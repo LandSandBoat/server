@@ -849,9 +849,204 @@ void CMobEntity::DropItems()
                     PChar->PTreasurePool->AddItem(4095 + m_Element, this);
                 }
 
-                // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
-                // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
-                // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
+                uint8 weather = PChar->loc.zone->GetWeather();
+                uint8 day = (uint8)CVanaTime::getInstance()->getWeekday();
+                // Avatarite. Both wiki say mobs lv 80+
+                if (GetMLevel() >= 80 && dsprand::GetRandomNumber(100) < 80)
+                {
+                    if (weather >=4 && weather <=19)
+                    {
+                        switch (weather)
+                        {
+                            case 4: // Fire
+                            case 5: // Double Fire
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3520, this); // Ifritite
+                                else
+                                    PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                                break;
+                            case 6: // Water
+                            case 7: // Double Water
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3525, this); // Leviatite
+                                else
+                                    PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                                break;
+                            case 8: // Earth
+                            case 9: // Double Earth
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3523, this); // Titanite
+                                else
+                                    PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                                break;
+                            case 10: // Wind
+                            case 11: // Double Wind
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3522, this); // Garudite
+                                else
+                                    PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                                break;
+                            case 12: // Ice
+                            case 13: // Double Ice
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3521, this); // Shivite
+                                else
+                                    PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                                break;
+                            case 14: // Thunder
+                            case 15: // Double Thunder
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3524, this); // Ramuite
+                                else
+                                    PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                                break;
+                            case 16: // Light
+                            case 17: // Double Light
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3526, this); // Carbite
+                                else
+                                    PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                                break;
+                            case 18: // Dark
+                            case 19: // Double Dark
+                                if (dsprand::GetRandomNumber(100) < 55)
+                                    PChar->PTreasurePool->AddItem(3527, this); // Fenrite
+                                else
+                                    PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (dsprand::GetRandomNumber(100) < 20)
+                    {
+                        switch (day)
+                        {
+                            case 0: // Fire
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3520, this); // Ifritite
+                                else
+                                    PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                                break;
+                            case 1: // Earth
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3523, this); // Titanite
+                                else
+                                    PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                                break;
+                            case 2: // Water
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3525, this); // Leviatite
+                                else
+                                    PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                                break;
+                            case 3: // Wind
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3522, this); // Garudite
+                                else
+                                    PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                                break;
+                            case 4: // Ice
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3521, this); // Shivite
+                                else
+                                    PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                                break;
+                            case 5: // Thunder
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3524, this); // Ramuite
+                                else
+                                    PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                                break;
+                            case 6: // Light
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3526, this); // Carbite
+                                else
+                                    PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                                break;
+                            case 7: // Dark
+                                if (dsprand::GetRandomNumber(100) < 45)
+                                    PChar->PTreasurePool->AddItem(3527, this); // Fenrite
+                                else
+                                    PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                                break;
+                        }
+                    }
+                }
+                // Geodes. Wiki's have conflicting info on mob lv required. One says 50 the other 75. I think 50 is correct.
+                else if (GetMLevel() >= 50 && dsprand::GetRandomNumber(100) < 85)
+                {
+                    if (weather >=4 && weather <=19)
+                    {
+                        switch (weather)
+                        {
+                            case 4: // Fire
+                            case 5: // Double Fire
+                                PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                                break;
+                            case 6: // Water
+                            case 7: // Double Water
+                                PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                                break;
+                            case 8: // Earth
+                            case 9: // Double Earth
+                                PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                                break;
+                            case 10: // Wind
+                            case 11: // Double Wind
+                                PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                                break;
+                            case 12: // Ice
+                            case 13: // Double Ice
+                                PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                                break;
+                            case 14: // Thunder
+                            case 15: // Double Thunder
+                                PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                                break;
+                            case 16: // Light
+                            case 17: // Double Light
+                                PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                                break;
+                            case 18: // Dark
+                            case 19: // Double Dark
+                                PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (dsprand::GetRandomNumber(100) < 20)
+                    {
+                        switch (day)
+                        {
+                            case 0: // Fire
+                                PChar->PTreasurePool->AddItem(3297, this); // Flame Geode
+                                break;
+                            case 1: // Earth
+                                PChar->PTreasurePool->AddItem(3300, this); // Soil Geode
+                                break;
+                            case 2: // Water
+                                PChar->PTreasurePool->AddItem(3302, this); // Aqua Geode
+                                break;
+                            case 3: // Wind
+                                PChar->PTreasurePool->AddItem(3299, this); // Breeze Geode
+                                break;
+                            case 4: // Ice
+                                PChar->PTreasurePool->AddItem(3298, this); // Snow Geode
+                                break;
+                            case 5: // Thunder
+                                PChar->PTreasurePool->AddItem(3301, this); // Thunder Geode
+                                break;
+                            case 6: // Light
+                                PChar->PTreasurePool->AddItem(3303, this); // Light Geode
+                                break;
+                            case 7: // Dark
+                                PChar->PTreasurePool->AddItem(3304, this); // Shadow Geode
+                                break;
+                        }
+                    }
+                }
 
                 if (dsprand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
                 {
