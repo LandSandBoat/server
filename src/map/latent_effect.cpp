@@ -107,7 +107,7 @@ bool CLatentEffect::Activate()
     if (!IsActivated())
     {
         //additional effect/dmg latents add mod to weapon, not player
-        if (GetModValue() == Mod::ADDITIONAL_EFFECT || GetModValue() == Mod::DMG)
+        if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
         {
             CCharEntity* PChar = (CCharEntity*)m_POwner;
             CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
@@ -131,7 +131,7 @@ bool CLatentEffect::Deactivate()
     if (IsActivated())
     {
         //remove the modifier from weapon, not player
-        if (GetModValue() == Mod::ADDITIONAL_EFFECT || GetModValue() == Mod::DMG)
+        if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
         {
             CCharEntity* PChar = (CCharEntity*)m_POwner;
 			CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
@@ -140,12 +140,12 @@ bool CLatentEffect::Deactivate()
 
             if (weapon != nullptr && (weapon->isType(ITEM_EQUIPMENT) || weapon->isType(ITEM_WEAPON)))
             {
-                if (GetModValue() == Mod::ADDITIONAL_EFFECT)
+                if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE)
                 {
                     for (uint8 i = 0; i < weapon->modList.size(); ++i)
                     {
                         //ensure the additional effect is fully removed from the weapon
-                        if (weapon->modList.at(i).getModID() == Mod::ADDITIONAL_EFFECT)
+                        if (weapon->modList.at(i).getModID() == Mod::ITEM_ADDEFFECT_TYPE)
                         {
                             weapon->modList.at(i).setModAmount(0);
                         }

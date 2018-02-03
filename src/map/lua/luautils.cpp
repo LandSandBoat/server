@@ -1772,6 +1772,54 @@ namespace luautils
         return 0;
     }
 
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage, bool isRanged)
+    {
+        lua_prepscript("scripts/globals/additional_effects.lua");
+
+        CLuaBaseEntity LuaBaseEntity(PAttacker);
+        CLuaBaseEntity LuaMobEntity(PDefender);
+        CLuaItem LuaItemEntity(PItem);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
+        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
+        lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage dealt before the Additional Effect activates
+
+        if (lua_pcall(LuaHandle, 4, 3, 0))
+        {
+            ShowError("luautils::additionalEffectAttack: %s\n", lua_tostring(LuaHandle, -1));
+            lua_pop(LuaHandle, 1);
+            return -1;
+        }
+
+        Action->additionalEffect = (SUBEFFECT)(!lua_isnil(LuaHandle, -3) && lua_isnumber(LuaHandle, -3) ? (int32)lua_tonumber(LuaHandle, -3) : 0);
+        Action->addEffectMessage = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : 0);
+        Action->addEffectParam = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
+        lua_pop(LuaHandle, 3);
+
+        return 0;
+    }
+
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemArmor* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
+    {
+        lua_prepscript("scripts/globals/additional_effects.lua");
+
+        CLuaBaseEntity LuaMobEntity(PDefender);
+        CLuaBaseEntity LuaBaseEntity(PAttacker);
+        CLuaItem LuaItemEntity(PItem);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
+        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
+        lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage taken before the Spike Effect activates
+
+        if (lua_pcall(LuaHandle, 4, 3, 0))
+        {
+            ShowError("luautils::additionalEffectSpikes: %s\n", lua_tostring(LuaHandle, -1));
+            lua_pop(LuaHandle, 1);
+        }
+
+        return 0;
+    }
+
     /************************************************************************
     *                                                                       *
     *  Начало работы статус-эффекта. Возвращаемое значение 0 или номер      *
