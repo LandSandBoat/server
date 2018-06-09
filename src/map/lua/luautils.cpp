@@ -58,6 +58,7 @@
 #include "../ai/states/weaponskill_state.h"
 #include "../alliance.h"
 #include "../battlefield.h"
+#include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../daily_system.h"
 #include "../entities/automatonentity.h"
@@ -4673,6 +4674,214 @@ namespace luautils
             ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
+    int32 CampaignHasBattle(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        lua_pushboolean(L, campaign::HasBattle(zone));
+        return 1;
+    }
+
+    int32 CampaignSetBattle(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isboolean(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto amount = lua_toboolean(L, 2);
+        campaign::SetBattle(zone, amount);
+        return 1;
+    }
+
+    int32 CampaignGetRegionControl(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        lua_pushinteger(L, campaign::GetRegionControl(zone));
+        return 1;
+    }
+
+    int32 CampaignSetRegionControl(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto nation = (uint8)lua_tointeger(L, 2);
+        campaign::SetRegionControl(zone, nation);
+        return 1;
+    }
+
+    int32 CampaignModifyFortification(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto amount = (int16)lua_tointeger(L, 2);
+        campaign::ModifyFortification(zone, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyResource(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto amount = (int16)lua_tointeger(L, 2);
+        campaign::ModifyResource(zone, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyMaxFortification(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto amount = (int16)lua_tointeger(L, 2);
+        campaign::ModifyMaxFortification(zone, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyMaxResource(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto zone = (CampaignZone)lua_tointeger(L, 1);
+        auto amount = (int16)lua_tointeger(L, 2);
+        campaign::ModifyMaxResource(zone, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyInfluence(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 3) || !lua_isnumber(L, 3))
+        {
+            return 0;
+        }
+
+        auto army = (CampaignArmy)lua_tointeger(L, 1);
+        auto zone = (CampaignZone)lua_tointeger(L, 2);
+        auto amount = (int16)lua_tointeger(L, 3);
+        campaign::ModifyInfluence(army, zone, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyReconnaissance(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto army = (CampaignArmy)lua_tointeger(L, 1);
+        auto amount = (int8)lua_tointeger(L, 2);
+        campaign::ModifyReconnaissance(army, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyMorale(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto army = (CampaignArmy)lua_tointeger(L, 1);
+        auto amount = (int8)lua_tointeger(L, 2);
+        campaign::ModifyMorale(army, amount);
+        return 1;
+    }
+
+    int32 CampaignModifyProsperity(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        {
+            return 0;
+        }
+
+        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
+        {
+            return 0;
+        }
+
+        auto army = (CampaignArmy)lua_tointeger(L, 1);
+        auto amount = (int8)lua_tointeger(L, 2);
+        campaign::ModifyProsperity(army, amount);
+        return 1;
     }
 
 }; // namespace luautils

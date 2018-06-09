@@ -4,6 +4,177 @@
 require("scripts/globals/teleports")
 -----------------------------------
 
+xi = xi or {}
+xi.campaign = {}
+
+xi.campaign.control =
+{
+    Sandoria = 2,
+    Bastok = 4,
+    Windurst = 6,
+    Beastman = 8,
+}
+
+xi.campaign.army =
+{
+    Sandoria = 0,
+    Bastok = 1,
+    Windurst = 2,
+    Orcish = 3,
+    Quadav = 4,
+    Yagudo = 5,
+    Kindred = 6,
+}
+
+xi.campaign.zone =
+{
+    SouthernSandOria = 0,
+    EastRonfaure = 1,
+    JugnerForest = 2,
+    VunkerlInlet = 3,
+    BatalliaDowns = 4,
+    LaVaule = 5,
+    TheEldiemeNecropolis = 6,
+    BastokMarkets = 7,
+    NorthGustaberg = 8,
+    Grauberg = 9,
+    PashhowMarshlands = 10,
+    RolanberryFields = 11,
+    Beadeaux = 12,
+    CrawlersNest = 13,
+    WindurstWaters = 14,
+    WestSarutabaruta = 15,
+    FortKarugoNarugo = 16,
+    MeriphataudMountains = 17,
+    SauromugueChampaign = 18,
+    CastleOztroja = 19,
+    GarlaigeCitadel = 20,
+    BeaucedineGlacier = 21,
+    Xarcabard = 22,
+    CastleZvahlBaileys = 23,
+    CastleZvahlKeep = 24,
+    ThroneRoom = 25,
+}
+
+-----------------------------------------------------------------
+-- Checks to see if a battle is occurring in the xi.campaign.zone
+-- zone: xi.campaign.zone
+-- Return: true / false
+-----------------------------------------------------------------
+xi.campaign.hasBattle = function(zone)
+    return CampaignHasBattle(zone)
+end
+
+-----------------------------------------------------------------
+-- Sets the battle flag for the campaign zone
+-- zone: xi.campaign.zone
+-- status: true / false
+-----------------------------------------------------------------
+xi.campaign.setBattle = function(zone, status)
+    CampaignSetBattle(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Returns the xi.campaign.control value for the zone
+-- zone: xi.campaign.zone
+-- Return: xi.campaign.control
+-----------------------------------------------------------------
+xi.campaign.getRegionControl = function(zone)
+    return CampaignGetRegionControl(zone)
+end
+
+-----------------------------------------------------------------
+-- Modifies the fortification value by the amount for the zone
+-- zone: xi.campaign.zone
+-- control: xi.campaign.control
+-----------------------------------------------------------------
+xi.campaign.setRegionControl = function(zone, control)
+    CampaignSetRegionControl(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the fortification value by the amount for the zone
+-- zone: xi.campaign.zone
+-- amount: -1000 to 1000 [retail max is unknown]
+-----------------------------------------------------------------
+xi.campaign.modifyFortification = function(zone, amount)
+    CampaignModifyFortification(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the resource value by the amount for the zone
+-- zone: xi.campaign.zone
+-- amount: -1000 to 1000 [retail max is unknown]
+-----------------------------------------------------------------
+xi.campaign.modifyResource = function(zone, amount)
+    CampaignModifyResource(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the max fortification value by the amount for the zone
+-- zone: xi.campaign.zone
+-- amount: -1000 to 1000 [retail max is unknown]
+-----------------------------------------------------------------
+xi.campaign.modifyMaxFortification = function(zone, amount)
+    CampaignModifyMaxFortification(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the max resource value by the amount for the zone
+-- zone: xi.campaign.zone
+-- amount: -1000 to 1000 [retail max is unknown]
+-----------------------------------------------------------------
+xi.campaign.modifyMaxResource = function(zone, amount)
+    CampaignModifyMaxResource(zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the army's influence value by the amount for the zone
+-- army: xi.campaign.army
+-- zone: xi.campaign.zone
+-- amount: -250 to 250
+-----------------------------------------------------------------
+xi.campaign.modifyInfluence = function(army, zone, amount)
+    CampaignModifyInfluence(army, zone, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the army's reconnaissance value by the amount
+-- army: xi.campaign.army
+-- amount: -10 to 10
+-----------------------------------------------------------------
+xi.campaign.modifyReconnaissance = function(army, amount)
+    CampaignModifyReconnaissance(army, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the army's morale value by the amount
+-- army: xi.campaign.army
+-- amount: -100 to 100
+-----------------------------------------------------------------
+xi.campaign.modifyMorale = function(army, amount)
+    CampaignModifyMorale(army, amount)
+end
+
+-----------------------------------------------------------------
+-- Modifies the army's prosperity value by the amount
+-- army: xi.campaign.army
+-- amount: -100 to 100
+-----------------------------------------------------------------
+xi.campaign.modifyProsperity = function(army, amount)
+    CampaignModifyProsperity(army, amount)
+end
+
+-----------------------------------------------------------------
+-- Variable for getNationTeleport and getPoint
+-----------------------------------------------------------------
+
+ALLIED_NOTES = 11
+MAW = 4
+PAST_SANDORIA = 5
+PAST_BASTOK = 6
+PAST_WINDURST = 7
+
 -- -------------------------------------------------------------------
 -- getMedalRank()
 -- Returns the numerical Campaign Medal of the player.
