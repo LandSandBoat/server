@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,22 +16,30 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
+  This file is part of DarkStar-server source code.
+
 ===========================================================================
 */
 
-#ifndef _CCAMPAIGNPACKET_H
-#define _CCAMPAIGNPACKET_H
+#ifndef _CCAMPAINGPACKET_H
+#define _CCAMPAINGPACKET_H
 
 #include "../../common/cbasetypes.h"
 
 #include "basic.h"
+
+#include "../campaign_system.h"
 
 class CCharEntity;
 
 class CCampaignPacket : public CBasicPacket
 {
 public:
-    CCampaignPacket(CCharEntity* PChar, uint8 number);
+    CCampaignPacket(CampaignState state, uint8 number);
+
+private:
+    void SetRegions(std::vector<CampaignRegion> areas, int start = 0);
+    void SetNations(std::vector<CampaignNation> nations);
 };
 
 #endif

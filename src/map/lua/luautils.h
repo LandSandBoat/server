@@ -315,4 +315,4 @@ namespace luautils
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
-#endif //- _LUAUTILS_H -
+#endif // _LUAUTILS_H -
