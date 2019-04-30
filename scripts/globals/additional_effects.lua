@@ -135,7 +135,6 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             local HP = 10 -- need actual calculation here!
 
             msgID = dsp.msg.basic.ADD_EFFECT_HP_HEAL
-            msgValue = hp_procType.HEAL
             attacker:addHP(HP)
             -- We have to fake this or it will say the defender was HEALed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_HP_HEAL)
