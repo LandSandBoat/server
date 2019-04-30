@@ -92,7 +92,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 if params.subEffect == SUBEFFECT_procType.HP_DRAIN then
                     msgID = dsp.msg.basic.ADD_EFFECT_HP_DRAIN
                     if params.damage < 0 then
-                        params.damage == 0
+                        params.damage = 0
                     end
                 else
                     msgID = dsp.msg.basic.ADD_EFFECT_DMG
@@ -132,11 +132,11 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(1, 100) then
             msgValue = nil
         else
-            local hp_procType.HEAL = 10 -- need actual calculation here!
+            local HP = 10 -- need actual calculation here!
 
             msgID = dsp.msg.basic.ADD_EFFECT_HP_HEAL
             msgValue = hp_procType.HEAL
-            attacker:addHP(hp_procType.HEAL)
+            attacker:addHP(HP)
             -- We have to fake this or it will say the defender was HEALed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_HP_HEAL)
             -- We're faking it, so return zeros!
@@ -149,8 +149,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(1, 100) then
             msgValue = nil
         else
-            local mp_procType.HEAL = 10 -- need actual calculation here!
-            attacker:addHP(mp_procType.HEAL)
+            local MP = 10 -- need actual calculation here!
+            attacker:addHP(MP)
             -- We have to fake this or it will say the defender was HEALed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_MP_HEAL)
             -- We're faking it, so return zeros!
