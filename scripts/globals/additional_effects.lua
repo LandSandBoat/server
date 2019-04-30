@@ -32,21 +32,18 @@ local procType =
 }
 
 function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
-    local params =
-    {
-        params.addType = item:getMod(dsp.mod.ITEM_ADDEFFECT_TYPE),
-        params.subEffect = item:getMod(dsp.mod.ITEM_SUBEFFECT),
-        params.damage = item:getMod(dsp.mod.ITEM_ADDEFFECT_DMG),
-        params.chance = item:getMod(dsp.mod.ITEM_ADDEFFECT_CHANCE),
-        params.element = item:getMod(dsp.mod.ITEM_ADDEFFECT_ELEMENT),
-        params.addStatus = item:getMod(dsp.mod.ITEM_ADDEFFECT_STATUS),
-        params.power = item:getMod(dsp.mod.ITEM_ADDEFFECT_POWER),
-        params.duration = item:getMod(dsp.mod.ITEM_ADDEFFECT_DURATION),
-        params.tick = 0
-    }
+    local params = {}
+    params.addType = item:getMod(dsp.mod.ITEM_ADDEFFECT_TYPE)
+    params.subEffect = item:getMod(dsp.mod.ITEM_SUBEFFECT)
+    params.damage = item:getMod(dsp.mod.ITEM_ADDEFFECT_DMG)
+    params.chance = item:getMod(dsp.mod.ITEM_ADDEFFECT_CHANCE)
+    params.element = item:getMod(dsp.mod.ITEM_ADDEFFECT_ELEMENT)
+    params.addStatus = item:getMod(dsp.mod.ITEM_ADDEFFECT_STATUS)
+    params.power = item:getMod(dsp.mod.ITEM_ADDEFFECT_POWER)
+    params.duration = item:getMod(dsp.mod.ITEM_ADDEFFECT_DURATION)
+    params.tick = 0
     local msgID = 0
     local msgValue = 0
-
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
@@ -92,7 +89,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 params.damage = adjustForTarget(defender, damage, params.element)
                 params.damage = finalMagicNonSpellAdjustments(attacker, defender, params.element, damage)
 
-                if subEffect == SUBEFFECT_procType.HP_DRAIN then
+                if params.subEffect == SUBEFFECT_procType.HP_DRAIN then
                     msgID = dsp.msg.basic.ADD_EFFECT_HP_DRAIN
                     if params.damage < 0 then
                         params.damage == 0
