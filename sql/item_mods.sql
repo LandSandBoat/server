@@ -20097,7 +20097,7 @@ INSERT INTO `item_mods` VALUES (16564,431,1); -- Flame Blade: AddEffect Type NOR
 INSERT INTO `item_mods` VALUES (16564,499,1); -- subEffect fire
 INSERT INTO `item_mods` VALUES (16564,500,10); -- AddEffect damage 10
 INSERT INTO `item_mods` VALUES (16564,501,10); -- AddEffect chance 10%
-INSERT INTO `item_mods` VALUES (16564,944,1); -- AddEffect element fire
+INSERT INTO `item_mods` VALUES (16564,950,1); -- AddEffect element fire
 INSERT INTO `item_mods` VALUES (16575,14,7);
 INSERT INTO `item_mods` VALUES (16578,10,2);
 INSERT INTO `item_mods` VALUES (16578,13,2);
