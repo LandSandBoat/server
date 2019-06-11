@@ -1709,8 +1709,7 @@ namespace luautils
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage)
     {
-        lua_prepscript(PAttacker->objtype == TYPE_PC ? "scripts/globals/items/%s.lua" : "scripts/zones/%s/mobs/%s.lua",
-            PAttacker->objtype == TYPE_PC ? PItem->getName() : PAttacker->loc.zone->GetName(), PAttacker->GetName());
+        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PAttacker->loc.zone->GetName(), PAttacker->GetName());
 
         if (prepFile(File, "onAdditionalEffect"))
         {
@@ -1772,17 +1771,25 @@ namespace luautils
         return 0;
     }
 
-    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage, bool isRanged)
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
     {
         lua_prepscript("scripts/globals/additional_effects.lua");
 
+        if (prepFile(File, "additionalEffectAttack"))
+        {
+            return -1;
+        }
+
         CLuaBaseEntity LuaBaseEntity(PAttacker);
-        CLuaBaseEntity LuaMobEntity(PDefender);
-        CLuaItem LuaItemEntity(PItem);
         Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+
+        CLuaBaseEntity LuaMobEntity(PDefender);
         Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
+
         lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage dealt before the Additional Effect activates
+
+        CLuaItem LuaItemEntity(PItem);
+        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
 
         if (lua_pcall(LuaHandle, 4, 3, 0))
         {
@@ -1803,13 +1810,21 @@ namespace luautils
     {
         lua_prepscript("scripts/globals/additional_effects.lua");
 
-        CLuaBaseEntity LuaMobEntity(PDefender);
-        CLuaBaseEntity LuaBaseEntity(PAttacker);
-        CLuaItem LuaItemEntity(PItem);
+        if (prepFile(File, "additionalEffectSpikes"))
+        {
+            return -1;
+        }
+
+        CLuaBaseEntity LuaBaseEntity(PDefender);
         Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+
+        CLuaBaseEntity LuaMobEntity(PAttacker);
         Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
+
         lua_pushinteger(LuaHandle, baseAttackDamage); // This is the damage taken before the Spike Effect activates
+
+        CLuaItem LuaItemEntity(PItem);
+        Lunar<CLuaItem>::push(LuaHandle, &LuaItemEntity);
 
         if (lua_pcall(LuaHandle, 4, 3, 0))
         {

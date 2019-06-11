@@ -47,8 +47,12 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    if params.damage > 0 and (item:getSkillType() == dsp.skill.ARCHERY
-    or item:getSkillType() == dsp.skill.MARKSMANSHIP or item:getSkillType() == dsp.skill.THROWING) then
+    if
+        params.damage > 0 and
+        (item:getSkillType() == dsp.skill.ARCHERY or
+        item:getSkillType() == dsp.skill.MARKSMANSHIP or
+        item:getSkillType() == dsp.skill.THROWING)
+    then
         local bonus = 0
         if params.element ~= nil and params.element == dsp.magic.ele.LIGHT then
             bonus = attacker:getStat(dsp.mod.INT) - defender:getStat(dsp.mod.INT)
@@ -74,9 +78,9 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     end
     --------------------------------------
 
-    if addType == procType.NORMAL then
+    if params.addType == procType.NORMAL then
         if params.damage > 0 then
-            if chance <= math.random(1, 100) then
+            if params.chance <= math.random(100) then
                 msgValue = nil
             else
                 params.damage = params.damage*(math.random(90, 110)/100) -- Artificially forcing 20% variance.
@@ -89,7 +93,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 params.damage = adjustForTarget(defender, damage, params.element)
                 params.damage = finalMagicNonSpellAdjustments(attacker, defender, params.element, damage)
 
-                if params.subEffect == SUBEFFECT_procType.HP_DRAIN then
+                if params.subEffect == dsp.subEffect.HP_DRAIN then
                     msgID = dsp.msg.basic.ADD_EFFECT_HP_DRAIN
                     if params.damage < 0 then
                         params.damage = 0
@@ -107,7 +111,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if addStatus ~= nil and addStatus ~= dsp.effect.NONE then
             msgID = dsp.msg.basic.ADD_EFFECT_STATUS
 
-            if chance <= math.random(1, 100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
+            if params.chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
                 msgValue = nil
             else
                 if addStatus == dsp.effect.DEFENSE_DOWN then
@@ -128,8 +132,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == HP_procType.HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             local HP = 10 -- need actual calculation here!
@@ -144,8 +148,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == MP_procType.HEAL then -- Mjollnir does this
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.HEAL then -- Mjollnir does this
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             local MP = 10 -- need actual calculation here!
@@ -158,8 +162,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             params.damage = params.damage*(math.random(90, 110)/100) -- Artificially forcing 20% variance.
@@ -175,8 +179,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             params.damage = params.damage*(math.random(90, 110)/100) -- Artificially forcing 20% variance.
@@ -192,8 +196,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             params.damage = params.damage*(math.random(90, 110)/100) -- Artificially forcing 20% variance.
@@ -209,8 +213,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.DISPEL then
-        if chance <= math.random(1, 100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
+    if params.addType == procType.DISPEL then
+        if params.chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
             msgValue = nil
         else
             local dispel = target:dispelStatusEffect()
@@ -223,8 +227,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.SELF_BUFF then
-        if chance <= math.random(1, 100) then
+    if params.addType == procType.SELF_BUFF then
+        if params.chance <= math.random(100) then
             msgValue = nil
         else
             if addStatus == dsp.effect.TELEPORT then -- WARP
@@ -233,7 +237,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 msgValue = 0
             elseif addStatus == dsp.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
                 -- Does not stack with or replace other shadows
-                if chance <= math.random(1, 100) or attacker:hasStatusEffect(dsp.effect.BLINK) or attacker:hasStatusEffect(dsp.effect.UTSUSEMI) then
+                if params.chance <= math.random(100) or attacker:hasStatusEffect(dsp.effect.BLINK) or attacker:hasStatusEffect(dsp.effect.UTSUSEMI) then
                     msgValue = nil
                 else
                     attacker:addStatusEffect(dsp.effect.BLINK, params.power, 0, params.duration)
@@ -251,8 +255,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.DEATH then
-        if chance <= math.random(1, 100) or defender:isNM() then
+    if params.addType == procType.DEATH then
+        if params.chance <= math.random(100) or defender:isNM() then
             msgValue = nil
         else
             msgID = dsp.msg.basic.ADD_EFFECT_STATUS
