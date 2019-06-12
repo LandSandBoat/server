@@ -231,11 +231,11 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if params.chance <= math.random(100) then
             msgValue = nil
         else
-            if addStatus == dsp.effect.TELEPORT then -- WARP
+            if params.addStatus == dsp.effect.TELEPORT then -- WARP
                 attacker:addStatusEffectEx(dsp.effect.TELEPORT, 0, dsp.teleport.id.WARP, 0, 1)
                 msgID = dsp.msg.basic.ADD_EFFECT_WARP
                 msgValue = 0
-            elseif addStatus == dsp.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+            elseif params.addStatus == dsp.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
                 -- Does not stack with or replace other shadows
                 if params.chance <= math.random(100) or attacker:hasStatusEffect(dsp.effect.BLINK) or attacker:hasStatusEffect(dsp.effect.UTSUSEMI) then
                     msgValue = nil
