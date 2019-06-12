@@ -108,26 +108,26 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             end
         end
 
-        if addStatus ~= nil and addStatus ~= dsp.effect.NONE then
+        if params.addStatus ~= nil and params.addStatus ~= dsp.effect.NONE then
             msgID = dsp.msg.basic.ADD_EFFECT_STATUS
 
             if params.chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
                 msgValue = nil
             else
-                if addStatus == dsp.effect.DEFENSE_DOWN then
+                if params.addStatus == dsp.effect.DEFENSE_DOWN then
                     defender:delStatusEffect(dsp.effect.DEFENSE_BOOST)
-                elseif addStatus == dsp.effect.EVASION_DOWN then
+                elseif params.addStatus == dsp.effect.EVASION_DOWN then
                     defender:delStatusEffect(dsp.effect.EVASION_BOOST)
-                elseif addStatus == dsp.effect.ATTACK_DOWN then
+                elseif params.addStatus == dsp.effect.ATTACK_DOWN then
                     defender:delStatusEffect(dsp.effect.ATTACK_BOOST)
                 end
 
-                if addStatus == dsp.effect.POISON or addStatus == dsp.effect.CHOKE then
+                if params.addStatus == dsp.effect.POISON or params.addStatus == dsp.effect.CHOKE then
                     tick = 3
                 end
 
-                defender:addStatusEffect(addStatus, params.power, params.tick, params.duration)
-                msgValue = addStatus
+                defender:addStatusEffect(params.addStatus, params.power, params.tick, params.duration)
+                msgValue = params.addStatus
             end
         end
     end
@@ -265,9 +265,11 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
+    --[[ Why did I do this??
     if msgValue == nil then
         return 0,0,0
     end
+    ]]
 
     return params.subEffect, msgID, msgValue
 end
