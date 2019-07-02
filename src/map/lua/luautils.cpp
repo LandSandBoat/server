@@ -1806,7 +1806,7 @@ namespace luautils
         return 0;
     }
 
-    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemArmor* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, uint32 baseAttackDamage)
     {
         lua_prepscript("scripts/globals/additional_effects.lua");
 
