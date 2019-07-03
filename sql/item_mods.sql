@@ -27144,7 +27144,8 @@ INSERT INTO `item_mods` VALUES (21964,8,20);      -- Beryllium Tachi +1: STR+20
 INSERT INTO `item_mods` VALUES (21964,25,52);     -- Beryllium Tachi +1: Accuracy+52
 INSERT INTO `item_mods` VALUES (21964,48,30);     -- Beryllium Tachi +1: Weapon Skill Accuracy+30
 INSERT INTO `item_mods` VALUES (21964,355,151);   -- Beryllium Tachi +1: Adds "Tachi: Gekko" effect
-INSERT INTO `item_mods` VALUES (21966,431,1);     -- Zanmato +1: Additional effect: "Dispel"
+INSERT INTO `item_mods` VALUES (21966,431,6);     -- Zanmato +1: Additional effect: "Dispel"
+INSERT INTO `item_mods` VALUES (21966,501,5);     -- Zanmato +1: Additional effect: "Dispel" chance = 5%
 INSERT INTO `item_mods` VALUES (21967,355,158);   -- Melon Slicer: Grants access to the Weapon Skill Tachi: Suikawari
 INSERT INTO `item_mods` VALUES (21968,2,130);     -- Saotome-no-Tachi: HP+130
 INSERT INTO `item_mods` VALUES (21968,25,30);     -- Saotome-no-Tachi: Accuracy+30
