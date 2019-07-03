@@ -20,6 +20,7 @@ require("scripts/globals/msg")
 
 local procType =
 {
+    -- These are arbitrary, make up new ones as needed.
     NORMAL = 1,
     HEAL = 2,
     HP_DRAIN = 3,

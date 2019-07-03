@@ -1364,7 +1364,7 @@ tpz.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_TYPE     = 431, -- 1 = Status Effect/DMG/HP Drain, 2 = MP Drain, 3 = TP Drain, 4 = Dispel, 5 = Self-Buff, 6 = Instant Death
+    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\assitional_effects.lua
     ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
     ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
