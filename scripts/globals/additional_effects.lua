@@ -17,11 +17,9 @@ require("scripts/globals/magic") -- For resist functions
 require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")
 --------------------------------------
-dsp = dsp or {}
-dsp.additionalEffect = {}
 
 -- paralyze on hit, fire damage on hit, etc..
-dsp.additionalEffect.attackEffect = function((attacker, defender, baseAttackDamage, item)
+function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     local addType = item:getMod(dsp.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(dsp.mod.ITEM_SUBEFFECT)
     local damage = item:getMod(dsp.mod.ITEM_ADDEFFECT_DMG)
@@ -276,7 +274,7 @@ dsp.additionalEffect.attackEffect = function((attacker, defender, baseAttackDama
     return subEffect, msgID, msgValue
 end
 
-dsp.additionalEffect.spikesEffect = function(attacker, defender, damage, spikeEffect, power, chance)
+function additionalEffectSpikes(attacker, defender, damage, spikeEffect, power, chance)
     --[[ Todo..
     local procType =
     {
