@@ -36,14 +36,15 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     {
         -- These are arbitrary, make up new ones as needed.
         NORMAL = 1,
-        HEAL = 2,
-        HP_DRAIN = 3,
-        MP_DRAIN = 4,
-        TP_DRAIN = 5,
-        DISPEL = 6,
-        SELF_BUFF = 7,
-        DEATH = 8,
-        HPMPTP_DRAIN = 9
+        HP_HEAL = 2,
+        MP_HEAL = 3,
+        HP_DRAIN = 4,
+        MP_DRAIN = 5,
+        TP_DRAIN = 6,
+        DISPEL = 7,
+        SELF_BUFF = 8,
+        DEATH = 9,
+        HPMPTP_DRAIN = 10
     }
 
     --------------------------------------
@@ -133,7 +134,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
+    if addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
         if chance <= math.random(100) then
             msgValue = nil
         else
@@ -149,12 +150,12 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
     end
 
-    if addType == procType.HEAL then -- Mjollnir does this
+    if addType == procType.MP_HEAL then -- Mjollnir does this
         if chance <= math.random(100) then
             msgValue = nil
         else
             local MP = 10 -- need actual calculation here!
-            attacker:addHP(MP)
+            attacker:addMP(MP)
             -- We have to fake this or it will say the defender was HEALed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_MP_HEAL)
             -- We're faking it, so return zeros!
