@@ -286,6 +286,8 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
 
+    PChar->PClaimedMob = nullptr;
+
     //remove pets
     if (PChar->PPet != nullptr)
     {
