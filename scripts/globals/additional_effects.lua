@@ -142,7 +142,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
             msgID = dsp.msg.basic.ADD_EFFECT_HP_HEAL
             attacker:addHP(HP)
-            -- We have to fake this or it will say the defender was HEALed rather than the attacker.
+            -- We have to fake this or it will say the defender was healed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_HP_HEAL)
             -- We're faking it, so return zeros!
             msgID = 0
@@ -156,7 +156,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         else
             local MP = 10 -- need actual calculation here!
             attacker:addMP(MP)
-            -- We have to fake this or it will say the defender was HEALed rather than the attacker.
+            -- We have to fake this or it will say the defender was healed rather than the attacker.
             attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_MP_HEAL)
             -- We're faking it, so return zeros!
             msgID = 0
