@@ -28,10 +28,10 @@ function onSpellCast(caster,target,spell)
     params.dmgtype = DMGTYPE_PIERCE
     params.scattr = SC_LIQUEFACTION
     params.numhits = 1
-    params.multiplier = 1.25
-    params.tp150 = 1.25
-    params.tp300 = 1.25
-    params.azuretp = 1.25
+    params.multiplier = 2.25
+    params.tp150 = 2.25
+    params.tp300 = 2.25
+    params.azuretp = 2.25
     params.duppercap = 37
     params.str_wsc = 0.20
     params.dex_wsc = 0.0
