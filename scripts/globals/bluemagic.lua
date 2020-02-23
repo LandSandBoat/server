@@ -2,12 +2,12 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 
 -- The TP modifier
-TPMOD_NONE = 0;
-TPMOD_CRITICAL = 1;
-TPMOD_DAMAGE = 2;
-TPMOD_ACC = 3;
-TPMOD_ATTACK = 4;
-TPMOD_DURATION = 5;
+TPMOD_NONE = 0
+TPMOD_CRITICAL = 1
+TPMOD_DAMAGE = 2
+TPMOD_ACC = 3
+TPMOD_ATTACK = 4
+TPMOD_DURATION = 5
 
 -- The SC the spell makes
 SC_IMPACTION = 0
