@@ -120,6 +120,12 @@ enum MOUNTTYPE
     MOUNT_SPECTRAL_CHAIR = 18,
     MOUNT_SPHEROID       = 19,
     MOUNT_OMEGA          = 20,
+    MOUNT_COEURL         = 21,
+    MOUNT_GOOBBUE        = 22,
+    MOUNT_RAAZ           = 23,
+    MOUNT_LEVITUS        = 24,
+    MOUNT_ADAMANTOISE    = 25,
+    MOUNT_DHAMEL         = 26,
 };
 
 enum ALLEGIANCETYPE
