@@ -126,6 +126,7 @@ enum MOUNTTYPE
     MOUNT_LEVITUS        = 24,
     MOUNT_ADAMANTOISE    = 25,
     MOUNT_DHAMEL         = 26,
+    MOUNT_DOLL           = 27,
 };
 
 enum ALLEGIANCETYPE

@@ -2654,6 +2654,7 @@ tpz.mount =
     LEVITUS        = 24,
     ADAMANTOISE    = 25,
     DHAMEL         = 26,
+    DOLL           = 27,
 }
 
 ------------------------------------
