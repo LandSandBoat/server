@@ -31,7 +31,7 @@ function onTrade(player,npc,trade)
     elseif npcUtil.tradeHasExactly(trade, 10061) then player:startEvent(10227, 10061, tpz.ki.TRAINERS_WHISTLE, tpz.mount.TULFAIRE - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.TULFAIRE_COMPANION)
     elseif npcUtil.tradeHasExactly(trade, 10062) then player:startEvent(10227, 10062, tpz.ki.TRAINERS_WHISTLE, tpz.mount.WARMACHINE - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.WARMACHINE_COMPANION)
     elseif npcUtil.tradeHasExactly(trade, 10063) then player:startEvent(10227, 10063, tpz.ki.TRAINERS_WHISTLE, tpz.mount.XZOMIT - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.XZOMIT_COMPANION)
-    elseif npcUtil.tradeHasExactly(trade, 10064) then player:startEvent(10227, 10064    , tpz.ki.TRAINERS_WHISTLE, tpz.mount.HIPPOGRYPH - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.HIPPOGRYPH_COMPANION)
+    elseif npcUtil.tradeHasExactly(trade, 10064) then player:startEvent(10227, 10064, tpz.ki.TRAINERS_WHISTLE, tpz.mount.HIPPOGRYPH - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.HIPPOGRYPH_COMPANION)
     elseif npcUtil.tradeHasExactly(trade, 10065) then player:startEvent(10227, 10065, tpz.ki.TRAINERS_WHISTLE, tpz.mount.SPECTRAL_CHAIR - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.SPECTRAL_CHAIR_COMPANION)
     elseif npcUtil.tradeHasExactly(trade, 10066) then player:startEvent(10227, 10066, tpz.ki.TRAINERS_WHISTLE, tpz.mount.SPHEROID - 1) player:setCharVar("FullSpeedAheadReward", tpz.ki.SPHEROID_COMPANION)
 
