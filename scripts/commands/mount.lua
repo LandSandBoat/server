@@ -13,14 +13,14 @@ end
 
 function onTrigger(player, mount, target)
 
-    -- validate mount
+    -- Default to Chocobo (0)
     if (mount == nil) then
-        error(player, "You must supply a mount ID or name.")
-        return
+        mount = 0
     end
 
+    -- validate mount
     mount = tonumber(mount) or tpz.mount[string.upper(mount)]
-    if (mount == nil or mount < 0 or mount > 26) then
+    if (mount == nil or mount < 0 or mount > 27) then
         error(player, "Invalid mount ID.")
         return
     end
@@ -37,5 +37,5 @@ function onTrigger(player, mount, target)
         end
     end
 
-    targ:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, mount, 0, 1800, true)
+    targ:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, mount, 0, 0, true)
 end
