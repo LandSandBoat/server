@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)    
+function onTrade(player,npc,trade)
     if npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067) then
         -- The Fenrir trade crashes in some arcane away and omega has it's own questline, so bail out here.
     elseif trade:getSlotCount() == 1 then
@@ -61,7 +61,7 @@ function onEventFinish(player,csid,option)
         local rewardKI = player:getLocalVar("FullSpeedAheadReward")
         player:setLocalVar("FullSpeedAheadReward", 0)
         if rewardKI ~= tpz.ki.CHOCOBO_COMPANION then
-            player:confirmTrade()
+            player:tradeComplete()
         end
         npcUtil.giveKeyItem(player, rewardKI)
     end
