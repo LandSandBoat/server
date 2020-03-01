@@ -4,6 +4,38 @@
 -- Reports the time remaining before boat arrival.
 -- !pos 7.057 -2.364 2.489 249
 -----------------------------------
+local ID = require("scripts/zones/Mhaura/IDs")
+require("scripts/globals/transport")
+-----------------------------------
+
+local messages =
+{
+    [tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_ALZAHBI] = ID.text.FERRY_ARRIVING,
+    [tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_ALZAHBI]  = ID.text.FERRY_DEPARTING,
+    [tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_SELBINA] = ID.text.FERRY_ARRIVING,
+    [tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_SELBINA]  = ID.text.FERRY_DEPARTING
+}
+
+function onSpawn(npc)
+    npc:initNpcAi()
+    -- TODO: NPC needs to rotate after finishing walking.
+    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_ALZAHBI,
+        tpz.transport.dockPorterMhauraInterval.FROM_TO_ALZAHBI,
+        tpz.transport.dockPorterMhauraOffset.FERRY_ARRIVING_FROM_ALZAHBI)
+    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_ALZAHBI,
+        tpz.transport.dockPorterMhauraInterval.FROM_TO_ALZAHBI,
+        tpz.transport.dockPorterMhauraOffset.FERRY_DEPARTING_TO_ALZAHBI)
+    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_SELBINA,
+        tpz.transport.dockPorterMhauraInterval.FROM_TO_SELBINA,
+        tpz.transport.dockPorterMhauraOffset.FERRY_ARRIVING_FROM_SELBINA)
+    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_SELBINA,
+        tpz.transport.dockPorterMhauraInterval.FROM_TO_SELBINA,
+        tpz.transport.dockPorterMhauraOffset.FERRY_DEPARTING_TO_SELBINA)
+end
+
+function onTimeTrigger(npc, triggerID)
+    tpz.transport.dockPorterMhauraMessages(npc, triggerID, messages)
+end
 
 function onTrade(player,npc,trade)
 end;
