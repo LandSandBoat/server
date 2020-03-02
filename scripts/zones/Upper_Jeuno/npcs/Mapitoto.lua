@@ -12,9 +12,8 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    if npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067) then
-        -- The Fenrir trade crashes in some arcane away and omega has it's own questline, so bail out here.
-    elseif trade:getSlotCount() == 1 then
+    -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
+    if trade:getSlotCount() == 1 and not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067)) then
         local item = trade:getItemId(0)
         local mount = item - 10050
         if item == 15533 then
