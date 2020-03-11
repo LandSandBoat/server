@@ -282,7 +282,7 @@ int32 login_parse(int32 fd)
             {
                 session[fd]->wdata.resize(1);
                 ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
-                ShowWarning("login_parse: unexisting user" CL_WHITE"<%s>" CL_RESET" tried to connect\n", escaped_name);
+                ShowWarning("login_parse: user" CL_WHITE"<%s>" CL_RESET" could not be found using the provided information. Aborting.\n", escaped_name);
                 do_close_login(sd, fd);
                 return 0;
             }
