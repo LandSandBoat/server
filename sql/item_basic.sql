@@ -3421,7 +3421,7 @@ INSERT INTO `item_basic` VALUES (3546,0,'piece_of_staghorn_coral','staghorn_cora
 INSERT INTO `item_basic` VALUES (3547,0,'sealord_skin','sealord_skin',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3548,0,'square_of_sealord_leather','sealord_leather',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3549,0,'vial_of_belladonna_sap','belladonna_sap',12,4,44,1,0);
-INSERT INTO `item_basic` VALUES (3550,0,'spool_of_wyrdstrand','wyrdstrand',12,4,40,1,0);
+INSERT INTO `item_basic` VALUES (3550,0,'spool_of_wyrdstrand','wyrdstrand',12,4,40,1,1319);
 INSERT INTO `item_basic` VALUES (3551,0,'square_of_wyrdweave','wyrdweave',12,4,40,1,0);
 INSERT INTO `item_basic` VALUES (3552,0,'squamous_hide','squamous_hide',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3553,0,'banquet_table_blueprint','b._table_blueprint',1,28752,0,1,0);
