@@ -26,7 +26,7 @@ function onSpellCast(caster,target,spell)
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
     params.attackType = tpz.attackType.PHYSICAL
-    params.damageType = tpz.damageType.HTH
+    params.damageType = tpz.damageType.BLUNT
     params.scattr = SC_LIQUEFACTION
     params.scattr2 = SC_IMPACTION
     params.numhits = 1
