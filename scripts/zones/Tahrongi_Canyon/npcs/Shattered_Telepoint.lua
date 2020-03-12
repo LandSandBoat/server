@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -22,6 +23,13 @@ function onTrigger(player, npc)
         end
     elseif player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) or (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1) then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
+    elseif
+        player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and
+        player:getRank() >= 3
+    then
+        player:startEvent(41)
+    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
+        player:startEvent(42)
     else
         player:messageSpecial(ID.text.TELEPOINT_HAS_BEEN_SHATTERED)
     end
@@ -38,5 +46,13 @@ function onEventFinish(player, csid, option)
         player:setPos(280.066, -80.635, -67.096, 191, 14) -- To Hall of Transference {R}
     elseif csid == 913 and option == 0 then
         player:setPos(280.066, -80.635, -67.096, 191, 14) -- To Hall of Transference {R}
+    elseif csid == 41 then
+        player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
+        player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
+    elseif csid == 42 then
+        npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
+        player:addItem(10159) -- Cipher: Lion II
+        player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+        player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
     end
 end

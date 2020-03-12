@@ -18,6 +18,15 @@ end
 
 function onZoneIn(player, prevZone)
     local cs = -1
+
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    end
+
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getFameLevel(player:getNation()) >= 5 then
+        cs = 30036
+    end
+
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         position = math.random(1, 5) - 123
@@ -26,9 +35,11 @@ function onZoneIn(player, prevZone)
             cs = 30004
         end
         player:setCharVar("PlayerMainJob", 0)
+
     elseif ENABLE_ASA == 1 and player:getCurrentMission(ASA) == tpz.mission.id.asa.A_SHANTOTTO_ASCENSION
         and (prevZone == tpz.zone.WINDURST_WATERS or prevZone == tpz.zone.WINDURST_WOODS) and player:getMainLvl()>=10 then
         cs = 510
+
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") == 4 then
         cs = 443
     end
@@ -76,5 +87,11 @@ function onEventFinish(player, csid, option)
         player:addItem(183)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 183)
         player:addTitle(tpz.title.VESTAL_CHAMBERLAIN)
+    elseif csid == 30035 then
+        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

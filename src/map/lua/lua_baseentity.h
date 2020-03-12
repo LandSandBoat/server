@@ -268,9 +268,11 @@ public:
     int32 changeJob(lua_State*);            // changes the job of a char (testing only!)
     int32 changesJob(lua_State*);           // changes the sub job of a char (testing only!)
     int32 unlockJob(lua_State*);            // Unlocks a job for the entity, sets job level to 1
+    int32 hasJob(lua_State*);               // Check to see if JOBTYPE is unlocked for a character
 
     int32 getMainLvl(lua_State*);           // Gets Entity Main Job Level
     int32 getSubLvl(lua_State*);            // Get Entity Sub Job Level
+    int32 getJobLevel(lua_State*);          // Gets character job level for specified JOBTYPE
     int32 setLevel(lua_State*);             // sets the character's level
     int32 setsLevel(lua_State*);            // sets the character's level
     int32 levelCap(lua_State*);             // genkai

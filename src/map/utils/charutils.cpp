@@ -3480,6 +3480,7 @@ namespace charutils
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);
+
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
                 }
             }
@@ -4455,7 +4456,7 @@ namespace charutils
         Sql_Query(SqlHandle, query, column, value, PChar->id);
     }
 
-    float  AddExpBonus(CCharEntity* PChar, float exp)
+    float AddExpBonus(CCharEntity* PChar, float exp)
     {
         int32 bonus = 0;
         if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION))
@@ -4470,15 +4471,31 @@ namespace charutils
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_DEDICATION);
             }
-
         }
 
-        bonus += (int32)(exp * (PChar->getMod(Mod::EXP_BONUS) / 100.0f));
+        int32 rovBonus = 0;
+        for (auto i = 2884; i <= 2892; ++i) // RHAPSODY KI are sequential, so start at WHITE and end at OCHRE
+        {
+            if (hasKeyItem(PChar, i))
+            {
+                rovBonus += 30;
+            }
+            else
+            {
+                break; // No need to check further as you can't get KI out of order, so break out.
+            }
+        }
+
+        bonus += (int32)(exp * ((PChar->getMod(Mod::EXP_BONUS) + rovBonus) / 100.0f));
 
         if (bonus + (int32)exp < 0)
+        {
             exp = 0;
+        }
         else
+        {
             exp = exp + bonus;
+        }
 
         return exp;
     }

@@ -28,6 +28,14 @@ function onZoneIn(player, prevZone)
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
 
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    end
+
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+        cs = 30036
+    end
+
     -- SOA 1-1 Optional CS
     if
         ENABLE_SOA and
@@ -113,5 +121,11 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Mission8-1Completed", 1)
     elseif csid == 878 then
         player:setCharVar("SOA_1_CS1", 1)
+    elseif csid == 30035 then
+        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

@@ -5340,6 +5340,29 @@ inline int32 CLuaBaseEntity::unlockJob(lua_State *L)
 }
 
 /************************************************************************
+*  Function: hasJob()
+*  Purpose : Check to see if JOBTYPE is unlocked
+*  Example : player:hasJob(BRD)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::hasJob(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    JOBTYPE JobID = (JOBTYPE)lua_tointeger(L, 1);
+
+    TPZ_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    lua_pushinteger(L, (PChar->jobs.unlocked >> JobID) & 1);
+    return 1;
+}
+
+/************************************************************************
 *  Function: getMainLvl()
 *  Purpose : Returns the main level of entity's current job
 *  Example : player:getMainLvl()
@@ -5368,6 +5391,29 @@ inline int32 CLuaBaseEntity::getSubLvl(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->GetSLevel());
+    return 1;
+}
+
+/************************************************************************
+*  Function: getJobLevel()
+*  Purpose : Return the levle of job specified by JOBTYPE
+*  Example : player:getJobLevel(BRD)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getJobLevel(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    JOBTYPE JobID = (JOBTYPE)lua_tointeger(L, 1);
+
+    TPZ_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    lua_pushinteger(L, PChar->jobs.job[JobID]);
+
     return 1;
 }
 
@@ -14202,9 +14248,11 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,changeJob),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,changesJob),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,unlockJob),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasJob),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMainLvl),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSubLvl),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getJobLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setsLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelCap),
