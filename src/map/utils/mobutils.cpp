@@ -562,7 +562,7 @@ void CalculateStats(CMobEntity * PMob)
     }
 
     if(PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-        zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
+        PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
     {
         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
     }
