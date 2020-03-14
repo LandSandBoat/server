@@ -127,13 +127,13 @@ dtNode* dtNodePool::getNode(dtPolyRef id, unsigned char state)
 			return &m_nodes[i];
 		i = m_next[i];
 	}
-	
+
 	if (m_nodeCount >= m_maxNodes)
 		return 0;
-	
+
 	i = (dtNodeIndex)m_nodeCount;
 	m_nodeCount++;
-	
+
 	// Init node
 	node = &m_nodes[i];
 	node->pidx = 0;
@@ -142,10 +142,10 @@ dtNode* dtNodePool::getNode(dtPolyRef id, unsigned char state)
 	node->id = id;
 	node->state = state;
 	node->flags = 0;
-	
+
 	m_next[i] = m_first[bucket];
 	m_first[bucket] = i;
-	
+
 	return node;
 }
 
@@ -157,7 +157,7 @@ dtNodeQueue::dtNodeQueue(int n) :
 	m_size(0)
 {
 	dtAssert(m_capacity > 0);
-	
+
 	m_heap = (dtNode**)dtAlloc(sizeof(dtNode*)*(m_capacity+1), DT_ALLOC_PERM);
 	dtAssert(m_heap);
 }
@@ -185,7 +185,7 @@ void dtNodeQueue::trickleDown(int i, dtNode* node)
 	int child = (i*2)+1;
 	while (child < m_size)
 	{
-		if (((child+1) < m_size) && 
+		if (((child+1) < m_size) &&
 			(m_heap[child]->total > m_heap[child+1]->total))
 		{
 			child++;

@@ -30,13 +30,13 @@
 #include "../vana_time.h"
 
 
-CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID) 
+CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {
     this->type = 0x20;
     this->size = 0x16;
 
     ref<uint8>(0x0E) = LocationID;
-    ref<uint8>(0x0F) = SlotID;    
+    ref<uint8>(0x0F) = SlotID;
 
     if (PItem != nullptr)
     {

@@ -33,7 +33,7 @@ CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_M
 	this->size = 0x30;
 
 	ref<uint8>(0x04) = messageID;
-	
+
 	ref<uint16>(0x1a) = PChar->id;
 	if (itemID != 0)
 	{

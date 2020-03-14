@@ -4446,7 +4446,7 @@ namespace charutils
                 Sql_Query(SqlHandle, query, buf, PChar->id);
                 return;
             }
-            default: 
+            default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
         }
