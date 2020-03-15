@@ -3838,6 +3838,7 @@ INSERT INTO `item_basic` VALUES (4082,0,'piece_of_moonlight_coral','moonlight_co
 INSERT INTO `item_basic` VALUES (4083,0,'handful_of_beryllium_arrowheads','ber._arrowheads',99,4,0,0,0);
 INSERT INTO `item_basic` VALUES (4084,0,'bag_of_mixed_fletchings','mixed_fletchings',99,4,0,0,0);
 INSERT INTO `item_basic` VALUES (4085,0,'handful_of_beryllium_bolt_heads','ber._bolt_heads',99,4,0,0,0);
+INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,1,0);
 INSERT INTO `item_basic` VALUES (4094,0,'bowl_of_goblin_stew_880','goblin_stew_880',1,61520,0,0,0);
 INSERT INTO `item_basic` VALUES (4095,0,'bismuth_sheet','bismuth_sheet',12,4,38,0,0);
 INSERT INTO `item_basic` VALUES (4096,0,'fire_crystal','fire_crystal',12,516,35,0,13);
