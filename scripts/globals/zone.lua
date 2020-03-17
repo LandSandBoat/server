@@ -365,6 +365,7 @@ tpz.zone =
     OUTER_RAKAZNAR_U                = 275,
     RAKAZNAR_INNER_COURT            = 276,
     RAKAZNAR_TURRIS                 = 277,
+    WALK_OF_ECHOES_P2               = 279,
     MOG_GARDEN                      = 280,
     LEAFALLIA                       = 281,
     MOUNT_KAMIHR                    = 282,
@@ -382,7 +383,7 @@ tpz.zone =
     DYNAMIS_BASTOK_D                = 295,
     DYNAMIS_WINDURST_D              = 296,
     DYNAMIS_JEUNO_D                 = 297,
-    WALK_OF_ECHOES_P                = 298,
+    WALK_OF_ECHOES_P1               = 298,
 
     -- Increment this when adding new zones
     MAX_ZONE                        = 299
