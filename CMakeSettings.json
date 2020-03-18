@@ -49,10 +49,6 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v:detailed",
       "ctestCommandArgs": ""
-    },
-    {
-      "name": "topaz",
-      "cacheRoot": "C:\\Games\\FFXI\\Topaz\\build\\x86-Debug"
     }
   ]
 }
