@@ -94,7 +94,7 @@ function onEventFinish(player,csid,option)
         player:addQuest(SANDORIA,tpz.quest.id.sandoria.CHASING_QUOTAS);
     elseif (csid == 17) then
         player:setCharVar("ChasingQuotas_Progress",1);
-        player:setCharVar("ChasingQuotas_date", getMidnight());
+        player:setCharVar("ChasingQuotas_date", os.time() + 60);
     elseif (csid == 7) then
         player:setCharVar("ChasingQuotas_Progress",2);
         player:setCharVar("ChasingQuotas_date",0);
