@@ -4920,7 +4920,7 @@ void SmallPacket0x0E2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     PChar->PLinkshell1->setPostRights(LSTYPE_LINKPEARL);
                 break;
                 }
-                return;     
+                return;
             }
         }
         break;

@@ -60,7 +60,7 @@ namespace blacklistutils
 
 		// Obtain this users blacklist info..
 		const char* sql = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
-		if (Sql_Query(SqlHandle, sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0) 
+		if (Sql_Query(SqlHandle, sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
 		{
 			PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
 			return;
@@ -76,7 +76,7 @@ namespace blacklistutils
 			blacklist.push_back(std::make_pair(accid_target, targetName));
 			currentCount++;
 
-			if (currentCount >= 12) 
+			if (currentCount >= 12)
 			{
 				PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
 				blacklist.clear();

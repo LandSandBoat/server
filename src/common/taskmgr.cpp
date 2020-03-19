@@ -53,7 +53,7 @@ void CTaskMgr::RemoveTask(std::string TaskName)
 
 duration CTaskMgr::DoTimer(time_point tick)
 {
-	duration diff = 1s; 
+	duration diff = 1s;
 
 	while( !m_TaskList.empty() )
 	{

@@ -38,7 +38,7 @@ class CItemContainer;
 class CGuildMenuBuyPacket : public CBasicPacket
 {
 public:
-	
+
 	CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild);
 };
 

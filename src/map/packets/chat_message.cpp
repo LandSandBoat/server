@@ -30,13 +30,13 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
     // (it changed when zoning, but not when zoning back)
     // if you'd like to try and figure out what the cap is based on, the client side max message length is also
     // variable in the same way, and is probably so under the same circumstances
-    // until that can be found, we'll just use the max length 
+    // until that can be found, we'll just use the max length
     auto buffSize = std::min<size_t>(message.size(), 236);
     const std::string& name = sender.empty() ? (const char*)PChar->GetName() : sender;
     // Build the packet..
     CBasicPacket::id(id);
     this->type = 0x17;
-    //12 (base length / 2) + ((buffSize in chunks of 4) / 2) 
+    //12 (base length / 2) + ((buffSize in chunks of 4) / 2)
     //this->size = 12 + ((buffSize / 4) + 1) * 2;
     this->size = 0x82;
 

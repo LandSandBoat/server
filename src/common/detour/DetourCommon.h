@@ -24,10 +24,10 @@
 /**
 @defgroup detour Detour
 
-Members in this module are used to create, manipulate, and query navigation 
+Members in this module are used to create, manipulate, and query navigation
 meshes.
 
-@note This is a summary list of members.  Use the index or search 
+@note This is a summary list of members.  Use the index or search
 feature to find minor members.
 */
 
@@ -85,7 +85,7 @@ inline void dtVcross(float* dest, const float* v1, const float* v2)
 {
 	dest[0] = v1[1]*v2[2] - v1[2]*v2[1];
 	dest[1] = v1[2]*v2[0] - v1[0]*v2[2];
-	dest[2] = v1[0]*v2[1] - v1[1]*v2[0]; 
+	dest[2] = v1[0]*v2[1] - v1[1]*v2[0];
 }
 
 /// Derives the dot product of two vectors. (@p v1 . @p v2)
@@ -273,7 +273,7 @@ inline void dtVnormalize(float* v)
 ///  @param[in]		p1	A point. [(x, y, z)]
 /// @return True if the points are considered to be at the same location.
 ///
-/// Basically, this function will return true if the specified points are 
+/// Basically, this function will return true if the specified points are
 /// close enough to eachother to be considered colocated.
 inline bool dtVequal(const float* p0, const float* p1)
 {
@@ -357,7 +357,7 @@ inline bool dtOverlapBounds(const float* amin, const float* amax,
 }
 
 /// Derives the closest point on a triangle from the specified reference point.
-///  @param[out]	closest	The closest point on the triangle.	
+///  @param[out]	closest	The closest point on the triangle.
 ///  @param[in]		p		The reference point from which to test. [(x, y, z)]
 ///  @param[in]		a		Vertex A of triangle ABC. [(x, y, z)]
 ///  @param[in]		b		Vertex B of triangle ABC. [(x, y, z)]

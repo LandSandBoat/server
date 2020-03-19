@@ -31,7 +31,7 @@ enum BLOWFISH
     BLOWFISH_ACCEPTED,
 };
 
-struct blowfish_t 
+struct blowfish_t
 {
 	uint32 key[5];
 	uint8  hash[16];

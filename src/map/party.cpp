@@ -834,7 +834,7 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
 
     if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
         return;
-    
+
 
 
     //alliance

@@ -34,7 +34,7 @@ CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity * PEntity, const char
 
 	ref<uint32>(0x04) = PEntity->id;
 	ref<uint32>(0x08) = PEntity->id;
-	
+
 	memcpy(data + ((0x0C)), type, 4);
 
 	ref<uint16>(0x10) = PEntity->targid;

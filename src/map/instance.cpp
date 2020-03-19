@@ -250,7 +250,7 @@ void CInstance::Fail()
     Cancel();
 
     ClearEntities();
-    
+
     luautils::OnInstanceFailure(this);
 }
 

@@ -976,7 +976,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         //visibleMp += (feet ? feet->getModifier(Mod::MP) : 0);
 
         //TODO: add mp percent too
-        //if ((float)( mp / ((m_POwner->health.mp - m_POwner->health.modmp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_MP)->count * 10 ) + 
+        //if ((float)( mp / ((m_POwner->health.mp - m_POwner->health.modmp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_MP)->count * 10 ) +
         //    visibleMp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
         //{
         //    m_LatentEffectList.at(i)->Activate();
@@ -1002,7 +1002,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         //visibleHp += (feet ? feet->getModifier(Mod::HP) : 0);
 
         //TODO: add mp percent too
-        //if ((float)( hp / ((m_POwner->health.hp - m_POwner->health.modhp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_HP)->count * 10 ) + 
+        //if ((float)( hp / ((m_POwner->health.hp - m_POwner->health.modhp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_HP)->count * 10 ) +
         //    visibleHp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
         //{
         //    m_LatentEffectList.at(i)->Activate();

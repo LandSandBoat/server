@@ -29,12 +29,12 @@
 #include "../entities/baseentity.h"
 
 
-CTreasureLotItemPacket::CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE MessageType) 
+CTreasureLotItemPacket::CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE MessageType)
 {
 	this->type = 0xD3;
 	this->size = 0x1E;
-	
-	ref<uint8>(0x14) = slotID;	
+
+	ref<uint8>(0x14) = slotID;
 	ref<uint8>(0x15) = MessageType;
 }
 
@@ -47,7 +47,7 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 slotI
 	ref<uint16>(0x0C) = PWinner->targid;
 	ref<uint16>(0x0E) = Lot;
 
-	ref<uint8>(0x14) = slotID;	
+	ref<uint8>(0x14) = slotID;
 	ref<uint8>(0x15) = MessageType;
 
 	memcpy(data+(0x16), PWinner->GetName(), PWinner->name.size());
@@ -70,8 +70,8 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint
     ref<uint16>(0x10) = PLotter->targid;
 	packBitsBE(data, Lot, 144, 16);  //this fixes an offset problem with lot numbers
 	//ref<uint8>(data,(0x12)) = Lot;
-	ref<uint8>(0x14) = SlotID; 
+	ref<uint8>(0x14) = SlotID;
 
 	memcpy(data + 0x26, PLotter->GetName(), PLotter->name.size());
-	
+
 }

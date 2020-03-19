@@ -89,7 +89,7 @@ uint16 CUContainer::GetTarget()
 *  Устанавливаем цель обмена                                            *
 *                                                                       *
 ************************************************************************/
-	
+
 void CUContainer::SetTarget(uint16 Target)
 {
     m_target = Target;

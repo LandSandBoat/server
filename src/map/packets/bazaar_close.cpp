@@ -27,7 +27,7 @@
 #include "../entities/charentity.h"
 
 
-CBazaarClosePacket::CBazaarClosePacket(CCharEntity * PChar) 
+CBazaarClosePacket::CBazaarClosePacket(CCharEntity * PChar)
 {
 	this->type = 0x07;	// 0x107
 	this->size = 0x0B;

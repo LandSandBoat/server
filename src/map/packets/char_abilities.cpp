@@ -28,7 +28,7 @@
 #include "../entities/charentity.h"
 
 
-CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar) 
+CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
 {
 	this->type = 0xAC;
 	this->size = 0x72;

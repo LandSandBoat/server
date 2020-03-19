@@ -52,8 +52,8 @@ struct dtNavMeshCreateParams
 
 	/// @}
 	/// @name Off-Mesh Connections Attributes (Optional)
-	/// Used to define a custom point-to-point edge within the navigation graph, an 
-	/// off-mesh connection is a user defined traversable connection made up to two vertices, 
+	/// Used to define a custom point-to-point edge within the navigation graph, an
+	/// off-mesh connection is a user defined traversable connection made up to two vertices,
 	/// at least one of which resides within a navigation mesh polygon.
 	/// @{
 
@@ -69,7 +69,7 @@ struct dtNavMeshCreateParams
 	///
 	/// 0 = Travel only from endpoint A to endpoint B.<br/>
 	/// #DT_OFFMESH_CON_BIDIR = Bidirectional travel.
-	const unsigned char* offMeshConDir;	
+	const unsigned char* offMeshConDir;
 	/// The user defined ids of the off-mesh connection. [Size: #offMeshConCount]
 	const unsigned int* offMeshConUserID;
 	/// The number of off-mesh connections. [Limit: >= 0]
@@ -136,10 +136,10 @@ This structure is used to marshal data between the Recast mesh generation pipeli
 
 See the rcPolyMesh and rcPolyMeshDetail documentation for detailed information related to mesh structure.
 
-Units are usually in voxels (vx) or world units (wu). The units for voxels, grid size, and cell size 
+Units are usually in voxels (vx) or world units (wu). The units for voxels, grid size, and cell size
 are all based on the values of #cs and #ch.
 
-The standard navigation mesh build process is to create tile data using dtCreateNavMeshData, then add the tile 
+The standard navigation mesh build process is to create tile data using dtCreateNavMeshData, then add the tile
 to a navigation mesh using either the dtNavMesh single tile <tt>init()</tt> function or the dtNavMesh::addTile()
 function.
 
