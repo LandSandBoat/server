@@ -14,10 +14,10 @@ end
 
 function onMobFight(mob,target)
     if (mob:hasStatusEffect(tpz.effect.AZURE_LORE))then
-		mob:setMobMod(tpz.mobMod.MAGIC_COOL, 0)
+        mob:setMobMod(tpz.mobMod.MAGIC_COOL, 0)
     else
         mob:setMobMod(tpz.mobMod.MAGIC_COOL, 20)
-	end
+    end
 end
 
 function onMobDeath(mob, player, isKiller)
