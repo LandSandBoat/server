@@ -467,6 +467,7 @@
     <ClInclude Include="..\..\src\map\zone_entities.h" />
     <ClInclude Include="..\..\src\map\zone_instance.h" />
     <ClInclude Include="gameserver.h" />
+    <ClInclude Include="..\..\src\map\daily_system.h" />
     <ClInclude Include="timetriggers.h" />
   </ItemGroup>
   <ItemGroup>
@@ -717,6 +718,7 @@
     <ClCompile Include="..\..\src\map\attackround.cpp" />
     <ClCompile Include="..\..\src\map\zone_entities.cpp" />
     <ClCompile Include="..\..\src\map\zone_instance.cpp" />
+    <ClCompile Include="..\..\src\map\daily_system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\documentation\message.log" />

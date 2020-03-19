@@ -51,6 +51,7 @@ CREATE TABLE `char_points` (
   `dark_fewell` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `ballista_point` int(10) unsigned NOT NULL DEFAULT '0',
   `fellow_point` int(10) unsigned NOT NULL DEFAULT '0',
+  `daily_tally` int(10) signed NOT NULL DEFAULT '-1',
   `chocobuck_sandoria` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_bastok` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_windurst` smallint(4) unsigned NOT NULL DEFAULT '0',

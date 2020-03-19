@@ -890,6 +890,9 @@
     <ClInclude Include="..\..\src\map\packets\trust_sync.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\daily_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\map\ability.cpp">
@@ -1631,6 +1634,9 @@
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\timetriggers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\daily_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
