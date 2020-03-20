@@ -49,7 +49,7 @@ function onUseAbility(player, target, ability, action)
 
             local arrowID = math.floor(player:getLocalVar("ArrowsUsed") / 10000)
             player:addItem(arrowID, arrowsToReturn)
-            
+
             if (arrowsToReturn == 1) then
                 action:messageID(playerID,140)
             else

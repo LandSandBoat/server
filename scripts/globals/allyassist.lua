@@ -4,7 +4,7 @@ tpz.ally =
 {
     ASSIST_PLAYER = 1,
     ASSIST_RANDOM = 2,
-    
+
     startAssist = function(entity, assistMode)
         -- print("Ally Assist Initiated")
 

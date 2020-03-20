@@ -63,7 +63,7 @@ function onEventFinish(player,csid,option)
                 [10] = {itemid = 15604, price = 20000},
                 [11] = {itemid = 14530, price = 20000},
             }
-               
+
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
                 player:delCurrency("ILRUSI_ASSAULT_POINT", choice.price)

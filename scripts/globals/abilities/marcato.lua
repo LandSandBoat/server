@@ -5,7 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: 1:00, or until next song is cast.
 -----------------------------------
- 
+
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------

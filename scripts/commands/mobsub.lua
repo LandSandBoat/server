@@ -19,7 +19,7 @@ end
 function onTrigger(player, arg1, arg2)
     local target
     local animationId
-    
+
     if (arg2 ~= nil) then
         target = arg1
         animationId = arg2

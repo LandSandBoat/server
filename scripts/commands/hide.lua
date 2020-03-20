@@ -25,7 +25,7 @@ function onTrigger(player, cmd)
     else
         isHidden = 0
     end
-    
+
     -- If hidden animate us beginning our hide..
     if (isHidden == 1) then
         player:setCharVar( "GMHidden", 1 )

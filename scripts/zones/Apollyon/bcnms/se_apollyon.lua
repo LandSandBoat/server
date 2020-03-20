@@ -24,7 +24,7 @@ function onBattlefieldEnter(player,battlefield)
     player:delKeyItem(tpz.ki.BLACK_CARD);
 end;
 -- 3=Disconnected or warped out (if dyna is empty: launch 4 after 3)
--- 4=Finish 
+-- 4=Finish
 
 function onBattlefieldLeave(player,battlefield,leavecode)
     -- print("leave code "..leavecode);

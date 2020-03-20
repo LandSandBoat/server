@@ -103,7 +103,7 @@ tpz.aftermath.effects =
                  { tpz.mod.REM_OCC_DO_DOUBLE_DMG_RANGED, function(tp) return 40 end } },
         duration = { 60, 90, 120 }
     },
-    
+
     -----------------------------------
     -- Tier 2 Mythic
     -----------------------------------
@@ -142,7 +142,7 @@ tpz.aftermath.effects =
                  { tpz.mod.REM_OCC_DO_DOUBLE_DMG_RANGED, function(tp) return 60 end } },
         duration = { 90, 120, 180 }
     },
-    
+
     -----------------------------------
     -- Tier 3 Mythic
     -----------------------------------
@@ -191,7 +191,7 @@ tpz.aftermath.effects =
         power = { 30, 40, 50 },
         duration = { 30, 60, 90 }
     },
-    
+
     -----------------------------------
     -- Tier 2 Empyrean
     -----------------------------------
@@ -217,12 +217,12 @@ tpz.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
         [1] = function(x)
             invalid = id > 28
         end,
-        
+
         -- Mythic
         [2] = function(x)
             invalid = id < 29 or id > 43
         end,
-        
+
         -- Empyrean
         [3] = function(x)
             invalid = id < 44
@@ -242,14 +242,14 @@ tpz.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
         [1] = function(x)
             player:addStatusEffect(tpz.effect.AFTERMATH, id, 0, aftermath.duration(tp), 0, tp, aftermathType)
         end,
-        
+
         -- Mythic
         [2] = function(x)
             local tier = math.floor(tp / 1000)
             local icon = tpz.effect["AFTERMATH_LV"..tier]
             player:addStatusEffectEx(tpz.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
         end,
-        
+
         -- Empyrean
         [3] = function(x)
             local tier = math.floor(tp / 1000)
@@ -279,7 +279,7 @@ tpz.aftermath.onEffectGain = function(target, effect)
                 end
             end
         end,
-        
+
         -- Mythic
         [2] = function(x)
             local tp = effect:getSubPower()
@@ -292,7 +292,7 @@ tpz.aftermath.onEffectGain = function(target, effect)
                 end
             end
         end,
-        
+
         -- Empyrean
         [3] = function(x)
             target:addMod(aftermath.mod, aftermath.power[math.floor(effect:getSubPower() / 1000)])
@@ -315,7 +315,7 @@ tpz.aftermath.onEffectLose = function(target, effect)
                 end
             end
         end,
-        
+
         -- Mythic
         [2] = function(x)
             local tp = effect:getSubPower()
@@ -328,7 +328,7 @@ tpz.aftermath.onEffectLose = function(target, effect)
                 end
             end
         end,
-        
+
         -- Empyrean
         [3] = function(x)
             target:delMod(aftermath.mod, aftermath.power[math.floor(effect:getSubPower() / 1000)])

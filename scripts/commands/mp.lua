@@ -35,7 +35,7 @@ function onTrigger(player, mp, target)
             return
         end
     end
-    
+
     -- set mp
     if (targ:getHP() > 0) then
         targ:setMP(mp)

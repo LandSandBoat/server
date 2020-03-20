@@ -63,7 +63,7 @@ function onEventFinish(player,csid,option)
                 [10] = {itemid = 15688, price = 20000},
                 [11] = {itemid = 15609, price = 20000},
             }
-               
+
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
                 player:delAssaultPoint("MAMOOL_ASSAULT_POINT", choice.price)

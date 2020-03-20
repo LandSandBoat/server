@@ -5,7 +5,7 @@
 -- Recast Time: 3 minutes
 -- Duration: Instant
 -----------------------------------
- 
+
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -19,7 +19,7 @@ function onAbilityCheck(player,target,ability)
 end
 
 function onUseAbility(player,target,ability)
-    
+
     local moves = player:getMerit(tpz.merit.NO_FOOT_RISE)
     if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
         if (moves > 4) then

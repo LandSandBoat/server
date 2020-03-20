@@ -12,7 +12,7 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)    
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[NE_Apollyon]UniqueID",os.time());
     HideArmouryCrates(NE_Apollyon,APOLLYON_SE_NE);
     SpawnCofferNEfloor1();
@@ -27,7 +27,7 @@ end;
 
 -- Leaving  by every mean possible, given by the LeaveCode
 -- 3=Disconnected or warped out (if dyna is empty: launch 4 after 3)
--- 4=Finish 
+-- 4=Finish
 
 function onBattlefieldLeave(player,battlefield,leavecode)
     --print("leave code "..leavecode);

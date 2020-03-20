@@ -50,7 +50,7 @@ tpz.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
 
             -- Confirm the clusters in the trade
             if hqQty > 0 then trade:confirmItem(v.cluster, hqQty) end
-            
+
             -- Count normal crystals and and subtract any that won't fit
             local qty = math.min(trade:getItemQty(v.crystal), diff)
 

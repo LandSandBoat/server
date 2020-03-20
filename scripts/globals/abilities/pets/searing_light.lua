@@ -10,17 +10,17 @@ require("/scripts/globals/magic")
 
 function onAbilityCheck(player, target, ability)
     local level = player:getMainLvl() * 2
-    
+
     if(player:getMP()<level) then
        return 87,0
     end
-    
+
     return 0,0
 end
 
 function onPetAbility(target, pet, skill, master)
     local dINT = math.floor(pet:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
-    
+
     local level = pet:getMainLvl()
     local damage = 26 + (level * 6)
     damage = damage + (dINT * 1.5)

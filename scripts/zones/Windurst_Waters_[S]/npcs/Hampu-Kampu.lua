@@ -49,4 +49,4 @@ function onEventFinish(player,csid,option)
     elseif csid == 169 then
         player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     end
-end 
+end

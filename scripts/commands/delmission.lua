@@ -26,7 +26,7 @@ function onTrigger(player, logId, missionId, target)
     end
     logName = logInfo.full_name
     logId = logInfo.mission_log
-    
+
     -- validate missionId
     local areaMissionIds = tpz.mission.id[tpz.mission.area[logId]]
     if (missionId ~= nil) then

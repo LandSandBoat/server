@@ -28,7 +28,7 @@ function onTrigger(player,npc)
             SpawnMob(ID.mob.BARAKBOK):updateClaim(player)
             player:setCharVar("theDoormanMyMob", 1)
         end
-        
+
     -- THE FIRST MEETING
     elseif offset == 1 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL) then
         if player:getCharVar("theFirstMeetingKilledNM") >= 2 then
@@ -38,7 +38,7 @@ function onTrigger(player,npc)
             SpawnMob(ID.mob.BILOPDOP):updateClaim(player)
             SpawnMob(ID.mob.DELOKNOK):updateClaim(player)
         end
-        
+
     -- DEFAULT DIALOG
     else
         player:messageSpecial(ID.text.YOU_SEE_NOTHING)

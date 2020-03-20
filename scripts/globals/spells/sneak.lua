@@ -21,7 +21,7 @@ function onSpellCast(caster, target, spell)
         duration = duration + target:getMod(tpz.mod.SNEAK_DURATION)
 
         duration = calculateDurationForLvl(duration, 20, target:getMainLvl())
-        
+
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
         target:addStatusEffect(tpz.effect.SNEAK, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
     else

@@ -44,7 +44,7 @@ function onEventUpdate(player,csid,option,target)
 
         player:createInstance(53,60);
         player:setLocalVar("theblackcoffinfight",0)
-        
+
         elseif player:getLocalVar("againstalloddsfight") == 1 then
         if (party ~= nil) then
             for i,v in ipairs(party) do

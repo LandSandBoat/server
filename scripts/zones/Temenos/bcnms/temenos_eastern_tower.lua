@@ -21,7 +21,7 @@ function onBattlefieldRegister(player,battlefield)
     if (GetMobByID(16928889):isSpawned()) then DespawnMob(16928889); end
     if (GetMobByID(16928894):isSpawned()) then DespawnMob(16928894); end
     SetServerVariable("[Temenos_E_Tower]UniqueID",os.time());
-    HideArmouryCrates(Temenos_Eastern_Tower,TEMENOS);        
+    HideArmouryCrates(Temenos_Eastern_Tower,TEMENOS);
     HideTemenosDoor(Temenos_Eastern_Tower);
 end;
 

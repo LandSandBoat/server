@@ -172,7 +172,7 @@ local p30 = { --Maps that are price at 30,000 gil
     Uoption[71],    --Grauberg
     Uoption[72]        --Fort Karugo-Narugo
     }
-    
+
 function CheckMaps(player, npc, csid)
     local i = 0
     local mapVar1 = 0
@@ -185,21 +185,21 @@ function CheckMaps(player, npc, csid)
         end
         i = i + 1
     end
-    
+
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
             mapVar2 = bit.bor(mapVar2, bit.lshift(1,i))
         end
         i = i + 1
     end
-    
+
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
             mapVar3 = bit.bor(mapVar3, bit.lshift(1,i))
         end
         i = i + 1
     end
-    
+
     player:startEvent(csid, mapVar1, mapVar2, mapVar3)
 end
 
@@ -243,7 +243,7 @@ function CheckMapsUpdate (player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED)
         player:addKeyItem(KI)
         player:messageSpecial(KEYITEM_OBTAINED, KI)
     end
-    
+
     i=0
     while i <= 31 do
         if player:hasKeyItem(Maps[i+1]) then
@@ -251,20 +251,20 @@ function CheckMapsUpdate (player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED)
         end
         i = i + 1
     end
-    
+
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
             mapVar2 = bit.bor(mapVar2, bit.lshift(1,i))
         end
         i = i + 1
     end
-    
+
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
             mapVar3 = bit.bor(mapVar3, bit.lshift(1,i))
         end
         i = i + 1
     end
-    
+
     player:updateEvent(mapVar1, mapVar2, mapVar3)
 end

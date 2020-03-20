@@ -10,11 +10,11 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-    
+
     if (EventTriggerBCNM(player,npc)) then
         return 1;
     end
-    
+
 end;
 
 function onEventUpdate(player,csid,option,extras)
@@ -28,9 +28,9 @@ end;
 function onEventFinish(player,csid,option)
     -- printf("onFinish CSID: %u",csid);
     -- printf("onFinish RESULT: %u",option);
-    
+
     if (EventFinishBCNM(player,csid,option)) then
         return;
     end
-    
+
 end;

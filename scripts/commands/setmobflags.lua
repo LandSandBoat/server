@@ -21,7 +21,7 @@ function onTrigger(player, flags, target)
         error(player, "You must supply a flags value.")
         return
     end
-    
+
     -- validate target
     local targ
     if (target == nil) then

@@ -41,7 +41,7 @@ function onEventUpdate(player,csid,option)
     elseif (csid == 818 or csid == 820) and option == 12 and player:getAssaultPoint(LEBROS_ASSAULT_POINT) >= 500 then
         player:setLocalVar("SalvageValid",3)
     elseif (csid == 818 or csid == 820) and option == 13 and player:getAssaultPoint(PERIQIA_ASSAULT_POINT) >= 500 then
-        player:setLocalVar("SalvageValid",4)   
+        player:setLocalVar("SalvageValid",4)
     elseif (csid == 818 or csid == 820) and option == 14 and player:getAssaultPoint(ILRUSI_ASSAULT_POINT) >= 500 then
         player:setLocalVar("SalvageValid",5)
     end
@@ -49,7 +49,7 @@ end;
 
 function onEventFinish(player,csid,option)
     local currentday = tonumber(os.date("%j"))
-    
+
     if (csid == 818 or csid == 820) and option == 100 then
         if player:getLocalVar("SalvageValid") == 1 then
             player:addKeyItem(tpz.ki.REMNANTS_PERMIT)

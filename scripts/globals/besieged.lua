@@ -37,7 +37,7 @@ tpz.besieged.onEventFinish = function(player, csid, option)
         if option ~= 0 then
             player:delCurrency("imperial_standing", 100)
         end
-        
+
         player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
         local duration = getSanctionDuration(player)
         local subPower = 0 -- getImperialDefenseStats()
@@ -102,7 +102,7 @@ tpz.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
 
 tpz.besieged.getMercenaryRank = function(player)
     local rank = 0
-    
+
     for _, v in ipairs(tpz.besieged.badges) do
         if player:hasKeyItem(v) then
             rank = rank + 1
@@ -240,6 +240,6 @@ function getISPItem(i)
     if item then
         return item.id, item.price
     end
-    
+
     return nil
 end

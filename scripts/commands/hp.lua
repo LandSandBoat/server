@@ -35,7 +35,7 @@ function onTrigger(player, hp, target)
             return
         end
     end
-    
+
     -- set hp
     if (targ:getHP() > 0) then
         targ:setHP(hp)

@@ -20,7 +20,7 @@ function onTrigger(player, cp)
         error(player, "Invalid amount.")
         return
     end
-    
+
     -- add cp
     player:addCP( cp )
     player:PrintToPlayer(string.format("Added %i cp to %s.", cp, player:getName()))

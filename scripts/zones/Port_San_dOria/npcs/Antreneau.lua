@@ -53,7 +53,7 @@ function onTrigger(player,npc)
             -- player:startEvent(534) -- What?  Something wrong with my food?
         end
     end
-    
+
 end
 
 function onEventUpdate(player,csid,option)

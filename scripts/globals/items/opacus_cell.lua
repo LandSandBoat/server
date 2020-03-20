@@ -15,5 +15,5 @@ end
 
 function onItemUse(target)
     target:delStatusEffectSilent(tpz.effect.IMPAIRMENT)
-    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 9) 
+    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 9)
 end

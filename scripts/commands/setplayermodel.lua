@@ -21,7 +21,7 @@ function onTrigger(player, model, slot, target)
         error(player, "Invalid model ID.")
         return
     end
-    
+
     -- validate slot
     if (slot == nil or slot < 0 or slot > 8) then
         error(player, "Invalid slot ID.")

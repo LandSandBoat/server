@@ -17,7 +17,7 @@ end
 function onTrigger(player, arg1, arg2)
     local targ
     local varName
-    
+
     if (arg2 == nil) then
         -- no player provided. shift arguments by one.
         targ = nil
@@ -26,7 +26,7 @@ function onTrigger(player, arg1, arg2)
         targ = arg1
         varName = arg2
     end
-    
+
     -- validate target
     if (targ == nil) then
         targ = player:getCursorTarget()
@@ -45,7 +45,7 @@ function onTrigger(player, arg1, arg2)
             end
         end
     end
-    
+
     -- validate varName
     if (varName == nil) then
         error(player, "You must provide a variable name.")

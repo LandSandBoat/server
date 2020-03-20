@@ -28,7 +28,7 @@ function onSpellCast(caster, target, spell)
     if merit > 0 then
         power = merit + caster:getMod(tpz.mod.STORMSURGE_EFFECT) + 2
     end
-    
+
     target:addStatusEffect(tpz.effect.HAILSTORM,power, 0, duration)
 
     return tpz.effect.HAILSTORM
