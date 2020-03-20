@@ -1,6 +1,4 @@
-﻿
-Список известных зон
-List of known zones
+﻿List of known zones
 
     0 -  00 - Tech Demo Area
     1 -  01 - Phanauet Channel

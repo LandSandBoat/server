@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -104,7 +104,7 @@ void login_config_read(const int8* file);       // We only need the search serve
 
 /************************************************************************
 *                                                                       *
-*  Отображения содержимого входящего пакета в консоли                   *
+*  Prints the contents of the packet in `data` to the console.          *
 *                                                                       *
 ************************************************************************/
 
@@ -135,12 +135,6 @@ void PrintPacket(char* data, int size)
     }
     printf("\n");
 }
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 int32 main(int32 argc, char **argv)
 {
@@ -282,7 +276,7 @@ int32 main(int32 argc, char **argv)
 
         std::thread(TCPComm, ClientSocket).detach();
     }
-    // TODO: сейчас мы никогда сюда не попадем
+    // TODO: The code below this line will never be reached.
 
     // shutdown the connection since we're done
 #ifdef WIN32
@@ -457,12 +451,6 @@ void login_config_read(const int8* file)
     fclose(fp);
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 void TCPComm(SOCKET socket)
 {
     //ShowMessage("TCP connection from client with port: %u\n", htons(CommInfo.port));
@@ -514,7 +502,7 @@ void TCPComm(SOCKET socket)
 
 /************************************************************************
 *                                                                       *
-*  Запрос списка персонажей (party/linkshell)                           *
+*  Character list request (party/linkshell)                             *
 *                                                                       *
 ************************************************************************/
 
@@ -563,12 +551,6 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
     }
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 void HandleSearchComment(CTCPRequestPacket& PTCPRequest)
 {
     uint8 packet[] =
@@ -590,12 +572,6 @@ void HandleSearchComment(CTCPRequestPacket& PTCPRequest)
     PTCPRequest.SendRawToSocket(packet, sizeof(packet));
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 {
     search_req sr = _HandleSearchRequest(PTCPRequest);
@@ -615,27 +591,19 @@ void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     PTCPRequest.SendToSocket(PSearchPacket.GetData(), PSearchPacket.GetSize());
 }
 
-/************************************************************************
-*                                                                       *
-
-
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
 {
     uint8* data = (uint8*)PTCPRequest.GetData();
     uint8  AHCatID = ref<uint8>(data, 0x16);
 
-    //2 - уровень -- level
-    //3 - раса -- race
-    //4 - профессия -- job
-    //5 - урон -- damage
-    //6 - задержка -- delay
-    //7 - защита -- defense
-    //8 - сопротивление -- resistance
-    //9 - название -- name
+    //2 - level
+    //3 - race
+    //4 - job
+    //5 - damage
+    //6 - delay
+    //7 - defense
+    //8 - resistance
+    //9 - name
     string_t OrderByString = "ORDER BY";
     uint8 paramCount = ref<uint8>(data, 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
@@ -677,12 +645,6 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     }
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
 {
     uint8* data = (uint8*)PTCPRequest.GetData();
@@ -702,16 +664,10 @@ void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
     PTCPRequest.SendToSocket(PAHPacket.GetData(), PAHPacket.GetSize());
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 {
-    // суть в том, чтобы заполнить некоторую структуру, на основании которой будет создан запрос к базе
-    // результат поиска в базе отправляется клиенту
+    // This function constructs a `search_req` based on which query should be send to the database.
+    // The results from the database will eventually be sent to the client.
 
     uint32 bitOffset = 0;
 
@@ -971,8 +927,10 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     return sr;
-    // не обрабатываем последние биты, что мешает в одну кучу например "/blacklist delete Name" и "/sea all Name"
+    // не обрабатываем последние биты, что мешает в одну кучу
+    // For example: "/blacklist delete Name" and "/sea all Name"
 }
+
 /************************************************************************
 *                                                                       *
 *  Task Manager Thread                                                  *

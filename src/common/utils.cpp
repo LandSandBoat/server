@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -30,13 +30,6 @@
 #ifdef _MSC_VER
 #	include <intrin.h>
 #endif
-
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
-
 
 //--------------------------------------------------
 // Return numerical value of a switch configuration
@@ -88,12 +81,6 @@ bool bin2hex(char* output, unsigned char* input, size_t count)
     return true;
 }
 
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
-
 float distance(const position_t& A, const position_t& B)
 {
     return sqrt(distanceSquared(A, B));
@@ -108,12 +95,6 @@ float distanceSquared(const position_t& A, const position_t& B)
     return diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
 }
 
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
-
 int32 intpow32(int32 base, int32 exponent)
 {
     int32 power = 1;
@@ -126,12 +107,6 @@ int32 intpow32(int32 base, int32 exponent)
     }
     return power;
 }
-
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
 
 void getMSB(uint32* result, uint32 value)
 {
@@ -162,13 +137,6 @@ uint8 radianToRotation(float radian)
     return (uint8)((radian / (2 * M_PI)) * 256);
 }
 
-
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
-
 uint8 getangle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
@@ -177,9 +145,9 @@ uint8 getangle(const position_t& A, const position_t& B)
 }
 
 /************************************************************************
-*																		*
-*  Проверяем, находится ли цель в поле зрения (coneAngle)				*
-*																		*
+*										       								                              *
+*  Check whether the target is in the field of view (coneAngle)	       	*
+*																		                                    *
 ************************************************************************/
 
 bool isFaceing(const position_t& A, const position_t& B, uint8 coneAngle)
@@ -212,9 +180,9 @@ position_t nearPosition(const position_t& A, float offset, float radian)
 }
 
 /************************************************************************
-*																		*
-*  Методы для работы с битовыми массивами								*
-*																		*
+*                                                                       *
+*  Methods for working with bit arrays.                 								*
+*                                                                       *
 ************************************************************************/
 
 int32 hasBit(uint16 value, uint8* BitArray, uint32 size)
@@ -246,12 +214,6 @@ int32 delBit(uint16 value, uint8* BitArray, uint32 size)
     }
     return 0;
 }
-
-/************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
 
 uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit)
 {
