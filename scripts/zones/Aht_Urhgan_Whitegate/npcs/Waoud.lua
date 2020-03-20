@@ -2,7 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Waoud
 -- Standard Info NPC
--- Involved in quests: An Empty Vessel (BLU flag), Beginnings (BLU AF1), Omens (BLU AF2)
+-- Involved in quests: An Empty Vessel (BLU Unlock), Beginnings (BLU AF Quest 1), Omens (BLU AF Quest 2)
 -- !pos 65 -6 -78 50
 -----------------------------------
 require("scripts/globals/settings")
@@ -35,7 +35,6 @@ function onTrigger(player, npc)
     -- AN EMPTY VESSEL
     if ENABLE_TOAU == 1 and anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
         if divinationReady then
-            player:setCharVar("SuccessfullyAnswered", 0)
             player:startEvent(60, player:getGil()) -- you must answer these 10 questions
         else
             player:startEvent(63) -- you failed, and must wait a gameday to try again
@@ -89,7 +88,7 @@ function onTrigger(player, npc)
             player:startEvent(711, player:getGil()) -- clue about bcnm location, costs you 1000 gil
         elseif player:getCharVar("OmensProgress") == 2 then
             player:startEvent(712) -- gives keyitem to claim armour piece
-        elseif player:getCharVar("OmensProgress") == 3 then
+        elseif player:getCharVar("OmensProgress") >= 3 then
             player:startEvent(713, player:getGil()) -- clue about location of armour piece, costs you 1000 gil
         end
 
@@ -102,14 +101,14 @@ end
 function onEventUpdate(player, csid, option)
     -- AN EMPTY VESSEL
     if csid == 60 then
-        local success = player:getCharVar("SuccessfullyAnswered")
+        local success = player:getLocalVar("SuccessfullyAnswered")
 
         -- record correct answers
         if option < 40 then
             local correctAnswers = {2, 6, 9, 12, 13, 18, 21, 24, 26, 30}
             for k, v in pairs(correctAnswers) do
                 if (v == option) then
-                    player:setCharVar("SuccessfullyAnswered", success + 1)
+                    player:setLocalVar("SuccessfullyAnswered", success + 1)
                     break
                 end
             end
@@ -128,7 +127,7 @@ function onEventUpdate(player, csid, option)
                     [2] = function (x) player:setCharVar("EmptyVesselStone", 503) end, -- (502) Valkurm Sunsand (502)
                     [3] = function (x) player:setCharVar("EmptyVesselStone", 553) end  -- (553) Dangruf Stone (553)
                 }
-                player:setCharVar("SuccessfullyAnswered", 0)
+                player:setLocalVar("SuccessfullyAnswered", 0)
                 player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, rand, 70) -- all 5 serpents / success!
             end
         end
@@ -149,6 +148,7 @@ function onEventFinish(player, csid, option)
 
     -- AN EMPTY VESSEL
     if csid == 60 then
+        player:setLocalVar("SuccessfullyAnswered", 0)
         if option == 0 then
             player:setCharVar("AnEmptyVesselProgress", 1)
         elseif option == 50 then
@@ -156,7 +156,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 2)
             player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
-        else
+        elseif player:getGil() >= 1000 then
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 1)
             player:delGil(1000)
@@ -170,13 +170,13 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BluAFBeginnings_Waoud", 1)
 
     -- BEGINNINGS
-    elseif csid == 78 and option == 1 then
+    elseif csid == 78 and option == 1 and player:getGil() >= 1000 then
         player:setCharVar("LastDivinationDay", vanaDay())
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 705 and option == 1 then
         player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    elseif csid == 706 and option == 1 then
+    elseif csid == 706 and option == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 707 then
@@ -186,13 +186,13 @@ function onEventFinish(player, csid, option)
     elseif csid == 710 and beginnings == QUEST_COMPLETED then
         player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
         player:setCharVar("OmensProgress", 1)
-    elseif csid == 711 and option == 1 and omensProgress == 1 then
+    elseif csid == 711 and option == 1 and omensProgress == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 712 and omensProgress == 2 then
         npcUtil.giveKeyItem(player, tpz.ki.SEALED_IMMORTAL_ENVELOPE)
         player:setCharVar("OmensProgress", 3)
-    elseif csid == 713 and option == 1 and omensProgress == 3 then
+    elseif csid == 713 and option == 1 and omensProgress == 3 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     end

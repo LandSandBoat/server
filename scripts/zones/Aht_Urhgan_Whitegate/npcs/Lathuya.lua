@@ -22,8 +22,8 @@ function onTrigger(player, npc)
             player:startEvent(714) -- Tells Master location
         elseif omensProgress == 4 then
             player:startEvent(715) -- Reminder of master location
-        elseif omensProgress== 5 then
-            player:startEvent(716) -- Quest Completed
+        elseif omensProgress == 5 then
+            player:startEvent(716) -- Master spoken to
         elseif omens == QUEST_COMPLETED then
             player:startEvent(771) -- Default dialog
         end

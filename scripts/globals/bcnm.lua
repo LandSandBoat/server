@@ -573,7 +573,7 @@ function checkReqs(player, npc, bfid, registrant)
         [1090] = function() return ( player:hasKeyItem(tpz.ki.TOGGLE_SWITCH)                                                                                                ) end, -- Quest: Puppetmaster Blues
         [1091] = function() return ( mjob == tpz.job.COR and mlvl >= 66                                                                                                     ) end, -- Quest: Breaking the Bonds of Fate (COR LB5)
         [1092] = function() return ( toau == mi.toau.LEGACY_OF_THE_LOST                                                                                                     ) end, -- TOAU35: Legacy of the Lost
-        [1122] = function() return ( player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and player:getCharVar('BluAf2CS') == 1                ) end, -- Quest: Omens (BLU AF2)
+        [1122] = function() return ( player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and player:getCharVar('OmensProgress') == 1           ) end, -- Quest: Omens (BLU AF Quest 2)
         [1123] = function() return ( mjob == tpz.job.PUP and mlvl >= 66                                                                                                     ) end, -- Quest: Achieving True Power (PUP LB5)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                  ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == tpz.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
