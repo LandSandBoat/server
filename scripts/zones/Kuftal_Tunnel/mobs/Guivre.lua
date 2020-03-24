@@ -2,8 +2,9 @@
 -- Area: Kuftal Tunnel
 --   NM: Guivre
 -----------------------------------
+require("scripts/globals/pathfind")
 
-local path =
+local pathNodes =
 {
     106.836830, 0.753614, -3.944333,
     106.991020, 0.588184, -4.941793,
@@ -372,18 +373,18 @@ local path =
     107.542999, 0.261044, 3.065771
 }
 
-function onMobSpawn(mob)
-    onMobRoam(mob)
+function onPath(mob)
+    tpz.path.patrol(mob, pathNodes)
 end
 
-function onPath(mob)
-    tpz.path.patrol(mob, path)
+function onMobSpawn(mob)
+    onPath(mob)
 end
 
 function onMobRoam(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path))
+        mob:pathThrough(tpz.path.first(pathNodes))
     end
 end
 
