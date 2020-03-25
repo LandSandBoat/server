@@ -4120,14 +4120,16 @@ namespace battleutils
             if (PAttacker)
             {
                 uint8 pcinzone = 0;
-                PAttacker->ForAlliance([&pcinzone, &mob](CBattleEntity* PMember) {
+                uint8 maxLevel = 0;
+                PAttacker->ForAlliance([&pcinzone, &maxLevel, &mob](CBattleEntity* PMember) {
                     if (PMember->getZone() == mob->getZone() && distance(PMember->loc.p, mob->loc.p) < 100)
                     {
+                        maxLevel = std::max(maxLevel, PMember->GetMLevel());
                         pcinzone++;
                     }
                 });
                 mob->m_HiPartySize = std::max(pcinzone, mob->m_HiPartySize);
-                mob->m_HiPCLvl = std::max(PAttacker->GetMLevel(), mob->m_HiPCLvl);
+                mob->m_HiPCLvl = std::max(maxLevel, mob->m_HiPCLvl);
             }
         }
     }
