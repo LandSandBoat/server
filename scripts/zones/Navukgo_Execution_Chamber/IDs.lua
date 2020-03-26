@@ -27,6 +27,11 @@ zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
     mob =
     {
         KARABABA_OFFSET = 17039401,
+        IMMORTAL_FLAN2  = 17039375, -- IMMORTAL_FLAN1 always pops in battlefield, other flans pop depending on party size
+        IMMORTAL_FLAN3  = 17039376,
+        IMMORTAL_FLAN4  = 17039377,
+        IMMORTAL_FLAN5  = 17039378,
+        IMMORTAL_FLAN6  = 17039379,
     },
     npc =
     {

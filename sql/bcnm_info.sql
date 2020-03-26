@@ -265,7 +265,7 @@ INSERT INTO `bcnm_info` VALUES (1091,57,'breaking_the_bonds_of_fate','nobody',0,
 INSERT INTO `bcnm_info` VALUES (1092,57,'legacy_of_the_lost','nobody',0,1800,1800,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (1120,64,'tough_nut_to_crack','nobody',0,1800,1800,60,6,1120,15,0);
 INSERT INTO `bcnm_info` VALUES (1121,64,'happy_caster','nobody',0,1800,1800,75,6,1121,15,0);
-INSERT INTO `bcnm_info` VALUES (1122,64,'omens','nobody',0,1800,1800,75,18,0,7,0);
+INSERT INTO `bcnm_info` VALUES (1122,64,'omens','nobody',0,1800,1800,0,18,0,7,0);
 INSERT INTO `bcnm_info` VALUES (1123,64,'achieving_true_power','nobody',0,600,600,75,1,0,6,0);
 INSERT INTO `bcnm_info` VALUES (1124,64,'shield_of_diplomacy','nobody',0,1800,1800,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (1152,67,'making_a_mockery','nobody',0,1800,1800,60,6,1152,15,0);
