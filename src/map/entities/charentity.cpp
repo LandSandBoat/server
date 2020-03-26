@@ -183,6 +183,7 @@ CCharEntity::CCharEntity()
     PWideScanTarget = nullptr;
 
     PAutomaton = nullptr;
+    PClaimedMob = nullptr;
     PRecastContainer = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
@@ -631,6 +632,7 @@ void CCharEntity::OnEngage(CAttackState& state)
 
 void CCharEntity::OnDisengage(CAttackState& state)
 {
+    battleutils::RelinquishClaim(this);
     CBattleEntity::OnDisengage(state);
     if (state.HasErrorMsg())
     {
@@ -898,6 +900,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 }
             }
         }
+        battleutils::ClaimMob(PBattleTarget, this);
     }
     else
     {
@@ -1322,7 +1325,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.messageID = 354;
 
             battleutils::ClaimMob(PTarget, this);
-
             hitCount = i; // end barrage, shot missed
         }
 
@@ -1657,6 +1659,7 @@ void CCharEntity::Die()
     else
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
 
+    battleutils::RelinquishClaim(this);
     Die(death_duration);
     SetDeathTimestamp((uint32)time(nullptr));
 

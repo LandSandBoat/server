@@ -727,6 +727,8 @@ void CMobController::DoRoamTick(time_point tick)
                 if (PMob->GetHPP() == 100)
                 {
                     // at max health undirty exp
+                    PMob->m_HiPCLvl = 0;
+                    PMob->m_HiPartySize = 0;
                     PMob->m_giveExp = true;
                 }
             }
