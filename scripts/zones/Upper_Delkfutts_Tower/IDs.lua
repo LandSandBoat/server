@@ -25,7 +25,7 @@ zones[tpz.zone.UPPER_DELKFUTTS_TOWER] =
         ALREADY_POSSESS_TEMP     = 7377,  -- You already possess that temporary item.
         NO_COMBINATION           = 7382,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 9460,  -- New training regime registered!
-        HOMEPOINT_SET            = 10516, -- Home point set!
+        HOMEPOINT_SET            = 10519, -- Home point set!
     },
     mob =
     {

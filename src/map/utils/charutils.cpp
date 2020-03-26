@@ -1456,7 +1456,7 @@ namespace charutils
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        if ((PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() + PTarget->UContainer->GetItemsCount()) < PChar->UContainer->GetItemsCount())
+        if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
             ShowDebug(CL_CYAN"Unable to trade, %s doesn't have enough inventory space\n" CL_RESET, PTarget->GetName());
             return false;
@@ -3095,7 +3095,7 @@ namespace charutils
         if (baseExp >= 200) return EMobDifficulty::EvenMatch;
         if (baseExp >= 160) return EMobDifficulty::DecentChallenge;
         if (baseExp >= 60) return EMobDifficulty::EasyPrey;
-        if (baseExp >= 14) return EMobDifficulty::IncredibyEasyPrey;
+        if (baseExp >= 14) return EMobDifficulty::IncrediblyEasyPrey;
 
         return EMobDifficulty::TooWeak;
     }

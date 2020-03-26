@@ -3594,6 +3594,7 @@ INSERT INTO `item_basic` VALUES (3736,0,'well','well',1,28752,0,0,0);
 INSERT INTO `item_basic` VALUES (3737,0,'doll_stand','doll_stand',1,61520,0,1,0);
 INSERT INTO `item_basic` VALUES (3738,0,'eastern_umbrella','eastern_umbrella',1,61520,0,1,0);
 INSERT INTO `item_basic` VALUES (3739,0,'autumn_tree','autumn_tree',1,28736,0,1,0);
+INSERT INTO `item_basic` VALUES (3740,0,'model_synergy_furnace','model_synergy_furn.',1,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (3840,0,'pulse_cell_mx','pulse_cell_mx',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3841,0,'pulse_cell_an','pulse_cell_an',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3842,0,'pulse_cell_fa','pulse_cell_fa',12,4100,46,1,0);
@@ -7450,6 +7451,8 @@ INSERT INTO `item_basic` VALUES (10069,0,'♪goobbue','♪goobbue',1,61504,0,0,0
 INSERT INTO `item_basic` VALUES (10070,0,'♪raaz','♪raaz',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10071,0,'♪levitus','♪levitus',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10072,0,'♪adamantoise','♪adamantoise',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10073,0,'♪dhalmel','♪dhalmel',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10074,0,'♪doll','♪doll',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10112,0,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,0,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,0,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);

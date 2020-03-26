@@ -32,14 +32,14 @@ zones[tpz.zone.THE_SANCTUARY_OF_ZITAH] =
         FOUND_ALL_FRAGS            = 7739,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT            = 7740,  -- It is an ancient Zilart monument.
         STURDY_BRANCH              = 7763,  -- It is a beautiful, sturdy branch.
-        SENSE_OMINOUS_PRESENCE     = 7848,  -- You sense an ominous presence...
-        PLAYER_OBTAINS_ITEM        = 8082,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 8083,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 8084,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 8085,  -- You already possess that temporary item.
-        NO_COMBINATION             = 8090,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 10268, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 12257, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE     = 7843,  -- You sense an ominous presence...
+        PLAYER_OBTAINS_ITEM        = 8077,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 8078,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 8079,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 8080,  -- You already possess that temporary item.
+        NO_COMBINATION             = 8085,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 10263, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 12252, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

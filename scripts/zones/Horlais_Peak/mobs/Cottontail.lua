@@ -6,10 +6,6 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
-end
-
 function onMobSpawn(mob) 
  	mob:setMobMod(tpz.mobMod.CHARMABLE, 1)
 end
