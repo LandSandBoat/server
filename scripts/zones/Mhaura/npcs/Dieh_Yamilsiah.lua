@@ -10,31 +10,31 @@ require("scripts/globals/transport")
 
 local messages =
 {
-    [tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_ALZAHBI] = ID.text.FERRY_ARRIVING,
-    [tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_ALZAHBI]  = ID.text.FERRY_DEPARTING,
-    [tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_SELBINA] = ID.text.FERRY_ARRIVING,
-    [tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_SELBINA]  = ID.text.FERRY_DEPARTING
+    [tpz.transport.trigger.mhaura.FERRY_ARRIVING_FROM_ALZAHBI] = ID.text.FERRY_ARRIVING,
+    [tpz.transport.trigger.mhaura.FERRY_DEPARTING_TO_ALZAHBI]  = ID.text.FERRY_DEPARTING,
+    [tpz.transport.trigger.mhaura.FERRY_ARRIVING_FROM_SELBINA] = ID.text.FERRY_ARRIVING,
+    [tpz.transport.trigger.mhaura.FERRY_DEPARTING_TO_SELBINA]  = ID.text.FERRY_DEPARTING
 }
 
 function onSpawn(npc)
     npc:initNpcAi()
     -- TODO: NPC needs to rotate after finishing walking.
-    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_ALZAHBI,
-        tpz.transport.dockPorterMhauraInterval.FROM_TO_ALZAHBI,
-        tpz.transport.dockPorterMhauraOffset.FERRY_ARRIVING_FROM_ALZAHBI)
-    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_ALZAHBI,
-        tpz.transport.dockPorterMhauraInterval.FROM_TO_ALZAHBI,
-        tpz.transport.dockPorterMhauraOffset.FERRY_DEPARTING_TO_ALZAHBI)
-    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_SELBINA,
-        tpz.transport.dockPorterMhauraInterval.FROM_TO_SELBINA,
-        tpz.transport.dockPorterMhauraOffset.FERRY_ARRIVING_FROM_SELBINA)
-    npc:addPeriodicTrigger(tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_SELBINA,
-        tpz.transport.dockPorterMhauraInterval.FROM_TO_SELBINA,
-        tpz.transport.dockPorterMhauraOffset.FERRY_DEPARTING_TO_SELBINA)
+    npc:addPeriodicTrigger(tpz.transport.trigger.mhaura.FERRY_ARRIVING_FROM_ALZAHBI,
+        tpz.transport.interval.mhaura.FROM_TO_ALZAHBI,
+        tpz.transport.offset.mhaura.FERRY_ARRIVING_FROM_ALZAHBI)
+    npc:addPeriodicTrigger(tpz.transport.trigger.mhaura.FERRY_DEPARTING_TO_ALZAHBI,
+        tpz.transport.interval.mhaura.FROM_TO_ALZAHBI,
+        tpz.transport.offset.mhaura.FERRY_DEPARTING_TO_ALZAHBI)
+    npc:addPeriodicTrigger(tpz.transport.trigger.mhaura.FERRY_ARRIVING_FROM_SELBINA,
+        tpz.transport.interval.mhaura.FROM_TO_SELBINA,
+        tpz.transport.offset.mhaura.FERRY_ARRIVING_FROM_SELBINA)
+    npc:addPeriodicTrigger(tpz.transport.trigger.mhaura.FERRY_DEPARTING_TO_SELBINA,
+        tpz.transport.interval.mhaura.FROM_TO_SELBINA,
+        tpz.transport.offset.mhaura.FERRY_DEPARTING_TO_SELBINA)
 end
 
 function onTimeTrigger(npc, triggerID)
-    tpz.transport.dockPorterMhauraMessages(npc, triggerID, messages)
+    tpz.transport.dockMessage(npc, triggerID, messages, 'mhaura')
 end
 
 function onTrade(player,npc,trade)

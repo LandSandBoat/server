@@ -24,33 +24,46 @@ tpz.transport.messageTime =
     SILVER_SEA = 480
 }
 
-tpz.transport.dockPorterMhauraTrigger =
+tpz.transport.trigger =
 {
-    FERRY_ARRIVING_FROM_ALZAHBI  = 0,
-    FERRY_DEPARTING_TO_ALZAHBI = 1,
-    FERRY_ARRIVING_FROM_SELBINA  = 2,
-    FERRY_DEPARTING_TO_SELBINA = 3
+    mhaura =
+    {
+        FERRY_ARRIVING_FROM_ALZAHBI = 0,
+        FERRY_DEPARTING_TO_ALZAHBI  = 1,
+        FERRY_ARRIVING_FROM_SELBINA = 2,
+        FERRY_DEPARTING_TO_SELBINA  = 3
+    }
 }
 
-tpz.transport.dockPorterMhauraOffset =
+tpz.transport.interval =
 {
-    FERRY_ARRIVING_FROM_ALZAHBI = 159,
-    FERRY_DEPARTING_TO_ALZAHBI = 239,
-    FERRY_ARRIVING_FROM_SELBINA = 399,
-    FERRY_DEPARTING_TO_SELBINA = 479
+    mhaura =
+    {
+        FROM_TO_ALZAHBI = 480,
+        FROM_TO_SELBINA = 480
+    }
 }
 
-tpz.transport.dockPorterMhauraInterval =
+tpz.transport.offset =
 {
-    FROM_TO_ALZAHBI = 480,
-    FROM_TO_SELBINA = 480
+    mhaura =
+    {
+        FERRY_ARRIVING_FROM_ALZAHBI = 159,
+        FERRY_DEPARTING_TO_ALZAHBI  = 239,
+        FERRY_ARRIVING_FROM_SELBINA = 399,
+        FERRY_DEPARTING_TO_SELBINA  = 479
+    }
 }
 
-tpz.transport.dockPorterMhauraPos =
+tpz.transport.pos =
 {
-    ARRIVING = {7.06, -1.36, 2.49},
-    DEPARTING = {8.26, -1.36, 2.20}
+    mhaura =
+    {
+        ARRIVING  = {7.06, -1.36, 2.20},
+        DEPARTING = {8.26, -1.36, 2.20}
+    }
 }
+
 -------------------------------------------------
 -- public functions
 -------------------------------------------------
@@ -62,13 +75,11 @@ tpz.transport.captainMessage = function(npc, triggerID, messages)
     end
 end
 
-tpz.transport.dockPorterMhauraMessages = function(npc, triggerID, messages)
+tpz.transport.dockMessage = function(npc, triggerID, messages, dock)
     npc:showText(npc, messages[triggerID])
-    if triggerID == tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_ALZAHBI or
-        triggerID == tpz.transport.dockPorterMhauraTrigger.FERRY_ARRIVING_FROM_SELBINA then
-        npc:pathThrough(tpz.transport.dockPorterMhauraPos.ARRIVING, PATHFLAG_WALLHACK)
-    elseif triggerID == tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_ALZAHBI or
-        triggerID == tpz.transport.dockPorterMhauraTrigger.FERRY_DEPARTING_TO_SELBINA then
-        npc:pathThrough(tpz.transport.dockPorterMhauraPos.DEPARTING, PATHFLAG_WALLHACK)
+    if (triggerID % 2) == 0 then
+        npc:pathThrough(tpz.transport.pos[dock].ARRIVING, PATHFLAG_WALLHACK)
+    else
+        npc:pathThrough(tpz.transport.pos[dock].DEPARTING, PATHFLAG_WALLHACK)
     end
 end
