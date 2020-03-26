@@ -54,6 +54,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
 #include "conquest_system.h"
+#include "daily_system.h"
 #include "utils/mobutils.h"
 #include "ai/controllers/automaton_controller.h"
 
@@ -218,6 +219,7 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     mobutils::LoadCustomMods();
+    daily::LoadDailyItems();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
