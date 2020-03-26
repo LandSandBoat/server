@@ -49,7 +49,7 @@ function onSpellCast(caster,target,spell)
         basepower = 0
     end
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == tpz.objType.PC or target:getObjType() == tpz.objType.MOB)) then
+    if isValidHealTarget(caster, target) then
         basecure = getBaseCure(power,divisor,constant,basepower)
         final = getCureFinal(caster,spell,basecure,minCure,false)
         if (caster:hasStatusEffect(tpz.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(tpz.effect.STONESKIN) == false) then

@@ -19,8 +19,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include <string.h>
-
 #include "trustentity.h"
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
@@ -33,10 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/helpers/targetfind.h"
 #include "../ai/states/ability_state.h"
 #include "../utils/battleutils.h"
-#include "../utils/petutils.h"
-#include "../utils/mobutils.h"
-#include "../../common/utils.h"
-#include "../mob_modifier.h"
+#include "../utils/trustutils.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 {
@@ -48,8 +43,9 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this), std::make_unique<CTargetFind>(this));
 }
 
-CTrustEntity::~CTrustEntity()
+const int8* CTrustEntity::GetName()
 {
+    return (const int8*)packetName.c_str();
 }
 
 void CTrustEntity::PostTick()
@@ -58,57 +54,39 @@ void CTrustEntity::PostTick()
     if (loc.zone && updatemask && status != STATUS_DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
-        for (auto PTrust : ((CCharEntity*)PMaster)->PTrusts)
-        {
-            if (PTrust == this)
-            {
-                ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
-            }
-        }
 
-        if (updatemask & UPDATE_HP)
+        if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
         {
-            if (PMaster->PParty != nullptr)
+            PMaster->ForParty([this](auto PMember)
             {
-                PMaster->ForParty([this](auto PMember)
-                {
-                    if (PMember->objtype == TYPE_PC)
-                    {
-                        static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this));
-                    }
-                });
-            }
+                static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this));
+            });
         }
-
         updatemask = 0;
     }
 }
 
 void CTrustEntity::FadeOut()
 {
-    CMobEntity::FadeOut();
+    CBaseEntity::FadeOut();
     loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
 }
 
 void CTrustEntity::Die()
 {
+    luautils::OnMobDeath(this, nullptr);
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
-    luautils::OnMobDeath(this, nullptr);
+    ((CCharEntity*)PMaster)->RemoveTrust(this);
     CBattleEntity::Die();
-    if (PMaster->objtype == TYPE_PC)
-    {
-        CCharEntity* PChar = (CCharEntity*)PMaster;
-        PChar->RemoveTrust(this);
-    }
 }
 
 void CTrustEntity::Spawn()
 {
     //we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
-    ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
     luautils::OnMobSpawn(this);
+    ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
 }
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
@@ -118,4 +96,15 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return false;
     }
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
+}
+
+void CTrustEntity::OnDespawn(CDespawnState&)
+{
+    if (GetHPP())
+    {
+        // Don't call this when despawning after being killed
+        luautils::OnMobDespawn(this);
+    }
+    FadeOut();
+    PAI->EventHandler.triggerListener("DESPAWN", this);
 }

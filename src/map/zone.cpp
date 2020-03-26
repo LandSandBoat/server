@@ -441,6 +441,22 @@ void CZone::InsertPET(CBaseEntity* PPet)
 
 /************************************************************************
 *                                                                       *
+*  Add a trust to the zone                                              *
+*                                                                       *
+************************************************************************/
+
+void CZone::InsertTRUST(CBaseEntity* PTrust)
+{
+    m_zoneEntities->InsertTRUST(PTrust);
+}
+
+void CZone::DeleteTRUST(CBaseEntity* PTrust)
+{
+    m_zoneEntities->DeleteTRUST(PTrust);
+}
+
+/************************************************************************
+*                                                                       *
 *  Добавляем в зону активную область                                    *
 *                                                                       *
 ************************************************************************/
@@ -652,6 +668,11 @@ void CZone::SpawnPETs(CCharEntity* PChar)
     m_zoneEntities->SpawnPETs(PChar);
 }
 
+void CZone::SpawnTRUSTs(CCharEntity* PChar)
+{
+    m_zoneEntities->SpawnTRUSTs(PChar);
+}
+
 /************************************************************************
 *                                                                       *
 *  Проверка видимости NPCs персонажем.                                  *
@@ -815,6 +836,22 @@ void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEnti
     }
 }
 
+void CZone::ForEachTrust(std::function<void(CTrustEntity*)> func)
+{
+    for (auto PTrust : m_zoneEntities->m_trustList)
+    {
+        func((CTrustEntity*)PTrust.second);
+    }
+}
+
+void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func)
+{
+    for (auto PTrust : m_zoneEntities->m_trustList)
+    {
+        func((CTrustEntity*)PTrust.second);
+    }
+}
+
 void CZone::ForEachNpc(std::function<void(CNpcEntity*)> func)
 {
     for (auto PNpc : m_zoneEntities->m_npcList)
@@ -962,6 +999,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     PChar->SpawnNPCList.clear();
     PChar->SpawnMOBList.clear();
     PChar->SpawnPETList.clear();
+    PChar->SpawnTRUSTList.clear();
 
     if (PChar->PParty && PChar->loc.destination != 0 && PChar->m_moghouseID == 0)
     {

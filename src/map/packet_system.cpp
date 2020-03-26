@@ -374,6 +374,11 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         PChar->updatemask |= UPDATE_HP;
     }
 
+    if (!PChar->PTrusts.empty())
+    {
+        PChar->ClearTrusts();
+    }
+
     if (PChar->status == STATUS_SHUTDOWN)
     {
         if (PChar->PParty != nullptr)
@@ -540,6 +545,7 @@ void SmallPacket0x015(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
         PChar->loc.zone->SpawnMOBs(PChar);
         PChar->loc.zone->SpawnPETs(PChar);
+        PChar->loc.zone->SpawnTRUSTs(PChar);
 
         if (PChar->PWideScanTarget != nullptr)
         {
@@ -809,6 +815,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             PChar->loc.zone->SpawnPCs(PChar);
             PChar->loc.zone->SpawnNPCs(PChar);
             PChar->loc.zone->SpawnMOBs(PChar);
+            PChar->loc.zone->SpawnTRUSTs(PChar);
         }
     }
     break;
@@ -3553,7 +3560,7 @@ void SmallPacket0x076(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     else
     {
         //previous CPartyDefine was dropped or otherwise didn't work?
-        PChar->pushPacket(new CPartyDefinePacket(nullptr));
+        PChar->pushPacket(new CPartyDefinePacket(nullptr, false));
     }
     return;
 }

@@ -527,7 +527,7 @@ INSERT INTO `mob_skills` VALUES (696,432,'soul_voice',0,7.0,2000,0,1,2,0,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (704,448,'counterstance',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (705,449,'hide',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (706,450,'bash',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (707,451,'sentinel',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (707,451,'sentinel',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (708,452,'last_resort',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (709,453,'souleater',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (710,438,'charm',0,18.0,2000,0,4,0,0,0,0,0,0);
@@ -1765,7 +1765,7 @@ INSERT INTO `mob_skills` VALUES (1941,1305,'string_clipper',0,7.0,2000,1,4,0,0,0
 INSERT INTO `mob_skills` VALUES (1942,1303,'arcuballista',0,15.0,2000,1,4,0,0,0,3,1,0);
 INSERT INTO `mob_skills` VALUES (1943,1306,'slapstick',0,7.0,2000,1,4,0,0,0,8,0,0);
 INSERT INTO `mob_skills` VALUES (1944,1307,'shield_bash',0,7.0,2000,0,4,4,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1945,1219,'provoke',0,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1945,1218,'provoke',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1946,435,'shock_absorber',0,7.0,2000,0,16,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1947,438,'flashbulb',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1948,439,'mana_converter',0,7.0,2000,0,16,4,0,0,0,0,0);

@@ -200,9 +200,17 @@ uint8 CParty::MemberCount(uint16 ZoneID)
 
     for (uint32 i = 0; i < members.size(); ++i)
     {
-        if (members.at(i)->getZone() == ZoneID)
+        auto* member = members.at(i);
+        if (member->getZone() == ZoneID)
         {
             count++;
+        }
+        if (member->objtype == TYPE_PC)
+        {
+            for (auto* trust : static_cast<CCharEntity*>(member)->PTrusts)
+            {
+                count++;
+            }
         }
     }
     return count;
@@ -238,10 +246,11 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
     if (m_PLeader == PEntity)
     {
+        RemovePartyLeader(PEntity);
+
         // Remove their trusts
         CCharEntity* PChar = (CCharEntity*)PEntity;
         PChar->ClearTrusts();
-        RemovePartyLeader(PEntity);
     }
     else
     {
@@ -733,6 +742,7 @@ void CParty::ReloadParty()
     else
     {
         RefreshFlags(info);
+        CBattleEntity* PLeader = GetLeader();
         //regular party
         for (uint8 i = 0; i < members.size(); ++i)
         {
@@ -742,7 +752,14 @@ void CParty::ReloadParty()
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
             PChar->ReloadPartyDec();
-            PChar->pushPacket(new CPartyDefinePacket(this));
+            if (PChar->loc.zone->GetID() == PLeader->loc.zone->GetID())
+            {
+                PChar->pushPacket(new CPartyDefinePacket(this, true));
+            }
+            else
+            {
+                PChar->pushPacket(new CPartyDefinePacket(this));
+            }
             //auto effects = std::make_unique<CPartyEffectsPacket>();
             uint8 j = 0;
             for (auto&& memberinfo : info)
@@ -772,13 +789,9 @@ void CParty::ReloadParty()
                     PChar->pushPacket(new CPartyMemberUpdatePacket(
                         memberinfo.id, (const int8*)memberinfo.name.c_str(),
                         memberinfo.flags, j, zoneid));
-                    //effects->AddMemberEffects(memberinfo.id);
                 }
                 j++;
             }
-
-
-            //PChar->pushPacket(effects.release());
         }
     }
 }

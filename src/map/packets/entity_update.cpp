@@ -28,6 +28,7 @@
 
 #include "../entities/baseentity.h"
 #include "../entities/mobentity.h"
+#include "../entities/trustentity.h"
 #include "../entities/npcentity.h"
 #include "../entities/petentity.h"
 #include "../status_effect_container.h"
@@ -112,19 +113,6 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case TYPE_TRUST:
         {
             CMobEntity* PMob = (CMobEntity*)PEntity;
-
-            //if(PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC && 
-            //	PMob->PBattleAI->GetCurrentAction() == ACTION_FALL)
-            //{
-            //    ref<uint8>(data,(0x21)) = 0x99;
-            //    //ref<uint8> (data,(0x27)) = 0x28;
-            //    ref<uint8>(data,(0x1E)) = 0x00; //0% HP
-            //    ref<uint8>(data,(0x1F)) = ANIMATION_DEATH; //death anim
-            //    ref<uint8>(data,(0x20)) = STATUS_NORMAL;
-            //	  ref<uint8>(data,(0x29)) = PEntity->allegiance;
-            //	  ref<uint8>(data,(0x2B)) = PEntity->namevis;
-            //}
-            //else
             {
                 if (updatemask & UPDATE_HP)
                 {
@@ -166,11 +154,11 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     // TODO: Read from the trust model itself
     if (PEntity->objtype == TYPE_TRUST)
     {
-        ref<uint32>(0x21) = 0x21b;
-        ref<uint8>(0x2B) = 0x06;
-        ref<uint8>(0x2A) = 0x08;
-        ref<uint8>(0x25) = 0x0f;
-        ref<uint8>(0x27) = 0x28;
+        //ref<uint32>(0x21) = 0x21b;
+        //ref<uint8>(0x2B) = 0x06;
+        //ref<uint8>(0x2A) = 0x08;
+        //ref<uint8>(0x25) = 0x0f;
+        //ref<uint8>(0x27) = 0x28;
         ref<uint8>(0x28) = 0x45;
     }
 

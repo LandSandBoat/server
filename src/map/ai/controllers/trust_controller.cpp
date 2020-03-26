@@ -23,15 +23,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../ai_container.h"
 #include "../../status_effect_container.h"
+#include "../../enmity_container.h"
 #include "../../ai/states/despawn_state.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
 #include "../../packets/char.h"
-#include "../../../common/utils.h"
 
-CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust) : CController(PTrust)
+CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust) : CMobController(PTrust)
 {
-    POwner->PAI->PathFind = std::make_unique<CPathFind>(PTrust);
 }
 
 CTrustController::~CTrustController()
@@ -42,20 +41,25 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
+    POwner->PMaster = nullptr;
+
+    m_LastTopEntity = nullptr;
 }
 
 void CTrustController::Despawn()
 {
-    if (POwner->PMaster)
-    {
-        POwner->PMaster = nullptr;
-    }
-    CController::Despawn();
+    POwner->animation = ANIMATION_DESPAWN;
+    CMobController::Despawn();
 }
 
 void CTrustController::Tick(time_point tick)
 {
     m_Tick = tick;
+
+    if (POwner->PMaster == nullptr)
+    {
+        return;
+    }
 
     if (POwner->PAI->IsEngaged())
     {
@@ -72,12 +76,18 @@ void CTrustController::DoCombatTick(time_point tick)
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
+        m_LastTopEntity = nullptr;
     }
+
     if (POwner->PMaster->GetBattleTargetID() != POwner->GetBattleTargetID())
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
+        m_LastTopEntity = nullptr;
     }
-    auto PTarget{ POwner->GetBattleTarget() };
+
+    float currentDistance = distance(POwner->loc.p, POwner->PMaster->loc.p);
+    PTarget = POwner->GetBattleTarget();
+
     if (PTarget)
     {
         if (POwner->PAI->CanFollowPath())
@@ -88,17 +98,27 @@ void CTrustController::DoCombatTick(time_point tick)
             {
                 if (POwner->speed > 0)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 2.0f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    auto new_position = GetDeclumpedPosition(PTarget->loc.p);
+                    POwner->PAI->PathFind->PathAround(new_position, 3.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SLIDE);
                     POwner->PAI->PathFind->FollowPath();
                 }
             }
         }
+
+        auto currentTopEnmity = GetTopEnmity();
+        if (m_LastTopEntity != currentTopEnmity)
+        {
+            POwner->PAI->EventHandler.triggerListener("ENMITY_CHANGED", POwner, POwner->PMaster, PTarget);
+            m_LastTopEntity = currentTopEnmity;
+        }
+
+        POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
 }
 
 void CTrustController::DoRoamTick(time_point tick)
 {
-    if (POwner->PMaster->PAI->IsEngaged())
+    if (POwner->PMaster->PAI->IsEngaged() && GetTopEnmity() == POwner->PMaster)
     {
         POwner->PAI->Internal_Engage(POwner->PMaster->GetBattleTargetID());
     }
@@ -107,7 +127,8 @@ void CTrustController::DoRoamTick(time_point tick)
 
     if (currentDistance > RoamDistance)
     {
-        if (currentDistance < 35.0f && POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        auto new_position = GetDeclumpedPosition(POwner->PMaster->loc.p);
+        if (currentDistance < 30.0f && POwner->PAI->PathFind->PathAround(new_position, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SLIDE))
         {
             POwner->PAI->PathFind->FollowPath();
         }
@@ -116,4 +137,57 @@ void CTrustController::DoRoamTick(time_point tick)
             POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
         }
     }
+}
+
+bool CTrustController::Ability(uint16 targid, uint16 abilityid)
+{
+    if (POwner->PAI->CanChangeState())
+    {
+        return POwner->PAI->Internal_Ability(targid, abilityid);
+    }
+    return false;
+}
+
+CBattleEntity* CTrustController::GetTopEnmity()
+{
+    CBattleEntity* PEntity = nullptr;
+    if (auto PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
+    {
+        return PMob->PEnmityContainer->GetHighestEnmity();
+    }
+    return PEntity;
+}
+
+position_t CTrustController::GetDeclumpedPosition(position_t target_pos)
+{
+    auto lerp = [](float a, float b, float f)
+    {
+        return a + f * (b - a);
+    };
+
+    auto lerp_position = [&](position_t a, position_t b, float ratio)
+    {
+        float safe_ratio = std::clamp(ratio, 0.0f, 1.0f);
+        position_t final_pos{
+            lerp(a.x, b.x, ratio),
+            lerp(a.y, b.y, ratio),
+            lerp(a.z, b.z, ratio),
+            0, 0};
+        return final_pos;
+    };
+
+    position_t final_pos = target_pos;
+    for (auto PTrust : static_cast<CCharEntity*>(POwner->PMaster)->PTrusts)
+    {
+        if (POwner != PTrust && distance(POwner->loc.p, PTrust->loc.p) < 5.0f)
+        {
+            auto angle = getangle(POwner->loc.p, PTrust->loc.p);
+            position_t declumped_pos{ POwner->loc.p.x - (cosf(rotationToRadian(angle)) * 2.0f),
+                POwner->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * 2.0f), 0, 0 };
+
+            final_pos = lerp_position(final_pos, declumped_pos, 0.5f);
+        }
+    }
+
+    return lerp_position(final_pos, target_pos, 0.1f);
 }

@@ -47,6 +47,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packet_system.h"
 #include "party.h"
 #include "utils/petutils.h"
+#include "utils/trustutils.h"
 #include "spell.h"
 #include "time_server.h"
 #include "transport.h"
@@ -217,6 +218,7 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadMobSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
+    trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
 
     ShowStatus("do_init: loading zones");
@@ -263,6 +265,7 @@ void do_final(int code)
     battleutils::FreeMobSkillList();
 
     petutils::FreePetList();
+    trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
     luautils::free();
     message::close();

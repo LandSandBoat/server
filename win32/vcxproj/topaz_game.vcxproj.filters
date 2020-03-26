@@ -677,6 +677,9 @@
     <ClInclude Include="..\..\src\map\utils\petutils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\utils\trustutils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\utils\synthutils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -1415,6 +1418,9 @@
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\utils\petutils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\utils\trustutils.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\utils\blueutils.cpp">

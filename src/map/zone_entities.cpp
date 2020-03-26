@@ -34,11 +34,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
 
+#include "entities/trustentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 
 #include "packets/char.h"
 #include "packets/char_sync.h"
+#include "packets/trust_sync.h"
 #include "packets/entity_update.h"
 #include "packets/entity_visual.h"
 #include "packets/wide_scan.h"
@@ -160,6 +162,57 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
         return;
     }
     ShowError(CL_RED"CZone::InsertPET : entity is null\n" CL_RESET);
+}
+
+void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
+{
+    if (PTrust != nullptr)
+    {
+        CTrustEntity* trust = (CTrustEntity*)PTrust;
+        CCharEntity* master = (CCharEntity*)trust->PMaster;
+        uint16 targid = 0x800;
+
+        for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
+        {
+            if (targid != it->first)
+            {
+                break;
+            }
+            targid++;
+        }
+        if (targid >= 0x900)
+        {
+            ShowError(CL_RED"CZone::InsertTRUST : targid is high (03hX)\n" CL_RESET, targid);
+            return;
+        }
+        PTrust->id = 0x1000000 + (m_zone->GetID() << 12) + targid;
+        PTrust->targid = targid;
+        PTrust->loc.zone = m_zone;
+        m_trustList[PTrust->targid] = PTrust;
+
+        for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+        {
+            CCharEntity* PCurrentChar = (CCharEntity*)it->second;
+
+            if (distance(PTrust->loc.p, PCurrentChar->loc.p) < 50)
+            {
+                if (PCurrentChar->targid == ((CBattleEntity*)PTrust)->PMaster->targid)
+                {
+                    PCurrentChar->SpawnTRUSTList[PTrust->id] = PTrust;
+                }
+                PCurrentChar->pushPacket(new CEntityUpdatePacket(PTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
+            }
+        }
+        return;
+    }
+}
+
+void CZoneEntities::DeleteTRUST(CBaseEntity* PTrust)
+{
+    if (PTrust != nullptr)
+    {
+        m_trustList.erase(PTrust->id);
+    }
 }
 
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
@@ -317,6 +370,19 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
             PChar->PPet = nullptr;
         }
     }
+
+    //remove trusts
+    for (auto trust : PChar->PTrusts)
+    {
+        for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+        {
+            //inform other players of the pets removal
+            CCharEntity* PCurrentChar = (CCharEntity*)it->second;
+            PCurrentChar->pushPacket(new CEntityUpdatePacket(trust, ENTITY_DESPAWN, UPDATE_NONE));
+        }
+    }
+    PChar->ClearTrusts();
+    PChar->SpawnTRUSTList.clear();
 
     if (m_zone->m_BattlefieldHandler)
         m_zone->m_BattlefieldHandler->RemoveFromBattlefield(PChar, PChar->PBattlefield, BATTLEFIELD_LEAVE_CODE_WARPDC);
@@ -486,6 +552,35 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
     }
 }
 
+void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
+{
+    for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
+    {
+        CTrustEntity* PCurrentTrust = (CTrustEntity*)it->second;
+        CCharEntity* master = (CCharEntity*)PCurrentTrust->PMaster;
+        SpawnIDList_t::iterator TRUST = PChar->SpawnTRUSTList.lower_bound(PCurrentTrust->id);
+
+        if (PCurrentTrust->status == STATUS_NORMAL &&
+            distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
+        {
+            if (TRUST == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, TRUST->first))
+            {
+                PChar->SpawnTRUSTList.insert(TRUST, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
+                PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                PChar->pushPacket(new CTrustSyncPacket(master, PCurrentTrust));
+            }
+        }
+        else {
+            if (TRUST != PChar->SpawnTRUSTList.end() &&
+                !(PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, TRUST->first)))
+            {
+                PChar->SpawnTRUSTList.erase(TRUST);
+                PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_DESPAWN, UPDATE_NONE));
+            }
+        }
+    }
+}
+
 void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 {
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -609,10 +704,21 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
     }
     else if (targid < 0x800)
     {
-        if (filter & TYPE_PET || filter & TYPE_TRUST)
+        if (filter & TYPE_PET)
         {
             EntityList_t::const_iterator it = m_petList.find(targid);
             if (it != m_petList.end())
+            {
+                return it->second;
+            }
+        }
+    }
+    else if (targid < 0x900)
+    {
+        if (filter & TYPE_TRUST)
+        {
+            EntityList_t::const_iterator it = m_trustList.find(targid);
+            if (it != m_trustList.end())
             {
                 return it->second;
             }
@@ -818,9 +924,13 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                             spawnlist = PCurrentChar->SpawnNPCList;
                                         }
                                     }
-                                    else if (entity->targid >= 0x700)
+                                    else if (entity->targid < 0x800)
                                     {
                                         spawnlist = PCurrentChar->SpawnPETList;
+                                    }
+                                    else if (entity->targid < 0x900)
+                                    {
+                                        spawnlist = PCurrentChar->SpawnTRUSTList;
                                     }
                                     else
                                     {
@@ -970,6 +1080,43 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
         else {
             ++pit;
+        }
+    }
+
+    EntityList_t::const_iterator trustit = m_trustList.begin();
+    while (trustit != m_trustList.end())
+    {
+        CTrustEntity* PTrust = (CTrustEntity*)trustit->second;
+        PTrust->PRecastContainer->Check();
+        PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
+        if (tick > m_EffectCheckTime)
+        {
+            PTrust->StatusEffectContainer->TickRegen(tick);
+            PTrust->StatusEffectContainer->TickEffects(tick);
+        }
+        PTrust->PAI->Tick(tick);
+        if (PTrust->status == STATUS_DISAPPEAR)
+        {
+            for (auto PMobIt : m_mobList)
+            {
+                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                PCurrentMob->PEnmityContainer->Clear(PTrust->id);
+            }
+            for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+            {
+                CCharEntity* PChar = (CCharEntity*)it->second;
+                if (distance(PChar->loc.p, PTrust->loc.p) < 50)
+                {
+                    PChar->SpawnTRUSTList.erase(PTrust->id);
+                    PChar->ReloadPartyInc();
+                }
+            }
+
+            delete trustit->second;
+            m_trustList.erase(trustit++);
+        }
+        else {
+            ++trustit;
         }
     }
 

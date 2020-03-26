@@ -169,7 +169,7 @@ public:
     virtual void OnCastFinished(CMagicState&, action_t&) override;
 
     virtual void OnDisengage(CAttackState&) override;
-    virtual void OnDeathTimer() override;public:
+    virtual void OnDeathTimer() override;
 
     virtual void OnDespawn(CDespawnState&) override;
 
@@ -255,8 +255,6 @@ protected:
 
     void DistributeRewards();
     void DropItems(CCharEntity* PChar);
-
-
 
 private:
 

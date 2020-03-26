@@ -24,6 +24,7 @@ tpz.zoneMisc =
     TREASURE   = 0x0100, -- Presence in the global zone TreasurePool
     AH         = 0x0200, -- Ability to use the auction house
     YELL       = 0x0400, -- Send and receive /yell commands
+    TRUST      = 0x0800, -- Ability to cast trust magic
 }
 
 ------------------------------------
@@ -2102,11 +2103,13 @@ tpz.MAX_SLOTID  = 15
 
 tpz.objType =
 {
-    PC   = 0x01,
-    NPC  = 0x02,
-    MOB  = 0x04,
-    PET  = 0x08,
-    SHIP = 0x10,
+    PC     = 0x01,
+    NPC    = 0x02,
+    MOB    = 0x04,
+    PET    = 0x08,
+    SHIP   = 0x10,
+    TRUST  = 0x20,
+    FELLOW = 0x40,
 }
 
 ----------------------------------

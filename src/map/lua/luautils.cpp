@@ -2885,9 +2885,18 @@ namespace luautils
         else
         {
             int8 File[255];
-            memset(File, 0, sizeof(File));
-            PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str()) :
-                snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());;
+            switch (PMob->objtype)
+            {
+            case TYPE_MOB:
+                snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+                break;
+            case TYPE_PET:
+                snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
+                break;
+            case TYPE_TRUST:
+                snprintf((char*)File, sizeof(File), "scripts/globals/spells/trust/%s.lua", PMob->GetName());
+                break;
+            }
 
             lua_pushnil(LuaHandle);
             lua_setglobal(LuaHandle, "onMobDeath");
@@ -2934,8 +2943,19 @@ namespace luautils
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         int8 File[255];
-        PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str()) :
+        switch (PMob->objtype)
+        {
+        case TYPE_MOB:
             snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+            break;
+        case TYPE_PET:
+            snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
+            break;
+        case TYPE_TRUST:
+            snprintf((char*)File, sizeof(File), "scripts/globals/spells/trust/%s.lua", PMob->GetName());
+            break;
+        }
+
         if (prepFile(File, "onMobSpawn"))
         {
             return -1;
@@ -2943,7 +2963,6 @@ namespace luautils
 
         CLuaBaseEntity LuaMobEntity(PMob);
         Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
 
         if (lua_pcall(LuaHandle, 1, 0, 0))
         {
@@ -3021,8 +3040,18 @@ namespace luautils
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         int8 File[255];
-        PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str()) :
+        switch (PMob->objtype)
+        {
+        case TYPE_MOB:
             snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+            break;
+        case TYPE_PET:
+            snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
+            break;
+        case TYPE_TRUST:
+            snprintf((char*)File, sizeof(File), "scripts/globals/spells/trust/%s.lua", PMob->GetName());
+            break;
+        }
 
         if (prepFile(File, "onMobDespawn"))
         {

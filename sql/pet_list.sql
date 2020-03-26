@@ -117,6 +117,4 @@ INSERT INTO `pet_list` VALUES (72, 'StormwakerFrame', 5127, 1, 99, 0, 0);
 -- INSERT INTO `pet_list` VALUES (73, 'AdventuringFellow', 0, 1, 99, 0, 0);
 -- 74 is Chocobo in the enum..
 
-
--- trusts.. TODO: Make trusts not use petlist at all.
-INSERT INTO `pet_list` VALUES (75, 'Shantotto', 5896, 1, 99, 0, 0);
+-- INSERT INTO `pet_list` VALUES (75, 'Trust', 0, 1, 99, 0, 0);

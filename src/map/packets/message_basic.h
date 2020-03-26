@@ -123,6 +123,9 @@ enum MSGBASIC_ID : uint16
 	MSGBASIC_TREASURE_HUNTER_UP		= 603,  /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
 	/* DNC */
 	MSGBASIC_NO_FINISHINGMOVES		= 524,
+    /* TRUST & ALTER EGO */
+    MSGBASIC_TRUST_NO_CAST_TRUST    = 700,  // You are unable to use Trust magic at this time.
+    MSGBASIC_TRUST_NO_CALL_AE       = 717,  // You cannot call forth alter egos here.
 
 	/* DEBUG MESSAGES */
 	MSGBASIC_DEBUG_RESISTED_SPELL	= 66, /* Debug: Resisted spell! */

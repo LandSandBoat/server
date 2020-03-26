@@ -38,6 +38,7 @@ public:
     void			SpawnMOBs(CCharEntity* PChar);									// отображаем MOBs в зоне
     void			SpawnPETs(CCharEntity* PChar);									// отображаем PETs в зоне
     void			SpawnNPCs(CCharEntity* PChar);									// отображаем NPCs в зоне
+    void			SpawnTRUSTs(CCharEntity* PChar);
     void			SpawnMoogle(CCharEntity* PChar);								// отображаем Moogle в MogHouse
     void			SpawnTransport(CCharEntity* PChar);                             // отображаем транспорт
     void			DespawnPC(CCharEntity* PChar);
@@ -52,7 +53,9 @@ public:
     void			InsertNPC(CBaseEntity* PNpc);									// добавляем в зону npc
     void			InsertMOB(CBaseEntity* PMob);									// добавляем в зону mob
     void			InsertPET(CBaseEntity* PPet);									// добавляем в зону pet
+    void			InsertTRUST(CBaseEntity* PTrust);
     void			DeletePET(CBaseEntity* PPet);       	                        // derefs the pet's ID from this zone
+    void			DeleteTRUST(CBaseEntity* PTrust);
 
     void			FindPartyForMob(CBaseEntity* PEntity);                          // ищем группу для монстра
     void			TransportDepart(uint16 boundary, uint16 zone);                  // транспотр отправляется, необходимо собрать пассажиров
@@ -72,6 +75,7 @@ public:
     EntityList_t	m_allyList;
     EntityList_t	m_mobList;				// список всех MOBs в зоне
     EntityList_t	m_petList;				// список всех PETs в зоне
+    EntityList_t	m_trustList;
     EntityList_t	m_npcList;				// список всех NPCs в зоне
     EntityList_t	m_charList;				// список всех PCs  в зоне
 

@@ -78,12 +78,12 @@ enum class MsgStd
     CannotHere                     = 256, // You cannot use that command in this area.
     HeadgearShow                   = 260,
     HeadgearHide                   = 261,
+    TrustCannotJoinParty           = 265, // You are unable to join a party whose leader currently has an alter ego present.
+    TrustCannotJoinAlliance        = 266, // You are unable to join an alliance whose leader currently has an alter ego present.
     StyleLockOn                    = 267, // Style lock mode enabled.
     StyleLockOff                   = 268, // Style lock mode disabled.
     StyleLockIsOn                  = 269, // Style lock mode is enabled.
     StyleLockIsOff                 = 270, // Style lock mode is disabled.
-    TrustCannotJoinParty           = 265, // You are unable to join a party whose leader currently has an alter ego present.
-    TrustCannotJoinAlliance        = 266, // You are unable to join an alliance whose leader currently has an alter ego present.
     PollProposalLinkshell2         = 289, // Player Name's proposal to the linkshell group (cast vote with command: "/vote ?"):
     CurrentPollResultsLinkshell2   = 290, // Player Name's proposal - Current poll results:
     FinalPollResultsLinkshell2     = 291, // Player Name's proposal - Final poll results:

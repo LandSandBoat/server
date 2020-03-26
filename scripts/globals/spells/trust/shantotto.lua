@@ -1,16 +1,25 @@
 -----------------------------------------
--- Spell: Shantotto
+-- Trust: Shantotto
 -----------------------------------------
--- require("scripts/globals/trust")
+require("scripts/globals/trust")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
-    return 0
+function onMagicCastingCheck(caster, target, spell)
+    return tpz.trust.canCast(caster, spell, 1019)
 end
 
-function onSpellCast(caster,target,spell)
-    -- Todo: put Trusts's spawn in dialog here or in entity script?
-    -- Todo: automate entity spawn in core for trust spells?
-    caster:spawnTrust(75) -- see pet_list.sql, this should be 896 but the pet list won't let me do that
-    return 0
+function onSpellCast(caster, target, spell)
+    return tpz.trust.spawn(caster, spell)
+end
+
+function onMobSpawn(mob)
+    mob:addListener("COMBAT_TICK", "SHANTOTTO_COMBAT_TICK", function(trust, master, target)
+        trust:castSpell()
+    end)
+end
+
+function onMobDespawn(mob)
+end
+
+function onMobDeath(mob)
 end

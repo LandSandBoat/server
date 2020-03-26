@@ -28,16 +28,22 @@ class CCharEntity;
 class CTrustEntity : public CMobEntity
 {
 public:
-    CTrustEntity(CCharEntity*);
-	~CTrustEntity();
-	uint8 m_Element;
-	uint32 m_PetID;
+    explicit CTrustEntity(CCharEntity*);
+    ~CTrustEntity() override = default;
 
-    virtual void PostTick() override;
-    virtual void FadeOut() override;
-    virtual void Die() override;
-    virtual void Spawn() override;
-    virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
+    // Note: The default name is the lowercase spell script name, so we override GetName()
+    // to return the packetName instead, which makes the behaviour consistant with other uses
+    // of GetName()
+    const int8* GetName() override;
+
+    void PostTick() override;
+    void FadeOut() override;
+    void Die() override;
+    void Spawn() override;
+    bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
+    void OnDespawn(CDespawnState&) override;
+
+    uint32 m_TrustID{};
 };
 
 #endif

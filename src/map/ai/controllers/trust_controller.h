@@ -22,30 +22,33 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _TRUSTCONTROLLER_H
 #define _TRUSTCONTROLLER_H
 
-#include "controller.h"
+#include "mob_controller.h"
 
 class CCharEntity;
 class CTrustEntity;
 
-class CTrustController : public CController
+class CTrustController : public CMobController
 {
 public:
     CTrustController(CCharEntity*, CTrustEntity*);
-    virtual ~CTrustController();
+    ~CTrustController() override;
+   
+    void Tick(time_point) override;
+    void Despawn() override;
 
-    virtual void Tick(time_point) override;
-    virtual void Despawn() override;
+    bool Ability(uint16 targid, uint16 abilityid) override;
 
-    virtual bool Cast(uint16 targid, SpellID spellid) override { return false; }
-    virtual bool ChangeTarget(uint16 targid) override { return false; }
-    virtual bool WeaponSkill(uint16 targid, uint16 wsid) override { return false; }
-
-    virtual bool Ability(uint16 targid, uint16 abilityid) override { return false; }
+    static constexpr float RoamDistance{ 5.5f };
+    static constexpr float SpawnDistance{ 5.5f };
 
 private:
-    static constexpr float RoamDistance{ 2.1f };
-    void DoCombatTick(time_point tick);
-    void DoRoamTick(time_point tick);
+    void DoCombatTick(time_point tick) override;
+    void DoRoamTick(time_point tick) override;
+
+    CBattleEntity* GetTopEnmity();
+    position_t GetDeclumpedPosition(position_t target_pos);
+
+    CBattleEntity* m_LastTopEntity;
 };
 
 #endif // _TRUSTCONTROLLER

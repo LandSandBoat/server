@@ -306,4 +306,8 @@ tpz.msg.basic =
     DESPOIL_EVA_DOWN        = 597,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Evasion Down.
     DESPOIL_ACC_DOWN        = 598,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Accuracy Down.
     DESPOIL_SLOW            = 599,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Slow.
+
+    -- TRUST & ALTER EGO
+    TRUST_NO_CAST_TRUST    = 700,  -- You are unable to use Trust magic at this time.
+    TRUST_NO_CALL_AE       = 717,  -- You cannot call forth alter egos here.
 }

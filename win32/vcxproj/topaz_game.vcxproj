@@ -457,6 +457,7 @@
     <ClInclude Include="..\..\src\map\utils\mobutils.h" />
     <ClInclude Include="..\..\src\map\utils\petutils.h" />
     <ClInclude Include="..\..\src\map\utils\puppetutils.h" />
+    <ClInclude Include="..\..\src\map\utils\trustutils.h" />
     <ClInclude Include="..\..\src\map\utils\synthutils.h" />
     <ClInclude Include="..\..\src\map\utils\zoneutils.h" />
     <ClInclude Include="..\..\src\map\vana_time.h" />
@@ -708,6 +709,7 @@
     <ClCompile Include="..\..\src\map\utils\mobutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\petutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\puppetutils.cpp" />
+    <ClCompile Include="..\..\src\map\utils\trustutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\synthutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\zoneutils.cpp" />
     <ClCompile Include="..\..\src\map\vana_time.cpp" />

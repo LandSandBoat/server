@@ -19,6 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 #include "../../common/socket.h"
+#include "../../common/utils.h"
 
 #include "trust_sync.h"
 
@@ -30,7 +31,7 @@ CTrustSyncPacket::CTrustSyncPacket(CCharEntity* PChar, CTrustEntity* PTrust)
     // The purpose of this packet is to make the client aware that this pet is a trust, and hence
     // to show trust options in the menu (like "Release").
     this->type = 0x67;
-    this->size = 0x0C;
+    this->size = 0x16;
 
     // Sample packet:
     // 67 0C 58 00 03 05 F4 07 F4 28 08 01 00 04 00 00
@@ -42,6 +43,9 @@ CTrustSyncPacket::CTrustSyncPacket(CCharEntity* PChar, CTrustEntity* PTrust)
     ref<uint16>(0x06) = PTrust->targid;
     ref<uint32>(0x08) = PTrust->id;
     ref<uint16>(0x0C) = PChar->targid;
+
+    packBitsBE(data + (0x04), (0x18) + PTrust->packetName.size(), 0, 6, 10); // Message Size
+    memcpy(data + (0x18), PTrust->packetName.c_str(), PTrust->packetName.size());
 
     // Unknown
     ref<uint8>(0x10) = 0x04;

@@ -899,7 +899,7 @@ void GetAvailableSpells(CMobEntity* PMob) {
     }
 
     // catch all non-defaulted spell chances
-        PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+    PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
     PMob->defaultMobMod(MOBMOD_GA_CHANCE, 35);
     PMob->defaultMobMod(MOBMOD_NA_CHANCE, 40);
     PMob->defaultMobMod(MOBMOD_BUFF_CHANCE, 35);

@@ -79,6 +79,7 @@
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../entities/petentity.h"
+#include "../entities/trustentity.h"
 
 #include "../packets/action.h"
 #include "../packets/auction_house.h"
@@ -141,6 +142,7 @@
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
 #include "../utils/puppetutils.h"
+#include "../utils/trustutils.h"
 #include "../utils/zoneutils.h"
 
 CLuaBaseEntity::CLuaBaseEntity(lua_State* L)
@@ -8490,9 +8492,49 @@ inline int32 CLuaBaseEntity::getParty(lua_State* L)
 }
 
 /************************************************************************
+*  Function: getPartyWithTrusts()
+*  Purpose : Returns a Lua table of party member and trust Entity objects
+*  Example : local party = player:getPartyWithTrusts()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getPartyWithTrusts(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    CParty* party = ((CBattleEntity*)m_PBaseEntity)->PParty;
+
+    int size = 0;
+    if (party)
+    {
+        size = party->MemberCount(m_PBaseEntity->getZone());
+    }
+    else
+    {
+        size = 1;
+    }
+
+    lua_createtable(L, size, 0);
+    int i = 1;
+    ((CBattleEntity*)m_PBaseEntity)->ForPartyWithTrusts([&L, &i](CBattleEntity* member)
+    {
+        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)member);
+        lua_pcall(L, 2, 1, 0);
+
+        lua_rawseti(L, -2, i++);
+    });
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: getPartySize()
 *  Purpose : Returns the count of members in the party
-*  Example : local count = getPartySize()
+*  Example : local count = player:getPartySize()
 *  Notes   :
 ************************************************************************/
 
@@ -8501,9 +8543,7 @@ inline int32 CLuaBaseEntity::getPartySize(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8 allianceparty = (uint8)lua_tonumber(L, 1);
+    uint8 allianceparty = lua_isnil(L, 1) ? 0 : (uint8)lua_tonumber(L, 1);
     uint8 partysize = 1;
 
     if (((CBattleEntity*)m_PBaseEntity)->PParty != nullptr)
@@ -11901,13 +11941,29 @@ inline int32 CLuaBaseEntity::spawnTrust(lua_State *L)
     if (!lua_isnil(L, 1) && lua_isstring(L, 1))
     {
         uint16 trustId = (uint16)lua_tointeger(L, 1);
-        petutils::SpawnTrust((CCharEntity*)m_PBaseEntity, trustId);
+        trustutils::SpawnTrust((CCharEntity*)m_PBaseEntity, trustId);
     }
     else
     {
         ShowError(CL_RED"CLuaBaseEntity::spawnTrust : TrustID is NULL\n" CL_RESET);
     }
     return 0;
+}
+
+/************************************************************************
+*  Function: getTrustID()
+*  Purpose :
+*  Example : trust:getTrustID()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getTrustID(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+
+    lua_pushinteger(L, ((CTrustEntity*)m_PBaseEntity)->m_TrustID);
+    return 1;
 }
 
 /************************************************************************
@@ -12075,20 +12131,19 @@ inline int32 CLuaBaseEntity::getMaster(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC)
 
-        if (((CBattleEntity*)m_PBaseEntity)->PMaster != nullptr)
-        {
-            //uint32 petid = (uint32);
+    if (((CBattleEntity*)m_PBaseEntity)->PMaster != nullptr)
+    {
+        CBaseEntity* PMaster = ((CBattleEntity*)m_PBaseEntity)->PMaster;
 
-            CBaseEntity* PMaster = ((CBattleEntity*)m_PBaseEntity)->PMaster;
+        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)PMaster);
+        lua_pcall(L, 2, 1, 0);
+        return 1;
+    }
 
-            lua_getglobal(L, CLuaBaseEntity::className);
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PMaster);
-            lua_pcall(L, 2, 1, 0);
-            return 1;
-        }
     lua_pushnil(L);
     return 1;
 }
@@ -13631,7 +13686,7 @@ inline int32 CLuaBaseEntity::useJobAbility(lua_State* L)
 inline int32 CLuaBaseEntity::useMobAbility(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST && m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
 
     if (lua_isnumber(L, 1))
     {
@@ -14343,6 +14398,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     // Parties and Alliances
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getParty),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyWithTrusts),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartySize),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasPartyJob),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyMember),
@@ -14547,7 +14603,9 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeAllManeuvers),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateAttachments),
 
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity, spawnTrust),
+    // Trust related
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawnTrust),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTrustID),
 
     // Mob Entity-Specific
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),
