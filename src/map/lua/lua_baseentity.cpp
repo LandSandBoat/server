@@ -8500,9 +8500,9 @@ inline int32 CLuaBaseEntity::getParty(lua_State* L)
 
 inline int32 CLuaBaseEntity::getPartyWithTrusts(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CParty* party = ((CBattleEntity*)m_PBaseEntity)->PParty;
+    CParty* party = ((CCharEntity*)m_PBaseEntity)->PParty;
 
     int size = 0;
     if (party)
@@ -8516,7 +8516,7 @@ inline int32 CLuaBaseEntity::getPartyWithTrusts(lua_State* L)
 
     lua_createtable(L, size, 0);
     int i = 1;
-    ((CBattleEntity*)m_PBaseEntity)->ForPartyWithTrusts([&L, &i](CBattleEntity* member)
+    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&L, &i](CBattleEntity* member)
     {
         lua_getglobal(L, CLuaBaseEntity::className);
         lua_pushstring(L, "new");
