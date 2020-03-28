@@ -1629,7 +1629,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         if (actionTarget.reaction != REACTION_HIT && actionTarget.reaction != REACTION_BLOCK && actionTarget.reaction != REACTION_GUARD)
         {
             actionTarget.param = 0;
-            battleutils::ClaimMob(PTarget, this);
         }
 
         if (actionTarget.reaction != REACTION_EVADE && actionTarget.reaction != REACTION_PARRY)
@@ -1661,8 +1660,10 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 attackRound.DeleteAttackSwing();
         }
         else
+        {
             attackRound.DeleteAttackSwing();
-
+        }
+        battleutils::ClaimMob(PTarget, this);
         if (list.actionTargets.size() == 8)
         {
             break;
