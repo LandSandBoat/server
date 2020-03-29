@@ -1336,7 +1336,10 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
     if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
     {
-        battleutils::ClaimMob(PActionTarget, this);
+        if (objtype != TYPE_PET)
+        {
+            battleutils::ClaimMob(PActionTarget, this);
+        }
     }
 
     // TODO: Pixies will probably break here, once they're added.
