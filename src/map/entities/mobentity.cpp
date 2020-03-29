@@ -728,8 +728,9 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
     PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    if (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR))
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)))
     {
+        static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(this, 0, 0);
         battleutils::ClaimMob(PTarget, this);
     }
     battleutils::DirtyExp(PTarget, this);
