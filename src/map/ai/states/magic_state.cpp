@@ -303,13 +303,13 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
 
                 if (!(m_PSpell->isHeal()) || m_PSpell->tookEffect())  //can't claim mob with cure unless it does damage
                 {
+                    mob->PEnmityContainer->UpdateEnmity(m_PEntity, ce, ve);
+                    enmityApplied = true;
                     if (PTarget->isDead())
                     { // claim mob only on death (for aoe)
                         battleutils::ClaimMob(PTarget, m_PEntity);
                     }
                     battleutils::DirtyExp(PTarget, m_PEntity);
-                    mob->PEnmityContainer->UpdateEnmity(m_PEntity, ce, ve);
-                    enmityApplied = true;
                 }
             }
         }
