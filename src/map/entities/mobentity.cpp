@@ -1064,6 +1064,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
+    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {
@@ -1071,6 +1072,12 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     }
     else
     {
-        return CBattleEntity::OnAttack(state, action);
+        bool success = CBattleEntity::OnAttack(state, action);
+        if (success && PTarget && PTarget->objtype == TYPE_MOB)
+        {
+            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(this, 0, 0);
+            battleutils::ClaimMob(PTarget, this);
+        }
+        return success;
     }
 }
