@@ -4064,8 +4064,7 @@ namespace battleutils
                     if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender
                         && attacker->PClaimedMob->isAlive() && attacker->PClaimedMob->m_OwnerID.id == attacker->id)
                     { // unclaim any other living mobs owned by attacker
-                        attacker->PClaimedMob->m_OwnerID.clean();
-                        attacker->PClaimedMob->updatemask |= UPDATE_STATUS;
+                        static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
                         attacker->PClaimedMob = nullptr;
                     }
                     if (!mob->CalledForHelp())
@@ -4150,8 +4149,7 @@ namespace battleutils
             });
             if (!found)
             { // if mob didn't pass to someone else, unclaim it
-                mob->m_OwnerID.clean();
-                mob->updatemask |= UPDATE_STATUS;
+                static_cast<CMobController*>(mob->PAI->GetController())->TapDeclaimTime();
             }
         }
         PChar->PClaimedMob = nullptr;
