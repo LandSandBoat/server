@@ -23,14 +23,14 @@ end
 function onTrigger(player,npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest,player)
 
-    if (wsQuestEvent ~= nil) then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
+    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(114)
-    elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
-        player:startEvent(115)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(265)
+    elseif (wsQuestEvent ~= nil) then
+        player:startEvent(wsQuestEvent)
+    elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
+        player:startEvent(115)
     else
         player:startEvent(113)
     end
