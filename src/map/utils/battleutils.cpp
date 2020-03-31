@@ -4081,6 +4081,12 @@ namespace battleutils
                         }
                         else
                         { // mob is unclaimed
+                            if (PDefender->isDead())
+                            { // always give rewards on the killing blow
+                                mob->m_OwnerID.id = PAttacker->id;
+                                mob->m_OwnerID.targid = PAttacker->targid;
+                                return;
+                            }
                             PAttacker->ForAlliance([&PAttacker, &PDefender, &mob, &attacker](CBattleEntity* PMember){
                                 if (mob->PEnmityContainer->GetHighestEnmity() == PMember || mob->PEnmityContainer->GetHighestEnmity() == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
