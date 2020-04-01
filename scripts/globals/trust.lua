@@ -55,9 +55,8 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
                         end
                     end
                 end
-            else
-                num_trusts = num_trusts + 1
             end
+            num_trusts = num_trusts + 1
         end
         num_pt = num_pt + 1
     end
