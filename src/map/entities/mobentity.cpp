@@ -728,8 +728,9 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
     PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    if (PTarget->isDead())
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)))
     {
+        static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(this, 0, 0);
         battleutils::ClaimMob(PTarget, this);
     }
     battleutils::DirtyExp(PTarget, this);
@@ -1064,6 +1065,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
+    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {
@@ -1071,6 +1073,12 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     }
     else
     {
-        return CBattleEntity::OnAttack(state, action);
+        bool success = CBattleEntity::OnAttack(state, action);
+        if (success && PTarget && PTarget->objtype == TYPE_MOB)
+        {
+            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(this, 0, 0);
+            battleutils::ClaimMob(PTarget, this);
+        }
+        return success;
     }
 }
