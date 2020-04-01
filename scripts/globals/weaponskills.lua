@@ -100,7 +100,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate critrates
     local critRate = 0
-    
+
     if (wsParams.canCrit) then -- Work out critical hit ratios
         local nativecrit = 0
         critrate = fTP(tp,wsParams.crit100,wsParams.crit200,wsParams.crit300)
@@ -146,7 +146,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if attacker:getMainJob() == tpz.job.THF then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
-        if calcParams.sneakApplicable then 
+        if calcParams.sneakApplicable then
             finaldmg = finaldmg +
                         (attacker:getStat(tpz.mod.DEX) * (1 + attacker:getMod(tpz.mod.SNEAK_ATK_DEX)/100) * calcParams.pdif) *
                         ((100+(attacker:getMod(tpz.mod.AUGMENTS_SA)))/100)
@@ -196,7 +196,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         finaldmg = finaldmg + souleaterBonus(attacker, (calcParams.tpHitsLanded+calcParams.extraHitsLanded))
     end
 
-    -- Factor in "all hits" bonus damage mods 
+    -- Factor in "all hits" bonus damage mods
     local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
     if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
         bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
@@ -392,7 +392,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         dmg = dmg * ftp
 
-        -- Factor in "all hits" bonus damage mods 
+        -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
             bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
@@ -928,7 +928,7 @@ function getAlpha(level)
     elseif (level < 99) then
         alpha = 0.85
     else
-        alpha = 1 
+        alpha = 1
     end
     return alpha
 end

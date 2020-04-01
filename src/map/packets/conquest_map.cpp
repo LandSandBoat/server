@@ -31,9 +31,9 @@
 #include "conquest_map.h"
 
 
-CConquestPacket::CConquestPacket(CCharEntity * PChar) 
+CConquestPacket::CConquestPacket(CCharEntity * PChar)
 {
-	this->type = 0x5E; 
+	this->type = 0x5E;
 	this->size = 0x5A;
 
     const char* Query = "SELECT region_id, region_control, region_control_prev, \
@@ -103,14 +103,14 @@ CConquestPacket::CConquestPacket(CCharEntity * PChar)
     ref<uint32>(0x90) = charutils::GetPoints(PChar, charutils::GetConquestPointsName(PChar).c_str());
 	ref<uint8>(0x9C) = 0x01;
 
-	//uint8 packet[] = 
+	//uint8 packet[] =
     //{
 	//    0x80, 0x78, 0x52, 0x03, 0x1a, 0x46, 0x04, 0x00, 0x42, 0x46, 0x04, 0x00, 0x65, 0x3d, 0x04, 0x00
     //};
 	//memcpy(data+(0xA0), &packet, 16);
 
 	ref<uint8>(0xA0) = 16; // Situation: mamool ja niveau -> (1) 16 (2) 32 (3) 48 (4) 64 (5) 80 (6) 96 (7) 112 (8) 128
-	ref<uint8>(0xA1) = 17; // Situation: mercenaire trolls niveau -> 1~12 la suite avec un autre 
+	ref<uint8>(0xA1) = 17; // Situation: mercenaire trolls niveau -> 1~12 la suite avec un autre
 	ref<uint8>(0xA2) = 0; // Situation: mamool ja status du siege -> (0) entrainement > (1) en marche > (2) attaque > (3) retraite | (4) defense (5) preparation
 	ref<uint8>(0xA3) = 4; // Situation: undead status du siege ? (3) defense (4) entrainement (5) defense
 

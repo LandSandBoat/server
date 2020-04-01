@@ -39,7 +39,7 @@ function onTrigger(player,currency,amount,target)
         error(player, "Invalid amount.")
         return
     end
-    
+
     -- add currency
     targ:addCurrency(currency,amount)
     local newAmount = targ:getCurrency(currency)

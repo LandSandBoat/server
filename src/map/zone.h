@@ -318,7 +318,7 @@ enum ZONEID : uint16
     ZONE_RAKAZNAR_INNER_COURT           = 276,
     ZONE_RAKAZNAR_TURRIS                = 277,
     ZONE_278                            = 278,
-    ZONE_279                            = 279,
+    ZONE_WALK_OF_ECHOES_P2              = 279,
     ZONE_MOG_GARDEN                     = 280,
     ZONE_LEAFALLIA                      = 281,
     ZONE_MOUNT_KAMIHR                   = 282,
@@ -337,7 +337,7 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_BASTOK_D               = 295,
     ZONE_DYNAMIS_WINDURST_D             = 296,
     ZONE_DYNAMIS_JEUNO_D                = 297,
-    ZONE_WALK_OF_ECHOES_P               = 298
+    ZONE_WALK_OF_ECHOES_P1              = 298
 };
 
 #define MAX_ZONEID 299

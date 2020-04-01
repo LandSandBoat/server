@@ -54,7 +54,7 @@ end
 function onTrigger(player,npc)
     local lureWindurst = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
-    
+
     if lureWindurst ~= QUEST_COMPLETED and ENABLE_TOAU == 1 then
         if lureWindurst == QUEST_AVAILABLE then
             player:startEvent(736)

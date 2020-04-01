@@ -79,7 +79,7 @@ function onEventFinish(player,csid,option)
             player:addQuest(JEUNO, questId)
         end
     elseif csid == 10088 and option <= tpz.job.SCH then
-        local jobs = 
+        local jobs =
         {
             [tpz.job.WAR] = tpz.ws_unlock.KINGS_JUSTICE,
             [tpz.job.MNK] = tpz.ws_unlock.ASCETICS_FURY,
@@ -103,7 +103,7 @@ function onEventFinish(player,csid,option)
             [tpz.job.SCH] = tpz.ws_unlock.OMNISCIENCE,
         }
         local skill = jobs[option]
-        
+
         player:completeQuest(JEUNO, questId)
         player:messageSpecial(ID.text.MYTHIC_LEARNED, player:getMainJob())
         player:addLearnedWeaponskill(skill)

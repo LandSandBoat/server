@@ -88,7 +88,7 @@ local loot =
             {itemid =  793, droprate = 93}, -- Black pearl
             {itemid =  815, droprate = 79}, -- sphene
             {itemid =  790, droprate = 71}, -- garnet
-            {itemid =  811, droprate = 90}, -- ametrine  
+            {itemid =  811, droprate = 90}, -- ametrine
             {itemid =    0, droprate =  0}, -- nothing
         },
     },

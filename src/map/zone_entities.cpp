@@ -266,7 +266,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
                 //The player talked to one of the guys on the boat, and the event target is wrong.
                 //This leads to the wrong script being loaded and you get stuck on a black screen
                 //instead of loading into the port.
-                
+
                 //Attempt to load the proper script
                 PCurrentChar->m_event.Target = nullptr;
                 size_t deleteStart = PCurrentChar->m_event.Script.find("npcs/");
@@ -277,7 +277,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
             }
             luautils::OnTransportEvent(PCurrentChar, zone);
         }
-            
+
     }
 }
 

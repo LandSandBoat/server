@@ -27,7 +27,7 @@ function onSpellCast(caster, target, spell)
     if (merits > 1) then
         basePotency = basePotency + merits - 1
     end
-    
+
     local potency = calculatePotency(basePotency, spell:getSkillType(), caster, target)
 
     -- Duration, including resistance.  Unconfirmed.

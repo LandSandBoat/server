@@ -9,7 +9,7 @@ function onMobSkillCheck(target,mob,skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-    
+
     local typeEffect = tpz.effect.WEIGHT
 
     local numhits = 1

@@ -20,7 +20,7 @@ function onTrigger(player, csid, op1, op2, op3, op4, op5, op6, op7, op8, texttab
         error(player, "You must enter a cutscene id.")
         return
     end
-    
+
     -- play cutscene
     if (op1 == nil) then
         player:startEvent(csid)

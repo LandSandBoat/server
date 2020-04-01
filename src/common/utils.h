@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -45,13 +45,13 @@ int32 intpow32(int32 base, int32 exponent);						// Exponential power of integer
 void getMSB(uint32* result,uint32 value);						// fast Most Significant Byte search under GCC or MSVC. Fallback included.
 float rotationToRadian(uint8 rotation);
 uint8 radianToRotation(float radian);
-uint8 getangle(const position_t& A, const position_t& B);						// А - основная сущность, B - цель сущности (проекция вектора на OX)
-bool  isFaceing(const position_t& A, const position_t& B, uint8 coneAngle);	// А - основная сущность, B - цель сущности
+uint8 getangle(const position_t& A, const position_t& B);						// А - the main entity, B - target entity (vector projection onto the X-axis)
+bool  isFaceing(const position_t& A, const position_t& B, uint8 coneAngle);	// А - the main entity, B - the target entity
 position_t nearPosition(const position_t& A, float offset, float radian); // Returns a position near the given position
 
-int32 hasBit(uint16 value, uint8* BitArray, uint32 size);		// проверяем наличие бита в массиве
-int32 addBit(uint16 value, uint8* BitArray, uint32 size);		// добавляем бит в массив
-int32 delBit(uint16 value, uint8* BitArray, uint32 size);		// удаляем бит из массива
+int32 hasBit(uint16 value, uint8* BitArray, uint32 size);		// Check for the presence of a bit in the array
+int32 addBit(uint16 value, uint8* BitArray, uint32 size);		// Adds a bit to the array
+int32 delBit(uint16 value, uint8* BitArray, uint32 size);		// Deletes a bit from the array
 
 	//(un)pack functions for Big Endian(BE) targets
 uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);

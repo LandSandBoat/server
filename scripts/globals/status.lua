@@ -2651,6 +2651,13 @@ tpz.mount =
     SPECTRAL_CHAIR = 18,
     SPHEROID       = 19,
     OMEGA          = 20,
+    COEURL         = 21,
+    GOOBBUE        = 22,
+    RAAZ           = 23,
+    LEVITUS        = 24,
+    ADAMANTOISE    = 25,
+    DHAMEL         = 26,
+    DOLL           = 27,
 }
 
 ------------------------------------

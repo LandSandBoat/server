@@ -23,7 +23,7 @@ zones[tpz.zone.ABYSSEA_ATTOHWA] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17658351] = { 'qm1', {3072},                                                                                                                       {}, 17658261}, -- Granite Borer
             --  [17658352] = { 'qm2', {3073},                                                                                                                       {}, 17658262}, -- Blazing Eruca

@@ -14,7 +14,7 @@ function onMobSkillCheck(target,mob,skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-    
+
     numhits = 1
     accmod = 2
     dmgmod = 2
@@ -22,5 +22,5 @@ function onMobWeaponSkill(target, mob, skill)
     dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.SLASHING,info.hitslanded)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
-    
+
 end

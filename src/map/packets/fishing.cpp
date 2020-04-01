@@ -21,14 +21,14 @@
 
 #include "../../common/socket.h"
 
-#include <string.h> 
+#include <string.h>
 
 #include "fishing.h"
 
 /* OLD FISHING PACKET - Used for old fishing minigame. Requires setting animation to 50 at fishing start and 38 when you receive a bite. Seems to still work but breaks client's target info after fishing
     this->type = 0x81;
     this->size = 0x0C;
-    
+
     unsigned char packet[] =
     {
                                 0x90, 0x27, 0x07, 0x80, 0x0e, 0x11, 0x08, 0x14, 0x00, 0x69, 0x74, 0x73,
@@ -36,7 +36,7 @@
     };
 
     memcpy(data+4, &packet, 20);
-    
+
     ref<uint16>(data, (0x04)) = stamina;
     ref<uint8>(data, (0x06)) = id3;
     ref<uint8>(data, (0x07)) = regen;

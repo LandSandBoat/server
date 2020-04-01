@@ -25,7 +25,7 @@ function onTrigger(player,npc)
         player:startEvent(289); -- he tells u to go Caedarva Mire
     elseif (TheWaywardAutomationProgress == 2) then
         player:startEvent(289); -- Hint to go to Caedarva Mire
-        
+
     -- Quest: Operation Teatime
     elseif (OperationTeatimeProgress == 2 and OTT_DayWait ~= Gameday) then
         player:startEvent(290); -- CS for Chai

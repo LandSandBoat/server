@@ -22,7 +22,7 @@ zones[tpz.zone.BEADEAUX] =
         LOCKED_DOOR_QUADAV_HAS_KEY       = 7212, -- It is locked tight, but has what looks like a keyhole. Maybe one of the Quadav here has the key.
         YOU_CAN_NOW_BECOME_A_DARK_KNIGHT = 7349, -- You can now become a dark knight!
         CHEST_UNLOCKED                   = 7360, -- You unlock the chest!
-        COMMON_SENSE_SURVIVAL            = 7784, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL            = 7787, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

@@ -21,8 +21,8 @@ function onTrigger(player, speed)
         error(player, "Invalid speed amount.")
         return
     end
-    
+
     -- set speed
     player:speed( speed )
-    
+
 end

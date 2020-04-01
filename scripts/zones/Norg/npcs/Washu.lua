@@ -46,7 +46,7 @@ function onTrigger(player,npc)
         player:startEvent(23); -- finish quest
     elseif (stopYourWhining == QUEST_COMPLETED) then
         player:startEvent(24); -- final dialog
-        
+
     -- DEFAULT DIALOG
     else
         player:startEvent(80);
@@ -64,7 +64,7 @@ function onEventFinish(player,csid,option)
         player:confirmTrade();
         npcUtil.giveKeyItem(player, tpz.ki.WASHUS_TASTY_WURST);
         player:setCharVar("yomiOkuriCS",3);
-        
+
     -- STOP YOUR WHINING
     elseif (csid == 21 and option == 1) then
         player:addQuest(OUTLANDS,tpz.quest.id.outlands.STOP_YOUR_WHINING);

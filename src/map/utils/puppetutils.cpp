@@ -162,7 +162,7 @@ bool UnlockAttachment(CCharEntity* PChar, CItem* PItem)
 		return false;
 
     uint8 slot = ((CItemPuppet*)PItem)->getEquipSlot();
-	
+
 	if (slot == 3) //automaton attachment
 	{
 		if (addBit(id & 0xFF, (uint8*)PChar->m_unlockedAttachments.attachments, sizeof(PChar->m_unlockedAttachments.attachments)))

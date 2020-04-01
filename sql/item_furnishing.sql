@@ -515,3 +515,5 @@ INSERT INTO `item_furnishing` VALUES (3735, 'aurum_coffer', 5, 540, 6, 7);
 INSERT INTO `item_furnishing` VALUES (3736, 'well', 80, 517, 5, 8);
 INSERT INTO `item_furnishing` VALUES (3737, 'doll_stand', 2, 2855, 6, 15);
 INSERT INTO `item_furnishing` VALUES (3738, 'eastern_umbrella', 1, 521, 5, 2); -- Moghancement: Gardening - From https://ffxiclopedia.fandom.com/wiki/Eastern_Umbrella (BG doesn't show Moghancement)
+INSERT INTO `item_furnishing` VALUES (3739, 'autumn_tree', 1, 515, 3, 5);
+-- INSERT INTO `item_furnishing` VALUES (3740, 'model_synergy_furnace', 8, 0, 7, 11); -- Moghancement: Synergy Skill Gains does not yet exist, so commenting this row out for now

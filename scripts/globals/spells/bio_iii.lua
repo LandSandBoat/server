@@ -45,8 +45,8 @@ function onSpellCast(caster,target,spell)
 
     -- Calculate duration
     local duration = caster:getMerit(tpz.merit.BIO_III)
-	-- If caster has the spell but no merits in it, they are either a mob or we assume they are GM or otherwise gifted with max duration
-    if duration == 0 then 
+    -- If caster has the spell but no merits in it, they are either a mob or we assume they are GM or otherwise gifted with max duration
+    if duration == 0 then
         duration = 150
     end
 

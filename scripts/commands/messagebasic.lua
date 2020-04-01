@@ -25,7 +25,7 @@ function onTrigger(player, msgId, param1, param2)
     if target == nil then
         target = player
     end
-    
+
     -- inject message packet
     player:messageBasic(msgId, param1, param2, target)
 end

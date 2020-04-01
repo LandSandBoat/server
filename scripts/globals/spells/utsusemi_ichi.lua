@@ -18,7 +18,7 @@ function onSpellCast(caster,target,spell)
     if (numShadows > 3) then
         icon = tpz.effect.COPY_IMAGE_4
     end
-    
+
     if (effect == nil or effect:getPower() <= 1) then
         target:addStatusEffectEx(tpz.effect.COPY_IMAGE, icon, 1, 0, 900, 0, numShadows)
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)

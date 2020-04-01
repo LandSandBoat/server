@@ -79,7 +79,7 @@ int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char*
 		ShowSQL("%s\n", mysql_error(&self->handle));
 		return SQL_ERROR;
 	}
-	
+
 	return SQL_SUCCESS;
 }
 
@@ -499,7 +499,7 @@ void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long deb
 *																		*
 ************************************************************************/
 
-void Sql_Free(Sql_t* self) 
+void Sql_Free(Sql_t* self)
 {
 	if( self )
 	{
@@ -530,8 +530,8 @@ bool Sql_GetAutoCommit(Sql_t* self)
     {
         int32 ret = Sql_Query(self, "SELECT @@autocommit;");
 
-        if( ret != SQL_ERROR && 
-           Sql_NumRows(self) > 0 && 
+        if( ret != SQL_ERROR &&
+           Sql_NumRows(self) > 0 &&
            Sql_NextRow(self) == SQL_SUCCESS )
         {
             return (Sql_GetUIntData(self, 0) == 1);

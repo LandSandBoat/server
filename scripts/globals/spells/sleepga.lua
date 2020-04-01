@@ -32,7 +32,7 @@ function onSpellCast(caster, target, spell)
         -- onMonsterMagicPrepare is not a realistic option.
         -- You'd have to script the use of every individual spell in Amnaf's list..
     end
-    
+
     if resist >= 0.5 then
         if target:addStatusEffect(params.effect, 1, 0, duration * resist) then
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)

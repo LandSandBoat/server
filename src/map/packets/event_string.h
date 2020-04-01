@@ -43,7 +43,7 @@ public:
 
 	CEventStringPacket(
 		CCharEntity* PChar,
-		uint16 EventID, 
+		uint16 EventID,
         const std::string& string0 = "",
         const std::string& string1 = "",
         const std::string& string2 = "",

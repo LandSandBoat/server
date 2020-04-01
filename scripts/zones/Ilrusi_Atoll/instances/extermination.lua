@@ -9,7 +9,7 @@ require("scripts/globals/instance")
 
 function afterInstanceRegister(player)
     local instance = player:getInstance()
-    
+
     player:messageSpecial(ID.text.ASSAULT_43_START, 43)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end

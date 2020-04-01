@@ -37,5 +37,5 @@ function onTrigger(player, amount, target)
     -- give gil to target
     targ:addGil(amount)
     player:PrintToPlayer(string.format("Gave %i gil to %s.  They now have %i gil.", amount, targ:getName(), targ:getGil()))
-    
+
 end

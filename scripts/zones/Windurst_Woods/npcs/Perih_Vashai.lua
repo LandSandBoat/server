@@ -111,7 +111,7 @@ function onEventFinish(player,csid,option)
         player:unlockJob(tpz.job.RNG)
         player:messageSpecial(ID.text.PERIH_VASHAI_DIALOG)
 
-    -- SIN HUNTING        
+    -- SIN HUNTING
     elseif csid == 523 then -- start quest RNG AF1
         player:addQuest(WINDURST, tpz.quest.id.windurst.SIN_HUNTING)
         npcUtil.giveKeyItem(player, tpz.ki.CHIEFTAINNESS_TWINSTONE_EARRING)
@@ -129,7 +129,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 537 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE, {item=12518, var="fireAndBrimstone"}) then -- complete quest RNG AF2
         player:confirmTrade()
 
-    -- UNBRIDLED PASSION        
+    -- UNBRIDLED PASSION
     elseif csid == 541 then -- start RNG AF3
         player:addQuest(WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)
         player:setCharVar("unbridledPassion", 1)

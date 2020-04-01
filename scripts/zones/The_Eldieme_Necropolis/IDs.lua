@@ -35,7 +35,7 @@ zones[tpz.zone.THE_ELDIEME_NECROPOLIS] =
         SPIRIT_INCENSE_EMITS_PUTRID_ODOR = 7412,  -- The <item> emits a putrid odor and burns up. Your attempt this time has failed...
         SARCOPHAGUS_CANNOT_BE_OPENED     = 7429,  -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
         SEEMS_TO_BE_THE_END              = 7557,  -- That seems to be the end of it.
-        GIRL_BACK_TO_JEUNO               = 7569,  -- I'll take the little girl back to Jeuno.
+        GIRL_BACK_TO_JEUNO               = 7569,  -- I'll take the little girl back to Jeuno. Take care.
         NOT_TIME_TO_SEARCH               = 7581,  -- Now doesn't seem to be the time to search here.
         PLAYER_OBTAINS_ITEM              = 7588,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM            = 7589,  -- You were unable to obtain the item.
@@ -43,7 +43,7 @@ zones[tpz.zone.THE_ELDIEME_NECROPOLIS] =
         ALREADY_POSSESS_TEMP             = 7591,  -- You already possess that temporary item.
         NO_COMBINATION                   = 7596,  -- You were unable to enter a combination.
         REGIME_REGISTERED                = 9674,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL            = 11625, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL            = 11628, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

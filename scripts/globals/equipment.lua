@@ -58,9 +58,9 @@ function isBaseNyzulWeapon(itemId)
             return true
         end
     end
-    
+
     return false
-    
+
 end
 
 -- Provides a power for using a chocobo shirt with bunch of gysahl greens

@@ -19,7 +19,7 @@ zones[tpz.zone.GHELSBA_OUTPOST] =
         KEYITEM_OBTAINED                 = 6921, -- Obtained key item: <keyitem>.
         FELLOW_MESSAGE_OFFSET            = 6947, -- I'm ready. I suppose.
         FISHING_MESSAGE_OFFSET           = 7579, -- You can't fish here.
-        HUT_DOOR                         = 7713, -- This looks like an orcish dwelling. The door is firmly shut.
+        HUT_DOOR                         = 7713, -- This looks like an Orcish dwelling. The door is firmly shut.
         LOGGING_IS_POSSIBLE_HERE         = 7740, -- Logging is possible here if you have <item>.
         YOU_CAN_NOW_BECOME_A_DRAGOON     = 7780, -- You can now become a dragoon!
     },

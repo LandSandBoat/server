@@ -47,7 +47,7 @@ zones[tpz.zone.PORT_JEUNO] =
         DRYEYES_3               = 8164, -- Hey, you already got <item>. What you tryin' to pull here? Save some for my other customers, eh?
         CHEST_IS_EMPTY          = 8652, -- The chest is empty.
         KINDLIX_SHOP_DIALOG     = 8671, -- Our fam'ly peddle sky flowers. You want have nice scenery? Send fireworks sky high! It's great feeling. Bwee hee hee.
-        PYROPOX_SHOP_DIALOG     = 8675, -- Bwee hee.♪ I get fireworks from all 'round globe. Kindlix never sell more than me.
+        PYROPOX_SHOP_DIALOG     = 8675, -- Bwee hee. I get fireworks from all 'round globe. Kindlix never sell more than me.
     },
     mob =
     {

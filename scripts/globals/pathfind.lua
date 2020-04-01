@@ -14,7 +14,7 @@ tpz.path =
         WALLHACK = 2,
         REVERSE  = 4,
     },
-    
+
     -- returns the point at the given index
     get = function(points, index)
         local pos = {}

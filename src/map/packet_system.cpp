@@ -661,6 +661,11 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     break;
     case 0x02: // attack
     {
+        if (PChar->isMounted())
+        {
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
+        }
+
         PChar->PAI->Engage(TargID);
     }
     break;
@@ -4922,7 +4927,7 @@ void SmallPacket0x0E2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     PChar->PLinkshell1->setPostRights(LSTYPE_LINKPEARL);
                 break;
                 }
-                return;     
+                return;
             }
         }
         break;

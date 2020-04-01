@@ -59,7 +59,7 @@ local nosTrades =
 function onTrade(player,npc,trade)
     local nameOfScience  = player:getQuestStatus(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-    
+
     if itemInProgress > 0 and npcUtil.tradeHas(trade, nosTrades[itemInProgress].organs) then
         player:setLocalVar("NAME_OF_SCIENCE_complete", itemInProgress)
         player:startEvent(529, gorget, earring, obi)
@@ -117,7 +117,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
         local itemComplete   = player:getLocalVar("NAME_OF_SCIENCE_complete")
-        
+
         if itemComplete > 0 and itemInProgress == itemComplete then
             player:setLocalVar("NAME_OF_SCIENCE_complete", 0)
             if npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemComplete, var={"NAME_OF_SCIENCE_target"}}) then

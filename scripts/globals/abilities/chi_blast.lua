@@ -19,7 +19,7 @@ function onUseAbility(player,target,ability)
     if boost ~= nil then
         multiplier = (boost:getPower()/100) * 4 -- power is the raw % atk boost
     end
-    
+
     local dmg = math.floor(player:getStat(tpz.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
 
     dmg = utils.stoneskin(target, dmg)

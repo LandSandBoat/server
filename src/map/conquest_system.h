@@ -28,7 +28,7 @@
 
 #define SANDORIA            0x00
 #define BASTOK              0x01
-#define WINDURST            0x02  
+#define WINDURST            0x02
 #define BEASTMEN            0x03
 #define NEUTRAL             0xFF
 
@@ -54,7 +54,7 @@ namespace conquest
     void    UpdateInfluencePoints(int points, unsigned int nation, unsigned int region);
 	void	GainInfluencePoints(CCharEntity* PChar, uint32 points);		// Gain influence for player's nation (+1)
 	void	LoseInfluencePoints(CCharEntity* PChar);					// Lose influence for player's nation and gain for beastmen influence
-	
+
     uint8	GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);	// Get number for graphics in conquest menu (arrows)
     uint8	GetInfluenceGraphics(REGIONTYPE RegionID);	                // Get number for graphics in conquest menu (arrows)
     uint8   GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);

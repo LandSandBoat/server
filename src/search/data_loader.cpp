@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -51,7 +51,7 @@ CDataLoader::~CDataLoader()
 
 /************************************************************************
 *                                                                       *
-*  История продаж предмета                                              *
+*  Returns the auction house sale history for a given item.             *
 *                                                                       *
 ************************************************************************/
 
@@ -88,8 +88,8 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
 
 /************************************************************************
 *                                                                       *
-*  Список продаваемых предметов в указанной категории                   *
 *  The list of items sold in this category                              *
+*                                                                       *
 ************************************************************************/
 
 std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString)
@@ -133,7 +133,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
 
 /************************************************************************
 *                                                                       *
-*  Количество активных игроков в мире                                   *
+*  Returns the number of active players in the world.                   *
 *                                                                       *
 ************************************************************************/
 
@@ -164,7 +164,8 @@ uint32 CDataLoader::GetPlayersCount(search_req sr)
 
 /************************************************************************
 *                                                                       *
-*  Список найденных персонажей в игровом мире                           *
+*  Returns the list of characters found in the world that match the     *
+*  search request.                                                      *
 *          Job ID is 0 for none specified.                              *
 ************************************************************************/
 
@@ -334,7 +335,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
 /************************************************************************
 *                                                                       *
-*  Список персонажей, состоящих в одной группе                          *
+*  Returns the list of characters in a given party/alliance group.      *
 *                                                                       *
 ************************************************************************/
 
@@ -393,7 +394,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
 
 /************************************************************************
 *                                                                       *
-*  Список персонажей, состоящих в одной linkshell                       *
+*  Returns the list of characters in a given linkshell.                 *
 *                                                                       *
 ************************************************************************/
 
@@ -456,6 +457,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
     return LinkshellList;
 }
+
 void CDataLoader::ExpireAHItems()
 {
     Sql_t* sqlH2 = Sql_Malloc();

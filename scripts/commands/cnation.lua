@@ -26,7 +26,7 @@ function onTrigger(player, target, nation)
     for k,v in pairs(nationNameToNum) do
         nationNumToName[v]=k
     end
-    
+
     -- validate target
     if (target == nil) then
         error(player, "You must specify an online player by name.")
@@ -37,7 +37,7 @@ function onTrigger(player, target, nation)
         error(player, string.format( "Player named '%s' not found!", target ) )
         return
     end
-    
+
     -- show or set allegiance
     if (nation == nil) then
         player:PrintToPlayer(string.format("%s's current campaign allegiance: %s", targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))

@@ -13,7 +13,7 @@ end;
 function onTrigger(player,npc)
     local cop = player:getCurrentMission(COP);
     local copStat = player:getCharVar("PromathiaStatus");
-    
+
     -- AN ETERNAL MEMORY (PM2-4)
     if (cop == tpz.mission.id.cop.AN_ETERNAL_MELODY and copStat == 1) then
         player:startEvent(5);
@@ -39,7 +39,7 @@ function onTrigger(player,npc)
         SpawnMob(ID.mob.PM6_2_MOB_OFFSET + 0):updateClaim(player);
         SpawnMob(ID.mob.PM6_2_MOB_OFFSET + 1):updateClaim(player);
         SpawnMob(ID.mob.PM6_2_MOB_OFFSET + 2):updateClaim(player);
-        
+
     -- DEFAULT DIALOG
     else
         player:messageSpecial(ID.text.DOOR_CLOSED);

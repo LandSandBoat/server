@@ -12,9 +12,9 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)    
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[C_Temenos_Base]UniqueID",os.time());
-    HideArmouryCrates(Central_Temenos_Basement,TEMENOS);        
+    HideArmouryCrates(Central_Temenos_Basement,TEMENOS);
     HideTemenosDoor(Central_Temenos_Basement);
     if (GetMobByID(16929088):isSpawned()) then DespawnMob(16929088); end
 end;

@@ -39,7 +39,7 @@ function onTrigger(player,npc)
         player:startEvent(603);
     elseif (player:getCharVar("FFR") > 2 and not player:hasItem(532)) then
         player:startEvent(510,3);
-        
+
     -- DEFAULT MENU
     else
         player:startEvent(510);
@@ -82,7 +82,7 @@ function onEventFinish(player,csid,option)
     elseif (csid == 535) then
         player:confirmTrade();
         player:setCharVar("TheBrugaireConsortium-Parcels", 11);
-        
+
     -- WHITE MAGIC SHOP
     elseif (csid == 510 and option == 0) then
         local stockA =

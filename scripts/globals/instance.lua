@@ -5,12 +5,12 @@ function updateInstanceTime(instance, elapsed, texttable)
     local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
     local wipeTime = instance:getWipeTime()
     local message = 0
-    
+
     if (remainingTimeLimit < 0) then
         instance:fail()
         return
     end
-    
+
     if (wipeTime == 0) then
         local wipe = true
         for i,v in pairs(players) do
@@ -50,7 +50,7 @@ function updateInstanceTime(instance, elapsed, texttable)
     elseif (lastTimeUpdate == 30 and remainingTimeLimit < 10) then
         message = 10
     end
-    
+
     if (message ~= 0) then
         for i,v in pairs(players) do
             if (remainingTimeLimit >= 60) then

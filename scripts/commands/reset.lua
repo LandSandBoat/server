@@ -27,7 +27,7 @@ function onTrigger(player,target)
             return
         end
     end
-    
+
     -- reset target recasts
     targ:resetRecasts()
     if (targ:getID() ~= player:getID()) then

@@ -23,7 +23,7 @@ zones[tpz.zone.ABYSSEA_GRAUBERG] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17818081] = { 'qm1',      {3260,3266},                                                              {}, 17818041}, -- Ironclad Sunderer
             --  [17818082] = { 'qm2', {3261,3262,3268},                                                              {}, 17818042}, -- Ningishzida

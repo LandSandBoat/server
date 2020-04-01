@@ -32,7 +32,7 @@ public:
 
 	CItemGeneral(uint16);
 	virtual ~CItemGeneral();
-	
+
 private:
 
 };

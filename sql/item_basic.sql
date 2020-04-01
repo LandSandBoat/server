@@ -3421,7 +3421,7 @@ INSERT INTO `item_basic` VALUES (3546,0,'piece_of_staghorn_coral','staghorn_cora
 INSERT INTO `item_basic` VALUES (3547,0,'sealord_skin','sealord_skin',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3548,0,'square_of_sealord_leather','sealord_leather',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3549,0,'vial_of_belladonna_sap','belladonna_sap',12,4,44,1,0);
-INSERT INTO `item_basic` VALUES (3550,0,'spool_of_wyrdstrand','wyrdstrand',12,4,40,1,0);
+INSERT INTO `item_basic` VALUES (3550,0,'spool_of_wyrdstrand','wyrdstrand',12,4,40,1,1319);
 INSERT INTO `item_basic` VALUES (3551,0,'square_of_wyrdweave','wyrdweave',12,4,40,1,0);
 INSERT INTO `item_basic` VALUES (3552,0,'squamous_hide','squamous_hide',12,4,41,1,0);
 INSERT INTO `item_basic` VALUES (3553,0,'banquet_table_blueprint','b._table_blueprint',1,28752,0,1,0);
@@ -3594,6 +3594,7 @@ INSERT INTO `item_basic` VALUES (3736,0,'well','well',1,28752,0,0,0);
 INSERT INTO `item_basic` VALUES (3737,0,'doll_stand','doll_stand',1,61520,0,1,0);
 INSERT INTO `item_basic` VALUES (3738,0,'eastern_umbrella','eastern_umbrella',1,61520,0,1,0);
 INSERT INTO `item_basic` VALUES (3739,0,'autumn_tree','autumn_tree',1,28736,0,1,0);
+INSERT INTO `item_basic` VALUES (3740,0,'model_synergy_furnace','model_synergy_furn.',1,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (3840,0,'pulse_cell_mx','pulse_cell_mx',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3841,0,'pulse_cell_an','pulse_cell_an',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3842,0,'pulse_cell_fa','pulse_cell_fa',12,4100,46,1,0);
@@ -3837,6 +3838,7 @@ INSERT INTO `item_basic` VALUES (4082,0,'piece_of_moonlight_coral','moonlight_co
 INSERT INTO `item_basic` VALUES (4083,0,'handful_of_beryllium_arrowheads','ber._arrowheads',99,4,0,0,0);
 INSERT INTO `item_basic` VALUES (4084,0,'bag_of_mixed_fletchings','mixed_fletchings',99,4,0,0,0);
 INSERT INTO `item_basic` VALUES (4085,0,'handful_of_beryllium_bolt_heads','ber._bolt_heads',99,4,0,0,0);
+INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,1,0);
 INSERT INTO `item_basic` VALUES (4094,0,'bowl_of_goblin_stew_880','goblin_stew_880',1,61520,0,0,0);
 INSERT INTO `item_basic` VALUES (4095,0,'bismuth_sheet','bismuth_sheet',12,4,38,0,0);
 INSERT INTO `item_basic` VALUES (4096,0,'fire_crystal','fire_crystal',12,516,35,0,13);
@@ -7450,6 +7452,8 @@ INSERT INTO `item_basic` VALUES (10069,0,'♪goobbue','♪goobbue',1,61504,0,0,0
 INSERT INTO `item_basic` VALUES (10070,0,'♪raaz','♪raaz',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10071,0,'♪levitus','♪levitus',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10072,0,'♪adamantoise','♪adamantoise',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10073,0,'♪dhalmel','♪dhalmel',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10074,0,'♪doll','♪doll',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10112,0,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,0,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,0,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);

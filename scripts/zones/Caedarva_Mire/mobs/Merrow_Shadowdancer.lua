@@ -3,7 +3,7 @@
 --  Mob: Merrow Shadowdancer
 -- Note: Minion of Experimental Lamia
 -----------------------------------
-mixins = 
+mixins =
     {
         require("scripts/mixins/job_special"),
         require("scripts/mixins/weapon_break")

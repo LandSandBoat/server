@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 
 function onTrade(player,npc,trade)
     local missionStatus = player:getCharVar("MissionStatus")
-    
+
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298,2}}) then -- Parana Shield x2
         if missionStatus == 5 then
             player:startEvent(455) -- before deliver shield to the yagudo

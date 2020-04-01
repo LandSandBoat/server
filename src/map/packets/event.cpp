@@ -29,8 +29,8 @@
 
 CEventPacket::CEventPacket(
 	CCharEntity* PChar,
-	uint16 EventID, 
-	uint8  numOfParams, 
+	uint16 EventID,
+	uint8  numOfParams,
 	uint32 param0,
 	uint32 param1,
 	uint32 param2,
@@ -46,7 +46,7 @@ CEventPacket::CEventPacket(
 
 	ref<uint32>(0x04) = PChar->id;
 
-	if(numOfParams > 0) 
+	if(numOfParams > 0)
 	{
 		this->type = 0x34;
 		this->size = 0x1A;
@@ -79,7 +79,7 @@ CEventPacket::CEventPacket(
     {
 		ref<uint16>(0x08) = PChar->targid;
 		ref<uint16>(0x0C) = EventID;
-		
+
         ref<uint16>(0x0A) = PChar->getZone();
 		ref<uint16>(0x10) = PChar->getZone();
 	}

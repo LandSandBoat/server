@@ -32,7 +32,7 @@ zones[tpz.zone.SAUROMUGUE_CHAMPAIGN] =
         ALREADY_POSSESS_TEMP     = 7500,  -- You already possess that temporary item.
         NO_COMBINATION           = 7505,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 9806,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12491, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 12494, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

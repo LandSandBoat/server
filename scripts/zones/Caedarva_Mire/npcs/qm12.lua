@@ -13,7 +13,7 @@ end
 
 function onTrigger(player,npc)
     local notMeantToBeProg = player:getCharVar("notmeanttobeCS")
-    
+
     if notMeantToBeProg == 1 then
         player:startEvent(16)
     elseif

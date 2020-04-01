@@ -11,7 +11,7 @@ function onMobSpawn(mob)
     local players = instance:getChars()
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
-    
+
     for i,v in pairs(players) do
         v:messageSpecial(ID.text.MINE_COUNTDOWN,10)
         mob:timer(5000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,5) end)

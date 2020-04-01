@@ -12,7 +12,7 @@ function onTrigger(player,npc)
     local arceliaAppears = player:getCurrentMission(SOA) == tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN
 
     if arceliaAppears and player:getFameLevel(ADOULIN) >= 4 then
-        if player:getCharVar("SOA") == 0 then 
+        if player:getCharVar("SOA") == 0 then
             player:startEvent(6)
         else
             player:startEvent(7)

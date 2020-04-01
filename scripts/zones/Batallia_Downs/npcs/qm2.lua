@@ -8,7 +8,7 @@ require("scripts/globals/keyitems");
 
 function onTrigger(player,npc)
     local sturmtigerKilled = player:getCharVar("SturmtigerKilled");
-    
+
     if (player:getCharVar("ChasingQuotas_Progress") == 5 and sturmtigerKilled == 0) then
         SpawnMob(ID.mob.STURMTIGER,300):updateClaim(player);
     elseif (sturmtigerKilled == 1) then

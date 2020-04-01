@@ -30,7 +30,7 @@ enum REVIVAL_TYPE
 {
 	TYPE_HOMEPOINT	= 0,
 	TYPE_RAISE		= 1,
-	TYPE_TRACTOR	= 2 
+	TYPE_TRACTOR	= 2
 };
 
 /************************************************************************

@@ -34,7 +34,7 @@ zones[tpz.zone.QUFIM_ISLAND] =
         ALREADY_POSSESS_TEMP           = 8047,  -- You already possess that temporary item.
         NO_COMBINATION                 = 8052,  -- You were unable to enter a combination.
         REGIME_REGISTERED              = 10328, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 12650, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL          = 12653, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

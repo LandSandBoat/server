@@ -561,12 +561,6 @@ void CalculateStats(CMobEntity * PMob)
         PMob->ResetGilPurse();
     }
 
-    if(PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-        zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
-    {
-        PMob->setMobMod(MOBMOD_CHARMABLE, 0);
-    }
-
     // Check for possible miss-setups
     if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 && PMob->getMobMod(MOBMOD_SPECIAL_COOL) == 0)
     {

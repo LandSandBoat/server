@@ -23,7 +23,7 @@ zones[tpz.zone.ABYSSEA_TAHRONGI] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [16961954] = { 'qm1',           {2915},                                                                                                                     {}, 16961917}, -- Halimede
             --  [16961955] = { 'qm2',           {2916},                                                                                                                     {}, 16961918}, -- Vetehinen

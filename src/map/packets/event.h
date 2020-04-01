@@ -42,8 +42,8 @@ public:
 
 	CEventPacket(
 		CCharEntity* PChar,
-		uint16 EventID, 
-		uint8  numOfParams = 0, 
+		uint16 EventID,
+		uint8  numOfParams = 0,
 		uint32 param0 = 0,
 		uint32 param1 = 0,
 		uint32 param2 = 0,

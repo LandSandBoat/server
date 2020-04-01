@@ -29,15 +29,15 @@ zones[tpz.zone.BHAFLAU_THICKETS] =
     },
     mob =
     {
-        MAHISHASURA_PH     = 
+        MAHISHASURA_PH     =
         {
             [16990296] = 16990306, -- 215.000 -18.000 372.000
         },
-        EMERGENT_ELM_PH    = 
+        EMERGENT_ELM_PH    =
         {
             [16990374] = 16990376, -- 86.000 -35.000 621.000
         },
-        NIS_PUK_PH         = 
+        NIS_PUK_PH         =
         {
             [16990383] = 16990403, -- -135 -18 -648
             [16990384] = 16990403, -- -104 -18 -636
