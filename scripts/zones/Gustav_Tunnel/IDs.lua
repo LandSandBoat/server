@@ -19,6 +19,7 @@ zones[tpz.zone.GUSTAV_TUNNEL] =
         GEOMAGNETRON_ATTUNED     = 7010,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         CONQUEST_BASE            = 7049,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7208,  -- You can't fish here.
+        SENSE_OMINOUS_PRESENCE   = 7310,  -- You sense an ominous presence...
         REGIME_REGISTERED        = 9578,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL    = 10662, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         PLAYER_OBTAINS_ITEM      = 10630, -- <name> obtains <item>!
