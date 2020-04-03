@@ -723,7 +723,7 @@ local function giveItem(player, npc, itemNum)
                     if player:addItem(itemID, 33) then
                         messageChest(player, "PLAYER_OBTAINS_ITEM", itemID, 0, 0, 0)
                         npc:setLocalVar(itemQuery, 0)
-                        checkItemChestIsEmpty(player, npc)
+                        checkItemChestIsEmpty(npc)
                     end
                 else
                     if player:addItem(itemID) then
