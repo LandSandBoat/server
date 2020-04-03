@@ -26,7 +26,10 @@ function onTrigger(player, mp, target)
 
     -- validate target
     local targ
-    if (target == nil) then
+    local cursor_target = player:getCursorTarget()
+    if cursor_target ~= nil then
+        targ = cursor_target
+    elseif target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
