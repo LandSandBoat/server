@@ -1,7 +1,5 @@
 -----------------------------------------
--- Spell: PHALANX
--- caster:getMerit() returns a value which is equal to the number of merit points TIMES the value of each point
--- Phalanx II value per point is '3' This is a constant set in the table 'merits'
+-- Spell: Phalanx II
 -----------------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -15,12 +13,14 @@ end
 function onSpellCast(caster, target, spell)
     local enhskill = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC)
     local final = 0
-    local merits = caster:getMerit(tpz.merit.PHALANX_II)
-
-    local duration = calculateDuration(90 + 10 * merits, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = calculateDuration(240, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 75, target:getMainLvl())
 
-    final = enhskill / 25 + merits + 1
+    if enhskill <= 300 then
+        final = math.floor(enhskill / 25) + 16
+    else
+        final = math.floor((enhskill - 300.5) / 28.5) + 28
+    end
 
     if target:addStatusEffect(tpz.effect.PHALANX,final,0,duration) then
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)

@@ -1,8 +1,6 @@
 -----------------------------------------
 -- Spell: Dia III
 -- Lowers an enemy's defense and gradually deals light elemental damage.
--- caster:getMerit() returns a value which is equal to the number of merit points TIMES the value of each point
--- Dia III value per point is '30' This is a constant set in the table 'merits'
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -44,12 +42,8 @@ function onSpellCast(caster, target, spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration and bonus
-    local duration = calculateDuration(caster:getMerit(tpz.merit.DIA_III), spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local dotBonus = caster:getMod(tpz.mod.DIA_DOT) -- Dia Wand
-    -- If caster has the spell but no merits in it, they are either a mob or we assume they are GM or otherwise gifted with max duration
-    if duration == 0 then
-        duration = 150
-    end
 
     -- Check for Bio
     local bio = target:getStatusEffect(tpz.effect.BIO)
