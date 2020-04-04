@@ -19,6 +19,7 @@ zones[tpz.zone.WINDURST_WALLS] =
         KEYITEM_LOST                   = 6551, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL            = 6552, -- You do not have enough gil.
         ITEMS_OBTAINED                 = 6556, -- You obtain <number> <item>!
+        YOU_LEARNED_TRUST              = 6610, -- You learned Trust: <name>!
         HOMEPOINT_SET                  = 6638, -- Home point set!
         MOG_LOCKER_OFFSET              = 6807, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         ITEM_DELIVERY_DIALOG           = 6960, -- We can deliver goods to your residence or to the residences of your friends.

@@ -8,8 +8,24 @@
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
+
+local TrustMemory = function(player)
+    local memories = 0
+    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
+        memories = memories + 2
+    end
+    -- 4 - nothing
+    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+        memories = memories + 8
+    end
+    -- 16 - chocobo racing
+    --  memories = memories + 16
+    return memories
+end
 
 function onTrade(player, npc, trade)
     if
@@ -42,7 +58,26 @@ function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(pNation)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if pNation == tpz.nation.SANDORIA then
+    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local WindurstFirstTrust = player:getCharVar("WindurstFirstTrust")
+    local KupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
+    local Rank3 = player:getRank() >= 3 and 1 or 0
+
+    if TrustWindurst == QUEST_ACCEPTED and (TrustSandoria == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
+        player:startEvent(439, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 0 then
+        player:startEvent(435, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 1 and KupipiTrustChatFlag == 0 then
+        player:startEvent(436)
+        player:setLocalVar("KupipiTrustChatFlag", 1)
+    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 2 then
+        player:startEvent(437)
+    elseif TrustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and KupipiTrustChatFlag == 0 then
+        player:startEvent(438)
+        player:setLocalVar("KupipiTrustChatFlag", 1)
+    elseif pNation == tpz.nation.SANDORIA then
         -- San d'Oria Mission 2-3 Part I - Windurst > Bastok
         if currentMission == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST then
             if missionStatus == 4 then
@@ -164,5 +199,26 @@ function onEventFinish(player, csid, option)
         player:setCharVar("KupipiDisbelief", 0)
     elseif csid == 408 then
         player:setCharVar("KupipiRankTenText", 1)
+
+    --TRUST
+    elseif csid == 435 then
+        player:addSpell(898, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
+        player:setCharVar("WindurstFirstTrust", 1)
+    elseif csid == 437 then
+        player:delKeyItem(tpz.ki.GREEN_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_INSTITUTE_CARD)
+        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TRUST_WINDURST, {
+            keyItem = tpz.ki.WINDURST_TRUST_PERMIT,
+            title = tpz.title.THE_TRUSTWORTHY,
+            var = "WindurstFirstTrust" })
+        player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
+    elseif csid == 439 then
+        player:addSpell(898, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
+        player:delKeyItem(tpz.ki.GREEN_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_INSTITUTE_CARD)
+        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TRUST_WINDURST, {
+            keyItem = tpz.ki.WINDURST_TRUST_PERMIT })
     end
 end

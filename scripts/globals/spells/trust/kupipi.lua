@@ -3,6 +3,7 @@
 -----------------------------------------
 require("scripts/globals/trust")
 require("scripts/globals/utils")
+require("scripts/globals/zone")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
@@ -10,6 +11,13 @@ function onMagicCastingCheck(caster, target, spell)
 end
 
 function onSpellCast(caster, target, spell)
+    local WindurstFirstTrust = caster:getCharVar("WindurstFirstTrust")
+    local zone = caster:getZoneID()
+
+    if WindurstFirstTrust == 1 and (zone == tpz.zone.EAST_SARUTABARUTA or zone == tpz.zone.WEST_SARUTABARUTA) then
+        caster:setCharVar("WindurstFirstTrust", 2)
+    end
+
     return tpz.trust.spawn(caster, spell)
 end
 

@@ -6,6 +6,7 @@
 -- Involved in Mission 2-1
 -- !pos 62 -4 240 241
 -----------------------------------
+local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -14,6 +15,35 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+
+local TrustMemory = function(player)
+    local memories = 0
+    -- 2 - Saw her at the start of the game
+    if player:getNation() == WINDURST then
+        memories = memories + 2
+    end
+    -- 4 - ROCK_RACKETEER
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
+        memories = memories + 4
+    end
+    -- 8 - HITTING_THE_MARQUISATE
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
+        memories = memories + 8
+    end
+    -- 16 - CRYING_OVER_ONIONS
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
+        memories = memories + 16
+    end
+    -- 32 - hasItem(286) Nanaa Mihgo statue
+    if player:hasItem(286) then
+        memories = memories + 32
+    end
+    -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
+    if player:hasCompletedMission(AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
+        memories = memories + 64
+    end
+    return memories
+end
 
 function onTrade(player,npc,trade)
     if npcUtil.tradeHas(trade, {{498,4}}) then -- Yagudo Necklace x4
@@ -45,9 +75,14 @@ function onTrigger(player,npc)
     local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
     local job = player:getMainJob()
     local lvl = player:getMainLvl()
+    local Rank3 = player:getRank() >= 3 and 1 or 0
+
+    -- TRUST
+    if mihgosAmigo == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
+        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
 
     -- WINDURST 2-1: LOST FOR WORDS
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and missionStatus > 0 and missionStatus < 5 then
+    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and missionStatus > 0 and missionStatus < 5 then
         if missionStatus == 1 then
             player:startEvent(165, 0, tpz.ki.LAPIS_CORAL, tpz.ki.LAPIS_MONOCLE)
         elseif missionStatus == 2 then
@@ -191,5 +226,9 @@ function onEventFinish(player,csid,option)
         player:addTitle(tpz.title.CAT_BURGLAR_GROUPIE)
         player:addGil(GIL_RATE*200)
         player:addFame(NORG, 30)
+
+    elseif csid == 865 then
+        player:addSpell(901, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
     end
 end

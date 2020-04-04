@@ -12,6 +12,35 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
+local TrustMemory = function(player)
+    local memories = 0
+    -- 2 - Saw him at the start of the game
+    if player:getNation() == WINDURST then
+        memories = memories + 2
+    end
+    -- 4 - WONDER_WANDS
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) then
+        memories = memories + 4
+    end
+    -- 8 - THE_TIGRESS_STIRS
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.THE_TIGRESS_STIRS) then
+        memories = memories + 8
+    end
+    -- 16 - I_CAN_HEAR_A_RAINBOW
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
+        memories = memories + 16
+    end
+    -- 32 - Hero's Combat (BCNM)
+    --if (playervar for Hero's Combat) then
+    --  memories = memories + 32
+    --end
+    -- 64 - MOON_READING
+    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+        memories = memories + 64
+    end
+    return memories
+end
+
 function onTrade(player,npc,trade)
     -- THE KIND CARDIAN
     if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 969) then
@@ -29,6 +58,7 @@ function onTrigger(player,npc)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
     local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
     local canCardiansCry = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+    local Rank6 = player:getRank() >= 6 and 1 or 0
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER then
@@ -85,6 +115,10 @@ function onTrigger(player,npc)
         player:startEvent(320, 0, 20000) -- reminder
     elseif canCardiansCry == QUEST_COMPLETED then
         player:startEvent(330) -- new standard dialog
+
+    -- TRUST
+    elseif player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
+        player:startEvent(866, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
 
     -- STANDARD DIALOG
     else
@@ -173,5 +207,10 @@ function onEventFinish(player,csid,option)
         player:addQuest(WINDURST,tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif csid == 325 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY, {gil=5000}) then
         player:confirmTrade()
+
+    -- TRUST
+    elseif csid == 866 and option == 2 then
+        player:addSpell(904, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 904)
     end
 end

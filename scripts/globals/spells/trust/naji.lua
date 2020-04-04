@@ -2,6 +2,7 @@
 -- Trust: Naji
 -----------------------------------------
 require("scripts/globals/trust")
+require("scripts/globals/zone")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
@@ -9,6 +10,13 @@ function onMagicCastingCheck(caster, target, spell)
 end
 
 function onSpellCast(caster, target, spell)
+    local BastokFirstTrust = caster:getCharVar("BastokFirstTrust")
+    local zone = caster:getZoneID()
+
+    if BastokFirstTrust == 1 and (zone == tpz.zone.NORTH_GUSTABERG or zone == tpz.zone.SOUTH_GUSTABERG) then
+        caster:setCharVar("BastokFirstTrust", 2)
+    end
+
     return tpz.trust.spawn(caster, spell)
 end
 

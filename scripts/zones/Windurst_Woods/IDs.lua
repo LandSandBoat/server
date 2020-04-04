@@ -17,6 +17,7 @@ zones[tpz.zone.WINDURST_WOODS] =
         KEYITEM_OBTAINED             = 6550, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                 = 6551, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL          = 6552, -- You do not have enough gil.
+        YOU_LEARNED_TRUST            = 6610, -- You learned Trust: <name>!
         HOMEPOINT_SET                = 6638, -- Home point set!
         YOU_ACCEPT_THE_MISSION       = 6731, -- You have accepted the mission.
         PEW_SAHBARAEF_DIALOG         = 6827, -- We can deliver goods to your residence or to the residences of your friends.

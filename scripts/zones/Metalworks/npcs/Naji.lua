@@ -10,8 +10,25 @@ require("scripts/globals/keyitems");
 require("scripts/globals/titles");
 require("scripts/globals/quests");
 require("scripts/globals/missions");
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Metalworks/IDs");
 -----------------------------------
+
+local TrustMemory = function(player)
+    local memories = 0
+    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY) then
+        memories = memories + 2
+    end
+    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN) then
+        memories = memories + 4
+    end
+    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+        memories = memories + 8
+    end
+    -- 16 - Chocobo racing
+    --  memories = memories + 16
+    return memories
+end
 
 function onTrade(player,npc,trade)
 
@@ -27,8 +44,27 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local BastokFirstTrust = player:getCharVar("BastokFirstTrust")
+    local NajiTrustChatFlag = player:getLocalVar("NajiTrustChatFlag")
+    local Rank3 = player:getRank() >= 3 and 1 or 0
 
-    if (player:hasKeyItem(tpz.ki.YASINS_SWORD)) then -- The Doorman, WAR AF1
+    if TrustBastok == QUEST_ACCEPTED and (TrustSandoria == QUEST_COMPLETED or TrustWindurst == QUEST_COMPLETED) then
+        player:startEvent(984, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+    elseif TrustBastok == QUEST_ACCEPTED and BastokFirstTrust == 0 then
+        player:startEvent(980, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+    elseif TrustBastok == QUEST_ACCEPTED and BastokFirstTrust == 1 and NajiTrustChatFlag == 0 then
+        player:startEvent(981)
+        player:setLocalVar("NajiTrustChatFlag", 1)
+    elseif TrustBastok == QUEST_ACCEPTED and BastokFirstTrust == 2 then
+        player:startEvent(982)
+    elseif TrustBastok == QUEST_COMPLETED and not player:hasSpell(900) and NajiTrustChatFlag == 0 then
+        player:startEvent(983, 0, 0, 0, 0, 0, 0, 0, Rank3)
+        player:setLocalVar("NajiTrustChatFlag", 1)
+
+    elseif (player:hasKeyItem(tpz.ki.YASINS_SWORD)) then -- The Doorman, WAR AF1
         player:startEvent(750);
     elseif (player:getCurrentMission(BASTOK) ~= tpz.mission.id.bastok.NONE) then
         local currentMission = player:getCurrentMission(BASTOK);
@@ -107,6 +143,26 @@ function onEventFinish(player,csid,option)
         player:setCharVar("MissionStatus",1);
     elseif (csid == 714 or csid == 722 or csid == 762) then
         finishMissionTimeline(player,1,csid,option);
-    end
 
-end;
+    --TRUST
+    elseif csid == 980 then
+        player:addSpell(897, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 897)
+        player:setCharVar("BastokFirstTrust", 1)
+    elseif csid == 982 then
+        player:delKeyItem(tpz.ki.BLUE_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.BLUE_INSTITUTE_CARD)
+        npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.TRUST_BASTOK, {
+            keyItem = tpz.ki.BASTOK_TRUST_PERMIT,
+            title = tpz.title.THE_TRUSTWORTHY,
+            var = "BastokFirstTrust" })
+        player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
+    elseif csid == 984 then
+        player:addSpell(897, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 897)
+        player:delKeyItem(tpz.ki.BLUE_INSTITUTE_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.BLUE_INSTITUTE_CARD)
+        npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.TRUST_BASTOK, {
+            keyItem = tpz.ki.BASTOK_TRUST_PERMIT })
+    end
+end

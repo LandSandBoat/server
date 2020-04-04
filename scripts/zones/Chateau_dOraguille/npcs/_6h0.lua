@@ -14,6 +14,31 @@ require("scripts/globals/titles");
 local ID = require("scripts/zones/Chateau_dOraguille/IDs");
 -----------------------------------
 
+local function TrustMemory(player)
+    local memories = 0
+    -- 2 - LIGHTBRINGER
+    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) then
+        memories = memories + 2
+    end
+    -- 4 - IMMORTAL_SENTRIES
+    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+        memories = memories + 4
+    end
+    -- 8 - UNDER_OATH
+    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.UNDER_OATH) then
+        memories = memories + 8
+    end
+    -- 16 - FIT_FOR_A_PRINCE
+    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+        memories = memories + 16
+    end
+    -- 32 - Hero's Combat BCNM
+    --if (playervar for Hero's Combat) then
+    --  memories = memories + 32
+    --end
+    return memories
+end
+
 function onTrade(player,npc,trade)
 
 end;
@@ -26,6 +51,7 @@ function onTrigger(player,npc)
 
     local Wait1DayRanperre = player:getCharVar("Wait1DayForRanperre_date");
     local osdate = tonumber(os.date("%j"));
+    local Rank6 = player:getRank() >= 6
 
     if (player:getCharVar("aBoysDreamCS") == 8) then
         player:startEvent(88);
@@ -33,6 +59,8 @@ function onTrigger(player,npc)
         player:startEvent(90);
     elseif (player:getCharVar("UnderOathCS") == 8) then
         player:startEvent(89);
+    elseif Rank6 and player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+        player:startEvent(574, 0, 0, 0, TrustMemory(player))
     elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi == false and MissionStatus == 0) then
         player:startEvent(553,0,tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT);
     elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and MissionStatus == 4) then
@@ -101,6 +129,9 @@ function onEventFinish(player,csid,option)
         player:setCharVar("MissionStatus",8);
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2",1)
+    elseif csid == 574 and option == 2 then
+        player:addSpell(905, false, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
 
 end;
