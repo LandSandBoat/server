@@ -101,7 +101,7 @@ zones[tpz.zone.NORTHERN_SAN_DORIA] =
         CAPIRIA_MESSAGE          = 13371, -- Capiria looks over curiously for a moment.
         VILLION_MESSAGE          = 13372, -- Villion looks over curiously for a moment.
         RETRIEVE_DIALOG_ID       = 18112, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL    = 18439, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 18444, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
