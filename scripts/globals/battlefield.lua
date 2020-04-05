@@ -65,6 +65,7 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
     local leavecode = -1
     local players = battlefield:getPlayers()
     local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
+    local phaseChange = battlefield:getLocalVar("phaseChange")
 
     if status == tpz.battlefield.status.LOST then
         leavecode = 4
@@ -101,7 +102,7 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
         battlefield:cleanup(true)
     end
 
-    if killedallmobs then
+    if killedallmobs and phaseChange == 0 then
         battlefield:setStatus(tpz.battlefield.status.WON)
     end
 end

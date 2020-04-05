@@ -13,8 +13,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onBattlefieldInitialise(battlefield)
-    battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("lootSpawned", 1)
+    battlefield:setLocalVar("phaseChange", 1)
     local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
     local pos = GetMobByID(baseID):getSpawnPos()
 
