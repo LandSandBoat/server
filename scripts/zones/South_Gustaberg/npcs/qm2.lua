@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
                 -- player puts sheep meat on the fire
                 player:messageSpecial(ID.text.FIRE_PUT, 4372)
                 player:confirmTrade()
-                player:setCharVar("SGusta_Sausage_Timer", os.time() + 3456) -- 57 minutes 36 seconds, 1 Vana'diel Day
+                player:setCharVar("SGusta_Sausage_Timer", os.time() + 60) -- 1 minute earth time
                 player:needToZone(true)
             else
                 -- message given if sheep meat is already on the fire
