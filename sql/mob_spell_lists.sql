@@ -2555,8 +2555,8 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,3,21,255);            -
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,4,41,255);            -- Cure IV
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,5,61,255);            -- Cure V
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,6,80,255);            -- Cure VI
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,58,6,255);            -- Paralyze
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,56,13,255);           -- Slow
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,58,6,255);            -- Paralyze
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,112,45,255);          -- Flash
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,125,7,255);           -- Protectra
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,126,27,255);          -- Protectra II
@@ -2865,7 +2865,6 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira',335,143,64,255);       -
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,56,13,255);           -- Slow
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,58,6,255);            -- Paralyze
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,59,18,255);           -- Silence
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,159,4,255);           -- Stone
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,144,19,255);          -- Fire
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,145,50,255);          -- Fire II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,146,71,255);          -- Fire III
@@ -2878,14 +2877,15 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,154,14,255);          -
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,155,45,255);          -- Aero II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,156,69,255);          -- Aero III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,157,83,255);          -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,159,4,255);           -- Stone
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,160,35,255);          -- Stone II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,161,65,255);          -- Stone III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,162,77,255);          -- Stone IV
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,169,9,255);           -- Water
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,164,29,255);          -- Thunder
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,165,60,255);          -- Thunder II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,166,75,255);          -- Thunder III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,167,92,255);          -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,169,9,255);           -- Water
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,170,40,255);          -- Water II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,171,67,255);          -- Water III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ovjang',337,172,80,255);          -- Water IV
@@ -3164,7 +3164,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,174,28,255);   
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,175,53,255);   -- Firaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,176,69,255);   -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,179,32,255);   -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,180,57,255);   -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,180,57,255);   -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,181,71,255);   -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,184,23,255);   -- Aeroga
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,185,48,255);   -- Aeroga II
@@ -3302,7 +3302,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Halver',385,112,37,255);           
 -- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rongelouts',386,0,1,255);       -- none (reserved)
 
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Leonoyne',387,179,32,255);         -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Leonoyne',387,180,57,255);         -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Leonoyne',387,180,57,255);         -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Leonoyne',387,181,71,255);         -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Leonoyne',387,250,20,255);         -- Ice spikes
 
@@ -3319,7 +3319,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,166,66,255);    
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,167,75,255);    -- Thunder IV
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,168,92,255);    -- Thunder V
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,179,32,255);    -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,180,57,255);    -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,180,57,255);    -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,181,71,255);    -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,194,36,255);    -- Thundaga
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kayeel-Payeel',389,195,61,255);    -- Thundaga II
@@ -3365,7 +3365,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,174,28,255);      
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,175,53,255);      -- Firaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,176,69,255);      -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,179,32,255);      -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,180,57,255);      -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,180,57,255);      -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,181,71,255);      -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,184,23,255);      -- Aeroga
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Robel-Akbel',390,185,48,255);      -- Aeroga II
@@ -3469,7 +3469,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,174,28,255);           
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,175,53,255);             -- Firaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,176,69,255);             -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,179,32,255);             -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,180,57,255);             -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,180,57,255);             -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,181,71,255);             -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,184,23,255);             -- Aeroga
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Teodor',399,185,48,255);             -- Aeroga II
@@ -3586,14 +3586,6 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_AAEV',406,310,85,255);             
 
 -- INSERT INTO `mob_spell_lists` VALUES ('TRUST_AAMR',407,0,1,255);               -- none (reserved)
 
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,220,3,41);                 -- Poison
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,221,42,255);               -- Poison II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,230,10,34);                -- Bio
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,231,35,255);               -- Bio II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,247,20,255);               -- Aspir
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,248,20,255);               -- Aspir II
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,273,31,55);                -- Sleepga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,274,56,255);               -- Sleepga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,144,13,255);               -- Fire
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,145,38,255);               -- Fire II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,146,62,255);               -- Fire III
@@ -3624,7 +3616,15 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,170,30,255);             
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,171,55,255);               -- Water III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,172,70,255);               -- Water IV
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,173,80,255);               -- Water V
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,220,3,41);                 -- Poison
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,221,42,255);               -- Poison II
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,230,10,34);                -- Bio
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,231,35,255);               -- Bio II
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,247,20,255);               -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,248,20,255);               -- Aspir II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,252,45,255);               -- Stun
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,273,31,55);                -- Sleepga
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_AATT',408,274,56,255);               -- Sleepga II
 
 -- INSERT INTO `mob_spell_lists` VALUES ('TRUST_AAGK',409,0,1,255);               -- none (reserved)
 
@@ -3749,7 +3749,7 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,174,28,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,175,53,255);           -- Firaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,176,69,255);           -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,179,32,255);           -- Blizzaga
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,180,57,255);           -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,180,57,255);           -- Blizzaga II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,181,71,255);           -- Blizzaga III
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,184,23,255);           -- Aeroga
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Mumor_II',424,185,48,255);           -- Aeroga II
@@ -3833,12 +3833,12 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,133,68,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,134,75,255);           -- Shellra V
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Iroha_II',427,205,75,255);           -- Flare II
 
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,159,1,255);        -- Stone
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,169,5,255);        -- Water
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,154,9,255);        -- Aero
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,144,9,255);        -- Fire
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,149,17,255);       -- Blizzard
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,154,9,255);        -- Aero
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,159,1,255);        -- Stone
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,164,21,255);       -- Thunder
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,169,5,255);        -- Water
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
