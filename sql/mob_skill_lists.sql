@@ -3461,3 +3461,133 @@ INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3512); -- Sonic Buffet
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3513); -- Entice
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3514); -- Hysteric Assault
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call
+-- Trusts
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto',1011,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naji',1012,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kupipi',1013,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille',1014,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame',1015,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nanaa_Mihgo',1016,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Curilla',1017,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Volker',1018,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ajido-Marujido',1019,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Joachim',1026,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1026,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ulmia',1029,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cherukiki',1031,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid',1036,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Sakura',1042,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Luzaf',1043,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Najelith',1044,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo',1045,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Moogle',1046,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Fablinix',1047,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_D_Shantotto',1049,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Star_Sibyl',1050,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Karaha-Baruha',1051,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kuyin_Hathdenna',1065,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rahal',1066,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Koru-Moru',1067,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Pieuje_UC',1068,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Invincible_Shield_UC',1069,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Apururu_UC',1070,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Jakoh_Wahcondalo_UC',1071,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kukki-Chebukki',1076,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhe_Lhangavo',1079,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela',1080,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mayakov',1081,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Qultada',1082,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Amchuchu',1084,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Brygid',1085,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mildaurion',1086,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Halver',1087,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rongelouts',1088,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Leonoyne',1089,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maximilian',1090,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kayeel-Payeel',1091,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Robel-Akbel',1092,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kupofried',1093,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Selh_teus',1094,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Yoran-Oran_UC',1095,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Sylvie_UC',1096,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abquhbah',1097,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Balamor',1098,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_August',1099,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rosulatia',1100,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Teodor',1101,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ullegore',1102,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Makki-Chebukki',1103,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AATT',1110,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Monberaux',1114,0);
+-- Reserved for future Trust 6000 (ID: 1115)
+-- Reserved for future Trust 6001 (ID: 1116)
+-- Reserved for future Trust 6002 (ID: 1117)
+-- Reserved for future Trust 6003 (ID: 1118) (Formerly Cornelia)
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille_S',1119,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame_UC',1120,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo_UC',1122,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,0);
+-- Reserved for future Trust 6020 (ID: 1135)
+-- Reserved for future Trust 6021 (ID: 1136)
+-- Reserved for future Trust 6022 (ID: 1137)
+
+-- Next available ID: 1138
