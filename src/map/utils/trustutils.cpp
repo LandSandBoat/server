@@ -15,6 +15,7 @@
 #include "../grades.h"
 #include "../map.h"
 #include "../mob_modifier.h"
+#include "../mob_spell_list.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/trust_controller.h"
@@ -267,7 +268,7 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     PTrust->m_OwnerID.targid = PMaster->targid;
 
     // spawn me randomly around master
-    PTrust->loc.p = nearPosition(PMaster->loc.p, CTrustController::SpawnDistance, (float)M_PI * tpzrand::GetRandomNumber(2.0f));
+    PTrust->loc.p = nearPosition(PMaster->loc.p, CTrustController::SpawnDistance + (PMaster->PTrusts.size() * CTrustController::SpawnDistance), (float)M_PI);
     PTrust->look  = trustData->look;
     PTrust->name  = trustData->name;
 
@@ -295,7 +296,13 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     PTrust->SetSLevel(PMaster->GetSLevel());
 
     LoadTrustStatsAndSkills(PTrust);
-    mobutils::SetSpellList(PTrust, trustData->spellList);
+
+    // Spell lists
+    auto spellList = mobSpellList::GetMobSpellList(trustData->spellList);
+    if (spellList)
+    {
+        mobutils::SetSpellList(PTrust, trustData->spellList);
+    }
 
     // TODO: This is temporary until a proper solution for decision making is chosen
     PTrust->setMobMod(MOBMOD_SKILL_LIST, PTrust->m_MobSkillList);

@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "latent_effect.h"
 #include "entities/charentity.h"
 #include "entities/battleentity.h"
+#include "entities/trustentity.h"
 #include "utils/battleutils.h"
 #include "utils/zoneutils.h"
 #include "conquest_system.h"
@@ -808,6 +809,14 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 if (member->id != m_POwner->id)
                 {
                     if (member->GetMJob() == latentEffect.GetConditionsValue())
+                    {
+                        expression = true;
+                        break;
+                    }
+                }
+                for (auto trust : static_cast<CCharEntity*>(member)->PTrusts)
+                {
+                    if (trust->GetMJob() == latentEffect.GetConditionsValue())
                     {
                         expression = true;
                         break;

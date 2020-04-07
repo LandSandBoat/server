@@ -8629,6 +8629,14 @@ inline int32 CLuaBaseEntity::hasPartyJob(lua_State *L)
                 lua_pushboolean(L, true);
                 return 1;
             }
+            for (auto PTrust : PTarget->PTrusts)
+            {
+                if (PTrust->GetMJob() == job)
+                {
+                    lua_pushboolean(L, true);
+                    return 1;
+                }
+            }
         }
     }
     lua_pushboolean(L, false);
@@ -10313,6 +10321,49 @@ inline int32 CLuaBaseEntity::updateClaim(lua_State *L)
         battleutils::ClaimMob((CMobEntity*)m_PBaseEntity, (CBattleEntity*)PEntity->GetBaseEntity());
     }
     return 0;
+}
+
+/************************************************************************
+*  Function: hasEnmity()
+*  Purpose : Find out if an entity has any enmity from any mob nearby
+*  Example : player::hasEnmity()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::hasEnmity(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC && m_PBaseEntity->objtype != TYPE_PET && m_PBaseEntity->objtype != TYPE_TRUST);
+
+    SpawnIDList_t* mobList{};
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        mobList = &static_cast<CCharEntity*>(m_PBaseEntity)->SpawnMOBList;
+    }
+    else if (m_PBaseEntity->objtype == TYPE_PET)
+    {
+        auto trust = static_cast<CPetEntity*>(m_PBaseEntity);
+        mobList = &static_cast<CCharEntity*>(trust->PMaster)->SpawnMOBList;
+    }
+    else if (m_PBaseEntity->objtype == TYPE_TRUST)
+    {
+        auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
+        mobList = &static_cast<CCharEntity*>(trust->PMaster)->SpawnMOBList;
+    }
+
+    bool hasEnmity = false;
+    for (SpawnIDList_t::const_iterator it = mobList->begin(); it != mobList->end(); ++it)
+    {
+        auto* mob = static_cast<CMobEntity*>(it->second);
+        if (mob->PEnmityContainer->HasID(m_PBaseEntity->id))
+        {
+            hasEnmity = true;
+            break;
+        }
+    }
+
+    lua_pushboolean(L, hasEnmity);
+    return 1;
 }
 
 /************************************************************************
@@ -14531,6 +14582,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmityFromCure),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetEnmity),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateClaim),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasEnmity),
 
     // Status Effects
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addStatusEffect),

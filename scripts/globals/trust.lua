@@ -33,6 +33,11 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- TODO: Block summoning trusts if someone recently joined party
 
+    -- Trusts cannot be summoned if you have hate
+    if caster:hasEnmity() then
+        return tpz.msg.basic.TRUST_NO_CAST_TRUST
+    end
+
     -- Check party for trusts
     local num_pt = 0
     local num_trusts = 0

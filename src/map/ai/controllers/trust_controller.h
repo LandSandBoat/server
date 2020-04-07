@@ -38,17 +38,20 @@ public:
 
     bool Ability(uint16 targid, uint16 abilityid) override;
 
-    static constexpr float RoamDistance{ 5.5f };
-    static constexpr float SpawnDistance{ 5.5f };
+    static constexpr float RoamDistance{ 2.0f };
+    static constexpr float SpawnDistance{ 3.0f };
+    static constexpr float WarpDistance{ 30.0f };
 
 private:
     void DoCombatTick(time_point tick) override;
     void DoRoamTick(time_point tick) override;
 
     CBattleEntity* GetTopEnmity();
-    position_t GetDeclumpedPosition(position_t target_pos);
+    uint8 GetPartyPosition();
 
-    CBattleEntity* m_LastTopEntity;
+    CBattleEntity* m_LastTopEnmity;
+    time_point m_CombatEndTime;
+    time_point m_LastHealTickTime;
 };
 
 #endif // _TRUSTCONTROLLER

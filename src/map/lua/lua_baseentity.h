@@ -497,6 +497,7 @@ public:
     int32 updateEnmityFromCure(lua_State*);
     int32 resetEnmity(lua_State*);             //resets enmity to player for specificed mob
     int32 updateClaim(lua_State*);             // Adds Enmity to player for specified mob and claims
+    int32 hasEnmity(lua_State*);               // Checks if you have ANY enmity with ANY mob in the zone
 
     // Status Effects
     int32 addStatusEffect(lua_State*);         // Adds status effect to character

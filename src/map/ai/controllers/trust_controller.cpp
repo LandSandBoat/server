@@ -43,7 +43,7 @@ CTrustController::~CTrustController()
     POwner->allegiance = ALLEGIANCE_PLAYER;
     POwner->PMaster = nullptr;
 
-    m_LastTopEntity = nullptr;
+    m_LastTopEnmity = nullptr;
 }
 
 void CTrustController::Despawn()
@@ -76,17 +76,19 @@ void CTrustController::DoCombatTick(time_point tick)
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
-        m_LastTopEntity = nullptr;
+        m_LastTopEnmity = nullptr;
+        m_CombatEndTime = m_Tick;
     }
 
     if (POwner->PMaster->GetBattleTargetID() != POwner->GetBattleTargetID())
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
-        m_LastTopEntity = nullptr;
+        m_LastTopEnmity = nullptr;
     }
 
     float currentDistance = distance(POwner->loc.p, POwner->PMaster->loc.p);
     PTarget = POwner->GetBattleTarget();
+    uint8 currentPartyPos = GetPartyPosition();
 
     if (PTarget)
     {
@@ -94,22 +96,44 @@ void CTrustController::DoCombatTick(time_point tick)
         {
             POwner->PAI->PathFind->LookAt(PTarget->loc.p);
             std::unique_ptr<CBasicPacket> err;
-            if (!POwner->CanAttack(PTarget, err))
+            if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
             {
-                if (POwner->speed > 0)
+                if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PTarget->loc.p, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                 {
-                    auto new_position = GetDeclumpedPosition(PTarget->loc.p);
-                    POwner->PAI->PathFind->PathAround(new_position, 3.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SLIDE);
                     POwner->PAI->PathFind->FollowPath();
                 }
+                else if (POwner->GetSpeed() > 0)
+                {
+                    POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
+                }
             }
+            else
+            {
+                for (auto POtherTrust : static_cast<CCharEntity*>(POwner->PMaster)->PTrusts)
+                {
+                    if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f)
+                    {
+                        auto angle = getangle(POwner->loc.p, PTarget->loc.p) + 64;
+                        auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
+                        position_t new_pos{ POwner->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
+                            PTarget->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0 };
+
+                        if (POwner->PAI->PathFind->ValidPosition(new_pos))
+                        {
+                            POwner->PAI->PathFind->PathTo(new_pos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                        }
+                        break;
+                    }
+                }
+            }
+            POwner->PAI->PathFind->FollowPath();
         }
 
         auto currentTopEnmity = GetTopEnmity();
-        if (m_LastTopEntity != currentTopEnmity)
+        if (m_LastTopEnmity != currentTopEnmity)
         {
             POwner->PAI->EventHandler.triggerListener("ENMITY_CHANGED", POwner, POwner->PMaster, PTarget);
-            m_LastTopEntity = currentTopEnmity;
+            m_LastTopEnmity = currentTopEnmity;
         }
 
         POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
@@ -118,23 +142,60 @@ void CTrustController::DoCombatTick(time_point tick)
 
 void CTrustController::DoRoamTick(time_point tick)
 {
-    if (POwner->PMaster->PAI->IsEngaged() && GetTopEnmity() == POwner->PMaster)
+    auto PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+    bool trustEngageCondition = (PMaster->GetBattleTarget() && PMaster->GetBattleTarget()->PLastAttacker == PMaster);
+
+    if (PMaster->PAI->IsEngaged() && trustEngageCondition)
     {
-        POwner->PAI->Internal_Engage(POwner->PMaster->GetBattleTargetID());
+        POwner->PAI->Internal_Engage(PMaster->GetBattleTargetID());
     }
 
-    float currentDistance = distance(POwner->loc.p, POwner->PMaster->loc.p);
+    uint8 currentPartyPos = GetPartyPosition();
+    CBattleEntity* PFollowTarget = (GetPartyPosition() > 0) ? (CBattleEntity*)PMaster->PTrusts.at(currentPartyPos - 1) : POwner->PMaster;
+    float currentDistance = distance(POwner->loc.p, PFollowTarget->loc.p);
+
+    for (auto POtherTrust : PMaster->PTrusts)
+    {
+        if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
+        {
+            auto angle = getangle(POwner->loc.p, POtherTrust->loc.p) + 64;
+            auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
+            position_t new_pos{ POwner->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
+                POtherTrust->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0 };
+
+            if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            {
+                POwner->PAI->PathFind->FollowPath();
+            }
+            break;
+        }
+    }
 
     if (currentDistance > RoamDistance)
     {
-        auto new_position = GetDeclumpedPosition(POwner->PMaster->loc.p);
-        if (currentDistance < 30.0f && POwner->PAI->PathFind->PathAround(new_position, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK | PATHFLAG_SLIDE))
+        if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
             POwner->PAI->PathFind->FollowPath();
         }
         else if (POwner->GetSpeed() > 0)
         {
-            POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
+            POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p, RoamDistance);
+        }
+    }
+
+    if (POwner->CanRest() &&
+        m_Tick - m_CombatEndTime > 10s &&
+        m_Tick - m_LastHealTickTime > 3s)
+    {
+        if (POwner->Rest(0.03f))
+        {
+            m_LastHealTickTime = m_Tick;
+            POwner->updatemask |= UPDATE_HP;
+        }
+        else if (POwner->Rest(0.05f))
+        {
+            m_LastHealTickTime = m_Tick;
+            POwner->updatemask |= UPDATE_HP;
         }
     }
 }
@@ -158,36 +219,15 @@ CBattleEntity* CTrustController::GetTopEnmity()
     return PEntity;
 }
 
-position_t CTrustController::GetDeclumpedPosition(position_t target_pos)
+uint8 CTrustController::GetPartyPosition()
 {
-    auto lerp = [](float a, float b, float f)
+    auto& trustList = static_cast<CCharEntity*>(POwner->PMaster)->PTrusts;
+    for (uint8 i = 0; i < trustList.size(); ++i)
     {
-        return a + f * (b - a);
-    };
-
-    auto lerp_position = [&](position_t a, position_t b, float ratio)
-    {
-        float safe_ratio = std::clamp(ratio, 0.0f, 1.0f);
-        position_t final_pos{
-            lerp(a.x, b.x, ratio),
-            lerp(a.y, b.y, ratio),
-            lerp(a.z, b.z, ratio),
-            0, 0};
-        return final_pos;
-    };
-
-    position_t final_pos = target_pos;
-    for (auto PTrust : static_cast<CCharEntity*>(POwner->PMaster)->PTrusts)
-    {
-        if (POwner != PTrust && distance(POwner->loc.p, PTrust->loc.p) < 5.0f)
+        if (trustList.at(i)->id == POwner->id)
         {
-            auto angle = getangle(POwner->loc.p, PTrust->loc.p);
-            position_t declumped_pos{ POwner->loc.p.x - (cosf(rotationToRadian(angle)) * 2.0f),
-                POwner->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * 2.0f), 0, 0 };
-
-            final_pos = lerp_position(final_pos, declumped_pos, 0.5f);
+            return i;
         }
     }
-
-    return lerp_position(final_pos, target_pos, 0.1f);
+    return 0;
 }
