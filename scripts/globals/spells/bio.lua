@@ -48,14 +48,12 @@ function onSpellCast(caster,target,spell)
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)
 
-    -- Calculate DoT effect.  Caps at 3.  Known breakpoints.
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
     local dotdmg = 0
-    if skillLvl > 80 then
-        dotdmg = 3
-    elseif skillLvl > 40 then
-        dotdmg = 2
-    else
-        dotdmg = 1
+    if     skillLvl > 80 then dotdmg = 3
+    elseif skillLvl > 40 then dotdmg = 2
+    else                      dotdmg = 1
     end
 
     -- Do it!

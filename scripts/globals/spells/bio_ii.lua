@@ -48,26 +48,11 @@ function onSpellCast(caster,target,spell)
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)
 
-    -- Calculate DoT effect. Unknown formula, but known cap of 8 and some known breakpoints.
-    local dotdmg = 0
-    if skillLvl > 290 then
-        dotdmg = 8
-    elseif skillLvl > 268 then
-        dotdmg = 7
-    -- known breakpoints above this line. unknown breakpoints below. for unknown breakpoints, I divided the remaining skill equally
-    elseif skillLvl > 223 then
-        dotdmg = 6
-    elseif skillLvl > 178 then
-        dotdmg = 5
-    elseif skillLvl > 133 then
-        dotdmg = 4
-    elseif skillLvl > 88 then
-        dotdmg = 3
-    elseif skillLvl > 43 then
-        dotdmg = 2
-    else
-        dotdmg = 1
-    end
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
+    -- This formula gives correct values for every breakpoint listed on that site
+    local dotdmg = math.floor((skillLvl + 29) / 40)
+    dotdmg = utils.clamp(dotdmg, 3, 8)
 
     -- Do it!
     target:addStatusEffect(tpz.effect.BIO, dotdmg, 3, duration, 0, 15, 2)
