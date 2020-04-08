@@ -730,6 +730,10 @@ end
 
 function dynamis.procMonster(mob, player)
     if player and player:getAllegiance() == 1 then
+        local master = player:getMaster()
+        if master then
+            player = master
+        end
         local extensions = dynamis.getExtensions(player)
         if extensions > 2 then
             if player:getSubJob() == tpz.job.NONE and math.random(0,99) == 0 then
