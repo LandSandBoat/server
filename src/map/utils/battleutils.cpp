@@ -4064,8 +4064,7 @@ namespace battleutils
                     if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender
                         && attacker->PClaimedMob->isAlive() && attacker->PClaimedMob->m_OwnerID.id == attacker->id)
                     { // unclaim any other living mobs owned by attacker
-                        attacker->PClaimedMob->m_OwnerID.clean();
-                        attacker->PClaimedMob->updatemask |= UPDATE_STATUS;
+                        static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
                         attacker->PClaimedMob = nullptr;
                     }
                     if (!mob->CalledForHelp())
@@ -4082,6 +4081,12 @@ namespace battleutils
                         }
                         else
                         { // mob is unclaimed
+                            if (PDefender->isDead())
+                            { // always give rewards on the killing blow
+                                mob->m_OwnerID.id = PAttacker->id;
+                                mob->m_OwnerID.targid = PAttacker->targid;
+                                return;
+                            }
                             PAttacker->ForAlliance([&PAttacker, &PDefender, &mob, &attacker](CBattleEntity* PMember){
                                 if (mob->PEnmityContainer->GetHighestEnmity() == PMember || mob->PEnmityContainer->GetHighestEnmity() == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
@@ -4150,8 +4155,7 @@ namespace battleutils
             });
             if (!found)
             { // if mob didn't pass to someone else, unclaim it
-                mob->m_OwnerID.clean();
-                mob->updatemask |= UPDATE_STATUS;
+                static_cast<CMobController*>(mob->PAI->GetController())->TapDeclaimTime();
             }
         }
         PChar->PClaimedMob = nullptr;
