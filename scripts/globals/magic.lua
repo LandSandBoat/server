@@ -1344,7 +1344,11 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         end
     elseif magicSkill == tpz.skill.ENFEEBLING_MAGIC then -- Enfeebling Magic
         if caster:hasStatusEffect(tpz.effect.SABOTEUR) then
-            duration = duration * 2
+            if target:isNM() then
+                duration = duration * 1.25
+            else
+                duration = duration * 2
+            end
         end
 
         -- After Saboteur according to bg-wiki

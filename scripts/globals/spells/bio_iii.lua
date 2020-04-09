@@ -1,8 +1,6 @@
 -----------------------------------------
 -- Spell: Bio III
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
--- caster:getMerit() returns a value which is equal to the number of merit points TIMES the value of each point
--- Bio III value per point is '30' This is a constant set in the table 'merits'
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -16,7 +14,8 @@ function onMagicCastingCheck(caster,target,spell)
 end
 
 function onSpellCast(caster,target,spell)
-    local basedmg = caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 4
+    local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
+    local basedmg = skillLvl / 4
     local params = {}
     params.dmg = basedmg
     params.multiplier = 3
@@ -44,17 +43,30 @@ function onSpellCast(caster,target,spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
-    local duration = caster:getMerit(tpz.merit.BIO_III)
-    -- If caster has the spell but no merits in it, they are either a mob or we assume they are GM or otherwise gifted with max duration
-    if duration == 0 then
-        duration = 150
-    end
+    local duration = 180
 
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)
 
-    -- Calculate DoT effect (rough, though fairly accurate)
-    local dotdmg = 4 + math.floor(caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 60)
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
+    -- this is a tiered calculation that has at least three tiers,
+    -- so I'll use breakpoints for human readability
+    local dotdmg = 0
+    if     skillLvl > 400 then dotdmg = 17
+    elseif skillLvl > 373 then dotdmg = 16
+    elseif skillLvl > 346 then dotdmg = 15
+    elseif skillLvl > 319 then dotdmg = 14
+    elseif skillLvl > 291 then dotdmg = 13
+    elseif skillLvl > 280 then dotdmg = 12
+    elseif skillLvl > 269 then dotdmg = 11
+    elseif skillLvl > 258 then dotdmg = 10
+    elseif skillLvl > 246 then dotdmg =  9
+    elseif skillLvl > 211 then dotdmg =  8
+    elseif skillLvl > 171 then dotdmg =  7
+    elseif skillLvl > 131 then dotdmg =  6
+    else                       dotdmg =  5
+    end
 
     -- Do it!
     target:addStatusEffect(tpz.effect.BIO, dotdmg, 3, duration, 0, 20, 3)
