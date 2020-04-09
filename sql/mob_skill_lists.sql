@@ -3590,4 +3590,27 @@ INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call
 -- Reserved for future Trust 6021 (ID: 1136)
 -- Reserved for future Trust 6022 (ID: 1137)
 
--- Next available ID: 1138
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,816); -- Fang RUsh
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1038,820); -- Thunder Breath
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,814); -- Deadly Drive 
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1039,822); -- Chaos Breath
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,813); -- Dispelling Wind 
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1040,819); -- Blizzard Breath
+
+-- Next available ID: 1141
+
