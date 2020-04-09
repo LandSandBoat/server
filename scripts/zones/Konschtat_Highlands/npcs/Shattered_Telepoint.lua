@@ -42,7 +42,7 @@ function onEventFinish(player, csid, option)
     if csid == 912 then
         player:setCharVar("cspromy2", 0)
         player:setCharVar("cs2ndpromy", 1)
-        player:setPos(-267.194, -40.634, -280.019, 0, 14) -- To Hall of Transference {R}
+        player:setPos(185.891, 0, -52.331, 128, 18) -- To Promyvion Dem
     elseif csid == 913 and option == 0 then
         player:setPos(-267.194, -40.634, -280.019, 0, 14) -- To Hall of Transference {R}
     end
