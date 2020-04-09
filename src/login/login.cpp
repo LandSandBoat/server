@@ -62,7 +62,7 @@ int32 do_init(int32 argc, char** argv)
 {
     int32 i;
     LOGIN_CONF_FILENAME = "conf/login.conf";
-    VERSION_INFO_FILENAME = "version.info";
+    VERSION_INFO_FILENAME = "conf/version.conf";
     MAINT_CONF_FILENAME = "conf/maint.conf";
 
     //srand(gettick());
@@ -493,7 +493,7 @@ void login_config_default()
 void version_info_default()
 {
     version_info.client_ver = "99999999_9"; // xxYYMMDD_m = xx:MajorRelease YY:year MM:month DD:day _m:MinorRelease
-    version_info.ver_lock = 1;
+    version_info.ver_lock = 2;
 }
 
 void maint_config_read(const char* key, const char* value)
