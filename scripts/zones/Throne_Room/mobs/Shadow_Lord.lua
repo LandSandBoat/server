@@ -7,6 +7,15 @@ local ID = require("scripts/zones/Throne_Room/IDs");
 require("scripts/globals/status");
 require("scripts/globals/titles");
 
+function onMobSpawn(mob)
+    if mob:getID() >= ID.mob.SHADOW_LORD_STAGE_2_OFFSET then
+        if GetMobByID(mob:getID() - 3):isDead() then
+            local battlefield = mob:getBattlefield()
+            battlefield:setLocalVar("phaseChange", 0)
+        end
+    end
+end
+
 function onMobFight(mob,target)
     -- 1st form
     -- after change magic or physical immunity every 5min or 1k dmg
@@ -74,7 +83,6 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004);
         player:setCharVar("mobid",mob:getID());
     else
-        mob:getBattlefield():setLocalVar("loot", 0)
         player:addTitle(tpz.title.SHADOW_BANISHER);
     end
     -- reset everything on death

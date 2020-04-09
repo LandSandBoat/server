@@ -32,7 +32,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 11 then
-        local inst = player:getCharVar("bcnm_instanceid")
+        local inst = player:getBattlefield():getArea()
 
         if inst >= 1 and inst <= 3 then
             -- players are healed in between fights, but their TP is set to 0

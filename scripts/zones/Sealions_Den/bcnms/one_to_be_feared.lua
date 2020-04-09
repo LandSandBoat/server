@@ -11,8 +11,7 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 function onBattlefieldInitialise(battlefield)
-    battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("lootSpawned", 1)
+    battlefield:setLocalVar("phaseChange", 1)
 end
 
 function onBattlefieldRegister(player, battlefield)
