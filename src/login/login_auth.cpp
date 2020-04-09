@@ -100,6 +100,9 @@ int32 login_parse(int32 fd)
             return -1;
         }
 
+        Sql_EscapeString(SqlHandle, escaped_name, name.c_str());
+        Sql_EscapeString(SqlHandle, escaped_pass, password.c_str());
+
         switch (code)
         {
         case LOGIN_ATTEMPT:
@@ -107,8 +110,6 @@ int32 login_parse(int32 fd)
             const char* fmtQuery = "SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
-            Sql_EscapeString(SqlHandle, escaped_name, name.c_str());
-            Sql_EscapeString(SqlHandle, escaped_pass, password.c_str());
             int32 ret = Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_pass);
             if (ret != SQL_ERROR  && Sql_NumRows(SqlHandle) != 0)
             {
@@ -208,8 +209,6 @@ int32 login_parse(int32 fd)
         break;
         case LOGIN_CREATE:
             //looking for same login
-            Sql_EscapeString(SqlHandle, escaped_name, name.c_str());
-            Sql_EscapeString(SqlHandle, escaped_pass, password.c_str());
             if (Sql_Query(SqlHandle, "SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
             {
                 session[fd]->wdata.resize(1);
@@ -273,6 +272,87 @@ int32 login_parse(int32 fd)
                 do_close_login(sd, fd);
             }
             break;
+        case LOGIN_CHANGE_PASSWORD:
+        {
+            const char* fmtQuery = "SELECT accounts.id,accounts.status \
+                                    FROM accounts \
+                                    WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
+            int32 ret = Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_pass);
+            if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+            {
+                session[fd]->wdata.resize(1);
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
+                ShowWarning("login_parse: user" CL_WHITE"<%s>" CL_RESET" could not be found using the provided information. Aborting.\n", escaped_name);
+                do_close_login(sd, fd);
+                return 0;
+            }
+
+            ret = Sql_NextRow(SqlHandle);
+
+            sd->accid = (uint32)Sql_GetUIntData(SqlHandle, 0);
+            uint8 status = (uint8)Sql_GetUIntData(SqlHandle, 1);
+
+            if (status & ACCST_BANNED)
+            {
+                session[fd]->wdata.resize(1);
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                ShowInfo("login_parse: banned user" CL_WHITE"<%s>" CL_RESET" detected. Aborting.\n", escaped_name);
+                do_close_login(sd, fd);
+                return 0;
+            }
+
+            if (status & ACCST_NORMAL)
+            {
+                // Account info verified. Now request the new password.
+                session[fd]->wdata.resize(1);
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_REQUEST_NEW_PASSWORD;
+                flush_fifo(fd);
+                session[fd]->rdata.resize(0);  // Clear read buffer
+                session[fd]->func_recv(fd);
+
+                // Packet expects a single password parameter no longer than
+                // 16 bytes.
+                size_t size = session[fd]->rdata.size();
+                if (size == 0 || size > 16)
+                {
+                    session[fd]->wdata.resize(1);
+                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                    ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user" CL_WHITE"<%s>" CL_RESET".\n", size, escaped_name);
+                    do_close_login(sd, fd);
+                    return 0;
+                }
+
+                char* buff2 = &session[fd]->rdata[0];
+                std::string updated_password(buff2, buff2 + 16);
+                char escaped_updated_password[16 * 2 + 1];
+                Sql_EscapeString(SqlHandle, escaped_updated_password, updated_password.c_str());
+
+                fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
+                Sql_Query(SqlHandle, fmtQuery, sd->accid);
+
+                fmtQuery = "UPDATE accounts SET accounts.password = PASSWORD('%s') WHERE accounts.id = %d";
+                ret = Sql_Query(SqlHandle, fmtQuery, escaped_updated_password, sd->accid);
+                if (ret == SQL_ERROR)
+                {
+                    session[fd]->wdata.resize(1);
+                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                    ShowWarning("login_parse: Error trying to update password in database for user" CL_WHITE"<%s>" CL_RESET".\n", escaped_name);
+                    do_close_login(sd, fd);
+                    return 0;
+                }
+
+                memset(&session[fd]->wdata[0], 0, 33);
+                session[fd]->wdata.resize(33);
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CHANGE_PASSWORD;
+                ref<uint32>(session[fd]->wdata.data(), 1) = sd->accid;
+                flush_fifo(fd);
+                do_close_tcp(fd);
+
+                ShowInfo("login_parse: password updated successfully.\n");
+                return 0;
+            }
+        }
+        break;
         default:
             ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>\n", code, ip2str(session[fd]->client_addr, nullptr));
             do_close_login(sd, fd);
