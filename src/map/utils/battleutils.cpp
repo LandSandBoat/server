@@ -4082,8 +4082,9 @@ namespace battleutils
                         }
                         else
                         { // mob is unclaimed
-                            PAttacker->ForAlliance([&PAttacker, &PDefender, &mob, &attacker](CBattleEntity* PMember){
-                                if (mob->PEnmityContainer->GetHighestEnmity() == PMember || mob->PEnmityContainer->GetHighestEnmity() == PMember->PPet)
+                            CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
+                            PAttacker->ForAlliance([&](CBattleEntity* PMember){
+                                if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
                                     mob->m_OwnerID.id = PAttacker->id;
                                     mob->m_OwnerID.targid = PAttacker->targid;
