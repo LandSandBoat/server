@@ -7,8 +7,7 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 
-function allHeirMobsDead(mob)
-    local battlefield = mob:getBattlefield()
+function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
     local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
     for i = instOffset + 3, instOffset + 13 do
@@ -25,7 +24,7 @@ end
 
 function onMobSpawn(mob)
     local battlefield = mob:getBattlefield()
-    if allHeirMobsDead(mob) then
+    if battlefield and phaseChangeReady(battlefield) then
        battlefield:setLocalVar("phaseChange", 0)
     end
 end
