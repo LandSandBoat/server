@@ -1323,8 +1323,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.reaction = REACTION_EVADE;
             actionTarget.speceffect = SPECEFFECT_NONE;
             actionTarget.messageID = 354;
-
-            battleutils::ClaimMob(PTarget, this);
             hitCount = i; // end barrage, shot missed
         }
 
@@ -1393,8 +1391,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         actionTarget.messageID = 0;
         actionTarget.reaction = REACTION_EVADE;
         PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
-
-        battleutils::ClaimMob(PTarget, this);
     }
 
     if (actionTarget.speceffect == SPECEFFECT_HIT && actionTarget.param > 0)
@@ -1413,7 +1409,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
-
+    battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
     // only remove detectables
     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);

@@ -2039,7 +2039,10 @@ namespace battleutils
         if (damage < 0)
             damage = -corrected;
 
-        battleutils::ClaimMob(PDefender, PAttacker);
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            battleutils::ClaimMob(PDefender, PAttacker);
+        }
 
         int16 standbyTp = 0;
 
@@ -4042,8 +4045,7 @@ namespace battleutils
     {
         if (PDefender->objtype == TYPE_MOB)
         {
-            CBattleEntity* battleTarget = PAttacker->GetBattleTarget();
-            CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
+            CBattleEntity* original = PAttacker;
             if (PAttacker->objtype != TYPE_PC)
             {
                 if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
@@ -4052,9 +4054,12 @@ namespace battleutils
                 }
                 else
                 {
-                    PAttacker = nullptr;
+                    return;
                 }
             }
+            CBattleEntity* battleTarget = original->GetBattleTarget();
+            CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
+            mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true);
             if (PAttacker)
             {
                 CCharEntity* attacker = static_cast<CCharEntity*>(PAttacker);

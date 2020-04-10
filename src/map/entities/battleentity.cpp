@@ -1666,12 +1666,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         {
             attackRound.DeleteAttackSwing();
         }
-        battleutils::ClaimMob(PTarget, this);
         if (list.actionTargets.size() == 8)
         {
             break;
         }
     }
+    battleutils::ClaimMob(PTarget, this);
     PAI->EventHandler.triggerListener("ATTACK", this, PTarget, &action);
     PTarget->PAI->EventHandler.triggerListener("ATTACKED", PTarget, this, &action);
     /////////////////////////////////////////////////////////////////////////////////////////////
