@@ -28,7 +28,7 @@ function onTrigger(player,npc)
     local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS then
+    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 then
         if TrustBastok == QUEST_AVAILABLE and (TrustWindurst == QUEST_COMPLETED or TrustSandoria == QUEST_COMPLETED) then
             player:startEvent(438)
         elseif TrustBastok == QUEST_AVAILABLE and TrustWindurst == QUEST_AVAILABLE and TrustSandoria == QUEST_AVAILABLE then
