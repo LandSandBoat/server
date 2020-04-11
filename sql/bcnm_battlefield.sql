@@ -630,6 +630,18 @@ INSERT INTO `bcnm_battlefield` VALUES (196,2,17465362,3);
 INSERT INTO `bcnm_battlefield` VALUES (196,2,17465363,0);
 INSERT INTO `bcnm_battlefield` VALUES (196,3,17465364,3);
 INSERT INTO `bcnm_battlefield` VALUES (196,3,17465365,0);
+INSERT INTO `bcnm_battlefield` VALUES (198,1,17465393,3); -- eye of the storm
+INSERT INTO `bcnm_battlefield` VALUES (198,1,17465394,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,1,17465395,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,1,17465396,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,2,17465399,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,2,17465398,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,2,17465400,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,2,17465401,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,3,17465403,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,3,17465404,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,3,17465405,3);
+INSERT INTO `bcnm_battlefield` VALUES (198,3,17465406,3);
 INSERT INTO `bcnm_battlefield` VALUES (224,1,17473537,3); -- moonlit_path
 INSERT INTO `bcnm_battlefield` VALUES (224,2,17473538,3);
 INSERT INTO `bcnm_battlefield` VALUES (224,3,17473539,3);

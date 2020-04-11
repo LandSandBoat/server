@@ -30,14 +30,20 @@
 * Login-Server data parse
 *-------------------------------------------*/
 /*main events*/
-#define LOGIN_ATTEMPT      0x10
-#define LOGIN_CREATE       0x20
-/*return result*/
-#define LOGIN_SUCCESS          0x01
-#define LOGIN_SUCCESS_CREATE   0x03
+#define LOGIN_ATTEMPT               0x10
+#define LOGIN_CREATE                0x20
+#define LOGIN_CHANGE_PASSWORD       0x30
 
-#define LOGIN_ERROR            0x02
-#define LOGIN_ERROR_CREATE     0x04
+/*return result*/
+#define LOGIN_SUCCESS                    0x01
+#define LOGIN_SUCCESS_CREATE             0x03
+#define LOGIN_SUCCESS_CHANGE_PASSWORD    0x06
+
+#define LOGIN_REQUEST_NEW_PASSWORD       0x05
+
+#define LOGIN_ERROR                      0x02
+#define LOGIN_ERROR_CREATE               0x04
+#define LOGIN_ERROR_CHANGE_PASSWORD      0x07
 
 extern int32 login_fd;
 /*

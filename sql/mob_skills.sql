@@ -639,8 +639,8 @@ INSERT INTO `mob_skills` VALUES (815,487,'wind_wall',0,7.0,2000,1500,1,0,0,0,0,0
 INSERT INTO `mob_skills` VALUES (816,488,'fang_rush',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (817,489,'dread_shriek',1,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (818,490,'tail_crush',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (819,563,'blizzard_breath',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (820,564,'thunder_breath',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (819,491,'blizzard_breath',4,18.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (820,492,'thunder_breath',4,18.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (821,493,'radiant_breath',4,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (822,494,'chaos_breath',4,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (823,495,'fire_blade',0,7,2000,0,1,0,0,0,0,0,0);
