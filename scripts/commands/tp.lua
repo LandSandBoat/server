@@ -36,7 +36,7 @@ function onTrigger(player, tp, target)
             error(player, string.format( "Player named '%s' not found!", target ) )
             return
         end
-    elseif cursor_target
+    elseif cursor_target then
         targ = cursor_target
     end
 
