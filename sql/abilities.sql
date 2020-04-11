@@ -290,7 +290,7 @@ INSERT INTO `abilities` VALUES (306,'maintenance',18,30,257,90,214,0,0,83,2000,0
 INSERT INTO `abilities` VALUES (311,'stymie',5,96,1,3600,254,0,0,275,2000,0,6,20.0,0,1,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (319,'mikage',13,96,1,3600,254,0,0,283,2000,0,6,20.0,0,1,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (327,'bolster',21,0,1,3600,0,0,0,33,2000,0,6,20.0,0,1,300,0,0,NULL);
-INSERT INTO `abilities` VALUES (340,'elemental_sforzo',22,0,1,3600,0,0,0,302,2000,0,6,20.0,0,0,0,0,0,'SOA');
+INSERT INTO `abilities` VALUES (340,'elemental_sforzo',22,0,1,3600,0,0,0,302,2000,0,6,20.0,0,1800,7200,0,0,'SOA');
 INSERT INTO `abilities` VALUES (341,'Rune_enchantment',22,5,1,0,0,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (342,'Ignis',22,5,1,10,0,0,0,291,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (343,'Gelus',22,5,1,10,0,0,0,292,2000,0,6,20.0,0,1,300,0,0,'SOA');
