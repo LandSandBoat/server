@@ -812,7 +812,8 @@ tpz.effect =
     SKILLCHAIN               = 799,
     DYNAMIS                  = 800,
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
-    -- PLACEHOLDER              = 802, -- Description
+    ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
+    -- PLACEHOLDER              = 803, -- Description
     -- 802-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }

@@ -421,3 +421,26 @@ INSERT INTO bcnm_treasure_chests VALUES (1152,3,17051654);
 INSERT INTO bcnm_treasure_chests VALUES (1153,1,17051660); -- shadows_of_the_mind
 INSERT INTO bcnm_treasure_chests VALUES (1153,2,17051666);
 INSERT INTO bcnm_treasure_chests VALUES (1153,3,17051672);
+
+-- ----------------------------
+-- Apollyon
+-- ----------------------------
+INSERT INTO bcnm_treasure_chests VALUES (1290,2,16932984); -- NW_Apollyon
+INSERT INTO bcnm_treasure_chests VALUES (1291,1,16932909); -- SW_Apollyon
+INSERT INTO bcnm_treasure_chests VALUES (1292,4,16933112); -- NE_Apollyon
+INSERT INTO bcnm_treasure_chests VALUES (1293,3,16933031); -- SE_Apollyon
+INSERT INTO bcnm_treasure_chests VALUES (1294,6,16933126); -- CS_Apollyon
+INSERT INTO bcnm_treasure_chests VALUES (1296,5,16933123); -- Central_Apollyon
+
+-- ----------------------------
+-- Temenos
+-- ----------------------------
+INSERT INTO bcnm_treasure_chests VALUES (1298,3,16928958); -- Temenos - Western Tower
+INSERT INTO bcnm_treasure_chests VALUES (1299,1,16928830); -- Temenos - Northern Tower
+INSERT INTO bcnm_treasure_chests VALUES (1300,2,16928890); -- Temenos - Eastern Tower
+INSERT INTO bcnm_treasure_chests VALUES (1303,7,16929045); -- Central Temenos - 1st Floor
+INSERT INTO bcnm_treasure_chests VALUES (1304,6,16929029); -- Central Temenos - 2nd Floor
+INSERT INTO bcnm_treasure_chests VALUES (1305,5,16929004); -- Central Temenos - 3rd Floor
+INSERT INTO bcnm_treasure_chests VALUES (1306,4,16928965); -- Central Temenos - 4th Floor
+INSERT INTO bcnm_treasure_chests VALUES (1301,8,16929052); -- Central Temenos - Basement
+
