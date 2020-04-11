@@ -809,9 +809,18 @@ void SetupBattlefieldMob(CMobEntity* PMob)
 
     // never despawn
     PMob->SetDespawnTime(0s);
-    // do not roam around
-    PMob->m_roamFlags |= ROAMFLAG_EVENT;
-    PMob->m_maxRoamDistance = 0.5f;
+    // Limbus mobs
+    uint16 zoneID = PMob->getZone();
+    if(zoneID == 37 || zoneID == 37) 
+    {
+        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
+        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
+    }
+    else
+    {// do not roam around
+        PMob->m_roamFlags |= ROAMFLAG_EVENT;
+        PMob->m_maxRoamDistance = 0.5f;
+    }
 
     if((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
     {

@@ -1,13 +1,14 @@
 -----------------------------------
--- Area: temenos
--- NPC:  Matter diffusion module
+-- Area: Appolyon
+-- NPC:  Radiant_Aureole
 -- !pos
 -----------------------------------
 require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Temenos/IDs")
+local ID = require("scripts/zones/Apollyon/IDs")
 
 function onTrade(player, npc, trade)
-    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD) then
+    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) then
+        player:setCharVar("ApollyonEntrance", 0)
         TradeBCNM(player, npc, trade)
     else
         player:messageSpecial(ID.text.NO_KEY)
@@ -15,7 +16,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD) then
+    if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) then
+        player:setCharVar("ApollyonEntrance", 0)
         EventTriggerBCNM(player, npc)
     else
         player:messageSpecial(ID.text.NO_KEY)
@@ -33,5 +35,7 @@ function onEventUpdate(player, csid, option, extras)
 end
 
 function onEventFinish(player, csid, option)
-    EventFinishBCNM(player, csid, option)
+    if not EventFinishBCNM(player, csid, option) then
+        player:setCharVar("ApollyonEntrance", 0)
+    end
 end

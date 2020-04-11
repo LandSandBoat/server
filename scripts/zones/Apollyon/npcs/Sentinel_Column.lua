@@ -3,42 +3,30 @@
 -- NPC:  Sentinel_Column
 -- !pos 643 0 -609 38
 -----------------------------------
-require("scripts/globals/limbus");
 
------------------------------------
--- onTrade Action
------------------------------------
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2127) then
+        player:startEvent(221, 65)
+    elseif npcUtil.tradeHas(trade, {1909, 1910, 1987, 1988}) then
+        player:startEvent(221, 33)
+    end
+end
 
-function onTrade(player,npc,trade)
-end;
+function onTrigger(player, npc)
+    player:startEvent(221, 31)
+end
 
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
-    player:startEvent(221, 127);
-end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     player:updateEvent(
         0,
-        player:getBattlefieldTimeLeft(1), -- SW Apollyon
-        player:getBattlefieldTimeLeft(2), -- NW Apollyon
-        player:getBattlefieldTimeLeft(3), -- SE Apollyon
-        player:getBattlefieldTimeLeft(4), -- NE Apollyon
-        player:getBattlefieldTimeLeft(5), -- Central Apollyon
-        player:getBattlefieldTimeLeft(6)  -- CS Apollyon
-    );
-end;
+        GetServerVariable("[SW_Apollyon]Time"), -- SW Apollyon
+        GetServerVariable("[NW_Apollyon]Time"), -- NW Apollyon
+        GetServerVariable("[SE_Apollyon]Time"), -- SE Apollyon
+        GetServerVariable("[NE_Apollyon]Time"), -- NE Apollyon
+        GetServerVariable("[Central_Apollyon]Time"), -- Central Apollyon
+        GetServerVariable("[CS_Apollyon]Time")  -- CS Apollyon
+    )
+end
 
------------------------------------
--- onEventFinish
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end
