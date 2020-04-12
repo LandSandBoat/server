@@ -16536,7 +16536,7 @@ INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, A
 INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
 INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
 INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,1000); -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
-INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,500); -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
+INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,500);  -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
