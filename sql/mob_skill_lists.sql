@@ -2502,7 +2502,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1269);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1521);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1522);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1523);
-INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1524);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1540);
 INSERT INTO `mob_skill_lists` VALUES ('Tiamat-Flying-Attack',730,1278);
 INSERT INTO `mob_skill_lists` VALUES ('Ouryu-Flying-Attack',731,1298);
