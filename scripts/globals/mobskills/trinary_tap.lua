@@ -22,9 +22,9 @@ end
 function onMobWeaponSkill(target, mob, skill)
 
     -- try to drain buff
-    local effect1 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE+tpz.effectFlag.FOOD)
-    local effect2 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE+tpz.effectFlag.FOOD)
-    local effect3 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE+tpz.effectFlag.FOOD)
+    local effect1 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
+    local effect2 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
+    local effect3 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
     local dmg = 0
 
     if (effect1 ~= 0) then
