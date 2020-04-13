@@ -4041,7 +4041,7 @@ namespace battleutils
         return GetCharmChance(PCharmer, PVictim) > tpzrand::GetRandomNumber(100.f);
     }
 
-    void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker)
+    void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
         if (PDefender->objtype == TYPE_MOB)
         {
@@ -4059,11 +4059,17 @@ namespace battleutils
             }
             CBattleEntity* battleTarget = original->GetBattleTarget();
             CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
-            mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true);
+            if (!passing)
+            {
+                mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true);
+            }
             if (PAttacker)
             {
                 CCharEntity* attacker = static_cast<CCharEntity*>(PAttacker);
-                battleutils::DirtyExp(PDefender, PAttacker);
+                if (!passing)
+                {
+                    battleutils::DirtyExp(PDefender, PAttacker);
+                }
                 if (!battleTarget || battleTarget == PDefender || battleTarget != attacker->PClaimedMob || PDefender->isDead())
                 {
                     if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender
@@ -4156,7 +4162,7 @@ namespace battleutils
                 if (member != PChar && !found && member->getZone() == PChar->getZone() && member->isAlive() && (!member->PClaimedMob || member->PClaimedMob == mob))
                 { // check if we can pass claim to someone else
                     found = true;
-                    battleutils::ClaimMob(mob, PMember);
+                    battleutils::ClaimMob(mob, PMember, true);
                 }
             });
             if (!found)
