@@ -1798,8 +1798,6 @@ inline int32 CLuaBaseEntity::pathTo(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
 
     position_t point;
-    uint8 flags;
-    
     point.x = (float)lua_tonumber(L, 1);
     point.y = (float)lua_tonumber(L, 2);
     point.z = (float)lua_tonumber(L, 3);
@@ -1808,8 +1806,7 @@ inline int32 CLuaBaseEntity::pathTo(lua_State* L)
     {
         if (lua_isnumber(L, 4))
         {
-            flags = (uint8)lua_tointeger(L, 4);
-            m_PBaseEntity->PAI->PathFind->PathTo(point, flags);
+            m_PBaseEntity->PAI->PathFind->PathTo(point, (uint8)lua_tointeger(L, 4));
         }
         else
         {

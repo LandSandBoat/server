@@ -806,15 +806,15 @@ void SetupBattlefieldMob(CMobEntity* PMob)
     // Battlefield mobs don't drop gil
     PMob->setMobMod(MOBMOD_GIL_MAX, -1);
     PMob->setMobMod(MOBMOD_MUG_GIL, -1);
+    PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
 
     // never despawn
     PMob->SetDespawnTime(0s);
     // Limbus mobs
     uint16 zoneID = PMob->getZone();
-    if(zoneID == 37 || zoneID == 37) 
+    if(zoneID == 37 || zoneID == 38) 
     {
         PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
-        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
     }
     else
     {// do not roam around
