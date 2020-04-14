@@ -1,7 +1,6 @@
 ---------------------------------------------------
--- Wire_Cutter
--- Single-target damage (~500-1500), absorbed by 2 Utsusemi shadows.
---
+--  Nuclear Waste
+--  Description: Reduces elemental resistances by 50 to players in range.
 ---------------------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -18,7 +17,7 @@ function onMobSkillCheck(target,mob,skill)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
-    if ((skillList == 729 and phase < 2) or (skillList == 728 and mobhp > 70)) then
+    if ((skillList == 729 and phase >= 1 and phase <= 2) or (skillList == 728 and mobhp < 70 and mobhp >= 40)) then
         if mob:getLocalVar("nuclearWaste") == 0 then
             return 0
         end
@@ -28,12 +27,14 @@ function onMobSkillCheck(target,mob,skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-    local numhits = 2
-    local accmod = 1
-    local dmgmod = 3
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.SLASHING,info.hitslanded)
-
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
-    return dmg
+    mob:setLocalVar("nuclearWaste", 1)
+    local typeEffect = tpz.effect.ELEMENTALRES_DOWN
+    local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),0,0);
+    if (resist >= 0.25) then
+        target:addStatusEffectEx(typeEffect, 0, 50, 0, 60)
+        skill:setMsg(tpz.msg.basic.NONE)
+    else
+        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+    end
+    return typeEffect
 end

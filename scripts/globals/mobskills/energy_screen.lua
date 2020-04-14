@@ -12,7 +12,9 @@ require("scripts/globals/status")
 function onMobSkillCheck(target,mob,skill)
     local phase = mob:getLocalVar("battlePhase")
     if (phase >= 3) then
-        return 0
+        if mob:getLocalVar("nuclearWaste") == 0 and mob:getLocalVar("citadelBuster") == 0 then
+            return 0
+        end
     end
     return 1
 end
