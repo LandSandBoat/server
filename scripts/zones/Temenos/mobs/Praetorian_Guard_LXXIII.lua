@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Temenos N T
---  Mob: Praetorian Guard CCCXI
+--  Mob: Praetorian Guard LXXIII
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/limbus")
@@ -9,8 +9,8 @@ local ID = require("scripts/zones/Temenos/IDs")
 
 function onMobDeath(mob, player, isKiller)
     if isKiller then
-        if GetMobByID(ID.mob.TEMENOS_N_MOB[5]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[5]+1):isDead() and
-            GetMobByID(ID.mob.TEMENOS_N_MOB[5]+2):isDead()
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[5]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[5]+2):isDead() and
+            GetMobByID(ID.mob.TEMENOS_N_MOB[5]+3):isDead()
         then
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]):setStatus(tpz.status.NORMAL)
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]+1):setStatus(tpz.status.NORMAL)
