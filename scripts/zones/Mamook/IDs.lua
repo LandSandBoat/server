@@ -44,8 +44,7 @@ zones[tpz.zone.MAMOOK] =
         MIKIRURU                 = 17043883,
         NIKILULU                 = 17043884,
         MIKILURU                 = 17043885,
-        MIKIRULU                 = 17043886,		
-
+        MIKIRULU                 = 17043886,
     },
     npc =
     {
