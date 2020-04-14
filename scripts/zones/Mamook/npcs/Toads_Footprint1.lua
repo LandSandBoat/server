@@ -14,7 +14,6 @@ function onTrigger(player, npc)
     if princeandhopper == 3 then
         player:startEvent(223)
     elseif princeandhopper == 4 then
-        player:messageSpecial(ID.text.DRAWS_NEAR)
         local mobs =
         {
             ID.mob.MIKILULU,
@@ -24,7 +23,9 @@ function onTrigger(player, npc)
             ID.mob.MIKIRULU,
             ID.mob.POROGGO_CASANOVA,
         }
-        npcUtil.popFromQM(player, npc, mobs, {hide = 30})
+        if npcUtil.popFromQM(player, npc, mobs, {hide = 1}) then
+            player:messageSpecial(ID.text.DRAWS_NEAR)
+        end
     elseif princeandhopper == 5 then
         player:startEvent(225)
     end
