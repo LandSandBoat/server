@@ -1230,8 +1230,8 @@ INSERT INTO `mob_groups` VALUES (32,5536,35,'Ix_aern_drgs_Wynav',0,128,0,0,0,78,
 
 INSERT INTO `mob_groups` VALUES (1,3205,36,'Promathia',0,128,0,8000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (2,5106,36,'Promathia',0,128,0,0,12000,75,75,0);
-INSERT INTO `mob_groups` VALUES (3,2184,36,'Kam_lanaut',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (4,1158,36,'Eald_narche',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (3,6100,36,'Kamlanaut',0,128,0,10000,1500,78,78,0);
+INSERT INTO `mob_groups` VALUES (4,6101,36,'Ealdnarche',0,128,0,5000,2500,78,78,0);
 INSERT INTO `mob_groups` VALUES (5,4820,36,'Metus',0,128,0,0,20000,125,125,0);
 INSERT INTO `mob_groups` VALUES (14166,3199,36,'Prishe',0,128,0,2200,0,75,75,1);
 INSERT INTO `mob_groups` VALUES (14167,5417,36,'Selh_teus',0,128,0,0,0,75,75,1);

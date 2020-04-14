@@ -16,6 +16,7 @@ zones[tpz.zone.PROMYVION_HOLLA] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY = 6402, -- There is nothing out of the ordinary here.
+        BARRIER_WOVEN           = 7211, -- It appears to be a barrier woven from the energy of overflowing memories...
     },
     mob =
     {

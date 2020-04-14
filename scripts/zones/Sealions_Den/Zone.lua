@@ -24,8 +24,10 @@ function onZoneIn(player,prevZone)
         cs=15;
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus")==2) then
         cs=14;
+    elseif player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and player:getCharVar('ApocalypseNigh') == 1 then
+        cs = 29
     end
-    return cs;
+    return cs
 end;
 
 function onRegionEnter(player,region)
@@ -39,5 +41,7 @@ function onEventFinish(player,csid,option)
         player:setCharVar("PromathiaStatus",2);
     elseif (csid == 14) then
         player:setCharVar("PromathiaStatus",3);
+    elseif csid == 29 then
+        player:setCharVar('ApocalypseNigh', 2)
     end
 end;

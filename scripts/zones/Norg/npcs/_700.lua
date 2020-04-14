@@ -34,6 +34,8 @@ function onTrigger(player,npc)
         player:startEvent(98); -- Bastok Mission 6-2
     elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then
         player:startEvent(172);
+    elseif player:getCharVar('ApocalypseNigh') == 6 and os.time() < player:getCharVar("Apoc_Nigh_Reward") then
+        player:startEvent(235)
     else
         player:startEvent(5);
     end
