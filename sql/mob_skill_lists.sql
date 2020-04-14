@@ -230,13 +230,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,477);
 INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,1794);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,551);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1529);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
 -- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536)
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
--- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539)
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,622);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,623);
 INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,510);
@@ -2468,12 +2468,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1527);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1528);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1529);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1530);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534);
 -- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1260);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1261);
@@ -2483,7 +2483,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1264);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1265);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1266);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1267);
--- INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1268);
+INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1268);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1269);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1270);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1259);
@@ -2495,13 +2495,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1264);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1265);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1266);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1267);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1268);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1268);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1269);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1521);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1522);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1523);
-INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1524);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1540);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1540);
 INSERT INTO `mob_skill_lists` VALUES ('Tiamat-Flying-Attack',730,1278);
 INSERT INTO `mob_skill_lists` VALUES ('Ouryu-Flying-Attack',731,1298);
 INSERT INTO `mob_skill_lists` VALUES ('Jormungand-Flying-Attack',732,1288);
@@ -3588,17 +3587,39 @@ INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call
 -- Reserved for future Trust 6021 (ID: 1136)
 -- Reserved for future Trust 6022 (ID: 1137)
 
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,823); -- Fire Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,824); -- Frost Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,825); -- Wind Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,826); -- Earth Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,827); -- Lightning Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,828); -- Water Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,829); -- Great Wheel
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1138,830); -- Light Blade
-INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1139,985); -- Stellar Burst
-INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1139,986); -- Vortex
-INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1139,988); -- Warp In (Works the same as Ealdnarche's)
-INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1139,989); -- Warp Out (Works the same as Ealdnarche's)
-INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1139,1006); -- Omega Javelin
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,816); -- Fang RUsh
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,820); -- Thunder Breath
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,813); -- Dispelling Wind
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,814); -- Deadly Drive 
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,822); -- Chaos Breath
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,813); -- Dispelling Wind 
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,819); -- Blizzard Breath
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,823); -- Fire Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,824); -- Frost Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,825); -- Wind Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,826); -- Earth Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,827); -- Lightning Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,828); -- Water Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,829); -- Great Wheel
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1141,830); -- Light Blade
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1142,985); -- Stellar Burst
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1142,986); -- Vortex
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1142,988); -- Warp In (Works the same as Ealdnarche's)
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1142,989); -- Warp Out (Works the same as Ealdnarche's)
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1142,1006); -- Omega Javelin
 
+-- Next available ID: 1143

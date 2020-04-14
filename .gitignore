@@ -175,6 +175,7 @@ cmake_install.cmake
 *-server
 
 # non-default config files containing server specific things
+/conf/version.conf
 /conf/login.conf
 /conf/maint.conf
 /conf/map.conf

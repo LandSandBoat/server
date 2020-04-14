@@ -26,14 +26,17 @@ function onTrigger(player, hp, target)
 
     -- validate target
     local targ
-    if (target == nil) then
+    local cursor_target = player:getCursorTarget()
+    if (not target) and (not cursor_target) then
         targ = player
-    else
+    elseif target then
         targ = GetPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return
         end
+    elseif cursor_target then
+        targ = cursor_target
     end
 
     -- set hp
