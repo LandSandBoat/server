@@ -820,14 +820,13 @@ void SetupBattlefieldMob(CMobEntity* PMob)
     {// do not roam around
         PMob->m_roamFlags |= ROAMFLAG_EVENT;
         PMob->m_maxRoamDistance = 0.5f;
-    }
-
-    if((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
-    {
-        // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
-        // force all mobs in same instance to superlink
-        // plus one in case id is zero
-        PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
+        if((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
+        {
+            // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
+            // force all mobs in same instance to superlink
+            // plus one in case id is zero
+            PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
+        }
     }
 
 }
