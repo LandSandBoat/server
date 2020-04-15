@@ -951,6 +951,7 @@ int32 map_config_default()
     map_config.ah_tax_rate_single = 1.0;
     map_config.ah_tax_rate_stacks = 0.5;
     map_config.ah_max_fee = 10000;
+    map_config.ah_list_limit = 7;
     map_config.exp_rate = 1.0f;
     map_config.exp_loss_rate = 1.0f;
     map_config.exp_retain = 0.0f;
@@ -1102,6 +1103,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "ah_max_fee") == 0)
         {
             map_config.ah_max_fee = atoi(w2);
+        }
+        else if (strcmp(w1, "ah_list_limit") == 0)
+        {
+            map_config.ah_list_limit = atoi(w2);
         }
         else if (strcmp(w1, "exp_rate") == 0)
         {

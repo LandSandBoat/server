@@ -2350,18 +2350,18 @@ void SmallPacket0x04E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             const char* Query = "SELECT COUNT(*) FROM auction_house WHERE seller = %u AND sale=0;";
 
             int32 ret = Sql_Query(SqlHandle, Query, PChar->id);
-            uint8 ah_listings = 0;
+            uint32 ah_listings = 0;
 
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
                 Sql_NextRow(SqlHandle);
-                ah_listings = (int32)Sql_GetIntData(SqlHandle, 0);
+                ah_listings = (uint32)Sql_GetIntData(SqlHandle, 0);
                 // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one." CL_RESET, PChar->GetName(), ah_listings);
             }
 
-            if (ah_listings >= 7)
+            if (map_config.ah_list_limit && ah_listings >= map_config.ah_list_limit)
             {
-                // ShowDebug(CL_CYAN"%s already has 7 items on the AH\n" CL_RESET,PChar->GetName());
+                // ShowDebug(CL_CYAN"%s already has %d items on the AH\n" CL_RESET,PChar->GetName(), ah_listings);
                 PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
                 return;
             }
@@ -2385,7 +2385,7 @@ void SmallPacket0x04E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
 
             PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0)); // Merchandise put up on auction msg
-            PChar->pushPacket(new CAuctionHousePacket(0x0C, ah_listings, PChar)); // Inform history of slot
+            PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)ah_listings, PChar)); // Inform history of slot
         }
     }
     break;
