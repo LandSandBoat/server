@@ -2,67 +2,51 @@
 -- Area: Apollyon SW
 --  Mob: Jidra
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
-
-function onMobEngaged(mob,target)
- local mobID = mob:getID();
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-
- if (mobID ==16932882) then
-                        SpawnMob(16932889):updateEnmity(target);
- elseif (mobID ==16932883) then
-                        SpawnMob(16932890):updateEnmity(target);
- elseif (mobID ==16932884) then
-                        SpawnMob(16932891):updateEnmity(target);
- elseif (mobID ==16932885) then
-                        SpawnMob(16932892):updateEnmity(target);
- elseif (mobID ==16932886) then
-                        SpawnMob(16932893):updateEnmity(target);
- elseif (mobID ==16932887) then
-                        SpawnMob(16932894):updateEnmity(target);
- elseif (mobID ==16932888) then
-                        SpawnMob(16932895):updateEnmity(target);
- end
-end;
+local ID = require("scripts/zones/Apollyon/IDs")
 
 function onMobDeath(mob, player, isKiller)
-end;
+    if isKiller then
+        local mobID = mob:getID()
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
 
-function onMobDespawn(mob)
- local mobID = mob:getID();
- -- print(mobID);
-      local mobX = mob:getXPos();
-    local mobY = mob:getYPos();
-    local mobZ = mob:getZPos();
-
-
- if (
-IsMobDead(16932882)==true and
-IsMobDead(16932883)==true and
-IsMobDead(16932884)==true and
-IsMobDead(16932885)==true and
-IsMobDead(16932886)==true and
-IsMobDead(16932887)==true and
-IsMobDead(16932888)==true
-
- ) then
-
--- time
-       GetNPCByID(16932864+70):setPos(mobX+3,mobY,mobZ);
-    GetNPCByID(16932864+70):setStatus(tpz.status.NORMAL);
--- recover
-       GetNPCByID(16932864+71):setPos(mobX+4,mobY,mobZ+4);
-    GetNPCByID(16932864+71):setStatus(tpz.status.NORMAL);
--- item
-      GetNPCByID(16932864+72):setPos(mobX,mobY,mobZ-3);
-    GetNPCByID(16932864+72):setStatus(tpz.status.NORMAL);
-
-
- end
-
-
-end;
+        if mobID == ID.mob.APOLLYON_SW_MOB[2] then
+            local battlefield = player:getBattlefield()
+            local players = battlefield:getPlayers()
+            for i, member in pairs(players) do
+                member:messageSpecial(ID.text.GATE_OPEN)
+                member:messageSpecial(ID.text.TIME_LEFT, battlefield:getRemainingTime()/60)
+            end
+            GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[2]):setAnimation(8)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+1 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+8):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+8):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+8):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+2 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+9):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+9):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+9):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+3 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+10):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+10):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+10):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+4 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+11):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+11):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+11):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+5 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+12):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+12):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+12):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+6 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+13):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+13):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+13):updateEnmity(player)
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[2]+7 then
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+14):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_SW_MOB[2]+14):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_SW_MOB[2]+14):updateEnmity(player)
+        end
+    end
+end
