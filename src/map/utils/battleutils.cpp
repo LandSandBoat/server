@@ -2039,7 +2039,10 @@ namespace battleutils
         if (damage < 0)
             damage = -corrected;
 
-        battleutils::ClaimMob(PDefender, PAttacker);
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            battleutils::ClaimMob(PDefender, PAttacker);
+        }
 
         int16 standbyTp = 0;
 
@@ -4038,12 +4041,11 @@ namespace battleutils
         return GetCharmChance(PCharmer, PVictim) > tpzrand::GetRandomNumber(100.f);
     }
 
-    void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker)
+    void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
         if (PDefender->objtype == TYPE_MOB)
         {
-            CBattleEntity* battleTarget = PAttacker->GetBattleTarget();
-            CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
+            CBattleEntity* original = PAttacker;
             if (PAttacker->objtype != TYPE_PC)
             {
                 if (PAttacker->PMaster && PAttacker->PMaster->objtype == TYPE_PC)
@@ -4052,13 +4054,22 @@ namespace battleutils
                 }
                 else
                 {
-                    PAttacker = nullptr;
+                    return;
                 }
+            }
+            CBattleEntity* battleTarget = original->GetBattleTarget();
+            CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
+            if (!passing)
+            {
+                mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true);
             }
             if (PAttacker)
             {
                 CCharEntity* attacker = static_cast<CCharEntity*>(PAttacker);
-                battleutils::DirtyExp(PDefender, PAttacker);
+                if (!passing)
+                {
+                    battleutils::DirtyExp(PDefender, PAttacker);
+                }
                 if (!battleTarget || battleTarget == PDefender || battleTarget != attacker->PClaimedMob || PDefender->isDead())
                 {
                     if (PDefender->isAlive() && attacker->PClaimedMob && attacker->PClaimedMob != PDefender
@@ -4087,8 +4098,9 @@ namespace battleutils
                                 mob->m_OwnerID.targid = PAttacker->targid;
                                 return;
                             }
-                            PAttacker->ForAlliance([&PAttacker, &PDefender, &mob, &attacker](CBattleEntity* PMember){
-                                if (mob->PEnmityContainer->GetHighestEnmity() == PMember || mob->PEnmityContainer->GetHighestEnmity() == PMember->PPet)
+                            CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
+                            PAttacker->ForAlliance([&](CBattleEntity* PMember){
+                                if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
                                     mob->m_OwnerID.id = PAttacker->id;
                                     mob->m_OwnerID.targid = PAttacker->targid;
@@ -4150,7 +4162,7 @@ namespace battleutils
                 if (member != PChar && !found && member->getZone() == PChar->getZone() && member->isAlive() && (!member->PClaimedMob || member->PClaimedMob == mob))
                 { // check if we can pass claim to someone else
                     found = true;
-                    battleutils::ClaimMob(mob, PMember);
+                    battleutils::ClaimMob(mob, PMember, true);
                 }
             });
             if (!found)
