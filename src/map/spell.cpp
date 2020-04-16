@@ -109,9 +109,19 @@ SPELLGROUP CSpell::getSpellGroup()
     return m_spellGroup;
 }
 
+SPELLFAMILY CSpell::getSpellFamily()
+{
+    return m_spellFamily;
+}
+
 void CSpell::setSpellGroup(SPELLGROUP SpellGroup)
 {
     m_spellGroup = SpellGroup;
+}
+
+void CSpell::setSpellFamily(SPELLFAMILY SpellFamily)
+{
+    m_spellFamily = SpellFamily;
 }
 
 uint8 CSpell::getSkillType()
@@ -405,7 +415,7 @@ namespace spell
     //Load a list of spells
     void LoadSpellList()
     {
-        const char* Query = "SELECT spellid, name, jobs, `group`, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, \
+        const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, \
                              AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range \
                              FROM spell_list;";
 
@@ -431,28 +441,29 @@ namespace spell
                 PSpell->setName(Sql_GetData(SqlHandle,1));
                 PSpell->setJob(Sql_GetData(SqlHandle,2));
                 PSpell->setSpellGroup((SPELLGROUP)Sql_GetIntData(SqlHandle,3));
-                PSpell->setValidTarget(Sql_GetIntData(SqlHandle,4));
-                PSpell->setSkillType(Sql_GetIntData(SqlHandle,5));
-                PSpell->setCastTime(Sql_GetIntData(SqlHandle,6));
-                PSpell->setRecastTime(Sql_GetIntData(SqlHandle,7));
-                PSpell->setAnimationID(Sql_GetIntData(SqlHandle,8));
-                PSpell->setAnimationTime(Sql_GetIntData(SqlHandle,9));
-                PSpell->setMPCost(Sql_GetIntData(SqlHandle,10));
-                PSpell->setAOE(Sql_GetIntData(SqlHandle,11));
-                PSpell->setBase(Sql_GetIntData(SqlHandle,12));
-                PSpell->setElement(Sql_GetIntData(SqlHandle,13));
-                PSpell->setZoneMisc(Sql_GetIntData(SqlHandle,14));
-                PSpell->setMultiplier((float)Sql_GetIntData(SqlHandle,15));
-                PSpell->setMessage(Sql_GetIntData(SqlHandle,16));
-                PSpell->setMagicBurstMessage(Sql_GetIntData(SqlHandle,17));
-                PSpell->setCE(Sql_GetIntData(SqlHandle,18));
-                PSpell->setVE(Sql_GetIntData(SqlHandle,19));
-                PSpell->setRequirements(Sql_GetIntData(SqlHandle,20));
+                PSpell->setSpellFamily((SPELLFAMILY)Sql_GetIntData(SqlHandle, 4));
+                PSpell->setValidTarget(Sql_GetIntData(SqlHandle,5));
+                PSpell->setSkillType(Sql_GetIntData(SqlHandle,6));
+                PSpell->setCastTime(Sql_GetIntData(SqlHandle,7));
+                PSpell->setRecastTime(Sql_GetIntData(SqlHandle,8));
+                PSpell->setAnimationID(Sql_GetIntData(SqlHandle,9));
+                PSpell->setAnimationTime(Sql_GetIntData(SqlHandle,10));
+                PSpell->setMPCost(Sql_GetIntData(SqlHandle,11));
+                PSpell->setAOE(Sql_GetIntData(SqlHandle,12));
+                PSpell->setBase(Sql_GetIntData(SqlHandle,13));
+                PSpell->setElement(Sql_GetIntData(SqlHandle,14));
+                PSpell->setZoneMisc(Sql_GetIntData(SqlHandle,15));
+                PSpell->setMultiplier((float)Sql_GetIntData(SqlHandle,16));
+                PSpell->setMessage(Sql_GetIntData(SqlHandle,17));
+                PSpell->setMagicBurstMessage(Sql_GetIntData(SqlHandle,18));
+                PSpell->setCE(Sql_GetIntData(SqlHandle,19));
+                PSpell->setVE(Sql_GetIntData(SqlHandle,20));
+                PSpell->setRequirements(Sql_GetIntData(SqlHandle,21));
 
-                Sql_GetData(SqlHandle, 21, &contentTag, nullptr);
+                Sql_GetData(SqlHandle, 22, &contentTag, nullptr);
                 PSpell->setContentTag((int8*)contentTag);
 
-                PSpell->setRange(static_cast<float>(Sql_GetIntData(SqlHandle, 22)) / 10);
+                PSpell->setRange(static_cast<float>(Sql_GetIntData(SqlHandle, 23)) / 10);
 
                 if(PSpell->getAOE())
                 {
