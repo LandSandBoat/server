@@ -644,16 +644,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Gowam',146,40); -- vorpal blade
 -- 147: Humanoid-Galka
 INSERT INTO `mob_skill_lists` VALUES ('Warabouc',148,383); -- tusk
 INSERT INTO `mob_skill_lists` VALUES ('Warabouc',148,385); -- bone_crunch
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,347);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,419);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,422);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,441);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,447);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,457);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,464);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,471);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,487);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,540);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1390);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1391);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1392);
@@ -2335,6 +2325,16 @@ INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
 -- INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1681); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
 -- 499 to 699: free
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,441);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,447);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,457);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,464);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,471);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,487);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,334);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,335);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,336);
