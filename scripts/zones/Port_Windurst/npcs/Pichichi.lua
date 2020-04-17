@@ -12,20 +12,20 @@ end;
 
 function onTrigger(player,npc)
 
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY);
-KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS);
-InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET);
-OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS);
-CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS);
-ThePromise = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE);
+TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
+InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET)
+OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS)
+CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+ThePromise           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE)
 
     if (ThePromise == QUEST_COMPLETED) then
         Message = math.random(0,1)
 
         if (Message == 1) then
-            player:startEvent(530);
+            player:startEvent(530)
         else
-            player:startEvent(536);
+            player:startEvent(536)
         end
     elseif (CryingOverOnions == QUEST_COMPLETED) then
         player:startEvent(511);
@@ -42,29 +42,27 @@ ThePromise = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE);
     elseif (KnowOnesOnions == QUEST_COMPLETED) then
         player:startEvent(411);
     elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions");
+        KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
 
         if (KnowOnesOnionsVar == 2) then
-            player:startEvent(410);
+            player:startEvent(410)
         else
-            player:startEvent(395);
+            player:startEvent(395)
         end
     elseif (TruthJusticeOnionWay == QUEST_COMPLETED) then
-        player:startEvent(385);
+        player:startEvent(385)
     elseif (TruthJusticeOnionWay == QUEST_ACCEPTED) then
-        player:startEvent(374);
+        player:startEvent(374)
     else
-        player:startEvent(364);
+        player:startEvent(364)
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
 
-end;
+end
 
 function onEventFinish(player,csid,option)
 
-end;
+end
