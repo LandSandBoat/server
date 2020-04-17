@@ -33,24 +33,23 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
-        local mobID = mob:getID()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local spawn = math.random(3) == 1
+        local battlefield = mob:getBattlefield()
 
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[5]):getAnimation() == tpz.animation.CLOSE_DOOR then
-            tpz.limbus.handleDoors(player:getBattlefield(), true, ID.npc.TEMENOS_W_GATE[5])
+            tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[5])
         end
 
         if spawn then
-            local battlefield = player:getBattlefield()
             for i = 0, 2 do
                 if GetNPCByID(ID.npc.TEMENOS_W_CRATE[5]+i):getStatus() == tpz.status.DISAPPEAR then
+                    local mobX = mob:getXPos()
+                    local mobY = mob:getYPos()
+                    local mobZ = mob:getZPos()
                     GetNPCByID(ID.npc.TEMENOS_W_CRATE[5]+i):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[5]+i, player, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"))
+                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[5]+i, battlefield, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"))
                     break
                 end
             end

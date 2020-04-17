@@ -42,10 +42,10 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         if GetNPCByID(ID.npc.TEMENOS_N_GATE[6]):getAnimation() == tpz.animation.CLOSE_DOOR then
-            tpz.limbus.handleDoors(player:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])
+            tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])
         end
     end
 end

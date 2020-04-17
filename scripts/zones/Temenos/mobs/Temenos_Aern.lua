@@ -20,13 +20,9 @@ end
 function onMobDespawn(mob)
     local battlefield = mob:getBattlefield()
     if battlefield then
-        local mobID = mob:getID()
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
         local killer = mob:getLocalVar("killer")
         
-        switch (mobID): caseof
+        switch (mob:getID()): caseof
         {
             [ID.mob.TEMENOS_C_MOB[5]+19] = function()
                 tpz.limbus.extendTimeLimit(battlefield, 5, tpz.zone.TEMENOS)
@@ -58,13 +54,19 @@ function onMobDespawn(mob)
         for n = 1, 27 do
             if GetMobByID(AernList[n]):isSpawned() then
                 leftAern = leftAern + 1
+                break
             end
         end
     
         if leftAern == 0 and not GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):isSpawned() then
+            local mobX = mob:getXPos()
+            local mobY = mob:getYPos()
+            local mobZ = mob:getZPos()
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.TEMENOS_C_MOB[5]+35):updateEnmity(GetPlayerByID(killer))
+            if killer ~= 0 then
+                SpawnMob(ID.mob.TEMENOS_C_MOB[5]+35):updateEnmity(GetPlayerByID(killer))
+            end
         end
     end
 end

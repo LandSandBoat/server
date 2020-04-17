@@ -242,8 +242,7 @@ function tpz.limbus.extendTimeLimit(battlefield, minutes, zone, npc)
     end
 end
 
-function tpz.limbus.spawnRandomCrate(npc, player, var, mask, canMimic)
-    local battlefield = player:getBattlefield()
+function tpz.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
     if mask < 8 then
         local spawnMimic = math.random(0,1) == 1
         switch (mask): caseof
@@ -356,7 +355,7 @@ function tpz.limbus.spawnRandomCrate(npc, player, var, mask, canMimic)
             end,
         }
     else
-        tpz.limbus.spawnRandomCrate(npc, player, var, mask-8)
+        tpz.limbus.spawnRandomCrate(npc, battlefield, var, mask-8)
         mask = battlefield:getLocalVar(var)
         battlefield:setLocalVar(var, mask+8)
         return

@@ -10,8 +10,8 @@ function onMobEngaged(mob,target)
     GetMobByID(ID.mob.TEMENOS_N_MOB[4]+2):updateEnmity(target)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         if GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[4]+2):isDead() then
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]):setStatus(tpz.status.NORMAL)
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]+1):setStatus(tpz.status.NORMAL)

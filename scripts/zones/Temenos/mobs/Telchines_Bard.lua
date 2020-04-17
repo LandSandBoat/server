@@ -6,10 +6,9 @@ require("scripts/globals/limbus")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         local random = battlefield:getLocalVar("randomF3")
 
         if random == 1 then

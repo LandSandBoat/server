@@ -27,10 +27,10 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+        local battlefield = mob:getBattlefield()
 
         if mobID == ID.mob.TEMENOS_E_MOB[1]+4 then --Ifrit
             local crateMask = battlefield:getLocalVar("crateMaskF1")

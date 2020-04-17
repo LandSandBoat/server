@@ -25,9 +25,9 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("randomF3", math.random(1,6))
         tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[2])
     end

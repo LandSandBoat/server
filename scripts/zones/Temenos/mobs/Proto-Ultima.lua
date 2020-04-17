@@ -37,9 +37,11 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.TEMENOS_LIBERATOR)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if player then
+        player:addTitle(tpz.title.TEMENOS_LIBERATOR)
+    end
+    if isKiller or noKiller then
         GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(tpz.status.NORMAL)
     end
 end

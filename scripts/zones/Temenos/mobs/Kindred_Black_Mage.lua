@@ -42,13 +42,12 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         local random = battlefield:getLocalVar("randomF4")
 
-        if mobID - ID.mob.TEMENOS_N_MOB[4] == random + 4 then
+        if mob:getID() - ID.mob.TEMENOS_N_MOB[4] == random + 4 then
             tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[4])
         end
     end

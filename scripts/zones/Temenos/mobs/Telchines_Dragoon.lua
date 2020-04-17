@@ -23,10 +23,9 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         local random = battlefield:getLocalVar("randomF3")
 
         if random == 3 or random == 4 then

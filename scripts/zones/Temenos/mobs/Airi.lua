@@ -11,15 +11,15 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         if GetMobByID(ID.mob.TEMENOS_C_MOB[1]+1):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[1]+2):isDead() and
             GetMobByID(ID.mob.TEMENOS_C_MOB[1]+3):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[1]+4):isDead() and
             GetMobByID(ID.mob.TEMENOS_C_MOB[1]+5):isDead()
         then
+            local mobX = mob:getXPos()
+            local mobY = mob:getYPos()
+            local mobZ = mob:getZPos()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setPos(mobX, mobY, mobZ)
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setStatus(tpz.status.NORMAL)
         end
