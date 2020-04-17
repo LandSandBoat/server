@@ -10,10 +10,10 @@ function onMobInitialize(mob)
     --mob:setMobMod(tpz.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= tpz.animation.OPEN_DOOR then
-            tpz.limbus.handleDoors(player:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
+            tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
         end
     end
 end

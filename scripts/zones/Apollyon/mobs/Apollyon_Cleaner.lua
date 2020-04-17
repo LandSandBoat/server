@@ -4,10 +4,10 @@
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+        local battlefield = mob:getBattlefield()
         local itemF3 = battlefield:getLocalVar("itemF3")
         if itemF3 == mobID then
             local mobX = mob:getXPos()

@@ -71,8 +71,12 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN)
 end
 
-function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.APOLLYON_RAVAGER)
-    GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(tpz.status.NORMAL)
+function onMobDeath(mob, player, isKiller, noKiller)
+    if player then
+        player:addTitle(tpz.title.APOLLYON_RAVAGER)
+    end
+    if isKiller or noKiller then
+        GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(tpz.status.NORMAL)
+    end
 end
 

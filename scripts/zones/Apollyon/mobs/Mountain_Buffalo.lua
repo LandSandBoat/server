@@ -55,10 +55,10 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    local mobID = mob:getID()
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobID = mob:getID()
+        local battlefield = mob:getBattlefield()
         local randomF2 = battlefield:getLocalVar("randomF2")
         if mobID == randomF2 then
             battlefield:setLocalVar("randomF3", ID.mob.APOLLYON_NW_MOB[3]+math.random(1,8))

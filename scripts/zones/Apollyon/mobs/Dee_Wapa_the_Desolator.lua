@@ -69,8 +69,8 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         if GetMobByID(ID.mob.APOLLYON_CS_MOB[1]):isDead() and GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isDead() then
             GetNPCByID(ID.npc.APOLLYON_CS_CRATE):setStatus(tpz.status.NORMAL)
         elseif GetMobByID(ID.mob.APOLLYON_CS_MOB[1]):isAlive() and GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isAlive() then

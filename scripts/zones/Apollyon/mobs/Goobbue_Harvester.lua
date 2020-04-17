@@ -22,9 +22,9 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         local randomF1 = battlefield:getLocalVar("randomF1")
         if randomF1 == 2 or randomF1 == 4 then
             local mobX = mob:getXPos()

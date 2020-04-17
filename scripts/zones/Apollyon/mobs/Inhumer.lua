@@ -77,18 +77,18 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    local cratePos =
-    {
-        [1] = {366.000, -0.500, -313.000},
-        [2] = {313.021, 0.000, -317.754},
-        [3] = {376.097, 0.000, -259.382},
-        [4] = {321.552, 0.000, -293.187},
-        [5] = {337.399, -0.388, -313.442},
-        [6] = {354.661, -0.072, -273.424},
-    }
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local cratePos =
+        {
+            [1] = {366.000, -0.500, -313.000},
+            [2] = {313.021, 0.000, -317.754},
+            [3] = {376.097, 0.000, -259.382},
+            [4] = {321.552, 0.000, -293.187},
+            [5] = {337.399, -0.388, -313.442},
+            [6] = {354.661, -0.072, -273.424},
+        }
+        local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF3", battlefield:getLocalVar("killCountF3")+1)
         local killCount = battlefield:getLocalVar("killCountF3")
         local random = math.random(1, 6)

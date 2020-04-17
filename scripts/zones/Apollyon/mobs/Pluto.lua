@@ -21,11 +21,11 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    local mobX = mob:getXPos()
-    local mobY = mob:getYPos()
-    local mobZ = mob:getZPos()
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[1][1]):setPos(mobX, mobY, mobZ)
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[1][1]):setStatus(tpz.status.NORMAL)
     end

@@ -69,9 +69,9 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.PIERCERES, 1500)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF2", battlefield:getLocalVar("killCountF2")+1)
         local killCount = battlefield:getLocalVar("killCountF2")
         if killCount == 2 then

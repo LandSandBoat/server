@@ -64,9 +64,9 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.UDMGMAGIC, -100)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF4", battlefield:getLocalVar("killCountF4")+1)
         local killCount = battlefield:getLocalVar("killCountF4")
         GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(tpz.mod.UDMGPHYS, -(8-killCount)*10)

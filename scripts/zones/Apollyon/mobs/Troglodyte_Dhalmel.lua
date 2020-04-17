@@ -33,8 +33,8 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local allDead = true
         for i = 2, 9 do
             if GetMobByID(ID.mob.APOLLYON_NE_MOB[5]+i):isAlive() then

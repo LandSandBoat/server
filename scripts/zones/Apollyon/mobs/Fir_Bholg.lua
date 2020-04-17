@@ -6,10 +6,10 @@ require("scripts/globals/limbus")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Apollyon/IDs")
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+        local battlefield = mob:getBattlefield()
         local race = battlefield:getLocalVar("raceF1")
         if race == 1 or race == 2 then
             if mobID == ID.mob.APOLLYON_SW_MOB[1]+2 or mobID == ID.mob.APOLLYON_SW_MOB[1]+7 then

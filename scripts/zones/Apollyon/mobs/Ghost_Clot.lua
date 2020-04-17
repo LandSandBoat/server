@@ -11,8 +11,8 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.IMPACTRES, 0)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         tpz.limbus.handleDoors(player:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[1])
     end
 end

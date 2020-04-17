@@ -5,10 +5,10 @@
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
 
-function onMobDeath(mob, player, isKiller)
-    if isKiller then
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         local mobID = mob:getID()
-        local battlefield = player:getBattlefield()
+        local battlefield = mob:getBattlefield()
         local portalTriggerF3 = battlefield:getLocalVar("portalTriggerF3")
         if portalTriggerF3 == mobID then
             battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NE_MOB[4]+math.random(0,2))

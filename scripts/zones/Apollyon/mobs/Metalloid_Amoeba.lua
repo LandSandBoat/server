@@ -10,12 +10,12 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.IMPACTRES, 0)
 end
 
-function onMobDeath(mob, player, isKiller)
-    local mobX = mob:getXPos()
-    local mobY = mob:getYPos()
-    local mobZ = mob:getZPos()
-    if isKiller then
-        local battlefield = player:getBattlefield()
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
+        local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF1", battlefield:getLocalVar("killCountF1")+1)
         local killCount = battlefield:getLocalVar("killCountF1")
         if killCount == 2 then
