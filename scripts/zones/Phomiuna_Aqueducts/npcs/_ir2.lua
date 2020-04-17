@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC: Oil Lamp - Earth (West)
--- !pos -63 -26 53
+-- NPC: Oil Lamp - Earth (East)
+-- !pos 104 -26 53
 -----------------------------------
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
@@ -20,11 +20,11 @@ function onTrigger(player,npc)
 
     if (element == 3) then -- wind day
         if (GetNPCByID(DoorOffset+1):getAnimation() == 8) then -- lamp wind open?
-            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rl
         end
     elseif (element == 1) then -- earth day
         if (GetNPCByID(DoorOffset-3):getAnimation() == 8) then -- lamp lightning open?
-            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rl
         end
     end
 

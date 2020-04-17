@@ -230,13 +230,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,477);
 INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,1794);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,551);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1529);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
 -- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536)
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
--- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539)
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,622);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,623);
 INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,510);
@@ -644,16 +644,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Gowam',146,40); -- vorpal blade
 -- 147: Humanoid-Galka
 INSERT INTO `mob_skill_lists` VALUES ('Warabouc',148,383); -- tusk
 INSERT INTO `mob_skill_lists` VALUES ('Warabouc',148,385); -- bone_crunch
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,347);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,419);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,422);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,441);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,447);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,457);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,464);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,471);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,487);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,540);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1390);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1391);
 INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',149,1392);
@@ -2335,6 +2325,16 @@ INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
 -- INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1681); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
 -- 499 to 699: free
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,441);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,447);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,457);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,464);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,471);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,487);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,334);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,335);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,336);
@@ -2470,12 +2470,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1527);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1528);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1529);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1530);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534);
 -- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1260);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1261);
@@ -2485,7 +2485,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1264);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1265);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1266);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1267);
--- INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1268);
+INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1268);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1269);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1270);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1259);
@@ -2497,13 +2497,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1264);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1265);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1266);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1267);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1268);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1268);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1269);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1521);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1522);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1523);
-INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1524);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1540);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1540);
 INSERT INTO `mob_skill_lists` VALUES ('Tiamat-Flying-Attack',730,1278);
 INSERT INTO `mob_skill_lists` VALUES ('Ouryu-Flying-Attack',731,1298);
 INSERT INTO `mob_skill_lists` VALUES ('Jormungand-Flying-Attack',732,1288);
