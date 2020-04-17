@@ -114,11 +114,7 @@ bool CMobController::CheckDetection(CBattleEntity* PTarget)
         TapDeaggroTime();
     }
 
-    if (m_Tick >= m_DeaggroTime + 25s)
-    {
-        return true;
-    }
-    return false;
+    return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s);
 }
 
 void CMobController::TryLink()
