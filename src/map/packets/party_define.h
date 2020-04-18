@@ -37,9 +37,7 @@ class CParty;
 class CPartyDefinePacket : public CBasicPacket
 {
 public:
-
-    CPartyDefinePacket(CParty* PParty);
-    CPartyDefinePacket(CParty* PParty, bool loadTrust);
+    CPartyDefinePacket(CParty* PParty, bool loadTrust = false);
 };
 
 #endif
