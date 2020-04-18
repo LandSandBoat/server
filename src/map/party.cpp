@@ -752,7 +752,7 @@ void CParty::ReloadParty()
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
             PChar->ReloadPartyDec();
-            if (PChar->loc.zone->GetID() == PLeader->loc.zone->GetID())
+            if (PChar->getZone() == PLeader->getZone())
             {
                 PChar->pushPacket(new CPartyDefinePacket(this, true));
             }
