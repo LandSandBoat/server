@@ -65,26 +65,17 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         if (loadTrust)
         {
-            ret = Sql_Query(SqlHandle, msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+            CCharEntity* PLeader = (CCharEntity*)PParty->GetLeader();
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+            if (PLeader != nullptr)
             {
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                for (auto PTrust : PLeader->PTrusts)
                 {
-                    CCharEntity* PChar = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
-                    CCharEntity* PLeader = (CCharEntity*)PParty->GetLeader();
-
-                    if (PLeader != nullptr)
-                    {
-                        for (auto PTrust : PLeader->PTrusts)
-                        {
-                            ref<uint32>(12 * i + (0x08)) = PTrust->id;
-                            ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
-                            ref<uint16>(12 * i + (0x0E)) = 0;
-                            ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
-                            i++;
-                        }
-                    }
+                    ref<uint32>(12 * i + (0x08)) = PTrust->id;
+                    ref<uint16>(12 * i + (0x0C)) = PTrust->targid;
+                    ref<uint16>(12 * i + (0x0E)) = 0;
+                    ref<uint16>(12 * i + (0x10)) = PTrust->getZone();
+                    i++;
                 }
             }
         }
