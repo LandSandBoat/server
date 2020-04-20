@@ -7,6 +7,7 @@ import char_unlock_table_columns
 import HP_masks_to_blobs
 import crystal_storage
 import broken_linkshells
+import spell_family_column
 
 credentials = {}
 db = None
