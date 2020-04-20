@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Apollyon NE
---  Mob: Troglodyte Dhalmel
+--  Mob: Arboricole Spider
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 

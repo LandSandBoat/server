@@ -39,6 +39,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
         for i = 2, 9 do
             if GetMobByID(ID.mob.APOLLYON_NE_MOB[5]+i):isAlive() then
                 allDead = false
+                break
             end
         end
         if allDead then

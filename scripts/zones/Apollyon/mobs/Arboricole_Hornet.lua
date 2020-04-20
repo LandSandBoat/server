@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Apollyon NE
---  Mob: Troglodyte Dhalmel
+--  Mob: Arboricole Hornet
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 
