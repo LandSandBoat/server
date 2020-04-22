@@ -36,8 +36,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         local random = battlefield:getLocalVar("randomF3")
-
-        if mob:getID() - ID.mob.TEMENOS_N_MOB[3] == random - 1 then
+        if (random == 1 and (mob:getID() % 2 == 1)) or (random == 2 and (mob:getID() % 2 == 0)) then
             battlefield:setLocalVar("randomF4", math.random(1, 4))
             tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[3])
         end

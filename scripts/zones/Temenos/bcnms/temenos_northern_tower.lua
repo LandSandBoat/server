@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 
 function onBattlefieldInitialise(battlefield)
     battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("randomF1", math.random(1,6))
+    battlefield:setLocalVar("randomF1", math.random(2,5))
     SetServerVariable("[Temenos_Northern_Tower]Time", battlefield:getTimeLimit()/60)
     tpz.limbus.handleDoors(battlefield)
     tpz.limbus.setupArmouryCrates(battlefield:getID())
