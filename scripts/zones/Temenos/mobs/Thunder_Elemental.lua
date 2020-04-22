@@ -47,35 +47,20 @@ function onMobDeath(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF5") ~= 1 then
-            local mobX = mob:getXPos()
-            local mobY = mob:getYPos()
-            local mobZ = mob:getZPos()
-            switch (mob:getID()): caseof
-            {
-                [ID.mob.TEMENOS_E_MOB[5]] = function()
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[5]):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_E_CRATE[5], battlefield, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"), true)
-                end,
-                [ID.mob.TEMENOS_E_MOB[5]+1] = function()
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[5]+1):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_E_CRATE[5]+1, battlefield, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"), true)
-                end,
-                [ID.mob.TEMENOS_E_MOB[5]+2] = function()
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[5]+2):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_E_CRATE[5]+2, battlefield, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"), true)
-                end,
-                [ID.mob.TEMENOS_E_MOB[5]+3] = function()
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[5]+3):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_E_CRATE[5]+3, battlefield, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"), true)
-                end,
-                [ID.mob.TEMENOS_C_MOB[2]+7] = function()
-                    GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.THUNDERDEF, -128)
-                    if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+8):isAlive() then
-                        DespawnMob(ID.mob.TEMENOS_C_MOB[2]+8)
-                        SpawnMob(ID.mob.TEMENOS_C_MOB[2]+14)
-                    end
-                end,
-            }
+            if mobID >= ID.mob.TEMENOS_C_MOB[2] then
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.THUNDERDEF, -128)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+8):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+8)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+14)
+                end
+            else
+                local mobX = mob:getXPos()
+                local mobY = mob:getYPos()
+                local mobZ = mob:getZPos()
+                local crateID = ID.npc.TEMENOS_E_CRATE[5] + (mobID - ID.mob.TEMENOS_E_MOB[5])
+                GetNPCByID(crateID):setPos(mobX, mobY, mobZ)
+                tpz.limbus.spawnRandomCrate(crateID, player, "crateMaskF5", battlefield:getLocalVar("crateMaskF5"), true)
+            end
         end
     end
 end
