@@ -21,7 +21,7 @@ function onZoneIn(player, prevZone)
     local cs = -1
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if OPENING_CUTSCENE_ENABLE == 1 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 503
         end
         player:setPos(-96, 1, -40, 224)
