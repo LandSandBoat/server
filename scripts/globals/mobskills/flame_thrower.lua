@@ -17,7 +17,7 @@ function onMobSkillCheck(target,mob,skill)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
-    if ((skillList == 729 and phase >= 1 and phase <= 2) or (skillList == 728 and mobhp < 70 and mobhp >= 40)) then
+    if mob:getLocalVar("nuclearWaste") == 1 then
         return 0
     end
 
@@ -33,5 +33,9 @@ function onMobWeaponSkill(target, mob, skill)
     local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.FIRE,MOBPARAM_IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
+    if target:hasStatusEffect(tpz.effect.ELEMENTALRES_DOWN) then
+        target:delStatusEffectSilent(tpz.effect.ELEMENTALRES_DOWN)
+    end
+    mob:setLocalVar("nuclearWaste", 0)
     return dmg
 end

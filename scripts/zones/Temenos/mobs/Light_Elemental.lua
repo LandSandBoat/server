@@ -2,37 +2,33 @@
 -- Area: Temenos E T
 --  Mob: Light Elemental
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobEngaged(mob,target)
-   local mobID = mob:getID();
-  if (mobID==16929031) then
-          GetMobByID(16929032):updateEnmity(target);
-        GetMobByID(16929030):updateEnmity(target);
-  elseif (mobID==16929032) then
-          GetMobByID(16929031):updateEnmity(target);
-        GetMobByID(16929030):updateEnmity(target);
-  end
-end;
+function onMobEngaged(mob, target)
+    local mobID = mob:getID()
+    if mobID == ID.mob.TEMENOS_C_MOB[2]+1 then
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]):updateEnmity(target)
+    elseif mobID == ID.mob.TEMENOS_C_MOB[2]+2 then
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2]):updateEnmity(target)
+    end
+end
 
-function onMobDeath(mob, player, isKiller)
-   local mobID = mob:getID();
-
-     switch (mobID): caseof {
-        [16929031] = function (x)
-          if (IsMobDead(16929030)==true and IsMobDead(16929032)==true ) then
-            GetNPCByID(16928768+77):setPos(0.5,-6,-459);
-            GetNPCByID(16928768+77):setStatus(tpz.status.NORMAL);
-            GetNPCByID(16928768+472):setStatus(tpz.status.NORMAL);
-          end
-        end    ,
-        [16929032] = function (x)
-          if (IsMobDead(16929030)==true and IsMobDead(16929031)==true ) then
-            GetNPCByID(16928768+77):setPos(0.5,-6,-459);
-            GetNPCByID(16928768+77):setStatus(tpz.status.NORMAL);
-            GetNPCByID(16928768+472):setStatus(tpz.status.NORMAL);
-          end
-        end    ,
-     }
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        switch (mob:getID()): caseof
+        {
+            [ID.mob.TEMENOS_C_MOB[2]+1] = function()
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(tpz.status.NORMAL)
+                end
+            end,
+            [ID.mob.TEMENOS_C_MOB[2]+2] = function()
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(tpz.status.NORMAL)
+                end
+            end,
+        }
+    end
+end

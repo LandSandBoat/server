@@ -19,7 +19,9 @@ function onMobSkillCheck(target,mob,skill)
     local phase = mob:getLocalVar("battlePhase")
 
     if ((skillList == 729 and phase >= 2 and phase <= 3) or (mobhp < 40 and mobhp > 20 and skillList == 728)) then
-        return 0
+        if mob:getLocalVar("nuclearWaste") == 0 then
+            return 0
+        end
     end
 
     return 1
