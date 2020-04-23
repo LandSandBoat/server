@@ -33,6 +33,7 @@
  */
 enum MSGBASIC_ID : uint16
 {
+    MSGBASIC_NONE                   = 0, /* Display nothing */
 	MSGBASIC_DEFEATS_TARG			= 6, /* The <player> defeats <target>. */
 	MSGBASIC_ALREADY_CLAIMED		= 12, /* Cannot attack. Your target is already claimed. */
 	MSGBASIC_IS_INTERRUPTED			= 16, /* The <player>'s casting is interrupted. */
@@ -47,6 +48,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANNOT_CAST_SPELL      = 47, /* >player> cannot cast <spell>. */
     MSGBASIC_CANNOT_USE_IN_AREA      = 40, /* cannot use in this area */
 	MSGBASIC_UNABLE_TO_CAST_SPELLS  = 49, /* The <player> is unable to cast spells. */
+    MSGBASIC_MAGIC_NO_EFFECT        = 75, /* <caster>'s <spell> has no effect on <target>. */
+    MSGBASIC_MAGIC_TELEPORT         = 93, /* <caster> casts <spell>. <target> vanishes. */
 	MSGBASIC_WAIT_LONGER			= 94, /* You must wait longer to perform that action. */
     MSGBASIC_PLAYER_DEFEATED_BY     = 97, /* <player> was defeated by the <target>. */
 	MSGBASIC_USES_JA				= 100, /* The <player> uses .. */
