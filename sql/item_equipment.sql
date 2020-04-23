@@ -12084,7 +12084,7 @@ INSERT INTO `item_equipment` VALUES (26403,'srivatsa',99,119,64,658,5,0,2,0);
 INSERT INTO `item_equipment` VALUES (26409,'dullahan_shield',1,0,4194303,669,3,0,2,0);
 INSERT INTO `item_equipment` VALUES (26406,'kupo_shield',1,0,4194303,56,3,0,2,0);
 INSERT INTO `item_equipment` VALUES (26419,'ammurapi_shield',99,119,1589788,42,1,0,2,0);
-INSERT INTO `item_equipment` VALUES (26420,'adapa_shield',99,119,385,25,3,0,2,0);
+INSERT INTO `item_equipment` VALUES (26420,'adapa_shield',99,119,385,29,3,0,2,0);
 INSERT INTO `item_equipment` VALUES (26421,'nusku_shield',99,119,66560,46,2,0,2,0);
 INSERT INTO `item_equipment` VALUES (26423,'joiners_aspis',1,0,4194303,41,1,0,2,0);
 INSERT INTO `item_equipment` VALUES (26424,'joiners_ecu',1,0,4194303,46,2,0,2,0);
