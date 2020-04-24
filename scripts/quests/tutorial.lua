@@ -114,7 +114,7 @@ tpz.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, na
 end
 
 tpz.tutorial.onMobDeath = function(player)
-    if player:getCharVar("TutorialProgress") == 8 then
+    if player and player:getCharVar("TutorialProgress") == 8 then
         player:setCharVar("TutorialProgress", 9)
     end
 end
