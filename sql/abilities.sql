@@ -99,7 +99,7 @@ INSERT INTO `abilities` VALUES (57,'stay',9,15,1,5,101,0,0,83,2000,0,6,18.0,0,1,
 INSERT INTO `abilities` VALUES (58,'divine_seal',3,15,1,600,26,0,0,81,2000,0,6,20.0,0,1,80,512,0,NULL);
 INSERT INTO `abilities` VALUES (59,'elemental_seal',4,15,1,600,38,0,0,80,2000,0,6,20.0,0,1,80,576,0,NULL);
 INSERT INTO `abilities` VALUES (60,'trick_attack',6,30,1,60,66,0,0,82,2000,0,6,20.0,0,0,0,710,0,NULL);
-INSERT INTO `abilities` VALUES (61,'weapon_bash',8,20,4,180,88,0,0,201,2000,0,3,4.4,0,1,900,0,0,NULL);
+INSERT INTO `abilities` VALUES (61,'weapon_bash',8,20,4,180,88,110,0,201,2000,0,3,4.4,0,1,900,0,0,NULL);
 INSERT INTO `abilities` VALUES (62,'reward',9,12,257,90,103,102,0,84,2000,0,6,18.0,0,0,0,898,0,NULL);
 INSERT INTO `abilities` VALUES (63,'cover',7,35,2,180,76,0,0,86,2000,0,6,20.0,0,0,35,0,0,NULL);
 INSERT INTO `abilities` VALUES (64,'spirit_link',14,25,1,90,162,0,0,94,2000,0,6,20.0,0,0,0,1224,4,NULL);

@@ -79,6 +79,7 @@ struct map_config_t
     float  ah_tax_rate_single;        // Percent of listing price to tax single items
     float  ah_tax_rate_stacks;        // Percent of listing price to tax stacks
     uint32 ah_max_fee;                // Maximum total AH fees/taxes
+    uint32 ah_list_limit;             // Maximum open AH listings per player
 
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies

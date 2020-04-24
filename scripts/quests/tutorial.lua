@@ -100,14 +100,14 @@ tpz.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, na
             player:setCharVar("TutorialProgress", 8)
         end
     elseif csid == (npc_event_offset + 12) then
-        player:addExp(1200 * EXP_RATE)
+        player:addExp(800 * EXP_RATE)
         player:setCharVar("TutorialProgress", 10)
     elseif csid == (npc_event_offset + 14) then
         npcUtil.giveCurrency(player, 'gil', 1000)
         player:setCharVar("TutorialProgress", 11)
     elseif csid == (npc_event_offset + 16) then
         if npcUtil.giveItem(player, {{1789, 3}}) then
-            player:addExp(2500 * EXP_RATE)
+            player:addExp(1000 * EXP_RATE)
             player:setCharVar("TutorialProgress", 0)
         end
     end
