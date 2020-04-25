@@ -485,6 +485,8 @@ public:
     int32 recalculateStats(lua_State* L);
     int32 checkImbuedItems(lua_State* L);
 
+    int32 isDualWielding(lua_State*);          // Checks if the battle entity is dual wielding
+
     // Enmity
     int32 getCE(lua_State*);                   //gets current CE the mob has towards the player
     int32 getVE(lua_State*);                   //gets current VE the mob has towards the player

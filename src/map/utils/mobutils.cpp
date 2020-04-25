@@ -388,6 +388,12 @@ void CalculateStats(CMobEntity * PMob)
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
     }
 
+    // Deprecate MOBMOD_DUAL_WIELD later, replace if check with value from DB
+    if (PMob->getMobMod(MOBMOD_DUAL_WIELD))
+    {
+        PMob->m_dualWield = true;
+    }
+
     uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
     uint16 fDEX = GetBaseToRank(PMob->dexRank, mLvl);
     uint16 fVIT = GetBaseToRank(PMob->vitRank, mLvl);
@@ -855,11 +861,6 @@ void SetupNMMob(CMobEntity* PMob)
 
     if(mLvl >= 25)
     {
-        if(mJob == JOB_NIN)
-        {
-            PMob->setMobMod(MOBMOD_DUAL_WIELD, 1);
-        }
-
         if(mJob == JOB_WHM)
         {
             // whm nms have stronger regen effect
