@@ -12,7 +12,7 @@ Visit our Discord to keep in touch with the latest developments.
 http://wiki.project-topaz.com/
 
 **Discord:**
-https://discord.gg/bG6GHNH
+https://discord.gg/nbYJfA5
 
 Bug Reports and Unimplemented Features
 ========
