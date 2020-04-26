@@ -68,7 +68,6 @@ struct map_config_t
     std::string mysql_database;     // mysql database -> default tpzdb
 
     std::string server_message;
-    std::string server_message_fr;
 
     uint32 max_time_lastupdate;       // max interval wait of last update player char
     int32  vanadiel_time_offset;      // смещение игрового времени относительно реального времени

@@ -1549,9 +1549,9 @@ void SmallPacket0x04B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     // uint32  msg_request_len = data.ref<uint32>(0x14); // The total requested size of send to the client..
 
     if (msg_language == 0x02)
+    {
         PChar->pushPacket(new CServerMessagePacket(map_config.server_message, msg_language, msg_timestamp, msg_offset));
-    else
-        PChar->pushPacket(new CServerMessagePacket(map_config.server_message_fr, msg_language, msg_timestamp, msg_offset));
+    }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));
 
