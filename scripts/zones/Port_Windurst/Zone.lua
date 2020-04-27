@@ -30,10 +30,6 @@ function onZoneIn(player,prevZone)
         else
             position = math.random(1,5) + 195;
             player:setPos(position,-15.56,258,65);
-            if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-                cs = 30004;
-            end
-            player:setCharVar("PlayerMainJob",0);
         end
     end
     return cs;
@@ -55,8 +51,5 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.ITEM_OBTAINED,536);
     elseif (csid == 10002) then
         player:setPos(0,0,0,0,225);
-    elseif (csid == 30004 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(ID.text.HOMEPOINT_SET);
     end
 end;
