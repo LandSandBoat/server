@@ -4,27 +4,27 @@
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 
 local events =
 {
-    INTRO                   = 519,
-    DEFAULT                 = 520,
-    HOLDING_ITEM            = 521,
-    TRADE                   = 522,
-    BAD_TRADE               = 523,
-    DAILY_COOLDOWN          = 524,
-    HIT_MAX                 = 525,
-    RESULT                  = 534,
-    KEY_TRADE               = 536,
-    NO_THANKS               = 537,
-    FULL_INV                = 538,
-    OTHER_BAD_TRADE         = 539,
-    ITEM_CANNOT_BE_OBTAINED = 6541,
-    LIL_BABY                = 6583
+    INTRO                   = 4000,
+    DEFAULT                 = 4001,
+    HOLDING_ITEM            = 4002,
+    TRADE                   = 4003,
+    BAD_TRADE               = 4004,
+    DAILY_COOLDOWN          = 4005,
+    HIT_MAX                 = 4006,
+    RESULT                  = 4009,
+    KEY_TRADE               = 4010,
+    NO_THANKS               = 4011,
+    FULL_INV                = 4012,
+    OTHER_BAD_TRADE         = 4013,
+    ITEM_CANNOT_BE_OBTAINED = 6426,
+    LIL_BABY                = 6468
 }
 
 function onTrigger(player, npc)

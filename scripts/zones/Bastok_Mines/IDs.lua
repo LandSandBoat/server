@@ -17,6 +17,7 @@ zones[tpz.zone.BASTOK_MINES] =
         KEYITEM_OBTAINED               = 6391, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                   = 6392, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL            = 6393, -- You do not have enough gil.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS   = 6424, -- You must wait another ≺number≻ [day/days] to perform that action.
         HOMEPOINT_SET                  = 6479, -- Home point set!
         YOU_ACCEPT_THE_MISSION         = 6508, -- You have accepted the mission.
         ORIGINAL_MISSION_OFFSET        = 6513, -- You can consult the Mission section of the main menu to review your objectives. Speed and efficiency are your priorities. Dismissed.

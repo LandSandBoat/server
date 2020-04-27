@@ -19,6 +19,7 @@ zones[tpz.zone.SOUTHERN_SAN_DORIA] =
         KEYITEM_LOST                   = 6436, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL            = 6437, -- You do not have enough gil.
         NOTHING_OUT_OF_ORDINARY        = 6446, -- There is nothing out of the ordinary here.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS   = 6468, -- You must wait another ≺number≻ [day/days] to perform that action.
         MOG_LOCKER_OFFSET              = 6673, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         LEATHER_SUPPORT                = 6775, -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
         GUILD_TERMINATE_CONTRACT       = 6789, -- You have terminated your trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.

@@ -17,6 +17,7 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         ITEM_OBTAINED                  = 6432, -- Obtained: <item>.
         GIL_OBTAINED                   = 6433, -- Obtained <number> gil.
         KEYITEM_OBTAINED               = 6435, -- Obtained key item: <keyitem>.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS   = 6468, -- You must wait another ≺number≻ [day/days] to perform that action.
         MOG_LOCKER_OFFSET              = 6596, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         CONQUEST_BASE                  = 7066, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET         = 7225, -- You can't fish here.

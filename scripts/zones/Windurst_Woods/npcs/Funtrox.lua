@@ -4,25 +4,25 @@
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 
 local events =
 {
-    INTRO                   = 519,
-    DEFAULT                 = 520,
-    HOLDING_ITEM            = 521,
-    TRADE                   = 522,
-    BAD_TRADE               = 523,
-    DAILY_COOLDOWN          = 524,
-    HIT_MAX                 = 525,
-    RESULT                  = 534,
-    KEY_TRADE               = 536,
-    NO_THANKS               = 537,
-    FULL_INV                = 538,
-    OTHER_BAD_TRADE         = 539,
+    INTRO                   = 6000,
+    DEFAULT                 = 6001,
+    HOLDING_ITEM            = 6002,
+    TRADE                   = 6003,
+    BAD_TRADE               = 6004,
+    DAILY_COOLDOWN          = 6005,
+    HIT_MAX                 = 6006,
+    RESULT                  = 6009,
+    KEY_TRADE               = 6010,
+    NO_THANKS               = 6011,
+    FULL_INV                = 6012,
+    OTHER_BAD_TRADE         = 6013,
     ITEM_CANNOT_BE_OBTAINED = 6541,
     LIL_BABY                = 6583
 }
