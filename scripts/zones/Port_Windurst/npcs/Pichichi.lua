@@ -7,64 +7,55 @@ require("scripts/globals/settings");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-
-end;
+end
 
 function onTrigger(player,npc)
 
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY);
-KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS);
-InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET);
-OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS);
-CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS);
-ThePromise = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE);
+    local TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    local InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE)
 
-    if (ThePromise == QUEST_COMPLETED) then
-        Message = math.random(0,1)
-
-        if (Message == 1) then
-            player:startEvent(530);
+    if ThePromise == QUEST_COMPLETED then
+        if math.random(0, 1) == 1 then
+            player:startEvent(530)
         else
-            player:startEvent(536);
+            player:startEvent(536)
         end
-    elseif (CryingOverOnions == QUEST_COMPLETED) then
+    elseif CryingOverOnions == QUEST_COMPLETED then
         player:startEvent(511);
-    elseif (CryingOverOnions == QUEST_ACCEPTED) then
+    elseif CryingOverOnions == QUEST_ACCEPTED then
         player:startEvent(503);
-    elseif (OnionRings == QUEST_COMPLETED) then
+    elseif OnionRings == QUEST_COMPLETED then
         player:startEvent(445);
-    elseif (OnionRings == QUEST_ACCEPTED ) then
+    elseif OnionRings == QUEST_ACCEPTED then
         player:startEvent(438);
-    elseif (InspectorsGadget == QUEST_COMPLETED) then
+    elseif InspectorsGadget == QUEST_COMPLETED then
         player:startEvent(423);
-    elseif (InspectorsGadget == QUEST_ACCEPTED) then
+    elseif InspectorsGadget == QUEST_ACCEPTED then
         player:startEvent(415);
-    elseif (KnowOnesOnions == QUEST_COMPLETED) then
+    elseif KnowOnesOnions == QUEST_COMPLETED then
         player:startEvent(411);
-    elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions");
-
-        if (KnowOnesOnionsVar == 2) then
-            player:startEvent(410);
+    elseif KnowOnesOnions == QUEST_ACCEPTED then
+        if player:getCharVar("KnowOnesOnions") == 2 then
+            player:startEvent(410)
         else
-            player:startEvent(395);
+            player:startEvent(395)
         end
-    elseif (TruthJusticeOnionWay == QUEST_COMPLETED) then
-        player:startEvent(385);
-    elseif (TruthJusticeOnionWay == QUEST_ACCEPTED) then
-        player:startEvent(374);
+    elseif TruthJusticeOnionWay == QUEST_COMPLETED then
+        player:startEvent(385)
+    elseif TruthJusticeOnionWay == QUEST_ACCEPTED then
+        player:startEvent(374)
     else
-        player:startEvent(364);
+        player:startEvent(364)
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
-
-end;
+end
 
 function onEventFinish(player,csid,option)
-
-end;
+end
