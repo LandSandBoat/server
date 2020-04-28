@@ -16,8 +16,8 @@ end;
 function onZoneIn(player,prevZone)
     local cs = -1;
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (NEW_CHARACTER_CUTSCENE == 1) then
+    if player:getPlaytime(false) == 0 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 305;
         end
         player:setPos(-120,-5.5,175,48);
@@ -28,7 +28,7 @@ function onZoneIn(player,prevZone)
             cs = 10004;
             player:setPos(228.000, -3.000, 76.000, 160);
         else
-            position = math.random(1,5) + 195;
+            local position = math.random(1,5) + 195;
             player:setPos(position,-15.56,258,65);
         end
     end

@@ -22,8 +22,8 @@ end;
 function onZoneIn(player,prevZone)
     local cs = -1;
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (NEW_CHARACTER_CUTSCENE == 1) then
+    if player:getPlaytime(false) == 0 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1;
         end
         player:setPos(132,-8.5,-13,179);

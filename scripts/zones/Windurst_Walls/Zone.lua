@@ -28,7 +28,7 @@ function onZoneIn(player, prevZone)
 
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) - 123
+        local position = math.random(1, 5) - 123
         player:setPos(-257.5, -5.05, position, 0)
     end
 

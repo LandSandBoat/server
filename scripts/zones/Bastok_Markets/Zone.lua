@@ -26,7 +26,7 @@ function onZoneIn(player, prevZone)
         player:setHomePoint()
     -- SOA 1-1 Optional CS
     elseif
-        ENABLE_SOA and
+        ENABLE_SOA == 1 and
         player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST and
         player:getCharVar("SOA_1_CS2") == 0
     then
@@ -35,7 +35,7 @@ function onZoneIn(player, prevZone)
 
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) - 33
+        local position = math.random(1, 5) - 33
         player:setPos(-177, -8, position, 127)
     end
 

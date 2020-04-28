@@ -37,7 +37,7 @@ function onZoneIn(player, prevZone)
         player:setHomePoint()
     -- SOA 1-1 Optional CS
     elseif
-        ENABLE_SOA and
+        ENABLE_SOA == 1 and
         player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST and
         player:getCharVar("SOA_1_CS1") == 0
     then
