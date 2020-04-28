@@ -75,10 +75,9 @@ function onEventFinish(player,csid,option)
             player,
             WINDURST,
             tpz.quest.id.windurst.ONION_RINGS,
-        {item = 17029, tpz.title.STAR_ONION_BRIGADIER, var="OnionRingsTime", var="OnionRings", fame=10}
-        ) then
-        player:delKeyItem(tpz.ki.OLD_RING)
-        player:setCharVar("OnionRingsTime",0)
+            {item = 17029, tpz.title.STAR_ONION_BRIGADIER, var = {"OnionRingsTime", "OnionRings"}, fame=10})
+        then
+            player:delKeyItem(tpz.ki.OLD_RING)
 		end
     elseif (csid == 384) then
         player:addQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW);

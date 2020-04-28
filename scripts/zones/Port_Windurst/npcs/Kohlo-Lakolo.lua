@@ -18,48 +18,53 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
-KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
-    if (TruthJusticeOnionWay == QUEST_ACCEPTED) then
-        if (trade:getItemQty(4444,1) and trade:getItemCount() == 1) then
-        player:startEvent(378, 0, 4444)
+    local TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    if TruthJusticeOnionWay == QUEST_ACCEPTED then
+        if npcUtil.tradeHas(trade, 4444) then
+            player:startEvent(378, 0, 4444)
         end
-
-    elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        if (trade:getItemQty(4387,1) and trade:getItemCount() == 4) then
-        player:startEvent(398, 0, 4387)
+    elseif KnowOnesOnions == QUEST_ACCEPTED then
+        if npcUtil.tradeHas(trade, {{4387, 4}}) and player:getCharVar("KnowOnesOnions") == 0 then
+            player:startEvent(398, 0, 4387)
         end
     end
 end
 
 function onTrigger(player,npc)
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
-KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
-InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET)
-OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS)
-CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
-WildCard             = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WILD_CARD)
-ThePromise           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE)
-NeedToZone           = player:needToZone()
-Level                = player:getMainLvl()
-Fame                 = player:getFameLevel(WINDURST)
+    local TruthJusticeOnionWay = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    local InspectorsGadget     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions     = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+    local WildCard             = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WILD_CARD)
+    local ThePromise           = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PROMISE)
+    local NeedToZone           = player:needToZone()
+    local Level                = player:getMainLvl()
+    local Fame                 = player:getFameLevel(WINDURST)
 
-    if  (TruthJusticeOnionWay) == QUEST_AVAILABLE then
+    if TruthJusticeOnionWay == QUEST_AVAILABLE then
         player:startEvent(368)
-    elseif KnowOnesOnions == QUEST_AVAILABLE and TruthJusticeOnionWay == QUEST_COMPLETED and
-        player:getMainLvl() >= 5 and player:getLocalVar('TruthZone') == 0  and Fame >=1 then
+    elseif
+        KnowOnesOnions == QUEST_AVAILABLE and TruthJusticeOnionWay == QUEST_COMPLETED and
+        player:getMainLvl() >= 5 and player:getLocalVar('TruthZone') == 0  and Fame >=1
+    then
         player:startEvent(391,0,4387)
-    elseif KnowOnesOnions == QUEST_ACCEPTED and (Level) >= 5 and player:getCharVar("KnowOnesOnions") == 2 then
+    elseif KnowOnesOnions == QUEST_ACCEPTED and Level >= 5 and player:getCharVar("KnowOnesOnions") == 2 then
         player:startEvent(400)
-    elseif InspectorsGadget == QUEST_AVAILABLE and KnowOnesOnions == QUEST_COMPLETED and
-        player:getCharVar("KnowOneOnionZone") == 0 and Fame >=2 then
+    elseif
+        InspectorsGadget == QUEST_AVAILABLE and KnowOnesOnions == QUEST_COMPLETED and
+        player:getLocalVar("KnowOneOnionZone") == 0 and Fame >=2
+    then
         player:startEvent(413)
     elseif InspectorsGadget == QUEST_ACCEPTED  and player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE) then
         player:startEvent(421)
-    elseif  OnionRings == QUEST_AVAILABLE and InspectorsGadget == QUEST_COMPLETED and
-        player:getLocalVar('InspectorsGadgetZone') == 0 and Fame >=3 and not player:hasKeyItem(tpz.ki.OLD_RING) then
+    elseif
+        OnionRings == QUEST_AVAILABLE and InspectorsGadget == QUEST_COMPLETED and
+        player:getLocalVar('InspectorsGadgetZone') == 0 and Fame >=3 and not player:hasKeyItem(tpz.ki.OLD_RING)
+    then
         player:startEvent(429)
-    elseif  OnionRings == QUEST_ACCEPTED or OnionRings == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.OLD_RING) then
+    elseif  (OnionRings == QUEST_ACCEPTED or OnionRings == QUEST_AVAILABLE) and player:hasKeyItem(tpz.ki.OLD_RING) then
         player:startEvent(430,0,tpz.ki.OLD_RING) --TODO get correct time for quest to expire. 
     elseif  CryingOverOnions == QUEST_AVAILABLE and OnionRings == QUEST_COMPLETED and Fame >=3 then
         player:startEvent(496)
@@ -67,15 +72,22 @@ Fame                 = player:getFameLevel(WINDURST)
         player:startEvent(497)
     elseif WildCard == QUEST_ACCEPTED then
         player:startEvent(505)
-    elseif ThePromise == QUEST_AVAILABLE and (WildCard) == QUEST_COMPLETED and Fame >=6 then
+    elseif ThePromise == QUEST_AVAILABLE and WildCard == QUEST_COMPLETED and Fame >=6 then
         player:startEvent(513,0,tpz.ki.INVISIBLE_MAN_STICKER)
-    elseif player:hasKeyItem(tpz.ki.INVISIBLE_MAN_STICKER) then
+    elseif ThePromise == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.INVISIBLE_MAN_STICKER) then
         player:startEvent(522,0,tpz.ki.INVISIBLE_MAN_STICKER)
+    elseif ThePromise == QUEST_COMPLETED then
+        player:startEvent(544)
+    elseif  KnowOnesOnions == QUEST_COMPLETED then
+        player:startEvent(401)
+    elseif TruthJusticeOnionWay == QUEST_COMPLETED then
+        player:startEvent(379)
+    else
+        player:startEvent(361)
     end
 end
 
 function onEventUpdate(player,csid,option)
-
 end
 
 function onEventFinish(player,csid,option)
@@ -86,8 +98,8 @@ function onEventFinish(player,csid,option)
             player,
             WINDURST,
             tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY,
-            {item = 13093, title=tpz.title.STAR_ONION_BRIGADE_MEMBER, fame=10}
-            ) then
+            {item = 13093, title=tpz.title.STAR_ONION_BRIGADE_MEMBER, fame=10})
+        then
             player:setLocalVar('TruthZone', 1)
             player:tradeComplete()
         end
@@ -101,8 +113,8 @@ function onEventFinish(player,csid,option)
             player,
             WINDURST,
             tpz.quest.id.windurst.KNOW_ONE_S_ONIONS,
-            {item = 4857, title=tpz.title.SOB_SUPER_HERO, var="KnowOnesOnions", fame=10}
-            ) then
+            {item = 4857, title=tpz.title.SOB_SUPER_HERO, var="KnowOnesOnions", fame=10})
+        then
             player:tradeComplete()
             player:setLocalVar("KnowOneOnionZone", 1)
         end
@@ -113,8 +125,8 @@ function onEventFinish(player,csid,option)
             player,
             WINDURST,
             tpz.quest.id.windurst.INSPECTOR_S_GADGET,
-            {item = 13204, title=tpz.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10}
-            ) then
+            {item = 13204, title=tpz.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10})
+        then
             player:setLocalVar("InspectorsGadgetZone", 1)
 		end
     elseif csid == 429 then
@@ -123,7 +135,7 @@ function onEventFinish(player,csid,option)
         if player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ONION_RINGS) == QUEST_AVAILABLE then
             player:addQuest(WINDURST,tpz.quest.id.windurst.ONION_RINGS)
         end
-            player:setCharVar("OnionRings", 1)
+        player:setCharVar("OnionRings", 1)
     elseif csid == 496 then
         player:addQuest(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
     elseif csid == 497 then
@@ -133,12 +145,8 @@ function onEventFinish(player,csid,option)
     elseif csid == 513 then
         player:addQuest(WINDURST,tpz.quest.id.windurst.THE_PROMISE)
     elseif csid == 522 then
-        if npcUtil.completeQuest(
-            player,
-            WINDURST,
-            tpz.quest.id.windurst.THE_PROMISE,
-            {item = 13135, fame=10}
-            ) then
+        if npcUtil.giveItem(player, 13135) then
+            npcUtil.completeQuest(player,WINDURST,tpz.quest.id.windurst.THE_PROMISE)
         end
     end
 end
