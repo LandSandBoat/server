@@ -30,6 +30,8 @@ function onTrigger(player, npc)
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
     local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
     local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
 
     -- AN EMPTY VESSEL
@@ -54,7 +56,7 @@ function onTrigger(player, npc)
 
     -- BEGINNINGS
     elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES
-            and player:getMainJob() == tpz.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
+            and currentJob == tpz.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
         if not divinationReady then
             player:startEvent(63)
         elseif waoudNeedToZone == 1 then
@@ -75,7 +77,7 @@ function onTrigger(player, npc)
         end
 
     -- OMENS
-    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and player:getMainJob() == tpz.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
+    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == tpz.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
         if not divinationReady then
             player:startEvent(63)
         elseif waoudNeedToZone == 1 then
@@ -90,6 +92,20 @@ function onTrigger(player, npc)
             player:startEvent(712) -- gives keyitem to claim armour piece
         elseif player:getCharVar("OmensProgress") >= 3 then
             player:startEvent(713, player:getGil()) -- clue about location of armour piece, costs you 1000 gil
+        end
+
+    -- TRANSFORMATIONS
+    elseif omens == QUEST_COMPLETED and transformations == QUEST_AVAILABLE and currentJob == tpz.job.BLU then
+        if not divinationReady then
+            player:startEvent(63)
+        elseif waoudNeedToZone == 1 then
+            player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
+        else
+            player:startEvent(721, player:getGil()) -- starts Transformations
+        end
+    elseif transformations == QUEST_ACCEPTED then
+        if player:getCharVar("TransformationsProgress") == 2 then
+            player:startEvent(723, player:getGil()) -- clue about possible route to take, costs you 1000 gil
         end
 
     -- DEFAULT DIALOG
@@ -144,7 +160,9 @@ end
 
 function onEventFinish(player, csid, option)
     local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
+    local transformationsProgress = player:getCharVar("TransformationsProgress")
 
     -- AN EMPTY VESSEL
     if csid == 60 then
@@ -193,6 +211,15 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.SEALED_IMMORTAL_ENVELOPE)
         player:setCharVar("OmensProgress", 3)
     elseif csid == 713 and option == 1 and omensProgress == 3 and player:getGil() >= 1000 then
+        player:delGil(1000)
+        player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
+
+    -- TRANSFORMATIONS
+    elseif csid == 721 and option == 1 and player:getGil() >= 1000 then
+        player:setCharVar("TransformationsProgress", 1)
+        player:delGil(1000)
+        player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
+    elseif csid == 723 and option == 1 and TransformationsProgress == 2 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     end
