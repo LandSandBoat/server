@@ -696,10 +696,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,482); -- pounce
 INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,652); -- blaster
 INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,653); -- chaotic_eye
 INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,1336); -- frenzied_rage
-INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,3416); -- charged_whisker
+INSERT INTO `mob_skill_lists` VALUES ('Coeurl_CoP',161,483); -- charged_whisker
 INSERT INTO `mob_skill_lists` VALUES ('Coeurl_WoTG',162,652); -- blaster
 INSERT INTO `mob_skill_lists` VALUES ('Coeurl_WoTG',162,653); -- chaotic_eye
-INSERT INTO `mob_skill_lists` VALUES ('Coeurl_WoTG',162,3416); -- charged_whisker
+INSERT INTO `mob_skill_lists` VALUES ('Coeurl_WoTG',162,483); -- charged_whisker
 -- 163: free
 INSERT INTO `mob_skill_lists` VALUES ('Hydra',164,1828);
 INSERT INTO `mob_skill_lists` VALUES ('Hydra',164,1829);
@@ -2308,7 +2308,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Ashrakk',493,3367);
 INSERT INTO `mob_skill_lists` VALUES ('Ashrakk',493,3368);
 INSERT INTO `mob_skill_lists` VALUES ('Sekhmet',494,3414);
 INSERT INTO `mob_skill_lists` VALUES ('Sekhmet',494,3415);
-INSERT INTO `mob_skill_lists` VALUES ('Sekhmet',494,3416);
+INSERT INTO `mob_skill_lists` VALUES ('Sekhmet',494,483);
 INSERT INTO `mob_skill_lists` VALUES ('Astral_Flow_Pet',495,839);
 INSERT INTO `mob_skill_lists` VALUES ('Astral_Flow_Pet',495,912);
 INSERT INTO `mob_skill_lists` VALUES ('Astral_Flow_Pet',495,913);
@@ -2978,7 +2978,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,652); -- blaster
 INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,653); -- chaotic eye
 -- INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,2209); -- blink of peril
 -- INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,2602); -- mortal blast
-INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,3416); -- charged whisker
+INSERT INTO `mob_skill_lists` VALUES ('Maahes',869,483); -- charged whisker
 INSERT INTO `mob_skill_lists` VALUES ('Mielikki',870,331); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Mielikki',870,332); -- entangle
 -- INSERT INTO `mob_skill_lists` VALUES ('Mielikki',870,1026); -- arbor storm
