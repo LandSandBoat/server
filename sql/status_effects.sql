@@ -258,7 +258,7 @@ INSERT INTO `status_effects` VALUES (215,'etude',65833,0,0,4,0,0,0,0);
 INSERT INTO `status_effects` VALUES (216,'carol',65833,0,0,4,0,0,0,0);
 INSERT INTO `status_effects` VALUES (217,'threnody',66088,0,0,1,0,0,0,0);
 INSERT INTO `status_effects` VALUES (218,'hymnus',65832,0,0,4,0,0,0,0);
-INSERT INTO `status_effects` VALUES (219,'mazurka',65832,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (219,'mazurka',65846,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (220,'sirvente',288,0,0,4,0,0,0,0);
 INSERT INTO `status_effects` VALUES (221,'dirge',288,0,0,4,0,0,0,0);
 INSERT INTO `status_effects` VALUES (222,'scherzo',288,0,0,4,0,0,0,0);
