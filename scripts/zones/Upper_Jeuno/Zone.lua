@@ -27,13 +27,11 @@ function onZoneIn(player, prevZone)
     -- COP mission 1-1
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_RITES_OF_LIFE and player:getCharVar("PromathiaStatus") == 0 then
         cs = 2
+    end
+
     -- MOG HOUSE EXIT
-    elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(46.2, -5, -78, 172)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
     end
 
     return cs
@@ -50,10 +48,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
-    elseif csid == 2 then
+    if csid == 2 then
         player:setCharVar("PromathiaStatus", 1)
     end
 end
