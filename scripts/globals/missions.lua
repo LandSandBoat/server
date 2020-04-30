@@ -41,6 +41,16 @@ tpz.mission.area =
     [tpz.mission.log_id.ROV]         = 'rov',
 }
 
+tpz.mission.logEx =
+{
+    -- Chains of Promathia
+    SANDORIA   = 0,
+    WINDURST   = 1,
+    LOUVERANCE = 2,
+    TENZEN     = 3,
+    ULMIA      = 4,
+}
+
 tpz.mission.id =
 {
     -----------------------------------
@@ -170,70 +180,70 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.COP]] =
     {
-        ANCIENT_FLAMES_BECKON            = 0,  -- Category
-        THE_RITES_OF_LIFE                = 1,  -- ± --
-        BELOW_THE_ARKS                   = 2,  -- ± --
-        THE_MOTHERCRYSTALS               = 3,  -- ± --
+        ANCIENT_FLAMES_BECKON            = 101,  -- Category
+        THE_RITES_OF_LIFE                = 110,  -- ± --
+        BELOW_THE_ARKS                   = 118,  -- ± --
+        THE_MOTHERCRYSTALS               = 128,  -- ± --
         -- THE_ISLE_OF_FORGOTTEN_SAINTS  =     -- Category
-        AN_INVITATION_WEST               = 5,  -- ± --
-        THE_LOST_CITY                    = 15, -- ± --
-        DISTANT_BELIEFS                  = 16, -- ± --
-        AN_ETERNAL_MELODY                = 17, -- ± --
-        ANCIENT_VOWS                     = 18, -- ± --
-        A_TRANSIENT_DREAM                = 19, -- Category
-        THE_CALL_OF_THE_WYRMKING         = 20, -- ± --
-        A_VESSEL_WITHOUT_A_CAPTAIN       = 27, -- ± --
-        THE_ROAD_FORKS                   = 28, -- ± --
+        AN_INVITATION_WEST               = 138,  -- ± --
+        THE_LOST_CITY                    = 218, -- ± --
+        DISTANT_BELIEFS                  = 228, -- ± --
+        AN_ETERNAL_MELODY                = 238, -- ± --
+        ANCIENT_VOWS                     = 248, -- ± --
+        A_TRANSIENT_DREAM                = 257, -- Category
+        THE_CALL_OF_THE_WYRMKING         = 258, -- ± --
+        A_VESSEL_WITHOUT_A_CAPTAIN       = 318, -- ± --
+        THE_ROAD_FORKS                   = 325, -- ± --
         -- EMERALD_WATERS                =     -- Sub-category
         -- VICISSITUDES                  =     -- ± --
-        DESCENDANTS_OF_A_LINE_LOST       = 29, -- ± --
+        DESCENDANTS_OF_A_LINE_LOST       = 335, -- ± --
         -- LOUVERANCE                    =     -- ± --
         -- MEMORIES_OF_A_MAIDEN          =     -- Sub-category
-        COMEDY_OF_ERRORS_ACT_I           = 30, -- ± --
+        COMEDY_OF_ERRORS_ACT_I           = 341, -- ± --
         -- COMEDY_OF_ERRORS_ACT_II       =     -- ± --
         -- EXIT_STAGE_LEFT               =     -- ± --
-        TENDING_AGED_WOUNDS              = 31, -- ± --
-        DARKNESS_NAMED                   = 32, -- ± --
+        TENDING_AGED_WOUNDS              = 350, -- ± --
+        DARKNESS_NAMED                   = 358, -- ± --
         -- THE_CRADLES_OF_CHILDREN_LOST  =     -- Category
-        SHELTERING_DOUBT                 = 33, -- ± --
-        THE_SAVAGE                       = 40, -- ± --
-        THE_SECRETS_OF_WORSHIP           = 41, -- ± --
-        SLANDEROUS_UTTERINGS             = 42, -- ± --
+        SHELTERING_DOUBT                 = 368, -- ± --
+        THE_SAVAGE                       = 418, -- ± --
+        THE_SECRETS_OF_WORSHIP           = 428, -- ± --
+        SLANDEROUS_UTTERINGS             = 438, -- ± --
         -- THE_RETURN_HOME               =     -- Category
-        THE_ENDURING_TUMULT_OF_WAR       = 43, -- ± --
-        DESIRES_OF_EMPTINESS             = 52, -- ± --
-        THREE_PATHS                      = 54, -- ± --
+        THE_ENDURING_TUMULT_OF_WAR       = 448, -- ± --
+        DESIRES_OF_EMPTINESS             = 518, -- ± --
+        THREE_PATHS                      = 530, -- ± --
         -- PAST_SINS                     =     -- ± --
         -- SOUTHERN_LEGEND               =     -- ± --
-        PARTNERS_WITHOUT_FAME            = 55, -- ± --
+        PARTNERS_WITHOUT_FAME            = 543, -- ± --
         -- A_CENTURY_OF_HARDSHIP         =     -- ± --
         -- DEPARTURES                    =     -- ± --
         -- THE_PURSUIT_OF_PARADISE       =     -- ± --
-        SPIRAL                           = 56, -- ± --
+        SPIRAL                           = 552, -- ± --
         -- BRANDED                       =     -- ± --
         -- PRIDE_AND_HONOR               =     -- ± --
         -- AND_THE_COMPASS_GUIDES        =     -- ± --
-        WHERE_MESSENGERS_GATHER          = 57, -- ± --
+        WHERE_MESSENGERS_GATHER          = 560, -- ± --
         -- ENTANGLEMENT                  =     -- ± --
         -- HEAD_WIND                     =     -- ± --
-        FLAMES_FOR_THE_DEAD              = 58, -- ± --
+        FLAMES_FOR_THE_DEAD              = 568, -- ± --
         -- ECHOES_OF_TIME                =     -- ± --   -- Category
-        FOR_WHOM_THE_VERSE_IS_SUNG       = 60, -- ± --
-        A_PLACE_TO_RETURN                = 65, -- ± --
-        MORE_QUESTIONS_THAN_ANSWERS      = 66, -- ± --
-        ONE_TO_BE_FEARED                 = 67, -- ± --
+        FOR_WHOM_THE_VERSE_IS_SUNG       = 578, -- ± --
+        A_PLACE_TO_RETURN                = 618, -- ± --
+        MORE_QUESTIONS_THAN_ANSWERS      = 628, -- ± --
+        ONE_TO_BE_FEARED                 = 638, -- ± --
         -- IN_THE_LIGHT_OF_THE_CRYSTAL   =     -- ± --   -- Category
-        CHAINS_AND_BONDS                 = 68, -- ± --
-        FLAMES_IN_THE_DARKNESS           = 77, -- ± --
-        FIRE_IN_THE_EYES_OF_MEN          = 78, -- ± --
-        CALM_BEFORE_THE_STORM            = 80, -- ± --
-        THE_WARRIOR_S_PATH               = 81, -- ± --
-        EMPTINESS_BLEEDS                 = 82, -- ± ---- Category
-        GARDEN_OF_ANTIQUITY              = 87, -- ± --
-        A_FATE_DECIDED                   = 90, -- ± --
-        WHEN_ANGELS_FALL                 = 91, -- ± --
-        DAWN                             = 92, -- ± --
-        THE_LAST_VERSE                   = 94,
+        CHAINS_AND_BONDS                 = 648, -- ± --
+        FLAMES_IN_THE_DARKNESS           = 718, -- ± --
+        FIRE_IN_THE_EYES_OF_MEN          = 728, -- ± --
+        CALM_BEFORE_THE_STORM            = 738, -- ± --
+        THE_WARRIOR_S_PATH               = 748, -- ± --
+        EMPTINESS_BLEEDS                 = 758, -- ± ---- Category
+        GARDEN_OF_ANTIQUITY              = 800, -- ± --
+        A_FATE_DECIDED                   = 818, -- ± --
+        WHEN_ANGELS_FALL                 = 828, -- ± --
+        DAWN                             = 840, -- ± --
+        THE_LAST_VERSE                   = 850,
     },
 
     -----------------------------------

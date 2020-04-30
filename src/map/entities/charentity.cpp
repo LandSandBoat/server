@@ -143,8 +143,15 @@ CCharEntity::CCharEntity()
         m_missionLog[i].current = 0xFFFF;
     }
 
-    m_missionLog[4].current = 0; // MISSION_TOAU
-    m_missionLog[5].current = 0; // MISSION_WOTG
+    m_missionLog[4].current = 0;   // MISSION_TOAU
+    m_missionLog[5].current = 0;   // MISSION_WOTG
+    m_missionLog[6].current = 101; // MISSION_COP
+    for (uint8 i = 0; i < MAX_MISSIONAREA; ++i)
+    {
+        m_missionLog[i].logExUpper = 0;
+        m_missionLog[i].logExLower = 0;
+    }
+
 
     m_copCurrent = 0;
     m_acpCurrent = 0;
