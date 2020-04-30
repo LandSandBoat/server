@@ -4,27 +4,27 @@
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 
 local events =
 {
-    INTRO                   = 519,
-    DEFAULT                 = 520,
-    HOLDING_ITEM            = 521,
-    TRADE                   = 522,
-    BAD_TRADE               = 523,
-    DAILY_COOLDOWN          = 524,
-    HIT_MAX                 = 525,
-    RESULT                  = 534,
-    KEY_TRADE               = 536,
-    NO_THANKS               = 537,
-    FULL_INV                = 538,
-    OTHER_BAD_TRADE         = 539,
-    ITEM_CANNOT_BE_OBTAINED = 6541,
-    LIL_BABY                = 6583
+    INTRO                   = 20055,
+    DEFAULT                 = 20056,
+    HOLDING_ITEM            = 20057,
+    TRADE                   = 20058,
+    BAD_TRADE               = 20059,
+    DAILY_COOLDOWN          = 20060,
+    HIT_MAX                 = 20061,
+    RESULT                  = 20064,
+    KEY_TRADE               = 20065,
+    NO_THANKS               = 20066,
+    FULL_INV                = 20067,
+    OTHER_BAD_TRADE         = 20068,
+    ITEM_CANNOT_BE_OBTAINED = 6382,
+    LIL_BABY                = 6424
 }
 
 function onTrigger(player, npc)

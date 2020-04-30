@@ -16,6 +16,7 @@ zones[tpz.zone.LOWER_JEUNO] =
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         KEYITEM_LOST            = 6392, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL     = 6393, -- You do not have enough gil.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS = 6424, -- You must wait another ≺number≻ [day/days] to perform that action.
         HOMEPOINT_SET           = 6517, -- Home point set!
         CONQUEST_BASE           = 6542, -- Tallying conquest results...
         MOG_LOCKER_OFFSET       = 6806, -- Your Mog Locker lease is valid until <timestamp>, kupo.

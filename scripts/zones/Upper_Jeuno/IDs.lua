@@ -18,6 +18,7 @@ zones[tpz.zone.UPPER_JEUNO] =
         KEYITEM_LOST                     = 6551, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL              = 6552, -- You do not have enough gil.
         NOTHING_OUT_OF_ORDINARY          = 6561, -- There is nothing out of the ordinary here.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS     = 6583, -- You must wait another ≺number≻ [day/days] to perform that action.
         HOMEPOINT_SET                    = 6676, -- Home point set!
         MOG_LOCKER_OFFSET                = 6789, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         GLYKE_SHOP_DIALOG                = 6972, -- Can I help you?

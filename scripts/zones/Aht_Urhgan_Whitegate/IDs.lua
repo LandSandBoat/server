@@ -16,6 +16,7 @@ zones[tpz.zone.AHT_URHGAN_WHITEGATE] =
         GIL_OBTAINED                  = 226, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 228, -- Obtained key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL           = 230, -- You do not have enough gil.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS  = 833, -- You must wait another ≺number≻ [day/days] to perform that action.
         FISHING_MESSAGE_OFFSET        = 886, -- You can't fish here.
         MOG_LOCKER_OFFSET             = 1225, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         HOMEPOINT_SET                 = 1366, -- Home point set!

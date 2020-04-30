@@ -17,6 +17,7 @@ zones[tpz.zone.BASTOK_MARKETS] =
         KEYITEM_OBTAINED            = 6391, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                = 6392, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL         = 6393, -- You do not have enough gil.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS= 6424, -- You must wait another ≺number≻ [day/days] to perform that action.
         ITEMS_OBTAINED              = 6397, -- You obtain <number> <item>!
         HOMEPOINT_SET               = 6479, -- Home point set!
         YOU_ACCEPT_THE_MISSION      = 6508, -- You have accepted the mission.
