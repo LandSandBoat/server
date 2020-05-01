@@ -146,6 +146,8 @@ namespace luautils
         lua_register(LuaHandle, "NearLocation", luautils::nearLocation);
         lua_register(LuaHandle, "terminate", luautils::terminate);
 
+        lua_register(LuaHandle, "GetHealingTickDelay", luautils::GetHealingTickDelay);
+
         lua_register(LuaHandle, "getAbility", luautils::getAbility);
         lua_register(LuaHandle, "getSpell", luautils::getSpell);
 
@@ -4242,6 +4244,11 @@ namespace luautils
         }
 
         return 0;
+    }
+
+    int32 GetHealingTickDelay(lua_State* L) {
+        lua_pushnumber(L, map_config.healing_tick_delay);
+        return 1;
     }
 
     int32 getAbility(lua_State* L)
