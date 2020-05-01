@@ -76,7 +76,7 @@ INSERT INTO `abilities` VALUES (34,'arcane_circle',8,5,1,600,86,0,0,30,2000,0,6,
 INSERT INTO `abilities` VALUES (35,'last_resort',8,15,1,300,87,0,0,12,2000,0,6,20.0,0,1,1300,836,0,NULL);
 INSERT INTO `abilities` VALUES (36,'charm',9,1,4,15,97,0,0,13,2000,0,6,18.0,0,320,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (37,'gauge',9,10,4,30,98,0,0,14,2000,0,6,23.0,0,0,0,0,0,NULL);
-INSERT INTO `abilities` VALUES (38,'tame',9,30,4,600,99,0,0,15,2000,0,6,18.0,0,1,0,904,0,NULL);
+INSERT INTO `abilities` VALUES (38,'tame',9,30,4,600,99,0,0,15,2000,0,6,18.0,0,0,0,904,0,NULL);
 INSERT INTO `abilities` VALUES (39,'pet_commands',9,1,1,0,0,0,0,0,2000,0,6,18.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (40,'scavenge',11,10,1,180,121,0,0,21,2000,0,6,20.0,0,1,80,1024,0,NULL);
 INSERT INTO `abilities` VALUES (41,'shadowbind',11,40,4,300,122,0,0,188,2000,0,3,18.0,0,1,800,0,0,NULL);
