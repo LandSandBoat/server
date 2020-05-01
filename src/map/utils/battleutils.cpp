@@ -4061,7 +4061,7 @@ namespace battleutils
             CMobEntity* mob = static_cast<CMobEntity*>(PDefender);
             if (!passing)
             {
-                mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true);
+                mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true, true);
             }
             if (PAttacker)
             {
