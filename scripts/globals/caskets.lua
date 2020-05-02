@@ -201,7 +201,7 @@ end
 ---------------------------------------------------------------------------------------------
 -- Desc: Sets all the base localVar's, type of chest and if locked, sets the random number.
 ---------------------------------------------------------------------------------------------
-local function setCasketData(player, x, y, z, r, npc, partyID)
+local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     ---------------------------------------------------------------------------------------------------
     -- NOTE: Super Kupowers Myriad Mystery Boxes add an additional 20% chance the chest will be locked.
     ---------------------------------------------------------------------------------------------------
@@ -231,6 +231,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID)
         -------------------------------------
         npc:setLocalVar("[caskets]PARTYID", partyID)
         npc:setLocalVar("[caskets]ITEMS_SET", 0)
+        npc:setLocalVar("[caskets]MOBLVL", mobLvl)
 
         if chestStyle == 966 then
             npc:setLocalVar("[caskets]ATTEMPTS", attempts)
@@ -401,10 +402,23 @@ function getDrops(npc, dropType, zoneId)
         local tempCount    = 1
         local randomTable  = {1,3,1,2,1,2,1,1,3,1,2,1}
 
+        if zoneId == 172 or zoneId == 173 or zoneId == 190 or
+           zoneId == 191 or zoneId == 193 or zoneId == 194 or
+           zoneId == 196 or zoneId == 198 then
+
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsHi
+            else
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsLow
+            end
+        else
+            tempDrops = tpz.casket_loot.casketItems[zoneId].temps
+        end
+
         tempCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, tempCount do
-            local tempDrops = tpz.casket_loot.casketItems[zoneId].temps
             local sum = 0
 
             for k, v in pairs(tempDrops) do
@@ -436,10 +450,23 @@ function getDrops(npc, dropType, zoneId)
         local itemCount    = 1
         local randomTable  = {1,4,1,3,1,1,2,1,3,1,2,1}
 
+        if zoneId == 172 or zoneId == 173 or zoneId == 190 or
+           zoneId == 191 or zoneId == 193 or zoneId == 194 or
+           zoneId == 196 or zoneId == 198 then
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                drops = tpz.casket_loot.casketItems[zoneId].itemsHi
+            else
+                drops = tpz.casket_loot.casketItems[zoneId].itemsLow
+                canDropReigonal = false
+            end
+        else
+            drops = tpz.casket_loot.casketItems[zoneId].items
+        end
+
         itemCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, itemCount do
-            local drops = tpz.casket_loot.casketItems[zoneId].items
             local sum = 0
 
             for k, v in pairs(drops) do
@@ -459,8 +486,8 @@ function getDrops(npc, dropType, zoneId)
             if item == 0 or item == nil then
                 items[i] = 4112 -- default to potion
             else
-                if math.random() < 0.05 then
-                    items[i] = tpz.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #tpz.casket_loot.casketItems[zoneId].regionalItems)]
+                if math.random() < 0.05 and canDropReigonal then
+                    items[1] = casketItems[zoneId].regionalItems[math.random(1, #casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
                 end
@@ -609,7 +636,7 @@ tpz.caskets.spawnCasket = function (player, mob, x, y, z, r)
     end
 
     if dropChance(player) then
-        setCasketData(player, x, y, z, r, npc, chestOwner)
+        setCasketData(player, x, y, z, r, npc, chestOwner, mob:getMainLvl())
     end
 end
 

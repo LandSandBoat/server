@@ -1,3 +1,9 @@
+-----------------------------------------------------------
+-- Caskets loot tables
+-- Note: some zones are split into high and low teir,
+-- this is because some zones have high mobs and low mobs,
+-- and the drops are level dependant.
+-----------------------------------------------------------
 tpz = tpz or {}
 tpz.casket_loot = tpz.casket_loot or {}
 
