@@ -458,7 +458,6 @@ function getDrops(npc, dropType, zoneId)
                 drops = tpz.casket_loot.casketItems[zoneId].itemsHi
             else
                 drops = tpz.casket_loot.casketItems[zoneId].itemsLow
-                canDropReigonal = false
             end
         else
             drops = tpz.casket_loot.casketItems[zoneId].items
@@ -486,7 +485,7 @@ function getDrops(npc, dropType, zoneId)
             if item == 0 or item == nil then
                 items[i] = 4112 -- default to potion
             else
-                if math.random() < 0.05 and canDropReigonal then
+                if math.random() < 0.05 then
                     items[1] = casketItems[zoneId].regionalItems[math.random(1, #casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
