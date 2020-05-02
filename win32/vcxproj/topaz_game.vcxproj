@@ -243,6 +243,7 @@
     <ClInclude Include="..\..\src\map\ai\controllers\player_controller.h" />
     <ClInclude Include="..\..\src\map\ai\controllers\trust_controller.h" />
     <ClInclude Include="..\..\src\map\ai\helpers\action_queue.h" />
+    <ClInclude Include="..\..\src\map\ai\helpers\gambits_container.h" />
     <ClInclude Include="..\..\src\map\ai\helpers\event_handler.h" />
     <ClInclude Include="..\..\src\map\ai\helpers\pathfind.h" />
     <ClInclude Include="..\..\src\map\ai\helpers\targetfind.h" />
@@ -497,6 +498,7 @@
     <ClCompile Include="..\..\src\map\ai\controllers\player_controller.cpp" />
     <ClCompile Include="..\..\src\map\ai\controllers\trust_controller.cpp" />
     <ClCompile Include="..\..\src\map\ai\helpers\action_queue.cpp" />
+    <ClCompile Include="..\..\src\map\ai\helpers\gambits_container.cpp" />
     <ClCompile Include="..\..\src\map\ai\helpers\event_handler.cpp" />
     <ClCompile Include="..\..\src\map\ai\helpers\pathfind.cpp" />
     <ClCompile Include="..\..\src\map\ai\helpers\targetfind.cpp" />

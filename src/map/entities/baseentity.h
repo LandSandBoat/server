@@ -231,8 +231,8 @@ public:
 
     virtual void    HandleErrorMessage(std::unique_ptr<CBasicPacket>&) {};
 
-    uint32          id;                 // глобальный идентификатор, уникальный на сервере
-    uint16          targid;             // локалный идентификатор, уникальный в зоне
+    uint32          id;                 // global identifier unique on the server
+    uint16          targid;             // local identifier unique to the zone
     ENTITYTYPE      objtype;            // тип сущности
     STATUSTYPE      status;             // статус сущности (разные сущности - разные статусы)
     uint16          m_TargID;           // targid объекта, на который смотрит сущность

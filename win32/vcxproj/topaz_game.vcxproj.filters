@@ -893,6 +893,9 @@
     <ClInclude Include="..\..\src\map\packets\trust_sync.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\ai\helpers\gambits_container.h">
+      <Filter>Header Files\ai\helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\map\ability.cpp">
@@ -1638,6 +1641,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\map\timetriggers.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\ai\helpers\gambits_container.cpp">
+      <Filter>Source Files\ai\helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

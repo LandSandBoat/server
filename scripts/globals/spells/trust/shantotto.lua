@@ -1,6 +1,8 @@
 -----------------------------------------
 -- Trust: Shantotto
 -----------------------------------------
+require("scripts/globals/gambits")
+require("scripts/globals/magic")
 require("scripts/globals/trust")
 -----------------------------------------
 
@@ -13,13 +15,6 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    mob:addListener("COMBAT_TICK", "SHANTOTTO_COMBAT_TICK", function(trust, master, target)
-        trust:castSpell()
-    end)
-end
-
-function onMobDespawn(mob)
-end
-
-function onMobDeath(mob)
+    mob:addGambit(ai.s.TARGET, ai.t.MB_AVAILABLE, 0, ai.r.MA, ai.rm.SELECT_MB_ELEMENT, tpz.magic.spellFamily.NONE)
+    mob:addGambit(ai.s.TARGET, ai.t.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.NONE, 30)
 end

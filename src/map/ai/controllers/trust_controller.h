@@ -22,10 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _TRUSTCONTROLLER_H
 #define _TRUSTCONTROLLER_H
 
+#include <memory>
+
 #include "mob_controller.h"
 
 class CCharEntity;
 class CTrustEntity;
+
+class CGambitsContainer;
 
 class CTrustController : public CMobController
 {
@@ -37,10 +41,13 @@ public:
     void Despawn() override;
 
     bool Ability(uint16 targid, uint16 abilityid) override;
+    bool Cast(uint16 targid, SpellID spellid) override;
 
     static constexpr float RoamDistance{ 2.0f };
     static constexpr float SpawnDistance{ 3.0f };
     static constexpr float WarpDistance{ 30.0f };
+
+    std::unique_ptr<CGambitsContainer> m_GambitsContainer;
 
 private:
     void DoCombatTick(time_point tick) override;

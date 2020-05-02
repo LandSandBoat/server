@@ -584,6 +584,7 @@ public:
 
     int32 spawnTrust(lua_State*);            // Spawns trust
     int32 getTrustID(lua_State*);
+    int32 addGambit(lua_State*);
 
     int32 isJugPet(lua_State*);              // If the entity has a pet, test if it is a jug pet.
     int32 hasValidJugPetItem(lua_State*);

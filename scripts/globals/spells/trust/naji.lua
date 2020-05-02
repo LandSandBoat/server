@@ -32,7 +32,7 @@ function onMobSpawn(mob)
         local provokeReadyTime = trust:getLocalVar("provokeReadyTime")
 
         if tryProvoke == 1 and os.time() >= provokeReadyTime then
-            trust:useMobAbility(1945, target)
+            trust:useJobAbility(19, target)
             trust:setLocalVar("tryProvoke", 0)
             trust:setLocalVar("provokeReadyTime", os.time() + 30)
         end

@@ -3092,6 +3092,32 @@ namespace battleutils
         return PDefender->getMod(defMod);
     }
 
+    std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
+    {
+        static const std::unordered_map<SKILLCHAIN_ELEMENT, std::vector<ELEMENT>> resonanceToElement = {
+            {SC_NONE, {}},
+            {SC_TRANSFIXION, {ELEMENT_LIGHT}},
+            {SC_COMPRESSION, {ELEMENT_DARK}},
+            {SC_LIQUEFACTION, {ELEMENT_FIRE}},
+            {SC_SCISSION, {ELEMENT_EARTH}},
+            {SC_REVERBERATION, {ELEMENT_WATER}},
+            {SC_DETONATION, {ELEMENT_WIND}},
+            {SC_INDURATION, {ELEMENT_ICE}},
+            {SC_IMPACTION, {ELEMENT_THUNDER}},
+
+            {SC_GRAVITATION, {ELEMENT_DARK, ELEMENT_EARTH}},
+            {SC_DISTORTION, {ELEMENT_WATER, ELEMENT_ICE}},
+            {SC_FUSION, {ELEMENT_LIGHT, ELEMENT_FIRE}},
+            {SC_FRAGMENTATION, {ELEMENT_WIND, ELEMENT_THUNDER}},
+
+            {SC_LIGHT, {ELEMENT_LIGHT, ELEMENT_FIRE, ELEMENT_WIND, ELEMENT_THUNDER}},
+            {SC_DARKNESS, {ELEMENT_DARK, ELEMENT_EARTH, ELEMENT_WATER, ELEMENT_ICE}},
+            {SC_LIGHT_II, {ELEMENT_LIGHT}},
+            {SC_DARKNESS_II, {ELEMENT_DARK}}};
+
+        return resonanceToElement.at(skillchain);
+    }
+
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
     {
         TPZ_DEBUG_BREAK_IF(PAttacker == nullptr);

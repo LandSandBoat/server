@@ -37,12 +37,12 @@ public:
 
   CMobSpellContainer(CMobEntity* PMob);
 
-
   // These methods return a random spell
   std::optional<SpellID> GetAggroSpell(); // -ga spell, dia, bio, paralyze, silence, blind
   std::optional<SpellID> GetGaSpell(); // AoE damage spells, stonega, diaga
   std::optional<SpellID> GetDamageSpell(); // Single target damage spells, stone
   std::optional<SpellID> GetBuffSpell(); // stoneskin, utsusemi, blink
+  std::optional<SpellID> GetDebuffSpell();
   std::optional<SpellID> GetHealSpell(); // cures, regen, armys paeon
   std::optional<SpellID> GetNaSpell(); // silena, blindna etc
   std::optional<SpellID> GetSpell(); // return a random spell
@@ -55,22 +55,24 @@ public:
   bool HasBuffSpells() const;
   bool HasHealSpells() const;
   bool HasNaSpells() const;
+  bool HasDebuffSpells() const;
 
   void ClearSpells();
   void AddSpell(SpellID spellId);
-  // TODO:
   void RemoveSpell(SpellID spellId);
+
+  std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
 
   std::vector<SpellID> m_gaList;
   std::vector<SpellID> m_damageList;
   std::vector<SpellID> m_buffList;
+  std::vector<SpellID> m_debuffList;
   std::vector<SpellID> m_healList;
   std::vector<SpellID> m_naList;
 
 private:
   CMobEntity* m_PMob;
   bool m_hasSpells;
-
 };
 
 #endif

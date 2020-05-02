@@ -1,10 +1,14 @@
 -----------------------------------------
 -- Trust: Kupipi
 -----------------------------------------
+require("scripts/globals/magic")
+require("scripts/globals/gambits")
+require("scripts/globals/status")
 require("scripts/globals/trust")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------------
+
 
 function onMagicCastingCheck(caster, target, spell)
     return tpz.trust.canCast(caster, spell)
@@ -22,19 +26,41 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    mob:addListener("COMBAT_TICK", "KUPIPI_COMBAT_TICK", function(trust, master, target)
-        function round(x)
-            return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
-        end
-        
-        local party = master:getPartyWithTrusts()
-        local lvl = trust:getMainLvl()
-        local maxCure = utils.clamp(round(lvl/8), 1, 6)
+    local CURE_I   = 1
+    local POISONA  = 14
+    local PARALYNA = 15
+    local BLINDNA  = 16
+    local SILENA   = 17
+    local STONA    = 18
+    local VIRUNA   = 19
+    local CURSENA  = 20
+    local FLASH    = 112
+    local ERASE    = 143
 
-        for _, member in ipairs(party) do
-            if member:getHPP() <= 75 then
-                trust:castSpell(maxCure, member)
-            end
-        end
-    end)
+    mob:addGambit(ai.s.PARTY, ai.t.HPP_LTE, 25, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.CURE)
+
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SLEEP_I, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURE_I)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SLEEP_II, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURE_I)
+
+    mob:addGambit(ai.s.PARTY, ai.t.HPP_LTE, 75, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.CURE)
+
+    mob:addGambit(ai.s.PARTY, ai.t.NOT_STATUS, tpz.effect.PROTECT, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.PROTECTRA)
+    mob:addGambit(ai.s.PARTY, ai.t.NOT_STATUS, tpz.effect.SHELL, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.SHELLRA)
+
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.POISON, ai.r.MA, ai.rm.SELECT_SPECIFIC, POISONA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.rm.SELECT_SPECIFIC, PARALYNA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.BLINDNESS, ai.r.MA, ai.rm.SELECT_SPECIFIC, BLINDNA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SILENCE, ai.r.MA, ai.rm.SELECT_SPECIFIC, SILENA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.PETRIFICATION, ai.r.MA, ai.rm.SELECT_SPECIFIC, STONA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.DISEASE, ai.r.MA, ai.rm.SELECT_SPECIFIC, VIRUNA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.CURSE_I, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURSENA)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.CURSE_II, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURSENA)
+
+    mob:addGambit(ai.s.SELF, ai.t.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.rm.SELECT_SPECIFIC, ERASE)
+    mob:addGambit(ai.s.PARTY, ai.t.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.rm.SELECT_SPECIFIC, ERASE)
+
+    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.PARALYZE, 60)
+    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.SLOW, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.SLOW, 60)
+
+    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.FLASH, ai.r.MA, ai.rm.SELECT_SPECIFIC, FLASH, 60)
 end

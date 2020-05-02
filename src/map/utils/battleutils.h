@@ -124,11 +124,12 @@ namespace battleutils
     void                FreeWeaponSkillsList();
     void                FreeMobSkillList();
 
-    SUBEFFECT           GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary);
-    SKILLCHAIN_ELEMENT  FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill);
-    uint8               GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain);
-    uint8               GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
-    int16               GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle);
+    SUBEFFECT            GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary);
+    SKILLCHAIN_ELEMENT   FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill);
+    uint8                GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain);
+    uint8                GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
+    int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle);
+    std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
 
     bool            IsParalyzed(CBattleEntity* PAttacker);
     bool            IsAbsorbByShadow(CBattleEntity* PDefender);
