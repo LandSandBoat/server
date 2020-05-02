@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Windurst_Waters/IDs");
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
         and player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
     then
@@ -106,7 +106,7 @@ function onTrigger(player,npc)
         player:startEvent(885, 0, 1696, 1697, 1698) -- Reminder to bring Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
     elseif moonlitPath == QUEST_COMPLETED then
-        player:startEvent(847,0,1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
+        player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
 
     else
         player:startEvent(345); -- Standard Dialogue?
@@ -230,12 +230,11 @@ function onEventFinish(player,csid,option)
     elseif csid == 884 then
         player:addQuest(WINDURST,tpz.quest.id.windurst.TUNING_IN)
 
-    elseif csid == 886 then
+    elseif csid == 886 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_IN, {
+        gil = 4000,
+        title = tpz.title.FINE_TUNER,
+    }) then
         player:tradeComplete()
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_IN, {
-            gil = 4000,
-            title = tpz.title.FINE_TUNER,
-        })
     end
 
 end;
