@@ -20,14 +20,14 @@ require("scripts/globals/msg")
 
 -- paralyze on hit, fire damage on hit, etc..
 function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
-    local addType = item:getMod(dsp.mod.ITEM_ADDEFFECT_TYPE)
-    local subEffect = item:getMod(dsp.mod.ITEM_SUBEFFECT)
-    local damage = item:getMod(dsp.mod.ITEM_ADDEFFECT_DMG)
-    local chance = 1000 --item:getMod(dsp.mod.ITEM_ADDEFFECT_CHANCE)
-    local element = item:getMod(dsp.mod.ITEM_ADDEFFECT_ELEMENT)
-    local addStatus = item:getMod(dsp.mod.ITEM_ADDEFFECT_STATUS)
-    local power = item:getMod(dsp.mod.ITEM_ADDEFFECT_POWER)
-    local duration = item:getMod(dsp.mod.ITEM_ADDEFFECT_DURATION)
+    local addType = item:getMod(tpz.mod.ITEM_ADDEFFECT_TYPE)
+    local subEffect = item:getMod(tpz.mod.ITEM_SUBEFFECT)
+    local damage = item:getMod(tpz.mod.ITEM_ADDEFFECT_DMG)
+    local chance = 1000 --item:getMod(tpz.mod.ITEM_ADDEFFECT_CHANCE)
+    local element = item:getMod(tpz.mod.ITEM_ADDEFFECT_ELEMENT)
+    local addStatus = item:getMod(tpz.mod.ITEM_ADDEFFECT_STATUS)
+    local power = item:getMod(tpz.mod.ITEM_ADDEFFECT_POWER)
+    local duration = item:getMod(tpz.mod.ITEM_ADDEFFECT_DURATION)
     local tick = 0
     local msgID = 0
     local msgValue = 0
@@ -51,21 +51,21 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
     if
         damage > 0 and
-        (item:getSkillType() == dsp.skill.ARCHERY or
-        item:getSkillType() == dsp.skill.MARKSMANSHIP or
-        item:getSkillType() == dsp.skill.THROWING)
+        (item:getSkillType() == tpz.skill.ARCHERY or
+        item:getSkillType() == tpz.skill.MARKSMANSHIP or
+        item:getSkillType() == tpz.skill.THROWING)
     then
         local bonus = 0
         if element ~= nil then
-            if element == dsp.magic.ele.LIGHT then
-                bonus = attacker:getStat(dsp.mod.MND) - defender:getStat(dsp.mod.MND)
+            if element == tpz.magic.ele.LIGHT then
+                bonus = attacker:getStat(tpz.mod.MND) - defender:getStat(tpz.mod.MND)
                 if bonus > 40 then
                     -- Copied from existing scripts.
                     bonus = bonus + (bonus -40) /2;
                     damage = damage + bonus
                 end
             else
-                bonus = attacker:getStat(dsp.mod.INT) - defender:getStat(dsp.mod.INT)
+                bonus = attacker:getStat(tpz.mod.INT) - defender:getStat(tpz.mod.INT)
                 if bonus > 20 then
                     -- Copied from existing scripts.
                     bonus = bonus + (bonus -20) /2;
@@ -84,20 +84,20 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
     if addType == procType.NORMAL then
         if addStatus ~= nil and addStatus > 0 then
-            msgID = dsp.msg.basic.ADD_EFFECT_STATUS
+            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
 
             if chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
                 msgValue = nil
             else
-                if addStatus == dsp.effect.DEFENSE_DOWN then
-                    defender:delStatusEffect(dsp.effect.DEFENSE_BOOST)
-                elseif addStatus == dsp.effect.EVASION_DOWN then
-                    defender:delStatusEffect(dsp.effect.EVASION_BOOST)
-                elseif addStatus == dsp.effect.ATTACK_DOWN then
-                    defender:delStatusEffect(dsp.effect.ATTACK_BOOST)
+                if addStatus == tpz.effect.DEFENSE_DOWN then
+                    defender:delStatusEffect(tpz.effect.DEFENSE_BOOST)
+                elseif addStatus == tpz.effect.EVASION_DOWN then
+                    defender:delStatusEffect(tpz.effect.EVASION_BOOST)
+                elseif addStatus == tpz.effect.ATTACK_DOWN then
+                    defender:delStatusEffect(tpz.effect.ATTACK_BOOST)
                 end
 
-                if addStatus == dsp.effect.POISON or addStatus == dsp.effect.CHOKE then
+                if addStatus == tpz.effect.POISON or addStatus == tpz.effect.CHOKE then
                     tick = 3
                 end
 
@@ -118,15 +118,15 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 dmg = adjustForTarget(defender, dmg, element)
                 dmg = finalMagicNonSpellAdjustments(attacker, defender, element, dmg)
 
-                if subEffect == dsp.subEffect.HP_DRAIN then
-                    msgID = dsp.msg.basic.ADD_EFFECT_HP_DRAIN
+                if subEffect == tpz.subEffect.HP_DRAIN then
+                    msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
                     if dmg < 0 then
                         dmg = 0
                     end
                 else
-                    msgID = dsp.msg.basic.ADD_EFFECT_DMG
+                    msgID = tpz.msg.basic.ADD_EFFECT_DMG
                     if dmg < 0 then
-                        msgID = dsp.msg.basic.ADD_EFFECT_HEAL
+                        msgID = tpz.msg.basic.ADD_EFFECT_HEAL
                     end
                 end
                 msgValue = dmg
@@ -140,10 +140,10 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         else
             local HP = 10 -- need actual calculation here!
 
-            msgID = dsp.msg.basic.ADD_EFFECT_HP_HEAL
+            msgID = tpz.msg.basic.ADD_EFFECT_HP_HEAL
             attacker:addHP(HP)
             -- We have to fake this or it will say the defender was healed rather than the attacker.
-            attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_HP_HEAL)
+            attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_HP_HEAL)
             -- We're faking it, so return zeros!
             msgID = 0
             msgValue = 0
@@ -157,7 +157,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             local MP = 10 -- need actual calculation here!
             attacker:addMP(MP)
             -- We have to fake this or it will say the defender was healed rather than the attacker.
-            attacker:messageBasic(dsp.msg.basic.ADD_EFFECT_MP_HEAL)
+            attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_MP_HEAL)
             -- We're faking it, so return zeros!
             msgID = 0
             msgValue = 0
@@ -173,7 +173,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 dmg = defender:getHP()
             end
 
-            msgID = dsp.msg.basic.ADD_EFFECT_HP_DRAIN
+            msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
             msgValue = dmg
             defender:addHP(-dmg)
             attacker:addHP(dmg)
@@ -190,7 +190,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 dmg = defender:getMP()
             end
 
-            msgID = dsp.msg.basic.ADD_EFFECT_MP_DRAIN
+            msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
             msgValue = dmg
             defender:addMP(-dmg)
             attacker:addMP(dmg)
@@ -207,7 +207,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 dmg = defender:getTP()
             end
 
-            msgID = dsp.msg.basic.ADD_EFFECT_TP_DRAIN
+            msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
             msgValue = dmg
             defender:addTP(-dmg)
             attacker:addTP(dmg)
@@ -219,10 +219,10 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             msgValue = nil
         else
             local dispel = target:dispelStatusEffect()
-            if dispel == dsp.effect.NONE then
+            if dispel == tpz.effect.NONE then
                 msgValue = nil
             else
-                msgID = dsp.msg.basic.ADD_EFFECT_DISPEL
+                msgID = tpz.msg.basic.ADD_EFFECT_DISPEL
                 msgValue = dispel
             end
         end
@@ -232,23 +232,23 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(100) then
             msgValue = nil
         else
-            if addStatus == dsp.effect.TELEPORT then -- WARP
-                attacker:addStatusEffectEx(dsp.effect.TELEPORT, 0, dsp.teleport.id.WARP, 0, 1)
-                msgID = dsp.msg.basic.ADD_EFFECT_WARP
+            if addStatus == tpz.effect.TELEPORT then -- WARP
+                attacker:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
+                msgID = tpz.msg.basic.ADD_EFFECT_WARP
                 msgValue = 0
-            elseif addStatus == dsp.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+            elseif addStatus == tpz.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
                 -- Does not stack with or replace other shadows
-                if chance <= math.random(100) or attacker:hasStatusEffect(dsp.effect.BLINK) or attacker:hasStatusEffect(dsp.effect.UTSUSEMI) then
+                if chance <= math.random(100) or attacker:hasStatusEffect(tpz.effect.BLINK) or attacker:hasStatusEffect(tpz.effect.UTSUSEMI) then
                     msgValue = nil
                 else
-                    attacker:addStatusEffect(dsp.effect.BLINK, power, 0, duration)
+                    attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
                     -- We're faking it, so return zeros!
                     msgID = 0
                     msgValue = 0
                 end
             else
                 -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
-                attacker:addStatusEffect(dsp.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
+                attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
                 -- We're faking it, so return zeros!
                 msgID = 0
                 msgValue = 0
@@ -260,8 +260,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(100) or defender:isNM() then
             msgValue = nil
         else
-            msgID = dsp.msg.basic.ADD_EFFECT_STATUS
-            msgValue = dsp.effect.KO
+            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
+            msgValue = tpz.effect.KO
             defender:setHP(0)
         end
     end
