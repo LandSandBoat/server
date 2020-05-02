@@ -102,7 +102,7 @@ local function timeElapsedCheck(npc)
         return false
     end
 
-    if npc:getLocalVar("[caskets]SPAWNTIME") > 0 then
+    if npc:getLocalVar("[caskets]SPAWNTIME") then
         spawnTime = npc:getLocalVar("[caskets]SPAWNTIME")
     end
     
@@ -127,7 +127,7 @@ local function getCasketID(mob)
     for i = baseChestId, baseChestId + 15 do
         if timeElapsedCheck(GetNPCByID(i)) then
             if GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
-                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == nil then
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0 then
                 chestId = i
                 break
             end
@@ -165,7 +165,6 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-
     if rand < utils.clamp(CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
         return true
     end
