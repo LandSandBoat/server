@@ -7,16 +7,14 @@
 require("scripts/globals/settings");
 require("scripts/globals/missions");
 require("scripts/globals/keyitems");
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Windurst_Waters/IDs");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    if (trade:getItemCount() == 3
-        and trade:hasItemQty(1696, 1) -- Magicked Steel Ingot
-        and trade:hasItemQty(1697, 1) -- Spruce Lumber
-        and trade:hasItemQty(1698, 1) -- Extra-fine File
+    if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
         and player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
-    ) then
+    then
         player:startEvent(886)
     end
 end
@@ -49,10 +47,10 @@ function onTrigger(player,npc)
         player:startEvent(311);
 
     -- Tuning In
-    elseif (tuningIn == QUEST_AVAILABLE
+    elseif tuningIn == QUEST_AVAILABLE
         and player:getFameLevel(WINDURST) >= 4
         and (player:getCurrentMission(COP) >= tpz.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(COP,tpz.mission.id.cop.THE_LAST_VERSE))
-    ) then
+    then
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
 
@@ -104,10 +102,10 @@ function onTrigger(player,npc)
             player:startEvent(848,0,1125,334);
         end
 
-    elseif (tuningIn == QUEST_ACCEPTED) then
+    elseif tuningIn == QUEST_ACCEPTED then
         player:startEvent(885, 0, 1696, 1697, 1698) -- Reminder to bring Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
-    elseif (moonlitPath == QUEST_COMPLETED) then
+    elseif moonlitPath == QUEST_COMPLETED then
         player:startEvent(847,0,1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
 
     else
@@ -229,16 +227,15 @@ function onEventFinish(player,csid,option)
         finishMissionTimeline(player,3,csid,option);
 
     -- Tuning In
-    elseif (csid == 884) then
+    elseif csid == 884 then
         player:addQuest(WINDURST,tpz.quest.id.windurst.TUNING_IN)
 
-    elseif (csid == 886) then
+    elseif csid == 886 then
         player:tradeComplete()
-        local gil = 4000 * GIL_RATE
-        player:addGil(gil)
-        player:messageSpecial(ID.text.GIL_OBTAINED, gil)
-        player:addTitle(tpz.title.FINE_TUNER)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.TUNING_IN)
+        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_IN, {
+            gil = 4000,
+            title = tpz.title.FINE_TUNER,
+        })
     end
 
 end;
