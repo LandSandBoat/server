@@ -52,7 +52,7 @@ function onSpellCast(caster,target,spell)
 
                 local mbonus = caster:getMerit(tpz.merit.ELEMENTAL_DEBUFF_EFFECT)
                 DOT = DOT + mbonus/2 -- Damage
-                target:addStatusEffect(tpz.effect.FROST,DOT, 3, duration,FLAG_ERASABLE)
+                target:addStatusEffect(tpz.effect.FROST,DOT, 3, duration)
             end
         end
     end
