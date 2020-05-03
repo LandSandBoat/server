@@ -1,8 +1,7 @@
 -----------------------------------
--- Area: Windurst Woods
---  NPC: Arbitrix
+-- Area: Lower Jeuno
+--  NPC: Sweepstox
 -- Gobbie Mystery Box
--- !pos -215.5 0.0 -147.3
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/settings")
@@ -22,10 +21,12 @@ local events =
     KEY_TRADE               = 20065,
     NO_THANKS               = 20066,
     FULL_INV                = 20067,
-    OTHER_BAD_TRADE         = 20068,
-    ITEM_CANNOT_BE_OBTAINED = 6382,
-    LIL_BABY                = 6424
+    OTHER_BAD_TRADE         = 20068
 }
+
+function onTrade(player,npc,trade)
+    tpz.mystery.onTrade(player, npc, trade, events)
+end
 
 function onTrigger(player, npc)
     tpz.mystery.onTrigger(player, npc, events)
