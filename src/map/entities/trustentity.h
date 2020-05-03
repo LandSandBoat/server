@@ -32,11 +32,6 @@ public:
     explicit CTrustEntity(CCharEntity*);
     ~CTrustEntity() override = default;
 
-    // Note: The default name is the lowercase spell script name, so we override GetName()
-    // to return the packetName instead, which makes the behaviour consistant with other uses
-    // of GetName()
-    const int8* GetName() override;
-
     void PostTick() override;
     void FadeOut() override;
     void Die() override;

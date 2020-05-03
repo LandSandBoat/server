@@ -49,11 +49,6 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this), std::make_unique<CTargetFind>(this));
 }
 
-const int8* CTrustEntity::GetName()
-{
-    return (const int8*)packetName.c_str();
-}
-
 void CTrustEntity::PostTick()
 {
     CBattleEntity::PostTick();
