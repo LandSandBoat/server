@@ -3460,4 +3460,4 @@ INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3511); -- Lunatic Voice
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3512); -- Sonic Buffet
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3513); -- Entice
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3514); -- Hysteric Assault
-INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call
+-- INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call -- Forced at 25%

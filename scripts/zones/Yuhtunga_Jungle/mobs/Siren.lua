@@ -4,8 +4,15 @@
 -- !pos -406.471 16.683 -378.071 123
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+mixins = {require("scripts/mixins/job_special")}
+-----------------------------------
 
-function onMobDisengage(mob)
+function onMobFight(mob, target)
+    local ClarsachCall = mob:getLocalVar("ClarsachCall")
+    if mob:getHPP() <= 25 and ClarsachCall == 0 then
+        mob:useMobAbility(3515)
+        mob:setLocalVar("ClarsachCall", 1)
+    end
 end
 
 function onMobDeath(mob, player, isKiller)

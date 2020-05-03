@@ -8,7 +8,10 @@ require("scripts/globals/status")
 ---------------------------------------------
 
 function onMobSkillCheck(target,mob,skill)
-    return 0
+    if mob:hasStatusEffect(tpz.effect.SOUL_VOICE) then
+        return 0
+    end
+    return 1
 end
 
 function onMobWeaponSkill(target, mob, skill)
