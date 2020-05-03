@@ -944,7 +944,6 @@ int32 map_config_default()
     map_config.mysql_database = "tpzdb";
     map_config.mysql_port = 3306;
     map_config.server_message = "";
-    map_config.server_message_fr = "";
     map_config.buffer_size = 1800;
     map_config.ah_base_fee_single = 1;
     map_config.ah_base_fee_stacks = 4;
@@ -1376,30 +1375,10 @@ int32 map_config_read(const int8* cfgName)
 
     fclose(fp);
 
-    // Load the French server message..
-    fp = fopen("./conf/server_message_fr.conf", "rb");
-    if (fp == nullptr)
-    {
-        ShowError("Could not read English server message from: ./conf/server_message_fr.conf\n");
-        return 1;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        string_t sline(line);
-        map_config.server_message_fr += sline;
-    }
-
-    fclose(fp);
-
     // Ensure both messages have nullptr terminates..
     if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
     {
         map_config.server_message += (char)0x00;
-    }
-    if (map_config.server_message_fr.at(map_config.server_message_fr.length() - 1) != 0x00)
-    {
-        map_config.server_message_fr += (char)0x00;
     }
 
     return 0;
