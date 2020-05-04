@@ -135,7 +135,11 @@ void CGambitsContainer::Tick(time_point tick)
             {
                 if (action.reaction_mod == G_REACTION_MODIFIER::SELECT_SPECIFIC)
                 {
-                    controller->Cast(target->targid, static_cast<SpellID>(action.reaction_arg));
+                    auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.reaction_arg));
+                    if (spell_id.has_value())
+                    {
+                        controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                    }
                 }
                 else if (action.reaction_mod == G_REACTION_MODIFIER::SELECT_HIGHEST)
                 {

@@ -61,6 +61,7 @@ public:
   void AddSpell(SpellID spellId);
   void RemoveSpell(SpellID spellId);
 
+  std::optional<SpellID> GetAvailable(SpellID spellId);
   std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
 
   std::vector<SpellID> m_gaList;
