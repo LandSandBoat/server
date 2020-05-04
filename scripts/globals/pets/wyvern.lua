@@ -34,12 +34,17 @@ local wyvernTypes = {
 }
 
 function doHealingBreath(player, threshold, breath)
-    if player:getHPP() < threshold then
+    local breath_heal_range = 13
+    local function inBreathRange(target)
+        return player:getPet():getZoneID() == target:getZoneID() and player:getPet():checkDistance(target) <= breath_heal_range
+    end
+
+    if player:getHPP() < threshold and inBreathRange(player) then
         player:getPet():useJobAbility(breath, player)
     else
         local party = player:getParty()
         for _,member in ipairs(party) do
-            if member:getHPP() < threshold then
+            if member:getHPP() < threshold and inBreathRange(member) then
                 player:getPet():useJobAbility(breath, member)
                 break
             end
