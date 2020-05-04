@@ -1066,7 +1066,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Structure',236,999);
 INSERT INTO `mob_skill_lists` VALUES ('Structure',236,1000);
 INSERT INTO `mob_skill_lists` VALUES ('Structure',236,1001);
 -- 235 to 238: assigned to many random mobs
-INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,629); -- thunderbolt
+INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,378); -- thunderbolt
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,498);
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,499);
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,500);
