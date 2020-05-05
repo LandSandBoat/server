@@ -602,8 +602,14 @@ namespace spell
             {
                 // cant cast cause im hidden or untargetable
                 if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->IsUntargetable())
+                {
                     return false;
-
+                }
+                // ensure trust level is appropriate+
+                if (PCaster->objtype == TYPE_TRUST && PCaster->GetMLevel() < JobMLVL)
+                {
+                    return false;
+                }
                 // Mobs can cast any non-given char spell
                 return true;
             }
