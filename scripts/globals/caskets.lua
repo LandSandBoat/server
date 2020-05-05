@@ -58,6 +58,15 @@ local casketInfo =
         167, 169, 172, 173, 174, 176, 177, 178, 184, 190, 191, 192,
         193, 194, 195, 196, 197, 198, 204, 205, 207, 208, 212, 213
     },
+    splitZones = set{
+       tpz.zone.ZERUHN_MINES,
+       tpz.zone.KORROLOKA_TUNNEL,
+       tpz.zone.KING_RANPERRES_TOMB,
+       tpz.zone.ORDELLES_CAVES,
+       tpz.zone.OUTER_HORUTOTO_RUINS,
+       tpz.zone.GUSGEN_MINES,
+       tpz.zone.MAZE_OF_SHAKHRAMI
+    },
     cs =
     {
         [0]  = 1000, [1]  = 1003, [2]  = 1006, [3]  = 1009, [4]  = 1012, [5]  = 1015,
@@ -402,10 +411,7 @@ function getDrops(npc, dropType, zoneId)
         local tempCount    = 1
         local randomTable  = {1,3,1,2,1,2,1,1,3,1,2,1}
 
-        if zoneId == 172 or zoneId == 173 or zoneId == 190 or
-           zoneId == 191 or zoneId == 193 or zoneId == 194 or
-           zoneId == 196 or zoneId == 198 then
-
+        if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
             if mobLvl > 50 then
                 tempDrops = tpz.casket_loot.casketItems[zoneId].tempsHi
@@ -450,9 +456,7 @@ function getDrops(npc, dropType, zoneId)
         local itemCount    = 1
         local randomTable  = {1,4,1,3,1,1,2,1,3,1,2,1}
 
-        if zoneId == 172 or zoneId == 173 or zoneId == 190 or
-           zoneId == 191 or zoneId == 193 or zoneId == 194 or
-           zoneId == 196 or zoneId == 198 then
+        if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
             if mobLvl > 50 then
                 drops = tpz.casket_loot.casketItems[zoneId].itemsHi
