@@ -37,15 +37,15 @@ CREATE TABLE `mob_spawn_mods` (
 
 LOCK TABLES `mob_spawn_mods` WRITE;
 /*!40000 ALTER TABLE `mob_spawn_mods` DISABLE KEYS */;
-INSERT INTO `mob_spawn_mods` VALUES (16806117,288,40,0); -- Sargas DA guestimate
-INSERT INTO `mob_spawn_mods` VALUES (17240232,23,50,0); -- Tegmine attack bonus guestimate, he hits hard for a crab on retail
-INSERT INTO `mob_spawn_mods` VALUES (17240232,288,40,0); -- Tegmine DA guestimate
+INSERT INTO `mob_spawn_mods` VALUES (16806117,288,40,0); -- Sargas DA guesstimate
+INSERT INTO `mob_spawn_mods` VALUES (17240232,23,50,0); -- Tegmine attack bonus guesstimate, he hits hard for a crab on retail
+INSERT INTO `mob_spawn_mods` VALUES (17240232,288,40,0); -- Tegmine DA guesstimate
 INSERT INTO `mob_spawn_mods` VALUES (17186927,368,33,0);
 INSERT INTO `mob_spawn_mods` VALUES (17195221,368,33,0);
 INSERT INTO `mob_spawn_mods` VALUES (17363080,368,33,0);
-INSERT INTO `mob_spawn_mods` VALUES (17424488,302,25,0); -- Autarch TA guestimate
-INSERT INTO `mob_spawn_mods` VALUES (17424488,288,25,0); -- Autarch DA guestimate
-INSERT INTO `mob_spawn_mods` VALUES (17424488,23,60,0); -- Autarch attack bonus guestimate
+INSERT INTO `mob_spawn_mods` VALUES (17424488,302,25,0); -- Autarch TA guesstimate
+INSERT INTO `mob_spawn_mods` VALUES (17424488,288,25,0); -- Autarch DA guesstimate
+INSERT INTO `mob_spawn_mods` VALUES (17424488,23,60,0); -- Autarch attack bonus guesstimate
 INSERT INTO `mob_spawn_mods` VALUES (17371142,1,20,1);
 INSERT INTO `mob_spawn_mods` VALUES (17371142,2,33,1);
 INSERT INTO `mob_spawn_mods` VALUES (17371143,1,20,1);
