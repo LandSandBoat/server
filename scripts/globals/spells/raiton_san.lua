@@ -16,11 +16,6 @@ function onSpellCast(caster,target,spell)
     local bonusAcc = 0
     local bonusMab = caster:getMerit(tpz.merit.RAITON_EFFECT) -- T1 mag atk
 
-    if(caster:getMerit(tpz.merit.RAITON_SAN) ~= 0) then -- T2 mag atk/mag acc, don't want to give a penalty to entities that can cast this without merits
-        bonusMab = bonusMab + caster:getMerit(tpz.merit.RAITON_SAN) - 5 -- merit gives 5 power but no bonus with one invest, thus subtract 5
-        bonusAcc = bonusAcc + caster:getMerit(tpz.merit.RAITON_SAN) - 5
-    end
-
     local params = {}
 
     params.dmg = 134

@@ -64,7 +64,7 @@ function onEventFinish(player,csid,option)
         player:setCharVar("SOA_1_CS1", 0)
         player:setCharVar("SOA_1_CS2", 0)
         player:setCharVar("SOA_1_CS3", 0)
-        
+
         if option == 2 then player:delGil(1000000) end
 
         player:delKeyItem(tpz.ki.GEOMAGNETRON)

@@ -23,7 +23,7 @@ zones[tpz.zone.ABYSSEA_ULEGUERAND] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17813949] = { 'qm1',      {3245,3251},                                                           {}, 17813925}, -- Ironclad Triturator
             --  [17813950] = { 'qm2', {3246,3247,3253},                                                           {}, 17813927}, -- Dhorme Khimaira

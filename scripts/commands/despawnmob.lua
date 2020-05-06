@@ -31,7 +31,7 @@ function onTrigger(player, mobId)
             return
         end
     end
-    
+
     -- despawn mob
     DespawnMob(targ:getID())
     player:PrintToPlayer(string.format("Despawned %s %i.",targ:getName(),targ:getID()))

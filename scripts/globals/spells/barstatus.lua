@@ -10,7 +10,7 @@ function calculateBarstatusPower(caster,enhanceSkill)
     if (enhanceSkill == nil or enhanceSkill < 0) then
         enhanceSkill = 0
     end
-    
+
     -- No known way to determine actual potency.
     return 1 + 0.02 * enhanceSkill + meritBonus
 end
@@ -27,7 +27,7 @@ function applyBarstatus(effectType,caster,target,spell)
     local power = calculateBarstatusPower(caster,enhanceSkill)
     local duration = calculateBarstatusDuration(caster, enhanceSkill)
     duration = calculateDuration(duration, tpz.skill.ENHANCING_MAGIC, tpz.magic.spellGroup.WHITE, caster, target)
-    
+
     target:addStatusEffect(effectType,power,0,duration)
     return effectType
 end

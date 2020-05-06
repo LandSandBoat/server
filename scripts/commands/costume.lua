@@ -20,7 +20,7 @@ function onTrigger(player, costumeId)
         error(player, "Invalid costumeID.")
         return
     end
-    
+
     -- put on costume
     player:costume( costumeId )
 end

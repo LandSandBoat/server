@@ -18,7 +18,7 @@ end
 
 function onMobWeaponSkill(target, mob, skill)
     local dmgmod = 1
-    
+
     if (mob:getName() == "Kreutzet") then
         local stormwindDamage = mob:getLocalVar("stormwindDamage")
         if (stormwindDamage == 2) then

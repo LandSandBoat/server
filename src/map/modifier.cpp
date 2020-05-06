@@ -35,7 +35,7 @@ int16 CModifier::getModAmount()
 {
 	return m_amount;
 }
-	
+
 void CModifier::setModAmount(int16 amount)
 {
 	m_amount = amount;

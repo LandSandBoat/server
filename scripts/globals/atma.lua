@@ -116,7 +116,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_FALLEN_ONE]             = {tpz.mod.INT, 30, tpz.mod.MND, 30},
     [tpz.ki.ATMA_OF_FIRES_AND_FLARES]           = {tpz.mod.AGI, 20, tpz.mod.RATT, 40},
     [tpz.ki.ATMA_OF_THE_APOCALYPSE]             = {tpz.mod.TRIPLE_ATTACK, 15, tpz.mod.RERAISE_III, 1, tpz.mod.QUICK_MAGIC, 10},
-    
+
     -- GROUP 2
     [tpz.ki.ATMA_OF_THE_HEIR]                   = {},
     [tpz.ki.ATMA_OF_THE_HERO]                   = {},

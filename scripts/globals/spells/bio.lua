@@ -14,7 +14,8 @@ function onMagicCastingCheck(caster,target,spell)
 end
 
 function onSpellCast(caster,target,spell)
-    local basedmg = caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 4
+    local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
+    local basedmg = skillLvl / 4
     local params = {}
     params.dmg = basedmg
     params.multiplier = 1
@@ -47,8 +48,13 @@ function onSpellCast(caster,target,spell)
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)
 
-    -- Calculate DoT effect (rough, though fairly accurate)
-    local dotdmg = 2 + math.floor(caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 60)
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
+    local dotdmg = 0
+    if     skillLvl > 80 then dotdmg = 3
+    elseif skillLvl > 40 then dotdmg = 2
+    else                      dotdmg = 1
+    end
 
     -- Do it!
     target:addStatusEffect(tpz.effect.BIO, dotdmg, 3, duration, 0, 10, 1)

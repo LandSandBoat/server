@@ -3867,7 +3867,7 @@ namespace battleutils
                 CharmTime = 1800000;
                 break;
 
-            case EMobDifficulty::IncredibyEasyPrey:
+            case EMobDifficulty::IncrediblyEasyPrey:
             case EMobDifficulty::EasyPrey:
                 CharmTime = 1200000;
                 break;
@@ -4025,7 +4025,7 @@ namespace battleutils
         case EMobDifficulty::TooWeak:
             charmChance = 90.f;
             break;
-        case EMobDifficulty::IncredibyEasyPrey:
+        case EMobDifficulty::IncrediblyEasyPrey:
         case EMobDifficulty::EasyPrey:
             charmChance = 75.f;
             break;
@@ -4063,10 +4063,10 @@ namespace battleutils
         }
 
         // FIXME: Level and CHR ratios are complete guesses
-        const float levelRatio = (targetLvl - charmerBSTlevel) / 100.f;
+        const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
-        const float chrRatio = (PTarget->CHR() - PCharmer->CHR()) / 100.f;
+        const float chrRatio = (PCharmer->CHR() - PTarget->CHR()) / 100.f;
         charmChance *= (1.f + chrRatio);
 
         // Retail doesn't take light/apollo into account for Gauge
@@ -4378,7 +4378,7 @@ namespace battleutils
             switch (mobCheck)
             {
             case EMobDifficulty::TooWeak:
-            case EMobDifficulty::IncredibyEasyPrey:
+            case EMobDifficulty::IncrediblyEasyPrey:
                 BindBreakChance = 10;
                 break;
 

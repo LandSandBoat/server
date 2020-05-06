@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option, npc)
         if remainder > 0 then
             slotsNeeded = slotsNeeded + 1
         end
-        
+
         if player:getFreeSlotsCount() < slotsNeeded then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
             return
@@ -74,11 +74,11 @@ function onEventFinish(player, csid, option, npc)
         for i = 1, stacks do
             player:addItem(item, 99)
         end
-        
+
         if remainder > 0 then
             player:addItem(item, remainder)
         end
-        
+
         player:delCurrency("imperial_standing", quantity * price)
         npc:showText(npc, ID.text.UGRIHD_PURCHASE_DIALOGUE)
         player:messageSpecial(ID.text.ITEM_OBTAINED, item)

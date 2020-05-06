@@ -93,7 +93,7 @@ void CItemFurnishing::setCol(uint8 col)
 {
 	ref<uint8>(m_extra, 0x06) = col;
 }
-	
+
 uint8 CItemFurnishing::getCol()
 {
     return ref<uint8>(m_extra, 0x06);

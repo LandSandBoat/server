@@ -21,5 +21,6 @@ function onTrigger(player, amount)
         return
     end
 
-    player:setGil( amount )
+    player:setGil(amount)
+    player:PrintToPlayer(string.format("%s's gil was set to %i.", player:getName(), amount))
 end

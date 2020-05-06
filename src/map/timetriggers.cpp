@@ -29,7 +29,7 @@ CTriggerHandler* CTriggerHandler::getInstance()
 {
     if (!_instance)
         _instance.reset(new CTriggerHandler);
-    
+
     return _instance.get();
 }
 

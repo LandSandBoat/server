@@ -19,7 +19,7 @@ function onMobSkillCheck(target,mob,skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-    
+
     local power = 50
     local duration = 120
 
@@ -28,8 +28,8 @@ function onMobWeaponSkill(target, mob, skill)
     local dmgmod = MobBreathMove(mob, target, 0.1, 1, tpz.magic.ele.FIRE, 200)
 
     local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,tpz.attackType.BREATH,tpz.damageType.FIRE,MOBPARAM_IGNORE_SHADOWS)
-    
+
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.FIRE)
     return dmg
-    
+
 end

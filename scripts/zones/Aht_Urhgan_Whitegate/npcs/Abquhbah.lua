@@ -10,7 +10,7 @@ end
 function onTrigger(player,npc)
     local promotion = player:getCharVar("AssaultPromotion")
     local rank = 0
-    
+
     if promotion <= 7 then
         rank = 1
     elseif promotion >= 8 and promotion <= 11 then
@@ -20,7 +20,7 @@ function onTrigger(player,npc)
     elseif promotion >= 19 then
         rank = 4
     end
-     
+
     player:startEvent(255, rank)
 end
 

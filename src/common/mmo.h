@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -35,7 +35,7 @@
 #define FFXI_HEADER_SIZE 0x1C		// common packet header size
 #define FFXI_CHANGE_ZONE 0x0A		// change zone cmd
 
-// флаги перед именем персонажа
+// Flags shown in front of the character's name
 
 enum FLAGTYPE : uint32
 {
@@ -105,10 +105,10 @@ enum MSGSERVTYPE : uint8
 
 typedef std::string string_t;
 
-// для персонажей в size хранится рост, 
-// для npc и монстров что-то вроде типа используемой модели
+// For characters, the size is stored in `size`.
+// For NPCs and monsters, something like the type of model is stored.
 
-struct look_t 
+struct look_t
 {
 	uint16 size;
     union {
@@ -120,7 +120,7 @@ struct look_t
 	uint16 head, body, hands, legs, feet, main, sub, ranged;
 };
 
-struct skills_t 
+struct skills_t
 {
 	union {
 		struct {
@@ -150,7 +150,7 @@ struct skills_t
 		// index SkillID 0-63
 		uint16 skill[64];
 	};
-	// ранг используется только в ремеслах. размер 64 необходим для совместимости ID
+	// The rank is only used in crafts. A size of 64 is required for skill ID compatability.
 	uint8 rank[64];
 };
 
@@ -160,18 +160,23 @@ struct keyitems_table_t
     std::bitset<512> seenList;
 };
 
-struct keyitems_t 
+struct keyitems_t
 {
     std::array<keyitems_table_t, 7> tables;
 };
 
-struct position_t 
+struct position_t
 {
     float x;
-    float y;				// высота расположения сущности относительно "уровня моря"
+    float y;                // Entity height, relative to "sea level"
     float z;
-    uint16 moving;			// что-то вроде расстояния перемещения, необходимое для правильной отрисовки в клиенте количества шагов сущности 
-	uint8 rotation;			// угол поворота сущности относительно своей позиции (используется 255 система, место 360°)
+    uint16 moving;          // Somehing like the travel distance, the number of steps required for correct rendering in the client.
+
+    // The angle of rotation of the entity relative to its position. A maximum rotation value of
+    // 255 is used as the rotation is stored in `uint8`. Use `rotationToRadian()` and
+    // `radianToRotation()` util functions to convert back and forth between the 255-encoded
+    // rotation value and the radian value.
+    uint8 rotation;
 };
 
 struct stats_t
@@ -179,31 +184,31 @@ struct stats_t
 	uint16 STR,DEX,VIT,AGI,INT,MND,CHR;
 };
 
-struct questlog_t 
+struct questlog_t
 {
 	uint8 current [32];
 	uint8 complete[32];
 };
 
-struct missionlog_t 
+struct missionlog_t
 {
 	uint16 current;
 	bool   complete[64];
 };
 
-struct assaultlog_t 
+struct assaultlog_t
 {
 	uint16 current;
 	bool   complete[128];
 };
 
-struct campaignlog_t 
+struct campaignlog_t
 {
 	uint16 current;
 	bool   complete[512];
 };
 
-struct nameflags_t 
+struct nameflags_t
 {
 	union {
 		struct {
@@ -216,13 +221,13 @@ struct nameflags_t
 	};
 };
 
-// информация для окна поиска
-struct search_t 
+// Information for the search window.
+struct search_t
 {
-	uint8 language;			// предпочтительный язык общения
-	uint8 messagetype;		// тип комментария
+	uint8 language;			// Preferred language
+	uint8 messagetype;		// Type of message
 
-	string_t message;	// комментарий поиска
+	string_t message;	//  Search message text
 };
 
 struct bazaar_t
@@ -230,12 +235,13 @@ struct bazaar_t
 	string_t message;
 };
 
-// небольшой комментарий к пакетам ниже, определенным в виде констант
-// 1-й байт - размер пакета
-// через 4-ре байта начинается заголовк 0x49, 0x58, 0x46, 0x46 - IXFF
-// после заголовка идет предположительно тип сообщения:
-// 0x03 - положительный результат
-// 0x04 - ошибка (в случае ошибки начиная с 33 байта идет код ошибки uint16) 
+// A comment on the packets below, defined as macros.
+//   byte 0 - packet size
+//   bytes 4-7 are the packet header "IXFF" (0x49, 0x58, 0x46, 0x46)
+//   byte 8 - The expected message type:
+//     0x03 - positive result
+//     0x04 - error (in the case of an error, a uint16 error code is used at byte 32)
+//     Other
 
 #define LOBBY_A1_RESERVEPACKET(a)\
 unsigned char a[] = { \
@@ -299,7 +305,7 @@ public:
 	uint16	m_zone;
 	uint8	m_nation;
 
-	look_t	m_look;	
+	look_t	m_look;
 
 	 char_mini() {};
 	~char_mini() {};

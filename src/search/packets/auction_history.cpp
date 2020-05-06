@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -28,12 +28,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "auction_history.h"
 
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
 {
     m_count = 0;
@@ -41,15 +35,9 @@ CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
     memset(m_PData, 0, sizeof(m_PData));
 
     ref<uint8>(m_PData, (0x0A)) = 0x80;
-    ref<uint8>(m_PData, (0x0B)) = 0x85;                       // packe type
+    ref<uint8>(m_PData, (0x0B)) = 0x85;                       // packet type
     ref<uint16>(m_PData, 0x10) = ItemID;
 }
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 void CAHHistoryPacket::AddItem(ahHistory* item)
 {
@@ -68,7 +56,7 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем собранный пакет                                           *
+*  Returns the packet's data.                                           *
 *                                                                       *
 ************************************************************************/
 
@@ -79,7 +67,7 @@ uint8* CAHHistoryPacket::GetData()
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем размер отправляемого пакета                               *
+*  Returns the size of the packet.                                      *
 *                                                                       *
 ************************************************************************/
 

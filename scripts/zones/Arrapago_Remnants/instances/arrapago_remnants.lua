@@ -80,7 +80,7 @@ end
 
 function onEventFinish(player, csid, option)
     local instance = player:getInstance()
-    
+
     if csid >= 200 and csid <= 203 and option == 1 then
         for id = ID.mob[2][csid - 199].mobs_start, ID.mob[2][csid - 199].mobs_end do
             SpawnMob(id, instance)

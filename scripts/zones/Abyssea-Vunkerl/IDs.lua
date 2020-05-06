@@ -24,7 +24,7 @@ zones[tpz.zone.ABYSSEA_VUNKERL] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17666576] = { 'qm1', {3098},                                                                                          {}, 17666487}, -- Khalkotaur
             --  [17666577] = { 'qm2', {3099},                                                                                          {}, 17666488}, -- Quasimodo

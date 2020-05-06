@@ -46,12 +46,12 @@ RESTRICT_CONTENT = 0
 
 -- CHARACTER CONFIG
 INITIAL_LEVEL_CAP = 50 -- The initial level cap for new players.  There seems to be a hardcap of 255.
-MAX_LEVEL = 75 -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
+MAX_LEVEL = 99 -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
 NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0 -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0 -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 START_GIL = 10 -- Amount of gil given to newly created characters.
 START_INVENTORY = 30 -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
-OPENING_CUTSCENE_ENABLE = 0 -- Set to 1 to enable opening cutscenes, 0 to disable.
+NEW_CHARACTER_CUTSCENE = 1 -- Set to 1 to enable opening cutscenes, 0 to disable.
 SUBJOB_QUEST_LEVEL = 18 -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
 ADVANCED_JOB_LEVEL = 30 -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
 ALL_MAPS = 0 -- Set to 1 to give starting characters all the maps.
@@ -94,8 +94,8 @@ CHEST_MIN_ILLUSION_TIME  = 1800  -- 30 minutes
 
 -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
 -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-LandKingSystem_NQ = 0
-LandKingSystem_HQ = 0
+LandKingSystem_NQ = 1
+LandKingSystem_HQ = 1
 
 -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
@@ -144,7 +144,7 @@ TIMEZONE_OFFSET = 9.0 -- Offset from UTC used to determine when "JP Midnight" is
 ALLOW_MULTIPLE_EXP_RINGS = 0 -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
 BYPASS_EXP_RING_ONE_PER_WEEK = 0 -- -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
 NUMBER_OF_DM_EARRINGS = 1 -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
-HOMEPOINT_TELEPORT = 0 -- Enables the homepoint teleport system
+HOMEPOINT_TELEPORT = 1 -- Enables the homepoint teleport system
 DIG_ABUNDANCE_BONUS = 0 -- Increase chance of digging up an item (450  = item digup chance +45)
 DIG_FATIGUE = 1 -- Set to 0 to disable Dig Fatigue
 DIG_GRANT_BURROW = 0 -- Set to 1 to grant burrow ability

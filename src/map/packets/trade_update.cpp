@@ -52,11 +52,11 @@ CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
 
         if (((CItemUsable*)PItem)->getCurrentCharges() > 0)
         {
-            ref<uint8>(0x0F) = ((CItemUsable*)PItem)->getCurrentCharges(); 
+            ref<uint8>(0x0F) = ((CItemUsable*)PItem)->getCurrentCharges();
         }
 	}
     if (PItem->isType(ITEM_LINKSHELL))
-	{	
+	{
         ref<uint32>(0x0E) = ((CItemLinkshell*)PItem)->GetLSID();
         ref<uint16>(0x14) = ((CItemLinkshell*)PItem)->GetLSRawColor();
         ref<uint8>(0x16) = ((CItemLinkshell*)PItem)->GetLSType();

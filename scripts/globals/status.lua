@@ -812,8 +812,9 @@ tpz.effect =
     SKILLCHAIN               = 799,
     DYNAMIS                  = 800,
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
-    -- PLACEHOLDER              = 802, -- Description
-    -- 802-1022
+    ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
+    -- PLACEHOLDER           = 803, -- Description
+    -- 803-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
@@ -2649,6 +2650,13 @@ tpz.mount =
     SPECTRAL_CHAIR = 18,
     SPHEROID       = 19,
     OMEGA          = 20,
+    COEURL         = 21,
+    GOOBBUE        = 22,
+    RAAZ           = 23,
+    LEVITUS        = 24,
+    ADAMANTOISE    = 25,
+    DHAMEL         = 26,
+    DOLL           = 27,
 }
 
 ------------------------------------
@@ -2813,11 +2821,11 @@ tpz.relicTiers =
     },
     [tpz.relicIDs.YOICHINOYUMI] =
     {
-        18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22129, 22115
+        18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115, 22129
     },
     [tpz.relicIDs.ANNIHILATOR] =
     {
-        18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 22140, 21267
+        18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267, 22140
     },
     [tpz.relicIDs.GJALLARHORN] =
     {

@@ -1,5 +1,5 @@
 -----------------------------------------
---   Spell: PHALANX
+-- Spell: Phalanx
 -----------------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -17,11 +17,9 @@ function onSpellCast(caster, target, spell)
     duration = calculateDurationForLvl(duration, 33, target:getMainLvl())
 
     if enhskill <= 300 then
-        final = math.max(enhskill / 10 - 2, 0)
-    elseif enhskill > 300 then
-        final = (enhskill - 300) / 29 + 28
+        final = math.max(math.floor(enhskill / 10) - 2, 0)
     else
-        print("Warning: Unknown enhancing magic skill for phalanx.")
+        final = math.floor((enhskill - 300.5) / 28.5) + 28
     end
 
     -- Cap at 35

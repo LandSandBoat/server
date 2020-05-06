@@ -19,7 +19,7 @@ function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.GIL_MAX, 30000)
     mob:setMobMod(tpz.mobMod.MUG_GIL, 8000)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
-    mob:setMod(tpz.mod.UDMGBREATH, 0) -- immune to breath damage
+    mob:setMod(tpz.mod.UDMGBREATH, -100) -- immune to breath damage
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 

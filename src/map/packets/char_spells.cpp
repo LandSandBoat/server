@@ -28,7 +28,7 @@
 #include "../entities/charentity.h"
 
 
-CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar) 
+CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
 {
 	this->type = 0xAA;
 	this->size = 0x42;

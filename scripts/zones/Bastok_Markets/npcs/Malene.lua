@@ -36,7 +36,7 @@ function onEventFinish(player,csid,option)
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY, {title=tpz.title.CRAB_CRUSHER, gil=500, fame=fame})) then
             player:confirmTrade();
         end
-        
+
     -- WISH UPON A STAR
     elseif (csid == 330) then
         player:setCharVar("WishUponAStar_Status", 2);

@@ -6,12 +6,12 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 
 function onMobSpawn(mob)
-	tpz.mix.jobSpecial.config(mob, {
-    specials =
-    {
-        {id = tpz.jsa.HUNDRED_FISTS},
-    },
-	})
+    tpz.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = tpz.jsa.HUNDRED_FISTS},
+        },
+    })
 end
 
 function onMobDeath(mob, player, isKiller)

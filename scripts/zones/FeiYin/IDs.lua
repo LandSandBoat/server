@@ -36,7 +36,7 @@ zones[tpz.zone.FEIYIN] =
         ALREADY_POSSESS_TEMP               = 7510,  -- You already possess that temporary item.
         NO_COMBINATION                     = 7515,  -- You were unable to enter a combination.
         REGIME_REGISTERED                  = 9593,  -- New training regime registered!
-        HOMEPOINT_SET                      = 10689, -- Home point set!
+        HOMEPOINT_SET                      = 10692, -- Home point set!
     },
     mob =
     {

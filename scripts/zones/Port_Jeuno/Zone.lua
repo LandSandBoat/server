@@ -26,6 +26,13 @@ function onZoneIn(player,prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
+    if
+        ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
+        and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+    then
+        cs = 324;
+    end
+
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         if (prevZone == tpz.zone.SAN_DORIA_JEUNO_AIRSHIP) then
             cs = 10018;
@@ -42,14 +49,7 @@ function onZoneIn(player,prevZone)
         else
             local position = math.random(1,3) - 2;
             player:setPos(-192.5 ,-5,position,0);
-            if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-                cs = 30004;
-            end
-            player:setCharVar("PlayerMainJob",0);
         end
-    elseif (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-    and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE) then
-        cs = 324;
     end
 
     return cs
@@ -83,9 +83,6 @@ function onEventFinish(player,csid,option)
         player:setPos(0,0,0,0,224);
     elseif (csid == 10013) then
         player:setPos(0,0,0,0,226);
-    elseif (csid == 30004 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(ID.text.HOMEPOINT_SET);
     elseif (csid == 324) then
         player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS);
     end

@@ -25,7 +25,7 @@ zones[tpz.zone.LOWER_DELKFUTTS_TOWER] =
         ALREADY_POSSESS_TEMP             = 8624,  -- You already possess that temporary item.
         NO_COMBINATION                   = 8629,  -- You were unable to enter a combination.
         REGIME_REGISTERED                = 10707, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL            = 11761, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL            = 11764, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

@@ -85,7 +85,7 @@ public:
 	int32	 getCustomOffset();
 
 	void	 setCustomOffset(int32 offset);
-	
+
 	time_point   lastConquestUpdate;
     time_point   lastVHourlyUpdate;
     time_point   lastVDailyUpdate;

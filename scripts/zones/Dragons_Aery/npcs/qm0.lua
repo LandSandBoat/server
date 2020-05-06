@@ -21,7 +21,7 @@ function onTrade(player,npc,trade)
         if LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3339) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
             player:confirmTrade()
         elseif LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3340) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
-            player:confirmTrade()        
+            player:confirmTrade()
         end
     end
 end

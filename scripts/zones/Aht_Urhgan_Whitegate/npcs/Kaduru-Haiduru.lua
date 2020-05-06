@@ -66,7 +66,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option) 
+function onEventUpdate(player, csid, option)
 end;
 
 function onEventFinish(player, csid, option)
@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
         if option == 1 then       -- Duchy of Jeuno
             player:setPos(0, 3, -6, 190, 243)
         elseif option == 2 then   -- Nation of Allegiance
-            local nationDestination = 
+            local nationDestination =
             {
                 [tpz.nation.SANDORIA] = {110,   0,  -7, 175, 231},
                 [tpz.nation.BASTOK  ] = { 90,   0, -67, 248, 234},

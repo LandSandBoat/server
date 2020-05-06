@@ -179,7 +179,7 @@ tpz.homepoint.onTrigger = function(player, csid, index)
         player:addMP(player:getMaxMP())
     end
 
-    if not HOMEPOINT_TELEPORT == 1 then -- Settings.lua Homepoints disabled
+    if HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
@@ -205,46 +205,49 @@ tpz.homepoint.onEventUpdate = function(player, csid, option)
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
-    if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
+    if HOMEPOINT_TELEPORT == 1 then
+        if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
 
-        local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
+            local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
 
-        if choice == selection.ADD_FAVORITE then
-            local temp = 0
-            for x = 1, 9 do
-                temp = favs[x]
-                favs[x] = index
-                index = temp
-            end
-        elseif choice == selection.REM_FAVORITE then
-            for x = 1, 9 do
-                if favs[x] == index then
-                    for x = x, 8 do
-                        favs[x] = favs[x+1]
-                    end
-                    favs[9] = -1
-                    break
+            if choice == selection.ADD_FAVORITE then
+                local temp = 0
+                for x = 1, 9 do
+                    temp = favs[x]
+                    favs[x] = index
+                    index = temp
                 end
+            elseif choice == selection.REM_FAVORITE then
+                for x = 1, 9 do
+                    if favs[x] == index then
+                        for x = x, 8 do
+                            favs[x] = favs[x+1]
+                        end
+                        favs[9] = -1
+                        break
+                    end
+                end
+            elseif choice == selection.REP_FAVORITE then
+                favs[bit.rshift(option, 24) + 1] = index
+            elseif choice == selection.SET_LAYOUT then
+                -- 1 = Sort by content/expansion else sort by region
+                favs[10] = bit.rshift(option, 16) == 1 and 1 or 0
             end
-        elseif choice == selection.REP_FAVORITE then
-            favs[bit.rshift(option, 24) + 1] = index
-        elseif choice == selection.SET_LAYOUT then
-            -- 1 = Sort by content/expansion else sort by region
-            favs[10] = bit.rshift(option, 16) == 1 and 1 or 0
+
+            player:setTeleportMenu(travelType, favs)
+
         end
 
-        player:setTeleportMenu(travelType, favs)
+        for x = 1, 3 do -- Condense arrays for event params
+            favs[1] = favs[1] + favs[x+1] * 256^x
+            favs[5] = favs[5] + favs[x+5] * 256^x
+        end
 
+        favs[9] = favs[9] + favs[10] * 256
+        player:updateEvent(favs[1], favs[5], favs[9])
+    else
+        player:updateEvent(-1, -1, -1)
     end
-
-    for x = 1, 3 do -- Condense arrays for event params
-        favs[1] = favs[1] + favs[x+1] * 256^x
-        favs[5] = favs[5] + favs[x+5] * 256^x
-    end
-
-    favs[9] = favs[9] + favs[10] * 256
-    player:updateEvent(favs[1], favs[5], favs[9])
-
 end
 
 tpz.homepoint.onEventFinish = function(player, csid, option, event)
@@ -254,7 +257,7 @@ tpz.homepoint.onEventFinish = function(player, csid, option, event)
         if choice == selection.SET_HOMEPOINT then
             player:setHomePoint()
             player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
-        elseif choice == selection.TELEPORT or choice == selection.SAME_ZONE then
+        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and HOMEPOINT_TELEPORT == 1 then
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end

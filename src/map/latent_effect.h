@@ -56,7 +56,7 @@ enum LATENT
     LATENT_SONG_ROLL_ACTIVE         = 25, //any song or roll active
     LATENT_TIME_OF_DAY              = 26, //PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
     LATENT_HOUR_OF_DAY              = 27, //PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
-    LATENT_FIRESDAY                 = 28, 
+    LATENT_FIRESDAY                 = 28,
     LATENT_EARTHSDAY                = 29,
     LATENT_WATERSDAY                = 30,
     LATENT_WINDSDAY                 = 31,
@@ -73,7 +73,7 @@ enum LATENT
     LATENT_WEAPON_DRAWN_HP_UNDER    = 43, //PARAM: HP PERCENT
     //                              = 44  //Unused
     LATENT_MP_UNDER_VISIBLE_GEAR    = 45, //mp less than or equal to %, calculated using MP bonuses from visible gear only
-    LATENT_HP_OVER_VISIBLE_GEAR     = 46, //hp more than or equal to %, calculated using HP bonuses from visible gear only 
+    LATENT_HP_OVER_VISIBLE_GEAR     = 46, //hp more than or equal to %, calculated using HP bonuses from visible gear only
     LATENT_WEAPON_BROKEN            = 47,
     LATENT_IN_DYNAMIS               = 48,
     LATENT_FOOD_ACTIVE              = 49, //food effect (foodId) active - PARAM: FOOD ITEMID
@@ -127,8 +127,8 @@ public:
          CBattleEntity* owner,
          LATENT conditionsId,
          uint16 conditionsValue,
-         uint8 slot, 
-         Mod modValue, 
+         uint8 slot,
+         Mod modValue,
          int16 modPower
     );
     CLatentEffect(const CLatentEffect&) = delete;

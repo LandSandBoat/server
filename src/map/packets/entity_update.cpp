@@ -113,7 +113,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         {
             CMobEntity* PMob = (CMobEntity*)PEntity;
 
-            //if(PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC && 
+            //if(PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC &&
             //	PMob->PBattleAI->GetCurrentAction() == ACTION_FALL)
             //{
             //    ref<uint8>(data,(0x21)) = 0x99;

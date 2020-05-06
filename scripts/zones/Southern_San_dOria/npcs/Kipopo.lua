@@ -13,7 +13,7 @@ require("scripts/globals/status")
 
 function onTrade(player,npc,trade)
     if
-        player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER) 
+        player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER)
         and player:getCharVar("sayItWithAHandbagCS") == 2
         and npcUtil.tradeHasExactly(trade, {2012, 850, 816})
     then

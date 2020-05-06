@@ -12,12 +12,12 @@ local CASTLE_OZTROJA = {
     pickNewCombo = function()
         local numOpen = 0
         local combo = {}
-        
+
         -- https://ffxiclopedia.wikia.com/wiki/Talk:Castle_Oztroja
         -- "the combination seems to always be two levers up and two levers down."
         -- "False. I just had a combo that was [Up,Up,Down,Up]. It isn't always 2 up and 2 down."
         -- Let's interpret this to mean a valid combination has at least two levers up (open)
-        
+
         repeat
             numOpen = 0
             for i = 0, 3 do
@@ -37,7 +37,7 @@ local CASTLE_OZTROJA = {
             hintLever:setAnimation(combo[i])
         end
     end,
-    
+
     --[[..............................................................................................
         pick a new password for the trap door on floor 4
         ..............................................................................................]]

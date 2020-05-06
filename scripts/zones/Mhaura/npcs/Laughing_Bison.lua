@@ -22,7 +22,7 @@ function onTrigger(player,npc)
         timer = timer - 576
         waiting = 193
     end
-	
+
     -- Logic to manipulate cutscene results.
     if timer <= waiting then
         direction = 1 -- Ship arrived, switch dialog from "arrive" to "depart"

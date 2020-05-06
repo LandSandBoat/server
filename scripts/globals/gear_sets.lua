@@ -319,7 +319,7 @@ function HandleHipsterSet(player, gearset, matches)
     -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
     elseif (gearset.id >= 133 and gearset.id <= 199 and gearset.id ~= 175) then
         local modValue = 0
-        
+
         if (matches == 2) then
             modValue = 15 -- 2 matches
         elseif (matches == 3) then
@@ -336,7 +336,7 @@ function HandleHipsterSet(player, gearset, matches)
     -- AF1 119 +2/+3 SMN Avatar:ACC/RACC/MACC (unimplemented)
     elseif (gearset.id == 175) then
         local modValue = 0
-        
+
         if (matches == 2) then
             modValue = 15 -- 2 matches
         elseif (matches == 3) then

@@ -12,7 +12,7 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)        
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[NW_Apollyon]UniqueID",os.time());
     HideArmouryCrates(NW_Apollyon,APOLLYON_NW_SW);
 end;
@@ -26,7 +26,7 @@ end;
 
 -- Leaving the Dynamis by every mean possible, given by the LeaveCode
 -- 3=Disconnected or warped out (if dyna is empty: launch 4 after 3)
--- 4=Finish 
+-- 4=Finish
 
 function onBattlefieldLeave(player,battlefield,leavecode)
     --print("leave code "..leavecode);

@@ -26,7 +26,7 @@
 #include "../common/mmo.h"
 
 /************************************************************************
-*                                                                       *  
+*                                                                       *
 *                                                                       *
 *                                                                       *
 ************************************************************************/
@@ -47,7 +47,7 @@ public:
 	void	SetLRCorner(float x, float y, float z);		// нижний правый угол (Lower Right)
 
 	bool	isPointInside(position_t pos);
-	
+
 private:
 
 	uint32 m_RegionID;									// номер региона

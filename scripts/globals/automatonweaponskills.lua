@@ -18,7 +18,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     local cratio, ccritratio = getAutocRatio(attacker, target, wsParams, ignoredDef, true)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
-    
+
     -- Handle Flame Holder attachment.
     -- Mod usage, and values returned by Flame Holder script, might not be correct.
     local flameHolderFTP = attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE) / 100
@@ -30,10 +30,10 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
         ['weaponType'] = attacker:getWeaponSkillType(tpz.slot.MAIN),
         ['damageType'] = attacker:getWeaponDamageType(tpz.slot.MAIN)
     }
- 
+
     local calcParams = {}
     calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
-    
+
     calcParams.fSTR = utils.clamp(attacker:getStat(tpz.mod.STR) - target:getStat(tpz.mod.VIT), -10, 10)
     calcParams.cratio = cratio
     calcParams.ccritratio = ccritratio
@@ -62,7 +62,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
-    
+
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectSilent(tpz.effect.BUILDING_FLOURISH)
 
@@ -88,7 +88,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     else
         skill:setMsg(tpz.msg.basic.SKILL_MISS)
     end
-    
+
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 

@@ -55,10 +55,10 @@ zones[tpz.zone.PERIQIA] =
         EXCALIACE_CAUGHT           = 7541, -- Damn...
     },
 
-    mob = 
+    mob =
     {
         -- Seagull Grounded
-        [31] = 
+        [31] =
         {
             CRAB1      = 17006594,
             CRAB2      = 17006595,
@@ -79,7 +79,7 @@ zones[tpz.zone.PERIQIA] =
             DEBAUCHER3 = 17006611,
         },
         -- Requiem
-        [32] = 
+        [32] =
         {
             PUTRID_IMMORTAL_GUARD1 = 17006612,
             PUTRID_IMMORTAL_GUARD2 = 17006613,
@@ -101,7 +101,7 @@ zones[tpz.zone.PERIQIA] =
             DARKLING_DRAUGAR7      = 17006634,
         },
         -- Shades of Vengeance
-        [79] = 
+        [79] =
         {
             K23H1LAMIA1  = 17006754,
             K23H1LAMIA2  = 17006755,
@@ -116,7 +116,7 @@ zones[tpz.zone.PERIQIA] =
         }
     },
 
-    npc = 
+    npc =
     {
         EXCALIACE       = 17006593,
         ANCIENT_LOCKBOX = 17006809,

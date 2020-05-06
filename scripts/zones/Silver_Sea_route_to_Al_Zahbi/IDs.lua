@@ -15,6 +15,8 @@ zones[tpz.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         FISHING_MESSAGE_OFFSET  = 7049, -- You can't fish here.
+        DOCKING_IN_AL_ZAHBI     = 7309, -- We are now docking in Al Zahbi.
+        NEARING_AL_ZAHBI        = 7310, -- We are nearing Al Zahbi.
         YAHLIQ_SHOP_DIALOG      = 7312, -- You've picked the best place to shop for your items, guaranteed!
         ON_WAY_TO_AL_ZAHBI      = 7313, -- We are on our way to Al Zahbi. We will be arriving soon.
     },
