@@ -87,26 +87,20 @@ local gobbieJunk =
     19220
 }
 tpz.mystery.onTrade = function (player, npc, trade, events)
-    if not trade then
-        return false
-    elseif trade:getItemCount() == 1 then
-        local keyID = trade:getItemId(0)
-        if keyID == nil or keyID < 1 or keyID > 65535 or trade:getItemCount() ~= 1 or trade:getSlotQty(0) ~= 1 then
-            return false
-        else
+    if trade:getItemCount() == 1 then
+        local tradeID = trade:getItemId(0)
+        if keyToDial[tradeID] ~= nil then
             if player:getFreeSlotsCount() == 0 then
-                player:startEvent(events.FULL_INV, keyID, keyToDial[keyID])
-            elseif keyToDial[keyID] ~= 0 then
-                if player:getFreeSlotsCount() == 0 then
-                    player:startEvent(events.FULL_INV, keyID, keyToDial[keyID])
-                else
-                    player:setLocalVar("gobbieBoxKey", keyID)
-                    player:startEvent(events.KEY_TRADE, keyID, keyToDial[keyID])
-                end
-            else -- trade for points
+                player:startEvent(events.FULL_INV, tradeID, keyToDial[tradeID])
                 return false
             end
+            player:setLocalVar("gobbieBoxKey", tradeID)
+            player:startEvent(events.KEY_TRADE, tradeID, keyToDial[tradeID])
+        else -- trade for points
+            return false
         end
+    else
+        return false
     end
 end
 
@@ -150,19 +144,19 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
         if option == 1 then
             local keyID = player:getLocalVar("gobbieBoxKey")
             player:setLocalVar("gobbieBoxKey", 0)
-            switch (keyID): caseof
+            switch (keyToDial[keyID]): caseof
             {
-                [8973] = function() itemID = SelectDailyItem(player, 6) end,  -- special dial
-                [9217] = function() -- abjuration
+                [6] = function() itemID = SelectDailyItem(player, 6) end,  -- special dial
+                [9] = function() -- abjuration
                     itemID = abjurationItems[math.random(1, #abjurationItems)]
                     if player:hasItem(itemID) then
                         itemID = gobbieJunk[math.random(1, #gobbieJunk)]
                     end
                 end,
-                [9218] = function() itemID = fortuneItems[math.random(1, #fortuneItems)] end, -- fortune
-              --[????] = function()  end, -- furnishing
-                [9274] = function()-- anniversary
-                    if math.random(1,100) == 1 then -- 1% chance for extra rare item?
+                [10] = function() itemID = fortuneItems[math.random(1, #fortuneItems)] end, -- fortune
+              --[??] = function()  end, -- furnishing
+                [13] = function()-- anniversary
+                    if math.random(1,100) == 1 then -- 1% chance for ANV exclusive item?
                         itemID = anniversaryItems[math.random(1, #anniversaryItems)] 
                     else
                         itemID = SelectDailyItem(player, 6)
