@@ -1193,17 +1193,7 @@ end
 
 function getElementalDebuffStatDownFromDOT(dot)
     local stat_down = 0
-    if (dot == 1) then
-        stat_down = 5
-    elseif (dot == 2) then
-        stat_down = 7
-    elseif (dot == 3) then
-        stat_down = 9
-    elseif (dot == 4) then
-        stat_down = 11
-    else
-        stat_down = 13
-    end
+    stat_down = (dot-1)*2 +5
     return stat_down
 end
 
