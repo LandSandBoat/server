@@ -58,6 +58,15 @@ local casketInfo =
         167, 169, 172, 173, 174, 176, 177, 178, 184, 190, 191, 192,
         193, 194, 195, 196, 197, 198, 204, 205, 207, 208, 212, 213
     },
+    splitZones = set{
+       tpz.zone.ZERUHN_MINES,
+       tpz.zone.KORROLOKA_TUNNEL,
+       tpz.zone.KING_RANPERRES_TOMB,
+       tpz.zone.ORDELLES_CAVES,
+       tpz.zone.OUTER_HORUTOTO_RUINS,
+       tpz.zone.GUSGEN_MINES,
+       tpz.zone.MAZE_OF_SHAKHRAMI
+    },
     cs =
     {
         [0]  = 1000, [1]  = 1003, [2]  = 1006, [3]  = 1009, [4]  = 1012, [5]  = 1015,
@@ -201,7 +210,7 @@ end
 ---------------------------------------------------------------------------------------------
 -- Desc: Sets all the base localVar's, type of chest and if locked, sets the random number.
 ---------------------------------------------------------------------------------------------
-local function setCasketData(player, x, y, z, r, npc, partyID)
+local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     ---------------------------------------------------------------------------------------------------
     -- NOTE: Super Kupowers Myriad Mystery Boxes add an additional 20% chance the chest will be locked.
     ---------------------------------------------------------------------------------------------------
@@ -231,6 +240,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID)
         -------------------------------------
         npc:setLocalVar("[caskets]PARTYID", partyID)
         npc:setLocalVar("[caskets]ITEMS_SET", 0)
+        npc:setLocalVar("[caskets]MOBLVL", mobLvl)
 
         if chestStyle == 966 then
             npc:setLocalVar("[caskets]ATTEMPTS", attempts)
@@ -401,10 +411,20 @@ function getDrops(npc, dropType, zoneId)
         local tempCount    = 1
         local randomTable  = {1,3,1,2,1,2,1,1,3,1,2,1}
 
+        if casketInfo.splitZones[zoneId] then
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsHi
+            else
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsLow
+            end
+        else
+            tempDrops = tpz.casket_loot.casketItems[zoneId].temps
+        end
+
         tempCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, tempCount do
-            local tempDrops = tpz.casket_loot.casketItems[zoneId].temps
             local sum = 0
 
             for k, v in pairs(tempDrops) do
@@ -436,10 +456,20 @@ function getDrops(npc, dropType, zoneId)
         local itemCount    = 1
         local randomTable  = {1,4,1,3,1,1,2,1,3,1,2,1}
 
+        if casketInfo.splitZones[zoneId] then
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                drops = tpz.casket_loot.casketItems[zoneId].itemsHi
+            else
+                drops = tpz.casket_loot.casketItems[zoneId].itemsLow
+            end
+        else
+            drops = tpz.casket_loot.casketItems[zoneId].items
+        end
+
         itemCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, itemCount do
-            local drops = tpz.casket_loot.casketItems[zoneId].items
             local sum = 0
 
             for k, v in pairs(drops) do
@@ -460,7 +490,7 @@ function getDrops(npc, dropType, zoneId)
                 items[i] = 4112 -- default to potion
             else
                 if math.random() < 0.05 then
-                    items[i] = tpz.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #tpz.casket_loot.casketItems[zoneId].regionalItems)]
+                    items[1] = casketItems[zoneId].regionalItems[math.random(1, #casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
                 end
@@ -609,7 +639,7 @@ tpz.caskets.spawnCasket = function (player, mob, x, y, z, r)
     end
 
     if dropChance(player) then
-        setCasketData(player, x, y, z, r, npc, chestOwner)
+        setCasketData(player, x, y, z, r, npc, chestOwner, mob:getMainLvl())
     end
 end
 
