@@ -1042,30 +1042,37 @@ INSERT INTO `mob_skill_lists` VALUES ('Snoll',232,1644);
 INSERT INTO `mob_skill_lists` VALUES ('Snoll',232,1645);
 INSERT INTO `mob_skill_lists` VALUES ('Snoll',232,1646);
 INSERT INTO `mob_skill_lists` VALUES ('Snoll',232,1647);
-INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1963);
--- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1964);
--- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1965);
-INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1966);
-INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1967);
-INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1968);
-INSERT INTO `mob_skill_lists` VALUES ('Spheroid',234,561);
-INSERT INTO `mob_skill_lists` VALUES ('Spheroid',234,984);
-INSERT INTO `mob_skill_lists` VALUES ('Spider',235,810);
-INSERT INTO `mob_skill_lists` VALUES ('Spider',235,811);
-INSERT INTO `mob_skill_lists` VALUES ('Spider',235,812);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,990);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,991);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,992);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,993);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,994);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,995);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,996);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,997);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,998);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,999);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,1000);
-INSERT INTO `mob_skill_lists` VALUES ('Structure',236,1001);
--- 235 to 238: assigned to many random mobs
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1963); -- Mind Blast
+-- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1964); -- Immortal Mind
+-- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1965); -- Immortal Shield
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1966); -- Mind Purge
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1967); -- Tribulation
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1968); -- Immortal Anathema
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1963); -- Mind Blast
+-- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1964); -- Immortal Mind
+-- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1965); -- Immortal Shield
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1966); -- Mind Purge
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1967); -- Tribulation
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1968); -- Immortal Anathema
+-- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1969); -- Reprobation
+INSERT INTO `mob_skill_lists` VALUES ('Spheroid',235,561);
+INSERT INTO `mob_skill_lists` VALUES ('Spheroid',235,984);
+INSERT INTO `mob_skill_lists` VALUES ('Spider',236,810);
+INSERT INTO `mob_skill_lists` VALUES ('Spider',236,811);
+INSERT INTO `mob_skill_lists` VALUES ('Spider',236,812);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,990);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,991);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,992);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,993);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,994);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,995);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,996);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,997);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,998);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,999);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1000);
+INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1001);
+-- 238: free
 INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,378); -- thunderbolt
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,498);
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,499);
@@ -1405,13 +1412,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2111);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2112);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1753);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1758);
-INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1963);
--- INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1964);
--- INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1965);
-INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1966);
-INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1967);
-INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,1968);
--- INSERT INTO `mob_skill_lists` VALUES ('MahjlaefThePai',311,256);
+-- 311: free
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1977);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1978);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1693);
@@ -2697,13 +2698,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,578); -- nihlity song
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
 -- 787: free
-INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1963); -- mind blast
--- INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1964); -- immortal mind
--- INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1965); -- immortal shield
-INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1966); -- mind purge
-INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1967); -- tribulation
-INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1968); -- immortal anathema
--- INSERT INTO `mob_skill_lists` VALUES ('Ashtaerh_the_Gallvexed',788,1969); -- reprobation
+-- 788: free
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,1711); -- frentic rip
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2003); -- grating tantra
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2004); -- stifling tantra
