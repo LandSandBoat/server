@@ -3145,6 +3145,11 @@ namespace charutils
         uint32 gil = PMob->GetRandomGil();
         uint32 gBonus = 0;
 
+        if (gil && map_config.mob_gil_multiplier >= 0)
+        {
+            gil = static_cast<uint32>(gil * map_config.mob_gil_multiplier);
+        }
+
         if (map_config.all_mobs_gil_bonus > 0)
         {
             gBonus = map_config.all_mobs_gil_bonus*PMob->GetMLevel();
