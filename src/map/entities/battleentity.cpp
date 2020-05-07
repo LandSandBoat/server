@@ -776,10 +776,38 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 
 void CBattleEntity::SetSLevel(uint8 slvl)
 {
-    m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+    if (!map_config.include_mob_sj && (this->objtype == TYPE_MOB && this->objtype != TYPE_PET))
+    {
+        // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
+        // But there is no place in the DB to set subLV right now.
+        m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+    }
+    else
+    {
+        switch (map_config.subjob_ratio)
+        {
+            case 0: //no SJ...Where is your Altana now?
+                m_slvl = 0;
+                break;
+            case 1: // 1/2 (75/37, 99/49)
+                m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
+                break;
+            case 2: // 2/3 (75/50, 99/66)
+                m_slvl = (slvl > (m_mlvl * 2) / 3 ? (m_mlvl == 1 ? 1 : (m_mlvl * 2) / 3) : slvl);
+                break;
+            case 3: // equal (75/75, 99/99)
+                m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
+                break;
+            default: // Error
+                ShowError("Error setting subjob level: Invalid ratio '%s' check your map.conf file!\n", map_config.subjob_ratio);
+                break;
+        }
+    }
 
     if (this->objtype & TYPE_PC)
+    {
         Sql_Query(SqlHandle, "UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
+    }
 }
 
 /************************************************************************
