@@ -1,8 +1,7 @@
 -----------------------------------
--- Area: Windurst Woods
---  NPC: Arbitrix
+-- Area: Port San d'Oria
+--  NPC: Habitox
 -- Gobbie Mystery Box
--- !pos -215.5 0.0 -147.3
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/settings")
@@ -22,10 +21,12 @@ local events =
     KEY_TRADE               = 812,
     NO_THANKS               = 813,
     FULL_INV                = 814,
-    OTHER_BAD_TRADE         = 815,
-    LIL_BABY                = 6468,
-    ITEM_CANNOT_BE_OBTAINED = 6426
+    OTHER_BAD_TRADE         = 815
 }
+
+function onTrade(player,npc,trade)
+    tpz.mystery.onTrade(player, npc, trade, events)
+end
 
 function onTrigger(player, npc)
     tpz.mystery.onTrigger(player, npc, events)

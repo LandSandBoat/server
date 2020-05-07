@@ -1,8 +1,7 @@
 -----------------------------------
--- Area: Windurst Woods
---  NPC: Arbitrix
+-- Area: Aht Urhgan Whitegate
+--  NPC: Wondrix
 -- Gobbie Mystery Box
--- !pos -215.5 0.0 -147.3
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/settings")
@@ -22,10 +21,12 @@ local events =
     KEY_TRADE               = 989,
     NO_THANKS               = 990,
     FULL_INV                = 991,
-    OTHER_BAD_TRADE         = 992,
-    ITEM_CANNOT_BE_OBTAINED = 219,
-    LIL_BABY                = 833
+    OTHER_BAD_TRADE         = 992
 }
+
+function onTrade(player,npc,trade)
+    tpz.mystery.onTrade(player, npc, trade, events)
+end
 
 function onTrigger(player, npc)
     tpz.mystery.onTrigger(player, npc, events)

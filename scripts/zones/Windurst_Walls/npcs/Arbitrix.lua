@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Windurst Woods
+-- Area: Windurst Walls
 --  NPC: Arbitrix
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
@@ -22,10 +22,12 @@ local events =
     KEY_TRADE               = 536,
     NO_THANKS               = 537,
     FULL_INV                = 538,
-    OTHER_BAD_TRADE         = 539,
-    ITEM_CANNOT_BE_OBTAINED = 6541,
-    LIL_BABY                = 6583
+    OTHER_BAD_TRADE         = 539
 }
+
+function onTrade(player,npc,trade)
+    tpz.mystery.onTrade(player, npc, trade, events)
+end
 
 function onTrigger(player, npc)
     tpz.mystery.onTrigger(player, npc, events)
