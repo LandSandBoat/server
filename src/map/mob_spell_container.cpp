@@ -108,6 +108,15 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
     m_hasSpells = !(m_gaList.empty() && m_damageList.empty() && m_buffList.empty() && m_debuffList.empty() && m_healList.empty() && m_naList.empty());
 }
 
+std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
+{
+    auto spell = spell::GetSpell(spellId);
+    bool hasEnoughMP = spell->getMPCost() <= m_PMob->health.mp;
+    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
+
+    return  (isNotInRecast && hasEnoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
+}
+
 std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
 {
     std::vector<SpellID> matches;
@@ -117,9 +126,9 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
         {
             auto spell = spell::GetSpell(id);
             bool sameFamily = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
-            bool hasEnougnMP = spell->getMPCost() <= m_PMob->health.mp;
+            bool hasEnoughMP = spell->getMPCost() <= m_PMob->health.mp;
             bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
-            if (sameFamily && hasEnougnMP && isNotInRecast)
+            if (sameFamily && hasEnoughMP && isNotInRecast)
             {
                 matches.push_back(id);
             }

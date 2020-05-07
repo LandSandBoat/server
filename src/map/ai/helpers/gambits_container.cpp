@@ -1,10 +1,22 @@
 #include "gambits_container.h"
 
+#include "../../spell.h"
 #include "../../utils/battleutils.h"
 
 void CGambitsContainer::AddGambit(G_SELECTOR selector, G_TRIGGER trigger, uint16 trigger_condition, G_REACTION reaction, G_REACTION_MODIFIER reaction_mod, uint16 reaction_arg, uint16 retry_delay)
 {
-    actions.push_back(Action_t{ selector, trigger, trigger_condition, reaction, reaction_mod, reaction_arg, retry_delay });
+    bool available = true;
+    if (reaction == G_REACTION::MA && reaction_mod == G_REACTION_MODIFIER::SELECT_SPECIFIC)
+    {
+        if (!spell::CanUseSpell(static_cast<CBattleEntity*>(POwner), static_cast<SpellID>(reaction_arg)))
+        {
+            available = false;
+        }
+    }
+    if (available)
+    {
+        actions.push_back(Action_t{ selector, trigger, trigger_condition, reaction, reaction_mod, reaction_arg, retry_delay });
+    }
 }
 
 void CGambitsContainer::Tick(time_point tick)
@@ -135,7 +147,11 @@ void CGambitsContainer::Tick(time_point tick)
             {
                 if (action.reaction_mod == G_REACTION_MODIFIER::SELECT_SPECIFIC)
                 {
-                    controller->Cast(target->targid, static_cast<SpellID>(action.reaction_arg));
+                    auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.reaction_arg));
+                    if (spell_id.has_value())
+                    {
+                        controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                    }
                 }
                 else if (action.reaction_mod == G_REACTION_MODIFIER::SELECT_HIGHEST)
                 {
