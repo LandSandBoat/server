@@ -24,8 +24,6 @@ function onTrigger(player,npc)
         17153, 503,  2, -- Self Bow
         17154, 7444, 2, -- Wrapped Bow
         17216, 165,  2, -- Light Crossbow
-        17319, 4,    3, -- Bone Arrow
-        17336, 5,    3, -- Crossbow Bolt
         5009,  2649, 3  -- Scroll of Hunter's Prelude
     }
 
