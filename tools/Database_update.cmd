@@ -29,8 +29,7 @@ set importtime=%month%-%day%-%year%-%hour%-%min%
 echo %importtime%
 
 REM may need to change the path to mysql
-
-set mysql="C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe"
+set mysql="C:\Program Files\MariaDB 10.4\bin\mysql.exe"
 set dbhost=localhost
 set dbuser=root
 
