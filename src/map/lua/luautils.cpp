@@ -2913,8 +2913,9 @@ namespace luautils
             Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
             lua_pushnil(LuaHandle);
             lua_pushnil(LuaHandle);
+            lua_pushboolean(LuaHandle, true);
 
-            if (lua_pcall(LuaHandle, 3, 0, 0))
+            if (lua_pcall(LuaHandle, 4, 0, 0))
             {
                 ShowError("luautils::onMobDeath: %s\n", lua_tostring(LuaHandle, -1));
                 lua_pop(LuaHandle, 1);

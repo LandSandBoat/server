@@ -81,6 +81,7 @@ CMobEntity::CMobEntity()
     m_EcoSystem = SYSTEM_UNCLASSIFIED;
     m_Element = 0;
     m_HiPCLvl = 0;
+    m_HiPartySize = 0;
     m_THLvl = 0;
     m_ItemStolen = false;
 
@@ -505,6 +506,7 @@ void CMobEntity::Spawn()
     CBattleEntity::Spawn();
     m_giveExp = true;
     m_HiPCLvl = 0;
+    m_HiPartySize = 0;
     m_THLvl = 0;
     m_ItemStolen = false;
     m_DropItemTime = 1000;
@@ -666,18 +668,6 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTarget, PSkill->getID(), state.GetSpentTP(), &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTarget, this, PSkill->getID(), state.GetSpentTP(), &action);
         }
-
-        if (objtype == TYPE_PET && PMaster && PMaster->objtype == TYPE_PC )
-        {
-            auto mob = dynamic_cast<CMobEntity *>(PTarget);
-            if (mob && !mob->CalledForHelp())
-            {
-                mob->m_OwnerID.id = PMaster->id;
-                mob->m_OwnerID.targid = PMaster->targid;
-                mob->updatemask |= UPDATE_STATUS; //This can go here because we only wanna call the updatemask if this happens
-            }
-        }
-
         if (msg == 0)
         {
             msg = PSkill->getMsg();
@@ -731,7 +721,18 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             }
         }
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        if (PTarget->isDead())
+        {
+            battleutils::ClaimMob(PTarget, this);
+        }
+        battleutils::DirtyExp(PTarget, this);
     }
+    PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)))
+    {
+        battleutils::ClaimMob(PTarget, this);
+    }
+    battleutils::DirtyExp(PTarget, this);
 }
 
 void CMobEntity::DistributeRewards()
@@ -1025,6 +1026,7 @@ void CMobEntity::Die()
                 loc.zone->PushPacket(this, CHAR_INRANGE, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
 
             DistributeRewards();
+            m_OwnerID.clean();
         }
     }));
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
@@ -1062,6 +1064,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
+    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {
