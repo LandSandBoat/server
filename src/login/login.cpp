@@ -119,6 +119,11 @@ int32 do_init(int32 argc, char** argv)
     messageThread = std::thread(message_server_init);
     ShowStatus("The login-server is " CL_GREEN"ready" CL_RESET" to work...\n");
 
+    if(!login_config.account_creation)
+    {
+        ShowStatus("New account creation is " CL_RED"disabled" CL_RESET" in login_config.\n");
+    }
+
     bool attached = isatty(0);
 
     if (attached)
@@ -438,6 +443,10 @@ void login_config_read(const char *key, const char *value)
     {
         login_config.log_user_ip = config_switch(value);
     }
+    else if (strcmp(key, "account_creation") == 0)
+    {
+        login_config.account_creation = config_switch(value);
+    }
     else
     {
         ShowWarning("Unknown setting '%s' with value '%s' in  login file\n", key, value);
@@ -488,6 +497,7 @@ void login_config_default()
     login_config.msg_server_ip = "127.0.0.1";
 
     login_config.log_user_ip = "false";
+    login_config.account_creation = "true";
 }
 
 void version_info_default()
