@@ -214,9 +214,9 @@ int32 login_parse(int32 fd)
             {
                 ShowWarning(CL_WHITE"login_parse" CL_RESET": New account attempt <" CL_WHITE"%s" CL_RESET"> but is disabled in config.\n", escaped_name);
                 session[fd]->wdata.resize(1);
-                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
                 do_close_login(sd, fd);
-                return 0;
+                return -1;
             }
 
            //looking for same login
@@ -279,7 +279,7 @@ int32 login_parse(int32 fd)
             else {
                 ShowWarning(CL_WHITE"login_parse" CL_RESET": account<" CL_WHITE"%s" CL_RESET"> already exists\n", escaped_name);
                 session[fd]->wdata.resize(1);
-                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
+                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
                 do_close_login(sd, fd);
             }
             break;
