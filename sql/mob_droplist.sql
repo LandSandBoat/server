@@ -6862,11 +6862,12 @@ INSERT INTO `mob_droplist` VALUES (1334,0,0,1000,846,120);
 INSERT INTO `mob_droplist` VALUES (1334,0,0,1000,4370,80);
 INSERT INTO `mob_droplist` VALUES (1335,2,0,1000,838,0);
 INSERT INTO `mob_droplist` VALUES (1335,0,0,1000,838,60);
-INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,846,30);
-INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,912,230);
-INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,925,10);
-INSERT INTO `mob_droplist` VALUES (1336,2,0,1000,4370,0);
-INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,4370,200);
+INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,846,50); -- Insect wing  (RARE)
+INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,912,240); -- Beehive chip (VERY COMMON)
+INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,925,10); -- Giant stinger (VERY RARE)
+INSERT INTO `mob_droplist` VALUES (1336,2,0,1000,4370,0); -- Pot of Honey (STEAL)
+INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,4370,150); -- Pot of Honey (Common)
+INSERT INTO `mob_droplist` VALUES (1336,0,0,1000,9082,100); -- Bee Pollen (Uncommon)
 INSERT INTO `mob_droplist` VALUES (1337,0,0,1000,18422,100);
 INSERT INTO `mob_droplist` VALUES (1338,2,0,1000,656,0); -- (Hundredscar Hajwaj) Beastcoin - steal
 INSERT INTO `mob_droplist` VALUES (1338,0,0,1000,13051,861); -- (Hundredscar Hajwaj) Coarse Leggings
@@ -10785,12 +10786,12 @@ INSERT INTO `mob_droplist` VALUES (2044,2,0,1000,656,0);
 INSERT INTO `mob_droplist` VALUES (2044,0,0,1000,1103,1000);
 INSERT INTO `mob_droplist` VALUES (2045,0,0,1000,3504,100);
 INSERT INTO `mob_droplist` VALUES (2045,0,0,1000,5569,130);
-INSERT INTO `mob_droplist` VALUES (2046,2,0,1000,834,0);
-INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,834,140);
-INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,934,40);
-INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,4368,160);
-INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,4369,30);
-INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,9083,130); -- Mandragora Dewdrop 
+INSERT INTO `mob_droplist` VALUES (2046,2,0,1000,834,0); -- Ball of Saruta cotton (STEAL)
+INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,834,100); -- Ball of Saruta cotton (UNCOMMON)
+INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,934,50); -- Pinch of Yuhtunga sulfur (RARE)
+INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,4368,100); -- Two-leaf mandragora bud (UNCOMMON)
+INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,4369,5); -- Four-leaf mandragora bud (SUPER RARE)
+INSERT INTO `mob_droplist` VALUES (2046,0,0,1000,9083,100); -- Mandragora Dewdrop (Uncommon)
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13179,100);
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13180,100);
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13181,100);
