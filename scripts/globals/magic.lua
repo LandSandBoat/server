@@ -348,11 +348,6 @@ function doBoostGain(caster, target, spell, effect)
 end
 
 function doEnspell(caster, target, spell, effect)
-    if effect == tpz.effect.BLOOD_WEAPON then
-        target:addStatusEffect(tpz.effect.BLOOD_WEAPON, 1, 0, 30)
-        return
-    end
-
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --calculate potency
