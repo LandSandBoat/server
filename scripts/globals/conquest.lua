@@ -1227,8 +1227,8 @@ tpz.conquest.teleporterOnTrigger = function(player, teleporterNation, teleporter
     local windyRegions = getRegionsMask(tpz.nation.WINDURST)
     local beastmenRegions = getRegionsMask(tpz.nation.BEASTMEN)
     local allowedTeleports = getAllowedTeleports(player, teleporterNation)
-    local teleporterNationBit = player:getNation() + bit.lshift(teleporterNation, 8)
-    player:startEvent(teleporterEvent, sandyRegions, bastokRegions, windyRegions, beastmenRegions, 0, teleporterNationBit, player:getMainLvl(), allowedTeleports)
+    local nationBits = player:getNation() + bit.lshift(teleporterNation, 8)
+    player:startEvent(teleporterEvent, sandyRegions, bastokRegions, windyRegions, beastmenRegions, 0, nationBits, player:getMainLvl(), allowedTeleports)
 end
 
 tpz.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterEvent)
