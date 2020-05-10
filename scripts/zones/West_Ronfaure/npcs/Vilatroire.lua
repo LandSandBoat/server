@@ -43,7 +43,7 @@ function onTrigger(player, npc)
     elseif questAdvancedTeamwork == QUEST_COMPLETED then
         player:startEvent(130) -- post second and third quest dialog
     else
-        player:startEvent(136) --player:startEvent(136) -- Default - before quests
+        player:startEvent(136) -- Default before quests
     end
 end
 
@@ -78,16 +78,16 @@ function onEventUpdate(player, csid, option)
                         partySameNationCount = partySameNationCount + 1
                     end
 
-                    if     (pRace == tpz.race.HUME_M or pRace == tpz.race.HUME_F) and (mRace == tpz.race.HUME_M or mRace == tpz.race.HUME_F) then
-                              partySameRaceCount = partySameRaceCount + 1
+                    if (pRace == tpz.race.HUME_M or pRace == tpz.race.HUME_F) and (mRace == tpz.race.HUME_M or mRace == tpz.race.HUME_F) then
+                        partySameRaceCount = partySameRaceCount + 1
                     elseif (pRace == tpz.race.ELVAAN_M or pRace == tpz.race.ELVAAN_F) and (mRace == tpz.race.ELVAAN_M or mRace == tpz.race.ELVAAN_F) then
-                              partySameRaceCount = partySameRaceCount + 1
+                        partySameRaceCount = partySameRaceCount + 1
                     elseif (pRace == tpz.race.TARU_M or pRace == tpz.race.TARU_F) and (mRace == tpz.race.TARU_M or mRace == tpz.race.TARU_F) then
-                              partySameRaceCount = partySameRaceCount + 1
+                        partySameRaceCount = partySameRaceCount + 1
                     elseif pRace == tpz.race.GALKA and mRace == tpz.race.GALKA then 
-                              partySameRaceCount = partySameRaceCount + 1
+                        partySameRaceCount = partySameRaceCount + 1
                     elseif pRace == tpz.race.MITHRA and mRace == tpz.race.MITHRA then
-                              partySameRaceCount = partySameRaceCount + 1
+                        partySameRaceCount = partySameRaceCount + 1
                     end
 
                     if member:getMainJob() == player:getMainJob() then
@@ -97,14 +97,14 @@ function onEventUpdate(player, csid, option)
             end
 
             if questIntroToTeamwork == QUEST_ACCEPTED then
-                if (partySameNationCount == partySizeRequirement) then
+                if partySameNationCount == partySizeRequirement then
                     player:setLocalVar("introToTmwrk_pass", 1) -- nation requirements met
                     player:updateEvent(15, 1)
                 else
                     player:updateEvent(3) -- not the same nation
                 end
             elseif questIntermediateTeamwork == QUEST_ACCEPTED then
-                if (partySameRaceCount == partySizeRequirement) then
+                if partySameRaceCount == partySizeRequirement then
                     player:setLocalVar("intermedTmwrk_pass", 1)
                     player:updateEvent(15, 2) -- race requirements met
                 else
@@ -128,29 +128,29 @@ end
 function onEventFinish(player, csid, option)
     -- csid 129 is the event for when they have selected ready/not ready option is always 0
     if csid == 129 and option == 0 then
-        local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK);
-        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK);
-        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK);
+        local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
-            if questIntroToTeamwork == QUEST_ACCEPTED and player:getLocalVar("introToTmwrk_pass") == 1 then
-                npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
-                    item = 13442,
-                    fame = 80, -- fame defaults to 30 if not set
-                    title = tpz.title.THIRDRATE_ORGANIZER,
-                })
-            elseif questIntermediateTeamwork == QUEST_ACCEPTED and player:getLocalVar("intermedTmwrk_pass") == 1 then
-                npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
-                    item = 4994,
-                    fame = 80, -- fame defaults to 30 if not set
-                    title = tpz.title.SECONDRATE_ORGANIZER,
-                })
-            elseif questAdvancedTeamwork == QUEST_ACCEPTED and player:getLocalVar("advTmwrk_pass") == 1 then
-                npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK, {
-                    item = 13459,
-                    fame = 80, -- fame defaults to 30 if not set
-                    title = tpz.title.FIRSTRATE_ORGANIZER,
-                })
-    		end
+        if questIntroToTeamwork == QUEST_ACCEPTED and player:getLocalVar("introToTmwrk_pass") == 1 then
+            npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
+                item = 13442,
+                fame = 80, -- fame defaults to 30 if not set
+                title = tpz.title.THIRDRATE_ORGANIZER,
+            })
+        elseif questIntermediateTeamwork == QUEST_ACCEPTED and player:getLocalVar("intermedTmwrk_pass") == 1 then
+            npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
+                item = 4994,
+                fame = 80, -- fame defaults to 30 if not set
+                title = tpz.title.SECONDRATE_ORGANIZER,
+            })
+        elseif questAdvancedTeamwork == QUEST_ACCEPTED and player:getLocalVar("advTmwrk_pass") == 1 then
+            npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK, {
+                item = 13459,
+                fame = 80, -- fame defaults to 30 if not set
+                title = tpz.title.FIRSTRATE_ORGANIZER,
+            })
+        end
     elseif csid == 131 and option == 1 then
         -- 131 is the third and last quest
         player:addQuest(SANDORIA,tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
