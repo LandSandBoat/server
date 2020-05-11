@@ -94,5 +94,6 @@ function onEventFinish(player,csid,option)
     elseif csid == 722 then
         player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
         player:setCharVar("TransformationsProgress", 2)
+        player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end
 end

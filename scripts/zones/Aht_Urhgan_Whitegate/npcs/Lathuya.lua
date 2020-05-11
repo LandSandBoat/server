@@ -10,26 +10,45 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 local craftingItems = {
--- itemBit = {firstItem, secondItem, thirdItem, fourthItem, coinType, coinAmmount, craftedItem, optionId}
-    [1] = {754,  828,  879, 4158, 2186, 2, 14928, 1}, -- magus bazubands
-    [2] = {761,  828, 2175, 2340, 2186, 2, 15600, 2}, -- magus shalwar
-    [4] = {828, 2229, 2288, 2340, 2186, 4, 14521, 3}  -- magus jubbah
+    [1] = -- magus bazubands
+    {
+        materials = {754, 828, 879, 4158},
+        currency = 2186,
+        currencyAmt = 2,
+        result = 14928
+    },
+    [2] = -- magus shalwar
+    {
+        materials = {761, 828, 2175, 2340},
+        currency = 2186,
+        currencyAmt = 2,
+        result = 15600
+    },
+    [3] = -- magus jubbah
+    {
+        materials = {828, 2229, 2288, 2340},
+        currency = 2186,
+        currencyAmt = 4,
+        result = 14521
+    }  
 }
 
 function onTrade(player, npc, trade)
-    local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-    local craftingBluArmor = player:getCharVar("CraftingBluArmor")
-    local totalCraftedPieces = player:countMaskBits(player:getCharVar("LathuyaCraftingList_Mask"))
-    local csOffset = 8 * totalCraftedPieces
+    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    if remainingBLUAF >= 1 then
+        local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
+        local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
+        local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+        local AFoffset = 8 * totalCraftedPieces
 
-    if craftingBluArmor == 0  and npcUtil.tradeHasExactly(trade, {
-        craftingItems[currentTask][1], craftingItems[currentTask][2], craftingItems[currentTask][3], craftingItems[currentTask][4]
-    }) then
-        player:startEvent(732 + csOffset, craftingItems[currentTask][7], craftingItems[currentTask][5], craftingItems[currentTask][6])
-    elseif craftingBluArmor == 1 and npcUtil.tradeHasExactly(trade, {
-        {craftingItems[currentTask][5], craftingItems[currentTask][6]}
-    }) then
-        player:startEvent(734 + csOffset, 0, craftingItems[currentTask][5], craftingItems[currentTask][6])
+        local item = craftingItems[player:getCharVar("[BLUAF]Current")]
+        if item then
+            if craftingStage == 0  and npcUtil.tradeHasExactly(trade, item.materials) then
+                player:startEvent(732 + AFoffset, item.result, item.currency, item.currencyAmt)
+            elseif craftingStage == 1 and npcUtil.tradeHasExactly(trade, {{item.currency, item.currencyAmt}}) then
+                player:startEvent(734 + AFoffset, 0, item.currency, item.currencyAmt)
+           end
+       end
    end
 end
 
@@ -37,13 +56,6 @@ function onTrigger(player, npc)
     local omensProgress = player:getCharVar("OmensProgress")
     local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
     local transformations = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
-    local craftingBluArmor = player:getCharVar("CraftingBluArmor")
-    local craftedPieces = player:getCharVar("LathuyaCraftingList_Mask")
-    local totalCraftedPieces = player:countMaskBits(player:getCharVar("LathuyaCraftingList_Mask"))
-    local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-    local pickupReady = vanaDay() > player:getCharVar("BluPaymentDay")
-    local craftmanAwake = vanaDay() > player:getCharVar("BluRestingDay")
-    local csOffset = 8 * totalCraftedPieces
 
     -- OMENS
     if omens == QUEST_ACCEPTED then
@@ -57,81 +69,82 @@ function onTrigger(player, npc)
 
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
     elseif transformations >= QUEST_ACCEPTED then
+        local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+        local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+        local currentTask = player:getCharVar("[BLUAF]Current")
+        local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
+        local AFoffset = 8 * totalCraftedPieces
+
         if currentTask == 0 and totalCraftedPieces ~= 3 then
-            if craftmanAwake then
+            if vanaDay() > player:getCharVar("[BLUAF]RestingDay") then
                 if totalCraftedPieces == 2 then
-                    currentTask = 7 - craftedPieces
-                    player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, craftingItems[currentTask][8]) -- 8th param is response
+                    currentTask = math.floor(player:getCharVar("[BLUAF]Remaining") / 2) + 1
+                    player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
                 else
-                    player:startEvent(730 + csOffset, craftedPieces) -- Will prompt for choosing which armor to work on
+                    -- Will prompt for choosing which armor to work on
+                    player:startEvent(730 + AFoffset, 7 - player:getCharVar("[BLUAF]Remaining"))
                 end
             else
-                player:startEvent(737 + (csOffset - 8)) -- Asleep message, wait until 1 day passes
+                player:startEvent(737 + (AFoffset - 8)) -- Asleep message, wait until 1 day passes
             end
-        elseif player:countMaskBits(player:getCharVar("LathuyaCurrentTask_Mask")) == 1 then
-            if craftingBluArmor == 0 then
-                player:startEvent(731 + csOffset , 0, craftingItems[currentTask][5], craftingItems[currentTask][6])
-            elseif craftingBluArmor == 1 then
-                player:startEvent(733 + csOffset , craftingItems[currentTask][7], craftingItems[currentTask][5], craftingItems[currentTask][6])
-            elseif craftingBluArmor == 2 and not pickupReady then
-                player:startEvent(735 + csOffset)
-            elseif craftingBluArmor == 2 and pickupReady then
-                player:startEvent(736 + csOffset, craftingItems[currentTask][7])
+        elseif currentTask > 0 then
+            local pickupReady = vanaDay() > player:getCharVar("[BLUAF]PaymentDay")
+            local item = craftingItems[currentTask]
+            if craftingStage == 0 then
+                player:startEvent(731 + AFoffset, 0, item.currency, item.currencyAmt)
+            elseif craftingStage == 1 then
+                player:startEvent(733 + AFoffset, item.result, item.currency, item.currencyAmt)
+            elseif craftingStage == 2 and not pickupReady then
+                player:startEvent(735 + AFoffset)
+            elseif craftingStage == 2 and pickupReady then
+                player:startEvent(736 + AFoffset, item.result)
             end
         elseif totalCraftedPieces == 3 then
-            player:startEvent(753) -- Default dialog after completing questline.
+            player:startEvent(753) -- Dialogue after crafting all BLU AF
         end
 
     elseif omens == QUEST_COMPLETED then
-            player:startEvent(718) -- Default dialog
-    -- DEFAULT DIALOG
+        player:startEvent(718)
     else
-        player:startEvent(770)
+        player:startEvent(770) -- Default dialogue
     end
 end
 
 function onEventUpdate(player, csid, option)
-    local totalCraftedPieces = player:countMaskBits(player:getCharVar("LathuyaCraftingList_Mask"))
-    local csOffset = 8 * totalCraftedPieces
+    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+    local AFoffset = 8 * totalCraftedPieces
 
-    if csid == 730 + csOffset then
-        local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-
-        -- MAGUS BASUBANDS
-        if option == 2 then
-            player:setCharVar("LathuyaCurrentTask_Mask", 0)
-            player:setMaskBit(player:getCharVar("LathuyaCurrentTask_Mask"), "LathuyaCurrentTask_Mask", 0, true)
-            local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-            player:updateEvent(0, craftingItems[currentTask][1], craftingItems[currentTask][2], craftingItems[currentTask][3], craftingItems[currentTask][4])
-        elseif option == 3 then
-            player:updateEvent(0, craftingItems[currentTask][5], craftingItems[currentTask][6])
-
-            -- MAGUS SHALWAR
-        elseif option == 5 then
-            player:setCharVar("LathuyaCurrentTask_Mask", 0)
-            player:setMaskBit(player:getCharVar("LathuyaCurrentTask_Mask"), "LathuyaCurrentTask_Mask", 1, true)
-            local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-            player:updateEvent(0, craftingItems[currentTask][1], craftingItems[currentTask][2], craftingItems[currentTask][3], craftingItems[currentTask][4])
-        elseif option == 6 then
-            player:updateEvent(0, craftingItems[currentTask][5], craftingItems[currentTask][6])
-
-            -- MAGUS JUBBAH
-        elseif option == 8 then
-            player:setCharVar("LathuyaCurrentTask_Mask", 0)
-            player:setMaskBit(player:getCharVar("LathuyaCurrentTask_Mask"), "LathuyaCurrentTask_Mask", 2, true)
-            local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-            player:updateEvent(0, craftingItems[currentTask][1], craftingItems[currentTask][2], craftingItems[currentTask][3], craftingItems[currentTask][4])
-        elseif option == 9 then
-            player:updateEvent(0, craftingItems[currentTask][5], craftingItems[currentTask][6])
+    if csid == 730 + AFoffset then
+        if option >= 2 and option <= 9 then
+            local currentTask = player:getCharVar("[BLUAF]Current")
+            local updateType = option % 3
+            if updateType == 2 then
+                -- Choosing a piece
+                local piece = math.floor(option / 4) + 1
+                local pieceMask = math.pow(2, (piece - 1))
+                -- Make sure the player isn't trying to cheat somehow
+                if bit.band(pieceMask, player:getCharVar("[BLUAF]Remaining")) > 0 then
+                    player:setCharVar("[BLUAF]Current", piece)
+                    local item = craftingItems[piece]
+                    player:updateEvent(0, unpack(item.materials))
+                end
+            else
+                -- Needs payment
+                local item = craftingItems[currentTask]
+                player:updateEvent(0, item.currency, item.currencyAmt)
+            end
         end
     end
 end
 
 function onEventFinish(player, csid, option)
-    local totalCraftedPieces = player:countMaskBits(player:getCharVar("LathuyaCraftingList_Mask"))
     local omensProgress = player:getCharVar("OmensProgress")
-    local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
-    local csOffset = 8 * totalCraftedPieces
+
+    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+    local currentTask = player:getCharVar("[BLUAF]Current")
+    local AFoffset = 8 * totalCraftedPieces
 
     -- OMENS
     if csid == 714 and omensProgress == 3 then
@@ -144,28 +157,30 @@ function onEventFinish(player, csid, option)
         })
         player:delKeyItem(tpz.ki.SEALED_IMMORTAL_ENVELOPE)
 
-    -- TRANSFORMATIONS
-    elseif csid == 732 + csOffset then
-        player:setCharVar("CraftingBluArmor", 1)
+    -- BLU AF CRAFTING
+    elseif csid == 732 + AFoffset then
+        player:setCharVar("[BLUAF]CraftingStage", 1)
         player:confirmTrade()
-    elseif csid == 734 + csOffset then
-        player:setCharVar("CraftingBluArmor", 2)
+    elseif csid == 734 + AFoffset then
+        player:confirmTrade()
+        player:setCharVar("[BLUAF]CraftingStage", 2)
+        player:setCharVar("[BLUAF]PaymentDay", vanaDay())
         npcUtil.giveKeyItem(player, tpz.ki.MAGUS_ORDER_SLIP)
-        player:setCharVar("BluPaymentDay", vanaDay())
-        player:confirmTrade()
-    elseif csid == 736 + csOffset then
-        if npcUtil.giveItem(player, craftingItems[currentTask][7]) then
-            if currentTask == 1 then
-                player:setMaskBit(player:getCharVar("LathuyaCraftingList_Mask"), "LathuyaCraftingList_Mask", 0, true)
-            elseif currentTask == 2 then
-                player:setMaskBit(player:getCharVar("LathuyaCraftingList_Mask"), "LathuyaCraftingList_Mask", 1, true)
-            elseif currentTask == 4 then
-                player:setMaskBit(player:getCharVar("LathuyaCraftingList_Mask"), "LathuyaCraftingList_Mask", 2, true)
+    elseif csid == 736 + AFoffset then
+        if npcUtil.giveItem(player, craftingItems[currentTask].result) then
+            remainingBLUAF = remainingBLUAF - math.pow(2, (currentTask - 1))
+            player:setCharVar("[BLUAF]Remaining", remainingBLUAF)
+            player:setCharVar("[BLUAF]PaymentDay", 0)
+            player:setCharVar("[BLUAF]CraftingStage", 0)
+            player:setCharVar("[BLUAF]Current", 0)
+
+            if player:getCharVar("[BLUAF]Remaining") == 0 then
+                -- Player is finished with Lathuya
+                player:setCharVar("[BLUAF]RestingDay", 0)
+            else
+                player:setCharVar("[BLUAF]RestingDay", vanaDay())  
             end
-            player:setCharVar("BluPaymentDay", 0)
-            player:setCharVar("CraftingBluArmor", 0)
-            player:setCharVar("LathuyaCurrentTask_Mask", 0)
-            player:setCharVar("BluRestingDay", vanaDay())
+
             player:delKeyItem(tpz.ki.MAGUS_ORDER_SLIP)
         end
     end
