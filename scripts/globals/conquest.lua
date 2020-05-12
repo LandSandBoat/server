@@ -1222,23 +1222,13 @@ end
 -----------------------------------
 
 tpz.conquest.teleporterOnTrigger = function(player, teleporterNation, teleporterEvent)
-    if player:getNation() == teleporterNation then
-        local sandyRegions = getRegionsMask(tpz.nation.SANDORIA)
-        local bastokRegions = getRegionsMask(tpz.nation.BASTOK)
-        local windyRegions = getRegionsMask(tpz.nation.WINDURST)
-        local beastmenRegions = getRegionsMask(tpz.nation.BEASTMEN)
-        local allowedTeleports = getAllowedTeleports(player, teleporterNation)
-        local teleporterRegion = tpz.region.SANDORIA + teleporterNation
-        player:startEvent(teleporterEvent, sandyRegions, bastokRegions, windyRegions, beastmenRegions, bit.lshift(1, teleporterRegion), 0, player:getMainLvl(), allowedTeleports)
-    else
-        local a6 =
-        {
-            [tpz.nation.SANDORIA] = 1,
-            [tpz.nation.BASTOK]   = 256,
-            [tpz.nation.WINDURST] = 512,
-        }
-        player:startEvent(teleporterEvent, 0, 0, 0, 0, 0, a6[teleporterNation], 0, 0)
-    end
+    local sandyRegions = getRegionsMask(tpz.nation.SANDORIA)
+    local bastokRegions = getRegionsMask(tpz.nation.BASTOK)
+    local windyRegions = getRegionsMask(tpz.nation.WINDURST)
+    local beastmenRegions = getRegionsMask(tpz.nation.BEASTMEN)
+    local allowedTeleports = getAllowedTeleports(player, teleporterNation)
+    local nationBits = player:getNation() + bit.lshift(teleporterNation, 8)
+    player:startEvent(teleporterEvent, sandyRegions, bastokRegions, windyRegions, beastmenRegions, 0, nationBits, player:getMainLvl(), allowedTeleports)
 end
 
 tpz.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterEvent)
