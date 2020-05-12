@@ -197,10 +197,10 @@ void CGambitsContainer::Tick(time_point tick)
                         {
                             // TODO: SpellContianer->GetBestByElement(ELEMENT)
                             // NOTE: Iterating this list in reverse guarantees finding the best match
-                            for (int i = POwner->SpellContainer->m_damageList.size() - 1; i > -1 ; --i)
+                            for (size_t i = POwner->SpellContainer->m_damageList.size(); i > 0 ; --i)
                             {
-                                auto spell = POwner->SpellContainer->m_damageList[i];
-;                               auto spell_element = spell::GetSpell(spell)->getElement();
+                                auto spell = POwner->SpellContainer->m_damageList[i-1];
+                                auto spell_element = spell::GetSpell(spell)->getElement();
                                 if (spell_element == chain_element)
                                 {
                                     spell_id = spell;
