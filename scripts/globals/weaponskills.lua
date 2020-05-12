@@ -219,7 +219,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     if (wsParams.ignoresDef == not nil and wsParams.ignoresDef == true) then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(tpz.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
-    local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef)
+    local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -638,9 +638,6 @@ function getRangedHitRate(attacker,target,capHitRate,bonus)
 end
 
 function fTP(tp,ftp1,ftp2,ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
     if (tp >= 1000 and tp < 2000) then
         return ftp1 + ( ((ftp2-ftp1)/1000) * (tp-1000))
     elseif (tp >= 2000 and tp <= 3000) then
@@ -662,13 +659,13 @@ function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-function cMeleeRatio(attacker, defender, params, ignoredDef)
+function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
 
     local flourisheffect = attacker:getStatusEffect(tpz.effect.BUILDING_FLOURISH)
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(tpz.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
-    local atkmulti = fTP(params.atk100, params.atk200, params.atk300)
+    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio = (attacker:getStat(tpz.mod.ATT) * atkmulti) / (defender:getStat(tpz.mod.DEF) - ignoredDef)
     cratio = utils.clamp(cratio, 0, 2.25)
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
