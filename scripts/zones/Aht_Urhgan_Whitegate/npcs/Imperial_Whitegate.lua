@@ -16,35 +16,34 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    if player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0 then
-        if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
-            doRoyalPalaceArmorCheck(player) == true then
-            player:startEvent(3078,0,1,0,0,0,0,0,1,0)
-        elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.SEAL_OF_THE_SERPENT then
-            player:startEvent(3111)
-        elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMPERIAL_CORONATION and
-            doRoyalPalaceArmorCheck(player) == true then
-            player:startEvent(3140,tpz.besieged.getMercenaryRank(player),player:getTitle(),0,0,0,0,0,0,0)
-        elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.IMPERIAL_CORONATION and
-            doRoyalPalaceArmorCheck(player) == true then
-            local ring = player:getCharVar("TOAU_RINGTIME")
-            local standard = player:hasItem(129)
+    local noWeapons = player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0
+    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        player:startEvent(3078,0,1,0,0,0,0,0,1,0)
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
+        player:startEvent(3111)
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMPERIAL_CORONATION and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        player:startEvent(3140,tpz.besieged.getMercenaryRank(player),player:getTitle(),0,0,0,0,0,0,0)
+    elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.IMPERIAL_CORONATION and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        local ring = player:getCharVar("TOAU_RINGTIME")
+        local standard = player:hasItem(129)
 
-            local ringParam = 0
+        local ringParam = 0
 
-            if ring == 0 then
-                ringParam = 1
-            end
+        if ring == 0 then
+            ringParam = 1
+        end
 
-            local standardParam = 0
+        local standardParam = 0
 
-            if standard == false then
-                standardParam = 1
-            end
+        if standard == false then
+            standardParam = 1
+        end
 
-            if ringParam > 0 or standardParam > 0 then
-                player:startEvent(3155,standardParam,ringParam,0,0,0,0,0,0,0)
-            end
+        if ringParam > 0 or standardParam > 0 then
+            player:startEvent(3155,standardParam,ringParam,0,0,0,0,0,0,0)
         end
 
     -- TRANSFORMATIONS

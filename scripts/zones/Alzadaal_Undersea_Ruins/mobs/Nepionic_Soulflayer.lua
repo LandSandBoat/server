@@ -12,12 +12,8 @@ function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobSpawn(mob)
-    DespawnMob(mob:getID(), 180)
-end
-
 function onMobDeath(mob, player, isKiller)
-    if player:getCharVar("TransformationsProgress") >= 2 then
+    if player:getCharVar("TransformationsProgress") == 4 then
         player:setCharVar("TransformationsProgress", 5)
     end
 end

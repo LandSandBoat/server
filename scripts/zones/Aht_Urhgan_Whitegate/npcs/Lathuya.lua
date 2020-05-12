@@ -36,7 +36,6 @@ local craftingItems = {
 function onTrade(player, npc, trade)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     if remainingBLUAF >= 1 then
-        local currentTask = player:getCharVar("LathuyaCurrentTask_Mask")
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
         local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
         local AFoffset = 8 * totalCraftedPieces
@@ -78,7 +77,7 @@ function onTrigger(player, npc)
         if currentTask == 0 and totalCraftedPieces ~= 3 then
             if vanaDay() > player:getCharVar("[BLUAF]RestingDay") then
                 if totalCraftedPieces == 2 then
-                    currentTask = math.floor(player:getCharVar("[BLUAF]Remaining") / 2) + 1
+                    currentTask = math.floor(remainingBLUAF / 2) + 1
                     player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
                 else
                     -- Will prompt for choosing which armor to work on

@@ -51,6 +51,7 @@ zones[tpz.zone.ALZADAAL_UNDERSEA_RUINS] =
     {
         RUNIC_PORTAL_NORTH      = 17072236,
         RUNIC_PORTAL_SOUTH      = 17072237,
+        NEPIONIC_QM             = 17072271,
     },
 }
 

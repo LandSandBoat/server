@@ -35,8 +35,8 @@ function onInitialize(zone)
     zone:registerRegion(21,-556, -2,-489,-550, 0,-483)  -- map 12 east porter (white)
     zone:registerRegion(22,-610, -2,-489,-603, 0,-483)  -- map 12 west porter (blue)
     zone:registerRegion(23, 382, -1,-582, 399, 1,-572)  -- mission 9 TOAU
-    zone:registerRegion(24,-495,  0, 675,-505, 0, 665)  -- transformations (quest) TODO: NEEDS CORRECT COORDINATES plz halp
-    zone:registerRegion(25,-493,  0, 664,-505, 0, 653)  -- transformations (quest) TODO: NEEDS CORRECT COORDINATES plz halp
+    zone:registerRegion(24,  52, -1, 774,  67, 1, 778)  -- transformations (quest)
+    zone:registerRegion(25, 134, -1,-584, 146, 1,-577)  -- transformations (quest)
 end
 
 function onZoneIn(player,prevZone)
@@ -65,7 +65,6 @@ function afterZoneIn(player)
 end
 
 function onRegionEnter(player,region)
-    local transformationsProgress = player:getCharVar("TransformationsProgress")
 
     switch (region:GetRegionID()): caseof
     {
@@ -141,12 +140,12 @@ function onRegionEnter(player,region)
             end
         end,
         [24] = function (x)
-            if transformationsProgress == 2 then
+            if player:getCharVar("TransformationsProgress") == 2 then
                 player:startEvent(2)
             end
         end,
         [25] = function (x)
-            if transformationsProgress <= 2 then
+            if player:getCharVar("TransformationsProgress") == 3 then
                 player:startEvent(3)
             end
         end,

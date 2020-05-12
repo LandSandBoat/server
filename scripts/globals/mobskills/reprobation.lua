@@ -19,11 +19,9 @@ end
 
 function onMobWeaponSkill(target, mob, skill)
     local dispel =  target:dispelAllStatusEffect(bit.bor(tpz.effectFlag.DISPELABLE, tpz.effectFlag.FOOD))
-    local msg -- to be set later
+    local msg = tpz.msg.basic.SKILL_NO_EFFECT
 
-    if (dispel == 0) then
-        msg = tpz.msg.basic.SKILL_NO_EFFECT -- no effect
-    else
+    if dispel > 0 then
         msg = tpz.msg.basic.DISAPPEAR_NUM
     end
 

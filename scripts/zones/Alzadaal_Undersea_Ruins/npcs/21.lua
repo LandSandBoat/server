@@ -12,9 +12,9 @@ end;
 function onTrigger(player,npc)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     -- TRANSFORMATIONS
-    if transformationsProgress >= 2 and transformationsProgress <= 4 and not GetMobByID(ID.mob.NEPIONIC_SOULFLAYER):isSpawned() then
+    if transformationsProgress == 4 then
         player:startEvent(4)
-    elseif player:getCharVar("TransformationsProgress") == 5 then
+    elseif transformationsProgress == 5 then
         player:startEvent(5)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -26,7 +26,7 @@ end
 
 function onEventFinish(player,csid,option)
     if csid == 4 then
-        SpawnMob(ID.mob.NEPIONIC_SOULFLAYER)
+        npcUtil.popFromQM(player, GetNPCByID(ID.npc.NEPIONIC_QM), ID.mob.NEPIONIC_SOULFLAYER, {hide = 1})
     elseif csid == 5 then
         npcUtil.completeQuest(player, AHT_URHGAN, TRANSFORMATIONS, {
             item = 15265,
