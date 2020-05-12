@@ -1,7 +1,7 @@
 #ifndef _ITEMS_H
 #define _ITEMS_H
 
-// Add items as needed, with 14K items in the database this 
+// Add items as needed, with 14K items in the database this
 // file would be huge if we put all of them in here.
 
 // Ninja tools

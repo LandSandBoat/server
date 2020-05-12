@@ -15,6 +15,6 @@ function onAdditionalEffect(player, target, damage)
         target:addStatusEffect(tpz.effect.POISON, 10, 3, 30) -- Power and Duration needs verified.
         return tpz.subEffect.POISON, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.POISON
     end
-    
+
     return 0, 0, 0
 end

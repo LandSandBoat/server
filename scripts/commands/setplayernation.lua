@@ -18,7 +18,7 @@ end
 function onTrigger(player, arg1, arg2)
     local targ
     local nation
-    
+
     -- validate target
     if (arg2 ~= nil) then
         targ = GetPlayerByName(arg1)

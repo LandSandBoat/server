@@ -11,7 +11,7 @@ require("scripts/globals/status");
 
 function onTrade(player,npc,trade)
     local nm = GetMobByID(ID.mob.IXAERN_MNK);
-    
+
     if (not nm:isSpawned()) then
         local chance = 0; -- percent chance that an item will drop.
 

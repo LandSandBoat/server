@@ -19,7 +19,7 @@ zones[tpz.zone.GRAND_PALACE_OF_HUXZOI] =
     },
     mob =
     {
-        JAILER_OF_TEMPERANCE_PH = 
+        JAILER_OF_TEMPERANCE_PH =
         {
             16916489, -- -420 -1 757
             16916508, --  -43 -1 460

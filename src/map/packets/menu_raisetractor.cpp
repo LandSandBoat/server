@@ -25,7 +25,7 @@
 #include "../entities/charentity.h"
 
 
-CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity * PChar, REVIVAL_TYPE type) 
+CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity * PChar, REVIVAL_TYPE type)
 {
 	this->type = 0xF9;
 	this->size = 0x06;

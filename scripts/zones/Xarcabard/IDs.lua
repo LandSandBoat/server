@@ -35,7 +35,7 @@ zones[tpz.zone.XARCABARD] =
         ALREADY_POSSESS_TEMP           = 8163,  -- You already possess that temporary item.
         NO_COMBINATION                 = 8168,  -- You were unable to enter a combination.
         REGIME_REGISTERED              = 10346, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 11528, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL          = 11531, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

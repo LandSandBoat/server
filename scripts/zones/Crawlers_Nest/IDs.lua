@@ -33,7 +33,7 @@ zones[tpz.zone.CRAWLERS_NEST] =
         PLAYER_OBTAINS_TEMP_ITEM      = 7344,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 7345,  -- You already possess that temporary item.
         NO_COMBINATION                = 7350,  -- You were unable to enter a combination.
-        COMMON_SENSE_SURVIVAL         = 11377, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 11380, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

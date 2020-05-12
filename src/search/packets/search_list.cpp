@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -29,13 +29,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "search_list.h"
 
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 CSearchListPacket::CSearchListPacket(uint32 Total)
 {
     m_count = 0;
@@ -46,16 +39,10 @@ CSearchListPacket::CSearchListPacket(uint32 Total)
     ref<uint8>(m_data, (0x0A)) = 0x80;
     ref<uint8>(m_data, (0x0B)) = 0x80;
 
-    ref<uint16>(m_data, (0x0E)) = Total; // общее количество найденных персонажей (может отличаться от отправляемого)
+    ref<uint16>(m_data, (0x0E)) = Total; // The total number of character found (may differ from the amount that gets sent)
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
-// в один пакет мождет быть добавлено не более 20-ти персонажей
+// A maximum of 20 characters can be added to a single packet.
 
 void CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
 {
@@ -119,16 +106,16 @@ void CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
     m_offset = packBitsLE(m_data, SEARCH_LANGUAGE, m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
 
-    if (m_offset % 8 > 0) m_offset += 8 - m_offset % 8;                 // побайтное выравнивание данных
+    if (m_offset % 8 > 0) m_offset += 8 - m_offset % 8;                 // Byte alignment
 
-    ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1;      // размер данных сущности
-    ref<uint16>(m_data, (0x08)) = m_offset / 8;                            // размер отправляемых данных
+    ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1;      // Entity data size
+    ref<uint16>(m_data, (0x08)) = m_offset / 8;                            // Size of the data to send
     delete PPlayer;
 }
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем собранный пакет                                           *
+*  Returns the packet's data.                                           *
 *                                                                       *
 ************************************************************************/
 
@@ -139,7 +126,7 @@ uint8* CSearchListPacket::GetData()
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем размер отправляемого пакета                               *
+*  Returns the size of the packet.                                      *
 *                                                                       *
 ************************************************************************/
 

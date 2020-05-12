@@ -5,7 +5,7 @@
 -- Type: Magical
 -- Utsusemi/Blink absorb: ignores shadows
 -- Range: Melee
--- 
+--
 ---------------------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")

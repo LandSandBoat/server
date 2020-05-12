@@ -1,39 +1,37 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
---  NPC: Oil lamp
--- !pos -60 -23 60 27
+-- NPC: Oil Lamp - Earth (West)
+-- !pos -63 -26 53
 -----------------------------------
-require("scripts/globals/missions");
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs");
+local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
-    local DoorOffset = npc:getID();
+    local DoorOffset = npc:getID()
 
-    player:messageSpecial(ID.text.LAMP_OFFSET+1); -- earth lamp
-    npc:openDoor(7); -- lamp animation
+    player:messageSpecial(ID.text.LAMP_OFFSET+1) -- earth lamp
+    npc:openDoor(7) -- lamp animation
 
-    local element = VanadielDayElement();
-    -- printf("element: %u",element);
+    local element = VanadielDayElement()
 
     if (element == 3) then -- wind day
         if (GetNPCByID(DoorOffset+1):getAnimation() == 8) then -- lamp wind open?
-            GetNPCByID(DoorOffset-7):openDoor(15); -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
         end
     elseif (element == 1) then -- earth day
         if (GetNPCByID(DoorOffset-3):getAnimation() == 8) then -- lamp lightning open?
-            GetNPCByID(DoorOffset-7):openDoor(15); -- Open Door _0rk
+            GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rk
         end
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
-end;
+end

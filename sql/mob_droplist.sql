@@ -10505,8 +10505,8 @@ INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,834,0);
 INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920,120);
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,4368,0);
 INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,17868,260);
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,505,1000);
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,531,1000);
+INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,505,1000); -- Sheepskin
+INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,531,1000); -- Lanolin
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,624,80);
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,888,340);
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,4360,80);
@@ -15709,8 +15709,8 @@ INSERT INTO `mob_droplist` VALUES (2910,0,0,1000,2718,10);
 INSERT INTO `mob_droplist` VALUES (2910,0,0,1000,2723,10);
 INSERT INTO `mob_droplist` VALUES (2910,0,0,1000,3495,15);
 INSERT INTO `mob_droplist` VALUES (2910,0,0,1000,5896,850);
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14676,730);
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14782,270);
+INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14676,730); -- Assailant's Ring
+INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14782,270); -- Astral Earring
 INSERT INTO `mob_droplist` VALUES (2912,0,0,1000,953,310);
 INSERT INTO `mob_droplist` VALUES (2912,0,0,1000,574,70);
 INSERT INTO `mob_droplist` VALUES (2912,2,0,1000,573,0);
@@ -16530,6 +16530,13 @@ INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10761,150); -- portus_annulet
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10760,125); -- portus_ring
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10944,300); -- portus_collar
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,11924,300); -- alucinor_mitts
+
+INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
+INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
+INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
+INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, Aeshma) ancient_beastcoin x 4
+INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,1000); -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
+INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,500);  -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -27,7 +27,7 @@
 #include "../entities/charentity.h"
 
 
-CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status) 
+CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status)
 {
 	this->type = 0xF6;
 	this->size = 0x04;
@@ -35,7 +35,7 @@ CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status)
 	ref<uint8>(0x04) = status;
 }
 
-CWideScanPacket::CWideScanPacket(CCharEntity * PChar, CBaseEntity * PEntity) 
+CWideScanPacket::CWideScanPacket(CCharEntity * PChar, CBaseEntity * PEntity)
 {
 	this->type = 0xF4;
 	this->size = 0x0E;
@@ -46,13 +46,13 @@ CWideScanPacket::CWideScanPacket(CCharEntity * PChar, CBaseEntity * PEntity)
         ref<uint8>(0x06) = ((CBattleEntity*)PEntity)->GetMLevel();
     }
 
-	// 0 - черная точка (? Char ?) 
+	// 0 - черная точка (? Char ?)
 	// 1 - зеленая точка (NPC)
 	// 2 - красная точка (Mob)
-	ref<uint8>(0x07) = PEntity->objtype/2; 
+	ref<uint8>(0x07) = PEntity->objtype/2;
 
 	ref<uint16>(0x08) = (int16)(PEntity->loc.p.x - PChar->loc.p.x); // x - разница координат персонажа и объекта
 	ref<uint16>(0x0A) = (int16)(PEntity->loc.p.z - PChar->loc.p.z); // z - разница координат персонажа и объекта
 
-  //memcpy(data+(0x0C), PEntity->GetName(), (PEntity->name.size() > 14 ? 14 : PEntity->name.size()));  
+  //memcpy(data+(0x0C), PEntity->GetName(), (PEntity->name.size() > 14 ? 14 : PEntity->name.size()));
 }

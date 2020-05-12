@@ -14,7 +14,7 @@ end
 
 function onEffectLose(target,effect)
     local destination = effect:getPower()
-    
+
     if (target:isMob()) then
         DespawnMob(target:getID())
     elseif (destination == tpz.teleport.id.WARP) then

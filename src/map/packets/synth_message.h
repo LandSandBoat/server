@@ -26,7 +26,7 @@
 
 #include "basic.h"
 
-enum SYNTH_MESSAGE 
+enum SYNTH_MESSAGE
 {
 	SYNTH_SUCCESS,
 	SYNTH_FAIL,
@@ -49,7 +49,7 @@ class CCharEntity;
 class CSynthMessagePacket : public CBasicPacket
 {
 public:
-	
+
 	CSynthMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID = 0, uint8 quantity = 0);
 };
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -31,13 +31,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "party_list.h"
 
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 CPartyListPacket::CPartyListPacket(uint32 partyid, uint32 Total)
 {
     m_partyid = partyid;
@@ -48,7 +41,7 @@ CPartyListPacket::CPartyListPacket(uint32 partyid, uint32 Total)
     ref<uint8>(m_data, (0x0A)) = 0x80;
     ref<uint8>(m_data, (0x0B)) = 0x82;                       // packet type
 
-    // ref<uint8>(m_data,(0x0E)) = 0x00;                       // количество персонажей в пакете
+    // ref<uint8>(m_data,(0x0E)) = 0x00;                       // Number of characters per packet.
     ref<uint8>(m_data, (0x0E)) = Total;
 }
 
@@ -59,7 +52,7 @@ CPartyListPacket::~CPartyListPacket()
 
 /************************************************************************
 *                                                                       *
-*  Добавляем персонажа в пакет                                          *
+*  Add the player to the packet.                                        *
 *                                                                       *
 ************************************************************************/
 
@@ -126,16 +119,16 @@ void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
     m_offset = packBitsLE(m_data, SEARCH_LANGUAGE, m_offset, 5);
     m_offset = packBitsLE(m_data, PPlayer->languages, m_offset, 16);
 
-    if (m_offset % 8 > 0) m_offset += 8 - m_offset % 8;                 // побайтное выравнивание данных
+    if (m_offset % 8 > 0) m_offset += 8 - m_offset % 8;                 // Byte alignment
 
-    ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1;      // размер данных сущности
-    ref<uint16>(m_data, (0x08)) = m_offset / 8;                            // размер отправляемых данных
+    ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1;      // Entity data size
+    ref<uint16>(m_data, (0x08)) = m_offset / 8;                            // Size of the data to send
     delete PPlayer;
 }
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем собранный пакет
+*  Returns the packet's data.                                           *
 *                                                                       *
 ************************************************************************/
 
@@ -162,7 +155,7 @@ uint8* CPartyListPacket::GetData()
 
 /************************************************************************
 *                                                                       *
-*  Возвращаем размер отправляемого пакета                               *
+*  Returns the size of the packet.                                      *
 *                                                                       *
 ************************************************************************/
 

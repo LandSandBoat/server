@@ -280,7 +280,7 @@ tpz.ws = tpz.weaponskill
 -- Weaponskill Unlock IDs
 ------------------------------------
 
-tpz.ws_unlock = 
+tpz.ws_unlock =
 {
     ASURAN_FISTS        = 1,
     EVISCERATION        = 2,

@@ -15,6 +15,8 @@ zones[tpz.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         FISHING_MESSAGE_OFFSET  = 7049, -- You can't fish here.
+        DOCKING_IN_NASHMAU      = 7309, -- We are now docking in Nashmau.
+        NEARING_NASHMAU         = 7310, -- We are nearing Nashmau.
         JIDWAHN_SHOP_DIALOG     = 7312, -- Would you care for some items to use on your travels?
         ON_WAY_TO_NASHMAU       = 7313, -- We are on our way to Nashmau. We will be arriving soon.
     },

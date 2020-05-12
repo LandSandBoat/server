@@ -24,7 +24,7 @@ zones[tpz.zone.ABYSSEA_MISAREAUX] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17662556] = { 'qm1',      {3085},                                                                                     {}, 17662464}, -- Minax Bugard
             --  [17662557] = { 'qm2',      {3086},                                                                                     {}, 17662465}, -- Sirrush

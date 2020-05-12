@@ -45,7 +45,7 @@ function onMobDisengage(mob)
     -- Make sure model is reset back to start
     mob:setModelId(1840);
     mob:setMobMod(tpz.mobMod.SKILL_LIST, 316);
-  
+
     -- Prevent death and hide HP until final phase
     mob:setUnkillable(true);
     mob:hideHP(true);
@@ -88,14 +88,14 @@ function onMobFight(mob,target)
             pets[i][j] = GetMobByID(petIDs[i][j]);
         end
     end
-  
+
     -- Check for phase change
     if (phase < 21 and mobHPP <= triggerHPP[phase]) then
         if (phase == 20) then -- Prepare for death
             mob:hideHP(false);
             mob:setUnkillable(false);
         end
-       
+
         -- Change phase
         mob:setTP(0);
         mob:setModelId(mobModelID[phase]);
@@ -110,10 +110,10 @@ function onMobFight(mob,target)
             newPet:setMobMod(tpz.mobMod.MAGIC_DELAY,4);
             handlePet(mob, newPet, oldPet, target, petModelID[phase]);
         end
-       
+
         -- Increment phase
         mob:setLocalVar("phase", phase + 1);
-       
+
     -- Or, check for Astral Flow
     elseif (phase == 21 and astral < 9 and mobHPP <= (100 - 25 * astral)) then
         for i = 1, 8 do
@@ -161,7 +161,7 @@ end;
 function onMobDeath(mob, player, isKiller)
 
     player:addTitle(tpz.title.PANDEMONIUM_QUELLER);
-   
+
     -- Despawn pets
     for i = 0, 1 do
         for j = 1, 8 do

@@ -52,7 +52,7 @@ char **arg_v = NULL;
 char *SERVER_NAME = NULL;
 char  SERVER_TYPE = TOPAZ_SERVER_NONE;
 
-// Copyright (c) Athena Dev Teams 
+// Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu
 //
 // This is an implementation of signal() using sigaction() for portability.
@@ -146,7 +146,7 @@ static void sig_proc(int sn)
 {
 	static int is_called = 0;
 
-	switch (sn) 
+	switch (sn)
 	{
 		case SIGINT:
 		case SIGTERM:
@@ -220,7 +220,7 @@ static void display_title(void)
 void usercheck(void)
 {
 #ifndef _WIN32
-    if ((getuid() == 0) && (getgid() == 0)) 
+    if ((getuid() == 0) && (getgid() == 0))
 	{
 		ShowWarning ("You are running Topaz as the root superuser.\n");
 		ShowWarning ("It is unnecessary and unsafe to run with root privileges.\n");
@@ -262,7 +262,7 @@ int main (int argc, char **argv)
 	{// Main runtime cycle
 		duration next;
 
-		while (runflag) 
+		while (runflag)
 		{
             next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
 			do_sockets(&rfd,next);

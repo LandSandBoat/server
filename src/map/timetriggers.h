@@ -43,7 +43,7 @@ class CTriggerHandler
 public:
     virtual ~CTriggerHandler() = default;
     static	CTriggerHandler* getInstance();
-    
+
     void insertTrigger(Trigger_t);
     void triggerTimer();
 private:

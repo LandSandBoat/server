@@ -23,7 +23,7 @@ function onTrigger(player, itemId, target, dropper)
         error(player, "Invalid itemID.")
         return
     end
-    
+
     -- validate target
     local targ
     if (target == nil) then

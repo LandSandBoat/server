@@ -12,9 +12,9 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 
 function onMobSpawn(mob)
     if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
-        mob:setDropID(4478)
+        mob:setDropID(2911)
     else
-        mob:setDropID(2734)
+        mob:setDropID(1972)
     end
 end
 

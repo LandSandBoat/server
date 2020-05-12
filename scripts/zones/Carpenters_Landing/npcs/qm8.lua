@@ -18,7 +18,7 @@ function onTrigger(player,npc)
     local k3 = player:getCharVar("Cryptonberry_Assassins-3_KILL")
     local executorKill = player:getCharVar("Cryptonberry_Executor_KILL")
     local executor = GetMobByID(ID.mob.CRYPTONBERRY_EXECUTOR)
-    
+
     if cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and (k1 * k2 * k3 * executorKill) == 1 then
         player:startEvent(37)
     elseif

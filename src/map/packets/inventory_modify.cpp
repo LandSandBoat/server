@@ -23,7 +23,7 @@
 
 #include "inventory_modify.h"
 
-CInventoryModifyPacket::CInventoryModifyPacket(uint8 LocationID, uint8 slotID, uint32 quantity) 
+CInventoryModifyPacket::CInventoryModifyPacket(uint8 LocationID, uint8 slotID, uint32 quantity)
 {
 	this->type = 0x1E;
 	this->size = 0x08;

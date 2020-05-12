@@ -164,10 +164,10 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 	//topearl = 3
 	//tosack = 2
 	int newId = 512 + toSack;
-	
+
     if (newId == 514 || newId == 515)
     {
-	    for (uint32 i = 0; i < members.size(); ++i) 
+	    for (uint32 i = 0; i < members.size(); ++i)
 	    {
 		    if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
 		    {
@@ -217,14 +217,14 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
                     PMember->pushPacket(new CLinkshellEquipPacket(PMember, lsID));
                     PMember->pushPacket(new CInventoryItemPacket(PItemLinkshell, LocationID, SlotID));
                 }
-	        
+
                 charutils::SaveCharStats(PMember);
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket(new CInventoryFinishPacket());
                 PMember->pushPacket(new CCharUpdatePacket(PMember));
 			    return;
-		    } 
+		    }
 	    }
     }
 }
@@ -239,7 +239,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank)
 {
     uint32 lsid = m_id;
-	for (uint32 i = 0; i < members.size(); ++i) 
+	for (uint32 i = 0; i < members.size(); ++i)
 	{
 		if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
 		{
@@ -304,7 +304,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank)
             PMember->pushPacket(new CCharUpdatePacket(PMember));
             PMember->pushPacket(new CMessageSystemPacket(0,0,109));
 			return;
-		} 
+		}
 	}
 }
 
@@ -319,9 +319,9 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
     uint32 lsid = m_id;
     int8 signature[21];
     DecodeStringLinkshell(lsname, signature);
-    
+
     // break logged in and equipped members
-	while (members.size() > 0) 
+	while (members.size() > 0)
 	{
         RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL);
     }
@@ -401,7 +401,7 @@ namespace linkshell
 	    if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
 	    {
             auto PLinkshell = std::make_unique<CLinkshell>(Sql_GetUIntData(SqlHandle,0));
-        
+
             PLinkshell->setColor(Sql_GetIntData(SqlHandle,1));
             int8 EncodedName[16];
             EncodeStringLinkshell(Sql_GetData(SqlHandle,2), EncodedName);

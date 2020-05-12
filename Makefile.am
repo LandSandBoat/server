@@ -22,7 +22,7 @@ LIBS_ALL                += -lzmq
 
 ## Add Architecture-specific stuff
 if TOPAZ_ARCH_LINUX
-LIBS_ALL                += -ldl
+LIBS_ALL                += -ldl -lpthread
 endif
 
 if TOPAZ_ARCH_SOLARIS

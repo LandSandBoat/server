@@ -22,7 +22,7 @@ function onTrigger(player, typeId, songId)
         error(player, "Invalid type ID.")
         return
     end
-    
+
     -- validate songId
     if (songId == nil or songId < 0) then
         error(player, "Invalid song ID.")

@@ -68,7 +68,6 @@ struct map_config_t
     std::string mysql_database;     // mysql database -> default tpzdb
 
     std::string server_message;
-    std::string server_message_fr;
 
     uint32 max_time_lastupdate;       // max interval wait of last update player char
     int32  vanadiel_time_offset;      // смещение игрового времени относительно реального времени
@@ -79,6 +78,7 @@ struct map_config_t
     float  ah_tax_rate_single;        // Percent of listing price to tax single items
     float  ah_tax_rate_stacks;        // Percent of listing price to tax stacks
     uint32 ah_max_fee;                // Maximum total AH fees/taxes
+    uint32 ah_list_limit;             // Maximum open AH listings per player
 
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies

@@ -13,7 +13,7 @@ function onTrade(player,npc,trade)
     local COUNT = trade:getItemCount()
     local INCUS_CELL = 5365
     local SPISSATUS_CELL = 5384
-        
+
     for i = INCUS_CELL, SPISSATUS_CELL do
         if COUNT <= 5 and trade:hasItemQty(i,COUNT) then
             SpawnMob(ID.mob[2][3].wahzil, instance):updateClaim(player)

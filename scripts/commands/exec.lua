@@ -20,11 +20,11 @@ function onTrigger(player, str)
         error(player, "You must enter a string to execute.")
         return
     end
-    
+
     -- For safety measures we will nuke the os table..
     local old_os = os
     os = nil
-    
+
     -- Ensure the command compiles / is valid..
     local scriptObj, err = loadstring(str)
     if (scriptObj == nil) then
@@ -33,13 +33,13 @@ function onTrigger(player, str)
         os = old_os
         return
     end
-    
+
     -- Execute the string..
     local status, err = pcall(scriptObj)
     if (status == false) then
         player:PrintToPlayer(err)
     end
-    
+
     -- Restore the os table..
     os = old_os
 end

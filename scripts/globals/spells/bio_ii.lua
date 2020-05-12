@@ -14,7 +14,8 @@ function onMagicCastingCheck(caster,target,spell)
 end
 
 function onSpellCast(caster,target,spell)
-    local basedmg = caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 4
+    local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
+    local basedmg = skillLvl / 4
     local params = {}
     params.dmg = basedmg
     params.multiplier = 2
@@ -47,8 +48,11 @@ function onSpellCast(caster,target,spell)
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)
 
-    -- Calculate DoT effect (rough, though fairly accurate)
-    local dotdmg = 3 + math.floor(caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 60)
+    -- Calculate DoT effect
+    -- http://wiki.ffo.jp/html/1954.html
+    -- This formula gives correct values for every breakpoint listed on that site
+    local dotdmg = math.floor((skillLvl + 29) / 40)
+    dotdmg = utils.clamp(dotdmg, 3, 8)
 
     -- Do it!
     target:addStatusEffect(tpz.effect.BIO, dotdmg, 3, duration, 0, 15, 2)

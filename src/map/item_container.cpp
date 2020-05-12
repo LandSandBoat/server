@@ -89,9 +89,9 @@ uint8 CItemContainer::AddBuff(int8 buff)
 
 // контейнер не несет ответственности за то, что предметы могут остаться за пределами размера
 
-uint8 CItemContainer::SetSize(uint8 size) 
+uint8 CItemContainer::SetSize(uint8 size)
 {
-	if (size <= MAX_CONTAINER_SIZE) 
+	if (size <= MAX_CONTAINER_SIZE)
 	{
 		if (size >= m_count)
 		{
@@ -115,7 +115,7 @@ uint8 CItemContainer::AddSize(int8 size)
 {
     uint8 newsize = m_size + size;
 
-    if (newsize <= MAX_CONTAINER_SIZE) 
+    if (newsize <= MAX_CONTAINER_SIZE)
 	{
 		if (newsize >= m_count)
 		{
@@ -137,9 +137,9 @@ uint8 CItemContainer::InsertItem(CItem* PItem)
 {
 	TPZ_DEBUG_BREAK_IF(PItem == nullptr);
 
-	for (uint8 SlotID = 1; SlotID <= m_size; ++SlotID) 
+	for (uint8 SlotID = 1; SlotID <= m_size; ++SlotID)
 	{
-		if (m_ItemList[SlotID] == nullptr) 
+		if (m_ItemList[SlotID] == nullptr)
 		{
             m_count++;
 
@@ -174,7 +174,7 @@ uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
             if (m_ItemList[SlotID] == nullptr && SlotID != 0) m_count++;
 		}
         else if(m_ItemList[SlotID] != nullptr && SlotID != 0) m_count--;
-        
+
 		m_ItemList[SlotID] = PItem;
 		return SlotID;
 	}
@@ -207,10 +207,10 @@ CItem* CItemContainer::GetItem(uint8 SlotID)
 
 uint8 CItemContainer::SearchItem(uint16 ItemID)
 {
-	for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID) 
+	for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
 	{
-		if ((m_ItemList[SlotID] != nullptr) && 
-			(m_ItemList[SlotID]->getID() == ItemID)) 
+		if ((m_ItemList[SlotID] != nullptr) &&
+			(m_ItemList[SlotID]->getID() == ItemID))
 		{
 			return SlotID;
 		}
@@ -226,11 +226,11 @@ uint8 CItemContainer::SearchItem(uint16 ItemID)
 
 uint8 CItemContainer::SearchItemWithSpace(uint16 ItemID, uint32 quantity)
 {
-	for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID) 
+	for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
 	{
-		if ((m_ItemList[SlotID] != nullptr) && 
+		if ((m_ItemList[SlotID] != nullptr) &&
 			(m_ItemList[SlotID]->getID() == ItemID) &&
-            (m_ItemList[SlotID]->getQuantity() <= m_ItemList[SlotID]->getStackSize()-quantity)) 
+            (m_ItemList[SlotID]->getQuantity() <= m_ItemList[SlotID]->getStackSize()-quantity))
 		{
 			return SlotID;
 		}

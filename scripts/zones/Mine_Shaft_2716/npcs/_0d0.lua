@@ -8,7 +8,7 @@ require("scripts/globals/missions");
 
 function onTrade(player,npc,trade)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and ( player:getCharVar("COP_Louverance_s_Path") == 7 or player:getCharVar("COP_Louverance_s_Path") == 8 )) then
-        if (trade:getItemCount() == 1 and trade:hasItemQty(1684,1)) then            
+        if (trade:getItemCount() == 1 and trade:hasItemQty(1684,1)) then
             player:startEvent(3);
         end
     else

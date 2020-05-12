@@ -13,7 +13,7 @@ end;
 
 function onTrigger(player,npc)
     local ttsStat = player:getCharVar("TigressStrikesProg");
-    
+
     if (ttsStat == 1) then
         player:startEvent(102);
     elseif (player:getCharVar("WarLynxKilled") == 1) then

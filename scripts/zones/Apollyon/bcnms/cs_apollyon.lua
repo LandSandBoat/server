@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Appolyon
--- Name: 
+-- Name:
 -----------------------------------
 require("scripts/globals/limbus");
 require("scripts/globals/battlefield")
@@ -15,7 +15,7 @@ end
 
 function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[CS_Apollyon]UniqueID",os.time());
-    HideArmouryCrates(CS_Apollyon,APOLLYON_SE_NE);    
+    HideArmouryCrates(CS_Apollyon,APOLLYON_SE_NE);
     SetServerVariable("[CS_Apollyon]Already_Received",0);
     GetNPCByID(16933245):setAnimation(8);
     GetNPCByID(16933246):setAnimation(8);

@@ -14,7 +14,7 @@ function onMobSkillCheck(target, mob, skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-	local DISPEL = target:dispelStatusEffect()
+    local DISPEL = target:dispelStatusEffect()
 
     MobStatusEffectMove(mob, target, tpz.effect.STUN, 1, 0, 2)
 

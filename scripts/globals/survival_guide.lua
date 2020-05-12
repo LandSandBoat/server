@@ -63,7 +63,7 @@ local function teleportMenuUpdate(player, option)
                     if favorites[x] == index then
                         for x = x, 8 do
                             favorites[x] = favorites[x+1]
-						end
+                        end
 
                         favorites[9] = -1
                         break

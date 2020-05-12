@@ -89,8 +89,8 @@ local armorSets =
     75, 6, 0x001000, 5, 15084, 15099, 15114, 15129, 15144, 1000, tpz.ki.KOGA_GARB_CLAIM_SLIP,
     76, 6, 0x002000, 5, 15085, 15100, 15115, 15130, 15145, 1000, tpz.ki.WYRM_ARMOR_CLAIM_SLIP,
     77, 6, 0x004000, 5, 15086, 15101, 15116, 15131, 15146, 1000, tpz.ki.SUMMONERS_ATTIRE_CLAIM_SLIP,
-    78, 4, 0x040000, 5, 16138, 14578, 15002, 15659, 15746, 500,  tpz.ki.DANCERS_ATTIRE_CLAIM_SLIP,
-    79, 4, 0x080000, 5, 16139, 14579, 15003, 15660, 15747, 500,  tpz.ki.DANCERS_ATTIRE_CLAIM_SLIP,
+    78, 4, 0x040000, 5, 16138, 14578, 15002, 15659, 15746, 500,  tpz.ki.DANCERS_ATTIRE_CLAIM_SLIP_M,
+    79, 4, 0x080000, 5, 16139, 14579, 15003, 15660, 15747, 500,  tpz.ki.DANCERS_ATTIRE_CLAIM_SLIP_F,
     80, 4, 0x100000, 5, 16140, 14580, 15004, 16311, 15748, 500,  tpz.ki.SCHOLARS_ATTIRE_CLAIM_SLIP,
     81, 4, 0x200000, 5, 16062, 14525, 14933, 15604, 15688, 1000, tpz.ki.AMIR_ARMOR_CLAIM_SLIP,
     82, 4, 0x400000, 5, 16069, 14530, 14940, 15609, 15695, 1000, tpz.ki.PAHLUWAN_ARMOR_CLAIM_SLIP,
@@ -108,7 +108,7 @@ tpz.armorStorage.onTrade = function(player, trade, deposit)
 
     for i = 1, #armorSets, 11 do
         local T1 = trade:hasItemQty(armorSets[i + 5], 1)
-        
+
         if T1 then
             if not player:hasKeyItem(armorSets[i + 10]) then
                 if trade:getItemCount() == armorSets[i + 3] then
@@ -128,7 +128,7 @@ tpz.armorStorage.onTrade = function(player, trade, deposit)
             end
         end
     end
-    
+
     return returnValue
 end
 
@@ -143,7 +143,7 @@ tpz.armorStorage.onTrigger = function(player, withdrawal)
         if player:hasKeyItem(armorSets[i]) then
             local group = armorSets[i - 9]
             local mask  = armorSets[i - 8]
-            
+
             if group == 1 then
                 G1 = G1 + mask
             elseif group == 2 then
@@ -157,7 +157,7 @@ tpz.armorStorage.onTrigger = function(player, withdrawal)
             end
         end
     end
-    
+
     player:startEvent(withdrawal, G1, G2, G3, G4, player:getGil(), G5)
 end
 
@@ -177,14 +177,14 @@ end
 tpz.armorStorage.onEventFinish = function(player, csid, option, deposit, withdrawal)
     if csid == deposit then
         player:tradeComplete()
-        
+
     elseif csid == withdrawal then
         if option > 0 and option <= armorSets[#armorSets] - 10 then
             local idx   = (option * 11) - 10
             local count = armorSets[idx + 3]
             local cost  = armorSets[idx + 9]
             local ki    = armorSets[idx + 10]
-            
+
             if player:hasKeyItem(ki) and player:getFreeSlotsCount() >= count and player:getGil() >= cost then
                 for i = 4, 8 do
                     local itemId = armorSets[idx + i]

@@ -126,7 +126,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
 
     CTriggerHandler::getInstance()->triggerTimer();
     CTransportHandler::getInstance()->TransportTimer();
-    
+
 	instanceutils::CheckInstance();
     return 0;
 }

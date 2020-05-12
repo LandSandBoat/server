@@ -130,7 +130,7 @@ void CQuestMissionLogPacket::generateQuestPacket(CCharEntity * PChar, uint8 logI
 void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity * PChar)
 {
     uint16 add_on_scenarios = 0;
-    
+
     add_on_scenarios += PChar->m_missionLog[MISSION_ACP].current;
     add_on_scenarios += PChar->m_missionLog[MISSION_AMK].current << 0x04;
     add_on_scenarios += PChar->m_missionLog[MISSION_ASA].current << 0x08;

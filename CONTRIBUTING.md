@@ -1,6 +1,5 @@
 # Issue Report Contributions:
 
-* Bug reports will only be accepted if they occur on [master](https://github.com/project-topaz/topaz/tree/master)
 * If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
 * Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
 
@@ -8,7 +7,7 @@
 
 # Pull Request Contributions:
 
-**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](https://github.com/project-topaz/topaz/tree/master/CONTRIBUTOR_AGREEMENT.md)**
+**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](http://project-topaz.com/blob/release/CONTRIBUTOR_AGREEMENT.md)**
 
 All contributions must be done through pull requests to the Topaz repository.  We don't take fixes from Discord to apply ourselves.  If you need help with making a pull request, there is a GitHub guide on how to do so.  If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 

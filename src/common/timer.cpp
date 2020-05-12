@@ -35,28 +35,28 @@ static __inline uint64 _rdtsc(){
 	} t;
 
 	asm volatile("rdtsc":"=a"(t.dw[0]), "=d"(t.dw[1]) );
-	
+
 	return t.qw;
 }
 
 static void rdtsc_calibrate(){
 	uint64 t1, t2;
 	int32 i;
-	
+
 	ShowStatus("Calibrating Timer Source, please wait... ");
-	
+
 	RDTSC_CLOCK = 0;
-	
+
 	for(i = 0; i < 5; i++){
 		t1 = _rdtsc();
 		usleep(1000000); //1000 MS
 		t2 = _rdtsc();
-		RDTSC_CLOCK += (t2 - t1) / 1000; 
+		RDTSC_CLOCK += (t2 - t1) / 1000;
 	}
 	RDTSC_CLOCK /= 5;
-	
-	RDTSC_BEGINTICK = _rdtsc();	
-	
+
+	RDTSC_BEGINTICK = _rdtsc();
+
 	ShowMessage(" done. (Frequency: %u Mhz)\n", (uint32)(RDTSC_CLOCK/1000) );
 }
 #endif

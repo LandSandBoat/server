@@ -27,7 +27,7 @@
 #include "../entities/charentity.h"
 
 
-CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity * PChar) 
+CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity * PChar)
 {
 	this->type = 0x08;
 	this->size = 0x1A;

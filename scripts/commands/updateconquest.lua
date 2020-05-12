@@ -22,6 +22,6 @@ function onTrigger(player, updatetype)
         error(player, "Invalid update type.")
         return
     end
-    
+
     WeekUpdateConquest(updatetype)
 end

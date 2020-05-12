@@ -23,7 +23,7 @@ function salvageUtil.onCellItemUse(target, effect, value, offset)
     local power = statusEffect:getPower()
     local newpower = bit.band(power, bit.bnot(value))
     local pet = target:getPet()
-    
+
     target:delStatusEffectSilent(effect)
     if newpower > 0 then
         local duration = math.floor(statusEffect:getTimeRemaining()/1000)

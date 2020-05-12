@@ -13,25 +13,20 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    local offset = npc:getID() - ID.npc.TORCH_OFFSET
-
     -- killed Dark Spark and clicked same torch used to spawn
-    if player:getCharVar("BorghertzSparkKilled") == 1 and GetMobByID(ID.mob.DARK_SPARK):getLocalVar("fromTorch") == offset then
+    if player:getCharVar("BorghertzSparkKilled") == 1 then
         npcUtil.giveKeyItem(player, tpz.ki.SHADOW_FLAMES)
         player:setCharVar("BorghertzSparkKilled", 0)
         player:setCharVar("BorghertzCS", 0)
 
     -- attempt to spawn Dark Spark from torch
     elseif
-        player:getCharVar("BorghertzSparkKilled") == 0 and
         player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) and
         not player:hasKeyItem(tpz.ki.SHADOW_FLAMES) and
         player:getCharVar("BorghertzCS") >= 2 and
         npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, {claim=true, hide=0})
     then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-        GetMobByID(ID.mob.DARK_SPARK):setLocalVar("fromTorch", offset)
-        player:setCharVar("BorghertzSparkKilled", 0)
 
     -- default dialog
     else

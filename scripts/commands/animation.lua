@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, animationId)
     local oldAnimation = player:getAnimation()
-    
+
     if (animationId == nil) then
         player:PrintToPlayer(string.format("Current player animation: %d", oldAnimation))
         return

@@ -1456,7 +1456,7 @@ namespace charutils
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        if ((PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() + PTarget->UContainer->GetItemsCount()) < PChar->UContainer->GetItemsCount())
+        if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
             ShowDebug(CL_CYAN"Unable to trade, %s doesn't have enough inventory space\n" CL_RESET, PTarget->GetName());
             return false;
@@ -3095,7 +3095,7 @@ namespace charutils
         if (baseExp >= 200) return EMobDifficulty::EvenMatch;
         if (baseExp >= 160) return EMobDifficulty::DecentChallenge;
         if (baseExp >= 60) return EMobDifficulty::EasyPrey;
-        if (baseExp >= 14) return EMobDifficulty::IncredibyEasyPrey;
+        if (baseExp >= 14) return EMobDifficulty::IncrediblyEasyPrey;
 
         return EMobDifficulty::TooWeak;
     }
@@ -3219,7 +3219,7 @@ namespace charutils
 
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
-        auto pcinzone = 0;
+        uint8 pcinzone = 0;
         uint8 minlevel = 0, maxlevel = PChar->GetMLevel();
         REGIONTYPE region = PChar->loc.zone->GetRegionID();
 
@@ -3260,6 +3260,7 @@ namespace charutils
                 pcinzone++;
             }
         });
+        pcinzone = std::max(pcinzone, PMob->m_HiPartySize);
 
         PChar->ForAlliance([&PMob, &region, &minlevel, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
         {
@@ -4446,7 +4447,7 @@ namespace charutils
                 Sql_Query(SqlHandle, query, buf, PChar->id);
                 return;
             }
-            default: 
+            default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
         }

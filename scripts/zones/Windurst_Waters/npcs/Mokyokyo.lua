@@ -64,5 +64,5 @@ printf("RESULT: %u",option);
     if (csid == 837) then
         player:setCharVar("WWatersRTenText",1);
     end
-    
+
 end;

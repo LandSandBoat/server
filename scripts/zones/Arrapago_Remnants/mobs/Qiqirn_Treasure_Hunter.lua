@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
 
 function onMobRoamAction(mob)
-    
+
     local instance = mob:getInstance()
     local stage = instance:getStage()
     local prog = instance:getProgress()
@@ -21,17 +21,17 @@ function onMobRoamAction(mob)
 end
 
 function onMobEngaged(mob, target)
-    
+
     local target = mob:getTarget()
-    
+
     if (target:isPC() or target:isPet()) then
         mob:setLocalVar("runTime", os.time())
     end
-    
+
 end
 
 function onMobFight(mob, target)
-    
+
     local act = mob:getCurrentAction()
     local isBusy = false
     local instance = mob:getInstance()
@@ -41,7 +41,7 @@ function onMobFight(mob, target)
     local popTime = mob:getLocalVar("popTime")
     local POS = mob:getPos()
     local PET = instance:getEntity(bit.band((mob:getID()+1), 0xFFF), tpz.objType.MOB)
-    
+
     if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
         isBusy = true; -- is set to true if mob is in any stage of using a mobskill or casting a spell
     end
@@ -60,7 +60,7 @@ function onMobFight(mob, target)
         end
     end
 end
-    
+
 function onMobDeath(mob, player, isKiller)
     DespawnMob(mob:getID() +1, instance) -- despawn bomb
 end

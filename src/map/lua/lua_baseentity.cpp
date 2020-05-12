@@ -2902,7 +2902,7 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State *L)
     uint8  type = (uint8 )lua_tointeger(L, 1);
     uint32 bit  = 1 << (uint32)lua_tointeger(L, 2);
     uint8  set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
-    
+
     if ((type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL) && (lua_isnil(L, 3) || set > 3))
     {
         ShowError("Lua::addteleport : Attempt to index array out-of-bounds or parameter is nil.");
@@ -2933,7 +2933,7 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State *L)
 *  Function: getTeleport(uint8 type)
 *  Purpose : Returns bit mask or table for supplied type of teleport
 *  Example : player:getTeleport(tpz.teleport.type.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
@@ -2964,7 +2964,7 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
                 lua_rawseti(L, -2, x + 1);
             }
             break;
-        case TELEPORT_SURVIVAL: 
+        case TELEPORT_SURVIVAL:
             lua_newtable(L);
             for (uint8 x = 0; x < 4; x++)
             {
@@ -2983,7 +2983,7 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
 *  Function: hasTeleport(uint8 type, uint8 bit, uint8 set (optional))
 *  Purpose : Returns true if player has HP, false otherwise
 *  Example : player:hasTeleport(tpz.teleport.type.HOMEPOINT, bit, set)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
@@ -2998,7 +2998,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
     uint8 type = (uint8)lua_tointeger(L, 1);
     uint8 bit  = (uint8)lua_tointeger(L, 2);
     uint8 set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
-    
+
     if (type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL)
     {
         if (lua_isnil(L, 3) || set > 3)
@@ -3006,7 +3006,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
             ShowError("Lua::addTeleport : Attempt to index array out-of-bounds or parameter is nil.");
             return 0;
         }
-        
+
         if (type == TELEPORT_HOMEPOINT)
             lua_pushboolean(L, PChar->teleport.homepoint.access[set] & (1 << bit));
         else
@@ -3035,7 +3035,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
 *  Function: setTeleportMenu(uint8 type)
 *  Purpose : Store favorite homepoints or menu layout
 *  Example : player:setTeleportMenu(tpz.teleport.type.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
@@ -3052,7 +3052,7 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
         ShowError("LuaBaseEntity::setteleportMenu : Table not passed in Parameter 2.\n");
         return 0;
     }
-    
+
     if (type != TELEPORT_HOMEPOINT && type != TELEPORT_SURVIVAL)
     {
         ShowError("LuaBaseEntity::setteleportMenu : Incorrect value for Parameter 1.\n");
@@ -3080,7 +3080,7 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
 *  Function: getTeleportMenu(uint8)
 *  Purpose : Return lua table containing integer values for favs + layout
 *  Example : player:getTeleportMenu(tpz.teleport.teleport.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getTeleportMenu(lua_State *L)
@@ -5340,6 +5340,29 @@ inline int32 CLuaBaseEntity::unlockJob(lua_State *L)
 }
 
 /************************************************************************
+*  Function: hasJob()
+*  Purpose : Check to see if JOBTYPE is unlocked
+*  Example : player:hasJob(BRD)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::hasJob(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    JOBTYPE JobID = (JOBTYPE)lua_tointeger(L, 1);
+
+    TPZ_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    lua_pushinteger(L, (PChar->jobs.unlocked >> JobID) & 1);
+    return 1;
+}
+
+/************************************************************************
 *  Function: getMainLvl()
 *  Purpose : Returns the main level of entity's current job
 *  Example : player:getMainLvl()
@@ -5368,6 +5391,29 @@ inline int32 CLuaBaseEntity::getSubLvl(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->GetSLevel());
+    return 1;
+}
+
+/************************************************************************
+*  Function: getJobLevel()
+*  Purpose : Return the levle of job specified by JOBTYPE
+*  Example : player:getJobLevel(BRD)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getJobLevel(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    JOBTYPE JobID = (JOBTYPE)lua_tointeger(L, 1);
+
+    TPZ_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    lua_pushinteger(L, PChar->jobs.job[JobID]);
+
     return 1;
 }
 
@@ -14103,7 +14149,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTeleport),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTeleportMenu),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTeleportMenu),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHomePoint),    
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHomePoint),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetPlayer),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,goToEntity),
@@ -14202,9 +14248,11 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,changeJob),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,changesJob),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,unlockJob),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasJob),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMainLvl),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSubLvl),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getJobLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setsLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelCap),

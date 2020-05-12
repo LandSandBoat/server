@@ -32,7 +32,7 @@ public:
 
 	CItemCurrency(uint16);
 	virtual ~CItemCurrency();
-	
+
 private:
 
 };

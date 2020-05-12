@@ -128,7 +128,7 @@ public:
 	void	setLevel(uint8 level);
 	void	setRotation(uint8 rotation);
     void    setOrder(uint8 order);
-	
+
 private:
 
 	uint8	m_storage;

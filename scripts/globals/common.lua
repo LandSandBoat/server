@@ -33,6 +33,18 @@ function printf(s,...)
 end
 
 -----------------------------------
+--  set()
+--  Returns a set that can be checked against
+-----------------------------------
+function set(list)
+    local set = {}
+    for _, item in pairs(list) do
+        set[item] = true
+    end
+    return set
+end
+
+-----------------------------------
 --  getMidnight
 --  Returns midnight for the current day in epoch format
 -----------------------------------

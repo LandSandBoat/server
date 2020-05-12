@@ -23,7 +23,7 @@ zones[tpz.zone.ABYSSEA_ALTEPA] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17670591] = { 'qm1',      {3230,3236},                                                          {}, 17670565}, -- Ironclad Smiter
             --  [17670592] = { 'qm2', {3231,3232,3238},                                                          {}, 17670567}, -- Amarok

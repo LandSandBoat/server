@@ -20,13 +20,13 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
         error(player, "You must provide an action ID.")
         return
     end
-    
+
     -- validate animationId
     if (animationId == nil) then
         error(player, "You must provide an animation ID.")
         return
     end
-    
+
     if (message == nil) then
         message = 185 -- Default message
     end

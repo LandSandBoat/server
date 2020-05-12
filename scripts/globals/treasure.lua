@@ -1465,19 +1465,18 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
 
     -- gil
     if roll <= info.gil[1] then
-        players = player:getParty()
-        for i = 1, #players, 1 do
-            if player:getZoneID() ~= players[i]:getZoneID() then
-                table.remove(players, i)
+        local partyMembers = player:getAlliance()
+        local membersInZone = {}
+        for i = 1, #partyMembers do
+            if player:getZoneID() == partyMembers[i]:getZoneID() then
+                table.insert(membersInZone, partyMembers[i])
             end
         end
         local gilAmount = math.random(info.gil[2], info.gil[3])
-        local gil = gilAmount/#players
-        for i = 1, #players, 1 do
-            if player:getZoneID() == players[i]:getZoneID() then
-                players[i]:addGil(gil)
-                players[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)
-            end
+        local gil = gilAmount/#membersInZone
+        for i = 1, #membersInZone do
+            membersInZone[i]:addGil(gil)
+            membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)
         end
 
     -- gem

@@ -26,6 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../utils/battleutils.h"
 #include "../../mobskill.h"
 #include "../../status_effect_container.h"
+#include "../../enmity_container.h"
 
 CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid) :
     CState(PEntity, targid),
@@ -102,6 +103,11 @@ bool CMobSkillState::Update(time_point tick)
     }
     if (IsCompleted() && tick > m_finishTime)
     {
+        auto PTarget = GetTarget();
+        if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_PLAYER)
+        {
+            static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
+        }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", m_PEntity, m_PSkill->getID());
         return true;
     }

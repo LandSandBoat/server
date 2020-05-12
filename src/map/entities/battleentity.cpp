@@ -213,7 +213,7 @@ int32 CBattleEntity::GetMaxMP()
 
 uint8 CBattleEntity::GetSpeed()
 {
-    return (isMounted() ? 40 + map_config.speed_mod : std::clamp<uint16>(speed * (100 + getMod(Mod::MOVE)) / 100, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+    return (isMounted() ? 50 + map_config.speed_mod : std::clamp<uint16>(speed * (100 + getMod(Mod::MOVE)) / 100, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
 }
 
 bool CBattleEntity::CanRest()
@@ -1181,9 +1181,20 @@ void CBattleEntity::Spawn()
 void CBattleEntity::Die()
 {
     if (CBaseEntity* PKiller = GetEntity(m_OwnerID.targid))
+    {
+        static_cast<CBattleEntity*>(PKiller)->ForAlliance([this](CBattleEntity* PMember){
+            CCharEntity* member = static_cast<CCharEntity*>(PMember);
+            if (member->PClaimedMob == this)
+            {
+                member->PClaimedMob = nullptr;
+            }
+        });
         PAI->EventHandler.triggerListener("DEATH", this, PKiller);
+    }
     else
+    {
         PAI->EventHandler.triggerListener("DEATH", this);
+    }
     SetBattleTargetID(0);
 }
 
@@ -1254,7 +1265,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     action.recast = state.GetRecast();
     action.spellgroup = PSpell->getSpellGroup();
 
-    uint16 msg = 0;
+    uint16 msg = MSGBASIC_NONE;
 
     for (auto PTarget : PAI->TargetFind->m_targets)
     {
@@ -1267,13 +1278,13 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         actionTarget.speceffect = SPECEFFECT_NONE;
         actionTarget.animation = PSpell->getAnimationID();
         actionTarget.param = 0;
-        actionTarget.messageID = 0;
+        actionTarget.messageID = MSGBASIC_NONE;
 
         auto ce = PSpell->getCE();
         auto ve = PSpell->getVE();
 
         // Take all shadows
-        if (PSpell->canTargetEnemy() && (aoeType > 0 || (PSpell->getFlag() & SPELLFLAG_WIPE_SHADOWS)))
+        if (PSpell->canTargetEnemy() && (aoeType > SPELLAOE_NONE || (PSpell->getFlag() & SPELLFLAG_WIPE_SHADOWS)))
         {
             PTarget->StatusEffectContainer->DelStatusEffect(EFFECT_BLINK);
             PTarget->StatusEffectContainer->DelStatusEffect(EFFECT_COPY_IMAGE);
@@ -1285,7 +1296,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS))
         {
             // take shadow
-            msg = 31;
+            msg = MSGBASIC_SHADOW_ABSORB;
             actionTarget.param = 1;
             ve = 0;
             ce = 0;
@@ -1296,9 +1307,10 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
             // Remove Saboteur
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ENFEEBLING_MAGIC)
+            {
                 StatusEffectContainer->DelStatusEffect(EFFECT_SABOTEUR);
-
-            if (msg == 0)
+            }
+            if (msg == MSGBASIC_NONE)
             {
                 msg = PSpell->getMessage();
             }
@@ -1308,19 +1320,40 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             }
         }
 
-        if (actionTarget.animation == 122 && msg == 283) // Teleport spells don't target unqualified members
-        {
-            actionList.actionTargets.pop_back();
-            continue;
+        if (actionTarget.animation == 122)
+        { // Teleport spells don't target unqualified members
+            if (PSpell->getMessage() == MSGBASIC_NONE)
+            {
+                actionTarget.animation = 0; // stop target from going invisible
+                if (PTarget != PActionTarget)
+                {
+                    action.actionLists.pop_back();
+                }
+                else
+                { // set this message in anticipation of nobody having the gate crystal
+                    actionTarget.messageID = MSGBASIC_MAGIC_NO_EFFECT;
+                }
+                continue;
+            }
+            if (msg == MSGBASIC_MAGIC_TELEPORT && PTarget != PActionTarget)
+            { // reset the no effect message above if somebody has gate crystal
+                action.actionLists[0].actionTargets[0].messageID = MSGBASIC_NONE;
+            }
         }
-
         actionTarget.messageID = msg;
 
         state.ApplyEnmity(PTarget, ce, ve);
 
-        if (PTarget->objtype == TYPE_MOB && msg != 31) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
+        if (PTarget->objtype == TYPE_MOB && msg != MSGBASIC_SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
             luautils::OnMagicHit(this, PTarget, PSpell);
+        }
+    }
+    if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
+    {
+        if (objtype != TYPE_PET)
+        {
+            battleutils::ClaimMob(PActionTarget, this);
         }
     }
 
@@ -1614,7 +1647,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         if (actionTarget.reaction != REACTION_HIT && actionTarget.reaction != REACTION_BLOCK && actionTarget.reaction != REACTION_GUARD)
         {
             actionTarget.param = 0;
-            battleutils::ClaimMob(PTarget, this);
         }
 
         if (actionTarget.reaction != REACTION_EVADE && actionTarget.reaction != REACTION_PARRY)
@@ -1646,13 +1678,15 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 attackRound.DeleteAttackSwing();
         }
         else
+        {
             attackRound.DeleteAttackSwing();
-
+        }
         if (list.actionTargets.size() == 8)
         {
             break;
         }
     }
+    battleutils::ClaimMob(PTarget, this);
     PAI->EventHandler.triggerListener("ATTACK", this, PTarget, &action);
     PTarget->PAI->EventHandler.triggerListener("ATTACKED", PTarget, this, &action);
     /////////////////////////////////////////////////////////////////////////////////////////////
