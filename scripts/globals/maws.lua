@@ -55,7 +55,7 @@ end
 tpz.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
-    if not ENABLE_WOTG == 1 then
+    if ENABLE_WOTG == 0 then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
         return
     end

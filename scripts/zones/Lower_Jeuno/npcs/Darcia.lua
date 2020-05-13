@@ -25,7 +25,7 @@ function onTrigger(player,npc)
     local turnOffOptionToPay    = 16
     local turnOffAskingForWork  = 32
 
-    if not ENABLE_SOA then
+    if ENABLE_SOA == 0 then
         player:startEvent(10124)
     elseif rumorsFromTheWest then
         player:startEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
