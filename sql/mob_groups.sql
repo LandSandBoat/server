@@ -4472,7 +4472,7 @@ INSERT INTO `mob_groups` VALUES (123,4081,83,'Ulla',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (124,2226,83,'Kilhwch',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (125,84,83,'Alfons',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (126,37,83,'Achtelle',1,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (127,526,83,'Bravo',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (127,526,83,'Bravo',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (128,1141,83,'Duskraven',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (129,1143,83,'Dusk_Raider',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (130,227,83,'Areuhat',1,0,0,0,0,1,1,0);
