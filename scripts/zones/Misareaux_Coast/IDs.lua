@@ -21,6 +21,7 @@ zones[tpz.zone.MISAREAUX_COAST] =
         DOOR_CLOSED              = 7347, -- The door is locked tight.
         LOGGING_IS_POSSIBLE_HERE = 7601, -- Logging is possible here if you have <item>.
         NOTHING_HERE_YET         = 7660; -- There is nothing here yet. Check again in the morning.
+        ALREADY_BAITED           = 7661; -- The trap already contains <item>.
         APPEARS_TO_BE_TRAP       = 7662; -- There appears to be some kind of trap here. Bits of fish are lying around the area.
         DID_NOT_CATCH_ANYTHING   = 7663; -- You did not catch anything.
         PUT_IN_TRAP              = 7664; -- You put <item> in the trap.
