@@ -56,7 +56,8 @@ namespace mobSpellList
                             mob_spell_lists.max_level, \
                             spell_list.content_tag \
                             FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
-                            WHERE spell_list_id < %u;";
+                            WHERE spell_list_id < %u \
+                            ORDER BY min_level ASC;";
 
         int32 ret = Sql_Query(SqlHandle, Query, MAX_MOBSPELLLIST_ID);
 
