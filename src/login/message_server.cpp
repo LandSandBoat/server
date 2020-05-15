@@ -301,14 +301,16 @@ void message_server_init()
 
 void message_server_close()
 {
-    Sql_Free(ChatSqlHandle);
-
-    zContext.close();
-
+    if(ChatSqlHandle)
+    {
+        Sql_Free(ChatSqlHandle);
+        ChatSqlHandle = nullptr;
+    }
     if (zSocket)
     {
         zSocket->close();
         delete zSocket;
         zSocket = nullptr;
     }
+    zContext.close();
 }
