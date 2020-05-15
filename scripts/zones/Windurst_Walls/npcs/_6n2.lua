@@ -69,14 +69,16 @@ end;
 function onEventFinish(player,csid,option)
 
     if (csid == 288) then
-        player:setCharVar("KnowOnesOnions",2);
+        player:setCharVar("KnowOnesOnions", 2)
     elseif (csid == 289) then
-        player:completeQuest(WINDURST,tpz.quest.id.windurst.ONION_RINGS);
-        player:addFame(WINDURST,100);
-        player:addTitle(tpz.title.STAR_ONION_BRIGADIER);
-        player:delKeyItem(tpz.ki.OLD_RING);
-        player:setCharVar("OnionRingsTime",0);
-        player:setCharVar("OnionRings",2);
+        if npcUtil.completeQuest(
+            player,
+            WINDURST,
+            tpz.quest.id.windurst.ONION_RINGS,
+            {item = 17029, tpz.title.STAR_ONION_BRIGADIER, var = {"OnionRingsTime", "OnionRings"}, fame=10})
+        then
+            player:delKeyItem(tpz.ki.OLD_RING)
+		end
     elseif (csid == 384) then
         player:addQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW);
     elseif (csid == 386) then
