@@ -1,6 +1,7 @@
 -----------------------------------------------------------
 -- Global Casket utility script
 -----------------------------------------------------------
+require("scripts/globals/casket_loot")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -55,7 +56,16 @@ local casketInfo =
         112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123,
         124, 125, 126, 127, 128, 130, 153, 157, 158, 159, 160, 166,
         167, 169, 172, 173, 174, 176, 177, 178, 184, 190, 191, 192,
-        193, 194, 195, 196, 197, 198, 204, 205, 207, 212, 213
+        193, 194, 195, 196, 197, 198, 204, 205, 207, 208, 212, 213
+    },
+    splitZones = set{
+       tpz.zone.ZERUHN_MINES,
+       tpz.zone.KORROLOKA_TUNNEL,
+       tpz.zone.KING_RANPERRES_TOMB,
+       tpz.zone.ORDELLES_CAVES,
+       tpz.zone.OUTER_HORUTOTO_RUINS,
+       tpz.zone.GUSGEN_MINES,
+       tpz.zone.MAZE_OF_SHAKHRAMI
     },
     cs =
     {
@@ -72,152 +82,6 @@ local casketInfo =
     evolithAugs =
     {
         -- TODO: find all augments for evoliths.
-    },
-}
-
-local casketItems =
-{
-    [tpz.zone.WEST_RONFAURE] =
-    {
-        regionalItems = {15834}, -- Blind Ring
-        temps =
-        {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
-            {1060, 4112}, -- Potion
-            { 790, 4113}, -- Potion +1
-            { 425, 4114}, -- Potion +2
-            {1040, 4128}, -- Ether
-            { 760, 4129}, -- Ether +1
-            { 420, 4130}, -- Ether +2
-            { 600, 4145}, -- Elixer
-            { 820, 4148}, -- Antidote
-            { 730, 4150}, -- Eye Drops
-            { 750, 4151}, -- Echo Drops
-            { 350, 4155}, -- Remedy
-            {1020, 4164}, -- Prism Powder
-            { 940, 4165}, -- Silent Oil
-            { 420, 4202}, -- Daedalus Wing
-            { 660, 4300}, -- Apple Au Lait
-            { 250, 4423}, -- Apple Juice
-        },
-        items =
-        {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-        ----------------------------------
-            {1700,   505}, -- Sheepskin
-            {4500,   640}, -- Copper Ore
-            {2500,   641}, -- Tin Ore
-            {3450,   642}, -- Zinc Ore
-            {2000,   688}, -- Arrowwood Log
-            {1020,   698}, -- Ash Log
-            {4200,   656}, -- Beastcoin
-            {5000,   768}, -- Flint Stone
-            {1250,   818}, -- Cotton Thread
-            {1300,   833}, -- Moko Grass
-            { 800,   840}, -- Chocobo Feather
-            {3600,   846}, -- Insect Wing
-            {3000,   912}, -- Beehive Chip
-            { 700,   943}, -- Poison Dust
-            {2400,  1214}, -- Handful of Stone Arrowheads x33
-            {4900,  4112}, -- Potion
-            {3590,  4148}, -- Antidote
-            {1150,  4150}, -- Eye Drops
-            {1360,  4151}, -- Echo Drops
-            {2900,  4370}, -- Honey
-            { 600, 12290}, -- Maple Shield
-            { 495, 12440}, -- Leather Bandana
-            { 450, 12449}, -- Brass Cap
-            { 190, 12456}, -- Hachimaki
-            { 530, 12608}, -- Tunic
-            { 460, 12696}, -- Leather Gloves
-            { 340, 12705}, -- Brass Mittens
-            { 168, 12712}, -- Tekko
-            { 310, 12736}, -- Mitts
-            { 475, 12824}, -- Leather Trousers
-            { 280, 12833}, -- Brass Subligar
-            { 235, 12840}, -- Sitabaki
-            { 422, 12864}, -- Slacks
-            { 250, 12961}, -- Brass Leggings
-            { 287, 12992}, -- Solea
-            { 500, 13081}, -- Leather Gorget
-            { 300, 16407}, -- Brass Baghnakhs
-            { 120, 16530}, -- Xiphos
-            { 320, 17050}, -- Willow Wand
-        }
-    },
-    [tpz.zone.EAST_RONFAURE] =
-    {
-        regionalItems = {19157}, -- Surviver
-        temps =
-        {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-         ----------------------------------
-            {1060, 4112}, -- Potion
-            { 790, 4113}, -- Potion +1
-            { 425, 4114}, -- Potion +2
-            {1040, 4128}, -- Ether
-            { 760, 4129}, -- Ether +1
-            { 420, 4130}, -- Ether +2
-            { 600, 4145}, -- Elixer
-            { 820, 4148}, -- Antidote
-            { 730, 4150}, -- Eye Drops
-            { 750, 4151}, -- Echo Drops
-            { 350, 4155}, -- Remedy
-            {1020, 4164}, -- Prism Powder
-            { 940, 4165}, -- Silent Oil
-            { 420, 4202}, -- Daedalus Wing
-            { 660, 4300}, -- Apple Au Lait
-            { 250, 4423}, -- Apple Juice
-        },
-        items =
-        {
-        ----------------------------------
-        --| Weight | Item ID |   Name  |--
-         ----------------------------------
-            {1700,   505}, -- Sheepskin
-            {4500,   640}, -- Copper Ore
-            {2500,   641}, -- Tin Ore
-            {3450,   642}, -- Zinc Ore
-            {2000,   688}, -- Arrowwood Log
-            {1020,   698}, -- Ash Log
-            {4200,   656}, -- Beastcoin
-            {5000,   768}, -- Flint Stone
-            {1250,   818}, -- Cotton Thread
-            {1300,   833}, -- Moko Grass
-            { 800,   840}, -- Chocobo Feather
-            {3600,   846}, -- Insect Wing
-            {3000,   912}, -- Beehive Chip
-            { 700,   943}, -- Poison Dust
-            {2400,  1214}, -- Handful of Stone Arrowheads x33
-            {4900,  4112}, -- Potion
-            {3590,  4148}, -- Antidote
-            {1150,  4150}, -- Eye Drops
-            {1360,  4151}, -- Echo Drops
-            {2900,  4370}, -- Honey
-            { 600, 12290}, -- Maple Shield
-            { 495, 12440}, -- Leather Bandana
-            { 450, 12449}, -- Brass Cap
-            { 190, 12456}, -- Hachimaki
-            { 530, 12608}, -- Tunic
-            { 460, 12696}, -- Leather Gloves
-            { 340, 12705}, -- Brass Mittens
-            { 168, 12712}, -- Tekko
-            { 310, 12736}, -- Mitts
-            { 475, 12824}, -- Leather Trousers
-            { 280, 12833}, -- Brass Subligar
-            { 235, 12840}, -- Sitabaki
-            { 422, 12864}, -- Slacks
-            { 250, 12961}, -- Brass Leggings
-            { 287, 12992}, -- Solea
-            { 500, 13081}, -- Leather Gorget
-            { 300, 16407}, -- Brass Baghnakhs
-            { 120, 16530}, -- Xiphos
-            { 320, 17050}, -- Willow Wand
-        }
     },
 }
 
@@ -243,8 +107,14 @@ local function timeElapsedCheck(npc)
     local spawnTime   = os.time() + 360000 -- defualt time in case no var set.
     local timeTable   = {0, 0, 0}          -- HOURS,MINUTES,SECONDS.
 
-    spawnTime = npc:getLocalVar("[caskets]SPAWNTIME")
+    if npc == nil then
+        return false
+    end
 
+    if npc:getLocalVar("[caskets]SPAWNTIME") then
+        spawnTime = npc:getLocalVar("[caskets]SPAWNTIME")
+    end
+    
     local lastSpawned = os.time() - spawnTime
 
     timeTable = convertTime(lastSpawned)
@@ -266,12 +136,11 @@ local function getCasketID(mob)
     for i = baseChestId, baseChestId + 15 do
         if timeElapsedCheck(GetNPCByID(i)) then
             if GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
-                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == nil then
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0 then
                 chestId = i
                 break
             end
         end
-        i = i + 1
     end
 
     if GetNPCByID(chestId) == nil then
@@ -305,7 +174,6 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-
     if rand < utils.clamp(CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
         return true
     end
@@ -342,7 +210,7 @@ end
 ---------------------------------------------------------------------------------------------
 -- Desc: Sets all the base localVar's, type of chest and if locked, sets the random number.
 ---------------------------------------------------------------------------------------------
-local function setCasketData(player, x, y, z, r, npc, partyID)
+local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     ---------------------------------------------------------------------------------------------------
     -- NOTE: Super Kupowers Myriad Mystery Boxes add an additional 20% chance the chest will be locked.
     ---------------------------------------------------------------------------------------------------
@@ -372,6 +240,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID)
         -------------------------------------
         npc:setLocalVar("[caskets]PARTYID", partyID)
         npc:setLocalVar("[caskets]ITEMS_SET", 0)
+        npc:setLocalVar("[caskets]MOBLVL", mobLvl)
 
         if chestStyle == 966 then
             npc:setLocalVar("[caskets]ATTEMPTS", attempts)
@@ -542,10 +411,20 @@ function getDrops(npc, dropType, zoneId)
         local tempCount    = 1
         local randomTable  = {1,3,1,2,1,2,1,1,3,1,2,1}
 
+        if casketInfo.splitZones[zoneId] then
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsHi
+            else
+                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsLow
+            end
+        else
+            tempDrops = tpz.casket_loot.casketItems[zoneId].temps
+        end
+
         tempCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, tempCount do
-            local tempDrops = casketItems[zoneId].temps
             local sum = 0
 
             for k, v in pairs(tempDrops) do
@@ -577,10 +456,20 @@ function getDrops(npc, dropType, zoneId)
         local itemCount    = 1
         local randomTable  = {1,4,1,3,1,1,2,1,3,1,2,1}
 
+        if casketInfo.splitZones[zoneId] then
+            local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
+            if mobLvl > 50 then
+                drops = tpz.casket_loot.casketItems[zoneId].itemsHi
+            else
+                drops = tpz.casket_loot.casketItems[zoneId].itemsLow
+            end
+        else
+            drops = tpz.casket_loot.casketItems[zoneId].items
+        end
+
         itemCount = randomTable[math.random(1, #randomTable)]
 
         for i = 1, itemCount do
-            local drops = casketItems[zoneId].items
             local sum = 0
 
             for k, v in pairs(drops) do
@@ -601,7 +490,7 @@ function getDrops(npc, dropType, zoneId)
                 items[i] = 4112 -- default to potion
             else
                 if math.random() < 0.05 then
-                    items[i] = casketItems[zoneId].regionalItems[math.random(1, #casketItems[zoneId].regionalItems)]
+                    items[1] = casketItems[zoneId].regionalItems[math.random(1, #casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
                 end
@@ -750,7 +639,7 @@ tpz.caskets.spawnCasket = function (player, mob, x, y, z, r)
     end
 
     if dropChance(player) then
-        setCasketData(player, x, y, z, r, npc, chestOwner)
+        setCasketData(player, x, y, z, r, npc, chestOwner, mob:getMainLvl())
     end
 end
 
@@ -829,7 +718,7 @@ tpz.caskets.onTrade = function(player, npc, trade)
     local locked            = npc:getLocalVar("[caskets]LOCKED")
     local eventBase         = zones[zoneId].npc.CASKET_BASE               -- base id of the current chest.
     local correctNumber     = npc:getLocalVar("[caskets]CORRECT_NUM")
-    local chestOwner        = npc:getLocalVar("[caskets]PARTYID")                  -- the id of the player,party or alliance that has rights to the chest.
+    local chestOwner        = npc:getLocalVar("[caskets]PARTYID")         -- the id of the player,party or alliance that has rights to the chest.
     local leaderId          = player:getLeaderID()
 
     if leaderId ~= chestOwner then
@@ -965,11 +854,11 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                             splitNumbers[1],
                             splitNumbers[1] +1,
                             splitNumbers[1] +2, 0)
-                    elseif tonumber(splitNumbers[2]) == 9 then
+                    elseif tonumber(splitNumbers[1]) == 9 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.FIRST_DIGIT_IS,
-                            splitNumbers[2] -2,
-                            splitNumbers[2] -1,
-                            splitNumbers[2], 0)
+                            splitNumbers[1] -2,
+                            splitNumbers[1] -1,
+                            splitNumbers[1], 0)
                     else
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.FIRST_DIGIT_IS,
                             splitNumbers[1] -1,
@@ -1030,7 +919,7 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
         -- Inputs
         --------------------------------------------
         elseif lockedChoice == 1 then -- Input a number
-            if inputNumber > 10 and inputNumber < 100 then
+            if inputNumber > 9 and inputNumber < 100 then
                 local splitNumbers = {}
 
                 for digit in string.gmatch(tostring(correctNumber), "%d") do
