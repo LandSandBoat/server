@@ -298,7 +298,7 @@ end
     if (wsParams.ignoresDef == not nil and wsParams.ignoresDef == true) then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(tpz.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
-    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef)
+    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and params used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -758,9 +758,9 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     return pdif, pdifcrit
 end
 
-function cRangedRatio(attacker, defender, params, ignoredDef)
+function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
-    local atkmulti = fTP(params.atk100, params.atk200, params.atk300)
+    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio = attacker:getRATT() / (defender:getStat(tpz.mod.DEF) - ignoredDef)
 
     local levelcor = 0
