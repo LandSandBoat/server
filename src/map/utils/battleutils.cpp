@@ -2796,54 +2796,57 @@ namespace battleutils
         {{SC_DARKNESS, SC_DARKNESS}, SC_DARKNESS_II},
 
         // Level 2 Pairs
-        {{SC_GRAVITATION, SC_DISTORTION}, SC_DARKNESS},
-        {{SC_GRAVITATION, SC_FRAGMENTATION}, SC_FRAGMENTATION},
+        {{SC_DISTORTION, SC_GRAVITATION}, SC_DARKNESS}, 
+        {{SC_FRAGMENTATION, SC_GRAVITATION}, SC_FRAGMENTATION}, 
 
-        {{SC_DISTORTION, SC_GRAVITATION}, SC_DARKNESS},
-        {{SC_DISTORTION, SC_FUSION}, SC_FUSION},
+        {{SC_GRAVITATION, SC_DISTORTION}, SC_DARKNESS}, 
+        {{SC_FUSION, SC_DISTORTION}, SC_FUSION}, 
 
-        {{SC_FUSION, SC_GRAVITATION}, SC_GRAVITATION},
-        {{SC_FUSION, SC_FRAGMENTATION}, SC_LIGHT},
+        {{SC_GRAVITATION, SC_FUSION}, SC_GRAVITATION}, 
+        {{SC_FRAGMENTATION, SC_FUSION}, SC_LIGHT}, 
 
-        {{SC_FRAGMENTATION, SC_DISTORTION}, SC_DISTORTION},
-        {{SC_FRAGMENTATION, SC_FUSION}, SC_LIGHT},
-
+        {{SC_DISTORTION, SC_FRAGMENTATION}, SC_DISTORTION}, 
+        {{SC_FUSION, SC_FRAGMENTATION}, SC_LIGHT}, 
+		
+			//Level 1 Pairs > Level 2 Skillchain
+		
+        {{SC_SCISSION, SC_TRANSFIXION}, SC_DISTORTION}, 
+        {{SC_IMPACTION, SC_LIQUEFACTION}, SC_FUSION}, 
+        {{SC_COMPRESSION, SC_DETONATION}, SC_GRAVITATION}, 
+        {{SC_REVERBERATION, SC_INDURATION}, SC_FRAGMENTATION}, 
+		
             // Level 1 Pairs
-        {{SC_TRANSFIXION, SC_COMPRESSION}, SC_COMPRESSION},
-        {{SC_TRANSFIXION, SC_SCISSION}, SC_DISTORTION},
-        {{SC_TRANSFIXION, SC_REVERBERATION}, SC_REVERBERATION},
+        {{SC_COMPRESSION, SC_TRANSFIXION}, SC_COMPRESSION}, 
+        {{SC_REVERBERATION, SC_TRANSFIXION}, SC_REVERBERATION}, 
 
-        {{SC_COMPRESSION, SC_TRANSFIXION}, SC_TRANSFIXION},
-        {{SC_COMPRESSION, SC_DETONATION}, SC_DETONATION},
+        {{SC_TRANSFIXION, SC_COMPRESSION}, SC_TRANSFIXION}, 
+        {{SC_DETONATION, SC_COMPRESSION}, SC_DETONATION}, 
 
-        {{SC_LIQUEFACTION, SC_SCISSION}, SC_SCISSION},
-        {{SC_LIQUEFACTION, SC_IMPACTION}, SC_FUSION},
+        {{SC_SCISSION, SC_LIQUEFACTION}, SC_SCISSION}, 
 
-        {{SC_SCISSION, SC_LIQUEFACTION}, SC_LIQUEFACTION},
-        {{SC_SCISSION, SC_REVERBERATION}, SC_REVERBERATION},
-        {{SC_SCISSION, SC_DETONATION}, SC_DETONATION},
+        {{SC_LIQUEFACTION, SC_SCISSION}, SC_LIQUEFACTION}, 
+        {{SC_REVERBERATION, SC_SCISSION}, SC_REVERBERATION}, 
+        {{SC_DETONATION, SC_SCISSION}, SC_DETONATION}, 
 
-        {{SC_REVERBERATION, SC_INDURATION}, SC_INDURATION},
-        {{SC_REVERBERATION, SC_IMPACTION}, SC_IMPACTION},
+        {{SC_INDURATION, SC_REVERBERATION}, SC_INDURATION}, 
+        {{SC_IMPACTION, SC_REVERBERATION}, SC_IMPACTION}, 
 
-        {{SC_DETONATION, SC_COMPRESSION}, SC_GRAVITATION},
-        {{SC_DETONATION, SC_SCISSION}, SC_SCISSION},
+        {{SC_SCISSION, SC_DETONATION}, SC_SCISSION}, 
 
-        {{SC_INDURATION, SC_COMPRESSION}, SC_COMPRESSION},
-        {{SC_INDURATION, SC_REVERBERATION}, SC_FRAGMENTATION},
-        {{SC_INDURATION, SC_IMPACTION}, SC_IMPACTION},
+        {{SC_COMPRESSION, SC_INDURATION}, SC_COMPRESSION}, 
+        {{SC_IMPACTION, SC_INDURATION}, SC_IMPACTION}, 
 
-        {{SC_IMPACTION, SC_LIQUEFACTION}, SC_LIQUEFACTION},
-        {{SC_IMPACTION, SC_DETONATION}, SC_DETONATION}
+        {{SC_LIQUEFACTION, SC_IMPACTION}, SC_LIQUEFACTION}, 
+        {{SC_DETONATION, SC_IMPACTION}, SC_DETONATION} 
     };
 
     SKILLCHAIN_ELEMENT FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill)
     {
-        for (auto& skill_element : skill)
+        for (auto& resonance_element : resonance)
         {
-            for (auto& resonance_element : resonance)
+            for (auto& skill_element : skill)
             {
-                if (auto skillchain = skillchain_map.find({ resonance_element, skill_element }); skillchain != skillchain_map.end())
+                if (auto skillchain = skillchain_map.find({ skill_element, resonance_element }); skillchain != skillchain_map.end())
                 {
                     return skillchain->second;
                 }
@@ -2851,6 +2854,7 @@ namespace battleutils
         }
         return SC_NONE;
     }
+
 
     SUBEFFECT GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary)
     {
