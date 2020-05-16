@@ -46,7 +46,7 @@ function onTrigger(player,logId,target)
     -- report mission
     local currentMission = targ:getCurrentMission(logId)
 
-    if ((logId <= 3) and (currentMission == 255)) then
+    if ((logId <= 3) and (currentMission == 65535)) then
         player:PrintToPlayer( string.format( "No current %s mission for %s.", logName, targ:getName() ) )
     else
         player:PrintToPlayer( string.format( "Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName() ) )
