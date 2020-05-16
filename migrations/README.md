@@ -20,12 +20,9 @@ For Ubuntu it's already installed. For *most* distros of GNU/Linux one or more v
 
 ## Installing MySQLdb
 
-A Mysql driver is required to execute mysql commands.
+A Mysql driver is required to execute mysql commands. This and any other required dependencies can be installed by running the following from bash or command prompt/powershell:
 
-For Windows user, you can get an [exe of MySQLdb](http://sourceforge.net/project/showfiles.php?group_id=22307).
-
-For Ubuntu, `sudo apt-get install python-mysqldb`.
-
+pip install -r requirements.txt
 
 ## Running Migrations
 
