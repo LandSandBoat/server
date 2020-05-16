@@ -82,7 +82,7 @@ tpz.mission.id =
         LIGHTBRINGER            = 21, -- ± --
         BREAKING_BARRIERS       = 22, -- ± --
         THE_HEIR_TO_THE_LIGHT   = 23,
-        NONE                    = 255,
+        NONE                    = 65535,
     },
 
     -----------------------------------
@@ -114,7 +114,7 @@ tpz.mission.id =
         ENTER_THE_TALEKEEPER      = 21,
         THE_SALT_OF_THE_EARTH     = 22,
         WHERE_TWO_PATHS_CONVERGE  = 23,
-        NONE                      = 255,
+        NONE                      = 65535,
     },
 
     -----------------------------------
@@ -146,7 +146,7 @@ tpz.mission.id =
         THE_JESTER_WHO_D_BE_KING      = 21,
         DOLL_OF_THE_DEAD              = 22,
         MOON_READING                  = 23,
-        NONE                          = 255,
+        NONE                          = 65535,
     },
 
     -----------------------------------
@@ -172,7 +172,7 @@ tpz.mission.id =
         THE_CELESTIAL_NEXUS           = 28,
         AWAKENING                     = 30,
         THE_LAST_VERSE                = 31,
-        NONE                          = 255,
+        NONE                          = 65535,
     },
 
     -----------------------------------
