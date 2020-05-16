@@ -856,7 +856,7 @@ INSERT INTO `synth_recipes` VALUES (739,1,0,0,0,0,0,0,27,0,0,4100,4242,13588,0,0
 INSERT INTO `synth_recipes` VALUES (740,1,0,0,0,0,0,0,95,0,0,4100,4242,13918,0,0,0,0,0,0,0,861,820,851,1122,1,1,1,1,'Tiger Hide');
 INSERT INTO `synth_recipes` VALUES (741,0,0,0,0,0,0,0,70,0,0,4103,4245,635,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
 INSERT INTO `synth_recipes` VALUES (742,0,0,0,0,0,0,0,70,0,0,4103,4245,695,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
-INSERT INTO `synth_recipes` VALUES (743,0,0,0,16,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 16) https://www.bg-wiki.com/bg/Fish_Scales
+INSERT INTO `synth_recipes` VALUES (743,0,0,0,6,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 6)
 INSERT INTO `synth_recipes` VALUES (744,1,0,0,7,0,0,0,0,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (745,1,0,0,37,0,0,0,0,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (746,1,0,0,70,0,0,0,0,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,864,902,902,1,1,1,1,'Fish Scales');
