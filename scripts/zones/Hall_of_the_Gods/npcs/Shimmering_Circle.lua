@@ -19,7 +19,7 @@ function onTrigger(player,npc)
     if (player:getZPos() < 200) then
         if (ZilartProgress == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and ZVar == 0) then
             player:startEvent(3); -- First time.
-        elseif (ZilartProgress ~= tpz.mission.id.zilart.NONE and ZilartProgress > tpz.mission.id.zilart.THE_GATE_OF_THE_GODS or -- If player has not done any ZM, Progress == 255
+        elseif (ZilartProgress ~= tpz.mission.id.zilart.NONE and ZilartProgress > tpz.mission.id.zilart.THE_GATE_OF_THE_GODS or -- If player has not done any ZM, Progress == 65535
          (ZilartProgress == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and ZVar > 0)) then
             player:startEvent(10);
         else
