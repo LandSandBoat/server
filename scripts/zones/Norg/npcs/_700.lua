@@ -44,6 +44,12 @@ function onTrigger(player,npc)
         player:startEvent(277)
     elseif RhapsodiesMission == tpz.mission.id.rov.WHAT_LIES_BEYOND then
         player:startEvent(278)
+    elseif player:getCharVar("ZeidIICipher") == 1 then
+        if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
+            player:completeMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
+            player:addMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
+            player:setCharVar("ZeidIICipher", 0)
+        end
     elseif RhapsodiesMission == tpz.mission.id.rov.VOLTO_OSCURO then
         player:startEvent(279)
     elseif
@@ -94,9 +100,12 @@ function onEventFinish(player,csid,option)
         player:completeMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
         player:addMission(ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
     elseif csid == 279 then
-        player:addItem(10159) -- Cipher: Zeid II
-        player:completeMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
-        player:addMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
+        if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
+            player:completeMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
+            player:addMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
+        else
+            player:setCharVar("ZeidIICipher", 1)
+        end
     elseif csid == 284 then
         player:completeMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
         player:addMission(ROV, tpz.mission.id.rov.SPIRITS_AWOKEN)

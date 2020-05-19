@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
         player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 6
      then
-        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+        if trade:hasItemQty(1127, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_3", 0)
             player:tradeComplete()
             player:addKeyItem(tpz.ki.SOMBER_STONE)
@@ -31,7 +31,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (math.random() > 0.5) then
+    if math.random() > 0.5 then
         player:startEvent(51)
     else
         player:startEvent(52)
@@ -42,9 +42,10 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
+    -- RoV: Set Free
     if csid == 370 then
         player:confirmTrade()
-        if not player:hasJob(0) then -- Is Subjob Unlocked
+        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
             npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
             if not npcUtil.giveItem(player, 8711) then return end
