@@ -1157,7 +1157,9 @@ INSERT INTO `mob_groups` VALUES (53,2134,33,'Jailer_of_Love',0,128,1400,0,0,83,8
 INSERT INTO `mob_groups` VALUES (54,3422,33,'Ru_phuabo',0,128,0,0,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (55,3270,33,'Qn_hpemde',0,128,0,0,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (56,21,33,'Absolute_Virtue',0,128,3,66000,0,84,84,0);
-INSERT INTO `mob_groups` VALUES (14116,5341,33,'Ul_aern_whm',960,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (57,5341,33,'Ul_aern_whm',960,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (58,5136,33,'Ul_aern_brd',960,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (59,6172,33,'Ul_aern_pld',960,0,2514,0,0,70,73,0);
 
 -- ------------------------------------------------------------
 -- Grand_Palace_of_HuXzoi (Zone 34)
