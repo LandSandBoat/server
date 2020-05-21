@@ -975,8 +975,8 @@ local function getFinishOpts(regimeType)
     end
     return out
 end
-
-local function clearPlayerVars(player)
+-- function made global to be called by hunts.lua
+tpz.regime.clearRegimeVars = function(player)
     player:setCharVar("[regime]type", 0)
     player:setCharVar("[regime]zone", 0)
     player:setCharVar("[regime]id", 0)
@@ -990,7 +990,11 @@ local function clearPlayerVars(player)
 end
 
 tpz.regime.bookOnTrigger = function(player, regimeType)
-    if (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
+     -- checks if hunt is active, if so prompts player to cancel
+  if player:getCharVar("[hunt]status") >= 1 then
+     player:startEvent(info.event,0,0,3,1,0,0,player:getCurrency("valor_point"),player:getCharVar("[hunt]page"))
+
+  elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
         local info = regimeInfo[regimeType].zone[player:getZoneID()]
 
         -- arg2 is a bitmask that controls which pages appear for examination
@@ -1061,6 +1065,10 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
         return
     end
 
+    if option == 7 then
+      tpz.hunts.clearHuntVars(player)
+    end
+
     -- check player has enough tabs
     if opt.cost and opt.cost > tabs then
         player:showText(player, msgOffset + 1032) -- You do not have enough tabs.
@@ -1079,7 +1087,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
         player:delCurrency("valor_point", opt.cost)
 
         if act == "CANCEL_REGIME" then
-            clearPlayerVars(player)
+            tpz.regime.clearRegimeVars(player)
             player:showText(player, msgOffset + 2) -- Training regime canceled.
 
         elseif act == "REPATRIATION" then
@@ -1355,6 +1363,6 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
         player:messageBasic(tpz.msg.basic.FOV_REGIME_BEGINS_ANEW)
     else
-        clearPlayerVars(player)
+        tpz.regime.clearRegimeVars(player)
     end
 end
