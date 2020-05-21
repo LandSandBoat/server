@@ -2,8 +2,10 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Warabouc
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

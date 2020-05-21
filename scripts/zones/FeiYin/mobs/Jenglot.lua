@@ -2,10 +2,12 @@
 -- Area: Fei'Yin
 --   NM: Jenglot
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/titles");
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, isKiller)
     -- Curses, Foiled A-Golem!?
     if (player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)) then
         player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL);

@@ -2,8 +2,10 @@
 -- Area: Yhoator Jungle (124)
 --   NM: Powderer Penny
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

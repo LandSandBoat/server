@@ -2,6 +2,7 @@
 -- Area: Batallia Downs (105)
 --  Mob: Skirling Liger
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status");
 -----------------------------------
 
@@ -14,6 +15,7 @@ function onMobDisengage(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, isKiller)
 end;
 
 function onMobDespawn(mob)
