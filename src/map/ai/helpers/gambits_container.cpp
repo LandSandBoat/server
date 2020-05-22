@@ -121,7 +121,9 @@ void CGambitsContainer::Tick(time_point tick)
             for (uint8 i = 0; i < master->PParty->members.size(); ++i)
             {
                 auto member = master->PParty->members.at(i);
-                if (checkTrigger(member, action.trigger, action.trigger_condition))
+                if (POwner->loc.zone == member->loc.zone &&
+                    distance(POwner->loc.p, member->loc.p) <= 20.0f &&
+                    checkTrigger(member, action.trigger, action.trigger_condition))
                 {
                     target = member;
                     break;
