@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_item.h"
 
 #include "../../common/showmsg.h"
-#include "../map/map.h"
+#include "../map.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_weapon.h"

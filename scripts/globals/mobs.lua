@@ -1,6 +1,7 @@
 -----------------------------------
 -- Global version of onMobDeath
 -----------------------------------
+require("scripts/globals/magiantrials")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
@@ -37,6 +38,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
+
+      checkMagianTrial(player, {['mob'] = mob})
 end
 
 -------------------------------------------------
