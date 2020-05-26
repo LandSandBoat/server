@@ -30,7 +30,7 @@ function onEventFinish(player,csid,option)
             [3] = {-1089.787 , -647 , -718.976 , 125},
         }
 
-        SpawnMob(zeidId)
+        SpawnMob(zeidId + 1)
         local volker = player:getBattlefield():insertEntity(14182, true, true)
         player:setPos(unpack(playerCoords[bfid]))
         volker:setSpawn(unpack(volkerCoords[bfid]))

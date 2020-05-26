@@ -13,8 +13,8 @@ end
 
 function onMobDeath(mob, player, isKiller)
     -- find mob offset for given battlefield instance
-    local inst = math.floor((mob:getID() - ID.mob.ONE_TO_BE_FEARED_OFFSET) / 7)
-    local instOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst))
+    local inst = mob:getBattlefield():getArea()
+    local instOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1))
 
     -- if all five mammets in this instance are dead, start event
     local allMammetsDead = true
@@ -32,24 +32,22 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 11 then
-        local inst = player:getCharVar("bcnm_instanceid")
+        local battlefield = player:getBattlefield()
+        local inst = battlefield:getArea()
+        -- players are healed in between fights, but their TP is set to 0
+        player:addTitle(tpz.title.BRANDED_BY_LIGHTNING)
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
+        player:setLocalVar("[OTBF]cs", 1)
 
-        if inst >= 1 and inst <= 3 then
-            -- players are healed in between fights, but their TP is set to 0
-            player:addTitle(tpz.title.BRANDED_BY_LIGHTNING)
-            player:setHP(player:getMaxHP())
-            player:setMP(player:getMaxMP())
-            player:setTP(0)
-            player:setLocalVar("[OTBF]cs", 1)
-
-            -- move player to instance
-            if inst == 1 then
-                player:setPos(-779, -103, -80)
-            elseif inst == 2 then
-                player:setPos(-140, -23, -440)
-            elseif inst == 3 then
-                player:setPos(499, 56, -802)
-            end
+        -- move player to instance
+        if inst == 1 then
+            player:setPos(-779, -103, -80)
+        elseif inst == 2 then
+            player:setPos(-140, -23, -440)
+        elseif inst == 3 then
+            player:setPos(499, 56, -802)
         end
     end
 end

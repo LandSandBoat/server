@@ -47,6 +47,7 @@ zones[tpz.zone.MAZE_OF_SHAKHRAMI] =
         LEECH_KING          = 17588685,
         WYRMFLY_OFFSET      = 17588701,
         APPARATUS_ELEMENTAL = 17588704,
+        AROMA_CRAWLER       = 17588705,
         LOST_SOUL           = 17588706,
     },
     npc =

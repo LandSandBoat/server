@@ -17,7 +17,7 @@ function onTrigger(player, npc)
 
     if oldNation == newNation then
         player:startEvent(10004, 0, 0, 0, oldNation)
-    elseif player:getCurrentMission(oldNation) ~= 255 or player:getCharVar("MissionStatus") ~= 0 then
+    elseif player:getCurrentMission(oldNation) ~= tpz.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0 then
         player:startEvent(10003, 0, 0, 0, newNation)
     elseif oldNation ~= newNation then
         local hasGil = 0

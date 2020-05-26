@@ -856,7 +856,7 @@ INSERT INTO `synth_recipes` VALUES (739,1,0,0,0,0,0,0,27,0,0,4100,4242,13588,0,0
 INSERT INTO `synth_recipes` VALUES (740,1,0,0,0,0,0,0,95,0,0,4100,4242,13918,0,0,0,0,0,0,0,861,820,851,1122,1,1,1,1,'Tiger Hide');
 INSERT INTO `synth_recipes` VALUES (741,0,0,0,0,0,0,0,70,0,0,4103,4245,635,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
 INSERT INTO `synth_recipes` VALUES (742,0,0,0,0,0,0,0,70,0,0,4103,4245,695,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
-INSERT INTO `synth_recipes` VALUES (743,0,0,0,16,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 16) https://www.bg-wiki.com/bg/Fish_Scales
+INSERT INTO `synth_recipes` VALUES (743,0,0,0,6,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 6)
 INSERT INTO `synth_recipes` VALUES (744,1,0,0,7,0,0,0,0,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (745,1,0,0,37,0,0,0,0,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (746,1,0,0,70,0,0,0,0,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,864,902,902,1,1,1,1,'Fish Scales');
@@ -4672,7 +4672,7 @@ INSERT INTO `synth_recipes` VALUES (4555,0,2037,49,0,0,0,14,0,0,0,4096,4238,752,
 INSERT INTO `synth_recipes` VALUES (4556,0,2037,73,0,0,0,55,0,0,0,4096,4238,754,1886,2309,2310,2362,0,0,0,9069,9069,9069,9069,12,12,12,12,'Dynamo II');
 INSERT INTO `synth_recipes` VALUES (4557,0,2037,54,0,0,0,15,0,0,0,4096,4238,914,932,1647,1887,2310,0,0,0,9072,9072,9072,9072,12,12,12,12,'Arcanic Cell');
 INSERT INTO `synth_recipes` VALUES (4558,0,2037,59,0,0,0,25,0,0,0,4096,4238,914,932,1647,2310,2460,0,0,0,9073,9073,9073,9073,12,12,12,12,'Arcanic Cell II');
-
+INSERT INTO `synth_recipes` VALUES (4559,1,0,0,0,0,0,15,0,0,0,4100,4242,16769,0,0,0,0,0,0,0,817,715,650,649,3,1,1,2,'Grass Thread'); -- Brass Zaghnal (desynth)
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)
