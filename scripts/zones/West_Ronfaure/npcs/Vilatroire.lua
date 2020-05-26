@@ -112,9 +112,9 @@ function onEventUpdate(player, csid, option)
                     player:updateEvent(4) -- not the same race
                 end
             elseif questAdvancedTeamwork == QUEST_ACCEPTED then
-                if partySameJobCount == partySameJobCount then
+                if partySameJobCount == partySizeRequirement then
                     player:setLocalVar("advTmwrk_pass", 1)
-                    player:updateEvent(15, 3) -- race requirements met
+                    player:updateEvent(15, 3) -- job requirements met
                 else
                     player:updateEvent(5) -- not the same job
                 end
