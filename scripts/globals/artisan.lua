@@ -22,11 +22,6 @@ local menuFlags = {
 	aexpand = 0x2,
 }
 
-local getEpochDays = function()
-    local time = os.date("*t")
-    return time.year*365 + time.yday
-end
-
 tpz.artisan.moogleOnTrigger = function(player, npc)
     local csid = event[player:getZoneID()]
     local menuMask = 0
@@ -62,13 +57,13 @@ tpz.artisan.moogleOnUpdate = function(player,csid,option)
         end
 
     elseif option == 3 then -- Client requests sack + scroll status
-        local scrollAvail = player:getCharVar("[artisan]nextScroll") <= getEpochDays() and 1 or 0
+        local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(tpz.inv.MOGSACK)
         if sackSize > 0 then sackSize = sackSize + 1 end
         player:updateEvent(0, 0, 0, sackSize, 0, 0, 0, scrollAvail)
 
     elseif option == 4 then -- Main dialogue
-        local scrollAvail = player:getCharVar("[artisan]nextScroll") <= getEpochDays() and 1 or 0
+        local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(tpz.inv.MOGSACK)
         if sackSize > 0 then sackSize = sackSize + 1 end
         player:updateEvent(0, 0, player:getGil(), sackSize, 0, 0, 0, scrollAvail)
@@ -79,10 +74,10 @@ tpz.artisan.moogleOnFinish = function(player,csid,option)
     local zone = zones[player:getZoneID()]
 
     if option == 99 then -- Get Scroll
-        if player:getCharVar("[artisan]nextScroll") <= getEpochDays() then
+        if player:getCharVar("[artisan]nextScroll") < getMidnight() then
             if player:addItem(4181) then
                 player:messageSpecial(zone.text.ITEM_OBTAINED,4181)
-                player:setCharVar("[artisan]nextScroll", getEpochDays() + 1)
+                player:setCharVar("[artisan]nextScroll", getMidnight())
             else
                 player:messageSpecial(zone.text.ITEM_CANNOT_BE_OBTAINED,4181)
             end
