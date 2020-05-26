@@ -54,6 +54,17 @@ tpz.mission.logEx =
 tpz.mission.id =
 {
     -----------------------------------
+    --  All Nations
+    -----------------------------------
+    ['nation'] =
+    {
+        MAGICITE    = 13,
+        ARCHLICH    = 14,
+        SHADOW_LORD = 15,
+        NONE        = 65535,
+    },
+
+    -----------------------------------
     --  San d'Oria (0)
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.SANDORIA]] =

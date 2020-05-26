@@ -32,7 +32,7 @@ function onZoneIn(player,prevZone)
         SpawnMob(ID.mob.MISER_MURPHY); -- RDM AF
     end
 
-    if (prevZone == tpz.zone.BEAUCEDINE_GLACIER and currentMission == 14 and MissionStatus == 10) then
+    if (prevZone == tpz.zone.BEAUCEDINE_GLACIER and currentMission == tpz.mission.id.nation.ARCHLICH and MissionStatus == 10) then
         cs = 1; -- MISSION 5-1
     elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 2) then
         cs = 23; -- San d'Oria 9-2
