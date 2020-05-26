@@ -394,7 +394,7 @@ namespace luautils
             }
             if (PInstance)
             {
-                PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB | TYPE_PET);
+                PMob = PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB | TYPE_PET);
             }
             else
             {
