@@ -3269,6 +3269,7 @@ namespace charutils
                 return;
 
             maxlevel = std::max(maxlevel, PMob->m_HiPCLvl);
+            PMob->m_HiPCLvl = maxlevel;
 
             bool chainactive = false;
 
