@@ -33,6 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
+#include "entities/trustentity.h"
 
 #include "lua/luautils.h"
 
@@ -388,9 +389,9 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
                     return PAlly;
         }
     }
-    else if (PEntity->objtype == TYPE_PET)
+    else if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
     {
-        if (auto POwner = dynamic_cast<CCharEntity*>(static_cast<CPetEntity*>(PEntity)->PMaster))
+        if (auto POwner = dynamic_cast<CCharEntity*>(static_cast<CBattleEntity*>(PEntity)->PMaster))
         {
             for (const auto id : m_EnteredPlayers)
                 if (id == POwner->id)
