@@ -674,10 +674,6 @@ INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,245,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,246,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,247,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,248,15,'SOA',0);
---INSERT INTO `traits` VALUES (118,'inquartata',22,15,1,0,5,'SOA',0); -- needs mod
---INSERT INTO `traits` VALUES (118,'inquartata',22,45,2,0,7,'SOA',0);
---INSERT INTO `traits` VALUES (118,'inquartata',22,75,3,0,9,'SOA',0);
---INSERT INTO `traits` VALUES (118,'inquartata',22,90,4,0,11,'SOA',0);
 INSERT INTO `traits` VALUES (123,'daken',13,25,1,911,20,'SOA',0);
 INSERT INTO `traits` VALUES (123,'daken',13,40,2,911,25,'SOA',0);
 INSERT INTO `traits` VALUES (123,'daken',13,55,3,911,30,'SOA',0);
