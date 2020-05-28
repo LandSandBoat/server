@@ -161,9 +161,11 @@ function onEventFinish(player,csid,option)
         if (tablets % (2 * 0x7fff)) >= 0x7fff then
             npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_THE_CRAWLERS_NEST)
         end
+
+    -- RoV: Set Free
     elseif csid == 178 then
         player:confirmTrade()
-        if not player:hasJob(0) then -- Is Subjob Unlocked
+        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
             npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
             if not npcUtil.giveItem(player, 8711) then return end
