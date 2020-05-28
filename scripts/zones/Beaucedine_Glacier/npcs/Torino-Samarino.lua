@@ -9,6 +9,7 @@ require("scripts/globals/quests");
 require("scripts/globals/settings");
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs");
 require("scripts/globals/keyitems");
+require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -17,6 +18,7 @@ end;
 function onTrigger(player,npc)
 
     local FoiledAGolem = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM);
+    local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     -- Curses, Foiled A_Golem!?
     if (player:hasKeyItem(tpz.ki.SHANTOTTOS_EXSPELL) and FoiledAGolem == QUEST_ACCEPTED) then
@@ -35,6 +37,12 @@ function onTrigger(player,npc)
         player:startEvent(110); -- talk to Shantotto reminder
     elseif (FoiledAGolem == QUEST_ACCEPTED) then
         player:startEvent(104); -- receive key item
+
+    elseif tuningOutProgress == 7 then
+        player:startEvent(207) -- Ildy meets up with Rhinostery peers
+    elseif tuningOutProgress == 8 then
+        player:startEvent(208) -- Talks about Ildy being passionate about his work
+
     else
         player:startEvent(101); -- standard dialog
     end
@@ -60,5 +68,8 @@ function onEventFinish(player,csid,option)
         player:setCharVar("golemday",0);
         player:setCharVar("golemyear",0);
         player:setCharVar("golemwait",0);
+    elseif csid == 207 then
+        npcUtil.giveCurrency(player, "gil", 6000)
+        player:setCharVar("TuningOut_Progress", 8)
     end
 end;
