@@ -281,7 +281,7 @@ const char* ip2str(uint32 ip, char ip_str[16])
     uint32 reversed_ip = htonl(ip);
     char* address = new char[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-	return (ip_str == NULL) ? address : strncpy(ip_str, address, 16);
+    return (ip_str == NULL) ? address : strncpy(ip_str, address, 16);
 }
 
 uint32 str2ip(const char* ip_str)
@@ -722,9 +722,9 @@ int32 makeListenBind_tcp(const char* ip, uint16 port,RecvFunc connect_client)
 	//setsocketopts(fd);
 	//set_nonblocking(fd, 1);
 
-	server_address.sin_family      = AF_INET;
+    server_address.sin_family      = AF_INET;
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
-	server_address.sin_port        = htons(port);
+    server_address.sin_port        = htons(port);
 
 	result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
 	if( result == SOCKET_ERROR ) {
