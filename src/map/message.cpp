@@ -70,7 +70,7 @@ namespace message
 
     void parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
     {
-        ShowDebug("Message: Received message %d from message server\n", type);
+        ShowDebug("Message: Received message %d from message server\n", static_cast<uint8>(type));
         switch (type)
         {
         case MSG_LOGIN:

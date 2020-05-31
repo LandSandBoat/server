@@ -308,7 +308,7 @@ int32 lobbydata_parse(int32 fd)
                     //new char only (first login from char create)
                     if (PrevZone == 0)  key3[16] += 6;
 
-                    ZoneIP = inet_addr((const char*)Sql_GetData(SqlHandle, 0));
+                    inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ZoneIP);
                     ZonePort = (uint16)Sql_GetUIntData(SqlHandle, 1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
