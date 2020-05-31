@@ -150,7 +150,11 @@ int32 do_init(int32 argc, char** argv)
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0)
-            map_ip.s_addr = inet_addr(argv[i + 1]);
+        {
+            uint32 ip;
+            inet_pton(AF_INET, argv[i + 2], &ip);
+            map_ip.s_addr = ip;
+        }
         else if (strcmp(argv[i], "--port") == 0)
             map_port = std::stoi(argv[i + 1]);
     }
