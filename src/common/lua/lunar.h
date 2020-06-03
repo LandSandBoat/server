@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "lua.hpp"
 /* Binds C++ objects to Lua objects. */
 template <typename T> class Lunar {

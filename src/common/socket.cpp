@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2015 Darkstar Dev Teams
+﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"

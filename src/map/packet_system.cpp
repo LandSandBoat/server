@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -2245,7 +2245,7 @@ void SmallPacket0x04E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     // 0x0A - Retrieve List of Items Sold By Player
     // 0x0B - Proof Of Purchase
     // 0x0E - Purchasing Items
-    // 0x0С - Cancel Sale
+    // 0x0C - Cancel Sale
     // 0x0D - Update Sale List By Player
 
     switch (action)
