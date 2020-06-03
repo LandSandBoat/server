@@ -10360,10 +10360,17 @@ inline int32 CLuaBaseEntity::resetEnmity(lua_State *L)
 inline int32 CLuaBaseEntity::updateClaim(lua_State *L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == NULL);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        return 0;
+    }
 
-    //TPZ_DEBUG_BREAK_IF(lua_gettop(L) > 1);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    if (lua_isnil(L, 1) || !lua_isuserdata(L, 1))
+    {
+        static_cast<CMobEntity*>(m_PBaseEntity)->m_OwnerID.clean();
+        static_cast<CMobEntity*>(m_PBaseEntity)->updatemask |= UPDATE_STATUS;
+        return 0;
+    }
 
     CLuaBaseEntity* PEntity = Lunar<CLuaBaseEntity>::check(L, 1);
 
