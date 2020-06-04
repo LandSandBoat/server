@@ -12,7 +12,7 @@ function onTrade(player,npc,trade)
         SpawnMob(ID.mob.SHEN):updateClaim(player);
         for i = 1, 2 do
             if (not GetMobByID(ID.mob.SHEN+i):isSpawned()) then
-                SpawnMob(ID.mob.SHEN+i):updateEnmity(target);
+                SpawnMob(ID.mob.SHEN+i):updateEnmity(player);
             end
         end
     end
