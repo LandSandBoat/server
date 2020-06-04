@@ -338,8 +338,8 @@ namespace luautils
 
             if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
             {
-                CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 2);
-                PInstance = PLuaBaseEntity->GetBaseEntity()->PInstance;
+                CLuaInstance* PLuaInstance = Lunar<CLuaInstance>::check(L, 2);
+                PInstance = PLuaInstance->GetInstance();
             }
 
             CBaseEntity* PNpc = nullptr;
