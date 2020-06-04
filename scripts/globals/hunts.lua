@@ -1483,134 +1483,130 @@ local zone =
       lock |   Scyld Qty    | NM pageId #  | status
                                           (Has distinct values) ]]--
 
-function tpz.hunts.onTrigger(player,npc,event)
-  local huntZone = player:getCharVar("[hunt]zone")
-  local huntId = player:getCharVar("[hunt]id")
-  local huntStatus = player:getCharVar("[hunt]status")
-  local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
-  local lockBit = bit.lshift(1, 24)
-  local registryZone = zone[player:getZoneID()]
+    function tpz.hunts.onTrigger(player,npc,event)
+        local huntZone = player:getCharVar("[hunt]zone")
+        local huntId = player:getCharVar("[hunt]id")
+        local huntStatus = player:getCharVar("[hunt]status")
+        local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
+        local lockBit = bit.lshift(1, 24)
+        local registryZone = zone[player:getZoneID()]
 
-  -- one vana'diel day lockout timer after completing a hunt
-  if (VanadielYear() * 360) + VanadielDayOfTheYear() < player:getCharVar("[hunt]nextHunt") then
-    local bitCombo = scyldBits + lockBit
-    player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
+        -- one vana'diel day lockout timer after completing a hunt
+        if os.time() < player:getCharVar("[hunt]nextHunt") then
+            local bitCombo = scyldBits + lockBit
+            player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
 
-  -- [hunt]status 1 player has already accepted a hunt
-  elseif huntStatus == 1 then
-    local playerHunt = zone[huntZone].hunt[huntId]
-    local pageBits = bit.lshift(playerHunt.pageId, 4)
-    local bitCombo = scyldBits + pageBits + 0x0002 -- bit displays hunt active menu
-    player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
+        -- [hunt]status 1 player has already accepted a hunt
+        elseif huntStatus == 1 then
+            local playerHunt = zone[huntZone].hunt[huntId]
+            local pageBits = bit.lshift(playerHunt.pageId, 4)
+            local bitCombo = scyldBits + pageBits + 0x0002 -- bit displays hunt active menu
+            player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
 
-  -- [hunt]status 2 player has completed a hunt
-  elseif huntStatus == 2 then
-    local playerHunt = zone[huntZone].hunt[huntId]
-    local pageBits = bit.lshift(playerHunt.pageId, 4)
-    local bitCombo = scyldBits + pageBits + 0x000A -- bit displays completion menu
-    player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
+        -- [hunt]status 2 player has completed a hunt
+        elseif huntStatus == 2 then
+            local playerHunt = zone[huntZone].hunt[huntId]
+            local pageBits = bit.lshift(playerHunt.pageId, 4)
+            local bitCombo = scyldBits + pageBits + 0x000A -- bit displays completion menu
+            player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
 
-  -- stops player from taking a hunt if a regime is active
-  elseif player:getCharVar("[regime]id") >= 1 then
-    local bitCombo = scyldBits + 0x0001 -- bit displays regime active menu
-    player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
+        -- stops player from taking a hunt if a regime is active
+        elseif player:getCharVar("[regime]id") >= 1 then
+            local bitCombo = scyldBits + 0x0001 -- bit displays regime active menu
+            player:startEvent(1500,bitCombo,registryZone.huntMenu[1])
 
-  -- default menu
-  else
-    player:startEvent(1500,scyldBits,registryZone.huntMenu[1])
-  end
-end
+        -- default menu
+        else
+            player:startEvent(1500,scyldBits,registryZone.huntMenu[1])
+        end
+      end
 
-function tpz.hunts.onEventUpdate(player,csid,option)
-  local registryZone = zone[player:getZoneID()]
-  local region = registryZone[option]
+    function tpz.hunts.onEventUpdate(player,csid,option)
+        local registryZone = zone[player:getZoneID()]
+        local region = registryZone[option]
+        player:updateEvent(0,0,registryZone.huntMenu[option])
 
-  player:updateEvent(0,0,registryZone.huntMenu[option])
+        -- handles region select
+        option = bit.band(option, 0xFF)
+        if registryZone.huntMenu[option] then
+            player:updateEvent(0,1,registryZone.huntMenu[option])
+        end
 
-  -- handles region select
-  option = bit.band(option, 0xFF)
-  if registryZone.huntMenu[option] then
-    player:updateEvent(0,1,registryZone.huntMenu[option])
-  end
+        -- gets progress of current hunt (param controls the display of kills needed)
+        if option == 3 then
+            player:updateEvent(1)
+        end
 
-  -- gets progress of current hunt (param controls the display of kills needed)
-  if option == 3 then
-    player:updateEvent(1)
-  end
-
-  -- displays hunt info (kills required,0,0,0,zoneId,huntId,scyld bounty+fee,?)
-  if region then
-    local huntPage = registryZone.hunt[region.optionId]
-    local bountyBit = bit.lshift(huntPage.bounty, 10)
-    local feeBit = huntPage.fee
-    local scyldParam = bountyBit + feeBit
-    player:updateEvent(1,0,0,0,0,region.huntId,scyldParam,1)
-  end
-end
-
-tpz.hunts.clearHuntVars = function(player)
-  player:setCharVar("[hunt]id", 0)
-  player:setCharVar("[hunt]status", 0)
-  player:setCharVar("[hunt]zone", 0)
-  player:setCharVar("[hunt]page", 0)
-end
-
-function tpz.hunts.onEventFinish(player, csid, option)
-  local scylds = player:getCurrency("scyld")
-  local registryZone = zone[player:getZoneID()]
-  local huntEntry = registryZone.hunt[option]
-  local msg = registryZone.msg
-
--- accepting hunt
-if huntEntry then
-    player:messageSpecial(msg[1])
-    player:messageSpecial(msg[2], huntEntry.fee, scylds)
-    player:setCharVar("[hunt]status", 1)
-    player:setCharVar("[hunt]zone", player:getZoneID())
-    player:setCharVar("[hunt]id", option)
-    player:setCharVar("[hunt]page", huntEntry.pageId)
-    player:delCurrency("scyld", huntEntry.fee)
-
-  -- cancels hunt
-  elseif option == 3 then
-    player:messageSpecial(msg[3])
-    player:setCharVar("[hunt]status", 0)
-
-  -- cancels training regime and clears all vars
-  elseif option == 4 then
-    player:messageSpecial(msg[4])
-    tpz.regime.clearPlayerVars(player)
-
-  -- completes hunt
-  elseif option == 5 then
-    local huntZone = player:getCharVar("[hunt]zone")
-    local huntId = player:getCharVar("[hunt]id")
-    local scyldBounty = zone[huntZone].hunt[huntId].bounty
-
-    player:messageSpecial(msg[5])
-    player:messageSpecial(msg[6], scyldBounty, scylds)
-    player:addCurrency("scyld", scyldBounty)
-    -- give player evoliths here
-    player:setCharVar("[hunt]nextHunt", (VanadielYear() * 360) + (VanadielDayOfTheYear() + 1))
-    tpz.hunts.clearHuntVars(player)
-
-    -- scylds cap at 1000
-    if player:getCurrency("scyld") + bounty > 1000 then
-       player:setCurrency("scyld", 1000)
-    else
-       player:addCurrency("scyld", bounty)
+        -- displays hunt info (kills required,0,0,0,zoneId,huntId,scyld bounty+fee,?)
+        if region then
+            local huntPage = registryZone.hunt[region.optionId]
+            local bountyBit = bit.lshift(huntPage.bounty, 10)
+            local feeBit = huntPage.fee
+            local scyldParam = bountyBit + feeBit
+            player:updateEvent(1,0,0,0,0,region.huntId,scyldParam,1)
+        end
     end
-  end
-end
 
-function tpz.hunts.checkHunt(mob, player, isKiller)
-  local huntZone = player:getCharVar("[hunt]zone")
-  local huntId = player:getCharVar("[hunt]id")
-  local playerHunt = zone[huntZone].hunt[huntId]
+    tpz.hunts.clearHuntVars = function(player)
+        player:setCharVar("[hunt]id", 0)
+        player:setCharVar("[hunt]status", 0)
+        player:setCharVar("[hunt]zone", 0)
+        player:setCharVar("[hunt]page", 0)
+    end
 
-  -- required NM has been defeated
-  if player:getCharVar("[hunt]status") == 1 and mob:getID() == zone[huntZone].hunt[huntId].mobId then
-   player:messageBasic(tpz.msg.basic.FOV_DEFEATED_TARGET + 20)
-   player:setCharVar("[hunt]status", 2)
-  end
-end
+    function tpz.hunts.onEventFinish(player, csid, option)
+        local registryZone = zone[player:getZoneID()]
+        local huntEntry = registryZone.hunt[option]
+        local msg = registryZone.msg
+
+        -- accepting hunt
+        if huntEntry then
+            player:setCharVar("[hunt]status", 1)
+            player:setCharVar("[hunt]zone", player:getZoneID())
+            player:setCharVar("[hunt]id", option)
+            player:setCharVar("[hunt]page", huntEntry.pageId)
+            player:delCurrency("scyld", huntEntry.fee)
+            player:messageSpecial(msg[1])
+            player:messageSpecial(msg[2], huntEntry.fee, player:getCurrency("scyld"))
+
+        -- cancels hunt
+        elseif option == 3 then
+            player:messageSpecial(msg[3])
+            player:setCharVar("[hunt]status", 0)
+
+        -- cancels training regime and clears all vars
+        elseif option == 4 then
+            player:messageSpecial(msg[4])
+            tpz.regime.clearRegimeVars(player)
+
+        -- completes hunt
+        elseif option == 5 then
+            local huntZone = player:getCharVar("[hunt]zone")
+            local huntId = player:getCharVar("[hunt]id")
+            local scyldBounty = zone[huntZone].hunt[huntId].bounty
+            -- give player evoliths here
+            player:setCharVar("[hunt]nextHunt", getVanaMidnight())
+            tpz.hunts.clearHuntVars(player)
+
+          -- scylds cap at 1000
+          if player:getCurrency("scyld") + scyldBounty > 1000 then
+              player:setCurrency("scyld", 1000)
+          else
+              player:addCurrency("scyld", scyldBounty)
+          end
+              player:messageSpecial(msg[5])
+              player:messageSpecial(msg[6], scyldBounty, player:getCurrency("scyld"))
+        end
+    end
+
+    function tpz.hunts.checkHunt(mob, player, isKiller)
+        local huntZone = player:getCharVar("[hunt]zone")
+        local huntId = player:getCharVar("[hunt]id")
+        local playerHunt = zone[huntZone].hunt[huntId]
+
+        -- required NM has been defeated
+        if player:getCharVar("[hunt]status") == 1 and mob:getID() == zone[huntZone].hunt[huntId].mobId then
+           player:messageBasic(tpz.msg.basic.FOV_DEFEATED_TARGET + 20)
+           player:setCharVar("[hunt]status", 2)
+        end
+    end
