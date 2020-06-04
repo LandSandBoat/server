@@ -1,25 +1,26 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Maugie
---  General Info NPC
+-- Type: General Info NPC
 -------------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs");
 require("scripts/globals/settings");
 require("scripts/globals/quests");
 
 function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getCharVar("tradeMaugie") == 0) then
-            player:messageSpecial(ID.text.MAUGIE_DIALOG);
+    -- FLYERS FOR REGINE
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+        if player:getCharVar("tradeMaugie") == 0 then
+            player:messageSpecial(ID.text.FLYER_ACCEPTED)
+            player:messageSpecial(ID.text.FFR_MAUGIE)
             player:addCharVar("FFR", -1)
-            player:setCharVar("tradeMaugie",1);
-            player:messageSpecial(ID.text.FLYER_ACCEPTED);
-            player:tradeComplete();
-            elseif (player:getCharVar("tradeMaugie") ==1) then
-                player:messageSpecial(ID.text.FLYER_ALREADY);
-            end
+            player:setCharVar("tradeMaugie", 1)
+            player:confirmTrade()
+        else
+            player:messageSpecial(ID.text.FLYER_ALREADY)
         end
-    end;
+    end
+end;
 
 function onTrigger(player,npc)
     local grimySignpost = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GRIMY_SIGNPOSTS);
