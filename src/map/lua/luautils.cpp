@@ -2690,7 +2690,7 @@ namespace luautils
 
         lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-        if (PTarget->objtype != TYPE_PET && PTarget->objtype != TYPE_MOB)
+        if (PTarget->objtype == TYPE_PC)
         {
             ((CCharEntity*)PTarget)->m_event.reset();
             ((CCharEntity*)PTarget)->m_event.Target = PMob;
