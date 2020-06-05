@@ -7,13 +7,25 @@
 require("scripts/globals/settings");
 require("scripts/globals/missions");
 require("scripts/globals/keyitems");
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Windurst_Waters/IDs");
 -----------------------------------
+
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
+        and player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
+    then
+        player:startEvent(886)
+    end
+end
+
 
 function onTrigger(player,npc)
     local moonlitPath = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
     local MissionStatus = player:getCharVar("MissionStatus");
+    local tuningIn = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_IN)
+    local tuningOut = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_OUT)
 
     -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_PRICE_OF_PEACE and MissionStatus < 3) then
@@ -34,6 +46,21 @@ function onTrigger(player,npc)
     ---------------------------
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         player:startEvent(311);
+
+    -- Tuning In
+    elseif tuningIn == QUEST_AVAILABLE
+        and player:getFameLevel(WINDURST) >= 4
+        and (player:getCurrentMission(COP) >= tpz.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(COP,tpz.mission.id.cop.THE_LAST_VERSE))
+    then
+        player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
+
+
+    -- Tuning Out
+    elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE then
+        player:startEvent(888) -- Starting dialogue
+
+    elseif tuningOut == QUEST_ACCEPTED and player:getCharVar("TuningOut_Progress") == 8 then
+        player:startEvent(897) -- Finishing dialogue
 
     -- The Moonlit Path and Other Fenrir Stuff!
     elseif (moonlitPath == QUEST_AVAILABLE and
@@ -81,9 +108,17 @@ function onTrigger(player,npc)
             player:startEvent(850,0,13399,1208,1125,availRewards,18165,13572);
         elseif (realday ~= player:getCharVar("MoonlitPath_date")) then --24 hours have passed, flag a new fight
             player:startEvent(848,0,1125,334);
-        else
-            player:startEvent(847,0,1125); -- Yes, this will indefinitely replace his standard dialogue!
         end
+
+    elseif tuningIn == QUEST_ACCEPTED then
+        player:startEvent(885, 0, 1696, 1697, 1698) -- Reminder to bring Magicked Steel Ingot, Spruce Lumber, Extra-fine File
+
+    elseif tuningOut == QUEST_ACCEPTED then
+        player:startEvent(889) -- Reminder to go help Ildy in Kazham
+
+    elseif moonlitPath == QUEST_COMPLETED then
+        player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
+
     else
         player:startEvent(345); -- Standard Dialogue?
     end
@@ -201,6 +236,26 @@ function onEventFinish(player,csid,option)
         player:setCharVar("MissionStatus",1);
     elseif (csid == 742) then
         finishMissionTimeline(player,3,csid,option);
-    end
 
+    -- Tuning In
+    elseif csid == 884 then
+        player:addQuest(WINDURST,tpz.quest.id.windurst.TUNING_IN)
+
+    elseif csid == 886 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_IN, {
+        gil = 4000,
+        title = tpz.title.FINE_TUNER,
+    }) then
+        player:tradeComplete()
+
+    -- Tuning Out
+    elseif csid == 888 then
+        player:setCharVar("TuningOut_Progress", 1)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.TUNING_OUT)
+
+    elseif csid == 897 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_OUT, {
+        item = 15180, -- Cache-Nez
+        title = tpz.title.FRIEND_OF_THE_HELMED,
+    }) then
+        player:setCharVar("TuningOut_Progress", 0) -- zero when quest is done
+    end
 end;

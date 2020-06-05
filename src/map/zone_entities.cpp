@@ -171,7 +171,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 
     // force all mobs in a burning circle to link
     ZONETYPE zonetype = m_zone->GetType();
-    bool forceLink = zonetype == ZONETYPE_BATTLEFIELD || zonetype == ZONETYPE_DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
+    bool forceLink = zonetype == ZONETYPE_DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
     {
@@ -285,6 +285,8 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+
+    PChar->PClaimedMob = nullptr;
 
     //remove pets
     if (PChar->PPet != nullptr)

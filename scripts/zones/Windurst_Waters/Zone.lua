@@ -23,26 +23,20 @@ function onZoneIn(player, prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if OPENING_CUTSCENE_ENABLE == 1 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 531
         end
         player:setPos(-40, -5, 80, 64)
         player:setHomePoint()
+    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 1 then -- COP MEMORIES_OF_A_MAIDEN--3-3B: Windurst Route
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 2)
+        cs = 871
     end
 
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) + 157
+        local position = math.random(1, 5) + 157
         player:setPos(position, -5, -62, 192)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    end
-
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 1 then -- COP MEMORIES_OF_A_MAIDEN--3-3B: Windurst Route
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 2)
-        cs = 871
     end
 
     return cs
@@ -72,9 +66,6 @@ end
 function onEventFinish(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 146 then -- Returned from Giddeus, Windurst 1-3
         player:setCharVar("MissionStatus", 3)
         player:setCharVar("ghoo_talk", 0)

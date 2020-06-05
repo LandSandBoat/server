@@ -72,10 +72,10 @@ function onEventFinish(player,csid,option)
         ItemID = 12747
     elseif option == 917505 then -- Teal Slops
         Price = 3000
-        ItemID = 11415
+        ItemID = 14258
     elseif option == 983041 then -- Teal Pigaches
         Price = 3000
-        ItemID = 14258
+        ItemID = 11415
     elseif option == 17825793 then -- 1x Forbidden Key
         Price = 500
         ItemID = 2490

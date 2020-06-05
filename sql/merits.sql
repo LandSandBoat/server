@@ -107,7 +107,7 @@ INSERT INTO `merits` VALUES (706,'hide_recast',5,10,32,6,10);
 INSERT INTO `merits` VALUES (708,'sneak_attack_recast',5,2,32,6,10);
 INSERT INTO `merits` VALUES (710,'trick_attack_recast',5,2,32,6,10);
 INSERT INTO `merits` VALUES (712,'triple_attack_rate',5,1,32,6,10);
-INSERT INTO `merits` VALUES (768,'shield_bash_recast',5,6,64,6,11);
+INSERT INTO `merits` VALUES (768,'shield_bash_recast',5,2,64,6,11);
 INSERT INTO `merits` VALUES (770,'holy_circle_recast',5,10,64,6,11);
 INSERT INTO `merits` VALUES (772,'sentinel_recast',5,10,64,6,11);
 INSERT INTO `merits` VALUES (774,'cover_effect_length',5,4,64,6,11);

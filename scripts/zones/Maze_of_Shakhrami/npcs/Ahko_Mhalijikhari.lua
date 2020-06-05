@@ -33,7 +33,7 @@ function onEventFinish(player, csid, option)
     if csid == 62 and option == 1 then
         player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 20, 0, 0)
     elseif csid == 65 then
-        player:setCharVar("ECOR_WAR_WIN-NMs_killed", 0)
+        player:setCharVar("ECO_WAR_WIN-NMs_killed", 0)
         player:delStatusEffect(tpz.effect.LEVEL_RESTRICTION)
     elseif csid == 64 then
         player:delStatusEffect(tpz.effect.LEVEL_RESTRICTION)

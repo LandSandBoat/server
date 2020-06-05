@@ -7,16 +7,27 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 
+function phaseChangeReady(battlefield)
+    local inst = battlefield:getArea()
+    local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
+    for i = instOffset + 3, instOffset + 13 do
+        if not GetMobByID(i):isDead() then
+            return false
+        end
+    end
+    return true
+end
+
 function onMobInitialize(mob)
     mob:addMod(tpz.mod.SLEEPRES,50)
 end
 
-function onMobDeath(mob, player, isKiller)
-    local inst = mob:getBattlefield():getArea()
-    local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
-    if GetMobByID(instOffset + 0):isDead() and GetMobByID(instOffset + 1):isDead()
-        and GetMobByID(instOffset + 2):isDead()
-    then
-        mob:getBattlefield():setLocalVar("loot", 0)
+function onMobSpawn(mob)
+    local battlefield = mob:getBattlefield()
+    if battlefield and phaseChangeReady(battlefield) then
+       battlefield:setLocalVar("phaseChange", 0)
     end
+end
+
+function onMobDeath(mob, player, isKiller)
 end

@@ -44,6 +44,7 @@ function onEventFinish(player,csid,option)
             player:addKeyItem(tpz.ki.MAP_OF_THE_GUSGEN_MINES);
             player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAP_OF_THE_GUSGEN_MINES);
         end
+        player:addExp(2000 * EXP_RATE)
         player:addFame(BASTOK,60);
         player:completeQuest(BASTOK,tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND);
     end

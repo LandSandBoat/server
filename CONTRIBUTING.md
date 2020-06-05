@@ -84,8 +84,8 @@ Clang-Format is also an option for C++
   ```
   and definitely not like this:
   ```
-  if ( variable == thing ) then
-  if (variable2 == thing2) then
+  if  variable == thing  then
+  if variable2 == thing2 then
   ```
 
 ### SQL
@@ -118,3 +118,7 @@ Clang-Format is also an option for C++
   ```
   insert into table_name
   ```
+
+  #### SQL Migrations for Schema changes
+
+  * Going forward schema changes should be accompanied by a migration script.

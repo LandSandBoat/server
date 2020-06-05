@@ -307,6 +307,8 @@ public:
     int32 getCurrentMission(lua_State*);    // Gets the current mission
     int32 hasCompletedMission(lua_State*);  // Checks if mission has been completed
     int32 completeMission(lua_State*);      // Complete Mission
+    int32 setMissionLogEx(lua_State*);      // Sets mission log extra data to correctly track progress in branching missions.
+    int32 getMissionLogEx(lua_State*);      // Gets mission log extra data.
 
     int32 addAssault(lua_State*);           // Add Mission
     int32 delAssault(lua_State*);           // Delete Mission from Mission Log

@@ -439,7 +439,7 @@ INSERT INTO `traits` VALUES (92,'winning streak',17,75,1,0,0,'TOAU',0);
 INSERT INTO `traits` VALUES (93,'loaded deck',17,75,1,0,0,'TOAU',0);
 INSERT INTO `traits` VALUES (94,'fine-tuning',18,75,1,0,0,'TOAU',3140);
 INSERT INTO `traits` VALUES (95,'optimization',18,75,1,0,0,'TOAU',3142);
-INSERT INTO `traits` VALUES (96,'closed position',19,75,1,0,0,'WOTG',0);
+INSERT INTO `traits` VALUES (96,'closed position',19,75,1,0,0,'WOTG',3206);
 INSERT INTO `traits` VALUES (97,'stormsurge',20,75,1,0,0,'WOTG',0);
 INSERT INTO `traits` VALUES (98,'crit. atk. bonus',1,78,1,421,5,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (98,'crit. atk. bonus',1,86,2,421,8,'ABYSSEA',0);

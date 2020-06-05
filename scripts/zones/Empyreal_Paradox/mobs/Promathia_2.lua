@@ -14,6 +14,13 @@ function onMobInitialize(mob)
     mob:addMod(tpz.mod.UFASTCAST,50)
 end
 
+function onMobSpawn(mob)
+    local battlefield = mob:getBattlefield()
+    if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2):isDead() then
+       battlefield:setLocalVar("phaseChange", 0)
+    end
+end
+
 function onMobEngaged(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i,v in pairs(bcnmAllies) do
@@ -68,5 +75,4 @@ function onMagicCastingCheck(mob, target, spell)
 end
 
 function onMobDeath(mob, player, isKiller)
-    mob:getBattlefield():setLocalVar("loot", 0)
 end

@@ -2,7 +2,7 @@
 Values 1 through 146 are FoV Regimes.
 Values 147 through 559 are Hunt Registries.
 Values 560 through 601 are Dominion Regimes.
-Values 302 through 819 are Dominion Regimes.
+Values 602 through 819 are GoV Regimes.
 
 ---------------------------------------
 Fields of Valor

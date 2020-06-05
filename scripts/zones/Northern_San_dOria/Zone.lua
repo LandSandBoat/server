@@ -28,33 +28,22 @@ function onZoneIn(player, prevZone)
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
 
-    -- SOA 1-1 Optional CS
-    if
-        ENABLE_SOA and
-        player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST and
-        player:getCharVar("SOA_1_CS1") == 0
-    then
-        cs = 878
-    end
-
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if OPENING_CUTSCENE_ENABLE == 1 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 535
         end
         player:setPos(0, 0, -11, 191)
         player:setHomePoint()
-    end
-    -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(130, -0.2, -3, 160)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    end
+    -- SOA 1-1 Optional CS
+    elseif
+        ENABLE_SOA == 1 and
+        player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST and
+        player:getCharVar("SOA_1_CS1") == 0
+    then
+        cs = 878
     -- RDM AF3 CS
-    if player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
+    elseif player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
         cs = 49
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 1 then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
         player:setCharVar("EMERALD_WATERS_Status", 2)
@@ -66,6 +55,12 @@ function onZoneIn(player, prevZone)
     elseif player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) and tonumber(os.date("%j")) == player:getCharVar("Wait1DayM8-1_date") then
         cs = 16
     end
+
+    -- MOG HOUSE EXIT
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(130, -0.2, -3, 160)
+    end
+
     return cs
 end
 
@@ -101,9 +96,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 1)
     elseif csid == 0 then
         player:setCharVar("MissionStatus", 5)
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
     elseif csid == 49 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, {item = 12513, fame = 60, title = tpz.title.PARAGON_OF_RED_MAGE_EXCELLENCE}) then

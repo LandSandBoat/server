@@ -7,7 +7,9 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-    if (npc:getAnimation() == 9) then
+    if player:getCharVar('X_MARKS_THE_SPOT') == 4 then
+        player:startEvent(37)
+    elseif (npc:getAnimation() == 9) then
         npc:openDoor();
     end
 end;
@@ -16,4 +18,7 @@ function onEventUpdate(player,csid,option)
 end;
 
 function onEventFinish(player,csid,option)
-end;
+    if csid == 37 then
+        player:setCharVar('X_MARKS_THE_SPOT',5)
+    end
+end

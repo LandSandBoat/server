@@ -3145,6 +3145,11 @@ namespace charutils
         uint32 gil = PMob->GetRandomGil();
         uint32 gBonus = 0;
 
+        if (gil && map_config.mob_gil_multiplier >= 0)
+        {
+            gil = static_cast<uint32>(gil * map_config.mob_gil_multiplier);
+        }
+
         if (map_config.all_mobs_gil_bonus > 0)
         {
             gBonus = map_config.all_mobs_gil_bonus*PMob->GetMLevel();
@@ -3219,7 +3224,7 @@ namespace charutils
 
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
-        auto pcinzone = 0;
+        uint8 pcinzone = 0;
         uint8 minlevel = 0, maxlevel = PChar->GetMLevel();
         REGIONTYPE region = PChar->loc.zone->GetRegionID();
 
@@ -3260,6 +3265,7 @@ namespace charutils
                 pcinzone++;
             }
         });
+        pcinzone = std::max(pcinzone, PMob->m_HiPartySize);
 
         PChar->ForAlliance([&PMob, &region, &minlevel, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
         {
@@ -3354,124 +3360,127 @@ namespace charutils
                         exp = std::fmin(exp, 600.f);
                     }
 
-                    if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)
+                    if (mobCheck > EMobDifficulty::DecentChallenge)
                     {
-                        chainactive = true;
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: exp *= 1.0f; break;
-                            case 1: exp *= 1.2f; break;
-                            case 2: exp *= 1.25f; break;
-                            case 3: exp *= 1.3f; break;
-                            case 4: exp *= 1.4f; break;
-                            case 5: exp *= 1.5f; break;
-                            default: exp *= 1.55f; break;
-                        }
-                    }
-                    else
-                    {
-                        if (PMember->GetMLevel() <= 10) PMember->expChain.chainTime = gettick() + 50000;
-                        else if (PMember->GetMLevel() <= 20) PMember->expChain.chainTime = gettick() + 100000;
-                        else if (PMember->GetMLevel() <= 30) PMember->expChain.chainTime = gettick() + 150000;
-                        else if (PMember->GetMLevel() <= 40) PMember->expChain.chainTime = gettick() + 200000;
-                        else if (PMember->GetMLevel() <= 50) PMember->expChain.chainTime = gettick() + 250000;
-                        else if (PMember->GetMLevel() <= 60) PMember->expChain.chainTime = gettick() + 300000;
-                        else PMember->expChain.chainTime = gettick() + 360000;
-                        PMember->expChain.chainNumber = 1;
-                    }
 
-                    if (chainactive && PMember->GetMLevel() <= 10)
-                    {
-                        switch (PMember->expChain.chainNumber)
+                        if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)
                         {
-                            case 0: PMember->expChain.chainTime = gettick() + 50000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 30000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 20000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 10000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 6000; break;
-                            default: PMember->expChain.chainTime = gettick() + 2000; break;
+                            chainactive = true;
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: exp *= 1.0f; break;
+                                case 1: exp *= 1.2f; break;
+                                case 2: exp *= 1.25f; break;
+                                case 3: exp *= 1.3f; break;
+                                case 4: exp *= 1.4f; break;
+                                case 5: exp *= 1.5f; break;
+                                default: exp *= 1.55f; break;
+                            }
                         }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 20)
-                    {
-                        switch (PMember->expChain.chainNumber)
+                        else
                         {
-                            case 0: PMember->expChain.chainTime = gettick() + 100000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 80000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 60000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 20000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 8000; break;
-                            default: PMember->expChain.chainTime = gettick() + 4000; break;
+                            if (PMember->GetMLevel() <= 10) PMember->expChain.chainTime = gettick() + 50000;
+                            else if (PMember->GetMLevel() <= 20) PMember->expChain.chainTime = gettick() + 100000;
+                            else if (PMember->GetMLevel() <= 30) PMember->expChain.chainTime = gettick() + 150000;
+                            else if (PMember->GetMLevel() <= 40) PMember->expChain.chainTime = gettick() + 200000;
+                            else if (PMember->GetMLevel() <= 50) PMember->expChain.chainTime = gettick() + 250000;
+                            else if (PMember->GetMLevel() <= 60) PMember->expChain.chainTime = gettick() + 300000;
+                            else PMember->expChain.chainTime = gettick() + 360000;
+                            PMember->expChain.chainNumber = 1;
                         }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 30)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 150000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 90000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 60000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 30000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 10000; break;
-                            default: PMember->expChain.chainTime = gettick() + 5000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 40)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 200000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 160000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 80000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 40000; break;
-                            default: PMember->expChain.chainTime = gettick() + 30000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 50)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 250000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 200000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 150000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 100000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 50000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 50000; break;
-                            default: PMember->expChain.chainTime = gettick() + 50000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 60)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 300000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 240000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 180000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 90000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 60000; break;
-                            default: PMember->expChain.chainTime = gettick() + 60000; break;
-                        }
-                    }
-                    else if (chainactive)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 360000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 300000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 240000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 165000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 105000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 60000; break;
-                            default: PMember->expChain.chainTime = gettick() + 60000; break;
-                        }
-                    }
 
+                        if (chainactive && PMember->GetMLevel() <= 10)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 50000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 30000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 20000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 10000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 6000; break;
+                                default: PMember->expChain.chainTime = gettick() + 2000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 20)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 100000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 80000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 60000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 20000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 8000; break;
+                                default: PMember->expChain.chainTime = gettick() + 4000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 30)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 150000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 90000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 60000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 30000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 10000; break;
+                                default: PMember->expChain.chainTime = gettick() + 5000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 40)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 200000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 160000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 80000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 40000; break;
+                                default: PMember->expChain.chainTime = gettick() + 30000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 50)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 250000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 200000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 150000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 100000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 50000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 50000; break;
+                                default: PMember->expChain.chainTime = gettick() + 50000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 60)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 300000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 240000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 180000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 90000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 60000; break;
+                                default: PMember->expChain.chainTime = gettick() + 60000; break;
+                            }
+                        }
+                        else if (chainactive)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 360000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 300000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 240000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 165000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 105000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 60000; break;
+                                default: PMember->expChain.chainTime = gettick() + 60000; break;
+                            }
+                        }
+                    }
                     // pet or companion exp penalty needs to be added here
                     if (distance(PMember->loc.p, PMob->loc.p) > 100)
                     {
