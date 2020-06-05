@@ -22,12 +22,14 @@ end;
 function onZoneIn(player,prevZone)
     local cs = -1;
     -- FIRST LOGIN (START CS)
-    if (player:getPlaytime(false) == 0) then
-        if (OPENING_CUTSCENE_ENABLE == 1) then
+    if player:getPlaytime(false) == 0 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1;
         end
         player:setPos(132,-8.5,-13,179);
         player:setHomePoint();
+    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
+        cs = 306;
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -37,15 +39,7 @@ function onZoneIn(player,prevZone)
         else
             local position = math.random(1,5) + 57;
             player:setPos(position,8.5,-239,192);
-            if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-                cs = 30004;
-            end
-            player:setCharVar("PlayerMainJob",0);
         end
-    end
-
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
-        cs = 306;
     end
 
     return cs;
@@ -74,9 +68,6 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.ITEM_OBTAINED,536);
     elseif (csid == 71) then
         player:setPos(0,0,0,0,224);
-    elseif (csid == 30004 and option == 0) then
-        player:setHomePoint();
-        player:messageSpecial(ID.text.HOMEPOINT_SET);
     elseif (csid == 305) then
         player:setCharVar("PromathiaStatus",1);
     elseif (csid == 306) then

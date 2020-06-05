@@ -55,7 +55,7 @@ end
 tpz.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
-    if not ENABLE_WOTG == 1 then
+    if ENABLE_WOTG == 0 then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
         return
     end
@@ -63,6 +63,7 @@ tpz.maws.onTrigger = function(player, npc)
     local maw = pastMaws[player:getZoneID()]
     local hasMaw = player:hasTeleport(MAW, maw.bit)
     local event = nil
+    local event_params = nil
 
     if maw.cs.msn and meetsMission2Reqs(player) then
         event = maw.cs.msn
@@ -72,13 +73,18 @@ tpz.maws.onTrigger = function(player, npc)
         local hasFeather = player:hasKeyItem(tpz.ki.PURE_WHITE_FEATHER)
         if maw.cs.new and not hasFeather then
             event = maw.cs.new
+            event_params = {maw.bit}
         elseif maw.cs.add then
             event = maw.cs.add
         end
     end
 
     if event then
-        player:startEvent(event)
+        if event_params then
+            player:startEvent(event, unpack(event_params))
+        else
+            player:startEvent(event)
+        end
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end

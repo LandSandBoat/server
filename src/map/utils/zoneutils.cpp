@@ -367,8 +367,9 @@ void LoadMOBList()
         while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             uint16 ZoneID = (uint16)Sql_GetUIntData(SqlHandle, 0);
+            ZONETYPE zoneType = GetZone(ZoneID)->GetType();
 
-            if (GetZone(ZoneID)->GetType() != ZONETYPE_DUNGEON_INSTANCED)
+            if (zoneType != ZONETYPE_DUNGEON_INSTANCED)
             {
                 CMobEntity* PMob = new CMobEntity;
 
@@ -492,6 +493,14 @@ void LoadMOBList()
                 PMob->m_Detects = Sql_GetUIntData(SqlHandle, 66);
 
                 PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 67));
+
+                // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
+                // can be set in mob_spawn_mods or in their onInitialize
+                if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
+                    PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
+                {
+                    PMob->setMobMod(MOBMOD_CHARMABLE, 0);
+                }
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, GetZone(ZoneID));

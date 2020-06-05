@@ -29,7 +29,7 @@
 #include "char_skills.h"
 
 
-CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar) 
+CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar)
 {
 	this->type = 0x62;
 	this->size = 0x80;

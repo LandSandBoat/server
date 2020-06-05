@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -30,12 +30,12 @@
 
 
 CMessageSpecialPacket::CMessageSpecialPacket(
-	CBaseEntity* PEntity, 
-	uint16 messageID,  
-	uint32 param0, 
-	uint32 param1, 
-	uint32 param2, 
-	uint32 param3, 
+	CBaseEntity* PEntity,
+	uint16 messageID,
+	uint32 param0,
+	uint32 param1,
+	uint32 param2,
+	uint32 param3,
 	bool ShowName)
 {
 	this->type = 0x2A;

@@ -6,10 +6,16 @@ g_mixins = g_mixins or {}
 g_mixins.fomor_hate = function(mob)
     mob:addListener("DEATH", "FOMOR_HATE_DEATH", function(mob, player)
         if player then
-            local hate = player:getCharVar("FOMOR_HATE")
-            local adj = mob:getLocalVar("fomorHateAdj")
-            if (adj == 0) then adj = 2 end -- most fomor add 2 hate
-            player:setCharVar("FOMOR_HATE", utils.clamp(hate + adj, 0, 60))
+            for _, member in pairs(player:getAlliance()) do
+                if member:getZoneID() == player:getZoneID() then
+                    local hate = member:getCharVar("FOMOR_HATE")
+                    local adj = mob:getLocalVar("fomorHateAdj")
+                    if adj == 0 then
+                        adj = 2 -- default: most fomor add 2 hate
+                    end
+                    member:setCharVar("FOMOR_HATE", utils.clamp(hate + adj, 0, 60))
+                end
+            end
         end
     end)
 end

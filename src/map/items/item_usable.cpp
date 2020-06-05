@@ -134,20 +134,20 @@ void CItemUsable::setValidTarget(uint8 ValidTarget)
 {
 	m_ValidTarget = ValidTarget;
 }
-	
-uint8 CItemUsable::getValidTarget() 
+
+uint8 CItemUsable::getValidTarget()
 {
 	return m_ValidTarget;
 }
 
 uint16 CItemUsable::getAoE()
-{ 
-    return m_AoE; 
+{
+    return m_AoE;
 }
 
-void CItemUsable::setAoE(uint16 AoE) 
-{ 
-    m_AoE = AoE; 
+void CItemUsable::setAoE(uint16 AoE)
+{
+    m_AoE = AoE;
 }
 
 /************************************************************************

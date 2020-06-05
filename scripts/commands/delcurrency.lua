@@ -43,7 +43,7 @@ function onTrigger(player,currency,amount,target)
     if (amount > currentAmount) then
         amount = currentAmount
     end
-    
+
     -- delete currency
     targ:delCurrency(currency,amount)
     local newAmount = targ:getCurrency(currency)

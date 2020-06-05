@@ -24,7 +24,7 @@ zones[tpz.zone.ABYSSEA_LA_THEINE] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [17318473] = { 'qm1', {2891},                                                                                                                      {}, 17318434}, -- Dozing Dorian
             --  [17318474] = { 'qm2', {2892},                                                                                                                      {}, 17318435}, -- Trudging Thomas

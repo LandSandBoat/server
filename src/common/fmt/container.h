@@ -1,4 +1,4 @@
-/*
+﻿/*
  Formatting library for C++ - standard container utilities
 
  Copyright (c) 2012 - 2016, Victor Zverovich

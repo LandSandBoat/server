@@ -69,7 +69,7 @@ local fishRewards =
     [4316] = -- Armored Pisces
     {
         gil = 475,
-        items = 
+        items =
         {
             {chance = 0.4, itemId = 13736}, -- Stolid Breastplate
         }
@@ -455,7 +455,7 @@ local fishRewards =
 local function tradeFish(player, fishId)
     player:setCharVar("insideBellyFishId", fishId)
     player:setCharVar("insideBellyItemIdx", 0)
-    
+
     local rewards = fishRewards[fishId].items
     local roll = math.random(1000) / 10
     local found = false
@@ -470,7 +470,7 @@ local function tradeFish(player, fishId)
             break
         end
     end
-    
+
     if not found then
         player:startEvent(167)
     end
@@ -482,7 +482,7 @@ local function giveReward(player, csid)
         local itemIdx = player:getCharVar("insideBellyItemIdx")
         local reward  = fishRewards[fishId]
         local traded  = true
-                
+
         if itemIdx > 0 then
             local r = reward.items[itemIdx]
             local itemId = r.itemId
@@ -490,12 +490,12 @@ local function giveReward(player, csid)
             if r.min ~= nil and r.max ~= nil then
                 itemQt = math.random(r.min, r.max)
             end
-            
+
             if not npcUtil.giveItem(player, {{itemId, itemQt}}) then
                 traded = false
             end
         end
-        
+
         if traded then
             player:confirmTrade()
             player:addGil(GIL_RATE * reward.gil)
@@ -516,14 +516,14 @@ function onTrade(player,npc,trade)
     local underTheSea    = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
 
-    -- UNDER THE SEA    
+    -- UNDER THE SEA
     if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
         if math.random(100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
             player:startEvent(36) -- Ring not found...
         end
-        
+
     -- A BOY'S DREAM
     elseif player:getCharVar("aBoysDreamCS") == 5 and npcUtil.tradeHas(trade, 4562) then
         player:startEvent(85)
@@ -549,7 +549,7 @@ function onTrigger(player,npc)
     -- UNDER THE SEA
     if player:getCharVar("underTheSeaVar") == 3 then
         player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
-        
+
     -- INSIDE THE BELLY
     elseif mLvl >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
         player:startEvent(161)
@@ -580,7 +580,7 @@ function onEventFinish(player,csid,option)
         player:confirmTrade()
     elseif csid == 36 then
         player:confirmTrade()
-        
+
     -- A BOY'S DREAM
     elseif csid == 85 then
         npcUtil.giveKeyItem(player, tpz.ki.KNIGHTS_BOOTS)

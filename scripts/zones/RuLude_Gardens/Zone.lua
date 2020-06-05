@@ -15,18 +15,15 @@ end
 
 function onZoneIn(player, prevZone)
     local cs = -1
+
+    if player:getCurrentMission(COP) == tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG  and  player:getCharVar("PromathiaStatus") == 2 then
+        cs = 10047
+    end
+
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         position = math.random(1, 5) + 45
         player:setPos(position, 10, -73, 192)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    end
-
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG  and  player:getCharVar("PromathiaStatus") == 2 then
-        cs = 10047
     end
 
     return cs
@@ -82,9 +79,6 @@ function onEventFinish(player, csid, option)
         -- progress are recorded in the following two variables
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 1) -- MEMORIES_OF_A_MAIDEN--3-3B: Windurst Road
         player:setCharVar("EMERALD_WATERS_Status", 1) -- EMERALD_WATERS-- 3-3A: San d'Oria Road
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 10047 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)

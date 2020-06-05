@@ -2,7 +2,7 @@
 --  Thunder Breath
 --
 --  Description: Deals thunder damage to enemies within a fan-shaped area originating from the caster.
---  Type: Magical (Fire)
+--  Type: Magical (Thunder)
 --
 --
 ---------------------------------------------
@@ -11,7 +11,7 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
 function onMobSkillCheck(target,mob,skill)
-    if (target:isInDynamis()) then
+    if target:isInDynamis() or target:hasStatusEffect(tpz.effect.BATTLEFIELD)  then
         return 0
     end
     return 1

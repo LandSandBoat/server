@@ -96,7 +96,7 @@ function onUseAbility(player,target,ability,action)
             end
         end
     end
-    
+
     return stolen
 end
 

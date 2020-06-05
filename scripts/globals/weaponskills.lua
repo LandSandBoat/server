@@ -100,7 +100,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate critrates
     local critRate = 0
-    
+
     if (wsParams.canCrit) then -- Work out critical hit ratios
         local nativecrit = 0
         critrate = fTP(tp,wsParams.crit100,wsParams.crit200,wsParams.crit300)
@@ -146,7 +146,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if attacker:getMainJob() == tpz.job.THF then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
-        if calcParams.sneakApplicable then 
+        if calcParams.sneakApplicable then
             finaldmg = finaldmg +
                         (attacker:getStat(tpz.mod.DEX) * (1 + attacker:getMod(tpz.mod.SNEAK_ATK_DEX)/100) * calcParams.pdif) *
                         ((100+(attacker:getMod(tpz.mod.AUGMENTS_SA)))/100)
@@ -196,7 +196,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         finaldmg = finaldmg + souleaterBonus(attacker, (calcParams.tpHitsLanded+calcParams.extraHitsLanded))
     end
 
-    -- Factor in "all hits" bonus damage mods 
+    -- Factor in "all hits" bonus damage mods
     local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
     if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
         bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
@@ -219,7 +219,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     if (wsParams.ignoresDef == not nil and wsParams.ignoresDef == true) then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(tpz.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
-    local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef)
+    local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -298,7 +298,7 @@ end
     if (wsParams.ignoresDef == not nil and wsParams.ignoresDef == true) then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(tpz.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
-    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef)
+    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and params used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -392,7 +392,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         dmg = dmg * ftp
 
-        -- Factor in "all hits" bonus damage mods 
+        -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
             bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
@@ -638,9 +638,6 @@ function getRangedHitRate(attacker,target,capHitRate,bonus)
 end
 
 function fTP(tp,ftp1,ftp2,ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
     if (tp >= 1000 and tp < 2000) then
         return ftp1 + ( ((ftp2-ftp1)/1000) * (tp-1000))
     elseif (tp >= 2000 and tp <= 3000) then
@@ -662,13 +659,13 @@ function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-function cMeleeRatio(attacker, defender, params, ignoredDef)
+function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
 
     local flourisheffect = attacker:getStatusEffect(tpz.effect.BUILDING_FLOURISH)
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(tpz.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
-    local atkmulti = fTP(params.atk100, params.atk200, params.atk300)
+    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio = (attacker:getStat(tpz.mod.ATT) * atkmulti) / (defender:getStat(tpz.mod.DEF) - ignoredDef)
     cratio = utils.clamp(cratio, 0, 2.25)
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
@@ -761,9 +758,9 @@ function cMeleeRatio(attacker, defender, params, ignoredDef)
     return pdif, pdifcrit
 end
 
-function cRangedRatio(attacker, defender, params, ignoredDef)
+function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
-    local atkmulti = fTP(params.atk100, params.atk200, params.atk300)
+    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio = attacker:getRATT() / (defender:getStat(tpz.mod.DEF) - ignoredDef)
 
     local levelcor = 0
@@ -928,7 +925,7 @@ function getAlpha(level)
     elseif (level < 99) then
         alpha = 0.85
     else
-        alpha = 1 
+        alpha = 1
     end
     return alpha
 end

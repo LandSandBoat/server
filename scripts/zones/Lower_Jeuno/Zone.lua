@@ -31,18 +31,16 @@ function onZoneIn(player, prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(41.2, -5, 84, 85)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
+    if player:getCurrentMission(COP) == tpz.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
         player:setCharVar("PromathiaStatus", 1)
         cs = 70
     elseif ENABLE_ACP == 1 and player:getCurrentMission(ACP) == tpz.mission.id.acp.A_CRYSTALLINE_PROPHECY and player:getMainLvl() >=10 then
         cs = 10094
+    end
+
+    -- MOG HOUSE EXIT
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(41.2, -5, 84, 85)
     end
 
     return cs
@@ -101,7 +99,7 @@ function onGameHour(zone)
             npc:setStatus(0)
             npc:initNpcAi()
             npc:setPos(tpz.path.first(LOWER_JEUNO.lampPath))
-            npc:pathThrough(tpz.path.fromStart(LOWER_JEUNO.lampPath), bit.bor(tpz.path.flag.RUN, tpz.path.flag.WALLHACK))
+            npc:pathThrough(tpz.path.fromStart(LOWER_JEUNO.lampPath), bit.bor(tpz.path.flag.WALLHACK))
         end
 
     end
@@ -111,10 +109,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
-    elseif csid == 20 then
+    if csid == 20 then
         player:addCharVar("ZilartStatus", 2)
     elseif csid == 10094 then
         player:completeMission(ACP, tpz.mission.id.acp.A_CRYSTALLINE_PROPHECY)

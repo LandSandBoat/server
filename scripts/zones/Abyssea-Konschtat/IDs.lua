@@ -46,7 +46,7 @@ zones[tpz.zone.ABYSSEA_KONSCHTAT] =
     },
     npc =
     {
-        QM_POPS = 
+        QM_POPS =
         {
             --  [16839078] = { 'qm1', {2914},                                                                                                                                           {}, 16838718}, -- Ashtaerth The Gallvexed
             --  [16839079] = { 'qm2', {2911},                                                                                                                                           {}, 16838767}, -- Sarcophilus

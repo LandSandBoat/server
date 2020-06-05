@@ -46,7 +46,7 @@ function onEventUpdate(player,csid,option)
 end
 
 function onEventFinish(player,csid,option)
-    
+
     local diaryPage = player:getCharVar("DiaryPage")
 
     if option >= diaryPage then

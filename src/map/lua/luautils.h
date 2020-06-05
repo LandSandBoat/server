@@ -138,6 +138,8 @@ namespace luautils
     int32 SetRegionalConquestOverseers(uint8 regionID);                         // Update NPC Conquest Guard
     int32 setMobPos(lua_State*);                                                // set a mobs position (only if mob is not in combat)
 
+    int32 GetHealingTickDelay(lua_State* L);                                    // Returns the configured healing tick delay
+
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 

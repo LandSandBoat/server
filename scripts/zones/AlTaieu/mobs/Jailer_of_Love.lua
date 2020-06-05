@@ -35,7 +35,7 @@ function onMobFight(mob, target)
     -- spawn minions in 2.5 minute intervals
     if os.time() > mob:getLocalVar("pop_pets") then
         mob:setLocalVar("pop_pets", os.time() + 150)
-        
+
         local spawns = mob:getLocalVar("SPAWNS")
         if spawns < 8 then
             local minionOffset = ID.mob.JAILER_OF_LOVE + minionGroup[spawns]
@@ -65,7 +65,7 @@ function onMobFight(mob, target)
             elseif #phuaboUp == 1 then
                 numToSpawn = math.random(3)
             end
-            
+
             -- spawn sharks
             for i = 1, math.min(numToSpawn, #phuaboDn) do
                 SpawnMob(phuaboDn[i]):updateEnmity(target)

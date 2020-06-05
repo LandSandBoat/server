@@ -30,7 +30,7 @@ function onTrade(player,npc,trade)
         {2971, 5867}, -- inoshishinofuda
         {2972, 5868}, -- shikanofuda
         {2973, 5869}, -- chonofuda
-		
+
         {17301, 6299}, -- shuriken
         {17302, 6297}, -- juji shuriken
         {17303, 6298}, -- manji shuriken

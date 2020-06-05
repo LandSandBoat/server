@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -55,11 +55,11 @@ public:
 	lscolor_t	GetLSColor();
     uint16      GetLSRawColor();
     void        SetLSID(uint32 lsid);
-	void		SetLSColor(uint16 color);	
+	void		SetLSColor(uint16 color);
     virtual const int8* getSignature();
     virtual void setSignature(int8* signature);
     void        SetLSType(LSTYPE value);
-	
+
 private:
 
 };

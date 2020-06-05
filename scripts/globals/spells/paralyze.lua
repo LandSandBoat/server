@@ -18,7 +18,7 @@ function onSpellCast(caster, target, spell)
     -- Calculate potency.
     local potency = utils.clamp(math.floor(dMND / 4) + 15, 5, 25)
     potency = calculatePotency(potency, spell:getSkillType(), caster, target)
-    
+
     -- Calculate duration.
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 

@@ -12,11 +12,11 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)        
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[Central_Apollyon]UniqueID",os.time());
-    HideArmouryCrates(Central_Apollyon,APOLLYON_SE_NE);    
+    HideArmouryCrates(Central_Apollyon,APOLLYON_SE_NE);
     GetNPCByID(16933248):setAnimation(8);
-    if (GetMobByID():isSpawned(16933125)) then DespawnMob(16933125);end        
+    if (GetMobByID():isSpawned(16933125)) then DespawnMob(16933125);end
 end;
 
 -- Physically entering the BCNM via bcnmEnter(bcnmid)
@@ -27,7 +27,7 @@ end;
 
 -- Leaving  by every mean possible, given by the LeaveCode
 -- 3=Disconnected or warped out (if dyna is empty: launch 4 after 3)
--- 4=Finish 
+-- 4=Finish
 
 function onBattlefieldLeave(player,battlefield,leavecode)
     --print("leave code "..leavecode);

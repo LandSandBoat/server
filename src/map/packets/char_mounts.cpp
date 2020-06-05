@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -28,7 +28,7 @@
 #include "../entities/charentity.h"
 
 
-CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar) 
+CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar)
 {
     this->type = 0xAE;
     this->size = 0x06;

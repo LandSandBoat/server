@@ -18,12 +18,12 @@ end;
 -----------------------------------
 
 function onTrigger(player,npc)
-    local GateID =  npc:getID();  
+    local GateID =  npc:getID();
 
     -- print("GateID " ..GateID);
     -- player:PrintToPlayer(npc:getID());
-    
-    switch (GateID): caseof 
+
+    switch (GateID): caseof
     {
          -- 100-106 : Northern Tower
         [GATE_OFFSET] = function (x)
@@ -114,7 +114,7 @@ end;
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)  
+function onEventUpdate(player,csid,option)
 end;
 
 -----------------------------------

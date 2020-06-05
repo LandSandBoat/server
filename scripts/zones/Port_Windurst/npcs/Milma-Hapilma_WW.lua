@@ -6,7 +6,7 @@ require("scripts/globals/conquest")
 -------------------------------------
 
 local guardNation = tpz.nation.WINDURST
-local guardType   = tpz.conq.guard.CITY  
+local guardType   = tpz.conq.guard.CITY
 local guardEvent  = 32759
 
 function onTrade(player,npc,trade)

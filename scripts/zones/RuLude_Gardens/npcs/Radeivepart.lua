@@ -37,7 +37,7 @@ function onTrigger(player,npc)
         player:startEvent(159, 3, 0, 0, 0, 0, 0, 8);
     else
         -- Standard dialogue
-        player:startEvent(159); 
+        player:startEvent(159);
     end
 end;
 

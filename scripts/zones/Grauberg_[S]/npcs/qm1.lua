@@ -14,7 +14,7 @@ end;
 function onTrigger(player,npc)
     local tuw = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ);
     local tuwStatus = player:getCharVar("QuestStatus_DNC_AF1");
-    
+
     if (tuw == QUEST_ACCEPTED and tuwStatus == 2) then
         player:startEvent(12);
     elseif (tuw == QUEST_ACCEPTED and tuwStatus == 3 and not GetMobByID(ID.mob.MIGRATORY_HIPPOGRYPH):isSpawned()) then

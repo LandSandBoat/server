@@ -445,7 +445,7 @@ local function givePrize(player, ki)
                 end
             end
 
-            -- determine augments           
+            -- determine augments
             local addAug = {}
             if prize.augments ~= nil then
                 local pAug = prize.augments
@@ -490,7 +490,7 @@ function onTrigger(player,npc)
         (not player:hasKeyItem(tpz.ki.IVORY_KEY)     and  32 or 0) +
         (not player:hasKeyItem(tpz.ki.EBON_KEY)      and  64 or 0) +
         (not player:hasKeyItem(tpz.ki.PRISMATIC_KEY) and 128 or 0)
-        
+
     local arg2 =
         (not player:hasKeyItem(tpz.ki.WHITE_CORAL_KEY) and   2 or 0) +
         (not player:hasKeyItem(tpz.ki.BLUE_CORAL_KEY)  and   4 or 0) +
@@ -515,7 +515,7 @@ function onTrigger(player,npc)
         ((ENABLE_ASA == 0 or arg3 == 254) and 8 or 0) +
         ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
         ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
-    
+
     player:startEvent(10099,arg1,arg2,arg3,arg4,0,0,0,0)
 end
 

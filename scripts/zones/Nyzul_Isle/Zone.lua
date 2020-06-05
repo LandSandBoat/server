@@ -12,7 +12,7 @@ end
 
 function onInstanceZoneIn(player,instance)
     local cs = -1
-    
+
     local pos = player:getPos()
     if (pos.x == 0 and pos.y == 0 and pos.z == 0) then
         player:setPos(player:getInstance():getEntryPos());
@@ -20,7 +20,7 @@ function onInstanceZoneIn(player,instance)
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS) then
         cs = 51
     end
-    
+
     player:addTempItem(5348)
 
     return cs

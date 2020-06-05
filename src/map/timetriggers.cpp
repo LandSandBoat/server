@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -29,7 +29,7 @@ CTriggerHandler* CTriggerHandler::getInstance()
 {
     if (!_instance)
         _instance.reset(new CTriggerHandler);
-    
+
     return _instance.get();
 }
 

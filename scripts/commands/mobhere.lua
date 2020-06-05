@@ -32,7 +32,7 @@ function onTrigger(player, mobId, noDepop)
         end
     end
     mobId = targ:getID()
-    
+
     -- attempt to bring mob here
     SpawnMob( mobId )
     if (player:getZoneID() == targ:getZoneID()) then

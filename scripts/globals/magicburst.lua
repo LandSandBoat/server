@@ -52,7 +52,7 @@ function FormMagicBurst(ele, target)
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
+
     return 0, 0
 end
 
@@ -64,7 +64,7 @@ function MobFormMagicBurst(element, target)
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
+
     return 0, 0
 end
 

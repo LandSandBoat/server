@@ -368,7 +368,7 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     if (ele > 0 and ele <= 6 and target:hasStatusEffect(tpz.magic.barSpell[ele])) then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[ele]):getSubPower()
     end
-    mab = (100 + caster:getMod(tpz.mod.MATT)) / (100 + target:getMod(tpz.mod.MDEF) + mdefBarBonus) 
+    mab = (100 + caster:getMod(tpz.mod.MATT)) / (100 + target:getMod(tpz.mod.MDEF) + mdefBarBonus)
 
     dmg = math.floor(dmg * mab)
 

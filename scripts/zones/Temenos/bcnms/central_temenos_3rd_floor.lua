@@ -12,9 +12,9 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)    
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[C_Temenos_3rd]UniqueID",os.time());
-    HideArmouryCrates(Central_Temenos_3rd_Floor,TEMENOS);        
+    HideArmouryCrates(Central_Temenos_3rd_Floor,TEMENOS);
     HideTemenosDoor(Central_Temenos_3rd_Floor);
 end;
 
@@ -34,5 +34,5 @@ function onBattlefieldLeave(player,battlefield,leavecode)
     if leavecode == tpz.battlefield.leaveCode.LOST then
         SetServerVariable("[C_Temenos_3rd]UniqueID",0);
         player:setPos(580,-1.5,4.452,192);
-    end    
+    end
 end;

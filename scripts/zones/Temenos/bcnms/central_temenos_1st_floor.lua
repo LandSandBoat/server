@@ -12,9 +12,9 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)        
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[C_Temenos_1st]UniqueID",os.time());
-    HideArmouryCrates(Central_Temenos_1st_Floor,TEMENOS);        
+    HideArmouryCrates(Central_Temenos_1st_Floor,TEMENOS);
     HideTemenosDoor(Central_Temenos_1st_Floor);
 end;
 

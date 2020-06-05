@@ -150,7 +150,7 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.timeArriveDock = (uint16)Sql_GetIntData(SqlHandle, 14);
             zoneTown.ship.timeDepartDock = zoneTown.ship.timeArriveDock + (uint16)Sql_GetIntData(SqlHandle, 13);
             zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)Sql_GetIntData(SqlHandle, 15) - 1;
-            
+
 
             zoneTown.ship.state = STATE_TRANSPORT_INIT;
             zoneTown.ship.setVisible(false);
@@ -171,7 +171,7 @@ void CTransportHandler::InitializeTransport()
                 ShowError("Transport <%u>: time_interval must be > time_anim_arrive + time_waiting + time_anim_depart\n", (uint8)Sql_GetIntData(SqlHandle, 0));
                 continue;
             }
-            
+
             townZoneList.push_back(zoneTown);
         }
     }
@@ -228,7 +228,7 @@ void CTransportHandler::TransportTimer()
     for (uint32 i = 0; i < townZoneList.size(); ++i)
     {
         TransportZone_Town* townZone = &townZoneList.at(i);
- 
+
         shipTimerOffset = ((vanaTime - townZone->ship.timeOffset) % townZone->ship.timeInterval);
 
         if (townZone->ship.state == STATE_TRANSPORT_AWAY)
@@ -376,7 +376,7 @@ void CTransportHandler::TransportTimer()
 ************************************************************************/
 
 void CTransportHandler::insertElevator(Elevator_t elevator)
-{    
+{
     // check to see if this elevator already exists
     for (uint32 i = 0; i < ElevatorList.size(); ++i)
     {
@@ -401,7 +401,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     elevator.Elevator->name[8] = 8;
 
     //Initialize the elevator into the correct state based on
-    //its animation value in the database. 
+    //its animation value in the database.
     if (elevator.Elevator->animation == ANIMATION_ELEVATOR_DOWN)
         elevator.state = STATE_ELEVATOR_BOTTOM;
     else if (elevator.Elevator->animation == ANIMATION_ELEVATOR_UP)

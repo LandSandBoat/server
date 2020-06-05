@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -32,7 +32,7 @@ public:
 
 	CItemGeneral(uint16);
 	virtual ~CItemGeneral();
-	
+
 private:
 
 };

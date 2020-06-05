@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -62,7 +62,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     if (PChar->isNewPlayer())
         ref<uint8>(0x38) |= 0x08; // New player ?
 
-    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // +  управляем ростом: 0x02 - 0; 0x08 - 1; 0x10 - 2;
+    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + управляем ростом: 0x02 - 0; 0x08 - 1; 0x10 - 2;
     ref<uint8>(0x2C) = PChar->GetSpeed();
     ref<uint16>(0x2E) |= PChar->speedsub << 1;
     ref<uint8>(0x30) = PChar->m_event.EventID != -1 ? ANIMATION_EVENT : PChar->animation;
@@ -84,10 +84,10 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     //Status flag: bit 4: frozen anim (terror),
     //  bit 6/7/8 related to Ballista (6 set - normal, 7 set san d'oria, 6+7 set bastok, 8 set windurst)
     uint8 flag = (PChar->allegiance << 5);
-    
+
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
         flag |= 0x08;
-    
+
     ref<uint8>(0x36) = flag;
 
     uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();

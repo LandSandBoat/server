@@ -2903,7 +2903,7 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State *L)
     uint8  type = (uint8 )lua_tointeger(L, 1);
     uint32 bit  = 1 << (uint32)lua_tointeger(L, 2);
     uint8  set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
-    
+
     if ((type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL) && (lua_isnil(L, 3) || set > 3))
     {
         ShowError("Lua::addteleport : Attempt to index array out-of-bounds or parameter is nil.");
@@ -2934,7 +2934,7 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State *L)
 *  Function: getTeleport(uint8 type)
 *  Purpose : Returns bit mask or table for supplied type of teleport
 *  Example : player:getTeleport(tpz.teleport.type.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
@@ -2965,7 +2965,7 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
                 lua_rawseti(L, -2, x + 1);
             }
             break;
-        case TELEPORT_SURVIVAL: 
+        case TELEPORT_SURVIVAL:
             lua_newtable(L);
             for (uint8 x = 0; x < 4; x++)
             {
@@ -2984,7 +2984,7 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State *L)
 *  Function: hasTeleport(uint8 type, uint8 bit, uint8 set (optional))
 *  Purpose : Returns true if player has HP, false otherwise
 *  Example : player:hasTeleport(tpz.teleport.type.HOMEPOINT, bit, set)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
@@ -2999,7 +2999,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
     uint8 type = (uint8)lua_tointeger(L, 1);
     uint8 bit  = (uint8)lua_tointeger(L, 2);
     uint8 set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
-    
+
     if (type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL)
     {
         if (lua_isnil(L, 3) || set > 3)
@@ -3007,7 +3007,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
             ShowError("Lua::addTeleport : Attempt to index array out-of-bounds or parameter is nil.");
             return 0;
         }
-        
+
         if (type == TELEPORT_HOMEPOINT)
             lua_pushboolean(L, PChar->teleport.homepoint.access[set] & (1 << bit));
         else
@@ -3036,7 +3036,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State *L)
 *  Function: setTeleportMenu(uint8 type)
 *  Purpose : Store favorite homepoints or menu layout
 *  Example : player:setTeleportMenu(tpz.teleport.type.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
@@ -3053,7 +3053,7 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
         ShowError("LuaBaseEntity::setteleportMenu : Table not passed in Parameter 2.\n");
         return 0;
     }
-    
+
     if (type != TELEPORT_HOMEPOINT && type != TELEPORT_SURVIVAL)
     {
         ShowError("LuaBaseEntity::setteleportMenu : Incorrect value for Parameter 1.\n");
@@ -3081,7 +3081,7 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State *L)
 *  Function: getTeleportMenu(uint8)
 *  Purpose : Return lua table containing integer values for favs + layout
 *  Example : player:getTeleportMenu(tpz.teleport.teleport.HOMEPOINT)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getTeleportMenu(lua_State *L)
@@ -6345,7 +6345,7 @@ inline int32 CLuaBaseEntity::addMission(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 MissionID = (uint8)lua_tointeger(L, 2);
+    uint16 MissionID = (uint16)lua_tointeger(L, 2);
 
     if (missionLogID < MAX_MISSIONAREA && MissionID < MAX_MISSIONID)
     {
@@ -6388,13 +6388,13 @@ inline int32 CLuaBaseEntity::delMission(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 MissionID = (uint8)lua_tointeger(L, 2);
+    uint16 MissionID = (uint16)lua_tointeger(L, 2);
 
     if (missionLogID < MAX_MISSIONAREA && MissionID < MAX_MISSIONID)
     {
         CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-        auto current = (uint8)PChar->m_missionLog[missionLogID].current;
+        auto current = (uint16)PChar->m_missionLog[missionLogID].current;
         bool complete = (missionLogID == MISSION_COP || MissionID >= 64) ? false : PChar->m_missionLog[missionLogID].complete[MissionID];
 
         if (current == MissionID)
@@ -6436,11 +6436,11 @@ inline int32 CLuaBaseEntity::getCurrentMission(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
 
     uint8 missionLogID = (uint8)lua_tointeger(L, -1);
-    uint8 MissionID = 0;
+    uint16 MissionID = 0;
 
     if (missionLogID < MAX_MISSIONAREA)
     {
-        MissionID = (uint8)((CCharEntity*)m_PBaseEntity)->m_missionLog[missionLogID].current;
+        MissionID = (uint16)((CCharEntity*)m_PBaseEntity)->m_missionLog[missionLogID].current;
     }
     else
     {
@@ -6471,7 +6471,7 @@ inline int32 CLuaBaseEntity::hasCompletedMission(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 MissionID = (uint8)lua_tointeger(L, 2);
+    uint16 MissionID = (uint16)lua_tointeger(L, 2);
 
     bool complete = false;
 
@@ -6509,7 +6509,7 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 MissionID = (uint8)lua_tointeger(L, 2);
+    uint16 MissionID = (uint16)lua_tointeger(L, 2);
 
     if (missionLogID < MAX_MISSIONAREA && MissionID < MAX_MISSIONID)
     {
@@ -6537,6 +6537,106 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
         ShowError(CL_RED"Lua::completeMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, MissionID);
     }
     return 0;
+}
+
+/************************************************************************
+*  Function: setMissionLogEx()
+*  Purpose : Sets mission log extra data to correctly track progress in branching missions.
+*  Example : player:setMissionLogEx(tpz.mission.log_id.COP, tpz.mission.logEx.ULMIA, 14)
+*  Notes   : 
+************************************************************************/
+
+inline int32 CLuaBaseEntity::setMissionLogEx(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint8 missionLogID = (uint8)lua_tointeger(L, 1);
+    if (missionLogID >= MAX_MISSIONAREA)
+    {
+        ShowError(CL_RED"Lua::setMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        return 0;
+    }
+    int32 n = lua_gettop(L);
+    if (n == 3)
+    {
+        uint8 missionLogExPos = (uint8)lua_tointeger(L, 2);
+        if (missionLogExPos > 7)
+        {
+            ShowError(CL_RED"Lua::setMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+            return 0;
+        }
+        uint8 missionLogExValue = (uint8)lua_tointeger(L, 3);
+        if (missionLogExValue > 0xF)
+        {
+            ShowError(CL_RED"Lua::setMissionLogEx: value %i is invalid\n" CL_RESET, missionLogExValue);
+            return 0;
+        }
+        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
+        uint32 mask = ~(0xF << (4 * missionLogExPos));
+
+        logEx &= mask;
+        logEx |= missionLogExValue << (4 * missionLogExPos);
+        PChar->m_missionLog[missionLogID].logExLower = logEx;
+        PChar->m_missionLog[missionLogID].logExUpper = logEx >> 16;
+        PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
+    }
+    else if (n == 2)
+    {
+        uint32 missionLogExValue = (uint32)lua_tointeger(L, 2);
+        PChar->m_missionLog[missionLogID].logExLower = missionLogExValue;
+        PChar->m_missionLog[missionLogID].logExUpper = missionLogExValue >> 16;
+    }
+
+    charutils::SaveMissionsList(PChar);
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: getMissionLogEx()
+*  Purpose : Gets mission log extra data.
+*  Example : player:getMissionLogEx(tpz.mission.log_id.COP, tpz.mission.logEx.ULMIA)
+*  Notes   :  If arg2 isn't provided, the whole 32 bits are returned.
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getMissionLogEx(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint8 missionLogID = (uint8)lua_tointeger(L, 1);
+    if (missionLogID < MAX_MISSIONAREA)
+    {
+        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
+        if (lua_isnumber(L, 2))
+        {
+            uint8 missionLogExPos = (uint8)lua_tointeger(L, 2);
+            if (missionLogExPos > 7)
+            {
+                ShowError(CL_RED"Lua::getMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+                return 0;
+            }
+            lua_pushinteger(L, ((logEx >> (4 * missionLogExPos)) & 0xF));
+        }
+        else
+        {
+            lua_pushinteger(L, logEx);
+        }
+    }
+    else
+    {
+        ShowError(CL_RED"Lua::getMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        return 0;
+    }
+    return 1;
 }
 
 /************************************************************************
@@ -10279,10 +10379,17 @@ inline int32 CLuaBaseEntity::resetEnmity(lua_State *L)
 inline int32 CLuaBaseEntity::updateClaim(lua_State *L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == NULL);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        return 0;
+    }
 
-    //TPZ_DEBUG_BREAK_IF(lua_gettop(L) > 1);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    if (lua_isnil(L, 1) || !lua_isuserdata(L, 1))
+    {
+        static_cast<CMobEntity*>(m_PBaseEntity)->m_OwnerID.clean();
+        static_cast<CMobEntity*>(m_PBaseEntity)->updatemask |= UPDATE_STATUS;
+        return 0;
+    }
 
     CLuaBaseEntity* PEntity = Lunar<CLuaBaseEntity>::check(L, 1);
 
@@ -14168,7 +14275,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTeleport),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTeleportMenu),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTeleportMenu),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHomePoint),    
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHomePoint),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetPlayer),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,goToEntity),
@@ -14307,6 +14414,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentMission),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasCompletedMission),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,completeMission),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMissionLogEx),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMissionLogEx),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addAssault),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,delAssault),

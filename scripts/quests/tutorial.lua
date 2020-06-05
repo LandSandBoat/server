@@ -56,18 +56,18 @@ tpz.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
         elseif stage == 8 then
             player:startEvent(npc_event_offset + 11, 0, 0, nation_offset, 0, 0, 0, 0, 0)
         elseif stage == 9 then
-            player:startEvent(npc_event_offset + 12, 1500, 0, nation_offset, 0, 0, 0, 0, 0)
+            player:startEvent(npc_event_offset + 12, 800*EXP_RATE, 0, nation_offset, 0, 0, 0, 0, 0)
         elseif stage == 10 then
             if mLevel < 10 then
                 player:startEvent(npc_event_offset + 13, 0, 0, nation_offset, 0, 0, 0, 0, 0)
             else
-                player:startEvent(npc_event_offset + 14, 0, 1000, nation_offset, 0, 0, 0, 0, 0)
+                player:startEvent(npc_event_offset + 14, 0, 1000*GIL_RATE, nation_offset, 0, 0, 0, 0, 0)
             end
         elseif stage == 11 then
             if not player:hasKeyItem(tpz.ki.HOLLA_GATE_CRYSTAL + nation_offset) then
                 player:startEvent(npc_event_offset + 15, tpz.ki.HOLLA_GATE_CRYSTAL + nation_offset, 0, nation_offset, 0, 0, 0, 0, 0)
             else
-                player:startEvent(npc_event_offset + 16, tpz.ki.HOLLA_GATE_CRYSTAL + nation_offset, 2500, 1789, 3, 0, 0, 0, 0)
+                player:startEvent(npc_event_offset + 16, tpz.ki.HOLLA_GATE_CRYSTAL + nation_offset, 1000*EXP_RATE, 1789, 3, 0, 0, 0, 0)
             end
         end
     end
@@ -89,8 +89,18 @@ tpz.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, na
     elseif csid == (npc_event_offset + 4) then
         player:setCharVar("TutorialProgress", 4)
     elseif csid == (npc_event_offset + 6) then
-        if npcUtil.giveItem(player, {{4101, 1}, {936, 1}, {4358, 1}}) then
-            player:setCharVar("TutorialProgress", 5)
+        if player:getZoneID() == tpz.zone.WINDURST_WOODS then
+            if npcUtil.giveItem(player, {{4101, 1}, {4570, 1}, {4370, 1}}) then
+                player:setCharVar("TutorialProgress", 5)
+            end
+        elseif player:getZoneID() == tpz.zone.BASTOK_MARKETS then
+            if npcUtil.giveItem(player, {{4096, 1}, {926, 1}, {4370, 1}}) then
+                player:setCharVar("TutorialProgress", 5)
+            end
+        elseif player:getZoneID() == tpz.zone.SOUTHERN_SAN_DORIA then
+            if npcUtil.giveItem(player, {{4096, 1}, {936, 1}, {4358, 1}}) then
+                player:setCharVar("TutorialProgress", 5)
+            end
         end
     elseif csid == (npc_event_offset + 8) then
         npcUtil.giveKeyItem(player, tpz.ki.CONQUEST_PROMOTION_VOUCHER)
@@ -100,21 +110,21 @@ tpz.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, na
             player:setCharVar("TutorialProgress", 8)
         end
     elseif csid == (npc_event_offset + 12) then
-        player:addExp(1200 * EXP_RATE)
+        player:addExp(800 * EXP_RATE)
         player:setCharVar("TutorialProgress", 10)
     elseif csid == (npc_event_offset + 14) then
-        npcUtil.giveCurrency(player, 'gil', 1000)
+        npcUtil.giveCurrency(player, 'gil', 1000 * GIL_RATE)
         player:setCharVar("TutorialProgress", 11)
     elseif csid == (npc_event_offset + 16) then
         if npcUtil.giveItem(player, {{1789, 3}}) then
-            player:addExp(2500 * EXP_RATE)
+            player:addExp(1000*EXP_RATE)
             player:setCharVar("TutorialProgress", 0)
         end
     end
 end
 
 tpz.tutorial.onMobDeath = function(player)
-    if player:getCharVar("TutorialProgress") == 8 then
+    if player and player:getCharVar("TutorialProgress") == 8 then
         player:setCharVar("TutorialProgress", 9)
     end
 end

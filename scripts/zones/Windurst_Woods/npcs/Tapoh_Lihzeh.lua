@@ -77,7 +77,7 @@ function onEventFinish(player,csid,option)
             player:addGil(GIL_RATE*200)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*200)
         end
-        
+
         player:confirmTrade()
     end
 end

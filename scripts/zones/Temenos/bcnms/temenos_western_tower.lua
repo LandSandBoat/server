@@ -12,10 +12,10 @@ function onBattlefieldTick(battlefield, tick)
 end
 
 
-function onBattlefieldRegister(player,battlefield)    
+function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[Temenos_W_Tower]UniqueID",os.time());
-    HideArmouryCrates(Temenos_Western_Tower,TEMENOS);        
-    HideTemenosDoor(Temenos_Western_Tower);        
+    HideArmouryCrates(Temenos_Western_Tower,TEMENOS);
+    HideTemenosDoor(Temenos_Western_Tower);
 end;
 
 -- Physically entering the BCNM via bcnmEnter(bcnmid)

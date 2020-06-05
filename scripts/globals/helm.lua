@@ -1433,7 +1433,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         end
 
         local amkChance = 20
-        if 
+        if
             player:getCurrentMission(AMK) == tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
             broke ~= 1
         then

@@ -1,4 +1,4 @@
-/*
+﻿/*
  Formatting library for C++ - std::ostream support
 
  Copyright (c) 2012 - 2016, Victor Zverovich

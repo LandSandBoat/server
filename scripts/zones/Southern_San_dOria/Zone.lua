@@ -21,20 +21,18 @@ function onZoneIn(player, prevZone)
     local cs = -1
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if OPENING_CUTSCENE_ENABLE == 1 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 503
         end
         player:setPos(-96, 1, -40, 224)
         player:setHomePoint()
     end
+
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(161, -2, 161, 94)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
     end
+
     return cs
 end
 
@@ -58,9 +56,6 @@ end
 function onEventFinish(player, csid, option)
     if csid == 503 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 758 then
         player:setCharVar("COP_louverance_story", 3)
     end

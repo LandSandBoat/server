@@ -22,10 +22,10 @@ local limbusArmor =
     [1928] = {csid = 330, reward = 15576}, -- Omega's Hindleg   (Homam Cosciales)
     [1929] = {csid = 330, reward = 15661}, -- Omega's Tail      (Homam Gambieras)
 }
-             
+
 function onTrade(player,npc,trade)
     local armor = nil
-    
+
     for k, v in pairs(limbusArmor) do
         if npcUtil.tradeHasExactly(trade, k) then
             player:setLocalVar("wilhelmTrade", k)
@@ -51,7 +51,7 @@ function onEventFinish(player,csid,option)
         -- cheat prevention
         local info = limbusArmor[player:getLocalVar("wilhelmTrade")]
         player:setLocalVar("wilhelmTrade", 0)
-        
+
         if info and info.csid == csid and info.reward == option and npcUtil.giveItem(player, option) then
             player:confirmTrade()
         end

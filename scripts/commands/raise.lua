@@ -30,7 +30,7 @@ function onTrigger(player, arg1, arg2)
             target = arg1
         end
     end
-    
+
     -- validate power
     if (power == nil or power > 3) then
         power = 3

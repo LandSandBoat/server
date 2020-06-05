@@ -9,7 +9,7 @@ require("scripts/globals/keyitems");
 require("scripts/globals/bcnm");
 
 function onTrade(player,npc,trade)
-    
+
     if (TradeBCNM(player,npc,trade)) then
         return;
     end
@@ -30,7 +30,7 @@ function onEventUpdate(player,csid,option,extras)
 end;
 
 -----------------------------------
--- onEventFinish Action 
+-- onEventFinish Action
 -----------------------------------
 
 function onEventFinish(player,csid,option)

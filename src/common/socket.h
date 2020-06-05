@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2015 Darkstar Dev Teams
+﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
 #ifndef	_SOCKET_H_
 #define _SOCKET_H_
@@ -37,7 +37,7 @@
 /////////////////////////////////////////////////////////////////////
 #if defined(WIN32)
 /////////////////////////////////////////////////////////////////////
-// windows portability layer 
+// windows portability layer
 typedef int socklen_t;
 
 #define sErrno WSAGetLastError()
@@ -72,7 +72,7 @@ int sock2fd(SOCKET s);
 
 /// Inserts the socket into the global array of sockets.
 /// Returns a new fd associated with the socket.
-/// If there are too many sockets it closes the socket, sets an error and 
+/// If there are too many sockets it closes the socket, sets an error and
 //  returns -1 instead.
 /// Since fd 0 is reserved, it returns values in the range [1,FD_SETSIZE[.
 ///

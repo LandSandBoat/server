@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
                 [2] = { trionPos = {  -3,   -1,    4, 61}, playerPos = {   0,   -1,   10, 61} },
                 [3] = { trionPos = { 397,  198, -395, 64}, playerPos = { 399,  198, -381, 57} },
             }
-            
+
             -- spawn Warlord Rojnoj and its right and left hands.
             for i = instOffset + 0, instOffset + 2 do
                 SpawnMob(i)

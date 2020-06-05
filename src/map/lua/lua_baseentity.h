@@ -172,7 +172,7 @@ public:
     int32 setTeleportMenu(lua_State*);       // Set favorites or menu layout preferences for homepoints or survival guides
     int32 getTeleportMenu(lua_State*);       // Get favorites and menu layout preferences
     int32 setHomePoint(lua_State*);          // Sets character's homepoint
-    
+
     int32 resetPlayer(lua_State*);           // if player is stuck, GM command @resetPlayer name
 
     int32 goToEntity(lua_State*);            // Warps self to NPC or Mob; works across multiple game servers
@@ -308,6 +308,8 @@ public:
     int32 getCurrentMission(lua_State*);    // Gets the current mission
     int32 hasCompletedMission(lua_State*);  // Checks if mission has been completed
     int32 completeMission(lua_State*);      // Complete Mission
+    int32 setMissionLogEx(lua_State*);      // Sets mission log extra data to correctly track progress in branching missions.
+    int32 getMissionLogEx(lua_State*);      // Gets mission log extra data.
 
     int32 addAssault(lua_State*);           // Add Mission
     int32 delAssault(lua_State*);           // Delete Mission from Mission Log

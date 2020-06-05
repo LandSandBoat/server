@@ -68,7 +68,6 @@ struct map_config_t
     std::string mysql_database;     // mysql database -> default tpzdb
 
     std::string server_message;
-    std::string server_message_fr;
 
     uint32 max_time_lastupdate;       // max interval wait of last update player char
     int32  vanadiel_time_offset;      // смещение игрового времени относительно реального времени
@@ -79,6 +78,7 @@ struct map_config_t
     float  ah_tax_rate_single;        // Percent of listing price to tax single items
     float  ah_tax_rate_stacks;        // Percent of listing price to tax stacks
     uint32 ah_max_fee;                // Maximum total AH fees/taxes
+    uint32 ah_list_limit;             // Maximum open AH listings per player
 
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies
@@ -108,12 +108,15 @@ struct map_config_t
     float  mob_mp_multiplier;         // Multiplier for max MP pool of mob
     float  player_mp_multiplier;      // Multiplier for max MP pool of player
     float  sj_mp_divisor;             // Divisor to use on subjob max MP
+    int8   subjob_ratio;              // Modify ratio of subjob-to-mainjob
+    bool   include_mob_sj;            // Include mobs in effects of SJ ratio setting
     float  nm_stat_multiplier;        // Multiplier for str/vit/etc of NMs
     float  mob_stat_multiplier;       // Multiplier for str/vit/etc of mobs
     float  player_stat_multiplier;    // Multiplier for str/vit/etc. of NMs of player
     float  ability_recast_multiplier; // Adjust ability recast time
     int8   blood_pact_shared_timer;   // Default is 0. Disable/enable old school shared timer for SMN blood pacts.
     float  drop_rate_multiplier;      // Multiplier for drops
+    float  mob_gil_multiplier;        // Gil multiplier for gil normally dropped by mobs. (Does not stack with all_mobs_gil_bonus.)
     uint32 all_mobs_gil_bonus;        // Sets the amount of bonus gil (per level) all mobs will drop.
     uint32 max_gil_bonus;             // Maximum total bonus gil that can be dropped. Default 9999 gil.
     uint8  newstyle_skillups;         // Allows failed parries and blocks to trigger skill up chance.

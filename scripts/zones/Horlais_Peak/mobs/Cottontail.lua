@@ -6,8 +6,8 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobSpawn(mob) 
- 	mob:setMobMod(tpz.mobMod.CHARMABLE, 1)
+function onMobSpawn(mob)
+    mob:setMobMod(tpz.mobMod.CHARMABLE, 1)
 end
 
 function onMobDeath(mob, player, isKiller)

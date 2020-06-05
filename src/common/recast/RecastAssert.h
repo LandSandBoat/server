@@ -1,4 +1,4 @@
-//
+﻿//
 // Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 //
 // This software is provided 'as-is', without any express or implied
@@ -24,9 +24,9 @@
 
 #ifdef NDEBUG
 // From http://cnicholson.net/2009/02/stupid-c-tricks-adventures-in-assert/
-#	define rcAssert(x) do { (void)sizeof(x); } while((void)(__LINE__==-1),false)  
+#	define rcAssert(x) do { (void)sizeof(x); } while((void)(__LINE__==-1),false)
 #else
-#	include <assert.h> 
+#	include <assert.h>
 #	define rcAssert assert
 #endif
 

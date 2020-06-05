@@ -9,7 +9,7 @@ require("scripts/globals/keyitems");
 require("scripts/globals/bcnm");
 
 function onTrade(player,npc,trade)
-    
+
     if (TradeBCNM(player,npc,trade)) then
         return;
     end

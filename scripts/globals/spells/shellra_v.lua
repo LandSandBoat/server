@@ -11,7 +11,6 @@ function onMagicCastingCheck(caster,target,spell)
 end
 
 function onSpellCast(caster,target,spell)
-    local meritBonus = caster:getMerit(tpz.merit.SHELLRA_V)
     local power = 29 -- according to bg-wiki
 
     local duration = calculateDuration(1800, spell:getSkillType(), spell:getSpellGroup(), caster, target, false)

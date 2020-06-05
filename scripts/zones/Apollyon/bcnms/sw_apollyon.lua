@@ -15,7 +15,7 @@ end
 function onBattlefieldRegister(player,battlefield)
     SetServerVariable("[SW_Apollyon]UniqueID",os.time());
     HideArmouryCrates(SW_Apollyon,APOLLYON_NW_SW);
-    SetServerVariable("[SW_Apollyon]MimicTrigger",0);    
+    SetServerVariable("[SW_Apollyon]MimicTrigger",0);
     SetServerVariable("[SW_Apollyon]ElementalTrigger",0);
 end;
 

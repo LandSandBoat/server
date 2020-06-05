@@ -26,7 +26,7 @@ function onTrigger(player, mobId, despawntime, respawntime)
         error(player, "Invalid mob ID.")
         return
     end
-    
+
     -- validate despawntime
     if (despawntime ~= nil and despawntime < 0) then
         error(player, "Invalid despawn time.")

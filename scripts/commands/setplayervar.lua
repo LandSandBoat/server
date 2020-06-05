@@ -28,13 +28,13 @@ function onTrigger(player, target, variable, value)
             return
         end
     end
-    
+
     -- validate var
     if (variable == nil) then
         error(player, "You must provide a variable name.")
         return
     end
-    
+
     -- validate value
     if (value == nil) then
         error(player, "You must provide a value.")

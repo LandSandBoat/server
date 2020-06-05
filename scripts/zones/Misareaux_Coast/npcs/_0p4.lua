@@ -14,7 +14,7 @@ end;
 
 function onTrigger(player,npc)
     local cop = player:getCurrentMission(COP);
-    
+
     if (cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and not GetMobByID(ID.mob.BOGGELMANN):isSpawned() and player:getCharVar("COP_Boggelmann_KILL") == 0) then
         SpawnMob(ID.mob.BOGGELMANN):updateClaim(player);
     elseif (cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("COP_Boggelmann_KILL") == 1) then

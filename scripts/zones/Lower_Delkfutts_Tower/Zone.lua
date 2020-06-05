@@ -27,7 +27,7 @@ function onZoneIn(player, prevZone)
     end
     if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") <= 1 then
         cs = 15
-    elseif ENABLE_COP == 1 and prevZone == tpz.zone.QUFIM_ISLAND and player:getCurrentMission(COP) == tpz.mission.id.cop.ANCIENT_FLAMES_BECKON then
+    elseif ENABLE_COP == 1 and prevZone == tpz.zone.QUFIM_ISLAND and player:getCurrentMission(COP) < tpz.mission.id.cop.THE_RITES_OF_LIFE then
         cs = 22
     elseif player:getCurrentMission(ACP) == tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == tpz.zone.QUFIM_ISLAND then
         cs = 34

@@ -9,6 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
+local ID = require("scripts/zones/Throne_Room/IDs")
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -17,6 +18,10 @@ function onMobSpawn(mob)
             {id = tpz.jsa.BLOOD_WEAPON, hpp = math.random(20, 50)},
         },
     })
+    local battlefield = mob:getBattlefield()
+    if GetMobByID(ID.mob.ZEID_BCNM_OFFSET + (battlefield:getArea() - 1) * 4):isDead() then
+       battlefield:setLocalVar("phaseChange", 0)
+    end
 end
 
 function onMobFight(mob, target)
@@ -30,7 +35,6 @@ function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
-    mob:getBattlefield():setLocalVar("loot", 0)
     DespawnMob(mob:getID()+1)
     DespawnMob(mob:getID()+2)
 end

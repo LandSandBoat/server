@@ -85,7 +85,7 @@ function onUseAbility(player,target,ability)
     if (pet:getHP() < pet:getMaxHP()) then -- sleep is only removed if it heals the wyvern
         removeSleepEffects(pet)
     end
-    
+
     -- Empathy copying
     local empathyTotal = player:getMerit(tpz.merit.EMPATHY)
     if empathyTotal > 0 then

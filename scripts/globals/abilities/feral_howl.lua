@@ -35,7 +35,7 @@ function onUseAbility(player,target,ability)
     -- Leaving potency at 1 since I am not sure it applies with this ability... no known way to increase resistance
     local potency = 1
     --printf("Potency : %u",potency)
-    
+
     -- Grabbing variables for terror accuracy. Unknown if ability is stat based. Using Beastmaster's level versus Target's level
     local pLvl = player:getMainLvl()
     --printf("player level : %u",pLvl)
@@ -67,7 +67,7 @@ function onUseAbility(player,target,ability)
             --printf("Duration post resist : %u",duration)
         end
     end
-    
+
     -- execute ability based off of resistance value space reserved for resist message
     if resist <= 90 then -- still experimental. not exactly sure how to calculate hit %
         target:addStatusEffect(tpz.effect.TERROR,potency,0,duration)

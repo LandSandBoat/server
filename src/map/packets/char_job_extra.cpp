@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -41,7 +41,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         job = PChar->GetMJob();
     else
         job = PChar->GetSJob();
-    
+
     ref<uint8>(0x04) = job;
     if (!mjob)
     {

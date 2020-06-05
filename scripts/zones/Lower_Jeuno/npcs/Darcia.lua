@@ -25,7 +25,7 @@ function onTrigger(player,npc)
     local turnOffOptionToPay    = 16
     local turnOffAskingForWork  = 32
 
-    if not ENABLE_SOA then
+    if ENABLE_SOA == 0 then
         player:startEvent(10124)
     elseif rumorsFromTheWest then
         player:startEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
@@ -64,7 +64,7 @@ function onEventFinish(player,csid,option)
         player:setCharVar("SOA_1_CS1", 0)
         player:setCharVar("SOA_1_CS2", 0)
         player:setCharVar("SOA_1_CS3", 0)
-        
+
         if option == 2 then player:delGil(1000000) end
 
         player:delKeyItem(tpz.ki.GEOMAGNETRON)

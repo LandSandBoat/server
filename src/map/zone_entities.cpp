@@ -171,7 +171,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 
     // force all mobs in a burning circle to link
     ZONETYPE zonetype = m_zone->GetType();
-    bool forceLink = zonetype == ZONETYPE_BATTLEFIELD || zonetype == ZONETYPE_DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
+    bool forceLink = zonetype == ZONETYPE_DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
     {
@@ -213,7 +213,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
                 //The player talked to one of the guys on the boat, and the event target is wrong.
                 //This leads to the wrong script being loaded and you get stuck on a black screen
                 //instead of loading into the port.
-                
+
                 //Attempt to load the proper script
                 PCurrentChar->m_event.Target = nullptr;
                 size_t deleteStart = PCurrentChar->m_event.Script.find("npcs/");
@@ -224,7 +224,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
             }
             luautils::OnTransportEvent(PCurrentChar, zone);
         }
-            
+
     }
 }
 
@@ -285,6 +285,8 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+
+    PChar->PClaimedMob = nullptr;
 
     //remove pets
     if (PChar->PPet != nullptr)

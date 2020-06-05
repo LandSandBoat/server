@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2015 Darkstar Dev Teams
+﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 #ifndef _ZLIB_H
 #define _ZLIB_H
 
