@@ -771,6 +771,7 @@ tpz.effect =
     NEGATE_CURSE             = 609,
     NEGATE_CHARM             = 610,
     MAGIC_EVASION_BOOST_II   = 611,
+    RAMPART                  = 623,
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     -- Purchased from Cruor Prospector
