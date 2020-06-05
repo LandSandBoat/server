@@ -290,37 +290,44 @@ void CZone::LoadZoneLines()
     }
 }
 
-/************************************************************************
-*                                                                       *
-*  Загружаем параметры погоды                                           *
-*                                                                       *
-************************************************************************/
+/*************************************************************************
+*                                                                        *
+*  Loads weather for the zone from zone_bweather SQL Table               *
+*                                                                        *
+*  Weather is a rotating pattern of 2160 vanadiel days for each zone.    *
+*  It's stored as a blob of 2160 16-bit values, each representing 1 day  *
+*  starting from day 0 and storing 3 5-bit weather values each.          *
+*                                                                        *
+*              0        00000       00000        00000                   *
+*              ^        ^^^^^       ^^^^^        ^^^^^                   *
+*          padding      normal      common       rare                    *
+*                                                                        *
+*************************************************************************/
 
 void CZone::LoadZoneWeather()
 {
     static const char* Query =
-        "SELECT "
-        "weather_day,"
-        "normal,"
-        "common,"
-        "rare "
-        "FROM zone_weather "
-        "WHERE zoneid = %u "
-        "ORDER BY weather_day";
+        "SELECT weather FROM zone_weather WHERE zone = %u;";
 
     int32 ret = Sql_Query(SqlHandle, Query, m_zoneID);
-
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-        {
-            m_WeatherVector.insert(std::make_pair((uint16)Sql_GetUIntData(SqlHandle, 0), zoneWeather_t(Sql_GetIntData(SqlHandle, 1),
-                Sql_GetIntData(SqlHandle, 2), Sql_GetIntData(SqlHandle, 3))));
-        }
+            Sql_NextRow(SqlHandle);
+            auto weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
+            for(uint16 i = 0; i < WEATHER_CYCLE; i++)
+            {
+                if(weatherBlob[i])
+                {
+                    uint8 w_normal = static_cast<uint8>( weatherBlob[i] >> 10);
+                    uint8 w_common = static_cast<uint8>((weatherBlob[i] >> 5) & 0x1F);
+                    uint8 w_rare   = static_cast<uint8>( weatherBlob[i] & 0x1F);
+                    m_WeatherVector.insert(std::make_pair(i, zoneWeather_t(w_normal, w_common, w_rare)));
+                }
+            }
     }
     else
     {
-        ShowFatalError(CL_RED"CZone::LoadZoneWeather: Cannot load zone weather (%u)\n" CL_RESET, m_zoneID);
+        ShowFatalError(CL_RED"CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!\n" CL_RESET, m_zoneID);
     }
 }
 
