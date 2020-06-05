@@ -196,8 +196,10 @@ TIMETYPE CVanaTime::SyncTime()
     m_vHour = (uint32)((m_vanaDate % VTIME_DAY)   / VTIME_HOUR);
     m_vMin  = (uint32)( m_vanaDate % VTIME_HOUR);
 
-    if (m_vMin == 0)
+    static int8 lastTickedHour = m_vHour;
+    if (m_vHour == (lastTickedHour+1)%24)
     {
+        lastTickedHour = m_vHour;
         switch (m_vHour)
         {
             case  0: m_TimeType = TIME_NIGHT;   return TIME_MIDNIGHT;

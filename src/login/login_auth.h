@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -42,7 +42,9 @@
 #define LOGIN_REQUEST_NEW_PASSWORD       0x05
 
 #define LOGIN_ERROR                      0x02
-#define LOGIN_ERROR_CREATE               0x04
+#define LOGIN_ERROR_CREATE               0x09
+#define LOGIN_ERROR_CREATE_TAKEN         0x04
+#define LOGIN_ERROR_CREATE_DISABLED      0x08
 #define LOGIN_ERROR_CHANGE_PASSWORD      0x07
 
 extern int32 login_fd;
