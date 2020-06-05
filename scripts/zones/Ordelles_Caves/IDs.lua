@@ -56,6 +56,7 @@ zones[tpz.zone.ORDELLES_CAVES] =
         POLEVIK             = 17568134,
         DARK_PUPPET_OFFSET  = 17568135,
         APPARATUS_ELEMENTAL = 17568139,
+        AROMA_LEECH         = 17568140,
     },
     npc =
     {

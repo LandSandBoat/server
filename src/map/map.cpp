@@ -944,13 +944,13 @@ int32 map_config_default()
     map_config.mysql_database = "tpzdb";
     map_config.mysql_port = 3306;
     map_config.server_message = "";
-    map_config.server_message_fr = "";
     map_config.buffer_size = 1800;
     map_config.ah_base_fee_single = 1;
     map_config.ah_base_fee_stacks = 4;
     map_config.ah_tax_rate_single = 1.0;
     map_config.ah_tax_rate_stacks = 0.5;
     map_config.ah_max_fee = 10000;
+    map_config.ah_list_limit = 7;
     map_config.exp_rate = 1.0f;
     map_config.exp_loss_rate = 1.0f;
     map_config.exp_retain = 0.0f;
@@ -976,6 +976,8 @@ int32 map_config_default()
     map_config.mob_mp_multiplier = 1.0f;
     map_config.player_mp_multiplier = 1.0f;
     map_config.sj_mp_divisor = 2.0f;
+    map_config.subjob_ratio = 1;
+    map_config.include_mob_sj = false;
     map_config.nm_stat_multiplier = 1.0f;
     map_config.mob_stat_multiplier = 1.0f;
     map_config.player_stat_multiplier = 1.0f;
@@ -986,6 +988,7 @@ int32 map_config_default()
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
     map_config.drop_rate_multiplier = 1.0f;
+    map_config.mob_gil_multiplier = 1.0f;
     map_config.all_mobs_gil_bonus = 0;
     map_config.max_gil_bonus = 9999;
     map_config.Battle_cap_tweak = 0;
@@ -1103,6 +1106,10 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.ah_max_fee = atoi(w2);
         }
+        else if (strcmp(w1, "ah_list_limit") == 0)
+        {
+            map_config.ah_list_limit = atoi(w2);
+        }
         else if (strcmp(w1, "exp_rate") == 0)
         {
             map_config.exp_rate = (float)atof(w2);
@@ -1155,6 +1162,14 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.sj_mp_divisor = (float)atof(w2);
         }
+        else if (strcmp(w1, "subjob_ratio") == 0)
+        {
+            map_config.subjob_ratio = atoi(w2);
+        }
+        else if (strcmp(w1, "include_mob_sj") == 0)
+        {
+            map_config.include_mob_sj = atoi(w2);
+        }
         else if (strcmp(w1, "nm_stat_multiplier") == 0)
         {
             map_config.nm_stat_multiplier = (float)atof(w2);
@@ -1178,6 +1193,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "drop_rate_multiplier") == 0)
         {
             map_config.drop_rate_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "mob_gil_multiplier") == 0)
+        {
+            map_config.mob_gil_multiplier = (float)atof(w2);
         }
         else if (strcmp(w1, "all_mobs_gil_bonus") == 0)
         {
@@ -1371,30 +1390,10 @@ int32 map_config_read(const int8* cfgName)
 
     fclose(fp);
 
-    // Load the French server message..
-    fp = fopen("./conf/server_message_fr.conf", "rb");
-    if (fp == nullptr)
-    {
-        ShowError("Could not read English server message from: ./conf/server_message_fr.conf\n");
-        return 1;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        string_t sline(line);
-        map_config.server_message_fr += sline;
-    }
-
-    fclose(fp);
-
     // Ensure both messages have nullptr terminates..
     if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
     {
         map_config.server_message += (char)0x00;
-    }
-    if (map_config.server_message_fr.at(map_config.server_message_fr.length() - 1) != 0x00)
-    {
-        map_config.server_message_fr += (char)0x00;
     }
 
     return 0;

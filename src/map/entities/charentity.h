@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define MAX_QUESTAREA	 11
 #define MAX_QUESTID     256
 #define MAX_MISSIONAREA	 15
-#define MAX_MISSIONID    226
+#define MAX_MISSIONID    851
 
 class CItemWeapon;
 class CTrustEntity;

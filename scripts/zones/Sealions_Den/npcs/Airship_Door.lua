@@ -14,7 +14,8 @@ function onTrigger(player, npc)
 end
 
 function onEventUpdate(player, csid, option)
-    local inst = player:getCharVar("bcnm_instanceid")
+    local battlefield = player:getBattlefield()
+    local inst = battlefield:getArea()
 
     -- spawn omega for given instance
     if csid == 1 and option == 0 then
@@ -28,6 +29,7 @@ function onEventUpdate(player, csid, option)
         local ultimaId = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1)) + 6
         if ultimaId and not GetMobByID(ultimaId):isSpawned() then
             SpawnMob(ultimaId)
+            battlefield:setLocalVar("phaseChange", 0)
         end
     end
 end

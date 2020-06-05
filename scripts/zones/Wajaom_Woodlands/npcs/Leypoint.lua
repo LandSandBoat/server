@@ -24,9 +24,7 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.PLACE_HYDROGAUGE,2341); -- You set the <item> in the trench.
             player:tradeComplete(); --Trade Complete
             player:setCharVar("NavigatingtheUnfriendlySeas",3)
-            player:setCharVar("Leypoint_waitJTime",getMidnight()); -- Time Set for 1 day real life time.
-            -- printf("Midnight: %u",getMidnight());
-            -- printf("Os: %u",os.time());
+            player:setCharVar("Leypoint_waitJTime", os.time() + 60); -- Wait 60 seconds.
         end
     end
 end;

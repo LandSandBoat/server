@@ -136,10 +136,6 @@ void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity * PChar)
     add_on_scenarios += PChar->m_missionLog[MISSION_ASA].current << 0x08;
     // Not perfect, but they display and missions DO progress. Can fix properly later. There is a delay before when the menu updates. Zoning will force it.
 
-    uint32 chains = 0;
-    chains = PChar->m_missionLog[MISSION_COP].current + 1;
-    chains = ((chains * 0x08) + 0x60);
-
     uint32 soa = (PChar->m_missionLog[MISSION_SOA].current * 2) + 0x6E;
     uint32 rov = PChar->m_missionLog[MISSION_ROV].current + 0x6C;
 
@@ -149,7 +145,8 @@ void CQuestMissionLogPacket::generateCurrentMissionPacket(CCharEntity * PChar)
     ref<uint16>(0x0C) = PChar->m_missionLog[MISSION_ZILART].current;          // Rise of the Zilart
 
     // But for COP, Add-On Scenarios, SOA, and ROV, sending the current mission will also update that log's completed missions.
-    ref<uint32>(0x10) = chains;												// Chains of Promathia Missions
+    ref<uint32>(0x10) = PChar->m_missionLog[MISSION_COP].current;             // Chains of Promathia Missions
+    ref<uint32>(0x14) = (PChar->m_missionLog[MISSION_COP].logExUpper << 16) | PChar->m_missionLog[MISSION_COP].logExLower;
     //ref<uint8>(data,(0x16)) = 0x30;                                                // назначение неизвестно
     ref<uint16>(0x18) = add_on_scenarios;                                     // A Crystalline Prophecy, A Moogle Kupo d'Etat, A Shantotto Ascension
     ref<uint16>(0x1C) = soa;                                                  // Seekers of Adoulin

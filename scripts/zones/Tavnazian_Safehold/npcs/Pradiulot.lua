@@ -32,6 +32,8 @@ function onEventFinish(player,csid,option)
         player:setCharVar("UnforgivenVar", 2)
         player:addKeyItem(tpz.ki.MAP_OF_TAVNAZIA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_TAVNAZIA) -- Map of Tavnazia
+        player:addExp(2000 * EXP_RATE)
+        player:addGil(2000 * GIL_RATE)
         player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 206 then
         player:setCharVar("UnforgivenVar", 0)

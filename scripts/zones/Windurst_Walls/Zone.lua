@@ -18,19 +18,18 @@ end
 
 function onZoneIn(player, prevZone)
     local cs = -1
-    -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) - 123
-        player:setPos(-257.5, -5.05, position, 0)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") and player:getGMLevel() == 0 then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    elseif ENABLE_ASA == 1 and player:getCurrentMission(ASA) == tpz.mission.id.asa.A_SHANTOTTO_ASCENSION
+
+    if ENABLE_ASA == 1 and player:getCurrentMission(ASA) == tpz.mission.id.asa.A_SHANTOTTO_ASCENSION
         and (prevZone == tpz.zone.WINDURST_WATERS or prevZone == tpz.zone.WINDURST_WOODS) and player:getMainLvl()>=10 then
         cs = 510
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") == 4 then
         cs = 443
+    end
+
+    -- MOG HOUSE EXIT
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        local position = math.random(1, 5) - 123
+        player:setPos(-257.5, -5.05, position, 0)
     end
 
     return cs
@@ -58,9 +57,6 @@ end
 function onEventFinish(player, csid, option)
     if csid == 86 then
         player:setPos(0, 0, -22.40, 192, 242)
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 510 then
         player:startEvent(514)
     elseif csid == 514 then

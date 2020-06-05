@@ -10,24 +10,29 @@ zones[tpz.zone.QUICKSAND_CAVES] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6388, -- Obtained: <item>.
-        GIL_OBTAINED            = 6389, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY = 6402, -- There is nothing out of the ordinary here.
-        SENSE_OF_FOREBODING     = 6403, -- You are suddenly overcome with a sense of foreboding...
-        NOW_IS_NOT_THE_TIME     = 6404, -- Now is not the time for that!
-        FELLOW_MESSAGE_OFFSET   = 6417, -- I'm ready. I suppose.
-        CONQUEST_BASE           = 7049, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET  = 7208, -- You can't fish here.
-        CHEST_UNLOCKED          = 7316, -- You unlock the chest!
-        DOOR_FIRMLY_SHUT        = 7324, -- The door is firmly shut.
-        POOL_OF_WATER           = 7356, -- It is a pool of water.
-        YOU_FIND_NOTHING        = 7359, -- You find nothing.
-        SOMETHING_IS_BURIED     = 7364, -- Something is buried in this fallen pillar.
-        SENSE_OMINOUS_PRESENCE  = 7368, -- You sense an ominous presence...
-        REGIME_REGISTERED       = 10362, -- New training regime registered!
-        HOMEPOINT_SET           = 11424, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED   = 6382, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED             = 6388, -- Obtained: <item>.
+        GIL_OBTAINED              = 6389, -- Obtained <number> gil.
+        KEYITEM_OBTAINED          = 6391, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY   = 6402, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING       = 6403, -- You are suddenly overcome with a sense of foreboding...
+        NOW_IS_NOT_THE_TIME       = 6404, -- Now is not the time for that!
+        FELLOW_MESSAGE_OFFSET     = 6417, -- I'm ready. I suppose.
+        CONQUEST_BASE             = 7049, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET    = 7208, -- You can't fish here.
+        CHEST_UNLOCKED            = 7316, -- You unlock the chest!
+        DOOR_FIRMLY_SHUT          = 7324, -- The door is firmly shut.
+        POOL_OF_WATER             = 7356, -- It is a pool of water.
+        YOU_FIND_NOTHING          = 7359, -- You find nothing.
+        SOMETHING_IS_BURIED       = 7364, -- Something is buried in this fallen pillar.
+        SENSE_OMINOUS_PRESENCE    = 7368, -- You sense an ominous presence...
+        PLAYER_OBTAINS_ITEM       = 8276,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM     = 8277,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM  = 8278,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP      = 8279,  -- You already possess that temporary item.
+        NO_COMBINATION            = 8284,  -- You were unable to enter a combination.
+        REGIME_REGISTERED         = 10362, -- New training regime registered!
+        HOMEPOINT_SET             = 11424, -- Home point set!
     },
     mob =
     {
@@ -91,6 +96,7 @@ zones[tpz.zone.QUICKSAND_CAVES] =
             [3] = {479.000, -14.000, -815.000},
             [4] = {814.000, -14.000, -761.000}
         },
+        CASKET_BASE            = 17629663,
         ORNATE_DOOR_OFFSET     = 17629685,
         CHAINS_THAT_BIND_US_QM = 17629738,
         TREASURE_COFFER        = 17629739,

@@ -44,6 +44,171 @@ tpz.magic.spellGroup =
 }
 
 ------------------------------------
+-- Spell Families
+------------------------------------
+
+tpz.magic.spellFamily =
+{
+    NONE               = 0,
+    CURE               = 1,
+    CURAGA             = 2,
+    RAISE              = 3,
+    NA                 = 4,
+    HOLY               = 5,
+    DIA                = 6,
+    BANISH             = 7,
+    DIAGA              = 8,
+    BANISHGA           = 9,
+    PROTECT            = 10,
+    SHELL              = 11,
+    SLOW               = 12,
+    HASTE              = 13,
+    PARALYZE           = 14,
+    ELE_BAR            = 15,
+    ELE_BAR_RA         = 16,
+    STATUS_BAR         = 17,
+    STATUS_BAR_RA      = 18,
+    RECALL             = 19,
+    CURA               = 20,
+    ENFIRE             = 21,
+    ENBLIZZARD         = 22,
+    ENAERO             = 23,
+    ENSTONE            = 24,
+    ENTHUNDER          = 25,
+    ENWATER            = 26,
+    PHALANX            = 27,
+    REGEN              = 28,
+    REFRESH            = 29,
+    SANDSTORM          = 30,
+    RAINSTORM          = 31,
+    WINDSTORM          = 32,
+    FIRESTORM          = 33,
+    HAILSTORM          = 34,
+    THUNDERSTORM       = 35,
+    VOIDSTORM          = 36,
+    AURORASTORM        = 37,
+    TELEPORT           = 38,
+    PROTECTRA          = 39,
+    SHELLRA            = 40,
+    RERAISE            = 41,
+    FIRE               = 42,
+    BLIZZARD           = 43,
+    AERO               = 44,
+    STONE              = 45,
+    THUNDER            = 46,
+    WATER              = 47,
+    FIRAGA             = 48,
+    BLIZZAGA           = 49,
+    AEROGA             = 50,
+    STONEGA            = 51,
+    THUNDAGA           = 52,
+    WATERGA            = 53,
+    FLARE              = 54,
+    FREEZE             = 55,
+    TORNADO            = 56,
+    QUAKE              = 57,
+    BURST              = 58,
+    FLOOD              = 59,
+    GRAVITY            = 60,
+    METEOR             = 61,
+    POISON             = 62,
+    POISONGA           = 63,
+    BIO                = 64,
+    ELE_DOT            = 65,
+    ABSORB             = 66,
+    DRAIN              = 67,
+    ASPIR              = 68,
+    SPIKES             = 69,
+    STATUS             = 70,
+    SLEEP              = 71,
+    BLIND              = 72,
+    WARP               = 73,
+    TRACTOR            = 74,
+    SLEEPGA            = 75,
+    GEOHELIX           = 76,
+    HYDROHELIX         = 77,
+    ANEMOHELIX         = 78,
+    PYROHELIX          = 79,
+    CRYOHELIX          = 80,
+    IONOHELIX          = 81,
+    NOCTOHELIX         = 82,
+    LUMINOHELIX        = 83,
+    ADDLE              = 84,
+    SPIRIT             = 85,
+    AVATAR             = 86,
+    ANIMUS             = 87,
+    ENLIGHT            = 88,
+    ENDARK             = 89,
+    KATON              = 90,
+    HYOTON             = 91,
+    HUTON              = 92,
+    DOTON              = 93,
+    RAITON             = 94,
+    SUITON             = 95,
+    UTSUSEMI           = 96,
+    JUBAKU             = 97,
+    HOJO               = 98,
+    KURAYAMI           = 99,
+    DOKUMORI           = 100,
+    TONKO              = 101,
+    STATUS_GA          = 102,
+    FOE_REQUIEM        = 103,
+    HORDE_LULLABY      = 104,
+    ARMYS_PAEON        = 105,
+    MAGES_BALLAD       = 106,
+    KNIGHTS_MINNE      = 107,
+    VALOR_MINUET       = 108,
+    MADRIGAL           = 109,
+    PRELUDE            = 110,
+    MAMBO              = 111,
+    OPERETTA           = 112,
+    MARCH              = 113,
+    ELEGY              = 114,
+    STR_ETUDE          = 115,
+    DEX_ETUDE          = 116,
+    VIT_ETUDE          = 117,
+    AGI_ETUDE          = 118,
+    INT_ETUDE          = 119,
+    MND_ETUDE          = 120,
+    CHR_ETUDE          = 121,
+    FIRE_CAROL         = 122,
+    ICE_CAROL          = 123,
+    WIND_CAROL         = 124,
+    EARTH_CAROL        = 125,
+    LIGHTNING_CAROL    = 126,
+    WATER_CAROL        = 127,
+    LIGHT_CAROL        = 128,
+    DARK_CAROL         = 129,
+    FIRE_THRENODY      = 130,
+    ICE_THRENODY       = 131,
+    WIND_THRENODY      = 132,
+    EARTH_THRENODY     = 133,
+    LIGHTNING_THRENODY = 134,
+    WATER_THRENODY     = 135,
+    LIGHT_THRENODY     = 136,
+    DARK_THRENODY      = 137,
+    FOE_LULLABY        = 138,
+    MAZURKA            = 139,
+    BOOST              = 140,
+    GAIN               = 141,
+    TEMPER             = 142,
+    JA                 = 143,
+    INDI_BUFF          = 144,
+    INDI_DEBUFF        = 145,
+    GEO_BUFF           = 146,
+    GEO_DEBUFF         = 147,
+    FIRA               = 148,
+    LIZZARA            = 149,
+    AERORA             = 150,
+    STONERA            = 151,
+    THUNDARA           = 152,
+    WATERA             = 153,
+    DISTRACT           = 154,
+    FRAZZLE            = 155,
+    FLURRY             = 156,
+}
+
+------------------------------------
 -- Spell AOE IDs
 ------------------------------------
 
@@ -183,11 +348,6 @@ function doBoostGain(caster, target, spell, effect)
 end
 
 function doEnspell(caster, target, spell, effect)
-    if effect == tpz.effect.BLOOD_WEAPON then
-        target:addStatusEffect(tpz.effect.BLOOD_WEAPON, 1, 0, 30)
-        return
-    end
-
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --calculate potency
@@ -1028,17 +1188,7 @@ end
 
 function getElementalDebuffStatDownFromDOT(dot)
     local stat_down = 0
-    if (dot == 1) then
-        stat_down = 5
-    elseif (dot == 2) then
-        stat_down = 7
-    elseif (dot == 3) then
-        stat_down = 9
-    elseif (dot == 4) then
-        stat_down = 11
-    else
-        stat_down = 13
-    end
+    stat_down = (dot-1)*2 +5
     return stat_down
 end
 

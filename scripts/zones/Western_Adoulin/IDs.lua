@@ -17,6 +17,7 @@ zones[tpz.zone.WESTERN_ADOULIN] =
         KEYITEM_LOST            = 6392, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL     = 6395, -- You do not have enough gil.
         BAYLD_OBTAINED          = 7005, -- You have obtained <number> bayld!
+        YOU_CAN_NOW_BECOME      = 7009, -- You can now become a <geomancer/rune fencer>!
         MOG_LOCKER_OFFSET       = 7569, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         RETRIEVE_DIALOG_ID      = 7742, -- You retrieve <item> from the porter moogle's care.
         HOMEPOINT_SET           = 8301, -- Home point set!

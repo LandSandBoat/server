@@ -17,7 +17,7 @@ function onSpellCast(caster,target,spell)
     if (target:getStatusEffect(tpz.effect.CHOKE) ~= nil) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+        local dINT = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
         local params = {}
         params.diff = nil
         params.attribute = tpz.mod.INT
@@ -33,7 +33,6 @@ function onSpellCast(caster,target,spell)
             end
             local sINT = caster:getStat(tpz.mod.INT)
             local DOT = getElementalDebuffDOT(sINT)
-            local DOTp = 0
             local effect = target:getStatusEffect(tpz.effect.RASP)
             local noeffect = false
             if (effect ~= nil) then
@@ -53,9 +52,8 @@ function onSpellCast(caster,target,spell)
 
                 local mbonus = caster:getMerit(tpz.merit.ELEMENTAL_DEBUFF_EFFECT)
                 DOT = DOT + mbonus/2 -- Damage
-                DOTp = DOTp + mbonus -- Stat Enfeeb
 
-                target:addStatusEffect(tpz.effect.RASP,DOT, 3, duration, tpz.effect.RASP, DOTp)
+                target:addStatusEffect(tpz.effect.RASP,DOT, 3, duration)
             end
         end
     end

@@ -133,6 +133,13 @@ local treasureInfo =
             {
                 treasureLvl = 43,
                 key = 1025,
+				misc =
+                {
+                    {
+                        test = function(player) return player:getQuestStatus(BASTOK,tpz.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and player:getCharVar("FadedPromises") == 2 and not player:hasKeyItem(tpz.ki.DIARY_OF_MUKUNDA) end,
+                        code = function(player) npcUtil.giveKeyItem(player, tpz.ki.DIARY_OF_MUKUNDA) end,
+                    },
+                },
                 points =
                 {
                     { 250.037,  -32.069,  174.156, 227},

@@ -12,11 +12,11 @@ function onMagicCastingCheck(caster,target,spell)
 end
 
 function onSpellCast(caster,target,spell)
-    if (target:hasKeyItem(tpz.ki.ALTEPA_GATE_CRYSTAL) == true) then
+    if target:hasKeyItem(tpz.ki.ALTEPA_GATE_CRYSTAL) == true then
         target:addStatusEffectEx(tpz.effect.TELEPORT,0,tpz.teleport.id.ALTEP,0,4.7)
         spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
     else
-        spell:setMsg(tpz.msg.basic.NO_EFFECT)
+        spell:setMsg(tpz.msg.basic.NONE)
     end
 
     return 0

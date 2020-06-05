@@ -25,7 +25,6 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
-    mob:getBattlefield():setLocalVar("loot", 0)
     player:addTitle(tpz.title.ULTIMA_UNDERTAKER)
     player:setLocalVar("[OTBF]cs", 0)
 end

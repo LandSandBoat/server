@@ -24,6 +24,7 @@ function onTrigger(player,npc)
         12292,  4482, 2,    -- Mahogany Shield
         12826, 16552, 2,    -- Studded Trousers
         12954, 10054, 2,    -- Studded Boots
+        12289,   110, 3,    -- Lauan Shield
         12290,   544, 3,    -- Maple Shield
         12832,   187, 3,    -- Bronze Subligar
         12833,  1800, 3,    -- Brass Subligar

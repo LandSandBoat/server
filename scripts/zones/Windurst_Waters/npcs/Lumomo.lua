@@ -53,6 +53,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED,4198);
             player:addTitle(tpz.title.EMERALD_EXTERMINATOR);
             player:addFame(WINDURST, 80);
+            player:setCharVar("ECO_WAR_WIN-NMs_killed", 0)
             player:setCharVar("ECO-WAR_ConquestWeek",getConquestTally())
             player:setCharVar("ECO_WARRIOR_ACTIVE",0);
         else
