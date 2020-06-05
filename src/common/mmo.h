@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -193,6 +193,8 @@ struct questlog_t
 struct missionlog_t
 {
 	uint16 current;
+    uint16 logExUpper;
+    uint16 logExLower;
 	bool   complete[64];
 };
 

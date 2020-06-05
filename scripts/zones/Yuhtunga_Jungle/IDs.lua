@@ -36,6 +36,7 @@ zones[tpz.zone.YUHTUNGA_JUNGLE] =
         LOGGING_IS_POSSIBLE_HERE    = 7697,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE = 7704,  -- Harvesting is possible here if you have <item>.
         SOMETHING_IS_BURIED_HERE    = 7747,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        SWARM_APPEARED              = 7820, -- A swarm has appeared!
         PLAYER_OBTAINS_ITEM         = 7860,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM       = 7861,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM    = 7862,  -- <name> obtains the temporary item: <item>!
@@ -55,11 +56,13 @@ zones[tpz.zone.YUHTUNGA_JUNGLE] =
         ROSE_GARDEN_PH          = 17281356,
         ROSE_GARDEN             = 17281357,
         VOLUPTUOUS_VILMA        = 17281358,
+        NASUS_OFFSET            = 17281491,
     },
     npc =
     {
         CASKET_BASE           = 17281559,
         BLUE_RAFFLESIA_OFFSET = 17281586,
+        TUNING_OUT_QM         = 17281590,
         OVERSEER_BASE         = 17281600,
         CERMET_HEADSTONE      = 17281625,
         PEDDLESTOX            = 17281640,
