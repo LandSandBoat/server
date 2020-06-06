@@ -16,15 +16,6 @@ local zone =
 {
     [tpz.zone.RULUDE_GARDENS] =
     {
-        msg =
-        {
-            6869, -- Hunt accepted!
-            6870, -- You use <fee> scylds. Scyld balance: <scylds>.
-            6887, -- Hunt canceled.
-            6851, -- Current training regime canceled.
-            6881, -- You record your hunt.
-            6883, -- You obtain <scylds>! Current Balance: <scylds>.
-        },
         -- these params display the correct number of hunts
         huntMenu =
         {
@@ -191,16 +182,6 @@ local zone =
 
     [tpz.zone.NORTHERN_SAN_DORIA] =
     {
-        msg =
-        {
-            7986,
-            7987,
-            8004,
-            7968,
-            7998,
-            8000,
-        },
-
         huntMenu =
         {
             [   1] =    2031616,
@@ -357,16 +338,6 @@ local zone =
 
     [tpz.zone.BASTOK_MINES] =
     {
-        msg =
-        {
-            7287,
-            7288,
-            7305,
-            7269,
-            7299,
-            7301,
-        },
-
         huntMenu =
         {
             [   1] =    2031616,
@@ -521,16 +492,6 @@ local zone =
 
     [tpz.zone.PORT_WINDURST] =
     {
-        msg =
-        {
-            32,
-            33,
-            50,
-            14,
-            44,
-            46,
-        },
-
         huntMenu =
         {
             [   1] =    1835008,
@@ -697,16 +658,6 @@ local zone =
 
     [tpz.zone.KAZHAM] =
     {
-        msg =
-        {
-            6837,
-            6838,
-            6855,
-            6819,
-            6849,
-            6851,
-        },
-
         huntMenu =
         {
             [   1] =    2097024,
@@ -817,16 +768,6 @@ local zone =
 
     [tpz.zone.NORG] =
     {
-        msg =
-        {
-        6837,
-        6838,
-        6855,
-        6819,
-        6849,
-        6851,
-        },
-
         huntMenu =
         {
             [   1] =    2097024,
@@ -937,16 +878,6 @@ local zone =
 
     [tpz.zone.RABAO] =
     {
-        msg =
-        {
-            6876,
-            6877,
-            6894,
-            6858,
-            6888,
-            6890,
-        },
-
         huntMenu =
         {
             [   1] =    2097024,
@@ -1045,16 +976,6 @@ local zone =
 
     [tpz.zone.TAVNAZIAN_SAFEHOLD] =
     {
-        msg =
-        {
-            6720, -- Hunt accepted!
-            6721, -- You use <fee> scylds. Current balance: <scylds>.
-            6738, -- Hunt canceled.
-            6702, -- Current training regime canceled.
-            6732, -- You record your hunt.
-            6734, -- You obtain <scylds>! Current Balance: <scylds>.
-        },
-
         huntMenu =
         {
             [   1] =    2097114,
@@ -1087,16 +1008,6 @@ local zone =
 
     [tpz.zone.AHT_URHGAN_WHITEGATE] =
     {
-        msg =
-        {
-            1484,
-            1485,
-            1502,
-            1466,
-            1496,
-            1498,
-        },
-
         huntMenu =
         {
             [   1] =    2097024,
@@ -1163,16 +1074,6 @@ local zone =
 
     [tpz.zone.NASHMAU] =
     {
-        msg =
-        {
-            7363,
-            7364,
-            7381,
-            7345,
-            7375,
-            7377,
-        },
-
         huntMenu =
         {
             [   1] =    2097136,
@@ -1209,16 +1110,6 @@ local zone =
 
     [tpz.zone.SOUTHERN_SAN_DORIA_S] =
     {
-        msg =
-        {
-            7635,
-            7636,
-            7653,
-            7617,
-            7647,
-            7649,
-        },
-
         huntMenu =
         {
             [   1] =    2096896,
@@ -1299,16 +1190,6 @@ local zone =
 
     [tpz.zone.BASTOK_MARKETS_S] =
     {
-        msg =
-        {
-            7716,
-            7717,
-            7734,
-            7698,
-            7728,
-            7730,
-        },
-
         huntMenu =
         {
             [   1] =    2096896,
@@ -1389,16 +1270,6 @@ local zone =
 
     [tpz.zone.WINDURST_WATERS_S] =
     {
-        msg =
-        {
-            7748,
-            7749,
-            7766,
-            7730,
-            7760,
-            7762,
-        },
-
         huntMenu =
         {
             [   1] =    2096896,
@@ -1555,9 +1426,10 @@ tpz.hunts.clearHuntVars = function(player)
 end
 
 function tpz.hunts.onEventFinish(player, csid, option)
-    local registryZone = zone[player:getZoneID()]
+    local zoneid = player:getZoneID()
+    local registryZone = zone[zoneid]
     local huntEntry = registryZone.hunt[option]
-    local msg = registryZone.msg
+    local msg = zones[zoneid].text
 
     -- accepting hunt
     if huntEntry then
@@ -1566,17 +1438,17 @@ function tpz.hunts.onEventFinish(player, csid, option)
         player:setCharVar("[hunt]id", option)
         player:setCharVar("[hunt]page", huntEntry.pageId)
         player:delCurrency("scyld", huntEntry.fee)
-        player:messageSpecial(msg[1])
-        player:messageSpecial(msg[2], huntEntry.fee, player:getCurrency("scyld"))
+        player:messageSpecial(msg.HUNT_ACCEPTED)
+        player:messageSpecial(msg.USE_SCYLDS, huntEntry.fee, player:getCurrency("scyld"))
 
     -- cancels hunt
     elseif option == 3 then
-        player:messageSpecial(msg[3])
+        player:messageSpecial(msg.HUNT_CANCELED)
         player:setCharVar("[hunt]status", 0)
 
     -- cancels training regime and clears all vars
     elseif option == 4 then
-        player:messageSpecial(msg[4])
+        player:messageSpecial(msg.REGIME_CANCELED)
         tpz.regime.clearRegimeVars(player)
 
     -- completes hunt
@@ -1594,8 +1466,8 @@ function tpz.hunts.onEventFinish(player, csid, option)
         else
             player:addCurrency("scyld", scyldBounty)
         end
-        player:messageSpecial(msg[5])
-        player:messageSpecial(msg[6], scyldBounty, player:getCurrency("scyld"))
+        player:messageSpecial(msg.HUNT_RECORDED)
+        player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency("scyld"))
     end
 end
 
