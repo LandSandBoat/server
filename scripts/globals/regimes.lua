@@ -1076,7 +1076,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     end
 
     -- check player has enough tabs
-    if cost > tabs then
+    if cost and cost > tabs then
         player:showText(player, msgOffset + 1032) -- You do not have enough tabs.
         return
     end
