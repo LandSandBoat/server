@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1056,7 +1056,7 @@ bool CAutomatonController::TryEnhance()
                     ++shellcount;
                 }
 
-                if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+                if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                     haste = true;
 
                 if (PStatus->GetStatusID() == EFFECT_STONESKIN)
@@ -1111,7 +1111,7 @@ bool CAutomatonController::TryEnhance()
             if (PStatus->GetStatusID() == EFFECT_SHELL)
                 shell = true;
 
-            if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+            if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                 haste = true;
         }
     });
@@ -1176,7 +1176,7 @@ bool CAutomatonController::TryEnhance()
                             ++shellcount;
                         }
 
-                        if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+                        if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                             haste = true;
                     }
                 });
@@ -1205,7 +1205,7 @@ bool CAutomatonController::TryEnhance()
         Cast(PAutomaton->targid, SpellID::Shellra_V);
 
     if (PRegenTarget && (PTarget->GetMLevel() + 5) >= PAutomaton->GetMLevel() && !(PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN) ||
-        PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN_II)))
+        PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_GEO_REGEN)))
         if (Cast(PRegenTarget->targid, SpellID::Regen_III) ||
             Cast(PRegenTarget->targid, SpellID::Regen_II) ||
             Cast(PRegenTarget->targid, SpellID::Regen))

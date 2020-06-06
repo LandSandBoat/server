@@ -2,7 +2,7 @@
 -- Ability: Shield Bash
 -- Delivers an attack that can stun the target. Shield required.
 -- Obtained: Paladin Level 15, Valoredge automaton frame Level 1
--- Recast Time: 3:00 minutes (3:00 for Valoredge version)
+-- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/settings")

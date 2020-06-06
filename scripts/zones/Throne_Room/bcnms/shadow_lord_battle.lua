@@ -26,7 +26,7 @@ end
 function onBattlefieldLeave(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then -- play end CS. Need time and battle id for record keeping + storage
         local name, clearTime, partySize = battlefield:getRecord()
-        local arg8 = player:hasCompletedMission(player:getNation(), 15) and 1 or 0
+        local arg8 = player:hasCompletedMission(player:getNation(), tpz.mission.id.nation.SHADOW_LORD) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == tpz.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -37,7 +37,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(player:getNation()) == 15 and player:getCharVar("MissionStatus") == 3 then
+    if csid == 32001 and player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 3 then
         if player:getCurrentMission(ZILART) ~= tpz.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER) then
             -- Don't add missions we already completed. Players who change nation will hit this.
             player:addMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)

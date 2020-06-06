@@ -856,7 +856,7 @@ INSERT INTO `synth_recipes` VALUES (739,1,0,0,0,0,0,0,27,0,0,4100,4242,13588,0,0
 INSERT INTO `synth_recipes` VALUES (740,1,0,0,0,0,0,0,95,0,0,4100,4242,13918,0,0,0,0,0,0,0,861,820,851,1122,1,1,1,1,'Tiger Hide');
 INSERT INTO `synth_recipes` VALUES (741,0,0,0,0,0,0,0,70,0,0,4103,4245,635,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
 INSERT INTO `synth_recipes` VALUES (742,0,0,0,0,0,0,0,70,0,0,4103,4245,695,860,4509,0,0,0,0,0,862,862,862,862,1,1,1,1,'Behem. Leather');
-INSERT INTO `synth_recipes` VALUES (743,0,0,0,16,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 16) https://www.bg-wiki.com/bg/Fish_Scales
+INSERT INTO `synth_recipes` VALUES (743,0,0,0,6,0,0,0,0,0,0,4100,4242,4477,0,0,0,0,0,0,0,864,1587,1587,1587,12,1,2,4,'Fish Scales'); -- fish scales (bone 6)
 INSERT INTO `synth_recipes` VALUES (744,1,0,0,7,0,0,0,0,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (745,1,0,0,37,0,0,0,0,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Fish Scales');
 INSERT INTO `synth_recipes` VALUES (746,1,0,0,70,0,0,0,0,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,864,902,902,1,1,1,1,'Fish Scales');
@@ -4256,15 +4256,15 @@ INSERT INTO `synth_recipes` VALUES (4139,0,0,0,0,0,0,10,0,0,0,4096,4238,8834,0,0
 INSERT INTO `synth_recipes` VALUES (4140,0,0,0,0,0,0,15,0,0,0,4096,4238,8835,0,0,0,0,0,0,0,16769,16769,16769,16769,1,1,1,1,'Brass Zaghnal'); -- brass zaghnal (kit)
 INSERT INTO `synth_recipes` VALUES (4141,0,0,0,0,0,0,20,0,0,0,4096,4238,8836,0,0,0,0,0,0,0,744,744,744,744,1,1,1,1,'Silver Ingot'); -- silver ingot (kit)
 INSERT INTO `synth_recipes` VALUES (4142,0,0,0,0,0,0,20,0,0,0,4096,4238,651,651,745,1886,0,0,0,0,3700,3700,3700,3700,1,1,1,1,'Shower Stand'); -- shower stand
-INSERT INTO `synth_recipes` VALUES (4143,0,0,0,0,0,0,25,0,0,0,4096,4238,8837,0,0,0,0,0,0,0,13196,13196,13196,13196,1,1,1,1,'Silver Belt'); -- silver belt (kit)
-INSERT INTO `synth_recipes` VALUES (4144,0,0,0,0,0,0,30,0,0,0,4096,4238,8838,0,0,0,0,0,0,0,12689,12689,12689,12689,1,1,1,1,'Brass Fng. Gnt.'); -- brass finger gauntlets (kit)
+INSERT INTO `synth_recipes` VALUES (4143,0,0,0,0,0,0,25,0,0,0,4099,4241,8837,0,0,0,0,0,0,0,13196,13196,13196,13196,1,1,1,1,'Silver Belt'); -- silver belt (kit)
+INSERT INTO `synth_recipes` VALUES (4144,0,0,0,0,0,0,30,0,0,0,4099,4241,8838,0,0,0,0,0,0,0,12689,12689,12689,12689,1,1,1,1,'Brass Fng. Gnt.'); -- brass finger gauntlets (kit)
 INSERT INTO `synth_recipes` VALUES (4145,0,0,0,0,0,0,31,0,0,6,4096,4238,650,706,0,0,0,0,0,0,18868,18869,18869,18869,1,1,1,1,'Lady Bell'); -- lady bell
-INSERT INTO `synth_recipes` VALUES (4146,0,0,0,0,0,0,35,0,0,0,4096,4238,8839,0,0,0,0,0,0,0,15801,15801,15801,15801,1,1,1,1,'Tigereye Ring'); -- tigereye ring (kit)
+INSERT INTO `synth_recipes` VALUES (4146,0,0,0,0,0,0,35,0,0,0,4099,4241,8839,0,0,0,0,0,0,0,15801,15801,15801,15801,1,1,1,1,'Tigereye Ring'); -- tigereye ring (kit)
 INSERT INTO `synth_recipes` VALUES (4147,0,0,0,0,0,0,36,0,0,0,4099,4241,760,760,760,2841,0,0,0,0,15939,15947,15947,15947,1,1,1,1,'Griot Belt'); -- griot belt
 INSERT INTO `synth_recipes` VALUES (4148,0,0,0,0,0,0,39,0,0,0,4099,4241,760,760,2842,0,0,0,0,0,16301,16304,16304,16304,1,1,1,1,'Focus Collar'); -- focus collar
 INSERT INTO `synth_recipes` VALUES (4149,0,0,0,0,0,0,40,0,0,0,4096,4238,8840,0,0,0,0,0,0,0,653,653,653,653,1,1,1,1,'Mythril Ingot'); -- mythril ingot (kit)
 INSERT INTO `synth_recipes` VALUES (4150,0,0,0,0,0,0,43,0,0,0,4096,4238,2844,16641,0,0,0,0,0,0,17968,18531,18531,18531,1,1,1,1,'Veldt Axe'); -- veldt axe
-INSERT INTO `synth_recipes` VALUES (4151,0,0,0,0,0,0,45,0,0,0,4096,4238,8841,0,0,0,0,0,0,0,13319,13319,13319,13319,1,1,1,1,'Peridot Earring'); -- peridot earring (kit)
+INSERT INTO `synth_recipes` VALUES (4151,0,0,0,0,0,0,45,0,0,0,4099,4241,8841,0,0,0,0,0,0,0,13319,13319,13319,13319,1,1,1,1,'Peridot Earring'); -- peridot earring (kit)
 INSERT INTO `synth_recipes` VALUES (4152,0,0,0,0,0,0,50,0,0,0,4096,4238,8842,0,0,0,0,0,0,0,670,670,670,670,1,1,1,1,'Aluminum Sheet'); -- aluminum sheet (kit)
 INSERT INTO `synth_recipes` VALUES (4153,0,2002,11,0,0,0,52,0,0,0,4099,4241,933,1109,1109,2360,2419,0,0,0,9036,9036,9036,9036,12,12,12,12,'Scope Ii'); -- scope ii
 INSERT INTO `synth_recipes` VALUES (4154,0,1994,0,0,0,0,53,0,0,0,4098,4240,745,745,2143,0,0,0,0,0,9052,9052,9052,9052,3,6,9,12,'Golden Coil'); -- golden coil
@@ -4673,6 +4673,7 @@ INSERT INTO `synth_recipes` VALUES (4556,0,2037,73,0,0,0,55,0,0,0,4096,4238,754,
 INSERT INTO `synth_recipes` VALUES (4557,0,2037,54,0,0,0,15,0,0,0,4096,4238,914,932,1647,1887,2310,0,0,0,9072,9072,9072,9072,12,12,12,12,'Arcanic Cell');
 INSERT INTO `synth_recipes` VALUES (4558,0,2037,59,0,0,0,25,0,0,0,4096,4238,914,932,1647,2310,2460,0,0,0,9073,9073,9073,9073,12,12,12,12,'Arcanic Cell II');
 INSERT INTO `synth_recipes` VALUES (4559,1,0,0,0,0,0,15,0,0,0,4100,4242,16769,0,0,0,0,0,0,0,817,715,650,649,3,1,1,2,'Grass Thread'); -- Brass Zaghnal (desynth)
+INSERT INTO `synth_recipes` VALUES (4560,1,0,0,0,45,0,0,0,0,0,4100,4242,12467,0,0,0,0,0,0,0,840,820,820,820,1,5,6,7,'Chocobo Feather'); -- Wool Cap (desynth)
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)

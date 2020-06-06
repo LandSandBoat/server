@@ -22,15 +22,22 @@ end
 
 function onTrigger(player,npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest,player)
+    local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(114)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(265)
+    elseif tuningOutProgress == 1 then
+        player:startEvent(293) -- Ildy meets Jakoh to inquire about Shikaree Y
+
     elseif (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
     elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
         player:startEvent(115)
+
+    elseif tuningOutProgress == 2 then
+        player:startEvent(294) -- Mentions expedition that was talked about in CS 293
     else
         player:startEvent(113)
     end
@@ -45,6 +52,8 @@ function onEventFinish(player,csid,option)
         player:addMission(ZILART,tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
     elseif (csid == 265) then
         player:setCharVar("MissionStatus",3)
+    elseif csid == 293 then
+        player:setCharVar("TuningOut_Progress", 2)
     else
         tpz.wsquest.handleEventFinish(wsQuest,player,csid,option,ID.text.EVISCERATION_LEARNED)
     end
