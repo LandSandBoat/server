@@ -12158,6 +12158,24 @@ inline int32 CLuaBaseEntity::spawnTrust(lua_State *L)
 }
 
 /************************************************************************
+*  Function: clearTrusts()
+*  Purpose :
+*  Example : caster:clearTrusts()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::clearTrusts(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC); // only PCs can spawn trusts
+
+    static_cast<CCharEntity*>(m_PBaseEntity)->ClearTrusts();
+
+    return 0;
+}
+
+
+/************************************************************************
 *  Function: getTrustID()
 *  Purpose :
 *  Example : trust:getTrustID()
@@ -12174,13 +12192,13 @@ inline int32 CLuaBaseEntity::getTrustID(lua_State* L)
 }
 
 /************************************************************************
-*  Function: addGambit()
+*  Function: addSimpleGambit()
 *  Purpose :
-*  Example : mob:addGambit(PARTY, HPP_LTE, 25, MA, SELECT_HIGHEST, tpz.magic.spellFamily.CURE)
+*  Example : trust:addSimpleGambit(target, condition, condition_arg, reaction, selector, selector_arg)
 *  Notes   : Adds a behaviour to the gambit system
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::addGambit(lua_State* L)
+inline int32 CLuaBaseEntity::addSimpleGambit(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
@@ -12191,24 +12209,114 @@ inline int32 CLuaBaseEntity::addGambit(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 5) || !lua_isnumber(L, 5));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 6) || !lua_isnumber(L, 6));
-    // 7 is optional
 
-    auto selector = static_cast<G_SELECTOR>(lua_tointeger(L, 1));
-    auto trigger = static_cast<G_TRIGGER>(lua_tointeger(L, 2));
-    auto trigger_condition = static_cast<uint16>(lua_tointeger(L, 3));
+    using namespace gambits;
+
+    auto target = static_cast<G_TARGET>(lua_tointeger(L, 1));
+    auto condition = static_cast<G_CONDITION>(lua_tointeger(L, 2));
+    auto condition_arg = static_cast<uint16>(lua_tointeger(L, 3));
+
     auto reaction = static_cast<G_REACTION>(lua_tointeger(L, 4));
-    auto reaction_mod = static_cast<G_REACTION_MODIFIER>(lua_tointeger(L, 5));
-    auto reaction_arg = static_cast<uint16>(lua_tointeger(L, 6));
+    auto selector = static_cast<G_SELECT>(lua_tointeger(L, 5));
+    auto selector_arg = static_cast<uint16>(lua_tointeger(L, 6));
+
+    // Optional
     auto retry_delay = 0;
     if (!lua_isnil(L, 7) && lua_isnumber(L, 7))
     {
         retry_delay = (uint16)lua_tointeger(L, 7);
     }
 
+    Gambit_t g{ { target, condition, condition_arg }, { reaction, selector, selector_arg } };
+    g.retry_delay = retry_delay;
+
     auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    controller->m_GambitsContainer->AddGambit(selector, trigger, trigger_condition, reaction, reaction_mod, reaction_arg, retry_delay);
+    controller->m_GambitsContainer->AddGambit(g);
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: addFullGambit()
+*  Purpose :
+*  Example : mob:addGambit(...)
+*  Notes   : Adds a behaviour to the gambit system
+************************************************************************/
+
+inline void build_gambit(lua_State* L, std::vector<int>& nums, int index, int depth = 0)
+{
+    lua_pushvalue(L, index);
+    lua_pushnil(L);
+    while (lua_next(L, -2))
+    {
+        lua_pushvalue(L, -2);
+
+        auto key = lua_tostring(L, -1);
+        auto value = lua_tostring(L, -2);
+        auto type = lua_type(L, -2);
+        auto type_name = lua_typename(L, type);
+
+        printf("(depth: %d, type: %s) %s => %s\n", depth, type_name, key, value);
+
+        // TODO: This is bad.
+        if (depth == 3)
+        {
+            nums.push_back((int)lua_tonumber(L, -2));
+        }
+
+        if (lua_istable(L, -2))
+        {
+            build_gambit(L, nums, -2, ++depth);
+        }
+        else
+        {
+            // TODO: Hack to keep depth constant for numbers
+            ++depth;
+        }
+
+        --depth;
+        lua_pop(L, 2);
+    }
+    lua_pop(L, 1);
+    --depth;
+}
+
+inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_istable(L, 1));
+
+    using namespace gambits;
+
+    std::vector<int> nums;
+    build_gambit(L, nums, 1);
+
+    TPZ_DEBUG_BREAK_IF(nums.size() != 6);
+
+    if (nums.size() != 6)
+    {
+        ShowWarning("Invalid Gambit");
+        return 0;
+    }
+
+    // TODO: don't hardcode this...
+    auto target = static_cast<G_TARGET>(nums[0]);
+    auto condition = static_cast<G_CONDITION>(nums[1]);
+    auto condition_arg = static_cast<uint16>(nums[2]);
+
+    auto reaction = static_cast<G_REACTION>(nums[3]);
+    auto selector = static_cast<G_SELECT>(nums[4]);
+    auto selector_arg = static_cast<uint16>(nums[5]);
+
+    Gambit_t g{ { target, condition, condition_arg }, { reaction, selector, selector_arg } };
+
+    auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->AddGambit(g);
 
     return 0;
 }
@@ -14857,8 +14965,10 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     // Trust related
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawnTrust),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,clearTrusts),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTrustID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addGambit),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSimpleGambit),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addFullGambit),
 
     // Mob Entity-Specific
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),

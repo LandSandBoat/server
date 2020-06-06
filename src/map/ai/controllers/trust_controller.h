@@ -29,14 +29,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CCharEntity;
 class CTrustEntity;
 
-class CGambitsContainer;
+namespace gambits
+{
+    class CGambitsContainer;
+}
 
 class CTrustController : public CMobController
 {
 public:
     CTrustController(CCharEntity*, CTrustEntity*);
     ~CTrustController() override;
-   
+
     void Tick(time_point) override;
     void Despawn() override;
 
@@ -47,13 +50,15 @@ public:
     static constexpr float SpawnDistance{ 3.0f };
     static constexpr float WarpDistance{ 30.0f };
 
-    std::unique_ptr<CGambitsContainer> m_GambitsContainer;
+    // TODO: Replace with reverse enmity container
+    CBattleEntity* GetTopEnmity();
+
+    std::unique_ptr<gambits::CGambitsContainer> m_GambitsContainer;
 
 private:
     void DoCombatTick(time_point tick) override;
     void DoRoamTick(time_point tick) override;
 
-    CBattleEntity* GetTopEnmity();
     uint8 GetPartyPosition();
 
     CBattleEntity* m_LastTopEnmity;

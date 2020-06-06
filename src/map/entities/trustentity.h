@@ -40,7 +40,9 @@ public:
     bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void OnDespawn(CDespawnState&) override;
 
-    void OnCastFinished(CMagicState& state, action_t& action);
+    void OnCastFinished(CMagicState& state, action_t& action) override;
+    void OnMobSkillFinished(CMobSkillState& state, action_t& action) override;
+    void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
     uint32 m_TrustID{};
 };

@@ -10,57 +10,84 @@
 #include "../../status_effect.h"
 #include "../../status_effect_container.h"
 
-
-enum class G_SELECTOR : uint16
+namespace gambits
 {
-    SELF = 0,
-    PARTY = 1,
+
+enum class G_TARGET : uint16
+{
+    SELF   = 0,
+    PARTY  = 1,
     TARGET = 2,
+    MASTER = 3,
+    TANK   = 4,
 };
 
-enum G_TRIGGER : uint16
+enum class G_CONDITION : uint16
 {
-    HPP_LTE = 0,
-    HPP_GTE = 1,
-    MPP_LTE = 2,
-    TP_GTE = 3,
-    STATUS = 4,
-    NOT_STATUS = 5,
-    STATUS_FLAG = 6,
-    NUKE = 7,
-    SC_AVAILABLE = 8,
-    NOT_SC_AVAILABLE = 9,
-    MB_AVAILABLE = 10,
+    ALWAYS             = 0,
+    HPP_LT             = 1,
+    HPP_GTE            = 2,
+    MPP_LT             = 3,
+    TP_LT              = 4,
+    TP_GTE             = 5,
+    STATUS             = 6,
+    NOT_STATUS         = 7,
+    STATUS_FLAG        = 8,
+    HAS_TOP_ENMITY     = 9,
+    NOT_HAS_TOP_ENMITY = 10,
+    SC_AVAILABLE       = 11,
+    NOT_SC_AVAILABLE   = 12,
+    MB_AVAILABLE       = 13,
 };
 
-enum G_REACTION : uint16
+enum class G_REACTION : uint16
 {
     ATTACK = 0,
     ASSIST = 1,
-    MA = 2,
-    JA = 3,
-    WS = 4,
+    MA     = 2,
+    JA     = 3,
+    WS     = 4,
+    MS     = 5,
 };
 
-enum G_REACTION_MODIFIER : uint16
+enum class G_SELECT : uint16
 {
-    SELECT_HIGHEST = 0,
-    SELECT_LOWEST = 1,
-    SELECT_SPECIFIC = 2,
-    SELECT_RANDOM = 3,
-    SELECT_MB_ELEMENT = 4,
+    HIGHEST    = 0,
+    LOWEST     = 1,
+    SPECIFIC   = 2,
+    RANDOM     = 3,
+    MB_ELEMENT = 4,
+};
+
+struct Predicate_t
+{
+    G_TARGET target;
+    G_CONDITION condition;
+    uint16 condition_arg;
 };
 
 struct Action_t
 {
-    G_SELECTOR selector;
-    G_TRIGGER trigger;
-    uint16 trigger_condition;
     G_REACTION reaction;
-    G_REACTION_MODIFIER reaction_mod;
-    uint16 reaction_arg;
+    G_SELECT select;
+    uint16 select_arg;
+};
+
+struct Gambit_t
+{
+    Predicate_t predicate;
+    Action_t action;
+
+    // TODO:
+    //std::vector<Predicate_t> predicates;
+    //std::vector<Action_t> actions;
     uint16 retry_delay;
     time_point last_used;
+};
+
+struct Chain_t
+{
+    std::vector<Gambit_t> gambits;
 };
 
 class CGambitsContainer
@@ -69,13 +96,15 @@ public:
     CGambitsContainer(CTrustEntity* trust) : POwner(trust) {}
     ~CGambitsContainer() = default;
 
-    void AddGambit(G_SELECTOR selector, G_TRIGGER trigger, uint16 trigger_condition, G_REACTION reaction, G_REACTION_MODIFIER reaction_mod, uint16 reaction_arg, uint16 retry_delay);
+    void AddGambit(Gambit_t gambit);
     void Tick(time_point tick);
 
 private:
     CTrustEntity* POwner;
     time_point m_lastAction;
-    std::vector<Action_t> actions;
+    std::vector<Gambit_t> gambits;
 };
+
+} // namespace gambits
 
 #endif // _GAMBITSCONTAINER

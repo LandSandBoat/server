@@ -56,6 +56,7 @@
 #include "../entities/battleentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/petentity.h"
+#include "../entities/trustentity.h"
 #include "../enmity_container.h"
 #include "../items.h"
 #include "../item_container.h"
@@ -4129,6 +4130,10 @@ namespace battleutils
                                 return;
                             }
                             CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
+                            if (highestClaim->objtype == TYPE_TRUST)
+                            {
+                                highestClaim = static_cast<CTrustEntity*>(highestClaim)->PMaster;
+                            }
                             PAttacker->ForAlliance([&](CBattleEntity* PMember){
                                 if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance

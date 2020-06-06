@@ -249,12 +249,8 @@ void SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
 
     CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
     PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
-
-    PTrust->allegiance = PMaster->allegiance;
     PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
-
-    PTrust->PMaster = PMaster;
-
+    
     if (PMaster->PBattlefield)
     {
         PTrust->PBattlefield = PMaster->PBattlefield;

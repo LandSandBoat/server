@@ -15,6 +15,15 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    mob:addGambit(ai.s.TARGET, ai.t.MB_AVAILABLE, 0, ai.r.MA, ai.rm.SELECT_MB_ELEMENT, tpz.magic.spellFamily.NONE)
-    mob:addGambit(ai.s.TARGET, ai.t.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.NONE, 30)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0,
+                        ai.r.MA, ai.s.MB_ELEMENT, tpz.magic.spellFamily.NONE)
+
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
+                        ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 30)
+end
+
+function onMobDespawn(mob)
+end
+
+function onMobDeath(mob)
 end

@@ -134,12 +134,21 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
             }
         };
     };
-    searchInList(m_gaList);
-    searchInList(m_damageList);
-    searchInList(m_buffList);
-    searchInList(m_debuffList);
-    searchInList(m_healList);
-    searchInList(m_naList);
+
+    // TODO: After a good refactoring, this sort of hack won't be needed...
+    if (family == SPELLFAMILY_NONE)
+    {
+        searchInList(m_damageList);
+    }
+    else
+    {
+        searchInList(m_gaList);
+        searchInList(m_damageList);
+        searchInList(m_buffList);
+        searchInList(m_debuffList);
+        searchInList(m_healList);
+        searchInList(m_naList);
+    }
 
     // Assume the highest ID is the best (back of the vector)
     // TODO: These will need to be organised by family, then merged

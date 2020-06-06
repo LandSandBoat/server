@@ -8,46 +8,56 @@ require("scripts/globals/utils")
 
 ai = ai or {}
 
--- Selectors
-ai.s =
+-- Target
+ai.target =
 {
     SELF   = 0,
     PARTY  = 1,
     TARGET = 2,
+    MASTER = 3,
+    TANK   = 4,
 }
+ai.t = ai.target
 
--- Triggers
-ai.t =
+-- Condition
+ai.condition =
 {
-    HPP_LTE          = 0,
-    HPP_GTE          = 1,
-    MPP_LTE          = 2,
-    TP_GTE           = 3,
-    STATUS           = 4,
-    NOT_STATUS       = 5,
-    STATUS_FLAG      = 6,
-    NUKE             = 7,
-    SC_AVAILABLE     = 8,
-    NOT_SC_AVAILABLE = 9,
-    MB_AVAILABLE     = 10,
+    ALWAYS             = 0,
+    HPP_LT             = 1,
+    HPP_GTE            = 2,
+    MPP_LT             = 3,
+    TP_LT              = 4,
+    TP_GTE             = 5,
+    STATUS             = 6,
+    NOT_STATUS         = 7,
+    STATUS_FLAG        = 8,
+    HAS_TOP_ENMITY     = 9,
+    NOT_HAS_TOP_ENMITY = 10,
+    SC_AVAILABLE       = 11,
+    NOT_SC_AVAILABLE   = 12,
+    MB_AVAILABLE       = 13,
 }
+ai.c = ai.condition
 
--- Reactions
-ai.r =
+-- Reaction
+ai.reaction =
 {
     ATTACK = 0,
     ASSIST = 1,
     MA     = 2,
     JA     = 3,
     WS     = 4,
+    MS     = 5,
 }
+ai.r = ai.reaction
 
--- Reaction Mods
-ai.rm =
+-- Select
+ai.select =
 {
-    SELECT_HIGHEST    = 0,
-    SELECT_LOWEST     = 1,
-    SELECT_SPECIFIC   = 2,
-    SELECT_RANDOM     = 3,
-    SELECT_MB_ELEMENT = 4,
+    HIGHEST    = 0,
+    LOWEST     = 1,
+    SPECIFIC   = 2,
+    RANDOM     = 3,
+    MB_ELEMENT = 4,
 }
+ai.s = ai.select

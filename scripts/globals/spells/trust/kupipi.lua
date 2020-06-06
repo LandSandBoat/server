@@ -6,6 +6,7 @@ require("scripts/globals/gambits")
 require("scripts/globals/status")
 require("scripts/globals/trust")
 require("scripts/globals/utils")
+require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")
 -----------------------------------------
 
@@ -37,30 +38,44 @@ function onMobSpawn(mob)
     local FLASH    = 112
     local ERASE    = 143
 
-    mob:addGambit(ai.s.PARTY, ai.t.HPP_LTE, 25, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.CURE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SLEEP_I, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURE_I)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SLEEP_II, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURE_I)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.SLEEP_I, ai.r.MA, ai.s.SPECIFIC, CURE_I)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.SLEEP_II, ai.r.MA, ai.s.SPECIFIC, CURE_I)
 
-    mob:addGambit(ai.s.PARTY, ai.t.HPP_LTE, 75, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.CURE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
-    mob:addGambit(ai.s.PARTY, ai.t.NOT_STATUS, tpz.effect.PROTECT, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.PROTECTRA)
-    mob:addGambit(ai.s.PARTY, ai.t.NOT_STATUS, tpz.effect.SHELL, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.SHELLRA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, tpz.effect.PROTECT, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.PROTECTRA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, tpz.effect.SHELL, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.SHELLRA)
 
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.POISON, ai.r.MA, ai.rm.SELECT_SPECIFIC, POISONA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.rm.SELECT_SPECIFIC, PARALYNA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.BLINDNESS, ai.r.MA, ai.rm.SELECT_SPECIFIC, BLINDNA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.SILENCE, ai.r.MA, ai.rm.SELECT_SPECIFIC, SILENA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.PETRIFICATION, ai.r.MA, ai.rm.SELECT_SPECIFIC, STONA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.DISEASE, ai.r.MA, ai.rm.SELECT_SPECIFIC, VIRUNA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.CURSE_I, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURSENA)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS, tpz.effect.CURSE_II, ai.r.MA, ai.rm.SELECT_SPECIFIC, CURSENA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.POISON, ai.r.MA, ai.s.SPECIFIC, POISONA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.s.SPECIFIC, PARALYNA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.BLINDNESS, ai.r.MA, ai.s.SPECIFIC, BLINDNA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.SILENCE, ai.r.MA, ai.s.SPECIFIC, SILENA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.PETRIFICATION, ai.r.MA, ai.s.SPECIFIC, STONA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.DISEASE, ai.r.MA, ai.s.SPECIFIC, VIRUNA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.CURSE_I, ai.r.MA, ai.s.SPECIFIC, CURSENA)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, tpz.effect.CURSE_II, ai.r.MA, ai.s.SPECIFIC, CURSENA)
 
-    mob:addGambit(ai.s.SELF, ai.t.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.rm.SELECT_SPECIFIC, ERASE)
-    mob:addGambit(ai.s.PARTY, ai.t.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.rm.SELECT_SPECIFIC, ERASE)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.s.SPECIFIC, ERASE)
+    mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS_FLAG, tpz.effectFlag.ERASABLE, ai.r.MA, ai.s.SPECIFIC, ERASE)
 
-    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.PARALYZE, 60)
-    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.SLOW, ai.r.MA, ai.rm.SELECT_HIGHEST, tpz.magic.spellFamily.SLOW, 60)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.PARALYSIS, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.PARALYZE, 60)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.SLOW, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.SLOW, 60)
 
-    mob:addGambit(ai.s.TARGET, ai.t.NOT_STATUS, tpz.effect.FLASH, ai.r.MA, ai.rm.SELECT_SPECIFIC, FLASH, 60)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.FLASH, ai.r.MA, ai.s.SPECIFIC, FLASH, 60)
+
+    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000, ai.r.WS, ai.s.SPECIFIC, tpz.ws.STARLIGHT)
+end
+
+function onMobDespawn(mob)
+end
+
+function onMobDeath(mob)
+end
+
+function onMobDespawn(mob)
+end
+
+function onMobDeath(mob)
 end

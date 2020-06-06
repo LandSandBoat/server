@@ -467,6 +467,10 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 end
 
 function fencerBonus(attacker)
+    if attacker:getObjType() ~= tpz.objType.PC then
+        return 0
+    end
+
     local mainEquip = attacker:getStorageItem(0, 0, tpz.slot.MAIN)
     if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
         local subEquip = attacker:getStorageItem(0, 0, tpz.slot.SUB)
