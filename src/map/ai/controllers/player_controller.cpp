@@ -206,6 +206,11 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
+time_point CPlayerController::getLastAttackTime()
+{
+    return m_LastAttackTime;
+}
+
 void CPlayerController::setLastAttackTime(time_point _LastAttackTime)
 {
     m_LastAttackTime = _LastAttackTime;
