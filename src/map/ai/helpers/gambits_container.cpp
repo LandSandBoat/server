@@ -288,6 +288,10 @@ void CGambitsContainer::Tick(time_point tick)
                 {
                     target = POwner;
                 }
+                else
+                {
+                    target = POwner->GetBattleTarget();
+                }
 
                 if (gambit.action.select == G_SELECT::SPECIFIC)
                 {
