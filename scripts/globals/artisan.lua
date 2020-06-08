@@ -25,8 +25,8 @@ local menuFlags = {
 tpz.artisan.moogleOnTrigger = function(player, npc)
     local csid = event[player:getZoneID()]
     local menuMask = 0
-    local mogVisited = player:getCharVar("[artisan]visited")
     local sackSize = player:getContainerSize(tpz.inv.MOGSACK)
+    local mogVisited = (sackSize > 0 or player:getCharVar("[artisan]visited") > 0) and 1 or 0
     if mogVisited == 0 then player:setCharVar("[artisan]visited", 1) end
     if sackSize > 0 then
         sackSize = sackSize + 1
@@ -42,6 +42,7 @@ tpz.artisan.moogleOnUpdate = function(player,csid,option)
         if player:getGil() >= 9980 and player:getContainerSize(tpz.inv.MOGSACK) == 0 then
             player:delGil(9980)
             player:changeContainerSize(tpz.inv.MOGSACK, 30)
+            player:setCharVar("[artisan]visited", 0)
             player:updateEvent(0, 0, 0, 30+1, 0, 0, 0, 2)
         end
 
