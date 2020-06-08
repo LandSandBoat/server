@@ -276,12 +276,12 @@ bool _vsocket_final(void){
 }
 
 // hostname/ip conversion functions
-const char* ip2str(uint32 ip, char ip_str[16])
+std::string ip2str(uint32 ip)
 {
     uint32 reversed_ip = htonl(ip);
-    char* address = new char[INET_ADDRSTRLEN];
+    char address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-    return (ip_str == NULL) ? address : strncpy(ip_str, address, 16);
+    return std::string(address);
 }
 
 uint32 str2ip(const char* ip_str)

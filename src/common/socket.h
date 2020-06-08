@@ -162,7 +162,7 @@ void socket_init();
 void socket_final();
 
 // hostname/ip conversion functions
-const char* ip2str(uint32 ip, char ip_str[16]);
+std::string ip2str(uint32 ip);
 
 uint32 str2ip(const char* ip_str);
 

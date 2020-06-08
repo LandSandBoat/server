@@ -93,7 +93,7 @@ int32 login_parse(int32 fd)
         //data check
         if (check_string(name, 16) && check_string(password, 16))
         {
-            ShowWarning(CL_WHITE"login_parse" CL_RESET":" CL_WHITE"%s" CL_RESET" send unreadable data\n", ip2str(sd->client_addr, nullptr));
+            ShowWarning(CL_WHITE"login_parse" CL_RESET":" CL_WHITE"%s" CL_RESET" send unreadable data\n", ip2str(sd->client_addr));
             session[fd]->wdata.resize(1);
             ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
             do_close_login(sd, fd);
@@ -365,7 +365,7 @@ int32 login_parse(int32 fd)
         }
         break;
         default:
-            ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>\n", code, ip2str(session[fd]->client_addr, nullptr));
+            ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>\n", code, ip2str(session[fd]->client_addr));
             do_close_login(sd, fd);
             break;
         };
@@ -380,7 +380,7 @@ int32 login_parse(int32 fd)
 
 int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 {
-    ShowInfo(CL_WHITE"login_parse" CL_RESET":" CL_WHITE"%s" CL_RESET"shutdown socket...\n", ip2str(loginsd->client_addr, nullptr));
+    ShowInfo(CL_WHITE"login_parse" CL_RESET":" CL_WHITE"%s" CL_RESET"shutdown socket...\n", ip2str(loginsd->client_addr));
     erase_loginsd(fd);
     do_close_tcp(fd);
     return 0;
