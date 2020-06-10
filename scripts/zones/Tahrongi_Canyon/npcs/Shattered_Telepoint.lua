@@ -13,7 +13,14 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
+    -- RoV Missions
+    if  player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
+        player:startEvent(41)
+    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
+        player:startEvent(42)
+
+    -- CoP Missions
+    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
         player:startEvent(913, 0, 0, 1) -- first time in promy -> have you made your preparations cs
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS and (player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(tpz.ki.LIGHT_OF_DEM)) then
         if player:getCharVar("cspromy2") == 1 then
@@ -23,13 +30,8 @@ function onTrigger(player, npc)
         end
     elseif player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) or (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1) then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
-    elseif
-        player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and
-        player:getRank() >= 3
-    then
-        player:startEvent(41)
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
-        player:startEvent(42)
+
+    -- Default Message
     else
         player:messageSpecial(ID.text.TELEPOINT_HAS_BEEN_SHATTERED)
     end
@@ -40,13 +42,8 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 912 then
-        player:setCharVar("cspromy2", 0)
-        player:setCharVar("cs2ndpromy", 1)
-        player:setPos(-93.268, 0, 170.749, 162, 20) -- To Promyvion Mea
-    elseif csid == 913 and option == 0 then
-        player:setPos(280.066, -80.635, -67.096, 191, 14) -- To Hall of Transference {R}
-    elseif csid == 41 then
+    -- RoV Missions
+    if csid == 41 then
         player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
         player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
     elseif csid == 42 then
@@ -54,5 +51,13 @@ function onEventFinish(player, csid, option)
         player:addItem(10159) -- Cipher: Lion II
         player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
         player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+
+    -- CoP Missions
+    elseif csid == 912 then
+        player:setCharVar("cspromy2", 0)
+        player:setCharVar("cs2ndpromy", 1)
+        player:setPos(-93.268, 0, 170.749, 162, 20) -- To Promyvion Mea
+    elseif csid == 913 and option == 0 then
+        player:setPos(280.066, -80.635, -67.096, 191, 14) -- To Hall of Transference {R}
     end
 end
