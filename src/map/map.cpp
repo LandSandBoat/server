@@ -975,15 +975,19 @@ int32 map_config_default()
     map_config.nm_hp_multiplier = 1.0f;
     map_config.mob_hp_multiplier = 1.0f;
     map_config.player_hp_multiplier = 1.0f;
+    map_config.alter_ego_hp_multiplier = 1.0f;
     map_config.nm_mp_multiplier = 1.0f;
     map_config.mob_mp_multiplier = 1.0f;
     map_config.player_mp_multiplier = 1.0f;
+    map_config.alter_ego_mp_multiplier = 1.0f;
     map_config.sj_mp_divisor = 2.0f;
     map_config.subjob_ratio = 1;
     map_config.include_mob_sj = false;
     map_config.nm_stat_multiplier = 1.0f;
     map_config.mob_stat_multiplier = 1.0f;
     map_config.player_stat_multiplier = 1.0f;
+    map_config.alter_ego_stat_multiplier = 1.0f;
+    map_config.alter_ego_skill_multiplier = 1.0f;
     map_config.ability_recast_multiplier = 1.0f;
     map_config.blood_pact_shared_timer = 0;
     map_config.vanadiel_time_offset = 0;
@@ -1149,6 +1153,10 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.player_hp_multiplier = (float)atof(w2);
         }
+        else if (strcmp(w1, "alter_ego_hp_multiplier") == 0)
+        {
+            map_config.alter_ego_hp_multiplier = (float)atof(w2);
+        }
         else if (strcmp(w1, "nm_mp_multiplier") == 0)
         {
             map_config.nm_mp_multiplier = (float)atof(w2);
@@ -1160,6 +1168,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "player_mp_multiplier") == 0)
         {
             map_config.player_mp_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "alter_ego_mp_multiplier") == 0)
+        {
+            map_config.alter_ego_mp_multiplier = (float)atof(w2);
         }
         else if (strcmp(w1, "sj_mp_divisor") == 0)
         {
@@ -1184,6 +1196,14 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "player_stat_multiplier") == 0)
         {
             map_config.player_stat_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "alter_ego_stat_multiplier") == 0)
+        {
+            map_config.alter_ego_stat_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "alter_ego_skill_multiplier") == 0)
+        {
+            map_config.alter_ego_skill_multiplier = (float)atof(w2);
         }
         else if (strcmp(w1, "ability_recast_multiplier") == 0)
         {

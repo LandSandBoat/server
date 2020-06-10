@@ -104,15 +104,19 @@ struct map_config_t
     float  nm_hp_multiplier;          // Multiplier for max HP of NM.
     float  mob_hp_multiplier;         // Multiplier for max HP pool of mob
     float  player_hp_multiplier;      // Multiplier for max HP pool of player
+    float  alter_ego_hp_multiplier;   // 
     float  nm_mp_multiplier;          // Multiplier for max MP of NM.
     float  mob_mp_multiplier;         // Multiplier for max MP pool of mob
     float  player_mp_multiplier;      // Multiplier for max MP pool of player
+    float  alter_ego_mp_multiplier;   // 
     float  sj_mp_divisor;             // Divisor to use on subjob max MP
     int8   subjob_ratio;              // Modify ratio of subjob-to-mainjob
     bool   include_mob_sj;            // Include mobs in effects of SJ ratio setting
     float  nm_stat_multiplier;        // Multiplier for str/vit/etc of NMs
     float  mob_stat_multiplier;       // Multiplier for str/vit/etc of mobs
     float  player_stat_multiplier;    // Multiplier for str/vit/etc. of NMs of player
+    float  alter_ego_stat_multiplier; //
+    float  alter_ego_skill_multiplier;//
     float  ability_recast_multiplier; // Adjust ability recast time
     int8   blood_pact_shared_timer;   // Default is 0. Disable/enable old school shared timer for SMN blood pacts.
     float  drop_rate_multiplier;      // Multiplier for drops

@@ -333,7 +333,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     float growth = 1.06f;
     float base   = 18.0f;
 
-    PTrust->health.maxhp = (int16)(base * pow(mLvl, growth) * PTrust->HPscale);
+    PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
 
     bool hasMp = false;
     switch (mJob)
@@ -370,7 +370,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     if (hasMp)
     {
-        PTrust->health.maxmp = (int16)(base * pow(mLvl, growth) * PTrust->MPscale);
+        PTrust->health.maxmp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
     }
 
     PTrust->health.tp = 0;
@@ -425,13 +425,13 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         sVIT = 0;
     }
 
-    PTrust->stats.STR = fSTR + mSTR + sSTR;
-    PTrust->stats.DEX = fDEX + mDEX + sDEX;
-    PTrust->stats.VIT = fVIT + mVIT + sVIT;
-    PTrust->stats.AGI = fAGI + mAGI + sAGI;
-    PTrust->stats.INT = fINT + mINT + sINT;
-    PTrust->stats.MND = fMND + mMND + sMND;
-    PTrust->stats.CHR = fCHR + mCHR + sCHR;
+    PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * map_config.alter_ego_stat_multiplier);
+    PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * map_config.alter_ego_stat_multiplier);
 
     // cap all stats for mLvl / job
     for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
@@ -439,7 +439,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
         if (maxSkill != 0)
         {
-            PTrust->WorkingSkills.skill[i] = maxSkill;
+            PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
         }
         else //if the mob is WAR/BLM and can cast spell
         {
@@ -448,7 +448,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
             if (maxSubSkill != 0)
             {
-                PTrust->WorkingSkills.skill[i] = maxSubSkill;
+                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSubSkill * map_config.alter_ego_skill_multiplier);
             }
         }
     }
@@ -458,7 +458,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
         uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mLvl > 99 ? 99 : mLvl);
         if (maxSkill != 0)
         {
-            PTrust->WorkingSkills.skill[i] = maxSkill;
+            PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
         }
     }
 
