@@ -125,12 +125,12 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr, nullptr));
+    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr));
 
     if (ret == SQL_ERROR ||
         Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return nullptr;
     }
     return map_session_data;
@@ -150,7 +150,11 @@ int32 do_init(int32 argc, char** argv)
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0)
-            map_ip.s_addr = inet_addr(argv[i + 1]);
+        {
+            uint32 ip;
+            inet_pton(AF_INET, argv[i + 2], &ip);
+            map_ip.s_addr = ip;
+        }
         else if (strcmp(argv[i], "--port") == 0)
             map_port = std::stoi(argv[i + 1]);
     }
@@ -436,8 +440,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    int8 ip_str[16];
-    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip, (char*)ip_str));
+    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip));
     return -1;
 }
 
@@ -459,7 +462,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return -1;
     }
 #else
