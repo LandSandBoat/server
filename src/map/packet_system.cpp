@@ -2520,10 +2520,12 @@ void SmallPacket0x050(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8 containerID = data.ref<uint8>(0x06);     // container id
 
     if (containerID != LOC_INVENTORY && containerID != LOC_WARDROBE && containerID != LOC_WARDROBE2 && containerID != LOC_WARDROBE3 && containerID != LOC_WARDROBE4)
+    {
         if (equipSlotID != 16 && equipSlotID != 17)
             return;
         else if (containerID != LOC_MOGSATCHEL && containerID != LOC_MOGSACK && containerID != LOC_MOGCASE)
             return;
+    }
 
     charutils::EquipItem(PChar, slotID, equipSlotID, containerID); //current
     charutils::SaveCharEquip(PChar);
@@ -2712,9 +2714,9 @@ void SmallPacket0x05A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05B(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    auto CharID = data.ref<uint32>(0x04);
+    //auto CharID = data.ref<uint32>(0x04);
     auto Result = data.ref<uint32>(0x08);
-    auto ZoneID = data.ref<uint16>(0x10);
+    //auto ZoneID = data.ref<uint16>(0x10);
     auto EventID = data.ref<uint16>(0x12);
 
     PrintPacket(data);
@@ -2749,9 +2751,9 @@ void SmallPacket0x05B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    auto CharID = data.ref<uint32>(0x10);
+    //auto CharID = data.ref<uint32>(0x10);
     auto Result = data.ref<uint32>(0x14);
-    auto ZoneID = data.ref<uint16>(0x18);
+    //auto ZoneID = data.ref<uint16>(0x18);
 
     auto EventID = data.ref<uint16>(0x1A);
 

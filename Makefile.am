@@ -7,7 +7,7 @@ include sources.am
 ## Set up all of our dependency flags
 SRC_ALL                 = $(SRC_TOPAZ)
 CFLAGS_ALL              = $(TOPAZ_CFLAGS) -fsigned-char
-CPPFLAGS_ALL            = $(TOPAZ_CPPFLAGS) -fsigned-char -DFMT_HEADER_ONLY
+CPPFLAGS_ALL            = $(TOPAZ_CPPFLAGS) -fsigned-char -DFMT_HEADER_ONLY -Wall -Werror -Wfatal-errors
 CXXFLAGS_ALL            = $(TOPAZ_CXXFLAGS) -fsigned-char
 LIBS_ALL                = $(TOPAZ_LIBS)
 LDFLAGS_ALL             = $(TOPAZ_LDFLAGS)
