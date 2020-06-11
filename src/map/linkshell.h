@@ -58,7 +58,7 @@ public:
     bool        DelMember(CCharEntity* PChar);
 
     void        BreakLinkshell(int8* lsname, bool gm);
-    void        RemoveMemberByName(int8* MemberName, uint8 kickerRank);
+    void        RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell = false);
 	void		ChangeMemberRank(int8* MemberName, uint8 toSack);
 
     void        PushPacket(uint32 senderID, CBasicPacket* packet);
