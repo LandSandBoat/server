@@ -167,7 +167,7 @@ void BuildTrust(uint32 TrustID)
                 FROM spell_list, mob_pools, mob_family_system WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid AND mob_pools.familyid = mob_family_system.familyid ORDER BY spell_list.spellid";
 
-    uint32 ret = Sql_Query(SqlHandle, Query, TrustID);
+    auto ret = Sql_Query(SqlHandle, Query, TrustID);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {

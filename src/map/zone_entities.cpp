@@ -168,8 +168,6 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
 {
     if (PTrust != nullptr)
     {
-        CTrustEntity* trust = (CTrustEntity*)PTrust;
-        CCharEntity* master = (CCharEntity*)trust->PMaster;
         uint16 targid = 0x800;
 
         for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)

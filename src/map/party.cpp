@@ -207,10 +207,10 @@ uint8 CParty::MemberCount(uint16 ZoneID)
         }
         if (member->objtype == TYPE_PC)
         {
-            for (auto* trust : static_cast<CCharEntity*>(member)->PTrusts)
-            {
+            auto* charMember = static_cast<CCharEntity*>(member);
+            std::for_each(charMember->PTrusts.begin(), charMember->PTrusts.end(), [&](CTrustEntity* trust) {
                 count++;
-            }
+            });
         }
     }
     return count;
