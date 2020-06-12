@@ -50,6 +50,8 @@ const char* LOGIN_CONF_FILENAME = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
 const char* MAINT_CONF_FILENAME = nullptr;
 
+volatile bool consoleThreadRun = true;
+
 login_config_t login_config;    //main settings
 version_info_t version_info;
 maint_config_t maint_config;
@@ -133,7 +135,7 @@ int32 do_init(int32 argc, char** argv)
             ShowStatus("Console input thread is ready..\r\n");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
-            while (true)
+            while (consoleThreadRun)
             {
                 if ((server_clock::now() - lastInputTime) > 1s)
                 {
@@ -211,6 +213,7 @@ int32 do_init(int32 argc, char** argv)
                     lastInputTime = server_clock::now();
                 }
             };
+            ShowStatus("Console input thread exiting..\r\n");
         });
     }
     return 0;
@@ -218,13 +221,21 @@ int32 do_init(int32 argc, char** argv)
 
 void do_final(int code)
 {
+    consoleThreadRun = false;
     message_server_close();
     if (messageThread.joinable())
     {
         messageThread.join();
     }
-
-    Sql_Free(SqlHandle);
+    if (consoleInputThread.joinable())
+    {
+        consoleInputThread.join();
+    }
+    if(SqlHandle)
+    {
+        Sql_Free(SqlHandle);
+        SqlHandle = nullptr;
+    }
 
     timer_final();
     socket_final();
