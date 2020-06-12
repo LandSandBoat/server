@@ -1238,8 +1238,6 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         // this should actually go into a char charm AI
         if (m_POwner->objtype == TYPE_PC)
         {
-            auto PChar = (CCharEntity*)m_POwner;
-
             if (effect == EFFECT_CHARM || effect == EFFECT_CHARM_II)
             {
                 if (m_POwner->PPet != nullptr)

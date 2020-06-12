@@ -166,7 +166,6 @@ void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
     CBattleEntity::OnCastFinished(state, action);
 
     auto PSpell = state.GetSpell();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 }
@@ -186,7 +185,6 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     int16 tp = state.GetSpentTP();
     tp = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
 
-    SLOTTYPE damslot = SLOT_MAIN;
     if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelSize <= PWeaponSkill->getRange())
     {
         PAI->TargetFind->reset();
