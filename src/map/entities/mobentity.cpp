@@ -919,19 +919,36 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         uint8 effect = 0; // Begin Adding Crystals
         
-        if (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2 && m_Element > 0) // Valid Signet Zone
+        if (m_Element > 0)
         {
-            effect = 1;
+            uint8 regionID = PChar->loc.zone->GetRegionID();
+            switch (regionID)
+            {
+                // Sanction Regions
+                case REGION_WEST_AHT_URHGAN:
+                case REGION_MAMOOL_JA_SAVAGE:
+                case REGION_HALVUNG:
+                case REGION_ARRAPAGO:
+                    effect = 2;
+                    break;
+                // Sigil Regions
+                case REGION_RONFAURE_FRONT:
+                case REGION_NORVALLEN_FRONT:
+                case REGION_GUSTABERG_FRONT:
+                case REGION_DERFLAND_FRONT:
+                case REGION_SARUTA_FRONT:
+                case REGION_ARAGONEAU_FRONT:
+                case REGION_FAUREGANDI_FRONT:
+                case REGION_VALDEAUNIA_FRONT:
+                    effect = 3;
+                    break;
+                // Signet Regions
+                default:
+                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
+                    break;
+            }
         }
-        else if (PChar->loc.zone->GetRegionID() >= 28 && PChar->loc.zone->GetRegionID() <= 32 && m_Element > 0) // Valid Sanction Zone
-        {
-            effect = 2;
-        }
-        else if (PChar->loc.zone->GetRegionID() >= 33 && PChar->loc.zone->GetRegionID() <= 40 && m_Element > 0) // Valid Sigil Zone
-        {
-            effect = 3;
-        }
-        int crystalRolls = 0;
+        uint8 crystalRolls = 0;
         PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
         {
             switch(effect)
@@ -958,7 +975,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
             }
         });
-        for (int i = 0; i < crystalRolls; i++)
+        for (uint8 i = 0; i < crystalRolls; i++)
         {
             if (tpzrand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
             {

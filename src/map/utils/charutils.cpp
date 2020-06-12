@@ -3261,15 +3261,15 @@ namespace charutils
             }
         });
         pcinzone = std::max(pcinzone, PMob->m_HiPartySize);
+        maxlevel = std::max(maxlevel, PMob->m_HiPCLvl);
+        PMob->m_HiPartySize = pcinzone;
+        PMob->m_HiPCLvl = maxlevel;
 
         PChar->ForAlliance([&PMob, &region, &minlevel, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
         {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
             if (!PMember || PMember->isDead())
                 return;
-
-            maxlevel = std::max(maxlevel, PMob->m_HiPCLvl);
-            PMob->m_HiPCLvl = maxlevel;
 
             bool chainactive = false;
 
