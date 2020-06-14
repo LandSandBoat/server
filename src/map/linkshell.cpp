@@ -29,6 +29,7 @@
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
 #include "packets/linkshell_equip.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 
 #include "utils/zoneutils.h"
@@ -236,7 +237,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 *                                                                       *
 ************************************************************************/
 
-void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank)
+void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell)
 {
     uint32 lsid = m_id;
 	for (uint32 i = 0; i < members.size(); ++i)
@@ -302,7 +303,15 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank)
 
             PMember->pushPacket(new CInventoryFinishPacket());
             PMember->pushPacket(new CCharUpdatePacket(PMember));
-            PMember->pushPacket(new CMessageSystemPacket(0,0,109));
+            if (breakLinkshell)
+            {
+                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
+            }
+            else
+            {
+                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellKicked));
+            }
+            
 			return;
 		}
 	}
@@ -323,7 +332,7 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
     // break logged in and equipped members
 	while (members.size() > 0)
 	{
-        RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL);
+        RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
     Sql_Query(SqlHandle, "UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
@@ -496,7 +505,7 @@ namespace linkshell
 
     bool IsValidLinkshellName(const int8* name)
     {
-        auto ret = Sql_Query(SqlHandle, "SELECT linkshellid FROM linkshells WHERE name = '%s';", name);
+        auto ret = Sql_Query(SqlHandle, "SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1;", name);
         return ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0;
     }
 
