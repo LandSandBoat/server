@@ -24,6 +24,6 @@ function onMobDeath(mob, player, isKiller)
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and
         player:getCharVar("MissionStatus") == 1
     then
-        player:setCharVar("Mission6-2MobKilled", 1)
+        player:setCharVar("MissionStatus", 2)
     end
 end
