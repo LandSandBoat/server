@@ -470,7 +470,6 @@ function corsairSetup(caster, ability, action, effect, job)
         action:recast(action:recast()/2)
     end
     checkForJobBonus(caster, job)
-    caster:addRecast(tpz.recast.ABILITY, 194, 8)
 end
 
 function atMaxCorsairBusts(caster)
