@@ -632,12 +632,14 @@ int access_ipmask(const char* str, AccessControl* acc)
 				mask = (mask >> 1) | 0x80000000;
 				--m[0];
 			}
-			mask = ntohl(mask);
 		} else
 		{// just this ip
 			mask = 0xFFFFFFFF;
 		}
 	}
+
+    ip = ntohl(ip);
+
 	if( access_debug ){
 		ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(mask));
 	}
