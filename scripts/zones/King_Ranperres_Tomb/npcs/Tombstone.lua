@@ -32,7 +32,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(2)
         end
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
         player:startEvent(8)
     end
 
