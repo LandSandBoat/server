@@ -165,6 +165,8 @@ void PrintPacket(CBasicPacket data)
 
     for (size_t y = 0; y < data.length(); y++)
     {
+        // TODO: -Wno-restrict - undefined behavior to print and write src into dest
+        // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
         sprintf(message, "%s %02hx", message, *((uint8*)data[(const int)y]));
         if (((y + 1) % 16) == 0)
         {
