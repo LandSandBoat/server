@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Chululu
--- Starts and Finishes Quests: Collect Tarut Cards, Rubbish Day
+-- Starts and Finishes Quests: Collect Tarut Cards, Rubbish Day, All in the Cards
 -- Optional Cutscene at end of Quest: Searching for the Right Words
 -- !pos -13 -6 -42 245
 -----------------------------------
@@ -19,12 +19,20 @@ function onTrade(player,npc,trade)
             player:startEvent(200); -- Finish quest "Collect Tarut Cards"
         end
     end
+    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(558,1) == true and trade:hasItemQty(559,1) == true and trade:hasItemQty(561,1) == true and trade:hasItemQty(562,1) == true and trade:getItemCount() == 4) then
+            player:startEvent(10114); -- Finish quest "All in the Cards"
+        end
+    end	
 end;
 
 function onTrigger(player,npc)
     local CollectTarutCards = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.COLLECT_TARUT_CARDS);
     local RubbishDay = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.RUBBISH_DAY);
     local SearchingForTheRightWords = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS);
+    local AllInTheCards = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);
+    local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day	
+    local cdate = player:getCharVar("AllInTheCards_date");
 
     if (player:getFameLevel(JEUNO) >= 3 and CollectTarutCards == QUEST_AVAILABLE) then
         player:startEvent(28); -- Start quest "Collect Tarut Cards" with option
@@ -50,6 +58,17 @@ function onTrigger(player,npc)
         else
             player:startEvent(87); -- final state, after all quests complete
         end
+
+
+    elseif (player:getFameLevel(JEUNO) >= 4 and CollectTarutCards == QUEST_COMPLETED and AllInTheCards == QUEST_AVAILABLE) then
+        player:startEvent(10110); -- Start quest "All in the Cards" with option
+	elseif (AllInTheCards == QUEST_ACCEPTED and cdate == realday) then
+		player:startEvent(10111); -- During quest "All in the Cards" and same AllInTheCards_date value		
+	elseif (AllInTheCards == QUEST_ACCEPTED and cdate ~= realday) then
+		player:startEvent(10112); -- During quest "All in the Cards"  THIS ONE GIVES ANOTHER BATCH
+	elseif (CollectTarutCards == QUEST_COMPLETED and AllInTheCards == QUEST_COMPLETED) then
+		player:startEvent(10113); -- Start quest "All in the Cards"	repeat with option
+
 
     elseif (RubbishDay == QUEST_COMPLETED) then
         player:startEvent(87); -- New standard dialog
@@ -98,7 +117,82 @@ function onEventFinish(player,csid,option)
         player:addKeyItem(tpz.ki.MAGIC_TRASH);
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAGIC_TRASH);
         player:setCharVar("RubbishDay_prog",0);
-        player:setCharVar("RubbishDay_day",0);
+        player:setCharVar("RubbishDay_day",VanadielDayOfTheYear());
+	elseif (csid == 10110 and option==0) then  -- ALL_IN_THE_CARDS started
+        player:delQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);	
+        local rand = math.random(1,4);
+        local card = 0;
+
+        if (rand == 1) then
+            card = 559; -- Tarut: Death
+        elseif (rand == 2) then
+            card = 562; -- Tarut: Hermit
+        elseif (rand == 3) then
+            card = 561; -- Tarut: King
+        else
+            card = 558; -- Tarut: Fool
+        end
+
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,card);
+        else	
+            player:addQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);
+			player:setCharVar("AllInTheCards_date", os.date("%j")); -- %M for next minute, %j for next day	
+            player:addItem(card,5);
+            player:messageSpecial(ID.text.ITEM_OBTAINED,card);
+        end	
+	elseif (csid == 10113 and option==0) then  -- ALL_IN_THE_CARDS repeat started
+        player:delQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);	
+        local rand = math.random(1,4);
+        local card = 0;
+
+        if (rand == 1) then
+            card = 559; -- Tarut: Death
+        elseif (rand == 2) then
+            card = 562; -- Tarut: Hermit
+        elseif (rand == 3) then
+            card = 561; -- Tarut: King
+        else
+            card = 558; -- Tarut: Fool
+        end
+
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,card);
+        else	
+            player:addQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);
+			player:setCharVar("AllInTheCards_date", os.date("%j")); -- %M for next minute, %j for next day	
+            player:addItem(card,5);
+            player:messageSpecial(ID.text.ITEM_OBTAINED,card);
+        end			
+	elseif (csid == 10112) then  -- ALL_IN_THE_CARDS progress + a day wait
+        local rand = math.random(1,4);
+        local card = 0;
+
+        if (rand == 1) then
+            card = 559; -- Tarut: Death
+        elseif (rand == 2) then
+            card = 562; -- Tarut: Hermit
+        elseif (rand == 3) then
+            card = 561; -- Tarut: King
+        else
+            card = 558; -- Tarut: Fool
+        end
+
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,card);
+        else
+			player:setCharVar("AllInTheCards_date", os.date("%j")); -- %M for next minute, %j for next day			
+            player:addItem(card,5);
+            player:messageSpecial(ID.text.ITEM_OBTAINED,card);
+        end		
+    elseif (csid == 10114) then
+        player:addTitle(tpz.title.CARD_COLLECTOR);
+        player:addFame(JEUNO, 30);
+        player:addGil(GIL_RATE*600);	
+        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*600);
+		player:setCharVar("AllInTheCards_date",0);		
+        player:tradeComplete();	
+        player:completeQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS);		
     elseif (csid == 197) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13083);
