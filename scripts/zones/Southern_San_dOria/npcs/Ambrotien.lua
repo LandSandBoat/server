@@ -62,13 +62,13 @@ function onTrigger(player,npc)
             player:startEvent(2000); -- Start First Mission "Smash the Orcish scouts"
         elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1036);
-        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 3 then
+        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 4 then
             if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
                 player:startEvent(1038)
             else
                 player:startEvent(1040)
             end
-        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 6 then
+        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 7 then
             player:startEvent(1034);
         elseif (CurrentMission ~= tpz.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player,19) == 1 and player:getCharVar("SecretWeaponStatus") == 0) then
             player:startEvent(62);
@@ -97,8 +97,9 @@ function onEventFinish(player,csid,option)
     if (csid == 1036) then
         player:delKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK);
         player:setLocalVar("RanperresRest", 1) -- set to require a zone
-    elseif (csid == 1040) then
         player:setCharVar("MissionStatus",4)
+    elseif (csid == 1040) then
+        player:setCharVar("MissionStatus",5)
     elseif (csid == 1034) then
         finishMissionTimeline(player,1,csid,option);
     elseif (csid == 62) then

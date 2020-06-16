@@ -31,7 +31,7 @@ function onTrigger(player, npc)
         player:startEvent(6) -- enter cutscene
     elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then -- inside
         player:startEvent(7) -- exit cutscene
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 5 then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
         player:startEvent(5)
     elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 6 then
         player:startEvent(14)
@@ -45,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 5 then
-        player:setCharVar("MissionStatus", 6)
+        player:setCharVar("MissionStatus", 7)
     elseif csid == 14 then
         player:setCharVar("MissionStatus", 7)
         -- at this point 3 optional cs are available and open until watched (add 3 var to char?)

@@ -17,11 +17,11 @@ function onTrigger(player,npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
+    if currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and ((player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus == 3) or missionStatus == 4 or missionStatus == 5) then
         player:startEvent(49) -- Optional 6-2 CS
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 5 then
-        player:startEvent(50) -- Optional 6-2 CS
     elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
+        player:startEvent(50) -- Optional 6-2 CS
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
         player:startEvent(79) -- Optional 6-2 CS
     elseif player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,18) == false then
         player:startEvent(560)

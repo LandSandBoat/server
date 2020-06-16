@@ -38,9 +38,9 @@ function onTrigger(player,npc)
         player:startEvent(547);
     elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 0 then
         player:startEvent(81);
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 4 then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 5 then
         player:startEvent(21);
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
         player:startEvent(79) -- Optional 6-2 CS
     elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.LIGHTBRINGER) and player:getRank() == 9 and player:getCharVar("Cutscenes_8-2") == 0) then
         player:startEvent(63);
@@ -93,7 +93,7 @@ function onEventFinish(player,csid,option)
     elseif (csid == 81) then
         player:setCharVar("MissionStatus",1);
     elseif (csid == 21) then
-        player:setCharVar("MissionStatus",5);
+        player:setCharVar("MissionStatus",6);
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2",1)
     end
