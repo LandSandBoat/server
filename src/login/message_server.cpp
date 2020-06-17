@@ -175,7 +175,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             if (ipstring)
             {
-                inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ip);
+                inet_pton(AF_INET, (const char*)Sql_GetData(ChatSqlHandle, 0), &ip);
             }
             else
             {
