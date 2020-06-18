@@ -18,7 +18,6 @@ else()
         -DFMT_USE_WINDOWS_H=0
         -D_CRT_SECURE_NO_WARNINGS
         -D_CRT_NONSTDC_NO_DEPRECATE
-        -D_WINSOCK_DEPRECATED_NO_WARNINGS
         /Ob2 # Inline Function Expansion
         /Oy- # Frame-Pointer Omission
         /MP # Build with Multiple Processes
