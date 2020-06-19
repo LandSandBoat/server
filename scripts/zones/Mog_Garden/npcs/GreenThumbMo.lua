@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
         tpz.shop.general(player, stock);
 
     elseif (csid == 1016 and option == 0xFFB00FF) then -- Leave this Mog Garden -> Whence I Came
-        player:warp(); -- Ghetto for now, the last zone seems to get messed up due to mog house issues.
+        player:warp(); -- Workaround for now, the last zone seems to get messed up due to mog house issues.
 
     end
 end;

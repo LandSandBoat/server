@@ -58,7 +58,7 @@ function onEventFinish(player,csid,option)
     elseif option == 515 then -- Augmented Doom Tabar
         Price = 2500
         ItemID = 16660
-        -- Aug crap here
+        -- Augment here
     elseif option == 769 then -- Lancer's Plackart
         Price = 1500
         ItemID = 12041
@@ -69,7 +69,7 @@ function onEventFinish(player,csid,option)
     elseif option == 771 then -- Augmented Yukitsugu
         Price = 2500
         ItemID = 16971
-        -- Aug crap here
+        -- Augment here
     elseif option == 1025 then -- Caller's Doublet
         Price = 1500
         ItemID = 12042

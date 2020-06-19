@@ -40,7 +40,7 @@ function onUseAbility(player,target,ability)
 
     local pEquipMods = player:getMod(tpz.mod.ENHANCES_ELEMENTAL_SIPHON)
     local basePower = player:getSkillLevel(tpz.skill.SUMMONING_MAGIC) + pEquipMods - 50
-    if (basePower < 0) then -- skill your summoning magic you lazy bastard !
+    if (basePower < 0) then
         basePower = 0
     end
     local weatherDayBonus = 1
