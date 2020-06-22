@@ -278,15 +278,6 @@ void CalculateStats(CMobEntity * PMob)
 
 
         PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
-
-        if(isNM)
-        {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * 2.0f);
-            if(mLvl > 75){
-                PMob->health.maxhp = (int32)(PMob->health.maxhp * 2.5f);
-            }
-        }
-
     }
     else
     {
