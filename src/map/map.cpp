@@ -152,7 +152,7 @@ int32 do_init(int32 argc, char** argv)
         if (strcmp(argv[i], "--ip") == 0)
         {
             uint32 ip;
-            inet_pton(AF_INET, argv[i + 2], &ip);
+            inet_pton(AF_INET, argv[i + 1], &ip);
             map_ip.s_addr = ip;
         }
         else if (strcmp(argv[i], "--port") == 0)
