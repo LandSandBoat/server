@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Fort_Ghelsba/IDs");
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 174)
 end;
 
 function onMobDespawn(mob)

@@ -25,5 +25,5 @@ function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 346)
 end

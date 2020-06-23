@@ -12,7 +12,7 @@ function onMobSpawn(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 199)
     tpz.regime.checkRegime(player, mob, 16, 1, tpz.regime.type.FIELDS)
 end
 

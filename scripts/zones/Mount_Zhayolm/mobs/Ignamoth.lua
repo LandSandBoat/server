@@ -17,5 +17,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 457)
 end

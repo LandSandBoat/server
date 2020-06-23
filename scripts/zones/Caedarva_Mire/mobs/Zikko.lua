@@ -8,5 +8,5 @@ mixins = {require("scripts/mixins/families/imp")}
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 469)
 end

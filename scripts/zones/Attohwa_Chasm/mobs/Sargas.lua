@@ -41,7 +41,7 @@ function onSpikesDamage(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 279)
 end
 
 function onMobDespawn(mob)
