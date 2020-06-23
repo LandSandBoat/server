@@ -16,7 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 316)
     tpz.regime.checkRegime(player, mob, 55, 1, tpz.regime.type.FIELDS)
 end
 

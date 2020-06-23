@@ -273,7 +273,7 @@ local zone =
         [ 354] = { huntId =  69813, optionId = 1481 },
         [ 610] = { huntId =  68790, optionId = 1489 },
         [ 866] = { huntId =  87223, optionId = 1497 },
-        -- Eldieme Necropolis
+        -- The Eldieme Necropolis
         [ 362] = { huntId = 105656, optionId = 1505 },
         [ 618] = { huntId = 105657, optionId = 1513 },
         [ 874] = { huntId = 105658, optionId = 1521 },
@@ -957,7 +957,7 @@ local zone =
         [  41] = 2147483584,
         [  49] = 2147467264,
      },
-        -- Cape Terrigan
+        -- Cape Teriggan
         [ 266] = { huntId = 121236, optionId = 3233 },
         [ 522] = { huntId = 137621, optionId = 3241 },
         [ 778] = { huntId = 139670, optionId = 3249 },
@@ -1250,7 +1250,7 @@ local zone =
         [ 546] = { huntId = 103916, optionId = 3937 },
         [ 802] = { huntId = 104941, optionId = 3945 },
         [1058] = { huntId = 122350, optionId = 3953 },
-        -- Eldieme Necropolis [S]
+        -- The Eldieme Necropolis [S]
         [ 298] = { huntId = 139759, optionId = 3961 },
         [ 554] = { huntId = 174576, optionId = 3969 },
         [ 810] = { huntId = 174577, optionId = 3977 },

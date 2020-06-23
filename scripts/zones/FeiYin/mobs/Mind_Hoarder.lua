@@ -7,7 +7,7 @@ require("scripts/globals/titles");
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 347)
 
     -- Curses, Foiled A-Golem!?
     if (player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)) then
