@@ -6,6 +6,8 @@ require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+require("scripts/quests/full_speed_ahead")
+-----------------------------------
 
 local startingRaceInfo =
 {
@@ -187,4 +189,10 @@ function onPlayerLevelUp(player)
 end
 
 function onPlayerLevelDown(player)
+end
+
+function onPlayerEmote(player, emoteId)   
+    if emoteId == tpz.emote.CHEER and player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
+        tpz.fsa.onCheer(player)
+    end
 end
