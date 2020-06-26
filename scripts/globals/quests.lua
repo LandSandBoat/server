@@ -481,6 +481,8 @@ tpz.quest.id =
         VW_OP_115_VALKURM_DUSTER        = 168,
         VW_OP_118_BUBURIMU_SQUALL       = 169,
         PRELUDE_TO_PUISSANCE            = 170,
+
+        FULL_SPEED_AHEAD                = 179, -- + --
     },
 
     -----------------------------------
