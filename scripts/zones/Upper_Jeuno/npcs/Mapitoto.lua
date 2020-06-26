@@ -12,8 +12,12 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
-    if trade:getSlotCount() == 1 and not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067)) then
+    if
+        player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE) and
+        trade:getSlotCount() == 1 and
+        -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
+        not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067))
+    then
         local item = trade:getItemId(0)
         local mount = item - 10050
         if item == 15533 then
