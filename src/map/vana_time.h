@@ -60,6 +60,7 @@ class CVanaTime
 public:
 
 	static	CVanaTime * getInstance();
+	static  void delInstance();
 
 	TIMETYPE SyncTime();
 	TIMETYPE GetCurrentTOTD();
