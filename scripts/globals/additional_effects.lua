@@ -7,7 +7,7 @@
 -- No matter how much MND you stack that holy mace doesn't hit any harder.
 -- But Ice Arrows and Bloody Bolts will gain damage from INT and Holy bolts will gain damage from MND.
 -- Melee weapon proc also do not appear to adjust for level, only resistance.
--- In testing my fire sword had the same dmg ranges no matter my level vs same mob.
+-- In testing my fire sword had the same damage ranges no matter my level vs same mob.
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
 ------------------------------------------------------------------------------
@@ -17,6 +17,68 @@ require("scripts/globals/magic") -- For resist functions
 require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")
 --------------------------------------
+
+tpz = tpz or {}
+tpz.addEffect = tpz.addEffect or {}
+
+tpz.addEffect.isRanged = function(item)
+    -- Archery/Marksmanship/Throwing
+    return math.abs(item:getSkillType() - tpz.skill.MARKSMANSHIP) < 2
+end
+
+tpz.addEffect.calcRangeBonus = function(attacker, defender, element, damage)
+    -- Copied from existing scripts.
+    local bonus = 0
+    if element == tpz.magic.ele.LIGHT then
+        bonus = attacker:getStat(tpz.mod.MND) - defender:getStat(tpz.mod.MND)
+        if bonus > 40 then
+            bonus = bonus + (bonus -40) /2;
+            damage = damage + bonus
+        end
+    else
+        bonus = attacker:getStat(tpz.mod.INT) - defender:getStat(tpz.mod.INT)
+        if bonus > 20 then
+            bonus = bonus + (bonus -20) /2;
+            damage = damage + bonus
+        end
+    end
+
+    return damage
+end
+
+tpz.addEffect.levelCorrection = function(dLV, aLV, chance)
+    -- Level correction of proc chance (copied from existing bolt/arrow scripts, looks wrong..)
+    if dLV > aLV then
+        chance = utils.clamp(chance - 5 * (dLV - aLV), 5, 95)
+    end
+
+    return chance
+end
+
+tpz.addEffect.statusAttack = function(addStatus)
+    local effectList =
+    {
+        [tpz.effect.DEFENSE_DOWN] = {tick = 0, strip = tpz.effect.DEFENSE_BOOST},
+        [tpz.effect.EVASION_DOWN] = {tick = 0, strip = tpz.effect.EVASION_BOOST},
+        [tpz.effect.ATTACK_DOWN]  = {tick = 0, strip = tpz.effect.ATTACK_BOOST},
+        [tpz.effect.POISON]       = {tick = 3, strip = nil},
+        [tpz.effect.CHOKE]        = {tick = 3, strip = nil},
+    }
+    local delEffect = effectList[addStatus]
+    defender:delStatusEffect(delEffect.strip)
+    return tick
+end
+
+tpz.addEffect.calcDamage = function(attacker, element, defender, damage)
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    damage = addBonusesAbility(attacker, element, defender, damage, params)
+    damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+    damage = adjustForTarget(defender, damage, element)
+    damage = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
+    return damage
+end
 
 -- paralyze on hit, fire damage on hit, etc..
 function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
@@ -28,10 +90,8 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     local addStatus = item:getMod(tpz.mod.ITEM_ADDEFFECT_STATUS)
     local power = item:getMod(tpz.mod.ITEM_ADDEFFECT_POWER)
     local duration = item:getMod(tpz.mod.ITEM_ADDEFFECT_DURATION)
-    local tick = 0
     local msgID = 0
     local msgValue = 0
-    local dmg = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
     local procType =
     {
         -- These are arbitrary, make up new ones as needed.
@@ -49,87 +109,46 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    if
-        damage > 0 and
-        (item:getSkillType() == tpz.skill.ARCHERY or
-        item:getSkillType() == tpz.skill.MARKSMANSHIP or
-        item:getSkillType() == tpz.skill.THROWING)
-    then
-        local bonus = 0
-        if element ~= nil then
-            if element == tpz.magic.ele.LIGHT then
-                bonus = attacker:getStat(tpz.mod.MND) - defender:getStat(tpz.mod.MND)
-                if bonus > 40 then
-                    -- Copied from existing scripts.
-                    bonus = bonus + (bonus -40) /2;
-                    damage = damage + bonus
-                end
-            else
-                bonus = attacker:getStat(tpz.mod.INT) - defender:getStat(tpz.mod.INT)
-                if bonus > 20 then
-                    -- Copied from existing scripts.
-                    bonus = bonus + (bonus -20) /2;
-                    damage = damage + bonus
-                end
-            end
+    if tpz.addEffect.isRanged(item) then
+        if element then
+            damage = tpz.addEffect.calcRangeBonus(attacker, defender, element, damage)
         end
-
-        -- Level correction of proc chance (copied from existing bolt/arrow scripts, looks wrong..)
-        if defender:getMainLvl() > attacker:getMainLvl() then
-            chance = chance - 5 * (defender:getMainLvl() - attacker:getMainLvl())
-            chance = utils.clamp(chance, 5, 95)
-        end
+        chance = ltpz.addEffect.evelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
     --------------------------------------
 
     if addType == procType.NORMAL then
-        if addStatus ~= nil and addStatus > 0 then
+        if addStatus and addStatus > 0 then
             msgID = tpz.msg.basic.ADD_EFFECT_STATUS
 
             if chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
                 msgValue = nil
             else
-                if addStatus == tpz.effect.DEFENSE_DOWN then
-                    defender:delStatusEffect(tpz.effect.DEFENSE_BOOST)
-                elseif addStatus == tpz.effect.EVASION_DOWN then
-                    defender:delStatusEffect(tpz.effect.EVASION_BOOST)
-                elseif addStatus == tpz.effect.ATTACK_DOWN then
-                    defender:delStatusEffect(tpz.effect.ATTACK_BOOST)
-                end
-
-                if addStatus == tpz.effect.POISON or addStatus == tpz.effect.CHOKE then
-                    tick = 3
-                end
-
+                local tick = tpz.addEffect.statusAttack(addStatus)
                 defender:addStatusEffect(addStatus, power, tick, duration)
                 msgValue = addStatus
             end
         end
 
         if damage > 0 then
+            -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
             if chance <= math.random(100) then
                 msgValue = nil
             else
-                local params = {}
-                params.bonusmab = 0
-                params.includemab = false
-                dmg = addBonusesAbility(attacker, element, defender, dmg, params)
-                dmg = dmg * applyResistanceAddEffect(attacker, defender, element, 0)
-                dmg = adjustForTarget(defender, dmg, element)
-                dmg = finalMagicNonSpellAdjustments(attacker, defender, element, dmg)
+                damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
 
                 if subEffect == tpz.subEffect.HP_DRAIN then
                     msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-                    if dmg < 0 then
-                        dmg = 0
+                    if damage < 0 then
+                        damage = 0
                     end
                 else
-                    msgID = tpz.msg.basic.ADD_EFFECT_DMG
-                    if dmg < 0 then
+                    msgID = tpz.msg.basic.ADD_EFFECT_damage
+                    if damage < 0 then
                         msgID = tpz.msg.basic.ADD_EFFECT_HEAL
                     end
                 end
-                msgValue = dmg
+                msgValue = damage
             end
         end
     end
@@ -168,15 +187,15 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(100) then
             msgValue = nil
         else
-            dmg = dmg * applyResistanceAddEffect(attacker, defender, element, 0)
-            if dmg > defender:getHP() then
-                dmg = defender:getHP()
+            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+            if damage > defender:getHP() then
+                damage = defender:getHP()
             end
 
             msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-            msgValue = dmg
-            defender:addHP(-dmg)
-            attacker:addHP(dmg)
+            msgValue = damage
+            defender:addHP(-damage)
+            attacker:addHP(damage)
         end
     end
 
@@ -184,16 +203,16 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(100) then
             msgValue = nil
         else
-            dmg = dmg * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            dmg = dmg * applyResistanceAddEffect(attacker, defender, element, 0)
-            if dmg > defender:getMP() then
-                dmg = defender:getMP()
+            damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
+            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+            if damage > defender:getMP() then
+                damage = defender:getMP()
             end
 
             msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
-            msgValue = dmg
-            defender:addMP(-dmg)
-            attacker:addMP(dmg)
+            msgValue = damage
+            defender:addMP(-damage)
+            attacker:addMP(damage)
         end
     end
 
@@ -201,16 +220,16 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if chance <= math.random(100) then
             msgValue = nil
         else
-            dmg = dmg * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            dmg = dmg * applyResistanceAddEffect(attacker, defender, element, 0)
-            if dmg > defender:getTP() then
-                dmg = defender:getTP()
+            -- +damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
+            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+            if damage > defender:getTP() then
+                damage = defender:getTP()
             end
 
             msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
-            msgValue = dmg
-            defender:addTP(-dmg)
-            attacker:addTP(dmg)
+            msgValue = damage
+            defender:addTP(-damage)
+            attacker:addTP(damage)
         end
     end
 
