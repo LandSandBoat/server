@@ -730,7 +730,7 @@ end
 
 function MobTakeAoEShadow(mob, target, max)
 
-    -- this is completely crap and should be using actual nin skill
+    -- this should be using actual nin skill
     -- TODO fix this
     if (target:getMainJob() == tpz.job.NIN and math.random() < 0.6) then
         max = max - 1

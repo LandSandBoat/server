@@ -14,7 +14,7 @@ function onSpellCast(caster,target,spell)
     local sLvl = caster:getSkillLevel(tpz.skill.SINGING) -- Gets skill level of Singing
     local iLvl = caster:getWeaponSkillLevel(tpz.slot.RANGED)
 
-    -- Since nobody knows the evasion values for mambo, I'll just make shit up! (aka - same as madrigal)
+    -- Since nobody knows the evasion values for mambo, I'll just make it up! (aka - same as madrigal)
     local power = 9
 
     if (sLvl+iLvl > 130) then

@@ -10,13 +10,14 @@ require("scripts/globals/quests")
 require("scripts/globals/shop")
 
 function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+    -- FLYERS FOR REGINE
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         if player:getCharVar("tradeBoncort") == 0 then
-            player:confirmTrade()
-            player:messageSpecial(ID.text.BONCORT_DIALOG)
             player:messageSpecial(ID.text.FLYER_ACCEPTED)
+            player:messageSpecial(ID.text.FFR_BONCORT)
             player:addCharVar("FFR", -1)
             player:setCharVar("tradeBoncort", 1)
+            player:confirmTrade()
         else
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end

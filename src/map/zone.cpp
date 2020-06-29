@@ -364,7 +364,7 @@ void CZone::LoadZoneSettings()
     {
         m_zoneName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
 
-        m_zoneIP = inet_addr((const char*)Sql_GetData(SqlHandle, 1));
+        inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 1), &m_zoneIP);
         m_zonePort = (uint16)Sql_GetUIntData(SqlHandle, 2);
         m_zoneMusic.m_songDay = (uint8)Sql_GetUIntData(SqlHandle, 3);   // background music (day)
         m_zoneMusic.m_songNight = (uint8)Sql_GetUIntData(SqlHandle, 4);   // background music (night)

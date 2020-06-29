@@ -60,6 +60,7 @@ CBattleEntity::CBattleEntity()
     m_Weapons[SLOT_SUB] = new CItemWeapon(0);
     m_Weapons[SLOT_RANGED] = new CItemWeapon(0);
     m_Weapons[SLOT_AMMO] = new CItemWeapon(0);
+    m_dualWield = false;
 
     memset(&stats, 0, sizeof(stats));
     memset(&health, 0, sizeof(health));

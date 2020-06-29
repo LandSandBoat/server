@@ -270,7 +270,7 @@ function ApplyMod(player, gearset, matches)
     -- find any additional matches
     local addMatches = matches - gearset.matches
 
-    -- just in case some d00d decides to custom shit up and complain the script is b0rked
+    -- just in case some d00d decides to customize things and complain the script is b0rked
     if (addMatches < 0) then
         return
     end
@@ -407,7 +407,7 @@ Empyrean +2
 11139 -- Mavi Tayt+2
 11159 -- Mavi Basmak+2
 -- Set Bonus: Occ. augments blue magic spells.
--- no damn clue!
+-- no clue!
 
 
 --Bale Armor +2 Set

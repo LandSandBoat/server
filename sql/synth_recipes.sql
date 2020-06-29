@@ -4674,6 +4674,8 @@ INSERT INTO `synth_recipes` VALUES (4557,0,2037,54,0,0,0,15,0,0,0,4096,4238,914,
 INSERT INTO `synth_recipes` VALUES (4558,0,2037,59,0,0,0,25,0,0,0,4096,4238,914,932,1647,2310,2460,0,0,0,9073,9073,9073,9073,12,12,12,12,'Arcanic Cell II');
 INSERT INTO `synth_recipes` VALUES (4559,1,0,0,0,0,0,15,0,0,0,4100,4242,16769,0,0,0,0,0,0,0,817,715,650,649,3,1,1,2,'Grass Thread'); -- Brass Zaghnal (desynth)
 INSERT INTO `synth_recipes` VALUES (4560,1,0,0,0,45,0,0,0,0,0,4100,4242,12467,0,0,0,0,0,0,0,840,820,820,820,1,5,6,7,'Chocobo Feather'); -- Wool Cap (desynth)
+INSERT INTO `synth_recipes` VALUES (4561,1,0,0,0,0,0,0,0,0,66,4100,4242,17054,0,0,0,0,0,0,0,719,842,842,842,1,1,1,1,'Ebony Lumber'); -- Ebony Wand (desynth)
+INSERT INTO `synth_recipes` VALUES (4562,1,0,0,0,0,0,0,0,87,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Mercury'); -- Rising Sun (desynth)
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)

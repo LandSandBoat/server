@@ -52,6 +52,9 @@ enum class MsgStd
     PollProposalParty              = 101, // Player Name's proposal to the party (cast vote with command: "/vote ?"):
     PollProposalLinkshell          = 102, // Player Name's proposal to the linkshell group (cast vote with command: "/vote ?"):
     PollProposalSystem             = 103, // Player Name's proposal to everyone (cast vote with command: "/vote ?"):
+    LinkshellEquipBeforeUsing      = 108, // Equip a linkshell, pearlsack, or linkpearl before using that command.
+    LinkshellKicked                = 109, // You have been kicked out of the linkshell group.
+    LinkshellNoLongerExists        = 110, // That linkshell group no longer exists. This item is unusable.
     LinkshellUnavailable           = 112, // The linkshell name you entered is already in use or otherwise unavailable.
     TellNotReceivedOffline         = 125, // Your tell was not received.  The recipient is currently away.
     CurrentPollResultsSystem       = 140, // Player Name's proposal - Current poll results:
@@ -65,6 +68,7 @@ enum class MsgStd
     FinalPollResultsParty          = 152, // Player Name's proposal - Final poll results:
     CurrentPollResultsLinkshell    = 153, // Player Name's proposal - Current poll results:
     FinalPollResultsLinkshell      = 154, // Player Name's proposal - Final poll results:
+    LinkshellNoAccess              = 158, // You do not have access to those linkshell commands.
     ThrowAway                      = 180, // You throw away <item>.
     TellNotReceivedAway            = 181, // Your tell was not received.  The recipient is currently away.
     ItemEx                         = 220, // You cannot possess more than one of that item.
