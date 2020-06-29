@@ -1,21 +1,22 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Leuveret
--- General Info NPC
+-- Type: General Info NPC
 -------------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs");
 require("scripts/globals/quests");
 
 function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getCharVar("tradeLeuveret") == 0) then
-            player:messageSpecial(ID.text.LEUVERET_DIALOG);
+    -- FLYERS FOR REGINE
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+        if player:getCharVar("tradeLeuveret") == 0 then
+            player:messageSpecial(ID.text.FLYER_ACCEPTED)
+            player:messageSpecial(ID.text.FFR_LEUVERET)
             player:addCharVar("FFR", -1)
-            player:setCharVar("tradeLeuveret",1);
-            player:messageSpecial(ID.text.FLYER_ACCEPTED);
-            player:tradeComplete();
-        elseif (player:getCharVar("tradeLeuveret") == 1) then
-            player:messageSpecial(ID.text.FLYER_ALREADY);
+            player:setCharVar("tradeLeuveret", 1)
+            player:confirmTrade()
+        else
+            player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
 end;

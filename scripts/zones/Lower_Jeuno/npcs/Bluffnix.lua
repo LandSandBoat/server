@@ -95,9 +95,8 @@ function onEventFinish(player,csid,option)
             player:addTitle(tpz.title.GRAND_GREEDALOX);
         end
 
-        player:changeContainerSize(0,5);
-        player:changeContainerSize(5,5);
-        player:changeContainerSize(6,5);
+        player:changeContainerSize(tpz.inv.INVENTORY,5);
+        player:changeContainerSize(tpz.inv.MOGSATCHEL,5);
         player:addFame(JEUNO, 30);
         player:tradeComplete();
         player:completeQuest(JEUNO,TheGobbieBag[1]);
