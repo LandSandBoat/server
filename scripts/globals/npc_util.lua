@@ -221,9 +221,13 @@ function npcUtil.giveItem(player, items)
     end
 
     -- give items to player
+    local messagedItems = {}
     for _, v in pairs(givenItems) do
         if player:addItem(v[1], v[2], true) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+            if not messagedItems[v[1]] then
+                player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+            end
+            messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             return false

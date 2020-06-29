@@ -1262,9 +1262,32 @@ void SmallPacket0x034(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             // If item count is zero.. remove from container..
             if (quantity > 0)
             {
-                ShowNotice(CL_CYAN"%s->%s trade updating trade slot id %d with item %s, quantity %d\n" CL_RESET, PChar->GetName(), PTarget->GetName(), tradeSlotID, PItem->getName(), quantity);
-                PItem->setReserve(quantity + PItem->getReserve());
-                PChar->UContainer->SetItem(tradeSlotID, PItem);
+                if (PItem->isType(ITEM_LINKSHELL))
+                {
+                    CItemLinkshell* PItemLinkshell = static_cast<CItemLinkshell*>(PItem);
+                    CItemLinkshell* PItemLinkshell1 = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
+                    CItemLinkshell* PItemLinkshell2 = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
+                    if ( (!PItemLinkshell1 && !PItemLinkshell2) ||
+                        ((!PItemLinkshell1 || PItemLinkshell1->GetLSID() != PItemLinkshell->GetLSID()) &&
+                        (!PItemLinkshell2 || PItemLinkshell2->GetLSID() != PItemLinkshell->GetLSID())) )
+                    {
+                        PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellEquipBeforeUsing));
+                        PItem->setReserve(0);
+                        PChar->UContainer->SetItem(tradeSlotID, nullptr);
+                    }
+                    else
+                    {
+                        ShowNotice(CL_CYAN"%s->%s trade updating trade slot id %d with item %s, quantity %d\n" CL_RESET, PChar->GetName(), PTarget->GetName(), tradeSlotID, PItem->getName(), quantity);
+                        PItem->setReserve(quantity + PItem->getReserve());
+                        PChar->UContainer->SetItem(tradeSlotID, PItem);
+                    }
+                }
+                else
+                {
+                    ShowNotice(CL_CYAN"%s->%s trade updating trade slot id %d with item %s, quantity %d\n" CL_RESET, PChar->GetName(), PTarget->GetName(), tradeSlotID, PItem->getName(), quantity);
+                    PItem->setReserve(quantity + PItem->getReserve());
+                    PChar->UContainer->SetItem(tradeSlotID, PItem);
+                }
             }
             else
             {
@@ -1588,7 +1611,7 @@ void SmallPacket0x04D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         return;
     }
 
-    if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
+    if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
     {
         ShowDebug(CL_CYAN"%s is trying to use the delivery box in a disallowed zone [%s]\n" CL_RESET, PChar->GetName(), PChar->loc.zone->GetName());
         return;
@@ -4438,12 +4461,12 @@ void SmallPacket0x0C4(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     Sql_Query(SqlHandle, Query, extra, PChar->id, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
                     PChar->pushPacket(new CInventoryItemPacket(PItemLinkshell, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID()));
                     PChar->pushPacket(new CInventoryFinishPacket());
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 110)); // That linkshell group no longer exists. This item is unusable.
+                    PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
                     return;
                 }
                 if (PItemLinkshell->GetLSID() == 0)
                 {
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 110)); // That linkshell group no longer exists. This item is unusable.
+                    PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
                     return;
                 }
                 if (OldLinkshell != nullptr) // switching linkshell group
@@ -4955,7 +4978,7 @@ void SmallPacket0x0E2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         break;
         }
     }
-    PChar->pushPacket(new CMessageSystemPacket(0, 0, 158)); // You do not have access to those linkshell commands.
+    PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoAccess));
     return;
 }
 

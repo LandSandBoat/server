@@ -3614,5 +3614,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,817); -- Dread Shri
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,818); -- Tail Crush
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,819); -- Blizzard Breath
 
+INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse 
+INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3051); -- Mending Halation
+INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3052); -- Radial Arcana
+
 -- Next available ID: 1141
 

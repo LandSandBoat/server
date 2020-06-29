@@ -4,11 +4,13 @@
 -- Involved in Quest: 20 in Pirate Years, I'll Take the Big Box, True Will
 -- !pos -50 8 40 247
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Rabao/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -73,15 +75,14 @@ function onEventFinish(player,csid,option)
         player:delKeyItem(tpz.ki.OLD_TRICK_BOX);
         player:setCharVar("trueWillCS",2);
     elseif (csid == 99) then
-        if (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13782);
-        else
-            player:delKeyItem(tpz.ki.LARGE_TRICK_BOX);
-            player:addItem(13782);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13782); -- Ninja Chainmail
-            player:setCharVar("trueWillCS",0);
-            player:addFame(NORG,30);
-            player:completeQuest(OUTLANDS,tpz.quest.id.outlands.TRUE_WILL);
+        if npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.TRUE_WILL, {
+                item = 13782, -- Ninja Chainmail
+                fameArea = NORG,               
+                title = tpz.title.PARAGON_OF_NINJA_EXCELLENCE,
+                var = "trueWillCS"
+            })
+        then
+            player:delKeyItem(tpz.ki.LARGE_TRICK_BOX)
         end
     end
 

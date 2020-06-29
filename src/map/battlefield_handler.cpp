@@ -57,7 +57,7 @@ CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 
 void CBattlefieldHandler::HandleBattlefields(time_point tick)
 {
-    // todo: probably stop being a pussy and use raw pointers otherwise might be fucking up lua
+    // todo: use raw pointers otherwise might be harming lua
     // dont want this to run again if we removed a battlefield
     for (auto& PBattlefield : m_Battlefields)
     {
@@ -65,7 +65,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
             PBattlefield.second->onTick(tick);
     }
 
-    // can't std::remove_if in map so i'll ghetto it
+    // can't std::remove_if in map so i'll workaround it
     for (auto it = m_Battlefields.begin(); it != m_Battlefields.end();)
     {
         auto PBattlefield = it->second;
@@ -202,8 +202,7 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
 {
     if (PChar->PBattlefield)
     {
-        // todo: fuck you entering multiple battlefields
-        ShowDebug("%s tried to enter another fuckin battlefield\n", PChar->GetName());
+        ShowDebug("%s tried to enter another battlefield\n", PChar->GetName());
         return BATTLEFIELD_RETURN_CODE_WAIT;
     }
     // attempt to add to an existing battlefield
