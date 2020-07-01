@@ -42,8 +42,8 @@ function onMobSpawn(mob)
                         ai.r.WS, ai.s.SPECIFIC, tpz.ws.DOUBLE_THRUST)
 
     -- Excenmille is a PLD who uses a Polearm, so raise his MAIN_DMG_RATING (up from 1H Sword levels)
-    local increase_damage_by_percent = 1.2
-    mob:addMod(tpz.mod.MAIN_DMG_RATING, mob:getWeaponDmg() * increase_damage_by_percent)
+    local increase_damage_by_percent = 30
+    mob:addMod(tpz.mod.MAIN_DMG_RATING, mob:getWeaponDmg() * (1.0 + (increase_damage_by_percent / 100)))
 end
 
 function onMobDespawn(mob)
