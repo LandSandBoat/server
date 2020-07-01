@@ -384,14 +384,22 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     float damage_mod = 1.0f;
     switch (mJob)
     {
-        // TODO: All jobs
+        // TODO: Check all jobs
 
         // Assuming the job is using its "default" weapon type, otherwise adjust damage with mods.
         // FAST WEAPONS
-        case JOB_MNK: { damage_mod = 0.60f; break; }
-        case JOB_THF: { damage_mod = 0.60f; break; }
+        case JOB_MNK:
+        case JOB_THF:
+        case JOB_NIN:
+        case JOB_PUP:
+            { damage_mod = 0.60f; break; }
         // SLOW WEAPONS
-        case JOB_WAR: { damage_mod = 1.50f; break; }
+        case JOB_WAR:
+        case JOB_DRK:
+        case JOB_SAM:
+        case JOB_DRG:
+        case JOB_RUN:
+            { damage_mod = 1.50f; break; }
         // NORMAL WEAPONS
         default: { damage_mod = 1.0f; break; }
     }

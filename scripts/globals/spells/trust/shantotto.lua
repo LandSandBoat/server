@@ -20,6 +20,11 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 30)
+
+    local power = mob:getMainLvl() / 5
+    mob:addMod(tpz.mod.MATT, power)
+    mob:addMod(tpz.mod.MACC, power)
+    mob:SetAutoAttackEnabled(false)
 end
 
 function onMobDespawn(mob)
