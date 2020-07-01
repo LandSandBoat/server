@@ -85,7 +85,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     local addType = item:getMod(tpz.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(tpz.mod.ITEM_SUBEFFECT)
     local damage = item:getMod(tpz.mod.ITEM_ADDEFFECT_DMG)
-    local chance = 1000 --item:getMod(tpz.mod.ITEM_ADDEFFECT_CHANCE)
+    local chance = item:getMod(tpz.mod.ITEM_ADDEFFECT_CHANCE)
     local element = item:getMod(tpz.mod.ITEM_ADDEFFECT_ELEMENT)
     local addStatus = item:getMod(tpz.mod.ITEM_ADDEFFECT_STATUS)
     local power = item:getMod(tpz.mod.ITEM_ADDEFFECT_POWER)
@@ -101,11 +101,16 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         HP_DRAIN = 4,
         MP_DRAIN = 5,
         TP_DRAIN = 6,
-        DISPEL = 7,
-        SELF_BUFF = 8,
-        DEATH = 9,
-        HPMPTP_DRAIN = 10
+        HPMPTP_DRAIN = 7,
+        DISPEL = 8,
+        SELF_BUFF = 9,
+        DEATH = 10,
     }
+
+    -- If we're not going to proc, lets not execute all those checks!
+    if chance < math.random(100) then
+        return 0,0,0
+    end
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
@@ -119,170 +124,124 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
 
     if addType == procType.NORMAL then
         if addStatus and addStatus > 0 then
+            local tick = tpz.addEffect.statusAttack(addStatus)
             msgID = tpz.msg.basic.ADD_EFFECT_STATUS
-
-            if chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
-                msgValue = nil
-            else
-                local tick = tpz.addEffect.statusAttack(addStatus)
-                defender:addStatusEffect(addStatus, power, tick, duration)
-                msgValue = addStatus
-            end
+            defender:addStatusEffect(addStatus, power, tick, duration)
+            msgValue = addStatus
         end
 
         if damage > 0 then
             -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            if chance <= math.random(100) then
-                msgValue = nil
-            else
-                damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
+            damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
 
-                if subEffect == tpz.subEffect.HP_DRAIN then
-                    msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-                    if damage < 0 then
-                        damage = 0
-                    end
-                else
-                    msgID = tpz.msg.basic.ADD_EFFECT_damage
-                    if damage < 0 then
-                        msgID = tpz.msg.basic.ADD_EFFECT_HEAL
-                    end
-                end
-                msgValue = damage
-            end
-        end
-    end
-
-    if addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            local HP = 10 -- need actual calculation here!
-
-            msgID = tpz.msg.basic.ADD_EFFECT_HP_HEAL
-            attacker:addHP(HP)
-            -- We have to fake this or it will say the defender was healed rather than the attacker.
-            attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_HP_HEAL)
-            -- We're faking it, so return zeros!
-            msgID = 0
-            msgValue = 0
-        end
-    end
-
-    if addType == procType.MP_HEAL then -- Mjollnir does this
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            local MP = 10 -- need actual calculation here!
-            attacker:addMP(MP)
-            -- We have to fake this or it will say the defender was healed rather than the attacker.
-            attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_MP_HEAL)
-            -- We're faking it, so return zeros!
-            msgID = 0
-            msgValue = 0
-        end
-    end
-
-    if addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
-            if damage > defender:getHP() then
-                damage = defender:getHP()
-            end
-
-            msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-            msgValue = damage
-            defender:addHP(-damage)
-            attacker:addHP(damage)
-        end
-    end
-
-    if addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
-            if damage > defender:getMP() then
-                damage = defender:getMP()
-            end
-
-            msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
-            msgValue = damage
-            defender:addMP(-damage)
-            attacker:addMP(damage)
-        end
-    end
-
-    if addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            -- +damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-            damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
-            if damage > defender:getTP() then
-                damage = defender:getTP()
-            end
-
-            msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
-            msgValue = damage
-            defender:addTP(-damage)
-            attacker:addTP(damage)
-        end
-    end
-
-    if addType == procType.DISPEL then
-        if chance <= math.random(100) or applyResistanceAddEffect(attacker, defender, element, 0) <= 0.5 then
-            msgValue = nil
-        else
-            local dispel = target:dispelStatusEffect()
-            if dispel == tpz.effect.NONE then
-                msgValue = nil
-            else
-                msgID = tpz.msg.basic.ADD_EFFECT_DISPEL
-                msgValue = dispel
-            end
-        end
-    end
-
-    if addType == procType.SELF_BUFF then
-        if chance <= math.random(100) then
-            msgValue = nil
-        else
-            if addStatus == tpz.effect.TELEPORT then -- WARP
-                attacker:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
-                msgID = tpz.msg.basic.ADD_EFFECT_WARP
-                msgValue = 0
-            elseif addStatus == tpz.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
-                -- Does not stack with or replace other shadows
-                if chance <= math.random(100) or attacker:hasStatusEffect(tpz.effect.BLINK) or attacker:hasStatusEffect(tpz.effect.UTSUSEMI) then
-                    msgValue = nil
-                else
-                    attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
-                    -- We're faking it, so return zeros!
-                    msgID = 0
-                    msgValue = 0
+            if subEffect == tpz.subEffect.HP_DRAIN then
+                msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
+                if damage < 0 then
+                    damage = 0
                 end
             else
-                -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
-                attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
+                msgID = tpz.msg.basic.ADD_EFFECT_damage
+                if damage < 0 then
+                    msgID = tpz.msg.basic.ADD_EFFECT_HEAL
+                end
+            end
+            msgValue = damage
+        end
+
+    elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
+        local HP = 10 -- need actual calculation here!
+
+        msgID = tpz.msg.basic.ADD_EFFECT_HP_HEAL
+        attacker:addHP(HP)
+        -- We have to fake this or it will say the defender was healed rather than the attacker.
+        attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_HP_HEAL)
+        -- We're faking it, so return zeros!
+        msgID = 0
+        msgValue = 0
+
+    elseif addType == procType.MP_HEAL then -- Mjollnir does this
+        local MP = 10 -- need actual calculation here!
+        attacker:addMP(MP)
+        -- We have to fake this or it will say the defender was healed rather than the attacker.
+        attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_MP_HEAL)
+        -- We're faking it, so return zeros!
+        msgID = 0
+        msgValue = 0
+
+    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
+        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+        if damage > defender:getHP() then
+            damage = defender:getHP()
+        end
+
+        msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
+        msgValue = damage
+        defender:addHP(-damage)
+        attacker:addHP(damage)
+
+    elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
+        -- damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
+        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+        if damage > defender:getMP() then
+            damage = defender:getMP()
+        end
+        msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
+        msgValue = damage
+        defender:addMP(-damage)
+        attacker:addMP(damage)
+
+    elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
+        -- damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
+        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+        if damage > defender:getTP() then
+            damage = defender:getTP()
+        end
+        msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
+        msgValue = damage
+        defender:addTP(-damage)
+        attacker:addTP(damage)
+
+    elseif addType == procType.DISPEL then
+        local dispel = defender:dispelStatusEffect()
+        -- Resistance check should be in dispelStatusEffect() itself
+        if dispel == tpz.effect.NONE then
+            return 0, 0, 0
+        else
+            msgID = tpz.msg.basic.ADD_EFFECT_DISPEL
+            msgValue = dispel
+        end
+
+    elseif addType == procType.SELF_BUFF then
+        if addStatus == tpz.effect.TELEPORT then -- WARP
+            attacker:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
+            msgID = tpz.msg.basic.ADD_EFFECT_WARP
+            msgValue = 0
+        elseif addStatus == tpz.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+            -- Does not stack with or replace other shadows
+            if attacker:hasStatusEffect(tpz.effect.BLINK) or attacker:hasStatusEffect(tpz.effect.UTSUSEMI) then
+                return 0, 0, 0
+            else
+                attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
                 -- We're faking it, so return zeros!
                 msgID = 0
                 msgValue = 0
             end
-        end
-    end
-
-    if addType == procType.DEATH then
-        if chance <= math.random(100) or defender:isNM() then
-            msgValue = nil
         else
-            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
-            msgValue = tpz.effect.KO
-            defender:setHP(0)
+            -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
+            attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
+            -- We're faking it, so return zeros!
+            msgID = 0
+            msgValue = 0
         end
+
+    elseif addType == procType.DEATH then
+        -- Todo: Resistance?
+        if defender:isNM() then
+            return 0, 0, 0 -- NMs immune, so return out
+        end
+        msgID = tpz.msg.basic.ADD_EFFECT_STATUS
+        msgValue = tpz.effect.KO
+        defender:setHP(0)
     end
 
     --[[ Why did I do this??
