@@ -138,10 +138,6 @@ INSERT INTO `nm_spawn_points` VALUES (16785676,46,86.146,-6.743,-526.943);
 INSERT INTO `nm_spawn_points` VALUES (16785676,47,87.834,-7.597,-520.502);
 INSERT INTO `nm_spawn_points` VALUES (16785676,48,76.962,-5.935,-514.680);
 INSERT INTO `nm_spawn_points` VALUES (16785676,49,102.059,-5.104,-559.392);
-INSERT INTO `nm_spawn_points` VALUES (17387567,0,333.895,-0.582,-144.558); -- Hawkeyed Dnatbat
-INSERT INTO `nm_spawn_points` VALUES (17387585,0,244,4,-240); -- Steelbiter Gudrud
-INSERT INTO `nm_spawn_points` VALUES (17387606,0,174.212,2.068,-20.285); -- Tigerbane Bakdak
-INSERT INTO `nm_spawn_points` VALUES (17387644,0,-60.045,-0.517,41.996); -- Poisonhand Gnadgad
 INSERT INTO `nm_spawn_points` VALUES (16793646,0,-634,0.001,-669); -- Serra
 INSERT INTO `nm_spawn_points` VALUES (16793698,0,-114,0.001,-591); -- Shankha
 INSERT INTO `nm_spawn_points` VALUES (16793742,0,523,-8,762); -- Intulo
@@ -882,6 +878,7 @@ INSERT INTO `nm_spawn_points` VALUES (17101099,49,-541.146,-2.807,61.593);
 INSERT INTO `nm_spawn_points` VALUES (17101143,0,279.313,-16.214,-390.119); -- Peallaidh
 INSERT INTO `nm_spawn_points` VALUES (17109147,0,794,-59,510); -- Melusine
 INSERT INTO `nm_spawn_points` VALUES (17109235,0,470,-18,-241); -- Myradrosh
+INSERT INTO `nm_spawn_points` VALUES (17109296,0,168,0,-440); -- Goblintrap
 INSERT INTO `nm_spawn_points` VALUES (17109338,0,273,-15,-377); -- Skogs Fru
 INSERT INTO `nm_spawn_points` VALUES (17113381,0,204.878,0.886,-347.779); -- Drumskull Zogdregg
 INSERT INTO `nm_spawn_points` VALUES (17117295,0,75.93,-40.153,-108.19); -- Warabouc
@@ -891,6 +888,7 @@ INSERT INTO `nm_spawn_points` VALUES (17121576,0,-153.108,-10.397,15.353); -- La
 INSERT INTO `nm_spawn_points` VALUES (17121603,0,137,8.5,-472); -- Habergoass
 INSERT INTO `nm_spawn_points` VALUES (17125433,0,358.667,-0.5,-181.406); -- Hawkeyed Dnatbat (La Vaule [S])
 INSERT INTO `nm_spawn_points` VALUES (17125452,0,137.606,3.346,-279.05); -- Ashmaker Gotblut (La Vaule [S])
+INSERT INTO `nm_spawn_points` VALUES (17137005,0,678.599,-10.219,532.811);
 INSERT INTO `nm_spawn_points` VALUES (17137705,0,678.599,-10.219,532.811); -- Ankabut
 INSERT INTO `nm_spawn_points` VALUES (17137821,0,49.650,1.692,630.371); -- Gloomanita
 INSERT INTO `nm_spawn_points` VALUES (17141962,0,-23.892,-24.139,327.721); -- Kotan-kor Kamuy
@@ -3786,6 +3784,10 @@ INSERT INTO `nm_spawn_points` VALUES (17379564,0,-294.223,-3.504,-206.657);
 INSERT INTO `nm_spawn_points` VALUES (17379626,0,139.642,-2.445,161.557);
 INSERT INTO `nm_spawn_points` VALUES (17383442,0,277.930,42.625,96.177);
 INSERT INTO `nm_spawn_points` VALUES (17383443,0,281,43,96);
+INSERT INTO `nm_spawn_points` VALUES (17387567,0,333.895,-0.582,-144.558); -- Hawkeyed Dnatbat
+INSERT INTO `nm_spawn_points` VALUES (17387585,0,244,4,-240); -- Steelbiter Gudrud
+INSERT INTO `nm_spawn_points` VALUES (17387606,0,174.212,2.068,-20.285); -- Tigerbane Bakdak
+INSERT INTO `nm_spawn_points` VALUES (17387644,0,-60.045,-0.517,41.996); -- Poisonhand Gnadgad
 INSERT INTO `nm_spawn_points` VALUES (17387920,0,-225.237,2.295,-294.764);
 INSERT INTO `nm_spawn_points` VALUES (17391802,0,219,-2,-99);
 INSERT INTO `nm_spawn_points` VALUES (17395800,0,-207.840,-0.498,109.939);
@@ -6022,10 +6024,10 @@ INSERT INTO `nm_spawn_points` VALUES (17629238,1,765.000, 1.000, -572.000);
 INSERT INTO `nm_spawn_points` VALUES (17629238,2,781.000, 2.000, -556.000);
 INSERT INTO `nm_spawn_points` VALUES (17629238,3,798.000, 2.000, -567.000);
 INSERT INTO `nm_spawn_points` VALUES (17629238,4,804.000, 2.000, -552.000);
-INSERT INTO `nm_spawn_points` VALUES (17629301,0,624.000,-16.500,-775.000); -- Sagittarius X-XIII
-INSERT INTO `nm_spawn_points` VALUES (17629412,0,-77,-0.5,-56); -- Antican Magister
 INSERT INTO `nm_spawn_points` VALUES (17629281,0,869.240,1.045,-655.214); -- Antican Praefectus
+INSERT INTO `nm_spawn_points` VALUES (17629301,0,624.000,-16.500,-775.000); -- Sagittarius X-XIII
 INSERT INTO `nm_spawn_points` VALUES (17629403,0,195,1,5); -- Nussknacker
+INSERT INTO `nm_spawn_points` VALUES (17629412,0,-77,-0.5,-56); -- Antican Magister
 INSERT INTO `nm_spawn_points` VALUES (17629421,0,76,-0.6,-194); -- Antican Proconsul
 INSERT INTO `nm_spawn_points` VALUES (17629430,0,-81,-0.5,-217); -- Diamond Daig
 INSERT INTO `nm_spawn_points` VALUES (17629483,0,-582,-0.5,-412); -- Antican Tribunus
@@ -6731,8 +6733,6 @@ INSERT INTO `nm_spawn_points` VALUES (17649822,46,35.051,5.000,197.337);
 INSERT INTO `nm_spawn_points` VALUES (17649822,47,7.846,5.191,202.515);
 INSERT INTO `nm_spawn_points` VALUES (17649822,48,19.666,6.000,160.166);
 INSERT INTO `nm_spawn_points` VALUES (17649822,49,39.591,5.000,165.616);
-INSERT INTO `nm_spawn_points` VALUES (17109296,0,168,0,-440); -- Goblintrap
-INSERT INTO `nm_spawn_points` VALUES (17137005,0,678.599,-10.219,532.811);
 
 /*!40000 ALTER TABLE `nm_spawn_points` ENABLE KEYS */;
 UNLOCK TABLES;
