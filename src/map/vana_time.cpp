@@ -42,6 +42,15 @@ CVanaTime* CVanaTime::getInstance()
     return _instance;
 }
 
+void CVanaTime::delInstance()
+{
+    if(_instance)
+    {
+        delete _instance;
+        _instance = nullptr;
+    }
+}
+
 uint32 CVanaTime::getDate()
 {
     return m_vanaDate;
