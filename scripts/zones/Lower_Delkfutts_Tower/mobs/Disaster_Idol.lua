@@ -6,21 +6,21 @@ require("scripts/globals/missions")
 -----------------------------------
 
 function onMobEngaged(mob, target)
-    local dayofWeek = VanadielDayElement()
+    local dayofWeek = VanadielDayOfWeek()
 
     mob:setSpellList(118 + dayofWeek)
-    mob:setLocalVar("Element", dayofWeek + 1)
+    mob:setLocalVar("dayofweek", dayofWeek + 1)
 end
 
 function onMobFight(mob, target)
     -- TODO: Has level mimic of person who spawned it. Minimum level 65. HP should scale accordingly.
 
-    local dayofWeek = VanadielDayElement()
-    local element = mob:getLocalVar("Element")
+    local dayofWeek = VanadielDayOfWeek()
+    local mobday = mob:getLocalVar("dayofweek")
 
-    if dayofWeek + 1 ~= element then
+    if dayofWeek + 1 ~= mobday then
         mob:setSpellList(118 + dayofWeek)
-        mob:setLocalVar("Element", dayofWeek + 1)
+        mob:setLocalVar("dayofweek", dayofWeek + 1)
     end
 end
 

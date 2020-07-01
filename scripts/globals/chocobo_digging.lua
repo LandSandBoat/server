@@ -936,7 +936,7 @@ local function getChocoboDiggingItem(player)
         end
     elseif itemId == 1255 then
         if weather >= tpz.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(tpz.skill.DIG) >= 7 then
-            itemId = oreMap[VanadielDayElement()]
+            itemId = oreMap[VanadielDayOfWeek()]
         else
             itemId = 0
         end

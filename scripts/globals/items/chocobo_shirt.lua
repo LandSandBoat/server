@@ -15,7 +15,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local day = VanadielDayElement()+1
+    local day = VanadielDayOfWeek()+1
     local crystal =
     {
         4096, -- Fire

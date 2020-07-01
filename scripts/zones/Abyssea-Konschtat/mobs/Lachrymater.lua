@@ -4,7 +4,7 @@
 -----------------------------------
 
 function onMobSpawn(mob,target)
-    local DayofWeek = VanadielDayElement()
+    local DayofWeek = VanadielDayOfWeek()
 
     mob:setSpellList(188 + DayofWeek)
 end

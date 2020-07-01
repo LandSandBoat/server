@@ -240,7 +240,7 @@ tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     only need to enable her on the appropriate day and disable her on the following day. ]]--
     local peddlestox = GetNPCByID(peddlestox)
 
-    if zoneData[zone].day == VanadielDayElement() then
+    if zoneData[zone].day == VanadielDayOfWeek() then
         peddlestox:setStatus(tpz.status.NORMAL)
     elseif peddlestox:getStatus() == tpz.status.NORMAL then
         --[[

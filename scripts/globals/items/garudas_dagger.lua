@@ -11,7 +11,7 @@ require("scripts/globals/weather")
 function onAdditionalEffect(player,target,damage)
     local chance = 10
 
-    if (VanadielDayElement() == tpz.day.WINDSDAY) then
+    if (VanadielDayOfWeek() == tpz.day.WINDSDAY) then
         chance = chance+6
     end
 

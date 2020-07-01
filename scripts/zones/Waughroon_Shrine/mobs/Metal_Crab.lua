@@ -14,7 +14,7 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    if VanadielDayElement() == tpz.day.WATERSDAY then
+    if VanadielDayOfWeek() == tpz.day.WATERSDAY then
         mob:setMod(tpz.mod.REGEN, 6, 3, 0)
     end
 end
