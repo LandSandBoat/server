@@ -30,6 +30,10 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
                         ai.r.WS, ai.s.SPECIFIC, tpz.ws.BURNING_BLADE)
+
+    -- Naji is a WAR who uses a 1H Sword, so lower his MAIN_DMG_RATING (down from G.Axe levels)
+    local reduce_damage_by_percent = 0.3
+    mob:addMod(tpz.mod.MAIN_DMG_RATING, mob:getWeaponDmg() * reduce_damage_by_percent * -1.0)
 end
 
 function onMobDespawn(mob)
