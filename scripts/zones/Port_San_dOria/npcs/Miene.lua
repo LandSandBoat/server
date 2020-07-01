@@ -4,26 +4,13 @@
 -- NPC for Quest "The Pickpocket"
 -- !pos 0.750 -4.000 -81.438 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        if player:getCharVar("tradeMiene") == 0 then
-            player:messageSpecial(ID.text.FLYER_ACCEPTED)
-            player:messageSpecial(ID.text.FFR_MIENE)
-            player:addCharVar("FFR", -1)
-            player:setCharVar("tradeMiene", 1)
-            player:confirmTrade()
-        else
-            player:messageSpecial(ID.text.FLYER_ALREADY)
-        end
-    end
+    quests.ffr.onTrade(player, npc, trade, 2) -- FLYERS FOR REGINE
 end
 
 function onTrigger(player, npc)

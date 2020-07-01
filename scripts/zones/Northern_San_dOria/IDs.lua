@@ -97,11 +97,7 @@ zones[tpz.zone.NORTHERN_SAN_DORIA] =
         HERE_TAKE_THIS           = 13049, -- Here, take this...
         IF_YOU_WEAR_THIS         = 13050, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                = 13051, -- Thank you...
-        COULLENE_MESSAGE         = 13368, -- Coullene looks over curiously for a moment.
-        GUILBERDRIER_MESSAGE     = 13369, -- Guilberdrier looks over curiously for a moment.
-        BONCORT_MESSAGE          = 13370, -- Boncort looks over curiously for a moment.
-        CAPIRIA_MESSAGE          = 13371, -- Capiria looks over curiously for a moment.
-        VILLION_MESSAGE          = 13372, -- Villion looks over curiously for a moment.
+        FFR_LOOKS_CURIOUSLY_BASE = 13368, -- Coullene looks over curiously for a moment.
         RETRIEVE_DIALOG_ID       = 18112, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL    = 18446, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

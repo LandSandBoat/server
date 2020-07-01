@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/conquest")
 require("scripts/globals/settings")
 require("scripts/globals/chocobo")
@@ -13,6 +14,7 @@ require("scripts/globals/zone")
 
 function onInitialize(zone)
     zone:registerRegion(1, -292, -10, 90 , -258, 10, 105)
+    quests.ffr.initZone(zone) -- register regions 2 through 6
     applyHalloweenNpcCostumes(zone:getID())
     tpz.chocobo.initZone(zone)
 end
@@ -45,6 +47,7 @@ function onRegionEnter(player, region)
     if regionID==1 and player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
         player:startEvent(758)
     end
+    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
 function onRegionLeave(player, region)
