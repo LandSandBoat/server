@@ -378,7 +378,39 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->health.hp = PTrust->GetMaxHP();
     PTrust->health.mp = PTrust->GetMaxMP();
 
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage(mobutils::GetWeaponDamage(PTrust));
+    // TODO: Set damage and delay based on job/sjob
+    // Base damage is based on mob calculations and is far too high, scale down here and fine tune below.
+    auto baseDamage = mobutils::GetWeaponDamage(PTrust) * 0.5;
+    float damage_mod = 1.0f;
+    switch (mJob)
+    {
+        // TODO: Check all jobs
+
+        // Assuming the job is using its "default" weapon type, otherwise adjust damage with mods.
+        // FAST WEAPONS
+        case JOB_MNK:
+        case JOB_THF:
+        case JOB_NIN:
+        case JOB_PUP:
+            { damage_mod = 0.60f; break; }
+        // SLOW WEAPONS
+        case JOB_WAR:
+        case JOB_DRK:
+        case JOB_SAM:
+        case JOB_DRG:
+        case JOB_RUN:
+            { damage_mod = 1.50f; break; }
+        // NORMAL WEAPONS
+        default: { damage_mod = 1.0f; break; }
+    }
+
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage((uint16)(baseDamage * damage_mod));
+
+    // Reduce weapon delay of MNK
+    if (PTrust->GetMJob() == JOB_MNK)
+    {
+        ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->resetDelay();
+    }
 
     uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
     uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);
