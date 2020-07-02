@@ -1446,6 +1446,7 @@ namespace autoSpell
         if(PStatus->GetFlag() & EFFECTFLAG_ERASABLE)
             return SpellID::Erase;
         else
+            // TODO: -Wno-maybe-uninitialized - possible false positive (anonymous may be used)
             return {};
     }
 }

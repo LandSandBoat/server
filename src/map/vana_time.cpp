@@ -205,8 +205,8 @@ TIMETYPE CVanaTime::SyncTime()
     m_vHour = (uint32)((m_vanaDate % VTIME_DAY)   / VTIME_HOUR);
     m_vMin  = (uint32)( m_vanaDate % VTIME_HOUR);
 
-    static int8 lastTickedHour = m_vHour;
-    if (m_vHour == (lastTickedHour+1)%24)
+    static uint8 lastTickedHour = m_vHour;
+    if (m_vHour == (lastTickedHour + 1) % 24u)
     {
         lastTickedHour = m_vHour;
         switch (m_vHour)
