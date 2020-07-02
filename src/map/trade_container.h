@@ -53,6 +53,8 @@ public:
     uint8   getItemsCount();
     uint8   getSlotCount();                                 // количество занятых ячеек
     uint32  getTotalQuantity();                             // общее количество предметов (gil считаются за 1)
+    uint8   getGuildID(uint8 slotID);
+    uint16  getGuildRank(uint8 slotID);
     CItem*  getItem(uint8 slotID);
     uint16  getItemID(uint8 slotID);
     uint8   getInvSlotID(uint8 slotID);
@@ -65,6 +67,8 @@ public:
     void    setCraftType(uint8 craftType);
     void    setItemsCount(uint8 count);
     void    setItem(uint8 slotID, CItem* item);
+    void    setGuildID(uint8 slotID, uint8 guildID);
+    void    setGuildRank(uint8 slotID, uint16 guildRank);
     void    setItemID(uint8 slotID, uint16 itemID);
     void    setInvSlotID(uint8 slotID, uint8 invSlotID);
     void    setQuantity(uint8 slotID, uint32 quantity);
@@ -85,6 +89,8 @@ private:
     std::vector<uint16>     m_itemID;
     std::vector<uint32>     m_quantity;
     std::vector<uint32>     m_confirmed;
+    std::vector<uint8>      m_guildID;
+    std::vector<uint16>     m_guildRank;
 };
 
 #endif

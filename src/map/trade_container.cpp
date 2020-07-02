@@ -111,6 +111,24 @@ uint8 CTradeContainer::getSlotCount()
     return count;
 }
 
+uint8 CTradeContainer::getGuildID(uint8 slotID)
+{
+    if (slotID < m_PItem.size())
+    {
+        return m_guildID[slotID];
+    }
+    return 0;
+}
+
+uint16 CTradeContainer::getGuildRank(uint8 slotID)
+{
+    if (slotID < m_PItem.size())
+    {
+        return m_guildRank[slotID];
+    }
+    return 0;
+}
+
 void CTradeContainer::setItem(uint8 slotID, CItem* item)
 {
     if (slotID < m_PItem.size())
@@ -171,6 +189,24 @@ void CTradeContainer::setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint
     return;
 }
 
+void CTradeContainer::setGuildID(uint8 slotID, uint8 guildID)
+{
+    if (slotID < m_PItem.size())
+    {
+        m_guildID[slotID] = guildID;
+    }
+    return;
+}
+
+void CTradeContainer::setGuildRank(uint8 slotID, uint16 guildRank)
+{
+    if (slotID < m_PItem.size())
+    {
+        m_guildRank[slotID] = guildRank;
+    }
+    return;
+}
+
 uint8 CTradeContainer::getSize()
 {
     return (uint8)m_PItem.size();
@@ -183,6 +219,8 @@ void CTradeContainer::setSize(uint8 size)
     m_slotID.resize(size, 0xFF);
     m_quantity.resize(size, 0);
     m_confirmed.resize(size, 0);
+    m_guildID.resize(size, 0);
+    m_guildRank.resize(size, 0);
 }
 
 uint8 CTradeContainer::getItemsCount()
@@ -238,4 +276,8 @@ void CTradeContainer::Clean()
     m_quantity.resize(CONTAINER_SIZE, 0);
     m_confirmed.clear();
     m_confirmed.resize(CONTAINER_SIZE, 0);
+    m_guildID.clear();
+    m_guildID.resize(CONTAINER_SIZE, 0);
+    m_guildRank.clear();
+    m_guildRank.resize(CONTAINER_SIZE, 0);
 }
