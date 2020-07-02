@@ -3415,7 +3415,7 @@ INSERT INTO `item_basic` VALUES (3532,0,'veiled_trophy','veiled_trophy',1,45124,
 INSERT INTO `item_basic` VALUES (3541,0,'seasoning_stone','seasoning_stone',12,28740,0,1,0);
 INSERT INTO `item_basic` VALUES (3542,0,'fossilized_bone','fossilized_bone',12,12356,0,1,0);
 INSERT INTO `item_basic` VALUES (3543,0,'fossilized_fang','fossilized_fang',12,12356,0,1,0);
-INSERT INTO `item_basic` VALUES (3544,0,'square_of_penelopes_cloth','penelopes_cloth',12,4,40,1,0);
+INSERT INTO `item_basic` VALUES (3544,0,'square_of_penelopes_cloth','penelopes_cloth',12,4,40,1,5265);
 INSERT INTO `item_basic` VALUES (3545,0,'square_of_serica_cloth','serica_cloth',12,4,40,1,6240);
 INSERT INTO `item_basic` VALUES (3546,0,'piece_of_staghorn_coral','staghorn_coral',12,4,42,1,10030);
 INSERT INTO `item_basic` VALUES (3547,0,'sealord_skin','sealord_skin',12,4,41,1,0);
