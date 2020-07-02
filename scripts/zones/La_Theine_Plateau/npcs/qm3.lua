@@ -4,7 +4,6 @@
 -- Involved in Quest: I Can Hear A Rainbow
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs");
-require("scripts/globals/icanheararainbow");
 require("scripts/globals/missions");
 require("scripts/globals/quests");
 require("scripts/globals/status");
@@ -37,8 +36,10 @@ function onEventFinish(player,csid,option)
         player:addSpell(296);
         player:messageSpecial(ID.text.UNLOCK_SUMMONER);
         player:messageSpecial(ID.text.UNLOCK_CARBUNCLE);
-        player:setCharVar("ICanHearARainbow",0);
-        SetServerVariable("I_Can_Hear_a_Rainbow", 1);
+        player:setCharVar("I_CAN_HEAR_A_RAINBOW",0);
+
+        local rainbow = GetNPCByID(ID.npc.RAINBOW)
+        rainbow:setLocalVar('setRainbow', 1)
     elseif (csid == 203) then
         player:setCharVar("COP_Tenzen_s_Path",1);
     end

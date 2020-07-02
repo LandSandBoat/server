@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/East_Ronfaure/IDs")
-require("scripts/globals/icanheararainbow");
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging");
 require("scripts/globals/conquest");
 require("scripts/globals/quests");
@@ -26,7 +26,7 @@ function onZoneIn(player,prevZone)
         player:setPos(200.015,-3.187,-536.074,187);
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 21;
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
         cs = 23;
@@ -44,7 +44,7 @@ end;
 
 function onEventUpdate(player,csid,option)
     if (csid == 21) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif (csid == 23) then
         if (player:getYPos() >= -22) then
             player:updateEvent(0,0,0,0,0,7);
@@ -55,7 +55,4 @@ function onEventUpdate(player,csid,option)
 end;
 
 function onEventFinish(player,csid,option)
-    if (csid == 21) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    end
 end;

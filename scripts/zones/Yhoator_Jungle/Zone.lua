@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/chocobo")
@@ -54,7 +54,7 @@ function onZoneIn( player, prevZone)
         player:setPos( 299.997, -5.838, -622.998, 190)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 2
     end
 
@@ -66,12 +66,9 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 2 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 2 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end
