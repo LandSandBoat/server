@@ -964,12 +964,6 @@ INSERT INTO `item_latents` VALUES(14035, 8, 2, 53, 0);      -- STR +2 in areas i
 INSERT INTO `item_latents` VALUES(14036, 8, 3, 53, 0);      -- STR +3 in areas inside own nation's control
 
 -- -------------------------------------------------------
--- Royal Knight's Sollerets +1/+2
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(14137, 10, 3, 53, 0);     -- VIT +3 in areas inside own nation's control
-INSERT INTO `item_latents` VALUES(14138, 10, 4, 53, 0);     -- VIT +4 in areas inside own nation's control
-
--- -------------------------------------------------------
 -- Bastokan Finger Gauntlets/Federation Finger Gauntlets
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES(14039, 8, 1, 53, 0);      -- STR +1 in areas inside own nation's control
@@ -1025,6 +1019,12 @@ INSERT INTO `item_latents` VALUES(14085, 370, 1, 26, 1);    -- Nighttime: Adds "
 INSERT INTO `item_latents` VALUES(14101, 169, 25, 26, 1);   -- %25 during nighttime
 
 INSERT INTO `item_latents` VALUES(14122, 68, 8, 52, 6);     -- Kyahan: Evasion +8 in Water weather
+
+-- -------------------------------------------------------
+-- Royal Knight's Sollerets +1/+2
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(14137, 10, 3, 53, 0);     -- VIT +3 in areas inside own nation's control
+INSERT INTO `item_latents` VALUES(14138, 10, 4, 53, 0);     -- VIT +4 in areas inside own nation's control
 
 -- -------------------------------------------------------
 -- San d'Orian Sollerets/Kingdom Sollerets
@@ -2633,9 +2633,6 @@ INSERT INTO `item_latents` VALUES(18261, 366, 15, 48, 0);   -- DMG:+16
 INSERT INTO `item_latents` VALUES(18262, 59, 9, 48, 0);     -- [Element: Water]+9
 INSERT INTO `item_latents` VALUES(18262, 366, 2, 48, 0);    -- DMG:+18
 
-INSERT INTO `item_latents` VALUES(18263, 26, 10, 58, 0);    -- ranged acc +10
-INSERT INTO `item_latents` VALUES(18263, 366, 2, 58, 0);    -- Imperial Bow dmg +2
-
 -- -------------------------------------------------------
 -- Malefic Dagger
 -- -------------------------------------------------------
@@ -2900,6 +2897,9 @@ INSERT INTO `item_latents` VALUES(18582, 366, 1, 58, 0);    -- Yigit Staff dmg +
 INSERT INTO `item_latents` VALUES(18588, 23, 10, 6, 1000);  -- Attack+10 while TP <100%
 INSERT INTO `item_latents` VALUES(18588, 25, 6, 6, 1000);   -- Accuracy+6 while TP <100%
 INSERT INTO `item_latents` VALUES(18588, 366, 6, 6, 1000);  -- DMG+6 while TP <100%
+
+INSERT INTO `item_latents` VALUES(18683, 26, 10, 58, 0);    -- ranged acc +10
+INSERT INTO `item_latents` VALUES(18683, 366, 2, 58, 0);    -- Imperial Bow dmg +2
 
 INSERT INTO `item_latents` VALUES(18684, 24, 10, 58, 0);    -- ranged att +10
 INSERT INTO `item_latents` VALUES(18684, 366, 2, 58, 0);    -- Storm Zamburak dmg +2
