@@ -233,7 +233,7 @@ int32 do_init(int32 argc, char** argv)
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
     ShowMessage("\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
-    CVanaTime::getInstance()->setCustomOffset(map_config.vanadiel_time_offset);
+    CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
 
     zoneutils::InitializeWeather(); // Need VanaTime initialized
 
@@ -989,7 +989,7 @@ int32 map_config_default()
     map_config.player_stat_multiplier = 1.0f;
     map_config.ability_recast_multiplier = 1.0f;
     map_config.blood_pact_shared_timer = 0;
-    map_config.vanadiel_time_offset = 0;
+    map_config.vanadiel_time_epoch = 0;
     map_config.lightluggage_block = 4;
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
@@ -1080,9 +1080,9 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.max_time_lastupdate = atoi(w2);
         }
-        else if (strcmp(w1, "vanadiel_time_offset") == 0)
+        else if (strcmp(w1, "vanadiel_time_epoch") == 0)
         {
-            map_config.vanadiel_time_offset = atoi(w2);
+            map_config.vanadiel_time_epoch = atoi(w2);
         }
         else if (strcmp(w1, "fame_multiplier") == 0)
         {
