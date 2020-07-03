@@ -125,759 +125,507 @@ end
   objectives =
 {
   [   2] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17563801 then -- Nocuous Weapon
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17563801 -- Nocuous Weapon
          end,
 
   [   3] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17227972 or conditions.mob:getID() == 17227992) then -- Black Triple Stars
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17227972 or conditions.mob:getID() == 17227992) -- Black Triple Stars
          end,
 
   [   4] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16793646 then -- Serra
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16793646 -- Serra
          end,
 
   [   5] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) then -- Bugbear Strongman
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
          end,
 
   [   6] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17121576 then -- La Velue
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
          end,
 
   [   7] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17596628 then -- Hovering Hotpot
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
          end,
 
   [   8] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) then -- Yacumama
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
          end,
 
   [   9] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) then -- Feuerunke
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
          end,
 
   [1092] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 
   [  68] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17195259 then -- Tumbling Truffle
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17195259 -- Tumbling Truffle
          end,
 
   [  69] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17260907 then -- Helldiver
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17260907 -- Helldiver
          end,
 
   [  70] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16785676 then -- Orctrap
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16785676 -- Orctrap
          end,
 
   [  71] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16793742 then -- Intulo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
          end,
 
   [  72] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17166705 then -- Ramponneau
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
          end,
 
   [  73] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17272978 then -- Keeper of Halidom
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
          end,
 
   [  74] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) then -- Shoggoth
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
          end,
 
   [  75] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) then -- Farruca Fly
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
          end,
 
   [1138] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 150] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17256563 or conditions.mob:getID() == 17256690) then -- Serpopard Ishtar
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17256563 or conditions.mob:getID() == 17256690) -- Serpopard Ishtar
          end,
 
   [ 151] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17207476 then -- Tottering Toby
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17207476 -- Tottering Toby
          end,
 
   [ 152] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17228236 then -- Drooling Daisy
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17228236 -- Drooling Daisy
          end,
 
   [ 153] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17232079 then -- Gargantua
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
          end,
 
   [ 154] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16875741 then -- Megalobugard
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
          end,
 
   [ 155] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17170475 then -- Ratatoskr
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
          end,
 
   [ 156] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) then -- Jyeshtha
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
          end,
 
   [ 157] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) then -- Capricornus
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
          end,
 
   [1200] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 
   [ 216] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17224019 then -- Bloodpool Vorax
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17224019 -- Bloodpool Vorax
          end,
 
   [ 217] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17199564 then -- Golden Bat
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17199564 -- Golden Bat
          end,
 
   [ 218] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17293389 then -- Slippery Sucker
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17293389 -- Slippery Sucker
          end,
 
   [ 219] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17498301 then -- Seww the Squidlimbed
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
          end,
 
   [ 220] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17137705 then -- Ankabut
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
          end,
 
   [ 221] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16879847 then -- Okyupete
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
          end,
 
   [ 222] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17178923 then -- Urd
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
          end,
 
   [ 223] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) then -- Lamprey Lord
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
          end,
 
   [1246] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 282] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17203585 or conditions.mob:getID() == 17203642) then -- Panzer Percival
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17203585 or conditions.mob:getID() == 17203642) -- Panzer Percival
          end,
 
   [ 283] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17379450 then -- Ge'Dha Evileye
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17379450 -- Ge'Dha Evileye
          end,
 
   [ 284] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17268788 then -- Bashe
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17268788 -- Bashe
          end,
 
   [ 285] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16793742 then -- Intulo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
          end,
 
   [ 286] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17166705 then -- Ramponneau
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
          end,
 
   [ 287] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17272978 then -- Keeper of Halidom
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
          end,
 
   [ 288] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) then -- Shoggoth
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
          end,
 
   [ 289] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) then -- Farruca Fly
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
          end,
 
   [1293] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 
   [ 364] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17371515 then -- Hoo Mjuu the Torrent
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17371515 -- Hoo Mjuu the Torrent
          end,
 
   [ 365] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17264818 then -- Daggerclaw Dracos
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17264818 -- Daggerclaw Dracos
          end,
 
   [ 366] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17498184 then -- Namtar
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17498184 -- Namtar
          end,
 
   [ 367] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17232079 then -- Gargantua
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
          end,
 
   [ 368] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16875741 then -- Megalobugard
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
          end,
 
   [ 369] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17170475 then -- Ratatoskr
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
          end,
 
   [ 370] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) then -- Jyeshtha
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
          end,
 
   [ 371] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) then -- Capricornus
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
          end,
 
   [1354] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 512] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17555721 then -- Barbastelle
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17555721 -- Barbastelle
          end,
 
   [ 513] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17571903 then -- Ah Puch
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17571903 -- Ah Puch
          end,
 
   [ 514] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17567801 then -- Donggu
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17567801 -- Donggu
          end,
 
   [ 515] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) then -- Bugbear Strongman
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
          end,
 
   [ 516] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17121576 then -- La Velue
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
          end,
 
   [ 517] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17596628 then -- Hovering Hotpot
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
          end,
 
   [ 518] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) then -- Yacumama
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
          end,
 
   [ 519] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) then -- Feuerunke
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
          end,
 
   [1462] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 
   [ 430] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17563785 then -- Slendlix Spindlethumb
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17563785 -- Slendlix Spindlethumb
          end,
 
   [ 431] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17256836 then -- Herbage Hunter
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17256836 -- Herbage Hunter
          end,
 
   [ 432] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17232044 then -- Kirata
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17232044 -- Kirata
          end,
 
   [ 433] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16793742 then -- Intulo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
          end,
 
   [ 434] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17166705 then -- Ramponneau
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
          end,
 
   [ 435] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17272978 then -- Keeper of Halidom
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
          end,
 
   [ 436] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) then -- Shoggoth
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
          end,
 
   [ 437] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) then -- Farruca Fly
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
          end,
 
   [1400] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 578] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17363208 then -- Zi'Ghi Boneeater
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17363208 -- Zi'Ghi Boneeater
          end,
 
   [ 579] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17195317 then -- Lumbering Lambert
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17195317 -- Lumbering Lambert
          end,
 
   [ 580] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17268851 then -- Deadly Dodo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17268851 -- Deadly Dodo
          end,
 
   [ 581] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17232079 then -- Gargantua
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
          end,
 
   [ 582] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16875741 then -- Megalobugard
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
          end,
 
   [ 583] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17170475 then -- Ratatoskr
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
          end,
 
   [ 584] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) then -- Jyeshtha
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
          end,
 
   [ 585] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) then -- Capricornus
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
          end,
 
   [1508] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 
   [ 644] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17371578 then -- Vuu Puqu the Beguiler
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17371578 -- Vuu Puqu the Beguiler
          end,
 
   [ 645] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17261003 then -- Buburimboo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17261003 -- Buburimboo
          end,
 
   [ 646] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17379564 then -- Zo'Khu Blackcloud
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17379564 -- Zo'Khu Blackcloud
          end,
 
   [ 647] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17498301 then -- Seww the Squidlimbed
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
          end,
 
   [ 648] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17137705 then -- Ankabut
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
          end,
 
   [ 649] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16879847 then -- Okyupete
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
          end,
 
   [ 650] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17178923 then -- Urd
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
          end,
 
   [ 651] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) then -- Lamprey Lord
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
          end,
 
   [1554] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 710] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17219795 or conditions.mob:getID() == 17219933) then -- Stray Mary
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17219795 or conditions.mob:getID() == 17219933) -- Stray Mary
          end,
 
   [ 711] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17387567 then -- Hawkeyed Dnatbat
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17387567 -- Hawkeyed Dnatbat
          end,
 
   [ 712] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17244396 then -- Dune Widow
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17244396 -- Dune Widow
          end,
 
   [ 713] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17498301 then -- Seww the Squidlimbed
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
          end,
 
   [ 714] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17137705 then -- Ankabut
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
          end,
 
   [ 715] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16879847 then -- Okyupete
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
          end,
 
   [ 716] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17178923 then -- Urd
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
          end,
 
   [ 717] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) then -- Lamprey Lord
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
          end,
 
   [1600] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 776] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17559584 then -- Teporingo
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17559584 -- Teporingo
          end,
 
   [ 777] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17199438 then -- Valkurm Emperor
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17199438 -- Valkurm Emperor
          end,
 
   [ 778] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17457236 then -- Hyakume
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17457236 -- Hyakume
          end,
 
   [ 779] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17137821 then -- Gloomanita
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17137821 -- Gloomanita
          end,
 
   [ 780] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17281149 then -- Mischievous Micholas
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17281149 -- Mischievous Micholas
          end,
 
   [ 781] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17289560 then -- Cactuar Cantautor
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17289560 -- Cactuar Cantautor
          end,
 
   [ 782] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17334553 or conditions.mob:getID() == 17338599) then -- Erebus
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17334553 or conditions.mob:getID() == 17338599) -- Erebus
          end,
 
   [ 783] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17178924) then -- Skuld
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17178924) -- Skuld
          end,
 
   [1646] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 941] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17363258 then -- Be'Hya Hundredwall
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17363258 -- Be'Hya Hundredwall
          end,
 
   [ 942] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17092898 then -- Jolly Green
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17092898 -- Jolly Green
          end,
 
   [ 943] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17588278 then -- Trembler Tabitha
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17588278 -- Trembler Tabitha
          end,
 
   [ 944] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17498301 then -- Seww the Squidlimbed
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
          end,
 
   [ 945] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17137705 then -- Ankabut
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
          end,
 
   [ 946] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 16879847 then -- Okyupete
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
          end,
 
   [ 947] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17178923 then -- Urd
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
          end,
 
   [ 948] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) then -- Lamprey Lord
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
          end,
 
   [1788] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195485) then -- Chesma
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
          end,
 
   [ 891] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17571870 then -- Desmodont
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17571870 -- Desmodont
          end,
 
   [ 892] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17395816 then -- Moo Ouzi the Swiftblade
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17395816 -- Moo Ouzi the Swiftblade
          end,
 
   [ 893] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17223797 then -- Ni'Zho Bladebender
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17223797 -- Ni'Zho Bladebender
          end,
 
   [ 894] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) then -- Bugbear Strongman
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
          end,
 
   [ 895] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17121576 then -- La Velue
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
          end,
 
   [ 896] = function (player, conditions)
-             if conditions.mob and conditions.mob:getID() == 17596628 then -- Hovering Hotpot
-                 return true
-             end
+             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
          end,
 
   [ 897] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) then -- Yacumama
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
          end,
 
   [ 898] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) then -- Feuerunke
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
          end,
 
   [1758] = function (player, conditions)
-             if conditions.mob and (conditions.mob:getID() == 17195484) then -- Tammuz
-                 return true
-             end
+             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
          end,
 }
 -------------------
