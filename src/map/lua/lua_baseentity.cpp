@@ -3805,8 +3805,8 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
 
     if(lua_isnumber(L, 3) && lua_isnumber(L, 4))
     {
-        uint8 guildID = lua_tonumber(L, 3);
-        uint16 guildRank = lua_tonumber(L, 4);
+        uint8 guildID = (uint8)lua_tonumber(L, 3);
+        uint16 guildRank = (uint16)lua_tonumber(L, 4);
 
         // The rank numbers in status.lua are fake. Internally, rank is really
         // a number between 0->1600. We fix the number here but really should solve
