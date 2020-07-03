@@ -25,7 +25,7 @@ local function TrustMemory(player)
         memories = memories + 4
     end
     -- 8 - UNDER_OATH
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.UNDER_OATH) then
+    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) then
         memories = memories + 8
     end
     -- 16 - FIT_FOR_A_PRINCE

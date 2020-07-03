@@ -15,7 +15,7 @@ require("scripts/globals/titles")
 local TrustMemory = function(player)
     local memories = 0
     -- 2 - Saw him at the start of the game
-    if player:getNation() == WINDURST then
+    if player:getNation() == tpz.nation.WINDURST then
         memories = memories + 2
     end
     -- 4 - WONDER_WANDS
@@ -23,7 +23,7 @@ local TrustMemory = function(player)
         memories = memories + 4
     end
     -- 8 - THE_TIGRESS_STIRS
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.THE_TIGRESS_STIRS) then
+    if player:hasCompletedQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) then
         memories = memories + 8
     end
     -- 16 - I_CAN_HEAR_A_RAINBOW
