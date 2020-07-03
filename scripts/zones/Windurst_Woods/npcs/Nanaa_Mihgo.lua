@@ -19,7 +19,7 @@ require("scripts/globals/titles")
 local TrustMemory = function(player)
     local memories = 0
     -- 2 - Saw her at the start of the game
-    if player:getNation() == WINDURST then
+    if player:getNation() == tpz.nation.WINDURST then
         memories = memories + 2
     end
     -- 4 - ROCK_RACKETEER
