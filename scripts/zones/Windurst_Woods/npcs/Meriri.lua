@@ -16,7 +16,7 @@ end
 function onTrigger(player,npc)
     local guildSkillId = tpz.skill.CLOTHCRAFT
     local stock = tpz.shop.generalGuildStock[guildSkillId]
-    tpz.shop.generalGuild(player, stock, guilSkilldId)
+    tpz.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc,ID.text.MERIRI_DIALOG)
 end
 
