@@ -60,12 +60,10 @@ tpz.shop =
     generalGuild = function(player, stock, guildSkillId)
         local log = -1
 
- --       player:createShop(#stock / 3, log)
---
+        player:createShop(#stock / 3, log)
+
         for i = 1, #stock, 3 do
-            if guildRank >= stock[i+2] then
-                player:addShopItem(stock[i], stock[i+1], stock[i+2], guildSkillId)
-            end
+            player:addShopItem(stock[i], stock[i+1], stock[i+2], guildSkillId)
         end
 
         player:sendMenu(2)
