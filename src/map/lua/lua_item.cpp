@@ -23,6 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../common/showmsg.h"
 #include "../map.h"
+#include "../utils/itemutils.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_weapon.h"
@@ -84,6 +85,14 @@ inline int32 CLuaItem::getQuantity(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
     lua_pushinteger(L, m_PLuaItem->getQuantity());
+    return 1;
+}
+
+inline int32 CLuaItem::getBasePrice(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    uint32 basePrice = static_cast<CItem*>(m_PLuaItem)->getBasePrice();
+    lua_pushinteger(L, basePrice);
     return 1;
 }
 
@@ -233,6 +242,13 @@ inline int32 CLuaItem::addMod(lua_State* L)
 
     CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
 
+    // Checks if this item is just a pointer created by GetItem()
+    // All item-modifying functions in this file should check this!
+    if(itemutils::IsItemPointer(PItem))
+    {
+        return 0;
+    }
+
     Mod mod = static_cast<Mod>(lua_tointeger(L, 1));
     auto power = (int16)lua_tointeger(L, 2);
 
@@ -363,6 +379,7 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,getAHCat),
     LUNAR_DECLARE_METHOD(CLuaItem,getQuantity),
     LUNAR_DECLARE_METHOD(CLuaItem,getLocationID),
+    LUNAR_DECLARE_METHOD(CLuaItem,getBasePrice),
     LUNAR_DECLARE_METHOD(CLuaItem,getSlotID),
     LUNAR_DECLARE_METHOD(CLuaItem,getTrialNumber),
     LUNAR_DECLARE_METHOD(CLuaItem,getMatchingTrials),

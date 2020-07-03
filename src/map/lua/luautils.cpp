@@ -4355,9 +4355,13 @@ namespace luautils
     /***************************************************************************
     *                                                                          *
     *  Creates an item object of the type specified by the itemID.             *
-    *  This item is ephemeral, read-only, and doesn't exist in-game            *
-    *  but can and should be used to lookup item information or access         *
-    *  item functions when only the ItemID is known.                           *
+    *  This item is ephemeral, and doesn't exist in-game but can and should    *
+    *  be used to lookup item information or access item functions when only   *
+    *  the ItemID is known.                                                    *
+    *                                                                          *
+    *  ## These items should be used to READ ONLY!                             *
+    *  ## Should lua functions be written which modify items, care must be     *
+    *     taken to ensure these are NEVER modified.                            *
     *                                                                          *
     *  example: local item = GetItem(16448)                                    *
     *           item:GetName()                 --Bronze Dagger                 *

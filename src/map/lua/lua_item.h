@@ -56,6 +56,7 @@ public:
     int32 getTrialNumber(lua_State*);
     int32 getMatchingTrials(lua_State* L);  // returns a table of trial #'s which match this item precisely
     int32 getWornItem(lua_State*);          // check if the item has been used
+    int32 getBasePrice(lua_State*);         // get the base sell price
 
     int32 isType(lua_State*);               // check the item type
     int32 isSubType(lua_State*);            // check the item's sub type
