@@ -4,6 +4,8 @@
 require("scripts/globals/msg")
 require("scripts/globals/zone")
 
+tpz = tpz or {}
+tpz.magian = tpz.magian or {}
 playerTrials = playerTrials or {}
 
 -- packs current trials into params for onTrigger
@@ -77,7 +79,8 @@ local function checkEquipment(player, trialId)
 end
 
 -- increments progress if conditions are met
-function checkMagianTrial(player, conditions)
+function tpz.magian.checkMagianTrial(player, conditions)
+    local objectives = tpz.magian.objectives
     for i, v in pairs(readTrials(player)) do
         local trialId, progress = getTrial(player, i)
         if objectives[trialId] and objectives[trialId](player, conditions) and checkEquipment(player, trialId) then
@@ -121,513 +124,6 @@ local function rewardAugmentParams(t)
     return augBits1, augBits2
 end
 
-  -- table of anon functions keyed with trial IDs called by checkMagianTrial
-  objectives =
-{
-  [   2] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17563801 -- Nocuous Weapon
-         end,
-
-  [   3] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17227972 or conditions.mob:getID() == 17227992) -- Black Triple Stars
-         end,
-
-  [   4] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16793646 -- Serra
-         end,
-
-  [   5] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-         end,
-
-  [   6] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-         end,
-
-  [   7] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-         end,
-
-  [   8] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-         end,
-
-  [   9] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-         end,
-
-  [1092] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-
-  [  68] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17195259 -- Tumbling Truffle
-         end,
-
-  [  69] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17260907 -- Helldiver
-         end,
-
-  [  70] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16785676 -- Orctrap
-         end,
-
-  [  71] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-         end,
-
-  [  72] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-         end,
-
-  [  73] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-         end,
-
-  [  74] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-         end,
-
-  [  75] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-         end,
-
-  [1138] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 150] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17256563 or conditions.mob:getID() == 17256690) -- Serpopard Ishtar
-         end,
-
-  [ 151] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17207476 -- Tottering Toby
-         end,
-
-  [ 152] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17228236 -- Drooling Daisy
-         end,
-
-  [ 153] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-         end,
-
-  [ 154] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-         end,
-
-  [ 155] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-         end,
-
-  [ 156] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-         end,
-
-  [ 157] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-         end,
-
-  [1200] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-
-  [ 216] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17224019 -- Bloodpool Vorax
-         end,
-
-  [ 217] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17199564 -- Golden Bat
-         end,
-
-  [ 218] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17293389 -- Slippery Sucker
-         end,
-
-  [ 219] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-         end,
-
-  [ 220] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-         end,
-
-  [ 221] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-         end,
-
-  [ 222] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-         end,
-
-  [ 223] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-         end,
-
-  [1246] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 282] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17203585 or conditions.mob:getID() == 17203642) -- Panzer Percival
-         end,
-
-  [ 283] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17379450 -- Ge'Dha Evileye
-         end,
-
-  [ 284] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17268788 -- Bashe
-         end,
-
-  [ 285] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-         end,
-
-  [ 286] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-         end,
-
-  [ 287] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-         end,
-
-  [ 288] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-         end,
-
-  [ 289] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-         end,
-
-  [1293] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-
-  [ 364] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17371515 -- Hoo Mjuu the Torrent
-         end,
-
-  [ 365] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17264818 -- Daggerclaw Dracos
-         end,
-
-  [ 366] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17498184 -- Namtar
-         end,
-
-  [ 367] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-         end,
-
-  [ 368] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-         end,
-
-  [ 369] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-         end,
-
-  [ 370] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-         end,
-
-  [ 371] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-         end,
-
-  [1354] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 512] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17555721 -- Barbastelle
-         end,
-
-  [ 513] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17571903 -- Ah Puch
-         end,
-
-  [ 514] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17567801 -- Donggu
-         end,
-
-  [ 515] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-         end,
-
-  [ 516] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-         end,
-
-  [ 517] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-         end,
-
-  [ 518] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-         end,
-
-  [ 519] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-         end,
-
-  [1462] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-
-  [ 430] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17563785 -- Slendlix Spindlethumb
-         end,
-
-  [ 431] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17256836 -- Herbage Hunter
-         end,
-
-  [ 432] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17232044 -- Kirata
-         end,
-
-  [ 433] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-         end,
-
-  [ 434] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-         end,
-
-  [ 435] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-         end,
-
-  [ 436] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-         end,
-
-  [ 437] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-         end,
-
-  [1400] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 578] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17363208 -- Zi'Ghi Boneeater
-         end,
-
-  [ 579] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17195317 -- Lumbering Lambert
-         end,
-
-  [ 580] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17268851 -- Deadly Dodo
-         end,
-
-  [ 581] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-         end,
-
-  [ 582] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-         end,
-
-  [ 583] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-         end,
-
-  [ 584] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-         end,
-
-  [ 585] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-         end,
-
-  [1508] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-
-  [ 644] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17371578 -- Vuu Puqu the Beguiler
-         end,
-
-  [ 645] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17261003 -- Buburimboo
-         end,
-
-  [ 646] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17379564 -- Zo'Khu Blackcloud
-         end,
-
-  [ 647] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-         end,
-
-  [ 648] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-         end,
-
-  [ 649] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-         end,
-
-  [ 650] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-         end,
-
-  [ 651] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-         end,
-
-  [1554] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 710] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17219795 or conditions.mob:getID() == 17219933) -- Stray Mary
-         end,
-
-  [ 711] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17387567 -- Hawkeyed Dnatbat
-         end,
-
-  [ 712] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17244396 -- Dune Widow
-         end,
-
-  [ 713] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-         end,
-
-  [ 714] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-         end,
-
-  [ 715] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-         end,
-
-  [ 716] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-         end,
-
-  [ 717] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-         end,
-
-  [1600] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 776] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17559584 -- Teporingo
-         end,
-
-  [ 777] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17199438 -- Valkurm Emperor
-         end,
-
-  [ 778] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17457236 -- Hyakume
-         end,
-
-  [ 779] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17137821 -- Gloomanita
-         end,
-
-  [ 780] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17281149 -- Mischievous Micholas
-         end,
-
-  [ 781] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17289560 -- Cactuar Cantautor
-         end,
-
-  [ 782] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17334553 or conditions.mob:getID() == 17338599) -- Erebus
-         end,
-
-  [ 783] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17178924) -- Skuld
-         end,
-
-  [1646] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 941] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17363258 -- Be'Hya Hundredwall
-         end,
-
-  [ 942] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17092898 -- Jolly Green
-         end,
-
-  [ 943] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17588278 -- Trembler Tabitha
-         end,
-
-  [ 944] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-         end,
-
-  [ 945] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-         end,
-
-  [ 946] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-         end,
-
-  [ 947] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-         end,
-
-  [ 948] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-         end,
-
-  [1788] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-         end,
-
-  [ 891] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17571870 -- Desmodont
-         end,
-
-  [ 892] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17395816 -- Moo Ouzi the Swiftblade
-         end,
-
-  [ 893] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17223797 -- Ni'Zho Bladebender
-         end,
-
-  [ 894] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-         end,
-
-  [ 895] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-         end,
-
-  [ 896] = function (player, conditions)
-             return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-         end,
-
-  [ 897] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-         end,
-
-  [ 898] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-         end,
-
-  [1758] = function (player, conditions)
-             return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-         end,
-}
 -------------------
 -- Magian Orange --
 -------------------
@@ -639,7 +135,7 @@ function magianOrangeOnTrigger(player, npc)
     if player:getMainLvl() < 75 then
         player:startEvent(10121) -- can't take a trial before lvl 75
 
-    elseif (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
+    elseif player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false then
         player:startEvent(10122) -- player can start magian for the first time
 
     else
@@ -647,38 +143,7 @@ function magianOrangeOnTrigger(player, npc)
     end
 end
 
--- set of non-weapon type items that can take trials
-local typeExceptions =
-{
-  [16191] = true,
-  [16192] = true,
-  [16193] = true,
-  [16194] = true,
-  [11926] = true,
-  [16199] = true,
-  [16200] = true,
-  [16198] = true,
-  [16197] = true,
-  [16196] = true,
-  [16195] = true,
-  [15070] = true,
-  [11927] = true,
-  [18573] = true,
-  [18571] = true,
-  [18574] = true,
-  [18575] = true,
-  [18576] = true,
-  [18839] = true,
-  [18342] = true,
-  [18572] = true,
-  [18577] = true,
-  [18578] = true,
-  [18579] = true,
-  [18580] = true,
-  [18840] = true
-}
-
-function magianOrangeOnTrade(player,npc,trade)
+function tpz.magian.magianOrangeOnTrade(player,npc,trade)
     local itemId = trade:getItemId()
     local item = trade:getItem()
     local matchId = item:getMatchingTrials()
@@ -690,45 +155,44 @@ function magianOrangeOnTrade(player,npc,trade)
 
     player:setLocalVar("storeItemId", itemId)
 
-    -- item traded isn't a weapon
-    if (not typeExceptions[itemId] and not item:isType(tpz.itemType.WEAPON)) then
-        player:messageSpecial(msg.ITEM_NOT_WEAPON_MAGIAN)
-        return
-
-    -- player can only keep 10 trials at once
-    elseif pt >= 10 and trialId == 0 then
-        player:startEvent(10124,0,0,0,0,0,0,0,-255)
-        return
-
-    elseif trialId ~= 0 then
-        for i, v in pairs(readTrials(player)) do
-            if v.trial == trialId then
-                player:setLocalVar("storeTrialId", trialId)
-                player:tradeComplete()
-
-                if v.progress >= t.objectiveTotal then
-                    player:startEvent(10129,0,0,0,t.rewardItem,0,0,0,itemId) -- completes trial
-
-                else
-                    player:startEvent(10125,trialId,itemId,0,0,v,0,0,-2) -- checks status of trial
-                end
-                return
-            end
-        end
-            -- item has trial, player does not
-            player:setLocalVar("storeTrialId", trialId)
-            player:startEvent(10125,trialId,t.reqItem,0,0,0,0,0,-3)
-            player:tradeComplete()
+    if player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == true then
+        if not next(matchId) and item:isType(tpz.itemType.WEAPON) then
+            player:setLocalVar("invalidItem", 1)
+            player:startEvent(10124,0,0,0,0,0,0,0,-1) -- invalid weapon
             return
 
-    elseif next(matchId) then
-        player:setLocalVar("storeTrialId", matchId[1])
-        player:tradeComplete()
-        player:startEvent(10124,matchId[1],matchId[2],matchId[3],matchId[4],0,itemId) -- starts trial
-        return
-    else
-        player:setLocalVar("invalidItem", 1)
-        player:startEvent(10124,0,0,0,0,0,0,0,-1) -- invalid weapon
+        -- player can only keep 10 trials at once
+        elseif pt >= 10 and trialId == 0 then
+            player:startEvent(10124,0,0,0,0,0,0,0,-255)
+            return
+
+        elseif trialId ~= 0 then
+            for i, v in pairs(readTrials(player)) do
+                if v.trial == trialId then
+                    player:setLocalVar("storeTrialId", trialId)
+                    player:tradeComplete()
+                    if v.progress >= t.objectiveTotal then
+                        player:startEvent(10129,0,0,0,t.rewardItem,0,0,0,itemId) -- completes trial
+                    else
+                        player:startEvent(10125,trialId,itemId,0,0,v,0,0,-2) -- checks status of trial
+                    end
+                    return
+                end
+            end
+                -- item has trial, player does not
+                player:setLocalVar("storeTrialId", trialId)
+                player:startEvent(10125,trialId,t.reqItem,0,0,0,0,0,-3)
+                player:tradeComplete()
+                return
+
+        elseif next(matchId) then
+            player:setLocalVar("storeTrialId", matchId[1])
+            player:tradeComplete()
+            player:startEvent(10124,matchId[1],matchId[2],matchId[3],matchId[4],0,itemId) -- starts trial
+            return
+        else
+            player:messageSpecial(msg.ITEM_NOT_WEAPON_MAGIAN) -- item traded isn't a weapon
+        end
     end
 end
 
@@ -738,7 +202,7 @@ end
       value                 value
                                                   ]]--
 
-function magianOrangeEventUpdate(player,itemId,csid,option)
+function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
     local optionMod = bit.band(option, 0xFF)
 
     -- 10123 = trigger, 10124 = initial trade, 10125 = in-progress trade
@@ -862,12 +326,13 @@ function magianOrangeEventUpdate(player,itemId,csid,option)
     end
 end
 
-function magianOrangeOnEventFinish(player,itemId,csid,option)
+function tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
+    local ID = require("scripts/zones/RuLude_Gardens/IDs")
 
-    if csid == 10122 and optionMod == 1 then
+    if csid == 10122 and option == 1 then
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAGIAN_TRIAL_LOG)
         player:addKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
 

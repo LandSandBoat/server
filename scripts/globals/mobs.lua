@@ -1,7 +1,6 @@
 -----------------------------------
 -- Global version of onMobDeath
 -----------------------------------
-require("scripts/globals/magiantrials")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
@@ -39,7 +38,7 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
         end
     end
 
-      checkMagianTrial(player, {['mob'] = mob})
+      tpz.magian.checkMagianTrial(player, {['mob'] = mob})
 end
 
 -------------------------------------------------
