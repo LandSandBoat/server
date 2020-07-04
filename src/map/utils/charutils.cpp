@@ -4545,7 +4545,7 @@ namespace charutils
 
         reduction = reduction + PChar->getMod(strong[element]);
 
-        if (CVanaTime::getInstance()->getWeekday() == element)
+        if (CVanaTime::getInstance()->getDayElement() == element)
         {
             reduction = reduction + PChar->getMod(Mod::DAY_REDUCTION);
         }

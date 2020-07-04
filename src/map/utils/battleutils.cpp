@@ -463,7 +463,7 @@ namespace battleutils
                 PAttacker->delModifier(Mod::ENSPELL_DMG, 1);
             else
             {
-                if (element == 7)
+                if (element == ELEMENT_DARK)
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENDARK);
                 else
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
@@ -478,14 +478,14 @@ namespace battleutils
         uint32 WeekDay = CVanaTime::getInstance()->getWeekday();
         WEATHER weather = GetWeather(PAttacker, false);
 
-        DAYTYPE strongDay[8] = { FIRESDAY, EARTHSDAY, WATERSDAY, WINDSDAY, ICEDAY, LIGHTNINGDAY, LIGHTSDAY, DARKSDAY };
-        DAYTYPE weakDay[8] = { WATERSDAY, WINDSDAY, LIGHTNINGDAY, ICEDAY, FIRESDAY, EARTHSDAY, DARKSDAY, LIGHTSDAY };
-        WEATHER strongWeatherSingle[8] = { WEATHER_HOT_SPELL, WEATHER_DUST_STORM, WEATHER_RAIN, WEATHER_WIND, WEATHER_SNOW, WEATHER_THUNDER, WEATHER_AURORAS, WEATHER_GLOOM };
-        WEATHER strongWeatherDouble[8] = { WEATHER_HEAT_WAVE, WEATHER_SAND_STORM, WEATHER_SQUALL, WEATHER_GALES, WEATHER_BLIZZARDS, WEATHER_THUNDERSTORMS, WEATHER_STELLAR_GLARE, WEATHER_DARKNESS };
-        WEATHER weakWeatherSingle[8] = { WEATHER_RAIN, WEATHER_WIND, WEATHER_THUNDER, WEATHER_SNOW, WEATHER_HOT_SPELL, WEATHER_DUST_STORM, WEATHER_GLOOM, WEATHER_AURORAS };
-        WEATHER weakWeatherDouble[8] = { WEATHER_SQUALL, WEATHER_GALES, WEATHER_THUNDERSTORMS, WEATHER_BLIZZARDS, WEATHER_HEAT_WAVE, WEATHER_SAND_STORM, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
-        uint32 obi[8] = { 15435, 15438, 15440, 15437, 15436, 15439, 15441, 15442 };
-        Mod resistarray[8] = { Mod::FIRERES, Mod::EARTHRES, Mod::WATERRES, Mod::WINDRES, Mod::ICERES, Mod::THUNDERRES, Mod::LIGHTRES, Mod::DARKRES };
+        DAYTYPE strongDay[8] = { FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, WATERSDAY, LIGHTSDAY, DARKSDAY };
+        DAYTYPE weakDay[8] = { WATERSDAY, FIRESDAY, ICEDAY, WINDSDAY, EARTHSDAY, LIGHTNINGDAY, DARKSDAY, LIGHTSDAY };
+        WEATHER strongWeatherSingle[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM, WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
+        WEATHER strongWeatherDouble[8] = { WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES, WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_SQUALL, WEATHER_STELLAR_GLARE, WEATHER_DARKNESS };
+        WEATHER weakWeatherSingle[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM, WEATHER_THUNDER, WEATHER_RAIN, WEATHER_GLOOM, WEATHER_AURORAS };
+        WEATHER weakWeatherDouble[8] = { WEATHER_SQUALL, WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES, WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
+        uint32 obi[8] = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
+        Mod resistarray[8] = { Mod::FIRERES, Mod::ICERES, Mod::WINDRES, Mod::EARTHRES, Mod::THUNDERRES, Mod::WATERRES, Mod::LIGHTRES, Mod::DARKRES };
         bool obiBonus = false;
 
         double half = (double)(PDefender->getMod(resistarray[element])) / 100;
@@ -4213,8 +4213,8 @@ namespace battleutils
 
     int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element)
     {
-        Mod absorb[8] = { Mod::FIRE_ABSORB, Mod::EARTH_ABSORB, Mod::WATER_ABSORB, Mod::WIND_ABSORB, Mod::ICE_ABSORB, Mod::LTNG_ABSORB, Mod::LIGHT_ABSORB, Mod::DARK_ABSORB };
-        Mod nullarray[8] = { Mod::FIRE_NULL, Mod::EARTH_NULL, Mod::WATER_NULL, Mod::WIND_NULL, Mod::ICE_NULL, Mod::LTNG_NULL, Mod::LIGHT_NULL, Mod::DARK_NULL };
+        Mod absorb[8] = { Mod::FIRE_ABSORB, Mod::ICE_ABSORB, Mod::WIND_ABSORB, Mod::EARTH_ABSORB, Mod::LTNG_ABSORB, Mod::WATER_ABSORB, Mod::LIGHT_ABSORB, Mod::DARK_ABSORB };
+        Mod nullarray[8] = { Mod::FIRE_NULL, Mod::ICE_NULL, Mod::WIND_NULL, Mod::EARTH_NULL, Mod::LTNG_NULL, Mod::WATER_NULL, Mod::LIGHT_NULL, Mod::DARK_NULL };
 
         float resist = 1.f + PDefender->getMod(Mod::UDMGMAGIC) / 100.f;
         resist = std::max(resist, 0.f);
@@ -4668,6 +4668,28 @@ namespace battleutils
                         return false;
                 }
                 break;
+            case ELEMENT_ICE:
+                switch (weather)
+                {
+                case WEATHER_SNOW:
+                case WEATHER_BLIZZARDS:
+                    return true;
+                    break;
+                default:
+                    return false;
+                }
+                break;
+            case ELEMENT_WIND:
+                switch (weather)
+                {
+                case WEATHER_WIND:
+                case WEATHER_GALES:
+                    return true;
+                    break;
+                default:
+                    return false;
+                }
+                break;
             case ELEMENT_EARTH:
                 switch (weather)
                 {
@@ -4679,44 +4701,22 @@ namespace battleutils
                         return false;
                 }
                 break;
+            case ELEMENT_THUNDER:
+                switch (weather)
+                {
+                case WEATHER_THUNDER:
+                case WEATHER_THUNDERSTORMS:
+                    return true;
+                    break;
+                default:
+                    return false;
+                }
+                break;
             case ELEMENT_WATER:
                 switch (weather)
                 {
                     case WEATHER_RAIN:
                     case WEATHER_SQUALL:
-                        return true;
-                        break;
-                    default:
-                        return false;
-                }
-                break;
-            case ELEMENT_WIND:
-                switch (weather)
-                {
-                    case WEATHER_WIND:
-                    case WEATHER_GALES:
-                        return true;
-                        break;
-                    default:
-                        return false;
-                }
-                break;
-            case ELEMENT_ICE:
-                switch (weather)
-                {
-                    case WEATHER_SNOW:
-                    case WEATHER_BLIZZARDS:
-                        return true;
-                        break;
-                    default:
-                        return false;
-                }
-                break;
-            case ELEMENT_THUNDER:
-                switch (weather)
-                {
-                    case WEATHER_THUNDER:
-                    case WEATHER_THUNDERSTORMS:
                         return true;
                         break;
                     default:
