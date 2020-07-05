@@ -8,509 +8,643 @@
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
 
-tpz.magian.objectives =
+local checks = {}
+checks.mobkill = function(self, player, params) 
+    if self.reqs.mobid and params.mob then
+        return self.reqs.mobid[params.mob:getID()] and 1
+    end
+    return 0
+end 
+
+tpz.magian.trials =
 {
-[   2] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17563801 -- Nocuous Weapon
-       end,
-
-[   3] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17227972 or conditions.mob:getID() == 17227992) -- Black Triple Stars
-       end,
-
-[   4] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16793646 -- Serra
-       end,
-
-[   5] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-       end,
-
-[   6] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-       end,
-
-[   7] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-       end,
-
-[   8] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-       end,
-
-[   9] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-       end,
-
-[1092] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
-
-[  68] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17195259 -- Tumbling Truffle
-       end,
-
-[  69] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17260907 -- Helldiver
-       end,
-
-[  70] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16785676 -- Orctrap
-       end,
-
-[  71] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-       end,
-
-[  72] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-       end,
-
-[  73] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-       end,
-
-[  74] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-       end,
-
-[  75] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-       end,
-
-[1138] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 150] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17256563 or conditions.mob:getID() == 17256690) -- Serpopard Ishtar
-       end,
-
-[ 151] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17207476 -- Tottering Toby
-       end,
-
-[ 152] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17228236 -- Drooling Daisy
-       end,
-
-[ 153] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-       end,
-
-[ 154] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-       end,
-
-[ 155] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-       end,
-
-[ 156] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-       end,
-
-[ 157] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-       end,
-
-[1200] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
-
-[ 216] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17224019 -- Bloodpool Vorax
-       end,
-
-[ 217] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17199564 -- Golden Bat
-       end,
-
-[ 218] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17293389 -- Slippery Sucker
-       end,
-
-[ 219] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-       end,
-
-[ 220] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-       end,
-
-[ 221] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-       end,
-
-[ 222] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-       end,
-
-[ 223] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-       end,
-
-[1246] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 282] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17203585 or conditions.mob:getID() == 17203642) -- Panzer Percival
-       end,
-
-[ 283] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17379450 -- Ge'Dha Evileye
-       end,
-
-[ 284] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17268788 -- Bashe
-       end,
-
-[ 285] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-       end,
-
-[ 286] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-       end,
-
-[ 287] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-       end,
-
-[ 288] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-       end,
-
-[ 289] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-       end,
-
-[1293] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
-
-[ 364] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17371515 -- Hoo Mjuu the Torrent
-       end,
-
-[ 365] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17264818 -- Daggerclaw Dracos
-       end,
-
-[ 366] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17498184 -- Namtar
-       end,
-
-[ 367] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-       end,
-
-[ 368] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-       end,
-
-[ 369] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-       end,
-
-[ 370] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-       end,
-
-[ 371] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-       end,
-
-[1354] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 512] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17555721 -- Barbastelle
-       end,
-
-[ 513] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17571903 -- Ah Puch
-       end,
-
-[ 514] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17567801 -- Donggu
-       end,
-
-[ 515] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-       end,
-
-[ 516] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-       end,
-
-[ 517] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-       end,
-
-[ 518] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-       end,
-
-[ 519] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-       end,
-
-[1462] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
-
-[ 430] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17563785 -- Slendlix Spindlethumb
-       end,
-
-[ 431] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17256836 -- Herbage Hunter
-       end,
-
-[ 432] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17232044 -- Kirata
-       end,
-
-[ 433] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16793742 -- Intulo
-       end,
-
-[ 434] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17166705 -- Ramponneau
-       end,
-
-[ 435] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17272978 -- Keeper of Halidom
-       end,
-
-[ 436] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138077 or conditions.mob:getID() == 17146177) -- Shoggoth
-       end,
-
-[ 437] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17166769 or conditions.mob:getID() == 17174908) -- Farruca Fly
-       end,
-
-[1400] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 578] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17363208 -- Zi'Ghi Boneeater
-       end,
-
-[ 579] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17195317 -- Lumbering Lambert
-       end,
-
-[ 580] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17268851 -- Deadly Dodo
-       end,
-
-[ 581] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17232079 -- Gargantua
-       end,
-
-[ 582] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16875741 -- Megalobugard
-       end,
-
-[ 583] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17170475 -- Ratatoskr
-       end,
-
-[ 584] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17174909 or conditions.mob:getID() == 17166770) -- Jyeshtha
-       end,
-
-[ 585] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191326 or conditions.mob:getID() == 17109385 or conditions.mob:getID() == 17113492) -- Capricornus
-       end,
-
-[1508] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
-
-[ 644] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17371578 -- Vuu Puqu the Beguiler
-       end,
-
-[ 645] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17261003 -- Buburimboo
-       end,
-
-[ 646] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17379564 -- Zo'Khu Blackcloud
-       end,
-
-[ 647] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-       end,
-
-[ 648] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-       end,
-
-[ 649] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-       end,
-
-[ 650] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-       end,
-
-[ 651] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-       end,
-
-[1554] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 710] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17219795 or conditions.mob:getID() == 17219933) -- Stray Mary
-       end,
-
-[ 711] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17387567 -- Hawkeyed Dnatbat
-       end,
-
-[ 712] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17244396 -- Dune Widow
-       end,
-
-[ 713] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-       end,
-
-[ 714] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-       end,
-
-[ 715] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-       end,
-
-[ 716] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-       end,
-
-[ 717] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-       end,
-
-[1600] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 776] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17559584 -- Teporingo
-       end,
-
-[ 777] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17199438 -- Valkurm Emperor
-       end,
-
-[ 778] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17457236 -- Hyakume
-       end,
-
-[ 779] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17137821 -- Gloomanita
-       end,
-
-[ 780] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17281149 -- Mischievous Micholas
-       end,
-
-[ 781] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17289560 -- Cactuar Cantautor
-       end,
-
-[ 782] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17334553 or conditions.mob:getID() == 17338599) -- Erebus
-       end,
-
-[ 783] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17178924) -- Skuld
-       end,
-
-[1646] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 941] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17363258 -- Be'Hya Hundredwall
-       end,
-
-[ 942] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17092898 -- Jolly Green
-       end,
-
-[ 943] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17588278 -- Trembler Tabitha
-       end,
-
-[ 944] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17498301 -- Seww the Squidlimbed
-       end,
-
-[ 945] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17137705 -- Ankabut
-       end,
-
-[ 946] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 16879847 -- Okyupete
-       end,
-
-[ 947] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17178923 -- Urd
-       end,
-
-[ 948] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17138078 or conditions.mob:getID() == 17146178) -- Lamprey Lord
-       end,
-
-[1788] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195485) -- Chesma
-       end,
-
-[ 891] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17571870 -- Desmodont
-       end,
-
-[ 892] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17395816 -- Moo Ouzi the Swiftblade
-       end,
-
-[ 893] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17223797 -- Ni'Zho Bladebender
-       end,
-
-[ 894] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 16822423 or conditions.mob:getID() == 16822427) -- Bugbear Strongman
-       end,
-
-[ 895] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17121576 -- La Velue
-       end,
-
-[ 896] = function (player, conditions)
-           return conditions.mob and conditions.mob:getID() == 17596628 -- Hovering Hotpot
-       end,
-
-[ 897] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17191325 or conditions.mob:getID() == 17109384 or conditions.mob:getID() == 17113491) -- Yacumama
-       end,
-
-[ 898] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17334552 or conditions.mob:getID() == 17338598) -- Feuerunke
-       end,
-
-[1758] = function (player, conditions)
-           return conditions.mob and (conditions.mob:getID() == 17195484) -- Tammuz
-       end,
+[   2] = {  -- Nocuous Weapon
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17563801 } }
+    },
+
+[   3] = {  -- Black Triple Stars
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17227972, 17227992 } }
+    },
+
+[   4] = {  -- Serra
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16793646 } }
+    },
+
+[   5] = {  -- Bugbear Strongman
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16822423, 16822427 } }
+    },
+
+[   6] = {  -- La Velue
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17121576 } }
+    },
+
+[   7] = {  -- Hovering Hotpot
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17596628 } }
+    },
+
+[   8] = {  -- Yacumama
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109384, 17113491} }
+    },
+
+[   9] = {  -- Feuerunke
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17334552, 17338598 } }
+    },
+
+[1092] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
+
+[  68] = {  -- Tumbling Truffle
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195259 } }
+    },
+
+[  69] = {  -- Helldiver
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17260907 } }
+    },
+
+[  70] = {  -- Orctrap
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16785676 } }
+    },
+
+[  71] = {  -- Intulo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16793742 } }
+    },
+
+[  72] = {  -- Ramponneau
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166705 } }
+    },
+
+[  73] = {  -- Keeper of Halidom
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17272978 } }
+    },
+
+[  74] = {  -- Shoggoth
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138077, 17146177 } }
+    },
+
+[  75] = {  -- Farruca Fly
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166769, 17174908 } }
+    },
+
+[1138] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 150] = {  -- Serpopard Ishtar
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17256563, 17256690 } }
+    },
+
+[ 151] = {  -- Tottering Toby
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17207476 } }
+    },
+
+[ 152] = {  -- Drooling Daisy
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17228236 } }
+    },
+
+[ 153] = {  -- Gargantua
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17232079 } }
+    },
+
+[ 154] = {  -- Megalobugard
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16875741 } }
+    },
+
+[ 155] = {  -- Ratatoskr
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17170475 } }
+    },
+
+[ 156] = {  -- Jyeshtha
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17174909, 17166770 } }
+    },
+
+[ 157] = {  -- Capricornus
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109385, 17113492 } }
+    },
+
+[1200] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
+
+[ 216] = {  -- Bloodpool Vorax
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17224019 } }
+    },
+
+[ 217] = {  -- Golden Bat
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17199564 } }
+    },
+
+[ 218] = {  -- Slippery Sucker
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17293389 } }
+    },
+
+[ 219] = {  -- Seww the Squidlimbed
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17498301 } }
+    },
+
+[ 220] = {  -- Ankabut
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17137705 } }
+    },
+
+[ 221] = {  -- Okyupete
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16879847 } }
+    },
+
+[ 222] = {  -- Urd
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17178923 } }
+    },
+
+[ 223] = {  -- Lamprey Lord
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138078, 17146178 } }
+    },
+
+[1246] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 282] = {  -- Panzer Percival
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17203585, 17203642 } }
+    },
+
+[ 283] = {  -- Ge'Dha Evileye
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17379450 } }
+    },
+
+[ 284] = {  -- Bashe
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17268788 } }
+    },
+
+[ 285] = {  -- Intulo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16793742 } }
+    },
+
+[ 286] = {  -- Ramponneau
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166705 } }
+    },
+
+[ 287] = {  -- Keeper of Halidom
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17272978 } }
+    },
+
+[ 288] = {  -- Shoggoth
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138077, 17146177 } }
+    },
+
+[ 289] = {  -- Farruca Fly
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166769, 17174908 } }
+    },
+
+[1293] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
+
+[ 364] = {  -- Hoo Mjuu the Torrent
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17371515 } }
+    },
+
+[ 365] = {  -- Daggerclaw Dracos
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17264818 } }
+    },
+
+[ 366] = {  -- Namtar
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17498184 } }
+    },
+
+[ 367] = {  -- Gargantua
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17232079 } }
+    },
+
+[ 368] = {  -- Megalobugard
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16875741 } }
+    },
+
+[ 369] = {  -- Ratatoskr
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17170475 } }
+    },
+
+[ 370] = {  -- Jyeshtha
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17174909, 17166770 } }
+    },
+
+[ 371] = {  -- Capricornus
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109385, 17113492 } }
+    },
+
+[1354] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 512] = {  -- Barbastelle
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17555721 } }
+    },
+
+[ 513] = {  -- Ah Puch
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17571903 } }
+    },
+
+[ 514] = {  -- Donggu
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17567801 } }
+    },
+
+[ 515] = {  -- Bugbear Strongman
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16822423, 16822427 } }
+    },
+
+[ 516] = {  -- La Velue
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17121576 } }
+    },
+
+[ 517] = {  -- Hovering Hotpot
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17596628 } }
+    },
+
+[ 518] = {  -- Yacumama
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109384, 17113491 } }
+    },
+
+[ 519] = {  -- Feuerunke
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17334552, 17338598 } }
+    },
+
+[1462] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
+
+[ 430] = {  -- Slendlix Spindlethumb
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17563785 } }
+    },
+
+[ 431] = {  -- Herbage Hunter
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17256836 } }
+    },
+
+[ 432] = {  -- Kirata
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17232044 } }
+    },
+
+[ 433] = {  -- Intulo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16793742 } }
+    },
+
+[ 434] = {  -- Ramponneau
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166705 } }
+    },
+
+[ 435] = {  -- Keeper of Halidom
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17272978 } }
+    },
+
+[ 436] = {  -- Shoggoth
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138077, 17146177 } }
+    },
+
+[ 437] = {  -- Farruca Fly
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17166769, 17174908 } }
+    },
+
+[1400] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 578] = {  -- Zi'Ghi Boneeater
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17363208 } }
+    },
+
+[ 579] = {  -- Lumbering Lambert
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195317 } }
+    },
+
+[ 580] = {  -- Deadly Dodo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17268851 } }
+    },
+
+[ 581] = {  -- Gargantua
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17232079 } }
+    },
+
+[ 582] = {  -- Megalobugard
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16875741 } }
+    },
+
+[ 583] = {  -- Ratatoskr
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17170475 } }
+    },
+
+[ 584] = {  -- Jyeshtha
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17174909, 17166770 } }
+    },
+
+[ 585] = {  -- Capricornus
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109385, 17113492 } }
+    },
+
+[1508] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
+
+[ 644] = {  -- Vuu Puqu the Beguiler
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17371578 } }
+    },
+
+[ 645] = {  -- Buburimboo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17261003 } }
+    },
+
+[ 646] = {  -- Zo'Khu Blackcloud
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17379564 } }
+    },
+
+[ 647] = {  -- Seww the Squidlimbed
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17498301 } }
+    },
+
+[ 648] = {  -- Ankabut
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17137705 } }
+    },
+
+[ 649] = {  -- Okyupete
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16879847 } }
+    },
+
+[ 650] = {  -- Urd
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17178923 } }
+    },
+
+[ 651] = {  -- Lamprey Lord
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138078, 17146178 } }
+    },
+
+[1554] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 710] = {  -- Stray Mary
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17219795, 17219933 } }
+    },
+
+[ 711] = {  -- Hawkeyed Dnatbat
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17387567 } }
+    },
+
+[ 712] = {  -- Dune Widow
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17244396 } }
+    },
+
+[ 713] = {  -- Seww the Squidlimbed
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17498301 } }
+    },
+
+[ 714] = {  -- Ankabut
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17137705 } }
+    },
+
+[ 715] = {  -- Okyupete
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16879847 } }
+    },
+
+[ 716] = {  -- Urd
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17178923 } }
+    },
+
+[ 717] = {  -- Lamprey Lord
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138078, 17146178 } }
+    },
+
+[1600] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 776] = {  -- Teporingo
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17559584 } }
+    },
+
+[ 777] = {  -- Valkurm Emperor
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17199438 } }
+    },
+
+[ 778] = {  -- Hyakume
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17457236 } }
+    },
+
+[ 779] = {  -- Gloomanita
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17137821 } }
+    },
+
+[ 780] = {  -- Mischievous Micholas
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17281149 } }
+    },
+
+[ 781] = {  -- Cactuar Cantautor
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17289560 } }
+    },
+
+[ 782] = {  -- Erebus
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17334553, 17338599 } }
+    },
+
+[ 783] = {  -- Skuld
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17178924 } }
+    },
+
+[1646] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 941] = {  -- Be'Hya Hundredwall
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17363258 } }
+    },
+
+[ 942] = {  -- Jolly Green
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17092898 } }
+    },
+
+[ 943] = {  -- Trembler Tabitha
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17588278 } }
+    },
+
+[ 944] = {  -- Seww the Squidlimbed
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17498301 } }
+    },
+
+[ 945] = {  -- Ankabut
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17137705 } }
+    },
+
+[ 946] = {  -- Okyupete
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16879847 } }
+    },
+
+[ 947] = {  -- Urd
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17178923 } }
+    },
+
+[ 948] = {  -- Lamprey Lord
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17138078, 17146178 } }
+    },
+
+[1788] = {  -- Chesma
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195485 } }
+    },
+
+[ 891] = {  -- Desmodont
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17571870 } }
+    },
+
+[ 892] = {  -- Moo Ouzi the Swiftblade
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17395816 } }
+    },
+
+[ 893] = {  -- Ni'Zho Bladebender
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17223797 } }
+    },
+
+[ 894] = {  -- Bugbear Strongman
+        check = checks.mobkill,
+        reqs = { mobid = set{ 16822423, 16822427 } }
+    },
+
+[ 895] = {  -- La Velue
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17121576 } }
+    },
+
+[ 896] = {  -- Hovering Hotpot
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17596628 } }
+    },
+
+[ 897] = {  -- Yacumama
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17109384, 17113491 } }
+    },
+
+[ 898] = {  -- Feuerunke
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17334552, 17338598 } }
+    },
+
+[1758] = {  -- Tammuz
+        check = checks.mobkill,
+        reqs = { mobid = set{ 17195484 } }
+    },
 }

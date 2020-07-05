@@ -9,19 +9,21 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/magiantrials")
 -----------------------------------
+tpz = tpz or {}
+tpz.magian = tpz.magian or {}
 
 function onTrade(player,npc,trade)
-  magianOrangeOnTrade(player,npc,trade)
+  tpz.magian.magianOrangeOnTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-  magianOrangeOnTrigger(player,npc)
+  tpz.magian.magianOrangeOnTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)
-  magianOrangeEventUpdate(player,itemId,csid,option)
+  tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
 end
 
 function onEventFinish(player,csid,option)
-  magianOrangeOnEventFinish(player,itemId,csid,option)
+  tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
 end
