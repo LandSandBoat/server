@@ -646,6 +646,8 @@ public:
     int32 instantiateMob(lua_State* L);
 
     int32 hasTrait(lua_State*);
+    int32 addTrait(lua_State*);
+
     int32 hasImmunity(lua_State*);          // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
     int32 setAggressive(lua_State* L);

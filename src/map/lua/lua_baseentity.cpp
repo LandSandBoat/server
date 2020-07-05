@@ -13410,6 +13410,29 @@ inline int32 CLuaBaseEntity::hasTrait(lua_State *L)
 }
 
 /************************************************************************
+*  Function: addTrait()
+*  Purpose : Add or increases one rank of a trait
+*  Example : target:addTrait(15)) -- Double Attack
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::addTrait(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    // TODO: Look up current ranks, add if not exists etc.
+    auto PBattleEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto traitID = (uint8)lua_tointeger(L, 1);
+    auto trait = traits::GetTraitByID(traitID);
+
+    PBattleEntity->addTrait(trait);
+
+    return 0;
+}
+
+/************************************************************************
 *  Function: hasImmunity()
 *  Purpose : Returns true if a Mob is immune to a specified type of spell
 *  Example : if (target:hasImmunity(64)) then
@@ -14992,6 +15015,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,instantiateMob),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTrait),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTrait),
+
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasImmunity),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setAggressive),
