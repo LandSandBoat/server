@@ -198,7 +198,6 @@ namespace traits
     void LoadTraitsList();
 
     TraitList_t* GetTraits(uint8 JobID);
-    CTrait* GetTraitByID(uint8 ID);
 };
 
 #endif

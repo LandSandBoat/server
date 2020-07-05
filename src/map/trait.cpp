@@ -122,22 +122,4 @@ namespace traits
 
 	    return &PTraitsList[JobID];
     }
-
-    CTrait* GetTraitByID(uint8 ID)
-    {
-        CTrait* trait;
-
-        for (auto& jobTraitList : PTraitsList)
-        {
-            for (auto& t : jobTraitList)
-            {
-                if (t->getID() == ID)
-                {
-                    trait = t;
-                }
-            }
-        }
-
-        return trait;
-    }
 };

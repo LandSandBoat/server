@@ -41,8 +41,7 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
                         ai.r.WS, ai.s.SPECIFIC, tpz.ws.DOUBLE_THRUST)
 
-    -- TODO: Table
-    mob:addTrait(14) -- Store TP
+    mob:addMod(tpz.mod.STORETP, 25)
 end
 
 function onMobDespawn(mob)
