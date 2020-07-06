@@ -2922,7 +2922,7 @@ INSERT INTO `mob_groups` VALUES (52,3339,62,'Reacton',0,128,2082,25000,0,81,83,0
 INSERT INTO `mob_groups` VALUES (53,34,62,'Achamoth',0,128,14,38000,0,86,88,0);
 INSERT INTO `mob_groups` VALUES (54,35,62,'Achamothcampa',0,128,0,8000,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (55,36,62,'Achamoth_Nympha',0,128,0,12000,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (56,2697,62,'Moblin_Millionaire',960,0,1712,0,0,70,75,0);
+INSERT INTO `mob_groups` VALUES (56,2697,62,'Moblin_Millionaire',960,0,1712,0,0,74,76,0);
 INSERT INTO `mob_groups` VALUES (2132,4493,62,'Zazarg',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
@@ -4710,7 +4710,15 @@ INSERT INTO `mob_groups` VALUES (38,761,85,'Cogtooth_Skagnogg',7200,0,0,10000,99
 INSERT INTO `mob_groups` VALUES (39,64,85,'Agrios',7200,0,0,20000,9999,83,83,0);
 INSERT INTO `mob_groups` VALUES (40,1293,85,'Falsespinner_Bhudbrodd',7200,0,0,22000,9999,83,83,0);
 INSERT INTO `mob_groups` VALUES (41,3413,85,'Rugaroo',14400,0,0,22000,9999,83,83,0);
-INSERT INTO `mob_groups` VALUES (42,1449,85,'Galarhigg',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (42,1449,85,'Galarhigg',0,128,0,0,0,69,69,0);
+INSERT INTO `mob_groups` VALUES (43,402,85,'Bhogbiggs_Grenade',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (44,1321,85,'Feldrautte_I_Rouhent',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (45,777,85,'Conqueror_Bakgodek',0,128,506,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (46,3767,85,'Steelhide_Protector',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (47,2127,85,'Jagidbods_Warmachine',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (48,737,85,'Clan_Reaper_Grunt',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (49,1333,85,'Fiendish_Leechkeeper',0,128,0,0,0,60,60,0);
+
 INSERT INTO `mob_groups` VALUES (3545,18,85,'Abenzio',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3546,37,85,'Achtelle',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3547,64,85,'Agrios',18000,0,31,0,0,80,85,0);
@@ -4729,7 +4737,6 @@ INSERT INTO `mob_groups` VALUES (3561,311,85,'Azima',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3562,312,85,'Azo',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3563,320,85,'Babban_Ny_Mheillea',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3564,366,85,'Battlemaster_Vatgit',0,128,239,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (3565,402,85,'Bhogbiggs_Grenade',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (3566,403,85,'Bhogbiggs_Vial',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (3567,456,85,'Bloodcrown_Brradhod',0,128,0,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (3568,464,85,'Bloodwing_Impaler',0,128,0,0,0,60,60,0);
@@ -4744,12 +4751,10 @@ INSERT INTO `mob_groups` VALUES (3576,714,85,'Chigoe',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3577,725,85,'Choh_Moui',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3578,735,85,'Clan_Bear_Fighter',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3579,736,85,'Clan_Longtooth_Pillager',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3580,737,85,'Clan_Reaper_Grunt',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3581,761,85,'Cogtooth_Skagnogg',18000,0,497,0,0,80,85,0);
 INSERT INTO `mob_groups` VALUES (3582,762,85,'Coinbiter_Cjaknokk',18000,0,498,0,0,80,85,0);
 INSERT INTO `mob_groups` VALUES (3583,775,85,'Confederate_Belfry',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3584,776,85,'Confederate_Mantelet',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (3585,777,85,'Conqueror_Bakgodek',0,128,506,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3586,896,85,'Dalzakk',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3587,903,85,'Darach',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3588,904,85,'Darkheir_Grradhod',0,128,0,0,0,12,12,0);
@@ -4764,9 +4769,7 @@ INSERT INTO `mob_groups` VALUES (3596,1262,85,'Eurytos',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (3597,1279,85,'Faerie',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3598,1293,85,'Falsespinner_Bhudbrodd',18000,0,816,0,0,80,85,0);
 INSERT INTO `mob_groups` VALUES (3599,1317,85,'Feeblescheme_Bhogbigg',18000,0,825,0,0,80,85,0);
-INSERT INTO `mob_groups` VALUES (3600,1321,85,'Feldrautte_I_Rouhent',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3602,1324,85,'Ferreous_Coffin',1,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (3603,1333,85,'Fiendish_Leechkeeper',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3604,1338,85,'Fighting_Smilodon',960,0,829,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (3605,1408,85,'Fortification',0,128,463,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (3607,1574,85,'Gigas_Mercenary',0,128,0,0,0,60,60,0);
@@ -4779,7 +4782,6 @@ INSERT INTO `mob_groups` VALUES (3614,1852,85,'Gutrender_Trooper',0,128,0,0,0,60
 INSERT INTO `mob_groups` VALUES (3615,1903,85,'Hawkeyed_Dnatbat',86400,0,1284,0,0,84,86,0);
 INSERT INTO `mob_groups` VALUES (3616,2100,85,'Iron_Bomb',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (3617,2126,85,'Jagidbod_of_Clan_Reaper',0,0,1393,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3618,2127,85,'Jagidbods_Warmachine',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3619,2137,85,'Jajaro',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3620,2179,85,'Kagetora',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3621,2180,85,'Kaiser_Behemoth',0,128,0,0,0,60,60,0);
@@ -4849,7 +4851,6 @@ INSERT INTO `mob_groups` VALUES (3687,3588,85,'Shatterskull_Mippdapp',86400,0,22
 INSERT INTO `mob_groups` VALUES (3688,3672,85,'Slitherword_Razghogg',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3689,3730,85,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3690,3765,85,'Steelbiter_Gudrud',0,128,2328,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (3691,3767,85,'Steelhide_Protector',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3692,3902,85,'Three-eyed_Prozpuz',0,128,307,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3693,3907,85,'Throatripper_Predator',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3694,3912,85,'Thunder_Elemental',960,4,2410,0,0,76,78,0);
