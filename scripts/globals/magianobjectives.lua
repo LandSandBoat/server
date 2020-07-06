@@ -9,12 +9,12 @@ tpz = tpz or {}
 tpz.magian = tpz.magian or {}
 
 local checks = {}
-checks.mobkill = function(self, player, params) 
+checks.mobkill = function(self, player, params)
     if self.reqs.mobid and params.mob then
-        return self.reqs.mobid[params.mob:getID()] and 1
+        return self.reqs.mobid[params.mob:getID()] and 1 or 0
     end
     return 0
-end 
+end
 
 tpz.magian.trials =
 {

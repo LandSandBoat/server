@@ -7,20 +7,7 @@ require("scripts/globals/magianobjectives")
 
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
-tpz.magian.trialCache = {}
-
--- packs current trials into params for onTrigger
-local function parseParams(player)
-    local paramTrials = {}
-    for _,v in pairs(readTrials(player)) do
-        if v.trial > 0 then table.insert(paramTrials, v.trial) end
-    end
-    local params = {0,0,0,0,0}
-    for i = 1, #paramTrials, 2 do
-        params[(i+1)/2] = paramTrials[i] + bit.lshift((paramTrials[i+1] or 0), 16)
-    end
-    return params, #paramTrials
-end
+tpz.magian.trialCache = tpz.magian.trialCache or {}
 
 -- creates table to track trial and progress per trial slot
 local function readTrials(player)
@@ -37,6 +24,19 @@ local function readTrials(player)
     end
     tpz.magian.trialCache[player:getID()] = activeTrials
     return activeTrials
+end
+
+-- packs current trials into params for onTrigger
+local function parseParams(player)
+    local paramTrials = {}
+    for _,v in pairs(readTrials(player)) do
+        if v.trial > 0 then table.insert(paramTrials, v.trial) end
+    end
+    local params = {0,0,0,0,0}
+    for i = 1, #paramTrials, 2 do
+        params[(i+1)/2] = paramTrials[i] + bit.lshift((paramTrials[i+1] or 0), 16)
+    end
+    return params, #paramTrials
 end
 
 -- trial id and progress
@@ -70,7 +70,7 @@ local function firstEmptySlot(player)
 end
 
 local function hasTrial(player, number)
-    for i, v in pairs(readTrials(player)) do
+    for i, v in ipairs(readTrials(player)) do
         if v.trial == number then
             return i
         end
@@ -91,8 +91,7 @@ function tpz.magian.checkMagianTrial(player, conditions)
                 if increment > 0 then
                     local trialSQL = GetMagianTrial(trialOnItem)
                     if cacheData.progress < trialSQL.objectiveTotal then
-                        cacheData.progress = cacheData.progress + increment
-                        setTrial(player, cachePosition, trialOnItem, cacheData.progress)
+                        setTrial(player, cachePosition, trialOnItem, cacheData.progress + increment)
                         local remainingObjectives = trialSQL.objectiveTotal - cacheData.progress
                         if remainingObjectives == 0 then
                             player:messageBasic(tpz.msg.basic.MAGIAN_TRIAL_COMPLETE, trialOnItem) -- trial complete
@@ -100,7 +99,7 @@ function tpz.magian.checkMagianTrial(player, conditions)
                             player:messageBasic(tpz.msg.basic.MAGIAN_TRIAL_COMPLETE - 1, trialOnItem, remainingObjectives) -- trial <trialid>: x objectives remain
                         end
                         break
-                    elseif cacheData.progress > trialSQL.objectiveTotal then
+                    elseif cacheData.progress + increment > trialSQL.objectiveTotal then
                         cacheData.progress = trialSQL.objectiveTotal
                         setTrial(player, cachePosition, trialOnItem, cacheData.progress)
                     end
@@ -223,12 +222,10 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
 
     if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 2 then
         local trialId = bit.rshift(option, 16)
-
         local t = GetMagianTrial(trialId)
         local activeSlot = hasTrial(player, trialId)
-        local progress = activeSlot and getTrial(player, activeSlot)
-        
-        player:updateEvent(t.objectiveTotal,0,data.progress,0,0,t.element)
+        local _, progress = getTrial(player, activeSlot)
+        player:updateEvent(t.objectiveTotal,0,progress,0,0,t.element)
     end
 
     if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 3 then
