@@ -9,6 +9,9 @@ tpz = tpz or {}
 tpz.magian = tpz.magian or {}
 
 local checks = {}
+
+-- Standard mob kill
+-- params = { ["mob"] = mob }
 checks.mobkill = function(self, player, params)
     if self.reqs.mobid and params.mob then
         return self.reqs.mobid[params.mob:getID()] and 1 or 0

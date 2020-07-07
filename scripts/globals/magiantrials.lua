@@ -61,9 +61,8 @@ end
 
 -- finds empty trial slot
 local function firstEmptySlot(player)
-    local activeTrials = readTrials(player)
-    for i = 1, 10 do
-        if activeTrials[i].trial == 0 then
+    for i, v in ipairs(readTrials(player)) do
+        if v.trial == 0 then
         	return i
         end
     end
@@ -223,7 +222,8 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         local trialId = bit.rshift(option, 16)
         local t = GetMagianTrial(trialId)
         local _,cacheData = hasTrial(player, trialId)
-        player:updateEvent(t.objectiveTotal,0,cacheData.progress,0,0,t.element)
+        local progress = cacheData and cacheData.progress or 0
+        player:updateEvent(t.objectiveTotal,0,progress,0,0,t.element)
     end
 
     if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 3 then
@@ -236,25 +236,23 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
     if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 4 then
         local trialId = bit.rshift(option, 16)
         local t = GetMagianTrial(trialId)
-        player:updateEvent(t.resultTrial1,t.resultTrial2,t.resultTrial3,t.resultTrial4,t.prevTrial,t.objectiveItem)
+        local results = GetMagianTrialsWithParent(trialId)
+        player:updateEvent(results[1],results[2],results[3],results[4],t.previousTrial,t.objectiveItem)
     end
 
     -- lists trials to abandon
     if csid == 10123 and optionMod == 5 then
-        local p, t = parseParams(player)
-        player:updateEvent(p[1],p[2],p[3],p[4],p[5],0,0,t)
+        local params, trialCount = parseParams(player)
+        player:updateEvent(params[1],params[2],params[3],params[4],params[5],0,0,trialCount)
     end
 
     -- abandon trial through menu
     if csid == 10123 and optionMod == 6 then
         local trialId = bit.rshift(option, 8)
-        for i = 1, 10 do
-            local tr, _ = getTrial(player, i)
-            if tr == trialId then
-                player:updateEvent(0,0,0,0,0,i)
-                setTrial(player, i, 0, 0)
-                break
-            end
+        local slot = hasTrial(player, trialId)
+        if slot then
+            player:updateEvent(0,0,0,0,0,slot)
+            setTrial(player, slot, 0, 0)
         end
     end
 
@@ -263,12 +261,10 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         local a1, a2 = reqAugmentParams(t)
-        for i = 1, 10 do
-            local tr, _ = getTrial(player, i)
-            if tr == trialId then
-                player:updateEvent(0,0,0,0,0,0,0,-1)
-                return
-            end
+        local slot = hasTrial(player, trialId)
+        if slot then
+            player:updateEvent(0,0,0,0,0,0,0,-1)
+            return
         end
         player:updateEvent(2,a1,a2,t.reqItem)
     end
@@ -383,14 +379,11 @@ function tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
     -- finishes a trial
     elseif csid == 10129 and optionMod == 0 then
         local trialId = player:getLocalVar("storeTrialId")
-        local t = GetMagianTrial(trialId)
-        for i = 1, 10 do
-            local tr, _ = getTrial(player, i)
-            if tr == trialId then
-                setTrial(player, i, 0, 0)
-                break
-            end
+        local slot = hasTrial(player, trialId)
+        if slot then
+            setTrial(player, slot, 0, 0)
         end
+        local t = GetMagianTrial(trialId)
         player:addItem(t.rewardItem,1,t.rewardItemAug1,t.rewardItemAugValue1,t.rewardItemAug2,t.rewardItemAugValue2,t.rewardItemAug3,t.rewardItemAugValue3,t.rewardItemAug4,t.rewardItemAugValue4)
         player:messageSpecial(msg.ITEM_OBTAINED, t.rewardItem)
         player:setLocalVar("storeTrialId", 0)

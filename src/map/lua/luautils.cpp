@@ -120,6 +120,7 @@ namespace luautils
         lua_register(LuaHandle, "GetPlayerByID", luautils::GetPlayerByID);
         lua_register(LuaHandle, "GetMobAction", luautils::GetMobAction);
         lua_register(LuaHandle, "GetMagianTrial", luautils::GetMagianTrial);
+        lua_register(LuaHandle, "GetMagianTrialsWithParent", luautils::GetMagianTrialsWithParent);
         lua_register(LuaHandle, "VanadielTime", luautils::VanadielTime);
         lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
         lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
@@ -1135,6 +1136,46 @@ namespace luautils
             return 1;
         }
         lua_pushnil(L);
+        return 1;
+    }
+
+    /*******************************************************************************
+    *                                                                              *
+    *  Returns a list of trial numbers who have the given parent trial             *
+    *                                                                              *
+    *******************************************************************************/
+
+    int32 GetMagianTrialsWithParent(lua_State* L)
+    {
+        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+        if (lua_isnumber(L, 1))
+        {
+            int32 parentTrial = lua_tointeger(L, 1);
+            const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
+
+            int32 ret = Sql_Query(SqlHandle, Query, parentTrial);
+            if(ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+            {
+                lua_newtable(L);
+                int32 field {0};
+                while(Sql_NextRow(SqlHandle) == 0)
+                {
+                    int32 childTrial = Sql_GetIntData(SqlHandle, 0);
+                    lua_pushinteger(L, ++field);
+                    lua_pushinteger(L, childTrial);
+                    lua_settable(L, -3);
+                }
+            }
+            else
+            {
+                lua_pushnil(L);
+            }
+        }
+        else
+        {
+            lua_pushnil(L);
+        }
         return 1;
     }
 
