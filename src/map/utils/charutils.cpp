@@ -1024,11 +1024,35 @@ namespace charutils
 
             if (PLinkshell1)
             {
-                linkshell::AddOnlineMember(PChar, PLinkshell1, 1);
+                ret = Sql_Query(SqlHandle, "SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell1->GetLSID());
+                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                { // if the linkshell has been broken, unequip
+                    uint8 SlotID = PLinkshell1->getSlotID();
+                    uint8 LocationID = PLinkshell1->getLocationID();
+                    PLinkshell1->setSubType(ITEM_UNLOCKED);
+                    PChar->equip[SLOT_LINK1] = 0;
+                    Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID, LocationID);
+                }
+                else
+                {
+                    linkshell::AddOnlineMember(PChar, PLinkshell1, 1);
+                }
             }
             if (PLinkshell2)
             {
-                linkshell::AddOnlineMember(PChar, PLinkshell2, 2);
+                ret = Sql_Query(SqlHandle, "SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell2->GetLSID());
+                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                { // if the linkshell has been broken, unequip
+                    uint8 SlotID = PLinkshell2->getSlotID();
+                    uint8 LocationID = PLinkshell2->getLocationID();
+                    PLinkshell2->setSubType(ITEM_UNLOCKED);
+                    PChar->equip[SLOT_LINK1] = 0;
+                    Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID, LocationID);
+                }
+                else
+                {
+                    linkshell::AddOnlineMember(PChar, PLinkshell2, 2);
+                }
             }
         }
         else
