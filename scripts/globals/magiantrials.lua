@@ -207,6 +207,8 @@ end
       value                 value
                                                   ]]--
 
+rareItems = set{ 16192,18574,19397,19398,19399,19400,19401,19402,19403,19404,19405,19406,19407,19408,19409,19410 }
+
 function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
     local optionMod = bit.band(option, 0xFF)
 
@@ -216,48 +218,42 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         local t = GetMagianTrial(trialId)
         local a1, a2 = reqAugmentParams(t)
         player:updateEvent(2,a1,a2,t.reqItem,0,0,t.trialTarget)
-    end
 
-    if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 2 then
+    elseif (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 2 then
         local trialId = bit.rshift(option, 16)
         local t = GetMagianTrial(trialId)
         local _,cacheData = hasTrial(player, trialId)
         local progress = cacheData and cacheData.progress or 0
         player:updateEvent(t.objectiveTotal,0,progress,0,0,t.element)
-    end
 
-    if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 3 then
+    elseif (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 3 then
         local trialId = bit.rshift(option, 16)
         local t = GetMagianTrial(trialId)
         local a1, a2 = rewardAugmentParams(t)
         player:updateEvent(2,a1,a2,t.rewardItem,0,t.objectiveItem)
-    end
 
-    if (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 4 then
+    elseif (csid == 10123 or csid == 10124 or csid == 10125) and optionMod == 4 then
         local trialId = bit.rshift(option, 16)
         local t = GetMagianTrial(trialId)
         local results = GetMagianTrialsWithParent(trialId)
         player:updateEvent(results[1],results[2],results[3],results[4],t.previousTrial,t.objectiveItem)
-    end
 
     -- lists trials to abandon
-    if csid == 10123 and optionMod == 5 then
+    elseif csid == 10123 and optionMod == 5 then
         local params, trialCount = parseParams(player)
         player:updateEvent(params[1],params[2],params[3],params[4],params[5],0,0,trialCount)
-    end
 
     -- abandon trial through menu
-    if csid == 10123 and optionMod == 6 then
+    elseif csid == 10123 and optionMod == 6 then
         local trialId = bit.rshift(option, 8)
         local slot = hasTrial(player, trialId)
         if slot then
             player:updateEvent(0,0,0,0,0,slot)
             setTrial(player, slot, 0, 0)
         end
-    end
 
     -- checks if trial is already in progress
-    if csid == 10124 and optionMod == 7 then
+    elseif csid == 10124 and optionMod == 7 then
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         local a1, a2 = reqAugmentParams(t)
@@ -267,10 +263,9 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
             return
         end
         player:updateEvent(2,a1,a2,t.reqItem)
-    end
 
     -- checks if item's level will increase
-    if csid == 10124 and optionMod == 13 then
+    elseif csid == 10124 and optionMod == 13 then
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         local reqItem = GetItem(t.reqItem)
@@ -280,30 +275,9 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         else
             player:updateEvent(0)
         end
-    end
-
-    rareItems =
-    {
-      [16192] = true,
-      [18574] = true,
-      [19397] = true,
-      [19398] = true,
-      [19399] = true,
-      [19400] = true,
-      [19401] = true,
-      [19402] = true,
-      [19403] = true,
-      [19404] = true,
-      [19405] = true,
-      [19406] = true,
-      [19407] = true,
-      [19408] = true,
-      [19409] = true,
-      [19410] = true,
-    }
 
     -- checks if player already owns reward item (if it's rare)
-    if csid == 10124 and optionMod == 14 then
+    elseif csid == 10124 and optionMod == 14 then
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         if (player:hasItem(t.rewardItem) and rareItems[t.rewardItem] == true) then
@@ -311,10 +285,9 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         else
             player:updateEvent(0)
         end
-    end
 
     -- abandoning trial through trade
-    if csid == 10125 and (optionMod == 8 or optionMod == 11) then
+    elseif csid == 10125 and (optionMod == 8 or optionMod == 11) then
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
         player:updateEvent(0,0,0,t.reqItem)
