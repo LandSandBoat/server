@@ -3784,8 +3784,8 @@ inline int32 CLuaBaseEntity::createShop(lua_State *L)
 *  Function: addShopItem()
 *  Purpose : Adds an item and established price to an existing shop
 *          : Optionally accepts a GuildID + Guild Rank requirement
-*  Example : addShopItem(512,8000)                  --Regular item
-*          : addShopItem(4362, 100, tpz., 0x02BC)   --Guild-rank locked item
+*  Example : addShopItem(512, 8000)                                                   --Regular item
+*          : addShopItem(512, 8000, tpz.skill.CLOTHCRAFT, tpz.craftRank.JOURNEYMAN)   --Guild-rank locked item
 *  Notes   : Use with createShop() - 16 Max Items in Shop
 ************************************************************************/
 
