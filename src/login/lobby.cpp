@@ -768,7 +768,7 @@ int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
     srand(clock());
     char_mini createchar;
 
-    memcpy(createchar.m_name, loginsd->charname, 16);
+    memcpy(createchar.m_name, loginsd->charname, 15);
     memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
