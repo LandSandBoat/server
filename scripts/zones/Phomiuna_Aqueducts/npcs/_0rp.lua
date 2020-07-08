@@ -16,7 +16,7 @@ function onTrigger(player,npc)
     player:messageSpecial(ID.text.LAMP_OFFSET+5) -- lighting lamp
     npc:openDoor(7) -- lamp animation
 
-    local day = VanadielDayOfWeek()
+    local day = VanadielDayOfTheWeek()
 
     if (day == tpz.day.LIGHTNINGDAY) then
         if (GetNPCByID(DoorOffset-2):getAnimation() == 8) then -- lamp water open ?

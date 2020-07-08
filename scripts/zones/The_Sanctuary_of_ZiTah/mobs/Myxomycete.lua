@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 require("scripts/globals/regimes")
-require("scripts/globals/weather")
+require("scripts/globals/world")
 require("scripts/globals/mobs")
 -----------------------------------
 

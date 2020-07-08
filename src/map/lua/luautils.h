@@ -154,7 +154,7 @@ namespace luautils
     int32 VanadielMinute(lua_State*);                                           // текущие Vanadiel минуты
     int32 VanadielDayOfTheYear(lua_State*);                                     // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
     int32 VanadielDayOfTheMonth(lua_State*);                                    // Gets day of the month (Feb 6 = Day 6)
-    int32 VanadielDayOfWeek(lua_State*);                                        // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
+    int32 VanadielDayOfTheWeek(lua_State*);                                     // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
     int32 VanadielYear(lua_State*);                                             // Gets the current Vanadiel Year
     int32 VanadielMonth(lua_State*);                                            // Gets the current Vanadiel Month
     int32 VanadielDayElement(lua_State*);                                       // Gets element of the day (1: fire, 2: ice, 3: wind, 4: earth, 5: thunder, 6: water, 7: light, 8: dark)

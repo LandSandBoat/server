@@ -1,3 +1,4 @@
+require('scripts/globals/status')
 
 tpz = tpz or {}
 tpz.magic = tpz.magic or {}

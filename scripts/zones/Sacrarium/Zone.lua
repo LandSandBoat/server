@@ -51,7 +51,7 @@ function onGameDay()
         [tpz.day.LIGHTSDAY]    = {1,0,0,0,0,0,0,1,1,0,1,0,1,1,0,1,0,1},
         [tpz.day.DARKSDAY]     = {1,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0},
     };
-    local doors = labyrinthDoorsByDay[VanadielDayOfWeek()];
+    local doors = labyrinthDoorsByDay[VanadielDayOfTheWeek()];
     for i = 0, 17 do
         GetNPCByID(ID.npc.LABYRINTH_OFFSET + i):setAnimation(tpz.anim.OPEN_DOOR + doors[i+1]);
     end

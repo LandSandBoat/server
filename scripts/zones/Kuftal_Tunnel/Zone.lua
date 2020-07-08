@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/treasure")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 -----------------------------------
 

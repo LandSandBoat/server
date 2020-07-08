@@ -62,6 +62,7 @@
 #include "../entities/automatonentity.h"
 #include "../utils/itemutils.h"
 #include "../utils/charutils.h"
+#include "../utils/battleutils.h"
 #include "../conquest_system.h"
 #include "../weapon_skill.h"
 #include "../status_effect_container.h"
@@ -121,7 +122,7 @@ namespace luautils
         lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
         lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
         lua_register(LuaHandle, "VanadielMinute", luautils::VanadielMinute);
-        lua_register(LuaHandle, "VanadielDayOfWeek", luautils::VanadielDayElement);
+        lua_register(LuaHandle, "VanadielDayOfTheWeek", luautils::VanadielDayOfTheWeek);
         lua_register(LuaHandle, "VanadielDayOfTheMonth", luautils::VanadielDayOfTheMonth);
         lua_register(LuaHandle, "VanadielDayOfTheYear", luautils::VanadielDayOfTheYear);
         lua_register(LuaHandle, "VanadielYear", luautils::VanadielYear);
@@ -663,7 +664,7 @@ namespace luautils
     *                                                                       *
     ************************************************************************/
 
-    int32 VanadielDayOfWeek(lua_State* L)
+    int32 VanadielDayOfTheWeek(lua_State* L)
     {
         lua_pushinteger(L, CVanaTime::getInstance()->getWeekday());
         return 1;
@@ -704,7 +705,7 @@ namespace luautils
 
     int32 VanadielDayElement(lua_State* L)
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getDayElement());
+        lua_pushinteger(L, battleutils::GetDayElement());
         return 1;
     }
 

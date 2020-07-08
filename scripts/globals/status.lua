@@ -1,3 +1,5 @@
+require("scripts/globals/world")
+
 ------------------------------------
 --
 -- STATUSES AND MODS

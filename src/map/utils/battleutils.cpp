@@ -889,53 +889,13 @@ namespace battleutils
         if (PAttacker->getMod(Mod::ENSPELL) > 0 && (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 ||
             PAttacker->getMod(Mod::ENSPELL_CHANCE) > tpzrand::GetRandomNumber(100)))
         {
-            SUBEFFECT subeffects[8] = { SUBEFFECT_LIGHT_DAMAGE, SUBEFFECT_DARKNESS_DAMAGE, SUBEFFECT_FIRE_DAMAGE, SUBEFFECT_EARTH_DAMAGE,
-                SUBEFFECT_WATER_DAMAGE, SUBEFFECT_WIND_DAMAGE, SUBEFFECT_ICE_DAMAGE, SUBEFFECT_LIGHTNING_DAMAGE };
-            int16 enspell = PAttacker->getMod(Mod::ENSPELL);
-
-            if (enspell > 0 && enspell <= 6)
+            static SUBEFFECT enspell_subeffects[8] =
             {
-                Action->additionalEffect = subeffects[enspell + 1];
-                Action->addEffectMessage = 163;
-                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell - 1);
-
-                if (Action->addEffectParam < 0)
-                {
-                    Action->addEffectParam = -Action->addEffectParam;
-                    Action->addEffectMessage = 384;
-                }
-
-                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
-            }
-            else if (enspell > 8 && enspell <= 14 && isFirstSwing)
-            {
-                Action->additionalEffect = subeffects[enspell - 7];
-                Action->addEffectMessage = 163;
-                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 9);
-
-                if (Action->addEffectParam < 0)
-                {
-                    Action->addEffectParam = -Action->addEffectParam;
-                    Action->addEffectMessage = 384;
-                }
-
-                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
-            }
-            else if (enspell > 6 && enspell <= 8)
-            {
-                Action->additionalEffect = subeffects[enspell - 7];
-                Action->addEffectMessage = 163;
-                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell - 1);
-
-                if (Action->addEffectParam < 0)
-                {
-                    Action->addEffectParam = -Action->addEffectParam;
-                    Action->addEffectMessage = 384;
-                }
-
-                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
-            }
-            else if (enspell == ENSPELL_BLOOD_WEAPON)
+                SUBEFFECT_FIRE_DAMAGE, SUBEFFECT_ICE_DAMAGE, SUBEFFECT_WIND_DAMAGE, SUBEFFECT_EARTH_DAMAGE,
+                SUBEFFECT_LIGHTNING_DAMAGE, SUBEFFECT_WATER_DAMAGE, SUBEFFECT_LIGHT_DAMAGE, SUBEFFECT_DARKNESS_DAMAGE,
+            };
+            uint8 enspell = (uint8) PAttacker->getMod(Mod::ENSPELL);
+            if (enspell == ENSPELL_BLOOD_WEAPON)
             {
                 Action->additionalEffect = SUBEFFECT_HP_DRAIN;
                 Action->addEffectMessage = 161;
@@ -958,6 +918,43 @@ namespace battleutils
                 }
 
                 PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+            }
+            else if (enspell <= ENSPELL_II_DARK) // Elemental enspells
+            {
+                if (enspell > ENSPELL_I_DARK && isFirstSwing ) // Tier II elemental enspell
+                {
+                    //Enlight II and Endark II currently not implemented; may vary
+                    Action->additionalEffect = enspell_subeffects[enspell - 9];
+                    Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8);
+                }
+                else if (enspell <= ENSPELL_I_DARK) // Tier I elemental enspell
+                {
+                    Action->additionalEffect = enspell_subeffects[enspell - 1];
+                    if (enspell >= ENSPELL_I_LIGHT) // Enlight or Endark
+                    {
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell);
+                    }
+                    else
+                    {
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell);
+                    }
+
+                }
+
+                if (Action->additionalEffect)
+                {
+                    if (Action->addEffectParam < 0)
+                    {
+                        Action->addEffectParam = -Action->addEffectParam;
+                        Action->addEffectMessage = 384;
+                    }
+                    else
+                    {
+                        Action->addEffectMessage = 163;
+                    }
+
+                    PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+                }
             }
         }
         //check weapon for additional effects
@@ -2956,24 +2953,26 @@ namespace battleutils
         static const Mod resistances[][4] =
         {
             {Mod::NONE,       Mod::NONE, Mod::NONE, Mod::NONE}, // SC_NONE
-            {Mod::LIGHTDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_TRANSFIXION
-            {Mod::DARKDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_COMPRESSION
-            {Mod::FIREDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_LIQUEFACTION
-            {Mod::EARTHDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_SCISSION
-            {Mod::WATERDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_REVERBERATION
-            {Mod::WINDDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_DETONATION
-            {Mod::ICEDEF,     Mod::NONE, Mod::NONE, Mod::NONE}, // SC_INDURATION
-            {Mod::THUNDERDEF, Mod::NONE, Mod::NONE, Mod::NONE}, // SC_IMPACTION
 
-            { Mod::EARTHDEF, Mod::DARKDEF, Mod::NONE, Mod::NONE }, // SC_GRAVITATION
-            { Mod::ICEDEF, Mod::WATERDEF, Mod::NONE, Mod::NONE }, // SC_DISTORTION
-            {Mod::FIREDEF,  Mod::LIGHTDEF,   Mod::NONE, Mod::NONE}, // SC_FUSION
-            {Mod::WINDDEF,  Mod::THUNDERDEF, Mod::NONE, Mod::NONE}, // SC_FRAGMENTATION
+            {Mod::FIREDEF, Mod::WINDDEF,  Mod::THUNDERDEF, Mod::LIGHTDEF}, // SC_LIGHT_II
+            {Mod::ICEDEF,  Mod::EARTHDEF, Mod::WATERDEF,   Mod::DARKDEF},  // SC_DARKNESS_II
 
             {Mod::FIREDEF, Mod::WINDDEF,  Mod::THUNDERDEF, Mod::LIGHTDEF}, // SC_LIGHT
             {Mod::ICEDEF,  Mod::EARTHDEF, Mod::WATERDEF,   Mod::DARKDEF},  // SC_DARKNESS
-            {Mod::FIREDEF, Mod::WINDDEF,  Mod::THUNDERDEF, Mod::LIGHTDEF}, // SC_LIGHT
-            {Mod::ICEDEF,  Mod::EARTHDEF, Mod::WATERDEF,   Mod::DARKDEF},  // SC_DARKNESS_II
+
+            {Mod::EARTHDEF, Mod::DARKDEF, Mod::NONE, Mod::NONE }, // SC_GRAVITATION
+            {Mod::WINDDEF,  Mod::THUNDERDEF, Mod::NONE, Mod::NONE}, // SC_FRAGMENTATION
+            {Mod::ICEDEF,   Mod::WATERDEF, Mod::NONE, Mod::NONE }, // SC_DISTORTION
+            {Mod::FIREDEF,  Mod::LIGHTDEF,   Mod::NONE, Mod::NONE}, // SC_FUSION
+
+            {Mod::DARKDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_COMPRESSION
+            {Mod::FIREDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_LIQUEFACTION
+            {Mod::ICEDEF,     Mod::NONE, Mod::NONE, Mod::NONE}, // SC_INDURATION
+            {Mod::WATERDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_REVERBERATION
+            {Mod::LIGHTDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_TRANSFIXION
+            {Mod::EARTHDEF,   Mod::NONE, Mod::NONE, Mod::NONE}, // SC_SCISSION
+            {Mod::WINDDEF,    Mod::NONE, Mod::NONE, Mod::NONE}, // SC_DETONATION
+            {Mod::THUNDERDEF, Mod::NONE, Mod::NONE, Mod::NONE}, // SC_IMPACTION
         };
 
         Mod defMod = Mod::NONE;
@@ -3029,20 +3028,20 @@ namespace battleutils
             case Mod::FIREDEF:
                 *appliedEle = ELEMENT_FIRE;
                 break;
-            case Mod::EARTHDEF:
-                *appliedEle = ELEMENT_EARTH;
-                break;
-            case Mod::WATERDEF:
-                *appliedEle = ELEMENT_WATER;
+            case Mod::ICEDEF:
+                *appliedEle = ELEMENT_ICE;
                 break;
             case Mod::WINDDEF:
                 *appliedEle = ELEMENT_WIND;
                 break;
-            case Mod::ICEDEF:
-                *appliedEle = ELEMENT_ICE;
+            case Mod::EARTHDEF:
+                *appliedEle = ELEMENT_EARTH;
                 break;
             case Mod::THUNDERDEF:
                 *appliedEle = ELEMENT_THUNDER;
+                break;
+            case Mod::WATERDEF:
+                *appliedEle = ELEMENT_WATER;
                 break;
             case Mod::LIGHTDEF:
                 *appliedEle = ELEMENT_LIGHT;
@@ -4617,6 +4616,23 @@ namespace battleutils
         return PSpell->getAOE();
     }
 
+    ELEMENT GetDayElement()
+    {
+        DAYTYPE weekday = (DAYTYPE)CVanaTime::getInstance()->getWeekday();
+        switch (weekday)
+        {
+            case     FIRESDAY: return ELEMENT_FIRE;
+            case    EARTHSDAY: return ELEMENT_EARTH;
+            case    WATERSDAY: return ELEMENT_WATER;
+            case     WINDSDAY: return ELEMENT_WIND;
+            case       ICEDAY: return ELEMENT_ICE;
+            case LIGHTNINGDAY: return ELEMENT_THUNDER;
+            case    LIGHTSDAY: return ELEMENT_LIGHT;
+            case     DARKSDAY: return ELEMENT_DARK;
+            default: return ELEMENT_NONE;
+        }
+    }
+
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
     {
         return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
@@ -5567,6 +5583,7 @@ namespace battleutils
     {
         switch (spikesType)
         {
+            // Action packet animation string order
             case SUBEFFECT_BLAZE_SPIKES:
                 return DAMAGE_FIRE;
             case SUBEFFECT_ICE_SPIKES:
@@ -5595,26 +5612,26 @@ namespace battleutils
             case ENSPELL_I_FIRE:
             case ENSPELL_II_FIRE:
                 return DAMAGE_FIRE;
-            case ENSPELL_I_EARTH:
-            case ENSPELL_II_EARTH:
-                return DAMAGE_EARTH;
-            case ENSPELL_I_WATER:
-            case ENSPELL_II_WATER:
-                return DAMAGE_WATER;
-            case ENSPELL_I_WIND:
-            case ENSPELL_II_WIND:
-                return DAMAGE_WIND;
             case ENSPELL_I_ICE:
             case ENSPELL_II_ICE:
                 return DAMAGE_ICE;
+            case ENSPELL_I_WIND:
+            case ENSPELL_II_WIND:
+                return DAMAGE_WIND;
+            case ENSPELL_I_EARTH:
+            case ENSPELL_II_EARTH:
+                return DAMAGE_EARTH;
             case ENSPELL_I_THUNDER:
             case ENSPELL_II_THUNDER:
-            case ENSPELL_ROLLING_THUNDER:
                 return DAMAGE_LIGHTNING;
+            case ENSPELL_I_WATER:
+            case ENSPELL_II_WATER:
+                return DAMAGE_WATER;
             case ENSPELL_I_LIGHT:
             case ENSPELL_II_LIGHT:
                 return DAMAGE_LIGHT;
             case ENSPELL_I_DARK:
+            case ENSPELL_II_DARK:
                 return DAMAGE_DARK;
             default:
                 return DAMAGE_NONE;

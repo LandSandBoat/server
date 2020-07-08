@@ -8,7 +8,6 @@ require("scripts/globals/icanheararainbow");
 require("scripts/globals/chocobo_digging");
 require("scripts/globals/conquest");
 require("scripts/globals/missions");
-require("scripts/globals/weather");
 require("scripts/globals/status");
 -----------------------------------
 

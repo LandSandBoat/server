@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
 require("scripts/globals/chocobo")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 -----------------------------------
 

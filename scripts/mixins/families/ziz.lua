@@ -5,7 +5,6 @@ AnimationSub(1) small neck pouch
 AnimationSub(2) large neck pouch
 AnimationSub(3) sleeping z's
 --]]
-require("scripts/globals/weather")
 require("scripts/globals/mixins")
 require("scripts/globals/status")
 -----------------------------------

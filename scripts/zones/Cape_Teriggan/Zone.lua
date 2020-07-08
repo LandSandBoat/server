@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
 require("scripts/globals/icanheararainbow")
 require("scripts/globals/conquest")
-require("scripts/globals/weather")
+require("scripts/globals/world")
 require("scripts/globals/zone")
 -----------------------------------
 

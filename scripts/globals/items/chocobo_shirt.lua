@@ -15,15 +15,15 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local day = VanadielDayOfWeek()+1
+    local day = VanadielDayOfTheWeek()+1
     local crystal =
     {
         4096, -- Fire
-        4099, -- Earth
-        4101, -- Water
-        4098, -- Wind
         4097, -- Ice
+        4098, -- Wind
+        4099, -- Earth
         4100, -- Thunder
+        4101, -- Water
         4102, -- Light
         4103  -- Dark
     }

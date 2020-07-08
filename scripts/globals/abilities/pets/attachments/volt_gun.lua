@@ -6,13 +6,13 @@ require("scripts/globals/status")
 
 function onEquip(pet)
     local skill = math.max(pet:getSkillLevel(tpz.skill.AUTOMATON_MELEE), pet:getSkillLevel(tpz.skill.AUTOMATON_RANGED), pet:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
-    pet:addMod(tpz.mod.ENSPELL, 6)
+    pet:addMod(tpz.mod.ENSPELL, tpz.magic.element.THUNDER)
     pet:addMod(tpz.mod.ENSPELL_DMG, skill * 0.1)
     pet:addMod(tpz.mod.ENSPELL_CHANCE, 20)
 end
 
 function onUnequip(pet)
-    pet:delMod(tpz.mod.ENSPELL, 6)
+    pet:delMod(tpz.mod.ENSPELL, tpz.magic.element.THUNDER)
     pet:delMod(tpz.mod.ENSPELL_DMG, pet:getMod(tpz.mod.ENSPELL_DMG))
     pet:delMod(tpz.mod.ENSPELL_CHANCE, 20)
 end

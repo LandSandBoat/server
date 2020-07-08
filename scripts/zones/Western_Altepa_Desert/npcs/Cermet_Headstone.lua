@@ -13,11 +13,11 @@ require("scripts/globals/titles")
 local function hasAllFragments(player)
     return
         player:hasKeyItem(tpz.ki.FIRE_FRAGMENT) and
-        player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
-        player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
-        player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
-        player:hasKeyItem(tpz.ki.LIGHTNING_FRAGMENT) and
         player:hasKeyItem(tpz.ki.ICE_FRAGMENT) and
+        player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
+        player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
+        player:hasKeyItem(tpz.ki.LIGHTNING_FRAGMENT) and
+        player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
         player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT) and
         player:hasKeyItem(tpz.ki.DARK_FRAGMENT)
 end

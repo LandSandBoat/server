@@ -1,7 +1,6 @@
 require("scripts/globals/spell_data")
 require("scripts/globals/magicburst")
 require("scripts/globals/settings")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -526,7 +525,7 @@ function getSpellBonusAcc(caster, target, spell, params)
     end
 
     --add acc for RDM group 1 merits
-    if (element > 0 and element <= 6) then
+    if (element >= tpz.magic.element.FIRE and element <= tpz.magic.element.WATER) then
         magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
     end
 
@@ -811,7 +810,7 @@ function addBonuses(caster, spell, target, dmg, params)
         end
 
         local mdefBarBonus = 0
-        if (ele > 0 and ele <= 6) then
+        if (ele >= tpz.magic.element.FIRE and ele <= tpz.magic.element.WATER) then
             mab = mab + caster:getMerit(blmMerit[ele])
             if (target:hasStatusEffect(tpz.magic.barSpell[ele])) then -- bar- spell magic defense bonus
                 mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[ele]):getSubPower()
@@ -902,7 +901,11 @@ function addBonusesAbility(caster, ele, target, dmg, params)
 
     local mab = 1
     local mdefBarBonus = 0
-    if (ele > 0 and ele <= 6 and target:hasStatusEffect(tpz.magic.barSpell[ele])) then -- bar- spell magic defense bonus
+    if
+        ele >= tpz.magic.element.FIRE and
+        ele <= tpz.magic.element.WATER and
+        target:hasStatusEffect(tpz.magic.barSpell[ele])
+    then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[ele]):getSubPower()
     end
 

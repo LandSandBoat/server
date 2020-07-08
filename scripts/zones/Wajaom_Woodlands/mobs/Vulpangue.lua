@@ -4,7 +4,6 @@
 -----------------------------------
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
-require("scripts/globals/weather")
 -----------------------------------
 function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
