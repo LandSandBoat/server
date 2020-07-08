@@ -830,7 +830,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
                 m_StatusEffectList.at(i)->GetStatusID() == PStatusEffect->GetStatusID()) {//remove same tier/type, if one exists
                 DelStatusEffectByTier(PStatusEffect->GetStatusID(), PStatusEffect->GetTier());
             }
-            if (m_StatusEffectList.at(i)->GetSubID() == PStatusEffect->GetSubID()) {//YOUR BRD effect
+            else if (m_StatusEffectList.at(i)->GetSubID() == PStatusEffect->GetSubID()) {//YOUR BRD effect
                 numOfEffects++;
                 if (!oldestSong) {
                     oldestSong = m_StatusEffectList.at(i);
