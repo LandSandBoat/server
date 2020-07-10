@@ -991,8 +991,7 @@ namespace battleutils
             // Generic drain for anyone able to do melee damage to a dazed target
             // TODO: ignore dazes from dancers outside party
             int16 delay = PAttacker->GetWeaponDelay(false) / 10;
-
-            if (PAttacker->PMaster == nullptr)
+            if (PAttacker->PMaster == nullptr || PAttacker->objtype == TYPE_TRUST)
             {
                 EFFECT daze = EFFECT_NONE;
                 uint16 power = 0;
@@ -1016,6 +1015,30 @@ namespace battleutils
                         {
                             daze = EFFECT_ASPIR_DAZE;
                             power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
+                            break;
+                        }
+                    }
+                }
+                if (PAttacker->objtype == TYPE_TRUST)
+                {
+                    for (uint8 i = 0; i < PAttacker->PMaster->PParty->members.size(); i++)
+                    {
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        {
+                            daze = EFFECT_DRAIN_DAZE;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
+                            break;
+                        }
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        {
+                            daze = EFFECT_HASTE_DAZE;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
+                            break;
+                        }
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        {
+                            daze = EFFECT_ASPIR_DAZE;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
                             break;
                         }
                     }
