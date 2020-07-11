@@ -3595,6 +3595,8 @@ INSERT INTO `item_basic` VALUES (3737,0,'doll_stand','doll_stand',1,61520,0,1,0)
 INSERT INTO `item_basic` VALUES (3738,0,'eastern_umbrella','eastern_umbrella',1,61520,0,1,0);
 INSERT INTO `item_basic` VALUES (3739,0,'autumn_tree','autumn_tree',1,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (3740,0,'model_synergy_furnace','model_synergy_furn.',1,28736,0,1,0);
+INSERT INTO `item_basic` VALUES (3742,0,'painting_of_a_mercenary','merc._painting',1,61504,0,1,0);
+INSERT INTO `item_basic` VALUES (3743,0,'moogle_bed','moogle_bed',1,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (3840,0,'pulse_cell_mx','pulse_cell_mx',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3841,0,'pulse_cell_an','pulse_cell_an',12,4100,46,1,0);
 INSERT INTO `item_basic` VALUES (3842,0,'pulse_cell_fa','pulse_cell_fa',12,4100,46,1,0);
