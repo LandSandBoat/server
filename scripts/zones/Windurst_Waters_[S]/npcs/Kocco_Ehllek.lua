@@ -19,7 +19,7 @@ function onTrigger(player,npc)
         player:startEvent(109) -- 3rd CS quest "Redeeming Rocks"
     elseif (RedeemingRocks == QUEST_ACCEPTED and RocksProg == 4) then
         player:startEvent(110) -- 4th CS quest "Redeeming Rocks"
-	elseif (RedeemingRocks == QUEST_ACCEPTED and RDay <= os.time()) then
+    elseif (RedeemingRocks == QUEST_ACCEPTED and RDay <= os.time()) then
         player:startEvent(111) -- Last CS quest "Redeeming Rocks"
     else
     player:startEvent(140) -- Standard text
@@ -39,8 +39,8 @@ function onEventFinish(player,csid,option)
         player:setCharVar("RedeemingRocksProg", 0)
         player:setCharVar("RedeemingDay", VanadielDayOfTheYear())
     elseif csid == 111 then -- Finish "Redeeming Rocks" quest
-       			npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS, {
-			item = 15998,
-            var = {"RedeemingDay"}})
+        npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS, {
+        item = 15998,
+        var = {"RedeemingDay"}})
     end
 end
