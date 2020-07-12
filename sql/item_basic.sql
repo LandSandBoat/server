@@ -2176,7 +2176,7 @@ INSERT INTO `item_basic` VALUES (2288,0,'square_of_karakul_cloth','karakul_cloth
 INSERT INTO `item_basic` VALUES (2289,0,'square_of_wamoura_cloth','wamoura_cloth',12,4,40,0,1087);
 INSERT INTO `item_basic` VALUES (2290,0,'chunk_of_imperial_cermet','imperial_cermet',12,4,44,0,1167);
 INSERT INTO `item_basic` VALUES (2291,0,'bag_of_puk_fletchings','puk_fletching',99,4,43,0,4);
-INSERT INTO `item_basic` VALUES (2292,0,'bag_of_apkallu_fletchings','apkal._fletching',99,4,43,0,1052);
+INSERT INTO `item_basic` VALUES (2292,0,'bag_of_apkallu_fletchings','apkal._fletching',99,4,43,0,4);
 INSERT INTO `item_basic` VALUES (2293,0,'handful_of_marid_tusk_arrowheads','m._tusk_arwhds.',99,4,43,0,46);
 INSERT INTO `item_basic` VALUES (2294,0,'handful_of_paralysis_arrowheads','par._arrowheads',99,4,43,0,1266);
 INSERT INTO `item_basic` VALUES (2295,0,'clump_of_mohbwa_grass','mohbwa_grass',12,4,40,0,1);
