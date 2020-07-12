@@ -5990,6 +5990,12 @@ void SmallPacket0x10A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
+    if (PItem->getReserve() > 0)
+    {
+        ShowError(CL_RED"SmallPacket0x10A: Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] \n" CL_RESET, PChar->GetName(), PItem->getID(), slotID);
+        return;
+    }
+
     if ((PItem != nullptr) && !(PItem->getFlag() & ITEM_FLAG_EX) && (!PItem->isSubType(ITEM_LOCKED) || PItem->getCharPrice() != 0))
     {
         Sql_Query(SqlHandle, "UPDATE char_inventory SET bazaar = %u WHERE charid = %u AND location = 0 AND slot = %u;", price, PChar->id, slotID);
