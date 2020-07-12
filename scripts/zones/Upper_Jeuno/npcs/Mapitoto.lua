@@ -37,7 +37,7 @@ function onTrigger(player,npc)
 
     if fsaQuest == QUEST_COMPLETED then
         player:startEvent(10226)
-    elseif fullSpeedAheadStatus == 3 then -- Complete
+    elseif fullSpeedAheadStatus == 4 then -- Complete
         player:startEvent(10225, tpz.ki.TRAINERS_WHISTLE, 15533, ID.npc.MAPITOTO)
     elseif fsaQuest == QUEST_ACCEPTED then -- Retry
         player:startEvent(10224, 1)
