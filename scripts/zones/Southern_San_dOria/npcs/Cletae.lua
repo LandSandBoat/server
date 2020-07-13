@@ -12,6 +12,9 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    -- Flyers_For_Regine needs to be reviewed.
+    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+
     if FlyerForRegine == 1 then
         if npcUtil.tradeHasExactly(trade, 532) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
