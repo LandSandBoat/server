@@ -62,7 +62,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.reaction = (REACTION)24;
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
-        actionTarget.param = PAbility->getID() + 16;
+        actionTarget.param = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
@@ -170,7 +170,7 @@ bool CAbilityState::CanUseAbility()
             int32 errNo = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
             if (errNo != 0)
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PMsgTarget, PAbility->getID() + 16, PAbility->getID(), errNo));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), errNo));
                 return false;
             }
             return true;
