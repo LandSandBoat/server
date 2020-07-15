@@ -7678,7 +7678,7 @@ INSERT INTO `mob_groups` VALUES (9,167,114,'Antican_Auxiliarius',330,0,116,0,0,3
 INSERT INTO `mob_groups` VALUES (10,1035,114,'Diatryma',330,0,651,0,0,47,50,0);
 INSERT INTO `mob_groups` VALUES (11,1341,114,'Fire_Elemental',330,4,831,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (12,174,114,'Antican_Funditor',330,0,123,0,0,35,39,0);
-INSERT INTO `mob_groups` VALUES (13,1369,114,'Flesh_Eater',330,2,849,0,0,37,42,0);
+INSERT INTO `mob_groups` VALUES (13,1239,114,'Flesh_Eater',330,2,849,0,0,37,42,0);
 INSERT INTO `mob_groups` VALUES (14,3426,114,'Sabotender',330,0,396,0,0,42,46,0);
 INSERT INTO `mob_groups` VALUES (15,1160,114,'Earth_Elemental',330,4,733,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (16,5764,114,'Donnergugi',0,32,3048,5500,0,60,60,0);
@@ -9550,7 +9550,7 @@ INSERT INTO `mob_groups` VALUES (19,2820,144,'Neman',0,128,0,0,0,30,30,0);
 INSERT INTO `mob_groups` VALUES (20,2646,144,'Metsanneitsyt',0,128,0,0,0,30,30,0);
 INSERT INTO `mob_groups` VALUES (21,2645,144,'Metsanhaltija',0,128,0,0,0,30,30,0);
 INSERT INTO `mob_groups` VALUES (22,1363,144,'Flayer_Franz',0,128,0,0,0,45,45,0);
-INSERT INTO `mob_groups` VALUES (23,1369,144,'Flesh_Eater',0,128,0,0,0,38,40,0);
+INSERT INTO `mob_groups` VALUES (23,2975,144,'Flesh_Eater',0,128,0,0,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (24,3282,144,'Queen_Jelly',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (25,3196,144,'Princess_Jelly',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (26,3920,144,'Time_Bomb',0,128,0,9999,0,50,50,0);
