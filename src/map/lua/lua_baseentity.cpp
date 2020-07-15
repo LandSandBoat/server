@@ -3808,9 +3808,6 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
         uint8 guildID = (uint8)lua_tonumber(L, 3);
         uint16 guildRank = (uint16)lua_tonumber(L, 4);
 
-        // The rank numbers in status.lua are fake. Internally, rank is really
-        // a number between 0->1600. We fix the number here but really should solve
-        // the root problem "some day" but it will need a rank system rewrite.
         guildRank = (guildRank + 1) * 100;
 
         ((CCharEntity*)m_PBaseEntity)->Container->setGuildID(slotID, guildID);
