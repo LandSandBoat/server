@@ -69,11 +69,7 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         NIMIA_OPEN_DIALOG              = 8287, -- Hello, friend! Can I interest you in specialty goods from the Elshimo Lowlands?
         PATOLLE_OPEN_DIALOG            = 8288, -- Hey, [mister/miss]! How about some specialty goods from Kuzotz?
         BONMAURIEUT_OPEN_DIALOG        = 8289, -- My shipment is in! Would you like to see what has just arrived from the Elshimo Uplands?
-        ANSWALD_MESSAGE                = 8426, -- Answald looks over curiously for a moment.
-        PRIETTA_MESSAGE                = 8427, -- Prietta looks over curiously for a moment.
-        MIENE_MESSAGE                  = 8428, -- Miene looks over curiously for a moment.
-        PORTAURE_MESSAGE               = 8429, -- Portaure looks over curiously for a moment.
-        AUVARE_MESSAGE                 = 8430, -- Auvare looks over curiously for a moment.
+        FFR_LOOKS_CURIOUSLY_BASE       = 8426, -- Answald looks over curiously for a moment.
     },
     mob =
     {

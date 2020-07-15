@@ -4,6 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/settings")
@@ -11,6 +12,7 @@ require("scripts/globals/zone")
 -----------------------------------
 
 function onInitialize(zone)
+    quests.ffr.initZone(zone) -- register regions 1 through 5
 end;
 
 function onZoneIn(player,prevZone)
@@ -41,6 +43,13 @@ end;
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end;
+
+function onRegionEnter(player, region)
+    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
+end
+
+function onRegionLeave(player, region)
+end
 
 function onTransportEvent(player,transport)
     player:startEvent(700);
