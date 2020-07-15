@@ -36,9 +36,6 @@ function onTrigger(player,npc)
     local rockRacketeer = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
     local thickAsThieves = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
-    local thickAsThievesCS = player:getCharVar("thickAsThievesCS")
-    local thickAsThievesGrapplingCS = player:getCharVar("thickAsThievesGrapplingCS")
-    local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
     local hittingTheMarquisate = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
     local hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
     local hittingTheMarquisateHagainCS = player:getCharVar("hittingTheMarquisateHagainCS")
@@ -79,11 +76,13 @@ function onTrigger(player,npc)
     -- THICK AS THIEVES
     elseif job == tpz.job.THF and lvl >= AF2_QUEST_LEVEL and thickAsThieves == QUEST_AVAILABLE and tenshodoShowdown == QUEST_COMPLETED then
         player:startEvent(504) -- start quest
-    elseif thickAsThievesCS >= 1 and thickAsThievesCS <= 4 and thickAsThievesGamblingCS <= 7 and thickAsThievesGrapplingCS <= 7 then
-        player:startEvent(505, 0, tpz.ki.GANG_WHEREABOUTS_NOTE) -- before completing grappling and gambling sidequests
-    elseif thickAsThievesGamblingCS == 8 and thickAsThievesGrapplingCS == 8 then
-        player:startEvent(508) -- complete quest
-
+    elseif thickAsThieves == QUEST_ACCEPTED then
+        if player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) and player:hasKeyItem(tpz.ki.SECOND_SIGNED_FORGED_ENVELOPE) then
+            player:startEvent(508) -- complete quest
+        else
+            player:startEvent(505, 0, tpz.ki.GANG_WHEREABOUTS_NOTE) -- before completing grappling and gambling sidequests
+        end
+        
     -- HITTING THE MARQUISATE
     elseif job == tpz.job.THF and lvl >= AF3_QUEST_LEVEL and thickAsThieves == QUEST_COMPLETED and hittingTheMarquisate == QUEST_AVAILABLE then
         player:startEvent(512) -- start quest
@@ -154,9 +153,9 @@ function onEventFinish(player,csid,option)
     -- THICK AS THIEVES
     elseif (csid == 504 and option == 1) then  -- start quest "as thick as thieves"
         player:addQuest(WINDURST,tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
-        player:setCharVar("thickAsThievesCS",1)
+        player:setCharVar("thickAsThievesGamblingCS",1)
         npcUtil.giveKeyItem(player, {tpz.ki.GANG_WHEREABOUTS_NOTE, tpz.ki.FIRST_FORGED_ENVELOPE, tpz.ki.SECOND_FORGED_ENVELOPE})
-    elseif (csid == 508 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES, {item=12514, var={"thickAsThievesCS", "thickAsThievesGrapplingCS", "thickAsThievesGamblingCS"}})) then
+    elseif (csid == 508 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES, {item=12514, var="thickAsThievesGamblingCS"})) then
         player:delKeyItem(tpz.ki.GANG_WHEREABOUTS_NOTE)
         player:delKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE)
         player:delKeyItem(tpz.ki.SECOND_SIGNED_FORGED_ENVELOPE)
