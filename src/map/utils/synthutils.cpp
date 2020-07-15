@@ -165,11 +165,6 @@ bool isRightRecipe(CCharEntity* PChar)
 
 double getSynthDifficulty(CCharEntity* PChar, uint8 skillID)
 {
-    uint8  ElementDirection = 0;
-    uint8  WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
-    uint8  crystalElement = PChar->CraftContainer->getType();
-    uint8  direction = (PChar->loc.p.rotation - 16)/32;
-    uint8  strongElement[8] = {2,3,5,4,0,1,7,6};
     Mod ModID = Mod::NONE;
 
     switch (skillID)
@@ -186,55 +181,8 @@ double getSynthDifficulty(CCharEntity* PChar, uint8 skillID)
 
     uint8 charSkill = PChar->RealSkills.skill[skillID]/10;  //player skill level is truncated before synth difficulty is calced
     double difficult = PChar->CraftContainer->getQuantity(skillID-40) - (double)(charSkill + PChar->getMod(ModID));
-    double MoonPhase = (double)CVanaTime::getInstance()->getMoonPhase();
-
-    if (map_config.craft_day_matters == 1)
-    {
-        if (crystalElement == WeekDay)
-            difficult -= 1;
-        else if (strongElement[crystalElement] == WeekDay)
-            difficult += 1;
-        else if (strongElement[WeekDay] == crystalElement)
-            difficult -= 1;
-        else if (WeekDay == LIGHTSDAY)
-            difficult -= 1;
-        else if (WeekDay == DARKSDAY)
-            difficult += 1;
-    }
-
-    if (map_config.craft_moonphase_matters == 1)
-    {
-        difficult -= (MoonPhase - 50)/50;   // full moon reduces difficulty by 1, new moon increases difficulty by 1, 50% moon has 0 effect
-    }
-
-    if (map_config.craft_direction_matters == 1)
-    {
-        switch (direction)
-        {
-            case 0: ElementDirection = ELEMENT_WIND;      break;
-            case 1: ElementDirection = ELEMENT_EARTH;     break;
-            case 2: ElementDirection = ELEMENT_LIGHTNING; break;
-            case 3: ElementDirection = ELEMENT_WATER;     break;
-            case 4: ElementDirection = ELEMENT_FIRE;      break;
-            case 5: ElementDirection = ELEMENT_DARK;      break;
-            case 6: ElementDirection = ELEMENT_LIGHT;     break;
-            case 7: ElementDirection = ELEMENT_ICE;       break;
-        }
-
-        if (crystalElement == ElementDirection)
-        {
-            difficult -= 0.5;
-        }
-        else if (strongElement[crystalElement] == ElementDirection)
-        {
-            difficult += 0.5;
-        }
-    }
 
     #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
-    ShowDebug(CL_CYAN"Direction = %i\n" CL_RESET, ElementDirection);
-    ShowDebug(CL_CYAN"Day = %i\n" CL_RESET, WeekDay);
-    ShowDebug(CL_CYAN"Moon = %g\n" CL_RESET, MoonPhase);
     ShowDebug(CL_CYAN"Difficulty = %g\n" CL_RESET, difficult);
     #endif
 
@@ -286,11 +234,6 @@ uint8 calcSynthResult(CCharEntity* PChar)
     double success = 0;
     double chance  = 0;
     double random = tpzrand::GetRandomNumber(1.);
-
-    double MoonPhase = (double)CVanaTime::getInstance()->getMoonPhase();
-    uint8  WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
-    uint8  crystalElement = PChar->CraftContainer->getType();
-    uint8  strongElement[8] = {2,3,5,4,0,1,7,6};
 
     for(uint8 skillID = 49; skillID < 57; ++skillID)
     {
@@ -393,23 +336,6 @@ uint8 calcSynthResult(CCharEntity* PChar)
 
         if(chance > 0 && canHQ) // if there is a chance already and it can HQ, we add myth mods
         {
-            if (map_config.craft_moonphase_matters)
-                chance *= 1.0 - (MoonPhase - 50)/150;  //new moon +33% of base rate bonus to hq chance, full moon -33%, corresponding/weakday/lightsday -33%, opposing/darksday +33%
-
-            if (map_config.craft_day_matters)
-            {
-                if (crystalElement == WeekDay)
-                    chance *= 1.0 - ((double)1 / 3);
-                else if (strongElement[crystalElement] == WeekDay)
-                    chance *= 1.0 + ((double)1 / 3);
-                else if (strongElement[WeekDay] == crystalElement)
-                    chance *= 1.0 - ((double)1 / 3);
-                else if (WeekDay == LIGHTSDAY)
-                    chance *= 1.0 - ((double)1 / 3);
-                else if (WeekDay == DARKSDAY)
-                    chance *= 1.0 + ((double)1 / 3);
-            }
-
             //limit max hq chance
             if (PChar->CraftContainer->getCraftType() ==  1)
                 chance = std::clamp(chance, 0., 0.800);
@@ -479,16 +405,12 @@ uint8 calcSynthResult(CCharEntity* PChar)
 /********************************************************************
 *                                                                   *
 * Do Skill Up                                                       *
-* To Do:                                                            *
-* - Lower chance of skill up if recipe s a desynth                  *
-* - Correct calculations so skill up chance in config file          *
-*   matches retail when value is set to 1.                          *
 *                                                                   *
 ********************************************************************/
 
 int32 doSynthSkillUp(CCharEntity* PChar)
 {
-    for(uint8 skillID = 49; skillID < 57; ++skillID)
+    for(uint8 skillID = 49; skillID < 57; ++skillID) // Check for all skills involved in a recipe, to check for skill up
     {
         if (PChar->CraftContainer->getQuantity(skillID-40) == 0) // Get the required skill level for the recipe
         {
@@ -502,64 +424,71 @@ int32 doSynthSkillUp(CCharEntity* PChar)
         int32  baseDiff   = PChar->CraftContainer->getQuantity(skillID-40) - charSkill/10; //the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
         if ((baseDiff <= 0) || ((baseDiff > 5) && (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL))) // synthesis result is stored in the zero cell quantity
-        {
+        {                                                                                                     // if you break a recipe higher than 5 levels, no skill ups
             continue;
         }
 
-        if (charSkill < maxSkill)
+        if (charSkill < maxSkill) // Check if a character can skill up
         {
-            double skillUpChance = ((double)baseDiff*(map_config.craft_chance_multiplier - (log(1.2 + charSkill/100))))/10;
+            double skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill/100))) / 10;
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
             int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
             skillUpChance += (double)modSynthSkillGain * 0.01;
 
-            skillUpChance = skillUpChance/(1 + (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL)); // synthesis result is stored in the zero cell quantity
+            skillUpChance = skillUpChance / (1 + (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL)); // Lower skill up chance if synth breaks
+
+            if (PChar->CraftContainer->getCraftType() == 1)  // If it's a desynth lower skill up rate
+                skillUpChance = skillUpChance / 2;
 
             double random = tpzrand::GetRandomNumber(1.);
             #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
             ShowDebug(CL_CYAN"Skill up chance: %g  Random: %g\n" CL_RESET, skillUpChance, random);
             #endif
 
-            if (random < skillUpChance)
+            if (random < skillUpChance) // If character skills up
             {
-                int32  satier = 0;
                 int32  skillAmount = 1;
-                double chance = 0;
 
-                if((baseDiff >= 1) && (baseDiff < 3))
-                    satier = 1;
-                else if((baseDiff >= 3) && (baseDiff < 5))
-                    satier = 2;
-                else if((baseDiff >= 5) && (baseDiff < 8))
-                    satier = 3;
-                else if((baseDiff >= 8) && (baseDiff < 10))
-                    satier = 4;
-                else if (baseDiff >= 10)
-                    satier = 5;
-
-                for(uint8 i = 0; i < 4; i ++)
+                if (charSkill < map_config.craft_common_cap) // no skill ups over 0.1 happen over level cap
                 {
-                    random = tpzrand::GetRandomNumber(1.);
-                    #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
-                    ShowDebug(CL_CYAN"SkillAmount Tier: %i  Random: %g\n" CL_RESET, satier, random);
-                    #endif
+                    int32  satier = 0;
+                    double chance = 0;
 
-                    switch(satier)
+                    // Set satier initial rank
+                    if((baseDiff >= 1) && (baseDiff < 3))
+                        satier = 1;
+                    else if((baseDiff >= 3) && (baseDiff < 5))
+                        satier = 2;
+                    else if((baseDiff >= 5) && (baseDiff < 8))
+                        satier = 3;
+                    else if((baseDiff >= 8) && (baseDiff < 10))
+                        satier = 4;
+                    else if (baseDiff >= 10)
+                        satier = 5;
+
+                    for(uint8 i = 0; i < 4; i ++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
                     {
-                        case 5:  chance = 0.900; break;
-                        case 4:  chance = 0.700; break;
-                        case 3:  chance = 0.500; break;
-                        case 2:  chance = 0.300; break;
-                        case 1:  chance = 0.200; break;
-                        default: chance = 0.000; break;
+                        #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+                        ShowDebug(CL_CYAN"SkillAmount Tier: %i  Random: %g\n" CL_RESET, satier, random);
+                        #endif
+
+                        switch(satier)
+                        {
+                            case 5:  chance = 0.900; break;
+                            case 4:  chance = 0.700; break;
+                            case 3:  chance = 0.500; break;
+                            case 2:  chance = 0.300; break;
+                            case 1:  chance = 0.200; break;
+                            default: chance = 0.000; break;
+                        }
+
+                        if(chance < random)
+                            break;
+
+                        skillAmount++;
+                        satier--;
                     }
-
-                    if(chance < random)
-                        break;
-
-                    skillAmount++;
-                    satier--;
                 }
 
                 // Do craft amount multiplier
@@ -572,23 +501,56 @@ int32 doSynthSkillUp(CCharEntity* PChar)
                     }
                 }
 
+                // Cap skill gain if character hits the current cap
                 if((skillAmount + charSkill) > maxSkill)
                 {
                     skillAmount = maxSkill - charSkill;
                 }
 
+                uint16 skillCumulation = skillAmount;
+                uint8 skillHighest = skillID;
+
+                if ((charSkill + skillAmount) > map_config.craft_common_cap) // If character is using the specialization system
+                {
+                    // Cycle through all skills
+                    for (int i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++)
+                    {
+                        if (PChar->RealSkills.skill[i] > map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
+                        {
+                            skillCumulation += (PChar->RealSkills.skill[i] - map_config.craft_common_cap); //Add to the ammount of specialization points in use.
+                            if (skillID != i && PChar->RealSkills.skill[i] > PChar->RealSkills.skill[skillHighest]) //Set the ID of the highest craft UNLESS it's the craft currently in use.
+                            {
+                                skillHighest = i;
+                            }
+                        }
+                    }
+                }
+
                 PChar->RealSkills.skill[skillID] += skillAmount;
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillAmount, 38));
 
-                if((charSkill/10) < (charSkill + skillAmount)/10)
+                if ((charSkill / 10) < (charSkill + skillAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[skillID] += 0x20;
 
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillAmount)/10, 53));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillAmount) / 10, 53));
                 }
 
                 charutils::SaveCharSkills(PChar, skillID);
+
+                if (skillHighest != 0 && skillCumulation > map_config.craft_specialization_points)
+                {
+                    PChar->RealSkills.skill[skillHighest] -= skillAmount;
+
+                    if ((PChar->RealSkills.skill[skillHighest] + skillAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
+                    {
+                        PChar->WorkingSkills.skill[skillHighest] -= 0x20;
+                        PChar->pushPacket(new CCharSkillsPacket(PChar));
+                    }
+
+                    charutils::SaveCharSkills(PChar, skillHighest);
+                }
             }
         }
     }
