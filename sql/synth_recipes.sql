@@ -4607,7 +4607,7 @@ INSERT INTO `synth_recipes` VALUES (4490,0,0,0,0,0,0,1,0,0,80,4099,4241,718,719,
 INSERT INTO `synth_recipes` VALUES (4491,0,0,0,0,0,0,9,0,0,85,4099,4241,711,711,711,1836,1836,1836,0,0,354,354,354,354,1,1,1,1,'Bookstack'); -- bookstack
 INSERT INTO `synth_recipes` VALUES (4492,0,0,0,0,0,0,29,0,0,87,4099,4241,745,2533,2533,2535,0,0,0,0,424,424,424,424,1,1,1,1,'Feasting Table'); -- feasting table
 INSERT INTO `synth_recipes` VALUES (4493,0,0,0,0,40,0,0,0,0,88,4099,4241,711,717,2010,0,0,0,0,0,343,343,343,343,1,1,1,1,'Harp Stool'); -- harp stool
-INSERT INTO `synth_recipes` VALUES (4494,0,0,0,0,40,0,0,0,0,88,4099,4241,717,717,717,717,717,717,0,0,352,352,352,352,1,1,1,1,'Half Partition'); -- half partition
+INSERT INTO `synth_recipes` VALUES (4494,0,0,0,0,0,0,0,0,0,88,4099,4241,717,717,717,717,717,717,0,0,352,352,352,352,1,1,1,1,'Half Partition'); -- half partition
 INSERT INTO `synth_recipes` VALUES (4495,0,0,1,0,0,0,0,0,0,90,4096,4238,709,709,947,2533,0,0,0,0,295,295,295,295,1,1,1,1,'Bonfire'); -- bonfire
 INSERT INTO `synth_recipes` VALUES (4496,0,0,0,0,60,0,0,0,0,90,4099,4241,720,725,2010,0,0,0,0,0,3678,3678,3678,3678,1,1,1,1,'Recital Bench'); -- recital bench
 INSERT INTO `synth_recipes` VALUES (4497,0,0,0,0,0,0,0,0,0,95,4098,4240,3927,3932,0,0,0,0,0,0,21206,21207,21207,21207,1,1,1,1,'Hemolele Staff'); -- hemolele staff
