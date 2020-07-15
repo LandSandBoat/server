@@ -41,6 +41,7 @@ zones[tpz.zone.UPPER_JEUNO] =
     },
     npc =
     {
+        MAPITOTO = 17776895,
     },
 }
 

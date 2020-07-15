@@ -9,13 +9,13 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onEffectGain(target,effect)
-    tpz.fsa.onEffectGain(target)
+    tpz.fsa.onEffectGain(target, effect)
 end
 
 function onEffectTick(target,effect)
-    tpz.fsa.tick(target)
+    tpz.fsa.tick(target, effect)
 end
 
 function onEffectLose(target,effect)
-    tpz.fsa.onEffectLose(target)
+    tpz.fsa.onEffectLose(target, effect)
 end
