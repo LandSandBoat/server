@@ -991,52 +991,45 @@ namespace battleutils
             // Generic drain for anyone able to do melee damage to a dazed target
             // TODO: ignore dazes from dancers outside party
             int16 delay = PAttacker->GetWeaponDelay(false) / 10;
-
-            if (PAttacker->PMaster == nullptr)
+            if (PAttacker->PMaster == nullptr || PAttacker->objtype == TYPE_TRUST)
             {
                 EFFECT daze = EFFECT_NONE;
                 uint16 power = 0;
-                if (PAttacker->PParty != nullptr && PAttacker->objtype == TYPE_PC)
+
+                auto setDazeAndPower = [&](CBattleEntity* PCurrentAttacker)
                 {
-                    for (uint8 i = 0; i < PAttacker->PParty->members.size(); i++)
+                    if (power) { return; }
+                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PCurrentAttacker->id))
                     {
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PParty->members[i]->id))
-                        {
-                            daze = EFFECT_DRAIN_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
-                            break;
-                        }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PParty->members[i]->id))
-                        {
-                            daze = EFFECT_HASTE_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
-                            break;
-                        }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id))
-                        {
-                            daze = EFFECT_ASPIR_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
-                            break;
-                        }
+                        daze = EFFECT_DRAIN_DAZE;
+                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PCurrentAttacker->id)->GetPower();
                     }
+                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PCurrentAttacker->id))
+                    {
+                        daze = EFFECT_HASTE_DAZE;
+                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PCurrentAttacker->id)->GetPower();
+                    }
+                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PCurrentAttacker->id))
+                    {
+                        daze = EFFECT_ASPIR_DAZE;
+                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PCurrentAttacker->id)->GetPower();
+                    }
+                };
+
+                // Note: If not in a party, ForParty forwards to just the caller
+                if (PAttacker->objtype == TYPE_TRUST)
+                {
+                    static_cast<CTrustEntity*>(PAttacker)->PMaster->ForParty([&](CBattleEntity* PMember)
+                    {
+                         setDazeAndPower(PMember);
+                    });
                 }
                 else
                 {
-                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->id))
+                    PAttacker->ForParty([&](CBattleEntity* PMember)
                     {
-                        daze = EFFECT_DRAIN_DAZE;
-                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->id)->GetPower();
-                    }
-                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PAttacker->id))
-                    {
-                        daze = EFFECT_HASTE_DAZE;
-                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PAttacker->id)->GetPower();
-                    }
-                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->id))
-                    {
-                        daze = EFFECT_ASPIR_DAZE;
-                        power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->id)->GetPower();
-                    }
+                        setDazeAndPower(PMember);
+                    });
                 }
 
                 if (daze == EFFECT_DRAIN_DAZE)
