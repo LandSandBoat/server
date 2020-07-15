@@ -2949,7 +2949,7 @@ tpz.casket_loot.casketItems =
     },
     [tpz.zone.VELUGANNON_PALACE] =
     {
-        regionalItems = {13467}, -- Dragon Ring
+        regionalItems = {13467,10954}, -- Dragon Ring | Alchemist's Torque
         temps =
         {
         ----------------------------------
