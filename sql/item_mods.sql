@@ -20923,8 +20923,17 @@ INSERT INTO `item_mods` VALUES (17485,54,6);
 INSERT INTO `item_mods` VALUES (17486,431,1); -- Stun claws +1 - Additional effect: "Stun"
 INSERT INTO `item_mods` VALUES (17487,431,1);
 INSERT INTO `item_mods` VALUES (17491,25,2);
+
+-- Shiva's Claws
 INSERT INTO `item_mods` VALUES (17492,12,3);
 INSERT INTO `item_mods` VALUES (17492,25,8);
+INSERT INTO `item_mods` VALUES (17492,431,1);  -- Additional effect Type NORMAL
+INSERT INTO `item_mods` VALUES (17492,499,11); -- Additional effect animation (subEffect) Paralyze
+INSERT INTO `item_mods` VALUES (17492,501,10); -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17492,951,4);  -- Additional effect Status ID Paralyze
+INSERT INTO `item_mods` VALUES (17492,952,10); -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17492,953,30); -- Additional effect Status Duration 30sec
+
 INSERT INTO `item_mods` VALUES (17493,25,10);
 INSERT INTO `item_mods` VALUES (17494,25,12);
 INSERT INTO `item_mods` VALUES (17495,23,2);
