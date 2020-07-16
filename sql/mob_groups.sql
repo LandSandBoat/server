@@ -13686,7 +13686,7 @@ INSERT INTO `mob_groups` VALUES (1,5538,288,'Eschan_Worm',300,0,0,0,9999,50,58,0
 INSERT INTO `mob_groups` VALUES (2,5249,288,'Eschan_Obdella',300,0,0,0,0,50,59,0);
 INSERT INTO `mob_groups` VALUES (3,3415,288,'Eschan_Crawler',300,0,0,0,0,50,59,0);
 INSERT INTO `mob_groups` VALUES (4,483,288,'Eschan_Weapon',300,0,0,0,9999,60,69,0);
-INSERT INTO `mob_groups` VALUES (5,3489,288,'Eschan_Dhalmel',300,0,0,0,0,60,69,0);
+INSERT INTO `mob_groups` VALUES (5,5350,288,'Eschan_Dhalmel',300,0,0,0,0,60,69,0);
 INSERT INTO `mob_groups` VALUES (6,5349,288,'Eschan_Coeurl',300,0,0,0,0,60,69,0);
 INSERT INTO `mob_groups` VALUES (7,1427,288,'Eschan_Vulture',300,0,0,0,0,70,79,0);
 INSERT INTO `mob_groups` VALUES (8,1517,288,'Eschan_Warrior',300,0,0,0,0,70,79,0);
