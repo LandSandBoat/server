@@ -5200,7 +5200,7 @@ INSERT INTO `mob_groups` VALUES (8,71,89,'Air_Elemental',330,4,38,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (9,4285,89,'Wandering_Sapling',330,0,2617,0,0,36,39,0);
 INSERT INTO `mob_groups` VALUES (10,441,89,'Black_Wolf',330,1,287,0,0,49,50,0);
 INSERT INTO `mob_groups` VALUES (11,4353,89,'Wingrats',330,2,80,0,0,41,49,0);
-INSERT INTO `mob_groups` VALUES (12,4355,89,'Wivre',330,0,2665,0,0,68,74,0);
+INSERT INTO `mob_groups` VALUES (12,5648,89,'Wivre',330,0,2665,0,0,68,74,0);
 INSERT INTO `mob_groups` VALUES (13,2275,89,'Knotty_Treant',330,0,1458,0,0,62,65,0);
 INSERT INTO `mob_groups` VALUES (14,1664,89,'Goblin_Freesword',330,0,1063,0,0,61,64,0);
 INSERT INTO `mob_groups` VALUES (15,1646,89,'Goblin_Corpsman',330,0,1024,0,0,62,64,0);
