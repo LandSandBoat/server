@@ -1983,7 +1983,7 @@ INSERT INTO `mob_groups` VALUES (123,4189,41,'Vanguards_Slime',0,128,0,2400,0,93
 INSERT INTO `mob_groups` VALUES (124,4179,41,'Vanguard_Ronin',600,0,2541,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (125,1707,41,'Goblin_Replica',0,128,1143,1000,1000,80,80,0);
 INSERT INTO `mob_groups` VALUES (126,1716,41,'Goblin_Statue',0,128,0,1000,1000,80,80,0);
-INSERT INTO `mob_groups` VALUES (127,2871,41,'Nightmare_Tiger',600,0,1800,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (127,5361,41,'Nightmare_Tiger',600,0,1800,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (128,4184,41,'Vanguard_Smithy',600,0,2541,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (129,4199,41,'Vanguard_Welldigger',600,0,2541,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (130,4192,41,'Vanguard_Tinkerer',600,0,2541,4000,0,93,95,0);
@@ -4527,7 +4527,7 @@ INSERT INTO `mob_groups` VALUES (10,1646,84,'Goblin_Corpsman',330,0,1024,0,0,62,
 INSERT INTO `mob_groups` VALUES (11,1638,84,'Goblin_Blastmaster',330,0,1024,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (12,1698,84,'Goblin_Pioneer',330,0,1137,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (13,1688,84,'Goblin_Mine',0,128,0,0,0,58,58,0);
-INSERT INTO `mob_groups` VALUES (14,3677,84,'Smilodon',330,0,2275,0,0,46,48,0);
+INSERT INTO `mob_groups` VALUES (14,5364,84,'Machairodus',330,0,2275,0,0,46,48,0);
 INSERT INTO `mob_groups` VALUES (15,4337,84,'Wight',330,1,958,0,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (16,3754,84,'Stalking_Sapling',330,0,2323,0,0,24,27,0);
 INSERT INTO `mob_groups` VALUES (17,1266,84,'Evil_Spirit',330,1,795,0,0,41,41,0);
@@ -8868,7 +8868,7 @@ INSERT INTO `mob_groups` VALUES (4,3418,136,'Ruszor',300,0,2135,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (5,2043,136,'Ice_Elemental',0,4,1347,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (6,112,136,'Amphiptere',3600,0,73,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (7,1561,136,'Gigas_Flesher',300,0,987,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (8,1594,136,'Gigass_Tiger',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (8,5362,136,'Gigass_Tiger',0,128,0,0,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (9,1577,136,'Gigas_Pelter',300,0,984,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (10,2042,136,'Icefang_Tiger',300,0,829,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (11,1435,136,'Fulminator',300,0,915,0,0,77,79,0);
@@ -9011,7 +9011,7 @@ INSERT INTO `mob_groups` VALUES (2,1045,137,'Dire_Gargouille',300,0,664,0,0,78,8
 INSERT INTO `mob_groups` VALUES (3,1571,137,'Gigas_Lopper',300,0,984,0,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (4,1584,137,'Gigas_Slugger',300,0,984,0,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (5,1562,137,'Gigas_Flogger',300,0,987,0,0,80,81,0);
-INSERT INTO `mob_groups` VALUES (6,1594,137,'Gigass_Tiger',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (6,5363,137,'Gigass_Tiger',0,128,0,0,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (7,1567,137,'Gigas_Hurler',300,0,987,0,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (8,1790,137,'Graoully',0,32,1216,0,0,90,90,0);
 INSERT INTO `mob_groups` VALUES (9,2043,137,'Ice_Elemental',0,4,1347,0,0,80,80,0);
