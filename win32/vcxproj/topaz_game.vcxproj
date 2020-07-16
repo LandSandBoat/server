@@ -387,7 +387,7 @@
     <ClInclude Include="..\..\src\map\packets\menu_raisetractor.h" />
     <ClInclude Include="..\..\src\map\packets\merit_points_categories.h" />
     <ClInclude Include="..\..\src\map\packets\message_basic.h" />
-    <ClInclude Include="..\..\src\map\packets\message_debug.h" />
+    <ClInclude Include="..\..\src\map\packets\message_combat.h" />
     <ClInclude Include="..\..\src\map\packets\message_name.h" />
     <ClInclude Include="..\..\src\map\packets\message_special.h" />
     <ClInclude Include="..\..\src\map\packets\message_standard.h" />
@@ -640,7 +640,7 @@
     <ClCompile Include="..\..\src\map\packets\menu_raisetractor.cpp" />
     <ClCompile Include="..\..\src\map\packets\merit_points_categories.cpp" />
     <ClCompile Include="..\..\src\map\packets\message_basic.cpp" />
-    <ClCompile Include="..\..\src\map\packets\message_debug.cpp" />
+    <ClCompile Include="..\..\src\map\packets\message_combat.cpp" />
     <ClCompile Include="..\..\src\map\packets\message_name.cpp" />
     <ClCompile Include="..\..\src\map\packets\message_special.cpp" />
     <ClCompile Include="..\..\src\map\packets\message_standard.cpp" />

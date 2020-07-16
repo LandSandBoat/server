@@ -487,6 +487,11 @@ void CParty::AddMember(CBattleEntity* PEntity)
     PEntity->PParty = this;
     members.push_back(PEntity);
 
+    if (PEntity->objtype == TYPE_PC && this->members.size() > 1)
+    {
+        this->m_TimeLastMemberJoined = server_clock::now();
+    }
+
     if (m_PartyType == PARTY_PCS)
     {
         TPZ_DEBUG_BREAK_IF(PEntity->objtype != TYPE_PC);
@@ -1168,6 +1173,11 @@ void CParty::RefreshSync()
 void CParty::SetPartyNumber(uint8 number)
 {
     m_PartyNumber = number;
+}
+
+uint32 CParty::GetTimeLastMemberJoined()
+{
+    return (uint32)std::chrono::time_point_cast<std::chrono::seconds>(m_TimeLastMemberJoined).time_since_epoch().count();
 }
 
 void CParty::RefreshFlags(std::vector<partyInfo_t>& info)

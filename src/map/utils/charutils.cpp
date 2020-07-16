@@ -57,7 +57,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/linkshell_equip.h"
 #include "../packets/menu_merit.h"
 #include "../packets/message_basic.h"
-#include "../packets/message_debug.h"
+#include "../packets/message_combat.h"
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
@@ -3576,7 +3576,7 @@ namespace charutils
                     PChar->PParty->ReloadParty();
                 }
 
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageDebugPacket(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
                 luautils::OnPlayerLevelDown(PChar);
                 PChar->updatemask |= UPDATE_HP;
             }
@@ -3628,19 +3628,19 @@ namespace charutils
                 if (PChar->expChain.chainNumber != 0)
                 {
                     if (onLimitMode)
-                        PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, PChar->expChain.chainNumber, 372));
+                        PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, PChar->expChain.chainNumber, 372));
                     else
-                        PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, PChar->expChain.chainNumber, 253));
+                        PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, PChar->expChain.chainNumber, 253));
                 }
                 else
                 {
                     if (onLimitMode)
                     {
-                        PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, 0, 371));
+                        PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, 0, 371));
                     }
                     else
                     {
-                        PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, 0, 8));
+                        PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, 0, 8));
                     }
                 }
                 PChar->expChain.chainNumber++;
@@ -3648,9 +3648,9 @@ namespace charutils
             else if (exp > 0)
             {
                 if (onLimitMode)
-                    PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, 0, 371));
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, 0, 371));
                 else
-                    PChar->pushPacket(new CMessageDebugPacket(PChar, PChar, exp, 0, 8));
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, exp, 0, 8));
             }
         }
 
@@ -3659,7 +3659,7 @@ namespace charutils
             //add limit points
             if (PChar->PMeritPoints->AddLimitPoints(exp))
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageDebugPacket(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
             }
         }
         else
@@ -3777,7 +3777,7 @@ namespace charutils
                 PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                 PChar->pushPacket(new CCharSyncPacket(PChar));
 
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageDebugPacket(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
                 PChar->pushPacket(new CCharStatsPacket(PChar));
 
                 luautils::OnPlayerLevelUp(PChar);

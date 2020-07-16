@@ -386,7 +386,7 @@
     <ClInclude Include="..\..\src\map\packets\message_basic.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\map\packets\message_debug.h">
+    <ClInclude Include="..\..\src\map\packets\message_combat.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\message_special.h">
@@ -1162,7 +1162,7 @@
     <ClCompile Include="..\..\src\map\packets\message_basic.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\map\packets\message_debug.cpp">
+    <ClCompile Include="..\..\src\map\packets\message_combat.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\message_special.cpp">

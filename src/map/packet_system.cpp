@@ -122,7 +122,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/menu_merit.h"
 #include "packets/merit_points_categories.h"
 #include "packets/message_basic.h"
-#include "packets/message_debug.h"
+#include "packets/message_combat.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/party_define.h"

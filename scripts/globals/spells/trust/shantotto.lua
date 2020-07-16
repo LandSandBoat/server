@@ -7,7 +7,7 @@ require("scripts/globals/trust")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
-    return tpz.trust.canCast(caster, spell, 1019)
+    return tpz.trust.canCast(caster, spell, tpz.magic.spell.SHANTOTTO_II)
 end
 
 function onSpellCast(caster, target, spell)
@@ -15,6 +15,13 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
+    tpz.trust.teamworkMessage(mob, {
+        [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_1,
+        [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_2,
+        [tpz.magic.spell.KORU_MORU] = tpz.trust.message_offset.TEAMWORK_3,
+        [tpz.magic.spell.KING_OF_HEARTS] = tpz.trust.message_offset.TEAMWORK_4,
+    })
+
     mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0,
                         ai.r.MA, ai.s.MB_ELEMENT, tpz.magic.spellFamily.NONE)
 
@@ -28,7 +35,8 @@ function onMobSpawn(mob)
 end
 
 function onMobDespawn(mob)
+    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
 end
-
 function onMobDeath(mob)
+    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
 end

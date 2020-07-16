@@ -122,6 +122,7 @@
 #include "../packets/menu_merit.h"
 #include "../packets/menu_raisetractor.h"
 #include "../packets/message_basic.h"
+#include "../packets/message_combat.h"
 #include "../packets/message_name.h"
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
@@ -530,6 +531,39 @@ inline int32 CLuaBaseEntity::messageSystem(lua_State* L)
         param1 = (uint32)lua_tointeger(L, 3);
 
     ((CCharEntity*)m_PBaseEntity)->pushPacket(new CMessageSystemPacket(param0, param1, messageID));
+    return 0;
+}
+
+/************************************************************************
+*  Function: messageCombat(...)
+*  Purpose : Various combat related messages are ended with this packet
+*  Example : master:messageCombat(mob, offset + id, 0, 711)
+*  Notes   :
+************************************************************************/
+int32 CLuaBaseEntity::messageCombat(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    CBaseEntity* PSpeaker;
+    if (!lua_isnil(L, 1) && lua_isuserdata(L, 1))
+    {
+        CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+        PSpeaker = PLuaBaseEntity->m_PBaseEntity;
+    }
+    else
+    {
+        PSpeaker = m_PBaseEntity;
+    }
+
+    auto p0 = (int32)lua_tointeger(L, 2);
+    auto p1 = (int32)lua_tointeger(L, 3);
+    auto message = (int16)lua_tointeger(L, 4);
+
+    PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
+
     return 0;
 }
 
@@ -4911,6 +4945,22 @@ inline int32 CLuaBaseEntity::setCampaignAllegiance(lua_State *L)
 }
 
 /************************************************************************
+*  Function: isSeekingParty()
+*  Purpose : Returns true if a player is seeking a party
+*  Example : if player:isSeekingParty() then
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::isSeekingParty(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    lua_pushboolean(L, (((CCharEntity*)m_PBaseEntity)->nameflags.flags & FLAG_INVITE));
+    return 1;
+}
+
+/************************************************************************
 *  Function: getNewPlayer()
 *  Purpose : Returns true if a player is new
 *  Example : if not (player:getNewPlayer()) then
@@ -9051,6 +9101,30 @@ inline int32 CLuaBaseEntity::getLeaderID(lua_State* L)
         return 1;
     }
     lua_pushnil(L);
+    return 1;
+}
+
+/************************************************************************
+*  Function: getPartyLastMemberJoinedTime()
+*  Purpose : Get the epoch time point in seconds that the last PC joined the party (if any)
+*  Example : seconds_since_last_member_joined = os.time() - player:getPartyLastMemberJoinedTime()
+*  Notes   : 
+************************************************************************/
+
+int32 CLuaBaseEntity::getPartyLastMemberJoinedTime(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
+
+    if (PChar->PParty != nullptr)
+    {
+        lua_pushnumber(L, PChar->PParty->GetTimeLastMemberJoined());
+        return 1;
+    }
+
+    lua_pushnumber(L, 0);
     return 1;
 }
 
@@ -14402,6 +14476,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,messagePublic),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageSpecial),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageSystem),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageCombat),
 
     // Variables
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCharVar),
@@ -14587,6 +14662,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCampaignAllegiance),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCampaignAllegiance),
 
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isSeekingParty),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNewPlayer),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setNewPlayer),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMentor),
@@ -14763,6 +14839,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyMember),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyLeader),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLeaderID),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyLastMemberJoinedTime),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,forMembersInRange),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addPartyEffect),
