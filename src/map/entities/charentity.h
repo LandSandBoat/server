@@ -201,6 +201,7 @@ public:
     uint8					m_WeaponSkills[32];
     questlog_t				m_questLog[MAX_QUESTAREA];		// список всех квестов
     missionlog_t			m_missionLog[MAX_MISSIONAREA];	// список миссий
+    eminencelog_t           m_eminenceLog;                  // Record of Eminence log
     assaultlog_t			m_assaultLog;					// список assault миссий
     campaignlog_t			m_campaignLog;					// список campaign миссий
     uint32					m_lastBcnmTimePrompt;			// the last message prompt in seconds

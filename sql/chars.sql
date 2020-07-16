@@ -33,6 +33,7 @@ CREATE TABLE `chars` (
   `missions` blob,
   `assault` blob,
   `campaign` blob,
+  `eminence` blob,
   `quests` blob,
   `keyitems` blob,
   `set_blue_spells` blob,
