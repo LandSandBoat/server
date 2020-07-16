@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local festiveItems = {getFestiveItems(player)}
+    local festiveItems = getFestiveItems(player)
     if festiveItems[1] then
         player:startEvent(773, unpack(festiveItems))
     else
@@ -24,7 +24,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    local festiveItems = {getFestiveItems(player)}
+    local festiveItems = getFestiveItems(player)
     if csid == 773 then
         npcUtil.giveItem(player, festiveItems[option])
     end
@@ -54,8 +54,8 @@ function getFestiveItems(player)
     }
     for i = 1, #festiveItems, 1 do
         if festiveItems[i] == 1 then
-            festiveItemsAvailable[i] = stock[i]
+            table.insert(festiveItemsAvailable, stock[i])
         end
     end
-    return unpack(festiveItemsAvailable)
+    return festiveItemsAvailable
 end
