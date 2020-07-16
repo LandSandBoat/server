@@ -11775,7 +11775,7 @@ INSERT INTO `mob_groups` VALUES (21,1683,191,'Goblin_Leecher',330,0,2881,0,0,86,
 INSERT INTO `mob_groups` VALUES (22,2292,191,'Kuftal_Digger',330,0,0,0,0,86,90,0);
 INSERT INTO `mob_groups` VALUES (23,2310,191,'Labyrinth_Leech',330,0,0,0,0,87,88,0);
 INSERT INTO `mob_groups` VALUES (24,4272,191,'Wadi_Hare',330,0,2598,0,0,86,90,0);
-INSERT INTO `mob_groups` VALUES (25,2963,191,'Old_Opo-opo',330,0,0,0,0,90,93,0);
+INSERT INTO `mob_groups` VALUES (25,5352,191,'Natty_Gibbon',330,0,0,0,0,90,93,0);
 INSERT INTO `mob_groups` VALUES (26,3375,191,'Robber_Crab',330,0,0,0,0,90,92,0);
 INSERT INTO `mob_groups` VALUES (27,2311,191,'Fume_Lizard',330,0,424,0,0,86,89,0);
 INSERT INTO `mob_groups` VALUES (28,1710,191,'Goblin_Shaman',330,0,0,0,0,86,91,0);
