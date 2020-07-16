@@ -2,11 +2,13 @@
 -- Area: Fort Ghelsba
 --   NM: Chariotbuster Byakzak
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")};
 local ID = require("scripts/zones/Fort_Ghelsba/IDs");
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 174)
 end;
 
 function onMobDespawn(mob)

@@ -4,6 +4,7 @@
 -- Notes: Spawns only from hours 06 to 16.
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -12,6 +13,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 263)
 end
 
 function onMobDespawn(mob)

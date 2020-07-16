@@ -2,6 +2,7 @@
 -- Area: Den of Rancor
 --   NM: Tawny-fingered Mugberry
 -----------------------------------
+require("scripts/globals/hunts")
 mixins =
 {
     require("scripts/mixins/families/tonberry"),
@@ -10,4 +11,5 @@ mixins =
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 396)
 end

@@ -2,8 +2,10 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Koropokkur
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 361)
 end;
 
 function onMobDespawn(mob)
