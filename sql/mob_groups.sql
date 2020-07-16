@@ -13700,7 +13700,7 @@ INSERT INTO `mob_groups` VALUES (15,5541,288,'Eschan_Shadowdragon',300,0,0,0,0,1
 INSERT INTO `mob_groups` VALUES (16,5542,288,'Eschan_Tarichuk',300,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (17,361,288,'Eschan_Bugard',300,0,0,0,0,107,110,0);
 INSERT INTO `mob_groups` VALUES (18,4849,288,'Eschan_Opo-Opo',180,0,0,0,0,107,109,0);
-INSERT INTO `mob_groups` VALUES (19,4808,288,'Eschan_Yztarg',300,0,0,0,0,107,110,0);
+INSERT INTO `mob_groups` VALUES (19,5365,288,'Eschan_Yztarg',300,0,0,0,0,107,110,0);
 INSERT INTO `mob_groups` VALUES (20,5543,288,'Eschan_Mosquito',300,0,0,0,0,119,119,0);
 INSERT INTO `mob_groups` VALUES (21,4850,288,'Hugemaw_Harold',0,128,0,0,99999,119,119,0);
 INSERT INTO `mob_groups` VALUES (22,4851,288,'Prickly_Pitriv',0,128,0,0,99999,75,75,0);
