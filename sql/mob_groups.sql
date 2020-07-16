@@ -1569,7 +1569,7 @@ INSERT INTO `mob_groups` VALUES (87,1716,39,'Goblin_Statue',0,128,0,1000,1000,70
 INSERT INTO `mob_groups` VALUES (88,5110,39,'Nightmare_Goobbue',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (89,2865,39,'Nightmare_Sabotender',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (90,5109,39,'Nightmare_Flytrap',600,0,3122,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (91,2860,39,'Nightmare_Manticore',600,0,3124,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (91,5351,39,'Nightmare_Manticore',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (92,2854,39,'Nightmare_Hippogryph',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (93,5108,39,'Nightmare_Treant',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (94,5107,39,'Nightmare_Funguar',600,0,3122,5000,0,95,97,0);
