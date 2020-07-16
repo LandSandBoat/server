@@ -60,15 +60,15 @@ function onTrigger(player,npc)
             end
         elseif (pRank == 1 and player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then
             player:startEvent(2000); -- Start First Mission "Smash the Orcish scouts"
-        elseif (player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK)) then
+        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1036);
-        elseif (CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus",4) and tonumber(os.date("%j")) == player:getCharVar("Wait1DayForRanperre_date")) then -- Not ready yet
-            player:startEvent(1038);
-        elseif (CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 4 and tonumber(os.date("%j")) ~= player:getCharVar("Wait1DayForRanperre_date")) then -- Ready now.
-            player:startEvent(1040);
-        elseif (CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 6) then
-            player:startEvent(1040);
-        elseif (CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 9) then
+        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 4 then
+            if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
+                player:startEvent(1038)
+            else
+                player:startEvent(1040)
+            end
+        elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 7 then
             player:startEvent(1034);
         elseif (CurrentMission ~= tpz.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player,19) == 1 and player:getCharVar("SecretWeaponStatus") == 0) then
             player:startEvent(62);
@@ -95,14 +95,11 @@ function onEventFinish(player,csid,option)
 
     finishMissionTimeline(player,2,csid,option);
     if (csid == 1036) then
-        player:setCharVar("MissionStatus",4);
         player:delKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK);
-        player:setCharVar("Wait1DayForRanperre_date", os.date("%j"));
-    elseif (csid == 1038) then
-        player:setCharVar("MissionStatus",6);
+        player:setLocalVar("RanperresRest", 1) -- set to require a zone
+        player:setCharVar("MissionStatus",4)
     elseif (csid == 1040) then
-        player:setCharVar("MissionStatus",7);
-        player:setCharVar("Wait1DayForRanperre_date",0);
+        player:setCharVar("MissionStatus",5)
     elseif (csid == 1034) then
         finishMissionTimeline(player,1,csid,option);
     elseif (csid == 62) then

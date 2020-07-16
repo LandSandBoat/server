@@ -21,11 +21,8 @@ end;
 function onTrigger(player,npc)
 
     local currentMission = player:getCurrentMission(SANDORIA);
-    local MissionStatus = player:getCharVar("MissionStatus");
+    local missionStatus = player:getCharVar("MissionStatus");
     local infiltrateDavoi = player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.INFILTRATE_DAVOI);
-
-    local Wait1DayRanperre = player:getCharVar("Wait1DayForRanperre_date");
-    local osdate = tonumber(os.date("%j"));
 
     if (player:getCharVar("aBoysDreamCS") == 8) then
         player:startEvent(88);
@@ -33,27 +30,26 @@ function onTrigger(player,npc)
         player:startEvent(90);
     elseif (player:getCharVar("UnderOathCS") == 8) then
         player:startEvent(89);
-    elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi == false and MissionStatus == 0) then
+    elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi == false and missionStatus == 0) then
         player:startEvent(553,0,tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT);
-    elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and MissionStatus == 4) then
+    elseif (currentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and missionStatus == 4) then
         player:startEvent(554,0,tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT);
-    elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 1) then
+    elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 1) then
         player:startEvent(547);
-    elseif (currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 0) then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 0 then
         player:startEvent(81);
-    elseif (currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 4 and Wait1DayRanperre ~= osdate) then -- Ready now.
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 5 then
         player:startEvent(21);
-    elseif (currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 7) then
-        player:startEvent(21);
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
+        player:startEvent(79) -- Optional 6-2 CS
     elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.LIGHTBRINGER) and player:getRank() == 9 and player:getCharVar("Cutscenes_8-2") == 0) then
         player:startEvent(63);
     else
         player:startEvent(522);
     end
 
-    return 1;
-
-end;
+    return 1
+end
 
 function onEventUpdate(player,csid,option)
 end;
@@ -97,8 +93,7 @@ function onEventFinish(player,csid,option)
     elseif (csid == 81) then
         player:setCharVar("MissionStatus",1);
     elseif (csid == 21) then
-        player:setCharVar("Wait1DayForRanperre_date",0);
-        player:setCharVar("MissionStatus",8);
+        player:setCharVar("MissionStatus",6);
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2",1)
     end
