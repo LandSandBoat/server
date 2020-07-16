@@ -6521,7 +6521,7 @@ INSERT INTO `mob_groups` VALUES (13,1660,98,'Goblin_Flagman',330,0,1056,0,0,66,6
 INSERT INTO `mob_groups` VALUES (14,1671,98,'Goblin_Guerrilla',330,0,1056,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (15,1723,98,'Goblins_Beetle',0,128,2853,0,0,61,64,0);
 INSERT INTO `mob_groups` VALUES (16,5151,98,'Herensugue',7200,0,3099,5500,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (17,2458,98,'Lynx',330,0,1558,0,0,47,50,0);
+INSERT INTO `mob_groups` VALUES (17,5348,98,'Lynx',330,0,1558,0,0,47,50,0);
 INSERT INTO `mob_groups` VALUES (18,3497,98,'Scavenging_Hound',330,1,2179,0,0,49,49,0);
 INSERT INTO `mob_groups` VALUES (19,329,98,'Balam-Quitz',0,32,214,0,0,69,75,0);
 INSERT INTO `mob_groups` VALUES (20,1956,98,'Hill_Lizard',330,0,1315,0,0,45,48,0);
@@ -6684,7 +6684,7 @@ INSERT INTO `mob_groups` VALUES (13,1160,99,'Earth_Elemental',960,4,733,0,0,80,8
 INSERT INTO `mob_groups` VALUES (14,1341,99,'Fire_Elemental',960,4,831,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (15,1145,99,'Duu_Masa_the_Onecut',0,128,725,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (16,4502,99,'Zhuu_Buxu_the_Silent',0,32,3033,0,0,80,84,0);
-INSERT INTO `mob_groups` VALUES (17,4298,99,'War_Lynx',960,0,413,0,0,71,73,0);
+INSERT INTO `mob_groups` VALUES (17,5347,99,'War_Lynx',960,0,413,0,0,71,73,0);
 INSERT INTO `mob_groups` VALUES (18,2062,99,'Immolatory_Pugil',960,0,1359,0,0,64,64,0);
 INSERT INTO `mob_groups` VALUES (19,17,99,'Aa_Xalmo_the_Savage',0,32,1,14500,0,80,84,0);
 INSERT INTO `mob_groups` VALUES (20,3541,99,'Seneschal_Imp',960,0,1002,0,0,77,79,0);
@@ -13687,7 +13687,7 @@ INSERT INTO `mob_groups` VALUES (2,5249,288,'Eschan_Obdella',300,0,0,0,0,50,59,0
 INSERT INTO `mob_groups` VALUES (3,3415,288,'Eschan_Crawler',300,0,0,0,0,50,59,0);
 INSERT INTO `mob_groups` VALUES (4,483,288,'Eschan_Weapon',300,0,0,0,9999,60,69,0);
 INSERT INTO `mob_groups` VALUES (5,3489,288,'Eschan_Dhalmel',300,0,0,0,0,60,69,0);
-INSERT INTO `mob_groups` VALUES (6,690,288,'Eschan_Coeurl',300,0,0,0,0,60,69,0);
+INSERT INTO `mob_groups` VALUES (6,5349,288,'Eschan_Coeurl',300,0,0,0,0,60,69,0);
 INSERT INTO `mob_groups` VALUES (7,1427,288,'Eschan_Vulture',300,0,0,0,0,70,79,0);
 INSERT INTO `mob_groups` VALUES (8,1517,288,'Eschan_Warrior',300,0,0,0,0,70,79,0);
 INSERT INTO `mob_groups` VALUES (9,5462,288,'Eschan_Corse',300,0,0,0,9999,70,78,0);
