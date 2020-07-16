@@ -1852,7 +1852,7 @@ INSERT INTO `mob_groups` VALUES (190,5353,40,'Nightmare_Bunny',600,0,1789,5000,0
 INSERT INTO `mob_groups` VALUES (191,2859,40,'Nightmare_Mandragora',600,0,1789,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (192,2848,40,'Nightmare_Crawler',600,0,1798,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (193,2863,40,'Nightmare_Raven',600,0,1798,5000,0,94,96,0);
-INSERT INTO `mob_groups` VALUES (194,2851,40,'Nightmare_Eft',600,0,1789,5000,0,94,96,0);
+INSERT INTO `mob_groups` VALUES (194,5638,40,'Nightmare_Eft',600,0,1789,5000,0,94,96,0);
 
 -- ------------------------------------------------------------
 -- Dynamis-Qufim (Zone 41)
@@ -13519,7 +13519,7 @@ INSERT INTO `mob_groups` VALUES (28,5526,272,'Slinking_Slug',0,0,0,0,0,121,123,0
 INSERT INTO `mob_groups` VALUES (29,5527,272,'Bloodspattered_Fly',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (30,2671,272,'Mineral_Eater',0,0,0,0,9999,120,123,0);
 INSERT INTO `mob_groups` VALUES (31,3102,272,'Passage_Crab',0,0,0,0,0,120,123,0);
-INSERT INTO `mob_groups` VALUES (32,4980,272,'Unyielding_Tarichuk',0,0,0,0,0,120,123,0);
+INSERT INTO `mob_groups` VALUES (32,5639,272,'Irascible_Tarichuk',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (33,4886,272,'Craklaw',0,0,0,0,0,123,125,0);
 INSERT INTO `mob_groups` VALUES (34,5449,272,'Slimeskin_Obdella',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (35,5448,272,'Bilespouting_Acuex',0,0,0,0,0,120,123,0);
@@ -13556,7 +13556,7 @@ INSERT INTO `mob_groups` VALUES (12,4806,273,'Hailstone',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (13,4984,273,'Twilight_Bat',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (14,4975,273,'Firth_Umbril',600,0,0,0,9999,124,127,0);
 INSERT INTO `mob_groups` VALUES (15,5051,273,'New_Moon_Bats',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (16,4980,273,'Unyielding_Tarichuk',330,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (16,5640,273,'Malodorous_Tarichuk',330,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (17,4884,273,'Fetid_Twitherym',330,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (18,5307,273,'Glaciated_Yanthu',0,4,0,0,9999,121,123,0);
 INSERT INTO `mob_groups` VALUES (19,2128,273,'Jagil',330,0,0,0,0,121,123,0);
