@@ -1573,7 +1573,7 @@ INSERT INTO `mob_groups` VALUES (91,5351,39,'Nightmare_Manticore',600,0,3124,500
 INSERT INTO `mob_groups` VALUES (92,2854,39,'Nightmare_Hippogryph',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (93,5108,39,'Nightmare_Treant',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (94,5107,39,'Nightmare_Funguar',600,0,3122,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (95,2867,39,'Nightmare_Sheep',600,0,3123,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (95,5360,39,'Nightmare_Sheep',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (96,2852,39,'Nightmare_Fly',600,0,3122,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (97,4150,39,'Vanguard_Footsoldier',600,0,2544,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (98,4172,39,'Vanguard_Pillager',600,0,2544,4000,0,93,95,0);
@@ -3453,7 +3453,7 @@ INSERT INTO `mob_groups` VALUES (53,1461,77,'Gargantua',0,128,906,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (54,1861,77,'Gyre-Carlin',0,128,1261,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (55,267,77,'Asphyxiated_Amsel',0,128,181,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (56,1429,77,'Frostmane',0,128,911,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (57,3109,77,'Peallaidh',0,128,906,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (57,5359,77,'Peallaidh',0,128,906,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (58,645,77,'Carnero',0,128,71,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (59,1282,77,'Falcatus_Aranei',0,128,807,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (60,1208,77,'Emergent_Elm',0,128,71,0,0,75,80,0);
