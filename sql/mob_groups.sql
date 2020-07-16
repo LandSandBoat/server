@@ -2015,7 +2015,7 @@ INSERT INTO `mob_groups` VALUES (155,4178,41,'Vanguard_Purloiner',600,0,2556,400
 INSERT INTO `mob_groups` VALUES (156,4196,41,'Vanguard_Vigilante',600,0,2556,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (157,4164,41,'Vanguard_Minstrel',600,0,2556,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (158,4146,41,'Vanguard_Drakekeeper',600,0,2556,4000,0,93,95,0);
-INSERT INTO `mob_groups` VALUES (159,2862,41,'Nightmare_Raptor',600,0,1800,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (159,5647,41,'Nightmare_Raptor',600,0,1800,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (160,4183,41,'Vanguard_Skirmisher',600,0,2551,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (161,4181,41,'Vanguard_Sentinel',600,0,2551,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (162,4148,41,'Vanguard_Exemplar',600,0,2551,4000,0,93,95,0);
@@ -6511,7 +6511,7 @@ INSERT INTO `mob_groups` VALUES (5,2735,98,'Moon_Bat',330,2,80,0,0,49,51,0);
 INSERT INTO `mob_groups` VALUES (6,3831,98,'Tabar_Beak',330,0,2370,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (7,792,98,'Coquecigrue',7200,0,515,12000,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (8,5343,98,'Gouger_Beetle',330,0,670,0,0,92,94,0);
-INSERT INTO `mob_groups` VALUES (9,3485,98,'Sauromugue_Skink',330,0,2167,0,0,51,53,0);
+INSERT INTO `mob_groups` VALUES (9,5646,98,'Sauromugue_Skink',330,0,2167,0,0,51,53,0);
 INSERT INTO `mob_groups` VALUES (10,1740,98,'Goblin_Toxophilite',330,0,1178,0,0,66,69,0);
 INSERT INTO `mob_groups` VALUES (11,1688,98,'Goblin_Mine',0,128,0,0,0,61,61,0);
 INSERT INTO `mob_groups` VALUES (12,1669,98,'Goblin_Grenadier',330,0,1086,0,0,66,69,0);
@@ -13420,7 +13420,7 @@ INSERT INTO `mob_groups` VALUES (23,4766,269,'Skittish_Matamata',3600,0,2330,0,0
 INSERT INTO `mob_groups` VALUES (24,4817,269,'Staumarth',0,128,0,0,9999,103,108,0);
 INSERT INTO `mob_groups` VALUES (25,4889,269,'Loathsome_Leech',330,0,0,0,0,120,124,0);
 INSERT INTO `mob_groups` VALUES (26,4957,269,'Tundra_Eft',330,0,0,0,0,120,124,0);
-INSERT INTO `mob_groups` VALUES (27,5085,269,'Ruby_Raptor',330,0,0,0,0,120,124,0);
+INSERT INTO `mob_groups` VALUES (27,5645,269,'Steelclaw_Raptor',330,0,0,0,0,120,124,0);
 INSERT INTO `mob_groups` VALUES (28,5005,269,'Fernfelling_Chapuli',330,0,0,0,0,120,124,0);
 INSERT INTO `mob_groups` VALUES (29,4892,269,'Groundstomp_Matamata',330,0,0,0,0,120,124,0);
 INSERT INTO `mob_groups` VALUES (30,5473,269,'Incandescent_Baelfyr',330,4,0,0,9999,125,126,0);
