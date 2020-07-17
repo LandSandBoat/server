@@ -4197,7 +4197,7 @@ INSERT INTO `mob_groups` VALUES (4,5733,82,'Snipper',330,0,2279,0,0,38,48,0);
 INSERT INTO `mob_groups` VALUES (5,4299,82,'War_Smilodon',330,0,2626,0,0,57,60,0);
 INSERT INTO `mob_groups` VALUES (6,2373,82,'Land_Pugil',300,0,2354,0,0,38,41,0);
 INSERT INTO `mob_groups` VALUES (7,3506,82,'Screamer',330,0,208,0,0,40,44,0);
-INSERT INTO `mob_groups` VALUES (8,3752,82,'Stag_Beetle',330,0,2319,0,0,38,48,0);
+INSERT INTO `mob_groups` VALUES (8,6309,82,'Stag_Beetle',330,0,2319,0,0,38,48,0);
 INSERT INTO `mob_groups` VALUES (9,4285,82,'Wandering_Sapling',330,0,2616,0,0,38,41,0);
 INSERT INTO `mob_groups` VALUES (10,947,82,'Decrepit_Gnole',330,0,590,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (11,1517,82,'Ghoul',330,1,959,0,0,39,51,0);
@@ -6356,7 +6356,7 @@ INSERT INTO `mob_groups` VALUES (8,5481,97,'Yagudo_Sentinel',330,0,2764,0,0,76,7
 INSERT INTO `mob_groups` VALUES (9,4298,97,'War_Lynx',330,0,0,0,0,68,72,0);
 INSERT INTO `mob_groups` VALUES (10,2772,97,'Muq_Shabeel',5400,0,3094,9000,0,72,72,0);
 INSERT INTO `mob_groups` VALUES (11,3991,97,'Treant_Sapling',330,0,2465,0,0,56,59,0);
-INSERT INTO `mob_groups` VALUES (12,3752,97,'Stag_Beetle',330,0,2320,0,0,44,47,0);
+INSERT INTO `mob_groups` VALUES (12,6309,97,'Stag_Beetle',330,0,2320,0,0,44,47,0);
 INSERT INTO `mob_groups` VALUES (13,1099,97,'Dragonfly',330,0,142,0,0,58,60,0);
 INSERT INTO `mob_groups` VALUES (14,2877,97,'Night_Bats',330,2,80,0,0,55,57,0);
 INSERT INTO `mob_groups` VALUES (15,433,97,'Black_Bat',330,2,80,0,0,55,55,0);
@@ -6504,7 +6504,7 @@ INSERT INTO `mob_groups` VALUES (5226,4515,97,'Zolku-Azolku',1,0,0,0,0,1,1,0);
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,2456,98,'Lycopodium',330,0,1555,0,0,28,32,0);
-INSERT INTO `mob_groups` VALUES (2,1065,98,'Diving_Beetle',330,0,169,0,0,44,47,0);
+INSERT INTO `mob_groups` VALUES (2,6310,98,'Diving_Beetle',330,0,169,0,0,44,47,0);
 INSERT INTO `mob_groups` VALUES (3,1628,98,'Gnat',330,0,1008,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (4,2649,98,'Midnight_Wings',330,2,80,0,0,49,52,0);
 INSERT INTO `mob_groups` VALUES (5,2735,98,'Moon_Bat',330,2,80,0,0,49,51,0);
