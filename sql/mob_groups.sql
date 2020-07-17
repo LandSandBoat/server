@@ -13621,7 +13621,7 @@ INSERT INTO `mob_groups` VALUES (14023,5259,274,'RegionlessDraugar3',330,0,0,0,9
 -- RaKaznar_Inner_Court (Zone 276)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5243,276,'Fluturini',330,0,0,0,0,117,123,0);
+INSERT INTO `mob_groups` VALUES (1,6329,276,'Draftdance_Fluturini',330,0,0,0,0,117,123,0);
 INSERT INTO `mob_groups` VALUES (2,5432,276,'Poxhound',330,0,0,0,0,117,123,0);
 INSERT INTO `mob_groups` VALUES (3,5245,276,'Legionless_Draugar2',330,0,0,0,0,117,123,0);
 INSERT INTO `mob_groups` VALUES (4,5316,276,'Legionless_Draugar3',330,0,0,0,0,117,123,0);
