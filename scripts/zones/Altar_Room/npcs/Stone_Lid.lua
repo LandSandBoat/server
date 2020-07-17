@@ -42,7 +42,7 @@ function onEventFinish(player,csid,option)
             ID.mob.GOO_PAKE_THE_BLOODHOUND,
             ID.mob.KEE_TAW_THE_NIGHTINGALE,
             ID.mob.LAA_YAKU_THE_AUSTERE,
-			ID.mob.POO_YOZO_THE_BABBLER,
+            ID.mob.POO_YOZO_THE_BABBLER,
         }
         if npcUtil.popFromQM(player, npc, mobs, {hide = 1}) then
             player:messageSpecial(ID.text.DRAWS_NEAR)

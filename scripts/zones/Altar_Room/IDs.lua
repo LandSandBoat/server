@@ -20,7 +20,7 @@ zones[tpz.zone.ALTAR_ROOM] =
     mob =
     {
 	    YAGUDO_AVATAR           = 17399809,
-		YAGUDOS_ELEMENTAL       = 17399810,
+        YAGUDOS_ELEMENTAL       = 17399810,
         YAGUDOS_AVATAR          = 17399811,
         LAA_YAKU_THE_AUSTERE    = 17399812,
         DUU_MASA_THE_ONECUT     = 17399813,

@@ -21,8 +21,7 @@ function onTrade(player,npc,trade)
         player:startEvent(10012,0,0,0,0,newRank)
     end
     if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
-        if (trade:hasItemQty(828,1) and trade:hasItemQty (830, 1) and tradeGil == 10000) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
-            player:tradeComplete()
+        if npcUtil.tradeHas(trade, {828, 830{"gil", 10000}}) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
             player:setCharVar("moral",3)
             player:setLocalVar('moralZone', 1)
             player:setCharVar("moralWait", getVanaMidnight())
