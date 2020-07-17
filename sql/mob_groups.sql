@@ -13539,7 +13539,7 @@ INSERT INTO `mob_groups` VALUES (1,5064,273,'Knotted_Root',3600,0,0,0,0,110,111,
 INSERT INTO `mob_groups` VALUES (2,5062,273,'Bloated_Acuex',3600,0,0,0,0,110,111,0);
 INSERT INTO `mob_groups` VALUES (3,5118,273,'Lost_Stringes',3600,0,0,0,0,110,111,0);
 INSERT INTO `mob_groups` VALUES (4,4989,273,'Cliffclinger_Toad',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (5,5058,273,'Malodorous_Twitherym',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (5,6340,273,'Drusy_Twitherym',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (6,4991,273,'Spinescent_Protuberance',600,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7,5105,273,'Hoarfrost_Gefyrst',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (8,4752,273,'Wheezing_Acuex',600,0,0,0,5000,124,127,0);
@@ -13551,7 +13551,7 @@ INSERT INTO `mob_groups` VALUES (13,4984,273,'Twilight_Bat',600,0,0,0,0,124,127,
 INSERT INTO `mob_groups` VALUES (14,4975,273,'Firth_Umbril',600,0,0,0,9999,124,127,0);
 INSERT INTO `mob_groups` VALUES (15,5051,273,'New_Moon_Bats',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (16,5640,273,'Malodorous_Tarichuk',330,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (17,4884,273,'Fetid_Twitherym',330,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (17,6339,273,'Bound_Twitherym',330,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (18,5307,273,'Glaciated_Yanthu',0,4,0,0,9999,121,123,0);
 INSERT INTO `mob_groups` VALUES (19,2128,273,'Jagil',330,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (20,5474,273,'Strato_Hippogryph',330,0,0,0,0,124,127,0);
