@@ -13395,7 +13395,7 @@ INSERT INTO `mob_groups` VALUES (14282,4752,268,'Wheezing_Acuex',330,0,0,0,0,119
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,4924,269,'Menacing_Mantis',330,0,2330,0,0,101,110,0);
-INSERT INTO `mob_groups` VALUES (2,5081,269,'Cthonic_Chapuli',330,0,2330,0,0,101,105,0);
+INSERT INTO `mob_groups` VALUES (2,6311,269,'Cthonic_Chapuli',330,0,2330,0,0,101,105,0);
 INSERT INTO `mob_groups` VALUES (3,5092,269,'Gleeful_Ungeweder',330,0,2330,0,0,102,110,0);
 INSERT INTO `mob_groups` VALUES (4,5082,269,'Cave_panopt',330,0,2330,0,999,101,110,0);
 INSERT INTO `mob_groups` VALUES (5,5087,269,'Erythemic_Eft',330,0,2330,0,0,101,110,0);
