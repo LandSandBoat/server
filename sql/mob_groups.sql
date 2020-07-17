@@ -3415,7 +3415,7 @@ INSERT INTO `mob_groups` VALUES (15,3835,77,'Tainted_Flesh',0,128,1528,0,0,66,68
 INSERT INTO `mob_groups` VALUES (16,1110,77,'Draugar',0,128,701,0,0,67,70,0);
 INSERT INTO `mob_groups` VALUES (17,404,77,'Bhoot',0,128,263,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (18,6320,77,'Carmine_Eruca',0,128,419,0,0,66,68,0);
-INSERT INTO `mob_groups` VALUES (19,3732,77,'Spinner',0,128,228,0,0,66,68,0);
+INSERT INTO `mob_groups` VALUES (19,6337,77,'Spinner',0,128,228,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (20,4281,77,'Wamouracampa',0,128,0,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (21,4280,77,'Wamoura',0,128,2608,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (22,2065,77,'Imp',0,128,1002,0,0,66,68,0);
@@ -5029,7 +5029,7 @@ INSERT INTO `mob_groups` VALUES (2,3452,88,'Sand_Crab',0,128,481,0,0,18,22,0);
 INSERT INTO `mob_groups` VALUES (3,2372,88,'Land_Crab',0,128,93,0,0,15,18,0);
 INSERT INTO `mob_groups` VALUES (4,3222,88,'Pug_Pugil',0,128,463,0,0,45,47,0);
 INSERT INTO `mob_groups` VALUES (5,1336,88,'Fighting_Pugil',0,128,279,0,0,45,47,0);
-INSERT INTO `mob_groups` VALUES (6,2002,88,'Huge_Spider',330,0,1335,0,0,35,38,0);
+INSERT INTO `mob_groups` VALUES (6,6336,88,'Huge_Spider',330,0,1335,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (7,1038,88,'Ding_Bats',330,2,82,0,0,26,28,0);
 INSERT INTO `mob_groups` VALUES (8,3058,88,'Ornery_Sheep',330,0,367,0,0,25,28,0);
 INSERT INTO `mob_groups` VALUES (9,3358,88,'Revenant',330,1,2091,0,0,51,54,0);
@@ -13469,7 +13469,7 @@ INSERT INTO `mob_groups` VALUES (32,4753,270,'Frightful_Funguar',3600,0,2330,120
 INSERT INTO `mob_groups` VALUES (33,5093,270,'Riverwashed_Toad',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (34,4770,270,'Soiled_Funguar',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (35,5476,270,'Fulvous_Bats',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (36,5016,270,'Colossal_Spider',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (36,6338,270,'Moldmouth_Attercop',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (37,5477,270,'Snippy_Rafflesia',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (38,5248,270,'Astringent_Acuex',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (39,4964,270,'Glutinous_Clot',330,0,0,0,0,125,126,0);
