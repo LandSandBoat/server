@@ -223,11 +223,7 @@ namespace itemutils
 
     bool IsItemPointer(CItem* item)
     {
-        for(auto i: g_pItemList)
-        {
-            if (i == item) return true;
-        }
-        return false;
+        return g_pItemList[item->getID()] == item;
     }
 
     /************************************************************************
