@@ -38,9 +38,5 @@ function onEventFinish(player,csid,option)
 
     if (csid == 746) then
         player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",14,true);
-    elseif (csid == 601) then
-        if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_AVAILABLE and player:getCharVar("FFR") == 0) then
-            player:setCharVar("FFR",1);
-        end
     end
 end;

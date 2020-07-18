@@ -63,13 +63,19 @@ end
 quests.flyers_for_regine.onRegionEnter = function(player, region)
     local zoneId = player:getZoneID()
     local regionId = region:GetRegionID()
-    local data = npcData[zone:getID()]
+    local data = npcData[zoneId]
 
     if data then
         for k, v in pairs(data) do
             if v.region == regionId then
-                local ID = zones[zoneId]
-                player:messageSpecial(ID.text.FFR_LOOKS_CURIOUSLY_BASE + v.offset)
+                local mask = player:getCharVar('[ffr]deliveryMask')
+                local alreadyDelivered = bit.band(mask, 2^k) ~= 0
+
+                if not alreadyDelivered then
+                    local ID = zones[zoneId]
+                    player:messageSpecial(ID.text.FFR_LOOKS_CURIOUSLY_BASE + v.offset)
+                end
+
                 break
             end
         end
