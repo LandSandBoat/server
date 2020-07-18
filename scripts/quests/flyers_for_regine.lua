@@ -61,22 +61,24 @@ quests.flyers_for_regine.initZone = function(zone)
 end
 
 quests.flyers_for_regine.onRegionEnter = function(player, region)
-    local zoneId = player:getZoneID()
-    local regionId = region:GetRegionID()
-    local data = npcData[zoneId]
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED then
+        local zoneId = player:getZoneID()
+        local regionId = region:GetRegionID()
+        local data = npcData[zoneId]
 
-    if data then
-        for k, v in pairs(data) do
-            if v.region == regionId then
-                local mask = player:getCharVar('[ffr]deliveryMask')
-                local alreadyDelivered = bit.band(mask, 2^k) ~= 0
+        if data then
+            for k, v in pairs(data) do
+                if v.region == regionId then
+                    local mask = player:getCharVar('[ffr]deliveryMask')
+                    local alreadyDelivered = bit.band(mask, 2^k) ~= 0
 
-                if not alreadyDelivered then
-                    local ID = zones[zoneId]
-                    player:messageSpecial(ID.text.FFR_LOOKS_CURIOUSLY_BASE + v.offset)
+                    if not alreadyDelivered then
+                        local ID = zones[zoneId]
+                        player:messageSpecial(ID.text.FFR_LOOKS_CURIOUSLY_BASE + v.offset)
+                    end
+
+                    break
                 end
-
-                break
             end
         end
     end
