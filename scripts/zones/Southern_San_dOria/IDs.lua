@@ -53,7 +53,6 @@ zones[tpz.zone.SOUTHERN_SAN_DORIA] =
         SHILAH_SHOP_DIALOG             = 8114, -- Welcome, weary traveler. Make yourself at home!
         VALERIANO_SHOP_DIALOG          = 8132, -- Oh, a fellow outsider! We are Troupe Valeriano. I am Valeriano, at your service!
         FERDOULEMIONT_SHOP_DIALOG      = 8148, -- Hello!
-        FLYER_REFUSED                  = 8180, -- Your flyer is refused.
         CLETAE_DIALOG                  = 8200, -- Why, hello. All our skins are guild-approved.
         KUEH_IGUNAHMORI_DIALOG         = 8201, -- Good day! We have lots in stock today.
         PAUNELIE_DIALOG                = 8309, -- I'm sorry, can I help you?

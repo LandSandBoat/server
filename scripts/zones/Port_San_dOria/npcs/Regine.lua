@@ -19,8 +19,6 @@ function onTrade(player,npc,trade)
         if (npcUtil.giveItem(player, 532)) then
             player:confirmTrade();
         end
-    elseif (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED);
 
     -- THE BRUGAIRE CONSORTIUM
     elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 593)) then

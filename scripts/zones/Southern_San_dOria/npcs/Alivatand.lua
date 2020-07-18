@@ -4,10 +4,10 @@
 -- Type: Guildworker's Union Representative
 -- !pos -179.458 -1 15.857 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/crafting")
+require("scripts/globals/keyitems")
+-----------------------------------
 
 local keyitems = {
     [0] = {
@@ -76,17 +76,7 @@ local items = {
 };
 
 function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE);
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
-        end
-    else
-        unionRepresentativeTrade(player, npc, trade, 691, 5);
-    end
+    unionRepresentativeTrade(player, npc, trade, 691, 5);
 end;
 
 function onTrigger(player,npc)

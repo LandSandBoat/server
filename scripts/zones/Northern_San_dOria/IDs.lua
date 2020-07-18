@@ -58,7 +58,6 @@ zones[tpz.zone.NORTHERN_SAN_DORIA] =
         AIVEDOIR_DIALOG          = 11503, -- That's funny. I could have sworn she asked me to meet her here...
         CAPIRIA_DIALOG           = 11504, -- He's late! I do hope he hasn't forgotten.
         BERTENONT_DIALOG         = 11505, -- Stars are more beautiful up close. Don't you agree?
-        FLYER_REFUSED            = 11517, -- Your flyer is refused.
         GILIPESE_DIALOG          = 11526, -- Nothing to report!
         DOGGOMEHR_SHOP_DIALOG    = 11539, -- Welcome to the Blacksmiths' Guild shop.
         CAUZERISTE_SHOP_DIALOG   = 11607, -- Welcome! San d'Oria Carpenters' Guild shop, at your service.

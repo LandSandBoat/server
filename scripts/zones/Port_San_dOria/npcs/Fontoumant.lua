@@ -5,11 +5,11 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -10 -10 -122 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -27,12 +27,6 @@ function onTrade(player,npc,trade)
                 player:startEvent(610);
                 player:setCharVar("TheBrugaireConsortium-Parcels",31)
             end
-        end
-    end
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and count == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(ID.text.FLYER_REFUSED);
         end
     end
 
