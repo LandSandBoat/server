@@ -21,7 +21,7 @@ function onTrade(player,npc,trade)
         player:startEvent(10012,0,0,0,0,newRank)
     end
     if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
-        if npcUtil.tradeHas(trade, {828, 830{"gil", 10000}}) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
+        if npcUtil.tradeHas(trade, {828, 830,{"gil", 10000}}) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
             player:setCharVar("moral",3)
             player:setLocalVar('moralZone', 1)
             player:setCharVar("moralWait", getVanaMidnight())
@@ -29,7 +29,6 @@ function onTrade(player,npc,trade)
         end
     end
 end
-
 
 function onTrigger(player,npc)
     local getNewRank = 0
@@ -50,6 +49,7 @@ function onTrigger(player,npc)
     elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <= os.time() then
         player:startEvent(705)
     else player:startEvent(10011,testItem,getNewRank,30,guildMember,44,0,0,0)
+
 	end
 end
 
