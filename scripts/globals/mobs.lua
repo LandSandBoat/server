@@ -8,6 +8,7 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
 -----------------------------------
 
 tpz = tpz or {}

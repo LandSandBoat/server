@@ -1216,6 +1216,16 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
 
             player:showText(player, msgOffset)
             player:showText(player, msgOffset + 1)
+
+            -- Records of Eminence: Undertake a FoV Training Regime
+            if player:getEminenceProgress(3) and regimeType == tpz.regime.type.FIELDS then
+                npcUtil.completeRecord(player, 3, { sparks = 100, xp = 500 })
+            end
+
+            -- Records of Eminence: Undertake a GoV Training Regime
+            if player:getEminenceProgress(11) and regimeType == tpz.regime.type.GROUNDS then
+                npcUtil.completeRecord(player, 11, { sparks = 100, xp = 500 })
+            end
         end
     end
 end
