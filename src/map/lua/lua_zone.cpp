@@ -29,9 +29,9 @@
 #include "../entities/charentity.h"
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
+*                                                                       *
+*  Конструктор                                                          *
+*                                                                       *
 ************************************************************************/
 
 CLuaZone::CLuaZone(lua_State *L)
@@ -48,9 +48,9 @@ CLuaZone::CLuaZone(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
+*                                                                       *
+*  Конструктор                                                          *
+*                                                                       *
 ************************************************************************/
 
 CLuaZone::CLuaZone(CZone* PZone)
@@ -59,10 +59,10 @@ CLuaZone::CLuaZone(CZone* PZone)
 }
 
 /************************************************************************
-*																		*
-*  Регистрируем активную область в зоне									*
-*  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2				*
-*																		*
+*                                                                       *
+*  Регистрируем активную область в зоне                                 *
+*  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2              *
+*                                                                       *
 ************************************************************************/
 
 inline int32 CLuaZone::registerRegion(lua_State *L)
@@ -99,9 +99,9 @@ inline int32 CLuaZone::registerRegion(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Устанавливаем ограничение уровня для зоны							*
-*																		*
+*                                                                       *
+*  Устанавливаем ограничение уровня для зоны                            *
+*                                                                       *
 ************************************************************************/
 
 inline int32 CLuaZone::levelRestriction(lua_State *L)
@@ -180,9 +180,22 @@ inline int32 CLuaZone::battlefieldsFull(lua_State* L)
 }
 
 /************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
+*  Function: getWeather()
+*  Purpose : Returns the current weather status
+************************************************************************/
+
+inline int32 CLuaZone::getWeather(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
+    WEATHER weather = m_pLuaZone->GetWeather();
+    lua_pushinteger(L, weather);
+    return 1;
+}
+
+/************************************************************************
+*                                                                       *
+*  Initializing Methods in LUA                                          *
+*                                                                       *
 ************************************************************************/
 
 const char CLuaZone::className[] = "CZone";
@@ -196,5 +209,6 @@ Lunar<CLuaZone>::Register_t CLuaZone::methods[] =
     LUNAR_DECLARE_METHOD(CLuaZone,getType),
     LUNAR_DECLARE_METHOD(CLuaZone,getBattlefieldByInitiator),
     LUNAR_DECLARE_METHOD(CLuaZone,battlefieldsFull),
+    LUNAR_DECLARE_METHOD(CLuaZone,getWeather),
     {nullptr,nullptr}
 };
