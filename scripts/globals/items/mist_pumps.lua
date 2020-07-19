@@ -1,6 +1,6 @@
 -----------------------------------------
--- ID: 14324
--- Item: Mist Slacks
+-- ID: 15312
+-- Item: Mist Pumps
 -- Item Effect: Evasion Boost
 -----------------------------------------
 require("scripts/globals/status")

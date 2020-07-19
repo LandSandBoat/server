@@ -1,20 +1,19 @@
 -----------------------------------------
--- ID: 14324
--- Item: Mist Slacks
--- Item Effect: Evasion Boost
+-- ID: 16273
+-- Chocobo Pullus Torque
+-- Enchantment: 60Min, Costume - Mandragora
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
 function onItemCheck(target)
+    if not target:canUseMisc(tpz.zoneMisc.COSTUME) then
+        return tpz.msg.basic.CANT_BE_USED_IN_AREA
+    end
     return 0
 end
 
 function onItemUse(target)
-    if (not target:hasStatusEffect(tpz.effect.EVASION_BOOST)) then
-        target:addStatusEffect(tpz.effect.EVASION_BOOST,15,0,180)
-    else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
-    end
+    target:addStatusEffect(tpz.effect.COSTUME,1997,0,3600)
 end
