@@ -27,7 +27,7 @@ function onEventUpdate(player,csid,option)
 end
 
 function onEventFinish(player,csid,option)
-    if csid == 24 and option == 1 then
+    if csid == 5079 and option == 1 then
         npcUtil.completeRecord(player, 1, {
             item = { {4376,6} },
             keyItem = tpz.ki.MEMORANDOLL,

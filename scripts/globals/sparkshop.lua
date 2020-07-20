@@ -8,7 +8,7 @@
 tpz = tpz or {}
 tpz.sparkshop = tpz.sparkshop or {}
 
-optionToItem = {
+local optionToItem = {
     [1] = { -- Items page
         [ 0] = { cost =    10, id =  4181 }, -- Scroll of Instant Warp
         [ 1] = { cost =    10, id =  4182 }, -- Scroll of Instant Reraise

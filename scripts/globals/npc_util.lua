@@ -414,6 +414,14 @@ end
 function npcUtil.completeRecord(player, record, params)
     params = params or {}
 
+    if params["item"] ~= nil then
+        if not npcUtil.giveItem(player, params["item"]) then
+            return false
+        end
+    end
+
+    player:messageBasic(tpz.msg.basic.ROE_COMPLETE,record)
+
     if params["sparks"] ~= nil and type(params["sparks"]) == "number" then
         local bonus = 1
         player:messageBasic(tpz.msg.basic.ROE_COMPLETE,record)
@@ -429,12 +437,6 @@ function npcUtil.completeRecord(player, record, params)
 
     if params["xp"] ~= nil and type(params["xp"]) == "number" then
         player:addExp(params["xp"] * EXP_RATE)
-    end
-
-    if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"]) then
-            return false
-        end
     end
 
     if params["keyItem"] ~= nil then
