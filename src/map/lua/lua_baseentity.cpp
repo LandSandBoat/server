@@ -2453,10 +2453,12 @@ inline int32 CLuaBaseEntity::getAngle(lua_State *L)
 }
 
 /************************************************************************
-*  Function: getZone()
+*  Function: getZone(isZoning)
 *  Purpose : Returns a pointer to a zone object?
 *  Example : if (player:getZone() == mob:getZone()) then
 *  Notes   : To Do: I don't think some scripts are using this correctly...
+*  Optional isZoning parameter will return player's destination zone if
+*  they are in the process of zoning (for use in onZoneIn)
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getZone(lua_State *L)
@@ -2470,6 +2472,17 @@ inline int32 CLuaBaseEntity::getZone(lua_State *L)
         lua_gettable(L, -2);
         lua_insert(L, -2);
         lua_pushlightuserdata(L, (void*)m_PBaseEntity->loc.zone);
+        lua_pcall(L, 2, 1, 0);
+    }
+    else if (m_PBaseEntity->loc.destination && !lua_isnil(L, 1) && lua_isboolean(L, 1) && (bool)lua_toboolean(L, 1) == true)
+    {
+        auto PZone = zoneutils::GetZone(m_PBaseEntity->loc.destination);
+
+        lua_getglobal(L, CLuaZone::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)PZone);
         lua_pcall(L, 2, 1, 0);
     }
     else
@@ -3098,7 +3111,7 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State *L)
         return 0;
     }
 
-	lua_newtable(L);
+    lua_newtable(L);
 
     for (uint8 x = 0; x < 10; x++)
     {
@@ -3847,7 +3860,7 @@ inline int32 CLuaBaseEntity::breakLinkshell(lua_State* L)
     bool found = false;
 
     int32 ret = Sql_Query(SqlHandle, "SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
-	if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         uint8 broken = Sql_GetUIntData(SqlHandle,0);
         if (broken)
@@ -6524,7 +6537,7 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
 *  Function: setMissionLogEx()
 *  Purpose : Sets mission log extra data to correctly track progress in branching missions.
 *  Example : player:setMissionLogEx(tpz.mission.log_id.COP, tpz.mission.logEx.ULMIA, 14)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setMissionLogEx(lua_State *L)
@@ -10018,7 +10031,7 @@ int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
 *  Function: isDualWielding()
 *  Purpose : Returns true if entity is wielding two weapons
 *  Example : if player:isDualWielding() then
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::isDualWielding(lua_State* L)

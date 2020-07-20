@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
@@ -30,7 +30,7 @@ function onZoneIn(player, prevZone)
     if not player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and player:getRank() >= 6 and player:getMainLvl() >= 65 and bit.band(player:getCharVar("Dynamis_Status"), 1) == 0 then
         player:setCharVar("Dynamis_Status", 1)
         cs = 13
-    elseif triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    elseif quests.rainbow.onZoneIn(player) then
         cs = 9
     elseif UnbridledPassionCS == 3 then
         cs = 4
@@ -50,7 +50,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 9 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 11 then
         if player:getPreviousZone() == tpz.zone.BEAUCEDINE_GLACIER then
             player:updateEvent(0, 0, 0, 0, 0, 2)
@@ -61,9 +61,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 9 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    elseif csid == 4 then
+    if csid == 4 then
         player:setCharVar("unbridledPassion", 4)
     end
 end

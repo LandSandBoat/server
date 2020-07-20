@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/helm")
@@ -38,7 +38,7 @@ function onZoneIn( player, prevZone)
         player:setPos( 342, -5, 15.117, 169)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 15
     end
 
@@ -57,14 +57,12 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 15 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 15 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    elseif csid == 14 then
+    if csid == 14 then
         player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
     end
 end

@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -32,7 +32,7 @@ function onZoneIn(player, prevZone)
         player:setPos(752.632, -33.761, -40.035, 129)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 31
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 34 -- no update for castle oztroja (north)
@@ -50,7 +50,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 31 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 34 then
         if player:getPreviousZone() == tpz.zone.SAUROMUGUE_CHAMPAIGN then
             player:updateEvent(0, 0, 0, 0, 0, 2)
@@ -61,7 +61,4 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 31 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end

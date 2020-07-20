@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -37,7 +37,7 @@ function onZoneIn(player, prevZone)
         elseif missionStatus == 22 then
             cs = 11
         end
-    elseif triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    elseif quests.rainbow.onZoneIn(player) then
         cs = 13
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 15
@@ -55,7 +55,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 13 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 15 then
         if player:getXPos() < 362 then
             player:updateEvent(0, 0, 0, 0, 0, 2)
@@ -69,7 +69,5 @@ function onEventFinish( player, csid, option)
     elseif csid == 11 then
         finishMissionTimeline(player, 1, csid, option)
         player:setPos(578, 25, -376, 126)
-    elseif csid == 13 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end

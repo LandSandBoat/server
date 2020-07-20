@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs");
-require("scripts/globals/icanheararainbow");
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging");
 require("scripts/globals/conquest");
 require("scripts/globals/missions");
@@ -27,7 +27,7 @@ function onZoneIn( player, prevZone)
         player:setPos( 60.989, -4.898, -151.001, 198);
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 3;
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
         cs = 5;
@@ -45,7 +45,7 @@ end;
 
 function onEventUpdate( player, csid, option)
     if (csid == 3) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif (csid == 5) then
         if (player:getZPos() > 45) then
             if (player:getZPos() > -301) then
@@ -58,9 +58,6 @@ function onEventUpdate( player, csid, option)
 end;
 
 function onEventFinish( player, csid, option)
-    if (csid == 3) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
-    end
 end;
 
 function onZoneWeatherChange(weather)
