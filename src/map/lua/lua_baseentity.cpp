@@ -3808,8 +3808,6 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
         uint8 guildID = (uint8)lua_tonumber(L, 3);
         uint16 guildRank = (uint16)lua_tonumber(L, 4);
 
-        guildRank = (guildRank + 1) * 100;
-
         ((CCharEntity*)m_PBaseEntity)->Container->setGuildID(slotID, guildID);
         ((CCharEntity*)m_PBaseEntity)->Container->setGuildRank(slotID, guildRank);
     }
