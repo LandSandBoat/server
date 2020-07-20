@@ -3783,7 +3783,9 @@ inline int32 CLuaBaseEntity::createShop(lua_State *L)
 /************************************************************************
 *  Function: addShopItem()
 *  Purpose : Adds an item and established price to an existing shop
-*  Example : addShopItem(512,8000)
+*          : Optionally accepts a GuildID + Guild Rank requirement
+*  Example : addShopItem(512, 8000)                                                   --Regular item
+*          : addShopItem(512, 8000, tpz.skill.CLOTHCRAFT, tpz.craftRank.JOURNEYMAN)   --Guild-rank locked item
 *  Notes   : Use with createShop() - 16 Max Items in Shop
 ************************************************************************/
 
@@ -3792,16 +3794,23 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    uint16 itemID = (uint16)lua_tonumber(L, -2);
-    uint32 price = (uint32)lua_tonumber(L, -1);
+    uint16 itemID = (uint16)lua_tonumber(L, 1);
+    uint32 price = (uint32)lua_tonumber(L, 2);
 
     uint8 slotID = ((CCharEntity*)m_PBaseEntity)->Container->getItemsCount();
-
     ((CCharEntity*)m_PBaseEntity)->Container->setItem(slotID, itemID, 0, price);
 
+    if(lua_isnumber(L, 3) && lua_isnumber(L, 4))
+    {
+        uint8 guildID = (uint8)lua_tonumber(L, 3);
+        uint16 guildRank = (uint16)lua_tonumber(L, 4);
+
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildID(slotID, guildID);
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildRank(slotID, guildRank);
+    }
     return 0;
 }
 
