@@ -9,10 +9,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    local RedeemingRocks = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
-    local RocksProg = player:getCharVar("RedeemingRocksProg")
-
-    if (RedeemingRocks == QUEST_ACCEPTED and RocksProg == 1) then
+    if player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS) == QUEST_ACCEPTED and player:getCharVar("RedeemingRocksProg") == 1 then
         player:startEvent(114) -- 2nd CS quest "Redeeming Rocks"
     else
     player:startEvent(440)
