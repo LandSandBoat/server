@@ -68,9 +68,12 @@ repo = Repo('../')
 current_version = current_client = release_version = release_client = None
 express_enabled = False
 auto_backup = auto_update_client = True
-mysql_bin = os.path.dirname(distutils.spawn.find_executable('mysql')).replace('\\','/')
-if mysql_bin and mysql_bin[-1] != '/':
-    mysql_bin = mysql_bin + '/'
+mysql_bin = ''
+mysql_env = distutils.spawn.find_executable('mysql')
+if mysql_env:
+    mysql_bin = os.path.dirname(mysql_env).replace('\\','/')
+    if mysql_bin[-1] != '/':
+        mysql_bin = mysql_bin + '/'
 if os.name == 'nt':
     exe = '.exe'
 else:
@@ -287,8 +290,12 @@ def backup_db(silent=False,lite=False):
             dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
                 tables + '> ../sql/backups/' + database + '--lite--' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
         else:
-            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            if current_version:
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            else:
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-full-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
         os.system(dumpcmd + log_errors)
         fetch_errors()
         print(Fore.GREEN + 'Database saved!')
