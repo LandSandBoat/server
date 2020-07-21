@@ -11,7 +11,6 @@ end
 function onTrigger(player,npc)
     local RedeemingRocks = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
     local RocksProg = player:getCharVar("RedeemingRocksProg")
-    local RDay = player:getCharVar("RedeemingDay")
 
     if RedeemingRocks == QUEST_AVAILABLE then
         player:startEvent(108) -- Start quest "Redeeming Rocks"
