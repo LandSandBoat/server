@@ -58,12 +58,13 @@ def needs_to_run(cur):
     cur.execute("SELECT missions FROM chars WHERE missions IS NOT NULL LIMIT 1;")
 
     row = cur.fetchone()
-    if row:
-        row = bytearray(row[0])
+    if row and len(row[0]) != 1050:
+        return True
+    if row and len(row[0]) == 1050:
+        row = bytearray(bytes(row[0]))
         currentMissionID = int.from_bytes(row[420:422], byteorder='little')
         if currentMissionID < 101:
             return True
-
     return False
 
 
@@ -84,7 +85,7 @@ def migrate(cur, db):
             cur.execute("SELECT missions FROM chars WHERE charid = {} AND missions IS NOT NULL".format(charid))
             row = cur.fetchone()
             if row:
-                row = bytearray(row[0])
+                row = bytearray(bytes(row[0]))
                 currentMissionID = int.from_bytes(row[420:422], byteorder='little')
                 newMissionID = mission_map[currentMissionID]
                 row[420:422] = newMissionID.to_bytes(2, 'little')

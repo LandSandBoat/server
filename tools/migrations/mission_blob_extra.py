@@ -34,7 +34,7 @@ def migrate(cur, db):
             cur.execute("SELECT missions FROM chars WHERE charid = {} AND missions IS NOT NULL".format(charid))
             row = cur.fetchone()
             if row:
-                row = bytearray(row[0])
+                row = bytearray(bytes(row[0]))
                 logEx = bytearray(b'\x00\x00\x00\x00')
                 pos = 2
                 for _ in range(1,16):
