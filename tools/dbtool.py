@@ -290,8 +290,12 @@ def backup_db(silent=False,lite=False):
             dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
                 tables + '> ../sql/backups/' + database + '--lite--' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
         else:
-            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            if current_version:
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            else:
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-full-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
         os.system(dumpcmd + log_errors)
         fetch_errors()
         print(Fore.GREEN + 'Database saved!')
