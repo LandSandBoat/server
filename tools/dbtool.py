@@ -68,9 +68,12 @@ repo = Repo('../')
 current_version = current_client = release_version = release_client = None
 express_enabled = False
 auto_backup = auto_update_client = True
-mysql_bin = os.path.dirname(distutils.spawn.find_executable('mysql')).replace('\\','/')
-if mysql_bin and mysql_bin[-1] != '/':
-    mysql_bin = mysql_bin + '/'
+mysql_bin = ''
+mysql_env = distutils.spawn.find_executable('mysql')
+if mysql_env:
+    mysql_bin = os.path.dirname(mysql_env).replace('\\','/')
+    if mysql_bin[-1] != '/':
+        mysql_bin = mysql_bin + '/'
 if os.name == 'nt':
     exe = '.exe'
 else:
