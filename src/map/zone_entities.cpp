@@ -1102,20 +1102,21 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                 PCurrentMob->PEnmityContainer->Clear(PTrust->id);
             }
+
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
                 CCharEntity* PChar = (CCharEntity*)it->second;
                 if (distance(PChar->loc.p, PTrust->loc.p) < 50)
                 {
                     PChar->SpawnTRUSTList.erase(PTrust->id);
-                    PChar->ReloadPartyInc();
                 }
             }
 
             delete trustit->second;
             m_trustList.erase(trustit++);
         }
-        else {
+        else
+        {
             ++trustit;
         }
     }
@@ -1141,6 +1142,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             }
         }
     }
+
     if (tick > m_EffectCheckTime)
     {
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;

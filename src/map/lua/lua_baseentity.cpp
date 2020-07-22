@@ -12419,6 +12419,28 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
     return 0;
 }
 
+inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    auto PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
+
+    auto p0 = lua_tointeger(L, 1);
+    auto p1 = 0;
+    auto p2 = 711;
+
+    auto PMaster = static_cast<CCharEntity*>(PTrust->PMaster);
+    PMaster->ForParty([&](CBattleEntity* PMember)
+    {
+        auto PCharMember = static_cast<CCharEntity*>(PMember);
+        PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, p0, p1, p2));
+    });
+
+    return 0;
+}
+
 /************************************************************************
 *  Function: despawnPet()
 *  Purpose : Despawns a Pet Entity
@@ -15072,6 +15094,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTrustID),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSimpleGambit),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addFullGambit),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,trustPartyMessage),
 
     // Mob Entity-Specific
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),

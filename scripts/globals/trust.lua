@@ -149,13 +149,8 @@ end
 
 tpz.trust.message = function(mob, message_offset)
 --[[
-    local master = mob:getMaster()
     local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (mob:getTrustID() - 896) * 100
-    local party = master:getParty()
-
-    for _, member in ipairs(party) do
-        member:messageCombat(mob, trust_offset + message_offset, 0, 711)
-    end
+    mob:trustPartyMessage(trust_offset + message_offset)
 --]]
 end
 
