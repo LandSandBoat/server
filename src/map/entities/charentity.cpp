@@ -507,9 +507,8 @@ void CCharEntity::ClearTrusts()
 {
     for (auto trust : PTrusts)
     {
-        trust->PAI->Despawn();
+        RemoveTrust(trust);
     }
-    PTrusts.clear();
 }
 
 void CCharEntity::Tick(time_point tick)
