@@ -437,6 +437,11 @@ namespace charutils
             char* eminence = nullptr;
             Sql_GetData(SqlHandle, 24, &eminence, &length);
             memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
+            for(int i = 0; i < 31; i++) // Build eminence lookup map
+            {
+                uint16 record = PChar->m_eminenceLog.active[i];
+                if(record) PChar->m_eminenceCache.activemap.set(record);
+            }
 
             PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
             PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
@@ -5051,6 +5056,7 @@ namespace charutils
             if(PChar->m_eminenceLog.active[i] == 0)
             {
                 PChar->m_eminenceLog.active[i] = recordID;
+                PChar->m_eminenceCache.activemap.set(recordID);
 
                 PChar->pushPacket(new CRoeUpdatePacket(PChar));
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recordID, 0, MSGBASIC_ROE_START));
@@ -5073,6 +5079,7 @@ namespace charutils
             {
                 PChar->m_eminenceLog.active[i] = 0;
                 PChar->m_eminenceLog.progress[i] = 0;
+                PChar->m_eminenceCache.activemap.reset(recordID);
                 // Shift entries up so records are shown in retail-accurate order.
                 for(int j = i; j < 29 && PChar->m_eminenceLog.active[j+1] != 0; j++)
                 {
@@ -5089,14 +5096,7 @@ namespace charutils
 
     bool HasEminenceRecord(CCharEntity* PChar, uint16 recordID)
     {
-        for(int i = 0; i < 31; i++)
-        {
-            if(PChar->m_eminenceLog.active[i] == recordID)
-            {
-                return true;
-            }
-        }
-        return false;
+        return PChar->m_eminenceCache.activemap.test(recordID);
     }
 
     uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID)

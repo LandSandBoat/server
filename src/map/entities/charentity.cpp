@@ -136,6 +136,7 @@ CCharEntity::CCharEntity()
     memset(&m_assaultLog, 0, sizeof(m_assaultLog));
     memset(&m_campaignLog, 0, sizeof(m_campaignLog));
     memset(&m_eminenceLog, 0, sizeof(m_eminenceLog));
+    m_eminenceCache.activemap.reset();
 
     memset(&teleport, 0, sizeof(teleport));
     memset(&teleport.homepoint.menu, -1, sizeof(teleport.homepoint.menu));

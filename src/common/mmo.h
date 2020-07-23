@@ -217,6 +217,11 @@ struct eminencelog_t
     uint8 complete[512]; //bitmap of all 4096 possible records.
 };
 
+struct eminencecache_t
+{
+    std::bitset<4096> activemap;
+};
+
 struct nameflags_t
 {
 	union {
