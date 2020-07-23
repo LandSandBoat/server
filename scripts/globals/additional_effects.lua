@@ -55,7 +55,7 @@ tpz.addEffect.levelCorrection = function(dLV, aLV, chance)
     return chance
 end
 
-tpz.addEffect.statusAttack = function(addStatus)
+tpz.addEffect.statusAttack = function(addStatus, defender)
     local effectList =
     {
         [tpz.effect.DEFENSE_DOWN] = {tick = 0, strip = tpz.effect.DEFENSE_BOOST},
@@ -64,9 +64,9 @@ tpz.addEffect.statusAttack = function(addStatus)
         [tpz.effect.POISON]       = {tick = 3, strip = nil},
         [tpz.effect.CHOKE]        = {tick = 3, strip = nil},
     }
-    local delEffect = effectList[addStatus]
-    defender:delStatusEffect(delEffect.strip)
-    return tick
+    local effect = effectList[addStatus]
+    defender:delStatusEffect(effect.strip)
+    return effect.tick
 end
 
 tpz.addEffect.calcDamage = function(attacker, element, defender, damage)
@@ -91,7 +91,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
     local power = item:getMod(tpz.mod.ITEM_ADDEFFECT_POWER)
     local duration = item:getMod(tpz.mod.ITEM_ADDEFFECT_DURATION)
     local msgID = 0
-    local msgValue = 0
+    local msgParam = 0
     local procType =
     {
         -- These are arbitrary, make up new ones as needed.
@@ -118,16 +118,16 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if element then
             damage = tpz.addEffect.calcRangeBonus(attacker, defender, element, damage)
         end
-        chance = ltpz.addEffect.evelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+        chance = tpz.addEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
     --------------------------------------
 
     if addType == procType.NORMAL then
         if addStatus and addStatus > 0 then
-            local tick = tpz.addEffect.statusAttack(addStatus)
+            local tick = tpz.addEffect.statusAttack(addStatus, defender)
             msgID = tpz.msg.basic.ADD_EFFECT_STATUS
             defender:addStatusEffect(addStatus, power, tick, duration)
-            msgValue = addStatus
+            msgParam = addStatus
         end
 
         if damage > 0 then
@@ -140,12 +140,12 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                     damage = 0
                 end
             else
-                msgID = tpz.msg.basic.ADD_EFFECT_damage
+                msgID = tpz.msg.basic.ADD_EFFECT_DMG
                 if damage < 0 then
                     msgID = tpz.msg.basic.ADD_EFFECT_HEAL
                 end
             end
-            msgValue = damage
+            msgParam = damage
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
@@ -157,7 +157,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_HP_HEAL)
         -- We're faking it, so return zeros!
         msgID = 0
-        msgValue = 0
+        msgParam = 0
 
     elseif addType == procType.MP_HEAL then -- Mjollnir does this
         local MP = 10 -- need actual calculation here!
@@ -166,7 +166,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_MP_HEAL)
         -- We're faking it, so return zeros!
         msgID = 0
-        msgValue = 0
+        msgParam = 0
 
     elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
         damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
@@ -175,7 +175,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         end
 
         msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-        msgValue = damage
+        msgParam = damage
         defender:addHP(-damage)
         attacker:addHP(damage)
 
@@ -186,7 +186,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             damage = defender:getMP()
         end
         msgID = tpz.msg.basic.ADD_EFFECT_MP_DRAIN
-        msgValue = damage
+        msgParam = damage
         defender:addMP(-damage)
         attacker:addMP(damage)
 
@@ -197,7 +197,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             damage = defender:getTP()
         end
         msgID = tpz.msg.basic.ADD_EFFECT_TP_DRAIN
-        msgValue = damage
+        msgParam = damage
         defender:addTP(-damage)
         attacker:addTP(damage)
 
@@ -208,14 +208,14 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             return 0, 0, 0
         else
             msgID = tpz.msg.basic.ADD_EFFECT_DISPEL
-            msgValue = dispel
+            msgParam = dispel
         end
 
     elseif addType == procType.SELF_BUFF then
         if addStatus == tpz.effect.TELEPORT then -- WARP
             attacker:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 1)
             msgID = tpz.msg.basic.ADD_EFFECT_WARP
-            msgValue = 0
+            msgParam = 0
         elseif addStatus == tpz.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
             if attacker:hasStatusEffect(tpz.effect.BLINK) or attacker:hasStatusEffect(tpz.effect.UTSUSEMI) then
@@ -223,15 +223,15 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             else
                 attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
                 -- We're faking it, so return zeros!
-                msgID = 0
-                msgValue = 0
+                msgID = 166
+                msgParam = tpz.effect.BLINK
             end
         else
             -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
             attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
             -- We're faking it, so return zeros!
-            msgID = 0
-            msgValue = 0
+            msgID = 166
+            msgParam = tpz.effect.HASTE
         end
 
     elseif addType == procType.DEATH then
@@ -240,17 +240,19 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
             return 0, 0, 0 -- NMs immune, so return out
         end
         msgID = tpz.msg.basic.ADD_EFFECT_STATUS
-        msgValue = tpz.effect.KO
+        msgParam = tpz.effect.KO
         defender:setHP(0)
     end
 
-    --[[ Why did I do this??
-    if msgValue == nil then
-        return 0,0,0
+    --[[
+    if msgID == nil then
+        print("Additional effect has a nil msgID !!")
+    elseif msgParam == nil then
+        print("Additional effect has a nil msgParam !!")
     end
+    print("subEffect: "..subEffect.." msgID: "..msgID.." msgParam: "..msgParam)
     ]]
-
-    return subEffect, msgID, msgValue
+    return subEffect, msgID, msgParam
 end
 
 function additionalEffectSpikes(attacker, defender, damage, spikeEffect, power, chance)
