@@ -21,7 +21,6 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         CONQUEST_BASE                  = 7066, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET         = 7225, -- You can't fish here.
         PICKPOCKET_AVANDALE            = 7379, -- What? A pickpocket? Well, I did see a strange woman run to Northern San d'Oria. But I didn't see her steal anything.
-        FLYER_REFUSED                  = 7557, -- This person isn't interested.
         FLYER_ALREADY                  = 7558, -- This person already has a flyer.
         FLYER_ACCEPTED                 = 7559, -- Your flyer is accepted!
         PICKPOCKET_COMITTIE            = 7597, -- A pickpocket? No one like that around here.

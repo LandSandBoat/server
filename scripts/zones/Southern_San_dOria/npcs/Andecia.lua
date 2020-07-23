@@ -4,38 +4,25 @@
 -- Starts and Finishes Quest: Grave Concerns
 -- !pos 167 0 45 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-
     if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
             player:startEvent(624);
         end
     end
-
-        -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE);
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
-        end
-    end
-
 end;
 
 function onTrigger(player,npc)
 
-    Tomb = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GRAVE_CONCERNS);
-    WellWater = player:hasItem(567); -- Well Water
-    Waterskin = player:hasItem(547); -- Tomb Waterskin
+    local Tomb = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GRAVE_CONCERNS);
+    local WellWater = player:hasItem(567); -- Well Water
+    local Waterskin = player:hasItem(547); -- Tomb Waterskin
 
     if (Tomb == QUEST_AVAILABLE) then
         player:startEvent(541);

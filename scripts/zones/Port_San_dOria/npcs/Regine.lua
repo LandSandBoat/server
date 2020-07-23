@@ -19,8 +19,6 @@ function onTrade(player,npc,trade)
         if (npcUtil.giveItem(player, 532)) then
             player:confirmTrade();
         end
-    elseif (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED);
 
     -- THE BRUGAIRE CONSORTIUM
     elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 593)) then
@@ -30,12 +28,9 @@ end;
 
 function onTrigger(player,npc)
     local ffr = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-    local ffrStat = player:getCharVar("FFR")
 
     -- FLYERS FOR REGINE
-    if ffr == QUEST_AVAILABLE and ffrStat == 0 then -- pre-quest cutscene
-        player:startEvent(601)
-    elseif ffr == QUEST_AVAILABLE and ffrStat == 1 then -- ready to accept quest
+    if ffr == QUEST_AVAILABLE then -- ready to accept quest
         player:startEvent(510, 2)
     elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
         player:startEvent(510, 3)
@@ -53,12 +48,9 @@ end;
 
 function onEventFinish(player,csid,option)
     -- FLYERS FOR REGINE
-    if csid == 601 then
-        player:setCharVar("FFR", 1)
-    elseif csid == 510 and option == 2 then
+    if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, {{532,12}, {532,3}}) then
             player:addQuest(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-            player:setCharVar("FFR", 0)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(

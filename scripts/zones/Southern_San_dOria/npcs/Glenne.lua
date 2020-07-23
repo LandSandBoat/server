@@ -4,11 +4,10 @@
 -- Starts and Finishes Quest: A Sentry's Peril
 -- !pos -122 -2 15 230
 -------------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+-------------------------------------
 
 require("scripts/globals/pathfind");
 
@@ -39,13 +38,7 @@ function onPath(npc)
 end;
 
 function onTrade(player,npc,trade)
-
-    local count = trade:getItemCount();
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
-        trade:hasItemQty(532,1) and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
-
-    elseif (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL) == QUEST_ACCEPTED and
+    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL) == QUEST_ACCEPTED and
         trade:hasItemQty(601,1) and count == 1) then
             player:startEvent(513);
             npc:wait();
@@ -76,8 +69,6 @@ function onTrigger(player,npc)
 end;
 
 function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid);
-    -- printf("RESULT2: %u",option);
 end;
 
 function onEventFinish(player,csid,option,npc)
