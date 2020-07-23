@@ -285,6 +285,7 @@ enum class Mod
     AMNESIARES                = 253, // Enhances "Resist Amnesia" effect
     LULLABYRES                = 254, // Enhances "Resist Lullaby" effect
     DEATHRES                  = 255, // Used by gear and ATMA that give resistance to instance KO
+    STATUSRES                 = 958, // "Resistance to All Status Ailments"
 
     PARALYZE                  = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE             = 258, // Augments Mijin Gakure
