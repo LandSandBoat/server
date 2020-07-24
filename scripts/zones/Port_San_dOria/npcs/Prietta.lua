@@ -8,18 +8,18 @@ require("scripts/globals/quests");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1 and player:getCharVar("tradePrietta") == 0) then
-            player:messageSpecial(ID.text.PRIETTA_DIALOG);
+    -- FLYERS FOR REGINE
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+        if player:getCharVar("tradePrietta") == 0 then
+            player:messageSpecial(ID.text.FLYER_ACCEPTED)
+            player:messageSpecial(ID.text.FFR_PRIETTA)
             player:addCharVar("FFR", -1)
-            player:setCharVar("tradePrietta",1);
-            player:messageSpecial(ID.text.FLYER_ACCEPTED);
-            player:messageSpecial(ID.text.FLYERS_HANDED,17 - player:getCharVar("FFR"));
-            player:tradeComplete();
-            elseif (player:getCharVar("tradePrietta") ==1) then
-                player:messageSpecial(ID.text.FLYER_ALREADY);
-            end
+            player:setCharVar("tradePrietta", 1)
+            player:confirmTrade()
+        else
+            player:messageSpecial(ID.text.FLYER_ALREADY)
         end
+    end
 end;
 
 function onTrigger(player,npc)

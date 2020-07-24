@@ -655,7 +655,8 @@ public:
 
     uint8			m_ModelSize;			    // размер модели сущности, для расчета дальности физической атаки
     ECOSYSTEM		m_EcoSystem;			    // эко-система сущности
-    CItemEquipment*	    m_Weapons[4];			    // четыре основных ячейки, используемыж для хранения оружия (только оружия)
+    CItemEquipment* m_Weapons[4];               // четыре основных ячейки, используемыж для хранения оружия (только оружия)
+    bool            m_dualWield;                // True/false depending on if the entity is using two weapons
 
     TraitList_t     TraitList;                  // список постянно активных способностей в виде указателей
 

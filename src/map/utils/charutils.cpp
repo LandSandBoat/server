@@ -1593,6 +1593,7 @@ namespace charutils
                 {
                     CheckUnarmedWeapon(PChar);
                 }
+                PChar->m_dualWield = false;
             }
             PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
             PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
@@ -1862,6 +1863,7 @@ namespace charutils
                                     return false;
                                 }
                                 PChar->m_Weapons[SLOT_SUB] = (CItemWeapon*)PItem;
+                                PChar->m_dualWield = true;
                             }
                             break;
                             default:
@@ -2375,30 +2377,30 @@ namespace charutils
                 {
                     if (PetID == 8)
                     {
-                        if (PAbility->getID() >= 496 && PAbility->getID() < 505)
+                        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_SOOTHING_RUBY)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID >= 9 && PetID <= 15)
                     {
-                        if (PAbility->getID() >= (496 + ((PetID - 8) * 16)) && PAbility->getID() < (496 + ((PetID - 7) * 16)))
+                        if (PAbility->getID() >= (ABILITY_HEALING_RUBY + ((PetID - 8) * 16)) && PAbility->getID() < (ABILITY_HEALING_RUBY + ((PetID - 7) * 16)))
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID == 16)
                     {
-                        if (PAbility->getID() >= 640 && PAbility->getID() <= 656)
+                        if (PAbility->getID() >= ABILITY_CAMISADO && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID == 20)
                     {
-                        if (PAbility->getID() >= 505 && PAbility->getID() <= 512)
+                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                 }
@@ -2409,7 +2411,7 @@ namespace charutils
             auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
             for (auto&& abilityid : skillList)
             {
-                addPetAbility(PChar, abilityid - 496);
+                addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
             }
         }
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -2440,7 +2442,7 @@ namespace charutils
 
             if (PChar->GetMLevel() >= PAbility->getLevel())
             {
-                if (PAbility->getID() < 496 && PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility))
+                if (PAbility->getID() < ABILITY_HEALING_RUBY && PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility))
                 {
                     addAbility(PChar, PAbility->getID());
                     Charge_t* charge = ability::GetCharge(PChar, PAbility->getRecastId());
@@ -2479,7 +2481,7 @@ namespace charutils
                     continue;
                 }
 
-                if (PAbility->getLevel() != 0 && PAbility->getID() < 496)
+                if (PAbility->getLevel() != 0 && PAbility->getID() < ABILITY_HEALING_RUBY)
                 {
                     if (PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility) && !(PAbility->getAddType() & ADDTYPE_MAIN_ONLY))
                     {

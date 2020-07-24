@@ -70,7 +70,7 @@ struct map_config_t
     std::string server_message;
 
     uint32 max_time_lastupdate;       // max interval wait of last update player char
-    int32  vanadiel_time_offset;      // смещение игрового времени относительно реального времени
+    int32  vanadiel_time_epoch;      // current timestamp - vanadiel_time_epoch = vana'diel time
     int32  lightluggage_block;        // если значение отлично от нуля, то персонажи с lightluggage будут удаляться с сервера автоматически
 
     uint16 ah_base_fee_single;        // Base AH fee for single items

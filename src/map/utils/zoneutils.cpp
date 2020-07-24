@@ -268,7 +268,9 @@ void LoadNPCList()
         ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid \
         WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
 
-    int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, inet_ntoa(map_ip), map_port);
+    char address[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
+    int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -360,7 +362,9 @@ void LoadMOBList()
             WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
             AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
-    int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, inet_ntoa(map_ip), map_port);
+    char address[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
+    int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -543,7 +547,7 @@ void LoadMOBList()
         WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
-    ret = Sql_Query(SqlHandle, PetQuery, map_ip.s_addr, inet_ntoa(map_ip), map_port);
+    ret = Sql_Query(SqlHandle, PetQuery, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -627,7 +631,9 @@ void LoadZoneList()
     std::vector<uint16> zones;
     const char* query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
 
-    int ret = Sql_Query(SqlHandle, query, map_ip.s_addr, inet_ntoa(map_ip), map_port);
+    char address[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
+    int ret = Sql_Query(SqlHandle, query, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -1016,7 +1022,9 @@ void FreeZoneList()
     {
         delete PZone.second;
     }
+    g_PZoneList.clear();
     delete g_PTrigger;
+    g_PTrigger = nullptr;
 }
 
 void ForEachZone(std::function<void(CZone*)> func)
@@ -1036,7 +1044,7 @@ uint64 GetZoneIPP(uint16 zoneID)
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
-        ipp = inet_addr((const char*)Sql_GetData(SqlHandle, 0));
+        inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);
         uint64 port = Sql_GetUIntData(SqlHandle, 1);
         ipp |= (port << 32);
     }

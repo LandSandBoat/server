@@ -8,9 +8,9 @@ g_mixins = g_mixins or {}
 
 g_mixins.abyssea_nm = function(mob)
     mob:addListener("ENGAGE", "ABYSSEA_WEAKNESS_SET", function(mob)
-        mob:setLocalVar("abyssea_magic_weak", getNewYellowWeakness(mob))
-        mob:setLocalVar("abyssea_ele_ws_weak", getNewRedWeakness(mob))
-        mob:setLocalVar("abyssea_phys_ws_weak", getNewBlueWeakness(mob))
+        mob:setLocalVar("abyssea_magic_weak", tpz.abyssea.getNewYellowWeakness(mob))
+        mob:setLocalVar("abyssea_ele_ws_weak", tpz.abyssea.getNewRedWeakness(mob))
+        mob:setLocalVar("abyssea_phys_ws_weak", tpz.abyssea.getNewBlueWeakness(mob))
         mob:setLocalVar("abyssea_blue_proc_count", 0)
         mob:setLocalVar("abyssea_red_proc_count", 0)
         mob:setLocalVar("abyssea_yellow_proc_count", 0)

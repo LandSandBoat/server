@@ -82,8 +82,7 @@ local outposts =
 }
 
 local function hasOutpost(player, region)
-    local region = region + 5
-    local hasOP = player:hasTeleport(player:getNation(), region)
+    local hasOP = player:hasTeleport(player:getNation(), region + 5)
     if not hasOP then
         if UNLOCK_OUTPOST_WARPS == 2 then
             hasOP = true

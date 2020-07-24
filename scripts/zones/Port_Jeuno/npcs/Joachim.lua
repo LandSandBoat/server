@@ -36,8 +36,8 @@ end;
 function onTrigger(player,npc)
 -- TODO: logic to increase traverser stone count...Based on time between 2 vars?
     local StonesStock = player:getCurrency("traverser_stones");
-    local StonesKI = getTravStonesTotal(player);
-    local MaxKI = getMaxTravStones(player);
+    local StonesKI = tpz.abyssea.getTravStonesTotal(player);
+    local MaxKI = tpz.abyssea.getMaxTravStones(player);
     local isCap = 0;
     if (StonesKI >= MaxKI) then
         isCap = 1;
@@ -70,7 +70,7 @@ function onEventFinish(player,csid,option)
         player:addQuest(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH);
         player:setCharVar("1stTimeAbyssea",0);
     elseif (csid == 328 and option == 6) then
-        local StonesKI = getTravStonesTotal(player);
+        local StonesKI = tpz.abyssea.getTravStonesTotal(player);
         if (StonesKI == 5) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.TRAVERSER_STONE6);
             player:addKeyItem(tpz.ki.TRAVERSER_STONE6)

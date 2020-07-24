@@ -3,6 +3,7 @@
 --   NM: Morille Mortelle
 -- !pos 59.788 -0.939 22.316 171
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -20,4 +21,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 515)
 end;

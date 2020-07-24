@@ -14,6 +14,7 @@
 #ifdef WIN32
     #define FD_SETSIZE 1000
 	#include <winsock2.h>
+	#include <WS2tcpip.h>
 	typedef long in_addr_t;
 #else
 	#include <sys/types.h>
@@ -161,21 +162,13 @@ void socket_init();
 void socket_final();
 
 // hostname/ip conversion functions
-uint32 host2ip(const char* hostname);
-
-const char* ip2str(uint32 ip, char ip_str[16]);
+std::string ip2str(uint32 ip);
 
 uint32 str2ip(const char* ip_str);
 
 #define CONVIP(ip) ((ip)>>24)&0xFF,((ip)>>16)&0xFF,((ip)>>8)&0xFF,((ip)>>0)&0xFF
 
 uint16 ntows(uint16 netshort);
-
-int socket_getips(uint32* ips, int max);
-
-extern uint32 g_addr_[16];   // ip addresses of local host (host byte order)
-
-extern int32 naddr_;   // # of ip addresses
 
 /************************************************/
 /*

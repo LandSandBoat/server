@@ -278,15 +278,6 @@ void CalculateStats(CMobEntity * PMob)
 
 
         PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
-
-        if(isNM)
-        {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * 2.0f);
-            if(mLvl > 75){
-                PMob->health.maxhp = (int32)(PMob->health.maxhp * 2.5f);
-            }
-        }
-
     }
     else
     {
@@ -351,14 +342,6 @@ void CalculateStats(CMobEntity * PMob)
         if(PMob->MPmodifier == 0)
         {
             PMob->health.maxmp = (int16)(18.2 * pow(mLvl,1.1075) * scale) + 10;
-            if(isNM)
-            {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * 1.5f);
-                if(mLvl>75)
-                {
-                    PMob->health.maxmp = (int32)(PMob->health.maxmp * 1.5f);
-                }
-            }
         }
         else
         {
@@ -386,6 +369,12 @@ void CalculateStats(CMobEntity * PMob)
     //reduce weapon delay of MNK
     if(PMob->GetMJob()==JOB_MNK){
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
+    }
+
+    // Deprecate MOBMOD_DUAL_WIELD later, replace if check with value from DB
+    if (PMob->getMobMod(MOBMOD_DUAL_WIELD))
+    {
+        PMob->m_dualWield = true;
     }
 
     uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
@@ -443,13 +432,13 @@ void CalculateStats(CMobEntity * PMob)
 
     if(isNM)
     {
-        PMob->stats.STR = (uint16)(PMob->stats.STR * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.DEX = (uint16)(PMob->stats.DEX * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.VIT = (uint16)(PMob->stats.VIT * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.AGI = (uint16)(PMob->stats.AGI * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.INT = (uint16)(PMob->stats.INT * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.MND = (uint16)(PMob->stats.MND * 1.5f * map_config.nm_stat_multiplier);
-        PMob->stats.CHR = (uint16)(PMob->stats.CHR * 1.5f * map_config.nm_stat_multiplier);
+        PMob->stats.STR = (uint16)(PMob->stats.STR * map_config.nm_stat_multiplier);
+        PMob->stats.DEX = (uint16)(PMob->stats.DEX * map_config.nm_stat_multiplier);
+        PMob->stats.VIT = (uint16)(PMob->stats.VIT * map_config.nm_stat_multiplier);
+        PMob->stats.AGI = (uint16)(PMob->stats.AGI * map_config.nm_stat_multiplier);
+        PMob->stats.INT = (uint16)(PMob->stats.INT * map_config.nm_stat_multiplier);
+        PMob->stats.MND = (uint16)(PMob->stats.MND * map_config.nm_stat_multiplier);
+        PMob->stats.CHR = (uint16)(PMob->stats.CHR * map_config.nm_stat_multiplier);
     }
     else
     {
@@ -855,11 +844,6 @@ void SetupNMMob(CMobEntity* PMob)
 
     if(mLvl >= 25)
     {
-        if(mJob == JOB_NIN)
-        {
-            PMob->setMobMod(MOBMOD_DUAL_WIELD, 1);
-        }
-
         if(mJob == JOB_WHM)
         {
             // whm nms have stronger regen effect

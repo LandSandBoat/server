@@ -5,9 +5,9 @@
 -----------------------------------------
 
 function onItemCheck(target)
-    return target:canLearnAbility(94)
+    return target:canLearnAbility(tpz.jobAbility.NINJA_ROLL)
 end
 
 function onItemUse(target)
-    target:addLearnedAbility(94)
+    target:addLearnedAbility(tpz.jobAbility.NINJA_ROLL)
 end

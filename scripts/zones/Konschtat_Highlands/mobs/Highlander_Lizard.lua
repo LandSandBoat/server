@@ -2,6 +2,7 @@
 -- Area: Konschtat Highlands
 --   NM: Highlander Lizard
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 require("scripts/quests/tutorial")
@@ -17,6 +18,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 206)
     -- I think he still counts the FoV pages? Most NM's do not though.
     tpz.regime.checkRegime(player, mob, 20, 2, tpz.regime.type.FIELDS)
     tpz.regime.checkRegime(player, mob, 82, 2, tpz.regime.type.FIELDS)
