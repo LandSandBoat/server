@@ -15,13 +15,12 @@ function onTrade(player, npc, trade)
     -- FLYERS FOR REGINE
     if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         if player:getCharVar("tradeMiene") == 0 then
-            player:messageSpecial(ID.text.MIENE_DIALOG)
             player:messageSpecial(ID.text.FLYER_ACCEPTED)
-            player:messageSpecial(ID.text.FLYERS_HANDED, 17 - player:getCharVar("FFR"))
+            player:messageSpecial(ID.text.FFR_MIENE)
             player:addCharVar("FFR", -1)
             player:setCharVar("tradeMiene", 1)
             player:confirmTrade()
-        elseif player:getCharVar("tradeMiene") == 1 then
+        else
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
