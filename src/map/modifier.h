@@ -803,6 +803,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     // SPARE = 964, // stuff
     // SPARE = 965, // stuff
+    // SPARE = 966, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it
