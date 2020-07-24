@@ -75,7 +75,7 @@ tpz.jobAbility =
     REWARD             = 78,
     COVER              = 79,
     SPIRIT_LINK        = 80,
-    ENRAGE             - 81,
+    ENRAGE             = 81,
     CHI_BLAST          = 82,
     CONVERT            = 83,
     ACCOMPLICE         = 84,
