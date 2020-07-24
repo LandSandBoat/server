@@ -45,10 +45,10 @@ function onTrigger(player,npc)
 
     vHour = math.floor( vMinutes / 60 + 0.5)
 
-    local message = ON_WAY_TO_SELBINA
+    local message = ID.text.ON_WAY_TO_SELBINA
 
     if vMinutes <= 30 then
-        message = ARRIVING_SOON_SELBINA
+        message = ID.text.ARRIVING_SOON_SELBINA
     elseif vMinutes < 60 then
         vHour = 0
     end
@@ -57,7 +57,7 @@ function onTrigger(player,npc)
         vHour = 7
     end
 
-    player:messageSpecial( ID.text.message, math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60), vHour)
+    player:messageSpecial(message, math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60), vHour)
 end
 
 function onEventUpdate(player,csid,option)

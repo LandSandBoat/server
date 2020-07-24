@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Patripatan
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -17,5 +18,6 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 269)
     tpz.regime.checkRegime(player, mob, 63, 1, tpz.regime.type.FIELDS)
 end

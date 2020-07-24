@@ -638,6 +638,7 @@ INSERT INTO `status_effects` VALUES (609,'negate_curse',289,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (610,'negate_charm',289,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (611,'magic_evasion_boost_ii',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (612,'colure_active',9437440,0,0,3,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (623,'rampart',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (768,'abyssea_str',256,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (769,'abyssea_dex',256,0,0,0,0,0,6,0,0);
 INSERT INTO `status_effects` VALUES (770,'abyssea_vit',256,0,0,0,0,0,2,0,0);
@@ -685,4 +686,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-16 17:31:42
+-- Dump completed on 2020-07-24 15:31:59

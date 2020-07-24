@@ -5,9 +5,9 @@
 -----------------------------------------
 
 function onItemCheck(target)
-    return target:canLearnAbility(97)
+    return target:canLearnAbility(tpz.jobAbility.MAGUSS_ROLL)
 end
 
 function onItemUse(target)
-    target:addLearnedAbility(97)
+    target:addLearnedAbility(tpz.jobAbility.MAGUSS_ROLL)
 end

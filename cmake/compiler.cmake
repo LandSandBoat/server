@@ -7,7 +7,7 @@
 add_definitions(-DFMT_HEADER_ONLY)
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wfatal-errors -fsigned-char")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wno-class-memaccess -Wno-restrict -Wno-format-overflow -Wno-sizeof-pointer-memaccess -Wno-maybe-uninitialized -Wno-stringop-truncation -Wno-sign-compare -fsigned-char")
 else()
     # fix /std:latest once VS2017 CMAKE supports CXX_STANDARD
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest /W3 /WX")

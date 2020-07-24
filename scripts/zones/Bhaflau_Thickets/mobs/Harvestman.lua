@@ -3,6 +3,7 @@
 --   NM: Harvestman
 -- !pos 398.130 -10.675 179.169 52
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -15,6 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 451)
 end;
 
 function onMobDespawn(mob)
