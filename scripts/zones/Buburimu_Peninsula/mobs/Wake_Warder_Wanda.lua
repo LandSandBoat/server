@@ -2,6 +2,7 @@
 -- Area: Buburimu Peninsula
 --   NM: Wake Warder Wanda
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -18,6 +19,7 @@ function onMobDisengage(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 260)
 end
 
 function onMobDespawn(mob)

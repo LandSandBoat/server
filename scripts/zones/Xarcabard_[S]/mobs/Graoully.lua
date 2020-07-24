@@ -2,6 +2,7 @@
 -- Area: Xarcabard [S]
 --   NM: Graoully
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -14,4 +15,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 542)
 end

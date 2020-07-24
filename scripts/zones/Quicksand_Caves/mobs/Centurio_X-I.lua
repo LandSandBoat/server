@@ -2,6 +2,7 @@
 -- Area: Quicksand Caves
 --   NM: Centurio X-I
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")};
 require("scripts/globals/status");
 -----------------------------------
@@ -18,4 +19,5 @@ function onMobSpawn(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 426)
 end;

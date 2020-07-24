@@ -3,6 +3,7 @@
 --   NM: Mahishasura
 -- !pos 206.510 -16.320 357.724 52
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -15,4 +16,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 454)
 end

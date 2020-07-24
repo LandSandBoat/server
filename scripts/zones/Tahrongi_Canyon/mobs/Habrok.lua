@@ -2,6 +2,7 @@
 -- Area: Tahrongi Canyon
 --  Mob: Habrok
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/quests/tutorial")
 
 function onMobInitialize(mob)
@@ -9,6 +10,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 258)
     tpz.tutorial.onMobDeath(player)
 end
 

@@ -1,9 +1,11 @@
 -----------------------------------
 -- Area: Ranguemont Pass
---  Mob: Mucoid Mass
+--   NM: Mucoid Mass
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 345)
 end;
 
 function onMobDespawn(mob)

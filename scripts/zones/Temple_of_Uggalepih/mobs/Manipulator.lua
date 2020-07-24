@@ -3,6 +3,7 @@
 --   NM: Manipulator
 -- Note: Paths around the 2 staircases
 -----------------------------------
+require("scripts/globals/hunts")
 
 local path =
 {
@@ -77,6 +78,7 @@ function onMobRoam(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 383)
 end
 
 function onMobDespawn(mob)

@@ -8,11 +8,11 @@ require("scripts/globals/abyssea")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    abysseaOnTrade(player,npc,trade)
+    tpz.abyssea.qmOnTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    abysseaOnTrigger(player,npc)
+    tpz.abyssea.qmOnTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)

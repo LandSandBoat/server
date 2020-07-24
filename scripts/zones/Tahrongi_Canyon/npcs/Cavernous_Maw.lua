@@ -19,7 +19,7 @@ function onTrigger(player, npc)
         if
             player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
             player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE) == QUEST_AVAILABLE and
-            getTravStonesTotal(player) >= 1
+            tpz.abyssea.getTravStonesTotal(player) >= 1
         then
             player:startEvent(38)
         else
