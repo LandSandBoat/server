@@ -1954,7 +1954,7 @@ INSERT INTO `mob_groups` VALUES (94,2864,41,'Nightmare_Roc',600,0,2798,5000,0,95
 INSERT INTO `mob_groups` VALUES (95,2869,41,'Nightmare_Stirge',600,0,1804,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (96,6322,41,'Nightmare_Diremite',600,0,1800,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (97,2853,41,'Nightmare_Gaylas',600,0,2798,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (98,2856,41,'Nightmare_Kraken',600,0,2798,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (98,6376,41,'Nightmare_Kraken',600,0,2798,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (99,2868,41,'Nightmare_Snoll',600,0,1804,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (100,4135,41,'Vanguard_Amputator',600,0,2546,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (101,4195,41,'Vanguard_Vexer',600,0,2546,4000,0,93,95,0);
