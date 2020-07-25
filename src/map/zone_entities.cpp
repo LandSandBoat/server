@@ -1087,6 +1087,14 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     while (trustit != m_trustList.end())
     {
         CTrustEntity* PTrust = (CTrustEntity*)trustit->second;
+        PTrust->PRecastContainer->Check();
+        PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
+        if (tick > m_EffectCheckTime)
+        {
+            PTrust->StatusEffectContainer->TickRegen(tick);
+            PTrust->StatusEffectContainer->TickEffects(tick);
+        }
+        PTrust->PAI->Tick(tick);
         if (PTrust->status == STATUS_DISAPPEAR)
         {
             for (auto PMobIt : m_mobList)
@@ -1109,15 +1117,6 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
         else
         {
-            PTrust->PRecastContainer->Check();
-            PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
-            if (tick > m_EffectCheckTime)
-            {
-                PTrust->StatusEffectContainer->TickRegen(tick);
-                PTrust->StatusEffectContainer->TickEffects(tick);
-            }
-            PTrust->PAI->Tick(tick);
-
             ++trustit;
         }
     }
