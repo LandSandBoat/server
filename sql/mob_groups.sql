@@ -3433,7 +3433,7 @@ INSERT INTO `mob_groups` VALUES (33,2562,77,'Marid',0,128,1618,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (34,937,77,'Death_Cap',0,128,581,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (35,6341,77,'Puktrap',0,128,852,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (36,2394,77,'Leshy',0,128,503,0,0,66,68,0);
-INSERT INTO `mob_groups` VALUES (37,106,77,'Ameretat',0,128,64,0,0,66,68,0);
+INSERT INTO `mob_groups` VALUES (37,6349,77,'Ameretat',0,128,64,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (38,3456,77,'Sand_Lizard',0,128,221,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (39,962,77,'Deinonychus',0,128,600,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (40,577,77,'Bull_Bugard',0,128,242,0,0,66,68,0);
@@ -4387,7 +4387,7 @@ INSERT INTO `mob_groups` VALUES (34,6282,83,'Orcish_Gladiator',330,0,1910,0,0,71
 INSERT INTO `mob_groups` VALUES (35,5558,83,'Orcish_Hexspinner',330,0,1910,0,0,71,74,0);
 INSERT INTO `mob_groups` VALUES (36,6286,83,'Orcish_Zerker',330,0,1871,0,0,71,74,0);
 INSERT INTO `mob_groups` VALUES (37,6280,83,'Orcish_Footsoldier',330,0,1906,0,0,71,74,0);
-INSERT INTO `mob_groups` VALUES (38,978,83,'Demonic_Rose',330,0,2924,0,0,74,78,0);
+INSERT INTO `mob_groups` VALUES (38,6350,83,'Demonic_Rose',330,0,2924,0,0,74,78,0);
 INSERT INTO `mob_groups` VALUES (39,5171,83,'JudgmentalJulika',9000,0,0,19000,0,82,82,0);
 INSERT INTO `mob_groups` VALUES (40,3406,83,'Royal_Leech',330,0,2126,0,0,35,37,0);
 INSERT INTO `mob_groups` VALUES (41,6327,83,'Dragonfly',330,0,142,0,0,58,60,0);
@@ -13517,7 +13517,7 @@ INSERT INTO `mob_groups` VALUES (32,5639,272,'Irascible_Tarichuk',0,0,0,0,0,120,
 INSERT INTO `mob_groups` VALUES (33,4886,272,'Craklaw',0,0,0,0,0,123,125,0);
 INSERT INTO `mob_groups` VALUES (34,5449,272,'Slimeskin_Obdella',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (35,5448,272,'Bilespouting_Acuex',0,0,0,0,0,120,123,0);
-INSERT INTO `mob_groups` VALUES (36,2452,272,'Lunantishee',0,0,0,0,0,125,125,0);
+INSERT INTO `mob_groups` VALUES (36,6351,272,'Dwende',0,0,0,0,0,125,125,0);
 INSERT INTO `mob_groups` VALUES (37,4760,272,'Umbril_Shadewarrior',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (38,5250,272,'Dullahan',0,0,0,0,0,120,123,0);
 INSERT INTO `mob_groups` VALUES (39,4981,272,'Ripsaw_Jagil',0,0,0,0,0,128,130,0);
