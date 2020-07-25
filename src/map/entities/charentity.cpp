@@ -494,7 +494,14 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 
     if (PParty != nullptr)
     {
-        PParty->ReloadParty();
+        if (PTrusts.empty() && PParty->members.size() == 1)
+        {
+            PParty->DisbandParty();
+        }
+        else
+        {
+            PParty->ReloadParty();
+        }
     }
 }
 

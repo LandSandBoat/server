@@ -12432,11 +12432,14 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
     auto p2 = 711;
 
     auto PMaster = static_cast<CCharEntity*>(PTrust->PMaster);
-    PMaster->ForParty([&](CBattleEntity* PMember)
+    if (PMaster)
     {
-        auto PCharMember = static_cast<CCharEntity*>(PMember);
-        PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, p0, p1, p2));
-    });
+        PMaster->ForParty([&](CBattleEntity* PMember)
+        {
+            auto PCharMember = static_cast<CCharEntity*>(PMember);
+            PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, p0, p1, p2));
+        });
+    }
 
     return 0;
 }

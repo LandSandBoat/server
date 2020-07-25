@@ -1109,6 +1109,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 if (distance(PChar->loc.p, PTrust->loc.p) < 50)
                 {
                     PChar->SpawnTRUSTList.erase(PTrust->id);
+                    PChar->ReloadPartyInc();
                 }
             }
 

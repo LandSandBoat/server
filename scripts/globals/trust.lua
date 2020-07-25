@@ -148,10 +148,8 @@ tpz.trust.spawn = function(caster, spell)
 end
 
 tpz.trust.message = function(mob, message_offset)
---[[
     local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (mob:getTrustID() - 896) * 100
     mob:trustPartyMessage(trust_offset + message_offset)
---]]
 end
 
 tpz.trust.teamworkMessage = function(mob, teamwork_messages)

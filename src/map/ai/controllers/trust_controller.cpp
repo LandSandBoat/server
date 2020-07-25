@@ -47,13 +47,13 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
+    POwner->status = STATUS_DISAPPEAR;
     m_LastTopEnmity = nullptr;
 }
 
 void CTrustController::Despawn()
 {
     POwner->PMaster = nullptr;
-    POwner->status = STATUS_DISAPPEAR;
     POwner->animation = ANIMATION_DESPAWN;
     CMobController::Despawn();
 }
