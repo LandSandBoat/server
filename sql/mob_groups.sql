@@ -5385,7 +5385,6 @@ INSERT INTO `mob_groups` VALUES (10977,3276,89,'Quadav_Transporter',240,0,0,500,
 INSERT INTO `mob_groups` VALUES (10978,3274,89,'Quadav_Guard',240,0,0,2500,9999,65,68,0);
 INSERT INTO `mob_groups` VALUES (10979,1793,89,'Grauberg_Hippogryph',240,0,0,5000,9999,72,75,0);
 INSERT INTO `mob_groups` VALUES (10981,3617,89,'Sidhe',240,0,0,4500,9999,75,77,0);
-INSERT INTO `mob_groups` VALUES (10983,4652,89,'FeywealdSaplin',240,0,0,8000,9999,93,95,0);
 
 -- ------------------------------------------------------------
 -- Pashhow_Marshlands_[S] (Zone 90)
@@ -13222,7 +13221,7 @@ INSERT INTO `mob_groups` VALUES (17,4771,263,'Grove_Wasp',300,0,0,0,0,107,109,0)
 INSERT INTO `mob_groups` VALUES (18,4811,263,'Abashed_Heartwing',300,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (19,4870,263,'Irksome_Leafkin',300,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (20,4873,263,'Arboreal_Bastion',300,0,0,0,0,107,109,0);
-INSERT INTO `mob_groups` VALUES (21,4871,263,'loyal_Snapweed',300,0,0,0,0,107,109,0);
+INSERT INTO `mob_groups` VALUES (21,4871,263,'Loyal_Snapweed',300,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (22,4872,263,'Tenacious_Panopt',300,0,0,0,9999,107,109,0);
 INSERT INTO `mob_groups` VALUES (23,4874,263,'Tight-lipped_Flytrap',300,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (24,4875,263,'Fervid_Funguar',300,0,0,0,0,107,109,0);
@@ -13687,7 +13686,7 @@ INSERT INTO `mob_groups` VALUES (8,1517,288,'Eschan_Warrior',300,0,0,0,0,70,79,0
 INSERT INTO `mob_groups` VALUES (9,5462,288,'Eschan_Corse',300,0,0,0,9999,70,78,0);
 INSERT INTO `mob_groups` VALUES (10,4320,288,'Eschan_Sorcerer',300,0,0,0,9999,70,78,0);
 INSERT INTO `mob_groups` VALUES (11,5539,288,'Eschan_Wasp',300,0,0,0,0,80,89,0);
-INSERT INTO `mob_groups` VALUES (12,4871,288,'Eschan_Snapweed',300,0,0,0,0,80,89,0);
+INSERT INTO `mob_groups` VALUES (12,4652,288,'Eschan_Snapweed',300,0,0,0,0,80,89,0);
 INSERT INTO `mob_groups` VALUES (13,5540,288,'Eschan_Goobbue',300,0,0,0,0,80,89,0);
 INSERT INTO `mob_groups` VALUES (14,4848,288,'Eschan_Puk',180,0,0,0,0,107,109,0);
 INSERT INTO `mob_groups` VALUES (15,5541,288,'Eschan_Shadowdragon',300,0,0,0,0,107,110,0);
