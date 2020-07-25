@@ -12427,9 +12427,7 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
 
     auto PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
 
-    auto p0 = lua_tointeger(L, 1);
-    auto p1 = 0;
-    auto p2 = 711;
+    auto message_id = lua_tointeger(L, 1);
 
     auto PMaster = static_cast<CCharEntity*>(PTrust->PMaster);
     if (PMaster)
@@ -12437,7 +12435,7 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
         PMaster->ForParty([&](CBattleEntity* PMember)
         {
             auto PCharMember = static_cast<CCharEntity*>(PMember);
-            PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, p0, p1, p2));
+            PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, message_id, 0, 711));
         });
     }
 
