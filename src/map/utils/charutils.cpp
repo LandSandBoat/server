@@ -1046,7 +1046,7 @@ namespace charutils
                     uint8 SlotID = PLinkshell2->getSlotID();
                     uint8 LocationID = PLinkshell2->getLocationID();
                     PLinkshell2->setSubType(ITEM_UNLOCKED);
-                    PChar->equip[SLOT_LINK1] = 0;
+                    PChar->equip[SLOT_LINK2] = 0;
                     Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID, LocationID);
                 }
                 else
