@@ -47,13 +47,13 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
-    POwner->PMaster = nullptr;
-
     m_LastTopEnmity = nullptr;
 }
 
 void CTrustController::Despawn()
 {
+    POwner->PMaster = nullptr;
+    POwner->status = STATUS_DISAPPEAR;
     POwner->animation = ANIMATION_DESPAWN;
     CMobController::Despawn();
 }
@@ -62,7 +62,7 @@ void CTrustController::Tick(time_point tick)
 {
     m_Tick = tick;
 
-    if (POwner->PMaster == nullptr)
+    if (!POwner->PMaster)
     {
         return;
     }
