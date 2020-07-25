@@ -13885,7 +13885,7 @@ INSERT INTO `mob_groups` VALUES (46,5583,291,'Taelmoth_The_Diremaw',0,128,0,0,0,
 INSERT INTO `mob_groups` VALUES (47,5584,291,'Belphegor',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (48,5585,291,'Kabandha',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (49,5586,291,'Selkit',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (50,5587,291,'SangBuaya',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (50,5587,291,'Sang_Buaya',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (51,5588,291,'Sabotender_Royal',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (52,5589,291,'Zduhac',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (53,5590,291,'Strophadia',0,128,0,0,0,125,127,0);
