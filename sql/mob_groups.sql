@@ -1568,7 +1568,7 @@ INSERT INTO `mob_groups` VALUES (86,1707,39,'Goblin_Replica',0,128,1143,1000,100
 INSERT INTO `mob_groups` VALUES (87,1716,39,'Goblin_Statue',0,128,0,1000,1000,70,70,0);
 INSERT INTO `mob_groups` VALUES (88,5110,39,'Nightmare_Goobbue',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (89,2865,39,'Nightmare_Sabotender',600,0,3123,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (90,5109,39,'Nightmare_Flytrap',600,0,3122,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (90,6342,39,'Nightmare_Flytrap',600,0,3122,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (91,5351,39,'Nightmare_Manticore',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (92,2854,39,'Nightmare_Hippogryph',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (93,5108,39,'Nightmare_Treant',600,0,3124,5000,0,95,97,0);
@@ -3431,7 +3431,7 @@ INSERT INTO `mob_groups` VALUES (31,4275,77,'Wajaom_Tiger',0,128,437,0,0,66,68,0
 INSERT INTO `mob_groups` VALUES (32,2554,77,'Manticore',0,128,1475,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (33,2562,77,'Marid',0,128,1618,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (34,937,77,'Death_Cap',0,128,581,0,0,66,68,0);
-INSERT INTO `mob_groups` VALUES (35,3224,77,'Puktrap',0,128,852,0,0,66,68,0);
+INSERT INTO `mob_groups` VALUES (35,6341,77,'Puktrap',0,128,852,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (36,2394,77,'Leshy',0,128,503,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (37,106,77,'Ameretat',0,128,64,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (38,3456,77,'Sand_Lizard',0,128,221,0,0,66,68,0);
@@ -4062,7 +4062,7 @@ INSERT INTO `mob_groups` VALUES (23,4657,81,'Melusine',7200,0,3082,8000,0,73,73,
 INSERT INTO `mob_groups` VALUES (24,656,81,'Carrion_Worm',330,0,428,0,0,10,12,0);
 INSERT INTO `mob_groups` VALUES (25,4658,81,'Myradrosh',0,128,3066,4444,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (26,1072,81,'Djinn',330,0,671,0,0,53,55,0);
-INSERT INTO `mob_groups` VALUES (27,371,81,'Battrap',330,0,243,0,0,35,37,0);
+INSERT INTO `mob_groups` VALUES (27,1103,81,'Battrap',330,0,243,0,0,35,37,0);
 INSERT INTO `mob_groups` VALUES (28,4655,81,'Goblintrap',0,32,3021,4800,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (29,4278,81,'Walking_Tree',330,0,2605,0,0,53,54,0);
 INSERT INTO `mob_groups` VALUES (30,3653,81,'Skogs_Fru',0,32,2269,4700,0,60,65,0);
