@@ -15,7 +15,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 
 function onTrade(player,npc,trade)
     if player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
-        if (trade:hasItemQty(558,1) == true and trade:hasItemQty(559,1) == true and trade:hasItemQty(561,1) == true and trade:hasItemQty(562,1) == true and trade:getItemCount() == 4) then
+        if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
     elseif player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
