@@ -141,10 +141,16 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    if (targetFlags & TARGET_PLAYER && PInitiator->allegiance == allegiance)
+    if (PInitiator->objtype == TYPE_PC && PInitiator->PParty != PMaster->PParty)
     {
         return false;
     }
+
+    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance)
+    {
+        return true;
+    }
+
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
 }
 

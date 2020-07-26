@@ -503,11 +503,6 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return m_PBattleEntity->PPet;
     }
 
-    if (PTarget->objtype == TYPE_TRUST)
-    {
-        return PTarget;
-    }
-
     if (PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {
         return PTarget;
