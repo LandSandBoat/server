@@ -18,8 +18,7 @@ function onTrade(player,npc,trade)
         if (trade:hasItemQty(558,1) == true and trade:hasItemQty(559,1) == true and trade:hasItemQty(561,1) == true and trade:hasItemQty(562,1) == true and trade:getItemCount() == 4) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
-    end
-    if player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
@@ -128,8 +127,8 @@ function onEventFinish(player,csid,option)
 
 		if npcUtil.giveItem(player, {{card, 5}}) then
             player:addQuest(JEUNO,tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
-		player:setCharVar("AllInTheCards_date", getMidnight())
-        player:setLocalVar("Cardstemp", 1)
+            player:setCharVar("AllInTheCards_date", getMidnight())
+            player:setLocalVar("Cardstemp", 1)
 		end
 
     elseif csid == 10114 then
