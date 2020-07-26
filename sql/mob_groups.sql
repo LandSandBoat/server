@@ -1846,7 +1846,7 @@ INSERT INTO `mob_groups` VALUES (184,4137,40,'Vanguard_Assassin',600,0,2550,4000
 INSERT INTO `mob_groups` VALUES (185,4168,40,'Vanguard_Oracle',600,0,2550,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (186,6362,40,'Nightmare_Crab',600,0,1791,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (187,2849,40,'Nightmare_Dhalmel',600,0,1791,5000,0,94,96,0);
-INSERT INTO `mob_groups` VALUES (188,2872,40,'Nightmare_Uragnite',600,0,1798,5000,0,94,96,0);
+INSERT INTO `mob_groups` VALUES (188,6380,40,'Nightmare_Uragnite',600,0,1798,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (189,6330,40,'Nightmare_Scorpion',600,0,1791,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (190,5353,40,'Nightmare_Bunny',600,0,1789,5000,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (191,6348,40,'Nightmare_Mandragora',600,0,1789,5000,0,94,96,0);
