@@ -12,7 +12,12 @@ function onMobSkillCheck(target,mob,skill)
 end
 
 function onMobWeaponSkill(target, mob, skill)
-    if target:hasStatusEffect(tpz.effect.MAGIC_SHIELD) or math.random(0,99) < target:getMod(tpz.mod.DEATHRES) then
+    if
+        target:isUndead() or
+        target:hasStatusEffect(tpz.effect.MAGIC_SHIELD) or
+        -- Todo: DeathRes has no place in the resistance functions so far..
+        target:getMod(tpz.mod.DEATHRES) > math.random(100)
+    then
         skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
         return 0
     end

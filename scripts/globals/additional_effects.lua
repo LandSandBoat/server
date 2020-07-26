@@ -222,26 +222,29 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 return 0, 0, 0
             else
                 attacker:addStatusEffect(tpz.effect.BLINK, power, 0, duration)
-                -- We're faking it, so return zeros!
-                msgID = 166
+                msgID = ADD_EFFECT_SELFBUFF
                 msgParam = tpz.effect.BLINK
             end
         else
             -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
             attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
-            -- We're faking it, so return zeros!
-            msgID = 166
+            msgID = ADD_EFFECT_SELFBUFF
             msgParam = tpz.effect.HASTE
         end
 
     elseif addType == procType.DEATH then
-        -- Todo: Resistance?
-        if defender:isNM() then
+        if
+            defender:isNM() or
+            target:isUndead() or
+            -- Todo: DeathRes has no place in the resistance functions so far..
+            target:getMod(tpz.mod.DEATHRES) > math.random(100)
+        then
             return 0, 0, 0 -- NMs immune, so return out
+        else
+            msgID = tpz.msg.basic.ADD_EFFECT_STATUS
+            msgParam = tpz.effect.KO
+            defender:setHP(0)
         end
-        msgID = tpz.msg.basic.ADD_EFFECT_STATUS
-        msgParam = tpz.effect.KO
-        defender:setHP(0)
     end
 
     --[[
