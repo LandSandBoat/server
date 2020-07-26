@@ -10685,8 +10685,8 @@ INSERT INTO `mob_groups` VALUES (28,6073,169,'Starborer',330,0,3108,0,0,95,97,0)
 INSERT INTO `mob_groups` VALUES (29,6335,169,'Rapier_Scorpion',330,0,549,0,0,95,99,0);
 INSERT INTO `mob_groups` VALUES (30,2070,169,'Impish_Bats',960,0,1361,0,0,58,60,0);
 INSERT INTO `mob_groups` VALUES (31,1958,169,'Hinge_Oil',960,0,0,0,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (32,3177,169,'Poroggo',330,0,0,0,0,97,99,0);
-INSERT INTO `mob_groups` VALUES (33,3934,169,'Toad',330,0,0,0,0,94,96,0);
+INSERT INTO `mob_groups` VALUES (32,6377,169,'Poroggo_Excavator',330,0,0,0,0,97,99,0);
+INSERT INTO `mob_groups` VALUES (33,6378,169,'Flume_Toad',330,0,0,0,0,94,96,0);
 INSERT INTO `mob_groups` VALUES (34,1044,169,'Dire_Bat',960,0,663,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (35,1083,169,'Doom_Mage',960,0,679,0,0,65,67,0);
 INSERT INTO `mob_groups` VALUES (36,1085,169,'Doom_Soldier',960,0,685,0,0,65,67,0);
@@ -13466,7 +13466,7 @@ INSERT INTO `mob_groups` VALUES (29,4756,270,'Tooth_Cave_Tarantula',3600,0,2330,
 INSERT INTO `mob_groups` VALUES (30,4755,270,'Tormented_Obdella',3600,0,2330,12000,0,104,106,0);
 INSERT INTO `mob_groups` VALUES (31,4754,270,'Slag_Mandragora',3600,0,2330,12000,0,104,106,0);
 INSERT INTO `mob_groups` VALUES (32,4753,270,'Frightful_Funguar',3600,0,2330,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (33,5093,270,'Riverwashed_Toad',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (33,6379,270,'Wetscale_Toad',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (34,4770,270,'Soiled_Funguar',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (35,5476,270,'Fulvous_Bats',330,0,0,0,0,125,126,0);
 INSERT INTO `mob_groups` VALUES (36,6338,270,'Moldmouth_Attercop',330,0,0,0,0,125,126,0);
