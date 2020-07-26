@@ -288,6 +288,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
             {
                 ApplyLevelRestrictions(PChar);
                 m_EnteredPlayers.emplace(PEntity->id);
+                PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
             }
             else if (!IsRegistered(PChar))

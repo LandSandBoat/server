@@ -483,9 +483,11 @@ bool CCharEntity::ReloadParty()
 void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 {
     if (!PTrust->PAI->IsSpawned())
+    {
         return;
+    }
 
-    auto trustIt = std::remove_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
+    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
     if (trustIt != PTrusts.end())
     {
         PTrust->PAI->Despawn();
