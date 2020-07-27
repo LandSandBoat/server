@@ -77,6 +77,13 @@ tpz.addEffect.calcDamage = function(attacker, element, defender, damage)
     damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
     damage = adjustForTarget(defender, damage, element)
     damage = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
+
+    --[[
+    This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
+    If you want to force some randomness, un-comment the line below to artificially force 20% variance.
+    ]]
+    -- damage = damage * (math.random(90, 110)/100) --
+
     return damage
 end
 
@@ -133,43 +140,29 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         if damage > 0 then
             -- local damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
             damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
-
-            if subEffect == tpz.subEffect.HP_DRAIN then
-                msgID = tpz.msg.basic.ADD_EFFECT_HP_DRAIN
-                if damage < 0 then
-                    damage = 0
-                end
-            else
-                msgID = tpz.msg.basic.ADD_EFFECT_DMG
-                if damage < 0 then
-                    msgID = tpz.msg.basic.ADD_EFFECT_HEAL
-                end
+            msgID = tpz.msg.basic.ADD_EFFECT_DMG
+            if damage < 0 then
+                msgID = tpz.msg.basic.ADD_EFFECT_HEAL
             end
             msgParam = damage
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
-        local HP = 10 -- need actual calculation here!
-
+        local HP = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
+        -- Unknown what modifies the HP, using power directly for now
         msgID = tpz.msg.basic.ADD_EFFECT_HP_HEAL
         attacker:addHP(HP)
-        -- We have to fake this or it will say the defender was healed rather than the attacker.
-        attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_HP_HEAL)
-        -- We're faking it, so return zeros!
-        msgID = 0
-        msgParam = 0
+        msgParam = HP
 
-    elseif addType == procType.MP_HEAL then -- Mjollnir does this
-        local MP = 10 -- need actual calculation here!
+    elseif addType == procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
+        local MP = damage
+        -- Unknown what modifies this, using power directly for now
+        msgID = tpz.msg.basic.ADD_EFFECT_MP_HEAL
         attacker:addMP(MP)
-        -- We have to fake this or it will say the defender was healed rather than the attacker.
-        attacker:messageBasic(tpz.msg.basic.ADD_EFFECT_MP_HEAL)
-        -- We're faking it, so return zeros!
-        msgID = 0
-        msgParam = 0
+        msgParam = MP
 
-    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then -- procType.HP_DRAIN
-        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
+        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getHP() then
             damage = defender:getHP()
         end
@@ -180,8 +173,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         attacker:addHP(damage)
 
     elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
-        -- damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getMP() then
             damage = defender:getMP()
         end
@@ -191,8 +183,7 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
         attacker:addMP(damage)
 
     elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
-        -- damage = damage * (math.random(90, 110)/100) -- Artificially forcing 20% variance.
-        damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+        damage = tpz.addEffect.calcDamage(attacker, element, defender, damage)
         if damage > defender:getTP() then
             damage = defender:getTP()
         end
@@ -225,11 +216,13 @@ function additionalEffectAttack(attacker, defender, baseAttackDamage, item)
                 msgID = ADD_EFFECT_SELFBUFF
                 msgParam = tpz.effect.BLINK
             end
-        else
-            -- Only known one to go here so far is HASTE (not haste samba) http://www.ffxiah.com/search/item?q=blurred
-            attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0) -- Todo: verify power/duration/tier
+        elseif addStatus == tpz.effect.HASTE then 
+            attacker:addStatusEffect(tpz.effect.HASTE, power, 0, duration, 0, 0)
+            -- Todo: verify power/duration/tier/overwrite etc
             msgID = ADD_EFFECT_SELFBUFF
             msgParam = tpz.effect.HASTE
+        else
+            print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
         end
 
     elseif addType == procType.DEATH then
