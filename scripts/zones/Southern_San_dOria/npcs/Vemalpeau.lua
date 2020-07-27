@@ -3,22 +3,22 @@
 --  NPC: Vemalpeau
 -- Involved in Quests: Under Oath
 -------------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 
 function onTrade(player,npc,trade)
     -- "Flyers for Regine" conditional script
 
     if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
+        local count = trade:getItemCount()
+        local MagicFlyer = trade:hasItemQty(532,1)
         if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
+            player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
 
@@ -31,12 +31,12 @@ function onTrigger(player,npc)
     elseif (player:getCharVar("UnderOathCS") == 9 and player:hasKeyItem(tpz.ki.KNIGHTS_CONFESSION)) then
         player:startEvent(2); -- Under Oath - Thanks you and concludes quest
     else
-        player:startEvent(1);
+        player:startEvent(1)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
@@ -44,10 +44,10 @@ function onEventFinish(player,csid,option)
         player:setCharVar("UnderOathCS", 1)
     elseif (csid == 5) then
         player:setCharVar("UnderOathCS", 4)
-        player:delKeyItem(tpz.ki.MIQUES_PAINTBRUSH);
+        player:delKeyItem(tpz.ki.MIQUES_PAINTBRUSH)
     elseif (csid == 2) then
         player:setCharVar("UnderOathCS", 0)
-        player:delKeyItem(tpz.ki.KNIGHTS_CONFESSION);
+        player:delKeyItem(tpz.ki.KNIGHTS_CONFESSION)
     end
 
 end;

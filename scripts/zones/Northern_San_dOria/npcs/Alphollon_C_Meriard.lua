@@ -4,13 +4,13 @@
 -- Type: Purifies cursed items with their corresponding abjurations.
 -- !pos 98.108 -1 137.999 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs");
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
     if (trade:getItemCount() == 2) then
-        local item = 0;
-        local reward = 0;
+        local item = 0
+        local reward = 0
         local abjurList =
         {
             -- Abjuration, item, item -1, reward, reward +1 (5 ID's per transaction)
@@ -75,43 +75,43 @@ function onTrade(player,npc,trade)
             9122,27129,27130,27119,27120,   9127,27131,27132,27121,27122,
             9123,27314,27315,27304,27305,   9128,27316,27317,27306,27307,
             9124,27485,27486,27475,27476,   9129,27487,27488,27477,27478
-        };
+        }
         for i = 1,#abjurList,5 do
             if (trade:hasItemQty(abjurList[i],1)) then
                 if (trade:hasItemQty(abjurList[i + 1],1)) then
-                    item = abjurList[i + 1];
-                    reward = abjurList[i + 3];
+                    item = abjurList[i + 1]
+                    reward = abjurList[i + 3]
                 elseif (trade:hasItemQty(abjurList[i + 2],1)) then
-                    item = abjurList[i + 2];
-                    reward = abjurList[i + 4];
+                    item = abjurList[i + 2]
+                    reward = abjurList[i + 4]
                 end
-                break;
+                break
             end
         end
 
         if (reward ~= 0) then
             --Trade pair for a nice reward.
-            player:startEvent(720,item,reward);
-            player:setCharVar("reward",reward);
+            player:startEvent(720,item,reward)
+            player:setCharVar("reward",reward)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
-    player:startEvent(719);
-end;
+    player:startEvent(719)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 720) then
-        local reward = player:getCharVar("reward");
+        local reward = player:getCharVar("reward")
         if (reward ~= 0) then
-            player:tradeComplete();
-            player:addItem(reward);
-            player:setCharVar("reward",0);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,reward);
+            player:tradeComplete()
+            player:addItem(reward)
+            player:setCharVar("reward",0)
+            player:messageSpecial(ID.text.ITEM_OBTAINED,reward)
         end
     end
 end;

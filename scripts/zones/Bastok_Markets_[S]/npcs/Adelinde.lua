@@ -4,13 +4,13 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
     player:startEvent(103)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end

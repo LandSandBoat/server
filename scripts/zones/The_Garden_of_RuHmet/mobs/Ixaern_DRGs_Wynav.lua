@@ -2,20 +2,20 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:setLocalVar("hpTrigger", math.random(10,75));
-end;
+    mob:setLocalVar("hpTrigger", math.random(10,75))
+end
 
 function onMobFight(mob,target)
-    local hpTrigger = mob:getLocalVar("hpTrigger");
+    local hpTrigger = mob:getLocalVar("hpTrigger")
     if (mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger) then
-        mob:setLocalVar("SoulVoice", 1);
+        mob:setLocalVar("SoulVoice", 1)
         mob:useMobAbility(696); -- Soul Voice
     end
-end;
+end
 
 function onMonsterMagicPrepare(mob,target)
     local spellList =
@@ -29,16 +29,16 @@ function onMonsterMagicPrepare(mob,target)
         [7] = 422,
         [8] = 462,
         [9] = 466 -- Virelai (charm)
-    };
+    }
     if (mob:hasStatusEffect(tpz.effect.SOUL_VOICE)) then
         return spellList[math.random(1,9)]; -- Virelai possible.
     else
         return spellList[math.random(1,8)]; -- No Virelai!
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end
 
 function onMobDespawn(mob)
     mob:setLocalVar("repop", mob:getBattleTime()); -- This get erased on respawn automatic.

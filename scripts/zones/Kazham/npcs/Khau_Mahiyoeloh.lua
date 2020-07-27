@@ -5,18 +5,18 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getCharVar("BathedInScent") == 1) then
         player:startEvent(165); -- scent from Blue Rafflesias
     else
-        player:startEvent(60);
+        player:startEvent(60)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

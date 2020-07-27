@@ -4,8 +4,8 @@
 -- Type: Standard NPC
 -- !pos 33.033 0.999 -30.119 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -21,16 +21,16 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
     player:startEvent(606)  -- my brother always takes my sweets
 --    player:startEvent(598)   --did nothing no speech or text
 --    player:startEvent(945)    --black screen and hang
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 606) then

@@ -3,11 +3,11 @@
 --  NPC: Romualdo
 -- Involved in Quest: Stamp Hunt
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     local StampHunt = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.STAMP_HUNT)
@@ -23,7 +23,7 @@ function onTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 

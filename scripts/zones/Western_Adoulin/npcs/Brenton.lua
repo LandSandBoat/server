@@ -31,8 +31,8 @@ end
 
 function onEventFinish(player,csid,option)
     if csid == 3 then
-        player:addCurrency('bayld', 1000 * BAYLD_RATE);
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE);
+        player:addCurrency('bayld', 1000 * BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
 
         player:addKeyItem(tpz.ki.PIONEERS_BADGE) -- Notification for this is shown in the CS, so hand over quietly
         npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_ADOULIN)

@@ -4,10 +4,10 @@
 -- Involved In Quest: RYCHARDE_THE_CHEF
 --  Starts and finishes quest: Expertice
 -----------------------------------
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/globals/settings");
-local ID = require("scripts/zones/Mhaura/IDs");
+require("scripts/globals/titles")
+require("scripts/globals/quests")
+require("scripts/globals/settings")
+local ID = require("scripts/zones/Mhaura/IDs")
 
 -- player:startEvent(59); -- standar dialog
 -- player:startEvent(60); -- tell to look for ricarde
@@ -21,7 +21,7 @@ local ID = require("scripts/zones/Mhaura/IDs");
 --player:startEvent(67);-- after back to basics i think
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
@@ -59,31 +59,31 @@ else
     player:startEvent(59); -- talk abaout something else
 end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 60) then
         player:setCharVar("QuestRychardetheChef_var",2); -- second stage on quest
     elseif (csid == 61) then  -- accept quest EXPERTICE
-        player:addQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.EXPERTISE);
+        player:addQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.EXPERTISE)
     elseif (csid == 62) then   -- end quest expertice
-        player:addFame(WINDURST,120);
+        player:addFame(WINDURST,120)
         if (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,132);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,132)
         else
-            player:addItem(132);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,132);
-            player:addTitle(tpz.title.THREESTAR_PURVEYOR);
+            player:addItem(132)
+            player:messageSpecial(ID.text.ITEM_OBTAINED,132)
+            player:addTitle(tpz.title.THREESTAR_PURVEYOR)
             player:setCharVar("QUEST_EXPERTISE_STATE_var",0); --done cooking
             player:setCharVar("QuestHNIVCCompDay_var",0); -- completition day of unending chase
-            player:setCharVar("QuestHNIVCCompYear_var",0);
+            player:setCharVar("QuestHNIVCCompYear_var",0)
             player:setCharVar("QuestExpertiseCompDay_var",VanadielDayOfTheYear()); -- completition day of expertise quest
-            player:setCharVar("QuestExpertiseCompYear_var",VanadielYear());
+            player:setCharVar("QuestExpertiseCompYear_var",VanadielYear())
             player:delKeyItem(tpz.ki.LAND_CRAB_BISQUE); --give Land Crab Bisque from Valgeir
-            player:completeQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.EXPERTISE);
+            player:completeQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.EXPERTISE)
         end
     end
 end;

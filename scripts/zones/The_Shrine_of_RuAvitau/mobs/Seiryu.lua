@@ -2,12 +2,12 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Seiryu (Pet version)
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onMonsterMagicPrepare(mob,target)
     if (mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS,0) == false) then
-        local rnd = math.random();
+        local rnd = math.random()
         if (rnd < 0.5) then
             return 186; -- aeroga 3
         elseif (rnd < 0.7) then
@@ -19,7 +19,7 @@ function onMonsterMagicPrepare(mob,target)
         end
     end
     return 0; -- Still need a return, so use 0 when not casting
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 end;

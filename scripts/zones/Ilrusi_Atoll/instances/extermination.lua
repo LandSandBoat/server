@@ -45,7 +45,7 @@ end
 function onInstanceProgressUpdate(instance, progress)
 
     if progress == 20 then
-        instance:complete();
+        instance:complete()
     end
 end
 

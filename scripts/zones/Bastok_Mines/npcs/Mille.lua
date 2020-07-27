@@ -10,7 +10,7 @@ require("scripts/globals/shop")
 
 function onTrade(player,npc,trade)
     onHalloweenTrade(player, trade, npc)
-end;
+end
 
 function onTrigger(player,npc)
     if GetRegionOwner(tpz.region.NORVALLEN) ~= tpz.nation.BASTOK then

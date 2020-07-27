@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Mandragora
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 -- TODO: Determine spell list and behavior.  Potentially includes Breakga and Bindga, unless they're TP moves.
@@ -17,11 +17,11 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
 function onMobFight(mob,target)
 
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 end;

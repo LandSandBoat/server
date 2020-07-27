@@ -9,7 +9,7 @@ require("scripts/globals/besieged")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-end;
+end
 
 function onTrigger(player, npc)
     if tpz.besieged.getAstralCandescence() == 1 then

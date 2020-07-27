@@ -3,17 +3,17 @@
 --  NPC: Door: Departures Exit (for Kahzam)
 -- !pos -12 8 54 246
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
-    KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM);
-    Gil = player:getGil();
+    KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    Gil = player:getGil()
 
     if (KazhPass == false) then
         player:startEvent(35); -- without pass
@@ -23,20 +23,20 @@ function onTrigger(player,npc)
         player:startEvent(37); -- Pass with money
     end
 
-    return 1;
+    return 1
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 37) then
-        Z = player:getZPos();
+        Z = player:getZPos()
 
         if (Z >= 58 and Z <= 61) then
-            player:delGil(200);
+            player:delGil(200)
         end
     end
 

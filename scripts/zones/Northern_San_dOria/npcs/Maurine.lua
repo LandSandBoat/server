@@ -5,18 +5,18 @@
 -- !pos 144.852 0.000 136.828 231
 --
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs");
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.MAURINE_DIALOG);
-end;
+    player:showText(npc,ID.text.MAURINE_DIALOG)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

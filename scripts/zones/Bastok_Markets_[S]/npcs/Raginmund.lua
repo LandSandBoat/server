@@ -7,7 +7,7 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getCharVar("TOO_MANY_CHEFS") == 2) then
@@ -15,13 +15,13 @@ function onTrigger(player,npc)
     else
         player:startEvent(111); -- standard
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 112) then
-        player:setCharVar("TOO_MANY_CHEFS",3);
+        player:setCharVar("TOO_MANY_CHEFS",3)
     end
 end;

@@ -5,9 +5,9 @@
 -- !pos -111 -6 0 165
 -------------------------------------
 
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
-require("scripts/globals/missions");
+require("scripts/globals/keyitems")
+require("scripts/globals/bcnm")
+require("scripts/globals/missions")
 
     -- events:
     -- 7D00 : BC menu
@@ -29,35 +29,35 @@ require("scripts/globals/missions");
     -- 7D03 : stay/run away
 
 function onTrade(player,npc,trade)
-    TradeBCNM(player,npc,trade);
-end;
+    TradeBCNM(player,npc,trade)
+end
 
 function onTrigger(player,npc)
 
     if (player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 2) then
-        player:startEvent(6);
+        player:startEvent(6)
     elseif (EventTriggerBCNM(player,npc)) then
-        return 1;
+        return 1
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option,extras)
-    EventUpdateBCNM(player,csid,option,extras);
-end;
+    EventUpdateBCNM(player,csid,option,extras)
+end
 
 -----------------------------------
 -- onEventFinish Action
 -----------------------------------
 
 function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
+    -- printf("onFinish CSID: %u",csid)
+    -- printf("onFinish RESULT: %u",option)
 
     if (csid == 6) then
-        player:setCharVar("MissionStatus",3);
+        player:setCharVar("MissionStatus",3)
     elseif (EventFinishBCNM(player,csid,option)) then
-        return;
+        return
     end
 
 end;

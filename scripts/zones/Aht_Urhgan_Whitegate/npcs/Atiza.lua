@@ -13,7 +13,7 @@ function onTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if csid == 223 and option == 333 then

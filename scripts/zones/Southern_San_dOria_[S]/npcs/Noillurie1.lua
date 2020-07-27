@@ -5,14 +5,14 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc, 13793);
-end;
+    player:showText(npc, 13793)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

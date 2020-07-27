@@ -4,9 +4,9 @@
 -- Teleport point, Quest -- NAVIGATING THE UNFRIENDLY SEAS RELATED --
 -- !pos -200.027 -8.500 80.058 51
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -27,22 +27,22 @@ function onTrade(player,npc,trade)
             player:setCharVar("Leypoint_waitJTime", os.time() + 60); -- Wait 60 seconds.
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
 
     if (player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") == 3) then
         if (player:getCharVar("Leypoint_waitJTime") <= os.time()) then
-            player:startEvent(508);
+            player:startEvent(508)
             player:setCharVar("NavigatingtheUnfriendlySeas",4);   -- play cs for having waited enough time
         else
             player:messageSpecial(ID.text.ENIGMATIC_LIGHT,2341);    -- play cs for not waiting long enough
         end
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

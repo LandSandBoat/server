@@ -2,7 +2,7 @@
 -- Area: The Shrouded Maw
 --  Mob: Diabolos
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs");
+local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 
 -- TODO: CoP Diabolos
 -- 1) Make the diremites in the pit all aggro said player that falls into region. Should have a respawn time of 10 seconds.
@@ -15,9 +15,9 @@ local ID = require("scripts/zones/The_Shrouded_Maw/IDs");
 -- Note: Diabolos Prime fight drops all tiles at once.
 
 function onMobFight(mob,target)
-    local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET;
+    local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET
     if (mobOffset >= 0 and mobOffset <= 14) then
-        local inst = math.floor(mobOffset/7);
+        local inst = math.floor(mobOffset/7)
 
         local tileDrops =
         {
@@ -29,13 +29,13 @@ function onMobFight(mob,target)
             {65,"byc6","bya6","byY6"},
             {75,"byc7","bya7","byY7"},
             {90,"byc8","bya8","byY8"},
-        };
+        }
 
-        local hpp = ((mob:getHP()/mob:getMaxHP())*100);
+        local hpp = ((mob:getHP()/mob:getMaxHP())*100)
         for k,v in pairs(tileDrops) do
             if (hpp < v[1]) then
-                local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1);
-                local tile = GetNPCByID(tileId);
+                local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
+                local tile = GetNPCByID(tileId)
                 if (tile:getAnimation() == tpz.anim.CLOSE_DOOR) then
                     SendEntityVisualPacket(tileId, v[inst+2]);  -- Animation for floor dropping
                     SendEntityVisualPacket(tileId, "s123");     -- Tile dropping sound
@@ -43,11 +43,11 @@ function onMobFight(mob,target)
                         tile:setAnimation(tpz.anim.OPEN_DOOR);     -- Floor opens
                     end)
                 end
-                break;
-            end;
+                break
+            end
         end
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 end;

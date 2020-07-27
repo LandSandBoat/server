@@ -26,9 +26,9 @@
 --will require changing other avatar quests and making a variable for it all. (if this gets scripted, please remove this comment)
 
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Norg/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -114,12 +114,12 @@ function onTrade(player,npc,trade)
         end
     end
 
-end;
+end
 
 function onTrigger(player,npc)
-    local MamaMia = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA);
-    local moonlitPath = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_MOONLIT_PATH);
-    local EvokersRing = player:hasItem(14625);
+    local MamaMia = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA)
+    local moonlitPath = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_MOONLIT_PATH)
+    local EvokersRing = player:hasItem(14625)
     local realday = tonumber(os.date("%j"));  -- %M for next minute, %j for next day
     local questday = player:getCharVar("MamaMia_date")
 
@@ -151,21 +151,21 @@ function onTrigger(player,npc)
         player:startEvent(93); -- Standard dialog
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 191) then
-        player:addQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA);
+        player:addQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA)
 
     elseif (csid == 193) then
-        player:tradeComplete();
+        player:tradeComplete()
 
     elseif (csid == 195) then
-        player:tradeComplete();
+        player:tradeComplete()
         player:setCharVar("MamaMia_date", os.date("%j")); -- %M for next minute, %j for next day
 
     elseif (csid == 197) then
@@ -175,14 +175,14 @@ function onEventFinish(player,csid,option)
             player:addItem(14625); -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED,14625); -- Evokers Ring
             player:addFame(NORG,30); --idk how much fame the quest adds, just left at 30 which the levi quest gave.
-            player:completeQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA);
+            player:completeQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA)
             player:setCharVar("tradesMamaMia",0)
         end
 
     elseif (csid == 243) then
         if (option == 1) then
-            player:delQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA);
-            player:addQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA);
+            player:delQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA)
+            player:addQuest(OUTLANDS,tpz.quest.id.outlands.MAMA_MIA)
         end
     end
 end;

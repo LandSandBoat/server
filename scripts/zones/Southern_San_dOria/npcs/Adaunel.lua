@@ -4,9 +4,9 @@
 -- General Info NPC
 -- !pos 80 -7 -22 230
 ------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -22,14 +22,14 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
-    player:startEvent(656);
-end;
+    player:startEvent(656)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

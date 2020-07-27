@@ -5,13 +5,13 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    --local nID = npc:getID();
-    -- printf("id: %u", nID);
+    --local nID = npc:getID()
+    -- printf("id: %u", nID)
 
-    local Lever = npc:getID();
+    local Lever = npc:getID()
 
     npc:openDoor(2); -- Lever animation
     if (GetNPCByID(Lever-6):getAnimation() == 9) then
@@ -20,10 +20,10 @@ function onTrigger(player,npc)
         GetNPCByID(Lever-6):setAnimation(8);--open door D
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

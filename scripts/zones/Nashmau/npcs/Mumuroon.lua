@@ -4,14 +4,14 @@
 -- Standard Info NPC
 -----------------------------------
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:startEvent(262);
-end;
+    player:startEvent(262)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

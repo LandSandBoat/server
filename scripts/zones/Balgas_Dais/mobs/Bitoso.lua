@@ -3,8 +3,8 @@
 --  Mob: Bitoso
 -- BCNM: Creeping Doom
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/magic");
+require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
 function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.HP_HEAL_CHANCE, 90)

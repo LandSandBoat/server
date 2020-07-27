@@ -25,10 +25,10 @@ function onTrigger(player,npc)
     else
         player:startEvent(72)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if csid == 207 then

@@ -3,19 +3,19 @@
 --  NPC: Guide Stone
 -- !pos -149 -3 0 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs");
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
-    player:messageSpecial(ID.text.GUIDE_STONE);
-end;
+    player:messageSpecial(ID.text.GUIDE_STONE)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

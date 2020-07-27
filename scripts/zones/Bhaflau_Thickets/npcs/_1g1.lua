@@ -5,18 +5,18 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getZPos() > -761) then
-        player:startEvent(106);
+        player:startEvent(106)
     else
-        player:startEvent(107);
+        player:startEvent(107)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

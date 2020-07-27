@@ -5,10 +5,10 @@
 -- Starts and finishes Quest: Stop Your Whining
 -- !pos 49 -6 15 252
 -----------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/npc_util");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -20,12 +20,12 @@ function onTrade(player,npc,trade)
         not player:hasKeyItem(tpz.ki.YOMOTSU_FEATHER) and
         npcUtil.tradeHas(trade, {939, 4360, 4372, 4382}) -- Hecteyes Eye, Bastore Sardine, Giant Sheep Meat, Frost Turnip
     ) then
-        player:startEvent(150);
+        player:startEvent(150)
     end
-end;
+end
 
 function onTrigger(player,npc)
-    local stopYourWhining = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.STOP_YOUR_WHINING);
+    local stopYourWhining = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.STOP_YOUR_WHINING)
 
     -- YOMI OKURI (SAM AF2)
     if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED) then
@@ -49,27 +49,27 @@ function onTrigger(player,npc)
 
     -- DEFAULT DIALOG
     else
-        player:startEvent(80);
+        player:startEvent(80)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     -- YOMI OKURI (SAM AF2)
     if (csid == 148) then
-        player:setCharVar("yomiOkuriCS",2);
+        player:setCharVar("yomiOkuriCS",2)
     elseif (csid == 150) then
-        player:confirmTrade();
-        npcUtil.giveKeyItem(player, tpz.ki.WASHUS_TASTY_WURST);
-        player:setCharVar("yomiOkuriCS",3);
+        player:confirmTrade()
+        npcUtil.giveKeyItem(player, tpz.ki.WASHUS_TASTY_WURST)
+        player:setCharVar("yomiOkuriCS",3)
 
     -- STOP YOUR WHINING
     elseif (csid == 21 and option == 1) then
-        player:addQuest(OUTLANDS,tpz.quest.id.outlands.STOP_YOUR_WHINING);
-        npcUtil.giveKeyItem(player, tpz.ki.EMPTY_BARREL);
+        player:addQuest(OUTLANDS,tpz.quest.id.outlands.STOP_YOUR_WHINING)
+        npcUtil.giveKeyItem(player, tpz.ki.EMPTY_BARREL)
     elseif (csid == 23 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING, {item=4952, fame=75, fameArea=NORG, title=tpz.title.APPRENTICE_SOMMELIER})) then -- Scroll of Hojo: Ichi
-        player:delKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW);
+        player:delKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW)
     end
 end;

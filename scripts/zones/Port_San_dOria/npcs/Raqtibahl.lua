@@ -3,18 +3,18 @@
 --  NPC: Raqtibahl
 -- (Corsair's Frac) !pos -59 -4 -39 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    local letterRed = player:getCharVar("LeleroonsLetterRed");
+    local letterRed = player:getCharVar("LeleroonsLetterRed")
 
     -- magicmart flyer
     if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and trade:getItemCount() == 1 and trade:hasItemQty(532,1)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED);
+        player:messageSpecial(ID.text.FLYER_REFUSED)
 
     -- gold chain, velvet cloth, red grass cloth, sailcloth
     elseif (letterRed == 2 and trade:getItemCount() == 4 and trade:hasItemQty(761,1) and trade:hasItemQty(828,1) and trade:hasItemQty(1829,1) and trade:hasItemQty(1997,1)) then
@@ -25,10 +25,10 @@ function onTrade(player,npc,trade)
         player:startEvent(760); -- accepts gold piece, now wait for next vana'diel day
 
     end
-end;
+end
 
 function onTrigger(player,npc)
-    local letterRed = player:getCharVar("LeleroonsLetterRed");
+    local letterRed = player:getCharVar("LeleroonsLetterRed")
     if (player:hasKeyItem(tpz.ki.LELEROONS_LETTER_RED)) then
         player:startEvent(753); -- accept letter, now bring me four items
     elseif (letterRed == 2) then
@@ -40,31 +40,31 @@ function onTrigger(player,npc)
             player:startEvent(756); -- here's your cor frac
         else
             player:startEvent(757); -- patience. need to wait for vana'diel day
-        end;
+        end
     elseif (letterRed == 5) then
         player:startEvent(758); -- are you caring for your corsair's frac?
     else
         player:startEvent(759); -- default dialog
-    end;
-end;
+    end
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 753) then
-        player:setCharVar("LeleroonsLetterRed", 2);
-        player:delKeyItem(tpz.ki.LELEROONS_LETTER_RED);
+        player:setCharVar("LeleroonsLetterRed", 2)
+        player:delKeyItem(tpz.ki.LELEROONS_LETTER_RED)
     elseif (csid == 755) then
-        player:tradeComplete();
-        player:setCharVar("LeleroonsLetterRed", 3);
+        player:tradeComplete()
+        player:setCharVar("LeleroonsLetterRed", 3)
     elseif (csid == 760) then
-        player:tradeComplete();
-        player:setCharVar("LeleroonsLetterRed", 4);
-        player:setCharVar("corAfSubmitDay", vanaDay());
+        player:tradeComplete()
+        player:setCharVar("LeleroonsLetterRed", 4)
+        player:setCharVar("corAfSubmitDay", vanaDay())
     elseif (csid == 756) then
-        player:setCharVar("LeleroonsLetterRed", 5);
+        player:setCharVar("LeleroonsLetterRed", 5)
         player:addItem(14522); -- corsair's frac
-        player:messageSpecial(ID.text.ITEM_OBTAINED,14522);
-    end;
+        player:messageSpecial(ID.text.ITEM_OBTAINED,14522)
+    end
 end;

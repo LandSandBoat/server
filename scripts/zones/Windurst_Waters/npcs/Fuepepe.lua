@@ -5,9 +5,9 @@
 -- Involved in Quest: Making the grade, Class Reunion
 -- !pos 161 -2 161 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -16,12 +16,12 @@ function onTrade(player,npc,trade)
             player:startEvent(455); -- Quest Progress: Test Papers Shown and told to deliver them to principal
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
 
-    local gradestatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE);
-    local prog = player:getCharVar("QuestMakingTheGrade_prog");
+    local gradestatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE)
+    local prog = player:getCharVar("QuestMakingTheGrade_prog")
         -- 1 = answers found
         -- 2 = gave test answers to principle
         -- 3 = spoke to chomoro
@@ -47,29 +47,29 @@ function onTrigger(player,npc)
     else
         player:startEvent(423); -- Standard Conversation
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 442 and option == 1) then -- Quest Start
-        player:addQuest(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE);
+        player:addQuest(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE)
     elseif (csid == 455) then -- Quest Progress: Test Papers Shown and told to deliver them to principal
-        player:setCharVar("QuestMakingTheGrade_prog",1);
+        player:setCharVar("QuestMakingTheGrade_prog",1)
     elseif (csid == 458) then -- Quest Finish
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4855);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4855)
         else
-            player:tradeComplete();
-            player:completeQuest(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE);
-            player:addFame(WINDURST,75);
-            player:addItem(4855);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,4855);
-            player:setCharVar("QuestMakingTheGrade_prog",0);
-            player:needToZone(true);
+            player:tradeComplete()
+            player:completeQuest(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE)
+            player:addFame(WINDURST,75)
+            player:addItem(4855)
+            player:messageSpecial(ID.text.ITEM_OBTAINED,4855)
+            player:setCharVar("QuestMakingTheGrade_prog",0)
+            player:needToZone(true)
         end
     elseif (csid == 817) then
-        player:setCharVar("ClassReunion_TalkedToFupepe",1);
+        player:setCharVar("ClassReunion_TalkedToFupepe",1)
     end
 end;

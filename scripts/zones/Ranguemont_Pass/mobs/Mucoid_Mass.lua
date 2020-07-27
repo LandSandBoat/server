@@ -6,7 +6,7 @@ require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 345)
-end;
+end
 
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(5400,6000)); -- 90 to 100 minutes

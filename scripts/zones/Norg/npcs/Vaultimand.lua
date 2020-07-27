@@ -7,16 +7,16 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    NorgFame = player:getFameLevel(NORG);
+    NorgFame = player:getFameLevel(NORG)
 
-    player:startEvent(100 + (NorgFame - 1));
-end;
+    player:startEvent(100 + (NorgFame - 1))
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

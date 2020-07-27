@@ -22,7 +22,7 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
     local stock =

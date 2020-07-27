@@ -2,17 +2,17 @@
 -- Area: Pso'Xja
 --  NPC: Stone Gate
 -----------------------------------
-require("scripts/globals/missions");
-local ID = require("scripts/zones/PsoXja/IDs");
-require("scripts/globals/keyitems");
+require("scripts/globals/missions")
+local ID = require("scripts/zones/PsoXja/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus")==4) then
-        player:startEvent(2);
+        player:startEvent(2)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==3) then
         player:startEvent(106); -- Start Floor 1, 3
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==5) then
@@ -22,22 +22,22 @@ function onTrigger(player,npc)
     elseif (player:hasCompletedMission(COP,tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)or player:hasCompletedMission(COP,tpz.mission.id.cop.THE_LAST_VERSE)) then
         player:startEvent(50); -- Start Floor 1
     else
-        player:messageSpecial(ID.text.DOOR_LOCKED);
+        player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-    return 1;
-end;
+    return 1
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     -- Retail packet captures have been marked {R}. Please don't change them.
     if (csid == 2 and option == 1 ) then
-        player:setCharVar("PromathiaStatus",0);
-        player:completeMission(COP,tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR);
-        player:addMission(COP,tpz.mission.id.cop.DESIRES_OF_EMPTINESS);
-        player:addKeyItem(tpz.ki.LIGHT_OF_VAHZL);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_VAHZL);
+        player:setCharVar("PromathiaStatus",0)
+        player:completeMission(COP,tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
+        player:addMission(COP,tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
+        player:addKeyItem(tpz.ki.LIGHT_OF_VAHZL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_VAHZL)
         player:setPos(-14.744,0.036,-119.736,1,22); -- To Floor 1 {R}
     elseif (csid == 50 and option == 1) then
         player:setPos(-14.744,0.036,-119.736,1,22); -- To Floor 1 {R}

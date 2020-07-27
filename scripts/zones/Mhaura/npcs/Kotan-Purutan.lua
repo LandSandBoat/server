@@ -10,14 +10,14 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local OvernightDelivery = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.OVERNIGHT_DELIVERY);
+    local OvernightDelivery = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
     local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var"); -- Variable to track progress for Overnight Delivery
     local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var"); -- Variable to track the day the quest is started.
     local KenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var"); -- Variable to track the hour the quest is started.
-    local HourOfTheDay = VanadielHour();
+    local HourOfTheDay = VanadielHour()
 
     if (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay < 6 or HourOfTheDay >= 18)) then
         player:startEvent(141); -- Gives Key Item at correct times of night
@@ -30,16 +30,16 @@ function onTrigger(player,npc)
     else
         player:startEvent(140); -- Standard
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 141) then
-        player:addKeyItem(tpz.ki.SMALL_BAG);
-        player:setCharVar("Kenapa_Overnight_Day_var",VanadielDayOfTheYear());
-        player:setCharVar("Kenapa_Overnight_Hour_var",VanadielHour());
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SMALL_BAG);
+        player:addKeyItem(tpz.ki.SMALL_BAG)
+        player:setCharVar("Kenapa_Overnight_Day_var",VanadielDayOfTheYear())
+        player:setCharVar("Kenapa_Overnight_Hour_var",VanadielHour())
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SMALL_BAG)
     end
 end;

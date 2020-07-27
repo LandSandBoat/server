@@ -5,19 +5,19 @@
 -- !pos -115.29 -11 -22.609 250
 --
 -----------------------------------
-local ID = require("scripts/zones/Kazham/IDs");
+local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG);
-    player:openSendBox();
-end;
+    player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
+    player:openSendBox()
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

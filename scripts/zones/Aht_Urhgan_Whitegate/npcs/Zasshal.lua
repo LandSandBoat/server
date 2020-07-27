@@ -8,7 +8,7 @@ require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     local currentday = tonumber(os.date("%j"))
@@ -45,7 +45,7 @@ function onEventUpdate(player,csid,option)
     elseif (csid == 818 or csid == 820) and option == 14 and player:getAssaultPoint(ILRUSI_ASSAULT_POINT) >= 500 then
         player:setLocalVar("SalvageValid",5)
     end
-end;
+end
 
 function onEventFinish(player,csid,option)
     local currentday = tonumber(os.date("%j"))

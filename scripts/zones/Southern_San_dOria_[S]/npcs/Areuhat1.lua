@@ -5,14 +5,14 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     player:showText(npc, 13454); -- (Couldn't find default dialogue)  How very good to see you again!
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

@@ -4,14 +4,14 @@
 -- Starts Quest: Borghertz's Hands (AF Hands, Many job)
 -- !pos -5 1 48 244
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
+require("scripts/globals/status")
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 -----------------------------------
 -- If it's the first Hands quest
@@ -19,17 +19,17 @@ end;
 
 function nbHandsQuestsCompleted(player)
 
-    local questNotAvailable = 0;
+    local questNotAvailable = 0
 
     for nb = 0, 14, 1 do
         if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + nb) ~= QUEST_AVAILABLE) then
-            questNotAvailable = questNotAvailable + 1;
+            questNotAvailable = questNotAvailable + 1
         end
     end
 
-    return questNotAvailable;
+    return questNotAvailable
 
-end;
+end
 
 function onTrigger(player,npc)
 
@@ -103,15 +103,15 @@ function onTrigger(player,npc)
         player:startEvent(26); -- Dialog with Old Gauntlets KI
 
         if (nbHandsQuestsCompleted(player) == 1) then
-            player:setCharVar("BorghertzHandsFirstTime",1);
+            player:setCharVar("BorghertzHandsFirstTime",1)
         else
-            player:setCharVar("BorghertzCS",1);
+            player:setCharVar("BorghertzCS",1)
         end
     else
         player:startEvent(154); -- Standard dialog
     end
 
-end;
+end
 
 -- 154 Standard dialog
 -- 155 Start Quest
@@ -119,14 +119,14 @@ end;
 -- 26 Dialog avec Old Gauntlets KI
 -- 156 During Quest after Old Gauntlets KI ?
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 155) then
-        local NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getMainJob() - 1;
-        player:addQuest(JEUNO,NumQuest);
-        player:setCharVar("BorghertzAlreadyActiveWithJob",player:getMainJob());
+        local NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getMainJob() - 1
+        player:addQuest(JEUNO,NumQuest)
+        player:setCharVar("BorghertzAlreadyActiveWithJob",player:getMainJob())
     end
 
 end;

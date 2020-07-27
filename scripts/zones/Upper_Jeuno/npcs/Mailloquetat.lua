@@ -4,13 +4,13 @@
 -- Involved in Quests: Save my Sister
 -- !pos -31 -1 8 244
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
+require("scripts/globals/settings")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getFameLevel(JEUNO) >= 4 and player:getCharVar("saveMySisterVar") == 1) then
@@ -18,13 +18,13 @@ function onTrigger(player,npc)
     else
         player:startEvent(25); -- Standard dialog
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 159) then
-        player:setCharVar("saveMySisterVar", 2);
+        player:setCharVar("saveMySisterVar", 2)
     end
 end;

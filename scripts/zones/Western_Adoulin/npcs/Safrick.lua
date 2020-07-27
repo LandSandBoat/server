@@ -6,15 +6,15 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     -- Standard dialogue
-    player:startEvent(551);
-end;
+    player:startEvent(551)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

@@ -12,35 +12,35 @@ function onTrade(player,npc,trade)
     if (trade:hasItemQty(1107,1) and trade:getItemCount() == 1) then -- glitter sand
         local SinHunting = player:getCharVar("sinHunting");    -- RNG AF1
         if (SinHunting == 2) then
-            player:startEvent(5);
+            player:startEvent(5)
         end
     end
 
-end;
+end
 
 function onTrigger(player,npc)
 
     local SinHunting = player:getCharVar("sinHunting");    -- RNG AF1
 
     if (SinHunting == 1) then
-        player:startEvent(3, 0, 1107);
+        player:startEvent(3, 0, 1107)
     else
-        player:startEvent(2);
+        player:startEvent(2)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 3) then
-        player:setCharVar("sinHunting",2);
+        player:setCharVar("sinHunting",2)
     elseif (csid == 5) then
-        player:tradeComplete();
-        player:addKeyItem(tpz.ki.PERCHONDS_ENVELOPE);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PERCHONDS_ENVELOPE);
-        player:setCharVar("sinHunting",3);
+        player:tradeComplete()
+        player:addKeyItem(tpz.ki.PERCHONDS_ENVELOPE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PERCHONDS_ENVELOPE)
+        player:setCharVar("sinHunting",3)
     end
 
 end;

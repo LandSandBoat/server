@@ -3,17 +3,17 @@
 --  NPC: Solitary Ant
 -- Involved in Quests: Fire in the Hole
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
     player:startEvent(112)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end

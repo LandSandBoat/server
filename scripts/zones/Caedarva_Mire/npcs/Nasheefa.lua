@@ -4,30 +4,30 @@
 -- Type: Alzadaal Undersea Ruins
 -- !pos -440.998 0.107 -740.015 79
 -----------------------------------
-require("scripts/globals/keyitems");
+require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player,npc,trade)
 
     if (trade:getItemCount() == 1 and trade:hasItemQty(2185,1)) then -- Silver
-        player:tradeComplete();
-        player:startEvent(183);
+        player:tradeComplete()
+        player:startEvent(183)
     end
 
-end;
+end
 
 function onTrigger(player,npc)
 
     if (player:getXPos() < -440) then
-        player:startEvent(184);
+        player:startEvent(184)
     else
-        player:startEvent(182);
+        player:startEvent(182)
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 

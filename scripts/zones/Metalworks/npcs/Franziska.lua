@@ -5,21 +5,21 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 if (player:getCharVar("OptionalcsCornelia") ==1) then
-player:startEvent(777);
+player:startEvent(777)
 else
-player:startEvent(620);
+player:startEvent(620)
 end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 if (csid == 777) then
-player:setCharVar("OptionalcsCornelia",0);
+player:setCharVar("OptionalcsCornelia",0)
 end
 end;

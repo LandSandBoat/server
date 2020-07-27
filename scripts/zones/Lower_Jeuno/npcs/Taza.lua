@@ -6,11 +6,11 @@
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     player:showText(npc, ID.text.TAZA_SHOP_DIALOG)
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end

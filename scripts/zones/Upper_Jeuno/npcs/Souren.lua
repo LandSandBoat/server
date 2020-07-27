@@ -4,8 +4,8 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos -51 0 4 244
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -16,24 +16,24 @@ function onTrade(player,npc,trade)
             player:startEvent(182,10 - player:getCharVar("saveTheClockTowerVar")); -- "Save the Clock Tower" Quest
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_ACCEPTED) then
-        player:startEvent(120);
+        player:startEvent(120)
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED) then
-        player:startEvent(181);
+        player:startEvent(181)
     else
-        player:startEvent(88);
+        player:startEvent(88)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 182) then
-        player:addCharVar("saveTheClockTowerVar", 1);
-        player:addCharVar("saveTheClockTowerNPCz1", 16);
+        player:addCharVar("saveTheClockTowerVar", 1)
+        player:addCharVar("saveTheClockTowerNPCz1", 16)
     end
 end;

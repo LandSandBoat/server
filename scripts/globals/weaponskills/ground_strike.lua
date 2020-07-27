@@ -25,7 +25,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     -- accuracy mods (ONLY USE FOR ACCURACY VARIES WITH TP) , should be the params.acc at those %s NOT the penalty values. Leave 0 if params.acc doesnt vary with tp.
     params.acc100 = 0 params.acc200=0 params.acc300=0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1.75; params.atk200 = 1.75; params.atk300 = 1.75;
+    params.atk100 = 1.75; params.atk200 = 1.75; params.atk300 = 1.75
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage

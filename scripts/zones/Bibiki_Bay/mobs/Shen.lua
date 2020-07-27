@@ -5,21 +5,21 @@
 
 function onMobFight(mob,target)
     if (mob:getBattleTime() % 45 == 0) then
-        local mobId = mob:getID();
+        local mobId = mob:getID()
         for i = 1, 2 do
             if (not GetMobByID(mobId+i):isSpawned()) then
-                SpawnMob(mobId+i):updateEnmity(target);
+                SpawnMob(mobId+i):updateEnmity(target)
             end
         end
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end
 
 function onMonsterMagicPrepare(mob,target)
     -- casts Water IV, Waterga III, Flood, Drown
-    local rnd = math.random();
+    local rnd = math.random()
 
     if (rnd < 0.5) then
         return 201; -- waterga 3

@@ -4,15 +4,15 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.HIKOMUMAKIMU_SHOP_DIALOG);
+    player:showText(npc,ID.text.HIKOMUMAKIMU_SHOP_DIALOG)
 
     stock = {
         4829, 23184,1,     --Scroll of Poison II
@@ -34,11 +34,11 @@ function onTrigger(player,npc)
         4758, 22356,3,     --Scroll of Blizzard II
         4773, 28520,3      --Scroll of Thunder II
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
-end;
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

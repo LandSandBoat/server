@@ -27,7 +27,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    local GetGems = player:getCharVar("PXPassGetGems");
+    local GetGems = player:getCharVar("PXPassGetGems")
 
     if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
         -- Start Quest: Tenshodo Membership
@@ -43,10 +43,10 @@ function onTrigger(player,npc)
     else
         player:startEvent(106,4)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if csid == 106 and option == 0 then

@@ -5,17 +5,17 @@
 -- Confirmed shop stock, August 2013
 -----------------------------------
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop");
-require("scripts/globals/conquest");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+require("scripts/globals/conquest")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+    onHalloweenTrade(player,trade,npc)
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.UPIHKHACHLA_SHOP_DIALOG);
+    player:showText(npc,ID.text.UPIHKHACHLA_SHOP_DIALOG)
 
     stock = {
         17313,  1107,1,     --Grenade
@@ -36,23 +36,23 @@ function onTrigger(player,npc)
         1241,   354,3      --Twinkle Powder
     }
 
-    rank = getNationRank(tpz.nation.WINDURST);
+    rank = getNationRank(tpz.nation.WINDURST)
     if (rank ~= 1) then
         table.insert(stock,1022); --Thief's Tools
-        table.insert(stock,3643);
-        table.insert(stock,3);
+        table.insert(stock,3643)
+        table.insert(stock,3)
     end
     if (rank == 3) then
         table.insert(stock,1023); --Living Key
-        table.insert(stock,5520);
-        table.insert(stock,3);
+        table.insert(stock,5520)
+        table.insert(stock,3)
     end
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     local offset = npc:getID() - ID.npc.UNDERGROUND_POOL_OFFSET

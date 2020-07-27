@@ -14,7 +14,7 @@ function onMobFight(mob, target)
     -- The captain gives up at <= 20% HP. Everyone disengages
     local instance = mob:getInstance()
     if (mob:getHPP() <= 20 and instance:completed() == false) then
-        instance:complete();
+        instance:complete()
         DespawnMob(ID.mob.GESSHO, instance)
         for i,v in pairs(ID.mob[2]) do
             DespawnMob(v, instance)

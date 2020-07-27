@@ -1,8 +1,8 @@
 -- Zone: Lower Jeuno (245)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs");
-require("scripts/globals/status");
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/status")
 -----------------------------------
 
 LOWER_JEUNO = {
@@ -10,12 +10,12 @@ LOWER_JEUNO = {
         Community Service Quest: player clicks a streetlamp
         ..............................................................................................]]
     lampTrigger = function(player, npc)
-        local lampId = npc:getID();
-        local lampNum = lampId - ID.npc.STREETLAMP_OFFSET;
-        local lampCs = 120 + lampNum;
+        local lampId = npc:getID()
+        local lampNum = lampId - ID.npc.STREETLAMP_OFFSET
+        local lampCs = 120 + lampNum
 
         if (GetServerVariable("[JEUNO]CommService") == player:getID()) then
-            local hour = VanadielHour();
+            local hour = VanadielHour()
             if (hour >= 20 and hour < 21) then
                 player:startEvent(lampCs, 4); -- It is too early to light it.  You must wait until nine o'clock.
             elseif (hour >= 21 or hour < 1) then
@@ -42,24 +42,24 @@ LOWER_JEUNO = {
         Community Service Quest: end of event triggered by lamp click
         ..............................................................................................]]
     lampEventFinish = function(player, csid, option, lampNum)
-        local lampId = ID.npc.STREETLAMP_OFFSET + lampNum;
-        local lampCs = 120 + lampNum;
+        local lampId = ID.npc.STREETLAMP_OFFSET + lampNum
+        local lampCs = 120 + lampNum
 
         if (csid == lampCs and option == 1) then
-            GetNPCByID(lampId):setAnimation(tpz.anim.OPEN_DOOR);
+            GetNPCByID(lampId):setAnimation(tpz.anim.OPEN_DOOR)
 
-            local lampsRemaining = 12;
+            local lampsRemaining = 12
             for i = 0, 11 do
-                local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i);
+                local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
                 if (lamp:getAnimation() == tpz.anim.OPEN_DOOR) then
-                    lampsRemaining = lampsRemaining - 1;
+                    lampsRemaining = lampsRemaining - 1
                 end
             end
 
             if (lampsRemaining == 0) then
-                player:messageSpecial(ID.text.LAMP_MSG_OFFSET);
+                player:messageSpecial(ID.text.LAMP_MSG_OFFSET)
             else
-                player:messageSpecial(ID.text.LAMP_MSG_OFFSET + 1, lampsRemaining);
+                player:messageSpecial(ID.text.LAMP_MSG_OFFSET + 1, lampsRemaining)
             end
         end
     end,

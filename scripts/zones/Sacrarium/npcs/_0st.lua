@@ -10,15 +10,15 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 function onTrigger(player,npc)
 
     if (player:getZPos() < 50) then
-        npc:openDoor();
+        npc:openDoor()
     else
-        player:messageSpecial(ID.text.CANNOT_OPEN_SIDE);
+        player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

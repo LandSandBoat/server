@@ -25,7 +25,7 @@ function onTrigger(player,npc)
         }
 
         player:showText(npc, ID.text.AULAVIA_OPEN_DIALOG)
-        tpz.shop.general(player, stock, BASTOK);
+        tpz.shop.general(player, stock, BASTOK)
     end
 end
 

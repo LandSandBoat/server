@@ -4,25 +4,25 @@
 -- Involved in Quests: The Holy Crest, Lure of the Wildcat (San d'Oria)
 -- !pos -28 0.1 -6 233
 -----------------------------------
-require("scripts/globals/status");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Chateau_dOraguille/IDs");
+require("scripts/globals/status")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
-    local CrestProgress = player:getCharVar("TheHolyCrest_Event");
-    local RemedyKI = player:hasKeyItem(tpz.ki.DRAGON_CURSE_REMEDY);
-    local Stalker_Quest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER);
-    local StalkerProgress = player:getCharVar("KnightStalker_Progress");
-    local WildcatSandy = player:getCharVar("WildcatSandy");
+    local CrestProgress = player:getCharVar("TheHolyCrest_Event")
+    local RemedyKI = player:hasKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
+    local Stalker_Quest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
+    local StalkerProgress = player:getCharVar("KnightStalker_Progress")
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
     if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,17) == false) then
-        player:startEvent(559);
+        player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
     elseif (CrestProgress == 5 and RemedyKI == false) then
         player:startEvent(60); -- Gives key item
@@ -53,48 +53,48 @@ function onTrigger(player,npc)
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 1) then
         player:startEvent(106)
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 2) then
-        player:startEvent(107);
+        player:startEvent(107)
     else
         player:startEvent(529); -- standard dialogue
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 60) then
-        player:addKeyItem(tpz.ki.DRAGON_CURSE_REMEDY);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DRAGON_CURSE_REMEDY);
+        player:addKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DRAGON_CURSE_REMEDY)
     elseif (csid == 559) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",17,true);
+        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",17,true)
     elseif (csid == 121) then
         if (option == 1) then
-            player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER);
+            player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
         else
-            player:setCharVar("KnightStalker_Declined",1);
+            player:setCharVar("KnightStalker_Declined",1)
         end
     elseif (csid == 120 and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER);
-        player:setCharVar("KnightStalker_Declined",0);
+        player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
+        player:setCharVar("KnightStalker_Declined",0)
     elseif (csid == 78) then
-        player:setCharVar("KnightStalker_Progress",2);
+        player:setCharVar("KnightStalker_Progress",2)
     elseif (csid == 110) then
-        player:setCharVar("KnightStalker_Progress",4);
+        player:setCharVar("KnightStalker_Progress",4)
     elseif (csid == 118) then
-        player:setCharVar("KnightStalker_Option2",0);
+        player:setCharVar("KnightStalker_Option2",0)
     elseif (csid == 106) then
         if (player:hasKeyItem(tpz.ki.CRYSTAL_DOWSER)) then
             player:delKeyItem(tpz.ki.CRYSTAL_DOWSER); -- To prevent them getting a message about already having the keyitem
         else
-            player:setCharVar("MissionStatus",2);
-            player:addKeyItem(tpz.ki.CRYSTAL_DOWSER);
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.CRYSTAL_DOWSER);
+            player:setCharVar("MissionStatus",2)
+            player:addKeyItem(tpz.ki.CRYSTAL_DOWSER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.CRYSTAL_DOWSER)
         end
     end
-end;
+end
 
 -- Already in-use cutscenes are not listed
 -- 563 - ToAU, brought a letter from "Sage Raillefal."

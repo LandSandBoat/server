@@ -42,7 +42,7 @@ function onEventUpdate(player,csid,option,target)
             end
         end
 
-        player:createInstance(53,60);
+        player:createInstance(53,60)
         player:setLocalVar("theblackcoffinfight",0)
 
         elseif player:getLocalVar("againstalloddsfight") == 1 then
@@ -83,7 +83,7 @@ function onInstanceCreated(player,target,instance)
             end
         end
     else
-        player:messageText(target,ID.text.CANNOT_ENTER, false);
-        player:instanceEntry(target,3);
+        player:messageText(target,ID.text.CANNOT_ENTER, false)
+        player:instanceEntry(target,3)
     end
 end

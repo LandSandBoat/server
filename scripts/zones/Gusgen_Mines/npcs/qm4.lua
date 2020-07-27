@@ -4,9 +4,9 @@
 -- Involved In Quest: Ghosts of the Past
 -- !pos -174 0 369 196
 -----------------------------------
-local ID = require("scripts/zones/Gusgen_Mines/IDs");
-require("scripts/globals/npc_util");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Gusgen_Mines/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -17,17 +17,17 @@ function onTrade(player,npc,trade)
         not player:hasItem(13122) and
         not GetMobByID(ID.mob.WANDERING_GHOST):isSpawned()
     ) then
-        player:confirmTrade();
-        SpawnMob(ID.mob.WANDERING_GHOST):updateClaim(player);
+        player:confirmTrade()
+        SpawnMob(ID.mob.WANDERING_GHOST):updateClaim(player)
     end
-end;
+end
 
 function onTrigger(player,npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY);
-end;
+    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

@@ -10,7 +10,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     local WildcatSandy = player:getCharVar("WildcatSandy")

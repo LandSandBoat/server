@@ -2,7 +2,7 @@
 -- Area: Port Bastok
 --  NPC: Drawbridge
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onSpawn(npc)
@@ -17,7 +17,7 @@ function onSpawn(npc)
     --Triggers to re-open the walkway
     npc:addPeriodicTrigger(4, 360, 13)
     npc:addPeriodicTrigger(5, 360, 89)
-end;
+end
 
 function onTimeTrigger(npc, triggerID)
 --npc is the moghouse-side door to the bridge

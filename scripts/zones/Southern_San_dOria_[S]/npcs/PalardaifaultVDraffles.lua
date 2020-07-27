@@ -5,14 +5,14 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     player:showText(npc, 11024); -- Greetings, I am Curate Palardaifaut, and I have been assigned to the Knights of the Iron Ram to ensure that its members stray not from the path of the Goddess.
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

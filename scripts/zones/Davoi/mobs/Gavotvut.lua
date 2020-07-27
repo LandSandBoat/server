@@ -3,8 +3,8 @@
 --  Mob: Gavotvut
 -- Involved in Quest: The Doorman
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)

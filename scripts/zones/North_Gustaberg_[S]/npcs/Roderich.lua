@@ -3,11 +3,11 @@
 --  NPC: Gebhardt
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
@@ -18,7 +18,7 @@ function onTrigger(player,npc)
     else
         player:startEvent(111)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end
@@ -26,6 +26,6 @@ end
 function onEventFinish(player,csid,option)
 
     if (csid == 104) then
-        player:setCharVar("THE_FIGHTING_FOURTH",2);
+        player:setCharVar("THE_FIGHTING_FOURTH",2)
     end
 end;

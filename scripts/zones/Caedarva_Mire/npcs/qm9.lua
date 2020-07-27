@@ -4,15 +4,15 @@
 -- Involved in quest: The Wayward Automation
 -- !pos  129 1.396 -631 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require("scripts/globals/quests")
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION);
-    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress");
+    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
 
     if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 2) then
         if (player:getCharVar("TheWaywardAutomationNM") >= 1) then
@@ -21,17 +21,17 @@ function onTrigger(player,npc)
             SpawnMob(ID.mob.CAEDARVA_TOAD):updateClaim(player); --Caedarva toad
         end
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 14) then
-        player:setCharVar("TheWaywardAutomationProgress",3);
-        player:setCharVar("TheWaywardAutomationNM",0);
+        player:setCharVar("TheWaywardAutomationProgress",3)
+        player:setCharVar("TheWaywardAutomationNM",0)
     end
 end;

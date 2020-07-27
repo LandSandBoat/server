@@ -4,18 +4,18 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     player:startEvent(32003)
-end;
+end
 
 function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-end;
+    -- printf("onUpdate CSID: %u",csid)
+    -- printf("onUpdate RESULT: %u",option)
+end
 
 function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
+    -- printf("onFinish CSID: %u",csid)
+    -- printf("onFinish RESULT: %u",option)
 end;

@@ -4,10 +4,10 @@
 -- Chocobo
 -----------------------------------
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    -- player:startEvent(601);
+    -- player:startEvent(601)
     -- player:startEvent(820) --crazy hang
     -- player:startEvent(821) --crazy hang
     -- player:startEvent(600)
@@ -15,11 +15,11 @@ function onTrigger(player,npc)
     -- player:startEvent(862) -- cool choco debug menu
     -- player:startEvent(819)
     player:startEvent(818)
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end
 
 function onEventFinish(player,csid,option)
-    -- printf("OPTION:",option);
+    -- printf("OPTION:",option)
 end;

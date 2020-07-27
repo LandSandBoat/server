@@ -5,14 +5,14 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     player:showText(npc, 11690); -- How dare a baseborn peasant raise [his/her] voice to a noble knight!? Begone, before I strike you down myself!
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

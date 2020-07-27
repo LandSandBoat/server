@@ -6,12 +6,12 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local painfulMemory = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PAINFUL_MEMORY);
-    local theRequiem = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_REQUIEM);
-    local pathOfTheBard = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PATH_OF_THE_BARD);
+    local painfulMemory = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PAINFUL_MEMORY)
+    local theRequiem = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_REQUIEM)
+    local pathOfTheBard = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PATH_OF_THE_BARD)
 
     -- THE OLD MONUMENT
     if (player:getCharVar("TheOldMonument_Event") == 1) then
@@ -32,11 +32,11 @@ function onTrigger(player,npc)
     -- DEFAULT RESPONSE
     else
         player:startEvent(144); -- have you heard of lewenhart?
-    end;
-end;
+    end
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

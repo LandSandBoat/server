@@ -6,20 +6,20 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
-    local DoorOffset = npc:getID() - 63;
+    local DoorOffset = npc:getID() - 63
 
     if (GetNPCByID(DoorOffset):getAnimation() == 9) then
         GetNPCByID(DoorOffset):openDoor(7); -- _0rh
     end
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

@@ -6,5 +6,5 @@
 -----------------------------------
 
 function onTrigger(player,npc)
-    return 1;
+    return 1
 end;

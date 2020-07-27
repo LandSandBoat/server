@@ -15,7 +15,7 @@ require("scripts/globals/shop")
 
 function onTrade(player,npc,trade)
     -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE);
+    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
         if (trade:hasItemQty(17391,1) == true and trade:getItemCount() == 1) then
@@ -32,26 +32,26 @@ function onTrade(player,npc,trade)
     end
 
     if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
+        local count = trade:getItemCount()
+        local MagicFlyer = trade:hasItemQty(532,1)
         if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
+            player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
-    fatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON);
-    sharpeningTheSword = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD);
-    aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM);
+    fatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+    sharpeningTheSword = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+    aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
 
     -- Checking levels and jobs for af quest
-    mLvl = player:getMainLvl();
-    mJob = player:getMainJob();
+    mLvl = player:getMainLvl()
+    mJob = player:getMainJob()
     -- Check if they have key item "Ordelle whetStone"
-    OrdelleWhetstone = player:hasKeyItem(tpz.ki.ORDELLE_WHETSTONE);
-    sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS");
-    aBoysDreamCS = player:getCharVar("aBoysDreamCS");
+    OrdelleWhetstone = player:hasKeyItem(tpz.ki.ORDELLE_WHETSTONE)
+    sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
+    aBoysDreamCS = player:getCharVar("aBoysDreamCS")
 
     -- "Father and Son" Event Dialogs
     if (fatherAndSon == QUEST_AVAILABLE) then
@@ -95,62 +95,62 @@ function onTrigger(player,npc)
     else
         player:startEvent(868); -- Standard dialog
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     -- "Father and Son"
     if (csid == 508) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.FATHER_AND_SON);
+        player:addQuest(SANDORIA,tpz.quest.id.sandoria.FATHER_AND_SON)
     elseif (csid == 509) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17391);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17391)
         else
-            player:addItem(17391);
+            player:addItem(17391)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17391); -- Willow Fishing Rod
-            player:addTitle(tpz.title.LOST_CHILD_OFFICER);
-            player:setCharVar("QuestfatherAndSonVar",0);
-            player:addFame(SANDORIA,30);
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.FATHER_AND_SON);
+            player:addTitle(tpz.title.LOST_CHILD_OFFICER)
+            player:setCharVar("QuestfatherAndSonVar",0)
+            player:addFame(SANDORIA,30)
+            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.FATHER_AND_SON)
         end
     elseif (csid == 61) then
-        player:setCharVar("returnedAilbecheRod",1);
-        player:addTitle(tpz.title.FAMILY_COUNSELOR);
-        player:tradeComplete();
+        player:setCharVar("returnedAilbecheRod",1)
+        player:addTitle(tpz.title.FAMILY_COUNSELOR)
+        player:tradeComplete()
     -- "Sharpening the Sword"
     elseif ((csid == 45 or csid == 43) and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.SHARPENING_THE_SWORD);
-        player:setCharVar("sharpeningTheSwordCS",2);
-        player:setCharVar("returnedAilbecheRod",0);
+        player:addQuest(SANDORIA,tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+        player:setCharVar("sharpeningTheSwordCS",2)
+        player:setCharVar("returnedAilbecheRod",0)
     elseif (csid == 45 and option == 0) then
-        player:setCharVar("sharpeningTheSwordCS",1);
+        player:setCharVar("sharpeningTheSwordCS",1)
     elseif (csid == 44) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17643);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17643)
         else
-            player:delKeyItem(tpz.ki.ORDELLE_WHETSTONE);
-            player:addItem(17643);
+            player:delKeyItem(tpz.ki.ORDELLE_WHETSTONE)
+            player:addItem(17643)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17643); -- Honor Sword
-            player:setCharVar("sharpeningTheSwordCS",0);
-            player:addFame(SANDORIA,30);
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.SHARPENING_THE_SWORD);
+            player:setCharVar("sharpeningTheSwordCS",0)
+            player:addFame(SANDORIA,30)
+            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
     -- "A Boy's Dream"
     elseif ((csid == 41 or csid == 40) and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.A_BOY_S_DREAM);
-        player:setCharVar("aBoysDreamCS",2);
+        player:addQuest(SANDORIA,tpz.quest.id.sandoria.A_BOY_S_DREAM)
+        player:setCharVar("aBoysDreamCS",2)
     elseif (csid == 41 and option == 0) then
-        player:setCharVar("aBoysDreamCS",1);
+        player:setCharVar("aBoysDreamCS",1)
     elseif (csid == 15 and player:getCharVar("aBoysDreamCS") == 3) then
-        player:setCharVar("aBoysDreamCS",4);
+        player:setCharVar("aBoysDreamCS",4)
     elseif (csid == 47 and player:getCharVar("aBoysDreamCS") == 4) then
-        player:setCharVar("aBoysDreamCS",5);
+        player:setCharVar("aBoysDreamCS",5)
     elseif (csid == 25 and player:getCharVar("aBoysDreamCS") == 6) then
-        player:setCharVar("aBoysDreamCS",7);
+        player:setCharVar("aBoysDreamCS",7)
     elseif (csid == 59) then
-        player:setCharVar("UnderOathCS", 7);
+        player:setCharVar("UnderOathCS", 7)
     end
 end;
