@@ -17,7 +17,7 @@ end
 
 function onInitialize(zone)
     local hour = VanadielHour()
-    
+
     if hour >= 6 and hour < 16 then
         GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end

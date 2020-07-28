@@ -76,7 +76,7 @@ local loot =
         {
             {itemid = 1122, droprate = 1000}, -- Wyvern Skin
         },
-          
+
         {
             {itemid = 65535, droprate = 1000, amount = 24000},  -- gil
 

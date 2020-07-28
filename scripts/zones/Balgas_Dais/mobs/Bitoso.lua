@@ -22,7 +22,7 @@ function onMobFight (mob, target)
 end
 
 function onMagicHit(caster, target, spell)
-   
+
 end
 
 function onMobDeath(mob, player, isKiller)

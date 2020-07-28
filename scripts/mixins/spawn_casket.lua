@@ -12,7 +12,7 @@ g_mixins = g_mixins or {}
 g_mixins.spawn_casket = function(mob)
     mob:addListener("DEATH", "DEATH_SPAWN_CASKET", function(mob, player, isKiller)
         local mobPos = mob:getPos()
-        
+
         if player then
             if mob:getMaster() ~= nil then
                 local master = mob:getMaster()
