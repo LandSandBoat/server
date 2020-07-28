@@ -16541,6 +16541,10 @@ INSERT INTO `mob_droplist` VALUES (3138,0,0,1000,1875,1000); -- (Nergal, Bata, A
 INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,1000); -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
 INSERT INTO `mob_droplist` VALUES (3139,0,0,1000,1875,500);  -- (Apollyon Demon, Taurus, Ahriman) ancient_beastcoin x 1-2
 INSERT INTO `mob_droplist` VALUES (3140,0,0,1000,2826,350);
+INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,16990,50);  -- Ancient Goobbue; Daihannya
+INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,919,1000);  -- Ancient Goobbue; Boyahda Moss
+INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1264,1000); -- Ancient Goobbue; Grt. Boyahda Moss
+INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue; Tree Cuttings
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
