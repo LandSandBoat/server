@@ -1950,7 +1950,7 @@ INSERT INTO `mob_groups` VALUES (90,4168,41,'Vanguard_Oracle',600,0,2551,4000,0,
 INSERT INTO `mob_groups` VALUES (91,5118,41,'Lost_Stringes',0,128,3135,0,0,100,100,0);
 INSERT INTO `mob_groups` VALUES (92,5120,41,'Lost_Suttung',0,128,3136,0,0,100,100,0);
 INSERT INTO `mob_groups` VALUES (93,5117,41,'Arch_Antaeus',0,128,3130,0,0,105,105,0);
-INSERT INTO `mob_groups` VALUES (94,2864,41,'Nightmare_Roc',600,0,2798,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (94,6481,41,'Nightmare_Roc',600,0,2798,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (95,6470,41,'Nightmare_Stirge',600,0,1804,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (96,6322,41,'Nightmare_Diremite',600,0,1800,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (97,6433,41,'Nightmare_Gaylas',600,0,2798,5000,0,95,97,0);
