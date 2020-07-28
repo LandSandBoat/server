@@ -68,7 +68,7 @@ function onEventUpdate(player, csid, option)
         if #party >= partySizeRequirement then
 
             for key, member in pairs(party) do
-            	local mRace = member:getRace()
+                local mRace = member:getRace()
 
                 if member:getZoneID() ~= player:getZoneID() or member:checkDistance(player) > 15 then
                     player:updateEvent(1) -- member not in zone or range

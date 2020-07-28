@@ -128,7 +128,7 @@ function onEventFinish(player, csid, option)
             {item = 13204, title=tpz.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10})
         then
             player:setLocalVar("InspectorsGadgetZone", 1)
-		end
+        end
     elseif csid == 429 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.ONION_RINGS)
     elseif csid == 430 then

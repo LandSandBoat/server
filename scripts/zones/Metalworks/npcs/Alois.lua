@@ -59,6 +59,6 @@ function onEventFinish(player, csid, option)
             {item = 17775, tpz.title.ASSASSIN_REJECT, var = {"FadedPromises"}, fame=10})
         then
             player:delKeyItem(tpz.ki.DIARY_OF_MUKUNDA)
-		end    
+        end    
     end
 end
