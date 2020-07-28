@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.cooking)
         end
     end
-end;
+end

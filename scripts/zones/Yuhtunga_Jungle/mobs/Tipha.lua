@@ -12,4 +12,4 @@ function onMobDeath(mob, player, isKiller)
     if (isKiller and GetMobByID(ID.mob.CARTHI):isDead()) then
         GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
     end
-end;
+end

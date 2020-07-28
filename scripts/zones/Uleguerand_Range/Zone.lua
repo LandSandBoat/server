@@ -60,4 +60,4 @@ function onZoneWeatherChange(weather)
             waterfall:setAnimation(tpz.anim.OPEN_DOOR)
         end
     end
-end;
+end

@@ -44,4 +44,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.A_SONG_OF_LOVE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.A_SONG_OF_LOVE)
     end
-end;
+end

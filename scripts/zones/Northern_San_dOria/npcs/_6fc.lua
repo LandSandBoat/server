@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 3, csid, option)
     end
 
-end;
+end

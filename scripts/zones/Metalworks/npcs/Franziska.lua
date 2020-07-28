@@ -22,4 +22,4 @@ function onEventFinish(player, csid, option)
 if (csid == 777) then
 player:setCharVar("OptionalcsCornelia", 0)
 end
-end;
+end

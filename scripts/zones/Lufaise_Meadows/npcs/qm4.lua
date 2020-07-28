@@ -25,4 +25,4 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.YOU_CAN_SEE_FOR_MALMS)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end

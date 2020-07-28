@@ -51,4 +51,4 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
         end
     end
-end;
+end

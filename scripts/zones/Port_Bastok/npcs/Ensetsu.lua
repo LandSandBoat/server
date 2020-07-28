@@ -75,4 +75,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("illTakeTheBigBoxCS", 1)
     end
 
-end;
+end

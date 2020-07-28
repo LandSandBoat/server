@@ -11,4 +11,4 @@ function onMobDeath(mob, player, isKiller)
     if (player:getCharVar("TheRequiemCS") == 3) then
         player:setCharVar("TheRequiemYumKilled", 1)
     end
-end;
+end

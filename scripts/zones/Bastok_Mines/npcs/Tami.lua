@@ -66,4 +66,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.FULL_INVENTORY_AFTER_TRADE, 13594)
         end
     end
-end;
+end

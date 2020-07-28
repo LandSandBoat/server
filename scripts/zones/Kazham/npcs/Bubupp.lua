@@ -69,4 +69,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("OPO_OPO_FAILED", 1)
         player:setCharVar("OPO_OPO_RETRY", 6)
     end
-end;
+end

@@ -156,4 +156,4 @@ function onEventFinish(player, csid, option)
         SetServerVariable("ClammingPoint_" .. player:getLocalVar("ClammingPointID") .. "_InUse", 0)
         player:setLocalVar("ClammingPointID", 0)
     end
-end;
+end

@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
         local mask = player:getCharVar("GiftsOfGriffonPlumes")
         player:setMaskBit(mask, "GiftsOfGriffonPlumes", 5, true)
     end
-end;
+end

@@ -32,4 +32,4 @@ function onEventFinish(player, csid, option)
         player:addMission(TOAU, tpz.mission.id.toau.PATH_OF_BLOOD)
     end
 
-end;
+end

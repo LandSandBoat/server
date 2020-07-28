@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Scaredycats_Status", 2)
         player:addQuest(ADOULIN, tpz.quest.id.adoulin.SCAREDYCATS)
     end
-end;
+end

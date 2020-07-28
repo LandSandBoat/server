@@ -63,4 +63,4 @@ function onEventFinish(player, csid, option)
     end
 
     player:setLocalVar("Durogg_PlayCutscene", 0)
-end;
+end

@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 6)
         player:delKeyItem(tpz.ki.SHIELD_OFFERING)
     end
-end;
+end

@@ -116,4 +116,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 22) then
         player:setCharVar("KnightStalker_Option1", 0)
     end
-end;
+end

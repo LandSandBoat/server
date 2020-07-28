@@ -90,4 +90,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.MOMMYS_HELPER)
         player:needToZone(true)
     end
-end;
+end

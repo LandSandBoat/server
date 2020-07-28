@@ -20,4 +20,4 @@ function onMobDeath(mob, player, isKiller)
     GetNPCByID(16928768+210):setPos(196, -82, 495)
     GetNPCByID(16928768+210):setStatus(tpz.status.NORMAL)
  end
-end;
+end

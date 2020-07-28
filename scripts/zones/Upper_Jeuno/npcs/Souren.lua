@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 16)
     end
-end;
+end

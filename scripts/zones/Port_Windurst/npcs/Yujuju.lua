@@ -57,4 +57,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 621) then
         player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 19, true)
     end
-end;
+end

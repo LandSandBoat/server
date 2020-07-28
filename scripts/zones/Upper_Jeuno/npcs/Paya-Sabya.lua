@@ -29,4 +29,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("YagudoTorchCS", 1)
     end
 
-end;
+end

@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
     if (csid == 739 and option == 0) then
         player:setMentor(1)
     end
-end;
+end

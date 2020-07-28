@@ -129,4 +129,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BorghertzAlreadyActiveWithJob", player:getMainJob())
     end
 
-end;
+end

@@ -76,4 +76,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_optional_CS_Despachaire", 0)
         player:setCharVar("PromathiaStatus", 1)
     end
-end;
+end

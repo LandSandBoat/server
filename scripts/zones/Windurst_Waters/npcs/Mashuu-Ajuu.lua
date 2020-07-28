@@ -105,4 +105,4 @@ function onEventFinish(player, csid, option)
         player:addItem(572)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 572)
     end
-end;
+end

@@ -24,4 +24,4 @@ printf("onFinish RESULT: %u", option)
         player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands {R}
     end
 
-end;
+end

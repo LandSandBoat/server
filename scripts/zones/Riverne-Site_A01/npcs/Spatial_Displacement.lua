@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10 and option == 1) then
         player:setPos(-538.526, -29.5, 359.219, 255, 25) -- back to Misareaux Coast (Retail confirmed)
     end
-end;
+end

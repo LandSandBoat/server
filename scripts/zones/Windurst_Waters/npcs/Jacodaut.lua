@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.COOKING_SUPPORT, 0, 8, 1)
         player:addStatusEffect(tpz.effect.COOKING_IMAGERY, 1, 0, 120)
     end
-end;
+end

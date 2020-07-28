@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:addFame(JEUNO, 30)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
     end
-end;
+end

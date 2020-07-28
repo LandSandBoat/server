@@ -108,4 +108,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 196) then
         player:setCharVar("SearchingForRightWords_postcs", 0)
     end
-end;
+end

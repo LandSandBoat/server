@@ -20,4 +20,4 @@ end
 
 function onEventFinish(player, csid, option)
     tpz.armorStorage.onEventFinish(player, csid, option, 626, 627)
-end;
+end

@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
     end
-end;
+end

@@ -201,4 +201,4 @@ function onEventFinish(player, csid, option)
     else
     -- do nothing
     end
-end;
+end

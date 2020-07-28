@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     end
 
-end;
+end

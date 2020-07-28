@@ -18,4 +18,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar("pop", os.time() + 600) -- 10 minutes until Chandelier can be popped again
-end;
+end

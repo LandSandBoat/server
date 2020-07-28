@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestRychardetheChef_var", 1)  -- first stage of rycharde the chef quest
     end
 
-end;
+end

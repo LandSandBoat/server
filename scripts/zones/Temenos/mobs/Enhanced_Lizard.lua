@@ -19,4 +19,4 @@ local cofferID=Randomcoffer(4, Temenos_Western_Tower)
        GetNPCByID(16928768+cofferID):setPos(mobX, mobY, mobZ)
     GetNPCByID(16928768+cofferID):setStatus(tpz.status.NORMAL)
   end
-end;
+end

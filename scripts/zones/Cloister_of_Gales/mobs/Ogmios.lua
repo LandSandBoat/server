@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.DAZEBREAKER_CHARM)
     end
 
-end;
+end

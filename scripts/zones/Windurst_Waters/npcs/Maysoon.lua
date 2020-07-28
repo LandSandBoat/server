@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 30)
         player:tradeComplete()
     end
-end;
+end

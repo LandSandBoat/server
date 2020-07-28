@@ -96,4 +96,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     end
 
-end;
+end

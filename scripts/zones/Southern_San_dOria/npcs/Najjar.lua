@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
     if (csid == 16) then
         player:setCharVar("UnderOathCS", 2)  -- Quest: Under Oath - PLD AF3
     end
-end;
+end

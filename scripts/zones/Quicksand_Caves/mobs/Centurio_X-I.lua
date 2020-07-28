@@ -20,4 +20,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 426)
-end;
+end

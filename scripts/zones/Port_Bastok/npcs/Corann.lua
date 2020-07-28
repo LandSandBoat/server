@@ -55,4 +55,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12832)
     end
 
-end;
+end

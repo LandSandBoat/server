@@ -27,4 +27,4 @@ function onEventFinish(player, csid, option)
     if (csid == 209) then
         player:setCharVar("ChocoboOnTheLoose", 2)
     end
-end;
+end

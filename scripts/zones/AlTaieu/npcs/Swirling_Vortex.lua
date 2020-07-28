@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 159 and option == 1 ) then
         enterApollyon(player, APOLLYON_SE_NE)
     end
-end;
+end

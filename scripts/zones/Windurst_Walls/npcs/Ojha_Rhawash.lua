@@ -84,4 +84,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addQuest(WINDURST, tpz.quest.id.windurst.FLOWER_CHILD)
     end
-end;
+end

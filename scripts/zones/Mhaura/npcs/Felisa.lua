@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
         player:delGil(100)
     end
 
-end;
+end

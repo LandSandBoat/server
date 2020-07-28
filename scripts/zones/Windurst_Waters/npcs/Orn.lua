@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("EARLY_BIRD_TRACK_BOOK", 3)
     end
 
-end;
+end

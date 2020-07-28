@@ -33,4 +33,4 @@ function onEventFinish(player, csid, option)
         -- Progresses Quest: 'Dont Ever Leaf Me'
         player:setCharVar("DELM_Barenngo_Branch", 1)
     end
-end;
+end

@@ -38,4 +38,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestMakingTheGrade_prog", 3)
         player:delKeyItem(tpz.ki.TATTERED_TEST_SHEET)
     end
-end;
+end

@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("foiledagolemdeliverycomplete", 1)
         player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) -- remove key item
     end
-end;
+end

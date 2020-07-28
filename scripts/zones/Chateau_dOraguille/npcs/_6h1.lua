@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Cutscenes_8-2", 2)
     end
 
-end;
+end

@@ -65,4 +65,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("EleventhsHour", 1)
     end
 
-end;
+end

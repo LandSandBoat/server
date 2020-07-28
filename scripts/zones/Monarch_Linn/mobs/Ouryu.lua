@@ -56,4 +56,4 @@ function onMobDeath(mob, player, isKiller)
 
     player:addTitle(tpz.title.MIST_MELTER)
 
-end;
+end

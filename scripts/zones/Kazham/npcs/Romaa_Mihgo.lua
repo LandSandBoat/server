@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TuningOut_Progress", 6)
     end
 
-end;
+end

@@ -76,4 +76,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MILITARY_SCRIP)
     end
 
-end;
+end

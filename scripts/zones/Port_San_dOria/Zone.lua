@@ -57,4 +57,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 4) then
         player:setCharVar("COP_Ulmia_s_Path", 2)
     end
-end;
+end

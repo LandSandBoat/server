@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
         -- Progresses Quest: 'A Certain Substitute Patrolman'
         player:setCharVar("ACSP_NPCs_Visited", 3)
     end
-end;
+end

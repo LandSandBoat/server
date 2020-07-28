@@ -65,4 +65,4 @@ function onCriticalHit(target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

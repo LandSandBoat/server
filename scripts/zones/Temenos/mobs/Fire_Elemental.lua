@@ -38,4 +38,4 @@ function onMobDeath(mob, player, isKiller)
            end
         end    ,
      }
-end;
+end

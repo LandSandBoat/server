@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, tpz.ki.SILVER_BELL, tpz.ki.CORUSCANT_ROSARY, tpz.ki.BLACK_MATINEE_NECKLACE)
     end
 
-end;
+end

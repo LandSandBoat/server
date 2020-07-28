@@ -200,4 +200,4 @@ function onEventFinish(player, csid, option)
         -- the surrounding NPCs should have their dialogue check comebackqueenCS as well.
         end
     end
-end;
+end

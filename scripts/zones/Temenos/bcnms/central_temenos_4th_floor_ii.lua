@@ -31,4 +31,4 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
     if leavecode == tpz.battlefield.leaveCode.LOST then
     end
-end;
+end

@@ -22,4 +22,4 @@ end
 
 function onEventFinish(player, csid, option)
     -- printf("OPTION:", option)
-end;
+end

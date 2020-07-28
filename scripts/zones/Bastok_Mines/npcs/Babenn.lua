@@ -56,4 +56,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16629)
         end
     end
-end;
+end

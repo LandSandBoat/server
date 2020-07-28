@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:addFame(SANDORIA, 30)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
     end
-end;
+end

@@ -21,4 +21,4 @@ end
 function onEventFinish(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
-end;
+end

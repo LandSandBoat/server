@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ChasingQuotas_Progress", 4)
     end
 
-end;
+end

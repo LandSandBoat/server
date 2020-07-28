@@ -10,4 +10,4 @@ function onMobDeath(mob, player, isKiller)
         player:addKeyItem(tpz.ki.SEEDSPALL_ROSEUM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEEDSPALL_ROSEUM)
     end
-end;
+end

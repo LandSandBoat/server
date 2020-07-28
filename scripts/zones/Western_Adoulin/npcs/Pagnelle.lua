@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
         player:addFame(ADOULIN)
         player:needToZone(true)
     end
-end;
+end

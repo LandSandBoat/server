@@ -96,4 +96,4 @@ function onMobDeath(mob, player, isKiller)
     mob:showText(mob, ID.text.ABQUHBAH)
     local instance = mob:getInstance()
     instance:fail()
-end;
+end

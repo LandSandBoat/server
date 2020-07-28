@@ -258,4 +258,4 @@ function onEventFinish(player, csid, option)
     }) then
         player:setCharVar("TuningOut_Progress", 0) -- zero when quest is done
     end
-end;
+end

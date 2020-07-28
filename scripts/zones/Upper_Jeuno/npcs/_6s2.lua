@@ -76,4 +76,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER)
         end
     end
-end;
+end

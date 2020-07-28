@@ -23,4 +23,4 @@ function onEventFinish(player, csid, option)
         player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau {R}
     end
 
-end;
+end

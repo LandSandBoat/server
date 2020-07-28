@@ -51,4 +51,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
         end
     end
-end;
+end

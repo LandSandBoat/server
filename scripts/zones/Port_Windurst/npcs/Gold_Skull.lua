@@ -57,4 +57,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.SWORD_OFFERING)
     end
 
-end;
+end

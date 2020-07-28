@@ -14,4 +14,4 @@ function onMobDeath(mob, player, isKiller)
     if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1") == 3) then
         player:setCharVar("QuestStatus_DNC_AF1", 4)
     end
-end;
+end

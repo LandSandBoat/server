@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         player:addCharVar("QuestHatInHand_var", 8)
         player:addCharVar("QuestHatInHand_count", 1)
     end
-end;
+end

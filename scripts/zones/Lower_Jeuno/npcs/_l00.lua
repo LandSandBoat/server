@@ -18,4 +18,4 @@ end
 
 function onEventFinish(player, csid, option)
     LOWER_JEUNO.lampEventFinish(player, csid, option, 0)
-end;
+end

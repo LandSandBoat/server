@@ -16,4 +16,4 @@ end
 
 function onTrigger(player, npc)
     player:messageSpecial(ID.text.OCCASIONAL_LUMPS)
-end;
+end

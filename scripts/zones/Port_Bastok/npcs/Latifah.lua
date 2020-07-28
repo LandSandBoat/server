@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
         player:setMaskBit(player:getCharVar("StampHunt_Mask"), "StampHunt_Mask", 6, true)
     end
 
-end;
+end

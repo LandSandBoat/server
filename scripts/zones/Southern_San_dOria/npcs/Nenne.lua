@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
     end
 
-end;
+end

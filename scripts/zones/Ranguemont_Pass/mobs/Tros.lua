@@ -12,4 +12,4 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("TrosKilled", 1)
         player:setCharVar("Tros_Timer", os.time())
     end
-end;
+end

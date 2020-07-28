@@ -58,4 +58,4 @@ function onEventFinish(player, csid, option)
     if (csid == 21) then
         lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
-end;
+end

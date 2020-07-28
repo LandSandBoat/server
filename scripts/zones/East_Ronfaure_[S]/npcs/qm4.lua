@@ -33,4 +33,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PIECE_OF_SHATTERED_LUMBER)
     end
-end;
+end

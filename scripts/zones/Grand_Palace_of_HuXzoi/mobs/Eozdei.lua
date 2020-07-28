@@ -66,4 +66,4 @@ function onMobDeath(mob, player, isKiller)
             DisallowRespawn(mobId, true)
         end
     end
-end;
+end

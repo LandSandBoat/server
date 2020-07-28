@@ -85,4 +85,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     end
 
-end;
+end

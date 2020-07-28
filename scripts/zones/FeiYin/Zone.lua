@@ -71,4 +71,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
         player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end
-end;
+end

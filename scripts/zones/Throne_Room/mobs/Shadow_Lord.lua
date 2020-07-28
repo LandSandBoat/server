@@ -119,4 +119,4 @@ function onEventFinish(player, csid, option)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
     end
-end;
+end

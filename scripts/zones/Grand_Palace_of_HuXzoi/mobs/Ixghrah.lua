@@ -26,4 +26,4 @@ function onMobDeath(mob, player, isKiller)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
         player:setCharVar("PromathiaStatus", 2)
     end
-end;
+end

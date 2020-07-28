@@ -75,4 +75,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000)
         player:setCharVar("FiresOfDiscProg", 0)
     end
-end;
+end

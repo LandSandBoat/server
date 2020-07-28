@@ -72,4 +72,4 @@ function onEventFinish(player, csid, option)
         npcUtil.giveCurrency(player, "gil", 6000)
         player:setCharVar("TuningOut_Progress", 8)
     end
-end;
+end

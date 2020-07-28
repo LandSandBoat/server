@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TheHolyCrest_Event", 4)
     end
 
-end;
+end

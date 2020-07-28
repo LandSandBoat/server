@@ -65,4 +65,4 @@ function onEventFinish(player, csid, option)
         player:addFame(ADOULIN)
         player:setCharVar("ACSP_NPCs_Visited", 0)
     end
-end;
+end

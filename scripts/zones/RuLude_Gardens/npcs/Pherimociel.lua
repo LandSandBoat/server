@@ -64,4 +64,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10046 or 10049) then
         player:setCharVar("PromathiaStatus", 1)
     end
-end;
+end

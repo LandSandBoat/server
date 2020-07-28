@@ -192,4 +192,4 @@ function handlePet(mob, newPet, oldPet, target, modelId)
     newPet:spawn()
     newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
     newPet:updateEnmity(target)
-end;
+end

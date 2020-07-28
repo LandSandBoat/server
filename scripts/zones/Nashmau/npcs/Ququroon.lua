@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("ratraceCS", 5)
         end
     end
-end;
+end

@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 17809) -- Mumeito
     end
 
-end;
+end

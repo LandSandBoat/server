@@ -109,4 +109,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     end
-end;
+end

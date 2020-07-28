@@ -13,4 +13,4 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("AncientVesselKilled", 1)
     end
 
-end;
+end

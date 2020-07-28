@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FOE_FINDER_MK_I)
     end
 
-end;
+end

@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("laa_talk", 2)
     end
 
-end;
+end

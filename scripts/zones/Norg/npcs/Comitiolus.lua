@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:setCharVar("TuningOut_Progress", 7)
     end
-end;
+end

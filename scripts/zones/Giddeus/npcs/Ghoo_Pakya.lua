@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ghoo_talk", 2)
     end
 
-end;
+end

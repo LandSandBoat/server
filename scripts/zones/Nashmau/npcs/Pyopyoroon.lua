@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(TOAU, tpz.mission.id.toau.ROYAL_PUPPETEER)
         player:addMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)
     end
-end;
+end

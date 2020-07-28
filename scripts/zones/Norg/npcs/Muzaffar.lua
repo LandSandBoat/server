@@ -71,4 +71,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.BLACK_MARKETEER)
         player:startEvent(20)
     end
-end;
+end

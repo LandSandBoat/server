@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.SICKLEMOON_SALT)
     end
 
-end;
+end

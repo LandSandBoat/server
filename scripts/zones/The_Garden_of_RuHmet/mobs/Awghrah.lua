@@ -70,4 +70,4 @@ function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

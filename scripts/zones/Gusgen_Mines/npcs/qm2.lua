@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
         player:delKeyItem(tpz.ki.LETTER_FROM_ZEID)
     end
-end;
+end

@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ART_FOR_EVERYONE)
     end
 
-end;
+end

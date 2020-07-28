@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRAND_OF_TWILIGHT)
         player:addKeyItem(tpz.ki.BRAND_OF_TWILIGHT)
     end
-end;
+end

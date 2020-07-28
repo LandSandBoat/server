@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         SpawnMob(ID.mob.DOMAN):updateClaim(player)
         SpawnMob(ID.mob.ONRYO):updateClaim(player)
     end
-end;
+end

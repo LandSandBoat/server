@@ -32,4 +32,4 @@ function onEventFinish(player, csid, option)
     if (csid == 10167) then
         player:setCharVar("dancerTailorCS", 2)
     end
-end;
+end

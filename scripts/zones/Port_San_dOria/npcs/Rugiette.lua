@@ -51,4 +51,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("FFR", 1)
         end
     end
-end;
+end

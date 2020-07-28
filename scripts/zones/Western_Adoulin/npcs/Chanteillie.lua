@@ -61,4 +61,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("VVC_Status", 2)
         player:setCharVar("VVC_Gameday_Wait", vanaDay())
     end
-end;
+end

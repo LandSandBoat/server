@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.fishing)
         end
     end
-end;
+end

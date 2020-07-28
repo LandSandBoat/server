@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.STAR_OF_IFRIT)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
     end
-end;
+end

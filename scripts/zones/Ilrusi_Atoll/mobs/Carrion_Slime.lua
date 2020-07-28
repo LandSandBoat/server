@@ -17,4 +17,4 @@ function onMobDespawn(mob)
     else
         instance:setProgress(instance:getProgress() + 1)
     end
-end;
+end

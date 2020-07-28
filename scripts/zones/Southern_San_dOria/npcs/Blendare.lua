@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
     if (csid == 606) then
         player:setCharVar("BrothersCS", 1)
     end
-end;
+end

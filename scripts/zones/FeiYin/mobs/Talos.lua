@@ -15,4 +15,4 @@ function onMobDeath(mob, player, isKiller)
         player:addKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
     end
 
-end;
+end

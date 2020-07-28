@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 766 or csid == 603) then
         finishMissionTimeline(player, 1, csid, option)
     end
-end;
+end

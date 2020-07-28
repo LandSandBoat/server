@@ -68,4 +68,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_Louverance_s_Path", 1)
     end
 
-end;
+end

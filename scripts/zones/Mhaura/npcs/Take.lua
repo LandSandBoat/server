@@ -86,4 +86,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.EXPERTISE)
         end
     end
-end;
+end

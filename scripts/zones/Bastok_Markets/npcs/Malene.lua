@@ -41,4 +41,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 330) then
         player:setCharVar("WishUponAStar_Status", 2)
     end
-end;
+end

@@ -56,4 +56,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("theTalekeeperTruthCS", 1)
     end
 
-end;
+end

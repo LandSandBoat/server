@@ -24,4 +24,4 @@ PastPerfectVar = player:getCharVar("PastPerfectVar")
         player:setCharVar("PastPerfectVar", 2)
     end
 
-end;
+end

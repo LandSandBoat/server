@@ -29,4 +29,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TheWisdomVar", 2)
     end
 
-end;
+end

@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("[B7-2]Cornelia", 1)
     end
 
-end;
+end

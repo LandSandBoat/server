@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
             player:confirmTrade()
         end
     end
-end;
+end

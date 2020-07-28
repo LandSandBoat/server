@@ -67,4 +67,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     mob:showText(mob, ID.text.SO_I_FALL)
-end;
+end

@@ -146,4 +146,4 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 8)
         player:setCharVar("QuestInAPickle_var", 0)
     end
-end;
+end

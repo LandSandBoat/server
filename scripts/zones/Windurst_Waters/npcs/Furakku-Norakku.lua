@@ -85,4 +85,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 816) then
         player:setCharVar("ClassReunion_TalkedToFurakku", 1)
     end
-end;
+end

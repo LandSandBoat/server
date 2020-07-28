@@ -79,4 +79,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MomTheAdventurer_Event", 0)
     end
 
-end;
+end

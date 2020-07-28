@@ -161,4 +161,4 @@ printf("RESULT: %u", option)
         player:tradeComplete(trade)
         player:needToZone(true)
     end
-end;
+end

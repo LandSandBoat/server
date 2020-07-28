@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
         player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
         player:addStatusEffect(tpz.effect.IONIS, 0, 0, 9000)
     end
-end;
+end

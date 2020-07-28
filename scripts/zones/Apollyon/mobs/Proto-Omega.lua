@@ -76,4 +76,4 @@ function onMobDespawn(mob)
     local mobZ = mob:getZPos()
     GetNPCByID(16932864+39):setPos(mobX, mobY, mobZ)
     GetNPCByID(16932864+39):setStatus(tpz.status.NORMAL)
-end;
+end

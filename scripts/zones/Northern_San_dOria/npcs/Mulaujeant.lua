@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.SUBLIME_STATUE_OF_THE_GODDESS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUBLIME_STATUE_OF_THE_GODDESS)
     end
-end;
+end

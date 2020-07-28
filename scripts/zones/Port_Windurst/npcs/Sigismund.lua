@@ -46,4 +46,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12316)
         player:setCharVar("QuestCatchAFallingStar_prog", 2)
     end
-end;
+end

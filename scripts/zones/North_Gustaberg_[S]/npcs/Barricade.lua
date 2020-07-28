@@ -24,4 +24,4 @@ function onEventFinish(player, csid, option)
     if (csid == 106) then
         player:setCharVar("THE_FIGHTING_FOURTH", 3)
     end
-end;
+end

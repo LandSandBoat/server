@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option, npc)
         npc:openDoor(16)
     end
 
-end;
+end

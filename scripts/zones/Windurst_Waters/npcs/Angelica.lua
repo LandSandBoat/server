@@ -95,4 +95,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestAPoseByOtherName_prog", 0)
         player:needToZone(true)
     end
-end;
+end

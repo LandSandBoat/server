@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
         player:addMission(COP, tpz.mission.id.cop.DAWN)
         player:setCharVar("PromathiaStatus", 0)
     end
-end;
+end

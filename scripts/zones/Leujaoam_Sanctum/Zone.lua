@@ -35,4 +35,4 @@ end
 
 function onInstanceLoadFailed()
     return 79
-end;
+end

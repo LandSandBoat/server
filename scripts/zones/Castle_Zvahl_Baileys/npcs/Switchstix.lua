@@ -371,4 +371,4 @@ function onEventFinish(player, csid, option)
             [86] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 15069); end, -- Aegis
         }
     end
-end;
+end

@@ -146,4 +146,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.CLAMMING_KIT)
         player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
     end
-end;
+end

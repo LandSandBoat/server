@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
         player:setCharVar("Raptor_Rapture_Status", 5)
     end
-end;
+end

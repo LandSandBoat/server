@@ -185,4 +185,4 @@ function onEventFinish(player, csid, option)
             player:addQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
         end
     end
-end;
+end

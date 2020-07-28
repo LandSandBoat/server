@@ -96,4 +96,4 @@ function onEventFinish(player, csid, option)
             player:addFame(WINDURST, 8)
         end
     end
-end;
+end

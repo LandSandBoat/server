@@ -142,4 +142,4 @@ function onEventFinish(player, csid, option)
         player:addMission(ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
         player:setCharVar("ZilartStatus", 0)
     end
-end;
+end

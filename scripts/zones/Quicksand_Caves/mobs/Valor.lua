@@ -24,4 +24,4 @@ function onMobDeath(mob, player, isKiller)
     ) then
         player:setCharVar("MissionStatus", 3)
     end
-end;
+end

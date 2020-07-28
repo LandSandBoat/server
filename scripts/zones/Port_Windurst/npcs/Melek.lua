@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 
-end;
+end

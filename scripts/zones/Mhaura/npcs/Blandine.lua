@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 128) then
         player:setCharVar("SmallDialogByBlandine", 0)
     end
-end;
+end

@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)
     end
 
-end;
+end

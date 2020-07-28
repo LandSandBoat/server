@@ -44,4 +44,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)
     end
 
-end;
+end

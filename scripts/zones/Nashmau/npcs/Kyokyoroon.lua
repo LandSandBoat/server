@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:setCharVar("ratraceCS", 6)
     end
-end;
+end

@@ -57,4 +57,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:setCharVar("unbridledPassion", 3)
     end
-end;
+end

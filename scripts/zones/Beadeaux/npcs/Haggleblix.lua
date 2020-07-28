@@ -186,4 +186,4 @@ function onEventFinish(player, csid, option)
         player:setLocalVar("hundoItemBought", 0)
 
     end
-end;
+end

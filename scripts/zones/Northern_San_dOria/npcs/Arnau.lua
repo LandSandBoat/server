@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 694) then
         player:setCharVar("OptionalCSforSTC", 0)
     end
-end;
+end

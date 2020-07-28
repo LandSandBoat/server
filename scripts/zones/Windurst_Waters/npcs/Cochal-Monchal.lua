@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
     end
 
-end;
+end

@@ -58,4 +58,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, 560*GIL_RATE)
     end
 
-end;
+end

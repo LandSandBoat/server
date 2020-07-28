@@ -208,4 +208,4 @@ function onEventFinish(player, csid, option)
             player:addItem(itemid)
         end
     end
-end;
+end

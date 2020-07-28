@@ -23,4 +23,4 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.VALKURM_VORTEX)
     end
 
-end;
+end

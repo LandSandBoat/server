@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("EveryonesGrudgeStarted", 0)
         player:addTitle(tpz.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)
     end
-end;
+end

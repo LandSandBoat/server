@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.goldsmithing)
         end
     end
-end;
+end

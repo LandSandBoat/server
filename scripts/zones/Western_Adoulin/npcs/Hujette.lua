@@ -46,4 +46,4 @@ function onEventFinish(player, csid, option)
             npcUtil.giveKeyItem(player, tpz.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end
-end;
+end

@@ -50,4 +50,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, NumQuest)
         end
     end
-end;
+end

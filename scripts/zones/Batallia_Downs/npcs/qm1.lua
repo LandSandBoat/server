@@ -16,4 +16,4 @@ function onTrigger(player, npc)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
-end;
+end

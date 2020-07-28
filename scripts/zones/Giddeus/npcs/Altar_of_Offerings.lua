@@ -32,4 +32,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OFF_OFFERING)
         player:setCharVar("QuestCrisisMaking_var", 2)
     end
-end;
+end

@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 203) then
         player:setCharVar("COP_Tenzen_s_Path", 1)
     end
-end;
+end

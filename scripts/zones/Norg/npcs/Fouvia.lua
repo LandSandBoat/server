@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ChangedWyvernName", 1)
         player:setPetName(tpz.pet.type.WYVERN, option+1)
     end
-end;
+end

@@ -123,4 +123,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("currCommService", 0)
 
     end
-end;
+end

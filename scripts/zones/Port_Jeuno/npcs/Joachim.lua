@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
             player:addKeyItem(tpz.ki.TRAVERSER_STONE1)
         end
     end
-end;
+end

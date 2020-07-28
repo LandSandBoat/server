@@ -53,4 +53,4 @@ function onEventFinish(player, csid, option)
             player:addFame(BASTOK, 30)
         end
     end
-end;
+end

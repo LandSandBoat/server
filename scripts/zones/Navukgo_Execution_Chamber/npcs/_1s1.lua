@@ -23,4 +23,4 @@ function onEventFinish(player, csid, option)
     if (EventFinishBCNM(player, csid, option)) then
         return
     end
-end;
+end

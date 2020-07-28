@@ -46,4 +46,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.GANTINEUXS_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GANTINEUXS_LETTER)
     end
-end;
+end

@@ -41,4 +41,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.CAT_BURGLARS_NOTE)
         end
     end
-end;
+end

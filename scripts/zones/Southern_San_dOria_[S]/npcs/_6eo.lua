@@ -33,4 +33,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("KnotQuiteThere", 0)
         end
     end
-end;
+end

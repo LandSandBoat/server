@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 757) then
         player:setCharVar("COP_louverance_story", 1)
     end
-end;
+end

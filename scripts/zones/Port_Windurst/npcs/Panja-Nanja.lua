@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.FISHING_SUPPORT, 0, 0, 0)
         player:addStatusEffect(tpz.effect.FISHING_IMAGERY, 2, 0, 7200)
     end
-end;
+end

@@ -65,4 +65,4 @@ function onEventFinish(player, csid, option)
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
     end
 
-end;
+end

@@ -70,4 +70,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
     end
 
-end;
+end

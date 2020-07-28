@@ -51,4 +51,4 @@ function onEventFinish(player, csid, option)
     if (csid==10131) then
         player:setCharVar("QuestStatus_DNC_AF1", 2)
     end
-end;
+end

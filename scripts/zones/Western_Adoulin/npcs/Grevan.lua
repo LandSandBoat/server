@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         -- Progresses Quest: 'Order Up'
         player:setMaskBit("Order_Up_NPCs", 10, true)
     end
-end;
+end

@@ -115,4 +115,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RANPIMONPIS_SPECIAL_STEW)
 
     end
-end;
+end

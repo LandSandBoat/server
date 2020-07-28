@@ -81,4 +81,4 @@ function onEventFinish(player, csid, option)
         player:addFame(KAZHAM, 30)
         player:completeQuest(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
-end;
+end

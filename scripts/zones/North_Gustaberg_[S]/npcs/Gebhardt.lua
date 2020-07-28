@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.BATTLE_RATIONS)
             player:setCharVar("THE_FIGHTING_FOURTH", 1)
     end
-end;
+end

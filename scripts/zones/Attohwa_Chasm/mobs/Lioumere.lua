@@ -11,4 +11,4 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 8)
         player:setCharVar("LioumereKilled", os.time())
     end
-end;
+end

@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     elseif ( csid == 153 and option == 1) then
         player:setPos(260, 35, 340, 255, 117)     -- To Tahrongi Canyon {R}
     end
-end;
+end
