@@ -25,7 +25,7 @@ function onZoneIn( player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(305.377,-36.092,660.435,71)
+        player:setPos(305.377, -36.092, 660.435, 71)
     end
 
     -- Check if we are on Windurst Mission 1-2
@@ -56,23 +56,23 @@ function onEventUpdate( player, csid, option)
     elseif (csid == 52) then
         if (player:getPreviousZone() == tpz.zone.WINDURST_WOODS or player:getPreviousZone() == tpz.zone.WEST_SARUTABARUTA) then
             if (player:getZPos() < 570) then
-                player:updateEvent(0,0,0,0,0,1)
+                player:updateEvent(0, 0, 0, 0, 0, 1)
             else
-                player:updateEvent(0,0,0,0,0,2)
+                player:updateEvent(0, 0, 0, 0, 0, 2)
             end
         elseif (player:getPreviousZone() == tpz.zone.OUTER_HORUTOTO_RUINS) then
             if (player:getZPos() > 570) then
-                player:updateEvent(0,0,0,0,0,2)
+                player:updateEvent(0, 0, 0, 0, 0, 2)
             end
         end
     elseif (csid == 71) then
-        player:setCharVar("ASA_Status",option)
+        player:setCharVar("ASA_Status", option)
     end
 end
 
 function onEventFinish( player, csid, option)
     if (csid == 48) then
-        player:setCharVar( "MissionStatus",6)
+        player:setCharVar( "MissionStatus", 6)
         -- Remove the glowing orb key items
         player:delKeyItem(tpz.ki.FIRST_GLOWING_MANA_ORB)
         player:delKeyItem(tpz.ki.SECOND_GLOWING_MANA_ORB)
@@ -83,7 +83,7 @@ function onEventFinish( player, csid, option)
     elseif (csid == 50) then
         lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 71) then
-        player:completeMission(ASA,tpz.mission.id.asa.BURGEONING_DREAD)
-        player:addMission(ASA,tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
+        player:completeMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
+        player:addMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end
 end;

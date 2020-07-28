@@ -20,7 +20,7 @@ function onTrigger(player, itemId, target)
 
     -- validate itemId
     if (itemId == nil or itemId < 1) then
-        error(player,"Invalid itemID.")
+        error(player, "Invalid itemID.")
         return
     end
 
@@ -31,7 +31,7 @@ function onTrigger(player, itemId, target)
     else
         targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player,string.format("Player named '%s' not found!", target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end

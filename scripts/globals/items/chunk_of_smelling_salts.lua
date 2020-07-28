@@ -18,7 +18,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    if (target:addStatusEffect(tpz.effect.MEDICINE,0,0,180,5320)) then
+    if (target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 180, 5320)) then
         target:messageBasic(GAINS_EFFECT_OF_STATUS, tpz.effect.MEDICINE)
         pet:delStatusEffect(tpz.effect.SLEEP_I)
         pet:delStatusEffect(tpz.effect.SLEEP_II)
@@ -28,8 +28,8 @@ function onItemUse(target)
     end
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
 end

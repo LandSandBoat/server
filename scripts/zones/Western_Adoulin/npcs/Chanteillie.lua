@@ -11,7 +11,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local DNGITL = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
     local VVC = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
@@ -25,7 +25,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local DNGITL = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
     local VVC = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
@@ -45,10 +45,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- DO NOT GO INTO THE LIGHT
     if (csid == 5076) then
         player:confirmTrade()

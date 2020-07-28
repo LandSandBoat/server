@@ -11,12 +11,12 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local C2000 = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local C2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
     local AGreetingCardian = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
     local LPB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
     local AGCcs = player:getCharVar("AGreetingCardian_Event")
@@ -37,17 +37,17 @@ function onTrigger(player,npc)
     -- Might be Legendary Plan B, most likely Lost Chick related.
     -- only activates before LPB completes so leaving it in as is for now
     elseif LPB == QUEST_ACCEPTED then
-        player:startEvent(312,0,529,940,858)
+        player:startEvent(312, 0, 529, 940, 858)
 
     else
         player:startEvent(277) -- standard dialog
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- A Greeting Cardian
     if csid == 296 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)

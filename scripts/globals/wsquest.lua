@@ -447,8 +447,8 @@ local WSQUEST_CONT1 = 1 -- Player has accepted quest ('cont1')
 local WSQUEST_CONT2 = 2 -- Player has turned in completed trial weapon and received Map to Annals ('cont2')
 local WSQUEST_FINISH = 3 -- Player has killed NM and received Annals of Truth ('finish')
 
-local function getQuestState(quest,player)
-    local status = player:getQuestStatus(quest.logId,quest.questId)
+local function getQuestState(quest, player)
+    local status = player:getQuestStatus(quest.logId, quest.questId)
     if status == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.ANNALS_OF_TRUTH) then
             return WSQUEST_FINISH
@@ -458,7 +458,7 @@ local function getQuestState(quest,player)
             return WSQUEST_CONT1
         end
     elseif status == QUEST_AVAILABLE then
-        local canEquip = player:canEquipItem(quest.trialWeaponId,true)
+        local canEquip = player:canEquipItem(quest.trialWeaponId, true)
         local sufficientSkill = player:getCharSkillLevel(quest.skillId) / 10 >= quest.minSkill
         local hasWeapon = player:hasItem(quest.trialWeaponId)
         local hasTrainingGuide = player:hasKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
@@ -471,9 +471,9 @@ local function getQuestState(quest,player)
     return nil
 end
 
-tpz.wsquest.getTradeEvent = function(quest,player,trade)
+tpz.wsquest.getTradeEvent = function(quest, player, trade)
     local wsPoints = (trade:getItem(0):getWeaponskillPoints())
-    if getQuestState(quest,player) == WSQUEST_CONT1 and trade:hasItemQty(quest.trialWeaponId,1) and trade:getItemCount() == 1 then
+    if getQuestState(quest, player) == WSQUEST_CONT1 and trade:hasItemQty(quest.trialWeaponId, 1) and trade:getItemCount() == 1 then
         if wsPoints < 300 then
             return quest.eventIds.tradedUnfinishedWeapon
         else
@@ -484,8 +484,8 @@ tpz.wsquest.getTradeEvent = function(quest,player,trade)
     return nil
 end
 
-tpz.wsquest.getTriggerEvent = function(quest,player)
-    local state = getQuestState(quest,player)
+tpz.wsquest.getTriggerEvent = function(quest, player)
+    local state = getQuestState(quest, player)
 
     if state == WSQUEST_START then
         return quest.eventIds.start -- WS Quest start
@@ -521,44 +521,44 @@ tpz.wsquest.handleWsnmDeath = function(quest, player)
     end
 end
 
-tpz.wsquest.handleEventFinish = function(quest,player,csid,option,learnedId)
+tpz.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
     if csid == quest.eventIds.start then -- WS Quest start
         if quest.options.acceptStart == nil or option == quest.options.acceptStart then
             if player:getFreeSlotsCount() < 1 then
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED,quest.trialWeaponId)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, quest.trialWeaponId)
             else
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED,quest.trialWeaponId)
-                player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED,tpz.ki.WEAPON_TRAINING_GUIDE)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, quest.trialWeaponId)
+                player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, tpz.ki.WEAPON_TRAINING_GUIDE)
                 player:addItem(quest.trialWeaponId)
                 player:addKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
-                player:addQuest(quest.logId,quest.questId)
+                player:addQuest(quest.logId, quest.questId)
             end
         end
     elseif csid == quest.eventIds.cont1 then -- WS Quest ongoing stage 1
         if quest.options.dropped ~= nil and option == quest.options.dropped then -- Misplaced weapon
             if player:hasItem(quest.trialWeaponId) then
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED,quest.trialWeaponId)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, quest.trialWeaponId)
             else
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED,quest.trialWeaponId)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, quest.trialWeaponId)
                 player:addItem(quest.trialWeaponId)
             end
         end
         if option == quest.options.abandon then -- Abandon quest
-            player:delQuest(quest.logId,quest.questId)
+            player:delQuest(quest.logId, quest.questId)
             player:delKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
             player:delKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
         end
     elseif csid == quest.eventIds.tradedFinishedWeapon then -- WS Quest ongoing stage 2
         player:tradeComplete()
-        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED,tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
         player:addKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
     elseif csid == quest.eventIds.finish then -- WS Quest completed
         player:messageSpecial(learnedId)
         player:addLearnedWeaponskill(quest.wsUnlockId)
-        player:addFame(quest.fameRegion,30)
+        player:addFame(quest.fameRegion, 30)
         player:delKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
         player:delKeyItem(tpz.ki.ANNALS_OF_TRUTH)
         player:delKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
-        player:completeQuest(quest.logId,quest.questId)
+        player:completeQuest(quest.logId, quest.questId)
     end
 end

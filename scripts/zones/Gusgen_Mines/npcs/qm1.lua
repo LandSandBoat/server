@@ -21,14 +21,14 @@ function onTrigger(player, npc)
 	
     if VanadielRSELocation() == 1 and VanadielRSERace() == playerRace and not player:hasItem(18246 + playerRace - raceOffset) then
 		
-        npcUtil.popFromQM(player, npc, ID.mob.AROMA_FLY, {claim=true, hide=math.random(600,1800), look=true, radius=1})  -- ??? despawns and respawns 10-30 minutes after NM dies
+        npcUtil.popFromQM(player, npc, ID.mob.AROMA_FLY, {claim=true, hide=math.random(600, 1800), look=true, radius=1})  -- ??? despawns and respawns 10-30 minutes after NM dies
 	
         for i = 1, 7 do
             SetDropRate(172, 18246 + i, 0) -- zeros all drop rates
         end
         SetDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
 		
-        local newSpawn = math.random(1,3) -- determine new spawn point for ???
+        local newSpawn = math.random(1, 3) -- determine new spawn point for ???
         if newSpawn == 1 then
             npcUtil.queueMove(npc, {-99.574, -28.163, 386.702})
         elseif newSpawn == 2 then

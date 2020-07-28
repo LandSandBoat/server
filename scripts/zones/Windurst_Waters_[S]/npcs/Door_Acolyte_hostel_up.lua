@@ -2,7 +2,7 @@
 -- Area: Windurst Waters (S)
 --  NPC: Door Acolyte hostel
 -- Type: Quest NPC
--- !pos 146.619,-8.525,242.874 94
+-- !pos 146.619, -8.525, 242.874 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/keyitems")
@@ -11,10 +11,10 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if
         player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_ACCEPTED
         and player:getCharVar("sayItWithAHandbagCS") == 0
@@ -23,10 +23,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 171 then
         if option == 1 then
             player:setCharVar("sayItWithAHandbagCS", 1)

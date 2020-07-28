@@ -15,11 +15,11 @@ end
 
 function onItemUse(target)
     if (target:hasStatusEffect(tpz.effect.ENCHANTMENT) == false) then
-        target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,600,17826)
+        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 600, 17826)
     end
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.ARCANA_KILLER, 20)
 end
 

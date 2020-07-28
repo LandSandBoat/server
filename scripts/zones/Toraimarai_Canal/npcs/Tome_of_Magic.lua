@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Toraimarai_Canal/IDs")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.TOME_OF_MAGIC_OFFSET
 
     if offset == 4 and player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 1 then
@@ -21,10 +21,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 69 then
         player:setCharVar("MissionStatus", 2)
     end

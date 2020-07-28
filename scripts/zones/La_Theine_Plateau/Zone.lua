@@ -56,7 +56,7 @@ function onEventUpdate( player, csid, option)
     if (csid == 123) then
         lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 125) then
-        player:updateEvent(0,0,0,0,0,2)
+        player:updateEvent(0, 0, 0, 0, 0, 2)
     end
 end
 

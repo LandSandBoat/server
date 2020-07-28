@@ -36,7 +36,7 @@ tpz.artisan.moogleOnTrigger = function(player, npc)
     player:startEvent(csid, 0, 0, 0, sackSize, 0, 0, menuMask, mogVisited)
 end
 
-tpz.artisan.moogleOnUpdate = function(player,csid,option)
+tpz.artisan.moogleOnUpdate = function(player, csid, option)
 
     if option == 1 then -- Buy sack
         if player:getGil() >= 9980 and player:getContainerSize(tpz.inv.MOGSACK) == 0 then
@@ -71,16 +71,16 @@ tpz.artisan.moogleOnUpdate = function(player,csid,option)
     end
 end
 
-tpz.artisan.moogleOnFinish = function(player,csid,option)
+tpz.artisan.moogleOnFinish = function(player, csid, option)
     local zone = zones[player:getZoneID()]
 
     if option == 99 then -- Get Scroll
         if player:getCharVar("[artisan]nextScroll") < getMidnight() then
             if player:addItem(4181) then
-                player:messageSpecial(zone.text.ITEM_OBTAINED,4181)
+                player:messageSpecial(zone.text.ITEM_OBTAINED, 4181)
                 player:setCharVar("[artisan]nextScroll", getMidnight())
             else
-                player:messageSpecial(zone.text.ITEM_CANNOT_BE_OBTAINED,4181)
+                player:messageSpecial(zone.text.ITEM_CANNOT_BE_OBTAINED, 4181)
             end
         end
     end

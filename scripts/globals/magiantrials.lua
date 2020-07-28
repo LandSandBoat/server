@@ -265,7 +265,7 @@ end
 -- magianOrangeEventUpdate
 -----------------------------------
 
-function magianOrangeEventUpdate(player,ItemID,csid,option)
+function magianOrangeEventUpdate(player, ItemID, csid, option)
     -- DO NOT try to convert into "elseif" !
     -- Probably need to table all this too, for now I'm just mapping it out.
     if (csid == 10124 and option == 4456449) then
@@ -301,12 +301,12 @@ end
 -- magianGreenEventUpdate
 -----------------------------------
 
-function magianGreenEventUpdate(player,ItemID,csid,option)
+function magianGreenEventUpdate(player, ItemID, csid, option)
 end
 
 -----------------------------------
 -- magianBlueEventUpdate
 -----------------------------------
 
-function magianBlueEventUpdate(player,ItemID,csid,option)
+function magianBlueEventUpdate(player, ItemID, csid, option)
 end

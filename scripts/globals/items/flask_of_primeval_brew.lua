@@ -35,5 +35,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.TRANSCENDENCY,1,0,180)
+    target:addStatusEffect(tpz.effect.TRANSCENDENCY, 1, 0, 180)
 end

@@ -5,7 +5,7 @@
 require("scripts/globals/limbus")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     GetMobByID(16933033):updateEnmity(target)
     GetMobByID(16933034):updateEnmity(target)
     GetMobByID(16933035):updateEnmity(target)
@@ -26,7 +26,7 @@ function onMobDespawn(mob)
  local mobY = mob:getYPos()
  local mobZ = mob:getZPos()
 
-  GetNPCByID(16932864+263):setPos(mobX,mobY,mobZ)
+  GetNPCByID(16932864+263):setPos(mobX, mobY, mobZ)
   GetNPCByID(16932864+263):setStatus(tpz.status.NORMAL)
 
 end;

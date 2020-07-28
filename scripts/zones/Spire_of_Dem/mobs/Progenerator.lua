@@ -7,16 +7,16 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    mob:setLocalVar("maxBabies",4)
+    mob:setLocalVar("maxBabies", 4)
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
 end
 
 function onMobWeaponSkill(target, mob, skill)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)

@@ -7,11 +7,11 @@
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     --TODO: trade of pells for prize
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local festiveItems = {getFestiveItems(player)}
     if festiveItems[1] then
         player:startEvent(503, unpack(festiveItems))
@@ -20,10 +20,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local festiveItems = {getFestiveItems(player)}
     if csid == 503 then
         npcUtil.giveItem(player, festiveItems[option])

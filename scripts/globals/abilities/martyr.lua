@@ -11,17 +11,17 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getID() == target:getID()) then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG,0
+        return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getHP() < 4) then -- Fails if HP < 4
-        return tpz.msg.basic.UNABLE_TO_USE_JA,0
+        return tpz.msg.basic.UNABLE_TO_USE_JA, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- Plus 5 percent hp recovers per extra martyr merit
     local meritBonus = player:getMerit(tpz.merit.MARTYR) - 5
     -- printf("Martyr Merit Bonus: %d", meritBonus)
@@ -34,7 +34,7 @@ function onUseAbility(player,target,ability)
 
     --We need to capture this here because the base damage is the basis for the heal
     local healHP = damageHP * hpPercent
-    healHP = utils.clamp(healHP, 0,target:getMaxHP() - target:getHP())
+    healHP = utils.clamp(healHP, 0, target:getMaxHP() - target:getHP())
 
     -- If stoneskin is present, it should absorb damage...
     damageHP = utils.stoneskin(player, damageHP)

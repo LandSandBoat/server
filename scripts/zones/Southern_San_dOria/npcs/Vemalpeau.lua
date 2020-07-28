@@ -8,21 +8,21 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- "Flyers for Regine" conditional script
 
     if (FlyerForRegine == 1) then
         local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532,1)
+        local MagicFlyer = trade:hasItemQty(532, 1)
         if (MagicFlyer == true and count == 1) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.UNDER_OATH) == QUEST_ACCEPTED and player:getCharVar("UnderOathCS") == 0) then   -- Quest: Under Oath - PLD AF3
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) == QUEST_ACCEPTED and player:getCharVar("UnderOathCS") == 0) then   -- Quest: Under Oath - PLD AF3
         player:startEvent(7) --Under Oath - mentions the boy missing
     elseif (player:getCharVar("UnderOathCS") == 3 and player:hasKeyItem(tpz.ki.MIQUES_PAINTBRUSH)) then
         player:startEvent(5) --Under Oath - upset about the paintbrush
@@ -35,10 +35,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 7) then
         player:setCharVar("UnderOathCS", 1)

@@ -10,7 +10,7 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    mob:setLocalVar("SAND_BLAST",1)
+    mob:setLocalVar("SAND_BLAST", 1)
 end
 
 function onMobDeath(mob, player, isKiller)

@@ -21,7 +21,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local mobID = mob:getID()
     local formTime = mob:getLocalVar("formWait")
     local lifePercent = mob:getHPP()
@@ -54,7 +54,7 @@ function onMobFight(mob,target)
             mob:setMod(tpz.mod.UDMGRANGE, -50)
             mob:setMod(tpz.mod.UDMGMAGIC, -50)
             mob:setMod(tpz.mod.MOVE, 100)
-            mob:addStatusEffect(tpz.effect.REGAIN,7,3,0) -- The final form has Regain,
+            mob:addStatusEffect(tpz.effect.REGAIN, 7, 3, 0) -- The final form has Regain,
             mob:getStatusEffect(tpz.effect.REGAIN):setFlag(tpz.effectFlag.DEATH)
             currentForm = 2
             mob:setLocalVar("form", currentForm)
@@ -74,6 +74,6 @@ function onMobDespawn(mob)
     local mobX = mob:getXPos()
     local mobY = mob:getYPos()
     local mobZ = mob:getZPos()
-    GetNPCByID(16932864+39):setPos(mobX,mobY,mobZ)
+    GetNPCByID(16932864+39):setPos(mobX, mobY, mobZ)
     GetNPCByID(16932864+39):setStatus(tpz.status.NORMAL)
 end;

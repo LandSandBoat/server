@@ -15,7 +15,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -34,7 +34,7 @@ function onMobWeaponSkill(target, mob, skill)
     -- Because shell matters, but we don't want to calculate damage normally via MobMagicalMove since this is a % attack
     local damage = baseDamage * getElementalDamageReduction(target, tpz.magic.ele.WIND)
     -- we still need final adjustments to handle stoneskin etc though
-    damage = MobFinalAdjustments(damage,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.WIND,MOBPARAM_WIPE_SHADOWS)
+    damage = MobFinalAdjustments(damage, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.WIND, MOBPARAM_WIPE_SHADOWS)
 
     target:takeDamage(finalDamage, mob, tpz.attackType.MAGICAL, tpz.damageType.WIND)
     mob:resetEnmity(target)

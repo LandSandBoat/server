@@ -12,13 +12,13 @@ require("scripts/globals/msg")
 
 function onAbilityCheck(player, target, ability)
     if player:getPet() ~= nil then
-        return tpz.msg.basic.ALREADY_HAS_A_PET,0
+        return tpz.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:hasValidJugPetItem() then
-        return tpz.msg.basic.NO_JUG_PET_ITEM,0
+        return tpz.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(tpz.zoneMisc.PET) then
-        return tpz.msg.basic.CANT_BE_USED_IN_AREA,0
+        return tpz.msg.basic.CANT_BE_USED_IN_AREA, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 

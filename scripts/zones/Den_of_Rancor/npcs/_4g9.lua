@@ -6,10 +6,10 @@
 require("scripts/zones/Den_of_Rancor/globals")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     DEN_OF_RANCOR.onTradeLanternHaku(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     DEN_OF_RANCOR.onTriggerLantern(player, npc)
 end

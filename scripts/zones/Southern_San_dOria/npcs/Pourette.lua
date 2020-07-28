@@ -9,7 +9,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         player:messageSpecial(ID.text.FLYER_REFUSED)
     else
@@ -17,7 +17,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.DERFLAND) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.POURETTE_CLOSED_DIALOG)
     else
@@ -36,8 +36,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -23,5 +23,5 @@ end
 
 function onItemUse(target)
     local region = target:getCurrentRegion()
-    target:addStatusEffectEx(tpz.effect.TELEPORT,0,tpz.teleport.id.OUTPOST,0,1,0,region)
+    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.OUTPOST, 0, 1, 0, region)
 end

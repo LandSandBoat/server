@@ -10,15 +10,15 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if ((player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP and player:getWeaponSkillType(tpz.slot.AMMO) == tpz.skill.MARKSMANSHIP) or
     (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.ARCHERY and player:getWeaponSkillType(tpz.slot.AMMO) == tpz.skill.ARCHERY)) then
-        return 0,0
+        return 0, 0
     end
-    return 216,0 -- You do not have an appropriate ranged weapon equipped.
+    return 216, 0 -- You do not have an appropriate ranged weapon equipped.
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
 
     if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then -- can't have your crossbow/gun held like a bow, now can we?
         action:animation(target:getID(), action:animation(target:getID()) + 1)

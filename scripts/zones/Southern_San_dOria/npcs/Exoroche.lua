@@ -10,27 +10,27 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local FlyerForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     if (FlyerForRegine == 1) then
         local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532,1)
+        local MagicFlyer = trade:hasItemQty(532, 1)
         if (MagicFlyer == true and count == 1) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
 --    player:startEvent(79)  -- how the paper works -- under oath
 --    player:startEvent(51)  -- it says what i dont beleive you -- under oath
 --    player:startEvent(19)  -- thanks for your help i have to tell trion -- under oath
 --     player:startEvent(77)    -- a boys dream
 -- "Father and Son" Event Dialogs
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_ACCEPTED) then
         player:startEvent(542)
     elseif (player:getCharVar("aBoysDreamCS") == 2) then
         player:startEvent(50)
@@ -50,18 +50,18 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 542) then
-        player:setCharVar("QuestfatherAndSonVar",1)
+        player:setCharVar("QuestfatherAndSonVar", 1)
     elseif (csid == 50) then
-        player:setCharVar("aBoysDreamCS",3)
+        player:setCharVar("aBoysDreamCS", 3)
     elseif (csid == 32 and player:getCharVar("aBoysDreamCS") == 7) then
-        player:setCharVar("aBoysDreamCS",8)
+        player:setCharVar("aBoysDreamCS", 8)
     elseif (csid == 77) then
-        player:setCharVar("UnderOathCS",5)
+        player:setCharVar("UnderOathCS", 5)
     end
 end
 ------- used in expansions

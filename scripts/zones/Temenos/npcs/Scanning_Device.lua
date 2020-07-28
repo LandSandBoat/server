@@ -9,14 +9,14 @@ require("scripts/globals/limbus")
 -- onTrade Action
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(121, 511)
 end
 
@@ -24,7 +24,7 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     local time = 0
     switch (option): caseof {
         [1] = function (x) time = player:getBattlefieldTimeLeft(1); end, -- Northern Tower
@@ -36,12 +36,12 @@ function onEventUpdate(player,csid,option)
         [7] = function (x) time = player:getBattlefieldTimeLeft(7); end, -- Central 1st
         [8] = function (x) time = player:getBattlefieldTimeLeft(8); end, -- Central Basement
     }
-    player:updateEvent(0,time,0,0,0,0,0,0)
+    player:updateEvent(0, time, 0, 0, 0, 0, 0, 0)
 end
 
 -----------------------------------
 -- onEventFinish
 -----------------------------------
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end;

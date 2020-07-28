@@ -8,11 +8,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local duration = 90
     local attBoost = 1
     local magAttBoost = 1
@@ -39,8 +39,8 @@ function onSpellCast(caster,target,spell)
         magAttBoost = 1
         attBoost = 15
     end
-    caster:addStatusEffect(tpz.effect.ATTACK_BOOST,attBoost,0,duration)
-    caster:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST,magAttBoost,0,duration)
+    caster:addStatusEffect(tpz.effect.ATTACK_BOOST, attBoost, 0, duration)
+    caster:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST, magAttBoost, 0, duration)
 
     local minCure = 350
 
@@ -55,7 +55,7 @@ function onSpellCast(caster,target,spell)
         constant = 310
     end
 
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,true)
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
     final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
     local diff = (target:getMaxHP() - target:getHP())
@@ -63,6 +63,6 @@ function onSpellCast(caster,target,spell)
         final = diff
     end
     target:addHP(final)
-    caster:updateEnmityFromCure(target,final)
+    caster:updateEnmityFromCure(target, final)
     return final
 end

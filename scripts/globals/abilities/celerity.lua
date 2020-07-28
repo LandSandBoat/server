@@ -18,15 +18,15 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if player:hasStatusEffect(tpz.effect.CELERITY) then
         return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(tpz.effect.CELERITY,1,0,60)
+function onUseAbility(player, target, ability)
+    player:addStatusEffect(tpz.effect.CELERITY, 1, 0, 60)
 
     return tpz.effect.CELERITY
 end

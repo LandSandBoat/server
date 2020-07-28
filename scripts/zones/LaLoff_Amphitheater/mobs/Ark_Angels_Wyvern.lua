@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-7, mobid do
@@ -16,7 +16,7 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
 end
 

@@ -17,10 +17,10 @@ function onMobSpawn(mob)
     mob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
         -- Burst
         if spell:getID() == 212 then
-            mob:showText(mob,ID.text.PLAY_TIME_IS_OVER)
+            mob:showText(mob, ID.text.PLAY_TIME_IS_OVER)
         -- Flood
         elseif spell:getID() == 214 then
-            mob:showText(mob,ID.text.YOU_SHOULD_BE_THANKFUL)
+            mob:showText(mob, ID.text.YOU_SHOULD_BE_THANKFUL)
         end
     end)
 end
@@ -31,9 +31,9 @@ function onMobRoam(mob)
         -- pick a random living target from the two enemies
         local inst = mob:getBattlefield():getArea()
         local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
-        local target = GetMobByID(instOffset + math.random(4,5))
+        local target = GetMobByID(instOffset + math.random(4, 5))
         if not target:isDead() then
-            mob:addEnmity(target,0,1)
+            mob:addEnmity(target, 0, 1)
             mob:setLocalVar("wait", 0)
         end
     else
@@ -61,7 +61,7 @@ end
 
 function onMobDeath(mob, player, isKiller)
     mob:getBattlefield():lose()
-        for _,player in ipairs(mob:getBattlefield():getPlayers()) do
+        for _, player in ipairs(mob:getBattlefield():getPlayers()) do
             player:messageSpecial(ID.text.UNABLE_TO_PROTECT)
         end
 end

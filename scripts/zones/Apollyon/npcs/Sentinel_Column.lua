@@ -9,14 +9,14 @@ require("scripts/globals/limbus")
 -- onTrade Action
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(221, 127)
 end
 
@@ -24,7 +24,7 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     player:updateEvent(
         0,
         player:getBattlefieldTimeLeft(1), -- SW Apollyon
@@ -40,5 +40,5 @@ end
 -- onEventFinish
 -----------------------------------
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end;

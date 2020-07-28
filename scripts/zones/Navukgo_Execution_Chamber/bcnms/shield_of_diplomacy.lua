@@ -14,7 +14,7 @@ end
 function onBattlefieldInitialise(battlefield)
 
     local karababa  = battlefield:insertEntity(2157, true, true)
-    karababa:setSpawn(360.937,-116.5,376.937, 0)
+    karababa:setSpawn(360.937, -116.5, 376.937, 0)
     karababa:spawn()
 end
 

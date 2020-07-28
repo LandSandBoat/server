@@ -19,7 +19,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.STUNRES, 35)
     mob:setMod(tpz.mod.BINDRES, 35)
     mob:setMod(tpz.mod.GRAVITYRES, 35)
-    mob:addStatusEffect(tpz.effect.REGEN,50,3,0)
+    mob:addStatusEffect(tpz.effect.REGEN, 50, 3, 0)
     mob:setLocalVar("numAdds", 1)
 end
 
@@ -30,7 +30,7 @@ function onMobFight( mob, target )
         local godsRemaining = {}
         for i = 1, 4 do
             if (mob:getLocalVar("add"..i) == 0) then
-                table.insert(godsRemaining,i)
+                table.insert(godsRemaining, i)
             end
         end
         if (#godsRemaining > 0) then

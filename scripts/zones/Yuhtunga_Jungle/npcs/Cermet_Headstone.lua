@@ -12,19 +12,19 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- WRATH OF THE OPO-OPOS
     if npcUtil.tradeHas(trade, 790) then
-        if not player:hasCompletedQuest(OUTLANDS,tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) and (player:hasCompletedMission(ZILART,tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.FIRE_FRAGMENT)) then
-            player:addQuest(OUTLANDS,tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
-            player:startEvent(202,790)
+        if not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.FIRE_FRAGMENT)) then
+            player:addQuest(OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
+            player:startEvent(202, 790)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- HEADSTONE PILGRIMAGE
     if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE then
         if player:hasKeyItem(tpz.ki.FIRE_FRAGMENT) then
@@ -55,17 +55,17 @@ function onTrigger(player,npc)
         end
 
     -- DEFAULT DIALOGS
-    elseif player:hasCompletedMission(ZILART,tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- HEADSTONE PILGRIMAGE
     if csid == 200 and option == 1 then
         SpawnMob(ID.mob.TIPHA):updateClaim(player)

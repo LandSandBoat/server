@@ -53,9 +53,9 @@ function onEventFinish( player, csid, option)
         lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 903) then
         if (player:getZPos() >  -331) then
-            player:updateEvent(0,0,0,0,0,3)
+            player:updateEvent(0, 0, 0, 0, 0, 3)
         else
-            player:updateEvent(0,0,0,0,0,2)
+            player:updateEvent(0, 0, 0, 0, 0, 2)
         end
     end
 end;

@@ -15,8 +15,8 @@ require("scripts/globals/pets")
 -----------------------------------
 
 
-function onTrade(player,npc,trade)
-    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(17859) then
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(17859) then
         player:confirmTrade()
         npcUtil.giveItem(player, 17859)
     elseif npcUtil.tradeHas(trade, {4161, 5570}) and player:getCharVar("OperationTeatimeProgress") == 1 then -- Chai, Sleeping Potion
@@ -24,13 +24,13 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
-    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
     local LvL = player:getMainLvl()
     local Job = player:getMainJob()
@@ -77,29 +77,29 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 260 then
-        player:setCharVar("NoStringsAttachedProgress",2)
-    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=17859, title=tpz.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
+        player:setCharVar("NoStringsAttachedProgress", 2)
+    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=17859, title=tpz.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
         player:unlockJob(tpz.job.PUP)
         player:messageSpecial(ID.text.YOU_CAN_BECOME_PUP) -- "You can now become a puppetmaster."
         player:setPetName(tpz.pet.type.AUTOMATON, option+118)
         player:unlockAttachment(8224) --Harlequin Frame
         player:unlockAttachment(8193) --Harlequin Head
     elseif csid == 774 then
-        player:setCharVar("TheWaywardAutomationProgress",1)
-        player:addQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+        player:setCharVar("TheWaywardAutomationProgress", 1)
+        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     elseif csid == 776 then
-        npcUtil.completeQuest(player,AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=17858, var="TheWaywardAutomationProgress"})
+        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=17858, var="TheWaywardAutomationProgress"})
     elseif csid == 778 then
-        player:setCharVar("OperationTeatimeProgress",1)
-        player:addQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+        player:setCharVar("OperationTeatimeProgress", 1)
+        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     elseif csid == 780 then
-        player:setCharVar("OperationTeatimeProgress",2)
+        player:setCharVar("OperationTeatimeProgress", 2)
         player:confirmTrade()
     end
 end

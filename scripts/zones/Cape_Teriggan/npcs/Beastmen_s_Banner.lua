@@ -6,17 +6,17 @@
 local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.BEASTMEN_BANNER)
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("OPTION: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("OPTION: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("OPTION: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("OPTION: %u", option)
 end;

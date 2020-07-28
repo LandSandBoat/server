@@ -50,9 +50,9 @@ end
 function onEventUpdate(player, csid, option)
     -- csid 129 happens for both quests
     if csid == 129 then
-        local questIntroToTeamwork = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+        local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         -- newer versions of these quests only require a party of 2. 
         -- older versions require all 6
@@ -153,12 +153,12 @@ function onEventFinish(player, csid, option)
         end
     elseif csid == 131 and option == 1 then
         -- 131 is the third and last quest
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
     elseif csid == 133 and option == 1 then
         -- 133 is the second quest
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
     elseif csid == 135 and option == 1 then
         -- 135 is the first quest
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     end
 end

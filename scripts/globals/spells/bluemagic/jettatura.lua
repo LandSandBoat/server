@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     params.attribute = tpz.mod.INT
     params.skillType = tpz.skill.BLUE_MAGIC
@@ -32,7 +32,7 @@ function onSpellCast(caster,target,spell)
 
     if (resist > 0.5) then -- Do it!
         if (target:isFacing(caster)) then
-            if (target:addStatusEffect(params.effect,1,0,duration)) then
+            if (target:addStatusEffect(params.effect, 1, 0, duration)) then
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
             else
                 spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)

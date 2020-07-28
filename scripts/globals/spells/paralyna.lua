@@ -6,11 +6,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     if (target:getStatusEffect(tpz.effect.PARALYSIS) ~= nil) then
         target:delStatusEffect(tpz.effect.PARALYSIS)
         spell:setMsg(tpz.msg.basic.MAGIC_REMOVE_EFFECT)

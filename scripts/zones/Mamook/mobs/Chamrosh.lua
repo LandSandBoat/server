@@ -15,9 +15,9 @@ end
 
 function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:setLocalVar("changeTime",150)
-    mob:setLocalVar("useWise", math.random(25,50))
-    mob:addMod(tpz.mod.UFASTCAST,150)
+    mob:setLocalVar("changeTime", 150)
+    mob:setLocalVar("useWise", math.random(25, 50))
+    mob:addMod(tpz.mod.UFASTCAST, 150)
 end
 
 function onMobFight(mob, target)
@@ -37,7 +37,7 @@ function onMobFight(mob, target)
     end
     if mob:getHPP() < mob:getLocalVar("useWise") and mob:getLocalVar("usedMainSpec") == 0 then
         mob:useMobAbility(1702)
-        mob:setLocalVar("usedMainSpec",1)
+        mob:setLocalVar("usedMainSpec", 1)
     end
     if mob:getBattleTime() == changeTime then
         if mob:AnimationSub() == 0 then

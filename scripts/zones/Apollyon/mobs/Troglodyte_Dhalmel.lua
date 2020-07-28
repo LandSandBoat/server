@@ -25,7 +25,7 @@ function onMobDespawn(mob)
      IsMobDead(16933122)==true
     ) then
      -- item
-       GetNPCByID(16932864+178):setPos(mobX,mobY,mobZ)
+       GetNPCByID(16932864+178):setPos(mobX, mobY, mobZ)
     GetNPCByID(16932864+178):setStatus(tpz.status.NORMAL)
    end
 end;

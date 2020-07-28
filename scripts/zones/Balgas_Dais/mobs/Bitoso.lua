@@ -17,7 +17,7 @@ mob:setMobMod(tpz.mobMod.MAGIC_COOL, 20)
 mob:setMobMod(tpz.mobMod.SOUND_RANGE, 13)
 end
 
-function onMobFight (mob,target)
+function onMobFight (mob, target)
 
 end
 

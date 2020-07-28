@@ -3,7 +3,7 @@
 --  Mob: Grave Digger
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     GetMobByID(16933021):updateEnmity(target)
     GetMobByID(16933022):updateEnmity(target)
     GetMobByID(16933023):updateEnmity(target)

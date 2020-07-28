@@ -890,14 +890,14 @@ local loot =
 -- onTrade Action
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if not battlefield then
         return
@@ -913,7 +913,7 @@ function onTrigger(player,npc)
     local Y = npc:getYPos()
     local Z = npc:getZPos()
 
-    for coffer = 1,#ARMOURY_CRATES_LIST_TEMENOS,2 do
+    for coffer = 1, #ARMOURY_CRATES_LIST_TEMENOS, 2 do
         if (ARMOURY_CRATES_LIST_TEMENOS[coffer] == CofferID-16928768) then
             CofferType=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][1]
             InstanceRegion=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][2]
@@ -929,11 +929,11 @@ function onTrigger(player,npc)
         tpz.battlefield.ExtendTimeLimit(battlefield, addtime)
     elseif (CofferType == cITEM) then
         if (InstanceRegion == Central_Temenos_4th_Floor and coffer~=79) then
-            local randmimic = math.random(1,24)
+            local randmimic = math.random(1, 24)
             if ( randmimic < 19) then
-                local MimicList={16928986,16928987,16928988,16928989,16928990,16928991,16928992,16928993,16928994,16928995,16928996,16928997,16928998,16928999,16929000,16929001,16929002,16929003}
-                GetMobByID(MimicList[randmimic]):setSpawn(X,Y,Z)
-                SpawnMob(MimicList[randmimic]):setPos(X,Y,Z)
+                local MimicList={16928986, 16928987, 16928988, 16928989, 16928990, 16928991, 16928992, 16928993, 16928994, 16928995, 16928996, 16928997, 16928998, 16928999, 16929000, 16929001, 16929002, 16929003}
+                GetMobByID(MimicList[randmimic]):setSpawn(X, Y, Z)
+                SpawnMob(MimicList[randmimic]):setPos(X, Y, Z)
                 GetMobByID(MimicList[randmimic]):updateClaim(player)
             else
                 battlefield:setLocalVar("loot", 1)
@@ -955,37 +955,37 @@ function onTrigger(player,npc)
         tpz.battlefield.HealPlayers(battlefield)
     elseif (CofferType == cMIMIC) then
         if (coffer == 284) then
-            GetMobByID(16928844):setSpawn(X,Y,Z)
-            SpawnMob(16928844):setPos(X,Y,Z)
+            GetMobByID(16928844):setSpawn(X, Y, Z)
+            SpawnMob(16928844):setPos(X, Y, Z)
             GetMobByID(16928844):updateClaim(player)
         elseif (coffer == 321) then
-            GetMobByID(16928853):setSpawn(X,Y,Z)
-            SpawnMob(16928853):setPos(X,Y,Z)
+            GetMobByID(16928853):setSpawn(X, Y, Z)
+            SpawnMob(16928853):setPos(X, Y, Z)
             GetMobByID(16928853):updateClaim(player)
         elseif (coffer == 348) then
-            GetMobByID(16928862):setSpawn(X,Y,Z)
-            SpawnMob(16928862):setPos(X,Y,Z)
+            GetMobByID(16928862):setSpawn(X, Y, Z)
+            SpawnMob(16928862):setPos(X, Y, Z)
             GetMobByID(16928862):updateClaim(player)
         elseif (coffer == 360) then
-            GetMobByID(16928871):setSpawn(X,Y,Z)
-            SpawnMob(16928871):setPos(X,Y,Z)
+            GetMobByID(16928871):setSpawn(X, Y, Z)
+            SpawnMob(16928871):setPos(X, Y, Z)
             GetMobByID(16928871):updateClaim(player)
         elseif (coffer == 393) then
-            GetMobByID(16928880):setSpawn(X,Y,Z)
-            SpawnMob(16928880):setPos(X,Y,Z)
+            GetMobByID(16928880):setSpawn(X, Y, Z)
+            SpawnMob(16928880):setPos(X, Y, Z)
             GetMobByID(16928880):updateClaim(player)
         elseif (coffer == 127) then
-            GetMobByID(16928889):setSpawn(X,Y,Z)
-            SpawnMob(16928889):setPos(X,Y,Z)
+            GetMobByID(16928889):setSpawn(X, Y, Z)
+            SpawnMob(16928889):setPos(X, Y, Z)
             GetMobByID(16928889):updateClaim(player)
         elseif (coffer == 123) then
-            GetMobByID(16928894):setSpawn(X,Y,Z)
-            SpawnMob(16928894):setPos(X,Y,Z)
+            GetMobByID(16928894):setSpawn(X, Y, Z)
+            SpawnMob(16928894):setPos(X, Y, Z)
             GetMobByID(16928894):updateClaim(player)
         end
     end
     if (DespawnOtherCoffer == true) then
-        HideArmouryCrates(InstanceRegion,TEMENOS)
+        HideArmouryCrates(InstanceRegion, TEMENOS)
         if (InstanceRegion==Temenos_Eastern_Tower) then --despawn mob of the current floor
             if (coffer == 173 or coffer == 215 or coffer == 284 or coffer == 40) then
                 --floor 1
@@ -1044,12 +1044,12 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 -----------------------------------
 -- onEventFinish Action
 -----------------------------------
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end;

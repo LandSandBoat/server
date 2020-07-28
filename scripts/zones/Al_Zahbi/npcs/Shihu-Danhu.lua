@@ -33,7 +33,7 @@ function onEventFinish(player, csid, option)
         -- Random TP positions
         -- Coordinates marked {R} have been obtained by packet capture from retail. Don't change them.
         -- TODO: if we have astral candesence, then
-        local warp = math.random(1,5)
+        local warp = math.random(1, 5)
         if warp == 1 then
             player:setPos(-1.015, 8.999, -52.962, 192, 243)   -- Ru Lude Gardens (H-9)     {R}
         elseif warp == 2 then

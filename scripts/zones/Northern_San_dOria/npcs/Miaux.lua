@@ -11,12 +11,12 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local aCraftsmansWork = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local aCraftsmansWork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     if (player:getMainJob() == tpz.job.DRG and player:getMainLvl() >= AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
@@ -41,32 +41,32 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
-        player:setCharVar("has_seen_drgaf1_quest_already",1)
+        player:setCharVar("has_seen_drgaf1_quest_already", 1)
     elseif ((csid == 73 or csid == 71) and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
-        player:setCharVar("has_seen_drgaf1_quest_already",0)
-        player:setCharVar("aCraftsmanWork",1)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+        player:setCharVar("has_seen_drgaf1_quest_already", 0)
+        player:setCharVar("aCraftsmanWork", 1)
     elseif (csid == 70) then -- This is only if player has Altepa Polishing Stone
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16887)-- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16887)-- Peregrine (DRG AF1)
         else
-            player:setCharVar("aCraftsmanWork",0)
+            player:setCharVar("aCraftsmanWork", 0)
             player:delKeyItem(tpz.ki.ALTEPA_POLISHING_STONE)
             player:addItem(16887)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,16887) -- Peregrine (DRG AF1)
-            player:addFame(SANDORIA,20)
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16887) -- Peregrine (DRG AF1)
+            player:addFame(SANDORIA, 20)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif (csid == 67) then
         player:addKeyItem(tpz.ki.SHINY_EARRING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SHINY_EARRING)
-        player:setCharVar("ChasingQuotas_Progress",3)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHINY_EARRING)
+        player:setCharVar("ChasingQuotas_Progress", 3)
     end
 
 end

@@ -14,7 +14,7 @@ function onMobSpawn(mob)
         GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
-        SetDropRate(24,3344,0) -- do not drop clump_of_red_pondweed
+        SetDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
     end
 
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
@@ -27,7 +27,7 @@ end
 function onMobDespawn(mob)
     local ToD = GetServerVariable("[POP]Aspidochelone")
     local kills = GetServerVariable("[PH]Aspidochelone")
-    local popNow = (math.random(1,5) == 3 or kills > 6)
+    local popNow = (math.random(1, 5) == 3 or kills > 6)
 
     if LandKingSystem_HQ ~= 1 and ToD <= os.time() and popNow then
         -- 0 = timed spawn, 1 = force pop only, 2 = BOTH

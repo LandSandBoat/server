@@ -5,25 +5,25 @@ require("scripts/globals/besieged")
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local instance = npc:getInstance()
 
     if (instance:completed()) then
-        player:startEvent(100,0)
+        player:startEvent(100, 0)
     end
 
     return 1
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
     local id = instance:getID()
@@ -34,10 +34,10 @@ function onEventFinish(player,csid,option)
         if (id == 1) then
             points = 1000 - math.max(0, playerpoints)
         end
-        for i,v in pairs(chars) do
-            v:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED,points)
-            v:addAssaultPoint(LEUJAOAM_ASSAULT_POINT,points)
-            v:setCharVar("AssaultComplete",1)
+        for i, v in pairs(chars) do
+            v:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
+            v:addAssaultPoint(LEUJAOAM_ASSAULT_POINT, points)
+            v:setCharVar("AssaultComplete", 1)
             if (v:hasCompletedAssault(v:getCurrentAssault())) then
                 v:addCharVar("AssaultPromotion", 1)
             else
@@ -47,6 +47,6 @@ function onEventFinish(player,csid,option)
         end
     end
     if (csid == 102) then
-        player:setPos(0,0,0,0,79)
+        player:setPos(0, 0, 0, 0, 79)
     end
 end;

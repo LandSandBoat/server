@@ -3,7 +3,7 @@
 --  Mob: Tieholtsodi
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     GetMobByID(16933007):updateEnmity(target)
     GetMobByID(16933008):updateEnmity(target)
     GetMobByID(16933009):updateEnmity(target)

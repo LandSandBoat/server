@@ -11,10 +11,10 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local rank = tpz.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local assaultPoints = player:getAssaultPoint(PERIQIA_ASSAULT_POINT)
@@ -26,26 +26,26 @@ function onTrigger(player,npc)
     end
 
 --[[    if (rank > 0) then
-        player:startEvent(276,rank,haveimperialIDtag,assaultPoints,player:getCurrentAssault())
+        player:startEvent(276, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(282) -- no rank
     --end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 276 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then
             -- taken assault mission
-            player:addAssault(bit.rshift(option,4))
+            player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
             npcUtil.giveKeyItem(player, tpz.ki.PERIQIA_ASSAULT_ORDERS)
         elseif (selectiontype == 2) then
             -- purchased an item
-            local item = bit.rshift(option,14)
+            local item = bit.rshift(option, 14)
             local items =
             {
                 [1]  = {itemid = 15973, price = 3000},

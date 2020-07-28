@@ -5,7 +5,7 @@
 require("scripts/globals/limbus")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
  local mobID = mob:getID()
  -- print(mobID)
       local mobX = mob:getXPos()
@@ -52,13 +52,13 @@ IsMobDead(16932888)==true
  ) then
 
 -- time
-       GetNPCByID(16932864+70):setPos(mobX+3,mobY,mobZ)
+       GetNPCByID(16932864+70):setPos(mobX+3, mobY, mobZ)
     GetNPCByID(16932864+70):setStatus(tpz.status.NORMAL)
 -- recover
-       GetNPCByID(16932864+71):setPos(mobX+4,mobY,mobZ+4)
+       GetNPCByID(16932864+71):setPos(mobX+4, mobY, mobZ+4)
     GetNPCByID(16932864+71):setStatus(tpz.status.NORMAL)
 -- item
-      GetNPCByID(16932864+72):setPos(mobX,mobY,mobZ-3)
+      GetNPCByID(16932864+72):setPos(mobX, mobY, mobZ-3)
     GetNPCByID(16932864+72):setStatus(tpz.status.NORMAL)
 
 

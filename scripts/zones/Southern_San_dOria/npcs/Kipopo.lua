@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if
         player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER)
         and player:getCharVar("sayItWithAHandbagCS") == 2
@@ -21,7 +21,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
     local SkillCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
     local SkillLevel = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
@@ -43,21 +43,21 @@ function onTrigger(player,npc)
         player:startEvent(909)
     elseif player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER) and sayItWithAHandbagCS == 1 then
         player:startEvent(908)
-    elseif isGuildMember(player,7) == 1 then
+    elseif isGuildMember(player, 7) == 1 then
         if not player:hasStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY) then
-            player:startEvent(651,SkillCap,SkillLevel,1,239,player:getGil(),0,0,0)
+            player:startEvent(651, SkillCap, SkillLevel, 1, 239, player:getGil(), 0, 0, 0)
         else
-            player:startEvent(651,SkillCap,SkillLevel,1,239,player:getGil(),7128,0,0)
+            player:startEvent(651, SkillCap, SkillLevel, 1, 239, player:getGil(), 7128, 0, 0)
         end
     else
         player:startEvent(651) -- Standard Dialogue
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 914 then
         player:setCharVar("sayItWithAHandbagBonusCS", 0)
     elseif csid == 912 then
@@ -71,7 +71,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 908 and option == 1 then
         player:setCharVar("sayItWithAHandbagCS", 2)
     elseif csid == 651 and option == 1 then
-        player:messageSpecial(ID.text.LEATHER_SUPPORT,0,5,1)
-        player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY,1,0,120)
+        player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 1)
+        player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end
 end

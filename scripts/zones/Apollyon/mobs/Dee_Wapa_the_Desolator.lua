@@ -9,7 +9,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobID = mob:getID()
     local X = mob:getXPos()
     local Y = mob:getYPos()
@@ -20,7 +20,7 @@ function onMobEngaged(mob,target)
     SpawnMob(16933146):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local mobID = mob:getID()
     local X = mob:getXPos()
     local Y = mob:getYPos()
@@ -46,8 +46,8 @@ function onMobFight(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-    if ( ( GetMobByID(16933129):isAlive() or GetMobByID(16933137):isAlive() ) and alreadyReceived(player,3,Central_Temenos_2nd_Floor) == false) then
-        player:addTimeToBattlefield(Central_Temenos_2nd_Floor,5)
-        addLimbusList(player,3,Central_Temenos_2nd_Floor)
+    if ( ( GetMobByID(16933129):isAlive() or GetMobByID(16933137):isAlive() ) and alreadyReceived(player, 3, Central_Temenos_2nd_Floor) == false) then
+        player:addTimeToBattlefield(Central_Temenos_2nd_Floor, 5)
+        addLimbusList(player, 3, Central_Temenos_2nd_Floor)
     end
 end;
