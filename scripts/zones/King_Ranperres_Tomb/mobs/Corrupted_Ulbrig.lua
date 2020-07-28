@@ -18,7 +18,7 @@ function onMobSpawn(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-    if        
+    if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and
         player:getCharVar("MissionStatus") == 1 and
         GetMobByID(ID.mob.CORRUPTED_YORGOS):isDead() and

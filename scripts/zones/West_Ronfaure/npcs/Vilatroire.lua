@@ -54,7 +54,7 @@ function onEventUpdate(player, csid, option)
         local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
         local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
-        -- newer versions of these quests only require a party of 2. 
+        -- newer versions of these quests only require a party of 2.
         -- older versions require all 6
         local partySizeRequirement = 2
 
@@ -84,7 +84,7 @@ function onEventUpdate(player, csid, option)
                         partySameRaceCount = partySameRaceCount + 1
                     elseif (pRace == tpz.race.TARU_M or pRace == tpz.race.TARU_F) and (mRace == tpz.race.TARU_M or mRace == tpz.race.TARU_F) then
                         partySameRaceCount = partySameRaceCount + 1
-                    elseif pRace == tpz.race.GALKA and mRace == tpz.race.GALKA then 
+                    elseif pRace == tpz.race.GALKA and mRace == tpz.race.GALKA then
                         partySameRaceCount = partySameRaceCount + 1
                     elseif pRace == tpz.race.MITHRA and mRace == tpz.race.MITHRA then
                         partySameRaceCount = partySameRaceCount + 1

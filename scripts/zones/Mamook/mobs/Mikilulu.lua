@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Mamook
--- Mob: Mikilulu 
--- ToAU Quest: Prince and the Hopper 
+-- Mob: Mikilulu
+-- ToAU Quest: Prince and the Hopper
 -----------------------------------
 
 function onMobSpawn(mob)

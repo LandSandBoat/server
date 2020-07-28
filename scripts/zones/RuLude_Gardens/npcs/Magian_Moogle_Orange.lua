@@ -36,7 +36,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if (csid == 10124) then
-        local ItemID =0 
+        local ItemID =0
         if (option == 4456449) then
             ItemID = 19327
         elseif (option == 4456449) then

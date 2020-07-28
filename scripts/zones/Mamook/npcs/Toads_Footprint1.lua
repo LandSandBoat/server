@@ -39,5 +39,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("princeandhopper", 4)
     elseif csid == 225 then
         player:setCharVar("princeandhopper", 6)
-    end    
+    end
 end

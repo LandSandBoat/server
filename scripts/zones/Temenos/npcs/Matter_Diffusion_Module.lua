@@ -44,8 +44,8 @@ end
 
 function onTrigger(player, npc)
  local instancelist ={}
- local limbusbitmap = 0 
- local AllowLimbusToPlayer = true 
+ local limbusbitmap = 0
+ local AllowLimbusToPlayer = true
  local currentlimbus= TryTobackOnCurrentLimbus(player)
 
 

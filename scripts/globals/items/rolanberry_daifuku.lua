@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 6339
 -- Item: rolanberry_daifuku
--- Food Effect: 30 Min, All Races 
+-- Food Effect: 30 Min, All Races
 -----------------------------------------
 -- HP +20
 -- DEX +2
