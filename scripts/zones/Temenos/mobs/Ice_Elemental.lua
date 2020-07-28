@@ -5,7 +5,7 @@
 require("scripts/globals/limbus")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
 
 end
 
@@ -17,19 +17,19 @@ function onMobDeath(mob, player, isKiller)
      switch (mobID): caseof {
          -- 100 a 106 inclut (Temenos -Northern Tower )
         [16928849] = function (x)
-           GetNPCByID(16928768+174):setPos(mobX,mobY,mobZ)
+           GetNPCByID(16928768+174):setPos(mobX, mobY, mobZ)
            GetNPCByID(16928768+174):setStatus(tpz.status.NORMAL)
         end    ,
         [16928850] = function (x)
-           GetNPCByID(16928768+216):setPos(mobX,mobY,mobZ)
+           GetNPCByID(16928768+216):setPos(mobX, mobY, mobZ)
            GetNPCByID(16928768+216):setStatus(tpz.status.NORMAL)
         end    ,
         [16928851] = function (x)
-           GetNPCByID(16928768+321):setPos(mobX,mobY,mobZ)
+           GetNPCByID(16928768+321):setPos(mobX, mobY, mobZ)
            GetNPCByID(16928768+321):setStatus(tpz.status.NORMAL)
         end    ,
         [16928852] = function (x)
-           GetNPCByID(16928768+45):setPos(mobX,mobY,mobZ)
+           GetNPCByID(16928768+45):setPos(mobX, mobY, mobZ)
            GetNPCByID(16928768+45):setStatus(tpz.status.NORMAL)
         end    ,
         [16929034] = function (x)

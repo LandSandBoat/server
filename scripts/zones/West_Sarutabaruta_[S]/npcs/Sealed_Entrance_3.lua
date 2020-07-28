@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
     local maskBit1 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 0)
     local maskBit2 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 1)
@@ -34,8 +34,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

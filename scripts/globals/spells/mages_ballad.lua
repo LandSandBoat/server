@@ -6,11 +6,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local power = 1
 
     local iBoost = caster:getMod(tpz.mod.BALLAD_EFFECT) + caster:getMod(tpz.mod.ALL_SONGS_EFFECT)
@@ -30,7 +30,7 @@ function onSpellCast(caster,target,spell)
         duration = duration * 2
     end
 
-    if not (target:addBardSong(caster,tpz.effect.BALLAD,power,0,duration,caster:getID(), 0, 1)) then
+    if not (target:addBardSong(caster, tpz.effect.BALLAD, power, 0, duration, caster:getID(), 0, 1)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
     end
 

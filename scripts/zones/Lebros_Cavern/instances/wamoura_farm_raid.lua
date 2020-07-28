@@ -14,7 +14,7 @@ end
 
 function onInstanceCreated(instance)
 
-    for i,v in pairs(ID.mob[27]) do
+    for i, v in pairs(ID.mob[27]) do
         SpawnMob(v, instance)
     end
 
@@ -34,14 +34,14 @@ function onInstanceTimeUpdate(instance, elapsed)
 
     if (wipeTime == 0) then
         local wipe = true
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if v:getHP() ~= 0 then
                 wipe = false
                 break
             end
         end
         if (wipe) then
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 v:messageSpecial(ID.text.PARTY_FALLEN, 3)
             end
             instance:setWipeTime(elapsed)
@@ -51,7 +51,7 @@ function onInstanceTimeUpdate(instance, elapsed)
             instance:fail()
             return
         else
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 if v:getHP() ~= 0 then
                     instance:setWipeTime(0)
                     break
@@ -73,7 +73,7 @@ function onInstanceTimeUpdate(instance, elapsed)
     end
 
     if (message ~= 0) then
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if (timeRemaining >= 60) then
                 v:messageSpecial(ID.text.TIME_REMAINING_MINUTES, timeRemaining / 60)
             else
@@ -88,8 +88,8 @@ function onInstanceFailure(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED,10,10)
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
     end
 end
@@ -106,7 +106,7 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
+    for i, v in pairs(chars) do
         v:messageSpecial(ID.text.RUNE_UNLOCKED, 7, 8)
     end
 
@@ -119,8 +119,8 @@ function onInstanceComplete(instance)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

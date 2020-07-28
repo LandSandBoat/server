@@ -11,17 +11,17 @@ local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local hatedPlayer = npc:getLocalVar("hatedPlayer")
     local isInTime = npc:getLocalVar("hateTimer") > os.time()
 
     if hatedPlayer ~= 0 and not isInTime then
         -- player took too long, so reset animosity
-        npc:setLocalVar("hatedPlayer",0)
-        npc:setLocalVar("hateTimer",0)
+        npc:setLocalVar("hatedPlayer", 0)
+        npc:setLocalVar("hateTimer", 0)
         player:messageSpecial(ID.text.UNKNOWN_PRESENCE)
 
     elseif hatedPlayer == 0 then
@@ -39,16 +39,16 @@ function onTrigger(player,npc)
         npcUtil.popFromQM(player, npc, {ID.mob.IXAERN_DRK, ID.mob.IXAERN_DRK + 1, ID.mob.IXAERN_DRK + 2}, {radius = 3})
 
         -- move QM to random location, and reset animosity
-        local pos = math.random(1,4)
+        local pos = math.random(1, 4)
         npcUtil.queueMove(npc, ID.npc.IXAERN_DRK_QM_POS[pos])
         npc:setLocalVar("position", pos)
-        npc:setLocalVar("hatedPlayer",0)
-        npc:setLocalVar("hateTimer",0)
+        npc:setLocalVar("hatedPlayer", 0)
+        npc:setLocalVar("hateTimer", 0)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

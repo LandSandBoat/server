@@ -12,7 +12,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -22,8 +22,8 @@ function onMobWeaponSkill(target, mob, skill)
     MobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
 
     local dmgmod = 1
-    local info = MobMagicalMove(mob,target,skill,mob:getWeaponDmg()*2.3,tpz.magic.ele.EARTH,dmgmod,TP_MAB_BONUS,1)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.EARTH,MOBPARAM_IGNORE_SHADOWS)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.3, tpz.magic.ele.EARTH, dmgmod, TP_MAB_BONUS, 1)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.EARTH, MOBPARAM_IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
     return dmg
 

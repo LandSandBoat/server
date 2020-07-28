@@ -21,7 +21,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid, mobid+7 do

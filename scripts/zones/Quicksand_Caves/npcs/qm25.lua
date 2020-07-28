@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (npcUtil.giveItem(player, 1190)) then
         local newPosition = npcUtil.pickNewPosition(npc:getID(), ID.npc.ANTICAN_TAG_POSITIONS, true)
         npc:hideNPC(7200)

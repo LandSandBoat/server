@@ -9,7 +9,7 @@ require("scripts/globals/summon")
 ---------------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill)
@@ -18,11 +18,11 @@ function onPetAbility(target, pet, skill)
     local dmgmod = 5
 
     local totaldamage = 0
-    local damage = AvatarPhysicalMove(pet,target,skill,numhits,accmod,dmgmod,0,TP_NO_EFFECT,1,2,3)
-    totaldamage = AvatarFinalAdjustments(damage.dmg,pet,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.PIERCING,numhits)
+    local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, 0, TP_NO_EFFECT, 1, 2, 3)
+    totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, numhits)
 
     local duration = 120
-    local resm = applyPlayerResistance(pet,-1,target,pet:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),tpz.skill.ELEMENTAL_MAGIC, 5)
+    local resm = applyPlayerResistance(pet, -1, target, pet:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), tpz.skill.ELEMENTAL_MAGIC, 5)
     if resm < 0.25 then
         resm = 0
     end
@@ -32,7 +32,7 @@ function onPetAbility(target, pet, skill)
         target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, duration)
     end
     target:takeDamage(totaldamage, pet, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
-    target:updateEnmityFromDamage(pet,totaldamage)
+    target:updateEnmityFromDamage(pet, totaldamage)
 
     return totaldamage
 end

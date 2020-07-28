@@ -20,10 +20,10 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(200.015,-3.187,-536.074,187)
+        player:setPos(200.015, -3.187, -536.074, 187)
     end
 
     if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
@@ -39,22 +39,22 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if (csid == 21) then
         lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 23) then
         if (player:getYPos() >= -22) then
-            player:updateEvent(0,0,0,0,0,7)
+            player:updateEvent(0, 0, 0, 0, 0, 7)
         else
-            player:updateEvent(0,0,0,0,0,6)
+            player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 21) then
         lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end

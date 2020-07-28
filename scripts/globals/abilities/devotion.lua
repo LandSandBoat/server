@@ -11,17 +11,17 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getID() == target:getID()) then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG,0
+        return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getHP() < 4) then -- Fails if HP < 4
-        return tpz.msg.basic.UNABLE_TO_USE_JA,0
+        return tpz.msg.basic.UNABLE_TO_USE_JA, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- Plus 5 percent mp recovers per extra devotion merit
     local meritBonus = player:getMerit(tpz.merit.DEVOTION) - 5
     -- printf("Devotion Merit Bonus: %d", meritBonus)
@@ -37,7 +37,7 @@ function onUseAbility(player,target,ability)
     -- printf("Devotion HP Damage (after Stoneskin): %d", damageHP)
 
     local healMP = player:getHP() * mpPercent
-    healMP = utils.clamp(healMP, 0,target:getMaxMP() - target:getMP())
+    healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
     -- printf("Devotion MP Healed: %d", healMP)
 
     damageHP = utils.stoneskin(player, damageHP)

@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 281) then

@@ -36,7 +36,7 @@ function onRegionEnter(player, region)
     }
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 

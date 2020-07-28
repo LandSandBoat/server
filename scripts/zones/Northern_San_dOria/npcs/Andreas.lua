@@ -79,21 +79,21 @@ local items = {
     }
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     unionRepresentativeTrade(player, npc, trade, 732, 1)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     unionRepresentativeTrigger(player, 1, 731, "guild_woodworking", keyitems)
 end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
     if (csid == 731) then
         unionRepresentativeTriggerFinish(player, option, target, 1, "guild_woodworking", keyitems, items)
     end
 end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
     if (csid == 731) then
         unionRepresentativeTriggerFinish(player, option, target, 1, "guild_woodworking", keyitems, items)
     elseif (csid == 732) then

@@ -30,6 +30,6 @@ function onTrigger(player, target)
     -- logoff target
     targ:leavegame()
     if (targ:getID() ~= player:getID()) then
-        player:PrintToPlayer(string.format("%s has been logged off.",targ:getName()))
+        player:PrintToPlayer(string.format("%s has been logged off.", targ:getName()))
     end
 end

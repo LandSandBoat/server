@@ -10,11 +10,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
      player:startEvent(532) -- What's this?  I don't need this.
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local aTasteForMeat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
     local medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
@@ -56,10 +56,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 725 then
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
@@ -67,7 +67,7 @@ function onEventFinish(player,csid,option)
         if csid == 527 then
             player:setCharVar("aTasteForMeat", 1)
         elseif csid == 530 then
-            player:addItem(4371,1)
+            player:addItem(4371, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4371)
             player:setCharVar("aTasteForMeat", 0)
         end

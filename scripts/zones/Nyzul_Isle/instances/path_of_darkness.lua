@@ -25,8 +25,8 @@ end
 function onInstanceFailure(instance)
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED,10,10)
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(1)
     end
 end
@@ -36,8 +36,8 @@ function onInstanceProgressUpdate(instance, progress)
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif(progress == 24) then
         local v = instance:getEntity(bit.band(ID.mob[58].NAJA, 0xFFF), tpz.objType.MOB)
-        v:setLocalVar("ready",0)
-        v:setLocalVar("Stage",2)
+        v:setLocalVar("ready", 0)
+        v:setLocalVar("Stage", 2)
 
         SpawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif(progress >= 30 and progress < 40) then
@@ -46,12 +46,12 @@ function onInstanceProgressUpdate(instance, progress)
         SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
 
         local v = instance:getEntity(bit.band(ID.mob[58].NAJA, 0xFFF), tpz.objType.MOB)
-        v:setLocalVar("ready",0)
-        v:setLocalVar("Stage",3)
+        v:setLocalVar("ready", 0)
+        v:setLocalVar("Stage", 3)
 
         local npcs = instance:getNpcs()
 
-        for i,v in pairs(npcs) do
+        for i, v in pairs(npcs) do
             if(v:getID() == ID.npc._259) then
                 v:setAnimation(8)
             end
@@ -65,17 +65,17 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
+    for i, v in pairs(chars) do
         if (v:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS and v:getCharVar("AhtUrganStatus") == 1) then
             v:setCharVar("AhtUrganStatus", 2)
         end
 
-        v:setPos(0,0,0,0,72)
+        v:setPos(0, 0, 0, 0, 72)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

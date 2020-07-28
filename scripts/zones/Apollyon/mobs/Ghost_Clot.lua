@@ -3,7 +3,7 @@
 --  Mob: Ghost Clot
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     GetMobByID(16932993):updateEnmity(target)
     GetMobByID(16932994):updateEnmity(target)
     GetMobByID(16932995):updateEnmity(target)

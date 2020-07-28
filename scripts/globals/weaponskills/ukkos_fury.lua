@@ -40,7 +40,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     if damage > 0 then
         if not target:hasStatusEffect(tpz.effect.SLOW) then
-            local duration = 60 * applyResistanceAddEffect(player,target,tpz.magic.ele.EARTH,0)
+            local duration = 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0)
             target:addStatusEffect(tpz.effect.SLOW, 1500, 0, duration)
         end
 

@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-6, mobid+1 do
@@ -29,7 +29,7 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
 end
 

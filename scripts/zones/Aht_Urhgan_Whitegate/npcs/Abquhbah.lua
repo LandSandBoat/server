@@ -4,10 +4,10 @@
 -- Standard Info NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local promotion = player:getCharVar("AssaultPromotion")
     local rank = 0
 
@@ -24,8 +24,8 @@ function onTrigger(player,npc)
     player:startEvent(255, rank)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

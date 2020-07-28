@@ -5,11 +5,11 @@
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 
 function onMobSpawn(mob)
-    mob:setLocalVar("timeToGrow", os.time() + math.random(36000,37800)) -- 10:00:00 to 10:30:00
+    mob:setLocalVar("timeToGrow", os.time() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
 end
 
 function onMobDisengage(mob)
-    mob:setLocalVar("timeToGrow", os.time() + math.random(36000,37800)) -- 10:00:00 to 10:30:00
+    mob:setLocalVar("timeToGrow", os.time() + math.random(36000, 37800)) -- 10:00:00 to 10:30:00
 end
 
 function onMobRoam(mob)

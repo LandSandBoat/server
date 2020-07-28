@@ -14,5 +14,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:messageBasic(tpz.msg.basic.RECOVERS_MP,0,target:addMP(100*ITEM_POWER))
+    target:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, target:addMP(100*ITEM_POWER))
 end

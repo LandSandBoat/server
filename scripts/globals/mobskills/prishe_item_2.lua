@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(tpz.effect.MAGIC_SHIELD)) then
         return 1
     elseif (mob:hasStatusEffect(tpz.effect.PLAGUE) or mob:hasStatusEffect(tpz.effect.CURSE_I) or mob:hasStatusEffect(tpz.effect.MUTE)) then

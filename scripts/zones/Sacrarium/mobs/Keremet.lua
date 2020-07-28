@@ -6,7 +6,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     local Keremet = mob:getID()
 
@@ -23,7 +23,7 @@ end
 
 function onMobDeath(mob, player, isKiller)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)==false) then
-        player:setCharVar("PromathiaStatus",4)
+        player:setCharVar("PromathiaStatus", 4)
     end
 end
 

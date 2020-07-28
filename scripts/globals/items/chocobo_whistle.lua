@@ -24,5 +24,5 @@ function onItemUse(target)
     -- Base duration 30 min, in seconds.
     local duration = 1800 + (target:getMod(tpz.mod.CHOCOBO_RIDING_TIME) * 60)
 
-    target:addStatusEffectEx(tpz.effect.MOUNTED,tpz.effect.MOUNTED,0,0,duration,true)
+    target:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, 0, 0, duration, true)
 end

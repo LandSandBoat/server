@@ -3,7 +3,7 @@
 --  Mob: Ranch Wamouracampa
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
 
 end
 

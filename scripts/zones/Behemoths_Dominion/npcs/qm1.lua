@@ -7,10 +7,10 @@
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if
         player:getCharVar("theTalekeeperGiftCS") == 3 and
         player:getCharVar("theTalekeepersGiftKilledNM") < 3 and
@@ -27,8 +27,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

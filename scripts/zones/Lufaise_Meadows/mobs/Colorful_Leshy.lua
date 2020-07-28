@@ -34,7 +34,7 @@ function onMobRoam(mob)
         DespawnMob(ph)
 
         DisallowRespawn(ph + 1, false)
-        nm:setSpawn(p.x,p.y,p.z,p.rot)
+        nm:setSpawn(p.x, p.y, p.z, p.rot)
         SpawnMob(ph + 1)
         nm:setLocalVar("phIndex", phIndex)
     end

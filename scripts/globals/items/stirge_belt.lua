@@ -15,5 +15,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.COSTUME,256,0,3600)
+    target:addStatusEffect(tpz.effect.COSTUME, 256, 0, 3600)
 end

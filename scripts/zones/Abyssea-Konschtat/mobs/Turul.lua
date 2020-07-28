@@ -6,7 +6,7 @@ mixins = {require("scripts/mixins/families/amphiptere")}
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- Uncertain of threshold. Going with 50% for now.
     -- (possibly varies, perhaps is simply lower HP = greater cast chance?)
     if mob:getHPP() <= 50 then

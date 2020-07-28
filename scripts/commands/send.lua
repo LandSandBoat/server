@@ -283,10 +283,10 @@ function error(player, msg)
     player:PrintToPlayer("!send <player to send> <destination player or zone>")
 end
 
-function getBytePos(s,needle)
+function getBytePos(s, needle)
     local i
     local b
-    for i=1,string.len(s),1 do
+    for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i
         end
@@ -309,7 +309,7 @@ function onTrigger(player, bytes)
         error(player, "You must provide the name of a player to send and a destination.")
         return
     end
-    bytes = string.sub(bytes,6)
+    bytes = string.sub(bytes, 6)
     local atpos = getBytePos(bytes, 253)
     local sppos = getBytePos(bytes, 32)
 
@@ -320,7 +320,7 @@ function onTrigger(player, bytes)
         error(player, "You must provide the name of a player to send and a destination.")
         return
     else
-        target = string.sub(bytes,1,sppos-1)
+        target = string.sub(bytes, 1, sppos-1)
         targ = GetPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ))
@@ -344,7 +344,7 @@ function onTrigger(player, bytes)
             end
         end
         if (zone == nil) then
-            error(player,"Auto-translated phrase is not a zone.")
+            error(player, "Auto-translated phrase is not a zone.")
             return
         end
     else

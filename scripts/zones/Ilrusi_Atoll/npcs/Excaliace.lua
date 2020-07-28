@@ -5,7 +5,7 @@
 require("scripts/zones/Periqia/IDs")
 require("scripts/globals/pathfind")
 
-local start = {-322,-16.5,380}
+local start = {-322, -16.5, 380}
 
 local startToChoice1 = {
     -320.349548, -16.046591, 379.684570
@@ -89,23 +89,23 @@ function onPath(npc)
 
 
     if (progress == 0) then
-        for tid,player in pairs(chars) do
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
                 instance:setProgress(1)
-                npc:messageText(npc,Periqia.text.EXCALIACE_START)
+                npc:messageText(npc, Periqia.text.EXCALIACE_START)
                 npc:pathThrough(startToChoice1)
             end
         end
     elseif (progress == 1) then
         local run = true
-        for tid,player in pairs(chars) do
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
                 run = false
             end
         end
 
         if (run) then
-            npc:messageText(npc,Periqia.text.EXCALIACE_RUN)
+            npc:messageText(npc, Periqia.text.EXCALIACE_RUN)
         end
     end
 
@@ -114,16 +114,16 @@ function onPath(npc)
 
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
 end;

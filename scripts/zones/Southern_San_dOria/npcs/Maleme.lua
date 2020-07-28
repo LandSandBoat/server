@@ -9,11 +9,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- "Flyers for Regine" conditional script
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532,1)
+        local MagicFlyer = trade:hasItemQty(532, 1)
 
         if (MagicFlyer == true and count == 1) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
@@ -21,12 +21,12 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
-    player:startEvent(632,0,0,0,0,0,0,0,VanadielTime())
+function onTrigger(player, npc)
+    player:startEvent(632, 0, 0, 0, 0, 0, 0, 0, VanadielTime())
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end;

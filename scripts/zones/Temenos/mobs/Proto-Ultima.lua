@@ -10,7 +10,7 @@ function onMobSpawn(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local phase = mob:getLocalVar("battlePhase")
     if (mob:actionQueueEmpty() == true) then
         if (mob:getHPP() < (80 - (phase * 20))) then
@@ -21,7 +21,7 @@ function onMobFight(mob,target)
             end
             if (phase == 4) then -- add Regain in final phase
                 if (mob:hasStatusEffect(tpz.effect.REGAIN) == false) then
-                    mob:addStatusEffect(tpz.effect.REGAIN,7,3,0)
+                    mob:addStatusEffect(tpz.effect.REGAIN, 7, 3, 0)
                     mob:getStatusEffect(tpz.effect.REGAIN):setFlag(tpz.effectFlag.DEATH)
                 end
             end
@@ -32,7 +32,7 @@ end
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.TEMENOS_LIBERATOR)
-    GetNPCByID(16928768+79):setPos(-559,5,-357)
+    GetNPCByID(16928768+79):setPos(-559, 5, -357)
     GetNPCByID(16928768+79):setStatus(tpz.status.NORMAL)
     GetNPCByID(16928768+474):setStatus(tpz.status.NORMAL)
 end;

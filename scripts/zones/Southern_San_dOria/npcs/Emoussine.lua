@@ -12,19 +12,19 @@ require("scripts/globals/chocobo")
 local eventSucceed = 600
 local eventFail    = 603
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+function onTrade(player, npc, trade)
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         player:messageSpecial(ID.text.FLYER_REFUSED)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     tpz.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     tpz.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
 end

@@ -10,14 +10,14 @@ require("scripts/globals/keyitems")
 -- onTrade Action
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local GateID =  npc:getID()
 
     -- print("GateID " ..GateID)
@@ -114,14 +114,14 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 -----------------------------------
 -- onEventFinish
 -----------------------------------
 
-function onEventFinish(player,csid,option)
--- printf("CSID: %u",csid)
--- printf("RESULT: %u",option)
+function onEventFinish(player, csid, option)
+-- printf("CSID: %u", csid)
+-- printf("RESULT: %u", option)
 end;

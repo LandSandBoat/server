@@ -12,7 +12,7 @@ function onMobDeath(mob, player, isKiller)
 
     if (player:getCurrentMission(player:getNation()) == 6) then
         if (player:getCharVar("MissionStatus") == 4) then
-            player:setCharVar("MissionStatus",5)
+            player:setCharVar("MissionStatus", 5)
         end
     end
 

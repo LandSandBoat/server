@@ -9,17 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(532, 1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     pNation = player:getNation()
     currentMission = player:getCurrentMission(pNation)
@@ -38,13 +38,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 582) then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
     end
 
 end;

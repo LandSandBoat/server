@@ -9,24 +9,24 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    local questStatus = player:getQuestStatus(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.THE_OLD_LADY)
+    local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
 
     if (questStatus == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
-        if (VeraOldLadyVar == 1 and trade:hasItemQty(542,1)) then
-            player:startEvent(135,541)
-        elseif (VeraOldLadyVar == 2 and trade:hasItemQty(541,1)) then
-            player:startEvent(136,540)
-        elseif (VeraOldLadyVar == 3 and trade:hasItemQty(540,1)) then
+        if (VeraOldLadyVar == 1 and trade:hasItemQty(542, 1)) then
+            player:startEvent(135, 541)
+        elseif (VeraOldLadyVar == 2 and trade:hasItemQty(541, 1)) then
+            player:startEvent(136, 540)
+        elseif (VeraOldLadyVar == 3 and trade:hasItemQty(540, 1)) then
             player:startEvent(137)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
 
@@ -37,15 +37,15 @@ function onTrigger(player,npc)
     elseif (questStatus == QUEST_ACCEPTED) then
         VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
         if (VeraOldLadyVar == 1) then
-            player:startEvent(132,542)
+            player:startEvent(132, 542)
         elseif (VeraOldLadyVar == 2) then
-            player:startEvent(132,541)
+            player:startEvent(132, 541)
         elseif (VeraOldLadyVar == 3) then
-            player:startEvent(132,540)
+            player:startEvent(132, 540)
         end
     else
         if (player:getMainLvl() >= SUBJOB_QUEST_LEVEL) then
-            player:startEvent(131,542)
+            player:startEvent(131, 542)
         else
             player:startEvent(133)
         end
@@ -53,12 +53,12 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid)
-    -- printf("RESULT2: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 131 and option == 40) then
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
@@ -74,7 +74,7 @@ function onEventFinish(player,csid,option)
         player:unlockJob(0)
         player:setCharVar("VeraOldLadyVar", 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
-        player:completeQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.THE_OLD_LADY)
+        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
     end
 
 end;

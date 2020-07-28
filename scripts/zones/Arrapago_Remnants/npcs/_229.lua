@@ -9,7 +9,7 @@ function onTrigger(entity, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(entity, eventid, result, door)
@@ -20,7 +20,7 @@ function onEventFinish(entity, eventid, result, door)
         door:setAnimation(8)
         SpawnMob(ID.mob[3].treasure_hunter1, instance)
         SpawnMob(ID.mob[3].qiqirn_mine_1, instance)
-        for i,v in pairs(ID.npc[3][1]) do
+        for i, v in pairs(ID.npc[3][1]) do
             local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
             npc:untargetable(true)
         end

@@ -16,7 +16,7 @@ function onMobSpawn(mob)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local warp = mob:getLocalVar("warp")
 
     if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
@@ -25,7 +25,7 @@ function onMobFight(mob,target)
         local instance = mob:getInstance()
         instance:setProgress(instance:getProgress() + 1)
 
-        mob:setLocalVar("perfectdef",1)
+        mob:setLocalVar("perfectdef", 1)
     end
 end
 

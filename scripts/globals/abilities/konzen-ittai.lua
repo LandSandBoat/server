@@ -11,15 +11,15 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT,0
+        return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     if (not target:hasStatusEffect(tpz.effect.CHAINBOUND, 0) and not target:hasStatusEffect(tpz.effect.SKILLCHAIN, 0)) then
         target:addStatusEffectEx(tpz.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
     else

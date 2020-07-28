@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- DANCES WITH LUOPANS
     if player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, 703) then -- Petrified Log
@@ -20,7 +20,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Buying a replacement Matre Bell on Geomancer
     if player:getLocalVar("Sylvie_Need_Zone") == 0 and player:getMainJob() == tpz.job.GEO and not player:hasItem(21460) then  -- Matre Bell
         player:setLocalVar("Sylvie_Need_Zone", 1)
@@ -47,7 +47,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     -- Buying a replacement Matre Bell on Geomancer
     if csid == 37 and (option == 1 or option == 2) then
         local eventUpdateParam = 0  -- 0 = can't afford, 1 = success, 2 = full inventory
@@ -61,7 +61,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- DANCES WITH LUOPANS
     if csid == 31 or csid == 32 then
         if option == 0 then

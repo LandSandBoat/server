@@ -12,7 +12,7 @@ function onMobInitialize(mob)
     mob:getStatusEffect(tpz.effect.SHOCK_SPIKES):setFlag(tpz.effectFlag.DEATH)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     mob:SetMobAbilityEnabled(false)
 end
 

@@ -13,11 +13,11 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local hpHeal = math.random(90,105)
+    local hpHeal = math.random(90, 105)
     local dif = target:getMaxHP() - target:getHP()
     if (hpHeal > dif) then
         hpHeal = dif
     end
     target:addHP(hpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP,0,hpHeal)
+    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, hpHeal)
 end

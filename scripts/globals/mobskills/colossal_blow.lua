@@ -10,7 +10,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
 
     if (currentForm == 2) then
@@ -32,7 +32,7 @@ function onMobWeaponSkill(target, mob, skill)
         -- else you die
         damage = currentHP
     end
-    local dmg = MobFinalAdjustments(damage,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.PIERCING,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(damage, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
     mob:resetEnmity(target)

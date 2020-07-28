@@ -49,9 +49,9 @@ function onEventUpdate( player, csid, option)
     elseif (csid == 5) then
         if (player:getZPos() > 45) then
             if (player:getZPos() > -301) then
-                player:updateEvent(0,0,0,0,0,1)
+                player:updateEvent(0, 0, 0, 0, 0, 1)
             else
-                player:updateEvent(0,0,0,0,0,3)
+                player:updateEvent(0, 0, 0, 0, 0, 3)
             end
         end
     end

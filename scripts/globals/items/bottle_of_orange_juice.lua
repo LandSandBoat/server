@@ -17,7 +17,7 @@ function onItemUse(target)
         power = power + 1
     end
     if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-        target:addStatusEffect(tpz.effect.REFRESH,power,3,90)
+        target:addStatusEffect(tpz.effect.REFRESH, power, 3, 90)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

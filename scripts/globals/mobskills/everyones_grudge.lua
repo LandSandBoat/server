@@ -5,7 +5,7 @@
 --   Damage done is 5x the amount of tonberries you have killed! For NM's using this it is 50 x damage.
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if mob:isNM() then
         return 1
     end

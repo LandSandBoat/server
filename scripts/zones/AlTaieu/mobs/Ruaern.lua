@@ -31,24 +31,24 @@ function onMobDeath(mob, player, isKiller)
         end
 
         if (player:getCharVar("Ru_aern_1-1KILL") == 1 and player:getCharVar("Ru_aern_1-2KILL") == 1 and player:getCharVar("Ru_aern_1-3KILL") == 1) then
-            player:setCharVar("[SEA][AlTieu]SouthTower",1)
+            player:setCharVar("[SEA][AlTieu]SouthTower", 1)
             clearTowerVars(player, 1)
         end
 
         if (player:getCharVar("Ru_aern_2-1KILL") == 1 and player:getCharVar("Ru_aern_2-2KILL") == 1 and player:getCharVar("Ru_aern_2-3KILL") == 1) then
-            player:setCharVar("[SEA][AlTieu]WestTower",1)
+            player:setCharVar("[SEA][AlTieu]WestTower", 1)
             clearTowerVars(player, 2)
         end
 
         if (player:getCharVar("Ru_aern_3-1KILL") == 1 and player:getCharVar("Ru_aern_3-2KILL") == 1 and player:getCharVar("Ru_aern_3-3KILL") == 1) then
-            player:setCharVar("[SEA][AlTieu]EastTower",1)
+            player:setCharVar("[SEA][AlTieu]EastTower", 1)
             clearTowerVars(player, 3)
         end
     end
 end
 
 function clearTowerVars (player, towerNum)
-    player:setCharVar("Ru_aern_"..towerNum.."-1KILL",0)
-    player:setCharVar("Ru_aern_"..towerNum.."-2KILL",0)
-    player:setCharVar("Ru_aern_"..towerNum.."-3KILL",0)
+    player:setCharVar("Ru_aern_"..towerNum.."-1KILL", 0)
+    player:setCharVar("Ru_aern_"..towerNum.."-2KILL", 0)
+    player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
 end

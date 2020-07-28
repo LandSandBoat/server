@@ -10,11 +10,11 @@ require("scripts/globals/zone")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1, -90,17,45, -84,19,51)  -- map 4 NW porter
-    zone:registerRegion(1, 17,-90,45, -85,18,51)  -- map 4 NW porter
-    zone:registerRegion(2, -90,17,-10, -85,18,-5)  -- map 4 SW porter
-    zone:registerRegion(3, -34,17,-10, -30,18,-5)  -- map 4 SE porter
-    zone:registerRegion(4, -34,17,45, -30,18,51)  -- map 4 NE porter
+    zone:registerRegion(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
+    zone:registerRegion(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
+    zone:registerRegion(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
+    zone:registerRegion(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
+    zone:registerRegion(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
     UpdateNMSpawnPoint(ID.mob.LIKHO)
     GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
@@ -38,15 +38,15 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-181.969,-35.542,19.995,254)
+        player:setPos(-181.969, -35.542, 19.995, 254)
     end
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -81,11 +81,11 @@ function onRegionEnter(player,region)
 
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

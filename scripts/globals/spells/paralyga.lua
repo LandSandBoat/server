@@ -7,11 +7,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
 
     if (target:hasStatusEffect(tpz.effect.PARALYSIS)) then --effect already on, do nothing
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
@@ -30,8 +30,8 @@ function onSpellCast(caster,target,spell)
         if (potency < 5) then
             potency = 5
         end
-        --printf("Duration : %u",duration)
-        --printf("Potency : %u",potency)
+        --printf("Duration : %u", duration)
+        --printf("Potency : %u", potency)
         local params = {}
         params.diff = nil
         params.attribute = tpz.mod.MND
@@ -41,7 +41,7 @@ function onSpellCast(caster,target,spell)
         local resist = applyResistanceEffect(caster, target, spell, params)
 
         if (resist >= 0.5) then --there are no quarter or less hits, if target resists more than .5 spell is resisted completely
-            if (target:addStatusEffect(tpz.effect.PARALYSIS,potency,0,duration*resist)) then
+            if (target:addStatusEffect(tpz.effect.PARALYSIS, potency, 0, duration*resist)) then
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
             else
                 -- no effect

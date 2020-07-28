@@ -34,6 +34,6 @@ function onMobDespawn(mob)
             GetMobByID(v):setRespawnTime(respawn)
         end
 
-        SetServerVariable("realPadfoot", math.random(1,5))
+        SetServerVariable("realPadfoot", math.random(1, 5))
     end
 end

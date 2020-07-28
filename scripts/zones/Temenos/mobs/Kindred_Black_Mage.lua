@@ -5,7 +5,7 @@
 require("scripts/globals/limbus")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
 
 end
 

@@ -10,16 +10,16 @@ require("scripts/globals/shop")
 require("scripts/globals/zone")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc)
+function onTrade(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local RegionOwner = GetRegionOwner(tpz.region.DERFLAND)
     if RegionOwner ~= tpz.nation.WINDURST then
-        player:showText(npc,ID.text.TARAIHIPERUNHI_CLOSED_DIALOG)
+        player:showText(npc, ID.text.TARAIHIPERUNHI_CLOSED_DIALOG)
     else
-        player:showText(npc,ID.text.TARAIHIPERUNHI_OPEN_DIALOG)
+        player:showText(npc, ID.text.TARAIHIPERUNHI_OPEN_DIALOG)
 
         local stock =
         {
@@ -34,8 +34,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

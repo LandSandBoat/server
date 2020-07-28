@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
         params.damageType = tpz.damageType.EARTH
         params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
@@ -47,7 +47,7 @@ function onSpellCast(caster,target,spell)
     if (damage > 0 and resist > 0.0625) then
         local typeEffect = tpz.effect.WEIGHT
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,25,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage

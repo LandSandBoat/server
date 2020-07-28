@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if
         player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 3 and
@@ -32,7 +32,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
         player:startEvent(60, 4366, 629, 919) -- Start quest "Only the Best"
     else
@@ -40,10 +40,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 60 and option == 10 then
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
     elseif csid == 62 then

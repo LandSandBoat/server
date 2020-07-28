@@ -22,20 +22,20 @@ local loot =
             {itemid = 4746, droprate = 222}, -- Scroll Of Deodorize
         },
         {
-            {itemid = 17786, droprate = 153},-- Ganko
-            {itemid = 18170, droprate = 139},-- Platoon Edge
+            {itemid = 17786, droprate = 153}, -- Ganko
+            {itemid = 18170, droprate = 139}, -- Platoon Edge
             {itemid = 16687, droprate = 83}, -- Platoon Axe
             {itemid = 17571, droprate = 97}, -- Platoon Pole
-            {itemid = 17993, droprate = 125},-- Platoon Dagger
+            {itemid = 17993, droprate = 125}, -- Platoon Dagger
             {itemid = 749, droprate = 444},  -- Mythril Beastcoin
             {itemid = 773, droprate = 56},   -- Translucent Rock
         },
         {
-            {itemid = 17820, droprate = 111},-- Gunromaru
-            {itemid = 17993, droprate = 139},-- Platoon Dagger
-            {itemid = 18170, droprate = 139},-- Platoon Edge
+            {itemid = 17820, droprate = 111}, -- Gunromaru
+            {itemid = 17993, droprate = 139}, -- Platoon Dagger
+            {itemid = 18170, droprate = 139}, -- Platoon Edge
             {itemid = 18085, droprate = 42}, -- Platoon Lance
-            {itemid = 16959, droprate = 181},-- Platoon Sword
+            {itemid = 16959, droprate = 181}, -- Platoon Sword
             {itemid = 774, droprate = 97},   -- Purple Rock
             {itemid = 769, droprate = 69},   -- Red Rock
             {itemid = 776, droprate = 14},   -- White Rock
@@ -79,8 +79,8 @@ local loot =
             {itemid =   652, droprate =  100}, -- Steel Ingot
         },
         {
-            {itemid = 15285, droprate = 105},-- Avatar Belt
-            {itemid = 15279, droprate = 105},-- Pick Belt
+            {itemid = 15285, droprate = 105}, -- Avatar Belt
+            {itemid = 15279, droprate = 105}, -- Pick Belt
             {itemid = 651, droprate = 131},  -- Iron Ingot
             {itemid = 643, droprate = 131},  -- Chunk Of Iron Ore
             {itemid = 644, droprate = 79},   -- Chunk Of Mythril Ore
@@ -88,7 +88,7 @@ local loot =
             {itemid = 795, droprate = 131},  -- Lapis Lazuli
         },
         {
-            {itemid = 17867, droprate = 552},-- Jug Of Cold Carrion Broth
+            {itemid = 17867, droprate = 552}, -- Jug Of Cold Carrion Broth
             {itemid = 4877, droprate = 263}, -- Scroll Of Absorb-agi
             {itemid = 4878, droprate = 210}, -- Scroll Of Absorb-int
             {itemid = 4876, droprate = 289}, -- Scroll Of Absorb-vit
@@ -178,18 +178,18 @@ local loot =
     },
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

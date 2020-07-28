@@ -6,7 +6,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onAdditionalEffect(player,target,damage)
+function onAdditionalEffect(player, target, damage)
     if (target:getFamily() == 280) then
         target:setMobMod(tpz.mobMod.ADD_EFFECT, 0)
     end

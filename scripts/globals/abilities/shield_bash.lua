@@ -10,7 +10,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if player:getShieldSize() == 0 then
         return tpz.msg.basic.REQUIRES_SHIELD, 0
     else
@@ -68,7 +68,7 @@ function onUseAbility(player, target, ability)
     damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)
     target:takeDamage(damage, player, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
-    target:updateEnmityFromDamage(player,damage)
+    target:updateEnmityFromDamage(player, damage)
     ability:setMsg(tpz.msg.basic.JA_DAMAGE)
 
     return damage
