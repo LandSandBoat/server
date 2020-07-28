@@ -30,7 +30,7 @@ function onTrade(player,npc,trade)
                 end
             end
         else
-            player:startEvent(43,81); -- You're bag's bigger than any gobbie bag I've ever seen...
+            player:startEvent(43,81) -- You're bag's bigger than any gobbie bag I've ever seen...
         end
     end
 end
@@ -73,7 +73,7 @@ function onTrigger(player,npc)
         end
         player:startEvent(43,inventorySize+1,questStatus,offer)
     else
-        player:startEvent(43,81); -- You're bag's bigger than any gobbie bag I've ever seen...
+        player:startEvent(43,81) -- You're bag's bigger than any gobbie bag I've ever seen...
     end
 end
 

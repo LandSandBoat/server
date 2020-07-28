@@ -11,7 +11,7 @@ require("scripts/globals/zone")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1,-112,-3,-17,-96,3,-3);--event COP
+    zone:registerRegion(1,-112,-3,-17,-96,3,-3)--event COP
     zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72)--drawbridge area
 end
 

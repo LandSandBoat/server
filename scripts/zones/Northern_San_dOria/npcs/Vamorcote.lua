@@ -28,11 +28,11 @@ function onTrigger(player,npc)
         player:getFameLevel(SANDORIA) >= 5 and
         player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) ~= QUEST_COMPLETED)
     then
-        player:startEvent(654,0,535,535); --The quest is offered to the player.
+        player:startEvent(654,0,535,535) --The quest is offered to the player.
     elseif (theSettingSun == QUEST_ACCEPTED) then
-        player:startEvent(655,0,0,535); --The NPC asks if the player got the key.'
+        player:startEvent(655,0,0,535) --The NPC asks if the player got the key.'
     elseif (theSettingSun == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(659); --The quest is already done by the player and the NPC does small talks.
+        player:startEvent(659) --The quest is already done by the player and the NPC does small talks.
     else
         player:startEvent(651)
     end

@@ -101,9 +101,9 @@ end
 function onEventUpdate(player,csid,option)
 
     if (csid == 28) then
-        local enoughMoney = 2; -- Not enough money
+        local enoughMoney = 2 -- Not enough money
         if (player:getGil() >= 500) then
-            enoughMoney = 1; --Player has enough Money
+            enoughMoney = 1 --Player has enough Money
         end
 
         player:updateEvent(tpz.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)

@@ -43,14 +43,14 @@ function onEventFinish(player,csid,option)
     if (csid == 13) then
         player:addKeyItem(tpz.ki.ZEPHYR_FAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.ZEPHYR_FAN)
-        player:setCharVar("[ENM]ZephyrFan",os.time()+(ENM_COOLDOWN*3600)); -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar("[ENM]ZephyrFan",os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 14) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779); -- Cotton Pouch
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779) -- Cotton Pouch
             return
         else
             player:addItem(1779)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1779); -- Cotton Pouch
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1779) -- Cotton Pouch
         end
     end
 end;

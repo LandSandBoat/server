@@ -34,9 +34,9 @@ function onTrigger(player,npc)
     -- BEGINNINGS
     elseif (beginnings == QUEST_ACCEPTED) then
         if (not player:hasKeyItem(tpz.ki.BRAND_OF_THE_GALESERPENT)) then
-            player:startEvent(10); -- brands you
+            player:startEvent(10) -- brands you
         else
-            player:startEvent(11); -- so now i am the teacher?
+            player:startEvent(11) -- so now i am the teacher?
         end
 
     -- ASSAULT

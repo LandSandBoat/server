@@ -43,9 +43,9 @@ function onTrigger(player,npc)
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(204)
         elseif (progress == 7 or failed == 8) then
-                player:startEvent(213);  -- asking for wyvern skull
+                player:startEvent(213)  -- asking for wyvern skull
         elseif (progress >= 8 or failed >= 9) then
-            player:startEvent(249); -- happy with wyvern skull
+            player:startEvent(249) -- happy with wyvern skull
         end
     else
         player:startEvent(204)

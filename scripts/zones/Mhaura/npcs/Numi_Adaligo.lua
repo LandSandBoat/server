@@ -22,7 +22,7 @@ function onEventFinish(player,csid,option)
     local QuestStatus=player:getCharVar("QuestRychardetheChef_var")
 
     if ((option == 2) and (RychardetheChef == QUEST_AVAILABLE) and (tonumber(QuestStatus) == 0)) then
-        player:setCharVar("QuestRychardetheChef_var",1);  -- first stage of rycharde the chef quest
+        player:setCharVar("QuestRychardetheChef_var",1)  -- first stage of rycharde the chef quest
     end
 
 end;

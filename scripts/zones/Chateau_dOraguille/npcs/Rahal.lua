@@ -25,37 +25,37 @@ function onTrigger(player,npc)
         player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
     elseif (CrestProgress == 5 and RemedyKI == false) then
-        player:startEvent(60); -- Gives key item
+        player:startEvent(60) -- Gives key item
     elseif (CrestProgress == 5 and RemedyKI == true) then
-        player:startEvent(122); -- Reminder to go to Gelsba
+        player:startEvent(122) -- Reminder to go to Gelsba
      -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG) then
         if (player:getCharVar("KnightStalker_Declined") == 0) then
-            player:startEvent(121); -- Start AF3
+            player:startEvent(121) -- Start AF3
         else
-            player:startEvent(120); -- Short version if they previously declined
+            player:startEvent(120) -- Short version if they previously declined
         end
     elseif Stalker_Quest == QUEST_ACCEPTED then
         if (StalkerProgress == 0) then
-            player:startEvent(119); -- Reminder to go to Brugaire/Ceraulian
+            player:startEvent(119) -- Reminder to go to Brugaire/Ceraulian
         elseif (player:hasKeyItem(tpz.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) == true) then
             if (StalkerProgress == 1) then
-                player:startEvent(78); -- Reaction to challenge, go talk to Balasiel
+                player:startEvent(78) -- Reaction to challenge, go talk to Balasiel
             elseif (StalkerProgress == 2) then
-                player:startEvent(69); -- Reminder to talk to Balasiel
+                player:startEvent(69) -- Reminder to talk to Balasiel
             elseif (StalkerProgress == 3) then
-                player:startEvent(110); -- To the south with you
+                player:startEvent(110) -- To the south with you
             end
         end
     elseif (player:getCharVar("KnightStalker_Option2") == 1) then
-        player:startEvent(118); -- Optional CS after Knight Stalker
+        player:startEvent(118) -- Optional CS after Knight Stalker
         -- Mission 8-2 San dOria --
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 1) then
         player:startEvent(106)
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(107)
     else
-        player:startEvent(529); -- standard dialogue
+        player:startEvent(529) -- standard dialogue
     end
 
 end
@@ -87,7 +87,7 @@ function onEventFinish(player,csid,option)
         player:setCharVar("KnightStalker_Option2",0)
     elseif (csid == 106) then
         if (player:hasKeyItem(tpz.ki.CRYSTAL_DOWSER)) then
-            player:delKeyItem(tpz.ki.CRYSTAL_DOWSER); -- To prevent them getting a message about already having the keyitem
+            player:delKeyItem(tpz.ki.CRYSTAL_DOWSER) -- To prevent them getting a message about already having the keyitem
         else
             player:setCharVar("MissionStatus",2)
             player:addKeyItem(tpz.ki.CRYSTAL_DOWSER)

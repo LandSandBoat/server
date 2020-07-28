@@ -27,7 +27,7 @@ end
 
 function afterZoneIn(player)
     if (ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
-        player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION,40,0,0); -- LV40 cap
+        player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION,40,0,0) -- LV40 cap
     end
 end
 

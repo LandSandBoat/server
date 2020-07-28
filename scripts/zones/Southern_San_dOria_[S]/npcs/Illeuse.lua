@@ -16,7 +16,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:startEvent(617); -- Default Dialogue
+    player:startEvent(617) -- Default Dialogue
 end
 
 function onEventUpdate(player,csid,option)

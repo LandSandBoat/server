@@ -3,14 +3,14 @@
 --  Mob: Kf'ghrah WHM
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/magic"); -- no spells are currently set due to lack of info
+require("scripts/globals/magic") -- no spells are currently set due to lack of info
 -----------------------------------
 
 function onMobSpawn(mob)
     -- Set core Skin and mob elemental bonus
     mob:AnimationSub(0)
     mob:setLocalVar("roamTime", os.time())
-    mob:setModelId(1167); -- light
+    mob:setModelId(1167) -- light
 end
 
 function onMobRoam(mob)
@@ -19,7 +19,7 @@ function onMobRoam(mob)
     if (os.time() - roamTime > 60) then
         roamForm = math.random(1,3) -- forms 2 and 3 are spider and bird; can change forms at will
         if (roamForm == 1) then
-            roamForm = 0; -- We don't want form 1 as that's humanoid - make it 0 for ball
+            roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
         end
         mob:AnimationSub(roamForm)
         mob:setLocalVar("roamTime", os.time())

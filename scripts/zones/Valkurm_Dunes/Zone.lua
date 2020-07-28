@@ -45,7 +45,7 @@ end
 
 function onEventUpdate( player, csid, option)
     if (csid == 3) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 5) then
         if (player:getZPos() > 45) then
             if (player:getZPos() > -301) then
@@ -59,12 +59,12 @@ end
 
 function onEventFinish( player, csid, option)
     if (csid == 3) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end
 
 function onZoneWeatherChange(weather)
-    local qm1 = GetNPCByID(ID.npc.SUNSAND_QM); -- Quest: An Empty Vessel
+    local qm1 = GetNPCByID(ID.npc.SUNSAND_QM) -- Quest: An Empty Vessel
     if (weather == tpz.weather.DUST_STORM) then
         qm1:setStatus(tpz.status.NORMAL)
     else

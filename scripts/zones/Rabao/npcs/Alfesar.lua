@@ -28,7 +28,7 @@ function onTrigger(player,npc)
     elseif (TheMissingPiece == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC)) then -- They got their Key items. tell them to goto sandy
         player:startEvent(9)
     else
-        player:startEvent(52); -- standard dialogue
+        player:startEvent(52) -- standard dialogue
     end
 end
 

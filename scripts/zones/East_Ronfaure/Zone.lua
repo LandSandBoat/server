@@ -44,7 +44,7 @@ end
 
 function onEventUpdate(player,csid,option)
     if (csid == 21) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 23) then
         if (player:getYPos() >= -22) then
             player:updateEvent(0,0,0,0,0,7)
@@ -56,6 +56,6 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 21) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end;

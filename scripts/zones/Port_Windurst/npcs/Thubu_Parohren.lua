@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 10009 and option == 1) then
-        local crystal = 4101; -- water crystal
+        local crystal = 4101 -- water crystal
 
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,crystal)

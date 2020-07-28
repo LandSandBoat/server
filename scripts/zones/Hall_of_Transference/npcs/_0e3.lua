@@ -23,6 +23,6 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 160) then
-        player:setPos(92.033, 0, 80.380, 255, 16); -- To Promyvion Holla {R}
+        player:setPos(92.033, 0, 80.380, 255, 16) -- To Promyvion Holla {R}
     end
 end;

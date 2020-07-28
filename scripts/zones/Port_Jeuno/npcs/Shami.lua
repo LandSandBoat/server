@@ -20,23 +20,23 @@ function onTrade(player,npc,trade)
 -------- Trading Seals/Crests to Shami -------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------
     if (trade:hasItemQty(1126,NumberItem) and trade:getItemCount() == NumberItem) then
-        player:startEvent(321,0,BeastmensSeal + NumberItem); -- Giving Shami Beastmen's Seal
+        player:startEvent(321,0,BeastmensSeal + NumberItem) -- Giving Shami Beastmen's Seal
         player:addSeals(NumberItem,0)
         player:tradeComplete(trade)
     elseif (trade:hasItemQty(1127,NumberItem) and trade:getItemCount() == NumberItem) then
-        player:startEvent(321,1,KindredsSeal + NumberItem); -- Giving Shami Kindred's Seal
+        player:startEvent(321,1,KindredsSeal + NumberItem) -- Giving Shami Kindred's Seal
         player:addSeals(NumberItem,1)
         player:tradeComplete(trade)
     elseif (trade:hasItemQty(2955,NumberItem) and trade:getItemCount() == NumberItem) then
-        player:startEvent(321,2,KindredsCrest + NumberItem); -- Giving Shami Kindred's Crest
+        player:startEvent(321,2,KindredsCrest + NumberItem) -- Giving Shami Kindred's Crest
         player:addSeals(NumberItem,2)
         player:tradeComplete(trade)
     elseif (trade:hasItemQty(2956,NumberItem) and trade:getItemCount() == NumberItem) then
-        player:startEvent(321,3,HighKindredsCrest + NumberItem); -- Giving Shami High Kindred's Crest
+        player:startEvent(321,3,HighKindredsCrest + NumberItem) -- Giving Shami High Kindred's Crest
         player:addSeals(NumberItem,3)
         player:tradeComplete(trade)
     elseif (trade:hasItemQty(2957,NumberItem) and trade:getItemCount() == NumberItem) then
-        player:startEvent(321,4,SacredKindredsCrest + NumberItem); -- Giving Shami Sacred Kindred's Crest
+        player:startEvent(321,4,SacredKindredsCrest + NumberItem) -- Giving Shami Sacred Kindred's Crest
         player:addSeals(NumberItem,4)
         player:tradeComplete(trade)
 ----------------------------------------------------------------------------------------------------------------------------
@@ -44,105 +44,105 @@ function onTrade(player,npc,trade)
 ----------------------------------------------------------------------------------------------------------------------------
     elseif (trade:hasItemQty(1551,1) and NumberItem == 1) then
         if (player:hasWornItem(1551)) then
-            player:startEvent(22); -- Cloudy Orb is Cracked
+            player:startEvent(22) -- Cloudy Orb is Cracked
         else
-            player:startEvent(5);  -- Cloudy Orb is ok, List where you can take the orb.
+            player:startEvent(5)  -- Cloudy Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1552,1) and NumberItem == 1) then
         if (player:hasWornItem(1552)) then
-            player:startEvent(22); -- Sky Orb is Cracked
+            player:startEvent(22) -- Sky Orb is Cracked
         else
-            player:startEvent(9); -- Sky Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Sky Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1131,1) and NumberItem == 1) then
         if (player:hasWornItem(1131)) then
-            player:startEvent(22); -- Star Orb is Cracked
+            player:startEvent(22) -- Star Orb is Cracked
         else
-            player:startEvent(9); -- Star Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Star Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1177,1) and NumberItem == 1) then
         if (player:hasWornItem(1177)) then
-            player:startEvent(22); -- Comet Orb is Cracked
+            player:startEvent(22) -- Comet Orb is Cracked
         else
-            player:startEvent(9); -- Comet Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Comet Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1130,1) and NumberItem == 1) then
         if (player:hasWornItem(1130)) then
-            player:startEvent(22); -- Moon Orb is Cracked
+            player:startEvent(22) -- Moon Orb is Cracked
         else
-            player:startEvent(9); -- Moon Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Moon Orb is ok, List where you can take the orb.
         end
 ----------------------------------------------------------------------------------------------------------------------------
 -------- Trading Cracked KSNM Orbs or checking where you can bring the Orb -------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------
     elseif (trade:hasItemQty(1180,1) and NumberItem == 1) then
         if (player:hasWornItem(1180)) then
-            player:startEvent(22); -- Atropos Orb is Cracked
+            player:startEvent(22) -- Atropos Orb is Cracked
         else
-            player:startEvent(9); -- Atropos Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Atropos Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1175,1) and NumberItem == 1) then
         if (player:hasWornItem(1175)) then
-            player:startEvent(22); -- Clotho Orb is Cracked
+            player:startEvent(22) -- Clotho Orb is Cracked
         else
-            player:startEvent(9); -- Clotho Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Clotho Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1178,1) and NumberItem == 1) then
         if (player:hasWornItem(1178)) then
             player:startEvent(22) -- Lachesis Orb is Cracked
         else
-            player:startEvent(9); -- Lachesis Orb is ok, List where you can take the orb.
+            player:startEvent(9) -- Lachesis Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(1553,1) and NumberItem == 1) then
         if (player:hasWornItem(1553)) then
-            player:startEvent(22); -- Themis Orb is Cracked
+            player:startEvent(22) -- Themis Orb is Cracked
         else
-            player:startEvent(11); -- Themis Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Themis Orb is ok, List where you can take the orb.
         end
 ----------------------------------------------------------------------------------------------------------------------------
 -------- Trading Cracked KCNM Orbs or checking where you can bring the Orb -------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------
     elseif (trade:hasItemQty(3351,1) and NumberItem == 1) then
         if (player:hasWornItem(3351)) then
-            player:startEvent(22); -- Phobos Orb is Cracked
+            player:startEvent(22) -- Phobos Orb is Cracked
         else
-            player:startEvent(11); -- Phobos Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Phobos Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(3352,1) and NumberItem == 1) then
         if (player:hasWornItem(3352)) then
-            player:startEvent(22); -- Deimos Orb is Cracked
+            player:startEvent(22) -- Deimos Orb is Cracked
         else
-            player:startEvent(11); -- Deimos Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Deimos Orb is ok, List where you can take the orb.
         end
 ----------------------------------------------------------------------------------------------------------------------------
 -------- Trading Cracked HKCNM Orbs or checking where you can bring the Orb ------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------
     elseif (trade:hasItemQty(3454,1) and NumberItem == 1) then
         if (player:hasWornItem(3454)) then
-            player:startEvent(22); -- Zelos Orb is Cracked
+            player:startEvent(22) -- Zelos Orb is Cracked
         else
-            player:startEvent(11); -- Zelos Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Zelos Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(3455,1) and NumberItem == 1) then
         if (player:hasWornItem(3455)) then
-            player:startEvent(22); -- Bia Orb is Cracked
+            player:startEvent(22) -- Bia Orb is Cracked
         else
-            player:startEvent(11); -- Bia Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Bia Orb is ok, List where you can take the orb.
         end
 ----------------------------------------------------------------------------------------------------------------------------
 -------- Trading Cracked SKCNM Orbs or checking where you can bring the Orb ------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------
     elseif (trade:hasItemQty(4062,1) and NumberItem == 1) then
         if (player:hasWornItem(4062)) then
-            player:startEvent(22); -- Microcosmic Orb is Cracked
+            player:startEvent(22) -- Microcosmic Orb is Cracked
         else
-            player:startEvent(11); -- Microcosmic Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Microcosmic Orb is ok, List where you can take the orb.
         end
     elseif (trade:hasItemQty(4063,1) and NumberItem == 1) then
         if (player:hasWornItem(4063)) then
-            player:startEvent(22); -- Macrocosmic Orb is Cracked
+            player:startEvent(22) -- Macrocosmic Orb is Cracked
         else
-            player:startEvent(11); -- Macrocosmic Orb is ok, List where you can take the orb.
+            player:startEvent(11) -- Macrocosmic Orb is ok, List where you can take the orb.
         end
 -- TODO : find cutscene that tells you where you can bring it
     end
@@ -185,9 +185,9 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,17) == false) then
         player:startEvent(317)
     elseif (BeastmensSeal + KindredsSeal + KindredsCrest + HighKindredsCrest + SacredKindredsCrest == 0) then
-        player:startEvent(23); -- Standard dialog ?
+        player:startEvent(23) -- Standard dialog ?
     else
-        player:startEvent(322,(KindredsSeal * 65536) + BeastmensSeal,(HighKindredsCrest * 65536) + KindredsCrest,SacredKindredsCrest,0,1,0,0); -- Standard dialog with menu
+        player:startEvent(322,(KindredsSeal * 65536) + BeastmensSeal,(HighKindredsCrest * 65536) + KindredsCrest,SacredKindredsCrest,0,1,0,0) -- Standard dialog with menu
     end
 end
 
@@ -222,7 +222,7 @@ function onEventFinish(player,csid,option)
         if ((option + 2)% 256 == 0) then
             if (player:getFreeSlotsCount() >=1) then
 
-                takingSealCount = (option + 2)/256 - 1; -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 510, two seals would be 510 + 256. etc
+                takingSealCount = (option + 2)/256 - 1 -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 510, two seals would be 510 + 256. etc
                 player:delSeals(takingSealCount,0)
                 player:addItem(1126,takingSealCount)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1126)
@@ -232,7 +232,7 @@ function onEventFinish(player,csid,option)
         elseif ((option + 1)% 256 == 0) then
             if (player:getFreeSlotsCount() >=1) then
 
-                takingSealCount = (option + 1)/256 - 1; -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 511, two seals would be 511 + 256. etc
+                takingSealCount = (option + 1)/256 - 1 -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 511, two seals would be 511 + 256. etc
                 player:delSeals(takingSealCount,1)
                 player:addItem(1127,takingSealCount)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1127)
@@ -242,7 +242,7 @@ function onEventFinish(player,csid,option)
         elseif ((option + 3)% 256 == 0) then
             if (player:getFreeSlotsCount() >=1) then
 
-                takingSealCount = (option + 3)/256 - 1; -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 509, two seals would be 509 + 256. etc
+                takingSealCount = (option + 3)/256 - 1 -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 509, two seals would be 509 + 256. etc
                 player:delSeals(takingSealCount,2)
                 player:addItem(2955,takingSealCount)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,2955)
@@ -252,7 +252,7 @@ function onEventFinish(player,csid,option)
         elseif ((option + 4)% 256 == 0) then
             if (player:getFreeSlotsCount() >=1) then
 
-                takingSealCount = (option + 4)/256 - 1; -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 508, two seals would be 508 + 256. etc
+                takingSealCount = (option + 4)/256 - 1 -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 508, two seals would be 508 + 256. etc
                 player:delSeals(takingSealCount,3)
                 player:addItem(2956,takingSealCount)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,2956)
@@ -262,7 +262,7 @@ function onEventFinish(player,csid,option)
         elseif ((option + 5)% 256 == 0) then
             if (player:getFreeSlotsCount() >=1) then
 
-                takingSealCount = (option + 5)/256 - 1; -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 508, two seals would be 508 + 256. etc
+                takingSealCount = (option + 5)/256 - 1 -- Every seal requested adds 256 to the option value. The lowest is one seal which sets the option to 508, two seals would be 508 + 256. etc
                 player:delSeals(takingSealCount,4)
                 player:addItem(2957,takingSealCount)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,2957)
@@ -281,7 +281,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1551)
                 player:setCharVar("CloudyOrbIsCracked",0)
             elseif (player:hasItem(1551)) then
-                player:addItem(1551);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1551)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1551)
             end
@@ -292,7 +292,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1552)
                 player:setCharVar("SkyOrbIsCracked",0)
             elseif (player:hasItem(1552)) then
-                player:addItem(1552);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1552)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1552)
             end
@@ -303,7 +303,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1131)
                 player:setCharVar("StarOrbIsCracked",0)
             elseif (player:hasItem(1131) == true) then
-                player:addItem(1131);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1131)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1131)
             end
@@ -314,7 +314,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1177)
                 player:setCharVar("CometOrbIsCracked",0)
             elseif (player:hasItem(1177)) then
-                player:addItem(1177);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1177)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1177)
             end
@@ -325,7 +325,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1130)
                 player:setCharVar("MoonOrbIsCracked",0)
             elseif (player:hasItem(1130)) then
-                player:addItem(1130);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1130)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1130)
             end
@@ -339,7 +339,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1175)
                 player:setCharVar("ClothoOrbIsCracked",0)
             elseif (player:hasItem(1175)) then
-                player:addItem(1175);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1175)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1175)
             end
@@ -350,7 +350,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1178)
                 player:setCharVar("LachesisOrbIsCracked",0)
             elseif (player:hasItem(1178) == true) then
-                player:addItem(1178);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1178)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1178)
             end
@@ -361,7 +361,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1180)
                 player:setCharVar("AtroposOrbIsCracked",0)
             elseif (player:hasItem(1180)) then
-                player:addItem(1180);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1180)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1180)
             end
@@ -372,7 +372,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,1553)
                 player:setCharVar("ThemisOrbIsCracked",0)
             elseif (player:hasItem(1553)) then
-                player:addItem(1553);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(1553)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,1553)
             end
@@ -386,7 +386,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,3351)
                 player:setCharVar("PhobosOrbIsCracked",0)
             elseif (player:hasItem(3351)) then
-                player:addItem(3351);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(3351)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,3351)
             end
@@ -397,7 +397,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,3352)
                 player:setCharVar("DeimosOrbIsCracked",0)
             elseif (player:hasItem(3352)) then
-                player:addItem(3352);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(3352)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,3352)
             end
@@ -411,7 +411,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,3454)
                 player:setCharVar("ZelosOrbIsCracked",0)
             elseif (player:hasItem(3454)) then
-                player:addItem(3454);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(3454)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,3454)
             end
@@ -422,7 +422,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,3455)
                 player:setCharVar("BiaOrbIsCracked",0)
             elseif (player:hasItem(3455)) then
-                player:addItem(3455);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(3455)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,3455)
             end
@@ -436,7 +436,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,4062)
                 player:setCharVar("MicrocosmicOrbIsCracked",0)
             elseif (player:hasItem(4062)) then
-                player:addItem(4062);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(4062)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4062)
             end
@@ -447,7 +447,7 @@ function onEventFinish(player,csid,option)
                 player:messageSpecial(ID.text.ITEM_OBTAINED,4063)
                 player:setCharVar("MacrocosmicOrbIsCracked",0)
             elseif (player:hasItem(4063)) then
-                player:addItem(4063);  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
+                player:addItem(4063)  -- does not add the item but forces it to send the "you cannot carry anymore of these" message.
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4063)
             end

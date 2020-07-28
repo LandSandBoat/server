@@ -30,22 +30,22 @@ function onTrigger(player,npc)
     -- YOMI OKURI (SAM AF2)
     if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED) then
         if (player:getCharVar("yomiOkuriCS") == 1) then
-            player:startEvent(148); -- start quest
+            player:startEvent(148) -- start quest
         elseif (player:hasKeyItem(tpz.ki.WASHUS_TASTY_WURST)) then
-            player:startEvent(151); -- remind objective
+            player:startEvent(151) -- remind objective
         elseif (player:getCharVar("yomiOkuriKilledNM") == 0 and not player:hasKeyItem(tpz.ki.WASHUS_TASTY_WURST)) then
-            player:startEvent(149); -- remind ingredients
+            player:startEvent(149) -- remind ingredients
         end
 
     -- STOP YOUR WHINING
     elseif (stopYourWhining == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and player:getMainLvl() >= 10) then
-        player:startEvent(21); -- start quest
+        player:startEvent(21) -- start quest
     elseif (stopYourWhining == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.EMPTY_BARREL)) then
-        player:startEvent(22); -- remind objective
+        player:startEvent(22) -- remind objective
     elseif (stopYourWhining == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW)) then
-        player:startEvent(23); -- finish quest
+        player:startEvent(23) -- finish quest
     elseif (stopYourWhining == QUEST_COMPLETED) then
-        player:startEvent(24); -- final dialog
+        player:startEvent(24) -- final dialog
 
     -- DEFAULT DIALOG
     else

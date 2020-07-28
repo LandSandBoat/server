@@ -44,13 +44,13 @@ end
 
 function onEventUpdate( player, csid, option)
     if (csid == 901) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     end
 end
 
 function onEventFinish( player, csid, option)
     if (csid == 901) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 903) then
         if (player:getZPos() >  -331) then
             player:updateEvent(0,0,0,0,0,3)

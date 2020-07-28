@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 
 function onTrade(player,npc,trade)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CHILD_S_PLAY) == QUEST_ACCEPTED and trade:hasItemQty(776,1) == true and trade:getItemCount() == 1) then
-        player:startEvent(1); -- Finish quest
+        player:startEvent(1) -- Finish quest
     end
 end
 
@@ -25,11 +25,11 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,16) == false) then
         player:startEvent(316)
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_ACCEPTED and ChildsPlay == QUEST_AVAILABLE) then
-        player:startEvent(0); -- Start quest
+        player:startEvent(0) -- Start quest
     elseif (ChildsPlay == QUEST_ACCEPTED) then
-        player:startEvent(61); -- mid quest CS
+        player:startEvent(61) -- mid quest CS
     else
-        player:startEvent(58); -- Standard dialog
+        player:startEvent(58) -- Standard dialog
     end
 
 end

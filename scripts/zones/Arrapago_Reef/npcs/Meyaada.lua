@@ -30,9 +30,9 @@ function onTrigger(player,npc)
     -- BEGINNINGS
     elseif (beginnings == QUEST_ACCEPTED) then
         if (not player:hasKeyItem(tpz.ki.BRAND_OF_THE_SPRINGSERPENT)) then
-            player:startEvent(10); -- brands you
+            player:startEvent(10) -- brands you
         else
-            player:startEvent(11); -- a harsh road lies before you
+            player:startEvent(11) -- a harsh road lies before you
         end
 
     -- ASSAULT --

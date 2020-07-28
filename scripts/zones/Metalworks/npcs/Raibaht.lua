@@ -36,9 +36,9 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok,5) == false) then
         player:startEvent(933)
     elseif (darkLegacy == QUEST_AVAILABLE and mJob == tpz.job.DRK and mLvl >= AF1_QUEST_LEVEL) then
-        player:startEvent(751); -- Start Quest "Dark Legacy"
+        player:startEvent(751) -- Start Quest "Dark Legacy"
     elseif (player:hasKeyItem(tpz.ki.DARKSTEEL_FORMULA)) then
-        player:startEvent(755); -- Finish Quest "Dark Legacy"
+        player:startEvent(755) -- Finish Quest "Dark Legacy"
     elseif (player:hasKeyItem(tpz.ki.STEAMING_SHEEP_INVITATION) and player:getCharVar("TheUsual_Event") ~= 1) then
         player:startEvent(510)
     else
@@ -59,11 +59,11 @@ function onEventFinish(player,csid,option)
         player:setCharVar("darkLegacyCS",1)
     elseif (csid == 755) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16798); -- Raven Scythe
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16798) -- Raven Scythe
         else
             player:delKeyItem(tpz.ki.DARKSTEEL_FORMULA)
             player:addItem(16798)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16798); -- Raven Scythe
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16798) -- Raven Scythe
             player:setCharVar("darkLegacyCS",0)
             player:addFame(BASTOK,20)
             player:completeQuest(BASTOK,tpz.quest.id.bastok.DARK_LEGACY)

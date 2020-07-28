@@ -35,6 +35,6 @@ function onEventFinish(player,csid,option)
     elseif (csid == 116) then
         player:setCharVar("PromathiaStatus",4)
     elseif (csid == 502 and option == 1) then
-        player:setPos(260.068,0,-283.568,190,27); -- To Phomiuna Aqueducts {R}
+        player:setPos(260.068,0,-283.568,190,27) -- To Phomiuna Aqueducts {R}
     end
 end;

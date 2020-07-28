@@ -27,22 +27,22 @@ function onTrigger(player,npc)
         local letterRed = player:getCharVar("LeleroonsLetterRed")
 
         if (letterGreen >= 1 and letterGreen < 5) then
-            player:startEvent(285); -- player is on green letter route
+            player:startEvent(285) -- player is on green letter route
         elseif (letterBlue >= 1 and letterBlue < 5) then
-            player:startEvent(286); -- player is on blue letter route
+            player:startEvent(286) -- player is on blue letter route
         elseif (letterRed >= 1 and letterRed < 5) then
-            player:startEvent(287); -- player is on red letter route
+            player:startEvent(287) -- player is on red letter route
         elseif (letterGreen < 5 or letterBlue < 5 or letterRed < 5) then
             local excludeFromMenu = 0
-            if (letterGreen == 5) then excludeFromMenu = excludeFromMenu + 2; end; -- finished green
-            if (letterBlue == 5) then excludeFromMenu = excludeFromMenu + 4; end;  -- finished blue
-            if (letterRed == 5) then excludeFromMenu = excludeFromMenu + 8; end;   -- finished red
-            player:startEvent(282,0,0,0,0,0,0,0,excludeFromMenu);                  -- choose new route
+            if (letterGreen == 5) then excludeFromMenu = excludeFromMenu + 2; end -- finished green
+            if (letterBlue == 5) then excludeFromMenu = excludeFromMenu + 4; end  -- finished blue
+            if (letterRed == 5) then excludeFromMenu = excludeFromMenu + 8; end   -- finished red
+            player:startEvent(282,0,0,0,0,0,0,0,excludeFromMenu)                  -- choose new route
         else
-            player:startEvent(264); -- default dialog
+            player:startEvent(264) -- default dialog
         end
     else
-        player:startEvent(264); -- default dialog
+        player:startEvent(264) -- default dialog
     end
 end
 

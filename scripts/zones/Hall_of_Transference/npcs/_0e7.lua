@@ -23,6 +23,6 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 160) then
-        player:setPos(-93.268, 0, 170.749, 162, 20); -- To Promyvion Mea {R}
+        player:setPos(-93.268, 0, 170.749, 162, 20) -- To Promyvion Mea {R}
     end
 end;

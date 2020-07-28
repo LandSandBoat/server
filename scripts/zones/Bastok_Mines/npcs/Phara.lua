@@ -22,15 +22,15 @@ function onTrigger(player,npc)
     local theTalekeeperTruth = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
 
     if (theDoorman == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 40) then
-        player:startEvent(151); -- Start Quests "The doorman"
+        player:startEvent(151) -- Start Quests "The doorman"
     elseif (player:hasKeyItem(tpz.ki.SWORD_GRIP_MATERIAL)) then
-        player:startEvent(152); -- Need to wait 1 vanadiel day
+        player:startEvent(152) -- Need to wait 1 vanadiel day
     elseif (player:getCharVar("theDoormanCS") == 2 and VanadielDayOfTheYear() ~= player:getCharVar("theDoorman_time")) then
-        player:startEvent(153); -- The doorman notification, go to naji
+        player:startEvent(153) -- The doorman notification, go to naji
     elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE) then
-        player:startEvent(154); -- New standard dialog
+        player:startEvent(154) -- New standard dialog
     else
-        player:startEvent(150); -- Standard dialog
+        player:startEvent(150) -- Standard dialog
     end
 
 end

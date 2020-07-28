@@ -14,14 +14,14 @@ require("scripts/globals/titles")
 function onTrade(player,npc,trade)
     featherstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     if (featherstatus >= 1 and trade:hasItemQty(842,3) == true and trade:getGil() == 0 and trade:getItemCount() == 3) then
-        player:startEvent(79,1500); -- Quest Turn In
+        player:startEvent(79,1500) -- Quest Turn In
     end
 end
 
 function onTrigger(player,npc)
 
---    player:delQuest(WINDURST,tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP);  -- ================== FOR TESTING ONLY =====================
---    player:addFame(WINDURST,200);   -- ================== FOR TESTING ONLY =====================
+--    player:delQuest(WINDURST,tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)  -- ================== FOR TESTING ONLY =====================
+--    player:addFame(WINDURST,200)   -- ================== FOR TESTING ONLY =====================
 
     function testflag(set,flag)
         return (set % (2*flag) >= flag)
@@ -30,9 +30,9 @@ function onTrigger(player,npc)
     featherstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     pfame = player:getFameLevel(WINDURST)
     if (hatstatus == 0) then
-        player:startEvent(48); -- Quest Offered
+        player:startEvent(48) -- Quest Offered
 --    elseif ((hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) and player:getCharVar("QuestHatInHand_count") == 0) then
---        player:startEvent(51,80); -- Hat in Hand: During Quest - Objective Reminder
+--        player:startEvent(51,80) -- Hat in Hand: During Quest - Objective Reminder
     elseif (hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) then
         --     Variable to track quest progress
         --     1 = Machitata       !pos 163 0 -22
@@ -56,38 +56,38 @@ function onTrigger(player,npc)
             player:startEvent(52)
         end
     elseif (featherstatus == 1 or player:getCharVar("QuestFeatherInOnesCap_var") == 1) then
-        player:startEvent(78,0,842); -- Quest Objective Reminder
+        player:startEvent(78,0,842) -- Quest Objective Reminder
     elseif (hatstatus == 2 and featherstatus == 0 and pfame >= 3 and player:needToZone() == false and player:getCharVar("QuestHatInHand_var2") == 0) then
         rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(75,0,842); -- Quest "Feather In One's Cap" offered
+            player:startEvent(75,0,842) -- Quest "Feather In One's Cap" offered
         else
-            player:startEvent(49); -- Repeatable Quest "Hat In Hand" offered
+            player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
         end
 
     elseif     (featherstatus == 2 and player:needToZone() == false) then
         rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(49); -- Repeatable Quest "Hat In Hand" offered
+            player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
         else
-            player:startEvent(75,0,842); -- Repeatable Quest "A Feather In One's Cap" offered
+            player:startEvent(75,0,842) -- Repeatable Quest "A Feather In One's Cap" offered
         end
     elseif (player:needToZone() == false) then
-        player:startEvent(49); -- Repeatable Quest "Hat In Hand" offered
+        player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
     else   --  Will run through these if fame is not high enough for other quests
         rand = math.random(1,6)
         if (rand == 1) then
-            player:startEvent(42); -- Standard Conversation 1
+            player:startEvent(42) -- Standard Conversation 1
         elseif (rand == 2) then
-            player:startEvent(44); -- Standard Conversation 2
+            player:startEvent(44) -- Standard Conversation 2
         elseif (rand == 3) then
-            player:startEvent(45); -- Standard Conversation 3
+            player:startEvent(45) -- Standard Conversation 3
         elseif (rand == 4) then
-            player:startEvent(46); -- Standard Conversation 4
+            player:startEvent(46) -- Standard Conversation 4
         elseif (rand == 5) then
-            player:startEvent(47); -- Standard Conversation 5
+            player:startEvent(47) -- Standard Conversation 5
         elseif (rand == 6) then
-            player:startEvent(1022); -- Standard Conversation 6
+            player:startEvent(1022) -- Standard Conversation 6
         end
     end
 end

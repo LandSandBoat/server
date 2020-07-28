@@ -101,12 +101,12 @@ function onEventFinish(player,csid,option)
         player:setCharVar("theSeamStress",0)
     elseif (csid == 530) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12696); -- Leather Gloves
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12696) -- Leather Gloves
         else
             player:tradeComplete()
             player:addTitle(tpz.title.SILENCER_OF_THE_LAMBS)
             player:addItem(12696)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 12696); -- Leather Gloves
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12696) -- Leather Gloves
             if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.THE_SEAMSTRESS) == QUEST_ACCEPTED) then
                 player:addFame(SANDORIA,30)
                 player:completeQuest(SANDORIA,tpz.quest.id.sandoria.THE_SEAMSTRESS)
@@ -121,12 +121,12 @@ function onEventFinish(player,csid,option)
         player:setCharVar("lzdSkins",0)
     elseif (csid == 561) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12697); -- Lizard Gloves
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12697) -- Lizard Gloves
         else
             player:tradeComplete()
             player:addTitle(tpz.title.LIZARD_SKINNER)
             player:addItem(12697)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 12697); -- Lizard Gloves
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12697) -- Lizard Gloves
             if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LIZARD_SKINS) == QUEST_ACCEPTED) then
                 player:addFame(SANDORIA,30)
                 player:completeQuest(SANDORIA,tpz.quest.id.sandoria.LIZARD_SKINS)
@@ -141,12 +141,12 @@ function onEventFinish(player,csid,option)
         player:setCharVar("blkTigerSkin",0)
     elseif (csid == 577) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13119); -- Tyger Stole
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13119) -- Tyger Stole
         else
             player:tradeComplete()
             player:addTitle(tpz.title.CAT_SKINNER)
             player:addItem(13119)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13119); -- Tyger Stole
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13119) -- Tyger Stole
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
         end

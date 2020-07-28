@@ -15,14 +15,14 @@ end
 
 function onTrigger(player,npc)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
-        player:startEvent(11,1); -- For the quest "Rubbish day"
+        player:startEvent(11,1) -- For the quest "Rubbish day"
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.BROKEN_WAND) == true) then
             player:startEvent(11,3)
-        else player:startEvent(11,0); -- Making Amens dialogue
+        else player:startEvent(11,0) -- Making Amens dialogue
         end
     else
-        player:startEvent(11,3); -- Standard dialog and menu
+        player:startEvent(11,3) -- Standard dialog and menu
     end
 end
 
@@ -36,7 +36,7 @@ MakingAmens = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_AMENS)
         player:delKeyItem(tpz.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDayVar",1)
     elseif (csid == 11 and option == 0 and MakingAmens == QUEST_ACCEPTED) then
-        player:addKeyItem(tpz.ki.BROKEN_WAND); --Broken Wand
+        player:addKeyItem(tpz.ki.BROKEN_WAND) --Broken Wand
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BROKEN_WAND)
         player:tradeComplete()
     end

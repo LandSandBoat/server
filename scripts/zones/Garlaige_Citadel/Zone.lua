@@ -54,8 +54,8 @@ end
 
 function onRegionEnter(player,region)
     local regionId = region:GetRegionID()
-    local leverSet = math.floor(regionId / 9);              -- the set of levers player is standing on (0, 1, 2)
-    local gateId = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet);  -- the ID of the related gate
+    local leverSet = math.floor(regionId / 9)              -- the set of levers player is standing on (0, 1, 2)
+    local gateId = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet)  -- the ID of the related gate
 
     -- if all levers are down, open gate for 30 seconds
     GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + regionId):setAnimation(tpz.anim.OPEN_DOOR)

@@ -27,7 +27,7 @@ function onSpellPrecast(mob, spell)
         spell:setAoE(tpz.magic.aoe.RADIAL)
         spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
-        spell:setAnimation(280); -- AoE Meteor Animation
+        spell:setAnimation(280) -- AoE Meteor Animation
         spell:setMPCost(1)
     end
 end

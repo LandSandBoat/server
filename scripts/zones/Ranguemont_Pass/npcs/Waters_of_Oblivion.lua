@@ -23,7 +23,7 @@ function onTrigger(player,npc)
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.TROS):updateClaim(player)
     elseif (player:hasKeyItem(tpz.ki.MERTAIRES_BRACELET) and TrosKilled == 1) then
-        player:startEvent(8); -- Finish Quest "Painful Memory"
+        player:startEvent(8) -- Finish Quest "Painful Memory"
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

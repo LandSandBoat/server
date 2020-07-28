@@ -198,9 +198,9 @@ function onTrigger(player,npc)
             player:startEvent(200)
             npc:wait()
         elseif (progress == 3 or failed == 4) then
-                player:startEvent(210);  -- asking for sands of silence
+                player:startEvent(210)  -- asking for sands of silence
         elseif (progress >= 4 or failed >= 5) then
-            player:startEvent(245); -- happy with sands of silence
+            player:startEvent(245) -- happy with sands of silence
         end
     else
         player:startEvent(200)

@@ -13,13 +13,13 @@ function onMonsterMagicPrepare(mob, target)
     rnd = math.random()
 
     if (rnd < 0.5) then
-        return 176; -- firaga 3
+        return 176 -- firaga 3
     elseif (rnd < 0.7) then
-        return 147; -- fire 4
+        return 147 -- fire 4
     elseif (rnd < 0.9) then
-        return 204; -- flare
+        return 204 -- flare
     else
-        return 235; -- burn
+        return 235 -- burn
     end
 
 end;

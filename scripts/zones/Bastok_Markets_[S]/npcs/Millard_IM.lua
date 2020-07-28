@@ -13,11 +13,11 @@ end
 
 function onTrigger(player,npc)
     local notes = player:getCurrency("allied_notes")
-    local freelances = 99; -- Faking it for now
-    local unknown = 12; -- Faking it for now
+    local freelances = 99 -- Faking it for now
+    local unknown = 12 -- Faking it for now
     local medalRank = getMedalRank(player)
-    local bonusEffects = 0; -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
-    local timeStamp = 0; -- getSigilTimeStamp(player)
+    local bonusEffects = 0 -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
+    local timeStamp = 0 -- getSigilTimeStamp(player)
     -- todo add in Throne Room controls
 
     -- if ( medal_rank > 25 and nation controls Throne_Room_S ) then
@@ -35,11 +35,11 @@ end
 
 function onEventUpdate(player,csid,option)
     local itemid = 0
-    local canEquip = 2; -- Faking it for now.
+    local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
     if (csid == 13 and option >= 2 and option <= 2050) then
         itemid = getBastokNotesItem(option)
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip); -- canEquip(player,itemid));  <- works for sanction NPC, wtf?
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player,itemid));  <- works for sanction NPC, wtf?
     end
 end
 
@@ -64,8 +64,8 @@ function onEventFinish(player,csid,option)
         or option == 45057 or option == 49153 or option == 53249 or option == 57345 or option == 61441) then
             local cost = 0
             local power = ( (option - 1) / 4096 )
-            local duration = 10800+((15*medalRank)*60); -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
-            local subPower = 35; -- Sets % trigger for regen/refresh. Static at minimum value (35%) for now.
+            local duration = 10800+((15*medalRank)*60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
+            local subPower = 35 -- Sets % trigger for regen/refresh. Static at minimum value (35%) for now.
 
             if (power == 1 or power == 2 or power == 4) then
             -- 1: Regen,  2: Refresh,  4: Meal Duration

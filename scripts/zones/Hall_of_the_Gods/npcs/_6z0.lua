@@ -18,7 +18,7 @@ function onTrigger(player,npc)
         player:startEvent(1)
     else
         if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
-            player:startEvent(4); -- Zilart CS.
+            player:startEvent(4) -- Zilart CS.
         else
             player:startEvent(2)
         end

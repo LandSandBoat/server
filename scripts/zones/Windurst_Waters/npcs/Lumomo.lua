@@ -21,15 +21,15 @@ function onTrigger(player,npc)
     local ecoWarWindurst = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ECO_WARRIOR)
     local ecoWarActiveNation = player:getCharVar("ECO_WARRIOR_ACTIVE")
     if (player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) and ecoWarActiveNation == 238) then
-        player:startEvent(822); -- quest done
+        player:startEvent(822) -- quest done
     elseif (ecoWarActiveNation < 1 and player:getFameLevel(WINDURST) >= 1 and player:getCharVar("ECO-WAR_ConquestWeek") ~= getConquestTally()) then
-        player:startEvent(818); -- Start CS
+        player:startEvent(818) -- Start CS
     elseif (ecoWarActiveNation ~= 238 and ecoWarActiveNation > 1) then
         player:startEvent(823)
     elseif (ecoWarWindurst ~= QUEST_AVAILABLE and ecoWarActiveNation == 238  and player:getCharVar("ECO-WAR_ConquestWeek") ~= getConquestTally()) then
-        player:startEvent(820); -- reminder
+        player:startEvent(820) -- reminder
     else
-        player:startEvent(821); -- Default chit-chat
+        player:startEvent(821) -- Default chit-chat
     end
 end
 

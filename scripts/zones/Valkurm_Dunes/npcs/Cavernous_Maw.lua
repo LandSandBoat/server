@@ -21,7 +21,7 @@ function onTrigger(player,npc)
         and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_DELECTABLE_DEMON) == QUEST_AVAILABLE) then
             player:startEvent(56)
         else
-            player:startEvent(55,0,1); -- No param = no entry.
+            player:startEvent(55,0,1) -- No param = no entry.
         end
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

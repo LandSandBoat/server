@@ -52,10 +52,10 @@ function onEventFinish(player,csid,option)
         player:setCharVar("MissionStatus",4)
     elseif (csid == 113) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16535); -- Bronze Sword
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16535) -- Bronze Sword
         else
             player:addItem(16535)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16535); -- Bronze Sword
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16535) -- Bronze Sword
             player:setCharVar("MissionStatus",9)
         end
     end

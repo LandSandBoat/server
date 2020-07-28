@@ -29,19 +29,19 @@ function onZoneIn(player,prevZone)
     end
 
     if (player:getCharVar("peaceForTheSpiritCS") == 1 and not player:hasItem(1093)) then -- Antique Coin
-        SpawnMob(ID.mob.MISER_MURPHY); -- RDM AF
+        SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
     if (prevZone == tpz.zone.BEAUCEDINE_GLACIER and currentMission == tpz.mission.id.nation.ARCHLICH and MissionStatus == 10) then
-        cs = 1; -- MISSION 5-1
+        cs = 1 -- MISSION 5-1
     elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 2) then
-        cs = 23; -- San d'Oria 9-2
+        cs = 23 -- San d'Oria 9-2
     elseif (player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
         cs = 29
     elseif (prevZone == tpz.zone.QUBIA_ARENA and player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LETTER_FROM_DALZAKK)) then
-        cs = 16; -- MNK AF
+        cs = 16 -- MNK AF
     elseif (prevZone == tpz.zone.BEAUCEDINE_GLACIER and player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and player:getCharVar("pieujesDecisionCS") == 0) then
-        cs = 19; -- WHM AF
+        cs = 19 -- WHM AF
     end
 
     return cs

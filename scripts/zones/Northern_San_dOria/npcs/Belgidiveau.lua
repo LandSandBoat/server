@@ -41,12 +41,12 @@ function onEventFinish(player,csid,option)
         player:setCharVar("troubleAtTheSluiceVar",1)
     elseif (csid == 56) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16706); -- Heavy Axe
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16706) -- Heavy Axe
         else
             player:tradeComplete()
             player:delKeyItem(tpz.ki.NEUTRALIZER)
             player:addItem(16706)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,16706); -- Heavy Axe
+            player:messageSpecial(ID.text.ITEM_OBTAINED,16706) -- Heavy Axe
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         end

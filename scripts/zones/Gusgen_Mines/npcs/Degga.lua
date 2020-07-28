@@ -14,7 +14,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:startEvent(12); -- i have nothing to say to you standar dialog
+    player:startEvent(12) -- i have nothing to say to you standar dialog
 end
 
 function onEventUpdate(player,csid,option)

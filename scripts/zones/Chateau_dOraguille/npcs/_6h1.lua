@@ -20,9 +20,9 @@ function onTrigger(player,npc)
 
     if (player:getMainJob() == tpz.job.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL) then
         if (messengerFromBeyond == QUEST_COMPLETED and preludeOfBandW == QUEST_AVAILABLE) then
-            player:startEvent(551); -- Start Quest "Prelude of Black and White"
+            player:startEvent(551) -- Start Quest "Prelude of Black and White"
         elseif (preludeOfBandW == QUEST_COMPLETED and pieujesDecision == QUEST_AVAILABLE) then
-            player:startEvent(552); -- Start Quest "Pieuje's Decision"
+            player:startEvent(552) -- Start Quest "Pieuje's Decision"
         end
     elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.LIGHTBRINGER) and player:getRank() == 9 and player:getCharVar("Cutscenes_8-2") == 1) then
         player:startEvent(74)

@@ -36,38 +36,38 @@ function onTrigger(player,npc)
         player:startEvent(801)
 
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==10) then
-        player:startEvent(875); -- COP event
+        player:startEvent(875) -- COP event
 
     -- Start Past Reflections in First -----------
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS) then
         MissionStatus = player:getCharVar("MissionStatus")
         if (MissionStatus == 0) then
-            player:startEvent(160); -- First CS for Mission 2-1
+            player:startEvent(160) -- First CS for Mission 2-1
         elseif (MissionStatus > 0 and MissionStatus < 6) then
-            player:startEvent(161); -- During Mission 2-1
+            player:startEvent(161) -- During Mission 2-1
         elseif (MissionStatus == 6) then
-            player:startEvent(168); -- Finish Mission 2-1
+            player:startEvent(168) -- Finish Mission 2-1
         end
     elseif (bookwormStatus == QUEST_AVAILABLE and glyphStatus == QUEST_COMPLETED and Fame >= 2 and player:needToZone() == false) then
-        player:startEvent(387); -- Start Quest "Early Bird Catches the Bookworm"
+        player:startEvent(387) -- Start Quest "Early Bird Catches the Bookworm"
     elseif (bookwormStatus == QUEST_ACCEPTED) then
-        player:startEvent(388); -- During Quest "Early Bird Catches the Bookworm"
+        player:startEvent(388) -- During Quest "Early Bird Catches the Bookworm"
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) then
         function testflag(set,flag)
             return (set % (2*flag) >= flag)
         end
         if (testflag(tonumber(player:getCharVar("QuestHatInHand_var")),32) == false) then
-            player:startEvent(55); -- Show Off Hat
+            player:startEvent(55) -- Show Off Hat
         end
     -- Book is tpz.ki.A_SONG_OF_LOVE, KeyItem ID = 126
     elseif (chasingStatus == QUEST_AVAILABLE and bookwormStatus == QUEST_COMPLETED and WindyMission ~= tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and Fame >= 3 and player:needToZone() == false) then
-        player:startEvent(403); --  Add initial cutscene
+        player:startEvent(403) --  Add initial cutscene
     elseif (chasingStatus == QUEST_ACCEPTED and player:getCharVar("CHASING_TALES_TRACK_BOOK") > 0) then
         player:startEvent(412)
     elseif (player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION) ==true) then
         player:startEvent(412)
     elseif (chasingStatus == QUEST_ACCEPTED) then
-        player:startEvent(406); --  Add follow up cutscene
+        player:startEvent(406) --  Add follow up cutscene
         -- Windurst Mission 7-1 --
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(715,0,tpz.ki.OPTISTERY_RING)
@@ -76,7 +76,7 @@ function onTrigger(player,npc)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(724)
     else
-        player:startEvent(370); -- Standard Conversation
+        player:startEvent(370) -- Standard Conversation
     end
 end
 

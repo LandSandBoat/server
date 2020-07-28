@@ -22,15 +22,15 @@ function onTrade(player,npc,trade)
         local rand = math.random(1,4)
         if (rand <= 2) then
             if (InAPickle == QUEST_ACCEPTED) then
-                player:startEvent(659); -- IN A PICKLE: Quest Turn In (1st Time)
+                player:startEvent(659) -- IN A PICKLE: Quest Turn In (1st Time)
             elseif (InAPickle == QUEST_COMPLETED) then
                 player:startEvent(662,200)
             end
         elseif (rand == 3) then
-            player:startEvent(657);  -- IN A PICKLE: Too Light
+            player:startEvent(657)  -- IN A PICKLE: Too Light
             player:tradeComplete(trade)
         elseif (rand == 4) then
-            player:startEvent(658);  -- IN A PICKLE: Too Small
+            player:startEvent(658)  -- IN A PICKLE: Too Small
             player:tradeComplete(trade)
         end
     elseif (FakeMoustache == false) then
@@ -88,23 +88,23 @@ function onTrigger(player,npc)
     elseif (InAPickle == QUEST_AVAILABLE and NeedToZone == false) then
         local rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(654,0,4444); -- IN A PICKLE + RARAB TAIL: Quest Begin
+            player:startEvent(654,0,4444) -- IN A PICKLE + RARAB TAIL: Quest Begin
         else
-            player:startEvent(651); -- Standard Conversation
+            player:startEvent(651) -- Standard Conversation
         end
     elseif (InAPickle == QUEST_ACCEPTED or player:getCharVar("QuestInAPickle_var") == 1) then
-        player:startEvent(655,0,4444); -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
+        player:startEvent(655,0,4444) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
     elseif (InAPickle == QUEST_COMPLETED and NeedToZone) then
-        player:startEvent(660); -- IN A PICKLE: After Quest
+        player:startEvent(660) -- IN A PICKLE: After Quest
     elseif (InAPickle == QUEST_COMPLETED and NeedToZone == false and player:getCharVar("QuestInAPickle_var") ~= 1) then
         local rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(661); -- IN A PICKLE: Repeatable Quest Begin
+            player:startEvent(661) -- IN A PICKLE: Repeatable Quest Begin
         else
-            player:startEvent(651); -- Standard Conversation
+            player:startEvent(651) -- Standard Conversation
         end
     else
-        player:startEvent(651); -- Standard Conversation
+        player:startEvent(651) -- Standard Conversation
     end
 -- player:delQuest(WINDURST,tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
 end

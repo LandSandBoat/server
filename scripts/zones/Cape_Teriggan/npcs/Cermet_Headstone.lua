@@ -77,7 +77,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13248)
         else
             player:tradeComplete()
-            player:addItem(13248); -- Flagellant's Rope
+            player:addItem(13248) -- Flagellant's Rope
             player:messageSpecial(ID.text.ITEM_OBTAINED,13248)
             player:addTitle(tpz.title.BEARER_OF_BONDS_BEYOND_TIME)
             player:completeQuest(OUTLANDS,tpz.quest.id.outlands.WANDERING_SOULS)

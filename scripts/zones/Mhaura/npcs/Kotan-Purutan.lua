@@ -14,21 +14,21 @@ end
 
 function onTrigger(player,npc)
     local OvernightDelivery = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
-    local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var"); -- Variable to track progress for Overnight Delivery
-    local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var"); -- Variable to track the day the quest is started.
-    local KenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var"); -- Variable to track the hour the quest is started.
+    local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- Variable to track progress for Overnight Delivery
+    local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- Variable to track the day the quest is started.
+    local KenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var") -- Variable to track the hour the quest is started.
     local HourOfTheDay = VanadielHour()
 
     if (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay < 6 or HourOfTheDay >= 18)) then
-        player:startEvent(141); -- Gives Key Item at correct times of night
+        player:startEvent(141) -- Gives Key Item at correct times of night
     elseif (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay >= 6 or HourOfTheDay < 18)) then
-        player:startEvent(144); -- Only at night
+        player:startEvent(144) -- Only at night
     elseif (player:hasKeyItem(tpz.ki.SMALL_BAG) == true) then
-        player:startEvent(142);  -- Reminder Dialogue
+        player:startEvent(142)  -- Reminder Dialogue
     elseif (OvernightDelivery == QUEST_COMPLETED) then
-        player:startEvent(143); -- Post quest
+        player:startEvent(143) -- Post quest
     else
-        player:startEvent(140); -- Standard
+        player:startEvent(140) -- Standard
     end
 end
 

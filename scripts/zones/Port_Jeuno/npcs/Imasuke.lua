@@ -17,7 +17,7 @@ function onTrade(player,npc,trade)
 
     -- THE ANTIQUE COLLECTOR (kaiser sword)
     if (theAntiqueCollector == QUEST_ACCEPTED and trade:hasItemQty(16631,1) and trade:getItemCount() == 1) then
-        player:startEvent(15); -- End quest
+        player:startEvent(15) -- End quest
     end
 end
 
@@ -42,9 +42,9 @@ function onTrigger(player,npc)
 
     -- THE ANTIQUE COLLECTOR
     elseif (theAntiqueCollector == QUEST_AVAILABLE and player:getFameLevel(JEUNO) >= 3) then
-        player:startEvent(13); -- Start quest
+        player:startEvent(13) -- Start quest
     elseif (theAntiqueCollector == QUEST_ACCEPTED) then
-        player:startEvent(14); -- Mid CS
+        player:startEvent(14) -- Mid CS
 
     -- DEFAULT DIALOG
     else

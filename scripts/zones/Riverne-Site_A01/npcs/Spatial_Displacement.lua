@@ -21,8 +21,8 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 35 and option == 1) then
-        player:setPos(12.527,0.345,-539.602,127,31); -- to Monarch Linn (Retail confirmed)
+        player:setPos(12.527,0.345,-539.602,127,31) -- to Monarch Linn (Retail confirmed)
     elseif (csid == 10 and option == 1) then
-        player:setPos(-538.526,-29.5,359.219,255,25); -- back to Misareaux Coast (Retail confirmed)
+        player:setPos(-538.526,-29.5,359.219,255,25) -- back to Misareaux Coast (Retail confirmed)
     end
 end;

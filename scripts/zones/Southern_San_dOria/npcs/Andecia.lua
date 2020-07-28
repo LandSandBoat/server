@@ -34,8 +34,8 @@ end
 function onTrigger(player,npc)
 
     Tomb = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GRAVE_CONCERNS)
-    WellWater = player:hasItem(567); -- Well Water
-    Waterskin = player:hasItem(547); -- Tomb Waterskin
+    WellWater = player:hasItem(567) -- Well Water
+    Waterskin = player:hasItem(547) -- Tomb Waterskin
 
     if (Tomb == QUEST_AVAILABLE) then
         player:startEvent(541)
@@ -58,12 +58,12 @@ function onEventFinish(player,csid,option)
 
     if (csid == 541 and option == 0) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,567); -- Well Water
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,567) -- Well Water
         else
             player:addQuest(SANDORIA,tpz.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar("graveConcernsVar",0)
             player:addItem(567)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,567); -- Well Water
+            player:messageSpecial(ID.text.ITEM_OBTAINED,567) -- Well Water
         end
     elseif (csid == 624) then
         player:tradeComplete()

@@ -55,7 +55,7 @@ function onEventFinish(player,csid,option)
     if (csid == 10098) then
         player:setPos(0,0,0,0,51)
     elseif (csid == 24) then
-        player:setCharVar("PromathiaStatus",1); -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
+        player:setCharVar("PromathiaStatus",1) -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
         player:setCharVar("FirstPromyvionHolla",1)
         player:setCharVar("FirstPromyvionMea",1)
         player:setCharVar("FirstPromyvionDem",1)

@@ -7,8 +7,8 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 
 function onMobSpawn(mob)
-    mob:SetMobSkillAttack(0); -- resetting so it doesn't respawn in flight mode.
-    mob:AnimationSub(0); -- subanim 0 is only used when it spawns until first flight.
+    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:AnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
 function onMobFight(mob,target)
@@ -65,5 +65,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    mob:setRespawnTime(math.random(259200,432000)); -- 3 to 5 days
+    mob:setRespawnTime(math.random(259200,432000)) -- 3 to 5 days
 end;

@@ -19,9 +19,9 @@ function onTrade(player,npc,trade)
     if (trade:hasItemQty(544,1) and count == 1 and trade:getGil() == 0) then
         if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
             if (player:getCharVar("QuestMakingTheGrade_prog") == 1) then
-                player:startEvent(285); -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
+                player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
             else
-                player:startEvent(287); -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
+                player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
             end
         end
     elseif (trade:hasItemQty(584,1) and count == 1 and trade:getGil() == 0) then
@@ -37,9 +37,9 @@ function onTrade(player,npc,trade)
         end
     elseif (trade:hasItemQty(16511,1) and count == 1 and trade:getGil() == 0) then
         if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED) then
-            player:startEvent(224); -- Complete quest!
+            player:startEvent(224) -- Complete quest!
         else
-            player:startEvent(225); -- not the shell
+            player:startEvent(225) -- not the shell
         end
     elseif (trade:hasItemQty(829,1) and count == 1 and trade:getGil() == 0) then
         if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED) then
@@ -49,7 +49,7 @@ function onTrade(player,npc,trade)
         end
     elseif (trade:hasItemQty(17299,4) and count == 4 and trade:getGil() == 0) then -- trade:getItemCount() is apparently checking total of all 8 slots combined. Could have sworn that wasn't how it worked before.
         if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") == 2) then
-            player:startEvent(407); -- now Koru remembers something that you need to inquire his former students.
+            player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
         end
     end
 end
@@ -77,11 +77,11 @@ function onTrigger(player,npc)
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local makingGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
         if (makingGradeProg == 0 and player:hasItem(544)) then
-            player:startEvent(287); -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
+            player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
         elseif (makingGradeProg == 1) then
-            player:startEvent(285); -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
+            player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
         elseif (makingGradeProg >= 2) then
-            player:startEvent(286); -- MAKING THE GRADE: Reminder to go away
+            player:startEvent(286) -- MAKING THE GRADE: Reminder to go away
         else
             player:startEvent(193)
         end
@@ -92,33 +92,33 @@ function onTrigger(player,npc)
     ----------------------------------------------------------
     -- Carbuncle Debacle
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 1 or CarbuncleDebacleProgress == 2) then
-        player:startEvent(416); -- go and see Ripapa
+        player:startEvent(416) -- go and see Ripapa
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 4) then
-        player:startEvent(417); -- now go and see Agado-Pugado
+        player:startEvent(417) -- now go and see Agado-Pugado
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5) then
-        player:startEvent(418); -- Uran-Mafran must be stopped
+        player:startEvent(418) -- Uran-Mafran must be stopped
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 7) then
-        player:startEvent(419); -- ending cs
+        player:startEvent(419) -- ending cs
     elseif (ThePuppetMaster == QUEST_COMPLETED and ClassReunion == QUEST_COMPLETED and CarbuncleDebacle == QUEST_COMPLETED) then
-        player:startEvent(420); -- new cs after all 3 SMN AFs done
+        player:startEvent(420) -- new cs after all 3 SMN AFs done
     ----------------------------------------------------------
     -- Class Reunion
     elseif (ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 1) then
-        player:startEvent(412,0,450,17299,0,0,0,0,0); -- bring Koru 4 astragaloi
+        player:startEvent(412,0,450,17299,0,0,0,0,0) -- bring Koru 4 astragaloi
     elseif (ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 2) then
-        player:startEvent(414,0,0,17299,0,0,0,0,0); -- reminder to bring 4 astragaloi
+        player:startEvent(414,0,0,17299,0,0,0,0,0) -- reminder to bring 4 astragaloi
     elseif ((ClassReunion == QUEST_ACCEPTED and ClassReunionProgress >= 3) and (talk1 ~= 1 or talk2 ~= 1)) then
-        player:startEvent(408); -- reminder to visit the students
+        player:startEvent(408) -- reminder to visit the students
     elseif (ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 6 and talk1 == 1 and talk2 == 1) then
-            player:startEvent(410); -- ending cs
+            player:startEvent(410) -- ending cs
     elseif (ThePuppetMaster == QUEST_COMPLETED and ClassReunion == QUEST_COMPLETED) then
-        player:startEvent(411); -- new cs after completed AF2
+        player:startEvent(411) -- new cs after completed AF2
     ----------------------------------------------------------
     -- The Puppet Master
     elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 4) then
-        player:startEvent(404); -- ending cs
+        player:startEvent(404) -- ending cs
     elseif (ThePuppetMaster == QUEST_COMPLETED and ClassReunion ~= 2) then
-        player:startEvent(405); -- new cs after completed AF1
+        player:startEvent(405) -- new cs after completed AF1
     ----------------------------------------------------------
     elseif (rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1) then
         player:startEvent(348,0,829)
@@ -203,7 +203,7 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.DAZEBREAKER_CHARM)
     elseif (csid == 419) then
         if (player:getFreeSlotsCount() ~= 0) then
-            player:addItem(12520); -- Evoker's Horn
+            player:addItem(12520) -- Evoker's Horn
             player:messageSpecial(ID.text.ITEM_OBTAINED,12520)
             player:addTitle(tpz.title.PARAGON_OF_SUMMONER_EXCELLENCE)
             player:completeQuest(WINDURST,tpz.quest.id.windurst.CARBUNCLE_DEBACLE)

@@ -23,25 +23,25 @@ function onTrigger(player,npc)
     TheKindCardian = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if (player:getFameLevel(JEUNO) >= 4 and TheWonderMagicSet == QUEST_AVAILABLE) then
-        player:startEvent(77); -- Start quest "The wonder magic set"
+        player:startEvent(77) -- Start quest "The wonder magic set"
     elseif (TheWonderMagicSet == QUEST_ACCEPTED and WonderMagicSetKI == false) then
-        player:startEvent(55); -- During quest "The wonder magic set"
+        player:startEvent(55) -- During quest "The wonder magic set"
     elseif (WonderMagicSetKI == true) then
-        player:startEvent(33); -- Finish quest "The wonder magic set"
+        player:startEvent(33) -- Finish quest "The wonder magic set"
     elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED) then
-        player:startEvent(40); -- Standard dialog
+        player:startEvent(40) -- Standard dialog
     elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE) then
         if (TheLostCardianCS >= 1) then
-            player:startEvent(30); -- Second dialog for "The lost cardien" quest
+            player:startEvent(30) -- Second dialog for "The lost cardien" quest
         else
-            player:startEvent(40); -- Standard dialog
+            player:startEvent(40) -- Standard dialog
         end
     elseif (TheKindCardian == QUEST_ACCEPTED and player:getCharVar("theKindCardianVar") == 2) then
-        player:startEvent(35); -- Finish quest "The kind cardien"
+        player:startEvent(35) -- Finish quest "The kind cardien"
     elseif (TheKindCardian == QUEST_COMPLETED) then
-        player:startEvent(76); -- New standard dialog after "The kind cardien"
+        player:startEvent(76) -- New standard dialog after "The kind cardien"
     else
-        player:startEvent(78); -- Base standard dialog
+        player:startEvent(78) -- Base standard dialog
     end
 end
 
@@ -76,7 +76,7 @@ function onEventFinish(player,csid,option)
             player:delKeyItem(tpz.ki.TWO_OF_SWORDS)
             player:setCharVar("theKindCardianVar",0)
             player:addItem(13596)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13596); -- Green Cape
+            player:messageSpecial(ID.text.ITEM_OBTAINED,13596) -- Green Cape
             player:addFame(JEUNO, 30)
             player:completeQuest(JEUNO,tpz.quest.id.jeuno.THE_KIND_CARDIAN)
         end

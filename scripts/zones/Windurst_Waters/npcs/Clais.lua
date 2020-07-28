@@ -17,9 +17,9 @@ function onTrigger(player,npc)
     end
     hatstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.HAT_IN_HAND)
     if ((hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")),8) == false) then
-        player:startEvent(57); -- Show Off Hat
+        player:startEvent(57) -- Show Off Hat
     else
-        player:startEvent(602); -- Standard Conversation
+        player:startEvent(602) -- Standard Conversation
     end
 end
 

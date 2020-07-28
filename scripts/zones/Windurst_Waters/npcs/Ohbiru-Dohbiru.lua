@@ -38,13 +38,13 @@ function onTrade(player,npc,trade)
         if (count == 3 and trade:getGil() == 0 and trade:hasItemQty(906,3) == true) then --Check that all 3 items have been traded
             player:startEvent(791)
         else
-            player:startEvent(786,4500,267,906); -- Reminder of needed items
+            player:startEvent(786,4500,267,906) -- Reminder of needed items
         end
     elseif (turmoil == QUEST_COMPLETED) then
         if (count == 3 and trade:getGil() == 0 and trade:hasItemQty(906,3) == true) then --Check that all 3 items have been traded
             player:startEvent(791)
         else
-            player:startEvent(795,4500,0,906); -- Reminder of needed items for repeated quest
+            player:startEvent(795,4500,0,906) -- Reminder of needed items for repeated quest
         end
     end
 end
@@ -56,7 +56,7 @@ function onTrigger(player,npc)
     local turmoil = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
     local FoodForThought = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local needToZone = player:needToZone()
-    local OhbiruFood = player:getCharVar("Ohbiru_Food_var"); -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
+    local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
     local waterWayToGo = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WATER_WAY_TO_GO)
     local overnightDelivery = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
     local SayFlowers = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
@@ -92,30 +92,30 @@ function onTrigger(player,npc)
         player:startEvent(352,0,4351)
 
     elseif (FoodForThought == QUEST_AVAILABLE and OhbiruFood == 0) then
-        player:startEvent(308); -- Hungry; mentions the experiment. First step in quest for this NPC.
+        player:startEvent(308) -- Hungry; mentions the experiment. First step in quest for this NPC.
         player:setCharVar("Ohbiru_Food_var",1)
     elseif (FoodForThought == QUEST_AVAILABLE and OhbiruFood == 1) then
-        player:startEvent(309); -- Hungry. The NPC complains of being hungry before the quest is active.
+        player:startEvent(309) -- Hungry. The NPC complains of being hungry before the quest is active.
     elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood < 2) then
-        player:startEvent(316,0,4493,624,4408); -- Gives Order
+        player:startEvent(316,0,4493,624,4408) -- Gives Order
         player:setCharVar("Ohbiru_Food_var",2)
     elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood == 2) then
-        player:startEvent(317,0,4493,624,4408); -- Repeats Order
+        player:startEvent(317,0,4493,624,4408) -- Repeats Order
     elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood == 3) then
-        player:startEvent(324); -- Reminds player to check on friends if he has been given his food.
+        player:startEvent(324) -- Reminds player to check on friends if he has been given his food.
     elseif (FoodForThought == QUEST_COMPLETED and needToZone == true) then
-        player:startEvent(344); -- Post Food for Thought Dialogue
+        player:startEvent(344) -- Post Food for Thought Dialogue
     elseif (overnightDelivery == QUEST_COMPLETED and pfame < 6) then
-        player:startEvent(351); -- Post Overnight Delivery Dialogue
+        player:startEvent(351) -- Post Overnight Delivery Dialogue
     --
     -- Begin Toraimarai Turmoil Section
     --
     elseif blueRibbonBlues == QUEST_COMPLETED and turmoil == QUEST_AVAILABLE and pfame >= 6 and needToZone == false then
         player:startEvent(785,4500,267,906)
     elseif (turmoil == QUEST_ACCEPTED) then
-        player:startEvent(786,4500,267,906); -- Reminder of needed items
+        player:startEvent(786,4500,267,906) -- Reminder of needed items
     elseif (turmoil == QUEST_COMPLETED) then
-        player:startEvent(795,4500,0,906); -- Allows player to initiate repeat of Toraimarai Turmoil
+        player:startEvent(795,4500,0,906) -- Allows player to initiate repeat of Toraimarai Turmoil
 
     else
         player:startEvent(344)
@@ -149,16 +149,16 @@ function onEventFinish(player,csid,option)
             player:addFame(WINDURST,100)
             player:addTitle(tpz.title.FAST_FOOD_DELIVERER)
             player:needToZone(true)
-            player:setCharVar("Kerutoto_Food_var",0);          -- ------------------------------------------
-            player:setCharVar("Kenapa_Food_var",0);            -- Erase all the variables used in this quest
-            player:setCharVar("Ohbiru_Food_var",0);            -- ------------------------------------------
+            player:setCharVar("Kerutoto_Food_var",0)          -- ------------------------------------------
+            player:setCharVar("Kenapa_Food_var",0)            -- Erase all the variables used in this quest
+            player:setCharVar("Ohbiru_Food_var",0)            -- ------------------------------------------
         else -- If this is NOT the last NPC given food, flag this NPC as completed.
             player:setCharVar("Ohbiru_Food_var",3)
         end
     elseif (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
         player:addQuest(WINDURST,tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.RHINOSTERY_CERTIFICATE)
-        player:addKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE); -- Rhinostery Certificate
+        player:addKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
         player:addGil(GIL_RATE*4500)
         player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*4500)

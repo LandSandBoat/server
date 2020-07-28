@@ -29,7 +29,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:startEvent(615); -- i know a thing or 2 about these streets
+    player:startEvent(615) -- i know a thing or 2 about these streets
 end
 
 function onEventUpdate(player,csid,option)

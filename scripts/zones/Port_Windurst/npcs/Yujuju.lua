@@ -24,7 +24,7 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,19) == false) then
         player:startEvent(621)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==9) then
-        player:startEvent(592);--COP event
+        player:startEvent(592)--COP event
     elseif (MakingHeadlines == 1) then
         local prog = player:getCharVar("QuestMakingHeadlines_var")
         --  Variable to track if player has talked to 4 NPCs and a door
@@ -34,12 +34,12 @@ function onTrigger(player,npc)
         -- 8 = Umumu
         -- 16 = Mahogany Door
         if (testflag(tonumber(prog),2) == false) then
-            player:startEvent(314); -- Get Scoop
+            player:startEvent(314) -- Get Scoop
         else
-            player:startEvent(315); -- After receiving scoop
+            player:startEvent(315) -- After receiving scoop
         end
     else
-        player:startEvent(340); -- Standard Conversation
+        player:startEvent(340) -- Standard Conversation
     end
 end
 

@@ -22,7 +22,7 @@ function onTrade(player,npc,trade)
         local carta = trade:hasItemQty(530, 1)
 
         if (carta == true and count == 1) then
-            player:startEvent(648,0,530); --648
+            player:startEvent(648,0,530) --648
         end
     end
 end
@@ -38,22 +38,22 @@ function onTrigger(player,npc)
 
 
     if (blackMail == QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3) then
-        player:startEvent(643); -- 643 gives me letter
+        player:startEvent(643) -- 643 gives me letter
     elseif (blackMail == QUEST_ACCEPTED and envelope == true) then
-        player:startEvent(645);  -- 645 recap, take envelope!
+        player:startEvent(645)  -- 645 recap, take envelope!
 
     elseif (blackMail == QUEST_ACCEPTED and questState == 1) then
-        player:startEvent(646,0,530); --646  after giving letter to H, needs param
+        player:startEvent(646,0,530) --646  after giving letter to H, needs param
 
 
     elseif (blackMail == QUEST_ACCEPTED and questState == 2) then
-        player:startEvent(647,0,530); --647 recap of 646
+        player:startEvent(647,0,530) --647 recap of 646
 
     else
         if (player:needToZone() ==true) then
-            player:startEvent(642); --642 Quiet!
+            player:startEvent(642) --642 Quiet!
         else
-            player:startEvent(641); --641 -- Quiet! leave me alone
+            player:startEvent(641) --641 -- Quiet! leave me alone
             player:needToZone(true)
         end
     end

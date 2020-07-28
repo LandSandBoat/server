@@ -12,12 +12,12 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877); -- 40 cap (H-8 Tower)
-    zone:registerRegion(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055); -- 50 cap area (J-8 Tower)
-    zone:registerRegion(3,   95.659, 42, -302.390,   99.973, 48, -297.744); -- 60 cap area (H-10 Tower)
-    zone:registerRegion(4, -384.452, 26,  257.961, -379.945, 32,  262.558); -- Uncapped area 1 (F-7 Tower)
-    zone:registerRegion(5, -302.493, 42, -179.995, -297.386, 48, -176.078); -- Uncapped area 2 (G-9 Tower)
-    zone:registerRegion(6,  299.847, 42,  257.716,  303.824, 48,  262.391); -- Uncapped area 3 (I-7 Tower)
+    zone:registerRegion(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877) -- 40 cap (H-8 Tower)
+    zone:registerRegion(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055) -- 50 cap area (J-8 Tower)
+    zone:registerRegion(3,   95.659, 42, -302.390,   99.973, 48, -297.744) -- 60 cap area (H-10 Tower)
+    zone:registerRegion(4, -384.452, 26,  257.961, -379.945, 32,  262.558) -- Uncapped area 1 (F-7 Tower)
+    zone:registerRegion(5, -302.493, 42, -179.995, -297.386, 48, -176.078) -- Uncapped area 2 (G-9 Tower)
+    zone:registerRegion(6,  299.847, 42,  257.716,  303.824, 48,  262.391) -- Uncapped area 3 (I-7 Tower)
 
     tpz.treasure.initZone(zone)
 end
@@ -34,7 +34,7 @@ function onZoneIn(player,prevZone)
     end
 
     if (player:getXPos() == -300 and player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 2) then
-        cs = 1; -- COP event
+        cs = 1 -- COP event
     elseif (player:getXPos() == 220 and player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 8) then
         cs = 4
     end

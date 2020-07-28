@@ -16,11 +16,11 @@ function onTrigger(player,npc)
     Gil = player:getGil()
 
     if (KazhPass == false) then
-        player:startEvent(35); -- without pass
+        player:startEvent(35) -- without pass
     elseif (KazhPass == true and Gil < 200) then
-        player:startEvent(45); -- Pass without money
+        player:startEvent(45) -- Pass without money
     elseif (KazhPass == true) then
-        player:startEvent(37); -- Pass with money
+        player:startEvent(37) -- Pass with money
     end
 
     return 1

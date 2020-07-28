@@ -113,9 +113,9 @@ function onTrigger(player,npc)
             player:startEvent(198)
             npc:wait()
         elseif (progress == 1 or failed == 2) then
-                player:startEvent(208);  -- asking for workbench
+                player:startEvent(208)  -- asking for workbench
         elseif (progress >= 2 or failed >= 3) then
-            player:startEvent(243); -- happy with workbench
+            player:startEvent(243) -- happy with workbench
         end
     else
         player:startEvent(198)

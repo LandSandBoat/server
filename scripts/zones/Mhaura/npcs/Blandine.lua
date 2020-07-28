@@ -17,15 +17,15 @@ function onTrigger(player,npc)
 
     if (Z <= 29 or Z >= 38 or X <= 16 or X >= 32) then
         if (player:getFameLevel(WINDURST) >= 4 and TheSandCharm == QUEST_AVAILABLE) then
-            player:startEvent(125); -- Start quest "The Sand Charm"
+            player:startEvent(125) -- Start quest "The Sand Charm"
         elseif (player:getCharVar("theSandCharmVar") == 2) then
-            player:startEvent(124); -- During quest "The Sand Charm" - 2nd dialog
+            player:startEvent(124) -- During quest "The Sand Charm" - 2nd dialog
         elseif (TheSandCharm == QUEST_COMPLETED and player:getCharVar("SmallDialogByBlandine") == 1) then
-            player:startEvent(128); -- Thanks dialog of Bladine after "The Sand Charm"
+            player:startEvent(128) -- Thanks dialog of Bladine after "The Sand Charm"
         elseif (TheSandCharm == QUEST_COMPLETED) then
-            player:startEvent(129); -- New standard dialog after "The Sand Charm"
+            player:startEvent(129) -- New standard dialog after "The Sand Charm"
         else
-            player:startEvent(122); -- Standard dialog
+            player:startEvent(122) -- Standard dialog
         end
     end
 end

@@ -286,9 +286,9 @@ function onTrigger(player,npc)
             player:startEvent(203)
             npc:wait()
         elseif (progress == 6 or failed == 7) then
-                player:startEvent(212);  -- asking for blackened toad
+                player:startEvent(212)  -- asking for blackened toad
         elseif (progress >= 7 or failed >= 8) then
-            player:startEvent(248); -- happy with blackened toad
+            player:startEvent(248) -- happy with blackened toad
         end
     else
         player:startEvent(203)

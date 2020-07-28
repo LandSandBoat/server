@@ -18,9 +18,9 @@ end
 function onTrigger(player,npc)
 
     if (player:getZPos() < -281) then
-        player:startEvent(204); -- leaving
+        player:startEvent(204) -- leaving
     else
-        player:startEvent(202); -- entering
+        player:startEvent(202) -- entering
     end
 end
 

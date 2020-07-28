@@ -122,10 +122,10 @@ end
 
 function onTrade(player,npc,trade)
     local itemid = hasRelic(trade,2)
-    local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS"); -- Stores which item has been taken from the player
-    local relicWait = player:getCharVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
-    local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER"); -- Stores a value that the player has acknowledged they can't hold the item they want to make yet they're making it anyway.
+    local eventParams = {} -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
+    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS") -- Stores which item has been taken from the player
+    local relicWait = player:getCharVar("RELIC_DUE_AT") -- Stores time that relic can be retrieved after
+    local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER") -- Stores a value that the player has acknowledged they can't hold the item they want to make yet they're making it anyway.
     local count = trade:getItemCount()
     local gil = trade:getGil()
     local tradeOK = false
@@ -209,9 +209,9 @@ end
 
 function onTrigger(player,npc)
     local itemid = hasRelic(player,1)
-    local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
+    local eventParams = {} -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
     local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
-    local relicWait = player:getCharVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
+    local relicWait = player:getCharVar("RELIC_DUE_AT") -- Stores time that relic can be retrieved after
     local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
     -- Working on a relic, waiting on completion, and time hasn't passed yet, so tell them to wait longer.

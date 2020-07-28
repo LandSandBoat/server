@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
--- player:startEvent(894);-- cavernous maw
+-- player:startEvent(894)-- cavernous maw
     player:startEvent(885)
 end
 

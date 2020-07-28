@@ -14,7 +14,7 @@ end
 function onTrigger(player,npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(tpz.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)) then
-        player:startEvent(695); -- Finish Mission "The Davoi Report"
+        player:startEvent(695) -- Finish Mission "The Davoi Report"
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(7)
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE and player:getCharVar("MissionStatus") == 1) then

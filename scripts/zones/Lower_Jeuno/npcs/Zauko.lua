@@ -17,10 +17,10 @@ function onTrade(player,npc,trade)
 
     ----- Save The Clock Tower Quest -----
     if (trade:hasItemQty(555,1) == true and trade:getItemCount() == 1) then
-        a = player:getCharVar("saveTheClockTowerNPCz2"); -- NPC Zone2
+        a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if (a == 0 or (a ~= 256 and a ~= 288 and a ~= 320 and a ~= 384 and a ~= 768 and a ~= 352 and a ~= 896 and a ~= 416 and
            a ~= 832 and a ~= 448 and a ~= 800 and a ~= 480 and a ~= 864 and a ~= 928 and a ~= 960 and a ~= 992)) then
-            player:startEvent(50,10 - player:getCharVar("saveTheClockTowerVar")); -- "Save the Clock Tower" Quest
+            player:startEvent(50,10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
     end
 
@@ -46,17 +46,17 @@ function onTrigger(player,npc)
     -- quest has already been accepted.
     if (currCommService == 1) then
         if (playerOnQuestId ~= player:getID()) then
-            player:startEvent(119); -- quest left over from previous day. fail quest.
+            player:startEvent(119) -- quest left over from previous day. fail quest.
         else
             if (hour >= 18 and hour < 21) then
-                player:startEvent(115); -- tell player it's too early to start lighting lamps.
+                player:startEvent(115) -- tell player it's too early to start lighting lamps.
             elseif (allLampsLit) then
-                player:startEvent(117,doneCommService); -- all lamps are lit. win quest.
+                player:startEvent(117,doneCommService) -- all lamps are lit. win quest.
             elseif (hour >= 21 or hour < 1) then
-                player:startEvent(114); -- tell player they can start lighting lamps.
+                player:startEvent(114) -- tell player they can start lighting lamps.
             else
-                SetServerVariable("[JEUNO]CommService",-1); -- frees player from quest, but don't allow anyone else to take it today.
-                player:startEvent(119); -- player didn't light lamps in time. fail quest.
+                SetServerVariable("[JEUNO]CommService",-1) -- frees player from quest, but don't allow anyone else to take it today.
+                player:startEvent(119) -- player didn't light lamps in time. fail quest.
             end
         end
 

@@ -15,28 +15,28 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 function onTrade(player,npc,trade)
     TotalNPC = player:getCharVar("saveTheClockTowerNPCz1") + player:getCharVar("saveTheClockTowerNPCz2")
     if (TotalNPC == 1023 and trade:hasItemQty(555,1) == true and trade:getItemCount() == 1) then
-        player:startEvent(231); -- Ending quest "save the clock tower"
+        player:startEvent(231) -- Ending quest "save the clock tower"
     end
 end
 
 function onTrigger(player,npc)
     AirshipKI = player:hasKeyItem(tpz.ki.AIRSHIP_PASS)
     saveTheClockTower = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
-    NPCNumber = player:getCharVar("saveTheClockTowerVar"); -- Quest step & number of npc
-    AgreeSignPetition = player:getCharVar("saveTheClockTowerVar2"); -- Sum of all NPC
+    NPCNumber = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
+    AgreeSignPetition = player:getCharVar("saveTheClockTowerVar2") -- Sum of all NPC
 
     if (AirshipKI == false and saveTheClockTower == QUEST_ACCEPTED and NPCNumber >= 1 and NPCNumber <= 11) then
-        player:startEvent(230,4,10); -- airship + petition help/restart
+        player:startEvent(230,4,10) -- airship + petition help/restart
     elseif (AirshipKI == true and saveTheClockTower == QUEST_ACCEPTED and NPCNumber >= 1 and NPCNumber <= 11) then
-        player:startEvent(230,6,10); -- petition help/restart
+        player:startEvent(230,6,10) -- petition help/restart
     elseif (AirshipKI == false and saveTheClockTower == QUEST_ACCEPTED and NPCNumber == 0) then
-        player:startEvent(230,8,10); -- airship + petition
+        player:startEvent(230,8,10) -- airship + petition
     elseif (AirshipKI == true and saveTheClockTower == QUEST_ACCEPTED and NPCNumber == 0) then
-        player:startEvent(230,10,10); -- petition
+        player:startEvent(230,10,10) -- petition
     elseif (AirshipKI == false) then
-        player:startEvent(230,12); -- airship
+        player:startEvent(230,12) -- airship
     else
-        player:startEvent(230,14); -- rien
+        player:startEvent(230,14) -- rien
     end
 end
 

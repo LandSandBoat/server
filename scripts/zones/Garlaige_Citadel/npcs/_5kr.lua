@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 
 function onTrade(player,npc,trade)
     if (trade:hasItemQty(502,1) == true and trade:getItemCount() == 1) then -- Garlaige Key (Not Chest/Coffer)
-        player:startEvent(4); -- Open the door
+        player:startEvent(4) -- Open the door
     end
 end
 

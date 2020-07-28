@@ -90,23 +90,23 @@ function onEventFinish(player,csid,option,npc)
             player:addItem(600)
             player:messageSpecial(ID.text.ITEM_OBTAINED,600)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600); -- Dose of ointment
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600) -- Dose of ointment
         end
     elseif (csid == 644) then
         if (player:getFreeSlotsCount() > 0) then
             player:addItem(600)
             player:messageSpecial(ID.text.ITEM_OBTAINED,600)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600); -- Dose of ointment
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600) -- Dose of ointment
         end
     elseif (csid == 513) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12832); -- Bronze Subligar
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12832) -- Bronze Subligar
         else
             player:tradeComplete()
             player:addTitle(tpz.title.RONFAURIAN_RESCUER)
             player:addItem(12832)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12832); -- Bronze Subligar
+            player:messageSpecial(ID.text.ITEM_OBTAINED,12832) -- Bronze Subligar
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
         end

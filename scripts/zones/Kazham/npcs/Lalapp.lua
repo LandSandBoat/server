@@ -63,9 +63,9 @@ function onTrigger(player,npc)
             player:startEvent(205)
             npc:wait()
         elseif (progress == 8 or failed == 9) then
-                player:startEvent(214);  -- asking for ancient salt
+                player:startEvent(214)  -- asking for ancient salt
         elseif (progress >= 9 or failed >= 10) then
-            player:startEvent(250); -- happy with ancient salt
+            player:startEvent(250) -- happy with ancient salt
         end
     else
         player:startEvent(205)

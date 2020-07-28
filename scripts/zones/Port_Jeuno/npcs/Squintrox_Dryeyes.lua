@@ -30,7 +30,7 @@ function onTrade(player,npc,trade)
     local AMKm = player:getCurrentMission(AMK)
     local ASAm = player:getCurrentMission(ASA)
     local CrimsonKey = player:hasKeyItem(tpz.ki.CRIMSON_KEY)
-    local LastCrimson = player:getCharVar("LastCrimsonKey"); -- When last Crimson key was obtained
+    local LastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
     if (ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA ==0) then
         player:showText(npc,ID.text.GET_LOST)
@@ -71,7 +71,7 @@ function onEventFinish(player,csid,option)
     local juice = player:hasKeyItem(tpz.ki.JUG_OF_GREASY_GOBLIN_JUICE)
     local grub = player:hasKeyItem(tpz.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
     local ViridianKey = player:hasKeyItem(tpz.ki.VIRIDIAN_KEY)
-    local LastViridian = player:getCharVar("LastViridianKey"); -- When last Viridian key was obtained
+    local LastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
     if (csid == 323) then
         if (option == 1) then

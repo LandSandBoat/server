@@ -26,12 +26,12 @@ function onTrigger(player,npc)
     elseif (wonderingstatus == QUEST_COMPLETED) then
         rand = math.random(3)
         if (rand == 1) then
-            player:startEvent(10011);         -- WONDERING_MINSTREL: After Quest
+            player:startEvent(10011)         -- WONDERING_MINSTREL: After Quest
         else
-            player:startEvent(10008);         -- Standard Conversation
+            player:startEvent(10008)         -- Standard Conversation
         end
     else
-        player:startEvent(10008);             -- Standard Conversation
+        player:startEvent(10008)             -- Standard Conversation
     end
 end
 

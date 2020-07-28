@@ -27,7 +27,7 @@ function onTrigger(player,npc)
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst,14) == false) then
         player:startEvent(939)
     elseif ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")),16) == false) then
-        player:startEvent(60); -- Show Off Hat
+        player:startEvent(60) -- Show Off Hat
     elseif (MakingHeadlines == 1) then
         local prog = player:getCharVar("QuestMakingHeadlines_var")
         --  Variable to track if player has talked to 4 NPCs and a door
@@ -37,16 +37,16 @@ function onTrigger(player,npc)
         -- 8 = Umumu
         -- 16 = Mahogany Door
         if (testflag(tonumber(prog),1) == false) then
-            player:startEvent(668); -- Quest progress
+            player:startEvent(668) -- Quest progress
         else
-            player:startEvent(669); -- Quest not furthered
+            player:startEvent(669) -- Quest not furthered
         end
     else
         local rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(604); -- Standard Conversation
+            player:startEvent(604) -- Standard Conversation
         else
-            player:startEvent(393); -- Standard Conversation
+            player:startEvent(393) -- Standard Conversation
         end
     end
 end

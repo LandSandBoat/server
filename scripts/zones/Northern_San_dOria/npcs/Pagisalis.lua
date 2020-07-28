@@ -57,12 +57,12 @@ function onEventFinish(player,csid,option)
         player:addQuest(SANDORIA,tpz.quest.id.sandoria.UNDYING_FLAMES)
     elseif (csid == 563) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13211); -- Friars Rope
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13211) -- Friars Rope
         else
             player:tradeComplete()
             player:addTitle(tpz.title.FAITH_LIKE_A_CANDLE)
             player:addItem(13211)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13211); -- Friars Rope
+            player:messageSpecial(ID.text.ITEM_OBTAINED,13211) -- Friars Rope
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.UNDYING_FLAMES)
         end

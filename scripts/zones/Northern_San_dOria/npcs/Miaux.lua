@@ -30,11 +30,11 @@ function onTrigger(player,npc)
     elseif (aCraftsmansWork == QUEST_ACCEPTED) then
             player:startEvent(70)
     elseif (Quotas_Status == 2) then
-        player:startEvent(67); -- I found this earring.
+        player:startEvent(67) -- I found this earring.
     elseif (Quotas_Status == 3 or Quotas_Status == 4) then
-        player:startEvent(68); -- Post-earring, move along.
+        player:startEvent(68) -- Post-earring, move along.
     elseif (Quotas_Status >= 5) then
-        player:startEvent(66); -- The earring was helpful?
+        player:startEvent(66) -- The earring was helpful?
     else
         player:startEvent(11)
     end
@@ -54,12 +54,12 @@ function onEventFinish(player,csid,option)
         player:setCharVar("aCraftsmanWork",1)
     elseif (csid == 70) then -- This is only if player has Altepa Polishing Stone
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16887);-- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16887)-- Peregrine (DRG AF1)
         else
             player:setCharVar("aCraftsmanWork",0)
             player:delKeyItem(tpz.ki.ALTEPA_POLISHING_STONE)
             player:addItem(16887)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,16887); -- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED,16887) -- Peregrine (DRG AF1)
             player:addFame(SANDORIA,20)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end

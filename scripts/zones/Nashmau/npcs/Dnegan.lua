@@ -22,13 +22,13 @@ function onTrigger(player,npc)
 
     -- Quest: The WayWard Automation
     if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 1) then
-        player:startEvent(289); -- he tells u to go Caedarva Mire
+        player:startEvent(289) -- he tells u to go Caedarva Mire
     elseif (TheWaywardAutomationProgress == 2) then
-        player:startEvent(289); -- Hint to go to Caedarva Mire
+        player:startEvent(289) -- Hint to go to Caedarva Mire
 
     -- Quest: Operation Teatime
     elseif (OperationTeatimeProgress == 2 and OTT_DayWait ~= Gameday) then
-        player:startEvent(290); -- CS for Chai
+        player:startEvent(290) -- CS for Chai
     else
         player:startEvent(288)
     end

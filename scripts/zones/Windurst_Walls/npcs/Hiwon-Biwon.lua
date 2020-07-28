@@ -23,9 +23,9 @@ function onTrigger(player,npc)
 
     -- Curses,Foiled ... Again!?
     if (CFA2 == QUEST_ACCEPTED and player:hasItem(552) == false) then
-        player:startEvent(182); -- get Hiwon's hair
+        player:startEvent(182) -- get Hiwon's hair
     elseif (CFA2 == QUEST_COMPLETED and MakingHeadlines ~= QUEST_ACCEPTED) then
-        player:startEvent(185); -- New Dialog after CFA2
+        player:startEvent(185) -- New Dialog after CFA2
 
     -- Making Headlines
     elseif (MakingHeadlines == 1) then
@@ -39,33 +39,33 @@ function onTrigger(player,npc)
         if (testflag(tonumber(prog),4) == false) then
             if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
                 if (math.random(1,2) == 1) then
-                    player:startEvent(283); -- Give scoop while sick
+                    player:startEvent(283) -- Give scoop while sick
                 else
-                    player:startEvent(284); -- Give scoop while sick
+                    player:startEvent(284) -- Give scoop while sick
                 end
             else
-                player:startEvent(281); -- Give scoop
+                player:startEvent(281) -- Give scoop
             end
         else
-            player:startEvent(282); -- "Getting back to the maater at hand-wand..."
+            player:startEvent(282) -- "Getting back to the maater at hand-wand..."
         end
     else
         local rand = math.random(1,5)
         if (rand == 1) then
             print (rand)
-            player:startEvent(305); -- Standard Conversation
+            player:startEvent(305) -- Standard Conversation
         elseif (rand == 2) then
             print (rand)
-            player:startEvent(306); -- Standard Conversation
+            player:startEvent(306) -- Standard Conversation
         elseif (rand == 3) then
             print (rand)
-            player:startEvent(168); -- Standard Conversation
+            player:startEvent(168) -- Standard Conversation
         elseif (rand == 4) then
             print (rand)
-            player:startEvent(170); -- Standard Conversation
+            player:startEvent(170) -- Standard Conversation
         elseif (rand == 5) then
             print (rand)
-            player:startEvent(169); -- Standard Conversation
+            player:startEvent(169) -- Standard Conversation
         end
     end
 end
@@ -86,10 +86,10 @@ function onEventFinish(player,csid,option)
     -- Curses,Foiled...Again!?
     elseif (csid == 182) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,552); -- Hiwon's hair
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,552) -- Hiwon's hair
         else
             player:addItem(552)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,552); -- Hiwon's hair
+            player:messageSpecial(ID.text.ITEM_OBTAINED,552) -- Hiwon's hair
         end
     end
 end;

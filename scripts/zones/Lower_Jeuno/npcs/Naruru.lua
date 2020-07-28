@@ -25,26 +25,26 @@ function onTrigger(player,npc)
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then
-            player:startEvent(189); -- Start quest "Cook's pride" Long CS
+            player:startEvent(189) -- Start quest "Cook's pride" Long CS
         else
-            player:startEvent(188); -- Start quest "Cook's pride" Short CS
+            player:startEvent(188) -- Start quest "Cook's pride" Short CS
         end
     elseif (CooksPride == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUPER_SOUP_POT) == false) then
-        player:startEvent(186); -- During quest "Cook's pride"
+        player:startEvent(186) -- During quest "Cook's pride"
     elseif (player:hasKeyItem(tpz.ki.SUPER_SOUP_POT) == true) then
-        player:startEvent(187); -- Finish quest "Cook's pride"
+        player:startEvent(187) -- Finish quest "Cook's pride"
     elseif (CooksPride == QUEST_COMPLETED and TheKindCardian == QUEST_AVAILABLE) then
         if (player:getCharVar("theLostCardianVar") == 0) then
-            player:startEvent(31); -- During quests "The lost cardian"
+            player:startEvent(31) -- During quests "The lost cardian"
         else
-            player:startEvent(71); -- During quests "The lost cardian"
+            player:startEvent(71) -- During quests "The lost cardian"
         end
     elseif (CooksPride == QUEST_COMPLETED and TheKindCardian ~= QUEST_COMPLETED) then
-        player:startEvent(71); -- During quests "The kind cardien"
+        player:startEvent(71) -- During quests "The kind cardien"
     elseif (TheKindCardian == QUEST_COMPLETED) then
-        player:startEvent(72); -- New standard dialog after the quest "The kind cardien"
+        player:startEvent(72) -- New standard dialog after the quest "The kind cardien"
     else
-        player:startEvent(98); -- Standard dialog
+        player:startEvent(98) -- Standard dialog
     end
 end
 
@@ -66,7 +66,7 @@ function onEventFinish(player,csid,option)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*3000)
             player:addItem(13446)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13446); -- Mythril Ring
+            player:messageSpecial(ID.text.ITEM_OBTAINED,13446) -- Mythril Ring
             player:addFame(JEUNO, 30)
             player:completeQuest(JEUNO,tpz.quest.id.jeuno.COOK_S_PRIDE)
         end

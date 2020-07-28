@@ -37,10 +37,10 @@ function onMobFight(mob,target)
                 local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
                 local tile = GetNPCByID(tileId)
                 if (tile:getAnimation() == tpz.anim.CLOSE_DOOR) then
-                    SendEntityVisualPacket(tileId, v[inst+2]);  -- Animation for floor dropping
-                    SendEntityVisualPacket(tileId, "s123");     -- Tile dropping sound
+                    SendEntityVisualPacket(tileId, v[inst+2])  -- Animation for floor dropping
+                    SendEntityVisualPacket(tileId, "s123")     -- Tile dropping sound
                     tile:timer(5000, function(tile)
-                        tile:setAnimation(tpz.anim.OPEN_DOOR);     -- Floor opens
+                        tile:setAnimation(tpz.anim.OPEN_DOOR)     -- Floor opens
                     end)
                 end
                 break

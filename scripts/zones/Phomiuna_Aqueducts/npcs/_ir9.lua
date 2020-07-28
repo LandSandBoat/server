@@ -26,7 +26,7 @@ end
 function onTrigger(player,npc)
 
     if (player:getXPos() >= 70) then
-        npc:openDoor(15); -- Retail timed
+        npc:openDoor(15) -- Retail timed
     elseif (npc:getAnimation() == 9) then
         player:messageSpecial(ID.text.DOOR_LOCKED,1660)
     end

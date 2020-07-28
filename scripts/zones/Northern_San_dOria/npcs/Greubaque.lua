@@ -24,7 +24,7 @@ function onTrigger(player,npc)
             player:startEvent(628,Cost,SkillLevel,0,205,player:getGil(),28721,4095,0)
         end
     else
-        player:startEvent(628,Cost,SkillLevel,0,201,player:getGil(),0,26,0); -- Standard Dialogue
+        player:startEvent(628,Cost,SkillLevel,0,201,player:getGil(),0,26,0) -- Standard Dialogue
     end
 end
 

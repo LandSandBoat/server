@@ -82,17 +82,17 @@ function onTrigger(player,npc)
     local IronBox = player:hasKeyItem(tpz.ki.SEALED_IRON_BOX)
 
     if (Vault == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 5) then
-        player:startEvent(36,tpz.ki.SEALED_IRON_BOX); -- Start quest
+        player:startEvent(36,tpz.ki.SEALED_IRON_BOX) -- Start quest
     elseif (Vault == QUEST_ACCEPTED) then
         if (IronBox == true) then
-            player:startEvent(38); -- Finish quest
+            player:startEvent(38) -- Finish quest
         else
-            player:startEvent(37,tpz.ki.MAP_OF_THE_SEA_SERPENT_GROTTO); -- Reminder/Directions Dialogue
+            player:startEvent(37,tpz.ki.MAP_OF_THE_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue
         end
     elseif (Vault == QUEST_COMPLETED) then
-        player:startEvent(39); -- New Standard Dialogue for everyone who has completed the quest
+        player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
     else
-        player:startEvent(89); -- Standard Conversation
+        player:startEvent(89) -- Standard Conversation
     end
 
     npc:wait()
@@ -109,7 +109,7 @@ function onEventFinish(player,csid,option,npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4961)
         else
             player:delKeyItem(tpz.ki.SEALED_IRON_BOX)
-            player:addItem(4961); -- Scroll of Tonko: Ichi
+            player:addItem(4961) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4961)
             player:addFame(NORG,50)
             player:completeQuest(OUTLANDS,tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)

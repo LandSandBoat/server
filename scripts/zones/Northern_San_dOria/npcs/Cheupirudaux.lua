@@ -40,7 +40,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4098)
         else
             player:addItem(4098)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,4098); -- Wind Crystal
+            player:messageSpecial(ID.text.ITEM_OBTAINED,4098) -- Wind Crystal
             signupGuild(player, guild.woodworking)
         end
     end

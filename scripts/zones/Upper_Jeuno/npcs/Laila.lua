@@ -24,15 +24,15 @@ function onTrigger(player,npc)
     local lakesideMin = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LAKESIDE_MINUET)
     local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
     if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL and ENABLE_WOTG == 1) then
-        player:startEvent(10111); -- Start quest csid, asks for Key Item Stardust Pebble
+        player:startEvent(10111) -- Start quest csid, asks for Key Item Stardust Pebble
     elseif (lakesideMin == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(10119)
     elseif (player:hasKeyItem(tpz.ki.STARDUST_PEBBLE)) then
-        player:startEvent(10118); -- Ends Quest
+        player:startEvent(10118) -- Ends Quest
     elseif (lakeProg == 3) then
         player:startEvent(10113)
     elseif (lakesideMin == QUEST_ACCEPTED) then
-        player:startEvent(10112); -- After accepting, reminder
+        player:startEvent(10112) -- After accepting, reminder
     elseif ((player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
         or (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
         and player:hasItem(19203) == false))
@@ -49,13 +49,13 @@ function onTrigger(player,npc)
         and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_AVAILABLE
         and player:getMainJob() == tpz.job.DNC) then
 
-        player:startEvent(10136); -- CSID 10136
+        player:startEvent(10136) -- CSID 10136
     elseif (player:getCharVar("roadToDivadomCS") == 1) then
-        player:startEvent(10137); --  quest chat line after the quest has been accepted
+        player:startEvent(10137) --  quest chat line after the quest has been accepted
     elseif (player:getCharVar("roadToDivadomCS") == 4) then
-        player:startEvent(10139); --CSID 10139
+        player:startEvent(10139) --CSID 10139
     elseif (player:getCharVar("roadToDivadomCS") == 5) then
-        player:startEvent(10170); --CSID 10170. This should only occur if the player's inventory was full during the chain of events that start in the elseif above.
+        player:startEvent(10170) --CSID 10170. This should only occur if the player's inventory was full during the chain of events that start in the elseif above.
 
     -- Dancer AF: Comeback Queen
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED
@@ -64,20 +64,20 @@ function onTrigger(player,npc)
 
         player:startEvent(10143)
     elseif (player:getCharVar("comebackQueenCS") == 1) then
-        player:startEvent(10144); -- quest chat line after quest accepted Rhea and Olgald have a line as well.
+        player:startEvent(10144) -- quest chat line after quest accepted Rhea and Olgald have a line as well.
     elseif (player:getCharVar("comebackQueenCS") == 2) then
         player:startEvent(10147)
     elseif (player:getCharVar("comebackQueenCS") == 3 or player:getCharVar("comebackQueenCS") == 6) then
         local currentVanaDay = VanadielDayOfTheYear()
         if (player:getCharVar("comebackQueenDanceOffTimer") < currentVanaDay) then
-            player:startEvent(10151);  -- play laila cs 10152->10154  olgald: 1053 if they lose the minigame
+            player:startEvent(10151)  -- play laila cs 10152->10154  olgald: 1053 if they lose the minigame
         else
             player:startEvent(10140)
         end
     elseif (player:getCharVar("comebackQueenCS") == 4 or player:getCharVar("comebackQueenCS") == 5) then
-        player:startEvent(10154); -- This occurs if the player's inventory was full during the final chain of events or if the player speaks with laila afterwards.
+        player:startEvent(10154) -- This occurs if the player's inventory was full during the final chain of events or if the player speaks with laila afterwards.
     else
-        player:startEvent(10120); -- Default
+        player:startEvent(10120) -- Default
     end
 end
 
@@ -109,7 +109,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,19203)
         else
             player:setCharVar("QuestStatus_DNC_AF1", 0)
-            player:addItem(19203); -- war hoop
+            player:addItem(19203) -- war hoop
             player:messageSpecial(ID.text.ITEM_OBTAINED,19203)
             player:completeQuest(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end
@@ -128,11 +128,11 @@ function onEventFinish(player,csid,option)
     elseif (csid == 10170) then
         if (player:getFreeSlotsCount() == 0) then
             -- do nothing. player doesn't have room to receive the reward item.
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 15660); -- the names of the gender specific items are the same
+            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 15660) -- the names of the gender specific items are the same
         else
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
             player:setCharVar("roadToDivadomCS", 0)
-            player:setCharVar("dancerTailorCS", 1); -- allows player to start dancer version of Coffer AF. check Olgald and Matthias(@Bastok Markets) for the rest of the quest line
+            player:setCharVar("dancerTailorCS", 1) -- allows player to start dancer version of Coffer AF. check Olgald and Matthias(@Bastok Markets) for the rest of the quest line
             -- determine what gender the player is so we can give the correct item
             local playerGender = player:getGender()
             local dancersTights = 15660 - playerGender
@@ -153,9 +153,9 @@ function onEventFinish(player,csid,option)
         player:setCharVar("comebackQueenDanceOffTimer", danceOffTimer)
     elseif (csid == 10151) then --the dance off minigame
         if (option > 0) then -- player won the minigame
-            player:startEvent(10208);  -- starts exhausting string of events
+            player:startEvent(10208)  -- starts exhausting string of events
         else
-            player:setCharVar("comebackQueenCS", 6); -- have surrounding npcs use losing state CS
+            player:setCharVar("comebackQueenCS", 6) -- have surrounding npcs use losing state CS
             local danceOffTimer = VanadielDayOfTheYear()
             player:setCharVar("comebackQueenDanceOffTimer", danceOffTimer)
         end
@@ -169,10 +169,10 @@ function onEventFinish(player,csid,option)
     elseif (csid == 10211) then -- finally reward the player
         if (player:getFreeSlotsCount() == 0) then
             -- do nothing. player doesn't have room to receive the reward item.
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578); -- the names of the gender specific items are the same
+            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578) -- the names of the gender specific items are the same
         else
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
-            player:setCharVar("comebackQueenCS", 5); -- final state for all of the surrounding NPCs
+            player:setCharVar("comebackQueenCS", 5) -- final state for all of the surrounding NPCs
             -- determine what gender the player is so we can give the correct item
             local playerGender = player:getGender()
             local dancersCasaque = 14579 - playerGender
@@ -185,7 +185,7 @@ function onEventFinish(player,csid,option)
         if (player:getCharVar("comebackQueenCS") == 4) then -- player's inventory was full at the end of the final cutscene
             if (player:getFreeSlotsCount() == 0) then
                 -- do nothing. player doesn't have room to receive the reward item.
-                player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578); -- the names of the gender specific items are the same
+                player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578) -- the names of the gender specific items are the same
             else
                 player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
                 player:setCharVar("comebackQueenCS", 5) -- final state for all of the surrounding NPCs

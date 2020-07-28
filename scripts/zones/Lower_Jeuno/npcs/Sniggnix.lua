@@ -16,7 +16,7 @@ function onTrade(player,npc,trade)
 
     if (trade:hasItemQty(1092,1) and trade:getItemCount() == 1 and thickAsThievesGamblingCS == 7) then -- Trade Regal die
         rand1 = math.random(1,700)
-        player:startEvent(10026,0,1092,rand1);     -- complete gambling side quest for as thick as thieves
+        player:startEvent(10026,0,1092,rand1)     -- complete gambling side quest for as thick as thieves
     end
 
 end

@@ -15,7 +15,7 @@ function onTrade(player,npc,trade)
         if (trade:hasItemQty(547,1) and trade:getItemCount() == 1) then
             player:tradeComplete()
             player:addItem(567)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,567); -- Tomb Waterskin
+            player:messageSpecial(ID.text.ITEM_OBTAINED,567) -- Tomb Waterskin
         end
     end
 

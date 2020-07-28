@@ -22,13 +22,13 @@ function onMonsterMagicPrepare(mob,target)
     local rnd = math.random()
 
     if (rnd < 0.5) then
-        return 201; -- waterga 3
+        return 201 -- waterga 3
     elseif (rnd < 0.7) then
-        return 172; -- water 4
+        return 172 -- water 4
     elseif (rnd < 0.9) then
-        return 214; -- flood
+        return 214 -- flood
     else
-        return 240; -- drown
+        return 240 -- drown
     end
 
 end;

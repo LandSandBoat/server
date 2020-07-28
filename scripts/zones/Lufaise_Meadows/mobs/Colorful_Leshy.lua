@@ -4,11 +4,11 @@
 -----------------------------------
 
 function onMobInitialize(mob)
-    mob:setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)); -- Colorful in 12 to 24 hours
+    mob:setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)) -- Colorful in 12 to 24 hours
 end
 
 function disturbMob(mob)
-    GetMobByID(mob:getID() + 1):setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)); -- Defoliate in 12 to 24 hours
+    GetMobByID(mob:getID() + 1):setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)) -- Defoliate in 12 to 24 hours
 end
 
 function onMobSpawn(mob)
@@ -50,6 +50,6 @@ function onMobDespawn(mob)
         DisallowRespawn(mob:getID(), true)
         DisallowRespawn(phIndex, false)
         GetMobByID(phIndex):setRespawnTime(GetMobRespawnTime(phIndex))
-        mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)); -- Colorful in 12 to 24 hours
+        mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)) -- Colorful in 12 to 24 hours
     end
 end;

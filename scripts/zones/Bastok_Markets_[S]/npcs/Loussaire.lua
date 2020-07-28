@@ -32,17 +32,17 @@ function onTrigger(player,npc)
         if ((loafersQuestProgress == 1 or pantsQuestProgress == 1 or gownQuestProgress == 1 or
              loafersQuestProgress == 2 or pantsQuestProgress == 2 or gownQuestProgress == 2) and AFProgress > 0) then
 
-            local itemid   = 14580; -- Scholar's Gown
+            local itemid   = 14580 -- Scholar's Gown
             local FristKI  = tpz.ki.PEISTE_DUNG
             local SecondKI = tpz.ki.SAMPLE_OF_GRAUBERG_CHERT
 
             if (loafersQuestProgress == 1 or loafersQuestProgress == 2) then
-                itemid   = 15748; -- Scholar's Loafers
+                itemid   = 15748 -- Scholar's Loafers
                 FristKI  = tpz.ki.RAFFLESIA_DREAMSPIT
                 SecondKI = tpz.ki.DROGAROGAN_BONEMEAL
 
             elseif (pantsQuestProgress == 1 or pantsQuestProgress == 2) then
-                itemid   = 16311; -- Scholar's Pants
+                itemid   = 16311 -- Scholar's Pants
                 FristKI  = tpz.ki.SLUG_MUCUS
                 SecondKI = tpz.ki.DJINN_EMBER
             end
@@ -94,7 +94,7 @@ function onTrigger(player,npc)
             -- Show them the normal Menu to select from.
             else
 
-                local params = 0; -- Controls which items to hide (Binary - 0XXX)
+                local params = 0 -- Controls which items to hide (Binary - 0XXX)
 
                 -- Scholar's Loafers
                 if (loafersQuestProgress ~= 0) then
@@ -113,7 +113,7 @@ function onTrigger(player,npc)
 
                 if (params < 8) then
                     if (AFProgress > 0) then
-                        player:startEvent(53, params); -- Shorter CS than 49
+                        player:startEvent(53, params) -- Shorter CS than 49
                     else
                         player:startEvent(49, params)
                     end
@@ -121,7 +121,7 @@ function onTrigger(player,npc)
             end
 
         else
-            player:startEvent(48); -- Default message
+            player:startEvent(48) -- Default message
         end
     end
 end
@@ -199,7 +199,7 @@ function onEventFinish(player,csid,option)
                 player:setCharVar("AF_SCH_COMPLETE", 1)
 
             else
-                player:setCharVar("AF_Loussaire", AFProgress + 1); -- They got an item. Add it!
+                player:setCharVar("AF_Loussaire", AFProgress + 1) -- They got an item. Add it!
             end
 
             player:delKeyItem(firstKI)

@@ -79,7 +79,7 @@ function onEventFinish(player,csid,option)
             player:needToZone(true)
             player:addTitle(tpz.title.SORROW_DROWNER)
             player:addItem(17356)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,17356); -- Lamia Harp
+            player:messageSpecial(ID.text.ITEM_OBTAINED,17356) -- Lamia Harp
             player:addFame(BASTOK,120)
             player:completeQuest(BASTOK,tpz.quest.id.bastok.LOVE_AND_ICE)
         end

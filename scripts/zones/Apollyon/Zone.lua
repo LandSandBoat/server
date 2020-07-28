@@ -23,38 +23,38 @@ function onInitialize(zone)
             SetServerVariable("[Central_Apollyon_II]UniqueID",0)
 
 
-zone:registerRegion(1,  637,-4,-642,642,4,-637);  -- APOLLYON_SE_NE exit
-zone:registerRegion(2, -642,-4,-642,-637,4,-637);  -- APOLLYON_NW_SW exit
+zone:registerRegion(1,  637,-4,-642,642,4,-637)  -- APOLLYON_SE_NE exit
+zone:registerRegion(2, -642,-4,-642,-637,4,-637)  -- APOLLYON_NW_SW exit
 
-zone:registerRegion(3, 468,-4,-637,  478,4,-622); -- appolyon SE register
-zone:registerRegion(4, 421,-4,-98,   455,4,-78); -- appolyon NE register
-zone:registerRegion(5, -470,-4,-629,  -459,4,-620); -- appolyon SW register
-zone:registerRegion(6, -455,-4,-95,   -425,4,-67); -- appolyon NW register
+zone:registerRegion(3, 468,-4,-637,  478,4,-622) -- appolyon SE register
+zone:registerRegion(4, 421,-4,-98,   455,4,-78) -- appolyon NE register
+zone:registerRegion(5, -470,-4,-629,  -459,4,-620) -- appolyon SW register
+zone:registerRegion(6, -455,-4,-95,   -425,4,-67) -- appolyon NW register
 
-zone:registerRegion(7, -3,-4,-214,   3,4,-210); -- appolyon CS register
-zone:registerRegion(8, -3,-4, 207,   3,4, 215); -- appolyon Center register
+zone:registerRegion(7, -3,-4,-214,   3,4,-210) -- appolyon CS register
+zone:registerRegion(8, -3,-4, 207,   3,4, 215) -- appolyon Center register
 
-zone:registerRegion(20,   396,-4,-522,   403,4,-516); -- appolyon SE telporter floor1 to floor2
-zone:registerRegion(21,   116,-4,-443,   123,4,-436); -- appolyon SE telporter floor2 to floor3
-zone:registerRegion(22,   276,-4,-283,   283,4,-276); -- appolyon SE telporter floor3 to floor4
-zone:registerRegion(23,   517,-4,-323,   523,4,-316); -- appolyon SE telporter floor4 to entrance
+zone:registerRegion(20,   396,-4,-522,   403,4,-516) -- appolyon SE telporter floor1 to floor2
+zone:registerRegion(21,   116,-4,-443,   123,4,-436) -- appolyon SE telporter floor2 to floor3
+zone:registerRegion(22,   276,-4,-283,   283,4,-276) -- appolyon SE telporter floor3 to floor4
+zone:registerRegion(23,   517,-4,-323,   523,4,-316) -- appolyon SE telporter floor4 to entrance
 
-zone:registerRegion(24,   396,-4,76,   403,4,83); -- appolyon NE telporter floor1 to floor2
-zone:registerRegion(25,   276,-4,356,   283,4,363); -- appolyon NE telporter floor2 to floor3
-zone:registerRegion(26,   236,-4,517,   243,4,523); -- appolyon NE telporter floor3 to floor4
-zone:registerRegion(27,   517,-4,637,   523,4,643); -- appolyon NE telporter floor4 to floor5
-zone:registerRegion(28,   557,-4,356,   563,4,363); -- appolyon NE telporter floor5 to entrance
+zone:registerRegion(24,   396,-4,76,   403,4,83) -- appolyon NE telporter floor1 to floor2
+zone:registerRegion(25,   276,-4,356,   283,4,363) -- appolyon NE telporter floor2 to floor3
+zone:registerRegion(26,   236,-4,517,   243,4,523) -- appolyon NE telporter floor3 to floor4
+zone:registerRegion(27,   517,-4,637,   523,4,643) -- appolyon NE telporter floor4 to floor5
+zone:registerRegion(28,   557,-4,356,   563,4,363) -- appolyon NE telporter floor5 to entrance
 
-zone:registerRegion(29, -403,-4,-523,  -396,4,-516); -- appolyon SW telporter floor1 to floor2
-zone:registerRegion(30, -123,-4,-443,  -116,4,-436); -- appolyon SW telporter floor2 to floor3
-zone:registerRegion(31, -283,-4,-283,  -276,4,-276); -- appolyon SW telporter floor3 to floor4
-zone:registerRegion(32, -523,-4,-323,  -517,4,-316); -- appolyon SW telporter floor4 to entrance
+zone:registerRegion(29, -403,-4,-523,  -396,4,-516) -- appolyon SW telporter floor1 to floor2
+zone:registerRegion(30, -123,-4,-443,  -116,4,-436) -- appolyon SW telporter floor2 to floor3
+zone:registerRegion(31, -283,-4,-283,  -276,4,-276) -- appolyon SW telporter floor3 to floor4
+zone:registerRegion(32, -523,-4,-323,  -517,4,-316) -- appolyon SW telporter floor4 to entrance
 
-zone:registerRegion(33, -403,-4,76,   -396,4,83); -- appolyon NW telporter floor1 to floor2
-zone:registerRegion(34, -283,-4,356,  -276,4,363); -- appolyon NW telporter floor2 to floor3
-zone:registerRegion(35, -243,-4,516,  -236,4,523); -- appolyon NW telporter floor3 to floor4
-zone:registerRegion(36, -523,-4,636,  -516,4,643); -- appolyon NW telporter floor4 to floor5
-zone:registerRegion(37, -563,-4,356,  -556,4,363); -- appolyon NW telporter floor5 to entrance
+zone:registerRegion(33, -403,-4,76,   -396,4,83) -- appolyon NW telporter floor1 to floor2
+zone:registerRegion(34, -283,-4,356,  -276,4,363) -- appolyon NW telporter floor2 to floor3
+zone:registerRegion(35, -243,-4,516,  -236,4,523) -- appolyon NW telporter floor3 to floor4
+zone:registerRegion(36, -523,-4,636,  -516,4,643) -- appolyon NW telporter floor4 to floor5
+zone:registerRegion(37, -563,-4,356,  -556,4,363) -- appolyon NW telporter floor5 to entrance
 
 end
 
@@ -96,10 +96,10 @@ function onRegionEnter(player,region)
   local regionID = region:GetRegionID()
    switch (regionID): caseof {
         [1] = function (x)
-             player:startEvent(100); -- APOLLYON_SE_NE exit
+             player:startEvent(100) -- APOLLYON_SE_NE exit
         end,
         [2] = function (x)
-             player:startEvent(101); -- APOLLYON_NW_SW exit
+             player:startEvent(101) -- APOLLYON_NW_SW exit
             -- print("APOLLYON_NW_SW")
         end,
         [3] = function (x)
@@ -226,8 +226,8 @@ end
 
 function onEventFinish(player,csid,option)
    if (csid == 100 and option == 1) then
-    player:setPos(557,-1,441,128,33);  -- APOLLYON_SE_NE exit
+    player:setPos(557,-1,441,128,33)  -- APOLLYON_SE_NE exit
    elseif (csid == 101 and option == 1) then
-    player:setPos(-561,0,443,242,33); -- APOLLYON_NW_SW exit
+    player:setPos(-561,0,443,242,33) -- APOLLYON_NW_SW exit
    end
 end;

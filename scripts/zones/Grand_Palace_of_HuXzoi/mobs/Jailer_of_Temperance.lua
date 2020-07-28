@@ -102,6 +102,6 @@ function onMobDespawn(mob)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
-    mob:setLocalVar("pop", os.time() + 900); -- 15 mins
+    mob:setLocalVar("pop", os.time() + 900) -- 15 mins
     GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
 end;

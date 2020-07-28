@@ -36,7 +36,7 @@ function onTrigger(player,npc)
             player:startEvent(10160, 1)
         end
     else
-        player:startEvent(10152); -- parameters unknown
+        player:startEvent(10152) -- parameters unknown
     end
 end
 

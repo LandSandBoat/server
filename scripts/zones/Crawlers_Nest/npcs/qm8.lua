@@ -17,7 +17,7 @@ function onTrigger(player,npc)
 
     local cprog = player:getCharVar("theCrimsonTrial_prog")
     local cdate = player:getCharVar("theCrimsonTrial_date")
-    local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
+    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
 
     if (player:hasKeyItem(tpz.ki.CRAWLER_BLOOD) == true and player:hasKeyItem(tpz.ki.OLD_BOOTS) == true) then
         player:startEvent(4)
@@ -39,18 +39,18 @@ function onEventFinish(player,csid,option)
     if (csid == 4 and option == 1) then
         player:delKeyItem(tpz.ki.CRAWLER_BLOOD)
         player:delKeyItem(tpz.ki.OLD_BOOTS)
-        player:setCharVar("theCrimsonTrial_date", os.date("%j")); -- %M for next minute, %j for next day
+        player:setCharVar("theCrimsonTrial_date", os.date("%j")) -- %M for next minute, %j for next day
         player:setCharVar("theCrimsonTrial_prog", 1)
         player:messageSpecial(ID.text.YOU_BURY_THE,tpz.ki.OLD_BOOTS,tpz.ki.CRAWLER_BLOOD)
     elseif (csid == 5) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,14093); -- Warlock's Boots
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,14093) -- Warlock's Boots
         else
             player:addItem(14093)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 14093); -- Warlock's Boots
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 14093) -- Warlock's Boots
             player:setCharVar("theCrimsonTrial_date",0)
             player:setCharVar("theCrimsonTrial_prog",0)
-            player:setCharVar("needs_crawler_blood",2); -- Fixed being unable start next quest
+            player:setCharVar("needs_crawler_blood",2) -- Fixed being unable start next quest
             player:addFame(SANDORIA,40)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
         end

@@ -19,12 +19,12 @@ function onTrigger(player,npc)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(tpz.effect.FISHING_IMAGERY) == false) then
-            player:startEvent(10013,SkillCap,SkillLevel,2,239,player:getGil(),0,30,0); -- p1 = skill level
+            player:startEvent(10013,SkillCap,SkillLevel,2,239,player:getGil(),0,30,0) -- p1 = skill level
         else
             player:startEvent(10013,SkillCap,SkillLevel,2,239,player:getGil(),19293,30,0)
         end
     else
-        player:startEvent(10013); -- Standard Dialogue
+        player:startEvent(10013) -- Standard Dialogue
     end
 end
 

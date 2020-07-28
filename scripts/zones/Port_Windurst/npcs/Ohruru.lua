@@ -17,7 +17,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
---    player:delQuest(WINDURST,tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN); -- ======== FOR TESTING ONLY ==========-----
+--    player:delQuest(WINDURST,tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
 -- ======== FOR TESTING ONLY ==========-----
 --    if (player:getCharVar("QuestCatchItIfYouCan_var") == 0 and player:hasStatusEffect(tpz.effect.MUTE) == false and player:hasStatusEffect(tpz.effect.BANE) == false and player:hasStatusEffect(tpz.effect.PLAGUE) == false) then
 --        rand = math.random(1,3)
@@ -38,30 +38,30 @@ function onTrigger(player,npc)
     elseif (Catch == 0) then
         prog = player:getCharVar("QuestCatchItIfYouCan_var")
         if (prog == 0) then
-            player:startEvent(230); -- CATCH IT IF YOU CAN: Before Quest 1
+            player:startEvent(230) -- CATCH IT IF YOU CAN: Before Quest 1
             player:setCharVar("QuestCatchItIfYouCan_var",1)
         elseif (prog == 1) then
-            player:startEvent(253); -- CATCH IT IF YOU CAN: Before Start
+            player:startEvent(253) -- CATCH IT IF YOU CAN: Before Start
             player:setCharVar("QuestCatchItIfYouCan_var",2)
         elseif (prog == 2) then
-            player:startEvent(231); -- CATCH IT IF YOU CAN: Before Quest 2
+            player:startEvent(231) -- CATCH IT IF YOU CAN: Before Quest 2
         end
 
     elseif (Catch >= 1 and (player:hasStatusEffect(tpz.effect.MUTE) == true or player:hasStatusEffect(tpz.effect.BANE) == true or player:hasStatusEffect(tpz.effect.PLAGUE) == true)) then
-        player:startEvent(246); -- CATCH IT IF YOU CAN: Quest Turn In 1
+        player:startEvent(246) -- CATCH IT IF YOU CAN: Quest Turn In 1
     elseif (Catch >= 1 and player:needToZone()) then
-        player:startEvent(255); -- CATCH IT IF YOU CAN: After Quest
+        player:startEvent(255) -- CATCH IT IF YOU CAN: After Quest
     elseif (Catch == 1 and player:hasStatusEffect(tpz.effect.MUTE) == false and player:hasStatusEffect(tpz.effect.BANE) == false and player:hasStatusEffect(tpz.effect.PLAGUE) == false) then
         rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(248); -- CATCH IT IF YOU CAN: During Quest 1
+            player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1
         else
-            player:startEvent(251); -- CATCH IT IF YOU CAN: During Quest 2
+            player:startEvent(251) -- CATCH IT IF YOU CAN: During Quest 2
         end
     elseif (WonderWands == QUEST_COMPLETED) then
         player:startEvent(265)
     else
-        player:startEvent(230); -- STANDARD CONVERSATION
+        player:startEvent(230) -- STANDARD CONVERSATION
     end
 end
 

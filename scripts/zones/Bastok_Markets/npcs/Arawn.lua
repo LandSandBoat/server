@@ -43,7 +43,7 @@ function onEventFinish(player,csid,option)
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addTitle(tpz.title.STAMPEDER)
             player:addItem(13081)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13081); -- Leather Gorget
+            player:messageSpecial(ID.text.ITEM_OBTAINED,13081) -- Leather Gorget
             player:delKeyItem(tpz.ki.STAMP_SHEET)
             player:setCharVar("StampHunt_Mask",0)
             player:addFame(BASTOK,50)

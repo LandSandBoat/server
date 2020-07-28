@@ -24,13 +24,13 @@ function onTrade(player,npc,trade)
             TotalSubligar = Subligar + TurnedInVar
             player:tradeComplete()
             player:setCharVar("shiningSubligar_nb",TotalSubligar)
-            player:startEvent(124,TotalSubligar); -- Update player on number of subligar turned in
+            player:startEvent(124,TotalSubligar) -- Update player on number of subligar turned in
         end
     else
         if (ShiningSubligar == QUEST_ACCEPTED) then
-            player:startEvent(124,TotalSubligar); -- Update player on number of subligar turned in, but doesn't accept anything other than subligar
+            player:startEvent(124,TotalSubligar) -- Update player on number of subligar turned in, but doesn't accept anything other than subligar
         else
-            player:startEvent(122); -- Give standard conversation if items are traded but no quest is accepted
+            player:startEvent(122) -- Give standard conversation if items are traded but no quest is accepted
         end
     end
 
@@ -41,11 +41,11 @@ function onTrigger(player,npc)
     ShiningSubligar = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
     if (ShiningSubligar == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3) then
-        player:startEvent(123); -- Start Like a Shining Subligar
+        player:startEvent(123) -- Start Like a Shining Subligar
     elseif (ShiningSubligar == QUEST_ACCEPTED) then
-        player:startEvent(124,player:getCharVar("shiningSubligar_nb")); -- Update player on number of subligar turned in
+        player:startEvent(124,player:getCharVar("shiningSubligar_nb")) -- Update player on number of subligar turned in
     else
-        player:startEvent(122); -- Standard Conversation
+        player:startEvent(122) -- Standard Conversation
     end
 
 end
@@ -60,8 +60,8 @@ function onEventFinish(player,csid,option)
     elseif (csid == 125) then
         player:tradeComplete()
         player:addTitle(tpz.title.LOOKS_SUBLIME_IN_A_SUBLIGAR)
-        player:addItem(4955); -- Scroll of Kurayami: Ichi
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 4955); -- Scroll of Kurayami: Ichi
+        player:addItem(4955) -- Scroll of Kurayami: Ichi
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 4955) -- Scroll of Kurayami: Ichi
         player:setCharVar("shiningSubligar_nb",0)
         player:addFame(NORG,100)
         player:completeQuest(OUTLANDS,tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)

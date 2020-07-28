@@ -46,7 +46,7 @@ function onTrigger(player,npc)
             player:startEvent(427,1)
         end
     else
-        player:startEvent(427);--422
+        player:startEvent(427)--422
     end
 
 end
@@ -58,11 +58,11 @@ function onEventFinish(player,csid,option)
 
     if (csid == 423 or csid == 425) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,605); -- Pickaxes
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,605) -- Pickaxes
             player:setCharVar("notReceivePickaxe",1)
         else
             player:addItem(605,5)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,605); -- Pickaxes
+            player:messageSpecial(ID.text.ITEM_OBTAINED,605) -- Pickaxes
             player:setCharVar("MissionStatus",5)
             player:setCharVar("notReceivePickaxe",0)
         end

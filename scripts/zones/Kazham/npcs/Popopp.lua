@@ -43,9 +43,9 @@ function onTrigger(player,npc)
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(201)
         elseif (progress == 4 or failed == 5) then
-                player:startEvent(210);  -- asking for wandering bulb
+                player:startEvent(210)  -- asking for wandering bulb
         elseif (progress >= 5 or failed >= 6) then
-            player:startEvent(246); -- happy with wandering bulb
+            player:startEvent(246) -- happy with wandering bulb
         end
     else
         player:startEvent(201)

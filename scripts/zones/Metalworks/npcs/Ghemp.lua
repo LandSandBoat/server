@@ -39,7 +39,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4096)
         else
             player:addItem(4096)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,4096); -- Fire Crystal
+            player:messageSpecial(ID.text.ITEM_OBTAINED,4096) -- Fire Crystal
             signupGuild(player, guild.smithing)
         end
     end

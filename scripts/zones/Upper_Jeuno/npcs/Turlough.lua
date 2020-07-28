@@ -18,7 +18,7 @@ function onTrigger(player,npc)
     if (player:getCurrentMission(WOTG) == tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE and player:getCharVar("QueenOfTheDance") == 1) then
         player:startEvent(10172)
     else
-        player:startEvent(10158); --default dialogue
+        player:startEvent(10158) --default dialogue
     end
 end
 

@@ -19,7 +19,7 @@ function onTrigger(player,npc)
         for i = DoorID,DoorID+4,1 do
             GetNPCByID(i):openDoor(30)
         end
-        player:messageSpecial(ID.text.BANISHING_GATES); -- First Banishing gate opening
+        player:messageSpecial(ID.text.BANISHING_GATES) -- First Banishing gate opening
         return 1
     end
 end

@@ -69,9 +69,9 @@ function onTrigger(player,npc)
     mLvl = player:getMainLvl()
 
     if (DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true) then
-        player:startEvent(31,1210); -- Start the quest
+        player:startEvent(31,1210) -- Start the quest
     elseif (DampScroll == QUEST_ACCEPTED) then
-        player:startEvent(32); -- Reminder Dialogue
+        player:startEvent(32) -- Reminder Dialogue
     else
         player:startEvent(85)
     end

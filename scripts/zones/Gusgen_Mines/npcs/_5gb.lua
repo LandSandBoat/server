@@ -13,11 +13,11 @@ function onTrigger(player,npc)
 
     local Lever = npc:getID()
 
-    npc:openDoor(2); -- Lever animation
+    npc:openDoor(2) -- Lever animation
     if (GetNPCByID(Lever-6):getAnimation() == 9) then
-        GetNPCByID(Lever-7):setAnimation(9);--close door C
-        GetNPCByID(Lever-6):setAnimation(8);--open door B
-        GetNPCByID(Lever-5):setAnimation(9);--close door A
+        GetNPCByID(Lever-7):setAnimation(9)--close door C
+        GetNPCByID(Lever-6):setAnimation(8)--open door B
+        GetNPCByID(Lever-5):setAnimation(9)--close door A
     end
 
 end

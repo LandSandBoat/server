@@ -61,7 +61,7 @@ function onEventFinish(player,csid,option)
         else
             player:addTitle(tpz.title.BASTOK_WELCOMING_COMMITTEE)
             player:addItem(16565)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,16565); -- Spatha
+            player:messageSpecial(ID.text.ITEM_OBTAINED,16565) -- Spatha
             player:setCharVar("WelcomeToBastok_Event",0)
             player:addFame(BASTOK,80)
             player:completeQuest(BASTOK,tpz.quest.id.bastok.WELCOME_TO_BASTOK)
@@ -74,7 +74,7 @@ function onEventFinish(player,csid,option)
         else
             player:addTitle(tpz.title.BASTOK_WELCOMING_COMMITTEE)
             player:addItem(12300)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12300); -- Targe
+            player:messageSpecial(ID.text.ITEM_OBTAINED,12300) -- Targe
             player:delKeyItem(tpz.ki.LETTERS_FROM_DOMIEN)
             player:setCharVar("GuestofHauteur_Event",0)
             player:addFame(BASTOK,80)

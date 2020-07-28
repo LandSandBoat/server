@@ -30,9 +30,9 @@ function onTrigger(player,npc)
     -- BEGINNINGS
     elseif (beginnings == QUEST_ACCEPTED) then
         if (not player:hasKeyItem(tpz.ki.BRAND_OF_THE_SKYSERPENT)) then
-            player:startEvent(8); -- brands you
+            player:startEvent(8) -- brands you
         else
-            player:startEvent(9); -- mortals were meant to seek power
+            player:startEvent(9) -- mortals were meant to seek power
         end
 
     -- ASSAULT

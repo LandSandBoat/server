@@ -18,15 +18,15 @@ function onTrade(player,npc,trade)
     if (lufetSalt and cnt == 1 and beansAhoy == QUEST_ACCEPTED) then
         if (player:getCharVar("BeansAhoy") == 0 == true) then
 
-            player:startEvent(337); -- Traded the Correct Item Dialogue (NOTE: You have to trade the Salts one at according to wiki)
+            player:startEvent(337) -- Traded the Correct Item Dialogue (NOTE: You have to trade the Salts one at according to wiki)
 
         elseif (player:needsToZone() == false) then
-            player:startEvent(340); -- Quest Complete Dialogue
+            player:startEvent(340) -- Quest Complete Dialogue
 
         end
 
     else
-        player:startEvent(339); -- Wrong Item Traded
+        player:startEvent(339) -- Wrong Item Traded
 
     end
 
@@ -35,17 +35,17 @@ end
 function onTrigger(player,npc)
     local beansAhoy = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.BEANS_AHOY)
     if (beansAhoy == QUEST_AVAILABLE) then
-        player:startEvent(334); -- Quest Start
+        player:startEvent(334) -- Quest Start
 
     elseif (beansAhoy == QUEST_ACCEPTED) then
-        player:startEvent(335); -- Quest Active, NPC Repeats what he says but as normal 'text' instead of cutscene.
+        player:startEvent(335) -- Quest Active, NPC Repeats what he says but as normal 'text' instead of cutscene.
 
     elseif (beansAhoy == QUEST_COMPLETED and getConquestTally() ~= player:getCharVar("BeansAhoy_ConquestWeek")) then
         player:startEvent(342)
     elseif (beansAhoy == QUEST_COMPLETED) then
         player:startEvent(341)
     else
-        player:startEvent(333); -- Default Dialogue
+        player:startEvent(333) -- Default Dialogue
 
     end
 end

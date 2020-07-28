@@ -15,108 +15,108 @@ function onTrigger(player,npc)
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
     if (player:hasCompletedMission (BASTOK,tpz.mission.id.bastok.FETICHISM)) then
-        BastokMissions = BastokMissions - 2; -- Fetichism.
+        BastokMissions = BastokMissions - 2 -- Fetichism.
     end
     if (player:hasCompletedMission (BASTOK,tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
-        BastokMissions = BastokMissions - 4; -- To the Forsaken Mines.
+        BastokMissions = BastokMissions - 4 -- To the Forsaken Mines.
     end
 
     -- Bastok Quests.
     local BastokQuests = 0xFFFFFFFE
     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)) then
-        BastokQuests = BastokQuests - 2;     -- The Return of the Adventurer
+        BastokQuests = BastokQuests - 2     -- The Return of the Adventurer
     end
 -- *Need the correct csid
 --     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.THE_FIRST_MEETING)) then
---         BastokQuests = BastokQuests - 4;     -- The First Meeting
+--         BastokQuests = BastokQuests - 4     -- The First Meeting
 --     end
     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.WISH_UPON_A_STAR)) then
-        BastokQuests = BastokQuests - 8;     -- Wish Upon a Star (pt.1)
-        BastokQuests = BastokQuests - 16;    -- Wish Upon a Star (pt.2)
-        BastokQuests = BastokQuests - 32;    -- Wish Upon a Star (pt.3)
+        BastokQuests = BastokQuests - 8     -- Wish Upon a Star (pt.1)
+        BastokQuests = BastokQuests - 16    -- Wish Upon a Star (pt.2)
+        BastokQuests = BastokQuests - 32    -- Wish Upon a Star (pt.3)
     end
 
 -- *Need the correct csid/parameters
 --    if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.ALL_BY_MYSELF)) then
---        BastokQuests = BastokQuests - 64;    -- All by Myself
+--        BastokQuests = BastokQuests - 64    -- All by Myself
 --    end
     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.ACHIEVING_TRUE_POWER)) then
-        BastokQuests = BastokQuests - 128;   -- Achieving True Power
+        BastokQuests = BastokQuests - 128   -- Achieving True Power
     end
     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.TOO_MANY_CHEFS)) then
-        BastokQuests = BastokQuests - 512;   -- Too Many Chefs
+        BastokQuests = BastokQuests - 512   -- Too Many Chefs
 
     end
     if (player:hasCompletedQuest(BASTOK,tpz.quest.id.bastok.A_PROPER_BURIAL)) then
-        BastokQuests = BastokQuests - 1024;  -- A Proper Burial (pt.1)
-        BastokQuests = BastokQuests - 2048;  -- A Proper Burial (pt.2)
-        BastokQuests = BastokQuests - 4096;  -- A Proper Burial (pt.3)
-        BastokQuests = BastokQuests - 8192;  -- A Proper Burial (pt.4)
-        BastokQuests = BastokQuests - 16384; -- A Proper Burial (pt.5)
-        BastokQuests = BastokQuests - 32768; -- A Proper Burial (pt.6)
+        BastokQuests = BastokQuests - 1024  -- A Proper Burial (pt.1)
+        BastokQuests = BastokQuests - 2048  -- A Proper Burial (pt.2)
+        BastokQuests = BastokQuests - 4096  -- A Proper Burial (pt.3)
+        BastokQuests = BastokQuests - 8192  -- A Proper Burial (pt.4)
+        BastokQuests = BastokQuests - 16384 -- A Proper Burial (pt.5)
+        BastokQuests = BastokQuests - 32768 -- A Proper Burial (pt.6)
     end
 
     -- Other Quests.
     local OtherQuests = 0xFFFFFFFE
     if (player:hasCompletedQuest(JEUNO,tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)) then
-        OtherQuests = OtherQuests - 2;      -- Beat Around the Bushin
+        OtherQuests = OtherQuests - 2      -- Beat Around the Bushin
     end
     if (player:hasCompletedQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)) then
-        OtherQuests = OtherQuests - 4;      -- Confessions of a Bellmaker
+        OtherQuests = OtherQuests - 4      -- Confessions of a Bellmaker
     end
     if (player:hasCompletedQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.PICTURE_PERFECT)) then
-        OtherQuests = OtherQuests - 8;      -- Picture Perfect (pt.1)
-        OtherQuests = OtherQuests - 16;     -- Picture Perfect (pt.2)
-        OtherQuests = OtherQuests - 32;     -- Picture Perfect (pt.3)
-        OtherQuests = OtherQuests - 64;     -- Picture Perfect (pt.4)
+        OtherQuests = OtherQuests - 8      -- Picture Perfect (pt.1)
+        OtherQuests = OtherQuests - 16     -- Picture Perfect (pt.2)
+        OtherQuests = OtherQuests - 32     -- Picture Perfect (pt.3)
+        OtherQuests = OtherQuests - 64     -- Picture Perfect (pt.4)
     end
     if (player:hasCompletedQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)) then
-        OtherQuests = OtherQuests - 128;    -- No Strings Attached
+        OtherQuests = OtherQuests - 128    -- No Strings Attached
     end
     if (player:hasCompletedQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)) then
-        OtherQuests = OtherQuests - 256;    -- Puppetmaster Blues (pt.1)
-        OtherQuests = OtherQuests - 512;    -- Puppetmaster Blues (pt.2)
+        OtherQuests = OtherQuests - 256    -- Puppetmaster Blues (pt.1)
+        OtherQuests = OtherQuests - 512    -- Puppetmaster Blues (pt.2)
     end
     if (player:hasCompletedQuest(JEUNO,tpz.quest.id.jeuno.COMEBACK_QUEEN)) then
-        OtherQuests = OtherQuests - 1024;   -- Comeback Queen
+        OtherQuests = OtherQuests - 1024   -- Comeback Queen
     end
 
 -- *This quest,as of the time this script was written,is not yet defined in Project Topaz.
 --     if (player:hasCompletedQuest(**Unknown**,DANCER_ATTIRE)) then
---         OtherQuests = OtherQuests - 2048;   -- Dancer Attire (pt.1)
---         OtherQuests = OtherQuests - 4096;   -- Dancer Attire (pt.2)
+--         OtherQuests = OtherQuests - 2048   -- Dancer Attire (pt.1)
+--         OtherQuests = OtherQuests - 4096   -- Dancer Attire (pt.2)
 --     end
     if (player:hasCompletedQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.DRAFTED_BY_THE_DUCHY)) then
-        OtherQuests = OtherQuests - 8192;   -- Drafted by the Duchy
+        OtherQuests = OtherQuests - 8192   -- Drafted by the Duchy
     end
     if (player:hasCompletedQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.BATTLE_ON_A_NEW_FRONT)) then
-        OtherQuests = OtherQuests - 16384;  -- Battle on a New Front
+        OtherQuests = OtherQuests - 16384  -- Battle on a New Front
     end
     if (player:hasCompletedQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.VOIDWALKER_OP_126)) then
-        OtherQuests = OtherQuests - 32768;  -- VW Op. #126: Qufim Incursion
+        OtherQuests = OtherQuests - 32768  -- VW Op. #126: Qufim Incursion
     end
 
 -- *This quest,as of the time this script was written,is not yet defined in Project Topaz.
 --     if (player:hasCompletedQuest(**Unknown**,RECORDS_OF_EMINENCE)) then
---         OtherQuests = OtherQuests - 65536;  -- Records of Eminence
+--         OtherQuests = OtherQuests - 65536  -- Records of Eminence
 --     end
 
 -- *This quest,as of the time this script was written,is not yet defined in Project Topaz.
 --     if (player:hasCompletedQuest(**Unknown**,TRUST_MUMOR)) then
---         OtherQuests = OtherQuests - 131072; -- Trust (Mumor)
+--         OtherQuests = OtherQuests - 131072 -- Trust (Mumor)
 --     end
 
 -- *This quest,as of the time this script was written,is not yet defined in Project Topaz.
 --     if (player:hasCompletedQuest(**Unknown**,UNITY_CONCORD)) then
---         OtherQuests = OtherQuests - 262144; -- Unity Concord (pt.1)
---         OtherQuests = OtherQuests - 524288; -- Unity Concord (pt.2)
+--         OtherQuests = OtherQuests - 262144 -- Unity Concord (pt.1)
+--         OtherQuests = OtherQuests - 524288 -- Unity Concord (pt.2)
 --     end
 
     -- Seekers of Adoulin
     local SeekersOfAdoulin = 0xFFFFFFFE
 -- *Need the correct csid
 --    if (player:hasCompletedMission (SOA,tpz.mission.id.soa.RUMORS_FROM_THE_WEST)) then
---        SeekersOfAdoulin = SeekersOfAdoulin - 2; -- Rumors from the West
+--        SeekersOfAdoulin = SeekersOfAdoulin - 2 -- Rumors from the West
 --    end
 
     -- Determine if any cutscenes are available for the player.
@@ -126,7 +126,7 @@ function onTrigger(player,npc)
         OtherQuests      == 0xFFFFFFFE and
         SeekersOfAdoulin == 0xFFFFFFFE)
     then -- Player has no cutscenes available to be viewed.
-        gil = 0; -- Setting gil to a value less than 10(cost) will trigger the appropriate response from this npc.
+        gil = 0 -- Setting gil to a value less than 10(cost) will trigger the appropriate response from this npc.
     end
 
     player:startEvent(326,BastokMissions,BastokQuests,OtherQuests,SeekersOfAdoulin,0xFFFFFFFE,0xFFFFFFFE,10,gil)
@@ -137,7 +137,7 @@ function onEventUpdate(player,csid,option)
     -- printf ("RESULT: %u",option)
 
     if (player:delGil(10) == false) then
-        player:setLocalVar("Lamepaue_PlayCutscene", 2) ; -- Cancel the cutscene.
+        player:setLocalVar("Lamepaue_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else
         player:setLocalVar("Lamepaue_PlayCutscene", 1)

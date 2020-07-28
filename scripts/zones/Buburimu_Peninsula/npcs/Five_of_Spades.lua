@@ -15,9 +15,9 @@ function onTrigger(player,npc)
     local AGCcs = player:getCharVar("AGreetingCardian_Event")
 
     if (AGreetingCardian == QUEST_ACCEPTED and AGCcs == 4) then
-        player:startEvent(1); -- A Greeting Cardian step three
+        player:startEvent(1) -- A Greeting Cardian step three
     else
-        player:showText(npc,ID.text.FIVEOFSPADES_DIALOG); -- Standard Dialog
+        player:showText(npc,ID.text.FIVEOFSPADES_DIALOG) -- Standard Dialog
     end
 end
 

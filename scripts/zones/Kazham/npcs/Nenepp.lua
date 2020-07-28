@@ -67,9 +67,9 @@ function onTrigger(player,npc)
             player:startEvent(206)
             npc:wait()
         elseif (progress == 9 or failed == 10) then
-                player:startEvent(212);  -- asking for lucky egg
+                player:startEvent(212)  -- asking for lucky egg
         elseif (progress >= 10 or failed >= 11) then
-            player:startEvent(250); -- happy with lucky egg
+            player:startEvent(250) -- happy with lucky egg
         end
     else
         player:startEvent(206)
@@ -88,9 +88,9 @@ function onEventFinish(player,csid,option,npc)
             player:tradeComplete()
             player:addFame(KAZHAM, 75)
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
-            player:addItem(13870);   -- opo opo crown
+            player:addItem(13870)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED,13870)
-            player:addItem(4468,3);  -- 3 pamamas
+            player:addItem(4468,3)  -- 3 pamamas
             player:messageSpecial(ID.text.ITEM_OBTAINED,4468,3)
             player:setCharVar("OPO_OPO_PROGRESS",0)
             player:setCharVar("OPO_OPO_FAILED", 0)

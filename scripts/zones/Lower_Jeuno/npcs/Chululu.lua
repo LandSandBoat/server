@@ -16,7 +16,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 function onTrade(player,npc,trade)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(558,1) == true and trade:hasItemQty(559,1) == true and trade:hasItemQty(561,1) == true and trade:hasItemQty(562,1) == true and trade:getItemCount() == 4) then
-            player:startEvent(200); -- Finish quest "Collect Tarut Cards"
+            player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
     end
 end
@@ -27,35 +27,35 @@ function onTrigger(player,npc)
     local SearchingForTheRightWords = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     if (player:getFameLevel(JEUNO) >= 3 and CollectTarutCards == QUEST_AVAILABLE) then
-        player:startEvent(28); -- Start quest "Collect Tarut Cards" with option
+        player:startEvent(28) -- Start quest "Collect Tarut Cards" with option
     elseif (CollectTarutCards == QUEST_ACCEPTED) then
-        player:startEvent(27); -- During quest "Collect Tarut Cards"
+        player:startEvent(27) -- During quest "Collect Tarut Cards"
     elseif (CollectTarutCards == QUEST_COMPLETED and RubbishDay == QUEST_AVAILABLE and player:getCharVar("RubbishDay_day") ~= VanadielDayOfTheYear()) then
 --      prog = player:getCharVar("RubbishDay_prog")
 --      if (prog <= 2) then
---          player:startEvent(199); -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
+--          player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
 --      elseif (prog == 3) then
-            player:startEvent(198); -- Start quest "Rubbish Day" with option
+            player:startEvent(198) -- Start quest "Rubbish Day" with option
 --      end
     elseif (CollectTarutCards == QUEST_COMPLETED and RubbishDay == QUEST_AVAILABLE) then
-        player:startEvent(57); -- Standard dialog between 2 quests
+        player:startEvent(57) -- Standard dialog between 2 quests
     elseif (RubbishDay == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
-        player:startEvent(49); -- During quest "Rubbish Day"
+        player:startEvent(49) -- During quest "Rubbish Day"
     elseif (RubbishDay == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 1) then
-        player:startEvent(197); -- Finish quest "Rubbish Day"
+        player:startEvent(197) -- Finish quest "Rubbish Day"
 
     elseif (SearchingForTheRightWords == QUEST_COMPLETED) then
         if (player:getCharVar("SearchingForRightWords_postcs") < -1) then
             player:startEvent(56)
         else
-            player:startEvent(87); -- final state, after all quests complete
+            player:startEvent(87) -- final state, after all quests complete
         end
 
     elseif (RubbishDay == QUEST_COMPLETED) then
-        player:startEvent(87); -- New standard dialog
+        player:startEvent(87) -- New standard dialog
 
     else
-        player:startEvent(26); -- Standard dialog
+        player:startEvent(26) -- Standard dialog
     end
 end
 
@@ -69,13 +69,13 @@ function onEventFinish(player,csid,option)
         local card = 0
 
         if (rand == 1) then
-            card = 559; -- Tarut: Death
+            card = 559 -- Tarut: Death
         elseif (rand == 2) then
-            card = 562; -- Tarut: Hermit
+            card = 562 -- Tarut: Hermit
         elseif (rand == 3) then
-            card = 561; -- Tarut: King
+            card = 561 -- Tarut: King
         else
-            card = 558; -- Tarut: Fool
+            card = 558 -- Tarut: Fool
         end
 
         if (player:getFreeSlotsCount() == 0) then
@@ -92,7 +92,7 @@ function onEventFinish(player,csid,option)
         player:completeQuest(JEUNO,tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
     elseif (csid == 199 and option == 0) then
         player:addCharVar("RubbishDay_prog", 1)
-        player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()); -- new vanadiel day
+        player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
     elseif (csid == 198 and option == 0) then
         player:addQuest(JEUNO,tpz.quest.id.jeuno.RUBBISH_DAY)
         player:addKeyItem(tpz.ki.MAGIC_TRASH)

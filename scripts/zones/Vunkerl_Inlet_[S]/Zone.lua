@@ -20,7 +20,7 @@ function onZoneIn(player,prevZone)
 end
 
 function onZoneWeatherChange(weather)
-    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS); -- Indescript Markings
+    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS) -- Indescript Markings
     if (npc ~= nil) then
         if (weather == tpz.weather.FOG or weather == tpz.weather.THUNDER) then
             npc:setStatus(tpz.status.DISAPPEAR)
@@ -31,7 +31,7 @@ function onZoneWeatherChange(weather)
 end
 
 function onGameHour(zone)
-    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS); -- Indescript Markings
+    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS) -- Indescript Markings
     if (npc ~= nil) then
         if (VanadielHour() == 16) then
             npc:setStatus(tpz.status.DISAPPEAR)

@@ -17,22 +17,22 @@ LOWER_JEUNO = {
         if (GetServerVariable("[JEUNO]CommService") == player:getID()) then
             local hour = VanadielHour()
             if (hour >= 20 and hour < 21) then
-                player:startEvent(lampCs, 4); -- It is too early to light it.  You must wait until nine o'clock.
+                player:startEvent(lampCs, 4) -- It is too early to light it.  You must wait until nine o'clock.
             elseif (hour >= 21 or hour < 1) then
                 if (npc:getAnimation() == tpz.anim.OPEN_DOOR) then
-                    player:startEvent(lampCs, 2); -- The lamp is already lit.
+                    player:startEvent(lampCs, 2) -- The lamp is already lit.
                 else
-                    player:startEvent(lampCs, 1, lampNum); -- Light the lamp? Yes/No
+                    player:startEvent(lampCs, 1, lampNum) -- Light the lamp? Yes/No
                 end
             else
-                player:startEvent(lampCs, 3); -- You have failed to light the lamps in time.
+                player:startEvent(lampCs, 3) -- You have failed to light the lamps in time.
             end
 
         else
             if (npc:getAnimation() == tpz.anim.OPEN_DOOR) then
-                player:startEvent(lampCs, 5); -- The lamp is lit.
+                player:startEvent(lampCs, 5) -- The lamp is lit.
             else
-                player:startEvent(lampCs, 6); -- You examine the lamp. It seems that it must be lit manually.
+                player:startEvent(lampCs, 6) -- You examine the lamp. It seems that it must be lit manually.
             end
 
         end

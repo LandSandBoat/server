@@ -22,9 +22,9 @@ function onTrigger(player,npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(164)
     elseif (player:getCurrentMission(COP) > tpz.mission.id.cop.GARDEN_OF_ANTIQUITY or (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 3)) then
-        player:startEvent(100); -- Teleport inside
+        player:startEvent(100) -- Teleport inside
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY); -- Access should be restricted if below requirements. Message is probably wrong, though.
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Access should be restricted if below requirements. Message is probably wrong, though.
     end
 end
 
@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 100 and option == 1) then
-        player:setPos(-20,0.624,-355,191,34); -- {R}
+        player:setPos(-20,0.624,-355,191,34) -- {R}
     elseif (csid == 164) then
         player:setCharVar("PromathiaStatus", 2)
     end

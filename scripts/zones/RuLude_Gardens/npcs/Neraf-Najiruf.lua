@@ -16,13 +16,13 @@ function onTrigger(player,npc)
     saveMySister = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
     if (saveMySister == QUEST_AVAILABLE and player:getCharVar("saveMySisterVar") == 3) then
-        player:startEvent(98); -- Real start of this quest (with addquest)
+        player:startEvent(98) -- Real start of this quest (with addquest)
     elseif (saveMySister == QUEST_ACCEPTED) then
-        player:startEvent(99); -- During quest
+        player:startEvent(99) -- During quest
     elseif (saveMySister == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.DUCAL_GUARDS_LANTERN) == true) then
-        player:startEvent(97); -- last CS (after talk with baudin)
+        player:startEvent(97) -- last CS (after talk with baudin)
     else
-        player:startEvent(156); -- Standard dialog
+        player:startEvent(156) -- Standard dialog
     end
 end
 

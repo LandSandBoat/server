@@ -58,7 +58,7 @@ function onEventFinish(player,csid,option)
         player:tradeComplete()
         player:addGil(GIL_RATE*900)
         player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*900)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH); -- for save fame
+        player:completeQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
     elseif (csid == 506) then
         player:setMaskBit(player:getCharVar("WildcatBastok"),"WildcatBastok",16,true)
     end

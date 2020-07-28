@@ -30,7 +30,7 @@ function onTrigger(player,npc)
     elseif (player:hasKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT)) then
         player:messageSpecial(ID.text.SOVEREIGN_WITHOUT_AN_APPOINTMENT)
     else
-        player:startEvent(138); -- you don't have a permit
+        player:startEvent(138) -- you don't have a permit
     end
 
 end
@@ -58,7 +58,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.AIRSHIP_PASS)
             player:addTitle(tpz.title.HAVE_WINGS_WILL_FLY)
         end
-        player:setCharVar("MissionStatus",6); -- all that's left is to go back to the embassy
+        player:setCharVar("MissionStatus",6) -- all that's left is to go back to the embassy
     elseif (csid == 10050) then
         player:setCharVar("PromathiaStatus",2)
     end

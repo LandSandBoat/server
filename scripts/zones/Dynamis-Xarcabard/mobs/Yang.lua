@@ -14,9 +14,9 @@ function onMobSpawn(mob)
         dynaLord:setMod(tpz.mod.UDMGPHYS, -100)
         dynaLord:setMod(tpz.mod.UDMGRANGE, -100)
         dynaLord:setLocalVar("physImmune", 0)
-        mob:setSpawn(-364,-35.974,24.254); -- Reset Yang's spawn point to initial spot.
+        mob:setSpawn(-364,-35.974,24.254) -- Reset Yang's spawn point to initial spot.
     else
-        mob:setSpawn(-414.282,-44,20.427); -- Spawned by DL, reset to DL's spawn point.
+        mob:setSpawn(-414.282,-44,20.427) -- Spawned by DL, reset to DL's spawn point.
     end
 end
 

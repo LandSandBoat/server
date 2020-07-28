@@ -12,7 +12,7 @@ function onTrigger(player,npc)
 
     if (player:getZPos() < 52) then
         if (DoorA == 8) then
-            npc:openDoor(15); -- Retail tested
+            npc:openDoor(15) -- Retail tested
         end
     end
 end

@@ -30,9 +30,9 @@ function onTrigger(player,npc)
     -- BEGINNINGS
     elseif (beginnings == QUEST_ACCEPTED) then
         if (not player:hasKeyItem(tpz.ki.BRAND_OF_THE_STONESERPENT)) then
-            player:startEvent(12); -- brands you
+            player:startEvent(12) -- brands you
         else
-            player:startEvent(13); -- blue muddies the purest waters
+            player:startEvent(13) -- blue muddies the purest waters
         end
 
     -- ASSAULT

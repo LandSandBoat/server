@@ -14,20 +14,20 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
+    realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     starttime = player:getCharVar("MissionaryMan_date")
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryManVar == 2) then
-        player:startEvent(698,0,1146); -- Start statue creation
+        player:startEvent(698,0,1146) -- Start statue creation
     elseif (MissionaryManVar == 3 and (starttime == realday or player:needToZone() == true)) then
-        player:startEvent(699); -- During statue creation
+        player:startEvent(699) -- During statue creation
     elseif (MissionaryManVar == 3 and starttime ~= realday and player:needToZone() == false) then
-        player:startEvent(700); -- End of statue creation
+        player:startEvent(700) -- End of statue creation
     elseif (MissionaryManVar == 4) then
-        player:startEvent(701); -- During quest (after creation)
+        player:startEvent(701) -- During quest (after creation)
     else
-        player:startEvent(697); -- Standard dialog
+        player:startEvent(697) -- Standard dialog
     end
 end
 
@@ -37,7 +37,7 @@ end
 function onEventFinish(player,csid,option)
     if (csid == 698) then
         player:setCharVar("MissionaryManVar",3)
-        player:setCharVar("MissionaryMan_date", os.date("%j")); -- %M for next minute, %j for next day
+        player:setCharVar("MissionaryMan_date", os.date("%j")) -- %M for next minute, %j for next day
         player:delKeyItem(tpz.ki.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 

@@ -60,7 +60,7 @@ function onEventFinish(player,csid,option)
             player:setCharVar("Groceries",0)
             player:completeQuest(BASTOK,tpz.quest.id.bastok.GROCERIES)
             player:addFame(BASTOK,75)
-            player:addItem(13594); -- Rabbit Mantle
+            player:addItem(13594) -- Rabbit Mantle
             player:messageSpecial(ID.text.ITEM_OBTAINED,13594)
         else
             player:messageSpecial(ID.text.FULL_INVENTORY_AFTER_TRADE,13594)

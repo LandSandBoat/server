@@ -16,18 +16,18 @@ function onTrigger(player,npc)
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
         if (player:getCharVar("ZilartStatus") == 0) then
-            player:startEvent(81); -- Start
+            player:startEvent(81) -- Start
         elseif (player:hasKeyItem(tpz.ki.SCRAP_OF_PAPYRUS)) then
-            player:startEvent(83); -- Finish
+            player:startEvent(83) -- Finish
         elseif (player:getCharVar("ZilartStatus") == 2) then
-            player:startEvent(84); -- Go to hall of the gods
+            player:startEvent(84) -- Go to hall of the gods
         else
             player:startEvent(82)
         end
     elseif (player:hasCompletedMission(ZILART,tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)) then
-        player:startEvent(85); -- New standard dialog after ZM12
+        player:startEvent(85) -- New standard dialog after ZM12
     else
-        player:startEvent(43); -- Standard dialog
+        player:startEvent(43) -- Standard dialog
     end
 
 end

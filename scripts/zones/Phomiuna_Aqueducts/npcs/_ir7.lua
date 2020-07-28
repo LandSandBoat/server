@@ -23,7 +23,7 @@ end
 
 function onTrigger(player,npc)
     if (player:getXPos() <= -71) then
-        npc:openDoor(15); -- Retail timed
+        npc:openDoor(15) -- Retail timed
     elseif (npc:getAnimation() == 9) then -- don't want it to say the door is locked when it's wide open!
         player:messageSpecial(ID.text.DOOR_LOCKED,1660)
     end

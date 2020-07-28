@@ -45,14 +45,14 @@ function onTrigger(player,npc)
         if (miniQuestForORB_CS == 0) then
             player:startEvent(24); --
         elseif (miniQuestForORB_CS == 99) then
-            player:startEvent(22); -- Start mini quest
+            player:startEvent(22) -- Start mini quest
         elseif (miniQuestForORB_CS == 1 and countRedPoolForORB ~= 15) then
-            player:startEvent(21); -- During mini quest
+            player:startEvent(21) -- During mini quest
         elseif (miniQuestForORB_CS == 1 and countRedPoolForORB == 15) then
-            player:startEvent(25,0,0,0,tpz.ki.CRIMSON_ORB); -- Finish mini quest
+            player:startEvent(25,0,0,0,tpz.ki.CRIMSON_ORB) -- Finish mini quest
         end
     else
-        player:startEvent(24); -- Standard dialog
+        player:startEvent(24) -- Standard dialog
     end
 
 end

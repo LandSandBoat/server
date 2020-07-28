@@ -22,9 +22,9 @@ function onTrigger(player,npc)
         player:startEvent(261)
 
     elseif (Quotas_Status == 3) then
-        player:startEvent(264); -- Someone was just asking about that earring.
+        player:startEvent(264) -- Someone was just asking about that earring.
     elseif (Quotas_Status == 4) then
-        player:startEvent(265); -- They'll be happy if you return it.
+        player:startEvent(265) -- They'll be happy if you return it.
     -- Standard dialog
     else
         player:startEvent(260)

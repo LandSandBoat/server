@@ -19,21 +19,21 @@ function onTrigger(player,npc)
 
     local TrialByIce = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.TRIAL_BY_ICE)
     local WhisperOfFrost = player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)
-    local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
+    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local ClassReunion = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
 
     ------------------------------------------------------------
     -- Class Reunion
     if (ClassReunion == 1 and ClassReunionProgress == 4) then
-        player:startEvent(713,0,1171,0,0,0,0,0,0); -- he gives you an ice pendulum and wants you to go to Cloister of Frost
+        player:startEvent(713,0,1171,0,0,0,0,0,0) -- he gives you an ice pendulum and wants you to go to Cloister of Frost
     elseif (ClassReunion == 1 and ClassReunionProgress == 5 and player:hasItem(1171) == false) then
-        player:startEvent(712,0,1171,0,0,0,0,0,0); -- lost the ice pendulum need another one
+        player:startEvent(712,0,1171,0,0,0,0,0,0) -- lost the ice pendulum need another one
     ------------------------------------------------------------
     elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByIce_date"))) then
-        player:startEvent(706,0,tpz.ki.TUNING_FORK_OF_ICE); -- Start and restart quest "Trial by ice"
+        player:startEvent(706,0,tpz.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
     elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
-        player:startEvent(718,0,tpz.ki.TUNING_FORK_OF_ICE); -- Defeat against Shiva : Need new Fork
+        player:startEvent(718,0,tpz.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
     elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost == false) then
         player:startEvent(707,0,tpz.ki.TUNING_FORK_OF_ICE,4)
     elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost) then
@@ -47,7 +47,7 @@ function onTrigger(player,npc)
 
         player:startEvent(709,0,tpz.ki.TUNING_FORK_OF_ICE,4,0,numitem)
     else
-        player:startEvent(710); -- Standard dialog
+        player:startEvent(710) -- Standard dialog
     end
 
 end
@@ -70,10 +70,10 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.TUNING_FORK_OF_ICE)
     elseif (csid == 709) then
         local item = 0
-        if (option == 1) then item = 17492;         -- Shiva's Claws
-        elseif (option == 2) then item = 13242;  -- Ice Belt
-        elseif (option == 3) then item = 13561;  -- Ice Ring
-        elseif (option == 4) then item = 1207;     -- Rust 'B' Gone
+        if (option == 1) then item = 17492         -- Shiva's Claws
+        elseif (option == 2) then item = 13242  -- Ice Belt
+        elseif (option == 3) then item = 13561  -- Ice Ring
+        elseif (option == 4) then item = 1207     -- Rust 'B' Gone
         end
 
         if (player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6)) then
@@ -81,17 +81,17 @@ function onEventFinish(player,csid,option)
         else
             if (option == 5) then
                 player:addGil(GIL_RATE*10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*10000); -- Gil
+                player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*10000) -- Gil
             elseif (option == 6) then
-                player:addSpell(302); -- Avatar
+                player:addSpell(302) -- Avatar
                 player:messageSpecial(ID.text.SHIVA_UNLOCKED,0,0,4)
             else
                 player:addItem(item)
-                player:messageSpecial(ID.text.ITEM_OBTAINED,item); -- Item
+                player:messageSpecial(ID.text.ITEM_OBTAINED,item) -- Item
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_ICE)
-            player:delKeyItem(tpz.ki.WHISPER_OF_FROST); --Whisper of Frost, as a trade for the above rewards
-            player:setCharVar("TrialByIce_date", os.date("%j")); -- %M for next minute, %j for next day
+            player:delKeyItem(tpz.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
+            player:setCharVar("TrialByIce_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end

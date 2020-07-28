@@ -34,7 +34,7 @@ function onZoneIn( player, prevZone)
     elseif (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
         cs = 50
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
-        cs = 52; -- go north no parameters (0 = north NE 1 E 2 SE 3 S 4 SW 5 W6 NW 7 @ as the 6th parameter)
+        cs = 52 -- go north no parameters (0 = north NE 1 E 2 SE 3 S 4 SW 5 W6 NW 7 @ as the 6th parameter)
     elseif (player:getCurrentMission(ASA) == tpz.mission.id.asa.BURGEONING_DREAD and prevZone == tpz.zone.WINDURST_WOODS and
         player:hasStatusEffect(tpz.effect.MOUNTED) == false ) then
         cs = 71
@@ -52,7 +52,7 @@ end
 
 function onEventUpdate( player, csid, option)
     if (csid == 50) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 52) then
         if (player:getPreviousZone() == tpz.zone.WINDURST_WOODS or player:getPreviousZone() == tpz.zone.WEST_SARUTABARUTA) then
             if (player:getZPos() < 570) then
@@ -81,7 +81,7 @@ function onEventFinish( player, csid, option)
         player:delKeyItem(tpz.ki.FIFTH_GLOWING_MANA_ORB)
         player:delKeyItem(tpz.ki.SIXTH_GLOWING_MANA_ORB)
     elseif (csid == 50) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 71) then
         player:completeMission(ASA,tpz.mission.id.asa.BURGEONING_DREAD)
         player:addMission(ASA,tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)

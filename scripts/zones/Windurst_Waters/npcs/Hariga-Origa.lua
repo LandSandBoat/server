@@ -46,7 +46,7 @@ function onTrigger(player,npc)
         player:startEvent(381)
 
     else
-        player:startEvent(372); -- The line will never be executed
+        player:startEvent(372) -- The line will never be executed
     end
 
 end

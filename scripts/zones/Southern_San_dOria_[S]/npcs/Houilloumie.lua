@@ -8,7 +8,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:startEvent(103); -- it says player:startEvent(103)
+    player:startEvent(103) -- it says player:startEvent(103)
     -- the player:startEvent basically means start CutScene
 end
 

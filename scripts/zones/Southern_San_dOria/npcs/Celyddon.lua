@@ -27,7 +27,7 @@ function onTrigger(player,npc)
     ASquiresTest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
 
     if ASquiresTest == (QUEST_AVAILABLE) then
-        player:startEvent(618); -- im looking for the examiner
+        player:startEvent(618) -- im looking for the examiner
     elseif ASquiresTest == (QUEST_ACCEPTED) then
         player:startEvent(619) -- i found the examiner but said i had to use sword
     else

@@ -25,14 +25,14 @@ function onInitialize(zone)
     SetServerVariable("[C_Temenos_4th]UniqueID",0)
     SetServerVariable("[C_Temenos_4th_II]UniqueID",0)
 
-    zone:registerRegion(1,  378,70,-186    ,382,72,-182); -- 'Temenos_Western_Tower'    380 71 -184
-    zone:registerRegion(2,  378,70,373    ,382,72,377); -- 'Temenos_Northern_Tower'   380 71 375
-    zone:registerRegion(3,  378,-4,93    ,382,4,98); -- 'Temenos_Eastern_Tower'    380 -2 96
-    zone:registerRegion(4,  578,-4,-546    ,582,4,-542); -- 'Central_Temenos_Basement' 580 -2 -544
-    zone:registerRegion(5,  258,-164,-506    ,262,-160,-502); -- 'Central_Temenos_1st_Floor' 260 -162 -504
-    zone:registerRegion(6,  18,-4,-546    ,22,4,-542); -- 'Central_Temenos_2nd_Floor' 20 -2 -544
-    zone:registerRegion(7,  -298,-164,-502    ,-294,-160,-498); -- 'Central_Temenos_3rd_Floor' -296 -162 -500
-    zone:registerRegion(8,  -542,-4,-586    ,-538,4,-582); -- 'Central_Temenos_4th_Floor'  -540 -2  -584
+    zone:registerRegion(1,  378,70,-186    ,382,72,-182) -- 'Temenos_Western_Tower'    380 71 -184
+    zone:registerRegion(2,  378,70,373    ,382,72,377) -- 'Temenos_Northern_Tower'   380 71 375
+    zone:registerRegion(3,  378,-4,93    ,382,4,98) -- 'Temenos_Eastern_Tower'    380 -2 96
+    zone:registerRegion(4,  578,-4,-546    ,582,4,-542) -- 'Central_Temenos_Basement' 580 -2 -544
+    zone:registerRegion(5,  258,-164,-506    ,262,-160,-502) -- 'Central_Temenos_1st_Floor' 260 -162 -504
+    zone:registerRegion(6,  18,-4,-546    ,22,4,-542) -- 'Central_Temenos_2nd_Floor' 20 -2 -544
+    zone:registerRegion(7,  -298,-164,-502    ,-294,-160,-498) -- 'Central_Temenos_3rd_Floor' -296 -162 -500
+    zone:registerRegion(8,  -542,-4,-586    ,-538,4,-582) -- 'Central_Temenos_4th_Floor'  -540 -2  -584
 end
 
 

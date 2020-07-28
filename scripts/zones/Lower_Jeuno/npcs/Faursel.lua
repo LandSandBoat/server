@@ -47,25 +47,25 @@ function onTrigger(player,npc)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
     if (questStatus == QUEST_AVAILABLE and ENABLE_TOAU == 1) then
-        player:startEvent(10062); -- Offer Quest, First Dialog.
+        player:startEvent(10062) -- Offer Quest, First Dialog.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 0) then
-        player:startEvent(10063); -- Offically offer quest, Second Dialog.
+        player:startEvent(10063) -- Offically offer quest, Second Dialog.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 1) then
-        player:startEvent(10064); -- Player did not make a decision during Second Dialog. Offering the list again.
+        player:startEvent(10064) -- Player did not make a decision during Second Dialog. Offering the list again.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 2 and passReady ~= true) then
-        player:startEvent(10066); -- Bought Bording Pass, Player must wait One Day.
+        player:startEvent(10066) -- Bought Bording Pass, Player must wait One Day.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 3 and passReady ~= true) then
-        player:startEvent(10072); -- Quested for Bording Pass, Player must wait One Day.
+        player:startEvent(10072) -- Quested for Bording Pass, Player must wait One Day.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 2 and passReady == true) then
-        player:startEvent(10067); -- Bought Bording Pass, ready to issue.
+        player:startEvent(10067) -- Bought Bording Pass, ready to issue.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 3 and passReady == true) then
-        player:startEvent(10070); -- Quested for Bording Pass, ready to issue.
+        player:startEvent(10070) -- Quested for Bording Pass, ready to issue.
     elseif (questStatus == QUEST_ACCEPTED and questStatusVar == 4) then
-        player:startEvent(10068); -- Bought Bording Pass, returned from the Woodlands.
+        player:startEvent(10068) -- Bought Bording Pass, returned from the Woodlands.
     elseif (questStatus == QUEST_COMPLETED) then
-        player:startEvent(10071); -- Regular chat dialog after the quest.
+        player:startEvent(10071) -- Regular chat dialog after the quest.
     else
-        player:startEvent(10065); -- Regular chat dialog.
+        player:startEvent(10065) -- Regular chat dialog.
     end
 
 end

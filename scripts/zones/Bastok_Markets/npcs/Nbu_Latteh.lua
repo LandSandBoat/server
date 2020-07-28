@@ -20,7 +20,7 @@ function onTrigger(player,npc)
     local questStatus = player:getCharVar("MomTheAdventurer_Event")
 
     if (player:needToZone()) then
-        player:startEvent(127); -- chat about my work
+        player:startEvent(127) -- chat about my work
     elseif (pFame < 2 and momTheAdventurer ~= QUEST_ACCEPTED and questStatus == 0) then
         player:startEvent(230)
     elseif (momTheAdventurer >= QUEST_ACCEPTED and questStatus == 2) then
@@ -48,7 +48,7 @@ function onEventFinish(player,csid,option)
         if (player:getFreeSlotsCount(0) > 0) then
             player:setCharVar("MomTheAdventurer_Event",1)
             player:addItem(4096)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,4096); -- Fire Crystal
+            player:messageSpecial(ID.text.ITEM_OBTAINED,4096) -- Fire Crystal
             if (player:getQuestStatus(BASTOK,tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_AVAILABLE) then
                 player:addQuest(BASTOK,tpz.quest.id.bastok.MOM_THE_ADVENTURER)
             end

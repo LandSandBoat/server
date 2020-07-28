@@ -14,7 +14,7 @@ require("scripts/globals/missions")
 function onTrigger(player,npc)
 
     if (player:getNation() ~= tpz.nation.WINDURST) then
-        player:startEvent(87); -- for other nation
+        player:startEvent(87) -- for other nation
     else
         CurrentMission = player:getCurrentMission(WINDURST)
         MissionStatus = player:getCharVar("MissionStatus")
@@ -23,7 +23,7 @@ function onTrigger(player,npc)
 
         if (CurrentMission <= tpz.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (CurrentMission == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
             if (cs == 0) then
-                player:showText(npc,ORIGINAL_MISSION_OFFSET + offset); -- dialog after accepting mission
+                player:showText(npc,ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
                 player:startEvent(cs,p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8])
             end

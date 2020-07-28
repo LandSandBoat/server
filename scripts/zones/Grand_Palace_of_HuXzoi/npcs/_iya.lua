@@ -25,7 +25,7 @@ end
 function onEventFinish(player,csid,option)
 
     if (csid == 52 and option == 1) then
-        player:setPos(-419.995,0,248.483,191,35); -- To The Garden of RuHmet {R}
+        player:setPos(-419.995,0,248.483,191,35) -- To The Garden of RuHmet {R}
     elseif (csid == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,14672)

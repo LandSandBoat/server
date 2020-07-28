@@ -9,7 +9,7 @@
 
 function onTrade(player,npc,trade)
 
---    player:startEvent(514); -- event that follows egg trading
+--    player:startEvent(514) -- event that follows egg trading
 end
 
 function onTrigger(player,npc)

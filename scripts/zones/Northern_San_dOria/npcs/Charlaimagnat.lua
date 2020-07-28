@@ -28,13 +28,13 @@ function onTrigger(player,npc)
     local TheMissingPiece = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.THE_MISSING_PIECE)
 
     if (TheMissingPiece == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC) and player:hasKeyItem(tpz.ki.LETTER_FROM_ALFESAR)) then
-        player:startEvent(703); -- Continuing the Quest
+        player:startEvent(703) -- Continuing the Quest
     elseif (TheMissingPiece == QUEST_ACCEPTED and realday < player:getCharVar("TheMissingPiece_date")) then
-        player:startEvent(704); -- didn't wait a day yet
+        player:startEvent(704) -- didn't wait a day yet
     elseif (TheMissingPiece == QUEST_ACCEPTED and realday >= player:getCharVar("TheMissingPiece_date")) then
-        player:startEvent(705); -- Quest Completed
+        player:startEvent(705) -- Quest Completed
     else
-        player:startEvent(702); -- standard dialogue
+        player:startEvent(702) -- standard dialogue
     end
 
 end

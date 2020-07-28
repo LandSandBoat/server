@@ -12,7 +12,7 @@ end
 
 function onTrigger(player,npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 2) then
-        player:startEvent(51); --COP event
+        player:startEvent(51) --COP event
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.SAVE_THE_CHILDREN and player:getCharVar("MissionStatus") < 2) then
         player:startEvent(693)
     elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.SAVE_THE_CHILDREN) and player:getCharVar("OptionalCSforSTC") == 1) then

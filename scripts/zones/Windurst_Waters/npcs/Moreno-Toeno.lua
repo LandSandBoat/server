@@ -14,7 +14,7 @@ require("scripts/globals/titles")
 
 function onTrade(player,npc,trade)
     if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847,1) == true and trade:hasItemQty(4368,1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
-        player:startEvent(440,250,847,4368); -- -- Quest Finish
+        player:startEvent(440,250,847,4368) -- -- Quest Finish
     end
 end
 
@@ -35,9 +35,9 @@ function onTrigger(player,npc)
         local alreadyCompleted = player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.A_TESTING_TIME)
         if (MissionStatus == 0) then
             if (alreadyCompleted == false) then
-                player:startEvent(182); -- First start at tahrongi
+                player:startEvent(182) -- First start at tahrongi
             else
-                player:startEvent(687); -- Repeat at buburimu
+                player:startEvent(687) -- Repeat at buburimu
             end
         elseif (MissionStatus == 1) then
             start_time = player:getCharVar("testingTime_start_time")
@@ -92,21 +92,21 @@ function onTrigger(player,npc)
     elseif (teacherstatus == QUEST_AVAILABLE) then
         prog = player:getCharVar("QuestTeachersPet_prog")
         if (prog == 0) then
-            player:startEvent(437); -- Before Quest
+            player:startEvent(437) -- Before Quest
             player:setCharVar("QuestTeachersPet_prog",1)
         elseif (prog == 1) then
-            player:startEvent(438,0,847,4368); -- Quest Start
+            player:startEvent(438,0,847,4368) -- Quest Start
         end
     elseif (teacherstatus == QUEST_ACCEPTED) then
-        player:startEvent(439,0,847,4368); -- Quest Reminder
+        player:startEvent(439,0,847,4368) -- Quest Reminder
     elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
-        player:startEvent(444); -- During Making the GRADE
+        player:startEvent(444) -- During Making the GRADE
     else   --  Will run through these iffame is not high enough for other quests
         rand = math.random(1,2)
         if (rand == 1) then
-            player:startEvent(441); -- Standard Conversation 1
+            player:startEvent(441) -- Standard Conversation 1
         else
-            player:startEvent(469); -- Standard Conversation 2
+            player:startEvent(469) -- Standard Conversation 2
         end
     end
 

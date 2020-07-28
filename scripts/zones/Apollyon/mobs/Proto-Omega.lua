@@ -54,7 +54,7 @@ function onMobFight(mob,target)
             mob:setMod(tpz.mod.UDMGRANGE, -50)
             mob:setMod(tpz.mod.UDMGMAGIC, -50)
             mob:setMod(tpz.mod.MOVE, 100)
-            mob:addStatusEffect(tpz.effect.REGAIN,7,3,0); -- The final form has Regain,
+            mob:addStatusEffect(tpz.effect.REGAIN,7,3,0) -- The final form has Regain,
             mob:getStatusEffect(tpz.effect.REGAIN):setFlag(tpz.effectFlag.DEATH)
             currentForm = 2
             mob:setLocalVar("form", currentForm)

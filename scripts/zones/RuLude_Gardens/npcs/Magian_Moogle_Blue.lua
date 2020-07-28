@@ -27,7 +27,7 @@ function onTrigger(player,npc)
     if (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
         player:startEvent(10141)
     else
-        player:startEvent(10142); -- parameters unknown
+        player:startEvent(10142) -- parameters unknown
     end
 end
 

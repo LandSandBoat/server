@@ -72,7 +72,7 @@ function onEventFinish(player,csid,option)
     elseif (csid == 8) then
         player:setCharVar("MissionStatus",6)
     elseif (csid == 32) then
-        player:setCharVar("Cutscenes_8-2",0); -- dont need this var now that mission is flagged and cs have been triggered to progress
+        player:setCharVar("Cutscenes_8-2",0) -- dont need this var now that mission is flagged and cs have been triggered to progress
         player:setCharVar("MissionStatus",1)
     elseif (csid == 76) then
         finishMissionTimeline(player,3,csid,option)

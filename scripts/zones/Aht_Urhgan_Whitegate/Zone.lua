@@ -14,11 +14,11 @@ require("scripts/globals/zone")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1,57,-1,-70,62,1,-65); -- Sets Mark for "Got It All" Quest cutscene.
-    zone:registerRegion(2,-96,-7,121,-64,-5,137); -- Sets Mark for "Vanishing Act" Quest cutscene.
-    zone:registerRegion(3,14,-7,-65,37,-2,-41); -- TOAU Mission 1 CS area
+    zone:registerRegion(1,57,-1,-70,62,1,-65) -- Sets Mark for "Got It All" Quest cutscene.
+    zone:registerRegion(2,-96,-7,121,-64,-5,137) -- Sets Mark for "Vanishing Act" Quest cutscene.
+    zone:registerRegion(3,14,-7,-65,37,-2,-41) -- TOAU Mission 1 CS area
     zone:registerRegion(4,75,-3,25,90,1,59)
-    zone:registerRegion(5,73,-7,-137,95,-3,-115); -- entering Shaharat Teahouse
+    zone:registerRegion(5,73,-7,-137,95,-3,-115) -- entering Shaharat Teahouse
 end
 
 function onZoneIn(player,prevZone)
@@ -219,9 +219,9 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.ALLIED_COUNCIL_SUMMONS)
         player:addMission(TOAU,tpz.mission.id.toau.ALLIED_RUMBLINGS)
     elseif (csid == 797) then
-        player:setCharVar("AgainstAllOdds",1); -- Set For Corsair BCNM
-        player:addQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS); -- Start of af 3 not completed yet
-        player:addKeyItem(tpz.ki.LIFE_FLOAT); -- BCNM KEY ITEM TO ENTER BCNM
+        player:setCharVar("AgainstAllOdds",1) -- Set For Corsair BCNM
+        player:addQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
+        player:addKeyItem(tpz.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIFE_FLOAT)
     end
 end;

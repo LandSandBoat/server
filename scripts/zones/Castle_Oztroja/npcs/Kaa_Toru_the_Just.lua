@@ -30,7 +30,7 @@ function onEventFinish(player,csid,option)
             player:delKeyItem(tpz.ki.HOLY_ONES_INVITATION)
             player:addKeyItem(tpz.ki.HOLY_ONES_OATH)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.HOLY_ONES_OATH)
-            player:addItem(13134); -- Ashura Necklace
+            player:addItem(13134) -- Ashura Necklace
             player:messageSpecial(ID.text.ITEM_OBTAINED,13134)
             player:setCharVar("MissionStatus",3)
         end

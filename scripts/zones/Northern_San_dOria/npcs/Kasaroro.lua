@@ -43,7 +43,7 @@ function onTrigger(player,npc)
             elseif (MissionStatus == 4) then
                 player:startEvent(549)
             elseif (MissionStatus == 5) then
-                player:startEvent(550); -- done with Sandy first path, now go to bastok
+                player:startEvent(550) -- done with Sandy first path, now go to bastok
             end
         elseif (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
             if (MissionStatus == 8) then

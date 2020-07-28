@@ -17,9 +17,9 @@ end
 function onTrigger(player,npc)
     -- Curses, Foiled A_Golem!?
     if (player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)) then
-        player:startEvent(14); -- deliver spell
+        player:startEvent(14) -- deliver spell
     elseif (player:hasKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)) then
-        player:startEvent(13); -- spell erased, try again!
+        player:startEvent(13) -- spell erased, try again!
 
     -- standard dialog
     else
@@ -35,6 +35,6 @@ function onEventFinish(player,csid,option)
     -- Curses, Foiled A_Golem!?
     if (csid == 14) then
         player:setCharVar("foiledagolemdeliverycomplete",1)
-        player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL); -- remove key item
+        player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) -- remove key item
     end
 end;

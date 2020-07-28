@@ -46,11 +46,11 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_ACCEPTED) then
         player:startEvent(325)
     elseif (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 1) then
-        player:startEvent(327,0,0,MaxKI); -- cs for "The Truth Beckons" completion
+        player:startEvent(327,0,0,MaxKI) -- cs for "The Truth Beckons" completion
     elseif (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) ~= QUEST_COMPLETED) then
-        player:startEvent(326); -- Pre "The Truth Beckons" Menu
+        player:startEvent(326) -- Pre "The Truth Beckons" Menu
     elseif (player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED) then
-        player:startEvent(328,0,StonesStock,StonesKI,isCap,1,1,1,3); -- Post "The Truth Beckons" Menu
+        player:startEvent(328,0,StonesStock,StonesKI,isCap,1,1,1,3) -- Post "The Truth Beckons" Menu
     -- elseif
         -- player:startEvent(332)
     end

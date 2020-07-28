@@ -45,22 +45,22 @@ function onTrigger(player,npc)
             player:startEvent(160)
             player:setCharVar("theTalekeeperTruthCS",2)
         elseif (theTalekeeperTruthCS == 2) then
-            player:startEvent(161); -- Start Quest "The Talekeeper's Truth"
+            player:startEvent(161) -- Start Quest "The Talekeeper's Truth"
         else
-            player:startEvent(32); -- Standard dialog
+            player:startEvent(32) -- Standard dialog
         end
     elseif (theTalekeeperTruthCS == 4) then
-        player:startEvent(163); -- During Quest "The Talekeeper's Truth"
+        player:startEvent(163) -- During Quest "The Talekeeper's Truth"
     elseif (theTalekeeperTruthCS == 5 and VanadielDayOfTheYear() ~= player:getCharVar("theTalekeeperTruth_timer")) then
-        player:startEvent(165); -- Finish Quest "The Talekeeper's Truth"
+        player:startEvent(165) -- Finish Quest "The Talekeeper's Truth"
     elseif (theTalekeeperTruthCS == 5 or (theTalekeeperTruth == QUEST_COMPLETED and (player:needToZone() or VanadielDayOfTheYear() == Wait1DayForAF3))) then
-        player:startEvent(166); -- New standard dialog after "The Talekeeper's Truth"
+        player:startEvent(166) -- New standard dialog after "The Talekeeper's Truth"
     elseif (player:needToZone() == false and VanadielDayOfTheYear() ~= Wait1DayForAF3 and Wait1DayForAF3 ~= 0 and theTalekeeperGiftCS == 0 and player:getMainJob() == tpz.job.WAR) then
         player:startEvent(170)
         player:setCharVar("theTalekeeperGiftCS",1)
         player:setCharVar("DeidoggWait1DayForAF3",0)
     else
-        player:startEvent(32); -- Standard dialog
+        player:startEvent(32) -- Standard dialog
     end
 
 end
@@ -82,10 +82,10 @@ function onEventFinish(player,csid,option)
         player:setCharVar("theTalekeeperTruth_timer",VanadielDayOfTheYear())
     elseif (csid == 165) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,14089); -- Fighter's Calligae
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,14089) -- Fighter's Calligae
         else
             player:addItem(14089)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 14089); -- Fighter's Calligae
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 14089) -- Fighter's Calligae
             player:setCharVar("theTalekeeperTruthCS",0)
             player:setCharVar("theTalekeeperTruth_timer",0)
             player:setCharVar("DeidoggWait1DayForAF3",VanadielDayOfTheYear())

@@ -17,7 +17,7 @@ function onTrade(player,npc,trade)
 
     if (player:getQuestStatus(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(13095,1) and trade:getItemCount() == 1) then
-            player:startEvent(127); -- Finish quest "The Sand Charm"
+            player:startEvent(127) -- Finish quest "The Sand Charm"
         end
     end
 
@@ -35,7 +35,7 @@ end
 function onTrigger(player,npc)
 
     if (player:getCharVar("theSandCharmVar") == 3) then
-        player:startEvent(126,13095); -- During quest "The Sand Charm" - 3rd dialog
+        player:startEvent(126,13095) -- During quest "The Sand Charm" - 3rd dialog
     elseif (player:sendGuild(528,8,23,4)) then
         player:showText(npc,ID.text.GOLDSMITHING_GUILD)
     end

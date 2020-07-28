@@ -13,7 +13,7 @@ function onTrade(player,npc,trade)
     local nm = GetMobByID(ID.mob.IXAERN_MNK)
 
     if (not nm:isSpawned()) then
-        local chance = 0; -- percent chance that an item will drop.
+        local chance = 0 -- percent chance that an item will drop.
 
         if (npcUtil.tradeHas(trade, {{1900,3}})) then
             chance = 100
@@ -25,7 +25,7 @@ function onTrade(player,npc,trade)
 
         if (chance > 0) then
             player:confirmTrade()
-            npc:setLocalVar("[SEA]IxAern_DropRate", chance); -- adjusts drops in IxAern (MNK)'s onMobSpawn.
+            npc:setLocalVar("[SEA]IxAern_DropRate", chance) -- adjusts drops in IxAern (MNK)'s onMobSpawn.
             npc:setStatus(tpz.status.DISAPPEAR)
 
             -- spawn Ix'Aern (MNK) and minions

@@ -15,9 +15,9 @@ end
 
 function onTrigger(player,npc)
     if (player:getCharVar("MeaChipRegistration") == 1) then
-        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+6); -- Device seems to be functioning correctly.
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+6) -- Device seems to be functioning correctly.
     else
-        player:startEvent(163); -- Hexagonal Cones
+        player:startEvent(163) -- Hexagonal Cones
     end
 end
 
@@ -26,8 +26,8 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 164) then
-        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+4,478); -- You fit..
-        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+5);     -- Device has been repaired
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+4,478) -- You fit..
+        player:messageSpecial(ID.text.NO_RESPONSE_OFFSET+5)     -- Device has been repaired
         player:setCharVar("MeaChipRegistration",1)
     end
 end;

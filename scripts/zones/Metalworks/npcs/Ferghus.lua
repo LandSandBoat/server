@@ -15,11 +15,11 @@ function onTrigger(player,npc)
     local pFame = player:getFameLevel(BASTOK)
 
     if (TooManyChefs == QUEST_AVAILABLE and pFame >= 5) then
-        player:startEvent(946); -- Start Quest "Too Many Chefs"
+        player:startEvent(946) -- Start Quest "Too Many Chefs"
     elseif (player:getCharVar("TOO_MANY_CHEFS") == 4) then -- after trade to Leonhardt
         player:startEvent(947)
     else
-        player:startEvent(420); -- Standard
+        player:startEvent(420) -- Standard
     end
 end
 

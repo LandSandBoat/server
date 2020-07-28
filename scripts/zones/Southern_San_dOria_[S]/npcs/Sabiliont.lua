@@ -16,7 +16,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:showText(npc, 6999); -- (Couldn't find default dialogue) What are you doing here? This is no place for civillians
+    player:showText(npc, 6999) -- (Couldn't find default dialogue) What are you doing here? This is no place for civillians
 end
 
 function onEventUpdate(player,csid,option)

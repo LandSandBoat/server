@@ -43,9 +43,9 @@ function onTrigger(player,npc)
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(202)
         elseif (progress == 5 or failed == 6) then
-                player:startEvent(211);  -- asking for giant fish bones
+                player:startEvent(211)  -- asking for giant fish bones
         elseif (progress >= 6 or failed >= 7) then
-            player:startEvent(247); -- happy with giant fish bones
+            player:startEvent(247) -- happy with giant fish bones
         end
     else
         player:startEvent(202)

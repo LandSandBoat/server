@@ -18,7 +18,7 @@ function onTrigger(player,npc)
     elseif (currentCOPMission  == tpz.mission.id.cop.SHELTERING_DOUBT and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(108)
     elseif (currentCOPMission  == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_Despachaire") == 0) then
-        player:startEvent(117); --117
+        player:startEvent(117) --117
     elseif (currentCOPMission  == tpz.mission.id.cop.THREE_PATHS and LouverancePathStatut == 0) then
         player:startEvent(118)
     elseif (currentCOPMission  == tpz.mission.id.cop.THREE_PATHS and LouverancePathStatut == 1 ) then

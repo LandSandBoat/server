@@ -13,12 +13,12 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 function onTrade(player,npc,trade)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         if (trade:hasItemQty(557,1) == true) then
-            player:startEvent(192); -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
+            player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
         elseif (trade:hasItemQty(556,1) == true) then
-            player:startEvent(196); -- Trade divination sphere, finish quest
+            player:startEvent(196) -- Trade divination sphere, finish quest
         end
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_ACCEPTED and trade:hasItemQty(12507,1) == true and trade:getItemCount() == 1) then
-        player:startEvent(203); -- Finish "Never to return" quest
+        player:startEvent(203) -- Finish "Never to return" quest
     end
 end
 
@@ -34,15 +34,15 @@ function onTrigger(player,npc)
 
 
     if (JFame >= 2 and YourCrystalBall == QUEST_AVAILABLE) then
-        player:startEvent(194); -- Start "Your Crystal Ball" quest
+        player:startEvent(194) -- Start "Your Crystal Ball" quest
 
     elseif (JFame >= 5 and YourCrystalBall == QUEST_COMPLETED and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_AVAILABLE and player:getCharVar("QuestNeverToReturn_day") ~= VanadielDayOfTheYear()) then
         prog = player:getCharVar("QuestNeverToReturn_prog")
         if (prog <= 2) then
             fortune = math.random(1,99)
-            player:startEvent(204,fortune); -- Required to get fortune read 3x on 3 diff game days before quest is kicked off
+            player:startEvent(204,fortune) -- Required to get fortune read 3x on 3 diff game days before quest is kicked off
         elseif (prog == 3) then
-            player:startEvent(202); -- Start "Never to return" quest
+            player:startEvent(202) -- Start "Never to return" quest
         end
 
     --if searching for right words *prereq* CS has been activated
@@ -67,7 +67,7 @@ function onTrigger(player,npc)
         player:startEvent(17)
 
     else
-        player:startEvent(193); -- Standard dialog
+        player:startEvent(193) -- Standard dialog
     end
 end
 
@@ -83,8 +83,8 @@ function onEventFinish(player,csid,option)
         player:tradeComplete(trade)
         player:completeQuest(JEUNO,tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL)
     elseif (csid == 204 and option == 0) then
-        player:addCharVar("QuestNeverToReturn_prog", 1);  -- Keep track of how many times the players fortune has been read
-        player:setCharVar("QuestNeverToReturn_day", VanadielDayOfTheYear()); -- new vanadiel day
+        player:addCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
+        player:setCharVar("QuestNeverToReturn_day", VanadielDayOfTheYear()) -- new vanadiel day
     elseif (csid == 202 and option == 0) then
         player:addQuest(JEUNO,tpz.quest.id.jeuno.NEVER_TO_RETURN)
         player:setCharVar("QuestNeverToReturn_prog", 0)

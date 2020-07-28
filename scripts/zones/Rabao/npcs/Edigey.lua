@@ -42,7 +42,7 @@ function onEventFinish(player,csid,option)
         player:setCharVar("DontForgetAntidoteVar",0)
         player:tradeComplete()
         player:addTitle(tpz.title.DESERT_HUNTER)
-        player:addItem(16974); -- Dotanuki
+        player:addItem(16974) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16974)
         player:completeQuest(OUTLANDS,tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:addFame(RABAO,60)

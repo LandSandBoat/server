@@ -13,10 +13,10 @@ end
 function onTrigger(player,npc)
 
     if (player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getCharVar("GiftsOfGriffonProg") == 1) then
-        player:startEvent(23); -- Gifts of Griffon Start
+        player:startEvent(23) -- Gifts of Griffon Start
 
     elseif (player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_ACCEPTED and player:getCharVar("GiftsOfGriffonProg") == 2 and player:getCharVar("GiftsOfGriffonPlumes") == 127) then
-        player:startEvent(24); -- Gifts of Griffon Quest Complete
+        player:startEvent(24) -- Gifts of Griffon Quest Complete
 
     elseif (player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) == QUEST_AVAILABLE and player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_COMPLETED and player:getMainLvl() >= 15) then
         player:startEvent(47) -- Claws of Griffon Start
@@ -36,7 +36,7 @@ function onTrigger(player,npc)
             player:startEvent(60)
         end
     else
-        player:startEvent(32); -- Default Dialogue
+        player:startEvent(32) -- Default Dialogue
     end
 end
 
@@ -51,7 +51,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,2528)
         else
             player:setCharVar("GiftsOfGriffonProg",2)
-            player:addItem(2528,7); -- Plume d'or
+            player:addItem(2528,7) -- Plume d'or
             player:messageSpecial(ID.text.ITEM_OBTAINED,2528)
         end
 

@@ -24,13 +24,13 @@ function onTrade(player,npc,trade)
             TotalLeggings = Legging + TurnedInVar
             player:tradeComplete()
             player:setCharVar("shiningLeggings_nb",TotalLeggings)
-            player:startEvent(128,TotalLeggings); -- Update player on number of leggings turned in
+            player:startEvent(128,TotalLeggings) -- Update player on number of leggings turned in
         end
     else
         if (ShiningLeggings == QUEST_ACCEPTED) then
-            player:startEvent(128,TotalLeggings); -- Update player on number of leggings turned in, but doesn't accept anything other than leggings
+            player:startEvent(128,TotalLeggings) -- Update player on number of leggings turned in, but doesn't accept anything other than leggings
         else
-            player:startEvent(126); -- Give standard conversation if items are traded but no quest is accepted
+            player:startEvent(126) -- Give standard conversation if items are traded but no quest is accepted
         end
     end
 end
@@ -40,11 +40,11 @@ function onTrigger(player,npc)
     ShiningLeggings = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
     if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(NORG) >= 3) then
-        player:startEvent(127); -- Start Like Shining Leggings
+        player:startEvent(127) -- Start Like Shining Leggings
     elseif (ShiningLeggings == QUEST_ACCEPTED) then
-        player:startEvent(128,player:getCharVar("shiningSubligar_nb")); -- Update player on number of Leggings turned in
+        player:startEvent(128,player:getCharVar("shiningSubligar_nb")) -- Update player on number of Leggings turned in
     else
-        player:startEvent(126); -- Standard Conversation
+        player:startEvent(126) -- Standard Conversation
     end
 
 end
@@ -58,8 +58,8 @@ function onEventFinish(player,csid,option)
         player:addQuest(OUTLANDS,tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif (csid == 129) then
         player:tradeComplete()
-        player:addItem(4958); -- Scroll of Dokumori: Ichi
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 4958); -- Scroll of Dokumori: Ichi
+        player:addItem(4958) -- Scroll of Dokumori: Ichi
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 4958) -- Scroll of Dokumori: Ichi
         player:addFame(NORG,100)
         player:addTitle(tpz.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb",0)

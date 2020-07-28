@@ -14,7 +14,7 @@ function onTrigger(player,npc)
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,3) == false) then
         player:startEvent(10091)
     else
-        player:startEvent(30); -- Standard dialog
+        player:startEvent(30) -- Standard dialog
     end
 end
 

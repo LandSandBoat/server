@@ -24,17 +24,17 @@ function onTrigger(player,npc)
     local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
 
     if (bookwormStatus == QUEST_ACCEPTED and bookNotifications == false) then
-        player:startEvent(389); -- During Quest "Early Bird Catches the Bookworm" 1
+        player:startEvent(389) -- During Quest "Early Bird Catches the Bookworm" 1
     elseif (bookwormStatus == QUEST_ACCEPTED and bookNotifications and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 0) then
-        player:startEvent(390); -- During Quest "Early Bird Catches the Bookworm" 2
+        player:startEvent(390) -- During Quest "Early Bird Catches the Bookworm" 2
     elseif (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 1) then
-        player:startEvent(397); -- During Quest "Early Bird Catches the Bookworm" 3
+        player:startEvent(397) -- During Quest "Early Bird Catches the Bookworm" 3
     elseif (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") >= 2) then
-        player:startEvent(400); -- Finish Quest "Early Bird Catches the Bookworm"
+        player:startEvent(400) -- Finish Quest "Early Bird Catches the Bookworm"
     elseif (bookwormStatus == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(401); -- Standard dialog before player zone
+        player:startEvent(401) -- Standard dialog before player zone
     elseif (chasingStatus == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION) == false) then
-        player:startEvent(404,0,126); -- During Quest "Chasing Tales", tells you the book "A Song of Love" is overdue
+        player:startEvent(404,0,126) -- During Quest "Chasing Tales", tells you the book "A Song of Love" is overdue
     elseif (player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION) and player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) == false) then
         player:startEvent(405,0,126)
     elseif (player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 and player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) == false) then
@@ -46,7 +46,7 @@ function onTrigger(player,npc)
     -----------------------------------------------------------------
     -- Class Reunion
     elseif (ClassReunion == 1 and ClassReunionProgress >= 3 and talk2 ~= 1) then
-        player:startEvent(816); -- he tells you about Uran-Mafran
+        player:startEvent(816) -- he tells you about Uran-Mafran
     -----------------------------------------------------------------
     else
         player:startEvent(371)

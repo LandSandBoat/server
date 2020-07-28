@@ -10,7 +10,7 @@ function onTrade(player,npc,trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 2) then
         if (trade:hasItemQty(1160,1) and trade:getItemCount() == 1) then -- Frag Rock
-            player:startEvent(99); -- Bastok Mission 6-2
+            player:startEvent(99) -- Bastok Mission 6-2
         end
     end
 

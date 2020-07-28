@@ -25,13 +25,13 @@ function onTrigger(player,npc)
     end
 
     if (ZilartMission == tpz.mission.id.zilart.WELCOME_TNORG) then
-        player:startEvent(2); -- Zilart Missions 2
+        player:startEvent(2) -- Zilart Missions 2
     elseif (ZilartMission == tpz.mission.id.zilart.ROMAEVE and player:getCharVar("ZilartStatus") <= 1) then
-        player:startEvent(3); -- Zilart Missions 9
+        player:startEvent(3) -- Zilart Missions 9
     elseif (ZilartMission == tpz.mission.id.zilart.THE_HALL_OF_THE_GODS) then
-        player:startEvent(169); -- Zilart Missions 11
+        player:startEvent(169) -- Zilart Missions 11
     elseif (currentMission == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 1) then
-        player:startEvent(98); -- Bastok Mission 6-2
+        player:startEvent(98) -- Bastok Mission 6-2
     elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then
         player:startEvent(172)
     else

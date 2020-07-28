@@ -11,7 +11,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    player:messageSpecial(ID.text.ON_WAY_TO_MHAURA,0,0); -- Earth Time, Vana Hours. Needs a get-time function for boat?
+    player:messageSpecial(ID.text.ON_WAY_TO_MHAURA,0,0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
 end
 
 function onEventUpdate(player,csid,option)

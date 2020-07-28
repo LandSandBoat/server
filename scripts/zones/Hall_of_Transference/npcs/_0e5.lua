@@ -23,6 +23,6 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 160) then
-        player:setPos(185.891, 0, -52.331, 128, 18); -- To Promyvion Dem {R}
+        player:setPos(185.891, 0, -52.331, 128, 18) -- To Promyvion Dem {R}
     end
 end;

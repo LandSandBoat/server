@@ -71,7 +71,7 @@ function onEventFinish(player,csid,option)
             end
             player:delKeyItem(tpz.ki.KNIGHTS_BOOTS)
             player:addItem(14095)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,14095); -- Gallant Leggings
+            player:messageSpecial(ID.text.ITEM_OBTAINED,14095) -- Gallant Leggings
             player:setCharVar("aBoysDreamCS",0)
             player:addFame(SANDORIA,40)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_BOY_S_DREAM)
@@ -84,7 +84,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12644)
         else
             player:addItem(12644)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12644); -- Gallant Surcoat
+            player:messageSpecial(ID.text.ITEM_OBTAINED,12644) -- Gallant Surcoat
             player:setCharVar("UnderOathCS",9)
             player:addFame(SANDORIA,60)
             player:setTitle(tpz.title.PARAGON_OF_PALADIN_EXCELLENCE)

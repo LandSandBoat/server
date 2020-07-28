@@ -63,7 +63,7 @@ function onEventFinish(player,csid,option)
             player:addQuest(SANDORIA,tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
             player:setCharVar("theTraderInTheForestCS",0)
             player:addItem(592)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,592); -- Supplies Order
+            player:messageSpecial(ID.text.ITEM_OBTAINED,592) -- Supplies Order
         end
     elseif (csid == 593 and option == 1) then
         local SUPPLIES_ORDER = 592
@@ -75,12 +75,12 @@ function onEventFinish(player,csid,option)
         end
     elseif (csid == 525) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12600); -- Robe
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12600) -- Robe
         else
             player:tradeComplete()
             player:addTitle(tpz.title.GREEN_GROCER)
             player:addItem(12600)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12600); -- Robe
+            player:messageSpecial(ID.text.ITEM_OBTAINED,12600) -- Robe
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
         end

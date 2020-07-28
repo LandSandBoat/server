@@ -8,7 +8,7 @@ require("scripts/globals/conquest")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1, 538, -2, -501,  542, 0, -497); -- to The Garden of Ru'hmet
+    zone:registerRegion(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
 end
 
 function onConquestUpdate(zone, updatetype)
@@ -18,7 +18,7 @@ end
 function onZoneIn(player,prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        --player:setPos(502,0,500,222); -- BC Area
+        --player:setPos(502,0,500,222) -- BC Area
         player:setPos(539,-1,-500,69)
     end
     return cs

@@ -18,21 +18,21 @@ function onTrigger(player,npc)
     local aClockMostdelicate = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 
     if (aClockMostdelicate == QUEST_AVAILABLE and player:getCharVar("aClockMostdelicateVar") == 1) then
-        player:startEvent(119); -- Start long cs quest with option "a clock most delicate"
+        player:startEvent(119) -- Start long cs quest with option "a clock most delicate"
     elseif (aClockMostdelicate == QUEST_AVAILABLE and player:getCharVar("aClockMostdelicateVar") == 2) then
-        player:startEvent(118); -- Start short cs quest with option "a clock most delicate"
+        player:startEvent(118) -- Start short cs quest with option "a clock most delicate"
     elseif (aClockMostdelicate == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.CLOCK_TOWER_OIL) == true) then
-            player:startEvent(202); -- Ending quest "a clock most delicate"
+            player:startEvent(202) -- Ending quest "a clock most delicate"
         else
-            player:startEvent(117); -- During quest "a clock most delicate"
+            player:startEvent(117) -- During quest "a clock most delicate"
         end
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_AVAILABLE) then
-        player:startEvent(152); -- Start & finish quest "The Clockmaster"
+        player:startEvent(152) -- Start & finish quest "The Clockmaster"
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
-        player:startEvent(110); -- After quest "The Clockmaster"
+        player:startEvent(110) -- After quest "The Clockmaster"
     else
-        player:startEvent(116); -- Standard dialog
+        player:startEvent(116) -- Standard dialog
     end
 end
 
@@ -60,7 +60,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED,12727)
             player:addFame(JEUNO,30)
             player:completeQuest(JEUNO,tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
-            player:addQuest(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER); -- Start next quest "Save the Clock Tower"
+            player:addQuest(JEUNO,tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) -- Start next quest "Save the Clock Tower"
         end
     elseif (csid == 152) then
         if (player:getFreeSlotsCount() == 0) then

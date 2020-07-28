@@ -33,13 +33,13 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VUNKERL_HERB_MEMO)
     elseif (csid == 108) then
         if(player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17384); -- Carbon Fishing Rod
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,17384) -- Carbon Fishing Rod
         else
             player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
             player:delKeyItem(tpz.ki.VUNKERL_HERB_MEMO)
             player:delKeyItem(tpz.ki.VUNKERL_HERB)
             player:addItem(17384)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,17384); --Carbon Fishing Rod
+            player:messageSpecial(ID.text.ITEM_OBTAINED,17384) --Carbon Fishing Rod
         end
     elseif (csid == 109) then
         player:delKeyItem(tpz.ki.VUNKERL_HERB)

@@ -15,9 +15,9 @@ end
 
 function onTrigger(player,npc)
     if (player:getCharVar("TOO_MANY_CHEFS") == 1) then
-        player:startEvent(948); -- part 2 Too Many Chefs
+        player:startEvent(948) -- part 2 Too Many Chefs
     else
-        player:startEvent(945); -- standard
+        player:startEvent(945) -- standard
     end
 end
 

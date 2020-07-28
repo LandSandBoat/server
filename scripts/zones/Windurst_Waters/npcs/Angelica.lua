@@ -18,7 +18,7 @@ end
 function onTrigger(player,npc)
     posestatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
     if (posestatus == QUEST_AVAILABLE and player:getCharVar("QuestAPoseByOtherName_prog") == 0 and player:needToZone() == false) then
-        player:startEvent(87);                                                     -- A POSE BY ANY tpz.nation.OTHER NAME: Before Quest
+        player:startEvent(87)                                                     -- A POSE BY ANY tpz.nation.OTHER NAME: Before Quest
         player:setCharVar("QuestAPoseByOtherName_prog",1)
     elseif (posestatus == QUEST_AVAILABLE and player:getCharVar("QuestAPoseByOtherName_prog") == 1) then
         player:setCharVar("QuestAPoseByOtherName_prog",2)
@@ -43,23 +43,23 @@ function onTrigger(player,npc)
         starttime = player:getCharVar("QuestAPoseByOtherName_time")
         if ((starttime + 600) >= os.time()) then
             if (player:getEquipID(tpz.slot.BODY) == player:getCharVar("QuestAPoseByOtherName_equip")) then
-                player:startEvent(96);     ------------------------------------------  QUEST FINISH
+                player:startEvent(96)     ------------------------------------------  QUEST FINISH
             else
-                player:startEvent(93,0,0,0,player:getCharVar("QuestAPoseByOtherName_equip"));-- QUEST REMINDER
+                player:startEvent(93,0,0,0,player:getCharVar("QuestAPoseByOtherName_equip"))-- QUEST REMINDER
             end
         else
-            player:startEvent(102);     ------------------------------------------  QUEST FAILURE
+            player:startEvent(102)     ------------------------------------------  QUEST FAILURE
         end
     elseif (posestatus == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(101); -----------------------------------------------    AFTER QUEST
+        player:startEvent(101) -----------------------------------------------    AFTER QUEST
     else
         rand = math.random(1,3)
         if (rand == 1) then
-            player:startEvent(86); -------------------------------------------- Standard Conversation 1
+            player:startEvent(86) -------------------------------------------- Standard Conversation 1
         elseif (rand == 2) then
-            player:startEvent(88); -------------------------------------------- Standard Conversation 2
+            player:startEvent(88) -------------------------------------------- Standard Conversation 2
         else
-            player:startEvent(89); -------------------------------------------- Standard Conversation 3
+            player:startEvent(89) -------------------------------------------- Standard Conversation 3
         end
     end
 end

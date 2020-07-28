@@ -20,15 +20,15 @@ function onTrigger(player,npc)
     SeaStatue = player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE)
 
     if (Stash == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and mLvl >= 5) then
-        player:startEvent(33); -- Start quest
+        player:startEvent(33) -- Start quest
     elseif (Stash == QUEST_ACCEPTED) then
         if (SeaStatue == true) then
-            player:startEvent(35,tpz.ki.SEA_SERPENT_STATUE); -- Finish quest
+            player:startEvent(35,tpz.ki.SEA_SERPENT_STATUE) -- Finish quest
         else
-            player:startEvent(34); -- Reminder Dialogue
+            player:startEvent(34) -- Reminder Dialogue
         end
     else
-        player:startEvent(83); -- Standard Conversation
+        player:startEvent(83) -- Standard Conversation
     end
 end
 
@@ -43,7 +43,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4946)
         else
             player:delKeyItem(tpz.ki.SEA_SERPENT_STATUE)
-            player:addItem(4946); -- Scroll of Utsusemi: Ichi
+            player:addItem(4946) -- Scroll of Utsusemi: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4946)
             player:addTitle(tpz.title.TREASUREHOUSE_RANSACKER)
             player:addFame(NORG,75)

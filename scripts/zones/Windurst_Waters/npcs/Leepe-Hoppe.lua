@@ -22,7 +22,7 @@ end
 
 function onTrigger(player,npc)
     local moonlitPath = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_MOONLIT_PATH)
-    local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
+    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local MissionStatus = player:getCharVar("MissionStatus")
     local tuningIn = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TUNING_OUT)
@@ -32,7 +32,7 @@ function onTrigger(player,npc)
         if (player:hasKeyItem(tpz.ki.FOOD_OFFERINGS) == false and player:hasKeyItem(tpz.ki.DRINK_OFFERINGS) == false) then
             player:startEvent(140)
         elseif (MissionStatus >= 1) then
-            player:startEvent(142); -- Keep displaying the instructions
+            player:startEvent(142) -- Keep displaying the instructions
         end
     -- Check if we are on Windurst Mission 7-2
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 0) then
@@ -120,7 +120,7 @@ function onTrigger(player,npc)
         player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
 
     else
-        player:startEvent(345); -- Standard Dialogue?
+        player:startEvent(345) -- Standard Dialogue?
     end
 end
 
@@ -158,14 +158,14 @@ function onEventFinish(player,csid,option)
         player:delQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     elseif (csid == 846) then -- Turn-in event
         local reward = 0
-        if (option == 1) then reward = 18165; -- Fenrir's Stone
-        elseif (option == 2) then reward = 13572; -- Fenrir's Cape
-        elseif (option == 3) then reward = 13138; -- Fenrir's Torque
-        elseif (option == 4) then reward = 13399; -- Fenrir's Earring
-        elseif (option == 5) then reward = 1208; -- Ancient's Key
+        if (option == 1) then reward = 18165 -- Fenrir's Stone
+        elseif (option == 2) then reward = 13572 -- Fenrir's Cape
+        elseif (option == 3) then reward = 13138 -- Fenrir's Torque
+        elseif (option == 4) then reward = 13399 -- Fenrir's Earring
+        elseif (option == 5) then reward = 1208 -- Ancient's Key
         elseif (option == 6) then
             player:addGil(GIL_RATE*15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*15000); -- Gil
+            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*15000) -- Gil
         elseif (option == 7) then
             player:addSpell(297) -- Pact
         elseif (option == 8) then
@@ -177,7 +177,7 @@ function onEventFinish(player,csid,option)
         if (reward ~= nil) then
             player:addTitle(tpz.title.HEIR_OF_THE_NEW_MOON)
             player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-            player:setCharVar("MoonlitPath_date", os.date("%j")); -- %M for next minute, %j for next day
+            player:setCharVar("MoonlitPath_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(WINDURST,30)
             player:completeQuest(WINDURST,tpz.quest.id.windurst.THE_MOONLIT_PATH)
         end
@@ -195,14 +195,14 @@ function onEventFinish(player,csid,option)
         end
     elseif (csid == 850) then -- Repeat turn-in event
         local reward = 0
-        if (option == 1) then reward = 18165; -- Fenrir's Stone
-        elseif (option == 2) then reward = 13572; -- Fenrir's Cape
-        elseif (option == 3) then reward = 13138; -- Fenrir's Torque
-        elseif (option == 4) then reward = 13399; -- Fenrir's Earring
-        elseif (option == 5) then reward = 1208; -- Ancient's Key
+        if (option == 1) then reward = 18165 -- Fenrir's Stone
+        elseif (option == 2) then reward = 13572 -- Fenrir's Cape
+        elseif (option == 3) then reward = 13138 -- Fenrir's Torque
+        elseif (option == 4) then reward = 13399 -- Fenrir's Earring
+        elseif (option == 5) then reward = 1208 -- Ancient's Key
         elseif (option == 6) then
             player:addGil(GIL_RATE*15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*15000); -- Gil
+            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*15000) -- Gil
         elseif (option == 7) then
             player:addSpell(297) -- Pact
         elseif (option == 8) then
@@ -214,7 +214,7 @@ function onEventFinish(player,csid,option)
         if (reward ~= nil) then
             player:addTitle(tpz.title.HEIR_OF_THE_NEW_MOON)
             player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-            player:setCharVar("MoonlitPath_date", os.date("%j")); -- %M for next minute, %j for next day
+            player:setCharVar("MoonlitPath_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(WINDURST,30)
         end
 

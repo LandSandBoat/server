@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Kazham/IDs")
 
 function onTrade(player,npc,trade)
     if (player:getCharVar("MissionaryManVar") == 1 and trade:hasItemQty(1146,1) == true and trade:getItemCount() == 1) then
-        player:startEvent(139); -- Trading elshimo marble
+        player:startEvent(139) -- Trading elshimo marble
     end
 end
 
@@ -22,17 +22,17 @@ function onTrigger(player,npc)
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryMan == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 3) then
-        player:startEvent(137,0,1146); -- Start quest "Missionary Man"
+        player:startEvent(137,0,1146) -- Start quest "Missionary Man"
     elseif (MissionaryMan == QUEST_ACCEPTED and MissionaryManVar == 1) then
-        player:startEvent(138,0,1146); -- During quest (before trade marble) "Missionary Man"
+        player:startEvent(138,0,1146) -- During quest (before trade marble) "Missionary Man"
     elseif (MissionaryMan == QUEST_ACCEPTED and (MissionaryManVar == 2 or MissionaryManVar == 3)) then
-        player:startEvent(140); -- During quest (after trade marble) "Missionary Man"
+        player:startEvent(140) -- During quest (after trade marble) "Missionary Man"
     elseif (MissionaryMan == QUEST_ACCEPTED and MissionaryManVar == 4) then
-        player:startEvent(141); -- Finish quest "Missionary Man"
+        player:startEvent(141) -- Finish quest "Missionary Man"
     elseif (MissionaryMan == QUEST_COMPLETED) then
-        player:startEvent(142); -- New standard dialog
+        player:startEvent(142) -- New standard dialog
     else
-        player:startEvent(136); -- Standard dialog
+        player:startEvent(136) -- Standard dialog
     end
 
 end

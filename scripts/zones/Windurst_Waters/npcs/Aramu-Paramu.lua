@@ -16,11 +16,11 @@ end
 function onTrigger(player,npc)
     wonderingstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == QUEST_ACCEPTED) then
-        player:startEvent(638);                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
+        player:startEvent(638)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
     elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(641);                      -- WONDERING_MINSTREL: Quest After
+        player:startEvent(641)                      -- WONDERING_MINSTREL: Quest After
     else
-        player:startEvent(609);                          -- Standard Conversation
+        player:startEvent(609)                          -- Standard Conversation
     end
 end
 

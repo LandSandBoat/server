@@ -18,8 +18,8 @@ function onTrade(player,npc,trade)
         trade:getItemCount() == 3
     ) then
         player:tradeComplete()
-        SpawnMob(ID.mob.JAILER_OF_PRUDENCE_1):updateClaim(player); -- Spawn Jailer of Prudence 1
-        SpawnMob(ID.mob.JAILER_OF_PRUDENCE_2);                     -- Spawn Jailer of Prudence 2 unclaimed
+        SpawnMob(ID.mob.JAILER_OF_PRUDENCE_1):updateClaim(player) -- Spawn Jailer of Prudence 1
+        SpawnMob(ID.mob.JAILER_OF_PRUDENCE_2)                     -- Spawn Jailer of Prudence 2 unclaimed
     end
 end
 

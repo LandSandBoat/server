@@ -28,7 +28,7 @@ function onTrigger(player,npc)
     if (player:hasKeyItem(tpz.ki.BOOK_OF_TASKS) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_EAST) == false) then
         player:startEvent(633)
     else
-        player:showText(npc, 7817); -- nothing to report
+        player:showText(npc, 7817) -- nothing to report
 
     end
 

@@ -11,8 +11,8 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    npc:openDoor(3); -- lever animation
-    RunElevator(tpz.elevator.DAVOI_LIFT); -- elevator @450 (actual npc script is _454)
+    npc:openDoor(3) -- lever animation
+    RunElevator(tpz.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
 end
 
 function onEventUpdate(player,csid,option)

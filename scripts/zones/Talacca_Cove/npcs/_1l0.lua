@@ -35,7 +35,7 @@ function onEventFinish(player,csid,option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,5493)
         else
-            player:setCharVar("LuckOfTheDraw",5); -- var will remain for af quests
+            player:setCharVar("LuckOfTheDraw",5) -- var will remain for af quests
             player:addItem(5493)
             player:messageSpecial(ID.text.ITEM_OBTAINED,5493)
             player:delKeyItem(tpz.ki.FORGOTTEN_HEXAGUN)

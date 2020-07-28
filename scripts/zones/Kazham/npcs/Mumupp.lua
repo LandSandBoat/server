@@ -80,9 +80,9 @@ function onTrigger(player,npc)
             player:startEvent(199)
             npc:wait()
         elseif (progress == 2 or failed == 3) then
-                player:startEvent(209);  -- asking for ten of coins
+                player:startEvent(209)  -- asking for ten of coins
         elseif (progress >= 3 or failed >= 4) then
-            player:startEvent(244); -- happy with ten of coins
+            player:startEvent(244) -- happy with ten of coins
         end
     else
         player:startEvent(199)

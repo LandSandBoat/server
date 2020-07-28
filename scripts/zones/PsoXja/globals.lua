@@ -50,7 +50,7 @@ function attemptOpenDoor(player, npc, correctSideOfDoor)
                 end
             end
         else
-            player:startEvent(26); -- return to beginning of spiral
+            player:startEvent(26) -- return to beginning of spiral
         end
     end
 end

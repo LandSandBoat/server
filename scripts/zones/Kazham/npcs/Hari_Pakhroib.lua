@@ -20,22 +20,22 @@ function onTrigger(player,npc)
 
     if (Guardian == QUEST_ACCEPTED) then
         if (Pamamas == 1) then
-            player:startEvent(71); --Finish Quest
+            player:startEvent(71) --Finish Quest
         else
-            player:startEvent(69,0,4596); --Reminder Dialogue
+            player:startEvent(69,0,4596) --Reminder Dialogue
         end
     elseif (Guardian == QUEST_AVAILABLE and pfame >= 7) then
-        player:startEvent(68,4596,4596,4596); --Start Quest
+        player:startEvent(68,4596,4596,4596) --Start Quest
     elseif (Guardian == QUEST_COMPLETED and needToZone == false) then
         if (Pamamas == 2) then
-            player:startEvent(71); --Finish quest dialogue (no different csid between initial and repeats)
+            player:startEvent(71) --Finish quest dialogue (no different csid between initial and repeats)
         else
-            player:startEvent(72); --Dialogue for after completion of quest
+            player:startEvent(72) --Dialogue for after completion of quest
         end
     elseif (Guardian == QUEST_COMPLETED and needToZone == true) then
         player:startEvent(72)
     else
-        player:startEvent(84); --Standard Dialogue
+        player:startEvent(84) --Standard Dialogue
     end
 end
 

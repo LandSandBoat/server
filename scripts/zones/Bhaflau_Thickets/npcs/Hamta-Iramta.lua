@@ -11,8 +11,8 @@ function onTrade(player,npc,trade)
 
     if (trade:getItemCount() == 1 and trade:hasItemQty(2185,1)) then -- Silver
         player:tradeComplete()
-        player:setPos(-458,-16,0,189); -- using the pos method until the problem below is fixed
-        -- player:startEvent(135); -- << this CS goes black at the end, never fades in
+        player:setPos(-458,-16,0,189) -- using the pos method until the problem below is fixed
+        -- player:startEvent(135) -- << this CS goes black at the end, never fades in
         return 1
     end
 

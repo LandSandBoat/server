@@ -22,11 +22,11 @@ function onTrigger(player,npc)
 
     nFame = player:getFameLevel(NORG)
     if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and nFame >= 2) then
-        player:startEvent(116,748);  -- Quest start - you have tonberry kills?! I got yo back ^.-
+        player:startEvent(116,748)  -- Quest start - you have tonberry kills?! I got yo back ^.-
     elseif (player:getCharVar("EveryonesGrudgeStarted")  == 1) then
         player:startEvent(117,748)
     elseif (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_COMPLETED) then
-        player:startEvent(119);  -- After completion cs
+        player:startEvent(119)  -- After completion cs
     else
         player:startEvent(115)
     end
@@ -43,7 +43,7 @@ function onEventFinish(player,csid,option)
         player:completeQuest(OUTLANDS,tpz.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
         player:addFame(NORG,80)
-        player:addKeyItem(tpz.ki.TONBERRY_PRIEST_KEY);    -- Permanent Tonberry key
+        player:addKeyItem(tpz.ki.TONBERRY_PRIEST_KEY)    -- Permanent Tonberry key
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.TONBERRY_PRIEST_KEY)
         player:setCharVar("EveryonesGrudgeStarted",0)
         player:addTitle(tpz.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)

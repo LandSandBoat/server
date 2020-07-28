@@ -21,7 +21,7 @@ function onTrigger(player,npc)
         player:messageSpecial(ID.text.BROKEN_EGG)
         LA_THEINE_PLATEAU.moveFallenEgg(300)
     elseif(random > 61) then
-        npcUtil.giveItem(player, 4570);         -- bird egg
-        LA_THEINE_PLATEAU.moveFallenEgg(300);   -- moved whether the item is obtained or not, to counter abuse with a full inv
+        npcUtil.giveItem(player, 4570)         -- bird egg
+        LA_THEINE_PLATEAU.moveFallenEgg(300)   -- moved whether the item is obtained or not, to counter abuse with a full inv
     end
 end;

@@ -16,7 +16,7 @@ function onTrade(player,npc,trade)
 
     if (checkItem == true) then
         if (trade:hasItemQty(738,1) and trade:hasItemQty(737,2) and trade:getItemCount() == 3) then
-            player:startEvent(43,0,0,738,737); -- Platinum Ore, Gold Ore
+            player:startEvent(43,0,0,738,737) -- Platinum Ore, Gold Ore
         end
     end
 
@@ -42,15 +42,15 @@ function onTrigger(player,npc)
 
     if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
         if (player:hasItem(1153)) then
-            player:startEvent(48,1153); -- Sacred Branch
+            player:startEvent(48,1153) -- Sacred Branch
         elseif (player:hasItem(1198) == false) then
             local questItem = player:getCharVar("ForgeYourDestiny_Event")
             local checkItem = testflag(tonumber(questItem),0x02)
 
             if (checkItem == false) then
-                player:startEvent(40,1153,1198); -- Sacred Branch, Sacred Sprig
+                player:startEvent(40,1153,1198) -- Sacred Branch, Sacred Sprig
             elseif (checkItem == true) then
-                player:startEvent(42,0,0,738,737); -- Platinum Ore, Gold Ore
+                player:startEvent(42,0,0,738,737) -- Platinum Ore, Gold Ore
             end
         elseif (player:hasItem(1198)) then -- Sacred Sprig
             player:startEvent(41)
@@ -72,23 +72,23 @@ function onEventFinish(player,csid,option)
     if (csid == 40) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addItem(1198)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1198); -- Sacred Sprig
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1198) -- Sacred Sprig
             player:setCharVar("ForgeYourDestiny_Event",questItem + 0x02)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1151); -- Oriental Steel
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1151) -- Oriental Steel
         end
     elseif (csid == 43) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:tradeComplete()
             player:addItem(1198)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1198); -- Sacred Sprig
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1198) -- Sacred Sprig
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1198); -- Sacred Sprig
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1198) -- Sacred Sprig
         end
     elseif (csid == 145) then
         player:tradeComplete()
         player:addItem(17809)
-        player:messageSpecial(ID.text.ITEM_OBTAINED,17809); -- Mumeito
+        player:messageSpecial(ID.text.ITEM_OBTAINED,17809) -- Mumeito
     end
 
 end;

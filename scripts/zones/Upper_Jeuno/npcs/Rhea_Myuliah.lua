@@ -20,12 +20,12 @@ function onTrigger(player,npc)
     if (lakeProg >= 3) then
         player:startEvent(10116)
     elseif (lakeProg == 2) then
-        player:startEvent(10115); -- You danced! Here's your hint
+        player:startEvent(10115) -- You danced! Here's your hint
         player:setCharVar("Lakeside_Minuet_Progress",3)
     elseif (lakeProg == 1) then
-        player:startEvent(10114); -- After the CS
+        player:startEvent(10114) -- After the CS
     elseif (lakesideMin == QUEST_ACCEPTED and lakeProg < 1) then
-        player:startEvent(10113); -- intial CS
+        player:startEvent(10113) -- intial CS
         player:setCharVar("Lakeside_Minuet_Progress",1)
     elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1")==1) then
     player:startEvent(10131)
@@ -36,7 +36,7 @@ function onTrigger(player,npc)
     elseif (player:getCharVar("comebackQueenCS") == 1) then
         player:startEvent(10145)
     elseif (player:getCharVar("comebackQueenCS") == 3) then
-        player:startEvent(10149); -- dance practice
+        player:startEvent(10149) -- dance practice
     elseif (player:getCharVar("comebackQueenCS") == 5) then --player cleared Laila's story
         player:startEvent(10155)
     else

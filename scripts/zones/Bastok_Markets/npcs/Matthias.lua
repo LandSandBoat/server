@@ -106,7 +106,7 @@ function onTrigger(player,npc)
 
     elseif (player:getCharVar("dancerTailorCS") == 4) then
 
-        player:startEvent(494, playersAFChoice -1); -- event params indexed from 0
+        player:startEvent(494, playersAFChoice -1) -- event params indexed from 0
 
     elseif (player:getCharVar("dancerTailorCS") == 5 )then
 
@@ -114,8 +114,8 @@ function onTrigger(player,npc)
 
         if (currentVanaDay > tailorStartedWorkDay) then
 
-            local dancerAFID = 1; -- variable used to convert player's choice into an Item ID.
-            local playerGender = player:getGender(); --gender is actually important here because it displays the item on screen for you.
+            local dancerAFID = 1 -- variable used to convert player's choice into an Item ID.
+            local playerGender = player:getGender() --gender is actually important here because it displays the item on screen for you.
 
             if (playersAFChoice == 1) then
                 dancerAFID = dancersTiara - playerGender
@@ -128,7 +128,7 @@ function onTrigger(player,npc)
             player:startEvent(497, dancerAFID)
 
         else
-            player:startEvent(496); -- not enough time has passed
+            player:startEvent(496) -- not enough time has passed
         end
     elseif (player:getCharVar("dancerTailorCS") == 6) then
         player:startEvent(498)
@@ -170,7 +170,7 @@ function onEventFinish(player,csid,option)
 
     elseif (csid == 497) then -- reward player the appropriate AF
 
-        local dancerAFID = 1; -- variable used to convert player's choice into an Item ID.
+        local dancerAFID = 1 -- variable used to convert player's choice into an Item ID.
         local playersAFChoice = player:getCharVar("dancerAFChoice")
 
         if (playersAFChoice == 1) then
@@ -190,7 +190,7 @@ function onEventFinish(player,csid,option)
 
             local allPiecesCompleted = 7
             if (bit.band(completedPieces, allPiecesCompleted) == allPiecesCompleted) then
-                player:setCharVar("dancerTailorCS",6); -- final cs flag
+                player:setCharVar("dancerTailorCS",6) -- final cs flag
             else
                 local playersReward = bit.lshift(1, playersAFChoice - 1)
                 completedPieces = bit.bor(completedPieces, playersReward)

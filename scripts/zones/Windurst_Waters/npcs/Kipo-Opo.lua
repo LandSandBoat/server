@@ -19,12 +19,12 @@ function onTrigger(player,npc)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(tpz.effect.COOKING_IMAGERY) == false) then
-            player:startEvent(10015,Cost,SkillLevel,0,495,player:getGil(),0,0,0); -- p1 = skill level
+            player:startEvent(10015,Cost,SkillLevel,0,495,player:getGil(),0,0,0) -- p1 = skill level
         else
             player:startEvent(10015,Cost,SkillLevel,0,495,player:getGil(),28589,0,0)
         end
     else
-        player:startEvent(10015); -- Standard Dialogue
+        player:startEvent(10015) -- Standard Dialogue
     end
 end
 

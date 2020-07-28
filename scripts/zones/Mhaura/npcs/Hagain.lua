@@ -27,9 +27,9 @@ function onTrigger(player,npc)
     elseif (hittingTheMarquisateHagainCS >= 2 and hittingTheMarquisateHagainCS < 9) then -- dialog during mini quest thf af3
         player:startEvent(10004,0,tpz.ki.BOMB_INCENSE)
     elseif (hittingTheMarquisateHagainCS == 9) then
-        player:startEvent(10006);    -- after the mini quest
+        player:startEvent(10006)    -- after the mini quest
     else
-        player:startEvent(10002);    -- standard dialog
+        player:startEvent(10002)    -- standard dialog
     end
 
 end

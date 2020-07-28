@@ -35,7 +35,7 @@ function onTrigger(player,npc)
     elseif (grimySignpost == QUEST_COMPLETED) then
         player:startEvent(42)
     else
-        player:startEvent(46); -- default text
+        player:startEvent(46) -- default text
     end
 end
 

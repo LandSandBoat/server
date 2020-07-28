@@ -40,7 +40,7 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13247)
         else
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
-            player:addItem(13247); -- Mithran Stone
+            player:addItem(13247) -- Mithran Stone
             player:messageSpecial(ID.text.ITEM_OBTAINED,13247)
         end
     end

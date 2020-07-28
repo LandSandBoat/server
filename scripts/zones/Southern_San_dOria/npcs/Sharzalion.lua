@@ -65,11 +65,11 @@ function onEventFinish(player,csid,option)
         end
     elseif (csid == 75) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16829); -- Fencing Degen
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16829) -- Fencing Degen
         else
             player:delKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
             player:addItem(16829)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16829); -- Fencing Degen
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end

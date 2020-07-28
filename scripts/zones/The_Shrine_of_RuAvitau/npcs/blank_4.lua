@@ -49,14 +49,14 @@ function onTrigger(player,npc)
         player:startEvent(57,player:getCharVar("DM_Earring"))
     elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus < 2) then
         if (MoonOre == false) then
-            player:startEvent(58); -- Reminder for Moonlight Ore
+            player:startEvent(58) -- Reminder for Moonlight Ore
         else
-            player:startEvent(56,917,1408,1550); -- Reminder for Ark Pentasphere
+            player:startEvent(56,917,1408,1550) -- Reminder for Ark Pentasphere
         end
     elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus == 2 and MoonOre == true) then -- Repeat turn in
         player:startEvent(59)
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY); -- Need some kind of feedback
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Need some kind of feedback
     end
 
 end
@@ -82,15 +82,15 @@ function onEventFinish(player,csid,option)
     elseif (csid == 55 or csid == 59) then -- Turning in Divine Might or Repeat
         local reward = 0
         if (option == 1) then
-            reward = 14739; -- Suppanomimi
+            reward = 14739 -- Suppanomimi
         elseif (option == 2) then
-            reward = 14740; -- Knight's Earring
+            reward = 14740 -- Knight's Earring
         elseif (option == 3) then
-            reward = 14741; -- Abyssal Earring
+            reward = 14741 -- Abyssal Earring
         elseif (option == 4) then
-            reward = 14742; -- Beastly Earring
+            reward = 14742 -- Beastly Earring
         elseif (option == 5) then
-            reward = 14743; -- Bushinomimi
+            reward = 14743 -- Bushinomimi
         end
         if (reward ~= 0) then
             if (player:getFreeSlotsCount() >= 1 and player:hasItem(reward) == false) then

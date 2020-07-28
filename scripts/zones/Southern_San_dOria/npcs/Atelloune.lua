@@ -39,7 +39,7 @@ function onTrigger(player,npc)
     elseif (atellounesLament == QUEST_ACCEPTED) then
         player:startEvent(892)
     elseif (atellounesLament == QUEST_COMPLETED) then
-        player:startEvent(884); -- im profesors research
+        player:startEvent(884) -- im profesors research
     elseif (sanFame < 2) then
         player:startEvent(884)
     end
@@ -55,10 +55,10 @@ function onEventFinish(player,csid,option)
         player:addQuest(SANDORIA,tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
     elseif (csid == 891) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,15008); -- Trainee Gloves
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,15008) -- Trainee Gloves
         else
             player:addItem(15008)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,15008); -- Trainee Gloves
+            player:messageSpecial(ID.text.ITEM_OBTAINED,15008) -- Trainee Gloves
             player:addFame(SANDORIA,30)
             player:completeQuest(SANDORIA,tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
         end

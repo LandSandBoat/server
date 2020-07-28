@@ -23,9 +23,9 @@ function onTrigger(player,npc)
 
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CANDLE_MAKING) ~= QUEST_COMPLETED and
        player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED) then
-        player:startEvent(36);  -- Start Quest Candle-making
+        player:startEvent(36)  -- Start Quest Candle-making
     else
-        player:startEvent(30);  --Standard dialog
+        player:startEvent(30)  --Standard dialog
     end
 end
 

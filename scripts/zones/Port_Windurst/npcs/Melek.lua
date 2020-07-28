@@ -75,11 +75,11 @@ function onEventFinish(player,csid,option)
     elseif (csid == 53) then
         player:addKeyItem(tpz.ki.DULL_SWORD)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.DULL_SWORD)
-        player:setCharVar("MissionStatus",4);  --> Gideus next
+        player:setCharVar("MissionStatus",4)  --> Gideus next
         player:delKeyItem(tpz.ki.SWORD_OFFERING) -- remove sword offering
     elseif (csid == 55) then
         player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
-        player:setCharVar("MissionStatus",7); -- to Sandy now
+        player:setCharVar("MissionStatus",7) -- to Sandy now
     elseif (csid == 61) then
         player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
         player:setCharVar("MissionStatus",7)
@@ -87,7 +87,7 @@ function onEventFinish(player,csid,option)
         player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.KINDRED_REPORT)
-        player:setCharVar("MissionStatus",10);  -- return to Bastok
+        player:setCharVar("MissionStatus",10)  -- return to Bastok
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 

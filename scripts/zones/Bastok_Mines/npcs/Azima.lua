@@ -19,7 +19,7 @@ function onTrigger(player,npc)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(tpz.effect.ALCHEMY_IMAGERY) == false) then
-            player:startEvent(122,Cost,SkillLevel,0,0xB0001AF,player:getGil(),0,0,0); -- Event doesn't work
+            player:startEvent(122,Cost,SkillLevel,0,0xB0001AF,player:getGil(),0,0,0) -- Event doesn't work
         else
             player:startEvent(122,Cost,SkillLevel,0,0xB0001AF,player:getGil(),0x6FE2,0,0)
         end

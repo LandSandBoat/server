@@ -31,7 +31,7 @@ end
 function onEventFinish(player,csid,option)
     if (csid == 2) then
         player:tradeComplete()
-        player:addItem(4949); -- Scroll of Jubaku: Ichi
+        player:addItem(4949) -- Scroll of Jubaku: Ichi
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4949)
         player:addFame(NORG,75)
         player:addTitle(tpz.title.CRACKER_OF_THE_SECRET_CODE)

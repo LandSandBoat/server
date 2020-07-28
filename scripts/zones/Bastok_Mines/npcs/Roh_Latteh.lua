@@ -51,7 +51,7 @@ function onEventFinish(player,csid,option)
             player:addTitle(tpz.title.TREASURE_SCAVENGER)
             player:addFame(BASTOK,50)
             player:addItem(12601)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12601); -- Linen Robe
+            player:messageSpecial(ID.text.ITEM_OBTAINED,12601) -- Linen Robe
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12601)
         end

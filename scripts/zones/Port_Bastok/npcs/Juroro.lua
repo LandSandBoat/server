@@ -17,7 +17,7 @@ function onTrigger(player,npc)
 
     local TrialByEarth = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.TRIAL_BY_EARTH)
     local WhisperOfTremors = player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)
-    local realday = tonumber(os.date("%j")); -- %M for next minute, %j for next day
+    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local ThePuppetMaster = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
 
@@ -28,9 +28,9 @@ function onTrigger(player,npc)
     elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 3) then
         player:startEvent(258)
     elseif ((TrialByEarth == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 6) or (TrialByEarth == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByEarth_date"))) then
-        player:startEvent(249,0,tpz.ki.TUNING_FORK_OF_EARTH); -- Start and restart quest "Trial by Earth"
+        player:startEvent(249,0,tpz.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
     elseif (TrialByEarth == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_EARTH) == false and WhisperOfTremors == false) then
-        player:startEvent(284,0,tpz.ki.TUNING_FORK_OF_EARTH); -- Defeat against Titan : Need new Fork
+        player:startEvent(284,0,tpz.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors == false) then
         player:startEvent(250,0,tpz.ki.TUNING_FORK_OF_EARTH,1)
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors) then
@@ -44,7 +44,7 @@ function onTrigger(player,npc)
 
         player:startEvent(252,0,tpz.ki.TUNING_FORK_OF_EARTH,1,0,numitem)
     else
-        player:startEvent(253); -- Standard dialog
+        player:startEvent(253) -- Standard dialog
     end
 
 end
@@ -84,10 +84,10 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.TUNING_FORK_OF_EARTH)
     elseif (csid == 252) then
         local item = 0
-        if (option == 1) then item = 17438;         -- Titan's Cudgel
-        elseif (option == 2) then item = 13244;  -- Earth Belt
-        elseif (option == 3) then item = 13563;  -- Earth Ring
-        elseif (option == 4) then item = 1205;     -- Desert Light
+        if (option == 1) then item = 17438         -- Titan's Cudgel
+        elseif (option == 2) then item = 13244  -- Earth Belt
+        elseif (option == 3) then item = 13563  -- Earth Ring
+        elseif (option == 4) then item = 1205     -- Desert Light
         end
 
         if (player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6)) then
@@ -95,17 +95,17 @@ function onEventFinish(player,csid,option)
         else
             if (option == 5) then
                 player:addGil(GIL_RATE*10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*10000); -- Gils
+                player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*10000) -- Gils
             elseif (option == 6) then
-                player:addSpell(299); -- Avatar Titan Spell
+                player:addSpell(299) -- Avatar Titan Spell
                 player:messageSpecial(ID.text.TITAN_UNLOCKED,0,0,1)
             else
                 player:addItem(item)
-                player:messageSpecial(ID.text.ITEM_OBTAINED,item); -- Item
+                player:messageSpecial(ID.text.ITEM_OBTAINED,item) -- Item
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_EARTH)
-            player:delKeyItem(tpz.ki.WHISPER_OF_TREMORS); --Whisper of Tremors, as a trade for the above rewards
-            player:setCharVar("TrialByEarth_date", os.date("%j")); -- %M for next minute, %j for next day
+            player:delKeyItem(tpz.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
+            player:setCharVar("TrialByEarth_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(BASTOK,30)
             player:completeQuest(BASTOK,tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
