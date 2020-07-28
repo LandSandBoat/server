@@ -13904,8 +13904,8 @@ INSERT INTO `mob_groups` VALUES (69,5606,291,'Albumens_Mandragora',0,128,0,0,0,1
 INSERT INTO `mob_groups` VALUES (70,5607,291,'Albumens_Lycopodium',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (71,5608,291,'Albumens_Korrigan',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (72,5615,291,'Albumens_Pachypodium',0,128,0,0,0,123,124,0);
-INSERT INTO `mob_groups` VALUES (73,5609,291,'Onycophora',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (74,5610,291,'Onycophoras_Sandworm',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (73,5609,291,'Onychophora',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (74,5610,291,'Onychophoras_Sandworm',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (75,5611,291,'Erinys',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (76,5612,291,'Boobrie',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (77,5613,291,'Quetzalcoatl',0,128,0,0,0,119,119,0);
