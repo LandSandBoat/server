@@ -11,34 +11,34 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local Race = player:getRace();
+    local Race = player:getRace()
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
-        player:startEvent(202);
+        player:startEvent(202)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
         if ( Race==tpz.race.HUME_M or Race==tpz.race.HUME_F) then
-            player:startEvent(120);
+            player:startEvent(120)
         else
-            player:messageSpecial(ID.text.NO_NEED_INVESTIGATE);
+            player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
         end
     else
-        player:messageSpecial(ID.text.NO_NEED_INVESTIGATE);
+        player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if (csid == 202) then
-        player:setCharVar("PromathiaStatus",2);
+        player:setCharVar("PromathiaStatus",2)
     elseif (120 and option ~=0) then -- Hume
-        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL);
-        player:setCharVar("PromathiaStatus",3);
-        player:addKeyItem(tpz.ki.LIGHT_OF_VAHZL);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LIGHT_OF_VAHZL);
+        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL)
+        player:setCharVar("PromathiaStatus",3)
+        player:addKeyItem(tpz.ki.LIGHT_OF_VAHZL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LIGHT_OF_VAHZL)
     end
 end;

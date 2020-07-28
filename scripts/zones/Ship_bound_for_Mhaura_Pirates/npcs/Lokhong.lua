@@ -14,7 +14,7 @@ end
 
 function onTrigger(player,npc)
     if player:sendGuild(521,1,23,5) then
-        player:showText(npc,ID.text.LOKHONG_SHOP_DIALOG);
+        player:showText(npc,ID.text.LOKHONG_SHOP_DIALOG)
     end
 end
 

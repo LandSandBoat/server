@@ -4,12 +4,12 @@
 -- Type: Standard NPC
 -- !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require("scripts/zones/Aht_Urhgan_Whitegate/Shared");
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
-require("scripts/globals/titles");
-require("scripts/globals/npc_util");
+require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/keyitems")
+require("scripts/globals/titles")
+require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -110,13 +110,13 @@ function onEventFinish(player,csid,option)
         player:setCharVar("AhtUrganStatus", 2)
         player:setCharVar("TOAUM3_DAY", os.date("%j")) -- %M for next minute, %j for next day
     elseif (csid == 3002) then
-        player:setCharVar("AhtUrganStatus",0);
-        player:completeMission(TOAU,tpz.mission.id.toau.IMMORTAL_SENTRIES);
-        player:addMission(TOAU,tpz.mission.id.toau.PRESIDENT_SALAHEEM);
-        player:addCurrency("imperial_standing", 150);
-        player:addTitle(tpz.title.PRIVATE_SECOND_CLASS);
-        player:addKeyItem(tpz.ki.PSC_WILDCAT_BADGE);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PSC_WILDCAT_BADGE);
+        player:setCharVar("AhtUrganStatus",0)
+        player:completeMission(TOAU,tpz.mission.id.toau.IMMORTAL_SENTRIES)
+        player:addMission(TOAU,tpz.mission.id.toau.PRESIDENT_SALAHEEM)
+        player:addCurrency("imperial_standing", 150)
+        player:addTitle(tpz.title.PRIVATE_SECOND_CLASS)
+        player:addKeyItem(tpz.ki.PSC_WILDCAT_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PSC_WILDCAT_BADGE)
     elseif (csid == 3020) then
         player:setCharVar("AhtUrganStatus",0)
         player:completeMission(TOAU,tpz.mission.id.toau.PRESIDENT_SALAHEEM)
@@ -124,14 +124,14 @@ function onEventFinish(player,csid,option)
         player:setCharVar("TOAUM3_DAY", 0)
     elseif (csid == 3028) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,2185);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,2185)
         else
-            player:addItem(2185,2);
-            player:setCharVar("AhtUrganStatus",0);
-            player:completeMission(TOAU,tpz.mission.id.toau.WESTERLY_WINDS);
-            player:addMission(TOAU,tpz.mission.id.toau.A_MERCENARY_LIFE);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,2185);
-            player:needToZone(true);
+            player:addItem(2185,2)
+            player:setCharVar("AhtUrganStatus",0)
+            player:completeMission(TOAU,tpz.mission.id.toau.WESTERLY_WINDS)
+            player:addMission(TOAU,tpz.mission.id.toau.A_MERCENARY_LIFE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED,2185)
+            player:needToZone(true)
         end
     elseif (csid == 3052) then
         player:completeMission(TOAU,tpz.mission.id.toau.ASTRAL_WAVES)
@@ -157,33 +157,33 @@ function onEventFinish(player,csid,option)
         player:setCharVar("TOAUM18_STARTDAY", 0)
         player:addMission(TOAU,tpz.mission.id.toau.SWEETS_FOR_THE_SOUL)
     elseif (csid == 3113) then
-        player:completeMission(TOAU,tpz.mission.id.toau.IN_THE_BLOOD);
-        player:setCharVar("TOAUM33_STARTDAY", VanadielDayOfTheYear());
-        player:needToZone(true);
-        player:addItem(2187);
-        player:messageSpecial(ID.text.ITEM_OBTAINED,2187);
-        player:addMission(TOAU,tpz.mission.id.toau.SENTINELS_HONOR);
+        player:completeMission(TOAU,tpz.mission.id.toau.IN_THE_BLOOD)
+        player:setCharVar("TOAUM33_STARTDAY", VanadielDayOfTheYear())
+        player:needToZone(true)
+        player:addItem(2187)
+        player:messageSpecial(ID.text.ITEM_OBTAINED,2187)
+        player:addMission(TOAU,tpz.mission.id.toau.SENTINELS_HONOR)
     elseif (csid == 3130) then
         player:completeMission(TOAU,tpz.mission.id.toau.SENTINELS_HONOR)
         player:setCharVar("TOAUM33_STARTDAY", 0)
         player:addMission(TOAU,tpz.mission.id.toau.TESTING_THE_WATERS)
     elseif (csid == 3138) then
-        player:completeMission(TOAU,tpz.mission.id.toau.FANGS_OF_THE_LION);
-        player:addKeyItem(tpz.ki.MYTHRIL_MIRROR);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MYTHRIL_MIRROR);
-        player:setTitle(tpz.title.NASHMEIRAS_LOYALIST);
-        player:addMission(TOAU,tpz.mission.id.toau.NASHMEIRAS_PLEA);
+        player:completeMission(TOAU,tpz.mission.id.toau.FANGS_OF_THE_LION)
+        player:addKeyItem(tpz.ki.MYTHRIL_MIRROR)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MYTHRIL_MIRROR)
+        player:setTitle(tpz.title.NASHMEIRAS_LOYALIST)
+        player:addMission(TOAU,tpz.mission.id.toau.NASHMEIRAS_PLEA)
     elseif (csid == 3139) then
         player:completeMission(TOAU,tpz.mission.id.toau.RAGNAROK)
         player:addMission(TOAU,tpz.mission.id.toau.IMPERIAL_CORONATION)
     elseif (csid == 3144) then
-        player:completeMission(TOAU,tpz.mission.id.toau.THE_EMPRESS_CROWNED);
-        player:addItem(16070);
-        player:messageSpecial(ID.text.ITEM_OBTAINED,16070);
-        player:addMission(TOAU,tpz.mission.id.toau.ETERNAL_MERCENARY);
+        player:completeMission(TOAU,tpz.mission.id.toau.THE_EMPRESS_CROWNED)
+        player:addItem(16070)
+        player:messageSpecial(ID.text.ITEM_OBTAINED,16070)
+        player:addMission(TOAU,tpz.mission.id.toau.ETERNAL_MERCENARY)
     elseif (csid == 3149) then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MYTHRIL_MIRROR);
-        player:addKeyItem(tpz.ki.MYTHRIL_MIRROR);
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MYTHRIL_MIRROR)
+        player:addKeyItem(tpz.ki.MYTHRIL_MIRROR)
     elseif (csid == 3076 and option == 0) then
         player:setCharVar("AhtUrganStatus", 1)
     elseif csid == 5000 then

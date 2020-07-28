@@ -6,19 +6,19 @@
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local rand = math.random(1,2);
+    local rand = math.random(1,2)
     if (rand == 1) then
-        player:startEvent(652);
+        player:startEvent(652)
     else
-        player:startEvent(656);
+        player:startEvent(656)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

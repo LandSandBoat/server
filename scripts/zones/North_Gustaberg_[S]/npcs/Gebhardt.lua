@@ -3,12 +3,12 @@
 --  NPC: Gebhardt
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/keyitems");
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
@@ -17,7 +17,7 @@ function onTrigger(player,npc)
     else
         player:startEvent(110)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end
@@ -25,7 +25,7 @@ end
 function onEventFinish(player,csid,option)
 
     if (csid == 102) then
-            player:delKeyItem(tpz.ki.BATTLE_RATIONS);
-            player:setCharVar("THE_FIGHTING_FOURTH",1);
+            player:delKeyItem(tpz.ki.BATTLE_RATIONS)
+            player:setCharVar("THE_FIGHTING_FOURTH",1)
     end
 end;

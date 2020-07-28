@@ -4,15 +4,15 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.TAAJIJI_SHOP_DIALOG);
+    player:showText(npc,ID.text.TAAJIJI_SHOP_DIALOG)
 
     stock = {
         4411,   756,1,     --Dhalmel Pie
@@ -33,12 +33,12 @@ function onTrigger(player,npc)
         4493,   184,3,     --Windurstian Tea
         4555,  1711,3      --Windurst Salad
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

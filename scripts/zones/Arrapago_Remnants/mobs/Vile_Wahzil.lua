@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    local instance = mob:getInstance();
+    local instance = mob:getInstance()
     instance:getEntity(bit.band(ID.npc[2][2].SOCKET, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.DISAPPEAR)
 end
 

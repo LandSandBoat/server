@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Tiger
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 -- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.
@@ -16,11 +16,11 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
 function onMobFight(mob,target)
 
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 end;

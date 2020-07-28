@@ -3,7 +3,7 @@
 --  Mob: Ark Angel MR
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
@@ -32,16 +32,16 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
 function onMobFight(mob,target)
-    local charm = mob:getLocalVar("Charm");
+    local charm = mob:getLocalVar("Charm")
 
     if (charm == 0 and mob:getHPP() <  50) then
-        mob:useMobAbility(710);
-        mob:setLocalVar("Charm",1);
+        mob:useMobAbility(710)
+        mob:setLocalVar("Charm",1)
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 end;

@@ -4,9 +4,9 @@
 -- !pos -221 -24 19 206
 -------------------------------------
 
-require("scripts/globals/bcnm");
-require("scripts/globals/missions");
-require("scripts/globals/keyitems");
+require("scripts/globals/bcnm")
+require("scripts/globals/missions")
+require("scripts/globals/keyitems")
 
 -------------------------------------
 
@@ -35,37 +35,37 @@ require("scripts/globals/keyitems");
 
 function onTrade(player,npc,trade)
     TradeBCNM(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
 
     -- if (player:hasKeyItem(tpz.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
-        --player:startEvent(5);
+        --player:startEvent(5)
     --elseif (EventTriggerBCNM(player,npc)) then
     -- Temp disabled pending fixes for the BCNM mobs.
 
     EventTriggerBCNM(player,npc)
-end;
+end
 
 function onEventUpdate(player,csid,option,extras)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
+    -- printf("onUpdate CSID: %u",csid)
+    -- printf("onUpdate RESULT: %u",option)
 
    EventUpdateBCNM(player,csid,option,extras)
 
-end;
+end
 
 -----------------------------------
 -- onEventFinish Action
 -----------------------------------
 
 function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
+    -- printf("onFinish CSID: %u",csid)
+    -- printf("onFinish RESULT: %u",option)
 
     if (csid == 5) then
-        player:completeMission(ACP,tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II);
-        player:addMission(ACP,tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III);
+        player:completeMission(ACP,tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
+        player:addMission(ACP,tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
     else
         EventFinishBCNM(player,csid,option)
     end

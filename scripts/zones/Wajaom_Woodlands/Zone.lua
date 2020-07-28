@@ -3,25 +3,25 @@
 -- Zone: Wajaom_Woodlands (51)
 --
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs");
-require("scripts/globals/chocobo_digging");
-require("scripts/globals/settings");
-require("scripts/globals/missions");
+local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/settings")
+require("scripts/globals/missions")
 require("scripts/globals/chocobo")
-require("scripts/globals/quests");
-require("scripts/globals/titles");
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
 
 function onChocoboDig(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
-end;
+end
 
 function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
     tpz.chocobo.initZone(zone)
-end;
+end
 
 function onZoneIn(player,prevZone)
     local cs = -1
@@ -41,16 +41,16 @@ function onZoneIn(player,prevZone)
 end
 
 function onRegionEnter(player,region)
-end;
+end
 
 function onEventUpdate(player,csid,option)
-    -- printf("Update CSID: %u",csid);
-    -- printf("Update RESULT: %u",option);
-end;
+    -- printf("Update CSID: %u",csid)
+    -- printf("Update RESULT: %u",option)
+end
 
 function onEventFinish(player,csid,option)
-    -- printf("Finish CSID: %u",csid);
-    -- printf("Finish RESULT: %u",option);
+    -- printf("Finish CSID: %u",csid)
+    -- printf("Finish RESULT: %u",option)
     if csid == 510 then
         player:setCharVar("threemenandaclosetCS",3)
     elseif csid == 11 then
@@ -59,7 +59,7 @@ function onEventFinish(player,csid,option)
         player:startEvent(22)
     elseif csid == 22 then
         player:completeMission(TOAU,tpz.mission.id.toau.UNRAVELING_REASON)
-        player:setTitle(tpz.title.ENDYMION_PARATROOPER);
+        player:setTitle(tpz.title.ENDYMION_PARATROOPER)
         player:setCharVar("TOAUM40_STARTDAY", 0)
         player:addMission(TOAU,tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
     elseif csid == 513 then

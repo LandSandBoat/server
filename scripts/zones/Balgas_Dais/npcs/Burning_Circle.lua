@@ -4,8 +4,8 @@
 -- Balga's Dais Burning Circle
 -- !pos 299 -123 345 146
 -------------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
+require("scripts/globals/keyitems")
+require("scripts/globals/bcnm")
 
     ---- 0: Rank 2 Final Mission for Bastok "The Emissary" and Sandy "Journey Abroad"
     ---- 1: Steamed Sprouts (BCNM 40, Star Orb)
@@ -43,16 +43,16 @@ function onTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
+    -- printf("onUpdate CSID: %u",csid)
+    -- printf("onUpdate RESULT: %u",option)
     local res = EventUpdateBCNM(player,csid,option)
     print(res)
     return res
 end
 
 function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
+    -- printf("onFinish CSID: %u",csid)
+    -- printf("onFinish RESULT: %u",option)
 
     if EventFinishBCNM(player,csid,option) then
         return

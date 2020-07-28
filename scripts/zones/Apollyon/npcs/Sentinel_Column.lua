@@ -3,22 +3,22 @@
 -- NPC:  Sentinel_Column
 -- !pos 643 0 -609 38
 -----------------------------------
-require("scripts/globals/limbus");
+require("scripts/globals/limbus")
 
 -----------------------------------
 -- onTrade Action
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
 
 function onTrigger(player,npc)
-    player:startEvent(221, 127);
-end;
+    player:startEvent(221, 127)
+end
 
 -----------------------------------
 -- onEventUpdate
@@ -33,8 +33,8 @@ function onEventUpdate(player,csid,option)
         player:getBattlefieldTimeLeft(4), -- NE Apollyon
         player:getBattlefieldTimeLeft(5), -- Central Apollyon
         player:getBattlefieldTimeLeft(6)  -- CS Apollyon
-    );
-end;
+    )
+end
 
 -----------------------------------
 -- onEventFinish

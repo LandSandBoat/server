@@ -8,21 +8,21 @@ require("scripts/globals/conquest")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1, 538, -2, -501,  542, 0, -497); -- to The Garden of Ru'hmet
-end;
+    zone:registerRegion(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
+end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
-end;
+end
 
 function onZoneIn(player,prevZone)
-    local cs = -1;
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        --player:setPos(502,0,500,222); -- BC Area
-        player:setPos(539,-1,-500,69);
+        --player:setPos(502,0,500,222) -- BC Area
+        player:setPos(539,-1,-500,69)
     end
-    return cs;
-end;
+    return cs
+end
 
 function onRegionEnter(player,region)
 
@@ -31,18 +31,18 @@ function onRegionEnter(player,region)
         [1] = function (x) player:startEvent(100); end,
     }
 
-end;
+end
 
 function onRegionLeave(player,region)
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
     if (csid == 100 and option == 1) then
-        player:setPos(-420,-1,379.900,62,35);
+        player:setPos(-420,-1,379.900,62,35)
     end
 
 end;

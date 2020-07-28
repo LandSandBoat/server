@@ -6,12 +6,12 @@
 
 function onTrigger(player,npc)
     if (npc:getAnimation() == 9) then
-        npc:openDoor();
+        npc:openDoor()
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

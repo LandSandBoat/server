@@ -3,18 +3,18 @@
 --  NPC: Pulykiki
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:startEvent(511);
-end;
+    player:startEvent(511)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

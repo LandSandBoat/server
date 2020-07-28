@@ -5,16 +5,16 @@
 -- Confirmed shop stock, August 2013
 -----------------------------------
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+    onHalloweenTrade(player,trade,npc)
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.NESSRUGETOMALL_SHOP_DIALOG);
+    player:showText(npc,ID.text.NESSRUGETOMALL_SHOP_DIALOG)
 
     stock = {
         4394,    10,1,     --Ginger Cookie
@@ -31,12 +31,12 @@ function onTrigger(player,npc)
         4509,    10,3,     --Distilled Water
         4538,   846,3      --Roast Pipira
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

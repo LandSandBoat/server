@@ -4,7 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -48 -4 30 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs");
+local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/shop")
 
 function onTrade(player,npc,trade)

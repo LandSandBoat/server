@@ -58,7 +58,7 @@ function onEventFinish( player, csid, option)
     if csid == 206 then
         player:setCharVar("PromathiaStatus",10)
     elseif csid == 114 then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end
 

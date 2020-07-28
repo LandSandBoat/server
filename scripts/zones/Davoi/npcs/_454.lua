@@ -2,7 +2,7 @@
 -- Area: Davoi
 -- NPC:
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onSpawn(npc)

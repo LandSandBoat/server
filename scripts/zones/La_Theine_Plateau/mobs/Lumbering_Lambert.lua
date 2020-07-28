@@ -3,7 +3,7 @@
 --  Mob: Lumbering Lambert
 -----------------------------------
 require("scripts/globals/hunts")
-local ID = require("scripts/zones/La_Theine_Plateau/IDs");
+local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
 require("scripts/globals/mobs")
 require("scripts/quests/tutorial")

@@ -4,17 +4,17 @@
 -- Type: NPC
 -- !pos -13 8 53 246
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

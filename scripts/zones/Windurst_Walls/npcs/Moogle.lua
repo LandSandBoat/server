@@ -14,7 +14,7 @@ function onTrigger(player,npc)
 end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     moogleEventFinish(player,csid,option)

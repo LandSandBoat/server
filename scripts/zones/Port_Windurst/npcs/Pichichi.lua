@@ -2,8 +2,8 @@
 -- Area: Port Windurst
 --  NPC: Pichichi
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+require("scripts/globals/quests")
+require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -25,19 +25,19 @@ function onTrigger(player,npc)
             player:startEvent(536)
         end
     elseif CryingOverOnions == QUEST_COMPLETED then
-        player:startEvent(511);
+        player:startEvent(511)
     elseif CryingOverOnions == QUEST_ACCEPTED then
-        player:startEvent(503);
+        player:startEvent(503)
     elseif OnionRings == QUEST_COMPLETED then
-        player:startEvent(445);
+        player:startEvent(445)
     elseif OnionRings == QUEST_ACCEPTED then
-        player:startEvent(438);
+        player:startEvent(438)
     elseif InspectorsGadget == QUEST_COMPLETED then
-        player:startEvent(423);
+        player:startEvent(423)
     elseif InspectorsGadget == QUEST_ACCEPTED then
-        player:startEvent(415);
+        player:startEvent(415)
     elseif KnowOnesOnions == QUEST_COMPLETED then
-        player:startEvent(411);
+        player:startEvent(411)
     elseif KnowOnesOnions == QUEST_ACCEPTED then
         if player:getCharVar("KnowOnesOnions") == 2 then
             player:startEvent(410)

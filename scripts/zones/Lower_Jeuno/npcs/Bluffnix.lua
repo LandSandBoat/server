@@ -4,42 +4,42 @@
 -- Starts and Finishes Quests: Gobbiebags I-X
 -- !pos -43.099 5.900 -114.788 245
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/shop");
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Lower_Jeuno/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/titles")
+require("scripts/globals/shop")
+require("scripts/globals/quests")
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
 
-    local count = trade:getItemCount();
-    local gil = trade:getGil();
-    local inventorySize = player:getContainerSize(0);
-    local TheGobbieBag = gobQuest(player,inventorySize);
-    local pFame = player:getFameLevel(JEUNO);
+    local count = trade:getItemCount()
+    local gil = trade:getGil()
+    local inventorySize = player:getContainerSize(0)
+    local TheGobbieBag = gobQuest(player,inventorySize)
+    local pFame = player:getFameLevel(JEUNO)
 
     if (count == 4 and gil == 0 and player:getQuestStatus(JEUNO,TheGobbieBag[1]) == 1) then
         if (player:getContainerSize(0) < 80) then
             if (trade:hasItemQty(TheGobbieBag[3],1) and trade:hasItemQty(TheGobbieBag[4],1) and trade:hasItemQty(TheGobbieBag[5],1) and trade:hasItemQty(TheGobbieBag[6],1)) then
                 if (pFame >= TheGobbieBag[2]) then
-                    player:startEvent(73, inventorySize+1);
-                    offer = 1;
+                    player:startEvent(73, inventorySize+1)
+                    offer = 1
                 else
-                    player:startEvent(43,inventorySize+1,questStatus,offer);
+                    player:startEvent(43,inventorySize+1,questStatus,offer)
                 end
             end
         else
-            player:startEvent(43,81); -- You're bag's bigger than any gobbie bag I've ever seen...;
+            player:startEvent(43,81) -- You're bag's bigger than any gobbie bag I've ever seen...
         end
     end
-end;
+end
 
 ---------------------------------------------
 -- Current Quest, Required Fame and Items
 ---------------------------------------------
 function gobQuest(player,bagSize)
-    currentQuest = {};
+    currentQuest = {}
     switch (bagSize) : caseof {
         [30] = function (x) currentQuest = {27,3,0848,0652,0826,0788}; end, --Gobbiebag I, Dhalmel Leather, Steel Ingot, Linen Cloth, Peridot
         [35] = function (x) currentQuest = {28,4,0851,0653,0827,0798}; end, --Gobbiebag II, Ram Leather, Mythril Ingot, Wool Cloth, Turquoise
@@ -52,56 +52,56 @@ function gobQuest(player,bagSize)
         [70] = function (x) currentQuest = {123,8,2538,0747,2704,2743}; end, --Gobbiebag IX, Peiste Leather, Orichalcum Ingot, Oil-Soaked Cloth, Oxblood Orb
         [75] = function (x) currentQuest = {124,9,1459,1711,2705,2744}; end, --Gobbiebag X, Griffon Leather, Molybdenum Ingot, Foulard, Angelskin Orb
     default = function (x) end, }
-    return currentQuest;
-end;
+    return currentQuest
+end
 
 function onTrigger(player,npc)
 
-    local WildcatJeuno = player:getCharVar("WildcatJeuno");
+    local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
     if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,12) == false) then
-        player:startEvent(10056);
+        player:startEvent(10056)
     elseif (player:getContainerSize(0) < 80) then
-        local pFame = player:getFameLevel(JEUNO);
-        local inventorySize = player:getContainerSize(0);
-        local TheGobbieBag = gobQuest(player,inventorySize);
-        local questStatus = player:getQuestStatus(JEUNO,TheGobbieBag[1]);
+        local pFame = player:getFameLevel(JEUNO)
+        local inventorySize = player:getContainerSize(0)
+        local TheGobbieBag = gobQuest(player,inventorySize)
+        local questStatus = player:getQuestStatus(JEUNO,TheGobbieBag[1])
 
-        offer = 0;
+        offer = 0
         if (pFame >= TheGobbieBag[2]) then
-            offer = 1;
+            offer = 1
         end
-        player:startEvent(43,inventorySize+1,questStatus,offer);
+        player:startEvent(43,inventorySize+1,questStatus,offer)
     else
-        player:startEvent(43,81); -- You're bag's bigger than any gobbie bag I've ever seen...;
+        player:startEvent(43,81) -- You're bag's bigger than any gobbie bag I've ever seen...
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 
-    local TheGobbieBag = gobQuest(player,player:getContainerSize(0));
+    local TheGobbieBag = gobQuest(player,player:getContainerSize(0))
 
     if (csid == 43 and option == 0) then
         if (player:getQuestStatus(JEUNO,TheGobbieBag[1]) == 0) then
-            player:addQuest(JEUNO,TheGobbieBag[1]);
+            player:addQuest(JEUNO,TheGobbieBag[1])
         end
     elseif (csid == 73) then
         if (gobbieBag == 5) then
-            player:addTitle(tpz.title.GREEDALOX);
+            player:addTitle(tpz.title.GREEDALOX)
         elseif (gobbieBag == 10) then
-            player:addTitle(tpz.title.GRAND_GREEDALOX);
+            player:addTitle(tpz.title.GRAND_GREEDALOX)
         end
 
-        player:changeContainerSize(tpz.inv.INVENTORY,5);
-        player:changeContainerSize(tpz.inv.MOGSATCHEL,5);
-        player:addFame(JEUNO, 30);
-        player:tradeComplete();
-        player:completeQuest(JEUNO,TheGobbieBag[1]);
-        player:messageSpecial(ID.text.INVENTORY_INCREASED);
+        player:changeContainerSize(tpz.inv.INVENTORY,5)
+        player:changeContainerSize(tpz.inv.MOGSATCHEL,5)
+        player:addFame(JEUNO, 30)
+        player:tradeComplete()
+        player:completeQuest(JEUNO,TheGobbieBag[1])
+        player:messageSpecial(ID.text.INVENTORY_INCREASED)
     elseif (csid == 10056) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"),"WildcatJeuno",12,true);
+        player:setMaskBit(player:getCharVar("WildcatJeuno"),"WildcatJeuno",12,true)
     end
 end;

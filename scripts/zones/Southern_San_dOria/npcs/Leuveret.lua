@@ -3,8 +3,8 @@
 --  NPC: Leuveret
 -- Type: General Info NPC
 -------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
 
 function onTrade(player,npc,trade)
     -- FLYERS FOR REGINE
@@ -19,14 +19,14 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
-end;
+end
 
 function onTrigger(player,npc)
-    player:startEvent(621);
-end;
+    player:startEvent(621)
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

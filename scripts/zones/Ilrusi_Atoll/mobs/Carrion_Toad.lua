@@ -4,7 +4,7 @@
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-end;
+end
 
 function onMobDespawn(mob)
     local instance = mob:getInstance()

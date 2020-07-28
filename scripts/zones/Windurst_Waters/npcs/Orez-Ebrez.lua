@@ -4,15 +4,15 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.OREZEBREZ_SHOP_DIALOG);
+    player:showText(npc,ID.text.OREZEBREZ_SHOP_DIALOG)
 
     stock = {
         12466, 20000,1,     --Red Cap
@@ -34,12 +34,12 @@ function onTrigger(player,npc)
         12448,   151,3,     --Bronze Cap
         12449,  1471,3      --Brass Cap
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

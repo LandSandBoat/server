@@ -4,15 +4,15 @@
 -- Standard Merchant NPC
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Windurst_Waters/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    player:showText(npc,ID.text.SHOHRUNTUHRUN_SHOP_DIALOG);
+    player:showText(npc,ID.text.SHOHRUNTUHRUN_SHOP_DIALOG)
 
     stock = {
         4665, 18000,1,     --Haste
@@ -34,12 +34,12 @@ function onTrigger(player,npc)
         4736, 74520,3,     --Scroll of Protectra IV
         4868, 64400,3      --Scroll of Dispel
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST);
+    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

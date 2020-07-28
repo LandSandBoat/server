@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     -- local vars to reduce repeat calls..
@@ -34,7 +34,7 @@ function onTrigger(player,npc)
 
     -- Move platform
     RunElevator(tpz.elevator.FORT_GHELSBA_LIFT)
-end;
+end
 
 function onEventUpdate(player,csid,option)
 end

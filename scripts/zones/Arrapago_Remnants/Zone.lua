@@ -30,7 +30,7 @@ function onInstanceZoneIn(player, instance)
     end
 
     player:addTempItem(5399)
-end;
+end
 
 function onRegionEnter(player, region)
 end

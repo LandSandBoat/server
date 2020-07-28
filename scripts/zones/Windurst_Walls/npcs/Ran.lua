@@ -3,22 +3,22 @@
 --  NPC: Ran
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if (math.random() >= .5) then
-        player:startEvent(272);
+        player:startEvent(272)
     else
-        player:startEvent(273);
+        player:startEvent(273)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
 end;

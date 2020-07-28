@@ -4,18 +4,18 @@
 -- !pos 139.000 -25.500 60.000 27
 -----------------------------------
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
     if player:getCharVar('X_MARKS_THE_SPOT') == 4 then
         player:startEvent(37)
     elseif (npc:getAnimation() == 9) then
-        npc:openDoor();
+        npc:openDoor()
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
     if csid == 37 then
