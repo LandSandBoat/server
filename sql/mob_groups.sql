@@ -1570,7 +1570,7 @@ INSERT INTO `mob_groups` VALUES (88,6347,39,'Nightmare_Goobbue',600,0,3124,5000,
 INSERT INTO `mob_groups` VALUES (89,4931,39,'Nightmare_Sabotender',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (90,6342,39,'Nightmare_Flytrap',600,0,3122,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (91,5351,39,'Nightmare_Manticore',600,0,3124,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (92,2854,39,'Nightmare_Hippogryph',600,0,3123,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (92,6480,39,'Nightmare_Hippogryph',600,0,3123,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (93,6359,39,'Nightmare_Treant',600,0,3124,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (94,6346,39,'Nightmare_Funguar',600,0,3122,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (95,5360,39,'Nightmare_Sheep',600,0,3123,5000,0,95,97,0);
@@ -13542,7 +13542,7 @@ INSERT INTO `mob_groups` VALUES (16,5640,273,'Malodorous_Tarichuk',330,0,0,0,0,1
 INSERT INTO `mob_groups` VALUES (17,6339,273,'Bound_Twitherym',330,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (18,5307,273,'Glaciated_Yanthu',0,4,0,0,9999,121,123,0);
 INSERT INTO `mob_groups` VALUES (19,5756,273,'Slabspitter_Jagil',330,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (20,5474,273,'Strato_Hippogryph',330,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (20,6479,273,'Nesting_Hippogryph',330,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (21,6381,273,'Pestiferous_Acuex',330,0,0,0,0,121,124,0);
 INSERT INTO `mob_groups` VALUES (22,6478,273,'Soundsplitter_Bat',330,0,0,0,0,121,124,0);
 INSERT INTO `mob_groups` VALUES (23,5250,273,'Dullahan',330,0,0,0,0,121,124,0);
