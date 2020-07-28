@@ -16,10 +16,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,1200,15681)
+    target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 1200, 15681)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.EVA, 15)
 end
 

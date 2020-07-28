@@ -16,10 +16,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,30,18216)
+    target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 30, 18216)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.DOUBLE_ATTACK, 100)
 end
 
