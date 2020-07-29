@@ -3355,6 +3355,46 @@ inline int32 CLuaBaseEntity::getEquipID(lua_State *L)
 }
 
 /************************************************************************
+*  Function: getEquippedItem()
+*  Purpose : Returns the Item for a given slot
+*  Example : player:getEquippedItem(SLOT_MAIN)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getEquippedItem(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        uint8 SLOT = (uint8)lua_tointeger(L, 1);
+        TPZ_DEBUG_BREAK_IF(SLOT > 15);
+
+        auto PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto slotItem = PChar->getEquip((SLOTTYPE)SLOT);
+        if(slotItem)
+        {
+            lua_getglobal(L, CLuaItem::className);
+            lua_pushstring(L, "new");
+            lua_gettable(L, -2);
+            lua_insert(L, -2);
+            lua_pushlightuserdata(L, (void*)slotItem);
+
+            if (lua_pcall(L, 2, 1, 0))
+            {
+                return 0;
+            }
+            return 1;
+        }
+    }
+    lua_pushnil(L);
+    return 1;
+}
+
+/************************************************************************
 *  Function: hasItem()
 *  Purpose : Returns true if a player possesses an item
 *  Example : if (player:hasItem(500) --Second var optional
@@ -14289,7 +14329,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     // Items
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquipID),
-
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquippedItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,delItem),
