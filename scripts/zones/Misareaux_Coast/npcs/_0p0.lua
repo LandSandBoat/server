@@ -69,4 +69,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(COP, tpz.mission.id.cop.A_PLACE_TO_RETURN)
         player:addMission(COP, tpz.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
     end
-end;
+end

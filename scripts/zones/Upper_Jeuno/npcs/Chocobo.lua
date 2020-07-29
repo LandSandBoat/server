@@ -122,4 +122,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     end
-end;
+end

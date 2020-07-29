@@ -13,4 +13,4 @@ function onMobDeath(mob, player, isKiller)
     if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 2 and player:getCharVar("TheWaywardAutomationNM") == 0) then
         player:setCharVar("TheWaywardAutomationNM", 1)
     end
-end;
+end

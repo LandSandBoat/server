@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
     else
         EventFinishBCNM(player, csid, option)
     end
-end;
+end

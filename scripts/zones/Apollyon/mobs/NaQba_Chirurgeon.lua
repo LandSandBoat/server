@@ -48,4 +48,4 @@ function onMobDeath(mob, player, isKiller)
         player:addTimeToBattlefield(Central_Temenos_2nd_Floor, 5)
         addLimbusList(player, 2, Central_Temenos_2nd_Floor)
     end
-end;
+end

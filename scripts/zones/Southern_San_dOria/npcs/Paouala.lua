@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end
 
-end;
+end

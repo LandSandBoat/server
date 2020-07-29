@@ -62,4 +62,4 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.leathercraft)
         end
     end
-end;
+end

@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 6)
     end
 
-end;
+end

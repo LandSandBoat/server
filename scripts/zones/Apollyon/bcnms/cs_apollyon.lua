@@ -38,4 +38,4 @@ function onBattlefieldLeave(player, battlefield, leavecode)
         SetServerVariable("[CS_Apollyon]UniqueID", 0)
         player:setPos(-668, 0.1, -666)
     end
-end;
+end

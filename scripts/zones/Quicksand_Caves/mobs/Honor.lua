@@ -20,4 +20,4 @@ function onMobDeath(mob, player, isKiller)
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.COMING_OF_AGE and player:getCharVar("MissionStatus") == 2) then
         player:setCharVar("MissionStatus", 3)
     end
-end;
+end

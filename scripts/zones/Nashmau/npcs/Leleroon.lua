@@ -65,4 +65,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("LeleroonsLetterRed", 1)
         end
     end
-end;
+end

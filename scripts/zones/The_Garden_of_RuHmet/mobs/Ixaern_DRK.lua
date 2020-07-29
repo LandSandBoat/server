@@ -77,4 +77,4 @@ end
 
 function onMobDespawn(mob)
     mob:setLocalVar("AERN_RERAISES", 0)
-end;
+end

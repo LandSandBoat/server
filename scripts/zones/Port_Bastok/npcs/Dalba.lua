@@ -242,4 +242,4 @@ function onEventFinish(player, csid, option)
     end
 
     player:setLocalVar("Dalba_PlayCutscene", 0)
-end;
+end

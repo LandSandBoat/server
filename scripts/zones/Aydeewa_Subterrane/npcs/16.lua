@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
         player:addMission(TOAU, tpz.mission.id.toau.BASTION_OF_KNOWLEDGE)
     end
-end;
+end

@@ -146,4 +146,4 @@ function onEventFinish(player, csid, option)
    if (csid == 32000) then
 
    end
-end;
+end

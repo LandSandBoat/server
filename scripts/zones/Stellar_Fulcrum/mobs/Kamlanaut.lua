@@ -36,4 +36,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.DESTROYER_OF_ANTIQUITY)
-end;
+end

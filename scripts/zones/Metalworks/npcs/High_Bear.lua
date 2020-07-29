@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
             player:setTitle(tpz.title.BEADEAUX_SURVEYOR)
     end
-end;
+end

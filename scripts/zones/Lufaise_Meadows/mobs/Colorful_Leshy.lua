@@ -52,4 +52,4 @@ function onMobDespawn(mob)
         GetMobByID(phIndex):setRespawnTime(GetMobRespawnTime(phIndex))
         mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)) -- Colorful in 12 to 24 hours
     end
-end;
+end

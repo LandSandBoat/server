@@ -50,4 +50,4 @@ local AernList = {16929053, 16929054, 16929055, 16929057, 16929058, 16929060, 16
      GetMobByID(16929088):setPos(mobX, mobY, mobZ)
      SpawnMob(16929088):updateEnmity(player)
     end
-end;
+end

@@ -12,4 +12,4 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Enagakure_Killed", 1)
     end
 
-end;
+end

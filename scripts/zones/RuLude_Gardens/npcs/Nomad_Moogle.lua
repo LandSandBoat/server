@@ -112,4 +112,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.SOUL_GEM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SOUL_GEM)
     end
-end;
+end

@@ -81,4 +81,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
         end
     end
-end;
+end

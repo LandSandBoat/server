@@ -92,4 +92,4 @@ function onEventFinish(player, csid, option)
         end
         player:tradeComplete()
     end
-end;
+end

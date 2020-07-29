@@ -107,4 +107,4 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*500)
         player:addFame(WINDURST, 50)
     end
-end;
+end

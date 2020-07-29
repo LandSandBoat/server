@@ -132,4 +132,4 @@ function onEventFinish(player, csid, option)
         }
         tpz.shop.nation(player, stockB, tpz.nation.SANDORIA)
     end
-end;
+end

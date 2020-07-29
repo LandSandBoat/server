@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FORGOTTEN_HEXAGUN)
     end
 
-end;
+end

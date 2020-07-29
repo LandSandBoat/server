@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
         player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4
         player:messageSpecial(ID.text.ITEM_OBTAINED, 1236)
     end
-end;
+end

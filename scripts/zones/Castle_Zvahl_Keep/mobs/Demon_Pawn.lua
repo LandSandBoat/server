@@ -11,4 +11,4 @@ end
 
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.BARONET_ROMWE_PH, 10, math.random(3600, 28800)) -- 1 to 8 hours
-end;
+end

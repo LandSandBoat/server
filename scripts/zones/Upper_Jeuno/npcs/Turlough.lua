@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAYAKOV_SHOW_TICKET)
     end
-end;
+end

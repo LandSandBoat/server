@@ -98,4 +98,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 25 and option == 1) then
         player:setPos(100, -20.25, 140, 64, 111)
     end
-end;
+end

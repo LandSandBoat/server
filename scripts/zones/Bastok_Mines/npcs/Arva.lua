@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
     if (csid == 4) then
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*50)
     end
-end;
+end

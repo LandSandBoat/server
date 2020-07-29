@@ -10,4 +10,4 @@ end
 
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.HOO_MJUU_THE_TORRENT_PH, 5, 3600) -- 1 hour
-end;
+end

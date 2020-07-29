@@ -16,4 +16,4 @@ end
 
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.TAXIM_PH, 5, 7200) -- 2 hours
-end;
+end

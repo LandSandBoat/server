@@ -81,4 +81,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
     end
-end;
+end

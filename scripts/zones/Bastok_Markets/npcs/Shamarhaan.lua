@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("NoStringsAttachedProgress", 1)
         player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     end
-end;
+end

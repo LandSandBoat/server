@@ -36,4 +36,4 @@ function onMobDespawn(mob)
     local JoL = GetMobByID(ID.mob.JAILER_OF_LOVE)
     local HPEMDES = JoL:getLocalVar("JoL_Qn_hpemde_Killed")
     JoL:setLocalVar("JoL_Qn_hpemde_Killed", HPEMDES+1)
-end;
+end

@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
     end
 
-end;
+end

@@ -27,4 +27,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("LoveAndIceProgress", 1)
         player:delKeyItem(tpz.ki.CARMELOS_SONG_SHEET)
     end
-end;
+end

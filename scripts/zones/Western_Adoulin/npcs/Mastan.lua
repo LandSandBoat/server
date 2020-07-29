@@ -46,4 +46,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MELVIENS_DEATH)
         end
     end
-end;
+end

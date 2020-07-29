@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
         player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end
-end;
+end

@@ -62,4 +62,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.RABBITER)
     end
 
-end;
+end

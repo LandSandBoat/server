@@ -48,4 +48,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.VIRTUOUS_SAINT)
-end;
+end

@@ -124,4 +124,4 @@ function onMobDeath(mob, player, isKiller)
     if (isKiller and mob:getMobMod(tpz.mobMod.BEHAVIOR) == 0) then
         mob:showText(mob, ID.text.MIRACLE)
     end
-end;
+end

@@ -208,4 +208,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("FLOWER_PROGRESS", 2)
         end
     end
-end;
+end

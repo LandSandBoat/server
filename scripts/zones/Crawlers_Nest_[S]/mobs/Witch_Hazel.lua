@@ -11,4 +11,4 @@ end
 
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.MORILLE_MORTELLE_PH, 12, 18000) -- 5 hours
-end;
+end

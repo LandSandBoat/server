@@ -72,4 +72,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 817) then
         player:setCharVar("ClassReunion_TalkedToFupepe", 1)
     end
-end;
+end

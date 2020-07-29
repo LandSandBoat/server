@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:setPos(729.749, -20.319, 407.153, 90, 29) -- Go to Riverne #B01 {R}
     end
 
-end;
+end

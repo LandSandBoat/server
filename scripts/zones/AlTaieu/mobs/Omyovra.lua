@@ -27,4 +27,4 @@ function onMobDisengage(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

@@ -27,4 +27,4 @@ function onEventFinish(player, csid, option)
     if (csid == 10) then
         player:setCharVar("MissionStatus", 3)
     end
-end;
+end

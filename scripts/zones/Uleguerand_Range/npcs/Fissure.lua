@@ -38,4 +38,4 @@ function onEventFinish(player, csid, option)
     if ((csid == 2 or csid == 3 or csid == 4) and option == 2) then
         player:delKeyItem(tpz.ki.MYSTIC_ICE)
     end
-end;
+end

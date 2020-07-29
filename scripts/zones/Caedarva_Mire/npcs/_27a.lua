@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.CYAN_DEEP_SALT)
     end
 
-end;
+end

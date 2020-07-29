@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AhtUrganStatus", 0)
         player:addMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
     end
-end;
+end

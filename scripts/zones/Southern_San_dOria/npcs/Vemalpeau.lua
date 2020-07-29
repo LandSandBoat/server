@@ -50,4 +50,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.KNIGHTS_CONFESSION)
     end
 
-end;
+end

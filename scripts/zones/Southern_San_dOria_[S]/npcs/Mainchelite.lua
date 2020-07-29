@@ -103,4 +103,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 13 and option == 1) then
         player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     end
-end;
+end

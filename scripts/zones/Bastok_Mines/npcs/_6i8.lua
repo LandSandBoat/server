@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     if (csid == 186) then
         player:setCharVar("aThiefinNorgCS", 4)
     end
-end;
+end

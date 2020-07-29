@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
         player:setCharVar("peaceForTheSpiritCS", 5)
     end
-end;
+end

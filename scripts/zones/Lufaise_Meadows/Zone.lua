@@ -69,4 +69,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 7)
         player:addTitle(tpz.title.BANISHER_OF_EMPTINESS)
     end
-end;
+end

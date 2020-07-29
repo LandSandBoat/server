@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("OperationTeatimeProgress", 3)
         player:setCharVar("OTT_DayWait", 0)
     end
-end;
+end

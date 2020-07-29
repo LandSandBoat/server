@@ -41,4 +41,4 @@ function onMobDespawn(mob)
     else
         DisallowRespawn(mobID, true)
     end
-end;
+end

@@ -44,4 +44,4 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.woodworking)
         end
     end
-end;
+end

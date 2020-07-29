@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Tros_Timer", 0)
         end
     end
-end;
+end

@@ -15,4 +15,4 @@ end
 
 function onEventFinish(player, csid, option)
     -- printf("finishCSID: %u", csid)
-end;
+end

@@ -41,4 +41,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
         player:addFame(ADOULIN)
     end
-end;
+end

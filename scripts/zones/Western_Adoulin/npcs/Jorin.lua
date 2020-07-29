@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)
         player:addFame(ADOULIN)
     end
-end;
+end

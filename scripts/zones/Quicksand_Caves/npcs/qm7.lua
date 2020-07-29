@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
     if (csid == 12 and option == 1) then
         SpawnMob(ID.mob.ANCIENT_VESSEL):updateClaim(player)
     end
-end;
+end

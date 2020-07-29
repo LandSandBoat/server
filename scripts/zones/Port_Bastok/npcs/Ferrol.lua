@@ -67,4 +67,4 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_TREMORS)
     end
 
-end;
+end

@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("BoyAndTheBeast", 4)
         end
     end
-end;
+end

@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("aThiefinNorgCS", 2)
     end
 
-end;
+end

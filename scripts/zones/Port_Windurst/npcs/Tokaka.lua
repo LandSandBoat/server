@@ -74,4 +74,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 209) then
         player:setCharVar("TokakaSpokenTo", 1)
     end
-end;
+end

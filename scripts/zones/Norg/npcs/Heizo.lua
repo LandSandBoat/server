@@ -66,4 +66,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     end
 
-end;
+end

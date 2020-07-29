@@ -40,4 +40,4 @@ MakingAmens = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BROKEN_WAND)
         player:tradeComplete()
     end
-end;
+end

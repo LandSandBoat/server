@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.GREEN_RECOMMENDATION_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GREEN_RECOMMENDATION_LETTER)
     end
-end;
+end

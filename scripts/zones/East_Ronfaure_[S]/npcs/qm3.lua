@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.CHARRED_PROPELLER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHARRED_PROPELLER)
     end
-end;
+end

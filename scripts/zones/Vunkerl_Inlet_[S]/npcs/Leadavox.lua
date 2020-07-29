@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.XHIFHUT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.XHIFHUT)
     end
-end;
+end

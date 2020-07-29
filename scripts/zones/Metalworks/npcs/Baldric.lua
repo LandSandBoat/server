@@ -41,4 +41,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.STARDUST)
     end
-end;
+end

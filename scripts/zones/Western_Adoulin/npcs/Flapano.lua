@@ -93,4 +93,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Flapano_Odd_Even", 0)
         end
     end
-end;
+end

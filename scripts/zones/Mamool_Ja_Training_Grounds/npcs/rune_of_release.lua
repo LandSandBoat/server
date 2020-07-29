@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
             v:setPos(0, 0, 0, 0, 52)
         end
     end
-end;
+end

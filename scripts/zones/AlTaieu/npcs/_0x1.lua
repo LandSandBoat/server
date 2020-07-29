@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("[SEA][AlTieu]SouthTowerCS", 1)
         player:setCharVar("[SEA][AlTieu]SouthTower", 0)
     end
-end;
+end

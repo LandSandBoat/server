@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TheWaywardAutomationProgress", 3)
         player:setCharVar("TheWaywardAutomationNM", 0)
     end
-end;
+end

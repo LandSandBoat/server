@@ -83,4 +83,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
         end
     end
-end;
+end

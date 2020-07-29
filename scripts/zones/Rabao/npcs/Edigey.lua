@@ -53,4 +53,4 @@ function onEventFinish(player, csid, option)
         player:addFame(RABAO, 30)
     end
 
-end;
+end

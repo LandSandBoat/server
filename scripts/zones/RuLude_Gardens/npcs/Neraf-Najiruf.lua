@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.DUCAL_GUARDS_LANTERN)
         player:setCharVar("saveMySisterFireLantern", 0)
     end
-end;
+end

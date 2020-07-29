@@ -70,4 +70,4 @@ function onZoneWeatherChange(weather)
     else
         qm1:setStatus(tpz.status.DISAPPEAR)
     end
-end;
+end

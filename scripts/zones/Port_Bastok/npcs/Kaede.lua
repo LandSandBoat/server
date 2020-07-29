@@ -56,4 +56,4 @@ function onEventFinish(player, csid, option)
         player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 0, true)
     end
 
-end;
+end

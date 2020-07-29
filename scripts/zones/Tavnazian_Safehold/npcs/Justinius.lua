@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.NAGMOLADAS_UNDERLING)
     end
 
-end;
+end

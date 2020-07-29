@@ -31,4 +31,4 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.LUFAISE_VORTEX)
     end
 
-end;
+end

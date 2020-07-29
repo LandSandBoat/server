@@ -77,4 +77,4 @@ function onZoneWeatherChange(weather)
     else
         GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(tpz.status.DISAPPEAR)
     end
-end;
+end

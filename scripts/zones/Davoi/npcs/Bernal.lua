@@ -24,4 +24,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.POWER_OF_THE_ORB_ALLOW_PASS)
     end
 
-end;
+end

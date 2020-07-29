@@ -89,4 +89,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         end
     end
-end;
+end

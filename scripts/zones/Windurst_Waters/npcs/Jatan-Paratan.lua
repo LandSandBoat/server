@@ -71,4 +71,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("QuestWonderingMin_var", 0)
         end
     end
-end;
+end

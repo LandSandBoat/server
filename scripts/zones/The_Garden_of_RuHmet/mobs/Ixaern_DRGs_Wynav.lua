@@ -42,4 +42,4 @@ end
 
 function onMobDespawn(mob)
     mob:setLocalVar("repop", mob:getBattleTime()) -- This get erased on respawn automatic.
-end;
+end

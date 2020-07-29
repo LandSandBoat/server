@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.TEARJERKER)
         player:setCharVar("SirensTear", 0)
     end
-end;
+end

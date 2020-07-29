@@ -227,4 +227,4 @@ function onEventFinish(player, csid, option)
     end
 
     player:setLocalVar("Lamepaue_PlayCutscene", 0)
-end;
+end

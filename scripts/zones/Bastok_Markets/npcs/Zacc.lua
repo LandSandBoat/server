@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
         player:addQuest(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 1)
     end
-end;
+end

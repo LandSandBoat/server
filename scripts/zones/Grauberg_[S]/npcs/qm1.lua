@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.THE_ESSENCE_OF_DANCE)
         player:setCharVar("QuestStatus_DNC_AF1", 5)
     end
-end;
+end

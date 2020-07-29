@@ -23,4 +23,4 @@ function onEventFinish(player, csid, option)
     if (csid==11) then
         player:setCharVar("FiresOfDiscProg", 4)
     end
-end;
+end

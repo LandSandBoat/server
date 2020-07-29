@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     if (csid == 26 and option == 1) then
         player:setPos(260, -0.25, -20, 254, 111)
     end
-end;
+end

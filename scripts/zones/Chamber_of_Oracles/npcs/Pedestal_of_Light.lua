@@ -56,4 +56,4 @@ function onEventFinish(player, csid, option)
         player:addMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
     end
 
-end;
+end

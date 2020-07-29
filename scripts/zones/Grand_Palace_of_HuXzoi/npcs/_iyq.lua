@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(COP, tpz.mission.id.cop.A_FATE_DECIDED)
         player:addMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
     end
-end;
+end

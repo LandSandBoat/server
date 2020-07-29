@@ -33,4 +33,4 @@ function onEventFinish(player, csid, option)
         -- You will be transported back to the entrance of Castle Zvahl Baileys
         player:setPos(378.222, -12, -20.299, 125, 161)
     end
-end;
+end

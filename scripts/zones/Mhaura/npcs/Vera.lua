@@ -77,4 +77,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
     end
 
-end;
+end

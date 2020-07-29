@@ -81,4 +81,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 2)
     end
 
-end;
+end

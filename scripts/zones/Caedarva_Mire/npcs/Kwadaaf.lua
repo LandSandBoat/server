@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:setPos(-235, -4, 220, 0, 72)
     end
 
-end;
+end

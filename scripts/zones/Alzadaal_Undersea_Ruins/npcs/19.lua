@@ -28,4 +28,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 8) then
         player:setCharVar("AhtUrganStatus", 1)
     end
-end;
+end

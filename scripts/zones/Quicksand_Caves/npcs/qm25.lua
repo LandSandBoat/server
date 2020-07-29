@@ -14,4 +14,4 @@ function onTrigger(player, npc)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
         SetServerVariable("[POP]Antican_Tag", os.time() + 7200) -- "pause" UpdateNPCSpawnPoint
     end
-end;
+end

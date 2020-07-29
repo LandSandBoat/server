@@ -18,4 +18,4 @@ function onMobDeath(mob, player, isKiller)
 
     player:addTitle(tpz.title.WARCHIEF_WRECKER)
 
-end;
+end

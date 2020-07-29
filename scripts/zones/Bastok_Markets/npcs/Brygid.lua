@@ -135,4 +135,4 @@ function onEventFinish(player, csid, option)
         player:addFame(BASTOK, 30)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end
-end;
+end

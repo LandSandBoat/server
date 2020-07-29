@@ -64,4 +64,4 @@ function onEventFinish(player, csid, option)
         player:addItem(14929) -- corsair's gants
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14929)
     end
-end;
+end

@@ -73,4 +73,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
-end;
+end

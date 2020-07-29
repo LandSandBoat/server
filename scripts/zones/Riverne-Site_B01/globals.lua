@@ -32,4 +32,4 @@ RIVERNE_SITE_B01 = {
 
 }
 
-return RIVERNE_SITE_B01;
+return RIVERNE_SITE_B01

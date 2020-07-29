@@ -142,4 +142,4 @@ function onEventFinish(player, csid, option, npc)
     else
         npc:wait(0)
     end
-end;
+end

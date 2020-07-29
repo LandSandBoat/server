@@ -27,4 +27,4 @@ function onEventFinish(player, csid, option)
     if (csid == 104) then
         player:setCharVar("TigressStrikesProg", 1)
     end
-end;
+end

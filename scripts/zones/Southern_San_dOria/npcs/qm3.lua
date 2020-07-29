@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.STRANGE_SHEET_OF_PAPER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STRANGE_SHEET_OF_PAPER)
     end
-end;
+end

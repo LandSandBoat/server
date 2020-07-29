@@ -16,4 +16,4 @@ function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.EASTERN_SHADOW_PH, 5, 36000) -- 10 hours
     tpz.mob.phOnDespawn(mob, ID.mob.WESTERN_SHADOW_PH, 5, 36000) -- 10 hours
     tpz.mob.phOnDespawn(mob, ID.mob.SOUTHERN_SHADOW_PH, 5, 57600) -- 16 hours
-end;
+end

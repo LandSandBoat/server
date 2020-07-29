@@ -44,4 +44,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_Boggelmann_KILL", 0)
         player:setCharVar("Cryptonberry_Executor_KILL", 0)
     end
-end;
+end

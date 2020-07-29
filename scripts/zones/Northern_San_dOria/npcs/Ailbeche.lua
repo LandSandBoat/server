@@ -153,4 +153,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 59) then
         player:setCharVar("UnderOathCS", 7)
     end
-end;
+end

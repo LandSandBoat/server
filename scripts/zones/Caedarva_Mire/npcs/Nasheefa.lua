@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:setPos(-219.977, -4, 474.522, 64, 72) -- To Alzadaal Undersea Ruins {R}
     end
 
-end;
+end

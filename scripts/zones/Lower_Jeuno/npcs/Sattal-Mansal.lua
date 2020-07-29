@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
     end
-end;
+end

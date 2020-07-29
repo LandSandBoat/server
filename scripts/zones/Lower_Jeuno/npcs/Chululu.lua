@@ -112,4 +112,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
         end
     end
-end;
+end

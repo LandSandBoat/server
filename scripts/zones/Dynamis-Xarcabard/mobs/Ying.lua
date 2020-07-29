@@ -48,4 +48,4 @@ function onMobDespawn(mob)
             dynaLord:setLocalVar("magImmune", 1)
         end
     end
-end;
+end

@@ -91,4 +91,4 @@ function onTOTDChange(TOTD)
         rainbow:setAnimation(tpz.anim.CLOSE_DOOR)
         SetServerVariable("I_Can_Hear_a_Rainbow", 0)
     end
-end;
+end

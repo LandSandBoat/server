@@ -27,4 +27,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("recollectionsQuest", 1)
     end
 
-end;
+end

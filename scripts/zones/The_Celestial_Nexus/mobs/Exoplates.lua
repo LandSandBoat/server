@@ -67,4 +67,4 @@ function onEventFinish(player, csid, option, target)
         mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
     end
 
-end;
+end

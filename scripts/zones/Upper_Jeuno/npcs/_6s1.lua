@@ -80,4 +80,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ring[option - 4])
         end
     end
-end;
+end

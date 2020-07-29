@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.VUNKERL_HERB)
         player:setCharVar("BoyAndTheBeast", 2)
     end
-end;
+end

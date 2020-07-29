@@ -75,4 +75,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     end
 
-end;
+end

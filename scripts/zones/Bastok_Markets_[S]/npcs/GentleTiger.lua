@@ -40,4 +40,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 160) then
         player:setCharVar("FiresOfDiscProg", 6)
     end
-end;
+end

@@ -198,4 +198,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 519) then
         player:setCharVar("FLOWER_PROGRESS", 3)
     end
-end;
+end

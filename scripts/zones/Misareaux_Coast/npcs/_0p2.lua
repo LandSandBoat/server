@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 1)
         player:setPos(729, -20, 410, 88, 29) -- Go to Riverne #B01
     end
-end;
+end

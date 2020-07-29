@@ -61,4 +61,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
         end
     end
-end;
+end

@@ -60,4 +60,4 @@ function onEventFinish(player, csid, option)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
     end
-end;
+end

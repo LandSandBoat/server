@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:setCharVar("KnotQuiteThere", 2)
     end
-end;
+end

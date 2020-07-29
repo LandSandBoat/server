@@ -83,4 +83,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     end
 
-end;
+end

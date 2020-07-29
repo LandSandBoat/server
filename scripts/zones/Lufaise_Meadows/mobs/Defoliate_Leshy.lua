@@ -15,4 +15,4 @@ function onMobDespawn(mob)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(phIndex, false)
     GetMobByID(phIndex):setRespawnTime(GetMobRespawnTime(phIndex))
-end;
+end

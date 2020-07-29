@@ -29,4 +29,4 @@ function onEventFinish(player, csid, option)
         player:addItem(4351)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4351)
     end
-end;
+end

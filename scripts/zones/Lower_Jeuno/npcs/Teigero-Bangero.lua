@@ -55,4 +55,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 29) then
         player:setCharVar("theLostCardianVar", 1)
     end
-end;
+end

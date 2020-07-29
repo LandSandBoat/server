@@ -19,4 +19,4 @@ end
 
 function onEventFinish(player, csid, option)
     EventFinishBCNM(player, csid, option)
-end;
+end

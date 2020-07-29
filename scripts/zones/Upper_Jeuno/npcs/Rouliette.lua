@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
     end
-end;
+end

@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
     if (csid == 6) then
         player:setCharVar("AhtUrganStatus", 1)
     end
-end;
+end

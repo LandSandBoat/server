@@ -107,4 +107,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("CarbuncleDebacleProgress", 1)
     end
 
-end;
+end

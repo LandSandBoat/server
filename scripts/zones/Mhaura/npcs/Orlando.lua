@@ -84,4 +84,4 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("OrlandoRepeat", 1)
         end
     end
-end;
+end

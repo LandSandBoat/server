@@ -68,4 +68,4 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.POTATION_PATHFINDER)
         player:addFame(ADOULIN)
     end
-end;
+end

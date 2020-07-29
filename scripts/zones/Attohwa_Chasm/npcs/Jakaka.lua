@@ -54,4 +54,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1777) -- Flaxen Pouch
         end
     end
-end;
+end

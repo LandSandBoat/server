@@ -34,4 +34,4 @@ function onBattlefieldLeave(player, battlefield, leavecode)
         --SetServerVariable("[]UniqueID", 0)
     end
 
-end;
+end

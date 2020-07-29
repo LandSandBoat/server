@@ -20,4 +20,4 @@ function onEventFinish(player, csid, option, npc)
         local DoorID = npc:getID()+1
         GetNPCByID(DoorID):openDoor(10)
     end
-end;
+end

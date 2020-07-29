@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.NORTH_BLOCK_CODE)
     end
 
-end;
+end

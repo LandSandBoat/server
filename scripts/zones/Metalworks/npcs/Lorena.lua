@@ -100,4 +100,4 @@ function onEventFinish(player, csid, option, target)
     elseif (csid == 801) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
-end;
+end

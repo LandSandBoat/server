@@ -41,4 +41,4 @@ function onEventFinish(player, csid, option)
         player:setPos(-266.76, -0.635, 280.058, 0, 14) -- To Hall of Transference {R}
     end
 
-end;
+end

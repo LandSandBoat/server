@@ -86,4 +86,4 @@ function onEventFinish(player, csid, option)
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     end
 
-end;
+end

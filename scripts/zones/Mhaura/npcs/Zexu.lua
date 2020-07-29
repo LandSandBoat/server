@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     if (csid == 123) then
         player:setCharVar("theSandCharmVar", 2)
     end
-end;
+end

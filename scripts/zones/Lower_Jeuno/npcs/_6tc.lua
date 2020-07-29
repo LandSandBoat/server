@@ -79,4 +79,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
         end
     end
-end;
+end

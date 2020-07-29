@@ -115,4 +115,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("theLostCardianVar", 3)
     end
 
-end;
+end

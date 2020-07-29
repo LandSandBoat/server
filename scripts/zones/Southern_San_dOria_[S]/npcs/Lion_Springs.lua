@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
         player:setCharVar("QueenOfTheDance", 0)
     end
-end;
+end

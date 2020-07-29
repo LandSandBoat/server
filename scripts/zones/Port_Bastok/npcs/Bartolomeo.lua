@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WelcometoBastok_Event", 1)
     end
 
-end;
+end

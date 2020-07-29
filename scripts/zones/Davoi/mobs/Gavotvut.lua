@@ -13,4 +13,4 @@ function onMobDeath(mob, player, isKiller)
         player:addCharVar("theDoormanKilledNM", 1)
     end
 
-end;
+end

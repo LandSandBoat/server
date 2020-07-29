@@ -59,4 +59,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
     end
 
-end;
+end

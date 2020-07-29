@@ -82,4 +82,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
         end
     end
-end;
+end

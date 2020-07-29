@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.OXIDIZED_PLATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OXIDIZED_PLATE)
     end
-end;
+end

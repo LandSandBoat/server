@@ -39,4 +39,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(COP, tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
         player:addMission(COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
     end
-end;
+end

@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_RECOMMENDATION_LETTER)
     end
-end;
+end

@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ZilartStatus", 1)
     end
 
-end;
+end

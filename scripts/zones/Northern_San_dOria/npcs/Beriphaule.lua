@@ -63,4 +63,4 @@ function onEventFinish(player, csid, option)
         player:setRankPoints(0)
     end
 
-end;
+end

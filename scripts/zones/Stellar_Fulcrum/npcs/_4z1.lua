@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar(tostring(pZone) .. "_Runaway", 0)
     end
 
-end;
+end

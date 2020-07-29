@@ -66,4 +66,4 @@ function onEventFinish(player, csid, option)
             player:setPos(-336.001, 0, 139.815, 0, 22) -- To Floor 5 (Ponderer) {R}
         end
     end
-end;
+end

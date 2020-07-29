@@ -88,4 +88,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
         player:needToZone(true)
     end
-end;
+end

@@ -91,4 +91,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     end
-end;
+end

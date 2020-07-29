@@ -78,4 +78,4 @@ function onMobDespawn(mob)
         firstPrudence:addMod(tpz.mod.ATTP, 100)
         firstPrudence:delMod(tpz.mod.DEFP, -50)
     end
-end;
+end

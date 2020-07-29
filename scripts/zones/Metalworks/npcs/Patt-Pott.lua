@@ -67,4 +67,4 @@ function onEventFinish(player, csid, option)
         player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
     end
 
-end;
+end

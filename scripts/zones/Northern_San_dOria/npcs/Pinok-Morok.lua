@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 2, 1)
         player:addStatusEffect(tpz.effect.SMITHING_IMAGERY, 1, 0, 120)
     end
-end;
+end

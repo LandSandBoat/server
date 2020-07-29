@@ -69,4 +69,4 @@ function onEventFinish(player, csid, option)
 end
 
 function onGameHour(zone)
-end;
+end

@@ -31,4 +31,4 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option, npc)
-end;
+end

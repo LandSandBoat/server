@@ -29,4 +29,4 @@ function onEventFinish(player, csid, option)
     if (csid == 0) then
         player:setCharVar("COP_Tenzen_s_Path", 6)
     end
-end;
+end

@@ -66,4 +66,4 @@ if (correctelement==true and IselementalDayAreDead() == true) then
     GetNPCByID(16932864+313):setStatus(tpz.status.NORMAL)
  end
 
-end;
+end

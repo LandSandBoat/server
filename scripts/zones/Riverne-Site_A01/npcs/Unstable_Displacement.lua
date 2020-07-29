@@ -28,4 +28,4 @@ function onEventUpdate(player, csid, option, extras)
 end
 
 function onEventFinish(player, csid, option)
-end;
+end

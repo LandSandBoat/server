@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Manaclipper_Ticket", 10)
         end
     end
-end;
+end

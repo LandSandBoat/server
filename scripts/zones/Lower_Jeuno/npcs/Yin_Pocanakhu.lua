@@ -29,4 +29,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BorghertzCS", 1)
     end
 
-end;
+end

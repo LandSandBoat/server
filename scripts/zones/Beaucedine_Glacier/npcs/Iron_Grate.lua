@@ -64,4 +64,4 @@ function onEventFinish(player, csid, option)
             player:setCharVar("PSOXJA_RESTRICTION_LVL", LVLcap)
         end
     end
-end;
+end

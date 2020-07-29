@@ -56,4 +56,4 @@ function onEventFinish(player, csid, option)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.TILL_DEATH_DO_US_PART)
     end
 
-end;
+end

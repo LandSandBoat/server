@@ -61,4 +61,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10026 and option == 1) then
         tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_STORMS)
     end
-end;
+end

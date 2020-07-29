@@ -10,4 +10,4 @@ function onMobDeath(mob, player, isKiller)
     if (darkLegacyCS == 3 or darkLegacyCS == 4) then
         player:setCharVar("darkLegacyCS", 5)
     end
-end;
+end

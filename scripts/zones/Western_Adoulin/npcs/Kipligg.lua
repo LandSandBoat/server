@@ -48,4 +48,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(SOA, tpz.mission.id.soa.DONE_AND_DELIVERED)
         player:addMission(SOA, tpz.mission.id.soa.MINISTERIAL_WHISPERS)
     end
-end;
+end

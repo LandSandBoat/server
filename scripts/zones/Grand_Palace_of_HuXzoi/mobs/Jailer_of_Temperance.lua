@@ -104,4 +104,4 @@ function onMobDespawn(mob)
     GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
     mob:setLocalVar("pop", os.time() + 900) -- 15 mins
     GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
-end;
+end

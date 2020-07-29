@@ -53,4 +53,4 @@ function onEventFinish(player, csid, option)
     --elseif
         --
     end
-end;
+end

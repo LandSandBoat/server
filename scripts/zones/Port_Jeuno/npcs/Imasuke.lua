@@ -83,4 +83,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 33) then
         player:setCharVar("circleTime", 5)
     end
-end;
+end

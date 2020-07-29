@@ -36,4 +36,4 @@ function onBattlefieldLeave(player, battlefield, leavecode)
         SetServerVariable("[Temenos_N_Tower]UniqueID", 0)
         player:setPos(580, -1.5, 4.452, 192)
     end
-end;
+end

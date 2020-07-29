@@ -34,4 +34,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 822) then
         player:setCharVar("ChocoboOnTheLoose", 6)
     end
-end;
+end

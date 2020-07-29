@@ -83,4 +83,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addQuest(BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
     end
-end;
+end

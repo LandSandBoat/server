@@ -84,4 +84,4 @@ LA_THEINE_PLATEAU = {
     end
 }
 
-return LA_THEINE_PLATEAU;
+return LA_THEINE_PLATEAU

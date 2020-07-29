@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option)
     if (csid == 619) then
         player:setCharVar("COP_3-taru_story", 1)
     end
-end;
+end

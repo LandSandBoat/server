@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.CLUMP_OF_ANIMAL_HAIR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLUMP_OF_ANIMAL_HAIR)
     end
-end;
+end

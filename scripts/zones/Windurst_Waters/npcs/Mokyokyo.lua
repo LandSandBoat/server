@@ -65,4 +65,4 @@ printf("RESULT: %u", option)
         player:setCharVar("WWatersRTenText", 1)
     end
 
-end;
+end

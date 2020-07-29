@@ -92,4 +92,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 552) -- Hiwon's hair
         end
     end
-end;
+end

@@ -42,4 +42,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Kenapa_Overnight_Hour_var", VanadielHour())
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMALL_BAG)
     end
-end;
+end

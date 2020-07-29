@@ -13,4 +13,4 @@ end
 
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.SHARP_EARED_ROPIPI_PH, 20, 300) -- 5 minutes
-end;
+end

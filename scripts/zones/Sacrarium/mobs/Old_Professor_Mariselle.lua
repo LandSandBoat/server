@@ -68,4 +68,4 @@ function onMobDespawn( mob )
     local rand = math.random((2), (7))
     SetServerVariable("Old_Prof_Spawn_Location", rand)
 
-end;
+end

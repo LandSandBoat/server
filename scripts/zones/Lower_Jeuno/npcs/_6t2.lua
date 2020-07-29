@@ -110,4 +110,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ANewDawn_Event", 0)
     end
 
-end;
+end

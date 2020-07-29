@@ -46,4 +46,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
         player:tradeComplete()
     end
-end;
+end

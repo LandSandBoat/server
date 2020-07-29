@@ -59,4 +59,4 @@ function onEventFinish(player, csid, option)
             player:needToZone(true)
         end
     end
-end;
+end

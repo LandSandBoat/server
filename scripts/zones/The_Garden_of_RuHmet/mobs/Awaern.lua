@@ -69,4 +69,4 @@ function onMobDespawn(mob)
         SetServerVariable("[SEA]IxAernDRG_PH", 0) -- Clear the variable because it is spawned!
     end
 
-end;
+end

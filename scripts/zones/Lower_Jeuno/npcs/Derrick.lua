@@ -95,4 +95,4 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     end
-end;
+end

@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
         player:setCharVar("RELIC_IN_PROGRESS", 0)
     end
-end;
+end

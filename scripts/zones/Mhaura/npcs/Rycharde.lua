@@ -317,4 +317,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 97) then  --end commentary quest the basics
         player:setCharVar("QuestTheBasicsComentary_var", 0)
     end
-end;
+end

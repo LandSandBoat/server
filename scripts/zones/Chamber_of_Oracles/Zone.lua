@@ -44,4 +44,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
     end
-end;
+end

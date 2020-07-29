@@ -67,4 +67,4 @@ function onEventFinish(player, csid, option)
         player:addItem(14522) -- corsair's frac
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14522)
     end
-end;
+end

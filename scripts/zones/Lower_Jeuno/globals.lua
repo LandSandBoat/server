@@ -126,4 +126,4 @@ LOWER_JEUNO = {
     lampPoints = {5, 12, 17, 20, 21, 30, 33, 39, 40, 44, 45, 46}
 }
 
-return LOWER_JEUNO;
+return LOWER_JEUNO

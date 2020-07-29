@@ -224,4 +224,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIFE_FLOAT)
     end
-end;
+end

@@ -71,4 +71,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.ASSAULT_ARMBAND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASSAULT_ARMBAND)
     end
-end;
+end

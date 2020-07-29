@@ -72,4 +72,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 23 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING, {item=4952, fame=75, fameArea=NORG, title=tpz.title.APPRENTICE_SOMMELIER})) then -- Scroll of Hojo: Ichi
         player:delKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW)
     end
-end;
+end

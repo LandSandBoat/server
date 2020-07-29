@@ -33,4 +33,4 @@ player:setCharVar("BASTOK91", 2)
 elseif (csid == 104) then
 player:setCharVar("BASTOK91", 4)
 end
-end;
+end

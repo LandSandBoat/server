@@ -36,4 +36,4 @@ function onEventFinish(player, csid, option)
         player:setPos(-220.075, -15.999, 79.634, 62, 28) -- To Sacrarium {R}
     end
 
-end;
+end

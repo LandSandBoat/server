@@ -71,4 +71,4 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_FROST)
     end
 
-end;
+end

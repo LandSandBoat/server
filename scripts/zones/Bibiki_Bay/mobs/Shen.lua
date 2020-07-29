@@ -31,4 +31,4 @@ function onMonsterMagicPrepare(mob, target)
         return 240 -- drown
     end
 
-end;
+end

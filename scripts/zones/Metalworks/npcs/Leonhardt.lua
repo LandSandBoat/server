@@ -30,4 +30,4 @@ function onEventFinish(player, csid, option)
     elseif (csid == 950) then
         player:setCharVar("TOO_MANY_CHEFS", 4)
     end
-end;
+end

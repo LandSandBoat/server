@@ -62,4 +62,4 @@ function onEventFinish(player, csid, option)
         SpawnMob(ID.mob.ANCIENT_WEAPON):updateClaim(player)
         SpawnMob(ID.mob.LEGENDARY_WEAPON):updateClaim(player)
     end
-end;
+end

@@ -37,4 +37,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SOUTHEASTERN_STAR_CHARM)
     end
 
-end;
+end

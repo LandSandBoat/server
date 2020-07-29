@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
     end
-end;
+end

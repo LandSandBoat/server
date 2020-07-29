@@ -25,4 +25,4 @@ function onEventFinish(player, csid, option)
     if (csid == 3) then
         player:setCharVar("BetterPartOfValProg", 2)
     end
-end;
+end

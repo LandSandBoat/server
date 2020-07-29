@@ -35,4 +35,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ALCHEMY_SUPPORT, 0, 7, 1)
         player:addStatusEffect(tpz.effect.ALCHEMY_IMAGERY, 1, 0, 120)
     end
-end;
+end

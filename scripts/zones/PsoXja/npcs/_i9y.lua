@@ -26,4 +26,4 @@ function onEventFinish(player, csid, option, npc)
         npc:openDoor(118) -- this sets the trigger animation to glowing. The time is retail confirmed.
         GetNPCByID(CrystalOperator+1):closeDoor(118) -- tiles will reset at the same time.
     end
-end;
+end

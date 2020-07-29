@@ -33,4 +33,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("peaceForTheSpiritCS", 2)
     end
 
-end;
+end

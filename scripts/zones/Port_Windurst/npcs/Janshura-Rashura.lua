@@ -64,4 +64,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WWatersRTenText", 1)
     end
 
-end;
+end

@@ -23,4 +23,4 @@ function onEventFinish(player, csid, option)
         player:setPos(-379.947, 48.045, 334.059, 192, 9) -- To Pso'Xja {R}
     end
 
-end;
+end

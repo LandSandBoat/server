@@ -14,4 +14,4 @@ function onMobDeath(mob, player, isKiller)
     if (theFirstMeeting == QUEST_ACCEPTED and martialArtsScroll == false) then
         player:addCharVar("theFirstMeetingKilledNM", 1)
     end
-end;
+end

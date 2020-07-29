@@ -80,4 +80,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_ALTAIEU)
     end
-end;
+end

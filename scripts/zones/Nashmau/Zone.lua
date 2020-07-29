@@ -53,4 +53,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AhtUrganStatus", 0)
         player:addMission(TOAU, tpz.mission.id.toau.GHOSTS_OF_THE_PAST)
     end
-end;
+end

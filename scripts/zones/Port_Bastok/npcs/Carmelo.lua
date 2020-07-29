@@ -98,4 +98,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.CHANSON_DE_LIBERTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHANSON_DE_LIBERTE)
     end
-end;
+end

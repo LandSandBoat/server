@@ -163,4 +163,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil_obtained)
         player:setCharVar("ATWTTB_Can_Trade_Gruel", 0)
     end
-end;
+end

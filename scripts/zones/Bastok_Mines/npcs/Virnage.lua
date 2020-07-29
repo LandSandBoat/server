@@ -47,4 +47,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.LETTER_FROM_VIRNAGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_FROM_VIRNAGE)
     end
-end;
+end

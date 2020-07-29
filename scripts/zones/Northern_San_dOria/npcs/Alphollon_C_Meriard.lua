@@ -114,4 +114,4 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
         end
     end
-end;
+end

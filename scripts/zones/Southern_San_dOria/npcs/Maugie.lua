@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
-end;
+end

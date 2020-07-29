@@ -9,4 +9,4 @@ function onMobDeath(mob, player, isKiller)
     if (player:getCharVar("ChasingQuotas_Progress") == 5) then
         player:setCharVar("SturmtigerKilled", 1)
     end
-end;
+end

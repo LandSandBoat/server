@@ -86,4 +86,4 @@ function onEventFinish( player, csid, option)
         player:completeMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
         player:addMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end
-end;
+end

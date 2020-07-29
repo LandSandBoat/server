@@ -43,4 +43,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("sinHunting", 3)
     end
 
-end;
+end

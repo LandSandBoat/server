@@ -59,4 +59,4 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.ANCIENT_VERSE_OF_ROMAEVE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ROMAEVE)
     end
-end;
+end

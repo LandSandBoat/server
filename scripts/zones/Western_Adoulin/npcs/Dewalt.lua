@@ -45,4 +45,4 @@ function onEventFinish(player, csid, option)
         -- Progresses Quest: 'Flavors of Our Lives'
         player:setCharVar("FOOL_Status", 3)
     end
-end;
+end

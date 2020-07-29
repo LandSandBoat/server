@@ -44,4 +44,4 @@ function onMobDeath(mob, player, isKiller)
     DespawnMob(17330317)
     DespawnMob(17330318)
 
-end;
+end

@@ -81,4 +81,4 @@ function onEventFinish(player, csid, option)
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
         player:addMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
     end
-end;
+end

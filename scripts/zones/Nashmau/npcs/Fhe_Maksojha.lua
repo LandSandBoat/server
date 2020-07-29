@@ -49,4 +49,4 @@ function onEventFinish(player, csid, option)
             player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
         end
     end
-end;
+end

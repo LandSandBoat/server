@@ -66,4 +66,4 @@ MineSweep = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MINESWEEPER)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*150)
     end
 
-end;
+end

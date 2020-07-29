@@ -32,4 +32,4 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_Boggelmann_KILL", 2)
         npcUtil.giveKeyItem(player, tpz.ki.VESSEL_OF_LIGHT_KI)
     end
-end;
+end

@@ -52,4 +52,4 @@ function onEventFinish(player, csid, option)
         player:warp() -- Workaround for now, the last zone seems to get messed up due to mog house issues.
 
     end
-end;
+end
