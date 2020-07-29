@@ -16,8 +16,16 @@ function onTrigger(player, npc)
     -- RoV Missions
     if  player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
         player:startEvent(41)
+    elseif player:getCharVar("LionIICipher") == 1 then
+        if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
+            npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
+            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:setCharVar("LionIICipher", 0)
+        end
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
-        player:startEvent(42)
+        local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
+        player:startEvent(42, player:getZoneID(), 0, 0, 0, 0, 0, rank6)
 
     -- CoP Missions
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
@@ -47,10 +55,13 @@ function onEventFinish(player, csid, option)
         player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
         player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
     elseif csid == 42 then
-        npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
-        player:addItem(10159) -- Cipher: Lion II
-        player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-        player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
+            npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
+            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        else
+            player:setCharVar("LionIICipher", 1)
+        end
 
     -- CoP Missions
     elseif csid == 912 then
