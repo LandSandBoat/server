@@ -19,6 +19,7 @@ from migrations import broken_linkshells
 from migrations import spell_family_column
 from migrations import mission_blob_extra
 from migrations import cop_mission_ids
+from migrations import extend_mission_log
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -28,6 +29,7 @@ migrations = [
     crystal_storage,
     broken_linkshells,
     spell_family_column,
+    extend_mission_log,
     mission_blob_extra,
     cop_mission_ids,
 ]
@@ -382,10 +384,14 @@ def run_all_migrations(silent=False):
                 return
             else:
                 backup_db()
+        os.remove('migration_errors.log')
         for migration in migrations_needed:
             print('Running migrations for ' + migration.migration_name() + '...')
             migration.migrate(cur, db)
         print(Fore.GREEN + 'Finished migrations!')
+        if os.path.exists('migration_errors.log'):
+            print(Fore.RED + 'There were errors with some migrations, this likely means one or more characters \n'
+                'have corrupt data in some field. See migration_errors.log for more details.')
         time.sleep(0.5)
     else:
         print(Fore.GREEN + 'All migrations done!')
