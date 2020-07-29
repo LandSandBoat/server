@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Port Windurst
 -- NPC: Kohlo-Lakolo
--- Invloved In Quests: 
+-- Invloved In Quests:
 -- Truth, Justice, and the Onion Way!,
 -- Know One's Onions,
 -- Inspector's Gadget,
@@ -65,7 +65,7 @@ function onTrigger(player, npc)
     then
         player:startEvent(429)
     elseif  (OnionRings == QUEST_ACCEPTED or OnionRings == QUEST_AVAILABLE) and player:hasKeyItem(tpz.ki.OLD_RING) then
-        player:startEvent(430, 0, tpz.ki.OLD_RING) --TODO get correct time for quest to expire. 
+        player:startEvent(430, 0, tpz.ki.OLD_RING) --TODO get correct time for quest to expire.
     elseif  CryingOverOnions == QUEST_AVAILABLE and OnionRings == QUEST_COMPLETED and Fame >=3 then
         player:startEvent(496)
     elseif CryingOverOnions == QUEST_ACCEPTED and player:getCharVar("CryingOverOnions") ==2 then

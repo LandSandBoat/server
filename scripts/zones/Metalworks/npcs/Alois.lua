@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)    
+    local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 0) then
         player:startEvent(773)
@@ -59,6 +59,6 @@ function onEventFinish(player, csid, option)
             {item = 17775, tpz.title.ASSASSIN_REJECT, var = {"FadedPromises"}, fame=10})
         then
             player:delKeyItem(tpz.ki.DIARY_OF_MUKUNDA)
-        end    
+        end
     end
 end

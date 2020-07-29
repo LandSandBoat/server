@@ -124,7 +124,7 @@ function onZoneIn(player, prevZone)
         player:setPos(-351.136, -2.25, -380, 253)
     end
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 0) then
-        cs = 201 
+        cs = 201
     end
     player:setCharVar("Ru-Hmet-TP", 0)
     return cs

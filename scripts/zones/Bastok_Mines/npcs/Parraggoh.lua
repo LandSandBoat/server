@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
     local BeautyAndTheGalka = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
-    
+
     if player:hasKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)
     elseif BeautyAndTheGalka == QUEST_ACCEPTED then

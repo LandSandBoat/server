@@ -77,7 +77,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 99) then
         if npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.TRUE_WILL, {
                 item = 13782, -- Ninja Chainmail
-                fameArea = NORG,               
+                fameArea = NORG,
                 title = tpz.title.PARAGON_OF_NINJA_EXCELLENCE,
                 var = "trueWillCS"
             })
