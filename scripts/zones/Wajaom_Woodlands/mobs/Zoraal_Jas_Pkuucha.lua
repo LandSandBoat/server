@@ -3,6 +3,8 @@
 --  Mob: Zoraal Ja's Pkuucha
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+require("scripts/globals/hunts")
+-----------------------------------
 
 function onMobSpawn(mob)
     mob:setLocalVar("whenToPopZoraal", math.random(20, 50))
@@ -38,4 +40,5 @@ function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 447)
 end
