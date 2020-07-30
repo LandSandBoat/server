@@ -10,7 +10,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -31,8 +31,8 @@ function onMobWeaponSkill(target, mob, skill)
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, 15)
 
     local dmgmod = 2
-    local info = MobMagicalMove(mob,target,skill,mob:getWeaponDmg()*3,tpz.magic.ele.EARTH,dmgmod,TP_MAB_BONUS,1)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.EARTH,MOBPARAM_IGNORE_SHADOWS)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, tpz.magic.ele.EARTH, dmgmod, TP_MAB_BONUS, 1)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.EARTH, MOBPARAM_IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
     if target:hasStatusEffect(tpz.effect.ELEMENTALRES_DOWN) then

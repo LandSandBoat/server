@@ -10,14 +10,14 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if player:getCharVar("GiohAijhriSpokenTo") == 1 and not player:needToZone() and npcUtil.tradeHas(trade, 13360) then
         player:startEvent(490)
     end
 end
 
-function onTrigger(player,npc)
-    local twinstoneBonding = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TWINSTONE_BONDING)
+function onTrigger(player, npc)
+    local twinstoneBonding = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
 
     if twinstoneBonding == QUEST_COMPLETED then
         if player:needToZone() then
@@ -34,19 +34,19 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 487 then
-        player:addQuest(WINDURST,tpz.quest.id.windurst.TWINSTONE_BONDING)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
         player:setCharVar("GiohAijhriSpokenTo", 1)
     elseif csid == 490 then
         player:confirmTrade()
         player:needToZone(true)
         player:setCharVar("GiohAijhriSpokenTo", 0)
 
-        if player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
+        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
             npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=tpz.title.BOND_FIXER})
         else
             player:addFame(WINDURST, 10)

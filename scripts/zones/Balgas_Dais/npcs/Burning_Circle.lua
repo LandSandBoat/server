@@ -4,8 +4,8 @@
 -- Balga's Dais Burning Circle
 -- !pos 299 -123 345 146
 -------------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/bcnm");
+require("scripts/globals/keyitems")
+require("scripts/globals/bcnm")
 
     ---- 0: Rank 2 Final Mission for Bastok "The Emissary" and Sandy "Journey Abroad"
     ---- 1: Steamed Sprouts (BCNM 40, Star Orb)
@@ -26,35 +26,35 @@ require("scripts/globals/bcnm");
     ---- 16: Royale Ramble (KSNM 30, Lachesis Orb)
     ---- 17: Moa Constrictors (KSNM 30, Atropos Orb
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if TradeBCNM(player,npc,trade) then
+    if TradeBCNM(player, npc, trade) then
         return
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if EventTriggerBCNM(player,npc) then
+    if EventTriggerBCNM(player, npc) then
         return
     end
 
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid);
-    -- printf("onUpdate RESULT: %u",option);
-    local res = EventUpdateBCNM(player,csid,option)
+function onEventUpdate(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
+    local res = EventUpdateBCNM(player, csid, option)
     print(res)
     return res
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid);
-    -- printf("onFinish RESULT: %u",option);
+function onEventFinish(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 
-    if EventFinishBCNM(player,csid,option) then
+    if EventFinishBCNM(player, csid, option) then
         return
     end
 

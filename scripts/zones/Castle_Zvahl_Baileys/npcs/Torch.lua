@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- killed Dark Spark and clicked same torch used to spawn
     if player:getCharVar("BorghertzSparkKilled") == 1 then
         npcUtil.giveKeyItem(player, tpz.ki.SHADOW_FLAMES)
@@ -34,8 +34,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

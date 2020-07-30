@@ -4,8 +4,8 @@
 -----------------------------------
 
 function onMobSpawn(mob)
-    --print(mob:getName());
-end;
+    --print(mob:getName())
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

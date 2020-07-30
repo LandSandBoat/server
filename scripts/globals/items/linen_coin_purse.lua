@@ -15,5 +15,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addItem(2488,math.random(50,99))
+    target:addItem(2488, math.random(50, 99))
 end

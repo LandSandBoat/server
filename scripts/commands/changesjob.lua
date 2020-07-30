@@ -44,7 +44,7 @@ function onTrigger(player, jobId, level)
 
     -- invert tpz.job table
     local jobNameByNum={}
-    for k,v in pairs(tpz.job) do
+    for k, v in pairs(tpz.job) do
         jobNameByNum[v]=k
     end
 

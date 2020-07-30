@@ -1,7 +1,7 @@
 ---------------------------------------------------
 --  Pile Pitch
 --
---  Description:  Reduces target's HP to 5% of its maximum value, ignores Utsusemi  ,Bind (30 sec)
+--  Description:  Reduces target's HP to 5% of its maximum value, ignores Utsusemi  , Bind (30 sec)
 --  Type: Magical
 --
 ---------------------------------------------------
@@ -11,7 +11,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima

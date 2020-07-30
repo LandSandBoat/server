@@ -9,10 +9,10 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local guildMember = isGuildMember(player, 6)
     local SkillCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
     local SkillLevel = player:getSkillLevel(tpz.skill.GOLDSMITHING)
@@ -28,10 +28,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 304 and option == 1 then
         player:delStatusEffectsByFlag(tpz.effectFlag.SYNTH_SUPPORT, true)
         player:addStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY, 1, 0, 120)

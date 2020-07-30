@@ -10,22 +10,22 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (target:getHP() == 0) then
-        return tpz.msg.basic.CANNOT_ON_THAT_TARG,0
+        return tpz.msg.basic.CANNOT_ON_THAT_TARG, 0
     elseif (player:hasStatusEffect(tpz.effect.SABER_DANCE)) then
         return tpz.msg.basic.UNABLE_TO_USE_JA2, 0
     elseif (player:hasStatusEffect(tpz.effect.TRANCE)) then
-        return 0,0
+        return 0, 0
     elseif (player:getTP() < 800) then
-        return tpz.msg.basic.NOT_ENOUGH_TP,0
+        return tpz.msg.basic.NOT_ENOUGH_TP, 0
     else
         --[[ Apply "Waltz Ability Delay" reduction
             1 modifier = 1 second]]
         local recastMod = player:getMod(tpz.mod.WALTZ_DELAY)
         if (recastMod ~= 0) then
             local newRecast = ability:getRecast() +recastMod
-            ability:setRecast(utils.clamp(newRecast,0,newRecast))
+            ability:setRecast(utils.clamp(newRecast, 0, newRecast))
         end
         -- Apply "Fan Dance" Waltz recast reduction
         if (player:hasStatusEffect(tpz.effect.FAN_DANCE)) then
@@ -35,11 +35,11 @@ function onAbilityCheck(player,target,ability)
                 ability:setRecast(ability:getRecast() * ((fanDanceMerits -5)/100))
             end
         end
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- Only remove TP if the player doesn't have Trance, and only deduct once instead of for each target.
     if (player:getID() == target:getID() and player:hasStatusEffect(tpz.effect.TRANCE) == false) then
         player:delTP(800)
@@ -74,7 +74,7 @@ function onUseAbility(player,target,ability)
 
     target:restoreHP(cure)
     target:wakeUp()
-    player:updateEnmityFromCure(target,cure)
+    player:updateEnmityFromCure(target, cure)
 
     return cure
 end

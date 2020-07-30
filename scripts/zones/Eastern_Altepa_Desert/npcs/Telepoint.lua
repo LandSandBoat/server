@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- trade any normal crystal for a faded crystal
     local item = trade:getItemId()
     if trade:getItemCount() == 1 and item >= 4096 and item <= 4103 and npcUtil.giveItem(player, 613) then
@@ -16,7 +16,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if not player:hasKeyItem(tpz.ki.ALTEPA_GATE_CRYSTAL) then
         npcUtil.giveKeyItem(player, tpz.ki.ALTEPA_GATE_CRYSTAL)
     else
@@ -24,8 +24,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

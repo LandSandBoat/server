@@ -4,18 +4,18 @@
 -- Involved in Quests: Community Service
 -- !pos -72 6 -96 245
 -----------------------------------
-require("scripts/zones/Lower_Jeuno/globals");
+require("scripts/zones/Lower_Jeuno/globals")
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    LOWER_JEUNO.lampTrigger(player, npc);
-end;
+function onTrigger(player, npc)
+    LOWER_JEUNO.lampTrigger(player, npc)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    LOWER_JEUNO.lampEventFinish(player, csid, option, 5);
-end;
+function onEventFinish(player, csid, option)
+    LOWER_JEUNO.lampEventFinish(player, csid, option, 5)
+end

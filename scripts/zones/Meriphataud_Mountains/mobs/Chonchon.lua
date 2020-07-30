@@ -2,6 +2,7 @@
 -- Area: Meriphataud Mountains
 --   NM: Chonchon
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -15,6 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 270)
 end
 
 function onMobDespawn(mob)

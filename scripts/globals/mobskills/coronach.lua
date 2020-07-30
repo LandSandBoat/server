@@ -13,7 +13,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -23,8 +23,8 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 1
     local dmgmod = 2.5
 
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_DMG_VARIES,3,3,3)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.RANGED,tpz.damageType.PIERCING,info.hitslanded)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 3, 3, 3)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.PIERCING, info.hitslanded)
 
     target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.PIERCING)
     return dmg

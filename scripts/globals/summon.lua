@@ -10,7 +10,7 @@ function getSummoningSkillOverCap(avatar)
     return math.max(summoningSkill - maxSkill, 0)
 end
 
-function AvatarPhysicalMove(avatar,target,skill,numberofhits,accmod,dmgmod,dmgmodsubsequent,tpeffect,mtp100,mtp200,mtp300)
+function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
 
     local returninfo = {}
 
@@ -105,7 +105,7 @@ function avatarHitDmg(dmg, pdifMin, pdifMax, fstrMin, fstrMax, critrate)
     return (dmg + fstr) * pdif
 end
 
-function AvatarFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav)
+function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
 
     -- physical attack missed, skip rest
     if skilltype == tpz.attackType.PHYSICAL and dmg == 0 then
@@ -231,7 +231,7 @@ function AvatarPhysicalHit(skill, dmg)
     return skill:getMsg() == tpz.msg.basic.DAMAGE
 end
 
-function avatarFTP(tp,ftp1,ftp2,ftp3)
+function avatarFTP(tp, ftp1, ftp2, ftp3)
     if tp < 1000 then
         tp = 1000
     end

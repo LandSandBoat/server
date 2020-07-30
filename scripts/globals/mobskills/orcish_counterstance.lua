@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:getContinentID() == tpz.continent.THE_SHADOWREIGN_ERA) then
         return 0
     else

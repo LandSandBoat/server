@@ -13,7 +13,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -28,11 +28,11 @@ function onMobWeaponSkill(target, mob, skill)
     typeEffect = tpz.effect.NAME
     statmod = tpz.mod.INT
 
-    resist = applyPlayerResistance(mob,typeEffect,target,isEnfeeble,typeEffect,statmod)
+    resist = applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
     if (resist > 0.2) then
         if (target:getStatusEffect(typeEffect) == nil) then
             skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
-            target:addStatusEffect(typeEffect,power,tic,duration)
+            target:addStatusEffect(typeEffect, power, tic, duration)
         else
             skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
         end

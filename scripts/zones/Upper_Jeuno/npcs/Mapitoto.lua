@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
     if trade:getSlotCount() == 1 and not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067)) then
         local item = trade:getItemId(0)
@@ -26,7 +26,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Minigame complete
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
     local hasTrainersWhistle = player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE)
@@ -46,10 +46,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10223 and option == 1 then
         player:setPos(475, 8.8, -159, 128, 105)
     elseif csid == 10225 then

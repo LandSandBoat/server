@@ -8,11 +8,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.PARALYSIS
     -- Base Stats
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
@@ -27,20 +27,20 @@ function onSpellCast(caster,target,spell)
     local power = 30
 
     --Calculates resist chanve from Reist Blind
-    if (math.random(0,100) >= target:getMod(tpz.mod.PARALYZERES)) then
+    if (math.random(0, 100) >= target:getMod(tpz.mod.PARALYZERES)) then
         if (duration >= 150) then
             -- Erases a weaker blind and applies the stronger one
             local paralysis = target:getStatusEffect(effect)
             if (paralysis ~= nil) then
                 if (paralysis:getPower() < power) then
                     target:delStatusEffect(effect)
-                    target:addStatusEffect(effect,power,0,duration)
+                    target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
                 else
                     spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
-                target:addStatusEffect(effect,power,0,duration)
+                target:addStatusEffect(effect, power, 0, duration)
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
             end
         else

@@ -15,7 +15,7 @@ function afterInstanceRegister(player)
 end
 
 function onInstanceCreated(instance)
-    for i,v in pairs(ID.mob[54]) do
+    for i, v in pairs(ID.mob[54]) do
         SpawnMob(v, instance)
     end
 end
@@ -28,8 +28,8 @@ function onInstanceFailure(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED,10,10)
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
     end
 end
@@ -46,16 +46,16 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
+    for i, v in pairs(chars) do
         if v:getCharVar("AgainstAllOdds") == 2 then
-            v:setCharVar("AgainstAllOdds",3)
+            v:setCharVar("AgainstAllOdds", 3)
         end
         v:startEvent(101)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

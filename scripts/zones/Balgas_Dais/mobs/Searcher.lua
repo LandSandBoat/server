@@ -7,8 +7,8 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, 50);
-end;
+    mob:setMobMod(tpz.mobMod.HP_STANDBACK, 50)
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

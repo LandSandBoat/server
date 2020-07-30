@@ -9,11 +9,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     local thfLevel
     local gil = 0
 
@@ -28,7 +28,7 @@ function onUseAbility(player,target,ability,action)
     if (target:isMob() and math.random(100) < mugChance and target:getMobMod(tpz.mobMod.MUG_GIL) > 0) then
         local purse = target:getMobMod(tpz.mobMod.MUG_GIL)
         local fatpurse = target:getGil()
-        gil = fatpurse / (8 + math.random(0,8))
+        gil = fatpurse / (8 + math.random(0, 8))
         if (gil == 0) then
             gil = fatpurse / 2
         end

@@ -11,7 +11,7 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if not player:getPet() then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
@@ -21,7 +21,7 @@ function onAbilityCheck(player,target,ability)
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     player:addStatusEffect(tpz.effect.OVERDRIVE, 0, 0, 60)
     return tpz.effect.OVERDRIVE
 end

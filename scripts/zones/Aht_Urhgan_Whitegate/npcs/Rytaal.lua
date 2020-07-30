@@ -11,10 +11,10 @@ require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local currentday = tonumber(os.date("%j"))
     local lastIDtag = player:getCharVar("LAST_IMPERIAL_TAG")
@@ -24,30 +24,30 @@ function onTrigger(player,npc)
     local haveimperialIDtag
 
     if player:getCurrentMission(TOAU) == tpz.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 0 then
-        player:startEvent(269,0,0,0,0,0,0,0,0,0)
+        player:startEvent(269, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif player:getCurrentMission(TOAU) <= tpz.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
         player:startEvent(270)
     elseif currentAssault ~= 0 and tpz.besieged.hasAssaultOrders(player) == 0 then
         if player:getCharVar("AssaultComplete") == 1 then
-            player:messageText(player,ID.text.RYTAAL_MISSION_COMPLETE)
+            player:messageText(player, ID.text.RYTAAL_MISSION_COMPLETE)
             player:completeAssault(currentAssault)
         else
-            player:messageText(player,ID.text.RYTAAL_MISSION_FAILED)
+            player:messageText(player, ID.text.RYTAAL_MISSION_FAILED)
             player:addAssault(0)
         end
-        player:setCharVar("AssaultComplete",0)
+        player:setCharVar("AssaultComplete", 0)
     elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.PRESIDENT_SALAHEEM or (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") >= 1) then
         if lastIDtag == 0 then -- first time you get the tag
             tagCount = 1
             player:setCurrency("id_tags", tagCount)
-            player:setCharVar("LAST_IMPERIAL_TAG",currentday)
+            player:setCharVar("LAST_IMPERIAL_TAG", currentday)
         elseif diffday > 0 then
             tagCount = tagCount + diffday
             if tagCount > 3 then -- store 3 TAG max
                 tagCount = 3
             end
             player:setCurrency("id_tags", tagCount)
-            player:setCharVar("LAST_IMPERIAL_TAG",currentday)
+            player:setCharVar("LAST_IMPERIAL_TAG", currentday)
         end
 
         if player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG) then
@@ -55,20 +55,20 @@ function onTrigger(player,npc)
         else
             haveimperialIDtag = 0
         end
-        player:startEvent(268,tpz.ki.IMPERIAL_ARMY_ID_TAG,tagCount,currentAssault,haveimperialIDtag)
+        player:startEvent(268, tpz.ki.IMPERIAL_ARMY_ID_TAG, tagCount, currentAssault, haveimperialIDtag)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     local tagCount = player:getCurrency("id_tags")
     local currentAssault = player:getCurrentAssault()
 
     if csid == 269 then
-        player:setCharVar("AhtUrganStatus",1)
+        player:setCharVar("AhtUrganStatus", 1)
     elseif csid == 268 and option == 1 and player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG) == false and tagCount > 0 then
         npcUtil.giveKeyItem(player, tpz.ki.IMPERIAL_ARMY_ID_TAG)
         player:setCurrency("id_tags", tagCount - 1)

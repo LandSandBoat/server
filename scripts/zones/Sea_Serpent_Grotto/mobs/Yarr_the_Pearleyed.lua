@@ -2,6 +2,7 @@
 -- Area: Sea Serpent Grotto
 --   NM: Yarr the Pearleyed
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 
@@ -15,4 +16,5 @@ function onMobSpawn(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 377)
 end

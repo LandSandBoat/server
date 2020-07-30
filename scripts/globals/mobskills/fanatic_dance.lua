@@ -13,7 +13,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:isInDynamis() and mob:isMobType(MOBTYPE_NOTORIOUS)) then
         return 0
     end

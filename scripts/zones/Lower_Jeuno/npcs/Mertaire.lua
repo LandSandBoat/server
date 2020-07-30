@@ -13,21 +13,21 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 
 local POETIC_PARCHMENT = 634
 
-function onTrade(player,npc,trade)
-    local theOldMonument = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_OLD_MONUMENT)
-    local aMinstrelInDespair = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
+function onTrade(player, npc, trade)
+    local theOldMonument = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
+    local aMinstrelInDespair = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
     -- A MINSTREL IN DESPAIR (poetic parchment)
-    if trade:hasItemQty(POETIC_PARCHMENT,1) and trade:getItemCount() == 1 and theOldMonument == QUEST_COMPLETED and aMinstrelInDespair == QUEST_AVAILABLE then
+    if trade:hasItemQty(POETIC_PARCHMENT, 1) and trade:getItemCount() == 1 and theOldMonument == QUEST_COMPLETED and aMinstrelInDespair == QUEST_AVAILABLE then
         player:startEvent(101)
     end
 end
 
-function onTrigger(player,npc)
-    local theOldMonument = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_OLD_MONUMENT)
-    local painfulMemory = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PAINFUL_MEMORY)
-    local theRequiem = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_REQUIEM)
-    local circleOfTime = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+function onTrigger(player, npc)
+    local theOldMonument = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
+    local painfulMemory = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+    local theRequiem = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+    local circleOfTime = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local job = player:getMainJob()
     local level = player:getMainLvl()
 
@@ -60,38 +60,38 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- THE OLD MONUMENT
     if csid == 102 then
-        player:setCharVar("TheOldMonument_Event",1)
+        player:setCharVar("TheOldMonument_Event", 1)
 
     -- A MINSTREL IN DESPAIR
     elseif csid == 101 then
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
         player:tradeComplete()
-        player:completeQuest(JEUNO,tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
+        player:completeQuest(JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
         player:addFame(JEUNO, 30)
 
         -- Placing this here allows the player to get additional poetic
         -- parchments should they drop them until this quest is complete
-        player:setCharVar("TheOldMonument_Event",0)
+        player:setCharVar("TheOldMonument_Event", 0)
 
     -- PAINFUL MEMORY (Bard AF1)
     elseif csid == 138 and option == 0 then
-        player:setCharVar("PainfulMemoryCS",1) -- player declined quest
+        player:setCharVar("PainfulMemoryCS", 1) -- player declined quest
     elseif (csid == 137 or csid == 138) and option == 1 then
-        player:addQuest(JEUNO,tpz.quest.id.jeuno.PAINFUL_MEMORY)
-        player:setCharVar("PainfulMemoryCS",0)
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+        player:setCharVar("PainfulMemoryCS", 0)
         player:addKeyItem(tpz.ki.MERTAIRES_BRACELET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MERTAIRES_BRACELET)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MERTAIRES_BRACELET)
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif csid == 139 then
-        player:addQuest(JEUNO,tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
-        player:setCharVar("circleTime",1)
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+        player:setCharVar("circleTime", 1)
     end
 end

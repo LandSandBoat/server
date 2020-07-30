@@ -20,8 +20,8 @@ function onMobWeaponSkill(target, mob, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 1
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT,1,1.5,2)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.SLASHING,MOBPARAM_3_SHADOW)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT, 1, 1.5, 2)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING, MOBPARAM_3_SHADOW)
 
     MobStatusEffectMove(mob, target, tpz.effect.DEFENSE_DOWN, 8, 0, 120)
 

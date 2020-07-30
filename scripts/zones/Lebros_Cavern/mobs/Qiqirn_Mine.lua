@@ -12,20 +12,20 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
 
-    for i,v in pairs(players) do
-        v:messageSpecial(ID.text.MINE_COUNTDOWN,10)
-        mob:timer(5000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,5) end)
-        mob:timer(6000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,4) end)
-        mob:timer(7000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,3) end)
-        mob:timer(8000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,2) end)
-        mob:timer(9000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN,1) mob:setLocalVar("Time",1) end)
+    for i, v in pairs(players) do
+        v:messageSpecial(ID.text.MINE_COUNTDOWN, 10)
+        mob:timer(5000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 5) end)
+        mob:timer(6000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 4) end)
+        mob:timer(7000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 3) end)
+        mob:timer(8000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 2) end)
+        mob:timer(9000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 1) mob:setLocalVar("Time", 1) end)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if mob:getLocalVar("Time") == 1 then
         mob:useMobAbility(1838)
-        mob:setLocalVar("Time",2)
+        mob:setLocalVar("Time", 2)
     elseif mob:getLocalVar("Time") == 2 then
         mob:timer(2000, function(mob) mob:setHP(0) end)
     end

@@ -8,13 +8,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAdditionalEffect(player,target,damage)
+function onAdditionalEffect(player, target, damage)
     local chance = 5
 
-    if (math.random(0,99) >= chance) then
-        return 0,0,0
+    if (math.random(0, 99) >= chance) then
+        return 0, 0, 0
     else
-        local TpDrain = math.random(10,30)
+        local TpDrain = math.random(10, 30)
 
         if (TpDrain > target:getTP()) then
             TpDrain = target:getTP()

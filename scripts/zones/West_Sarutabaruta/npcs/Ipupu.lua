@@ -8,10 +8,10 @@ local ID = require("scripts/zones/West_Sarutabaruta/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:hasKeyItem(tpz.ki.NOTES_FROM_HARIGAORIGA) then
         player:startEvent(47, 0, tpz.ki.NOTES_FROM_HARIGAORIGA)
     else
@@ -19,10 +19,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 47 then
         player:delKeyItem(tpz.ki.NOTES_FROM_HARIGAORIGA)
         player:addKeyItem(tpz.ki.NOTES_FROM_IPUPU)

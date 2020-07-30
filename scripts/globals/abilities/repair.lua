@@ -11,22 +11,22 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if not player:getPet() then
-        return tpz.msg.basic.REQUIRES_A_PET,0
+        return tpz.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
-        return tpz.msg.basic.NO_EFFECT_ON_PET,0
+        return tpz.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(tpz.slot.AMMO)
         if (id >= 18731 and id <= 18733 or id == 19185) then
-            return 0,0
+            return 0, 0
         else
-            return tpz.msg.basic.UNABLE_TO_USE_JA,0
+            return tpz.msg.basic.UNABLE_TO_USE_JA, 0
         end
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- 1st need to get the pet food is equipped in the range slot.
     local rangeObj = player:getEquipID(tpz.slot.AMMO)
     local totalHealing = 0
@@ -110,7 +110,7 @@ function onUseAbility(player,target,ability)
     -- Apply regen tpz.effect.
 
     pet:delStatusEffect(tpz.effect.REGEN)
-    pet:addStatusEffect(tpz.effect.REGEN,regenAmount,3,regenTime) -- 3 = tick, each 3 seconds.
+    pet:addStatusEffect(tpz.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
     player:removeAmmo()
 
     return totalHealing

@@ -19,10 +19,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset        = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local ACP           = player:getCurrentMission(ACP)
     local currentDay    = tonumber(os.date("%j"))
@@ -63,10 +63,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 28 then
         player:delStatusEffectSilent(tpz.effect.MARK_OF_SEED)
 

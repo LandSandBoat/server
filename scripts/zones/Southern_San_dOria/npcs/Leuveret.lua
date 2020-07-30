@@ -3,10 +3,10 @@
 --  NPC: Leuveret
 -- Type: General Info NPC
 -------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- FLYERS FOR REGINE
     if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         if player:getCharVar("tradeLeuveret") == 0 then
@@ -19,14 +19,14 @@ function onTrade(player,npc,trade)
             player:messageSpecial(ID.text.FLYER_ALREADY)
         end
     end
-end;
+end
 
-function onTrigger(player,npc)
-    player:startEvent(621);
-end;
+function onTrigger(player, npc)
+    player:startEvent(621)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local param = skill:getParam()
     if (param == 0) then
         param = 50
@@ -30,7 +30,7 @@ function onMobWeaponSkill(target, mob, skill)
 
     local mobHP = mob:getHP()
     local hpMod = skill:getMobHPP() / 100
-    dmgmod = dmgmod + hpMod * 14 + math.random(2,6)
+    dmgmod = dmgmod + hpMod * 14 + math.random(2, 6)
 
     if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
         dmgmod = dmgmod * 5
@@ -38,8 +38,8 @@ function onMobWeaponSkill(target, mob, skill)
 
     mob:setHP(0)
 
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_DMG_VARIES,1,2,3)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.SLASHING,info.hitslanded)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 2, 3)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end

@@ -19,11 +19,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffect = tpz.effect.MAGIC_DEF_BOOST
     local power = 40
     local duration = 60
@@ -38,7 +38,7 @@ function onSpellCast(caster,target,spell)
         caster:delStatusEffect(tpz.effect.DIFFUSION)
     end
 
-    if (target:addStatusEffect(typeEffect,power,0,duration) == false) then
+    if (target:addStatusEffect(typeEffect, power, 0, duration) == false) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
     end
 

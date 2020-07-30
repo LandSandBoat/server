@@ -745,22 +745,22 @@ tpz.magic.spell =
     KAKKA_ICHI            =  509,
     MIGAWARI_ICHI         =  510,
     HASTE_II              =  511,
-    
+
     VENOM_SHELL           =  513,
-    
+
     MAELSTROM             =  515,
-    
+
     METALLIC_BODY         =  517,
-    
+
     SCREWDRIVER           =  519,
-    
+
     MP_DRAINKISS          =  521,
     DEATH_RAY             =  522,
-    
+
     SANDSPIN              =  524,
-    
+
     SMITE_OF_RAGE         =  527,
-    
+
     BLUDGEON              =  529,
     REFUELING             =  530,
     ICE_BREAK             =  531,
@@ -778,30 +778,30 @@ tpz.magic.spell =
     MANDIBULAR_BITE       =  543,
     CURSED_SPHERE         =  544,
     SICKLE_SLASH          =  545,
-    
+
     COCOON                =  547,
     FILAMENTED_HOLD       =  548,
     POLLEN                =  549,
-    
+
     POWER_ATTACK          =  551,
-    
+
     DEATH_SCISSORS        =  554,
     MAGNETITE_CLOUD       =  555,
-    
+
     EYES_ON_ME            =  557,
-    
+
     FRENETIC_RIP          =  560,
     FRIGHTFUL_ROAR        =  561,
-    
+
     HECATOMB_WAVE         =  563,
     BODY_SLAM             =  564,
     RADIANT_BREATH        =  565,
-    
+
     HELLDIVE              =  567,
-    
+
     JET_STREAM            =  569,
     BLOOD_DRAIN           =  570,
-    
+
     SOUND_BLAST           =  572,
     FEATHER_TICKLE        =  573,
     FEATHER_BARRIER       =  574,
@@ -810,17 +810,17 @@ tpz.magic.spell =
     FOOT_KICK             =  577,
     WILD_CARROT           =  578,
     VORACIOUS_TRUNK       =  579,
-    
+
     HEALING_BREEZE        =  581,
     CHAOTIC_EYE           =  582,
-    
+
     SHEEP_SONG            =  584,
     RAM_CHARGE            =  585,
-    
+
     CLAW_CYCLONE          =  587,
     LOWING                =  588,
     DIMENSIONAL_DEATH     =  589,
-    
+
     HEAT_BREATH           =  591,
     BLANK_GAZE            =  592,
     MAGIC_FRUIT           =  593,
@@ -830,14 +830,14 @@ tpz.magic.spell =
     SPROUT_SMACK          =  597,
     SOPORIFIC             =  598,
     QUEASYSHROOM          =  599,
-    
+
     WILD_OATS             =  603,
     BAD_BREATH            =  604,
     GEIST_WALL            =  605,
     AWFUL_EYE             =  606,
-    
+
     FROST_BREATH          =  608,
-    
+
     INFRASONICS           =  610,
     DISSEVERMENT          =  611,
     ACTINIC_BURST         =  612,
@@ -847,26 +847,26 @@ tpz.magic.spell =
     TEMPORAL_SHIFT        =  616,
     VERTICAL_CLEAVE       =  617,
     BLASTBOMB             =  618,
-    
+
     BATTLE_DANCE          =  620,
     SANDSPRAY             =  621,
     GRAND_SLAM            =  622,
     HEAD_BUTT             =  623,
-    
+
     BOMB_TOSS             =  626,
-    
+
     FRYPAN                =  628,
     FLYING_HIP_PRESS      =  629,
-    
+
     HYDRO_SHOT            =  631,
     DIAMONDHIDE           =  632,
     ENERVATION            =  633,
     LIGHT_OF_PENANCE      =  634,
-    
+
     WARM_UP               =  636,
     FIRESPIT              =  637,
     FEATHER_STORM         =  638,
-    
+
     TAIL_SLAP             =  640,
     HYSTERIC_BARRAGE      =  641,
     AMPLIFICATION         =  642,
@@ -876,7 +876,7 @@ tpz.magic.spell =
     MAGIC_HAMMER          =  646,
     ZEPHYR_MANTLE         =  647,
     REGURGITATION         =  648,
-    
+
     SEEDSPRAY             =  650,
     CORROSIVE_OOZE        =  651,
     SPIRAL_SPIN           =  652,
@@ -903,7 +903,7 @@ tpz.magic.spell =
     QUADRATIC_CONTINUUM   =  673,
     FANTOD                =  674,
     THERMAL_PULSE         =  675,
-    
+
     EMPTY_THRASH          =  677,
     DREAM_FLOWER          =  678,
     OCCULTATION           =  679,
@@ -918,7 +918,7 @@ tpz.magic.spell =
     HEAVY_STRIKE          =  688,
     DARK_ORB              =  689,
     WHITE_WIND            =  690,
-    
+
     SUDDEN_LUNGE          =  692,
     QUADRASTRIKE          =  693,
     VAPOR_SPRAY           =  694,
@@ -956,7 +956,7 @@ tpz.magic.spell =
     SCOURING_SPATE        =  726,
     SILENT_STORM          =  727,
     TENEBRAL_CRUSH        =  728,
-    
+
     THUNDERBOLT           =  736,
     HARDEN_SHELL          =  737,
     ABSOLUTE_TERROR       =  738,
@@ -975,7 +975,7 @@ tpz.magic.spell =
     CRUEL_JOKE            =  751,
     CESSPOOL              =  752,
     TEARING_GUST          =  753,
-    
+
     INDI_REGEN            =  768,
     INDI_POISON           =  769,
     INDI_REFRESH          =  770,
@@ -1208,7 +1208,7 @@ tpz.magic.spell =
     IROHA                 =  997,
     YGNAS                 =  998,
     MONBERAUX             =  999,
-    
+
     EXCENMILLE_S          = 1004,
     AYAME_UC              = 1005,
     MAAT_UC               = 1006,

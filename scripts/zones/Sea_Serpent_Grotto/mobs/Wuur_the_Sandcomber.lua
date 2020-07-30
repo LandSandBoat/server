@@ -2,6 +2,7 @@
 -- Area: Sea Serpent Grotto
 --   NM: Wuur the Sandcomber
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 
@@ -11,4 +12,5 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 370)
 end

@@ -5,13 +5,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.ENSPELL_DMG, 0)
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:setMod(tpz.mod.ENSPELL_DMG, 0)
 end

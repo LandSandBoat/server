@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(WildcatBastok,10) then
+    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(WildcatBastok, 10) then
         player:startEvent(430)
     elseif player:getCharVar("comebackQueenCS") == 1 then
         player:startEvent(490)
@@ -37,12 +37,12 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 430 then
-        player:setMaskBit(player:getCharVar("WildcatBastok"),"WildcatBastok",10,true)
+        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 10, true)
     elseif csid == 490 then
         player:startEvent(491)
     elseif csid == 491 then

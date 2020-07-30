@@ -9,7 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:hasKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY) then
         GetNPCByID(npc:getID() - 2):openDoor(15)
     else
@@ -17,7 +17,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 1658) then
         local smallKeyhole = GetNPCByID(ID.npc.SMALL_KEYHOLE)
         if smallKeyhole:getLocalVar("canTradeSecondKey") == 1 then
@@ -29,8 +29,8 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

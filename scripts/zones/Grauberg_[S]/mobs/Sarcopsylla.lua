@@ -2,6 +2,7 @@
 -- Area: Grauberg [S]
 --   NM: Sarcopsylla
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/families/chigoe")}
 require("scripts/globals/mobs")
 -----------------------------------
@@ -15,4 +16,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 502)
 end

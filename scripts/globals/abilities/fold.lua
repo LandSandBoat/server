@@ -10,22 +10,22 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (target:hasCorsairEffect()) then
-        return 0,0
+        return 0, 0
     else
-        return tpz.msg.basic.CANNOT_PERFORM,0
+        return tpz.msg.basic.CANNOT_PERFORM, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     target:fold()
 
     local merit = target:getMerit(tpz.merit.FOLD)
     merit = merit - 10
 
     if (math.random(0, 99) < merit) then
-        target:resetRecast(tpz.recast.ABILITY,193)
+        target:resetRecast(tpz.recast.ABILITY, 193)
     end
 
     return tpz.effect.FOLD

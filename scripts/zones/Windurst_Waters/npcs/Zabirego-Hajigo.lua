@@ -3,25 +3,25 @@
 --  NPC: Zabirego-Hajigo
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-fame = player:getFameLevel(2);
+fame = player:getFameLevel(2)
 
     if (fame == 9) then
-        player:startEvent(784);
+        player:startEvent(784)
     else
-        player:startEvent(687 + fame);
+        player:startEvent(687 + fame)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end
