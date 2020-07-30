@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local job = mob:getMainJob()
     if (job == tpz.job.RDM or job == tpz.job.THF or job == tpz.job.PLD or job == tpz.job.BST or job == tpz.job.RNG or job == tpz.job.BRD or job == tpz.job.NIN or job == tpz.job.COR) then
         return 0
@@ -23,8 +23,8 @@ function onMobWeaponSkill(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.6
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_DMG_VARIES,1,2,3)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.BLUNT,info.hitslanded)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 2, 3)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, info.hitslanded)
 
     local typeEffect = tpz.effect.STUN
 

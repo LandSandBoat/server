@@ -6,19 +6,19 @@ local ID = require("scripts/zones/Abyssea-Grauberg/IDs")
 require("scripts/globals/abyssea")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local DM = player:getDominionNotes()
     local Trophies = 0 -- Max all Trophy = 4294967295 sort out its bit mask later.
     player:startEvent(120, DM, 0, 0, 0, 0, Trophies)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local Price = 0
     local TempItem = false
     local ItemID = 0
@@ -107,18 +107,18 @@ function onEventFinish(player,csid,option)
     if option > 256 and option < 2818 then
         if player:getDominionNotes() > Price then
             if TempItem then
-                if player:addTempItem(ItemID,1) then
-                    player:delCurrency("dominion_note",Price)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED,ItemID)
+                if player:addTempItem(ItemID, 1) then
+                    player:delCurrency("dominion_note", Price)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
                 else
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,ItemID)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
                 end
             else
-                if player:addItem(ItemID,1,a1,v1,a2,v2,a3,v3,a4,v4) then
-                    player:delCurrency("dominion_note",Price)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED,ItemID)
+                if player:addItem(ItemID, 1, a1, v1, a2, v2, a3, v3, a4, v4) then
+                    player:delCurrency("dominion_note", Price)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
                 else
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,ItemID)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
                 end
             end
         end

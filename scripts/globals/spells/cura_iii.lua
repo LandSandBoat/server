@@ -12,7 +12,7 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     if (caster:getID() ~= target:getID()) then
         return tpz.msg.basic.CANNOT_PERFORM_TARG
     else
@@ -20,7 +20,7 @@ function onMagicCastingCheck(caster,target,spell)
     end
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -66,9 +66,9 @@ function onSpellCast(caster,target,spell)
     end
 
     if (USE_OLD_CURE_FORMULA == true) then
-        basecure = getBaseCureOld(power,divisor,constant)
+        basecure = getBaseCureOld(power, divisor, constant)
     else
-        basecure = getBaseCure(power,divisor,constant,basepower)
+        basecure = getBaseCure(power, divisor, constant, basepower)
     end
 
     --Apply Afflatus Misery Bonus to the Result
@@ -102,7 +102,7 @@ function onSpellCast(caster,target,spell)
         caster:setMod(tpz.mod.AFFLATUS_MISERY, 0)
     end
 
-    final = getCureFinal(caster,spell,basecure,minCure,false)
+    final = getCureFinal(caster, spell, basecure, minCure, false)
     final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....

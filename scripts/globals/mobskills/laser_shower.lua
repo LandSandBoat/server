@@ -12,7 +12,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
 
     if (currentForm == 2) then
@@ -28,7 +28,7 @@ function onMobWeaponSkill(target, mob, skill)
     dmgmod = dmgmod * dis
     dmgmod = utils.clamp(dmgmod, 50, 1600)
 
-    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,tpz.attackType.BREATH,tpz.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.LIGHT, MOBPARAM_IGNORE_SHADOWS)
 
     MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.DEFENSE_DOWN, 25, 0, 60)
 

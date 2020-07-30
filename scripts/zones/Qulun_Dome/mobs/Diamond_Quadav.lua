@@ -16,7 +16,7 @@ function onMobInitialize(mob)
     end
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
@@ -34,16 +34,16 @@ function onMobDespawn(mob)
         local hqId = mob:getID() + 1
         local ToD = GetServerVariable("[POP]Za_Dha_Adamantking")
         local kills = GetServerVariable("[PH]Za_Dha_Adamantking")
-        local popNow = (math.random(1,5) == 3 or kills > 6)
+        local popNow = (math.random(1, 5) == 3 or kills > 6)
 
         if os.time() > ToD and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             UpdateNMSpawnPoint(hqId)
-            GetMobByID(hqId):setRespawnTime(math.random(75600,86400))
+            GetMobByID(hqId):setRespawnTime(math.random(75600, 86400))
         else
             UpdateNMSpawnPoint(nqId)
-            mob:setRespawnTime(math.random(75600,86400))
+            mob:setRespawnTime(math.random(75600, 86400))
             SetServerVariable("[PH]Za_Dha_Adamantking", kills + 1)
         end
     end

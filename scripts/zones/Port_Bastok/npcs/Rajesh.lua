@@ -6,31 +6,31 @@
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true and player:getGil() >= 200) then
-        player:startEvent(141);
+        player:startEvent(141)
     else
-        player:startEvent(142);
+        player:startEvent(142)
     end
-    return 1;
+    return 1
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 141 and option == 0) then
-        X = player:getXPos();
+        X = player:getXPos()
 
         if (X >= -58 and X <= -55) then
-            player:delGil(200);
+            player:delGil(200)
         end
     end
 
-end;
+end

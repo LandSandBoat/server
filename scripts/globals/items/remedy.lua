@@ -26,7 +26,7 @@ function onItemUse(target)
         target:delStatusEffect(tpz.effect.PARALYSIS)
     end
 
-    local rDisease = math.random(1,2) -- Disease is not garunteed to be cured, 1 means removed 2 means fail. 50% chance
+    local rDisease = math.random(1, 2) -- Disease is not garunteed to be cured, 1 means removed 2 means fail. 50% chance
     if (rDisease == 1 and target:hasStatusEffect(tpz.effect.DISEASE) == true) then
         target:delStatusEffect(tpz.effect.DISEASE)
     end

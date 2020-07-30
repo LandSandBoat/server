@@ -16,7 +16,7 @@ function error(player, msg)
     player:PrintToPlayer("!checkmission <logID> {player}")
 end
 
-function onTrigger(player,logId,target)
+function onTrigger(player, logId, target)
 
     -- validate logId
     local logName

@@ -3,7 +3,7 @@
 --  Mob: Ark Angel GK
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-6, mobid+1 do
@@ -27,11 +27,11 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

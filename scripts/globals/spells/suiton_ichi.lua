@@ -6,12 +6,12 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
-    --doNinjutsuNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistBonus)
+function onSpellCast(caster, target, spell)
+    --doNinjutsuNuke(V, M, caster, spell, target, hasMultipleTargetReduction, resistBonus)
     local duration = 15 + caster:getMerit(tpz.merit.SUITON_EFFECT) -- T1 bonus debuff duration
     local bonusAcc = 0
     local bonusMab = caster:getMerit(tpz.merit.SUITON_EFFECT) -- T1 mag atk
@@ -29,7 +29,7 @@ function onSpellCast(caster,target,spell)
     params.mabBonus = bonusMab
 
     dmg = doNinjutsuNuke(caster, target, spell, params)
-    handleNinjutsuDebuff(caster,target,spell,30,duration,tpz.mod.THUNDERRES)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, tpz.mod.THUNDERRES)
 
     return dmg
 end

@@ -4,9 +4,9 @@
 -- Type: Standard NPC
 -- !pos 386.091 -13 -17.399 161
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/status");
+local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
 -----------------------------------
 
 local relics = {
@@ -91,93 +91,93 @@ local relics = {
     15067, {12301, 12295, 12387,  4,     0,   4,  2,  5},
     15068, { 1821,     0,     0,  2,     0,  20,  3,  6},
     15069, { 1822,  1589,     0,  0,  1454,   1,  4,  6}
-};
+}
 
-function hasRelic(entity,checktype)
+function hasRelic(entity, checktype)
     -- Type 1 == Player is triggering NPC
     -- Type 2 == Player is trading an item
 
     if checktype == 1 then
         for i=1, #relics, 2 do -- Step through the array grabbing every second (2 value, and see if it matches that itemid.
-            if (entity:hasItem(relics[i],tpz.inv.INVENTORY)) then -- Specifically checks inventory, so that items in other containers (mog safe, satchel, etc) will be ignored.
-                return relics[i];
+            if (entity:hasItem(relics[i], tpz.inv.INVENTORY)) then -- Specifically checks inventory, so that items in other containers (mog safe, satchel, etc) will be ignored.
+                return relics[i]
             end
         end
     elseif checktype == 2 then
-        for i=1, #relics,2 do
-            if (entity:hasItemQty(relics[i],1)) then
-                return relics[i];
+        for i=1, #relics, 2 do
+            if (entity:hasItemQty(relics[i], 1)) then
+                return relics[i]
             end
         end
     end
-end;
+end
 
 function getRelicParameters(itemid)
     for i=1, #relics, 2 do
         if (relics[i] == itemid) then -- If you've found the right itemid, return the array stored in the next value.
-            return relics[i + 1];
+            return relics[i + 1]
         end
     end
-end;
+end
 
-function onTrade(player,npc,trade)
-    local itemid = hasRelic(trade,2);
-    local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS"); -- Stores which item has been taken from the player
-    local relicWait = player:getCharVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
-    local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER"); -- Stores a value that the player has acknowledged they can't hold the item they want to make yet they're making it anyway.
-    local count = trade:getItemCount();
-    local gil = trade:getGil();
-    local tradeOK = false;
+function onTrade(player, npc, trade)
+    local itemid = hasRelic(trade, 2)
+    local eventParams = {} -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
+    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS") -- Stores which item has been taken from the player
+    local relicWait = player:getCharVar("RELIC_DUE_AT") -- Stores time that relic can be retrieved after
+    local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER") -- Stores a value that the player has acknowledged they can't hold the item they want to make yet they're making it anyway.
+    local count = trade:getItemCount()
+    local gil = trade:getGil()
+    local tradeOK = false
 
     -- Starting a stage upgrade.
     -- No relics in progress, found a relic in the trade with other items, and (doesn't already own next stage, or (owns it and has acknowledged this is a bad idea))
     if (currentRelic == 0 and itemid ~= nil and gil == 0 and count > 1 and (player:hasItem(itemid+1) == false or (player:hasItem(itemid+1) == true and relicDupe == 1))) then
-        eventParams = getRelicParameters(itemid);
+        eventParams = getRelicParameters(itemid)
 
         -- Stage 1->2 or 2->3, 3 items + relic itself
-        if (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(eventParams[2],1) and
-        trade:hasItemQty(eventParams[3],1) and trade:hasItemQty(itemid,1)) then
-            tradeOK = true;
+        if (count == eventParams[4] and trade:hasItemQty(eventParams[1], 1) and trade:hasItemQty(eventParams[2], 1) and
+        trade:hasItemQty(eventParams[3], 1) and trade:hasItemQty(itemid, 1)) then
+            tradeOK = true
 
         -- Stage 3->4, just check for attestation + relic itself
-        elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(itemid,1)) then
-            tradeOK = true;
+        elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1], 1) and trade:hasItemQty(itemid, 1)) then
+            tradeOK = true
 
         -- Stage 4->5, Shard + Necropschye + relic itself
-        elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1],1) and trade:hasItemQty(eventParams[2],1) and trade:hasItemQty(itemid,1)) then
-            tradeOK = true;
+        elseif (count == eventParams[4] and trade:hasItemQty(eventParams[1], 1) and trade:hasItemQty(eventParams[2], 1) and trade:hasItemQty(itemid, 1)) then
+            tradeOK = true
         end
 
         -- Trade is valid, so set vars, complete trade, and give a CS
         if tradeOK == true then
-            player:setCharVar("RELIC_IN_PROGRESS",itemid);
-            player:tradeComplete();
-            player:startEvent(11, itemid, eventParams[1], eventParams[2], eventParams[3], eventParams[5], eventParams[6], 0, eventParams[8]);
+            player:setCharVar("RELIC_IN_PROGRESS", itemid)
+            player:tradeComplete()
+            player:startEvent(11, itemid, eventParams[1], eventParams[2], eventParams[3], eventParams[5], eventParams[6], 0, eventParams[8])
         end
 
     -- Already owns the next stage and hasn't acknowledged this is a bad idea yet.
     elseif (itemid ~= nil and relicDupe ~= 1 and player:hasItem(itemid+1) == true) then
-        player:startEvent(20,itemid);
+        player:startEvent(20, itemid)
 
     -- Trading a new relic with one already in progress.  Offer cancellation.
     elseif (currentRelic ~= 0 and itemid ~= nil) then
-        player:startEvent(87);
+        player:startEvent(87)
 
-    -- Has turned in a relic and items, has not turned in currency (no wait), so they must be bringing currency, but not 10,000 piece
+    -- Has turned in a relic and items, has not turned in currency (no wait), so they must be bringing currency, but not 10, 000 piece
     elseif (currentRelic ~= 0 and relicWait == 0 and gil == 0 and itemid~=1451 and itemid~=1454 and itemid~=1457) then
-        eventParams = getRelicParameters(currentRelic);
+        eventParams = getRelicParameters(currentRelic)
 
         -- Has currencyamount of currencytype, and nothing additional.  See below for Aegis, since it's different.
-        if (count == eventParams[6] and trade:hasItemQty(eventParams[5],eventParams[6])) then
-            tradeOK = true;
+        if (count == eventParams[6] and trade:hasItemQty(eventParams[5], eventParams[6])) then
+            tradeOK = true
 
         -- Aegis uses all three currency types for the first 3 stages.  It has currencytype 0 in these situations.
         elseif (count == eventParams[6] * 3 and eventParams[5] == 0) then
             -- Has currencyamount of all three currencies
-            if (trade:hasItemQty(1450,eventParams[6]) and trade:hasItemQty(1453,eventParams[6]) and trade:hasItemQty(1456,eventParams[6])) then
+            if (trade:hasItemQty(1450, eventParams[6]) and trade:hasItemQty(1453, eventParams[6]) and trade:hasItemQty(1456, eventParams[6])) then
                 if (eventParams[5] ~= 1451 and eventParams[5] ~= 1454 and eventParams[5] ~= 1457) then -- disallow trade of 10k piece, else the gob will eat it.
-                    tradeOK = true;
+                    tradeOK = true
                 end
             end
         end
@@ -189,77 +189,77 @@ function onTrade(player,npc,trade)
 
             -- Stage 1->2, wait until next game day
             if (eventParams[7] == 1) then
-                player:setCharVar("RELIC_DUE_AT",getMidnight());
+                player:setCharVar("RELIC_DUE_AT", getVanaMidnight())
 
             -- Stage 2->3, wait RELIC_2ND_UPGRADE_WAIT_TIME (7200s / 2 hours default)
             elseif (eventParams[7] == 2) then
-                player:setCharVar("RELIC_DUE_AT",os.time() + RELIC_2ND_UPGRADE_WAIT_TIME);
+                player:setCharVar("RELIC_DUE_AT", os.time() + RELIC_2ND_UPGRADE_WAIT_TIME)
 
             -- Stage 3->4, wait RELIC_3RD_UPGRADE_WAIT_TIME (3600s / 1 hour default)
             elseif (eventParams[7] == 3) then
-                player:setCharVar("RELIC_DUE_AT",os.time() + RELIC_3RD_UPGRADE_WAIT_TIME);
+                player:setCharVar("RELIC_DUE_AT", os.time() + RELIC_3RD_UPGRADE_WAIT_TIME)
             end
 
-            player:tradeComplete();
-            player:startEvent(13, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8]);
+            player:tradeComplete()
+            player:startEvent(13, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8])
         end
     end
 
-end;
+end
 
-function onTrigger(player,npc)
-    local itemid = hasRelic(player,1);
-    local eventParams = {}; -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS");
-    local relicWait = player:getCharVar("RELIC_DUE_AT"); -- Stores time that relic can be retrieved after
-    local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT");
+function onTrigger(player, npc)
+    local itemid = hasRelic(player, 1)
+    local eventParams = {} -- item1, item2, item3, num_items, currencytype, currencyamount, finalvar
+    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local relicWait = player:getCharVar("RELIC_DUE_AT") -- Stores time that relic can be retrieved after
+    local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
     -- Working on a relic, waiting on completion, and time hasn't passed yet, so tell them to wait longer.
     if (currentRelic ~= 0 and relicWait ~= 0 and relicWait > os.time()) then
-        eventParams = getRelicParameters(currentRelic);
+        eventParams = getRelicParameters(currentRelic)
 
         -- Determine cutscene to play by Stage
         if (eventParams[7] == 1) then
-            player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 2) then
-            player:startEvent(18, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(18, 0, 0, 0, 0, 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 3) then
-            player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, eventParams[8])
         end
 
     -- Working on a relic, waiting on completion, and time has passed.
     elseif (currentRelic ~= 0 and relicWait ~= 0 and relicWait <= os.time()) then
-        eventParams = getRelicParameters(currentRelic);
+        eventParams = getRelicParameters(currentRelic)
 
         -- Determine the cutscene to play by Stage
         if (eventParams[7] == 1) then
-            player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 2) then
-            player:startEvent(19, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(19, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 3) then
-            player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, eventParams[8])
         end
 
     -- Working on a relic and not waiting, so currency is due
     elseif (currentRelic ~= 0 and relicWait == 0) then
-        eventParams = getRelicParameters(currentRelic);
-        player:startEvent(12, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8]);
+        eventParams = getRelicParameters(currentRelic)
+        player:startEvent(12, currentRelic, eventParams[5], eventParams[6], 0, 0, 0, 0, eventParams[8])
 
     -- No relic, or waiting until next conquest tally.
     elseif (itemid == nil or relicConquest > os.time()) then
-        player:startEvent(10);
+        player:startEvent(10)
 
     -- Found a relic and conquest tally is not due (0, or passed), time to explain a stage
     elseif (itemid ~= nil and relicConquest <= os.time()) then
-        eventParams = getRelicParameters(itemid);
+        eventParams = getRelicParameters(itemid)
 
         -- Determine stage based on eventParams[7]
         if (eventParams[7] == 1) then
-            player:startEvent(14, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8]);
+            player:startEvent(14, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 2) then
-            player:startEvent(17, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8]);
+            player:startEvent(17, itemid, eventParams[1], eventParams[2], eventParams[3], 0, 0, 0, eventParams[8])
         elseif (eventParams[7] == 3) then
-            player:startEvent(50, itemid, eventParams[1], 0, 0, 0, 0, 0, eventParams[8]);
+            player:startEvent(50, itemid, eventParams[1], 0, 0, 0, 0, 0, eventParams[8])
 
         -- Stage 4 logic starts here.  Every weapon has its own cutscene.
         elseif (eventParams[7] == 4) then
@@ -286,89 +286,89 @@ function onTrigger(player,npc)
 
     -- Should never happen, but should be here just in case.
     else
-        player:startEvent(10);
+        player:startEvent(10)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-    -- printf("Update CSID: %u",csid);
-    -- printf("Update RESULT: %u",option);
+function onEventUpdate(player, csid, option)
+    -- printf("Update CSID: %u", csid)
+    -- printf("Update RESULT: %u", option)
 
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
     if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
         if (option == 1) then
-            player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1);
+            player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
         elseif (option == 2) then
-            player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4);
+            player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
         elseif (option == 3) then
-            player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20);
+            player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
         end
     end
-end;
+end
 
-function onEventFinish(player,csid,option)
-    -- printf("Finish CSID: %u",csid);
-    -- printf("Finish RESULT: %u",option);
+function onEventFinish(player, csid, option)
+    -- printf("Finish CSID: %u", csid)
+    -- printf("Finish RESULT: %u", option)
 
-    local reward = player:getCharVar("RELIC_IN_PROGRESS");
+    local reward = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- User is cancelling a relic.  Null everything out, it never happened.
     if (csid == 87 and option == 666) then
-        player:setCharVar("RELIC_IN_PROGRESS",0);
-        player:setCharVar("RELIC_DUE_AT",0);
-        player:setCharVar("RELIC_MAKE_ANOTHER",0);
-        player:setCharVar("RELIC_CONQUEST_WAIT",0);
+        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar("RELIC_DUE_AT", 0)
+        player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
 
     -- User is okay with making a relic they cannot possibly accept
     elseif (csid == 20 and option == 1) then
-        player:setCharVar("RELIC_MAKE_ANOTHER",1);
+        player:setCharVar("RELIC_MAKE_ANOTHER", 1)
 
     -- Picking up a finished relic stage 1>2 and 2>3.
     elseif ((csid == 16 or csid == 19) and reward ~= 0) then
         if (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,reward+1);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward+1)
         else
-            player:addItem(reward+1);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,reward+1);
-            player:setCharVar("RELIC_IN_PROGRESS",0);
-            player:setCharVar("RELIC_DUE_AT",0);
-            player:setCharVar("RELIC_MAKE_ANOTHER",0);
-            player:setCharVar("RELIC_CONQUEST_WAIT",getConquestTally());
+            player:addItem(reward+1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, reward+1)
+            player:setCharVar("RELIC_IN_PROGRESS", 0)
+            player:setCharVar("RELIC_DUE_AT", 0)
+            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+            player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
         end
     -- Picking up a finished relic stage 3>4.
     elseif (csid == 52 and reward ~= 0) then
         if (player:getFreeSlotsCount() < 1) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,reward+1);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward+1)
         else
-            player:addItem(reward+1);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,reward+1);
-            player:setCharVar("RELIC_IN_PROGRESS",0);
-            player:setCharVar("RELIC_DUE_AT",0);
-            player:setCharVar("RELIC_MAKE_ANOTHER",0);
-            player:setCharVar("RELIC_CONQUEST_WAIT",0);
+            player:addItem(reward+1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, reward+1)
+            player:setCharVar("RELIC_IN_PROGRESS", 0)
+            player:setCharVar("RELIC_DUE_AT", 0)
+            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
+            player:setCharVar("RELIC_CONQUEST_WAIT", 0)
         end
 
     -- Stage 4 cutscenes
     elseif ((csid >= 68 and csid <= 82) or csid == 86) then
-        player:setCharVar("RELIC_CONQUEST_WAIT",0);
+        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
         switch (csid): caseof
         {
-            [68] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18263); end, -- Spharai
-            [69] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18269); end, -- Mandau
-            [70] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18275); end, -- Excalibur
-            [71] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18281); end, -- Ragnarok
-            [72] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18287); end, -- Guttler
-            [73] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18293); end, -- Bravura
-            [75] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18299); end, -- Gungnir
-            [74] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18305); end, -- Apocalypse
-            [76] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18311); end, -- Kikoku
-            [77] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18317); end, -- Amanomurakumo
-            [78] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18323); end, -- Mjollnir
-            [79] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18329); end, -- Claustrum
-            [81] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18335); end, -- Annihilator
-            [82] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18341); end, -- Gjallarhorn
-            [80] = function (x) player:setCharVar("RELIC_IN_PROGRESS",18347); end, -- Yoichinoyumi
-            [86] = function (x) player:setCharVar("RELIC_IN_PROGRESS",15069); end, -- Aegis
+            [68] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18263); end, -- Spharai
+            [69] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18269); end, -- Mandau
+            [70] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18275); end, -- Excalibur
+            [71] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18281); end, -- Ragnarok
+            [72] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18287); end, -- Guttler
+            [73] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18293); end, -- Bravura
+            [75] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18299); end, -- Gungnir
+            [74] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18305); end, -- Apocalypse
+            [76] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18311); end, -- Kikoku
+            [77] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18317); end, -- Amanomurakumo
+            [78] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18323); end, -- Mjollnir
+            [79] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18329); end, -- Claustrum
+            [81] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18335); end, -- Annihilator
+            [82] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18341); end, -- Gjallarhorn
+            [80] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 18347); end, -- Yoichinoyumi
+            [86] = function (x) player:setCharVar("RELIC_IN_PROGRESS", 15069); end, -- Aegis
         }
     end
-end;
+end

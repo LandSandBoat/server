@@ -4,16 +4,16 @@
 -- Pos: -50 8 89 244
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-end;
+end
 
-function onTrigger(player,npc)
-    player:startEvent(10096);
-end;
+function onTrigger(player, npc)
+    player:startEvent(10096)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         17248, 46836, 2,    -- Arquebus
@@ -21,8 +21,8 @@ function onTrigger(player,npc)
     tpz.shop.nation(player, stock, tpz.nation.BASTOK)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

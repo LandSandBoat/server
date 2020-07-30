@@ -9,8 +9,8 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability,action)
-    return 0,0
+function onAbilityCheck(player, target, ability, action)
+    return 0, 0
 end
 
 function onUseAbility(player, target, ability, action)
@@ -41,7 +41,7 @@ function onUseAbility(player, target, ability, action)
     local playerID = target:getID()
 
         if (arrowsToReturn == 0) then
-            action:messageID(playerID,139)
+            action:messageID(playerID, 139)
         else
             if (arrowsToReturn > 99) then
                 arrowsToReturn = 99
@@ -51,7 +51,7 @@ function onUseAbility(player, target, ability, action)
             player:addItem(arrowID, arrowsToReturn)
 
             if (arrowsToReturn == 1) then
-                action:messageID(playerID,140)
+                action:messageID(playerID, 140)
             else
                 action:messageID(playerID, 674)
                 action:additionalEffect(playerID, 1)

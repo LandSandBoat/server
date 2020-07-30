@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
 end
 
@@ -26,7 +26,7 @@ function onMobDespawn(mob)
         local hqId = mob:getID() + 3
         local ToD = GetServerVariable("[POP]Tzee_Xicu_the_Manifest")
         local kills = GetServerVariable("[PH]Tzee_Xicu_the_Manifest")
-        local popNow = (math.random(1,5) == 3 or kills > 6)
+        local popNow = (math.random(1, 5) == 3 or kills > 6)
 
         if os.time() > ToD and popNow then
             DisallowRespawn(nqId, true)

@@ -17,9 +17,9 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,180,4565)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 4565)
     if (not target:hasStatusEffect(tpz.effect.SILENCE)) then
-        target:addStatusEffect(tpz.effect.SILENCE,1,3,180)
+        target:addStatusEffect(tpz.effect.SILENCE, 1, 3, 180)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

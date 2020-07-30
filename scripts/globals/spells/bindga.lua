@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
 
     --Pull base stats.
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
@@ -29,7 +29,7 @@ function onSpellCast(caster,target,spell)
 
     if (resist >= 0.5) then --Do it!
         --Try to erase a weaker bind.
-        if (target:addStatusEffect(tpz.effect.BIND,target:speed(),0,duration*resist)) then
+        if (target:addStatusEffect(tpz.effect.BIND, target:speed(), 0, duration*resist)) then
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)

@@ -6,7 +6,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if (effect:getPower() < 2) then
         target:addMod(tpz.mod.UDMGPHYS, -100)
     else
@@ -14,10 +14,10 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     if (effect:getPower() < 2) then
         target:delMod(tpz.mod.UDMGPHYS, -100)
     else

@@ -9,7 +9,7 @@ function onTrigger(entity, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(entity, eventid, result, door)

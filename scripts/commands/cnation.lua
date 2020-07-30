@@ -23,7 +23,7 @@ function onTrigger(player, target, nation)
         ["WINDURST"] =  3
     }
     local nationNumToName ={}
-    for k,v in pairs(nationNameToNum) do
+    for k, v in pairs(nationNameToNum) do
         nationNumToName[v]=k
     end
 

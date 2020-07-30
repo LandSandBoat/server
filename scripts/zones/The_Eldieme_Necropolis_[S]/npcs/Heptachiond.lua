@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-end;
+end
 
 function onTrigger(player, npc)
     local Rftd = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)

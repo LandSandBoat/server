@@ -82,7 +82,7 @@ std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE> g_SkillRanks;
 std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList;           // Holds all Weapon skills
-std::array<CMobSkill*, 4096> g_PMobSkillList;                   // List of mob skills
+std::array<CMobSkill*, MAX_MOBSKILL_ID> g_PMobSkillList;                   // List of mob skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 std::unordered_map<uint16, std::vector<uint16>>  g_PMobSkillLists;  // List of mob skills defined from mob_skill_lists.sql
@@ -1725,6 +1725,10 @@ namespace battleutils
                     //ShowDebug(CL_CYAN"GetParryRate: Issekigan Active, Parry Rate %d -> %d...\n" CL_RESET, parryRate, (parryRate+issekiganBonus));
                     parryRate = parryRate + issekiganBonus;
                 }
+
+                // Inquartata grants a flat parry rate bonus.
+                int16 inquartataBonus = PDefender->getMod(Mod::INQUARTATA);
+                parryRate += inquartataBonus;
 
                 return parryRate;
             }

@@ -167,7 +167,7 @@ local p3 = {    --Maps that are price at 3000 gil
     Uoption[68],    --Alzadall Ruins
     Uoption[69]        --Bhaflau Thickets
     }
-local p30 = { --Maps that are price at 30,000 gil
+local p30 = { --Maps that are price at 30, 000 gil
     Uoption[70],    --Vunkerl Inlet
     Uoption[71],    --Grauberg
     Uoption[72]        --Fort Karugo-Narugo
@@ -181,21 +181,21 @@ function CheckMaps(player, npc, csid)
 
     while i <= 31 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar1 = bit.bor(mapVar1, bit.lshift(1,i))
+            mapVar1 = bit.bor(mapVar1, bit.lshift(1, i))
         end
         i = i + 1
     end
 
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar2 = bit.bor(mapVar2, bit.lshift(1,i))
+            mapVar2 = bit.bor(mapVar2, bit.lshift(1, i))
         end
         i = i + 1
     end
 
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar3 = bit.bor(mapVar3, bit.lshift(1,i))
+            mapVar3 = bit.bor(mapVar3, bit.lshift(1, i))
         end
         i = i + 1
     end
@@ -247,21 +247,21 @@ function CheckMapsUpdate (player, option, NOT_HAVE_ENOUGH_GIL, KEYITEM_OBTAINED)
     i=0
     while i <= 31 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar1 = bit.bor(mapVar1, bit.lshift(1,i))
+            mapVar1 = bit.bor(mapVar1, bit.lshift(1, i))
         end
         i = i + 1
     end
 
     while i <= 63 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar2 = bit.bor(mapVar2, bit.lshift(1,i))
+            mapVar2 = bit.bor(mapVar2, bit.lshift(1, i))
         end
         i = i + 1
     end
 
     while i <= 71 do
         if player:hasKeyItem(Maps[i+1]) then
-            mapVar3 = bit.bor(mapVar3, bit.lshift(1,i))
+            mapVar3 = bit.bor(mapVar3, bit.lshift(1, i))
         end
         i = i + 1
     end

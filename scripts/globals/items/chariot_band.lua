@@ -22,5 +22,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.DEDICATION,75,0,43200,0,10000)
+    target:addStatusEffect(tpz.effect.DEDICATION, 75, 0, 43200, 0, 10000)
 end

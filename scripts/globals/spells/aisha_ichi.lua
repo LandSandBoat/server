@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.ATTACK_DOWN
     -- Base Stats
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
@@ -35,14 +35,14 @@ function onSpellCast(caster,target,spell)
             if (attackdown ~= nil) then
                 if (attackdown:getPower() < power) then
                     target:delStatusEffect(effect)
-                    target:addStatusEffect(effect,power,0,duration)
+                    target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
                 else
                     -- no effect
                     spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
                 end
             else
-                target:addStatusEffect(effect,power,0,duration)
+                target:addStatusEffect(effect, power, 0, duration)
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
             end
         else

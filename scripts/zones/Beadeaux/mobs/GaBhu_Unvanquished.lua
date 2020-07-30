@@ -2,7 +2,10 @@
 -- Area: Beadeaux (254)
 --   NM: Ga'Bhu Unvanquished
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")};
+mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/hunts")
+-----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-end;
+    tpz.hunts.checkHunt(mob, player, 243)
+end

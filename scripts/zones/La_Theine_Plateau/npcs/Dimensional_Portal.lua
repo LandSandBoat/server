@@ -9,7 +9,7 @@ require("scripts/globals/missions")
 function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH then
         player:startEvent(204)
     else
@@ -22,6 +22,6 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 204 and option == 1 then
-        player:setPos(25.299,-2.799,579,193,33) -- To AlTaieu {R}
+        player:setPos(25.299, -2.799, 579, 193, 33) -- To AlTaieu {R}
     end
 end

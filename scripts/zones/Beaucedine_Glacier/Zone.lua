@@ -21,7 +21,7 @@ function onZoneIn( player, prevZone)
     local cs = -1
 
     if prevZone == tpz.zone.DYNAMIS_BEAUCEDINE then -- warp player to a correct position after dynamis
-        player:setPos(-284.751,-39.923,-422.948,235)
+        player:setPos(-284.751, -39.923, -422.948, 235)
     end
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -50,15 +50,15 @@ function onEventUpdate( player, csid, option)
     if csid == 114 then
         lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif csid == 116 then
-        player:updateEvent(0,0,0,0,0,4)
+        player:updateEvent(0, 0, 0, 0, 0, 4)
     end
 end
 
 function onEventFinish( player, csid, option)
     if csid == 206 then
-        player:setCharVar("PromathiaStatus",10)
+        player:setCharVar("PromathiaStatus", 10)
     elseif csid == 114 then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end
 

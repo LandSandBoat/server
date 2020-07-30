@@ -11,10 +11,10 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local rank = tpz.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local assaultPoints = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
@@ -26,27 +26,27 @@ function onTrigger(player,npc)
     end
 
     --[[if (rank > 0) then
-        player:startEvent(273,rank,haveimperialIDtag,assaultPoints,player:getCurrentAssault())
+        player:startEvent(273, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(279) -- no rank
     --end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 273 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then
             -- taken assault mission
-            player:addAssault(bit.rshift(option,4))
+            player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
             player:addKeyItem(tpz.ki.LEUJAOAM_ASSAULT_ORDERS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LEUJAOAM_ASSAULT_ORDERS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LEUJAOAM_ASSAULT_ORDERS)
         elseif selectiontype == 2 then
             -- purchased an item
-            local item = bit.rshift(option,14)
+            local item = bit.rshift(option, 14)
             local itemID = 0
             local price = 0
             local items =

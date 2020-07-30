@@ -8,11 +8,11 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     local power = 20 + player:getMod(tpz.mod.DODGE_EFFECT)
-    player:addStatusEffect(tpz.effect.DODGE,power,0,120)
+    player:addStatusEffect(tpz.effect.DODGE, power, 0, 120)
 end

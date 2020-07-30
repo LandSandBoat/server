@@ -30,7 +30,7 @@ function onInstanceZoneIn(player, instance)
     end
 
     player:addTempItem(5399)
-end;
+end
 
 function onRegionEnter(player, region)
 end
@@ -43,11 +43,11 @@ function onEventFinish(player, csid, option)
     local chars = instance:getChars()
 
     if csid == 1 then
-        for i,v in pairs(chars) do
-            v:setPos(0,0,0,0,72)
+        for i, v in pairs(chars) do
+            v:setPos(0, 0, 0, 0, 72)
         end
     elseif csid >= 200 and csid <= 210 and option == 1 then
-        for i,v in ipairs(chars) do
+        for i, v in ipairs(chars) do
             if v:getID() ~= player:getID() then
                 v:startEvent(3)
                 v:timer(4000, function(player)

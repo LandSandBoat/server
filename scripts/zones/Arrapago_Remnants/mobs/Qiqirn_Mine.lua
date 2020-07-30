@@ -20,5 +20,5 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SOUND_RANGE, 15)
 end
 
-function onMobDeath(mob,player)
+function onMobDeath(mob, player)
 end

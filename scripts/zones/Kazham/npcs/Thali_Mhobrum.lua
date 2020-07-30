@@ -16,34 +16,34 @@ local path =
 47.709465, -11.000000, -44.374393,
 52.782181, -11.000000, -44.192482,
 47.469643, -11.000000, -44.383091
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(tpz.path.first(path));
-    onPath(npc);
-end;
+    npc:initNpcAi()
+    npc:setPos(tpz.path.first(path))
+    onPath(npc)
+end
 
 function onPath(npc)
-    tpz.path.patrol(npc, path);
-end;
+    tpz.path.patrol(npc, path)
+end
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCharVar("BathedInScent") == 1) then
-        player:startEvent(163); -- scent from Blue Rafflesias
-        npc:wait();
+        player:startEvent(163) -- scent from Blue Rafflesias
+        npc:wait()
     else
-    player:startEvent(190);
-    npc:wait();
+    player:startEvent(190)
+    npc:wait()
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
-    npc:wait(0);
-end;
+function onEventFinish(player, csid, option, npc)
+    npc:wait(0)
+end

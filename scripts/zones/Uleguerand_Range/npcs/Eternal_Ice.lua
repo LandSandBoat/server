@@ -6,19 +6,19 @@
 -- !pos 455 -82 421 5
 -- !pos -95 -146 378 5
 -----------------------------------
-require("scripts/globals/keyitems");
-local ID = require("scripts/zones/Uleguerand_Range/IDs");
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.MYSTIC_ICE) == false) then
-        player:addKeyItem(tpz.ki.MYSTIC_ICE);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MYSTIC_ICE);
+        player:addKeyItem(tpz.ki.MYSTIC_ICE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTIC_ICE)
     else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY);
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
-end;
+end

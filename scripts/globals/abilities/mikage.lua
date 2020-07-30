@@ -8,10 +8,10 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
-    target:addStatusEffect(tpz.effect.MIKAGE,0,0,45)
+function onUseAbility(player, target, ability)
+    target:addStatusEffect(tpz.effect.MIKAGE, 0, 0, 45)
 end

@@ -6,10 +6,10 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
     local complete = false
     local level = 0
     if (target:getMainJob() == tpz.job.SCH) then
@@ -31,7 +31,7 @@ function onEffectTick(target,effect)
         if (target:hasStatusEffect(tpz.effect.STONESKIN)) then
             local skin = target:getMod(tpz.mod.STONESKIN)
             if (skin >= dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN,dmg)
+                target:delMod(tpz.mod.STONESKIN, dmg)
             else
                 target:delStatusEffect(tpz.effect.STONESKIN)
                 target:takeDamage(dmg - skin)
@@ -56,12 +56,12 @@ function onEffectTick(target,effect)
 
     if (complete) then
         target:delStatusEffectSilent(tpz.effect.SUBLIMATION_ACTIVATED)
-        target:addStatusEffect(tpz.effect.SUBLIMATION_COMPLETE,store,0,7200)
+        target:addStatusEffect(tpz.effect.SUBLIMATION_COMPLETE, store, 0, 7200)
     else
         effect:setPower(store)
     end
 
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
 end

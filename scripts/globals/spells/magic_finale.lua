@@ -7,11 +7,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     -- Pull base stats.
     local dCHR = (caster:getStat(tpz.mod.CHR) - target:getStat(tpz.mod.CHR))
 
