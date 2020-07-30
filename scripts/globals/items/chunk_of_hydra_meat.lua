@@ -28,10 +28,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,300,5564)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 300, 5564)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.HP, 10)
     target:addMod(tpz.mod.MP, -10)
     target:addMod(tpz.mod.STR, 6)
@@ -39,7 +39,7 @@ function onEffectGain(target,effect)
     target:addMod(tpz.mod.DEMON_KILLER, 10)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:delMod(tpz.mod.HP, 10)
     target:delMod(tpz.mod.MP, -10)
     target:delMod(tpz.mod.STR, 6)

@@ -3,8 +3,8 @@
 -- NPC:  Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/titles");
-require("scripts/globals/quests");
+require("scripts/globals/titles")
+require("scripts/globals/quests")
 
 local loot =
 {
@@ -104,18 +104,18 @@ local loot =
     }
 }
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

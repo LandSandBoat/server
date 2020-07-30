@@ -215,7 +215,7 @@ INSERT INTO `traits` VALUES (14,'store tp',12,70,4,73,25,NULL,0);
 INSERT INTO `traits` VALUES (14,'store tp',12,90,5,73,30,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (15,'double attack',1,25,1,288,10,NULL,0);
 INSERT INTO `traits` VALUES (15,'double attack',1,50,2,288,12,'ROV',0);
-INSERT INTO `traits` VALUES (15,'double attack',1,75,3,288,14,'ABYSSEA',0); -- level 76 prior to ROV update (05/14/2015), set Abby tag so it's removed from 75-cap servers 
+INSERT INTO `traits` VALUES (15,'double attack',1,75,3,288,14,'ABYSSEA',0); -- level 76 prior to ROV update (05/14/2015), set Abby tag so it's removed from 75-cap servers
 INSERT INTO `traits` VALUES (15,'double attack',1,85,4,288,16,'ROV',0);
 INSERT INTO `traits` VALUES (15,'double attack',1,99,5,288,18,'ROV',0);
 INSERT INTO `traits` VALUES (16,'triple attack',6,55,1,302,5,NULL,0);
@@ -678,7 +678,10 @@ INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,245,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,246,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,247,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,248,15,'SOA',0);
-
+INSERT INTO `traits` VALUES (118,'inquartata',22,15,1,963,5,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,45,2,963,7,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,75,3,963,9,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,90,4,963,11,'SOA',0);
 INSERT INTO `traits` VALUES (119,'curative recantation',21,75,1,970,0,'SOA',3396);
 INSERT INTO `traits` VALUES (120,'primeval zeal',21,75,1,971,0,'SOA',3398);
 

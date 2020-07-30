@@ -8,13 +8,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 4569) and player:getCharVar("theTenshodoShowdownCS") == 3 then -- Quadav Stew
         player:startEvent(10004, 0, tpz.ki.TENSHODO_ENVELOPE, 4569)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local theTenshodoShowdownCS = player:getCharVar("theTenshodoShowdownCS")
 
     if theTenshodoShowdownCS == 2 then
@@ -27,10 +27,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10004 then
         player:setCharVar("theTenshodoShowdownCS", 4)
         player:delKeyItem(tpz.ki.TENSHODO_ENVELOPE)

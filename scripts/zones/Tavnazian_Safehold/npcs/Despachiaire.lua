@@ -3,31 +3,31 @@
 --  NPC: Despachiaire
 -- !pos 108 -40 -83 26
 -----------------------------------
-require("scripts/globals/missions");
+require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    local currentCOPMission = player:getCurrentMission(COP);
-    local LouverancePathStatut = player:getCharVar("COP_Louverance_s_Path");
+function onTrigger(player, npc)
+    local currentCOPMission = player:getCurrentMission(COP)
+    local LouverancePathStatut = player:getCharVar("COP_Louverance_s_Path")
 
     if (currentCOPMission  == tpz.mission.id.cop.THE_LOST_CITY and player:getCharVar("PromathiaStatus") == 0) then
-        player:startEvent(102);
+        player:startEvent(102)
     elseif (currentCOPMission  == tpz.mission.id.cop.SHELTERING_DOUBT and player:getCharVar("PromathiaStatus") == 1) then
-        player:startEvent(108);
+        player:startEvent(108)
     elseif (currentCOPMission  == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_Despachaire") == 0) then
-        player:startEvent(117); --117
+        player:startEvent(117) --117
     elseif (currentCOPMission  == tpz.mission.id.cop.THREE_PATHS and LouverancePathStatut == 0) then
-        player:startEvent(118);
+        player:startEvent(118)
     elseif (currentCOPMission  == tpz.mission.id.cop.THREE_PATHS and LouverancePathStatut == 1 ) then
-        player:startEvent(134);
+        player:startEvent(134)
     else
-        player:startEvent(106);
+        player:startEvent(106)
     end
 
-end;
+end
 --Despachiaire     102 ++
 --Despachiaire     104 ++
 --Despachiaire     106 ++
@@ -55,17 +55,17 @@ end;
 --Despachiaire     579 chat
 --Despachiaire     617 XX
 --Despachiaire     618 XX
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 102 or csid == 108) then
-        player:setCharVar("PromathiaStatus",2);
+        player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 117) then
-        player:setCharVar("COP_optional_CS_Despachaire",1);
+        player:setCharVar("COP_optional_CS_Despachaire", 1)
     elseif (csid == 118) then
-        player:setCharVar("COP_Louverance_s_Path",1);
+        player:setCharVar("COP_Louverance_s_Path", 1)
     end
 
-end;
+end

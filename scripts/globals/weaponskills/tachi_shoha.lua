@@ -26,7 +26,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1.375; params.atk200 = 1.375; params.atk300 = 1.375;
+    params.atk100 = 1.375; params.atk200 = 1.375; params.atk300 = 1.375
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 0.7 + (player:getMerit(tpz.merit.TACHI_SHOHA) / 100)

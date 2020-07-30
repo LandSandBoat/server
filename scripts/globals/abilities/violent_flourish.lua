@@ -13,39 +13,39 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT,0
+        return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
         if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
             player:delStatusEffect(tpz.effect.FINISHING_MOVE_1)
-            return 0,0
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_2)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1, 1, 0, 7200)
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_3)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2, 1, 0, 7200)
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_4)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3, 1, 0, 7200)
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_5)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_4,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_4, 1, 0, 7200)
+            return 0, 0
         else
-            return tpz.msg.basic.NO_FINISHINGMOVES,0
+            return tpz.msg.basic.NO_FINISHINGMOVES, 0
         end
     end
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     local hit = 4
     --get fstr
-    local fstr = fSTR(player:getStat(tpz.mod.STR),target:getStat(tpz.mod.VIT),player:getWeaponDmgRank())
+    local fstr = fSTR(player:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), player:getWeaponDmgRank())
 
     local params = {}
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
@@ -67,7 +67,7 @@ function onUseAbility(player,target,ability,action)
         isSneakValid = false
     end
     local pdif = generatePdif (cratio[1], cratio[2], true)
-    local hitrate = getHitRate(player,target,true)
+    local hitrate = getHitRate(player, target, true)
 
     if (math.random() <= hitrate or isSneakValid) then
         hit = 3
@@ -88,7 +88,7 @@ function onUseAbility(player,target,ability,action)
 
         dmg = utils.stoneskin(target, dmg)
         target:takeDamage(dmg, player, tpz.attackType.PHYSICAL, player:getWeaponDamageType(tpz.slot.MAIN))
-        target:updateEnmityFromDamage(player,dmg)
+        target:updateEnmityFromDamage(player, dmg)
 
         action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
         action:speceffect(target:getID(), hit)

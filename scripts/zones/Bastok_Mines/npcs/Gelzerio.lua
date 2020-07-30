@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         13198, 19602, 1,    --Swordbelt
@@ -30,12 +30,12 @@ function onTrigger(player,npc)
         12976,  1269, 3,    --Gaiters
     }
 
-    player:showText(npc,ID.text.GELZERIO_SHOP_DIALOG)
+    player:showText(npc, ID.text.GELZERIO_SHOP_DIALOG)
     tpz.shop.nation(player, stock, tpz.nation.BASTOK)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

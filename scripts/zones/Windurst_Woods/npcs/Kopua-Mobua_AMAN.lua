@@ -7,10 +7,10 @@
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local var = 0
     if player:getMentor() == 0 then
         if player:getMainLvl() >= 30 and player:getPlaytime() >= 648000 then
@@ -22,10 +22,10 @@ function onTrigger(player,npc)
     player:startEvent(10026, var)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10026 and option == 0 then
         player:setMentor(1)
     end

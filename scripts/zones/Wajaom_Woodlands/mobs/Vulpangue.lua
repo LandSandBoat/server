@@ -12,7 +12,7 @@ end
 
 function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mod:addMod((tpz.mod.FIRE_ABSORB + VanadielDayElement()),100)
+    mod:addMod((tpz.mod.FIRE_ABSORB + VanadielDayElement()), 100)
     mob:addMod(tpz.mod.WIND_ABSORB, 100)
     mob:setLocalVar("HPP", 90)
 end

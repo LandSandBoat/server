@@ -21,13 +21,13 @@ end
 function onItemUse(target)
     if (target:hasStatusEffect(tpz.effect.ENCHANTMENT) == true) then
         target:delStatusEffect(tpz.effect.ENCHANTMENT)
-        target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,1800,15486)
+        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 1800, 15486)
     else
-        target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,1800,15486)
+        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 1800, 15486)
     end
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.HP, 18)
     target:addMod(tpz.mod.ENMITY, 3)
 end

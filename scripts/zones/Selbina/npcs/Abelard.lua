@@ -17,26 +17,26 @@ require("scripts/globals/quests")
 
 local ZoneID =
 {
-    0x00001,800,   -- West Ronfaure
-    0x00002,800,   -- East Ronfaure
-    0x00004,1000,  -- La Theine Plateau
-    0x00008,1000,  -- Valkurm Dunes
-    0x00010,1000,  -- Jugner Forest
-    0x00020,3000,  -- North Gustaberg
-    0x00040,800,   -- South Gustaberg
-    0x00080,1000,  -- Konschtat Highlands
-    0x00100,1000,  -- Pashhow Marshlands
-    0x00200,3000,  -- Rolanberry Fields
-    0x00400,800,   -- West Sarutabaruta
-    0x00800,800,   -- East Sarutabaruta
-    0x01000,1000,  -- Tahrongi Canyon
-    0x02000,1000,  -- Buburimu Peninsula
-    0x04000,1000,  -- Meriphataud Mountains
-    0x08000,10000, -- Sauromugue Champaign
-    0x10000,10000  -- Batallia Downs
+    0x00001, 800,   -- West Ronfaure
+    0x00002, 800,   -- East Ronfaure
+    0x00004, 1000,  -- La Theine Plateau
+    0x00008, 1000,  -- Valkurm Dunes
+    0x00010, 1000,  -- Jugner Forest
+    0x00020, 3000,  -- North Gustaberg
+    0x00040, 800,   -- South Gustaberg
+    0x00080, 1000,  -- Konschtat Highlands
+    0x00100, 1000,  -- Pashhow Marshlands
+    0x00200, 3000,  -- Rolanberry Fields
+    0x00400, 800,   -- West Sarutabaruta
+    0x00800, 800,   -- East Sarutabaruta
+    0x01000, 1000,  -- Tahrongi Canyon
+    0x02000, 1000,  -- Buburimu Peninsula
+    0x04000, 1000,  -- Meriphataud Mountains
+    0x08000, 10000, -- Sauromugue Champaign
+    0x10000, 10000  -- Batallia Downs
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
@@ -71,9 +71,9 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local anExplorersFootsteps = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
-    local signedInBlood = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+    local signedInBlood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local signedInBloodStat = player:getCharVar("SIGNED_IN_BLOOD_Prog")
 
     -- SIGNED IN BLOOD (will only activate if An Explorer's Footsteps is not active, or if it is completed)
@@ -115,10 +115,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- SIGNED IN BLOOD
     if csid == 1104 then
         player:setCharVar("SIGNED_IN_BLOOD_Prog", 2)

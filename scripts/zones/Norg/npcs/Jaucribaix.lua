@@ -16,8 +16,8 @@ require("scripts/globals/wsquest")
 
 local wsQuest = tpz.wsquest.tachi_kasha
 
-function onTrade(player,npc,trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest,player,trade)
+function onTrade(player, npc, trade)
+    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
@@ -30,7 +30,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local forgeYourDestiny  = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
     local theSacredKatana   = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
     local yomiOkuri         = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
@@ -41,7 +41,7 @@ function onTrigger(player,npc)
     local aThiefinNorgCS    = player:getCharVar("aThiefinNorgCS")
     local mLvl              = player:getMainLvl()
     local mJob              = player:getMainJob()
-    local wsQuestEvent      = tpz.wsquest.getTriggerEvent(wsQuest,player)
+    local wsQuestEvent      = tpz.wsquest.getTriggerEvent(wsQuest, player)
 
     -- THE POTENTIAL WITHIN
     if (wsQuestEvent ~= nil) then
@@ -105,10 +105,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- FORGE YOUR DESTINY
     if (csid == 25 and option == 1) then
@@ -130,14 +130,14 @@ function onEventFinish(player,csid,option)
 
     -- YOMI OKURI
     elseif (csid == 146 and option == 1) then
-        player:addQuest(OUTLANDS,tpz.quest.id.outlands.YOMI_OKURI)
-        player:setCharVar("yomiOkuriCS",1)
+        player:addQuest(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
+        player:setCharVar("yomiOkuriCS", 1)
     elseif (csid == 152) then
         player:delKeyItem(tpz.ki.YOMOTSU_FEATHER)
-        player:setCharVar("yomiOkuriCS",4)
+        player:setCharVar("yomiOkuriCS", 4)
         player:needToZone(true)
     elseif (csid == 154) then
-        player:setCharVar("yomiOkuriCS",5)
+        player:setCharVar("yomiOkuriCS", 5)
         npcUtil.giveKeyItem(player, tpz.ki.YOMOTSU_HIRASAKA)
     elseif (csid == 156 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI, {item=14100, fame=40, fameArea=NORG, var="yomiOkuriCS"})) then -- Myochin Sune-Ate
         player:delKeyItem(tpz.ki.FADED_YOMOTSU_HIRASAKA)
@@ -145,21 +145,21 @@ function onEventFinish(player,csid,option)
 
     -- A THIEF IN NORG
     elseif (csid == 158 and option == 1) then
-        player:addQuest(OUTLANDS,tpz.quest.id.outlands.A_THIEF_IN_NORG)
-        player:setCharVar("aThiefinNorgCS",1)
+        player:addQuest(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG)
+        player:setCharVar("aThiefinNorgCS", 1)
     elseif ((csid == 166 or csid == 168) and npcUtil.giveItem(player, 1166)) then -- Banishing Charm
-        player:setCharVar("aThiefinNorgCS",6)
+        player:setCharVar("aThiefinNorgCS", 6)
     elseif (csid == 160) then
-        player:setCharVar("aThiefinNorgCS",8)
+        player:setCharVar("aThiefinNorgCS", 8)
     elseif (csid == 162) then
         player:confirmTrade()
         player:delKeyItem(tpz.ki.CHARRED_HELM)
-        player:setCharVar("aThiefinNorgCS",9)
+        player:setCharVar("aThiefinNorgCS", 9)
         player:needToZone(true)
     elseif (csid == 164) then
         npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG, {item=13868, title=tpz.title.PARAGON_OF_SAMURAI_EXCELLENCE, fame=60, fameArea=NORG, var={"aThiefinNorgCS"}})
 
     else
-        tpz.wsquest.handleEventFinish(wsQuest,player,csid,option,ID.text.TACHI_KASHA_LEARNED)
+        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.TACHI_KASHA_LEARNED)
     end
 end

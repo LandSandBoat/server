@@ -8,27 +8,27 @@ require("scripts/globals/conquest")
 -----------------------------------
 
 function onInitialize(zone)
-end;
+end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
-end;
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+function onZoneIn(player, prevZone)
+    local cs = -1
 
     if player:getCharVar("inJail") > 0 then
         player:jail()
     end
 
-    return cs;
-end;
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+function onRegionEnter(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

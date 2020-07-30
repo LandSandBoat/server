@@ -9,16 +9,16 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     -- The wyvern must be present in order to use Spirit Surge
     if (target:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET,0
+        return tpz.msg.basic.REQUIRES_A_PET, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- Spirit Surge increases dragoon's MAX HP increases by 25% of wyvern MaxHP
     -- bg wiki says 25% ffxiclopedia says 15%, going with 25 for now
     local mhp_boost = target:getPet():getMaxHP()*0.25
@@ -39,9 +39,9 @@ function onUseAbility(player,target,ability)
 
     target:despawnPet()
     -- All Jump recast times are reset
-    target:resetRecast(tpz.recast.ABILITY,158) -- Jump
-    target:resetRecast(tpz.recast.ABILITY,159) -- High Jump
-    target:resetRecast(tpz.recast.ABILITY,160) -- Super Jump
+    target:resetRecast(tpz.recast.ABILITY, 158) -- Jump
+    target:resetRecast(tpz.recast.ABILITY, 159) -- High Jump
+    target:resetRecast(tpz.recast.ABILITY, 160) -- Super Jump
 
     target:addStatusEffect(tpz.effect.SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost)
 end

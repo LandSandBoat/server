@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1695, 4297, 4506 }) -- Habaneros, Black Curry, Mutton Tortilla
         and player:getCharVar("TuningOut_Progress") == 6
     then
@@ -14,7 +14,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     if tuningOutProgress == 6 then
@@ -25,14 +25,14 @@ function onTrigger(player,npc)
     else
         player:startEvent(72)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 207 then
         player:tradeComplete()
         player:setCharVar("TuningOut_Progress", 7)
     end
-end;
+end

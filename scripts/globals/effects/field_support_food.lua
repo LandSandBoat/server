@@ -4,7 +4,7 @@
 -- From FoV and GoV
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
         target:addMod(tpz.mod.STR, 4)
         target:addMod(tpz.mod.FOOD_ATTP, 22)
@@ -37,10 +37,10 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
         target:delMod(tpz.mod.STR, 4)
         target:delMod(tpz.mod.FOOD_ATTP, 22)

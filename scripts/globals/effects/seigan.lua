@@ -6,13 +6,13 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
-    target:addMod(tpz.mod.COUNTER,(target:getMod(tpz.mod.ZANSHIN)/4))
+function onEffectGain(target, effect)
+    target:addMod(tpz.mod.COUNTER, (target:getMod(tpz.mod.ZANSHIN)/4))
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
-    target:delMod(tpz.mod.COUNTER,(target:getMod(tpz.mod.ZANSHIN)/4))
+function onEffectLose(target, effect)
+    target:delMod(tpz.mod.COUNTER, (target:getMod(tpz.mod.ZANSHIN)/4))
 end

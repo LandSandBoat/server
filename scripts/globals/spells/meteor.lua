@@ -9,7 +9,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
    -- TODO: Correct message is "Incorrect job, job level too low, or required ability not activated."  Unable to locate this in our basic or system message functions.
    -- The client blocks the spell via menus, but it can still be cast via text commands, so we have to block it here, albiet with the wrong message.
     if (caster:isMob()) then
@@ -21,7 +21,7 @@ function onMagicCastingCheck(caster,target,spell)
     end
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
 
     --calculate raw damage
     --Byrthnoth @ Random Facts Thread: Magic @ BG:
@@ -36,9 +36,9 @@ function onSpellCast(caster,target,spell)
     end
 
     --add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
     return dmg
 
 end

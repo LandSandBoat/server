@@ -676,6 +676,9 @@ enum EFFECT
     EFFECT_NEGATE_CHARM             = 610,
     EFFECT_MAGIC_EVASION_BOOST_II   = 611,
     EFFECT_COLURE_ACTIVE            = 612,
+
+    EFFECT_RAMPART                  = 623,
+
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     // Purchased from Cruor Prospector

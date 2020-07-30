@@ -8,10 +8,10 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         5703,    100,    -- Uleguerand Milk
@@ -37,8 +37,8 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock, JEUNO)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

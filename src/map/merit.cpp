@@ -462,7 +462,7 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
-	uint8 meritValue = 0;
+	uint16 meritValue = 0;
 
     if (PMerit)
     {

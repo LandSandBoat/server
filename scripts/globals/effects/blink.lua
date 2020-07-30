@@ -6,13 +6,13 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
-    target:setMod(tpz.mod.BLINK,effect:getPower())
+function onEffectGain(target, effect)
+    target:setMod(tpz.mod.BLINK, effect:getPower())
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
-    target:setMod(tpz.mod.BLINK,0)
+function onEffectLose(target, effect)
+    target:setMod(tpz.mod.BLINK, 0)
 end

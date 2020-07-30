@@ -20,9 +20,9 @@ function onItemUse(target)
             target:messageBasic(tpz.msg.basic.NO_EFFECT)
         else
             target:delStatusEffect(tpz.effect.RERAISE)
-            target:addStatusEffect(tpz.effect.RERAISE,power,0,duration)
+            target:addStatusEffect(tpz.effect.RERAISE, power, 0, duration)
         end
     else
-        target:addStatusEffect(tpz.effect.RERAISE,power,0,duration)
+        target:addStatusEffect(tpz.effect.RERAISE, power, 0, duration)
     end
 end

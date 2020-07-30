@@ -15,10 +15,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,180,18239)
+    target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 180, 18239)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.CURE_POTENCY, 15)
 end
 

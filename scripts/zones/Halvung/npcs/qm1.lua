@@ -7,18 +7,18 @@ local ID = require("scripts/zones/Halvung/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 2384) and npcUtil.popFromQM(player, npc, ID.mob.BIG_BOMB) then -- Smokey Flask
         player:confirmTrade()
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.BLUE_FLAMES)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

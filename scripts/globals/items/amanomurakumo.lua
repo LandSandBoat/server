@@ -7,7 +7,7 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 
-function onAdditionalEffect(player,target,damage)
+function onAdditionalEffect(player, target, damage)
     local chance = 10
 
     if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0) > 0.5 then

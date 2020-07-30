@@ -21,7 +21,7 @@ function onZoneIn(player, prevZone)
         cs = 1
     end
 
-    return cs;
+    return cs
 end
 
 function onConquestUpdate(zone, updatetype)

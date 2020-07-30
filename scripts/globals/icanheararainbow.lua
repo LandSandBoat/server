@@ -59,46 +59,46 @@ function triggerLightCutscene( player)
 
     if (player:hasItem( 1125, 0)) then -- Player has Carbuncle's Ruby?
         if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED) then
-            if (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),0) == false and (weather == tpz.weather.HOT_SPELL or weather == tpz.weather.HEAT_WAVE)) then
+            if (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 0) == false and (weather == tpz.weather.HOT_SPELL or weather == tpz.weather.HEAT_WAVE)) then
                 if (colorsAvailable[zone][RED]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",0,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 0, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),1) == false and (weather == tpz.weather.NONE or weather == tpz.weather.SUNSHINE)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 1) == false and (weather == tpz.weather.NONE or weather == tpz.weather.SUNSHINE)) then
                 if (colorsAvailable[zone][ORANGE]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",1,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 1, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),2) == false and (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 2) == false and (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM)) then
                 if (colorsAvailable[zone][YELLOW]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",2,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 2, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),3)  == false and (weather == tpz.weather.WIND or weather == tpz.weather.GALES)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 3)  == false and (weather == tpz.weather.WIND or weather == tpz.weather.GALES)) then
                 if (colorsAvailable[zone][GREEN]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",3,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 3, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),4)   == false and (weather == tpz.weather.RAIN or weather == tpz.weather.SQUALL)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 4)   == false and (weather == tpz.weather.RAIN or weather == tpz.weather.SQUALL)) then
                 if (colorsAvailable[zone][BLUE]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",4,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 4, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),5) == false and (weather == tpz.weather.SNOW or weather == tpz.weather.BLIZZARDS)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 5) == false and (weather == tpz.weather.SNOW or weather == tpz.weather.BLIZZARDS)) then
                 if (colorsAvailable[zone][INDIGO]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",5,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 5, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
-            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),6) == false and (weather == tpz.weather.THUNDER or weather == tpz.weather.THUNDERSTORMS)) then
+            elseif (player:getMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 6) == false and (weather == tpz.weather.THUNDER or weather == tpz.weather.THUNDERSTORMS)) then
                 if (colorsAvailable[zone][VIOLET]) then
                     cutsceneTriggered = true
-                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"),"I_CAN_HEAR_A_RAINBOW",6,true)
+                    player:setMaskBit(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), "I_CAN_HEAR_A_RAINBOW", 6, true)
                     player:setCharVar( "I_CAN_HEAR_A_RAINBOW_Weather", weather)
                 end
             end

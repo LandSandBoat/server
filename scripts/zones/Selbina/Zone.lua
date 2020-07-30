@@ -17,10 +17,10 @@ function onInitialize(zone)
 end
 
 function onGameHour(zone)
-    SetServerVariable("Selbina_Deastination", math.random(1,100))
+    SetServerVariable("Selbina_Deastination", math.random(1, 100))
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -47,14 +47,14 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player,transport)
+function onTransportEvent(player, transport)
     player:startEvent(200)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 200 then
         if GetServerVariable("Selbina_Deastination") > 89 then
             player:setPos(0, 0, 0, 0, tpz.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)

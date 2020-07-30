@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.REQUIEM
     local duration = 79
     local power = 2
@@ -49,7 +49,7 @@ function onSpellCast(caster,target,spell)
     if (canOverwrite(target, effect, power)) then
         -- overwrite them
         target:delStatusEffect(effect)
-        target:addStatusEffect(effect,power,3,duration)
+        target:addStatusEffect(effect, power, 3, duration)
         spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
     else
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect

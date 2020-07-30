@@ -38,18 +38,18 @@ zones[tpz.zone.ABYSSEA_VUNKERL] =
             --  [17666585] = {'qm10', {3107},                                                                                          {}, 17666496}, -- Armillaria
             --  [17666586] = {'qm11', {3108},                                                                                          {}, 17666497}, -- Pascerpot
             --  [17666587] = {'qm12', {3109},                                                                                          {}, 17666498}, -- Gnawtooth Gary
-            --  [17666588] = {'qm13',     {},     {tpz.ki.INGROWN_TAURUS_NAIL,tpz.ki.OSSIFIED_GARGOUILLE_HAND,tpz.ki.IMBRUED_VAMPYR_FANG}, 17666499}, -- Bukhis
-            --  [17666589] = {'qm14',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER,tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666500}, -- Sedna
-            --  [17666590] = {'qm15',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH,tpz.ki.PULSATING_SOULFLAYER_BEARD,tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666501}, -- Durinn
-            --  [17666591] = {'qm16',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR,tpz.ki.WARPED_SMILODON_CHOKER}, 17666502}, -- Karkadann
-            --  [17666592] = {'qm17',     {},     {tpz.ki.INGROWN_TAURUS_NAIL,tpz.ki.OSSIFIED_GARGOUILLE_HAND,tpz.ki.IMBRUED_VAMPYR_FANG}, 17666503}, -- Bukhis
-            --  [17666593] = {'qm18',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER,tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666504}, -- Sedna
-            --  [17666594] = {'qm19',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH,tpz.ki.PULSATING_SOULFLAYER_BEARD,tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666505}, -- Durinn
-            --  [17666595] = {'qm20',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR,tpz.ki.WARPED_SMILODON_CHOKER}, 17666506}, -- Karkadann
-            --  [17666596] = {'qm21',     {},     {tpz.ki.INGROWN_TAURUS_NAIL,tpz.ki.OSSIFIED_GARGOUILLE_HAND,tpz.ki.IMBRUED_VAMPYR_FANG}, 17666507}, -- Bukhis
-            --  [17666597] = {'qm22',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER,tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666508}, -- Sedna
-            --  [17666598] = {'qm23',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH,tpz.ki.PULSATING_SOULFLAYER_BEARD,tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666509}, -- Durinn
-            --  [17666599] = {'qm24',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR,tpz.ki.WARPED_SMILODON_CHOKER}, 17666510}, -- Karkadann
+            --  [17666588] = {'qm13',     {},     {tpz.ki.INGROWN_TAURUS_NAIL, tpz.ki.OSSIFIED_GARGOUILLE_HAND, tpz.ki.IMBRUED_VAMPYR_FANG}, 17666499}, -- Bukhis
+            --  [17666589] = {'qm14',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER, tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666500}, -- Sedna
+            --  [17666590] = {'qm15',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH, tpz.ki.PULSATING_SOULFLAYER_BEARD, tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666501}, -- Durinn
+            --  [17666591] = {'qm16',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR, tpz.ki.WARPED_SMILODON_CHOKER}, 17666502}, -- Karkadann
+            --  [17666592] = {'qm17',     {},     {tpz.ki.INGROWN_TAURUS_NAIL, tpz.ki.OSSIFIED_GARGOUILLE_HAND, tpz.ki.IMBRUED_VAMPYR_FANG}, 17666503}, -- Bukhis
+            --  [17666593] = {'qm18',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER, tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666504}, -- Sedna
+            --  [17666594] = {'qm19',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH, tpz.ki.PULSATING_SOULFLAYER_BEARD, tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666505}, -- Durinn
+            --  [17666595] = {'qm20',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR, tpz.ki.WARPED_SMILODON_CHOKER}, 17666506}, -- Karkadann
+            --  [17666596] = {'qm21',     {},     {tpz.ki.INGROWN_TAURUS_NAIL, tpz.ki.OSSIFIED_GARGOUILLE_HAND, tpz.ki.IMBRUED_VAMPYR_FANG}, 17666507}, -- Bukhis
+            --  [17666597] = {'qm22',     {},                               {tpz.ki.GLOSSY_SEA_MONK_SUCKER, tpz.ki.SHIMMERING_PUGIL_SCALE}, 17666508}, -- Sedna
+            --  [17666598] = {'qm23',     {}, {tpz.ki.DECAYED_DVERGR_TOOTH, tpz.ki.PULSATING_SOULFLAYER_BEARD, tpz.ki.CHIPPED_IMPS_OLIFANT}, 17666509}, -- Durinn
+            --  [17666599] = {'qm24',     {},                                 {tpz.ki.MALODOROUS_MARID_FUR, tpz.ki.WARPED_SMILODON_CHOKER}, 17666510}, -- Karkadann
         },
     },
 }

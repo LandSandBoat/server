@@ -3,11 +3,19 @@
 -- DO NOT mess with the order
 -- or change things to "elseif"!
 -----------------------------------
-
 require("scripts/globals/keyitems")
+require("scripts/globals/zone")
+-----------------------------------
+
+tpz = tpz or {}
+tpz.abyssea = tpz.abyssea or {}
+
+-------------------------------------------------
+-- local data
+-------------------------------------------------
 
 -- weaponskills for red weakness
-local red_weakness =
+local redWeakness =
 {
     --light
     37, 161, 149, 180,
@@ -25,7 +33,7 @@ local red_weakness =
     144
 }
 
-local yellow_weakness =
+local yellowWeakness =
 {
     --fire
     [0] = { 146, 147, 176, 204, 591, 321, 455 },
@@ -45,7 +53,7 @@ local yellow_weakness =
     [7] = { 247, 245, 231, 260, 557, 348, 460 }
 }
 
-local blue_weakness =
+local blueWeakness =
 {
     --6-14
     {196, 197, 198, 199, 212, 213, 214, 215, 18, 23, 24, 25, 118, 119, 120},
@@ -55,295 +63,308 @@ local blue_weakness =
     {165, 166, 167, 168, 169, 5, 6, 7, 8, 9, 176, 181, 182, 183, 184}
 }
 
+-- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
+local popEvents =
+{
+    [tpz.zone.ABYSSEA_KONSCHTAT]        = {1010, 1020, 1021},
+    [tpz.zone.ABYSSEA_TAHRONGI]         = {1010, 1020, 1021},
+    [tpz.zone.ABYSSEA_LA_THEINE]        = {1010, 1020, 1021},
+    [tpz.zone.ABYSSEA_ATTOHWA]          = {1010, 1022, 1023},
+    [tpz.zone.ABYSSEA_MISAREAUX]        = {1010, 1022, 1021},
+    [tpz.zone.ABYSSEA_VUNKERL]          = {1010, 1015, 1120},
+    [tpz.zone.ABYSSEA_ALTEPA]           = {1010, 1020, 1021},
+    [tpz.zone.ABYSSEA_ULEGUERAND]       = {1010, 1020, 1025},
+    [tpz.zone.ABYSSEA_GRAUBERG]         = {1010, 1020, 1021},
+    [tpz.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
+}
+
+-------------------------------------------------
+-- public functions
+-------------------------------------------------
+
 -- returns Traverser Stone KI cap
-function getMaxTravStones(player)
-    local MaxTravStones = 3
+tpz.abyssea.getMaxTravStones = function(player)
+    local stones = 3
 
     for ki = tpz.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, tpz.ki.VERMILLION_ABYSSITE_OF_AVARICE do
         if player:hasKeyItem(ki) then
-            MaxTravStones = MaxTravStones + 1
+            stones = stones + 1
         end
     end
 
-    return MaxTravStones
+    return stones
 end
 
 -- returns total Traverser Stone KI
 -- (NOT the reserve value from currency menu)
-function getTravStonesTotal(player)
-    local STONES = 0
+tpz.abyssea.getTravStonesTotal = function(player)
+    local stones = 0
 
     for ki = tpz.ki.TRAVERSER_STONE1, tpz.ki.TRAVERSER_STONE6 do
         if player:hasKeyItem(ki) then
-            STONES = STONES + 1
+            stones = stones + 1
         end
     end
 
-    return STONES
+    return stones
 end
 
 -- removes Traverser Stone KIs
-function spendTravStones(player, spentstones)
-    if (spentstones == 4) then
-        if (player:hasKeyItem(tpz.ki.TRAVERSER_STONE6)) then
+tpz.abyssea.spendTravStones = function(player, spentstones)
+    if spentstones == 4 then
+        if player:hasKeyItem(tpz.ki.TRAVERSER_STONE6) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE6)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE5)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE5) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE5)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE4)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE4) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE4)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE3)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE3) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE3)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE2)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE2) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE2)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE1)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE1) then
             spentstones = 3
             player:delKeyItem(tpz.ki.TRAVERSER_STONE1)
         end
     end
-    if (spentstones == 3) then
-        if (player:hasKeyItem(tpz.ki.TRAVERSER_STONE6)) then
+
+    if spentstones == 3 then
+        if player:hasKeyItem(tpz.ki.TRAVERSER_STONE6) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE6)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE5)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE5) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE5)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE4)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE4) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE4)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE3)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE3) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE3)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE2)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE2) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE2)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE1)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE1) then
             spentstones = 2
             player:delKeyItem(tpz.ki.TRAVERSER_STONE1)
         end
     end
-    if (spentstones == 2) then
-        if (player:hasKeyItem(tpz.ki.TRAVERSER_STONE6)) then
+
+    if spentstones == 2 then
+        if player:hasKeyItem(tpz.ki.TRAVERSER_STONE6) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE6)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE5)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE5) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE5)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE4)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE4) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE4)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE3)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE3) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE3)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE2)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE2) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE2)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE1)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE1) then
             spentstones = 1
             player:delKeyItem(tpz.ki.TRAVERSER_STONE1)
         end
     end
-    if (spentstones == 1) then
-        if (player:hasKeyItem(tpz.ki.TRAVERSER_STONE6)) then
+
+    if spentstones == 1 then
+        if player:hasKeyItem(tpz.ki.TRAVERSER_STONE6) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE6)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE5)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE5) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE5)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE4)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE4) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE4)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE3)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE3) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE3)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE2)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE2) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE2)
-        elseif (player:hasKeyItem(tpz.ki.TRAVERSER_STONE1)) then
+        elseif player:hasKeyItem(tpz.ki.TRAVERSER_STONE1) then
             player:delKeyItem(tpz.ki.TRAVERSER_STONE1)
         end
     end
 end
 
 -- returns total "Abyssite of <thing>"
-function getAbyssiteTotal(player, abyssite)
-    local SOJOURN = 0
-    local FURTHERANCE = 0
-    local MERIT = 0
+tpz.abyssea.getAbyssiteTotal = function(player, abyssite)
+    local sojourn = 0
+    local furtherance = 0
+    local merit = 0
+
     if abyssite == "SOJOURN" then
         for ki = tpz.ki.IVORY_ABYSSITE_OF_SOJOURN, tpz.ki.EMERALD_ABYSSITE_OF_SOJOURN do
             if player:hasKeyItem(ki) then
-                SOJOURN = SOJOURN + 1
+                sojourn = sojourn + 1
             end
         end
-        return SOJOURN
+        return sojourn
     elseif abyssite == "FURTHERANCE" then
         for ki = tpz.ki.SCARLET_ABYSSITE_OF_FURTHERANCE, tpz.ki.IVORY_ABYSSITE_OF_FURTHERANCE do
             if player:hasKeyItem(ki) then
-                FURTHERANCE = FURTHERANCE + 1
+                furtherance = furtherance + 1
             end
         end
-        return FURTHERANCE
+        return furtherance
     elseif abyssite == "MERIT" then
         for ki = tpz.ki.AZURE_ABYSSITE_OF_MERIT, tpz.ki.INDIGO_ABYSSITE_OF_MERIT do
             if player:hasKeyItem(ki) then
-                MERIT = MERIT + 1
+                merit = merit + 1
             end
         end
-        return MERIT
+        return merit
     end
 end
 
 -- returns total value of Demulune KeyItems
-function getDemiluneAbyssite(player)
-    local Demilune = 0
+tpz.abyssea.getDemiluneAbyssite = function(player)
+    local demilune = 0
     -- Todo: change this into proper bitmask
-    if (player:hasKeyItem(tpz.ki.CLEAR_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 1
+    if player:hasKeyItem(tpz.ki.CLEAR_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 1
     end
-    if (player:hasKeyItem(tpz.ki.COLORFUL_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 2
+    if player:hasKeyItem(tpz.ki.COLORFUL_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 2
     end
-    if (player:hasKeyItem(tpz.ki.SCARLET_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 4
+    if player:hasKeyItem(tpz.ki.SCARLET_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 4
     end
-    if (player:hasKeyItem(tpz.ki.AZURE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 8
+    if player:hasKeyItem(tpz.ki.AZURE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 8
     end
-    if (player:hasKeyItem(tpz.ki.VIRIDIAN_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 16
+    if player:hasKeyItem(tpz.ki.VIRIDIAN_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 16
     end
-    if (player:hasKeyItem(tpz.ki.JADE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 32
+    if player:hasKeyItem(tpz.ki.JADE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 32
     end
-    if (player:hasKeyItem(tpz.ki.SAPPHIRE_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 64
+    if player:hasKeyItem(tpz.ki.SAPPHIRE_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 64
     end
-    if (player:hasKeyItem(tpz.ki.CRIMSON_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 128
+    if player:hasKeyItem(tpz.ki.CRIMSON_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 128
     end
-    if (player:hasKeyItem(tpz.ki.EMERALD_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 256
+    if player:hasKeyItem(tpz.ki.EMERALD_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 256
     end
-    if (player:hasKeyItem(tpz.ki.VERMILLION_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 512
+    if player:hasKeyItem(tpz.ki.VERMILLION_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 512
     end
-    if (player:hasKeyItem(tpz.ki.INDIGO_DEMILUNE_ABYSSITE)) then
-        Demilune = Demilune + 1024
+    if player:hasKeyItem(tpz.ki.INDIGO_DEMILUNE_ABYSSITE) then
+        demilune = demilune + 1024
     end
-    return Demilune
+    return demilune
 end
 
-function getNewYellowWeakness(mob)
+tpz.abyssea.getNewYellowWeakness = function(mob)
     local day = VanadielDayElement()
-    local weakness = math.random(day-1, day+1)
+    local weakness = math.random(day - 1, day + 1)
+
     if weakness < 0 then weakness = 7 elseif weakness > 7 then weakness = 0 end
-    return yellow_weakness[weakness][math.random(#yellow_weakness[weakness])]
+
+    return yellowWeakness[weakness][math.random(#yellowWeakness[weakness])]
 end
 
-function getNewRedWeakness(mob)
-    return red_weakness[math.random(#red_weakness)]
+tpz.abyssea.getNewRedWeakness = function(mob)
+    return redWeakness[math.random(#redWeakness)]
 end
 
-function getNewBlueWeakness(mob)
+tpz.abyssea.getNewBlueWeakness = function(mob)
     local time = VanadielHour()
     local table = 3
+
     if time >= 6 and time < 14 then
         table = 1
     elseif time >= 14 and time < 22 then
         table = 2
     end
-    return blue_weakness[table][math.random(#blue_weakness[table])]
+
+    return blueWeakness[table][math.random(#blueWeakness[table])]
 end
 
--- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
-local POP_EVENTS =
-{
-    [15]  = {1010, 1020, 1021}, -- Abyssea-Konschtat
-    [45]  = {1010, 1020, 1021}, -- Abyssea-Tahrongi
-    [132] = {1010, 1020, 1021}, -- Abyssea-La Theine
-    [215] = {1010, 1022, 1023}, -- Abyssea-Attohwa
-    [216] = {1010, 1022, 1021}, -- Abyssea-Misareaux
-    [217] = {1010, 1015, 1120}, -- Abyssea-Vunkerl
-    [218] = {1010, 1020, 1021}, -- Abyssea-Altepa
-    [253] = {1010, 1020, 1025}, -- Abyssea-Uleguerand
-    [254] = {1010, 1020, 1021}, -- Abyssea-Grauberg
-    [255] = {1010, 1020, 1021}, -- Abyssea-Empyreal Paradox
-}
-
-function abysseaOnTrade(player,npc,trade)
+-- trade to QM to pop mob
+tpz.abyssea.qmOnTrade = function(player, npc, trade)
     -- validate QM pop data
     local zoneId = player:getZoneID()
     local pop = zones[zoneId].npc.QM_POPS[npc:getID()]
-    if (pop == nil) then
+    if not pop then
         return false
     end
 
     -- validate trade-to-pop
     local reqTrade = pop[2]
-    if (#reqTrade == 0 or trade:getItemCount() ~= #reqTrade) then
+    if #reqTrade == 0 or trade:getItemCount() ~= #reqTrade then
         return false
     end
 
     -- validate traded items
     for k, v in pairs(reqTrade) do
-        if (not trade:hasItemQty(v,1)) then
+        if not trade:hasItemQty(v, 1) then
             return false
         end
     end
 
     -- validate nm status
     local nm = pop[4]
-    if (GetMobByID(nm):isSpawned()) then
+    if GetMobByID(nm):isSpawned() then
         return false
     end
 
     -- complete trade and pop nm
     player:tradeComplete()
-    local dx = player:getXPos() + math.random(-1,1)
+    local dx = player:getXPos() + math.random(-1, 1)
     local dy = player:getYPos()
-    local dz = player:getZPos() + math.random(-1,1)
-    GetMobByID(nm):setSpawn(dx,dy,dz)
+    local dz = player:getZPos() + math.random(-1, 1)
+    GetMobByID(nm):setSpawn(dx, dy, dz)
     SpawnMob(nm):updateClaim(player)
     return true
 end
 
-function abysseaOnTrigger(player,npc)
+tpz.abyssea.qmOnTrigger = function(player, npc)
     -- validate QM pop data
     local zoneId = player:getZoneID()
-    local events = POP_EVENTS[zoneId]
+    local events = popEvents[zoneId]
     local pop = zones[zoneId].npc.QM_POPS[npc:getID()]
-    if (pop == nil) then
+    if not pop then
         return false
     end
 
     -- validate nm status
     local nm = pop[4]
-    if (GetMobByID(nm):isSpawned()) then
+    if GetMobByID(nm):isSpawned() then
         return false
     end
 
     -- validate trade-to-pop
     local t = pop[2]
-    if (#t > 0) then
+    if #t > 0 then
         for i = 1, 8, 1 do
-            if (t[i] == nil) then
+            if not t[i] then
                 t[i] = 0
             end
         end
-        player:startEvent(events[1],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8]) -- report required trades
+        player:startEvent(events[1], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8]) -- report required trades
         return true
     end
 
     -- validate ki-to-pop
     local kis = pop[3]
-    if (#kis == 0) then
+    if #kis == 0 then
         return false
     end
 
     -- validate kis
     local validKis = true
     for k, v in pairs(kis) do
-        if (not player:hasKeyItem(v)) then
+        if not player:hasKeyItem(v) then
             validKis = false
             break
         end
@@ -351,50 +372,50 @@ function abysseaOnTrigger(player,npc)
 
     -- infill kis
     for i = 1, 8, 1 do
-        if (kis[i] == nil) then
+        if not kis[i] then
             kis[i] = 0
         end
     end
 
     -- start event
-    if (validKis) then
+    if validKis then
         player:setLocalVar("abysseaQM", npc:getID())
-        player:startEvent(events[2],kis[1],kis[2],kis[3],kis[4],kis[5],kis[6],kis[7],kis[8]) -- player has all key items
+        player:startEvent(events[2], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player has all key items
         return true
     else
-        player:startEvent(events[3],kis[1],kis[2],kis[3],kis[4],kis[5],kis[6],kis[7],kis[8]) -- player is missing key items
+        player:startEvent(events[3], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player is missing key items
         return false
     end
 end
 
-function abysseaOnEventUpdate(player,csid,option)
+tpz.abyssea.qmOnEventUpdate = function(player, csid, option)
     return false
 end
 
-function abysseaOnEventFinish(player,csid,option)
+tpz.abyssea.qmOnEventFinish = function(player, csid, option)
     local zoneId = player:getZoneID()
-    local events = POP_EVENTS[zoneId]
+    local events = popEvents[zoneId]
     local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")]
     player:setLocalVar("abysseaQM", 0)
-    if (pop == nil) then
+    if not pop then
         return false
     end
 
-    if (csid == events[2] and option == 1) then
+    if csid == events[2] and option == 1 then
         -- delete kis
         local kis = pop[3]
         for k, v in pairs(kis) do
-            if (player:hasKeyItem(v)) then
+            if player:hasKeyItem(v) then
                 player:delKeyItem(v)
             end
         end
 
         -- pop nm
         local nm = pop[4]
-        local dx = player:getXPos() + math.random(-1,1)
+        local dx = player:getXPos() + math.random(-1, 1)
         local dy = player:getYPos()
-        local dz = player:getZPos() + math.random(-1,1)
-        GetMobByID(nm):setSpawn(dx,dy,dz)
+        local dz = player:getZPos() + math.random(-1, 1)
+        GetMobByID(nm):setSpawn(dx, dy, dz)
         SpawnMob(nm):updateClaim(player)
         return true
     end

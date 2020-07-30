@@ -332,7 +332,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 else
                     m_AdditionalEnemyList.push_back(mob);
 
-                // todo: this is retarded, why the fuck did past me do this
+                // todo: this can be greatly improved
                 if (mob.PMob->isAlive())
                     mob.PMob->Die();
                 if (mob.condition & CONDITION_SPAWNED_AT_START)

@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local ammoList =
     {
         {21307, 6199}, -- arrow, achiyalabopa
@@ -91,7 +91,7 @@ function onTrade(player,npc,trade)
     local giveToPlayer = {}
 
     -- check for invalid items
-    for i = 0,8,1 do
+    for i = 0, 8, 1 do
         local itemId = trade:getItemId(i)
         if itemId > 0 and itemId ~= 948 then
             local validSlot = false
@@ -132,17 +132,17 @@ function onTrade(player,npc,trade)
     player:messageSpecial(ID.text.NOKKHI_GOOD_TRADE)
     for k, v in pairs(giveToPlayer) do
         player:addItem(v[1], v[2])
-        player:messageSpecial(ID.text.ITEM_OBTAINED,v[1])
+        player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
     end
     player:tradeComplete()
 end
 
-function onTrigger(player,npc)
-    player:startEvent(667,npc:getID())
+function onTrigger(player, npc)
+    player:startEvent(667, npc:getID())
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

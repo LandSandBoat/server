@@ -4607,7 +4607,7 @@ INSERT INTO `synth_recipes` VALUES (4490,0,0,0,0,0,0,1,0,0,80,4099,4241,718,719,
 INSERT INTO `synth_recipes` VALUES (4491,0,0,0,0,0,0,9,0,0,85,4099,4241,711,711,711,1836,1836,1836,0,0,354,354,354,354,1,1,1,1,'Bookstack'); -- bookstack
 INSERT INTO `synth_recipes` VALUES (4492,0,0,0,0,0,0,29,0,0,87,4099,4241,745,2533,2533,2535,0,0,0,0,424,424,424,424,1,1,1,1,'Feasting Table'); -- feasting table
 INSERT INTO `synth_recipes` VALUES (4493,0,0,0,0,40,0,0,0,0,88,4099,4241,711,717,2010,0,0,0,0,0,343,343,343,343,1,1,1,1,'Harp Stool'); -- harp stool
-INSERT INTO `synth_recipes` VALUES (4494,0,0,0,0,40,0,0,0,0,88,4099,4241,717,717,717,717,717,717,0,0,352,352,352,352,1,1,1,1,'Half Partition'); -- half partition
+INSERT INTO `synth_recipes` VALUES (4494,0,0,0,0,0,0,0,0,0,88,4099,4241,717,717,717,717,717,717,0,0,352,352,352,352,1,1,1,1,'Half Partition'); -- half partition
 INSERT INTO `synth_recipes` VALUES (4495,0,0,1,0,0,0,0,0,0,90,4096,4238,709,709,947,2533,0,0,0,0,295,295,295,295,1,1,1,1,'Bonfire'); -- bonfire
 INSERT INTO `synth_recipes` VALUES (4496,0,0,0,0,60,0,0,0,0,90,4099,4241,720,725,2010,0,0,0,0,0,3678,3678,3678,3678,1,1,1,1,'Recital Bench'); -- recital bench
 INSERT INTO `synth_recipes` VALUES (4497,0,0,0,0,0,0,0,0,0,95,4098,4240,3927,3932,0,0,0,0,0,0,21206,21207,21207,21207,1,1,1,1,'Hemolele Staff'); -- hemolele staff
@@ -4674,6 +4674,8 @@ INSERT INTO `synth_recipes` VALUES (4557,0,2037,54,0,0,0,15,0,0,0,4096,4238,914,
 INSERT INTO `synth_recipes` VALUES (4558,0,2037,59,0,0,0,25,0,0,0,4096,4238,914,932,1647,2310,2460,0,0,0,9073,9073,9073,9073,12,12,12,12,'Arcanic Cell II');
 INSERT INTO `synth_recipes` VALUES (4559,1,0,0,0,0,0,15,0,0,0,4100,4242,16769,0,0,0,0,0,0,0,817,715,650,649,3,1,1,2,'Grass Thread'); -- Brass Zaghnal (desynth)
 INSERT INTO `synth_recipes` VALUES (4560,1,0,0,0,45,0,0,0,0,0,4100,4242,12467,0,0,0,0,0,0,0,840,820,820,820,1,5,6,7,'Chocobo Feather'); -- Wool Cap (desynth)
+INSERT INTO `synth_recipes` VALUES (4561,1,0,0,0,0,0,0,0,0,66,4100,4242,17054,0,0,0,0,0,0,0,719,842,842,842,1,1,1,1,'Ebony Lumber'); -- Ebony Wand (desynth)
+INSERT INTO `synth_recipes` VALUES (4562,1,0,0,0,0,0,0,0,87,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Mercury'); -- Rising Sun (desynth)
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)

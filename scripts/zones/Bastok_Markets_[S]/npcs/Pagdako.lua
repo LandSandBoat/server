@@ -4,31 +4,31 @@
 -- Quest NPC
 -- pos -200 -6 -93
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 0) then
-            player:startEvent(122);
+            player:startEvent(122)
         else
-            player:startEvent(123);
+            player:startEvent(123)
         end
     else
-        player:startEvent(106);
+        player:startEvent(106)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 122) then
-        player:setCharVar("FiresOfDiscProg",1);
+        player:setCharVar("FiresOfDiscProg", 1)
     end
-end;
+end

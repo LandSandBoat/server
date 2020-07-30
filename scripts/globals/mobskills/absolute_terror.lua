@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES)) then
         return 1
     elseif (mob:hasStatusEffect(tpz.effect.SUPER_BUFF)) then

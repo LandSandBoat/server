@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
         return 0
     end

@@ -7,11 +7,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     params.attribute = tpz.mod.INT
     params.bonus = 1.0
@@ -36,25 +36,25 @@ function onSpellCast(caster,target,spell)
     local MND_Loss = ((target:getStat(tpz.mod.MND) / 100) * 20)
     local CHR_Loss = ((target:getStat(tpz.mod.CHR) / 100) * 20)
     if (target:hasStatusEffect(tpz.effect.STR_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.STR_DOWN,STR_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.STR_DOWN, STR_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.DEX_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.DEX_DOWN,DEX_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.DEX_DOWN, DEX_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.VIT_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.VIT_DOWN,VIT_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.VIT_DOWN, VIT_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.AGI_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.AGI_DOWN,AGI_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.AGI_DOWN, AGI_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.INT_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.INT_DOWN,INT_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.INT_DOWN, INT_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.MND_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.MND_DOWN,MND_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.MND_DOWN, MND_Loss, 0, duration)
     end
     if (target:hasStatusEffect(tpz.effect.CHR_DOWN) == false) then
-        target:addStatusEffect(tpz.effect.CHR_DOWN,CHR_Loss,0,duration)
+        target:addStatusEffect(tpz.effect.CHR_DOWN, CHR_Loss, 0, duration)
     end
 
     -- Diverting use of doElementalNuke till spellParams is implemented for this spell
@@ -65,11 +65,11 @@ function onSpellCast(caster,target,spell)
     -- Get the resisted damage
     dmg = dmg*resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster,spell,target,dmg)
+    dmg = addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     -- Add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
     return dmg
 end

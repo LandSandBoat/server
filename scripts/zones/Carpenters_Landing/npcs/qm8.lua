@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local cop = player:getCurrentMission(COP)
     local k1 = player:getCharVar("Cryptonberry_Assassins-1_KILL")
     local k2 = player:getCharVar("Cryptonberry_Assassins-2_KILL")
@@ -38,10 +38,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 37 then
         player:setCharVar("Cryptonberry_Executor_KILL", 2)
         player:setCharVar("Cryptonberry_Assassins-1_KILL", 0)

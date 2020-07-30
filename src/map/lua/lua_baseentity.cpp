@@ -10015,6 +10015,30 @@ int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
 }
 
 /************************************************************************
+*  Function: isDualWielding()
+*  Purpose : Returns true if entity is wielding two weapons
+*  Example : if player:isDualWielding() then
+*  Notes   : 
+************************************************************************/
+
+inline int32 CLuaBaseEntity::isDualWielding(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
+    {
+        lua_pushboolean(L, PBattleEntity->m_dualWield);
+        return 1;
+    }
+    else
+    {
+        lua_pushboolean(L, false);
+        ShowError("lua::isDualWielding :: NPCs don't wield weapons!\n");
+        return 1;
+    }
+}
+
+/************************************************************************
 *  Function: getCE()
 *  Purpose : Returns the current Cumulative Enmity a Mob has against an Entity
 *  Example : local playerCE = target:getCE(player)
@@ -14570,6 +14594,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,recalculateStats),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkImbuedItems),
+
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isDualWielding),
 
     // Enmity
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCE),

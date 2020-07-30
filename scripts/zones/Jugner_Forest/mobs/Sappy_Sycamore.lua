@@ -2,6 +2,7 @@
 -- Area: Jugner_Forest
 --   NM: Sappy Sycamore
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -17,6 +18,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 159)
 end
 
 function onMobDespawn(mob)

@@ -17,9 +17,9 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,180,4566)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 4566)
     if (not target:hasStatusEffect(tpz.effect.POISON)) then
-        target:addStatusEffect(tpz.effect.POISON,2,3,180)
+        target:addStatusEffect(tpz.effect.POISON, 2, 3, 180)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

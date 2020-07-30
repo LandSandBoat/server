@@ -3,7 +3,7 @@
 --  Mob: Draconic Draugar
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local instance = mob:getInstance()
     local mobID = mob:getID()
 

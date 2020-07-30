@@ -4,10 +4,10 @@
 -- Standard Info NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Based on scripts/zones/Mhaura/Dieh_Yamilsiah.lua
     local timer = 1152 - ((os.time() - 1009811376)%1152)
     local direction = 0 -- Arrive, 1 for depart
@@ -18,11 +18,11 @@ function onTrigger(player,npc)
     else
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
     end
-    player:startEvent(232,timer,direction)
+    player:startEvent(232, timer, direction)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

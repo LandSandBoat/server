@@ -17,7 +17,7 @@ function onItemUse(target)
     if (VanadielDayElement() == LIGHTDAY) then
         if (cMP < (mMP * .85)) then
             if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-                target:addStatusEffect(tpz.effect.REFRESH,2,3,1800)
+                target:addStatusEffect(tpz.effect.REFRESH, 2, 3, 1800)
             else
                 target:messageBasic(tpz.msg.basic.NO_EFFECT)
             end

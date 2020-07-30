@@ -11,7 +11,7 @@ function onAdditionalEffect(player, target, damage)
     local chance = 10
 
     if math.random(100) <= chance then
-        local mp = math.random(4,16)
+        local mp = math.random(4, 16)
         player:addMP(mp)
         player:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, mp)
     end

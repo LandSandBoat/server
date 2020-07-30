@@ -2,6 +2,7 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Marquis Naberius
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -14,6 +15,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 350)
 end
 
 function onMobDespawn(mob)

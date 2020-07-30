@@ -17,8 +17,8 @@ require("scripts/globals/titles")
 
 local wsQuest = tpz.wsquest.empyreal_arrow
 
-function onTrade(player,npc,trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest,player,trade)
+function onTrade(player, npc, trade)
+    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     -- FROM SAPLINGS GROW
     if wsQuestEvent ~= nil then
@@ -26,19 +26,19 @@ function onTrade(player,npc,trade)
 
     -- FIRE AND BRIMSTONE
     elseif player:getCharVar("fireAndBrimstone") == 5 and npcUtil.tradeHas(trade, 1113) then -- old earring
-        player:startEvent(537,0,13360)
+        player:startEvent(537, 0, 13360)
     end
 end
 
-function onTrigger(player,npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest,player)
-    local theFangedOne = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
+function onTrigger(player, npc)
+    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
+    local theFangedOne = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
     local theFangedOneCS = player:getCharVar("TheFangedOne_Event")
-    local sinHunting = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.SIN_HUNTING)-- RNG AF1
+    local sinHunting = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SIN_HUNTING)-- RNG AF1
     local sinHuntingCS = player:getCharVar("sinHunting")
-    local fireAndBrimstone = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)-- RNG AF2
+    local fireAndBrimstone = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)-- RNG AF2
     local fireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
-    local unbridledPassion = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.UNBRIDLED_PASSION)-- RNG AF3
+    local unbridledPassion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)-- RNG AF3
     local unbridledPassionCS = player:getCharVar("unbridledPassion")
     local lvl = player:getMainLvl()
     local job = player:getMainJob()
@@ -97,7 +97,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- THREE PATHS
     if csid == 686 then
         player:setCharVar("COP_Louverance_s_Path", 2)
@@ -138,6 +138,6 @@ function onEventFinish(player,csid,option)
 
     -- FROM SAPLINGS GROW
     else
-        tpz.wsquest.handleEventFinish(wsQuest,player,csid,option,ID.text.EMPYREAL_ARROW_LEARNED)
+        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.EMPYREAL_ARROW_LEARNED)
     end
 end

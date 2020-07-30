@@ -20,10 +20,10 @@ function onInitialize(zone)
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-162.895,22.136,-139.923,2)
+        player:setPos(-162.895, 22.136, -139.923, 2)
     end
     return cs
 end
@@ -32,7 +32,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
 function onGameHour(zone)
@@ -45,8 +45,8 @@ function onGameHour(zone)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

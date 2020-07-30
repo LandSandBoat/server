@@ -4,16 +4,16 @@
 -- Type: Shop NPC
 -- !pos 37 32 117 256
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Western_Adoulin/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Standard shop
-    player:showText(npc, ID.text.LEDERICUS_SHOP_TEXT);
+    player:showText(npc, ID.text.LEDERICUS_SHOP_TEXT)
     local stock =
     {
         4916, 34000,  -- Scroll of Fira
@@ -32,11 +32,11 @@ function onTrigger(player,npc)
         4692, 396825, -- Scroll of Haste II
         5105, 396825, -- Scroll of Flurry II
     }
-    tpz.shop.general(player, stock);
-end;
+    tpz.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -1080,9 +1080,21 @@ INSERT INTO `bcnm_battlefield` VALUES (736,3,16830479,3);
 INSERT INTO `bcnm_battlefield` VALUES (768,1,16846849,3); -- ancient_flames_beckon
 INSERT INTO `bcnm_battlefield` VALUES (768,2,16846850,3);
 INSERT INTO `bcnm_battlefield` VALUES (768,3,16846851,3);
-INSERT INTO `bcnm_battlefield` VALUES (800,1,16855041,3); -- ancient_flames_beckon
+INSERT INTO `bcnm_battlefield` VALUES (800,1,16855041,3); -- ancient_flames_beckon (dem)
+INSERT INTO `bcnm_battlefield` VALUES (800,1,16855042,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,1,16855043,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,1,16855044,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,1,16855045,0);
 INSERT INTO `bcnm_battlefield` VALUES (800,2,16855046,3);
+INSERT INTO `bcnm_battlefield` VALUES (800,2,16855047,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,2,16855048,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,2,16855049,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,2,16855050,0);
 INSERT INTO `bcnm_battlefield` VALUES (800,3,16855051,3);
+INSERT INTO `bcnm_battlefield` VALUES (800,3,16855052,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,3,16855053,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,3,16855054,0);
+INSERT INTO `bcnm_battlefield` VALUES (800,3,16855055,0);
 INSERT INTO `bcnm_battlefield` VALUES (832,1,16863233,3); -- ancient_flames_backon
 INSERT INTO `bcnm_battlefield` VALUES (832,2,16863234,3);
 INSERT INTO `bcnm_battlefield` VALUES (832,3,16863235,3);

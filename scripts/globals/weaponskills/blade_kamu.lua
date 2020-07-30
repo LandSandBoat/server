@@ -27,17 +27,17 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1;
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.int_wsc = 0.6
-        params.atk100 = 1.3125; params.atk200 = 1.3125; params.atk300 = 1.3125;
+        params.atk100 = 1.3125; params.atk200 = 1.3125; params.atk300 = 1.3125
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
         if not target:hasStatusEffect(tpz.effect.ACCURACY_DOWN) then
-            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player,target, tpz.magic.ele.EARTH, 0)
+            local duration = tp / 1000 * 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0)
             target:addStatusEffect(tpz.effect.ACCURACY_DOWN, 10, 0, duration)
         end
 

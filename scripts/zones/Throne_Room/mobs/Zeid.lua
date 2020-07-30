@@ -6,13 +6,13 @@
 local ID = require("scripts/zones/Throne_Room/IDs")
 
 function onMobDeath(mob, player, isKiller)
-    player:startEvent(32004,3,3,1,3,3,3,3,3)
+    player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 32004 then
 
         local bfid = player:getBattlefield():getArea()

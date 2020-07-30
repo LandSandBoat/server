@@ -16,6 +16,6 @@ function onItemUse(target)
         hpHeal = dif
     end
     target:addHP(hpHeal)
-    target:updateEnmityFromCure(target,hpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP,0,hpHeal)
+    target:updateEnmityFromCure(target, hpHeal)
+    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, hpHeal)
 end

@@ -12,7 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
         if (mobSkin == 1805) then

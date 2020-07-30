@@ -5,7 +5,7 @@
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- Spawn the pets if they are despawned
     -- TODO: summon animations?
     local mobId = mob:getID()

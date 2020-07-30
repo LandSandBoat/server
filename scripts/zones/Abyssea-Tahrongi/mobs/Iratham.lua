@@ -6,7 +6,7 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if mob:getHPP() < 20 then
         mob:setMobMod(tpz.mobMod.SPELL_LIST, 155)
     elseif mob:getHPP() < 50 then
