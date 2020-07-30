@@ -37,14 +37,6 @@ end
 tpz.rhapsodies.unavailability =
 {
     [tpz.rhapsodies.character.PRISHE] = set{
-       tpz.mission.id.cop.THE_RITES_OF_LIFE,
-       tpz.mission.id.cop.BELOW_THE_ARKS,
-       tpz.mission.id.cop.THE_MOTHERCRYSTALS,
-       tpz.mission.id.cop.AN_INVITATION_WEST,
-       tpz.mission.id.cop.THE_LOST_CITY,
-       tpz.mission.id.cop.DISTANT_BELIEFS,
-       tpz.mission.id.cop.AN_ETERNAL_MELODY,
-       tpz.mission.id.cop.ANCIENT_VOWS,
        tpz.mission.id.cop.DARKNESS_NAMED,
        tpz.mission.id.cop.SLANDEROUS_UTTERINGS,
        tpz.mission.id.cop.DESIRES_OF_EMPTINESS,
@@ -59,14 +51,6 @@ tpz.rhapsodies.unavailability =
        tpz.mission.id.cop.DAWN,
     },
     [tpz.rhapsodies.character.TENZEN] = set{
-        tpz.mission.id.cop.THE_RITES_OF_LIFE,
-        tpz.mission.id.cop.BELOW_THE_ARKS,
-        tpz.mission.id.cop.THE_MOTHERCRYSTALS,
-        tpz.mission.id.cop.AN_INVITATION_WEST,
-        tpz.mission.id.cop.THE_LOST_CITY,
-        tpz.mission.id.cop.DISTANT_BELIEFS,
-        tpz.mission.id.cop.AN_ETERNAL_MELODY,
-        tpz.mission.id.cop.ANCIENT_VOWS,
         tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING,
         tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN,
         tpz.mission.id.cop.DESIRES_OF_EMPTINESS,
@@ -182,6 +166,9 @@ tpz.rhapsodies.unavailability =
 
 tpz.rhapsodies.requiredCharacters =
 {
+    [tpz.mission.id.rov.RING_MY_BELL] = {
+        tpz.rhapsodies.character.TENZEN,
+    },
     [tpz.mission.id.rov.SPIRITS_AWOKEN] = {
         tpz.rhapsodies.character.TENZEN,
     },
