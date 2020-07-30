@@ -10449,11 +10449,11 @@ inline int32 CLuaBaseEntity::updateEnmityFromCure(lua_State *L)
     CLuaBaseEntity* PEntity = Lunar<CLuaBaseEntity>::check(L, 1);
     auto amount = (int32)lua_tointeger(L, 2);
 
-    auto PCurer = [&]() -> CCharEntity*
+    auto PCurer = [&]() -> CBattleEntity*
     {
-        if (m_PBaseEntity->objtype == TYPE_PC)
+        if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
         {
-            return static_cast<CCharEntity*>(m_PBaseEntity);
+            return static_cast<CBattleEntity*>(m_PBaseEntity);
         }
         else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PETTYPE_AUTOMATON)
         {

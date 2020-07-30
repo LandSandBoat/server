@@ -494,25 +494,18 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         PTrusts.erase(trustIt);
     }
 
-    if (PParty != nullptr)
-    {
-        if (PTrusts.empty() && PParty->members.size() == 1)
-        {
-            PParty->DisbandParty();
-        }
-        else
-        {
-            PParty->ReloadParty();
-        }
-    }
+    ReloadPartyInc();
 }
 
 void CCharEntity::ClearTrusts()
 {
-    for (auto trust : PTrusts)
+    for (auto PTrust : PTrusts)
     {
-        RemoveTrust(trust);
+        PTrust->PAI->Despawn();
     }
+    PTrusts.clear();
+
+    ReloadPartyInc();
 }
 
 void CCharEntity::Tick(time_point tick)
@@ -1686,10 +1679,11 @@ void CCharEntity::Die()
 
 void CCharEntity::Die(duration _duration)
 {
+    this->ClearTrusts();
+
     m_deathSyncTime = server_clock::now() + death_update_frequency;
     PAI->ClearStateStack();
     PAI->Internal_Die(_duration);
-    this->ClearTrusts();
 
     // reraise modifiers
     if (this->getMod(Mod::RERAISE_I) > 0)
