@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.VOLLBOW) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.MILLECHUCA_CLOSED_DIALOG)
     else
@@ -23,13 +23,13 @@ function onTrigger(player,npc)
             1410, 1656,    -- Sweet William
         }
 
-        player:showText(npc,ID.text.MILLECHUCA_OPEN_DIALOG)
+        player:showText(npc, ID.text.MILLECHUCA_OPEN_DIALOG)
         tpz.shop.general(player, stock, SANDORIA)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

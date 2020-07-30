@@ -8,11 +8,11 @@ require("scripts/quests/flyers_for_regine")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 7) -- FLYERS FOR REGINE
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         4441, 837, 1,    --Grape Juice
@@ -29,8 +29,8 @@ function onTrigger(player,npc)
     tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

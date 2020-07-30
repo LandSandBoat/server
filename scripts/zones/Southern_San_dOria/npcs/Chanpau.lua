@@ -7,13 +7,13 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
-        player:startEvent(629);
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
+        player:startEvent(629)
     elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED) then
         local Fired = player:getCharVar("Fired")
         if Fired == 1 then
@@ -22,19 +22,19 @@ function onTrigger(player,npc)
             player:startEvent(505) -- theres work ill go check it out
         end
     else
-        player:startEvent(566);
+        player:startEvent(566)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 505) then
         player:setCharVar("Fired", 1)
     end
-end;
+end
 
 -------for future use
 --    player:startEvent(32691) -- starlight celebration

@@ -5,16 +5,16 @@
 -- !pos 0 2 -83 230
 -------------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
--- player:startEvent(894);-- cavernous maw
+function onTrigger(player, npc)
+-- player:startEvent(894)-- cavernous maw
     player:startEvent(885)
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

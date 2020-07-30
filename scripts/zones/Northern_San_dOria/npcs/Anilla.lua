@@ -7,28 +7,28 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local WildcatSandy = player:getCharVar("WildcatSandy");
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,6) == false) then
-        player:startEvent(808);
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 6) == false) then
+        player:startEvent(808)
     else
-        player:startEvent(586);
+        player:startEvent(586)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 808) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",6,true);
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 6, true)
     end
 
-end;
+end

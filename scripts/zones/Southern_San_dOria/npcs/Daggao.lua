@@ -7,34 +7,34 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local WildcatSandy = player:getCharVar("WildcatSandy");
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,0) == false) then
-        player:startEvent(810);
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 0) == false) then
+        player:startEvent(810)
     elseif (player:getCharVar("peaceForTheSpiritCS") == 3) then
-        player:startEvent(72);
+        player:startEvent(72)
     elseif (player:getCharVar("peaceForTheSpiritCS") == 5) then
-        player:startEvent(73);
+        player:startEvent(73)
     else
-        player:startEvent(60);
+        player:startEvent(60)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 810) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",0,true);
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 0, true)
     elseif (csid == 72) then
-        player:setCharVar("peaceForTheSpiritCS",4);
+        player:setCharVar("peaceForTheSpiritCS", 4)
     end
 
-end;
+end

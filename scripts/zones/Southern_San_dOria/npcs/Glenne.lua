@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -------------------------------------
 
-require("scripts/globals/pathfind");
+require("scripts/globals/pathfind")
 
 local path =
 {
@@ -25,82 +25,82 @@ local path =
     -124.788277, -2.000000, 14.715488,
     -123.792847, -2.000000, 14.619405,
     -124.871826, -2.000000, 14.723736
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(tpz.path.first(path));
-    onPath(npc);
-end;
+    npc:initNpcAi()
+    npc:setPos(tpz.path.first(path))
+    onPath(npc)
+end
 
 function onPath(npc)
-    tpz.path.patrol(npc, path);
-end;
+    tpz.path.patrol(npc, path)
+end
 
-function onTrade(player,npc,trade)
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL) == QUEST_ACCEPTED and
-        trade:hasItemQty(601,1) and count == 1) then
-            player:startEvent(513);
-            npc:wait();
+function onTrade(player, npc, trade)
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL) == QUEST_ACCEPTED and
+        trade:hasItemQty(601, 1) and count == 1) then
+            player:startEvent(513)
+            npc:wait()
     end
 
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local aSentrysPeril = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL);
+    local aSentrysPeril = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
 
-    npc:wait();
+    npc:wait()
 
     if (aSentrysPeril == QUEST_AVAILABLE) then
-        player:startEvent(510);
+        player:startEvent(510)
     elseif (aSentrysPeril == QUEST_ACCEPTED) then
         if (player:hasItem(600) == true or player:hasItem(601) == true) then
-            player:startEvent(520);
+            player:startEvent(520)
         else
-            player:startEvent(644);
+            player:startEvent(644)
         end
     elseif (aSentrysPeril == QUEST_COMPLETED) then
-        player:startEvent(521);
+        player:startEvent(521)
     else
-        npc:wait(0);
+        npc:wait(0)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
 
-    npc:wait(5000);
+    npc:wait(5000)
 
     if (csid == 510 and option == 0) then
         if (player:getFreeSlotsCount() > 0) then
-            player:addQuest(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL);
-            player:addItem(600);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,600);
+            player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
+            player:addItem(600)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 600)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600); -- Dose of ointment
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 600) -- Dose of ointment
         end
     elseif (csid == 644) then
         if (player:getFreeSlotsCount() > 0) then
-            player:addItem(600);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,600);
+            player:addItem(600)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 600)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,600); -- Dose of ointment
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 600) -- Dose of ointment
         end
     elseif (csid == 513) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,12832); -- Bronze Subligar
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12832) -- Bronze Subligar
         else
-            player:tradeComplete();
-            player:addTitle(tpz.title.RONFAURIAN_RESCUER);
-            player:addItem(12832);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12832); -- Bronze Subligar
-            player:addFame(SANDORIA,30);
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_SENTRY_S_PERIL);
+            player:tradeComplete()
+            player:addTitle(tpz.title.RONFAURIAN_RESCUER)
+            player:addItem(12832)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12832) -- Bronze Subligar
+            player:addFame(SANDORIA, 30)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
         end
     end
 
-end;
+end

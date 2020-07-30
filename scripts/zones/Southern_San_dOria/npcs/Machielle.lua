@@ -8,11 +8,11 @@ require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.NORVALLEN) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.MACHIELLE_CLOSED_DIALOG)
     else
@@ -24,13 +24,13 @@ function onTrigger(player,npc)
             698, 88,    -- Ash Log
         }
 
-        player:showText(npc,ID.text.MACHIELLE_OPEN_DIALOG)
+        player:showText(npc, ID.text.MACHIELLE_OPEN_DIALOG)
         tpz.shop.general(player, stock, SANDORIA)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

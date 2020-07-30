@@ -7,16 +7,16 @@
 require("scripts/quests/flyers_for_regine")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 13) -- FLYERS FOR REGINE
-end;
+end
 
-function onTrigger(player,npc)
-    player:startEvent(656);
-end;
+function onTrigger(player, npc)
+    player:startEvent(656)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

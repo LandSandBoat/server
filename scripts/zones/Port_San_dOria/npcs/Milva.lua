@@ -7,10 +7,10 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.SARUTABARUTA) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.MILVA_CLOSED_DIALOG)
     else
@@ -28,8 +28,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

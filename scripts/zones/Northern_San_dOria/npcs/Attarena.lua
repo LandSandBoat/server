@@ -8,11 +8,11 @@ require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc);
-end;
+function onTrade(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.LITELOR) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.ATTARENA_CLOSED_DIALOG)
     else
@@ -25,10 +25,10 @@ function onTrigger(player,npc)
         player:showText(npc, ID.text.ATTARENA_OPEN_DIALOG)
         tpz.shop.general(player, stock, SANDORIA)
     end
-end;
-
-function onEventUpdate(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventUpdate(player, csid, option)
+end
+
+function onEventFinish(player, csid, option)
 end

@@ -9,11 +9,11 @@ require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.ARAGONEU) ~= tpz.nation.SANDORIA then
         player:showText(npc, ID.text.ANTONIAN_CLOSED_DIALOG)
     else
@@ -31,8 +31,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end
