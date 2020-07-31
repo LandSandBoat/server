@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: East Ronfause
+-- Area: East Ronfaure
 --  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")

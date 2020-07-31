@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Make of Shakhrami
+-- Area: Maze of Shakhrami
 --  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
