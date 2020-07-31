@@ -3970,6 +3970,9 @@ namespace battleutils
             {
                 petutils::DespawnPet(PVictim);
             }
+
+            static_cast<CCharEntity*>(PVictim)->ClearTrusts();
+
             PVictim->PAI->SetController(std::make_unique<CPlayerCharmController>(static_cast<CCharEntity*>(PVictim)));
 
             battleutils::RelinquishClaim(static_cast<CCharEntity*>(PVictim));
