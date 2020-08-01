@@ -194,6 +194,11 @@ tpz.homepoint.onTrigger = function(player, csid, index)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
     end
 
+    if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+        -- "Rhapsody in White" key item reduces teleport fee by 80%
+        params = bit.bor(params, 0x20000)
+    end
+
     player:setLocalVar("originIndex", index)
     local G1,G2,G3,G4 = unpack(player:getTeleport(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
