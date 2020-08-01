@@ -14,7 +14,7 @@ function onTrigger(player, npc)
 end
 
 function onEventUpdate(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras, 1)
+    EventUpdateBCNM(player, csid, option, extras)
 end
 
 function onEventFinish(player, csid, option)

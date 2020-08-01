@@ -389,7 +389,6 @@ function onEventFinish(player, csid, option)
         local cosmoTime = getCosmoCleanseTime(player)
         if cosmoTime == COSMO_READY and player:delGil(15000) then
             npcUtil.giveKeyItem(player, tpz.ki.COSMOCLEANSE)
-            player:setCharVar("Cosmo_Cleanse_TIME", os.time())
         end
 
     -- purchase item using ancient beastcoins
