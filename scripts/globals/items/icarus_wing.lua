@@ -15,5 +15,5 @@ end
 
 function onItemUse(target)
     target:addTP(1000)
-    target:addStatusEffect(tpz.effect.MEDICINE,0,0,7200)
+    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 7200)
 end

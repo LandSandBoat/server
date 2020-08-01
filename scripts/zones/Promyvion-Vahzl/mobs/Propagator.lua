@@ -6,7 +6,7 @@ require("scripts/globals/missions")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:setLocalVar("maxBabies",2)
+    mob:setLocalVar("maxBabies", 2)
 end
 
 function onMobDeath(mob, player, isKiller)

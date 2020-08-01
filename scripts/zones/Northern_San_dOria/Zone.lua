@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -18,6 +19,7 @@ function onInitialize(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     zone:registerRegion(1, -7, -3, 110, 7, -1, 155)
+    quests.ffr.initZone(zone) -- register regions 2 through 6
 
     applyHalloweenNpcCostumes(zone:getID())
 end
@@ -81,6 +83,7 @@ function onRegionEnter(player, region)
             end
         end,
     }
+    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
 function onRegionLeave(player, region)

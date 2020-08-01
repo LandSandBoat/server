@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ELDER_MEMORIES)
 
     if questStatus == QUEST_ACCEPTED then
@@ -26,7 +26,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ELDER_MEMORIES)
 
     if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY) ~= QUEST_AVAILABLE then
@@ -53,10 +53,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 111 and option == 40 then
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ELDER_MEMORIES)
         player:setCharVar("IsacioElderMemVar", 1)

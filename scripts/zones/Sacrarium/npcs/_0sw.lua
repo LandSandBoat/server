@@ -6,18 +6,18 @@
 local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getZPos() < 52) then
-        player:messageSpecial(ID.text.STURDY_GATE);
+        player:messageSpecial(ID.text.STURDY_GATE)
     else
-        player:messageSpecial(ID.text.KEYHOLE_DAMAGED);
+        player:messageSpecial(ID.text.KEYHOLE_DAMAGED)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

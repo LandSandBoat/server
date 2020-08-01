@@ -113,7 +113,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     end
     -- print(params.offcratiomod)
     local cratio = BluecRatio(params.offcratiomod / target:getStat(tpz.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = BlueGetHitRate(caster,target,true)
+    local hitrate = BlueGetHitRate(caster, target, true)
 
     -- print("Hit rate "..hitrate)
     -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
@@ -131,7 +131,7 @@ function BluePhysicalSpell(caster, target, spell, params)
             -- TODO: Check for shadow absorbs.
 
             -- Generate a random pDIF between min and max
-            local pdif = math.random((cratio[1]*1000),(cratio[2]*1000))
+            local pdif = math.random((cratio[1]*1000), (cratio[2]*1000))
             pdif = pdif/1000
 
             -- Apply it to our final D
@@ -234,7 +234,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     local attackType = params.attackType or tpz.attackType.NONE
     local damageType = params.damageType or tpz.damageType.NONE
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
-    target:updateEnmityFromDamage(caster,dmg)
+    target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
     -- TP has already been dealt with.
     return dmg
@@ -253,7 +253,7 @@ function BlueGetWsc(attacker, params)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-function BluecRatio(ratio,atk_lvl,def_lvl)
+function BluecRatio(ratio, atk_lvl, def_lvl)
     -- Level penalty...
     local levelcor = 0
     if (atk_lvl < def_lvl) then
@@ -301,7 +301,7 @@ end
 -- ftp1 - The TP 0% value
 -- ftp2 - The TP 150% value
 -- ftp3 - The TP 300% value
-function BluefTP(tp,ftp1,ftp2,ftp3)
+function BluefTP(tp, ftp1, ftp2, ftp3)
     if (tp >= 0 and tp < 1500) then
         return ftp1 + ( ((ftp2-ftp1)/100) * (tp / 10))
     elseif (tp >= 1500 and tp <= 3000) then
@@ -336,7 +336,7 @@ function BluefSTR(dSTR)
     return fSTR2
 end
 
-function BlueGetHitRate(attacker,target,capHitRate)
+function BlueGetHitRate(attacker, target, capHitRate)
     local acc = attacker:getACC()
     local eva = target:getEVA()
 
@@ -372,7 +372,7 @@ function BlueGetHitRate(attacker,target,capHitRate)
 end
 
 -- Function to stagger duration of effects by using the resistance to change the value
-function getBlueEffectDuration(caster,resist,effect)
+function getBlueEffectDuration(caster, resist, effect)
     local duration = 0
 
     if (resist == 0.125) then
@@ -386,20 +386,20 @@ function getBlueEffectDuration(caster,resist,effect)
     end
 
     if (effect == tpz.effect.BIND) then
-        duration = math.random(0,5) + resist * 5
+        duration = math.random(0, 5) + resist * 5
     elseif (effect == tpz.effect.STUN) then
-        duration = math.random(2,3) + resist
-        -- printf("Duration of stun is %i",duration)
+        duration = math.random(2, 3) + resist
+        -- printf("Duration of stun is %i", duration)
     elseif (effect == tpz.effect.WEIGHT) then
-        duration = math.random(20,24) + resist * 9 -- 20-24
+        duration = math.random(20, 24) + resist * 9 -- 20-24
     elseif (effect == tpz.effect.PARALYSIS) then
-        duration = math.random(50,60) + resist * 15 -- 50- 60
+        duration = math.random(50, 60) + resist * 15 -- 50- 60
     elseif (effect == tpz.effect.SLOW) then
-        duration = math.random(60,120) + resist * 15 -- 60- 120 -- Needs confirmation but capped max duration based on White Magic Spell Slow
+        duration = math.random(60, 120) + resist * 15 -- 60- 120 -- Needs confirmation but capped max duration based on White Magic Spell Slow
     elseif (effect == tpz.effect.SILENCE) then
-        duration = math.random(60,180) + resist * 15 -- 60- 180 -- Needs confirmation but capped max duration based on White Magic Spell Silence
+        duration = math.random(60, 180) + resist * 15 -- 60- 180 -- Needs confirmation but capped max duration based on White Magic Spell Silence
     elseif (effect == tpz.effect.POISON) then
-        duration = math.random(20,30) + resist * 9 -- 20-30 -- based on magic spell poison
+        duration = math.random(20, 30) + resist * 9 -- 20-30 -- based on magic spell poison
     end
 
     return duration

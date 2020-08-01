@@ -8,11 +8,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local minCure = 600
 
     local divisor = 1
@@ -23,7 +23,7 @@ function onSpellCast(caster,target,spell)
         constant = 814--this is too powerful and needs to be fixed when the rest of the curaga 5 numbers are determined
     end
 
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,false)
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
 
     final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
 
@@ -37,7 +37,7 @@ function onSpellCast(caster,target,spell)
     target:restoreHP(final)
     target:wakeUp()
 
-    caster:updateEnmityFromCure(target,final)
+    caster:updateEnmityFromCure(target, final)
 
     spell:setMsg(tpz.msg.basic.AOE_HP_RECOVERY)
 

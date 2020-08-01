@@ -10,10 +10,10 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local luckOfTheDraw = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
     local againstAllOdds = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS)
 
@@ -30,10 +30,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 547 then
         player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
         player:setCharVar("LuckOfTheDraw", 1)

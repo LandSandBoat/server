@@ -8,10 +8,10 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local IAS = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     local IASvar = player:getCharVar("IASvar")
     local CB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
@@ -34,10 +34,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- IN A STEW
     if csid == 233 then
         player:setCharVar("IASvar", 2)

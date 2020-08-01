@@ -3,13 +3,13 @@
 --  NPC: Brave Wolf
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Rabao/IDs");
-require("scripts/globals/shop");
+local ID = require("scripts/zones/Rabao/IDs")
+require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         12301, 31201,    -- Buckler
@@ -30,11 +30,11 @@ function onTrigger(player,npc)
     }
 
     player:showText(npc, ID.text.BRAVEWOLF_SHOP_DIALOG)
-    tpz.shop.general(player, stock);
-end;
+    tpz.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

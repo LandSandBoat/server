@@ -10,20 +10,20 @@ local ID = require("scripts/zones/PsoXja/IDs")
     ..............................................................................................]]
 function attemptPickLock(player, npc, correctSideOfDoor)
     if (npc:getAnimation() == tpz.anim.CLOSE_DOOR and correctSideOfDoor) then
-        local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET;
-        local gargoyle = ID.mob.GARGOYLE_OFFSET + offset;
+        local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
+        local gargoyle = ID.mob.GARGOYLE_OFFSET + offset
 
         if (GetMobByID(gargoyle):isSpawned()) then
-            player:messageSpecial(ID.text.DOOR_LOCKED);
+            player:messageSpecial(ID.text.DOOR_LOCKED)
         else
-            if (math.random(1,2) == 1) then
-                npc:messageName(ID.text.DISCOVER_DISARM_FAIL, player);
-                SpawnMob(gargoyle):updateClaim(player);
+            if (math.random(1, 2) == 1) then
+                npc:messageName(ID.text.DISCOVER_DISARM_FAIL, player)
+                SpawnMob(gargoyle):updateClaim(player)
             else
-                npc:messageName(ID.text.DISCOVER_DISARM_SUCCESS, player);
-                npc:openDoor(30);
+                npc:messageName(ID.text.DISCOVER_DISARM_SUCCESS, player)
+                npc:openDoor(30)
             end
-            player:tradeComplete();
+            player:tradeComplete()
         end
     end
 end
@@ -35,22 +35,22 @@ end
 function attemptOpenDoor(player, npc, correctSideOfDoor)
     if (npc:getAnimation() == tpz.anim.CLOSE_DOOR) then
         if (correctSideOfDoor) then
-            local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET;
-            local gargoyle = ID.mob.GARGOYLE_OFFSET + offset;
+            local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
+            local gargoyle = ID.mob.GARGOYLE_OFFSET + offset
 
             if (GetMobByID(gargoyle):isSpawned()) then
-                player:messageSpecial(ID.text.DOOR_LOCKED);
+                player:messageSpecial(ID.text.DOOR_LOCKED)
             else
-                if (math.random(1,10) <= 9) then -- Spawn Gargoyle
-                    npc:messageName(ID.text.TRAP_ACTIVATED, player);
-                    SpawnMob(gargoyle):updateClaim(player);
+                if (math.random(1, 10) <= 9) then -- Spawn Gargoyle
+                    npc:messageName(ID.text.TRAP_ACTIVATED, player)
+                    SpawnMob(gargoyle):updateClaim(player)
                 else
-                    npc:messageName(ID.text.TRAP_FAILS, player);
-                    npc:openDoor(30);
+                    npc:messageName(ID.text.TRAP_FAILS, player)
+                    npc:openDoor(30)
                 end
             end
         else
-            player:startEvent(26); -- return to beginning of spiral
+            player:startEvent(26) -- return to beginning of spiral
         end
     end
 end

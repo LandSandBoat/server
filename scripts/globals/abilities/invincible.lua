@@ -9,10 +9,10 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(tpz.effect.INVINCIBLE,1,0,30)
+function onUseAbility(player, target, ability)
+    player:addStatusEffect(tpz.effect.INVINCIBLE, 1, 0, 30)
 end

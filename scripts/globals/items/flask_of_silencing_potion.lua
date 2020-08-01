@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.SILENCE)) then
-        target:addStatusEffect(tpz.effect.SILENCE,1,3,180)
+        target:addStatusEffect(tpz.effect.SILENCE, 1, 3, 180)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

@@ -2,11 +2,13 @@
 -- Area: Jugner Forest
 --   NM: Fraelissa
 -----------------------------------
+require("scripts/globals/hunts")
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 158)
 end
 
 function onMobDespawn(mob)

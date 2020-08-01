@@ -9,7 +9,7 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if mob:AnimationSub() == 0 and (mob:getMainJob() == tpz.job.COR or mob:getMainJob() == tpz.job.BRD or mob:getMainJob() == tpz.job.RDM) then
         return 0
     else
@@ -21,8 +21,8 @@ function onMobWeaponSkill(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
     local dmgmod = 1.5
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.PIERCE,info.hitslanded)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCE, info.hitslanded)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end

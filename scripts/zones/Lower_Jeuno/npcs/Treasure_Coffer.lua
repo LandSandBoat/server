@@ -456,7 +456,7 @@ local function givePrize(player, ki)
                     if a ~= nil and alreadyRolled[a[1]] == nil then
                         alreadyRolled[a[1]] = true
                         table.insert(addAug, a[1])
-                        table.insert(addAug, math.random(a[2],a[3]))
+                        table.insert(addAug, math.random(a[2], a[3]))
                     end
                 end
             end
@@ -476,10 +476,10 @@ local function givePrize(player, ki)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local receivedNexusCape = player:getCharVar("receivedNexusCape")
 
     local arg1 =
@@ -516,13 +516,13 @@ function onTrigger(player,npc)
         ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
         ((ENABLE_ACP * ENABLE_AMK * ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
 
-    player:startEvent(10099,arg1,arg2,arg3,arg4,0,0,0,0)
+    player:startEvent(10099, arg1, arg2, arg3, arg4, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10099 then
         if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, 11538) then
             player:setCharVar("receivedNexusCape", 1)

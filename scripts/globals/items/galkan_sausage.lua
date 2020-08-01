@@ -31,10 +31,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,1800,4395)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 4395)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if (target:getRace() ~= tpz.race.GALKA) then
         target:addMod(tpz.mod.STR, 3)
         target:addMod(tpz.mod.INT, -4)

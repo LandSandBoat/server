@@ -4,19 +4,19 @@
 -- Standard Info NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCharVar("BathedInScent") == 1) then
-        player:startEvent(168); -- scent from Blue Rafflesias
+        player:startEvent(168) -- scent from Blue Rafflesias
     else
-        player:startEvent(63);
+        player:startEvent(63)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

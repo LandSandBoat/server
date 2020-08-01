@@ -16,7 +16,7 @@ end
 function onZoneIn(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-260.136,2.09,-325.702,188)
+        player:setPos(-260.136, 2.09, -325.702, 188)
     end
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3 then
         cs = 50

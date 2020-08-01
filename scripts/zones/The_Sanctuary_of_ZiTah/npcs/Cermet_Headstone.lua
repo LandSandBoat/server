@@ -11,10 +11,10 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- HEADSTONE PILGRIMAGE
     if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE then
         if player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT) then
@@ -57,10 +57,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- HEADSTONE PILGRIMAGE
     if csid == 200 and option == 1 then
         SpawnMob(ID.mob.DOOMED_PILGRIMS):updateClaim(player)

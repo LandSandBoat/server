@@ -331,31 +331,31 @@ local loot =
             {itemid = 846, droprate = 1000}, -- Insect Wing
         },
         {
-            {itemid = 1601, droprate = 1000},-- Mannequin Head
+            {itemid = 1601, droprate = 1000}, -- Mannequin Head
         },
         {
             {itemid = 0, droprate = 636},    -- Nothing
-            {itemid = 12486, droprate = 364},-- Emperor Hairpin
+            {itemid = 12486, droprate = 364}, -- Emperor Hairpin
         },
         {
-            {itemid = 12400, droprate = 175},-- Ashigaru Targe
-            {itemid = 12399, droprate = 175},-- Beaters Aspis
-            {itemid = 12395, droprate = 175},-- Varlets Targe
-            {itemid = 12390, droprate = 175},-- Wrestlers Aspis
+            {itemid = 12400, droprate = 175}, -- Ashigaru Targe
+            {itemid = 12399, droprate = 175}, -- Beaters Aspis
+            {itemid = 12395, droprate = 175}, -- Varlets Targe
+            {itemid = 12390, droprate = 175}, -- Wrestlers Aspis
             {itemid = 809, droprate = 100},  -- Clear Topaz
             {itemid = 795, droprate = 100},  -- Lapis Lazuli
             {itemid = 796, droprate = 100},  -- Light Opal
         },
         {
-            {itemid = 13659, droprate = 250},-- Mercenary Mantle
-            {itemid = 13668, droprate = 250},-- Singers Mantle
-            {itemid = 13662, droprate = 250},-- Wizards Mantle
-            {itemid = 13672, droprate = 250},-- Wyvern Mantle
+            {itemid = 13659, droprate = 250}, -- Mercenary Mantle
+            {itemid = 13668, droprate = 250}, -- Singers Mantle
+            {itemid = 13662, droprate = 250}, -- Wizards Mantle
+            {itemid = 13672, droprate = 250}, -- Wyvern Mantle
         },
         {
             {itemid = 4947, droprate = 70},  -- Scroll Of Utsusemi Ni
             {itemid = 5070, droprate = 70},  -- Scroll Of Magic Finale
-            {itemid = 17863, droprate = 150},-- Jug Of Quadav Bug Broth
+            {itemid = 17863, droprate = 150}, -- Jug Of Quadav Bug Broth
             {itemid = 799, droprate = 100},  -- Onyx
             {itemid = 795, droprate = 100},  -- Lapis Lazuli
             {itemid = 796, droprate = 100},  -- Light Opal
@@ -489,7 +489,7 @@ local loot =
             {itemid = 18086, droprate = 48}, -- Behourd Lance
             {itemid = 18046, droprate = 61}, -- Mutilator
             {itemid = 18210, droprate = 46}, -- Raifu
-            {itemid = 15286, droprate = 302},-- Tilt Belt
+            {itemid = 15286, droprate = 302}, -- Tilt Belt
             {itemid = 18350, droprate = 76}, -- Tourney Patas
         },
         {
@@ -497,7 +497,7 @@ local loot =
             {itemid = 17696, droprate = 42}, -- Buzzard Tuck
             {itemid = 17936, droprate = 77}, -- De Saintres Axe
             {itemid = 17693, droprate = 73}, -- Grudge Sword
-            {itemid = 15287, droprate = 258},-- Mantra Belt
+            {itemid = 15287, droprate = 258}, -- Mantra Belt
             {itemid = 4717, droprate = 68},  -- Scroll Of Refresh
             {itemid = 4947, droprate = 55},  -- Scroll Of Utsusemi Ni
             {itemid = 4858, droprate = 14},  -- Scroll Of Ice Spikes
@@ -710,29 +710,29 @@ local loot =
             {itemid = 837, droprate = 1000}, -- Spool Of Malboro Fiber
         },
         {
-            {itemid = 17827, droprate = 217},-- Michishiba-no-tsuyu
-            {itemid = 17451, droprate = 174},-- Morgenstern
-            {itemid = 17793, droprate = 333},-- Senjuinrikio
-            {itemid = 17589, droprate = 174},-- Thyrsusstab
+            {itemid = 17827, droprate = 217}, -- Michishiba-no-tsuyu
+            {itemid = 17451, droprate = 174}, -- Morgenstern
+            {itemid = 17793, droprate = 333}, -- Senjuinrikio
+            {itemid = 17589, droprate = 174}, -- Thyrsusstab
         },
         {
-            {itemid = 13402, droprate = 101},-- Cassie Earring
+            {itemid = 13402, droprate = 101}, -- Cassie Earring
             {itemid = 19027, droprate = 43}, -- Claymore Grip
             {itemid = 920, droprate = 275},  -- Malboro Vine
             {itemid = 1013, droprate = 275}, -- Morbolger Vine
-            {itemid = 19025, droprate = 203},-- Pole Grip
-            {itemid = 19026, droprate = 116},-- Spear Strap
+            {itemid = 19025, droprate = 203}, -- Pole Grip
+            {itemid = 19026, droprate = 116}, -- Spear Strap
         },
         {
             {itemid = 655, droprate = 159},  -- Adaman Ingot
             {itemid = 747, droprate = 290},  -- Orichalcum Ingot
-            {itemid = 13182, droprate = 406},-- Oscar Scarf
+            {itemid = 13182, droprate = 406}, -- Oscar Scarf
         },
         {
-            {itemid = 15325, droprate = 159},-- Evokers Boots
-            {itemid = 14872, droprate = 217},-- Ostreger Mitts
-            {itemid = 15181, droprate = 145},-- Pineal Hat
-            {itemid = 15387, droprate = 159},-- Trackers Kecks
+            {itemid = 15325, droprate = 159}, -- Evokers Boots
+            {itemid = 14872, droprate = 217}, -- Ostreger Mitts
+            {itemid = 15181, droprate = 145}, -- Pineal Hat
+            {itemid = 15387, droprate = 159}, -- Trackers Kecks
         },
         {
             {itemid = 887, droprate = 101},  -- Coral Fragment
@@ -764,18 +764,18 @@ local loot =
     },
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

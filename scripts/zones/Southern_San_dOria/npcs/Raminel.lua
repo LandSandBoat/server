@@ -4,10 +4,11 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -56 2 -21 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/pathfind");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/pathfind")
+require("scripts/globals/quests")
+-----------------------------------
 
 local path =
 {
@@ -52,76 +53,68 @@ local path =
     -111.995232, -2.000000, 16.411282,
     -140.205811, -2.000000, 15.668728,  -- package Lusiane
     -139.296539, -2.000000, 16.786556
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(tpz.path.first(path));
-    onPath(npc);
+    npc:initNpcAi()
+    npc:setPos(tpz.path.first(path))
+    onPath(npc)
 
     -- test fromStart
-    local start = tpz.path.fromStart(path, 2);
-    local startFirst = tpz.path.get(path, 3);
+    local start = tpz.path.fromStart(path, 2)
+    local startFirst = tpz.path.get(path, 3)
 
     if (start[1] ~= startFirst[1] or start[2] ~= startFirst[2] or start[3] ~= startFirst[3]) then
-        printf("[Error] start path is not right %f %f %f actually = %f %f %f", startFirst[1], startFirst[2], startFirst[3], start[1], start[2], start[3]);
+        printf("[Error] start path is not right %f %f %f actually = %f %f %f", startFirst[1], startFirst[2], startFirst[3], start[1], start[2], start[3])
     end
 
     -- test fromEnd
-    -- local endPt = tpz.path.fromEnd(path, 2);
-    -- local endFirst = tpz.path.get(path, 37);
+    -- local endPt = tpz.path.fromEnd(path, 2)
+    -- local endFirst = tpz.path.get(path, 37)
 
     -- if (endPt[1] ~= endFirst[1] or endPt[2] ~= endFirst[2] or endPt[3] ~= endFirst[3]) then
-    --     printf("[Error] endPt path is not right %f %f %f actually = %f %f %f", endFirst[1], endFirst[2], endFirst[3], endPt[1], endPt[2], endPt[3]);
+    --     printf("[Error] endPt path is not right %f %f %f actually = %f %f %f", endFirst[1], endFirst[2], endFirst[3], endPt[1], endPt[2], endPt[3])
     -- end
-end;
+end
 
 function onPath(npc)
     if (npc:atPoint(tpz.path.get(path, 23))) then
-        npc:lookAt(GetNPCByID(ID.npc.ARPETION):getPos());
-        npc:wait();
+        npc:lookAt(GetNPCByID(ID.npc.ARPETION):getPos())
+        npc:wait()
     elseif (npc:atPoint(tpz.path.get(path, -1))) then
         -- give package to Lusiane, wait 4 seconds, then continue
-        local lus = GetNPCByID(ID.npc.LUSIANE);
-        lus:showText(npc, ID.text.RAMINEL_DELIVERY);
-        npc:showText(lus, ID.text.LUSIANE_THANK);
-        npc:wait();
+        local lus = GetNPCByID(ID.npc.LUSIANE)
+        lus:showText(npc, ID.text.RAMINEL_DELIVERY)
+        npc:showText(lus, ID.text.LUSIANE_THANK)
+        npc:wait()
     elseif (npc:atPoint(tpz.path.last(path))) then
         -- when I walk away stop looking at me
-        GetNPCByID(ID.npc.LUSIANE):clearTargID();
+        GetNPCByID(ID.npc.LUSIANE):clearTargID()
     end
 
     -- go back and forth the set path
-    tpz.path.patrol(npc, path);
-end;
+    tpz.path.patrol(npc, path)
+end
 
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart Flyer
-            player:messageSpecial(ID.text.FLYER_REFUSED);
+function onTrade(player, npc, trade)
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_1", 0)
+            player:tradeComplete()
+            player:addKeyItem(tpz.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCOWLING_STONE)
         end
     end
+end
 
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setCharVar("ridingOnTheClouds_1",0);
-            player:tradeComplete();
-            player:addKeyItem(tpz.ki.SCOWLING_STONE);
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SCOWLING_STONE);
-        end
-    end
+function onTrigger(player, npc)
+    player:startEvent(614)
+    npc:wait()
+end
 
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(614);
-    npc:wait();
-end;
-
-function onEventUpdate(player,csid,option)
-end;
-
-function onEventFinish(player,csid,option,npc)
-    npc:wait(0);
-end;
+function onEventFinish(player, csid, option, npc)
+    npc:wait(0)
+end

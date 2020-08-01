@@ -24,7 +24,7 @@ function onMobWeaponSkill(target, mob, skill)
     skuld     : 250 ish
     carabosse : 100-250 ish (lowest lv mob of the 3)
     ]]
-    local heal = math.random(100,400)
+    local heal = math.random(100, 400)
 
     skill:setMsg(tpz.msg.basic.SELF_HEAL)
 

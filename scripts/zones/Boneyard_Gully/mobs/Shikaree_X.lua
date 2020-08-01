@@ -3,7 +3,7 @@
 --  Mob: Shikaree X
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     SpawnMob(mob:getID() + 2)
 end
 

@@ -20,10 +20,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.WOODWORKING_IMAGERY,3,0,120)
+    target:addStatusEffect(tpz.effect.WOODWORKING_IMAGERY, 3, 0, 120)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.WOOD, 1)
 end
 

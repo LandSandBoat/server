@@ -14,5 +14,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.NEGATE_TERROR,1,0,120)
+    target:addStatusEffect(tpz.effect.NEGATE_TERROR, 1, 0, 120)
 end

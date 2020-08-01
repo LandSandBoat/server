@@ -9,10 +9,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM) == QUEST_ACCEPTED and VanadielDayOfTheYear() ~= player:getCharVar("DreadbugNM_Day") then
         if os.time() > player:getCharVar("DreadbugNM_Timer") + 30 and npcUtil.popFromQM(player, npc, ID.mob.DREADBUG, {claim=true, hide=0}) then
             player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
@@ -26,8 +26,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

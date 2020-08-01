@@ -4,6 +4,7 @@
 -- Note: Wiki says Painful Whip does increasing damage after each use, but videos do not indicate this, so I've ignored it.
 --       Does not retreat into its shell, and does not poison you, unlike other uragnites.
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -12,6 +13,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 266)
 end
 
 function onMobDespawn(mob)

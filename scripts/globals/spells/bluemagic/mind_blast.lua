@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.LIGHTNING
@@ -51,7 +51,7 @@ function onSpellCast(caster,target,spell)
 
     if (damage > 0 and resist > 0.3) then
         local typeEffect = tpz.effect.PARALYSIS
-        target:addStatusEffect(typeEffect,20,0,getBlueEffectDuration(caster,resist,typeEffect)) -- https://www.bg-wiki.com/bg/Mind_Blast says 20%
+        target:addStatusEffect(typeEffect, 20, 0, getBlueEffectDuration(caster, resist, typeEffect)) -- https://www.bg-wiki.com/bg/Mind_Blast says 20%
     end
 
     return damage

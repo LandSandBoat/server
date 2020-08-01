@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -48,7 +48,7 @@ function onSpellCast(caster,target,spell)
     if (target:hasStatusEffect(tpz.effect.VIT_DOWN)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        target:addStatusEffect(tpz.effect.VIT_DOWN,15,0,20)
+        target:addStatusEffect(tpz.effect.VIT_DOWN, 15, 0, 20)
     end
 
     return damage

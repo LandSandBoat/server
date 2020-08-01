@@ -2,18 +2,17 @@
 -- Area: Apollyon SE
 --  Mob: Ghost Clot
 -----------------------------------
+require("scripts/globals/limbus")
+local ID = require("scripts/zones/Apollyon/IDs")
 
-function onMobEngaged(mob,target)
-    GetMobByID(16932993):updateEnmity(target);
-    GetMobByID(16932994):updateEnmity(target);
-    GetMobByID(16932995):updateEnmity(target);
-    GetMobByID(16932996):updateEnmity(target);
-    GetMobByID(16932997):updateEnmity(target);
-    GetMobByID(16932998):updateEnmity(target);
-    GetMobByID(16932999):updateEnmity(target);
-    GetMobByID(16933000):updateEnmity(target);
-end;
+function onMobSpawn(mob)
+    mob:setMod(tpz.mod.SLASHRES, 1500)
+    mob:setMod(tpz.mod.HTHRES, 0)
+    mob:setMod(tpz.mod.IMPACTRES, 0)
+end
 
-function onMobDeath(mob, player, isKiller)
-
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        tpz.limbus.handleDoors(player:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[1])
+    end
+end

@@ -12,7 +12,7 @@ function onInitialize(zone)
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     -- rng af2
     if player:getCharVar("fireAndBrimstone") == 2 then
         return 4
@@ -31,13 +31,13 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 4 then
         player:setCharVar("fireAndBrimstone", 3)
     end

@@ -38,15 +38,15 @@ zones[tpz.zone.ABYSSEA_LA_THEINE] =
             --  [17318482] = {'qm10', {2900},                                                                                                                      {}, 17318443}, -- Poroggo Dom Juan
             --  [17318483] = {'qm11', {2901},                                                                                                                      {}, 17318444}, -- Toppling Tuber
             --  [17318484] = {'qm12', {2902},                                                                                                                      {}, 17318445}, -- Lugarhoo
-            --  [17318485] = {'qm13',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD,tpz.ki.WARPED_GIGAS_ARMBAND,tpz.ki.SEVERED_GIGAS_COLLAR}, 17318446}, -- Briareus
-            --  [17318486] = {'qm14',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE,tpz.ki.SHIMMERING_PIXIE_PINION}, 17318447}, -- Carabosse
-            --  [17318487] = {'qm15',     {}, {tpz.ki.MARBLED_MUTTON_CHOP,tpz.ki.BLOODIED_SABER_TOOTH,tpz.ki.GLITTERING_PIXIE_CHOKER,tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318448}, -- Hadhayosh
-            --  [17318488] = {'qm16',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD,tpz.ki.WARPED_GIGAS_ARMBAND,tpz.ki.SEVERED_GIGAS_COLLAR}, 17318456}, -- Briareus
-            --  [17318489] = {'qm17',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE,tpz.ki.SHIMMERING_PIXIE_PINION}, 17318457}, -- Carabosse
-            --  [17318490] = {'qm18',     {}, {tpz.ki.MARBLED_MUTTON_CHOP,tpz.ki.BLOODIED_SABER_TOOTH,tpz.ki.GLITTERING_PIXIE_CHOKER,tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318458}, -- Hadhayosh
-            --  [17318491] = {'qm19',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD,tpz.ki.WARPED_GIGAS_ARMBAND,tpz.ki.SEVERED_GIGAS_COLLAR}, 17318459}, -- Briareus
-            --  [17318492] = {'qm20',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE,tpz.ki.SHIMMERING_PIXIE_PINION}, 17318460}, -- Carabosse
-            --  [17318493] = {'qm21',     {}, {tpz.ki.MARBLED_MUTTON_CHOP,tpz.ki.BLOODIED_SABER_TOOTH,tpz.ki.GLITTERING_PIXIE_CHOKER,tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318461}, -- Hadhayosh
+            --  [17318485] = {'qm13',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD, tpz.ki.WARPED_GIGAS_ARMBAND, tpz.ki.SEVERED_GIGAS_COLLAR}, 17318446}, -- Briareus
+            --  [17318486] = {'qm14',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE, tpz.ki.SHIMMERING_PIXIE_PINION}, 17318447}, -- Carabosse
+            --  [17318487] = {'qm15',     {}, {tpz.ki.MARBLED_MUTTON_CHOP, tpz.ki.BLOODIED_SABER_TOOTH, tpz.ki.GLITTERING_PIXIE_CHOKER, tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318448}, -- Hadhayosh
+            --  [17318488] = {'qm16',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD, tpz.ki.WARPED_GIGAS_ARMBAND, tpz.ki.SEVERED_GIGAS_COLLAR}, 17318456}, -- Briareus
+            --  [17318489] = {'qm17',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE, tpz.ki.SHIMMERING_PIXIE_PINION}, 17318457}, -- Carabosse
+            --  [17318490] = {'qm18',     {}, {tpz.ki.MARBLED_MUTTON_CHOP, tpz.ki.BLOODIED_SABER_TOOTH, tpz.ki.GLITTERING_PIXIE_CHOKER, tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318458}, -- Hadhayosh
+            --  [17318491] = {'qm19',     {},                                    {tpz.ki.DENTED_GIGAS_SHIELD, tpz.ki.WARPED_GIGAS_ARMBAND, tpz.ki.SEVERED_GIGAS_COLLAR}, 17318459}, -- Briareus
+            --  [17318492] = {'qm20',     {},                                                                {tpz.ki.PELLUCID_FLY_EYE, tpz.ki.SHIMMERING_PIXIE_PINION}, 17318460}, -- Carabosse
+            --  [17318493] = {'qm21',     {}, {tpz.ki.MARBLED_MUTTON_CHOP, tpz.ki.BLOODIED_SABER_TOOTH, tpz.ki.GLITTERING_PIXIE_CHOKER, tpz.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318461}, -- Hadhayosh
         },
     },
 }

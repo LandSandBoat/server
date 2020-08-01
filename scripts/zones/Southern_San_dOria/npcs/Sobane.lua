@@ -6,20 +6,15 @@
 -- !pos -190 -3 97 230
 -- csid: 52  732  733  734  735  736  737  738  739  740  741
 -------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    -- FLYERS FOR REGINE
-    if npcUtil.tradeHas(trade, 532) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-
+function onTrade(player, npc, trade)
     -- SIGNED IN BLOOD
-    elseif npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
-        player:startEvent(734,0,1662)
+    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
+        player:startEvent(734, 0, 1662)
 
     -- RIDING ON THE CLOUDS
     elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
@@ -29,7 +24,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local blood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
 
@@ -49,10 +44,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- SHARPENING THE SWORD
     if csid == 52 then
         player:setCharVar("sharpeningTheSwordCS", 3)

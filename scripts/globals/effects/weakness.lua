@@ -25,13 +25,13 @@ end
 
 function onEffectLose(target, effect)
     --restore HP and MP to its former state. Remove 100% slow
-    target:delMod(tpz.mod.HPP,-75)
-    target:delMod(tpz.mod.MPP,-75)
+    target:delMod(tpz.mod.HPP, -75)
+    target:delMod(tpz.mod.MPP, -75)
     target:delMod(tpz.mod.HASTE_MAGIC, -10000)
 
     if (effect:getPower() == 2) then
         -- handle double weakness
         target:delMod(tpz.mod.RACC, -999)
-        target:delMod(tpz.mod.MATT,-999)
+        target:delMod(tpz.mod.MATT, -999)
     end
 end

@@ -37,5 +37,5 @@ function onTrigger(player, spellId, target)
     local save = true
     local silent = false
     targ:addSpell(spellId, silent, save)
-    player:PrintToPlayer(string.format("Added spell %i to %s.",spellId,targ:getName()))
+    player:PrintToPlayer(string.format("Added spell %i to %s.", spellId, targ:getName()))
 end

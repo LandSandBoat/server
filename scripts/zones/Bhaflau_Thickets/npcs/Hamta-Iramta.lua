@@ -7,38 +7,38 @@
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (trade:getItemCount() == 1 and trade:hasItemQty(2185,1)) then -- Silver
-        player:tradeComplete();
-        player:setPos(-458,-16,0,189); -- using the pos method until the problem below is fixed
-        -- player:startEvent(135); -- << this CS goes black at the end, never fades in
-        return 1;
+    if (trade:getItemCount() == 1 and trade:hasItemQty(2185, 1)) then -- Silver
+        player:tradeComplete()
+        player:setPos(-458, -16, 0, 189) -- using the pos method until the problem below is fixed
+        -- player:startEvent(135) -- << this CS goes black at the end, never fades in
+        return 1
     end
 
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- NPC is on a slant which makes this really difficult
 
     if (player:getXPos() < -456 and player:getXPos() > -459 and player:getYPos() < -16.079) then
-        player:startEvent(134);
+        player:startEvent(134)
 
     elseif (player:getXPos() < -459 and player:getXPos() > -462 and player:getYPos() < -16.070) then
-        player:startEvent(134);
+        player:startEvent(134)
 
     elseif (player:getXPos() < -462 and player:getXPos() > -464 and player:getYPos() < -16.071) then
-        player:startEvent(134);
+        player:startEvent(134)
 
     else
-        player:startEvent(136);
+        player:startEvent(136)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

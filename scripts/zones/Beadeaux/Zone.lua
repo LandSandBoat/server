@@ -16,21 +16,21 @@ require("scripts/globals/zone")
 
 function onInitialize(zone)
     -- Regions 1-6 are for the Afflictor System (RegionID, X, Radius, Z)
-    zone:registerRegion(1, -163, 10, -137, 0,0,0)
-    zone:registerRegion(2, -209, 10, -131, 0,0,0)
-    zone:registerRegion(3, -140, 10,   20, 0,0,0)
-    zone:registerRegion(4,  261, 10,  140, 0,0,0)
-    zone:registerRegion(5,  340, 10,  100, 0,0,0)
-    zone:registerRegion(6,  380, 10,   60, 0,0,0)
+    zone:registerRegion(1, -163, 10, -137, 0, 0, 0)
+    zone:registerRegion(2, -209, 10, -131, 0, 0, 0)
+    zone:registerRegion(3, -140, 10,   20, 0, 0, 0)
+    zone:registerRegion(4,  261, 10,  140, 0, 0, 0)
+    zone:registerRegion(5,  340, 10,  100, 0, 0, 0)
+    zone:registerRegion(6,  380, 10,   60, 0, 0, 0)
 
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(387.382,38.029,19.694,3)
+        player:setPos(387.382, 38.029, 19.694, 3)
     end
 
     if prevZone == tpz.zone.PASHHOW_MARSHLANDS then
@@ -50,7 +50,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
     if region:GetRegionID() <= 6 then
         if not player:hasStatusEffect(tpz.effect.CURSE_I) and not player:hasStatusEffect(tpz.effect.SILENCE) then
             player:addStatusEffect(tpz.effect.CURSE_I, 50, 0, 300)
@@ -61,13 +61,13 @@ function onRegionEnter(player,region)
     end
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 121 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS, {title=tpz.title.DARK_SIDER, var="ZeruhnMines_Zeid_CS"}) then
         player:unlockJob(tpz.job.DRK)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DARK_KNIGHT)

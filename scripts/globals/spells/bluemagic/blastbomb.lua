@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.FIRE
@@ -48,7 +48,7 @@ function onSpellCast(caster,target,spell)
     if (damage > 0 and resist > 0.125) then
         local typeEffect = tpz.effect.BIND
         target:delStatusEffect(typeEffect) -- Wiki says it can overwrite itself or other binds
-        target:addStatusEffect(typeEffect,1,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage

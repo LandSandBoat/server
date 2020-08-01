@@ -42,7 +42,7 @@ function isInMogHouseInHomeNation(player)
     return false
 end
 
-function moogleTrade(player,npc,trade)
+function moogleTrade(player, npc, trade)
     if player:isInMogHouse() then
         local numBronze = trade:getItemQty(2184)
         if numBronze > 0 then
@@ -75,7 +75,7 @@ function moogleTrade(player,npc,trade)
     return false
 end
 
-function moogleTrigger(player,npc)
+function moogleTrigger(player, npc)
     if player:isInMogHouse() then
         local lockerTs = getMogLockerExpiryTimestamp(player)
         if lockerTs ~= nil then
@@ -100,25 +100,25 @@ function moogleTrigger(player,npc)
 
         elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_AVAILABLE and homeNationFameLevel >= 3 and
                player:getCharVar("[MS1]BedPlaced") == 1 then
-            player:startEvent(30005,0,0,0,5,0,17161,13457)
+            player:startEvent(30005, 0, 0, 0, 5, 0, 17161, 13457)
         elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 1 then
-            player:startEvent(30006,0,0,0,0,0,17161,13457)
+            player:startEvent(30006, 0, 0, 0, 0, 0, 17161, 13457)
         elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 2 then
             player:startEvent(30008)
 
         elseif player:getLocalVar("QuestSeen") == 0 and theMooglePicnic == QUEST_AVAILABLE and homeNationFameLevel >= 5 and
                 giveMoogleABreak == QUEST_COMPLETED and player:getCharVar("[MS2]BedPlaced") == 1 then
-            player:startEvent(30009,0,0,0,4,0,17402,615)
+            player:startEvent(30009, 0, 0, 0, 4, 0, 17402, 615)
         elseif player:getLocalVar("QuestSeen") == 0 and theMooglePicnic == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 1 then
-            player:startEvent(30010,0,0,0,0,0,17402,615)
+            player:startEvent(30010, 0, 0, 0, 0, 0, 17402, 615)
         elseif player:getLocalVar("QuestSeen") == 0 and theMooglePicnic == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 2 then
             player:startEvent(30012)
 
         elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_AVAILABLE and homeNationFameLevel >= 7 and
                 theMooglePicnic == QUEST_COMPLETED and player:getCharVar("[MS3]BedPlaced") == 1 then
-            player:startEvent(30013,0,0,0,6,0,13593,12474)
+            player:startEvent(30013, 0, 0, 0, 6, 0, 13593, 12474)
         elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 1 then
-            player:startEvent(30014,0,0,0,0,0,13593,12474)
+            player:startEvent(30014, 0, 0, 0, 0, 0, 13593, 12474)
         elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 2 then
             player:startEvent(30016)
 
@@ -130,24 +130,24 @@ function moogleTrigger(player,npc)
     return false
 end
 
-function moogleEventUpdate(player,csid,option)
+function moogleEventUpdate(player, csid, option)
     if player:isInMogHouse() then
         return true
     end
     return false
 end
 
-function moogleEventFinish(player,csid,option)
+function moogleEventFinish(player, csid, option)
     if player:isInMogHouse() then
         if csid == 30000 then
             player:setCharVar("MoghouseExplication", 0)
 
         elseif csid == 30023 then
-            player:completeMission(AMK,tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
-            player:addMission(AMK,tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:completeMission(AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
+            player:addMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
         elseif csid == 30024 then
-            player:completeMission(AMK,tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
-            player:addMission(AMK,tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
+            player:completeMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:addMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then
             player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)

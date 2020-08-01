@@ -10,14 +10,14 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if player:hasStatusEffect(tpz.effect.DARK_ARTS) or player:hasStatusEffect(tpz.effect.ADDENDUM_BLACK) then
         return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     player:delStatusEffectSilent(tpz.effect.LIGHT_ARTS)
     player:delStatusEffect(tpz.effect.ADDENDUM_WHITE)
     player:delStatusEffect(tpz.effect.PENURY)
@@ -33,7 +33,7 @@ function onUseAbility(player,target,ability)
         helixbonus = math.floor(player:getMainLvl() / 4)
     end
 
-    player:addStatusEffect(tpz.effect.DARK_ARTS,1,0,7200,0,helixbonus)
+    player:addStatusEffect(tpz.effect.DARK_ARTS, 1, 0, 7200, 0, helixbonus)
 
     return tpz.effect.DARK_ARTS
 end

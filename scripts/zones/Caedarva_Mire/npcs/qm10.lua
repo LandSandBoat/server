@@ -9,11 +9,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+function onTrigger(player, npc)
+    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
 
     if OperationTeatime == QUEST_ACCEPTED and OperationTeatimeProgress == 3 then
@@ -23,10 +23,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 15 then
         npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME, {item=15602, var="OperationTeatimeProgress"})
     end

@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 2.08
@@ -53,42 +53,42 @@ function onSpellCast(caster,target,spell)
     if (damage > 0 and resist > 0.3) then
         local typeEffect = tpz.effect.PARALYSIS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,25,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.WEIGHT
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,25,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.POISON
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,4,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.SLOW
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,2000,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 2000, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.SILENCE
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,25,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.BIND
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,1,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
         if (damage > 0 and resist > 0.3) then
     local typeEffect = tpz.effect.BLINDNESS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,25,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage

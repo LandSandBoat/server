@@ -18,12 +18,12 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/bluemagic")
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     caster:setLocalVar("self-destruct_hp", caster:getHP())
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local duration = 300
     local playerHP = caster:getLocalVar("self-destruct_hp")
     local damage = playerHP - 1
@@ -32,7 +32,7 @@ function onSpellCast(caster,target,spell)
         target:takeSpellDamage(caster, spell, playerHP, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
         caster:setHP(1)
         caster:delStatusEffect(tpz.effect.WEAKNESS)
-        caster:addStatusEffect(tpz.effect.WEAKNESS,1,0,duration)
+        caster:addStatusEffect(tpz.effect.WEAKNESS, 1, 0, duration)
     end
 
     return damage

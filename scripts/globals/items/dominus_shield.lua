@@ -10,11 +10,11 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local mpHeal = math.random(60,85)
+    local mpHeal = math.random(60, 85)
     local dif = target:getMaxMP() - target:getMP()
     if (mpHeal > dif) then
         mpHeal = dif
     end
     target:addMP(mpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_MP,0,mpHeal)
+    target:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, mpHeal)
 end

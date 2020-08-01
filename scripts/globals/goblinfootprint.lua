@@ -81,7 +81,7 @@ local csReq = -- add checks to this table
     },
     [tpz.zone.CASTLE_ZVAHL_KEEP] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(WINDURST,tpz.quest.id.windurst.RECOLLECTIONS)) end,
+        [1] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)) end,
     },
     [tpz.zone.BOSTAUNIEUX_OUBLIETTE] =
     {

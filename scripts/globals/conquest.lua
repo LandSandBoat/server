@@ -31,19 +31,19 @@ local CONQUEST_UPDATE      = 2
 
 local exForceMenuData =
 {
-    0x20006,ZULK_EF,103,0x000040,20,tpz.ki.ZULKHEIM_EF_INSIGNIA,
-    0x20007,NORV_EF,104,0x000080,25,tpz.ki.NORVALLEN_EF_INSIGNIA,
-    0x20009,DERF_EF,109,0x000200,25,tpz.ki.DERFLAND_EF_INSIGNIA,
-    0x2000B,KOLS_EF,118,0x000800,20,tpz.ki.KOLSHUSHU_EF_INSIGNIA,
-    0x2000C,ARAG_EF,119,0x001000,25,tpz.ki.ARAGONEU_EF_INSIGNIA,
-    0x2000D,FAUR_EF,111,0x002000,35,tpz.ki.FAUREGANDI_EF_INSIGNIA,
-    0x2000E,VALD_EF,112,0x004000,40,tpz.ki.VALDEAUNIA_EF_INSIGNIA,
-    0x2000F,QUFI_EF,126,0x008000,25,tpz.ki.QUFIM_EF_INSIGNIA,
-    0x20010,LITE_EF,121,0x010000,35,tpz.ki.LITELOR_EF_INSIGNIA,
-    0x20011,KUZO_EF,114,0x020000,40,tpz.ki.KUZOTZ_EF_INSIGNIA,
-    0x20012,VOLL_EF,113,0x040000,65,tpz.ki.VOLLBOW_EF_INSIGNIA,
-    0x20013,ELLO_EF,123,0x080000,35,tpz.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
-    0x20014,ELUP_EF,124,0x100000,45,tpz.ki.ELSHIMO_UPLANDS_EF_INSIGNIA
+    0x20006, ZULK_EF, 103, 0x000040, 20, tpz.ki.ZULKHEIM_EF_INSIGNIA,
+    0x20007, NORV_EF, 104, 0x000080, 25, tpz.ki.NORVALLEN_EF_INSIGNIA,
+    0x20009, DERF_EF, 109, 0x000200, 25, tpz.ki.DERFLAND_EF_INSIGNIA,
+    0x2000B, KOLS_EF, 118, 0x000800, 20, tpz.ki.KOLSHUSHU_EF_INSIGNIA,
+    0x2000C, ARAG_EF, 119, 0x001000, 25, tpz.ki.ARAGONEU_EF_INSIGNIA,
+    0x2000D, FAUR_EF, 111, 0x002000, 35, tpz.ki.FAUREGANDI_EF_INSIGNIA,
+    0x2000E, VALD_EF, 112, 0x004000, 40, tpz.ki.VALDEAUNIA_EF_INSIGNIA,
+    0x2000F, QUFI_EF, 126, 0x008000, 25, tpz.ki.QUFIM_EF_INSIGNIA,
+    0x20010, LITE_EF, 121, 0x010000, 35, tpz.ki.LITELOR_EF_INSIGNIA,
+    0x20011, KUZO_EF, 114, 0x020000, 40, tpz.ki.KUZOTZ_EF_INSIGNIA,
+    0x20012, VOLL_EF, 113, 0x040000, 65, tpz.ki.VOLLBOW_EF_INSIGNIA,
+    0x20013, ELLO_EF, 123, 0x080000, 35, tpz.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
+    0x20014, ELUP_EF, 124, 0x100000, 45, tpz.ki.ELSHIMO_UPLANDS_EF_INSIGNIA
 }
 
 local function getExForceAvailable(player, guardNation)
@@ -1193,12 +1193,12 @@ tpz.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
     end
 
     local fee = tpz.conquest.outpostFee(player, vendorRegion)
-    player:startEvent(vendorEvent,nation,fee,0,fee,player:getCP(),0,0,0)
+    player:startEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
 end
 
 tpz.conquest.vendorOnEventUpdate = function(player, vendorRegion)
     local fee = tpz.conquest.outpostFee(player, vendorRegion)
-    player:updateEvent(player:getGil(),fee,0,fee,player:getCP())
+    player:updateEvent(player:getGil(), fee, 0, fee, player:getCP())
 end
 
 tpz.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
@@ -1353,8 +1353,8 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
                 player:messageText(player, messageBase + 36, 5) -- All three nations are at a deadlock.
             else
                 local sandoria = bit.band(influence, 0x03)
-                local bastok = bit.rshift(bit.band(influence, 0x0C),2)
-                local windurst = bit.rshift(bit.band(influence, 0x30),4)
+                local bastok = bit.rshift(bit.band(influence, 0x0C), 2)
+                local windurst = bit.rshift(bit.band(influence, 0x30), 4)
 
                 player:messageText(player, messageBase + 41 - sandoria, 5) -- Regional influence: San d'Oria
                 player:messageText(player, messageBase + 45 - bastok, 5)   -- Regional influence: Bastok

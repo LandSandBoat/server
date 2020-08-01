@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill)
@@ -31,8 +31,8 @@ function onPetAbility(target, pet, skill)
     end
     target:delStatusEffect(tpz.effect.ACCURACY_DOWN)
     target:delStatusEffect(tpz.effect.EVASION_DOWN)
-    target:addStatusEffect(tpz.effect.ACCURACY_DOWN,buffvalue,0,180)
-    target:addStatusEffect(tpz.effect.EVASION_DOWN,32-buffvalue,0,180)
+    target:addStatusEffect(tpz.effect.ACCURACY_DOWN, buffvalue, 0, 180)
+    target:addStatusEffect(tpz.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0
 end

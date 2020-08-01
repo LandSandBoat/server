@@ -60,6 +60,7 @@ class CVanaTime
 public:
 
 	static	CVanaTime * getInstance();
+	static  void delInstance();
 
 	TIMETYPE SyncTime();
 	TIMETYPE GetCurrentTOTD();
@@ -82,9 +83,9 @@ public:
 	uint32	 getSysYearDay();						// Number of day since 1st january
 
     uint32   getVanaTime();
-	int32	 getCustomOffset();
+	int32	 getCustomEpoch();
 
-	void	 setCustomOffset(int32 offset);
+	void	 setCustomEpoch(int32 epoch);
 
 	time_point   lastConquestUpdate;
     time_point   lastVHourlyUpdate;
@@ -108,7 +109,7 @@ private:
 
 	TIMETYPE m_TimeType;							// текущий тип времени
 
-	int32	 m_customOffset;						// Смещение игрового времени в игровых минутах
+	int32	 m_customEpoch;						// Custom epoch to use instead of VTIME_BASEDATE
 };
 
 #endif

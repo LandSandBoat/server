@@ -29,9 +29,9 @@ end
 function removeTentacle(mob, tentacles)
     if tentacles > 0 then
         mob:setMobMod(tpz.mobMod.MULTI_HIT, tentacles)
-        mob:messageText(mob,ID.text.ONE_TENTACLE_WOUNDED, false)
+        mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
     else
-        mob:messageText(mob,ID.text.ALL_TENTACLES_WOUNDED, false)
+        mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
         mob:SetMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
     end
     mob:addMod(tpz.mod.ATT, 50)
@@ -43,7 +43,7 @@ function removeTentacle(mob, tentacles)
     mob:addMod(tpz.mod.GRAVITYRES, 10)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local tentacles = mob:getLocalVar("tentacles")
 
     if tentacles > 0 then

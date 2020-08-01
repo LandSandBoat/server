@@ -2,6 +2,7 @@
 -- Area: Attohwa Chasm
 --   NM: Sargas
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -40,6 +41,7 @@ function onSpikesDamage(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 279)
 end
 
 function onMobDespawn(mob)

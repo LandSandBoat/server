@@ -2,6 +2,7 @@
 -- Area: Ranguemont Pass
 --   NM: Gloom Eye
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -24,4 +25,5 @@ function onMobFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 346)
 end

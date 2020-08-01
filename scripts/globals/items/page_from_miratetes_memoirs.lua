@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 4247
 -- Item: Page From Miratete's Memo
--- Grants 750 - 1,500 EXP
+-- Grants 750 - 1, 500 EXP
 -- Does not grant Limit Points.
 --
 -----------------------------------------
@@ -17,5 +17,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addExp(EXP_RATE * math.random(750,1500))
+    target:addExp(EXP_RATE * math.random(750, 1500))
 end

@@ -14,7 +14,7 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.MINING)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if prevZone == tpz.zone.PALBOROUGH_MINES then
@@ -25,13 +25,13 @@ function onZoneIn(player,prevZone)
             elseif not player:hasItem(16607) then
                 cs = 131
             end
-        elseif player:getQuestStatus(BASTOK,tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED then
+        elseif player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED then
             if not player:hasItem(16607) then
                 cs = 131
             end
         end
     elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-270.707,14.159,-20.268,0)
+        player:setPos(-270.707, 14.159, -20.268, 0)
     end
 
     return cs
@@ -41,13 +41,13 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 130 or csid == 131 then
         if player:getFreeSlotsCount() > 0 then
             player:addItem(16607)

@@ -4,14 +4,14 @@
 --
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:levelRestriction(0)
     target:disableLevelSync()
 end

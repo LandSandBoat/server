@@ -31,23 +31,23 @@ function onRegionEnter(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
-            --player:setCharVar("porter_lock",1)
+            --player:setCharVar("porter_lock", 1)
             player:startEvent(0)
         end,
         [2] = function (x)
-            --player:setCharVar("porter_lock",1)
+            --player:setCharVar("porter_lock", 1)
             player:startEvent(1)
         end,
     }
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 0 and option == 1 then
         player:setPos(-490, -130, 81, 231, 157)
     elseif csid == 1 and option == 1 then

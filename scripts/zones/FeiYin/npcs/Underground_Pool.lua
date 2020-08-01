@@ -11,10 +11,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.UNDERGROUND_POOL_OFFSET
 
     if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED then
@@ -34,10 +34,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 18 then
         player:delKeyItem(tpz.ki.AQUAFLORA3)
         player:setCharVar("DabotzKilled", 0)

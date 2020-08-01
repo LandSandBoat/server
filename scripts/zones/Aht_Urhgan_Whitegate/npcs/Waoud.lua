@@ -149,7 +149,7 @@ function onEventUpdate(player, csid, option)
             elseif success <  8 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 40) -- Flameserpent
             elseif success < 10 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 60) -- Skyserpent
             else
-                local rand = math.random(1,3)
+                local rand = math.random(1, 3)
                 switch (rand): caseof {
                     [1] = function (x) player:setCharVar("EmptyVesselStone", 576) end, -- (576) Siren's Tear (576)
                     [2] = function (x) player:setCharVar("EmptyVesselStone", 503) end, -- (502) Valkurm Sunsand (502)

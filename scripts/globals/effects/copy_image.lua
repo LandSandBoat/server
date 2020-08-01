@@ -5,13 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:setMod(tpz.mod.UTSUSEMI, effect:getSubPower())
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:setMod(tpz.mod.UTSUSEMI, 0)
 end

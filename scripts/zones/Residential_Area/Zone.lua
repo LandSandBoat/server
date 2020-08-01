@@ -7,22 +7,22 @@ local ID = require("scripts/zones/Residential_Area/IDs")
 -----------------------------------
 
 function onInitialize(zone)
-end;
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+function onZoneIn(player, prevZone)
+    local cs = -1
 
-    player:eraseStatusEffect(true);
-    player:setPos(0,0,0,192);
+    player:eraseStatusEffect(true)
+    player:setPos(0, 0, 0, 192)
 
-    return cs;
-end;
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+function onRegionEnter(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

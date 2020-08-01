@@ -4,20 +4,20 @@
 -- Quest NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getNation() == 0) then
-    player:startEvent(595);
+    player:startEvent(595)
 else
-    player:startEvent(598);
+    player:startEvent(598)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

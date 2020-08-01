@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 2.125
@@ -59,8 +59,8 @@ function onSpellCast(caster,target,spell)
     local duration = 60
 
     if (damage > 0 and resist > 0.3) then
-        target:addStatusEffect(typeEffectOne,5,0,duration)
-        target:addStatusEffect(typeEffectTwo,5,0,duration)
+        target:addStatusEffect(typeEffectOne, 5, 0, duration)
+        target:addStatusEffect(typeEffectTwo, 5, 0, duration)
     end
 
     return damage

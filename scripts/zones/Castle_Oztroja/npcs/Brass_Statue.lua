@@ -23,10 +23,10 @@ local passwordTable =
     [8] = {[1] = {17, "Mjuu"},  [2] = {19, "Ouzi"},  [3] = {23, "Buxu"}},
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local statue = npc:getID()
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar("password")
     local password = passwordTable[passwordIndex]
@@ -45,7 +45,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     local passwordGuess = player:getLocalVar("passwordGuess")
     local passwordIndex = GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):getLocalVar("password")
     local password = passwordTable[passwordIndex]
@@ -65,7 +65,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local passwordGuess = player:getLocalVar("passwordGuess")
 
     if csid == 13 and passwordGuess == 3 then

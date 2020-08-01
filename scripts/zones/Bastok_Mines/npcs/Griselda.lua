@@ -8,13 +8,13 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(WildcatBastok,15)  then
+    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(WildcatBastok, 15)  then
         player:startEvent(507)
     else
         local stock =
@@ -33,11 +33,11 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 507 then
-        player:setMaskBit(player:getCharVar("WildcatBastok"),"WildcatBastok",15,true)
+        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 15, true)
     end
 end

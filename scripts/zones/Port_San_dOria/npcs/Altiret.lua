@@ -6,17 +6,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/titles")
 require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-
     -- THE PICKPOCKET
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
         player:startEvent(550)
 
     -- DEFAULT DIALOG

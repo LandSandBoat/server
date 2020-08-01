@@ -3,6 +3,7 @@
 --   NM: Nis Puk
 -- !pos -155.319 -15.959 -599.366 52
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -15,4 +16,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 453)
 end
