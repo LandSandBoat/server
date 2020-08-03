@@ -1,5 +1,6 @@
 -----------------------------------
--- NPC:  Treasure Casket
+-- Area: Buburimu Peninsula
+--  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------

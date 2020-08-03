@@ -1,5 +1,6 @@
 -----------------------------------
--- NPC:  Treasure Casket
+-- Area: Qufim Island
+--  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------

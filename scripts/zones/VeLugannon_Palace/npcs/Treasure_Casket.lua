@@ -1,5 +1,6 @@
 -----------------------------------
--- NPC:  Treasure Casket
+-- Area: Ve'Lugannon Palace
+--  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------

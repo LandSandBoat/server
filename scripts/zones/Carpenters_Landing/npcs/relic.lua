@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Carpenter's Landing
+-- Area: Carpenters' Landing
 --  NPC: <this space intentionally left blank>
 -- !pos -99 -0 -514 2
 -----------------------------------

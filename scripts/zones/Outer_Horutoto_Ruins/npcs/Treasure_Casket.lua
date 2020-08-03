@@ -1,5 +1,6 @@
 -----------------------------------
--- NPC:  Treasure Casket
+-- Area: Outer Horutoto Ruins
+--  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------

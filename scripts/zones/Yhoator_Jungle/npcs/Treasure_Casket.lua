@@ -1,5 +1,6 @@
 -----------------------------------
--- NPC:  Treasure Casket
+-- Area: Yhoator Jungle
+--  NPC: Treasure Casket
 -----------------------------------
 require("scripts/globals/caskets")
 -----------------------------------
