@@ -2500,7 +2500,6 @@ INSERT INTO `mob_groups` VALUES (1727,39,52,'Acrolith',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (1731,272,52,'Assault_Bhoot',0,128,0,0,0,15,17,0);
 INSERT INTO `mob_groups` VALUES (1732,273,52,'Assault_Draugar',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (1744,1112,52,'Draugars_Wyvern',0,128,0,0,0,60,64,0);
-INSERT INTO `mob_groups` VALUES (1746,1276,52,'Expunger',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (1752,1505,52,'Gespenst',0,128,0,0,0,64,67,0);
 INSERT INTO `mob_groups` VALUES (1758,2327,52,'Lamia_Commandress',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (1759,2336,52,'Lamia_Immolator',0,128,0,0,0,75,80,0);
@@ -3410,7 +3409,7 @@ INSERT INTO `mob_groups` VALUES (11,2476,77,'Magic_Flagon',0,128,606,0,0,66,68,0
 INSERT INTO `mob_groups` VALUES (12,1426,77,'Friars_Lantern',0,128,909,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (13,3825,77,'Sweeping_Cluster',0,128,2368,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (14,1471,77,'Garm',0,128,933,0,0,66,68,0);
-INSERT INTO `mob_groups` VALUES (15,3835,77,'Tainted_Flesh',0,128,1528,0,0,66,68,0);
+INSERT INTO `mob_groups` VALUES (15,6485,77,'Tainted_Flesh',0,128,1528,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (16,1110,77,'Draugar',0,128,701,0,0,67,70,0);
 INSERT INTO `mob_groups` VALUES (17,404,77,'Bhoot',0,128,263,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (18,6320,77,'Carmine_Eruca',0,128,419,0,0,66,68,0);
@@ -3847,7 +3846,7 @@ INSERT INTO `mob_groups` VALUES (9,4309,79,'Water_Elemental',330,4,2629,0,0,70,7
 INSERT INTO `mob_groups` VALUES (10,603,79,'Caedarva_Leech',330,0,174,0,0,63,65,0);
 INSERT INTO `mob_groups` VALUES (11,3049,79,'Orderly_Imp',330,0,1002,0,0,63,68,0);
 INSERT INTO `mob_groups` VALUES (12,4342,79,'Wild_Karakul',330,0,2657,0,0,68,70,0);
-INSERT INTO `mob_groups` VALUES (13,2154,79,'Jnun',330,0,1408,0,0,72,77,0);
+INSERT INTO `mob_groups` VALUES (13,6483,79,'Jnun',330,0,1408,0,0,72,77,0);
 INSERT INTO `mob_groups` VALUES (14,2957,79,'Oil_Slick',330,0,1845,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (15,2587,79,'Mature_Treant',330,0,755,0,0,70,72,0);
 INSERT INTO `mob_groups` VALUES (16,2332,79,'Lamia_Fatedealer',330,0,1490,0,0,73,75,0);
@@ -12204,7 +12203,7 @@ INSERT INTO `mob_groups` VALUES (23,692,200,'Chandelier',0,128,451,3500,0,63,63,
 INSERT INTO `mob_groups` VALUES (24,38,200,'Acid_Grease',924,0,16,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (25,4379,200,'Wraith',960,0,2675,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (26,689,200,'Chamber_Beetle',924,0,448,0,0,56,58,0);
-INSERT INTO `mob_groups` VALUES (27,3835,200,'Tainted_Flesh',960,0,2372,0,0,63,65,0);
+INSERT INTO `mob_groups` VALUES (27,6484,200,'Tainted_Flesh',960,0,2372,0,0,63,65,0);
 INSERT INTO `mob_groups` VALUES (28,1922,200,'Hellmine',960,0,1295,0,0,59,62,0);
 INSERT INTO `mob_groups` VALUES (29,1922,200,'Hellmine',330,0,1295,0,0,91,96,0);
 INSERT INTO `mob_groups` VALUES (30,3078,200,'Over_Weapon',960,0,1968,0,0,59,62,0);
