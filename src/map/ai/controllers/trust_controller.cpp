@@ -110,11 +110,11 @@ void CTrustController::DoCombatTick(time_point tick)
             std::unique_ptr<CBasicPacket> err;
             if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
             {
-                if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PTarget->loc.p, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                if (currentDistance < WarpDistance)
                 {
-                    POwner->PAI->PathFind->FollowPath();
+                    POwner->PAI->PathFind->PathTo(PTarget->loc.p, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                 }
-                else if (POwner->GetSpeed() > 0)
+                else
                 {
                     POwner->PAI->PathFind->WarpTo(PMaster->loc.p, RoamDistance);
                 }

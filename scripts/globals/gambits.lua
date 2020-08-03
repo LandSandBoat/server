@@ -48,6 +48,7 @@ ai.reaction =
     JA     = 3,
     WS     = 4,
     MS     = 5,
+    MSG    = 6,
 }
 ai.r = ai.reaction
 
@@ -59,5 +60,15 @@ ai.select =
     SPECIFIC   = 2,
     RANDOM     = 3,
     MB_ELEMENT = 4,
+    SPECIAL_AYAME = 5,
 }
 ai.s = ai.select
+
+-- TP Move Trigger
+ai.tp = 
+{
+    ASAP   = 0,
+    RANDOM = 1,
+    OPENER = 2,
+    CLOSER = 3,
+}

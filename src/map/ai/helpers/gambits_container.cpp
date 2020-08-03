@@ -1,9 +1,12 @@
-#include "gambits_container.h"
+﻿#include "gambits_container.h"
 
 #include "../../ability.h"
 #include "../../spell.h"
+#include "../../mobskill.h"
 #include "../../weapon_skill.h"
+#include "../../ai/states/magic_state.h"
 #include "../../utils/battleutils.h"
+#include "../../utils/trustutils.h"
 
 namespace gambits
 {
@@ -13,11 +16,14 @@ namespace gambits
 void CGambitsContainer::AddGambit(Gambit_t gambit)
 {
     bool available = true;
-    if (gambit.action.reaction == G_REACTION::MA && gambit.action.select == G_SELECT::SPECIFIC)
+    for (auto& action : gambit.actions)
     {
-        if (!spell::CanUseSpell(static_cast<CBattleEntity*>(POwner), static_cast<SpellID>(gambit.action.select_arg)))
+        if (action.reaction == G_REACTION::MA && action.select == G_SELECT::SPECIFIC)
         {
-            available = false;
+            if (!spell::CanUseSpell(static_cast<CBattleEntity*>(POwner), static_cast<SpellID>(action.select_arg)))
+            {
+                available = false;
+            }
         }
     }
     if (available)
@@ -32,10 +38,137 @@ void CGambitsContainer::Tick(time_point tick)
     {
         return;
     }
+
     auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
     m_lastAction = tick + random_offset;
 
     auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+
+    // TODO: Is this necessary?
+    if (POwner->PAI->IsCurrentState<CMagicState>())
+    {
+        return;
+    }
+
+    // Deal with TP skills before any gambits
+    // TODO: Should this be its own special gambit?
+    if (POwner->health.tp >= 1000)
+    {
+        auto target = POwner->GetBattleTarget();
+
+        auto checkTrigger = [&]() -> bool
+        {
+            if (POwner->health.tp >= 3000) { return true;  } // Go, go, go!
+
+            switch (tp_trigger)
+            {
+            case G_TP_TRIGGER::ASAP:
+            {
+                return true;
+                break;
+            }
+            case G_TP_TRIGGER::OPENER:
+            {
+                bool result = false;
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&result](CBattleEntity* PMember){
+                    if (PMember->health.tp >= 1000)
+                    {
+                        result = true;
+                    }
+                });
+                return result;
+                break;
+            }
+            case G_TP_TRIGGER::CLOSER:
+            {
+                auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+
+                // TODO: ...and has a valid WS...
+
+                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
+                break;
+            }
+            default:
+            {
+                return false;
+                break;
+            }
+            }
+        };
+
+        std::optional<TrustSkill_t> chosen_skill;
+        SKILLCHAIN_ELEMENT chosen_skillchain = SC_NONE;
+        if (checkTrigger())
+        {
+            switch (tp_select)
+            {
+                case G_SELECT::RANDOM:
+                {
+                    chosen_skill = tp_skills.at(tpzrand::GetRandomNumber(tp_skills.size()));
+                    break;
+                }
+                case G_SELECT::HIGHEST: // Form the best possible skillchain
+                {
+                    auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+
+                    if (!PSCEffect) // Opener
+                    {
+                        // TODO: This relies on the skills being passed in in some kind of correct order...
+                        // Probably best to do this another way
+                        chosen_skill = tp_skills.at(tp_skills.size() - 1);
+                        break;
+                    }
+
+                    // Closer
+                    for (auto& skill : tp_skills)
+                    {
+                        std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
+                        if (uint16 power = PSCEffect->GetPower())
+                        {
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power & 0xF));
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 4 & 0xF));
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(power >> 8));
+                        }
+
+                        std::list<SKILLCHAIN_ELEMENT> skillProperties;
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                        if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties); possible_skillchain != SC_NONE)
+                        {
+                            if (possible_skillchain >= chosen_skillchain)
+                            {
+                                chosen_skill = skill;
+                                chosen_skillchain = possible_skillchain;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (chosen_skill)
+        {
+            if (chosen_skill->skill_type == G_REACTION::WS)
+            {
+                CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
+                if (battleutils::isValidSelfTargetWeaponskill(PWeaponSkill->getID()))
+                {
+                    target = POwner;
+                }
+                else
+                {
+                    target = POwner->GetBattleTarget();
+                }
+                controller->WeaponSkill(target->targid, PWeaponSkill->getID());
+            }
+            else // Mobskill
+            {
+                controller->MobSkill(target->targid, chosen_skill->skill_id);
+            }
+        }
+    }
 
     for (auto gambit : gambits)
     {
@@ -70,12 +203,12 @@ void CGambitsContainer::Tick(time_point tick)
             }
             case G_CONDITION::TP_LT:
             {
-                return target->health.tp < predicate.condition_arg;
+                return target->health.tp < (int16)predicate.condition_arg;
                 break;
             }
             case G_CONDITION::TP_GTE:
             {
-                return target->health.tp >= predicate.condition_arg;
+                return target->health.tp >= (int16)predicate.condition_arg;
                 break;
             }
             case G_CONDITION::STATUS:
@@ -125,17 +258,7 @@ void CGambitsContainer::Tick(time_point tick)
             }
         };
 
-        CBattleEntity* target = nullptr;
-        if (gambit.predicate.target == G_TARGET::SELF)
-        {
-            target = checkTrigger(POwner, gambit.predicate) ? POwner : nullptr;
-        }
-        else if (gambit.predicate.target == G_TARGET::TARGET)
-        {
-            auto mob = POwner->GetBattleTarget();
-            target = checkTrigger(mob, gambit.predicate) ? mob : nullptr;
-        }
-        else if (gambit.predicate.target == G_TARGET::PARTY)
+        auto runPredicate = [&](Predicate_t& predicate) -> CBattleEntity*
         {
             auto isValidMember = [&](CBattleEntity* PPartyTarget)
             {
@@ -161,27 +284,32 @@ void CGambitsContainer::Tick(time_point tick)
             // TODO
         }
 
-        if (target)
+        if (!predicates_all_true)
         {
-            if (gambit.action.reaction == G_REACTION::MA)
+            continue;
+        }
+
+        for (auto& action : gambit.actions)
+        {
+            if (action.reaction == G_REACTION::MA)
             {
-                if (gambit.action.select == G_SELECT::SPECIFIC)
+                if (action.select == G_SELECT::SPECIFIC)
                 {
-                    auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(gambit.action.select_arg));
+                    auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.select_arg));
                     if (spell_id.has_value())
                     {
                         controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                     }
                 }
-                else if (gambit.action.select == G_SELECT::HIGHEST)
+                else if (action.select == G_SELECT::HIGHEST)
                 {
-                    auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(gambit.action.select_arg));
+                    auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
                     if (spell_id.has_value())
                     {
                         controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                     }
                 }
-                else if (gambit.action.select == G_SELECT::LOWEST)
+                else if (action.select == G_SELECT::LOWEST)
                 {
                     // TODO
                     //auto spell_id = POwner->SpellContainer->GetWorstAvailable(static_cast<SPELLFAMILY>(gambit.action.select_arg));
@@ -190,7 +318,7 @@ void CGambitsContainer::Tick(time_point tick)
                     //    controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                     //}
                 }
-                else if (gambit.action.select == G_SELECT::RANDOM)
+                else if (action.select == G_SELECT::RANDOM)
                 {
                     auto spell_id = POwner->SpellContainer->GetSpell();
                     if (spell_id.has_value())
@@ -198,7 +326,7 @@ void CGambitsContainer::Tick(time_point tick)
                         controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                     }
                 }
-                else if (gambit.action.select == G_SELECT::MB_ELEMENT)
+                else if (action.select == G_SELECT::MB_ELEMENT)
                 {
                     CStatusEffect* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
                     std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
@@ -234,9 +362,9 @@ void CGambitsContainer::Tick(time_point tick)
                     }
                 }
             }
-            else if (gambit.action.reaction == G_REACTION::JA)
+            else if (action.reaction == G_REACTION::JA)
             {
-                CAbility* PAbility = ability::GetAbility(gambit.action.select_arg);
+                CAbility* PAbility = ability::GetAbility(action.select_arg);
                 if (PAbility->getValidTarget() == TARGET_SELF)
                 {
                     target = POwner;
@@ -246,34 +374,16 @@ void CGambitsContainer::Tick(time_point tick)
                     target = POwner->GetBattleTarget();
                 }
 
-                if (gambit.action.select == G_SELECT::SPECIFIC)
+                if (action.select == G_SELECT::SPECIFIC)
                 {
                     controller->Ability(target->targid, PAbility->getID());
                 }
             }
-            else if (gambit.action.reaction == G_REACTION::WS)
+            else if (action.reaction == G_REACTION::MSG)
             {
-                CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(gambit.action.select_arg);
-                if (battleutils::isValidSelfTargetWeaponskill(PWeaponSkill->getID()))
+                if (action.select == G_SELECT::SPECIFIC)
                 {
-                    target = POwner;
-                }
-                else
-                {
-                    target = POwner->GetBattleTarget();
-                }
-
-                if (gambit.action.select == G_SELECT::SPECIFIC)
-                {
-                    controller->WeaponSkill(target->targid, PWeaponSkill->getID());
-                }
-            }
-            else if (gambit.action.reaction == G_REACTION::MS)
-            {
-                if (gambit.action.select == G_SELECT::SPECIFIC)
-                {
-                    auto mob = POwner->GetBattleTarget();
-                    controller->MobSkill(mob->targid, gambit.action.select_arg);
+                    trustutils::SendTrustMessage(POwner, action.select_arg);
                 }
             }
 

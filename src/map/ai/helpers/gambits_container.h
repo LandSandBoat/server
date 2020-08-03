@@ -1,4 +1,4 @@
-#ifndef _GAMBITSCONTAINER
+﻿#ifndef _GAMBITSCONTAINER
 #define _GAMBITSCONTAINER
 
 #include "../../../common/cbasetypes.h"
@@ -48,6 +48,7 @@ enum class G_REACTION : uint16
     JA     = 3,
     WS     = 4,
     MS     = 5,
+    MSG    = 6,
 };
 
 enum class G_SELECT : uint16
@@ -57,37 +58,98 @@ enum class G_SELECT : uint16
     SPECIFIC   = 2,
     RANDOM     = 3,
     MB_ELEMENT = 4,
+    SPECIAL_AYAME = 5,
+};
+
+enum class G_TP_TRIGGER : uint16
+{
+    ASAP = 0,
+    RANDOM = 1,
+    OPENER = 2,
+    CLOSER = 3,
 };
 
 struct Predicate_t
 {
     G_TARGET target;
     G_CONDITION condition;
-    uint16 condition_arg;
+    uint32 condition_arg = 0;
+
+    bool parseInput(std::string key, uint32 value)
+    {
+        if (key.compare("target") == 0)
+        {
+            target = static_cast<G_TARGET>(value);
+        }
+        else if (key.compare("condition") == 0)
+        {
+            condition = static_cast<G_CONDITION>(value);
+        }
+        else if (key.compare("argument") == 0)
+        {
+            condition_arg = value;
+        }
+        else
+        {
+            // TODO: Log error
+            return false;
+        }
+        return true;
+    }
 };
 
 struct Action_t
 {
     G_REACTION reaction;
     G_SELECT select;
-    uint16 select_arg;
+    uint32 select_arg = 0;
+
+    bool parseInput(std::string key, uint32 value)
+    {
+        if (key.compare("reaction") == 0)
+        {
+            reaction = static_cast<G_REACTION>(value);
+        }
+        else if (key.compare("select") == 0)
+        {
+            select = static_cast<G_SELECT>(value);
+        }
+        else if (key.compare("argument") == 0)
+        {
+            select_arg = value;
+        }
+        else
+        {
+            // TODO: Log error
+            return false;
+        }
+        return true;
+    }
 };
 
 struct Gambit_t
 {
-    Predicate_t predicate;
-    Action_t action;
-
-    // TODO:
-    //std::vector<Predicate_t> predicates;
-    //std::vector<Action_t> actions;
-    uint16 retry_delay;
+    std::vector<Predicate_t> predicates;
+    std::vector<Action_t> actions;
+    uint16 retry_delay = 0;
     time_point last_used;
 };
 
+// TODO
 struct Chain_t
 {
     std::vector<Gambit_t> gambits;
+};
+
+// TODO: smaller types, make less bad.
+struct TrustSkill_t
+{
+    G_REACTION skill_type;
+    uint32 skill_id;
+    uint32 min_level;
+    uint8 primary;
+    uint8 secondary;
+    uint8 tertiary;
 };
 
 class CGambitsContainer
@@ -98,6 +160,11 @@ public:
 
     void AddGambit(Gambit_t gambit);
     void Tick(time_point tick);
+
+    // TODO: make private
+    std::vector<TrustSkill_t> tp_skills;
+    G_TP_TRIGGER tp_trigger;
+    G_SELECT tp_select;
 
 private:
     CTrustEntity* POwner;
