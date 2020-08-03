@@ -137,32 +137,20 @@ void CGambitsContainer::Tick(time_point tick)
         }
         else if (gambit.predicate.target == G_TARGET::PARTY)
         {
-            // TODO: This is very messy, priority are player chars
-            CCharEntity* master = static_cast<CCharEntity*>(POwner->PMaster);
-            for (uint8 i = 0; i < master->PParty->members.size(); ++i)
+            auto isValidMember = [&](CBattleEntity* PPartyTarget)
             {
-                auto member = master->PParty->members.at(i);
-                if (member->isAlive() &&
-                    POwner->loc.zone == member->loc.zone &&
-                    distance(POwner->loc.p, member->loc.p) <= 15.0f &&
-                    checkTrigger(member, gambit.predicate))
-                {
-                    target = member;
-                    break;
-                }
-            }
-            if (!target)
+                return !target && PPartyTarget->isAlive() &&
+                    POwner->loc.zone == PPartyTarget->loc.zone &&
+                    distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+            };
+
+            static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
-                for (uint8 i = 0; i < master->PTrusts.size(); ++i)
+                if (isValidMember(PMember) && checkTrigger(PMember, gambit.predicate))
                 {
-                    auto member = master->PTrusts.at(i);
-                    if (checkTrigger(member, gambit.predicate))
-                    {
-                        target = member;
-                        break;
-                    }
+                    target = PMember;
                 }
-            }
+            });
         }
         else if (gambit.predicate.target == G_TARGET::MASTER)
         {
@@ -170,42 +158,7 @@ void CGambitsContainer::Tick(time_point tick)
         }
         else if (gambit.predicate.target == G_TARGET::TANK)
         {
-            /*
-            // TODO: This is awful
-            CBattleEntity* tank = nullptr;
-            CCharEntity* master = static_cast<CCharEntity*>(POwner->PMaster);
-            for (uint8 i = 0; i < master->PParty->members.size(); ++i)
-            {
-                auto member = master->PParty->members.at(i);
-                auto job = member->GetMJob();
-                if (member->isAlive() &&
-                    POwner->loc.zone == member->loc.zone &&
-                    distance(POwner->loc.p, member->loc.p) <= 15.0f &&
-                    (job == JOB_PLD || job == JOB_RUN || JOB_WAR || JOB_NIN))
-                {
-                    tank = member;
-                    break;
-                }
-            }
-            if (!tank)
-            {
-                for (uint8 i = 0; i < master->PTrusts.size(); ++i)
-                {
-                    auto member = master->PTrusts.at(i);
-                    auto job = member->GetMJob();
-                    if (job == JOB_PLD || job == JOB_RUN || JOB_WAR || JOB_NIN)
-                    {
-                        tank = member;
-                        break;
-                    }
-                }
-            }
-            if (checkTrigger(tank, gambit.predicate))
-            {
-                target = tank;
-                break;
-            }
-            */
+            // TODO
         }
 
         if (target)

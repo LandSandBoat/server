@@ -67,6 +67,11 @@ void CTrustController::Tick(time_point tick)
         return;
     }
 
+    if (POwner->PMaster->isCharmed)
+    {
+        this->Despawn();
+    }
+
     if (POwner->PAI->IsEngaged())
     {
         DoCombatTick(tick);

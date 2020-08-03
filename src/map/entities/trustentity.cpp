@@ -70,7 +70,7 @@ void CTrustEntity::PostTick()
 void CTrustEntity::FadeOut()
 {
     CBaseEntity::FadeOut();
-    loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
+    loc.zone->PushPacket(this, (loc.zone->m_BattlefieldHandler) ? CHAR_INZONE : CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
 }
 
 void CTrustEntity::Die()
@@ -141,14 +141,14 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    if (PInitiator->objtype == TYPE_PC && PInitiator->PParty != PMaster->PParty)
-    {
-        return false;
-    }
-
-    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance)
+    if (PInitiator->objtype == TYPE_TRUST && PMaster == PInitiator->PMaster)
     {
         return true;
+    }
+
+    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance && PMaster)
+    {
+        return PInitiator->PParty == PMaster->PParty;
     }
 
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
