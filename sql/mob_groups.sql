@@ -9983,7 +9983,7 @@ INSERT INTO `mob_groups` VALUES (30,994,155,'Demons_Elemental',0,128,0,0,999,75,
 INSERT INTO `mob_groups` VALUES (31,990,155,'Demon_Magus',960,0,0,0,999,80,81,0);
 INSERT INTO `mob_groups` VALUES (32,5235,155,'Shadowguard_Demon',0,128,0,14500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (33,6458,155,'Desmodus',960,0,0,0,999,80,82,0);
-INSERT INTO `mob_groups` VALUES (34,2910,155,'Nosferatu',960,0,0,0,0,89,89,0);
+INSERT INTO `mob_groups` VALUES (34,6581,155,'Varkolak',960,0,0,0,0,89,89,0);
 INSERT INTO `mob_groups` VALUES (35,5224,155,'Demon_Suppressor',960,0,0,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (36,5222,155,'Demon_Entomber',960,0,0,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (37,5221,155,'Demon_Corrupter',960,0,0,0,0,82,83,0);
@@ -10647,7 +10647,7 @@ INSERT INTO `mob_groups` VALUES (14,6475,167,'Blind_Bat',330,0,2641,0,0,94,99,0)
 INSERT INTO `mob_groups` VALUES (15,6411,167,'Panna_Cotta',330,0,567,0,0,95,96,0);
 INSERT INTO `mob_groups` VALUES (16,6509,167,'Nachtmahr',330,0,1283,0,0,96,97,0);
 INSERT INTO `mob_groups` VALUES (17,6527,167,'Dabilla',330,0,933,0,0,94,97,0);
-INSERT INTO `mob_groups` VALUES (18,2910,167,'Nosferatu',330,0,2882,0,0,97,99,0);
+INSERT INTO `mob_groups` VALUES (18,6582,167,'Wurdalak',330,0,2882,0,0,97,99,0);
 INSERT INTO `mob_groups` VALUES (19,233,167,'Arioch',0,32,2388,0,0,56,62,0);
 INSERT INTO `mob_groups` VALUES (20,1505,167,'Gespenst',960,0,950,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (21,2548,167,'Manes',0,32,2879,0,0,73,73,0);
