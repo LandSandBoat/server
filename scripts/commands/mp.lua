@@ -15,34 +15,35 @@ function error(player, msg)
 end
 
 function onTrigger(player, mp, target)
+    -- validate target
+    local targ
+    local cursor_target = player:getCursorTarget()
+
+    if target then
+        targ = GetPlayerByName(target)
+        if not targ then
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
+        end
+    elseif cursor_target and not cursor_target:isNPC() then
+        targ = cursor_target
+    else
+        targ = player
+    end
+
     -- validate amount
-    if (mp == nil or tonumber(mp) == nil) then
+    if mp == nil or tonumber(mp) == nil then
         error(player, "You must provide an amount.")
         return
-    elseif (mp < 0) then
+    elseif mp < 0 then
         error(player, "Invalid amount.")
         return
     end
 
-    -- validate target
-    local targ
-    local cursor_target = player:getCursorTarget()
-    if (not target) and (not cursor_target) then
-        targ = player
-    elseif target then
-        targ = GetPlayerByName(target)
-        if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) )
-            return
-        end
-    elseif cursor_target then
-        targ = cursor_target
-    end
-
     -- set mp
-    if (targ:getHP() > 0) then
+    if targ:isAlive() then
         targ:setMP(mp)
-        if(targ:getID() ~= player:getID()) then
+        if targ:getID() ~= player:getID() then
             player:PrintToPlayer(string.format("Set %s's MP to %i.", targ:getName(), targ:getMP()))
         end
     else
