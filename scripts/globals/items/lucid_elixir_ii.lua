@@ -14,7 +14,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addHP((target:getMaxHP()/100)*75*ITEM_POWER)
-    target:addMP((target:getMaxMP()/100)*75*ITEM_POWER)
+    target:addHP(target:getMaxHP()*0.75*ITEM_POWER)
+    target:addMP(target:getMaxMP()*0.75*ITEM_POWER)
     target:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP)
 end

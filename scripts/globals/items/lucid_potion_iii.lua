@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 5826
 -- Item: Lucid Potion III
--- Item Effect: Restores 1000 HP
+-- Item Effect: Restores 2000 HP
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
@@ -14,5 +14,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, target:addHP(1000*ITEM_POWER))
+    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, target:addHP(2000*ITEM_POWER))
 end
