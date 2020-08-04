@@ -53,9 +53,8 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 		  Ingredient3, Ingredient4, Ingredient5, Ingredient6, \
 		  Ingredient7, Ingredient8 \
 		FROM synth_recipes \
-		WHERE %s >= Wood AND %s >= Smith AND %s >= Gold AND \
-		  %s >= Cloth AND %s >= Leather AND %s >= Bone AND \
-		  %s >= Alchemy AND %s >= Cook AND \
+		WHERE `%s` >= GREATEST(`Wood`,`Smith`,`Gold`,`Cloth`, \
+	          `Bone`,`Alchemy`,`Cook`) AND \
 		  %s BETWEEN %u AND %u \
 		ORDER BY RAND ( ) \
 		LIMIT 1;";
@@ -68,8 +67,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 	int32 ret = Sql_Query(
 		SqlHandle,
 		fmtQuery,
-		craftname,craftname,craftname,craftname,craftname,
-		craftname,craftname,craftname,craftname,
+		craftname,craftname,
 		skillLevel + 5, skillLevel + 10);
 
 	if (ret != SQL_ERROR &&
@@ -117,7 +115,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 			if (this_ingredient != 0)
 			{
 				if (ingredients[this_ingredient])
-					ingredients[this_ingredient] = ingredients[this_ingredient]++;
+					ingredients[this_ingredient] = ingredients[this_ingredient] + 1;
 				else
 					ingredients[this_ingredient] = 1;
 			}
