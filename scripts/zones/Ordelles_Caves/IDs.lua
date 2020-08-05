@@ -55,6 +55,7 @@ zones[tpz.zone.ORDELLES_CAVES] =
         MORBOLGER           = 17568127,
         POLEVIK             = 17568134,
         DARK_PUPPET_OFFSET  = 17568135,
+        NECROPLASM          = 17568138,
         APPARATUS_ELEMENTAL = 17568139,
         AROMA_LEECH         = 17568140,
     },

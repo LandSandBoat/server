@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
 --  NPC: qm2
--- Type: Quest NPC
+-- Note: Spawns Wyrmflies for Eco-Warrior (Windurst)
 -- !pos 143 9 -219 198
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
@@ -15,17 +15,14 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ECO_WARRIOR) ~= QUEST_AVAILABLE and
-        player:getCharVar("ECO_WARRIOR_ACTIVE") == 238 and
-        player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) and
-        not player:hasKeyItem(tpz.ki.INDIGESTED_MEAT)
-    then
-        if player:getCharVar("ECO_WAR_WIN-NMs_killed") == 1 then
-            npcUtil.giveKeyItem(player, tpz.ki.INDIGESTED_MEAT)
-        elseif npcUtil.popFromQM(player, npc, {ID.mob.WYRMFLY_OFFSET, ID.mob.WYRMFLY_OFFSET + 1, ID.mob.WYRMFLY_OFFSET + 2}, {hide = 0}) then
-            -- no further action
-        end
+    local wyrmfly = ID.mob.WYRMFLY_OFFSET
+    
+    if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
+        npcUtil.popFromQM(player, npc, {wyrmfly, wyrmfly + 1, wyrmfly + 2}, {claim=true, look=true, hide = 0})
+    elseif player:getCharVar("EcoStatus") == 202 and not player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
+        npcUtil.giveKeyItem(player, tpz.ki.INDIGESTED_MEAT)
+    else
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
