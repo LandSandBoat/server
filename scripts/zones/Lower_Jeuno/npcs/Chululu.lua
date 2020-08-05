@@ -130,7 +130,8 @@ function onEventFinish(player,csid,option)
             player:setCharVar("AllInTheCards_date", getMidnight())
             player:setLocalVar("Cardstemp", 1)
 		end
-
+    elseif csid == 10111 then -- same day, have to return later
+            player:setLocalVar("Cardstemp", 1)
     elseif csid == 10114 then
 		if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS, {
         gil = 600,
