@@ -5,6 +5,7 @@
 -- !pos -54 -1 -44 248
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
+require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
@@ -34,9 +35,11 @@ function onTrigger(player, npc)
     elseif questStatus == QUEST_COMPLETED then
         player:startEvent(118)
     elseif questStatus == QUEST_ACCEPTED then
-        IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
+        local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
 
-        if IsacioElderMemVar == 1 then
+        if player:hasKeyItem(tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
+            player:startEvent(117)
+        elseif  IsacioElderMemVar == 1 then
             player:startEvent(114, 538)
         elseif IsacioElderMemVar == 2 then
             player:startEvent(114, 537)
@@ -50,7 +53,6 @@ function onTrigger(player, npc)
             player:startEvent(119)
         end
     end
-
 end
 
 function onEventUpdate(player, csid, option)
