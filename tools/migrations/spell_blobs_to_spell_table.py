@@ -1,4 +1,4 @@
-import utils
+from migrations import utils
 import mysql.connector
 
 def migration_name():
