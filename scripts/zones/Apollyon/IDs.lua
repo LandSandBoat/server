@@ -16,15 +16,15 @@ zones[tpz.zone.APOLLYON] =
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         TIME_EXCEEDED           = 7054, -- You have exceeded the time limit. Exiting Limbus now.
         WIPE_KICK               = 7347, -- All party members in Limbus have fallen in battle. Exiting now.
-        WIPE                    = 7355, -- All party members in Limbus have fallen in battle. Exiting in <p3> minutes.
+        WIPE                    = 7355, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
         CONDITION_FOR_LIMBUS    = 7055, -- You have clearance to enter Limbus, but cannot enter while you or a party member is engaged in battle.
         HUM                     = 7067, -- You hear a faint hum.
-        NO_KEY                  = 7072, -- There is a disc here inscribed ...
+        NO_KEY                  = 7072, -- There are several six-sided indentations and a thin slot in the center of the circular dais here.
         CHIP_TRADE              = 7361, -- The light in the <item> has grown dim.
-        TIME_EXTENDED           = 7363, -- Your time in Limbus has been extended...
-        TIME_LEFT               = 7364, -- You have <p0> minutes left in Limbus.
+        TIME_EXTENDED           = 7363, -- our time in Limbus has been extended <number> [minute/minutes].
+        TIME_LEFT               = 7364, -- ou have <number> [minute/minutes] left in Limbus.
         CONQUEST_BASE           = 7366, -- Tallying conquest results...
-        GATE_OPEN               = 7545, -- A vortex materializes...
+        GATE_OPEN               = 7545, -- <space>vortex materializes...
     },
     mob =
     {
@@ -58,7 +58,7 @@ zones[tpz.zone.APOLLYON] =
             16933099,
             16933113,
         },
-        APOLLYON_CS_MOB = 
+        APOLLYON_CS_MOB =
         {
             16933129,
             16933137,
