@@ -32,16 +32,14 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         params.str_wsc = 0.4 params.agi_wsc = 0.0 params.int_wsc = 0.4
     end
 
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.RELIC)
+
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if not target:isUndead() then
         local drain = math.floor(damage * 0.4)
         player:addHP(drain)
-    end
-
-    -- Apply aftermath
-    if damage > 0 then
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.RELIC)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -37,15 +37,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         params.ftp100 = 4.0 params.ftp200 = 4.0 params.ftp300 = 4.0
     end
 
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
         local duration = tp / 1000 * 20 - 5
         if not target:hasStatusEffect(tpz.effect.MAGIC_EVASION_DOWN) then
             target:addStatusEffect(tpz.effect.MAGIC_EVASION_DOWN, 10, 0, duration)
         end
-
-        -- Apply aftermath
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -31,6 +31,9 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         params.dex_wsc = 0.8
     end
 
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
+
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- tpz.effect.WEIGHT power value is equal to lead breath as per bg-wiki: http://www.bg-wiki.com/bg/Rudra%27s_Storm
@@ -38,9 +41,6 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         if not target:hasStatusEffect(tpz.effect.WEIGHT) then
             target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, 60)
         end
-
-        -- Apply aftermath
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
     end
 
     return tpHits, extraHits, criticalHit, damage
