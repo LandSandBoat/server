@@ -989,13 +989,15 @@ namespace battleutils
                 Action->addEffectMessage = 384;
             }
         }
-        else
+        else if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE) ||
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE) ||
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE))
         {
             // Generic drain for anyone able to do melee damage to a dazed target
             // TODO: ignore dazes from dancers outside party
             int16 delay = PAttacker->GetWeaponDelay(false) / 10;
 
-            if (PAttacker->PMaster == nullptr || (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster))
+            if (PAttacker->PMaster == nullptr || PAttacker->objtype == TYPE_TRUST)
             {
                 // TODO: All of this is very ugly, but is fairly fragile, be careful refactoring!
                 EFFECT daze = EFFECT_NONE;
@@ -1024,29 +1026,26 @@ namespace battleutils
                         }
                     }
                 }
-                else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster->PParty)
+                else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster)
                 {
-                    for (uint8 i = 0; i < PAttacker->PMaster->PParty->members.size(); i++)
+                    static_cast<CCharEntity*>(PAttacker->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
                     {
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        if (daze == EFFECT_NONE && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PMember->id))
                         {
                             daze = EFFECT_DRAIN_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
-                            break;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PMember->id)->GetPower();
                         }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        if (daze == EFFECT_NONE && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PMember->id))
                         {
-                            daze = EFFECT_HASTE_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
-                            break;
+                            daze = EFFECT_DRAIN_DAZE;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PMember->id)->GetPower();
                         }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PMaster->PParty->members[i]->id))
+                        if (daze == EFFECT_NONE && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PMember->id))
                         {
-                            daze = EFFECT_ASPIR_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PMaster->PParty->members[i]->id)->GetPower();
-                            break;
+                            daze = EFFECT_DRAIN_DAZE;
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PMember->id)->GetPower();
                         }
-                    }
+                    });
                 }
                 else
                 {
@@ -1135,71 +1134,6 @@ namespace battleutils
                 }
             }
         }
-
-        // TODO: move all this to scripts for each of these weapons
-
-        // elemental damage equation = (weapDmg / 2) +- (weapDmg / 4)
-
-        // no enspells active, check weapon additional effects
-
-        /*if (Action->animation == 1)
-            PWeapon = (CItemWeapon*)PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->equip[SLOT_SUB]);
-        if(PWeapon != nullptr)
-        {
-            EFFECT dispelled;
-            switch(PWeapon->getID())
-            {
-                //Additional Effect: HP drain Weapons
-                case 16827:
-                case 16528:
-                case 16824:
-                case 17651:
-                case 16556:
-                case 16609:
-                case 16580:
-                case 17646:
-                case 16777:
-                case 16791:
-                case 16846:
-                case 16881:
-                case 17561:
-                case 17562:
-                case 17778:
-                case 17779:
-                case 17576:
-                case 17510:
-                    //30 % chance to drain, will heal 30% of damage done
-                    if (rand()%100 >= 30 || PWeapon==nullptr) return;
-
-                    Action->additionalEffect = SUBEFFECT_HP_DRAIN;
-                    Action->addEffectMessage = 161;
-                    Action->addEffectParam = (float)(Action->param * 0.3f);
-                    PAttacker->addHP(Action->addEffectParam);
-
-                    PChar->updatemask |= UPDATE_HP;
-                    return;
-
-
-                //Additional Effect: Dispel Weapons (10% chance needs verifying)
-                case 16942:
-                case 16944:
-                case 16950:
-                case 16951:
-                case 18330:
-                    if (rand()%100 > 10) return;
-                    dispelled = PDefender->StatusEffectContainer->DispelStatusEffect();
-                    // if(dispelled > 0){
-                    //     Action->submessageID = 42;
-                    //     Action->flag = 2;
-                    //     Action->subeffect = SUBEFFECT_LIGHT;
-                    //     Action->subparam = dispelled;
-                    // }
-                    return;
-                default:
-                    return;
-            }
-        }*/
-        return;
     }
 
     /************************************************************************
