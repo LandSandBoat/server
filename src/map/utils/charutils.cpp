@@ -2724,6 +2724,9 @@ namespace charutils
         if ((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000))
         {
             uint16 CurSkill = PChar->RealSkills.skill[SkillID];
+            uint16 CapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
+            // Max skill this mob level will allow.
+            // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
             uint16 MaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
 
             int16  Diff = MaxSkill - CurSkill / 10;
@@ -2773,7 +2776,9 @@ namespace charutils
                     tier -= 1;
                     SkillAmount += 1;
                 }
+                // convert to 10th units
                 MaxSkill = MaxSkill * 10;
+                CapSkill = CapSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
                 if (map_config.skillup_amount_multiplier > 1)
@@ -2785,9 +2790,10 @@ namespace charutils
                     }
                 }
 
-                if (SkillAmount + CurSkill >= MaxSkill)
+                if (SkillAmount + CurSkill >= CapSkill)
                 {
-                    SkillAmount = MaxSkill - CurSkill;
+                    // skill is capped. set blue flag
+                    SkillAmount = CapSkill - CurSkill;
                     PChar->WorkingSkills.skill[SkillID] |= 0x8000;
                 }
 
