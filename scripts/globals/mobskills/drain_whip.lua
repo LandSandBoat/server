@@ -5,14 +5,14 @@
 -- Type: Magical
 -- Utsusemi/Blink absorb: ignores shadows
 -- Range: Melee
--- 
+--
 ---------------------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 

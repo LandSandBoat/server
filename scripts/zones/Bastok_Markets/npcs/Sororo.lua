@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         4641,  1165, 1, -- Diaga

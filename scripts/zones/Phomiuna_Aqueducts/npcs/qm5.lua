@@ -5,13 +5,13 @@
 -- !pos -65.512 -25.262 62.918 27
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local xPos = player:getXPos();
-    local DoorOffset = npc:getID() - 1;
+    local xPos = player:getXPos()
+    local DoorOffset = npc:getID() - 1
 
     if (GetNPCByID(DoorOffset):getAnimation() == 9) then
         if (xPos <= -65) then
@@ -19,10 +19,10 @@ function onTrigger(player,npc)
         end
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

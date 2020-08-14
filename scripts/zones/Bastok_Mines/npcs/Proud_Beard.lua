@@ -7,11 +7,11 @@ require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         12631, 276,    --Hume Tunic
@@ -32,8 +32,8 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

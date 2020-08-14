@@ -6,10 +6,10 @@
 --    Involved in Quests: As Thick as Thieves, Mihgo's Amigo
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local MihgosAmigo = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
     local thickAsThieves = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
     local thickAsThievesCS = player:getCharVar("thickAsThievesCS")
@@ -28,7 +28,7 @@ function onTrigger(player,npc)
 
     -- Mihgo's Amigo
     elseif MihgosAmigo == QUEST_ACCEPTED then
-        player:startEvent(85,0,498) -- hint dialog
+        player:startEvent(85, 0, 498) -- hint dialog
 
     -- standard dialog
     elseif MihgosAmigo == QUEST_COMPLETED then
@@ -38,8 +38,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

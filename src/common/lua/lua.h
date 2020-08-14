@@ -1,4 +1,4 @@
-/*
+﻿/*
 ** $Id: lua.h,v 1.218.1.4 2008/01/03 15:41:15 roberto Exp $
 ** Lua - An Extensible Extension Language
 ** Lua.org, PUC-Rio, Brazil (http://www.lua.org)
@@ -245,7 +245,7 @@ LUA_API void lua_setallocf (lua_State *L, lua_Alloc f, void *ud);
 
 
 
-/* 
+/*
 ** ===============================================================
 ** some useful macros
 ** ===============================================================

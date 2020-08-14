@@ -7,10 +7,10 @@
 local ID = require("scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
@@ -60,8 +60,8 @@ function onTrigger(player,npc)
     player:messageSpecial( message, math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60), vHour)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

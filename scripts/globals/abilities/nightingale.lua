@@ -5,15 +5,15 @@
 -- Recast Time: 0:10:00
 -- Duration: 0:01:00
 -----------------------------------
- 
+
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
 function onUseAbility(player, target, ability)
-    player:addStatusEffect(tpz.effect.NIGHTINGALE,0,0,60)
+    player:addStatusEffect(tpz.effect.NIGHTINGALE, 0, 0, 60)
 end

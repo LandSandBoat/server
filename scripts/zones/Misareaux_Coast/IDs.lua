@@ -20,6 +20,11 @@ zones[tpz.zone.MISAREAUX_COAST] =
         CONQUEST_BASE            = 7171, -- Tallying conquest results...
         DOOR_CLOSED              = 7347, -- The door is locked tight.
         LOGGING_IS_POSSIBLE_HERE = 7601, -- Logging is possible here if you have <item>.
+        NOTHING_HERE_YET         = 7660, -- There is nothing here yet. Check again in the morning.
+        ALREADY_BAITED           = 7661, -- The trap already contains <item>.
+        APPEARS_TO_BE_TRAP       = 7662, -- There appears to be some kind of trap here. Bits of fish are lying around the area.
+        DID_NOT_CATCH_ANYTHING   = 7663, -- You did not catch anything.
+        PUT_IN_TRAP              = 7664, -- You put <item> in the trap.
         COMMON_SENSE_SURVIVAL    = 8635, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET            = 8858, -- Home point set!
     },
@@ -32,6 +37,8 @@ zones[tpz.zone.MISAREAUX_COAST] =
         PM6_2_MOB_OFFSET = 16879893,
         BOGGELMANN       = 16879897,
         GRATION          = 16879899,
+        ZIPHIUS          = 16879900,
+
     },
     npc =
     {
@@ -44,6 +51,7 @@ zones[tpz.zone.MISAREAUX_COAST] =
             16879976,
             16879977,
         },
+        ZIPHIUS_QM_BASE  = 16879919,
     },
 }
 

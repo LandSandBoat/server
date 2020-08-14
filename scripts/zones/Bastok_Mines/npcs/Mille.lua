@@ -8,11 +8,11 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.NORVALLEN) ~= tpz.nation.BASTOK then
         player:showText(npc, ID.text.MILLE_CLOSED_DIALOG)
     else
@@ -29,8 +29,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

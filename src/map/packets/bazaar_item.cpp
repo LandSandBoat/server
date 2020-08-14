@@ -29,7 +29,7 @@
 #include "../utils/itemutils.h"
 #include "../vana_time.h"
 
-CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax) 
+CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {
 	this->type = 0x05;	// 0x105
 	this->size = 0x17;
@@ -49,8 +49,8 @@ CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 		    uint32 nextUseTime = ((CItemUsable*)PItem)->getLastUseTime() + ((CItemUsable*)PItem)->getReuseDelay();
 
 		    ref<uint8>(0x11) = 0x01;													    // флаг ITEM_CHARGED
-		    ref<uint8>(0x12) = ((CItemUsable*)PItem)->getCurrentCharges(); 
-		    ref<uint8>(0x14) = (nextUseTime > currentTime ? 0x90 : 0xD0); 
+		    ref<uint8>(0x12) = ((CItemUsable*)PItem)->getCurrentCharges();
+		    ref<uint8>(0x14) = (nextUseTime > currentTime ? 0x90 : 0xD0);
 
 	        ref<uint32>(0x15) = nextUseTime;												// таймер следующего использования
 		    ref<uint32>(0x19) = ((CItemUsable*)PItem)->getUseDelay() + currentTime;		// таймер задержки использования

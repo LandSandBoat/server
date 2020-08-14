@@ -167,7 +167,7 @@ local function getAssignedDigSite(player)
     return player:getCharVar(zoneData[player:getZoneID()].dsvar)
 end
 
-local function startMapMarkerEvent(eventid,player,digsiteids)
+local function startMapMarkerEvent(eventid, player, digsiteids)
     --[[ Map marker event notes:
         Event 101 creates the "Treasure" map marker using coordinate args
         Event 103 shows the "Treasure" map marker using coordinate args
@@ -194,7 +194,7 @@ local function startMapMarkerEvent(eventid,player,digsiteids)
     player:startEvent(eventid, player:getZoneID(), 0, pos.x * 1000, pos.z * 1000)
 end
 
-tpz.beastmentreasure.handleNpcOnTrigger = function(player,digsiteids)
+tpz.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
     local zd = zoneData[player:getZoneID()]
     local status = player:getCharVar(zd.statusvar)
 
@@ -207,22 +207,22 @@ tpz.beastmentreasure.handleNpcOnTrigger = function(player,digsiteids)
     elseif status == QUEST_COMPLETED then
         -- Note: Quest will be "completed" after trading the correct items,
         -- but will be set to available again after excavating the reward.
-        startMapMarkerEvent(103,player,digsiteids) -- Peddlestox reminds you where your digsite is
+        startMapMarkerEvent(103, player, digsiteids) -- Peddlestox reminds you where your digsite is
     end
 end
 
-tpz.beastmentreasure.handleNpcOnTrade = function(player,trade,digsiteids)
+tpz.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     local zd = zoneData[player:getZoneID()]
 
     if player:getCharVar(zd.statusvar) == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, zd.fetchitems) then
         -- Assign a random dig site to the player
-        player:setCharVar(zd.dsvar, math.random(1,8))
+        player:setCharVar(zd.dsvar, math.random(1, 8))
 
-        startMapMarkerEvent(101,player,digsiteids) -- Peddlestox shows you where to dig
+        startMapMarkerEvent(101, player, digsiteids) -- Peddlestox shows you where to dig
     end
 end
 
-tpz.beastmentreasure.handleNpcOnEventFinish = function(player,csid)
+tpz.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     local zd = zoneData[player:getZoneID()]
 
     if csid == 100 then
@@ -257,7 +257,7 @@ tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     end
 end
 
-tpz.beastmentreasure.handleQmOnTrigger = function(player,npc,buriedtext,nothingtext,digsiteids)
+tpz.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
     local digsiteid = digsiteids[getAssignedDigSite(player)]
     local qmid = npc:getID()
 
@@ -269,7 +269,7 @@ tpz.beastmentreasure.handleQmOnTrigger = function(player,npc,buriedtext,nothingt
     end
 end
 
-tpz.beastmentreasure.handleQmOnTrade = function(player,npc,trade,digsiteids)
+tpz.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local zoneid = player:getZoneID()
     local digsite = getAssignedDigSite(player)
 
@@ -288,7 +288,7 @@ tpz.beastmentreasure.handleQmOnTrade = function(player,npc,trade,digsiteids)
     end
 end
 
-tpz.beastmentreasure.handleQmOnEventFinish = function(player,csid)
+tpz.beastmentreasure.handleQmOnEventFinish = function(player, csid)
     local zoneid = player:getZoneID()
 
     if csid == 105 then

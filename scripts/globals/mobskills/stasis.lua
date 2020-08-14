@@ -12,13 +12,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
 function onMobWeaponSkill(target, mob, skill)
     local shadows = MOBPARAM_1_SHADOW
-    local dmg = MobFinalAdjustments(10,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.BLUNT,shadows)
+    local dmg = MobFinalAdjustments(10, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, shadows)
 
     local typeEffect = tpz.effect.PARALYSIS
 

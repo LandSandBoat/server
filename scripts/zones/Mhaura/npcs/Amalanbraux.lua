@@ -2,18 +2,18 @@
 -- Area: Mhaura
 --  NPC: Amalanbraux
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(700);
-end;
+function onTrigger(player, npc)
+    player:startEvent(700)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

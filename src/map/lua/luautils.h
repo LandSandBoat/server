@@ -138,6 +138,8 @@ namespace luautils
     int32 SetRegionalConquestOverseers(uint8 regionID);                         // Update NPC Conquest Guard
     int32 setMobPos(lua_State*);                                                // set a mobs position (only if mob is not in combat)
 
+    int32 GetHealingTickDelay(lua_State* L);                                    // Returns the configured healing tick delay
+
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
@@ -227,7 +229,7 @@ namespace luautils
     int32 OnMobDisengage(CBaseEntity* PMob);                                      // triggers on mob disengaging (no more targets)
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget);                    // Сalled every 3 sec when a player fight monster
-    int32 OnCriticalHit(CBattleEntity* PTarget);
+    int32 OnCriticalHit(CBattleEntity* PMob, CBattleEntity* PAttacker);
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller);                    // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                                        // triggers on mob despawn (death not assured)
 

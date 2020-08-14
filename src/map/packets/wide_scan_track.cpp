@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -27,7 +27,7 @@
 #include "../entities/baseentity.h"
 
 
-CWideScanTrackPacket::CWideScanTrackPacket(CBaseEntity * PEntity) 
+CWideScanTrackPacket::CWideScanTrackPacket(CBaseEntity * PEntity)
 {
 	this->type = 0xF5;
 	this->size = 0x0C;

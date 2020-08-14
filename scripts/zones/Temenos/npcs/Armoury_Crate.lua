@@ -2,668 +2,1048 @@
 -- Area: Temenos
 -- NPC:  Armoury Crate
 -----------------------------------
-
-require("scripts/globals/titles");
-require("scripts/globals/quests");
-require("scripts/globals/limbus");
-
------------------------------------
+require("scripts/globals/battlefield")
+require("scripts/globals/limbus")
+require("scripts/globals/zone")
+local ID = require("scripts/zones/Temenos/IDs")
 
 local loot =
 {
     -- northern tower floor 1
-    [130] =
+    [1299] = 
     {
+        [1] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 250},
+                {itemid = 1954, droprate = 159},
+                {itemid = 1940, droprate = 146},
+                {itemid = 1932, droprate =  85},
+                {itemid = 1956, droprate = 171},
+                {itemid = 1934, droprate = 110},
+                {itemid = 2658, droprate = 220},
+                {itemid = 2716, droprate =  98},
+            },
+            {
+                {itemid =    0, droprate = 250},
+                {itemid = 1954, droprate = 159},
+                {itemid = 1940, droprate = 146},
+                {itemid = 1932, droprate =  85},
+                {itemid = 1956, droprate = 171},
+                {itemid = 1934, droprate = 110},
+                {itemid = 2658, droprate = 220},
+                {itemid = 2716, droprate =  98},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1954, droprate = 159},
-            {itemid = 1940, droprate = 146},
-            {itemid = 1932, droprate = 85},
-            {itemid = 1956, droprate = 171},
-            {itemid = 1934, droprate = 110},
-            {itemid = 2658, droprate = 220},
-            {itemid = 2716, droprate = 98},
-        },
-    },
     -- northern tower floor 2
-    [131] =
-    {
+        [2] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 400},
+                {itemid = 1932, droprate = 333},
+                {itemid = 1954, droprate = 200},
+                {itemid = 1950, droprate = 100},
+                {itemid = 1940, droprate =  90},
+                {itemid = 1942, droprate =  70},
+                {itemid = 1934, droprate =  90},
+                {itemid = 1936, droprate = 100},
+                {itemid = 1958, droprate =  90},
+                {itemid = 2656, droprate =  67},
+                {itemid = 1956, droprate = 167},
+            },
+            {
+                {itemid =    0, droprate = 400},
+                {itemid = 1932, droprate = 333},
+                {itemid = 1954, droprate = 200},
+                {itemid = 1950, droprate = 100},
+                {itemid = 1940, droprate =  90},
+                {itemid = 1942, droprate =  70},
+                {itemid = 1934, droprate =  90},
+                {itemid = 1936, droprate = 100},
+                {itemid = 1958, droprate =  90},
+                {itemid = 2656, droprate =  67},
+                {itemid = 1956, droprate = 167},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1932, droprate = 333},
-            {itemid = 1954, droprate = 200},
-            {itemid = 1950, droprate = 100},
-            {itemid = 1940, droprate = 90},
-            {itemid = 1942, droprate = 70},
-            {itemid = 1934, droprate = 90},
-            {itemid = 1936, droprate = 100},
-            {itemid = 1958, droprate = 90},
-            {itemid = 2656, droprate = 67},
-            {itemid = 1956, droprate = 167},
-        },
-    },
     -- northern tower floor 3
-    [132] =
-    {
+        [3] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1956, droprate =  27},
+                {itemid = 1932, droprate = 324},
+                {itemid = 1950, droprate =  80},
+                {itemid = 1934, droprate = 189},
+                {itemid = 1930, droprate =  50},
+                {itemid = 1940, droprate =  27},
+                {itemid = 1936, droprate =  81},
+                {itemid = 1944, droprate =  80},
+                {itemid = 1958, droprate =  81},
+                {itemid = 2658, droprate = 270},
+                {itemid = 2714, droprate = 108},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1956, droprate =  27},
+                {itemid = 1932, droprate = 324},
+                {itemid = 1950, droprate =  80},
+                {itemid = 1934, droprate = 189},
+                {itemid = 1930, droprate =  50},
+                {itemid = 1940, droprate =  27},
+                {itemid = 1936, droprate =  81},
+                {itemid = 1944, droprate =  80},
+                {itemid = 1958, droprate =  81},
+                {itemid = 2658, droprate = 270},
+                {itemid = 2714, droprate = 108},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1956, droprate = 27},
-            {itemid = 1932, droprate = 324},
-            {itemid = 1950, droprate = 80},
-            {itemid = 1934, droprate = 189},
-            {itemid = 1930, droprate = 50},
-        },
-        {
-            {itemid = 1940, droprate = 27},
-            {itemid = 1936, droprate = 81},
-            {itemid = 1944, droprate = 80},
-            {itemid = 1958, droprate = 81},
-            {itemid = 2658, droprate = 270},
-            {itemid = 2714, droprate = 108},
-        },
-    },
     -- northern tower floor 4
-    [133] =
-    {
+        [4] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1942, droprate =  90},
+                {itemid = 1934, droprate = 435},
+                {itemid = 1956, droprate =  80},
+                {itemid = 1940, droprate = 174},
+                {itemid = 1958, droprate =  87},
+                {itemid = 1954, droprate =  90},
+                {itemid = 1936, droprate =  87},
+                {itemid = 1930, droprate =  43},
+                {itemid = 2656, droprate =  27},
+                {itemid = 2658, droprate = 261},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1942, droprate =  90},
+                {itemid = 1934, droprate = 435},
+                {itemid = 1956, droprate =  80},
+                {itemid = 1940, droprate = 174},
+                {itemid = 1958, droprate =  87},
+                {itemid = 1954, droprate =  90},
+                {itemid = 1936, droprate =  87},
+                {itemid = 1930, droprate =  43},
+                {itemid = 2656, droprate =  27},
+                {itemid = 2658, droprate = 261},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1942, droprate = 90},
-            {itemid = 1934, droprate = 435},
-            {itemid = 1956, droprate = 80},
-            {itemid = 1940, droprate = 174},
-            {itemid = 1958, droprate = 87},
-            {itemid = 1954, droprate = 90},
-            {itemid = 1936, droprate = 87},
-            {itemid = 1930, droprate = 43},
-            {itemid = 2656, droprate = 27},
-            {itemid = 2658, droprate = 261},
-        },
-    },
     -- northern tower floor 5
-    [134] =
-    {
+        [5] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 200},
+                {itemid = 1954, droprate =  67},
+                {itemid = 1940, droprate = 353},
+                {itemid = 1936, droprate =  87},
+                {itemid = 1956, droprate = 110},
+                {itemid = 1958, droprate =  87},
+                {itemid = 1942, droprate =  50},
+                {itemid = 1950, droprate =  60},
+                {itemid = 1932, droprate =  59},
+                {itemid = 2716, droprate = 100},
+                {itemid = 2714, droprate = 110},
+            },
+            {
+                {itemid =    0, droprate = 200},
+                {itemid = 1954, droprate =  67},
+                {itemid = 1940, droprate = 353},
+                {itemid = 1936, droprate =  87},
+                {itemid = 1956, droprate = 110},
+                {itemid = 1958, droprate =  87},
+                {itemid = 1942, droprate =  50},
+                {itemid = 1950, droprate =  60},
+                {itemid = 1932, droprate =  59},
+                {itemid = 2716, droprate = 100},
+                {itemid = 2714, droprate = 110},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1954, droprate = 67},
-            {itemid = 1940, droprate = 353},
-            {itemid = 1936, droprate = 87},
-            {itemid = 1956, droprate = 110},
-            {itemid = 1958, droprate = 87},
-            {itemid = 1942, droprate = 50},
-            {itemid = 1950, droprate = 60},
-            {itemid = 1932, droprate = 59},
-            {itemid = 2716, droprate = 100},
-            {itemid = 2714, droprate = 110},
-        },
-    },
     -- northern tower floor 6
-    [135] =
-    {
+        [6] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1954, droprate = 263},
+                {itemid = 1932, droprate =  59},
+                {itemid = 1942, droprate =  53},
+                {itemid = 1934, droprate =  60},
+                {itemid = 1956, droprate = 526},
+                {itemid = 1930, droprate =  60},
+                {itemid = 1936, droprate =  53},
+                {itemid = 1950, droprate = 158},
+                {itemid = 2716, droprate = 105},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1954, droprate = 263},
+                {itemid = 1932, droprate =  59},
+                {itemid = 1942, droprate =  53},
+                {itemid = 1934, droprate =  60},
+                {itemid = 1956, droprate = 526},
+                {itemid = 1930, droprate =  60},
+                {itemid = 1936, droprate =  53},
+                {itemid = 1950, droprate = 158},
+                {itemid = 2716, droprate = 105},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1954, droprate = 263},
-            {itemid = 1932, droprate = 59},
-            {itemid = 1942, droprate = 53},
-            {itemid = 1934, droprate = 60},
-            {itemid = 1956, droprate = 526},
-        },
-        {
-            {itemid = 1930, droprate = 60},
-            {itemid = 1936, droprate = 53},
-            {itemid = 1950, droprate = 158},
-            {itemid = 2716, droprate = 105},
-        },
-    },
     -- northern tower floor 7
-    [136] =
-    {
+        [7] =
         {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1956, droprate = 240},
-            {itemid = 1932, droprate = 120},
-            {itemid = 1940, droprate = 200},
-        },
-        {
-            {itemid = 1934, droprate = 40},
-            {itemid = 1954, droprate = 120},
-            {itemid = 2658, droprate = 200},
-            {itemid = 2716, droprate = 80},
-        },
-        {
-            {itemid = 1875, droprate = 100},
-            {itemid = 2127, droprate = 55},
-        },
-        {
-            {itemid = 1904, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1956, droprate = 240},
+                {itemid = 1932, droprate = 120},
+                {itemid = 1940, droprate = 200},
+                {itemid = 1934, droprate =  40},
+                {itemid = 1954, droprate = 120},
+                {itemid = 2658, droprate = 200},
+                {itemid = 2716, droprate =  80},
+            },
+            {
+                {itemid = 1904, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 100},
+                {itemid = 2127, droprate =  55},
+            },
         },
     },
     -- western tower floor 1
-    [137] =
-    {
+    [1298] = {
+        [1] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 100},
+                {itemid = 1948, droprate = 172},
+                {itemid = 1938, droprate = 138},
+                {itemid = 1952, droprate = 138},
+                {itemid = 1958, droprate = 207},
+                {itemid = 1930, droprate = 241},
+                {itemid = 2656, droprate = 172},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1948, droprate = 172},
-            {itemid = 1938, droprate = 138},
-            {itemid = 1952, droprate = 138},
-            {itemid = 1958, droprate = 207},
-            {itemid = 1930, droprate = 241},
-            {itemid = 2656, droprate = 172},
-        },
-    },
     -- western tower floor 2
-    [138] =
-    {
+        [2] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1948, droprate = 179},
+                {itemid = 1938, droprate = 571},
+                {itemid = 1944, droprate =  71},
+                {itemid = 1952, droprate = 179},
+                {itemid = 1946, droprate = 120},
+                {itemid = 1934, droprate =  71},
+                {itemid = 1930, droprate = 143},
+                {itemid = 2660, droprate = 143},
+            },
+            {
+                {itemid =    0, droprate = 200},
+                {itemid = 1948, droprate = 179},
+                {itemid = 1938, droprate = 571},
+                {itemid = 1944, droprate =  71},
+                {itemid = 1952, droprate = 179},
+                {itemid = 1946, droprate = 120},
+                {itemid = 1934, droprate =  71},
+                {itemid = 1930, droprate = 143},
+                {itemid = 2660, droprate = 143},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1948, droprate = 179},
-            {itemid = 1938, droprate = 571},
-            {itemid = 1944, droprate = 71},
-            {itemid = 1952, droprate = 179},
-        },
-        {
-            {itemid = 1946, droprate = 120},
-            {itemid = 1934, droprate = 71},
-            {itemid = 1930, droprate = 143},
-            {itemid = 2660, droprate = 143},
-        },
-    },
     -- western tower floor 3
-    [139] =
-    {
+        [3] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1948, droprate = 536},
+                {itemid = 1952, droprate = 107},
+                {itemid = 1938, droprate =  60},
+                {itemid = 1934, droprate = 110},
+                {itemid = 1930, droprate =  80},
+                {itemid = 2660, droprate =  90},
+                {itemid = 1946, droprate =  71},
+                {itemid = 1944, droprate = 103},
+                {itemid = 1958, droprate = 160},
+                {itemid = 1954, droprate =  36},
+                {itemid = 2656, droprate = 250},
+                {itemid = 2716, droprate = 350},
+            },
+            {
+                {itemid =    0, droprate = 750},
+                {itemid = 1948, droprate = 536},
+                {itemid = 1952, droprate = 107},
+                {itemid = 1938, droprate =  60},
+                {itemid = 1934, droprate = 110},
+                {itemid = 1930, droprate =  80},
+                {itemid = 2660, droprate =  90},
+                {itemid = 1946, droprate =  71},
+                {itemid = 1944, droprate = 103},
+                {itemid = 1958, droprate = 160},
+                {itemid = 1954, droprate =  36},
+                {itemid = 2656, droprate = 250},
+                {itemid = 2716, droprate = 350},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1948, droprate = 536},
-            {itemid = 1952, droprate = 107},
-            {itemid = 1938, droprate = 60},
-            {itemid = 1934, droprate = 110},
-            {itemid = 1930, droprate = 80},
-            {itemid = 2660, droprate = 90},
-        },
-        {
-            {itemid = 1946, droprate = 71},
-            {itemid = 1944, droprate = 103},
-            {itemid = 1958, droprate = 160},
-            {itemid = 1954, droprate = 36},
-            {itemid = 2656, droprate = 250},
-            {itemid = 2716, droprate = 350},
-        },
-    },
     -- western tower floor 4
-    [140] =
-    {
+        [4] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1952, droprate = 533},
+                {itemid = 1946, droprate =  90},
+                {itemid = 1938, droprate = 133},
+                {itemid = 1932, droprate =  90},
+                {itemid = 1958, droprate =  10},
+                {itemid = 1954, droprate = 133},
+                {itemid = 1944, droprate = 133},
+                {itemid = 1930, droprate = 133},
+                {itemid = 2660, droprate =  33},
+            },
+            {
+                {itemid =    0, droprate = 500},
+                {itemid = 1952, droprate = 533},
+                {itemid = 1946, droprate =  90},
+                {itemid = 1938, droprate = 133},
+                {itemid = 1932, droprate =  90},
+                {itemid = 1958, droprate =  10},
+                {itemid = 1954, droprate = 133},
+                {itemid = 1944, droprate = 133},
+                {itemid = 1930, droprate = 133},
+                {itemid = 2660, droprate =  33},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1952, droprate = 533},
-            {itemid = 1946, droprate = 90},
-            {itemid = 1938, droprate = 133},
-            {itemid = 1932, droprate = 90},
-        },
-        {
-            {itemid = 1958, droprate = 10},
-            {itemid = 1954, droprate = 133},
-            {itemid = 1944, droprate = 133},
-            {itemid = 1930, droprate = 133},
-            {itemid = 2660, droprate = 33},
-        },
-    },
     -- western tower floor 5
-    [141] =
-    {
+        [5] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1954, droprate =  59},
+                {itemid = 1930, droprate = 294},
+                {itemid = 1946, droprate =  59},
+                {itemid = 1934, droprate =  78},
+                {itemid = 1958, droprate = 176},
+                {itemid = 1938, droprate =  59},
+                {itemid = 1948, droprate =  25},
+                {itemid = 1932, droprate = 118},
+                {itemid = 2656, droprate = 294},
+            },
+            {
+                {itemid =    0, droprate = 200},
+                {itemid = 1954, droprate =  59},
+                {itemid = 1930, droprate = 294},
+                {itemid = 1946, droprate =  59},
+                {itemid = 1934, droprate =  78},
+                {itemid = 1958, droprate = 176},
+                {itemid = 1938, droprate =  59},
+                {itemid = 1948, droprate =  25},
+                {itemid = 1932, droprate = 118},
+                {itemid = 2656, droprate = 294},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1954, droprate = 59},
-            {itemid = 1930, droprate = 294},
-            {itemid = 1946, droprate = 59},
-            {itemid = 1934, droprate = 78},
-            {itemid = 2716, droprate = 59},
-        },
-        {
-            {itemid = 1958, droprate = 176},
-            {itemid = 1938, droprate = 59},
-            {itemid = 1948, droprate = 25},
-            {itemid = 1932, droprate = 118},
-            {itemid = 2656, droprate = 294},
-        },
-    },
     -- western tower floor 6
-    [142] =
-    {
+        [6] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1954, droprate = 200},
+                {itemid = 1958, droprate = 400},
+                {itemid = 1948, droprate = 100},
+                {itemid = 1934, droprate = 150},
+                {itemid = 1932, droprate =  50},
+                {itemid = 1930, droprate =  60},
+                {itemid = 1938, droprate = 200},
+                {itemid = 1944, droprate =  60},
+                {itemid = 1952, droprate = 200},
+            },
+            {
+                {itemid =    0, droprate = 400},
+                {itemid = 1954, droprate = 200},
+                {itemid = 1958, droprate = 400},
+                {itemid = 1948, droprate = 100},
+                {itemid = 1934, droprate = 150},
+                {itemid = 1932, droprate =  50},
+                {itemid = 1930, droprate =  60},
+                {itemid = 1938, droprate = 200},
+                {itemid = 1944, droprate =  60},
+                {itemid = 1952, droprate = 200},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1954, droprate = 200},
-            {itemid = 1958, droprate = 400},
-            {itemid = 1948, droprate = 100},
-            {itemid = 1934, droprate = 150},
-        },
-        {
-            {itemid = 1932, droprate = 50},
-            {itemid = 1930, droprate = 60},
-            {itemid = 1938, droprate = 200},
-            {itemid = 1944, droprate = 60},
-            {itemid = 1952, droprate = 200},
-        },
-    },
     -- western tower floor 7
-    [143] =
-    {
+        [7] =
         {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1948, droprate = 36},
-            {itemid = 1952, droprate = 143},
-            {itemid = 1930, droprate = 143},
-            {itemid = 1958, droprate = 214},
-            {itemid = 1938, droprate = 71},
-            {itemid = 2656, droprate = 321},
-        },
-        {
-            {itemid = 1875, droprate = 100},
-            {itemid = 2127, droprate = 55},
-        },
-        {
-            {itemid = 1906, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1948, droprate =  36},
+                {itemid = 1952, droprate = 143},
+                {itemid = 1930, droprate = 143},
+                {itemid = 1958, droprate = 214},
+                {itemid = 1938, droprate =  71},
+                {itemid = 2656, droprate = 321},
+            },
+            {
+                {itemid = 1906, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 100},
+                {itemid = 2127, droprate =  55},
+            },
         },
     },
     -- eastern tower floor 1
-    [144] =
-    {
+    [1300] = {
+        [1] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },  
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1944, droprate =  65},
+                {itemid = 1936, droprate =  97},
+                {itemid = 1946, droprate =  40},
+                {itemid = 1942, droprate =  95},
+                {itemid = 2660, droprate = 194},
+                {itemid = 2714, droprate =  32},
+                {itemid = 1950, droprate = 161},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1944, droprate = 65},
-            {itemid = 1936, droprate = 97},
-            {itemid = 1946, droprate = 40},
-            {itemid = 1942, droprate = 95},
-            {itemid = 2660, droprate = 194},
-            {itemid = 2714, droprate = 32},
-            {itemid = 1950, droprate = 161},
-            {itemid = 2716, droprate = 190},
-            {itemid = 2656, droprate = 210},
-        },
-    },
     -- eastern tower floor 2
-    [145] =
-    {
+        [2] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1936, droprate = 367},
+                {itemid = 1952, droprate =  70},
+                {itemid = 1950, droprate =  40},
+                {itemid = 1942, droprate = 333},
+                {itemid = 1958, droprate =  20},
+                {itemid = 1956, droprate = 106},
+                {itemid = 1938, droprate =  33},
+                {itemid = 1944, droprate =  76},
+                {itemid = 1948, droprate =  95},
+                {itemid = 2658, droprate =  67},
+                {itemid = 1946, droprate = 133},
+            },
+            {
+                {itemid =    0, droprate = 350},
+                {itemid = 1936, droprate = 367},
+                {itemid = 1952, droprate =  70},
+                {itemid = 1950, droprate =  40},
+                {itemid = 1942, droprate = 333},
+                {itemid = 1958, droprate =  20},
+                {itemid = 1956, droprate = 106},
+                {itemid = 1938, droprate =  33},
+                {itemid = 1944, droprate =  76},
+                {itemid = 1948, droprate =  95},
+                {itemid = 2658, droprate =  67},
+                {itemid = 1946, droprate = 133},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1936, droprate = 367},
-            {itemid = 1952, droprate = 70},
-            {itemid = 1950, droprate = 40},
-            {itemid = 1942, droprate = 333},
-            {itemid = 1958, droprate = 20},
-        },
-        {
-            {itemid = 1956, droprate = 106},
-            {itemid = 1938, droprate = 33},
-            {itemid = 1944, droprate = 76},
-            {itemid = 1948, droprate = 95},
-            {itemid = 2658, droprate = 67},
-            {itemid = 1946, droprate = 133},
-        },
-    },
     -- eastern tower floor 3
-    [146] =
-    {
+        [3] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1942, droprate = 625},
+                {itemid = 1944, droprate = 102},
+                {itemid = 1950, droprate =  42},
+                {itemid = 1952, droprate =  83},
+                {itemid = 1946, droprate =  50},
+                {itemid = 1940, droprate =  83},
+                {itemid = 1936, droprate =  70},
+                {itemid = 1938, droprate =  42},
+                {itemid = 1948, droprate =  42},
+                {itemid = 2660, droprate = 292},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1942, droprate = 625},
+                {itemid = 1944, droprate = 102},
+                {itemid = 1950, droprate =  42},
+                {itemid = 1952, droprate =  83},
+                {itemid = 1946, droprate =  50},
+                {itemid = 1940, droprate =  83},
+                {itemid = 1936, droprate =  70},
+                {itemid = 1938, droprate =  42},
+                {itemid = 1948, droprate =  42},
+                {itemid = 2660, droprate = 292},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1942, droprate = 625},
-            {itemid = 1944, droprate = 102},
-            {itemid = 1950, droprate = 42},
-            {itemid = 1952, droprate = 83},
-            {itemid = 1946, droprate = 50},
-        },
-        {
-            {itemid = 1940, droprate = 83},
-            {itemid = 1936, droprate = 70},
-            {itemid = 1938, droprate = 42},
-            {itemid = 1948, droprate = 42},
-            {itemid = 2660, droprate = 292},
-        },
-    },
     -- eastern tower floor 4
-    [147] =
-    {
+        [4] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1950, droprate = 417},
+                {itemid = 1956, droprate =  75},
+                {itemid = 1944, droprate = 208},
+                {itemid = 1940, droprate = 167},
+                {itemid = 1946, droprate =  62},
+                {itemid = 1936, droprate =  69},
+                {itemid = 2660, droprate = 208},
+                {itemid = 1952, droprate =  42},
+                {itemid = 2658, droprate =  83},
+            },
+            {
+                {itemid =    0, droprate = 400},
+                {itemid = 1950, droprate = 417},
+                {itemid = 1956, droprate =  75},
+                {itemid = 1944, droprate = 208},
+                {itemid = 1940, droprate = 167},
+                {itemid = 1946, droprate =  62},
+                {itemid = 1936, droprate =  69},
+                {itemid = 2660, droprate = 208},
+                {itemid = 1952, droprate =  42},
+                {itemid = 2658, droprate =  83},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1950, droprate = 417},
-            {itemid = 1956, droprate = 75},
-            {itemid = 1944, droprate = 208},
-            {itemid = 1940, droprate = 167},
-        },
-        {
-            {itemid = 1946, droprate = 62},
-            {itemid = 1936, droprate = 69},
-            {itemid = 2660, droprate = 208},
-            {itemid = 1952, droprate = 42},
-            {itemid = 2658, droprate = 83},
-        },
-    },
     -- eastern tower floor 5
-    [148] =
-    {
+        [5] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1944, droprate = 208},
+                {itemid = 1938, droprate =  42},
+                {itemid = 1946, droprate =  36},
+                {itemid = 1940, droprate =  83},
+                {itemid = 1942, droprate =  20},
+                {itemid = 1952, droprate =  94},
+                {itemid = 1956, droprate =  42},
+                {itemid = 1936, droprate =  49},
+                {itemid = 1950, droprate = 167},
+                {itemid = 2714, droprate = 458},
+            },
+            {
+                {itemid =    0, droprate = 200},
+                {itemid = 1944, droprate = 208},
+                {itemid = 1938, droprate =  42},
+                {itemid = 1946, droprate =  36},
+                {itemid = 1940, droprate =  83},
+                {itemid = 1942, droprate =  20},
+                {itemid = 1952, droprate =  94},
+                {itemid = 1956, droprate =  42},
+                {itemid = 1936, droprate =  49},
+                {itemid = 1950, droprate = 167},
+                {itemid = 2714, droprate = 458},
+            },
         },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1944, droprate = 208},
-            {itemid = 1938, droprate = 42},
-            {itemid = 1946, droprate = 36},
-            {itemid = 1940, droprate = 83},
-            {itemid = 1942, droprate = 20},
-        },
-        {
-            {itemid = 1952, droprate = 94},
-            {itemid = 1956, droprate = 42},
-            {itemid = 1936, droprate = 49},
-            {itemid = 1950, droprate = 167},
-            {itemid = 2714, droprate = 458},
-        },
-    },
     -- eastern tower floor 6
-    [149] =
-    {
+        [6] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },  
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 1000},
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1942, droprate =  68},
+                {itemid = 1948, droprate =  74},
+                {itemid = 1936, droprate = 259},
+                {itemid = 1940, droprate =  74},
+                {itemid = 1956, droprate =  74},
+                {itemid = 1950, droprate =  62},
+                {itemid = 2656, droprate = 150},
+                {itemid = 1938, droprate =  76},
+                {itemid = 1952, droprate =  53},
+                {itemid = 2658, droprate = 111},
+                {itemid = 2714, droprate = 370},
+                {itemid = 1946, droprate = 333},
+            },
+            {
+                {itemid =    0, droprate = 300},
+                {itemid = 1942, droprate =  68},
+                {itemid = 1948, droprate =  74},
+                {itemid = 1936, droprate = 259},
+                {itemid = 1940, droprate =  74},
+                {itemid = 1956, droprate =  74},
+                {itemid = 1950, droprate =  62},
+                {itemid = 2656, droprate = 150},
+                {itemid = 1938, droprate =  76},
+                {itemid = 1952, droprate =  53},
+                {itemid = 2658, droprate = 111},
+                {itemid = 2714, droprate = 370},
+                {itemid = 1946, droprate = 333},
+            },
         },
+    -- eastern tower floor 7
+        [7] =
         {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1942, droprate = 68},
-            {itemid = 1948, droprate = 74},
-            {itemid = 1936, droprate = 259},
-            {itemid = 1940, droprate = 74},
-            {itemid = 1956, droprate = 74},
-            {itemid = 1950, droprate = 62},
-        },
-        {
-            {itemid = 2656, droprate = 150},
-            {itemid = 1938, droprate = 76},
-            {itemid = 1952, droprate = 53},
-            {itemid = 2658, droprate = 111},
-            {itemid = 2714, droprate = 370},
-            {itemid = 1946, droprate = 333},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1942, droprate =  38},
+                {itemid = 1950, droprate =  67},
+                {itemid = 1944, droprate = 100},
+                {itemid = 1936, droprate = 233},
+                {itemid = 1946, droprate =  80},
+                {itemid = 2660, droprate = 333},
+                {itemid = 2714, droprate =  67},
+            },
+            {
+                {itemid = 1905, droprate = 1000},
+            },
+            {
+                {itemid =    0, droprate = 100},
+                {itemid = 2127, droprate =  55},
+            },
         },
     },
-    -- eastern tower floor 7
-    [150] =
+    -- central temenos basement
+    [1301] =
     {
         {
             {itemid = 1875, droprate = 1000},
@@ -685,26 +1065,10 @@ local loot =
         },
         {
             {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1942, droprate = 38},
-            {itemid = 1950, droprate = 67},
-            {itemid = 1944, droprate = 100},
-            {itemid = 1936, droprate = 233},
-            {itemid = 1946, droprate = 80},
-            {itemid = 2660, droprate = 333},
-            {itemid = 2714, droprate = 67},
-        },
-        {
-            {itemid = 1875, droprate = 100},
-            {itemid = 2127, droprate = 55},
-        },
-        {
-            {itemid = 1905, droprate = 1000},
         },
     },
     -- central temenos floor 1
-    [151] =
+    [1303] =
     {
         {
             {itemid = 1875, droprate = 1000},
@@ -740,7 +1104,7 @@ local loot =
         },
     },
     -- central temenos floor 2
-    [152] =
+    [1304] =
     {
         {
             {itemid = 1875, droprate = 1000},
@@ -765,10 +1129,10 @@ local loot =
         },
         {
             {itemid = 1944, droprate = 250},
-            {itemid = 1936, droprate = 94},
-            {itemid = 1950, droprate = 63},
+            {itemid = 1936, droprate =  94},
+            {itemid = 1950, droprate =  63},
             {itemid = 1942, droprate = 125},
-            {itemid = 1946, droprate = 63},
+            {itemid = 1946, droprate =  63},
             {itemid = 2660, droprate = 281},
             {itemid = 2714, droprate = 125},
         },
@@ -777,7 +1141,7 @@ local loot =
         },
     },
     -- central temenos floor 3
-    [153] =
+    [1305]=
     {
         {
             {itemid = 1875, droprate = 1000},
@@ -801,7 +1165,7 @@ local loot =
             {itemid = 1875, droprate = 1000},
         },
         {
-            {itemid = 1934, droprate = 53},
+            {itemid = 1934, droprate =  53},
             {itemid = 1940, droprate = 132},
             {itemid = 1954, droprate = 105},
             {itemid = 1932, droprate = 211},
@@ -815,241 +1179,279 @@ local loot =
         },
     },
     -- central temenos floor 4
-    [154] =
-    {
+    [1306] = {
+        [1] =
         {
-            {itemid = 1875, droprate = 1000},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1920, droprate = 659},
+                {itemid = 1924, droprate = 394},
+                {itemid = 1923, droprate = 388},
+                {itemid = 1922, droprate = 404},
+            },
+            {
+                {itemid = 1924, droprate = 394},
+                {itemid = 1922, droprate = 402},
+                {itemid = 1920, droprate = 659},
+                {itemid = 1923, droprate = 383},
+            },
+            {
+                {itemid = 1921, droprate = 265},
+                {itemid =    0, droprate = 735},
+            },
         },
+    -- central temenos floor 4 side loot
+        [2] =
         {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1920, droprate = 659},
-            {itemid = 1924, droprate = 394},
-            {itemid = 1923, droprate = 388},
-            {itemid = 1922, droprate = 404},
-        },
-        {
-            {itemid = 1924, droprate = 394},
-            {itemid = 1922, droprate = 402},
-            {itemid = 1920, droprate = 659},
-            {itemid = 1923, droprate = 383},
-        },
-        {
-            {itemid = 1921, droprate = 265},
-            {itemid = 1875, droprate = 100},
-        },
-    },
-    -- central temenos floor 5
-    [155] =
-    {
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1875, droprate = 1000},
-        },
-        {
-            {itemid = 1934, droprate = 200},
-            {itemid = 1930, droprate = 200},
-            {itemid = 1958, droprate = 200},
-            {itemid = 2658, droprate = 400},
-            {itemid = 1940, droprate = 200},
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1875, droprate = 1000},
+            },
+            {
+                {itemid = 1934, droprate = 200},
+                {itemid = 1930, droprate = 200},
+                {itemid = 1958, droprate = 200},
+                {itemid = 2658, droprate = 400},
+                {itemid = 1940, droprate = 200},
+            },
         },
     },
 }
 
------------------------------------
--- onTrade Action
------------------------------------
+function onTrade(player, npc, trade)
+end
 
-function onTrade(player,npc,trade)
-end;
-
------------------------------------
--- onTrigger Action
------------------------------------
-
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if not battlefield then
         return
     end
-    local  CofferID = npc:getID();
-    local  CofferType=0;
-    local  lootID=0;
-    local  InstanceRegion=0;
-    local  addtime=0;
-    local  DespawnOtherCoffer=false;
-    local  MimicID=0;
-    local X = npc:getXPos();
-    local Y = npc:getYPos();
-    local Z = npc:getZPos();
-
-    for coffer = 1,#ARMOURY_CRATES_LIST_TEMENOS,2 do
-        if (ARMOURY_CRATES_LIST_TEMENOS[coffer] == CofferID-16928768) then
-            CofferType=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][1];
-            InstanceRegion=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][2];
-            addtime=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][3];
-            DespawnOtherCoffer=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][4];
-            MimicID=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][5];
-            lootID=ARMOURY_CRATES_LIST_TEMENOS[coffer+1][6];
-        end
-    end
-    local coffer = CofferID-16928768;
-
-    if (CofferType == cTIME) then
-        tpz.battlefield.ExtendTimeLimit(battlefield, addtime)
-    elseif (CofferType == cITEM) then
-        if (InstanceRegion == Central_Temenos_4th_Floor and coffer~=79) then
-            local randmimic = math.random(1,24)
-            if ( randmimic < 19) then
-                local MimicList={16928986,16928987,16928988,16928989,16928990,16928991,16928992,16928993,16928994,16928995,16928996,16928997,16928998,16928999,16929000,16929001,16929002,16929003};
-                GetMobByID(MimicList[randmimic]):setSpawn(X,Y,Z);
-                SpawnMob(MimicList[randmimic]):setPos(X,Y,Z);
-                GetMobByID(MimicList[randmimic]):updateClaim(player);
-            else
-                battlefield:setLocalVar("loot", 1)
-                battlefield:spawnLoot(npc)
-                tpz.battlefield.HandleLootRolls(battlefield, loot[lootID], nil, npc)
-            end
-            -- despawn les coffer du meme groupe
-            for coffer = 1, #ARMOURY_CRATES_LIST_TEMENOS, 2 do
-                if (ARMOURY_CRATES_LIST_TEMENOS[coffer+1][5] == MimicID) then
-                    GetNPCByID(16928768+ARMOURY_CRATES_LIST_TEMENOS[coffer]):setStatus(tpz.status.DISAPPEAR);
+    local crateID = npc:getID()
+    local model = npc:getModelId()
+    local X = npc:getXPos()
+    local Y = npc:getYPos()
+    local Z = npc:getZPos()
+    local bfid = battlefield:getID()
+    local hold = false
+    if npc:getLocalVar("open") == 0 then
+        switch (bfid): caseof 
+        {
+            [1298] = function() -- Temenos West Crate Handling
+                if crateID ~= ID.npc.TEMENOS_W_CRATE[7] then
+                    for i = 1, 6 do
+                        for j = 0, 2 do
+                            if crateID == ID.npc.TEMENOS_W_CRATE[i]+j then
+                                if model == 960 then
+                                    tpz.battlefield.HealPlayers(battlefield)
+                                elseif model == 961 then
+                                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                elseif model == 962 then
+                                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.TEMENOS)
+                                end
+                            end
+                        end
+                    end
+                else
+                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][7], nil, npc)
+                    battlefield:setLocalVar("cutsceneTimer", 10)
+                    battlefield:setLocalVar("lootSeen", 1)
                 end
-            end
-        else
-            battlefield:setLocalVar("loot", 1)
-            battlefield:spawnLoot(npc)
-            tpz.battlefield.HandleLootRolls(battlefield, loot[lootID], nil, npc)
-        end
-    elseif (CofferType == cRESTORE) then
-        tpz.battlefield.HealPlayers(battlefield)
-    elseif (CofferType == cMIMIC) then
-        if (coffer == 284) then
-            GetMobByID(16928844):setSpawn(X,Y,Z);
-            SpawnMob(16928844):setPos(X,Y,Z)
-            GetMobByID(16928844):updateClaim(player);
-        elseif (coffer == 321) then
-            GetMobByID(16928853):setSpawn(X,Y,Z);
-            SpawnMob(16928853):setPos(X,Y,Z);
-            GetMobByID(16928853):updateClaim(player);
-        elseif (coffer == 348) then
-            GetMobByID(16928862):setSpawn(X,Y,Z);
-            SpawnMob(16928862):setPos(X,Y,Z);
-            GetMobByID(16928862):updateClaim(player);
-        elseif (coffer == 360) then
-            GetMobByID(16928871):setSpawn(X,Y,Z);
-            SpawnMob(16928871):setPos(X,Y,Z);
-            GetMobByID(16928871):updateClaim(player);
-        elseif (coffer == 393) then
-            GetMobByID(16928880):setSpawn(X,Y,Z);
-            SpawnMob(16928880):setPos(X,Y,Z);
-            GetMobByID(16928880):updateClaim(player);
-        elseif (coffer == 127) then
-            GetMobByID(16928889):setSpawn(X,Y,Z);
-            SpawnMob(16928889):setPos(X,Y,Z);
-            GetMobByID(16928889):updateClaim(player);
-        elseif (coffer == 123) then
-            GetMobByID(16928894):setSpawn(X,Y,Z);
-            SpawnMob(16928894):setPos(X,Y,Z);
-            GetMobByID(16928894):updateClaim(player);
+            end,
+            [1299] = function() -- Temenos North Crate Handling
+                if crateID ~= ID.npc.TEMENOS_N_CRATE[7] then
+                    for i = 1, 6 do
+                        for j = 0, 2 do
+                            if crateID == ID.npc.TEMENOS_N_CRATE[i]+j then
+                                if j ~= 0 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]):setStatus(tpz.status.DISAPPEAR) end
+                                if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+1):setStatus(tpz.status.DISAPPEAR) end
+                                if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+2):setStatus(tpz.status.DISAPPEAR) end
+                                if model == 960 then
+                                    tpz.battlefield.HealPlayers(battlefield)
+                                elseif model == 961 then
+                                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                elseif model == 962 then
+                                    tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.TEMENOS)
+                                end
+                            end
+                        end
+                    end
+                else
+                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][7], nil, npc)
+                    battlefield:setLocalVar("cutsceneTimer", 10)
+                    battlefield:setLocalVar("lootSeen", 1)
+                end
+            end,
+            [1300] = function() -- Temenos East Crate Handling
+                local spawnMimic = math.random(0,1) == 1
+                if crateID ~= ID.npc.TEMENOS_E_CRATE[7] and crateID ~= ID.npc.TEMENOS_E_CRATE[7]+1 then
+                    for i = 1, 6 do
+                        local mask = battlefield:getLocalVar("crateMaskF"..i)
+                        for j = 0, 3 do
+                            if crateID == ID.npc.TEMENOS_E_CRATE[i]+j then
+                                if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):isDead() then
+                                    battlefield:setLocalVar("crateOpenedF"..i, 1)
+                                    if model ~= 961 or not (mask > 7 and spawnMimic) then
+                                        if j ~= 0 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]):setStatus(tpz.status.DISAPPEAR) end
+                                        if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+1):setStatus(tpz.status.DISAPPEAR) end
+                                        if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+2):setStatus(tpz.status.DISAPPEAR) end
+                                        if j ~= 3 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+3):setStatus(tpz.status.DISAPPEAR) end
+                                    end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+1):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+1) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+2):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+2) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+3):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+3) end
+                                    if model == 960 then
+                                        tpz.battlefield.HealPlayers(battlefield)
+                                        tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                    elseif model == 961 then
+                                        if mask > 7 and spawnMimic then
+                                            battlefield:setLocalVar("crateMaskF"..i, mask-8)
+                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):setSpawn(X, Y, Z)
+                                            SpawnMob(ID.mob.TEMENOS_E_MOB[i]+4):setPos(X, Y, Z)
+                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):updateClaim(player)
+                                        else
+                                            tpz.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                            tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                        end
+                                    elseif model == 962 then
+                                        tpz.limbus.extendTimeLimit(battlefield, 15, tpz.zone.TEMENOS)
+                                        tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                    end
+                                else
+                                    hold = true
+                                    player:messageSpecial(ID.text.CANNOT_OPEN_CHEST)
+                                end
+                            end
+                        end
+                    end
+                else
+                    if GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):isDead() then
+                        local otherCrate = ID.npc.TEMENOS_E_CRATE[7]
+                        if crateID % 2 == 0 then otherCrate = otherCrate + 1 end
+                        if spawnMimic and battlefield:getLocalVar("otherCrate") == 0 then
+                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):setSpawn(X, Y, Z)
+                            SpawnMob(ID.mob.TEMENOS_E_MOB[7]+2):setPos(X, Y, Z)
+                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):updateClaim(player)
+                            battlefield:setLocalVar("otherCrate", otherCrate)
+                        else
+                            GetNPCByID(otherCrate):setStatus(tpz.status.DISAPPEAR)
+                            tpz.limbus.handleLootRolls(battlefield, loot[bfid][7], nil, npc)
+                            battlefield:setLocalVar("cutsceneTimer", 10)
+                            battlefield:setLocalVar("lootSeen", 1)
+                        end
+                    else
+                        hold = true
+                        player:messageSpecial(ID.text.CANNOT_OPEN_CHEST)
+                    end
+                end
+            end,
+            [1301] = function() -- Temenos Central Basement Crate Handling
+                tpz.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
+                battlefield:setLocalVar("cutsceneTimer", 10)
+                battlefield:setLocalVar("lootSeen", 1)
+            end,
+            [1303] = function() -- Temenos Central F1 Crate Handling
+                tpz.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
+                battlefield:setLocalVar("cutsceneTimer", 10)
+                battlefield:setLocalVar("lootSeen", 1)
+            end,
+            [1304] = function() -- Temenos Central F2 Crate Handling
+                tpz.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
+                battlefield:setLocalVar("cutsceneTimer", 10)
+                battlefield:setLocalVar("lootSeen", 1)
+            end,
+            [1305] = function() -- Temenos Central F3 Crate Handling
+                tpz.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
+                battlefield:setLocalVar("cutsceneTimer", 10)
+                battlefield:setLocalVar("lootSeen", 1)
+            end,
+            [1306] = function() -- Temenos Central F4 Crate Handling
+                if crateID ~= ID.npc.TEMENOS_C_CRATE[4][1] then
+                    local randmimic = math.random(1, 24)
+                    if randmimic < 17 then
+                        local MimicList =
+                        {
+                            ID.mob.TEMENOS_C_MOB[4]+20, ID.mob.TEMENOS_C_MOB[4]+21,
+                            ID.mob.TEMENOS_C_MOB[4]+22, ID.mob.TEMENOS_C_MOB[4]+25,
+                            ID.mob.TEMENOS_C_MOB[4]+26, ID.mob.TEMENOS_C_MOB[4]+27,
+                            ID.mob.TEMENOS_C_MOB[4]+28, ID.mob.TEMENOS_C_MOB[4]+29,
+                            ID.mob.TEMENOS_C_MOB[4]+30, ID.mob.TEMENOS_C_MOB[4]+31,
+                            ID.mob.TEMENOS_C_MOB[4]+32, ID.mob.TEMENOS_C_MOB[4]+33,
+                            ID.mob.TEMENOS_C_MOB[4]+34, ID.mob.TEMENOS_C_MOB[4]+35,
+                            ID.mob.TEMENOS_C_MOB[4]+36, ID.mob.TEMENOS_C_MOB[4]+37,
+                        }
+                        GetMobByID(MimicList[randmimic]):setSpawn(X, Y, Z)
+                        SpawnMob(MimicList[randmimic]):setPos(X, Y, Z)
+                        GetMobByID(MimicList[randmimic]):updateClaim(player)
+                    else
+                        tpz.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
+                    end
+                    for i = ID.npc.TEMENOS_C_CRATE[4][1]+2, ID.npc.TEMENOS_C_CRATE[4][1]+20 do
+                        if ID.npc.TEMENOS_C_CRATE[4][crateID] == ID.npc.TEMENOS_C_CRATE[4][i] then
+                            if crateID ~= i then
+                                GetNPCByID(i):setStatus(tpz.status.DISAPPEAR)
+                            end
+                        end
+                    end
+                else
+                    tpz.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
+                    battlefield:setLocalVar("cutsceneTimer", 10)
+                    battlefield:setLocalVar("lootSeen", 1)
+                end
+            end,
+        }
+        if not hold then
+            npc:entityAnimationPacket("open")
+            npc:setLocalVar("open", 1)
+            npc:timer(15000, function(npc)
+                npc:entityAnimationPacket("kesu")
+            end)
+            npc:timer(16000, function(npc)
+                npc:setStatus(tpz.status.DISAPPEAR)
+                npc:timer(500, function(mob)
+                    npc:setLocalVar("open", 0)
+                end)
+            end)
         end
     end
-    if (DespawnOtherCoffer == true) then
-        HideArmouryCrates(InstanceRegion,TEMENOS);
-        if (InstanceRegion==Temenos_Eastern_Tower) then --despawn mob of the current floor
-            if (coffer == 173 or coffer == 215 or coffer == 284 or coffer == 40) then
-                --floor 1
-                if (GetMobAction(16928840) > 0) then DespawnMob(16928840); end
-                if (GetMobAction(16928841) > 0) then DespawnMob(16928841); end
-                if (GetMobAction(16928842) > 0) then DespawnMob(16928842); end
-                if (GetMobAction(16928843) > 0) then DespawnMob(16928843); end
-                GetNPCByID(16929228):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 174 or coffer == 216 or coffer == 321 or coffer == 45) then
-                --floor 2
-                if (GetMobAction(16928849) > 0) then DespawnMob(16928849); end
-                if (GetMobAction(16928850) > 0) then DespawnMob(16928850); end
-                if (GetMobAction(16928851) > 0) then DespawnMob(16928851); end
-                if (GetMobAction(16928852) > 0) then DespawnMob(16928852); end
-                GetNPCByID(16929229):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 181 or coffer == 217 or coffer == 348 or coffer == 46) then
-                --floor 3
-                if (GetMobAction(16928858) > 0) then DespawnMob(16928858); end
-                if (GetMobAction(16928859) > 0) then DespawnMob(16928859); end
-                if (GetMobAction(16928860) > 0) then DespawnMob(16928860); end
-                if (GetMobAction(16928861) > 0) then DespawnMob(16928861); end
-                GetNPCByID(16929230):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 182 or coffer == 236 or coffer == 360 or coffer == 47) then
-                --floor 4
-                if (GetMobAction(16928867) > 0) then DespawnMob(16928867); end
-                if (GetMobAction(16928868) > 0) then DespawnMob(16928868); end
-                if (GetMobAction(16928869) > 0) then DespawnMob(16928869); end
-                if (GetMobAction(16928870) > 0) then DespawnMob(16928870); end
-                GetNPCByID(16929231):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 183 or coffer == 261 or coffer == 393 or coffer == 68) then
-                --floor 5
-                if (GetMobAction(16928876) > 0) then DespawnMob(16928876); end
-                if (GetMobAction(16928877) > 0) then DespawnMob(16928877); end
-                if (GetMobAction(16928878) > 0) then DespawnMob(16928878); end
-                if (GetMobAction(16928879) > 0) then DespawnMob(16928879); end
-                GetNPCByID(16929232):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 277 or coffer == 190 or coffer ==  127 or coffer == 69) then
-                --floor 6
-                if (GetMobAction(16928885) > 0) then DespawnMob(16928885); end
-                if (GetMobAction(16928886) > 0) then DespawnMob(16928886); end
-                if (GetMobAction(16928887) > 0) then DespawnMob(16928887); end
-                if (GetMobAction(16928888) > 0) then DespawnMob(16928888); end
-                GetNPCByID(16929233):setStatus(tpz.status.NORMAL);
-            elseif (coffer == 70 or coffer == 123) then
-                --floor 7
-                if (GetMobAction(16928892) > 0) then DespawnMob(16928892); end
-                if (GetMobAction(16928893) > 0) then DespawnMob(16928893); end
-                GetNPCByID(16929234):setStatus(tpz.status.NORMAL);
-            end
-        end
-    end
-    npc:setStatus(tpz.status.DISAPPEAR);
-end;
+end
 
------------------------------------
--- onEventUpdate
------------------------------------
+function onEventUpdate(player, csid, option)
+end
 
-function onEventUpdate(player,csid,option)
-end;
-
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -5,17 +5,13 @@
 -- !pos 70 0 39 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    end
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         12808, 11340, 1,    -- Chain Hose
@@ -24,6 +20,7 @@ function onTrigger(player,npc)
         12292,  4482, 2,    -- Mahogany Shield
         12826, 16552, 2,    -- Studded Trousers
         12954, 10054, 2,    -- Studded Boots
+        12289,   110, 3,    -- Lauan Shield
         12290,   544, 3,    -- Maple Shield
         12832,   187, 3,    -- Bronze Subligar
         12833,  1800, 3,    -- Brass Subligar
@@ -37,8 +34,8 @@ function onTrigger(player,npc)
     tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

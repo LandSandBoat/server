@@ -538,6 +538,16 @@ enum class Mod
     SUBLIMATION_BONUS         = 401, //
     GRIMOIRE_SPELLCASTING     = 489, // "Grimoire: Reduces spellcasting time" bonus
 
+    // Geo
+    CARDINAL_CHANT            = 959,
+    INDI_DURATION             = 960,
+    GEOMANCY                  = 961,
+    WIDENED_COMPASS           = 962,
+    MENDING_HALATION          = 968,
+    RADIAL_ARCANA             = 969,
+    CURATIVE_RECANTATION      = 970,
+    PRIMEVAL_ZEAL             = 971,
+
     ENSPELL                   = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG               = 343, // stores the base damage of the enspell before reductions
     ENSPELL_DMG_BONUS         = 432, //
@@ -548,6 +558,10 @@ enum class Mod
     TP_BONUS                  = 345, //
     SAVETP                    = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP               = 944, // Conserve TP trait, random chance between 10 and 200 TP
+
+    // Rune Fencer
+
+    INQUARTATA                = 963, // increases parry rate by a flat %.
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG         = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -786,9 +800,8 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 958, // stuff
-    // SPARE = 959, // stuff
-    // SPARE = 960, // stuff
+    // SPARE = 964, // stuff
+    // SPARE = 965, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

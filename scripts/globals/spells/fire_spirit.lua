@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     local result = 0
     if (caster:hasPet()) then
         result = tpz.msg.basic.ALREADY_HAS_A_PET
@@ -21,8 +21,7 @@ function onMagicCastingCheck(caster,target,spell)
     return result
 end
 
-function onSpellCast(caster,target,spell)
-    caster:spawnPet(tpz.pet.id.FIRE_SPIRIT)
-
+function onSpellCast(caster, target, spell)
+    tpz.pet.spawnPet(caster, tpz.pet.id.FIRE_SPIRIT)
     return 0
 end

@@ -23,7 +23,7 @@ function onAbilityCheck(player, target, ability)
     if player:getFreeSlotsCount() == 0 then
         return tpz.msg.basic.FULL_INVENTORY, 0
     end
-    
+
     return 0, 0
 end
 
@@ -31,7 +31,7 @@ function onUseAbility(player, target, ability, action)
     local level = player:getMainLvl() -- Can only reach THF77 as main job
     local despoilMod = player:getMod(tpz.mod.DESPOIL)
     local despoilChance = 50 + despoilMod * 2 + level - target:getMainLvl() -- Same math as Steal
-    
+
     local stolen = target:getDespoilItem()
     if target:isMob() and math.random(100) < despoilChance and stolen then
         player:addItem(stolen)
@@ -49,7 +49,7 @@ function onUseAbility(player, target, ability, action)
         action:animation(target:getID(), 182)
         ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed
     end
-    
+
     return stolen
 end
 
@@ -82,6 +82,6 @@ function processDebuff(player, target, ability, debuff)
         end
         power = utils.clamp(power, 750, 3000)
     end
-    
+
     return power
 end

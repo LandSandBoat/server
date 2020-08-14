@@ -2,6 +2,7 @@
 -- Area: Konschtat Highlands
 --   NM: Haty
 -----------------------------------
+require("scripts/quests/tutorial")
 
 function onMobRoam(mob)
     local hour = VanadielHour()
@@ -11,6 +12,7 @@ function onMobRoam(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

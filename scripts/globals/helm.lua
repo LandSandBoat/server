@@ -1307,7 +1307,7 @@ local helmInfo =
 -- colored rocks. do not change this order!
 -------------------------------------------------
 
-local rocks = {769,771,770,772,773,774,776,775}
+local rocks = {769, 771, 770, 772, 773, 774, 776, 775}
 
 -------------------------------------------------
 -- local functions
@@ -1424,7 +1424,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- quest stuff
         if
             helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
             not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
             broke ~= 1 and
             zoneId == tpz.zone.WAJAOM_WOODLANDS
@@ -1433,7 +1433,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         end
 
         local amkChance = 20
-        if 
+        if
             player:getCurrentMission(AMK) == tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
             broke ~= 1
         then

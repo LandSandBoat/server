@@ -5,17 +5,13 @@
 -- !pos -139 -6 46 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    end
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         625,  79, 1,    -- Apple Vinegar
@@ -34,8 +30,8 @@ function onTrigger(player,npc)
     tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

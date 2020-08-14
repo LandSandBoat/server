@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill, summoner)
@@ -40,13 +40,13 @@ function onPetAbility(target, pet, skill, summoner)
     target:delStatusEffect(tpz.effect.MND_BOOST)
     target:delStatusEffect(tpz.effect.CHR_BOOST)
 
-    target:addStatusEffect(tpz.effect.STR_BOOST,buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.DEX_BOOST,buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.VIT_BOOST,buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.AGI_BOOST,8-buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.INT_BOOST,8-buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.MND_BOOST,8-buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.CHR_BOOST,8-buffvalue,0,duration)
+    target:addStatusEffect(tpz.effect.STR_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.DEX_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.VIT_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.AGI_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.INT_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.MND_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.CHR_BOOST, 8-buffvalue, 0, duration)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0
 end

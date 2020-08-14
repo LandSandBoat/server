@@ -19,31 +19,33 @@ function onInitialize(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
+
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    end
+
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+        cs = 30036
+    end
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if OPENING_CUTSCENE_ENABLE == 1 then
+        if NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1
         end
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
+    -- ENTER THE TALEKEEPER
+    elseif prevZone == tpz.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 5 then
+        cs = 176
     end
 
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) - 75
+        local position = math.random(1, 5) - 75
         player:setPos(116, 0.99, position, 127)
-        if player:getMainJob() ~= player:getCharVar("PlayerMainJob") then
-            cs = 30004
-        end
-        player:setCharVar("PlayerMainJob", 0)
-    end
-
-    -- ENTER THE TALEKEEPER
-    if prevZone == tpz.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 5 then
-        cs = 176
     end
 
     return cs
@@ -53,19 +55,22 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
-    elseif csid == 30004 and option == 0 then
-        player:setHomePoint()
-        player:messageSpecial(ID.text.HOMEPOINT_SET)
     elseif csid == 176 then
         finishMissionTimeline(player, 1, csid, option)
+    elseif csid == 30035 then
+        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

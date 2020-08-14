@@ -25,11 +25,11 @@ zones[tpz.zone.ATTOHWA_CHASM] =
     },
     mob =
     {
-        AMBUSHER_ANTLION_PH = 
+        AMBUSHER_ANTLION_PH =
         {
             [16806171] = 16806249, -- -433.309 -4.3 113.841
         },
-        CITIPATI_PH         = 
+        CITIPATI_PH         =
         {
             [16806155] = 16806162, -- -328.973 -12.876 67.481
             [16806158] = 16806162, -- -398.931 -4.536 79.640

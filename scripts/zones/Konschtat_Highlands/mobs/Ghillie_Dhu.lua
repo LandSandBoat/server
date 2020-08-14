@@ -2,10 +2,12 @@
 -- Area: Konschtat Highlands
 --   NM: Ghillie Dhu
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobInitialize(mob)
@@ -37,8 +39,10 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 204)
     -- I think he still counts for the FoV page? Most NM's do not though.
     tpz.regime.checkRegime(player, mob, 81, 1, tpz.regime.type.FIELDS)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

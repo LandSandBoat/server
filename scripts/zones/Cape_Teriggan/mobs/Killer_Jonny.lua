@@ -2,6 +2,7 @@
 -- Area: Cape Teriggan
 --   NM: Killer Jonny
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -15,6 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 407)
 end
 
 function onMobDespawn(mob)

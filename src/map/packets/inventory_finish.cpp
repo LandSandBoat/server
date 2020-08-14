@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -23,7 +23,7 @@
 
 #include "inventory_finish.h"
 
-CInventoryFinishPacket::CInventoryFinishPacket() 
+CInventoryFinishPacket::CInventoryFinishPacket()
 {
 	this->type = 0x1D;
 	this->size = 0x04;

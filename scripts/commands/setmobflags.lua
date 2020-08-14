@@ -8,37 +8,37 @@ cmdprops =
 {
     permission = 1,
     parameters = "si"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!setmobflags <flags> {mob ID}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!setmobflags <flags> {mob ID}")
+end
 
 function onTrigger(player, flags, target)
     -- validate flags
     if (flags == nil) then
-        error(player, "You must supply a flags value.");
-        return;
+        error(player, "You must supply a flags value.")
+        return
     end
-    
+
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player:getCursorTarget();
+        targ = player:getCursorTarget()
         if (targ == nil or not targ:isMob()) then
-            error(player, "You must either supply a mob ID or target a mob.");
-            return;
+            error(player, "You must either supply a mob ID or target a mob.")
+            return
         end
     else
-        targ = GetMobByID(target);
+        targ = GetMobByID(target)
         if (targ == nil) then
-            error(player, "Invalid mob ID.");
-            return;
+            error(player, "Invalid mob ID.")
+            return
         end
     end
 
     -- set flags
-    player:setMobFlags(flags, targ:getID());
-    player:PrintToPlayer( string.format("Set %s %i flags to %i.", targ:getName(), targ:getID(), flags) );
-end;
+    player:setMobFlags(flags, targ:getID())
+    player:PrintToPlayer( string.format("Set %s %i flags to %i.", targ:getName(), targ:getID(), flags) )
+end

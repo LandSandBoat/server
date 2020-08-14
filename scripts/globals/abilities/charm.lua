@@ -19,28 +19,32 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    if (player:getPet() ~= nil) then
-        return tpz.msg.basic.ALREADY_HAS_A_PET,0
-    elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
-        return tpz.msg.basic.THAT_SOMEONES_PET,0
+function onAbilityCheck(player, target, ability)
+    if player:getPet() ~= nil then
+        return tpz.msg.basic.ALREADY_HAS_A_PET, 0
+    elseif target:getMaster() ~= nil and target:getMaster():isPC() then
+        return tpz.msg.basic.THAT_SOMEONES_PET, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(player,target,ability)
-    local Tamed = false
+function onUseAbility(player, target, ability)
+    if target:isPC() then
+        ability:setMsg(tpz.msg.basic.NO_EFFECT)
+    else
+        local Tamed = false
 
-    if (player:getLocalVar("Tamed_Mob") == target:getID())then
-        player:addMod(tpz.mod.CHARM_CHANCE, 10)
-        Tamed = true
-    end
+        if player:getLocalVar("Tamed_Mob") == target:getID() then
+            player:addMod(tpz.mod.CHARM_CHANCE, 10)
+            Tamed = true
+        end
 
-    player:charmPet(target)
+        player:charmPet(target)
 
-    if (Tamed == true) then
-        player:delMod(tpz.mod.CHARM_CHANCE, 10)
-        player:setLocalVar("Tamed_Mob",0)
+        if Tamed then
+            player:delMod(tpz.mod.CHARM_CHANCE, 10)
+            player:setLocalVar("Tamed_Mob", 0)
+        end
     end
 end

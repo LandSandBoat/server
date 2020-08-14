@@ -4,26 +4,13 @@
 -- Unlocks leg and feet equipment
 -----------------------------------------
 require("scripts/globals/status")
+require("scripts/globals/salvage")
 -----------------------------------------
 
 function onItemCheck(target)
-    local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
-    if (encumbrance) then
-        local power = encumbrance:getPower()
-        if bit.band(power, 0x0180) > 0 then
-            return 0
-        end
-    end
-    return -1
+    return salvageUtil.onCellItemCheck(target, tpz.effect.ENCUMBRANCE_I, 0x0180)
 end
 
 function onItemUse(target)
-    local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
-    local power = encumbrance:getPower()
-    local newpower = bit.band(power, bit.bnot(0x0180))
-    target:delStatusEffectSilent(tpz.effect.ENCUMBRANCE_I)
-    if (newpower > 0) then
-        target:addStatusEffectEx(tpz.effect.ENCUMBRANCE_I, tpz.effect.ENCUMBRANCE_I, newpower, 0, 0)
-    end
-    target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 4)
+    return salvageUtil.onCellItemUse(target, tpz.effect.ENCUMBRANCE_I, 0x0180, 4)
 end

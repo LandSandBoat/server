@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local allNewC2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
     local legendaryPlanB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
     local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
@@ -44,7 +44,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local allNewC2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
     local aGreetingCardian = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
     local aGreetingCardianCS = player:getCharVar("AGreetingCardian_Event")
@@ -91,10 +91,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- THE ALL NEW C-2000
     if csid == 285 and option ~= 2 then  -- option 2 is declining the quest for the second question
         player:addQuest(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)

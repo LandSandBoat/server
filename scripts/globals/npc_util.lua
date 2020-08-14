@@ -189,8 +189,8 @@ end
     Examples of valid items parameter:
         640                 -- copper ore x1
         { 640, 641 }        -- copper ore x1, tin ore x1
-        { {640,2} }         -- copper ore x2
-        { {640,2}, 641 }    -- copper ore x2, tin ore x1
+        { {640, 2} }         -- copper ore x2
+        { {640, 2}, 641 }    -- copper ore x2, tin ore x1
 ******************************************************************************* --]]
 function npcUtil.giveItem(player, items)
     local ID = zones[player:getZoneID()]
@@ -200,13 +200,13 @@ function npcUtil.giveItem(player, items)
     local itemId
     local itemQty
     if type(items) == "number" then
-        table.insert(givenItems, {items,1})
+        table.insert(givenItems, {items, 1})
     elseif type(items) == "table" then
         for _, v in pairs(items) do
             if type(v) == "number" then
-                table.insert(givenItems, {v,1})
+                table.insert(givenItems, {v, 1})
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
-                table.insert(givenItems, {v[1],v[2]})
+                table.insert(givenItems, {v[1], v[2]})
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
                 return false
@@ -221,14 +221,67 @@ function npcUtil.giveItem(player, items)
     end
 
     -- give items to player
+    local messagedItems = {}
     for _, v in pairs(givenItems) do
         if player:addItem(v[1], v[2], true) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+            if not messagedItems[v[1]] then
+                player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+            end
+            messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             return false
         end
     end
+    return true
+end
+
+--[[ *******************************************************************************
+    Give currency to a player.
+    Message is displayed showing currency obtained.
+
+    Examples of valid parameters:
+        gil, 500
+        bayld, 1000
+******************************************************************************* --]]
+function npcUtil.giveCurrency(player, currency, amount)
+    local ID = zones[player:getZoneID()]
+
+    if (not type(currency) == "string") or (not type(amount) == "number") then
+        print(string.format("ERROR: invalid parameter given to npcUtil.giveCurrency in zone %s.", player:getZoneName()))
+        return false
+    end
+
+    currency = string.lower(currency)
+
+    local currency_types =
+    {
+        ["gil"]   = {"GIL_OBTAINED", GIL_RATE},
+        ["bayld"] = {"BAYLD_OBTAINED", BAYLD_RATE}
+    }
+
+    local currency_type = currency_types[currency]
+
+    if not currency_type then
+        print(string.format("ERROR: invalid currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
+        return false
+    end
+
+    local message_id = ID.text[currency_type[1]]
+    if not message_id then
+        print(string.format("ERROR: no message ID defined for currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
+        return false
+    end
+
+    amount = amount * currency_type[2]
+
+    if currency == "gil" then
+        player:addGil(amount)
+    else
+        player:addCurrency(currency, amount)
+    end
+    player:messageSpecial(message_id, amount)
+
     return true
 end
 
@@ -259,7 +312,7 @@ function npcUtil.giveKeyItem(player, keyitems)
     for _, v in pairs(givenKeyItems) do
         if not player:hasKeyItem(v) then
             player:addKeyItem(v)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,v)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
         end
     end
     return true
@@ -272,7 +325,7 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.completeQuest(player, SANDORIA, ROSEL_THE_ARMORER, {
-            item = { {640,2}, 641 },    -- see npcUtil.giveItem for formats
+            item = { {640, 2}, 641 },    -- see npcUtil.giveItem for formats
             keyItem = tpz.ki.ZERUHN_REPORT,    -- see npcUtil.giveKeyItem for formats
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
@@ -340,7 +393,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
 
     -- successfully complete the quest
-    player:completeQuest(area,quest)
+    player:completeQuest(area, quest)
     return true
 end
 
@@ -353,8 +406,8 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640,2} }             -- copper ore x2
-        { {640,2}, 641 }        -- copper ore x2, tin ore x1
+        { {640, 2} }             -- copper ore x2
+        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
         { 640, {"gil", 200} }   -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHas(trade, items, exact)
@@ -421,7 +474,7 @@ function npcUtil.tradeHas(trade, items, exact)
 
     -- confirm items
     for k, v in pairs(neededItems) do
-        trade:confirmItem(k,v)
+        trade:confirmItem(k, v)
     end
     return true
 end
@@ -435,8 +488,8 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640,2} }             -- copper ore x2
-        { {640,2}, 641 }        -- copper ore x2, tin ore x1
+        { {640, 2} }             -- copper ore x2
+        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
         { 640, {"gil", 200} }   -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHasExactly(trade, items)

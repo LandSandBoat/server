@@ -172,7 +172,7 @@ public:
     int32 setTeleportMenu(lua_State*);       // Set favorites or menu layout preferences for homepoints or survival guides
     int32 getTeleportMenu(lua_State*);       // Get favorites and menu layout preferences
     int32 setHomePoint(lua_State*);          // Sets character's homepoint
-    
+
     int32 resetPlayer(lua_State*);           // if player is stuck, GM command @resetPlayer name
 
     int32 goToEntity(lua_State*);            // Warps self to NPC or Mob; works across multiple game servers
@@ -192,6 +192,7 @@ public:
     int32 createShop(lua_State*);            // Prepare the container for work of shop ??
     int32 addShopItem(lua_State*);           // Adds item to shop container (16 max)
     int32 getCurrentGPItem(lua_State*);      // Gets current GP item id and max points
+    int32 breakLinkshell(lua_State*);        // Breaks all pearls/sacks
 
     // Trading
     int32 getContainerSize(lua_State*);      // Gets the current capacity of a container
@@ -267,9 +268,11 @@ public:
     int32 changeJob(lua_State*);            // changes the job of a char (testing only!)
     int32 changesJob(lua_State*);           // changes the sub job of a char (testing only!)
     int32 unlockJob(lua_State*);            // Unlocks a job for the entity, sets job level to 1
+    int32 hasJob(lua_State*);               // Check to see if JOBTYPE is unlocked for a character
 
     int32 getMainLvl(lua_State*);           // Gets Entity Main Job Level
     int32 getSubLvl(lua_State*);            // Get Entity Sub Job Level
+    int32 getJobLevel(lua_State*);          // Gets character job level for specified JOBTYPE
     int32 setLevel(lua_State*);             // sets the character's level
     int32 setsLevel(lua_State*);            // sets the character's level
     int32 levelCap(lua_State*);             // genkai
@@ -304,6 +307,8 @@ public:
     int32 getCurrentMission(lua_State*);    // Gets the current mission
     int32 hasCompletedMission(lua_State*);  // Checks if mission has been completed
     int32 completeMission(lua_State*);      // Complete Mission
+    int32 setMissionLogEx(lua_State*);      // Sets mission log extra data to correctly track progress in branching missions.
+    int32 getMissionLogEx(lua_State*);      // Gets mission log extra data.
 
     int32 addAssault(lua_State*);           // Add Mission
     int32 delAssault(lua_State*);           // Delete Mission from Mission Log
@@ -479,6 +484,8 @@ public:
 
     int32 recalculateStats(lua_State* L);
     int32 checkImbuedItems(lua_State* L);
+
+    int32 isDualWielding(lua_State*);          // Checks if the battle entity is dual wielding
 
     // Enmity
     int32 getCE(lua_State*);                   //gets current CE the mob has towards the player

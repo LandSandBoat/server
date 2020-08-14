@@ -254,7 +254,7 @@ local additionalEffects =
         msg = tpz.msg.basic.ADD_EFFECT_MP_DRAIN,
         mod = tpz.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
-        code = function(mob, target, power) local mp = math.min(power, target:getMP()); target:delMP(mp); mob:addMP(mp) end,
+        code = function(mob, target, power) local mp = math.min(power, target:getMP()) target:delMP(mp) mob:addMP(mp) end,
     },
     [tpz.mob.ae.PARALYZE] =
     {
@@ -363,7 +363,7 @@ local additionalEffects =
         msg = tpz.msg.basic.ADD_EFFECT_TP_DRAIN,
         mod = tpz.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
-        code = function(mob, target, power) local tp = math.min(power, target:getTP()); target:delTP(tp); mob:addTP(tp) end,
+        code = function(mob, target, power) local tp = math.min(power, target:getTP()) target:delTP(tp) mob:addTP(tp) end,
     },
 }
 

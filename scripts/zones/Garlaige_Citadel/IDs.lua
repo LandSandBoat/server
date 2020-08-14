@@ -31,7 +31,7 @@ zones[tpz.zone.GARLAIGE_CITADEL] =
         PRESENCE_FROM_CEILING       = 7295,  -- You sense a presence from in the ceiling.
         HEAT_FROM_CEILING           = 7296,  -- You feel a terrible heat from the ceiling.
         CHEST_UNLOCKED              = 7326,  -- You unlock the chest!
-        ITEMS_ITEMS_LA_LA           = 7453,  -- You can hear a strange voice...“Items, items, la la la la la～♪”
+        ITEMS_ITEMS_LA_LA           = 7453,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY         = 7459,  -- The Goblin slipped away when you were not looking...
         PLAYER_OBTAINS_ITEM         = 7519,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM       = 7520,  -- You were unable to obtain the item.
@@ -39,7 +39,7 @@ zones[tpz.zone.GARLAIGE_CITADEL] =
         ALREADY_POSSESS_TEMP        = 7522,  -- You already possess that temporary item.
         NO_COMBINATION              = 7527,  -- You were unable to enter a combination.
         REGIME_REGISTERED           = 9605,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL       = 11553, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL       = 11556, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

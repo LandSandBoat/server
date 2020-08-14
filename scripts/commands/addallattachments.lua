@@ -7,7 +7,7 @@ cmdprops =
 {
     permission = 1,
     parameters = "s"
-};
+}
 
 local ValidAttachments = {
   8193, 8194, 8195, 8196, 8197, 8198, 8224, 8225, 8226, 8227,
@@ -19,23 +19,23 @@ local ValidAttachments = {
   8586, 8609, 8610, 8611, 8612, 8613, 8614, 8615, 8616, 8617,
   8618, 8641, 8642, 8643, 8644, 8645, 8646, 8648, 8649, 8650,
   8673, 8674, 8675, 8676, 8677, 8678, 8680, 8681
-};
+}
 
 local function AddAllAttachments(player)
     for i = 1, #ValidAttachments do
-        player:unlockAttachment(ValidAttachments[i]);
+        player:unlockAttachment(ValidAttachments[i])
     end
-end;
+end
 
 function onTrigger(player, target)
     if (target == nil) then
-        AddAllAttachments(player);
+        AddAllAttachments(player)
     else
-        local targ = GetPlayerByName(target);
+        local targ = GetPlayerByName(target)
         if (targ == nil) then
-            player:PrintToPlayer(string.format( "Player named '%s' not found!", target ));
+            player:PrintToPlayer(string.format( "Player named '%s' not found!", target ))
         else
-            AddAllAttachments(targ);
+            AddAllAttachments(targ)
         end
     end
 end

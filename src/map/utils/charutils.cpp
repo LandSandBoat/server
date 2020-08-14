@@ -909,6 +909,10 @@ namespace charutils
 
                     if (PItem->isType(ITEM_LINKSHELL))
                     {
+                        if (static_cast<CItemLinkshell*>(PItem)->GetLSType() == 0)
+                        {
+                            static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
+                        }
                         int8 EncodedString[16];
                         EncodeStringLinkshell(Sql_GetData(SqlHandle, 5), EncodedString);
                         PItem->setSignature(EncodedString);
@@ -994,13 +998,14 @@ namespace charutils
                 {
                     uint8 SlotID = Sql_GetUIntData(SqlHandle, 0);
                     uint8 equipSlot = Sql_GetUIntData(SqlHandle, 1);
-                    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(SlotID);
+                    uint8 LocationID = Sql_GetUIntData(SqlHandle, 2);
+                    CItem* PItem = PChar->getStorage(LocationID)->GetItem(SlotID);
 
                     if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                     {
                         PItem->setSubType(ITEM_LOCKED);
                         PChar->equip[equipSlot] = SlotID;
-                        PChar->equipLoc[equipSlot] = LOC_INVENTORY;
+                        PChar->equipLoc[equipSlot] = LocationID;
                         if (equipSlot == SLOT_LINK1)
                             PLinkshell1 = (CItemLinkshell*)PItem;
                         else if (equipSlot == SLOT_LINK2)
@@ -1019,11 +1024,35 @@ namespace charutils
 
             if (PLinkshell1)
             {
-                linkshell::AddOnlineMember(PChar, PLinkshell1, 1);
+                ret = Sql_Query(SqlHandle, "SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell1->GetLSID());
+                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                { // if the linkshell has been broken, unequip
+                    uint8 SlotID = PLinkshell1->getSlotID();
+                    uint8 LocationID = PLinkshell1->getLocationID();
+                    PLinkshell1->setSubType(ITEM_UNLOCKED);
+                    PChar->equip[SLOT_LINK1] = 0;
+                    Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID, LocationID);
+                }
+                else
+                {
+                    linkshell::AddOnlineMember(PChar, PLinkshell1, 1);
+                }
             }
             if (PLinkshell2)
             {
-                linkshell::AddOnlineMember(PChar, PLinkshell2, 2);
+                ret = Sql_Query(SqlHandle, "SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell2->GetLSID());
+                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                { // if the linkshell has been broken, unequip
+                    uint8 SlotID = PLinkshell2->getSlotID();
+                    uint8 LocationID = PLinkshell2->getLocationID();
+                    PLinkshell2->setSubType(ITEM_UNLOCKED);
+                    PChar->equip[SLOT_LINK2] = 0;
+                    Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID, LocationID);
+                }
+                else
+                {
+                    linkshell::AddOnlineMember(PChar, PLinkshell2, 2);
+                }
             }
         }
         else
@@ -1134,7 +1163,7 @@ namespace charutils
             PItem->setSubType(ITEM_LOCKED);
 
             PChar->nameflags.flags |= FLAG_LINKSHELL;
-            PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PChar->equip[SLOT_LINK1]));
+            PChar->pushPacket(new CInventoryItemPacket(PItem, PChar->equipLoc[SLOT_LINK1], PChar->equip[SLOT_LINK1]));
             PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
             PChar->pushPacket(new CLinkshellEquipPacket(PChar, 1));
         }
@@ -1148,7 +1177,7 @@ namespace charutils
         {
             PItem->setSubType(ITEM_LOCKED);
 
-            PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PChar->equip[SLOT_LINK2]));
+            PChar->pushPacket(new CInventoryItemPacket(PItem, PChar->equipLoc[SLOT_LINK2], PChar->equip[SLOT_LINK2]));
             PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
             PChar->pushPacket(new CLinkshellEquipPacket(PChar, 2));
         }
@@ -1451,7 +1480,7 @@ namespace charutils
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        if ((PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() + PTarget->UContainer->GetItemsCount()) < PChar->UContainer->GetItemsCount())
+        if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
             ShowDebug(CL_CYAN"Unable to trade, %s doesn't have enough inventory space\n" CL_RESET, PTarget->GetName());
             return false;
@@ -1588,6 +1617,7 @@ namespace charutils
                 {
                     CheckUnarmedWeapon(PChar);
                 }
+                PChar->m_dualWield = false;
             }
             PChar->delEquipModifiers(&((CItemEquipment*)PItem)->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
             PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
@@ -1630,7 +1660,10 @@ namespace charutils
                         PChar->look.ranged = 0;
                     }
                     PChar->m_Weapons[SLOT_RANGED] = nullptr;
-                    PChar->health.tp = 0;
+                    if (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT)
+                    {
+                        PChar->health.tp = 0;
+                    }
                     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
                     BuildingCharWeaponSkills(PChar);
                     UpdateWeaponStyle(PChar, equipSlotID, nullptr);
@@ -1857,6 +1890,7 @@ namespace charutils
                                     return false;
                                 }
                                 PChar->m_Weapons[SLOT_SUB] = (CItemWeapon*)PItem;
+                                PChar->m_dualWield = true;
                             }
                             break;
                             default:
@@ -2152,14 +2186,23 @@ namespace charutils
         }
         if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
         {
-            PChar->health.tp = 0;
+            // If the weapon ISN'T an wind based instrument or an string based instrument
+            if (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT)
+            {
+                PChar->health.tp = 0;
+            }
+
             /*// fixes logging in with no h2h
-            if(PChar->m_Weapons[SLOT_MAIN]->getDmgType() == DAMAGE_NONE && PChar->GetMJob() == JOB_MNK){
-            PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedH2HItem();
-            } else if(PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem() && PChar->GetMJob() != JOB_MNK) {
-            // return back to normal if changed jobs
-            PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedItem();
+            if(PChar->m_Weapons[SLOT_MAIN]->getDmgType() == DAMAGE_NONE && PChar->GetMJob() == JOB_MNK)
+            {
+                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedH2HItem();
+            }
+            else if(PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem() && PChar->GetMJob() != JOB_MNK)
+            {
+                // return back to normal if changed jobs
+                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedItem();
             }*/
+
             if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) || PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem())
             {
                 CheckUnarmedWeapon(PChar);
@@ -3090,7 +3133,7 @@ namespace charutils
         if (baseExp >= 200) return EMobDifficulty::EvenMatch;
         if (baseExp >= 160) return EMobDifficulty::DecentChallenge;
         if (baseExp >= 60) return EMobDifficulty::EasyPrey;
-        if (baseExp >= 14) return EMobDifficulty::IncredibyEasyPrey;
+        if (baseExp >= 14) return EMobDifficulty::IncrediblyEasyPrey;
 
         return EMobDifficulty::TooWeak;
     }
@@ -3139,6 +3182,11 @@ namespace charutils
         //work out the amount of gil to give (guessed; replace with testing)
         uint32 gil = PMob->GetRandomGil();
         uint32 gBonus = 0;
+
+        if (gil && map_config.mob_gil_multiplier >= 0)
+        {
+            gil = static_cast<uint32>(gil * map_config.mob_gil_multiplier);
+        }
 
         if (map_config.all_mobs_gil_bonus > 0)
         {
@@ -3214,7 +3262,7 @@ namespace charutils
 
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
-        auto pcinzone = 0;
+        uint8 pcinzone = 0;
         uint8 minlevel = 0, maxlevel = PChar->GetMLevel();
         REGIONTYPE region = PChar->loc.zone->GetRegionID();
 
@@ -3255,14 +3303,16 @@ namespace charutils
                 pcinzone++;
             }
         });
+        pcinzone = std::max(pcinzone, PMob->m_HiPartySize);
+        maxlevel = std::max(maxlevel, PMob->m_HiPCLvl);
+        PMob->m_HiPartySize = pcinzone;
+        PMob->m_HiPCLvl = maxlevel;
 
         PChar->ForAlliance([&PMob, &region, &minlevel, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
         {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
             if (!PMember || PMember->isDead())
                 return;
-
-            maxlevel = std::max(maxlevel, PMob->m_HiPCLvl);
 
             bool chainactive = false;
 
@@ -3349,124 +3399,127 @@ namespace charutils
                         exp = std::fmin(exp, 600.f);
                     }
 
-                    if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)
+                    if (mobCheck > EMobDifficulty::DecentChallenge)
                     {
-                        chainactive = true;
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: exp *= 1.0f; break;
-                            case 1: exp *= 1.2f; break;
-                            case 2: exp *= 1.25f; break;
-                            case 3: exp *= 1.3f; break;
-                            case 4: exp *= 1.4f; break;
-                            case 5: exp *= 1.5f; break;
-                            default: exp *= 1.55f; break;
-                        }
-                    }
-                    else
-                    {
-                        if (PMember->GetMLevel() <= 10) PMember->expChain.chainTime = gettick() + 50000;
-                        else if (PMember->GetMLevel() <= 20) PMember->expChain.chainTime = gettick() + 100000;
-                        else if (PMember->GetMLevel() <= 30) PMember->expChain.chainTime = gettick() + 150000;
-                        else if (PMember->GetMLevel() <= 40) PMember->expChain.chainTime = gettick() + 200000;
-                        else if (PMember->GetMLevel() <= 50) PMember->expChain.chainTime = gettick() + 250000;
-                        else if (PMember->GetMLevel() <= 60) PMember->expChain.chainTime = gettick() + 300000;
-                        else PMember->expChain.chainTime = gettick() + 360000;
-                        PMember->expChain.chainNumber = 1;
-                    }
 
-                    if (chainactive && PMember->GetMLevel() <= 10)
-                    {
-                        switch (PMember->expChain.chainNumber)
+                        if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)
                         {
-                            case 0: PMember->expChain.chainTime = gettick() + 50000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 30000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 20000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 10000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 6000; break;
-                            default: PMember->expChain.chainTime = gettick() + 2000; break;
+                            chainactive = true;
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: exp *= 1.0f; break;
+                                case 1: exp *= 1.2f; break;
+                                case 2: exp *= 1.25f; break;
+                                case 3: exp *= 1.3f; break;
+                                case 4: exp *= 1.4f; break;
+                                case 5: exp *= 1.5f; break;
+                                default: exp *= 1.55f; break;
+                            }
                         }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 20)
-                    {
-                        switch (PMember->expChain.chainNumber)
+                        else
                         {
-                            case 0: PMember->expChain.chainTime = gettick() + 100000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 80000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 60000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 20000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 8000; break;
-                            default: PMember->expChain.chainTime = gettick() + 4000; break;
+                            if (PMember->GetMLevel() <= 10) PMember->expChain.chainTime = gettick() + 50000;
+                            else if (PMember->GetMLevel() <= 20) PMember->expChain.chainTime = gettick() + 100000;
+                            else if (PMember->GetMLevel() <= 30) PMember->expChain.chainTime = gettick() + 150000;
+                            else if (PMember->GetMLevel() <= 40) PMember->expChain.chainTime = gettick() + 200000;
+                            else if (PMember->GetMLevel() <= 50) PMember->expChain.chainTime = gettick() + 250000;
+                            else if (PMember->GetMLevel() <= 60) PMember->expChain.chainTime = gettick() + 300000;
+                            else PMember->expChain.chainTime = gettick() + 360000;
+                            PMember->expChain.chainNumber = 1;
                         }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 30)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 150000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 90000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 60000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 30000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 10000; break;
-                            default: PMember->expChain.chainTime = gettick() + 5000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 40)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 200000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 160000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 80000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 40000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 40000; break;
-                            default: PMember->expChain.chainTime = gettick() + 30000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 50)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 250000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 200000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 150000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 100000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 50000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 50000; break;
-                            default: PMember->expChain.chainTime = gettick() + 50000; break;
-                        }
-                    }
-                    else if (chainactive && PMember->GetMLevel() <= 60)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 300000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 240000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 180000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 120000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 90000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 60000; break;
-                            default: PMember->expChain.chainTime = gettick() + 60000; break;
-                        }
-                    }
-                    else if (chainactive)
-                    {
-                        switch (PMember->expChain.chainNumber)
-                        {
-                            case 0: PMember->expChain.chainTime = gettick() + 360000; break;
-                            case 1: PMember->expChain.chainTime = gettick() + 300000; break;
-                            case 2: PMember->expChain.chainTime = gettick() + 240000; break;
-                            case 3: PMember->expChain.chainTime = gettick() + 165000; break;
-                            case 4: PMember->expChain.chainTime = gettick() + 105000; break;
-                            case 5: PMember->expChain.chainTime = gettick() + 60000; break;
-                            default: PMember->expChain.chainTime = gettick() + 60000; break;
-                        }
-                    }
 
+                        if (chainactive && PMember->GetMLevel() <= 10)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 50000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 30000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 20000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 10000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 6000; break;
+                                default: PMember->expChain.chainTime = gettick() + 2000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 20)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 100000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 80000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 60000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 20000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 8000; break;
+                                default: PMember->expChain.chainTime = gettick() + 4000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 30)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 150000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 90000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 60000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 30000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 10000; break;
+                                default: PMember->expChain.chainTime = gettick() + 5000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 40)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 200000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 160000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 80000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 40000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 40000; break;
+                                default: PMember->expChain.chainTime = gettick() + 30000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 50)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 250000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 200000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 150000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 100000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 50000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 50000; break;
+                                default: PMember->expChain.chainTime = gettick() + 50000; break;
+                            }
+                        }
+                        else if (chainactive && PMember->GetMLevel() <= 60)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 300000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 240000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 180000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 120000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 90000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 60000; break;
+                                default: PMember->expChain.chainTime = gettick() + 60000; break;
+                            }
+                        }
+                        else if (chainactive)
+                        {
+                            switch (PMember->expChain.chainNumber)
+                            {
+                                case 0: PMember->expChain.chainTime = gettick() + 360000; break;
+                                case 1: PMember->expChain.chainTime = gettick() + 300000; break;
+                                case 2: PMember->expChain.chainTime = gettick() + 240000; break;
+                                case 3: PMember->expChain.chainTime = gettick() + 165000; break;
+                                case 4: PMember->expChain.chainTime = gettick() + 105000; break;
+                                case 5: PMember->expChain.chainTime = gettick() + 60000; break;
+                                default: PMember->expChain.chainTime = gettick() + 60000; break;
+                            }
+                        }
+                    }
                     // pet or companion exp penalty needs to be added here
                     if (distance(PMember->loc.p, PMob->loc.p) > 100)
                     {
@@ -3475,6 +3528,7 @@ namespace charutils
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);
+
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
                 }
             }
@@ -4441,7 +4495,7 @@ namespace charutils
                 Sql_Query(SqlHandle, query, buf, PChar->id);
                 return;
             }
-            default: 
+            default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
         }
@@ -4450,7 +4504,7 @@ namespace charutils
         Sql_Query(SqlHandle, query, column, value, PChar->id);
     }
 
-    float  AddExpBonus(CCharEntity* PChar, float exp)
+    float AddExpBonus(CCharEntity* PChar, float exp)
     {
         int32 bonus = 0;
         if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION))
@@ -4465,15 +4519,31 @@ namespace charutils
             {
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_DEDICATION);
             }
-
         }
 
-        bonus += (int32)(exp * (PChar->getMod(Mod::EXP_BONUS) / 100.0f));
+        int32 rovBonus = 0;
+        for (auto i = 2884; i <= 2892; ++i) // RHAPSODY KI are sequential, so start at WHITE and end at OCHRE
+        {
+            if (hasKeyItem(PChar, i))
+            {
+                rovBonus += 30;
+            }
+            else
+            {
+                break; // No need to check further as you can't get KI out of order, so break out.
+            }
+        }
+
+        bonus += (int32)(exp * ((PChar->getMod(Mod::EXP_BONUS) + rovBonus) / 100.0f));
 
         if (bonus + (int32)exp < 0)
+        {
             exp = 0;
+        }
         else
+        {
             exp = exp + bonus;
+        }
 
         return exp;
     }

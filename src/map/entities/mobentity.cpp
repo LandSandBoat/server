@@ -81,6 +81,7 @@ CMobEntity::CMobEntity()
     m_EcoSystem = SYSTEM_UNCLASSIFIED;
     m_Element = 0;
     m_HiPCLvl = 0;
+    m_HiPartySize = 0;
     m_THLvl = 0;
     m_ItemStolen = false;
 
@@ -505,6 +506,7 @@ void CMobEntity::Spawn()
     CBattleEntity::Spawn();
     m_giveExp = true;
     m_HiPCLvl = 0;
+    m_HiPartySize = 0;
     m_THLvl = 0;
     m_ItemStolen = false;
     m_DropItemTime = 1000;
@@ -666,7 +668,6 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTarget, PSkill->getID(), state.GetSpentTP(), &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTarget, this, PSkill->getID(), state.GetSpentTP(), &action);
         }
-
         if (msg == 0)
         {
             msg = PSkill->getMsg();
@@ -720,7 +721,18 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             }
         }
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        if (PTarget->isDead())
+        {
+            battleutils::ClaimMob(PTarget, this);
+        }
+        battleutils::DirtyExp(PTarget, this);
     }
+    PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)))
+    {
+        battleutils::ClaimMob(PTarget, this);
+    }
+    battleutils::DirtyExp(PTarget, this);
 }
 
 void CMobEntity::DistributeRewards()
@@ -740,13 +752,13 @@ void CMobEntity::DistributeRewards()
             blueutils::TryLearningSpells(PChar, this);
             m_UsedSkillIds.clear();
 
-            if (m_giveExp)
+            if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
             {
                 charutils::DistributeExperiencePoints(PChar, this);
             }
 
             // check for gil (beastmen drop gil, some NMs drop gil)
-            if (CanDropGil() || (map_config.all_mobs_gil_bonus > 0 && getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
+            if ((map_config.mob_gil_multiplier > 0 && CanDropGil()) || (map_config.all_mobs_gil_bonus > 0 && getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
             {
                 charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
             }
@@ -822,32 +834,21 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     }
 
-    //check for seal drops
-    /* MobLvl >= 1 = Beastmen Seals ID=1126
-    >= 50 = Kindred Seals ID=1127
-    >= 75 = Kindred Crests ID=2955
-    >= 90 = High Kindred Crests ID=2956
-    */
+
 
     uint16 Pzone = PChar->getZone();
 
     bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
 
-    if (validZone && charutils::CheckMob(PChar->GetMLevel(), GetMLevel()) > EMobDifficulty::TooWeak)
+    if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {
-        if (((PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ||
-            (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PChar->loc.zone->GetRegionID() >= 28 && PChar->loc.zone->GetRegionID() <= 32) ||
-            (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PChar->loc.zone->GetRegionID() >= 33 && PChar->loc.zone->GetRegionID() <= 40)) &&
-            m_Element > 0 && tpzrand::GetRandomNumber(100) < 20) // Need to move to CRYSTAL_CHANCE constant
-        {
-            if (AddItemToPool(4095 + m_Element, ++dropCount))
-                return;
-        }
 
-        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
-        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
-        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
-
+        //check for seal drops
+        /* MobLvl >= 1 = Beastmen Seals ID=1126
+        >= 50 = Kindred Seals ID=1127
+        >= 75 = Kindred Crests ID=2955
+        >= 90 = High Kindred Crests ID=2956
+        */
         if (tpzrand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
         {
             //RULES: Only 1 kind may drop per mob
@@ -910,6 +911,75 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 //b.seal only
                 if (AddItemToPool(1126, ++dropCount))
                     return;
+            }
+        }
+        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
+        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
+        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
+
+        uint8 effect = 0; // Begin Adding Crystals
+        
+        if (m_Element > 0)
+        {
+            uint8 regionID = PChar->loc.zone->GetRegionID();
+            switch (regionID)
+            {
+                // Sanction Regions
+                case REGION_WEST_AHT_URHGAN:
+                case REGION_MAMOOL_JA_SAVAGE:
+                case REGION_HALVUNG:
+                case REGION_ARRAPAGO:
+                    effect = 2;
+                    break;
+                // Sigil Regions
+                case REGION_RONFAURE_FRONT:
+                case REGION_NORVALLEN_FRONT:
+                case REGION_GUSTABERG_FRONT:
+                case REGION_DERFLAND_FRONT:
+                case REGION_SARUTA_FRONT:
+                case REGION_ARAGONEAU_FRONT:
+                case REGION_FAUREGANDI_FRONT:
+                case REGION_VALDEAUNIA_FRONT:
+                    effect = 3;
+                    break;
+                // Signet Regions
+                default:
+                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
+                    break;
+            }
+        }
+        uint8 crystalRolls = 0;
+        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
+        {
+            switch(effect)
+            {
+                case 1:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 2:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 3:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        for (uint8 i = 0; i < crystalRolls; i++)
+        {
+            if (tpzrand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
+            {
+                return;
             }
         }
     }
@@ -1014,6 +1084,7 @@ void CMobEntity::Die()
                 loc.zone->PushPacket(this, CHAR_INRANGE, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
 
             DistributeRewards();
+            m_OwnerID.clean();
         }
     }));
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)

@@ -4,51 +4,51 @@
 --       Can use either of number or the variable string from keyitems.lua
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/keyitems");
+require("scripts/globals/keyitems")
 
 cmdprops =
 {
     permission = 1,
     parameters = "ss"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!haskeyitem <key item ID> {player}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!haskeyitem <key item ID> {player}")
+end
 
 function onTrigger(player, keyId, target)
     -- validate itemId
     if (keyId == nil) then
-        error(player, "You must provide a key item ID.");
-        return;
+        error(player, "You must provide a key item ID.")
+        return
     else
-        keyId = tonumber(keyId) or tpz.ki[string.upper(keyId)];
+        keyId = tonumber(keyId) or tpz.ki[string.upper(keyId)]
         if (keyId == nil or keyId < 1) then
-            error(player, "Invalid key item ID.");
-            return;
+            error(player, "Invalid key item ID.")
+            return
         end
     end
 
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player:getCursorTarget();
+        targ = player:getCursorTarget()
         if (targ == nil or not targ:isPC()) then
-            targ = player;
+            targ = player
         end
     else
-        targ = GetPlayerByName(target);
+        targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player, string.format("Player named '%s' not found!", target));
-            return;
+            error(player, string.format("Player named '%s' not found!", target))
+            return
         end
     end
 
     -- report hasKeyItem
     if (targ:hasKeyItem(keyId)) then
-        player:PrintToPlayer(string.format("%s has key item %i.", targ:getName(), keyId));
+        player:PrintToPlayer(string.format("%s has key item %i.", targ:getName(), keyId))
     else
-        player:PrintToPlayer(string.format("%s does not have key item %i.", targ:getName(), keyId));
+        player:PrintToPlayer(string.format("%s does not have key item %i.", targ:getName(), keyId))
     end
-end;
+end

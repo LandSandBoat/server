@@ -9,9 +9,9 @@ armory crates
 17346624 - Contaminated Colosseum
 17346634 - Contaminated Colosseum
 17346644 - Contaminated Colosseum
-17346653
-17346662
-17346671
+17346653 - Tails of Woe
+17346662 - Tails of Woe
+17346671 - Tails of Woe
 17346675
 17346679
 17346683

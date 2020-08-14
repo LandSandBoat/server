@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -70,7 +70,7 @@ namespace message
 
     void parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
     {
-        ShowDebug("Message: Received message %d from message server\n", type);
+        ShowDebug("Message: Received message %d from message server\n", static_cast<uint8>(type));
         switch (type)
         {
         case MSG_LOGIN:
@@ -367,18 +367,18 @@ namespace message
             {
                 uint8 kickerRank = ref<uint8>((uint8*)extra->data(), 28);
                 CItemLinkshell* targetLS = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
-                if (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS && targetLS->GetLSType() == LSTYPE_LINKPEARL))
+                if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                 {
-                    PChar->PLinkshell1->RemoveMemberByName((int8*)extra->data() + 4);
+                    PChar->PLinkshell1->RemoveMemberByName((int8*)extra->data() + 4, (targetLS->GetLSType() == LSTYPE_LINKSHELL ? LSTYPE_PEARLSACK : kickerRank));
                 }
             }
             else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra->data(), 24))
             {
                 uint8 kickerRank = ref<uint8>((uint8*)extra->data(), 28);
                 CItemLinkshell* targetLS = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
-                if (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS && targetLS->GetLSType() == LSTYPE_LINKPEARL))
+                if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                 {
-                    PChar->PLinkshell2->RemoveMemberByName((int8*)extra->data() + 4);
+                    PChar->PLinkshell2->RemoveMemberByName((int8*)extra->data() + 4, kickerRank);
                 }
             }
             break;
@@ -608,7 +608,7 @@ namespace message
             int ret = Sql_Query(SqlHandle, "SELECT zoneip, zoneport FROM zone_settings GROUP BY zoneip, zoneport ORDER BY COUNT(*) DESC;");
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                ipp = inet_addr((const char*)Sql_GetData(SqlHandle, 0));
+                inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);
                 port = Sql_GetUIntData(SqlHandle, 1);
             }
         }

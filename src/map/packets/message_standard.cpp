@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -47,8 +47,8 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 	{
 		ref<uint32>(0x04) = PChar->id;
 		ref<uint16>(0x08) = PChar->targid;
-		
-		if (MessageID == MsgStd::Examine) 
+
+		if (MessageID == MsgStd::Examine)
 		{
 			this->size = 0x30;
 

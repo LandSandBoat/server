@@ -7,8 +7,8 @@ cmdprops =
 {
     permission = 1,
     parameters = ""
-};
+}
 
 function onTrigger(player)
-    player:showPosition();
+    player:showPosition()
 end

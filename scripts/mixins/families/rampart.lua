@@ -8,11 +8,11 @@ g_mixins.families = g_mixins.families or {}
 -- 1 = door open
 
 g_mixins.families.rampart = function(mob)
-    
+
     mob:addListener("SPAWN", "RAMPART_SPAWN", function(mob)
-        mob:setLocalVar("swapTime", os.time())    
+        mob:setLocalVar("swapTime", os.time())
     end)
-    
+
     mob:addListener("TICK", "RAMPART_TICK", function(mob)
         local swapTime = mob:getLocalVar("swapTime")
 

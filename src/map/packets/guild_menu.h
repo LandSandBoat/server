@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -42,7 +42,7 @@ enum GUILDSTATUS
 class CGuildMenuPacket : public CBasicPacket
 {
 public:
-	
+
 	CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday);
 };
 

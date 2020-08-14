@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
@@ -23,8 +23,8 @@ function onMobWeaponSkill(target, mob, skill)
 
         shadowOne:spawn()
         shadowTwo:spawn()
-        shadowOne:setPos(X,Y,Z)
-        shadowTwo:setPos(X,Y,Z)
+        shadowOne:setPos(X, Y, Z)
+        shadowTwo:setPos(X, Y, Z)
         shadowOne:updateEnmity(target)
         shadowTwo:updateEnmity(target)
     end

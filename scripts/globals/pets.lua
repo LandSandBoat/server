@@ -1220,3 +1220,17 @@ tpz.pet.name =
     DESTRUCTION   = 1125,
     FIRECRACKER   = 1126,
 }
+
+function tpz.pet.spawnPet(player, petID)
+    local effect = tpz.effect.DEBILITATION
+
+    player:spawnPet(petID)
+
+    if player:hasStatusEffect(effect) then
+        local pet = player:getPet()
+        local statusEffect = player:getStatusEffect(effect)
+        local power = statusEffect:getPower()
+        local duration = math.floor(statusEffect:getTimeRemaining()/1000)
+        pet:addStatusEffectEx(effect, effect, power, 0, duration)
+    end
+end

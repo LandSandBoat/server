@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2016 Darkstar Dev Teams
@@ -50,6 +50,8 @@ const char* LOGIN_CONF_FILENAME = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
 const char* MAINT_CONF_FILENAME = nullptr;
 
+volatile bool consoleThreadRun = true;
+
 login_config_t login_config;    //main settings
 version_info_t version_info;
 maint_config_t maint_config;
@@ -62,7 +64,7 @@ int32 do_init(int32 argc, char** argv)
 {
     int32 i;
     LOGIN_CONF_FILENAME = "conf/login.conf";
-    VERSION_INFO_FILENAME = "version.info";
+    VERSION_INFO_FILENAME = "conf/version.conf";
     MAINT_CONF_FILENAME = "conf/maint.conf";
 
     //srand(gettick());
@@ -119,6 +121,11 @@ int32 do_init(int32 argc, char** argv)
     messageThread = std::thread(message_server_init);
     ShowStatus("The login-server is " CL_GREEN"ready" CL_RESET" to work...\n");
 
+    if(!login_config.account_creation)
+    {
+        ShowStatus("New account creation is " CL_RED"disabled" CL_RESET" in login_config.\n");
+    }
+
     bool attached = isatty(0);
 
     if (attached)
@@ -128,7 +135,7 @@ int32 do_init(int32 argc, char** argv)
             ShowStatus("Console input thread is ready..\r\n");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
-            while (true)
+            while (consoleThreadRun)
             {
                 if ((server_clock::now() - lastInputTime) > 1s)
                 {
@@ -206,6 +213,7 @@ int32 do_init(int32 argc, char** argv)
                     lastInputTime = server_clock::now();
                 }
             };
+            ShowStatus("Console input thread exiting..\r\n");
         });
     }
     return 0;
@@ -213,13 +221,21 @@ int32 do_init(int32 argc, char** argv)
 
 void do_final(int code)
 {
+    consoleThreadRun = false;
     message_server_close();
     if (messageThread.joinable())
     {
         messageThread.join();
     }
-
-    Sql_Free(SqlHandle);
+    if (consoleInputThread.joinable())
+    {
+        consoleInputThread.join();
+    }
+    if(SqlHandle)
+    {
+        Sql_Free(SqlHandle);
+        SqlHandle = nullptr;
+    }
 
     timer_final();
     socket_final();
@@ -438,6 +454,10 @@ void login_config_read(const char *key, const char *value)
     {
         login_config.log_user_ip = config_switch(value);
     }
+    else if (strcmp(key, "account_creation") == 0)
+    {
+        login_config.account_creation = config_switch(value);
+    }
     else
     {
         ShowWarning("Unknown setting '%s' with value '%s' in  login file\n", key, value);
@@ -488,12 +508,13 @@ void login_config_default()
     login_config.msg_server_ip = "127.0.0.1";
 
     login_config.log_user_ip = "false";
+    login_config.account_creation = "true";
 }
 
 void version_info_default()
 {
     version_info.client_ver = "99999999_9"; // xxYYMMDD_m = xx:MajorRelease YY:year MM:month DD:day _m:MinorRelease
-    version_info.ver_lock = 1;
+    version_info.ver_lock = 2;
 }
 
 void maint_config_read(const char* key, const char* value)

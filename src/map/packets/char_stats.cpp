@@ -31,11 +31,11 @@
 #include "../modifier.h"
 
 
-CCharStatsPacket::CCharStatsPacket(CCharEntity * PChar) 
+CCharStatsPacket::CCharStatsPacket(CCharEntity * PChar)
 {
-	this->type = 0x61;	
-	this->size = 0x30;	
-	
+	this->type = 0x61;
+	this->size = 0x30;
+
     ref<uint32>(0x04) = PChar->GetMaxHP();
     ref<uint32>(0x08) = PChar->GetMaxMP();
 
@@ -73,7 +73,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity * PChar)
 	ref<uint8>(0x46) = PChar->profile.rank[PChar->profile.nation];
 	ref<uint16>(0x48) = PChar->profile.rankpoints;
     ref<uint16>(0x4A) = PChar->profile.home_point.destination;
-	ref<uint8>(0x50) = PChar->profile.nation; 
+	ref<uint8>(0x50) = PChar->profile.nation;
     //0x52 = superior level (1 or 2)
     //0x54 = maximum item level
     //0x55 = itemlevel over 99

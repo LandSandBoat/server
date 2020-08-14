@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -47,7 +47,7 @@ void CItemLinkshell::SetLSID(uint32 lsid)
 
 LSTYPE CItemLinkshell::GetLSType()
 {
-    return (LSTYPE)(getID() - 0x200);
+    return ref<LSTYPE>(m_extra, 0x08);
 }
 
 lscolor_t CItemLinkshell::GetLSColor()
@@ -74,3 +74,9 @@ void CItemLinkshell::setSignature(int8* signature)
 {
     memcpy(m_extra + 0x09, signature, sizeof(m_extra) - 0x09);
 }
+
+void CItemLinkshell::SetLSType(LSTYPE value)
+{
+    ref<LSTYPE>(m_extra,0x08) = value;
+}
+

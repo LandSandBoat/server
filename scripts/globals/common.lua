@@ -28,8 +28,20 @@ end
 --  printf
 -----------------------------------
 
-function printf(s,...)
+function printf(s, ...)
     print(s:format(...))
+end
+
+-----------------------------------
+--  set()
+--  Returns a set that can be checked against
+-----------------------------------
+function set(list)
+    local set = {}
+    for _, item in pairs(list) do
+        set[item] = true
+    end
+    return set
 end
 
 -----------------------------------

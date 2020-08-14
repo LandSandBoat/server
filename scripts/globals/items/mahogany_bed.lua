@@ -2,8 +2,8 @@
 -- ID: 4
 -- Item: Mahogany Bed
 -----------------------------------------
-require("scripts/globals/common");
-require("scripts/globals/quests");
+require("scripts/globals/common")
+require("scripts/globals/quests")
 -----------------------------------------
 
 function onFurniturePlaced(player)

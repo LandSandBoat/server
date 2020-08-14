@@ -4,13 +4,13 @@
 -- A) The given zone
 -- B) another player
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/zone");
+require("scripts/globals/zone")
 
 cmdprops =
 {
     permission = 1,
     parameters = "b"
-};
+}
 
 ---------------------------------------------------------------------------------------------------
 -- desc: List of zones with their auto-translated group and message id.
@@ -276,116 +276,116 @@ local zone_list =
     { 0x27, 0x59, 284 }, -- Celennia Memorial Library
     { 0x27, 0x5B, 285 }, -- Feretory
     { 0x14, 0x09, 288 }, -- Escha - Zi'Tah
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!send <player to send> <destination player or zone>");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!send <player to send> <destination player or zone>")
+end
 
-function getBytePos(s,needle)
-    local i;
-    local b;
-    for i=1,string.len(s),1 do
+function getBytePos(s, needle)
+    local i
+    local b
+    for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
-            return i;
+            return i
         end
     end
-    return nil;
-end;
+    return nil
+end
 
 ---------------------------------------------------------------------------------------------------
 -- func: onTrigger
 -- desc: Called when this command is invoked.
 ---------------------------------------------------------------------------------------------------
 function onTrigger(player, bytes)
-    local x = 0;
-    local y = 0;
-    local z = 0;
-    local rot = 0;
-    local zone;
+    local x = 0
+    local y = 0
+    local z = 0
+    local rot = 0
+    local zone
 
     if (bytes == nil) then
-        error(player, "You must provide the name of a player to send and a destination.");
-        return;
+        error(player, "You must provide the name of a player to send and a destination.")
+        return
     end
-    bytes = string.sub(bytes,6);
-    local atpos = getBytePos(bytes, 253);
-    local sppos = getBytePos(bytes, 32);
+    bytes = string.sub(bytes, 6)
+    local atpos = getBytePos(bytes, 253)
+    local sppos = getBytePos(bytes, 32)
 
     -- validate player to send
-    local target;
-    local targ;
+    local target
+    local targ
     if (sppos == nil) then
-        error(player, "You must provide the name of a player to send and a destination.");
-        return;
+        error(player, "You must provide the name of a player to send and a destination.")
+        return
     else
-        target = string.sub(bytes,1,sppos-1);
-        targ = GetPlayerByName(target);
+        target = string.sub(bytes, 1, sppos-1)
+        targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ));
-            return;
+            error(player, string.format( "Player named '%s' not found!", target ))
+            return
         end
     end
 
     -- validate destination
     if (atpos ~= nil) then
         -- destination is an auto-translate phrase
-        local groupId = string.byte(bytes, atpos + 3);
-        local messageId = string.byte(bytes, atpos + 4);
+        local groupId = string.byte(bytes, atpos + 3)
+        local messageId = string.byte(bytes, atpos + 4)
         for k, v in pairs(zone_list) do
             if (v[1] == groupId and v[2] == messageId) then
-                x = v[4] or 0;
-                y = v[5] or 0;
-                z = v[6] or 0;
-                rot = 0;
-                zone = v[3];
-                break;
+                x = v[4] or 0
+                y = v[5] or 0
+                z = v[6] or 0
+                rot = 0
+                zone = v[3]
+                break
             end
         end
         if (zone == nil) then
-            error(player,"Auto-translated phrase is not a zone.");
-            return;
+            error(player, "Auto-translated phrase is not a zone.")
+            return
         end
     else
-        local dest = string.sub(bytes, sppos+1);
+        local dest = string.sub(bytes, sppos+1)
         if (tonumber(dest) ~= nil) then
             -- destination is a zone ID.
-            zone = tonumber(dest);
+            zone = tonumber(dest)
             if (zone < 0 or zone >= tpz.zone.MAX_ZONE) then
-                error(player, "Invalid zone ID.");
-                return;
+                error(player, "Invalid zone ID.")
+                return
             end
             for k, v in pairs(zone_list) do
                 if (v[3] == zone) then
-                    x = v[4] or 0;
-                    y = v[5] or 0;
-                    z = v[6] or 0;
-                    rot = 0;
-                    zone = v[3];
-                    break;
+                    x = v[4] or 0
+                    y = v[5] or 0
+                    z = v[6] or 0
+                    rot = 0
+                    zone = v[3]
+                    break
                 end
             end
         else
             -- destination is a player name.
-            local target = dest;
-            dest = GetPlayerByName(dest);
+            local target = dest
+            dest = GetPlayerByName(dest)
             if (dest == nil) then
-                error(player, string.format( "Player named '%s' not found!", target ));
-                return;
+                error(player, string.format( "Player named '%s' not found!", target ))
+                return
             end
-            x = dest:getXPos();
-            y = dest:getYPos();
-            z = dest:getZPos();
-            rot = dest:getRotPos();
-            zone = dest:getZoneID();
+            x = dest:getXPos()
+            y = dest:getYPos()
+            z = dest:getZPos()
+            rot = dest:getRotPos()
+            zone = dest:getZoneID()
         end
     end
 
     -- send target to destination
-    targ:setPos(x, y, z, rot, zone);
+    targ:setPos(x, y, z, rot, zone)
     if (targ:getID() ~= player:getID()) then
-        player:PrintToPlayer( string.format("Sent %s to zone %i.", targ:getName(), zone) );
+        player:PrintToPlayer( string.format("Sent %s to zone %i.", targ:getName(), zone) )
     end
 end
 

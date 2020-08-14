@@ -2,8 +2,8 @@
 -- ID: 6
 -- Item: Noble's Bed
 -----------------------------------------
-require("scripts/globals/common");
-require("scripts/globals/quests");
+require("scripts/globals/common")
+require("scripts/globals/quests")
 -----------------------------------------
 
 function onFurniturePlaced(player)

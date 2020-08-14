@@ -6,7 +6,7 @@
 
 require("scripts/globals/status")
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
     local effectregen = {4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0}
     if (effect:getPower() > 69) then
@@ -31,10 +31,10 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
     local effectregen = {4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0}
     if (effect:getPower() > 69) then

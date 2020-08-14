@@ -7,22 +7,22 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.phuabo = function(mob)
     mob:addListener("SPAWN", "PHUABO_SPAWN", function(mob)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(5);
-        mob:wait(2000);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(5)
+        mob:wait(2000)
     end)
     mob:addListener("ENGAGE", "PHUABO_ENGAGE", function(mob, target)
-        mob:hideName(false);
-        mob:untargetable(false);
-        mob:AnimationSub(6);
-        mob:wait(2000);
+        mob:hideName(false)
+        mob:untargetable(false)
+        mob:AnimationSub(6)
+        mob:wait(2000)
     end)
     mob:addListener("DISENGAGE", "PHUABO_DISENGAGE", function(mob, target)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(5);
-        mob:wait(2000);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(5)
+        mob:wait(2000)
     end)
 end
 

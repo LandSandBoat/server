@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -25,7 +25,7 @@
 #include "../entities/charentity.h"
 #include "../trade_container.h"
 
-CShopMenuPacket::CShopMenuPacket(CCharEntity * PChar) 
+CShopMenuPacket::CShopMenuPacket(CCharEntity * PChar)
 {
 	this->type = 0x3E;
 	this->size = 0x04;

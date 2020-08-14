@@ -10,7 +10,7 @@ require("scripts/globals/teleports")
 -- -------------------------------------------------------------------
 
 function getMedalRank(player)
-    local rank = 0;
+    local rank = 0
     local medals =
     {
          924, 925, 926, 927, 928, 929, 930,
@@ -18,18 +18,18 @@ function getMedalRank(player)
          938, 939, 940, 941, 942, 943
     }
     while (player:hasKeyItem(medals[rank + 1]) == true) do
-        rank = rank + 1;
-    end;
-    return rank;
-end;
+        rank = rank + 1
+    end
+    return rank
+end
 
 -- -------------------------------------------------------------------
 -- get[nation]NotesItem()
 -- Returns the item ID and cost of the Allied Notes indexed item
 -- (the same value as that used by the vendor event)
 -- Format:
--- ListName_AN_item[optionID] = itemID; -- ItemName
--- ListName_AN_price[optionID] = cost; -- ItemName
+-- ListName_AN_item[optionID] = itemID -- ItemName
+-- ListName_AN_price[optionID] = cost -- ItemName
 -- -------------------------------------------------------------------
 
 function getSandOriaNotesItem(i)
@@ -41,7 +41,7 @@ function getSandOriaNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 16172, price = 4500}, -- Iron Ram Shield
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service
@@ -71,9 +71,9 @@ function getSandOriaNotesItem(i)
         [82] = {id = 17684, price = 150000}, -- Griffinclaw
         [338] = {id = 11636, price = 75000} -- Royal Knight Sigil Ring
     }
-    local item = SandOria_AN[i];
-    return item.id, item.price;
-end;
+    local item = SandOria_AN[i]
+    return item.id, item.price
+end
 
 function getBastokNotesItem(i)
     local Bastok_AN =
@@ -84,7 +84,7 @@ function getBastokNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 18727, price = 4500}, -- Fourth Gun
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service
@@ -114,9 +114,9 @@ function getBastokNotesItem(i)
         [82] = {id = 17685, price = 150000}, -- Lex Talionis
         [338] = {id = 11545, price = 75000} -- Fourth Mantle
     }
-    local item = Bastok_AN[i];
-    return item.id, item.price;
-end;
+    local item = Bastok_AN[i]
+    return item.id, item.price
+end
 
 function getWindurstNotesItem(i)
     local Windurst_AN =
@@ -127,7 +127,7 @@ function getWindurstNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 19150, price = 4500}, -- Cobra CLaymore
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service
@@ -159,9 +159,9 @@ function getWindurstNotesItem(i)
         [82] = {id = 17684, price = 150000}, -- Samudra
         [338] = {id = 11636, price = 75000} -- Mercenary Major Charm
     }
-    local item = Windurst_AN[i];
-    return item.id, item.price;
-end;
+    local item = Windurst_AN[i]
+    return item.id, item.price
+end
 
 -- -------------------------------------------------------------------
 -- getSigilTimeStamp(player)
@@ -170,12 +170,12 @@ end;
 -- -------------------------------------------------------------------
 
 function getSigilTimeStamp(player)
-    local timeStamp = 0; -- zero'd till math is done.
+    local timeStamp = 0 -- zero'd till math is done.
 
     -- TODO: calculate time stamp for menu display of when it wears off
 
-    return timeStamp;
-end;
+    return timeStamp
+end
 
 -- TODO:
 -- Past nation teleport

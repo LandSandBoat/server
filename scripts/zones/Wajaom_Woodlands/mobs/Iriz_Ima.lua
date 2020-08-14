@@ -15,7 +15,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("BreakChance", 5)
 end
 
-function onCriticalHit(mob, player)
+function onCriticalHit(mob, attacker)
     if math.random(100) <= mob:getLocalVar("BreakChance") then
         local animationSub = mob:AnimationSub()
         if animationSub == 4 then

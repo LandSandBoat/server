@@ -5,21 +5,21 @@
 -- !pos 92.542 -25.907 26.548 27
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local DoorOffset = npc:getID() - 1;
+    local DoorOffset = npc:getID() - 1
 
     if (GetNPCByID(DoorOffset):getAnimation() == 9) then
-        GetNPCByID(DoorOffset):openDoor(7); -- _0rj
+        GetNPCByID(DoorOffset):openDoor(7) -- _0rj
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

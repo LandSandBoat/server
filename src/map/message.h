@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/socket.h"
 #include "../common/sql.h"
 #include "../common/mmo.h"
-#include <zmq.hpp>
+#include "../common/zmq.hpp"
 #include "../common/cbasetypes.h"
 
 class CBasicPacket;

@@ -34,7 +34,13 @@ CLinkshellEquipPacket::CLinkshellEquipPacket(CCharEntity* PChar, uint8 number)
 
     ref<uint8>(0x04) = number;
     if (number == 1)
+    {
         ref<uint8>(0x05) = PChar->equip[SLOT_LINK1];
+        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK1];
+    }
     else
+    {
         ref<uint8>(0x05) = PChar->equip[SLOT_LINK2];
+        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK2];
+    }
 }

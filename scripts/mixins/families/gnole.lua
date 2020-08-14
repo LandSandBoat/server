@@ -9,11 +9,11 @@ g_mixins.families.gnole = function(mob)
     mob:addListener("SPAWN", "GNOLE_SPAWN", function(mob)
         mob:setLocalVar("transformTime", os.time())
     end)
-    
+
     mob:addListener("ROAM_TICK", "GNOLE_ROAM", function(mob)
         attemptTransform(mob, 300)
     end)
-    
+
     mob:addListener("COMBAT_TICK", "GNOLE_COMBAT", function(mob)
         attemptTransform(mob, 60)
     end)

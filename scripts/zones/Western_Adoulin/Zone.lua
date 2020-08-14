@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 function onInitialize(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     local heartwingsAndTheKindhearted = player:getCurrentMission(SOA) == tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
 
@@ -31,13 +31,13 @@ function onZoneIn(player,prevZone)
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 5056 then
         -- Successfully finished introduction CS event chain for Quest: 'Raptor Rapture'.
         player:setCharVar("Raptor_Rapture_Status", 3)
@@ -48,7 +48,7 @@ function onEventFinish(player,csid,option)
             player:setCharVar("Raptor_Rapture_Status", 4)
         end
     elseif csid == 2 then
-        player:completeMission(SOA,tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
-        player:addMission(SOA,tpz.mission.id.soa.PIONEER_REGISTRATION)
+        player:completeMission(SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
+        player:addMission(SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
     end
 end

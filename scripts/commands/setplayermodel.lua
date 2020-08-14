@@ -7,36 +7,36 @@ cmdprops =
 {
     permission = 1,
     parameters = "iis"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!setplayermodel <model> <slot> {player}");
-    player:PrintToPlayer("Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!setplayermodel <model> <slot> {player}")
+    player:PrintToPlayer("Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet")
+end
 
 function onTrigger(player, model, slot, target)
     -- validate model
     if (model == nil) then
-        error(player, "Invalid model ID.");
-        return;
+        error(player, "Invalid model ID.")
+        return
     end
-    
+
     -- validate slot
     if (slot == nil or slot < 0 or slot > 8) then
-        error(player, "Invalid slot ID.");
-        return;
+        error(player, "Invalid slot ID.")
+        return
     end
 
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player;
+        targ = player
     else
-        targ = GetPlayerByName(target);
+        targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player, string.format("Player named '%s' not found!", target));
-            return;
+            error(player, string.format("Player named '%s' not found!", target))
+            return
         end
     end
 
@@ -53,6 +53,6 @@ function onTrigger(player, model, slot, target)
     }
 
     -- set model
-    targ:setModelId(model, slot);
-    player:PrintToPlayer(string.format("Set %s's %s slot to model %i.", targ:getName(), slotNameByNum[slot], model));
-end;
+    targ:setModelId(model, slot)
+    player:PrintToPlayer(string.format("Set %s's %s slot to model %i.", targ:getName(), slotNameByNum[slot], model))
+end

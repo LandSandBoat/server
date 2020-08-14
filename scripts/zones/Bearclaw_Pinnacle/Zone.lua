@@ -7,25 +7,25 @@ local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------
 
 function onInitialize(zone)
-end;
+end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
-end;
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+function onZoneIn(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-680,16,-540,129);
+        player:setPos(-680, 16, -540, 129)
     end
-    return cs;
-end;
+    return cs
+end
 
-function onRegionEnter(player,region)
-end;
+function onRegionEnter(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

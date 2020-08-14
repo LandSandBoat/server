@@ -2,6 +2,7 @@
 -- Area: Jugner Forest
 --   NM: Supplespine Mujwuj
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -10,4 +11,5 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 160)
 end

@@ -27,11 +27,11 @@
 #include "../utils/charutils.h"
 
 
-CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar) 
+CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 {
 	this->type = 0x63;
 	this->size = 0x08;
-	
+
 	ref<uint8>(0x04) = 0x02;
 	ref<uint8>(0x06) = 0x0C;
 
@@ -50,7 +50,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 	}
 
 	//capped EXP
-	if ((PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1) 
+	if ((PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai && PChar->jobs.exp[PChar->GetMJob()] == charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1)
 		|| PChar->MeritMode)
 	{
 		flag |= 0x40;
@@ -67,7 +67,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 
 	memset(data + 4, 0, sizeof(PACKET_SIZE -4));
 
-    uint8 packet[] = 
+    uint8 packet[] =
     {
 		0x03, 0x00, 0xD8
     };
@@ -81,7 +81,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 
 	memset(data + 4, 0, sizeof(PACKET_SIZE -4));
 
-	uint8 packet2[] = 
+	uint8 packet2[] =
 	{
 		0x04, 0x00, 0x84
 	};

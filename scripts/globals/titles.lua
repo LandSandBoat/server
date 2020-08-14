@@ -1029,6 +1029,7 @@ tpz.title =
     SIDHE_SMASHER                             = 1036,
     ALEXANDER_ANNIHILATOR                     = 1037,
     LILITH_LIQUIDATOR                         = 1038,
+    MIREU_MINCER                              = 1039,
     VEGETABLE_HERO                            = 1044,
     CONTRIBUTER_FROM_THE_SHADOWS              = 1045,
     THE_DECIDER                               = 1046,
@@ -1049,6 +1050,7 @@ tpz.title =
     LEGENDARY_BONEWORKER                      = 1125,
     LEGENDARY_ALCHEMIST                       = 1126,
     LEGENDARY_CULINARIAN                      = 1127,
+    ETERNAL_COMMUNER                          = 1128,
 }
 
 -----------------------------------

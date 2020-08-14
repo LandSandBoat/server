@@ -2,8 +2,8 @@
 -- ID: 5
 -- Item: Bronze Bed
 -----------------------------------------
-require("scripts/globals/common");
-require("scripts/globals/quests");
+require("scripts/globals/common")
+require("scripts/globals/quests")
 -----------------------------------------
 
 function onFurniturePlaced(player)

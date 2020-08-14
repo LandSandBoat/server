@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobInitialize(mob)
@@ -22,6 +23,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

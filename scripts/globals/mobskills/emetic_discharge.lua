@@ -12,7 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -25,7 +25,7 @@ function onMobWeaponSkill(target, mob, skill)
                         tpz.effect.EVASION_DOWN, tpz.effect.DEFENSE_DOWN, tpz.effect.MAGIC_ACC_DOWN, tpz.effect.MAGIC_ATK_DOWN, tpz.effect.MAGIC_EVASION_DOWN,
                         tpz.effect.MAGIC_DEF_DOWN, tpz.effect.MAX_TP_DOWN, tpz.effect.MAX_MP_DOWN, tpz.effect.MAX_HP_DOWN}
 
-    local dmg = utils.takeShadows(target, 1, math.random(2,3)) --removes 2-3 shadows
+    local dmg = utils.takeShadows(target, 1, math.random(2, 3)) --removes 2-3 shadows
     --if removed more shadows than were up or there weren't any
     if (dmg > 0) then
         for i, effect in ipairs(removables) do

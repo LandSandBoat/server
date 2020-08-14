@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -24,7 +24,7 @@ function onMobWeaponSkill(target, mob, skill)
         dmgmod = dmgmod + math.random()
     end
 
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
 
     local shadows = info.hitslanded
 
@@ -33,7 +33,7 @@ function onMobWeaponSkill(target, mob, skill)
         shadows = MOBPARAM_WIPE_SHADOWS
     end
 
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.BLUNT,shadows)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, shadows)
 
     local typeEffect = tpz.effect.STUN
 

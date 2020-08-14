@@ -15,6 +15,6 @@ function onAdditionalEffect(player, target, damage)
         target:addStatusEffect(tpz.effect.PARALYSIS, 17, 0, 30) -- Power needs verification/adjustment.
         return tpz.subEffect.PARALYSIS, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.PARALYSIS
     end
-    
+
     return 0, 0, 0
 end

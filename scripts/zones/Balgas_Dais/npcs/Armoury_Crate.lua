@@ -171,53 +171,56 @@ local loot =
             {itemid =   816, droprate = 1000}, -- spool_of_silk_thread
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   816, droprate =  500}, -- spool_of_silk_thread
+            {itemid = 65535, droprate = 1000, amount = 3000}, -- gil
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   816, droprate =  500}, -- spool_of_silk_thread
+            {itemid =     0, droprate =  700}, -- nothing
+            {itemid =   816, droprate =  300}, -- spool_of_silk_thread
         },
         {
-            {itemid =     0, droprate =  400}, -- nothing
+            {itemid =     0, droprate =  900}, -- nothing
+            {itemid =   816, droprate =  100}, -- spool_of_silk_thread
+        },
+        {
+            {itemid =     0, droprate =  300}, -- nothing
             {itemid = 14733, droprate =   40}, -- singers_earring
-            {itemid = 14735, droprate =   40}, -- ashigaru_earring
-            {itemid = 14738, droprate =   40}, -- magicians_earring
-            {itemid = 13439, droprate =   40}, -- warlocks_earring
+            {itemid = 14735, droprate =   50}, -- ashigaru_earring
+            {itemid = 14738, droprate =   50}, -- magicians_earring
+            {itemid = 13439, droprate =   50}, -- warlocks_earring
             {itemid = 13437, droprate =   40}, -- healers_earring
-            {itemid = 14730, droprate =   40}, -- esquires_earring
-            {itemid = 13438, droprate =   40}, -- wizards_earring
+            {itemid = 14730, droprate =   45}, -- esquires_earring
+            {itemid = 13438, droprate =   50}, -- wizards_earring
             {itemid = 14737, droprate =   40}, -- wyvern_earring
-            {itemid = 13435, droprate =   40}, -- mercenarys_earring
-            {itemid = 14731, droprate =   40}, -- killer_earring
-            {itemid = 13436, droprate =   40}, -- wrestlers_earring
-            {itemid = 14736, droprate =   40}, -- genin_earring
-            {itemid = 14734, droprate =   40}, -- beaters_earring
-            {itemid = 14729, droprate =   40}, -- pilferers_earring
-            {itemid = 14732, droprate =   40}, -- trimmers_earring
+            {itemid = 13435, droprate =   50}, -- mercenarys_earring
+            {itemid = 14731, droprate =   45}, -- killer_earring
+            {itemid = 13436, droprate =   45}, -- wrestlers_earring
+            {itemid = 14736, droprate =   50}, -- genin_earring
+            {itemid = 14734, droprate =   50}, -- beaters_earring
+            {itemid = 14729, droprate =   45}, -- pilferers_earring
+            {itemid = 14732, droprate =   50}, -- trimmers_earring
         },
         {
-            {itemid =     0, droprate =  400}, -- nothing
-            {itemid = 14733, droprate =   40}, -- singers_earring
-            {itemid = 14735, droprate =   40}, -- ashigaru_earring
-            {itemid = 14738, droprate =   40}, -- magicians_earring
-            {itemid = 13439, droprate =   40}, -- warlocks_earring
-            {itemid = 13437, droprate =   40}, -- healers_earring
-            {itemid = 14730, droprate =   40}, -- esquires_earring
-            {itemid = 13438, droprate =   40}, -- wizards_earring
-            {itemid = 14737, droprate =   40}, -- wyvern_earring
-            {itemid = 13435, droprate =   40}, -- mercenarys_earring
-            {itemid = 14731, droprate =   40}, -- killer_earring
-            {itemid = 13436, droprate =   40}, -- wrestlers_earring
-            {itemid = 14736, droprate =   40}, -- genin_earring
-            {itemid = 14734, droprate =   40}, -- beaters_earring
-            {itemid = 14729, droprate =   40}, -- pilferers_earring
-            {itemid = 14732, droprate =   40}, -- trimmers_earring
+            {itemid =     0, droprate =  700}, -- nothing
+            {itemid = 14733, droprate =   20}, -- singers_earring
+            {itemid = 14735, droprate =   20}, -- ashigaru_earring
+            {itemid = 14738, droprate =   20}, -- magicians_earring
+            {itemid = 13439, droprate =   20}, -- warlocks_earring
+            {itemid = 13437, droprate =   20}, -- healers_earring
+            {itemid = 14730, droprate =   20}, -- esquires_earring
+            {itemid = 13438, droprate =   20}, -- wizards_earring
+            {itemid = 14737, droprate =   20}, -- wyvern_earring
+            {itemid = 13435, droprate =   20}, -- mercenarys_earring
+            {itemid = 14731, droprate =   20}, -- killer_earring
+            {itemid = 13436, droprate =   20}, -- wrestlers_earring
+            {itemid = 14736, droprate =   20}, -- genin_earring
+            {itemid = 14734, droprate =   20}, -- beaters_earring
+            {itemid = 14729, droprate =   20}, -- pilferers_earring
+            {itemid = 14732, droprate =   20}, -- trimmers_earring
         },
         {
             {itemid =     0, droprate =  500}, -- nothing
-            {itemid =  1134, droprate =  250}, -- sheet_of_bast_parchment
-            {itemid =  4116, droprate =  250}, -- hi-potion
+            {itemid =  1134, droprate =  400}, -- sheet_of_bast_parchment
+            {itemid =  4116, droprate =  100}, -- hi-potion
         },
         {
             {itemid =     0, droprate =  500}, -- nothing
@@ -225,11 +228,11 @@ local loot =
             {itemid =  4132, droprate =  250}, -- hi-ether
         },
         {
-            {itemid =     0, droprate =  200}, -- nothing
-            {itemid =  4751, droprate =  200}, -- scroll_of_erase
+            {itemid =     0, droprate =  250}, -- nothing
+            {itemid =  4751, droprate =  150}, -- scroll_of_erase
             {itemid =  4868, droprate =  200}, -- scroll_of_dispel
-            {itemid =  5070, droprate =  200}, -- scroll_of_magic_finale
-            {itemid =  4947, droprate =  200}, -- scroll_of_utsusemi_ni
+            {itemid =  5070, droprate =  250}, -- scroll_of_magic_finale
+            {itemid =  4947, droprate =  150}, -- scroll_of_utsusemi_ni
         },
         {
             {itemid =     0, droprate =  300}, -- nothing
@@ -247,23 +250,25 @@ local loot =
             {itemid =   736, droprate =   50}, -- chunk_of_silver_ore
             {itemid =   652, droprate =   50}, -- steel_ingot
             {itemid =   806, droprate =   50}, -- tourmaline
+            {itemid =   796, droprate =   50}, -- light opal
         },
         {
-            {itemid =     0, droprate =  300}, -- nothing
-            {itemid =   814, droprate =   50}, -- amber_stone
-            {itemid =   645, droprate =   50}, -- chunk_of_darksteel_ore
-            {itemid =   690, droprate =   50}, -- elm_log
-            {itemid =   651, droprate =   50}, -- iron_ingot
-            {itemid =   643, droprate =   50}, -- chunk_of_iron_ore
-            {itemid =   795, droprate =   50}, -- lapis_lazuli
-            {itemid =   653, droprate =   50}, -- mythril_ingot
-            {itemid =   644, droprate =   50}, -- chunk_of_mythril_ore
-            {itemid =   799, droprate =   50}, -- onyx
-            {itemid =   807, droprate =   50}, -- sardonyx
-            {itemid =   744, droprate =   50}, -- silver_ingot
-            {itemid =   736, droprate =   50}, -- chunk_of_silver_ore
-            {itemid =   652, droprate =   50}, -- steel_ingot
-            {itemid =   806, droprate =   50}, -- tourmaline
+            {itemid =     0, droprate =  500}, -- nothing
+            {itemid =   814, droprate =   30}, -- amber_stone
+            {itemid =   645, droprate =   40}, -- chunk_of_darksteel_ore
+            {itemid =   690, droprate =   30}, -- elm_log
+            {itemid =   651, droprate =   30}, -- iron_ingot
+            {itemid =   643, droprate =   40}, -- chunk_of_iron_ore
+            {itemid =   795, droprate =   30}, -- lapis_lazuli
+            {itemid =   653, droprate =   40}, -- mythril_ingot
+            {itemid =   644, droprate =   40}, -- chunk_of_mythril_ore
+            {itemid =   799, droprate =   30}, -- onyx
+            {itemid =   807, droprate =   30}, -- sardonyx
+            {itemid =   744, droprate =   40}, -- silver_ingot
+            {itemid =   736, droprate =   30}, -- chunk_of_silver_ore
+            {itemid =   652, droprate =   30}, -- steel_ingot
+            {itemid =   806, droprate =   30}, -- tourmaline
+            {itemid =   796, droprate =   30}, -- light opal
         },
     },
     -- BCNM Charming Trio
@@ -281,15 +286,15 @@ local loot =
         },
         {
             {itemid = 749, droprate = 250},  -- Mythril Beastcoin
-            {itemid = 17786, droprate = 190},-- Ganko
+            {itemid = 17786, droprate = 190}, -- Ganko
             {itemid = 827, droprate = 270},  -- Square Of Wool Cloth
-            {itemid = 18171, droprate = 145},-- Platoon Disc
+            {itemid = 18171, droprate = 145}, -- Platoon Disc
             {itemid = 824, droprate = 295},  -- Square Of Grass Cloth
             {itemid = 826, droprate = 260},  -- Square Of Linen Cloth
         },
         {
             {itemid = 0, droprate = 800},    -- Nothing
-            {itemid = 18209, droprate = 167},-- Platoon Cutter
+            {itemid = 18209, droprate = 167}, -- Platoon Cutter
         },
         {
             {itemid = 0, droprate = 500},    -- Nothing
@@ -300,11 +305,11 @@ local loot =
             {itemid = 924, droprate = 500},  -- Vial Of Fiend Blood
         },
         {
-            {itemid = 18170, droprate = 235},-- Platoon Edge
-            {itemid = 17271, droprate = 235},-- Platoon Gun
-            {itemid = 17692, droprate = 235},-- Platoon Spatha
-            {itemid = 17571, droprate = 235},-- Platoon Pole
-            {itemid = 17820, droprate = 255},-- Gunromaru
+            {itemid = 18170, droprate = 235}, -- Platoon Edge
+            {itemid = 17271, droprate = 235}, -- Platoon Gun
+            {itemid = 17692, droprate = 235}, -- Platoon Spatha
+            {itemid = 17571, droprate = 235}, -- Platoon Pole
+            {itemid = 17820, droprate = 255}, -- Gunromaru
             {itemid = 1601, droprate = 260}, -- Mannequin Head
             {itemid = 4853, droprate = 250}, -- Scroll Of Drain
             {itemid = 930, droprate = 190},  -- Vial Of Beastman Blood
@@ -360,15 +365,15 @@ local loot =
     [107] =
     {
         {
-            {itemid = 3339, droprate = 1000},-- Jug Of Honey Wine
+            {itemid = 3339, droprate = 1000}, -- Jug Of Honey Wine
         },
         {
             {itemid = 1441, droprate = 312}, -- Libation Abjuration
-            {itemid = 17694, droprate = 182},-- Guespiere
+            {itemid = 17694, droprate = 182}, -- Guespiere
             {itemid = 18047, droprate = 65}, -- Havoc Scythe
             {itemid = 17937, droprate = 43}, -- Leopard Axe
-            {itemid = 18173, droprate = 181},-- Nokizaru Shuriken
-            {itemid = 17823, droprate = 217},-- Shinsoku
+            {itemid = 18173, droprate = 181}, -- Nokizaru Shuriken
+            {itemid = 17823, droprate = 217}, -- Shinsoku
             {itemid = 17575, droprate = 43}, -- Somnus Signa
         },
         {
@@ -379,12 +384,12 @@ local loot =
         },
         {
             {itemid = 1442, droprate = 159}, -- Oblation Abjuration
-            {itemid = 17695, droprate = 151},-- Bayards Sword
-            {itemid = 18088, droprate = 167},-- Dreizack
+            {itemid = 17695, droprate = 151}, -- Bayards Sword
+            {itemid = 18088, droprate = 167}, -- Dreizack
             {itemid = 17576, droprate = 95}, -- Grim Staff
             {itemid = 17245, droprate = 95}, -- Grosveneurs Bow
             {itemid = 17996, droprate = 56}, -- Stylet
-            {itemid = 17789, droprate = 341},-- Unsho
+            {itemid = 17789, droprate = 341}, -- Unsho
         },
         {
             {itemid = 4486, droprate = 522}, -- Dragon Heart
@@ -421,7 +426,7 @@ local loot =
             {itemid = 4211, droprate = 116}, -- Charisma Potion
             {itemid = 4213, droprate = 51},  -- Icarus Wing
             {itemid = 1132, droprate = 246}, -- Square Of Raxa
-            {itemid = 17582, droprate = 246},-- Prelatic Pole
+            {itemid = 17582, droprate = 246}, -- Prelatic Pole
         },
         {
             {itemid = 4135, droprate = 290}, -- Hi-ether +3
@@ -599,18 +604,18 @@ local loot =
         },
     },
 }
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -38,7 +38,7 @@ class CItemContainer;
 class CGuildMenuSellPacket : public CBasicPacket
 {
 public:
-	
+
 	CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* PGuild);
 };
 

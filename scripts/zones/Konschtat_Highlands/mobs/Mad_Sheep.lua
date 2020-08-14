@@ -5,9 +5,11 @@
 -----------------------------------
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
 require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

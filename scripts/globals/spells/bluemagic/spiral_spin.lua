@@ -17,15 +17,15 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
         params.tpmod = TPMOD_CRITICAL
-        params.dmgtype = tpz.damageType.SLASHING
+        params.damageType = tpz.damageType.SLASHING
         params.scattr = SC_TRANSFIXION
         params.numhits = 1
     params.multiplier = 1.925
@@ -48,7 +48,7 @@ function onSpellCast(caster,target,spell)
     if (damage > 0 and chance > 4) then
         local typeEffect = tpz.effect.ACCURACY_DOWN
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect,4,0,getBlueEffectDuration(caster,resist,typeEffect))
+        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage

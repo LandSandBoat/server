@@ -7,18 +7,18 @@ cmdprops =
 {
     permission = 1,
     parameters = "si"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!goto <player> {forceZone}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!goto <player> {forceZone}")
+end
 
 function onTrigger(player, target, forceZone)
 
     -- validate target
     if not target then
-        error(player, "You must enter a player name.");
+        error(player, "You must enter a player name.")
         return
     end
 

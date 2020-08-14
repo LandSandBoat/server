@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
@@ -22,7 +22,7 @@ function onTrade(player,npc,trade)
                 --                                                                       ^ 1 = Remembers you and girl from Tavnazia and asks to TRADE dagger for map
             else
                 player:startEvent(10, 0, 1729, tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE, 1, 0, 1, 0)
-                --                                                                 ^ 1   ^ 1 = Remembers you and girl from Tavnazia and asks for the dagger   
+                --                                                                 ^ 1   ^ 1 = Remembers you and girl from Tavnazia and asks for the dagger
             end
         else
             if player:hasTitle(tpz.title.COMPANION_OF_LOUVERANCE) or player:hasTitle(tpz.title.TRUE_COMPANION_OF_LOUVERANCE) then
@@ -39,7 +39,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
@@ -47,17 +47,17 @@ function onTrigger(player,npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     elseif overTheHillsAndFarAway == QUEST_ACCEPTED then
         player:messageSpecial(ID.text.SOMETHING_GLITTERING)
-        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, 1729)     
+        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, 1729)
     else
         player:messageSpecial(ID.text.SOMETHING_GLITTERING_BUT)
     end
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 10 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
         player:confirmTrade()

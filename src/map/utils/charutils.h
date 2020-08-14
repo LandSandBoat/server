@@ -40,7 +40,7 @@ class CAbility;
 enum class EMobDifficulty : uint8
 {
     TooWeak = 0,
-    IncredibyEasyPrey,
+    IncrediblyEasyPrey,
     EasyPrey,
     DecentChallenge,
     EvenMatch,

@@ -106,7 +106,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_SOLITARY_ONE]           = {tpz.mod.TRIPLE_ATTACK, 7, tpz.mod.DMGBREATH, -25, tpz.mod.ZANSHIN, 10},
     [tpz.ki.ATMA_OF_THE_WINGED_GLOOM]           = {tpz.mod.DMG, -25, tpz.mod.REGEN, 2},
     [tpz.ki.ATMA_OF_THE_SEA_DAUGHTER]           = {tpz.mod.REGAIN, 50, tpz.mod.HASTE_GEAR, -1500, tpz.mod.REGEN, 30},
-    [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit crap in onTick for it..
+    [tpz.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit work in onTick for it..
     [tpz.ki.ATMA_OF_THE_FOE_FLAYER]             = {tpz.mod.MPP, 20, tpz.mod.REFRESH, 20, tpz.mod.FASTCAST, 20, tpz.mod.MACC, 50},
     [tpz.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {tpz.mod.MND, 20, tpz.mod.DARKRES, 100, tpz.mod.FORCE_DARK_DWBONUS, 1},
     [tpz.ki.ATMA_OF_THE_SUNDERING_SLASH]        = {tpz.mod.ATT, 20, tpz.mod.REGAIN, 30},
@@ -116,7 +116,7 @@ local atmaMods =
     [tpz.ki.ATMA_OF_THE_FALLEN_ONE]             = {tpz.mod.INT, 30, tpz.mod.MND, 30},
     [tpz.ki.ATMA_OF_FIRES_AND_FLARES]           = {tpz.mod.AGI, 20, tpz.mod.RATT, 40},
     [tpz.ki.ATMA_OF_THE_APOCALYPSE]             = {tpz.mod.TRIPLE_ATTACK, 15, tpz.mod.RERAISE_III, 1, tpz.mod.QUICK_MAGIC, 10},
-    
+
     -- GROUP 2
     [tpz.ki.ATMA_OF_THE_HEIR]                   = {},
     [tpz.ki.ATMA_OF_THE_HERO]                   = {},

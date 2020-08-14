@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -193,7 +193,9 @@ namespace battleutils
     uint8               getBarrageShotCount(CCharEntity* PChar);
     uint8               getStoreTPbonusFromMerit(CBattleEntity* PEntity);
 
-    void                ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker);
+    void                ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing = false);
+    void                DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker);
+    void                RelinquishClaim(CCharEntity* PDefender);
 
     int32               BreathDmgTaken(CBattleEntity* PDefender, int32 damage);
     int32               MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element);

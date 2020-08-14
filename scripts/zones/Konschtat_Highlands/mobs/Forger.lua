@@ -3,6 +3,7 @@
 --   NM: Forger
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobInitialize(mob)
@@ -10,4 +11,5 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.tutorial.onMobDeath(player)
 end

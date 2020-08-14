@@ -7,34 +7,34 @@ cmdprops =
 {
     permission = 1,
     parameters = "ss"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!setflag <flags> {player}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!setflag <flags> {player}")
+end
 
 function onTrigger(player, flags, target)
 
     -- validate flags
     if (flags == nil) then
-        error(player, "You must enter a number for the flags (hex values work).");
-        return;
+        error(player, "You must enter a number for the flags (hex values work).")
+        return
     end
 
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player;
+        targ = player
     else
-        targ = GetPlayerByName(target);
+        targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) );
-            return;
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
         end
     end
 
     -- set flags
-    targ:setFlag( flags );
+    targ:setFlag( flags )
 
-end;
+end

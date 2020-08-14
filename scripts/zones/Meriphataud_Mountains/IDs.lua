@@ -24,8 +24,8 @@ zones[tpz.zone.MERIPHATAUD_MOUNTAINS] =
         FIND_NOTHING             = 7245,  -- You dig and you dig, but find nothing.
         NOTHING_FOUND            = 7488,  -- You find nothing.
         CONQUEST                 = 7900,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA        = 8274,  -- You can hear a strange voice... "Items, Items, la la la la la~♪"
-        GOBLIN_SLIPPED_AWAY      = 8279,  -- The Goblin slipped away when you were not looking...
+        ITEMS_ITEMS_LA_LA        = 8274,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY      = 8280,  -- The Goblin slipped away when you were not looking...
         PLAYER_OBTAINS_ITEM      = 8337,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 8338,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM = 8339,  -- <name> obtains the temporary item: <item>!
@@ -42,9 +42,9 @@ zones[tpz.zone.MERIPHATAUD_MOUNTAINS] =
         },
         PATRIPATAN_PH       =
         {
-            [17264967] = 17264972, -- 551.767,-32.570,590.205
-            [17264968] = 17264972, -- 646.199,-24.483,644.477
-            [17264969] = 17264972, -- 535.318,-32.179,602.055
+            [17264967] = 17264972, -- 551.767, -32.570, 590.205
+            [17264968] = 17264972, -- 646.199, -24.483, 644.477
+            [17264969] = 17264972, -- 535.318, -32.179, 602.055
         },
         DAGGERCLAW_DRACOS_PH =
         {

@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 function onInitialize(zone)
 end
 
-function onInstanceZoneIn(player,instance)
+function onInstanceZoneIn(player, instance)
     local cs = -1
 
     local pos = player:getPos()
@@ -16,24 +16,24 @@ function onInstanceZoneIn(player,instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
-    
+
     player:addTempItem(5347)
-    
+
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
     if csid == 102 then
-        for i,v in pairs(chars) do
-            v:setPos(0,0,0,0,54)
+        for i, v in pairs(chars) do
+            v:setPos(0, 0, 0, 0, 54)
         end
     end
 end

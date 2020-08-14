@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -44,7 +44,7 @@ public:
     void   setEquipSlot(uint32 slot);
     uint32 getElementSlots();
     void   setElementSlots(uint32 slots);
-	
+
 private:
     uint8  m_equipSlot;
     uint32 m_elementSlots;

@@ -7,11 +7,11 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------------
 
-function onMagicCastingCheck(caster, target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local dMND = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
 
     --Power
@@ -28,7 +28,7 @@ function onSpellCast(caster,target,spell)
     params.bonus = 0
     params.effect = tpz.effect.SLOW
     local resist = applyResistanceEffect(caster, target, spell, params)
-    
+
     if resist >= 0.5 then -- Do it!
         if target:addStatusEffect(params.effect, power, 0, duration * resist, 0, 1) then
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)

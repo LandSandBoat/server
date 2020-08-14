@@ -27,7 +27,7 @@ function onTrigger(player, target)
     local isUp = false
     local targ = GetNPCByID(target)
     local pos0 = false
-    
+
     if targ then
         local pos = targ:getPos()
         pos0 = (pos.x == 0 and pos.y == 0 and pos.z == 0)
@@ -44,7 +44,7 @@ function onTrigger(player, target)
             end
         end
     end
-    
+
     if not targ then
         player:goToEntity(target)
     elseif pos0 then

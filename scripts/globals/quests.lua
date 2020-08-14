@@ -10,9 +10,9 @@ tpz.quest = tpz.quest or {}
 --
 -----------------------------------
 
-QUEST_AVAILABLE = 0;
-QUEST_ACCEPTED  = 1;
-QUEST_COMPLETED = 2;
+QUEST_AVAILABLE = 0
+QUEST_ACCEPTED  = 1
+QUEST_COMPLETED = 2
 
 -- Log IDs defined as "enums" here to tie into quest_rewrite
 -- branch that will be merged in at a later date. Used

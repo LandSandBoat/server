@@ -2,7 +2,7 @@
 -- Ability: Shield Bash
 -- Delivers an attack that can stun the target. Shield required.
 -- Obtained: Paladin Level 15, Valoredge automaton frame Level 1
--- Recast Time: 3:00 minutes (3:00 for Valoredge version)
+-- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/settings")
@@ -10,7 +10,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if player:getShieldSize() == 0 then
         return tpz.msg.basic.REQUIRES_SHIELD, 0
     else
@@ -68,7 +68,7 @@ function onUseAbility(player, target, ability)
     damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)
     target:takeDamage(damage, player, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
-    target:updateEnmityFromDamage(player,damage)
+    target:updateEnmityFromDamage(player, damage)
     ability:setMsg(tpz.msg.basic.JA_DAMAGE)
 
     return damage

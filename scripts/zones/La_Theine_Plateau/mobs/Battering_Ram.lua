@@ -2,12 +2,14 @@
 -- Area: La Theine Plateau
 --  Mob: Battering Ram
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs");
+local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
 require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

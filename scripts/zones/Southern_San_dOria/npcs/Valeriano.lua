@@ -4,18 +4,13 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    end
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         4394,     10,    -- Ginger Cookie
@@ -37,8 +32,8 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock, SANDORIA)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

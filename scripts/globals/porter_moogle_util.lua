@@ -2,10 +2,10 @@
 -- Porter Moogle Utilities
 -- desc: Common functionality for Porter Moogles.
 -----------------------------------
-require("scripts/globals/common");
+require("scripts/globals/common")
 
 -- Item IDs for all of the slips.
-local slipIds = { 29312, 29313, 29314, 29315, 29316, 29317, 29318, 29319, 29320, 29321, 29322, 29323, 29324, 29325, 29326, 29327, 29328, 29329, 29330, 29331, 29332, 29333, 29334, 29335, 29336, 29337, 29338, 29339 };
+local slipIds = { 29312, 29313, 29314, 29315, 29316, 29317, 29318, 29319, 29320, 29321, 29322, 29323, 29324, 29325, 29326, 29327, 29328, 29329, 29330, 29331, 29332, 29333, 29334, 29335, 29336, 29337, 29338, 29339 }
 
 -- Item IDs for the items stored on each slip. Zero-based index in the table represents the bit indicating if the slip has the item stored.
 local slipItems = {
@@ -26,8 +26,8 @@ local slipItems = {
     [slipIds[15]] = { 27663, 27807, 27943, 28090, 28223, 27664, 27808, 27944, 28091, 28224, 27665, 27809, 27945, 28092, 28225, 27666, 27810, 27946, 28093, 28226, 27667, 27811, 27947, 28094, 28227, 27668, 27812, 27948, 28095, 28228, 27669, 27813, 27949, 28096, 28229, 27670, 27814, 27950, 28097, 28230, 27671, 27815, 27951, 28098, 28231, 27672, 27816, 27952, 28099, 28232, 27673, 27817, 27953, 28100, 28233, 27674, 27818, 27954, 28101, 28234, 27675, 27819, 27955, 28102, 28235, 27676, 27820, 27956, 28103, 28236, 27677, 27821, 27957, 28104, 28237, 27678, 27822, 27958, 28105, 28238, 27679, 27823, 27959, 28106, 28239, 27680, 27824, 27960, 28107, 28240, 27681, 27825, 27961, 28108, 28241, 27682, 27826, 27962, 28109, 28242, 27683, 27827, 27963, 28110, 28243 },
     [slipIds[16]] = { 27684, 27828, 27964, 28111, 28244, 27685, 27829, 27965, 28112, 28245, 27686, 27830, 27966, 28113, 28246, 28246, 27831, 27967, 28114, 28247, 27688, 27832, 27968, 28115, 28248, 27689, 27833, 27969, 28116, 28249, 27690, 27834, 27970, 28117, 28250, 27691, 27835, 27971, 28118, 28251, 27692, 27836, 27972, 28119, 28252, 27693, 27837, 27973, 28120, 28253, 27694, 27838, 27974, 28121, 28254, 27695, 27839, 27975, 28122, 28255, 27696, 27840, 27976, 28123, 28256, 27697, 27841, 27977, 28124, 28257, 27698, 27842, 27978, 28125, 28258, 27699, 27843, 27979, 28126, 28259, 27700, 27844, 27980, 28127, 28260, 27701, 27845, 27981, 28128, 28261, 27702, 27846, 27982, 28129, 28262, 27703, 27847, 27983, 28130, 28263, 27704, 27848, 27984, 28131, 28264, 27705, 27849, 27985, 28132, 28265, 27706, 27850, 27986, 28133, 28266 },
     [slipIds[17]] = { 26624, 26800, 26976, 27152, 27328, 26626, 26802, 26978, 27154, 27330, 26628, 26804, 26980, 27156, 27332, 26630, 26806, 26982, 27158, 27334, 26632, 26808, 26984, 27160, 27336, 26634, 26810, 26986, 27162, 27338, 26636, 26812, 26988, 27164, 27340, 26638, 26814, 26990, 27166, 27342, 26640, 26816, 26992, 27168, 27344, 26642, 26818, 26994, 27170, 27346, 26644, 26820, 26996, 27172, 27348, 26646, 26822, 26998, 27174, 27350, 26648, 26824, 27000, 27176, 27352, 26650, 26826, 27002, 27178, 27354, 26652, 26828, 27004, 27180, 27356, 26654, 26830, 27006, 27182, 27358, 26656, 26832, 27008, 27184, 27360, 26658, 26834, 27010, 27186, 27362, 26660, 26836, 27012, 27188, 27364, 26662, 26838, 27014, 27190, 27366, 26664, 26840, 27016, 27192, 27368, 26666, 26842, 27018, 27194, 27370 },
-    [slipIds[18]] = { 26625, 26801, 26977, 27153, 27329, 26627, 26803, 26979, 27155, 27331, 26629, 26805, 26981, 27157, 27333, 26631, 26807, 26983, 27159, 27335, 26633, 26809, 26985, 27161, 27337, 26635, 26811, 26987, 27163, 27339, 26637, 26813, 26989, 27165, 27341, 26639, 26815, 26991, 27167, 27343, 26641, 26817, 26993, 27169, 27345, 26643, 26819, 26995, 27171, 27347, 26645, 26821, 26997, 27173, 27349, 26647, 26823, 26999, 27175, 27351, 26649, 26825, 27001, 27177, 27353, 26651, 26827, 27003, 27179, 27355, 26653, 26829, 27005, 27181, 27357, 26655, 26831, 27007, 27183, 27358, 26657, 26833, 27009, 27185, 27361, 26659, 26835, 27011, 27187, 27363, 26661, 26837, 27013, 27189, 27365, 26663, 26839, 27015, 27191, 27367, 26665, 26841, 27017, 27193, 27369, 26667, 26843, 27019, 27195, 27371 },
-    [slipIds[19]] = { 27715, 27866, 27716, 27867, 278, 281, 284, 3680, 3681, 27859, 28149, 27860, 28150, 21107, 21108, 27625, 27626, 26693, 26694, 26707, 26708, 27631, 27632, 26705, 26706, 27854, 27855, 26703, 26704, 3682, 3683, 3684, 3685, 3686, 3687, 3688, 3689, 3690, 3691, 3692, 3693, 3694, 3695, 21097, 21098, 26717, 26718, 26728,26719,26720,26889,26890, 21095, 21096, 26738, 26739, 26729, 26730, 26788, 26946, 27281, 27455, 26789 },
+    [slipIds[18]] = { 26625, 26801, 26977, 27153, 27329, 26627, 26803, 26979, 27155, 27331, 26629, 26805, 26981, 27157, 27333, 26631, 26807, 26983, 27159, 27335, 26633, 26809, 26985, 27161, 27337, 26635, 26811, 26987, 27163, 27339, 26637, 26813, 26989, 27165, 27341, 26639, 26815, 26991, 27167, 27343, 26641, 26817, 26993, 27169, 27345, 26643, 26819, 26995, 27171, 27347, 26645, 26821, 26997, 27173, 27349, 26647, 26823, 26999, 27175, 27351, 26649, 26825, 27001, 27177, 27353, 26651, 26827, 27003, 27179, 27355, 26653, 26829, 27005, 27181, 27357, 26655, 26831, 27007, 27183, 27359, 26657, 26833, 27009, 27185, 27361, 26659, 26835, 27011, 27187, 27363, 26661, 26837, 27013, 27189, 27365, 26663, 26839, 27015, 27191, 27367, 26665, 26841, 27017, 27193, 27369, 26667, 26843, 27019, 27195, 27371 },
+    [slipIds[19]] = { 27715, 27866, 27716, 27867, 278, 281, 284, 3680, 3681, 27859, 28149, 27860, 28150, 21107, 21108, 27625, 27626, 26693, 26694, 26707, 26708, 27631, 27632, 26705, 26706, 27854, 27855, 26703, 26704, 3682, 3683, 3684, 3685, 3686, 3687, 3688, 3689, 3690, 3691, 3692, 3693, 3694, 3695, 21097, 21098, 26717, 26718, 26728, 26719, 26720, 26889, 26890, 21095, 21096, 26738, 26739, 26729, 26730, 26788, 26946, 27281, 27455, 26789 },
     [slipIds[20]] = { 26740, 26898, 27052, 27237, 27411, 26742, 26900, 27054, 27239, 27413, 26744, 26902, 27056, 27241, 27415, 26746, 26904, 27058, 27243, 27417, 26748, 26906, 27060, 27245, 27419, 26750, 26908, 27062, 27247, 27421, 26752, 26910, 27064, 27249, 27423, 26754, 26912, 27066, 27251, 27425, 26756, 26914, 27068, 27253, 27427, 26758, 26916, 27070, 27255, 27429, 26760, 26918, 27072, 27257, 27431, 26762, 26920, 27074, 27259, 27433, 26764, 26922, 27076, 27261, 27435, 26766, 26924, 27078, 27263, 27437, 26768, 26926, 27080, 27265, 27439, 26770, 26928, 27082, 27267, 27441, 26772, 26930, 27084, 27269, 27443, 26774, 26932, 27086, 27271, 27445, 26776, 26934, 27088, 27273, 27447, 26778, 26936, 27090, 27275, 27449, 26780, 26938, 27092, 27277, 27451, 26782, 26940, 27094, 27279, 27453 },
     [slipIds[21]] = { 26741, 26899, 27053, 27238, 27412, 26743, 26901, 27055, 27240, 27414, 26745, 26903, 27057, 27242, 27416, 26747, 26905, 27059, 27244, 27418, 26749, 26907, 27061, 27246, 27420, 26751, 26909, 27063, 27248, 27422, 26753, 26911, 27065, 27250, 27424, 26755, 26913, 27067, 27252, 27426, 26757, 26915, 27069, 27254, 27428, 26759, 26917, 27071, 27256, 27430, 26761, 26919, 27073, 27258, 27432, 26763, 26921, 27075, 27260, 27434, 26765, 26923, 27077, 27262, 27436, 26767, 26925, 27079, 27264, 27438, 26769, 26927, 27081, 27266, 27440, 26771, 26929, 27083, 27268, 27442, 26773, 26931, 27085, 27270, 27444, 26775, 26933, 27087, 27272, 27446, 26777, 26935, 27089, 27274, 27448, 26779, 26937, 27091, 27276, 27450, 26781, 26939, 27093, 27278, 27452, 26783, 26941, 27095, 27280, 27454 },
     [slipIds[22]] = { 25639, 25715, 25638, 3707, 3708, 21074, 26406, 25645, 25726, 25648, 25649, 25650, 25758, 25759, 25672, 25673, 282, 279, 280, 268, 25670, 25671, 26520, 25652, 25653, 22017, 22018, 25586, 25587, 10384, 10385, 22019, 22020, 25722, 25585, 25776, 25677, 25677, 25675, 25676, 20668, 20669, 22069, 25755, 37222, 21608, 3713, 3714, 3715, 3717, 3727, 3728, 20577, 3726, 20666, 20667, 21741, 21609, 3723, 26410, 26411, 25850, 21509, 3725, 3720, 21658, 26524, 20665, 26412, 21965, 21966, 21967, 25774, 25838, 25775, 25839, 3724, 3721, 21682, 22072, 21820, 21821, 23731, 26517, 23730, 20573, 20674, 21742, 21860, 22065, 22039, 22124, 22132, 3719, 3738, 26518, 27623, 21867, 21868, 22283, 26516, 20933, 20578, 20568, 3739 },
@@ -37,13 +37,13 @@ local slipItems = {
     [slipIds[26]] = { 23063, 23130, 23197, 23264, 23331, 23064, 23131, 23198, 23265, 23332, 23065, 23132, 23199, 23266, 23333, 23066, 23133, 23200, 23267, 23334, 23067, 23134, 23201, 23268, 23335, 23068, 23135, 23202, 23269, 23336, 23069, 23136, 23203, 23270, 23337, 23070, 23137, 23204, 23271, 23338, 23071, 23138, 23205, 23272, 23339, 23072, 23139, 23206, 23273, 23340, 23073, 23140, 23207, 23274, 23341, 23074, 23141, 23208, 23275, 23342, 23075, 23142, 23209, 23276, 23343, 23076, 23143, 23210, 23277, 23344, 23077, 23144, 23211, 23278, 23345, 23078, 23145, 23212, 23279, 23346, 23079, 23146, 23213, 23280, 23347, 23080, 23147, 23214, 23281, 23348, 23081, 23148, 23215, 23282, 23349, 23082, 23149, 23216, 23283, 23350, 23083, 23150, 23217, 23284, 23351, 23084, 23151, 23218, 23285, 23352 },
     [slipIds[27]] = { 23398, 23465, 23532, 23599, 23666, 23399, 23466, 23533, 23600, 23667, 23400, 23467, 23534, 23601, 23668, 23401, 23468, 23535, 23602, 23669, 23402, 23469, 23536, 23603, 23670, 23403, 23470, 23537, 23604, 23671, 23404, 23471, 23538, 23605, 23672, 23405, 23472, 23539, 23606, 23673, 23406, 23473, 23540, 23607, 23674, 23407, 23474, 23541, 23608, 23675, 23408, 23475, 23542, 23609, 23676, 23409, 23476, 23543, 23610, 23677, 23410, 23477, 23544, 23611, 23678, 23411, 23478, 23545, 23612, 23679, 23412, 23479, 23546, 23613, 23680, 23413, 23480, 23547, 23614, 23681, 23414, 23481, 23548, 23615, 23682, 23415, 23482, 23549, 23616, 23683, 23416, 23483, 23550, 23617, 23684, 23417, 23484, 23551, 23618, 23685, 23418, 23485, 23552, 23619, 23686, 23419, 23486, 23553, 23620, 23687 },
     [slipIds[28]] = { 21515, 21561, 21617, 21670, 21718, 21775, 21826, 21879, 21918, 21971, 22027, 22082, 22108, 22214, 21516, 21562, 21618, 21671, 21719, 21776, 21827, 21880, 21919, 21972, 22028, 22083, 22109, 22215, 21517, 21563, 21619, 21672, 21720, 21777, 21828, 21881, 21920, 21973, 22029, 22084, 22110, 22216, 21518, 21564, 21620, 21673, 21721, 21778, 21829, 21882, 21921, 21974, 22030, 22085, 22111, 22217, 21519, 21565, 21621, 21674, 21722, 21779, 21830, 21883, 21922, 21975, 22031, 22086, 22112, 22218 }
-};
+}
 
 ----------------------------------------------------------------------
 -- desc : Checks if the supplied item is a Moogle Storage Slip.
 ----------------------------------------------------------------------
 local function isSlip(itemId)
-    return (slipItems[itemId] ~= nil);
+    return (slipItems[itemId] ~= nil)
 end
 
 ----------------------------------------------------------------------
@@ -52,35 +52,35 @@ end
 local function isStorableOn(slipId, itemId)
     for _, id in ipairs(slipItems[slipId]) do
         if (id == itemId) then
-            return true;
+            return true
         end
     end
-    
-    printf('Item %s is not storable on %s', itemId, slipId);
-    return false;
+
+    printf('Item %s is not storable on %s', itemId, slipId)
+    return false
 end
 
 ----------------------------------------------------------------------
 -- desc : Gets IDs of retrievable items from the extra data on a slip.
 ----------------------------------------------------------------------
 local function getItemsOnSlip(extra, slipId)
-    local slip = slipItems[slipId];
-    
-    local itemsOnSlip = {};
-    local x = 1;
-    for k,v in ipairs(slip) do
-        local byte = extra[math.floor((k - 1) / 8) + 1];
+    local slip = slipItems[slipId]
+
+    local itemsOnSlip = {}
+    local x = 1
+    for k, v in ipairs(slip) do
+        local byte = extra[math.floor((k - 1) / 8) + 1]
         if byte < 0 then
-            byte = byte + 256;
+            byte = byte + 256
         end
-                
+
         if (bit.band(bit.rshift(byte, (k - 1) % 8), 1) ~= 0) then
-            itemsOnSlip[x] = v;
-            x = x + 1;
+            itemsOnSlip[x] = v
+            x = x + 1
         end
     end
-    
-    return itemsOnSlip;
+
+    return itemsOnSlip
 end
 
 ----------------------------------------------------------------------
@@ -99,22 +99,22 @@ end
 -- desc : Converts the 8 bit extra data into 32 bit params for events.
 ----------------------------------------------------------------------
 local function int8ToInt32(extra)
-    local params = {};
-    local int32 = '';
-    
-    for k,v in ipairs(extra) do
-        int32 = string.format('%02x%s', v, int32);
+    local params = {}
+    local int32 = ''
+
+    for k, v in ipairs(extra) do
+        int32 = string.format('%02x%s', v, int32)
         if (k % 4 == 0) then
-            params[#params + 1] = tonumber(int32, 16);
-            int32 = '';
+            params[#params + 1] = tonumber(int32, 16)
+            int32 = ''
         end
     end
-    
+
     if (int32 ~= '') then
-        params[#params + 1] = tonumber(int32, 16);
+        params[#params + 1] = tonumber(int32, 16)
     end
-    
-    return params;
+
+    return params
 end
 
 ----------------------------------------------------------------------
@@ -123,23 +123,23 @@ end
 --        storable items.
 ----------------------------------------------------------------------
 local function getSlipId(trade)
-    local slipId = 0;
-    local slips = 0;
-    
+    local slipId = 0
+    local slips = 0
+
     for _, itemId in ipairs(slipIds) do
         if (trade:hasItemQty(itemId, 1)) then
-            slips = slips + 1;
+            slips = slips + 1
             if (slipId == 0) then
-                slipId = itemId;
+                slipId = itemId
             end
         end
     end
-    
+
     if (slips == trade:getItemCount() and slips > 1) then
-        slipId = 0;
+        slipId = 0
     end
-    
-    return slipId, slips;
+
+    return slipId, slips
 end
 
 ----------------------------------------------------------------------
@@ -147,18 +147,18 @@ end
 --        slip in the trade window.
 ----------------------------------------------------------------------
 local function getStorableItems(player, trade, slipId)
-    local storableItemIds = { };
-    
+    local storableItemIds = { }
+
     for i = 0, 7 do
-        local slotItemId = trade:getItemId(i);
+        local slotItemId = trade:getItemId(i)
         if (slotItemId ~= 0 and isSlip(slotItemId) ~= true and player:hasItem(slotItemId)) then
             if (isStorableOn(slipId, slotItemId)) then
-                storableItemIds[#storableItemIds+1] = slotItemId;
+                storableItemIds[#storableItemIds+1] = slotItemId
             end
         end
     end
-    
-    return storableItemIds;
+
+    return storableItemIds
 end
 
 ----------------------------------------------------------------------
@@ -167,40 +167,40 @@ end
 ----------------------------------------------------------------------
 local function storeItems(player, storableItemIds, slipId, e)
     if (#storableItemIds > 0) then
-        local param0 = 0;
-        local param1 = 0;
+        local param0 = 0
+        local param1 = 0
         if (#storableItemIds == 1) then
-            param0 = storableItemIds[1];
-            param1 = 0;
+            param0 = storableItemIds[1]
+            param1 = 0
         else
-            param0 = #storableItemIds;
-            param1 = 1;
+            param0 = #storableItemIds
+            param1 = 1
         end
-        
+
         -- idk
-        local extra = { };
+        local extra = { }
         for i = 0, 23 do
-            extra[i] = 0;
+            extra[i] = 0
         end
-        
+
         for k, v in ipairs(slipItems[slipId]) do
             if find(storableItemIds, v) ~= nil then
-                local bitmask = extra[math.floor((k - 1) / 8)];
+                local bitmask = extra[math.floor((k - 1) / 8)]
                 if bitmask < 0 then
-                    bitmask = bitmask + 256;
+                    bitmask = bitmask + 256
                 end
-                extra[math.floor((k - 1) / 8)] = bit.bor(bitmask, bit.lshift(1, (k - 1) % 8));
+                extra[math.floor((k - 1) / 8)] = bit.bor(bitmask, bit.lshift(1, (k - 1) % 8))
             end
         end
-        
-        local result = player:storeWithPorterMoogle(slipId, extra, storableItemIds);
-        
+
+        local result = player:storeWithPorterMoogle(slipId, extra, storableItemIds)
+
         if (result == 0) then
-            player:startEvent(e.STORE_EVENT_ID, param0, param1);
+            player:startEvent(e.STORE_EVENT_ID, param0, param1)
         elseif (result == 1) then
-            player:startEvent(e.ALREADY_STORED_ID);
+            player:startEvent(e.ALREADY_STORED_ID)
         elseif (result == 2) then
-            player:startEvent(e.MAGIAN_TRIAL_ID);
+            player:startEvent(e.MAGIAN_TRIAL_ID)
         end
     end
 end
@@ -210,7 +210,7 @@ end
 --        is index 0, Storage Slip 2 is index 1, etc).
 ----------------------------------------------------------------------
 local function getSlipIndex(slipId)
-    return find(slipIds, slipId) - 1;
+    return find(slipIds, slipId) - 1
 end
 
 ----------------------------------------------------------------------
@@ -218,12 +218,12 @@ end
 --        retrieval event.
 ----------------------------------------------------------------------
 local function startRetrieveProcess(player, eventId, slipId)
-    local extra = player:getRetrievableItemsForSlip(slipId);
-    local params = int8ToInt32(extra);
-    local slipIndex = getSlipIndex(slipId);
-    
-    player:setLocalVar('slipId', slipId);
-    player:startEvent(eventId, params[1], params[2], params[3], params[4], params[5], params[6], nil, slipIndex);
+    local extra = player:getRetrievableItemsForSlip(slipId)
+    local params = int8ToInt32(extra)
+    local slipIndex = getSlipIndex(slipId)
+
+    player:setLocalVar('slipId', slipId)
+    player:startEvent(eventId, params[1], params[2], params[3], params[4], params[5], params[6], nil, slipIndex)
 end
 
 ----------------------------------------------------------------------
@@ -231,15 +231,15 @@ end
 --        supplied in the trade.
 ----------------------------------------------------------------------
 function porterMoogleTrade(player, trade, e)
-    local slipId, slipCount = getSlipId(trade);
-    if (slipId == 0 or slipCount > 1) then return; end;
-    
-    local storableItemIds = getStorableItems(player, trade, slipId);
-    
+    local slipId, slipCount = getSlipId(trade)
+    if (slipId == 0 or slipCount > 1) then return end
+
+    local storableItemIds = getStorableItems(player, trade, slipId)
+
     if (#storableItemIds > 0) then
-        storeItems(player, storableItemIds, slipId, e);
+        storeItems(player, storableItemIds, slipId, e)
     else
-        startRetrieveProcess(player, e.RETRIEVE_EVENT_ID, slipId);
+        startRetrieveProcess(player, e.RETRIEVE_EVENT_ID, slipId)
     end
 end
 
@@ -249,30 +249,30 @@ end
 --        updates the user's event data.
 ----------------------------------------------------------------------
 function porterEventUpdate(player, csid, option, RETRIEVE_EVENT_ID)
-    local slipId = player:getLocalVar('slipId');
+    local slipId = player:getLocalVar('slipId')
     if (csid == RETRIEVE_EVENT_ID and slipId ~= 0 and slipId ~= nil) then
-        local extra = player:getRetrievableItemsForSlip(slipId);
-        local itemsOnSlip = getItemsOnSlip(extra, slipId);
-        local retrievedItemId = itemsOnSlip[option + 1];
-        
-        if (player:hasItem(retrievedItemId) or player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, retrievedItemId);
-        else
-            local k = find(slipItems[slipId], retrievedItemId);
-            local extraId = math.floor((k - 1) / 8);
-            local bitmask = extra[extraId + 1];
-            if bitmask < 0 then
-                bitmask = bitmask + 256;
-            end
-            bitmask = bit.band(bitmask, bit.bnot(bit.lshift(1, (k - 1) % 8)));
-            extra[extraId + 1] = bitmask;
+        local extra = player:getRetrievableItemsForSlip(slipId)
+        local itemsOnSlip = getItemsOnSlip(extra, slipId)
+        local retrievedItemId = itemsOnSlip[option + 1]
 
-            player:retrieveItemFromSlip(slipId, retrievedItemId, extraId, bitmask);
-            player:messageSpecial(zones[player:getZoneID()].text.RETRIEVE_DIALOG_ID, retrievedItemId, nil, nil, retrievedItemId, false);
+        if (player:hasItem(retrievedItemId) or player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, retrievedItemId)
+        else
+            local k = find(slipItems[slipId], retrievedItemId)
+            local extraId = math.floor((k - 1) / 8)
+            local bitmask = extra[extraId + 1]
+            if bitmask < 0 then
+                bitmask = bitmask + 256
+            end
+            bitmask = bit.band(bitmask, bit.bnot(bit.lshift(1, (k - 1) % 8)))
+            extra[extraId + 1] = bitmask
+
+            player:retrieveItemFromSlip(slipId, retrievedItemId, extraId, bitmask)
+            player:messageSpecial(zones[player:getZoneID()].text.RETRIEVE_DIALOG_ID, retrievedItemId, nil, nil, retrievedItemId, false)
         end
-        
-        local params = int8ToInt32(extra);
-        player:updateEvent(params[1], params[2], params[3], params[4], params[5], params[6], slipId);
+
+        local params = int8ToInt32(extra)
+        player:updateEvent(params[1], params[2], params[3], params[4], params[5], params[6], slipId)
     end
 end
 
@@ -282,21 +282,21 @@ end
 function porterEventFinish(player, csid, option, TALK_EVENT_ID)
     if (csid == TALK_EVENT_ID and option < 1000) then
         -- This is just because hilarious.
-        option = math.floor(option / 16) + (option % 16);
-        local hasItem = player:hasItem(slipIds[option]);
+        option = math.floor(option / 16) + (option % 16)
+        local hasItem = player:hasItem(slipIds[option])
         if (hasItem or player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, slipIds[option]);
-            return;
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, slipIds[option])
+            return
         end
 
         if (player:delGil(1000)) then
-            player:addItem(slipIds[option]);
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, slipIds[option]);
+            player:addItem(slipIds[option])
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, slipIds[option])
         else
-            player:messageSpecial(zones[player:getZoneID()].text.NOT_HAVE_ENOUGH_GIL, slipIds[option]);
-            return;
+            player:messageSpecial(zones[player:getZoneID()].text.NOT_HAVE_ENOUGH_GIL, slipIds[option])
+            return
         end
     else
-        player:setLocalVar('slipId', 0);
+        player:setLocalVar('slipId', 0)
     end
 end

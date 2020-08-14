@@ -62,9 +62,9 @@ zones[tpz.zone.WEST_RONFAURE] =
     },
     npc =
     {
-        CASKET_BASE     = 17187500,
-        SIGNPOST_OFFSET = 17187538,
-        OVERSEER_BASE   = 17187558,
+        CASKET_BASE     = 17187467,
+        SIGNPOST_OFFSET = 17187505,
+        OVERSEER_BASE   = 17187525,
     },
 }
 

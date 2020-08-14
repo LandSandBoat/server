@@ -11,12 +11,12 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.antlion_ambush_noaggro = function(mob)
     mob:addListener("SPAWN", "ANTLION_AMBUSH_NOAGGRO_SPAWN", function(mob)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(0);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(0)
     end)
     mob:addListener("ENGAGE", "ANTLION_AMBUSH_NOAGGRO_ENGAGE", function(mob, target)
-        mob:useMobAbility(278); -- Pit Ambush
+        mob:useMobAbility(278) -- Pit Ambush
     end)
 end
 

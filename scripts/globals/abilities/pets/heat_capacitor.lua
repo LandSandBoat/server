@@ -19,8 +19,8 @@ function onPetAbility(target, automaton, skill, master, action)
     for i = 1, maneuvers do
         master:delStatusEffectSilent(tpz.effect.FIRE_MANEUVER)
     end
-    
-    
+
+
     if automaton:getLocalVar("heat_capacitor") >= 3 then -- Heat Capacitor & Heat Capacitor II
         target:addTP(1000 * maneuvers)
     elseif automaton:getLocalVar("heat_capacitor") >= 2 then -- Heat Capacitor II

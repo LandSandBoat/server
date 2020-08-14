@@ -12,32 +12,84 @@ local loot =
     [1] =
     {
         {
-            {itemid = 13553, droprate =  500}, -- blitz_ring
-            {itemid = 13554, droprate =  500}, -- aegis_ring
+            {itemid = 13553, droprate = 150}, -- blitz Ring
+            {itemid = 0,     droprate = 850}, -- Nothing
         },
         {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid = 13238, droprate =  200}, -- druids_rope
-            {itemid = 13625, droprate =  200}, -- tundra_mantle
+            {itemid = 13554, droprate = 300}, -- aegis Ring
+            {itemid = 13625, droprate = 200}, -- tundra mantle
+            {itemid = 13238, droprate = 200}, -- druids rope
+            {itemid = 0,     droprate = 300}, -- Nothing
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   788, droprate =  250}, -- pearl
-            {itemid =   792, droprate =  250}, -- peridot
+            {itemid = 4896, droprate = 145}, -- firespirit
+            {itemid = 4751, droprate = 165}, -- erase
+            {itemid = 4714, droprate = 140}, -- phalanx
+            {itemid = 4874, droprate = 123}, -- absorb-str
+            {itemid = 788,  droprate =  94}, -- peridot
+            {itemid = 792,  droprate =  94}, -- pearl
+            {itemid = 772,  droprate =  13}, -- green rock
+            {itemid = 811,  droprate =  53}, -- ametrine
+            {itemid = 748,  droprate =  70}, -- gold beastcoin
+            {itemid = 749,  droprate =  50}, -- mythril beastcoin
+            {itemid = 771,  droprate =  53}, -- yellow rock
+            {itemid = 0,    droprate =   0}, -- nothing
         },
         {
-            {itemid =     0, droprate =  900}, -- nothing
-            {itemid =  4174, droprate =  100}, -- vile_elixir
+            {itemid = 4751, droprate = 125}, -- erase
+            {itemid = 4714, droprate = 110}, -- phalanx
+            {itemid = 4874, droprate = 104}, -- absorb-str
+            {itemid = 788,  droprate =  94}, -- peridot
+            {itemid = 792,  droprate =  94}, -- pearl
+            {itemid = 772,  droprate =  53}, -- green rock
+            {itemid = 811,  droprate =  73}, -- ametrine
+            {itemid = 748,  droprate =  70}, -- gold beastcoin
+            {itemid = 749,  droprate =  70}, -- mythril beastcoin
+            {itemid = 771,  droprate =  73}, -- yellow rock
+            {itemid = 0,    droprate =  94}, -- nothing
         },
         {
-            {itemid =     0, droprate =  125}, -- nothing
-            {itemid =  4717, droprate =  125}, -- scroll_of_refresh
-            {itemid =  4896, droprate =  125}, -- fire_spirit_pact
-            {itemid =  4751, droprate =  125}, -- scroll_of_erase
-            {itemid =  4874, droprate =  125}, -- scroll_of_absorb-str
-            {itemid =  4714, droprate =  125}, -- scroll_of_phalanx
-            {itemid =  4858, droprate =  125}, -- scroll_of_ice_spikes
-            {itemid =  4947, droprate =  125}, -- scroll_of_utsusemi_ni
+            {itemid = 4896, droprate = 174}, -- firespirit
+            {itemid = 4751, droprate =  16}, -- vile elixir
+            {itemid = 4714, droprate = 114}, -- icespikes
+            {itemid = 4874, droprate = 174}, -- refresh
+            {itemid = 4947, droprate = 138}, -- utsusemi ni
+            {itemid = 772,  droprate =  18}, -- green rock
+            {itemid = 775,  droprate =  18}, -- black rock
+            {itemid = 770,  droprate =  17}, -- blue rock
+            {itemid = 769,  droprate =  16}, -- red rock
+            {itemid = 774,  droprate =  16}, -- purple rock
+            {itemid = 776,  droprate =  16}, -- white rock
+            {itemid = 771,  droprate =  17}, -- yellow rock
+            {itemid = 773,  droprate =  17}, -- translucent rock
+            {itemid = 4172, droprate =  21}, -- reraiser
+            {itemid = 699,  droprate =  22}, -- oak log
+            {itemid = 701,  droprate =  18}, -- rosewood log
+            {itemid = 748,  droprate = 120}, -- gold beastcoin
+            {itemid = 749,  droprate = 102}, -- mythril beastcoin
+            {itemid = 792,  droprate =  21}, -- pearl
+            {itemid = 798,  droprate =  23}, -- Turquoise
+            {itemid = 808,  droprate =  19}, -- Goshenite
+            {itemid = 793,  droprate =  18}, -- Black pearl
+            {itemid = 815,  droprate =  17}, -- sphene
+            {itemid = 790,  droprate =  20}, -- garnet
+            {itemid = 811,  droprate =  18}, -- ametrine
+            {itemid = 0,    droprate =   0}, -- nothing
+        },
+        {
+            {itemid = 4714, droprate = 87}, -- icespikes
+            {itemid = 4874, droprate = 75}, -- refresh
+            {itemid = 4947, droprate = 75}, -- utsusemi ni
+            {itemid =  699, droprate = 80}, -- oak log
+            {itemid =  701, droprate = 97}, -- rosewood log
+            {itemid =  792, droprate = 86}, -- pearl
+            {itemid =  798, droprate = 88}, -- Turquoise
+            {itemid =  808, droprate = 79}, -- Goshenite
+            {itemid =  793, droprate = 93}, -- Black pearl
+            {itemid =  815, droprate = 79}, -- sphene
+            {itemid =  790, droprate = 71}, -- garnet
+            {itemid =  811, droprate = 90}, -- ametrine
+            {itemid =    0, droprate =  0}, -- nothing
         },
     },
 
@@ -279,31 +331,31 @@ local loot =
             {itemid = 846, droprate = 1000}, -- Insect Wing
         },
         {
-            {itemid = 1601, droprate = 1000},-- Mannequin Head
+            {itemid = 1601, droprate = 1000}, -- Mannequin Head
         },
         {
             {itemid = 0, droprate = 636},    -- Nothing
-            {itemid = 12486, droprate = 364},-- Emperor Hairpin
+            {itemid = 12486, droprate = 364}, -- Emperor Hairpin
         },
         {
-            {itemid = 12400, droprate = 175},-- Ashigaru Targe
-            {itemid = 12399, droprate = 175},-- Beaters Aspis
-            {itemid = 12395, droprate = 175},-- Varlets Targe
-            {itemid = 12390, droprate = 175},-- Wrestlers Aspis
+            {itemid = 12400, droprate = 175}, -- Ashigaru Targe
+            {itemid = 12399, droprate = 175}, -- Beaters Aspis
+            {itemid = 12395, droprate = 175}, -- Varlets Targe
+            {itemid = 12390, droprate = 175}, -- Wrestlers Aspis
             {itemid = 809, droprate = 100},  -- Clear Topaz
             {itemid = 795, droprate = 100},  -- Lapis Lazuli
             {itemid = 796, droprate = 100},  -- Light Opal
         },
         {
-            {itemid = 13659, droprate = 250},-- Mercenary Mantle
-            {itemid = 13668, droprate = 250},-- Singers Mantle
-            {itemid = 13662, droprate = 250},-- Wizards Mantle
-            {itemid = 13672, droprate = 250},-- Wyvern Mantle
+            {itemid = 13659, droprate = 250}, -- Mercenary Mantle
+            {itemid = 13668, droprate = 250}, -- Singers Mantle
+            {itemid = 13662, droprate = 250}, -- Wizards Mantle
+            {itemid = 13672, droprate = 250}, -- Wyvern Mantle
         },
         {
             {itemid = 4947, droprate = 70},  -- Scroll Of Utsusemi Ni
             {itemid = 5070, droprate = 70},  -- Scroll Of Magic Finale
-            {itemid = 17863, droprate = 150},-- Jug Of Quadav Bug Broth
+            {itemid = 17863, droprate = 150}, -- Jug Of Quadav Bug Broth
             {itemid = 799, droprate = 100},  -- Onyx
             {itemid = 795, droprate = 100},  -- Lapis Lazuli
             {itemid = 796, droprate = 100},  -- Light Opal
@@ -437,7 +489,7 @@ local loot =
             {itemid = 18086, droprate = 48}, -- Behourd Lance
             {itemid = 18046, droprate = 61}, -- Mutilator
             {itemid = 18210, droprate = 46}, -- Raifu
-            {itemid = 15286, droprate = 302},-- Tilt Belt
+            {itemid = 15286, droprate = 302}, -- Tilt Belt
             {itemid = 18350, droprate = 76}, -- Tourney Patas
         },
         {
@@ -445,7 +497,7 @@ local loot =
             {itemid = 17696, droprate = 42}, -- Buzzard Tuck
             {itemid = 17936, droprate = 77}, -- De Saintres Axe
             {itemid = 17693, droprate = 73}, -- Grudge Sword
-            {itemid = 15287, droprate = 258},-- Mantra Belt
+            {itemid = 15287, droprate = 258}, -- Mantra Belt
             {itemid = 4717, droprate = 68},  -- Scroll Of Refresh
             {itemid = 4947, droprate = 55},  -- Scroll Of Utsusemi Ni
             {itemid = 4858, droprate = 14},  -- Scroll Of Ice Spikes
@@ -658,29 +710,29 @@ local loot =
             {itemid = 837, droprate = 1000}, -- Spool Of Malboro Fiber
         },
         {
-            {itemid = 17827, droprate = 217},-- Michishiba-no-tsuyu
-            {itemid = 17451, droprate = 174},-- Morgenstern
-            {itemid = 17793, droprate = 333},-- Senjuinrikio
-            {itemid = 17589, droprate = 174},-- Thyrsusstab
+            {itemid = 17827, droprate = 217}, -- Michishiba-no-tsuyu
+            {itemid = 17451, droprate = 174}, -- Morgenstern
+            {itemid = 17793, droprate = 333}, -- Senjuinrikio
+            {itemid = 17589, droprate = 174}, -- Thyrsusstab
         },
         {
-            {itemid = 13402, droprate = 101},-- Cassie Earring
+            {itemid = 13402, droprate = 101}, -- Cassie Earring
             {itemid = 19027, droprate = 43}, -- Claymore Grip
             {itemid = 920, droprate = 275},  -- Malboro Vine
             {itemid = 1013, droprate = 275}, -- Morbolger Vine
-            {itemid = 19025, droprate = 203},-- Pole Grip
-            {itemid = 19026, droprate = 116},-- Spear Strap
+            {itemid = 19025, droprate = 203}, -- Pole Grip
+            {itemid = 19026, droprate = 116}, -- Spear Strap
         },
         {
             {itemid = 655, droprate = 159},  -- Adaman Ingot
             {itemid = 747, droprate = 290},  -- Orichalcum Ingot
-            {itemid = 13182, droprate = 406},-- Oscar Scarf
+            {itemid = 13182, droprate = 406}, -- Oscar Scarf
         },
         {
-            {itemid = 15325, droprate = 159},-- Evokers Boots
-            {itemid = 14872, droprate = 217},-- Ostreger Mitts
-            {itemid = 15181, droprate = 145},-- Pineal Hat
-            {itemid = 15387, droprate = 159},-- Trackers Kecks
+            {itemid = 15325, droprate = 159}, -- Evokers Boots
+            {itemid = 14872, droprate = 217}, -- Ostreger Mitts
+            {itemid = 15181, droprate = 145}, -- Pineal Hat
+            {itemid = 15387, droprate = 159}, -- Trackers Kecks
         },
         {
             {itemid = 887, droprate = 101},  -- Coral Fragment
@@ -712,18 +764,18 @@ local loot =
     },
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

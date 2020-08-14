@@ -94,7 +94,7 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
         [5] = {
             [1] = {
                 [1] = {
-                mobs_start = 17080516, 
+                mobs_start = 17080516,
                 mobs_end   = 17080519,
                 },
                 [2] = {
@@ -112,7 +112,7 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
             },
             [2] = {
                 [1] = {
-                mobs_start = 17080538, 
+                mobs_start = 17080538,
                 mobs_end   = 17080541,
                 },
                 [2] = {
@@ -144,7 +144,7 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
         },
         [7] = {
             [1] = {
-            chariot = 17080585,    
+            chariot = 17080585,
             },
         },
     },
@@ -161,7 +161,7 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
                 DOOR1 = 17080975,
                 DOOR2 = 17080976,
                 DOOR3 = 17080977,
-                DOOR4 = 17080978,  
+                DOOR4 = 17080978,
             },
         },
         [2] = {
@@ -198,13 +198,13 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
             DOOR = 17080989,
         },
     },
-    points = 
+    points =
     {
-        [3] = 
+        [3] =
         {
             [0] = -- 2nd Floor Astrologer
             {
-                point1 = 
+                point1 =
                 {
                     302, -2, 99,
                 },
@@ -312,13 +312,13 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
                 },
             },
         },
-        [6] = 
+        [6] =
         {
             [1] = --5th Floor S Astrologer
             {
                 point1 =
                 {
-                    -340, 3, -160, 
+                    -340, 3, -160,
                 },
                 point2 =
                 {
@@ -343,7 +343,7 @@ zones[tpz.zone.ARRAPAGO_REMNANTS] =
             },
             [2] = --5th Floor N Astrologer
             {
-                point1 = 
+                point1 =
                 {
                     -339, -4, -35,
                 },

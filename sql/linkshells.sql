@@ -34,5 +34,6 @@ CREATE TABLE IF NOT EXISTS `linkshells` (
   `message` BLOB NULL,
   `messagetime` int(10) unsigned NOT NULL DEFAULT '0',
   `postrights` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `broken` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`linkshellid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;

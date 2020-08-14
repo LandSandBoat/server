@@ -7,19 +7,19 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.amphiptere = function(mob)
     mob:addListener("SPAWN", "AMPHIPTERE_SPAWN", function(mob)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(1);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(1)
     end)
     mob:addListener("ENGAGE", "AMPHIPTERE_ENGAGE", function(mob, target)
-        mob:hideName(false);
-        mob:untargetable(false);
-        mob:AnimationSub(0);
+        mob:hideName(false)
+        mob:untargetable(false)
+        mob:AnimationSub(0)
     end)
     mob:addListener("DISENGAGE", "AMPHIPTERE_DISENGAGE", function(mob, target)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(1);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(1)
     end)
 end
 

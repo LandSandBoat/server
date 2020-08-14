@@ -40,41 +40,41 @@ local matches = -- [element id][resonance id]
 
 -- Returns a boolean if the spell's element matches the resonace given
 function doesSpellElementMatchResonance(ele, resonance)
-    isMatch = matches[ele + 1][resonance:getPower() + 1];
-    return (isMatch ~= nil and isMatch > 0);
+    isMatch = matches[ele + 1][resonance:getPower() + 1]
+    return (isMatch ~= nil and isMatch > 0)
 end
 
 -- Returns the burst level for a spell / target combination
 function FormMagicBurst(ele, target)
-    local resonance = target:getStatusEffect(tpz.effect.SKILLCHAIN);
+    local resonance = target:getStatusEffect(tpz.effect.SKILLCHAIN)
     if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
         if (doesSpellElementMatchResonance(ele, resonance) == true) then
-            return resonance:getTier(), resonance:getSubPower();
+            return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
-    return 0, 0;
+
+    return 0, 0
 end
 
 function MobFormMagicBurst(element, target)
-    local resonance = target:getStatusEffect(tpz.effect.SKILLCHAIN);
+    local resonance = target:getStatusEffect(tpz.effect.SKILLCHAIN)
 
     if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
         if (doesMobSpellElementMatchResonance(element, resonance) == true) then
-            return resonance:getTier(), resonance:getSubPower();
+            return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
-    
-    return 0, 0;
+
+    return 0, 0
 end
 
 function doesMobSpellElementMatchResonance(element, resonance)
-    isMatch = matches[element + 1][resonance:getPower() + 1];
-    return (isMatch ~= nil and isMatch > 0);
+    isMatch = matches[element + 1][resonance:getPower() + 1]
+    return (isMatch ~= nil and isMatch > 0)
 end
 
 -- Returns a boolean if the element matches the skillchain property given
 function doesElementMatchWeaponskill(ele, SCProp)
-    isMatch = matches[ele + 1][SCProp + 1];
-    return (isMatch ~= nil and isMatch > 0);
+    isMatch = matches[ele + 1][SCProp + 1]
+    return (isMatch ~= nil and isMatch > 0)
 end

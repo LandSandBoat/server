@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign [S]
 --   NM: Herensugue
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobInitialize(mob)
     mob:setMod(tpz.mod.TRIPLE_ATTACK, 90) -- "Triple Attacks almost every round"
@@ -9,6 +10,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 531)
 end
 
 function onMobDespawn(mob)

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -52,7 +52,7 @@ public:
     };
     typedef int32 (*TaskFunc_t)(time_point tick,CTask*);
     typedef std::priority_queue<CTask*,std::deque<CTask*>,greater_equal<CTask*> > TaskList_t;
-        
+
     TaskList_t& getTaskList(){ return m_TaskList; };
 
     CTask* AddTask(CTask*);
@@ -68,13 +68,14 @@ public:
     void    RemoveTask(std::string TaskName);
 
     static CTaskMgr * getInstance();
+    static void delInstance();
 
     ~CTaskMgr() {};
 
 private:
 
     static CTaskMgr* _instance;
-        
+
     TaskList_t m_TaskList;
 
     CTaskMgr() {};

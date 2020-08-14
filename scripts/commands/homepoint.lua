@@ -7,29 +7,29 @@ cmdprops =
 {
     permission = 1,
     parameters = "s"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!homepoint {player}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!homepoint {player}")
+end
 
 function onTrigger(player, target)
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player;
+        targ = player
     else
-        targ = GetPlayerByName( target );
+        targ = GetPlayerByName( target )
         if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) );
-            return;
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
         end
     end
 
     -- homepoint target
-    targ:warp();
+    targ:warp()
     if (targ:getID() ~= player:getID()) then
-        player:PrintToPlayer(string.format("Sent %s to their homepoint.",targ:getName()));
+        player:PrintToPlayer(string.format("Sent %s to their homepoint.", targ:getName()))
     end
 end

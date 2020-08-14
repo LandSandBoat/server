@@ -36,7 +36,7 @@ function onSpellCast(caster, target, spell)
     local resist = applyResistance(caster, target, spell, params)
 
     if resist < 0.5 then
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST); --resist message
+        spell:setMsg(tpz.msg.basic.MAGIC_RESIST) --resist message
     else
         if target:addStatusEffect(tpz.effect.SLOW, 2000, 0, getBlueEffectDuration(caster, resist, tpz.effect.SLOW)) then
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)

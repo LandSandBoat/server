@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -121,7 +121,7 @@ class CTransportHandler
 public:
     virtual ~CTransportHandler() = default;
     static CTransportHandler* getInstance();
-    
+
     void startElevator(int32 elevatorID);
     void TransportTimer();
     void insertElevator(Elevator_t elevator);

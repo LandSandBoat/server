@@ -5,10 +5,10 @@
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.CHEST)
 
     local npcID = npc:getID()
@@ -18,7 +18,7 @@ function onTrigger(player,npc)
     if (npcID == figureheadChest) then
         player:messageSpecial(ID.text.GOLDEN)
         instance:complete()
-        for i,v in pairs(ID.mob[2]) do
+        for i, v in pairs(ID.mob[2]) do
             DespawnMob(v, instance)
         end
     else
@@ -26,8 +26,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

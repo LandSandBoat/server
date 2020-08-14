@@ -6,10 +6,10 @@
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) then
         player:startEvent(407)
     elseif player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 then
@@ -19,8 +19,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

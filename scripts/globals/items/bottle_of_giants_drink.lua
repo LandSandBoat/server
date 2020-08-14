@@ -13,5 +13,5 @@ end
 function onItemUse(target)
     local duration = 900
     target:delStatusEffect(tpz.effect.MAX_HP_BOOST)
-    target:addStatusEffect(tpz.effect.MAX_HP_BOOST,100,0,duration)
+    target:addStatusEffect(tpz.effect.MAX_HP_BOOST, 100, 0, duration)
 end

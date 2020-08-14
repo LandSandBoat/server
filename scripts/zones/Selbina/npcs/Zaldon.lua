@@ -69,7 +69,7 @@ local fishRewards =
     [4316] = -- Armored Pisces
     {
         gil = 475,
-        items = 
+        items =
         {
             {chance = 0.4, itemId = 13736}, -- Stolid Breastplate
         }
@@ -455,7 +455,7 @@ local fishRewards =
 local function tradeFish(player, fishId)
     player:setCharVar("insideBellyFishId", fishId)
     player:setCharVar("insideBellyItemIdx", 0)
-    
+
     local rewards = fishRewards[fishId].items
     local roll = math.random(1000) / 10
     local found = false
@@ -470,7 +470,7 @@ local function tradeFish(player, fishId)
             break
         end
     end
-    
+
     if not found then
         player:startEvent(167)
     end
@@ -482,7 +482,7 @@ local function giveReward(player, csid)
         local itemIdx = player:getCharVar("insideBellyItemIdx")
         local reward  = fishRewards[fishId]
         local traded  = true
-                
+
         if itemIdx > 0 then
             local r = reward.items[itemIdx]
             local itemId = r.itemId
@@ -490,12 +490,12 @@ local function giveReward(player, csid)
             if r.min ~= nil and r.max ~= nil then
                 itemQt = math.random(r.min, r.max)
             end
-            
+
             if not npcUtil.giveItem(player, {{itemId, itemQt}}) then
                 traded = false
             end
         end
-        
+
         if traded then
             player:confirmTrade()
             player:addGil(GIL_RATE * reward.gil)
@@ -512,18 +512,18 @@ local function giveReward(player, csid)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local underTheSea    = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
 
-    -- UNDER THE SEA    
+    -- UNDER THE SEA
     if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
         if math.random(100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
             player:startEvent(36) -- Ring not found...
         end
-        
+
     -- A BOY'S DREAM
     elseif player:getCharVar("aBoysDreamCS") == 5 and npcUtil.tradeHas(trade, 4562) then
         player:startEvent(85)
@@ -539,7 +539,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(tpz.skill.FISHING)
 
     local theRealGift    = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT)
@@ -549,18 +549,18 @@ function onTrigger(player,npc)
     -- UNDER THE SEA
     if player:getCharVar("underTheSeaVar") == 3 then
         player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
-        
+
     -- INSIDE THE BELLY
     elseif mLvl >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
         player:startEvent(161)
     elseif mLvl >= 30 and mLvl < 39 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
-        player:startEvent(162,5799,4481,5802,4428)
+        player:startEvent(162, 5799, 4481, 5802, 4428)
     elseif mLvl >= 40 and mLvl < 49 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
-        player:startEvent(163,5805,4385,5800,5802,5450) -- 5802(Istavrit) is skill cap 41, and therefore is used in this and the previous csid
+        player:startEvent(163, 5805, 4385, 5800, 5802, 5450) -- 5802(Istavrit) is skill cap 41, and therefore is used in this and the previous csid
     elseif mLvl >= 50 and mLvl <= 74 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
-        player:startEvent(164,5806,5451,5801,5804,5807,5135)
+        player:startEvent(164, 5806, 5451, 5801, 5804, 5807, 5135)
     elseif mLvl >= 75 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
-        player:startEvent(165,4451,4477,5803,4307,4478,5467,4304,4474)
+        player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
 
     -- STANDARD DIALOG
     else
@@ -568,10 +568,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- UNDER THE SEA
     if csid == 34 then
         player:setCharVar("underTheSeaVar", 4)
@@ -580,7 +580,7 @@ function onEventFinish(player,csid,option)
         player:confirmTrade()
     elseif csid == 36 then
         player:confirmTrade()
-        
+
     -- A BOY'S DREAM
     elseif csid == 85 then
         npcUtil.giveKeyItem(player, tpz.ki.KNIGHTS_BOOTS)

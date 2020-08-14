@@ -17,12 +17,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local params = {}
+        params.damageType = tpz.damageType.WIND
         params.multiplier = 2.775
         params.tMultiplier = 2.912
         params.duppercap = 58

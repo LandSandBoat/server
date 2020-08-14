@@ -15,11 +15,11 @@ end
 
 function onItemUse(target)
     if (target:addStatusEffect(tpz.effect.ENCHANTMENT) == false) then
-        target:addStatusEffect(tpz.effect.ENCHANTMENT,0,0,3600,17592)
+        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 3600, 17592)
     end
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.SUBTLE_BLOW, 20)
 end
 

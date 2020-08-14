@@ -10,10 +10,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local rumorsFromTheWest = player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST
     local theGeomagnetron = player:getCurrentMission(SOA) == tpz.mission.id.soa.THE_GEOMAGNETRON
 
@@ -25,7 +25,7 @@ function onTrigger(player,npc)
     local turnOffOptionToPay    = 16
     local turnOffAskingForWork  = 32
 
-    if not ENABLE_SOA then
+    if ENABLE_SOA == 0 then
         player:startEvent(10124)
     elseif rumorsFromTheWest then
         player:startEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
@@ -38,14 +38,14 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if csid == 10117 then
         local hasEnoughGil = player:getGil() >= 1000000 and 1 or 0
         player:updateEvent(hasEnoughGil)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10117 and option == 1 then -- accepted geomagnetron
         -- Clear option CS flags
         player:setCharVar("SOA_1_CS1", 0)
@@ -54,8 +54,8 @@ function onEventFinish(player,csid,option)
 
         npcUtil.giveKeyItem(player, tpz.ki.GEOMAGNETRON)
 
-        player:completeMission(SOA,tpz.mission.id.soa.RUMORS_FROM_THE_WEST)
-        player:addMission(SOA,tpz.mission.id.soa.THE_GEOMAGNETRON)
+        player:completeMission(SOA, tpz.mission.id.soa.RUMORS_FROM_THE_WEST)
+        player:addMission(SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
     elseif
         (csid == 10117 and option == 2) or -- paid
         csid == 10118  -- quest complete
@@ -64,15 +64,15 @@ function onEventFinish(player,csid,option)
         player:setCharVar("SOA_1_CS1", 0)
         player:setCharVar("SOA_1_CS2", 0)
         player:setCharVar("SOA_1_CS3", 0)
-        
+
         if option == 2 then player:delGil(1000000) end
 
         player:delKeyItem(tpz.ki.GEOMAGNETRON)
         npcUtil.giveKeyItem(player, tpz.ki.GEOMAGNETRON)
         npcUtil.giveKeyItem(player, tpz.ki.ADOULINIAN_CHARTER_PERMIT)
 
-        player:completeMission(SOA,tpz.mission.id.soa.THE_GEOMAGNETRON)
-        player:addMission(SOA,tpz.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:completeMission(SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
+        player:addMission(SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
 
         player:setCharVar("SOA", 0)
     end

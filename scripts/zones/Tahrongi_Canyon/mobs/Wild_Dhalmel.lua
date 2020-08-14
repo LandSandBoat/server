@@ -6,10 +6,12 @@
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
+require("scripts/quests/tutorial")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 96, 2, tpz.regime.type.FIELDS)
+    tpz.tutorial.onMobDeath(player)
 end
 
 function onMobDespawn(mob)

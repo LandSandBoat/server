@@ -18,12 +18,12 @@ function onSpellCast(caster, target, spell)
     -- Calculate potency.
     local potency = utils.clamp(math.floor(dMND / 4) + 15, 5, 25)
     potency = calculatePotency(potency, spell:getSkillType(), caster, target)
-    
+
     -- Calculate duration.
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    -- printf("Duration : %u",duration)
-    -- printf("Potency : %u",potency)
+    -- printf("Duration : %u", duration)
+    -- printf("Potency : %u", potency)
     local params = {}
     params.diff = dMND
     params.skillType = tpz.skill.ENFEEBLING_MAGIC

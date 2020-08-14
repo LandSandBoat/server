@@ -15,6 +15,6 @@ function onAdditionalEffect(player, target, damage)
         target:addStatusEffect(tpz.effect.CHOKE, 17, 0, 60)
         return tpz.subEffect.CHOKE, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.CHOKE
     end
-    
+
     return 0, 0, 0
 end

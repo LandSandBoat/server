@@ -4,12 +4,12 @@
 -- Type: Warp NPC
 -- !pos 116.080 7.372 -31.820 236
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/quests");
-require("scripts/globals/missions");
-require("scripts/globals/teleports");
-require("scripts/globals/keyitems");
-local ID = require("scripts/zones/Port_Bastok/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
+require("scripts/globals/teleports")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 
 --[[
 Bitmask Designations:
@@ -42,54 +42,54 @@ Bastok Mines (Clockwise, starting at Ore Street, upper floor to lower floor)
 80000    (H-9) Vaghron (southwest of South Auction House)
 ]]--
 
-function onTrade(player,npc,trade)
-    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+function onTrade(player, npc, trade)
+    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
-        player:startEvent(379);
+        player:startEvent(379)
     end
-end;
+end
 
-function onTrigger(player,npc)
-    local LureBastok = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT);
-    local WildcatBastok = player:getCharVar("WildcatBastok");
+function onTrigger(player, npc)
+    local LureBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
+    local WildcatBastok = player:getCharVar("WildcatBastok")
     if (LureBastok ~= 2 and ENABLE_TOAU == 1) then
         if (LureBastok == 0) then
-            player:startEvent(357);
+            player:startEvent(357)
         else
             if (WildcatBastok == 0) then
-                player:startEvent(358);
-            elseif (player:isMaskFull(WildcatBastok,20) == true) then
-                player:startEvent(360);
+                player:startEvent(358)
+            elseif (player:isMaskFull(WildcatBastok, 20) == true) then
+                player:startEvent(360)
             else
-                player:startEvent(359);
+                player:startEvent(359)
             end
         end
     elseif (player:getCurrentMission(TOAU) >= tpz.mission.id.toau.PRESIDENT_SALAHEEM) then
-        player:startEvent(378);
+        player:startEvent(378)
     else
-        player:startEvent(361);
+        player:startEvent(361)
     end
-end;
-
-function onEventUpdate(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventUpdate(player, csid, option)
+end
+
+function onEventFinish(player, csid, option)
     if (csid == 357) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT);
-        player:setCharVar("WildcatBastok",0);
-        player:addKeyItem(tpz.ki.BLUE_SENTINEL_BADGE);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BLUE_SENTINEL_BADGE);
+        player:addQuest(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
+        player:setCharVar("WildcatBastok", 0)
+        player:addKeyItem(tpz.ki.BLUE_SENTINEL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_SENTINEL_BADGE)
     elseif (csid == 360) then
-        player:completeQuest(BASTOK,tpz.quest.id.bastok.LURE_OF_THE_WILDCAT);
-        player:addFame(BASTOK,150);
-        player:setCharVar("WildcatBastok",0);
-        player:delKeyItem(tpz.ki.BLUE_SENTINEL_BADGE);
-        player:addKeyItem(tpz.ki.BLUE_INVITATION_CARD);
-        player:messageSpecial(ID.text.KEYITEM_LOST,tpz.ki.BLUE_SENTINEL_BADGE);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BLUE_INVITATION_CARD);
+        player:completeQuest(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
+        player:addFame(BASTOK, 150)
+        player:setCharVar("WildcatBastok", 0)
+        player:delKeyItem(tpz.ki.BLUE_SENTINEL_BADGE)
+        player:addKeyItem(tpz.ki.BLUE_INVITATION_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.BLUE_SENTINEL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_INVITATION_CARD)
     elseif (csid == 379) then
-        player:tradeComplete();
-        tpz.teleport.to(player, tpz.teleport.id.WHITEGATE);
+        player:tradeComplete()
+        tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
     end
-end;
+end

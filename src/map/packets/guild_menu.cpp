@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -36,8 +36,8 @@ CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, 
 
 	switch (status)
 	{
-		case GUILD_OPEN: 
-		case GUILD_CLOSE: 
+		case GUILD_OPEN:
+		case GUILD_CLOSE:
 		{
 			packBitsBE(data+(0x08), 0xFFFFFF, open, close-open);
 		}

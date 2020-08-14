@@ -125,12 +125,12 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr, nullptr));
+    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr));
 
     if (ret == SQL_ERROR ||
         Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return nullptr;
     }
     return map_session_data;
@@ -150,7 +150,11 @@ int32 do_init(int32 argc, char** argv)
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0)
-            map_ip.s_addr = inet_addr(argv[i + 1]);
+        {
+            uint32 ip;
+            inet_pton(AF_INET, argv[i + 1], &ip);
+            map_ip.s_addr = ip;
+        }
         else if (strcmp(argv[i], "--port") == 0)
             map_port = std::stoi(argv[i + 1]);
     }
@@ -229,7 +233,7 @@ int32 do_init(int32 argc, char** argv)
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
     ShowMessage("\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
-    CVanaTime::getInstance()->setCustomOffset(map_config.vanadiel_time_offset);
+    CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
 
     zoneutils::InitializeWeather(); // Need VanaTime initialized
 
@@ -256,7 +260,9 @@ int32 do_init(int32 argc, char** argv)
 void do_final(int code)
 {
     delete[] g_PBuff;
+    g_PBuff = nullptr;
     delete[] PTempBuff;
+    PTempBuff = nullptr;
 
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
@@ -271,10 +277,11 @@ void do_final(int code)
         messageThread.join();
     }
 
-    delete CTaskMgr::getInstance();
-    delete CVanaTime::getInstance();
+    CTaskMgr::delInstance();
+    CVanaTime::delInstance();
 
     Sql_Free(SqlHandle);
+    SqlHandle = nullptr;
 
     timer_final();
     socket_final();
@@ -436,8 +443,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    int8 ip_str[16];
-    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip, (char*)ip_str));
+    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip));
     return -1;
 }
 
@@ -459,7 +465,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return -1;
     }
 #else
@@ -944,13 +950,13 @@ int32 map_config_default()
     map_config.mysql_database = "tpzdb";
     map_config.mysql_port = 3306;
     map_config.server_message = "";
-    map_config.server_message_fr = "";
     map_config.buffer_size = 1800;
     map_config.ah_base_fee_single = 1;
     map_config.ah_base_fee_stacks = 4;
     map_config.ah_tax_rate_single = 1.0;
     map_config.ah_tax_rate_stacks = 0.5;
     map_config.ah_max_fee = 10000;
+    map_config.ah_list_limit = 7;
     map_config.exp_rate = 1.0f;
     map_config.exp_loss_rate = 1.0f;
     map_config.exp_retain = 0.0f;
@@ -976,16 +982,19 @@ int32 map_config_default()
     map_config.mob_mp_multiplier = 1.0f;
     map_config.player_mp_multiplier = 1.0f;
     map_config.sj_mp_divisor = 2.0f;
+    map_config.subjob_ratio = 1;
+    map_config.include_mob_sj = false;
     map_config.nm_stat_multiplier = 1.0f;
     map_config.mob_stat_multiplier = 1.0f;
     map_config.player_stat_multiplier = 1.0f;
     map_config.ability_recast_multiplier = 1.0f;
     map_config.blood_pact_shared_timer = 0;
-    map_config.vanadiel_time_offset = 0;
+    map_config.vanadiel_time_epoch = 0;
     map_config.lightluggage_block = 4;
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
     map_config.drop_rate_multiplier = 1.0f;
+    map_config.mob_gil_multiplier = 1.0f;
     map_config.all_mobs_gil_bonus = 0;
     map_config.max_gil_bonus = 9999;
     map_config.Battle_cap_tweak = 0;
@@ -1071,9 +1080,9 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.max_time_lastupdate = atoi(w2);
         }
-        else if (strcmp(w1, "vanadiel_time_offset") == 0)
+        else if (strcmp(w1, "vanadiel_time_epoch") == 0)
         {
-            map_config.vanadiel_time_offset = atoi(w2);
+            map_config.vanadiel_time_epoch = atoi(w2);
         }
         else if (strcmp(w1, "fame_multiplier") == 0)
         {
@@ -1102,6 +1111,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "ah_max_fee") == 0)
         {
             map_config.ah_max_fee = atoi(w2);
+        }
+        else if (strcmp(w1, "ah_list_limit") == 0)
+        {
+            map_config.ah_list_limit = atoi(w2);
         }
         else if (strcmp(w1, "exp_rate") == 0)
         {
@@ -1155,6 +1168,14 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.sj_mp_divisor = (float)atof(w2);
         }
+        else if (strcmp(w1, "subjob_ratio") == 0)
+        {
+            map_config.subjob_ratio = atoi(w2);
+        }
+        else if (strcmp(w1, "include_mob_sj") == 0)
+        {
+            map_config.include_mob_sj = atoi(w2);
+        }
         else if (strcmp(w1, "nm_stat_multiplier") == 0)
         {
             map_config.nm_stat_multiplier = (float)atof(w2);
@@ -1178,6 +1199,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "drop_rate_multiplier") == 0)
         {
             map_config.drop_rate_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "mob_gil_multiplier") == 0)
+        {
+            map_config.mob_gil_multiplier = (float)atof(w2);
         }
         else if (strcmp(w1, "all_mobs_gil_bonus") == 0)
         {
@@ -1371,30 +1396,10 @@ int32 map_config_read(const int8* cfgName)
 
     fclose(fp);
 
-    // Load the French server message..
-    fp = fopen("./conf/server_message_fr.conf", "rb");
-    if (fp == nullptr)
-    {
-        ShowError("Could not read English server message from: ./conf/server_message_fr.conf\n");
-        return 1;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        string_t sline(line);
-        map_config.server_message_fr += sline;
-    }
-
-    fclose(fp);
-
     // Ensure both messages have nullptr terminates..
     if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
     {
         map_config.server_message += (char)0x00;
-    }
-    if (map_config.server_message_fr.at(map_config.server_message_fr.length() - 1) != 0x00)
-    {
-        map_config.server_message_fr += (char)0x00;
     }
 
     return 0;

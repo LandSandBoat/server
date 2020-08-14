@@ -11,12 +11,19 @@ require("scripts/globals/magic")
 
 function onMobInitialize(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
-    mob:addMod(tpz.mod.UFASTCAST,50)
+    mob:addMod(tpz.mod.UFASTCAST, 50)
+end
+
+function onMobSpawn(mob)
+    local battlefield = mob:getBattlefield()
+    if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2):isDead() then
+       battlefield:setLocalVar("phaseChange", 0)
+    end
 end
 
 function onMobEngaged(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i,v in pairs(bcnmAllies) do
+    for i, v in pairs(bcnmAllies) do
         if v:getName() == "Prishe" then
             if not v:getTarget() then
                 v:entityAnimationPacket("prov")
@@ -24,7 +31,7 @@ function onMobEngaged(mob, target)
                 v:setLocalVar("ready", mob:getID())
             end
         else
-            v:addEnmity(mob,0,1)
+            v:addEnmity(mob, 0, 1)
         end
     end
 end
@@ -32,7 +39,7 @@ end
 function onMobFight(mob, target)
     if mob:AnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
         mob:AnimationSub(0)
-        mob:stun(1500);
+        mob:stun(1500)
     elseif mob:AnimationSub() == 2 and not mob:hasStatusEffect(tpz.effect.MAGIC_SHIELD) then
         mob:AnimationSub(0)
     elseif mob:AnimationSub() == 1 and not mob:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) then
@@ -40,9 +47,9 @@ function onMobFight(mob, target)
     end
 
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i,v in pairs(bcnmAllies) do
+    for i, v in pairs(bcnmAllies) do
         if not v:getTarget() then
-            v:addEnmity(mob,0,1)
+            v:addEnmity(mob, 0, 1)
         end
     end
 end
@@ -68,5 +75,4 @@ function onMagicCastingCheck(mob, target, spell)
 end
 
 function onMobDeath(mob, player, isKiller)
-    mob:getBattlefield():setLocalVar("loot", 0)
 end

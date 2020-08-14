@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -56,11 +56,6 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     if (!CanCastSpell(PTarget))
     {
         throw CStateInitException(std::move(m_errorMsg));
-    }
-
-    if (PTarget->objtype != TYPE_PC && (m_PSpell->getZoneMisc() & MISC_TRACTOR) != 0)
-    {
-        throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_CANNOT_ON_THAT_TARG));
     }
 
     auto errorMsg = luautils::OnMagicCastingCheck(m_PEntity, PTarget, GetSpell());
@@ -308,19 +303,13 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
 
                 if (!(m_PSpell->isHeal()) || m_PSpell->tookEffect())  //can't claim mob with cure unless it does damage
                 {
-                    if (m_PEntity->objtype == TYPE_PC)
-                    {
-                        if (!mob->CalledForHelp())
-                        {
-                            mob->m_OwnerID.id = m_PEntity->id;
-                            mob->m_OwnerID.targid = m_PEntity->targid;
-                        }
-                        mob->updatemask |= UPDATE_STATUS;
-                    }
                     mob->PEnmityContainer->UpdateEnmity(m_PEntity, ce, ve);
-                    if (mob->m_HiPCLvl < m_PEntity->GetMLevel())
-                        mob->m_HiPCLvl = m_PEntity->GetMLevel();
                     enmityApplied = true;
+                    if (PTarget->isDead())
+                    { // claim mob only on death (for aoe)
+                        battleutils::ClaimMob(PTarget, m_PEntity);
+                    }
+                    battleutils::DirtyExp(PTarget, m_PEntity);
                 }
             }
         }

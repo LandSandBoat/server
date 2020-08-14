@@ -2,21 +2,22 @@
 -- Area: Temenos N T
 --  Mob: Goblin Theurgist
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobEngaged(mob,target)
-GetMobByID(16928831):updateEnmity(target);
-GetMobByID(16928832):updateEnmity(target);
-GetMobByID(16928834):updateEnmity(target);
+function onMobEngaged(mob, target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[7]):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[7]+1):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[7]+3):updateEnmity(target)
+end
 
-end;
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928831)==true and IsMobDead(16928832)==true and IsMobDead(16928833)==true and IsMobDead(16928834)==true and IsMobDead(16928835)==true ) then
-       GetNPCByID(16928768+39):setPos(-599,85,438);
-    GetNPCByID(16928768+39):setStatus(tpz.status.NORMAL);
-
-    GetNPCByID(16928768+456):setStatus(tpz.status.NORMAL);
- end
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[7]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[7]+1):isDead() and
+            GetMobByID(ID.mob.TEMENOS_N_MOB[7]+2):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[7]+3):isDead() and
+            GetMobByID(ID.mob.TEMENOS_N_MOB[7]+4):isDead()
+        then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[7]):setStatus(tpz.status.NORMAL)
+        end
+    end
+end

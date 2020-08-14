@@ -31,7 +31,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1;
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.8
@@ -39,10 +39,8 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.ATTACK_DOWN) then
-            local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0)
-            target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 19, 0, duration)
-        end
+        local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0)
+        target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 19, 0, duration)
 
         -- Apply aftermath
         tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.RELIC)

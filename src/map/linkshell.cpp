@@ -29,8 +29,10 @@
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
 #include "packets/linkshell_equip.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 
+#include "utils/zoneutils.h"
 #include "utils/charutils.h"
 #include "conquest_system.h"
 #include "utils/itemutils.h"
@@ -67,6 +69,13 @@ void CLinkshell::setColor(uint16 color)
     m_color = color;
 }
 
+void CLinkshell::setPostRights(uint8 postrights)
+{
+    m_postRights = postrights;
+    Sql_Query(SqlHandle, "UPDATE linkshells SET postrights = %u WHERE linkshellid = %d;",
+        postrights, m_id);
+}
+
 const int8* CLinkshell::getName()
 {
     return (const int8*)m_name.c_str();
@@ -88,7 +97,10 @@ void CLinkshell::setMessage(const int8* message, const int8* poster)
     int8 packetData[8] {};
     ref<uint32>(packetData, 0) = m_id;
     ref<uint32>(packetData, 4) = 0;
-    message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData, new CLinkshellMessagePacket(poster, message, (const int8*)m_name.c_str(), std::numeric_limits<uint32>::min(), true));
+    if (strlen((const char*)message) != 0)
+    {
+        message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData, new CLinkshellMessagePacket(poster, message, (const int8*)m_name.c_str(), std::numeric_limits<uint32>::min(), true));
+    }
 }
 
 /************************************************************************
@@ -153,10 +165,10 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 	//topearl = 3
 	//tosack = 2
 	int newId = 512 + toSack;
-	
+
     if (newId == 514 || newId == 515)
     {
-	    for (uint32 i = 0; i < members.size(); ++i) 
+	    for (uint32 i = 0; i < members.size(); ++i)
 	    {
 		    if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
 		    {
@@ -179,50 +191,56 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
                         return;
                     newShellItem->setQuantity(1);
                     memcpy(newShellItem->m_extra, PItemLinkshell->m_extra, 24);
+                    newShellItem->SetLSType(newId == 514 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL);
                     newShellItem->setSubType(ITEM_LOCKED);
+                    uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID = PItemLinkshell->getSlotID();
                     delete PItemLinkshell;
                     PItemLinkshell = newShellItem;
+                    char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
+                    Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
 
-                    PMember->getStorage(LOC_INVENTORY)->InsertItem(PItemLinkshell, SlotID);
-                    const char* Query = "UPDATE char_inventory SET itemid = %u WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-                    Sql_Query(SqlHandle, Query, PItemLinkshell->getID(), PMember->id, LOC_INVENTORY, SlotID);
+                    PMember->getStorage(LocationID)->InsertItem(PItemLinkshell, SlotID);
+                    const char* Query = "UPDATE char_inventory SET itemid = %u, extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
+                    Sql_Query(SqlHandle, Query, PItemLinkshell->getID(), extra, PMember->id, LocationID, SlotID);
                     if (lsID == 1)
                     {
                         Sql_Query(SqlHandle, "UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u",
-                            m_id, PItemLinkshell->GetLSType(), PMember->id);
+                            m_id, static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
                     else if (lsID == 2)
                     {
                         Sql_Query(SqlHandle, "UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u",
-                            m_id, PItemLinkshell->GetLSType(), PMember->id);
+                            m_id, static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
                     PMember->pushPacket(new CInventoryAssignPacket(PItemLinkshell, INV_NORMAL));
                     PMember->pushPacket(new CLinkshellEquipPacket(PMember, lsID));
-                    PMember->pushPacket(new CInventoryItemPacket(PItemLinkshell, LOC_INVENTORY, SlotID));
+                    PMember->pushPacket(new CInventoryItemPacket(PItemLinkshell, LocationID, SlotID));
                 }
-	        
+
                 charutils::SaveCharStats(PMember);
                 charutils::SaveCharEquip(PMember);
 
                 PMember->pushPacket(new CInventoryFinishPacket());
                 PMember->pushPacket(new CCharUpdatePacket(PMember));
 			    return;
-		    } 
+		    }
 	    }
     }
 }
 
 /************************************************************************
 *                                                                       *
-*  Удаление персонажа из Linkshell по имени (ломаем все его Linkshells) *
+* Remove a character from Linkshell by name. Breaks all pearls/sacks if *
+* kicked by shell holder, otherwise equipped pearl only.                *
 *                                                                       *
 ************************************************************************/
 
-void CLinkshell::RemoveMemberByName(int8* MemberName)
+void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell)
 {
-	for (uint32 i = 0; i < members.size(); ++i) 
+    uint32 lsid = m_id;
+	for (uint32 i = 0; i < members.size(); ++i)
 	{
 		if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
 		{
@@ -232,7 +250,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName)
             SLOTTYPE slot = SLOT_LINK1;
             int lsNum = 1;
 
-            if (!PItemLinkshell || (PItemLinkshell->GetLSID() != this->getID()))
+            if (!PItemLinkshell || (PItemLinkshell->GetLSID() != lsid))
             {
                 PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK2);
                 slot = SLOT_LINK2;
@@ -256,33 +274,68 @@ void CLinkshell::RemoveMemberByName(int8* MemberName)
                 PMember->pushPacket(new CLinkshellEquipPacket(PMember,lsNum));
             }
 
-			CItemContainer* Inventory = PMember->getStorage(LOC_INVENTORY);
-            for (uint8 SlotID = 0; SlotID < Inventory->GetSize(); ++SlotID)
+            for (uint8 LocationID = 0; LocationID < MAX_CONTAINER_ID; ++LocationID)
             {
-                    CItemLinkshell* PItemLinkshell = (CItemLinkshell*)Inventory->GetItem(SlotID);
-
-					if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL) && PItemLinkshell->GetLSID() == m_id)
-		            {
-                        const char* Query = "UPDATE char_inventory SET itemid = (itemid+2) WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-
-                        Sql_Query(SqlHandle, Query, PMember->id, LOC_INVENTORY, SlotID);
-
-                        PItemLinkshell->SetLSID(0);
-                        PItemLinkshell->setID(PItemLinkshell->getID() + 2);
-
-                        PMember->pushPacket(new CInventoryItemPacket(PItemLinkshell, LOC_INVENTORY, SlotID));
-		            }
+                CItemContainer* Inventory = PMember->getStorage(LocationID);
+                for (uint8 SlotID = 0; SlotID < Inventory->GetSize(); ++SlotID)
+                {
+                    CItemLinkshell* newPItemLinkshell = (CItemLinkshell*)Inventory->GetItem(SlotID);
+                    if (newPItemLinkshell != nullptr && newPItemLinkshell->isType(ITEM_LINKSHELL) && newPItemLinkshell->GetLSID() == lsid)
+                    {
+                        if (kickerRank == LSTYPE_LINKSHELL || newPItemLinkshell == PItemLinkshell)
+                        {
+                            if (newPItemLinkshell->GetLSType() != LSTYPE_LINKSHELL)
+                            {
+                                newPItemLinkshell->SetLSType(LSTYPE_BROKEN);
+                                char extra[sizeof(newPItemLinkshell->m_extra) * 2 + 1];
+                                Sql_EscapeStringLen(SqlHandle, extra, (const char*)newPItemLinkshell->m_extra, sizeof(newPItemLinkshell->m_extra));
+                                const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
+                                Sql_Query(SqlHandle, Query, extra, PMember->id, LocationID, SlotID);
+                                PMember->pushPacket(new CInventoryItemPacket(newPItemLinkshell, LocationID, SlotID));
+                            }
+                        }
+                    }
+                }
             }
-	        
+
             charutils::SaveCharStats(PMember);
             charutils::SaveCharEquip(PMember);
 
             PMember->pushPacket(new CInventoryFinishPacket());
             PMember->pushPacket(new CCharUpdatePacket(PMember));
-            PMember->pushPacket(new CMessageSystemPacket(0,0,109));
+            if (breakLinkshell)
+            {
+                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
+            }
+            else
+            {
+                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellKicked));
+            }
+            
 			return;
-		} 
+		}
 	}
+}
+
+/************************************************************************
+*                                                                       *
+*  Break and unequip all affiliated pearlsacks and linkpearls           *
+*                                                                       *
+************************************************************************/
+
+void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
+{
+    uint32 lsid = m_id;
+    int8 signature[21];
+    DecodeStringLinkshell(lsname, signature);
+
+    // break logged in and equipped members
+	while (members.size() > 0)
+	{
+        RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
+    }
+    // set the linkshell as broken
+    Sql_Query(SqlHandle, "UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
 }
 
 /************************************************************************
@@ -302,10 +355,12 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
             CBasicPacket* newPacket = new CBasicPacket(*packet);
             if (members.at(i)->PLinkshell2 == this)
             {
-                if (newPacket->id() == CChatMessagePacket::id) {
+                if (newPacket->id() == CChatMessagePacket::id)
+                {
                     newPacket->ref<uint8>(0x04) = MESSAGE_LINKSHELL2;
                 }
-                else if (newPacket->id() == CLinkshellMessagePacket::id) {
+                else if (newPacket->id() == CLinkshellMessagePacket::id)
+                {
                     newPacket->ref<uint8>(0x05) |= 0x40;
                 }
             }
@@ -344,21 +399,42 @@ namespace linkshell
 
     CLinkshell* LoadLinkshell(uint32 id)
     {
-	    int32 ret = Sql_Query(SqlHandle, "SELECT linkshellid, color, name FROM linkshells WHERE linkshellid = %d", id);
+	    int32 ret = Sql_Query(SqlHandle, "SELECT linkshellid, color, name, postrights FROM linkshells WHERE linkshellid = %d", id);
 
 	    if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
 	    {
             auto PLinkshell = std::make_unique<CLinkshell>(Sql_GetUIntData(SqlHandle,0));
-        
+
             PLinkshell->setColor(Sql_GetIntData(SqlHandle,1));
             int8 EncodedName[16];
             EncodeStringLinkshell(Sql_GetData(SqlHandle,2), EncodedName);
             PLinkshell->setName(EncodedName);
+            if (Sql_GetUIntData(SqlHandle,3) < LSTYPE_LINKSHELL || Sql_GetUIntData(SqlHandle,3) > LSTYPE_LINKPEARL)
+            {
+                PLinkshell->setPostRights(LSTYPE_PEARLSACK);
+            }
+            else
+            {
+                PLinkshell->m_postRights = Sql_GetUIntData(SqlHandle,3);
+            }
             LinkshellList[id] = std::move(PLinkshell);
-
             return LinkshellList[id].get();
 	    }
         return nullptr;
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Unloads a loaded linkshell, only used after all members are removed  *
+    *                                                                       *
+    ************************************************************************/
+
+    void UnloadLinkshell(uint32 id)
+    {
+        if (auto PLinkshell = LinkshellList.find(id); PLinkshell != LinkshellList.end())
+        {
+            LinkshellList.erase(id);
+        }
     }
 
     /************************************************************************
@@ -423,7 +499,7 @@ namespace linkshell
 
     bool IsValidLinkshellName(const int8* name)
     {
-        auto ret = Sql_Query(SqlHandle, "SELECT linkshellid FROM linkshells WHERE name = '%s';", name);
+        auto ret = Sql_Query(SqlHandle, "SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1;", name);
         return ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0;
     }
 
@@ -437,7 +513,7 @@ namespace linkshell
     {
         if (IsValidLinkshellName(name))
         {
-		    if (Sql_Query(SqlHandle, "INSERT INTO linkshells (name, color) VALUES ('%s', %u)", name, color) != SQL_ERROR)
+		    if (Sql_Query(SqlHandle, "INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color, static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
             {
                 return LoadLinkshell((uint32)Sql_LastInsertId(SqlHandle))->getID();
             }

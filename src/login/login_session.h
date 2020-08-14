@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -34,7 +34,7 @@ struct login_session_data_t {
     uint16 client_port;
     uint32 servip;
 
-    char charname[17];
+    char charname[16];
     int32 login_fd;
     int32 login_lobbydata_fd;
     int32 login_lobbyview_fd;

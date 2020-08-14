@@ -10,7 +10,7 @@ require("scripts/globals/status")
 function onMobSpawn(mob)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()

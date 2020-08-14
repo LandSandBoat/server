@@ -31,7 +31,7 @@ function onSpellCast(caster, target, spell)
 
         if (diffMerit > 0) then
             duration = duration + (duration / 100)* diffMerit
-        end;
+        end
 
         caster:delStatusEffect(tpz.effect.DIFFUSION)
     end

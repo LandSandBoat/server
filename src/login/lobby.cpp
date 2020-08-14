@@ -35,12 +35,6 @@
 int32 login_lobbydata_fd;
 int32 login_lobbyview_fd;
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 int32 connect_client_lobbydata(int32 listenfd)
 {
     int32 fd = 0;
@@ -55,12 +49,6 @@ int32 connect_client_lobbydata(int32 listenfd)
     }
     return -1;
 }
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 int32 lobbydata_parse(int32 fd)
 {
@@ -104,8 +92,8 @@ int32 lobbydata_parse(int32 fd)
     if (RFIFOREST(fd) >= 1)
     {
         char* buff = &session[fd]->rdata[0];
-        if (ref<uint8>(buff, 0) == 0x0d) ShowDebug(CL_RED"Posible Crash Attempt from IP: " CL_WHITE"<%s>\n" CL_RESET, ip2str(session[fd]->client_addr, nullptr));
-        ShowDebug("lobbydata_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 0), ip2str(sd->client_addr, nullptr));
+        if (ref<uint8>(buff, 0) == 0x0d) ShowDebug(CL_RED"Posible Crash Attempt from IP: " CL_WHITE"<%s>\n" CL_RESET, ip2str(session[fd]->client_addr));
+        ShowDebug("lobbydata_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
         int32 code = ref<uint8>(buff, 0);
         switch (code)
@@ -114,7 +102,7 @@ int32 lobbydata_parse(int32 fd)
             {
                 if (RFIFOREST(fd) < 9)
                 {
-                    ShowError("lobbydata_parse:" CL_WHITE"<%s>" CL_RESET" sent less then 9 bytes\n", ip2str(session[fd]->client_addr, nullptr));
+                    ShowError("lobbydata_parse:" CL_WHITE"<%s>" CL_RESET" sent less then 9 bytes\n", ip2str(session[fd]->client_addr));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -125,7 +113,7 @@ int32 lobbydata_parse(int32 fd)
 
                 unsigned char CharList[2500];
                 memset(CharList, 0, sizeof(CharList));
-                //запись зарезервированных чисел
+                // Store the reserved numbers.
                 CharList[0] = 0xE0; CharList[1] = 0x08;
                 CharList[4] = 0x49; CharList[5] = 0x58; CharList[6] = 0x46; CharList[7] = 0x46; CharList[8] = 0x20;
 
@@ -176,8 +164,8 @@ int32 lobbydata_parse(int32 fd)
                 uList[0] = 0x03;
 
                 int i = 0;
-                //Считывание информации о конкректном персонаже
-                //Загрузка всей необходимой информации о персонаже из базы
+                // Read information about a specific character.
+                // Extract all the necessary information about the character from the database.
                 while (Sql_NextRow(SqlHandle) != SQL_NO_DATA)
                 {
                     char* strCharName = nullptr;
@@ -203,7 +191,7 @@ int32 lobbydata_parse(int32 fd)
                         ////////////////////////////////////////////////////
                         ref<uint32>(CharList, 4 + 32 + i * 140) = CharID;
 
-                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 15);
+                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 16);
 
                         ref<uint8>(CharList, 46 + 32 + i * 140) = MainJob;
                         ref<uint8>(CharList, 73 + 32 + i * 140) = lvlMainJob;
@@ -320,11 +308,11 @@ int32 lobbydata_parse(int32 fd)
                     //new char only (first login from char create)
                     if (PrevZone == 0)  key3[16] += 6;
 
-                    ZoneIP = inet_addr((const char*)Sql_GetData(SqlHandle, 0));
+                    inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ZoneIP);
                     ZonePort = (uint16)Sql_GetUIntData(SqlHandle, 1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
-                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)\n", ZoneID, ip2str(ntohl(ZoneIP), nullptr), ZonePort, charid);
+                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)\n", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
                     {
@@ -336,7 +324,7 @@ int32 lobbydata_parse(int32 fd)
 
                         memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
-                        // необходиму одалять сессию, необработанную игровым сервером
+                        // If the session was not processed by the game server, then it must be deleted.
                         Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", sd->accid);
 
                         char session_key[sizeof(key3) * 2 + 1];
@@ -346,10 +334,10 @@ int32 lobbydata_parse(int32 fd)
 
                         if (Sql_Query(SqlHandle, fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr, (uint8)session[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
-                            //отправляем клиенту сообщение об ошибке
+                            // Send error message to the client.
                             LOBBBY_ERROR_MESSAGE(ReservePacket);
-                            // устанавливаем код ошибки
-                            // Unable to connect to world server. Specified operation failed
+                            // Set the error code:
+                            //     Unable to connect to world server. Specified operation failed
                             ref<uint16>(ReservePacket, 32) = 305;
                             memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
                         }
@@ -368,8 +356,8 @@ int32 lobbydata_parse(int32 fd)
                 {
                     //either there is no character for this charid/accid, or there is no zone for this char's zone
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
-                    // устанавливаем код ошибки
-                    // Unable to connect to world server. Specified operation failed
+                    // Set the error code:
+                    //     Unable to connect to world server. Specified operation failed
                     ref<uint16>(ReservePacket, 32) = 305;
                     memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
                 }
@@ -388,7 +376,7 @@ int32 lobbydata_parse(int32 fd)
 
                 if (SendBuffSize == 0x24)
                 {
-                    // выходим в случае ошибки без разрыва соединения
+                    // In the event of an error, exit without breaking the connection.
                     return -1;
                 }
 
@@ -407,7 +395,7 @@ int32 lobbydata_parse(int32 fd)
                     fmtQuery = "INSERT INTO account_ip_record(login_time,accid,charid,client_ip)\
                             VALUES ('%s', %u, %u, '%s');";
 
-                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr, nullptr)) == SQL_ERROR)
+                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
                     {
                         ShowError("lobbyview_parse: Could not write info to account_ip_record.\n");
                     }
@@ -415,7 +403,7 @@ int32 lobbydata_parse(int32 fd)
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowStatus("lobbydata_parse: client %s finished work with " CL_GREEN"lobbyview" CL_RESET"\n", ip2str(sd->client_addr, nullptr));
+                ShowStatus("lobbydata_parse: client %s finished work with " CL_GREEN"lobbyview" CL_RESET"\n", ip2str(sd->client_addr));
                 break;
             }
             default:
@@ -425,12 +413,6 @@ int32 lobbydata_parse(int32 fd)
     }
     return 0;
 };
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 int32 do_close_lobbydata(login_session_data_t *loginsd, int32 fd)
 {
@@ -448,18 +430,12 @@ int32 do_close_lobbydata(login_session_data_t *loginsd, int32 fd)
     }
     else
     {
-        ShowInfo("lobbydata_parse: " CL_WHITE"%s" CL_RESET" shutdown the socket\n", ip2str(session[fd]->client_addr, nullptr));
+        ShowInfo("lobbydata_parse: " CL_WHITE"%s" CL_RESET" shutdown the socket\n", ip2str(session[fd]->client_addr));
         do_close_tcp(fd);
         return 0;
     }
     return -1;
 }
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 int32 connect_client_lobbyview(int32 listenfd)
 {
@@ -473,12 +449,6 @@ int32 connect_client_lobbyview(int32 listenfd)
     }
     return -1;
 }
-
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
 
 int32 lobbyview_parse(int32 fd)
 {
@@ -505,7 +475,7 @@ int32 lobbyview_parse(int32 fd)
     if (RFIFOREST(fd) >= 9)
     {
         char* buff = &session[fd]->rdata[0];
-        ShowDebug("lobbyview_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 8), ip2str(sd->client_addr, nullptr));
+        ShowDebug("lobbyview_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 8), ip2str(sd->client_addr));
         uint8 code = ref<uint8>(buff, 8);
         switch (code)
         {
@@ -580,11 +550,11 @@ int32 lobbyview_parse(int32 fd)
                     }
                 }
 
-                //Хеширование пакета, и запись значения Хеш функции в пакет
+                // Hash the packet data and then write the value of the hash into the packet.
                 unsigned char Hash[16];
                 md5(MainReservePacket, Hash, sendsize);
                 memcpy(MainReservePacket + 12, Hash, 16);
-                //Запись итогового пакета
+                // Finalize the packet.
                 session[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
                 session[fd]->ver_mismatch = ver_mismatch;
                 RFIFOSKIP(fd, session[fd]->rdata.size());
@@ -596,7 +566,7 @@ int32 lobbyview_parse(int32 fd)
                 //delete char
                 uint32 CharID = ref<uint32>(session[fd]->rdata.data(), 0x20);
 
-                ShowInfo(CL_WHITE"lobbyview_parse" CL_RESET":attempt to delete char:<" CL_WHITE"%d" CL_RESET"> from ip:<%s>\n", CharID, ip2str(sd->client_addr, nullptr));
+                ShowInfo(CL_WHITE"lobbyview_parse" CL_RESET":attempt to delete char:<" CL_WHITE"%d" CL_RESET"> from ip:<%s>\n", CharID, ip2str(sd->client_addr));
 
                 uint8 sendsize = 0x20;
 
@@ -610,8 +580,8 @@ int32 lobbyview_parse(int32 fd)
                 RFIFOSKIP(fd, session[fd]->rdata.size());
                 RFIFOFLUSH(fd);
 
-                //Выполнение удаления персонажа из основных таблиц
-                //Достаточно удалить значение из таблицы chars, все остальное сделает mysql-сервер
+                // Perform character deletion from the database. It is sufficient to remove the
+                // value from the `chars` table. The mysql server will handle the rest.
 
                 const char *pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
                 Sql_Query(SqlHandle, pfmtQuery, CharID, sd->accid);
@@ -785,12 +755,6 @@ int32 lobbyview_parse(int32 fd)
     return 0;
 };
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 int32 do_close_lobbyview(login_session_data_t* sd, int32 fd)
 {
     ShowInfo(CL_WHITE"lobbyview_parse" CL_RESET": " CL_WHITE"%s" CL_RESET" shutdown the socket\n", sd->login);
@@ -798,19 +762,13 @@ int32 do_close_lobbyview(login_session_data_t* sd, int32 fd)
     return 0;
 }
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
 {
-    // инициализируем генератор случайных чисел
+    // Seed the random number generator.
     srand(clock());
     char_mini createchar;
 
-    memcpy(createchar.m_name, loginsd->charname, 16);
+    memcpy(createchar.m_name, loginsd->charname, 15);
     memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
@@ -873,12 +831,6 @@ int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
     return 0;
 };
 
-/************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
-
 int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 {
     const char* Query = "INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);";
@@ -907,9 +859,6 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
         return -1;
     }
 
-
-
-
     // people reported char creation errors, here is a fix.
 
     Query = "INSERT INTO char_exp(charid) VALUES(%u) \
@@ -936,17 +885,12 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
             ON DUPLICATE KEY UPDATE charid = charid;";
     if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR) return -1;
 
-
-
     //hot fix
     Query = "DELETE FROM char_inventory WHERE charid = %u";
     if (Sql_Query(SqlHandle, Query, charid) == SQL_ERROR) return -1;
 
     Query = "INSERT INTO char_inventory(charid) VALUES(%u);";
     if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR) return -1;
-
-
-
 
     return 0;
 }

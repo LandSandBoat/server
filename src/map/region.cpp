@@ -40,7 +40,7 @@ CRegion::CRegion(uint32 RegionID, bool isCircle) :
 {
 	if (m_RegionID == 0)
 	{
-		ShowWarning(CL_YELLOW"Region ID cannot be zero\n" CL_RESET);	
+		ShowWarning(CL_YELLOW"Region ID cannot be zero\n" CL_RESET);
 	}
 }
 
@@ -71,7 +71,7 @@ int16 CRegion::GetCount()
 *                                                                       *
 *                                                                       *
 ************************************************************************/
-    
+
 int16 CRegion::AddCount(int16 count)
 {
     m_Count += count;
@@ -83,7 +83,7 @@ int16 CRegion::AddCount(int16 count)
 *                                                                       *
 *                                                                       *
 ************************************************************************/
-    
+
 int16 CRegion::DelCount(int16 count)
 {
     m_Count -= count;
@@ -142,10 +142,10 @@ bool CRegion::isPointInside(position_t pos)
 		return false;
 	}
 
-	return (x1 <= pos.x && 
-			y1 <= pos.y && 
-			z1 <= pos.z && 
-			x2 >= pos.x && 
-			y2 >= pos.y && 
+	return (x1 <= pos.x &&
+			y1 <= pos.y &&
+			z1 <= pos.z &&
+			x2 >= pos.x &&
+			y2 >= pos.y &&
 			z2 >= pos.z);
 }

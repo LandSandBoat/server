@@ -15,19 +15,19 @@ cmdprops =
 {
     permission = 4,
     parameters = "ss"
-};
+}
 
-function onTrigger(player,globalLua,other)
+function onTrigger(player, globalLua, other)
     if (globalLua ~= nil and other == nil) then
-        local String = table.concat({"scripts/globals/",globalLua});
-        package.loaded[String] = nil;
-        require(String);
-        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.",String));
+        local String = table.concat({"scripts/globals/", globalLua})
+        package.loaded[String] = nil
+        require(String)
+        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", String))
     elseif (other == "I_am_sure") then
-        package.loaded[globalLua] = nil;
-        require(globalLua);
-        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.",globalLua));
+        package.loaded[globalLua] = nil
+        require(globalLua)
+        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", globalLua))
     else
-        player:PrintToPlayer("Must Specify a global lua file.");
+        player:PrintToPlayer("Must Specify a global lua file.")
     end
-end;
+end

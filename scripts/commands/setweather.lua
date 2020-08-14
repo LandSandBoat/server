@@ -3,18 +3,18 @@
 -- desc: Sets the current weather for the current zone.
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/weather");
+require("scripts/globals/weather")
 
 cmdprops =
 {
     permission = 1,
     parameters = "s"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!setweather <weather ID>");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!setweather <weather ID>")
+end
 
 function onTrigger(player, weather)
 
@@ -40,26 +40,26 @@ function onTrigger(player, weather)
         ["stellar glare"]   = 17,
         ["gloom"]           = 18,
         ["darkness"]        = 19
-    };
+    }
 
     -- validate weather
     if (weather == nil) then
-        error(player, "You must supply a weather ID.");
-        return;
+        error(player, "You must supply a weather ID.")
+        return
     end
-    weather = tonumber(weather) or tpz.weather[string.upper(weather)] or weatherList[string.lower(weather)];
+    weather = tonumber(weather) or tpz.weather[string.upper(weather)] or weatherList[string.lower(weather)]
     if (weather == nil or weather < 0 or weather > 19) then
-        error(player, "Invalid weather ID.");
-        return;
+        error(player, "Invalid weather ID.")
+        return
     end
 
     -- invert weather table
-    local weatherByNum={};
-    for k,v in pairs(weatherList) do
-        weatherByNum[v]=k;
+    local weatherByNum={}
+    for k, v in pairs(weatherList) do
+        weatherByNum[v]=k
     end
 
     -- set weather
-    player:setWeather( weather );
-    player:PrintToPlayer( string.format("Set weather to %s.", weatherByNum[weather]) );
+    player:setWeather( weather )
+    player:PrintToPlayer( string.format("Set weather to %s.", weatherByNum[weather]) )
 end

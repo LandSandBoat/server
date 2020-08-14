@@ -2,27 +2,24 @@
 -- Area: Temenos E T
 --  Mob: Dark Elemental
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobEngaged(mob,target)
-
-end;
-
-function onMobDeath(mob, player, isKiller)
-   local mobID = mob:getID();
-   local mobX = mob:getXPos();
-   local mobY = mob:getYPos();
-   local mobZ = mob:getZPos();
-     switch (mobID): caseof {
-         -- 100 a 106 inclut (Temenos -Northern Tower )
-        [16928892] = function (x)
-           GetNPCByID(16928768+70):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+70):setStatus(tpz.status.NORMAL);
-        end    ,
-        [16928893] = function (x)
-           GetNPCByID(16928768+123):setPos(mobX,mobY,mobZ);
-           GetNPCByID(16928768+123):setStatus(tpz.status.NORMAL);
-        end    ,
-     }
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        switch (mob:getID()): caseof
+        {
+            [ID.mob.TEMENOS_E_MOB[7]] = function ()
+                if GetMobByID(ID.mob.TEMENOS_E_MOB[7]+1):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(tpz.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]+1):setStatus(tpz.status.NORMAL)
+                end
+            end,
+            [ID.mob.TEMENOS_E_MOB[7]+1] = function ()
+                if GetMobByID(ID.mob.TEMENOS_E_MOB[7]):isDead() then
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(tpz.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]+1):setStatus(tpz.status.NORMAL)
+                end
+            end,
+        }
+    end
+end

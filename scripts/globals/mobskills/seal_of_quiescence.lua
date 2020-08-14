@@ -7,7 +7,7 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     return 0
 end

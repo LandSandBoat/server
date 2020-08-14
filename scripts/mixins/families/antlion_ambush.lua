@@ -7,19 +7,19 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.antlion_ambush = function(mob)
     mob:addListener("SPAWN", "ANTLION_AMBUSH_SPAWN", function(mob)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(0);
-        mob:wait(2000);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(0)
+        mob:wait(2000)
     end)
     mob:addListener("ENGAGE", "ANTLION_AMBUSH_ENGAGE", function(mob, target)
-        mob:useMobAbility(278); -- Pit Ambush
+        mob:useMobAbility(278) -- Pit Ambush
     end)
     mob:addListener("DISENGAGE", "ANTLION_AMBUSH_DISENGAGE", function(mob)
-        mob:hideName(true);
-        mob:untargetable(true);
-        mob:AnimationSub(0);
-        mob:wait(2000);
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:AnimationSub(0)
+        mob:wait(2000)
     end)
 end
 

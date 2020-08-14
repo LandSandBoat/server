@@ -16,12 +16,12 @@ end
 function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:SetAutoAttackEnabled(false)
-    mob:setMod(tpz.mod.FASTCAST,15)
+    mob:setMod(tpz.mod.FASTCAST, 15)
     mob:setLocalVar("HPP", 90)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL,10)
+    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 10)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local FastCast = mob:getLocalVar("HPP")
     if mob:getHPP() <= FastCast then
         if mob:getHPP() > 10 then

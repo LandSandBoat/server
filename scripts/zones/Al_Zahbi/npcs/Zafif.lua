@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         4612, 23400,    -- Scroll of Cure IV
@@ -34,8 +34,8 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

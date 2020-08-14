@@ -8,11 +8,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
 
     if (target:getStatusEffect(tpz.effect.FROST) ~= nil) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
@@ -33,7 +33,6 @@ function onSpellCast(caster,target,spell)
             end
             local sINT = caster:getStat(tpz.mod.INT)
             local DOT = getElementalDebuffDOT(sINT)
-            local DOTp = 0
             local effect = target:getStatusEffect(tpz.effect.CHOKE)
             local noeffect = false
             if (effect ~= nil) then
@@ -53,9 +52,8 @@ function onSpellCast(caster,target,spell)
 
                 local mbonus = caster:getMerit(tpz.merit.ELEMENTAL_DEBUFF_EFFECT)
                 DOT = DOT + mbonus/2 -- Damage
-                DOTp = DOTp + mbonus -- Stat Enfeeb
 
-                target:addStatusEffect(tpz.effect.CHOKE,DOT, 3, duration, tpz.effect.CHOKE, DOTp)
+                target:addStatusEffect(tpz.effect.CHOKE, DOT, 3, duration)
             end
         end
     end

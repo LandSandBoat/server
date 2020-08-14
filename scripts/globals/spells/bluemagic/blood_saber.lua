@@ -19,11 +19,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local dmg = 1 + (0.709 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC))
     local params = {}
     params.diff = caster:getStat(tpz.mod.MND)-target:getStat(tpz.mod.MND)
@@ -32,8 +32,8 @@ function onSpellCast(caster,target,spell)
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     dmg = dmg*resist
-    dmg = addBonuses(caster,spell,target,dmg)
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     if (dmg > (caster:getSkillLevel(tpz.skill.BLUE_MAGIC) + 20)) then
         dmg = (caster:getSkillLevel(tpz.skill.BLUE_MAGIC) + 20)
     end
@@ -51,7 +51,8 @@ function onSpellCast(caster,target,spell)
         dmg = target:getHP()
     end
 
-    dmg = BlueFinalAdjustments(caster,target,spell,dmg,params)
+    params.damageType = tpz.damageType.DARK
+    dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
     caster:addHP(dmg)
 
     return dmg

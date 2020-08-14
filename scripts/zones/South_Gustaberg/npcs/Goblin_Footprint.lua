@@ -15,7 +15,7 @@ function onTrigger(player, npc)
     tpz.goblinfootprint.rewatch(player, true)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)

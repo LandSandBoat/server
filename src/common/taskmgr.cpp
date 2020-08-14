@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -24,15 +24,24 @@
 #include "../common/timer.h"
 #include "../common/taskmgr.h"
 
-CTaskMgr* CTaskMgr::_instance = NULL;
+CTaskMgr* CTaskMgr::_instance = nullptr;
 
 CTaskMgr* CTaskMgr::getInstance()
 {
-	if( _instance == NULL )
+	if( _instance == nullptr )
 	{
 		_instance = new CTaskMgr();
 	}
 	return _instance;
+}
+
+void CTaskMgr::delInstance()
+{
+    if(_instance)
+    {
+        delete _instance;
+        _instance = nullptr;
+    }
 }
 
 CTaskMgr::CTask *CTaskMgr::AddTask(std::string InitName, time_point InitTick, std::any InitData,TASKTYPE InitType,TaskFunc_t InitFunc,duration InitInterval)
@@ -53,7 +62,7 @@ void CTaskMgr::RemoveTask(std::string TaskName)
 
 duration CTaskMgr::DoTimer(time_point tick)
 {
-	duration diff = 1s; 
+	duration diff = 1s;
 
 	while( !m_TaskList.empty() )
 	{

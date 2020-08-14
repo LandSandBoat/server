@@ -17,7 +17,7 @@ function onSpellCast(caster, target, spell)
        duration = duration * 3
     end
 
-    local power = 150 -- 15%
+    local power = 1465 -- 150/1024 ~14.65%
 
     if not target:addStatusEffect(tpz.effect.HASTE, power, 0, duration) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)

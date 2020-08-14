@@ -7,45 +7,45 @@ cmdprops =
 {
     permission = 1,
     parameters = "isi"
-};
+}
 
 function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer("!addtreasure <itemID> {player} {npcID}");
-end;
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!addtreasure <itemID> {player} {npcID}")
+end
 
 function onTrigger(player, itemId, target, dropper)
     -- validate itemId
     if (itemId ~= nil) then
-        itemId = tonumber(itemId);
+        itemId = tonumber(itemId)
     end
     if (itemId == nil or itemId == 0) then
-        error(player, "Invalid itemID.");
-        return;
+        error(player, "Invalid itemID.")
+        return
     end
-    
+
     -- validate target
-    local targ;
+    local targ
     if (target == nil) then
-        targ = player;
+        targ = player
     else
-        targ = GetPlayerByName(target);
+        targ = GetPlayerByName(target)
         if (targ == nil) then
-            error(player, string.format("Player named '%s' not found!", target));
-            return;
+            error(player, string.format("Player named '%s' not found!", target))
+            return
         end
     end
 
     -- validate dropper
     if (dropper ~= nil) then
-        dropper = GetNPCByID(dropper);
+        dropper = GetNPCByID(dropper)
         if (dropper == nil) then
-            error(player, "Invalid npcID.");
-            return;
+            error(player, "Invalid npcID.")
+            return
         end
     end
 
     -- add treasure to pool
-    targ:addTreasure(itemId, dropper);
-    player:PrintToPlayer(string.format("Item of ID %d was added to the treasure pool of %s or their party/alliance.", itemId, targ:getName()));
+    targ:addTreasure(itemId, dropper)
+    player:PrintToPlayer(string.format("Item of ID %d was added to the treasure pool of %s or their party/alliance.", itemId, targ:getName()))
 end

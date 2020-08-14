@@ -4,20 +4,20 @@
 -- Fame Checker
 -- !zone 230
 -----------------------------------
-require("scripts/globals/quests");
-require("scripts/globals/settings");
+require("scripts/globals/quests")
+require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-end;
+end
 
-function onTrigger(player,npc)
-    player:startEvent(31, player:getFame(SANDORIA));
-end;
+function onTrigger(player, npc)
+    player:startEvent(31, player:getFame(SANDORIA))
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end
