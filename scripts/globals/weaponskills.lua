@@ -106,8 +106,8 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect then
-            if calcParams.flourisheffect:getPower() > 1 then
-                critrate = critrate + (10 + calcParams.flourisheffect:getSubPower()/2)/100
+            if calcParams.flourishEffect:getPower() > 1 then
+                critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
             end
         end
 
