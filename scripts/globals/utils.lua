@@ -16,6 +16,25 @@ function utils.shuffle(tab)
     return res
 end
 
+-- Generates a random permutation of integers >= min_val and <= max_val
+-- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
+function utils.permgen(max_val, min_val)
+    local indices = {}
+    min_val = min_val or 1
+
+    if min_val >= max_val then
+        for iter = min_val, max_val, -1 do
+            indices[iter] = iter
+        end
+    else
+        for iter = min_val, max_val, 1 do
+            indices[iter] = iter
+        end
+    end
+
+    return utils.shuffle(indices)
+end
+
 function utils.clamp(input, min_val, max_val)
     if input < min_val then
         input = min_val
