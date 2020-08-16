@@ -1020,6 +1020,30 @@ INSERT INTO `bcnm_battlefield` VALUES (672,3,16809998,0);
 INSERT INTO `bcnm_battlefield` VALUES (673,1,16810018,3); -- like_the_wind: Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,2,16810020,3); -- Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,3,16810022,3); -- Race Runner
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810024,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810025,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810026,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810027,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810028,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810029,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810030,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,1,16810031,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810033,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810034,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810035,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810036,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810037,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810038,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810039,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,2,16810040,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810042,3); -- Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810043,3); -- Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810044,0); -- Nepionic Parata
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810045,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810046,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810047,0); -- Nepionic Bladmall
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810048,0);
+INSERT INTO `bcnm_battlefield` VALUES (675,3,16810049,0);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818177,3); -- darkness_named
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818178,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818179,1);
