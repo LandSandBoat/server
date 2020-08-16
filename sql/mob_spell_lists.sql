@@ -3890,7 +3890,16 @@ INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,258,7,255);  -- Bind
 INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,273,31,255); -- Sleepga
 INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,274,56,255); -- Sleepga II
 
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,46,63,255);  -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,133,68,255); -- Shellra IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,172,70,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,200,44,255); -- Waterga II
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,201,65,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',431,214,1,255);  -- Flood
 
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',432,51,68,255); -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',432,46,63,255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',432,4,41,255);   -- Cure IV
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
