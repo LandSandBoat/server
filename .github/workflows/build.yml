@@ -1,0 +1,41 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  Linux:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev mysql-client-core-5.6 mysql-server-5.6 mysql-client-5.6 luarocks python3.7
+    - name: Build SQL and Lua
+      run: |
+        g++ --version
+        python3 ./tools/price_checker.py
+        mysql -u root -e 'create database tpzdb_test;'
+        sh travis_sql.sh
+        sh travis_lua.sh
+    - name: Build C++
+      run: |
+        sh autogen.sh
+        ./configure
+        make
+
+  Windows:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build
+        shell: cmd
+        run: |
+          "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln
