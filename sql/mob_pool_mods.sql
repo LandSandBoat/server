@@ -164,6 +164,7 @@ INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (3598,368,70,0);
 INSERT INTO `mob_pool_mods` VALUES (3600,368,70,0);
 INSERT INTO `mob_pool_mods` VALUES (3601,368,70,0);
+INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1);
 INSERT INTO `mob_pool_mods` VALUES (3759,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (3781,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (3784,2,-1,1); -- Stray GIL_MAX: don't drop gil
