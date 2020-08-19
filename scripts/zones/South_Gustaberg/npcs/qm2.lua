@@ -13,19 +13,16 @@ function onTrade(player, npc, trade)
     if not player:needToZone() then
         player:setCharVar("SGusta_Sausage_Timer", 0)
     end
-
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, 4372) then
-            if player:getCharVar("SGusta_Sausage_Timer") == 0 then
-                -- player puts sheep meat on the fire
-                player:messageSpecial(ID.text.FIRE_PUT, 4372)
-                player:confirmTrade()
-                player:setCharVar("SGusta_Sausage_Timer", os.time() + 60) -- 1 minute earth time
-                player:needToZone(true)
-            else
-                -- message given if sheep meat is already on the fire
-                player:messageSpecial(ID.text.MEAT_ALREADY_PUT, 4372)
-            end
+    if npcUtil.tradeHas(trade, 4372) then
+        if player:getCharVar("SGusta_Sausage_Timer") == 0 then
+            -- player puts sheep meat on the fire
+            player:messageSpecial(ID.text.FIRE_PUT, 4372)
+            player:confirmTrade()
+            player:setCharVar("SGusta_Sausage_Timer", os.time() + 60) -- 1 minute earth time
+            player:needToZone(true)
+        else
+            -- message given if sheep meat is already on the fire
+            player:messageSpecial(ID.text.MEAT_ALREADY_PUT, 4372)
         end
     end
 end
