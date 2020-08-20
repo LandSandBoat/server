@@ -3104,7 +3104,7 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State *L)
         return 0;
     }
 
-	lua_newtable(L);
+    lua_newtable(L);
 
     for (uint8 x = 0; x < 10; x++)
     {
@@ -3853,7 +3853,7 @@ inline int32 CLuaBaseEntity::breakLinkshell(lua_State* L)
     bool found = false;
 
     int32 ret = Sql_Query(SqlHandle, "SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
-	if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         uint8 broken = Sql_GetUIntData(SqlHandle,0);
         if (broken)
@@ -6530,7 +6530,7 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
 *  Function: setMissionLogEx()
 *  Purpose : Sets mission log extra data to correctly track progress in branching missions.
 *  Example : player:setMissionLogEx(tpz.mission.log_id.COP, tpz.mission.logEx.ULMIA, 14)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setMissionLogEx(lua_State *L)
@@ -9075,24 +9075,6 @@ inline int32 CLuaBaseEntity::checkSoloPartyAlliance(lua_State *L)
 }
 
 /************************************************************************
-*  Function: checkFovAllianceAllowed()
-*  Purpose : Returns true if server owner has enabled FoV alliances
-*  Example : if (player:checkFovAllianceAllowed() == 1) then
-*  Notes   :
-************************************************************************/
-
-inline int32 CLuaBaseEntity::checkFovAllianceAllowed(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    uint8 FovAlliance = map_config.fov_allow_alliance;
-
-    lua_pushinteger(L, FovAlliance);
-    return 1;
-}
-
-/************************************************************************
 *  Function: checkKillCredit()
 *  Purpose : Used to determine if kill counts towards regimes/etc.
 *  Example : if (player:checkKillCredit(mob)) then
@@ -10024,7 +10006,7 @@ int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
 *  Function: isDualWielding()
 *  Purpose : Returns true if entity is wielding two weapons
 *  Example : if player:isDualWielding() then
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::isDualWielding(lua_State* L)
@@ -14549,7 +14531,6 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkSoloPartyAlliance),
 
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkFovAllianceAllowed),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkKillCredit),
 
     // Instances

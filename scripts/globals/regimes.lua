@@ -1227,8 +1227,8 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no Fields credit unless fov_allow_alliance is 1 in map.conf
-    if regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 and player:checkFovAllianceAllowed() ~= 1 then
+    -- people in alliance get no regime credit unless REGIME_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if REGIME_REWARD_ALLIANCE ~= 1 and player:checkSoloPartyAlliance() == 2 then
         return
     end
 

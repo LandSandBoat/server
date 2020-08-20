@@ -1128,10 +1128,6 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.exp_party_gap_penalties = (uint8)atof(w2);
         }
-        else if (strcmp(w1, "fov_allow_alliance") == 0)
-        {
-            map_config.fov_allow_alliance = (uint8)atof(w2);
-        }
         else if (strcmp(w1, "mob_tp_multiplier") == 0)
         {
             map_config.mob_tp_multiplier = (float)atof(w2);
