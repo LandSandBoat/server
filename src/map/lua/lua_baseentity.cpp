@@ -5684,6 +5684,22 @@ inline int32 CLuaBaseEntity::levelRestriction(lua_State* L)
 }
 
 /************************************************************************
+*  Function: addJobTraits
+*  Purpose : Add job traits
+*  Example : player:addJobTraits(tpz.job.WHM, 75)
+************************************************************************/
+
+int32 CLuaBaseEntity::addJobTraits(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+
+    battleutils::AddTraits(static_cast<CCharEntity*>(m_PBaseEntity), traits::GetTraits(lua_tointeger(L, 1)), lua_tointeger(L, 2));
+    return 0;
+}
+
+/************************************************************************
 *  Function: getTitle()
 *  Purpose : Returns the integer value of the player's current title
 *  Example : if (player:getTitle()) == 123) then
@@ -14530,6 +14546,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setsLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelCap),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelRestriction),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addJobTraits),
 
     // Player Titles and Fame
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTitle),
