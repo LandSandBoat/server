@@ -132,6 +132,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/position.h"
 #include "packets/release.h"
 #include "packets/release_special.h"
+#include "packets/roe_questlog.h"
+#include "packets/roe_sparkupdate.h"
+#include "packets/roe_update.h"
 #include "packets/server_ip.h"
 #include "packets/server_message.h"
 #include "packets/shop_appraise.h"
@@ -6044,6 +6047,32 @@ void SmallPacket0x10B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 /************************************************************************
 *                                                                        *
+*  Eminence Record Start                                                  *
+*                                                                        *
+************************************************************************/
+
+void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+{
+    charutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
+    PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+    return;
+}
+
+/************************************************************************
+*                                                                        *
+*  Eminence Record Drop                                                  *
+*                                                                        *
+************************************************************************/
+
+void SmallPacket0x10D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+{
+    charutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
+    PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+    return;
+}
+
+/************************************************************************
+*                                                                        *
 *  Request Currency1 tab                                                  *
 *                                                                        *
 ************************************************************************/
@@ -6088,6 +6117,24 @@ void SmallPacket0x111(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     charutils::SetStyleLock(PChar, data.ref<uint8>(0x04));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
+    return;
+}
+
+/************************************************************************
+*                                                                        *
+*  Roe Quest Log Request                                                 *
+*                                                                        *
+************************************************************************/
+
+void SmallPacket0x112(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+{
+    // Send spark updates + current RoE quests
+    PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+    PChar->pushPacket(new CRoeUpdatePacket(PChar));
+    // 4-part Eminence Completion bitmap
+    for(int i = 0; i < 4; i++)
+        PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
+
     return;
 }
 
@@ -6149,6 +6196,19 @@ void SmallPacket0x114(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 void SmallPacket0x115(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
     PChar->pushPacket(new CCurrencyPacket2(PChar));
+    return;
+}
+
+/************************************************************************
+*                                                                        *
+*  Unity Menu Packet (Possibly incomplete)                               *
+*  This stub only handles the needed RoE updates.                        *
+*                                                                        *
+************************************************************************/
+
+void SmallPacket0x117(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+{
+    PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     return;
 }
 
@@ -6261,13 +6321,17 @@ void PacketParserInitialize()
     PacketSize[0x109] = 0x00; PacketParser[0x109] = &SmallPacket0x109;
     PacketSize[0x10A] = 0x06; PacketParser[0x10A] = &SmallPacket0x10A;
     PacketSize[0x10B] = 0x00; PacketParser[0x10B] = &SmallPacket0x10B;
+    PacketSize[0x10C] = 0x04; PacketParser[0x10C] = &SmallPacket0x10C;
+    PacketSize[0x10D] = 0x04; PacketParser[0x10D] = &SmallPacket0x10D;
     PacketSize[0x10F] = 0x02; PacketParser[0x10F] = &SmallPacket0x10F;
     PacketSize[0x110] = 0x0A; PacketParser[0x110] = &SmallPacket0x110;
     PacketSize[0x111] = 0x00; PacketParser[0x111] = &SmallPacket0x111; // Lock Style Request
-    PacketSize[0x112] = 0x00; PacketParser[0x112] = &SmallPacket0xFFF;
+    PacketSize[0x112] = 0x00; PacketParser[0x112] = &SmallPacket0x112;
     PacketSize[0x113] = 0x06; PacketParser[0x113] = &SmallPacket0x113;
     PacketSize[0x114] = 0x00; PacketParser[0x114] = &SmallPacket0x114;
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
+    PacketSize[0x116] = 0x02; PacketParser[0x116] = &SmallPacket0xFFF; // not implemented
+    PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
 }
 
 /************************************************************************

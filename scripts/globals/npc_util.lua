@@ -6,6 +6,7 @@
     npcUtil.giveItem(player, items)
     npcUtil.giveKeyItem(player, keyitems)
     npcUtil.completeQuest(player, area, quest, params)
+    npcUtil.completeRecord(player, record, params)
     npcUtil.tradeHas(trade, items)
     npcUtil.queueMove(npc, point, delay)
     npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
@@ -13,6 +14,7 @@
 --]]
 require("scripts/globals/settings")
 require("scripts/globals/status")
+require("scripts/globals/msg")
 
 npcUtil = {}
 
@@ -394,6 +396,54 @@ function npcUtil.completeQuest(player, area, quest, params)
 
     -- successfully complete the quest
     player:completeQuest(area, quest)
+    return true
+end
+--[[ *******************************************************************************
+    Complete a record of eminence.
+    If record rewards items, and the player cannot carry them, return false.
+    Otherwise, return true.
+
+    Example of usage with params (all params are optional):
+        npcUtil.completeRecord(player, record#, {
+            item = { {640,2}, 641 },    -- see npcUtil.giveItem for formats
+            keyItem = tpz.ki.ZERUHN_REPORT,    -- see npcUtil.giveKeyItem for formats
+            sparks = 500,
+            xp = 1000
+        })
+******************************************************************************* --]]
+function npcUtil.completeRecord(player, record, params)
+    params = params or {}
+
+    if params["item"] ~= nil then
+        if not npcUtil.giveItem(player, params["item"]) then
+            return false
+        end
+    end
+
+    player:messageBasic(tpz.msg.basic.ROE_COMPLETE,record)
+
+    if params["sparks"] ~= nil and type(params["sparks"]) == "number" then
+        local bonus = 1
+        if player:getEminenceCompleted(record) then
+            player:addCurrency('spark_of_eminence', params["sparks"] * bonus * SPARKS_RATE)
+            player:messageBasic(tpz.msg.basic.ROE_RECEIVE_SPARKS, params["sparks"] * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+        else
+            bonus = 3
+            player:addCurrency('spark_of_eminence', params["sparks"] * bonus * SPARKS_RATE)
+            player:messageBasic(tpz.msg.basic.ROE_FIRST_TIME_SPARKS, params["sparks"] * bonus * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+        end
+    end
+
+    if params["xp"] ~= nil and type(params["xp"]) == "number" then
+        player:addExp(params["xp"] * EXP_RATE)
+    end
+
+    if params["keyItem"] ~= nil then
+        npcUtil.giveKeyItem(player, params["keyItem"])
+    end
+
+    -- successfully complete the record
+    player:setEminenceCompleted(record)
     return true
 end
 

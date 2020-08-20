@@ -151,6 +151,7 @@ namespace charutils
     void    SaveCharLook(CCharEntity* PChar);                           // Saves a character's appearance based on style locking.
     void	SaveCharPosition(CCharEntity* PChar);				        // сохраняем позицию персонажа
     void	SaveMissionsList(CCharEntity* PChar);                       // Save the missions list
+    void    SaveEminenceData(CCharEntity* PChar);                       // Save Eminence Record (RoE) data
     void	SaveQuestsList(CCharEntity* PChar);					        // сохраняем список ксевтов
     void    SaveFame(CCharEntity* PChar);                               // Save area fame / reputation
     void	SaveZonesVisited(CCharEntity* PChar);				        // сохраняем посещенные зоны
@@ -172,6 +173,14 @@ namespace charutils
     void	SaveDeathTime(CCharEntity* PChar);							// Saves when this character last died.
     void	SavePlayTime(CCharEntity* PChar);							// Saves this characters total play time.
     bool	hasMogLockerAccess(CCharEntity* PChar);						// true if have access, false otherwise.
+
+    void    SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus);
+    bool    GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID);
+    bool    AddEminenceRecord(CCharEntity* PChar, uint16 recordID);
+    bool    DelEminenceRecord(CCharEntity* PChar, uint16 recordID);
+    bool    HasEminenceRecord(CCharEntity* PChar, uint16 recordID);
+    bool    SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress);
+    uint32  GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID);
 
     float  AddExpBonus(CCharEntity* PChar, float exp);
 

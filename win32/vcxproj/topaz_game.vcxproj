@@ -663,6 +663,9 @@
     <ClCompile Include="..\..\src\map\packets\position.cpp" />
     <ClCompile Include="..\..\src\map\packets\quest_mission_log.cpp" />
     <ClCompile Include="..\..\src\map\packets\release.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_sparkupdate.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_questlog.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_update.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_ip.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_message.cpp" />
     <ClCompile Include="..\..\src\map\packets\shop_appraise.cpp" />

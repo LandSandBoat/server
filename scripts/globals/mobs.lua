@@ -8,6 +8,7 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
 -----------------------------------
 
 tpz = tpz or {}
@@ -37,6 +38,22 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
+
+    if player:getEminenceProgress(2) then
+        npcUtil.completeRecord(player, 2, { sparks = 100, xp = 500 })
+    end
+
+    -- Vanquish Multiple Enemies I - Eminence Record Example
+    -- (Will be replaced by proper record check systems when implemented.)
+    if player:getEminenceProgress(12) and player:checkKillCredit(mob) then
+        local progress = player:getEminenceProgress(12) + 1
+        if progress >= 200 then
+            npcUtil.completeRecord(player, 12, { sparks = 1000, xp = 5000 })
+        else
+            player:setEminenceProgress(12, progress, 200)
+        end
+    end
+
 end
 
 -------------------------------------------------
