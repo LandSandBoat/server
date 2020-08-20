@@ -139,7 +139,7 @@ namespace luautils
     int32 setMobPos(lua_State*);                                                // set a mobs position (only if mob is not in combat)
 
     int32 GetHealingTickDelay(lua_State* L);                                    // Returns the configured healing tick delay
-
+    int32 GetItem(lua_State* L);                                                // Returns a newly minted item object of the specified ID
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
@@ -147,6 +147,8 @@ namespace luautils
     int32 DespawnMob(lua_State*);                                               // Despawn (Fade Out) Mob By Id
     int32 GetPlayerByName(lua_State*);                                          // Gets Player ref from a name supplied
     int32 GetPlayerByID(lua_State*);                                            // Gets Player ref from an Id supplied
+    int32 GetMagianTrial(lua_State*);
+    int32 GetMagianTrialsWithParent(lua_State* L);
     int32 GetMobAction(lua_State*);                                             // Get Mobs current action
     int32 VanadielTime(lua_State*);                                             // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     int32 VanadielTOTD(lua_State*);                                             // текущее игровое время суток

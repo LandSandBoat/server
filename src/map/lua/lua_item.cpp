@@ -22,6 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_item.h"
 
 #include "../../common/showmsg.h"
+#include "../map.h"
+#include "../utils/itemutils.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_weapon.h"
@@ -86,6 +88,14 @@ inline int32 CLuaItem::getQuantity(lua_State* L)
     return 1;
 }
 
+inline int32 CLuaItem::getBasePrice(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    uint32 basePrice = static_cast<CItem*>(m_PLuaItem)->getBasePrice();
+    lua_pushinteger(L, basePrice);
+    return 1;
+}
+
 inline int32 CLuaItem::getLocationID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
@@ -100,6 +110,61 @@ inline int32 CLuaItem::getSlotID(lua_State* L)
 
     lua_pushinteger(L, m_PLuaItem->getSlotID());
     return 1;
+}
+
+inline int32 CLuaItem::getTrialNumber(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    uint16 trialID = static_cast<CItemEquipment*>(m_PLuaItem)->getTrialNumber();
+    lua_pushinteger(L, trialID);
+    return 1;
+}
+
+inline int32 CLuaItem::getMatchingTrials(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+
+    auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
+
+    const char* Query =
+        "SELECT trialId FROM `magian` "
+        "WHERE `reqItem` = %u AND "
+        "`reqItemAug1` = %u AND "
+        "`reqItemAug2` = %u AND "
+        "`reqItemAug3` = %u AND "
+        "`reqItemAug4` = %u AND "
+        "`reqItemAugValue1` = %u AND "
+        "`reqItemAugValue2` = %u AND "
+        "`reqItemAugValue3` = %u AND "
+        "`reqItemAugValue4` = %u AND "
+        "`trialTarget` <> 0;";
+
+    int32 augs[4][2] {};
+    for(int i = 0; i < 4; i++){
+        auto augbits = PItem->getAugment(i);
+        uint16 augmentid = (uint16)unpackBitsBE((uint8*)(&augbits), 0, 11);
+        uint8 augmentVal = (uint8)unpackBitsBE((uint8*)(&augbits), 11, 5);
+        augs[i][0] = augmentid;
+        augs[i][1] = augmentVal;
+    }
+
+    int32 ret = Sql_Query(SqlHandle, Query, PItem->getID(),
+            augs[0][0], augs[1][0], augs[2][0], augs[3][0],
+            augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
+
+    lua_newtable(L);
+    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    {
+        int32 trialCount {0};
+        while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            lua_pushinteger(L, ++trialCount);
+            lua_pushinteger(L, (int32)Sql_GetIntData(SqlHandle, 0));
+            lua_settable(L,-3);
+        }
+    }
+    return 1;
+
 }
 
 inline int32 CLuaItem::getWornItem(lua_State* L)
@@ -140,6 +205,22 @@ inline int32 CLuaItem::getName(lua_State* L)
     return 1;
 }
 
+inline int32 CLuaItem::getILvl(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    uint16 ilvl = static_cast<CItemEquipment*>(m_PLuaItem)->getILvl();
+    lua_pushinteger(L, ilvl);
+    return 1;
+}
+
+inline int32 CLuaItem::getReqLvl(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    uint16 lvl = static_cast<CItemEquipment*>(m_PLuaItem)->getReqLvl();
+    lua_pushinteger(L, lvl);
+    return 1;
+}
+
 inline int32 CLuaItem::getMod(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
@@ -160,6 +241,13 @@ inline int32 CLuaItem::addMod(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
+
+    // Checks if this item is just a pointer created by GetItem()
+    // All item-modifying functions in this file should check this!
+    if(itemutils::IsItemPointer(PItem))
+    {
+        return 0;
+    }
 
     Mod mod = static_cast<Mod>(lua_tointeger(L, 1));
     auto power = (int16)lua_tointeger(L, 2);
@@ -291,11 +379,16 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,getAHCat),
     LUNAR_DECLARE_METHOD(CLuaItem,getQuantity),
     LUNAR_DECLARE_METHOD(CLuaItem,getLocationID),
+    LUNAR_DECLARE_METHOD(CLuaItem,getBasePrice),
     LUNAR_DECLARE_METHOD(CLuaItem,getSlotID),
+    LUNAR_DECLARE_METHOD(CLuaItem,getTrialNumber),
+    LUNAR_DECLARE_METHOD(CLuaItem,getMatchingTrials),
     LUNAR_DECLARE_METHOD(CLuaItem,getWornItem),
     LUNAR_DECLARE_METHOD(CLuaItem,isType),
     LUNAR_DECLARE_METHOD(CLuaItem,isSubType),
     LUNAR_DECLARE_METHOD(CLuaItem,getName),
+    LUNAR_DECLARE_METHOD(CLuaItem,getILvl),
+    LUNAR_DECLARE_METHOD(CLuaItem,getReqLvl),
     LUNAR_DECLARE_METHOD(CLuaItem,getMod),
     LUNAR_DECLARE_METHOD(CLuaItem,addMod),
     LUNAR_DECLARE_METHOD(CLuaItem,delMod),

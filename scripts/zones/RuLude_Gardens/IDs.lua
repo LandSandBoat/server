@@ -54,6 +54,8 @@ zones[tpz.zone.RULUDE_GARDENS] =
         YOUR_LEVEL_LIMIT_IS_NOW_99       = 12516, -- Your level limit is now 99!
         COMMON_SENSE_SURVIVAL            = 15684, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15944, -- There appears to be a tear in the fabric of space...
+        ITEM_NOT_WEAPON_MAGIAN           = 14490, -- As I advised you previously, my sole specialty is weapons. I have not the moogle magic at my disposal to augment items of this variety, kupo...
+        RETURN_MAGIAN_ITEM               = 14510, -- The Magian Moogle returns your <item>.
     },
     mob =
     {

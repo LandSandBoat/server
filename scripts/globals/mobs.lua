@@ -37,6 +37,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
+
+      tpz.magian.checkMagianTrial(player, {['mob'] = mob})
 end
 
 -------------------------------------------------

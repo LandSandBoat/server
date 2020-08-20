@@ -298,6 +298,9 @@ tpz.msg.basic =
     FOV_OBTAINS_TABS        = 566,  -- ${target} obtains ${number} tab.${lb}(Total: ${number})
     FOV_REGIME_BEGINS_ANEW  = 643,  -- Your current training regime will begin anew!
 
+    -- Magian Trials
+    MAGIAN_TRIAL_COMPLETE   = 584,  -- You have completed Trial <trialID>. Report your success to a Magian Moogle.
+
     -- Depoil Statuses
     DESPOIL_ATT_DOWN        = 593,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Attack Down.
     DESPOIL_DEF_DOWN        = 594,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Defense Down.
