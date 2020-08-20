@@ -452,3 +452,14 @@ bool CEnmityContainer::IsTameable()
 {
     return m_tameable;
 }
+
+void CEnmityContainer::UpdateEnmityFromCover(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser)
+{
+    // Update Enmity if cover ability target and cover ability user are not nullptr
+    if (PCoverAbilityTarget != nullptr && PCoverAbilityUser != nullptr)
+    {
+        int32 currentCE = GetCE(PCoverAbilityUser);
+        SetCE(PCoverAbilityUser, currentCE + 200);
+        LowerEnmityByPercent(PCoverAbilityTarget, 10, nullptr);
+    }
+}
