@@ -32,11 +32,11 @@ function onTrigger(player, arg1, arg2)
 
     -- validate target
     if (targ == nil) then
-        error(player,"You must either enter a valid npcID or target an NPC.")
+        error(player, "You must either enter a valid npcID or target an NPC.")
         return
     end
     if (not targ:isNPC()) then
-        error(player,"Targeted entity is not an NPC.")
+        error(player, "Targeted entity is not an NPC.")
         return
     end
 
@@ -45,7 +45,7 @@ function onTrigger(player, arg1, arg2)
         animationId = tonumber(animationId) or tpz.anim[string.upper(animationId)]
     end
     if (animationId == nil) then
-        error(player,"Invalid animationID.")
+        error(player, "Invalid animationID.")
         return
     end
 

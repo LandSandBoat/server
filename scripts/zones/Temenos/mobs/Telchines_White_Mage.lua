@@ -2,20 +2,16 @@
 -- Area: Temenos N T
 --  Mob: Telchines White Mage
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+require("scripts/globals/limbus")
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobEngaged(mob,target)
-
-end;
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928788)==true and IsMobDead(16928789)==true  and IsMobDead(16928792)==true   and IsMobDead(16928793)==true ) then
-       GetNPCByID(16928768+26):setPos(19,80,430);
-    GetNPCByID(16928768+26):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+160):setPos(16,80,430);
-    GetNPCByID(16928768+160):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+211):setPos(22,80,430);
-    GetNPCByID(16928768+211):setStatus(tpz.status.NORMAL);
- end
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[3]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[3]+1):isDead() then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[3]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[3]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[3]+2):setStatus(tpz.status.NORMAL)
+        end
+    end
+end

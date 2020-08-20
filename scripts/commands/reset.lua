@@ -15,7 +15,7 @@ function error(player, msg)
     player:PrintToPlayer("!reset {player}")
 end
 
-function onTrigger(player,target)
+function onTrigger(player, target)
     -- validate target
     local targ
     if (target == nil) then

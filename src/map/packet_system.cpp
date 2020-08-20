@@ -5897,11 +5897,20 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
             return;
 
-        uint32 Price1 = (PBazaarItem->getCharPrice() * Quantity);
-        uint32 Price2 = (PChar->loc.zone->GetTax() * Price1) / 10000 + Price1;
+        uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
+        uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)Price2);
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price1);
+        // Validate this player can afford said item
+        if (PCharGil->getQuantity() < PriceWithTax)
+        {
+            // Exploit attempt
+            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
+            return;
+        }
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)PriceWithTax);
+        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
 
         PChar->pushPacket(new CBazaarPurchasePacket(PTarget, true));
 

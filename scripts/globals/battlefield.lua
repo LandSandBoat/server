@@ -243,7 +243,7 @@ function tpz.battlefield.HealPlayers(battlefield, players)
         player:addHP(recoverHP)
         player:addMP(recoverMP)
         player:resetRecasts()
-        player:messageBasic(msgBasic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
-        player:messageBasic(msgBasic.ALL_ABILITIES_RECHARGED)
+        player:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
+        player:messageBasic(tpz.msg.basic.ALL_ABILITIES_RECHARGED)
     end
 end

@@ -6,10 +6,10 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- local vars to reduce repeat calls..
     local lever = npc:getID()
     local gear = GetNPCByID(lever +2)
@@ -34,10 +34,10 @@ function onTrigger(player,npc)
 
     -- Move platform
     RunElevator(tpz.elevator.FORT_GHELSBA_LIFT)
-end;
-
-function onEventUpdate(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventUpdate(player, csid, option)
+end
+
+function onEventFinish(player, csid, option)
 end

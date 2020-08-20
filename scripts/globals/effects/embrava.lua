@@ -4,7 +4,7 @@
 --
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     local skill = effect:getPower()
     local regen = math.floor(skill / 7) + 1
     local refresh = math.floor(skill / 100) + 1
@@ -15,10 +15,10 @@ function onEffectGain(target,effect)
     target:addMod(tpz.mod.HASTE_MAGIC, haste)
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local skill = effect:getPower()
     local regen = math.floor(skill / 7) + 1
     local refresh = math.floor(skill / 100) + 1

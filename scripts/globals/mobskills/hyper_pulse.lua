@@ -10,7 +10,10 @@ require("scripts/globals/status")
 ---------------------------------------------
 
 function onMobSkillCheck(target,mob,skill)
-    if (mob:AnimationSub() <= 1) then -- proto omega  bipedform
+    local currentForm = mob:getLocalVar("form")
+    local skillList = mob:getMobMod(tpz.mobMod.SKILL_LIST)
+
+    if (mob:AnimationSub() == 2 and currentForm == 1) or skillList == 54 then -- proto-omega bipedform
         return 0
     end
     return 1

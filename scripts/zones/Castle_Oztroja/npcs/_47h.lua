@@ -6,12 +6,12 @@
 -----------------------------------
 local CASTLE_OZTROJA = require("scripts/zones/Castle_Oztroja/globals")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     CASTLE_OZTROJA.handleOnTrigger(npc)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

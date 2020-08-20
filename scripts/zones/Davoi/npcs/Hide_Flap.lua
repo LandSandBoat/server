@@ -11,10 +11,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.HIDE_FLAP_OFFSET
 
     -- THE DOORMAN
@@ -33,7 +33,7 @@ function onTrigger(player,npc)
     elseif offset == 1 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL) then
         if player:getCharVar("theFirstMeetingKilledNM") >= 2 then
             npcUtil.giveKeyItem(player, tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
-            player:setCharVar("theFirstMeetingKilledNM",0)
+            player:setCharVar("theFirstMeetingKilledNM", 0)
         elseif not GetMobByID(ID.mob.BILOPDOP):isSpawned() and not GetMobByID(ID.mob.DELOKNOK):isSpawned() then
             SpawnMob(ID.mob.BILOPDOP):updateClaim(player)
             SpawnMob(ID.mob.DELOKNOK):updateClaim(player)
@@ -45,8 +45,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

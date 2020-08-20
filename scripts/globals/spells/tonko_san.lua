@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     if (target:hasStatusEffect(tpz.effect.INVISIBLE) == false) then
-        target:addStatusEffect(tpz.effect.INVISIBLE,0,10,420)
+        target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, 420)
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
     else
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no tpz.effect.

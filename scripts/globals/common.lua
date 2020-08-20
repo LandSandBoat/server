@@ -28,7 +28,7 @@ end
 --  printf
 -----------------------------------
 
-function printf(s,...)
+function printf(s, ...)
     print(s:format(...))
 end
 

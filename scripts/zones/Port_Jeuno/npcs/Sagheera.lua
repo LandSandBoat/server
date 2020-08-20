@@ -270,7 +270,7 @@ local function getCosmoCleanseTime(player)
     return (lastCosmoTime - 1009843200) - 39600 -- (os.time number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local count = trade:getItemCount()
     local afUpgrade = player:getCharVar("AFupgrade")
 
@@ -326,7 +326,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
@@ -364,7 +364,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
         local info = afArmorPlusOne[option]
@@ -379,7 +379,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- LURE OF THE WILDCAT
     if csid == 313 then
         player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 19, true)
@@ -389,7 +389,6 @@ function onEventFinish(player,csid,option)
         local cosmoTime = getCosmoCleanseTime(player)
         if cosmoTime == COSMO_READY and player:delGil(15000) then
             npcUtil.giveKeyItem(player, tpz.ki.COSMOCLEANSE)
-            player:setCharVar("Cosmo_Cleanse_TIME", os.time())
         end
 
     -- purchase item using ancient beastcoins

@@ -2,7 +2,7 @@
 --     tpz.effect.RAMPART
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     local power = -1 * effect:getPower()
     target:addMod(tpz.mod.UDMGPHYS, power)
     target:addMod(tpz.mod.UDMGBREATH, power)
@@ -10,10 +10,10 @@ function onEffectGain(target,effect)
     target:addMod(tpz.mod.UDMGRANGE, power)
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local power = -1 * effect:getPower()
     target:delMod(tpz.mod.UDMGPHYS, power)
     target:delMod(tpz.mod.UDMGBREATH, power)

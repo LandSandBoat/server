@@ -18,7 +18,7 @@ function onAbilityCheck(player, target, ability)
     elseif player:getTP() < 350 then
         return tpz.msg.basic.NOT_ENOUGH_TP, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 

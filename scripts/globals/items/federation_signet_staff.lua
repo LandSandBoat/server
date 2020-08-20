@@ -31,5 +31,5 @@ end
 
 function onItemUse(target)
     target:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
-    target:addStatusEffect(tpz.effect.SIGNET,0,0,18000)
+    target:addStatusEffect(tpz.effect.SIGNET, 0, 0, 18000)
 end

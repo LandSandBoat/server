@@ -4,10 +4,10 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Bastok 1st Place
 -- !pos 111 8 -47 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs");
+local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local ammoList =
     {
         {21307, 6199}, -- arrow, achiyalabopa
@@ -85,64 +85,64 @@ function onTrade(player,npc,trade)
         {2181, 5407}, -- card, water
         {2182, 5408}, -- card, light
         {2183, 5409}, -- card, dark
-    };
+    }
 
-    local carnationsNeeded = 0;
-    local giveToPlayer = {};
+    local carnationsNeeded = 0
+    local giveToPlayer = {}
 
     -- check for invalid items
-    for i = 0,8,1 do
-        local itemId = trade:getItemId(i);
+    for i = 0, 8, 1 do
+        local itemId = trade:getItemId(i)
         if (itemId > 0 and itemId ~= 948) then
-            local validSlot = false;
+            local validSlot = false
             for k, v in pairs(ammoList) do
                 if (v[1] == itemId) then
-                    local itemQty = trade:getSlotQty(i);
+                    local itemQty = trade:getSlotQty(i)
                     if (itemQty % 99 ~= 0) then
-                        player:messageSpecial(ID.text.NOKKHI_BAD_COUNT);
-                        return;
-                    end;
-                    local stacks = itemQty / 99;
-                    carnationsNeeded = carnationsNeeded + stacks;
-                    giveToPlayer[#giveToPlayer+1] = {v[2], stacks};
-                    validSlot = true;
-                    break;
+                        player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
+                        return
+                    end
+                    local stacks = itemQty / 99
+                    carnationsNeeded = carnationsNeeded + stacks
+                    giveToPlayer[#giveToPlayer+1] = {v[2], stacks}
+                    validSlot = true
+                    break
                 end
             end
             if (not validSlot) then
-                player:messageSpecial(ID.text.NOKKHI_BAD_ITEM);
-                return;
+                player:messageSpecial(ID.text.NOKKHI_BAD_ITEM)
+                return
             end
         end
     end
 
     -- check for correct number of carnations
     if (carnationsNeeded == 0 or trade:getItemQty(948) ~= carnationsNeeded) then
-        player:messageSpecial(ID.text.NOKKHI_BAD_COUNT);
-        return;
+        player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
+        return
     end
 
     -- check for enough inventory space
     if (player:getFreeSlotsCount() < carnationsNeeded) then
-        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, giveToPlayer[1][1]);
-        return;
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, giveToPlayer[1][1])
+        return
     end
 
     -- make the trade
-    player:messageSpecial(ID.text.NOKKHI_GOOD_TRADE);
+    player:messageSpecial(ID.text.NOKKHI_GOOD_TRADE)
     for k, v in pairs(giveToPlayer) do
-        player:addItem(v[1], v[2]);
-        player:messageSpecial(ID.text.ITEM_OBTAINED,v[1]);
+        player:addItem(v[1], v[2])
+        player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
     end
-    player:tradeComplete();
-end;
+    player:tradeComplete()
+end
 
-function onTrigger(player,npc)
-    player:startEvent(285,npc:getID());
-end;
+function onTrigger(player, npc)
+    player:startEvent(285, npc:getID())
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -8,41 +8,41 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
         if npcUtil.tradeHas(trade, 2219) then
             npc:openDoor()
-            player:messageSpecial(ID.text.KEY_BREAKS,2219)
+            player:messageSpecial(ID.text.KEY_BREAKS, 2219)
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1022) and player:getMainJob() == tpz.job.THF then -- thief's tools
-            if math.random(1,2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
-                player:messageSpecial(ID.text.LOCK_SUCCESS,1022)
+            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+                player:messageSpecial(ID.text.LOCK_SUCCESS, 1022)
                 npc:openDoor()
             else
-                player:messageSpecial(ID.text.LOCK_FAIL,1022)
+                player:messageSpecial(ID.text.LOCK_FAIL, 1022)
             end
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1023) and player:getMainJob() == tpz.job.THF then -- living key
-            if math.random(1,2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
-                player:messageSpecial(ID.text.LOCK_SUCCESS,1023)
+            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+                player:messageSpecial(ID.text.LOCK_SUCCESS, 1023)
                 npc:openDoor()
             else
-                player:messageSpecial(ID.text.LOCK_FAIL,1023)
+                player:messageSpecial(ID.text.LOCK_FAIL, 1023)
             end
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1115) and player:getMainJob() == tpz.job.THF then -- skeleton key
-            if math.random(1,2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
-                player:messageSpecial(ID.text.LOCK_SUCCESS,1115)
+            if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
+                player:messageSpecial(ID.text.LOCK_SUCCESS, 1115)
                 npc:openDoor()
             else
-                player:messageSpecial(ID.text.LOCK_FAIL,1115)
+                player:messageSpecial(ID.text.LOCK_FAIL, 1115)
             end
             player:confirmTrade()
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getZPos() < 120 and npc:getAnimation() == tpz.anim.CLOSE_DOOR then
         if player:getMainJob() == tpz.job.THF then
             player:messageSpecial(ID.text.DOOR_IS_LOCKED2, 2219, 1022) -- message only THF's get
@@ -55,8 +55,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
 end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
 end

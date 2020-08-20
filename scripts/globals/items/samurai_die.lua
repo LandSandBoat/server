@@ -5,9 +5,9 @@
 -----------------------------------------
 
 function onItemCheck(target)
-    return target:canLearnAbility(93)
+    return target:canLearnAbility(tpz.jobAbility.SAMURAI_ROLL)
 end
 
 function onItemUse(target)
-    target:addLearnedAbility(93)
+    target:addLearnedAbility(tpz.jobAbility.SAMURAI_ROLL)
 end

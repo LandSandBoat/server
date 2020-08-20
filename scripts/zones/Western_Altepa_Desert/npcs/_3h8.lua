@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if npc:getAnimation() ~= tpz.anim.OPEN_DOOR then
         npc:setAnimation(tpz.anim.OPEN_DOOR)
         GetNPCByID(npc:getID() - 4):setAnimation(tpz.anim.OPEN_DOOR)
@@ -32,8 +32,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

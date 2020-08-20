@@ -3,10 +3,10 @@
 --  Mob: Baron Vapula
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles");
+require("scripts/globals/titles")
 
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 354)
-    player:addTitle(tpz.title.HELLSBANE);
-end;
+    player:addTitle(tpz.title.HELLSBANE)
+end

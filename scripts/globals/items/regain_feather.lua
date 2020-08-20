@@ -19,5 +19,5 @@ function onItemUse(target)
     target:setHP(target:getMaxHP())
     target:setMP(target:getMaxMP())
     target:setTP(3000)
-    target:addStatusEffect(tpz.effect.MEDICINE,0,0,7200)
+    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 7200)
 end
