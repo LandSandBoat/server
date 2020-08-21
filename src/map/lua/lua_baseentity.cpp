@@ -5695,7 +5695,13 @@ int32 CLuaBaseEntity::addJobTraits(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    battleutils::AddTraits(static_cast<CCharEntity*>(m_PBaseEntity), traits::GetTraits(lua_tointeger(L, 1)), lua_tointeger(L, 2));
+    CBattleEntity* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    
+    if (PEntity != nullptr)
+    {
+        battleutils::AddTraits(PEntity, traits::GetTraits(lua_tointeger(L, 1)), lua_tointeger(L, 2));
+    }
+
     return 0;
 }
 
