@@ -16547,6 +16547,7 @@ INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,16990,50);  -- Ancient Goobbue;
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,919,1000);  -- Ancient Goobbue; Boyahda Moss
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1264,1000); -- Ancient Goobbue; Grt. Boyahda Moss
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue; Tree Cuttings
+INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,637,150);   -- Panna Cotta; Slime Oil; Common
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
