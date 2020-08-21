@@ -1873,6 +1873,7 @@ INSERT INTO `item_mods` VALUES (10683,2,46);
 INSERT INTO `item_mods` VALUES (10683,23,8);
 INSERT INTO `item_mods` VALUES (10683,68,8);
 INSERT INTO `item_mods` VALUES (10683,384,300);
+INSERT INTO `item_mods` VALUES (10683,972,1);
 INSERT INTO `item_mods` VALUES (10684,1,49);      -- Summoner's Doublet +2: DEF 49
 INSERT INTO `item_mods` VALUES (10684,5,28);      -- MP +28
 INSERT INTO `item_mods` VALUES (10684,165,6);     -- Crit Hit Rate+6
@@ -14169,6 +14170,7 @@ INSERT INTO `item_mods` VALUES (14513,1,50);
 INSERT INTO `item_mods` VALUES (14513,2,33);
 INSERT INTO `item_mods` VALUES (14513,110,15);
 INSERT INTO `item_mods` VALUES (14513,384,200);
+INSERT INTO `item_mods` VALUES (14513,972,1);
 INSERT INTO `item_mods` VALUES (14514,1,39);      -- Summoner's Doublet +1: DEF 39
 INSERT INTO `item_mods` VALUES (14514,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (14514,357,4);     -- Blood Pact ability delay -4
@@ -16117,6 +16119,7 @@ INSERT INTO `item_mods` VALUES (15100,1,49);
 INSERT INTO `item_mods` VALUES (15100,2,24);
 INSERT INTO `item_mods` VALUES (15100,110,15);
 INSERT INTO `item_mods` VALUES (15100,243,2);
+INSERT INTO `item_mods` VALUES (15100,972,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (15101,1,38);      -- Summoner's Doublet: DEF 38
 INSERT INTO `item_mods` VALUES (15101,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (15101,357,3);     -- Blood Pact ability delay -3
@@ -37050,6 +37053,7 @@ INSERT INTO `item_mods` VALUES (26826,29,2);
 INSERT INTO `item_mods` VALUES (26826,31,36);
 INSERT INTO `item_mods` VALUES (26826,68,31);
 INSERT INTO `item_mods` VALUES (26826,384,300);
+INSERT INTO `item_mods` VALUES (26826,972,1);
 INSERT INTO `item_mods` VALUES (26827,1,141);
 INSERT INTO `item_mods` VALUES (26827,2,82);
 INSERT INTO `item_mods` VALUES (26827,5,44);
@@ -37065,6 +37069,7 @@ INSERT INTO `item_mods` VALUES (26827,29,4);
 INSERT INTO `item_mods` VALUES (26827,31,53);
 INSERT INTO `item_mods` VALUES (26827,68,56);
 INSERT INTO `item_mods` VALUES (26827,384,300);
+INSERT INTO `item_mods` VALUES (26827,972,1);
 INSERT INTO `item_mods` VALUES (26828,1,90);
 INSERT INTO `item_mods` VALUES (26828,2,23);
 INSERT INTO `item_mods` VALUES (26828,5,100);
