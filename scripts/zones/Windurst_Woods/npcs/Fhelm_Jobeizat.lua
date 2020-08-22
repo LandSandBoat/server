@@ -28,12 +28,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 848 and option == 1 then
-        npcUtil.completeRecord(player, 1, {
-            item = { {4376,6} },
-            keyItem = tpz.ki.MEMORANDOLL,
-            sparks = 100,
-            xp = 300
-        })
+        tpz.roe.onRecordTrigger(player, 1)
         player:messageBasic(tpz.msg.basic.ROE_BONUS_ITEM_PLURAL, 4376, 6)
     end
 end

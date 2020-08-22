@@ -26,6 +26,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../common/utils.h"
 
 #include <math.h>
+#include <src/map/packets/chat_message.h>
+#include <src/map/packets/roe_sparkupdate.h>
 #include <stdio.h>
 #include <string.h>
 #include <array>
@@ -61,9 +63,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
-#include "../packets/roe_sparkupdate.h"
-#include "../packets/roe_update.h"
-#include "../packets/roe_questlog.h"
 #include "../packets/server_ip.h"
 
 #include "../ability.h"
@@ -5020,112 +5019,6 @@ namespace charutils
 
         if (strcmp(type, "spark_of_eminence") == 0)
             PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
-    }
-
-    void SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus)
-    {
-        uint8 page = recordID / 8;
-        uint8 bit = recordID % 8;
-        if(newStatus)
-            PChar->m_eminenceLog.complete[page] |= (1 << bit);
-        else
-            PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
-
-        for(int i = 0; i < 4; i++)
-        {
-            PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
-        }
-        charutils::SaveEminenceData(PChar);
-    }
-
-    bool GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID)
-    {
-        uint8 page = recordID / 8;
-        uint8 bit = recordID % 8;
-        return PChar->m_eminenceLog.complete[page] & (1 << bit);
-    }
-
-    bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
-    {
-        // TODO: Time limited records aren't implemented yet and can't be accepted normally.
-        //       For now we are refusing their IDs outright and protecting its slot from use here.
-        if(recordID > 2047)
-            return false;
-
-        // Per above, this i < 30 is correct.
-        for(int i = 0; i < 30; i++)
-        {
-            if(PChar->m_eminenceLog.active[i] == 0)
-            {
-                PChar->m_eminenceLog.active[i] = recordID;
-                PChar->m_eminenceCache.activemap.set(recordID);
-
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recordID, 0, MSGBASIC_ROE_START));
-                SaveEminenceData(PChar);
-                return true;
-            }
-            else if(PChar->m_eminenceLog.active[i] == recordID)
-            {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    bool DelEminenceRecord(CCharEntity* PChar, uint16 recordID)
-    {
-        for(int i = 0; i < 31; i++)
-        {
-            if(PChar->m_eminenceLog.active[i] == recordID)
-            {
-                PChar->m_eminenceLog.active[i] = 0;
-                PChar->m_eminenceLog.progress[i] = 0;
-                PChar->m_eminenceCache.activemap.reset(recordID);
-                // Shift entries up so records are shown in retail-accurate order.
-                for(int j = i; j < 29 && PChar->m_eminenceLog.active[j+1] != 0; j++)
-                {
-                    std::swap(PChar->m_eminenceLog.active[j], PChar->m_eminenceLog.active[j+1]);
-                    std::swap(PChar->m_eminenceLog.progress[j], PChar->m_eminenceLog.progress[j+1]);
-                }
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
-                charutils::SaveEminenceData(PChar);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool HasEminenceRecord(CCharEntity* PChar, uint16 recordID)
-    {
-        return PChar->m_eminenceCache.activemap.test(recordID);
-    }
-
-    uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID)
-    {
-        for(int i = 0; i < 31; i++)
-        {
-            if(PChar->m_eminenceLog.active[i] == recordID)
-            {
-                return PChar->m_eminenceLog.progress[i];
-            }
-        }
-        return 0;
-    }
-
-    bool SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress)
-    {
-        for(int i = 0; i < 31; i++)
-        {
-            if(PChar->m_eminenceLog.active[i] == recordID)
-            {
-                PChar->m_eminenceLog.progress[i] = progress;
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
-                charutils::SaveEminenceData(PChar);
-                return true;
-            }
-        }
-        return false;
     }
 
     int32 GetPoints(CCharEntity* PChar, const char* type)
