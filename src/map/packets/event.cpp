@@ -46,10 +46,12 @@ CEventPacket::CEventPacket(
 
     uint32 npcID = 0;
     auto PNpc = PChar->m_event.Target;
-    if (PNpc) {
+    if (PNpc)
+    {
         npcID = PNpc->id;
     }
-    else {
+    else
+    {
         // Fallback to our own CharID because giving a value
         // of zero makes the game hang.
         npcID = PChar->id;
