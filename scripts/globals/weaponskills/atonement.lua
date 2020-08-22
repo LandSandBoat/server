@@ -38,6 +38,9 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.enmityMult = 1
 
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+
     local attack =
     {
         ['type'] = tpz.attackType.BREATH,
@@ -96,11 +99,6 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         end
 
         damage = takeWeaponskillDamage(target, player, params, primary, attack, calcParams, action)
-    end
-
-    -- Apply aftermath
-    if damage > 0 then
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
     end
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
