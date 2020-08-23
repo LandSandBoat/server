@@ -3594,10 +3594,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,816); -- Fang Rush
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,817); -- Dread Shriek
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,818); -- Tail Crush
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,819); -- Blizzard Breath
-
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3051); -- Mending Halation
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3052); -- Radial Arcana
+INSERT INTO `mob_skill_lists` VALUES ('Bashe',1142,370); -- Baleful Gaze
 
--- Next available ID: 1141
-
+-- Next available ID: 1143
