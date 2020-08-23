@@ -8048,6 +8048,7 @@ INSERT INTO `mob_groups` VALUES (45,1119,120,'Dribblix_Greasemaw',330,128,0,0,0,
 INSERT INTO `mob_groups` VALUES (46,5149,120,'Goji',0,128,0,0,0,92,94,0);
 INSERT INTO `mob_groups` VALUES (47,1642,120,'Goblin_Bounty_Hunter',0,0,1030,0,0,30,34,0);
 INSERT INTO `mob_groups` VALUES (48,6570,120,'Wight',330,1,2651,0,0,26,36,0);
+INSERT INTO `mob_groups` VALUES (49,6583,120,'Bashe',0,32,3142,3300,0,54,55,0);
 
 INSERT INTO `mob_groups` VALUES (6565,2378,120,'Larzos',0,0,0,0,0,0,0,0);
 
