@@ -2,6 +2,7 @@
 -- Area: Sauromugue Champaign
 --  Mob: Hill Lizard
 -----------------------------------
+local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/globals/regimes")
 -----------------------------------
 
@@ -10,5 +11,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.BANSHE_PH, 10, 3600) -- 1 hour
+    tpz.mob.phOnDespawn(mob, ID.mob.BASHE_PH, 10, 3600) -- 1 hour
 end
