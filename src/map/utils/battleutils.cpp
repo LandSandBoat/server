@@ -4281,11 +4281,9 @@ namespace battleutils
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
-            int16 coverAbsorb = 0;
-            if (IsCovered) coverAbsorb = PDefender->getMod(Mod::COVER_TO_MP); // If successful cover, add PLD cover absorb mod.
-            int16 absorbedMP = (int16)(damage * (PDefender->getMod(Mod::ABSORB_DMG_TO_MP) + PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP) + coverAbsorb) / 100);
-            if (absorbedMP > 0)
-                PDefender->addMP(absorbedMP);
+            
+            ConvertDmgToMP(PDefender, damage, IsCovered);
+
             damage = HandleFanDance(PDefender, damage);
         }
 
@@ -4318,11 +4316,9 @@ namespace battleutils
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
-            int16 coverAbsorb = 0;
-            if (IsCovered) coverAbsorb = PDefender->getMod(Mod::COVER_TO_MP); // If successful cover, add PLD cover absorb mod.
-            int16 absorbedMP = (int16)(damage * (PDefender->getMod(Mod::ABSORB_DMG_TO_MP) + PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP) + coverAbsorb) / 100);
-            if (absorbedMP > 0)
-                PDefender->addMP(absorbedMP);
+
+            ConvertDmgToMP(PDefender, damage, IsCovered);
+
             damage = HandleFanDance(PDefender, damage);
         }
 
@@ -5738,5 +5734,26 @@ namespace battleutils
                 return true;
             }
         return false;
+    }
+
+    void ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered)
+    {
+        double dmgToMPMods = 0.0;
+
+        //If attack was covered, get cover ability user's COVER_TO_MP mod
+        if (IsCovered)
+            dmgToMPMods += PDefender->getMod(Mod::COVER_TO_MP);
+
+        //Get ABSORB_DMG_TO_MP mod
+        dmgToMPMods += PDefender->getMod(Mod::ABSORB_DMG_TO_MP);
+
+        //Get ABSORB_PHYSDMG_TO_MP mod
+        dmgToMPMods += PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP);
+
+        //Calculate final absorbed MP
+        int16 absorbedMP = static_cast<int16>(damage * (dmgToMPMods / 100.0));
+
+        if (absorbedMP > 0)
+            PDefender->addMP(absorbedMP);
     }
 };
