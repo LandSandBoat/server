@@ -1562,9 +1562,9 @@ tpz.mod =
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
 
-    -- SPARE = 958, -- stuff
-    -- SPARE = 959, -- stuff
-    -- SPARE = 960, -- stuff
+    -- SPARE = 972, -- stuff
+    -- SPARE = 973, -- stuff
+    -- SPARE = 974, -- stuff
 }
 
 tpz.latent =

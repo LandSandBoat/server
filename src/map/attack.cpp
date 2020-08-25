@@ -459,7 +459,8 @@ bool CAttack::CheckCover()
         m_isCovered = true;
         m_victim = PCoverAbilityUser;
     }
-    else {
+    else
+    {
         m_isCovered = false;
     }
 
