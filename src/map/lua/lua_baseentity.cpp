@@ -6653,7 +6653,9 @@ inline int32 CLuaBaseEntity::setEminenceCompleted(lua_State *L)
     if (lua_gettop(L) > 2)
         status = lua_tointeger(L, 3) != 0;
 
-    if (!repeat)
+    if (repeat)
+        charutils::SetEminenceRecordProgress(PChar, recordID, 0);
+    else
         charutils::DelEminenceRecord(PChar, recordID);
 
     charutils::SetEminenceRecordCompletion(PChar, recordID, status);
