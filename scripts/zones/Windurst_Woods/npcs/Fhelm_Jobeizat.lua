@@ -13,7 +13,7 @@ end
 
 function onTrigger(player,npc)
     if player:getEminenceProgress(1) then
-        player:startEvent(848)
+        player:startEvent(848,0,player:getGil())
     elseif player:hasKeyItem(tpz.ki.MEMORANDOLL) == false then
         player:startEvent(849)
     else

@@ -46,7 +46,7 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     -- Vanquish Multiple Enemies I - Eminence Record Example
     -- (Will be replaced by proper record check systems when implemented.)
     if player:getEminenceProgress(12) and player:checkKillCredit(mob) then
-        local progress = player:getEminenceProgress(12) + 100
+        local progress = player:getEminenceProgress(12) + 1
         if progress >= 200 then
             npcUtil.completeRecord(player, 12, { sparks = 1000, xp = 5000, repeatable = true })
         else
