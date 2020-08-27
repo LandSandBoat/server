@@ -167,6 +167,7 @@ public:
     G_SELECT tp_select;
 
 private:
+    bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
     bool TryTrustSkill();
 
     CTrustEntity* POwner;

@@ -4,6 +4,7 @@
 #include "../../spell.h"
 #include "../../mobskill.h"
 #include "../../weapon_skill.h"
+#include "../../ai/states/ability_state.h"
 #include "../../ai/states/mobskill_state.h"
 #include "../../ai/states/magic_state.h"
 #include "../../ai/states/weaponskill_state.h"
@@ -41,18 +42,20 @@ void CGambitsContainer::Tick(time_point tick)
         return;
     }
 
-    auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
-    m_lastAction = tick + random_offset;
-
-    auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
-
     // TODO: Is this necessary?
-    if (POwner->PAI->IsCurrentState<CMagicState>() ||
+    // Not already doing something
+    if (POwner->PAI->IsCurrentState<CAbilityState>() ||
+        POwner->PAI->IsCurrentState<CMagicState>() ||
         POwner->PAI->IsCurrentState<CWeaponSkillState>() ||
         POwner->PAI->IsCurrentState<CMobSkillState>())
     {
         return;
     }
+
+    auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
+    m_lastAction = tick + random_offset;
+
+    auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
 
     // Deal with TP skills before any gambits
     // TODO: Should this be its own special gambit?
@@ -69,149 +72,69 @@ void CGambitsContainer::Tick(time_point tick)
             continue;
         }
 
-        auto checkTrigger = [&](CBattleEntity* trigger_target, Predicate_t& predicate) -> bool
+        auto runPredicate = [&](Predicate_t& predicate) -> bool
         {
-            switch (predicate.condition)
+            if (predicate.target == G_TARGET::SELF)
             {
-            case G_CONDITION::ALWAYS:
+                return CheckTrigger(POwner, predicate);
+            }
+            else if (predicate.target == G_TARGET::TARGET)
             {
-                return true;
-                break;
+                return CheckTrigger(POwner->GetBattleTarget(), predicate);
             }
-            case G_CONDITION::HPP_LT:
+            else if (predicate.target == G_TARGET::PARTY)
             {
-                return trigger_target->GetHPP() < predicate.condition_arg;
-                break;
+                auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
+                {
+                    return !POwner->GetBattleTarget() && PPartyTarget->isAlive() &&
+                        POwner->loc.zone == PPartyTarget->loc.zone &&
+                        distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+                };
+
+                auto result = false;
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
+                    {
+                        result = true;
+                    }
+                });
+
+                return result;
             }
-            case G_CONDITION::HPP_GTE:
+            else if (predicate.target == G_TARGET::MASTER)
             {
-                return trigger_target->GetHPP() >= predicate.condition_arg;
-                break;
+                return CheckTrigger(POwner->PMaster, predicate);
             }
-            case G_CONDITION::MPP_LT:
-            {
-                return trigger_target->GetMPP() < predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::TP_LT:
-            {
-                return trigger_target->health.tp < (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::TP_GTE:
-            {
-                return trigger_target->health.tp >= (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::STATUS:
-            {
-                return trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::NOT_STATUS:
-            {
-                return !trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::STATUS_FLAG:
-            {
-                return trigger_target->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg));
-                break;
-            }
-            case G_CONDITION::HAS_TOP_ENMITY:
-            {
-                return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false;
-                break;
-            }
-            case G_CONDITION::NOT_HAS_TOP_ENMITY:
-            {
-                return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid != POwner->targid : false;
-                break;
-            }
-            case G_CONDITION::SC_AVAILABLE:
-            {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
-                break;
-            }
-            case G_CONDITION::NOT_SC_AVAILABLE:
-            {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect == nullptr;
-                break;
-            }
-            case G_CONDITION::MB_AVAILABLE:
-            {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
-                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0;
-                break;
-            }
-            default: { return false;  break; }
-            }
+
+            // Fallthrough
+            return false;
         };
 
         for (auto& action : gambit.actions)
         {
-            CBattleEntity* target = nullptr;
-            auto runPredicate = [&](Predicate_t& predicate) -> bool
-            {
-                if (predicate.target == G_TARGET::SELF)
-                {
-                    return checkTrigger(POwner, predicate);
-                }
-                else if (predicate.target == G_TARGET::TARGET)
-                {
-                    auto mob = POwner->GetBattleTarget();
-                    return checkTrigger(mob, predicate);
-                }
-                else if (predicate.target == G_TARGET::PARTY)
-                {
-                    auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
-                    {
-                        return !target && PPartyTarget->isAlive() &&
-                            POwner->loc.zone == PPartyTarget->loc.zone &&
-                            distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
-                    };
-
-                    auto result = false;
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                    {
-                        if (isValidMember(PMember) && checkTrigger(PMember, predicate))
-                        {
-                            result = true;
-                        }
-                    });
-
-                    return result;
-                }
-                else if (predicate.target == G_TARGET::MASTER)
-                {
-                    return checkTrigger(POwner->PMaster, predicate);
-                }
-
-                // Fallthrough
-                return false;
-            };
-
+            // Make sure that the predicates remain true for each action in a gambit
             bool all_predicates_true = true;
             for (auto& predicate : gambit.predicates)
             {
                 if (!runPredicate(predicate))
                 {
-                    return;
+                    all_predicates_true = false;
                 }
             }
+            if (!all_predicates_true) { break; }
 
             // TODO: This whole section is messy and bonkers
             // Try and extract target out the first predicate
+            CBattleEntity* target = nullptr;
             if (gambit.predicates[0].target == G_TARGET::SELF)
             {
-                target = checkTrigger(POwner, gambit.predicates[0]) ? POwner : nullptr;
+                target = CheckTrigger(POwner, gambit.predicates[0]) ? POwner : nullptr;
             }
             else if (gambit.predicates[0].target == G_TARGET::TARGET)
             {
                 auto mob = POwner->GetBattleTarget();
-                target = checkTrigger(mob, gambit.predicates[0]) ? mob : nullptr;
+                target = CheckTrigger(mob, gambit.predicates[0]) ? mob : nullptr;
             }
             else if (gambit.predicates[0].target == G_TARGET::PARTY)
             {
@@ -223,12 +146,12 @@ void CGambitsContainer::Tick(time_point tick)
                 };
 
                 static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                     {
-                        if (isValidMember(PMember) && checkTrigger(PMember, gambit.predicates[0]))
-                        {
-                            target = PMember;
-                        }
-                    });
+                        target = PMember;
+                    }
+                });
             }
             else if (gambit.predicates[0].target == G_TARGET::MASTER)
             {
@@ -241,7 +164,7 @@ void CGambitsContainer::Tick(time_point tick)
 
             if (!target)
             {
-                return;
+                break;
             }
 
             if (action.reaction == G_REACTION::MA)
@@ -350,11 +273,93 @@ void CGambitsContainer::Tick(time_point tick)
     }
 }
 
+bool CGambitsContainer::CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate)
+{
+    auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+    switch (predicate.condition)
+    {
+        case G_CONDITION::ALWAYS:
+        {
+            return true;
+            break;
+        }
+        case G_CONDITION::HPP_LT:
+        {
+            return trigger_target->GetHPP() < predicate.condition_arg;
+            break;
+        }
+        case G_CONDITION::HPP_GTE:
+        {
+            return trigger_target->GetHPP() >= predicate.condition_arg;
+            break;
+        }
+        case G_CONDITION::MPP_LT:
+        {
+            return trigger_target->GetMPP() < predicate.condition_arg;
+            break;
+        }
+        case G_CONDITION::TP_LT:
+        {
+            return trigger_target->health.tp < (int16)predicate.condition_arg;
+            break;
+        }
+        case G_CONDITION::TP_GTE:
+        {
+            return trigger_target->health.tp >= (int16)predicate.condition_arg;
+            break;
+        }
+        case G_CONDITION::STATUS:
+        {
+            return trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
+            break;
+        }
+        case G_CONDITION::NOT_STATUS:
+        {
+            return !trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
+            break;
+        }
+        case G_CONDITION::STATUS_FLAG:
+        {
+            return trigger_target->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg));
+            break;
+        }
+        case G_CONDITION::HAS_TOP_ENMITY:
+        {
+            return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid == POwner->targid : false;
+            break;
+        }
+        case G_CONDITION::NOT_HAS_TOP_ENMITY:
+        {
+            return (controller->GetTopEnmity()) ? controller->GetTopEnmity()->targid != POwner->targid : false;
+            break;
+        }
+        case G_CONDITION::SC_AVAILABLE:
+        {
+            auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+            return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
+            break;
+        }
+        case G_CONDITION::NOT_SC_AVAILABLE:
+        {
+            auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+            return PSCEffect == nullptr;
+            break;
+        }
+        case G_CONDITION::MB_AVAILABLE:
+        {
+            auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+            return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0;
+            break;
+        }
+        default: { return false;  break; }
+    }
+}
+
 bool CGambitsContainer::TryTrustSkill()
 {
     auto target = POwner->GetBattleTarget();
 
-    auto checkTrigger = [&]() -> bool
+    auto checkTPTrigger = [&]() -> bool
     {
         if (POwner->health.tp >= 3000) { return true; } // Go, go, go!
 
@@ -369,12 +374,12 @@ bool CGambitsContainer::TryTrustSkill()
         {
             bool result = false;
             static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&result](CBattleEntity* PMember)
+            {
+                if (PMember->health.tp >= 1000)
                 {
-                    if (PMember->health.tp >= 1000)
-                    {
-                        result = true;
-                    }
-                });
+                    result = true;
+                }
+            });
             return result;
             break;
         }
@@ -397,7 +402,7 @@ bool CGambitsContainer::TryTrustSkill()
 
     std::optional<TrustSkill_t> chosen_skill;
     SKILLCHAIN_ELEMENT chosen_skillchain = SC_NONE;
-    if (checkTrigger())
+    if (checkTPTrigger() && !tp_skills.empty())
     {
         switch (tp_select)
         {
