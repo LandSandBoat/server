@@ -443,7 +443,7 @@ function npcUtil.completeRecord(player, record, params)
     end
 
     -- successfully complete the record
-    if params["repeatable"] == true then
+    if params["repeatable"] then
         player:messageBasic(tpz.msg.basic.ROE_REPEAT_OR_CANCEL)
         player:setEminenceCompleted(record, 1)
     else
