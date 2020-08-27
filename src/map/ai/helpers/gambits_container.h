@@ -167,6 +167,8 @@ public:
     G_SELECT tp_select;
 
 private:
+    bool TryTrustSkill();
+
     CTrustEntity* POwner;
     time_point m_lastAction;
     std::vector<Gambit_t> gambits;
