@@ -6631,7 +6631,8 @@ inline int32 CLuaBaseEntity::getMissionLogEx(lua_State *L)
 *  Function: setEminenceCompleted()
 *  Purpose :
 *  Example : player:setEminenceCompleted(1)
-*  Notes   : optional arg 2 can set completion state explicitly (1/0)
+*  Notes   : optional arg 1 flags for repeat record (1/0) (Does not remove from log)
+*            optional arg 2 can set completion state explicitly (1/0)
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setEminenceCompleted(lua_State *L)
@@ -6644,13 +6645,27 @@ inline int32 CLuaBaseEntity::setEminenceCompleted(lua_State *L)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint16 recordID = (uint16)lua_tointeger(L, 1);
 
-    bool status;
-    if (lua_gettop(L) < 2)
-        status = true;
-    else
-        status = lua_tointeger(L, 2) != 0;
+    bool repeat = false;
+    if (lua_gettop(L) > 1)
+    {
+        repeat = lua_tointeger(L, 2) != 0;
+    }
 
-    charutils::DelEminenceRecord(PChar, recordID);
+    bool status = true;
+    if (lua_gettop(L) > 2)
+    {
+        status = lua_tointeger(L, 3) != 0;
+    }
+
+    if (repeat)
+    {
+        charutils::SetEminenceRecordProgress(PChar, recordID, 0);
+    }
+    else
+    {
+        charutils::DelEminenceRecord(PChar, recordID);
+    }
+
     charutils::SetEminenceRecordCompletion(PChar, recordID, status);
 
     return 0;

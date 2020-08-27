@@ -230,7 +230,7 @@ local optionToItem = {
         [44] = { cost =  70, id = 15163 }, -- Seer's crown
         [45] = { cost = 234, id = 14424 }, -- Seer's tunic
         [46] = { cost =  97, id = 14856 }, -- Seer's mitts
-        [31] = { cost = 137, id = 14325 }, -- Seer's slacks
+        [47] = { cost = 137, id = 14325 }, -- Seer's slacks
         [48] = { cost = 157, id = 15313 }, -- Seer's pumps
         [49] = { cost =  83, id = 12292 }, -- Mahogany shield
         [50] = { cost =  70, id = 12414 }, -- Turtle shield

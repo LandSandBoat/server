@@ -435,7 +435,7 @@ function npcUtil.completeRecord(player, record, params)
     end
 
     if params["xp"] ~= nil and type(params["xp"]) == "number" then
-        player:addExp(params["xp"] * EXP_RATE)
+        player:addExp(params["xp"] * ROE_EXP_RATE)
     end
 
     if params["keyItem"] ~= nil then
@@ -443,7 +443,12 @@ function npcUtil.completeRecord(player, record, params)
     end
 
     -- successfully complete the record
-    player:setEminenceCompleted(record)
+    if params["repeatable"] then
+        player:messageBasic(tpz.msg.basic.ROE_REPEAT_OR_CANCEL)
+        player:setEminenceCompleted(record, 1)
+    else
+        player:setEminenceCompleted(record)
+    end
     return true
 end
 
