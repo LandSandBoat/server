@@ -20093,6 +20093,11 @@ INSERT INTO `item_mods` VALUES (16550,431,1);
 INSERT INTO `item_mods` VALUES (16557,23,6);
 INSERT INTO `item_mods` VALUES (16557,25,3);
 INSERT INTO `item_mods` VALUES (16562,9,1);
+INSERT INTO `item_mods` VALUES (16564,431,1); -- Flame Blade: AddEffect Type NORMAL
+INSERT INTO `item_mods` VALUES (16564,499,1); -- subEffect fire
+INSERT INTO `item_mods` VALUES (16564,500,10); -- AddEffect damage 10
+INSERT INTO `item_mods` VALUES (16564,501,10); -- AddEffect chance 10%
+INSERT INTO `item_mods` VALUES (16564,950,1); -- AddEffect element fire
 INSERT INTO `item_mods` VALUES (16575,14,7);
 INSERT INTO `item_mods` VALUES (16578,10,2);
 INSERT INTO `item_mods` VALUES (16578,13,2);
@@ -20918,8 +20923,17 @@ INSERT INTO `item_mods` VALUES (17485,54,6);
 INSERT INTO `item_mods` VALUES (17486,431,1); -- Stun claws +1 - Additional effect: "Stun"
 INSERT INTO `item_mods` VALUES (17487,431,1);
 INSERT INTO `item_mods` VALUES (17491,25,2);
+
+-- Shiva's Claws
 INSERT INTO `item_mods` VALUES (17492,12,3);
 INSERT INTO `item_mods` VALUES (17492,25,8);
+INSERT INTO `item_mods` VALUES (17492,431,1);  -- Additional effect Type NORMAL
+INSERT INTO `item_mods` VALUES (17492,499,11); -- Additional effect animation (subEffect) Paralyze
+INSERT INTO `item_mods` VALUES (17492,501,10); -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17492,951,4);  -- Additional effect Status ID Paralyze
+INSERT INTO `item_mods` VALUES (17492,952,10); -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17492,953,30); -- Additional effect Status Duration 30sec
+
 INSERT INTO `item_mods` VALUES (17493,25,10);
 INSERT INTO `item_mods` VALUES (17494,25,12);
 INSERT INTO `item_mods` VALUES (17495,23,2);
@@ -25073,11 +25087,11 @@ INSERT INTO `item_mods` VALUES (20610,491,7);
 INSERT INTO `item_mods` VALUES (20611,23,26);     -- Sangarius (iLvl 119): Attack +26
 INSERT INTO `item_mods` VALUES (20611,288,2);     -- Double Attack +2%
 INSERT INTO `item_mods` VALUES (20611,302,2);     -- Triple Attack +2%
-INSERT INTO `item_mods` VALUES (20611,431,1);     -- Additional effect: HP Drain
+INSERT INTO `item_mods` VALUES (20611,431,4);     -- Additional effect: HP Drain
 INSERT INTO `item_mods` VALUES (20612,23,26);     -- Sangarius +1 (iLvl 119): Attack +26
 INSERT INTO `item_mods` VALUES (20612,288,3);     -- Double Attack +3%
 INSERT INTO `item_mods` VALUES (20612,302,3);     -- Triple Attack +3%
-INSERT INTO `item_mods` VALUES (20612,431,1);     -- Additional effect: HP Drain
+INSERT INTO `item_mods` VALUES (20612,431,4);     -- Additional effect: HP Drain
 INSERT INTO `item_mods` VALUES (20613,113,10);    -- Pukulatmuj (iLvl 119): Enhancing magic skill +10
 INSERT INTO `item_mods` VALUES (20613,432,10);    -- Enspell damage bonus +10
 INSERT INTO `item_mods` VALUES (20614,113,11);    -- Pukulatmuj +1 (iLvl 119): Enhancing magic skill +11
@@ -27139,7 +27153,12 @@ INSERT INTO `item_mods` VALUES (21964,8,20);      -- Beryllium Tachi +1: STR+20
 INSERT INTO `item_mods` VALUES (21964,25,52);     -- Beryllium Tachi +1: Accuracy+52
 INSERT INTO `item_mods` VALUES (21964,48,30);     -- Beryllium Tachi +1: Weapon Skill Accuracy+30
 INSERT INTO `item_mods` VALUES (21964,355,151);   -- Beryllium Tachi +1: Adds "Tachi: Gekko" effect
-INSERT INTO `item_mods` VALUES (21966,431,1);     -- Zanmato +1: Additional effect: "Dispel"
+
+-- Zanmato +1
+INSERT INTO `item_mods` VALUES (21966,431,8);     -- Additional effect type: "Dispel"
+INSERT INTO `item_mods` VALUES (21966,499,7);     -- Additional effect subeffect animation "Light"
+INSERT INTO `item_mods` VALUES (21966,501,5);     -- Additional effect chance 5%
+
 INSERT INTO `item_mods` VALUES (21967,355,158);   -- Melon Slicer: Grants access to the Weapon Skill Tachi: Suikawari
 INSERT INTO `item_mods` VALUES (21968,2,130);     -- Saotome-no-Tachi: HP+130
 INSERT INTO `item_mods` VALUES (21968,25,30);     -- Saotome-no-Tachi: Accuracy+30

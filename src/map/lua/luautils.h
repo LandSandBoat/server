@@ -62,6 +62,7 @@ class CStatusEffect;
 class CTradeContainer;
 class CItemPuppet;
 class CItemWeapon;
+class CItemEquipment;
 class CItemFurnishing;
 class CInstance;
 class CWeaponSkill;
@@ -272,18 +273,20 @@ namespace luautils
     int32 SetDropRate(lua_State*);                                              // Set drop rate of a mob setDropRate(dropid,itemid,newrate)
     int32 UpdateServerMessage(lua_State*);                                      // update server message, first modify in conf and update
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 baseAttackDamage);    // for items with additional effects
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, uint32 baseAttackDamage); // for armor with spikes
 
     int32 nearLocation(lua_State*);
 
     int32 OnPlayerLevelUp(CCharEntity* PChar);
     int32 OnPlayerLevelDown(CCharEntity* PChar);
 
-    bool OnChocoboDig(CCharEntity* PChar, bool pre);                           // chocobo digging, pre = check
+    bool OnChocoboDig(CCharEntity* PChar, bool pre);                       // chocobo digging, pre = check
     bool LoadEventScript(CCharEntity* PChar, const char* functionName);    // Utility method: checks for and loads a lua function for events
 
-    uint16 GetDespoilDebuff(uint16 itemId);                                   // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
+    uint16 GetDespoilDebuff(uint16 itemId);                                // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
 
     void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* itemId);
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);

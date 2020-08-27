@@ -2219,6 +2219,11 @@ INSERT INTO `item_latents` VALUES(17471, 23, 10, 0, 25);    -- Attack+10 when HP
 INSERT INTO `item_latents` VALUES(17471, 25, 10, 0, 25);    -- Accuracy+10 when HP <=25% while weapon drawn
 
 -- -------------------------------------------------------
+-- Shiva's Claws
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(17492, 501, 6, 34, 0);    -- Increased Add Effect rate on Iceday (base of 10 plus 6)
+
+-- -------------------------------------------------------
 -- Tactician Magician's Hooks +1/+2
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES(17501, 14, 3, 53, 1);     -- CHR +3 in areas outside own nation's control
