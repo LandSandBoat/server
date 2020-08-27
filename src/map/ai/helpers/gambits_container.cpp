@@ -474,6 +474,7 @@ bool CGambitsContainer::TryTrustSkill()
                 }
                 break;
             }
+            default: { break; }
         }
     }
 
