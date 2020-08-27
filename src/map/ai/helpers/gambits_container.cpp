@@ -64,6 +64,45 @@ void CGambitsContainer::Tick(time_point tick)
         return;
     }
 
+    auto runPredicate = [&](Predicate_t& predicate) -> bool
+    {
+        if (predicate.target == G_TARGET::SELF)
+        {
+            return CheckTrigger(POwner, predicate);
+        }
+        else if (predicate.target == G_TARGET::TARGET)
+        {
+            return CheckTrigger(POwner->GetBattleTarget(), predicate);
+        }
+        else if (predicate.target == G_TARGET::PARTY)
+        {
+            auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
+            {
+                return PPartyTarget->isAlive() &&
+                    POwner->loc.zone == PPartyTarget->loc.zone &&
+                    distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
+            };
+
+            auto result = false;
+            static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
+                if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
+                {
+                    result = true;
+                }
+            });
+
+            return result;
+        }
+        else if (predicate.target == G_TARGET::MASTER)
+        {
+            return CheckTrigger(POwner->PMaster, predicate);
+        }
+
+        // Fallthrough
+        return false;
+    };
+
     // Didn't WS/MS, go for other Gambits
     for (auto gambit : gambits)
     {
@@ -71,45 +110,6 @@ void CGambitsContainer::Tick(time_point tick)
         {
             continue;
         }
-
-        auto runPredicate = [&](Predicate_t& predicate) -> bool
-        {
-            if (predicate.target == G_TARGET::SELF)
-            {
-                return CheckTrigger(POwner, predicate);
-            }
-            else if (predicate.target == G_TARGET::TARGET)
-            {
-                return CheckTrigger(POwner->GetBattleTarget(), predicate);
-            }
-            else if (predicate.target == G_TARGET::PARTY)
-            {
-                auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
-                {
-                    return !POwner->GetBattleTarget() && PPartyTarget->isAlive() &&
-                        POwner->loc.zone == PPartyTarget->loc.zone &&
-                        distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
-                };
-
-                auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                {
-                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
-                    {
-                        result = true;
-                    }
-                });
-
-                return result;
-            }
-            else if (predicate.target == G_TARGET::MASTER)
-            {
-                return CheckTrigger(POwner->PMaster, predicate);
-            }
-
-            // Fallthrough
-            return false;
-        };
 
         for (auto& action : gambit.actions)
         {
@@ -351,6 +351,31 @@ bool CGambitsContainer::CheckTrigger(CBattleEntity* trigger_target, Predicate_t&
             return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0;
             break;
         }
+        case G_CONDITION::READYING_WS:
+        {
+            return trigger_target->PAI->IsCurrentState<CWeaponSkillState>();
+            break;
+        }
+        case G_CONDITION::READYING_MS:
+        {
+            return trigger_target->PAI->IsCurrentState<CMobSkillState>();
+            break;
+        }
+        case G_CONDITION::READYING_JA:
+        {
+            return trigger_target->PAI->IsCurrentState<CAbilityState>();
+            break;
+        }
+        case G_CONDITION::CASTING_MA:
+        {
+            return trigger_target->PAI->IsCurrentState<CMagicState>();
+            break;
+        }
+        case G_CONDITION::RANDOM:
+        {
+            return tpzrand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
+            break;
+        }
         default: { return false;  break; }
     }
 }
@@ -408,7 +433,7 @@ bool CGambitsContainer::TryTrustSkill()
         {
             case G_SELECT::RANDOM:
             {
-                chosen_skill = tp_skills.at(tpzrand::GetRandomNumber(tp_skills.size()));
+                chosen_skill = tp_skills.at(tpzrand::GetRandomNumber(tp_skills.size() - 1));
                 break;
             }
             case G_SELECT::HIGHEST: // Form the best possible skillchain

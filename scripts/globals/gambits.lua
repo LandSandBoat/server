@@ -36,6 +36,11 @@ ai.condition =
     SC_AVAILABLE       = 11,
     NOT_SC_AVAILABLE   = 12,
     MB_AVAILABLE       = 13,
+    READYING_WS        = 14,
+    READYING_MS        = 15,
+    READYING_JA        = 16,
+    CASTING_MA         = 17,
+    RANDOM             = 18,
 }
 ai.c = ai.condition
 
