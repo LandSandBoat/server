@@ -456,7 +456,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
             m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
         }
-        else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
+        else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
         {
             // todo: probably need to check allegiance too cause besieged will prolly use > 0x700 too
             // allies targid >= 0x700
