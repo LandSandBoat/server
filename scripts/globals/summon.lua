@@ -11,7 +11,6 @@ function getSummoningSkillOverCap(avatar)
 end
 
 function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
-
     local returninfo = {}
 
     local acc = avatar:getACC() + utils.clamp(getSummoningSkillOverCap(avatar), 0, 200)
@@ -118,8 +117,8 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
 
     --Handle shadows depending on shadow behaviour / skilltype
     if shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
-        targShadows = target:getMod(tpz.mod.UTSUSEMI)
-        shadowType = tpz.mod.UTSUSEMI
+        local targShadows = target:getMod(tpz.mod.UTSUSEMI)
+        local shadowType = tpz.mod.UTSUSEMI
         if targShadows == 0 then --try blink, as utsusemi always overwrites blink this is okay
             targShadows = target:getMod(tpz.mod.BLINK)
             shadowType = tpz.mod.BLINK
@@ -162,7 +161,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     end
 
     -- handle Third Eye using shadowbehav as a guide
-    teye = target:getStatusEffect(tpz.effect.THIRD_EYE)
+    local teye = target:getStatusEffect(tpz.effect.THIRD_EYE)
     if teye ~= nil and skilltype == tpz.attackType.PHYSICAL then --T.Eye only procs when active with PHYSICAL stuff
         if shadowbehav == MOBPARAM_WIPE_SHADOWS then --e.g. aoe moves
             target:delStatusEffect(tpz.effect.THIRD_EYE)
