@@ -2,10 +2,10 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Wyvern
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-7, mobid do
@@ -14,11 +14,11 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

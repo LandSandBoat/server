@@ -10,7 +10,7 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
 function onEffectLose(target,effect)

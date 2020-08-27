@@ -6,7 +6,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if (effect:getSubType() == tpz.mod.DMG) then
         target:addMod(tpz.mod.DMG, effect:getPower())
     else
@@ -22,10 +22,10 @@ function onEffectGain(target,effect)
     --print("added "..effect:getPower().." of mod "..effect:getSubType())
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     if (effect:getSubType() == tpz.mod.DMG) then
         target:delMod(tpz.mod.DMG, effect:getPower())
     else

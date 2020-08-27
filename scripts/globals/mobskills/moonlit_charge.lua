@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -17,8 +17,8 @@ function onMobWeaponSkill(target, mob, skill)
     local dmgmod = 4
 
     local totaldamage = 0
-    local damage = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,0,TP_NO_EFFECT,1,2,3)
-    totaldamage = MobFinalAdjustments(damage.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.BLUNT,numhits)
+    local damage = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, 0, TP_NO_EFFECT, 1, 2, 3)
+    totaldamage = MobFinalAdjustments(damage.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, numhits)
     target:addStatusEffect(tpz.effect.BLINDNESS, 20, 0, 30)
     target:takeDamage(totaldamage, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
 

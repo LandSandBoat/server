@@ -3,9 +3,9 @@
 --  Mob: Count Bifrons
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/titles");
+require("scripts/globals/titles")
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 355)
-    player:addTitle(tpz.title.HELLSBANE);
-end;
+    player:addTitle(tpz.title.HELLSBANE)
+end

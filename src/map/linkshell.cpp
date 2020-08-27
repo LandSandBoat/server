@@ -336,12 +336,6 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
     }
     // set the linkshell as broken
     Sql_Query(SqlHandle, "UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
-    // unequip any offline members
-    Sql_Query(SqlHandle, "DELETE char_equip FROM char_equip INNER JOIN char_inventory \
-        ON char_inventory.slot = char_equip.slotid \
-        AND char_inventory.location = char_equip.containerid \
-        WHERE STRCMP('%s', char_inventory.signature) = 0 \
-        AND (char_inventory.itemid = 513 OR char_inventory.itemid = 514 OR char_inventory.itemid = 515)", signature);
 }
 
 /************************************************************************

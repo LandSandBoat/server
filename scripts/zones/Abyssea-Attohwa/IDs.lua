@@ -39,17 +39,17 @@ zones[tpz.zone.ABYSSEA_ATTOHWA] =
             --  [17658362] = {'qm12', {3083},                                                                                                                       {}, 17658272}, -- Wherwetrice
             --  [17658363] = {'qm13', {3084},                                                                                                                       {}, 17658273}, -- Mielikki
             --  [17658364] = {'qm14',     {},                                                                                               {tpz.ki.HOLLOW_DRAGON_EYE}, 17658274}, -- Smok
-            --  [17658365] = {'qm15',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE,tpz.ki.CRACKED_SKELETON_CLAVICLE,tpz.ki.WRITHING_GHOST_FINGER,tpz.ki.RUSTED_HOUND_COLLAR}, 17658275}, -- Titlacauan
-            --  [17658366] = {'qm16',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT,tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658276}, -- Ulhuadshi
-            --  [17658367] = {'qm17',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER,tpz.ki.BULBOUS_CRAWLER_COCOON,tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658277}, -- Itzpapalotl
+            --  [17658365] = {'qm15',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE, tpz.ki.CRACKED_SKELETON_CLAVICLE, tpz.ki.WRITHING_GHOST_FINGER, tpz.ki.RUSTED_HOUND_COLLAR}, 17658275}, -- Titlacauan
+            --  [17658366] = {'qm16',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT, tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658276}, -- Ulhuadshi
+            --  [17658367] = {'qm17',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER, tpz.ki.BULBOUS_CRAWLER_COCOON, tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658277}, -- Itzpapalotl
             --  [17658368] = {'qm18',     {},                                                                                               {tpz.ki.HOLLOW_DRAGON_EYE}, 17658278}, -- Smok
-            --  [17658369] = {'qm19',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE,tpz.ki.CRACKED_SKELETON_CLAVICLE,tpz.ki.WRITHING_GHOST_FINGER,tpz.ki.RUSTED_HOUND_COLLAR}, 17658279}, -- Titlacauan
-            --  [17658370] = {'qm20',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT,tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658280}, -- Ulhuadshi
-            --  [17658371] = {'qm21',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER,tpz.ki.BULBOUS_CRAWLER_COCOON,tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658281}, -- Itzpapalotl
+            --  [17658369] = {'qm19',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE, tpz.ki.CRACKED_SKELETON_CLAVICLE, tpz.ki.WRITHING_GHOST_FINGER, tpz.ki.RUSTED_HOUND_COLLAR}, 17658279}, -- Titlacauan
+            --  [17658370] = {'qm20',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT, tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658280}, -- Ulhuadshi
+            --  [17658371] = {'qm21',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER, tpz.ki.BULBOUS_CRAWLER_COCOON, tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658281}, -- Itzpapalotl
             --  [17658372] = {'qm22',     {},                                                                                               {tpz.ki.HOLLOW_DRAGON_EYE}, 17658282}, -- Smok
-            --  [17658373] = {'qm23',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE,tpz.ki.CRACKED_SKELETON_CLAVICLE,tpz.ki.WRITHING_GHOST_FINGER,tpz.ki.RUSTED_HOUND_COLLAR}, 17658283}, -- Titlacauan
-            --  [17658374] = {'qm24',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT,tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658284}, -- Ulhuadshi
-            --  [17658375] = {'qm25',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER,tpz.ki.BULBOUS_CRAWLER_COCOON,tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658285}, -- Itzpapalotl
+            --  [17658373] = {'qm23',     {}, {tpz.ki.BLOTCHED_DOOMED_TONGUE, tpz.ki.CRACKED_SKELETON_CLAVICLE, tpz.ki.WRITHING_GHOST_FINGER, tpz.ki.RUSTED_HOUND_COLLAR}, 17658283}, -- Titlacauan
+            --  [17658374] = {'qm24',     {},                                                              {tpz.ki.MUCID_WORM_SEGMENT, tpz.ki.SHRIVELED_HECTEYES_STALK}, 17658284}, -- Ulhuadshi
+            --  [17658375] = {'qm25',     {},                           {tpz.ki.VENOMOUS_WAMOURA_FEELER, tpz.ki.BULBOUS_CRAWLER_COCOON, tpz.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658285}, -- Itzpapalotl
         },
     },
 }

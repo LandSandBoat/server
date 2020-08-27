@@ -19,14 +19,12 @@ function onMobSpawn(mob)
         [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_2,
         [tpz.magic.spell.KORU_MORU] = tpz.trust.message_offset.TEAMWORK_3,
-        [tpz.magic.spell.KING_OF_HEARTS] = tpz.trust.message_offset.TEAMWORK_4,
+        [tpz.magic.spell.KING_OF_HEARTS] = tpz.trust.message_offset.TEAMWORK_4
     })
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0,
-                        ai.r.MA, ai.s.MB_ELEMENT, tpz.magic.spellFamily.NONE)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0, ai.r.MA, ai.s.MB_ELEMENT, tpz.magic.spellFamily.NONE)
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
-                        ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 30)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 30)
 
     local power = mob:getMainLvl() / 5
     mob:addMod(tpz.mod.MATT, power)
@@ -37,6 +35,7 @@ end
 function onMobDespawn(mob)
     tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
 end
+
 function onMobDeath(mob)
     tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
 end

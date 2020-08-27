@@ -26,19 +26,19 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 3.5; params.atk200 = 3.5; params.atk300 = 3.5;
+    params.atk100 = 3.5; params.atk200 = 3.5; params.atk300 = 3.5
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 4.5 params.ftp200 = 4.5 params.ftp300 = 4.5
         params.dex_wsc = 1.0
-        params.atk100 = 1.0; params.atk200 = 1.0; params.atk300 = 1.0;
+        params.atk100 = 1.0; params.atk200 = 1.0; params.atk300 = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    local chance = (tp-1000) * applyResistanceAddEffect(player,target,tpz.magic.ele.ICE,0) > math.random() * 150
+    local chance = (tp-1000) * applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0) > math.random() * 150
     if (damage > 0 and target:hasStatusEffect(tpz.effect.BIND) == false and change) then
-        local duration = 20 * applyResistanceAddEffect(player,target,tpz.magic.ele.ICE,0)
+        local duration = 20 * applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0)
         target:addStatusEffect(tpz.effect.BIND, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

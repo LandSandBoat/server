@@ -15,38 +15,42 @@ function error(player, msg)
 end
 
 function onTrigger(player, tp, target)
+    -- validate target
+    local targ
+    local cursor_target = player:getCursorTarget()
+
+    if target then
+        targ = GetPlayerByName(target)
+        if not targ then
+            error(player, string.format( "Player named '%s' not found!", target ) )
+            return
+        end
+    elseif cursor_target and not cursor_target:isNPC() then
+        targ = cursor_target
+    else
+        targ = player
+    end
 
     -- validate amount
-    if (tp == nil or tonumber(tp) == nil) then
+    if tp == nil or tonumber(tp) == nil then
         error(player, "You must provide an amount.")
         return
-    elseif (tp < 0) then
+    elseif tp < 0 then
         error(player, "Invalid amount.")
         return
     end
 
-    -- validate target
-    local targ
-    local cursor_target = player:getCursorTarget()
-    if (not target) and (not cursor_target) then
-        targ = player
-    elseif target then
-        targ = GetPlayerByName(target)
-        if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) )
-            return
-        end
-    elseif cursor_target then
-        targ = cursor_target
-    end
-
     -- set tp
-    targ:setTP( tp )
-    local pet = targ:getPet()
-    if (pet ~= nil) then
-        pet:setTP( tp )
-    end
-    if(targ:getID() ~= player:getID()) then
-        player:PrintToPlayer(string.format("Set %s's TP to %i.", targ:getName(), targ:getTP()))
+    if targ:isAlive() then
+        targ:setTP(tp)
+        local pet = targ:getPet()
+        if pet and pet:isAlive() then
+            pet:setTP(tp)
+        end
+        if targ:getID() ~= player:getID() then
+            player:PrintToPlayer(string.format("Set %s's TP to %i.", targ:getName(), targ:getTP()))
+        end
+    else
+        player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
 end

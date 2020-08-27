@@ -8,7 +8,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if mob:getMainJob() == tpz.job.COR then
         return 0
     else
@@ -20,5 +20,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     skill:setMsg(tpz.msg.basic.SELF_HEAL)
 
-    return MobHealMove(mob, math.random(350,500))
+    return MobHealMove(mob, math.random(350, 500))
 end

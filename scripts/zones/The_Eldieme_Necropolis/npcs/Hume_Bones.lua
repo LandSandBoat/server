@@ -9,9 +9,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(WINDURST,tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED and
+        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED and
         player:getCharVar("BlueRibbonBluesProg") >= 3 and
         player:getCharVar("Lich_C_Magnus_Died") == 0 and
         npcUtil.tradeHas(trade, 13569) and
@@ -22,7 +22,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCharVar("Lich_C_Magnus_Died") == 1 and not player:hasItem(12521) then
         if npcUtil.giveItem(player, 12521) then
             player:setCharVar("Lich_C_Magnus_Died", 0)
@@ -32,8 +32,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

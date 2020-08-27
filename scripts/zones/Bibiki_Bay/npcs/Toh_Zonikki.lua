@@ -4,8 +4,8 @@
 -- Type: Clamming NPC
 -- !pos -371 -1 -421 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs");
-require("scripts/globals/keyitems");
+local ID = require("scripts/zones/Bibiki_Bay/IDs")
+require("scripts/globals/keyitems")
 -----------------------------------
 -- Local Variables
 -----------------------------------
@@ -41,7 +41,7 @@ local clammingItems = {
     17296, -- Pebble
     5123,  -- Jacknife
     5122   -- Bibiki Slug
-};
+}
 
 -----------------------------------
 -- Local Functions
@@ -50,100 +50,100 @@ local clammingItems = {
 local function giveClammedItems(player)
 
     for item = 1, #clammingItems do
-        local clammedItemQty = player:getCharVar("ClammedItem_" ..  clammingItems[item]);
+        local clammedItemQty = player:getCharVar("ClammedItem_" ..  clammingItems[item])
 
         if (clammedItemQty > 0) then
-            if (player:addItem(clammingItems[item],clammedItemQty)) then
+            if (player:addItem(clammingItems[item], clammedItemQty)) then
 
-                player:messageSpecial(ID.text.YOU_OBTAIN, clammingItems[item], clammedItemQty);
-                player:setCharVar("ClammedItem_" ..  clammingItems[item], 0);
+                player:messageSpecial(ID.text.YOU_OBTAIN, clammingItems[item], clammedItemQty)
+                player:setCharVar("ClammedItem_" ..  clammingItems[item], 0)
             else
-                player:messageSpecial(ID.text.WHOA_HOLD_ON_NOW);
-                break;
+                player:messageSpecial(ID.text.WHOA_HOLD_ON_NOW)
+                break
             end
         end
     end
-end;
+end
 
 local function owePlayerClammedItems(player)
 
     for item = 1, #clammingItems do
         if (player:getCharVar("ClammedItem_" ..  clammingItems[item]) > 0) then
-            return true;
+            return true
         end
     end
 
-    return false;
-end;
+    return false
+end
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if ( player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then -- Player has clamming kit
 
         if (player:getCharVar("ClammingKitBroken") == 1) then -- Broken bucket
-            player:startEvent(30, 0, 0, 0, 0, 0, 0, 0, 0);
+            player:startEvent(30, 0, 0, 0, 0, 0, 0, 0, 0)
         else --Bucket not broken
-            player:startEvent(29, 0, 0, 0, 0, 0, 0, 0, 0);
+            player:startEvent(29, 0, 0, 0, 0, 0, 0, 0, 0)
         end
     else -- Player does not have clamming kit
         if (owePlayerClammedItems(player)) then
-            player:messageSpecial(ID.text.YOU_GIT_YER_BAG_READY);
-            giveClammedItems(player);
+            player:messageSpecial(ID.text.YOU_GIT_YER_BAG_READY)
+            giveClammedItems(player)
         else
-            player:startEvent(28, 500, 0, 0, 0, 0, 0, 0, 0);
+            player:startEvent(28, 500, 0, 0, 0, 0, 0, 0, 0)
         end
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
     if (csid == 28) then
-        local enoughMoney = 2; -- Not enough money
+        local enoughMoney = 2 -- Not enough money
         if (player:getGil() >= 500) then
-            enoughMoney = 1; --Player has enough Money
+            enoughMoney = 1 --Player has enough Money
         end
 
-        player:updateEvent(tpz.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0);
+        player:updateEvent(tpz.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)
     elseif  (csid == 29) then
-        local clammingKitSize = player:getCharVar("ClammingKitSize");
+        local clammingKitSize = player:getCharVar("ClammingKitSize")
 
-        player:updateEvent( player:getCharVar("ClammingKitWeight"), clammingKitSize, clammingKitSize, clammingKitSize + 50, 0, 0, 0, 0);
+        player:updateEvent( player:getCharVar("ClammingKitWeight"), clammingKitSize, clammingKitSize, clammingKitSize + 50, 0, 0, 0, 0)
     end
-end;
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 28) then
         if (option == 1) then -- Give 50pz clamming kit
-            player:setCharVar("ClammingKitSize", 50);
-            player:addKeyItem(tpz.ki.CLAMMING_KIT);
-            player:delGil(500);
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.CLAMMING_KIT);
+            player:setCharVar("ClammingKitSize", 50)
+            player:addKeyItem(tpz.ki.CLAMMING_KIT)
+            player:delGil(500)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLAMMING_KIT)
         end
     elseif (csid == 29) then
         if (option == 2) then -- Give player clammed items
 
-            player:setCharVar("ClammingKitSize", 0);
-            player:setCharVar("ClammingKitWeight", 0);
-            player:delKeyItem(tpz.ki.CLAMMING_KIT);
-            player:messageSpecial(ID.text.YOU_RETURN_THE,tpz.ki.CLAMMING_KIT);
+            player:setCharVar("ClammingKitSize", 0)
+            player:setCharVar("ClammingKitWeight", 0)
+            player:delKeyItem(tpz.ki.CLAMMING_KIT)
+            player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
 
-            giveClammedItems(player);
+            giveClammedItems(player)
 
         elseif (option == 3) then -- Get bigger kit
-            local clammingKitSize = player:getCharVar("ClammingKitSize") + 50;
+            local clammingKitSize = player:getCharVar("ClammingKitSize") + 50
 
-            player:setCharVar("ClammingKitSize", clammingKitSize);
-            player:messageSpecial(ID.text.YOUR_CLAMMING_CAPACITY, 0, 0, clammingKitSize);
+            player:setCharVar("ClammingKitSize", clammingKitSize)
+            player:messageSpecial(ID.text.YOUR_CLAMMING_CAPACITY, 0, 0, clammingKitSize)
         end
     elseif ( csid == 30) then -- Broken bucket
-        player:setCharVar("ClammingKitSize", 0);
-        player:setCharVar("ClammingKitBroken", 0);
-        player:setCharVar("ClammingKitWeight", 0);
-        player:delKeyItem(tpz.ki.CLAMMING_KIT);
-        player:messageSpecial(ID.text.YOU_RETURN_THE,tpz.ki.CLAMMING_KIT);
+        player:setCharVar("ClammingKitSize", 0)
+        player:setCharVar("ClammingKitBroken", 0)
+        player:setCharVar("ClammingKitWeight", 0)
+        player:delKeyItem(tpz.ki.CLAMMING_KIT)
+        player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
     end
-end;
+end

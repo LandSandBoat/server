@@ -13,14 +13,14 @@ function updateInstanceTime(instance, elapsed, texttable)
 
     if (wipeTime == 0) then
         local wipe = true
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if v:getHP() ~= 0 then
                 wipe = false
                 break
             end
         end
         if (wipe) then
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 v:messageSpecial(texttable.PARTY_FALLEN, 3)
             end
             instance:setWipeTime(elapsed)
@@ -30,7 +30,7 @@ function updateInstanceTime(instance, elapsed, texttable)
             instance:fail()
             return
         else
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 if v:getHP() ~= 0 then
                     instance:setWipeTime(0)
                     break
@@ -52,7 +52,7 @@ function updateInstanceTime(instance, elapsed, texttable)
     end
 
     if (message ~= 0) then
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if (remainingTimeLimit >= 60) then
                 v:messageSpecial(texttable.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
             else

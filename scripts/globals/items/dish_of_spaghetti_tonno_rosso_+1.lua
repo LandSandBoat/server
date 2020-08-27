@@ -23,7 +23,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,7200,5624)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 7200, 5624)
 end
 
 function onEffectGain(target, effect)

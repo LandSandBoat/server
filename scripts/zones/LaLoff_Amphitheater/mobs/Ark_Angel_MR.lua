@@ -3,7 +3,7 @@
 --  Mob: Ark Angel MR
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
@@ -17,7 +17,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     --[[ TODO:
         Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
         Current victory system doesn't readily support a random choice of pet while having
@@ -32,16 +32,16 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
-function onMobFight(mob,target)
-    local charm = mob:getLocalVar("Charm");
+function onMobFight(mob, target)
+    local charm = mob:getLocalVar("Charm")
 
     if (charm == 0 and mob:getHPP() <  50) then
-        mob:useMobAbility(710);
-        mob:setLocalVar("Charm",1);
+        mob:useMobAbility(710)
+        mob:setLocalVar("Charm", 1)
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

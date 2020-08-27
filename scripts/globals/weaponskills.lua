@@ -96,18 +96,18 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
 
     -- Calculate fTP multiplier
-    local ftp = fTP(tp,wsParams.ftp100,wsParams.ftp200,wsParams.ftp300) + calcParams.bonusfTP
+    local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     -- Calculate critrates
     local critRate = 0
 
     if (wsParams.canCrit) then -- Work out critical hit ratios
         local nativecrit = 0
-        critrate = fTP(tp,wsParams.crit100,wsParams.crit200,wsParams.crit300)
+        critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect then
-            if calcParams.flourisheffect:getPower() > 1 then
-                critrate = critrate + (10 + calcParams.flourisheffect:getSubPower()/2)/100
+            if calcParams.flourishEffect:getPower() > 1 then
+                critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
             end
         end
 
@@ -387,7 +387,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
              attacker:getStat(tpz.mod.CHR) * wsParams.chr_wsc) + fint
 
         -- Applying fTP multiplier
-        local ftp = fTP(tp,wsParams.ftp100,wsParams.ftp200,wsParams.ftp300) + bonusfTP
+        local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
 
         dmg = dmg * ftp
 
@@ -504,9 +504,9 @@ function souleaterBonus(attacker, numhits)
     end
 end
 
-function accVariesWithTP(hitrate,acc,tp,a1,a2,a3)
+function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
     -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    accpct = fTP(tp,a1,a2,a3)
+    accpct = fTP(tp, a1, a2, a3)
     acclost = acc - (acc*accpct)
     hrate = hitrate - (0.005*acclost)
     -- cap it
@@ -538,7 +538,7 @@ function getMeleeDmg(attacker, weaponType, kick)
     return {mainhandDamage, offhandDamage}
 end
 
-function getHitRate(attacker,target,capHitRate,bonus)
+function getHitRate(attacker, target, capHitRate, bonus)
     local flourisheffect = attacker:getStatusEffect(tpz.effect.BUILDING_FLOURISH)
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(tpz.mod.ACC, 20 + flourisheffect:getSubPower())
@@ -594,7 +594,7 @@ function getHitRate(attacker,target,capHitRate,bonus)
     return hitrate
 end
 
-function getRangedHitRate(attacker,target,capHitRate,bonus)
+function getRangedHitRate(attacker, target, capHitRate, bonus)
     local acc = attacker:getRACC()
     local eva = target:getEVA()
 
@@ -640,7 +640,7 @@ function getRangedHitRate(attacker,target,capHitRate,bonus)
     return hitrate
 end
 
-function fTP(tp,ftp1,ftp2,ftp3)
+function fTP(tp, ftp1, ftp2, ftp3)
     if (tp >= 1000 and tp < 2000) then
         return ftp1 + ( ((ftp2-ftp1)/1000) * (tp-1000))
     elseif (tp >= 2000 and tp <= 3000) then
@@ -984,7 +984,7 @@ end
 function generatePdif (cratiomin, cratiomax, melee)
     local pdif = math.random(cratiomin*1000, cratiomax*1000) / 1000
     if (melee) then
-        pdif = pdif * (math.random(100,105)/100)
+        pdif = pdif * (math.random(100, 105)/100)
     end
     return pdif
 end
@@ -1054,7 +1054,7 @@ function handleWSGorgetBelt(attacker)
         local belt = attacker:getEquipID(tpz.slot.WAIST)
         local SCProp1, SCProp2, SCProp3 = attacker:getWSSkillchainProp()
 
-        for i,v in ipairs(elementalGorget) do
+        for i, v in ipairs(elementalGorget) do
             if (neck == v) then
                 if (doesElementMatchWeaponskill(i, SCProp1) or doesElementMatchWeaponskill(i, SCProp2) or doesElementMatchWeaponskill(i, SCProp3)) then
                     accBonus = accBonus + 10
@@ -1069,7 +1069,7 @@ function handleWSGorgetBelt(attacker)
             ftpBonus = ftpBonus + 0.1
         end
 
-        for i,v in ipairs(elementalBelt) do
+        for i, v in ipairs(elementalBelt) do
             if (belt == v) then
                 if (doesElementMatchWeaponskill(i, SCProp1) or doesElementMatchWeaponskill(i, SCProp2) or doesElementMatchWeaponskill(i, SCProp3)) then
                     accBonus = accBonus + 10

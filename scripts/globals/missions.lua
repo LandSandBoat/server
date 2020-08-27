@@ -559,25 +559,25 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ROV]] =
     {
-        RHAPSODIES_OF_VANADIEL          = 0,
+        RHAPSODIES_OF_VANADIEL          = 0,   -- ± --
         -- CREATION_AND_REBIRTH         =  -- Category
-        RESONACE                        = 2,
-        EMISSARY_FROM_THE_SEAS          = 3,
-        SET_FREE                        = 4,
-        THE_BEGINNING                   = 6,
-        FLAMES_OF_PRAYER                = 10,
-        THE_PATH_UNTRAVELED             = 12,
-        AT_THE_HEAVENS_DOOR             = 18,
-        THE_LIONS_ROAR                  = 20,
-        EDDIES_OF_DESPAIR_I             = 22,
-        A_LAND_AFTER_TIME               = 26,
-        FATES_CALL                      = 28,
-        WHAT_LIES_BEYOND                = 30,
-        THE_TIES_THAT_BIND              = 32,
-        IMPURITY                        = 34,
-        THE_LOST_AVATAR                 = 36,
-        VOLTO_OSCURO                    = 40,
-        RING_MY_BELL                    = 42,
+        RESONACE                        = 2,   -- ± --
+        EMISSARY_FROM_THE_SEAS          = 3,   -- ± --
+        SET_FREE                        = 4,   -- ± --
+        THE_BEGINNING                   = 6,   -- ± --
+        FLAMES_OF_PRAYER                = 10,  -- ± --
+        THE_PATH_UNTRAVELED             = 12,  -- ± --
+        AT_THE_HEAVENS_DOOR             = 18,  -- ± --
+        THE_LIONS_ROAR                  = 20,  -- ± --
+        EDDIES_OF_DESPAIR_I             = 22,  -- ± --
+        A_LAND_AFTER_TIME               = 26,  -- ± --
+        FATES_CALL                      = 28,  -- ± --
+        WHAT_LIES_BEYOND                = 30,  -- ± --
+        THE_TIES_THAT_BIND              = 32,  -- ± --
+        IMPURITY                        = 34,  -- ± --
+        THE_LOST_AVATAR                 = 36,  -- ± --
+        VOLTO_OSCURO                    = 40,  -- ± --
+        RING_MY_BELL                    = 42,  -- ± --
         -- REVITALIZATION               =  -- Category
         SPIRITS_AWOKEN                  = 44,
         CRASHING_WAVES                  = 46,
@@ -771,29 +771,29 @@ function getMissionMask(player)
 
     if (nation == tpz.nation.WINDURST) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
                 -- 1-1 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 1
             end
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
                 -- 1-2 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 2
             end
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
                 -- 1-3 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 4
             end
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.LOST_FOR_WORDS) == false and getMissionRankPoints(player,3) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
-                if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.LOST_FOR_WORDS) and (rank > 2 or getMissionRankPoints(player,4) == 1)) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) and (rank > 2 or getMissionRankPoints(player, 4) == 1)) then
                     -- 2-2 Repeatable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_THREE_KINGDOMS) == false and getMissionRankPoints(player,5) == 1) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
@@ -801,17 +801,17 @@ function getMissionMask(player)
         end
         if (rank >= 3) then
             -- 3-1
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player,10) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
-                if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == false and getMissionRankPoints(player,11) == 1) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == false and getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
-                elseif (rank > 3 or getMissionRankPoints(player,11) == 1) then
+                elseif (rank > 3 or getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 end
-                if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.A_NEW_JOURNEY) == false and getMissionRankPoints(player,12) == 1) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY) == false and getMissionRankPoints(player, 12) == 1) then
                     -- 3-3
                     first_mission = first_mission + 4096
                 end
@@ -822,59 +822,59 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_FINAL_SEAL) == false and getMissionRankPoints(player,0) == 1 and mission_status == 0) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_FINAL_SEAL) and player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_SHADOW_AWAITS) == false and getMissionRankPoints(player,15) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) and player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SHADOW_AWAITS) == false and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.FULL_MOON_FOUNTAIN) == false and getMissionRankPoints(player,16) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.FULL_MOON_FOUNTAIN) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.SAINTLY_INVITATION) == false and getMissionRankPoints(player,17) == 1) then
+            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_SIXTH_MINISTRY) == false and getMissionRankPoints(player,18) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.AWAKENING_OF_THE_GODS) == false and getMissionRankPoints(player,19) == 1) then
+            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.AWAKENING_OF_THE_GODS) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.VAIN) == false and getMissionRankPoints(player,20) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.VAIN) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) == false and getMissionRankPoints(player,21) == 1) then
+            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) == false and getMissionRankPoints(player, 21) == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.DOLL_OF_THE_DEAD) == false and getMissionRankPoints(player,22) == 1) then
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.DOLL_OF_THE_DEAD) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(WINDURST,tpz.mission.id.windurst.MOON_READING) == false and getMissionRankPoints(player,23) == 1) then
+            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
             end
         end
     elseif (nation == tpz.nation.SANDORIA) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then -- The first mission is repeatable in San d'Oria
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then -- The first mission is repeatable in San d'Oria
                 -- 1-1
                 repeat_mission = repeat_mission + 1
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.BAT_HUNT) == false) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BAT_HUNT) == false) then
                 -- 1-2 If we completed 1-1, we can start and repeat this mission
                 repeat_mission = repeat_mission + 2 + 1
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.SAVE_THE_CHILDREN) == false) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN) == false) then
                 -- 1-3 If we completed 1-2, we can start and repeat this mission
                 repeat_mission = repeat_mission + 4 + 2 + 1
             else
@@ -883,29 +883,29 @@ function getMissionMask(player)
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_RESCUE_DRILL) == false and getMissionRankPoints(player,3) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
-                if (rank > 2 or getMissionRankPoints(player,4) == 1) then
+                if (rank > 2 or getMissionRankPoints(player, 4) == 1) then
                     -- 2-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_ABROAD) == false and getMissionRankPoints(player,5) == 1) then
+                if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
             end
         end
         if (rank >= 3) then
-            if (rank > 3 or getMissionRankPoints(player,10) == 1) then
+            if (rank > 3 or getMissionRankPoints(player, 10) == 1) then
                 -- 3-1
                 repeat_mission = repeat_mission + 1024
             end
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.INFILTRATE_DAVOI) == true and getMissionRankPoints(player,11) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI) == true and getMissionRankPoints(player, 11) == 1) then
                 -- 3-2 Repeatable & Skippable
                 repeat_mission = repeat_mission + 2048
             end
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO) == false and getMissionRankPoints(player,12) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
                 -- 3-3
                 first_mission = first_mission + 4096
             end
@@ -915,50 +915,50 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) == false and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) == false) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) == false and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) == false) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_SHADOW_LORD) == false and player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) and getMissionRankPoints(player,15) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) == false and player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES) == false and getMissionRankPoints(player,16) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST) == false and getMissionRankPoints(player,17) == 1) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) == false and getMissionRankPoints(player,18) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_SECRET_WEAPON) == false and getMissionRankPoints(player,19) == 1) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SECRET_WEAPON) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.COMING_OF_AGE) == false and getMissionRankPoints(player,20) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.LIGHTBRINGER) == false and getMissionRankPoints(player,21) == 1 and player:getCharVar("Mission8-1Completed") == 1) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) == false and getMissionRankPoints(player, 21) == 1 and player:getCharVar("Mission8-1Completed") == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player,22) == 1) then
+            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player,22) == 1 and player:getCharVar("Cutscenes_8-2") == 2) then
+            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1 and player:getCharVar("Cutscenes_8-2") == 2) then
                 -- 9-2
                 first_mission = first_mission + 8388608
 
-    elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) == false and getMissionRankPoints(player,23) == 1) then
+    elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
 
@@ -966,29 +966,29 @@ function getMissionMask(player)
         end
     elseif (nation == tpz.nation.BASTOK) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
                 -- 1-1 NOTE: This mission will not be listed in the Mission List for Bastok
                 --first_mission = first_mission + 1
             end
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == false) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == false) then
                 -- 1-2 NOTE: This mission will not be listed in the Mission List for Bastok
                 first_mission = first_mission + 2
             end
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == true) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == true) then
                 -- 1-3
                 repeat_mission = repeat_mission + 4
             end
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_CRYSTAL_LINE) == false and getMissionRankPoints(player,3) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_CRYSTAL_LINE) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
-                if (rank > 2 or getMissionRankPoints(player,4) == 1) then
+                if (rank > 2 or getMissionRankPoints(player, 4) == 1) then
                     -- 2-2 Repeatable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY) == false and getMissionRankPoints(player,5) == 1) then
+                if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
@@ -996,14 +996,14 @@ function getMissionMask(player)
         end
         if (rank >= 3) then
             -- 3-1
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_FOUR_MUSKETEERS) == false and getMissionRankPoints(player,10) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_FOUR_MUSKETEERS) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
-                if (rank > 3 or getMissionRankPoints(player,11) == 1) then
+                if (rank > 3 or getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 end
-                if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.JEUNO) == false and getMissionRankPoints(player,12) == 1) then
+                if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
                     -- 3-3
                     first_mission = first_mission + 4096
                 end
@@ -1014,46 +1014,46 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.DARKNESS_RISING) == false and getMissionRankPoints(player,0) == 1 and mission_status == 0) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.DARKNESS_RISING) and player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS) == false and getMissionRankPoints(player,15) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS) == false and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER) == false and getMissionRankPoints(player,16) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_PIRATE_S_COVE) == false and getMissionRankPoints(player,17) == 1) then
+            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_FINAL_IMAGE) == false and getMissionRankPoints(player,18) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_FINAL_IMAGE) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.ON_MY_WAY) == false and getMissionRankPoints(player,19) == 1) then
+            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) == false and getMissionRankPoints(player,20) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.ENTER_THE_TALEKEEPER) == false and getMissionRankPoints(player,21) == 1) then
+            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ENTER_THE_TALEKEEPER) == false and getMissionRankPoints(player, 21) == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH) == false and getMissionRankPoints(player,22) == 1) then
+            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(BASTOK,tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) == false and getMissionRankPoints(player,23) == 1) then
+            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
             end
@@ -1066,29 +1066,29 @@ function getMissionMask(player)
         mission_mask = 2147483647 - repeat_mission - first_mission -- 2^31 -1 - ..
     end
 
-    return mission_mask,repeat_mission
+    return mission_mask, repeat_mission
 end
 
-function getMissionOffset(player,guard,pMission,MissionStatus)
+function getMissionOffset(player, guard, pMission, MissionStatus)
 
-    offset = 0 cs = 0 params = {0,0,0,0,0,0,0,0}
+    offset = 0 cs = 0 params = {0, 0, 0, 0, 0, 0, 0, 0}
     nation = player:getNation()
 
     if (nation == tpz.nation.SANDORIA) then
 
-            if (guard == 1) then GuardCS = {1022,1021,1025,1004,1024,1005,1006,1028,1029,1012,1031}
-        elseif (guard == 2) then GuardCS = {2022,2021,2025,2004,2024,2005,2006,2028,2029,2012,2031}
+            if (guard == 1) then GuardCS = {1022, 1021, 1025, 1004, 1024, 1005, 1006, 1028, 1029, 1012, 1031}
+        elseif (guard == 2) then GuardCS = {2022, 2021, 2025, 2004, 2024, 2005, 2006, 2028, 2029, 2012, 2031}
         end
 
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end, -- Mission 1-1
             [1] = function (x) if (MissionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
             [2] = function (x) if (MissionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
-                           elseif (MissionStatus == 4 and player:hasCompletedMission(0,2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
+                           elseif (MissionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
                            elseif (MissionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
             [3] = function (x) if (MissionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
-            [4] = function (x) if (MissionStatus == 3 and player:hasCompletedMission(0,4)) then cs = GuardCS[7]
-                           elseif (MissionStatus == 3) then cs = GuardCS[8] params = {0,0,0,44} else offset = 44 end end,
+            [4] = function (x) if (MissionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
+                           elseif (MissionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
             [5] = function (x) if (MissionStatus == 0) then offset = 50 else offset = 51 end end,
             [10] = function (x) if (MissionStatus == 0) then cs = GuardCS[9]
                             elseif (MissionStatus == 4) then offset = 55
@@ -1128,10 +1128,10 @@ function getMissionOffset(player,guard,pMission,MissionStatus)
 
     elseif (nation == tpz.nation.WINDURST) then
 
-            if (guard == 1) then GuardCS = {127,136,150,154,160,473,177}
-        elseif (guard == 2) then GuardCS = {123,131,310,148,156,177,215}
-        elseif (guard == 3) then GuardCS = {89,105,110,114,120,133,138}
-        elseif (guard == 4) then GuardCS = {99,107,112,116,122,127,134}
+            if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
+        elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
+        elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
+        elseif (guard == 4) then GuardCS = {99, 107, 112, 116, 122, 127, 134}
         end
 
         switch (pMission) : caseof {
@@ -1147,141 +1147,141 @@ function getMissionOffset(player,guard,pMission,MissionStatus)
 
 end
 
-function finishMissionTimeline(player,guard,csid,option)
+function finishMissionTimeline(player, guard, csid, option)
 
     nation = player:getNation()
 
     -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
-    -- missionid, {Guard1CS,option}, {Guard2CS,option}, {NPC1 CS,option}, {NPC2 CS,option}, {{function,value},...},
-    --  1: player:addMission(nation,mission)
+    -- missionid, {Guard1CS, option}, {Guard2CS, option}, {NPC1 CS, option}, {NPC2 CS, option}, {{function, value}, ...},
+    --  1: player:addMission(nation, mission)
     --  2: player:messageSpecial(YOU_ACCEPT_THE_MISSION)
-    --  3: player:setCharVar(variablename,value)
+    --  3: player:setCharVar(variablename, value)
     --  4: player:tradeComplete()
     --  5: player:addRankPoints(number)
     --  6: player:setRankPoints(0)
-    --  7: player:addPoint(player:getNation(),number) player:messageSpecial(YOUVE_EARNED_CONQUEST_POINTS)
-    --  8: player:addGil(GIL_RATE*number) player:messageSpecial(GIL_OBTAINED,GIL_RATE*number)
+    --  7: player:addPoint(player:getNation(), number) player:messageSpecial(YOUVE_EARNED_CONQUEST_POINTS)
+    --  8: player:addGil(GIL_RATE*number) player:messageSpecial(GIL_OBTAINED, GIL_RATE*number)
     --  9: player:delKeyItem(number)
-    -- 10: player:addKeyItem(number) player:messageSpecial(KEYITEM_OBTAINED,number)
+    -- 10: player:addKeyItem(number) player:messageSpecial(KEYITEM_OBTAINED, number)
     -- 11: player:setRank(number)
-    -- 12: player:completeMission(nation,mission)
+    -- 12: player:completeMission(nation, mission)
     -- 13: player:addTitle(number)
-    -- 14: player:setCharVar("MissionStatus",value)
+    -- 14: player:setCharVar("MissionStatus", value)
 
     if (nation == tpz.nation.SANDORIA) then
         if ((csid == 1009 or csid == 2009) and option ~= 1073741824 and option ~= 31) then
             if (option > 100) then
-                badoption = {101,1,102,2,104,4,110,10,111,11}
+                badoption = {101, 1, 102, 2, 104, 4, 110, 10, 111, 11}
                 for op = 1, #badoption, 2 do
                     if (option == badoption[op]) then
-                    timeline = {badoption[op+1],{1009,badoption[op]},{2009,badoption[op]},{0,0},{0,0},{{1},{2}}} end
+                    timeline = {badoption[op+1], {1009, badoption[op]}, {2009, badoption[op]}, {0, 0}, {0, 0}, {{1}, {2}}} end
                 end
             elseif (option == 14) then
-                timeline = {option,{1009,option},{2009,option},{0,0},{0,0},{{1},{2},{3,"MissionStatus",9}}}
+                timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}, {3, "MissionStatus", 9}}}
             else
-                timeline = {option,{1009,option},{2009,option},{0,0},{0,0},{{1},{2}}}
+                timeline = {option, {1009, option}, {2009, option}, {0, 0}, {0, 0}, {{1}, {2}}}
             end
         else
             timeline =
             {
-                 -- MissionID,{Guard#1 DialogID, option},{Guard#2 DialogID, option},{NPC#1 DialogID, option},{NPC#2 DialogID, option},{function list}
-                 0,{1000,0},{2000,0},{0,0},        {0,0},{{1},{2}},                                                     -- MISSION 1-1 (First Mission [START])
-                 0,{1020,0},{2020,0},{0,0},        {0,0},{{4},{5,150},{12},{14,0}},                                     -- MISSION 1-1
-                 0,{1002,0},{2002,0},{0,0},        {0,0},{{4},{5,150},{12}},                                            -- MISSION 1-1 [Repeat]
-                 1,{1023,0},{2023,0},{0,0},        {0,0},{{4},{14,0},{5,200},{12}},                                     -- MISSION 1-2
-                 1,{1003,0},{2003,0},{0,0},        {0,0},{{4},{14,0},{5,200},{12}},                                    -- MISSION 1-2 [Repeat]
-                 2,{1004,0},{2004,0},{0,0},        {0,0},{{11,2},{3,"OptionalCSforSTC",1},{14,0},{6},{8,1000},{12}},     -- MISSION 1-3
-                 2,{1024,0},{2024,0},{0,0},        {0,0},{{14,0},{5,250},{12}},                                        -- MISSION 1-3 [Repeat]
-                 3,{1005,0},{2005,0},{0,0},        {0,0},{{9,65},{14,0},{5,300},{12}},                                 -- MISSION 2-1
-                 4,{0,0},      {0,0},     {695,0},{0,0},{{9,44},{14,0},{5,350},{12}},                                 -- MISSION 2-2 (Papal Chambers)
-                 5,{0,0},      {0,0},     {507,0},{0,0},{{10,35},{6},{13,207},{8,3000},{11,3},{9,29},{14,0},{12}},     -- MISSION 2-3 (Halver)
-                10,{0,0},      {0,0},     {554,0},{0,0},{{9,237},{14,0},{5,400},{12}},                                 -- MISSION 3-1 (Prince Trion (door))
-                10,{1012,0},{2012,0},{0,0},        {0,0},{{14,0},{5,300},{12}},                                         -- MISSION 3-1 (Guard)[Repeat]
-                11,{1030,0},{2030,0},{0,0},        {0,0},{{4},{14,2}},                                                 -- MISSION 3-2 (dialog with the guard after trade)
-                11,{0,0},      {0,0},     {556,0},{0,0},{{14,0},{5,400},{12}},                                         -- MISSION 3-2 (Chalvatot)
-                11,{1013,0},{2013,0},{0,0},        {0,0},{{4},{14,0},{5,400},{12}},                                     -- MISSION 3-2 (Guard)[Repeat]
-                12,{0,0},      {0,0},     {39,0},{0,0},{{11,4},{14,0},{6},{8,5000},{12}},                             -- MISSION 3-3 (Finish (Nelcabrit))
-                13,{0,0},      {0,0},     {36,0},{0,0},{{11,5},{14,0},{13,212},{10,69},{6},{8,10000},{12},{1,14}},     -- MISSION 4-1 (Finish (Nelcabrit))
-                14,{0,0},      {0,0},     {533,0},{0,0},{{10,72},{14,10}},                                             -- MISSION 5-1 (Finish (Halver))
-                14,{0,0},      {0,0},     {534,0},{0,0},{{9,73},{5,400},{14,0},{13,10},{12}},                         -- MISSION 5-1 (Finish (Halver))
-                15,{0,0},      {0,0},     {548,0},{0,0},{{11,6},{14,5}},                                                -- MISSION 5-2 (Finish 1st Part (Halver))
-                15,{0,0},      {0,0},     {61,0},{0,0},{{14,0},{9,74},{8,20000},{6},{12}},                             -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
-                16,{0,0},      {0,0},     {111,0},{0,0},{{14,0},{9,268},{10,270},{12}},                                 -- MISSION 6-1 (Finish (Chalvatot))
-                17,{1034,0},{1033,0},{0,0},{0,0},{{14,0},{11,7},{8,40000},{6},{12}},                                -- MISSION 6-2 (Finish (Guard))
-                18,{0,0},      {0,0},     {7,0},{0,0},{{14,1}},                                                     -- MISSION 7-1 (setCharVar("MissionStatus",1) (Door: Papal Chambers))
-                18,{0,0},      {0,0},     {8,0},{0,0},{{14,0},{9,283},{5,1000},{12}},                                 -- MISSION 7-1 (Finish (Door: Papal Chambers))
-                19,{1044,0},{1043,0},{0,0},{0,0},{{14,0},{6},{3,"SecretWeaponStatus",0},{9,284},{11,8},{8,60000},{12}}, -- MISSION 7-2 (Finish)
-                20,{0,0},      {0,0},     {102,0},{0,0},{{14,0},{9,288},{5,800},{12}},                                    -- MISSION 8-1 (Finish)
-                21,{0,0},     {0,0},     {104,0},{0,0},{{14,0},{9,284},{11,9},{8,80000},{6},{12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
-                22,{0,0},      {0,0},     {76,0},{0,0},{{14,0},{9,481},{9,482},{9,483},{5,900},{12}}                    -- MISSION 9-1 (Finish (Door: Great Hall))
-                --[[0,{0,0},{0,0},{0,0},{0,0},{0},{0,0},{0,0},{0,0},{0,0},{0},
-                0,{0,0},{0,0},{0,0},{0,0},{0},{0,0},{0,0},{0,0},{0,0},{0}, ]]--
+                 -- MissionID, {Guard#1 DialogID, option}, {Guard#2 DialogID, option}, {NPC#1 DialogID, option}, {NPC#2 DialogID, option}, {function list}
+                 0, {1000, 0}, {2000, 0}, {0, 0},        {0, 0}, {{1}, {2}},                                                     -- MISSION 1-1 (First Mission [START])
+                 0, {1020, 0}, {2020, 0}, {0, 0},        {0, 0}, {{4}, {5, 150}, {12}, {14, 0}},                                     -- MISSION 1-1
+                 0, {1002, 0}, {2002, 0}, {0, 0},        {0, 0}, {{4}, {5, 150}, {12}},                                            -- MISSION 1-1 [Repeat]
+                 1, {1023, 0}, {2023, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 200}, {12}},                                     -- MISSION 1-2
+                 1, {1003, 0}, {2003, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 200}, {12}},                                    -- MISSION 1-2 [Repeat]
+                 2, {1004, 0}, {2004, 0}, {0, 0},        {0, 0}, {{11, 2}, {3, "OptionalCSforSTC", 1}, {14, 0}, {6}, {8, 1000}, {12}},     -- MISSION 1-3
+                 2, {1024, 0}, {2024, 0}, {0, 0},        {0, 0}, {{14, 0}, {5, 250}, {12}},                                        -- MISSION 1-3 [Repeat]
+                 3, {1005, 0}, {2005, 0}, {0, 0},        {0, 0}, {{9, 65}, {14, 0}, {5, 300}, {12}},                                 -- MISSION 2-1
+                 4, {0, 0},      {0, 0},     {695, 0}, {0, 0}, {{9, 44}, {14, 0}, {5, 350}, {12}},                                 -- MISSION 2-2 (Papal Chambers)
+                 5, {0, 0},      {0, 0},     {507, 0}, {0, 0}, {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}},     -- MISSION 2-3 (Halver)
+                10, {0, 0},      {0, 0},     {554, 0}, {0, 0}, {{9, 237}, {14, 0}, {5, 400}, {12}},                                 -- MISSION 3-1 (Prince Trion (door))
+                10, {1012, 0}, {2012, 0}, {0, 0},        {0, 0}, {{14, 0}, {5, 300}, {12}},                                         -- MISSION 3-1 (Guard)[Repeat]
+                11, {1030, 0}, {2030, 0}, {0, 0},        {0, 0}, {{4}, {14, 2}},                                                 -- MISSION 3-2 (dialog with the guard after trade)
+                11, {0, 0},      {0, 0},     {556, 0}, {0, 0}, {{14, 0}, {5, 400}, {12}},                                         -- MISSION 3-2 (Chalvatot)
+                11, {1013, 0}, {2013, 0}, {0, 0},        {0, 0}, {{4}, {14, 0}, {5, 400}, {12}},                                     -- MISSION 3-2 (Guard)[Repeat]
+                12, {0, 0},      {0, 0},     {39, 0}, {0, 0}, {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                             -- MISSION 3-3 (Finish (Nelcabrit))
+                13, {0, 0},      {0, 0},     {36, 0}, {0, 0}, {{11, 5}, {14, 0}, {13, 212}, {10, 69}, {6}, {8, 10000}, {12}, {1, 14}},     -- MISSION 4-1 (Finish (Nelcabrit))
+                14, {0, 0},      {0, 0},     {533, 0}, {0, 0}, {{10, 72}, {14, 10}},                                             -- MISSION 5-1 (Finish (Halver))
+                14, {0, 0},      {0, 0},     {534, 0}, {0, 0}, {{9, 73}, {5, 400}, {14, 0}, {13, 10}, {12}},                         -- MISSION 5-1 (Finish (Halver))
+                15, {0, 0},      {0, 0},     {548, 0}, {0, 0}, {{11, 6}, {14, 5}},                                                -- MISSION 5-2 (Finish 1st Part (Halver))
+                15, {0, 0},      {0, 0},     {61, 0}, {0, 0}, {{14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                             -- MISSION 5-2 (Finish 2nd Part (Trion in Great Hall))
+                16, {0, 0},      {0, 0},     {111, 0}, {0, 0}, {{14, 0}, {9, 268}, {10, 270}, {12}},                                 -- MISSION 6-1 (Finish (Chalvatot))
+                17, {1034, 0}, {1033, 0}, {0, 0}, {0, 0}, {{14, 0}, {11, 7}, {8, 40000}, {6}, {12}},                                -- MISSION 6-2 (Finish (Guard))
+                18, {0, 0},      {0, 0},     {7, 0}, {0, 0}, {{14, 1}},                                                     -- MISSION 7-1 (setCharVar("MissionStatus", 1) (Door: Papal Chambers))
+                18, {0, 0},      {0, 0},     {8, 0}, {0, 0}, {{14, 0}, {9, 283}, {5, 1000}, {12}},                                 -- MISSION 7-1 (Finish (Door: Papal Chambers))
+                19, {1044, 0}, {1043, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {3, "SecretWeaponStatus", 0}, {9, 284}, {11, 8}, {8, 60000}, {12}}, -- MISSION 7-2 (Finish)
+                20, {0, 0},      {0, 0},     {102, 0}, {0, 0}, {{14, 0}, {9, 288}, {5, 800}, {12}},                                    -- MISSION 8-1 (Finish)
+                21, {0, 0},     {0, 0},     {104, 0}, {0, 0}, {{14, 0}, {9, 284}, {11, 9}, {8, 80000}, {6}, {12}},                    -- MISSION 8-2 (Finish (Door: Great Hall))
+                22, {0, 0},      {0, 0},     {76, 0}, {0, 0}, {{14, 0}, {9, 481}, {9, 482}, {9, 483}, {5, 900}, {12}}                    -- MISSION 9-1 (Finish (Door: Great Hall))
+                --[[0, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0},
+                0, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0}, ]]--
             }
         end
     elseif (nation == tpz.nation.BASTOK) then
         if (csid == 1001 and option ~= 1073741824 and option ~= 31) then
-            timeline = {option,{1001,option},{0,0},{0,0},{0,0},{{1},{2}}}
+            timeline = {option, {1001, option}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}}}
         else
             timeline =
             {
-                 0,{1000,0},{0,0},{0,0},{0,0},{{1},{2}},                                                                 -- MISSION 1-1 (First Mission [START])
-                 1,{504,0},{0,0},{0,0},{0,0},{{9,4},{12}},                                                             -- MISSION 1-2 (Finish Mission)
-                 2,{1008,0},{0,0},{0,0},{0,0},{{4},{11,2},{8,1000},{12}},                                             -- MISSION 1-3
-                 2,{1005,0},{0,0},{0,0},{0,0},{{4},{8,1000},{5,200},{12}},                                              -- MISSION 1-3 [Repeat]
-                 3,{712,0},{0,0},{0,0},{0,0},{{9,12},{14,0},{5,200},{12}},                                             -- MISSION 2-1 (Finish (Ayame))
-                 4,{372,0},{0,0},{0,0},{0,0},{{4},{5,250},{12}},                                                     -- MISSION 2-2 (Finish (Alois))
-                 4,{373,0},{0,0},{0,0},{0,0},{{4},{5,250},{12}},                                                     -- MISSION 2-2 (Finish (Alois)) [Repeat]
-                 5,{714,0},{0,0},{0,0},{0,0},{{10,35},{6},{13,207},{8,3000},{11,3},{9,29},{14,0},{12}},                 -- MISSION 2-3 (Finish (Naji))
-                10,{11,0},{0,0},{0,0},{0,0},{{14,0},{5,350},{12}},                                                     -- MISSION 3-1 (Pashhow Marshlands Zone)
-                11,{1010,0},{0,0},{0,0},{0,0},{{4},{5,400},{12}},                                                     -- MISSION 3-2
-                11,{1006,0},{0,0},{0,0},{0,0},{{4},{5,400},{12}},                                                     -- MISSION 3-2 [Repeat]
-                12,{38,0},{0,0},{0,0},{0,0},{{11,4},{14,0},{6},{8,5000},{12}},                                         -- MISSION 3-3 (Finish (Goggehn))
-                13,{35,0},{0,0},{0,0},{0,0},{{11,5},{14,0},{13,212},{10,70},{6},{8,10000},{12},{1,14}},             -- MISSION 4-1 (Finish (Goggehn))
-                14,{722,0},{0,0},{0,0},{0,0},{{14,0},{9,73},{5,600},{12}},                                             -- MISSION 5-1 (Finish (Naji))
-                15,{603,0},{0,0},{0,0},{0,0},{{11,6},{14,0},{9,74},{8,20000},{6},{12}},                                 -- MISSION 5-2 (Finish (Karst))
-                16,{182,0},{0,0},{0,0},{0,0},{{14,0},{9,266},{5,650},{12}},                                             -- MISSION 6-1 (Finish (Tall Mountain))
-                17,{762,0},{0,0},{0,0},{0,0},{{14,0},{6},{11,7},{8,40000},{12}},                                     -- MISSION 6-2 (Finish (Naji))
-                18,{764,0},{0,0},{0,0},{0,0},{{14,0},{9,289},{5,700},{12}},                                             -- MISSION 7-1 (Finish (Cid))
-                19,{766,0},{0,0},{0,0},{0,0},{{14,0},{6},{11,8},{8,60000},{3,"OptionalCSforOMW",1},{12}},             -- MISSION 7-2 (Finish (Karst))
-                20,{768,0},{0,0},{0,0},{0,0},{{14,0},{5,1133},{12}},                                                 -- MISSION 8-1 (Finish (Iron Eater))
-                21,{176,0},{0,0},{0,0},{0,0},{{14,0},{6},{11,9},{9,293},{8,80000},{12}},                                     -- MISSION 8-2 (Finish (Bastok Mines))
+                 0, {1000, 0}, {0, 0}, {0, 0}, {0, 0}, {{1}, {2}},                                                                 -- MISSION 1-1 (First Mission [START])
+                 1, {504, 0}, {0, 0}, {0, 0}, {0, 0}, {{9, 4}, {12}},                                                             -- MISSION 1-2 (Finish Mission)
+                 2, {1008, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {11, 2}, {8, 1000}, {12}},                                             -- MISSION 1-3
+                 2, {1005, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {8, 1000}, {5, 200}, {12}},                                              -- MISSION 1-3 [Repeat]
+                 3, {712, 0}, {0, 0}, {0, 0}, {0, 0}, {{9, 12}, {14, 0}, {5, 200}, {12}},                                             -- MISSION 2-1 (Finish (Ayame))
+                 4, {372, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 250}, {12}},                                                     -- MISSION 2-2 (Finish (Alois))
+                 4, {373, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 250}, {12}},                                                     -- MISSION 2-2 (Finish (Alois)) [Repeat]
+                 5, {714, 0}, {0, 0}, {0, 0}, {0, 0}, {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}},                 -- MISSION 2-3 (Finish (Naji))
+                10, {11, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 350}, {12}},                                                     -- MISSION 3-1 (Pashhow Marshlands Zone)
+                11, {1010, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2
+                11, {1006, 0}, {0, 0}, {0, 0}, {0, 0}, {{4}, {5, 400}, {12}},                                                     -- MISSION 3-2 [Repeat]
+                12, {38, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 4}, {14, 0}, {6}, {8, 5000}, {12}},                                         -- MISSION 3-3 (Finish (Goggehn))
+                13, {35, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 5}, {14, 0}, {13, 212}, {10, 70}, {6}, {8, 10000}, {12}, {1, 14}},             -- MISSION 4-1 (Finish (Goggehn))
+                14, {722, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 73}, {5, 600}, {12}},                                             -- MISSION 5-1 (Finish (Naji))
+                15, {603, 0}, {0, 0}, {0, 0}, {0, 0}, {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                                 -- MISSION 5-2 (Finish (Karst))
+                16, {182, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 266}, {5, 650}, {12}},                                             -- MISSION 6-1 (Finish (Tall Mountain))
+                17, {762, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 7}, {8, 40000}, {12}},                                     -- MISSION 6-2 (Finish (Naji))
+                18, {764, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {9, 289}, {5, 700}, {12}},                                             -- MISSION 7-1 (Finish (Cid))
+                19, {766, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 8}, {8, 60000}, {3, "OptionalCSforOMW", 1}, {12}},             -- MISSION 7-2 (Finish (Karst))
+                20, {768, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {5, 1133}, {12}},                                                 -- MISSION 8-1 (Finish (Iron Eater))
+                21, {176, 0}, {0, 0}, {0, 0}, {0, 0}, {{14, 0}, {6}, {11, 9}, {9, 293}, {8, 80000}, {12}},                                     -- MISSION 8-2 (Finish (Bastok Mines))
             }
         end
     elseif (nation == tpz.nation.WINDURST) then
-        guardlist = {114,111,78,93}
+        guardlist = {114, 111, 78, 93}
         if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31) then
-            timeline = {option,{guardlist[guard],option},{guardlist[guard],option},{guardlist[guard],option},{guardlist[guard],option},{{1},{2}}}
+            timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             {
-                 0,{121,1},{118,1},{83,1},{96,1},{{1},{2}},                                                 -- MISSION 1-1 (First Mission [START])
-                 0,{94,0},{0,0},     {0,0},        {0,0},       {{14,0},{5,150},{9,28},{12}},                             -- MISSION 1-1 (Finish (Hakkuru-Rinkuru))
-                 1,{132,1},{130,1},{104,1},{106,1},{{1},{2}},                                                 -- MISSION 1-2 [START]
-                 1,{143,0},{0,0},     {0,0},        {0,0},       {{14,0},{5,200},{12}},                                     -- MISSION 1-2 (Finish (Apururu)) [WITHOUT ORB]
-                 1,{145,0},{0,0},     {0,0},        {0,0},       {{14,0},{5,250},{12}},                                     -- MISSION 1-2 (Finish (Apururu)) [WITH ORB]
-                 2,{149,2},{135,2},{109,2},{111,2},{{1},{2}},                                                 -- MISSION 1-3 [START]
-                 2,{154,0},{148,0},{114,0},{116,0},{{11,2},{14,0},{5,300},{8,1000},{12}},                     -- MISSION 1-3
-                 3,{168,0},{0,0},     {0,0},        {0,0},       {{14,0},{5,350},{12}},                                     -- MISSION 2-1 (Finish (Tosuka-Porika))
-                 4,{201,0},{0,0},     {0,0},        {0,0},       {{14,0},{9,38},{5,400},{12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
-                 4,{206,0},{0,0},     {0,0},        {0,0},       {{14,0},{9,38},{5,400},{12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]
-                 4,{200,0},{0,0},     {0,0},        {0,0},       {{14,0},{9,38},{5,250},{12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed)
-                 4,{209,0},{0,0},     {0,0},        {0,0},       {{14,0},{9,38},{5,250},{12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed) [Repeat]
-                 5,{101,0},{0,0},     {0,0},        {0,0},       {{10,35},{6},{13,207},{8,3000},{11,3},{9,29},{14,0},{12}},-- MISSION 2-3 (Finish (Kupipi))
-                10,{0,0},      {114,0},{0,0},        {0,0},       {{5,450},{14,0},{12}},                                     -- MISSION 3-1 (Finish (Rhy Epocan))
-                11,{135,0},{0,0},     {0,0},        {0,0},       {{5,500},{14,0},{12}},                                     -- MISSION 3-2 (Finish (Zubaba))
-                11,{151,0},{0,0},     {0,0},        {0,0},       {{5,400},{14,0},{12}},                                    -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
-                12,{40,0},{0,0},     {0,0},        {0,0},       {{11,4},{9,30},{14,0},{6},{8,5000},{12}},                 -- MISSION 3-3 (Finish (Ambassador's door))
-                13,{37,0},{0,0},     {0,0},        {0,0},       {{11,5},{14,0},{13,212},{10,71},{6},{8,10000},{12}},     -- MISSION 4-1 (Finish (Pakh Jatalfih))
-                14,{192,0},{0,0},     {0,0},        {0,0},       {{14,0},{9,73},{5,600},{12}},                             -- MISSION 5-1 (Finish (Star Sibyl))
-                15,{216,0},{0,0},     {0,0},        {0,0},       {{11,6},{14,0},{9,74},{8,20000},{6},{12}},                 -- MISSION 5-2 (Finish (Star Sibyl))
-                16,{0,0},      {0,0},     {50,0},{0,0},       {{14,0},{5,650},{0,0},{0,0},{0,0},{12}},                    -- MISSION 6-1 (Finish (Zone: Full Moon Fountain))
-                17,{0,0},      {0,0},     {312,0},{0,0},       {{14,0},{11,7},{8,40000},{6},{0,0},{12}},                -- MISSION 6-2 (Finish (Star Sibyl))
-                18,{0,0},      {0,0},     {724,0},{0,0},       {{14,0},{5,700},{10,251},{0,0},{0,0},{12}},                -- MISSION 7-1 (Finish (Tosuka-Porika))
-                19,{0,0},      {0,0},     {742,0},{0,0},       {{14,0},{11,8},{8,60000},{6},{0,0},{12}},                    -- MISSION 7-2 (Finish (Leepe-Hoppe))
-                20,{0,0},      {0,0},     {758,0},{0,0},       {{14,0},{5,750},{0,0},{0},{0,0},{12}},                    -- MISSION 8-1 (Finish (Morno-Toeno))
-                21,{0,0},      {0,0},     {609,0},{0,0},       {{14,0},{11,9},{8,80000},{6},{0,0},{12}},                    -- MISSION 8-2 (Finish (Apururu))
-                22,{0,0},     {0,0},     {61,0},{0,0},     {{14,0},{5,800},{13,293},{0},{0,0},{12}},                    -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
-                23,{0,0},      {0,0},     {407,0},{0,0},       {{13,294},{11,10},{8,100000},{6},{0,0},{12}}                    -- MISSION 9-2 (Finish (Vestal Chamber))
+                 0, {121, 1}, {118, 1}, {83, 1}, {96, 1}, {{1}, {2}},                                                 -- MISSION 1-1 (First Mission [START])
+                 0, {94, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {5, 150}, {9, 28}, {12}},                             -- MISSION 1-1 (Finish (Hakkuru-Rinkuru))
+                 1, {132, 1}, {130, 1}, {104, 1}, {106, 1}, {{1}, {2}},                                                 -- MISSION 1-2 [START]
+                 1, {143, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {5, 200}, {12}},                                     -- MISSION 1-2 (Finish (Apururu)) [WITHOUT ORB]
+                 1, {145, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {5, 250}, {12}},                                     -- MISSION 1-2 (Finish (Apururu)) [WITH ORB]
+                 2, {149, 2}, {135, 2}, {109, 2}, {111, 2}, {{1}, {2}},                                                 -- MISSION 1-3 [START]
+                 2, {154, 0}, {148, 0}, {114, 0}, {116, 0}, {{11, 2}, {14, 0}, {5, 300}, {8, 1000}, {12}},                     -- MISSION 1-3
+                 3, {168, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {5, 350}, {12}},                                     -- MISSION 2-1 (Finish (Tosuka-Porika))
+                 4, {201, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
+                 4, {206, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]
+                 4, {200, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed)
+                 4, {209, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                             -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed) [Repeat]
+                 5, {101, 0}, {0, 0},     {0, 0},        {0, 0},       {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Finish (Kupipi))
+                10, {0, 0},      {114, 0}, {0, 0},        {0, 0},       {{5, 450}, {14, 0}, {12}},                                     -- MISSION 3-1 (Finish (Rhy Epocan))
+                11, {135, 0}, {0, 0},     {0, 0},        {0, 0},       {{5, 500}, {14, 0}, {12}},                                     -- MISSION 3-2 (Finish (Zubaba))
+                11, {151, 0}, {0, 0},     {0, 0},        {0, 0},       {{5, 400}, {14, 0}, {12}},                                    -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
+                12, {40, 0}, {0, 0},     {0, 0},        {0, 0},       {{11, 4}, {9, 30}, {14, 0}, {6}, {8, 5000}, {12}},                 -- MISSION 3-3 (Finish (Ambassador's door))
+                13, {37, 0}, {0, 0},     {0, 0},        {0, 0},       {{11, 5}, {14, 0}, {13, 212}, {10, 71}, {6}, {8, 10000}, {12}},     -- MISSION 4-1 (Finish (Pakh Jatalfih))
+                14, {192, 0}, {0, 0},     {0, 0},        {0, 0},       {{14, 0}, {9, 73}, {5, 600}, {12}},                             -- MISSION 5-1 (Finish (Star Sibyl))
+                15, {216, 0}, {0, 0},     {0, 0},        {0, 0},       {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},                 -- MISSION 5-2 (Finish (Star Sibyl))
+                16, {0, 0},      {0, 0},     {50, 0}, {0, 0},       {{14, 0}, {5, 650}, {0, 0}, {0, 0}, {0, 0}, {12}},                    -- MISSION 6-1 (Finish (Zone: Full Moon Fountain))
+                17, {0, 0},      {0, 0},     {312, 0}, {0, 0},       {{14, 0}, {11, 7}, {8, 40000}, {6}, {0, 0}, {12}},                -- MISSION 6-2 (Finish (Star Sibyl))
+                18, {0, 0},      {0, 0},     {724, 0}, {0, 0},       {{14, 0}, {5, 700}, {10, 251}, {0, 0}, {0, 0}, {12}},                -- MISSION 7-1 (Finish (Tosuka-Porika))
+                19, {0, 0},      {0, 0},     {742, 0}, {0, 0},       {{14, 0}, {11, 8}, {8, 60000}, {6}, {0, 0}, {12}},                    -- MISSION 7-2 (Finish (Leepe-Hoppe))
+                20, {0, 0},      {0, 0},     {758, 0}, {0, 0},       {{14, 0}, {5, 750}, {0, 0}, {0}, {0, 0}, {12}},                    -- MISSION 8-1 (Finish (Morno-Toeno))
+                21, {0, 0},      {0, 0},     {609, 0}, {0, 0},       {{14, 0}, {11, 9}, {8, 80000}, {6}, {0, 0}, {12}},                    -- MISSION 8-2 (Finish (Apururu))
+                22, {0, 0},     {0, 0},     {61, 0}, {0, 0},     {{14, 0}, {5, 800}, {13, 293}, {0}, {0, 0}, {12}},                    -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
+                23, {0, 0},      {0, 0},     {407, 0}, {0, 0},       {{13, 294}, {11, 10}, {8, 100000}, {6}, {0, 0}, {12}}                    -- MISSION 9-2 (Finish (Vestal Chamber))
             }
         end
     end
@@ -1292,20 +1292,20 @@ function finishMissionTimeline(player,guard,csid,option)
                 messList = timeline[cs + 5][nb]
 
                 switch (messList[1]) : caseof {
-                    [1] = function (x) if (messList[2] ~= nil) then player:addMission(nation,messList[2]) else player:addMission(nation,timeline[cs]) end end,
+                    [1] = function (x) if (messList[2] ~= nil) then player:addMission(nation, messList[2]) else player:addMission(nation, timeline[cs]) end end,
                     [2] = function (x) player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION) end,
-                    [3] = function (x) player:setCharVar(messList[2],messList[3]) end,
+                    [3] = function (x) player:setCharVar(messList[2], messList[3]) end,
                     [4] = function (x) player:tradeComplete() end,
                     [5] = function (x) if ((player:getRankPoints() + messList[2]) > 4000) then player:setRankPoints(4000) else player:addRankPoints(messList[2]) end end,
                     [6] = function (x) player:setRankPoints(0) end,
                     [7] = function (x) player:addCP(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.YOUVE_EARNED_CONQUEST_POINTS) end,
-                    [8] = function (x) player:addGil(GIL_RATE*messList[2]) player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED,GIL_RATE*messList[2]) end,
+                    [8] = function (x) player:addGil(GIL_RATE*messList[2]) player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED, GIL_RATE*messList[2]) end,
                     [9] = function (x) player:delKeyItem(messList[2]) end,
-                    [10] = function (x) player:addKeyItem(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED,messList[2]) end,
+                    [10] = function (x) player:addKeyItem(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, messList[2]) end,
                     [11] = function (x) player:setRank(messList[2]) end,
-                    [12] = function (x) player:completeMission(nation,timeline[cs]) end,
+                    [12] = function (x) player:completeMission(nation, timeline[cs]) end,
                     [13] = function (x) player:addTitle(messList[2]) end,
-                    [14] = function (x) player:setCharVar("MissionStatus",messList[2]) end,
+                    [14] = function (x) player:setCharVar("MissionStatus", messList[2]) end,
                 }
             end
         end

@@ -2,7 +2,7 @@
 -- Area: Windurst Waters (S)
 --  NPC: Hampu-Kampu
 -- Type: Quest NPC
--- !pos  -115.597,-1.000,-158.703 94
+-- !pos  -115.597, -1.000, -158.703 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/quests")
@@ -10,10 +10,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local sayItWithAHandbag = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
 
@@ -32,10 +32,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 174 then -- Option doesn't matter as NPC will take key item if yes or no
         if npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
             item = 19110, -- Trainee's Needle

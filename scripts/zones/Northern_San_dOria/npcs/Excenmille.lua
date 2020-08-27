@@ -28,12 +28,12 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
     local SandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
     local ExcenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
@@ -56,11 +56,11 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-    --TRUST
+function onEventFinish(player, csid, option)
+    -- TRUST
     if csid == 893 then
         player:addSpell(899, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 899)
@@ -71,7 +71,8 @@ function onEventFinish(player,csid,option)
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
             keyItem = tpz.ki.SAN_DORIA_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
-            var = "SandoriaFirstTrust" })
+            var = "SandoriaFirstTrust"
+        })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 897 then
         player:addSpell(899, true, true)
@@ -79,6 +80,7 @@ function onEventFinish(player,csid,option)
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
-            keyItem = tpz.ki.SAN_DORIA_TRUST_PERMIT })
+            keyItem = tpz.ki.SAN_DORIA_TRUST_PERMIT
+        })
     end
 end

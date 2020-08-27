@@ -114,16 +114,16 @@ local titleInfo =
     },
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     tpz.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end

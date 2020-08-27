@@ -6,7 +6,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if VanadielHour() >= 6 and VanadielHour() <= 18 then
         return 0
     else

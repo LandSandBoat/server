@@ -21,7 +21,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,ChocoboShirt(target),0,300,4545)
+    target:addStatusEffect(tpz.effect.FOOD, ChocoboShirt(target), 0, 300, 4545)
 end
 
 function onEffectGain(target, effect)
@@ -39,7 +39,7 @@ end
 -----------------------------------------
 -- onEffectLose Action
 -----------------------------------------
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local power = effect:getPower()
     if (power == 1) then
         target:delMod(tpz.mod.AGI, 13)

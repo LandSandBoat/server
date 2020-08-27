@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill, master)
@@ -22,7 +22,7 @@ function onPetAbility(target, pet, skill, master)
         duration = 30 + summoningSkill / 20
     end
     target:delStatusEffect(tpz.effect.PERFECT_DEFENSE)
-    target:addStatusEffect(tpz.effect.PERFECT_DEFENSE,power,3,duration)
+    target:addStatusEffect(tpz.effect.PERFECT_DEFENSE, power, 3, duration)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     master:setMP(0)
     return tpz.effect.PERFECT_DEFENSE

@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.REGAIN)) then
-        target:addStatusEffect(tpz.effect.REGAIN,1,3,60)
+        target:addStatusEffect(tpz.effect.REGAIN, 1, 3, 60)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

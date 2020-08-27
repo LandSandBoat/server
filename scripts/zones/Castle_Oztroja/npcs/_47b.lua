@@ -9,7 +9,7 @@ require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local X = player:getXPos()
     local Z = player:getZPos()
     local trapDoor  = GetNPCByID(npc:getID() - 1)
@@ -37,10 +37,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 43 then
         player:setCharVar("MissionStatus", 4)
     end

@@ -23,7 +23,7 @@ local limbusArmor =
     [1929] = {csid = 330, reward = 15661}, -- Omega's Tail      (Homam Gambieras)
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local armor = nil
 
     for k, v in pairs(limbusArmor) do
@@ -35,7 +35,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH then
         player:startEvent(326)
     else
@@ -43,10 +43,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 328 or csid == 330 then
         -- cheat prevention
         local info = limbusArmor[player:getLocalVar("wilhelmTrade")]

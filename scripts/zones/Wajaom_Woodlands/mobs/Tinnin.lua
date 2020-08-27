@@ -30,10 +30,10 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.REGEN, 50)
 
     -- Regen Head every 1.5-4 minutes 90-240
-    mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+    mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
     -- Number of crits to lose a head
-    mob:setLocalVar("CritToTheFace", math.random(10,30))
+    mob:setLocalVar("CritToTheFace", math.random(10, 30))
     mob:setLocalVar("crits", 0)
 end
 
@@ -42,7 +42,7 @@ function onMobRoam(mob)
     local headTimer = mob:getLocalVar("headTimer")
     if (mob:AnimationSub() == 2 and os.time() > headTimer) then
         mob:AnimationSub(1)
-        mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
         if (mob:getLocalVar("secondHead") == 0) then
@@ -54,7 +54,7 @@ function onMobRoam(mob)
 
     elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
         mob:AnimationSub(0)
-        mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
@@ -72,7 +72,7 @@ function onMobFight(mob, target)
     local headTimer = mob:getLocalVar("headTimer")
     if (mob:AnimationSub() == 2 and os.time() > headTimer) then
         mob:AnimationSub(1)
-        mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
         if (mob:getLocalVar("secondHead") == 0) then
@@ -81,7 +81,7 @@ function onMobFight(mob, target)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(),tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
         end
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
@@ -90,7 +90,7 @@ function onMobFight(mob, target)
 
     elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
         mob:AnimationSub(0)
-        mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
@@ -101,7 +101,7 @@ function onMobFight(mob, target)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(),tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
         end
         -- Reverse order, same deal.
@@ -117,16 +117,16 @@ function onCriticalHit(mob)
     if ((critNum+1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
         if (mob:AnimationSub() == 0) then
             mob:AnimationSub(1)
-            mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+            mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         elseif (mob:AnimationSub() == 1) then
             mob:AnimationSub(2)
-            mob:setLocalVar("headTimer", os.time() + math.random(60,190))
+            mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         else
             -- Meh
         end
 
         -- Number of crits to lose a head, re-randoming
-        mob:setLocalVar("CritToTheFace", math.random(10,30))
+        mob:setLocalVar("CritToTheFace", math.random(10, 30))
 
         critNum = 0 -- reset the crits on the NM
     else
