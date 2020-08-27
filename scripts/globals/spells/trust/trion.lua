@@ -33,6 +33,9 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75,
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
+    -- TODO: Table me
+    local ROYAL_BASH = 3193
+    local ROYAL_SAVIOUR = 3194
     mob:setTPSkills({
         ['skills'] = {
             { ai.r.MS, ROYAL_BASH, 0 },
