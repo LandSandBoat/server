@@ -18,6 +18,8 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
+    tpz.trust.message(mob, tpz.trust.message_offset.SPAWN)
+
     -- Stun all the things!
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0,
                         ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.STUN)
