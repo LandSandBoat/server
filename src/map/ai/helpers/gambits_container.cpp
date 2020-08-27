@@ -4,7 +4,9 @@
 #include "../../spell.h"
 #include "../../mobskill.h"
 #include "../../weapon_skill.h"
+#include "../../ai/states/mobskill_state.h"
 #include "../../ai/states/magic_state.h"
+#include "../../ai/states/weaponskill_state.h"
 #include "../../utils/battleutils.h"
 #include "../../utils/trustutils.h"
 
@@ -45,7 +47,15 @@ void CGambitsContainer::Tick(time_point tick)
     auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
 
     // TODO: Is this necessary?
-    if (POwner->PAI->IsCurrentState<CMagicState>())
+    if (POwner->PAI->IsCurrentState<CMagicState>() ||
+        POwner->PAI->IsCurrentState<CWeaponSkillState>() ||
+        POwner->PAI->IsCurrentState<CMobSkillState>())
+    {
+        return;
+    }
+
+    auto target = POwner->GetBattleTarget();
+    if (!target)
     {
         return;
     }
@@ -54,45 +64,44 @@ void CGambitsContainer::Tick(time_point tick)
     // TODO: Should this be its own special gambit?
     if (POwner->health.tp >= 1000)
     {
-        auto target = POwner->GetBattleTarget();
-
         auto checkTrigger = [&]() -> bool
         {
             if (POwner->health.tp >= 3000) { return true;  } // Go, go, go!
 
             switch (tp_trigger)
             {
-            case G_TP_TRIGGER::ASAP:
-            {
-                return true;
-                break;
-            }
-            case G_TP_TRIGGER::OPENER:
-            {
-                bool result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&result](CBattleEntity* PMember){
-                    if (PMember->health.tp >= 1000)
+                case G_TP_TRIGGER::ASAP:
+                {
+                    return true;
+                    break;
+                }
+                case G_TP_TRIGGER::OPENER:
+                {
+                    bool result = false;
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&result](CBattleEntity* PMember)
                     {
-                        result = true;
-                    }
-                });
-                return result;
-                break;
-            }
-            case G_TP_TRIGGER::CLOSER:
-            {
-                auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                        if (PMember->health.tp >= 1000)
+                        {
+                            result = true;
+                        }
+                    });
+                    return result;
+                    break;
+                }
+                case G_TP_TRIGGER::CLOSER:
+                {
+                    auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
 
-                // TODO: ...and has a valid WS...
+                    // TODO: ...and has a valid WS...
 
-                return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
-                break;
-            }
-            default:
-            {
-                return false;
-                break;
-            }
+                    return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
+                    break;
+                }
+                default:
+                {
+                    return false;
+                    break;
+                }
             }
         };
 
@@ -167,9 +176,11 @@ void CGambitsContainer::Tick(time_point tick)
             {
                 controller->MobSkill(target->targid, chosen_skill->skill_id);
             }
+            return;
         }
     }
 
+    // Didn't WS/MS, go for other Gambits
     for (auto gambit : gambits)
     {
         if (tick < gambit.last_used + std::chrono::seconds(gambit.retry_delay))
@@ -262,26 +273,32 @@ void CGambitsContainer::Tick(time_point tick)
         {
             auto isValidMember = [&](CBattleEntity* PPartyTarget)
             {
-                return !target && PPartyTarget->isAlive() &&
+                return PPartyTarget->isAlive() &&
                     POwner->loc.zone == PPartyTarget->loc.zone &&
                     distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
             };
 
             static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
             {
-                if (isValidMember(PMember) && checkTrigger(PMember, gambit.predicate))
+                if (isValidMember(PMember) && checkTrigger(PMember, predicate))
                 {
                     target = PMember;
                 }
             });
-        }
-        else if (gambit.predicate.target == G_TARGET::MASTER)
+
+            return nullptr;
+        };
+
+        bool predicates_all_true = true;
+        for (auto& predicate : gambit.predicates)
         {
-            target = POwner->PMaster;
-        }
-        else if (gambit.predicate.target == G_TARGET::TANK)
-        {
-            // TODO
+            auto result = runPredicate(predicate);
+            if (!result)
+            {
+                predicates_all_true = false;
+                return;
+            }
+            target = result;
         }
 
         if (!predicates_all_true)
@@ -356,6 +373,7 @@ void CGambitsContainer::Tick(time_point tick)
                             }
                         }
                     }
+
                     if (spell_id.has_value())
                     {
                         controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
@@ -383,7 +401,7 @@ void CGambitsContainer::Tick(time_point tick)
             {
                 if (action.select == G_SELECT::SPECIFIC)
                 {
-                    trustutils::SendTrustMessage(POwner, action.select_arg);
+                    //trustutils::SendTrustMessage(POwner, action.select_arg);
                 }
             }
 

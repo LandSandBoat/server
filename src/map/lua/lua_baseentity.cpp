@@ -12309,7 +12309,7 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
 
     auto PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
 
-    auto message_id = lua_tointeger(L, 1);
+    auto message_id = (uint32)lua_tointeger(L, 1);
 
     auto PMaster = static_cast<CCharEntity*>(PTrust->PMaster);
     if (PMaster)
