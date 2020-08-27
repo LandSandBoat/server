@@ -3,6 +3,7 @@
 --  NPC: Janshura Rashura
 -- Starts Windurst Missions
 -- !pos -227 -8 184 240
+-- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/settings")
@@ -41,7 +42,13 @@ function onTrigger(player, npc)
             player:startEvent(567)
         else
             flagMission, repeatMission = getMissionMask(player)
-            player:startEvent(78, flagMission, 0, 0, 0, tpz.ki.STAR_CRESTED_SUMMONS, repeatMission)
+            -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
+            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
+                param3 = 1
+            else
+                param3 = 0
+            end
+            player:startEvent(78, flagMission, 0, param3, 0, tpz.ki.STAR_CRESTED_SUMMONS, repeatMission)
         end
     end
 
