@@ -12401,7 +12401,6 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
     {
         auto table = lua_gettop(L);
         lua_pushnil(L);
-        int counter = 0;
         while (lua_next(L, table) != 0)
         {
             Predicate_t new_predicate;
@@ -12433,7 +12432,6 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
     {
         auto table = lua_gettop(L);
         lua_pushnil(L);
-        int counter = 0;
         while (lua_next(L, table) != 0)
         {
             Action_t new_action;
