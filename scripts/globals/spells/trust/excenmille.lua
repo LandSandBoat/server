@@ -39,8 +39,15 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75,
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
-                        ai.r.WS, ai.s.SPECIFIC, tpz.ws.DOUBLE_THRUST)
+    mob:setTPSkills({
+        ['skills'] = {
+            { ai.r.WS, tpz.ws.DOUBLE_THRUST, 0 },
+            { ai.r.WS, tpz.ws.LEG_SWEEP, 0 },
+            { ai.r.WS, tpz.ws.PENTA_THRUST, 30 },
+        },
+        ['mode'] = ai.tp.ASAP,
+        ['skill_select'] = ai.s.RANDOM,
+    })
 
     mob:addMod(tpz.mod.STORETP, 25)
 end

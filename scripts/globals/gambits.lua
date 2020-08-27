@@ -36,6 +36,11 @@ ai.condition =
     SC_AVAILABLE       = 11,
     NOT_SC_AVAILABLE   = 12,
     MB_AVAILABLE       = 13,
+    READYING_WS        = 14,
+    READYING_MS        = 15,
+    READYING_JA        = 16,
+    CASTING_MA         = 17,
+    RANDOM             = 18,
 }
 ai.c = ai.condition
 
@@ -48,6 +53,7 @@ ai.reaction =
     JA     = 3,
     WS     = 4,
     MS     = 5,
+    MSG    = 6,
 }
 ai.r = ai.reaction
 
@@ -59,5 +65,15 @@ ai.select =
     SPECIFIC   = 2,
     RANDOM     = 3,
     MB_ELEMENT = 4,
+    SPECIAL_AYAME = 5,
 }
 ai.s = ai.select
+
+-- TP Move Trigger
+ai.tp = 
+{
+    ASAP   = 0,
+    RANDOM = 1,
+    OPENER = 2,
+    CLOSER = 3,
+}

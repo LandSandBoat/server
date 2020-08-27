@@ -110,20 +110,27 @@ void CTrustController::DoCombatTick(time_point tick)
             std::unique_ptr<CBasicPacket> err;
             if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
             {
-                if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PTarget->loc.p, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                if (currentDistance > WarpDistance)
                 {
-                    POwner->PAI->PathFind->FollowPath();
+                    POwner->PAI->PathFind->WarpTo(PTarget->loc.p);
                 }
-                else if (POwner->GetSpeed() > 0)
+                else if (currentDistance > RoamDistance)
                 {
-                    POwner->PAI->PathFind->WarpTo(PMaster->loc.p, RoamDistance);
+                    if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                    {
+                        POwner->PAI->PathFind->FollowPath();
+                    }
+                    else if (POwner->GetSpeed() > 0)
+                    {
+                        POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
+                    }
                 }
             }
             else
             {
                 for (auto POtherTrust : PMaster->PTrusts)
                 {
-                    if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f)
+                    if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 2.0f)
                     {
                         auto angle = getangle(POwner->loc.p, PTarget->loc.p) + 64;
                         auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
@@ -187,15 +194,19 @@ void CTrustController::DoRoamTick(time_point tick)
         }
     }
 
-    if (currentDistance > RoamDistance)
+    if (currentDistance > WarpDistance)
     {
-        if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p);
+    }
+    else if (currentDistance > RoamDistance)
+    {
+        if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
             POwner->PAI->PathFind->FollowPath();
         }
         else if (POwner->GetSpeed() > 0)
         {
-            POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p, RoamDistance);
+            POwner->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
         }
     }
 

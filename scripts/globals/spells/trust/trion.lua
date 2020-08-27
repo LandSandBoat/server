@@ -33,8 +33,21 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75,
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
-                        ai.r.WS, ai.s.SPECIFIC, tpz.ws.RED_LOTUS_BLADE)
+    -- TODO: Table me
+    local ROYAL_BASH = 3193
+    local ROYAL_SAVIOUR = 3194
+    mob:setTPSkills({
+        ['skills'] = {
+            { ai.r.MS, ROYAL_BASH, 0 },
+            { ai.r.MS, ROYAL_SAVIOUR, 0 },
+
+            { ai.r.WS, tpz.ws.RED_LOTUS_BLADE, 0 },
+            { ai.r.WS, tpz.ws.FLAT_BLADE, 0 },
+            { ai.r.WS, tpz.ws.SAVAGE_BLADE, 60 },
+        },
+        ['mode'] = ai.tp.ASAP,
+        ['skill_select'] = ai.s.RANDOM,
+    })
 end
 
 function onMobDespawn(mob)

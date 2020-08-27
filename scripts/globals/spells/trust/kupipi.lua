@@ -59,7 +59,14 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.FLASH, ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.FLASH, 60)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000, ai.r.WS, ai.s.SPECIFIC, tpz.ws.STARLIGHT)
+    mob:setTPSkills({
+        ['skills'] = {
+            { ai.r.WS, tpz.ws.STARLIGHT, 0 },
+            { ai.r.WS, tpz.ws.MOONLIGHT, 0 },
+        },
+        ['mode'] = ai.tp.ASAP,
+        ['skill_select'] = ai.s.RANDOM,
+    })
 end
 
 function onMobDespawn(mob)

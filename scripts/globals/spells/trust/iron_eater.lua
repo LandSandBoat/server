@@ -25,8 +25,15 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.PROVOKE)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
-                        ai.r.WS, ai.s.SPECIFIC, tpz.ws.SHIELD_BREAK)
+    mob:setTPSkills({
+        ['skills'] = {
+            { ai.r.WS, tpz.ws.SHIELD_BREAK, 0 },
+            { ai.r.WS, tpz.ws.ARMOR_BREAK, 0 },
+            { ai.r.WS, tpz.ws.STEEL_CYCLONE, 60 },
+        },
+        ['mode'] = ai.tp.ASAP,
+        ['skill_select'] = ai.s.RANDOM,
+    })
 end
 
 function onMobDespawn(mob)
