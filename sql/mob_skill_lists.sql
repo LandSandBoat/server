@@ -1123,12 +1123,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
 -- 247: Tube
--- 248 to 250: free
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1571);
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1572);
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1573);
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1574);
-INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1575);
+-- 248 to 249: free
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1572); -- venom_shell
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1573); -- palsynyxis
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1574); -- painful_whip
+INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1575); -- suctorial_tentacle
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2106);
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2107);
 INSERT INTO `mob_skill_lists` VALUES ('Vampyr',252,2108);
@@ -3593,13 +3593,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,817); -- Dread Shr
 INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,818); -- Tail Crush
 INSERT INTO `mob_skill_lists` VALUES ('Lightning_Wyvern',1138,820); -- Thunder Breath
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,813); -- Dispelling Wind
-INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,814); -- Deadly Drive 
+INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,814); -- Deadly Drive
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,815); -- Wind Wall
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,816); -- Fang Rush
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,817); -- Dread Shriek
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,818); -- Tail Crush
 INSERT INTO `mob_skill_lists` VALUES ('Chaos_Wyvern',1139,822); -- Chaos Breath
-INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,813); -- Dispelling Wind 
+INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,813); -- Dispelling Wind
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,814); -- Deadly Drive
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,815); -- Wind Wall
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,816); -- Fang Rush
@@ -3607,7 +3607,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,817); -- Dread Shri
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,818); -- Tail Crush
 INSERT INTO `mob_skill_lists` VALUES ('Blizzard_Wyvern',1140,819); -- Blizzard Breath
 
-INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse 
+INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3051); -- Mending Halation
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3052); -- Radial Arcana
 
