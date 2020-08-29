@@ -1249,12 +1249,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,195,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,200,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,226,1,255); -- might not have access to poisonga 2
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,274,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,100,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,101,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,102,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,103,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,104,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,105,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,254,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,231,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,245,1,255);
