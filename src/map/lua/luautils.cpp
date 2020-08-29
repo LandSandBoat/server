@@ -80,6 +80,7 @@
 #include "../ai/states/magic_state.h"
 #include <optional>
 #include "../battlefield.h"
+#include "../packets/char_emotion.h"
 
 namespace luautils
 {
@@ -4500,6 +4501,26 @@ namespace luautils
         {
             ShowError("luautils::onFurnitureRemoved: %s\n", lua_tostring(LuaHandle, -1));
             lua_pop(LuaHandle, 1);
+        }
+    }
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+    {
+        lua_prepscript("scripts/globals/player.lua");
+
+        if (prepFile(File, "onPlayerEmote"))
+            return;
+
+        CLuaBaseEntity LuaBaseEntity(PChar);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+
+        lua_pushinteger(LuaHandle, (uint8)EmoteID);
+
+        if (lua_pcall(LuaHandle, 2, 0, 0))
+        {
+            ShowError("luautils::onEmote: %s\n", lua_tostring(LuaHandle, -1));
+            lua_pop(LuaHandle, 1);
+            return;
         }
     }
 
