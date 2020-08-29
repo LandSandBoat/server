@@ -8,12 +8,8 @@ require("scripts/globals/magic")
 
 function onMobInitialize(mob)
     mob:addMod(tpz.mod.DOUBLE_ATTACK, 25)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-end
-
-function onMobSpawn(mob)
     mob:addMod(tpz.mod.ACC, 50)
+    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -34,7 +30,8 @@ function onMobFight(mob, target)
         if (element ~= 0) then
             mob:delMod(tpz.magic.absorbMod[element], 100)
         end
-        -- to do: handle 2hr animation on element change
+
+        mob:useMobAbility(624)
         mob:addMod(tpz.magic.absorbMod[newelement], 100)
         mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(2, 3)*15)
         mob:setLocalVar("element", newelement)
