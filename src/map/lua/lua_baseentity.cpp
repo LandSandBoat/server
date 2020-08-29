@@ -105,6 +105,7 @@
 #include "../packets/change_music.h"
 #include "../packets/conquest_map.h"
 #include "../packets/entity_animation.h"
+#include "../packets/entity_enable_list.h"
 #include "../packets/entity_update.h"
 #include "../packets/entity_visual.h"
 #include "../packets/event.h"
@@ -113,6 +114,7 @@
 #include "../packets/event_update_string.h"
 #include "../packets/guild_menu.h"
 #include "../packets/guild_menu_buy.h"
+#include "../packets/independant_animation.h"
 #include "../packets/instance_entry.h"
 #include "../packets/inventory_finish.h"
 #include "../packets/inventory_modify.h"
@@ -128,6 +130,7 @@
 #include "../packets/message_standard.h"
 #include "../packets/message_system.h"
 #include "../packets/message_text.h"
+#include "../packets/timer_bar_util.h"
 #include "../packets/position.h"
 #include "../packets/quest_mission_log.h"
 #include "../packets/release.h"
@@ -3143,7 +3146,7 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State *L)
         return 0;
     }
 
-	lua_newtable(L);
+    lua_newtable(L);
 
     for (uint8 x = 0; x < 10; x++)
     {
@@ -3892,7 +3895,7 @@ inline int32 CLuaBaseEntity::breakLinkshell(lua_State* L)
     bool found = false;
 
     int32 ret = Sql_Query(SqlHandle, "SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
-	if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         uint8 broken = Sql_GetUIntData(SqlHandle,0);
         if (broken)
@@ -6585,7 +6588,7 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
 *  Function: setMissionLogEx()
 *  Purpose : Sets mission log extra data to correctly track progress in branching missions.
 *  Example : player:setMissionLogEx(tpz.mission.log_id.COP, tpz.mission.logEx.ULMIA, 14)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::setMissionLogEx(lua_State *L)
@@ -9200,24 +9203,6 @@ inline int32 CLuaBaseEntity::checkSoloPartyAlliance(lua_State *L)
 }
 
 /************************************************************************
-*  Function: checkFovAllianceAllowed()
-*  Purpose : Returns true if server owner has enabled FoV alliances
-*  Example : if (player:checkFovAllianceAllowed() == 1) then
-*  Notes   :
-************************************************************************/
-
-inline int32 CLuaBaseEntity::checkFovAllianceAllowed(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    uint8 FovAlliance = map_config.fov_allow_alliance;
-
-    lua_pushinteger(L, FovAlliance);
-    return 1;
-}
-
-/************************************************************************
 *  Function: checkKillCredit()
 *  Purpose : Used to determine if kill counts towards regimes/etc.
 *  Example : if (player:checkKillCredit(mob)) then
@@ -9676,6 +9661,104 @@ inline int32 CLuaBaseEntity::sendTractor(lua_State *L)
 
         PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_TRACTOR));
     }
+    return 0;
+}
+
+/************************************************************************
+*  Function: countdown()
+*  Purpose : Starts or clears a visible countdown bar for player
+*  Example : player:countdown(60)
+*  Notes   : Using 0 or no argument removes the countdown bar from the player
+************************************************************************/
+int32 CLuaBaseEntity::countdown(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto seconds = static_cast<uint32>(lua_tonumber(L, 1));
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto packet = new CTimerBarUtilPacket(PChar);
+
+    if (seconds)
+    {
+        packet->addCountdown(seconds);
+    }
+
+    if (lua_isstring(L, 2) && lua_isnumber(L, 3))
+    {
+        packet->addBar1(lua_tostring(L, 2), (uint8)lua_tonumber(L, 3));
+    }
+
+    if (lua_isstring(L, 4) && lua_isnumber(L, 5))
+    {
+        packet->addBar2(lua_tostring(L, 4), (uint8)lua_tonumber(L, 5));
+    }
+
+    PChar->pushPacket(packet);
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: enableEntities()
+*  Purpose : Enables/disables the list of given special hidden entities for just the target char
+*  Example : player:enableEntities({ 17207972, 17207973})
+*  Notes   : Default is all off, so sending the ID enables the special entity
+************************************************************************/
+int32 CLuaBaseEntity::enableEntities(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    std::vector<uint32> data;
+
+    if (lua_istable(L, 1))
+    {
+        lua_pushnil(L);
+        while (lua_next(L, -2))
+        {
+            lua_pushvalue(L, -2);
+            auto value = (uint32)lua_tonumber(L, -2);
+            data.push_back(value);
+            lua_pop(L, 2);
+        }
+    }
+
+    PChar->pushPacket(new CEntityEnableList(data));
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: independantAnimation()
+*  Purpose : Play an animation independant of action messages
+*  Example : player:independantAnimation(player, 251, 4) -- Plays little hearts
+*  Notes   : Accepts a target, but works perfectly fine on self
+************************************************************************/
+int32 CLuaBaseEntity::independantAnimation(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    CBaseEntity* PTarget;
+    if (!lua_isnil(L, 1) && lua_isuserdata(L, 1))
+    {
+        CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+        PTarget = PLuaBaseEntity->m_PBaseEntity;
+    }
+    else
+    {
+        PTarget = m_PBaseEntity;
+    }
+
+    auto animId = (uint16)lua_tointeger(L, 2);
+    auto mode = (uint8)lua_tointeger(L, 3);
+
+    PChar->pushPacket(new CIndependantAnimationPacket(PChar, PTarget, animId, mode));
+
     return 0;
 }
 
@@ -10149,7 +10232,7 @@ int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
 *  Function: isDualWielding()
 *  Purpose : Returns true if entity is wielding two weapons
 *  Example : if player:isDualWielding() then
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::isDualWielding(lua_State* L)
@@ -15049,7 +15132,6 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkSoloPartyAlliance),
 
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkFovAllianceAllowed),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkKillCredit),
 
     // Instances
@@ -15079,6 +15161,9 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendTractor),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageCombat),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,countdown),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,enableEntities),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,independantAnimation),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,engage),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,isEngaged),

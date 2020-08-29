@@ -804,7 +804,7 @@ function getMissionMask(player)
             if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == false and getMissionRankPoints(player, 11) == 1) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == true and getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 elseif (rank > 3 or getMissionRankPoints(player, 11) == 1) then
