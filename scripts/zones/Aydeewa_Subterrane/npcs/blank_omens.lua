@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Aydeewa Subterrane
---  NPC: Blank (Blue AF2 Quest)
+--  NPC: Blank (Omens Quest)
 -- !pos 342.129 36.509 -24.856 68
 -----------------------------------
 require("scripts/globals/keyitems");

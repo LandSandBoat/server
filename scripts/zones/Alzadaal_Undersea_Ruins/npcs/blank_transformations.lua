@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Alzadaal Undersea Ruins
---  NPC: 21 (no name)
+--  NPC: Blank (Transformations Quest)
+-- !pos 529.704 0.000 649.682 72
 -----------------------------------
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 require("scripts/globals/npc_util")
