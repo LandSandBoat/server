@@ -18,9 +18,29 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     local dmg = avatar:getWeaponDmg()
     local minFstr, maxFstr = avatarFSTR(avatar:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT))
     local ratio = avatar:getStat(tpz.mod.ATT) / target:getStat(tpz.mod.DEF)
+    local lvluser = avatar:getMainLvl()
+    local lvltarget = target:getMainLvl()
+    local firstacc = acc + 100
 
-    -- Note: Avatars do not have any level correction. This is why they are so good on Wyrms! // https://kegsay.livejournal.com/tag/smn!
-    local hitrate = utils.clamp(acc - eva, 20, 95)
+
+-- formula should be 75 + floor( (Accuracy - Evasion)÷2 ) - 2×(dLVL)
+-- while level correction does not apply to damage, it doesnt appear to correspond to hit rate.
+    local hitdiff = 0
+    local hitrate = 75
+    local firsthit = 0
+    
+    if (lvluser > lvltarget) then
+        hitdiff = hitrate + math.floor(acc + bonusacc - eva) 
+        firsthit = hitrate + math.floor(firstacc + bonusacc - eva) 
+    else 
+        hitdiff = hitrate + math.floor(acc + bonusacc - eva + ((lvltarget - lvluser) *2 ))
+        firsthit = hitrate + math.floor(firstacc + bonusacc - eva + ((lvltarget - lvluser) * 2))
+    end
+
+    hitrate = hitdiff / 100
+    firsthit = firsthit / 100
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    firsthit = utils.clamp(firsthit, 0.2, 0.95)
 
     -- add on native crit hit rate (guesstimated, it actually follows an exponential curve)
     local critrate = (avatar:getStat(tpz.mod.DEX) - target:getStat(tpz.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
@@ -51,7 +71,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     local hitdmg = 0
     local finaldmg = 0
 
-    if math.random() < hitrate then
+    if math.random() < firsthit then
         hitdmg = avatarHitDmg(dmg, minRatio, maxRatio, minFstr, maxFstr, critrate)
         finaldmg = finaldmg + hitdmg * dmgmod
         hitslanded = hitslanded + 1
