@@ -39,27 +39,22 @@ function onMobFight(mob, target)
 end
 
 function onAdditionalEffect(mob, target, damage)
-
     local element = mob:getLocalVar("element")
-
-    if (element ~= 0) then
-        if (element == 1) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENFIRE, {chance = 1000})
-        elseif (element == 2) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENSTONE, {chance = 1000})
-        elseif (element == 3) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENWATER, {chance = 1000})
-        elseif (element == 4) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENAERO, {chance = 1000})
-        elseif (element == 5) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENBLIZZARD, {chance = 1000})
-        elseif (element == 6) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENTHUNDER, {chance = 1000})
-        elseif (element == 7) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENLIGHT, {chance = 1000})
-        elseif (element == 8) then
-            return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENDARK, {chance = 1000})
-        end
+    local index =
+    {
+        [1] = tpz.mob.ae.ENFIRE,
+        [2] = tpz.mob.ae.ENSTONE,
+        [3] = tpz.mob.ae.ENWATER,
+        [4] = tpz.mob.ae.ENAERO,
+        [5] = tpz.mob.ae.ENBLIZZARD,
+        [6] = tpz.mob.ae.ENTHUNDER,
+        [7] = tpz.mob.ae.ENLIGHT,
+        [8] = tpz.mob.ae.ENDARK
+    }
+    if index[element] then
+        return tpz.mob.onAddEffect(mob, target, damage, index[element], {chance = 1000})
+    else
+        return 0, 0, 0 -- Just in case its somehow not got a variable set
     end
 end
 
