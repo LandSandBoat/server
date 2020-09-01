@@ -1955,7 +1955,7 @@ INSERT INTO `mob_groups` VALUES (95,6470,41,'Nightmare_Stirge',600,0,1804,5000,0
 INSERT INTO `mob_groups` VALUES (96,6322,41,'Nightmare_Diremite',600,0,1800,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (97,6433,41,'Nightmare_Gaylas',600,0,2798,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (98,6376,41,'Nightmare_Kraken',600,0,2798,5000,0,95,97,0);
-INSERT INTO `mob_groups` VALUES (99,2868,41,'Nightmare_Snoll',600,0,1804,5000,0,95,97,0);
+INSERT INTO `mob_groups` VALUES (99,6602,41,'Nightmare_Snoll',600,0,1804,5000,0,95,97,0);
 INSERT INTO `mob_groups` VALUES (100,4135,41,'Vanguard_Amputator',600,0,2546,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (101,4195,41,'Vanguard_Vexer',600,0,2546,4000,0,93,95,0);
 INSERT INTO `mob_groups` VALUES (102,4165,41,'Vanguard_Neckchopper',600,0,2546,4000,0,93,95,0);
@@ -13589,7 +13589,7 @@ INSERT INTO `mob_groups` VALUES (8,4752,273,'Wheezing_Acuex',600,0,0,0,5000,124,
 INSERT INTO `mob_groups` VALUES (9,5041,273,'Baleful_Tarichuk',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (10,6421,273,'Metalcruncher_Worm',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (11,5358,273,'Snowpelt_Rabbit',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (12,4806,273,'Hailstone',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (12,6603,273,'Powdery_Snoll',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (13,6476,273,'Grimfang_Bat',600,0,0,0,0,124,127,0);
 INSERT INTO `mob_groups` VALUES (14,4975,273,'Firth_Umbril',600,0,0,0,9999,124,127,0);
 INSERT INTO `mob_groups` VALUES (15,6442,273,'Depthdiver_Bats',600,0,0,0,0,124,127,0);
