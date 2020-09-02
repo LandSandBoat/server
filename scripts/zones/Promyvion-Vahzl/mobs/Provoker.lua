@@ -7,7 +7,6 @@ require("scripts/globals/magic")
 -----------------------------------
 
 function onMobInitialize(mob)
-    mob:addMod(tpz.mod.DOUBLE_ATTACK, 25)
     mob:addMod(tpz.mod.ACC, 50)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
