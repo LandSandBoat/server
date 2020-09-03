@@ -10,8 +10,10 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
+
+local PLATOON_SCORP_POOL_ID = 3157
+local WILD_RAGE_DMG_INCREASE = 0.10
 
 function onMobSkillCheck(target, mob, skill)
     return 0
@@ -21,7 +23,18 @@ function onMobWeaponSkill(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.1
+
+
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
+    if mob:getPool() == PLATOON_SCORP_POOL_ID then
+        -- should not have to verify because platoon scorps only in battlefield
+        local num_scorps_dead= mob:getBattlefield():getLocalVar("[ODS]NumScorpsDead")
+
+        -- Increase the strength of Wild Rage as scorps in the BC die
+        -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
+        info.dmg = info.dmg * (1 + WILD_RAGE_DMG_INCREASE * num_scorps_dead)
+    end
+
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING, MOBPARAM_3_SHADOW)
 
     -- king vinegrroon

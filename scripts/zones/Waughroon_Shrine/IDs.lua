@@ -24,12 +24,40 @@ zones[tpz.zone.WAUGHROON_SHRINE] =
         THAT_LL_HURT_IN_THE_MORNING  = 7683, -- Ungh... That'll hurt in the morning...
         ONE_TENTACLE_WOUNDED         = 7701, -- One of the sea creature's tentacles have been wounded.
         ALL_TENTACLES_WOUNDED        = 7702, -- All of the sea creature's tentacles have been wounded.
+		SCORPION_IS_STUNNED			 = 7703, -- The platoon scorpion does not have enough energy to attack!
+		SCORPION_IS_BOUND			 = 7704, -- The platoon scorpion's legs are lodged in the rocks!
     },
     mob =
     {
     },
     npc =
     {
+    },
+    operationDesertSwarm = {
+        [1] = {
+            17367266,
+            17367267,
+            17367268,
+            17367269,
+            17367270,
+            17367271,
+        },
+        [2] = {
+            17367273,
+            17367274,
+            17367275,
+            17367276,
+            17367277,
+            17367278,
+        },
+        [3] = {
+            17367280,
+            17367281,
+            17367282,
+            17367283,
+            17367284,
+            17367285,
+        },
     },
 }
 
