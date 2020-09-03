@@ -17,23 +17,23 @@ function onMobFight(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")
 
-    if (changeTime == 0) then
+    if changeTime == 0 then
         mob:setLocalVar("changeTime", math.random(2, 3)*15)
         return
     end
-    if (mob:getBattleTime() >= changeTime) then
-        local newelement = element
-        while (newelement == element) do
-            newelement = math.random(1, 8)
+    if mob:getBattleTime() >= changeTime then
+        local newElement = element
+        while (newElement == element) do
+            newElement = math.random(1, 8)
         end
-        if (element ~= 0) then
+        if element ~= 0 then
             mob:delMod(tpz.magic.absorbMod[element], 100)
         end
 
         mob:useMobAbility(624)
-        mob:addMod(tpz.magic.absorbMod[newelement], 100)
+        mob:addMod(tpz.magic.absorbMod[newElement], 100)
         mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(2, 3)*15)
-        mob:setLocalVar("element", newelement)
+        mob:setLocalVar("element", newElement)
     end
 end
 
