@@ -31,22 +31,23 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 	this->size = 0x1A;
 
 	char craftname[8];
-	memset(craftname,0,8);
+	memset(craftname, 0, 8);
 
 	switch (skillID)
 	{
 		//TODO: There might be a better way than this
 		//TODO: Also confirm that this order is consistent, else
 		//      we might get recipes for the wrong guild
-		case(1): strncpy(craftname,"Wood",   8); break;
-		case(2): strncpy(craftname,"Smith",  8); break;
-		case(3): strncpy(craftname,"Gold",   8); break;
-		case(4): strncpy(craftname,"Cloth",  8); break;
-		case(5): strncpy(craftname,"Leather",8); break;
-		case(6): strncpy(craftname,"Bone",   8); break;
-		case(7): strncpy(craftname,"Alchemy",8); break;
-		case(8): strncpy(craftname,"Cook",   8); break;
+		case(1): strncpy(craftname, "Wood",   8); break;
+		case(2): strncpy(craftname, "Smith",  8); break;
+		case(3): strncpy(craftname, "Gold",   8); break;
+		case(4): strncpy(craftname, "Cloth",  8); break;
+		case(5): strncpy(craftname, "Leather",8); break;
+		case(6): strncpy(craftname, "Bone",   8); break;
+		case(7): strncpy(craftname, "Alchemy",8); break;
+		case(8): strncpy(craftname, "Cook",   8); break;
 	}
+
 	const char* fmtQuery =
 		"SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, \
 		  Alchemy, Cook, Crystal, Result, Ingredient1, Ingredient2, \
@@ -67,7 +68,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 	int32 ret = Sql_Query(
 		SqlHandle,
 		fmtQuery,
-		craftname,craftname,
+		craftname, craftname,
 		skillLevel + 5, skillLevel + 10);
 
 	if (ret != SQL_ERROR &&
@@ -80,11 +81,14 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 
 		// So, each craft can have up to 3 subcrafts. This loop is
 		//     to pack the subcraft requirements to be sent
-		for(auto i=1; i < 9; i++)
+		for (auto i = 1; i < 9; ++i)
 		{
 			uint16 this_skill = 0u;
 			if (i != skillID && subidx < 3)
+			{
 				this_skill = Sql_GetUIntData(SqlHandle,i);
+			}
+				
 			if (this_skill > 0u)
 			{
 				subcraftIDs[subidx] = i;
@@ -107,7 +111,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 		//     an ingredient into a std::map with a qty 1 and then
 		//     any duplicate instances will increase the quantity
 		//     without creating new duplicate entries
-		for(auto i=0; i < 8; i++)
+		for(auto i = 0 ; i < 8; ++i)
 		{
 			uint16 this_ingredient = 0;
 
@@ -115,9 +119,13 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 			if (this_ingredient != 0)
 			{
 				if (ingredients[this_ingredient])
+				{
 					ingredients[this_ingredient] = ingredients[this_ingredient] + 1;
+				}	
 				else
+				{
 					ingredients[this_ingredient] = 1;
+				}
 			}
 		}
 
@@ -129,8 +137,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
 			ref<uint16>(pointer_ref)        = it->first;
 			ref<uint16>(pointer_ref + 0x10) = it->second;
 			pointer_ref                    += 0x02u;
-			if (pointer_ref > 0x1E)
-				break;
+			if (pointer_ref > 0x1E) { break; }
 		}
 		ref<uint16>(0x30) = 0x01;
 	}
