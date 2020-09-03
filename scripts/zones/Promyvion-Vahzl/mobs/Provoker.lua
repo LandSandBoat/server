@@ -23,7 +23,7 @@ function onMobFight(mob, target)
     end
     if mob:getBattleTime() >= changeTime then
         local newElement = element
-        while (newElement == element) do
+        while newElement == element do
             newElement = math.random(1, 8)
         end
         if element ~= 0 then
