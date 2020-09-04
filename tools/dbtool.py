@@ -241,7 +241,7 @@ def write_version(silent=False):
         print(Fore.RED + 'Error writing version.')
 
 def import_file(file):
-    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database
+    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database
     print('Importing ' + file + '...')
     os.system(updatecmd + ' < ../sql/' + file + log_errors)
     fetch_errors()
@@ -264,7 +264,7 @@ def connect():
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
             print(Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
-                create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -u ' + login + ' -p' + password + ' CREATE ' + database
+                create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
                 os.system(create_command + log_errors)
                 fetch_errors()
                 setup_db()
@@ -293,15 +293,15 @@ def backup_db(silent=False,lite=False):
             tables = ' '
             for table in player_data:
                 tables += table[:-4] + ' '
-            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                tables + '> ../sql/backups/' + database + '--lite--' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                tables + '> ../sql/backups/' + database + '-' + time.strftime('%Y%m%d-%H%M%S') + '-lite.sql'
         else:
             if current_version:
-                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                    ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-' + time.strftime('%Y%m%d-%H%M%S') + '-' + current_version + '.sql'
             else:
-                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                    ' > ../sql/backups/' + database + '-full-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + time.strftime('%Y%m%d-%H%M%S') + '-full.sql'
         os.system(dumpcmd + log_errors)
         fetch_errors()
         print(Fore.GREEN + 'Database saved!')
@@ -428,7 +428,7 @@ def restore_backup():
                 backup_file = backups[choice - 1]
                 print(colorama.ansi.clear_screen())
                 print(Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
-                    'the DB_VER in ../conf/version.conf to the hash sequence in the filename, between \n'
+                    'the DB_VER in ../conf/version.conf to the hash sequence in the filename, after \n'
                     'the database name and the timestamp, so that express update functions properly.')
                 if input('Import ' + backup_file + '? [y/N] ').lower() == 'y':
                     import_file('backups/' + backup_file)
