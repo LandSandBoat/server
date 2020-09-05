@@ -9,10 +9,10 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local olduumQuest = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
     local ringCheck = player:hasItem(2217)
     if olduumQuest == QUEST_AVAILABLE then
@@ -31,10 +31,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 4 then
         player:addKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)

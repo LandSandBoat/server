@@ -6,7 +6,7 @@
 
 require("scripts/globals/status")
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if effect:getPower() == 3 then -- arcane stomp
         target:addMod(tpz.mod.FIRE_ABSORB, 100)
         target:addMod(tpz.mod.EARTH_ABSORB, 100)
@@ -26,7 +26,7 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     if effect:getPower() == 3 then -- arcane stomp
         target:delMod(tpz.mod.FIRE_ABSORB, 100)
         target:delMod(tpz.mod.EARTH_ABSORB, 100)

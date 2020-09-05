@@ -12,34 +12,34 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT,0
+        return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
         if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
-            return tpz.msg.basic.NO_FINISHINGMOVES,0
+            return tpz.msg.basic.NO_FINISHINGMOVES, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
             player:delStatusEffect(tpz.effect.FINISHING_MOVE_2)
-            return 0,0
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_3)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1, 1, 0, 7200)
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_4)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2, 1, 0, 7200)
+            return 0, 0
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_5)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3,1,0,7200)
-            return 0,0
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3, 1, 0, 7200)
+            return 0, 0
         else
-            return tpz.msg.basic.NO_FINISHINGMOVES,0
+            return tpz.msg.basic.NO_FINISHINGMOVES, 0
         end
     end
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     if (not target:hasStatusEffect(tpz.effect.CHAINBOUND, 0) and not target:hasStatusEffect(tpz.effect.SKILLCHAIN, 0)) then
         target:addStatusEffectEx(tpz.effect.CHAINBOUND, 0, 1, 0, 5, 0, 1)
     else

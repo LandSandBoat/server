@@ -32,7 +32,7 @@ function utils.stoneskin(target, dmg)
         skin = target:getMod(tpz.mod.STONESKIN)
         if (skin > 0) then
             if (skin > dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN,dmg)
+                target:delMod(tpz.mod.STONESKIN, dmg)
                 return 0
             else --absorbs some damage then wear
                 target:delStatusEffect(tpz.effect.STONESKIN)
@@ -127,7 +127,7 @@ end
 --    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
 -----------------------------------
 
-function utils.getSkillLvl(rank,level)
+function utils.getSkillLvl(rank, level)
 
     local skill = 0 --Failsafe
 

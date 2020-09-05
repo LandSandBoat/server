@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
@@ -39,7 +39,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
@@ -54,10 +54,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 10 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
         player:confirmTrade()

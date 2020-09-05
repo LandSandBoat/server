@@ -33,15 +33,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         params.str_wsc = 0.3 params.mnd_wsc = 0.7
     end
 
+    -- Apply Aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     if damage > 0 then
         if not target:hasStatusEffect(tpz.effect.DEFENSE_DOWN) then
             local duration = (30 + tp / 1000 * 30) * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0)
             target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 12.5, 0, duration)
         end
-
-        -- Apply Aftermath
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
     end
 
     return tpHits, extraHits, criticalHit, damage

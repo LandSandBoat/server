@@ -10,17 +10,17 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getWeaponSubSkillType(tpz.slot.RANGED) == 10 and
         not player:hasStatusEffect(tpz.effect.OVERLOAD) and
         player:getPet()) then
-        return 0,0
+        return 0, 0
     else
-        return 71,0
+        return 71, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
 
     local burden = 10
     if (target:getMP() < target:getPet():getMP()) then
@@ -44,7 +44,7 @@ function onUseAbility(player,target,ability)
         end
 
         local dur = player:getPet():getLocalVar("MANEUVER_DURATION")
-        target:addStatusEffect(tpz.effect.DARK_MANEUVER, 0, 0, utils.clamp(dur,60,300))
+        target:addStatusEffect(tpz.effect.DARK_MANEUVER, 0, 0, utils.clamp(dur, 60, 300))
 
     end
 

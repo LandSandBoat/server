@@ -5,15 +5,15 @@
 -- !pos 10.577 -2.478 32.680 94
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(307)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

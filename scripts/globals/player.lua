@@ -6,6 +6,8 @@ require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+require("scripts/quests/full_speed_ahead")
+-----------------------------------
 
 local startingRaceInfo =
 {
@@ -149,27 +151,27 @@ function onGameIn(player, firstLogin, zoning)
 
     -- god mode
     if player:getCharVar("GodMode") == 1 then
-        player:addStatusEffect(tpz.effect.MAX_HP_BOOST,1000,0,0)
-        player:addStatusEffect(tpz.effect.MAX_MP_BOOST,1000,0,0)
-        player:addStatusEffect(tpz.effect.MIGHTY_STRIKES,1,0,0)
-        player:addStatusEffect(tpz.effect.HUNDRED_FISTS,1,0,0)
-        player:addStatusEffect(tpz.effect.CHAINSPELL,1,0,0)
-        player:addStatusEffect(tpz.effect.PERFECT_DODGE,1,0,0)
-        player:addStatusEffect(tpz.effect.INVINCIBLE,1,0,0)
-        player:addStatusEffect(tpz.effect.ELEMENTAL_SFORZO,1,0,0)
-        player:addStatusEffect(tpz.effect.MANAFONT,1,0,0)
-        player:addStatusEffect(tpz.effect.REGAIN,300,0,0)
-        player:addStatusEffect(tpz.effect.REFRESH,99,0,0)
-        player:addStatusEffect(tpz.effect.REGEN,99,0,0)
-        player:addMod(tpz.mod.RACC,2500)
-        player:addMod(tpz.mod.RATT,2500)
-        player:addMod(tpz.mod.ACC,2500)
-        player:addMod(tpz.mod.ATT,2500)
-        player:addMod(tpz.mod.MATT,2500)
-        player:addMod(tpz.mod.MACC,2500)
-        player:addMod(tpz.mod.RDEF,2500)
-        player:addMod(tpz.mod.DEF,2500)
-        player:addMod(tpz.mod.MDEF,2500)
+        player:addStatusEffect(tpz.effect.MAX_HP_BOOST, 1000, 0, 0)
+        player:addStatusEffect(tpz.effect.MAX_MP_BOOST, 1000, 0, 0)
+        player:addStatusEffect(tpz.effect.MIGHTY_STRIKES, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.HUNDRED_FISTS, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.CHAINSPELL, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.PERFECT_DODGE, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.INVINCIBLE, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.ELEMENTAL_SFORZO, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.MANAFONT, 1, 0, 0)
+        player:addStatusEffect(tpz.effect.REGAIN, 300, 0, 0)
+        player:addStatusEffect(tpz.effect.REFRESH, 99, 0, 0)
+        player:addStatusEffect(tpz.effect.REGEN, 99, 0, 0)
+        player:addMod(tpz.mod.RACC, 2500)
+        player:addMod(tpz.mod.RATT, 2500)
+        player:addMod(tpz.mod.ACC, 2500)
+        player:addMod(tpz.mod.ATT, 2500)
+        player:addMod(tpz.mod.MATT, 2500)
+        player:addMod(tpz.mod.MACC, 2500)
+        player:addMod(tpz.mod.RDEF, 2500)
+        player:addMod(tpz.mod.DEF, 2500)
+        player:addMod(tpz.mod.MDEF, 2500)
         player:addHP(50000)
         player:setMP(50000)
     end
@@ -187,4 +189,10 @@ function onPlayerLevelUp(player)
 end
 
 function onPlayerLevelDown(player)
+end
+
+function onPlayerEmote(player, emoteId)   
+    if emoteId == tpz.emote.CHEER and player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
+        tpz.fsa.onCheer(player)
+    end
 end

@@ -11,16 +11,16 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
     if (not player:hasStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)) then
-        return tpz.msg.basic.NO_ELIGIBLE_ROLL,0
+        return tpz.msg.basic.NO_ELIGIBLE_ROLL, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(caster,target,ability,action)
+function onUseAbility(caster, target, ability, action)
     if (caster:getID() == target:getID()) then
         local du_effect = caster:getStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)
         local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
@@ -36,7 +36,7 @@ function onUseAbility(caster,target,ability,action)
             end
             caster:delStatusEffect(tpz.effect.SNAKE_EYE)
         else
-            roll = roll + math.random(1,6)
+            roll = roll + math.random(1, 6)
             if (roll > 12) then
                 roll = 12
                 caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
@@ -46,16 +46,16 @@ function onUseAbility(caster,target,ability,action)
             caster:resetRecast(tpz.recast.ABILITY, 193)
         end
         caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(),roll-prev_roll:getSubPower())
+        action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
         checkForJobBonus(caster, job)
     end
     local total = caster:getLocalVar("corsairRollTotal")
     local prev_ability = getAbility(caster:getLocalVar("corsairActiveRoll"))
     if (prev_ability) then
-        action:animation(target:getID(),prev_ability:getAnimation())
+        action:animation(target:getID(), prev_ability:getAnimation())
         action:actionID(prev_ability:getID())
-        dofile("scripts/globals/abilities/"..prev_ability:getName()..".lua")
-        local total = applyRoll(caster,target,ability,action,total)
+        dofile("scripts/globals/abilities/" .. prev_ability:getName() .. ".lua")
+        local total = applyRoll(caster, target, ability, action, total)
         local msg = ability:getMsg()
         if msg == 420 then
             ability:setMsg(tpz.msg.basic.DOUBLEUP)

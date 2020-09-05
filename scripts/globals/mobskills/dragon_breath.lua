@@ -14,7 +14,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/utils")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (target:isBehind(mob, 48) == true) then
         return 1
     elseif (mob:AnimationSub() ~= 0) then
@@ -32,7 +32,7 @@ function onMobWeaponSkill(target, mob, skill)
     dmgmod = dmgmod * ((128-math.abs(angle))/128)
     dmgmod = utils.clamp(dmgmod, 50, 1600)
 
-    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,tpz.attackType.BREATH,tpz.damageType.FIRE,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.FIRE, MOBPARAM_IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.FIRE)
     return dmg

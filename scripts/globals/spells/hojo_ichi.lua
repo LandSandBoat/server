@@ -24,7 +24,7 @@ function onSpellCast(caster, target, spell)
     params.bonus = 0
     duration = duration * applyResistance(caster, target, spell, params)
     --Calculates the resist chance from Resist Blind trait
-    if math.random(0,100) >= target:getMod(tpz.mod.SLOWRES) then
+    if math.random(0, 100) >= target:getMod(tpz.mod.SLOWRES) then
         -- Spell succeeds if a 1 or 1/2 resist check is achieved
         if duration >= 150 then
             if target:addStatusEffect(tpz.effect.SLOW, power, 0, duration) then

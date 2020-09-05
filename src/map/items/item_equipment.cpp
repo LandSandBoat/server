@@ -231,16 +231,23 @@ void CItemEquipment::addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod 
 void CItemEquipment::setTrialNumber(uint16 trial)
 {
     if (trial)
+    {
         ref<uint8>(m_extra, 0x01) |= 0x40;
+        setSubType(ITEM_AUGMENTED);
+        ref<uint8>(m_extra, 0x00) |= 0x02;
+        ref<uint8>(m_extra, 0x01) |= 0x03;
+    }
     else
         ref<uint8>(m_extra, 0x01) &= ~0x40;
 
-    ref<uint8>(m_extra, 0x0A) = (uint8)trial;
+    trial &= 0x7FFF;                               // Trial is only 15 bits long
+    ref<uint16>(m_extra, 0x0A) &= ~0x7FFF;
+    ref<uint16>(m_extra, 0x0A) |= (uint16)trial;
 }
 
 uint16 CItemEquipment::getTrialNumber()
 {
-    return ref<uint8>(m_extra, 0x0A);
+    return ref<uint16>(m_extra, 0x0A) & 0x7FFF;
 }
 
 /************************************************************************

@@ -9,11 +9,11 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
     local basedmg = skillLvl / 4
     local params = {}
@@ -43,7 +43,7 @@ function onSpellCast(caster,target,spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
-    local duration = 180
+    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     -- Check for Dia
     local dia = target:getStatusEffect(tpz.effect.DIA)

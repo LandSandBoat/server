@@ -2845,19 +2845,27 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
+    {
         return;
+    }
 
     // Invalid Emote Mode.
     if (emoteMode < EmoteMode::ALL || emoteMode > EmoteMode::MOTION)
+    {
         return;
+    }
 
     const auto extra = data.ref<uint16>(0x0C);
 
     // Attempting to use locked job emote.
     if (EmoteID == Emote::JOB && extra && !(PChar->jobs.unlocked & (1 << (extra - 0x1E))))
+    {
         return;
-
+    }
+    
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionPacket(PChar, TargetID, TargetIndex, EmoteID, emoteMode, extra));
+
+    luautils::OnPlayerEmote(PChar, EmoteID);
 }
 
 /************************************************************************
@@ -5895,11 +5903,20 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
             return;
 
-        uint32 Price1 = (PBazaarItem->getCharPrice() * Quantity);
-        uint32 Price2 = (PChar->loc.zone->GetTax() * Price1) / 10000 + Price1;
+        uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
+        uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)Price2);
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price1);
+        // Validate this player can afford said item
+        if (PCharGil->getQuantity() < PriceWithTax)
+        {
+            // Exploit attempt
+            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
+            return;
+        }
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)PriceWithTax);
+        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
 
         PChar->pushPacket(new CBazaarPurchasePacket(PTarget, true));
 

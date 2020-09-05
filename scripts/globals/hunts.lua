@@ -1242,7 +1242,7 @@ local zone =
       lock |   Scyld Qty    | NM pageId #  | status
                                           (Has distinct values) ]]--
 
-function tpz.hunts.onTrigger(player,npc,event)
+function tpz.hunts.onTrigger(player, npc, event)
     local huntId = player:getCharVar("[hunt]id")
     local huntStatus = player:getCharVar("[hunt]status")
     local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
@@ -1267,15 +1267,15 @@ function tpz.hunts.onTrigger(player,npc,event)
     player:startEvent(1500, scyldBits, zone[player:getZoneID()].huntMenu[1])
 end
 
-function tpz.hunts.onEventUpdate(player,csid,option)
+function tpz.hunts.onEventUpdate(player, csid, option)
     local registryZone = zone[player:getZoneID()]
     local region = registryZone[option]
-    player:updateEvent(0,0,registryZone.huntMenu[option])
+    player:updateEvent(0, 0, registryZone.huntMenu[option])
 
     -- handles region select
     option = bit.band(option, 0xFF)
     if registryZone.huntMenu[option] then
-        player:updateEvent(0,1,registryZone.huntMenu[option])
+        player:updateEvent(0, 1, registryZone.huntMenu[option])
     end
 
     -- gets progress of current hunt (param controls the display of kills needed)
@@ -1283,13 +1283,13 @@ function tpz.hunts.onEventUpdate(player,csid,option)
         player:updateEvent(1)
     end
 
-    -- displays hunt info (kills required,0,0,0,zoneId,huntId,scyld bounty+fee,?)
+    -- displays hunt info (kills required, 0, 0, 0, zoneId, huntId, scyld bounty+fee, ?)
     if region then
         local huntPage = hunts[region.huntId]
         local bountyBit = bit.lshift(huntPage.bounty, 10)
         local feeBit = huntPage.fee
         local scyldParam = bountyBit + feeBit
-        player:updateEvent(1,0,0,0,0,region.params,scyldParam,1)
+        player:updateEvent(1, 0, 0, 0, 0, region.params, scyldParam, 1)
     end
 end
 

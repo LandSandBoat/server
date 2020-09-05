@@ -43,7 +43,7 @@ function doHealingBreath(player, threshold, breath)
         player:getPet():useJobAbility(breath, player)
     else
         local party = player:getParty()
-        for _,member in ipairs(party) do
+        for _, member in ipairs(party) do
             if member:getHPP() < threshold and inBreathRange(member) then
                 player:getPet():useJobAbility(breath, member)
                 break
@@ -63,7 +63,7 @@ function onMobSpawn(mob)
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local party = player:getParty()
-            for _,member in ipairs(party) do
+            for _, member in ipairs(party) do
                 if member:hasStatusEffect(tpz.effect.POISON) then
                     player:getPet():useJobAbility(627, member)
                     break
@@ -149,9 +149,9 @@ function onMobSpawn(mob)
             local diff = math.floor((prev_exp + currentExp)/200) - math.floor(prev_exp/200)
             if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
-                pet:addMod(tpz.mod.ACC,6*diff)
-                pet:addMod(tpz.mod.HPP,6*diff)
-                pet:addMod(tpz.mod.ATTP,5*diff)
+                pet:addMod(tpz.mod.ACC, 6*diff)
+                pet:addMod(tpz.mod.HPP, 6*diff)
+                pet:addMod(tpz.mod.ATTP, 5*diff)
                 pet:setHP(pet:getMaxHP())
                 player:messageBasic(tpz.msg.basic.STATUS_INCREASED, 0, 0, pet)
                 master:addMod(tpz.mod.ATTP, 4 * diff)

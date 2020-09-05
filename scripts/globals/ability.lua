@@ -697,7 +697,7 @@ tpz.specEffect =
 }
 
 function corsairSetup(caster, ability, action, effect, job)
-    local roll = math.random(1,6)
+    local roll = math.random(1, 6)
     caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffectEx(tpz.effect.DOUBLE_UP_CHANCE,
                              tpz.effect.DOUBLE_UP_CHANCE,
@@ -731,7 +731,7 @@ end
 
 function checkForElevenRoll(caster)
     local effects = caster:getStatusEffects()
-    for _,effect in ipairs(effects) do
+    for _, effect in ipairs(effects) do
         if (effect:getType() >= tpz.effect.FIGHTERS_ROLL and
             effect:getType() <= tpz.effect.NATURALISTS_ROLL and
             effect:getSubPower() == 11) then
@@ -761,7 +761,7 @@ function phantombuffMultiple(caster) -- Check for tpz.mod.PHANTOM_ROLL Value and
     return phantombuffMultiplier
 end
 
-function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav)
+function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if (msg == 158 or msg == 188 or msg == 31 or msg == 30) then
@@ -823,7 +823,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
 
     if (dmg > 0) then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob,dmg)
+        target:updateEnmityFromDamage(mob, dmg)
     end
 
     return dmg
