@@ -4,12 +4,11 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/full_speed_ahead")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
------------------------------------
-require("scripts/quests/full_speed_ahead")
 -----------------------------------
 
 function onChocoboDig(player, precheck)
@@ -52,10 +51,10 @@ function onZoneIn(player, prevZone)
         player:setPos(-693.609, -14.583, 173.59, 30);
     end
 
-    if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 901;
+    if quests.rainbow.onZoneIn(player) then
+        cs = 901
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1) then
-        cs = 903;
+        cs = 903
     end
 
     return cs
@@ -73,15 +72,13 @@ end;
 
 function onEventUpdate(player, csid, option)
     if (csid == 901) then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 901) then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    elseif (csid == 903) then
-        if (player:getZPos() >  -331) then
+    if csid == 903 then
+        if player:getZPos() >  -331 then
             player:updateEvent(0, 0, 0, 0, 0, 3)
         else
             player:updateEvent(0, 0, 0, 0, 0, 2)
