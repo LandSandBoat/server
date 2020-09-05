@@ -3,7 +3,7 @@
 --  NPC: Fariel
 -- Type: Standard Info NPC
 -----------------------------------
-require("scripts/globals/pathfind");
+require("scripts/globals/pathfind")
 -----------------------------------
 
 local path =
@@ -35,29 +35,29 @@ local path =
 41.396103, -14.000000, 6.599321,
 41.349224, -14.000000, 5.512603,
 41.340771, -14.000000, 4.424644
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(tpz.path.first(path));
-    onPath(npc);
-end;
+    npc:initNpcAi()
+    npc:setPos(tpz.path.first(path))
+    onPath(npc)
+end
 
 function onPath(npc)
-    tpz.path.patrol(npc, path);
-end;
+    tpz.path.patrol(npc, path)
+end
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(706);
-    npc:wait();
-end;
+function onTrigger(player, npc)
+    player:startEvent(706)
+    npc:wait()
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
-    npc:wait(0);
-end;
+function onEventFinish(player, csid, option, npc)
+    npc:wait(0)
+end

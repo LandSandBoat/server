@@ -7,8 +7,11 @@
 function onTrade(player, npc, trade)
 end
 
+function onTrade(player, npc, trade)
+end
+
 function onTrigger(player, npc)
-    player:startEvent(46);
+    player:startEvent(46)
 end
 
 function onEventUpdate(player, csid, option)

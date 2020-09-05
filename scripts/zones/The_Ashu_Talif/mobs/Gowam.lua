@@ -12,7 +12,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.SILENCERES, 150)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if (mob:hasStatusEffect(tpz.effect.AZURE_LORE))then
         mob:setMobMod(tpz.mobMod.MAGIC_COOL, 0)
     else
@@ -21,7 +21,7 @@ function onMobFight(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-    mob:showText(mob,ID.text.GOWAM_DEATH)
+    mob:showText(mob, ID.text.GOWAM_DEATH)
 end
 
 function onMobDespawn(mob)

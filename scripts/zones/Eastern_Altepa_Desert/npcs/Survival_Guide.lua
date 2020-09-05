@@ -1,4 +1,9 @@
+-----------------------------------
+-- Area: Eastern Altepa Desert
+--  NPC: Survival Guide
+-----------------------------------
 require("scripts/globals/survival_guide")
+-----------------------------------
 
 function onTrigger(player, targetNpc)
     tpz.survivalGuide.onTrigger(player)

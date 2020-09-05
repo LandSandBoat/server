@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCharVar("[TIMER]Lamian_Fang_Key") ~= VanadielDayOfTheYear() then
         if npcUtil.giveItem(player, 2219) then
             player:setCharVar("[TIMER]Lamian_Fang_Key", VanadielDayOfTheYear()) -- Can obtain key once per vanadiel day
@@ -19,8 +19,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

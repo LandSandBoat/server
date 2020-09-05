@@ -7,7 +7,7 @@ tpz.homepoint = tpz.homepoint or {}
 
 local HPs =
 {
-    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x,y,z,rot,zone}
+    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x, y, z, rot, zone}
     [  0] = {group = 1, fee = 1, dest = {  -85.554,       1, -64.554,  45, 230}}, -- Southern San d'Oria #1
     [  1] = {group = 1, fee = 1, dest = {     44.1,       2,   -34.5, 170, 230}}, -- Southern San d'Oria #2
     [  2] = {group = 1, fee = 1, dest = {    140.5,      -2,     121,   0, 230}}, -- Southern San d'Oria #3
@@ -99,7 +99,7 @@ local HPs =
     [ 88] = {group = 0, fee = 2, dest = {      -12,       0,    -288, 192,  34}}, -- Grand Palace of Hu'Xzoi #1
     [ 89] = {group = 0, fee = 2, dest = {     -426,       0,     368, 224,  35}}, -- The Garden of Ru'Hmet #1
     [ 90] = {group = 0, fee = 2, dest = { -540.844,  -4.000,  70.809,  74,  61}}, -- Mount Zhayolm #1
-    [ 91] = {group = 0, fee = 2, dest = {     -303,      -8,     526,   0, 113}}, -- Cape Terrigan #1
+    [ 91] = {group = 0, fee = 2, dest = {     -303,      -8,     526,   0, 113}}, -- Cape Teriggan #1
     [ 92] = {group = 0, fee = 2, dest = {       88,     -15,    -217,   0, 153}}, -- The Boyahda Tree #1
     [ 93] = {group = 0, fee = 2, dest = {      182,      34,     -62, 223, 160}}, -- Den of Rancor #2
     [ 94] = {group = 0, fee = 2, dest = {      102,       0,     269, 191, 204}}, -- Fei'Yin #2
@@ -194,8 +194,13 @@ tpz.homepoint.onTrigger = function(player, csid, index)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
     end
 
+    if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+        -- "Rhapsody in White" key item reduces teleport fee by 80%
+        params = bit.bor(params, 0x20000)
+    end
+
     player:setLocalVar("originIndex", index)
-    local G1,G2,G3,G4 = unpack(player:getTeleport(travelType))
+    local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
 
 end

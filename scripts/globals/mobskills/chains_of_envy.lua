@@ -10,9 +10,9 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local targets = mob:getEnmityList()
-    for i,v in pairs(targets) do
+    for i, v in pairs(targets) do
         if (v.entity:isPC()) then
             local race = v.entity:getRace()
             if (race == tpz.race.MITHRA) and not v.entity:hasKeyItem(tpz.ki.LIGHT_OF_DEM) then

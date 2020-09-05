@@ -2,28 +2,28 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Splintery Chest
 -----------------------------------
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-local ID = require("scripts/zones/RuLude_Gardens/IDs");
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(10133);
-end;
+function onTrigger(player, npc)
+    player:startEvent(10133)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    local ItemID = 0;
+function onEventFinish(player, csid, option)
+    local ItemID = 0
 --------------------
     -- Page 2
 --------------------
     if (option == 0) then -- Pugilists
-        ItemID = 19327;
+        ItemID = 19327
     elseif (option == 4) then -- Peeler
         ItemID = 19332
     elseif (option == 8) then -- Side-sword
@@ -54,7 +54,7 @@ function onEventFinish(player,csid,option)
     -- Page 2
 --------------------
     elseif (option == 64) then -- Barracudas
-        ItemID = 19415;
+        ItemID = 19415
     elseif (option == 68) then -- Fusetto
         ItemID = 19419
     elseif (option == 72) then -- Machaera
@@ -85,43 +85,43 @@ function onEventFinish(player,csid,option)
     -- Page 3
 --------------------
     elseif (option == 128) then -- Dumuzis -1
-        ItemID = 20544;
+        ItemID = 20544
     elseif (option == 132) then -- Khandroma -1
-        ItemID = 20631;
+        ItemID = 20631
     elseif (option == 140) then -- Brunello -1
-        ItemID = 20732;
+        ItemID = 20732
     elseif (option == 144) then -- Xiphias -1
-        ItemID = 20769;
+        ItemID = 20769
     elseif (option == 148) then -- Sacripante -1
-        ItemID = 20821;
+        ItemID = 20821
     elseif (option == 152) then -- Shamash -1
-        ItemID = 20867;
+        ItemID = 20867
     elseif (option == 156) then -- Umiliati -1
-        ItemID = 20912;
+        ItemID = 20912
     elseif (option == 160) then -- Daboya -1
-        ItemID = 20959;
+        ItemID = 20959
     elseif (option == 164) then -- Kasasagi -1
-        ItemID = 21001;
+        ItemID = 21001
     elseif (option == 168) then -- Torigashiranotachi -1
-        ItemID = 21048;
+        ItemID = 21048
     elseif (option == 172) then -- Rose Couverte -1
-        ItemID = 21121;
+        ItemID = 21121
     elseif (option == 176) then -- Circinae -1
-        ItemID = 21234;
+        ItemID = 21234
     elseif (option == 180) then -- Mollfrith -1
-        ItemID = 21283;
+        ItemID = 21283
     end
 
     if (option ~= 1073741824) then
         if (player:getFreeSlotsCount() >= 1 and player:hasItem(ItemID) == false) then
-            player:addItem(ItemID,1);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,ItemID);
+            player:addItem(ItemID, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
         elseif (ItemID == 0) then
             -- How did you get here??
-            player:PrintToPlayer( "ItemID or OptionID related script error!" );
+            player:PrintToPlayer( "ItemID or OptionID related script error!" )
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,ItemID);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
         end
     end
 
-end;
+end

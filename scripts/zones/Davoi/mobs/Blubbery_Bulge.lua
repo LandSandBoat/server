@@ -7,4 +7,4 @@ require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 196)
-end;
+end

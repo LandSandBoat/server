@@ -19,11 +19,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffect = tpz.effect.STONESKIN
     local blueskill = caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
     local power = (blueskill/3) + (caster:getMainLvl()/3) + 10
@@ -43,7 +43,7 @@ function onSpellCast(caster,target,spell)
         caster:delStatusEffect(tpz.effect.DIFFUSION)
     end
 
-    if not target:addStatusEffect(typeEffect,power,0,duration,0,0,2) then
+    if not target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, 2) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
     end
 

@@ -17,5 +17,5 @@ function onItemUse(target)
     target:delStatusEffect(tpz.effect.FLEE)
     target:addStatusEffect(tpz.effect.FLEE, 100, 0, 30)
     target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.FLEE)
-    target:addStatusEffect(tpz.effect.MEDICINE,0,0,900)
+    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 900)
 end

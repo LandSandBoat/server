@@ -7,10 +7,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
 
     if player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) then
@@ -24,10 +24,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 402 then
         player:setCharVar("CHASING_TALES_TRACK_BOOK", 1)
     end

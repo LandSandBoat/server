@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
@@ -67,8 +67,8 @@ function onTrigger(player,npc)
     player:messageSpecial(message, math.floor((2.4 * vMinutes) / 60), math.floor( vMinutes / 60 + 0.5))
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

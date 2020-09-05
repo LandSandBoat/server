@@ -17,7 +17,7 @@ end
 
 function onInitialize(zone)
     local hour = VanadielHour()
-    
+
     if hour >= 6 and hour < 16 then
         GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end
@@ -47,7 +47,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
 function onGameHour(zone)
@@ -73,9 +73,9 @@ function onEventUpdate( player, csid, option)
         lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif csid == 5 then
         if player:getPreviousZone() == tpz.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == tpz.zone.MHAURA then
-            player:updateEvent(0,0,0,0,0,7)
+            player:updateEvent(0, 0, 0, 0, 0, 7)
         elseif player:getPreviousZone() == tpz.zone.MAZE_OF_SHAKHRAMI then
-            player:updateEvent(0,0,0,0,0,6)
+            player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end
 end

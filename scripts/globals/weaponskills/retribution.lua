@@ -28,10 +28,10 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1;
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
-        params.atk100 = 1.5; params.atk200 = 1.5; params.atk300 = 1.5;
+        params.atk100 = 1.5; params.atk200 = 1.5; params.atk300 = 1.5
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

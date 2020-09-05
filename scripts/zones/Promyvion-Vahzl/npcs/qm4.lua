@@ -20,12 +20,12 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
     if csid == 48 then
         player:confirmTrade()
-        npcUtil.giveKeyItem(player,tpz.ki.MAP_OF_PROMYVION_VAHZL)
+        npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_PROMYVION_VAHZL)
     end
 end

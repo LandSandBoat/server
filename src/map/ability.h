@@ -681,7 +681,7 @@ enum ABILITY
     ABILITY_HYSTERIC_ASSAULT   = 954
 };
 
-#define MAX_ABILITY_ID  752
+#define MAX_ABILITY_ID  955
 
 struct Charge_t
 {

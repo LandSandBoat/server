@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local dMND = (caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND))
     local params = {}
     params.diff = nil
@@ -24,7 +24,7 @@ function onSpellCast(caster,target,spell)
         return tpz.effect.SLEEP_II
     end
 
-    if (target:addStatusEffect(tpz.effect.SLEEP_II,2,0,90*resist)) then
+    if (target:addStatusEffect(tpz.effect.SLEEP_II, 2, 0, 90*resist)) then
         spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
     else
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- No effect

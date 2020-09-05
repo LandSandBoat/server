@@ -12,7 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:getPool() ~= 4249) then
         mob:messageBasic(tpz.msg.basic.READIES_WS, 0, 39)
     end
@@ -22,7 +22,7 @@ end
 
 function onMobWeaponSkill(target, mob, skill)
     if (mob:getPool() == 4249) then -- Volker@Throne_Room only
-        target:showText(mob,zones[tpz.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
+        target:showText(mob, zones[tpz.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
     local tp = skill:getTP()
@@ -53,7 +53,7 @@ function onMobWeaponSkill(target, mob, skill)
 
     if (dmg > 0) then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob,dmg)
+        target:updateEnmityFromDamage(mob, dmg)
     end
 
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.ELEMENTAL)

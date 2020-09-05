@@ -13,12 +13,14 @@ require("scripts/globals/npc_util")
 function onInitialize(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     local head = player:getEquipID(tpz.slot.HEAD)
+
     if player:getCharVar("FickblixCS") == 1 then
         cs = 10000
-    elseif player:getQuestStatus(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time()then
+    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+        player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then
         cs = 46
     elseif player:getCharVar("moral") == 4 and head == 15202 then -- Yagudo Headgear
         cs = 47
@@ -26,7 +28,7 @@ function onZoneIn(player,prevZone)
         cs = 51
     end
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-247.998,12.609,-100.008,128)
+        player:setPos(-247.998, 12.609, -100.008, 128)
     end
     return cs
 end
@@ -35,18 +37,18 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 10000 then
-        player:setCharVar("FickblixCS",0)
+        player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
-        player:setCharVar("moral",1)
-        player:addQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+        player:setCharVar("moral", 1)
+        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     elseif csid == 46 and option == 1 then
         player:setCharVar("moraldecline", getConquestTally())
     elseif csid == 47 then
@@ -54,11 +56,9 @@ function onEventFinish(player,csid,option)
         player:setCharVar("moral", 5)
     elseif csid == 51 then
         player:setCharVar("moralrebuy", 1)
-        npcUtil.completeQuest(
-            player,
-            OTHER_AREAS_LOG,
-            tpz.quest.id.otherAreas.A_MORAL_MANIFEST,
-            {item = 748, var = "moral"}
-        )
+        npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST, {
+            item = 748,
+            var = "moral"
+        })
     end
 end

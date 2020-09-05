@@ -57,7 +57,7 @@ tpz.promyvion.initZone = function(zone)
 
     -- register teleporter regions
     for k, v in pairs(ID.npc.MEMORY_STREAMS) do
-        zone:registerRegion(k,v[1],v[2],v[3],v[4],v[5],v[6])
+        zone:registerRegion(k, v[1], v[2], v[3], v[4], v[5], v[6])
     end
 
     -- randomize floor exits
@@ -110,7 +110,7 @@ tpz.promyvion.receptacleOnDeath = function(mob, isKiller)
             randomizeFloorExit(ID, floor)
             local events = ID.npc.MEMORY_STREAMS[streamId][7]
             local event = events[math.random(#events)]
-            stream:setLocalVar("[promy]destination",event)
+            stream:setLocalVar("[promy]destination", event)
             stream:openDoor(180)
         end
     end

@@ -9,7 +9,7 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (target:getCurrentRegion() == tpz.region.TAVNAZIANARCH) then
         return 0
     end

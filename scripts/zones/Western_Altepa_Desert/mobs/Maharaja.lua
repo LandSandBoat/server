@@ -14,6 +14,6 @@ function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob,player,isKiller)
+function onMobDeath(mob, player, isKiller)
     tpz.wsquest.handleWsnmDeath(tpz.wsquest.ground_strike, player)
 end
