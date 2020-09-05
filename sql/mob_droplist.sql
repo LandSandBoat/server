@@ -4596,10 +4596,9 @@ INSERT INTO `mob_droplist` VALUES (907,0,0,1000,928,270);
 INSERT INTO `mob_droplist` VALUES (907,2,0,1000,17316,0);
 INSERT INTO `mob_droplist` VALUES (907,0,0,1000,17316,80);
 INSERT INTO `mob_droplist` VALUES (907,0,0,1000,18139,1000);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,928,400);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,2384,80);
-INSERT INTO `mob_droplist` VALUES (908,2,0,1000,17316,0);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,17316,300);
+INSERT INTO `mob_droplist` VALUES (908,0,0,1000,928,400); -- Friar's Lantern: pinch_of_bomb_ash
+INSERT INTO `mob_droplist` VALUES (908,2,0,1000,17316,0); -- bomb_arm
+INSERT INTO `mob_droplist` VALUES (908,0,0,1000,17316,300); -- bomb_arm
 INSERT INTO `mob_droplist` VALUES (909,0,0,1000,928,270);
 INSERT INTO `mob_droplist` VALUES (910,0,0,1000,847,460);
 INSERT INTO `mob_droplist` VALUES (910,0,0,1000,3088,220);
@@ -16549,6 +16548,8 @@ INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,919,1000);  -- Ancient Goobbue;
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1264,1000); -- Ancient Goobbue; Grt. Boyahda Moss
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue; Tree Cuttings
 INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,16031,150); -- Affinity Earring (COMMON)
+INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,928,400); -- Friar's Lantern (grow): pinch_of_bomb_ash
+INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,2384,80); -- smoke-filled_flask
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
