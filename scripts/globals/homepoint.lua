@@ -99,7 +99,7 @@ local HPs =
     [ 88] = {group = 0, fee = 2, dest = {      -12,       0,    -288, 192,  34}}, -- Grand Palace of Hu'Xzoi #1
     [ 89] = {group = 0, fee = 2, dest = {     -426,       0,     368, 224,  35}}, -- The Garden of Ru'Hmet #1
     [ 90] = {group = 0, fee = 2, dest = { -540.844,  -4.000,  70.809,  74,  61}}, -- Mount Zhayolm #1
-    [ 91] = {group = 0, fee = 2, dest = {     -303,      -8,     526,   0, 113}}, -- Cape Terrigan #1
+    [ 91] = {group = 0, fee = 2, dest = {     -303,      -8,     526,   0, 113}}, -- Cape Teriggan #1
     [ 92] = {group = 0, fee = 2, dest = {       88,     -15,    -217,   0, 153}}, -- The Boyahda Tree #1
     [ 93] = {group = 0, fee = 2, dest = {      182,      34,     -62, 223, 160}}, -- Den of Rancor #2
     [ 94] = {group = 0, fee = 2, dest = {      102,       0,     269, 191, 204}}, -- Fei'Yin #2
@@ -192,6 +192,11 @@ tpz.homepoint.onTrigger = function(player, csid, index)
     if not player:hasTeleport(travelType, hpBit, hpSet) then
         player:addTeleport(travelType, hpBit, hpSet)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
+    end
+
+    if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+        -- "Rhapsody in White" key item reduces teleport fee by 80%
+        params = bit.bor(params, 0x20000)
     end
 
     player:setLocalVar("originIndex", index)

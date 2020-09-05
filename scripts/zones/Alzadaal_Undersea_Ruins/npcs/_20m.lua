@@ -35,7 +35,7 @@ end
 
 function onEventUpdate(player, csid, option, target)
 
-    if not csid == 405 then
+    if csid ~= 405 then
         return
     end
 

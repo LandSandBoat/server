@@ -10,7 +10,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    player:startEvent(50)
+    local rovOptionEnable = 0
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS and player:getCharVar("RhapsodiesStatus") == 2 then
+        rovOptionEnable = 1
+    end
+    player:startEvent(50, 0, 0, 0, 0, 0, 0, 0, rovOptionEnable)
 end
 
 function onEventUpdate(player, csid, option)
@@ -22,7 +26,10 @@ function onEventFinish(player, csid, option)
     local QuestStatus=player:getCharVar("QuestRychardetheChef_var")
 
     if ((option == 2) and (RychardetheChef == QUEST_AVAILABLE) and (tonumber(QuestStatus) == 0)) then
-        player:setCharVar("QuestRychardetheChef_var", 1)  -- first stage of rycharde the chef quest
+        player:setCharVar("QuestRychardetheChef_var", 1);  -- first stage of rycharde the chef quest
+    elseif csid == 50 and option == 1 then
+        player:completeMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:addMission(ROV, tpz.mission.id.rov.SET_FREE)
     end
 
 end

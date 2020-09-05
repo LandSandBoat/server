@@ -816,8 +816,9 @@ tpz.effect =
     DYNAMIS                  = 800,
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
-    -- PLACEHOLDER           = 803, -- Description
-    -- 803-1022
+    FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
+    -- PLACEHOLDER           = 804, -- Description
+    -- 804-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
@@ -1557,6 +1558,7 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
+
     -- SPARE = 958, -- stuff
     -- SPARE = 959, -- stuff
     -- SPARE = 960, -- stuff

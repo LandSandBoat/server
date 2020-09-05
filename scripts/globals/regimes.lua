@@ -14,6 +14,7 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/keyitems")
 ------------------------------------
 
 tpz = tpz or {}
@@ -56,17 +57,17 @@ local regimeInfo = {
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0},
-            [ 21] = {act = "REPATRIATION",    cost = 50},
-            [ 37] = {act = "RERAISE",         cost = 10},
-            [ 53] = {act = "REGEN",           cost = 20},
-            [ 69] = {act = "REFRESH",         cost = 20},
-            [ 85] = {act = "PROTECT",         cost = 15},
-            [101] = {act = "SHELL",           cost = 15},
-            [117] = {act = "DRIED_MEAT",      cost = 50, food = true},
-            [133] = {act = "SALTED_FISH",     cost = 50, food = true},
-            [149] = {act = "HARD_COOKIE",     cost = 50, food = true},
-            [165] = {act = "INSTANT_NOODLES", cost = 50, food = true},
+            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
+            [ 21] = {act = "REPATRIATION",    cost = 50, discounted = 10},
+            [ 37] = {act = "RERAISE",         cost = 10, discounted =  5},
+            [ 53] = {act = "REGEN",           cost = 20, discounted = 10},
+            [ 69] = {act = "REFRESH",         cost = 20, discounted = 10},
+            [ 85] = {act = "PROTECT",         cost = 15, discounted =  5},
+            [101] = {act = "SHELL",           cost = 15, discounted =  5},
+            [117] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
+            [133] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
+            [149] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
+            [165] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
 
             -- TODO: implement elite training
             -- ELITE_INTRO     =  36,
@@ -468,24 +469,24 @@ local regimeInfo = {
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0},
-            [ 20] = {act = "REPATRIATION",    cost = 50},
-            [ 36] = {act = "CIRCUMSPECTION",  cost =  5},
-            [ 52] = {act = "HOMING_INSTINCT", cost = 50},
-            [ 68] = {act = "RERAISE",         cost = 10},
-            [ 84] = {act = "RERAISE_II",      cost = 20},
-            [100] = {act = "RERAISE_III",     cost = 30},
-            [116] = {act = "REGEN",           cost = 20},
-            [132] = {act = "REFRESH",         cost = 20},
-            [148] = {act = "PROTECT",         cost = 15},
-            [164] = {act = "SHELL",           cost = 15},
-            [180] = {act = "HASTE",           cost = 20},
-            [196] = {act = "DRIED_MEAT",      cost = 50, food = true},
-            [212] = {act = "SALTED_FISH",     cost = 50, food = true},
-            [228] = {act = "HARD_COOKIE",     cost = 50, food = true},
-            [244] = {act = "INSTANT_NOODLES", cost = 50, food = true},
-            [260] = {act = "DRIED_AGARICUS",  cost = 50, food = true},
-            [276] = {act = "INSTANT_RICE",    cost = 50, food = true},
+            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
+            [ 20] = {act = "REPATRIATION",    cost = 50, discounted = 10},
+            [ 36] = {act = "CIRCUMSPECTION",  cost =  5, discounted =  5},
+            [ 52] = {act = "HOMING_INSTINCT", cost = 50, discounted = 25},
+            [ 68] = {act = "RERAISE",         cost = 10, discounted =  5},
+            [ 84] = {act = "RERAISE_II",      cost = 20, discounted = 10},
+            [100] = {act = "RERAISE_III",     cost = 30, discounted = 15},
+            [116] = {act = "REGEN",           cost = 20, discounted = 10},
+            [132] = {act = "REFRESH",         cost = 20, discounted = 10},
+            [148] = {act = "PROTECT",         cost = 15, discounted =  5},
+            [164] = {act = "SHELL",           cost = 15, discounted =  5},
+            [180] = {act = "HASTE",           cost = 20, discounted = 10},
+            [196] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
+            [212] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
+            [228] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
+            [244] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
+            [260] = {act = "DRIED_AGARICUS",  cost = 50, discounted = 25, food = true},
+            [276] = {act = "INSTANT_RICE",    cost = 50, discounted = 25, food = true},
 
             -- TODO: implement Trust: Sakura and Trust: Koru-Moru (Alter Ego Extravaganza)
             -- CIPHER_SAKURA   = 292,
@@ -999,15 +1000,20 @@ tpz.regime.bookOnTrigger = function(player, regimeType)
 
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
+        -- arg4 reduces prices of field suppord
         local pages = table.getn(info.page)
         local arg2 = 0
+        local arg4 = 0
         for i = 1, 10 do
             if i > pages then
                 arg2 = arg2 + 2^i
             end
         end
+        if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+            arg4 = 1
+        end
 
-        player:startEvent(info.event, 0, arg2, 0, 0, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
+        player:startEvent(info.event, 0, arg2, 0, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
     else
         player:PrintToPlayer("Disabled.")
     end
@@ -1054,6 +1060,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     local msgOffset = zones[zoneId].text.REGIME_REGISTERED
     local tabs = player:getCurrency("valor_point")
     local regimeRepeat = bit.band(option, 0x80000000)
+    local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
 
@@ -1069,8 +1076,15 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
       tpz.hunts.clearHuntVars(player)
     end
 
+    local cost = opt.cost
+
+    -- charges player differently if they hold RoV KeyItem
+    if cost and hasKI then
+        cost = opt.discounted
+    end
+
     -- check player has enough tabs
-    if opt.cost and opt.cost > tabs then
+    if cost and cost > tabs then
         player:showText(player, msgOffset + 1032) -- You do not have enough tabs.
         return
     end
@@ -1084,7 +1098,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     -- purchase a service
     if opt.act then
         local act = opt.act
-        player:delCurrency("valor_point", opt.cost)
+        player:delCurrency("valor_point", cost)
 
         if act == "CANCEL_REGIME" then
             tpz.regime.clearRegimeVars(player)
@@ -1213,8 +1227,13 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no Fields credit unless fov_allow_alliance is 1 in map.conf
-    if regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 and not player:checkFovAllianceAllowed() == 1 then
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if FOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+        return
+    end
+
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if GOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 

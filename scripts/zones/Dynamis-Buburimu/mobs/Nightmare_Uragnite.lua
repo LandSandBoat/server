@@ -2,7 +2,10 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Nightmare Uragnite
 -----------------------------------
-mixins = {require("scripts/mixins/dynamis_dreamland")}
+mixins = {
+    require("scripts/mixins/dynamis_dreamland"),
+    require("scripts/mixins/families/uragnite")
+}
 -----------------------------------
 
 function onMobSpawn(mob)
