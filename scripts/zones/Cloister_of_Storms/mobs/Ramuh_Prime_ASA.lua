@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Storms
 --  Mob: Ramuh Prime
--- Involved in Quest: Trial by Lightning, Trial Size Trial by Lightning
 -- Involved in Mission: ASA-4 Sugar Coated Directive
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -11,15 +10,13 @@ require("scripts/globals/status")
 
 function onMobSpawn(mob)
     -- ASA-4: Avatar is Unkillable Until Its Used Astral Flow At Least 5 times At Specified Intervals
-    if mob:getBattlefieldID() == 452 then
-        mob:setLocalVar("astralflows", 0)
-        mob:setUnkillable(true)
-    end
+    mob:setLocalVar("astralflows", 0)
+    mob:setUnkillable(true)
 end
 
 function onMobFight(mob, target)
     -- ASA-4: Astral Flow Behavior - Guaranteed to Use At Least 5 times before killable, at specified intervals.
-    if mob:getBattlefieldID() == 452 and mob:getCurrentAction() == tpz.act.ATTACK then
+    if mob:getCurrentAction() == tpz.act.ATTACK then
         local astralFlows = mob:getLocalVar("astralflows")
         if (astralFlows == 0 and mob:getHPP() <= 80)
         or (astralFlows == 1 and mob:getHPP() <= 60)

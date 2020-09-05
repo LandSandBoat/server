@@ -86,20 +86,10 @@ function onTrigger(player, npc)
         local blueRibbonProg = player:getCharVar("BlueRibbonBluesProg")
         if (player:hasItem(12521)) then
             player:startEvent(362)--362
-        elseif (blueRibbonProg == 2 and needZone == false) then
-            local timerDay = player:getCharVar("BlueRibbonBluesTimer_Day")
-            local currentDay = VanadielDayOfTheYear()
-
-            if (player:getCharVar("BlueRibbonBluesTimer_Year") < VanadielYear()) then
-                player:startEvent(360) --  go to the grave  360
-            elseif (timerDay + 1 == VanadielDayOfTheYear() and player:getCharVar("BlueRibbonBluesTimer_Hour") <= VanadielHour()) then
-                player:startEvent(360) --  go to the grave  360
-            elseif (timerDay + 2 <=  VanadielDayOfTheYear()) then
-                player:startEvent(360) --  go to the grave  360
-            else
-                player:startEvent(359) -- Thanks for the ribbon 359
-            end
-
+        elseif blueRibbonProg == 2 and needZone == false then
+            player:startEvent(360) --  go to the grave  360
+        elseif blueRibbonProg == 2 then
+            player:startEvent(359) -- Thanks for the ribbon 359
         elseif (blueRibbonProg == 3) then
             if (player:hasItem(13569)) then
                 player:startEvent(361, 0, 13569) -- remidner, go to the grave
@@ -168,9 +158,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 358 or csid == 365) then
         player:tradeComplete()
         player:setCharVar("BlueRibbonBluesProg", 2)
-        player:setCharVar("BlueRibbonBluesTimer_Hour", VanadielHour())
-        player:setCharVar("BlueRibbonBluesTimer_Year", VanadielYear())
-        player:setCharVar("BlueRibbonBluesTimer_Day", VanadielDayOfTheYear())
         player:needToZone(true)
         if (csid == 358) then
             player:addGil(GIL_RATE*3600)
@@ -178,9 +165,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 360) then
         if (player:getFreeSlotsCount() >= 1) then
             player:setCharVar("BlueRibbonBluesProg", 3)
-            player:setCharVar("BlueRibbonBluesTimer_Hour", 0)
-            player:setCharVar("BlueRibbonBluesTimer_Year", 0)
-            player:setCharVar("BlueRibbonBluesTimer_Day", 0)
             player:addItem(13569)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13569)
         else

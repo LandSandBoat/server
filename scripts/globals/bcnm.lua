@@ -597,8 +597,28 @@ function checkReqs(player, npc, bfid, registrant)
 
     -- requirements to enter a battlefield already registered by a party member
     local enterReqs =
-    {
-        [ 897] = function() return ( player:hasKeyItem(tpz.ki.WHISPER_OF_THE_WYRMKING)                                                                      ) end, -- Quest: The Wyrmking Descends
+    {   
+        [ 641] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Follow the White Rabbit
+        [ 642] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: When Hell Freezes Over
+        [ 643] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Brothers
+        [ 644] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Holy Cow
+        [ 673] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Like the Wind
+        [ 674] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
+        [ 675] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Shell We Dance?
+        [ 676] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Totentanz
+        [ 705] = function() return ( player:hasKeyItem(tpz.ki.ASTRAL_COVENANT)                                                                              ) end, -- ENM: Test Your Mite
+        [ 738] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_2716_OPERATING_LEVER)                                                                   ) end, -- ENM: Bionic Bug
+        [ 739] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Pulling Your Strings
+        [ 740] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Automaton Assault
+        [ 769] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ABANDONMENT)                                                                        ) end, -- ENM: Simulant
+        [ 801] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ANTIPATHY)                                                                          ) end, -- ENM: You Are What You Eat
+        [ 833] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ANIMUS)                                                                             ) end, -- ENM: Playing Host
+        [ 865] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ACRIMONY)                                                                           ) end, -- ENM: Pulling the Plug
+        [ 897] = function() return ( player:hasKeyItem(tpz.ki.WHISPER_OF_THE_WYRMKING)                                                                      ) end, -- Quest: The Wyrmking Descends 
+        [ 962] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Fire in the Sky
+        [ 963] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bad Seed
+        [ 964] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bugard in the Clouds
+        [ 965] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
         [ 928] = function() return ( player:hasCompletedMission(COP, mi.cop.ANCIENT_VOWS) or (cop == mi.cop.ANCIENT_VOWS and copStat >= 2)                  ) end, -- Quest: Ouryu Cometh
         [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- NW Apollyon
         [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- SW Apollyon

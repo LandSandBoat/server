@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -32,7 +32,7 @@ function onZoneIn(player, prevZone)
         player:setPos(539.901, 3.379, -580.218, 126)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 2
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 4
@@ -46,7 +46,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 2 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 4 then
         if player:getPreviousZone() == tpz.zone.THE_BOYAHDA_TREE then
             player:updateEvent(0, 0, 0, 0, 0, 7)
@@ -57,7 +57,4 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 2 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end
