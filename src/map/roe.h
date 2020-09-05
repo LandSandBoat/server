@@ -44,6 +44,7 @@ enum ROE_EVENT
     ROE_MOBKILL = 1,
     ROE_WSKILL_USE = 2,
     ROE_LOOTITEM = 3,
+    ROE_SYNTHSUCCESS = 4,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
@@ -100,6 +101,7 @@ namespace roeutils
 
     bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload);
     bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagram payload);
+    bool event(ROE_EVENT eventID, CCharEntity* PChar);
 
     void    SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus);
     bool    GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID);

@@ -181,6 +181,11 @@ namespace roeutils
         return event(eventID, PChar, RoeDatagramList{ data });
     }
 
+    bool event(ROE_EVENT eventID, CCharEntity* PChar)  // shorthand for no-datagram calls.
+    {
+        return event(eventID, PChar, RoeDatagramList{});
+    }
+
     void SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus)
     {
         uint8 page = recordID / 8;

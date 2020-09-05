@@ -11,6 +11,8 @@ tpz.roe.triggers =
     mobkill = 1,
     wsuse = 2,
     lootitem = 3,
+    synthsuccess = 4,
+    
 }
 local triggers = tpz.roe.triggers
 
@@ -193,7 +195,17 @@ tpz.roe.records =
     },
 
   --------------------------------------------
-  -- Combat (Wide Area) -> Spoils I --
+  -- Crafting: General                      --
+  --------------------------------------------
+
+    [57  ] = { -- Total Successful Synthesis Attempts
+        trigger = triggers.synthsuccess,
+        goal = 30,
+        reward = { sparks = 100, xp = 500, unity = 10, repeatable = true },
+    },
+
+  --------------------------------------------
+  -- Combat (Wide Area) -> Spoils I         --
   --------------------------------------------
 
     [71  ] = { -- Spoils - Fire Crystals
