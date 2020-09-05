@@ -50,6 +50,7 @@ public:
     int32 getType(lua_State*);
     int32 getBattlefieldByInitiator(lua_State*);
     int32 battlefieldsFull(lua_State*);
+    int32 getWeather(lua_State*);
 };
 
 #endif
