@@ -1,11 +1,8 @@
 name: build
 
 on:
-  push:
-    branches:
-      - release
-      - canary
   pull_request:
+  push:
     branches:
       - release
       - canary
