@@ -53,12 +53,16 @@ public:
 
     int32 getLocationID(lua_State*);        // get the location id (container id)
     int32 getSlotID(lua_State*);            // get the slot id
+    int32 getTrialNumber(lua_State*);
     int32 getWornItem(lua_State*);          // check if the item has been used
+    int32 getBasePrice(lua_State*);         // get the base sell price
 
     int32 isType(lua_State*);               // check the item type
     int32 isSubType(lua_State*);            // check the item's sub type
 
     int32 getName(lua_State*);              // get the item's name
+    int32 getILvl(lua_State*);              // get the item's ilvl
+    int32 getReqLvl(lua_State*);            // get the item's level
 
     int32 getMod(lua_State*);               // get the power of a mod
     int32 addMod(lua_State*);               // add mod to item (or add to a mod already applied on item)
