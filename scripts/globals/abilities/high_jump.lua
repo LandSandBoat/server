@@ -11,11 +11,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability,action)
+function onUseAbility(player, target, ability, action)
     local params = {}
     params.numHits = 1
     local ftp = 1

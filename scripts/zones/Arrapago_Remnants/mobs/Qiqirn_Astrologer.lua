@@ -54,7 +54,7 @@ function onMobFight(mob, target)
     local prog = instance:getProgress()
 
     if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
-        isBusy = true; -- is set to true if mob is in any stage of using a mobskill or casting a spell
+        isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     end
 
     if mob:isFollowingPath() == false then

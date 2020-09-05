@@ -4,7 +4,7 @@
 --
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     local regen = effect:getSubPower()
     local helix = effect:getPower()
 
@@ -38,10 +38,10 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local regen = effect:getSubPower()
     local helix = effect:getPower()
 

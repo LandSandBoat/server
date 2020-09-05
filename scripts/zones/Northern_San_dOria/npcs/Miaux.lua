@@ -4,72 +4,72 @@
 -- Type: Quest Giver
 -- !pos -169.127 2.999 158.677 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/status");
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local aCraftsmansWork = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK);
-    local Quotas_Status = player:getCharVar("ChasingQuotas_Progress");
+    local aCraftsmansWork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     if (player:getMainJob() == tpz.job.DRG and player:getMainLvl() >= AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_drgaf1_quest_already") == 0) then
-            player:startEvent(73);
+            player:startEvent(73)
         else -- If player has seen the big cut scene, give them a smaller one.
-            player:startEvent(71);
+            player:startEvent(71)
         end
     elseif (aCraftsmansWork == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ALTEPA_POLISHING_STONE) == false) then
-        player:startEvent(69);
+        player:startEvent(69)
     elseif (aCraftsmansWork == QUEST_ACCEPTED) then
-            player:startEvent(70);
+            player:startEvent(70)
     elseif (Quotas_Status == 2) then
-        player:startEvent(67); -- I found this earring.
+        player:startEvent(67) -- I found this earring.
     elseif (Quotas_Status == 3 or Quotas_Status == 4) then
-        player:startEvent(68); -- Post-earring, move along.
+        player:startEvent(68) -- Post-earring, move along.
     elseif (Quotas_Status >= 5) then
-        player:startEvent(66); -- The earring was helpful?
+        player:startEvent(66) -- The earring was helpful?
     else
-        player:startEvent(11);
+        player:startEvent(11)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
-        player:setCharVar("has_seen_drgaf1_quest_already",1);
+        player:setCharVar("has_seen_drgaf1_quest_already", 1)
     elseif ((csid == 73 or csid == 71) and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK);
-        player:setCharVar("has_seen_drgaf1_quest_already",0);
-        player:setCharVar("aCraftsmanWork",1);
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+        player:setCharVar("has_seen_drgaf1_quest_already", 0)
+        player:setCharVar("aCraftsmanWork", 1)
     elseif (csid == 70) then -- This is only if player has Altepa Polishing Stone
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,16887);-- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16887)-- Peregrine (DRG AF1)
         else
-            player:setCharVar("aCraftsmanWork",0);
-            player:delKeyItem(tpz.ki.ALTEPA_POLISHING_STONE);
-            player:addItem(16887);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,16887); -- Peregrine (DRG AF1)
-            player:addFame(SANDORIA,20);
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK);
+            player:setCharVar("aCraftsmanWork", 0)
+            player:delKeyItem(tpz.ki.ALTEPA_POLISHING_STONE)
+            player:addItem(16887)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16887) -- Peregrine (DRG AF1)
+            player:addFame(SANDORIA, 20)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif (csid == 67) then
-        player:addKeyItem(tpz.ki.SHINY_EARRING);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SHINY_EARRING);
-        player:setCharVar("ChasingQuotas_Progress",3);
+        player:addKeyItem(tpz.ki.SHINY_EARRING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHINY_EARRING)
+        player:setCharVar("ChasingQuotas_Progress", 3)
     end
 
-end;
+end
 -- 11 Miaux : "<Sigh> Why must all craftsmen be so uptight?"
 -- 73 Miaux : "I wish to have a breastplate repaired... Y/N dialog
 -- 71 Miaux : "I...I hesitate to impose upon you again, but would it be possible for you to find

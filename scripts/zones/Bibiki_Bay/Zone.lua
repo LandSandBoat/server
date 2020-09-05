@@ -18,7 +18,7 @@ function onInitialize(zone)
     zone:registerRegion(2, -410, -10, -385, -371, 10, -343) -- Manaclipper while docked at Purgonorgo Isle
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -36,22 +36,22 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
     tpz.manaclipper.aboard(player, region:GetRegionID(), true)
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
     tpz.manaclipper.aboard(player, region:GetRegionID(), false)
 end
 
-function onTransportEvent(player,transport)
+function onTransportEvent(player, transport)
     tpz.manaclipper.onTransportEvent(player, transport)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 12 then
         player:startEvent(10) -- arrive at Sunset Docks CS
     elseif csid == 13 then

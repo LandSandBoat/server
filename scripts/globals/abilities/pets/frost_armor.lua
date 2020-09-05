@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill, summoner)
@@ -17,7 +17,7 @@ function onPetAbility(target, pet, skill, summoner)
     local duration = 180 + bonusTime
 
     target:delStatusEffect(tpz.effect.ICE_SPIKES)
-    target:addStatusEffect(tpz.effect.ICE_SPIKES,15,0,duration)
+    target:addStatusEffect(tpz.effect.ICE_SPIKES, 15, 0, duration)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     return tpz.effect.ICE_SPIKES
 end

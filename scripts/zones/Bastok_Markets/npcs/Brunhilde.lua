@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         12448,   154, 3,    -- Bronze Cap

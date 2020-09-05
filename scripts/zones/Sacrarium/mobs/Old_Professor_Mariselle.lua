@@ -2,13 +2,13 @@
 -- Area: Sacrarium
 --  Mob: Old Professor Mariselle
 -----------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/missions");
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
-    local OP_Mariselle = mob:getID();
+    local OP_Mariselle = mob:getID()
 
     -- Summons a pupil every 30 seconds.
     -- TODO: Casting animation for summons. When he spawns them isn't retail accurate.
@@ -25,16 +25,16 @@ function onMobFight(mob,target)
                 m:spawn()
                 m:updateEnmity(target)
                 m:setPos(X + 1, Y, Z + 1) -- Set pupil x and z position +1 from Mariselle
-                return;
+                return
             end
         end
     end
 
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
 
-    local OP_Mariselle = mob:getID();
+    local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
         local m = GetMobByID(i)
@@ -44,18 +44,18 @@ function onMobDeath(mob, player, isKiller)
     end
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)==false) then
-        player:setCharVar("PromathiaStatus",4);
+        player:setCharVar("PromathiaStatus", 4)
     end
 
     -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7));
-    SetServerVariable("Old_Prof_Spawn_Location", rand);
+    local rand = math.random((2), (7))
+    SetServerVariable("Old_Prof_Spawn_Location", rand)
 
-end;
+end
 
 function onMobDespawn( mob )
 
-    local OP_Mariselle = mob:getID();
+    local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
         local m = GetMobByID(i)
@@ -65,7 +65,7 @@ function onMobDespawn( mob )
     end
 
     -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7));
-    SetServerVariable("Old_Prof_Spawn_Location", rand);
+    local rand = math.random((2), (7))
+    SetServerVariable("Old_Prof_Spawn_Location", rand)
 
-end;
+end

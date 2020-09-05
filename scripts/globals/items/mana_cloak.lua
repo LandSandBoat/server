@@ -13,7 +13,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local mpHeal = math.random(20,35)
+    local mpHeal = math.random(20, 35)
     local dif = target:getMaxMP() - target:getMP()
     if (mpHeal > dif) then
         mpHeal = dif

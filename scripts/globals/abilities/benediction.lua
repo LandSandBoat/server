@@ -6,11 +6,11 @@
 -- Duration: Instant
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
     local removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.MAX_HP_DOWN, tpz.effect.MAX_MP_DOWN, tpz.effect.PARALYSIS, tpz.effect.POISON,
                         tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE, tpz.effect.WEIGHT, tpz.effect.BIND,
@@ -34,7 +34,7 @@ function onUseAbility(player,target,ability)
         heal = maxHeal
     end
 
-    player:updateEnmityFromCure(target,heal)
+    player:updateEnmityFromCure(target, heal)
     target:addHP(heal)
     target:wakeUp()
 

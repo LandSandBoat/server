@@ -24,10 +24,10 @@ local RUN_COTR = {
   REWARD_PENDING = 3
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- CHILDREN OF THE RUNE
     local cotrQuestStatus = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
@@ -51,7 +51,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if csid == 26 then
         if option == 1 then
             -- Half the players MP and HP unless the HP is really low, to avoid
@@ -68,7 +68,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
        if option == 0 then

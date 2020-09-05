@@ -3,7 +3,7 @@
 --   NM: Lachrymater
 -----------------------------------
 
-function onMobSpawn(mob,target)
+function onMobSpawn(mob, target)
     local DayofWeek = VanadielDayElement()
 
     mob:setSpellList(188 + DayofWeek)

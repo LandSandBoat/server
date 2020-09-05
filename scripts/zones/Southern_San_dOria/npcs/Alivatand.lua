@@ -4,10 +4,10 @@
 -- Type: Guildworker's Union Representative
 -- !pos -179.458 -1 15.857 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/crafting")
+require("scripts/globals/keyitems")
+-----------------------------------
 
 local keyitems = {
     [0] = {
@@ -30,7 +30,7 @@ local keyitems = {
         rank = 9,
         cost = 20000
     }
-};
+}
 
 local items = {
     [0] = {
@@ -73,36 +73,26 @@ local items = {
         rank = 9,
         cost = 15000
     }
-};
+}
 
-function onTrade(player,npc,trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE);
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount();
-        local MagicFlyer = trade:hasItemQty(532,1);
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
-        end
-    else
-        unionRepresentativeTrade(player, npc, trade, 691, 5);
-    end
-end;
+function onTrade(player, npc, trade)
+    unionRepresentativeTrade(player, npc, trade, 691, 5)
+end
 
-function onTrigger(player,npc)
-    unionRepresentativeTrigger(player, 5, 690, "guild_leathercraft", keyitems);
-end;
+function onTrigger(player, npc)
+    unionRepresentativeTrigger(player, 5, 690, "guild_leathercraft", keyitems)
+end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
     if (csid == 690) then
-        unionRepresentativeTriggerFinish(player, option, target, 5, "guild_leathercraft", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 5, "guild_leathercraft", keyitems, items)
     end
-end;
+end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
     if (csid == 690) then
-        unionRepresentativeTriggerFinish(player, option, target, 5, "guild_leathercraft", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 5, "guild_leathercraft", keyitems, items)
     elseif (csid == 691) then
-        player:messageSpecial(ID.text.GP_OBTAINED, option);
+        player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
-end;
+end

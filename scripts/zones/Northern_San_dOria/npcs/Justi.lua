@@ -4,17 +4,13 @@
 -- Conquest depending furniture seller
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    end
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         32, 170726, 1,    -- Dresser
@@ -24,16 +20,16 @@ function onTrigger(player,npc)
         1657,   92, 3,    -- Bundling Twine
         93,    518, 3,    -- Water Cask
         57,  15881, 3,    -- Cupboard
-        24, 129168, 3,    --Oak Table
-        46,   8376, 3,    --Armor Box
+        24, 129168, 3,    -- Oak Table
+        46,   8376, 3,    -- Armor Box
     }
 
     player:showText(npc, ID.text.JUSTI_SHOP_DIALOG)
     tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

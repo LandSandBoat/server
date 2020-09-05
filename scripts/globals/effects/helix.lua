@@ -8,11 +8,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
 
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
     local dmg = utils.stoneskin(target, effect:getPower())
 
     if (dmg > 0) then
@@ -24,6 +24,6 @@ function onEffectTick(target,effect)
     end
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
 
 end

@@ -7,16 +7,16 @@
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    player:startEvent(57 + (player:getFameLevel(4) - 1));
-end;
+    player:startEvent(57 + (player:getFameLevel(4) - 1))
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

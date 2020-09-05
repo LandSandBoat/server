@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/helm")
@@ -40,7 +40,7 @@ function onZoneIn( player, prevZone)
         player:setPos(116.825, 6.613, 100, 140)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 11
     end
 
@@ -52,12 +52,9 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 11 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 11 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end

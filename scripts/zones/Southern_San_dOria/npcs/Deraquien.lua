@@ -4,42 +4,34 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -98 -2 31 230
 -------------------------------------
-require("scripts/globals/quests");
-local ID = require("scripts/zones/Southern_San_dOria/IDs");
+require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
+end
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-            player:messageSpecial(ID.text.FLYER_REFUSED);
-        end
-    end
+function onTrigger(player, npc)
 
-end;
+    local WildcatSandy = player:getCharVar("WildcatSandy")
 
-function onTrigger(player,npc)
-
-    local WildcatSandy = player:getCharVar("WildcatSandy");
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,4) == false) then
-        player:startEvent(811);
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 4) == false) then
+        player:startEvent(811)
     else
-        player:startEvent(18);
+        player:startEvent(18)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 811) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",4,true);
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 4, true)
     end
 
-end;
+end
 
 ---------other CS
 --    player:startEvent(654) -- nothing to report
