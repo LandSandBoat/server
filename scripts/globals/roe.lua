@@ -12,7 +12,8 @@ tpz.roe.triggers =
     wsuse = 2,
     lootitem = 3,
     synthsuccess = 4,
-    
+    dmgtaken = 5,
+    dmgdealt = 6,
 }
 local triggers = tpz.roe.triggers
 
@@ -37,6 +38,14 @@ end
 
 checks.mobxp = function(self, player, params)  -- Mob yields xp
      return (params.mob and player:checkKillCredit(params.mob)) and true or false
+end
+
+checks.dmgmin = function(self, player, params)  -- Mob yields xp
+     return (params.dmg and params.dmg >= self.reqs.dmgmin) and true or false
+end
+
+checks.dmgmax = function(self, player, params)  -- Mob yields xp
+     return (params.dmg and params.dmg <= self.reqs.dmgmax) and true or false
 end
 
 checks.zone = function(self, player, params)  -- Player in Zone
@@ -186,6 +195,159 @@ tpz.roe.records =
         goal = 750,
         reqs = { mobxp = true },
         reward = { sparks = 5000, xp = 10000 , item = { 6183 } },
+    },
+
+    [16  ] = { -- Deal 500+ Damage
+        trigger = triggers.dmgdealt,
+        goal = 200,
+        reqs = { dmgmin = 500 },
+        reward = { sparks = 1000, xp = 5000, unity = 100, repeatable = true},
+    },
+
+    [17  ] = { -- Deal 1000+ Damage
+        trigger = triggers.dmgdealt,
+        goal = 150,
+        reqs = { dmgmin = 1000 },
+        reward = { sparks = 1000, xp = 5000 },
+    },
+
+    [18  ] = { -- Deal 1500+ Damage
+        trigger = triggers.dmgdealt,
+        goal = 100,
+        reqs = { dmgmin = 1500 },
+        reward = { sparks = 1000, xp = 5000 },
+    },
+
+    [698 ] = { -- Deal 2000+ Damage
+        trigger = triggers.dmgdealt,
+        goal = 100,
+        reqs = { dmgmin = 2000 },
+        reward = { sparks = 2000, xp = 5000, item = { {8711, 6} } },
+    },
+
+    [19  ] = { -- Deal 10-20 Damage
+        trigger = triggers.dmgdealt,
+        goal = 10,
+        reqs = { dmgmin = 10, dmgmax = 20 },
+        reward = { sparks = 300, xp = 2500 },
+    },
+
+    [20  ] = { -- Deal 110-120 Damage
+        trigger = triggers.dmgdealt,
+        goal = 10,
+        reqs = { dmgmin = 110, dmgmax = 120 },
+        reward = { sparks = 300, xp = 1500 },
+    },
+
+    [21  ] = { -- Deal 310-320 Damage
+        trigger = triggers.dmgdealt,
+        goal = 10,
+        reqs = { dmgmin = 310, dmgmax = 320 },
+        reward = { sparks = 300, xp = 1500 },
+    },
+
+    [22  ] = { -- Deal 510-520 Damage
+        trigger = triggers.dmgdealt,
+        goal = 10,
+        reqs = { dmgmin = 510, dmgmax = 520 },
+        reward = { sparks = 300, xp = 1500 },
+    },
+
+    [23  ] = { -- Deal 1110-1120 Damage
+        trigger = triggers.dmgdealt,
+        goal = 10,
+        reqs = { dmgmin = 1110, dmgmax = 1120 },
+        reward = { sparks = 300, xp = 1500, item = { {8711, 2} } },
+    },
+
+    [29  ] = { -- Total Damage I
+        trigger = triggers.dmgdealt,
+        goal = 100000,
+        increment = 0,
+        reward = { sparks = 1000, xp = 5000 , item = { 6181 } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(29)
+                    player:setEminenceProgress(29, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
+    },
+
+    [30  ] = { -- Total Damage II
+        trigger = triggers.dmgdealt,
+        goal = 200000,
+        increment = 0,
+        reward = { sparks = 3000, xp = 7000 , item = { 6184 } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(30)
+                    player:setEminenceProgress(30, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
+    },
+
+    [696 ] = { -- Total Damage III
+        trigger = triggers.dmgdealt,
+        goal = 300000,
+        increment = 0,
+        reward = { sparks = 3000, xp = 7000 , item = { 6184 } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(696)
+                    player:setEminenceProgress(696, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
+    },
+
+    [33  ] = { -- Total Damage Taken I
+        trigger = triggers.dmgtaken,
+        goal = 10000,
+        increment = 0,
+        reward = { sparks = 1000, xp = 1000, item = { {8711, 2} } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(33)
+                    player:setEminenceProgress(33, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
+    },
+
+    [34  ] = { -- Total Damage Taken II
+        trigger = triggers.dmgtaken,
+        goal = 20000,
+        increment = 0,
+        reward = { sparks = 3000, xp = 5000, item = { {8711, 4} } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(34)
+                    player:setEminenceProgress(34, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
+    },
+
+    [697 ] = { -- Total Damage Taken III
+        trigger = triggers.dmgtaken,
+        goal = 30000,
+        increment = 0,
+        reward = { sparks = 3000, xp = 5000, item = { {8711, 6} } },
+        check = function(self, player, params)
+                if params.dmg and params.dmg > 0 then
+                    local progress = player:getEminenceProgress(697)
+                    player:setEminenceProgress(697, progress + params.dmg)
+                    return true
+                end
+                return false
+            end
     },
 
     [45  ] = { -- Weapon Skills 1

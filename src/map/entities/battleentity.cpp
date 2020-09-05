@@ -37,6 +37,7 @@
 #include "../ai/states/inactive_state.h"
 #include "../ai/states/weaponskill_state.h"
 #include "../ai/states/despawn_state.h"
+#include "../roe.h"
 #include "../attack.h"
 #include "../attackround.h"
 #include "../weapon_skill.h"
@@ -519,6 +520,13 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
 {
     PLastAttacker = attacker;
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
+
+    //RoE Damage Taken Trigger
+    if(this->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+    else if(PLastAttacker && PLastAttacker->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+
     return addHP(-amount);
 }
 
@@ -1624,6 +1632,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true);
+
                 if (actionTarget.param < 0)
                 {
                     actionTarget.param = -(actionTarget.param);
