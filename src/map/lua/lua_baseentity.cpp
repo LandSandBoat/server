@@ -2462,10 +2462,12 @@ inline int32 CLuaBaseEntity::getAngle(lua_State *L)
 }
 
 /************************************************************************
-*  Function: getZone()
+*  Function: getZone(isZoning)
 *  Purpose : Returns a pointer to a zone object?
 *  Example : if (player:getZone() == mob:getZone()) then
 *  Notes   : To Do: I don't think some scripts are using this correctly...
+*  Optional isZoning parameter will return player's destination zone if
+*  they are in the process of zoning (for use in onZoneIn)
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getZone(lua_State *L)
@@ -2479,6 +2481,17 @@ inline int32 CLuaBaseEntity::getZone(lua_State *L)
         lua_gettable(L, -2);
         lua_insert(L, -2);
         lua_pushlightuserdata(L, (void*)m_PBaseEntity->loc.zone);
+        lua_pcall(L, 2, 1, 0);
+    }
+    else if (m_PBaseEntity->loc.destination && !lua_isnil(L, 1) && lua_isboolean(L, 1) && (bool)lua_toboolean(L, 1) == true)
+    {
+        auto PZone = zoneutils::GetZone(m_PBaseEntity->loc.destination);
+
+        lua_getglobal(L, CLuaZone::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)PZone);
         lua_pcall(L, 2, 1, 0);
     }
     else
