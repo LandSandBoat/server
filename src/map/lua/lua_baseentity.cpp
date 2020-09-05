@@ -2463,10 +2463,12 @@ inline int32 CLuaBaseEntity::getAngle(lua_State *L)
 }
 
 /************************************************************************
-*  Function: getZone()
+*  Function: getZone(isZoning)
 *  Purpose : Returns a pointer to a zone object?
 *  Example : if (player:getZone() == mob:getZone()) then
 *  Notes   : To Do: I don't think some scripts are using this correctly...
+*  Optional isZoning parameter will return player's destination zone if
+*  they are in the process of zoning (for use in onZoneIn)
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::getZone(lua_State *L)
@@ -2480,6 +2482,17 @@ inline int32 CLuaBaseEntity::getZone(lua_State *L)
         lua_gettable(L, -2);
         lua_insert(L, -2);
         lua_pushlightuserdata(L, (void*)m_PBaseEntity->loc.zone);
+        lua_pcall(L, 2, 1, 0);
+    }
+    else if (m_PBaseEntity->loc.destination && !lua_isnil(L, 1) && lua_isboolean(L, 1) && (bool)lua_toboolean(L, 1) == true)
+    {
+        auto PZone = zoneutils::GetZone(m_PBaseEntity->loc.destination);
+
+        lua_getglobal(L, CLuaZone::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)PZone);
         lua_pcall(L, 2, 1, 0);
     }
     else
@@ -3361,6 +3374,46 @@ inline int32 CLuaBaseEntity::getEquipID(lua_State *L)
         }
     }
     lua_pushinteger(L, 0);
+    return 1;
+}
+
+/************************************************************************
+*  Function: getEquippedItem()
+*  Purpose : Returns the Item for a given slot
+*  Example : player:getEquippedItem(SLOT_MAIN)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getEquippedItem(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        uint8 SLOT = (uint8)lua_tointeger(L, 1);
+        TPZ_DEBUG_BREAK_IF(SLOT > 15);
+
+        auto PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto slotItem = PChar->getEquip((SLOTTYPE)SLOT);
+        if(slotItem)
+        {
+            lua_getglobal(L, CLuaItem::className);
+            lua_pushstring(L, "new");
+            lua_gettable(L, -2);
+            lua_insert(L, -2);
+            lua_pushlightuserdata(L, (void*)slotItem);
+
+            if (lua_pcall(L, 2, 1, 0))
+            {
+                return 0;
+            }
+            return 1;
+        }
+    }
+    lua_pushnil(L);
     return 1;
 }
 
@@ -14397,7 +14450,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     // Items
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquipID),
-
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquippedItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,delItem),
