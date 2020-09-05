@@ -30,4 +30,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.ARCHMAGE_ASSASSIN)
-end;
+end

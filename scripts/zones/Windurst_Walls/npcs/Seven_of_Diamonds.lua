@@ -7,10 +7,10 @@
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:hasKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) then
         player:startEvent(390)
     else
@@ -18,8 +18,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

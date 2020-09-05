@@ -9,9 +9,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (trade:hasItemQty(13315,1) and trade:getItemCount() == 1) then -- Trade gold earring (during Rng AF3 quest)
+    if (trade:hasItemQty(13315, 1) and trade:getItemCount() == 1) then -- Trade gold earring (during Rng AF3 quest)
         local UnbridledPassionCS = player:getCharVar("unbridledPassion")
         if (UnbridledPassionCS == 2) then
             player:startEvent(10011)
@@ -20,7 +20,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local FireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
     local UnbridledPassionCS = player:getCharVar("unbridledPassion")
@@ -42,19 +42,19 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10007) then
         player:startEvent(10032)
-        player:setCharVar("fireAndBrimstone",2)
+        player:setCharVar("fireAndBrimstone", 2)
     elseif (csid == 10009) then
-        player:setCharVar("unbridledPassion",2)
+        player:setCharVar("unbridledPassion", 2)
     elseif (csid == 10011) then
         player:addKeyItem(tpz.ki.KOHS_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.KOHS_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KOHS_LETTER)
         player:tradeComplete()
-        player:setCharVar("unbridledPassion",3)
+        player:setCharVar("unbridledPassion", 3)
     end
-end;
+end

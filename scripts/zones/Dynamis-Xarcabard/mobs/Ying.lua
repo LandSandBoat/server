@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobInitialize(mob,target)
+function onMobInitialize(mob, target)
 end
 
 function onMobSpawn(mob)
@@ -14,13 +14,13 @@ function onMobSpawn(mob)
         dynaLord:setMod(tpz.mod.UDMGMAGIC, -100)
         dynaLord:setMod(tpz.mod.UDMGBREATH, -100)
         dynaLord:setLocalVar("magImmune", 0)
-        mob:setSpawn(-364,-35.661,17.254) -- Reset Ying's spawn point to initial spot.
+        mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
     else
-        mob:setSpawn(-414.282,-44,20.427) -- Spawned by DL, reset to DL's spawn point.
+        mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local YangID = 17330184
     local YangToD = mob:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
@@ -48,4 +48,4 @@ function onMobDespawn(mob)
             dynaLord:setLocalVar("magImmune", 1)
         end
     end
-end;
+end

@@ -6,17 +6,17 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 2) then
-        if (trade:hasItemQty(1160,1) and trade:getItemCount() == 1) then -- Frag Rock
+        if (trade:hasItemQty(1160, 1) and trade:getItemCount() == 1) then -- Frag Rock
             player:startEvent(99) -- Bastok Mission 6-2
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local ZilartMission = player:getCurrentMission(ZILART)
 
@@ -48,14 +48,14 @@ end
 -- 98  99 mission bastok
 -- 12 parle de kuzotz ? parle de bijoux aussi
 -- 10 parle de zitah
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 99) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus",3)
+        player:setCharVar("MissionStatus", 3)
     end
 
-end;
+end

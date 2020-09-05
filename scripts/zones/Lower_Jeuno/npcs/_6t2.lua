@@ -11,14 +11,14 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local ANewDawn = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
-    local ScatteredIntoShadow = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+    local ScatteredIntoShadow = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
 
     local SaveMySon = player:getCharVar("SaveMySon_Event")
 
@@ -74,10 +74,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 164 and option == 0) then
         player:addQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
@@ -88,26 +88,26 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13110)
             player:addGil(GIL_RATE*2100)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
-            player:setCharVar("SaveMySon_Event",2)
+            player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
-            player:addFame(JEUNO,30)
-            player:completeQuest(JEUNO,tpz.quest.id.jeuno.SAVE_MY_SON)
+            player:addFame(JEUNO, 30)
+            player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13110)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13110)
         end
     elseif (csid == 132) then
-        player:setCharVar("SaveMySon_Event",0)
+        player:setCharVar("SaveMySon_Event", 0)
     elseif (csid == 5) then
-        player:setCharVar("ANewDawn_Event",1)
+        player:setCharVar("ANewDawn_Event", 1)
         if (option == 1) then
             player:addQuest(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
-            player:setCharVar("ANewDawn_Event",2)
+            player:setCharVar("ANewDawn_Event", 2)
         end
     elseif (csid == 4 and option == 1) then
         player:addQuest(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
-        player:setCharVar("ANewDawn_Event",2)
+        player:setCharVar("ANewDawn_Event", 2)
     elseif (csid == 0) then
-        player:setCharVar("ANewDawn_Event",0)
+        player:setCharVar("ANewDawn_Event", 0)
     end
 
-end;
+end

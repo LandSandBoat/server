@@ -16,7 +16,7 @@ function attemptPickLock(player, npc, correctSideOfDoor)
         if (GetMobByID(gargoyle):isSpawned()) then
             player:messageSpecial(ID.text.DOOR_LOCKED)
         else
-            if (math.random(1,2) == 1) then
+            if (math.random(1, 2) == 1) then
                 npc:messageName(ID.text.DISCOVER_DISARM_FAIL, player)
                 SpawnMob(gargoyle):updateClaim(player)
             else
@@ -41,7 +41,7 @@ function attemptOpenDoor(player, npc, correctSideOfDoor)
             if (GetMobByID(gargoyle):isSpawned()) then
                 player:messageSpecial(ID.text.DOOR_LOCKED)
             else
-                if (math.random(1,10) <= 9) then -- Spawn Gargoyle
+                if (math.random(1, 10) <= 9) then -- Spawn Gargoyle
                     npc:messageName(ID.text.TRAP_ACTIVATED, player)
                     SpawnMob(gargoyle):updateClaim(player)
                 else

@@ -10,11 +10,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local ToBee = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+function onTrigger(player, npc)
+    local ToBee = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
     if (ToBeeOrNotStatus == 10 and ToBee == QUEST_AVAILABLE) then
@@ -37,26 +37,26 @@ end
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
 --  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 67) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4370) -- Cannot give Honey because player Inventory is full
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4370) -- Cannot give Honey because player Inventory is full
         else
-            player:addQuest(WINDURST,tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+            player:addQuest(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
             player:addItem(4370)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4370) -- Gives player Honey x1
         end
     elseif (csid == 80) then -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,4156) -- Cannot give Mulsum because player Inventory is full
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4156) -- Cannot give Mulsum because player Inventory is full
         else
-            player:setCharVar("ToBeeOrNot_var",0)
-            player:addItem(4156,3) -- Mulsum x3
-            player:messageSpecial(ID.text.ITEMS_OBTAINED, 4156,3)
+            player:setCharVar("ToBeeOrNot_var", 0)
+            player:addItem(4156, 3) -- Mulsum x3
+            player:messageSpecial(ID.text.ITEMS_OBTAINED, 4156, 3)
             player:needToZone(true)
         end
     end
-end;
+end

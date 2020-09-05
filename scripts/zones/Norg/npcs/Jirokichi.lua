@@ -10,12 +10,12 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.TENSHODO_MEMBERS_CARD)) then
-        if (player:sendGuild(60423,9,23,7)) then
+        if (player:sendGuild(60423, 9, 23, 7)) then
             player:showText(npc, ID.text.JIROKICHI_SHOP_DIALOG)
         end
     else
@@ -23,8 +23,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -7,4 +7,4 @@ mixins = {require("scripts/mixins/families/maat")}
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

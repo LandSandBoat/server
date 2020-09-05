@@ -7,19 +7,19 @@
 require("scripts/globals/conquest")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local new_nation = tpz.nation.BASTOK
     local old_nation = player:getNation()
     local rank = getNationRank(new_nation)
 
     if (old_nation == new_nation) then
-        player:startEvent(362,0,0,0,old_nation)
+        player:startEvent(362, 0, 0, 0, old_nation)
     elseif (player:getCurrentMission(old_nation) ~= tpz.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0) then
-        player:startEvent(361,0,0,0,new_nation)
+        player:startEvent(361, 0, 0, 0, new_nation)
     elseif (old_nation ~= new_nation) then
         local has_gil = 0
         local cost = 0
@@ -36,15 +36,15 @@ function onTrigger(player,npc)
             has_gil = 1
         end
 
-        player:startEvent(360,0,1,player:getRank(),new_nation,has_gil,cost)
+        player:startEvent(360, 0, 1, player:getRank(), new_nation, has_gil, cost)
     end
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 360 and option == 1) then
         local new_nation = tpz.nation.BASTOK
@@ -64,4 +64,4 @@ function onEventFinish(player,csid,option)
         player:setRankPoints(0)
     end
 
-end;
+end

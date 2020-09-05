@@ -7,10 +7,10 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
     Gil = player:getGil()
@@ -27,10 +27,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 37) then
         Z = player:getZPos()
@@ -40,4 +40,4 @@ function onEventFinish(player,csid,option)
         end
     end
 
-end;
+end

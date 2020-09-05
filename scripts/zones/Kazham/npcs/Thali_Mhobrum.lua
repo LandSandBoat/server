@@ -28,10 +28,10 @@ function onPath(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCharVar("BathedInScent") == 1) then
         player:startEvent(163) -- scent from Blue Rafflesias
         npc:wait()
@@ -41,9 +41,9 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
     npc:wait(0)
-end;
+end

@@ -12,9 +12,9 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    local Black = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.BLACKMAIL)
+    local Black = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     local questState = player:getCharVar("BlackMailQuest")
 
     if (Black == QUEST_ACCEPTED and questState == 2 or Black == QUEST_COMPLETED) then
@@ -22,12 +22,12 @@ function onTrade(player,npc,trade)
         local carta = trade:hasItemQty(530, 1)
 
         if (carta == true and count == 1) then
-            player:startEvent(648,0,530) --648
+            player:startEvent(648, 0, 530) --648
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- "Blackmail" quest status
     local blackMail = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
@@ -43,11 +43,11 @@ function onTrigger(player,npc)
         player:startEvent(645)  -- 645 recap, take envelope!
 
     elseif (blackMail == QUEST_ACCEPTED and questState == 1) then
-        player:startEvent(646,0,530) --646  after giving letter to H, needs param
+        player:startEvent(646, 0, 530) --646  after giving letter to H, needs param
 
 
     elseif (blackMail == QUEST_ACCEPTED and questState == 2) then
-        player:startEvent(647,0,530) --647 recap of 646
+        player:startEvent(647, 0, 530) --647 recap of 646
 
     else
         if (player:needToZone() ==true) then
@@ -60,30 +60,30 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 643) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
         player:addKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SUSPICIOUS_ENVELOPE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUSPICIOUS_ENVELOPE)
     elseif (csid == 646 and option == 1) then
-        player:setCharVar("BlackMailQuest",2)
+        player:setCharVar("BlackMailQuest", 2)
     elseif (csid == 648) then
         player:tradeComplete()
         player:addGil(GIL_RATE*900)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*900)
-        if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
-            player:addFame(SANDORIA,30)
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.BLACKMAIL)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
+        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
+            player:addFame(SANDORIA, 30)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
         else
-            player:addFame(SANDORIA,5)
+            player:addFame(SANDORIA, 5)
         end
     elseif (csid == 40 and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     end
 
-end;
+end

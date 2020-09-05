@@ -11,17 +11,17 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
         local ATWTTB_Paid_Hujette = player:getMaskBit(player:getCharVar("ATWTTB_Payments"), 1)
-        if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas( trade, {{"gil",3000}} )) then
+        if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas( trade, {{"gil", 3000}} )) then
             player:startEvent(5070)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:showText(npc, ID.text.HUJETTE_SHOP_TEXT)
     local stock =
     {
@@ -34,10 +34,10 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5070) then
         player:confirmTrade()
@@ -46,4 +46,4 @@ function onEventFinish(player,csid,option)
             npcUtil.giveKeyItem(player, tpz.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end
-end;
+end

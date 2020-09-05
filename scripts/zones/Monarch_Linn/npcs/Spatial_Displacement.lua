@@ -10,14 +10,14 @@ require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (TradeBCNM(player,npc,trade)) then
+    if (TradeBCNM(player, npc, trade)) then
         return
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local npcID = npc:getID()
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -32,25 +32,25 @@ function onTrigger(player,npc)
         player:startEvent(32003)  -- leave the battlefield
     elseif (X > -25.684 and X < -13.684) then -- post-battlefield exit
         player:startEvent(7)
-    elseif (EventTriggerBCNM(player,npc)) then  -- enter the battlefield
+    elseif (EventTriggerBCNM(player, npc)) then  -- enter the battlefield
         return 1
     else
         player:messageSpecial(ID.text.GLOWING_MIST) -- needs confirmation
     end
 end
 
-function onEventUpdate(player,csid,option,extras)
-    EventUpdateBCNM(player,csid,option,extras)
+function onEventUpdate(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 11 and option == 1) then
-        player:setPos(-508.582,-8.471,-387.670,92,30) -- To Riv Site A (Retail confirmed)
+        player:setPos(-508.582, -8.471, -387.670, 92, 30) -- To Riv Site A (Retail confirmed)
     elseif (csid == 10 and option == 1) then
-        player:setPos(-533.690,-20.5,503.656,224,29) -- To Riv Site B (Retail confirmed)
+        player:setPos(-533.690, -20.5, 503.656, 224, 29) -- To Riv Site B (Retail confirmed)
     elseif (csid == 7 and option ==1) then
-        player:setPos(-538.526,-29.5,359.219,255,25) -- back to Misareaux Coast (Retail confirmed)
-    elseif (EventFinishBCNM(player,csid,option)) then
+        player:setPos(-538.526, -29.5, 359.219, 255, 25) -- back to Misareaux Coast (Retail confirmed)
+    elseif (EventFinishBCNM(player, csid, option)) then
         return
     end
-end;
+end

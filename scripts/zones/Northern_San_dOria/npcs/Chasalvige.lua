@@ -10,10 +10,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 3) then
         player:startEvent(38) --COP event
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_chasalvigne") == 0) then
@@ -25,15 +25,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 38) then
-        player:setCharVar("EMERALD_WATERS_Status",4)
+        player:setCharVar("EMERALD_WATERS_Status", 4)
     elseif (csid == 761) then
-        player:setCharVar("COP_optional_CS_chasalvigne",1)
+        player:setCharVar("COP_optional_CS_chasalvigne", 1)
     elseif (csid == 762) then
-        player:setCharVar("COP_Ulmia_s_Path",3)
+        player:setCharVar("COP_Ulmia_s_Path", 3)
     end
-end;
+end

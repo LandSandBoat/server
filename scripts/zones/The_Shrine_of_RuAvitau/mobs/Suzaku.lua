@@ -22,4 +22,4 @@ function onMonsterMagicPrepare(mob, target)
         return 235 -- burn
     end
 
-end;
+end

@@ -7,10 +7,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(180)
@@ -25,12 +25,12 @@ end
 -- player:startEvent(180)
 -- player:startEvent(181)
 --1  25  176  181  180
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 180) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     end
-end;
+end

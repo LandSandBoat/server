@@ -11,7 +11,7 @@ function onMobSpawn(mob)
     -- adjust drops based on number of HQ Aern Organs traded to QM
     local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
     local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
-    if (math.random(0,1) > 0) then
+    if (math.random(0, 1) > 0) then
         SetDropRate(4398, 1851, chance * 10) -- Deed Of Placidity
         SetDropRate(4398, 1901, 0)
     else
@@ -23,11 +23,11 @@ function onMobSpawn(mob)
     mob:AnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- The mob gains a huge boost when it 2hours to attack speed and attack.
     -- It forces the minions to 2hour as well. Wiki says 50% but all videos show 60%.
     if (mob:getLocalVar("BracerMode") == 0) then
-        if (mob:getHPP() < math.random(50,60)) then
+        if (mob:getHPP() < math.random(50, 60)) then
             -- Go into bracer mode
             mob:setLocalVar("BracerMode", 1)
             mob:AnimationSub(2)
@@ -56,10 +56,10 @@ function onMobDespawn(mob)
     DespawnMob(mob:getID()+2)
 
     local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
-    if (math.random(0,1) == 1) then
-        qm:setPos(380,0,540,0) -- G-7
+    if (math.random(0, 1) == 1) then
+        qm:setPos(380, 0, 540, 0) -- G-7
     else
-        qm:setPos(460,0,540,0) -- I-7
+        qm:setPos(460, 0, 540, 0) -- I-7
     end
     qm:updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME)
-end;
+end

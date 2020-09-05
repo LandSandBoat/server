@@ -8,12 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local X = player:getXPos(); Z = player:getZPos()
-    local TheSandCharm = player:getQuestStatus(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.THE_SAND_CHARM)
+    local TheSandCharm = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
 
     if (Z <= 29 or Z >= 38 or X <= 16 or X >= 32) then
         if (player:getFameLevel(WINDURST) >= 4 and TheSandCharm == QUEST_AVAILABLE) then
@@ -30,16 +30,16 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 125) then
-        player:addQuest(OTHER_AREAS_LOG,tpz.quest.id.otherAreas.THE_SAND_CHARM)
-        player:setCharVar("theSandCharmVar",1)
+        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+        player:setCharVar("theSandCharmVar", 1)
     elseif (csid == 124) then
-        player:setCharVar("theSandCharmVar",3)
+        player:setCharVar("theSandCharmVar", 3)
     elseif (csid == 128) then
-        player:setCharVar("SmallDialogByBlandine",0)
+        player:setCharVar("SmallDialogByBlandine", 0)
     end
-end;
+end

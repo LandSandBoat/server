@@ -12,21 +12,21 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(555,1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
+function onTrade(player, npc, trade)
+    if (trade:hasItemQty(555, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Zone1
         if (a == 0 or (a ~= 1 and a ~= 3 and a ~= 5 and a ~= 9 and a ~= 17 and a ~= 7 and a ~= 25 and a ~= 11 and
            a ~= 13 and a ~= 19 and a ~= 21 and a ~= 15 and a ~= 23 and a ~= 27 and a ~= 29 and a ~= 31)) then
-            player:startEvent(160,10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
+            player:startEvent(160, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(16522,1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(16522, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish quest "Northward"
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local northward = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NORTHWARD)
 
     if (player:getFameLevel(JEUNO) >= 4 and northward == QUEST_AVAILABLE) then
@@ -41,10 +41,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 160) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 1)
@@ -55,9 +55,9 @@ function onEventFinish(player,csid,option)
         player:addTitle(tpz.title.ENVOY_TO_THE_NORTH)
         if (player:hasKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL) == false) then
             player:addKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAP_OF_CASTLE_ZVAHL)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_CASTLE_ZVAHL)
         end
         player:addFame(JEUNO, 30)
         player:tradeComplete()
     end
-end;
+end

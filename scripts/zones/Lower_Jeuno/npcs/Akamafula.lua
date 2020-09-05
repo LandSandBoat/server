@@ -10,12 +10,12 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.TENSHODO_MEMBERS_CARD)) then
-        if (player:sendGuild(60417,1,23,1)) then
+        if (player:sendGuild(60417, 1, 23, 1)) then
             player:showText(npc, ID.text.AKAMAFULA_SHOP_DIALOG)
         end
     else
@@ -23,8 +23,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -12,16 +12,16 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local TheWonderMagicSet = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    local CooksPride = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.COOK_S_PRIDE)
-    local TheKindCardian = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+function onTrigger(player, npc)
+    local TheWonderMagicSet = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local CooksPride = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+    local TheKindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,13) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno, 13) == false) then
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then
@@ -48,29 +48,29 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if ((csid == 189 or csid == 188) and option == 0) then
-        player:addQuest(JEUNO,tpz.quest.id.jeuno.COOK_S_PRIDE)
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     elseif (csid == 189 and option == 1) then
-        player:setCharVar("CooksPrideVar",1)
+        player:setCharVar("CooksPrideVar", 1)
     elseif (csid == 187) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13446)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13446)
         else
             player:addTitle(tpz.title.MERCY_ERRAND_RUNNER)
             player:delKeyItem(tpz.ki.SUPER_SOUP_POT)
-            player:setCharVar("CooksPrideVar",0)
+            player:setCharVar("CooksPrideVar", 0)
             player:addGil(GIL_RATE*3000)
-            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*3000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
             player:addItem(13446)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13446) -- Mythril Ring
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13446) -- Mythril Ring
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO,tpz.quest.id.jeuno.COOK_S_PRIDE)
+            player:completeQuest(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
         end
     elseif (csid == 10053) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"),"WildcatJeuno",13,true)
+        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 13, true)
     end
-end;
+end

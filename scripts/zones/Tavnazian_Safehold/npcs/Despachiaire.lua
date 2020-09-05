@@ -6,10 +6,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentCOPMission = player:getCurrentMission(COP)
     local LouverancePathStatut = player:getCharVar("COP_Louverance_s_Path")
 
@@ -55,17 +55,17 @@ end
 --Despachiaire     579 chat
 --Despachiaire     617 XX
 --Despachiaire     618 XX
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 102 or csid == 108) then
-        player:setCharVar("PromathiaStatus",2)
+        player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 117) then
-        player:setCharVar("COP_optional_CS_Despachaire",1)
+        player:setCharVar("COP_optional_CS_Despachaire", 1)
     elseif (csid == 118) then
-        player:setCharVar("COP_Louverance_s_Path",1)
+        player:setCharVar("COP_Louverance_s_Path", 1)
     end
 
-end;
+end

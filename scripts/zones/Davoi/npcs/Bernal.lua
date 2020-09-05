@@ -8,20 +8,20 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(30)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 42 and option == 0) then
         player:messageSpecial(ID.text.POWER_OF_THE_ORB_ALLOW_PASS)
     end
 
-end;
+end

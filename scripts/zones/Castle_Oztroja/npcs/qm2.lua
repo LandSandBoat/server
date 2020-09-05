@@ -10,12 +10,12 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.YAGUDO_CREST) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.YAGUDO_CREST) == false) then
         player:addKeyItem(tpz.ki.YAGUDO_CREST)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.YAGUDO_CREST)
     else
@@ -24,8 +24,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -11,18 +11,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local guildRank = player:getSkillRank(tpz.skill.BONECRAFT)
     local stock = tpz.shop.generalGuildStock[guild.bonecraft]
     tpz.shop.generalGuild(player, stock, guildRank)
-    player:showText(npc,ID.text.RETTO_MARUTTO_DIALOG)
+    player:showText(npc, ID.text.RETTO_MARUTTO_DIALOG)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

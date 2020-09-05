@@ -4,7 +4,7 @@
 -- maxBabies set by NM lua
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local momma = mob:getID()
     local fam = 1
     for i = momma + 1, momma + mob:getLocalVar("maxBabies") do
@@ -24,7 +24,7 @@ function onMobWeaponSkill(target, mob, skill)
         local baby = GetMobByID(babyID)
         if not baby:isSpawned() then
             SpawnMob(babyID):updateEnmity(mob:getTarget())
-            baby:setPos(pos.x,pos.y,pos.z)
+            baby:setPos(pos.x, pos.y, pos.z)
             break
         end
     end

@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/East_Ronfaure/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -22,7 +22,7 @@ function onTrigger(player,npc)
             player:startEvent(20)
             player:delKeyItem(tpz.ki.SCROLL_OF_TREASURE)
             player:addGil(GIL_RATE*3000)
-            player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*3000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
         else
             player:startEvent(5)
         end
@@ -44,8 +44,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

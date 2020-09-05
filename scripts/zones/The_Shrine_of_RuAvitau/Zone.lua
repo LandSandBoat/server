@@ -40,7 +40,7 @@ function onInitialize(zone)
 
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
    local cs = -1
    local xPos = player:getXPos()
    local yPos = player:getYPos()
@@ -63,7 +63,7 @@ function onZoneIn(player,prevZone)
     end
 
     if ((xPos == 0) and (yPos == 0) and (zPos == 0)) then
-        player:setPos(-3.38,46.326,60,122)
+        player:setPos(-3.38, 46.326, 60, 122)
     end
 
    return cs
@@ -73,7 +73,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -129,17 +129,17 @@ function onRegionEnter(player,region)
 
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 51) then
-        player:completeMission(ZILART,tpz.mission.id.zilart.THE_SEALED_SHRINE)
-        player:addMission(ZILART,tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
-        player:setCharVar("ZilartStatus",0)
+        player:completeMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
+        player:addMission(ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
+        player:setCharVar("ZilartStatus", 0)
     end
-end;
+end

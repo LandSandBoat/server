@@ -14,26 +14,26 @@ require("scripts/globals/status")
 
 function onInitialize(zone)
     -- Weight Door System (RegionID, X, Radius, Z)
-    zone:registerRegion(1, -15, 5, -60, 0,0,0)
-    zone:registerRegion(3, 15, 5,-180, 0,0,0)
-    zone:registerRegion(5, -580, 5,-420, 0,0,0)
-    zone:registerRegion(7, -700, 5,-420, 0,0,0)
-    zone:registerRegion(9, -700, 5,-380, 0,0,0)
-    zone:registerRegion(11, -780, 5,-460, 0,0,0)
-    zone:registerRegion(13, -820, 5,-380, 0,0,0)
-    zone:registerRegion(15, -260, 5, 740, 0,0,0)
-    zone:registerRegion(17, -340, 5, 660, 0,0,0)
-    zone:registerRegion(19, -420, 5, 740, 0,0,0)
-    zone:registerRegion(21, -340, 5, 820, 0,0,0)
-    zone:registerRegion(23, -409, 5, 800, 0,0,0)
-    zone:registerRegion(25, -400, 5, 670, 0,0,0)
+    zone:registerRegion(1, -15, 5, -60, 0, 0, 0)
+    zone:registerRegion(3, 15, 5, -180, 0, 0, 0)
+    zone:registerRegion(5, -580, 5, -420, 0, 0, 0)
+    zone:registerRegion(7, -700, 5, -420, 0, 0, 0)
+    zone:registerRegion(9, -700, 5, -380, 0, 0, 0)
+    zone:registerRegion(11, -780, 5, -460, 0, 0, 0)
+    zone:registerRegion(13, -820, 5, -380, 0, 0, 0)
+    zone:registerRegion(15, -260, 5, 740, 0, 0, 0)
+    zone:registerRegion(17, -340, 5, 660, 0, 0, 0)
+    zone:registerRegion(19, -420, 5, 740, 0, 0, 0)
+    zone:registerRegion(21, -340, 5, 820, 0, 0, 0)
+    zone:registerRegion(23, -409, 5, 800, 0, 0, 0)
+    zone:registerRegion(25, -400, 5, 670, 0, 0, 0)
 
     -- Hole in the Sand
-    zone:registerRegion(30,495,-9,-817,497,-7,-815) -- E-11 (Map 2)
-    zone:registerRegion(31,815,-9,-744,817,-7,-742) -- M-9 (Map 2)
-    zone:registerRegion(32,215,6,-17,217,8,-15)     -- K-6 (Map 3)
-    zone:registerRegion(33,-297,6,415,-295,8,417)   -- E-7 (Map 6)
-    zone:registerRegion(34,-137,6,-177,-135,8,-175) -- G-7 (Map 8)
+    zone:registerRegion(30, 495, -9, -817, 497, -7, -815) -- E-11 (Map 2)
+    zone:registerRegion(31, 815, -9, -744, 817, -7, -742) -- M-9 (Map 2)
+    zone:registerRegion(32, 215, 6, -17, 217, 8, -15)     -- K-6 (Map 3)
+    zone:registerRegion(33, -297, 6, 415, -295, 8, 417)   -- E-7 (Map 6)
+    zone:registerRegion(34, -137, 6, -177, -135, 8, -175) -- G-7 (Map 8)
 
     tpz.treasure.initZone(zone)
 
@@ -44,10 +44,10 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-980.193,14.913,-282.863,60)
+        player:setPos(-980.193, 14.913, -282.863, 60)
     end
     return cs
 end
@@ -63,7 +63,7 @@ function getWeight(player)
     end
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
     local RegionID = region:GetRegionID()
 
     -- holes in the sand
@@ -71,19 +71,19 @@ function onRegionEnter(player,region)
         switch (RegionID): caseof
         {
             [30] = function (x)
-                player:setPos(496,-6,-816)
+                player:setPos(496, -6, -816)
             end,
             [31] = function (x)
-                player:setPos(816,-6,-743)
+                player:setPos(816, -6, -743)
             end,
             [32] = function (x)
-                player:setPos(216,9,-16)
+                player:setPos(216, 9, -16)
             end,
             [33] = function (x)
-                player:setPos(-296,9,416)
+                player:setPos(-296, 9, 416)
             end,
             [34] = function (x)
-                player:setPos(-136,9,-176)
+                player:setPos(-136, 9, -176)
             end,
         }
 
@@ -103,7 +103,7 @@ function onRegionEnter(player,region)
     end
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
     local RegionID = region:GetRegionID()
 
     if (RegionID < 30) then
@@ -120,8 +120,8 @@ function onRegionLeave(player,region)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

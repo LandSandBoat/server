@@ -9,11 +9,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+function onTrigger(player, npc)
+    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
 
     if (player:getMainLvl() >= ADVANCED_JOB_LEVEL and NoStringsAttached == QUEST_AVAILABLE) then
@@ -25,13 +25,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 434) then
-        player:setCharVar("NoStringsAttachedProgress",1)
-        player:addQuest(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+        player:setCharVar("NoStringsAttachedProgress", 1)
+        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     end
-end;
+end

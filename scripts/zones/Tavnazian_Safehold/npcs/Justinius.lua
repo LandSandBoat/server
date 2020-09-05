@@ -8,10 +8,10 @@ require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.DISTANT_BELIEFS and player:getCharVar("PromathiaStatus") == 3) then
         player:startEvent(113)
@@ -25,22 +25,22 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 113) then
-        player:setCharVar("PromathiaStatus",0)
-        player:completeMission(COP,tpz.mission.id.cop.DISTANT_BELIEFS)
-        player:addMission(COP,tpz.mission.id.cop.AN_ETERNAL_MELODY)
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(COP, tpz.mission.id.cop.DISTANT_BELIEFS)
+        player:addMission(COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
     elseif (csid == 109) then
-        player:setCharVar("PromathiaStatus",3)
+        player:setCharVar("PromathiaStatus", 3)
     elseif (csid == 110) then
-        player:setCharVar("PromathiaStatus",0)
-        player:completeMission(COP,tpz.mission.id.cop.THE_SAVAGE)
-        player:addMission(COP,tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(COP, tpz.mission.id.cop.THE_SAVAGE)
+        player:addMission(COP, tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
         player:addTitle(tpz.title.NAGMOLADAS_UNDERLING)
     end
 
-end;
+end

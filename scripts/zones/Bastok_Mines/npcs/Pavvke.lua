@@ -8,11 +8,11 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
 count = trade:getItemCount()
-SilverTag = trade:hasItemQty(13116,1)
-Fallen = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.FALLEN_COMRADES)
+SilverTag = trade:hasItemQty(13116, 1)
+Fallen = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 
     if (Fallen == 1 and SilverTag == true and count == 1) then
         player:tradeComplete()
@@ -24,9 +24,9 @@ Fallen = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.FALLEN_COMRADES)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-Fallen = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.FALLEN_COMRADES)
+Fallen = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 pLevel = player:getMainLvl(player)
 pFame = player:getFameLevel(BASTOK)
 
@@ -38,24 +38,24 @@ pFame = player:getFameLevel(BASTOK)
 
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid)
-    -- printf("RESULT2: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 90) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.FALLEN_COMRADES)
+        player:addQuest(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
     elseif (csid == 91) then
-        player:completeQuest(BASTOK,tpz.quest.id.bastok.FALLEN_COMRADES)
-        player:addFame(BASTOK,120)
+        player:completeQuest(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+        player:addFame(BASTOK, 120)
         player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*550)
     elseif (csid == 92) then
-        player:addFame(BASTOK,8)
+        player:addFame(BASTOK, 8)
         player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*550)
     end
 
-end;
+end

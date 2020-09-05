@@ -9,10 +9,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentday = tonumber(os.date("%j"))
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status")==6 ) then
         player:startEvent(23)
@@ -25,15 +25,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 23) then
-        player:setCharVar("EMERALD_WATERS_Status",7)  --end 3-3A: San d'Oria Route: "Emerald Waters"
+        player:setCharVar("EMERALD_WATERS_Status", 7)  --end 3-3A: San d'Oria Route: "Emerald Waters"
     elseif (csid == 22) then
-        player:setCharVar("COP_Ulmia_s_Path",1)
+        player:setCharVar("COP_Ulmia_s_Path", 1)
     elseif (csid == 757) then
-        player:setCharVar("COP_louverance_story",1)
+        player:setCharVar("COP_louverance_story", 1)
     end
-end;
+end

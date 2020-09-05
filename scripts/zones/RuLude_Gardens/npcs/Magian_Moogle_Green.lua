@@ -10,7 +10,7 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/magiantrials")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if (trade:getItemCount() == 1) then
         local ItemID = trade:getItemId()
         local TrialInfo = getEmoteTrialInfo(ItemID)
@@ -24,7 +24,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local LearnerLog = player:hasKeyItem(tpz.ki.MAGIAN_LEARNERS_LOG)
     local TrialLog = player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
     if (player:getMainLvl() < 30) then
@@ -40,17 +40,17 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10160 and option == 1) then
         if (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAGIAN_LEARNERS_LOG)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIAN_LEARNERS_LOG)
             player:addKeyItem(tpz.ki.MAGIAN_LEARNERS_LOG)
         end
-        player:setCharVar("MetGreenMagianMog",1)
+        player:setCharVar("MetGreenMagianMog", 1)
     --elseif
         --
     end
-end;
+end

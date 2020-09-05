@@ -19,17 +19,17 @@ function onInitialize(zone)
     -- https://ffxiclopedia.fandom.com/wiki/Black_Coney
     -- https://ffxiclopedia.fandom.com/wiki/White_Coney
     -- BG Wiki has no info. For now, triggers every 3 vana minutes
-    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0,3,0)
+    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0, 3, 0)
 end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(363.025,16,-60,12)
+        player:setPos(363.025, 16, -60, 12)
     end
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 ) then
         cs=17
@@ -37,15 +37,15 @@ function onZoneIn(player,prevZone)
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 17) then
-        player:setCharVar("COP_louverance_story",2)
+        player:setCharVar("COP_louverance_story", 2)
     end
 end
 
@@ -60,4 +60,4 @@ function onZoneWeatherChange(weather)
             waterfall:setAnimation(tpz.anim.OPEN_DOOR)
         end
     end
-end;
+end

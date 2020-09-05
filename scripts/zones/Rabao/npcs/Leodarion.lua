@@ -13,19 +13,19 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
-        if (trade:hasItemQty(17098,1) and trade:getItemCount() == 1) then -- Trade Oak Pole
+    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
+        if (trade:hasItemQty(17098, 1) and trade:getItemCount() == 1) then -- Trade Oak Pole
             player:startEvent(92)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
         illTakeTheBigBoxCS = player:getCharVar("illTakeTheBigBoxCS")
 
         if (illTakeTheBigBoxCS == 1) then
@@ -39,7 +39,7 @@ function onTrigger(player,npc)
         elseif (illTakeTheBigBoxCS == 4) then
             player:startEvent(95)
         end
-    elseif (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
         trueWillCS = player:getCharVar("trueWillCS")
 
         if (trueWillCS == 1) then
@@ -55,29 +55,29 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 90) then
-        player:setCharVar("illTakeTheBigBoxCS",2)
+        player:setCharVar("illTakeTheBigBoxCS", 2)
     elseif (csid == 92) then
         player:tradeComplete()
-        player:setCharVar("illTakeTheBigBox_Timer",VanadielDayOfTheYear())
-        player:setCharVar("illTakeTheBigBoxCS",3)
+        player:setCharVar("illTakeTheBigBox_Timer", VanadielDayOfTheYear())
+        player:setCharVar("illTakeTheBigBoxCS", 3)
     elseif (csid == 94) then
-        player:setCharVar("illTakeTheBigBox_Timer",0)
-        player:setCharVar("illTakeTheBigBoxCS",4)
+        player:setCharVar("illTakeTheBigBox_Timer", 0)
+        player:setCharVar("illTakeTheBigBoxCS", 4)
         player:addKeyItem(tpz.ki.SEANCE_STAFF)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SEANCE_STAFF)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEANCE_STAFF)
     elseif (csid == 97) then
         player:delKeyItem(tpz.ki.OLD_TRICK_BOX)
-        player:setCharVar("trueWillCS",2)
+        player:setCharVar("trueWillCS", 2)
     elseif (csid == 99) then
         if npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.TRUE_WILL, {
                 item = 13782, -- Ninja Chainmail
-                fameArea = NORG,               
+                fameArea = NORG,
                 title = tpz.title.PARAGON_OF_NINJA_EXCELLENCE,
                 var = "trueWillCS"
             })
@@ -86,4 +86,4 @@ function onEventFinish(player,csid,option)
         end
     end
 
-end;
+end

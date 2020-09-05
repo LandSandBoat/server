@@ -14,4 +14,4 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 153)
     tpz.tutorial.onMobDeath(player)
-end;
+end

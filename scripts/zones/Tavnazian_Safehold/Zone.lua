@@ -18,11 +18,11 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(27.971,-14.068,43.735,66)
+        player:setPos(27.971, -14.068, 43.735, 66)
     end
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.AN_INVITATION_WEST) then
@@ -38,7 +38,7 @@ function onZoneIn(player,prevZone)
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -57,28 +57,28 @@ function onRegionEnter(player,region)
 
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 101) then
-        player:completeMission(COP,tpz.mission.id.cop.AN_INVITATION_WEST)
-        player:addMission(COP,tpz.mission.id.cop.THE_LOST_CITY)
-        player:setCharVar("PromathiaStatus",0)
+        player:completeMission(COP, tpz.mission.id.cop.AN_INVITATION_WEST)
+        player:addMission(COP, tpz.mission.id.cop.THE_LOST_CITY)
+        player:setCharVar("PromathiaStatus", 0)
     elseif (csid == 105) then
-        player:setCharVar("PromathiaStatus",0)
-        player:completeMission(COP,tpz.mission.id.cop.AN_ETERNAL_MELODY)
-        player:addMission(COP,tpz.mission.id.cop.ANCIENT_VOWS)
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
+        player:addMission(COP, tpz.mission.id.cop.ANCIENT_VOWS)
     elseif (csid == 107) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 112) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 114) then
-        player:setCharVar("PromathiaStatus",2)
+        player:setCharVar("PromathiaStatus", 2)
     end
 
-end;
+end

@@ -21,7 +21,7 @@ local wamouraCloth = 2289
 local moblinWeave = 1636
 local goldBrocade = 1999
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     if (player:getCharVar("dancerTailorCS") == 4) then
         local playersAFChoice = player:getCharVar("dancerAFChoice")
@@ -70,7 +70,7 @@ local dancersTiara = 16139
 local dancersBangles = 15003
 local dancersToeshoes = 15747
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local playersAFChoice = player:getCharVar("dancerAFChoice")
     local tailorStartedWorkDay = player:getCharVar("dancerTailorWorkDay")
@@ -82,17 +82,17 @@ function onTrigger(player,npc)
         local completedPieces = player:getCharVar("dancerCompletedAF")
 
         local playerCompletedTiara = 0
-        if (bit.band(completedPieces,1) > 0) then
+        if (bit.band(completedPieces, 1) > 0) then
             playerCompletedTiara = 1
         end
 
         local playerCompletedBangles = 0
-        if (bit.band(completedPieces,2) > 0) then
+        if (bit.band(completedPieces, 2) > 0) then
             playerCompletedBangles = 1
         end
 
         local playerCompletedShoes = 0
-        if (bit.band(completedPieces,4) > 0) then
+        if (bit.band(completedPieces, 4) > 0) then
             playerCompletedShoes = 1
         end
 
@@ -137,10 +137,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     local completedPieces = player:getCharVar("dancerCompletedAF")
 
@@ -190,7 +190,7 @@ function onEventFinish(player,csid,option)
 
             local allPiecesCompleted = 7
             if (bit.band(completedPieces, allPiecesCompleted) == allPiecesCompleted) then
-                player:setCharVar("dancerTailorCS",6) -- final cs flag
+                player:setCharVar("dancerTailorCS", 6) -- final cs flag
             else
                 local playersReward = bit.lshift(1, playersAFChoice - 1)
                 completedPieces = bit.bor(completedPieces, playersReward)
@@ -201,4 +201,4 @@ function onEventFinish(player,csid,option)
     else
     -- do nothing
     end
-end;
+end

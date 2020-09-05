@@ -8,10 +8,10 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local DELM = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DONT_EVER_LEAF_ME)
     if ((DELM == QUEST_ACCEPTED) and (player:getCharVar("DELM_Barenngo_Branch") < 1)) then
         -- Progresses Quest: 'Dont Ever Leaf Me'
@@ -25,12 +25,12 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 5015) then
         -- Progresses Quest: 'Dont Ever Leaf Me'
         player:setCharVar("DELM_Barenngo_Branch", 1)
     end
-end;
+end

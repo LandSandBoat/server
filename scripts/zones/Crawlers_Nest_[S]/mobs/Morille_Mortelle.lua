@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Crawler's Nest [S] (171)
+-- Area: Crawlers' Nest [S] (171)
 --   NM: Morille Mortelle
 -- !pos 59.788 -0.939 22.316 171
 -----------------------------------
@@ -22,4 +22,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 515)
-end;
+end

@@ -5,7 +5,7 @@
 local ID = require("scripts/zones/Sealions_Den/IDs")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     -- three tarus fight with tenzen
     local mobId = mob:getID()
     local offset = mobId - ID.mob.WARRIORS_PATH_OFFSET
@@ -17,4 +17,4 @@ function onMobEngaged(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

@@ -8,11 +8,11 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     local duration = 30 + player:getMod(tpz.mod.FLEE_DURATION)
-    player:addStatusEffect(tpz.effect.FLEE,100,0,duration)
+    player:addStatusEffect(tpz.effect.FLEE, 100, 0, duration)
 end

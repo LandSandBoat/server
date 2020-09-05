@@ -29,17 +29,17 @@ function onPath(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(84)
     npc:wait()
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
     npc:wait(0)
-end;
+end

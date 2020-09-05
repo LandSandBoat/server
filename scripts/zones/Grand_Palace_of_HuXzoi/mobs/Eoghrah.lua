@@ -11,8 +11,8 @@ function onMobSpawn(mob)
     mob:AnimationSub(0)
     mob:setAggressive(0)
     mob:setLocalVar("roamTime", os.time())
-    mob:setLocalVar("form2",math.random(2,3))
-    local skin = math.random(1161,1168)
+    mob:setLocalVar("form2", math.random(2, 3))
+    local skin = math.random(1161, 1168)
     mob:setModelId(skin)
     if (skin == 1161) then -- Fire
         mob:setMod(tpz.mod.ICERES, 27)
@@ -54,7 +54,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     local changeTime = mob:getLocalVar("changeTime")
 
@@ -70,4 +70,4 @@ function onMobFight(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

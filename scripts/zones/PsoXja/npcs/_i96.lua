@@ -8,10 +8,10 @@ local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local Z=player:getZPos()
 
@@ -27,8 +27,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
-end;
+function onEventFinish(player, csid, option, npc)
+end

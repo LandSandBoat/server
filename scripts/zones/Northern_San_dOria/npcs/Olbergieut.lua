@@ -13,12 +13,12 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    gates = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GATES_TO_PARADISE)
+    gates = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
     if (player:hasKeyItem(tpz.ki.SCRIPTURE_OF_WATER) == true) then
         player:startEvent(620)
     elseif (gates == QUEST_ACCEPTED) then
@@ -31,10 +31,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 619 and option == 0) then
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
@@ -44,13 +44,13 @@ function onEventFinish(player,csid,option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13584)
         else
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.GATES_TO_PARADISE)
-            player:addFame(SANDORIA,30)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
+            player:addFame(SANDORIA, 30)
             player:addTitle(tpz.title.THE_PIOUS_ONE)
             player:delKeyItem(tpz.ki.SCRIPTURE_OF_WATER)
-            player:addItem(13584,1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13584)
+            player:addItem(13584, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13584)
         end
     end
 
-end;
+end

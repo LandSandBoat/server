@@ -9,13 +9,13 @@ require("scripts/globals/treasure")
 -----------------------------------
 
 function onInitialize(zone)
-    zone:registerRegion(1, -301,-50,-22, -297,-49,-17) -- central porter on map 3
-    zone:registerRegion(2, -275,-54,3, -271,-53,7)     -- NE porter on map 3
-    zone:registerRegion(3, -275,-54,-47, -271,-53,-42) -- SE porter on map 3
-    zone:registerRegion(4, -330,-54,3, -326,-53,7)     -- NW porter on map 3
-    zone:registerRegion(5, -328,-54,-47, -324,-53,-42) -- SW porter on map 3
-    zone:registerRegion(6, -528,-74,84, -526,-73,89)   -- N porter on map 4
-    zone:registerRegion(7, -528,-74,30, -526,-73,36)   -- S porter on map 4
+    zone:registerRegion(1, -301, -50, -22, -297, -49, -17) -- central porter on map 3
+    zone:registerRegion(2, -275, -54, 3, -271, -53, 7)     -- NE porter on map 3
+    zone:registerRegion(3, -275, -54, -47, -271, -53, -42) -- SE porter on map 3
+    zone:registerRegion(4, -330, -54, 3, -326, -53, 7)     -- NW porter on map 3
+    zone:registerRegion(5, -328, -54, -47, -324, -53, -42) -- SW porter on map 3
+    zone:registerRegion(6, -528, -74, 84, -526, -73, 89)   -- N porter on map 4
+    zone:registerRegion(7, -528, -74, 30, -526, -73, 36)   -- S porter on map 4
 
     tpz.treasure.initZone(zone)
 end
@@ -24,15 +24,15 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-555.996,-71.691,59.989,254)
+        player:setPos(-555.996, -71.691, 59.989, 254)
     end
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -85,11 +85,11 @@ function onRegionEnter(player,region)
 
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -28,7 +28,7 @@ function onMobSpawn(mob)
     })
 
     mob:AnimationSub(0) -- Mouth closed
-    mob:addStatusEffectEx(tpz.effect.FLEE,0,100,0,60)
+    mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(tpz.mod.TRIPLE_ATTACK, 20)
     mob:setMod(tpz.mod.REGEN, 10)
     mob:addMod(tpz.mod.BINDRES, 30)
@@ -44,7 +44,7 @@ function onMobDisEngage(mob, target)
 end
 
 --[[ onMobskill -- When this functionlity is added, this should work.
-function onUseAbility(mob,target,ability)
+function onUseAbility(mob, target, ability)
     local mobId = mob:getID()
     local pOne = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local pTwo = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
@@ -52,7 +52,7 @@ function onUseAbility(mob,target,ability)
     local pTwoAct = pTwo:getCurrentAction()
 
     if ability:getID() == 437 then -- Perfect Dodge
-        mob:addStatusEffectEx(tpz.effect.FLEE,0,100,0,30)
+        mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 30)
     elseif mobId == ID.mob.JAILER_OF_PRUDENCE_1 and pTwoAct > 0 and pTwoAct ~= tpz.act.SLEEP and pTwoAct ~= tpz.act.STUN and pTwo:checkDistance(mob) <= 10 then
         pTwo:useMobAbility(ability:getID())
     elseif mobId == ID.mob.JAILER_OF_PRUDENCE_2 and pOneAct > 0 and pOneAct ~= tpz.act.SLEEP and pOneAct ~= tpz.act.STUN and pOne:checkDistance(mob) <= 10 then
@@ -78,4 +78,4 @@ function onMobDespawn(mob)
         firstPrudence:addMod(tpz.mod.ATTP, 100)
         firstPrudence:delMod(tpz.mod.DEFP, -50)
     end
-end;
+end

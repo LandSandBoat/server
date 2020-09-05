@@ -8,10 +8,10 @@ require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(tpz.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)) then
         player:startEvent(695) -- Finish Mission "The Davoi Report"
@@ -26,13 +26,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 695 or csid == 7 or csid == 8) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
     end
 
-end;
+end

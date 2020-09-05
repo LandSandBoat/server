@@ -10,15 +10,15 @@ local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    local Gourmet = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
-        local hasSleepshroom = trade:hasItemQty(4374,1)
-        local hasTreantBulb = trade:hasItemQty(953,1)
-        local hasWildOnion = trade:hasItemQty(4387,1)
+        local hasSleepshroom = trade:hasItemQty(4374, 1)
+        local hasTreantBulb = trade:hasItemQty(953, 1)
+        local hasWildOnion = trade:hasItemQty(4387, 1)
 
         if (hasSleepshroom or hasTreantBulb or hasWildOnion) then
             if (count == 1) then
@@ -43,36 +43,36 @@ function onTrade(player,npc,trade)
                     end
                 end
 
-                player:startEvent(event,item)
+                player:startEvent(event, item)
             end
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK,tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
         player:startEvent(200)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
-    local Gourmet = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK,tpz.quest.id.bastok.GOURMET)
+            player:addQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()
         if (Gourmet == QUEST_ACCEPTED) then
-            player:completeQuest(BASTOK,tpz.quest.id.bastok.GOURMET)
+            player:completeQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
         end
 
         local gil=350
@@ -85,9 +85,9 @@ function onEventFinish(player,csid,option)
         end
 
         player:addGil(gil*GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED,gil*GIL_RATE)
-        player:addFame(BASTOK,fame)
+        player:messageSpecial(ID.text.GIL_OBTAINED, gil*GIL_RATE)
+        player:addFame(BASTOK, fame)
         player:addTitle(tpz.title.MOMMYS_HELPER)
         player:needToZone(true)
     end
-end;
+end

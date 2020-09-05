@@ -9,15 +9,15 @@ require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local RegionOwner = GetRegionOwner(tpz.region.SARUTABARUTA)
     if (RegionOwner ~= tpz.nation.WINDURST) then
-        player:showText(npc,ID.text.BAEHUFAEHU_CLOSED_DIALOG)
+        player:showText(npc, ID.text.BAEHUFAEHU_CLOSED_DIALOG)
     else
-        player:showText(npc,ID.text.BAEHUFAEHU_OPEN_DIALOG)
+        player:showText(npc, ID.text.BAEHUFAEHU_OPEN_DIALOG)
 
         local stock =
         {
@@ -33,8 +33,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -7,10 +7,10 @@ local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Set the PromathiaStatus to 3 if they did all 3 towers for GARDEN_OF_ANTIQUITY
     if (player:getCharVar("[SEA][AlTieu]SouthTowerCS") == 1 and player:getCharVar("[SEA][AlTieu]WestTowerCS") == 1 and player:getCharVar("[SEA][AlTieu]EastTowerCS") == 1 and player:getCharVar("PromathiaStatus") == 2) then
         player:setCharVar("[SEA][AlTieu]SouthTowerCS", 0)
@@ -28,13 +28,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 100 and option == 1) then
-        player:setPos(-20,0.624,-355,191,34) -- {R}
+        player:setPos(-20, 0.624, -355, 191, 34) -- {R}
     elseif (csid == 164) then
         player:setCharVar("PromathiaStatus", 2)
     end
-end;
+end

@@ -6,12 +6,12 @@ require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:setMod(tpz.mod.REGAIN, 50)
 end
 
 function onMobDisengage(mob)
-    mob:setMod(tpz.mod.REGAIN,0)
+    mob:setMod(tpz.mod.REGAIN, 0)
 end
 
 function onMobDeath(mob, player, isKiller)
@@ -20,4 +20,4 @@ end
 
 function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
-end;
+end

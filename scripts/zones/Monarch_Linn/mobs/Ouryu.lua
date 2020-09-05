@@ -10,7 +10,7 @@ function onMobSpawn(mob)
     mob:AnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     local bf = mob:getBattlefield()
     if bf:getID() == 961 and mob:getHPP() < 30 then
@@ -56,4 +56,4 @@ function onMobDeath(mob, player, isKiller)
 
     player:addTitle(tpz.title.MIST_MELTER)
 
-end;
+end

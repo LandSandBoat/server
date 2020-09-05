@@ -14,5 +14,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    tpz.mob.phOnDespawn(mob,ID.mob.WYVERNPOACHER_DRACHLOX_PH,5,math.random(7200,28800)) -- 2 to 8 hours
-end;
+    tpz.mob.phOnDespawn(mob, ID.mob.WYVERNPOACHER_DRACHLOX_PH, 5, math.random(7200, 28800)) -- 2 to 8 hours
+end

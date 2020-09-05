@@ -10,18 +10,18 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    function testflag(set,flag)
+function onTrigger(player, npc)
+    function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    local MakingHeadlines = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_HEADLINES)
-    local CFA2 = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local CFA2 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
-    -- Curses,Foiled ... Again!?
+    -- Curses, Foiled ... Again!?
     if (CFA2 == QUEST_ACCEPTED and player:hasItem(552) == false) then
         player:startEvent(182) -- get Hiwon's hair
     elseif (CFA2 == QUEST_COMPLETED and MakingHeadlines ~= QUEST_ACCEPTED) then
@@ -36,9 +36,9 @@ function onTrigger(player,npc)
         -- 4 = Hiwom
         -- 8 = Umumu
         -- 16 = Mahogany Door
-        if (testflag(tonumber(prog),4) == false) then
-            if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
-                if (math.random(1,2) == 1) then
+        if (testflag(tonumber(prog), 4) == false) then
+            if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
+                if (math.random(1, 2) == 1) then
                     player:startEvent(283) -- Give scoop while sick
                 else
                     player:startEvent(284) -- Give scoop while sick
@@ -50,7 +50,7 @@ function onTrigger(player,npc)
             player:startEvent(282) -- "Getting back to the maater at hand-wand..."
         end
     else
-        local rand = math.random(1,5)
+        local rand = math.random(1, 5)
         if (rand == 1) then
             print (rand)
             player:startEvent(305) -- Standard Conversation
@@ -70,26 +70,26 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- Making Headlines
     if (csid == 281 or csid == 283 or csid == 284) then
         prog = player:getCharVar("QuestMakingHeadlines_var")
         player:addKeyItem(tpz.ki.WINDURST_WALLS_SCOOP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.WINDURST_WALLS_SCOOP)
-        player:setCharVar("QuestMakingHeadlines_var",prog+4)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WINDURST_WALLS_SCOOP)
+        player:setCharVar("QuestMakingHeadlines_var", prog+4)
 
-    -- Curses,Foiled...Again!?
+    -- Curses, Foiled...Again!?
     elseif (csid == 182) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,552) -- Hiwon's hair
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 552) -- Hiwon's hair
         else
             player:addItem(552)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,552) -- Hiwon's hair
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 552) -- Hiwon's hair
         end
     end
-end;
+end

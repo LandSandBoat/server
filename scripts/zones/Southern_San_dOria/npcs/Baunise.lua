@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.BOOK_OF_TASKS) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_WEST) == false) then
         player:startEvent(634)
     else
@@ -21,14 +21,14 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 634) then
         player:addKeyItem(tpz.ki.BOOK_OF_THE_WEST)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOOK_OF_THE_WEST)
     end
 
-end;
+end

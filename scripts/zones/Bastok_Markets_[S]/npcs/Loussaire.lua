@@ -11,10 +11,10 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
@@ -126,20 +126,20 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
     if (csid == 49 or csid == 53) then
         -- Display Loafers
         if (option == 2) then
-            player:updateEvent(option,tpz.ki.RAFFLESIA_DREAMSPIT,tpz.ki.DROGAROGAN_BONEMEAL,0,0,0,0,0)
+            player:updateEvent(option, tpz.ki.RAFFLESIA_DREAMSPIT, tpz.ki.DROGAROGAN_BONEMEAL, 0, 0, 0, 0, 0)
 
         -- Display Pants
         elseif (option == 4) then
-            player:updateEvent(option,tpz.ki.SLUG_MUCUS,tpz.ki.DJINN_EMBER,0,0,0,0,0)
+            player:updateEvent(option, tpz.ki.SLUG_MUCUS, tpz.ki.DJINN_EMBER, 0, 0, 0, 0, 0)
 
         -- Display Gown
         elseif (option == 6) then
-            player:updateEvent(option,tpz.ki.PEISTE_DUNG,tpz.ki.SAMPLE_OF_GRAUBERG_CHERT,0,0,0,0,0)
+            player:updateEvent(option, tpz.ki.PEISTE_DUNG, tpz.ki.SAMPLE_OF_GRAUBERG_CHERT, 0, 0, 0, 0, 0)
 
         -- Confirm Loafers
         elseif (option == 1) then
@@ -159,7 +159,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 49 and option == 0) then
         player:setCharVar("AF_Loussaire", 1)
@@ -208,4 +208,4 @@ function onEventFinish(player,csid,option)
             player:addItem(itemid)
         end
     end
-end;
+end

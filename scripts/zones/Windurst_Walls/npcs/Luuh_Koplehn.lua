@@ -8,11 +8,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local qStarStruck = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.STAR_STRUCK)
+function onTrigger(player, npc)
+    local qStarStruck = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
 
     if (qStarStruck == QUEST_ACCEPTED) then
         player:startEvent(200)
@@ -21,8 +21,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

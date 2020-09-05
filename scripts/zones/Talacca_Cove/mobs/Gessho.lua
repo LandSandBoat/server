@@ -4,13 +4,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Talacca_Cove/IDs")
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if(mob:getID() == ID.mob.GESSHO) then
-        local chance = math.random(1,100)
+        local chance = math.random(1, 100)
 
         if (chance == 50) then
-            local clones = math.random(1,6)
-            for i=1,clones,1 do SpawnMob(mob:getID()+i) end
+            local clones = math.random(1, 6)
+            for i=1, clones, 1 do SpawnMob(mob:getID()+i) end
         end
 
         if (mob:getHPP() <= 15) then
@@ -27,4 +27,4 @@ function onMobFight(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

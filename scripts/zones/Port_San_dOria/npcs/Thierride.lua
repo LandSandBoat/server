@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local count = trade:getItemCount()
 
     if (trade:hasItemQty(4358, 5) and count == 5) then
@@ -21,7 +21,7 @@ function onTrade(player,npc,trade)
         else
             player:startEvent(526)
         end
-    elseif (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and trade:hasItemQty(595,1) == true and count == 1) then
+    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and trade:hasItemQty(595, 1) == true and count == 1) then
         player:tradeComplete()
         player:startEvent(539)
         player:setCharVar("TheBrugaireConsortium-Parcels", 31)
@@ -31,7 +31,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     aTasteForMeat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
     if (aTasteForMeat == QUEST_AVAILABLE and player:getCharVar("aTasteForMeat") == 1 or aTasteForMeat == QUEST_ACCEPTED) then
@@ -42,10 +42,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 526) then
         if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_AVAILABLE) then
@@ -62,4 +62,4 @@ function onEventFinish(player,csid,option)
         player:addTitle(tpz.title.RABBITER)
     end
 
-end;
+end

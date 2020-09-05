@@ -10,15 +10,15 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getPet() == nil) then
-      return tpz.msg.basic.REQUIRES_A_PET,0
+      return tpz.msg.basic.REQUIRES_A_PET, 0
     end
 
-    return 0,0
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     local pet = player:getPet()
 
     if (pet:hasStatusEffect(tpz.effect.HEALING)) then

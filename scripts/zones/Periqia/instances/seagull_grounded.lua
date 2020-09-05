@@ -14,14 +14,14 @@ end
 
 function onInstanceCreated(instance)
 
-    for i,v in pairs(ID.mob[31]) do
+    for i, v in pairs(ID.mob[31]) do
         SpawnMob(v, instance)
     end
 
     local rune = instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC)
     local box = instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC)
-    rune:setPos(-495,-9.899,-72,0)
-    box:setPos(-495,-9.695,-75,0)
+    rune:setPos(-495, -9.899, -72, 0)
+    box:setPos(-495, -9.695, -75, 0)
 
     instance:getEntity(bit.band(ID.npc.EXCALIACE, 0xFFF), tpz.objType.NPC):setStatus(1)
     instance:getEntity(bit.band(ID.npc._1K6, 0xFFF), tpz.objType.NPC):setAnimation(8)
@@ -46,14 +46,14 @@ function onInstanceTimeUpdate(instance, elapsed)
 
     if (wipeTime == 0) then
         local wipe = true
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if v:getHP() ~= 0 then
                 wipe = false
                 break
             end
         end
         if (wipe) then
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 v:messageSpecial(ID.text.PARTY_FALLEN, 3)
             end
             instance:setWipeTime(elapsed)
@@ -63,7 +63,7 @@ function onInstanceTimeUpdate(instance, elapsed)
             instance:fail()
             return
         else
-            for i,v in pairs(players) do
+            for i, v in pairs(players) do
                 if v:getHP() ~= 0 then
                     instance:setWipeTime(0)
                     break
@@ -85,7 +85,7 @@ function onInstanceTimeUpdate(instance, elapsed)
     end
 
     if (message ~= 0) then
-        for i,v in pairs(players) do
+        for i, v in pairs(players) do
             if (remainingTimeLimit >= 60) then
                 v:messageSpecial(ID.text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
             else
@@ -100,8 +100,8 @@ function onInstanceFailure(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED,10,10)
+    for i, v in pairs(chars) do
+        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
     end
 end
@@ -118,7 +118,7 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i,v in pairs(chars) do
+    for i, v in pairs(chars) do
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 
@@ -129,8 +129,8 @@ function onInstanceComplete(instance)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -9,17 +9,17 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(5272,8,23,4)) then
+function onTrigger(player, npc)
+    if (player:sendGuild(5272, 8, 23, 4)) then
         player:showText(npc, ID.text.VISALA_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -61,15 +61,15 @@ end
 function onPath(npc)
     tpz.path.patrol(npc, path)
 end
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    DampScroll = player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+function onTrigger(player, npc)
+    DampScroll = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     mLvl = player:getMainLvl()
 
     if (DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true) then
-        player:startEvent(31,1210) -- Start the quest
+        player:startEvent(31, 1210) -- Start the quest
     elseif (DampScroll == QUEST_ACCEPTED) then
         player:startEvent(32) -- Reminder Dialogue
     else
@@ -79,13 +79,13 @@ function onTrigger(player,npc)
     npc:wait(0)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
     if (csid == 31) then
-        player:addQuest(OUTLANDS,tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+        player:addQuest(OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     end
 
     npc:wait(0)
-end;
+end

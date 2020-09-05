@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/status")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.MONOLITH_OFFSET
     if (offset >= 0 and offset <= 38) then
         local colorTouched = ID.npc.MONOLITHS[offset / 2]
@@ -24,8 +24,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

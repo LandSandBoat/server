@@ -25,13 +25,13 @@ function onTrigger(player, npc)
     player:startEvent(140, 0, mercRank, hasPermit, points, hasAstral, cost, captain)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 140 and option == 1 and npcUtil.giveKeyItem(player, tpz.ki.RUNIC_PORTAL_USE_PERMIT) then
         player:delCurrency("imperial_standing", 200)
     elseif csid == 140 and option == 2 then
-        npcUtil.giveKeyItem(player,tpz.ki.RUNIC_PORTAL_USE_PERMIT)
+        npcUtil.giveKeyItem(player, tpz.ki.RUNIC_PORTAL_USE_PERMIT)
     end
 end

@@ -16,7 +16,7 @@ require("scripts/globals/status")
 function onMobInitialize(mob)
     mob:addListener("DEATH", "AERN_DEATH", function(mob)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
-        if(math.random (1,10) < 10) then
+        if(math.random (1, 10) < 10) then
             -- reraise
             local target = mob:getTarget()
             local targetid = 0
@@ -76,5 +76,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    mob:setLocalVar("AERN_RERAISES",0)
-end;
+    mob:setLocalVar("AERN_RERAISES", 0)
+end

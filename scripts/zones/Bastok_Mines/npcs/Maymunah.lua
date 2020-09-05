@@ -9,17 +9,17 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(5262,8,23,6)) then
+function onTrigger(player, npc)
+    if (player:sendGuild(5262, 8, 23, 6)) then
         player:showText(npc, ID.text.MAYMUNAH_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

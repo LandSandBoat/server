@@ -9,10 +9,10 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
         local MissionStatus = player:getCharVar("MissionStatus")
@@ -38,18 +38,18 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 108) then
-        player:setCharVar("MissionStatus",5)
+        player:setCharVar("MissionStatus", 5)
     elseif (csid == 115) then
         player:addKeyItem(tpz.ki.RESCUE_TRAINING_CERTIFICATE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.RESCUE_TRAINING_CERTIFICATE)
-        player:setCharVar("theRescueDrillRandomNPC",0)
-        player:setCharVar("MissionStatus",11)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RESCUE_TRAINING_CERTIFICATE)
+        player:setCharVar("theRescueDrillRandomNPC", 0)
+        player:setCharVar("MissionStatus", 11)
     end
 
-end;
+end

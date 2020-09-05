@@ -10,13 +10,13 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(502,1) == true and trade:getItemCount() == 1) then -- Garlaige Key (Not Chest/Coffer)
+function onTrade(player, npc, trade)
+    if (trade:hasItemQty(502, 1) == true and trade:getItemCount() == 1) then -- Garlaige Key (Not Chest/Coffer)
         player:startEvent(4) -- Open the door
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -29,8 +29,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

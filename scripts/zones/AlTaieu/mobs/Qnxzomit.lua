@@ -16,4 +16,4 @@ function onMobDespawn(mob)
         local xzomitsKilled = JoL:getLocalVar("JoL_Qn_xzomit_Killed")
         JoL:setLocalVar("JoL_Qn_xzomit_Killed", xzomitsKilled + 1)
     end
-end;
+end

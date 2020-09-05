@@ -7,10 +7,10 @@
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/missions")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- THE CHAINS THAT BIND US
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US and player:getCharVar("MissionStatus") == 1) then
@@ -33,13 +33,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- THE CHAINS THAT BIND US
     if (csid == 11) then
         player:setCharVar("MissionStatus", 2)
     end
-end;
+end

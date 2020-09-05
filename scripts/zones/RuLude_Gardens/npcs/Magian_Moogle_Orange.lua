@@ -10,7 +10,7 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/magiantrials")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if (trade:getItemCount() == 1) then
         local ItemID = trade:getItemId()
         local TrialInfo = getTrialInfo(ItemID)
@@ -24,7 +24,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getMainLvl() < 75) then
         player:startEvent(10121)
     elseif (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
@@ -34,23 +34,23 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if (csid == 10124) then
-        local ItemID =0 
+        local ItemID =0
         if (option == 4456449) then
             ItemID = 19327
         elseif (option == 4456449) then
             ItemID = 19327
         end
-        magianOrangeEventUpdate(player,ItemID,csid,option)
+        magianOrangeEventUpdate(player, ItemID, csid, option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10122 and option == 1) then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAGIAN_TRIAL_LOG)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIAN_TRIAL_LOG)
         player:addKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
     --elseif
         --
     end
-end;
+end

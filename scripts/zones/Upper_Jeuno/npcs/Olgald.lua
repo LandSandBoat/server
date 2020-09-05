@@ -7,10 +7,10 @@
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCharVar("dancerTailorCS") == 1) then
         player:startEvent(10167)
@@ -25,11 +25,11 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10167) then
         player:setCharVar("dancerTailorCS", 2)
     end
-end;
+end

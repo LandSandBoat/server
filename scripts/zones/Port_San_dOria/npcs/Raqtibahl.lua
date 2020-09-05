@@ -4,30 +4,24 @@
 -- (Corsair's Frac) !pos -59 -4 -39 232
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
-require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
 
-    -- magicmart flyer
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and trade:getItemCount() == 1 and trade:hasItemQty(532,1)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-
     -- gold chain, velvet cloth, red grass cloth, sailcloth
-    elseif (letterRed == 2 and trade:getItemCount() == 4 and trade:hasItemQty(761,1) and trade:hasItemQty(828,1) and trade:hasItemQty(1829,1) and trade:hasItemQty(1997,1)) then
+    if (letterRed == 2 and trade:getItemCount() == 4 and trade:hasItemQty(761, 1) and trade:hasItemQty(828, 1) and trade:hasItemQty(1829, 1) and trade:hasItemQty(1997, 1)) then
         player:startEvent(755) -- accepts materials, now bring me imperial gold piece
 
     -- imperial gold piece
-    elseif (letterRed == 3 and trade:getItemCount() == 1 and trade:hasItemQty(2187,1)) then
+    elseif (letterRed == 3 and trade:getItemCount() == 1 and trade:hasItemQty(2187, 1)) then
         player:startEvent(760) -- accepts gold piece, now wait for next vana'diel day
 
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
     if (player:hasKeyItem(tpz.ki.LELEROONS_LETTER_RED)) then
         player:startEvent(753) -- accept letter, now bring me four items
@@ -48,10 +42,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 753) then
         player:setCharVar("LeleroonsLetterRed", 2)
         player:delKeyItem(tpz.ki.LELEROONS_LETTER_RED)
@@ -65,6 +59,6 @@ function onEventFinish(player,csid,option)
     elseif (csid == 756) then
         player:setCharVar("LeleroonsLetterRed", 5)
         player:addItem(14522) -- corsair's frac
-        player:messageSpecial(ID.text.ITEM_OBTAINED,14522)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 14522)
     end
-end;
+end

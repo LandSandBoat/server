@@ -8,7 +8,7 @@ require("scripts/globals/status")
 
 function onMobSpawn(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
-        mob:showText(mob,ID.text.CARVE)
+        mob:showText(mob, ID.text.CARVE)
     end)
 
     --[[ Todo:
@@ -54,7 +54,7 @@ function onMobSpawn(mob)
 
                 local chars = mob:getInstance():getChars()
 
-                for i,v in pairs(chars) do
+                for i, v in pairs(chars) do
                     local job = v:getMainJob()
 
                     if (job == 1 or job == 2 or (job >= 6 and job <= 10) or (job >=12 and job <=14) or (job >= 16 and job <=19 )) then
@@ -69,13 +69,13 @@ function onMobSpawn(mob)
                 -- RESIST message only shows for first reraise,
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
                 if (phys >= magic and phys >= ranged) then
-                    mob:showText(mob,ID.text.RESIST_MELEE)
+                    mob:showText(mob, ID.text.RESIST_MELEE)
                     mob:setMod(tpz.mod.UDMGPHYS, -100)
                 elseif (magic >= phys and magic >= ranged) then
-                    mob:showText(mob,ID.text.RESIST_MAGIC)
+                    mob:showText(mob, ID.text.RESIST_MAGIC)
                     mob:addMod(tpz.mod.UDMGMAGIC, -100)
                 else
-                    mob:showText(mob,ID.text.RESIST_RANGE)
+                    mob:showText(mob, ID.text.RESIST_RANGE)
                     mob:addMod(tpz.mod.UDMGRANGE, -100)
                 end
             end
@@ -89,15 +89,15 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.BEHAVIOR, 5)
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     -- localVar because we don't want it to repeat every reraise.
     if (mob:getLocalVar("started") == 0) then
-        mob:showText(mob,ID.text.PRAY)
+        mob:showText(mob, ID.text.PRAY)
         mob:setLocalVar("started", 1)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     --[[ Mob version of Azure Lore needs scripted, then we can remove this block commenting.
     -- On his 2nd and 3rd "lives" Raubahn will use Azure Lore at low health.
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
@@ -105,7 +105,7 @@ function onMobFight(mob,target)
         local usedAzure = mob:getLocalVar("usedAzureLore")
         if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
             mob:setLocalVar("usedAzureLore", 1)
-            mob:setLocalVar("AzureLoreHP", math.random(20,50) -- Re-rolling the % for next "life"
+            mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
             mob:useMobAbility(tpz.jsa.AZURE_LORE)
         end
     end
@@ -115,13 +115,13 @@ end
 function onSpellPrecast(mob, spell)
     -- Eyes on Me
     if (spell == 641) then
-        mob:showText(mob,ID.text.BEHOLD)
+        mob:showText(mob, ID.text.BEHOLD)
     end
 end
 
 function onMobDeath(mob, player, isKiller)
     -- If he's out of reraises, display text
     if (isKiller and mob:getMobMod(tpz.mobMod.BEHAVIOR) == 0) then
-        mob:showText(mob,ID.text.MIRACLE)
+        mob:showText(mob, ID.text.MIRACLE)
     end
-end;
+end

@@ -7,10 +7,10 @@ local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
@@ -21,13 +21,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 3) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.A_FATE_DECIDED)
         player:addMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
     end
-end;
+end

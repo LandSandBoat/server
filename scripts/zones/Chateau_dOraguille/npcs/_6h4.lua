@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
 
     local currentMission = player:getCurrentMission(SANDORIA)
@@ -50,32 +50,32 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 537) then
-        player:setCharVar("MissionStatus",3)
+        player:setCharVar("MissionStatus", 3)
         player:addKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LETTER_TO_THE_AMBASSADOR)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_AMBASSADOR)
     elseif (csid == 61) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 87) then
-        player:setCharVar('MissionStatus',2)
+        player:setCharVar('MissionStatus', 2)
     elseif (csid == 100) then
-        player:setCharVar("Mission8-1Completed",0) -- dont need this var anymore. JP midnight is done and prev mission completed.
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 104) then
-        player:setCharVar("Mission8-2Kills",0)
-        finishMissionTimeline(player,3,csid,option)
+        player:setCharVar("Mission8-2Kills", 0)
+        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 8) then
-        player:setCharVar("MissionStatus",6)
+        player:setCharVar("MissionStatus", 6)
     elseif (csid == 32) then
-        player:setCharVar("Cutscenes_8-2",0) -- dont need this var now that mission is flagged and cs have been triggered to progress
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("Cutscenes_8-2", 0) -- dont need this var now that mission is flagged and cs have been triggered to progress
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 76) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
     end
 
-end;
+end

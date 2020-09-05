@@ -8,23 +8,23 @@ local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE) == QUEST_ACCEPTED and player:getCharVar("ChocoboOnTheLoose") < 2) then
+function onTrigger(player, npc)
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE) == QUEST_ACCEPTED and player:getCharVar("ChocoboOnTheLoose") < 2) then
         player:startEvent(209)
     else
         player:messageSpecial(ID.text.CHOCOBO_TRACKS)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 209) then
-        player:setCharVar("ChocoboOnTheLoose",2)
+        player:setCharVar("ChocoboOnTheLoose", 2)
     end
-end;
+end

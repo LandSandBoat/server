@@ -11,7 +11,7 @@ function onMobSpawn(mob)
     mob:SetMagicCastingEnabled(false) -- does not cast spells while idle
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:SetMagicCastingEnabled(true)
 end
 
@@ -33,7 +33,7 @@ function onMobDespawn(mob)
     end
 
     if (allFliesDead) then
-        local respawnTime = math.random(75600,86400)
+        local respawnTime = math.random(75600, 86400)
         for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
             DisallowRespawn(i, false)
             GetMobByID(i):setRespawnTime(respawnTime)
@@ -41,4 +41,4 @@ function onMobDespawn(mob)
     else
         DisallowRespawn(mobID, true)
     end
-end;
+end

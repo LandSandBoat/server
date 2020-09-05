@@ -9,10 +9,10 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local Transporting = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
     if ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") >= 2)) then
         -- Finishing Quest: 'Transporting'
@@ -26,10 +26,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 2590) then
         -- Starting Quest: 'Transporting'
         player:addQuest(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
@@ -41,4 +41,4 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
         player:addFame(ADOULIN)
     end
-end;
+end

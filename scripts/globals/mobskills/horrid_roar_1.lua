@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (target:isBehind(mob, 48) == true) then
         return 1
     elseif (mob:AnimationSub() ~= 0) then

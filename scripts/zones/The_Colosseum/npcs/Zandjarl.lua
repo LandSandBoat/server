@@ -7,19 +7,19 @@
 local ID = require("scripts/zones/The_Colosseum/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local RESULT = nil
     local COUNT = trade:getItemCount()
     local TOTAL = player:getCurrency("jetton")
     local MAX = 100000000
 
-    if (trade:hasItemQty(2184,COUNT)) then
+    if (trade:hasItemQty(2184, COUNT)) then
         RESULT = 2*COUNT
-    elseif (trade:hasItemQty(2185,COUNT)) then
+    elseif (trade:hasItemQty(2185, COUNT)) then
         RESULT = 10*COUNT
-    elseif (trade:hasItemQty(2186,COUNT)) then
+    elseif (trade:hasItemQty(2186, COUNT)) then
         RESULT = 30*COUNT
-    elseif (trade:hasItemQty(2187,COUNT)) then
+    elseif (trade:hasItemQty(2187, COUNT)) then
         RESULT = 200*COUNT
     end
 
@@ -37,14 +37,14 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(1900, player:getCurrency("jetton"))
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 1900) then -- onTrigger
         local shop =
@@ -63,11 +63,11 @@ function onEventFinish(player,csid,option)
             if (result.itemID ~= nil) then
                 if (player:addItem(result.itemID, result.QTY)) then
                     player:delCurrency("jetton", result.price)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED,result.itemID)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, result.itemID)
                 else
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,result.itemID)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, result.itemID)
                 end
             end
         end
     end
-end;
+end

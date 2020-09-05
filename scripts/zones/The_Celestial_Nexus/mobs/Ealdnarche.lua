@@ -11,12 +11,12 @@ require("scripts/globals/magic")
 function onMobInitialize(mob)
     --50% fast cast, no standback
     mob:addMod(tpz.mod.UFASTCAST, 50)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK,-1)
+    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
 function onMobSpawn(mob)
     mob:SetAutoAttackEnabled(false)
-    mob:setMobMod(tpz.mobMod.GA_CHANCE,25)
+    mob:setMobMod(tpz.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(tpz.effect.ARROW_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
@@ -52,12 +52,12 @@ function onMobDeath(mob, player, isKiller)
     player:startEvent(32004, battlefield:getArea())
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("updateCSID: %u",csid)
+function onEventUpdate(player, csid, option)
+    -- printf("updateCSID: %u", csid)
 end
 
-function onEventFinish(player,csid,option,target)
-    -- printf("finishCSID: %u",csid)
+function onEventFinish(player, csid, option, target)
+    -- printf("finishCSID: %u", csid)
     if (csid == 32004) then
         DespawnMob(target:getID())
         mob = SpawnMob(target:getID()+2)
@@ -66,4 +66,4 @@ function onEventFinish(player,csid,option,target)
         mob:addStatusEffectEx(tpz.effect.BIND, 0, 1, 0, 30)
         mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
     end
-end;
+end

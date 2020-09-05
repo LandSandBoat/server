@@ -20,13 +20,13 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-100,-13.5,-479.514,60)
+        player:setPos(-100, -13.5, -479.514, 60)
     end
     if (prevZone == tpz.zone.MAMOOL_JA_TRAINING_GROUNDS) then
-        player:setPos(-186,-10,-802,80)
+        player:setPos(-186, -10, -802, 80)
     end
     return cs
 end
@@ -36,14 +36,14 @@ function afterZoneIn(player)
     player:entityVisualPacket("2pb1")
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 108) then
-        player:setPos(0,0,0,0,66)
+        player:setPos(0, 0, 0, 0, 66)
     end
-end;
+end

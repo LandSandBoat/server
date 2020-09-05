@@ -9,10 +9,10 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local TOMATH = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
     if (TOMATH == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)) then
@@ -31,10 +31,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 2540) then
         -- Starting Quest: 'The Old Man and the Harpoon'
         player:addQuest(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
@@ -49,4 +49,4 @@ function onEventFinish(player,csid,option)
         player:delKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)
         player:addFame(ADOULIN)
     end
-end;
+end

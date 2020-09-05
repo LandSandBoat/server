@@ -10,10 +10,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     TrosKilled = player:getCharVar("TrosKilled")
 
     if (player:hasKeyItem(tpz.ki.MERTAIRES_BRACELET) and
@@ -29,15 +29,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 8) then
         if (npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
             player:delKeyItem(tpz.ki.MERTAIRES_BRACELET)
-            player:setCharVar("TrosKilled",0)
-            player:setCharVar("Tros_Timer",0)
+            player:setCharVar("TrosKilled", 0)
+            player:setCharVar("Tros_Timer", 0)
         end
     end
-end;
+end

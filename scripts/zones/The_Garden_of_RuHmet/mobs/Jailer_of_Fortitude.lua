@@ -45,7 +45,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMagicHit(caster,target,spell)
+function onMagicHit(caster, target, spell)
     if (spell:tookEffect() and (caster:isPC() or caster:isPet()) and spell:getSpellGroup() ~= tpz.magic.spellGroup.BLUE ) then
         -- Handle mimicked spells
         target:setLocalVar("COPY_SPELL", spell:getID())
@@ -67,4 +67,4 @@ function onMobDespawn(mob)
     -- Move QM to random location
     local pos = math.random(1, 5)
     GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
-end;
+end

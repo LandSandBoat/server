@@ -33,13 +33,13 @@ function onMobRoam(mob)
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned() and
             os.time() > nm:getLocalVar("timeToGrow") and
             nm:getLocalVar("phIndex") == 0 and
-            math.random(1,20) == 1 -- this prevents the same Leshy from growing every cycle
+            math.random(1, 20) == 1 -- this prevents the same Leshy from growing every cycle
         ) then
             local p = mob:getPos()
             DisallowRespawn(ph, true)
             DespawnMob(ph)
             DisallowRespawn(ID.mob.COLORFUL_LESHY, false)
-            nm:setSpawn(p.x,p.y,p.z,p.rot)
+            nm:setSpawn(p.x, p.y, p.z, p.rot)
             SpawnMob(ID.mob.COLORFUL_LESHY)
             nm:setLocalVar("phIndex", ph)
         end
@@ -47,4 +47,4 @@ function onMobRoam(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

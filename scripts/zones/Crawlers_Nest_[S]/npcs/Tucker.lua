@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
@@ -26,7 +26,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
@@ -46,10 +46,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 6) then
         player:setCharVar("SheetsofVellum", 1)
@@ -82,4 +82,4 @@ function onEventFinish(player,csid,option)
         end
     end
 
-end;
+end

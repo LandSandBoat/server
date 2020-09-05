@@ -7,13 +7,13 @@
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- JAILER OF HOPE
     if (
         not GetMobByID(ID.mob.JAILER_OF_HOPE):isSpawned() and
-        trade:hasItemQty(1850,1) and -- first_virtue
-        trade:hasItemQty(1851,1) and -- deed_of_placidity
-        trade:hasItemQty(1852,1) and -- high-quality_phuabo_organ
+        trade:hasItemQty(1850, 1) and -- first_virtue
+        trade:hasItemQty(1851, 1) and -- deed_of_placidity
+        trade:hasItemQty(1852, 1) and -- high-quality_phuabo_organ
         trade:getItemCount() == 3
     ) then
         player:tradeComplete()
@@ -21,15 +21,15 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid)
-    -- printf("onUpdate RESULT: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid)
-    -- printf("onFinish RESULT: %u",option)
-end;
+function onEventFinish(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
+end

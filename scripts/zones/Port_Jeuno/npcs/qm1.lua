@@ -11,10 +11,10 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     OldGauntlets = player:hasKeyItem(tpz.ki.OLD_GAUNTLETS)
     ShadowFlames = player:hasKeyItem(tpz.ki.SHADOW_FLAMES)
     BorghertzCS = player:getCharVar("BorghertzCS")
@@ -28,26 +28,26 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 20 and option == 1) then
-        player:setCharVar("BorghertzCS",2)
+        player:setCharVar("BorghertzCS", 2)
     elseif (csid == 48) then
         NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getCharVar("BorghertzAlreadyActiveWithJob") - 1
         NumHands = 13960 + player:getCharVar("BorghertzAlreadyActiveWithJob")
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,NumHands)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, NumHands)
         else
             player:addItem(NumHands)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,NumHands)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, NumHands)
             player:delKeyItem(tpz.ki.OLD_GAUNTLETS)
             player:delKeyItem(tpz.ki.SHADOW_FLAMES)
-            player:setCharVar("BorghertzCS",0)
-            player:setCharVar("BorghertzAlreadyActiveWithJob",0)
-            player:addFame(JEUNO,30)
-            player:completeQuest(JEUNO,NumQuest)
+            player:setCharVar("BorghertzCS", 0)
+            player:setCharVar("BorghertzAlreadyActiveWithJob", 0)
+            player:addFame(JEUNO, 30)
+            player:completeQuest(JEUNO, NumQuest)
         end
     end
-end;
+end

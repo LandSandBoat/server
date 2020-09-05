@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local hate = player:getCharVar("FOMOR_HATE")
 
     if (hate < 8) then --hate lvl 1
@@ -20,9 +20,9 @@ function onTrigger(player,npc)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- fomor codex
-    if (trade:hasItemQty(1877,1) and trade:getItemCount() == 1) then
+    if (trade:hasItemQty(1877, 1) and trade:getItemCount() == 1) then
         local draftOffset = npc:getID() - ID.npc.STALE_DRAFT_OFFSET
         local nmId = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][1]
         local races = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][2]
@@ -32,7 +32,7 @@ function onTrade(player,npc,trade)
 
         if (races[race] and not nm:isSpawned() and hate >= 50) then
             player:tradeComplete()
-            player:setCharVar("FOMOR_HATE",0)
+            player:setCharVar("FOMOR_HATE", 0)
             SpawnMob(nmId):updateClaim(player)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
@@ -40,8 +40,8 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

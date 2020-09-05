@@ -11,19 +11,19 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(4527,1) and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
+        if (trade:hasItemQty(4527, 1) and trade:getItemCount() == 1) then
             player:startEvent(84)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    sleeplessNights = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+    sleeplessNights = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
     if (player:getFameLevel(SANDORIA) >= 2 and sleeplessNights == QUEST_AVAILABLE) then
         player:startEvent(85)
@@ -36,20 +36,20 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 85 and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
     elseif (csid == 84) then
         player:tradeComplete()
         player:addTitle(tpz.title.SHEEPS_MILK_DELIVERER)
         player:addGil(GIL_RATE*5000)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*5000)
-        player:addFame(SANDORIA,30)
-        player:completeQuest(SANDORIA,tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*5000)
+        player:addFame(SANDORIA, 30)
+        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end
 
-end;
+end

@@ -11,10 +11,10 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCampaignAllegiance() > 0) then
         if (player:getCampaignAllegiance() == 2) then
             player:startEvent(9)
@@ -29,12 +29,12 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 7 and option == 0) then
         player:addKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BLUE_RECOMMENDATION_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_RECOMMENDATION_LETTER)
     end
-end;
+end

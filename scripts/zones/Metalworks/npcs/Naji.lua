@@ -13,20 +13,20 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 6) then
-        if (trade:hasItemQty(1127,1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-            player:setCharVar("ridingOnTheClouds_2",0)
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 6) then
+        if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
+            player:setCharVar("ridingOnTheClouds_2", 0)
             player:tradeComplete()
             player:addKeyItem(tpz.ki.SMILING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SMILING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMILING_STONE)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.YASINS_SWORD)) then -- The Doorman, WAR AF1
         player:startEvent(750)
@@ -35,9 +35,9 @@ function onTrigger(player,npc)
 
         if (currentMission == tpz.mission.id.bastok.THE_ZERUHN_REPORT and player:hasKeyItem(tpz.ki.ZERUHN_REPORT)) then
             if (player:seenKeyItem(tpz.ki.ZERUHN_REPORT)) then
-                player:startEvent(710,0)
+                player:startEvent(710, 0)
             else
-                player:startEvent(710,1)
+                player:startEvent(710, 1)
             end
         elseif (currentMission == tpz.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(tpz.ki.C_L_REPORTS)) then
             player:startEvent(711)
@@ -47,7 +47,7 @@ function onTrigger(player,npc)
             if (player:hasKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getCharVar("MissionStatus") == 0) then
                 player:startEvent(713)
             else
-                player:showText(npc,ID.text.GOOD_LUCK)
+                player:showText(npc, ID.text.GOOD_LUCK)
             end
         elseif (player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_BASTOK) and player:getCharVar("MissionStatus") == 0) then
             player:startEvent(720)
@@ -72,41 +72,41 @@ end
 
 -- 710  711  700  713  714  715  717  720  721  750  1008  1009  761
 -- 762  782  805  845  877  938  939  940  941  942  971  969  970
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 750) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addItem(16678)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16678) -- Razor Axe
             player:delKeyItem(tpz.ki.YASINS_SWORD)
-            player:setCharVar("theDoormanCS",0)
-            player:addFame(BASTOK,30)
-            player:completeQuest(BASTOK,tpz.quest.id.bastok.THE_DOORMAN)
+            player:setCharVar("theDoormanCS", 0)
+            player:addFame(BASTOK, 30)
+            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16678) -- Razor Axe
         end
     elseif (csid == 710) then
         player:delKeyItem(tpz.ki.ZERUHN_REPORT)
-        player:completeMission(BASTOK,tpz.mission.id.bastok.THE_ZERUHN_REPORT)
+        player:completeMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT)
     elseif (csid == 713) then
         player:addKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:setCharVar("MissionStatus",1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 720 and option == 0 or csid == 721) then
         player:delKeyItem(tpz.ki.MESSAGE_TO_JEUNO_BASTOK)
         player:addKeyItem(tpz.ki.NEW_FEIYIN_SEAL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.NEW_FEIYIN_SEAL)
-        player:setCharVar("MissionStatus",10)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NEW_FEIYIN_SEAL)
+        player:setCharVar("MissionStatus", 10)
     elseif (csid == 720 and option == 1) then
         player:delKeyItem(tpz.ki.MESSAGE_TO_JEUNO_BASTOK)
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 761) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 714 or csid == 722 or csid == 762) then
-        finishMissionTimeline(player,1,csid,option)
+        finishMissionTimeline(player, 1, csid, option)
     end
 
-end;
+end

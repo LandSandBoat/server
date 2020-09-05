@@ -9,23 +9,23 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
-    if (trade:hasItemQty(717,1) and trade:getItemCount() == 1 and ANewDawnEvent == 3) then
+    if (trade:hasItemQty(717, 1) and trade:getItemCount() == 1 and ANewDawnEvent == 3) then
         player:tradeComplete()
         player:startEvent(148)
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local ANewDawn = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     local feed = player:getCharVar("ChocobosWounds_Event")
 
     -- A New Dawn
@@ -64,21 +64,21 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
     if (csid == 146) then
         if (ANewDawnEvent == 2) then
-            player:setCharVar("ANewDawn_Event",3)
+            player:setCharVar("ANewDawn_Event", 3)
         end
     elseif (csid == 148) then
         player:addKeyItem(tpz.ki.TAMERS_WHISTLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TAMERS_WHISTLE)
-        player:setCharVar("ANewDawn_Event",4)
+        player:setCharVar("ANewDawn_Event", 4)
     end
 
-end;
+end

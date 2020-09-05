@@ -64,7 +64,7 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     -- pop pets
     for i = 1, 8 do
         local pet = GetMobByID(petIDs[1][i])
@@ -74,7 +74,7 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     -- Init Vars
     local mobHPP = mob:getHPP()
@@ -100,14 +100,14 @@ function onMobFight(mob,target)
         mob:setTP(0)
         mob:setModelId(mobModelID[phase])
         mob:setHP(mobHP[phase])
-        mob:setMobMod(tpz.mobMod.SKILL_LIST,skillID[phase])
+        mob:setMobMod(tpz.mobMod.SKILL_LIST, skillID[phase])
 
         -- Handle pets
         for i = 1, 8 do
             local oldPet = pets[phase % 2][i]
             local newPet = pets[(phase - 1) % 2][i]
             newPet:updateEnmity(target)
-            newPet:setMobMod(tpz.mobMod.MAGIC_DELAY,4)
+            newPet:setMobMod(tpz.mobMod.MAGIC_DELAY, 4)
             handlePet(mob, newPet, oldPet, target, petModelID[phase])
         end
 
@@ -121,7 +121,7 @@ function onMobFight(mob,target)
             local newPet = pets[(astral - 1) % 2][i]
             if i == 1 then
                 newPet:updateEnmity(target)
-                astralRand = math.random(1,8)
+                astralRand = math.random(1, 8)
                 handlePet(mob, newPet, oldPet, target, avatarSkins[astralRand])
                 newPet:useMobAbility(avatarAbilities[astralRand])
             else
@@ -192,4 +192,4 @@ function handlePet(mob, newPet, oldPet, target, modelId)
     newPet:spawn()
     newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
     newPet:updateEnmity(target)
-end;
+end

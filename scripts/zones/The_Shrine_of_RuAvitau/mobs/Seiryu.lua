@@ -5,8 +5,8 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMonsterMagicPrepare(mob,target)
-    if (mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS,0) == false) then
+function onMonsterMagicPrepare(mob, target)
+    if (mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS, 0) == false) then
         local rnd = math.random()
         if (rnd < 0.5) then
             return 186 -- aeroga 3
@@ -22,4 +22,4 @@ function onMonsterMagicPrepare(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

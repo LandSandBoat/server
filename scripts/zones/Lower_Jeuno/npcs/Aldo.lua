@@ -9,10 +9,10 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local ZilartMission = player:getCurrentMission(ZILART)
     local ZilartStatus = player:getCharVar("ZilartStatus")
@@ -28,18 +28,18 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 152) then
         player:delKeyItem(tpz.ki.LETTERS_TO_ALDO)
         player:addKeyItem(tpz.ki.SILVER_BELL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SILVER_BELL)
-        player:setCharVar("MissionStatus",3)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SILVER_BELL)
+        player:setCharVar("MissionStatus", 3)
     elseif (csid == 104) then
-        player:setCharVar("ZilartStatus",1)
+        player:setCharVar("ZilartStatus", 1)
     end
 
-end;
+end

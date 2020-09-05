@@ -12,10 +12,10 @@
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -35,33 +35,33 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     local LVLcap = 0
 
     if (option == 1) then
         if (csid == 200) then        -- 50 Cap Area
             LVLcap = 50
-            player:setPos(396,-8,-20,125,9)
+            player:setPos(396, -8, -20, 125, 9)
         elseif (csid == 201) then -- 60 Cap Area
             LVLcap = 60
-            player:setPos(220,-8,-282,66,9)
+            player:setPos(220, -8, -282, 66, 9)
         elseif (csid == 202) then -- No Cap Area
-            player:setPos(180,-8,241,190,9)
+            player:setPos(180, -8, 241, 190, 9)
         elseif (csid == 203) then -- No Cap Area
-            player:setPos(-242,8,-259,126,9)
+            player:setPos(-242, 8, -259, 126, 9)
         elseif (csid == 204) then -- Cap 40 Area
             LVLcap = 40
-            player:setPos(-180,-8,-78,194,9)
+            player:setPos(-180, -8, -78, 194, 9)
         elseif (csid == 205) then -- No Cap Area
-            player:setPos(-300,-8,203,191,9)
+            player:setPos(-300, -8, 203, 191, 9)
         end
 
         if (ENABLE_COP_ZONE_CAP == 1 ) then
-            player:setCharVar("PSOXJA_RESTRICTION_LVL",LVLcap)
+            player:setCharVar("PSOXJA_RESTRICTION_LVL", LVLcap)
         end
     end
-end;
+end

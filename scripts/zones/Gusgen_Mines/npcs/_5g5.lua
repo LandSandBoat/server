@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (npc:getAnimation() == 9) then
         player:messageSpecial(ID.text.LOCK_OTHER_DEVICE)
@@ -19,8 +19,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

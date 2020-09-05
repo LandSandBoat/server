@@ -8,13 +8,13 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-TheQuadav = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 
     if (TheQuadav == QUEST_ACCEPTED) then
         count = trade:getItemCount()
-        QuadavBack = trade:hasItemQty(596,1)
+        QuadavBack = trade:hasItemQty(596, 1)
 
         if (count == 1 and QuadavBack == true) then
             player:startEvent(81)
@@ -23,10 +23,10 @@ TheQuadav = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-TheQuadav = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
-OutOfOneShell = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_COMPLETED) then
         player:startEvent(88)
@@ -40,19 +40,19 @@ OutOfOneShell = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.OUT_OF_ONE_S_SH
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 80) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
     elseif (csid == 81) then
         player:tradeComplete()
-        player:completeQuest(BASTOK,tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
-        player:addFame(BASTOK,120)
+        player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:addFame(BASTOK, 120)
         player:addItem(12832)
-        player:messageSpecial(ID.text.ITEM_OBTAINED,12832)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 12832)
     end
 
-end;
+end

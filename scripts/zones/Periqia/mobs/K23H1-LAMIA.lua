@@ -8,6 +8,6 @@ end
 
 function onMobDespawn(mob)
     local instance = mob:getInstance()
-    local progress = math.random(1,4)
+    local progress = math.random(1, 4)
     instance:setProgress(instance:getProgress() + progress)
-end;
+end

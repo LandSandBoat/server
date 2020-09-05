@@ -8,10 +8,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
 
     if (SOA_Mission < tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
@@ -35,10 +35,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 155) then
         -- Finishes SOA Mission: '...Into the Fire'
         player:completeMission(SOA, tpz.mission.id.soa.INTO_THE_FIRE)
@@ -48,4 +48,4 @@ function onEventFinish(player,csid,option)
         player:completeMission(SOA, tpz.mission.id.soa.DONE_AND_DELIVERED)
         player:addMission(SOA, tpz.mission.id.soa.MINISTERIAL_WHISPERS)
     end
-end;
+end

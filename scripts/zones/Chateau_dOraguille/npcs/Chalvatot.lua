@@ -13,24 +13,24 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    local herMajestysGarden = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+function onTrade(player, npc, trade)
+    local herMajestysGarden = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
-    if (herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533,1) and trade:getItemCount() == 1) then
+    if (herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533, 1) and trade:getItemCount() == 1) then
         player:startEvent(83)
 
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
-    local circleOfTime = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleOfTime = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
-    local lureOfTheWildcat = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local lureOfTheWildcat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local herMajestysGarden = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- THE CRYSTAL SPRING (San d'Oria 3-2)
     if (currentMission == tpz.mission.id.sandoria.THE_CRYSTAL_SPRING and MissionStatus == 3) then
@@ -53,7 +53,7 @@ function onTrigger(player,npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (lureOfTheWildcat == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,19) == false) then
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 19) == false) then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
@@ -68,45 +68,45 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- SAN D'ORIA MISSIONS
     if (csid == 556 or csid == 111) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
 
     -- CIRCLE OF TIME
     elseif (csid == 99 and option == 0) then
-        player:setCharVar("circleTime",6)
+        player:setCharVar("circleTime", 6)
     elseif ((csid == 98 or csid == 99) and option == 1) then
-        player:setCharVar("circleTime",7)
+        player:setCharVar("circleTime", 7)
         player:addKeyItem(tpz.ki.MOON_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MOON_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOON_RING)
     elseif (csid == 96) then
         if (player:getFreeSlotsCount() ~= 0) then
             player:addItem(12647)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,12647)
-            player:completeQuest(JEUNO,tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 12647)
+            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
             player:addTitle(tpz.title.PARAGON_OF_BARD_EXCELLENCE)
-            player:setCharVar("circleTime",0)
+            player:setCharVar("circleTime", 0)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end
 
     -- LURE OF THE WILDCAT
     elseif (csid == 561) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",19,true)
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 19, true)
 
     -- HER MAJESTY'S GARDEN
     elseif (csid == 84 and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
     elseif (csid == 83) then
         player:tradeComplete()
         player:addKeyItem(tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
-        player:addFame(SANDORIA,30)
-        player:completeQuest(SANDORIA,tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
+        player:addFame(SANDORIA, 30)
+        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     end
-end;
+end

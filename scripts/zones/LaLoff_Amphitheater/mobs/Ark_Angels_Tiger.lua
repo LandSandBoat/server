@@ -7,7 +7,7 @@ require("scripts/globals/status")
 
 -- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-2, mobid+5 do
@@ -18,9 +18,9 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

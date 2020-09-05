@@ -18,10 +18,10 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local X = player:getXPos()
     local Y = player:getYPos()
@@ -43,7 +43,7 @@ function onTrigger(player,npc)
         player:startEvent(27)
     elseif ((X <= -153.3 and X >= -168.3) and (Y >= -2 and Y <= 0) and (Z >= 54 and Z <= 66)) then
         if (player:getCurrentMission(COP) == tpz.mission.id.cop.DISTANT_BELIEFS and player:getCharVar("PromathiaStatus") == 1) then
-            player:setCharVar("PromathiaStatus",2)
+            player:setCharVar("PromathiaStatus", 2)
             player:startEvent(35)
         else
             player:startEvent(28)
@@ -60,8 +60,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

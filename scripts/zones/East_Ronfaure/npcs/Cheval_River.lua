@@ -9,9 +9,9 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/East_Ronfaure/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED and trade:hasItemQty(602, 1)) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED and trade:hasItemQty(602, 1)) then
         if (trade:getItemCount() == 1 and player:getFreeSlotsCount() > 0) then
             player:tradeComplete()
             player:addItem(603)
@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasItem(602) == true) then
         player:messageSpecial(ID.text.BLESSED_WATERSKIN)
@@ -33,9 +33,9 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
-end;
+end

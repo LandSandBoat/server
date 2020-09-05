@@ -7,10 +7,10 @@ local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 9) then
         player:startEvent(5)
     else
@@ -19,11 +19,11 @@ function onTrigger(player,npc)
     return 1
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 5) then
-        player:setCharVar("COP_Tenzen_s_Path",10)
+        player:setCharVar("COP_Tenzen_s_Path", 10)
     end
-end;
+end

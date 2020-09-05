@@ -13,13 +13,13 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local theDoorman = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
 
     if (theDoorman == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 40) then
         player:startEvent(151) -- Start Quests "The doorman"
@@ -35,25 +35,25 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 151) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.THE_DOORMAN)
-        player:setCharVar("theDoormanCS",1)
+        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+        player:setCharVar("theDoormanCS", 1)
     elseif (csid == 152) then
-        player:setCharVar("theDoorman_time",VanadielDayOfTheYear())
-        player:setCharVar("theDoormanCS",2)
+        player:setCharVar("theDoorman_time", VanadielDayOfTheYear())
+        player:setCharVar("theDoormanCS", 2)
         player:delKeyItem(tpz.ki.SWORD_GRIP_MATERIAL)
     elseif (csid == 153) then
         player:addKeyItem(tpz.ki.YASINS_SWORD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.YASINS_SWORD)
-        player:setCharVar("theDoormanCS",3)
-        player:setCharVar("theDoorman_time",0)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.YASINS_SWORD)
+        player:setCharVar("theDoormanCS", 3)
+        player:setCharVar("theDoorman_time", 0)
     elseif (csid == 154) then
-        player:setCharVar("theTalekeeperTruthCS",1)
+        player:setCharVar("theTalekeeperTruthCS", 1)
     end
 
-end;
+end

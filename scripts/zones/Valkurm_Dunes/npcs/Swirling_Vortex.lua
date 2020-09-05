@@ -9,12 +9,12 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:hasCompletedMission(COP,tpz.mission.id.cop.THE_MOTHERCRYSTALS)) then
+    if (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) then
         player:startEvent(12)
     else
         player:messageSpecial(ID.text.AN_EMPTY_LIGHT_SWIRLS)
@@ -22,13 +22,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 12 and option == 1) then
         tpz.teleport.to(player, tpz.teleport.id.LUFAISE_VORTEX)
     end
 
-end;
+end

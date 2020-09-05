@@ -4,10 +4,10 @@
 -- Standard Info NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local kill=player:getCharVar("FOMOR_HATE")
     local n=0
     if (kill< 8) then n=0
@@ -15,11 +15,11 @@ function onTrigger(player,npc)
     elseif (kill< 50) then n=2
     elseif (kill>= 50) then n=3
     end
-    player:startEvent(355,n)
+    player:startEvent(355, n)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

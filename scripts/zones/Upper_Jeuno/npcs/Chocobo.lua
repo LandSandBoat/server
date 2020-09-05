@@ -11,8 +11,8 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    local ChocobosWounds = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+function onTrade(player, npc, trade)
+    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     if (ChocobosWounds == 0) then
         player:startEvent(62)
@@ -20,9 +20,9 @@ function onTrade(player,npc,trade)
         local count = trade:getItemCount()
         local gil = trade:getGil()
 
-        if (trade:hasItemQty(4545,1)) then
+        if (trade:hasItemQty(4545, 1)) then
             player:startEvent(76)
-        elseif (trade:hasItemQty(534,1) and gil == 0 and count == 1) then
+        elseif (trade:hasItemQty(534, 1) and gil == 0 and count == 1) then
             --Check feeding status.
             local feed = player:getCharVar("ChocobosWounds_Event")
             local feedMin = player:getCharVar("ChocobosWounds_Min")
@@ -49,15 +49,15 @@ function onTrade(player,npc,trade)
             end
         end
     else
-        if (trade:hasItemQty(4545,1)) then
+        if (trade:hasItemQty(4545, 1)) then
             player:startEvent(38)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     if (ChocobosWounds == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) == false) then
         -- this is a quick hack to let people get their license if it was lost
@@ -88,29 +88,29 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 57) then
         player:setCharVar("ChocobosWounds_Event", 2)
-        player:setCharVar("ChocobosWounds_Min",os.time() + 60)
+        player:setCharVar("ChocobosWounds_Min", os.time() + 60)
     elseif (csid == 58) then
         player:setCharVar("ChocobosWounds_Event", 3)
-        player:setCharVar("ChocobosWounds_Min",os.time() + 60)
+        player:setCharVar("ChocobosWounds_Min", os.time() + 60)
     elseif (csid == 59) then
         player:setCharVar("ChocobosWounds_Event", 4)
-        player:setCharVar("ChocobosWounds_Min",os.time() + 60)
+        player:setCharVar("ChocobosWounds_Min", os.time() + 60)
         player:tradeComplete()
         player:startEvent(99)
     elseif (csid == 60) then
         player:setCharVar("ChocobosWounds_Event", 5)
-        player:setCharVar("ChocobosWounds_Min",os.time() + 60)
+        player:setCharVar("ChocobosWounds_Min", os.time() + 60)
         player:tradeComplete()
     elseif (csid == 63) then
         player:setCharVar("ChocobosWounds_Event", 6)
-        player:setCharVar("ChocobosWounds_Min",os.time() + 60)
+        player:setCharVar("ChocobosWounds_Min", os.time() + 60)
         player:tradeComplete()
     elseif (csid == 64) then
         player:addKeyItem(tpz.ki.CHOCOBO_LICENSE)
@@ -118,8 +118,8 @@ function onEventFinish(player,csid,option)
         player:addTitle(tpz.title.CHOCOBO_TRAINER)
         player:setCharVar("ChocobosWounds_Event", 0)
         player:setCharVar("ChocobosWounds_Min", 0)
-        player:addFame(JEUNO,30)
+        player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO,tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     end
-end;
+end

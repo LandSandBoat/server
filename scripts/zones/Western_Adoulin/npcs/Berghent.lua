@@ -11,10 +11,10 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local FOOL = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
     if (FOOL == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.BLIGHTBERRY)) then
@@ -38,10 +38,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 80) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
@@ -68,4 +68,4 @@ function onEventFinish(player,csid,option)
         player:addTitle(tpz.title.POTATION_PATHFINDER)
         player:addFame(ADOULIN)
     end
-end;
+end

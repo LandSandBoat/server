@@ -19,7 +19,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
 
     local cs = -1
 
@@ -31,7 +31,7 @@ function onZoneIn(player,prevZone)
 
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -45,18 +45,18 @@ function onRegionEnter(player,region)
 
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 8 and option == 1) then
         player:setPos(-370, -178, -40, 243, 158)
     elseif (csid == 0) then
-        player:setCharVar("ZilartStatus",3)
+        player:setCharVar("ZilartStatus", 3)
     end
 
-end;
+end

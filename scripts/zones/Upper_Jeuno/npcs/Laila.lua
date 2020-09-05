@@ -17,11 +17,11 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local lakesideMin = player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LAKESIDE_MINUET)
+function onTrigger(player, npc)
+    local lakesideMin = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
     if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL and ENABLE_WOTG == 1) then
         player:startEvent(10111) -- Start quest csid, asks for Key Item Stardust Pebble
@@ -33,20 +33,20 @@ function onTrigger(player,npc)
         player:startEvent(10113)
     elseif (lakesideMin == QUEST_ACCEPTED) then
         player:startEvent(10112) -- After accepting, reminder
-    elseif ((player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
-        or (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
+    elseif ((player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE
+        or (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
         and player:hasItem(19203) == false))
         and player:getMainJob() == tpz.job.DNC and player:getMainLvl()>=40) then
 
         player:startEvent(10129)
-    elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1") == 5 and player:seenKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE) and player:getMainJob() == tpz.job.DNC) then
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and player:getCharVar("QuestStatus_DNC_AF1") == 5 and player:seenKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE) and player:getMainJob() == tpz.job.DNC) then
         player:startEvent(10133)
-    elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED) then
         player:startEvent(10134)
 
     -- Dancer AF: The Road to Divadom
-    elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
-        and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_AVAILABLE
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED
+        and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_AVAILABLE
         and player:getMainJob() == tpz.job.DNC) then
 
         player:startEvent(10136) -- CSID 10136
@@ -58,7 +58,7 @@ function onTrigger(player,npc)
         player:startEvent(10170) --CSID 10170. This should only occur if the player's inventory was full during the chain of events that start in the elseif above.
 
     -- Dancer AF: Comeback Queen
-    elseif (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED
         and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN) == QUEST_AVAILABLE
         and player:getMainJob() == tpz.job.DNC) then
 
@@ -81,15 +81,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10111 and option == 1) then
-        player:addQuest(JEUNO,tpz.quest.id.jeuno.LAKESIDE_MINUET)
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     elseif (csid == 10118) then
-        player:setCharVar("Lakeside_Minuet_Progress",0)
-        player:completeQuest(JEUNO,tpz.quest.id.jeuno.LAKESIDE_MINUET)
+        player:setCharVar("Lakeside_Minuet_Progress", 0)
+        player:completeQuest(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
         player:addTitle(tpz.title.TROUPE_BRILIOTH_DANCER)
         player:unlockJob(tpz.job.DNC)
         player:messageSpecial(ID.text.UNLOCK_DANCER)
@@ -97,21 +97,21 @@ function onEventFinish(player,csid,option)
         player:delKeyItem(tpz.ki.STARDUST_PEBBLE)
         player:needToZone(true)
     elseif (csid== 10129) then
-        if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED) then
-            player:delQuest(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED) then
+            player:delQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
             player:delKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE)
         end
-        player:addQuest(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         player:setCharVar("QuestStatus_DNC_AF1", 1)
 
     elseif (csid== 10133) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,19203)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 19203)
         else
             player:setCharVar("QuestStatus_DNC_AF1", 0)
             player:addItem(19203) -- war hoop
-            player:messageSpecial(ID.text.ITEM_OBTAINED,19203)
-            player:completeQuest(JEUNO,tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 19203)
+            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end
 
     -- Dancer AF: The Road to Divadom
@@ -200,4 +200,4 @@ function onEventFinish(player,csid,option)
         -- the surrounding NPCs should have their dialogue check comebackqueenCS as well.
         end
     end
-end;
+end

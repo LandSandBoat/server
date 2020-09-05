@@ -64,10 +64,10 @@ local function giveReducedIncidents(player)
     return 0.1
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then
         player:setLocalVar("ClammingPointID", npc:getID())
 
@@ -94,7 +94,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
     if (csid == 20) then
         if (player:getCharVar("ClammingKitSize") == 200 and math.random() <= giveReducedIncidents(player)) then
@@ -121,7 +121,7 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 20) then
         if (player:getLocalVar("SomethingJumpedInBucket") > 0) then
@@ -156,4 +156,4 @@ function onEventFinish(player,csid,option)
         SetServerVariable("ClammingPoint_" .. player:getLocalVar("ClammingPointID") .. "_InUse", 0)
         player:setLocalVar("ClammingPointID", 0)
     end
-end;
+end

@@ -28,14 +28,14 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-20,-1.5,-355.482,192)
+        player:setPos(-20, -1.5, -355.482, 192)
     end
 
-    player:setCharVar("Hu-Xzoi-TP",0)
+    player:setCharVar("Hu-Xzoi-TP", 0)
 
     return cs
 end
@@ -47,26 +47,26 @@ function afterZoneIn(player)
     player:entityVisualPacket("cryq")
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
     if (player:getCharVar("Hu-Xzoi-TP") == 0 and player:getAnimation() == tpz.anim.NONE) then -- prevent 2cs at same time
         player:startEvent(149 + region:GetRegionID())
     end
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if (csid >= 150 and csid <= 159) then
-        player:setCharVar("Hu-Xzoi-TP",1)
+        player:setCharVar("Hu-Xzoi-TP", 1)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid >= 150 and csid <= 159) then
-        player:setCharVar("Hu-Xzoi-TP",0)
+        player:setCharVar("Hu-Xzoi-TP", 0)
     end
 end
 
 function onGameHour(zone)
-end;
+end

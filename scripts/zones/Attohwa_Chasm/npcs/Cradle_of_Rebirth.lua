@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- Trade Flaxen Pouch
-    if (trade:hasItemQty(1777,1) and trade:getItemCount() == 1) then
+    if (trade:hasItemQty(1777, 1) and trade:getItemCount() == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1778) -- Parradamo Stones
         else
@@ -20,10 +20,10 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.MIMEO_JEWEL) == true) then
         player:delKeyItem(tpz.ki.MIMEO_JEWEL)
-        player:messageSpecial(ID.text.KEYITEM_LOST,tpz.ki.MIMEO_JEWEL)
+        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.MIMEO_JEWEL)
         player:addKeyItem(tpz.ki.MIMEO_FEATHER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIMEO_FEATHER)
         player:addKeyItem(tpz.ki.SECOND_MIMEO_FEATHER)
@@ -35,8 +35,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

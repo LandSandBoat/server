@@ -8,4 +8,4 @@ mixins = { require("scripts/mixins/families/phuabo") }
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

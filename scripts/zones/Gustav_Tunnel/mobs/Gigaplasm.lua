@@ -22,4 +22,4 @@ function onMobDeath(mob, player, isKiller)
         GetMobByID(mobId + 1):updateEnmity(player)
         GetMobByID(mobId + 2):updateEnmity(player)
     end
-end;
+end

@@ -17,10 +17,10 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-25,-1 ,-620 ,33)
+        player:setPos(-25, -1 , -620 , 33)
     end
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 0) then
         cs=1
@@ -30,19 +30,19 @@ function onZoneIn(player,prevZone)
     return cs
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 1) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
         player:addKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LIGHT_OF_ALTAIEU)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_ALTAIEU)
         player:addTitle(tpz.title.SEEKER_OF_THE_LIGHT)
     elseif (csid == 167) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
     end
-end;
+end

@@ -27,7 +27,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-5, mobid+2 do
@@ -38,21 +38,21 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
-    if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(),tpz.behavior.STANDBACK) > 0) then
+    if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(), tpz.behavior.STANDBACK) > 0) then
         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.STANDBACK)))
-        mob:setMobMod(tpz.mobMod.TELEPORT_TYPE,0)
-        mob:setMobMod(tpz.mobMod.SPAWN_LEASH,0)
+        mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 0)
+        mob:setMobMod(tpz.mobMod.SPAWN_LEASH, 0)
         mob:setSpellList(0)
     end
-    if (not mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(),tpz.behavior.STANDBACK) == 0) then
+    if (not mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(), tpz.behavior.STANDBACK) == 0) then
         mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.STANDBACK))
-        mob:setMobMod(tpz.mobMod.TELEPORT_TYPE,1)
-        mob:setMobMod(tpz.mobMod.SPAWN_LEASH,22)
+        mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 1)
+        mob:setMobMod(tpz.mobMod.SPAWN_LEASH, 22)
         mob:setSpellList(39)
     end
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

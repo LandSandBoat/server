@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
 
@@ -29,8 +29,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

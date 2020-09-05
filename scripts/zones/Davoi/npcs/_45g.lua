@@ -9,17 +9,17 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(50)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 50 and player:getCharVar("miniQuestForORB_CS") == 1) then
 
@@ -45,8 +45,8 @@ function onEventFinish(player,csid,option)
             player:delKeyItem(tpz.ki.BLOOD_ORB)
             player:addKeyItem(tpz.ki.CURSED_ORB)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURSED_ORB)
-            player:addStatusEffect(tpz.effect.CURSE_I,50,0,900)
+            player:addStatusEffect(tpz.effect.CURSE_I, 50, 0, 900)
         end
     end
 
-end;
+end

@@ -7,12 +7,12 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(OUTLANDS,tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
         local aThiefinNorgCS = player:getCharVar("aThiefinNorgCS")
         if (aThiefinNorgCS == 2) then
             player:startEvent(301)
@@ -27,13 +27,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 301) then
-        player:setCharVar("aThiefinNorgCS",3)
+        player:setCharVar("aThiefinNorgCS", 3)
     end
 
-end;
+end

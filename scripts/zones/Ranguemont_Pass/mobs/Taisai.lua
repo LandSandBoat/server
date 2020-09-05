@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Ranguemont_Pass/IDs")
 function disturbMob(mob)
     local phIndex = mob:getLocalVar("phIndex")
     if (phIndex > 0) then
-        mob:setLocalVar("timeToGrow", os.time() + math.random(86400,259200)) -- 1 to 3 days
+        mob:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
     end
 end
 
@@ -38,4 +38,4 @@ function onMobRoam(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

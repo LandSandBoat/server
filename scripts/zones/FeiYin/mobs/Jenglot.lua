@@ -13,4 +13,4 @@ function onMobDeath(mob, player, isKiller)
         player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
         player:addKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
     end
-end;
+end

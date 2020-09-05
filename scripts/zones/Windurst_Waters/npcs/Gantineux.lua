@@ -11,11 +11,11 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    ActingInGoodFaith = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
+function onTrigger(player, npc)
+    ActingInGoodFaith = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
 
     if (ActingInGoodFaith == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 4 and player:getMainLvl() >= 10) then
         player:startEvent(10019) -- Start quest "Acting in Good Faith"
@@ -34,16 +34,16 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10019 and option == 0) then
-        player:addQuest(WINDURST,tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
         player:addKeyItem(tpz.ki.SPIRIT_INCENSE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SPIRIT_INCENSE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SPIRIT_INCENSE)
     elseif (csid == 10021) then
         player:addKeyItem(tpz.ki.GANTINEUXS_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.GANTINEUXS_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GANTINEUXS_LETTER)
     end
-end;
+end

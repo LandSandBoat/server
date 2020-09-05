@@ -6,10 +6,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(tpz.ki.SHADOW_FRAGMENT)) then
         player:startEvent(603)
@@ -21,13 +21,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 603) then
-        finishMissionTimeline(player,1,csid,option)
+        finishMissionTimeline(player, 1, csid, option)
     end
 
-end;
+end

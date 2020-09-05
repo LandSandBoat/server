@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         16643, 11285, 1,    -- Battleaxe
@@ -23,6 +23,6 @@ function onTrigger(player,npc)
         16450,  1867, 3,    -- Dagger
     }
 
-    player:showText(npc,ID.text.PERITRAGE_SHOP_DIALOG)
+    player:showText(npc, ID.text.PERITRAGE_SHOP_DIALOG)
     tpz.shop.nation(player, stock, tpz.nation.BASTOK)
 end

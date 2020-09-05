@@ -14,10 +14,10 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- cs notes
     -- 370 (370) = You have no mission, gtfo
@@ -26,9 +26,9 @@ function onTrigger(player,npc)
     -- 160 (160) = 1st cutscene of Windurst Mission 2-1
     -- 161 (161) = More info on 2-1, if you talk to him right after the previous cutscene again
 
-    local bookwormStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local glyphStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.GLYPH_HANGER)
-    local chasingStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CHASING_TALES)
+    local bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local glyphStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+    local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
 
     local Fame = player:getFameLevel(WINDURST)
 
@@ -52,11 +52,11 @@ function onTrigger(player,npc)
         player:startEvent(387) -- Start Quest "Early Bird Catches the Bookworm"
     elseif (bookwormStatus == QUEST_ACCEPTED) then
         player:startEvent(388) -- During Quest "Early Bird Catches the Bookworm"
-    elseif (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) then
-        function testflag(set,flag)
+    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) then
+        function testflag(set, flag)
             return (set % (2*flag) >= flag)
         end
-        if (testflag(tonumber(player:getCharVar("QuestHatInHand_var")),32) == false) then
+        if (testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 32) == false) then
             player:startEvent(55) -- Show Off Hat
         end
     -- Book is tpz.ki.A_SONG_OF_LOVE, KeyItem ID = 126
@@ -70,9 +70,9 @@ function onTrigger(player,npc)
         player:startEvent(406) --  Add follow up cutscene
         -- Windurst Mission 7-1 --
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 0) then
-        player:startEvent(715,0,tpz.ki.OPTISTERY_RING)
+        player:startEvent(715, 0, tpz.ki.OPTISTERY_RING)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 1) then
-        player:startEvent(716,0,tpz.ki.OPTISTERY_RING)
+        player:startEvent(716, 0, tpz.ki.OPTISTERY_RING)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(724)
     else
@@ -80,35 +80,35 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 55) then  -- Show Off Hat
         player:addCharVar("QuestHatInHand_var", 32)
         player:addCharVar("QuestHatInHand_count", 1)
     elseif (csid == 160) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 168) then
-        finishMissionTimeline(player,1,csid,option)
+        finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 387 and option == 0) then -- Early Bird Catches the Bookworm
-        player:addQuest(WINDURST,tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
     elseif (csid == 403 and option == 0) then
-        player:addQuest(WINDURST,tpz.quest.id.windurst.CHASING_TALES)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     elseif (csid ==875) then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status",11)
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
     elseif (csid == 715) then
         player:addKeyItem(tpz.ki.OPTISTERY_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.OPTISTERY_RING)
-        player:setCharVar("MissionStatus",1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OPTISTERY_RING)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 724) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 801) then
         player:addKeyItem(tpz.ki.OPTISTERY_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.OPTISTERY_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OPTISTERY_RING)
         if (player:hasKeyItem(tpz.ki.AURASTERY_RING) and player:hasKeyItem(tpz.ki.RHINOSTERY_RING)) then
-            player:setCharVar("MissionStatus",2)
+            player:setCharVar("MissionStatus", 2)
         end
     end
-end;
+end

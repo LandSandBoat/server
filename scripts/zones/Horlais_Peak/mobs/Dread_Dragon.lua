@@ -8,4 +8,4 @@ require("scripts/globals/titles")
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.DREAD_DRAGON_SLAYER)
-end;
+end

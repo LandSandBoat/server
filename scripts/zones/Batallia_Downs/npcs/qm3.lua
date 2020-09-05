@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.BREAKING_BARRIERS and player:getCharVar("MissionStatus") == 3
         and not GetMobByID(ID.mob.SUPARNA):isSpawned() and not GetMobByID(ID.mob.SUPARNA_FLEDGLING):isSpawned()) then
         if (player:getCharVar("Mission9-1Kills") > 0) then
@@ -22,17 +22,17 @@ function onTrigger(player,npc)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 904) then
         player:addKeyItem(tpz.ki.FIGURE_OF_LEVIATHAN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.FIGURE_OF_LEVIATHAN)
-        player:setCharVar("MissionStatus",4)
-        player:setCharVar("Mission9-1Kills",0)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FIGURE_OF_LEVIATHAN)
+        player:setCharVar("MissionStatus", 4)
+        player:setCharVar("Mission9-1Kills", 0)
     end
-end;
+end

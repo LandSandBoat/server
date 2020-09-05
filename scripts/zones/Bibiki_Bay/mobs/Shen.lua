@@ -3,7 +3,7 @@
 --  Mob: Shen
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if (mob:getBattleTime() % 45 == 0) then
         local mobId = mob:getID()
         for i = 1, 2 do
@@ -17,7 +17,7 @@ end
 function onMobDeath(mob, player, isKiller)
 end
 
-function onMonsterMagicPrepare(mob,target)
+function onMonsterMagicPrepare(mob, target)
     -- casts Water IV, Waterga III, Flood, Drown
     local rnd = math.random()
 
@@ -31,4 +31,4 @@ function onMonsterMagicPrepare(mob,target)
         return 240 -- drown
     end
 
-end;
+end

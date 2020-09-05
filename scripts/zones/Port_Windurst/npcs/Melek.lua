@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     pNation = player:getNation()
 
@@ -26,7 +26,7 @@ function onTrigger(player,npc)
                 if (missionStatus == 1) then
                     player:startEvent(48)
                 elseif (missionStatus == 7) then
-                    player:showText(npc,ID.text.MELEK_DIALOG_C)
+                    player:showText(npc, ID.text.MELEK_DIALOG_C)
                 -- Bastok Mission 2-3 Part II - San d'Oria > Windurst
                 elseif (missionStatus == 6) then
                     player:startEvent(61)
@@ -40,7 +40,7 @@ function onTrigger(player,npc)
                 elseif (player:hasKeyItem(tpz.ki.SWORD_OFFERING)) then
                 player:startEvent(53)
                 elseif (missionStatus <= 5) then
-                    player:showText(npc,ID.text.MELEK_DIALOG_B)
+                    player:showText(npc, ID.text.MELEK_DIALOG_B)
                 elseif (missionStatus == 6) then
                     player:startEvent(55)
                 end
@@ -49,7 +49,7 @@ function onTrigger(player,npc)
                 if (missionStatus == 7) then
                     player:startEvent(64)
                 elseif (missionStatus == 8) then
-                    player:showText(npc,ID.text.MELEK_DIALOG_A)
+                    player:showText(npc, ID.text.MELEK_DIALOG_A)
                 elseif (player:hasKeyItem(tpz.ki.KINDRED_CREST)) then
                     player:startEvent(66)
                 end
@@ -63,32 +63,32 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 48) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY_WINDURST)
-        player:setCharVar("MissionStatus",2)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST)
+        player:setCharVar("MissionStatus", 2)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
     elseif (csid == 53) then
         player:addKeyItem(tpz.ki.DULL_SWORD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.DULL_SWORD)
-        player:setCharVar("MissionStatus",4)  --> Gideus next
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DULL_SWORD)
+        player:setCharVar("MissionStatus", 4)  --> Gideus next
         player:delKeyItem(tpz.ki.SWORD_OFFERING) -- remove sword offering
     elseif (csid == 55) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
-        player:setCharVar("MissionStatus",7) -- to Sandy now
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:setCharVar("MissionStatus", 7) -- to Sandy now
     elseif (csid == 61) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
-        player:setCharVar("MissionStatus",7)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
+        player:setCharVar("MissionStatus", 7)
     elseif (csid == 66) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.KINDRED_REPORT)
-        player:setCharVar("MissionStatus",10)  -- return to Bastok
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
+        player:setCharVar("MissionStatus", 10)  -- return to Bastok
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 
-end;
+end

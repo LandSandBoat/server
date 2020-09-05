@@ -11,12 +11,12 @@ function onMobSpawn(mob)
     mob:AnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
     if (mob:getHP() < ((mob:getMaxHP() / 10) * 2.5)) then
         if (mob:hasStatusEffect(tpz.effect.ATTACK_BOOST) == false) then
-            mob:addStatusEffect(tpz.effect.ATTACK_BOOST,75,0,0)
+            mob:addStatusEffect(tpz.effect.ATTACK_BOOST, 75, 0, 0)
             mob:getStatusEffect(tpz.effect.ATTACK_BOOST):setFlag(tpz.effectFlag.DEATH)
         end
     end
@@ -64,5 +64,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    mob:setRespawnTime(math.random(259200,432000)) -- 3 to 5 days
-end;
+    mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
+end

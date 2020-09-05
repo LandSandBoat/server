@@ -8,9 +8,9 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- Trade Cotton Pouch
-    if (trade:hasItemQty(1779,1) and trade:getItemCount() == 1) then
+    if (trade:hasItemQty(1779, 1) and trade:getItemCount() == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1780) -- Chamnaet Ice
         else
@@ -21,5 +21,5 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
-end;
+function onTrigger(player, npc)
+end

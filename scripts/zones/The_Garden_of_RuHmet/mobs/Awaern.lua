@@ -27,17 +27,17 @@ function onMobDeath(mob, player, isKiller)
         if (qm2:getStatus() ~= tpz.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
             -- if hated player took too long, reset
             if (hatedPlayer ~= 0) then
-                qm2:setLocalVar("hatedPlayer",0)
-                qm2:setLocalVar("hateTimer",0)
+                qm2:setLocalVar("hatedPlayer", 0)
+                qm2:setLocalVar("hateTimer", 0)
             end
 
             -- if aern belongs to QM group, chance for sheer animosity
             local position = GetNPCByID(ID.npc.IXAERN_DRK_QM):getLocalVar("position")
             local currentMobID = mob:getID()
             if (currentMobID >= ID.mob.AWAERN_DRK_GROUPS[position] and currentMobID <= ID.mob.AWAERN_DRK_GROUPS[position] + 2) then
-                if (math.random(1,8) == 1) then
-                    qm2:setLocalVar("hatedPlayer",player:getID())
-                    qm2:setLocalVar("hateTimer",os.time() + 600) -- player with animosity has 10 minutes to touch QM
+                if (math.random(1, 8) == 1) then
+                    qm2:setLocalVar("hatedPlayer", player:getID())
+                    qm2:setLocalVar("hateTimer", os.time() + 600) -- player with animosity has 10 minutes to touch QM
                     player:messageSpecial(ID.text.SHEER_ANIMOSITY)
                 end
             end
@@ -69,4 +69,4 @@ function onMobDespawn(mob)
         SetServerVariable("[SEA]IxAernDRG_PH", 0) -- Clear the variable because it is spawned!
     end
 
-end;
+end

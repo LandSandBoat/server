@@ -5,7 +5,7 @@
 -- !pos 23.447 -1.563 50.941 28
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local DoorID = npc:getID() + 1
     local DoorA = GetNPCByID(DoorID):getAnimation()
@@ -17,8 +17,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -17,7 +17,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     --[[ TODO:
         Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
         Current victory system doesn't readily support a random choice of pet while having
@@ -34,14 +34,14 @@ function onMobEngaged(mob,target)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local charm = mob:getLocalVar("Charm")
 
     if (charm == 0 and mob:getHPP() <  50) then
         mob:useMobAbility(710)
-        mob:setLocalVar("Charm",1)
+        mob:setLocalVar("Charm", 1)
     end
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

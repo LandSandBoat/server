@@ -13,4 +13,4 @@ end
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.DARK_DRAGON_SLAYER)
-end;
+end

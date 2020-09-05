@@ -5,29 +5,20 @@
 -- !pos 123 0 106 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) == true and trade:getItemCount() == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+function onTrade(player, npc, trade)
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (trade:getGil() >= 10) then
             player:startEvent(571)
         end
     end
-
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (player:hasItem(603) == true) then
             player:startEvent(573)
         elseif (player:hasItem(602) == true) then
@@ -41,10 +32,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- Waters of the Cheval, recieve blessed waterskin
     if (csid == 571) then
@@ -56,4 +47,4 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 602)
         end
     end
-end;
+end

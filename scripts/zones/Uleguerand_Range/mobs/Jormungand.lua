@@ -11,7 +11,7 @@ function onMobSpawn(mob)
     mob:AnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) == false and mob:actionQueueEmpty() == true) then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
@@ -65,5 +65,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    mob:setRespawnTime(math.random(259200,432000)) -- 3 to 5 days
-end;
+    mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
+end

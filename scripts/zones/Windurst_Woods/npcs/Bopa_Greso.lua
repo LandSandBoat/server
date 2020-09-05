@@ -9,11 +9,11 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local thickAsThieves = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
+function onTrigger(player, npc)
+    local thickAsThieves = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
     local thickAsThievesCS = player:getCharVar("thickAsThievesCS")
 
     if thickAsThieves == QUEST_ACCEPTED then
@@ -31,8 +31,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

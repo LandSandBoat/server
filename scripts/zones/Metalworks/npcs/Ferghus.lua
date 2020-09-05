@@ -1,17 +1,17 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Ferghus
--- Starts Quest: Too Many Chefs (1,86)
+-- Starts Quest: Too Many Chefs (1, 86)
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local TooManyChefs = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.TOO_MANY_CHEFS)
+function onTrigger(player, npc)
+    local TooManyChefs = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
     local pFame = player:getFameLevel(BASTOK)
 
     if (TooManyChefs == QUEST_AVAILABLE and pFame >= 5) then
@@ -23,14 +23,14 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 946 and option == 0) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.TOO_MANY_CHEFS)
-        player:setCharVar("TOO_MANY_CHEFS",1)
+        player:addQuest(BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
+        player:setCharVar("TOO_MANY_CHEFS", 1)
     elseif (csid == 947) then
-        player:setCharVar("TOO_MANY_CHEFS",5)
+        player:setCharVar("TOO_MANY_CHEFS", 5)
     end
-end;
+end

@@ -7,11 +7,11 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:addMod(tpz.mod.DMG,-98)
+    mob:addMod(tpz.mod.DMG, -98)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
-    mob:setMod(tpz.mod.DEF,1500)
-    mob:setMod(tpz.mod.MDEF,900)
+    mob:setMod(tpz.mod.DEF, 1500)
+    mob:setMod(tpz.mod.MDEF, 900)
 end
 
 function onMobDeath(mob, player, isKiller)

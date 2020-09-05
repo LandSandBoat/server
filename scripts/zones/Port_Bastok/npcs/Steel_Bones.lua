@@ -10,12 +10,12 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local GuestofHauteur = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+    local GuestofHauteur = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
     local itemEquipped = player:getEquipID(tpz.slot.MAIN)
 
     if GuestofHauteur == QUEST_ACCEPTED and player:getCharVar("GuestofHauteur_Event") ~= 1 and (itemEquipped == 17045 or itemEquipped == 17426) then -- Maul / Replica Maul
@@ -25,15 +25,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if csid == 57 then
-        player:setCharVar("GuestofHauteur_Event",1)
+        player:setCharVar("GuestofHauteur_Event", 1)
         player:addKeyItem(tpz.ki.LETTERS_FROM_DOMIEN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LETTERS_FROM_DOMIEN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTERS_FROM_DOMIEN)
     end
 
 end

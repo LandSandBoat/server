@@ -73,7 +73,7 @@ function onPath(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- item IDs
     -- 483       Broken Mithran Fishing Rod
     -- 22        Workbench
@@ -88,8 +88,8 @@ function onTrade(player,npc,trade)
     local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
-    local goodtrade = trade:hasItemQty(22,1)
-    local badtrade = (trade:hasItemQty(483,1) or trade:hasItemQty(1008,1) or trade:hasItemQty(1157,1) or trade:hasItemQty(1158,1) or trade:hasItemQty(904,1) or trade:hasItemQty(4599,1) or trade:hasItemQty(905,1) or trade:hasItemQty(1147,1) or trade:hasItemQty(4600,1))
+    local goodtrade = trade:hasItemQty(22, 1)
+    local badtrade = (trade:hasItemQty(483, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1))
 
     if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
         if progress == 1 or failed == 2 then
@@ -102,7 +102,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
@@ -123,23 +123,23 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option,npc)
+function onEventFinish(player, csid, option, npc)
 
     if (csid == 220) then    -- correct trade, onto next opo
         if player:getCharVar("OPO_OPO_PROGRESS") == 1 then
             player:tradeComplete()
-            player:setCharVar("OPO_OPO_PROGRESS",2)
-            player:setCharVar("OPO_OPO_FAILED",0)
+            player:setCharVar("OPO_OPO_PROGRESS", 2)
+            player:setCharVar("OPO_OPO_FAILED", 0)
         else
-            player:setCharVar("OPO_OPO_FAILED",3)
+            player:setCharVar("OPO_OPO_FAILED", 3)
         end
     elseif (csid == 230) then              -- wrong trade, restart at first opo
-        player:setCharVar("OPO_OPO_FAILED",1)
-        player:setCharVar("OPO_OPO_RETRY",2)
+        player:setCharVar("OPO_OPO_FAILED", 1)
+        player:setCharVar("OPO_OPO_RETRY", 2)
     else
         npc:wait(0)
     end
-end;
+end

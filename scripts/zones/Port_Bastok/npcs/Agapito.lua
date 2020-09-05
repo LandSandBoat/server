@@ -11,11 +11,11 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+function onTrigger(player, npc)
+    local TheStarsOfIfrit = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
 
     if (player:getFameLevel(BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true) then
         player:startEvent(180)
@@ -26,17 +26,17 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 180) then
-        player:addQuest(BASTOK,tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
     elseif (csid == 181) then
         player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*2100)
-        player:addFame(BASTOK,100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
+        player:addFame(BASTOK, 100)
         player:addTitle(tpz.title.STAR_OF_IFRIT)
-        player:completeQuest(BASTOK,tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+        player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
     end
-end;
+end

@@ -9,17 +9,17 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Open_sea_route_to_Al_Zahbi/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(522,1,23,5)) then
-        player:showText(npc,ID.text.CEHN_TEYOHNGO_SHOP_DIALOG)
+function onTrigger(player, npc)
+    if (player:sendGuild(522, 1, 23, 5)) then
+        player:showText(npc, ID.text.CEHN_TEYOHNGO_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

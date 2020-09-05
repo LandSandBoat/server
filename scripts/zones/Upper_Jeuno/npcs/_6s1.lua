@@ -15,10 +15,10 @@ local ring =
     15545  -- Tamas Ring
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local status = player:getCharVar("PromathiaStatus")
     local mission = player:getCurrentMission(COP)
 
@@ -28,7 +28,7 @@ function onTrigger(player,npc)
         player:startEvent(10012)
     elseif (mission == tpz.mission.id.cop.DAWN and status == 4) then
         player:startEvent(129)
-    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(COP,tpz.mission.id.cop.DAWN)) then
+    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN)) then
         local hasRing = false
 
         for key, value in pairs(ring) do
@@ -53,13 +53,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if ((csid == 84 or csid == 204) and option == 4) then
-        player:updateEvent(ring[1],ring[2],ring[3])
+        player:updateEvent(ring[1], ring[2], ring[3])
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10011) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 10012) then
@@ -80,4 +80,4 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ring[option - 4])
         end
     end
-end;
+end

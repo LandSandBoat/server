@@ -8,15 +8,15 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- Trade Chamnaet Ice
-    if (trade:hasItemQty(1780,1) and trade:getItemCount() == 1) then
+    if (trade:hasItemQty(1780, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
         player:startEvent(13)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local ZephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
 
@@ -36,14 +36,14 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 13) then
         player:addKeyItem(tpz.ki.ZEPHYR_FAN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.ZEPHYR_FAN)
-        player:setCharVar("[ENM]ZephyrFan",os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ZEPHYR_FAN)
+        player:setCharVar("[ENM]ZephyrFan", os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 14) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779) -- Cotton Pouch
@@ -53,4 +53,4 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1779) -- Cotton Pouch
         end
     end
-end;
+end

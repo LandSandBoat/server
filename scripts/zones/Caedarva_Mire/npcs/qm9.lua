@@ -7,11 +7,11 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/quests")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+function onTrigger(player, npc)
+    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
 
     if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 2) then
@@ -25,13 +25,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 14) then
-        player:setCharVar("TheWaywardAutomationProgress",3)
-        player:setCharVar("TheWaywardAutomationNM",0)
+        player:setCharVar("TheWaywardAutomationProgress", 3)
+        player:setCharVar("TheWaywardAutomationNM", 0)
     end
-end;
+end

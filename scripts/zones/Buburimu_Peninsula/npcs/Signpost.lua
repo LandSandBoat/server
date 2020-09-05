@@ -4,10 +4,10 @@
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.SIGNPOST_OFFSET
     if (offset >= 4 or offset <= 6) then
         player:messageSpecial(ID.text.SIGN_1)
@@ -16,8 +16,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

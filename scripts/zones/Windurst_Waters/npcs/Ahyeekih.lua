@@ -10,16 +10,16 @@ require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    onHalloweenTrade(player,trade,npc)
+function onTrade(player, npc, trade)
+    onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local RegionOwner = GetRegionOwner(tpz.region.KOLSHUSHU)
     if (RegionOwner ~= tpz.nation.WINDURST) then
-        player:showText(npc,ID.text.AHYEEKIH_CLOSED_DIALOG)
+        player:showText(npc, ID.text.AHYEEKIH_CLOSED_DIALOG)
     else
-        player:showText(npc,ID.text.AHYEEKIH_OPEN_DIALOG)
+        player:showText(npc, ID.text.AHYEEKIH_OPEN_DIALOG)
 
         local stock =
         {
@@ -35,8 +35,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

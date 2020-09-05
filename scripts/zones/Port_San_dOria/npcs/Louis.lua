@@ -4,10 +4,10 @@
 -- Type: Standard NPC
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
@@ -26,8 +26,8 @@ function onTrigger(player,npc)
     player:startEvent( 763, seconds, 0, 0, 0, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

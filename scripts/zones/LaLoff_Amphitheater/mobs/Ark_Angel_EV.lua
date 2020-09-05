@@ -20,7 +20,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-4, mobid+3 do
@@ -32,4 +32,4 @@ function onMobEngaged(mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

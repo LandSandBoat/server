@@ -9,10 +9,10 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local POWER_SANDALS = 13012
 
     -- Give Player Power Sandals if they don't have them
@@ -28,10 +28,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid)
-    -- printf("RESULT2: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -9,17 +9,17 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(517,3,18,5)) then
-        player:showText(npc,ID.text.BABUBU_SHOP_DIALOG)
+function onTrigger(player, npc)
+    if (player:sendGuild(517, 3, 18, 5)) then
+        player:showText(npc, ID.text.BABUBU_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

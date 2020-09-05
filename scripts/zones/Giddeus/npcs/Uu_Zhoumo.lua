@@ -8,15 +8,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY_WINDURST and trade:hasItemQty(16509,1) and trade:getItemCount() == 1) then -- Trade Aspir Knife
+    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY_WINDURST and trade:hasItemQty(16509, 1) and trade:getItemCount() == 1) then -- Trade Aspir Knife
         player:startEvent(41)
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.SHIELD_OFFERING)) then
         player:startEvent(42)
@@ -33,19 +33,19 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 40) then
-        player:setCharVar("MissionStatus",5)
+        player:setCharVar("MissionStatus", 5)
         player:delKeyItem(tpz.ki.DULL_SWORD)
     elseif (csid == 41) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus",6)
+        player:setCharVar("MissionStatus", 6)
     elseif (csid == 42) then
-        player:setCharVar("MissionStatus",6)
+        player:setCharVar("MissionStatus", 6)
         player:delKeyItem(tpz.ki.SHIELD_OFFERING)
     end
-end;
+end

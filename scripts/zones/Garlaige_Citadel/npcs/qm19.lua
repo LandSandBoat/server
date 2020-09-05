@@ -10,15 +10,15 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (OldSchoolG1 == false) then
         if (player:hasItem(1090) == false and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2) == false
-        and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
+        and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
             player:addKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BOMB_COAL_FRAGMENT2)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOMB_COAL_FRAGMENT2)
         end
 
         if (player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1) and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2) and player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT3)) then
@@ -38,10 +38,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("CSID2: %u",csid)
-    -- printf("RESULT2: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("CSID2: %u", csid)
+    -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -24,16 +24,16 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
+    local TheFightingFourth = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local SnakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local SteamedRams = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     local RedLetter = player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     local CharredPropeller = player:hasKeyItem(tpz.ki.CHARRED_PROPELLER)
     local OxidizedPlate = player:hasKeyItem(tpz.ki.OXIDIZED_PLATE)
@@ -56,16 +56,16 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
-        player:setCharVar("RED_R_LETTER_USED",1)
+        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 7 and option == 1) then
-        player:setCharVar("RED_R_LETTER_USED",1)
+        player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 8 and option == 0) then
         player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
@@ -78,11 +78,11 @@ function onEventFinish(player,csid,option)
         if (player:getCharVar("Campaign_Nation") == 0) then
             if (player:getFreeSlotsCount() >= 1) then
                 player:setCampaignAllegiance(1)
-                player:setCharVar("RED_R_LETTER_USED",0)
+                player:setCharVar("RED_R_LETTER_USED", 0)
                 player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
                 player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
+                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
                 player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
                 player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
                 player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
@@ -93,14 +93,14 @@ function onEventFinish(player,csid,option)
             end
         else
             player:setCampaignAllegiance(1)
-            player:setCharVar("RED_R_LETTER_USED",0)
+            player:setCharVar("RED_R_LETTER_USED", 0)
             player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
-            player:completeQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
+            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
             player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
             player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
             player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
         end
     elseif (csid == 13 and option == 1) then
-        player:delQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     end
-end;
+end

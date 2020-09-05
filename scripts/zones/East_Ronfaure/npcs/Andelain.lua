@@ -9,8 +9,8 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    sermonQuest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+function onTrade(player, npc, trade)
+    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -19,12 +19,12 @@ function onTrade(player,npc,trade)
             player:tradeComplete()
             player:showText(npc, 7349)
             player:startEvent(19)
-            player:setCharVar("sermonQuestVar",1)
+            player:setCharVar("sermonQuestVar", 1)
         elseif (BluePeas > 1 and count == BluePeas) then
             player:showText(npc, 7352)
             player:startEvent(19)
         elseif (BluePeas == 1 and count == 1) then
-            player:showText(npc, 7352,618)
+            player:showText(npc, 7352, 618)
             player:startEvent(19)
         else
             player:showText(npc, 7350)
@@ -38,13 +38,13 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:showText(npc, 7347)
-    player:showText(npc, 7348,618)
+    player:showText(npc, 7348, 618)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

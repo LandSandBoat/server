@@ -9,10 +9,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
@@ -35,13 +35,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 266) then
-        player:setCharVar("MissionStatus",3)
+        player:setCharVar("MissionStatus", 3)
 
     elseif csid == 295 then
         player:setCharVar("TuningOut_Progress", 3)
@@ -49,4 +49,4 @@ function onEventFinish(player,csid,option)
         player:setCharVar("TuningOut_Progress", 6)
     end
 
-end;
+end

@@ -8,10 +8,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(104)
@@ -25,19 +25,19 @@ function onTrigger(player,npc)
     return 1
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 104 or csid == 111) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 115) then
-        player:setCharVar("PromathiaStatus",0)
-        player:completeMission(COP,tpz.mission.id.cop.CHAINS_AND_BONDS)
-        player:addMission(COP,tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(COP, tpz.mission.id.cop.CHAINS_AND_BONDS)
+        player:addMission(COP, tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
     elseif (csid == 543) then
-        player:setCharVar("PromathiaStatus",6)
+        player:setCharVar("PromathiaStatus", 6)
     end
 
-end;
+end

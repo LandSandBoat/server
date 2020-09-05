@@ -14,35 +14,35 @@ function onMobSpawn(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         -- Radiant Sacrament
         if (skillID == 2141) then
-            mob:showText(mob,ID.text.OFFER_THY_WORSHIP)
+            mob:showText(mob, ID.text.OFFER_THY_WORSHIP)
         -- Mega Holy
         elseif (skillID == 2142) then
-            mob:showText(mob,ID.text.OPEN_THINE_EYES)
+            mob:showText(mob, ID.text.OPEN_THINE_EYES)
         -- Perfect Defense
         elseif (skillID == 2143) then
-            mob:showText(mob,ID.text.CEASE_THY_STRUGGLES)
+            mob:showText(mob, ID.text.CEASE_THY_STRUGGLES)
         -- Divine Spear
         elseif (skillID == 2144) then
-            mob:showText(mob,ID.text.RELEASE_THY_SELF)
+            mob:showText(mob, ID.text.RELEASE_THY_SELF)
         -- Gospel of the Lost
         elseif (skillID == 2145) then
-            mob:showText(mob,ID.text.BASK_IN_MY_GLORY)
+            mob:showText(mob, ID.text.BASK_IN_MY_GLORY)
         -- Void of Repentance
         elseif (skillID == 2146) then
-            mob:showText(mob,ID.text.REPENT_THY_IRREVERENCE)
+            mob:showText(mob, ID.text.REPENT_THY_IRREVERENCE)
         -- Divine Judgement
         elseif (skillID == 2147) then
-            mob:showText(mob,ID.text.ACCEPT_THY_DESTRUCTION)
-            mob:showText(mob,ID.text.OMEGA_SPAM)
+            mob:showText(mob, ID.text.ACCEPT_THY_DESTRUCTION)
+            mob:showText(mob, ID.text.OMEGA_SPAM)
         end
     end)
 end
 
-function onMobEngaged(mob,target)
-    mob:showText(mob,ID.text.SHALL_BE_JUDGED)
+function onMobEngaged(mob, target)
+    mob:showText(mob, ID.text.SHALL_BE_JUDGED)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- BG Wiki: "He will use this ability at 50% of his HP and several times again as his health decreases."
     -- ffxiclopedia: "Alexander will use this ability as his next TP move once its HP falls below 50%."
     if (mob:getHPP() <= 50 and mob:getTP() >= 1000 and mob:getLocalVar("DivineJudgement") == 0) then
@@ -60,11 +60,11 @@ end
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller) then
-        mob:showText(mob,ID.text.SHALL_KNOW_OBLIVION)
+        mob:showText(mob, ID.text.SHALL_KNOW_OBLIVION)
     end
 end
 
 function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
-end;
+end

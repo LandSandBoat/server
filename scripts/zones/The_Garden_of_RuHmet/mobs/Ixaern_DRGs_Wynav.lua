@@ -6,10 +6,10 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:setLocalVar("hpTrigger", math.random(10,75))
+    mob:setLocalVar("hpTrigger", math.random(10, 75))
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local hpTrigger = mob:getLocalVar("hpTrigger")
     if (mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger) then
         mob:setLocalVar("SoulVoice", 1)
@@ -17,7 +17,7 @@ function onMobFight(mob,target)
     end
 end
 
-function onMonsterMagicPrepare(mob,target)
+function onMonsterMagicPrepare(mob, target)
     local spellList =
     {
         [1] = 382,
@@ -31,9 +31,9 @@ function onMonsterMagicPrepare(mob,target)
         [9] = 466 -- Virelai (charm)
     }
     if (mob:hasStatusEffect(tpz.effect.SOUL_VOICE)) then
-        return spellList[math.random(1,9)] -- Virelai possible.
+        return spellList[math.random(1, 9)] -- Virelai possible.
     else
-        return spellList[math.random(1,8)] -- No Virelai!
+        return spellList[math.random(1, 8)] -- No Virelai!
     end
 end
 
@@ -42,4 +42,4 @@ end
 
 function onMobDespawn(mob)
     mob:setLocalVar("repop", mob:getBattleTime()) -- This get erased on respawn automatic.
-end;
+end

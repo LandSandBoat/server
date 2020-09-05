@@ -11,15 +11,15 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local bookwormStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local chasingStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CHASING_TALES)
+    local bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     local bookNotifications = player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATIONS)
-    local ClassReunion = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CLASS_REUNION)
+    local ClassReunion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
 
@@ -34,9 +34,9 @@ function onTrigger(player,npc)
     elseif (bookwormStatus == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(401) -- Standard dialog before player zone
     elseif (chasingStatus == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION) == false) then
-        player:startEvent(404,0,126) -- During Quest "Chasing Tales", tells you the book "A Song of Love" is overdue
+        player:startEvent(404, 0, 126) -- During Quest "Chasing Tales", tells you the book "A Song of Love" is overdue
     elseif (player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION) and player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) == false) then
-        player:startEvent(405,0,126)
+        player:startEvent(405, 0, 126)
     elseif (player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 and player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) == false) then
         player:startEvent(409)
     elseif (player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE)) then
@@ -53,36 +53,36 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 389) then
         player:addKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATIONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.OVERDUE_BOOK_NOTIFICATIONS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OVERDUE_BOOK_NOTIFICATIONS)
     elseif (csid == 400) then
         player:needToZone(true)
         player:addTitle(tpz.title.SAVIOR_OF_KNOWLEDGE)
         player:addGil(GIL_RATE*1500)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*1500)
-        player:setCharVar("EARLY_BIRD_TRACK_BOOK",0)
-        player:addFame(WINDURST,120)
-        player:completeQuest(WINDURST,tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 0)
+        player:addFame(WINDURST, 120)
+        player:completeQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
     elseif (csid == 404) then
         player:addKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.OVERDUE_BOOK_NOTIFICATION)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OVERDUE_BOOK_NOTIFICATION)
     elseif (csid == 410) then
         player:needToZone(true)
         player:addGil(GIL_RATE*2800)
-        player:messageSpecial(ID.text.GIL_OBTAINED,GIL_RATE*2800)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2800)
         player:addTitle(tpz.title.SAVIOR_OF_KNOWLEDGE)
         player:delKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION)
         player:delKeyItem(tpz.ki.A_SONG_OF_LOVE)
-        player:setCharVar("CHASING_TALES_TRACK_BOOK",0)
-        player:addFame(WINDURST,120)
-        player:completeQuest(WINDURST,tpz.quest.id.windurst.CHASING_TALES)
+        player:setCharVar("CHASING_TALES_TRACK_BOOK", 0)
+        player:addFame(WINDURST, 120)
+        player:completeQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     elseif (csid == 816) then
-        player:setCharVar("ClassReunion_TalkedToFurakku",1)
+        player:setCharVar("ClassReunion_TalkedToFurakku", 1)
     end
-end;
+end

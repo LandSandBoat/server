@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if (sermonQuest == QUEST_ACCEPTED) then
         gil = trade:getGil()
         count = trade:getItemCount()
@@ -22,8 +22,8 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
-    sermonQuest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+function onTrigger(player, npc)
+    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_AVAILABLE) then
         player:startEvent(589)
@@ -32,33 +32,33 @@ function onTrigger(player,npc)
             player:tradeComplete()
             player:startEvent(600)
         else
-            player:showText(npc,11103,618,70)
+            player:showText(npc, 11103, 618, 70)
         end
     else
-        player:showText(npc,ID.text.ABIOLEGET_DIALOG)
+        player:showText(npc, ID.text.ABIOLEGET_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 600) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13465)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13465)
         else
             player:addItem(13465)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13465)
-            player:addFame(SANDORIA,30)
+            player:addFame(SANDORIA, 30)
             player:addTitle(tpz.title.THE_BENEVOLENT_ONE)
-            player:setCharVar("sermonQuestVar",0)
-            player:completeQuest(SANDORIA,tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+            player:setCharVar("sermonQuestVar", 0)
+            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
         end
     elseif (csid == 589) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
     elseif (csid == 591) then
         player:addItem(618)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 618)
     end
-end;
+end

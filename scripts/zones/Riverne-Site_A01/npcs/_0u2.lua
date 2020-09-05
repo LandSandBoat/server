@@ -5,16 +5,16 @@
 local RIVERNE_SITE_A01 = require("scripts/zones/Riverne-Site_A01/globals")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     RIVERNE_SITE_A01.unstableDisplacementTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     RIVERNE_SITE_A01.unstableDisplacementTrigger(player, npc, 17)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

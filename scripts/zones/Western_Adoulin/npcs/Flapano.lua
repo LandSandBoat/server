@@ -12,11 +12,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local exoticDelacacies = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- ALL THE WAY TO THE BANK
-    if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil",5600}} )) then
+    if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil", 5600}} )) then
         local ATWTTB_Paid_Flapano = player:getMaskBit(player:getCharVar("ATWTTB_Payments"), 2)
         if (not ATWTTB_Paid_Flapano) then
             player:startEvent(5071)
@@ -24,7 +24,7 @@ function onTrade(player,npc,trade)
 
     -- EXOTIC DELICACIES
     elseif (exoticDelacacies == QUEST_ACCEPTED) then
-        if (npcUtil.tradeHas( trade, {3916, 5949, {5954,2}} )) then
+        if (npcUtil.tradeHas( trade, {3916, 5949, {5954, 2}} )) then
             player:startEvent(2861)
         elseif (npcUtil.tradeHas(trade, 5974) or npcUtil.tradeHas(trade, 5975)) then
             player:startEvent(2862)
@@ -32,7 +32,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local theWeatherspoonWar = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_WEATHERSPOON_WAR)
     local exoticDelacacies = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
@@ -72,10 +72,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5071) then
         player:confirmTrade()
@@ -93,4 +93,4 @@ function onEventFinish(player,csid,option)
             player:setCharVar("Flapano_Odd_Even", 0)
         end
     end
-end;
+end

@@ -9,17 +9,17 @@ require("scripts/globals/shop")
 local ID = require("scripts/zones/Silver_Sea_route_to_Nashmau/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    if (player:sendGuild(524,1,23,5)) then
-        player:showText(npc,ID.text.JIDWAHN_SHOP_DIALOG)
+function onTrigger(player, npc)
+    if (player:sendGuild(524, 1, 23, 5)) then
+        player:showText(npc, ID.text.JIDWAHN_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

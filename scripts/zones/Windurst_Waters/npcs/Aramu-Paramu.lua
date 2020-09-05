@@ -10,11 +10,11 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    wonderingstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WONDERING_MINSTREL)
+function onTrigger(player, npc)
+    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == QUEST_ACCEPTED) then
         player:startEvent(638)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
     elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
@@ -24,8 +24,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

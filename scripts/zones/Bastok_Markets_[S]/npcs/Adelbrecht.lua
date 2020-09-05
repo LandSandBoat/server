@@ -22,16 +22,16 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.STEAMED_RAMS)
+    local TheFightingFourth = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local SnakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local SteamedRams = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     local BlueLetter = player:hasKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     local BattleRations = player:hasKeyItem(tpz.ki.BATTLE_RATIONS)
 
@@ -52,15 +52,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 139 and option == 1) then
         player:addKeyItem(tpz.ki.BATTLE_RATIONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BATTLE_RATIONS)
-        player:addQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-        player:setCharVar("BLUE_R_LETTER_USED",1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BATTLE_RATIONS)
+        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:setCharVar("BLUE_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     elseif (csid == 140 and option == 1) then
         player:delKeyItem(tpz.ki.BATTLE_RATIONS)
@@ -72,11 +72,11 @@ function onEventFinish(player,csid,option)
         if (player:getCharVar("Campaign_Nation") == 0) then
             if (player:getFreeSlotsCount() >= 1) then
                 player:setCampaignAllegiance(2)
-                player:setCharVar("BLUE_R_LETTER_USED",0)
+                player:setCharVar("BLUE_R_LETTER_USED", 0)
                 player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
             else
@@ -84,9 +84,9 @@ function onEventFinish(player,csid,option)
             end
         else
             player:setCampaignAllegiance(2)
-            player:setCharVar("BLUE_R_LETTER_USED",0)
+            player:setCharVar("BLUE_R_LETTER_USED", 0)
             player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
-            player:completeQuest(CRYSTAL_WAR,tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         end
     end
-end;
+end

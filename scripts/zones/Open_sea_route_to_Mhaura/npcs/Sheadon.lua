@@ -7,15 +7,15 @@
 local ID = require("scripts/zones/Open_sea_route_to_Mhaura/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    player:messageSpecial(ID.text.ON_WAY_TO_MHAURA,0,0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
+function onTrigger(player, npc)
+    player:messageSpecial(ID.text.ON_WAY_TO_MHAURA, 0, 0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

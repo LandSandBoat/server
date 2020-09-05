@@ -12,12 +12,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local FoiledAGolem = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local FoiledAGolem = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     -- Curses, Foiled A_Golem!?
@@ -48,28 +48,28 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- Curses, Foiled A_Golem!?
     if (csid == 104 and option == 1) then
         player:addKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
     elseif (csid == 108) then                                       -- start wait for new scroll
         player:delKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
-        player:setCharVar("golemday",VanadielDayOfTheYear())
-        player:setCharVar("golemyear",VanadielYear())
-        player:setCharVar("golemwait",1)
+        player:setCharVar("golemday", VanadielDayOfTheYear())
+        player:setCharVar("golemyear", VanadielYear())
+        player:setCharVar("golemwait", 1)
     elseif (csid == 109) then
         player:addKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
-        player:setCharVar("golemday",0)
-        player:setCharVar("golemyear",0)
-        player:setCharVar("golemwait",0)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
+        player:setCharVar("golemday", 0)
+        player:setCharVar("golemyear", 0)
+        player:setCharVar("golemwait", 0)
     elseif csid == 207 then
         npcUtil.giveCurrency(player, "gil", 6000)
         player:setCharVar("TuningOut_Progress", 8)
     end
-end;
+end

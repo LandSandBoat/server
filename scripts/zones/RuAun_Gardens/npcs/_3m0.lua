@@ -4,10 +4,10 @@
 -- !pos 0.1 -45 -113 130
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local DoorID = npc:getID()
 
@@ -16,8 +16,8 @@ function onTrigger(player,npc)
     GetNPCByID(DoorID+2):openDoor(7)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

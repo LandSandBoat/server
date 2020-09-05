@@ -48,12 +48,12 @@ function onMobDeath(mob, player, isKiller)
     eald_narche:delStatusEffect(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("updateCSID: %u",csid)
+function onEventUpdate(player, csid, option)
+    -- printf("updateCSID: %u", csid)
 end
 
-function onEventFinish(player,csid,option,target)
-    -- printf("finishCSID: %u",csid)
+function onEventFinish(player, csid, option, target)
+    -- printf("finishCSID: %u", csid)
 
     if (csid == 32004) then
         DespawnMob(target:getID())
@@ -67,4 +67,4 @@ function onEventFinish(player,csid,option,target)
         mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
     end
 
-end;
+end

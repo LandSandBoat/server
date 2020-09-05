@@ -10,18 +10,18 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local CrestProgress = player:getCharVar("TheHolyCrest_Event")
     local RemedyKI = player:hasKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
-    local Stalker_Quest = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
+    local Stalker_Quest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
     local StalkerProgress = player:getCharVar("KnightStalker_Progress")
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,17) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 17) == false) then
         player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
     elseif (CrestProgress == 5 and RemedyKI == false) then
@@ -29,7 +29,7 @@ function onTrigger(player,npc)
     elseif (CrestProgress == 5 and RemedyKI == true) then
         player:startEvent(122) -- Reminder to go to Gelsba
      -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
-    elseif (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG) then
+    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG) then
         if (player:getCharVar("KnightStalker_Declined") == 0) then
             player:startEvent(121) -- Start AF3
         else
@@ -60,38 +60,38 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 60) then
         player:addKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DRAGON_CURSE_REMEDY)
     elseif (csid == 559) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",17,true)
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 17, true)
     elseif (csid == 121) then
         if (option == 1) then
-            player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
+            player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
         else
-            player:setCharVar("KnightStalker_Declined",1)
+            player:setCharVar("KnightStalker_Declined", 1)
         end
     elseif (csid == 120 and option == 1) then
-        player:addQuest(SANDORIA,tpz.quest.id.sandoria.KNIGHT_STALKER)
-        player:setCharVar("KnightStalker_Declined",0)
+        player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+        player:setCharVar("KnightStalker_Declined", 0)
     elseif (csid == 78) then
-        player:setCharVar("KnightStalker_Progress",2)
+        player:setCharVar("KnightStalker_Progress", 2)
     elseif (csid == 110) then
-        player:setCharVar("KnightStalker_Progress",4)
+        player:setCharVar("KnightStalker_Progress", 4)
     elseif (csid == 118) then
-        player:setCharVar("KnightStalker_Option2",0)
+        player:setCharVar("KnightStalker_Option2", 0)
     elseif (csid == 106) then
         if (player:hasKeyItem(tpz.ki.CRYSTAL_DOWSER)) then
             player:delKeyItem(tpz.ki.CRYSTAL_DOWSER) -- To prevent them getting a message about already having the keyitem
         else
-            player:setCharVar("MissionStatus",2)
+            player:setCharVar("MissionStatus", 2)
             player:addKeyItem(tpz.ki.CRYSTAL_DOWSER)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.CRYSTAL_DOWSER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CRYSTAL_DOWSER)
         end
     end
 end

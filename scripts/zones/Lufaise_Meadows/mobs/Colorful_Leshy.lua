@@ -34,7 +34,7 @@ function onMobRoam(mob)
         DespawnMob(ph)
 
         DisallowRespawn(ph + 1, false)
-        nm:setSpawn(p.x,p.y,p.z,p.rot)
+        nm:setSpawn(p.x, p.y, p.z, p.rot)
         SpawnMob(ph + 1)
         nm:setLocalVar("phIndex", phIndex)
     end
@@ -52,4 +52,4 @@ function onMobDespawn(mob)
         GetMobByID(phIndex):setRespawnTime(GetMobRespawnTime(phIndex))
         mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)) -- Colorful in 12 to 24 hours
     end
-end;
+end

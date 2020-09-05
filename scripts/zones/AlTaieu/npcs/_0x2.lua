@@ -7,10 +7,10 @@ local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (
             player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY
@@ -39,12 +39,12 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 162) then
         player:setCharVar("[SEA][AlTieu]WestTowerCS", 1)
         player:setCharVar("[SEA][AlTieu]WestTower", 0)
     end
-end;
+end

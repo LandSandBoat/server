@@ -10,10 +10,10 @@ local ID = require("scripts/zones/Kazham/IDs")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCharVar("BathedInScent") == 1 then
         if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_AVAILABLE) then
             player:startEvent(191)
@@ -29,19 +29,19 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 191) then
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
     elseif (csid == 193) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,13247)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13247)
         else
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
             player:addItem(13247) -- Mithran Stone
-            player:messageSpecial(ID.text.ITEM_OBTAINED,13247)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13247)
         end
     end
-end;
+end

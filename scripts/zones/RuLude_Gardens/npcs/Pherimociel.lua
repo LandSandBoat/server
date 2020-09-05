@@ -7,10 +7,10 @@
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local Hrandom =math.random()
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 0) then
@@ -33,7 +33,7 @@ function onTrigger(player,npc)
         player:startEvent(10049)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.UNRAVELING_REASON) then
         if (player:getCharVar("TOAUM40_STARTDAY") ~= VanadielDayOfTheYear() and player:needToZone() == false) then
-            player:startEvent(10098,0,0,0,0,0,0,0,0)
+            player:startEvent(10098, 0, 0, 0, 0, 0, 0, 0, 0)
         else
             player:startEvent(10099)
         end
@@ -43,25 +43,25 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("Update CSID: %u",csid)
-    -- printf("Update RESULT: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("Update CSID: %u", csid)
+    -- printf("Update RESULT: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("Finish CSID: %u",csid)
-    -- printf("Finish RESULT: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("Finish CSID: %u", csid)
+    -- printf("Finish RESULT: %u", option)
 
     if (csid == 10098) then
-        player:setPos(0,0,0,0,51)
+        player:setPos(0, 0, 0, 0, 51)
     elseif (csid == 24) then
-        player:setCharVar("PromathiaStatus",1) -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
-        player:setCharVar("FirstPromyvionHolla",1)
-        player:setCharVar("FirstPromyvionMea",1)
-        player:setCharVar("FirstPromyvionDem",1)
+        player:setCharVar("PromathiaStatus", 1) -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
+        player:setCharVar("FirstPromyvionHolla", 1)
+        player:setCharVar("FirstPromyvionMea", 1)
+        player:setCharVar("FirstPromyvionDem", 1)
     elseif (csid == 58) then
-        player:setCharVar("COP_Tenzen_s_Path",4)
+        player:setCharVar("COP_Tenzen_s_Path", 4)
     elseif (csid == 10046 or 10049) then
-        player:setCharVar("PromathiaStatus",1)
+        player:setCharVar("PromathiaStatus", 1)
     end
-end;
+end

@@ -5,10 +5,10 @@
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
 require("scripts/globals/status")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.Y_LITH_OFFSET
     if (offset >= 0 and offset <= 20) then
         local y = (offset <= 11) and tpz.anim.OPEN_DOOR or tpz.anim.CLOSE_DOOR
@@ -20,8 +20,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -16,7 +16,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     -- 1st form
     -- after change magic or physical immunity every 5min or 1k dmg
     -- 2nd form
@@ -81,7 +81,7 @@ end
 function onMobDeath(mob, player, isKiller)
     if (mob:getID() < ID.mob.SHADOW_LORD_STAGE_2_OFFSET) then
         player:startEvent(32004)
-        player:setCharVar("mobid",mob:getID())
+        player:setCharVar("mobid", mob:getID())
     else
         player:addTitle(tpz.title.SHADOW_BANISHER)
     end
@@ -102,14 +102,14 @@ function onMobDespawn(mob)
     mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 32004) then
         local mobid = player:getCharVar("mobid")
         DespawnMob(mobid)
-        player:setCharVar("mobid",0)
+        player:setCharVar("mobid", 0)
 
         --first phase dies, spawn second phase ID, make him engage, and disable
         --  magic, auto attack, and abilities (all he does is case Implode by script)
@@ -119,4 +119,4 @@ function onEventFinish(player,csid,option)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
     end
-end;
+end

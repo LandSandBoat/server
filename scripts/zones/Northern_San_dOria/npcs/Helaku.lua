@@ -10,10 +10,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -24,7 +24,7 @@ function onTrigger(player,npc)
         elseif (missionStatus == 2) then
             player:startEvent(536)
         elseif (missionStatus == 3) then
-            player:showText(npc,ID.text.HELAKU_DIALOG)
+            player:showText(npc, ID.text.HELAKU_DIALOG)
         -- Bastok Mission 2-3 Part II - Windurst > San d'Oria
         elseif (missionStatus == 7) then
             player:startEvent(537)
@@ -53,24 +53,24 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 536) then
-        player:setCharVar("MissionStatus",3)
+        player:setCharVar("MissionStatus", 3)
     elseif (csid == 543) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
-        player:setCharVar("MissionStatus",6)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:setCharVar("MissionStatus", 6)
     elseif (csid == 537 and option == 0) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2)
-        player:setCharVar("MissionStatus",8)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2)
+        player:setCharVar("MissionStatus", 8)
     elseif (csid == 545) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY)
-        player:setCharVar("MissionStatus",11)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:setCharVar("MissionStatus", 11)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.KINDRED_REPORT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
-end;
+end

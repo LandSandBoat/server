@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- TO THE FORSAKEN MINES: Hare Meat
     if (
         player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and
@@ -33,16 +33,16 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH, {item=16637, title=tpz.title.BLACK_DEATH, var="ChaosbringerKills"})) then
         player:confirmTrade()
         player:delKeyItem(tpz.ki.LETTER_FROM_ZEID)
     end
-end;
+end

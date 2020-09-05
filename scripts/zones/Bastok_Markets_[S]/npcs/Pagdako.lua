@@ -7,12 +7,12 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR,tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 0) then
             player:startEvent(122)
         else
@@ -24,11 +24,11 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 122) then
-        player:setCharVar("FiresOfDiscProg",1)
+        player:setCharVar("FiresOfDiscProg", 1)
     end
-end;
+end

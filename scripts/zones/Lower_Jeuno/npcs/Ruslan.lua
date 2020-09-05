@@ -10,18 +10,18 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    wonderingstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WONDERING_MINSTREL)
+function onTrigger(player, npc)
+    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == QUEST_ACCEPTED) then
         prog = player:getCharVar("QuestWonderingMin_var")
         if (prog == 0) then                 -- WONDERING_MINSTREL + Rosewood Lumber: During Quest / Progression
-            player:startEvent(10009,0,718)
-            player:setCharVar("QuestWonderingMin_var",1)
+            player:startEvent(10009, 0, 718)
+            player:setCharVar("QuestWonderingMin_var", 1)
         elseif (prog == 1) then             -- WONDERING_MINSTREL + Rosewood Lumber: Quest Objective Reminder
-            player:startEvent(10010,0,718)
+            player:startEvent(10010, 0, 718)
         end
     elseif (wonderingstatus == QUEST_COMPLETED) then
         rand = math.random(3)
@@ -35,8 +35,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

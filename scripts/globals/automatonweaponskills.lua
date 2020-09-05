@@ -158,7 +158,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
-function getAutoHitRate(attacker,defender,capHitRate,bonus,melee)
+function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
     local acc = (melee and attacker:getACC() or attacker:getRACC()) + (bonus or 0)
     local eva = defender:getEVA()
 

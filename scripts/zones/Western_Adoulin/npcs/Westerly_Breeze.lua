@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local HS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
     local TS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
     local AMQTR = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
@@ -71,7 +71,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local HS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
     local TS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
     local AMQTR = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
@@ -110,10 +110,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 2530) then
         -- Starting Quest: 'Hunger Strikes'
         player:addQuest(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
@@ -163,4 +163,4 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil_obtained)
         player:setCharVar("ATWTTB_Can_Trade_Gruel", 0)
     end
-end;
+end

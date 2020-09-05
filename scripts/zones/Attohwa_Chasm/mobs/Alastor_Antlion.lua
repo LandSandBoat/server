@@ -8,11 +8,11 @@ require("scripts/globals/mobs")
 
 function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(tpz.mobMod.GA_CHANCE,50)
-    mob:setMobMod(tpz.mobMod.MUG_GIL,10000)
-    mob:addMod(tpz.mod.FASTCAST,10)
-    mob:addMod(tpz.mod.BINDRES,40)
-    mob:addMod(tpz.mod.SILENCERES,40)
+    mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
+    mob:setMobMod(tpz.mobMod.MUG_GIL, 10000)
+    mob:addMod(tpz.mod.FASTCAST, 10)
+    mob:addMod(tpz.mod.BINDRES, 40)
+    mob:addMod(tpz.mod.SILENCERES, 40)
 end
 
 function onAdditionalEffect(mob, target, damage)
@@ -20,4 +20,4 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

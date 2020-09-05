@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Zeruhn_Mines/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local groceries = player:getCharVar("Groceries")
 
     -- GROCERIES
@@ -30,10 +30,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- GROCERIES
     if csid == 161 then
         player:setCharVar("Groceries", 2)

@@ -9,12 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- needs check for tpz.ki.TATTERED_TEST_SHEET then sets to var 3
-    if (player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestMakingTheGrade_prog")
         if (prog == 0) then
             player:startEvent(454)
@@ -30,12 +30,12 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 460) then
-        player:setCharVar("QuestMakingTheGrade_prog",3)
+        player:setCharVar("QuestMakingTheGrade_prog", 3)
         player:delKeyItem(tpz.ki.TATTERED_TEST_SHEET)
     end
-end;
+end

@@ -7,12 +7,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
         player:startEvent(175)
     else
         player:startEvent(35)
@@ -20,13 +20,13 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 175) then
-        player:setCharVar("TheWisdomVar",2)
+        player:setCharVar("TheWisdomVar", 2)
     end
 
-end;
+end

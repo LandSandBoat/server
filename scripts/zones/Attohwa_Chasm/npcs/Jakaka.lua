@@ -9,15 +9,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- Trade Parradamo Stones
-    if (trade:hasItemQty(1778,1) and trade:getItemCount() == 1) then
+    if (trade:hasItemQty(1778, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
         player:startEvent(12)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     local MiasmaFilterCD = player:getCharVar("[ENM]MiasmaFilter")
 
@@ -37,14 +37,14 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 12) then
         player:addKeyItem(tpz.ki.MIASMA_FILTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MIASMA_FILTER)
-        player:setCharVar("[ENM]MiasmaFilter",os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIASMA_FILTER)
+        player:setCharVar("[ENM]MiasmaFilter", os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 13) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1777) -- Flaxen Pouch
@@ -54,4 +54,4 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1777) -- Flaxen Pouch
         end
     end
-end;
+end

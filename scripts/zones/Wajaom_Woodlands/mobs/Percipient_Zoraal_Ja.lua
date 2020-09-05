@@ -13,4 +13,4 @@ function onMobDeath(mob, player, isKiller)
             pet:setHP(0)
         end
     end
-end;
+end

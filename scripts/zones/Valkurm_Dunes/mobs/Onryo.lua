@@ -12,4 +12,4 @@ function onMobDeath(mob, player, isKiller)
         player:addCharVar("OkuriNMKilled", 1)
     end
 
-end;
+end

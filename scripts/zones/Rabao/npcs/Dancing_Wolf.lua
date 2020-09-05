@@ -7,10 +7,10 @@
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 1) then
 player:startEvent(102)
 elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 2) then
@@ -24,13 +24,13 @@ player:startEvent(106)
 end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 if (csid == 102) then
-player:setCharVar("BASTOK91",2)
+player:setCharVar("BASTOK91", 2)
 elseif (csid == 104) then
-player:setCharVar("BASTOK91",4)
+player:setCharVar("BASTOK91", 4)
 end
-end;
+end

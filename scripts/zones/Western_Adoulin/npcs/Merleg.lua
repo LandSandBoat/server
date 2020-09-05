@@ -11,10 +11,10 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local APBIF = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     if (APBIF == QUEST_ACCEPTED) then
         if (player:hasStatusEffect(tpz.effect.IONIS)) then
@@ -32,10 +32,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 2520) then
         -- Starting Quest: 'A Pioneers Best (Imaginary) Friend'
         player:addQuest(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
@@ -53,4 +53,4 @@ function onEventFinish(player,csid,option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FAIL_BADGE)
         player:addFame(ADOULIN)
     end
-end;
+end

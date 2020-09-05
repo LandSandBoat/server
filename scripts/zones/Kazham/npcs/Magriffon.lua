@@ -11,7 +11,7 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Kazham/IDs")
 
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
         if (trade:getGil() >= player:getCharVar("MAGRIFFON_GIL_REQUEST")) then
             player:startEvent(146)
@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local gulliblesTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
     local evenmoreTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
 
@@ -53,10 +53,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 144 and option == 1)  then                     -- Gullible's Travels: First CS
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
     elseif (csid == 146) then                                  -- Gullible's Travels: Final CS
@@ -75,10 +75,10 @@ function onEventFinish(player,csid,option)
         player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 1)
         player:setTitle(tpz.title.EVEN_MORE_GULLIBLES_TRAVELS)
         player:addKeyItem(tpz.ki.TREASURE_MAP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.TREASURE_MAP)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TREASURE_MAP)
     elseif (csid == 152) then
         player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 0)
         player:addFame(KAZHAM, 30)
         player:completeQuest(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
-end;
+end

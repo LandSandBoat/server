@@ -9,17 +9,17 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK and player:getCharVar("MissionStatus") == 5) then
-        if (trade:hasItemQty(599,1) and trade:getItemCount() == 1) then -- Trade Mythril Sand
+        if (trade:hasItemQty(599, 1) and trade:getItemCount() == 1) then -- Trade Mythril Sand
             player:startEvent(205)
         end
     end
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- San d'Oria Mission 2-3 Part I - Bastok > Windurst
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_ABROAD and player:getCharVar("MissionStatus") == 2) then
@@ -38,27 +38,27 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 204) then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
-        player:setCharVar("MissionStatus",3)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
+        player:setCharVar("MissionStatus", 3)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif (csid == 205) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus",6)
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:setCharVar("MissionStatus", 6)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
     elseif (csid == 206) then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2)
-        player:setCharVar("MissionStatus",8)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2)
+        player:setCharVar("MissionStatus", 8)
     elseif (csid == 207) then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.KINDRED_REPORT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
     end
 
-end;
+end

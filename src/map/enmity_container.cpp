@@ -436,7 +436,7 @@ int16 CEnmityContainer::GetHighestTH() const
         const EnmityObject_t& PEnmityObject = it->second;
         PEntity = PEnmityObject.PEnmityOwner;
 
-        if (PEntity != nullptr && !PEntity->isDead() && IsWithinEnmityRange(PEntity) && PEnmityObject.maxTH > THLvl)
+        if (PEntity != nullptr && !PEntity->isDead() && PEnmityObject.maxTH > THLvl)
             THLvl = PEnmityObject.maxTH;
     }
 

@@ -7,10 +7,10 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true and player:getGil() >= 200) then
         player:startEvent(141)
@@ -21,10 +21,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 141) then
         local X = player:getXPos()
@@ -34,4 +34,4 @@ function onEventFinish(player,csid,option)
         end
     end
 
-end;
+end

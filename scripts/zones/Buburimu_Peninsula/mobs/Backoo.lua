@@ -21,5 +21,5 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    GetMobByID(ID.mob.BACKOO):setRespawnTime(math.random(3600,5400), true) -- 60-90 minute respawn, depending on if it's daytime
+    GetMobByID(ID.mob.BACKOO):setRespawnTime(math.random(3600, 5400), true) -- 60-90 minute respawn, depending on if it's daytime
 end

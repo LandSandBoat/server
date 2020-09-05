@@ -37,10 +37,10 @@ function onTimeTrigger(npc, triggerID)
     tpz.transport.dockMessage(npc, triggerID, messages, 'mhaura')
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     -- Each boat comes every 1152 seconds/8 game hours, 4 hour offset between Selbina and Aht Urghan
     -- Original timer: local timer = 1152 - ((os.time() - 1009810584)%1152)
@@ -63,7 +63,7 @@ function onTrigger(player,npc)
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
     end
 
-    player:startEvent(231,timer,direction,0,destination) -- timer arriving/departing ??? destination
+    player:startEvent(231, timer, direction, 0, destination) -- timer arriving/departing ??? destination
 
     --[[Other cutscenes:
     233 "This ship is headed for Selbina."
@@ -74,8 +74,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

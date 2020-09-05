@@ -11,7 +11,7 @@ function onMobSpawn (mob)
     mob:SetMobAbilityEnabled(false)
 end
 
-function onMobFight (mob,target)
+function onMobFight (mob, target)
     local partner = (mob:getID() - 1)
     if (GetMobByID(partner):isDead() and mob:getLocalVar("buffed") == 0) then
         mob:setLocalVar("buffed", 1)
@@ -29,4 +29,4 @@ function onMobFight (mob,target)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

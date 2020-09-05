@@ -10,12 +10,12 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    local gates = player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.GATES_TO_PARADISE)
+    local gates = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
     if (gates == QUEST_COMPLETED) then
         player:showText(npc, ID.text.FAURBELLANT_4)
     elseif (gates == QUEST_ACCEPTED) then
@@ -33,8 +33,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -15,14 +15,14 @@ function onInitialize(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if ((month == 12 and day >= 5) or (month == 1 and day <= 5)) then
-        player:ChangeMusic(0,239)
-        player:ChangeMusic(1,239)
+        player:ChangeMusic(0, 239)
+        player:ChangeMusic(1, 239)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
@@ -47,8 +47,8 @@ function onZoneIn(player,prevZone)
             cs = 10021
             player:setPos(-24.000, 12.000, 116.000, 128)
         else
-            local position = math.random(1,3) - 2
-            player:setPos(-192.5 ,-5,position,0)
+            local position = math.random(1, 3) - 2
+            player:setPos(-192.5 , -5, position, 0)
         end
     end
 
@@ -59,7 +59,7 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player,transport)
+function onTransportEvent(player, transport)
     if (transport == 223) then
         player:startEvent(10010)
     elseif (transport == 224) then
@@ -71,19 +71,19 @@ function onTransportEvent(player,transport)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10010) then
-        player:setPos(0,0,0,0,223)
+        player:setPos(0, 0, 0, 0, 223)
     elseif (csid == 10011) then
-        player:setPos(0,0,0,0,225)
+        player:setPos(0, 0, 0, 0, 225)
     elseif (csid == 10012) then
-        player:setPos(0,0,0,0,224)
+        player:setPos(0, 0, 0, 0, 224)
     elseif (csid == 10013) then
-        player:setPos(0,0,0,0,226)
+        player:setPos(0, 0, 0, 0, 226)
     elseif (csid == 324) then
         player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
-end;
+end

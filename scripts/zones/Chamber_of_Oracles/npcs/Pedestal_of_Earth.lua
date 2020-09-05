@@ -10,17 +10,17 @@ require("scripts/globals/missions")
 local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
 -------------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local ZilartStatus = player:getCharVar("ZilartStatus")
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES) then
         if (player:hasKeyItem(tpz.ki.EARTH_FRAGMENT)) then
             player:delKeyItem(tpz.ki.EARTH_FRAGMENT)
-            player:setCharVar("ZilartStatus",ZilartStatus + 4)
-            player:messageSpecial(ID.text.YOU_PLACE_THE,tpz.ki.EARTH_FRAGMENT)
+            player:setCharVar("ZilartStatus", ZilartStatus + 4)
+            player:messageSpecial(ID.text.YOU_PLACE_THE, tpz.ki.EARTH_FRAGMENT)
 
             if (ZilartStatus == 255) then
                 player:startEvent(1)
@@ -28,32 +28,32 @@ function onTrigger(player,npc)
         elseif (ZilartStatus == 255) then -- Execute cutscene if the player is interrupted.
             player:startEvent(1)
         else
-            player:messageSpecial(ID.text.IS_SET_IN_THE_PEDESTAL,tpz.ki.EARTH_FRAGMENT)
+            player:messageSpecial(ID.text.IS_SET_IN_THE_PEDESTAL, tpz.ki.EARTH_FRAGMENT)
         end
-    elseif (player:hasCompletedMission(ZILART,tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
-        player:messageSpecial(ID.text.HAS_LOST_ITS_POWER,tpz.ki.EARTH_FRAGMENT)
+    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
+        player:messageSpecial(ID.text.HAS_LOST_ITS_POWER, tpz.ki.EARTH_FRAGMENT)
     else
         player:messageSpecial(ID.text.PLACED_INTO_THE_PEDESTAL)
     end
 
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid)
-    -- printf("onUpdate RESULT: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid)
-    -- printf("onFinish RESULT: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 
     if (csid == 1) then
         player:addTitle(tpz.title.LIGHTWEAVER)
-        player:setCharVar("ZilartStatus",0)
+        player:setCharVar("ZilartStatus", 0)
         player:addKeyItem(tpz.ki.PRISMATIC_FRAGMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.PRISMATIC_FRAGMENT)
-        player:completeMission(ZILART,tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
-        player:addMission(ZILART,tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PRISMATIC_FRAGMENT)
+        player:completeMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
+        player:addMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
     end
 
-end;
+end

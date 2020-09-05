@@ -9,7 +9,7 @@ require("scripts/zones/Leujaoam_Sanctum/IDs")
 function onInitialize(zone)
 end
 
-function onInstanceZoneIn(player,instance)
+function onInstanceZoneIn(player, instance)
     local cs = -1
 
     local pos = player:getPos()
@@ -21,18 +21,18 @@ function onInstanceZoneIn(player,instance)
     player:addTempItem(5343)
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 102) then
-        player:setPos(0,0,0,0,79)
+        player:setPos(0, 0, 0, 0, 79)
     end
 end
 
 function onInstanceLoadFailed()
     return 79
-end;
+end

@@ -9,11 +9,11 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getXPos() > 45) then
         if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 2) then
-            player:startEvent(6,0,582)
+            player:startEvent(6, 0, 582)
         elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 4 and player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY) == true) then
             player:startEvent(5)
         elseif (player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY) == true) then
@@ -25,18 +25,18 @@ function onTrigger(player,npc)
     return 1
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 6) then
-        player:setCharVar("PromathiaStatus",3)
+        player:setCharVar("PromathiaStatus", 3)
     elseif (csid == 5) then
-        player:setCharVar("PromathiaStatus",0)
-        player:completeMission(COP,tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
-        player:addMission(COP,tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
+        player:setCharVar("PromathiaStatus", 0)
+        player:completeMission(COP, tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
+        player:addMission(COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
     end
-end;
+end

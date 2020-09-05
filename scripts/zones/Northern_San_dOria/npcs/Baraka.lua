@@ -8,10 +8,10 @@ require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) ~= tpz.mission.id.bastok.NONE) then
         local missionStatus = player:getCharVar("MissionStatus")
@@ -19,7 +19,7 @@ function onTrigger(player,npc)
             if (missionStatus == 1) then
                 player:startEvent(581)
             elseif (missionStatus == 2) then
-                player:showText(npc,11141)
+                player:showText(npc, 11141)
             else
                 player:startEvent(539)
             end
@@ -38,17 +38,17 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 581) then
         -- This cs should only play if you visit San d'Oria first
         -- If you visit Windurst first you will encounter Lion in Heaven's Tower instead
         if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY
         and player:getCharVar("MissionStatus") < 2) then
-            player:setCharVar("MissionStatus",2)
+            player:setCharVar("MissionStatus", 2)
             player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
         end
     end
-end;
+end

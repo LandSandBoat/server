@@ -79,24 +79,24 @@ local items = {
     }
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     unionRepresentativeTrade(player, npc, trade, 730, 2)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     unionRepresentativeTrigger(player, 2, 729, "guild_smithing", keyitems)
 end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
     if (csid == 729) then
         unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     end
 end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
     if (csid == 729) then
         unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     elseif (csid == 730) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
-end;
+end

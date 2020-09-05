@@ -11,10 +11,10 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local TCCOM = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
     local TCCOM_Need_KI = player:hasKeyItem(tpz.ki.MELVIENS_TURN) and (not player:hasKeyItem(tpz.ki.MELVIENS_DEATH))
     local Order_Up = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
@@ -32,10 +32,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 70) then
         -- Progresses Quest: 'Order Up'
         player:setMaskBit("Order_Up_NPCs", 11, true)
@@ -46,4 +46,4 @@ function onEventFinish(player,csid,option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MELVIENS_DEATH)
         end
     end
-end;
+end

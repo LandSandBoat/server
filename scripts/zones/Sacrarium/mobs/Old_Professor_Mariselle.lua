@@ -6,7 +6,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 
     local OP_Mariselle = mob:getID()
 
@@ -44,11 +44,11 @@ function onMobDeath(mob, player, isKiller)
     end
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)==false) then
-        player:setCharVar("PromathiaStatus",4)
+        player:setCharVar("PromathiaStatus", 4)
     end
 
     -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7))
+    local rand = math.random((2), (7))
     SetServerVariable("Old_Prof_Spawn_Location", rand)
 
 end
@@ -65,7 +65,7 @@ function onMobDespawn( mob )
     end
 
     -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2),(7))
+    local rand = math.random((2), (7))
     SetServerVariable("Old_Prof_Spawn_Location", rand)
 
-end;
+end

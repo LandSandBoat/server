@@ -14,10 +14,10 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local TOMATH = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
     local Fertile_Ground = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.FERTILE_GROUND)
     local Wayward_Waypoints = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.WAYWARD_WAYPOINTS)
@@ -48,10 +48,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 2543) then
         -- Progresses Quest: 'The Old Man and the Harpoon'
         player:delKeyItem(tpz.ki.BROKEN_HARPOON)
@@ -67,4 +67,4 @@ function onEventFinish(player,csid,option)
         -- Progresses Quest: 'A Certain Substitute Patrolman'
         player:setCharVar("ACSP_NPCs_Visited", 6)
     end
-end;
+end

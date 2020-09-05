@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
     local prof = GetMobByID(ID.mob.OLD_PROFESSOR_MARISELLE)
@@ -23,7 +23,7 @@ function onTrigger(player,npc)
         prof:setPos(npc:getXPos()+1, npc:getYPos(), npc:getZPos()+1) -- Set Prof. spawn x and z pos. +1 from NPC
     elseif (cop == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and copStat == 4 and not player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)) then
         player:addKeyItem(tpz.ki.RELIQUIARIUM_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.RELIQUIARIUM_KEY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RELIQUIARIUM_KEY)
     elseif (profLoc == 2) then
         player:messageSpecial(ID.text.DRAWER_SHUT)
     else
@@ -32,8 +32,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

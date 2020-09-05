@@ -53,7 +53,7 @@ local function giveClammedItems(player)
         local clammedItemQty = player:getCharVar("ClammedItem_" ..  clammingItems[item])
 
         if (clammedItemQty > 0) then
-            if (player:addItem(clammingItems[item],clammedItemQty)) then
+            if (player:addItem(clammingItems[item], clammedItemQty)) then
 
                 player:messageSpecial(ID.text.YOU_OBTAIN, clammingItems[item], clammedItemQty)
                 player:setCharVar("ClammedItem_" ..  clammingItems[item], 0)
@@ -76,10 +76,10 @@ local function owePlayerClammedItems(player)
     return false
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if ( player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then -- Player has clamming kit
 
@@ -98,7 +98,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
     if (csid == 28) then
         local enoughMoney = 2 -- Not enough money
@@ -114,14 +114,14 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 28) then
         if (option == 1) then -- Give 50pz clamming kit
             player:setCharVar("ClammingKitSize", 50)
             player:addKeyItem(tpz.ki.CLAMMING_KIT)
             player:delGil(500)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.CLAMMING_KIT)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLAMMING_KIT)
         end
     elseif (csid == 29) then
         if (option == 2) then -- Give player clammed items
@@ -129,7 +129,7 @@ function onEventFinish(player,csid,option)
             player:setCharVar("ClammingKitSize", 0)
             player:setCharVar("ClammingKitWeight", 0)
             player:delKeyItem(tpz.ki.CLAMMING_KIT)
-            player:messageSpecial(ID.text.YOU_RETURN_THE,tpz.ki.CLAMMING_KIT)
+            player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
 
             giveClammedItems(player)
 
@@ -144,6 +144,6 @@ function onEventFinish(player,csid,option)
         player:setCharVar("ClammingKitBroken", 0)
         player:setCharVar("ClammingKitWeight", 0)
         player:delKeyItem(tpz.ki.CLAMMING_KIT)
-        player:messageSpecial(ID.text.YOU_RETURN_THE,tpz.ki.CLAMMING_KIT)
+        player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
     end
-end;
+end

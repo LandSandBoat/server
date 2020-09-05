@@ -9,10 +9,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
 
     if (currentMission == tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:getCharVar("MissionStatus") == 0) then
@@ -28,15 +28,15 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 602) then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
     elseif (csid == 765) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 766 or csid == 603) then
         finishMissionTimeline(player, 1, csid, option)
     end
-end;
+end

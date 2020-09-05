@@ -9,7 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local darkLegacyCS = player:getCharVar("darkLegacyCS")
 
     if (
@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if (player:getCharVar("darkLegacyCS") == 5 and not player:hasKeyItem(tpz.ki.DARKSTEEL_FORMULA)) then
         npcUtil.giveKeyItem(player, tpz.ki.DARKSTEEL_FORMULA)
     else
@@ -31,8 +31,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

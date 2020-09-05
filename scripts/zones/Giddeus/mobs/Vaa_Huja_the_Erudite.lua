@@ -8,6 +8,6 @@ function onMobDeath(mob, player, isKiller)
     local darkLegacyCS = player:getCharVar("darkLegacyCS")
 
     if (darkLegacyCS == 3 or darkLegacyCS == 4) then
-        player:setCharVar("darkLegacyCS",5)
+        player:setCharVar("darkLegacyCS", 5)
     end
-end;
+end

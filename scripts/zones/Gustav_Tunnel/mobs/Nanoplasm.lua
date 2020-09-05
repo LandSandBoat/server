@@ -25,4 +25,4 @@ function onMobDeath(mob, player, isKiller)
             player:setCharVar("BASTOK91", 3)
         end
     end
-end;
+end

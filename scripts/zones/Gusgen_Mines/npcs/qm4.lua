@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- GHOSTS OF THE PAST: Pickaxe
     if (
         player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED and
@@ -22,12 +22,12 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

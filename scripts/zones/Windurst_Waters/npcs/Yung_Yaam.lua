@@ -10,12 +10,12 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
---player:addFame(WINDURST,100)
-    wonderingstatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WONDERING_MINSTREL)
+function onTrigger(player, npc)
+--player:addFame(WINDURST, 100)
+    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     fame = player:getFameLevel(WINDURST)
     if (wonderingstatus <= 1 and fame >= 5) then
         player:startEvent(637)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted
@@ -26,8 +26,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

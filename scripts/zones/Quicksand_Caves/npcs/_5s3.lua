@@ -7,13 +7,13 @@
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local difX = player:getXPos()-(-685)
     local difZ = player:getZPos()-(-420)
-    local Distance = math.sqrt( math.pow(difX,2) + math.pow(difZ,2) )
+    local Distance = math.sqrt( math.pow(difX, 2) + math.pow(difZ, 2) )
     if (Distance < 3) then
         return -1
     end
@@ -22,8 +22,8 @@ function onTrigger(player,npc)
     return 1
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

@@ -7,12 +7,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    bookwormStatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
     if (bookwormStatus == QUEST_ACCEPTED and player:getCharVar("EARLY_BIRD_TRACK_BOOK") == 3) then
         player:startEvent(399)
@@ -32,15 +32,15 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 395) then
-        player:setCharVar("EARLY_BIRD_TRACK_BOOK",1)
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 1)
     elseif (csid == 398) then
-        player:setCharVar("EARLY_BIRD_TRACK_BOOK",3)
+        player:setCharVar("EARLY_BIRD_TRACK_BOOK", 3)
     end
 
-end;
+end

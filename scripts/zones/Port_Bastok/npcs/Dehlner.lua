@@ -7,12 +7,12 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-ForemansBestFriend = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+ForemansBestFriend = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
 
     if (ForemansBestFriend == QUEST_ACCEPTED) then
         player:startEvent(111)
@@ -21,8 +21,8 @@ ForemansBestFriend = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.A_FOREMAN_
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

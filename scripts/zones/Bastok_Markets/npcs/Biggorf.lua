@@ -7,12 +7,12 @@
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-BareBones = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_BARE_BONES)
+BareBones = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
 
     if (BareBones == QUEST_ACCEPTED) then
         player:startEvent(257)
@@ -21,8 +21,8 @@ BareBones = player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_BARE_BONES)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

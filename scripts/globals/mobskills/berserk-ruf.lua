@@ -6,7 +6,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function OnMobSkillCheck(target,mob,skill)
+function OnMobSkillCheck(target, mob, skill)
     return 0
 end
 

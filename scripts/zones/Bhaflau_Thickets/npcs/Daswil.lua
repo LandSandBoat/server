@@ -12,12 +12,12 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local toauMission = player:getCurrentMission(TOAU)
-    local beginnings = player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
 
     -- IMMORTAL SENTRIES
     if (toauMission == tpz.mission.id.toau.IMMORTAL_SENTRIES) then
@@ -39,7 +39,7 @@ function onTrigger(player,npc)
     elseif (toauMission >= tpz.mission.id.toau.PRESIDENT_SALAHEEM) then
         local IPpoint = player:getCurrency("imperial_standing")
         if (player:hasKeyItem(tpz.ki.MAMOOL_JA_ASSAULT_ORDERS) and player:hasKeyItem(tpz.ki.ASSAULT_ARMBAND) == false) then
-            player:startEvent(512,50,IPpoint)
+            player:startEvent(512, 50, IPpoint)
         else
             player:startEvent(7)
             -- player:delKeyItem(tpz.ki.ASSAULT_ARMBAND)
@@ -51,24 +51,24 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- IMMORTAL SENTRIES
     if (csid == 5 and option == 1) then
         player:delKeyItem(tpz.ki.SUPPLIES_PACKAGE)
-        player:setCharVar("AhtUrganStatus",1)
+        player:setCharVar("AhtUrganStatus", 1)
 
     -- BEGINNINGS
     elseif (csid == 8) then
         player:addKeyItem(tpz.ki.BRAND_OF_THE_SKYSERPENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.BRAND_OF_THE_SKYSERPENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRAND_OF_THE_SKYSERPENT)
 
     -- ASSAULT
     elseif (csid == 512 and option == 1) then
         player:delCurrency("imperial_standing", 50)
         player:addKeyItem(tpz.ki.ASSAULT_ARMBAND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.ASSAULT_ARMBAND)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASSAULT_ARMBAND)
     end
-end;
+end

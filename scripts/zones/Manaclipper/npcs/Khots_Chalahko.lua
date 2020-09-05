@@ -7,15 +7,15 @@
 local ID = require("scripts/zones/Manaclipper/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    player:showText(npc,ID.text.KHOTS_CHALAHKO_OFFSET)
+function onTrigger(player, npc)
+    player:showText(npc, ID.text.KHOTS_CHALAHKO_OFFSET)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

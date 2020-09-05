@@ -11,10 +11,10 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
     local ACSP = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local Transporting = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
@@ -39,10 +39,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 148) then
         -- Gave hint for SOA Mission: 'A Curse From the Past'
         player:setCharVar("SOA_ACFTP_Kongramm", 1)
@@ -53,4 +53,4 @@ function onEventFinish(player,csid,option)
         -- Progresses Quest: 'A Certain Substitute Patrolman'
         player:setCharVar("ACSP_NPCs_Visited", 4)
     end
-end;
+end

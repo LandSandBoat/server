@@ -10,10 +10,10 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCurrentMission(WOTG) == tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE and player:getCharVar("QueenOfTheDance") == 1) then
         player:startEvent(10172)
@@ -22,13 +22,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10172) then
-        player:setCharVar("QueenOfTheDance",2)
+        player:setCharVar("QueenOfTheDance", 2)
         player:addKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAYAKOV_SHOW_TICKET)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAYAKOV_SHOW_TICKET)
     end
-end;
+end

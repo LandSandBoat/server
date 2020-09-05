@@ -57,4 +57,4 @@ function onMobDespawn(mob)
             ph:setRespawnTime(GetMobRespawnTime(ph:getID()))
         end
     end
-end;
+end

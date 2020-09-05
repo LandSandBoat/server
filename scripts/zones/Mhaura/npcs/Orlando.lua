@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local itemID = trade:getItemId()
     local itemList =
@@ -44,7 +44,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
 
     if (player:getFameLevel(WINDURST) >= 2) then
@@ -62,10 +62,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local payout = player:getCharVar("ANTIQUE_PAYOUT")
 
@@ -73,9 +73,9 @@ function onEventFinish(player,csid,option)
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     elseif (csid == 102) then
         player:tradeComplete()
-        player:addFame(WINDURST,10)
+        player:addFame(WINDURST, 10)
         player:addGil(payout)
-        player:messageSpecial(ID.text.GIL_OBTAINED,payout)
+        player:messageSpecial(ID.text.GIL_OBTAINED, payout)
         player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
         player:setCharVar("ANTIQUE_PAYOUT", 0)
         player:setLocalVar("OrlandoRepeat", 0)
@@ -84,4 +84,4 @@ function onEventFinish(player,csid,option)
             player:setLocalVar("OrlandoRepeat", 1)
         end
     end
-end;
+end

@@ -22,4 +22,4 @@ function onMobDeath(mob, player, isKiller)
     ) then
         player:setCharVar("Mission9-1Kills", 1)
     end
-end;
+end
