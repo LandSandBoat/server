@@ -470,31 +470,31 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         {
             uint16 highestEnmity = 0;
             static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
+                if (PMember->id != PAutomaton->PMaster->id)
                 {
-                    if (PMember->id != PAutomaton->PMaster->id)
+                    auto enmity_obj = enmityList->find(PMember->id);
+                    if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE &&
+                        PMember->GetHPP() <= threshold && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
                     {
-                        auto enmity_obj = enmityList->find(PMember->id);
-                        if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE &&
-                            PMember->GetHPP() <= threshold && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
-                        {
-                            highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
-                            PCastTarget = PMember;
-                        }
+                        highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                        PCastTarget = PMember;
                     }
-                });
+                }
+            });
         }
         else
         {
             static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
+                if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
                 {
-                    if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
+                    if (PMember->GetHPP() <= threshold)
                     {
-                        if (PMember->GetHPP() <= threshold)
-                        {
-                            PCastTarget = PMember;
-                        }
+                        PCastTarget = PMember;
                     }
-                });
+                }
+            });
         }
     }
 
@@ -1129,68 +1129,67 @@ bool CAutomatonController::TryEnhance()
     {
         members = PAutomaton->PMaster->PParty->members.size();
         static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        {
+            if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PMember->loc.p) < 20)
             {
-                if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PMember->loc.p) < 20)
+                protect = false;
+                shell = false;
+                haste = false;
+
+                isEngaged = false;
+
+                if (PMob)
                 {
-                    protect = false;
-                    shell = false;
-                    haste = false;
-
-                    isEngaged = false;
-
-                    if (PMob)
+                    auto enmity_obj = enmityList->find(PMember->id);
+                    if (enmity_obj != enmityList->end())
                     {
-                        auto enmity_obj = enmityList->find(PMember->id);
-                        if (enmity_obj != enmityList->end())
+                        isEngaged = true;
+                        if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
                         {
-                            isEngaged = true;
-                            if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
-                            {
-                                highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
-                                PRegenTarget = PMember;
-                            }
+                            highestEnmity = enmity_obj->second.CE + enmity_obj->second.VE;
+                            PRegenTarget = PMember;
                         }
                     }
-                    else
-                    {
-                        isEngaged = true; // Assume everyone is engaged if the target isn't a mob
-                    }
-
-                    PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
-                        {
-                            if (PStatus->GetDuration() > 0)
-                            {
-                                if (PStatus->GetStatusID() == EFFECT_PROTECT)
-                                {
-                                    protect = true;
-                                    ++protectcount;
-                                }
-
-                                if (PStatus->GetStatusID() == EFFECT_SHELL)
-                                {
-                                    shell = true;
-                                    ++shellcount;
-                                }
-
-                                if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
-                                    haste = true;
-                            }
-                        });
-
-                    if (isEngaged)
-                    {
-                        if (!PProtectTarget && !protect)
-                            PProtectTarget = PMember;
-
-                        if (!PShellTarget && !shell)
-                            PShellTarget = PMember;
-
-                        if (!PHasteTarget && !haste)
-                            PHasteTarget = PMember;
-                    }
+                }
+                else
+                {
+                    isEngaged = true; // Assume everyone is engaged if the target isn't a mob
                 }
 
-            });
+                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
+                {
+                    if (PStatus->GetDuration() > 0)
+                    {
+                        if (PStatus->GetStatusID() == EFFECT_PROTECT)
+                        {
+                            protect = true;
+                            ++protectcount;
+                        }
+
+                        if (PStatus->GetStatusID() == EFFECT_SHELL)
+                        {
+                            shell = true;
+                            ++shellcount;
+                        }
+
+                        if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
+                            haste = true;
+                    }
+                });
+
+                if (isEngaged)
+                {
+                    if (!PProtectTarget && !protect)
+                        PProtectTarget = PMember;
+
+                    if (!PShellTarget && !shell)
+                        PShellTarget = PMember;
+
+                    if (!PHasteTarget && !haste)
+                        PHasteTarget = PMember;
+                }
+            }
+        });
     }
 
     // No info on how this spell worked
