@@ -14,6 +14,6 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.CHR_BOOST,7,0,180)
-    target:addStatusEffect(tpz.effect.MEDICINE,0,0,900)
+    target:addStatusEffect(tpz.effect.CHR_BOOST, 7, 0, 180)
+    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 900)
 end

@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.PARALYSIS)) then
-        target:addStatusEffect(tpz.effect.PARALYSIS,20,0,180)
+        target:addStatusEffect(tpz.effect.PARALYSIS, 20, 0, 180)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

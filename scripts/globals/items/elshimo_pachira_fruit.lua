@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.POISON)) then
-        target:addStatusEffect(tpz.effect.POISON,1,3,120)
+        target:addStatusEffect(tpz.effect.POISON, 1, 3, 120)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

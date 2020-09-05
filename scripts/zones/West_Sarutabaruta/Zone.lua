@@ -39,7 +39,7 @@ function onZoneIn( player, prevZone)
         cs = 50
     -- removed only "cs =" works onzonein and can't take parameters atm
     -- elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
-        -- player:startEvent(50,0,0,0,0,0,2) -- talking doll go east
+        -- player:startEvent(50, 0, 0, 0, 0, 0, 2) -- talking doll go east
     end
 
     return cs
@@ -59,9 +59,9 @@ function onEventUpdate( player, csid, option)
         player:setCharVar("ASA_Status", option)
     elseif csid == 50 then
         if player:getZPos() > 470 then
-            player:updateEvent(0,0,0,0,0,2)
+            player:updateEvent(0, 0, 0, 0, 0, 2)
         else
-            player:updateEvent(0,0,0,0,0,1)
+            player:updateEvent(0, 0, 0, 0, 0, 1)
         end
     end
 end

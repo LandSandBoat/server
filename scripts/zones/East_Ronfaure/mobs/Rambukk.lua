@@ -6,8 +6,8 @@ require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 152)
-end;
+end
 
 function onMobDespawn(mob)
-    UpdateNMSpawnPoint(mob:getID());
-end;
+    UpdateNMSpawnPoint(mob:getID())
+end

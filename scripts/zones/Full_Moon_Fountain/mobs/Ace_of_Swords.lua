@@ -20,6 +20,6 @@ end
 function onMobDeath(mob, player, isKiller)
     if allMoonMobsDead(player) then
         player:release() -- prevents event collision if player kills multiple remaining mobs with an AOE move/spell
-        player:startEvent(32004,1,0,1,0,1)
+        player:startEvent(32004, 1, 0, 1, 0, 1)
     end
 end

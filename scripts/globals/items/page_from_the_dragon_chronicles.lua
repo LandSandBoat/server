@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 4198
 -- Item: Page from the Dragon Chronicles
--- Grants 500 - 1,000 EXP
+-- Grants 500 - 1, 000 EXP
 -- Does not grant Limit Points.
 --
 -----------------------------------------
@@ -17,5 +17,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addExp(EXP_RATE * math.random(500,1000))
+    target:addExp(EXP_RATE * math.random(500, 1000))
 end

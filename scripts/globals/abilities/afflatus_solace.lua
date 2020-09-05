@@ -8,12 +8,12 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     target:delStatusEffect(tpz.effect.AFFLATUS_SOLACE)
     target:delStatusEffect(tpz.effect.AFFLATUS_MISERY)
-    target:addStatusEffect(tpz.effect.AFFLATUS_SOLACE,8,0,7200)
+    target:addStatusEffect(tpz.effect.AFFLATUS_SOLACE, 8, 0, 7200)
 end

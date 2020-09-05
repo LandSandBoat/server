@@ -10,5 +10,5 @@ end
 
 function onItemUse(target)
     local effect = tpz.effect.ENFIRE
-    doEnspell(target,target,nil,effect)
+    doEnspell(target, target, nil, effect)
 end

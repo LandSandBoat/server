@@ -9,7 +9,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("petCount", 1)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
     local petCount = mob:getLocalVar("petCount")
 

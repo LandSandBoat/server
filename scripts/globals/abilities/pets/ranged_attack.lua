@@ -7,7 +7,7 @@ require("scripts/globals/automatonweaponskills")
 
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 

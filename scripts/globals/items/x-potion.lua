@@ -18,5 +18,5 @@ end
 
 function onItemUse(target)
     target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, target:addHP(150*ITEM_POWER))
-    target:addStatusEffect(tpz.effect.MEDICINE,0,0,5)
+    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 5)
 end
