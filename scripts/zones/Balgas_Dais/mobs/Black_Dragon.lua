@@ -8,9 +8,9 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onMobInitialize(mob)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1);
-end;
+    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+end
 
 function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.BLACK_DRAGON_SLAYER);
-end;
+    player:addTitle(tpz.title.BLACK_DRAGON_SLAYER)
+end

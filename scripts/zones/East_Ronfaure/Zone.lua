@@ -4,58 +4,58 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/East_Ronfaure/IDs")
-require("scripts/globals/icanheararainbow");
-require("scripts/globals/chocobo_digging");
-require("scripts/globals/conquest");
-require("scripts/globals/quests");
+require("scripts/globals/icanheararainbow")
+require("scripts/globals/chocobo_digging")
+require("scripts/globals/conquest")
+require("scripts/globals/quests")
 require("scripts/globals/helm")
-require("scripts/globals/zone");
+require("scripts/globals/zone")
 -----------------------------------
 
 function onChocoboDig(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
-end;
+end
 
 function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
-end;
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+function onZoneIn(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(200.015,-3.187,-536.074,187);
+        player:setPos(200.015, -3.187, -536.074, 187)
     end
 
     if (triggerLightCutscene(player)) then -- Quest: I Can Hear A Rainbow
-        cs = 21;
+        cs = 21
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
-        cs = 23;
+        cs = 23
     end
 
-    return cs;
-end;
+    return cs
+end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
-end;
+end
 
-function onRegionEnter(player,region)
-end;
+function onRegionEnter(player, region)
+end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
     if (csid == 21) then
-        lightCutsceneUpdate(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
     elseif (csid == 23) then
         if (player:getYPos() >= -22) then
-            player:updateEvent(0,0,0,0,0,7);
+            player:updateEvent(0, 0, 0, 0, 0, 7)
         else
-            player:updateEvent(0,0,0,0,0,6);
+            player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end
-end;
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 21) then
-        lightCutsceneFinish(player); -- Quest: I Can Hear A Rainbow
+        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
-end;
+end

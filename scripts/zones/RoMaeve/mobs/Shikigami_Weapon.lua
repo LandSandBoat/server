@@ -62,7 +62,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:setStatus(tpz.status.UPDATE)
 end
 

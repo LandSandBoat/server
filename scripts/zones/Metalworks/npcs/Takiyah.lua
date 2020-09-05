@@ -7,10 +7,10 @@ local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.QUFIMISLAND) ~= tpz.nation.BASTOK then
         player:showText(npc, ID.text.TAKIYAH_CLOSED_DIALOG)
     else
@@ -25,8 +25,8 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

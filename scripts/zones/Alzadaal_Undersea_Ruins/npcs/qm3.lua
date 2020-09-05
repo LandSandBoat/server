@@ -3,17 +3,16 @@
 --  NPC: ??? (Spawn Armed Gears(ZNM T3))
 -- !pos -42 -4 -169 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs");
+local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+require("scripts/globals/npc_util")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(2574,1) and trade:getItemCount() == 1) then -- Trade Ferrite
-        if (not GetMobByID(ID.mob.ARMED_GEARS):isSpawned()) then
-            player:tradeComplete();
-            SpawnMob(ID.mob.ARMED_GEARS):updateClaim(player);
-        end
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2574) and npcUtil.popFromQM(player, npc, ID.mob.ARMED_GEARS) then -- Trade Ferrite
+        player:confirmTrade()
     end
-end;
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(ID.text.NOTHING_HAPPENS);
-end;
+function onTrigger(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end

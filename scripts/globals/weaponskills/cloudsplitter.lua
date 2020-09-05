@@ -29,12 +29,10 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         params.ftp200 = 6.7 params.ftp300 = 8.5
     end
 
-    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
-
     -- Apply aftermath
-    if damage > 0 then
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
-    end
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
+
+    local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     return tpHits, extraHits, criticalHit, damage
 end

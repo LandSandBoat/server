@@ -45,6 +45,10 @@ zones[tpz.zone.SAUROMUGUE_CHAMPAIGN] =
         {
             [17269013] = 17269016, -- 240.725 1.853 223.185
         },
+        BASHE_PH =
+        {
+            [17268782] = 17268788, -- 537.188 6.167 -11.067
+        },
         OLD_SABERTOOTH     = 17268808,
         ROC                = 17269106,
         CLIMBPIX_HIGHRISE  = 17269107,

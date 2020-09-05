@@ -8,16 +8,16 @@ local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local notMeantToBeProg = player:getCharVar("notmeanttobeCS")
 
     if notMeantToBeProg == 1 then
         player:startEvent(16)
     elseif
-        player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE) == QUEST_ACCEPTED and
+        player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE) == QUEST_ACCEPTED and
         notMeantToBeProg == 3 and
         not GetMobByID(ID.mob.LAMIA_NO27):isSpawned() and
         not GetMobByID(ID.mob.MOSHDAHN):isSpawned()
@@ -30,10 +30,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 16 then
         player:setCharVar("notmeanttobeCS", 2)
     elseif csid == 17 and not GetMobByID(ID.mob.LAMIA_NO27):isSpawned() and not GetMobByID(ID.mob.MOSHDAHN):isSpawned() then

@@ -8,7 +8,7 @@ local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local pendantChance = 0
     if npcUtil.tradeHas(trade, 18014) then -- odorous knife
         pendantChance = 500
@@ -22,12 +22,12 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.BROKEN_KNIFE)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

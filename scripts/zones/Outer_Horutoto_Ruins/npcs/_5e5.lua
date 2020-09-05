@@ -19,8 +19,8 @@ function onTrigger(player, npc)
         not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0):isSpawned() and
         not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1):isSpawned()
     then
-        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0):updateEnmity(player)
-        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1):updateEnmity(player)
+        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0)
+        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1)
 
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getCharVar("MissionStatus") == 5) then
         player:startEvent(71)

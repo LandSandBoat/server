@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/settings")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 2)
 
     if npc:getAnimation() == tpz.anim.CLOSE_DOOR and brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
@@ -18,10 +18,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if option == 1 then
         local brassDoor = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7)
         if brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then

@@ -122,18 +122,18 @@ zones[tpz.zone.DYNAMIS_VALKURM] =
     {
         QM =
         {
-            [16937585] =
-            {
-                param = {3456, 3470, 3471, 3472, 3473},
-                trade =
-                {
-                    {item = 3456,                     mob = 16936961}, -- Cirrate Christelle
-                    {item = {3470, 3471, 3472, 3473}, mob = 16937290}, -- Arch Christelle
-                }
-            },
-            [16937586] = {trade = {{item = 3461, mob = 16937311}}}, -- Lost Nant'ina
-            [16937587] = {trade = {{item = 3460, mob = 16937432}}}, -- Lost Fairy Ring
-            [16937588] = {trade = {{item = 3462, mob = 16937415}}}, -- Lost Stcemqestcint
+            -- [16937585] =
+            -- {
+            --     param = {3456, 3470, 3471, 3472, 3473},
+            --     trade =
+            --     {
+            --         {item = 3456,                     mob = 16936961}, -- Cirrate Christelle
+            --         {item = {3470, 3471, 3472, 3473}, mob = 16937290}, -- Arch Christelle
+            --     }
+            -- },
+            -- [16937586] = {trade = {{item = 3461, mob = 16937311}}}, -- Lost Nant'ina
+            -- [16937587] = {trade = {{item = 3460, mob = 16937432}}}, -- Lost Fairy Ring
+            -- [16937588] = {trade = {{item = 3462, mob = 16937415}}}, -- Lost Stcemqestcint
         },
     },
 }

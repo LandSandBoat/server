@@ -12,10 +12,10 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local inAStew = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     local inAStewCS = player:getCharVar("IASvar")
     local chocobilious = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
@@ -53,10 +53,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- CHOCOBILIOUS
     if csid == 224 and option == 1 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)

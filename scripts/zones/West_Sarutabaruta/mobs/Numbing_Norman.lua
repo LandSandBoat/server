@@ -2,6 +2,7 @@
 -- Area: West Sarutabaruta
 --   NM: Numbing Norman
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -15,6 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 252)
     tpz.regime.checkRegime(player, mob, 61, 2, tpz.regime.type.FIELDS)
 end
 

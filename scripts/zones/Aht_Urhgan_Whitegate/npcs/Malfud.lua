@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         936,  16,    -- Rock Salt
@@ -20,12 +20,12 @@ function onTrigger(player,npc)
         2213, 12     -- Pine Nuts
     }
 
-    player:showText(npc,ID.text.MALFUD_SHOP_DIALOG)
+    player:showText(npc, ID.text.MALFUD_SHOP_DIALOG)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

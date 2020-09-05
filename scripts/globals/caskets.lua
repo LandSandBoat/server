@@ -106,7 +106,7 @@ end
 ---------------------------------------------------------------------------------------------
 local function timeElapsedCheck(npc)
     local spawnTime   = os.time() + 360000 -- defualt time in case no var set.
-    local timeTable   = {0, 0, 0}          -- HOURS,MINUTES,SECONDS.
+    local timeTable   = {0, 0, 0}          -- HOURS, MINUTES, SECONDS.
 
     if npc == nil then
         return false
@@ -192,7 +192,7 @@ local function sendChestDropMessage(player)
 
     party = player:getAlliance()
 
-    for _,member in ipairs(party) do
+    for _, member in ipairs(party) do
         if member:getZoneID() == player:getZoneID() then
             member:messageSpecial(dropMessage , 0)
         end
@@ -249,7 +249,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
             npc:setLocalVar("[caskets]FAILED_ATEMPTS", 0)
             npc:setLocalVar("[caskets]LOCKED", 1)
             npc:setLocalVar("[caskets]LOOT_TYPE", 2)
-            npc:setLocalVar("[caskets]HINTS_TABLE",1234567)
+            npc:setLocalVar("[caskets]HINTS_TABLE", 1234567)
         else
             npc:setLocalVar("[caskets]LOCKED", 0)
             npc:setLocalVar("[caskets]LOOT_TYPE", 1)
@@ -408,9 +408,9 @@ function getDrops(npc, dropType, zoneId)
     -- Temp drops
     ----------------------------------------------
     if chestType == "tempItems" then
-        local temps        = {0,0,0}
+        local temps        = {0, 0, 0}
         local tempCount    = 1
-        local randomTable  = {1,3,1,2,1,2,1,1,3,1,2,1}
+        local randomTable  = {1, 3, 1, 2, 1, 2, 1, 1, 3, 1, 2, 1}
 
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
@@ -453,9 +453,9 @@ function getDrops(npc, dropType, zoneId)
     -- Item drops
     ----------------------------------------------
     elseif chestType == "items" then
-        local items        = {0,0,0,0}
+        local items        = {0, 0, 0, 0}
         local itemCount    = 1
-        local randomTable  = {1,4,1,3,1,1,2,1,3,1,2,1}
+        local randomTable  = {1, 4, 1, 3, 1, 1, 2, 1, 3, 1, 2, 1}
 
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
@@ -719,7 +719,7 @@ tpz.caskets.onTrade = function(player, npc, trade)
     local locked            = npc:getLocalVar("[caskets]LOCKED")
     local eventBase         = zones[zoneId].npc.CASKET_BASE               -- base id of the current chest.
     local correctNumber     = npc:getLocalVar("[caskets]CORRECT_NUM")
-    local chestOwner        = npc:getLocalVar("[caskets]PARTYID")         -- the id of the player,party or alliance that has rights to the chest.
+    local chestOwner        = npc:getLocalVar("[caskets]PARTYID")         -- the id of the player, party or alliance that has rights to the chest.
     local leaderId          = player:getLeaderID()
 
     if leaderId ~= chestOwner then
@@ -755,12 +755,12 @@ tpz.caskets.onTrade = function(player, npc, trade)
 
                 if tonumber(splitNumbers[1]) == 1 then
                     lowNum  = 10
-                    highNum = 20 + math.random(1,9)
+                    highNum = 20 + math.random(1, 9)
                 elseif tonumber(splitNumbers[1]) > 1 and tonumber(splitNumbers[1]) < 9 then
-                    lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1,9)
-                    highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1,9)
+                    lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1, 9)
+                    highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1, 9)
                 elseif tonumber(splitNumbers[1]) == 9 then
-                    lowNum  = 80 + math.random(1,9)
+                    lowNum  = 80 + math.random(1, 9)
                     highNum = 99
                 end
                 player:messageSpecial(baseMessage + casketInfo.messageOffset.COMBINATION_GREATER_LESS, lowNum, highNum, 0, 0)
@@ -899,12 +899,12 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
 
                     if tonumber(splitNumbers[1]) == 1 then
                         lowNum  = 10
-                        highNum = 20 + math.random(1,9)
+                        highNum = 20 + math.random(1, 9)
                     elseif tonumber(splitNumbers[1]) > 1 and tonumber(splitNumbers[1]) < 9 then
-                        lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1,9)
-                        highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1,9)
+                        lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1, 9)
+                        highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1, 9)
                     elseif tonumber(splitNumbers[1]) == 9 then
-                        lowNum  = 80 + math.random(1,9)
+                        lowNum  = 80 + math.random(1, 9)
                         highNum = 99
                     end
 
@@ -924,14 +924,14 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                 local splitNumbers = {}
 
                 for digit in string.gmatch(tostring(correctNumber), "%d") do
-                    table.insert(splitNumbers,digit)
+                    table.insert(splitNumbers, digit)
                 end
 
                 if inputNumber == correctNumber then
                     if locked == 0 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.NO_COMBINATION, 0, 0, 0, 0)
                     else
-                        messageChest(player,"OPENED_LOCK",0 ,0, 0, 0, npc)
+                        messageChest(player, "OPENED_LOCK", 0 , 0, 0, 0, npc)
                         npc:setLocalVar("[caskets]LOCKED", 0)
 
                         if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then  -- is the chest shut?, then open it.

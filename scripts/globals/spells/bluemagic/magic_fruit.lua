@@ -18,16 +18,16 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local minCure = 250
     local divisor = 0.6666
     local constant = 130
     local power = getCurePowerOld(caster)
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,true)
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
     local diff = (target:getMaxHP() - target:getHP())
 
     if (power > 559) then
@@ -51,7 +51,7 @@ function onSpellCast(caster,target,spell)
 
     target:addHP(final)
     target:wakeUp()
-    caster:updateEnmityFromCure(target,final)
+    caster:updateEnmityFromCure(target, final)
     spell:setMsg(tpz.msg.basic.MAGIC_RECOVERS_HP)
 
     return final

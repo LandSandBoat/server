@@ -20,10 +20,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,180,4510)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 4510)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.AQUAN_KILLER, 10)
     target:addMod(tpz.mod.SILENCERES, 10)
     target:addMod(tpz.mod.MPHEAL, 3)
