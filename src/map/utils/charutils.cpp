@@ -26,8 +26,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../common/utils.h"
 
 #include <math.h>
-#include <src/map/packets/chat_message.h>
-#include <src/map/packets/roe_sparkupdate.h>
 #include <stdio.h>
 #include <string.h>
 #include <array>
@@ -63,6 +61,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
+#include "../packets/chat_message.h"
+#include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
 
 #include "../ability.h"

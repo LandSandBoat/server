@@ -23,10 +23,10 @@
 */
 
 #include "../common/lua/lunar.h"
-#include <src/map/lua/luautils.h>
-#include <src/map/packets/chat_message.h>
-#include <src/map/roe.h>
-#include <src/map/utils/charutils.h>
+#include "lua/luautils.h"
+#include "packets/chat_message.h"
+#include "roe.h"
+#include "utils/charutils.h"
 
 #include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
