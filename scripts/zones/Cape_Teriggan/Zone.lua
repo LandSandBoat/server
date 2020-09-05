@@ -2,10 +2,10 @@
 --
 -- Zone: Cape_Teriggan (113)
 --
----------            --------------------------
+-----------------------------------
 local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/conquest")
 require("scripts/globals/weather")
 require("scripts/globals/zone")
@@ -32,7 +32,7 @@ function onZoneIn( player, prevZone)
         player:setPos( 315.644, -1.517, -60.633, 108)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 2
     end
 
@@ -44,14 +44,11 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 2 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 2 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end
 
 function onZoneWeatherChange(weather)
