@@ -8,11 +8,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local skill = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
     local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
 
@@ -35,10 +35,10 @@ function onSpellCast(caster,target,spell)
     local dmg = base * resist
     duration = duration * resist
     dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target,dmg,spell:getElement())
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    target:addStatusEffect(tpz.effect.KAUSTRA,math.floor(dmg/3),3,duration)
+    target:addStatusEffect(tpz.effect.KAUSTRA, math.floor(dmg/3), 3, duration)
 
     return dmg
 end

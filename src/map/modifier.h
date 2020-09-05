@@ -559,6 +559,10 @@ enum class Mod
     SAVETP                    = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP               = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
+    // Rune Fencer
+
+    INQUARTATA                = 963, // increases parry rate by a flat %.
+
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG         = 347, // They're stored separately due to Magian stuff - they can grant different levels of
     EARTH_AFFINITY_DMG        = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
@@ -796,7 +800,6 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 963, // stuff
     // SPARE = 964, // stuff
     // SPARE = 965, // stuff
 };

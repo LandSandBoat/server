@@ -18,7 +18,7 @@ end
 function onTrigger(player, id)
     -- invert tpz.mod table
     local modNameByNum = {}
-    for k,v in pairs(tpz.mod) do
+    for k, v in pairs(tpz.mod) do
         modNameByNum[v]=k
     end
 

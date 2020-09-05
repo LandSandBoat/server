@@ -71,6 +71,7 @@ struct actionList_t;
 struct actionTarget_t;
 
 enum ConquestUpdate : uint8;
+enum class Emote : uint8;
 
 namespace luautils
 {
@@ -289,6 +290,8 @@ namespace luautils
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
     int32 SelectDailyItem(lua_State* L);
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
 };
 
 #endif //- _LUAUTILS_H -

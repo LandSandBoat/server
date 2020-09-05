@@ -68,6 +68,7 @@ public:
     void    RemoveTask(std::string TaskName);
 
     static CTaskMgr * getInstance();
+    static void delInstance();
 
     ~CTaskMgr() {};
 

@@ -1122,7 +1122,6 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {

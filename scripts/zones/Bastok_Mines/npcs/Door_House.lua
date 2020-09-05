@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
         local letterBlue = player:getCharVar("LeleroonsLetterBlue")
         if letterBlue == 2 and npcUtil.tradeHas(trade, {663, 879, 2007, 2010}) then -- mythril sheet, karakul leather, laminated buffalo leather, wolf felt
@@ -19,7 +19,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
         local letterBlue = player:getCharVar("LeleroonsletterBlue")
         if player:hasKeyItem(tpz.ki.LELEROONS_LETTER_BLUE) then
@@ -38,10 +38,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 519 then
         player:setCharVar("LeleroonsletterBlue", 2)
         player:delKeyItem(tpz.ki.LELEROONS_LETTER_BLUE)

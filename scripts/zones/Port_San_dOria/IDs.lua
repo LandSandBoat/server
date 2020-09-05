@@ -22,7 +22,6 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         CONQUEST_BASE                  = 7066, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET         = 7225, -- You can't fish here.
         PICKPOCKET_AVANDALE            = 7379, -- What? A pickpocket? Well, I did see a strange woman run to Northern San d'Oria. But I didn't see her steal anything.
-        FLYER_REFUSED                  = 7557, -- This person isn't interested.
         FLYER_ALREADY                  = 7558, -- This person already has a flyer.
         FLYER_ACCEPTED                 = 7559, -- Your flyer is accepted!
         PICKPOCKET_COMITTIE            = 7597, -- A pickpocket? No one like that around here.
@@ -70,11 +69,7 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         NIMIA_OPEN_DIALOG              = 8287, -- Hello, friend! Can I interest you in specialty goods from the Elshimo Lowlands?
         PATOLLE_OPEN_DIALOG            = 8288, -- Hey, [mister/miss]! How about some specialty goods from Kuzotz?
         BONMAURIEUT_OPEN_DIALOG        = 8289, -- My shipment is in! Would you like to see what has just arrived from the Elshimo Uplands?
-        ANSWALD_MESSAGE                = 8426, -- Answald looks over curiously for a moment.
-        PRIETTA_MESSAGE                = 8427, -- Prietta looks over curiously for a moment.
-        MIENE_MESSAGE                  = 8428, -- Miene looks over curiously for a moment.
-        PORTAURE_MESSAGE               = 8429, -- Portaure looks over curiously for a moment.
-        AUVARE_MESSAGE                 = 8430, -- Auvare looks over curiously for a moment.
+        FFR_LOOKS_CURIOUSLY_BASE       = 8426, -- Answald looks over curiously for a moment.
     },
     mob =
     {

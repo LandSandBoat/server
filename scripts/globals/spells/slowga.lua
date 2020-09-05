@@ -7,11 +7,11 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------------
 
-function onMagicCastingCheck(caster, target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local dMND = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
 
     --Power

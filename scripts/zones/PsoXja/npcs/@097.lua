@@ -17,4 +17,4 @@ function onSpawn(npc)
     }
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
-end;
+end

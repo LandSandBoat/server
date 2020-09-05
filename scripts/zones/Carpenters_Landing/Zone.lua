@@ -12,27 +12,27 @@ require("scripts/globals/helm")
 
 function onChocoboDig(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
-end;
+end
 
 function onInitialize(zone)
-    UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON);
-    GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800));
+    UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
+    GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
 
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
     func.herculesTreeOnGameHour()
-end;
+end
 
-function onZoneIn(player,prevZone)
-    local cs = -1;
+function onZoneIn(player, prevZone)
+    local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(6.509,-9.163,-819.333,239);
+        player:setPos(6.509, -9.163, -819.333, 239)
     end
-    return cs;
-end;
+    return cs
+end
 
 function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
-end;
+end
 
 function onGameHour(zone)
     local hour = VanadielHour()
@@ -42,11 +42,11 @@ function onGameHour(zone)
     end
 end
 
-function onRegionEnter(player,region)
-end;
+function onRegionEnter(player, region)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

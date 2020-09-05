@@ -1333,8 +1333,10 @@ bool CAutomatonController::TryTPMove()
 
 bool CAutomatonController::TryRangedAttack() // TODO: Find the animation for its ranged attack
 {
-    if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + (m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::SNAP_SHOT))))
-        return MobSkill(PTarget->targid, m_RangedAbility);
+    if (PAutomaton->getFrame() == FRAME_SHARPSHOT) 
+        if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + (m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::SNAP_SHOT))))
+            return MobSkill(PTarget->targid, m_RangedAbility);
+
     return false;
 }
 
@@ -1446,6 +1448,7 @@ namespace autoSpell
         if(PStatus->GetFlag() & EFFECTFLAG_ERASABLE)
             return SpellID::Erase;
         else
+            // TODO: -Wno-maybe-uninitialized - possible false positive (anonymous may be used)
             return {};
     }
 }

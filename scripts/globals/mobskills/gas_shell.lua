@@ -12,13 +12,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
 function onMobWeaponSkill(target, mob, skill)
     local typeEffect = tpz.effect.POISON
-        local power = math.random(23,24)
+        local power = math.random(23, 24)
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, 60))
 
     return typeEffect

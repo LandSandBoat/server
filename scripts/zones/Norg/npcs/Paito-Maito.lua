@@ -3,7 +3,7 @@
 --  NPC: Paito-Maito
 -- Standard Info NPC
 -----------------------------------
-require("scripts/globals/pathfind");
+require("scripts/globals/pathfind")
 -----------------------------------
 
 local path =
@@ -51,29 +51,29 @@ local path =
     -72.413185, -9.415321, 74.420128,
     -71.452393, -9.413510, 74.054657,
     -70.487755, -9.413510, 73.666130
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:setPos(tpz.path.first(path));
-    -- onPath(npc);
-end;
+    npc:initNpcAi()
+    npc:setPos(tpz.path.first(path))
+    -- onPath(npc)
+end
 
 function onPath(npc)
-    tpz.path.patrol(npc, path);
-end;
+    tpz.path.patrol(npc, path)
+end
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    player:startEvent(90);
-    npc:wait();
-end;
+function onTrigger(player, npc)
+    player:startEvent(90)
+    npc:wait()
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
-    npc:wait(0);
-end;
+function onEventFinish(player, csid, option, npc)
+    npc:wait(0)
+end

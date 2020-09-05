@@ -12,7 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
 
@@ -33,7 +33,7 @@ end
 function onMobWeaponSkill(target, mob, skill)
 
     -- addEx to pervent dispel
-    mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD,0,1,0,45)
+    mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 45)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     if (mob:getFamily() == 313) then -- Tinnin follows this up immediately with Nerve Gas
         mob:useMobAbility(1580)

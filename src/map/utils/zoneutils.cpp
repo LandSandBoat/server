@@ -1022,7 +1022,9 @@ void FreeZoneList()
     {
         delete PZone.second;
     }
+    g_PZoneList.clear();
     delete g_PTrigger;
+    g_PTrigger = nullptr;
 }
 
 void ForEachZone(std::function<void(CZone*)> func)

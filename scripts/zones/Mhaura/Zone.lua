@@ -21,27 +21,34 @@ function onGameHour(zone)
     else
         GetNPCByID(ID.npc.LAUGHING_BISON):AnimationSub(0)
     end
-    SetServerVariable("Mhaura_Deastination", math.random(1,100))
+    SetServerVariable("Mhaura_Deastination", math.random(1, 100))
 end
 
 function onInitialize(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     local currentday = tonumber(os.date("%j"))
+
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
+        cs = 368
+    end
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == tpz.zone.SHIP_BOUND_FOR_MHAURA or prevZone == tpz.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == tpz.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
             cs = 202
-            player:setPos(14.960,-3.430,18.423,192)
+            player:setPos(14.960, -3.430, 18.423, 192)
         else
-            player:setPos(0.003,-6.252,117.971,65)
+            player:setPos(0.003, -6.252, 117.971, 65)
         end
     end
+
     if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") ~= currentday and player:getCharVar("COP_shikarees_story")== 0 then
         cs = 322
     end
+
     return cs
 end
 
@@ -49,10 +56,10 @@ function onConquestUpdate(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player,transport)
+function onTransportEvent(player, transport)
     if transport == 47 or transport == 46 then
         if not player:hasKeyItem(tpz.ki.BOARDING_PERMIT) or ENABLE_TOAU == 0 then
-            player:setPos(8.200,-1.363,3.445,192)
+            player:setPos(8.200, -1.363, 3.445, 192)
             player:messageSpecial(ID.text.DO_NOT_POSSESS, tpz.ki.BOARDING_PERMIT)
         else
             player:startEvent(200)
@@ -62,10 +69,10 @@ function onTransportEvent(player,transport)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
         if DepartureTime % 8 == 0 then
@@ -80,6 +87,11 @@ function onEventFinish(player,csid,option)
             player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
         end
     elseif csid == 322 then
-        player:setCharVar("COP_shikarees_story",1)
+        player:setCharVar("COP_shikarees_story", 1)
+    elseif csid == 368 then
+        -- Flag ROV 1-3 Mhuara Route (2)
+        player:setCharVar("RhapsodiesStatus", 2)
+        player:completeMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:addMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end

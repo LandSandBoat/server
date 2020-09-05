@@ -44,7 +44,7 @@ function getNumberOfCoinsToUpgradeSize(size)
     end
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local numBronze = trade:getItemQty(2184)
     local numMythril = trade:getItemQty(2186)
     local numGold = trade:getItemQty(2187)
@@ -63,29 +63,29 @@ function onTrade(player,npc,trade)
             if slotSize == 30 and numMythril == 4 and numGold == 0 then
                 player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
                 player:tradeComplete()
-                player:startEvent(602,0,0,0,40)
+                player:startEvent(602, 0, 0, 0, 40)
             elseif slotSize == 40 and numMythril == 0 and numGold == 2 then
                 player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
                 player:tradeComplete()
-                player:startEvent(602,0,0,0,50)
+                player:startEvent(602, 0, 0, 0, 50)
             elseif slotSize == 50 and numMythril == 0 and numGold == 3 then
                 player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
                 player:tradeComplete()
-                player:startEvent(602,0,0,0,60)
+                player:startEvent(602, 0, 0, 0, 60)
             elseif slotSize == 60 and numMythril == 0 and numGold == 5 then
                 player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
                 player:tradeComplete()
-                player:startEvent(602,0,0,0,70)
+                player:startEvent(602, 0, 0, 0, 70)
             elseif slotSize == 70 and numMythril == 0 and numGold == 10 then
                 player:changeContainerSize(tpz.inv.MOGLOCKER, 10)
                 player:tradeComplete()
-                player:startEvent(602,0,0,0,80)
+                player:startEvent(602, 0, 0, 0, 80)
             end
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- TODO: Check if they are >= Mission 2
     -- if < mission 2 then
     --      player:startEvent(600)
@@ -100,9 +100,9 @@ function onTrigger(player,npc)
             mogLockerExpiryTimestamp = unlockMogLocker(player)
             accessType = setMogLockerAccessType(player, MOGLOCKER_ACCESS_TYPE_ALLAREAS)
         end
-        player:startEvent(600,mogLockerExpiryTimestamp,accessType,
-        MOGLOCKER_ALZAHBI_VALID_DAYS,player:getContainerSize(tpz.inv.MOGLOCKER),
-        getNumberOfCoinsToUpgradeSize(player:getContainerSize(tpz.inv.MOGLOCKER)),2,3,
+        player:startEvent(600, mogLockerExpiryTimestamp, accessType,
+        MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(tpz.inv.MOGLOCKER),
+        getNumberOfCoinsToUpgradeSize(player:getContainerSize(tpz.inv.MOGLOCKER)), 2, 3,
         MOGLOCKER_ALLAREAS_VALID_DAYS)
     else
         player:startEvent(600)
@@ -110,12 +110,12 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("fCSID: %u",csid)
-    -- printf("fRESULT: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("fCSID: %u", csid)
+    -- printf("fRESULT: %u", option)
     if csid == 600 and option == 3 then
         local accessType = player:getCharVar(MOGLOCKER_PLAYERVAR_ACCESS_TYPE)
         if accessType == MOGLOCKER_ACCESS_TYPE_ALLAREAS then

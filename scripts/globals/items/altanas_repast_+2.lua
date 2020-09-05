@@ -38,7 +38,7 @@ end
 function onItemUse(target)
     target:forMembersInRange(30, function(member)
         if not member:hasStatusEffect(tpz.effect.FOOD) and not member:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-            member:addStatusEffect(tpz.effect.FOOD,0,0,10800,6540)
+            member:addStatusEffect(tpz.effect.FOOD, 0, 0, 10800, 6540)
         end
     end)
 end

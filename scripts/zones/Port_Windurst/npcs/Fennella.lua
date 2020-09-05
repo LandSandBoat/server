@@ -4,9 +4,9 @@
 -- Type: Guildworker's Union Representative
 -- !pos -177.811 -2.835 65.639 240
 -----------------------------------
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
-local ID = require("scripts/zones/Port_Windurst/IDs");
+require("scripts/globals/keyitems")
+require("scripts/globals/crafting")
+local ID = require("scripts/zones/Port_Windurst/IDs")
 
 local keyitems = {
     [0] = {
@@ -29,7 +29,7 @@ local keyitems = {
         rank = 9,
         cost = 20000
     }
-};
+}
 
 local items = {
     [0] = {
@@ -72,26 +72,26 @@ local items = {
         rank = 9,
         cost = 15000
     }
-};
+}
 
-function onTrade(player,npc,trade)
-    unionRepresentativeTrade(player, npc, trade, 10021, 0);
-end;
+function onTrade(player, npc, trade)
+    unionRepresentativeTrade(player, npc, trade, 10021, 0)
+end
 
-function onTrigger(player,npc)
-    unionRepresentativeTrigger(player, 0, 10020, "guild_fishing", keyitems);
-end;
+function onTrigger(player, npc)
+    unionRepresentativeTrigger(player, 0, 10020, "guild_fishing", keyitems)
+end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
     if (csid == 10020) then
-        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
     end
-end;
+end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
     if (csid == 10020) then
-        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
     elseif (csid == 10021) then
-        player:messageSpecial(ID.text.GP_OBTAINED, option);
+        player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
-end;
+end

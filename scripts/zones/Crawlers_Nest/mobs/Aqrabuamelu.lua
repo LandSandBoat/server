@@ -2,6 +2,7 @@
 -- Area: Crawlers' Nest
 --   NM: Aqrabuamelu
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -38,6 +39,7 @@ function onSpikesDamage(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 238)
 end
 
 function onMobDespawn(mob)

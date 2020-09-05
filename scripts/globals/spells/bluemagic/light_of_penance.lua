@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffectOne = tpz.effect.BLINDNESS
     local typeEffectTwo = tpz.effect.BIND
     local params = {}
@@ -43,13 +43,13 @@ function onSpellCast(caster,target,spell)
                 target:delTP(power)
                 spell:setMsg(tpz.msg.basic.MAGIC_TP_REDUCE)
             elseif (target:hasStatusEffect(typeEffectOne)) then
-                target:addStatusEffect(typeEffectTwo,1,0,duration)
+                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
                 target:delTP(power)
                 returnEffect = typeEffectTwo -- make it return bind message if blind can't be inflicted
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
             else
-                target:addStatusEffect(typeEffectOne,50,0,duration)
-                target:addStatusEffect(typeEffectTwo,1,0,duration)
+                target:addStatusEffect(typeEffectOne, 50, 0, duration)
+                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
                 target:delTP(power)
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
             end

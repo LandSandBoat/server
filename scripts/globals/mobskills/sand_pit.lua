@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -38,7 +38,7 @@ function onMobWeaponSkill(target, mob, skill)
 
         if (spawnId > 0) then
             local executioner = GetMobByID(spawnId)
-            executioner:setSpawn(npcX-1,npcY-2,npcZ-1) -- Set its spawn location.
+            executioner:setSpawn(npcX-1, npcY-2, npcZ-1) -- Set its spawn location.
             SpawnMob(spawnId):updateEnmity(target)
         end
     end

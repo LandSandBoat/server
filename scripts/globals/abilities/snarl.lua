@@ -11,18 +11,18 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if (player:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET,0
+        return tpz.msg.basic.REQUIRES_A_PET, 0
     else
         if ((player:getPet():getTarget() ~= nil) and (player:isJugPet())) then
-            return 0,0
+            return 0, 0
         else
-            return tpz.msg.basic.PET_CANNOT_DO_ACTION,0
+            return tpz.msg.basic.PET_CANNOT_DO_ACTION, 0
         end
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     player:transferEnmity(player:getPet(), 99, 11.5)
 end

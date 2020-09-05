@@ -22,10 +22,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,180,5635)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 5635)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.VIT, 1)
     target:addMod(tpz.mod.DEF, 10)
     target:addMod(tpz.mod.AMORPH_KILLER, 10)

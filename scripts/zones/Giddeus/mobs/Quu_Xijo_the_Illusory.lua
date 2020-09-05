@@ -2,8 +2,10 @@
 -- Area: Giddeus (145)
 --   NM: Quu Xijo the Illusory
 -----------------------------------
+require("scripts/globals/hunts")
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 283)
 end
 
 function onMobDespawn(mob)

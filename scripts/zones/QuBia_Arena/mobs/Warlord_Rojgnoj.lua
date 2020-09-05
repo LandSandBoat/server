@@ -19,7 +19,7 @@ function phaseChangeReady(battlefield)
 end
 
 function onMobInitialize(mob)
-    mob:addMod(tpz.mod.SLEEPRES,50)
+    mob:addMod(tpz.mod.SLEEPRES, 50)
 end
 
 function onMobSpawn(mob)

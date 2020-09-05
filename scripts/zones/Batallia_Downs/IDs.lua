@@ -29,6 +29,10 @@ zones[tpz.zone.BATALLIA_DOWNS] =
         NO_COMBINATION           = 7698,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 9976,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL    = 12832, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RAPTOR_OVERCOME_MUNCHIES = 12985, -- The raptor has overcome the munchies! (<n>/<n>)
+        RAPTOR_SECOND_WIND       = 12986, -- The raptor has gained a second wind!
+        MEET_SYRILLIA            = 12987, -- Meet up with Syrillia.
+        RAPTOR_SPEEDS_OFF        = 12988, -- The raptor speeds off into the sunset...
     },
     mob =
     {
@@ -52,7 +56,10 @@ zones[tpz.zone.BATALLIA_DOWNS] =
     },
     npc =
     {
-        CASKET_BASE   = 17207794,
+        CASKET_BASE      = 17207794,
+        SYRILLIA         = 17207972,
+        BLUE_BEAM_BASE   = 17207973,
+        RAPTOR_FOOD_BASE = 17207981,
     },
 }
 

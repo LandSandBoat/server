@@ -28,7 +28,7 @@ local points =
     [17] = { 439.1841, -0.1640, -447.2572 }
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local coney
     local currentPoint = npc:getLocalVar("currentPoint")
 
@@ -42,20 +42,20 @@ function onTrade(player,npc,trade)
         local x = points[currentPoint][1]
         local y = points[currentPoint][2]
         local z = points[currentPoint][3]
-        GetMobByID(coney):setSpawn(x,y,z,0)
+        GetMobByID(coney):setSpawn(x, y, z, 0)
         if npcUtil.tradeHas(trade, 4389) and npcUtil.popFromQM(player, npc, coney) then -- 4389 is sandorian carrot
             player:confirmTrade()
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end
 
 
@@ -66,7 +66,7 @@ local function moveFootprint(npc)
     -- BG Wiki has no info. For now, triggers every 3 vana minutes
 
     local currentPoint = npc:getLocalVar("currentPoint")
-    local nextPoint = math.random(1,17)
+    local nextPoint = math.random(1, 17)
 
     if nextPoint == currentPoint then
         nextPoint = nextPoint + 1
@@ -76,7 +76,7 @@ local function moveFootprint(npc)
     end
 
     local nextPointLoc = points[nextPoint]
-    npc:setLocalVar("currentPoint",nextPoint)
+    npc:setLocalVar("currentPoint", nextPoint)
     npc:setStatus(tpz.status.NORMAL)
     npcUtil.queueMove(npc, nextPointLoc, 1000)
 end
@@ -88,7 +88,7 @@ function onTimeTrigger(npc, triggerID)
     if not isSpawned then
         if IsMoonFull() or IsMoonNew() then
             if activeTime == 0 then
-                npc:setLocalVar("activeTime",os.time()+math.random(60*9,60*15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
+                npc:setLocalVar("activeTime", os.time()+math.random(60*9, 60*15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
             elseif os.time() > activeTime then
                 --print("MOVING!")
                 moveFootprint(npc)

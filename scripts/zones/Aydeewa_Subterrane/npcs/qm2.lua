@@ -7,13 +7,12 @@ local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    if npcUtil.tradeHas(trade, 2572) and not GetMobByID(ID.mob.PANDEMONIUM_WARDEN):isSpawned() then -- Pandemonium Key
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2572) and npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN) then -- Pandemonium Key
         player:confirmTrade()
-        SpawnMob(ID.mob.PANDEMONIUM_WARDEN):updateClaim(player)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end

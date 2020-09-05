@@ -41,7 +41,7 @@ function halloweenItemsCheck(player)
     local trickStaff = 17565
     local trickStaff2 = 17587
 
-    reward_list = {pumpkinHead,pumpkinHead2,trickStaff,trickStaff2}
+    reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
 
     -- Checks for HQ Upgrade
     for ri = 1, #reward_list do
@@ -63,19 +63,19 @@ function halloweenItemsCheck(player)
     local cnt = #reward_list
 
     while cnt ~= 0 do
-        local picked = reward_list[math.random(1,#reward_list)]
+        local picked = reward_list[math.random(1, #reward_list)]
         if (player:hasItem(picked) == false) then
             reward = picked
             cnt = 0
         else
-            table.remove(reward_list,picked)
+            table.remove(reward_list, picked)
             cnt = cnt - 1
         end
     return reward
     end
 end
 
-function onHalloweenTrade(player,trade,npc)
+function onHalloweenTrade(player, trade, npc)
     local zone = player:getZoneName()
     local ID = zones[player:getZoneID()]
 
@@ -151,12 +151,12 @@ function onHalloweenTrade(player,trade,npc)
                     itemInList = itemInList - 32
                 end
 
-                local AlreadyTradedChk = player:getMaskBit(harvestFestTreats,itemInList)
-                if (itemReward ~= 0 and player:getFreeSlotsCount() >= 1 and math.random(1,3) < 2) then -- Math.random added so you have 33% chance on getting item
+                local AlreadyTradedChk = player:getMaskBit(harvestFestTreats, itemInList)
+                if (itemReward ~= 0 and player:getFreeSlotsCount() >= 1 and math.random(1, 3) < 2) then -- Math.random added so you have 33% chance on getting item
 
                     player:messageSpecial(ID.text.HERE_TAKE_THIS)
                     player:addItem(itemReward)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED,itemReward)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, itemReward)
 
                 elseif target:canUseMisc(tpz.zoneMisc.COSTUME) and not AlreadyTradedChk then
                 -- Other neat looking halloween type costumes
@@ -172,19 +172,19 @@ function onHalloweenTrade(player,trade,npc)
                 -- 564/579 skele
 
                     -- Possible costume values:
-                    local Yagudo = math.random(580,607)
-                    local Quadav = math.random(644,671)
-                    local Shade = math.random(535,538)
-                    local Orc = math.random(612,639)
+                    local Yagudo = math.random(580, 607)
+                    local Quadav = math.random(644, 671)
+                    local Shade = math.random(535, 538)
+                    local Orc = math.random(612, 639)
                     local Ghost = 368
                     local Hound = 365
                     local Skeleton = 564
-                    local Dark_Stalker = math.random(531,534)
+                    local Dark_Stalker = math.random(531, 534)
 
-                    local halloween_costume_list = {Quadav,Orc,Yagudo,Shade,Ghost,Hound,Skeleton,Dark_Stalker}
+                    local halloween_costume_list = {Quadav, Orc, Yagudo, Shade, Ghost, Hound, Skeleton, Dark_Stalker}
 
-                    local costumePicked = halloween_costume_list[math.random(1,#halloween_costume_list)] -- will randomly pick one of the costumes in the list
-                    player:addStatusEffect(tpz.effect.COSTUME,costumePicked,0,3600)
+                    local costumePicked = halloween_costume_list[math.random(1, #halloween_costume_list)] -- will randomly pick one of the costumes in the list
+                    player:addStatusEffect(tpz.effect.COSTUME, costumePicked, 0, 3600)
 
                     -- pitchForkCostumeList defines the special costumes per zone that can trigger the pitch fork requirement
                     -- zone, costumeID
@@ -214,7 +214,7 @@ function onHalloweenTrade(player,trade,npc)
                 end
 
                 if (AlreadyTradedChk == false) then
-                    player:setMaskBit(harvestFestTreats,varName,itemInList,true)
+                    player:setMaskBit(harvestFestTreats, varName, itemInList, true)
                 end
 
                 player:tradeComplete()

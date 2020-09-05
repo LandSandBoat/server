@@ -138,10 +138,11 @@ UpgradeLog*.XML
 /autom4te.cache
 /compile
 /configure
-/config.*
+**/config.*
 /depcomp
 /missing
 /install-sh
+/tools/config.yaml
 
 src/common/config.h
 src/common/config.h.in
