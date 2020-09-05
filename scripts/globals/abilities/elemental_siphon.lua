@@ -13,16 +13,16 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     local pet = player:getPetID()
     if (pet >= 0 and pet <= 7) then -- spirits
-        return 0,0
+        return 0, 0
     else
-        return tpz.msg.basic.UNABLE_TO_USE_JA,0
+        return tpz.msg.basic.UNABLE_TO_USE_JA, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     local spiritEle = player:getPetID() + 1 -- get the spirit's ID, then make it line up with element value for the day order.
     -- pet order: fire, ice, air, earth, thunder, water, light, dark
     -- day order: fire, earth, water, wind, ice, thunder, light, dark

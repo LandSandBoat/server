@@ -1250,6 +1250,17 @@ void SmallPacket0x034(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (PTarget != nullptr && PTarget->id == PChar->TradePending.id)
     {
+        if (!PChar->UContainer->IsSlotEmpty(tradeSlotID))
+        {
+            CItem* PCurrentSlotItem = PChar->UContainer->GetItem(tradeSlotID);
+            if (quantity != 0)
+            {
+                ShowError(CL_RED"SmallPacket0x034: Player %s trying to update trade quantity of a RESERVED item! [Item: %i | Trade Slot: %i] \n" CL_RESET, PChar->GetName(), PCurrentSlotItem->getID(), tradeSlotID);
+            }
+            PCurrentSlotItem->setReserve(0);
+            PChar->UContainer->ClearSlot(tradeSlotID);
+        }
+
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
         // We used to disable Rare/Ex items being added to the container, but that is handled properly else where now
         if (PItem != nullptr && PItem->getID() == itemID && quantity + PItem->getReserve() <= PItem->getQuantity())
@@ -2836,19 +2847,27 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
+    {
         return;
+    }
 
     // Invalid Emote Mode.
     if (emoteMode < EmoteMode::ALL || emoteMode > EmoteMode::MOTION)
+    {
         return;
+    }
 
     const auto extra = data.ref<uint16>(0x0C);
 
     // Attempting to use locked job emote.
     if (EmoteID == Emote::JOB && extra && !(PChar->jobs.unlocked & (1 << (extra - 0x1E))))
+    {
         return;
-
+    }
+    
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionPacket(PChar, TargetID, TargetIndex, EmoteID, emoteMode, extra));
+
+    luautils::OnPlayerEmote(PChar, EmoteID);
 }
 
 /************************************************************************
@@ -5886,11 +5905,20 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
             return;
 
-        uint32 Price1 = (PBazaarItem->getCharPrice() * Quantity);
-        uint32 Price2 = (PChar->loc.zone->GetTax() * Price1) / 10000 + Price1;
+        uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
+        uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)Price2);
-        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price1);
+        // Validate this player can afford said item
+        if (PCharGil->getQuantity() < PriceWithTax)
+        {
+            // Exploit attempt
+            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
+            return;
+        }
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)PriceWithTax);
+        charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
 
         PChar->pushPacket(new CBazaarPurchasePacket(PTarget, true));
 
@@ -5978,6 +6006,12 @@ void SmallPacket0x10A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint32 price = data.ref<uint32>(0x08);
 
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+
+    if (PItem->getReserve() > 0)
+    {
+        ShowError(CL_RED"SmallPacket0x10A: Player %s trying to bazaar a RESERVED item! [Item: %i | Slot ID: %i] \n" CL_RESET, PChar->GetName(), PItem->getID(), slotID);
+        return;
+    }
 
     if ((PItem != nullptr) && !(PItem->getFlag() & ITEM_FLAG_EX) && (!PItem->isSubType(ITEM_LOCKED) || PItem->getCharPrice() != 0))
     {

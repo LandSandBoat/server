@@ -82,7 +82,7 @@ std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE> g_SkillRanks;
 std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList;           // Holds all Weapon skills
-std::array<CMobSkill*, 4096> g_PMobSkillList;                   // List of mob skills
+std::array<CMobSkill*, MAX_MOBSKILL_ID> g_PMobSkillList;                   // List of mob skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 std::unordered_map<uint16, std::vector<uint16>>  g_PMobSkillLists;  // List of mob skills defined from mob_skill_lists.sql
@@ -1726,6 +1726,10 @@ namespace battleutils
                     parryRate = parryRate + issekiganBonus;
                 }
 
+                // Inquartata grants a flat parry rate bonus.
+                int16 inquartataBonus = PDefender->getMod(Mod::INQUARTATA);
+                parryRate += inquartataBonus;
+
                 return parryRate;
             }
         }
@@ -1996,7 +2000,7 @@ namespace battleutils
                 float sBlowMult = ((100.0f - std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), 0.0f, 50.0f)) / 100.0f);
 
                 //mobs hit get basetp+30 whereas pcs hit get basetp/3
-                if (PDefender->objtype == TYPE_PC)
+                if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
                 {
                     PDefender->addTP((int16)(tpMultiplier * ((baseTp / 3) * sBlowMult * (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))))); //yup store tp counts on hits taken too!
                 }
@@ -2331,7 +2335,7 @@ namespace battleutils
 
         if (PAttacker->objtype == TYPE_PC)
         {
-            ratioCap = 2.25f;
+            ratioCap = isCritical ? 3 : 2.25f;
         }
         if (PAttacker->objtype == TYPE_MOB)
         {

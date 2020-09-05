@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.POISON
     -- Base Stats
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
@@ -29,9 +29,9 @@ function onSpellCast(caster,target,spell)
         return effect
     end
 
-    if (math.random(0,100) >= target:getMod(tpz.mod.POISONRES)) then
+    if (math.random(0, 100) >= target:getMod(tpz.mod.POISONRES)) then
         if (duration >= 30) then
-            if (target:addStatusEffect(effect,power,3,duration)) then
+            if (target:addStatusEffect(effect, power, 3, duration)) then
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
             else
                 spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)

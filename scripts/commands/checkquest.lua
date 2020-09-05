@@ -16,7 +16,7 @@ function error(player, msg)
     player:PrintToPlayer("!checkquest <logID> <questID> {player}")
 end
 
-function onTrigger(player,logId,questId,target)
+function onTrigger(player, logId, questId, target)
 
     -- validate logId
     local questLog = GetQuestLogInfo(logId)
@@ -53,7 +53,7 @@ function onTrigger(player,logId,questId,target)
     end
 
     -- get quest status
-    local status = targ:getQuestStatus(logId,questId)
+    local status = targ:getQuestStatus(logId, questId)
     switch (status): caseof
     {
         [0] = function (x) status = "AVAILABLE" end,

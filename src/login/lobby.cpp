@@ -191,7 +191,7 @@ int32 lobbydata_parse(int32 fd)
                         ////////////////////////////////////////////////////
                         ref<uint32>(CharList, 4 + 32 + i * 140) = CharID;
 
-                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 15);
+                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 16);
 
                         ref<uint8>(CharList, 46 + 32 + i * 140) = MainJob;
                         ref<uint8>(CharList, 73 + 32 + i * 140) = lvlMainJob;
@@ -768,7 +768,7 @@ int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
     srand(clock());
     char_mini createchar;
 
-    memcpy(createchar.m_name, loginsd->charname, 16);
+    memcpy(createchar.m_name, loginsd->charname, 15);
     memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);

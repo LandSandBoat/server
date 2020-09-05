@@ -8,11 +8,11 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    player:showText(npc,ID.text.WIJETIREN_SHOP_DIALOG)
+function onTrigger(player, npc)
+    player:showText(npc, ID.text.WIJETIREN_SHOP_DIALOG)
 
     local stock = {
         4148,   290,       --Antidote
@@ -27,8 +27,8 @@ function onTrigger(player,npc)
     tpz.shop.general(player, stock, WINDURST)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -3,17 +3,16 @@
 --  NPC: ??? (Spawn Wulgaru(ZNM T2))
 -- !pos -22 -4 204 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs");
+local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+require("scripts/globals/npc_util")
+-----------------------------------
 
-function onTrade(player,npc,trade)
-    if (trade:hasItemQty(2597,1) and trade:getItemCount() == 1) then -- Trade Opalus Gem
-        if (not GetMobByID(ID.mob.WULGARU):isSpawned()) then
-            player:tradeComplete();
-            SpawnMob(ID.mob.WULGARU):updateClaim(player);
-        end
+function onTrade(player, npc, trade)
+    if npcUtil.tradeHas(trade, 2597) and npcUtil.popFromQM(player, npc, ID.mob.WULGARU) then -- Trade Opalus Gem
+        player:confirmTrade()
     end
-end;
+end
 
-function onTrigger(player,npc)
-    player:messageSpecial(ID.text.NOTHING_HAPPENS);
-end;
+function onTrigger(player, npc)
+    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+end

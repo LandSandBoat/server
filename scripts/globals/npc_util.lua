@@ -189,8 +189,8 @@ end
     Examples of valid items parameter:
         640                 -- copper ore x1
         { 640, 641 }        -- copper ore x1, tin ore x1
-        { {640,2} }         -- copper ore x2
-        { {640,2}, 641 }    -- copper ore x2, tin ore x1
+        { {640, 2} }         -- copper ore x2
+        { {640, 2}, 641 }    -- copper ore x2, tin ore x1
 ******************************************************************************* --]]
 function npcUtil.giveItem(player, items)
     local ID = zones[player:getZoneID()]
@@ -200,13 +200,13 @@ function npcUtil.giveItem(player, items)
     local itemId
     local itemQty
     if type(items) == "number" then
-        table.insert(givenItems, {items,1})
+        table.insert(givenItems, {items, 1})
     elseif type(items) == "table" then
         for _, v in pairs(items) do
             if type(v) == "number" then
-                table.insert(givenItems, {v,1})
+                table.insert(givenItems, {v, 1})
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
-                table.insert(givenItems, {v[1],v[2]})
+                table.insert(givenItems, {v[1], v[2]})
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
                 return false
@@ -312,7 +312,7 @@ function npcUtil.giveKeyItem(player, keyitems)
     for _, v in pairs(givenKeyItems) do
         if not player:hasKeyItem(v) then
             player:addKeyItem(v)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,v)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
         end
     end
     return true
@@ -325,7 +325,7 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.completeQuest(player, SANDORIA, ROSEL_THE_ARMORER, {
-            item = { {640,2}, 641 },    -- see npcUtil.giveItem for formats
+            item = { {640, 2}, 641 },    -- see npcUtil.giveItem for formats
             keyItem = tpz.ki.ZERUHN_REPORT,    -- see npcUtil.giveKeyItem for formats
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
@@ -393,7 +393,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
 
     -- successfully complete the quest
-    player:completeQuest(area,quest)
+    player:completeQuest(area, quest)
     return true
 end
 
@@ -406,8 +406,8 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640,2} }             -- copper ore x2
-        { {640,2}, 641 }        -- copper ore x2, tin ore x1
+        { {640, 2} }             -- copper ore x2
+        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
         { 640, {"gil", 200} }   -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHas(trade, items, exact)
@@ -474,7 +474,7 @@ function npcUtil.tradeHas(trade, items, exact)
 
     -- confirm items
     for k, v in pairs(neededItems) do
-        trade:confirmItem(k,v)
+        trade:confirmItem(k, v)
     end
     return true
 end
@@ -488,8 +488,8 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640,2} }             -- copper ore x2
-        { {640,2}, 641 }        -- copper ore x2, tin ore x1
+        { {640, 2} }             -- copper ore x2
+        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
         { 640, {"gil", 200} }   -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHasExactly(trade, items)

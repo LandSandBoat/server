@@ -5,9 +5,9 @@
 -----------------------------------------
 
 function onItemCheck(target)
-    return target:canLearnAbility(89)
+    return target:canLearnAbility(tpz.jobAbility.CHAOS_ROLL)
 end
 
 function onItemUse(target)
-    target:addLearnedAbility(89)
+    target:addLearnedAbility(tpz.jobAbility.CHAOS_ROLL)
 end

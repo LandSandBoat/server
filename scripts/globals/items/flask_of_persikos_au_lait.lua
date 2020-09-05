@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.REGEN)) then
-        target:addStatusEffect(tpz.effect.REGEN,4,3,600)
+        target:addStatusEffect(tpz.effect.REGEN, 4, 3, 600)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

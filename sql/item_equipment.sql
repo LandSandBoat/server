@@ -10502,12 +10502,12 @@ INSERT INTO `item_equipment` VALUES (21394,'sancus_sachet',99,119,16384,0,0,0,8,
 INSERT INTO `item_equipment` VALUES (21395,'sancus_sachet_+1',99,119,16384,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (21396,'regal_gem',99,0,16,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (21398,'marsyas',99,0,512,135,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (21399,'nibiru_harp',99,119,512,128,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (21399,'nibiru_harp',99,0,512,128,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21400,'blurred_harp',99,0,512,131,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21401,'blurred_harp_+1',99,0,512,131,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21402,'damani_horn',99,0,512,68,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21403,'damani_horn_+1',99,0,512,68,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (21404,'linos',99,119,512,124,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (21404,'linos',99,0,512,124,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21405,'eminent_flute',99,0,512,67,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21406,'homestead_flute',99,0,512,116,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (21407,'terpander',99,0,512,80,0,0,4,0);
@@ -10582,7 +10582,7 @@ INSERT INTO `item_equipment` VALUES (21505,'arasy_sainti_+1',99,119,135427,506,0
 INSERT INTO `item_equipment` VALUES (21506,'jolt_counter',99,119,131074,129,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21507,'jolt_counter_+1',99,119,131074,129,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21509,'premium_mogti',1,0,4194303,481,0,0,1,0);
-INSERT INTO `item_equipment` VALUES (21510,'voluspa_knuckles',99,119,262643,129,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21510,'voluspa_knuckles',99,119,393715,129,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21511,'hep._baghnakhs',99,119,397747,141,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21512,'hep._baghnakhs_+1',99,119,397747,141,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21513,'raetic_baghnakhs',99,119,971707,143,0,0,1,0);

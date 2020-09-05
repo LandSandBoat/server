@@ -27,12 +27,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.15 params.crit200 = 0.2 params.crit300 = 0.25
     params.canCrit = true
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1;
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.multiHitfTP = true
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.dex_wsc = 0.8
     end
+
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.RANGED, tpz.aftermath.type.EMPYREAN)
 
     local damage, criticalHit, tpHits, extraHits, shadowsAbsorbed = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
@@ -40,11 +43,6 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 8))
     elseif shadowsAbsorbed + tpHits + extraHits == 2 then
         action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 4))
-    end
-
-    -- Apply aftermath
-    if damage > 0 then
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.RANGED, tpz.aftermath.type.EMPYREAN)
     end
 
     return tpHits, extraHits, criticalHit, damage

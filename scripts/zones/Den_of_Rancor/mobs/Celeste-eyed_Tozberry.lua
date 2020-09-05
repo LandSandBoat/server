@@ -2,6 +2,7 @@
 -- Area: Den of Rancor
 --   NM: Celeste-eyed Tozberry
 -----------------------------------
+require("scripts/globals/hunts")
 mixins =
 {
     require("scripts/mixins/families/tonberry"),
@@ -19,4 +20,5 @@ function onMobSpawn(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 395)
 end

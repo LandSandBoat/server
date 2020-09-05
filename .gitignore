@@ -142,6 +142,7 @@ UpgradeLog*.XML
 /depcomp
 /missing
 /install-sh
+/tools/config.yaml
 
 src/common/config.h
 src/common/config.h.in

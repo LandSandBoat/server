@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -29,7 +29,7 @@ function onZoneIn( player, prevZone)
         player:setPos(-374.008, -23.712, 63.289, 213)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 48
     elseif player:getCurrentMission(ASA) == tpz.mission.id.asa.BURGEONING_DREAD and prevZone == tpz.zone.WINDURST_WATERS then
         cs = 62
@@ -39,7 +39,7 @@ function onZoneIn( player, prevZone)
         cs = 50
     -- removed only "cs =" works onzonein and can't take parameters atm
     -- elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
-        -- player:startEvent(50,0,0,0,0,0,2) -- talking doll go east
+        -- player:startEvent(50, 0, 0, 0, 0, 0, 2) -- talking doll go east
     end
 
     return cs
@@ -54,22 +54,20 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 48 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 62 or csid == 63 then
         player:setCharVar("ASA_Status", option)
     elseif csid == 50 then
         if player:getZPos() > 470 then
-            player:updateEvent(0,0,0,0,0,2)
+            player:updateEvent(0, 0, 0, 0, 0, 2)
         else
-            player:updateEvent(0,0,0,0,0,1)
+            player:updateEvent(0, 0, 0, 0, 0, 1)
         end
     end
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 48 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    elseif csid == 62 or csid == 63 then
+    if csid == 62 or csid == 63 then
         player:completeMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
         player:addMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end

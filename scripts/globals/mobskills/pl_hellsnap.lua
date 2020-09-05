@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1839) then
@@ -21,8 +21,8 @@ function onMobWeaponSkill(target, mob, skill)
     local numhits = 1
     local accmod = 10
     local dmgmod = 4.0
-    local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.PHYSICAL,tpz.damageType.SLASHING,info.hitslanded*math.random(2,3))
+    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING, info.hitslanded*math.random(2, 3))
     local typeEffect = tpz.effect.STUN
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
