@@ -22,18 +22,17 @@ end
 
 function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getCharVar("MissionStatus")
-    local BatHuntCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BAT_HUNT) -- quest repeatable and clicking tombstone should not produce cutscene on repeat
+    local missionStatus = player:getCharVar("MissionStatus")
     local X = npc:getXPos()
     local Z = npc:getZPos()
 
     if X >= -1 and X <= 1 and Z >= -106 and Z <= -102 then
-        if currentMission == tpz.mission.id.sandoria.BAT_HUNT and MissionStatus <= 1 then
+        if currentMission == tpz.mission.id.sandoria.BAT_HUNT and missionStatus <= 1 then
             player:startEvent(4)
         else
             player:startEvent(2)
         end
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 2 then
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
         player:startEvent(8)
     end
 
@@ -57,7 +56,6 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
         player:setCharVar("OfferingWaterOK", 1)
     elseif csid == 8 then
-        player:setCharVar("MissionStatus", 3)
         npcUtil.giveKeyItem(player, tpz.ki.ANCIENT_SANDORIAN_BOOK)
     end
 end

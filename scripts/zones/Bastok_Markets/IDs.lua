@@ -67,6 +67,7 @@ zones[tpz.zone.BASTOK_MARKETS] =
     },
     npc =
     {
+        AQUILLINA = 17739784,
         HALLOWEEN_SKINS =
         {
             [17739805] = 45, -- Olwyn

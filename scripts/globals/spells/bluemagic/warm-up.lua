@@ -19,11 +19,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffectOne = tpz.effect.ACCURACY_BOOST
     local typeEffectTwo = tpz.effect.EVASION_BOOST
     local power = 10
@@ -40,15 +40,15 @@ function onSpellCast(caster,target,spell)
         caster:delStatusEffect(tpz.effect.DIFFUSION)
     end
 
-    if (target:addStatusEffect(typeEffectOne,power,0,duration) == false and target:addStatusEffect(typeEffectTwo,power,0,duration) == false) then -- both statuses fail to apply
+    if (target:addStatusEffect(typeEffectOne, power, 0, duration) == false and target:addStatusEffect(typeEffectTwo, power, 0, duration) == false) then -- both statuses fail to apply
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
-    elseif (target:addStatusEffect(typeEffectOne,power,0,duration) == false) then -- the first status fails to apply
-        target:addStatusEffect(typeEffectTwo,power,0,duration)
+    elseif (target:addStatusEffect(typeEffectOne, power, 0, duration) == false) then -- the first status fails to apply
+        target:addStatusEffect(typeEffectTwo, power, 0, duration)
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
         returnEffect = typeEffectTwo
     else
-        target:addStatusEffect(typeEffectOne,power,0,duration)
-        target:addStatusEffect(typeEffectTwo,power,0,duration)
+        target:addStatusEffect(typeEffectOne, power, 0, duration)
+        target:addStatusEffect(typeEffectTwo, power, 0, duration)
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
     end
 

@@ -1056,7 +1056,7 @@ bool CAutomatonController::TryEnhance()
                     ++shellcount;
                 }
 
-                if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+                if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                     haste = true;
 
                 if (PStatus->GetStatusID() == EFFECT_STONESKIN)
@@ -1111,7 +1111,7 @@ bool CAutomatonController::TryEnhance()
             if (PStatus->GetStatusID() == EFFECT_SHELL)
                 shell = true;
 
-            if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+            if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                 haste = true;
         }
     });
@@ -1176,7 +1176,7 @@ bool CAutomatonController::TryEnhance()
                             ++shellcount;
                         }
 
-                        if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_HASTE_II)
+                        if (PStatus->GetStatusID() == EFFECT_HASTE || PStatus->GetStatusID() == EFFECT_GEO_HASTE)
                             haste = true;
                     }
                 });
@@ -1205,7 +1205,7 @@ bool CAutomatonController::TryEnhance()
         Cast(PAutomaton->targid, SpellID::Shellra_V);
 
     if (PRegenTarget && (PTarget->GetMLevel() + 5) >= PAutomaton->GetMLevel() && !(PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN) ||
-        PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_REGEN_II)))
+        PRegenTarget->StatusEffectContainer->HasStatusEffect(EFFECT_GEO_REGEN)))
         if (Cast(PRegenTarget->targid, SpellID::Regen_III) ||
             Cast(PRegenTarget->targid, SpellID::Regen_II) ||
             Cast(PRegenTarget->targid, SpellID::Regen))
@@ -1333,8 +1333,10 @@ bool CAutomatonController::TryTPMove()
 
 bool CAutomatonController::TryRangedAttack() // TODO: Find the animation for its ranged attack
 {
-    if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + (m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::SNAP_SHOT))))
-        return MobSkill(PTarget->targid, m_RangedAbility);
+    if (PAutomaton->getFrame() == FRAME_SHARPSHOT) 
+        if (m_rangedCooldown > 0s && m_Tick > m_LastRangedTime + (m_rangedCooldown - std::chrono::seconds(PAutomaton->getMod(Mod::SNAP_SHOT))))
+            return MobSkill(PTarget->targid, m_RangedAbility);
+
     return false;
 }
 
@@ -1446,6 +1448,7 @@ namespace autoSpell
         if(PStatus->GetFlag() & EFFECTFLAG_ERASABLE)
             return SpellID::Erase;
         else
+            // TODO: -Wno-maybe-uninitialized - possible false positive (anonymous may be used)
             return {};
     }
 }

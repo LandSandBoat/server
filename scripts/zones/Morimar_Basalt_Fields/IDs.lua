@@ -14,7 +14,7 @@ zones[tpz.zone.MORIMAR_BASALT_FIELDS] =
         ITEM_OBTAINED           = 6388, -- Obtained: <item>.
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
-        HOMEPOINT_SET           = 8159, -- Home point set!
+        HOMEPOINT_SET           = 8163, -- Home point set!
     },
     mob =
     {

@@ -12,7 +12,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local mobhp = mob:getHPP()
 
     if (mobhp <= 20) then

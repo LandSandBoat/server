@@ -125,12 +125,12 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr, nullptr));
+    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr));
 
     if (ret == SQL_ERROR ||
         Sql_NumRows(SqlHandle) == 0)
     {
-        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"recv_parse: Invalid login attempt from %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return nullptr;
     }
     return map_session_data;
@@ -150,7 +150,11 @@ int32 do_init(int32 argc, char** argv)
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0)
-            map_ip.s_addr = inet_addr(argv[i + 1]);
+        {
+            uint32 ip;
+            inet_pton(AF_INET, argv[i + 1], &ip);
+            map_ip.s_addr = ip;
+        }
         else if (strcmp(argv[i], "--port") == 0)
             map_port = std::stoi(argv[i + 1]);
     }
@@ -229,7 +233,7 @@ int32 do_init(int32 argc, char** argv)
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
     ShowMessage("\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
-    CVanaTime::getInstance()->setCustomOffset(map_config.vanadiel_time_offset);
+    CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
 
     zoneutils::InitializeWeather(); // Need VanaTime initialized
 
@@ -256,7 +260,9 @@ int32 do_init(int32 argc, char** argv)
 void do_final(int code)
 {
     delete[] g_PBuff;
+    g_PBuff = nullptr;
     delete[] PTempBuff;
+    PTempBuff = nullptr;
 
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
@@ -271,10 +277,11 @@ void do_final(int code)
         messageThread.join();
     }
 
-    delete CTaskMgr::getInstance();
-    delete CVanaTime::getInstance();
+    CTaskMgr::delInstance();
+    CVanaTime::delInstance();
 
     Sql_Free(SqlHandle);
+    SqlHandle = nullptr;
 
     timer_final();
     socket_final();
@@ -436,8 +443,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    int8 ip_str[16];
-    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip, (char*)ip_str));
+    ShowError("map_encipher_packet: bad packet from <%s>\n", ip2str(ip));
     return -1;
 }
 
@@ -459,7 +465,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr, nullptr));
+        ShowError(CL_RED"Possible crash attempt from: %s\n" CL_RESET, ip2str(map_session_data->client_addr));
         return -1;
     }
 #else
@@ -983,7 +989,7 @@ int32 map_config_default()
     map_config.player_stat_multiplier = 1.0f;
     map_config.ability_recast_multiplier = 1.0f;
     map_config.blood_pact_shared_timer = 0;
-    map_config.vanadiel_time_offset = 0;
+    map_config.vanadiel_time_epoch = 0;
     map_config.lightluggage_block = 4;
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
@@ -1074,9 +1080,9 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.max_time_lastupdate = atoi(w2);
         }
-        else if (strcmp(w1, "vanadiel_time_offset") == 0)
+        else if (strcmp(w1, "vanadiel_time_epoch") == 0)
         {
-            map_config.vanadiel_time_offset = atoi(w2);
+            map_config.vanadiel_time_epoch = atoi(w2);
         }
         else if (strcmp(w1, "fame_multiplier") == 0)
         {
@@ -1121,10 +1127,6 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "exp_party_gap_penalties") == 0)
         {
             map_config.exp_party_gap_penalties = (uint8)atof(w2);
-        }
-        else if (strcmp(w1, "fov_allow_alliance") == 0)
-        {
-            map_config.fov_allow_alliance = (uint8)atof(w2);
         }
         else if (strcmp(w1, "mob_tp_multiplier") == 0)
         {

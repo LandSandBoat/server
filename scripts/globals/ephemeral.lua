@@ -88,7 +88,7 @@ end
 
 tpz.ephemeral.onEventFinish = function(player, option, wasTrade)
     -- Early out if the player cancelled the menu
-    if not wasTrade and bit.band(option, 0xF) == 0 then
+    if not wasTrade and bit.band(option, 0xFFFF) == 0 then
         return
     end
 

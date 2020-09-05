@@ -13,7 +13,7 @@ function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.QUADAV_KING_ENGAGE)
 end
 

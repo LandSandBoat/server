@@ -410,7 +410,7 @@ enum IMMUNITY : uint16
     IMMUNITY_ELEGY = 0x200, // 512
     IMMUNITY_REQUIEM = 0x400, // 1024
     IMMUNITY_LIGHT_SLEEP = 0x800, // 2048
-    IMMUNITY_DARK_SLEEP = 01000, // 4096
+    IMMUNITY_DARK_SLEEP = 0x1000, // 4096
 };
 
 struct apAction_t
@@ -654,7 +654,8 @@ public:
 
     uint8			m_ModelSize;			    // размер модели сущности, для расчета дальности физической атаки
     ECOSYSTEM		m_EcoSystem;			    // эко-система сущности
-    CItemEquipment*	    m_Weapons[4];			    // четыре основных ячейки, используемыж для хранения оружия (только оружия)
+    CItemEquipment* m_Weapons[4];               // четыре основных ячейки, используемыж для хранения оружия (только оружия)
+    bool            m_dualWield;                // True/false depending on if the entity is using two weapons
 
     TraitList_t     TraitList;                  // список постянно активных способностей в виде указателей
 

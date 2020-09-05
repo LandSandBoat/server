@@ -5,6 +5,6 @@
 -- !pos -180 1.375 -159 166
 -----------------------------------
 
-function onTrigger(player,npc)
-    return 1;
-end;
+function onTrigger(player, npc)
+    return 1
+end

@@ -2,7 +2,7 @@
 -- Area: Batallia Downs (S)
 --  NPC: Thorben
 -- Type: Quest NPC
--- !pos  175.346,8.038,-419.244 84
+-- !pos  175.346, 8.038, -419.244 84
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
@@ -10,10 +10,10 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local lostInTranslocation = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     local leftMapPiece = player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
     local middleMapPiece = player:hasKeyItem(tpz.ki.MIDDLE_MAP_PIECE)
@@ -35,10 +35,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 107 then
         if player:hasKeyItem(tpz.ki.MAP_OF_GRAUBERG) then
             npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {

@@ -27,13 +27,13 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     -- also have small constant to account for 0 dark skill
-    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC),0,165)
+    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
     local params = {}
     params.diff = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
@@ -44,9 +44,9 @@ function onSpellCast(caster,target,spell)
     -- get the resisted damage
     dmg = dmg*resist
     -- add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster,spell,target,dmg)
+    dmg = addBonuses(caster, spell, target, dmg)
     -- add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     -- add in final adjustments
 
     if (dmg < 0) then

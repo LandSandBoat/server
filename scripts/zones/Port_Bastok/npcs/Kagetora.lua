@@ -8,12 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK,tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
 
         local AyameAndKaede = player:getCharVar("AyameAndKaede_Event")
 
@@ -34,17 +34,17 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 241) then
-        player:setCharVar("AyameAndKaede_Event",1)
+        player:setCharVar("AyameAndKaede_Event", 1)
     elseif (csid == 261) then
-        player:setCharVar("twentyInPirateYearsCS",2)
+        player:setCharVar("twentyInPirateYearsCS", 2)
     elseif (csid == 296) then
-        player:setCharVar("FadedPromises",3)
+        player:setCharVar("FadedPromises", 3)
     end
 
 end

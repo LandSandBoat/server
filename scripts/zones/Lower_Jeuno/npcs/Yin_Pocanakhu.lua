@@ -5,28 +5,28 @@
 -- !pos 35 4 -43 245
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
     if (player:getCharVar("BorghertzHandsFirstTime") == 2) then
-        player:startEvent(220);
+        player:startEvent(220)
     else
-        player:startEvent(209);
+        player:startEvent(209)
     end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 220 and option == 0 and player:delGil(1000)) then
-        player:startEvent(221);
-        player:setCharVar("BorghertzHandsFirstTime",0);
-        player:setCharVar("BorghertzCS",1);
+        player:startEvent(221)
+        player:setCharVar("BorghertzHandsFirstTime", 0)
+        player:setCharVar("BorghertzCS", 1)
     end
 
-end;
+end

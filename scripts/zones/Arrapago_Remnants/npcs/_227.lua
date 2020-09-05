@@ -9,7 +9,7 @@ function onTrigger(entity, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(entity, eventid, result, door)
@@ -18,7 +18,7 @@ function onEventFinish(entity, eventid, result, door)
         instance:setStage(3)
         instance:setProgress(1)
         door:setAnimation(8)
-        for i,v in pairs(ID.npc[2][1]) do
+        for i, v in pairs(ID.npc[2][1]) do
             local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
             npc:untargetable(true)
         end

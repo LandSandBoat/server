@@ -1,3 +1,4 @@
+require("scripts/globals/spell_data")
 require("scripts/globals/magicburst")
 require("scripts/globals/settings")
 require("scripts/globals/weather")
@@ -8,232 +9,6 @@ require("scripts/globals/msg")
 
 tpz = tpz or {}
 tpz.magic = tpz.magic or {}
-
-------------------------------------
--- Elements
-------------------------------------
-
-tpz.magic.element =
-{
-    NONE      = 0,
-    FIRE      = 1,
-    EARTH     = 2,
-    WATER     = 3,
-    WIND      = 4,
-    ICE       = 5,
-    LIGHTNING = 6,
-    THUNDER   = 6,
-    LIGHT     = 7,
-    DARK      = 8,
-}
-tpz.magic.ele = tpz.magic.element
-
-------------------------------------
--- Spell Groups
-------------------------------------
-
-tpz.magic.spellGroup =
-{
-    NONE      = 0,
-    SONG      = 1,
-    BLACK     = 2,
-    BLUE      = 3,
-    NINJUTSU  = 4,
-    SUMMONING = 5,
-    WHITE     = 6,
-}
-
-------------------------------------
--- Spell Families
-------------------------------------
-
-tpz.magic.spellFamily =
-{
-    NONE               = 0,
-    CURE               = 1,
-    CURAGA             = 2,
-    RAISE              = 3,
-    NA                 = 4,
-    HOLY               = 5,
-    DIA                = 6,
-    BANISH             = 7,
-    DIAGA              = 8,
-    BANISHGA           = 9,
-    PROTECT            = 10,
-    SHELL              = 11,
-    SLOW               = 12,
-    HASTE              = 13,
-    PARALYZE           = 14,
-    ELE_BAR            = 15,
-    ELE_BAR_RA         = 16,
-    STATUS_BAR         = 17,
-    STATUS_BAR_RA      = 18,
-    RECALL             = 19,
-    CURA               = 20,
-    ENFIRE             = 21,
-    ENBLIZZARD         = 22,
-    ENAERO             = 23,
-    ENSTONE            = 24,
-    ENTHUNDER          = 25,
-    ENWATER            = 26,
-    PHALANX            = 27,
-    REGEN              = 28,
-    REFRESH            = 29,
-    SANDSTORM          = 30,
-    RAINSTORM          = 31,
-    WINDSTORM          = 32,
-    FIRESTORM          = 33,
-    HAILSTORM          = 34,
-    THUNDERSTORM       = 35,
-    VOIDSTORM          = 36,
-    AURORASTORM        = 37,
-    TELEPORT           = 38,
-    PROTECTRA          = 39,
-    SHELLRA            = 40,
-    RERAISE            = 41,
-    FIRE               = 42,
-    BLIZZARD           = 43,
-    AERO               = 44,
-    STONE              = 45,
-    THUNDER            = 46,
-    WATER              = 47,
-    FIRAGA             = 48,
-    BLIZZAGA           = 49,
-    AEROGA             = 50,
-    STONEGA            = 51,
-    THUNDAGA           = 52,
-    WATERGA            = 53,
-    FLARE              = 54,
-    FREEZE             = 55,
-    TORNADO            = 56,
-    QUAKE              = 57,
-    BURST              = 58,
-    FLOOD              = 59,
-    GRAVITY            = 60,
-    METEOR             = 61,
-    POISON             = 62,
-    POISONGA           = 63,
-    BIO                = 64,
-    ELE_DOT            = 65,
-    ABSORB             = 66,
-    DRAIN              = 67,
-    ASPIR              = 68,
-    SPIKES             = 69,
-    STATUS             = 70,
-    SLEEP              = 71,
-    BLIND              = 72,
-    WARP               = 73,
-    TRACTOR            = 74,
-    SLEEPGA            = 75,
-    GEOHELIX           = 76,
-    HYDROHELIX         = 77,
-    ANEMOHELIX         = 78,
-    PYROHELIX          = 79,
-    CRYOHELIX          = 80,
-    IONOHELIX          = 81,
-    NOCTOHELIX         = 82,
-    LUMINOHELIX        = 83,
-    ADDLE              = 84,
-    SPIRIT             = 85,
-    AVATAR             = 86,
-    ANIMUS             = 87,
-    ENLIGHT            = 88,
-    ENDARK             = 89,
-    KATON              = 90,
-    HYOTON             = 91,
-    HUTON              = 92,
-    DOTON              = 93,
-    RAITON             = 94,
-    SUITON             = 95,
-    UTSUSEMI           = 96,
-    JUBAKU             = 97,
-    HOJO               = 98,
-    KURAYAMI           = 99,
-    DOKUMORI           = 100,
-    TONKO              = 101,
-    STATUS_GA          = 102,
-    FOE_REQUIEM        = 103,
-    HORDE_LULLABY      = 104,
-    ARMYS_PAEON        = 105,
-    MAGES_BALLAD       = 106,
-    KNIGHTS_MINNE      = 107,
-    VALOR_MINUET       = 108,
-    MADRIGAL           = 109,
-    PRELUDE            = 110,
-    MAMBO              = 111,
-    OPERETTA           = 112,
-    MARCH              = 113,
-    ELEGY              = 114,
-    STR_ETUDE          = 115,
-    DEX_ETUDE          = 116,
-    VIT_ETUDE          = 117,
-    AGI_ETUDE          = 118,
-    INT_ETUDE          = 119,
-    MND_ETUDE          = 120,
-    CHR_ETUDE          = 121,
-    FIRE_CAROL         = 122,
-    ICE_CAROL          = 123,
-    WIND_CAROL         = 124,
-    EARTH_CAROL        = 125,
-    LIGHTNING_CAROL    = 126,
-    WATER_CAROL        = 127,
-    LIGHT_CAROL        = 128,
-    DARK_CAROL         = 129,
-    FIRE_THRENODY      = 130,
-    ICE_THRENODY       = 131,
-    WIND_THRENODY      = 132,
-    EARTH_THRENODY     = 133,
-    LIGHTNING_THRENODY = 134,
-    WATER_THRENODY     = 135,
-    LIGHT_THRENODY     = 136,
-    DARK_THRENODY      = 137,
-    FOE_LULLABY        = 138,
-    MAZURKA            = 139,
-    BOOST              = 140,
-    GAIN               = 141,
-    TEMPER             = 142,
-    JA                 = 143,
-    INDI_BUFF          = 144,
-    INDI_DEBUFF        = 145,
-    GEO_BUFF           = 146,
-    GEO_DEBUFF         = 147,
-    FIRA               = 148,
-    LIZZARA            = 149,
-    AERORA             = 150,
-    STONERA            = 151,
-    THUNDARA           = 152,
-    WATERA             = 153,
-    DISTRACT           = 154,
-    FRAZZLE            = 155,
-    FLURRY             = 156,
-}
-
-------------------------------------
--- Spell AOE IDs
-------------------------------------
-
-tpz.magic.aoe =
-{
-    NONE        = 0,
-    RADIAL      = 1,
-    CONAL       = 2,
-    RADIAL_MANI = 3, -- AOE when under SCH stratagem Manifestation
-    RADIAL_ACCE = 4, -- AOE when under SCH stratagem Accession
-    PIANISSIMO  = 5, -- Single target when under BRD JA Pianissimo
-    DIFFUSION   = 6, -- AOE when under Diffusion
-}
-
-------------------------------------
--- Spell flag bits
-------------------------------------
-
-tpz.magic.spellFlag =
-{
-    NONE           = 0x00,
-    HIT_ALL        = 0x01, -- Hit all targets in range regardless of party
-    WIPE_SHADOWS   = 0x02, -- Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    IGNORE_SHADOWS = 0x04  -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
-}
 
 ------------------------------------
 -- Tables by element
@@ -333,9 +108,9 @@ function doBoostGain(caster, target, spell, effect)
     }
 
     for i, effect in ipairs(effectOverwrite) do
-            --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...",effect)
+            --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
             if caster:hasStatusEffect(effect) then
-                --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...",effect)
+                --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
                 caster:delStatusEffect(effect)
             end
     end
@@ -370,7 +145,7 @@ end
 --   getCureFinal returns the final cure amount
 --   Source: http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 ---------------------------------
-function getCurePower(caster,isBlueMagic)
+function getCurePower(caster, isBlueMagic)
     local MND = caster:getStat(tpz.mod.MND)
     local VIT = caster:getStat(tpz.mod.VIT)
     local skill = caster:getSkillLevel(tpz.skill.HEALING_MAGIC)
@@ -384,10 +159,10 @@ function getCurePowerOld(caster)
     local power = ((3 * MND) + VIT + (3 * math.floor(skill/5)))
     return power
 end
-function getBaseCure(power,divisor,constant,basepower)
+function getBaseCure(power, divisor, constant, basepower)
     return ((power - basepower) / divisor) + constant
 end
-function getBaseCureOld(power,divisor,constant)
+function getBaseCureOld(power, divisor, constant)
     return (power / 2) / divisor + constant
 end
 
@@ -465,8 +240,8 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
     return final
 end
 
-function getCureAsNukeFinal(caster,spell,power,divisor,constant,basepower)
-    return getCureFinal(caster,spell,power,divisor,constant,basepower)
+function getCureAsNukeFinal(caster, spell, power, divisor, constant, basepower)
+    return getCureFinal(caster, spell, power, divisor, constant, basepower)
 end
 
 -----------------------------------
@@ -476,7 +251,7 @@ end
 -- affinities that strengthen/weaken the index element
 
 
-function AffinityBonusDmg(caster,ele)
+function AffinityBonusDmg(caster, ele)
 
     local affinity = caster:getMod(strongAffinityDmg[ele])
     local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
@@ -484,7 +259,7 @@ function AffinityBonusDmg(caster,ele)
     return bonus
 end
 
-function AffinityBonusAcc(caster,ele)
+function AffinityBonusAcc(caster, ele)
 
     local affinity = caster:getMod(strongAffinityAcc[ele])
     local bonus = 0 + affinity * 10 -- 10 acc per level of affinity
@@ -527,7 +302,7 @@ function applyResistanceEffect(caster, target, spell, params)
     end
 
     if (skill == tpz.skill.SINGING and caster:hasStatusEffect(tpz.effect.TROUBADOUR)) then
-        if (math.random(0,99) < caster:getMerit(tpz.merit.TROUBADOUR)-25) then
+        if (math.random(0, 99) < caster:getMerit(tpz.merit.TROUBADOUR)-25) then
             return 1.0
         end
     end
@@ -556,14 +331,14 @@ function applyResistanceEffect(caster, target, spell, params)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(player,target,element,skill,bonus)
+function applyResistanceAbility(player, target, element, skill, bonus)
     local p = getMagicHitRate(player, target, skill, element, 0, bonus)
 
     return getMagicResist(p)
 end
 
 -- Applies resistance for additional effects
-function applyResistanceAddEffect(player,target,element,bonus)
+function applyResistanceAddEffect(player, target, element, bonus)
 
     local p = getMagicHitRate(player, target, 0, element, 0, bonus)
 
@@ -650,16 +425,16 @@ function getMagicResist(magicHitRate)
     -- Determine final resist based on which thresholds have been crossed.
     if (resvar <= sixteenth) then
         resist = 0.0625
-        --printf("Spell resisted to 1/16!!!  Threshold = %u",sixteenth)
+        --printf("Spell resisted to 1/16!!!  Threshold = %u", sixteenth)
     elseif (resvar <= eighth) then
         resist = 0.125
-        --printf("Spell resisted to 1/8!  Threshold = %u",eighth)
+        --printf("Spell resisted to 1/8!  Threshold = %u", eighth)
     elseif (resvar <= quart) then
         resist = 0.25
-        --printf("Spell resisted to 1/4.  Threshold = %u",quart)
+        --printf("Spell resisted to 1/4.  Threshold = %u", quart)
     elseif (resvar <= half) then
         resist = 0.5
-        --printf("Spell resisted to 1/2.  Threshold = %u",half)
+        --printf("Spell resisted to 1/2.  Threshold = %u", half)
     else
         resist = 1.0
         --printf("1.0")
@@ -790,7 +565,7 @@ function handleAfflatusMisery(caster, spell, dmg)
     return dmg
 end
 
- function finalMagicAdjustments(caster,target,spell,dmg)
+ function finalMagicAdjustments(caster, target, spell, dmg)
     --Handles target's HP adjustment and returns UNSIGNED dmg (absorb message is set in this function)
 
     -- handle multiple targets
@@ -846,7 +621,7 @@ end
     else
         target:takeSpellDamage(caster, spell, dmg, tpz.attackType.MAGICAL, tpz.damageType.ELEMENTAL + spell:getElement())
         target:handleAfflatusMiseryDamage(dmg)
-        target:updateEnmityFromDamage(caster,dmg)
+        target:updateEnmityFromDamage(caster, dmg)
         -- Only add TP if the target is a mob
         if (target:getObjType() ~= tpz.objType.PC) then
             target:addTP(100)
@@ -856,7 +631,7 @@ end
     return dmg
  end
 
-function finalMagicNonSpellAdjustments(caster,target,ele,dmg)
+function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     --Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
     dmg = target:magicDmgTaken(dmg)
@@ -878,16 +653,16 @@ function finalMagicNonSpellAdjustments(caster,target,ele,dmg)
     end
     --Not updating enmity from damage, as this is primarily used for additional effects (which don't generate emnity)
     -- in the case that updating enmity is needed, do it manually after calling this
-    --target:updateEnmityFromDamage(caster,dmg)
+    --target:updateEnmityFromDamage(caster, dmg)
 
     return dmg
 end
 
-function adjustForTarget(target,dmg,ele)
-    if (dmg > 0 and math.random(0,99) < target:getMod(tpz.magic.absorbMod[ele])) then
+function adjustForTarget(target, dmg, ele)
+    if (dmg > 0 and math.random(0, 99) < target:getMod(tpz.magic.absorbMod[ele])) then
         return -dmg
     end
-    if (math.random(0,99) < target:getMod(nullMod[ele])) then
+    if (math.random(0, 99) < target:getMod(nullMod[ele])) then
         return 0
     end
     --Moved non element specific absorb and null mod checks to core
@@ -1032,7 +807,7 @@ function addBonuses(caster, spell, target, dmg, params)
         end
 
         local mab_crit = caster:getMod(tpz.mod.MAGIC_CRITHITRATE)
-        if ( math.random(1,100) < mab_crit ) then
+        if ( math.random(1, 100) < mab_crit ) then
            mab = mab + ( 10 + caster:getMod(tpz.mod.MAGIC_CRIT_DMG_INCREASE ) )
         end
 
@@ -1436,9 +1211,9 @@ function doNuke(caster, target, spell, params)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg, params)
     --add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
     return dmg
 end
 
@@ -1456,11 +1231,11 @@ function doDivineBanishNuke(caster, target, spell, params)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg, params)
     --add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     --handling afflatus misery
     dmg = handleAfflatusMisery(caster, spell, dmg)
     --add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
     return dmg
 end
 
@@ -1561,6 +1336,4 @@ function outputMagicHitRateInfo()
     end
 end
 
--- outputMagicHitRateInfo()
-
-tpz.mag = tpz.magic
+tpz.ma = tpz.magic

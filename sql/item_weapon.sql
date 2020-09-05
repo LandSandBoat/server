@@ -3647,6 +3647,7 @@ INSERT INTO `item_weapon` VALUES (20679,'tanmogayi',3,0,242,242,188,2,1,288,176,
 INSERT INTO `item_weapon` VALUES (20680,'tanmogayi_+1',3,0,242,242,188,2,1,280,177,0);
 INSERT INTO `item_weapon` VALUES (20681,'flyssa',3,0,242,242,188,2,1,240,146,0);
 INSERT INTO `item_weapon` VALUES (20682,'flyssa_+1',3,0,242,242,188,2,1,233,147,0);
+INSERT INTO `item_weapon` VALUES (20683,'zantetsuken',3,0,242,242,228,2,1,236,167,0);
 INSERT INTO `item_weapon` VALUES (20685,'excalibur',3,0,269,269,255,2,1,233,164,0);
 INSERT INTO `item_weapon` VALUES (20686,'murgleis',3,0,269,269,255,2,1,224,140,0);
 INSERT INTO `item_weapon` VALUES (20687,'burtgang',3,0,269,269,255,2,1,264,165,0);
@@ -4464,6 +4465,7 @@ INSERT INTO `item_weapon` VALUES (21630,'moralltach',3,0,269,269,255,2,1,260,180
 INSERT INTO `item_weapon` VALUES (21631,'mirage_sword',3,0,242,242,228,2,1,268,178,0);    -- DMG:178 Delay:268
 INSERT INTO `item_weapon` VALUES (21632,'luhlaza_sword',3,0,255,255,242,2,1,260,179,0);   -- DMG:179 Delay:260
 INSERT INTO `item_weapon` VALUES (21633,'zomorrodnegar',3,0,269,269,255,2,1,260,180,0);   -- DMG:180 Delay:260
+INSERT INTO `item_weapon` VALUES (21635,'malignance_sword',3,0,242,242,228,2,1,264,183,0);
 INSERT INTO `item_weapon` VALUES (21654,'arasy_claymore',4,0,242,242,188,2,1,489,251,0);
 INSERT INTO `item_weapon` VALUES (21655,'arasy_claymore_+1',4,0,242,242,188,2,1,475,252,0);
 INSERT INTO `item_weapon` VALUES (21656,'dyrnwyn',4,0,228,228,228,2,1,480,313,0);

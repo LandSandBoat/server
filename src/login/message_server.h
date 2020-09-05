@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/sql.h"
 #include "../common/mmo.h"
 
-#include <zmq.hpp>
+#include "../common/zmq.hpp"
 
 struct chat_message_t
 {

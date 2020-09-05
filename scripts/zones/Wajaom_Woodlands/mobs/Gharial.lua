@@ -2,6 +2,7 @@
 -- Area: Wajaom Woodlands
 --   NM: Gharial
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -11,6 +12,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 450)
 end
 
 function onMobDespawn(mob)

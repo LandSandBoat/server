@@ -326,7 +326,7 @@ bool CMobEntity::CanBeNeutral()
     return !(m_Type & MOBTYPE_NOTORIOUS);
 }
 
-uint8 CMobEntity::TPUseChance()
+uint16 CMobEntity::TPUseChance()
 {
     auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
 
@@ -337,10 +337,10 @@ uint8 CMobEntity::TPUseChance()
 
     if (health.tp == 3000 || (GetHPP() <= 25 && health.tp >= 1000))
     {
-        return 100;
+        return 10000;
     }
 
-    return (uint8)getMobMod(MOBMOD_TP_USE_CHANCE);
+    return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
 }
 
 void CMobEntity::setMobMod(uint16 type, int16 value)
@@ -834,32 +834,21 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     }
 
-    //check for seal drops
-    /* MobLvl >= 1 = Beastmen Seals ID=1126
-    >= 50 = Kindred Seals ID=1127
-    >= 75 = Kindred Crests ID=2955
-    >= 90 = High Kindred Crests ID=2956
-    */
+
 
     uint16 Pzone = PChar->getZone();
 
     bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
 
-    if (validZone && charutils::CheckMob(PChar->GetMLevel(), GetMLevel()) > EMobDifficulty::TooWeak)
+    if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {
-        if (((PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ||
-            (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PChar->loc.zone->GetRegionID() >= 28 && PChar->loc.zone->GetRegionID() <= 32) ||
-            (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PChar->loc.zone->GetRegionID() >= 33 && PChar->loc.zone->GetRegionID() <= 40)) &&
-            m_Element > 0 && tpzrand::GetRandomNumber(100) < 20) // Need to move to CRYSTAL_CHANCE constant
-        {
-            if (AddItemToPool(4095 + m_Element, ++dropCount))
-                return;
-        }
 
-        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
-        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
-        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
-
+        //check for seal drops
+        /* MobLvl >= 1 = Beastmen Seals ID=1126
+        >= 50 = Kindred Seals ID=1127
+        >= 75 = Kindred Crests ID=2955
+        >= 90 = High Kindred Crests ID=2956
+        */
         if (tpzrand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
         {
             //RULES: Only 1 kind may drop per mob
@@ -922,6 +911,75 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 //b.seal only
                 if (AddItemToPool(1126, ++dropCount))
                     return;
+            }
+        }
+        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
+        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
+        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
+
+        uint8 effect = 0; // Begin Adding Crystals
+        
+        if (m_Element > 0)
+        {
+            uint8 regionID = PChar->loc.zone->GetRegionID();
+            switch (regionID)
+            {
+                // Sanction Regions
+                case REGION_WEST_AHT_URHGAN:
+                case REGION_MAMOOL_JA_SAVAGE:
+                case REGION_HALVUNG:
+                case REGION_ARRAPAGO:
+                    effect = 2;
+                    break;
+                // Sigil Regions
+                case REGION_RONFAURE_FRONT:
+                case REGION_NORVALLEN_FRONT:
+                case REGION_GUSTABERG_FRONT:
+                case REGION_DERFLAND_FRONT:
+                case REGION_SARUTA_FRONT:
+                case REGION_ARAGONEAU_FRONT:
+                case REGION_FAUREGANDI_FRONT:
+                case REGION_VALDEAUNIA_FRONT:
+                    effect = 3;
+                    break;
+                // Signet Regions
+                default:
+                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
+                    break;
+            }
+        }
+        uint8 crystalRolls = 0;
+        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
+        {
+            switch(effect)
+            {
+                case 1:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 2:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                case 3:
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
+                    {
+                        crystalRolls++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        for (uint8 i = 0; i < crystalRolls; i++)
+        {
+            if (tpzrand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
+            {
+                return;
             }
         }
     }
@@ -1064,7 +1122,6 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {

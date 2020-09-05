@@ -156,10 +156,6 @@ time_t last_tick;
 time_t tick_time;
 time_t stall_time = 60;
 
-uint32 g_addr_[16];   // ip addresses of local host (host byte order)
-
-int32 naddr_;   // # of ip addresses
-
 int32 makeConnection(uint32 ip, uint16 port, int32 type)
 {
 	struct sockaddr_in remote_address;
@@ -225,94 +221,6 @@ void do_close(int32 fd)
 	sClose(fd); // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
 }
 
-/// Retrieve local ips in host byte order.
-/// Uses loopback is no address is found.
-int socket_getips(uint32* ips, int max)
-{
-	int num = 0;
-
-	if( ips == NULL || max <= 0 )
-		return 0;
-
-#ifdef WIN32
-	{
-		char fullhost[255];
-		u_long** a;
-		struct hostent* hent;
-
-		// XXX This should look up the local IP addresses in the registry
-		// instead of calling gethostbyname. However, the way IP addresses
-		// are stored in the registry is annoyingly complex, so I'll leave
-		// this as T.B.D. [Meruru]
-		if( gethostname(fullhost, sizeof(fullhost)) == SOCKET_ERROR )
-		{
-			ShowError("socket_getips: No hostname defined!\n");
-			return 0;
-		}
-		else
-		{
-			hent = gethostbyname(fullhost);
-			if( hent == NULL ){
-				ShowError("socket_getips: Cannot resolve our own hostname to an IP address\n");
-				return 0;
-			}
-			a = (u_long**)hent->h_addr_list;
-			for( ; a[num] != NULL && num < max; ++num)
-				ips[num] = (uint32)ntohl(*a[num]);
-		}
-	}
-#else // not WIN32
-	{
-		int pos;
-		int fd;
-		char buf[2*16*sizeof(struct ifreq)];
-		struct ifconf ic;
-		struct ifreq* ir;
-		struct sockaddr_in* a;
-		u_long ad;
-
-		fd = sSocket(AF_INET, SOCK_STREAM, 0);
-
-		memset(buf, 0x00, sizeof(buf));
-
-		// The ioctl call will fail with Invalid Argument if there are more
-		// interfaces than will fit in the buffer
-		ic.ifc_len = sizeof(buf);
-		ic.ifc_buf = buf;
-		if( sIoctl(fd, SIOCGIFCONF, &ic) == -1 )
-		{
-			ShowError("socket_getips: SIOCGIFCONF failed!\n");
-			return 0;
-		}
-		else
-		{
-			for( pos=0; pos < ic.ifc_len && num < max; )
-			{
-				ir = (struct ifreq*)(buf+pos);
-				a = (struct sockaddr_in*) &(ir->ifr_addr);
-				if( a->sin_family == AF_INET ){
-					ad = ntohl(a->sin_addr.s_addr);
-					if( ad != INADDR_LOOPBACK && ad != INADDR_ANY )
-						ips[num++] = (uint32)ad;
-				}
-	#if (defined(BSD) && BSD >= 199103) || defined(_AIX) || defined(__APPLE__)
-				pos += ir->ifr_addr.sa_len + sizeof(ir->ifr_name);
-	#else// not AIX or APPLE
-				pos += sizeof(struct ifreq);
-	#endif//not AIX or APPLE
-			}
-		}
-		sClose(fd);
-	}
-#endif // not W32
-
-	// Use loopback if no ips are found
-	if( num == 0 )
-		ips[num++] = (uint32)INADDR_LOOPBACK;
-
-	return num;
-}
-
 bool _vsocket_init(void)
 {
 #ifdef WIN32
@@ -356,12 +264,7 @@ bool _vsocket_init(void)
 	}
 #endif
 
-	// Get initial local ips
-	naddr_ = socket_getips(g_addr_,16);
-
 	sFD_ZERO(&readfds);
-
-
 
 	// initialise last send-receive tick
 	last_tick = time(NULL);
@@ -373,22 +276,20 @@ bool _vsocket_final(void){
 }
 
 // hostname/ip conversion functions
-uint32 host2ip(const char* hostname)
+std::string ip2str(uint32 ip)
 {
-	struct hostent* h = gethostbyname(hostname);
-	return (h != NULL) ? ntohl(*(uint32*)h->h_addr) : 0;
-}
-
-const char* ip2str(uint32 ip, char ip_str[16])
-{
-	struct in_addr addr;
-	addr.s_addr = htonl(ip);
-	return (ip_str == NULL) ? inet_ntoa(addr) : strncpy(ip_str, inet_ntoa(addr), 16);
+    uint32 reversed_ip = htonl(ip);
+    char address[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
+    return std::string(address);
 }
 
 uint32 str2ip(const char* ip_str)
 {
-	return ntohl(inet_addr(ip_str));
+    uint32 ip;
+    inet_pton(AF_INET, ip_str, &ip);
+
+    return ntohl(ip);
 }
 
 // Reorders bytes from network to little endian (Windows).
@@ -632,12 +533,14 @@ int access_ipmask(const char* str, AccessControl* acc)
 				mask = (mask >> 1) | 0x80000000;
 				--m[0];
 			}
-			mask = ntohl(mask);
 		} else
 		{// just this ip
 			mask = 0xFFFFFFFF;
 		}
 	}
+
+    ip = ntohl(ip);
+
 	if( access_debug ){
 		ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d\n", CONVIP(ip), CONVIP(mask));
 	}
@@ -821,9 +724,9 @@ int32 makeListenBind_tcp(const char* ip, uint16 port,RecvFunc connect_client)
 	//setsocketopts(fd);
 	//set_nonblocking(fd, 1);
 
-	server_address.sin_family      = AF_INET;
-	server_address.sin_addr.s_addr = inet_addr(ip);
-	server_address.sin_port        = htons(port);
+    server_address.sin_family      = AF_INET;
+    inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
+    server_address.sin_port        = htons(port);
 
 	result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
 	if( result == SOCKET_ERROR ) {

@@ -90,4 +90,4 @@ INSERT INTO `skill_ranks` VALUES (41, 'string', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0,
 INSERT INTO `skill_ranks` VALUES (42, 'wind', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO `skill_ranks` VALUES (43, 'blue', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0);
 INSERT INTO `skill_ranks` VALUES (44, 'geomancy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0);
- -- INSERT INTO `skill_ranks` VALUES (45, 'handbell', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0); -- Does not display correctly in-game
+INSERT INTO `skill_ranks` VALUES (45, 'handbell', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0); -- Does not display correctly in-game

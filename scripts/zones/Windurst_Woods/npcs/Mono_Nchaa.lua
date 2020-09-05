@@ -8,10 +8,10 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock = {
         17318, 3,    2, -- Wooden Arrow
         17319, 4,    3, -- Bone Arrow
@@ -27,12 +27,12 @@ function onTrigger(player,npc)
         5009,  2649, 3  -- Scroll of Hunter's Prelude
     }
 
-    player:showText(npc,ID.text.MONONCHAA_SHOP_DIALOG)
+    player:showText(npc, ID.text.MONONCHAA_SHOP_DIALOG)
     tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

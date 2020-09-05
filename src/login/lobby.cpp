@@ -92,8 +92,8 @@ int32 lobbydata_parse(int32 fd)
     if (RFIFOREST(fd) >= 1)
     {
         char* buff = &session[fd]->rdata[0];
-        if (ref<uint8>(buff, 0) == 0x0d) ShowDebug(CL_RED"Posible Crash Attempt from IP: " CL_WHITE"<%s>\n" CL_RESET, ip2str(session[fd]->client_addr, nullptr));
-        ShowDebug("lobbydata_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 0), ip2str(sd->client_addr, nullptr));
+        if (ref<uint8>(buff, 0) == 0x0d) ShowDebug(CL_RED"Posible Crash Attempt from IP: " CL_WHITE"<%s>\n" CL_RESET, ip2str(session[fd]->client_addr));
+        ShowDebug("lobbydata_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
         int32 code = ref<uint8>(buff, 0);
         switch (code)
@@ -102,7 +102,7 @@ int32 lobbydata_parse(int32 fd)
             {
                 if (RFIFOREST(fd) < 9)
                 {
-                    ShowError("lobbydata_parse:" CL_WHITE"<%s>" CL_RESET" sent less then 9 bytes\n", ip2str(session[fd]->client_addr, nullptr));
+                    ShowError("lobbydata_parse:" CL_WHITE"<%s>" CL_RESET" sent less then 9 bytes\n", ip2str(session[fd]->client_addr));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -191,7 +191,7 @@ int32 lobbydata_parse(int32 fd)
                         ////////////////////////////////////////////////////
                         ref<uint32>(CharList, 4 + 32 + i * 140) = CharID;
 
-                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 15);
+                        memcpy(CharList + 12 + 32 + i * 140, strCharName, 16);
 
                         ref<uint8>(CharList, 46 + 32 + i * 140) = MainJob;
                         ref<uint8>(CharList, 73 + 32 + i * 140) = lvlMainJob;
@@ -308,11 +308,11 @@ int32 lobbydata_parse(int32 fd)
                     //new char only (first login from char create)
                     if (PrevZone == 0)  key3[16] += 6;
 
-                    ZoneIP = inet_addr((const char*)Sql_GetData(SqlHandle, 0));
+                    inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ZoneIP);
                     ZonePort = (uint16)Sql_GetUIntData(SqlHandle, 1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
-                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)\n", ZoneID, ip2str(ntohl(ZoneIP), nullptr), ZonePort, charid);
+                    ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)\n", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
                     {
@@ -395,7 +395,7 @@ int32 lobbydata_parse(int32 fd)
                     fmtQuery = "INSERT INTO account_ip_record(login_time,accid,charid,client_ip)\
                             VALUES ('%s', %u, %u, '%s');";
 
-                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr, nullptr)) == SQL_ERROR)
+                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
                     {
                         ShowError("lobbyview_parse: Could not write info to account_ip_record.\n");
                     }
@@ -403,7 +403,7 @@ int32 lobbydata_parse(int32 fd)
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowStatus("lobbydata_parse: client %s finished work with " CL_GREEN"lobbyview" CL_RESET"\n", ip2str(sd->client_addr, nullptr));
+                ShowStatus("lobbydata_parse: client %s finished work with " CL_GREEN"lobbyview" CL_RESET"\n", ip2str(sd->client_addr));
                 break;
             }
             default:
@@ -430,7 +430,7 @@ int32 do_close_lobbydata(login_session_data_t *loginsd, int32 fd)
     }
     else
     {
-        ShowInfo("lobbydata_parse: " CL_WHITE"%s" CL_RESET" shutdown the socket\n", ip2str(session[fd]->client_addr, nullptr));
+        ShowInfo("lobbydata_parse: " CL_WHITE"%s" CL_RESET" shutdown the socket\n", ip2str(session[fd]->client_addr));
         do_close_tcp(fd);
         return 0;
     }
@@ -475,7 +475,7 @@ int32 lobbyview_parse(int32 fd)
     if (RFIFOREST(fd) >= 9)
     {
         char* buff = &session[fd]->rdata[0];
-        ShowDebug("lobbyview_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 8), ip2str(sd->client_addr, nullptr));
+        ShowDebug("lobbyview_parse:Incoming Packet:" CL_WHITE"<%x>" CL_RESET" from ip:<%s>\n", ref<uint8>(buff, 8), ip2str(sd->client_addr));
         uint8 code = ref<uint8>(buff, 8);
         switch (code)
         {
@@ -566,7 +566,7 @@ int32 lobbyview_parse(int32 fd)
                 //delete char
                 uint32 CharID = ref<uint32>(session[fd]->rdata.data(), 0x20);
 
-                ShowInfo(CL_WHITE"lobbyview_parse" CL_RESET":attempt to delete char:<" CL_WHITE"%d" CL_RESET"> from ip:<%s>\n", CharID, ip2str(sd->client_addr, nullptr));
+                ShowInfo(CL_WHITE"lobbyview_parse" CL_RESET":attempt to delete char:<" CL_WHITE"%d" CL_RESET"> from ip:<%s>\n", CharID, ip2str(sd->client_addr));
 
                 uint8 sendsize = 0x20;
 
@@ -768,7 +768,7 @@ int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
     srand(clock());
     char_mini createchar;
 
-    memcpy(createchar.m_name, loginsd->charname, 16);
+    memcpy(createchar.m_name, loginsd->charname, 15);
     memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);

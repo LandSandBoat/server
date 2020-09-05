@@ -9,11 +9,11 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    player:showText(npc,ID.text.VALERIANO_SHOP_DIALOG)
+function onTrigger(player, npc)
+    player:showText(npc, ID.text.VALERIANO_SHOP_DIALOG)
 
     local stock =
     {
@@ -29,13 +29,13 @@ function onTrigger(player,npc)
         5056, 30912, -- Scroll of Wind Carol II
         5057, 27140, -- Scroll of Earth Carol II
         5059, 28520, -- Scroll of Water Carol II
-        4996,123880  -- Scroll of Mage's Ballad III
+        4996, 123880  -- Scroll of Mage's Ballad III
     }
     tpz.shop.general(player, stock, WINDURST)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

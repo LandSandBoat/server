@@ -76,8 +76,8 @@ local loot =
         {
             {itemid = 1122, droprate = 1000}, -- Wyvern Skin
         },
-          
-        {    
+
+        {
             {itemid = 65535, droprate = 1000, amount = 24000},  -- gil
 
         },
@@ -88,7 +88,7 @@ local loot =
             {itemid = 17998, droprate = 231}, -- Thanatos Baselard
             {itemid = 17579, droprate = 231}, -- Wyvern Perch
             {itemid = 18373, droprate = 231}, -- Balin's Sword
-            {itemid = 1110, droprate = 231}, -- Beetle Blood                                    
+            {itemid = 1110, droprate = 231}, -- Beetle Blood
         },
         {
             {itemid = 18092, droprate = 104}, -- Bourdonasse
@@ -139,18 +139,18 @@ local loot =
 
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -33,7 +33,7 @@ function onPetAbility(target, automaton, skill, master, action)
             skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
         end
     else
-        skill:setMsg(tpz.msg.basic.RESIST)
+        skill:setMsg(tpz.msg.basic.JA_MISS_2)
     end
 
     return tpz.effect.FLASH

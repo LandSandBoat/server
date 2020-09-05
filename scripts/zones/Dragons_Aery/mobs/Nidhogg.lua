@@ -22,14 +22,14 @@ function onMobFight(mob, target)
     local twohourTime = mob:getLocalVar("twohourTime")
 
     if twohourTime == 0 then
-        mob:setLocalVar("twohourTime",math.random(30,90))
+        mob:setLocalVar("twohourTime", math.random(30, 90))
     end
 
     if battletime >= twohourTime then
         mob:useMobAbility(956)
         -- technically aerial hurricane wing, but I'm using 700 for his two hour
         --(since I have no inclination to spend millions on a PI to cap one name you never see)
-        mob:setLocalVar("twohourTime",battletime + math.random(60,120))
+        mob:setLocalVar("twohourTime", battletime + math.random(60, 120))
     end
 end
 

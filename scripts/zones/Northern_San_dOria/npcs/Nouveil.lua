@@ -4,56 +4,47 @@
 -- Type: General
 -- !pos 123 0 106 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/quests");
+local ID = require("scripts/zones/Northern_San_dOria/IDs")
+require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532,1) == true and trade:getItemCount() == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED);
+function onTrade(player, npc, trade)
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+        if (trade:getGil() >= 10) then
+            player:startEvent(571)
         end
     end
+end
 
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
-        if (trade:getGil() >= 10) then
-            player:startEvent(571);
-        end;
-    end;
+function onTrigger(player, npc)
 
-end;
-
-function onTrigger(player,npc)
-
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (player:hasItem(603) == true) then
-            player:startEvent(573);
+            player:startEvent(573)
         elseif (player:hasItem(602) == true) then
-            player:startEvent(572);
+            player:startEvent(572)
         else
-            player:startEvent(575);
-        end;
+            player:startEvent(575)
+        end
     else
-        player:startEvent(574);
-    end;
+        player:startEvent(574)
+    end
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- Waters of the Cheval, recieve blessed waterskin
     if (csid == 571) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 602);
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 602)
         else
-            player:delGil(10);
-            player:addItem(602);
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 602);
-        end;
-    end;
-end;
+            player:delGil(10)
+            player:addItem(602)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 602)
+        end
+    end
+end

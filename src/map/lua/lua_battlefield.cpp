@@ -233,7 +233,7 @@ inline int32 CLuaBattlefield::getAllies(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
 
     lua_createtable(L, (int)m_PLuaBattlefield->m_AllyList.size(), 0);
-    auto newTable = lua_gettop(L);
+    lua_gettop(L);
     int i = 1;
 
     m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly)

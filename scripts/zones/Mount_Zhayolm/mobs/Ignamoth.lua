@@ -2,6 +2,7 @@
 -- Area: Mount Zhayolm
 --   NM: Ignamoth
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -16,4 +17,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob)
+    tpz.hunts.checkHunt(mob, player, 457)
 end

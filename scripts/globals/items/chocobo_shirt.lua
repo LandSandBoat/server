@@ -28,5 +28,5 @@ function onItemUse(target)
         4103  -- Dark
     }
     -- print(crystal[day])
-    target:addItem(crystal[day],math.random(2,12))
+    target:addItem(crystal[day], math.random(2, 12))
 end

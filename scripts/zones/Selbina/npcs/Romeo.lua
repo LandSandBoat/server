@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if
         player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING) == QUEST_ACCEPTED and
         (
@@ -24,7 +24,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     donateToRecycling = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
 
     if donateToRecycling == QUEST_AVAILABLE then
@@ -36,10 +36,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 20 then
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
     elseif csid == 21 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING, {item = 89, fame_area = SELBINA, title = tpz.title.ECOLOGIST}) then

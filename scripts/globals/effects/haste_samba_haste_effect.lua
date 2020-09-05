@@ -12,6 +12,6 @@ end
 function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:delMod(tpz.mod.HASTE_ABILITY, effect:getPower())
 end

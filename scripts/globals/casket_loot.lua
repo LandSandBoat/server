@@ -4,6 +4,9 @@
 -- this is because some zones have high mobs and low mobs,
 -- and the drops are level dependant.
 -----------------------------------------------------------
+
+require("scripts/globals/zone")
+
 tpz = tpz or {}
 tpz.casket_loot = tpz.casket_loot or {}
 
@@ -2946,7 +2949,7 @@ tpz.casket_loot.casketItems =
     },
     [tpz.zone.VELUGANNON_PALACE] =
     {
-        regionalItems = {13467}, -- Dragon Ring
+        regionalItems = {13467, 10954}, -- Dragon Ring | Alchemist's Torque
         temps =
         {
         ----------------------------------

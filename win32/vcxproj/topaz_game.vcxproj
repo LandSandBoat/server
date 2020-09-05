@@ -96,7 +96,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)..\external;$(ProjectDir)..\external\mysql;$(ProjectDir)..\external\zmq;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;_CONSOLE;DEBUGLOGMAP;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;_CONSOLE;DEBUGLOGMAP;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -120,7 +120,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)..\external;$(ProjectDir)..\external\mysql;$(ProjectDir)..\external\zmq;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;_CONSOLE;DEBUGLOGMAP;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;_CONSOLE;DEBUGLOGMAP;_CRT_SECURE_NO_WARNINGS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -141,7 +141,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUGLOGMAP;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUGLOGMAP;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -173,7 +173,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUGLOGMAP;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NOMINMAX;FMT_HEADER_ONLY;FMT_USE_WINDOWS_H=0;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUGLOGMAP;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -356,6 +356,7 @@
     <ClInclude Include="..\..\src\map\packets\delivery_box.h" />
     <ClInclude Include="..\..\src\map\packets\downloading_data.h" />
     <ClInclude Include="..\..\src\map\packets\entity_update.h" />
+    <ClInclude Include="..\..\src\map\packets\entity_enable_list.h" />
     <ClInclude Include="..\..\src\map\packets\event.h" />
     <ClInclude Include="..\..\src\map\packets\event_string.h" />
     <ClInclude Include="..\..\src\map\packets\event_update.h" />
@@ -368,6 +369,7 @@
     <ClInclude Include="..\..\src\map\packets\guild_menu_sell.h" />
     <ClInclude Include="..\..\src\map\packets\guild_menu_buy_update.h" />
     <ClInclude Include="..\..\src\map\packets\guild_menu_sell_update.h" />
+    <ClInclude Include="..\..\src\map\packets\independant_animation.h" />
     <ClInclude Include="..\..\src\map\packets\instance_entry.h" />
     <ClInclude Include="..\..\src\map\packets\inventory_assign.h" />
     <ClInclude Include="..\..\src\map\packets\inventory_finish.h" />
@@ -397,6 +399,7 @@
     <ClInclude Include="..\..\src\map\packets\status_effects.h" />
     <ClInclude Include="..\..\src\map\packets\synth_result.h" />
     <ClInclude Include="..\..\src\map\packets\synth_suggestion.h" />
+    <ClInclude Include="..\..\src\map\packets\timer_bar_util.h" />
     <ClInclude Include="..\..\src\map\packets\trade_action.h" />
     <ClInclude Include="..\..\src\map\packets\trade_item.h" />
     <ClInclude Include="..\..\src\map\packets\trade_request.h" />
@@ -607,6 +610,7 @@
     <ClCompile Include="..\..\src\map\packets\delivery_box.cpp" />
     <ClCompile Include="..\..\src\map\packets\downloading_data.cpp" />
     <ClCompile Include="..\..\src\map\packets\entity_update.cpp" />
+    <ClCompile Include="..\..\src\map\packets\entity_enable_list.cpp" />
     <ClCompile Include="..\..\src\map\packets\event.cpp" />
     <ClCompile Include="..\..\src\map\packets\event_string.cpp" />
     <ClCompile Include="..\..\src\map\packets\event_update.cpp" />
@@ -619,6 +623,7 @@
     <ClCompile Include="..\..\src\map\packets\guild_menu_sell.cpp" />
     <ClCompile Include="..\..\src\map\packets\guild_menu_buy_update.cpp" />
     <ClCompile Include="..\..\src\map\packets\guild_menu_sell_update.cpp" />
+    <ClCompile Include="..\..\src\map\packets\independant_animation.cpp" />
     <ClCompile Include="..\..\src\map\packets\instance_entry.cpp" />
     <ClCompile Include="..\..\src\map\packets\inventory_assign.cpp" />
     <ClCompile Include="..\..\src\map\packets\inventory_finish.cpp" />
@@ -648,6 +653,7 @@
     <ClCompile Include="..\..\src\map\packets\status_effects.cpp" />
     <ClCompile Include="..\..\src\map\packets\synth_result.cpp" />
     <ClCompile Include="..\..\src\map\packets\synth_suggestion.cpp" />
+    <ClCompile Include="..\..\src\map\packets\timer_bar_util.cpp" />
     <ClCompile Include="..\..\src\map\packets\trade_action.cpp" />
     <ClCompile Include="..\..\src\map\packets\trade_item.cpp" />
     <ClCompile Include="..\..\src\map\packets\trade_request.cpp" />
