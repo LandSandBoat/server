@@ -286,15 +286,15 @@ local loot =
         },
         {
             {itemid = 749, droprate = 250},  -- Mythril Beastcoin
-            {itemid = 17786, droprate = 190},-- Ganko
+            {itemid = 17786, droprate = 190}, -- Ganko
             {itemid = 827, droprate = 270},  -- Square Of Wool Cloth
-            {itemid = 18171, droprate = 145},-- Platoon Disc
+            {itemid = 18171, droprate = 145}, -- Platoon Disc
             {itemid = 824, droprate = 295},  -- Square Of Grass Cloth
             {itemid = 826, droprate = 260},  -- Square Of Linen Cloth
         },
         {
             {itemid = 0, droprate = 800},    -- Nothing
-            {itemid = 18209, droprate = 167},-- Platoon Cutter
+            {itemid = 18209, droprate = 167}, -- Platoon Cutter
         },
         {
             {itemid = 0, droprate = 500},    -- Nothing
@@ -305,11 +305,11 @@ local loot =
             {itemid = 924, droprate = 500},  -- Vial Of Fiend Blood
         },
         {
-            {itemid = 18170, droprate = 235},-- Platoon Edge
-            {itemid = 17271, droprate = 235},-- Platoon Gun
-            {itemid = 17692, droprate = 235},-- Platoon Spatha
-            {itemid = 17571, droprate = 235},-- Platoon Pole
-            {itemid = 17820, droprate = 255},-- Gunromaru
+            {itemid = 18170, droprate = 235}, -- Platoon Edge
+            {itemid = 17271, droprate = 235}, -- Platoon Gun
+            {itemid = 17692, droprate = 235}, -- Platoon Spatha
+            {itemid = 17571, droprate = 235}, -- Platoon Pole
+            {itemid = 17820, droprate = 255}, -- Gunromaru
             {itemid = 1601, droprate = 260}, -- Mannequin Head
             {itemid = 4853, droprate = 250}, -- Scroll Of Drain
             {itemid = 930, droprate = 190},  -- Vial Of Beastman Blood
@@ -365,15 +365,15 @@ local loot =
     [107] =
     {
         {
-            {itemid = 3339, droprate = 1000},-- Jug Of Honey Wine
+            {itemid = 3339, droprate = 1000}, -- Jug Of Honey Wine
         },
         {
             {itemid = 1441, droprate = 312}, -- Libation Abjuration
-            {itemid = 17694, droprate = 182},-- Guespiere
+            {itemid = 17694, droprate = 182}, -- Guespiere
             {itemid = 18047, droprate = 65}, -- Havoc Scythe
             {itemid = 17937, droprate = 43}, -- Leopard Axe
-            {itemid = 18173, droprate = 181},-- Nokizaru Shuriken
-            {itemid = 17823, droprate = 217},-- Shinsoku
+            {itemid = 18173, droprate = 181}, -- Nokizaru Shuriken
+            {itemid = 17823, droprate = 217}, -- Shinsoku
             {itemid = 17575, droprate = 43}, -- Somnus Signa
         },
         {
@@ -384,12 +384,12 @@ local loot =
         },
         {
             {itemid = 1442, droprate = 159}, -- Oblation Abjuration
-            {itemid = 17695, droprate = 151},-- Bayards Sword
-            {itemid = 18088, droprate = 167},-- Dreizack
+            {itemid = 17695, droprate = 151}, -- Bayards Sword
+            {itemid = 18088, droprate = 167}, -- Dreizack
             {itemid = 17576, droprate = 95}, -- Grim Staff
             {itemid = 17245, droprate = 95}, -- Grosveneurs Bow
             {itemid = 17996, droprate = 56}, -- Stylet
-            {itemid = 17789, droprate = 341},-- Unsho
+            {itemid = 17789, droprate = 341}, -- Unsho
         },
         {
             {itemid = 4486, droprate = 522}, -- Dragon Heart
@@ -426,7 +426,7 @@ local loot =
             {itemid = 4211, droprate = 116}, -- Charisma Potion
             {itemid = 4213, droprate = 51},  -- Icarus Wing
             {itemid = 1132, droprate = 246}, -- Square Of Raxa
-            {itemid = 17582, droprate = 246},-- Prelatic Pole
+            {itemid = 17582, droprate = 246}, -- Prelatic Pole
         },
         {
             {itemid = 4135, droprate = 290}, -- Hi-ether +3
@@ -604,18 +604,18 @@ local loot =
         },
     },
 }
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
         tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

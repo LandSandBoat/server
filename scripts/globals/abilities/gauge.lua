@@ -12,9 +12,9 @@ require("scripts/globals/msg")
 
 function onAbilityCheck(player, target, ability)
     if (player:getPet() ~= nil ) then
-        return tpz.msg.basic.ALREADY_HAS_A_PET,0
+        return tpz.msg.basic.ALREADY_HAS_A_PET, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 

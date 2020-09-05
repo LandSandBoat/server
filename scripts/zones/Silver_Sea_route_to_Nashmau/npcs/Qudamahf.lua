@@ -23,15 +23,15 @@ function onTimeTrigger(npc, triggerID)
     tpz.transport.captainMessage(npc, triggerID, messages)
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
-    player:messageSpecial(ID.text.ON_WAY_TO_NASHMAU,0,0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
+function onTrigger(player, npc)
+    player:messageSpecial(ID.text.ON_WAY_TO_NASHMAU, 0, 0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

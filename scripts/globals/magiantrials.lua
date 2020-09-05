@@ -367,12 +367,20 @@ end
 -- Magian Green  --
 -------------------
 
+<<<<<<< HEAD
 function magianGreenEventUpdate(player,itemId,csid,option)
+=======
+function magianGreenEventUpdate(player, ItemID, csid, option)
+>>>>>>> release
 end
 
 -------------------
 -- Magian Blue   --
 -------------------
 
+<<<<<<< HEAD
 function magianBlueEventUpdate(player,itemId,csid,option)
+=======
+function magianBlueEventUpdate(player, ItemID, csid, option)
+>>>>>>> release
 end

@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onUseAbility(pet, target, skill, action)
@@ -18,7 +18,7 @@ function onUseAbility(pet, target, skill, action)
    -- Healing Breath Results: http://images2.wikia.nocookie.net/__cb20080714061150/ffxi/images/3/32/Healingbreathgraph.jpg (Assume Wyvern has 991 HP)
 
    -- TODO:
-   -- Wyvern Exp Bonus is +6% HP per 200 exp gained until 1,000 exp cap, granting a max 30% (0.3 works in the formula)
+   -- Wyvern Exp Bonus is +6% HP per 200 exp gained until 1, 000 exp cap, granting a max 30% (0.3 works in the formula)
       -- Exp bonus wears off at zone, dismiss, etc, and shouldn't be handled here, as it also adds to other stats.
    -- Wyvern HP or HP% gear has no effect (Not handled here)
 

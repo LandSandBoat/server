@@ -3,7 +3,7 @@
 --  Mob: Weeping Willow
 -----------------------------------
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     if (mob:getHPP() <= 50 and mob:getLocalVar("Saplings") < 1) then
         SpawnMob(mob:getID()+1):updateEnmity(target)
         SpawnMob(mob:getID()+2):updateEnmity(target)

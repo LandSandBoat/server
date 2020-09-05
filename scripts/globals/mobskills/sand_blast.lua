@@ -8,7 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -20,7 +20,7 @@ function onMobWeaponSkill(target, mob, skill)
         local alastorId = mob:getID()+6
         local alastor = GetMobByID(alastorId)
         if (not alastor:isSpawned()) then -- Alastor Antlion
-            mob:setLocalVar("SAND_BLAST",0) -- Don't spawn more NMs
+            mob:setLocalVar("SAND_BLAST", 0) -- Don't spawn more NMs
             alastor:setSpawn(mob:getXPos() + 1, mob:getYPos() + 1, mob:getZPos() + 1) -- Set its spawn location.
             SpawnMob(alastorId, 120):updateClaim(target)
         end

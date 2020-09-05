@@ -17,9 +17,9 @@ local stats_bits =
     tpz.mod.MPP
 }
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     local power = effect:getPower()
-    for statbit,mod in ipairs(stats_bits) do
+    for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
             if mod == tpz.mod.HPP or mod == tpz.mod.MPP then
                 target:addMod(mod, -40)
@@ -31,12 +31,12 @@ function onEffectGain(target,effect)
     target:setStatDebilitation(power)
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local power = effect:getPower()
-    for statbit,mod in ipairs(stats_bits) do
+    for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
             if mod == tpz.mod.HPP or mod == tpz.mod.MPP then
                 target:delMod(mod, -40)

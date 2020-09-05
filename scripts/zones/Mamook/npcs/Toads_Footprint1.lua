@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Mamook/IDs")
 require("scripts/globals/npc_util")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
@@ -31,13 +31,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 223 then
         player:setCharVar("princeandhopper", 4)
     elseif csid == 225 then
         player:setCharVar("princeandhopper", 6)
-    end	
+    end
 end

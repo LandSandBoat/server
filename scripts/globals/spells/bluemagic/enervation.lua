@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffectOne = tpz.effect.DEFENSE_DOWN
     local typeEffectTwo = tpz.effect.MAGIC_DEF_DOWN
     local params = {}
@@ -38,15 +38,15 @@ function onSpellCast(caster,target,spell)
         if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then -- the def/mag def down does not overwrite the same debuff from any other source
             spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
         elseif (target:hasStatusEffect(typeEffectOne)) then
-            target:addStatusEffect(typeEffectTwo,8,0,duration)
+            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
             returnEffect = typeEffectTwo
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
         elseif (target:hasStatusEffect(typeEffectTwo)) then
-            target:addStatusEffect(typeEffectOne,10,0,duration)
+            target:addStatusEffect(typeEffectOne, 10, 0, duration)
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
         else
-            target:addStatusEffect(typeEffectOne,10,0,duration)
-            target:addStatusEffect(typeEffectTwo,8,0,duration)
+            target:addStatusEffect(typeEffectOne, 10, 0, duration)
+            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
         end
     end

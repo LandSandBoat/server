@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:addStatusEffectEx(tpz.effect.SHOCK_SPIKES,0,60,0,0) -- ~60 damage
+    mob:addStatusEffectEx(tpz.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
     -- TODO: Effect can be stolen, giving a THF (Aura Steal) or BLU (Voracious Trunk) a 60 minute shock spikes effect (unknown potency).
     -- If effect is stolen, he will recast it instantly.
 end
@@ -39,7 +39,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onAdditionalEffect(mob,target,damage)
+function onAdditionalEffect(mob, target, damage)
     -- TODO: Additional Effect for ~100 damage (theme suggests enthunder)
     -- Unknown if this can be stolen/dispelled like spikes.  Isn't mentioned, probably not.
 end

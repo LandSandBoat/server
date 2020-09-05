@@ -19,5 +19,5 @@ end
 function onItemUse(target)
     -- May need a retail capture to verify actual position
     -- https://ffxiclopedia.fandom.com/wiki/Shadow_Lord_Shirt states teleports next to HP#1
-    target:addStatusEffectEx(tpz.effect.TELEPORT,0,tpz.teleport.id.ZVAHL_KEEP,0,4)
+    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.ZVAHL_KEEP, 0, 4)
 end

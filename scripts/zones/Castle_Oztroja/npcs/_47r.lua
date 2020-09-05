@@ -6,12 +6,12 @@
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

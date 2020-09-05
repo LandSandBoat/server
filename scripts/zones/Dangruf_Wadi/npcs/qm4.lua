@@ -10,21 +10,21 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
     local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
     if npcUtil.tradeHas(trade, 534) then -- Trade 1x gaussbit wildgrass
         if thickAsThievesGamblingCS == 3 then
-            local rand1 = math.random(1,999)
-            local rand2 = math.random(1,999)
+            local rand1 = math.random(1, 999)
+            local rand2 = math.random(1, 999)
 
             if (rand1 > rand2) then
-                player:messageSpecial(ID.text.YOU_PLACE_ITEM,0,534)
-                player:startEvent(137,1092,0,rand1,rand2) -- complete 2/3 gamble mini quest
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 534)
+                player:startEvent(137, 1092, 0, rand1, rand2) -- complete 2/3 gamble mini quest
             else
-                player:messageSpecial(ID.text.YOU_PLACE_ITEM,0,534)
-                player:startEvent(140,0,0,rand1,rand2) -- player looses
+                player:messageSpecial(ID.text.YOU_PLACE_ITEM, 0, 534)
+                player:startEvent(140, 0, 0, rand1, rand2) -- player looses
             end
         elseif thickAsThievesGamblingCS < 3 then -- trading out of order
             player:messageSpecial(ID.text.DONT_WASTE_TIME)
@@ -35,14 +35,14 @@ function onTrade(player,npc,trade)
 
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.PLANT_EXTRACT)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 137 or csid == 140) and option == 2 then -- player gives up
         player:confirmTrade()
@@ -53,7 +53,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 137 and option == 0 then -- player wins dice game
         player:confirmTrade()
         player:messageSpecial(ID.text.YOU_BEAT_GOBLIN)
-        player:setCharVar("thickAsThievesGamblingCS",4)
+        player:setCharVar("thickAsThievesGamblingCS", 4)
     end
 
 end

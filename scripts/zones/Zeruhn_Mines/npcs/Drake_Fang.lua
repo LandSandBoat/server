@@ -8,10 +8,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local MissionStatus = player:getCharVar("MissionStatus")
 
@@ -32,10 +32,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 200 then
         player:setCharVar("MissionStatus", 2)
     elseif csid == 202 then

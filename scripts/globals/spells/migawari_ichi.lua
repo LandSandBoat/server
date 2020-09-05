@@ -15,14 +15,14 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.MIGAWARI
     local ninjutsu = target:getSkillLevel(tpz.skill.NINJUTSU)
     local negationThreshold = math.floor(100 * ((ninjutsu / 5) / 100))
-    caster:addStatusEffect(effect,negationThreshold,0,60,0,100)
+    caster:addStatusEffect(effect, negationThreshold, 0, 60, 0, 100)
     return effect
 end

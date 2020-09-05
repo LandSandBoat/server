@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local minCure = 60
     local effect = target:eraseStatusEffect()
     local divisor = 0.6666
@@ -37,7 +37,7 @@ function onSpellCast(caster,target,spell)
         constant = 65
     end
 
-    local final = getCureFinal(caster,spell,getBaseCureOld(power,divisor,constant),minCure,true)
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
     final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
 
@@ -54,7 +54,7 @@ function onSpellCast(caster,target,spell)
     target:addHP(final)
     target:wakeUp()
     target:eraseStatusEffect()
-    caster:updateEnmityFromCure(target,final)
+    caster:updateEnmityFromCure(target, final)
     spell:setMsg(tpz.msg.basic.MAGIC_RECOVERS_HP)
 
     return final

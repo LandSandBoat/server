@@ -9,11 +9,11 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     player:delStatusEffect(tpz.effect.COMPOSURE)
-    player:addStatusEffect(tpz.effect.COMPOSURE,1,0,7200)
+    player:addStatusEffect(tpz.effect.COMPOSURE, 1, 0, 7200)
 end

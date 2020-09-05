@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 ---------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onPetAbility(target, pet, skill, summoner)
@@ -20,8 +20,8 @@ function onPetAbility(target, pet, skill, summoner)
     buffvalue = math.abs(12 - hour) + 1
     target:delStatusEffect(tpz.effect.MAGIC_ATK_BOOST)
     target:delStatusEffect(tpz.effect.MAGIC_DEF_BOOST)
-    target:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST,buffvalue,0,duration)
-    target:addStatusEffect(tpz.effect.MAGIC_DEF_BOOST,14 - buffvalue,0,duration)
+    target:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(tpz.effect.MAGIC_DEF_BOOST, 14 - buffvalue, 0, duration)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0
 end

@@ -36,6 +36,8 @@ enum SKILLFLAG
     SKILLFLAG_DRAW_IN        = 0x020
 };
 
+#define MAX_MOBSKILL_ID	4262
+
 class CMobSkill
 {
 public:

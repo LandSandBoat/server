@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     caster:delStatusEffect(tpz.effect.ENMITY_BOOST)
 
-    caster:addStatusEffect(tpz.effect.PAX,15,0,300)
+    caster:addStatusEffect(tpz.effect.PAX, 15, 0, 300)
     return tpz.effect.PAX
 end
