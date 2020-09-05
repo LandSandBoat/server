@@ -8,12 +8,17 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/chocobo")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
-    if trade:getSlotCount() == 1 and not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067)) then
+    if
+        player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE) and
+        trade:getSlotCount() == 1 and
+        -- The Fenrir (10057) and Omega (10067) items and mounts have their own questlines, so they aren't valid trades here
+        not (npcUtil.tradeHasExactly(trade, 10057) or npcUtil.tradeHasExactly(trade, 10067))
+    then
         local item = trade:getItemId(0)
         local mount = item - 10050
         if item == 15533 then
@@ -27,33 +32,40 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    -- Minigame complete
+    local fsaQuest = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD) 
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
-    local hasTrainersWhistle = player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE)
 
-    if hasTrainersWhistle then
+    if fsaQuest == QUEST_COMPLETED then
         player:startEvent(10226)
+    elseif fullSpeedAheadStatus == 4 then -- Complete
+        player:startEvent(10225, tpz.ki.TRAINERS_WHISTLE, 15533, ID.npc.MAPITOTO)
+    elseif fsaQuest == QUEST_ACCEPTED then -- Retry
+        player:startEvent(10224, 1)
     elseif
       player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) and
       player:getMainLvl() >= 20 and
       player:hasKeyItem(tpz.ki.MAP_OF_THE_JEUNO_AREA)
     then
         player:startEvent(10223, 0, 0, 4)
-    elseif fullSpeedAheadStatus == 1 then
-        player:startEvent(10225, tpz.ki.TRAINERS_WHISTLE)
     else
         player:startEvent(10222)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player,csid,option)
-    if csid == 10223 and option == 1 then
+    if (csid == 10223 or csid == 10224) and option == 1 then
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:setCharVar("[QUEST]FullSpeedAhead", 1) -- Flag to start minigame
         player:setPos(475, 8.8, -159, 128, 105)
+    elseif csid == 10223 and option == 2 then
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     elseif csid == 10225 then
         -- Complete quest
+        player:setCharVar("[QUEST]FullSpeedAhead", 0)
+        player:completeQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         npcUtil.giveKeyItem(player, tpz.ki.TRAINERS_WHISTLE)
         npcUtil.giveKeyItem(player, tpz.ki.RAPTOR_COMPANION)
     elseif csid == 10227 then

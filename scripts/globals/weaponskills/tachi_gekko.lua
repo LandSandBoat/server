@@ -27,7 +27,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 2; params.atk200 = 2; params.atk300 = 2;
+    params.atk100 = 2; params.atk200 = 2; params.atk300 = 2
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 1.5625 params.ftp200 = 2.6875 params.ftp300 = 4.125
@@ -36,7 +36,7 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     -- Silence duration changed from 60 to 45 as per bg-wiki: http://www.bg-wiki.com/bg/Tachi:_Gekko
     if (damage > 0 and target:hasStatusEffect(tpz.effect.SILENCE) == false) then
-        local duration = 60 * applyResistanceAddEffect(player,target,tpz.magic.ele.WIND,0)
+        local duration = 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0)
         target:addStatusEffect(tpz.effect.SILENCE, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

@@ -20,7 +20,7 @@ function onTrigger(player, npc)
             player:startEvent(15) -- Remove ointment option
         end
     elseif player:hasKeyItem(tpz.ki.INDIGESTED_ORE) then
-            player:startEvent(16) -- After receiving KI, Degga sends the player to Raifa     
+        player:startEvent(16) -- After receiving KI, Degga sends the player to Raifa     
     else
         player:startEvent(12) -- Default dialogue
     end

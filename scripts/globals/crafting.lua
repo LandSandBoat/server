@@ -26,15 +26,15 @@ guild =
 -- Table for Test Item
 -----------------------------------
 
-local TI_Alchemy = {937,4157,4163,947,16543,4116,16479,4120,16609,10792}
-local TI_Bonecraft = {13442,13441,13323,13459,13091,17299,16420,12508,13987,11058} --  Way of The Boneworker + Hajduk Ring
-local TI_Clothcraft = {13583,13584,13204,13075,12723,13586,13752,12612,14253,11000}
-local TI_Cooking = {4355,4416,4489,4381,4413,4558,4546,4440,4561,} -- Sprightly Soup + Way of the Culinarian
-local TI_Fishing = {4401,4379,4469,4480,4462,4479,4471,4478,4474,5817,} -- Tiger shark
-local TI_Goldsmithing = {12496,12497,12495,13082,13446,13084,12545,13125,16515,} --  Evader Earring**Guild item must be made with an Inferno Crystal
-local TI_Leathercraft = {13594,16386,13588,13195,12571,12572,12980,12702,12447,} --  Urja Trousers(Signed with Terra Crystal)
-local TI_Smithing = {16530,12299,16512,16650,16651,16559,12427,16577,12428,} -- Gorkhali Kukri
-local TI_Woodworking = {22,23,17354,17348,17053,17156,17054,56,17101,} -- Vejovis wand signed
+local TI_Alchemy = {937, 4157, 4163, 947, 16543, 4116, 16479, 4120, 16609, 10792}
+local TI_Bonecraft = {13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058} --  Way of The Boneworker + Hajduk Ring
+local TI_Clothcraft = {13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000}
+local TI_Cooking = {4355, 4416, 4489, 4381, 4413, 4558, 4546, 4440, 4561, } -- Sprightly Soup + Way of the Culinarian
+local TI_Fishing = {4401, 4379, 4469, 4480, 4462, 4479, 4471, 4478, 4474, 5817, } -- Tiger shark
+local TI_Goldsmithing = {12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, } --  Evader Earring**Guild item must be made with an Inferno Crystal
+local TI_Leathercraft = {13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, } --  Urja Trousers(Signed with Terra Crystal)
+local TI_Smithing = {16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, } -- Gorkhali Kukri
+local TI_Woodworking = {22, 23, 17354, 17348, 17053, 17156, 17054, 56, 17101, } -- Vejovis wand signed
 local TI_Synergy = {}
 
 local HQCrystals = {
@@ -76,12 +76,12 @@ local HQCrystals = {
 -- isGuildMember Action
 -----------------------------------
 
-function isGuildMember(player,guild)
+function isGuildMember(player, guild)
 
     local guildOK = player:getCharVar("Guild_Member")
     local bit = {}
 
-    for i = 12,1,-1 do
+    for i = 12, 1, -1 do
         twop = 2^i
 
         if (guildOK >= twop) then
@@ -89,7 +89,7 @@ function isGuildMember(player,guild)
         else
             bit[i]=0
         end
-        --printf("bit %u: %u",i,bit[i])
+        --printf("bit %u: %u", i, bit[i])
     end
 
     return bit[guild]
@@ -108,7 +108,7 @@ end
 -- getTestItem Action
 -----------------------------------
 
-function getTestItem(player,npc,craftID)
+function getTestItem(player, npc, craftID)
 
     local TItemList = {}
     local NextRank = player:getSkillRank(craftID) + 1
@@ -134,7 +134,7 @@ end
 -- canGetNewRank Action
 -----------------------------------
 
-function canGetNewRank(player,skillLvL,craftID)
+function canGetNewRank(player, skillLvL, craftID)
 
     local Rank = player:getSkillRank(craftID) + 1
     local canGet = 0
@@ -161,20 +161,20 @@ end
 -- tradeTestItem Action
 -----------------------------------
 
-function tradeTestItem(player,npc,trade,craftID)
+function tradeTestItem(player, npc, trade, craftID)
 
     local guildID = craftID - 48
     local skillLvL = player:getSkillLevel(craftID)
-    local myTI = getTestItem(player,npc,craftID)
+    local myTI = getTestItem(player, npc, craftID)
     local newRank = 0
 
-    if (canGetNewRank(player,skillLvL,craftID) == 1 and
-        trade:hasItemQty(myTI,1) and
+    if (canGetNewRank(player, skillLvL, craftID) == 1 and
+        trade:hasItemQty(myTI, 1) and
         trade:getItemCount() == 1) then
         newRank = player:getSkillRank(craftID) + 1
         player:tradeComplete()
         if player:getCharVar('[GUILD]currentGuild') == guildID + 1 then
-            player:setCharVar('[GUILD]daily_points',-1)
+            player:setCharVar('[GUILD]daily_points', -1)
         end
     end
 
@@ -191,7 +191,7 @@ end
 -----------------------------------
 -- getCraftSkillCap
 -----------------------------------
-function getCraftSkillCap(player,craftID)
+function getCraftSkillCap(player, craftID)
 
     local Rank = player:getSkillRank(craftID)
     return (Rank+1)*10
@@ -201,7 +201,7 @@ end
 -----------------------------------
 -- getAdvImageSupportCost
 -----------------------------------
-function getAdvImageSupportCost(player,craftID)
+function getAdvImageSupportCost(player, craftID)
 
     local Rank = player:getSkillRank(craftID)
     return (Rank+1)*30
@@ -214,10 +214,10 @@ function unionRepresentativeTrigger(player, guildID, csid, currency, keyitems)
     local cap = (rank + 1) * 10
     local kibits = 0
 
-    for kbit,ki in pairs(keyitems) do
+    for kbit, ki in pairs(keyitems) do
         if (rank >= ki.rank) then
             if not player:hasKeyItem(ki.id) then
-                kibits = bit.bor(kibits, bit.lshift(1,kbit))
+                kibits = bit.bor(kibits, bit.lshift(1, kbit))
             end
         end
     end
@@ -227,18 +227,18 @@ end
 
 function unionRepresentativeTriggerFinish(player, option, target, guildID, currency, keyitems, items)
     local rank = player:getSkillRank(guildID + 48)
-    local category = bit.band(bit.rshift(option, 2),3)
+    local category = bit.band(bit.rshift(option, 2), 3)
     local text = zones[player:getZoneID()].text
 
     if (bit.tobit(option) == -1 and rank >= 3) then
         local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
-        player:setCharVar('[GUILD]currentGuild',guildID + 1)
+        player:setCharVar('[GUILD]currentGuild', guildID + 1)
 
         if (oldGuild == -1) then
             player:messageSpecial(text.GUILD_NEW_CONTRACT, guildID)
         else
             player:messageSpecial(text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
-            player:setCharVar('[GUILD]daily_points',-1)
+            player:setCharVar('[GUILD]daily_points', -1)
         end
     elseif (category == 3) then -- keyitem
         local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
@@ -310,7 +310,7 @@ function unionRepresentativeTrade(player, npc, trade, csid, guildID)
             end
             if (totalPoints > 0) then
                 player:confirmTrade()
-                player:startEvent(csid,totalPoints)
+                player:startEvent(csid, totalPoints)
             end
         end
     end

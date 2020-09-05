@@ -16,7 +16,7 @@ g_mixins.gears = function(mob)
         if mob:getLocalVar("Def1") == 0 then
             mob:delMod(tpz.mod.MDEF, 10)
             mob:delMod(tpz.mod.DEF, 20)
-            mob:setLocalVar("Def1",1)
+            mob:setLocalVar("Def1", 1)
         end
         elseif mobHPP <= 25 then
             if mob:AnimationSub() ~= 2 then
@@ -26,7 +26,7 @@ g_mixins.gears = function(mob)
             if mob:getLocalVar("Def2") == 0 then
                 mob:delMod(tpz.mod.MDEF, 10)
                 mob:delMod(tpz.mod.DEF, 20)
-                mob:setLocalVar("Def2",1)
+                mob:setLocalVar("Def2", 1)
             end
         elseif mobHPP > 50 then
             if mob:AnimationSub() ~= 0 then

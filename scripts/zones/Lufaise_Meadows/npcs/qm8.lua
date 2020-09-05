@@ -7,12 +7,12 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 15066) and npcUtil.popFromQM(player, npc, ID.mob.AMALTHEIA) then -- Relic Shield
         player:confirmTrade()
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end

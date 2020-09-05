@@ -13,11 +13,11 @@ end
 function onItemUse(target)
     local worked = false
     if (not target:hasStatusEffect(tpz.effect.REGEN)) then
-        target:addStatusEffect(tpz.effect.REGEN,5,3,300)
+        target:addStatusEffect(tpz.effect.REGEN, 5, 3, 300)
         worked = true
     end
     if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-        target:addStatusEffect(tpz.effect.REFRESH,5,3,300)
+        target:addStatusEffect(tpz.effect.REFRESH, 5, 3, 300)
         worked = true
     end
     if (not worked) then

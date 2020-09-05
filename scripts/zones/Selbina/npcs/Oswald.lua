@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4375) then
         player:startEvent(72, 0, 4375) -- Finish quest "The gift"
     elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4484) then
@@ -18,7 +18,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     underTheSea  = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
     theSandCharm = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
     theGift      = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT)
@@ -47,10 +47,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 32 then
         player:setCharVar("underTheSeaVar", 2)
     elseif csid == 37 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA, {item = 13335, fame_area = SELBINA, title = tpz.title.LIL_CUPID, var = "underTheSeaVar"}) then

@@ -36,6 +36,6 @@ function onTrigger(player, spellId, target)
 
     -- add spell
     targ:delSpell(spellId)
-    player:PrintToPlayer(string.format("Deleted spell %i from %s.",spellId,targ:getName()))
+    player:PrintToPlayer(string.format("Deleted spell %i from %s.", spellId, targ:getName()))
 
 end

@@ -4,16 +4,16 @@
 -- Type: Shop NPC
 -- !pos -151 3 -36 256
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Western_Adoulin/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Standard shop
-    player:showText(npc, ID.text.TEVIGOGO_SHOP_TEXT);
+    player:showText(npc, ID.text.TEVIGOGO_SHOP_TEXT)
     local stock =
     {
         605, 200,    -- Pickaxe
@@ -23,11 +23,11 @@ function onTrigger(player,npc)
         17308, 60,     -- Hawkeye
         17320, 8,      -- Iron Arrow
     }
-    tpz.shop.general(player, stock);
-end;
+    tpz.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

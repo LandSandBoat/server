@@ -28,10 +28,10 @@ local stock =
     5936,  300,    -- Mog Missile
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if  player:getCharVar("spokeKindlix") == 1 then
         player:startEvent(348)
     else
@@ -40,10 +40,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 348 and option == 0 then
         tpz.shop.general(player, stock)
         player:setCharVar("spokeKindlix", 0)

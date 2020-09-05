@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if not player:hasKeyItem(tpz.ki.OLD_RING) then
         player:addKeyItem(tpz.ki.OLD_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RING)
@@ -18,8 +18,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

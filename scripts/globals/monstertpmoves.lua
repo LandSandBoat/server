@@ -42,9 +42,9 @@ TP_RANGED = 4
 
 BOMB_TOSS_HPP = 1
 
-function MobRangedMove(mob,target,skill,numberofhits,accmod,dmgmod, tpeffect)
+function MobRangedMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
-    return MobPhysicalMove(mob,target,skill,numberofhits,accmod,dmgmod, TP_RANGED)
+    return MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, TP_RANGED)
 end
 
 -- PHYSICAL MOVE FUNCTION
@@ -61,7 +61,7 @@ end
 -- if TP_ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
 -- if TP_DMG_VARIES -> three values are
 
-function MobPhysicalMove(mob,target,skill,numberofhits,accmod,dmgmod,tpeffect,mtp000,mtp150,mtp300,offcratiomod)
+function MobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod)
     local returninfo = {}
 
     --get dstr (bias to monsters, so no fSTR)
@@ -180,7 +180,7 @@ function MobPhysicalMove(mob,target,skill,numberofhits,accmod,dmgmod,tpeffect,mt
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
     if ((chance*100) <= firstHitChance) then
-        pdif = math.random((minRatio*1000),(maxRatio*1000)) --generate random PDIF
+        pdif = math.random((minRatio*1000), (maxRatio*1000)) --generate random PDIF
         pdif = pdif/1000 --multiplier set.
         finaldmg = finaldmg + hitdamage * pdif
         hitslanded = hitslanded + 1
@@ -188,7 +188,7 @@ function MobPhysicalMove(mob,target,skill,numberofhits,accmod,dmgmod,tpeffect,mt
     while (hitsdone < numberofhits) do
         chance = math.random()
         if ((chance*100)<=hitrate) then --it hit
-            pdif = math.random((minRatio*1000),(maxRatio*1000)) --generate random PDIF
+            pdif = math.random((minRatio*1000), (maxRatio*1000)) --generate random PDIF
             pdif = pdif/1000 --multiplier set.
             finaldmg = finaldmg + hitdamage * pdif
             hitslanded = hitslanded + 1
@@ -239,7 +239,7 @@ end
 -- TP_DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
 -- TP_DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
-function MobMagicalMove(mob,target,skill,damage,element,dmgmod,tpeffect,tpvalue)
+function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
     returninfo = {}
     --get all the stuff we need
     local resist = 1
@@ -275,7 +275,7 @@ function MobMagicalMove(mob,target,skill,damage,element,dmgmod,tpeffect,tpvalue)
             avatarAccBonus = utils.clamp(master:getSkillLevel(tpz.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
-    resist = applyPlayerResistance(mob,nil,target,mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),avatarAccBonus,element)
+    resist = applyPlayerResistance(mob, nil, target, mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), avatarAccBonus, element)
 
     local magicDefense = getElementalDamageReduction(target, element)
 
@@ -289,9 +289,9 @@ end
 
 -- mob version
 -- effect = tpz.effect.WHATEVER if enfeeble
--- statmod = the stat to account for resist (INT,MND,etc) e.g. tpz.mod.INT
+-- statmod = the stat to account for resist (INT, MND, etc) e.g. tpz.mod.INT
 -- This determines how much the monsters ability resists on the player.
-function applyPlayerResistance(mob,effect,target,diff,bonus,element)
+function applyPlayerResistance(mob, effect, target, diff, bonus, element)
     local percentBonus = 0
     local magicaccbonus = 0
 
@@ -433,7 +433,7 @@ function MobBreathMove(mob, target, percent, base, element, cap)
     -- elemental resistence
     if (element ~= nil and element > 0) then
         -- no skill available, pass nil
-        local resist = applyPlayerResistance(mob,nil,target,mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),0,element)
+        local resist = applyPlayerResistance(mob, nil, target, mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), 0, element)
 
         -- get elemental damage reduction
         local defense = getElementalDamageReduction(target, element)
@@ -446,7 +446,7 @@ function MobBreathMove(mob, target, percent, base, element, cap)
     return damage
 end
 
-function MobFinalAdjustments(dmg,mob,skill,target,attackType,damageType,shadowbehav)
+function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, shadowbehav)
 
     -- physical attack missed, skip rest
     if (skill:hasMissMsg()) then
@@ -538,7 +538,7 @@ function MobFinalAdjustments(dmg,mob,skill,target,attackType,damageType,shadowbe
     dmg = utils.stoneskin(target, dmg)
 
     if (dmg > 0) then
-        target:updateEnmityFromDamage(mob,dmg)
+        target:updateEnmityFromDamage(mob, dmg)
         target:handleAfflatusMiseryDamage(dmg)
     end
 
@@ -671,7 +671,7 @@ function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
         local statmod = tpz.mod.INT
         local element = mob:getStatusEffectElement(typeEffect)
 
-        local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(statmod)-target:getStat(statmod),0,element)
+        local resist = applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
 
         if (resist >= 0.25) then
 
@@ -706,7 +706,7 @@ end
 
 function MobBuffMove(mob, typeEffect, power, tick, duration)
 
-    if (mob:addStatusEffect(typeEffect,power,tick,duration)) then
+    if (mob:addStatusEffect(typeEffect, power, tick, duration)) then
         return tpz.msg.basic.SKILL_GAIN_EFFECT
     end
     return tpz.msg.basic.SKILL_NO_EFFECT
@@ -752,7 +752,7 @@ function MobTPMod(tp)
     return 1
 end
 
-function fTP(tp,ftp1,ftp2,ftp3)
+function fTP(tp, ftp1, ftp2, ftp3)
     if (tp < 1000) then
         tp = 1000
     end

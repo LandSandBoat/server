@@ -24,12 +24,15 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1;
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 5 params.ftp200 = 10.19 params.ftp300 = 13
         params.dex_wsc = 0.8
     end
+
+    -- Apply aftermath
+    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
@@ -38,9 +41,6 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
         if not target:hasStatusEffect(tpz.effect.WEIGHT) then
             target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, 60)
         end
-
-        -- Apply aftermath
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
     end
 
     return tpHits, extraHits, criticalHit, damage

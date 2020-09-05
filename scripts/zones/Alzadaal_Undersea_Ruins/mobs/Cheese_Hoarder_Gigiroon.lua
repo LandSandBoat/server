@@ -15,7 +15,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
 end
 
 function onMobDeath(mob)

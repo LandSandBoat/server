@@ -11,12 +11,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local ecoStatus = player:getCharVar("EcoStatus")
-    
+
     if ecoStatus == 0 and player:getFameLevel(SANDORIA) >= 1 and player:getCharVar("EcoReset") ~= getConquestTally() then
         player:startEvent(677) -- Offer Eco-Warrior quest
     elseif ecoStatus == 1 then
@@ -30,17 +30,23 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 677 and option == 1 then
-        if player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
-            player:addQuest(SANDORIA,tpz.quest.id.sandoria.ECO_WARRIOR)
+        if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
+            player:addQuest(SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 1) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
-    elseif csid == 681 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR, {gil = 5000, item = 4198, title = tpz.title.VERMILLION_VENTURER, fame = 80, var = "EcoStatus"}) then
+    elseif csid == 681 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR, {
+        gil = 5000,
+        item = 4198,
+        title = tpz.title.VERMILLION_VENTURER,
+        fame = 80,
+        var = "EcoStatus"
+    }) then
         player:delKeyItem(tpz.ki.INDIGESTED_ORE)
-        player:setCharVar("EcoReset",getConquestTally())
+        player:setCharVar("EcoReset", getConquestTally())
     end
 end

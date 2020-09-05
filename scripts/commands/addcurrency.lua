@@ -14,7 +14,7 @@ function error(player, msg)
     player:PrintToPlayer("!addcurrency <currency type> <amount> {player}")
 end
 
-function onTrigger(player,currency,amount,target)
+function onTrigger(player, currency, amount, target)
     -- validate target
     local targ
     if (target == nil) then
@@ -41,7 +41,7 @@ function onTrigger(player,currency,amount,target)
     end
 
     -- add currency
-    targ:addCurrency(currency,amount)
+    targ:addCurrency(currency, amount)
     local newAmount = targ:getCurrency(currency)
-    player:PrintToPlayer(string.format("%s was given %i %s, for a total of %i.",targ:getName(),amount,currency,newAmount))
+    player:PrintToPlayer(string.format("%s was given %i %s, for a total of %i.", targ:getName(), amount, currency, newAmount))
 end
