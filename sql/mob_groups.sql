@@ -9755,7 +9755,7 @@ INSERT INTO `mob_groups` VALUES (15,4297,149,'War_Lizard',720,0,2625,0,0,29,32,0
 INSERT INTO `mob_groups` VALUES (16,3912,149,'Thunder_Elemental',960,4,2410,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (17,3011,149,'Orcish_Firebelcher',924,0,1901,0,0,39,42,0);
 INSERT INTO `mob_groups` VALUES (18,3765,149,'Steelbiter_Gudrud',0,32,2328,0,0,33,34,0);
-INSERT INTO `mob_groups` VALUES (19,3048,149,'Orcs_Wyvern',0,128,0,0,0,26,28,0);
+INSERT INTO `mob_groups` VALUES (19,5259,149,'Orcs_Wyvern',0,128,0,0,0,26,28,0);
 INSERT INTO `mob_groups` VALUES (20,3919,149,'Tigerbane_Bakdak',0,32,2417,0,0,31,32,0);
 INSERT INTO `mob_groups` VALUES (21,4357,149,'Wolf_Bat',792,2,80,0,0,25,28,0);
 INSERT INTO `mob_groups` VALUES (22,2997,149,'Orcish_Bowshooter',960,0,1875,0,0,42,46,0);
