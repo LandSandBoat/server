@@ -523,7 +523,7 @@ void CMobController::DoCombatTick(time_point tick)
     {
         return;
     }
-    else if (m_Tick >= m_LastMobSkillTime && tpzrand::GetRandomNumber(100) < PMob->TPUseChance() && MobSkill())
+    else if (m_Tick >= m_LastMobSkillTime && tpzrand::GetRandomNumber(10000) <= PMob->TPUseChance() && MobSkill())
     {
         return;
     }

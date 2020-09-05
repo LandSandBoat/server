@@ -140,7 +140,7 @@ namespace luautils
     int32 setMobPos(lua_State*);                                                // set a mobs position (only if mob is not in combat)
 
     int32 GetHealingTickDelay(lua_State* L);                                    // Returns the configured healing tick delay
-
+    int32 GetItem(lua_State* L);                                                // Returns a newly minted item object of the specified ID
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
