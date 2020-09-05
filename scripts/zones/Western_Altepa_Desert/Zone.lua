@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/weather")
@@ -34,7 +34,7 @@ function onZoneIn(player, prevZone)
         player:setPos(-19.901, 13.607, 440.058, 78)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 2
     end
 
@@ -50,14 +50,11 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 2 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     end
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 2 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end
 
 function onZoneWeatherChange(weather)

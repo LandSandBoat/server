@@ -2850,19 +2850,27 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
+    {
         return;
+    }
 
     // Invalid Emote Mode.
     if (emoteMode < EmoteMode::ALL || emoteMode > EmoteMode::MOTION)
+    {
         return;
+    }
 
     const auto extra = data.ref<uint16>(0x0C);
 
     // Attempting to use locked job emote.
     if (EmoteID == Emote::JOB && extra && !(PChar->jobs.unlocked & (1 << (extra - 0x1E))))
+    {
         return;
-
+    }
+    
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionPacket(PChar, TargetID, TargetIndex, EmoteID, emoteMode, extra));
+
+    luautils::OnPlayerEmote(PChar, EmoteID);
 }
 
 /************************************************************************

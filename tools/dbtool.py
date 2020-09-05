@@ -202,6 +202,8 @@ def fetch_files(express=False):
     backups.clear()
     for (_, _, filenames) in os.walk('../sql/backups/'):
         backups.extend(filenames)
+        if '.gitignore' in backups:
+            backups.remove('.gitignore')
         break
     backups.sort()
     import_files.sort()
@@ -215,6 +217,7 @@ def write_version(silent=False):
     update_client = auto_update_client
     if not silent and current_client != release_client:
         update_client = input('Update client version? [y/N] ').lower() == 'y'
+    update_client = update_client and release_client
     try:
         for line in fileinput.input('../conf/version.conf', inplace=True):
             match = re.match(r'\S?DB_VER:\s+(\S+)', line)
@@ -236,10 +239,11 @@ def write_version(silent=False):
             print(Fore.GREEN + 'Updated client version!')
         fetch_versions()
     except:
+        fileinput.close()
         print(Fore.RED + 'Error writing version.')
 
 def import_file(file):
-    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database
+    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database
     print('Importing ' + file + '...')
     os.system(updatecmd + ' < ../sql/' + file + log_errors)
     fetch_errors()
@@ -262,7 +266,7 @@ def connect():
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
             print(Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
-                create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -u ' + login + ' -p' + password + ' CREATE ' + database
+                create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
                 os.system(create_command + log_errors)
                 fetch_errors()
                 setup_db()
@@ -291,15 +295,15 @@ def backup_db(silent=False,lite=False):
             tables = ' '
             for table in player_data:
                 tables += table[:-4] + ' '
-            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                tables + '> ../sql/backups/' + database + '--lite--' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+            dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                tables + '> ../sql/backups/' + database + '-' + time.strftime('%Y%m%d-%H%M%S') + '-lite.sql'
         else:
             if current_version:
-                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                    ' > ../sql/backups/' + database + '-' + current_version + '-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + '-' + time.strftime('%Y%m%d-%H%M%S') + '-' + current_version + '.sql'
             else:
-                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -u ' + login + ' -p' + password + ' ' + database +\
-                    ' > ../sql/backups/' + database + '-full-' + time.strftime('%Y%m%d-%H%M%S') + '.sql'
+                dumpcmd = '"' + mysql_bin + 'mysqldump' + exe + '" --hex-blob --add-drop-trigger -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database +\
+                    ' > ../sql/backups/' + database + time.strftime('%Y%m%d-%H%M%S') + '-full.sql'
         os.system(dumpcmd + log_errors)
         fetch_errors()
         print(Fore.GREEN + 'Database saved!')
@@ -331,7 +335,10 @@ def adjust_mysql_bin():
     while True:
         choice = input('Please enter the path to your MySQL bin directory or press enter to check PATH.\ne.g. C:\\Program Files\\MariaDB 10.5\\bin\\\n> ').replace('\\', '/')
         if choice == '':
-            choice = os.path.dirname(distutils.spawn.find_executable('mysql')).replace('\\','/')
+            mysql_file = distutils.spawn.find_executable('mysql')
+            if not mysql_file:
+                continue
+            choice = os.path.dirname(mysql_file).replace('\\','/')
         if choice and choice[-1] != '/':
             choice = choice + '/'
         if os.path.exists(choice + 'mysql' + exe):
@@ -386,7 +393,8 @@ def run_all_migrations(silent=False):
                 return
             else:
                 backup_db()
-        os.remove('migration_errors.log')
+        if os.path.exists('migration_errors.log'):
+            os.remove('migration_errors.log')
         for migration in migrations_needed:
             print('Running migrations for ' + migration.migration_name() + '...')
             migration.migrate(cur, db)
@@ -412,18 +420,17 @@ def check_migration(migration, migrations_needed, silent=False):
 def restore_backup():
     backup_db()
     fetch_files()
-    while len(backups) > 1:
+    while len(backups):
         for i, backup in enumerate(backups):
-            if backup != '.gitignore':
-                print(Fore.GREEN + str(i) + Style.RESET_ALL + '. ' + backup)
+            print(Fore.GREEN + str(i + 1) + Style.RESET_ALL + '. ' + backup)
         choice = input('Choose a number to import, or type "delete #" to delete a file.\n> ')
         if choice.isnumeric():
             choice = int(choice)
-            if 0 < choice < len(backups):
-                backup_file = backups[choice]
+            if 0 < choice < len(backups) + 1:
+                backup_file = backups[choice - 1]
                 print(colorama.ansi.clear_screen())
                 print(Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
-                    'the DB_VER in ../conf/version.conf to the hash sequence in the filename, between \n'
+                    'the DB_VER in ../conf/version.conf to the hash sequence in the filename, after \n'
                     'the database name and the timestamp, so that express update functions properly.')
                 if input('Import ' + backup_file + '? [y/N] ').lower() == 'y':
                     import_file('backups/' + backup_file)
@@ -435,8 +442,8 @@ def restore_backup():
             choice = re.match(r'^delete (\d+)$', choice)
             if choice:
                 choice = int(choice.group(1))
-                if 0 < choice < len(backups):
-                    backup_file = backups[choice]
+                if 0 < choice < len(backups) + 1:
+                    backup_file = backups[choice - 1]
                     print(colorama.ansi.clear_screen())
                     if input('Delete ' + backup_file + '? [y/N] ').lower() == 'y':
                         os.remove('../sql/backups/' + backup_file)
