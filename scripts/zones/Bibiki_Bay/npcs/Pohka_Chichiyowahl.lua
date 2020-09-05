@@ -7,10 +7,10 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         17388,  1238, 3,    -- Fastwater F. Rod
@@ -22,8 +22,8 @@ function onTrigger(player,npc)
     tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

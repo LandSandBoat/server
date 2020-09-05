@@ -28,28 +28,28 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     local effectID = tpz.effect.CHAOS_ROLL
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
     if (player:hasStatusEffect(effectID)) then
-        return tpz.msg.basic.ROLL_ALREADY_ACTIVE,0
+        return tpz.msg.basic.ROLL_ALREADY_ACTIVE, 0
     elseif atMaxCorsairBusts(player) then
-        return tpz.msg.basic.CANNOT_PERFORM,0
+        return tpz.msg.basic.CANNOT_PERFORM, 0
     else
-        return 0,0
+        return 0, 0
     end
 end
 
-function onUseAbility(caster,target,ability,action)
+function onUseAbility(caster, target, ability, action)
     if (caster:getID() == target:getID()) then
         corsairSetup(caster, ability, action, tpz.effect.CHAOS_ROLL, tpz.job.DRK)
     end
     local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster,target,ability,action,total)
+    return applyRoll(caster, target, ability, action, total)
 end
 
 
-function applyRoll(caster,target,ability,action,total)
+function applyRoll(caster, target, ability, action, total)
     local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
     local effectpowers = {6, 8, 9, 25, 11, 13, 16, 3, 17, 19, 31, 10}
     local effectpower = effectpowers[total]

@@ -21,9 +21,9 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,1800,6568)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 6568)
 end
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.INT, 2)
     target:addMod(tpz.mod.MND, 2)
     target:addMod(tpz.mod.FOOD_MACCP, 21)

@@ -17,7 +17,7 @@ function getQuestId(mainJobId)
 
 end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     for i, wepId in pairs(BaseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(i))
@@ -39,7 +39,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local mainJobId = player:getMainJob()
     local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(mainJobId))
     local nyzulWeaponMain = isBaseNyzulWeapon(player:getEquipID(tpz.slot.MAIN))
@@ -66,10 +66,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local questId = getQuestId(option)
     if csid == 10086 then
         if option == 53 then

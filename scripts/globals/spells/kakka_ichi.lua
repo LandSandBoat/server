@@ -7,12 +7,12 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local effect = tpz.effect.STORE_TP
-    caster:addStatusEffect(effect,10,0,180)
+    caster:addStatusEffect(effect, 10, 0, 180)
     return effect
 end

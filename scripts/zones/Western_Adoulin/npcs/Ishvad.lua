@@ -4,16 +4,16 @@
 -- Type: Shop NPC
 -- !pos 44 32 125 256
 -----------------------------------
-require("scripts/globals/shop");
-local ID = require("scripts/zones/Western_Adoulin/IDs");
+require("scripts/globals/shop")
+local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     -- Standard shop
-    player:showText(npc, ID.text.ISHVAD_SHOP_TEXT);
+    player:showText(npc, ID.text.ISHVAD_SHOP_TEXT)
     local stock =
     {
         6074, 100,    -- Scroll of Indi-Poison
@@ -33,11 +33,11 @@ function onTrigger(player,npc)
         6078, 43740,  -- Scroll of Indi-VIT
         6077, 46440,  -- Scroll of Indi-DEX
     }
-    tpz.shop.general(player, stock);
-end;
+    tpz.shop.general(player, stock)
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-end;
+function onEventFinish(player, csid, option)
+end

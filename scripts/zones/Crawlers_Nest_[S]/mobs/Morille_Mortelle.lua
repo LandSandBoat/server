@@ -1,8 +1,9 @@
 -----------------------------------
--- Area: Crawler's Nest [S] (171)
+-- Area: Crawlers' Nest [S] (171)
 --   NM: Morille Mortelle
 -- !pos 59.788 -0.939 22.316 171
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -11,13 +12,14 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    mob:setMod(tpz.mod.DOUBLE_ATTACK, 20);
-    mob:setMod(tpz.mod.STORETP, 10);
-end;
+    mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(tpz.mod.STORETP, 10)
+end
 
 function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PLAGUE)
 end
 
 function onMobDeath(mob, player, isKiller)
-end;
+    tpz.hunts.checkHunt(mob, player, 515)
+end

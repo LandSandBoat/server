@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:getPool() == 4661 and mob:getHPP() <= 50
     and mob:getLocalVar("BracerMode") == 1) then
         return 0

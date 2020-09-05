@@ -2,6 +2,7 @@
 -- Area: East Ronfaure [S]
 --   NM: Myradrosh
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -10,6 +11,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 480)
 end
 
 function onMobDespawn(mob)

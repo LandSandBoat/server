@@ -9,8 +9,8 @@ require("scripts/globals/titles")
 require("scripts/globals/bcnm")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    TradeBCNM(player,npc,trade)
+function onTrade(player, npc, trade)
+    TradeBCNM(player, npc, trade)
 end
 
 function onTrigger(player, npc)
@@ -23,22 +23,22 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player,csid,option,extras)
-    EventUpdateBCNM(player,csid,option,extras)
+function onEventUpdate(player, csid, option, extras)
+    EventUpdateBCNM(player, csid, option, extras)
         return
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid)
-    -- printf("onFinish RESULT: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 
-    if (EventFinishBCNM(player,csid,option)) then
+    if (EventFinishBCNM(player, csid, option)) then
         return
     end
     if (csid == 12 and option == 1) then
         toPalaceEntrance(player)
     elseif (csid == 13) then
-        player:setCharVar("PromathiaStatus",0)
+        player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
         player:addMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
         player:addTitle(tpz.title.THE_LOST_ONE)

@@ -11,20 +11,20 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if player:getCharVar("CryingOverOnions") == 1 and npcUtil.tradeHas(trade, 1149) then
-        player:startEvent(775,0,1149)
+        player:startEvent(775, 0, 1149)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    local cryingOverOnions  = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.CRYING_OVER_ONIONS)
-    local wildCard          = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.WILD_CARD)
-    local hatInHand         = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.HAT_IN_HAND)
+    local cryingOverOnions  = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+    local wildCard          = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WILD_CARD)
+    local hatInHand         = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5 then
         player:startEvent(874) -- COP event
@@ -60,10 +60,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 774 then
         player:setCharVar("CryingOverOnions", 1)
     elseif csid == 775 and npcUtil.giveItem(player, 13136) then

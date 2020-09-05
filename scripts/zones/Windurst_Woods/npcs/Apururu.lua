@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     -- THE KIND CARDIAN
     if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 969) then
         player:startEvent(397)
@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
     local kindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
@@ -92,10 +92,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
     if csid == 137 then
@@ -146,7 +146,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 592 then
         player:setCharVar("MissionStatus", 9)
     elseif csid == 609 then
-        player:setCharVar("ShantottoCS",1)
+        player:setCharVar("ShantottoCS", 1)
         finishMissionTimeline(player, 3, csid, option)
 
     -- WINDURST 9-1: DOLL OF THE DEAD
@@ -170,7 +170,7 @@ function onEventFinish(player,csid,option)
 
     -- CAN CARDIANS CRY?
     elseif csid == 319 then
-        player:addQuest(WINDURST,tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif csid == 325 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY, {gil=5000}) then
         player:confirmTrade()
     end

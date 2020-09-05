@@ -120,25 +120,25 @@ local battlefields = {
     },
 
     [37] = {                -- TEMENOS
-        { 0, 1299,    0},   -- Northern Tower
-        { 1, 1300,    0},   -- Eastern Tower
-        { 2, 1298,    0},   -- Western Tower
-        { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
-        { 4, 1305, 1904},   -- Central 3rd Floor
-        { 5, 1304, 1905},   -- Central 2nd Floor
-        { 6, 1303, 1906},   -- Central 1st Floor
-        { 7, 1301, 2127},   -- Central Basement
+     -- { 0, 1299,    0},   -- Northern Tower
+     -- { 1, 1300,    0},   -- Eastern Tower
+     -- { 2, 1298,    0},   -- Western Tower
+     -- { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
+     -- { 4, 1305, 1904},   -- Central 3rd Floor
+     -- { 5, 1304, 1905},   -- Central 2nd Floor
+     -- { 6, 1303, 1906},   -- Central 1st Floor
+     -- { 7, 1301, 2127},   -- Central Basement
      -- { 8, 1302,    0},   -- Central Basement II
      -- { 9, 1307,    0},   -- Central 4th Floor II
     },
 
     [38] = {                -- APOLLYON
-        { 0, 1291,    0},   -- SW Apollyon
-        { 1, 1290,    0},   -- NW Apollyon
-        { 2, 1293,    0},   -- SE Apollyon
-        { 3, 1292,    0},   -- NE Apollyon
-        { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-        { 5, 1294, 2127},   -- CS Apollyon
+     -- { 0, 1291,    0},   -- SW Apollyon
+     -- { 1, 1290,    0},   -- NW Apollyon
+     -- { 2, 1293,    0},   -- SE Apollyon
+     -- { 3, 1292,    0},   -- NE Apollyon
+     -- { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
+     -- { 5, 1294, 2127},   -- CS Apollyon
      -- { 6, 1295,    0},   -- CS Apollyon II
      -- { 7, 1297,    0},   -- Central Apollyon II
     },
@@ -459,9 +459,9 @@ function checkReqs(player, npc, bfid, registrant)
     local stc = player:hasCompletedMission(SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
     local dm1 = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
     local dm2 = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-
-    local function getZM14Offset(offset)
-        return zones[tpz.zone.LALOFF_AMPHITHEATER].npc.SHIMMERING_CIRCLE_OFFSET + offset
+    
+    local function getEntranceOffset(offset)
+        return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
     -- requirements to register a battlefield
@@ -497,11 +497,11 @@ function checkReqs(player, npc, bfid, registrant)
         [ 224] = function() return ( player:hasKeyItem(tpz.ki.MOON_BAUBLE)                                                                                                  ) end, -- Quest: The Moonlit Path
         [ 225] = function() return ( windy == mi.windurst.MOON_READING and natStat == 2                                                                                     ) end, -- Windy 9-2: Moon Reading
         [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 3                                                                            ) end, -- ZM8: Return to Delkfutt's Tower
-        [ 288] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getZM14Offset(0) and not player:hasKeyItem(tpz.ki.SHARD_OF_APATHY)           ) end, -- ZM14: Ark Angels (Hume)
-        [ 289] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getZM14Offset(1) and not player:hasKeyItem(tpz.ki.SHARD_OF_COWARDICE)        ) end, -- ZM14: Ark Angels (Tarutaru)
-        [ 290] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getZM14Offset(2) and not player:hasKeyItem(tpz.ki.SHARD_OF_ENVY)             ) end, -- ZM14: Ark Angels (Mithra)
-        [ 291] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getZM14Offset(3) and not player:hasKeyItem(tpz.ki.SHARD_OF_ARROGANCE)        ) end, -- ZM14: Ark Angels (Elvaan)
-        [ 292] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getZM14Offset(4) and not player:hasKeyItem(tpz.ki.SHARD_OF_RAGE)             ) end, -- ZM14: Ark Angels (Galka)
+        [ 288] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(0) and not player:hasKeyItem(tpz.ki.SHARD_OF_APATHY)       ) end, -- ZM14: Ark Angels (Hume)
+        [ 289] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(1) and not player:hasKeyItem(tpz.ki.SHARD_OF_COWARDICE)    ) end, -- ZM14: Ark Angels (Tarutaru)
+        [ 290] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(2) and not player:hasKeyItem(tpz.ki.SHARD_OF_ENVY)         ) end, -- ZM14: Ark Angels (Mithra)
+        [ 291] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(3) and not player:hasKeyItem(tpz.ki.SHARD_OF_ARROGANCE)    ) end, -- ZM14: Ark Angels (Elvaan)
+        [ 292] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(4) and not player:hasKeyItem(tpz.ki.SHARD_OF_RAGE)         ) end, -- ZM14: Ark Angels (Galka)
         [ 293] = function() return ( dm1 == QUEST_ACCEPTED or dm2 == QUEST_ACCEPTED                                                                                         ) end, -- ZM14 Divine Might
         [ 320] = function() return ( roz == mi.zilart.THE_CELESTIAL_NEXUS                                                                                                   ) end, -- ZM16: The Celestial Nexus
         [ 416] = function() return ( player:hasKeyItem(tpz.ki.TUNING_FORK_OF_WIND)                                                                                          ) end, -- Quest: Trial by Wind
@@ -577,12 +577,14 @@ function checkReqs(player, npc, bfid, registrant)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                  ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == tpz.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
         [1156] = function() return ( toau == mi.toau.PUPPET_IN_PERIL and toauStat == 1                                                                                      ) end, -- TOAU29: Puppet in Peril
-        [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD)                                                          ) end, -- NW Apollyon
-        [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD)                                                          ) end, -- SW Apollyon
-        [1292] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD)                                                        ) end, -- NE Apollyon
-        [1293] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD)                                                        ) end, -- SE Apollyon
-        [1294] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE)                                                                                                 ) end, -- CS Apollyon
-        [1296] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE)                                                                                                 ) end, -- Central Apollyon
+        [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- NW Apollyon
+        [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)                        ) end, -- SW Apollyon
+        [1292] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- NE Apollyon
+        [1293] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- SE Apollyon
+        [1294] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and ((player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0))
+                                                                            or (player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- CS Apollyon
+        [1296] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and ((player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0))
+                                                                            or (player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- Central Apollyon
         [1298] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                                        ) end, -- Temenos Western Tower
         [1299] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                                        ) end, -- Temenos Northern Tower
         [1300] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                                        ) end, -- Temenos Eastern Tower
@@ -595,23 +597,45 @@ function checkReqs(player, npc, bfid, registrant)
 
     -- requirements to enter a battlefield already registered by a party member
     local enterReqs =
-    {
-        [ 897] = function() return ( player:hasKeyItem(tpz.ki.WHISPER_OF_THE_WYRMKING)                                                      ) end, -- Quest: The Wyrmking Descends
-        [ 928] = function() return ( player:hasCompletedMission(COP, mi.cop.ANCIENT_VOWS) or (cop == mi.cop.ANCIENT_VOWS and copStat >= 2)  ) end, -- Quest: Ouryu Cometh
-        [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD)                          ) end, -- NW Apollyon
-        [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD)                          ) end, -- SW Apollyon
-        [1292] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD)                        ) end, -- NE Apollyon
-        [1293] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE)                                                                 ) end, -- SE Apollyon
-        [1294] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE)                                                                 ) end, -- CS Apollyon
-        [1296] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE)                                                                 ) end, -- Central Apollyon
-        [1298] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Temenos Western Tower
-        [1299] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Temenos Northern Tower
-        [1300] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Temenos Eastern Tower
-        [1301] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Central Temenos Basement
-        [1303] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Central Temenos 1st Floor
-        [1304] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Central Temenos 2nd Floor
-        [1305] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Central Temenos 3rd Floor
-        [1306] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                        ) end, -- Central Temenos 4th Floor
+    {   
+        [ 641] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Follow the White Rabbit
+        [ 642] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: When Hell Freezes Over
+        [ 643] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Brothers
+        [ 644] = function() return ( player:hasKeyItem(tpz.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Holy Cow
+        [ 673] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Like the Wind
+        [ 674] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
+        [ 675] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Shell We Dance?
+        [ 676] = function() return ( player:hasKeyItem(tpz.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Totentanz
+        [ 705] = function() return ( player:hasKeyItem(tpz.ki.ASTRAL_COVENANT)                                                                              ) end, -- ENM: Test Your Mite
+        [ 738] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_2716_OPERATING_LEVER)                                                                   ) end, -- ENM: Bionic Bug
+        [ 739] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Pulling Your Strings
+        [ 740] = function() return ( player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Automaton Assault
+        [ 769] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ABANDONMENT)                                                                        ) end, -- ENM: Simulant
+        [ 801] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ANTIPATHY)                                                                          ) end, -- ENM: You Are What You Eat
+        [ 833] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ANIMUS)                                                                             ) end, -- ENM: Playing Host
+        [ 865] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ACRIMONY)                                                                           ) end, -- ENM: Pulling the Plug
+        [ 897] = function() return ( player:hasKeyItem(tpz.ki.WHISPER_OF_THE_WYRMKING)                                                                      ) end, -- Quest: The Wyrmking Descends 
+        [ 962] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Fire in the Sky
+        [ 963] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bad Seed
+        [ 964] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bugard in the Clouds
+        [ 965] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
+        [ 928] = function() return ( player:hasCompletedMission(COP, mi.cop.ANCIENT_VOWS) or (cop == mi.cop.ANCIENT_VOWS and copStat >= 2)                  ) end, -- Quest: Ouryu Cometh
+        [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- NW Apollyon
+        [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- SW Apollyon
+        [1292] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- NE Apollyon
+        [1293] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- SE Apollyon
+        [1294] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and ((player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0))
+                                                                            or (player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- CS Apollyon
+        [1296] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and ((player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0))
+                                                                            or (player:hasKeyItem(tpz.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- Central Apollyon
+        [1298] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Temenos Western Tower
+        [1299] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Temenos Northern Tower
+        [1300] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Temenos Eastern Tower
+        [1301] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Central Temenos Basement
+        [1303] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Central Temenos 1st Floor
+        [1304] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
+        [1305] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
+        [1306] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
     }
 
     -- determine whether player meets battlefield requirements
@@ -740,7 +764,7 @@ function findBattlefields(player, npc, itemId)
     end
     for k, v in pairs(zbfs) do
         if v[3] == itemId and checkReqs(player, npc, v[2], true) and not player:battlefieldAtCapacity(v[2]) then
-            mask = bit.bor(mask,math.pow(2,v[1]))
+            mask = bit.bor(mask, math.pow(2, v[1]))
         end
     end
     return mask
@@ -772,7 +796,7 @@ function getBattlefieldMaskById(player, bfid)
     if zbfs then
         for k, v in pairs(zbfs) do
             if v[2] == bfid then
-                return math.pow(2,v[1])
+                return math.pow(2, v[1])
             end
         end
     end
@@ -804,9 +828,9 @@ function TradeBCNM(player, npc, trade, onUpdate)
     local itemId
     if not trade then
         return false
-    elseif trade:getItemCount() == 3 and trade:hasItemQty(1907,1) and trade:hasItemQty(1908,1) and trade:hasItemQty(1986,1) then
+    elseif trade:getItemCount() == 3 and trade:hasItemQty(1907, 1) and trade:hasItemQty(1908, 1) and trade:hasItemQty(1986, 1) then
         itemId = -1
-    elseif trade:getItemCount() == 4 and trade:hasItemQty(1909,1) and trade:hasItemQty(1910,1) and trade:hasItemQty(1987,1) and trade:hasItemQty(1988,1) then
+    elseif trade:getItemCount() == 4 and trade:hasItemQty(1909, 1) and trade:hasItemQty(1910, 1) and trade:hasItemQty(1987, 1) and trade:hasItemQty(1988, 1) then
         itemId = -2
     else
         itemId = trade:getItemId(0)
@@ -875,7 +899,7 @@ end
 -- onEventUpdate
 -----------------------------------------------
 
-function EventUpdateBCNM(player, csid, option, extras, entrance)
+function EventUpdateBCNM(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
 
     -- requesting a battlefield
@@ -898,7 +922,23 @@ function EventUpdateBCNM(player, csid, option, extras, entrance)
         local clearTime = 1
         local name = "Meme"
         local partySize = 1
-
+        switch (battlefieldId): caseof 
+        {
+            [1290] = function() area = 2 end, -- NW_Apollyon
+            [1291] = function() area = 1 end, -- SW_Apollyon
+            [1292] = function() area = 4 end, -- NE_Apollyon
+            [1293] = function() area = 3 end, -- SE_Apollyon
+            [1294] = function() area = 6 end, -- CS_Apollyon
+            [1296] = function() area = 5 end, -- Central_Apollyon
+            [1298] = function() area = 3 end, -- Temenos_Western_Tower
+            [1299] = function() area = 1 end, -- Temenos_Northern_Tower
+            [1300] = function() area = 2 end, -- Temenos_Eastern_Tower
+            [1301] = function() area = 8 end, -- Central_Temenos_Basement
+            [1303] = function() area = 7 end, -- Central_Temenos_1st_Floor
+            [1304] = function() area = 6 end, -- Central_Temenos_2nd_Floor
+            [1305] = function() area = 5 end, -- Central_Temenos_3rd_Floor
+            [1306] = function() area = 4 end, -- Central_Temenos_4th_Floor
+        }
         local result = tpz.battlefield.returnCode.REQS_NOT_MET
         result = player:registerBattlefield(id, area)
         local status = tpz.battlefield.status.OPEN

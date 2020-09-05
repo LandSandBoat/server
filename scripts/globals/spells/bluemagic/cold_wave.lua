@@ -18,11 +18,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffect = tpz.effect.FROST
     local dINT = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
     local params = {}
@@ -56,7 +56,7 @@ function onSpellCast(caster,target,spell)
             end
                 spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
             local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
-            target:addStatusEffect(typeEffect,DOT,3,ELEMENTAL_DEBUFF_DURATION)
+            target:addStatusEffect(typeEffect, DOT, 3, ELEMENTAL_DEBUFF_DURATION)
         end
     else
         spell:setMsg(tpz.msg.basic.MAGIC_RESIST)

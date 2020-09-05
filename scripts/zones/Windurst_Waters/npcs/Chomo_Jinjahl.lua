@@ -10,18 +10,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local guildSkillId = tpz.skill.COOKING
     local stock = tpz.shop.generalGuildStock[guildSkillId]
     tpz.shop.generalGuild(player, stock, guildSkillId)
-    player:showText(npc,ID.text.CHOMOJINJAHL_SHOP_DIALOG)
+    player:showText(npc, ID.text.CHOMOJINJAHL_SHOP_DIALOG)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

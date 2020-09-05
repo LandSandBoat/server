@@ -3,12 +3,12 @@
 --  Mob: Ark Angel EV
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onMobInitialize(mob)
-    mob:addMod(tpz.mod.REGAIN, 50);
-end;
+    mob:addMod(tpz.mod.REGAIN, 50)
+end
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -20,7 +20,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-4, mobid+3 do
@@ -29,7 +29,7 @@ function onMobEngaged(mob,target)
             m:updateEnmity(target)
         end
     end
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end
