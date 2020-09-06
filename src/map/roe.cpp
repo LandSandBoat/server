@@ -111,6 +111,7 @@ namespace roeutils
 
             lua_pop(L, 1);
         }
+        ShowInfo("\nRoEUtils: %d record entries parsed & available.", RoeBitmaps.ImplementedRecords.count());
         return 0;
     }
 

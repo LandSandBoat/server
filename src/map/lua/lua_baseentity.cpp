@@ -9191,7 +9191,7 @@ inline int32 CLuaBaseEntity::isLevelSync(lua_State* L)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
     if (PChar->PParty)
-        lua_pushboolean(L, PChar->PParty->GetSyncTarget() != PChar);
+        lua_pushboolean(L, (PChar->PParty->GetSyncTarget() && PChar->PParty->GetSyncTarget() != PChar) );
     else
         lua_pushboolean(L, false);
 

@@ -40,11 +40,11 @@ checks.mobxp = function(self, player, params)  -- Mob yields xp
      return (params.mob and player:checkKillCredit(params.mob)) and true or false
 end
 
-checks.dmgmin = function(self, player, params)  -- Mob yields xp
+checks.dmgmin = function(self, player, params)  -- Minimum Dmg Dealt/Taken
      return (params.dmg and params.dmg >= self.reqs.dmgmin) and true or false
 end
 
-checks.dmgmax = function(self, player, params)  -- Mob yields xp
+checks.dmgmax = function(self, player, params)  -- Maximum Dmg Dealt/Taken
      return (params.dmg and params.dmg <= self.reqs.dmgmax) and true or false
 end
 
@@ -58,6 +58,10 @@ end
 
 checks.itemid = function(self, player, params)  -- itemid in set
      return (params.itemid and self.reqs.itemid[params.itemid]) and true or false
+end
+
+checks.levelsync = function(self, player, params)  -- Player is Level Sync'd
+     return self.reqs.levelsync and player:isLevelSync() and true or false
 end
 
 
@@ -195,6 +199,20 @@ tpz.roe.records =
         goal = 750,
         reqs = { mobxp = true },
         reward = { sparks = 5000, xp = 10000 , item = { 6183 } },
+    },
+
+    [15  ] = { -- Level Sync to Vanquish I
+        trigger = triggers.mobkill,
+        goal = 200,
+        reqs = { mobxp = true , levelsync = true},
+        reward = { sparks = 2000, xp = 6000 , unity = 200 },
+    },
+
+    [117 ] = { -- Level Sync to Vanquish II
+        trigger = triggers.mobkill,
+        goal = 20,
+        reqs = { mobxp = true , levelsync = true},
+        reward = { sparks = 200, xp = 600 , unity = 20 , repeatable = true },
     },
 
     [16  ] = { -- Deal 500+ Damage
