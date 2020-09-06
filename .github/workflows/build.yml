@@ -100,7 +100,7 @@ jobs:
           "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=x64
 
   Style_Checks:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     if: github.event_name == 'pull_request'
     steps:
     - uses: actions/checkout@v1
