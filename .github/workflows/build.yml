@@ -100,35 +100,38 @@ jobs:
           "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=x64
 
   Style_Checks:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     if: github.event_name == 'pull_request'
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format-10 luajit-5.1-dev luarocks
+        sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
     - name: Lua Checks
       run: |
         sh travis_lua.sh
-    - name: Clang Format
+    - name: Clang Format (C++ files)
       run: |
-        clang-format-10 --version
+        clang-format --version
+        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
         echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
+        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
         echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | clang-format-diff-10 -p1`
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
 
         if [ -z "$diff" ]
         then
             echo "Diff formatting looks good!"
         else
             echo "Problem with formatting!"
-            echo "To fix this locally, run: git diff -U0 --no-color base..HEAD | clang-format-diff-10 -p1 -i"
-            echo "Where replacing base with whatever branch your PR is targetting, ie. release"
-
-            cat "$diff"
+            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
+            echo "Windows and Linux installation instructions for these tools are available here:"
+            echo "https://github.com/project-topaz/topaz/wiki/Developer-Workflow"
+            echo "" 
+            echo "$diff" 
 
             exit -1
         fi
@@ -167,6 +170,7 @@ jobs:
           echo -e "Importing $f into the database..."
           mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
         done
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Copy confs
       run: |
         cp conf/default/* conf/
