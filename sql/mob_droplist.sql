@@ -4596,10 +4596,9 @@ INSERT INTO `mob_droplist` VALUES (907,0,0,1000,928,270);
 INSERT INTO `mob_droplist` VALUES (907,2,0,1000,17316,0);
 INSERT INTO `mob_droplist` VALUES (907,0,0,1000,17316,80);
 INSERT INTO `mob_droplist` VALUES (907,0,0,1000,18139,1000);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,928,400);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,2384,80);
-INSERT INTO `mob_droplist` VALUES (908,2,0,1000,17316,0);
-INSERT INTO `mob_droplist` VALUES (908,0,0,1000,17316,300);
+INSERT INTO `mob_droplist` VALUES (908,0,0,1000,928,400); -- Friar's Lantern: pinch_of_bomb_ash
+INSERT INTO `mob_droplist` VALUES (908,2,0,1000,17316,0); -- bomb_arm
+INSERT INTO `mob_droplist` VALUES (908,0,0,1000,17316,300); -- bomb_arm
 INSERT INTO `mob_droplist` VALUES (909,0,0,1000,928,270);
 INSERT INTO `mob_droplist` VALUES (910,0,0,1000,847,460);
 INSERT INTO `mob_droplist` VALUES (910,0,0,1000,3088,220);
@@ -10463,12 +10462,13 @@ INSERT INTO `mob_droplist` VALUES (1965,0,0,1000,3087,170);
 INSERT INTO `mob_droplist` VALUES (1965,0,0,1000,5568,80);
 INSERT INTO `mob_droplist` VALUES (1965,2,0,1000,5568,0);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,644,30);
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,12362,190);
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,17649,810);
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,17928,70);
+INSERT INTO `mob_droplist` VALUES (1966,1,1,1000,12362,190);
+INSERT INTO `mob_droplist` VALUES (1966,1,1,1000,17649,810);
+INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,17928,240);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,1432,970);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,645,50);
 INSERT INTO `mob_droplist` VALUES (1966,2,0,1000,656,0);
+INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,658,30);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,700,50);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,702,130);
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,703,150);
@@ -16547,7 +16547,10 @@ INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,16990,50);  -- Ancient Goobbue;
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,919,1000);  -- Ancient Goobbue; Boyahda Moss
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1264,1000); -- Ancient Goobbue; Grt. Boyahda Moss
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue; Tree Cuttings
-INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,637,150);   -- Panna Cotta; Slime Oil; Common
+INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,16031,150); -- Affinity Earring (COMMON)
+INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,928,400); -- Friar's Lantern (grow): pinch_of_bomb_ash
+INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,2384,80); -- smoke-filled_flask
+INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,637,150);   -- Panna Cotta; Slime Oil; Common
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -2,7 +2,7 @@
 -- Area: Misareaux Coast
 --  NPC: Dilapidated Gate
 -- Entrance to Riverne Site #B01
--- !pos -259 -30 276 178
+-- !pos -259 -30 276 25
 -----------------------------------
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
