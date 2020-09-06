@@ -298,6 +298,11 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
         return false;
     }
 
+    if (getMobMod(MOBMOD_NO_LINK) > 0)
+    {
+        return false;
+    }
+
     if (!PAI->PathFind->CanSeePoint(*pos))
     {
         return false;
