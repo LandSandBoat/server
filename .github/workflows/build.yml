@@ -115,7 +115,7 @@ jobs:
         sh travis_lua.sh
     - name: Clang Format (C++ files)
       run: |
-        clang-format-10 --version
+        clang-format --version
         echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
         echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
         echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
