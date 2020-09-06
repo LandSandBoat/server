@@ -2186,9 +2186,11 @@ namespace charutils
         }
         if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
         {
-            // If the weapon ISN'T an wind based instrument or an string based instrument
-            if (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT)
+            if (!PItem || !PItem->isType(ITEM_EQUIPMENT) ||
+                ( ((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT &&
+                  ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT ))
             {
+                // If the weapon ISN'T a wind based instrument or a string based instrument
                 PChar->health.tp = 0;
             }
 
