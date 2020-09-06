@@ -120,14 +120,14 @@ jobs:
         echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
         echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
         echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.ref }} -- '*.cpp' '*.h' | clang-format-diff -p1`
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1`
 
         if [ -z "$diff" ]
         then
             echo "Diff formatting looks good!"
         else
             echo "Problem with formatting!"
-            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.ref }} -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
+            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
 
             echo "$diff" 
 
