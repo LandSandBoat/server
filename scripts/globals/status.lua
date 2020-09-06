@@ -1111,6 +1111,7 @@ tpz.mod =
     AMNESIARES                      = 253,
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
+    STATUSRES                       = 958, -- "Resistance to All Status Ailments"
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
@@ -1558,10 +1559,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-
-    -- SPARE = 958, -- stuff
-    -- SPARE = 959, -- stuff
-    -- SPARE = 960, -- stuff
+    -- SPARE = 964, -- stuff
+    -- SPARE = 965, -- stuff
+    -- SPARE = 966, -- stuff
 }
 
 tpz.latent =
