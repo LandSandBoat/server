@@ -113,22 +113,23 @@ jobs:
     - name: Lua Checks
       run: |
         sh travis_lua.sh
-    - name: Clang Format
+    - name: Clang Format (C++ files)
       run: |
         clang-format-10 --version
+        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
         echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
+        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
         echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | clang-format-diff-10 -p1`
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.ref }} -- '*.cpp' '*.h' | clang-format-diff -p1`
 
         if [ -z "$diff" ]
         then
             echo "Diff formatting looks good!"
         else
             echo "Problem with formatting!"
-            echo "To fix this locally, run: git diff -U0 --no-color base..HEAD | clang-format-diff-10 -p1 -i"
-            echo "Where replacing base with whatever branch your PR is targetting, ie. release"
+            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.ref }} -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
 
-            cat "$diff"
+            echo "$diff" 
 
             exit -1
         fi
@@ -167,6 +168,13 @@ jobs:
           echo -e "Importing $f into the database..."
           mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
         done
+    - name: Create account
+      run: |
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO accounts (`id`, `login`, `password`) VALUES (1, 'test', PASSWORD('test'));"
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel) VALUES(1, 1, 'Test', 139, 0, 5);"
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO char_look(charid, face, race, size) VALUES(1, 1, 1, 1);"
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO char_stats(charid, mjob, mlvl, sjob, slvl) VALUES(1, 4, 75, 3, 37);"
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "UPDATE char_jobs SET blm = 75, whm = 37 WHERE charid = 1;"
     - name: Copy confs
       run: |
         cp conf/default/* conf/
