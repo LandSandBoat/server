@@ -120,7 +120,7 @@ jobs:
         echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
         echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
         echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1`
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
 
         if [ -z "$diff" ]
         then
@@ -170,13 +170,7 @@ jobs:
           echo -e "Importing $f into the database..."
           mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
         done
-    - name: Create account
-      run: |
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO accounts (`id`, `login`, `password`) VALUES (1, 'test', PASSWORD('test'));"
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel) VALUES(1, 1, 'Test', 139, 0, 5);"
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO char_look(charid, face, race, size) VALUES(1, 1, 1, 1);"
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "INSERT INTO char_stats(charid, mjob, mlvl, sjob, slvl) VALUES(1, 4, 75, 3, 37);"
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -f -e "UPDATE char_jobs SET blm = 75, whm = 37 WHERE charid = 1;"
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Copy confs
       run: |
         cp conf/default/* conf/
