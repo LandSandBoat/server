@@ -1047,6 +1047,7 @@ tpz.mod =
     UDMGRANGE                       = 390,
     CRITHITRATE                     = 165,
     CRIT_DMG_INCREASE               = 421,
+    RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
     ENEMYCRITRATE                   = 166,
     CRIT_DEF_BONUS                  = 908, -- Reduces crit hit damage
     MAGIC_CRITHITRATE               = 562,
@@ -1559,9 +1560,11 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 964, -- stuff
+
+
     -- SPARE = 965, -- stuff
     -- SPARE = 966, -- stuff
+    -- SPARE = 967, -- stuff
 }
 
 tpz.latent =
