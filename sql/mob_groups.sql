@@ -975,7 +975,7 @@ INSERT INTO `mob_groups` VALUES (44,4531,27,'Aqueduct_Spider',330,0,3006,0,0,84,
 
 INSERT INTO `mob_groups` VALUES (1,1481,28,'Gazer',960,0,941,0,0,48,50,0);
 INSERT INTO `mob_groups` VALUES (2,1804,28,'Greater_Gaylas',960,0,1227,0,0,46,48,0);
-INSERT INTO `mob_groups` VALUES (3,3770,28,'Stegotaur',792,0,2333,0,0,47,49,0);
+INSERT INTO `mob_groups` VALUES (3,6638,28,'Stegotaur',792,0,2333,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (4,2770,28,'Mummy',960,0,1754,0,0,54,56,0);
 INSERT INTO `mob_groups` VALUES (5,2407,28,'Lich',960,0,958,0,0,54,56,0);
 INSERT INTO `mob_groups` VALUES (6,476,28,'Blubber_Eyes',960,0,315,0,0,57,59,0);
@@ -9993,7 +9993,7 @@ INSERT INTO `mob_groups` VALUES (38,5223,155,'Demon_Condemner',960,0,0,0,0,82,83
 INSERT INTO `mob_groups` VALUES (39,1172,155,'Eclipse_Demon',960,0,0,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (40,2078,155,'Inferno_Demon',960,0,0,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (41,51,155,'Adjudicator_Demon',960,0,0,0,0,82,83,0);
-INSERT INTO `mob_groups` VALUES (42,3845,155,'Tarbotaur',960,0,0,0,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (42,6639,155,'Titanotaur',960,0,0,0,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (43,913,155,'Dark_Elemental',0,4,0,0,0,81,81,0);
 INSERT INTO `mob_groups` VALUES (44,2043,155,'Ice_Elemental',0,4,0,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (45,396,155,'Berserker_Demon',960,0,0,0,0,82,83,0);
