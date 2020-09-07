@@ -4020,7 +4020,7 @@ INSERT INTO `mob_groups` VALUES (2934,3565,80,'Shadowhand',0,128,2215,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (2935,3566,80,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2936,3569,80,'Shadowhorn',0,128,2220,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (2937,3570,80,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2938,3576,80,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (2938,6608,80,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (2939,3584,80,'Shantotto',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2940,3627,80,'Silver_Fox_Archer',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2941,3730,80,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
@@ -4180,7 +4180,7 @@ INSERT INTO `mob_groups` VALUES (3078,3565,81,'Shadowhand',0,128,2216,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (3079,3566,81,'Shadowhand_Cuirassier',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3080,3569,81,'Shadowhorn',0,128,2221,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3081,3570,81,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3082,3576,81,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (3082,6608,81,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3085,3730,81,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3086,3767,81,'Steelhide_Protector',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3087,3920,81,'Time_Bomb',0,128,0,0,0,0,0,0);
@@ -4297,7 +4297,7 @@ INSERT INTO `mob_groups` VALUES (99,3565,82,'Shadowhand',0,128,2217,0,0,75,80,0)
 INSERT INTO `mob_groups` VALUES (100,3566,82,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (101,3563,82,'Shadowfang',0,128,2213,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (102,3564,82,'Shadowfang_Void',0,128,0,0,0,50,50,0);
-INSERT INTO `mob_groups` VALUES (103,3576,82,'Shadow_Eye',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (103,6608,82,'Shadoweye',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (104,3562,82,'Shadoweye_Gnat',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (105,1408,82,'Fortification',0,128,463,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (106,3366,82,'Rikoh_Wahcondalo',0,128,0,0,0,1,1,0);
@@ -4512,7 +4512,7 @@ INSERT INTO `mob_groups` VALUES (3297,1349,83,'Five_Moons',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3327,2252,83,'Kingslayer_Doggvdegg',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3331,2415,83,'Lilisette',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3337,2839,83,'Nicolaus',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3380,3576,83,'Shadow_Eye',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (3380,6608,83,'Shadoweye',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3390,3920,83,'Time_Bomb',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3396,4249,83,'Volker',0,128,0,0,0,0,0,0);
 
@@ -4661,7 +4661,7 @@ INSERT INTO `mob_groups` VALUES (3525,3565,84,'Shadowhand',0,128,2216,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (3526,3566,84,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3527,3569,84,'Shadowhorn',0,128,2221,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3528,3570,84,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3529,3576,84,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (3529,6608,84,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3532,3730,84,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3534,3767,84,'Steelhide_Protector',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3535,3920,84,'Time_Bomb',0,0,0,0,0,0,0,0);
@@ -4839,7 +4839,7 @@ INSERT INTO `mob_groups` VALUES (3682,3565,85,'Shadowhand',0,128,2219,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (3683,3566,85,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3684,3569,85,'Shadowhorn',0,128,2220,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3685,3570,85,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3686,3576,85,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (3686,6608,85,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3687,3588,85,'Shatterskull_Mippdapp',86400,0,2232,0,0,84,86,0);
 INSERT INTO `mob_groups` VALUES (3688,3672,85,'Slitherword_Razghogg',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3689,3730,85,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
@@ -5015,7 +5015,7 @@ INSERT INTO `mob_groups` VALUES (3844,3565,87,'Shadowhand',0,128,2216,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (3845,3566,87,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3846,3569,87,'Shadowhorn',0,128,2221,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3847,3570,87,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3848,3576,87,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (3848,6608,87,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3849,3624,87,'Silencing_Tube',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3850,3700,87,'Sonia',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3851,3790,87,'Striking_Bull',1,0,0,0,0,1,1,0);
@@ -5182,7 +5182,7 @@ INSERT INTO `mob_groups` VALUES (3992,3565,88,'Shadowhand',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3993,3566,88,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3994,3569,88,'Shadowhorn',0,128,2223,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3995,3570,88,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3996,3576,88,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (3996,6608,88,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4000,3790,88,'Striking_Bull',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4001,3920,88,'Time_Bomb',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4002,3926,88,'Titania',1,0,0,0,0,1,1,0);
@@ -5353,7 +5353,7 @@ INSERT INTO `mob_groups` VALUES (4147,3565,89,'Shadowhand',0,128,2218,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (4148,3566,89,'Shadowhand_Cuirassier',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4149,3569,89,'Shadowhorn',0,128,2224,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4150,3570,89,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4151,3576,89,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (4151,6608,89,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4156,3675,89,'Small_Box',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4158,3920,89,'Time_Bomb',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4159,3926,89,'Titania',0,128,0,0,0,1,1,0);
@@ -5535,7 +5535,7 @@ INSERT INTO `mob_groups` VALUES (4293,3565,90,'Shadowhand',0,128,2218,0,0,60,60,
 INSERT INTO `mob_groups` VALUES (4294,3566,90,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (4295,3569,90,'Shadowhorn',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (4296,3570,90,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4297,3576,90,'Shadow_Eye',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (4297,6608,90,'Shadoweye',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4300,3700,90,'Sonia',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4308,3920,90,'Time_Bomb',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4309,3926,90,'Titania',0,128,0,0,0,60,60,0);
@@ -5699,7 +5699,7 @@ INSERT INTO `mob_groups` VALUES (4455,3565,91,'Shadowhand',0,128,2217,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (4456,3566,91,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (4457,3569,91,'Shadowhorn',0,128,2224,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4458,3570,91,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4459,3576,91,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (4459,6608,91,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4463,3790,91,'Striking_Bull',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4464,3920,91,'Time_Bomb',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4465,3926,91,'Titania',1,0,0,0,0,1,1,0);
@@ -5860,7 +5860,7 @@ INSERT INTO `mob_groups` VALUES (4494,311,92,'Azima',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4540,1349,92,'Five_Moons',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4574,2839,92,'Nicolaus',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4592,3354,92,'Republic_Supplier',1,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (4603,3576,92,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (4603,6608,92,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4621,4498,92,'Zeid',0,0,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
@@ -6011,7 +6011,7 @@ INSERT INTO `mob_groups` VALUES (4759,3565,94,'Shadowhand',0,128,2217,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (4760,3566,94,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (4761,3569,94,'Shadowhorn',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4762,3570,94,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4763,3576,94,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (4763,6608,94,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4764,3913,94,'Thunder_Fiend',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4765,3926,94,'Titania',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4766,4061,94,'Two_of_Cups',0,0,0,0,0,0,0,0);
@@ -6175,7 +6175,7 @@ INSERT INTO `mob_groups` VALUES (4902,3565,95,'Shadowhand',0,128,2219,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (4903,3566,95,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4904,3569,95,'Shadowhorn',0,128,2224,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4905,3570,95,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4906,3576,95,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (4906,6608,95,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (4907,3584,95,'Shantotto',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (4908,3913,95,'Thunder_Fiend',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (4909,3920,95,'Time_Bomb',0,0,0,0,0,0,0,0);
@@ -6326,7 +6326,7 @@ INSERT INTO `mob_groups` VALUES (5044,3565,96,'Shadowhand',0,128,2216,0,0,60,60,
 INSERT INTO `mob_groups` VALUES (5045,3566,96,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5046,3569,96,'Shadowhorn',0,128,2221,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5047,3570,96,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (5048,3576,96,'Shadow_Eye',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (5048,6608,96,'Shadoweye',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5050,3913,96,'Thunder_Fiend',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5051,3920,96,'Time_Bomb',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5052,3926,96,'Titania',0,128,0,0,0,60,60,0);
@@ -6485,7 +6485,7 @@ INSERT INTO `mob_groups` VALUES (5191,3565,97,'Shadowhand',0,128,2215,0,0,60,60,
 INSERT INTO `mob_groups` VALUES (5192,3566,97,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5193,3569,97,'Shadowhorn',0,128,2225,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5194,3570,97,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (5195,3576,97,'Shadow_Eye',0,128,0,0,0,50,50,0);
+INSERT INTO `mob_groups` VALUES (5195,6608,97,'Shadoweye',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (5199,3913,97,'Thunder_Fiend',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5200,3920,97,'Time_Bomb',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5201,3926,97,'Titania',1,0,0,0,0,1,1,0);
@@ -6644,7 +6644,7 @@ INSERT INTO `mob_groups` VALUES (5346,3565,98,'Shadowhand',0,128,2219,0,0,60,60,
 INSERT INTO `mob_groups` VALUES (5347,3566,98,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5348,3569,98,'Shadowhorn',0,128,2222,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (5349,3570,98,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (5350,3576,98,'Shadow_Eye',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (5350,6608,98,'Shadoweye',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5351,3584,98,'Shantotto',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5354,3912,98,'Thunder_Elemental',330,4,2410,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (5355,3913,98,'Thunder_Fiend',1,0,0,0,0,1,1,0);
@@ -6825,7 +6825,7 @@ INSERT INTO `mob_groups` VALUES (155,291,99,'Auroral_Alicorn',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5433,1314,99,'Federation_Dispenser',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (5447,2065,99,'Imp',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5483,3387,99,'Romaa_Mihgo',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5495,3576,99,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (5495,6608,99,'Shadoweye',0,128,0,0,0,75,80,0);
 
 -- ------------------------------------------------------------
 -- West_Ronfaure (Zone 100)
@@ -9015,7 +9015,7 @@ INSERT INTO `mob_groups` VALUES (7359,3569,136,'Shadowhorn',1,0,2221,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7360,3570,136,'Shadowhorn_Stormer',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7361,3573,136,'Shadowwing',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7362,3574,136,'Shadowwing_Infuriator',1,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (7363,3576,136,'Shadow_Eye',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (7363,6608,136,'Shadoweye',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7365,3621,136,'Siege_Turret',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7366,3644,136,'Skeleton_Escort',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7367,3767,136,'Steelhide_Protector',1,0,0,0,0,1,1,0);
@@ -9175,7 +9175,7 @@ INSERT INTO `mob_groups` VALUES (7510,3569,137,'Shadowhorn',1,0,2222,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7511,3570,137,'Shadowhorn_Stormer',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7512,3571,137,'Shadowsoul',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7513,3572,137,'Shadowsoul_Devourer',1,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (7514,3576,137,'Shadow_Eye',1,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (7514,6608,137,'Shadoweye',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7515,3579,137,'Shadow_Lord',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7516,3621,137,'Siege_Turret',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (7517,3644,137,'Skeleton_Escort',1,0,0,0,0,1,1,0);
@@ -9239,7 +9239,7 @@ INSERT INTO `mob_groups` VALUES (37,5225,138,'Soulsearer_Demon',960,0,0,0,0,85,8
 INSERT INTO `mob_groups` VALUES (38,5224,138,'Demon_Suppressor',960,0,0,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (39,996,138,'Demon_Warrior',960,0,0,0,0,85,88,0);
 INSERT INTO `mob_groups` VALUES (40,996,138,'Demon_Warrior',960,0,0,0,0,85,88,0);
-INSERT INTO `mob_groups` VALUES (41,5226,138,'Doom_Lens',960,0,0,0,9000,84,85,0);
+INSERT INTO `mob_groups` VALUES (41,6607,138,'Doom_Lens',960,0,0,0,9000,84,85,0);
 INSERT INTO `mob_groups` VALUES (42,994,138,'Demons_Elemental',0,128,0,0,999,80,83,0);
 INSERT INTO `mob_groups` VALUES (7536,1,138,'1st_Gold_Musketeer',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7537,7,138,'2nd_Legionnaire',0,0,0,0,0,0,0,0);
@@ -10552,7 +10552,7 @@ INSERT INTO `mob_groups` VALUES (8697,3565,164,'Shadowhand',0,128,2216,0,0,75,80
 INSERT INTO `mob_groups` VALUES (8698,3566,164,'Shadowhand_Cuirassier',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (8699,3569,164,'Shadowhorn',0,128,2221,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (8700,3570,164,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (8701,3576,164,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (8701,6608,164,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (8703,3913,164,'Thunder_Fiend',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8704,3926,164,'Titania',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8705,4081,164,'Ulla',1,0,0,0,0,1,1,0);
@@ -10612,7 +10612,7 @@ INSERT INTO `mob_groups` VALUES (16,1537,166,'Giant_Scorpion',792,0,972,0,0,38,4
 INSERT INTO `mob_groups` VALUES (17,374,166,'Bat_Eye',792,0,246,0,0,42,44,0);
 INSERT INTO `mob_groups` VALUES (18,1912,166,'Hecteyes',960,0,1288,0,0,31,34,0);
 INSERT INTO `mob_groups` VALUES (19,4574,166,'Mucoid_Mass',6000,0,3016,0,0,45,48,0);
-INSERT INTO `mob_groups` VALUES (20,1264,166,'Evil_Eye',330,0,0,0,0,87,92,0);
+INSERT INTO `mob_groups` VALUES (20,6606,166,'Hovering_Oculus',330,0,0,0,0,87,92,0);
 INSERT INTO `mob_groups` VALUES (21,6459,166,'Bilesucker',330,0,0,0,0,87,92,0);
 INSERT INTO `mob_groups` VALUES (22,1637,166,'Goblin_Bandit',330,0,0,0,0,86,90,0);
 INSERT INTO `mob_groups` VALUES (23,1664,166,'Goblin_Freesword',330,0,0,0,0,88,90,0);
@@ -10878,7 +10878,7 @@ INSERT INTO `mob_groups` VALUES (8967,3565,171,'Shadowhand',0,128,2216,0,0,75,80
 INSERT INTO `mob_groups` VALUES (8968,3566,171,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8969,3569,171,'Shadowhorn',0,128,2221,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (8970,3570,171,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (8971,3576,171,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (8971,6608,171,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (8973,3926,171,'Titania',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8974,4081,171,'Ulla',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8975,4118,171,'Vahi',1,0,0,0,0,1,1,0);
@@ -11105,7 +11105,7 @@ INSERT INTO `mob_groups` VALUES (9162,3565,175,'Shadowhand',0,128,0,0,0,75,80,0)
 INSERT INTO `mob_groups` VALUES (9163,3566,175,'Shadowhand_Cuirassier',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (9164,3569,175,'Shadowhorn',0,128,2225,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (9165,3570,175,'Shadowhorn_Stormer',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (9166,3576,175,'Shadow_Eye',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (9166,6608,175,'Shadoweye',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (9168,3730,175,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (9169,3767,175,'Steelhide_Protector',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (9170,3873,175,'Temple_Knight',1,0,0,0,0,1,1,0);
