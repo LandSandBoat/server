@@ -9954,7 +9954,7 @@ INSERT INTO `mob_groups` VALUES (8179,2904,154,'Noillurie',0,0,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (1,763,155,'Cointeach',960,0,0,0,9999,79,82,0);
 INSERT INTO `mob_groups` VALUES (2,2950,155,'Ogler',960,0,0,0,9999,80,82,0);
-INSERT INTO `mob_groups` VALUES (3,1045,155,'Dire_Gargouille',960,0,665,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (3,6635,155,'Gnarled_Gargouille',960,0,665,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (4,5234,155,'Errand_Imp',960,0,0,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (5,6298,155,'Orcish_Prophetess',960,0,1871,0,9999,81,82,0);
 INSERT INTO `mob_groups` VALUES (6,6288,155,'Orcish_Dreadnought',960,0,1895,0,0,81,82,0);
@@ -13847,7 +13847,7 @@ INSERT INTO `mob_groups` VALUES (64,5686,289,'Kammavacas_Murex',0,128,0,0,99999,
 INSERT INTO `mob_groups` VALUES (65,5687,289,'Kammavacas_Amoeban',0,128,0,0,99999,123,123,0);
 INSERT INTO `mob_groups` VALUES (66,5688,289,'Pakecet',0,128,0,0,99999,123,124,0);
 INSERT INTO `mob_groups` VALUES (67,5689,289,'Pakecets_Pugil',0,128,0,0,0,123,123,0);
-INSERT INTO `mob_groups` VALUES (68,5650,289,'Eschan_Gargouille',0,128,0,0,99999,125,125,0);
+INSERT INTO `mob_groups` VALUES (68,5690,289,'Byakko-Escha',0,128,0,0,99999,125,125,0);
 INSERT INTO `mob_groups` VALUES (69,5691,289,'Seiryu-Escha',0,128,0,0,99999,125,125,0);
 INSERT INTO `mob_groups` VALUES (70,5692,289,'Suzaku-Escha',0,128,0,0,99999,125,125,0);
 INSERT INTO `mob_groups` VALUES (71,237,289,'Ark_Angel_HM',0,128,0,0,0,124,124,0);
