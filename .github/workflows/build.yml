@@ -2,7 +2,15 @@ name: build
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - release
+      - canary
+      - feature/**
+    types:
+      - opened
+      - synchronize
+      - reopened
+
   push:
     branches:
       - release
