@@ -572,9 +572,13 @@ uint16 CBattleEntity::ATT()
     {
         ATT += (STR() * 3) / 4;
     }
+    else if (weapon && weapon->isHandToHand())
+    {
+        ATT += (STR() * 5) / 8;
+    }
     else
     {
-        ATT += (STR()) / 2;
+        ATT += (STR() * 3) / 4;
     }
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
@@ -608,7 +612,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
     {
         return 0;
     }
-    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR() / 2;
+    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
     return ATT + (ATT * m_modStat[Mod::RATTP] / 100) +
         std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
 }
@@ -628,7 +632,7 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
     }
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
-    acc += AGI() / 2;
+    acc += (AGI() * 3) / 4;
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
@@ -677,7 +681,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else
         {
-            ACC += (int16)(DEX() * 0.5);
+            ACC += (int16)(DEX() * 0.75);
         }
         ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
         auto PChar = dynamic_cast<CCharEntity *>(this);
