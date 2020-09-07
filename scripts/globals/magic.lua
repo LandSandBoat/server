@@ -455,6 +455,7 @@ end
 -- target has to the given effect (stun, sleep, etc..)
 function getEffectResistance(target, effect)
     local effectres = 0
+    local statusres = target:getMod(tpz.mod.STATUSRES)
     if (effect == tpz.effect.SLEEP_I or effect == tpz.effect.SLEEP_II) then
         effectres = tpz.mod.SLEEPRES
     elseif (effect == tpz.effect.LULLABY) then
@@ -488,10 +489,10 @@ function getEffectResistance(target, effect)
     end
 
     if (effectres ~= 0) then
-        return target:getMod(effectres)
+        return target:getMod(effectres) + statusres
     end
 
-    return 0
+    return statusres
 end
 
 -- Returns the bonus magic accuracy for any spell

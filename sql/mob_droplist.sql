@@ -16550,6 +16550,7 @@ INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,1000); -- Ancient Goobbue;
 INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,16031,150); -- Affinity Earring (COMMON)
 INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,928,400); -- Friar's Lantern (grow): pinch_of_bomb_ash
 INSERT INTO `mob_droplist` VALUES (3143,0,0,1000,2384,80); -- smoke-filled_flask
+INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,637,150);   -- Panna Cotta; Slime Oil; Common
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
