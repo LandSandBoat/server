@@ -481,13 +481,13 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         }
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, CEntityAnimationPacket::Fade_Out));
     }
-    // assume its either a player or ally and remove any enmity
-    if (PEntity->objtype != TYPE_NPC)
+
+    // Remove enmity from valid battle entities
+    if (auto PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity))
     {
-        auto entity = static_cast<CBattleEntity*>(PEntity);
-        entity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-        entity->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-        ClearEnmityForEntity(entity);
+        PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+        PBattleEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        ClearEnmityForEntity(PBattleEntity);
     }
 
     PEntity->PBattlefield = nullptr;
