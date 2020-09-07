@@ -3855,7 +3855,7 @@ INSERT INTO `mob_groups` VALUES (15,2587,79,'Mature_Treant',330,0,755,0,0,70,72,
 INSERT INTO `mob_groups` VALUES (16,2332,79,'Lamia_Fatedealer',330,0,1490,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (17,6575,79,'Reserve_Draugar',960,0,2088,0,0,73,74,0);
 INSERT INTO `mob_groups` VALUES (18,6576,79,'Reserve_Draugar',960,0,2088,0,0,73,74,0);
-INSERT INTO `mob_groups` VALUES (19,1933,79,'Heraldic_Imp',330,0,1302,0,0,79,82,0);
+INSERT INTO `mob_groups` VALUES (19,6636,79,'Heraldic_Imp',330,0,1302,0,0,79,82,0);
 INSERT INTO `mob_groups` VALUES (20,3738,79,'Spongilla_Fly',330,0,2310,0,0,78,79,0);
 INSERT INTO `mob_groups` VALUES (21,3912,79,'Thunder_Elemental',330,4,2410,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (22,2753,79,'Mosshorn',330,0,1741,0,0,80,81,0);
@@ -5720,7 +5720,7 @@ INSERT INTO `mob_groups` VALUES (4,1175,92,'Edible_Slug',960,0,0,0,0,72,76,0);
 INSERT INTO `mob_groups` VALUES (5,3140,92,'Pitchy_Pudding',960,0,0,0,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (6,6254,92,'Magnes_Quadav',960,0,1574,0,0,76,79,0);
 INSERT INTO `mob_groups` VALUES (7,1753,92,'Gold_Quadav',960,0,1193,0,0,76,79,0);
-INSERT INTO `mob_groups` VALUES (8,3541,92,'Seneschal_Imp',960,0,1002,0,0,77,79,0);
+INSERT INTO `mob_groups` VALUES (8,6637,92,'Seneschal_Imp',960,0,1002,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (9,6247,92,'Iron_Quadav',960,0,87,0,0,76,79,0);
 INSERT INTO `mob_groups` VALUES (10,5553,92,'Adaman_Quadav',960,0,22,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (11,6068,92,'EaTho_Cruelheart',0,32,3032,0,0,78,78,0);
