@@ -117,7 +117,7 @@ bool isRightRecipe(CCharEntity* PChar)
             uint16 skillValue   = 0;
             uint16 currentSkill = 0;
 
-            for (uint8 skillID = 49; skillID < 57; ++skillID) // range for all 8 synth skills
+            for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
             {
                 skillValue   = (uint16)Sql_GetUIntData(SqlHandle,(skillID-49+2));
                 currentSkill = PChar->RealSkills.skill[skillID];
@@ -235,7 +235,7 @@ uint8 calcSynthResult(CCharEntity* PChar)
     double chance  = 0;
     double random = tpzrand::GetRandomNumber(1.);
 
-    for(uint8 skillID = 49; skillID < 57; ++skillID)
+    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
     {
         uint8 checkSkill = PChar->CraftContainer->getQuantity(skillID-40);
         if(checkSkill != 0)
@@ -410,7 +410,7 @@ uint8 calcSynthResult(CCharEntity* PChar)
 
 int32 doSynthSkillUp(CCharEntity* PChar)
 {
-    for(uint8 skillID = 49; skillID < 57; ++skillID) // Check for all skills involved in a recipe, to check for skill up
+    for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // Check for all skills involved in a recipe, to check for skill up
     {
         if (PChar->CraftContainer->getQuantity(skillID-40) == 0) // Get the required skill level for the recipe
         {
@@ -448,9 +448,9 @@ int32 doSynthSkillUp(CCharEntity* PChar)
 
             if (random < skillUpChance) // If character skills up
             {
-                int32  skillAmount = 1;
+                int32  skillUpAmount = 1;
 
-                if (charSkill < map_config.craft_common_cap) // no skill ups over 0.1 happen over level cap
+                if (charSkill < 600) // no skill ups over 0.1 happen over level 60
                 {
                     int32  satier = 0;
                     double chance = 0;
@@ -470,7 +470,7 @@ int32 doSynthSkillUp(CCharEntity* PChar)
                     for(uint8 i = 0; i < 4; i ++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
                     {
                         #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
-                        ShowDebug(CL_CYAN"SkillAmount Tier: %i  Random: %g\n" CL_RESET, satier, random);
+                        ShowDebug(CL_CYAN"SkillUpAmount Tier: %i  Random: %g\n" CL_RESET, satier, random);
                         #endif
 
                         switch(satier)
@@ -486,7 +486,7 @@ int32 doSynthSkillUp(CCharEntity* PChar)
                         if(chance < random)
                             break;
 
-                        skillAmount++;
+                        skillUpAmount++;
                         satier--;
                     }
                 }
@@ -494,59 +494,63 @@ int32 doSynthSkillUp(CCharEntity* PChar)
                 // Do craft amount multiplier
                 if (map_config.craft_amount_multiplier > 1)
                 {
-                    skillAmount += (int32)(skillAmount * map_config.craft_amount_multiplier);
-                    if (skillAmount > 9)
+                    skillUpAmount += (int32)(skillUpAmount * map_config.craft_amount_multiplier);
+                    if (skillUpAmount > 9)
                     {
-                        skillAmount = 9;
+                        skillUpAmount = 9;
                     }
                 }
 
                 // Cap skill gain if character hits the current cap
-                if((skillAmount + charSkill) > maxSkill)
+                if((skillUpAmount + charSkill) > maxSkill)
                 {
-                    skillAmount = maxSkill - charSkill;
+                    skillUpAmount = maxSkill - charSkill;
                 }
 
-                uint16 skillCumulation = skillAmount;
+                uint16 skillCumulation = skillUpAmount;
                 uint8 skillHighest = skillID;
+                uint16 skillHighestValue = map_config.craft_common_cap;
 
-                if ((charSkill + skillAmount) > map_config.craft_common_cap) // If character is using the specialization system
+                if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If character is using the specialization system
                 {
                     // Cycle through all skills
-                    for (int i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++)
+                    for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++)
                     {
                         if (PChar->RealSkills.skill[i] > map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                         {
                             skillCumulation += (PChar->RealSkills.skill[i] - map_config.craft_common_cap); //Add to the ammount of specialization points in use.
-                            if (skillID != i && PChar->RealSkills.skill[i] > PChar->RealSkills.skill[skillHighest]) //Set the ID of the highest craft UNLESS it's the craft currently in use.
+                            if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) //Set the ID of the highest craft UNLESS it's the craft currently in use.
                             {
                                 skillHighest = i;
+                                skillHighestValue = PChar->RealSkills.skill[i];
                             }
                         }
                     }
                 }
 
-                PChar->RealSkills.skill[skillID] += skillAmount;
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillAmount, 38));
+                PChar->RealSkills.skill[skillID] += skillUpAmount;
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
 
-                if ((charSkill / 10) < (charSkill + skillAmount) / 10)
+                if ((charSkill / 10) < (charSkill + skillUpAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[skillID] += 0x20;
 
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillAmount) / 10, 53));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, (charSkill + skillUpAmount) / 10, 53));
                 }
 
                 charutils::SaveCharSkills(PChar, skillID);
 
                 if (skillHighest != 0 && skillCumulation > map_config.craft_specialization_points)
                 {
-                    PChar->RealSkills.skill[skillHighest] -= skillAmount;
+                    PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
 
-                    if ((PChar->RealSkills.skill[skillHighest] + skillAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
+                    if ((PChar->RealSkills.skill[skillHighest] + skillUpAmount) / 10 > (PChar->RealSkills.skill[skillHighest]) / 10)
                     {
                         PChar->WorkingSkills.skill[skillHighest] -= 0x20;
                         PChar->pushPacket(new CCharSkillsPacket(PChar));
+                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, (PChar->RealSkills.skill[skillHighest] - skillUpAmount) / 10, 53));
                     }
 
                     charutils::SaveCharSkills(PChar, skillHighest);
