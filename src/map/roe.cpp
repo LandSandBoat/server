@@ -146,14 +146,14 @@ namespace roeutils
                 args++;
 
                 lua_newtable(L);
-                for (auto datagram: payload)
+                for (auto& datagram: payload)
                 {
                     lua_pushstring(L, datagram.param.c_str());
                     switch(datagram.type)
                     {
                         case RoeDatagramPayload::mob:
                         {
-                            CLuaBaseEntity LuaMobEntity((CMobEntity*)datagram.data.mobEntity);
+                            CLuaBaseEntity LuaMobEntity(datagram.data.mobEntity);
                             Lunar<CLuaBaseEntity>::push(L, &LuaMobEntity);
                             break;
                         }
