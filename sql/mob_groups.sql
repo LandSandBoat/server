@@ -10632,29 +10632,30 @@ INSERT INTO `mob_groups` VALUES (8761,2633,166,'Metallic_Slime',0,128,1664,0,0,2
 -- Bostaunieux_Oubliette (Zone 167)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,6393,167,'Bloodsucker',960,0,302,0,0,65,68,0);
+INSERT INTO `mob_groups` VALUES (1,6393,167,'Bloodsucker',300,0,302,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (2,38,167,'Acid_Grease',0,128,15,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (3,2764,167,'Mousse',0,128,15,0,0,60,68,0);
-INSERT INTO `mob_groups` VALUES (4,1440,167,'Funnel_Bats',960,0,918,0,0,52,55,0);
-INSERT INTO `mob_groups` VALUES (5,1911,167,'Hecatomb_Hound',960,0,1287,0,0,56,59,0);
-INSERT INTO `mob_groups` VALUES (6,4321,167,'Werebat',960,0,2641,0,0,55,59,0);
-INSERT INTO `mob_groups` VALUES (7,1900,167,'Haunt',960,0,1281,0,0,60,63,0);
-INSERT INTO `mob_groups` VALUES (8,6526,167,'Garm',960,0,933,0,0,64,66,0);
-INSERT INTO `mob_groups` VALUES (9,908,167,'Dark_Aspic',960,0,567,0,0,52,54,0);
+INSERT INTO `mob_groups` VALUES (4,1440,167,'Funnel_Bats',300,0,918,0,0,52,55,0);
+INSERT INTO `mob_groups` VALUES (5,1911,167,'Hecatomb_Hound',300,0,1287,0,0,56,59,0);
+INSERT INTO `mob_groups` VALUES (6,4321,167,'Werebat',300,0,2641,0,0,55,59,0);
+INSERT INTO `mob_groups` VALUES (7,1900,167,'Haunt',300,0,1281,0,0,60,63,0);
+INSERT INTO `mob_groups` VALUES (8,1471,167,'Garm',300,0,933,0,0,64,66,0);
+INSERT INTO `mob_groups` VALUES (9,908,167,'Dark_Aspic',300,0,567,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (10,3557,167,'Sewer_Syrup',0,32,2209,0,0,64,65,0);
 INSERT INTO `mob_groups` VALUES (11,3597,167,'Shii',0,32,2236,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (12,1118,167,'Drexerion_the_Condemned',0,128,707,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (13,3125,167,'Phanduron_the_Condemned',0,128,1992,0,0,72,73,0);
-INSERT INTO `mob_groups` VALUES (14,6475,167,'Blind_Bat',330,0,2641,0,0,94,99,0);
-INSERT INTO `mob_groups` VALUES (15,6411,167,'Panna_Cotta',330,0,567,0,0,95,96,0);
-INSERT INTO `mob_groups` VALUES (16,6509,167,'Nachtmahr',330,0,1283,0,0,96,97,0);
-INSERT INTO `mob_groups` VALUES (17,6527,167,'Dabilla',330,0,933,0,0,94,97,0);
-INSERT INTO `mob_groups` VALUES (18,6582,167,'Wurdalak',330,0,2882,0,0,97,99,0);
+INSERT INTO `mob_groups` VALUES (14,6475,167,'Blind_Bat',300,0,2641,0,0,94,99,0);
+INSERT INTO `mob_groups` VALUES (15,6411,167,'Panna_Cotta',300,0,3144,0,0,95,96,0);
+INSERT INTO `mob_groups` VALUES (16,1900,167,'Haunt',300,0,1283,0,0,96,97,0);
+INSERT INTO `mob_groups` VALUES (17,1471,167,'Garm',300,0,933,0,0,94,97,0);
+INSERT INTO `mob_groups` VALUES (18,2910,167,'Nosferatu',300,0,2882,0,0,97,99,0);
 INSERT INTO `mob_groups` VALUES (19,233,167,'Arioch',0,32,2388,0,0,56,62,0);
-INSERT INTO `mob_groups` VALUES (20,1505,167,'Gespenst',960,0,950,0,0,68,70,0);
+INSERT INTO `mob_groups` VALUES (20,1505,167,'Gespenst',300,0,950,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (21,2548,167,'Manes',0,32,2879,0,0,73,73,0);
 INSERT INTO `mob_groups` VALUES (22,482,167,'Bodach',0,128,0,7500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (23,5138,167,'Bloodsucker',3600,128,2892,3600,0,71,73,0);
+INSERT INTO `mob_groups` VALUES (24,2764,167,'Mousse',300,0,567,0,0,58,62,0);
 
 -- ------------------------------------------------------------
 -- Chamber_of_Oracles (Zone 168)
