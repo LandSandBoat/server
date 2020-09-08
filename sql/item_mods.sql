@@ -20128,7 +20128,7 @@ INSERT INTO `item_mods` VALUES (16598,25,4);
 INSERT INTO `item_mods` VALUES (16599,8,2);
 INSERT INTO `item_mods` VALUES (16599,13,3);
 INSERT INTO `item_mods` VALUES (16599,14,1);
-INSERT INTO `item_mods` VALUES (16604,964,5);    -- Save the Queen - Cover Duration +5
+INSERT INTO `item_mods` VALUES (16604,967,5);    -- Save the Queen - Cover Duration +5
 INSERT INTO `item_mods` VALUES (16605,432,5);
 INSERT INTO `item_mods` VALUES (16610,25,2);
 INSERT INTO `item_mods` VALUES (16611,25,2);
@@ -25247,7 +25247,7 @@ INSERT INTO `item_mods` VALUES (20722,25,4);
 INSERT INTO `item_mods` VALUES (20722,29,1);
 INSERT INTO `item_mods` VALUES (20726,23,10);
 INSERT INTO `item_mods` VALUES (20726,25,15);
-INSERT INTO `item_mods` VALUES (20728,964,8);     -- Kheshig Blade - Cover Duration +8
+INSERT INTO `item_mods` VALUES (20728,967,8);     -- Kheshig Blade - Cover Duration +8
 INSERT INTO `item_mods` VALUES (20733,8,10);      -- Anahera Saber (iLvl 119): STR +10
 INSERT INTO `item_mods` VALUES (20733,11,10);     -- AGI +10
 INSERT INTO `item_mods` VALUES (20733,288,2);     -- Double Attack +2%
@@ -27926,7 +27926,7 @@ INSERT INTO `item_mods` VALUES (23046,31,42);     -- Magic Evasion+42
 INSERT INTO `item_mods` VALUES (23046,68,43);     -- Evasion+43
 INSERT INTO `item_mods` VALUES (23046,161,-6);    -- Physical Damage Taken-6
 INSERT INTO `item_mods` VALUES (23046,384,700);   -- Haste +7%
-INSERT INTO `item_mods` VALUES (23046,964,9);     -- Cover Duration +9
+INSERT INTO `item_mods` VALUES (23046,967,9);     -- Cover Duration +9
 INSERT INTO `item_mods` VALUES (23046,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23047,1,126);     -- ig._burgeonet_+2 DEF:126
 INSERT INTO `item_mods` VALUES (23047,2,61);      -- HP+61
@@ -29931,7 +29931,7 @@ INSERT INTO `item_mods` VALUES (23381,31,52);     -- Magic Evasion+52
 INSERT INTO `item_mods` VALUES (23381,68,53);     -- Evasion+53
 INSERT INTO `item_mods` VALUES (23381,161,-7);    -- Physical Damage Taken-7
 INSERT INTO `item_mods` VALUES (23381,384,700);   -- Haste +7%
-INSERT INTO `item_mods` VALUES (23381,964,10);    -- Cover Duration +10
+INSERT INTO `item_mods` VALUES (23381,967,10);    -- Cover Duration +10
 INSERT INTO `item_mods` VALUES (23381,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23382,1,136);     -- ig._burgeonet_+3 DEF:136
 INSERT INTO `item_mods` VALUES (23382,2,71);      -- HP+71
@@ -43739,7 +43739,7 @@ INSERT INTO `item_mods` VALUES (27690,31,32);
 INSERT INTO `item_mods` VALUES (27690,68,33);
 INSERT INTO `item_mods` VALUES (27690,161,-5);
 INSERT INTO `item_mods` VALUES (27690,384,700);
-INSERT INTO `item_mods` VALUES (27690,964,9);    -- Reverence Cornet +1 - Cover Duration +9
+INSERT INTO `item_mods` VALUES (27690,967,9);    -- Reverence Cornet +1 - Cover Duration +9
 INSERT INTO `item_mods` VALUES (27690,966,1);    -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (27691,1,116);
 INSERT INTO `item_mods` VALUES (27691,2,41);

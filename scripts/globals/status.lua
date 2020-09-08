@@ -1554,9 +1554,9 @@ tpz.mod =
     RADIAL_ARCANA                   = 969,
     CURATIVE_RECANTATION            = 970,
     PRIMEVAL_ZEAL                   = 971,
-    COVER_DURATION                  = 964, -- Increases Cover Duration
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION                  = 967, -- Increases Cover Duration
 
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
