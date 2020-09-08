@@ -1557,14 +1557,16 @@ tpz.mod =
     RADIAL_ARCANA                   = 969,
     CURATIVE_RECANTATION            = 970,
     PRIMEVAL_ZEAL                   = 971,
+    COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION                  = 967, -- Increases Cover Duration
+
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-
-
-    -- SPARE = 965, -- stuff
-    -- SPARE = 966, -- stuff
-    -- SPARE = 967, -- stuff
+    -- SPARE = 972, -- stuff
+    -- SPARE = 973, -- stuff
+    -- SPARE = 974, -- stuff
 }
 
 tpz.latent =
