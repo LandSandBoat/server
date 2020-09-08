@@ -2,10 +2,10 @@
 -- Area: Periqia
 --  NPC: Excaliace
 -----------------------------------
-require("scripts/zones/Periqia/IDs");
-require("scripts/globals/pathfind");
+require("scripts/zones/Periqia/IDs")
+require("scripts/globals/pathfind")
 
-local start = {-322,-16.5,380};
+local start = {-322, -16.5, 380}
 
 local startToChoice1 = {
     -320.349548, -16.046591, 379.684570
@@ -74,56 +74,56 @@ local startToChoice1 = {
     -340.554047, -15.631170, 306.619476
     -340.412598, -15.624416, 304.459137
     -340.379303, -15.661182, 302.420258
-};
+}
 
 function onSpawn(npc)
-    npc:initNpcAi();
-    npc:pathThrough(start, PATHFLAG_REPEAT);
-end;
+    npc:initNpcAi()
+    npc:pathThrough(start, PATHFLAG_REPEAT)
+end
 
 function onPath(npc)
 
-    local instance = npc:getInstance();
-    local progress = instance:getProgress();
-    local chars = instance:getChars();
+    local instance = npc:getInstance()
+    local progress = instance:getProgress()
+    local chars = instance:getChars()
 
 
     if (progress == 0) then
-        for tid,player in pairs(chars) do
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
-                instance:setProgress(1);
-                npc:messageText(npc,Periqia.text.EXCALIACE_START);
-                npc:pathThrough(startToChoice1);
+                instance:setProgress(1)
+                npc:messageText(npc, Periqia.text.EXCALIACE_START)
+                npc:pathThrough(startToChoice1)
             end
         end
     elseif (progress == 1) then
-        local run = true;
-        for tid,player in pairs(chars) do
+        local run = true
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
-                run = false;
+                run = false
             end
         end
 
         if (run) then
-            npc:messageText(npc,Periqia.text.EXCALIACE_RUN);
+            npc:messageText(npc, Periqia.text.EXCALIACE_RUN)
         end
     end
 
     -- go back and forth the set path
-    -- tpz.path.patrol(npc, path);
+    -- tpz.path.patrol(npc, path)
 
-end;
+end
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 
-end;
+end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
 
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option,npc)
-end;
+function onEventFinish(player, csid, option, npc)
+end

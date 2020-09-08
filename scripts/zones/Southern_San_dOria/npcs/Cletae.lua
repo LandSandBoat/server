@@ -11,25 +11,25 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     if (FlyerForRegine == 1) then
         count = trade:getItemCount()
-        MagicFlyer = trade:hasItemQty(532,1)
+        MagicFlyer = trade:hasItemQty(532, 1)
         if (MagicFlyer == true and count == 1) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local guildRank = player:getSkillRank(tpz.skill.LEATHERCRAFT)
     local stock = tpz.shop.generalGuildStock[guild.leathercraft]
     tpz.shop.generalGuild(player, stock, guildRank)
-    player:showText(npc,ID.text.CLETAE_DIALOG)
+    player:showText(npc, ID.text.CLETAE_DIALOG)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

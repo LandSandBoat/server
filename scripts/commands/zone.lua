@@ -281,10 +281,10 @@ function error(player, msg)
     player:PrintToPlayer("!zone <zone ID or autotranslate phrase>")
 end
 
-function getBytePos(s,needle)
+function getBytePos(s, needle)
     local i
     local b
-    for i=1,string.len(s),1 do
+    for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i
         end
@@ -307,7 +307,7 @@ function onTrigger(player, bytes)
         error(player, "You must provide a zone ID or autotranslate phrase.")
         return
     end
-    bytes = string.sub(bytes,6)
+    bytes = string.sub(bytes, 6)
     local atpos = getBytePos(bytes, 253)
 
     -- validate destination
@@ -326,7 +326,7 @@ function onTrigger(player, bytes)
             end
         end
         if (zone == nil) then
-            error(player,"Auto-translated phrase is not a zone.")
+            error(player, "Auto-translated phrase is not a zone.")
             return
         end
     else

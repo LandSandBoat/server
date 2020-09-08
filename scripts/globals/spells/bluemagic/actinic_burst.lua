@@ -19,11 +19,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local typeEffect = tpz.effect.FLASH
     local dINT = (caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND))
     local params = {}
@@ -37,7 +37,7 @@ function onSpellCast(caster,target,spell)
     local power = 200
 
     if (resist > 0.0625) then -- Do it!
-        if (target:addStatusEffect(typeEffect,power,0,duration)) then
+        if (target:addStatusEffect(typeEffect, power, 0, duration)) then
             spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)

@@ -14,7 +14,7 @@ function onMobSpawn(mob)
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
-        SetDropRate(918,3340,0) -- do not drop cup_of_sweet_tea
+        SetDropRate(918, 3340, 0) -- do not drop cup_of_sweet_tea
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
@@ -27,7 +27,7 @@ end
 function onMobDespawn(mob)
     local ToD = GetServerVariable("[POP]Nidhogg")
     local kills = GetServerVariable("[PH]Nidhogg")
-    local popNow = (math.random(1,5) == 3 or kills > 6)
+    local popNow = (math.random(1, 5) == 3 or kills > 6)
 
     if LandKingSystem_HQ ~= 1 and ToD <= os.time() and popNow then
         -- 0 = timed spawn, 1 = force pop only, 2 = BOTH

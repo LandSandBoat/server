@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Kazham/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         112,    456,    -- Yellow Jar
@@ -28,12 +28,12 @@ function onTrigger(player,npc)
         4964,  8726,    -- Scroll of Monomi: Ichi
     }
 
-    player:showText(npc,ID.text.TOJIMUMOSULAH_SHOP_DIALOG)
+    player:showText(npc, ID.text.TOJIMUMOSULAH_SHOP_DIALOG)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

@@ -686,7 +686,7 @@ local loot =
 -- onTrade Action
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 -----------------------------------
@@ -708,7 +708,7 @@ function onTrigger(player, npc)
         return
     end
 
-    for coffer = 1,#ARMOURY_CRATES_LIST_APOLLYON,2 do
+    for coffer = 1, #ARMOURY_CRATES_LIST_APOLLYON, 2 do
         if (ARMOURY_CRATES_LIST_APOLLYON[coffer]== CofferID-16932864) then
            CofferType=ARMOURY_CRATES_LIST_APOLLYON[coffer+1][1]
            InstanceRegion=ARMOURY_CRATES_LIST_APOLLYON[coffer+1][2]
@@ -719,12 +719,12 @@ function onTrigger(player, npc)
         end
     end
 
--- printf("CofferID : %u",CofferID-16932864)
--- printf("Coffertype %u",CofferType)
--- printf("InstanceRegion: %u",InstanceRegion)
--- printf("addtime: %u",addtime)
--- printf("MimicID: %u",MimicID)
--- printf("lootID: %u",lootID)
+-- printf("CofferID : %u", CofferID-16932864)
+-- printf("Coffertype %u", CofferType)
+-- printf("InstanceRegion: %u", InstanceRegion)
+-- printf("addtime: %u", addtime)
+-- printf("MimicID: %u", MimicID)
+-- printf("lootID: %u", lootID)
 
     if (CofferType == cTIME) then
         tpz.battlefield.ExtendTimeLimit(battlefield, addtime)
@@ -736,35 +736,35 @@ function onTrigger(player, npc)
         tpz.battlefield.HealPlayers(battlefield)
     elseif (CofferType == cMIMIC) then
          if (CofferID==16932864+210) then
-                GetNPCByID(16932864+195):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                GetNPCByID(16932864+195):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
                 GetNPCByID(16932864+195):setStatus(tpz.status.NORMAL)
          elseif (CofferID==16932864+211) then
-                          GetMobByID(16932896):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
-                        GetMobByID(16932896):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                          GetMobByID(16932896):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
+                        GetMobByID(16932896):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
                         GetMobByID(16932896):updateClaim(player)
          elseif (CofferID==16932864+212) then
-                GetNPCByID(16932864+196):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                GetNPCByID(16932864+196):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
                 GetNPCByID(16932864+196):setStatus(tpz.status.NORMAL)
          elseif (CofferID==16932864+213) then
-                         GetMobByID(16932897):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
-                        GetMobByID(16932897):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                         GetMobByID(16932897):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
+                        GetMobByID(16932897):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
                         GetMobByID(16932897):updateClaim(player)
          elseif (CofferID==16932864+214) then
-                GetNPCByID(16932864+197):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                GetNPCByID(16932864+197):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
                 GetNPCByID(16932864+197):setStatus(tpz.status.NORMAL)
          elseif (CofferID==16932864+215) then
-                         GetMobByID(16932898):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
-                        GetMobByID(16932898):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                         GetMobByID(16932898):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
+                        GetMobByID(16932898):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
                         GetMobByID(16932898):updateClaim(player)
          elseif (CofferID==16932864+216) then
-                          GetMobByID(16932899):setPos(npc:getXPos(),npc:getYPos(),npc:getZPos())
-                        GetMobByID(16932899):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos())
+                          GetMobByID(16932899):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos())
+                        GetMobByID(16932899):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
                         GetMobByID(16932899):updateClaim(player)
          end
     end
 
     if (DespawnOtherCoffer==true) then
-        HideArmouryCrates(InstanceRegion,APOLLYON_SE_NE)
+        HideArmouryCrates(InstanceRegion, APOLLYON_SE_NE)
     end
 
    npc:setStatus(tpz.status.DISAPPEAR)
@@ -774,12 +774,12 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 -----------------------------------
 -- onEventFinish Action
 -----------------------------------
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

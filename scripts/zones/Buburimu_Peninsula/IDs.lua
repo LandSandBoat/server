@@ -45,7 +45,7 @@ zones[tpz.zone.BUBURIMU_PENINSULA] =
         COMMON_SENSE_SURVIVAL          = 12307, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
-    {   
+    {
         BACKOO        = 17260613,
         HELLDIVER_PH  =
         {

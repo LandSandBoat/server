@@ -1,18 +1,18 @@
 -----------------------------------
 --
 --    tpz.effect.MADRIGAL
--- getPower returns the TIER (e.g. 1,2,3,4)
+-- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.ACC, effect:getPower())
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, effect:getPower())
 end

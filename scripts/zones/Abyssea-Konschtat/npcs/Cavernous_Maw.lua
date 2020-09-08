@@ -5,18 +5,18 @@
 -- Teleports Players to Konschatat Highlands
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:startEvent(200)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 200 and option == 1 then
-        player:setPos(91,-68,-582,237,108)
+        player:setPos(91, -68, -582, 237, 108)
     end
 end

@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     if (not target:hasStatusEffect(tpz.effect.DEODORIZE)) then
-        target:addStatusEffect(tpz.effect.DEODORIZE,1,10,180)
+        target:addStatusEffect(tpz.effect.DEODORIZE, 1, 10, 180)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end

@@ -1,13 +1,13 @@
--- MariaDB dump 10.17  Distrib 10.4.12-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tpzdb
 -- ------------------------------------------------------
--- Server version	10.4.12-MariaDB
+-- Server version	5.5.5-10.4.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -85,7 +85,7 @@ INSERT INTO `status_effects` VALUES (41,'shell',41,0,0,0,0,0,7,0,250);
 INSERT INTO `status_effects` VALUES (42,'regen',41,0,0,0,0,0,7,0,700);
 INSERT INTO `status_effects` VALUES (43,'refresh',41,0,0,0,0,0,7,0,750);
 INSERT INTO `status_effects` VALUES (44,'mighty_strikes',32,0,0,0,0,0,1,0,0);
-INSERT INTO `status_effects` VALUES (45,'boost',45,0,0,0,0,0,1,0,0);
+INSERT INTO `status_effects` VALUES (45,'boost',44,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (46,'hundred_fists',32,0,0,0,0,0,6,0,0);
 INSERT INTO `status_effects` VALUES (47,'manafont',32,0,0,0,0,0,3,0,0);
 INSERT INTO `status_effects` VALUES (48,'chainspell',32,0,0,0,0,0,6,0,0);
@@ -105,7 +105,7 @@ INSERT INTO `status_effects` VALUES (61,'counterstance',33,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (62,'sentinel',33,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (63,'souleater',40,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (64,'last_resort',41,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (65,'sneak_attack',37,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (65,'sneak_attack',36,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (66,'copy_image',33,0,0,0,0,36,4,0,50);
 INSERT INTO `status_effects` VALUES (67,'third_eye',41,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (68,'warcry',41,0,0,0,0,0,0,0,400);
@@ -127,7 +127,7 @@ INSERT INTO `status_effects` VALUES (83,'agi_boost',41,0,139,0,0,0,4,0,0);
 INSERT INTO `status_effects` VALUES (84,'int_boost',41,0,140,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (85,'mnd_boost',41,0,141,0,0,0,3,0,0);
 INSERT INTO `status_effects` VALUES (86,'chr_boost',41,0,142,0,0,0,7,0,0);
-INSERT INTO `status_effects` VALUES (87,'trick_attack',37,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (87,'trick_attack',36,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (88,'max_hp_boost',41,0,144,0,0,0,7,0,0);
 INSERT INTO `status_effects` VALUES (89,'max_mp_boost',41,0,145,0,0,0,8,0,0);
 INSERT INTO `status_effects` VALUES (90,'accuracy_boost',41,0,146,0,0,0,6,0,0);
@@ -375,10 +375,10 @@ INSERT INTO `status_effects` VALUES (336,'misers_roll',131368,0,0,0,0,0,0,0,2000
 INSERT INTO `status_effects` VALUES (337,'companions_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (338,'avengers_roll',131368,0,0,0,0,0,0,0,2000);
 INSERT INTO `status_effects` VALUES (339,'naturalists_roll',131368,0,0,0,0,0,0,0,2000);
-INSERT INTO `status_effects` VALUES (340,'warriors_charge',37,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (340,'warriors_charge',36,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (341,'formless_strikes',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (342,'assassins_charge',37,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (343,'feint',35,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (342,'assassins_charge',36,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (343,'feint',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (344,'fealty',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (345,'dark_seal',161,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (346,'diabolic_eye',32,0,0,0,0,0,0,0,0);
@@ -686,4 +686,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-24 15:31:59
+-- Dump completed on 2020-09-08 17:29:41

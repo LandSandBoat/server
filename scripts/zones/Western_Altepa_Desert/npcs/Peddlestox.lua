@@ -9,13 +9,13 @@ require("scripts/globals/beastmentreasure")
 -----------------------------------
 
 function onTrigger(player)
-    tpz.bmt.handleNpcOnTrigger(player,ID.npc.BEASTMEN_TREASURE)
+    tpz.bmt.handleNpcOnTrigger(player, ID.npc.BEASTMEN_TREASURE)
 end
 
-function onTrade(player,npc,trade)
-    tpz.bmt.handleNpcOnTrade(player,trade,ID.npc.BEASTMEN_TREASURE)
+function onTrade(player, npc, trade)
+    tpz.bmt.handleNpcOnTrade(player, trade, ID.npc.BEASTMEN_TREASURE)
 end
 
-function onEventFinish(player,csid,option)
-    tpz.bmt.handleNpcOnEventFinish(player,csid)
+function onEventFinish(player, csid, option)
+    tpz.bmt.handleNpcOnEventFinish(player, csid)
 end

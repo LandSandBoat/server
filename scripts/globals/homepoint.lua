@@ -7,7 +7,7 @@ tpz.homepoint = tpz.homepoint or {}
 
 local HPs =
 {
-    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x,y,z,rot,zone}
+    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x, y, z, rot, zone}
     [  0] = {group = 1, fee = 1, dest = {  -85.554,       1, -64.554,  45, 230}}, -- Southern San d'Oria #1
     [  1] = {group = 1, fee = 1, dest = {     44.1,       2,   -34.5, 170, 230}}, -- Southern San d'Oria #2
     [  2] = {group = 1, fee = 1, dest = {    140.5,      -2,     121,   0, 230}}, -- Southern San d'Oria #3
@@ -195,7 +195,7 @@ tpz.homepoint.onTrigger = function(player, csid, index)
     end
 
     player:setLocalVar("originIndex", index)
-    local G1,G2,G3,G4 = unpack(player:getTeleport(travelType))
+    local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
 
 end

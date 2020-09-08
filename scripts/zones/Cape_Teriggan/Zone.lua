@@ -14,8 +14,8 @@ require("scripts/globals/zone")
 function onInitialize(zone)
     local Kreutzet = GetMobByID(ID.mob.KREUTZET)
     UpdateNMSpawnPoint(ID.mob.KREUTZET)
-    Kreutzet:setRespawnTime(math.random(32400,43200)) -- 9 to 12 hours
-    Kreutzet:setLocalVar("cooldown",os.time() + Kreutzet:getRespawnTime()/1000)
+    Kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
+    Kreutzet:setLocalVar("cooldown", os.time() + Kreutzet:getRespawnTime()/1000)
     DisallowRespawn(Kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
@@ -61,6 +61,6 @@ function onZoneWeatherChange(weather)
         and (weather == tpz.weather.WIND or weather == tpz.weather.GALES)
     then
         DisallowRespawn(Kreutzet:getID(), false)
-        Kreutzet:setRespawnTime(math.random(30,150)) -- pop 30-150 sec after wind weather starts
+        Kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
     end
 end
