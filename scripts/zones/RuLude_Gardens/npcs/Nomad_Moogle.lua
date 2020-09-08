@@ -8,6 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
+require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -28,6 +29,12 @@ function onTrade(player, npc, trade)
         if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
             player:startEvent(10138)
         end
+    elseif npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
+        player:tradeComplete()
+        player:completeQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+        player:startEvent(10045, 0, 1, 5, 0)
+    elseif npcUtil.tradeHasExactly(trade, {{2956, 5}}) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
+        player:startEvent(10195, 1)
     end
 end
 
@@ -42,8 +49,12 @@ function onTrigger(player, npc)
         player:startEvent(10045, 0, 1, 3, 0)
     elseif (player:getMainLvl() >= 86 and player:levelCap() == 90 and MAX_LEVEL >= 95 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 4, 0)
-    elseif (player:getMainLvl() >= 91 and player:levelCap() == 95 and MAX_LEVEL >= 99 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 91 and player:levelCap() == 95 and MAX_LEVEL == 99 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
+        player:startEvent(10194)
+    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
         player:startEvent(10045, 0, 1, 5, 0)
+    elseif player:getCharVar("BeyondInfinityCS") == 2 then
+        player:startEvent(10139)
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 1, 1)
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
@@ -52,8 +63,16 @@ function onTrigger(player, npc)
         player:startEvent(10045, 0, 1, 3, 1)
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 4, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED) then
-        player:startEvent(10045, 0, 1, 5, 1) -- player:startEvent(10045, 0, 1, 6, 1)
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) then
+        player:startEvent(10045, 0, 1, 6, 2)
+    elseif  player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
+        player:startEvent(10045, 0, 1, 5, 1)
+    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:getCharVar("BeyondInfinityCS") == 1 then
+        if player:getMeritCount() >= 1 then
+            player:startEvent(10045, 0, 1, 5, 3, 0, 0, 1)
+        else
+            player:startEvent(10045, 0, 1, 5, 3)
+        end
     elseif (player:hasKeyItem(tpz.ki.LIMIT_BREAKER) == true and player:getMainLvl() >= 75) then
         player:startEvent(10045, 0, 1, 0, 0)
     else
@@ -79,6 +98,22 @@ function onEventFinish(player, csid, option)
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS)
         elseif (option == 11) then
             player:addQuest(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
+        elseif option == 13 or option == 14 or option == 19 or option == 20 or option == 21 or
+            option == 18 or option == 17 or option == 25 or option == 26 or option == 27 or
+            option == 16 or option == 22 or option == 23 or option == 24 then -- 13 and 18 is no teleport
+            player:setCharVar("BeyondInfinityCS", 0)
+            if not player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
+                npcUtil.giveKeyItem(player, tpz.ki.SOUL_GEM_CLASP)
+            end
+            if option == 14 or option == 17 or option == 16 then
+                player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
+            elseif option == 19 or option == 25 or option == 22 then
+                player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
+            elseif option == 20 or option == 26 or option == 23 then
+                player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
+            elseif option == 21 or option == 27 or option == 24 then
+                player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
+            end
         end
     elseif (csid == 10135) then
         player:tradeComplete()
@@ -111,5 +146,27 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_95)
         player:addKeyItem(tpz.ki.SOUL_GEM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SOUL_GEM)
+    elseif csid == 10139 then
+        npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY, {
+            title = tpz.title.BUSHIN_ASPIRANT,
+            var = "BeyondInfinityCS"
+        })
+        player:levelCap(99)
+        player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_99)
+    elseif csid == 10194 then
+        player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+    elseif csid == 10195 then
+        player:tradeComplete()
+        player:setCharVar("BeyondInfinityCS", 0)
+        npcUtil.giveKeyItem(player, tpz.ki.SOUL_GEM_CLASP)
+        if option == 16 then
+            player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
+        elseif option == 22 then
+            player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
+        elseif option == 23 then
+            player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
+        elseif option == 24 then
+            player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
+        end
     end
 end
