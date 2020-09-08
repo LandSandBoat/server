@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/South_Gustaberg/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -26,7 +26,7 @@ function onZoneIn(player, prevZone)
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("VowsDone") == 1 then
         cs = 906
-    elseif triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    elseif quests.rainbow.onZoneIn(player) then
         cs = 901
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 37
@@ -44,7 +44,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 901 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 37 then
         if player:getXPos() > -390 then
             if player:getZPos() > -301 then
@@ -63,7 +63,5 @@ function onEventFinish(player, csid, option)
             player:addMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
         end
         player:setCharVar("VowsDone", 0)
-    elseif csid == 901 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
     end
 end

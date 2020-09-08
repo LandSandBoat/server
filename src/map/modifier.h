@@ -203,7 +203,8 @@ enum class Mod
     UDMGRANGE                 = 390, //
 
     CRITHITRATE               = 165, // Raises chance to crit
-    CRIT_DMG_INCREASE         = 421, // Raises the damage of critcal hit by percent %
+    CRIT_DMG_INCREASE         = 421, // Raises the damage of critical hit by percent %
+    RANGED_CRIT_DMG_INCREASE  = 964, // Increases ranged critical damage by a percent
     ENEMYCRITRATE             = 166, // Raises chance enemy will crit
     CRIT_DEF_BONUS            = 908, // Reduces crit hit damage
     MAGIC_CRITHITRATE         = 562, // Raises chance to magic crit
@@ -285,6 +286,7 @@ enum class Mod
     AMNESIARES                = 253, // Enhances "Resist Amnesia" effect
     LULLABYRES                = 254, // Enhances "Resist Lullaby" effect
     DEATHRES                  = 255, // Used by gear and ATMA that give resistance to instance KO
+    STATUSRES                 = 958, // "Resistance to All Status Ailments"
 
     PARALYZE                  = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE             = 258, // Augments Mijin Gakure

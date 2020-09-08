@@ -816,8 +816,9 @@ tpz.effect =
     DYNAMIS                  = 800,
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
-    -- PLACEHOLDER           = 803, -- Description
-    -- 803-1022
+    FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
+    -- PLACEHOLDER           = 804, -- Description
+    -- 804-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
@@ -1046,6 +1047,7 @@ tpz.mod =
     UDMGRANGE                       = 390,
     CRITHITRATE                     = 165,
     CRIT_DMG_INCREASE               = 421,
+    RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
     ENEMYCRITRATE                   = 166,
     CRIT_DEF_BONUS                  = 908, -- Reduces crit hit damage
     MAGIC_CRITHITRATE               = 562,
@@ -1110,6 +1112,7 @@ tpz.mod =
     AMNESIARES                      = 253,
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
+    STATUSRES                       = 958, -- "Resistance to All Status Ailments"
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
@@ -1561,7 +1564,6 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-
     -- SPARE = 972, -- stuff
     -- SPARE = 973, -- stuff
     -- SPARE = 974, -- stuff
