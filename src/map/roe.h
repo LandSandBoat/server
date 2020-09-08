@@ -50,10 +50,11 @@ enum ROE_EVENT
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
-struct RoeCache
+struct RoeSystemData
 {
     std::bitset<4096> ImplementedRecords;
     std::bitset<4096> RepeatableRecords;
+    std::array<uint32, 4096> NotifyThresholds;
 };
 
 struct RoeCheckHandler
@@ -79,16 +80,14 @@ struct RoeDatagram
         CItem* item;
     } data;
 
-    RoeDatagram(std::string param, uint32 id)
+    RoeDatagram(std::string param, uint32 id) : param{param}
     {
         this->type = RoeDatagramPayload::uinteger;
-        this->param = param;
         this->data.uinteger = id;
     }
-    RoeDatagram(std::string param, CMobEntity* PMob)
+    RoeDatagram(std::string param, CMobEntity* PMob) : param{param}
     {
         this->type = RoeDatagramPayload::mob;
-        this->param = param;
         this->data.mobEntity = PMob;
     }
 };
@@ -97,7 +96,7 @@ typedef std::vector<RoeDatagram> RoeDatagramList;
 
 namespace roeutils
 {
-extern RoeCache RoeBitmaps;
+extern RoeSystemData RoeCache;
 
 void init();
 int32 RegisterHandler(lua_State* L);
