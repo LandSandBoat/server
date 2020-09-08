@@ -579,8 +579,6 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                 }
             }
         }
-
-
     }
 }
 
