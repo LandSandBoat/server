@@ -4113,7 +4113,7 @@ namespace battleutils
                                 return;
                             }
                             CBattleEntity* highestClaim = mob->PEnmityContainer->GetHighestEnmity();
-                            if (highestClaim->objtype == TYPE_TRUST)
+                            if (highestClaim && highestClaim->objtype == TYPE_TRUST)
                             {
                                 highestClaim = static_cast<CTrustEntity*>(highestClaim)->PMaster;
                             }
