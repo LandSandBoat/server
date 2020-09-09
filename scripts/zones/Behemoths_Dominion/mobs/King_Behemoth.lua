@@ -8,9 +8,11 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
+require("scripts/globals/mobs")
 -----------------------------------
 
 function onMobInitialize(mob)
+    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 60)
 end
 
@@ -20,6 +22,10 @@ function onMobSpawn(mob)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+end
+
+function onAdditionalEffect(mob, target, damage)
+    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
 end
 
 function onSpellPrecast(mob, spell)

@@ -8,10 +8,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local pNation = player:getNation()
 
     if pNation == tpz.nation.BASTOK then
@@ -25,7 +25,7 @@ function onTrigger(player,npc)
         elseif currentMission == tpz.mission.id.bastok.JEUNO and MissionStatus == 3 then
             player:startEvent(139)
         elseif player:getRank() == 4 and MissionStatus == 0 then
-            if getMissionRankPoints(player,13) == 1 then
+            if getMissionRankPoints(player, 13) == 1 then
                 player:startEvent(3)
             else
                 player:startEvent(4)
@@ -48,16 +48,16 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 41 then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 139 then
-        player:setCharVar("MissionStatus",4)
+        player:setCharVar("MissionStatus", 4)
     elseif csid == 35 then
-        finishMissionTimeline(player,1,csid,option)
+        finishMissionTimeline(player, 1, csid, option)
     end
 end

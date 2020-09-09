@@ -6,15 +6,15 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local sLvl = caster:getSkillLevel(tpz.skill.SINGING) -- Gets skill level of Singing
     local iLvl = caster:getWeaponSkillLevel(tpz.slot.RANGED)
 
-    -- Since nobody knows the evasion values for mambo, I'll just make shit up! (aka - same as madrigal)
+    -- Since nobody knows the evasion values for mambo, I'll just make it up! (aka - same as madrigal)
     local power = 9
 
     if (sLvl+iLvl > 130) then
@@ -44,7 +44,7 @@ function onSpellCast(caster,target,spell)
         duration = duration * 2
     end
 
-    if not (target:addBardSong(caster,tpz.effect.MAMBO,power,0,duration,caster:getID(), 0, 2)) then
+    if not (target:addBardSong(caster, tpz.effect.MAMBO, power, 0, duration, caster:getID(), 0, 2)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
     end
 

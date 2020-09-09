@@ -326,7 +326,7 @@ bool CMobEntity::CanBeNeutral()
     return !(m_Type & MOBTYPE_NOTORIOUS);
 }
 
-uint8 CMobEntity::TPUseChance()
+uint16 CMobEntity::TPUseChance()
 {
     auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
 
@@ -337,10 +337,10 @@ uint8 CMobEntity::TPUseChance()
 
     if (health.tp == 3000 || (GetHPP() <= 25 && health.tp >= 1000))
     {
-        return 100;
+        return 10000;
     }
 
-    return (uint8)getMobMod(MOBMOD_TP_USE_CHANCE);
+    return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
 }
 
 void CMobEntity::setMobMod(uint16 type, int16 value)
@@ -1122,7 +1122,6 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
 bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
 {
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (getMobMod(MOBMOD_ATTACK_SKILL_LIST))
     {

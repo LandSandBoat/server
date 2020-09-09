@@ -203,7 +203,8 @@ enum class Mod
     UDMGRANGE                 = 390, //
 
     CRITHITRATE               = 165, // Raises chance to crit
-    CRIT_DMG_INCREASE         = 421, // Raises the damage of critcal hit by percent %
+    CRIT_DMG_INCREASE         = 421, // Raises the damage of critical hit by percent %
+    RANGED_CRIT_DMG_INCREASE  = 964, // Increases ranged critical damage by a percent
     ENEMYCRITRATE             = 166, // Raises chance enemy will crit
     CRIT_DEF_BONUS            = 908, // Reduces crit hit damage
     MAGIC_CRITHITRATE         = 562, // Raises chance to magic crit
@@ -285,6 +286,7 @@ enum class Mod
     AMNESIARES                = 253, // Enhances "Resist Amnesia" effect
     LULLABYRES                = 254, // Enhances "Resist Lullaby" effect
     DEATHRES                  = 255, // Used by gear and ATMA that give resistance to instance KO
+    STATUSRES                 = 958, // "Resistance to All Status Ailments"
 
     PARALYZE                  = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE             = 258, // Augments Mijin Gakure
@@ -559,6 +561,10 @@ enum class Mod
     SAVETP                    = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP               = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
+    // Rune Fencer
+
+    INQUARTATA                = 963, // increases parry rate by a flat %.
+
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG         = 347, // They're stored separately due to Magian stuff - they can grant different levels of
     EARTH_AFFINITY_DMG        = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
@@ -796,9 +802,8 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 963, // stuff
-    // SPARE = 964, // stuff
     // SPARE = 965, // stuff
+    // SPARE = 966, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

@@ -54,7 +54,7 @@ tpz.msg.area =
 }
 
 ------------------------------------
--- Message Basic
+-- Basic Messages
 ------------------------------------
 
 tpz.msg.basic =
@@ -117,9 +117,9 @@ tpz.msg.basic =
     SKILL_ENFEEB_2         = 142, -- <user> uses <skill>. <target> receives the effect of <status> and <status>.
     ABILITIES_RECHARGED    = 360, -- <user> uses <skill>. All of <target>'s abilities are recharged.
 
-    -- Job Ability messages (offset JA by 16)
+    -- Job Ability messages
     JA_RECOVERS_HP         = 102, -- The <player> uses .. <target> recovers .. HP.
-    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP. (offset JA by 16)
+    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     USES_JA                = 100, -- The <player> uses ..
     USES                   = 101, -- The <entity> uses ..
     USES_JA_TAKE_DAMAGE    = 317, -- The <player> uses .. <target> takes .. points of damage.
@@ -310,4 +310,19 @@ tpz.msg.basic =
     -- TRUST & ALTER EGO
     TRUST_NO_CAST_TRUST    = 700,  -- You are unable to use Trust magic at this time.
     TRUST_NO_CALL_AE       = 717,  -- You cannot call forth alter egos here.
+}
+
+------------------------------------
+-- System Messages
+------------------------------------
+
+tpz.msg.system =
+{
+    GLOBAL_TRUST_OFFSET          = 0,
+    TRUST_NO_SEEKING_PARTY       = 296, -- You cannot use Trust magic while seeking a party.
+    TRUST_DELAY_NEW_PARTY_MEMBER = 297, -- While inviting a party member, you must wait a while before using Trust magic.
+    TRUST_MAXIMUM_NUMBER         = 298, -- You have called forth your maximum number of alter egos.
+    TRUST_ALREADY_CALLED         = 299, -- That alter ego has already been called forth.
+    TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
+    TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }

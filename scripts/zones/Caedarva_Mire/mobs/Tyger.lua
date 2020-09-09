@@ -8,9 +8,9 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:addMod(tpz.mod.SLEEPRES,30)
-    mob:addMod(tpz.mod.BINDRES,30)
-    mob:addMod(tpz.mod.GRAVITYRES,30)
+    mob:addMod(tpz.mod.SLEEPRES, 30)
+    mob:addMod(tpz.mod.BINDRES, 30)
+    mob:addMod(tpz.mod.GRAVITYRES, 30)
     mob:addMod(tpz.mod.ATT, 200)
 end
 

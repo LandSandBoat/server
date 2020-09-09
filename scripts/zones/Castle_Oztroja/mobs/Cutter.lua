@@ -4,8 +4,8 @@
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:setMobMod(tpz.mobMod.CHARMABLE, 1);
-end;
+    mob:setMobMod(tpz.mobMod.CHARMABLE, 1)
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+end

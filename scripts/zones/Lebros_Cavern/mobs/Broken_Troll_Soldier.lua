@@ -5,9 +5,9 @@
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 -- Todo  make them spawn at 25-75% hp and stay
-function onMobEngaged(mob,target)
+function onMobEngaged(mob, target)
     local MaxHP = mob:getHP()
-    local bonus = math.random(2,6)
+    local bonus = math.random(2, 6)
     mob:setHP(MaxHP / (8/(bonus)))
 end
 

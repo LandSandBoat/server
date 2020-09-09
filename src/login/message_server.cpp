@@ -81,11 +81,13 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     in_addr from_ip;
     uint16 from_port = 0;
     bool ipstring = false;
+    char from_address[INET_ADDRSTRLEN];
 
     if (from)
     {
         from_ip.s_addr = ref<uint32>((uint8*)from->data(), 0);
         from_port = ref<uint16>((uint8*)from->data(), 4);
+        inet_ntop(AF_INET, &from_ip, from_address, INET_ADDRSTRLEN);
     }
     switch (type)
     {
@@ -158,14 +160,14 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug("Message: unknown type received: %d from %s:%hu\n", type, inet_ntoa(from_ip), from_port);
+            ShowDebug("Message: unknown type received: %d from %s:%hu\n", static_cast<uint8>(type), from_address, from_port);
             break;
         }
     }
 
     if (ret != SQL_ERROR)
     {
-        ShowDebug("Message: Received message %d from %s:%hu\n", type, inet_ntoa(from_ip), from_port);
+        ShowDebug("Message: Received message %d from %s:%hu\n", static_cast<uint8>(type), from_address, from_port);
 
         while (Sql_NextRow(ChatSqlHandle) == SQL_SUCCESS)
         {
@@ -173,8 +175,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             if (ipstring)
             {
-                int8* ip_string = Sql_GetData(ChatSqlHandle, 0);
-                ip = inet_addr((const char*)ip_string);
+                inet_pton(AF_INET, (const char*)Sql_GetData(ChatSqlHandle, 0), &ip);
             }
             else
             {
@@ -184,7 +185,10 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             uint64 port = Sql_GetUIntData(ChatSqlHandle, 1);
             in_addr target;
             target.s_addr = (unsigned long)ip;
-            ShowDebug("Message:  -> rerouting to %s:%lu\n", inet_ntoa(target), port);
+
+            char target_address[INET_ADDRSTRLEN];
+            inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
+            ShowDebug("Message:  -> rerouting to %s:%lu\n", target_address, port);
             ip |= (port << 32);
 
             if (type == MSG_CHAT_PARTY || type == MSG_PT_RELOAD || type == MSG_PT_DISBAND)

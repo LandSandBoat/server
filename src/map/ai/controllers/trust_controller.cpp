@@ -47,13 +47,13 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
-    POwner->PMaster = nullptr;
-
+    POwner->status = STATUS_DISAPPEAR;
     m_LastTopEnmity = nullptr;
 }
 
 void CTrustController::Despawn()
 {
+    POwner->PMaster = nullptr;
     POwner->animation = ANIMATION_DESPAWN;
     CMobController::Despawn();
 }
@@ -62,9 +62,14 @@ void CTrustController::Tick(time_point tick)
 {
     m_Tick = tick;
 
-    if (POwner->PMaster == nullptr)
+    if (!POwner->PMaster)
     {
         return;
+    }
+
+    if (POwner->PMaster->isCharmed)
+    {
+        this->Despawn();
     }
 
     if (POwner->PAI->IsEngaged())
@@ -105,20 +110,27 @@ void CTrustController::DoCombatTick(time_point tick)
             std::unique_ptr<CBasicPacket> err;
             if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
             {
-                if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PTarget->loc.p, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                if (currentDistance > WarpDistance)
                 {
-                    POwner->PAI->PathFind->FollowPath();
+                    POwner->PAI->PathFind->WarpTo(PTarget->loc.p);
                 }
-                else if (POwner->GetSpeed() > 0)
+                else if (currentDistance > RoamDistance)
                 {
-                    POwner->PAI->PathFind->WarpTo(PMaster->loc.p, RoamDistance);
+                    if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                    {
+                        POwner->PAI->PathFind->FollowPath();
+                    }
+                    else if (POwner->GetSpeed() > 0)
+                    {
+                        POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
+                    }
                 }
             }
             else
             {
                 for (auto POtherTrust : PMaster->PTrusts)
                 {
-                    if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f)
+                    if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 2.0f)
                     {
                         auto angle = getangle(POwner->loc.p, PTarget->loc.p) + 64;
                         auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
@@ -182,15 +194,19 @@ void CTrustController::DoRoamTick(time_point tick)
         }
     }
 
-    if (currentDistance > RoamDistance)
+    if (currentDistance > WarpDistance)
     {
-        if (currentDistance < WarpDistance && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p);
+    }
+    else if (currentDistance > RoamDistance)
+    {
+        if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
             POwner->PAI->PathFind->FollowPath();
         }
         else if (POwner->GetSpeed() > 0)
         {
-            POwner->PAI->PathFind->WarpTo(PFollowTarget->loc.p, RoamDistance);
+            POwner->PAI->PathFind->StepTo(PFollowTarget->loc.p, true);
         }
     }
 
@@ -198,13 +214,13 @@ void CTrustController::DoRoamTick(time_point tick)
         m_Tick - m_CombatEndTime > 10s &&
         m_Tick - m_LastHealTickTime > 3s)
     {
-        if (POwner->Rest(0.03f))
+        if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
-            m_LastHealTickTime = m_Tick;
-            POwner->updatemask |= UPDATE_HP;
-        }
-        else if (POwner->Rest(0.05f))
-        {
+            // recover 5% HP & MP
+            uint32 recoverHP = (uint32)(POwner->health.maxhp * 0.05);
+            uint32 recoverMP = (uint32)(POwner->health.maxmp * 0.05);
+            POwner->addHP(recoverHP);
+            POwner->addMP(recoverMP);
             m_LastHealTickTime = m_Tick;
             POwner->updatemask |= UPDATE_HP;
         }
@@ -213,7 +229,7 @@ void CTrustController::DoRoamTick(time_point tick)
 
 bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
-    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid + 16, 0))
+    if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0))
     {
         return false;
     }

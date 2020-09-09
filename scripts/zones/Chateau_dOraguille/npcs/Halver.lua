@@ -13,10 +13,10 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     --print(player:getCharVar("MissionStatus"))
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
@@ -24,21 +24,21 @@ function onTrigger(player,npc)
     local MissionStatus = player:getCharVar("MissionStatus")
 
     -- Lure of the Wildcat San d'Oria
-    if (player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy,16) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 16) == false) then
         player:startEvent(558)
     -- Blackmail quest
     elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)) then
         player:startEvent(549)
-        player:setCharVar("BlackMailQuest",1)
+        player:setCharVar("BlackMailQuest", 1)
         player:delKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)
     -- San D'Oria Flag check
     elseif (player:getCharVar("Flagsando") == 1) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,181)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 181)
         else
-            player:setCharVar("Flagsando",0)
+            player:setCharVar("Flagsando", 0)
             player:addItem(181)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,181)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 181)
         end
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY and player:hasKeyItem(tpz.ki.RAILLEFALS_LETTER)) then
         player:startEvent(564)
@@ -46,7 +46,7 @@ function onTrigger(player,npc)
         player:startEvent(565)
     elseif (pNation == tpz.nation.SANDORIA) then
         -- Mission San D'Oria 9-2 The Heir to the Light
-        if (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)) then
+        if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)) then
             player:startEvent(31)
         elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 7) then
             player:startEvent(9)
@@ -69,10 +69,10 @@ function onTrigger(player,npc)
         elseif (currentMission == tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 0) then
             player:startEvent(25)
         -- Mission San D'Oria 5-2 The Shadow Lord
-        elseif (player:hasCompletedMission(SANDORIA,tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
-            player:showText(npc,ID.text.HALVER_OFFSET+500)
+        elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
+            player:showText(npc, ID.text.HALVER_OFFSET+500)
         elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 5) then
-            player:showText(npc,ID.text.HALVER_OFFSET+471)
+            player:showText(npc, ID.text.HALVER_OFFSET+471)
         elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 4 and player:hasKeyItem(tpz.ki.SHADOW_FRAGMENT)) then
             player:startEvent(548)
         elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 0) then
@@ -81,7 +81,7 @@ function onTrigger(player,npc)
         elseif (currentMission == tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 12 and player:hasKeyItem(tpz.ki.BURNT_SEAL)) then
             player:startEvent(534)
         elseif (currentMission == tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 10) then
-            player:showText(npc,ID.text.HALVER_OFFSET+334)
+            player:showText(npc, ID.text.HALVER_OFFSET+334)
         elseif (currentMission == tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 9) then
             player:startEvent(533)
         -- Mission San D'Oria 3-3 Appointment to Jeuno
@@ -103,16 +103,16 @@ function onTrigger(player,npc)
             end
         -- Bastok 2-3 San -> Win, report to consulate
         elseif (currentMission == tpz.mission.id.bastok.THE_EMISSARY_SANDORIA) then
-            player:showText(npc,ID.text.HALVER_OFFSET+279)
+            player:showText(npc, ID.text.HALVER_OFFSET+279)
         -- Bastok 2-3 Win -> San
         elseif (currentMission == tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2) then
             if (MissionStatus == 8) then
                 player:startEvent(503)
             elseif (MissionStatus <= 10) then
-                player:showText(npc,ID.text.HALVER_OFFSET+279)
+                player:showText(npc, ID.text.HALVER_OFFSET+279)
             end
         else
-            player:showText(npc,ID.text.HALVER_OFFSET+1092)
+            player:showText(npc, ID.text.HALVER_OFFSET+1092)
         end
     elseif (pNation == tpz.nation.WINDURST) then
         -- Windurst 2-3
@@ -124,72 +124,72 @@ function onTrigger(player,npc)
             elseif (MissionStatus == 8) then
                 player:startEvent(504)
             else
-                player:showText(npc,ID.text.HALVER_OFFSET+279)
+                player:showText(npc, ID.text.HALVER_OFFSET+279)
             end
         end
 
     else
-        player:showText(npc,ID.text.HALVER_OFFSET+1092)
+        player:showText(npc, ID.text.HALVER_OFFSET+1092)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 
     if (csid == 501) then
-        player:addMission(BASTOK,tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
-        player:setCharVar("MissionStatus",4)
+        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
+        player:setCharVar("MissionStatus", 4)
     elseif (csid == 503) then
-        player:setCharVar("MissionStatus",9)
+        player:setCharVar("MissionStatus", 9)
     elseif (csid == 508) then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
     elseif (csid == 505) then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
         player:addKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif (csid == 502) then
-        player:setCharVar("MissionStatus",4)
+        player:setCharVar("MissionStatus", 4)
     elseif (csid == 558) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"),"WildcatSandy",16,true)
+        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 16, true)
     elseif (csid == 504) then
-        player:setCharVar("MissionStatus",9)
+        player:setCharVar("MissionStatus", 9)
     elseif (csid == 546) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 507 or csid == 534 or csid == 548) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 533) then
         player:addKeyItem(tpz.ki.NEW_FEIYIN_SEAL)
-        player:setCharVar("MissionStatus",10)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.NEW_FEIYIN_SEAL)
+        player:setCharVar("MissionStatus", 10)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NEW_FEIYIN_SEAL)
     elseif (csid == 25) then
-        player:setCharVar("MissionStatus",1)
+        player:setCharVar("MissionStatus", 1)
     elseif (csid == 22) then
-        player:setCharVar("MissionStatus",4)
+        player:setCharVar("MissionStatus", 4)
     elseif (csid == 9) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,181)
-            player:setCharVar("Flagsando",1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 181)
+            player:setCharVar("Flagsando", 1)
         else
             player:addItem(181)
-            player:messageSpecial(ID.text.ITEM_OBTAINED,181)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 181)
         end
-        player:setCharVar("MissionStatus",0)
-        player:completeMission(SANDORIA,tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
+        player:setCharVar("MissionStatus", 0)
+        player:completeMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
         player:setRank(10)
         player:addGil(100000)
-        player:messageSpecial(ID.text.GIL_OBTAINED,100000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, 100000)
         player:setTitle(tpz.title.SAN_DORIAN_ROYAL_HEIR)
-        player:setCharVar("SandoEpilogue",1)
+        player:setCharVar("SandoEpilogue", 1)
     elseif (csid == 58) then
-        player:setCharVar("MissionStatus",2)
+        player:setCharVar("MissionStatus", 2)
     elseif (csid == 102) then
-        finishMissionTimeline(player,3,csid,option)
+        finishMissionTimeline(player, 3, csid, option)
         player:setCharVar("Wait1DayM8-1_date", os.date("%j"))
     elseif (csid == 564 and option == 1) then
-        player:completeMission(TOAU,tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
-        player:addMission(TOAU,tpz.mission.id.toau.EASTERLY_WINDS)
+        player:completeMission(TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
+        player:addMission(TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
         player:delKeyItem(tpz.ki.RAILLEFALS_LETTER)
         player:setCharVar("AhtUrganStatus", 1)
     end

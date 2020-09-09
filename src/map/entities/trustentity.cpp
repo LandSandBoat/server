@@ -70,7 +70,7 @@ void CTrustEntity::PostTick()
 void CTrustEntity::FadeOut()
 {
     CBaseEntity::FadeOut();
-    loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
+    loc.zone->PushPacket(this, (loc.zone->m_BattlefieldHandler) ? CHAR_INZONE : CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
 }
 
 void CTrustEntity::Die()
@@ -111,8 +111,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
         action.id = this->id;
         action.actiontype = PAbility->getActionType();
-        //#TODO: unoffset this
-        action.actionid = PAbility->getID() + 16;
+        action.actionid = PAbility->getID();
         action.recast = PAbility->getRecastTime();
         actionList_t& actionList = action.getNewActionList();
         actionList.ActionTargetID = PTarget->id;
@@ -142,10 +141,21 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
-    if (targetFlags & TARGET_PLAYER && PInitiator->allegiance == allegiance)
+    if (PInitiator->objtype == TYPE_TRUST && PMaster == PInitiator->PMaster)
     {
-        return false;
+        return true;
     }
+
+    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->objtype == TYPE_PET && PInitiator->allegiance == allegiance)
+    {
+        return true;
+    }
+
+    if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->allegiance == allegiance && PMaster)
+    {
+        return PInitiator->PParty == PMaster->PParty;
+    }
+
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
 }
 

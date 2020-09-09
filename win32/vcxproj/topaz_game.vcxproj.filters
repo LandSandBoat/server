@@ -338,6 +338,9 @@
     <ClInclude Include="..\..\src\map\packets\entity_update.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\entity_enable_list.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\packets\event.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
@@ -386,7 +389,7 @@
     <ClInclude Include="..\..\src\map\packets\message_basic.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\map\packets\message_debug.h">
+    <ClInclude Include="..\..\src\map\packets\message_combat.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\message_special.h">
@@ -438,6 +441,9 @@
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\synth_message.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\timer_bar_util.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\treasure_find_item.h">
@@ -772,6 +778,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\map\lua\lua_instance.h">
       <Filter>Header Files\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\independant_animation.h">
+      <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\instance_entry.h">
       <Filter>Header Files\packets</Filter>
@@ -1114,6 +1123,9 @@
     <ClCompile Include="..\..\src\map\packets\entity_update.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\entity_enable_list.cpp">
+      <Filter>Source Files\packets</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\map\packets\event.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
@@ -1162,7 +1174,7 @@
     <ClCompile Include="..\..\src\map\packets\message_basic.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\map\packets\message_debug.cpp">
+    <ClCompile Include="..\..\src\map\packets\message_combat.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\message_special.cpp">
@@ -1214,6 +1226,9 @@
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\synth_message.cpp">
+      <Filter>Source Files\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\timer_bar_util.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\treasure_find_item.cpp">
@@ -1524,6 +1539,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\map\lua\lua_instance.cpp">
       <Filter>Source Files\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\independant_animation.cpp">
+      <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\instance_entry.cpp">
       <Filter>Source Files\packets</Filter>

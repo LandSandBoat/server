@@ -70,7 +70,7 @@ struct map_config_t
     std::string server_message;
 
     uint32 max_time_lastupdate;       // max interval wait of last update player char
-    int32  vanadiel_time_offset;      // смещение игрового времени относительно реального времени
+    int32  vanadiel_time_epoch;      // current timestamp - vanadiel_time_epoch = vana'diel time
     int32  lightluggage_block;        // если значение отлично от нуля, то персонажи с lightluggage будут удаляться с сервера автоматически
 
     uint16 ah_base_fee_single;        // Base AH fee for single items
@@ -83,7 +83,6 @@ struct map_config_t
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies
     uint8  exp_party_gap_penalties;   // if 1 Party Gap Penalties will apply
-    uint8  fov_allow_alliance;        // if 1 allow alliance to farm fov pages
     float  exp_retain;                // percentage of normally lost experience to retain upon death
     int8   exp_loss_level;            // Minimum main job level at which a character may lose experience points.
     bool   level_sync_enable;         // Enable/disable Level Sync

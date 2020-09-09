@@ -8,10 +8,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local unforgiven = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
 
     if unforgiven == QUEST_AVAILABLE then
@@ -27,10 +27,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 200 then
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 202 then

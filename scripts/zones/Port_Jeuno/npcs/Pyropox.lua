@@ -26,10 +26,10 @@ local stock =
     5725,  300,    -- Goshikitenge
 }
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if  player:getCharVar("spokePyropox") == 1 then
         player:startEvent(349)
     else
@@ -38,10 +38,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 349 and option == 0 then
         tpz.shop.general(player, stock)
         player:setCharVar("spokePyropox", 0)

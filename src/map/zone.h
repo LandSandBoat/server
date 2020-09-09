@@ -449,7 +449,8 @@ enum ZONEMISC
     MISC_PET        = 0x0080,   // Ability to summon Pets
     MISC_TREASURE   = 0x0100,   // Presence in the global zone TreasurePool
     MISC_AH         = 0x0200,   // Ability to use the auction house
-    MISC_YELL       = 0x0400    // Send and receive /yell commands
+    MISC_YELL       = 0x0400,   // Send and receive /yell commands
+    MISC_TRUST      = 0x0800,   // Ability to summon Trust NPC
 };
 
 /************************************************************************

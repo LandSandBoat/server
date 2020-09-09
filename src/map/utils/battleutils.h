@@ -168,7 +168,7 @@ namespace battleutils
     bool                isValidSelfTargetWeaponskill(int wsid);
     bool                CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
     int16               CalculateBaseTP(int delay);
-    void                GenerateCureEnmity(CCharEntity* PSource, CBattleEntity* PTarget, int32 amount);
+    void                GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount);
     void                GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE);
 
     CItemWeapon*        GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot);

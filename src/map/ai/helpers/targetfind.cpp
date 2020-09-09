@@ -94,7 +94,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
     m_PTarget = PTarget;
     isPlayer = checkIsPlayer(m_PBattleEntity);
 
-    if (isPlayer || m_PTarget->objtype == TYPE_TRUST)
+    if (isPlayer)
     {
         // handle this as a player
         if (m_PMasterTarget->objtype == TYPE_PC)
@@ -114,22 +114,12 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
                     // add party members
                     addAllInParty(m_PMasterTarget, withPet);
                 }
-
-                // add my trust too, if its allowed
-                for (auto* trust : ((CCharEntity*)m_PMasterTarget)->PTrusts)
-                {
-                    if (validEntity((CBattleEntity*)trust))
-                    {
-                        m_targets.push_back((CBattleEntity*)trust);
-                    }
-                }
             }
             else 
             {
                 // just add myself
                 addEntity(m_PMasterTarget, withPet);
             }
-
         }
         else 
         {
@@ -137,7 +127,6 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
             // special case to add all mobs in range
             addAllInMobList(m_PMasterTarget, false);
         }
-
     }
     else 
     {
@@ -257,21 +246,20 @@ void CTargetFind::addAllInAlliance(CBattleEntity* PTarget, bool withPet)
 
 void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
 {
-    PTarget->ForParty([this, withPet](CBattleEntity* PMember)
+    if (PTarget->objtype == TYPE_PC)
     {
-        // Add Trust
-        if (PMember->objtype == TYPE_PC)
+        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
         {
-            auto* PChar = (CCharEntity*)PMember;
-            for (auto trust : PChar->PTrusts)
-            {
-                CBattleEntity* PTrust = static_cast<CBattleEntity*>(trust);
-                m_targets.push_back(PTrust);
-            }
-        }
-        
-        addEntity(PMember, withPet);
-    });
+            addEntity(PMember, withPet);
+        });
+    }
+    else
+    {
+        PTarget->ForParty([this, withPet](CBattleEntity* PMember)
+        {
+            addEntity(PMember, withPet);
+        });
+    }
 }
 
 void CTargetFind::addAllInEnmityList()
@@ -501,11 +489,6 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
     if (validTargetFlags & TARGET_PET)
     {
         return m_PBattleEntity->PPet;
-    }
-
-    if (PTarget->objtype == TYPE_TRUST)
-    {
-        return PTarget;
     }
 
     if (PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))

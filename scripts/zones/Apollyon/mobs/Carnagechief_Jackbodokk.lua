@@ -2,52 +2,82 @@
 -- Area: Apollyon CS
 --  Mob: Carnagechief Jackbodokk
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Apollyon/IDs")
 
 function onMobSpawn(mob)
-    mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-end;
+    mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+end
 
-function onMobEngaged(mob,target)
-    local mobID = mob:getID();
-    local X = mob:getXPos();
-    local Y = mob:getYPos();
-    local Z = mob:getZPos();
-    SpawnMob(16933130):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-    SpawnMob(16933131):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-    SpawnMob(16933132):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-end;
-
-function onMobFight(mob,target)
-    local mobID = mob:getID();
-    local X = mob:getXPos();
-    local Y = mob:getYPos();
-    local Z = mob:getZPos();
-    local lifepourcent= ((mob:getHP()/mob:getMaxHP())*100);
-    local instancetime = target:getBattlefieldTimeLeft(Central_Temenos_2nd_Floor);
-
-
-    if (lifepourcent < 50 and GetNPCByID(16933245):getAnimation() == 8) then
-        SpawnMob(16933134):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-        SpawnMob(16933135):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-        SpawnMob(16933133):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-        SpawnMob(16933136):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID());
-        GetNPCByID(16933245):setAnimation(9);
+function onMobEngaged(mob, target)
+    local battlefield = mob:getBattlefield()
+    if battlefield:getLocalVar("startTime") == 0 then
+        battlefield:setLocalVar("startTime", battlefield:getRemainingTime())
     end
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+1):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+2):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+3):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+    mob:setLocalVar("wave", 1)
+end
 
-    if (instancetime < 13) then
-        if (GetMobByID(16933144):isAlive()) then
-            GetMobByID(16933144):updateEnmity(target);
-        elseif (GetMobByID(16933137):isAlive()) then
-            GetMobByID(16933137):updateEnmity(target);
+function onMobFight(mob, target)
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        local mobX = mob:getXPos()
+        local mobY = mob:getYPos()
+        local mobZ = mob:getZPos()
+        local remainingTime = battlefield:getRemainingTime()
+        local startTime = battlefield:getLocalVar("startTime")
+        local wave = mob:getLocalVar("wave")
+    
+        if GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+1):isDead() and GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+2):isDead()
+            and GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+3):isDead() and wave == 1
+        then
+            mob:setLocalVar("wave", 2)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+4):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+4):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+4):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+5):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+5):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+5):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+6):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+6):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+6):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+        elseif GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+4):isDead() and GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+5):isDead()
+            and GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+6):isDead() and wave == 2
+        then
+            mob:setLocalVar("wave", 1)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+1):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+1):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+1):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+2):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+2):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+2):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+3):setSpawn(mobX, mobY, mobZ)
+            GetMobByID(ID.mob.APOLLYON_CS_MOB[1]+3):setPos(mobX, mobY, mobZ)
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1]+3):setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
+        end
+    
+        if remainingTime <= startTime*0.66 then
+            if GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isAlive() and not GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isEngaged() then
+                battlefield:setLocalVar("startTime", battlefield:getRemainingTime())
+                GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):updateEnmity(target)
+            elseif GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isAlive() and not GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isEngaged() then
+                battlefield:setLocalVar("startTime", battlefield:getRemainingTime())
+                GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):updateEnmity(target)
+            end
         end
     end
-end;
+end
 
-function onMobDeath(mob, player, isKiller)
-    if ( ( GetMobByID(16933144):isAlive() or GetMobByID(16933137):isAlive() ) and alreadyReceived(player,1,Central_Temenos_2nd_Floor) == false) then
-        player:addTimeToBattlefield(Central_Temenos_2nd_Floor,5);
-        addLimbusList(player,1,Central_Temenos_2nd_Floor);
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isDead() and GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isDead() then
+            GetNPCByID(ID.npc.APOLLYON_CS_CRATE):setStatus(tpz.status.NORMAL)
+        elseif GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isAlive() and GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isAlive() then
+            GetNPCByID(ID.npc.APOLLYON_CS_CRATE+1):setStatus(tpz.status.NORMAL)
+        else
+            GetNPCByID(ID.npc.APOLLYON_CS_CRATE+2):setStatus(tpz.status.NORMAL)
+        end
     end
-end;
+end

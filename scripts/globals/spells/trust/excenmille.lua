@@ -11,7 +11,7 @@ require("scripts/globals/zone")
 -----------------------------------------
 
 function onMagicCastingCheck(caster, target, spell)
-    return tpz.trust.canCast(caster, spell, 1004)
+    return tpz.trust.canCast(caster, spell, tpz.magic.spell.EXCENMILLE_S)
 end
 
 function onSpellCast(caster, target, spell)
@@ -26,28 +26,36 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    -- TODO: Spells table /cry
-    local FLASH  = 112
+    tpz.trust.teamworkMessage(mob, {
+        [tpz.magic.spell.RAHAL] = tpz.trust.message_offset.TEAMWORK_1,
+    })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, tpz.effect.SENTINEL,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.SENTINEL)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.FLASH,
-                        ai.r.MA, ai.s.SPECIFIC, FLASH)
+                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.FLASH)
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75,
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_GTE, 1000,
-                        ai.r.WS, ai.s.SPECIFIC, tpz.ws.DOUBLE_THRUST)
+    mob:setTPSkills({
+        ['skills'] = {
+            { ai.r.WS, tpz.ws.DOUBLE_THRUST, 0 },
+            { ai.r.WS, tpz.ws.LEG_SWEEP, 0 },
+            { ai.r.WS, tpz.ws.PENTA_THRUST, 30 },
+        },
+        ['mode'] = ai.tp.ASAP,
+        ['skill_select'] = ai.s.RANDOM,
+    })
 
-    -- Excenmille is a PLD who uses a Polearm, so raise his MAIN_DMG_RATING (up from 1H Sword levels)
-    local increase_damage_by_percent = 30
-    mob:addMod(tpz.mod.MAIN_DMG_RATING, mob:getWeaponDmg() * (1.0 + (increase_damage_by_percent / 100)))
+    mob:addMod(tpz.mod.STORETP, 25)
 end
 
 function onMobDespawn(mob)
+    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
 end
 
 function onMobDeath(mob)
+    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
 end

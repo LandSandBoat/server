@@ -56,7 +56,7 @@ login_session_data_t *find_loginsd_byip(uint32 ip)
     }
 
     if (multiple_ip_count > 1) {
-        ShowInfo("Detected %i instances from %s. Returning best account match.\n", multiple_ip_count, ip2str(ip, nullptr));
+        ShowInfo("Detected %i instances from %s. Returning best account match.\n", multiple_ip_count, ip2str(ip));
     }
     ////////////////
     for (login_sd_list_t::iterator i = login_sd_list.begin();

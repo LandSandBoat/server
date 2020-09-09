@@ -12,38 +12,38 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    if player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MANDRAGORA_MAD) ~= QUEST_AVAILABLE then
+function onTrade(player, npc, trade)
+    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD) ~= QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, 17344, true) then
-            player:startEvent(251,GIL_RATE*200)
+            player:startEvent(251, GIL_RATE*200)
         elseif npcUtil.tradeHas(trade, 934, true) then
-            player:startEvent(252,GIL_RATE*250)
+            player:startEvent(252, GIL_RATE*250)
         elseif npcUtil.tradeHas(trade, 1154, true) then
-            player:startEvent(253,GIL_RATE*1200)
+            player:startEvent(253, GIL_RATE*1200)
         elseif npcUtil.tradeHas(trade, 4369, true) then
-            player:startEvent(254,GIL_RATE*120)
+            player:startEvent(254, GIL_RATE*120)
         elseif npcUtil.tradeHas(trade, 1150, true) then
-            player:startEvent(255,GIL_RATE*5500)
+            player:startEvent(255, GIL_RATE*5500)
         else
             player:startEvent(250)
         end
     end
 end
 
-function onTrigger(player,npc)
-    local MandragoraMad = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.MANDRAGORA_MAD)
-    local blastFromPast = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
+function onTrigger(player, npc)
+    local MandragoraMad = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
+    local blastFromPast = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
     local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
     local MissionStatus = player:getCharVar("MissionStatus")
 
     --optional windy 9-1
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.DOLL_OF_THE_DEAD and MissionStatus == 4 then
-        player:startEvent(439,0,17868,1181)
+        player:startEvent(439, 0, 17868, 1181)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 3 then
         player:startEvent(469)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 6 then
-        player:startEvent(470,0,587,581,586)
+        player:startEvent(470, 0, 587, 581, 586)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:hasKeyItem(tpz.ki.MIMEO_FEATHER) then
         player:startEvent(471)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 11 then
@@ -56,7 +56,7 @@ function onTrigger(player,npc)
         local blastPastProg = player:getCharVar("BlastFromThePast_Prog")
         if (blastPastProg == 1) then
             player:startEvent(221)
-            player:setCharVar("BlastFromThePast_Prog",2)
+            player:setCharVar("BlastFromThePast_Prog", 2)
         elseif (blastPastProg == 2) then
             player:startEvent(222)
         end
@@ -71,30 +71,30 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 249 then
-        player:addQuest(WINDURST,tpz.quest.id.windurst.MANDRAGORA_MAD)
+        player:addQuest(WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
     elseif csid == 469 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status",4)
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 4)
     elseif csid == 470 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status",7)
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 7)
         player:delKeyItem(tpz.ki.CRACKED_MIMEO_MIRROR)
     elseif csid == 471 then
         player:delKeyItem(tpz.ki.MIMEO_FEATHER)
         player:delKeyItem(tpz.ki.SECOND_MIMEO_FEATHER)
         player:delKeyItem(tpz.ki.THIRD_MIMEO_FEATHER)
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status",9)
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 9)
     elseif csid == 472 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status",12)    --end 3-3B: Windurst Route: "Memories of a Maiden"
+        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 12)    --end 3-3B: Windurst Route: "Memories of a Maiden"
     elseif csid == 481 then
-        player:setCharVar("COP_Louverance_s_Path",4)
+        player:setCharVar("COP_Louverance_s_Path", 4)
     elseif csid == 473 then
-        player:setCharVar("COP_Ulmia_s_Path",5)
+        player:setCharVar("COP_Ulmia_s_Path", 5)
     elseif csid == 439 then
-        player:setCharVar("MissionStatus",5)
+        player:setCharVar("MissionStatus", 5)
     elseif csid == 251 then
         npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD, { fame = 10 })
         player:addGil(GIL_RATE*200)

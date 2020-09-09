@@ -3861,6 +3861,46 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,159,1,255);      
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,164,21,255);       -- Thunder
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto_II',428,169,5,255);        -- Water
 
+INSERT INTO `mob_spell_lists` VALUES ('Siren',429,423,1,255);        -- Massacre Elegy
+INSERT INTO `mob_spell_lists` VALUES ('Siren',429,462,1,255);        -- Magic Finale
+INSERT INTO `mob_spell_lists` VALUES ('Siren',429,873,1,255);        -- Wind Threnody II
+
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,147,24,255); -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,152,24,255); -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,157,24,255); -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,162,24,255); -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,167,24,255); -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,172,24,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,176,69,255); -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,181,71,255); -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,186,67,255); -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,191,63,255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,196,73,255); -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,201,65,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,204,60,255); -- Flare
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,206,50,255); -- Freeze
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,208,52,255); -- Tornado
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,210,54,255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,212,56,255); -- Burst
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,214,58,255); -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,231,35,255); -- Bio II
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,235,24,255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,236,22,255); -- Frost
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,237,20,255); -- Choke
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,238,18,255); -- Rasp
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,239,16,255); -- Shock
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,240,27,255); -- Drown
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,245,12,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,247,25,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,249,10,255); -- Blaze Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,252,45,255); -- Stun
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,254,4,255);  -- Blind
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,258,7,255);  -- Bind
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,273,31,255); -- Sleepga
+INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,274,56,255); -- Sleepga II
+
+
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

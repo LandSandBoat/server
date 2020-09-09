@@ -9,7 +9,7 @@ require("scripts/globals/keyitems")
 tpz = tpz or {}
 tpz.armorStorage = tpz.armorStorage or {}
 
--- {SetId,SetGroup,SetMask,SetCount,Head,Body,Hands,Legs,Feet,StorageCost,KeyItem}
+-- {SetId, SetGroup, SetMask, SetCount, Head, Body, Hands, Legs, Feet, StorageCost, KeyItem}
 local armorSets =
 {
     1,  4, 0x000001, 5, 12511, 12638, 13961, 14214, 14089, 500,  tpz.ki.FIGHTERS_ARMOR_CLAIM_SLIP,

@@ -10,6 +10,12 @@ zones[tpz.zone.PORT_WINDURST] =
 {
     text =
     {
+        REGIME_CANCELED                 = 14, -- Current training regime canceled.
+        HUNT_ACCEPTED                   = 32, -- Hunt accepted!
+        USE_SCYLDS                      = 33, -- You use <number> [scyld/scylds]. Scyld balance: <number>.
+        HUNT_RECORDED                   = 44, -- You record your hunt.
+        OBTAIN_SCYLDS                   = 46, -- You obtain <number> [scyld/scylds]! Current balance: <number> [scyld/scylds].
+        HUNT_CANCELED                   = 50, -- Hunt canceled.
         MELEK_DIALOG_B                  = 3250, -- Take that sword to Giddeus. Good luck.
         GOLD_SKULL_DIALOG               = 3251, -- Welcome back. Your mission went without incident, I trust?
         MELEK_DIALOG_C                  = 3256, -- I hope to see you safe and well again someday. Take care, <name>.
@@ -62,7 +68,7 @@ zones[tpz.zone.PORT_WINDURST] =
         ALIZABE_CLOSED_DIALOG           = 12875, -- Pssst! Have you heard of Tavnazia? Boy, do they have some sweet items on those islands...
         ALIZABE_COP_NOT_COMPLETED       = 12876, -- It won't be long before I set up shop right here in this very place. And once I start, there won't be no stoppin' me!
         RETRIEVE_DIALOG_ID              = 15881, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL           = 16281, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL           = 16283, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

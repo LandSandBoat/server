@@ -53,6 +53,7 @@ struct Trust_t
     float HPscale; // HP boost percentage
     float MPscale; // MP boost percentage
 
+    uint16 cmbDmgMult;
     uint16 cmbDelay;
     uint8 speed;
     // stat ranks
@@ -140,7 +141,7 @@ void BuildTrust(uint32 TrustID)
                 mob_pools.mJob,\
                 mob_pools.sJob,\
                 mob_pools.hasSpellScript, mob_pools.spellList, \
-                mob_pools.cmbDelay, mob_pools.name_prefix, \
+                mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.name_prefix, \
                 mob_pools.behavior, mob_pools.skill_list_id, \
                 spell_list.spellid, \
                 mob_family_system.mobsize, mob_family_system.systemid, \
@@ -184,34 +185,35 @@ void BuildTrust(uint32 TrustID)
             trust->sJob           = (uint8)Sql_GetIntData(SqlHandle, 5);
             trust->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 6);
             trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, 7);
-            trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 8);
-            trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 9);
+            trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 8);
+            trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 9);
+            trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 10);
             // Behaviour
-            trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 11);
+            trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 12);
             // SpellID
-            trust->size      = Sql_GetUIntData(SqlHandle, 13);
-            trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 14);
-            trust->HPscale   = Sql_GetFloatData(SqlHandle, 15);
-            trust->MPscale   = Sql_GetFloatData(SqlHandle, 16);
-            trust->speed     = (uint8)Sql_GetIntData(SqlHandle, 17);
-            trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, 18);
-            trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, 19);
-            trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, 20);
-            trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, 21);
-            trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, 22);
-            trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, 23);
-            trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, 24);
-            trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, 25);
-            trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, 26);
-            trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, 27);
-            trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 28);
+            trust->size      = Sql_GetUIntData(SqlHandle, 14);
+            trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 15);
+            trust->HPscale   = Sql_GetFloatData(SqlHandle, 16);
+            trust->MPscale   = Sql_GetFloatData(SqlHandle, 17);
+            trust->speed     = (uint8)Sql_GetIntData(SqlHandle, 18);
+            trust->strRank   = (uint8)Sql_GetIntData(SqlHandle, 19);
+            trust->dexRank   = (uint8)Sql_GetIntData(SqlHandle, 20);
+            trust->vitRank   = (uint8)Sql_GetIntData(SqlHandle, 21);
+            trust->agiRank   = (uint8)Sql_GetIntData(SqlHandle, 22);
+            trust->intRank   = (uint8)Sql_GetIntData(SqlHandle, 23);
+            trust->mndRank   = (uint8)Sql_GetIntData(SqlHandle, 24);
+            trust->chrRank   = (uint8)Sql_GetIntData(SqlHandle, 25);
+            trust->defRank   = (uint8)Sql_GetIntData(SqlHandle, 26);
+            trust->attRank   = (uint8)Sql_GetIntData(SqlHandle, 27);
+            trust->accRank   = (uint8)Sql_GetIntData(SqlHandle, 28);
+            trust->evaRank   = (uint8)Sql_GetIntData(SqlHandle, 29);
 
             // resistances
-            trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 29) * 1000);
-            trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
-            trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
-            trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
-
+            trust->slashres  = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
+            trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
+            trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
+            trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
+        
             trust->firedef    = 0;
             trust->icedef     = 0;
             trust->winddef    = 0;
@@ -221,14 +223,14 @@ void BuildTrust(uint32 TrustID)
             trust->lightdef   = 0;
             trust->darkdef    = 0;
 
-            trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 33) - 1) * -100);
-            trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
-            trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-            trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-            trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
-            trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
-            trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
-            trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
+            trust->fireres    = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
+            trust->iceres     = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
+            trust->windres    = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
+            trust->earthres   = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+            trust->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
+            trust->waterres   = (uint16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
+            trust->lightres   = (uint16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
+            trust->darkres    = (uint16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
 
             g_PTrustList.push_back(trust);
         }
@@ -299,14 +301,22 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     PTrust->SetMJob(trustData->mJob);
     PTrust->SetSJob(trustData->sJob);
 
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDelay((trustData->cmbDelay * 1000) / 60);
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
-
     // assume level matches master
     PTrust->SetMLevel(PMaster->GetMLevel());
     PTrust->SetSLevel(PMaster->GetSLevel());
 
     LoadTrustStatsAndSkills(PTrust);
+
+    // Use Mob formulas to work out base "weapon" damage, but scale down to reasonable values.
+    auto mobStyleDamage = static_cast<float>(mobutils::GetWeaponDamage(PTrust));
+    auto baseDamage = mobStyleDamage * 0.5f;
+    auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
+    auto adjustedDamage = baseDamage * damageMultiplier;
+    auto finalDamage = std::max(adjustedDamage, 1.0f);
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage(static_cast<uint16>(finalDamage));
+
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDelay((trustData->cmbDelay * 1000) / 60);
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
 
     // Spell lists
     auto spellList = mobSpellList::GetMobSpellList(trustData->spellList);
@@ -314,9 +324,6 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     {
         mobutils::SetSpellList(PTrust, trustData->spellList);
     }
-
-    // TODO: This is temporary until a proper solution for decision making is chosen
-    PTrust->setMobMod(MOBMOD_SKILL_LIST, PTrust->m_MobSkillList);
 
     return PTrust;
 }
@@ -377,40 +384,6 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->UpdateHealth();
     PTrust->health.hp = PTrust->GetMaxHP();
     PTrust->health.mp = PTrust->GetMaxMP();
-
-    // TODO: Set damage and delay based on job/sjob
-    // Base damage is based on mob calculations and is far too high, scale down here and fine tune below.
-    auto baseDamage = mobutils::GetWeaponDamage(PTrust) * 0.5;
-    float damage_mod = 1.0f;
-    switch (mJob)
-    {
-        // TODO: Check all jobs
-
-        // Assuming the job is using its "default" weapon type, otherwise adjust damage with mods.
-        // FAST WEAPONS
-        case JOB_MNK:
-        case JOB_THF:
-        case JOB_NIN:
-        case JOB_PUP:
-            { damage_mod = 0.60f; break; }
-        // SLOW WEAPONS
-        case JOB_WAR:
-        case JOB_DRK:
-        case JOB_SAM:
-        case JOB_DRG:
-        case JOB_RUN:
-            { damage_mod = 1.50f; break; }
-        // NORMAL WEAPONS
-        default: { damage_mod = 1.0f; break; }
-    }
-
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage((uint16)(baseDamage * damage_mod));
-
-    // Reduce weapon delay of MNK
-    if (PTrust->GetMJob() == JOB_MNK)
-    {
-        ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->resetDelay();
-    }
 
     uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
     uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);

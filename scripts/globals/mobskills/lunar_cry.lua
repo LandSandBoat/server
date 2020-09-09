@@ -8,7 +8,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -31,8 +31,8 @@ function onMobWeaponSkill(target, mob, skill)
         buffvalue = 6
     end
 
-    target:addStatusEffect(tpz.effect.ACCURACY_DOWN,buffvalue,0,180)
-    target:addStatusEffect(tpz.effect.EVASION_DOWN,32-buffvalue,0,180)
+    target:addStatusEffect(tpz.effect.ACCURACY_DOWN, buffvalue, 0, 180)
+    target:addStatusEffect(tpz.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
     skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_2)
     return 0
 

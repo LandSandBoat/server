@@ -9,11 +9,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -64,11 +64,11 @@ function onSpellCast(caster,target,spell)
 
     if isValidHealTarget(caster, target) then
         if (USE_OLD_CURE_FORMULA == true) then
-            basecure = getBaseCureOld(power,divisor,constant)
+            basecure = getBaseCureOld(power, divisor, constant)
         else
-            basecure = getBaseCure(power,divisor,constant,basepower)
+            basecure = getBaseCure(power, divisor, constant, basepower)
         end
-        final = getCureFinal(caster,spell,basecure,minCure,false)
+        final = getCureFinal(caster, spell, basecure, minCure, false)
         if (caster:hasStatusEffect(tpz.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(tpz.effect.STONESKIN) == false) then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(tpz.slot.BODY)
@@ -82,7 +82,7 @@ function onSpellCast(caster,target,spell)
 
             solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(tpz.merit.ANIMUS_SOLACE)/100)
 
-            target:addStatusEffect(tpz.effect.STONESKIN,solaceStoneskin,0,25,0,0,1)
+            target:addStatusEffect(tpz.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
         end
         final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
 
@@ -96,7 +96,7 @@ function onSpellCast(caster,target,spell)
         target:addHP(final)
 
         target:wakeUp()
-        caster:updateEnmityFromCure(target,final)
+        caster:updateEnmityFromCure(target, final)
     else
         -- no effect if player casted on mob
 
@@ -117,22 +117,22 @@ function onSpellCast(caster,target,spell)
             params.bonus = 1.0
             local resist = applyResistance(caster, target, spell, params)
             dmg = dmg*resist
-            dmg = addBonuses(caster,spell,target,dmg)
-            dmg = adjustForTarget(target,dmg,spell:getElement())
-            dmg = finalMagicAdjustments(caster,target,spell,dmg)
+            dmg = addBonuses(caster, spell, target, dmg)
+            dmg = adjustForTarget(target, dmg, spell:getElement())
+            dmg = finalMagicAdjustments(caster, target, spell, dmg)
             final = dmg
             target:takeDamage(final, caster, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
-            target:updateEnmityFromDamage(caster,final)
+            target:updateEnmityFromDamage(caster, final)
         elseif (caster:getObjType() == tpz.objType.PC) then
             spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
             if (USE_OLD_CURE_FORMULA == true) then
-                basecure = getBaseCureOld(power,divisor,constant)
+                basecure = getBaseCureOld(power, divisor, constant)
             else
-                basecure = getBaseCure(power,divisor,constant,basepower)
+                basecure = getBaseCure(power, divisor, constant, basepower)
             end
-            final = getCureFinal(caster,spell,basecure,minCure,false)
+            final = getCureFinal(caster, spell, basecure, minCure, false)
             local diff = (target:getMaxHP() - target:getHP())
             if (final > diff) then
                 final = diff

@@ -9,11 +9,11 @@ require("scripts/globals/utils")
 require("scripts/globals/msg")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local basedmg = caster:getSkillLevel(tpz.skill.DARK_MAGIC) / 4
     local params = {}
     params.dmg = basedmg

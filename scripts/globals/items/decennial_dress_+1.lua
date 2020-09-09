@@ -15,5 +15,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addItem(5935,1)
+    target:addItem(5935, 1)
 end

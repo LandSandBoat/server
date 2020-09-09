@@ -110,6 +110,7 @@ CCharEntity::CCharEntity()
     m_Wardrobe4 = std::make_unique<CItemContainer>(LOC_WARDROBE4);
 
     memset(&jobs, 0, sizeof(jobs));
+    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
     memset(&keys, 0, sizeof(keys));
     memset(&equip, 0, sizeof(equip));
     memset(&equipLoc, 0, sizeof(equipLoc));
@@ -118,6 +119,7 @@ CCharEntity::CCharEntity()
     memset(&nameflags, 0, sizeof(nameflags));
     memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 
+    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
     memset(&m_SpellList, 0, sizeof(m_SpellList));
     memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
     memset(&m_TitleList, 0, sizeof(m_TitleList));
@@ -481,35 +483,29 @@ bool CCharEntity::ReloadParty()
 void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 {
     if (!PTrust->PAI->IsSpawned())
+    {
         return;
+    }
 
-    auto trustIt = std::remove_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
+    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
     if (trustIt != PTrusts.end())
     {
         PTrust->PAI->Despawn();
         PTrusts.erase(trustIt);
     }
 
-    if (PParty != nullptr)
-    {
-        if (PTrusts.size() < 1 && PParty->members.size() == 1)
-        {
-            PParty->DisbandParty();
-        }
-        else
-        {
-            PParty->ReloadParty();
-        }
-    }
+    ReloadPartyInc();
 }
 
 void CCharEntity::ClearTrusts()
 {
-    for (auto trust : PTrusts)
+    for (auto PTrust : PTrusts)
     {
-        trust->PAI->Despawn();
+        PTrust->PAI->Despawn();
     }
     PTrusts.clear();
+
+    ReloadPartyInc();
 }
 
 void CCharEntity::Tick(time_point tick)
@@ -1022,8 +1018,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         action.id = this->id;
         action.actiontype = PAbility->getActionType();
-        //#TODO: unoffset this
-        action.actionid = PAbility->getID() + 16;
+        action.actionid = PAbility->getID();
 
         // #TODO: get rid of this to script, too
         if (PAbility->isPetAbility())
@@ -1153,7 +1148,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             //{
             //    battleutils::jumpAbility(this, PTarget, 3);
             //    action.messageID = 0;
-            //    this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, PAbility->getID() + 16, 0, MSGBASIC_USES_JA));
+            //    this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, PAbility->getID(), 0, MSGBASIC_USES_JA));
             //}
 
             //#TODO: move these 3 BST abilities to scripts
@@ -1684,10 +1679,11 @@ void CCharEntity::Die()
 
 void CCharEntity::Die(duration _duration)
 {
+    this->ClearTrusts();
+
     m_deathSyncTime = server_clock::now() + death_update_frequency;
     PAI->ClearStateStack();
     PAI->Internal_Die(_duration);
-    this->ClearTrusts();
 
     // reraise modifiers
     if (this->getMod(Mod::RERAISE_I) > 0)

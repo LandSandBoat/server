@@ -139,7 +139,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
             }
             targid++;
         }
-        if (targid >= 0x800)
+        if (targid >= 0x780)
         {
             ShowError(CL_RED"CZone::InsertPET : targid is high (03hX)\n" CL_RESET, targid);
             return;
@@ -168,7 +168,7 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
 {
     if (PTrust != nullptr)
     {
-        uint16 targid = 0x800;
+        uint16 targid = 0x780;
 
         for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
         {
@@ -178,7 +178,7 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
             }
             targid++;
         }
-        if (targid >= 0x900)
+        if (targid >= 0x800)
         {
             ShowError(CL_RED"CZone::InsertTRUST : targid is high (03hX)\n" CL_RESET, targid);
             return;
@@ -702,7 +702,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x800)
+    else if (targid < 0x780)
     {
         if (filter & TYPE_PET)
         {
@@ -713,7 +713,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x900)
+    else if (targid < 0x800)
     {
         if (filter & TYPE_TRUST)
         {
@@ -924,11 +924,11 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                             spawnlist = PCurrentChar->SpawnNPCList;
                                         }
                                     }
-                                    else if (entity->targid < 0x800)
+                                    else if (entity->targid < 0x780)
                                     {
                                         spawnlist = PCurrentChar->SpawnPETList;
                                     }
-                                    else if (entity->targid < 0x900)
+                                    else if (entity->targid < 0x800)
                                     {
                                         spawnlist = PCurrentChar->SpawnTRUSTList;
                                     }
@@ -1102,6 +1102,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                 PCurrentMob->PEnmityContainer->Clear(PTrust->id);
             }
+
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
                 CCharEntity* PChar = (CCharEntity*)it->second;
@@ -1115,7 +1116,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             delete trustit->second;
             m_trustList.erase(trustit++);
         }
-        else {
+        else
+        {
             ++trustit;
         }
     }
@@ -1141,6 +1143,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             }
         }
     }
+
     if (tick > m_EffectCheckTime)
     {
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;

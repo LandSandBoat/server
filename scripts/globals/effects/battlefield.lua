@@ -4,7 +4,7 @@
 --
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     if target:getPet() then
         target:getPet():addStatusEffect(effect)
     end
@@ -14,10 +14,10 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     local pet = target:getPet()
     if pet then
         pet:delStatusEffect(tpz.effect.BATTLEFIELD)
@@ -26,12 +26,12 @@ function onEffectLose(target,effect)
     target:setLocalVar("[battlefield]area", 0)
 end
 
-function onEventUpdate(player,csid,option)
-    -- printf("onUpdate CSID: %u",csid)
-    -- printf("onUpdate RESULT: %u",option)
+function onEventUpdate(player, csid, option)
+    -- printf("onUpdate CSID: %u", csid)
+    -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player,csid,option)
-    -- printf("onFinish CSID: %u",csid)
-    -- printf("onFinish RESULT: %u",option)
+function onEventFinish(player, csid, option)
+    -- printf("onFinish CSID: %u", csid)
+    -- printf("onFinish RESULT: %u", option)
 end

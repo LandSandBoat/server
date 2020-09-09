@@ -12,7 +12,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     -- only used during daytime
     local currentTime = VanadielHour()
     if (currentTime >= 6 and currentTime <= 18) then

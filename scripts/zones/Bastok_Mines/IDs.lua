@@ -30,6 +30,12 @@ zones[tpz.zone.BASTOK_MINES] =
         NO_MORE_GP_ELIGIBLE            = 7082, -- You are not eligible to receive guild points at this time.
         GP_OBTAINED                    = 7087, -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP             = 7088, -- You do not have enough guild points.
+        REGIME_CANCELED                = 7269, -- Current training regime canceled.
+        HUNT_ACCEPTED                  = 7287, -- Hunt accepted!
+        USE_SCYLDS                     = 7288, -- You use <number> [scyld/scylds]. Scyld balance: <number>.
+        HUNT_RECORDED                  = 7299, -- You record your hunt.
+        OBTAIN_SCYLDS                  = 7301, -- You obtain <number> [scyld/scylds]! Current balance: <number> [scyld/scylds].
+        HUNT_CANCELED                  = 7305, -- Hunt canceled.
         ITEM_DELIVERY_DIALOG           = 10435, -- Need something sent to a friend's house? Sending items to your own house? You've come to the right place!
         DETZO_RIVALS_DIALOG            = 10586, -- Can I borrow it for just a few seconds? I'll give it back, promise! I'll even give you a reward!
         FAUSTIN_CLOSED_DIALOG          = 10779, -- Sorry, I don't have anything to sell you. I'm trying to start a business selling goods from Ronfaure, but it's not easy getting stuff from areas that aren't under Bastokan control.
@@ -72,8 +78,8 @@ zones[tpz.zone.BASTOK_MINES] =
         EMALIVEULAUX_COP_NOT_COMPLETED = 12241, -- I'd like to start my own business someday, but I just haven't found anything that truly interests me.
         EMALIVEULAUX_OPEN_DIALOG       = 12242, -- Rare Tavnazian imports! Get them before they're gone!
         EMALIVEULAUX_CLOSED_DIALOG     = 12243, -- I'd love to sell you goods imported from the island of Tavnazia, but with the area under foreign control, I can't secure my trade routes...
-        COMMON_SENSE_SURVIVAL          = 15996, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE        = 16593, -- There appears to be a tear in the fabric of space...
+        COMMON_SENSE_SURVIVAL          = 15998, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TEAR_IN_FABRIC_OF_SPACE        = 16597, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {
