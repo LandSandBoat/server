@@ -75,11 +75,12 @@ function onTrigger(player, npc)
     local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
     local job = player:getMainJob()
     local lvl = player:getMainLvl()
-    local Rank3 = player:getRank() >= 3 and 1 or 0
 
     -- TRUST
-    if mihgosAmigo == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
-        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+    if player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
+        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+
+        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
 
         -- WINDURST 2-1: LOST FOR WORDS
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and missionStatus > 0 and
@@ -241,7 +242,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE * 200)
         player:addFame(NORG, 30)
 
-    elseif csid == 865 then
+    elseif csid == 865 and option == 2 then
         player:addSpell(901, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
     end

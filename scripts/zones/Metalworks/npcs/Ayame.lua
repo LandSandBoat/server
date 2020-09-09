@@ -107,7 +107,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("FadedPromises", 2)
     elseif (csid == 804) then
         player:setCharVar("FadedPromises", 4)
-    elseif csid == 985 then
+    elseif csid == 985 and option == 2 then
         player:addSpell(900, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 900)
     end
