@@ -6,7 +6,7 @@ require("scripts/globals/status")
 tpz = tpz or {}
 tpz.roe = tpz.roe or {}
 
-tpz.roe.triggers = 
+tpz.roe.triggers =
 {
     mobKill = 1,        -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,      -- Player Weapon skill used
@@ -148,7 +148,7 @@ tpz.roe.completeRecord = tpz.roe.onRecordTrigger
 -- All implemented records must have their entries in this table.
 -- Records not in this table can't be taken.
 
-tpz.roe.records = 
+tpz.roe.records =
 {
 
   ----------------------------------------
@@ -161,25 +161,25 @@ tpz.roe.records =
 
     [2   ] = { -- Vanquish 1 Enemy
         trigger = triggers.mobKill,
-        reward =  { sparks = 100, xp = 500}       
+        reward =  { sparks = 100, xp = 500}
     },
 
     [3   ] = { -- Undertake a FoV Training Regime
-        reward =  { sparks = 100, xp = 500}       
+        reward =  { sparks = 100, xp = 500}
     },
 
     [4   ] = { -- Heal without magic
-        reward =  { sparks = 100, xp = 500}       
+        reward =  { sparks = 100, xp = 500}
     },
 
     [11  ] = { -- Undertake a GoV Training Regime
-        reward =  { sparks = 100, xp = 500}       
+        reward =  { sparks = 100, xp = 500}
     },
-    
+
   --------------------------------------------
   -- Combat (Wide Area) -> Combat (General) --
   --------------------------------------------
-    
+
     [12  ] = { -- Vanquish Multiple Enemies I - 200
         trigger = triggers.mobKill,
         goal = 200,
@@ -379,7 +379,7 @@ tpz.roe.records =
     },
 
   --------------------------------------------
-  -- Combat (Wide Area) -> Spoils I         --
+  -- Combat (Wide Area) -> Spoils 1         --
   --------------------------------------------
 
     [71  ] = { -- Spoils - Fire Crystals
@@ -437,7 +437,473 @@ tpz.roe.records =
         reqs = { itemID = set{ 4103 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
-    
+
+    [84  ] = { -- Spoils - Flame Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3297 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [85  ] = { -- Spoils - Snow Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3298 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [86  ] = { -- Spoils - Breeze Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3299 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [87  ] = { -- Spoils - Soil Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3300 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [88  ] = { -- Spoils - Thunder Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3301 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [89  ] = { -- Spoils - Aqua Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3302 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [90  ] = { -- Spoils - Light Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3303 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [91  ] = { -- Spoils - Shadow Geode
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3304 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [92  ] = { -- Spoils - Ifritite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3520 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [93  ] = { -- Spoils - Shivite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3521 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [94  ] = { -- Spoils - Garudite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3522 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [95  ] = { -- Spoils - Titanite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3523 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [96  ] = { -- Spoils - Ramuite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3524 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [97  ] = { -- Spoils - Leviatite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3525 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [98  ] = { -- Spoils - Carbite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3526 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+    [99  ] = { -- Spoils - Fenrite
+        trigger = triggers.lootitem,
+        goal = 3,
+        reqs = { itemid = set{ 3527 } },
+        reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
+    },
+
+  --------------------------------------------
+  -- Combat (Wide Area) -> Spoils 2         --
+  --------------------------------------------
+
+    [120 ] = { -- Spoils - Bat Wing
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 922 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [121 ] = { -- Spoils - Black Tiger Fang
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 884 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [122 ] = { -- Spoils - Flint Stone
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 768 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [123 ] = { -- Spoils - Rabbit Hide
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 856 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [124 ] = { -- Spoils - Honey
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 4370 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [125 ] = { -- Spoils - Sheepskin
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 505 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [126 ] = { -- Spoils - Lizard Skin
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 852 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [127 ] = { -- Spoils - Beetle Shell
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 889 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [128 ] = { -- Spoils - Zeruhn Soot
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 560 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [129 ] = { -- Spoils - Silver Name Tag
+        trigger = triggers.lootitem,
+        goal = 1,
+        reqs = { itemid = set{ 13116 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [130 ] = { -- Spoils - Quadav Helm
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 501 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [132 ] = { -- Spoils - Treant Bulb
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 953 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [133 ] = { -- Spoils - Wild Onion
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 4387 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [134 ] = { -- Spoils - Sleepshroom
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 4374 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [135 ] = { -- Spoils - Sand Bat Fang
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 1015 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [136 ] = { -- Spoils - Zinc Ore
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 642 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [137 ] = { -- Spoils - Giant Bird Feather
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 842 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [138 ] = { -- Spoils - Three-leaf Mandragora Bud
+        trigger = triggers.lootitem,
+        goal = 1,
+        reqs = { itemid = set{ 1154 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [139 ] = { -- Spoils - Four-leaf Mandragora Bud
+        trigger = triggers.lootitem,
+        goal = 1,
+        reqs = { itemid = set{ 4369 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [140 ] = { -- Spoils - Cornette
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 17344 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [141 ] = { -- Spoils - Yuhtunga Sulfur
+        trigger = triggers.lootitem,
+        goal = 1,
+        reqs = { itemid = set{ 934 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [142 ] = { -- Spoils - Snobby Letter
+        trigger = triggers.lootitem,
+        goal = 1,
+        reqs = { itemid = set{ 1150 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [143 ] = { -- Spoils - Yagudo Bead Necklace
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 498 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [144 ] = { -- Spoils - Woozyshroom
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 4373 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [145 ] = { -- Spoils - Beehive Chip
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 912 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [146 ] = { -- Spoils - Remi Shell
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 1016 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+    [147 ] = { -- Spoils - Twinstone Earring
+        trigger = triggers.lootitem,
+        goal = 2,
+        reqs = { itemid = set{ 13360 } },
+        reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
+    },
+
+  ----------------------------------------
+  -- Combat (Region) - Original Areas 1 --
+  ----------------------------------------
+
+    [215 ] = { -- Conflict: West Ronfaure
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{100} },
+        reward = { sparks = 10, xp = 500, unity = 5, item = { 4439 }, repeatable = true },
+    },
+
+    [216 ] = { -- Subjugation: Jaggedy-Eared Jack
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17187111} },
+        reward = { sparks = 250, xp = 500 },
+    },
+
+    [217 ] = { -- Conflict: East Ronfaure
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{101} },
+        reward = { sparks = 10, xp = 500, unity = 5, item = { 12577 }, repeatable = true },
+    },
+
+    [218 ] = { -- Subjugation: Swamfisk
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17191189, 17191291} },
+        reward = { sparks = 250, xp = 500 },
+    },
+
+    [219 ] = { -- Conflict: Ghelsba Outpost
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{140} },
+        reward = { sparks = 10, xp = 500, unity = 5, item = { 13331 }, repeatable = true },
+    },
+
+    [220 ] = { -- Subjugation: Thousandarm Deshglesh
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17350826} },
+        reward = { sparks = 250, xp = 550 },
+    },
+
+    [221 ] = { -- Conflict: Fort Ghelsba
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{141} },
+        reward = { sparks = 10, xp = 500, unity = 5, item = { 13333 }, repeatable = true },
+    },
+
+    [222 ] = { -- Subjugation: Hundredscar Hajwaj
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17354828} },
+        reward = { sparks = 500, xp = 1000 },
+    },
+
+    [223 ] = { -- Conflict: Yughott Grotto
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{142} },
+        reward = { sparks = 10, xp = 500, unity = 5, item = { 13336 }, repeatable = true },
+    },
+
+    [224 ] = { -- Subjugation: Ashmaker Gotblut
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17358932} },
+        reward = { sparks = 250, xp = 500 },
+    },
+
+    [225 ] = { -- Conflict: King Ranperre's Tomb
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{190} },
+        reward = { sparks = 10, xp = 100, unity = 5, item = { 13443 }, repeatable = true },
+    },
+
+    [226 ] = { -- Subjugation: Barbastelle
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17555721} },
+        reward = { sparks = 250, xp = 500 },
+    },
+
+    [227 ] = { -- Conflict: Bostaunieux Oubliette
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{167} },
+        reward = { sparks = 15, xp = 100, unity = 5, item = { 11532 }, repeatable = true },
+    },
+
+    [228 ] = { -- Subjugation: Bloodsucker
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17461478} },
+        reward = { sparks = 500, xp = 1000 },
+    },
+
+    [229 ] = { -- Conflict: Valkurm Dunes
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{103} },
+        reward = { sparks = 11, xp = 550, unity = 5, item = { 13456 }, repeatable = true },
+    },
+
+    [230 ] = { -- Subjugation: Valkurm Emperor
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17199438} },
+        reward = { sparks = 250, xp = 550 },
+    },
+
+    [231 ] = { -- Conflict: Konschtat Highlands
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{108} },
+        reward = { sparks = 11, xp = 550, unity = 5, item = { 13472 }, repeatable = true },
+    },
+
+    [232 ] = { -- Subjugation: Bendigeit Vran
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17220001} },
+        reward = { sparks = 250, xp = 600 },
+    },
+
+    [233 ] = { -- Conflict: Gusgen Mines
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{196} },
+        reward = { sparks = 11, xp = 100, unity = 5, item = { 13471 }, repeatable = true },
+    },
+
+    [234 ] = { -- Subjugation: Juggler Hecatomb
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17580248} },
+        reward = { sparks = 250, xp = 600 },
+    },
+
+    [235 ] = { -- Conflict: La Theine Plateau
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{102} },
+        reward = { sparks = 11, xp = 550, unity = 5, item = { 13444 }, repeatable = true },
+    },
+
+    [236 ] = { -- Subjugation: Bloodtear Baldurf
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17195318} },
+        reward = { sparks = 500, xp = 1000 },
+    },
+
+
+    [237 ] = { -- Conflict: Ordelle's Caves
+        trigger = triggers.mobkill,
+        goal = 10,
+        reqs = { zone = set{102} },
+        reward = { sparks = 12, xp = 100, unity = 5, item = { 13470 }, repeatable = true },
+    },
+
+    [238 ] = { -- Subjugation: Morbolger
+        trigger = triggers.mobkill,
+        reqs = { mob = set{17568127} },
+        reward = { sparks = 500, xp = 1000 },
+    },
+
   ----------------------------------------
   -- Combat (Region) - Original Areas 2 --
   ----------------------------------------
@@ -533,7 +999,7 @@ tpz.roe.records =
         reqs = { zone = set{143} },
         reward = { sparks = 10, xp = 500, unity = 5, item = { 13330 }, repeatable = true },
     },
-    
+
     [253 ] = { -- Subjugation: Zi-Ghi Bone-eater
         trigger = triggers.mobKill,
         reqs = { mobID = set{17363208} },
@@ -565,7 +1031,7 @@ tpz.roe.records =
         reqs = { mobID = set{17223797} },
         reward = { sparks = 250, xp = 700 },
     },
-    
+
     [258 ] = { -- Conflict: Rolanberry Fields
         trigger = triggers.mobKill,
         goal = 10,
@@ -578,7 +1044,7 @@ tpz.roe.records =
         reqs = { mobID = set{17228242, 17092905} },
         reward = { sparks = 250, xp = 1000 },
     },
-    
+
     [260 ] = { -- Conflict: Crawler's Nest
         trigger = triggers.mobKill,
         goal = 10,
