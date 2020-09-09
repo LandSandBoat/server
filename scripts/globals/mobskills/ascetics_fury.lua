@@ -1,13 +1,11 @@
 ---------------------------------------------
---  Ascetics Fury
---  Description: Hand To Hand Weapon Skill
---  Type: Physical
+-- Ascetics Fury
+-- Description: Hand To Hand Weapon Skill
+-- Type: Physical
 ---------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
 
 function onMobSkillCheck(target,mob,skill)

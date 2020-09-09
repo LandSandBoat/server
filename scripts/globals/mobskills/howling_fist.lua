@@ -1,13 +1,11 @@
 ---------------------------------------------
---  Howling Fist
---  Description: Damage varies with TP.
---  Type: Physical
+-- Howling Fist
+-- Description: Damage varies with TP.
+-- Type: Physical
 ---------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
 
 function onMobSkillCheck(target,mob,skill)
