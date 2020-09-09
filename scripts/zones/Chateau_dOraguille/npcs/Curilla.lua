@@ -128,7 +128,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("needs_crawler_blood", 1)
     elseif (csid == 562) then
         player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 15, true)
-    elseif csid == 573 then
+    elseif csid == 573 and option == 2 then
         player:addSpell(902, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 902)
     else
