@@ -1342,13 +1342,13 @@ INSERT INTO `mob_groups` VALUES (91,6149,37,'Iruci',0,128,2863,16000,1000,80,80,
 INSERT INTO `mob_groups` VALUES (92,3870,37,'Temenos_Weapon',0,128,2863,16000,1000,75,80,0);
 INSERT INTO `mob_groups` VALUES (93,1219,37,'Enhanced_Dragon',0,128,2863,16000,1000,75,80,0);
 INSERT INTO `mob_groups` VALUES (94,1216,37,'Enhanced_Ahriman',0,128,2863,16000,1000,75,80,0);
-INSERT INTO `mob_groups` VALUES (95,3867,37,'Temenos_Aern',0,128,2862,6500,300,80,82,0); -- PLD
+INSERT INTO `mob_groups` VALUES (95,3867,37,'Temenos_Aern',0,128,2862,6500,300,80,82,0); -- pld
 INSERT INTO `mob_groups` VALUES (96,6152,37,'Aerns_Wynav',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (97,6151,37,'Aerns_Euvhi',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (98,6150,37,'Aerns_Elemental',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (99,53,37,'Aerns_Avatar',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (100,3869,37,'Temenos_Ghrah',0,128,0,0,0,82,82,0);
-INSERT INTO `mob_groups` VALUES (101,3867,37,'Temenos_Aern',0,128,0,0,0,101,102,0);
+-- 101: free
 INSERT INTO `mob_groups` VALUES (102,6152,37,'Aerns_Wynav',0,128,0,0,0,100,100,0);
 INSERT INTO `mob_groups` VALUES (103,6100,37,'Temenos_Euvhi',0,128,0,0,0,102,103,0);
 INSERT INTO `mob_groups` VALUES (104,6101,37,'Thalesek',0,128,0,0,0,105,105,0);
