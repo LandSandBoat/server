@@ -1321,7 +1321,7 @@ local function doesToolBreak(player, info)
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll < _G[info.settingBreak] then
+    if roll <= _G[info.settingBreak] then
         player:tradeComplete()
         return true
     end
@@ -1333,7 +1333,7 @@ function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) >= _G[info.settingRate] then
+    if math.random(100) > _G[info.settingRate] then
         return 0
     end
 
