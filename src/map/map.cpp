@@ -204,7 +204,7 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("do_init: loading plants");
     gardenutils::Initialize();
-    ShowMessage("\t\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
+    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
 
     // нужно будет написать один метод для инициализации всех данных в battleutils
     // и один метод для освобождения этих данных

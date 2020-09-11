@@ -23,12 +23,12 @@
 
 #include "gardenutils.h"
 
-#include "../item_container.h"
-#include "../map.h"
-#include "../vana_time.h"
 #include "../entities/charentity.h"
+#include "../item_container.h"
 #include "../items/item_flowerpot.h"
+#include "../map.h"
 #include "../packets/inventory_item.h"
+#include "../vana_time.h"
 
 #define MAX_RESULTID 2500
 
@@ -45,7 +45,8 @@ GardenResult_t::GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuanti
 , MinQuantity(MinQuantity)
 , MaxQuantity(MaxQuantity)
 , Weight(Weight)
-{}
+{
+}
 
 namespace gardenutils
 {
@@ -117,7 +118,7 @@ namespace gardenutils
                         if (sendPacket)
                         {
                             PChar->pushPacket(new CInventoryItemPacket(PPotItem, containerID, slotID));
-                        }   
+                        }
                     }
                 }
             }
@@ -131,7 +132,7 @@ namespace gardenutils
         if (PItem->isTree())
         {
             elements[PItem->getExtraCrystalFeed()] += 10;
-        }  
+        }
 
         switch (PItem->getPlant())
         {
@@ -192,7 +193,7 @@ namespace gardenutils
                 {
                     strength = element;
                 }
-            }                   
+            }
         }
         else
         {
@@ -209,7 +210,7 @@ namespace gardenutils
                     {
                         best = element;
                     }
-                }        
+                }
                 strength += best;
             }
             else
@@ -221,7 +222,7 @@ namespace gardenutils
         if (map_config.garden_moonphase_matters)
         {
             strength += (int16)ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
-        }      
+        }
 
         if (map_config.garden_mh_aura_matters)
         {
@@ -250,7 +251,7 @@ namespace gardenutils
                 {
                     dominantAura = elements[elementID];
                 }
-            }     
+            }
             strength += dominantAura / 10;
         }
 
@@ -260,7 +261,7 @@ namespace gardenutils
         if (PItem->isTree())
         {
             resultElement += PItem->getExtraCrystalFeed() << 4;
-        }   
+        }
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 
@@ -279,7 +280,7 @@ namespace gardenutils
         if (item.ItemID == 0)
         {
             item = resultList.back();
-        }       
+        }
 
         float percentage = (strength - (cumulativeWeight - item.Weight)) / float(item.Weight);
         uint8 quantity = item.MinQuantity + int((item.MaxQuantity - item.MinQuantity) * percentage + 0.1);
@@ -301,11 +302,11 @@ namespace gardenutils
                 if (PItem->isTree())
                 {
                     PItem->setStage(FLOWERPOT_STAGE_FIRST_SPROUTS_2);
-                }  
+                }
                 else
                 {
                     PItem->setStage(FLOWERPOT_STAGE_SECOND_SPROUTS_2);
-                }  
+                }
                 break;
             case FLOWERPOT_STAGE_FIRST_SPROUTS_2:
                 PItem->setStage(FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL);
@@ -380,7 +381,7 @@ namespace gardenutils
                     case FLOWERPOT_STAGE_SECOND_SPROUTS_2:
                         return 12;
                     case FLOWERPOT_STAGE_SECOND_SPROUTS_CRYSTAL:
-                        return 50 ;
+                        return 50;
                     case FLOWERPOT_STAGE_SECOND_SPROUTS_3:
                         return growFromFeed ? 24 : 4;
                     case FLOWERPOT_STAGE_THIRD_SPROUTS:

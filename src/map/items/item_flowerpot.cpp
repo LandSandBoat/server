@@ -35,11 +35,14 @@
 // 0C-0F - Vanatime of when the seed was planted in the flowerpot
 // 10-13 - Vanatime of when the next plant stage will occur
 
-CItemFlowerpot::CItemFlowerpot(uint16 id) : CItemFurnishing(id)
-{}
+CItemFlowerpot::CItemFlowerpot(uint16 id)
+: CItemFurnishing(id)
+{
+}
 
 CItemFlowerpot::~CItemFlowerpot()
-{}
+{
+}
 
 void CItemFlowerpot::cleanPot()
 {
@@ -81,11 +84,11 @@ void CItemFlowerpot::setDried(bool dried)
     {
         ref<uint8>(m_extra, 0x01) |= 0x80;
     }
-        
+
     else
     {
         ref<uint8>(m_extra, 0x01) &= ~0x80;
-    }  
+    }
 }
 
 bool CItemFlowerpot::isDried()
