@@ -309,7 +309,7 @@ void SmallPacket0x00A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     if (PChar->m_moghouseID != 0)
     {
         gardenutils::UpdateGardening(PChar, false);
-    }     
+    }
 
     PChar->pushPacket(new CDownloadingDataPacket());
     PChar->pushPacket(new CZoneInPacket(PChar, PChar->m_event.EventID));
@@ -5584,7 +5584,7 @@ void SmallPacket0x0FC(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     CItemContainer* PPotItemContainer = PChar->getStorage(potContainerID);
     CItemFlowerpot* PPotItem = (CItemFlowerpot*)PPotItemContainer->GetItem(potSlotID);
     if (PPotItem == nullptr)
-        return; 
+        return;
 
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
     CItem* PItem = PItemContainer->GetItem(slotID);

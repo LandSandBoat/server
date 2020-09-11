@@ -84,7 +84,6 @@ enum FLOWERPOT_ELEMENT_TYPE
 class CItemFlowerpot : public CItemFurnishing
 {
 public:
-
     CItemFlowerpot(uint16);
     virtual ~CItemFlowerpot();
     void cleanPot();
