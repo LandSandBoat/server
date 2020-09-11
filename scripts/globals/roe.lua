@@ -85,7 +85,7 @@ local defaults = {
         })
      *************************************************************************** --]]
 local function completeRecord(player, record, params)
-    params = params or {}
+    local params = params or {}
 
     if not player:getEminenceCompleted(record) and params["item"] then
         if not npcUtil.giveItem(player, params["item"]) then

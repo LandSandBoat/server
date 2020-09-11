@@ -6740,6 +6740,12 @@ inline int32 CLuaBaseEntity::getEminenceProgress(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
+    if(m_PBaseEntity->objtype != TYPE_PC)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint16 recordID = (uint16)lua_tointeger(L, 1);
 

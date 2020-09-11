@@ -119,7 +119,7 @@ int32 ParseRecords(lua_State* L)
 
 bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
 {
-    if (!PChar)
+    if (!PChar || PChar->objtype != TYPE_PC)
         return false;
 
     RoeCheckHandler& handler = RoeHandlers[eventID];
