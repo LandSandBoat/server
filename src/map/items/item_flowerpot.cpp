@@ -84,7 +84,6 @@ void CItemFlowerpot::setDried(bool dried)
     {
         ref<uint8>(m_extra, 0x01) |= 0x80;
     }
-
     else
     {
         ref<uint8>(m_extra, 0x01) &= ~0x80;
@@ -132,6 +131,7 @@ uint16 CItemFlowerpot::getSeedID(FLOWERPOT_PLANT_TYPE plantType)
             return 1238;
         case FLOWERPOT_PLANT_WILDGRASS_SEEDS:
             return 2235;
+        case FLOWERPOT_PLANT_NONE:
         default:
             return 0;
     }

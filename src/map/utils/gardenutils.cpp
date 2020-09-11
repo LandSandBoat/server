@@ -32,10 +32,10 @@
 
 #define MAX_RESULTID 2500
 
-static const uint32 VANADAY_SECONDS = 3456;
-static const uint32 VANADAYS_TO_WILT = 36;
-static const uint32 VANADAYS_TO_GUARANTEE_WILT = 144;
-static const uint32 VANATIME_FOR_WILT_STAGE = 65535 * VANADAY_SECONDS;
+constexpr uint32 VANADAY_SECONDS = 3456;
+constexpr uint32 VANADAYS_TO_WILT = 36;
+constexpr uint32 VANADAYS_TO_GUARANTEE_WILT = 144;
+constexpr uint32 VANATIME_FOR_WILT_STAGE = 65535 * VANADAY_SECONDS;
 
 std::map<uint32, GardenResultList_t> g_pGardenResultMap; // global map of gardening results
 
