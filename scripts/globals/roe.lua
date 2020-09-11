@@ -134,7 +134,7 @@ end
 function tpz.roe.onRecordTrigger(player, recordID, params)
     local entry = tpz.roe.records[recordID]
     if entry and entry:check(player, params) then
-        local progress = player:getEminenceProgress(recordID) + entry.increment
+        local progress = params.progress + entry.increment
         if progress >= entry.goal then
             completeRecord(player, recordID, entry.reward)
         else
@@ -285,8 +285,7 @@ tpz.roe.records =
         reward = { sparks = 1000, xp = 5000 , item = { 6181 } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(29)
-                    player:setEminenceProgress(29, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false
@@ -300,8 +299,7 @@ tpz.roe.records =
         reward = { sparks = 3000, xp = 7000 , item = { 6184 } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(30)
-                    player:setEminenceProgress(30, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false
@@ -315,8 +313,7 @@ tpz.roe.records =
         reward = { sparks = 3000, xp = 7000 , item = { 6184 } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(696)
-                    player:setEminenceProgress(696, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false
@@ -330,8 +327,7 @@ tpz.roe.records =
         reward = { sparks = 1000, xp = 1000, item = { {8711, 2} } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(33)
-                    player:setEminenceProgress(33, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false
@@ -345,8 +341,7 @@ tpz.roe.records =
         reward = { sparks = 3000, xp = 5000, item = { {8711, 4} } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(34)
-                    player:setEminenceProgress(34, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false
@@ -360,8 +355,7 @@ tpz.roe.records =
         reward = { sparks = 3000, xp = 5000, item = { {8711, 6} } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
-                    local progress = player:getEminenceProgress(697)
-                    player:setEminenceProgress(697, progress + params.dmg)
+                    params.progress = params.progress + params.dmg
                     return true
                 end
                 return false

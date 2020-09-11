@@ -145,10 +145,17 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
             Lunar<CLuaBaseEntity>::push(L, &LuaAllyEntity);
             args++;
 
+            // Record #
             lua_pushinteger(L, PChar->m_eminenceLog.active[i]);
             args++;
 
+            // param table
             lua_newtable(L);
+            args++;
+
+            lua_pushinteger(L, PChar->m_eminenceLog.progress[i]);
+            lua_setfield(L, -2, "progress");
+
             for (auto& datagram : payload)
             {
                 lua_pushstring(L, datagram.param.c_str());
@@ -167,7 +174,6 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
                 }
                 }
                 lua_settable(L, -3);
-                args++;
             }
 
             if (lua_pcall(L, args, 0, 0))
