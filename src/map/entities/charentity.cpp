@@ -62,6 +62,7 @@
 #include "../utils/attackutils.h"
 #include "../utils/charutils.h"
 #include "../utils/battleutils.h"
+#include "../utils/gardenutils.h"
 #include "../item_container.h"
 #include "../items/item_weapon.h"
 #include "../items/item_usable.h"
@@ -519,6 +520,11 @@ void CCharEntity::Tick(time_point tick)
         // Send an update packet at a regular interval to keep the player's death variables synced
         updatemask |= UPDATE_STATUS;
         m_deathSyncTime = tick + death_update_frequency;
+    }
+
+    if (m_moghouseID != 0)
+    {
+        gardenutils::UpdateGardening(this, true);
     }
 }
 
@@ -1970,7 +1976,7 @@ void CCharEntity::SetMoghancement(uint16 moghancementID)
                 addModifier(Mod::EXPERIENCE_RETAINED, 5);
                 break;
             case MOGHANCEMENT_GARDENING:
-                // TODO: Reduces the chances of plants withering when gardening
+                addModifier(Mod::GARDENING_WILT_BONUS, 36);
                 break;
             case MOGHANCEMENT_DESYNTHESIS:
                 addModifier(Mod::DESYNTH_SUCCESS, 2);

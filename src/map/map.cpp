@@ -38,6 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
+#include "utils/gardenutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -199,6 +200,10 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("do_init: loading items");
     itemutils::Initialize();
+    ShowMessage("\t\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
+
+    ShowStatus("do_init: loading plants");
+    gardenutils::Initialize();
     ShowMessage("\t\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
     // нужно будет написать один метод для инициализации всех данных в battleutils
@@ -973,6 +978,10 @@ int32 map_config_default()
     map_config.craft_day_matters = 1;
     map_config.craft_moonphase_matters = 0;
     map_config.craft_direction_matters = 0;
+    map_config.garden_day_matters = false;
+    map_config.garden_moonphase_matters = false;
+    map_config.garden_pot_matters = false;
+    map_config.garden_mh_aura_matters = false;
     map_config.mob_tp_multiplier = 1.0f;
     map_config.player_tp_multiplier = 1.0f;
     map_config.nm_hp_multiplier = 1.0f;
@@ -1263,6 +1272,22 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "craft_direction_matters") == 0)
         {
             map_config.craft_direction_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_day_matters") == 0)
+        {
+            map_config.garden_day_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_moonphase_matters") == 0)
+        {
+            map_config.garden_moonphase_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_pot_matters") == 0)
+        {
+            map_config.garden_pot_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_mh_aura_matters") == 0)
+        {
+            map_config.garden_mh_aura_matters = atof(w2);
         }
         else if (strcmp(w1, "mysql_host") == 0)
         {
