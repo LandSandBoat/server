@@ -1,5 +1,4 @@
-﻿#pragma once
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2018 Darkstar Dev Teams
@@ -84,8 +83,9 @@ enum FLOWERPOT_ELEMENT_TYPE
 class CItemFlowerpot : public CItemFurnishing
 {
 public:
-    CItemFlowerpot(uint16);
+    CItemFlowerpot(uint16 id);
     virtual ~CItemFlowerpot();
+
     void cleanPot();
 
     bool isPlanted();
@@ -122,4 +122,4 @@ public:
     uint8 getStrength();
 };
 
-#endif
+#endif // _CITEMFLOWERPOT_H

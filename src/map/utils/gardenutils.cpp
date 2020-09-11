@@ -41,11 +41,11 @@ std::map<uint32, GardenResultList_t> g_pGardenResultMap; // global map of garden
 
 GardenResult_t::GardenResult_t() { }
 GardenResult_t::GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuantity, uint8 Weight)
-    : ItemID(ItemID)
-    , MinQuantity(MinQuantity)
-    , MaxQuantity(MaxQuantity)
-    , Weight(Weight)
-{ }
+: ItemID(ItemID)
+, MinQuantity(MinQuantity)
+, MaxQuantity(MaxQuantity)
+, Weight(Weight)
+{}
 
 namespace gardenutils
 {
@@ -57,7 +57,6 @@ namespace gardenutils
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint16 ResultID = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 uint8 SeedID = (uint8)Sql_GetUIntData(SqlHandle, 1);
                 uint8 Element1 = (uint8)Sql_GetUIntData(SqlHandle, 2);
                 uint8 Element2 = (uint8)Sql_GetUIntData(SqlHandle, 3);
@@ -98,7 +97,8 @@ namespace gardenutils
                         uint32 daysSinceStageChange = (vanatime - PPotItem->getStageTimestamp()) / VANADAY_SECONDS;
                         uint8 wiltTime = VANADAYS_TO_WILT + PChar->getMod(Mod::GARDENING_WILT_BONUS);
                         bool wasExamined = PPotItem->wasExamined();
-                        if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) || daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime){
+                        if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) || daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
+                        {
                             PPotItem->setStage(FLOWERPOT_STAGE_WILTED);
                             PPotItem->setStageTimestamp(vanatime + VANATIME_FOR_WILT_STAGE);
                         }
@@ -115,7 +115,9 @@ namespace gardenutils
                         Sql_Query(SqlHandle, Query, extra, PChar->id, containerID, slotID);
 
                         if (sendPacket)
+                        {
                             PChar->pushPacket(new CInventoryItemPacket(PPotItem, containerID, slotID));
+                        }   
                     }
                 }
             }
@@ -127,7 +129,9 @@ namespace gardenutils
         std::array<uint8, 9> elements = { 0 };
         elements[PItem->getCommonCrystalFeed()] += 10;
         if (PItem->isTree())
+        {
             elements[PItem->getExtraCrystalFeed()] += 10;
+        }  
 
         switch (PItem->getPlant())
         {
@@ -174,6 +178,8 @@ namespace gardenutils
                     elements[FLOWERPOT_ELEMENT_LIGHT] += 10;
                 case 221: // Arcane Flowerpot
                     elements[FLOWERPOT_ELEMENT_DARK] += 10;
+                default:
+                    break;
             }
         }
 
@@ -181,8 +187,12 @@ namespace gardenutils
         if (PItem->getCommonCrystalFeed() == FLOWERPOT_ELEMENT_NONE)
         {
             for (uint8 element : elements)
+            {
                 if (element > strength)
+                {
                     strength = element;
+                }
+            }                   
         }
         else
         {
@@ -194,8 +204,12 @@ namespace gardenutils
             {
                 uint16 best = 0;
                 for (uint8 element : elements)
+                {
                     if (element > best)
+                    {
                         best = element;
+                    }
+                }        
                 strength += best;
             }
             else
@@ -205,7 +219,9 @@ namespace gardenutils
         }
 
         if (map_config.garden_moonphase_matters)
+        {
             strength += (int16)ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
+        }      
 
         if (map_config.garden_mh_aura_matters)
         {
@@ -229,8 +245,12 @@ namespace gardenutils
             // Determine the dominant aura
             uint16 dominantAura = 0;
             for (uint8 elementID = 0; elementID < 8; ++elementID)
+            {
                 if (elements[elementID] > dominantAura)
+                {
                     dominantAura = elements[elementID];
+                }
+            }     
             strength += dominantAura / 10;
         }
 
@@ -238,7 +258,9 @@ namespace gardenutils
 
         int resultElement = PItem->getCommonCrystalFeed();
         if (PItem->isTree())
+        {
             resultElement += PItem->getExtraCrystalFeed() << 4;
+        }   
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 
@@ -255,7 +277,9 @@ namespace gardenutils
             }
         }
         if (item.ItemID == 0)
+        {
             item = resultList.back();
+        }       
 
         float percentage = (strength - (cumulativeWeight - item.Weight)) / float(item.Weight);
         uint8 quantity = item.MinQuantity + int((item.MaxQuantity - item.MinQuantity) * percentage + 0.1);
@@ -265,7 +289,6 @@ namespace gardenutils
 
     void GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed /*= false*/)
     {
-        FLOWERPOT_STAGE_TYPE stage = PItem->getStage();
         switch (PItem->getStage())
         {
             case FLOWERPOT_STAGE_EMPTY:
@@ -276,11 +299,15 @@ namespace gardenutils
                 break;
             case FLOWERPOT_STAGE_FIRST_SPROUTS:
                 if (PItem->isTree())
+                {
                     PItem->setStage(FLOWERPOT_STAGE_FIRST_SPROUTS_2);
+                }  
                 else
+                {
                     PItem->setStage(FLOWERPOT_STAGE_SECOND_SPROUTS_2);
+                }  
                 break;
-                case FLOWERPOT_STAGE_FIRST_SPROUTS_2:
+            case FLOWERPOT_STAGE_FIRST_SPROUTS_2:
                 PItem->setStage(FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL);
                 break;
             case FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL:
@@ -300,6 +327,10 @@ namespace gardenutils
                 break;
             case FLOWERPOT_STAGE_THIRD_SPROUTS:
                 PItem->setStage(FLOWERPOT_STAGE_MATURE_PLANT);
+                break;
+            case FLOWERPOT_STAGE_MATURE_PLANT:
+            case FLOWERPOT_STAGE_WILTED:
+            default:
                 break;
         }
 
@@ -335,6 +366,8 @@ namespace gardenutils
                         return 20;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_HERB_SEEDS:
@@ -354,6 +387,8 @@ namespace gardenutils
                         return 30;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_GRAIN_SEEDS:
@@ -373,6 +408,8 @@ namespace gardenutils
                         return 36;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_VEGETABLE_SEEDS:
@@ -392,6 +429,8 @@ namespace gardenutils
                         return 30;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_CACTUS_STEMS:
@@ -419,6 +458,8 @@ namespace gardenutils
                         return 72;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_TREE_CUTTINGS:
@@ -446,6 +487,8 @@ namespace gardenutils
                         return 60;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_TREE_SAPLINGS:
@@ -473,6 +516,8 @@ namespace gardenutils
                         return 108;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
                 break;
             case FLOWERPOT_PLANT_WILDGRASS_SEEDS:
@@ -492,7 +537,11 @@ namespace gardenutils
                         return 46;
                     case FLOWERPOT_STAGE_MATURE_PLANT:
                         return 187;
+                    default:
+                        break;
                 }
+                break;
+            default:
                 break;
         }
         return 0;

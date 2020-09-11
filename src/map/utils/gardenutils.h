@@ -52,4 +52,4 @@ namespace gardenutils
     uint8 GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
 }
 
-#endif
+#endif // _GARDENUTILS_H
