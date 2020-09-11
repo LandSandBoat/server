@@ -113,14 +113,14 @@ function onEventFinish(player, csid, option)
                 keyItem = tpz.ki.SOUL_GEM_CLASP,
                 var = "PreludeCS"
             })
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
         elseif option == 14 then
             player:tradeComplete()
             npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
                 keyItem = tpz.ki.SOUL_GEM_CLASP,
                 var = "PreludeCS"
             })
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
         elseif option == 19 then
             player:tradeComplete()
@@ -128,7 +128,7 @@ function onEventFinish(player, csid, option)
                 keyItem = tpz.ki.SOUL_GEM_CLASP,
                 var = "PreludeCS"
             })
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
         elseif option == 20 then
             player:tradeComplete()
@@ -136,7 +136,7 @@ function onEventFinish(player, csid, option)
                 keyItem = tpz.ki.SOUL_GEM_CLASP,
                 var = "PreludeCS"
             })
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
         elseif option == 21 then
             player:tradeComplete()
@@ -144,7 +144,7 @@ function onEventFinish(player, csid, option)
                 keyItem = tpz.ki.SOUL_GEM_CLASP,
                 var = "PreludeCS"
             })
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
 
         -- BEYOND INFINITY (Already holding keyitem)
