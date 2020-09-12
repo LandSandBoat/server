@@ -29,8 +29,8 @@ function onTrade(player, npc, trade)
         if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
             player:startEvent(10138)
         end
-    elseif npcUtil.tradeHas(trade, 3541) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
-        player:tradeComplete()
+    elseif npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
+        npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) -- Exception to onEventFinish
         player:startEvent(10045, 0, 1, 5)
     elseif npcUtil.tradeHasExactly(trade, {{2956, 5}}) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
         player:startEvent(10195, 1)
@@ -50,8 +50,10 @@ function onTrigger(player, npc)
         player:startEvent(10045, 0, 1, 4, 0)
     elseif (player:getMainLvl() >= 91 and player:levelCap() == 95 and MAX_LEVEL == 99 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
         player:startEvent(10194)
+    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE and player:getLocalVar("MaybeAnotherTimeCS") == 1 then
+        player:startEvent(10045, 0, 1, 5, 0, 1)
     elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
-        player:startEvent(10045, 0, 1, 5, 0)
+        player:startEvent(10045, 0, 1, 5)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
@@ -62,12 +64,8 @@ function onTrigger(player, npc)
         player:startEvent(10045, 0, 1, 3, 1)
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 4, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) and player:getLocalVar("PreludeTrade", 0)then
+    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 6, 2)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) and player:getLocalVar("PreludeTrade", 1)then
-        player:startEvent(10045, 0, 1, 5, 0, 1)
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED and player:getCharVar("PreludeCS", 1) then
-        player:startEvent(10045, 0, 1, 5)
     elseif  player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
         player:startEvent(10045, 0, 1, 5, 1)
     elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:getCharVar("BeyondInfinityCS") == 1 then
@@ -102,49 +100,33 @@ function onEventFinish(player, csid, option)
         elseif (option == 11) then
             player:addQuest(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
-        -- PRELUDE TO PUISSANCE
+        -- PRELUDE TO PUISSANCE + BEYOND INFINITY
         elseif option == 15 then
             player:tradeComplete()
-            player:setLocalVar("PreludeTrade", 1)
-            player:setCharVar("PreludeCS", 1)
+            player:setLocalVar("MaybeAnotherTimeCS", 1)
         elseif option == 13 then
             player:tradeComplete()
-            npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
-                keyItem = tpz.ki.SOUL_GEM_CLASP,
-                var = "PreludeCS"
-            })
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
         elseif option == 14 then
             player:tradeComplete()
-            npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
-                keyItem = tpz.ki.SOUL_GEM_CLASP,
-                var = "PreludeCS"
-            })
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
         elseif option == 19 then
             player:tradeComplete()
-            npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
-                keyItem = tpz.ki.SOUL_GEM_CLASP,
-                var = "PreludeCS"
-            })
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
         elseif option == 20 then
             player:tradeComplete()
-            npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
-                keyItem = tpz.ki.SOUL_GEM_CLASP,
-                var = "PreludeCS"
-            })
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
         elseif option == 21 then
             player:tradeComplete()
-            npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE, {
-                keyItem = tpz.ki.SOUL_GEM_CLASP,
-                var = "PreludeCS"
-            })
             player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
 
         -- BEYOND INFINITY (Already holding keyitem)
