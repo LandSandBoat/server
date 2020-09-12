@@ -41,6 +41,7 @@
 #include "../trade_container.h"
 #include "../vana_time.h"
 #include "../anticheat.h"
+#include "../roe.h"
 
 #include "charutils.h"
 #include "itemutils.h"
@@ -922,6 +923,7 @@ int32 doSynthResult(CCharEntity* PChar)
         {
             PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_SUCCESS, itemID, quantity));
         }
+        roeutils::event(ROE_EVENT::ROE_SYNTHSUCCESS, PChar, RoeDatagram("itemid", itemID));
     }
 
     doSynthSkillUp(PChar);

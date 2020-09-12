@@ -44,6 +44,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/jailutils.h"
 #include "linkshell.h"
 #include "map.h"
+#include "roe.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/charentity.h"
@@ -6061,7 +6062,7 @@ void SmallPacket0x10B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    charutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
+    roeutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     return;
 }
@@ -6074,7 +6075,7 @@ void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    charutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
+    roeutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     return;
 }

@@ -693,6 +693,8 @@
     <ClCompile Include="..\..\src\map\party.cpp" />
     <ClCompile Include="..\..\src\map\recast_container.cpp" />
     <ClCompile Include="..\..\src\map\region.cpp" />
+    <ClCompile Include="..\..\src\map\roe.h" />
+    <ClCompile Include="..\..\src\map\roe.cpp" />
     <ClCompile Include="..\..\src\map\spell.cpp" />
     <ClCompile Include="..\..\src\map\status_effect.cpp" />
     <ClCompile Include="..\..\src\map\status_effect_container.cpp" />

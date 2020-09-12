@@ -7,6 +7,7 @@ require("scripts/globals/msg")
 require("scripts/globals/keyitems")
 require("scripts/globals/sparkshop")
 require("scripts/globals/npc_util")
+require("scripts/globals/roe")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 
 function onTrade(player,npc,trade)
@@ -29,12 +30,7 @@ end
 
 function onEventFinish(player,csid,option)
     if csid == 24 and option == 1 then
-        npcUtil.completeRecord(player, 1, {
-            item = { {4376,6} },
-            keyItem = tpz.ki.MEMORANDOLL,
-            sparks = 100,
-            xp = 300
-        })
+        tpz.roe.onRecordTrigger(player, 1)
         player:messageBasic(tpz.msg.basic.ROE_BONUS_ITEM_PLURAL,4376,6)
     end
 end

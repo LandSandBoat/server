@@ -47,6 +47,7 @@
 #include "../party.h"
 #include "../alliance.h"
 #include "../entities/mobentity.h"
+#include "../roe.h"
 #include "../spell.h"
 #include "../weapon_skill.h"
 #include "../vana_time.h"
@@ -2795,6 +2796,8 @@ namespace luautils
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
+
+        roeutils::event(ROE_MOBKILL, (CCharEntity*)PKiller, RoeDatagram("mob", (CMobEntity*)PMob));
 
         if (PChar && PMob->objtype == TYPE_MOB)
         {
