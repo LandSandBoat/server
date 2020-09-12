@@ -40,7 +40,7 @@ function onUseAbility(player, target, ability, action)
         local mjob = player:getMainJob()
         local daze = 1
 
-        if (mjob == 83) then
+        if (mjob == tpz.job.DNC) then
             if (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_1)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
