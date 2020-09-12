@@ -1,7 +1,7 @@
 -----------------------------------
 --
---     tpz.effect.DRAGON_BREAKER
---     
+--     tpz.effect.LARCENY
+--
 -----------------------------------
 
 function onEffectGain(target, effect)

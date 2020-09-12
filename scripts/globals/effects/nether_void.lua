@@ -1,7 +1,7 @@
 -----------------------------------
 --
---
---
+--     tpz.effect.NETHER_VOID
+--     
 -----------------------------------
 
 function onEffectGain(target, effect)
