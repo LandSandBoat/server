@@ -25,10 +25,6 @@ function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
     local windurstFame = player:getFameLevel(WINDURST)
 
-    -- The Road Forks (CoP 3-3)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
-        player:startEvent(875)
-
     -- The Jester Who'd Be King (Windurst 8-2)
     if
         currentMission == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
@@ -36,6 +32,10 @@ function onTrigger(player, npc)
         player:hasKeyItem(tpz.ki.tpz.ki.OPTISTERY_RING)
     then
         player:startEvent(801, 0, tpz.ki.OPTISTERY_RING)
+        
+    -- The Road Forks (CoP 3-3)
+    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
+        player:startEvent(875)
 
     -- The Sixth Ministry (Windurst 7-1)
     elseif currentMission == tpz.mission.id.windurst.THE_SIXTH_MINISTRY then
