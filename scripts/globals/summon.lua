@@ -1,51 +1,50 @@
-
 require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 
 function getSummoningSkillOverCap(avatar)
-local summoner = avatar:getMaster()
-local summoningSkill = summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC)
-local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC)
-    
+    local summoner = avatar:getMaster()
+    local summoningSkill = summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC)
+    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC)
+
     return math.max(summoningSkill - maxSkill, 0)
 end
 
-function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
-local returninfo = {}
+function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100,
+    mtp200, mtp300)
+    local returninfo = {}
 
-local acc = avatar:getACC() + utils.clamp(getSummoningSkillOverCap(avatar), 0, 200)
-local eva = target:getEVA()
-local dmg = avatar:getWeaponDmg()
-local minFstr, maxFstr = avatarFSTR(avatar:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT))
-local ratio = avatar:getStat(tpz.mod.ATT) / target:getStat(tpz.mod.DEF)
-local firstacc = acc + 100
+    local acc = avatar:getACC() + utils.clamp(getSummoningSkillOverCap(avatar), 0, 200)
+    local eva = target:getEVA()
+    local dmg = avatar:getWeaponDmg()
+    local minFstr, maxFstr = avatarFSTR(avatar:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT))
+    local ratio = avatar:getStat(tpz.mod.ATT) / target:getStat(tpz.mod.DEF)
+    local firstacc = acc + 100
 
+    -- formula should be 75 + floor( (Accuracy - Evasion)÷2 ) - 2×(dLVL)
+    --  level correction does not apply .
+    -- https://web.archive.org/web/20200905213200if_/https://kegsay.livejournal.com/tag/smn!
+    local hitdiff = 0
+    local hitrate = 75
+    local firsthit = 0
 
--- formula should be 75 + floor( (Accuracy - Evasion)÷2 ) - 2×(dLVL)
---  level correction does not apply .
--- https://web.archive.org/web/20200905213200if_/https://kegsay.livejournal.com/tag/smn!
-local hitdiff = 0
-local hitrate = 75
-local firsthit = 0
-    
-hitdiff = hitrate + math.floor(acc + bonusacc - eva) 
-firsthit = hitrate + math.floor(firstacc + bonusacc - eva) 
-    
-hitrate = hitdiff / 100
-firsthit = firsthit / 100
-hitrate = utils.clamp(hitrate, 0.2, 0.95)
-firsthit = utils.clamp(firsthit, 0.2, 0.95)
+    hitdiff = hitrate + math.floor(acc + bonusacc - eva)
+    firsthit = hitrate + math.floor(firstacc + bonusacc - eva)
+
+    hitrate = hitdiff / 100
+    firsthit = firsthit / 100
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    firsthit = utils.clamp(firsthit, 0.2, 0.95)
 
     -- add on native crit hit rate (guesstimated, it actually follows an exponential curve)
-local critrate = (avatar:getStat(tpz.mod.DEX) - target:getStat(tpz.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
-critrate = critrate + avatar:getMod(tpz.mod.CRITHITRATE) / 100
-critrate = utils.clamp(critrate, 0.05, 0.2)
+    local critrate = (avatar:getStat(tpz.mod.DEX) - target:getStat(tpz.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
+    critrate = critrate + avatar:getMod(tpz.mod.CRITHITRATE) / 100
+    critrate = utils.clamp(critrate, 0.05, 0.2)
 
     -- Applying pDIF
     if ratio <= 1 then
         maxRatio = 1
-        minRatio = 1/3
+        minRatio = 1 / 3
     elseif ratio < 1.6 then
         maxRatio = (2 * ratio + 1) / 3
         minRatio = (7 * ratio - 4) / 9
@@ -61,10 +60,10 @@ critrate = utils.clamp(critrate, 0.05, 0.2)
     end
 
     -- start the hits
-local hitsdone = 1
-local hitslanded = 0
-local hitdmg = 0
-local finaldmg = 0
+    local hitsdone = 1
+    local hitslanded = 0
+    local hitdmg = 0
+    local finaldmg = 0
 
     if math.random() < firsthit then
         hitdmg = avatarHitDmg(dmg, minRatio, maxRatio, minFstr, maxFstr, critrate)
@@ -87,7 +86,7 @@ local finaldmg = 0
         hitslanded = 0
         skill:setMsg(tpz.msg.basic.SKILL_MISS)
 
-    -- some hits hit
+        -- some hits hit
     else
         target:wakeUp()
     end
@@ -140,7 +139,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
         end
 
         if targShadows > 0 then
-        -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
+            -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
             if targShadows >= shadowbehav then -- no damage, just suck the shadows
                 skill:setMsg(tpz.msg.basic.SHADOW_ABSORB)
                 target:setMod(shadowType, targShadows - shadowbehav)
@@ -192,7 +191,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
             end
             if math.random() * 10 < 8 - prevAnt then
                 -- anticipated!
-                teye:setPower(prevAnt+1)
+                teye:setPower(prevAnt + 1)
                 skill:setMsg(tpz.msg.basic.ANTICIPATE)
                 return 0
             end
@@ -225,7 +224,8 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
         return 0
     end
     -- handle pd
-    if target:hasStatusEffect(tpz.effect.PERFECT_DODGE) or target:hasStatusEffect(tpz.effect.TOO_HIGH) and skilltype == tpz.attackType.PHYSICAL then
+    if target:hasStatusEffect(tpz.effect.PERFECT_DODGE) or target:hasStatusEffect(tpz.effect.TOO_HIGH) and skilltype ==
+        tpz.attackType.PHYSICAL then
         return 0
     end
 
