@@ -326,7 +326,7 @@ INSERT INTO `abilities` VALUES (296,'feather_step',19,83,4,5,220,591,0,17,2000,0
 INSERT INTO `abilities` VALUES (297,'striking_flourish',19,89,1,30,226,0,0,222,2000,0,14,20.0,0,1,80,0,0,NULL);	--check animation/message1
 INSERT INTO `abilities` VALUES (298,'ternary_flourish',19,93,1,30,226,0,0,222,2000,0,14,20.0,0,1,80,0,0,NULL);	--check animation/message1
 INSERT INTO `abilities` VALUES (300,'perpetuance',20,87,1,1,231,100,0,224,2000,0,6,0.0,0,1,80,0,0,NULL);
-INSERT INTO `abilities` VALUES (301,'immanence',20,87,1,1,231,100,0,245,2000,0,6,0.0,0,1,80,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (301,'immanence',20,87,1,1,231,100,0,245,2000,0,6,0.0,0,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (302,'smiting_breath',14,90,4,60,238,100,0,135,2000,0,6,8.0,0,1,80,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (303,'restoring_breath',14,90,1,60,239,100,0,130,2000,0,6,0.0,0,1,80,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (304,'konzen-ittai',12,65,4,180,132,529,0,39,2000,0,14,4.0,0,1,300,0,0,'ABYSSEA');
