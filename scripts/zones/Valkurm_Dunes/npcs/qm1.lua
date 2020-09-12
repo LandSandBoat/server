@@ -11,14 +11,13 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-
-    if (player:getFreeSlotsCount() > 0 and player:hasItem(503) == false) then
+    if player:getFreeSlotsCount() > 0 and player:getLocalVar("gotSunSand") == 0 and not player:hasItem(503) then
         player:addItem(503)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 503)
+        player:setLocalVar("gotSunSand", 1)
     else
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 503)
     end
-
 end
 
 function onEventUpdate(player, csid, option)
