@@ -12327,9 +12327,9 @@ INSERT INTO `mob_droplist` VALUES (2373,0,0,1000,849,290);
 INSERT INTO `mob_droplist` VALUES (2374,0,0,1000,939,170);
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,914,480);
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,939,250);
-INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,4717,1000);    -- Taisaijin; Refresh
+INSERT INTO `mob_droplist` VALUES (2375,0,1,1000,4717,950);     -- Taisaijin; Refresh
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,15222,50);     -- Taisaijin; Spelunkers Hat
-INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,4850,50);      -- Taisaijin; Refresh II
+INSERT INTO `mob_droplist` VALUES (2375,0,1,1000,4850,50);      -- Taisaijin; Refresh II
 INSERT INTO `mob_droplist` VALUES (2376,0,0,1000,914,110);
 INSERT INTO `mob_droplist` VALUES (2376,0,0,1000,1165,40);
 INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,1000);
