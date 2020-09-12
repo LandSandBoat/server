@@ -11,7 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-
+	
 function onAbilityCheck(player, target, ability)
     if (player:getAnimation() ~= 1) then
         return tpz.msg.basic.REQUIRES_COMBAT, 0
@@ -22,7 +22,9 @@ function onAbilityCheck(player, target, ability)
             return tpz.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0
+        end
     end
+end
 
 function onUseAbility(player, target, ability, action)
     -- Only remove TP if the player doesn't have Trance.
@@ -34,108 +36,74 @@ function onUseAbility(player, target, ability, action)
     local effect = 1
 
     if math.random() <= getHitRate(player, target, true, player:getMod(tpz.mod.STEP_ACCURACY)) then
-        hit = 6
+        hit = 6	
         local daze = 1
-            if (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_1)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
-                if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
-                    daze = 3
-                    effect = 3
-                else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration+30)
-                    daze = 2
-                    effect = 2
-                end
 
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_2)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_2):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_2)
-                if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
-                    daze = 3
-                    effect = 4
-                else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
-                    daze = 2
-                    effect = 3
-                end
-
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_3)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_3):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_3)
-                if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
-                    daze = 3
-                    effect = 5
-                else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
-                    daze = 2
-                    effect = 4
-                end
-
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_4)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_4):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_4)
-                if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    daze = 3
-                else
-                    daze = 2
-                end
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
-                effect = 5
-
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_5)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_5):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_5)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
-                daze = 1
-                effect = 5
-
-            else
-                if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, 60)
-                    daze = 3
-                    effect = 2
-                else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_1, 1, 0, 60)
-                    daze = 2
-                    effect = 1
-                end
-            end
-        else
-            if (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_1)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration+30)
-                effect = 2
-
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_2)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_2):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_2)
+        if (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_1)) then
+            local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
+            target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
+            if (player:hasStatusEffect(tpz.effect.PRESTO)) then
                 target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
+                daze = 3
                 effect = 3
+            else
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration+30)
+                daze = 2
+                effect = 2
+            end
 
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_3)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_3):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_3)
+        elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_2)) then
+            local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_2):getDuration()
+            target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_2)
+            if (player:hasStatusEffect(tpz.effect.PRESTO)) then
                 target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
+                daze = 3
                 effect = 4
+            else
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
+                daze = 2
+                effect = 3
+            end
 
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_4)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_4):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_4)
+        elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_3)) then
+            local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_3):getDuration()
+            target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_3)
+            if (player:hasStatusEffect(tpz.effect.PRESTO)) then
                 target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                daze = 3
                 effect = 5
+            else
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
+                daze = 2
+                effect = 4
+            end
 
-            elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_5)) then
-                local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_5):getDuration()
-                target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_5)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
-                effect = 5
+        elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_4)) then
+            local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_4):getDuration()
+            target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_4)
+            if (player:hasStatusEffect(tpz.effect.PRESTO)) then
+                daze = 3
+            else
+                daze = 2
+            end
+            target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+            effect = 5
+
+       elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_5)) then
+            local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_5):getDuration()
+            target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_5)
+            target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+            daze = 1
+            effect = 5
+
+        else
+            if (player:hasStatusEffect(tpz.effect.PRESTO)) then
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, 60)
+                daze = 3
+                effect = 2
             else
                 target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_1, 1, 0, 60)
+                daze = 2
                 effect = 1
             end
         end
