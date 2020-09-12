@@ -1900,13 +1900,11 @@ INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1283);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1284);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1285);
 INSERT INTO `mob_skill_lists` VALUES ('TiamatWyrm',393,1286);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,936);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,962);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,985);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,986);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,988);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,989);
-INSERT INTO `mob_skill_lists` VALUES ('Humanoid-Hume',394,1006);
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Celestial Nexus, phase 2)',394,985); -- Stellar Burst
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Celestial Nexus, phase 2)',394,986); -- Vortex
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Celestial Nexus, phase 2)',394,988); -- Warp In
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Celestial Nexus, phase 2)',394,989); -- Warp Out
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Celestial Nexus, phase 2)',394,1006); -- Omega Javelin
 INSERT INTO `mob_skill_lists` VALUES ('Calcabrina',395,537);
 -- 396: Bedrock_Barry
 INSERT INTO `mob_skill_lists` VALUES ('Qu_Vho_Deathhurler',397,611);
@@ -3598,5 +3596,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3051); -- Mending Halation
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3052); -- Radial Arcana
 INSERT INTO `mob_skill_lists` VALUES ('Bashe',1142,370); -- Baleful Gaze
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,823); -- Fire Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,824); -- Frost Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,825); -- Wind Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,826); -- Earth Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,827); -- Lightning Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,828); -- Water Blade
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,829); -- Great Wheel
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,830); -- Light Blade
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,985); -- Stellar Burst
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,986); -- Vortex
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,988); -- Warp In (Works the same as Ealdnarche's)
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,989); -- Warp Out (Works the same as Ealdnarche's)
+INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,1006); -- Omega Javelin
 
 -- Next available ID: 1143
