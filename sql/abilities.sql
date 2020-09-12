@@ -350,7 +350,7 @@ INSERT INTO `abilities` VALUES (321,'astral_conduit',15,96,1,3600,254,0,0,285,20
 INSERT INTO `abilities` VALUES (322,'unbridled_wisdom',16,96,1,3600,254,100,0,286,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (323,'cutting_cards',17,96,2,3600,254,0,0,287,2000,0,6,8.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (324,'heady_artifice',18,96,1,3600,254,0,0,288,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
-INSERT INTO `abilities` VALUES (325,'gran_pas',19,96,1,3600,254,0,0,289,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
+INSERT INTO `abilities` VALUES (325,'grand_pas',19,96,1,3600,254,0,0,289,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (326,'caper_emissarius',20,96,2,3600,254,0,0,290,2000,0,6,8.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (327,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,0,'SOA');	--check animation
 INSERT INTO `abilities` VALUES (328,'swipe',22,25,4,90,241,0,0,302,2000,0,6,4.0,0,80,320,0,0,'SOA');	--check animation 15 cat
