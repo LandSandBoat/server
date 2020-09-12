@@ -4969,6 +4969,9 @@ inline int32 CLuaBaseEntity::setAllegiance(lua_State* L)
     ALLEGIANCETYPE allegiance = (ALLEGIANCETYPE)lua_tointeger(L, 1);
 
     m_PBaseEntity->allegiance = allegiance;
+
+    m_PBaseEntity->updatemask |= UPDATE_STATUS;
+
     return 0;
 }
 
