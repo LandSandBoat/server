@@ -1186,23 +1186,23 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         {
             // Teams PVP
             if (allegiance >= ALLEGIANCE_WYVERNS &&
-                PInitiator_allegiance >= ALLEGIANCE_WYVERNS)
+                PInitiator->allegiance >= ALLEGIANCE_WYVERNS)
             {
-                return allegiance != PInitiator_allegiance;
+                return allegiance != PInitiator->allegiance;
             }
 
             // Nation PVP
             if ((allegiance >= ALLEGIANCE_SAN_DORIA && allegiance <= ALLEGIANCE_WINDURST) &&
-                (PInitiator_allegiance >= ALLEGIANCE_SAN_DORIA && PInitiator_allegiance <= ALLEGIANCE_WINDURST))
+                (PInitiator->allegiance >= ALLEGIANCE_SAN_DORIA && PInitiator->allegiance <= ALLEGIANCE_WINDURST))
             {
-                return allegiance != PInitiator_allegiance;
+                return allegiance != PInitiator->allegiance;
             }
 
             // PVE
             if (allegiance <= ALLEGIANCE_PLAYER &&
-                PInitiator_allegiance <= ALLEGIANCE_PLAYER)
+                PInitiator->allegiance <= ALLEGIANCE_PLAYER)
             {
-                return allegiance != PInitiator_allegiance;
+                return allegiance != PInitiator->allegiance;
             }
 
             return false;
