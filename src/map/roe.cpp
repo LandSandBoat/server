@@ -70,8 +70,8 @@ int32 RegisterHandler(lua_State* L)
     while (lua_next(L, -2) != 0)
     {
         lua_getfield(L, -1, "trigger");
-        uint32 recordID = lua_tointeger(L, -3);
-        uint32 trigger = lua_tointeger(L, -1);
+        uint32 recordID = static_cast<uint32>(lua_tointeger(L, -3));
+        uint32 trigger = static_cast<uint32>(lua_tointeger(L, -1));
         lua_pop(L, 2);
         if (trigger == event)
             RoeHandlers[event].bitmap.set(recordID);
@@ -95,7 +95,7 @@ int32 ParseRecords(lua_State* L)
     while (lua_next(L, -2) != 0)
     {
         // Set Implemented bit.
-        uint32 recordID = lua_tointeger(L, -2);
+        uint32 recordID = static_cast<uint32>(lua_tointeger(L, -2));
         roeutils::RoeBitmaps.ImplementedRecords.set(recordID);
 
         // Set repeatability bit
