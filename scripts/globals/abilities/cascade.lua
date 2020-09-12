@@ -14,5 +14,5 @@ function onAbilityCheck(player,target,ability)
 end
 
 function onUseAbility(player,target,ability)
-    player:addStatusEffect(tpz.effect.CASCADE,4,0,60 or the next spell cast)
+    player:addStatusEffect(tpz.effect.CASCADE,4,0,60)
 end
