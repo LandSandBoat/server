@@ -572,9 +572,13 @@ uint16 CBattleEntity::ATT()
     {
         ATT += (STR() * 3) / 4;
     }
+    else if (weapon && weapon->isHandToHand())
+    {
+        ATT += (STR() * 5) / 8;
+    }
     else
     {
-        ATT += (STR()) / 2;
+        ATT += (STR() * 3) / 4;
     }
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
@@ -608,7 +612,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
     {
         return 0;
     }
-    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR() / 2;
+    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
     return ATT + (ATT * m_modStat[Mod::RATTP] / 100) +
         std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
 }
@@ -628,7 +632,7 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
     }
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
-    acc += AGI() / 2;
+    acc += (AGI() * 3) / 4;
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
@@ -677,7 +681,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else
         {
-            ACC += (int16)(DEX() * 0.5);
+            ACC += (int16)(DEX() * 0.75);
         }
         ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
         auto PChar = dynamic_cast<CCharEntity *>(this);
@@ -1234,6 +1238,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     auto PSpell = state.GetSpell();
     auto PActionTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    CBattleEntity* POriginalTarget = PActionTarget;
+    bool IsMagicCovered= false;
 
     luautils::OnSpellPrecast(this, PSpell);
 
@@ -1280,6 +1286,16 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
     else
     {
+        if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
+        {
+            CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
+            IsMagicCovered = battleutils::IsMagicCovered((CCharEntity*) PCoverAbilityUser);
+
+            if (IsMagicCovered)
+            {
+                PActionTarget = PCoverAbilityUser;
+            }
+        }
         // only add target
         PAI->TargetFind->findSingleTarget(PActionTarget, flags);
     }
@@ -1371,7 +1387,14 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         }
         actionTarget.messageID = msg;
 
-        state.ApplyEnmity(PTarget, ce, ve);
+        if (IsMagicCovered)
+        {
+            state.ApplyMagicCoverEnmity(POriginalTarget, PActionTarget, (CMobEntity*)this);
+        }
+        else
+        {
+            state.ApplyEnmity(PTarget, ce, ve);
+        }
 
         if (PTarget->objtype == TYPE_MOB && msg != MSGBASIC_SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
@@ -1487,6 +1510,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     list.ActionTargetID = PTarget->id;
 
+    CBattleEntity* POriginalTarget = PTarget;
+
     /////////////////////////////////////////////////////////////////////////
     //	Start of the attack loop.
     /////////////////////////////////////////////////////////////////////////
@@ -1498,6 +1523,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
         // Set the swing animation.
         actionTarget.animation = attack.GetAnimationID();
+
+        if (attack.CheckCover())
+        {
+            PTarget = attackRound.GetCoverAbilityUserEntity();
+            list.ActionTargetID = PTarget->id;
+        }
 
         if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
         {
@@ -1623,7 +1654,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     actionTarget.reaction = REACTION_BLOCK;
                 }
 
-                actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true);
+                actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
                 if (actionTarget.param < 0)
                 {
                     actionTarget.param = -(actionTarget.param);

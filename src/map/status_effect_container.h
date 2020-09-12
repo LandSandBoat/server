@@ -25,6 +25,8 @@
 #include "../common/cbasetypes.h"
 #include "../common/taskmgr.h"
 
+#include <set>
+
 #include "status_effect.h"
 
 /************************************************************************
@@ -78,6 +80,7 @@ public:
     void SaveStatusEffects(bool logout = false);                // сохраняем эффекты персонажа
 
     uint8 GetEffectsCount(EFFECT ID);                        // получаем количество эффектов с указанным id
+    uint8 GetLowestFreeSlot(); // returns the lowest free slot for songs/rolls
 
     bool ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration);
     bool CheckForElevenRoll();
@@ -99,7 +102,7 @@ public:
     template<typename F, typename... Args>
     void ForEachEffect(F func, Args&&... args)
     {
-        for (auto&& PEffect : m_StatusEffectList)
+        for (auto&& PEffect : m_StatusEffectSet)
         {
             func(PEffect, std::forward<Args>(args)...);
         }
@@ -120,7 +123,7 @@ private:
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);
 
-    std::vector<CStatusEffect*>	m_StatusEffectList;
+    std::multiset<CStatusEffect*, bool(*)(CStatusEffect* AStatus, CStatusEffect* BStatus)>	m_StatusEffectSet;
 };
 
 /************************************************************************

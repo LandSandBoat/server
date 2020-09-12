@@ -1,0 +1,205 @@
+name: build
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - release
+      - canary
+
+jobs:
+  Linux_Build_32bit:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7
+    - name: Build C++
+      run: |
+        g++ --version
+        sh autogen.sh  "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+        ./configure
+        make -j $(nproc)
+
+  Linux_Build_32bit_CMake:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7 cmake
+    - name: Build C++
+      run: |
+        g++ --version
+        cmake .
+        make -j $(nproc)
+
+  Linux_Build_64bit:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7
+    - name: Build C++
+      run: |
+        g++ --version
+        sh autogen.sh
+        ./configure "CFLAGS=-m64" "CXXFLAGS=-m64" "LDFLAGS=-m64"
+        make -j $(nproc)
+
+  Windows_Build_32bit:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build Solution
+        shell: cmd
+        run: |
+          "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=Win32
+
+  Windows_Build_32bit_CMake:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build Solution
+        shell: cmd
+        run: |
+          cmake . -G "Visual Studio 16 2019"
+          "%MSBUILD_PATH%\MSBuild.exe" topaz.sln
+
+  Windows_Build_64bit:
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build Solution
+        shell: cmd
+        run: |
+          "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=x64
+
+  Style_Checks:
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 0
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
+    - name: Lua Checks
+      run: |
+        sh travis_lua.sh
+    - name: Clang Format (C++ files)
+      run: |
+        clang-format --version
+        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
+        echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
+        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
+        echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
+        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
+
+        if [ -z "$diff" ]
+        then
+            echo "Diff formatting looks good!"
+        else
+            echo "Problem with formatting!"
+            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
+            echo "Windows and Linux installation instructions for these tools are available here:"
+            echo "https://github.com/project-topaz/topaz/wiki/Developer-Workflow"
+            echo "" 
+            echo "$diff" 
+
+            exit -1
+        fi
+
+  Full_Startup_Checks:
+    runs-on: ubuntu-18.04
+    services:
+      mysql:
+        image: mysql:5.6
+        env:
+          MYSQL_DATABASE: tpzdb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common mariadb-server-10.1 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev autoconf pkg-config zlib1g-dev libssl-dev
+    - name: Build Binaies
+      run: |
+        g++ --version
+        sh autogen.sh
+        ./configure "CFLAGS=-m64" "CXXFLAGS=-m64" "LDFLAGS=-m64"
+        make -j $(nproc)
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Copy confs
+      run: |
+        cp conf/default/* conf/
+    - name: Run services (2 mins)
+      env:
+        MYSQL_HOST: mydb
+      run: |
+        screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
+        screen -d -m -S topaz_game ./topaz_game --log map-server.log
+        screen -d -m -S topaz_search ./topaz_search --log search-server.log
+        sleep 2m
+        killall screen
+    - name: Check for errors
+      run: |
+        cat login-server.log
+        cat map-server.log
+        cat search-server.log
+
+        if grep -q error login-server.log; then
+            exit -1
+        fi
+
+        if grep -q error map-server.log; then
+            exit -1
+        fi
+
+        if grep -q error search-server.log; then
+            exit -1
+        fi

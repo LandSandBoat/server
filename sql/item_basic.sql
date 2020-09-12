@@ -18146,6 +18146,7 @@ INSERT INTO `item_basic` VALUES (21631,0,'mirage_sword','mirage_sword',1,2080,3,
 INSERT INTO `item_basic` VALUES (21632,0,'luhlaza_sword','luhlaza_sword',1,2080,3,0,0);     -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21633,0,'zomorrodnegar','zomorrodnegar',1,2080,3,0,0);     -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21635,0,'malignance_sword','malignance_sword',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21636,0,'nihility','nihility',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21654,0,'arasy_claymore','arasy_claymore',1,2084,4,0,0);
 INSERT INTO `item_basic` VALUES (21655,0,'arasy_claymore_+1','arasy_claymore_+1',1,2080,4,0,0);
 INSERT INTO `item_basic` VALUES (21656,0,'dyrnwyn','dyrnwyn',1,2084,4,0,0);
