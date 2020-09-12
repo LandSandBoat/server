@@ -22,7 +22,6 @@ function onAbilityCheck(player, target, ability)
             return tpz.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0
-        end
     end
 
 function onUseAbility(player, target, ability, action)
