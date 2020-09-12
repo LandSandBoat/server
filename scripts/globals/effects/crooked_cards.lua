@@ -1,6 +1,6 @@
 -----------------------------------
 --
---     tpz.effect.CROOKED_CARDS Increases the effects of the next phantom roll.	
+--     tpz.effect.CROOKED_CARDS	
 --
 -----------------------------------
 
