@@ -21,7 +21,7 @@ function onTrigger(player, npc)
         player:startEvent(677) -- Offer Eco-Warrior quest
     elseif ecoStatus == 1 then
         player:startEvent(679) -- Reminder dialogue to talk to Rojaireaut
-    elseif ecoStatus == 3 and player:hasKeyItem(tpz.ki.INDIGESTED_ORE) then
+    elseif ecoStatus == 3 and player:hasKeyItem(tpz.ki.INDIGESTED_STALAGMITE) then
         player:startEvent(681) -- Complete quest
     elseif ecoStatus > 100 then
         player:startEvent(682) -- Already on a different nation's Eco-Warrior
@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         fame = 80,
         var = "EcoStatus"
     }) then
-        player:delKeyItem(tpz.ki.INDIGESTED_ORE)
+        player:delKeyItem(tpz.ki.INDIGESTED_STALAGMITE)
         player:setCharVar("EcoReset", getConquestTally())
     end
 end
