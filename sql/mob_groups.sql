@@ -5810,7 +5810,7 @@ INSERT INTO `mob_groups` VALUES (95,3566,92,'Shadowhand_Cuirassier',0,128,0,0,0,
 INSERT INTO `mob_groups` VALUES (96,3563,92,'Shadowfang',0,128,2212,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (97,3564,92,'Shadowfang_Void',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (98,3562,92,'Shadoweye_Gnat',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (99,1408,92,'Fortification',0,128,463,0,0,50,50,0);
+INSERT INTO `mob_groups` VALUES (99,6653,92,'Fortification',0,128,463,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (100,3366,92,'Rikoh_Wahcondalo',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (101,2179,92,'Kagetora',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (102,896,92,'Dalzakk',1,0,0,0,0,1,1,0);
