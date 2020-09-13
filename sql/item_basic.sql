@@ -18989,6 +18989,8 @@ INSERT INTO `item_basic` VALUES (23749,0,'angantyr_tights','angantyr_tights',1,6
 INSERT INTO `item_basic` VALUES (23750,0,'hervor_sollerets','hervor_sollerets',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23751,0,'heidrek_boots','heidrek_boots',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23752,0,'angantyr_boots','angantyr_boots',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23753,0,'sandogasa','sandogasa',1,30784,0,1,0);
+INSERT INTO `item_basic` VALUES (23754,0,'sandogasa_+1','sandogasa_+1',1,64584,0,1,0);
 INSERT INTO `item_basic` VALUES (25417,0,'warriors_bead_necklace','warriors_beads',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (25418,0,'warriors_bead_necklace_+1','war._beads_+1',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (25419,0,'warriors_bead_necklace_+2','war._beads_+2',1,2080,22,0,0);
