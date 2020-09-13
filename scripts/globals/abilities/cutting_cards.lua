@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Cutting Cards
--- Description	Reduces the recast times of other party members' special abilities. The degree to which they are reduced is determined by the number rolled.
+-- Description: Reduces the recast times of other party members' special abilities. The degree to which they are reduced is determined by the number rolled.
 -- Obtained: COR Level 96
 -- Recast Time: 01:00:00
 -----------------------------------
@@ -20,7 +20,7 @@ end
 
 function applyRoll(caster, target, ability, action, total)
     caster:doCuttingCards(target, total)
-    ability:setMsg(435 + math.floor((total-1)/2)*2)
+    ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:animation(target:getID(), 132 + (total) - 1)
     return total
 end

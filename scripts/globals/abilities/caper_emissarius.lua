@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Caper Emissarius
--- Description Transfers enmity to a party member of your choice.
+-- Description: Transfers enmity to a party member of your choice.
 -- Obtained: SCH Level 96
 -- Recast Time: 01:00:00
 -- Duration: 00:00:30

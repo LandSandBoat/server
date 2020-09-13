@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Spirit Jump
--- Delivers a short jumping attack on a targeted enemy which suppresses enmity. Effect enhanced when wyvern is present.
+-- Description: Delivers a short jumping attack on a targeted enemy which suppresses enmity. Effect enhanced when wyvern is present.
 -- Obtained: DRG Level 77
 -- Recast Time: 1:00
 -----------------------------------

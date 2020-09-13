@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Soul Jump
--- Delivers a high jumping attack on a targeted enemy which suppresses enmity. Effect enhanced when wyvern is present.
+-- Description: Delivers a high jumping attack on a targeted enemy which suppresses enmity. Effect enhanced when wyvern is present.
 -- Obtained: DRG Level 85
 -- Recast Time: 2:00
 -----------------------------------

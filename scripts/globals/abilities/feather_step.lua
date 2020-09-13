@@ -45,11 +45,11 @@ function onUseAbility(player, target, ability, action)
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
                 if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration + 30)
                     daze = 3
                     effect = 3
                 else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration + 30)
                     daze = 2
                     effect = 2
                 end
@@ -58,11 +58,11 @@ function onUseAbility(player, target, ability, action)
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_2):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_2)
                 if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration + 30)
                     daze = 3
                     effect = 4
                 else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration + 30)
                     daze = 2
                     effect = 3
                 end
@@ -71,11 +71,11 @@ function onUseAbility(player, target, ability, action)
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_3):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_3)
                 if (player:hasStatusEffect(tpz.effect.PRESTO)) then
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                     daze = 3
                     effect = 5
                 else
-                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
+                    target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration + 30)
                     daze = 2
                     effect = 4
                 end
@@ -88,13 +88,13 @@ function onUseAbility(player, target, ability, action)
                 else
                     daze = 2
                 end
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                 effect = 5
 
             elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_5)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_5):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_5)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                 daze = 1
                 effect = 5
 
@@ -113,31 +113,31 @@ function onUseAbility(player, target, ability, action)
             if (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_1)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_1):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_1)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_2, 1, 0, duration + 30)
                 effect = 2
 
             elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_2)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_2):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_2)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_3, 1, 0, duration + 30)
                 effect = 3
 
             elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_3)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_3):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_3)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_4, 1, 0, duration + 30)
                 effect = 4
 
             elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_4)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_4):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_4)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                 effect = 5
 
             elseif (target:hasStatusEffect(tpz.effect.BEWILDERED_DAZE_5)) then
                 local duration = target:getStatusEffect(tpz.effect.BEWILDERED_DAZE_5):getDuration()
                 target:delStatusEffectSilent(tpz.effect.BEWILDERED_DAZE_5)
-                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration+30)
+                target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                 effect = 5
             else
                 target:addStatusEffect(tpz.effect.BEWILDERED_DAZE_1, 1, 0, 60)
@@ -147,18 +147,18 @@ function onUseAbility(player, target, ability, action)
 
         if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_1)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1+daze, 1, 0, 7200)
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1 + daze, 1, 0, 7200)
 
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_2)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2+daze, 1, 0, 7200)
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2 + daze, 1, 0, 7200)
 
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_3)
             if (daze > 2) then
                 daze = 2
             end
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3+daze, 1, 0, 7200)
+            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3 + daze, 1, 0, 7200)
 
         elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
             player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_4)
