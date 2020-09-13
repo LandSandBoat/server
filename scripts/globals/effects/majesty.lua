@@ -3,7 +3,6 @@
 --     tpz.effect.MAJESTY
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

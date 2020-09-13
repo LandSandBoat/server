@@ -3,7 +3,6 @@
 --     tpz.effect.INTERVENE
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

@@ -3,7 +3,6 @@
 --     tpz.effect.UNBRIDLED_WISDOM
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

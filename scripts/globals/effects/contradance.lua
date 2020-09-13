@@ -3,7 +3,6 @@
 --     tpz.effect.CONTRADANCE
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

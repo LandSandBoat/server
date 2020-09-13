@@ -3,7 +3,6 @@
 --     tpz.effect.DRAGON_BREAKER
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

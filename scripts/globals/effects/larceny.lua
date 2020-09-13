@@ -3,7 +3,6 @@
 --     tpz.effect.LARCENY
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

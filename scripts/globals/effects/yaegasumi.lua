@@ -3,7 +3,6 @@
 --     tpz.effect.YAEGASUMI
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

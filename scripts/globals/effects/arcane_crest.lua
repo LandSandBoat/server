@@ -3,7 +3,6 @@
 --     tpz.effect.ARCANE_CREST
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

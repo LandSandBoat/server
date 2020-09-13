@@ -1,10 +1,8 @@
-
 -----------------------------------
 --
---
+--   tpz.effect.BEWILDERED_DAZE_1
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CEVA, -5)
 end

@@ -3,7 +3,6 @@
 --     tpz.effect.SEPULCHER
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

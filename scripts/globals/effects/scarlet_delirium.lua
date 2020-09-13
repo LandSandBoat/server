@@ -3,7 +3,6 @@
 --     tpz.effect.SCARLET_DELIRIUM
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

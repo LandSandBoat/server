@@ -1,9 +1,8 @@
 -----------------------------------
 --
---     tpz.effect.BRAZEN_STRENGTH
+--    tpz.effect.BRAZEN_STRENGTH
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

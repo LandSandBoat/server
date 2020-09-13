@@ -3,7 +3,6 @@
 --     tpz.effect.HEADY_ARTIFICE
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

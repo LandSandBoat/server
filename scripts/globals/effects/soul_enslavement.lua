@@ -3,7 +3,6 @@
 --     tpz.effect.SOUL_ENSLAVEMENT
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

@@ -3,7 +3,6 @@
 --     tpz.effect.DIVINE_EMBLEM
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

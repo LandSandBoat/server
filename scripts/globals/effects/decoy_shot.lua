@@ -3,7 +3,6 @@
 --     tpz.effect.DECOY_SHOT
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

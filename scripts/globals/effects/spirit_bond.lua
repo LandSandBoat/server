@@ -3,7 +3,6 @@
 --     tpz.effect.SPIRIT_BOND
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

@@ -3,7 +3,6 @@
 --     tpz.effect.LIBRA
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

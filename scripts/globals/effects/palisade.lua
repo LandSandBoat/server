@@ -3,7 +3,6 @@
 --     tpz.effect.PALISADE
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

@@ -3,9 +3,8 @@
 --     tpz.effect.BOUNTY_SHOT
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
-target:addMod(tpz.mod.TREASURE_HUNTER, 40)
+    target:addMod(tpz.mod.TREASURE_HUNTER, 40)
 end
 
 function onEffectTick(target, effect)

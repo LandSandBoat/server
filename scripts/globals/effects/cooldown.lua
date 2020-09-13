@@ -3,7 +3,6 @@
 --     tpz.effect.COOLDOWN
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

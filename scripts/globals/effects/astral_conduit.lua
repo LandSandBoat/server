@@ -3,7 +3,6 @@
 --     tpz.effect.ASTRAL_CONDUIT
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.BP_DELAY, 99)
     target:addMod(tpz.mod.MPP, 100)

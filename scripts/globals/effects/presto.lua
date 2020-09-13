@@ -3,7 +3,6 @@
 --     tpz.effect.PRESTO
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

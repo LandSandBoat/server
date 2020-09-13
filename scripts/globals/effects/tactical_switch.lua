@@ -3,7 +3,6 @@
 --     tpz.effect.TACTICAL_SWITCH
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

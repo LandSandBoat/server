@@ -3,7 +3,6 @@
 --     tpz.effect.GRAND_PAS
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

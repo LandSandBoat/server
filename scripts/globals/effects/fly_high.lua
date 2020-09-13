@@ -3,7 +3,6 @@
 --     tpz.effect.FLY_HIGH
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

@@ -3,7 +3,6 @@
 --     tpz.effect.MANA_CEDE
 --     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 
