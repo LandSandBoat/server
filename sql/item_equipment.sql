@@ -10651,7 +10651,7 @@ INSERT INTO `item_equipment` VALUES (21631,'mirage_sword',99,119,32768,278,0,0,3
 INSERT INTO `item_equipment` VALUES (21632,'luhlaza_sword',99,119,32768,278,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21633,'zomorrodnegar',99,119,32768,819,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21635,'malignance_sword',99,119,2097345,280,0,0,3,0);
-INSERT INTO `item_equipment` VALUES (21636,'nihility',1,0,4194303,886,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21636,'nihility',1,0,4194303,886,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21654,'arasy_claymore',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21655,'arasy_claymore_+1',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21656,'dyrnwyn',99,119,128,321,0,0,1,0);
