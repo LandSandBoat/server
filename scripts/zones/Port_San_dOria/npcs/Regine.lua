@@ -32,10 +32,10 @@ function onTrigger(player, npc)
     -- FLYERS FOR REGINE
     if ffr == QUEST_AVAILABLE then -- ready to accept quest
         player:startEvent(510, 2)
-    elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
-        player:startEvent(510, 3)
     elseif ffr == QUEST_ACCEPTED and player:getCharVar('[ffr]deliveryMask') == 32767 then -- all flyers delivered
         player:startEvent(603)
+    elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
+        player:startEvent(510, 3)
 
     -- DEFAULT MENU
     else
