@@ -134,7 +134,7 @@ end
 function tpz.roe.onRecordTrigger(player, recordID, params)
     local entry = tpz.roe.records[recordID]
     if entry and entry:check(player, params) then
-        local progress = params.progress + entry.increment
+        local progress = (params and params.progress or player:getEminenceProgress(recordID)) + entry.increment
         if progress >= entry.goal then
             completeRecord(player, recordID, entry.reward)
         else
