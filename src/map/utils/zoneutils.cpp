@@ -302,8 +302,9 @@ void LoadNPCList()
 
                 PNpc->m_TargID = (uint32)Sql_GetUIntData(SqlHandle, 6) >> 16; // вполне вероятно
 
-                PNpc->speed = (uint8)Sql_GetIntData(SqlHandle, 7);
-                PNpc->speedsub = (uint8)Sql_GetIntData(SqlHandle, 8);
+                PNpc->speed = (uint8)Sql_GetIntData(SqlHandle, 7);    // Overwrites baseentity.cpp's defined speed
+                PNpc->speedsub = (uint8)Sql_GetIntData(SqlHandle, 8); // Overwrites baseentity.cpp's defined speedsub
+
                 PNpc->animation = (uint8)Sql_GetIntData(SqlHandle, 9);
                 PNpc->animationsub = (uint8)Sql_GetIntData(SqlHandle, 10);
 

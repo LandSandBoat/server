@@ -208,13 +208,15 @@ int32 CBattleEntity::GetMaxMP()
 
 /************************************************************************
 *                                                                       *
-*  Скорость перемещения с учетом модификаторов                          *
+*  Movement speed, taking into account modifiers                        *
+*  Note: retail speeds show as a float in the client,                   *
+*        yet in the packet it seems to be just one byte 0-255..         *
 *                                                                       *
 ************************************************************************/
 
 uint8 CBattleEntity::GetSpeed()
 {
-    return (isMounted() ? 50 + map_config.speed_mod : std::clamp<uint16>(speed * (100 + getMod(Mod::MOVE)) / 100, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+    return (isMounted() ? 40 + map_config.mount_speed_mod : std::clamp<uint16>(speed * (100 + getMod(Mod::MOVE)) / 100, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
 }
 
 bool CBattleEntity::CanRest()
