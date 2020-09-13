@@ -17,7 +17,7 @@ function error(player, msg)
 end
 
 function onTrigger(player, modifier, amount, target)
-    if not modifier then
+    if not modifier or not amount then
         error(player, "Must specify modifier and amount. ")
         return
     end
@@ -25,11 +25,6 @@ function onTrigger(player, modifier, amount, target)
     local modID = tonumber(modifier) or tpz.mod[string.upper(modifier)]
     if not modID then
         error(player, "No valid modifier found. ")
-        return
-    end
-
-    if not tonumber(amount) then
-        error(player, "Need an amount to set the modifier to! ")
         return
     end
 
