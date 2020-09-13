@@ -15,7 +15,7 @@ function onTrigger(player, npc)
 
     -- Already got sunsand
     if player:getLocalVar("gotSunSand") > 0 then
-        player:messageSpecial(NOTHING_OUT_OF_ORDINARY)
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 
     -- its go time
     elseif player:getFreeSlotsCount() > 0 and not player:hasItem(503) then
