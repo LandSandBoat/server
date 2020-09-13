@@ -10650,9 +10650,9 @@ INSERT INTO `mob_groups` VALUES (12,1118,167,'Drexerion_the_Condemned',0,128,707
 INSERT INTO `mob_groups` VALUES (13,3125,167,'Phanduron_the_Condemned',0,128,1992,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (14,6475,167,'Blind_Bat',300,0,2641,0,0,94,99,0);
 INSERT INTO `mob_groups` VALUES (15,6411,167,'Panna_Cotta',300,0,3144,0,0,95,96,0);
-INSERT INTO `mob_groups` VALUES (16,1900,167,'Haunt',300,0,1283,0,0,96,97,0);
-INSERT INTO `mob_groups` VALUES (17,6526,167,'Garm',300,0,933,0,0,94,97,0);
-INSERT INTO `mob_groups` VALUES (18,2910,167,'Nosferatu',300,0,2882,0,0,97,99,0);
+INSERT INTO `mob_groups` VALUES (16,6509,167,'Nachtmahr',300,0,1283,0,0,96,97,0);
+INSERT INTO `mob_groups` VALUES (17,6527,167,'Dabilla',300,0,933,0,0,94,97,0);
+INSERT INTO `mob_groups` VALUES (18,6582,167,'Wurdalak',300,0,2882,0,0,97,99,0);
 INSERT INTO `mob_groups` VALUES (19,233,167,'Arioch',0,32,2388,0,0,56,62,0);
 INSERT INTO `mob_groups` VALUES (20,1505,167,'Gespenst',300,0,950,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (21,2548,167,'Manes',0,32,2879,0,0,73,73,0);
