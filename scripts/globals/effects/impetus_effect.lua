@@ -12,6 +12,6 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-    target:addMod(tpz.mod.ATT, -100)
-    target:addMod(tpz.mod.CRITHITRATE, -50)
+    target:delMod(tpz.mod.ATT, 100)
+    target:delMod(tpz.mod.CRITHITRATE, 50)
 end
