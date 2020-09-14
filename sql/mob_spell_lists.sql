@@ -3899,6 +3899,21 @@ INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,258,7,255);  -- Bind
 INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,273,31,255); -- Sleepga
 INSERT INTO `mob_spell_lists` VALUES ('Ebony_Pudding',430,274,56,255); -- Sleepga II
 
+INSERT INTO `mob_spell_lists` VALUES ('Kamlanaut (Apoc Nigh)',431,356,76,255); -- paralyaga
+INSERT INTO `mob_spell_lists` VALUES ('Kamlanaut (Apoc Nigh)',431,357,75,255); -- slowga
+INSERT INTO `mob_spell_lists` VALUES ('Kamlanaut (Apoc Nigh)',431,359,75,255); -- silencega
+INSERT INTO `mob_spell_lists` VALUES ('Kamlanaut (Apoc Nigh)',431,360,75,255); -- dispelga
+INSERT INTO `mob_spell_lists` VALUES ('Kamlanaut (Apoc Nigh)',431,366,76,255); -- graviga
+
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,176,75,255);-- firaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,181,75,255);-- blizzaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,186,75,255);-- aeroga_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,191,75,255);-- stonega_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,196,75,255);-- thundaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,201,75,255);-- waterga_iii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,274,75,255);-- sleepga_ii
+INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,362,75,255);-- bindga
+
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

@@ -1833,6 +1833,7 @@ INSERT INTO `item_mods` VALUES (10676,1,72);
 INSERT INTO `item_mods` VALUES (10676,2,42);
 INSERT INTO `item_mods` VALUES (10676,27,7);
 INSERT INTO `item_mods` VALUES (10676,160,-4);
+INSERT INTO `item_mods` VALUES (10676,965,30);    -- Valor Surcoat +2 - Converts 30% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (10677,1,64);
 INSERT INTO `item_mods` VALUES (10677,2,38);
 INSERT INTO `item_mods` VALUES (10677,8,6);
@@ -8398,6 +8399,7 @@ INSERT INTO `item_mods` VALUES (12515,1,24);
 INSERT INTO `item_mods` VALUES (12515,2,12);
 INSERT INTO `item_mods` VALUES (12515,13,3);
 INSERT INTO `item_mods` VALUES (12515,27,2);
+INSERT INTO `item_mods` VALUES (12515,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (12516,1,23);
 INSERT INTO `item_mods` VALUES (12516,2,12);
 INSERT INTO `item_mods` VALUES (12516,8,4);
@@ -14135,6 +14137,7 @@ INSERT INTO `item_mods` VALUES (14506,1,56);
 INSERT INTO `item_mods` VALUES (14506,2,30);
 INSERT INTO `item_mods` VALUES (14506,9,3);
 INSERT INTO `item_mods` VALUES (14506,27,5);
+INSERT INTO `item_mods` VALUES (14506,965,20);    -- Valor Surcoat +1 - Converts 20% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (14507,1,50);
 INSERT INTO `item_mods` VALUES (14507,2,27);
 INSERT INTO `item_mods` VALUES (14507,13,4);
@@ -16082,6 +16085,7 @@ INSERT INTO `item_mods` VALUES (15093,1,55);
 INSERT INTO `item_mods` VALUES (15093,2,23);
 INSERT INTO `item_mods` VALUES (15093,9,3);
 INSERT INTO `item_mods` VALUES (15093,27,4);
+INSERT INTO `item_mods` VALUES (15093,965,20);    -- Valor Surcoat - Converts 20% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (15094,1,49);
 INSERT INTO `item_mods` VALUES (15094,2,20);
 INSERT INTO `item_mods` VALUES (15094,13,4);
@@ -16632,6 +16636,7 @@ INSERT INTO `item_mods` VALUES (15231,1,28);
 INSERT INTO `item_mods` VALUES (15231,2,12);
 INSERT INTO `item_mods` VALUES (15231,13,6);
 INSERT INTO `item_mods` VALUES (15231,27,3);
+INSERT INTO `item_mods` VALUES (15231,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (15232,1,27);
 INSERT INTO `item_mods` VALUES (15232,2,12);
 INSERT INTO `item_mods` VALUES (15232,5,12);
@@ -20072,6 +20077,7 @@ INSERT INTO `item_mods` VALUES (16598,25,4);
 INSERT INTO `item_mods` VALUES (16599,8,2);
 INSERT INTO `item_mods` VALUES (16599,13,3);
 INSERT INTO `item_mods` VALUES (16599,14,1);
+INSERT INTO `item_mods` VALUES (16604,967,5);    -- Save the Queen - Cover Duration +5
 INSERT INTO `item_mods` VALUES (16605,432,5);
 INSERT INTO `item_mods` VALUES (16610,25,2);
 INSERT INTO `item_mods` VALUES (16611,25,2);
@@ -25164,6 +25170,7 @@ INSERT INTO `item_mods` VALUES (20722,25,4);
 INSERT INTO `item_mods` VALUES (20722,29,1);
 INSERT INTO `item_mods` VALUES (20726,23,10);
 INSERT INTO `item_mods` VALUES (20726,25,15);
+INSERT INTO `item_mods` VALUES (20728,967,8);     -- Kheshig Blade - Cover Duration +8
 INSERT INTO `item_mods` VALUES (20733,8,10);      -- Anahera Saber (iLvl 119): STR +10
 INSERT INTO `item_mods` VALUES (20733,11,10);     -- AGI +10
 INSERT INTO `item_mods` VALUES (20733,288,2);     -- Double Attack +2%
@@ -27814,6 +27821,8 @@ INSERT INTO `item_mods` VALUES (23046,31,42);     -- Magic Evasion+42
 INSERT INTO `item_mods` VALUES (23046,68,43);     -- Evasion+43
 INSERT INTO `item_mods` VALUES (23046,161,-6);    -- Physical Damage Taken-6
 INSERT INTO `item_mods` VALUES (23046,384,700);   -- Haste +7%
+INSERT INTO `item_mods` VALUES (23046,967,9);     -- Cover Duration +9
+INSERT INTO `item_mods` VALUES (23046,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23047,1,126);     -- ig._burgeonet_+2 DEF:126
 INSERT INTO `item_mods` VALUES (23047,2,61);      -- HP+61
 INSERT INTO `item_mods` VALUES (23047,5,34);      -- MP+34
@@ -28523,6 +28532,7 @@ INSERT INTO `item_mods` VALUES (23129,68,59);     -- Evasion+59
 INSERT INTO `item_mods` VALUES (23129,369,2);     -- Refresh+2
 INSERT INTO `item_mods` VALUES (23129,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23130,955,25);  -- WAR AF2 119 +2 Body Aggressor Duration +25
+INSERT INTO `item_mods` VALUES (23136,965,38);    -- Caballarius Surcoat +2 - Converts 38% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (23174,1,111);     -- pumm._mufflers_+2 DEF:111
 INSERT INTO `item_mods` VALUES (23174,2,55);      -- HP+55
 INSERT INTO `item_mods` VALUES (23174,8,23);      -- STR+23
@@ -29801,6 +29811,8 @@ INSERT INTO `item_mods` VALUES (23381,31,52);     -- Magic Evasion+52
 INSERT INTO `item_mods` VALUES (23381,68,53);     -- Evasion+53
 INSERT INTO `item_mods` VALUES (23381,161,-7);    -- Physical Damage Taken-7
 INSERT INTO `item_mods` VALUES (23381,384,700);   -- Haste +7%
+INSERT INTO `item_mods` VALUES (23381,967,10);    -- Cover Duration +10
+INSERT INTO `item_mods` VALUES (23381,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23382,1,136);     -- ig._burgeonet_+3 DEF:136
 INSERT INTO `item_mods` VALUES (23382,2,71);      -- HP+71
 INSERT INTO `item_mods` VALUES (23382,5,44);      -- MP+44
@@ -30511,6 +30523,7 @@ INSERT INTO `item_mods` VALUES (23464,68,69);     -- Evasion+69
 INSERT INTO `item_mods` VALUES (23464,369,3);     -- Refresh+3
 INSERT INTO `item_mods` VALUES (23464,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23465,955,30);  -- WAR AF2 119 +3 Body Aggressor Duration +30
+INSERT INTO `item_mods` VALUES (23471,965,41);    -- Caballarius Surcoat +3 - Converts 41% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (23509,1,121);     -- pumm._mufflers_+3 DEF:121
 INSERT INTO `item_mods` VALUES (23509,2,65);      -- HP+65
 INSERT INTO `item_mods` VALUES (23509,8,28);      -- STR+28
@@ -36799,6 +36812,7 @@ INSERT INTO `item_mods` VALUES (26812,31,32);
 INSERT INTO `item_mods` VALUES (26812,68,19);
 INSERT INTO `item_mods` VALUES (26812,160,-9);
 INSERT INTO `item_mods` VALUES (26812,384,300);
+INSERT INTO `item_mods` VALUES (26812,965,32);    -- Caballarius Surcoat - Converts 32% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (26813,1,151);
 INSERT INTO `item_mods` VALUES (26813,2,118);
 INSERT INTO `item_mods` VALUES (26813,5,90);
@@ -36815,6 +36829,7 @@ INSERT INTO `item_mods` VALUES (26813,31,48);
 INSERT INTO `item_mods` VALUES (26813,68,41);
 INSERT INTO `item_mods` VALUES (26813,160,-10);
 INSERT INTO `item_mods` VALUES (26813,384,300);
+INSERT INTO `item_mods` VALUES (26813,965,35);    -- Caballarius Surcoat +1 - Converts 35% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (26814,1,105);     -- Fallen's Cuirass: DEF 105
 INSERT INTO `item_mods` VALUES (26814,2,50);      -- HP +50
 INSERT INTO `item_mods` VALUES (26814,5,49);      -- MP +49
@@ -43135,6 +43150,7 @@ INSERT INTO `item_mods` VALUES (27669,31,21);
 INSERT INTO `item_mods` VALUES (27669,68,15);
 INSERT INTO `item_mods` VALUES (27669,161,-5);
 INSERT INTO `item_mods` VALUES (27669,384,600);
+INSERT INTO `item_mods` VALUES (27669,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (27670,1,83);
 INSERT INTO `item_mods` VALUES (27670,2,19);
 INSERT INTO `item_mods` VALUES (27670,5,19);
@@ -43485,6 +43501,8 @@ INSERT INTO `item_mods` VALUES (27690,31,32);
 INSERT INTO `item_mods` VALUES (27690,68,33);
 INSERT INTO `item_mods` VALUES (27690,161,-5);
 INSERT INTO `item_mods` VALUES (27690,384,700);
+INSERT INTO `item_mods` VALUES (27690,967,9);    -- Reverence Cornet +1 - Cover Duration +9
+INSERT INTO `item_mods` VALUES (27690,966,1);    -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (27691,1,116);
 INSERT INTO `item_mods` VALUES (27691,2,41);
 INSERT INTO `item_mods` VALUES (27691,5,23);
