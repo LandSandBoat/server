@@ -51,7 +51,9 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/automatonentity.h"
+#include "entities/mobentity.h"
 #include "utils/itemutils.h"
+#include "enmity_container.h"
 #include "map.h"
 #include "latent_effect_container.h"
 #include "status_effect_container.h"
@@ -546,7 +548,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bo
 
             if (PStatusEffect->GetIcon() != 0)
             {
-                if (!silent)
+                if (!silent && (PStatusEffect->GetFlag() & EFFECTFLAG_NO_LOSS_MESSAGE) == 0)
                 {
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, PStatusEffect->GetIcon(), 0, 206));
                 }
@@ -1500,6 +1502,47 @@ void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 
 /************************************************************************
 *                                                                       *
+*                                                                       *
+*                                                                       *
+************************************************************************/
+
+
+void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
+{
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_POwner);
+    uint16 targetType = (uint16)PStatusEffect->GetTier();
+
+    switch (targetType)
+    {
+    case ALLEGIANCE_PLAYER:
+    {
+        if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
+        {
+            PEntity = PEntity->PMaster;
+        }
+        PEntity->ForParty([&](CBattleEntity* PMember)
+        {
+            if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= 6.25 && !PMember->isDead())
+            {
+                CStatusEffect* PEffect = new CStatusEffect(
+                    (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                    (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                    (uint16)PStatusEffect->GetSubPower(), // Power
+                    3, // Tick
+                    4); // Duration
+                PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+            }
+        });
+    }
+    break;
+    default:
+        break;
+    }
+}
+
+/************************************************************************
+*                                                                       *
 *  Runs OnEffectTick for all status effects                             *
 *                                                                       *
 ************************************************************************/
@@ -1515,6 +1558,10 @@ void CStatusEffectContainer::TickEffects(time_point tick)
             if (PStatusEffect->GetTickTime() != 0 &&
                 PStatusEffect->GetElapsedTickCount() <= std::chrono::duration_cast<std::chrono::milliseconds>(tick - PStatusEffect->GetStartTime()).count() / PStatusEffect->GetTickTime())
             {
+                if (PStatusEffect->GetFlag() & EFFECTFLAG_AURA)
+                {
+                    HandleAura(PStatusEffect);
+                }
                 PStatusEffect->IncrementElapsedTickCount();
                 luautils::OnEffectTick(m_POwner, PStatusEffect);
             }

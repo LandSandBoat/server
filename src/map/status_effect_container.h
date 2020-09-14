@@ -120,6 +120,7 @@ private:
     void RemoveStatusEffect(CStatusEffect* PEffect, bool silent = false);	// удаляем эффект по его номеру в контейнере
     void DeleteStatusEffects();
     void SetEffectParams(CStatusEffect* StatusEffect);			// устанавливаем имя эффекта
+    void HandleAura(CStatusEffect* PStatusEffect);
 
     void OverwriteStatusEffect(CStatusEffect* StatusEffect);
 
