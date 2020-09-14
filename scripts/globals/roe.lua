@@ -441,112 +441,112 @@ tpz.roe.records =
     [84  ] = { -- Spoils - Flame Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3297 } },
+        reqs = { itemID = set{ 3297 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [85  ] = { -- Spoils - Snow Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3298 } },
+        reqs = { itemID = set{ 3298 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [86  ] = { -- Spoils - Breeze Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3299 } },
+        reqs = { itemID = set{ 3299 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [87  ] = { -- Spoils - Soil Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3300 } },
+        reqs = { itemID = set{ 3300 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [88  ] = { -- Spoils - Thunder Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3301 } },
+        reqs = { itemID = set{ 3301 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [89  ] = { -- Spoils - Aqua Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3302 } },
+        reqs = { itemID = set{ 3302 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [90  ] = { -- Spoils - Light Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3303 } },
+        reqs = { itemID = set{ 3303 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [91  ] = { -- Spoils - Shadow Geode
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3304 } },
+        reqs = { itemID = set{ 3304 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [92  ] = { -- Spoils - Ifritite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3520 } },
+        reqs = { itemID = set{ 3520 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [93  ] = { -- Spoils - Shivite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3521 } },
+        reqs = { itemID = set{ 3521 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [94  ] = { -- Spoils - Garudite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3522 } },
+        reqs = { itemID = set{ 3522 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [95  ] = { -- Spoils - Titanite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3523 } },
+        reqs = { itemID = set{ 3523 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [96  ] = { -- Spoils - Ramuite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3524 } },
+        reqs = { itemID = set{ 3524 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [97  ] = { -- Spoils - Leviatite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3525 } },
+        reqs = { itemID = set{ 3525 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [98  ] = { -- Spoils - Carbite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3526 } },
+        reqs = { itemID = set{ 3526 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
     [99  ] = { -- Spoils - Fenrite
         trigger = triggers.itemLooted,
         goal = 3,
-        reqs = { itemid = set{ 3527 } },
+        reqs = { itemID = set{ 3527 } },
         reward = { sparks = 200, xp = 1000, unity = 20, repeatable = true },
     },
 
@@ -557,189 +557,189 @@ tpz.roe.records =
     [120 ] = { -- Spoils - Bat Wing
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 922 } },
+        reqs = { itemID = set{ 922 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [121 ] = { -- Spoils - Black Tiger Fang
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 884 } },
+        reqs = { itemID = set{ 884 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [122 ] = { -- Spoils - Flint Stone
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 768 } },
+        reqs = { itemID = set{ 768 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [123 ] = { -- Spoils - Rabbit Hide
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 856 } },
+        reqs = { itemID = set{ 856 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [124 ] = { -- Spoils - Honey
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 4370 } },
+        reqs = { itemID = set{ 4370 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [125 ] = { -- Spoils - Sheepskin
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 505 } },
+        reqs = { itemID = set{ 505 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [126 ] = { -- Spoils - Lizard Skin
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 852 } },
+        reqs = { itemID = set{ 852 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [127 ] = { -- Spoils - Beetle Shell
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 889 } },
+        reqs = { itemID = set{ 889 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [128 ] = { -- Spoils - Zeruhn Soot
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 560 } },
+        reqs = { itemID = set{ 560 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [129 ] = { -- Spoils - Silver Name Tag
         trigger = triggers.itemLooted,
         goal = 1,
-        reqs = { itemid = set{ 13116 } },
+        reqs = { itemID = set{ 13116 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [130 ] = { -- Spoils - Quadav Helm
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 501 } },
+        reqs = { itemID = set{ 501 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [132 ] = { -- Spoils - Treant Bulb
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 953 } },
+        reqs = { itemID = set{ 953 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [133 ] = { -- Spoils - Wild Onion
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 4387 } },
+        reqs = { itemID = set{ 4387 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [134 ] = { -- Spoils - Sleepshroom
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 4374 } },
+        reqs = { itemID = set{ 4374 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [135 ] = { -- Spoils - Sand Bat Fang
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 1015 } },
+        reqs = { itemID = set{ 1015 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [136 ] = { -- Spoils - Zinc Ore
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 642 } },
+        reqs = { itemID = set{ 642 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [137 ] = { -- Spoils - Giant Bird Feather
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 842 } },
+        reqs = { itemID = set{ 842 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [138 ] = { -- Spoils - Three-leaf Mandragora Bud
         trigger = triggers.itemLooted,
         goal = 1,
-        reqs = { itemid = set{ 1154 } },
+        reqs = { itemID = set{ 1154 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [139 ] = { -- Spoils - Four-leaf Mandragora Bud
         trigger = triggers.itemLooted,
         goal = 1,
-        reqs = { itemid = set{ 4369 } },
+        reqs = { itemID = set{ 4369 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [140 ] = { -- Spoils - Cornette
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 17344 } },
+        reqs = { itemID = set{ 17344 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [141 ] = { -- Spoils - Yuhtunga Sulfur
         trigger = triggers.itemLooted,
         goal = 1,
-        reqs = { itemid = set{ 934 } },
+        reqs = { itemID = set{ 934 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [142 ] = { -- Spoils - Snobby Letter
         trigger = triggers.itemLooted,
         goal = 1,
-        reqs = { itemid = set{ 1150 } },
+        reqs = { itemID = set{ 1150 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [143 ] = { -- Spoils - Yagudo Bead Necklace
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 498 } },
+        reqs = { itemID = set{ 498 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [144 ] = { -- Spoils - Woozyshroom
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 4373 } },
+        reqs = { itemID = set{ 4373 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [145 ] = { -- Spoils - Beehive Chip
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 912 } },
+        reqs = { itemID = set{ 912 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [146 ] = { -- Spoils - Remi Shell
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 1016 } },
+        reqs = { itemID = set{ 1016 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
     [147 ] = { -- Spoils - Twinstone Earring
         trigger = triggers.itemLooted,
         goal = 2,
-        reqs = { itemid = set{ 13360 } },
+        reqs = { itemID = set{ 13360 } },
         reward = { sparks = 100, xp = 300, unity = 10, repeatable = true },
     },
 
