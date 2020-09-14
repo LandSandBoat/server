@@ -410,19 +410,25 @@ float CPathFind::GetRealSpeed()
 {
     uint8 baseSpeed = m_PTarget->speed;
 
-    if (m_PTarget->objtype != TYPE_NPC)
+    // Lets not factor in player map conf or mod's to non players. 
+    // (Mobs should just have speed set directly instead, and NPC's don't have mods)
+    if (m_PTarget->objtype == TYPE_PC)
     {
         baseSpeed = ((CBattleEntity*)m_PTarget)->GetSpeed();
     }
 
-    if (baseSpeed == 0 && (m_roamFlags & ROAMFLAG_WORM))
+    // Lets not check mob things on non mobs
+    if (m_PTarget->objtype == TYPE_MOB)
     {
-        baseSpeed = 20;
-    }
-
-    if (m_PTarget->animation == ANIMATION_ATTACK)
-    {
-        baseSpeed = baseSpeed + map_config.mob_speed_mod;
+        if (baseSpeed == 0 && (m_roamFlags & ROAMFLAG_WORM))
+        {
+            baseSpeed = 20;
+        }
+        // using 'else if' so we don't mess with worm speed.
+        else if (m_PTarget->animation == ANIMATION_ATTACK)
+        {
+            baseSpeed = baseSpeed + map_config.mob_speed_mod;
+        }
     }
 
     return baseSpeed;

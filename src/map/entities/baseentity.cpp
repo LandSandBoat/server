@@ -33,7 +33,7 @@ CBaseEntity::CBaseEntity()
     targid = 0;
     objtype = ENTITYTYPE::TYPE_NONE;
     status = STATUS_DISAPPEAR;
-	m_TargID = 0;
+    m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));
     memset(&loc, 0, sizeof(loc));
@@ -41,12 +41,12 @@ CBaseEntity::CBaseEntity()
     animationsub = 0;
     speed = 50 + map_config.speed_mod;
     speedsub = 50 + map_config.speed_mod;
-	namevis = 1;
+    namevis = 1;
     allegiance = 0;
     updatemask = 0;
     PAI = nullptr;
-	PBattlefield = nullptr;
-	PInstance = nullptr;
+    PBattlefield = nullptr;
+    PInstance = nullptr;
 }
 
 CBaseEntity::~CBaseEntity()
