@@ -33,7 +33,7 @@ end
 
 
 checks.mobID = function(self, player, params)    -- Mob ID check
-    return (params.mob and self.reqs.mob[params.mob:getID()]) and true or false
+    return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
 end
 
 checks.mobXP = function(self, player, params)  -- Mob yields xp
@@ -756,7 +756,7 @@ tpz.roe.records =
 
     [216 ] = { -- Subjugation: Jaggedy-Eared Jack
         trigger = triggers.mobKill,
-        reqs = { mob = set{17187111} },
+        reqs = { mobID = set{17187111} },
         reward = { sparks = 250, xp = 500 },
     },
 
@@ -769,7 +769,7 @@ tpz.roe.records =
 
     [218 ] = { -- Subjugation: Swamfisk
         trigger = triggers.mobKill,
-        reqs = { mob = set{17191189, 17191291} },
+        reqs = { mobID = set{17191189, 17191291} },
         reward = { sparks = 250, xp = 500 },
     },
 
@@ -782,7 +782,7 @@ tpz.roe.records =
 
     [220 ] = { -- Subjugation: Thousandarm Deshglesh
         trigger = triggers.mobKill,
-        reqs = { mob = set{17350826} },
+        reqs = { mobID = set{17350826} },
         reward = { sparks = 250, xp = 550 },
     },
 
@@ -795,7 +795,7 @@ tpz.roe.records =
 
     [222 ] = { -- Subjugation: Hundredscar Hajwaj
         trigger = triggers.mobKill,
-        reqs = { mob = set{17354828} },
+        reqs = { mobID = set{17354828} },
         reward = { sparks = 500, xp = 1000 },
     },
 
@@ -808,7 +808,7 @@ tpz.roe.records =
 
     [224 ] = { -- Subjugation: Ashmaker Gotblut
         trigger = triggers.mobKill,
-        reqs = { mob = set{17358932} },
+        reqs = { mobID = set{17358932} },
         reward = { sparks = 250, xp = 500 },
     },
 
@@ -821,7 +821,7 @@ tpz.roe.records =
 
     [226 ] = { -- Subjugation: Barbastelle
         trigger = triggers.mobKill,
-        reqs = { mob = set{17555721} },
+        reqs = { mobID = set{17555721} },
         reward = { sparks = 250, xp = 500 },
     },
 
@@ -834,7 +834,7 @@ tpz.roe.records =
 
     [228 ] = { -- Subjugation: Bloodsucker
         trigger = triggers.mobKill,
-        reqs = { mob = set{17461478} },
+        reqs = { mobID = set{17461478} },
         reward = { sparks = 500, xp = 1000 },
     },
 
@@ -847,7 +847,7 @@ tpz.roe.records =
 
     [230 ] = { -- Subjugation: Valkurm Emperor
         trigger = triggers.mobKill,
-        reqs = { mob = set{17199438} },
+        reqs = { mobID = set{17199438} },
         reward = { sparks = 250, xp = 550 },
     },
 
@@ -860,7 +860,7 @@ tpz.roe.records =
 
     [232 ] = { -- Subjugation: Bendigeit Vran
         trigger = triggers.mobKill,
-        reqs = { mob = set{17220001} },
+        reqs = { mobID = set{17220001} },
         reward = { sparks = 250, xp = 600 },
     },
 
@@ -873,7 +873,7 @@ tpz.roe.records =
 
     [234 ] = { -- Subjugation: Juggler Hecatomb
         trigger = triggers.mobKill,
-        reqs = { mob = set{17580248} },
+        reqs = { mobID = set{17580248} },
         reward = { sparks = 250, xp = 600 },
     },
 
@@ -886,7 +886,7 @@ tpz.roe.records =
 
     [236 ] = { -- Subjugation: Bloodtear Baldurf
         trigger = triggers.mobKill,
-        reqs = { mob = set{17195318} },
+        reqs = { mobID = set{17195318} },
         reward = { sparks = 500, xp = 1000 },
     },
 
@@ -900,7 +900,7 @@ tpz.roe.records =
 
     [238 ] = { -- Subjugation: Morbolger
         trigger = triggers.mobKill,
-        reqs = { mob = set{17568127} },
+        reqs = { mobID = set{17568127} },
         reward = { sparks = 500, xp = 1000 },
     },
 
