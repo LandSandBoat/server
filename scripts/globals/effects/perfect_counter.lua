@@ -11,5 +11,5 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-    target:addMod(tpz.mod.PERFECT_COUNTER_ATT, -100)
+    target:delMod(tpz.mod.PERFECT_COUNTER_ATT, 100)
 end
