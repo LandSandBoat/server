@@ -11,5 +11,5 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-    target:delMod(tpz.mod.MATT)
+    target:delMod(tpz.mod.MATT, 100)
 end
