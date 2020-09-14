@@ -76,11 +76,15 @@ function onTrigger(player, npc)
     local job = player:getMainJob()
     local lvl = player:getMainLvl()
 
-    -- TRUST
-    if player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
-        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
-
-        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
+        -- MIHGO'S AMIGO
+    if mihgosAmigo == QUEST_AVAILABLE then
+        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
+            player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
+        else
+            player:startEvent(80) -- Start Quest "Mihgo's Amigo"
+        end
+    elseif mihgosAmigo == QUEST_ACCEPTED then
+        player:startEvent(82)
 
         -- WINDURST 2-1: LOST FOR WORDS
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and missionStatus > 0 and
@@ -94,6 +98,12 @@ function onTrigger(player, npc)
         else
             player:startEvent(170)
         end
+
+        -- TRUST
+    elseif player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
+        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+
+        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
 
         -- LURE OF THE WILDCAT (WINDURST)
     elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -146,16 +156,6 @@ function onTrigger(player, npc)
         player:startEvent(95) -- not sold reminder
     elseif rockRacketeer == QUEST_ACCEPTED then
         player:startEvent(94) -- quest reminder
-
-        -- MIHGO'S AMIGO
-    elseif mihgosAmigo == QUEST_AVAILABLE then
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
-            player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
-        else
-            player:startEvent(80) -- Start Quest "Mihgo's Amigo"
-        end
-    elseif mihgosAmigo == QUEST_ACCEPTED then
-        player:startEvent(82)
 
         -- STANDARD DIALOG
     elseif rockRacketeer == QUEST_COMPLETED then
