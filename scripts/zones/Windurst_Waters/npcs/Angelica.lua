@@ -11,7 +11,8 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 
-local poseItems = {
+local poseItems =
+{
     [tpz.job.WAR] = 12576,
     [tpz.job.MNK] = 12600,
     [tpz.job.WHM] = 12608,
