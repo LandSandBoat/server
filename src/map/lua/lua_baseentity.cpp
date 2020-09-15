@@ -1909,21 +1909,64 @@ inline int32 CLuaBaseEntity::clearPath(lua_State* L)
 /************************************************************************
 *  Function: checkDistance()
 *  Purpose : Returns the yalm distance between entities
-*  Example : if (player:checkDistance(pet) <= 25) then
-*  Notes   :
+*  Example1: if player:checkDistance(target) <= 25 then
+*  Example2: if player:checkDistance(pos) <= 25 then
+*  Example3: if player:checkDistance(posX, posY, PosZ) <= 25 then
+*  Notes   : Example1 is an entity, the others are coordinate point inputs
 ************************************************************************/
 
 inline int32 CLuaBaseEntity::checkDistance(lua_State *L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
 
-    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+    float calcdistance = 0;
 
-    CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
-    CBattleEntity* PMob = (CBattleEntity*)PLuaBaseEntity->GetBaseEntity();
+    if (lua_isuserdata(L, 1))
+    {
+        CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+        calcdistance = distance(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
+    }
+    else
+    {
+        float posX = 0;
+        float posY = 0;
+        float posZ = 0;
+        position_t point;
 
-    float calcdistance = distance(PBattle->loc.p, PMob->loc.p);
+        if (lua_istable(L, 1))
+        {
+            lua_getfield(L, 1, "x");
+            posX = (float)lua_tonumber(L, -1);
+            lua_getfield(L, 1, "y");
+            posY = (float)lua_tonumber(L, -1);
+            lua_getfield(L, 1, "z");
+            posZ = (float)lua_tonumber(L, -1);
+        }
+        else if (lua_isnumber(L, 1))
+        {
+            posX = (float)lua_tonumber(L, 1);
+
+            if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+            {
+                posY = (float)lua_tonumber(L, 2);
+            }
+
+            if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
+            {
+                posZ = (float)lua_tonumber(L, 3);
+            }
+        }
+        else
+        {
+            ShowError("Lua::checkDistance : invalid inputs.");
+            return 0;
+        }
+        point.x = posX;
+        point.y = posY;
+        point.z = posZ;
+        calcdistance = distance(m_PBaseEntity->loc.p, point);
+    }
 
     lua_pushnumber(L, calcdistance);
     return 1;
@@ -2791,7 +2834,6 @@ inline int32 CLuaBaseEntity::setPos(lua_State *L)
 
     if (lua_isnumber(L, 1))
     {
-
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
             m_PBaseEntity->loc.p.x = (float)lua_tonumber(L, 1);
         if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
@@ -10627,14 +10669,15 @@ inline int32 CLuaBaseEntity::addStatusEffectEx(lua_State *L)
     }
 
     CStatusEffect * PEffect = new CStatusEffect(
-        (EFFECT)lua_tointeger(L, 1),
-        (uint16)lua_tointeger(L, 2),
-        (uint16)lua_tointeger(L, 3),
-        (uint16)lua_tointeger(L, 4),
-        (uint16)lua_tointeger(L, 5),
-        (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0),
-        (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0),
-        (n >= 8 ? (uint16)lua_tointeger(L, 8) : 0));
+        (EFFECT)lua_tointeger(L, 1), // Effect ID
+        (uint16)lua_tointeger(L, 2), // Effect Icon ID
+        (uint16)lua_tointeger(L, 3), // Power
+        (uint16)lua_tointeger(L, 4), // Tick
+        (uint16)lua_tointeger(L, 5), // Duration
+        (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0), // Sub Effect ID
+        (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0), // Sub Power
+        (n >= 8 ? (uint16)lua_tointeger(L, 8) : 0), // Tier
+        (n >= 9 ? (uint32)lua_tointeger(L, 9) : 0)); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
 
     lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent));
     return 1;

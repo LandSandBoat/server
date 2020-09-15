@@ -89,6 +89,7 @@ struct map_config_t
     bool   disable_gear_scaling;      // Disables ability to equip higher level gear when level cap/sync effect is on player.
     bool   all_jobs_widescan;         // Enable/disable jobs other than BST and RNG having widescan.
     int8   speed_mod;                 // Modifier to add to player speed
+    int8   mount_speed_mod;           // Modifier to add to mount speed
     int8   mob_speed_mod;             // Modifier to add to monster speed
     float  skillup_chance_multiplier; // Constant used in the skillup formula that has a strong effect on skill-up rates
     float  craft_chance_multiplier;   // Constant used in the crafting skill-up formula that has a strong effect on skill-up rates

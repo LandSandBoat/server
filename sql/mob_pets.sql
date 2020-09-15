@@ -1135,18 +1135,21 @@ INSERT INTO `mob_pets` VALUES (16928827, 1, 15); -- Tonberry_s_Elemental
 INSERT INTO `mob_pets` VALUES (16928988, 1, 15); -- Yagudo_s_Elemental
 INSERT INTO `mob_pets` VALUES (16929007, 1, 15); -- Yagudo_s_Elemental
 INSERT INTO `mob_pets` VALUES (16929015, 1, 14); -- Orc_s_Wyvern
-INSERT INTO `mob_pets` VALUES (16929055, 1, 14); -- Aern_s_Wynav
-INSERT INTO `mob_pets` VALUES (16929058, 1, 9); -- Aern_s_Euvhi
-INSERT INTO `mob_pets` VALUES (16929066, 1, 15); -- Aern_s_Elemental
--- INSERT INTO `mob_pets` VALUES (16929068, 1, 15); -- Aern_s_Avatar
-INSERT INTO `mob_pets` VALUES (16929069, 1, 14); -- Aern_s_Wynav
-INSERT INTO `mob_pets` VALUES (16929073, 1, 9); -- Aern_s_Euvhi
-INSERT INTO `mob_pets` VALUES (16929079, 1, 15); -- Aern_s_Elemental
--- INSERT INTO `mob_pets` VALUES (16929081, 1, 9); -- Aern_s_Avatar
--- INSERT INTO `mob_pets` VALUES (16929099, 1, 9); -- Aern_s_Wynav
--- INSERT INTO `mob_pets` VALUES (16929102, 1, 9); -- Aern_s_Wynav
--- INSERT INTO `mob_pets` VALUES (16929114, 1, 9); -- Aern_s_Elemental
--- INSERT INTO `mob_pets` VALUES (16929115, 1, 9); -- Aern_s_Avatar
+
+-- ------------------------------------------------------------
+-- Temenos Aerns (Zone 37)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_pets` VALUES (16929055, 1, 14); -- Temenos Aern DRG
+INSERT INTO `mob_pets` VALUES (16929058, 1, 9); -- Temenos Aern BST
+INSERT INTO `mob_pets` VALUES (16929066, 1, 15); -- Temenos Aern SMN
+INSERT INTO `mob_pets` VALUES (16929069, 1, 14); -- Temenos Aern DRG
+INSERT INTO `mob_pets` VALUES (16929073, 1, 9); -- Temenos Aern BST
+INSERT INTO `mob_pets` VALUES (16929079, 1, 15); -- Temenos Aern SMN
+INSERT INTO `mob_pets` VALUES (16929098, 1, 14); -- Temenos Aern DRG
+INSERT INTO `mob_pets` VALUES (16929101, 1, 14); -- Temenos Aern DRG
+INSERT INTO `mob_pets` VALUES (16929113, 1, 15); -- Temenos Aern SMN
+
 INSERT INTO `mob_pets` VALUES (17539308, 1, 15); -- Ra_Gho_s_Avatar
 INSERT INTO `mob_pets` VALUES (17326103, 1, 9); -- Vanguard_s_Scorpion
 INSERT INTO `mob_pets` VALUES (17326143, 1, 9); -- Vanguard_s_Scorpion
