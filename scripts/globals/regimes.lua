@@ -991,13 +991,12 @@ tpz.regime.clearRegimeVars = function(player)
 end
 
 tpz.regime.bookOnTrigger = function(player, regimeType)
+    local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
-  if player:getCharVar("[hunt]status") >= 1 then
-     player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]page"))
+    if player:getCharVar("[hunt]status") >= 1 then
+        player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-  elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
-        local info = regimeInfo[regimeType].zone[player:getZoneID()]
-
+    elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
@@ -1062,6 +1061,10 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     local regimeRepeat = bit.band(option, 0x80000000)
     local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
 
+    if option == 7 then
+      tpz.hunts.clearHuntVars(player)
+    end
+
     option = bit.band(option, 0x7FFFFFFF)
 
     -- check valid option
@@ -1070,10 +1073,6 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
 
     if not opt then
         return
-    end
-
-    if option == 7 then
-      tpz.hunts.clearHuntVars(player)
     end
 
     local cost = opt.cost
