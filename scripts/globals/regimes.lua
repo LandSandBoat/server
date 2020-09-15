@@ -1061,11 +1061,11 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     local regimeRepeat = bit.band(option, 0x80000000)
     local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
 
+    option = bit.band(option, 0x7FFFFFFF)
+
     if option == 7 then
       tpz.hunts.clearHuntVars(player)
     end
-
-    option = bit.band(option, 0x7FFFFFFF)
 
     -- check valid option
     local opts = getFinishOpts(regimeType)
