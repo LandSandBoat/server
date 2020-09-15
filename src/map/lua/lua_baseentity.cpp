@@ -6808,13 +6808,13 @@ inline int32 CLuaBaseEntity::setEminenceProgress(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    uint16 recordID = (uint16)lua_tointeger(L, 1);
-    uint32 progress = (uint32)lua_tointeger(L, 2);
+    uint16 recordID = static_cast<uint16>(lua_tointeger(L, 1));
+    uint32 progress = static_cast<uint32>(lua_tointeger(L, 2));
 
     bool result = roeutils::SetEminenceRecordProgress(PChar, recordID, progress);
     lua_pushboolean(L, result);
 
-    uint32 total = lua_tointeger(L, 3);
+    uint32 total = static_cast<uint32>(lua_tointeger(L, 3));
     if (total)
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recordID, 0, MSGBASIC_ROE_RECORD));
