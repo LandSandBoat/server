@@ -4680,6 +4680,16 @@ INSERT INTO `synth_recipes` VALUES (4563,1,0,0,0,0,0,0,53,0,0,4100,4242,19015,0,
 INSERT INTO `synth_recipes` VALUES (4564,1,0,0,0,0,0,0,53,0,0,4100,4242,19016,0,0,0,0,0,0,0,853,853,853,853,1,1,2,2,'Raptor Skin'); -- Raptor Strap +1 (desynth)
 INSERT INTO `synth_recipes` VALUES (4565,1,0,0,0,0,0,0,0,33,0,4100,4242,16966,0,0,0,0,0,0,0,852,818,651,657,1,1,1,1,'Lizard Skin'); -- Tachi (desynth)
 INSERT INTO `synth_recipes` VALUES (4566,1,0,0,0,0,0,0,0,33,0,4100,4242,16981,0,0,0,0,0,0,0,852,818,651,657,1,1,1,1,'Lizard Skin'); -- Tachi +1 (desynth)
+INSERT INTO `synth_recipes` VALUES (4567,0,0,0,0,93,0,0,0,0,0,4098,4240,843,843,0,0,0,0,0,0,1417,1417,1417,1417,6,8,10,12,'Giant Bird Fletchings'); -- giant bird fletchings
+INSERT INTO `synth_recipes` VALUES (4568,0,2011,0,0,93,0,0,0,0,0,4098,4240,843,843,843,843,843,843,2145,0,1417,1417,1417,1417,18,24,30,36,'Giant Bird Fletchings'); -- giant bird fletchings
+INSERT INTO `synth_recipes` VALUES (4569,1,0,0,0,0,0,95,0,0,0,4100,4242,13448,0,0,0,0,0,0,0,746,746,746,785,1,1,2,1,'Platinum Ingot'); -- Emerald Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4570,1,0,0,0,0,0,95,0,0,0,4100,4242,13449,0,0,0,0,0,0,0,746,746,746,786,1,1,2,1,'Platinum Ingot'); -- Ruby Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4571,1,0,0,0,0,0,95,0,0,0,4100,4242,13450,0,0,0,0,0,0,0,746,746,746,787,1,1,2,1,'Platinum Ingot'); -- Diamond Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4572,1,0,0,0,0,0,95,0,0,0,4100,4242,13451,0,0,0,0,0,0,0,746,746,746,804,1,1,2,1,'Platinum Ingot'); -- Spinel Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4573,1,0,0,0,0,0,95,0,0,0,4100,4242,13452,0,0,0,0,0,0,0,746,746,746,794,1,1,2,1,'Platinum Ingot'); -- Sapphire Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4574,1,0,0,0,0,0,95,0,0,0,4100,4242,13453,0,0,0,0,0,0,0,746,746,746,789,1,1,2,1,'Platinum Ingot'); -- Topaz Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4575,1,0,0,0,0,0,95,0,0,0,4100,4242,13462,0,0,0,0,0,0,0,746,746,746,812,1,1,2,1,'Platinum Ingot'); -- Death Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4576,1,0,0,0,0,0,95,0,0,0,4100,4242,13463,0,0,0,0,0,0,0,746,746,746,813,1,1,2,1,'Platinum Ingot'); -- Angels Ring (desynth)
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)

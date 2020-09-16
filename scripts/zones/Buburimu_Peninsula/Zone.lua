@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/helm")
@@ -34,7 +34,7 @@ function onZoneIn(player, prevZone)
         player:setPos( -276.529, 16.403, -324.519, 14)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 3
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1 then
         cs = 5 -- zone 4 buburimu no update (north)
@@ -70,7 +70,7 @@ end
 
 function onEventUpdate( player, csid, option)
     if csid == 3 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 5 then
         if player:getPreviousZone() == tpz.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == tpz.zone.MHAURA then
             player:updateEvent(0, 0, 0, 0, 0, 7)
@@ -81,7 +81,4 @@ function onEventUpdate( player, csid, option)
 end
 
 function onEventFinish( player, csid, option)
-    if csid == 3 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end

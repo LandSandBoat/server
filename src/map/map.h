@@ -83,13 +83,13 @@ struct map_config_t
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies
     uint8  exp_party_gap_penalties;   // if 1 Party Gap Penalties will apply
-    uint8  fov_allow_alliance;        // if 1 allow alliance to farm fov pages
     float  exp_retain;                // percentage of normally lost experience to retain upon death
     int8   exp_loss_level;            // Minimum main job level at which a character may lose experience points.
     bool   level_sync_enable;         // Enable/disable Level Sync
     bool   disable_gear_scaling;      // Disables ability to equip higher level gear when level cap/sync effect is on player.
     bool   all_jobs_widescan;         // Enable/disable jobs other than BST and RNG having widescan.
     int8   speed_mod;                 // Modifier to add to player speed
+    int8   mount_speed_mod;           // Modifier to add to mount speed
     int8   mob_speed_mod;             // Modifier to add to monster speed
     float  skillup_chance_multiplier; // Constant used in the skillup formula that has a strong effect on skill-up rates
     float  craft_chance_multiplier;   // Constant used in the crafting skill-up formula that has a strong effect on skill-up rates

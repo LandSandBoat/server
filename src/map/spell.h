@@ -899,6 +899,8 @@ enum class SpellID : uint16
     Bilgestorm              = 742,
     Bloodrake               = 743,
 
+    Indi_Regen              = 768,
+
     Distract                = 841,
     Distract_II             = 842,
     Frazzle                 = 843,

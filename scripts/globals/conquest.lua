@@ -60,25 +60,25 @@ end
 
 local outposts =
 {
-    [tpz.region.RONFAURE]        = {zone = 100, ki = tpz.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100},
-    [tpz.region.ZULKHEIM]        = {zone = 103, ki = tpz.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100},
-    [tpz.region.NORVALLEN]       = {zone = 104, ki = tpz.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150},
-    [tpz.region.GUSTABERG]       = {zone = 106, ki = tpz.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100},
-    [tpz.region.DERFLAND]        = {zone = 109, ki = tpz.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [tpz.region.SARUTABARUTA]    = {zone = 115, ki = tpz.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100},
-    [tpz.region.KOLSHUSHU]       = {zone = 118, ki = tpz.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100},
-    [tpz.region.ARAGONEU]        = {zone = 119, ki = tpz.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [tpz.region.FAUREGANDI]      = {zone = 111, ki = tpz.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350},
-    [tpz.region.VALDEAUNIA]      = {zone = 112, ki = tpz.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400},
-    [tpz.region.QUFIMISLAND]     = {zone = 126, ki = tpz.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150},
-    [tpz.region.LITELOR]         = {zone = 121, ki = tpz.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250},
-    [tpz.region.KUZOTZ]          = {zone = 114, ki = tpz.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300},
-    [tpz.region.VOLLBOW]         = {zone = 113, ki = tpz.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500},
-    [tpz.region.ELSHIMOLOWLANDS] = {zone = 123, ki = tpz.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250},
-    [tpz.region.ELSHIMOUPLANDS]  = {zone = 124, ki = tpz.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350},
-    [tpz.region.TULIA]           = {zone = 130,                                             cp = 0,  lvl = 70, fee = 500},
-    [tpz.region.MOVALPOLOS]      = {zone =  11,                                             cp = 40, lvl = 25, fee = 250},
-    [tpz.region.TAVNAZIANARCH]   = {zone =  24, ki = tpz.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300},
+    [tpz.region.RONFAURE]        = {zone = 100, ki = tpz.ki.RONFAURE_SUPPLIES,              lvl = 10, fee = 100},
+    [tpz.region.ZULKHEIM]        = {zone = 103, ki = tpz.ki.ZULKHEIM_SUPPLIES,              lvl = 10, fee = 100},
+    [tpz.region.NORVALLEN]       = {zone = 104, ki = tpz.ki.NORVALLEN_SUPPLIES,             lvl = 15, fee = 150},
+    [tpz.region.GUSTABERG]       = {zone = 106, ki = tpz.ki.GUSTABERG_SUPPLIES,             lvl = 10, fee = 100},
+    [tpz.region.DERFLAND]        = {zone = 109, ki = tpz.ki.DERFLAND_SUPPLIES,              lvl = 15, fee = 150},
+    [tpz.region.SARUTABARUTA]    = {zone = 115, ki = tpz.ki.SARUTABARUTA_SUPPLIES,          lvl = 10, fee = 100},
+    [tpz.region.KOLSHUSHU]       = {zone = 118, ki = tpz.ki.KOLSHUSHU_SUPPLIES,             lvl = 10, fee = 100},
+    [tpz.region.ARAGONEU]        = {zone = 119, ki = tpz.ki.ARAGONEU_SUPPLIES,              lvl = 15, fee = 150},
+    [tpz.region.FAUREGANDI]      = {zone = 111, ki = tpz.ki.FAUREGANDI_SUPPLIES,            lvl = 35, fee = 350},
+    [tpz.region.VALDEAUNIA]      = {zone = 112, ki = tpz.ki.VALDEAUNIA_SUPPLIES,            lvl = 40, fee = 400},
+    [tpz.region.QUFIMISLAND]     = {zone = 126, ki = tpz.ki.QUFIM_SUPPLIES,                 lvl = 15, fee = 150},
+    [tpz.region.LITELOR]         = {zone = 121, ki = tpz.ki.LITELOR_SUPPLIES,               lvl = 25, fee = 250},
+    [tpz.region.KUZOTZ]          = {zone = 114, ki = tpz.ki.KUZOTZ_SUPPLIES,                lvl = 30, fee = 300},
+    [tpz.region.VOLLBOW]         = {zone = 113, ki = tpz.ki.VOLLBOW_SUPPLIES,               lvl = 50, fee = 500},
+    [tpz.region.ELSHIMOLOWLANDS] = {zone = 123, ki = tpz.ki.ELSHIMO_LOWLANDS_SUPPLIES,      lvl = 25, fee = 250},
+    [tpz.region.ELSHIMOUPLANDS]  = {zone = 124, ki = tpz.ki.ELSHIMO_UPLANDS_SUPPLIES,       lvl = 35, fee = 350},
+    [tpz.region.TULIA]           = {zone = 130,                                             lvl = 70, fee = 500},
+    [tpz.region.MOVALPOLOS]      = {zone =  11,                                             lvl = 25, fee = 250},
+    [tpz.region.TAVNAZIANARCH]   = {zone =  24, ki = tpz.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, lvl = 30, fee = 300},
 }
 
 local function hasOutpost(player, region)
@@ -1234,7 +1234,9 @@ tpz.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporter
     if csid == teleporterEvent then
         local region = option - 1073741829
         local fee = tpz.conquest.outpostFee(player, region)
-        player:updateEvent(player:getGil(), fee, 0, fee, player:getCP())
+        local cpFee = fee/10
+
+        player:updateEvent(player:getGil(), fee, 0, cpFee, player:getCP())
     end
 end
 
@@ -1252,10 +1254,10 @@ tpz.conquest.teleporterOnEventFinish = function(player, csid, option, teleporter
         -- TELEPORT WITH CP
         elseif option >= 1029 and option <= 1047 then
             local region = option - 1029
-            local fee = tpz.conquest.outpostFee(player, region)
+            local cpFee = tpz.conquest.outpostFee(player, region)/10
 
-            if tpz.conquest.canTeleportToOutpost(player, region) and player:getCP() >= fee then
-                player:delCP(fee)
+            if tpz.conquest.canTeleportToOutpost(player, region) and player:getCP() >= cpFee then
+                player:delCP(cpFee)
                 player:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.OUTPOST, 0, 1, 0, region)
             end
         end
