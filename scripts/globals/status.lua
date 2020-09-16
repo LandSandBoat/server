@@ -2273,7 +2273,8 @@ tpz.mobMod =
     MULTI_HIT           = 66, -- Mob will have as many swings as defined.
     NO_AGGRO            = 67, -- If set, mob cannot aggro until unset.
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
-    NO_LINK             = 69  -- If set, mob cannot link until unset.
+    NO_LINK             = 69, -- If set, mob cannot link until unset.
+    NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
 }
 
 ------------------------------------

@@ -1020,6 +1020,18 @@ INSERT INTO `bcnm_battlefield` VALUES (672,3,16809998,0);
 INSERT INTO `bcnm_battlefield` VALUES (673,1,16810018,3); -- like_the_wind: Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,2,16810020,3); -- Race Runner
 INSERT INTO `bcnm_battlefield` VALUES (673,3,16810022,3); -- Race Runner
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810001,3); -- sheep in antlions: Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810002,1); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810003,1); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,1,16810004,1); -- Armored Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810007,3); -- Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810008,1); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810009,1); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,2,16810010,1); -- Armored Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810013,3); -- Tuchulcha
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810014,0); -- Swift Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810015,0); -- Shrewd Hunter
+INSERT INTO `bcnm_battlefield` VALUES (674,3,16810016,0); -- Armored Hunter
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818177,3); -- darkness_named
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818178,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818179,1);
