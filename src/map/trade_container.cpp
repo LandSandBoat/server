@@ -232,6 +232,7 @@ void CTradeContainer::Clean()
         if (PItem)
         {
             PItem->setReserve(0);
+            PItem->setSubType(ITEM_UNLOCKED);
         }
     }
     m_type = 0;
