@@ -10,23 +10,55 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local signed = player:signedByTrader(player,0)
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.GOLDSMITHING)
 
-    if (newRank ~= 0) then
+    if
+        newRank > 9 and
+        player:getCharVar("GoldsmithingExpertQuest") == 1 and
+        player:hasKeyItem(getRankKeyItem(player,51))
+    then
+        if signed ~=0 then
+            player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
+            player:startEvent(301, 0, 0, 0, 0, newRank, 1)
+            player:setCharVar("GoldsmithingExpertQuest",2)
+        else
+            player:startEvent(301, 0, 0, 0, 0, newRank, 0)
+        end
+    elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
     end
 end
 
 function onTrigger(player, npc)
-    local getNewRank = 0
     local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
     local guildMember = isGuildMember(player, 6)
+        local rankCap = getCraftSkillCap(player, 51)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(51)
+    local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
-    if (canGetNewRank(player, craftSkill, tpz.skill.GOLDSMITHING) == 1) then getNewRank = 100; end
+    if player:getCharVar("GoldsmithingExpertQuest") == 1 then
+        if player:hasKeyItem(getRankKeyItem(player,51)) then
+            expertQuestStatus = 600
+        else
+            expertQuestStatus = 550
+        end
+    end
 
-    player:startEvent(300, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
+    if expertQuestStatus == 600 then
+        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
+              possibly be due to an unimplemented packet or function (display recipe?) Work
+              around to present dialog to player to let them know the trade is ready to be
+              received by triggering with lower rank up parameters.  ]]--
+        player:showText(npc, 7188)
+        player:showText(npc, 7190)
+        player:startEvent(300, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+    else
+        player:startEvent(300, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
+    end
 end
 
 -- 300  301  402
@@ -34,9 +66,14 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 300 and option == 1) then
-        local crystal = 4096 -- fire crystal
+    local guildMember = isGuildMember(player, 6)
 
+    if (csid == 300 and option == 2) then
+        if guildMember == 1 then
+            player:setCharVar("GoldsmithingExpertQuest",1)
+        end
+    elseif (csid == 300 and option == 1) then
+        local crystal = 4096 -- fire crystal
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else

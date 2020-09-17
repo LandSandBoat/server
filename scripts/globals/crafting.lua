@@ -26,16 +26,16 @@ guild =
 -- Table for Test Item
 -----------------------------------
 
-local TI_Alchemy = {937, 4157, 4163, 947, 16543, 4116, 16479, 4120, 16609, 10792}
-local TI_Bonecraft = {13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058} --  Way of The Boneworker + Hajduk Ring
-local TI_Clothcraft = {13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000}
-local TI_Cooking = {4355, 4416, 4489, 4381, 4413, 4558, 4546, 4440, 4561, } -- Sprightly Soup + Way of the Culinarian
-local TI_Fishing = {4401, 4379, 4469, 4480, 4462, 4479, 4471, 4478, 4474, 5817, } -- Tiger shark
-local TI_Goldsmithing = {12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, } --  Evader Earring**Guild item must be made with an Inferno Crystal
-local TI_Leathercraft = {13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, } --  Urja Trousers(Signed with Terra Crystal)
-local TI_Smithing = {16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, } -- Gorkhali Kukri
-local TI_Woodworking = {22, 23, 17354, 17348, 17053, 17156, 17054, 56, 17101, } -- Vejovis wand signed
-local TI_Synergy = {}
+local TI_Alchemy =      {  937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792}
+local TI_Bonecraft =    {13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058}
+local TI_Clothcraft =   {13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000}
+local TI_Cooking =      { 4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930}
+local TI_Fishing =      { 4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817}
+local TI_Goldsmithing = {12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060}
+local TI_Leathercraft = {13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577}
+local TI_Smithing =     {16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788}
+local TI_Woodworking =  {   22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884}
+local TI_Synergy =      {}
 
 local HQCrystals = {
     [1] = {
@@ -89,7 +89,6 @@ function isGuildMember(player, guild)
         else
             bit[i]=0
         end
-        --printf("bit %u: %u", i, bit[i])
     end
 
     return bit[guild]
@@ -115,20 +114,54 @@ function getTestItem(player, npc, craftID)
 
     switch (npc:getName()): caseof
     {
-        ["Abd-al-Raziq"] = function (x)     TItemList = TI_Alchemy end,
-        ["Peshi_Yohnts"] = function (x)     TItemList = TI_Bonecraft end,
-        ["Ponono"] = function (x)             TItemList = TI_Clothcraft end,
-        ["Piketo-Puketo"] = function (x)     TItemList = TI_Cooking end,
-        ["Thubu_Parohren"] = function (x)     TItemList = TI_Fishing end,
-        ["Reinberta"] = function (x)         TItemList = TI_Goldsmithing end,
-        ["Faulpie"] = function (x)             TItemList = TI_Leathercraft end,
-        ["Mevreauche"] = function (x)         TItemList = TI_Smithing end,
-        ["Ghemp"] = function (x)             TItemList = TI_Smithing end,
-        ["Cheupirudaux"] = function (x)     TItemList = TI_Woodworking end,
+        ["Abd-al-Raziq"] =      function (x)    TItemList = TI_Alchemy end,
+        ["Peshi_Yohnts"] =      function (x)    TItemList = TI_Bonecraft end,
+        ["Ponono"] =            function (x)    TItemList = TI_Clothcraft end,
+        ["Piketo-Puketo"] =     function (x)    TItemList = TI_Cooking end,
+        ["Thubu_Parohren"] =    function (x)    TItemList = TI_Fishing end,
+        ["Reinberta"] =         function (x)    TItemList = TI_Goldsmithing end,
+        ["Faulpie"] =           function (x)    TItemList = TI_Leathercraft end,
+        ["Mevreauche"] =        function (x)    TItemList = TI_Smithing end,
+        ["Ghemp"] =             function (x)    TItemList = TI_Smithing end,
+        ["Cheupirudaux"] =      function (x)    TItemList = TI_Woodworking end,
     }
 
     return TItemList[NextRank]
 end
+
+
+-----------------------------------
+-- getRankKeyItem by craftID
+-----------------------------------
+
+function getRankKeyItem(player,craftID)
+
+    local RankKI = 0
+
+    if craftID == 48 then -- fishing
+        RankKI = 1979 -- ANGLERS_ALMANAC
+    elseif craftID == 49 then -- woodworking
+        RankKI = 1988 -- WAY_OF_THE_CARPENTER
+    elseif craftID == 50 then -- smithing
+        RankKI = 1996 -- WAY_OF_THE_BLACKSMITH
+    elseif craftID == 51 then -- goldsmithing
+        RankKI = 2003 -- WAY_OF_THE_GOLDSMITH
+    elseif craftID == 52 then -- clothcraft
+        RankKI = 2012 -- WAY_OF_THE_WEAVER
+    elseif craftID == 53 then -- leathercraft
+        RankKI = 2019 -- WAY_OF_THE_TANNER
+    elseif craftID == 54 then -- bonecraft
+        RankKI = 2027 -- WAY_OF_THE_BONEWORKER
+    elseif craftID == 55 then -- alchemy
+        RankKI = 2039 -- WAY_OF_THE_ALCHEMIST
+    elseif craftID == 56 then -- cooking
+        RankKI = 2044 -- WAY_OF_THE_CULINARIAN
+    end
+
+    return RankKI
+
+end
+
 
 -----------------------------------
 -- canGetNewRank Action
@@ -139,23 +172,23 @@ function canGetNewRank(player, skillLvL, craftID)
     local Rank = player:getSkillRank(craftID) + 1
     local canGet = 0
 
-    -- 0 fonctionne pas en lua donc rank + 1
     if (Rank == 1 and skillLvL >= 256 or
-       Rank == 2 and skillLvL >= 577 or
-       Rank == 3 and skillLvL >= 898 or
-       Rank == 4 and skillLvL >= 1219 or
-       Rank == 5 and skillLvL >= 1540 or
-       Rank == 6 and skillLvL >= 1861 or
-       Rank == 7 and skillLvL >= 2182 or
-       Rank == 8 and skillLvL >= 2503 or
-       Rank == 9 and skillLvL >= 2824) then
---       Rank == 10 and skillLvL >= 3145) then
+       Rank ==  2 and skillLvL >= 577 or
+       Rank ==  3 and skillLvL >= 898 or
+       Rank ==  4 and skillLvL >= 1219 or
+       Rank ==  5 and skillLvL >= 1540 or
+       Rank ==  6 and skillLvL >= 1861 or
+       Rank ==  7 and skillLvL >= 2182 or
+       Rank ==  8 and skillLvL >= 2503 or
+       Rank ==  9 and skillLvL >= 2824 or
+       Rank == 10 and skillLvL >= 3145) then
             canGet = 1
     end
 
     return canGet
 
 end
+
 
 -----------------------------------
 -- tradeTestItem Action

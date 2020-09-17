@@ -10,27 +10,55 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local signed = player:signedByTrader(player,0)
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.CLOTHCRAFT)
 
-    if newRank ~= 0 then
+    if
+        newRank > 9 and
+        player:getCharVar("ClothcraftExpertQuest") == 1 and
+        player:hasKeyItem(getRankKeyItem(player,52))
+    then
+        if signed ~=0 then
+            player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
+            player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
+            player:setCharVar("ClothcraftExpertQuest",2)
+        else
+            player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
+        end
+    elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
     end
 end
 
 function onTrigger(player, npc)
-    local getNewRank = 0
     local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)
     local guildMember = isGuildMember(player, 3)
-    if guildMember == 1 then
-        guildMember = 10000
-    end
-    if canGetNewRank(player, craftSkill, tpz.skill.CLOTHCRAFT) == 1 then
-        getNewRank = 100
+    local rankCap = getCraftSkillCap(player, 52)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(52)
+    local realSkill = (craftSkill - Rank) / 32
+    if guildMember == 1 then guildMember = 10000; end
+    if player:getCharVar("ClothcraftExpertQuest") == 1 then
+        if player:hasKeyItem(getRankKeyItem(player,52)) then
+            expertQuestStatus = 600
+        else
+            expertQuestStatus = 550
+        end
     end
 
-    player:startEvent(10011, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
+    if expertQuestStatus == 600 then
+        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
+              possibly be due to an unimplemented packet or function (display recipe?) Work
+              around to present dialog to player to let them know the trade is ready to be
+              received by triggering with lower rank up parameters.  ]]--
+        player:showText(npc, 7339)
+        player:showText(npc, 7341)
+        player:startEvent(10011, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+    else
+        player:startEvent(10011, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
+    end
 end
 
 -- 10011  10012  700  701  702  703  704  705  832  765
@@ -38,7 +66,13 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 10011 and option == 1 then
+    local guildMember = isGuildMember(player, 3)
+
+    if (csid == 10011 and option == 2) then
+        if guildMember == 1 then
+            player:setCharVar("ClothcraftExpertQuest",1)
+        end
+    elseif (csid == 10011 and option == 1) then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4099)
         else

@@ -4110,6 +4110,43 @@ inline int32 CLuaBaseEntity::tradeComplete(lua_State *L)
 }
 
 /************************************************************************
+*  Function: signedByTrader()
+*  Purpose : Returns 1 if the traded item was signed by the trader
+************************************************************************/
+
+inline int32 CLuaBaseEntity::signedByTrader(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+
+    auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    int Slot = (uint32)lua_tointeger(L, 2);
+
+    char    *sig = nullptr;
+    int     Signed = 0;
+
+    if (PChar->TradeContainer->getInvSlotID(Slot) != 0xFF)
+    {
+        uint8 invSlotID = PChar->TradeContainer->getInvSlotID(Slot);
+
+        const char* Query = "SELECT signature from char_inventory WHERE charid = %u AND location = 0 AND slot = %u;\0";
+
+        int32 SQLReturn = Sql_Query(SqlHandle, Query, PChar->id, invSlotID);
+
+        if ((SQL_ERROR != SQLReturn) && (1 == Sql_NumRows(SqlHandle)))
+            if (SQL_SUCCESS == Sql_NextRow(SqlHandle))
+                Sql_GetData(SqlHandle, 0, &sig, nullptr);
+
+        if ((nullptr != sig) && (!strcmp(sig, (char*)(PChar->GetName()))))
+            Signed = 1;
+    }
+
+    lua_pushinteger(L, Signed);
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: canEquipItem()
 *  Purpose : Returns true if a player can equip the item
 *  Example : if (player:canEquipItem(JOY_TOY)) then
@@ -14494,6 +14531,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFreeSlotsCount),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,confirmTrade),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,tradeComplete),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,signedByTrader),
 
     // Equipping
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,canEquipItem),

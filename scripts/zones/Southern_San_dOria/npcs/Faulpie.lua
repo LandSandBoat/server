@@ -11,24 +11,47 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local signed = player:signedByTrader(player,0)
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.LEATHERCRAFT)
 
-    if (newRank ~= 0) then
+    if
+        newRank > 9 and
+        player:getCharVar("LeathercraftExpertQuest") == 1 and
+        player:hasKeyItem(getRankKeyItem(player,53))
+    then
+        if signed ~=0 then
+            player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
+            player:startEvent(649, 0, 0, 0, 0, newRank, 1)
+            player:setCharVar("LeathercraftExpertQuest",2)
+        else
+            player:startEvent(649, 0, 0, 0, 0, newRank, 0)
+        end
+    elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
     end
 end
 
 function onTrigger(player, npc)
-    local getNewRank = 0
     local craftSkill = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.LEATHERCRAFT)
     local guildMember = isGuildMember(player, 7)
+    local rankCap = getCraftSkillCap(player, 53)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(53)
+    local realSkill = (craftSkill - Rank) / 32
+    local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
     if (guildMember == 1) then guildMember = 150995375; end
-    if (canGetNewRank(player, craftSkill, tpz.skill.LEATHERCRAFT) == 1) then getNewRank = 100; end
+    if player:getCharVar("LeathercraftExpertQuest") == 1 then
+        if player:hasKeyItem(getRankKeyItem(player,53)) then
+            expertQuestStatus = 550
+        else
+            expertQuestStatus = 600
+        end
+    end
 
     if (player:getCurrentMission(ASA) == tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and
-        getNewRank ~= 100) then
+        canRankUp >= 3) then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
@@ -41,8 +64,16 @@ function onTrigger(player, npc)
 
         -- The Parameters are Item IDs for the Recipe
         player:startEvent(944, item, 2773, 917, 917, 2776, 4103)
+    elseif expertQuestStatus == 550 then
+        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
+              possibly be due to an unimplemented packet or function (display recipe?) Work
+              around to present dialog to player to let them know the trade is ready to be
+              received by triggering with lower rank up parameters.  ]]--
+        player:showText(npc, 7014)
+        player:showText(npc, 7016)
+        player:startEvent(648, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
     else
-        player:startEvent(648, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
+        player:startEvent(648, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
     end
 end
 
@@ -51,9 +82,14 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 648 and option == 1) then
-        local crystal = 4103 -- dark crystal
+    local guildMember = isGuildMember(player, 7)
 
+    if (csid == 648 and option == 2) then
+        if guildMember == 1 then
+            player:setCharVar("LeathercraftExpertQuest",1)
+        end
+    elseif (csid == 648 and option == 1) then
+        local crystal = 4103 -- dark crystal
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else

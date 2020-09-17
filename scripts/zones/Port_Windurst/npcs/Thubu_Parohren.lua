@@ -12,21 +12,50 @@ require("scripts/globals/status")
 function onTrade(player, npc, trade)
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.FISHING)
 
-    if (newRank ~= 0) then
+    if
+        newRank > 9 and
+        player:getCharVar("FishingExpertQuest") == 1 and
+        player:hasKeyItem(getRankKeyItem(player,48))
+    then
+        player:setSkillRank(tpz.skill.FISHING, newRank)
+        player:startEvent(10010, 0, 0, 0, 0, newRank)
+        player:setCharVar("FishingExpertQuest",2)
+    elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
     end
 end
 
 function onTrigger(player, npc)
-    local getNewRank = 0
     local craftSkill = player:getSkillLevel(tpz.skill.FISHING)
     local testItem = getTestItem(player, npc, tpz.skill.FISHING)
     local guildMember = isGuildMember(player, 5)
-    if (guildMember == 1) then guildMember = 150995375; end
-    if (canGetNewRank(player, craftSkill, tpz.skill.FISHING) == 1) then getNewRank = 100; end
+    local rankCap = getCraftSkillCap(player, 48)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(48)
+    local realSkill = (craftSkill - Rank) / 32
 
-    player:startEvent(10009, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
+    if (guildMember == 1) then guildMember = 150995375; end
+
+    if player:getCharVar("FishingExpertQuest") == 1 then
+        if player:hasKeyItem(getRankKeyItem(player,48)) then
+            expertQuestStatus = 550
+        else
+            expertQuestStatus = 600
+        end
+    end
+
+    if expertQuestStatus == 550 then
+        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
+              possibly be due to an unimplemented packet or function (display recipe?) Work
+              around to present dialog to player to let them know the trade is ready to be
+              received by triggering with lower rank up parameters.  ]]--
+        player:showText(npc, 11807)
+        player:showText(npc, 11809)
+        player:startEvent(10009, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+    else
+        player:startEvent(10009, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
+    end
 end
 
 -- 10009  10010  595  597
@@ -34,7 +63,13 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 10009 and option == 1) then
+    local guildMember = isGuildMember(player, 5)
+
+    if (csid == 10009 and option == 2) then
+        if guildMember == 1 then
+            player:setCharVar("FishingExpertQuest",1)
+        end
+    elseif (csid == 10009 and option == 1) then
         local crystal = 4101 -- water crystal
 
         if (player:getFreeSlotsCount() == 0) then
