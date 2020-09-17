@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("SmithingExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,50))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BLACKSMITH)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.SMITHING, newRank)
@@ -35,14 +35,14 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.SMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.SMITHING)
     local guildMember = isGuildMember(player, 8)
-    local rankCap = getCraftSkillCap(player, 50)
+    local rankCap = getCraftSkillCap(player, tpz.skill.SMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(50)
+    local Rank = player:getSkillRank(tpz.skill.SMITHING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
 
     if player:getCharVar("SmithingExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,50)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BLACKSMITH) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

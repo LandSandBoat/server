@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("WoodworkingExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,49))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CARPENTER)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.WOODWORKING, newRank)
@@ -36,13 +36,13 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.WOODWORKING)
     local testItem = getTestItem(player, npc, tpz.skill.WOODWORKING)
     local guildMember = isGuildMember(player, 9)
-    local rankCap = getCraftSkillCap(player, 49)
+    local rankCap = getCraftSkillCap(player, tpz.skill.WOODWORKING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(49)
+    local Rank = player:getSkillRank(tpz.skill.WOODWORKING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("WoodworkingExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,49)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CARPENTER) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

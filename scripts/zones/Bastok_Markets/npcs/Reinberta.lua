@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("GoldsmithingExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,51))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
@@ -35,13 +35,13 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
     local guildMember = isGuildMember(player, 6)
-        local rankCap = getCraftSkillCap(player, 51)
+        local rankCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(51)
+    local Rank = player:getSkillRank(tpz.skill.GOLDSMITHING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("GoldsmithingExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,51)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550

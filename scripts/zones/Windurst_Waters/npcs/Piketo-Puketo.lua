@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("CookingExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,56))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CULINARIAN)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.COOKING, newRank)
@@ -35,13 +35,13 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.COOKING)
     local testItem = getTestItem(player, npc, tpz.skill.COOKING)
     local guildMember = isGuildMember(player, 4)
-    local rankCap = getCraftSkillCap(player, 56)
+    local rankCap = getCraftSkillCap(player, tpz.skill.COOKING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(56)
+    local Rank = player:getSkillRank(tpz.skill.COOKING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("CookingExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,56)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CULINARIAN) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

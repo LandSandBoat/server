@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("LeathercraftExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,53))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_TANNER)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
@@ -36,14 +36,14 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.LEATHERCRAFT)
     local guildMember = isGuildMember(player, 7)
-    local rankCap = getCraftSkillCap(player, 53)
+    local rankCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(53)
+    local Rank = player:getSkillRank(tpz.skill.LEATHERCRAFT)
     local realSkill = (craftSkill - Rank) / 32
     local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("LeathercraftExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,53)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_TANNER) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

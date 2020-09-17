@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("AlchemyExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,55))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_ALCHEMIST)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.ALCHEMY, newRank)
@@ -36,14 +36,14 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.ALCHEMY)
     local testItem = getTestItem(player, npc, tpz.skill.ALCHEMY)
     local guildMember = isGuildMember(player, 1)
-    local rankCap = getCraftSkillCap(player, 55)
+    local rankCap = getCraftSkillCap(player, tpz.skill.ALCHEMY)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(55)
+    local Rank = player:getSkillRank(tpz.skill.ALCHEMY)
     local realSkill = (craftSkill - Rank) / 32
     local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("AlchemyExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,55)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_ALCHEMIST) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

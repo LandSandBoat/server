@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
     if
         newRank > 9 and
         player:getCharVar("ClothcraftExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,52))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
@@ -35,13 +35,13 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)
     local guildMember = isGuildMember(player, 3)
-    local rankCap = getCraftSkillCap(player, 52)
+    local rankCap = getCraftSkillCap(player, tpz.skill.CLOTHCRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(52)
+    local Rank = player:getSkillRank(tpz.skill.CLOTHCRAFT)
     local realSkill = (craftSkill - Rank) / 32
     if guildMember == 1 then guildMember = 10000; end
     if player:getCharVar("ClothcraftExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,52)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550

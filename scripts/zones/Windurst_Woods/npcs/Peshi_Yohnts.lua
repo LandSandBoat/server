@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
         if
         newRank > 9 and
         player:getCharVar("BonecraftExpertQuest") == 1 and
-        player:hasKeyItem(getRankKeyItem(player,54))
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BONEWORKER)
     then
         if signed ~=0 then
             player:setSkillRank(tpz.skill.BONECRAFT, newRank)
@@ -35,15 +35,15 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.BONECRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.BONECRAFT)
     local guildMember = isGuildMember(player, 2)
-    local rankCap = getCraftSkillCap(player, 54)
+    local rankCap = getCraftSkillCap(player, tpz.skill.BONECRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(54)
+    local Rank = player:getSkillRank(tpz.skill.BONECRAFT)
     local realSkill = (craftSkill - Rank) / 32
     if guildMember == 1 then
         guildMember = 64
     end
     if player:getCharVar("BonecraftExpertQuest") == 1 then
-        if player:hasKeyItem(getRankKeyItem(player,54)) then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BONEWORKER) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550
