@@ -60,6 +60,7 @@ public:
     uint8   getConfirmedStatus(uint8 slotID);
     uint32  getItemQuantity(uint16 itemID);                 // количество предметов одного типа
     uint8   getSize();
+    uint8   getExSize();
 
     void    setType(uint8 type);
     void    setCraftType(uint8 craftType);
@@ -71,6 +72,7 @@ public:
     bool    setConfirmedStatus(uint8 slotID, uint32 amount);
     void    setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint32 quantity, CItem* item = nullptr);
     void    setSize(uint8 size);
+    void    setExSize(uint8 size);                          // Set "extra" size information; purpose changes depending on container's goal
 
     void    Clean();                                        // отчищаем контейнер
 
@@ -79,6 +81,7 @@ private:
     uint8   m_type;                                         // тип контейнера (тип кристалла, нация магазина и т.д.)
     uint8   m_craftType;                                    // The craft synthesis type (CRAFT_TYPE)
     uint8   m_ItemsCount;                                   // количество предметов в контейнере (устанавливаем самостоятельно)
+    uint8   m_exSize;                                       // Can be used as a custom delineation point inside a container
 
     std::vector<CItem*>     m_PItem;
     std::vector<uint8>      m_slotID;
