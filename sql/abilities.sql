@@ -269,9 +269,9 @@ INSERT INTO `abilities` VALUES (230,'afflatus_misery',3,40,1,60,30,0,0,217,2000,
 INSERT INTO `abilities` VALUES (231,'composure',5,50,1,300,50,0,0,215,2000,0,6,20.0,0,1,80,0,0,'WOTG');
 INSERT INTO `abilities` VALUES (232,'yonin',13,40,1,180,146,0,0,218,2000,0,6,20.0,0,1,600,0,4,'WOTG');
 INSERT INTO `abilities` VALUES (233,'innin',13,40,1,180,147,0,0,219,2000,0,6,20.0,0,1,60,0,4,'WOTG');
-INSERT INTO `abilities` VALUES (234,'avatars_favor',15,55,4,30,176,100,0,94,2000,0,6,10.0,1,1,80,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (234,'avatars_favor',15,55,4,30,176,100,0,94,2000,0,6,10.0,1,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (235,'ready',9,25,1,0,255,0,0,83,2000,0,6,18.0,0,0,0,902,64,NULL);
-INSERT INTO `abilities` VALUES (236,'restraint',1,77,1,600,9,100,0,220,2000,0,6,20.0,0,450,900,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (236,'restraint',1,77,1,600,9,100,0,220,2000,0,6,20.0,0,450,900,0,0,NULL);
 INSERT INTO `abilities` VALUES (237,'perfect_counter',2,79,1,60,22,100,0,221,2000,0,6,20.0,0,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (238,'mana_wall',4,76,1,600,39,0,0,222,2000,0,6,20.0,0,1,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (239,'divine_emblem',7,78,1,180,80,100,0,222,2000,0,6,20.0,0,1,3600,0,0,NULL);
@@ -299,8 +299,8 @@ INSERT INTO `abilities` VALUES (261,'sepulcher',7,87,4,300,41,100,0,253,2000,0,6
 INSERT INTO `abilities` VALUES (262,'palisade',7,95,1,300,42,100,0,253,2000,0,6,20.0,0,900,1800,0,0,NULL);
 INSERT INTO `abilities` VALUES (263,'arcane_crest',8,87,4,300,43,100,0,250,2000,0,6,20.0,0,1,80,0,0,NULL);	--needs animation
 INSERT INTO `abilities` VALUES (264,'scarlet_delirium',8,95,1,90,44,100,0,250,2000,0,6,20.0,0,1,80,0,0,NULL);
-INSERT INTO `abilities` VALUES (265,'spur',9,83,1,180,45,100,0,255,2000,0,6,20.0,0,0,0,0,0,NULL);
-INSERT INTO `abilities` VALUES (266,'run_wild',9,93,1,900,46,100,0,255,2000,0,6,20.0,0,0,0,0,0,NULL); 		--needs animation
+-- INSERT INTO `abilities` VALUES (265,'spur',9,83,1,180,45,100,0,255,2000,0,6,20.0,0,0,0,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (266,'run_wild',9,93,1,900,46,100,0,255,2000,0,6,20.0,0,0,0,0,0,NULL); 		--needs animation
 INSERT INTO `abilities` VALUES (267,'tenuto',10,83,1,5,47,0,0,257,2000,0,6,20.0,0,0,0,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (268,'marcato',10,95,1,600,48,0,0,251,2000,0,6,20.0,0,0,0,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (269,'bounty_shot',11,87,4,60,51,100,0,261,2000,0,6,20.0,0,0,0,0,0,NULL);
@@ -310,7 +310,7 @@ INSERT INTO `abilities` VALUES (272,'hagakure',12,95,1,180,54,0,0,249,2000,0,6,2
 INSERT INTO `abilities` VALUES (275,'issekigan',13,95,1,300,57,0,0,246,2000,0,6,20.0,0,1,0,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (276,'dragon_breaker',14,87,4,300,58,320,0,236,2000,0,6,8.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (277,'soul_jump',14,85,4,120,167,100,0,209,2000,0,6,7.0,0,1,0,1220,0,NULL);	--check animation
-INSERT INTO `abilities` VALUES (279,'steady_wing',14,95,1,300,70,100,0,262,2000,0,6,0.0,0,0,0,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (279,'steady_wing',14,95,1,300,70,100,0,262,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (280,'mana_cede',15,87,1,300,71,100,0,241,2000,0,6,8.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (281,'efflux',16,83,1,180,185,100,0,256,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (282,'unbridled_learning',16,95,1,300,81,100,0,263,2000,0,6,0.0,0,0,0,0,0,NULL);
@@ -325,10 +325,10 @@ INSERT INTO `abilities` VALUES (295,'curing_waltz_v',19,87,27,14,189,102,0,35,20
 INSERT INTO `abilities` VALUES (296,'feather_step',19,83,4,5,220,591,0,17,2000,0,14,4.5,0,1,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (297,'striking_flourish',19,89,1,30,226,0,0,222,2000,0,14,20.0,0,1,80,0,0,NULL);	--check animation/message1
 INSERT INTO `abilities` VALUES (298,'ternary_flourish',19,93,1,30,226,0,0,222,2000,0,14,20.0,0,1,80,0,0,NULL);	--check animation/message1
-INSERT INTO `abilities` VALUES (300,'perpetuance',20,87,1,1,231,100,0,224,2000,0,6,0.0,0,1,80,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (300,'perpetuance',20,87,1,1,231,100,0,224,2000,0,6,0.0,0,1,80,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (301,'immanence',20,87,1,1,231,100,0,245,2000,0,6,0.0,0,1,80,0,0,NULL);
-INSERT INTO `abilities` VALUES (302,'smiting_breath',14,90,4,60,238,100,0,135,2000,0,6,8.0,0,1,80,0,0,NULL);	--check animation
-INSERT INTO `abilities` VALUES (303,'restoring_breath',14,90,1,60,239,100,0,130,2000,0,6,0.0,0,1,80,0,0,NULL);	--check animation
+-- INSERT INTO `abilities` VALUES (302,'smiting_breath',14,90,4,60,238,100,0,135,2000,0,6,8.0,0,1,80,0,0,NULL);	--check animation
+-- INSERT INTO `abilities` VALUES (303,'restoring_breath',14,90,1,60,239,100,0,130,2000,0,6,0.0,0,1,80,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (304,'konzen-ittai',12,65,4,180,132,529,0,39,2000,0,14,4.0,0,1,300,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (305,'bully',6,93,4,180,240,127,0,248,2000,0,6,8.0,0,1,300,0,4,'ABYSSEA');
 INSERT INTO `abilities` VALUES (306,'maintenance',18,30,1,90,214,0,0,83,2000,0,6,12.0,0,0,0,1474,0,'ABYSSEA'); --ta257
@@ -353,7 +353,7 @@ INSERT INTO `abilities` VALUES (324,'heady_artifice',18,96,1,3600,254,0,0,288,20
 INSERT INTO `abilities` VALUES (325,'grand_pas',19,96,1,3600,254,0,0,289,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (326,'caper_emissarius',20,96,2,3600,254,0,0,290,2000,0,6,8.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (327,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,0,'SOA');	--check animation
-INSERT INTO `abilities` VALUES (328,'swipe',22,25,4,90,241,0,0,302,2000,0,6,4.0,0,80,320,0,0,'SOA');	--check animation 15 cat
+-- INSERT INTO `abilities` VALUES (328,'swipe',22,25,4,90,241,0,0,302,2000,0,6,4.0,0,80,320,0,0,'SOA');	--check animation 15 cat
 INSERT INTO `abilities` VALUES (329,'full_circle',21,5,1,10,1,0,0,94,2000,0,6,0.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (330,'lasting_emanation',21,25,1,300,244,663,0,306,2000,0,6,0.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (331,'ecliptic_attrition',21,25,1,300,244,664,0,307,2000,0,6,0.0,0,1,300,0,0,'SOA');
@@ -375,23 +375,23 @@ INSERT INTO `abilities` VALUES (346,'Sulpor',22,5,1,5,10,100,0,295,2000,0,6,20.0
 INSERT INTO `abilities` VALUES (347,'Unda',22,5,1,5,10,100,0,296,2000,0,6,20.0,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'Lux',22,5,1,5,10,100,0,297,2000,0,6,20.0,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (349,'Tenebrae',22,5,1,5,10,100,0,298,2000,0,6,20.0,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (350,'Vallation',22,10,1,180,23,668,0,0,2000,0,15,0.0,0,450,900,1794,0,'SOA'); --check merit
+-- INSERT INTO `abilities` VALUES (350,'Vallation',22,10,1,180,23,668,0,0,2000,0,15,0.0,0,450,900,1794,0,'SOA'); --check merit
 INSERT INTO `abilities` VALUES (351,'Swordplay',22,20,1,300,24,667,0,299,2000,0,6,20.0,0,160,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (352,'Lunge',22,25,4,180,25,110,0,8,2000,0,15,4.0,0,0,0,1796,0,'SOA'); --check merit
-INSERT INTO `abilities` VALUES (353,'Pflug',22,40,1,180,59,671,0,1,2000,0,15,0.0,0,450,900,1798,0,'SOA'); --check merit
+-- INSERT INTO `abilities` VALUES (352,'Lunge',22,25,4,180,25,110,0,8,2000,0,15,4.0,0,0,0,1796,0,'SOA'); --check merit
+-- INSERT INTO `abilities` VALUES (353,'Pflug',22,40,1,180,59,671,0,1,2000,0,15,0.0,0,450,900,1798,0,'SOA'); --check merit
 INSERT INTO `abilities` VALUES (354,'Embolden',22,60,1,600,72,100,0,300,2000,0,6,0.0,0,160,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (355,'Valiance',22,50,1,300,113,668,0,2,2000,0,15,0.0,0,450,900,0,0,'SOA');
-INSERT INTO `abilities` VALUES (356,'Gambit',22,70,4,300,116,0,0,4,2000,0,15,4.0,0,640,1280,1800,0,'SOA');	--check animation
-INSERT INTO `abilities` VALUES (357,'Liement',22,85,1,180,117,0,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');	--check animation
+-- INSERT INTO `abilities` VALUES (355,'Valiance',22,50,1,300,113,668,0,2,2000,0,15,0.0,0,450,900,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (356,'Gambit',22,70,4,300,116,0,0,4,2000,0,15,4.0,0,640,1280,1800,0,'SOA');	--check animation
+-- INSERT INTO `abilities` VALUES (357,'Liement',22,85,1,180,117,0,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');	--check animation
 INSERT INTO `abilities` VALUES (358,'One_for_all',22,95,1,300,118,100,0,301,2000,0,6,0.0,1,160,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (359,'Rayke',22,75,4,300,119,0,0,4,2000,0,15,4.0,0,640,1260,0,0,'SOA');	--check animation
-INSERT INTO `abilities` VALUES (360,'Battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');
+-- INSERT INTO `abilities` VALUES (359,'Rayke',22,75,4,300,119,0,0,4,2000,0,15,4.0,0,640,1260,0,0,'SOA');	--check animation
+-- INSERT INTO `abilities` VALUES (360,'Battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');
 INSERT INTO `abilities` VALUES (361,'widened_compass',21,96,1,3600,130,100,0,276,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (362,'odyllic_subterfuge',22,96,4,3600,131,0,0,10,2000,0,15,8.0,15,1,318,0,0,NULL); --check 6 or 15 animation
+-- INSERT INTO `abilities` VALUES (362,'odyllic_subterfuge',22,96,4,3600,131,0,0,10,2000,0,15,8.0,15,1,318,0,0,NULL); --check 6 or 15 animation
 INSERT INTO `abilities` VALUES (363,'Ward',22,1,1,0,142,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (364,'Effusion',22,1,1,0,143,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (365,'chocobo_jig_ii',19,70,1,60,218,126,0,13,2000,0,14,0.0,1,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (366,'relinquish',23,1,1,60,253,0,0,0,0,0,6,0.0,0,0,0,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (366,'relinquish',23,1,1,60,253,0,0,0,0,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (367,'vivacious_pulse',22,65,1,60,242,102,0,327,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (368,'contradance',19,50,1,300,229,0,0,329,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (369,'apogee',15,70,1,180,108,100,0,94,2000,0,6,0.0,0,1,80,0,0,'SOA');
@@ -595,7 +595,7 @@ INSERT INTO `abilities` VALUES (752,'stink_bomb',9,25,257,2,102,0,0,0,2000,0,6,1
 INSERT INTO `abilities` VALUES (753,'nectarous_deluge',9,25,257,2,102,0,0,0,2000,0,7,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (754,'nepenthic_plunge',9,25,257,3,102,0,0,0,2000,0,7,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (755,'somersault',9,25,257,1,102,0,0,0,2000,0,6,19.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (756,'pacifying_ruby',9,25,257,1,102,0,0,0,2000,0,6,19.0,0,1,60,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (756,'pacifying_ruby',9,25,257,1,102,0,0,0,2000,0,6,19.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (757,'foul_waters',9,25,257,255,102,0,0,0,2000,0,6,19.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (758,'pestilent_plume',9,25,257,255,102,0,0,0,2000,0,6,19.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (759,'pecking_flurry',9,25,257,255,102,0,0,0,2000,0,6,18.1,0,1,60,0,0,NULL);
