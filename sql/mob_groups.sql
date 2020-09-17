@@ -2619,6 +2619,8 @@ INSERT INTO `mob_groups` VALUES (90,4490,54,'Zareehkl_the_Jubilant',0,128,2794,7
 INSERT INTO `mob_groups` VALUES (91,2920,54,'Nuhn',0,128,1828,36000,0,86,86,0);
 INSERT INTO `mob_groups` VALUES (92,5198,54,'Dimgruzub',0,128,0,0,5000,95,95,0);
 INSERT INTO `mob_groups` VALUES (93,5199,54,'Assassins_Apprentice',0,128,0,0,5000,80,80,0);
+INSERT INTO `mob_groups` VALUES (94,6673,54,'Lamia_Palace_Guard',960,0,0,0,0,81,82,0);
+
 INSERT INTO `mob_groups` VALUES (1806,110,54,'Amnaf_blu',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (1815,872,54,'Cutter',0,128,0,0,0,65,70,0);
 INSERT INTO `mob_groups` VALUES (1821,1284,54,'Fallen_Imperial',0,128,0,0,0,72,74,0);
@@ -3877,9 +3879,9 @@ INSERT INTO `mob_groups` VALUES (37,5196,79,'Draugar_Servant',960,0,2088,0,5000,
 INSERT INTO `mob_groups` VALUES (38,2335,79,'Lamia_Idolater',330,0,1493,0,0,79,81,0);
 INSERT INTO `mob_groups` VALUES (39,5197,79,'Draugar_Servant',960,0,2088,0,5000,78,80,0);
 INSERT INTO `mob_groups` VALUES (40,1111,79,'Draugar_Servant',330,0,702,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (41,2361,79,'Lamia_Toxophilite',330,0,1495,0,0,82,83,0);
+INSERT INTO `mob_groups` VALUES (41,6674,79,'Lamia_Toxophilite',330,0,1495,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (42,2326,79,'Lamia_Chaukidar',330,0,1486,0,0,82,83,0);
-INSERT INTO `mob_groups` VALUES (43,2338,79,'Lamia_Necromancer',330,0,1494,0,0,82,83,0);
+INSERT INTO `mob_groups` VALUES (43,6672,79,'Lamia_Necromancer',330,0,1494,0,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (44,5206,79,'Aynu-Kaysey',0,128,2936,20000,5000,80,80,0);
 INSERT INTO `mob_groups` VALUES (45,5337,79,'Vauxia_Fly',330,0,2310,0,0,86,89,0);
 INSERT INTO `mob_groups` VALUES (46,5203,79,'Ephramadian_Shade',330,0,2878,0,0,75,77,0);
