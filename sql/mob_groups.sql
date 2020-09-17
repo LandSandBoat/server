@@ -3970,7 +3970,7 @@ INSERT INTO `mob_groups` VALUES (2879,1752,80,'Gold_Badger_Esquire',0,128,0,0,0,
 INSERT INTO `mob_groups` VALUES (2880,1852,80,'Gutrender_Trooper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2881,2085,80,'Invincible_Shield',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2882,2100,80,'Iron_Bomb',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2883,2126,80,'Jagidbod_of_Clan_Reaper',0,128,1391,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2883,6677,80,'Jagidbod_of_Clan_Reaper',0,128,1391,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2884,2127,80,'Jagidbods_Warmachine',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (2885,2137,80,'Jajaro',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (2886,2179,80,'Kagetora',0,128,0,0,0,1,1,0);
@@ -4139,7 +4139,7 @@ INSERT INTO `mob_groups` VALUES (3011,1681,81,'Goblin_Lansquenet',0,128,0,0,0,60
 INSERT INTO `mob_groups` VALUES (3017,1752,81,'Gold_Badger_Esquire',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3018,1852,81,'Gutrender_Trooper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3019,2100,81,'Iron_Bomb',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (3020,2126,81,'Jagidbod_of_Clan_Reaper',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3020,6677,81,'Jagidbod_of_Clan_Reaper',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3021,2127,81,'Jagidbods_Warmachine',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3022,2137,81,'Jajaro',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3023,2179,81,'Kagetora',0,128,0,0,0,1,1,0);
@@ -4281,7 +4281,7 @@ INSERT INTO `mob_groups` VALUES (78,1852,82,'Gutrender_Trooper',0,128,0,0,0,75,8
 INSERT INTO `mob_groups` VALUES (79,935,82,'Deathlord_Rojgnoj',0,128,580,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (80,3730,82,'Spinebeak_Neckchopper',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (81,2127,82,'Jagidbods_Warmachine',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (82,2126,82,'Jagidbod_of_Clan_Reaper',0,128,1392,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (82,6677,82,'Jagidbod_of_Clan_Reaper',0,128,1392,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (83,737,82,'Clan_Reaper_Grunt',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (84,96,82,'Alpha_Gnole_Anders',0,128,53,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (85,132,82,'Anderss_Guard',0,128,0,0,0,60,60,0);
@@ -4443,7 +4443,7 @@ INSERT INTO `mob_groups` VALUES (79,1852,83,'Gutrender_Trooper',0,128,0,0,0,60,6
 INSERT INTO `mob_groups` VALUES (80,935,83,'Deathlord_Rojgnoj',0,128,580,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (81,3730,83,'Spinebeak_Neckchopper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (82,2127,83,'Jagidbods_Warmachine',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (83,2126,83,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (83,6677,83,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (84,737,83,'Clan_Reaper_Grunt',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (85,96,83,'Alpha_Gnole_Anders',0,0,53,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (86,132,83,'Anderss_Guard',0,128,0,0,0,60,60,0);
@@ -4615,7 +4615,7 @@ INSERT INTO `mob_groups` VALUES (3457,1752,84,'Gold_Badger_Esquire',0,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (3458,1795,84,'Gravemaker_Mesmerizer',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3460,1852,84,'Gutrender_Trooper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3462,2100,84,'Iron_Bomb',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (3463,2126,84,'Jagidbod_of_Clan_Reaper',0,0,1393,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3463,6677,84,'Jagidbod_of_Clan_Reaper',0,0,1393,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3464,2127,84,'Jagidbods_Warmachine',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (3465,2137,84,'Jajaro',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3466,2179,84,'Kagetora',1,0,0,0,0,1,1,0);
@@ -4791,9 +4791,8 @@ INSERT INTO `mob_groups` VALUES (3610,1752,85,'Gold_Badger_Esquire',0,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (3611,1765,85,'Gorepledge_Rozzbrezz',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3612,1795,85,'Gravemaker_Mesmerizer',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (3614,1852,85,'Gutrender_Trooper',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3615,1903,85,'Hawkeyed_Dnatbat',86400,0,1284,0,0,84,86,0);
 INSERT INTO `mob_groups` VALUES (3616,2100,85,'Iron_Bomb',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (3617,2126,85,'Jagidbod_of_Clan_Reaper',0,0,1393,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3617,6677,85,'Jagidbod_of_Clan_Reaper',0,0,1393,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3619,2137,85,'Jajaro',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3620,2179,85,'Kagetora',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (3621,2180,85,'Kaiser_Behemoth',0,128,0,0,0,60,60,0);
@@ -9303,7 +9302,7 @@ INSERT INTO `mob_groups` VALUES (7600,1779,138,'GoBhu_Herohunter',0,0,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (7601,1780,138,'GoBhus_Elite_Raider',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7602,1875,138,'Haja_Zhwan',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7605,2100,138,'Iron_Bomb',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7607,2126,138,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7607,6677,138,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7608,2127,138,'Jagidbods_Warmachine',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7609,2137,138,'Jajaro',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7610,2179,138,'Kagetora',0,0,0,0,0,0,0,0);
@@ -9792,7 +9791,7 @@ INSERT INTO `mob_groups` VALUES (45,419,149,'Bilopdop',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (46,964,149,'Deloknok',0,128,0,0,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (47,3233,149,'Purpleflash_Brukdok',600,0,2044,0,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (48,2980,149,'One-eyed_Gwajboj',0,128,1859,0,0,62,62,0);
-INSERT INTO `mob_groups` VALUES (49,3902,149,'Three-eyed_Prozpuz',0,128,307,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (49,6678,149,'Three-eyed_Prozpuz',0,128,307,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (50,1930,149,'Hematic_Cyst',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (8047,3992,149,'Treasure_Chest',0,0,0,0,0,0,0,0);
 
@@ -10060,7 +10059,7 @@ INSERT INTO `mob_groups` VALUES (8246,1779,155,'GoBhu_Herohunter',0,0,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (8247,1780,155,'GoBhus_Elite_Raider',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8248,1875,155,'Haja_Zhwan',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8251,2100,155,'Iron_Bomb',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8252,2126,155,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8252,6677,155,'Jagidbod_of_Clan_Reaper',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8253,2127,155,'Jagidbods_Warmachine',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8254,2137,155,'Jajaro',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8255,2179,155,'Kagetora',0,0,0,0,0,0,0,0);
@@ -11065,7 +11064,7 @@ INSERT INTO `mob_groups` VALUES (9104,1681,175,'Goblin_Lansquenet',0,128,0,0,0,6
 INSERT INTO `mob_groups` VALUES (9107,1752,175,'Gold_Badger_Esquire',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (9108,1852,175,'Gutrender_Trooper',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (9112,2100,175,'Iron_Bomb',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (9113,2126,175,'Jagidbod_of_Clan_Reaper',0,0,1394,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9113,6677,175,'Jagidbod_of_Clan_Reaper',0,0,1394,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (9114,2127,175,'Jagidbods_Warmachine',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (9115,2137,175,'Jajaro',1,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (9116,2179,175,'Kagetora',1,0,0,0,0,1,1,0);
