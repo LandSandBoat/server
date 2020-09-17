@@ -3061,7 +3061,7 @@ INSERT INTO `mob_groups` VALUES (7,2515,66,'Mamool_Ja_Executioner',0,128,0,0,999
 INSERT INTO `mob_groups` VALUES (8,5467,66,'Mamool_Ja_Executioner',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (9,6501,66,'Mamool_Ja_Executioner',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (10,3437,66,'Sagelord_Molaal_Ja',0,128,0,0,0,82,84,0);
-INSERT INTO `mob_groups` VALUES (11,2542,66,'Mamool_Ja_Trainee_nin',0,0,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (11,2542,66,'Mamool_Ja_Trainee_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (12,5466,66,'Mamool_Ja_Warder_whm',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (13,5467,66,'Mamool_Ja_Executioner_bl',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (14,5742,66,'Marid',0,128,0,0,0,80,80,0);
@@ -3070,6 +3070,9 @@ INSERT INTO `mob_groups` VALUES (16,2509,66,'Mamool_Ja_Breeder',0,128,0,0,0,76,7
 INSERT INTO `mob_groups` VALUES (17,2524,66,'Mamool_Ja_Mahout',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (18,2516,66,'Mamool_Ja_Farrier',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (19,3060,66,'Orochi',0,128,0,25000,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (20,6675,66,'Mamool_Ja_Trainee_bst',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (21,6676,66,'Mamool_Ja_Trainee_blu',0,128,0,0,0,77,78,0);
+
 INSERT INTO `mob_groups` VALUES (2230,478,66,'Bluethunder_Kaqool_Ja',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2231,557,66,'Bugard',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2234,1327,66,'Festive_Firedrake',0,128,0,0,0,0,0,0);
