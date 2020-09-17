@@ -5908,13 +5908,6 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             return;
         }
 
-        PItem->setCharPrice(0);
-        PItem->setQuantity(Quantity);
-        PItem->setSubType(ITEM_UNLOCKED);
-
-        if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
-            return;
-
         uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
         uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
@@ -5926,6 +5919,13 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
+
+        PItem->setCharPrice(0);
+        PItem->setQuantity(Quantity);
+        PItem->setSubType(ITEM_UNLOCKED);
+
+        if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
+            return;
 
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)PriceWithTax);
         charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
