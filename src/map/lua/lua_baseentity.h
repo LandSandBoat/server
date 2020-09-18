@@ -201,7 +201,6 @@ public:
     int32 getFreeSlotsCount(lua_State*);     // Gets value of free slots in Entity inventory
     int32 confirmTrade(lua_State*);          // Complete trade with an npc, only removing confirmed items
     int32 tradeComplete(lua_State*);         // Complete trade with an npc
-    int32 signedByTrader(lua_State*);        // Check if item is signed by the trading player
 
     // Equipping
     int32 canEquipItem(lua_State*);          // returns true if the player is able to equip the item

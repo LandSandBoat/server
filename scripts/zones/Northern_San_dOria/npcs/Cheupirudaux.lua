@@ -11,7 +11,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local signed = player:signedByTrader(player,0)
+    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.WOODWORKING)
 
     if
@@ -23,12 +23,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("WoodworkingExpertQuest",2)
+            player:tradeComplete()
         else
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
+        player:tradeComplete()
     end
 end
 

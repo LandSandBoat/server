@@ -11,7 +11,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local signed = player:signedByTrader(player,0)
+    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.ALCHEMY)
 
     if
@@ -23,12 +23,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("AlchemyExpertQuest",2)
+            player:tradeComplete()
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
+        player:tradeComplete()
     end
 end
 

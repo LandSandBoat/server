@@ -20,9 +20,11 @@ function onTrade(player, npc, trade)
         player:setSkillRank(tpz.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
         player:setCharVar("FishingExpertQuest",2)
+        player:tradeComplete()
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
+        player:tradeComplete()
     end
 end
 

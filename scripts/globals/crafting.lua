@@ -166,12 +166,12 @@ function tradeTestItem(player, npc, trade, craftID)
     local skillLvL = player:getSkillLevel(craftID)
     local myTI = getTestItem(player, npc, craftID)
     local newRank = 0
+    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
 
     if (canGetNewRank(player, skillLvL, craftID) == 1 and
         trade:hasItemQty(myTI, 1) and
         trade:getItemCount() == 1) then
         newRank = player:getSkillRank(craftID) + 1
-        player:tradeComplete()
         if player:getCharVar('[GUILD]currentGuild') == guildID + 1 then
             player:setCharVar('[GUILD]daily_points', -1)
         end
