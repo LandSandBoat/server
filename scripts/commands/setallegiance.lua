@@ -2,7 +2,6 @@
 -- func: setallegiance
 -- desc: Sets the players allegiance.
 ---------------------------------------------------------------------------------------------------
-
 cmdprops =
 {
     permission = 1,
@@ -15,17 +14,20 @@ function error(player, msg)
 end
 
 function onTrigger(player, target, allegiance)
-
     -- validate target
     local targ
-    if (target == nil) then
-        targ = player
-    else
+    local cursor_target = player:getCursorTarget()
+
+    if target then
         targ = GetPlayerByName(target)
-        if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+        if not targ then
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
+    elseif cursor_target and not cursor_target:isNPC() then
+        targ = cursor_target
+    else
+        targ = player
     end
 
     if allegiance == nil or (allegiance < 0 or allegiance > 6) then
@@ -33,11 +35,7 @@ function onTrigger(player, target, allegiance)
         return
     end
 
-    local toString = {
-        "Mob", "Player",
-        "San d'Oria", "Bastok", "Windurst",
-        "Wyverns", "Griffons"
-    }
+    local toString = {"Mob", "Player", "San d'Oria", "Bastok", "Windurst", "Wyverns", "Griffons"}
 
     player:PrintToPlayer(string.format("You set %s's allegiance to %s", target, toString[allegiance + 1]))
     targ:setAllegiance(allegiance)
