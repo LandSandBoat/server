@@ -143,8 +143,8 @@ struct GearSetMod_t
 
 enum CHAR_SUBSTATE
 {
-    NONE = 0,
-    IN_CS,
+    SUBSTATE_NONE = 0,
+    SUBSTATE_IN_CS,
     SUBSTATE_LAST,
 };
 

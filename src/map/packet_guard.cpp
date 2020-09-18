@@ -6,7 +6,7 @@
 #include <unordered_map> // Lookup
 #include <unordered_set> // Capture
 
-#define PACKETGUARD_CAP_ENABLED 0
+// #define PACKETGUARD_CAP_ENABLED 1
 
 namespace PacketGuard
 {
@@ -14,27 +14,33 @@ namespace PacketGuard
 std::unordered_map<CHAR_SUBSTATE, std::unordered_set<uint16>> regular_client_packets;
 #endif
 
-// Allowlists
-std::unordered_set<uint16> in_cs_allowlist =
+std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>> allowlist;
+
+void Init()
 {
-    0x015, // Player Sync
-    0x016, // Entity Information Request
-    0x01A, // Player Action
-    0x03A, // Sort Inventory
-    0x05B, // Event Update (Completion or Update)
-    0x05C, // Event Update (Update Player Position)
-    0x0B5, // Chat Message
-    0x0F2, // Update Player Zone Boundary
-    0x114, // Map Marker Request
-};
+    // Allow all non-substate packets
+    for (uint16 i = 0; i < 512; ++i)
+    {
+        allowlist[SUBSTATE_NONE][i] = true;
+    }
+
+    // In Cutscene
+    allowlist[SUBSTATE_IN_CS][0x015] = true; // Player Sync
+    allowlist[SUBSTATE_IN_CS][0x016] = true; // Entity Information Request
+    allowlist[SUBSTATE_IN_CS][0x01A] = true; // Player Action
+    allowlist[SUBSTATE_IN_CS][0x03A] = true; // Sort Inventory
+    allowlist[SUBSTATE_IN_CS][0x05B] = true; // Event Update (Completion or Update)
+    allowlist[SUBSTATE_IN_CS][0x05C] = true; // Event Update (Update Player Position)
+    allowlist[SUBSTATE_IN_CS][0x0B5] = true; // Chat Message
+    allowlist[SUBSTATE_IN_CS][0x0F2] = true; // Update Player Zone Boundary
+    allowlist[SUBSTATE_IN_CS][0x114] = true; // Map Marker Request
+}
 
 bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
 {
-#ifdef PACKETGUARD_CAP_ENABLED
-    // Capture packets
-    // TODO: Generate a file and ask a few servers to run this
+#if PACKETGUARD_CAP_ENABLED == 1
     regular_client_packets[PChar->m_Substate].insert(SmallPD_Type);
-    for (uint8 state = IN_CS; state < SUBSTATE_LAST; ++state)
+    for (uint8 state = SUBSTATE_IN_CS; state < SUBSTATE_LAST; ++state)
     {
         fmt::print("Substate {}: ", state);
         for (auto& entry : regular_client_packets[(CHAR_SUBSTATE)state])
@@ -46,26 +52,6 @@ bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
     return true;
 #endif
 
-    switch (PChar->m_Substate)
-    {
-    case IN_CS:
-    {
-        // TODO: O(1) lookup
-        if (in_cs_allowlist.find(SmallPD_Type) != in_cs_allowlist.end())
-        {
-            return true;
-        }
-        break;
-    }
-    case NONE:
-        // TODO: Maybe a small rejectlist here
-        [[fallthrough]];
-    default:
-    {
-        return true;
-    }
-    }
-
-    return false;
+    return allowlist[PChar->m_Substate][SmallPD_Type];
 }
 } // namespace PacketGuard

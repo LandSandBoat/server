@@ -247,6 +247,8 @@ int32 do_init(int32 argc, char** argv)
     g_PBuff = new int8[map_config.buffer_size + 20];
     PTempBuff = new int8[map_config.buffer_size + 20];
 
+    PacketGuard::Init();
+
     ShowStatus("The map-server is " CL_GREEN"ready" CL_RESET" to work...\n");
     ShowMessage("=======================================================================\n");
     return 0;

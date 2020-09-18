@@ -9,6 +9,7 @@ class CCharEntity;
 
 namespace PacketGuard
 {
+void Init();
 bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type);
 }
 
