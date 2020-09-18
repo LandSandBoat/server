@@ -1065,6 +1065,9 @@ inline int32 CLuaBaseEntity::startEvent(lua_State *L)
     {
         PChar->m_event.Option = (int32)lua_tointeger(L, 10);
     }
+
+    PChar->m_Substate = CHAR_SUBSTATE::IN_CS;
+
     return 0;
 }
 

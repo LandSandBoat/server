@@ -141,6 +141,13 @@ struct GearSetMod_t
     uint16	modValue;
 };
 
+enum CHAR_SUBSTATE
+{
+    NONE = 0,
+    IN_CS,
+    SUBSTATE_LAST,
+};
+
 /************************************************************************
 *                                                                       *
 *                                                                       *
@@ -309,6 +316,8 @@ public:
     bool              m_EquipSwap;					// true if equipment was recently changed
     bool              m_EffectsChanged;
     time_point        m_LastSynthTime;
+
+    CHAR_SUBSTATE     m_Substate;
 
     int16 addTP(int16 tp) override;
     int32 addHP(int32 hp) override;
