@@ -129,6 +129,7 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
         return 0;
 
     lua_State* L = luautils::LuaHandle;
+    uint32 stackTop = lua_gettop(L);
     lua_getglobal(L, "tpz");
     lua_getfield(L, -1, "roe");
 
@@ -183,6 +184,7 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
             }
         }
     }
+    lua_settop(L, stackTop);
     return true;
 }
 
