@@ -5862,6 +5862,16 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     if (PTarget == nullptr || PTarget->id != PChar->BazaarID.id)
         return;
 
+    // Validate purchase quantity..
+    if (Quantity < 1)
+    {
+        // Exploit attempt..
+        ShowError(
+            CL_RED "Player %s purchasing invalid quantity %u from Player %s bazaar! \n" CL_RESET,
+            PChar->GetName(), Quantity, PTarget->GetName());
+        return;
+    }
+
     CItemContainer* PBazaar = PTarget->getStorage(LOC_INVENTORY);
     CItemContainer* PBuyerInventory = PChar->getStorage(LOC_INVENTORY);
 
@@ -5884,30 +5894,8 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         return;
     }
 
-    // Validate this player can afford said item..
-    if (PCharGil->getQuantity() < PBazaarItem->getCharPrice())
+    if ((PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
     {
-        // Exploit attempt..
-        ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
-        PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
-        return;
-    }
-
-    if ((PBazaarItem != nullptr) && (PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
-    {
-        CItem* PItem = itemutils::GetItem(PBazaarItem);
-
-        // Validate purchase quantity..
-        if (Quantity < 1)
-        {
-            // Exploit attempt..
-            ShowError(
-                CL_RED"Player %s purchasing invalid quantity %u of itemID %u from Player %s bazaar! \n" CL_RESET,
-                PChar->GetName(), Quantity, PItem->getID(), PTarget->GetName()
-            );
-            return;
-        }
-
         uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
         uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
@@ -5915,10 +5903,12 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            ShowError(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
+
+        CItem* PItem = itemutils::GetItem(PBazaarItem);
 
         PItem->setCharPrice(0);
         PItem->setQuantity(Quantity);
