@@ -1342,14 +1342,22 @@ void SmallPacket0x036(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
         for (int32 slotID = 0; slotID < numItems; ++slotID)
         {
-            uint8  invSlotID = data.ref<uint8>(0x30 + slotID);
+            uint8 invSlotID = data.ref<uint8>(0x30 + slotID);
             uint32 Quantity = data.ref<uint32>(0x08 + slotID * 4);
 
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-            if (PItem != nullptr && PItem->getQuantity() >= Quantity)
+            if ((PItem == nullptr) || (PItem->isSubType(ITEM_LOCKED)) || (PItem->getQuantity() < Quantity))
+            {
+                ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade invalid item [to NPC]! \n" CL_RESET, PChar->GetName());
+
+                // Leave the items locked so people can't use invalid trade attempts to unlock arbitrary inventory slots
+                return;
+            }
+            else
             {
                 PChar->TradeContainer->setItem(slotID, PItem->getID(), invSlotID, Quantity, PItem);
+                PItem->setSubType(ITEM_LOCKED);
             }
         }
 
@@ -3720,15 +3728,15 @@ void SmallPacket0x083(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8  quantity = data.ref<uint8>(0x04);
     uint8  shopSlotID = data.ref<uint8>(0x0A);
 
-    // Prevent users from buying from slots higher than 15.. (Prevents appraise duping..)
-    if (shopSlotID > PChar->Container->getSize() - 1)
+    // Prevent users from buying from invalid container slots
+    if (shopSlotID > PChar->Container->getExSize() - 1)
     {
-        ShowWarning(CL_YELLOW"User '%s' attempting to buy vendor item from an invalid slot!" CL_RESET, PChar->GetName());
+        ShowError(CL_RED"User '%s' attempting to buy vendor item from an invalid slot!\n" CL_RESET, PChar->GetName());
         return;
     }
 
     uint16 itemID = PChar->Container->getItemID(shopSlotID);
-    uint32 price = PChar->Container->getQuantity(shopSlotID); // здесь мы сохранили стоимость предмета
+    uint32 price = PChar->Container->getQuantity(shopSlotID); // We used the "quantity" to store the item's sale price
 
     CItem* PItem = itemutils::GetItemPointer(itemID);
     if (PItem == nullptr)
@@ -3783,7 +3791,8 @@ void SmallPacket0x084(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             !(PItem->getFlag() & ITEM_FLAG_NOSALE))
         {
             quantity = std::min(quantity, PItem->getQuantity());
-            PChar->Container->setItem(PChar->Container->getSize() - 1, itemID, slotID, quantity);
+            // Store item-to-sell in the last slot of the shop container
+            PChar->Container->setItem(PChar->Container->getExSize(), itemID, slotID, quantity);
             PChar->pushPacket(new CShopAppraisePacket(slotID, PItem->getBasePrice()));
         }
         return;
@@ -3799,9 +3808,10 @@ void SmallPacket0x084(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    uint32 quantity = PChar->Container->getQuantity(PChar->Container->getSize() - 1);
-    uint16 itemID = PChar->Container->getItemID(PChar->Container->getSize() - 1);
-    uint8  slotID = PChar->Container->getInvSlotID(PChar->Container->getSize() - 1);
+    // Retrieve item-to-sell from last slot of the shop's container
+    uint32 quantity = PChar->Container->getQuantity(PChar->Container->getExSize());
+    uint16 itemID = PChar->Container->getItemID(PChar->Container->getExSize());
+    uint8  slotID = PChar->Container->getInvSlotID(PChar->Container->getExSize());
 
     CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);

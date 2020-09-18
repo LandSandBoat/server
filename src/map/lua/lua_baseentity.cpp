@@ -3902,9 +3902,14 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     uint16 itemID = (uint16)lua_tonumber(L, -2);
     uint32 price = (uint32)lua_tonumber(L, -1);
 
-    uint8 slotID = ((CCharEntity*)m_PBaseEntity)->Container->getItemsCount();
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint8 slotID = PChar->Container->getItemsCount();
 
-    ((CCharEntity*)m_PBaseEntity)->Container->setItem(slotID, itemID, 0, price);
+    PChar->Container->setItem(slotID, itemID, 0, price);
+
+    // Players can add items to the shop container during shop interaction,
+    // so track the shop's number of items separately from the container's size.
+    PChar->Container->setExSize(PChar->Container->getExSize() + 1);
 
     return 0;
 }
@@ -10672,14 +10677,15 @@ inline int32 CLuaBaseEntity::addStatusEffectEx(lua_State *L)
     }
 
     CStatusEffect * PEffect = new CStatusEffect(
-        (EFFECT)lua_tointeger(L, 1),
-        (uint16)lua_tointeger(L, 2),
-        (uint16)lua_tointeger(L, 3),
-        (uint16)lua_tointeger(L, 4),
-        (uint16)lua_tointeger(L, 5),
-        (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0),
-        (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0),
-        (n >= 8 ? (uint16)lua_tointeger(L, 8) : 0));
+        (EFFECT)lua_tointeger(L, 1), // Effect ID
+        (uint16)lua_tointeger(L, 2), // Effect Icon ID
+        (uint16)lua_tointeger(L, 3), // Power
+        (uint16)lua_tointeger(L, 4), // Tick
+        (uint16)lua_tointeger(L, 5), // Duration
+        (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0), // Sub Effect ID
+        (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0), // Sub Power
+        (n >= 8 ? (uint16)lua_tointeger(L, 8) : 0), // Tier
+        (n >= 9 ? (uint32)lua_tointeger(L, 9) : 0)); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
 
     lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent));
     return 1;
