@@ -319,6 +319,25 @@ inline int32 CLuaItem::isShield(lua_State* L)
 
     return 1;
 }
+
+inline int32 CLuaItem::getSignature(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+
+    lua_pushstring(L, (const char*)m_PLuaItem->getSignature());
+
+    return 1;
+}
+
+inline int32 CLuaItem::setSignature(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
+
+    m_PLuaItem->setSignature((int8*)lua_tostring(L, 1));
+
+    return 0;
+}
 //==========================================================//
 
 const char CLuaItem::className[] = "CItem";
@@ -349,5 +368,7 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,isTwoHanded),
     LUNAR_DECLARE_METHOD(CLuaItem,isHandToHand),
     LUNAR_DECLARE_METHOD(CLuaItem,isShield),
+    LUNAR_DECLARE_METHOD(CLuaItem,getSignature),
+    LUNAR_DECLARE_METHOD(CLuaItem,setSignature),
     {nullptr,nullptr}
 };
