@@ -5,15 +5,15 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "si"
+    parameters = "is"
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setallegiance <player> <allegiance>")
+    player:PrintToPlayer("!setallegiance <allegiance> <player>")
 end
 
-function onTrigger(player, target, allegiance)
+function onTrigger(player, allegiance, target)
     -- validate target
     local targ
     local cursor_target = player:getCursorTarget()
@@ -37,6 +37,6 @@ function onTrigger(player, target, allegiance)
 
     local toString = {"Mob", "Player", "San d'Oria", "Bastok", "Windurst", "Wyverns", "Griffons"}
 
-    player:PrintToPlayer(string.format("You set %s's allegiance to %s", target, toString[allegiance + 1]))
+    player:PrintToPlayer(string.format("You set %s's allegiance to %s", targ:getName(), toString[allegiance + 1]))
     targ:setAllegiance(allegiance)
 end
