@@ -324,19 +324,19 @@ inline int32 CLuaItem::getSignature(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
-    lua_pushstring(L, (const char*)m_PLuaItem->getSignature());
+    int8 signature[21];
+    if (m_PLuaItem->isType(ITEM_LINKSHELL))
+    {
+        DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
+    }
+    else
+    {
+        DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
+    }
+
+    lua_pushstring(L, (const char*)signature);
 
     return 1;
-}
-
-inline int32 CLuaItem::setSignature(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    m_PLuaItem->setSignature((int8*)lua_tostring(L, 1));
-
-    return 0;
 }
 //==========================================================//
 
@@ -369,6 +369,5 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,isHandToHand),
     LUNAR_DECLARE_METHOD(CLuaItem,isShield),
     LUNAR_DECLARE_METHOD(CLuaItem,getSignature),
-    LUNAR_DECLARE_METHOD(CLuaItem,setSignature),
     {nullptr,nullptr}
 };
