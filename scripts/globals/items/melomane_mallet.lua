@@ -1,6 +1,6 @@
 -----------------------------------------
--- ID: 15299
--- Mandragora Belt
+-- ID: 18881
+-- Melomane Mallet
 -- Enchantment: 60Min, Costume - Mandragora
 -----------------------------------------
 require("scripts/globals/status")

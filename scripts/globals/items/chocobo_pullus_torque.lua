@@ -1,6 +1,6 @@
 -----------------------------------------
--- ID: 15299
--- Mandragora Belt
+-- ID: 16273
+-- Chocobo Pullus Torque
 -- Enchantment: 60Min, Costume - Mandragora
 -----------------------------------------
 require("scripts/globals/status")
@@ -15,5 +15,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.COSTUME, 31, 0, 3600)
+    target:addStatusEffect(tpz.effect.COSTUME, 1997, 0, 3600)
 end
