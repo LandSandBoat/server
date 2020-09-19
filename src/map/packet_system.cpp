@@ -3032,6 +3032,7 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
@@ -3040,9 +3041,10 @@ void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     }
 
     uint32 zoneLineID = data.ref<uint32>(0x04);
-    //TODO: verify packet in adoulin expansion
     uint8  town = data.ref<uint8>(0x16);
-    uint8  zone = data.ref<uint8>(0x17);
+    uint8  requestedZone = data.ref<uint8>(0x17);
+
+    uint16 startingZone = PChar->getZone();
 
     PChar->ClearTrusts();
 
@@ -3054,33 +3056,58 @@ void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         // Exiting Mog House..
         if (zoneLineID == 1903324538)
         {
-            uint16 prevzone = PChar->getZone();
+            uint16 destinationZone = PChar->getZone();
             // Note: zone zero actually exists but is unused in retail, we should stop using zero someday.
             // If zero, return to previous zone.. otherwise, determine the zone..
-            if (zone != 0)
+            if (requestedZone != 0)
             {
                 switch (town)
                 {
-                case 1: prevzone = zone + 0xE5; break;
-                case 2: prevzone = zone + 0xE9; break;
-                case 3: prevzone = zone + 0xED; break;
-                case 4: prevzone = zone + 0xF2; break;
-                case 5: prevzone = zone + (zone == 1 ? 0x2F : 0x30); break;
+                case 1: destinationZone = requestedZone + ZONE_SOUTHERN_SANDORIA - 1; break;
+                case 2: destinationZone = requestedZone + ZONE_BASTOK_MINES - 1; break;
+                case 3: destinationZone = requestedZone + ZONE_WINDURST_WATERS - 1; break;
+                case 4: destinationZone = requestedZone + ZONE_RULUDE_GARDENS - 1; break;
+                case 5: destinationZone = requestedZone + (requestedZone == 1 ? ZONE_AL_ZAHBI - 1 : ZONE_AHT_URHGAN_WHITEGATE - 2); break;
                 }
 
                 // Handle case for mog garden.. (Above addition does not work for this zone.)
-                if (zone == 127)
+                if (requestedZone == 127)
                 {
-                    prevzone = 280;
+                    destinationZone = ZONE_MOG_GARDEN;
                 }
-                else if (zone == 125)
+                else if (requestedZone == 125) // Go to second floor
                 {
-                    prevzone = PChar->getZone();
+                    destinationZone = PChar->getZone();
                 }
             }
-            PChar->m_moghouseID = 0;
-            PChar->loc.destination = prevzone;
-            memset(&PChar->loc.p, 0, sizeof(PChar->loc.p));
+
+            bool moghouseExitRegular = requestedZone == 0 && PChar->m_moghouseID > 0;
+
+            auto startingRegion = zoneutils::GetCurrentRegion(startingZone);
+            auto destinationRegion = zoneutils::GetCurrentRegion(destinationZone);
+            auto moghouseExitRegions = { REGION_SANDORIA, REGION_BASTOK, REGION_WINDURST, REGION_JEUNO, REGION_WEST_AHT_URHGAN };
+            auto moghouseQuestComplete = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
+            bool moghouseExitQuestZoneline =
+                moghouseQuestComplete &&
+                startingRegion == destinationRegion &&
+                PChar->m_moghouseID > 0 &&
+                std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(), [&destinationRegion](REGIONTYPE acceptedReg) { return destinationRegion == acceptedReg; });
+
+            bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
+
+            // Validate travel
+            if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)
+            {
+                PChar->m_moghouseID = 0;
+                PChar->loc.destination = destinationZone;
+                memset(&PChar->loc.p, 0, sizeof(PChar->loc.p));
+            }
+            else
+            {
+                PChar->status = STATUS_NORMAL;
+                ShowWarning(CL_YELLOW "SmallPacket0x05E: Moghouse zoneline abuse by %s\n" CL_RESET, PChar->GetName());
+                return;
+            }
         }
         else
         {
@@ -3132,6 +3159,13 @@ void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         ShowInfo(CL_WHITE"Zoning from zone %u to zone %u: %s\n" CL_RESET, PChar->getZone(), PChar->loc.destination, PChar->GetName());
     }
     PChar->clearPacketList();
+
+    if (PChar->loc.destination >= MAX_ZONEID)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x05E: Invalid destination passed to packet %u by %s\n" CL_RESET, PChar->loc.destination, PChar->GetName());
+        PChar->loc.destination = startingZone;
+        return;
+    }
 
     uint64 ipp = zoneutils::GetZoneIPP(PChar->loc.destination == 0 ? PChar->getZone() : PChar->loc.destination);
 
