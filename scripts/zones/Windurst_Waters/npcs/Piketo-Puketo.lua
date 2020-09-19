@@ -21,15 +21,15 @@ function onTrade(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(tpz.skill.COOKING, newRank)
             player:startEvent(10014, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("CookingExpertQuest",2)
-            player:setCharVar("CookingTraded",1)
+            player:setCharVar("CookingExpertQuest",0)
+            player:setLocalVar("CookingTraded",1)
         else
             player:startEvent(10014, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.COOKING, newRank)
         player:startEvent(10014, 0, 0, 0, 0, newRank)
-        player:setCharVar("CookingTraded",1)
+        player:setLocalVar("CookingTraded",1)
     end
 end
 
@@ -84,9 +84,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.cooking)
         end
     else
-        if player:getCharVar("CookingTraded") == 1 then
+        if player:getLocalVar("CookingTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("CookingTraded",0)
+            player:setLocalVar("CookingTraded",0)
         end
     end
 end
