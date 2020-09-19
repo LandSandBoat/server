@@ -3905,7 +3905,16 @@ INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,201,75,255);-
 INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,274,75,255);-- sleepga_ii
 INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,362,75,255);-- bindga
 
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,46,63,255);  -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,133,68,255); -- Shellra IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,172,70,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,200,44,255); -- Waterga II
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,201,65,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,214,1,255);  -- Flood
 
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,51,68,255); -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,46,63,255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,4,41,255);  -- Cure IV
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
