@@ -32,6 +32,7 @@ void Init()
     allowlist[SUBSTATE_IN_CS][0x05B] = true; // Event Update (Completion or Update)
     allowlist[SUBSTATE_IN_CS][0x05C] = true; // Event Update (Update Player Position)
     allowlist[SUBSTATE_IN_CS][0x0B5] = true; // Chat Message
+    allowlist[SUBSTATE_IN_CS][0x0B6] = true; // Tell Message
     allowlist[SUBSTATE_IN_CS][0x0F2] = true; // Update Player Zone Boundary
     allowlist[SUBSTATE_IN_CS][0x114] = true; // Map Marker Request
 }
