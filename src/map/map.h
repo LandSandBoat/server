@@ -98,6 +98,10 @@ struct map_config_t
     bool   craft_day_matters;         // Enable/disable Element day factor in synthesis
     bool   craft_moonphase_matters;   // Enable/disable Moon phase factor in synthesis
     bool   craft_direction_matters;   // Enable/disable Compass direction factor in synthesis
+    bool   garden_day_matters;        // Enable/disable Element day factor in gardening results
+    bool   garden_moonphase_matters;  // Enable/disable Moon phase factor in gardening results
+    bool   garden_pot_matters;        // Enable/disable Pot element factor in gardening results
+    bool   garden_mh_aura_matters;    // Enable/disable Mog house aura factor in gardening results
     float  mob_tp_multiplier;         // Multiplies the amount of TP mobs gain on any effect that would grant TP
     float  player_tp_multiplier;      // Multiplies the amount of TP players gain on any effect that would grant TP
     bool   mob_no_despawn;            // Toggle whether mobs roam home or despawn
