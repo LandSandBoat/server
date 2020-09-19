@@ -33,7 +33,7 @@
 #include "packets/roe_update.h"
 
 std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
-RoeCache roeutils::RoeBitmaps;
+RoeSystemData roeutils::RoeCache;
 
 namespace roeutils
 {
@@ -84,8 +84,9 @@ int32 RegisterHandler(lua_State* L)
 
 int32 ParseRecords(lua_State* L)
 {
-    roeutils::RoeBitmaps.ImplementedRecords.reset();
-    roeutils::RoeBitmaps.RepeatableRecords.reset();
+    roeutils::RoeCache.ImplementedRecords.reset();
+    roeutils::RoeCache.RepeatableRecords.reset();
+    roeutils::RoeCache.NotifyThresholds.fill(1);
 
     if (lua_isnil(L, -1) || !lua_istable(L, -1))
         return 0;
@@ -96,7 +97,13 @@ int32 ParseRecords(lua_State* L)
     {
         // Set Implemented bit.
         uint32 recordID = static_cast<uint32>(lua_tointeger(L, -2));
-        roeutils::RoeBitmaps.ImplementedRecords.set(recordID);
+        roeutils::RoeCache.ImplementedRecords.set(recordID);
+
+        // Set notification threshold
+        lua_getfield(L, -1, "notify");
+        if (!lua_isnil(L, -1))
+            roeutils::RoeCache.NotifyThresholds[recordID] = static_cast<uint32>((lua_tointeger(L, -1)));
+        lua_pop(L, 1);
 
         // Set repeatability bit
         lua_getfield(L, -1, "reward");
@@ -105,7 +112,7 @@ int32 ParseRecords(lua_State* L)
             lua_getfield(L, -1, "repeatable");
             if (lua_toboolean(L, -1))
             {
-                roeutils::RoeBitmaps.RepeatableRecords.set(recordID);
+                roeutils::RoeCache.RepeatableRecords.set(recordID);
             }
             lua_pop(L, 1);
         }
@@ -200,7 +207,7 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar) // shorthand for no-datagram c
 
 void SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus)
 {
-    uint8 page = recordID / 8;
+    uint16 page = recordID / 8;
     uint8 bit = recordID % 8;
     if (newStatus)
         PChar->m_eminenceLog.complete[page] |= (1 << bit);
@@ -216,24 +223,16 @@ void SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newSt
 
 bool GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID)
 {
-    uint8 page = recordID / 8;
+    uint16 page = recordID / 8;
     uint8 bit = recordID % 8;
     return PChar->m_eminenceLog.complete[page] & (1 << bit);
 }
 
 bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
 {
-    // TODO: Time limited records aren't implemented yet and can't be accepted normally.
-    //       For now we are refusing their IDs outright and protecting its slot from use here.
-    if (recordID > 2047)
-    {
-        std::string message = "Special Event/Timed Records can not be taken.";
-        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_NS_SAY, message, "RoE System"));
-        return false;
-    }
 
     // We deny taking records which aren't implemented in the Lua
-    if (!roeutils::RoeBitmaps.ImplementedRecords.test(recordID))
+    if (!roeutils::RoeCache.ImplementedRecords.test(recordID))
     {
         std::string message = "The record #" + std::to_string(recordID) + " is not implemented at this time.";
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_NS_SAY, message, "RoE System"));
@@ -241,7 +240,7 @@ bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
     }
 
     // Prevent packet-injection for re-taking completed records which aren't marked repeatable.
-    if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeBitmaps.RepeatableRecords.test(recordID))
+    if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeCache.RepeatableRecords.test(recordID))
         return false;
 
     // Per above, this i < 30 is correct.

@@ -68,8 +68,10 @@ end
 local defaults = {
     check = checks.masterCheck, -- Check function should return true/false
     increment = 1,              -- Amount to increment per successful check
+    notify = 1,                 -- Progress notifications shown every X increases 
     goal = 1,                   -- Progress goal
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
+    reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
 }
 
 --[[ **************************************************************************
@@ -282,6 +284,7 @@ tpz.roe.records =
         trigger = triggers.dmgDealt,
         goal = 100000,
         increment = 0,
+        notify = 5000,
         reward = { sparks = 1000, xp = 5000 , item = { 6181 } },
         check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
