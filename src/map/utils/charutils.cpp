@@ -83,6 +83,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../latent_effect_container.h"
 #include "../treasure_pool.h"
 #include "../mob_modifier.h"
+#include "../roe.h"
 
 #include "../entities/charentity.h"
 #include "../entities/petentity.h"
@@ -358,7 +359,8 @@ namespace charutils
             "playtime,"             // 25
             "campaign_allegiance,"  // 26
             "isstylelocked,"        // 27
-            "moghancement "         // 28
+            "moghancement,"         // 28
+            "UNIX_TIMESTAMP(`lastupdate`) " // 29
             "FROM chars "
             "WHERE charid = %u";
 
@@ -437,18 +439,16 @@ namespace charutils
             char* eminence = nullptr;
             Sql_GetData(SqlHandle, 24, &eminence, &length);
             memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
-            for(int i = 0; i < 31; i++) // Build eminence lookup map
-            {
-                uint16 record = PChar->m_eminenceLog.active[i];
-                if(record) PChar->m_eminenceCache.activemap.set(record);
-            }
 
             PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
             PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
             PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1 ? true : false);
             PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
+            PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
+
         }
 
+        roeutils::onCharLoad(PChar);
         LoadSpells(PChar);
 
         fmtQuery =
@@ -3726,6 +3726,8 @@ namespace charutils
         {
             //add normal exp
             PChar->jobs.exp[PChar->GetMJob()] += exp;
+            if (PMob != PChar) // Only mob kills count for gain EXP records
+                roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
         }
 
         if (!expFromRaise)
@@ -4025,6 +4027,7 @@ namespace charutils
         Sql_EscapeStringLen(SqlHandle, eminenceList, (const char*)&PChar->m_eminenceLog, sizeof(PChar->m_eminenceLog));
 
         Sql_Query(SqlHandle, Query, eminenceList, PChar->id);
+        PChar->m_eminenceCache.lastWriteout = static_cast<uint32>(time(nullptr));
     }
 
     /************************************************************************
