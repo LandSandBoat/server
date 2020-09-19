@@ -22,14 +22,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.SMITHING, newRank)
             player:startEvent(627, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("SmithingExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("SmithingTraded",1)
         else
             player:startEvent(627, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.SMITHING, newRank)
         player:startEvent(627, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("SmithingTraded",1)
     end
 end
 
@@ -82,6 +82,11 @@ function onEventFinish(player, csid, option)
             player:addItem(4096)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
             signupGuild(player, guild.smithing)
+        end
+    else
+        if player:getCharVar("SmithingTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("SmithingTraded",0)
         end
     end
 end

@@ -23,14 +23,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("AlchemyExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("AlchemyTraded",1)
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("AlchemyTraded",1)
     end
 end
 
@@ -97,6 +97,11 @@ function onEventFinish(player, csid, option)
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
             signupGuild(player, guild.alchemy)
+        end
+    else
+        if player:getCharVar("AlchemyTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("AlchemyTraded",0)
         end
     end
 end

@@ -23,14 +23,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("WoodworkingExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("WoodworkingTraded",1)
         else
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("WoodworkingTraded",1)
     end
 end
 
@@ -82,6 +82,11 @@ function onEventFinish(player, csid, option)
             player:addItem(4098)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4098) -- Wind Crystal
             signupGuild(player, guild.woodworking)
+        end
+    else
+        if player:getCharVar("WoodworkingTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("WoodworkingTraded",0)
         end
     end
 end

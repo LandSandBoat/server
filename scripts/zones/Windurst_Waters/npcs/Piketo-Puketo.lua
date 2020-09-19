@@ -22,14 +22,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.COOKING, newRank)
             player:startEvent(10014, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("CookingExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("CookingTraded",1)
         else
             player:startEvent(10014, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.COOKING, newRank)
         player:startEvent(10014, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("CookingTraded",1)
     end
 end
 
@@ -82,6 +82,11 @@ function onEventFinish(player, csid, option)
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
             signupGuild(player, guild.cooking)
+        end
+    else
+        if player:getCharVar("CookingTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("CookingTraded",0)
         end
     end
 end

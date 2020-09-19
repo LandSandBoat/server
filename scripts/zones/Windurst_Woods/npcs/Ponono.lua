@@ -22,14 +22,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("ClothcraftExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("ClothcraftTraded",1)
         else
             player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("ClothcraftTraded",1)
     end
 end
 
@@ -81,6 +81,11 @@ function onEventFinish(player, csid, option)
             player:addItem(4099) -- earth crystal
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4099)
             signupGuild(player, guild.clothcraft)
+        end
+    else
+        if player:getCharVar("ClothcraftTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("ClothcraftTraded",0)
         end
     end
 end

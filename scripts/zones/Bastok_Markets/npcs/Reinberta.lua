@@ -22,14 +22,14 @@ function onTrade(player, npc, trade)
             player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("GoldsmithingExpertQuest",2)
-            player:tradeComplete()
+            player:setCharVar("GoldsmithingTraded",1)
         else
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
-        player:tradeComplete()
+        player:setCharVar("GoldsmithingTraded",1)
     end
 end
 
@@ -82,6 +82,11 @@ function onEventFinish(player, csid, option)
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
             signupGuild(player, guild.goldsmithing)
+        end
+    else
+        if player:getCharVar("GoldsmithingTraded") == 1 then
+            player:tradeComplete()
+            player:setCharVar("GoldsmithingTraded",0)
         end
     end
 end
