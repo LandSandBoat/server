@@ -1,10 +1,11 @@
 -----------------------------------------
--- ID: 15526
--- Item: Mist Slacks
+-- ID: 15162
+-- Item: Mist Crown
 -- Item Effect: Evasion Boost
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------------
 
 function onItemCheck(target)
     return 0

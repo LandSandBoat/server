@@ -703,9 +703,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     case 0x09: // jobability
     {
         uint16 JobAbilityID = data.ref<uint16>(0x0C);
-        //if ((JobAbilityID < 496 && !charutils::hasAbility(PChar, JobAbilityID - 16)) || JobAbilityID >= 496 && !charutils::hasPetAbility(PChar, JobAbilityID - 512))
-        //    return;
-        PChar->PAI->Ability(TargID, JobAbilityID - 16);
+        PChar->PAI->Ability(TargID, JobAbilityID);
     }
     break;
     case 0x0B: // homepoint
@@ -2712,9 +2710,10 @@ void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x058(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    // uint16 skillID = data.ref<uint16>(0x04);
-    // uint16 skillLevel = data.ref<uint16>(0x06);
-    //PChar->pushPacket(new CSynthSuggestionPacket(recipeID));
+    uint16 skillID    = data.ref<uint16>(0x04);
+    uint16 skillLevel = data.ref<uint16>(0x06);
+
+    PChar->pushPacket(new CSynthSuggestionPacket(skillID, skillLevel));
 }
 
 /************************************************************************
@@ -5864,6 +5863,16 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     if (PTarget == nullptr || PTarget->id != PChar->BazaarID.id)
         return;
 
+    // Validate purchase quantity..
+    if (Quantity < 1)
+    {
+        // Exploit attempt..
+        ShowError(
+            CL_RED "Player %s purchasing invalid quantity %u from Player %s bazaar! \n" CL_RESET,
+            PChar->GetName(), Quantity, PTarget->GetName());
+        return;
+    }
+
     CItemContainer* PBazaar = PTarget->getStorage(LOC_INVENTORY);
     CItemContainer* PBuyerInventory = PChar->getStorage(LOC_INVENTORY);
 
@@ -5886,37 +5895,8 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         return;
     }
 
-    // Validate this player can afford said item..
-    if (PCharGil->getQuantity() < PBazaarItem->getCharPrice())
+    if ((PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
     {
-        // Exploit attempt..
-        ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
-        PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
-        return;
-    }
-
-    if ((PBazaarItem != nullptr) && (PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
-    {
-        CItem* PItem = itemutils::GetItem(PBazaarItem);
-
-        // Validate purchase quantity..
-        if (Quantity < 1)
-        {
-            // Exploit attempt..
-            ShowError(
-                CL_RED"Player %s purchasing invalid quantity %u of itemID %u from Player %s bazaar! \n" CL_RESET,
-                PChar->GetName(), Quantity, PItem->getID(), PTarget->GetName()
-            );
-            return;
-        }
-
-        PItem->setCharPrice(0);
-        PItem->setQuantity(Quantity);
-        PItem->setSubType(ITEM_UNLOCKED);
-
-        if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
-            return;
-
         uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
         uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
@@ -5924,10 +5904,19 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            ShowError(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
+
+        CItem* PItem = itemutils::GetItem(PBazaarItem);
+
+        PItem->setCharPrice(0);
+        PItem->setQuantity(Quantity);
+        PItem->setSubType(ITEM_UNLOCKED);
+
+        if (charutils::AddItem(PChar, LOC_INVENTORY, PItem) == ERROR_SLOTID)
+            return;
 
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)PriceWithTax);
         charutils::UpdateItem(PTarget, LOC_INVENTORY, 0, Price);
