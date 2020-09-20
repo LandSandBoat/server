@@ -21,15 +21,15 @@ function onTrade(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("ClothcraftExpertQuest",2)
-            player:setCharVar("ClothcraftTraded",1)
+            player:setCharVar("ClothcraftExpertQuest",0)
+            player:setLocalVar("ClothcraftTraded",1)
         else
             player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
-        player:setCharVar("ClothcraftTraded",1)
+        player:setLocalVar("ClothcraftTraded",1)
     end
 end
 
@@ -83,9 +83,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.clothcraft)
         end
     else
-        if player:getCharVar("ClothcraftTraded") == 1 then
+        if player:getLocalVar("ClothcraftTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("ClothcraftTraded",0)
+            player:setLocalVar("ClothcraftTraded",0)
         end
     end
 end

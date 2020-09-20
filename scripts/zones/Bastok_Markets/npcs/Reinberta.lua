@@ -21,15 +21,15 @@ function onTrade(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("GoldsmithingExpertQuest",2)
-            player:setCharVar("GoldsmithingTraded",1)
+            player:setCharVar("GoldsmithingExpertQuest",0)
+            player:setLocalVar("GoldsmithingTraded",1)
         else
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
-        player:setCharVar("GoldsmithingTraded",1)
+        player:setLocalVar("GoldsmithingTraded",1)
     end
 end
 
@@ -84,9 +84,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.goldsmithing)
         end
     else
-        if player:getCharVar("GoldsmithingTraded") == 1 then
+        if player:getLocalVar("GoldsmithingTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("GoldsmithingTraded",0)
+            player:setLocalVar("GoldsmithingTraded",0)
         end
     end
 end

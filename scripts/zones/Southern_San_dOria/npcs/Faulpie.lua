@@ -22,15 +22,15 @@ function onTrade(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
             player:startEvent(649, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("LeathercraftExpertQuest",2)
-            player:setCharVar("LeathercraftTraded",1)
+            player:setCharVar("LeathercraftExpertQuest",0)
+            player:setLocalVar("LeathercraftTraded",1)
         else
             player:startEvent(649, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
-        player:setCharVar("LeathercraftTraded",1)
+        player:setLocalVar("LeathercraftTraded",1)
     end
 end
 
@@ -100,9 +100,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.leathercraft)
         end
     else
-        if player:getCharVar("LeathercraftTraded") == 1 then
+        if player:getLocalVar("LeathercraftTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("LeathercraftTraded",0)
+            player:setLocalVar("LeathercraftTraded",0)
         end
     end
 end

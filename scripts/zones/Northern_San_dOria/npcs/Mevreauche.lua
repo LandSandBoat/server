@@ -21,15 +21,15 @@ function onTrade(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(tpz.skill.SMITHING, newRank)
             player:startEvent(627, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("SmithingExpertQuest",2)
-            player:setCharVar("SmithingTraded",1)
+            player:setCharVar("SmithingExpertQuest",0)
+            player:setLocalVar("SmithingTraded",1)
         else
             player:startEvent(627, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.SMITHING, newRank)
         player:startEvent(627, 0, 0, 0, 0, newRank)
-        player:setCharVar("SmithingTraded",1)
+        player:setLocalVar("SmithingTraded",1)
     end
 end
 
@@ -84,9 +84,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.smithing)
         end
     else
-        if player:getCharVar("SmithingTraded") == 1 then
+        if player:getLocalVar("SmithingTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("SmithingTraded",0)
+            player:setLocalVar("SmithingTraded",0)
         end
     end
 end

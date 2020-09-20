@@ -19,12 +19,12 @@ function onTrade(player, npc, trade)
     then
         player:setSkillRank(tpz.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setCharVar("FishingExpertQuest",2)
-        player:setCharVar("FishingTraded",1)
+        player:setCharVar("FishingExpertQuest",0)
+        player:setLocalVar("FishingTraded",1)
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(tpz.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setCharVar("FishingTraded",1)
+        player:setLocalVar("FishingTraded",1)
     end
 end
 
@@ -82,9 +82,9 @@ function onEventFinish(player, csid, option)
             signupGuild(player, guild.fishing)
         end
     else
-        if player:getCharVar("FishingTraded") == 1 then
+        if player:getLocalVar("FishingTraded") == 1 then
             player:tradeComplete()
-            player:setCharVar("FishingTraded",0)
+            player:setLocalVar("FishingTraded",0)
         end
     end
 end
