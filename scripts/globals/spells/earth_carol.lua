@@ -7,11 +7,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local sLvl = caster:getSkillLevel(tpz.skill.SINGING) -- Gets skill level of Singing
     local iLvl = caster:getWeaponSkillLevel(tpz.slot.RANGED)
 
@@ -42,7 +42,7 @@ function onSpellCast(caster,target,spell)
         duration = duration * 2
     end
 
-    if not (target:addBardSong(caster,tpz.effect.CAROL,power,0,duration,caster:getID(), tpz.magic.ele.EARTH, 1)) then
+    if not (target:addBardSong(caster, tpz.effect.CAROL, power, 0, duration, caster:getID(), tpz.magic.ele.EARTH, 1)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
     end
 

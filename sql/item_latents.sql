@@ -1278,12 +1278,12 @@ INSERT INTO `item_latents` VALUES(14659, 370, 3, 0, 50);    -- Regen+3 when HP <
 -- -------------------------------------------------------
 -- Melody Earring
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(14725, 68, 5, 25, 0);     -- EVA+5 song/roll active
+INSERT INTO `item_latents` VALUES(14725, 108, 5, 25, 0);     -- EVA Skill +5 song/roll active
 
 -- -------------------------------------------------------
 -- Melody Earring +1
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(14726, 68, 6, 25, 0);     -- EVA+6 song/roll active
+INSERT INTO `item_latents` VALUES(14726, 108, 6, 25, 0);     -- EVA Skill +6 song/roll active
 
 INSERT INTO `item_latents` VALUES(14729, 9, 2, 8, 6);
 INSERT INTO `item_latents` VALUES(14730, 1, 5, 8, 7);

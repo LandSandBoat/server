@@ -7,7 +7,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 1)
 
     if player:getXPos() < -186 and npc:getAnimation() == tpz.anim.CLOSE_DOOR and brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
@@ -17,8 +17,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

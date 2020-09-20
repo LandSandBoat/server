@@ -10,10 +10,10 @@ require("scripts/globals/besieged")
 require("scripts/globals/missions")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local rank = tpz.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
@@ -25,13 +25,13 @@ function onTrigger(player,npc)
     end
 
 --[[    if (rank > 0) then
-        player:startEvent(278,rank,haveimperialIDtag,tokens,player:getCurrentAssault())
+        player:startEvent(278, rank, haveimperialIDtag, tokens, player:getCurrentAssault())
     else]]
         player:startEvent(284) -- no rank
     --end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
@@ -48,15 +48,15 @@ function onEventUpdate(player,csid,option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then
             -- taken assault mission
-            player:addAssault(bit.rshift(option,4))
+            player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
             player:addKeyItem(tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
         end
     end
 end

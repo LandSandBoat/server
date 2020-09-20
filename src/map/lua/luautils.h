@@ -72,6 +72,7 @@ struct actionList_t;
 struct actionTarget_t;
 
 enum ConquestUpdate : uint8;
+enum class Emote : uint8;
 
 namespace luautils
 {
@@ -140,7 +141,7 @@ namespace luautils
     int32 setMobPos(lua_State*);                                                // set a mobs position (only if mob is not in combat)
 
     int32 GetHealingTickDelay(lua_State* L);                                    // Returns the configured healing tick delay
-
+    int32 GetItem(lua_State* L);                                                // Returns a newly minted item object of the specified ID
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
@@ -290,6 +291,8 @@ namespace luautils
 
     void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* itemId);
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
 };
 
 #endif //- _LUAUTILS_H -

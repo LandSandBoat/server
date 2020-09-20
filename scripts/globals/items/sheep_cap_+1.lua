@@ -17,7 +17,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    local giftList = {4363,4505,1845,4366,919,2213,4571,4504,8929,4367,833}
-    local gift = math.random(1,11)
+    local giftList = {4363, 4505, 1845, 4366, 919, 2213, 4571, 4504, 8929, 4367, 833}
+    local gift = math.random(1, 11)
     target:addItem(giftList[gift])
 end

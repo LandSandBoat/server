@@ -55,7 +55,7 @@ function onTrigger(player, weather)
 
     -- invert weather table
     local weatherByNum={}
-    for k,v in pairs(weatherList) do
+    for k, v in pairs(weatherList) do
         weatherByNum[v]=k
     end
 

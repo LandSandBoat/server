@@ -12,7 +12,7 @@ end
 
 function onItemUse(target)
     target:forMembersInRange(30, function(member)
-        local healAmount = math.random(60,90)
+        local healAmount = math.random(60, 90)
 
         healAmount = healAmount + (healAmount * (member:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
         healAmount = healAmount * CURE_POWER
@@ -22,6 +22,6 @@ function onItemUse(target)
             healAmount = diff
         end
         member:addHP(healAmount)
-        member:messageBasic(tpz.msg.basic.RECOVERS_HP,0,healAmount)
+        member:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, healAmount)
     end)
 end

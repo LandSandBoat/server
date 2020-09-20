@@ -4,95 +4,120 @@
 -- Starts and Finished Quest: A Pose By Any Other Name
 -- !pos -70 -10 -6 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs");
-require("scripts/globals/settings");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/globals/titles");
-require("scripts/globals/status");
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+local poseItems =
+{
+    [tpz.job.WAR] = 12576,
+    [tpz.job.MNK] = 12600,
+    [tpz.job.WHM] = 12608,
+    [tpz.job.BLM] = 12608,
+    [tpz.job.RDM] = 12608,
+    [tpz.job.THF] = 12568,
+    [tpz.job.PLD] = 12576,
+    [tpz.job.DRK] = 12576,
+    [tpz.job.BST] = 12568,
+    [tpz.job.BRD] = 12600,
+    [tpz.job.RNG] = 12568,
+    [tpz.job.SAM] = 12584,
+    [tpz.job.NIN] = 12584,
+    [tpz.job.DRG] = 12576,
+    [tpz.job.SMN] = 12608,
+    [tpz.job.BLU] = 12600,
+    [tpz.job.COR] = 12576,
+    [tpz.job.PUP] = 12608,
+    [tpz.job.DNC] = 12568,
+    [tpz.job.SCH] = 12608,
+    [tpz.job.GEO] = 12608,
+    [tpz.job.RUN] = 12576,
+}
 
-function onTrigger(player,npc)
-    posestatus = player:getQuestStatus(WINDURST,tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME);
-    if (posestatus == QUEST_AVAILABLE and player:getCharVar("QuestAPoseByOtherName_prog") == 0 and player:needToZone() == false) then
-        player:startEvent(87);                                                     -- A POSE BY ANY tpz.nation.OTHER NAME: Before Quest
-        player:setCharVar("QuestAPoseByOtherName_prog",1);
-    elseif (posestatus == QUEST_AVAILABLE and player:getCharVar("QuestAPoseByOtherName_prog") == 1) then
-        player:setCharVar("QuestAPoseByOtherName_prog",2);
-        mjob = player:getMainJob();
-        if (mjob == tpz.job.WAR or mjob == tpz.job.PLD or mjob == tpz.job.DRK or mjob == tpz.job.DRG or mjob == tpz.job.COR) then      -- Quest Start: Bronze Harness (War/Pld/Drk/Drg/Crs)
-            player:startEvent(92,0,0,0,12576);
-            player:setCharVar("QuestAPoseByOtherName_equip",12576);
-        elseif (mjob == tpz.job.MNK or mjob == tpz.job.BRD or mjob == tpz.job.BLU) then                             -- Quest Start: Robe (Mnk/Brd/Blu)
-            player:startEvent(92,0,0,0,12600);
-            player:setCharVar("QuestAPoseByOtherName_equip",12600);
-        elseif (mjob == tpz.job.THF or mjob == tpz.job.BST or mjob == tpz.job.RNG or mjob == tpz.job.DNC) then             -- Quest Start: Leather Vest (Thf/Bst/Rng/Dnc)
-            player:startEvent(92,0,0,0,12568);
-            player:setCharVar("QuestAPoseByOtherName_equip",12568);
-        elseif (mjob == tpz.job.WHM or mjob == tpz.job.BLM or mjob == tpz.job.SMN or mjob == tpz.job.PUP or mjob == tpz.job.SCH) then     -- Quest Start: Tunic (Whm/Blm/Rdm/Smn/Pup/Sch)
-            player:startEvent(92,0,0,0,12608);
-            player:setCharVar("QuestAPoseByOtherName_equip",12608);
-        elseif (mjob == tpz.job.SAM or mjob == tpz.job.NIN) then                                         -- Quest Start: Kenpogi(Sam/Nin)
-            player:startEvent(92,0,0,0,12584);
-            player:setCharVar("QuestAPoseByOtherName_equip",12584);
-        end
-    elseif (posestatus == QUEST_ACCEPTED) then
-        starttime = player:getCharVar("QuestAPoseByOtherName_time");
-        if ((starttime + 600) >= os.time()) then
-            if (player:getEquipID(tpz.slot.BODY) == player:getCharVar("QuestAPoseByOtherName_equip")) then
-                player:startEvent(96);     ------------------------------------------  QUEST FINISH
+function onTrade(player, npc, trade)
+end
+
+function onTrigger(player, npc)
+    local aPose = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+    local aPoseProg = player:getCharVar("QuestAPoseByOtherName_prog")
+    local desiredBody = poseItems[player:getMainJob()]
+    local currentBody = player:getEquipID(tpz.slot.BODY)
+
+    -- pre-quest CS
+    if aPose == QUEST_AVAILABLE and aPoseProg == 0 and not player:needToZone() and currentBody ~= desiredBody then
+        player:startEvent(87) -- pre-quest CS
+
+    -- start quest
+    elseif aPose == QUEST_AVAILABLE and aPoseProg == 1 and currentBody ~= desiredBody then
+        player:startEvent(92, 0, 0, 0, desiredBody)
+
+    -- check in during quest
+    elseif aPose == QUEST_ACCEPTED then
+        local starttime = player:getCharVar("QuestAPoseByOtherName_time")
+        if os.time() - starttime < 600 then -- took less than 10 minutes
+            if currentBody == player:getCharVar("QuestAPoseByOtherName_equip") then
+                player:startEvent(96) -- complete quest
             else
-                player:startEvent(93,0,0,0,player:getCharVar("QuestAPoseByOtherName_equip"));-- QUEST REMINDER
+                player:startEvent(93, 0, 0, 0, player:getCharVar("QuestAPoseByOtherName_equip")) -- reminder
             end
         else
-            player:startEvent(102);     ------------------------------------------  QUEST FAILURE
+            player:startEvent(102) -- fail quest
         end
-    elseif (posestatus == QUEST_COMPLETED and player:needToZone()) then
-        player:startEvent(101); -----------------------------------------------    AFTER QUEST
+
+    -- post-quest dialog
+    elseif aPose == QUEST_COMPLETED and player:needToZone() then
+        player:startEvent(101)
+
+    -- default dialogs
     else
-        rand = math.random(1,3);
-        if (rand == 1) then
-            player:startEvent(86); -------------------------------------------- Standard Conversation 1
-        elseif (rand == 2) then
-            player:startEvent(88); -------------------------------------------- Standard Conversation 2
+        local rand = math.random(1, 3)
+        if rand == 1 then
+            player:startEvent(86)
+        elseif rand == 2 then
+            player:startEvent(88)
         else
-            player:startEvent(89); -------------------------------------------- Standard Conversation 3
+            player:startEvent(89)
         end
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
-    if (csid == 92) then -------------------------- QUEST START
-        player:addQuest(WINDURST,tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME);
-        player:setCharVar("QuestAPoseByOtherName_time",os.time());
-    elseif (csid == 96) then  --------------------- QUEST FINFISH
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED,206);
-        else
-            player:completeQuest(WINDURST,tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
-            player:addTitle(tpz.title.SUPER_MODEL);
-            player:addItem(206);
-            player:messageSpecial(ID.text.ITEM_OBTAINED,206);
-            player:addKeyItem(tpz.ki.ANGELICAS_AUTOGRAPH);
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.ANGELICAS_AUTOGRAPH);
-            player:addFame(WINDURST,75);
-            player:setCharVar("QuestAPoseByOtherName_time",0);
-            player:setCharVar("QuestAPoseByOtherName_equip",0);
-            player:setCharVar("QuestAPoseByOtherName_prog",0);
-            player:needToZone(true);
-        end
-    elseif (csid == 102) then  ---------------------- QUEST FAILURE
-        player:delQuest(WINDURST,tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME);
-        player:addTitle(tpz.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM);
-        player:setCharVar("QuestAPoseByOtherName_time",0);
-        player:setCharVar("QuestAPoseByOtherName_equip",0);
-        player:setCharVar("QuestAPoseByOtherName_prog",0);
-        player:needToZone(true);
+function onEventFinish(player, csid, option)
+    -- pre-quest CS
+    if csid == 87 then
+        player:setCharVar("QuestAPoseByOtherName_prog", 1)
+
+    -- start quest
+    elseif csid == 92 then
+        local desiredBody = poseItems[player:getMainJob()]
+
+        player:addQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:setCharVar("QuestAPoseByOtherName_time", os.time())
+        player:setCharVar("QuestAPoseByOtherName_prog", 2)
+        player:setCharVar("QuestAPoseByOtherName_equip", desiredBody)
+
+    -- complete quest
+    elseif csid == 96 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME, {
+        item = 206, -- copy_of_ancient_blood
+        keyItem = tpz.ki.ANGELICAS_AUTOGRAPH,
+        fame = 75,
+        title = tpz.title.SUPER_MODEL,
+        var = {"QuestAPoseByOtherName_time", "QuestAPoseByOtherName_equip", "QuestAPoseByOtherName_prog"},
+    }) then
+        player:needToZone(true)
+
+    -- fail quest
+    elseif csid == 102 then
+        player:delQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:addTitle(tpz.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
+        player:setCharVar("QuestAPoseByOtherName_time", 0)
+        player:setCharVar("QuestAPoseByOtherName_equip", 0)
+        player:setCharVar("QuestAPoseByOtherName_prog", 0)
+        player:needToZone(true)
     end
-end;
+end

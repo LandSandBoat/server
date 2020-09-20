@@ -9,7 +9,7 @@ require("scripts/globals/ability")
 ---------------------------------------------------
 
 function onAbilityCheck(player, target, ability)
-    return 0,0
+    return 0, 0
 end
 
 function onUseAbility(pet, target, skill, action)
@@ -31,7 +31,7 @@ function onUseAbility(pet, target, skill, action)
     dmgmod = (dmgmod * (1+gear))*deep
     pet:setTP(0)
 
-    local dmg = AbilityFinalAdjustments(dmgmod,pet,skill,target,tpz.attackType.BREATH,tpz.damageType.WIND,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = AbilityFinalAdjustments(dmgmod, pet, skill, target, tpz.attackType.BREATH, tpz.damageType.WIND, MOBPARAM_IGNORE_SHADOWS)
     target:takeDamage(dmg, pet, tpz.attackType.BREATH, tpz.damageType.WIND)
     return dmg
 end

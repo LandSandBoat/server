@@ -7,10 +7,10 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if GetRegionOwner(tpz.region.FAUREGANDI) ~= tpz.nation.WINDURST then
         player:showText(npc, ID.text.SHEIAPOHRICHAMAHA_CLOSED_DIALOG)
     else
@@ -26,8 +26,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

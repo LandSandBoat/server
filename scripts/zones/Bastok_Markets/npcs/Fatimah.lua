@@ -9,10 +9,10 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local guildMember = isGuildMember(player, 6)
     local SkillLevel = player:getSkillLevel(tpz.skill.GOLDSMITHING)
     local Cost = getAdvImageSupportCost(player, tpz.skill.GOLDSMITHING)
@@ -28,10 +28,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     local Cost = getAdvImageSupportCost(player, tpz.skill.GOLDSMITHING)
 
     if csid == 302 and option == 1 then

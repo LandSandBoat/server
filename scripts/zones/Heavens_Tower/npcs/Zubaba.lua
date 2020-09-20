@@ -3,6 +3,7 @@
 --  NPC: Zubaba
 -- Involved in Mission 3-2
 -- !pos 15 -27 18 242
+-- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")
@@ -25,8 +26,10 @@ function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
     local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local starsMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
-    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and not nextMissionFinished then
+    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
+	   not nextMissionFinished and not starsMissionFinished then
         if missionStatus == 0 then
             player:startEvent(121)
         elseif missionStatus == 1 then
@@ -36,7 +39,7 @@ function onTrigger(player, npc)
         end
     elseif
         currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
-        (nextMissionFinished or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS))
+        (nextMissionFinished or starsMissionFinished)
     then
         if missionStatus == 0 then
             player:startEvent(257, 0, 16447) -- Rusty Dagger

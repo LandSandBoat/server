@@ -59,10 +59,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     -- THE REQUIEM
     if csid == 46 then
         player:setCharVar("TheRequiemCS", 0)

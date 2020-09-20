@@ -4,9 +4,9 @@
 -- Type: Guildworker's Union Representative
 -- !pos 117.970 1.017 -10.438 234
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs");
-require("scripts/globals/keyitems");
-require("scripts/globals/crafting");
+local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/crafting")
 
 local keyitems = {
     [0] = {
@@ -44,7 +44,7 @@ local keyitems = {
         rank = 9,
         cost = 20000
     }
-};
+}
 
 local items = {
     [0] = {
@@ -87,26 +87,26 @@ local items = {
         rank = 9,
         cost = 15000
     }
-};
+}
 
-function onTrade(player,npc,trade)
-    unionRepresentativeTrade(player, npc, trade, 207, 7);
-end;
+function onTrade(player, npc, trade)
+    unionRepresentativeTrade(player, npc, trade, 207, 7)
+end
 
-function onTrigger(player,npc)
-    unionRepresentativeTrigger(player, 7, 206, "guild_alchemy", keyitems);
-end;
+function onTrigger(player, npc)
+    unionRepresentativeTrigger(player, 7, 206, "guild_alchemy", keyitems)
+end
 
-function onEventUpdate(player,csid,option,target)
+function onEventUpdate(player, csid, option, target)
     if (csid == 206) then
-        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
     end
-end;
+end
 
-function onEventFinish(player,csid,option,target)
+function onEventFinish(player, csid, option, target)
     if (csid == 206) then
-        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items);
+        unionRepresentativeTriggerFinish(player, option, target, 7, "guild_alchemy", keyitems, items)
     elseif (csid == 207) then
-        player:messageSpecial(ID.text.GP_OBTAINED, option);
+        player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
-end;
+end

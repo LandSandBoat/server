@@ -117,9 +117,9 @@ tpz.msg.basic =
     SKILL_ENFEEB_2         = 142, -- <user> uses <skill>. <target> receives the effect of <status> and <status>.
     ABILITIES_RECHARGED    = 360, -- <user> uses <skill>. All of <target>'s abilities are recharged.
 
-    -- Job Ability messages (offset JA by 16)
+    -- Job Ability messages
     JA_RECOVERS_HP         = 102, -- The <player> uses .. <target> recovers .. HP.
-    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP. (offset JA by 16)
+    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     USES_JA                = 100, -- The <player> uses ..
     USES                   = 101, -- The <entity> uses ..
     USES_JA_TAKE_DAMAGE    = 317, -- The <player> uses .. <target> takes .. points of damage.
@@ -286,6 +286,10 @@ tpz.msg.basic =
     ROLL_ALREADY_ACTIVE    = 429, -- The same roll is already active on the <player>.
 
     EFFECT_ALREADY_ACTIVE  = 523, -- The same effect is already active on <player>.
+
+    -- PLD
+    COVER_SUCCESS          = 311, -- The <player> covers <target>.
+    COVER_FAILURE          = 312, -- The <player>'s attempt to cover has no effect.
 
     -- DNC
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.

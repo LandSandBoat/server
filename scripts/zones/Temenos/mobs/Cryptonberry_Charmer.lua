@@ -2,21 +2,15 @@
 -- Area: Temenos N T
 --  Mob: Cryptonberry Charmer
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 
-function onMobEngaged(mob,target)
-
-end;
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928816)==true and IsMobDead(16928817)==true ) then
-       GetNPCByID(16928768+38):setPos(-412,-78,426);
-    GetNPCByID(16928768+38):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+172):setPos(-415,-78,427);
-    GetNPCByID(16928768+172):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+214):setPos(-412,-78,422);
-    GetNPCByID(16928768+214):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928770+455):setStatus(tpz.status.NORMAL);
- end
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[6]+1):isDead() then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[6]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[6]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[6]+2):setStatus(tpz.status.NORMAL)
+        end
+    end
+end

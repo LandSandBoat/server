@@ -17,5 +17,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addExp(EXP_RATE * math.random(50,200))
+    target:addExp(EXP_RATE * math.random(50, 200))
 end

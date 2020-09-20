@@ -20,10 +20,10 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,14400,4533)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 4533)
 end
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:addMod(tpz.mod.DEX, -1)
     target:addMod(tpz.mod.VIT, 3)
     target:addMod(tpz.mod.HPHEAL, 5)

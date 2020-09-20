@@ -16,13 +16,13 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 --(based on above, going to assume it has regain...)
 
 function onMobSpawn(mob)
-    mob:setMod(tpz.mod.REGAIN,30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
-    mob:setMod(tpz.mod.ICERES,150)
+    mob:setMod(tpz.mod.REGAIN, 30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
+    mob:setMod(tpz.mod.ICERES, 150)
 end
 
 function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar("activeTime",os.time()+math.random(60*9,60*15))
+    GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar("activeTime", os.time()+math.random(60*9, 60*15))
 end

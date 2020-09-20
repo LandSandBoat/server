@@ -721,12 +721,13 @@ enum EFFECT
     EFFECT_DYNAMIS                  = 800,
     EFFECT_MEDITATE                 = 801, // Dummy effect for SAM Meditate JA
     EFFECT_ELEMENTALRES_DOWN        = 802, // Elemental resistance down
-    // EFFECT_PLACEHOLDER           = 803 // Description
-    // 803-1022
+    EFFECT_FULL_SPEED_AHEAD         = 803, // Used to track Full Speed Ahead quest minigame 
+    // EFFECT_PLACEHOLDER           = 804  // Description
+    // 804-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID    803  // 768 real + 32 custom
+#define MAX_EFFECTID    804  // 768 real + 32 custom
 
 /************************************************************************
 *                                                                       *
@@ -751,6 +752,7 @@ public:
     uint16  GetTier();
     uint32  GetFlag();
     uint16  GetType();
+    uint8   GetSlot();
 
     uint32  GetTickTime();
     uint32  GetDuration();
@@ -761,6 +763,7 @@ public:
     void    SetFlag(uint32 Flag);
     void    UnsetFlag(uint32 Flag);
     void    SetType(uint16 Type);
+    void    SetSlot(uint8 Slot);
     void    SetIcon(uint16 Icon);
     void    SetPower(uint16 Power);
     void    SetSubPower(uint16 subPower);
@@ -807,6 +810,7 @@ private:
     uint16      m_Tier {0};                 // Tier of the effect
     uint32      m_Flag {0};                 // флаг эффекта (условия его исчезновения)
     uint16      m_Type {0};                 // used to enforce only one
+    uint8       m_Slot {0};                 // used to determine slot order for songs/rolls
 
     uint32      m_TickTime {0};             // время повторения эффекта (млс)
     uint32      m_Duration {0};             // продолжительность эффекта (млс)

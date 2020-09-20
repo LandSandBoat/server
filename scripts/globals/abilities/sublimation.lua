@@ -11,11 +11,11 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
 
     local sublimationComplete = player:getStatusEffect(tpz.effect.SUBLIMATION_COMPLETE)
     local sublimationCharging = player:getStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED)
@@ -45,7 +45,7 @@ function onUseAbility(player,target,ability)
         local refresh = player:getStatusEffect(tpz.effect.REFRESH)
         if refresh == nil or refresh:getSubPower() < 3 then
             player:delStatusEffect(tpz.effect.REFRESH)
-            player:addStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED,0,3,7200)
+            player:addStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED, 0, 3, 7200)
         else
             ability:setMsg(tpz.msg.basic.JA_NO_EFFECT_2)
         end
