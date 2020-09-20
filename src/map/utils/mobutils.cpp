@@ -795,19 +795,27 @@ void SetupBattlefieldMob(CMobEntity* PMob)
     // Battlefield mobs don't drop gil
     PMob->setMobMod(MOBMOD_GIL_MAX, -1);
     PMob->setMobMod(MOBMOD_MUG_GIL, -1);
+    PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
 
     // never despawn
     PMob->SetDespawnTime(0s);
-    // do not roam around
-    PMob->m_roamFlags |= ROAMFLAG_EVENT;
-    PMob->m_maxRoamDistance = 0.5f;
-
-    if((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
+    // Limbus mobs
+    uint16 zoneID = PMob->getZone();
+    if (zoneID == 37 || zoneID == 38)
     {
-        // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
-        // force all mobs in same instance to superlink
-        // plus one in case id is zero
-        PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
+        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
+    }
+    else
+    {// do not roam around
+        PMob->m_roamFlags |= ROAMFLAG_EVENT;
+        PMob->m_maxRoamDistance = 0.5f;
+        if((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
+        {
+            // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
+            // force all mobs in same instance to superlink
+            // plus one in case id is zero
+            PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
+        }
     }
 
 }
@@ -910,7 +918,7 @@ void InitializeMob(CMobEntity* PMob, CZone* PZone)
 
     PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
     PMob->defaultMobMod(MOBMOD_LINK_RADIUS, 10);
-    PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE, 30);
+    PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE, 92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
     PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
     PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
 
@@ -1215,15 +1223,8 @@ CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* instance)
             PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 19);
             PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 20);
 
-            PMob->speed = (uint8)Sql_GetIntData(SqlHandle, 21);
-            PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 21);
-
-            /*if(PMob->speed != 0)
-            {
-            PMob->speed += map_config.speed_mod;
-            // whats this for?
-            PMob->speedsub += map_config.speed_mod;
-            }*/
+            PMob->speed = (uint8)Sql_GetIntData(SqlHandle, 21);    // Overwrites baseentity.cpp's defined speed
+            PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 21); // Overwrites baseentity.cpp's defined speedsub
 
             PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 22);
             PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 23);

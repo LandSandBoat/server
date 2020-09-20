@@ -8,12 +8,12 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     spell:setFlag(tpz.magic.spellFlag.IGNORE_SHADOWS)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     if
         target:isUndead() or
         target:hasStatusEffect(tpz.effect.MAGIC_SHIELD) or

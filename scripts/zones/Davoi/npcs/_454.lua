@@ -2,7 +2,7 @@
 -- Area: Davoi
 -- NPC:
 -----------------------------------
-require("scripts/globals/status");
+require("scripts/globals/status")
 -----------------------------------
 
 function onSpawn(npc)
@@ -17,4 +17,4 @@ function onSpawn(npc)
     }
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
-end;
+end

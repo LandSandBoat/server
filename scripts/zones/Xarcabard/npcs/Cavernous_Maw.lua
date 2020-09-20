@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
     if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
-        local HasStone = getTravStonesTotal(player)
+        local HasStone = tpz.abyssea.getTravStonesTotal(player)
         if
             HasStone >= 1 and
             player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and

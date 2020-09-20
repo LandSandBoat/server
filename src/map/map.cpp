@@ -965,6 +965,7 @@ int32 map_config_default()
     map_config.disable_gear_scaling = 0;
     map_config.all_jobs_widescan = 1;
     map_config.speed_mod = 0;
+    map_config.mount_speed_mod = 0;
     map_config.mob_speed_mod = 0;
     map_config.skillup_chance_multiplier = 2.5f;
     map_config.craft_chance_multiplier = 2.6f;
@@ -1128,10 +1129,6 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.exp_party_gap_penalties = (uint8)atof(w2);
         }
-        else if (strcmp(w1, "fov_allow_alliance") == 0)
-        {
-            map_config.fov_allow_alliance = (uint8)atof(w2);
-        }
         else if (strcmp(w1, "mob_tp_multiplier") == 0)
         {
             map_config.mob_tp_multiplier = (float)atof(w2);
@@ -1235,6 +1232,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "speed_mod") == 0)
         {
             map_config.speed_mod = atoi(w2);
+        }
+        else if (strcmp(w1, "mount_speed_mod") == 0)
+        {
+            map_config.mount_speed_mod = atoi(w2);
         }
         else if (strcmp(w1, "mob_speed_mod") == 0)
         {

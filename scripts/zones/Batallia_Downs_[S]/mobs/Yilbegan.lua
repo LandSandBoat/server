@@ -2,9 +2,9 @@
 -- Area: Batallia_Downs_[S]
 --  VNM: Yilbegan
 -----------------------------------
-require("scripts/globals/titles");
+require("scripts/globals/titles")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.YILBEGAN_HIDEFLAYER);
-end;
+    player:addTitle(tpz.title.YILBEGAN_HIDEFLAYER)
+end

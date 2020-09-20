@@ -14,5 +14,5 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.NEGATE_POISON,1,0,120)
+    target:addStatusEffect(tpz.effect.NEGATE_POISON, 1, 0, 120)
 end

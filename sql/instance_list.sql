@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: tpzdb
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version   5.6.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -95,7 +95,7 @@ INSERT INTO `instance_list` VALUES (43,'extermination',54,30,298.099,-3.943,135.
 -- INSERT INTO `instance_list` VALUES (47,'lost_and_found',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (48,'deserter',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (49,'desperately_seeking_cephalopods',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (50,'bellerophon\'s_bliss',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+-- INSERT INTO `instance_list` VALUES (50,'bellerophons_bliss',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (51,'nyzul_isle_investigation',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (52,'nyzul_isle_uncharted_survey',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (53,'the_black_coffin',54,30,0,-22,24,64,-1,-1,-1,-1);
@@ -104,7 +104,7 @@ INSERT INTO `instance_list` VALUES (54,'against_all_odds',54,30,-9.000,-22.000,1
 -- INSERT INTO `instance_list` VALUES (56,'royal_painter_escort',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (57,'targeting_the_captain',54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (58,'path_of_darkness',72,30,500,0,-572,192,143,143,143,143);
-INSERT INTO `instance_list` VALUES (59,'nashmeira\'s_plea',72,45,-444,-4,420,127,143,143,143,143);
+INSERT INTO `instance_list` VALUES (59,'nashmeiras_plea',72,45,-444,-4,420,127,143,143,143,143);
 -- INSERT INTO `instance_list` VALUES (60,'forging_a_new_myth',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (61,'waking_the_colossus',72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (62,'zhayolm_remnants',72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);

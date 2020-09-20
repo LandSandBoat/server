@@ -9,12 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
-    player:addStatusEffect(tpz.effect.SNAKE_EYE,(player:getMerit(tpz.merit.SNAKE_EYE) - 5),0,60)
+function onUseAbility(player, target, ability)
+    player:addStatusEffect(tpz.effect.SNAKE_EYE, (player:getMerit(tpz.merit.SNAKE_EYE) - 5), 0, 60)
 
     return tpz.effect.SNAKE_EYE
 end

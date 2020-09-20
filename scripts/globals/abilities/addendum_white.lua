@@ -18,14 +18,14 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
+function onAbilityCheck(player, target, ability)
     if player:hasStatusEffect(tpz.effect.ADDENDUM_WHITE) then
         return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
-    return 0,0
+    return 0, 0
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
     player:delStatusEffectSilent(tpz.effect.DARK_ARTS)
     player:delStatusEffectSilent(tpz.effect.ADDENDUM_BLACK)
     player:delStatusEffectSilent(tpz.effect.LIGHT_ARTS)
@@ -37,7 +37,7 @@ function onUseAbility(player,target,ability)
         regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end
 
-    player:addStatusEffectEx(tpz.effect.ADDENDUM_WHITE,tpz.effect.ADDENDUM_WHITE,effectbonus,0,7200,0,regenbonus,true)
+    player:addStatusEffectEx(tpz.effect.ADDENDUM_WHITE, tpz.effect.ADDENDUM_WHITE, effectbonus, 0, 7200, 0, regenbonus, true)
 
     return tpz.effect.ADDENDUM_WHITE
 end

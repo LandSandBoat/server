@@ -7,11 +7,11 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
 
     if (caster:getID() == target:getID()) then -- much of this should only run once per cast, otherwise it would only delete the debuffs from the caster.
 
@@ -33,11 +33,11 @@ function onSpellCast(caster,target,spell)
         end
 
         if (statusNum >= 0) then -- make sure this happens once instead of for every target
-            local delEff = math.random(0,statusNum) -- pick a random status to delete
-            caster:setLocalVar("esunaDelEff",has[delEff]) -- this can't be a local because it would only delete from the caster if it were.
+            local delEff = math.random(0, statusNum) -- pick a random status to delete
+            caster:setLocalVar("esunaDelEff", has[delEff]) -- this can't be a local because it would only delete from the caster if it were.
         else -- clear it if the caster has no eligible statuses, otherwise it will remove the status from others if it was previously removed.
-            caster:setLocalVar("esunaDelEff",0)
-            caster:setLocalVar("esunaDelEffMis",0)  -- again, this can't be a local because it would only delete from the caster if it were. For extra status deletion under Misery
+            caster:setLocalVar("esunaDelEff", 0)
+            caster:setLocalVar("esunaDelEffMis", 0)  -- again, this can't be a local because it would only delete from the caster if it were. For extra status deletion under Misery
         end
 
         if (statusNum >= 1 and caster:hasStatusEffect(tpz.effect.AFFLATUS_MISERY)) then -- Misery second status removal.
@@ -53,10 +53,10 @@ function onSpellCast(caster,target,spell)
                 end
             end
 
-            local delEffMis = math.random(0,statusNumMis) -- pick another random status to delete
-            caster:setLocalVar("esunaDelEffMis",has[delEffMis])
+            local delEffMis = math.random(0, statusNumMis) -- pick another random status to delete
+            caster:setLocalVar("esunaDelEffMis", has[delEffMis])
         else
-            caster:setLocalVar("esunaDelEffMis",0)
+            caster:setLocalVar("esunaDelEffMis", 0)
         end
     end
 

@@ -1,0 +1,12 @@
+﻿---
+BasedOnStyle: WebKit
+BreakBeforeBraces: Allman
+Cpp11BracedListStyle: 'true'
+Language: Cpp
+PointerAlignment: Left
+SortIncludes: 'true'
+SortUsingDeclarations: 'true'
+Standard: Cpp11
+UseTab: Never
+
+...

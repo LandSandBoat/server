@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/magic_maps")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
@@ -20,5 +20,5 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

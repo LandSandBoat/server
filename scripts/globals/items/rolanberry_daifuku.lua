@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 6339
 -- Item: rolanberry_daifuku
--- Food Effect: 30 Min, All Races 
+-- Food Effect: 30 Min, All Races
 -----------------------------------------
 -- HP +20
 -- DEX +2
@@ -31,7 +31,7 @@ function onItemCheck(target)
 end
 
 function onItemUse(target)
-    target:addStatusEffect(tpz.effect.FOOD,0,0,1800,6339)
+    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 6339)
 end
 
 function onEffectGain(target, effect)

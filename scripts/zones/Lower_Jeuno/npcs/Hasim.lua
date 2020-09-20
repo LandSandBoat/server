@@ -6,10 +6,10 @@
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local stock =
     {
         4612,  23400,    -- Scroll of Cure IV
@@ -78,12 +78,12 @@ function onTrigger(player,npc)
         6571, 139135,    -- Scroll of Phalanx II
     }
 
-    player:showText(npc,ID.text.HASIM_SHOP_DIALOG)
+    player:showText(npc, ID.text.HASIM_SHOP_DIALOG)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

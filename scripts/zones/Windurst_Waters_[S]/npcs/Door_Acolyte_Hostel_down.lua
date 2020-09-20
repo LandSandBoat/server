@@ -2,7 +2,7 @@
 -- Area: Windurst Waters (S)
 --  NPC: Door Acolyte Hostel
 -- Type: Quest NPC
--- !pos  124.000,-3.000,222.215 94
+-- !pos  124.000, -3.000, 222.215 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/keyitems")
@@ -11,10 +11,10 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if
         player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and
         player:hasKeyItem(tpz.ki.SMALL_STARFRUIT)
@@ -34,10 +34,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 129 then
         player:addItem(4144) -- hi-elixir
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4144)

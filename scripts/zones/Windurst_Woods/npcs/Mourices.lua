@@ -9,10 +9,10 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298,2}}) then -- Parana Shield x2
+    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298, 2}}) then -- Parana Shield x2
         if missionStatus == 5 then
             player:startEvent(455) -- before deliver shield to the yagudo
         elseif missionStatus == 6 then
@@ -21,7 +21,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_ABROAD then
@@ -55,25 +55,25 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 448 then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_TO_WINDURST)
-        player:setCharVar("MissionStatus",3)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST)
+        player:setCharVar("MissionStatus", 3)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif csid == 457 then
-        player:setCharVar("MissionStatus",7)
+        player:setCharVar("MissionStatus", 7)
         player:confirmTrade()
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
     elseif csid == 462 then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2)
-        player:setCharVar("MissionStatus",7)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2)
+        player:setCharVar("MissionStatus", 7)
     elseif csid == 467 then
-        player:addMission(SANDORIA,tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
-        player:setCharVar("MissionStatus",11)
+        player:setCharVar("MissionStatus", 11)
         npcUtil.giveKeyItem(player, tpz.ki.KINDRED_REPORT)
     end
 end

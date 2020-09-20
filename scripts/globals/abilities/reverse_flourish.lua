@@ -10,29 +10,21 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-
-    if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
-        return 0,0
-
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
-        return 0,0
-
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
-        return 0,0
-
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
-        return 0,0
-
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
-        return 0,0
-
+function onAbilityCheck(player, target, ability)
+    if
+        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1) or
+        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2) or
+        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3) or
+        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4) or
+        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)
+    then
+        return 0, 0
     else
-        return tpz.msg.basic.NO_FINISHINGMOVES,0
+        return tpz.msg.basic.NO_FINISHINGMOVES, 0
     end
 end
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player, target, ability)
 
     local TPGain = 0
     local STM = 0.5 + (0.1 * player:getMod(tpz.mod.REVERSE_FLOURISH_EFFECT))

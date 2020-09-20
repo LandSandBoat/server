@@ -12,7 +12,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if mob:isNM() and mob:getHP() / mob:getMaxHP() <= 0.25 and mob:getLocalVar("everyonesRancorUsed") == 0 then
         mob:setLocalVar("everyonesRancorUsed", 1)
         return 0

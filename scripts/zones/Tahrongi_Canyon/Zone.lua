@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/icanheararainbow")
+require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
@@ -30,7 +30,7 @@ function onZoneIn(player, prevZone)
         player:setPos(442.781, -1.641, -40.144, 160)
     end
 
-    if triggerLightCutscene(player) then -- Quest: I Can Hear A Rainbow
+    if quests.rainbow.onZoneIn(player) then
         cs = 35
     elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 37
@@ -48,7 +48,7 @@ end
 
 function onEventUpdate(player, csid, option)
     if csid == 35 then
-        lightCutsceneUpdate(player) -- Quest: I Can Hear A Rainbow
+        quests.rainbow.onEventUpdate(player)
     elseif csid == 37 then
         if player:getPreviousZone() == tpz.zone.EAST_SARUTABARUTA or player:getPreviousZone() == tpz.zone.BUBURIMU_PENINSULA then
             player:updateEvent(0, 0, 0, 0, 0, 7)
@@ -59,9 +59,6 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 35 then
-        lightCutsceneFinish(player) -- Quest: I Can Hear A Rainbow
-    end
 end
 
 local function isHabrokWeather(weather)

@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
@@ -31,7 +31,7 @@ function onMobWeaponSkill(target, mob, skill)
         effectid = tpz.effect.CHR_BOOST
     end
 
-    target:addStatusEffect(effectid,math.random(12,14),0,90)
+    target:addStatusEffect(effectid, math.random(12, 14), 0, 90)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     return effectid
 end

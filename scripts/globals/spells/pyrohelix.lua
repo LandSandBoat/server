@@ -8,11 +8,11 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 --------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     -- get helix acc/att merits
     local merit = caster:getMerit(tpz.merit.HELIX_MAGIC_ACC_ATT)
 
@@ -37,14 +37,14 @@ function onSpellCast(caster,target,spell)
     -- get the resisted damage.
     dmg = dmg*resist
     -- add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster,spell,target,dmg,params)
+    dmg = addBonuses(caster, spell, target, dmg, params)
     -- add in target adjustment
-    dmg = adjustForTarget(target,dmg,spell:getElement())
+    dmg = adjustForTarget(target, dmg, spell:getElement())
     -- helix MAB merits are actually a percentage increase
     dmg = dmg * ((100 + merit*2)/100)
     local dot = dmg
     -- add in final adjustments
-    dmg = finalMagicAdjustments(caster,target,spell,dmg)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
     -- calculate Damage over time
     dot = target:magicDmgTaken(dot)
 
@@ -53,7 +53,7 @@ function onSpellCast(caster,target,spell)
     duration = duration * (resist/2)
 
     if (dot > 0) then
-        target:addStatusEffect(tpz.effect.HELIX,dot,3,duration)
+        target:addStatusEffect(tpz.effect.HELIX, dot, 3, duration)
     end
 
     return dmg
