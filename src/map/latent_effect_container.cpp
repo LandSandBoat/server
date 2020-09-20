@@ -1117,7 +1117,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     case LATENT_VS_FAMILY:
         if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
         {
-            auto PMob = dynamic_cast<CMobEntity*>(PTarget);
+            CMobEntity* PMob = dynamic_cast<CMobEntity*>(PTarget);
             if (PMob)
             {
                 expression = PMob->m_Family == latentEffect.GetConditionsValue();
