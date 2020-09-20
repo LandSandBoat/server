@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <deque>
 #include <mutex>
 #include <bitset>
+#include <unordered_map>
 
 #include "battleentity.h"
 #include "petentity.h"
@@ -325,6 +326,8 @@ public:
 
     std::vector<GearSetMod_t> m_GearSetMods;		// The list of gear set mods currently applied to the character.
     std::vector<AuctionHistory_t> m_ah_history;		// AH history list (in the future consider using UContainer)
+
+    std::unordered_map<uint16, uint32> m_PacketRecievedTimestamps;
 
     void SetPlayTime(uint32 playTime);				// Set playtime
     uint32 GetPlayTime(bool needUpdate = true);		// Get playtime
