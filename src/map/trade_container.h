@@ -73,6 +73,7 @@ public:
     void    setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint32 quantity, CItem* item = nullptr);
     void    setSize(uint8 size);
     void    setExSize(uint8 size);                          // Set "extra" size information; purpose changes depending on container's goal
+    void    unreserveUnconfirmed();
 
     void    Clean();                                        // отчищаем контейнер
 

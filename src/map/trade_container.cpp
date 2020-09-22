@@ -21,9 +21,8 @@
 
 #include <string.h>
 
-#include "utils/itemutils.h"
 #include "trade_container.h"
-
+#include "utils/itemutils.h"
 
 CTradeContainer::CTradeContainer()
 {
@@ -80,7 +79,7 @@ uint32 CTradeContainer::getItemQuantity(uint16 itemID)
     uint32 quantity = 0;
     for (uint8 slotID = 0; slotID < m_PItem.size(); ++slotID)
     {
-        if( m_itemID[slotID] == itemID)
+        if (m_itemID[slotID] == itemID)
         {
             quantity += m_quantity[slotID];
         }
@@ -223,6 +222,28 @@ uint8 CTradeContainer::getCraftType()
 void CTradeContainer::setCraftType(uint8 craftType)
 {
     m_craftType = craftType;
+}
+
+void CTradeContainer::unreserveUnconfirmed()
+{
+    for (uint8 slotID = 0; slotID < CONTAINER_SIZE; ++slotID)
+    {
+        CItem* PItem = m_PItem[slotID];
+
+        if (PItem)
+        {
+            uint8 confirmedStatus = getConfirmedStatus(slotID);
+            if (confirmedStatus && confirmedStatus > 0)
+            {
+
+                PItem->setReserve(confirmedStatus);
+            }
+            else
+            {
+                PItem->setReserve(0);
+            }
+        }
+    }
 }
 
 void CTradeContainer::Clean()
