@@ -19,9 +19,9 @@ function onTrigger(player, npc)
         local timeout = player:getCharVar("envelopedInDarkness_timer")
         if player:hasKeyItem(tpz.ki.CRAWLER_BLOOD) and player:hasKeyItem(tpz.ki.OLD_BOOTS) then
             player:startEvent(4) -- Ask to take key items
-        elseif (timeout ~= 0 and timeout > os.time()) then
+        elseif timeout ~= 0 and timeout > os.time() then
             player:messageSpecial(ID.text.EQUIPMENT_NOT_PURIFIED) -- Stagger quest retrieval
-        elseif (timeout ~= 0 and timeout <= os.time()) then
+        elseif timeout ~= 0 and timeout <= os.time() then
             player:startEvent(5) -- Finish quest
         else
             player:messageSpecial(ID.text.SOMEONE_HAS_BEEN_DIGGING_HERE) -- Player misses key item(s)
@@ -36,12 +36,12 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 4 and option == 1) then
+    if csid == 4 and option == 1 then
         player:delKeyItem(tpz.ki.CRAWLER_BLOOD)
         player:delKeyItem(tpz.ki.OLD_BOOTS)
         player:setCharVar("envelopedInDarkness_timer", os.time() + math.random(10,40)) -- Set timer
         player:messageSpecial(ID.text.YOU_BURY_THE, tpz.ki.OLD_BOOTS, tpz.ki.CRAWLER_BLOOD)
-    elseif (csid == 5) then
+    elseif csid == 5 then
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
             item = 14093, -- Warlock's Boots
             fame = 40,
