@@ -7,6 +7,7 @@
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Crawlers_Nest/IDs")
 -----------------------------------
 
