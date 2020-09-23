@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
     if csid == 4 and option == 1 then
         player:delKeyItem(tpz.ki.CRAWLER_BLOOD)
         player:delKeyItem(tpz.ki.OLD_BOOTS)
-        player:setCharVar("envelopedInDarkness_timer", os.time() + math.random(10,40)) -- Set timer
+        player:setCharVar("envelopedInDarkness_timer", os.time() + 30) -- Set timer
         player:messageSpecial(ID.text.YOU_BURY_THE, tpz.ki.OLD_BOOTS, tpz.ki.CRAWLER_BLOOD)
     elseif csid == 5 then
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
