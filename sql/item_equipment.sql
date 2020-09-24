@@ -9015,8 +9015,8 @@ INSERT INTO `item_equipment` VALUES (19316,'fetter_lance',81,0,8192,209,0,0,1,0)
 INSERT INTO `item_equipment` VALUES (19317,'borian_spear',87,0,10305,204,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (19318,'borian_spear_+1',87,0,10305,204,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (19319,'mmm_fishing_rod',1,0,4194303,1,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (19320,'lu_sh._f._rod_+1',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (19321,'ebisu_f._rod_+1',1,0,4194303,0,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (19320,'lu_sh._f._rod_+1',1,0,4194303,32782,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (19321,'ebisu_f._rod_+1',1,0,4194303,32783,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (19323,'mmm_minnow',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (19324,'dried_squid',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (19325,'judge_fly',1,0,4194303,0,0,0,8,0);
