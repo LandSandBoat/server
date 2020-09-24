@@ -2855,9 +2855,9 @@ INSERT INTO `mob_groups` VALUES (46,524,61,'Brass_Borer',0,128,347,15000,0,83,83
 INSERT INTO `mob_groups` VALUES (47,738,61,'Claret',0,128,477,15000,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (48,118,61,'Anantaboga',0,128,78,30000,0,85,87,0);
 INSERT INTO `mob_groups` VALUES (49,2223,61,'Khromasoul_Bhurborlor',0,128,1438,39000,0,82,84,0);
-INSERT INTO `mob_groups` VALUES (50,4018,61,'Troll_Grenadier',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (51,4013,61,'Troll_Cuirasser',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (52,4009,61,'Troll_Artilleryman',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (50,6686,61,'Troll_Grenadier',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (51,6685,61,'Troll_Cuirasser',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (52,6684,61,'Troll_Artilleryman',0,128,0,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (53,4019,61,'Troll_Hammersmith',0,128,0,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (54,3465,61,'Sarameya',0,128,2162,50000,0,88,89,0);
 INSERT INTO `mob_groups` VALUES (55,5191,61,'Vanasarvik',0,128,0,0,25000,94,95,0);
