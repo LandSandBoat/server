@@ -6686,7 +6686,7 @@ INSERT INTO `mob_groups` VALUES (12,193,99,'Antlion_Fly',960,0,142,0,0,63,64,0);
 INSERT INTO `mob_groups` VALUES (13,1160,99,'Earth_Elemental',960,4,733,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (14,1341,99,'Fire_Elemental',960,4,831,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (15,1145,99,'Duu_Masa_the_Onecut',0,128,725,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (16,4502,99,'Zhuu_Buxu_the_Silent',0,32,3033,0,0,80,84,0);
+INSERT INTO `mob_groups` VALUES (16,6687,99,'Zhuu_Buxu_the_Silent',0,32,3033,0,0,80,84,0);
 INSERT INTO `mob_groups` VALUES (17,5347,99,'War_Lynx',960,0,413,0,0,71,73,0);
 INSERT INTO `mob_groups` VALUES (18,2062,99,'Immolatory_Pugil',960,0,1359,0,0,64,64,0);
 INSERT INTO `mob_groups` VALUES (19,17,99,'Aa_Xalmo_the_Savage',0,32,1,14500,0,80,84,0);
