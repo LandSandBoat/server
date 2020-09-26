@@ -9885,15 +9885,15 @@ INSERT INTO `mob_groups` VALUES (8095,3992,151,'Treasure_Chest',0,0,0,0,0,0,0,0)
 -- Altar_Room (Zone 152)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4408,152,'Yagudo_Avatar',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2,4454,152,'Yagudos_Elemental',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (3,4453,152,'Yagudos_Avatar',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (4,2309,152,'Laa_Yaku_the_Austere',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5,1145,152,'Duu_Masa_the_Onecut',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6,1320,152,'Fee_Jugu_the_Ramfist',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7,3175,152,'Poo_Yozo_the_Babbler',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8,2205,152,'Kee_Taw_the_Nightingale',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9,1762,152,'Goo_Pake_the_Bloodhound',0,0,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (1,4408,152,'Yagudo_Avatar',0,128,0,7000,7000,75,75,0);
+INSERT INTO `mob_groups` VALUES (2,4454,152,'Yagudos_Elemental',0,128,0,2500,1000,60,60,0);
+INSERT INTO `mob_groups` VALUES (3,4453,152,'Yagudos_Avatar',0,128,0,3000,1500,60,60,0);
+INSERT INTO `mob_groups` VALUES (4,2309,152,'Laa_Yaku_the_Austere',0,128,0,5000,2500,60,60,0);
+INSERT INTO `mob_groups` VALUES (5,1145,152,'Duu_Masa_the_Onecut',0,128,0,5000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (6,1320,152,'Fee_Jugu_the_Ramfist',0,128,0,5000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (7,3175,152,'Poo_Yozo_the_Babbler',0,128,0,5000,2500,60,60,0);
+INSERT INTO `mob_groups` VALUES (8,2205,152,'Kee_Taw_the_Nightingale',0,128,0,5000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (9,1762,152,'Goo_Pake_the_Bloodhound',0,128,0,5000,0,60,60,0);
 
 -- ------------------------------------------------------------
 -- The_Boyahda_Tree (Zone 153)

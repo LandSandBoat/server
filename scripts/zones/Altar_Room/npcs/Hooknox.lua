@@ -4,6 +4,8 @@
 -- Type: Standard NPC
 -- !pos -265.248 11.693 -102.547 152
 -----------------------------------
+function onTrade(player, npc, trade)
+end
 
 function onTrade(player, npc, trade)
 end
