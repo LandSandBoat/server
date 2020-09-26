@@ -1345,22 +1345,25 @@ void SmallPacket0x036(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-            if ((PItem == nullptr) || (PItem->isSubType(ITEM_LOCKED)) || (PItem->getQuantity() < Quantity))
+            if (PItem == nullptr || PItem->getQuantity() < Quantity)
             {
                 ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade invalid item [to NPC]! \n" CL_RESET, PChar->GetName());
-
-                // Leave the items locked so people can't use invalid trade attempts to unlock arbitrary inventory slots
                 return;
             }
-            else
+
+            if (PItem->getReserve() > 0)
             {
-                PChar->TradeContainer->setItem(slotID, PItem->getID(), invSlotID, Quantity, PItem);
-                PItem->setSubType(ITEM_LOCKED);
+                ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade a RESERVED item [to NPC]! \n" CL_RESET, PChar->GetName());
+                return;
             }
+
+            PItem->setReserve(Quantity);
+            PChar->TradeContainer->setItem(slotID, PItem->getID(), invSlotID, Quantity, PItem);
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
         luautils::OnTrade(PChar, PNpc);
+        PChar->TradeContainer->unreserveUnconfirmed();
     }
     return;
 }

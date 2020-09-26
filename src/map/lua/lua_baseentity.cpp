@@ -4077,7 +4077,7 @@ inline int32 CLuaBaseEntity::getFreeSlotsCount(lua_State *L)
 *  Notes   : Must use trade:confirmItem(slotID) first
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
+inline int32 CLuaBaseEntity::confirmTrade(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -4086,11 +4086,21 @@ inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
-        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF && PChar->TradeContainer->getConfirmedStatus(slotID))
+        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
         {
-            uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
-            auto quantity = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), PChar->TradeContainer->getConfirmedStatus(slotID));
-            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            CItem* PItem = PChar->TradeContainer->getItem(slotID);
+            if (PItem)
+            {
+                uint8 confirmedItems = PChar->TradeContainer->getConfirmedStatus(slotID);
+                auto quantity = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), confirmedItems);
+
+                PItem->setReserve(PItem->getReserve() - quantity);
+                if (confirmedItems > 0)
+                {
+                    uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
+            }
         }
     }
     PChar->TradeContainer->Clean();
@@ -4105,7 +4115,7 @@ inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
 *  Notes   :
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::tradeComplete(lua_State *L)
+inline int32 CLuaBaseEntity::tradeComplete(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -4118,8 +4128,12 @@ inline int32 CLuaBaseEntity::tradeComplete(lua_State *L)
         {
             uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
             int32 quantity = PChar->TradeContainer->getQuantity(slotID);
-
-            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            CItem* PItem = PChar->TradeContainer->getItem(slotID);
+            if (PItem)
+            {
+                PItem->setReserve(0);
+                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            }
         }
     }
     PChar->TradeContainer->Clean();
