@@ -12573,6 +12573,8 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
 
     bool gambit_error = false;
 
+    uint32 stackTop = lua_gettop(L);
+
     lua_pushvalue(L, 1); // Push main table onto stack
 
     lua_getfield(L, 1, "predicates"); // Acts as push
@@ -12645,6 +12647,8 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
     {
         ShowWarning("Invalid Gambit");
     }
+
+    lua_settop(L, stackTop);
 
     // ===
 
