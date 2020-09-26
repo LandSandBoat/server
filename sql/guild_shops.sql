@@ -676,7 +676,7 @@ INSERT INTO `guild_shops` VALUES (5272,16641,2870,13845,20,0,10);    -- brass_ax
 INSERT INTO `guild_shops` VALUES (5272,16769,2245,13221,20,0,10);    -- brass_zaghnal
 INSERT INTO `guild_shops` VALUES (5272,17043,1735,1839,20,0,10);     -- brass_hammer
 
--- Yabby Tanmikey / Celestina (Goldsmith Guild) Mhaura (S)
+-- Yabby Tanmikey (Goldsmith Guild) Mhaura (S)
 INSERT INTO `guild_shops` VALUES (528,640,9,20,255,48,100);
 INSERT INTO `guild_shops` VALUES (528,736,315,945,255,48,100);
 INSERT INTO `guild_shops` VALUES (528,769,1400,4200,165,33,65);
