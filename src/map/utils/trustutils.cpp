@@ -340,8 +340,8 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // TODO: HP/MP should take into account family, job, etc.
 
-    float growth = 1.06f;
-    float base   = 18.0f;
+    float growth = 1.04f;
+    float base   = 16.0f;
 
     PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
 
