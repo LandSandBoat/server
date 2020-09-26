@@ -655,6 +655,7 @@ void CLatentEffectContainer::CheckLatentsTargetChange()
         {
         case LATENT_SIGNET_BONUS:
         case LATENT_VS_ECOSYSTEM:
+        case LATENT_VS_FAMILY:
             return ProcessLatentEffect(latentEffect);
         default:
             break;
@@ -1120,6 +1121,16 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
         {
             expression = PTarget->m_EcoSystem == latentEffect.GetConditionsValue();
+        }
+        break;
+    case LATENT_VS_FAMILY:
+        if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
+        {
+            CMobEntity* PMob = dynamic_cast<CMobEntity*>(PTarget);
+            if (PMob)
+            {
+                expression = PMob->m_Family == latentEffect.GetConditionsValue();
+            }
         }
         break;
     default:

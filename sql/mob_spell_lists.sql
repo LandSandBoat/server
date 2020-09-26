@@ -1249,12 +1249,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,195,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,200,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,226,1,255); -- might not have access to poisonga 2
 INSERT INTO `mob_spell_lists` VALUES ('Deviator',113,274,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,100,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,101,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,102,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,103,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,104,1,255);
-INSERT INTO `mob_spell_lists` VALUES ('Provoker',114,105,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,254,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,231,1,255);
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Darkness_Named',115,245,1,255);
@@ -3914,6 +3908,16 @@ INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,201,75,255);-
 INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,274,75,255);-- sleepga_ii
 INSERT INTO `mob_spell_lists` VALUES ('EaldNarche (Apoc Nigh)',432,362,75,255);-- bindga
 
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,46,63,255);  -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,133,68,255); -- Shellra IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,172,70,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,200,44,255); -- Waterga II
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,201,65,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Bladmall',433,214,1,255);  -- Flood
+
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,51,68,255); -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,46,63,255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,4,41,255);  -- Cure IV
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

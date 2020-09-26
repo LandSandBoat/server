@@ -58,9 +58,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    look_t      look;		// внешний вид
-    string_t    name;		// имя
-    ECOSYSTEM   EcoSystem;	// эко-система
+    uint16      PetID;      // ID in pet_list.sql
+    look_t		look;		// внешний вид
+    string_t	name;		// имя
+    ECOSYSTEM	EcoSystem;	// эко-система
 
     uint8       minLevel;	// минимально-возможный  уровень
     uint8       maxLevel;	// максимально-возможный уровень
@@ -139,6 +140,7 @@ namespace petutils
 
         const char* Query =
             "SELECT\
+                pet_list.petid,\
                 pet_list.name,\
                 modelid,\
                 minLevel,\
@@ -176,44 +178,45 @@ namespace petutils
             {
                 Pet_t* Pet = new Pet_t();
 
-                Pet->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+                Pet->PetID = (uint16)Sql_GetIntData(SqlHandle, 0);
+                Pet->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
 
-                memcpy(&Pet->look, Sql_GetData(SqlHandle, 1), 20);
-                Pet->minLevel = (uint8)Sql_GetIntData(SqlHandle, 2);
-                Pet->maxLevel = (uint8)Sql_GetIntData(SqlHandle, 3);
-                Pet->time = Sql_GetUIntData(SqlHandle, 4);
-                Pet->size = Sql_GetUIntData(SqlHandle, 5);
-                Pet->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 6);
-                Pet->m_Family = (uint16)Sql_GetIntData(SqlHandle, 7);
-                Pet->mJob = (uint8)Sql_GetIntData(SqlHandle, 8);
-                Pet->m_Element = (uint8)Sql_GetIntData(SqlHandle, 9);
+                memcpy(&Pet->look, Sql_GetData(SqlHandle, 2), 20);
+                Pet->minLevel = (uint8)Sql_GetIntData(SqlHandle, 3);
+                Pet->maxLevel = (uint8)Sql_GetIntData(SqlHandle, 4);
+                Pet->time = Sql_GetUIntData(SqlHandle, 5);
+                Pet->size = Sql_GetUIntData(SqlHandle, 6);
+                Pet->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 7);
+                Pet->m_Family = (uint16)Sql_GetIntData(SqlHandle, 8);
+                Pet->mJob = (uint8)Sql_GetIntData(SqlHandle, 9);
+                Pet->m_Element = (uint8)Sql_GetIntData(SqlHandle, 10);
 
-                Pet->HPscale = Sql_GetFloatData(SqlHandle, 10);
-                Pet->MPscale = Sql_GetFloatData(SqlHandle, 11);
+                Pet->HPscale = Sql_GetFloatData(SqlHandle, 11);
+                Pet->MPscale = Sql_GetFloatData(SqlHandle, 12);
 
-                Pet->speed = (uint8)Sql_GetIntData(SqlHandle, 12);
+                Pet->speed = (uint8)Sql_GetIntData(SqlHandle, 13);
 
-                Pet->strRank = (uint8)Sql_GetIntData(SqlHandle, 13);
-                Pet->dexRank = (uint8)Sql_GetIntData(SqlHandle, 14);
-                Pet->vitRank = (uint8)Sql_GetIntData(SqlHandle, 15);
-                Pet->agiRank = (uint8)Sql_GetIntData(SqlHandle, 16);
-                Pet->intRank = (uint8)Sql_GetIntData(SqlHandle, 17);
-                Pet->mndRank = (uint8)Sql_GetIntData(SqlHandle, 18);
-                Pet->chrRank = (uint8)Sql_GetIntData(SqlHandle, 19);
-                Pet->defRank = (uint8)Sql_GetIntData(SqlHandle, 20);
-                Pet->attRank = (uint8)Sql_GetIntData(SqlHandle, 21);
-                Pet->accRank = (uint8)Sql_GetIntData(SqlHandle, 22);
-                Pet->evaRank = (uint8)Sql_GetIntData(SqlHandle, 23);
+                Pet->strRank = (uint8)Sql_GetIntData(SqlHandle, 14);
+                Pet->dexRank = (uint8)Sql_GetIntData(SqlHandle, 15);
+                Pet->vitRank = (uint8)Sql_GetIntData(SqlHandle, 16);
+                Pet->agiRank = (uint8)Sql_GetIntData(SqlHandle, 17);
+                Pet->intRank = (uint8)Sql_GetIntData(SqlHandle, 18);
+                Pet->mndRank = (uint8)Sql_GetIntData(SqlHandle, 19);
+                Pet->chrRank = (uint8)Sql_GetIntData(SqlHandle, 20);
+                Pet->defRank = (uint8)Sql_GetIntData(SqlHandle, 21);
+                Pet->attRank = (uint8)Sql_GetIntData(SqlHandle, 22);
+                Pet->accRank = (uint8)Sql_GetIntData(SqlHandle, 23);
+                Pet->evaRank = (uint8)Sql_GetIntData(SqlHandle, 24);
 
-                Pet->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 24);
+                Pet->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 25);
 
-                Pet->spellList = (uint8)Sql_GetIntData(SqlHandle, 25);
+                Pet->spellList = (uint8)Sql_GetIntData(SqlHandle, 26);
 
                 // resistances
-                Pet->slashres = (uint16)(Sql_GetFloatData(SqlHandle, 26) * 1000);
-                Pet->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 27) * 1000);
-                Pet->hthres = (uint16)(Sql_GetFloatData(SqlHandle, 28) * 1000);
-                Pet->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 29) * 1000);
+                Pet->slashres = (uint16)(Sql_GetFloatData(SqlHandle, 27) * 1000);
+                Pet->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 28) * 1000);
+                Pet->hthres = (uint16)(Sql_GetFloatData(SqlHandle, 29) * 1000);
+                Pet->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
 
                 Pet->firedef = 0;
                 Pet->icedef = 0;
@@ -224,18 +227,18 @@ namespace petutils
                 Pet->lightdef = 0;
                 Pet->darkdef = 0;
 
-                Pet->fireres = (uint16)((Sql_GetFloatData(SqlHandle, 30) - 1) * -100);
-                Pet->iceres = (uint16)((Sql_GetFloatData(SqlHandle, 31) - 1) * -100);
-                Pet->windres = (uint16)((Sql_GetFloatData(SqlHandle, 32) - 1) * -100);
-                Pet->earthres = (uint16)((Sql_GetFloatData(SqlHandle, 33) - 1) * -100);
-                Pet->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
-                Pet->waterres = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-                Pet->lightres = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-                Pet->darkres = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+                Pet->fireres = (uint16)((Sql_GetFloatData(SqlHandle, 31) - 1) * -100);
+                Pet->iceres = (uint16)((Sql_GetFloatData(SqlHandle, 32) - 1) * -100);
+                Pet->windres = (uint16)((Sql_GetFloatData(SqlHandle, 33) - 1) * -100);
+                Pet->earthres = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
+                Pet->thunderres = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
+                Pet->waterres = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
+                Pet->lightres = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
+                Pet->darkres = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
 
-                Pet->cmbDelay = (uint16)Sql_GetIntData(SqlHandle, 38);
-                Pet->name_prefix = (uint8)Sql_GetUIntData(SqlHandle, 39);
-                Pet->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 40);
+                Pet->cmbDelay = (uint16)Sql_GetIntData(SqlHandle, 39);
+                Pet->name_prefix = (uint8)Sql_GetUIntData(SqlHandle, 40);
+                Pet->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 41);
 
                 g_PPetList.push_back(Pet);
             }
@@ -1146,11 +1149,14 @@ namespace petutils
 
     void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
-        TPZ_DEBUG_BREAK_IF(PetID >= g_PPetList.size());
+        TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
+
+        Pet_t* PPetData = new Pet_t();
+
+        PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t) { return t->PetID == PetID; });
+
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
             return;
-
-        Pet_t* PPetData = g_PPetList.at(PetID);
 
         if (PMaster->objtype == TYPE_PC)
         {
@@ -1184,8 +1190,8 @@ namespace petutils
 
                     if (wyvernid != 0)
                     {
-                        g_PPetList.at(PetID)->name.clear();
-                        g_PPetList.at(PetID)->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+                        PPetData->name.clear();
+                        PPetData->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
                     }
                 }
             }
@@ -1210,8 +1216,8 @@ namespace petutils
 
                     if (adventuringfellowid != 0)
                     {
-                        g_PPetList.at(PetID)->name.clear();
-                        g_PPetList.at(PetID)->name.insert(0, Sql_GetData(SqlHandle, 0));
+                        PPetData->name.clear();
+                        PPetData->name.insert(0, Sql_GetData(SqlHandle, 0));
                     }
                 }
             }
@@ -1238,7 +1244,7 @@ namespace petutils
                         uint16 chocoboname1 = chocoboid & 0x0000FFFF;
                         uint16 chocoboname2 = chocoboid >>= 16;
 
-                        g_PPetList.at(PetID)->name.clear();
+                        PPetData->name.clear();
 
                         Query =
                             "SELECT\
@@ -1252,7 +1258,7 @@ namespace petutils
                             {
                                 if (chocoboname1 != 0 && chocoboname2 != 0)
                                 {
-                                    g_PPetList.at(PetID)->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+                                    PPetData->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
                                 }
                             }
                         }
@@ -1283,19 +1289,19 @@ namespace petutils
 
         if (petType != PETTYPE_AUTOMATON)
         {
-            PPet->look = g_PPetList.at(PetID)->look;
-            PPet->name = g_PPetList.at(PetID)->name;
+            PPet->look = PPetData->look;
+            PPet->name = PPetData->name;
         }
         else
         {
             PPet->look.size = MODEL_AUTOMATON;
         }
-        PPet->m_name_prefix = g_PPetList.at(PetID)->name_prefix;
-        PPet->m_Family = g_PPetList.at(PetID)->m_Family;
-        PPet->m_MobSkillList = g_PPetList.at(PetID)->m_MobSkillList;
-        PPet->SetMJob(g_PPetList.at(PetID)->mJob);
-        PPet->m_Element = g_PPetList.at(PetID)->m_Element;
-        PPet->m_PetID = PetID;
+        PPet->m_name_prefix = PPetData->name_prefix;
+        PPet->m_Family = PPetData->m_Family;
+        PPet->m_MobSkillList = PPetData->m_MobSkillList;
+        PPet->SetMJob(PPetData->mJob);
+        PPet->m_Element = PPetData->m_Element;
+        PPet->m_PetID = PPetData->PetID;
 
         if (PPet->getPetType() == PETTYPE_AVATAR)
         {
@@ -1307,7 +1313,7 @@ namespace petutils
             {
                 PPet->SetMLevel(PMaster->GetSLevel());
             }
-            else{ //should never happen
+            else { //should never happen
                 ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. \n", PMaster->GetName());
                 PPet->SetMLevel(1);
             }
@@ -1462,8 +1468,8 @@ namespace petutils
 
         FinalizePetStatistics(PMaster, PPet);
         PPet->status = STATUS_NORMAL;
-        PPet->m_ModelSize = g_PPetList.at(PetID)->size;
-        PPet->m_EcoSystem = g_PPetList.at(PetID)->EcoSystem;
+        PPet->m_ModelSize = PPetData->size;
+        PPet->m_EcoSystem = PPetData->EcoSystem;
 
         PMaster->PPet = PPet;
     }

@@ -26,7 +26,7 @@ CREATE TABLE `mob_family_system` (
   `familyid` smallint(4) unsigned NOT NULL,
   `family` tinytext,
   `systemid` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `system` tinytext,
+  `ecosystem` tinytext,
   `mobsize` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `speed` tinyint(3) unsigned NOT NULL DEFAULT '40',
   `HP` tinyint(3) unsigned NOT NULL DEFAULT '100',

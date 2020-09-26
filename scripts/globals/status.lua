@@ -1628,7 +1628,10 @@ tpz.latent =
     ZONE_HOME_NATION         = 54, -- in zone and citizen of nation (aketons)
     MP_OVER                  = 55, -- mp greater than # - PARAM: MP #
     WEAPON_DRAWN_MP_OVER     = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
-    ELEVEN_ROLL_ACTIVE       = 57  -- corsair roll of 11 active
+    ELEVEN_ROLL_ACTIVE       = 57, -- corsair roll of 11 active
+    IN_ASSAULT               = 58, -- is in an Instance battle in a TOAU zone
+    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
+    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
 }
 
 ------------------------------------
@@ -2276,7 +2279,8 @@ tpz.mobMod =
     MULTI_HIT           = 66, -- Mob will have as many swings as defined.
     NO_AGGRO            = 67, -- If set, mob cannot aggro until unset.
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
-    NO_LINK             = 69  -- If set, mob cannot link until unset.
+    NO_LINK             = 69, -- If set, mob cannot link until unset.
+    NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
 }
 
 ------------------------------------

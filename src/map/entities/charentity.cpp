@@ -1685,6 +1685,9 @@ void CCharEntity::Die(duration _duration)
     PAI->ClearStateStack();
     PAI->Internal_Die(_duration);
 
+    // If player allegiance is not reset on death they will auto-homepoint
+    allegiance = ALLEGIANCE_PLAYER;
+
     // reraise modifiers
     if (this->getMod(Mod::RERAISE_I) > 0)
         m_hasRaise = 1;
