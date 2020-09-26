@@ -3444,7 +3444,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3514); -- Hysteric Assault
 INSERT INTO `mob_skill_lists` VALUES ('Siren',1010,3515); -- Clarsach Call
 -- Trusts
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto',1011,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naji',1012,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naji',1012,33); -- Burning Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naji',1012,34); -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naji',1012,40); -- Vorpal Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kupipi',1013,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Excenmille',1014,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ayame',1015,0);
