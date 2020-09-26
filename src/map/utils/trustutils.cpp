@@ -340,47 +340,18 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // TODO: HP/MP should take into account family, job, etc.
 
-    float growth = 1.04f;
-    float base   = 16.0f;
+    uint8 jobHPGrade = grade::GetJobGrade(mJob, 0);
+    uint8 jobMPGrade = grade::GetJobGrade(mJob, 1);
 
-    PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
+    float hpGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
+    float mpGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
+    float base = 16.0f;
 
-    bool hasMp = false;
-    switch (mJob)
+    PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, hpGrowth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
+
+    if (jobMPGrade)
     {
-    case JOB_PLD:
-    case JOB_WHM:
-    case JOB_BLM:
-    case JOB_RDM:
-    case JOB_DRK:
-    case JOB_BLU:
-    case JOB_SCH:
-    case JOB_SMN:
-        hasMp = true;
-        break;
-    default:
-        break;
-    }
-
-    switch (sJob)
-    {
-    case JOB_PLD:
-    case JOB_WHM:
-    case JOB_BLM:
-    case JOB_RDM:
-    case JOB_DRK:
-    case JOB_BLU:
-    case JOB_SCH:
-    case JOB_SMN:
-        hasMp = true;
-        break;
-    default:
-        break;
-    }
-
-    if (hasMp)
-    {
-        PTrust->health.maxmp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+        PTrust->health.maxmp = static_cast<uint16>(base * pow(mLvl, mpGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
     }
 
     PTrust->health.tp = 0;
