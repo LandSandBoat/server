@@ -1054,7 +1054,8 @@ tpz.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE                            = 169,
+    MOVE                            = 169, -- % Movement Speed
+    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
     CURE_CAST_TIME                  = 519,
@@ -1564,9 +1565,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 972, -- stuff
     -- SPARE = 973, -- stuff
     -- SPARE = 974, -- stuff
+    -- SPARE = 975, -- stuff
 }
 
 tpz.latent =
