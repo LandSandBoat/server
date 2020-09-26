@@ -28,7 +28,7 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
         ai.r.JA, ai.s.SPECIFIC, tpz.ja.THIRD_EYE)
-        
+
     mob:addFullGambit({
         ['predicates'] =
         {
@@ -39,7 +39,7 @@ function onMobSpawn(mob)
                 ['target'] = ai.t.MASTER, ['condition'] = ai.c.TP_GTE, ['argument'] = 1000,
             },
         },
-        ['actions'] = 
+        ['actions'] =
         {
             {
                 ['reaction'] = ai.r.JA, ['select'] = ai.s.SPECIFIC, ['argument'] = tpz.ja.MEDITATE,
@@ -47,20 +47,7 @@ function onMobSpawn(mob)
         },
     })
 
-    mob:setTPSkills({
-        ['skills'] = {
-            { ai.r.WS, tpz.ws.TACHI_ENPI, 0 },
-            { ai.r.WS, tpz.ws.TACHI_HOBAKU, 0 },
-            { ai.r.WS, tpz.ws.TACHI_GOTEN, 0 },
-            { ai.r.WS, tpz.ws.TACHI_KAGERO, 0 },
-            { ai.r.WS, tpz.ws.TACHI_JINPU, 0 },
-            { ai.r.WS, tpz.ws.TACHI_YUKIKAZE, 0 },
-            { ai.r.WS, tpz.ws.TACHI_GEKKO, 60 },
-            { ai.r.WS, tpz.ws.TACHI_KASHA, 60 },
-        },
-        ['mode'] = ai.tp.CLOSER,
-        ['skill_select'] = ai.s.HIGHEST,
-    })
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
 end
 
 function onMobDespawn(mob)

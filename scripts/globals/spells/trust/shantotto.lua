@@ -33,7 +33,7 @@ function onMobSpawn(mob)
                 ['target'] = ai.t.TARGET, ['condition'] = ai.c.MB_AVAILABLE, ['argument'] = 0,
             }
         },
-        ['actions'] = 
+        ['actions'] =
         {
             {
                 ['reaction'] = ai.r.MA, ['select'] = ai.s.HIGHEST, ['argument'] = tpz.magic.spellFamily.NONE,
