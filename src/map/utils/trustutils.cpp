@@ -534,7 +534,11 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
         // Only get access to skills that produce Lv3 SCs after Lv60
         bool canFormLv3Skillchain = skill.primary >= SC_GRAVITATION || skill.secondary >= SC_GRAVITATION || skill.tertiary >= SC_GRAVITATION;
-        if (!canFormLv3Skillchain || PTrust->GetMLevel() >= 60)
+
+        // Special case for Zeid II and others who only have Lv3+ skills
+        bool onlyHasLc3Skillchains = canFormLv3Skillchain && controller->m_GambitsContainer->tp_skills.empty();
+
+        if (!canFormLv3Skillchain || PTrust->GetMLevel() >= 60 || onlyHasLc3Skillchains)
         {
             controller->m_GambitsContainer->tp_skills.emplace_back(skill);
         }
