@@ -2348,15 +2348,18 @@ inline int32 CLuaBaseEntity::sendGuild(lua_State* L)
     TPZ_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    // uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
+    /*
+     * No more guild holidays since 2014
     if (VanadielDay == holiday)
     {
         status = GUILD_HOLYDAY;
     }
-    else if ((VanadielHour < open) || (VanadielHour >= close))
+    */
+    if ((VanadielHour < open) || (VanadielHour >= close))
     {
         status = GUILD_CLOSE;
     }
@@ -3887,7 +3890,9 @@ inline int32 CLuaBaseEntity::createShop(lua_State *L)
 /************************************************************************
 *  Function: addShopItem()
 *  Purpose : Adds an item and established price to an existing shop
-*  Example : addShopItem(512,8000)
+*          : Optionally accepts a GuildID + Guild Rank requirement
+*  Example : addShopItem(512, 8000)                                                   --Regular item
+*          : addShopItem(512, 8000, tpz.skill.CLOTHCRAFT, tpz.craftRank.JOURNEYMAN)   --Guild-rank locked item
 *  Notes   : Use with createShop() - 16 Max Items in Shop
 ************************************************************************/
 
@@ -3896,11 +3901,11 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    uint16 itemID = (uint16)lua_tonumber(L, -2);
-    uint32 price = (uint32)lua_tonumber(L, -1);
+    uint16 itemID = (uint16)lua_tonumber(L, 1);
+    uint32 price = (uint32)lua_tonumber(L, 2);
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint8 slotID = PChar->Container->getItemsCount();
@@ -3911,6 +3916,14 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     // so track the shop's number of items separately from the container's size.
     PChar->Container->setExSize(PChar->Container->getExSize() + 1);
 
+    if(lua_isnumber(L, 3) && lua_isnumber(L, 4))
+    {
+        uint8 guildID = (uint8)lua_tonumber(L, 3);
+        uint16 guildRank = (uint16)lua_tonumber(L, 4);
+
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildID(slotID, guildID);
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildRank(slotID, guildRank);
+    }
     return 0;
 }
 

@@ -703,9 +703,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     case 0x09: // jobability
     {
         uint16 JobAbilityID = data.ref<uint16>(0x0C);
-        //if ((JobAbilityID < 496 && !charutils::hasAbility(PChar, JobAbilityID - 16)) || JobAbilityID >= 496 && !charutils::hasPetAbility(PChar, JobAbilityID - 512))
-        //    return;
-        PChar->PAI->Ability(TargID, JobAbilityID - 16);
+        PChar->PAI->Ability(TargID, JobAbilityID);
     }
     break;
     case 0x0B: // homepoint
@@ -2712,9 +2710,10 @@ void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x058(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    // uint16 skillID = data.ref<uint16>(0x04);
-    // uint16 skillLevel = data.ref<uint16>(0x06);
-    //PChar->pushPacket(new CSynthSuggestionPacket(recipeID));
+    uint16 skillID    = data.ref<uint16>(0x04);
+    uint16 skillLevel = data.ref<uint16>(0x06);
+
+    PChar->pushPacket(new CSynthSuggestionPacket(skillID, skillLevel));
 }
 
 /************************************************************************
