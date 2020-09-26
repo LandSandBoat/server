@@ -967,13 +967,12 @@ int32 map_config_default()
     map_config.speed_mod = 0;
     map_config.mount_speed_mod = 0;
     map_config.mob_speed_mod = 0;
-    map_config.skillup_chance_multiplier = 2.5f;
-    map_config.craft_chance_multiplier = 2.6f;
+    map_config.skillup_chance_multiplier = 1.0f;
+    map_config.craft_chance_multiplier = 1.0f;
     map_config.skillup_amount_multiplier = 1;
     map_config.craft_amount_multiplier = 1;
-    map_config.craft_day_matters = 1;
-    map_config.craft_moonphase_matters = 0;
-    map_config.craft_direction_matters = 0;
+    map_config.craft_common_cap = 700;
+    map_config.craft_specialization_points = 400;
     map_config.mob_tp_multiplier = 1.0f;
     map_config.player_tp_multiplier = 1.0f;
     map_config.nm_hp_multiplier = 1.0f;
@@ -1257,17 +1256,13 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.craft_amount_multiplier = (float)atof(w2);
         }
-        else if (strcmp(w1, "craft_day_matters") == 0)
+        else if (strcmp(w1, "craft_common_cap") == 0)
         {
-            map_config.craft_day_matters = atof(w2);
+            map_config.craft_common_cap = atoi(w2);
         }
-        else if (strcmp(w1, "craft_moonphase_matters") == 0)
+        else if (strcmp(w1, "craft_specialization_points") == 0)
         {
-            map_config.craft_moonphase_matters = atof(w2);
-        }
-        else if (strcmp(w1, "craft_direction_matters") == 0)
-        {
-            map_config.craft_direction_matters = atof(w2);
+            map_config.craft_specialization_points = atoi(w2);
         }
         else if (strcmp(w1, "mysql_host") == 0)
         {
