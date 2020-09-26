@@ -40,13 +40,7 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.LAST_RESORT)
 
-    mob:setTPSkills({
-        ['skills'] = {
-            { ai.r.WS, tpz.ws.GROUND_STRIKE, 0 },
-        },
-        ['mode'] = ai.tp.CLOSER,
-        ['skill_select'] = ai.s.RANDOM,
-    })
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.RANDOM)
 end
 
 function onMobDespawn(mob)

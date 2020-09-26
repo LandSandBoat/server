@@ -598,7 +598,7 @@ public:
     int32 trustPartyMessage(lua_State*);
     int32 addSimpleGambit(lua_State*);
     int32 addFullGambit(lua_State*);
-    int32 setTPSkills(lua_State*);
+    int32 setTrustTPSkillSettings(lua_State*);
 
     int32 isJugPet(lua_State*);              // If the entity has a pet, test if it is a jug pet.
     int32 hasValidJugPetItem(lua_State*);

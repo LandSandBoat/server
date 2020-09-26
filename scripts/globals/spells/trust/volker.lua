@@ -26,17 +26,6 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.PROVOKE)
-
-    mob:setTPSkills({
-        ['skills'] = {
-            { ai.r.WS, tpz.ws.RED_LOTUS_BLADE, 0 },
-            { ai.r.WS, tpz.ws.SPIRIT_WITHIN, 0 },
-            { ai.r.WS, tpz.ws.VORPAL_BLADE, 60 },
-            { ai.r.WS, tpz.ws.SAVAGE_BLADE, 60 },
-        },
-        ['mode'] = ai.tp.ASAP,
-        ['skill_select'] = ai.s.RANDOM,
-    })
 end
 
 function onMobDespawn(mob)

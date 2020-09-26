@@ -151,7 +151,6 @@ struct TrustSkill_t
 {
     G_REACTION skill_type;
     uint32 skill_id;
-    uint32 min_level;
     uint8 primary;
     uint8 secondary;
     uint8 tertiary;

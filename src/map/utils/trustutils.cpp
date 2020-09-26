@@ -19,6 +19,7 @@
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/trust_controller.h"
+#include "../ai/helpers/gambits_container.h"
 #include "../entities/mobentity.h"
 #include "../entities/trustentity.h"
 #include "../items/item_weapon.h"
@@ -26,7 +27,9 @@
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
 #include "../packets/trust_sync.h"
+#include "../mobskill.h"
 #include "../status_effect_container.h"
+#include "../weapon_skill.h"
 #include "../zone_instance.h"
 
 struct TrustSpell_ID
@@ -213,7 +216,7 @@ void BuildTrust(uint32 TrustID)
             trust->pierceres = (uint16)(Sql_GetFloatData(SqlHandle, 31) * 1000);
             trust->hthres    = (uint16)(Sql_GetFloatData(SqlHandle, 32) * 1000);
             trust->impactres = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
-        
+
             trust->firedef    = 0;
             trust->icedef     = 0;
             trust->winddef    = 0;
@@ -252,7 +255,7 @@ void SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
     CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
     PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
     PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
-    
+
     if (PMaster->PBattlefield)
     {
         PTrust->PBattlefield = PMaster->PBattlefield;
@@ -337,8 +340,8 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // TODO: HP/MP should take into account family, job, etc.
 
-    float growth = 1.06f;
-    float base   = 18.0f;
+    float growth = 1.04f;
+    float base   = 16.0f;
 
     PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, growth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
 
@@ -480,5 +483,65 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     battleutils::AddTraits(PTrust, traits::GetTraits(sJob), sLvl);
 
     mobutils::SetupJob(PTrust);
+
+    // Skills
+    using namespace gambits;
+    auto controller = static_cast<CTrustController*>(PTrust->PAI->GetController());
+
+    // Default TP selectors
+    controller->m_GambitsContainer->tp_trigger = G_TP_TRIGGER::ASAP;
+    controller->m_GambitsContainer->tp_select = G_SELECT::RANDOM;
+
+    auto skillList = battleutils::GetMobSkillList(PTrust->m_MobSkillList);
+    for (uint16 skill_id : skillList)
+    {
+        TrustSkill_t skill;
+        if (skill_id <= 240) // Player WSs
+        {
+            CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(skill_id);
+            if (!PWeaponSkill)
+            {
+                ShowWarning("LoadTrustStatsAndSkills: Error loading WeaponSkill id %d for trust %s\n", skill_id, PTrust->name);
+                break;
+            }
+
+            skill = TrustSkill_t {
+                G_REACTION::WS,
+                skill_id,
+                PWeaponSkill->getPrimarySkillchain(),
+                PWeaponSkill->getSecondarySkillchain(),
+                PWeaponSkill->getTertiarySkillchain(),
+            };
+        }
+        else // MobSkills
+        {
+            CMobSkill* PMobSkill = battleutils::GetMobSkill(skill_id);
+            if (!PMobSkill)
+            {
+                ShowWarning("LoadTrustStatsAndSkills: Error loading MobSkill id %d for trust %s\n", skill_id, PTrust->name);
+                break;
+            }
+            skill = {
+                G_REACTION::MS,
+                skill_id,
+                skill.primary = PMobSkill->getPrimarySkillchain(),
+                skill.secondary = PMobSkill->getSecondarySkillchain(),
+                skill.tertiary = PMobSkill->getTertiarySkillchain(),
+            };
+
+            controller->m_GambitsContainer->tp_skills.emplace_back(skill);
+        }
+
+        // Only get access to skills that produce Lv3 SCs after Lv60
+        bool canFormLv3Skillchain = skill.primary >= SC_GRAVITATION || skill.secondary >= SC_GRAVITATION || skill.tertiary >= SC_GRAVITATION;
+
+        // Special case for Zeid II and others who only have Lv3+ skills
+        bool onlyHasLc3Skillchains = canFormLv3Skillchain && controller->m_GambitsContainer->tp_skills.empty();
+
+        if (!canFormLv3Skillchain || PTrust->GetMLevel() >= 60 || onlyHasLc3Skillchains)
+        {
+            controller->m_GambitsContainer->tp_skills.emplace_back(skill);
+        }
+    }
 }
 }; // namespace trustutils

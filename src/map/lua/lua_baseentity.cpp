@@ -9212,7 +9212,7 @@ inline int32 CLuaBaseEntity::getLeaderID(lua_State* L)
 *  Function: getPartyLastMemberJoinedTime()
 *  Purpose : Get the epoch time point in seconds that the last PC joined the party (if any)
 *  Example : seconds_since_last_member_joined = os.time() - player:getPartyLastMemberJoinedTime()
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 int32 CLuaBaseEntity::getPartyLastMemberJoinedTime(lua_State* L)
@@ -12573,6 +12573,8 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
 
     bool gambit_error = false;
 
+    uint32 stackTop = lua_gettop(L);
+
     lua_pushvalue(L, 1); // Push main table onto stack
 
     lua_getfield(L, 1, "predicates"); // Acts as push
@@ -12646,6 +12648,8 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
         ShowWarning("Invalid Gambit");
     }
 
+    lua_settop(L, stackTop);
+
     // ===
 
     auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
@@ -12657,114 +12661,25 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
 }
 
 /************************************************************************
-*  Function: setTPSkills()
+*  Function: setTrustTPSkillSettings(trigger, select)
 *  Purpose :
-*  Example : mob:setTPSkills(...)
+*  Example : mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
 *  Notes   :
 ************************************************************************/
 
-int32 CLuaBaseEntity::setTPSkills(lua_State* L)
+int32 CLuaBaseEntity::setTrustTPSkillSettings(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_istable(L, 1));
-
-    auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
-    auto controller = static_cast<CTrustController*>(trust->PAI->GetController());
-    auto mLvl = trust->GetMLevel();
+    TPZ_DEBUG_BREAK_IF(!lua_isnumber(L, 1) || !lua_isnumber(L, 2));
 
     using namespace gambits;
 
-    // TODO: This is all garbage and arcane, can be done better!
+    auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    std::vector<uint32> skills_data;
-
-    // skills
-    lua_getfield(L, 1, "skills");
-    if (lua_istable(L, -1))
-    {
-        auto table = lua_gettop(L);
-        lua_pushnil(L);
-        while (lua_next(L, table) != 0)
-        {
-            auto sub_table = lua_gettop(L);
-            lua_pushnil(L);
-            while (lua_next(L, sub_table) != 0)
-            {
-                auto value = static_cast<uint32>(lua_tonumber(L, -1));
-                skills_data.emplace_back(value);
-                lua_pop(L, 1);
-            }
-            lua_pop(L, 1);
-        }
-    }
-    else
-    {
-        // No skills, fatal!
-    }
-    lua_pop(L, 1);
-
-    // Handle skills_data
-    for (size_t i = 0; i < skills_data.size(); i += 3)
-    {
-        auto skill_type = skills_data[i];
-        auto skill_id = skills_data[i + 1];
-        auto min_level = skills_data[i + 2];
-
-        TrustSkill_t skill{ static_cast<G_REACTION>(skill_type), skill_id, min_level };
-        if (skill.skill_type == G_REACTION::WS)
-        {
-            CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(skill_id);
-            if (!PWeaponSkill)
-            {
-                ShowWarning("CLuaBaseEntity::setTPSkills: Error loading WeaponSkill id %d for trust %s\n", skill_id, trust->name);
-                break;
-            }
-            skill.primary = PWeaponSkill->getPrimarySkillchain();
-            skill.secondary = PWeaponSkill->getSecondarySkillchain();
-            skill.tertiary = PWeaponSkill->getTertiarySkillchain();
-        }
-        else // MS
-        {
-            CMobSkill* PMobSkill = battleutils::GetMobSkill(skill_id);
-            if (!PMobSkill)
-            {
-                ShowWarning("CLuaBaseEntity::setTPSkills: Error loading MobSkill id %d for trust %s\n", skill_id, trust->name);
-                break;
-            }
-            skill.primary = PMobSkill->getPrimarySkillchain();
-            skill.secondary = PMobSkill->getSecondarySkillchain();
-            skill.tertiary = PMobSkill->getTertiarySkillchain();
-        }
-        
-        if (mLvl >= min_level)
-        {
-            controller->m_GambitsContainer->tp_skills.emplace_back(skill);
-        }
-     }
-
-    // mode
-    uint32 mode = 0;
-    lua_getfield(L, 1, "mode");
-    if (lua_isnumber(L, -1))
-    {
-        mode = static_cast<uint32>(lua_tonumber(L, -1));
-    }
-    lua_pop(L, 1);
-
-    // skill_select
-    uint32 skill_select = 0;
-    lua_getfield(L, 1, "skill_select");
-    if (lua_isnumber(L, -1))
-    {
-        skill_select = static_cast<uint32>(lua_tonumber(L, -1));
-    }
-    lua_pop(L, 1);
-
-    lua_pop(L, 1); // Init state
-
-    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(mode);
-    controller->m_GambitsContainer->tp_select = static_cast<G_SELECT>(skill_select);
+    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(lua_tonumber(L, 1));
+    controller->m_GambitsContainer->tp_select = static_cast<G_SELECT>(lua_tonumber(L, 2));
 
     return 0;
 }
@@ -15427,8 +15342,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,trustPartyMessage),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSimpleGambit),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addFullGambit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTPSkills),
-  
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTrustTPSkillSettings),
+
     // Mob Entity-Specific
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSystem),
