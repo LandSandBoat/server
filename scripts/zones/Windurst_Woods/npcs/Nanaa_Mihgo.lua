@@ -86,6 +86,16 @@ function onTrigger(player, npc)
             player:startEvent(170)
         end
 
+        -- MIHGO'S AMIGO
+    elseif mihgosAmigo == QUEST_AVAILABLE then
+        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
+            player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
+        else
+            player:startEvent(80) -- Start Quest "Mihgo's Amigo"
+        end
+    elseif mihgosAmigo == QUEST_ACCEPTED then
+        player:startEvent(82)
+
         -- TRUST
     elseif player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
         local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
@@ -145,16 +155,6 @@ function onTrigger(player, npc)
         player:startEvent(95) -- not sold reminder
     elseif rockRacketeer == QUEST_ACCEPTED then
         player:startEvent(94) -- quest reminder
-
-        -- MIHGO'S AMIGO
-    elseif mihgosAmigo == QUEST_AVAILABLE then
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
-            player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
-        else
-            player:startEvent(80) -- Start Quest "Mihgo's Amigo"
-        end
-    elseif mihgosAmigo == QUEST_ACCEPTED then
-        player:startEvent(82)
 
         -- STANDARD DIALOG
     elseif rockRacketeer == QUEST_COMPLETED then
