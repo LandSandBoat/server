@@ -343,11 +343,23 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     uint8 jobHPGrade = grade::GetJobGrade(mJob, 0);
     uint8 jobMPGrade = grade::GetJobGrade(mJob, 1);
 
+    uint8 sjobHPGrade = grade::GetJobGrade(sJob, 0);
+    uint8 sjobMPGrade = grade::GetJobGrade(sJob, 1);
+
     float hpGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
     float mpGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
-    float base = 16.0f;
+
+    float subHPGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
+    float subMPGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
+
+    float base = 15.0f;
 
     PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, hpGrowth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
+
+    if (sjobMPGrade)
+    {
+        PTrust->health.maxmp = static_cast<uint16>(base * pow(sLvl, subMPGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+    }
 
     if (jobMPGrade)
     {
