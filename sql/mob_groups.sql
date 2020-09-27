@@ -8562,7 +8562,7 @@ INSERT INTO `mob_groups` VALUES (49,2104,132,'Irrlicht',0,0,1379,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (50,3080,132,'Ovni',0,0,1970,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (51,3798,132,'Sturdy_Pyxis',0,0,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (52,76,132,'Akash',0,0,9,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (53,1548,132,'Gigadaphnia',0,0,978,0,999,79,80,0);
+INSERT INTO `mob_groups` VALUES (53,6708,132,'Gigadaphnia',0,0,978,0,999,79,80,0);
 INSERT INTO `mob_groups` VALUES (54,6707,132,'Veld_Clionid',0,0,2570,0,999,79,80,0);
 INSERT INTO `mob_groups` VALUES (6952,540,132,'Brooder',0,0,364,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6958,862,132,'Curilla',0,0,0,0,0,0,0,0);
