@@ -93,6 +93,7 @@ void login_versionscreen(int32 flag);
 
 void login_config_read(const char *key, const char* value);
 void login_config_default();
+void login_config_read_from_env();
 
 void version_info_read(const char *key, const char* value);
 void version_info_default();
