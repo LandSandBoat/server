@@ -965,11 +965,26 @@ function EventUpdateBCNM(player, csid, option, extras)
                 name, clearTime, partySize = battlefield:getRecord()
                 initiatorId, initiatorName = battlefield:getInitiator()
             end
+
             -- register party members
             if initiatorId == player:getID() then
                 local effect = player:getStatusEffect(tpz.effect.BATTLEFIELD)
+                local zone = player:getZoneID()
+                local item = getItemById(player, effect:getPower())
+
+                if item ~= 0 then
+                    -- remove limbus chips
+                    if zone == 37 or zone == 38 then
+                        player:tradeComplete()
+
+                    -- set other traded item to worn
+                    elseif player:hasItem(item) and player:getName() == initiatorName then
+                        player:createWornItem(item)
+                    end
+                end
+
                 for _, member in pairs(player:getAlliance()) do
-                    if member:getZoneID() == player:getZoneID() and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
+                    if member:getZoneID() == zone and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
                         member:addStatusEffect(effect)
                         member:registerBattlefield(id, area, player:getID())
                     end
@@ -1000,25 +1015,7 @@ function EventFinishBCNM(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
     if player:hasStatusEffect(tpz.effect.BATTLEFIELD) then
-        if csid == 32000 and option ~= 0 then
-            local zone = player:getZoneID()
-            local stat = player:getStatusEffect(tpz.effect.BATTLEFIELD)
-            local bfid = stat:getPower()
-            local item = getItemById(player, bfid)
-            local initiatorId, initiatorName = player:getBattlefield():getInitiator()
-
-            if item ~= 0 then
-                -- remove limbus chips
-                if zone == 37 or zone == 38 then
-                    player:tradeComplete()
-
-                -- set other traded item to worn
-                elseif player:hasItem(item) and player:getName() == initiatorName then
-                    player:createWornItem(item)
-                end
-            end
-
-        elseif csid == 32003 and option == 4 then
+        if csid == 32003 and option == 4 then
             if player:getBattlefield() then
                 player:leaveBattlefield(1)
             end
