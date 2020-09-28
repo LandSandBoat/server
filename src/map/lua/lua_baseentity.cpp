@@ -4535,7 +4535,12 @@ inline int32 CLuaBaseEntity::storeWithPorterMoogle(lua_State *L)
                 // TODO: Items need to be checked for an in-progress magian trial before storing.
                 //auto item = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
                 //if (item->isType(ITEM_EQUIPMENT) && ((CItemEquipment*)item)->getTrialNumber() != 0)
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
+                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
+                if (PItem)
+                {
+                    PItem->setReserve(0);
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
+                }
                 //else
                 //{
                 //lua_pushinteger(L, 2);
