@@ -649,7 +649,7 @@ INSERT INTO `abilities` VALUES (779,'spider_web',9,25,257,255,102,0,0,0,2000,0,6
 -- INSERT INTO `abilities` VALUES (965,'chinook',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (966,'bitter_elegy',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (968,'tornado_ii',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (969,'wind_s_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (969,'winds_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 
 -- Dump completed on 2017-01-31 10:57:44 updated on 2020-06-30 14:22:34
 -- 
