@@ -1,11 +1,10 @@
 # Try to find ZMQ
-# Once done this will define
 # ZMQ_FOUND - System has ZMQ
+# ZMQ_LIBRARY - The libraries needed to use ZMQ
 # ZMQ_INCLUDE_DIR - The ZMQ include directories
-# ZMQ_LIBRARIES - The libraries needed to use ZMQ
 
-set(ZMQ_FOUND TRUE)
-set(ZMQ_INCLUDE_DIR "")
-set(ZMQ_LIBRARIES "")
+find_library(ZMQ_LIBRARY NAMES zmq)
+find_path(ZMQ_INCLUDE_DIR zmq.h)
 
-mark_as_advanced(ZMQ_LIBRARIES)
+include (FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ZMQ DEFAULT_MSG ZMQ_LIBRARY ZMQ_INCLUDE_DIR)

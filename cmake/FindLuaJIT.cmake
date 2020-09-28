@@ -1,11 +1,10 @@
 # Try to find LUAJIT
-# Once done this will define
 # LUAJIT_FOUND - System has LUAJIT
+# LUAJIT_LIBRARY - The libraries needed to use LUAJIT
 # LUAJIT_INCLUDE_DIR - The LUAJIT include directories
-# LUAJIT_LIBRARIES - The libraries needed to use LUAJIT
 
-set(LUAJIT_FOUND TRUE)
-set(LUAJIT_INCLUDE_DIR "")
-set(LUAJIT_LIBRARIES "")
+find_library(LUAJIT_LIBRARY NAMES luajit)
+find_path(LUAJIT_INCLUDE_DIR luajit.h)
 
-mark_as_advanced(LUAJIT_LIBRARIES)
+include (FindPackageHandleStandardArgs)
+find_package_handle_standard_args(LUAJIT DEFAULT_MSG LUAJIT_LIBRARY LUAJIT_INCLUDE_DIR)
