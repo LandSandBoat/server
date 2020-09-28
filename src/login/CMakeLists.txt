@@ -1,11 +1,3 @@
-cmake_minimum_required(VERSION 3.9)
-project(topaz)
-
-add_definitions(
-    -DdsTCPSERV
-    -DDEBUGLOGLOGIN
-)
-
 file(GLOB GENERATED_SOURCES CONFIGURE_DEPENDS *.cpp)
 
 if(UNIX)
@@ -14,45 +6,22 @@ else()
     set(resource "../../win32/vcxproj/connectserver.rc")
 endif()
 
-
 add_executable(topaz_connect
+    $<TARGET_OBJECTS:common>
     ${GENERATED_SOURCES}
-    ../common/blowfish.cpp
-    ../common/kernel.cpp
-    ../common/md52.cpp
-    ../common/showmsg.cpp
-    ../common/socket.cpp
-    ../common/sql.cpp
-    ../common/taskmgr.cpp
-    ../common/timer.cpp
-    ../common/utils.cpp
-    ../common/zlib.cpp
-    ${resource}
+    #${resource}
 )
 
 set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
 
-if(UNIX)
-    target_include_directories(topaz_connect PRIVATE
-        ${MYSQLCLIENT_INCLUDE_DIRS}
-    )
+target_include_directories(topaz_connect PRIVATE
+    ${MYSQLCLIENT_INCLUDE_DIRS}
+)
 
-    target_link_libraries(topaz_connect
-        ${MYSQLCLIENT_LIBRARIES}
-        ${ZMQ_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
-    )
-else()
-    target_include_directories(topaz_connect PRIVATE
-        ../common
-        ../../win32/external
-        ../../win32/external/mysql
-        ../../win32/external/zmq
-    )
-
-    target_link_libraries(topaz_connect
-        libmariadb${platform_suffix}
-        libzmq${lib_debug}${spacer}${platform_suffix}
-        WS2_32
-    )
-endif()
+target_link_libraries(topaz_connect
+    ${MYSQLCLIENT_LIBRARIES}
+    ${ZMQ_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    common
+    project_options
+)

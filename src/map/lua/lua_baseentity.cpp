@@ -146,8 +146,12 @@
 #include "../utils/puppetutils.h"
 #include "../utils/zoneutils.h"
 
+#include <sol/sol.hpp>
+
 CLuaBaseEntity::CLuaBaseEntity(lua_State* L)
 {
+    sol::state_view lua(L);
+
     if (!lua_isnil(L, 1))
     {
         m_PBaseEntity = (CBaseEntity*)lua_touserdata(L, 1);

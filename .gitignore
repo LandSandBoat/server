@@ -171,6 +171,7 @@ CMakeCache.txt
 Makefile
 **/CMakeFiles
 cmake_install.cmake
+/cmake-**/**
 
 # ignore servers
 *-server
@@ -185,3 +186,6 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
+
+# Jetbrains files
+.idea/

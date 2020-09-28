@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.10)
 project(topaz)
 
 add_definitions(
@@ -46,7 +46,7 @@ if(UNIX)
         ${MYSQLCLIENT_LIBRARIES}
         ${ZMQ_LIBRARIES}
         ${LUAJIT_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
+        ${CMAKE_THREAD_LIBS_INIT} sol2::sol2_single
     )
 
     if(APPLE)

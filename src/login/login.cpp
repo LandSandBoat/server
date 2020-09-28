@@ -665,12 +665,10 @@ void log_init(int argc, char** argv)
 {
     std::string logFile;
 
-#ifdef DEBUGLOGLOGIN
 #ifdef WIN32
     logFile = "log\\login-server.log";
 #else
     logFile = "log/login-server.log";
-#endif
 #endif
     for (int i = 1; i < argc; i++)
     {
