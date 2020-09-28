@@ -1636,7 +1636,7 @@ namespace charutils
                 case SLOT_SUB:
                 {
                     PChar->look.sub = 0;
-                    PChar->m_Weapons[SLOT_SUB] = itemutils::GetUnarmedItem();           // << equips "nothing" in the sub slot to prevent multi attack exploit
+                    PChar->m_Weapons[SLOT_SUB] = itemutils::GetUnarmedItem(); // << equips "nothing" in the sub slot to prevent multi attack exploit
                     PChar->health.tp = 0;
                     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
                     BuildingCharWeaponSkills(PChar);

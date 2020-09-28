@@ -2874,7 +2874,7 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         return;
     }
-    
+
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionPacket(PChar, TargetID, TargetIndex, EmoteID, emoteMode, extra));
 
     luautils::OnPlayerEmote(PChar, EmoteID);
@@ -3822,13 +3822,13 @@ void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowError(CL_RED"SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity);
+            ShowExploit(CL_RED"SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity);
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowError(CL_RED"SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, PItem->getID());
+            ShowExploit(CL_RED"SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, PItem->getID());
             return;
         }
 
@@ -5868,7 +5868,7 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     if (Quantity < 1)
     {
         // Exploit attempt..
-        ShowError(
+        ShowExploit(
             CL_RED "Player %s purchasing invalid quantity %u from Player %s bazaar! \n" CL_RESET,
             PChar->GetName(), Quantity, PTarget->GetName());
         return;
@@ -5905,7 +5905,7 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowError(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            ShowExploit(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
