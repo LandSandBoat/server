@@ -87,6 +87,28 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
         }
     }
 
+    //JST Midnight
+    static time_point lastTickedJstMidnight = tick - 1s;
+    if (CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
+    {
+        if (tick > (lastTickedJstMidnight + 1h))
+        {
+            // roeutils::CycleDailyRecords();
+            lastTickedJstMidnight = tick;
+        }
+    }
+
+    //4-hour RoE Timed blocks
+    static time_point lastTickedRoeBlock = tick - 1s;
+    if (CVanaTime::getInstance()->getJstHour() % 4 == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
+    {
+        if (tick > (lastTickedRoeBlock + 1h))
+        {
+            // roeutils::CycleTimedRecords();
+            lastTickedRoeBlock = tick;
+        }
+    }
+
     if (CVanaTime::getInstance()->getHour() == 0 && CVanaTime::getInstance()->getMinute() == 0)
     {
         if (tick > (CVanaTime::getInstance()->lastVDailyUpdate + 4800ms))
