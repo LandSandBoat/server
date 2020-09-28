@@ -332,7 +332,7 @@ INSERT INTO `abilities` VALUES (314,'ternary_flourish',19,93,1,30,226,0,0,222,20
 -- INSERT INTO `abilities` VALUES (319,'restoring_breath',14,90,1,60,239,100,0,130,2000,0,6,0.0,0,1,80,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (320,'konzen-ittai',12,65,4,180,132,529,0,39,2000,0,14,4.0,0,1,300,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (321,'bully',6,93,4,180,240,127,0,248,2000,0,6,8.0,0,1,300,0,4,'ABYSSEA');
-INSERT INTO `abilities` VALUES (322,'maintenance',18,30,1,90,214,0,0,83,2000,0,6,12.0,0,0,0,1474,0,'ABYSSEA'); --ta257
+INSERT INTO `abilities` VALUES (322,'maintenance',18,30,1,90,214,0,0,83,2000,0,6,12.0,0,0,0,1474,0,'ABYSSEA'); -- ta257
 INSERT INTO `abilities` VALUES (323,'brazen_rush',1,96,1,3600,254,100,0,271,2000,0,6,0.0,0,1,300,0,0,NULL);
 INSERT INTO `abilities` VALUES (324,'inner_strength',2,96,1,3600,254,100,0,272,2000,0,6,0.0,0,0,0,0,0,NULL);	--check animation
 INSERT INTO `abilities` VALUES (325,'asylum',3,96,1,3600,254,100,0,273,2000,0,6,0.0,0,0,0,0,0,NULL);
@@ -376,10 +376,10 @@ INSERT INTO `abilities` VALUES (362,'Sulpor',22,5,1,5,10,100,0,295,2000,0,6,20.0
 INSERT INTO `abilities` VALUES (363,'Unda',22,5,1,5,10,100,0,296,2000,0,6,20.0,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (364,'Lux',22,5,1,5,10,100,0,297,2000,0,6,20.0,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (365,'Tenebrae',22,5,1,5,10,100,0,298,2000,0,6,20.0,0,80,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (366,'Vallation',22,10,1,180,23,668,0,0,2000,0,15,0.0,0,450,900,1794,0,'SOA'); --check merit
+-- INSERT INTO `abilities` VALUES (366,'Vallation',22,10,1,180,23,668,0,0,2000,0,15,0.0,0,450,900,1794,0,'SOA'); -- check merit
 INSERT INTO `abilities` VALUES (367,'Swordplay',22,20,1,300,24,667,0,299,2000,0,6,20.0,0,160,320,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (368,'Lunge',22,25,4,180,25,110,0,8,2000,0,15,4.0,0,0,0,1796,0,'SOA'); --check merit
--- INSERT INTO `abilities` VALUES (369,'Pflug',22,40,1,180,59,671,0,1,2000,0,15,0.0,0,450,900,1798,0,'SOA'); --check merit
+-- INSERT INTO `abilities` VALUES (368,'Lunge',22,25,4,180,25,110,0,8,2000,0,15,4.0,0,0,0,1796,0,'SOA'); -- check merit
+-- INSERT INTO `abilities` VALUES (369,'Pflug',22,40,1,180,59,671,0,1,2000,0,15,0.0,0,450,900,1798,0,'SOA'); -- check merit
 INSERT INTO `abilities` VALUES (370,'Embolden',22,60,1,600,72,100,0,300,2000,0,6,0.0,0,160,320,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (371,'Valiance',22,50,1,300,113,668,0,2,2000,0,15,0.0,0,450,900,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (372,'Gambit',22,70,4,300,116,0,0,4,2000,0,15,4.0,0,640,1280,1800,0,'SOA');	--check animation
@@ -388,7 +388,7 @@ INSERT INTO `abilities` VALUES (374,'One_for_all',22,95,1,300,118,100,0,301,2000
 -- INSERT INTO `abilities` VALUES (375,'Rayke',22,75,4,300,119,0,0,4,2000,0,15,4.0,0,640,1260,0,0,'SOA');	--check animation
 -- INSERT INTO `abilities` VALUES (376,'Battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');
 INSERT INTO `abilities` VALUES (377,'widened_compass',21,96,1,3600,130,100,0,276,2000,0,6,0.0,0,1,300,0,0,'SOA');
--- INSERT INTO `abilities` VALUES (378,'odyllic_subterfuge',22,96,4,3600,131,0,0,10,2000,0,15,8.0,15,1,318,0,0,NULL); --check 6 or 15 animation
+-- INSERT INTO `abilities` VALUES (378,'odyllic_subterfuge',22,96,4,3600,131,0,0,10,2000,0,15,8.0,15,1,318,0,0,NULL); -- check 6 or 15 animation
 INSERT INTO `abilities` VALUES (379,'Ward',22,1,1,0,142,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (380,'Effusion',22,1,1,0,143,0,0,0,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (381,'chocobo_jig_ii',19,70,1,60,218,126,0,13,2000,0,14,0.0,1,1,300,0,0,'SOA');
@@ -649,7 +649,7 @@ INSERT INTO `abilities` VALUES (779,'spider_web',9,25,257,255,102,0,0,0,2000,0,6
 -- INSERT INTO `abilities` VALUES (965,'chinook',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (966,'bitter_elegy',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (968,'tornado_ii',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (969,'wind_s_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (969,'winds_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 
 -- Dump completed on 2017-01-31 10:57:44 updated on 2020-06-30 14:22:34
 -- 
