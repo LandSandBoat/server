@@ -1,69 +1,122 @@
-cmake_minimum_required(VERSION 3.10)
-project(topaz)
+set(SOURCES
+    ability.cpp
+    ability.h
+    alliance.cpp
+    alliance.h
+    anticheat.cpp
+    anticheat.h
+    attack.cpp
+    attack.h
+    attackround.cpp
+    attackround.h
+    battlefield_handler.cpp
+    battlefield_handler.h
+    battlefield.cpp
+    battlefield.h
+    blue_spell.cpp
+    blue_spell.h
+    blue_trait.cpp
+    blue_trait.h
+    char_recast_container.cpp
+    char_recast_container.h
+    commandhandler.cpp
+    commandhandler.h
+    conquest_system.cpp
+    conquest_system.h
+    enmity_container.cpp
+    enmity_container.h
+    grades.cpp
+    grades.h
+    guild.cpp
+    guild.h
+    instance_loader.cpp
+    instance_loader.h
+    instance.cpp
+    instance.h
+    item_container.cpp
+    item_container.h
+    items.h
+    latent_effect_container.cpp
+    latent_effect_container.h
+    latent_effect.cpp
+    latent_effect.h
+    linkshell.cpp
+    linkshell.h
+    map.cpp
+    map.h
+    merit.cpp
+    merit.h
+    message.cpp
+    message.h
+    mob_modifier.h
+    mob_spell_container.cpp
+    mob_spell_container.h
+    mob_spell_list.cpp
+    mob_spell_list.h
+    mobskill.cpp
+    mobskill.h
+    modifier.cpp
+    modifier.h
+    navmesh.cpp
+    navmesh.h
+    packet_system.cpp
+    packet_system.h
+    party.cpp
+    party.h
+    recast_container.cpp
+    recast_container.h
+    region.cpp
+    region.h
+    spell.cpp
+    spell.h
+    status_effect_container.cpp
+    status_effect_container.h
+    status_effect.cpp
+    status_effect.h
+    time_server.cpp
+    time_server.h
+    timetriggers.cpp
+    timetriggers.h
+    trade_container.cpp
+    trade_container.h
+    trait.cpp
+    trait.h
+    transport.cpp
+    transport.h
+    treasure_pool.cpp
+    treasure_pool.h
+    universal_container.cpp
+    universal_container.h
+    vana_time.cpp
+    vana_time.h
+    weapon_skill.cpp
+    weapon_skill.h
+    zone_entities.cpp
+    zone_entities.h
+    zone_instance.cpp
+    zone_instance.h
+    zone.cpp
+    zone.h)
 
-add_definitions(
-    -DdsUDPSERV
-    -DDEBUGLOGMAP
-)
-
-file(GLOB_RECURSE GENERATED_SOURCES CONFIGURE_DEPENDS *.cpp)
-
-if(UNIX)
-    set(resource "")
-else()
-    set(resource "../../win32/vcxproj/gameserver.rc")
-endif()
+add_subdirectory(ai)
+add_subdirectory(entities)
+add_subdirectory(items)
+add_subdirectory(lua)
+add_subdirectory(packets)
+add_subdirectory(utils)
 
 add_executable(topaz_game
-    ${GENERATED_SOURCES}
-    ../common/blowfish.cpp
-    ../common/detour/DetourAlloc.cpp
-    ../common/detour/DetourCommon.cpp
-    ../common/detour/DetourNavMesh.cpp
-    ../common/detour/DetourNavMeshBuilder.cpp
-    ../common/detour/DetourNavMeshQuery.cpp
-    ../common/detour/DetourNode.cpp
-    ../common/kernel.cpp
-    ../common/md52.cpp
-    ../common/showmsg.cpp
-    ../common/socket.cpp
-    ../common/sql.cpp
-    ../common/taskmgr.cpp
-    ../common/timer.cpp
-    ../common/utils.cpp
-    ../common/zlib.cpp
-    ${resource}
+    ${SOURCES}
+    $<TARGET_OBJECTS:ai>
+    $<TARGET_OBJECTS:entities>
+    $<TARGET_OBJECTS:items>
+    $<TARGET_OBJECTS:lua>
+    $<TARGET_OBJECTS:packets>
+    $<TARGET_OBJECTS:utils>)
+
+target_link_libraries(topaz_game
+    PUBLIC
+    common
+    project_options
+    #project_warnings
 )
-
-set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
-
-if(UNIX)
-    target_include_directories(topaz_game PRIVATE
-        ${MYSQLCLIENT_INCLUDE_DIRS}
-        ${LUAJIT_INCLUDE_DIRS}
-    )
-    target_link_libraries(topaz_game
-        ${MYSQLCLIENT_LIBRARIES}
-        ${ZMQ_LIBRARIES}
-        ${LUAJIT_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT} sol2::sol2_single
-    )
-
-    if(APPLE)
-        target_link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
-    endif()
-else()
-    target_include_directories(topaz_game PRIVATE
-        ../common
-        ../../win32/external
-        ../../win32/external/mysql
-        ../../win32/external/zmq
-    )
-
-    target_link_libraries(topaz_game
-        libmariadb${platform_suffix}
-        lua51${spacer}${platform_suffix}
-        libzmq${lib_debug}${spacer}${platform_suffix}
-        WS2_32
-    )
-endif()

@@ -13,16 +13,16 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 # Find MySQL
-#find_package(MySQL CONFIG REQUIRED)
+find_package(MySQL REQUIRED)
 
 # Find ZMQ
-#find_package(ZeroMQ CONFIG REQUIRED)
+find_package(ZeroMQ REQUIRED)
 
 # Find Lua 5.1
-# find_package(Lua51 CONFIG REQUIRED)
+#find_package(Lua51 REQUIRED)
 
 # Find LuaJIT
-#find_package(LuaJIT CONFIG REQUIRED)
+find_package(LuaJIT REQUIRED)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
@@ -37,5 +37,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
-add_subdirectory(ext)
 add_subdirectory(src)

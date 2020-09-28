@@ -1,27 +1,22 @@
-file(GLOB GENERATED_SOURCES CONFIGURE_DEPENDS *.cpp)
+set(SOURCES
+    account.cpp
+    account.h
+    lobby.cpp
+    lobby.h
+    login_auth.cpp
+    login_auth.h
+    login_session.cpp
+    login_session.h
+    login.cpp
+    login.h
+    message_server.cpp
+    message_server.h)
 
-if(UNIX)
-    set(resource "")
-else()
-    set(resource "../../win32/vcxproj/connectserver.rc")
-endif()
-
-add_executable(topaz_connect
-    $<TARGET_OBJECTS:common>
-    ${GENERATED_SOURCES}
-    #${resource}
-)
-
-set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
-
-target_include_directories(topaz_connect PRIVATE
-    ${MYSQLCLIENT_INCLUDE_DIRS}
-)
+add_executable(topaz_connect ${SOURCES})
 
 target_link_libraries(topaz_connect
-    ${MYSQLCLIENT_LIBRARIES}
-    ${ZMQ_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
+    PUBLIC
     common
     project_options
+    #project_warnings
 )

@@ -69,6 +69,15 @@ function(set_project_warnings project_name)
       -Wduplicated-branches # warn if if / else branches have duplicated code
       -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
       # TODO: -Wuseless-cast # warn if you perform a cast to the same type
+      
+      # TODO: Remove this
+      -Wno-implicit-fallthrough
+      -Wno-non-virtual-dtor
+      -Wno-overloaded-virtual
+      -Wno-type-limits
+      -Wno-extra
+      -Wno-class-memaccess
+      -Wno-restrict
   )
 
   if(MSVC)
