@@ -41,5 +41,5 @@ target_link_libraries(
   lua_lib
   recast
   project_options
-  project_warnings
-)
+  # project_warnings
+  )

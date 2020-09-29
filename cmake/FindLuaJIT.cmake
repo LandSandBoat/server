@@ -5,7 +5,7 @@
 
 find_library(LUAJIT_LIBRARY 
     NAMES 
-        luajit-51 luajit-5.1 luajit
+        luajit-51 luajit-5.1 luajit lua51
     PATHS
         ${LUAJIT_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}/lib

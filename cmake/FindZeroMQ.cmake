@@ -5,10 +5,11 @@
 
 find_library(ZMQ_LIBRARY 
     NAMES 
-        zmq
+        zmq libzmq zmq64 libzmq64
     PATHS
         ${ZMQ_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}/lib
+        ${PROJECT_SOURCE_DIR}/lib64
         /usr/include)
 
 find_path(ZMQ_INCLUDE_DIR 

@@ -37,6 +37,9 @@ if(APPLE)
     link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
-#add_definitions(-DFMT_HEADER_ONLY)
+if(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX)
+    link_libraries(WS2_32)
+endif()

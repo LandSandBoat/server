@@ -1,3 +1,6 @@
+project(fmt CXX)
+set_property(GLOBAL PROPERTY CXX_STANDARD 17)
+
 set(SOURCES
     container.h
     format.cc
