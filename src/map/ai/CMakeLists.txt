@@ -6,15 +6,15 @@ add_subdirectory(controllers)
 add_subdirectory(helpers)
 add_subdirectory(states)
 
-add_library(ai OBJECT
-    ${SOURCES}
-    $<TARGET_OBJECTS:ai_controllers>
-    $<TARGET_OBJECTS:ai_helpers>
-    $<TARGET_OBJECTS:ai_states>)
+add_library(ai STATIC
+    ${SOURCES})
 
 target_link_libraries(ai
     PUBLIC
     common
+    ai_controllers
+    ai_helpers
+    ai_states
     project_options
     #project_warnings
 )

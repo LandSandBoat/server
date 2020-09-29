@@ -1,16 +1,28 @@
 cmake_minimum_required(VERSION 3.10)
 project(topaz CXX)
 
+set_property(GLOBAL PROPERTY CXX_STANDARD 17)
+set_property(GLOBAL PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(GLOBAL PROPERTY CXX_EXTENSIONS ON)
+set_property(GLOBAL PROPERTY LINKER_LANGUAGE CXX)
+
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(StandardProjectSettings)
 include(Cache)
 include(CompilerWarnings)
 
+message("-- CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
+message("-- CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
+message("-- CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID}")
+message("-- CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
+
 # set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Find Threads (pthread)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
+link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
 # Find MySQL
 find_package(MySQL REQUIRED)

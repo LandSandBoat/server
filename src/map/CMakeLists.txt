@@ -107,7 +107,6 @@ add_subdirectory(utils)
 
 add_executable(topaz_game
     ${SOURCES}
-    $<TARGET_OBJECTS:ai>
     $<TARGET_OBJECTS:entities>
     $<TARGET_OBJECTS:items>
     $<TARGET_OBJECTS:lua>
@@ -117,6 +116,7 @@ add_executable(topaz_game
 target_link_libraries(topaz_game
     PUBLIC
     common
+    ai
     project_options
     #project_warnings
 )

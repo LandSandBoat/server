@@ -8,7 +8,7 @@ set(SOURCES
     targetfind.cpp
     targetfind.h)
 
-add_library(ai_helpers OBJECT ${SOURCES})
+add_library(ai_helpers STATIC ${SOURCES})
 
 target_link_libraries(ai_helpers
     PUBLIC

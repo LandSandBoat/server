@@ -14,7 +14,7 @@ set(SOURCES
     trust_controller.cpp
     trust_controller.h)
 
-add_library(ai_controllers OBJECT ${SOURCES})
+add_library(ai_controllers STATIC ${SOURCES})
 
 target_link_libraries(ai_controllers
     PUBLIC

@@ -28,7 +28,7 @@ set(SOURCES
     weaponskill_state.cpp
     weaponskill_state.h)
 
-add_library(ai_states OBJECT ${SOURCES})
+add_library(ai_states STATIC ${SOURCES})
 
 target_link_libraries(ai_states
     PUBLIC

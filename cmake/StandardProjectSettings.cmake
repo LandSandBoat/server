@@ -32,3 +32,11 @@ if(ENABLE_IPO)
     message(SEND_ERROR "IPO is not supported: ${output}")
   endif()
 endif()
+
+if(APPLE)
+    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
+endif()
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+
+#add_definitions(-DFMT_HEADER_ONLY)
