@@ -12712,8 +12712,8 @@ int32 CLuaBaseEntity::setTrustTPSkillSettings(lua_State* L)
     auto trust = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(lua_tonumber(L, 1));
-    controller->m_GambitsContainer->tp_select = static_cast<G_SELECT>(lua_tonumber(L, 2));
+    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(lua_tointeger(L, 1));
+    controller->m_GambitsContainer->tp_select = static_cast<G_SELECT>(lua_tointeger(L, 2));
 
     return 0;
 }
