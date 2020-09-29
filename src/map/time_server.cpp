@@ -40,27 +40,31 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     // uint8 WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
     // weekly update for conquest (sunday at midnight)
+    static time_point lastConquestTally = tick - 1h;
+    static time_point lastConquestUpdate = tick - 1h;
     if (CVanaTime::getInstance()->getSysWeekDay() == 1  && CVanaTime::getInstance()->getSysHour() == 0 && CVanaTime::getInstance()->getSysMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastConquestTally + 1h))
+        if (tick > (lastConquestTally + 1h))
         {
             conquest::UpdateWeekConquest();
-            CVanaTime::getInstance()->lastConquestTally = tick;
+            lastConquestTally = tick;
         }
     }
     // hourly conquest update
     else if (CVanaTime::getInstance()->getSysMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastConquestUpdate + 1h))
+        if (tick > (lastConquestUpdate + 1h))
         {
             conquest::UpdateConquestSystem();
-            CVanaTime::getInstance()->lastConquestUpdate = tick;
+            lastConquestUpdate = tick;
         }
     }
 
+    // Vanadiel Hour
+    static time_point lastVHourlyUpdate = tick - 4800ms;
     if (CVanaTime::getInstance()->getMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastVHourlyUpdate + 4800ms))
+        if (tick > (lastVHourlyUpdate + 4800ms))
         {
 			zoneutils::ForEachZone([](CZone* PZone)
             {
@@ -72,34 +76,25 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
 				});
 			});
 
-            CVanaTime::getInstance()->lastVHourlyUpdate = tick;
+            lastVHourlyUpdate = tick;
         }
 
-    }
-
-    //Midnight
-    if (CVanaTime::getInstance()->getSysHour() == 0 && CVanaTime::getInstance()->getSysMinute() == 0)
-    {
-        if (tick > (CVanaTime::getInstance()->lastMidnight + 1h))
-        {
-            guildutils::UpdateGuildPointsPattern();
-            CVanaTime::getInstance()->lastMidnight = tick;
-        }
     }
 
     //JST Midnight
-    static time_point lastTickedJstMidnight = tick - 1s;
+    static time_point lastTickedJstMidnight = tick - 1h;
     if (CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
             // roeutils::CycleDailyRecords();
+            guildutils::UpdateGuildPointsPattern();
             lastTickedJstMidnight = tick;
         }
     }
 
     //4-hour RoE Timed blocks
-    static time_point lastTickedRoeBlock = tick - 1s;
+    static time_point lastTickedRoeBlock = tick - 1h;
     if (CVanaTime::getInstance()->getJstHour() % 4 == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastTickedRoeBlock + 1h))
@@ -109,9 +104,11 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
         }
     }
 
+    // Vanadiel Day
+    static time_point lastVDailyUpdate = tick - 4800ms;
     if (CVanaTime::getInstance()->getHour() == 0 && CVanaTime::getInstance()->getMinute() == 0)
     {
-        if (tick > (CVanaTime::getInstance()->lastVDailyUpdate + 4800ms))
+        if (tick > (lastVDailyUpdate + 4800ms))
         {
 			zoneutils::ForEachZone([](CZone* PZone)
 			{
@@ -125,7 +122,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
             guildutils::UpdateGuildsStock();
             zoneutils::SavePlayTime();
 
-            CVanaTime::getInstance()->lastVDailyUpdate = tick;
+            lastVDailyUpdate = tick;
         }
     }
 
