@@ -96,11 +96,6 @@ public:
 
 	void	 setCustomEpoch(int32 epoch);
 
-	time_point   lastConquestUpdate;
-    time_point   lastVHourlyUpdate;
-    time_point   lastVDailyUpdate;
-    time_point   lastConquestTally;
-    time_point   lastMidnight;
 
 private:
 
