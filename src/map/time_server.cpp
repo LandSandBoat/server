@@ -42,7 +42,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     // weekly update for conquest (sunday at midnight)
     static time_point lastConquestTally = tick - 1h;
     static time_point lastConquestUpdate = tick - 1h;
-    if (CVanaTime::getInstance()->getSysWeekDay() == 1  && CVanaTime::getInstance()->getSysHour() == 0 && CVanaTime::getInstance()->getSysMinute() == 0)
+    if (CVanaTime::getInstance()->getJstWeekDay() == 1  && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestTally + 1h))
         {
@@ -51,7 +51,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
         }
     }
     // hourly conquest update
-    else if (CVanaTime::getInstance()->getSysMinute() == 0)
+    else if (CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
