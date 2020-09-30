@@ -120,3 +120,5 @@ target_link_libraries(topaz_game
     project_options
     #project_warnings
 )
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)
