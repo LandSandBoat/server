@@ -13147,7 +13147,7 @@ INSERT INTO `mob_groups` VALUES (11,5024,260,'Edacious_Orobon',330,0,2330,0,0,10
 INSERT INTO `mob_groups` VALUES (12,5002,260,'Bight_Uragnite',330,0,2330,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (13,5029,260,'Luckybug_Hoarder',330,0,2330,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (14,5027,260,'Beady_panopt',330,0,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (15,5013,260,'Numbing_Blossom',330,0,2330,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (15,5013,260,'Numbing_Blossom',330,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (16,5030,260,'Monstrosiraptor',330,0,2330,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (17,5033,260,'Hinterland_Peiste',330,0,2330,0,0,100,102,0);
 INSERT INTO `mob_groups` VALUES (18,5034,260,'Verdant_Treant',330,0,2330,0,0,100,102,0);
@@ -13186,7 +13186,7 @@ INSERT INTO `mob_groups` VALUES (12,5009,261,'Belaboring_Wasp',330,0,2962,0,0,10
 INSERT INTO `mob_groups` VALUES (13,5010,261,'Undergrowth_Hornet',330,0,2967,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (14,5011,261,'Longclaw_Raptor',330,0,2963,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (15,5012,261,'Sedge_Scorpion',330,0,2966,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (16,5013,261,'Numbing_Blossom',330,0,2330,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (16,5013,261,'Numbing_Blossom',330,0,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (17,5014,261,'Knobby_Treant',330,0,2968,0,0,100,102,0);
 INSERT INTO `mob_groups` VALUES (18,5015,261,'Resplendent_Luckybug',330,0,2965,0,0,99,107,0);
 INSERT INTO `mob_groups` VALUES (19,5016,261,'Colossal_Spider',330,0,2969,0,0,99,107,0);

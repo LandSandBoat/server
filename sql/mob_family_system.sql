@@ -399,7 +399,7 @@ INSERT INTO `mob_family_system` VALUES (337,'QuadavNM',7,'Beastmen',0,40,120,110
 INSERT INTO `mob_family_system` VALUES (338,'Twitherym',20,'Vermin',0,40,92,90,1,3,4,3,6,6,5,3,3,3,3,1,1.25,1,1,1,1.25,0.875,1,1,1,1,1,3,1,1);
 INSERT INTO `mob_family_system` VALUES (339,'Chapuli',20,'Vermin',1,40,105,120,3,3,4,3,3,6,5,3,5,3,3,1,1,1,1,1,1.25,1,1,1.25,1,1.125,1.25,4,1,1);
 INSERT INTO `mob_family_system` VALUES (340,'Mantis',20,'Vermin',1,40,105,120,3,3,4,3,3,6,5,3,5,3,3,1,1,1,1,1,1.25,1,1,1.25,1,1.125,1.25,4,1,0);
-INSERT INTO `mob_family_system` VALUES (341,'Blossom',1,'Amorph',0,0,130,180,1,3,4,3,6,6,5,3,3,3,3,1,1,1,1,1,1,1.25,0.875,1,1,1.25,0.875,4,2,0);
+INSERT INTO `mob_family_system` VALUES (341,'Blossom',18,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,3,3,3,3,1,1,1,1,1,1,1.25,0.875,1,1,1.25,0.875,4,2,0);
 INSERT INTO `mob_family_system` VALUES (342,'Velkk',7,'Beastmen',0,40,116,140,1,3,1,2,2,3,3,3,3,3,3,1,1,1,1,1,1,1.25,0.5,1,1,1,0.5,8,257,0);
 INSERT INTO `mob_family_system` VALUES (343,'Heartwing',11,'Elemental',0,40,90,90,1,3,4,3,6,6,5,3,3,3,3,1,1,1,1,1,1,1,1,1.25,1,1,1,5,288,0);
 INSERT INTO `mob_family_system` VALUES (344,'Cracklaw',2,'Aquan',0,40,108,120,4,3,1,5,3,3,4,3,3,3,3,0.9,0.9,0.9,0.9,0.875,1,0.875,0.875,1,0.75,0.875,0.875,6,2,0);
