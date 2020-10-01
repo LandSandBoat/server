@@ -19984,7 +19984,12 @@ INSERT INTO `item_mods` VALUES (16452,10,2);
 INSERT INTO `item_mods` VALUES (16452,13,2);
 INSERT INTO `item_mods` VALUES (16453,5,20);
 INSERT INTO `item_mods` VALUES (16453,12,2);
-INSERT INTO `item_mods` VALUES (16454,431,1);
+INSERT INTO `item_mods` VALUES (16454,431,1);   -- Blind Dagger (Additional effect: Blindness)
+INSERT INTO `item_mods` VALUES (16454,499,12);  -- Additional effect animation (subEffect) tpz.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16454,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16454,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
+INSERT INTO `item_mods` VALUES (16454,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16454,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16458,431,1);
 INSERT INTO `item_mods` VALUES (16459,431,1);   -- Acid Baselard (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (16459,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
@@ -20000,7 +20005,12 @@ INSERT INTO `item_mods` VALUES (16470,2,10);
 INSERT INTO `item_mods` VALUES (16470,9,2);
 INSERT INTO `item_mods` VALUES (16470,10,2);
 INSERT INTO `item_mods` VALUES (16470,59,8);
-INSERT INTO `item_mods` VALUES (16471,431,1);
+INSERT INTO `item_mods` VALUES (16471,431,1);   -- Blind Knife (Additional effect: Blindness)
+INSERT INTO `item_mods` VALUES (16471,499,12);  -- Additional effect animation (subEffect) tpz.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16471,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16471,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
+INSERT INTO `item_mods` VALUES (16471,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16471,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16472,431,1);
 INSERT INTO `item_mods` VALUES (16478,431,1);
 INSERT INTO `item_mods` VALUES (16479,431,1);   -- Acid Kukri (Additional effect: Weakens defense)
@@ -20024,8 +20034,18 @@ INSERT INTO `item_mods` VALUES (16488,11,7);
 INSERT INTO `item_mods` VALUES (16488,24,10);
 INSERT INTO `item_mods` VALUES (16488,26,-5);
 INSERT INTO `item_mods` VALUES (16489,431,1);
-INSERT INTO `item_mods` VALUES (16490,431,1);
-INSERT INTO `item_mods` VALUES (16493,431,1);
+INSERT INTO `item_mods` VALUES (16490,431,1);   -- Blind Knife +1 (Additional effect: Blindness)
+INSERT INTO `item_mods` VALUES (16490,499,12);  -- Additional effect animation (subEffect) tpz.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16490,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16490,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
+INSERT INTO `item_mods` VALUES (16490,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16490,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16493,431,1);   -- Blind Dagger +1 (Additional effect: Blindness)
+INSERT INTO `item_mods` VALUES (16493,499,12);  -- Additional effect animation (subEffect) tpz.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16493,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16493,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
+INSERT INTO `item_mods` VALUES (16493,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16493,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16494,431,1);
 INSERT INTO `item_mods` VALUES (16495,431,1);
 INSERT INTO `item_mods` VALUES (16496,431,1);
@@ -21940,7 +21960,12 @@ INSERT INTO `item_mods` VALUES (18148,951,149); -- Additional effect Status ID t
 INSERT INTO `item_mods` VALUES (18148,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18148,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18149,431,1);
-INSERT INTO `item_mods` VALUES (18150,431,1);
+INSERT INTO `item_mods` VALUES (18150,431,1);   -- Blind Bolt (Additional effect: Blindness)
+INSERT INTO `item_mods` VALUES (18150,499,12);  -- Additional effect animation (subEffect) tpz.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (18150,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18150,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
+INSERT INTO `item_mods` VALUES (18150,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18150,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18151,431,1);
 INSERT INTO `item_mods` VALUES (18152,431,1);
 INSERT INTO `item_mods` VALUES (18153,431,1);
