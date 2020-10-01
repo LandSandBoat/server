@@ -20046,7 +20046,12 @@ INSERT INTO `item_mods` VALUES (16493,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16493,951,5);   -- Additional effect Status ID tpz.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (16493,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16493,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16494,431,1);
+INSERT INTO `item_mods` VALUES (16494,431,1);   -- Corrosive Kukri (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (16494,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16494,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16494,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16494,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16494,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16495,431,1);
 INSERT INTO `item_mods` VALUES (16496,431,1);
 INSERT INTO `item_mods` VALUES (16497,431,1);
@@ -20917,7 +20922,12 @@ INSERT INTO `item_mods` VALUES (17481,14,3);
 INSERT INTO `item_mods` VALUES (17481,25,3);
 INSERT INTO `item_mods` VALUES (17485,54,6);
 INSERT INTO `item_mods` VALUES (17486,431,1); -- Stun claws +1 - Additional effect: "Stun"
-INSERT INTO `item_mods` VALUES (17487,431,1);
+INSERT INTO `item_mods` VALUES (17487,431,1);   -- Corrosive Claws (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (17487,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17487,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (17487,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17487,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17487,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17491,25,2);
 
 -- Shiva's Claws
@@ -21281,9 +21291,24 @@ INSERT INTO `item_mods` VALUES (17605,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17605,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (17605,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (17605,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (17606,431,1);
-INSERT INTO `item_mods` VALUES (17607,431,1);
-INSERT INTO `item_mods` VALUES (17608,431,1);
+INSERT INTO `item_mods` VALUES (17606,431,1);   -- Corrosive Dagger (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (17606,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17606,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (17606,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17606,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17606,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (17607,431,1);   -- Corrosive Baselard (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (17607,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17607,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (17607,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17607,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17607,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (17608,431,1);   -- Corrosive Knife (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (17608,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17608,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (17608,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17608,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17608,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17610,23,3);
 INSERT INTO `item_mods` VALUES (17610,25,3);
 INSERT INTO `item_mods` VALUES (17610,60,-5);
