@@ -19960,7 +19960,12 @@ INSERT INTO `item_mods` VALUES (16426,1,-10);
 INSERT INTO `item_mods` VALUES (16426,23,10);
 INSERT INTO `item_mods` VALUES (16428,165,3);
 INSERT INTO `item_mods` VALUES (16428,292,7);
-INSERT INTO `item_mods` VALUES (16429,431,1);
+INSERT INTO `item_mods` VALUES (16429,431,1);   -- Silence Baghnakhs (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16429,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16429,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16429,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16429,952,1);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (16429,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16430,431,1);   -- Acid Claws (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (16430,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (16430,501,10);  -- Additional effect Chance 10%
@@ -19973,7 +19978,12 @@ INSERT INTO `item_mods` VALUES (16433,25,2);
 INSERT INTO `item_mods` VALUES (16434,25,2);
 INSERT INTO `item_mods` VALUES (16434,431,1);
 INSERT INTO `item_mods` VALUES (16437,25,3);
-INSERT INTO `item_mods` VALUES (16438,431,1);
+INSERT INTO `item_mods` VALUES (16438,431,1);   -- Silence Baghnakhs +1 (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16438,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16438,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16438,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16438,952,1);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (16438,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16439,431,1);
 INSERT INTO `item_mods` VALUES (16440,25,3);
 INSERT INTO `item_mods` VALUES (16443,25,3);
@@ -20052,7 +20062,12 @@ INSERT INTO `item_mods` VALUES (16494,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16494,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (16494,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (16494,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (16495,431,1);
+INSERT INTO `item_mods` VALUES (16495,431,1);   -- Silence Dagger (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16495,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16495,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16495,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16495,952,1);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (16495,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16496,431,1);
 INSERT INTO `item_mods` VALUES (16497,431,1);
 INSERT INTO `item_mods` VALUES (16498,8,5);
@@ -20070,7 +20085,12 @@ INSERT INTO `item_mods` VALUES (16501,952,12);  -- Additional effect Status Pote
 INSERT INTO `item_mods` VALUES (16501,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16504,250,2);
 INSERT INTO `item_mods` VALUES (16504,431,1);
-INSERT INTO `item_mods` VALUES (16508,431,1);
+INSERT INTO `item_mods` VALUES (16508,431,1);   -- Silence Dagger +1 (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16508,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16508,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16508,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16508,952,1);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (16508,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16509,431,1);
 INSERT INTO `item_mods` VALUES (16520,5,18);
 INSERT INTO `item_mods` VALUES (16520,110,7);
@@ -21764,7 +21784,12 @@ INSERT INTO `item_mods` VALUES (18002,246,2);
 INSERT INTO `item_mods` VALUES (18004,26,14);
 INSERT INTO `item_mods` VALUES (18005,377,15);
 INSERT INTO `item_mods` VALUES (18007,26,12);
-INSERT INTO `item_mods` VALUES (18008,431,1);
+INSERT INTO `item_mods` VALUES (18008,431,1);   -- Hushed Dagger (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (18008,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (18008,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18008,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (18008,952,5);   -- Additional effect Status Potency 5
+INSERT INTO `item_mods` VALUES (18008,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18009,345,1000);  -- Martial Knife: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18010,431,1);   -- Melt Dagger (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (18010,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
@@ -22308,7 +22333,12 @@ INSERT INTO `item_mods` VALUES (18353,10,1);
 INSERT INTO `item_mods` VALUES (18353,107,2);
 INSERT INTO `item_mods` VALUES (18354,10,2);
 INSERT INTO `item_mods` VALUES (18354,107,3);
-INSERT INTO `item_mods` VALUES (18355,431,1);
+INSERT INTO `item_mods` VALUES (18355,431,1);   -- Hushed Baghnakhs (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (18355,499,13);  -- Additional effect animation (subEffect) tpz.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (18355,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18355,951,6);   -- Additional effect Status ID tpz.effect.SILENCE
+INSERT INTO `item_mods` VALUES (18355,952,5);   -- Additional effect Status Potency 5
+INSERT INTO `item_mods` VALUES (18355,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18356,345,1000);  -- Martial Knuckles: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18357,431,1);   -- Melt Claws (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (18357,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
