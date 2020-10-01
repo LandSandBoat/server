@@ -5,11 +5,12 @@
 
 find_library(MYSQL_LIBRARY 
     NAMES 
-        mysql mariadb libmysql libmariadb
+        mysql mariadb libmysql libmysql64 libmariadb libmariadb64
+    PATH_SUFFIXES
+        ${lib_dir}
     PATHS
         ${MYSQL_ADD_LIBRARIES_PATH}
-        ${PROJECT_SOURCE_DIR}/lib
-        ${PROJECT_SOURCE_DIR}/lib64
+        ${PROJECT_SOURCE_DIR}
         /usr/include)
 
 find_path(MYSQL_INCLUDE_DIR 
@@ -20,7 +21,6 @@ find_path(MYSQL_INCLUDE_DIR
     PATHS
         ${MYSQL_ADD_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/win32/external
-        #${PROJECT_SOURCE_DIR}/win32/external/mysql
         /usr/include)
 
 include (FindPackageHandleStandardArgs)
@@ -30,6 +30,8 @@ message(STATUS "MYSQL_FOUND: ${MYSQL_FOUND}")
 message(STATUS "MYSQL_LIBRARY: ${MYSQL_LIBRARY}")
 message(STATUS "MYSQL_INCLUDE_DIR: ${MYSQL_INCLUDE_DIR}")
 
-link_libraries(${MYSQL_LIBRARY})
-include_directories(${MYSQL_INCLUDE_DIR})
-include_directories(${MYSQL_INCLUDE_DIR}/../)
+if (${MYSQL_FOUND})
+    link_libraries(${MYSQL_LIBRARY})
+    include_directories(${MYSQL_INCLUDE_DIR})
+    include_directories(${MYSQL_INCLUDE_DIR}/../)
+endif()

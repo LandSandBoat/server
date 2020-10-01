@@ -38,6 +38,7 @@ if(APPLE)
 endif()
 
 if(WIN32)
+    # compiler_settings(/nologo /verbosity:minimal)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE -DNOMINMAX)
     link_libraries(WS2_32 dbghelp)
 endif()

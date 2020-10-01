@@ -1,31 +1,34 @@
-# Try to find ZMQ
-# ZMQ_FOUND - System has ZMQ
-# ZMQ_LIBRARY - The libraries needed to use ZMQ
-# ZMQ_INCLUDE_DIR - The ZMQ include directories
+# Try to find ZeroMQ
+# ZeroMQ_FOUND - System has ZeroMQ
+# ZeroMQ_LIBRARY - The libraries needed to use ZeroMQ
+# ZeroMQ_INCLUDE_DIR - The ZeroMQ include directories
 
-find_library(ZMQ_LIBRARY 
+find_library(ZeroMQ_LIBRARY 
     NAMES 
-        zmq libzmq zmq64 libzmq64
+        zmq zmq64 libzmq libzmq-d libzmq_64 libzmq-d_64
+    PATH_SUFFIXES
+        ${lib_dir}
     PATHS
-        ${ZMQ_ADD_LIBRARIES_PATH}
-        ${PROJECT_SOURCE_DIR}/lib
-        ${PROJECT_SOURCE_DIR}/lib64
+        ${ZeroMQ_ADD_LIBRARIES_PATH}
+        ${PROJECT_SOURCE_DIR}
         /usr/include)
 
-find_path(ZMQ_INCLUDE_DIR 
+find_path(ZeroMQ_INCLUDE_DIR 
     NAMES 
         zmq.h
     PATHS
-        ${ZMQ_ADD_INCLUDE_PATH}
+        ${ZeroMQ_ADD_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/win32/external/zmq
         /usr/include)
 
 include (FindPackageHandleStandardArgs)
-find_package_handle_standard_args(ZMQ DEFAULT_MSG ZMQ_LIBRARY ZMQ_INCLUDE_DIR)
+find_package_handle_standard_args(ZeroMQ DEFAULT_MSG ZeroMQ_LIBRARY ZeroMQ_INCLUDE_DIR)
 
-message(STATUS "ZMQ_FOUND: ${ZMQ_FOUND}")
-message(STATUS "ZMQ_LIBRARY: ${ZMQ_LIBRARY}")
-message(STATUS "ZMQ_INCLUDE_DIR: ${ZMQ_INCLUDE_DIR}")
+message(STATUS "ZeroMQ_FOUND: ${ZeroMQ_FOUND}")
+message(STATUS "ZeroMQ_LIBRARY: ${ZeroMQ_LIBRARY}")
+message(STATUS "ZeroMQ_INCLUDE_DIR: ${ZeroMQ_INCLUDE_DIR}")
 
-link_libraries(${ZMQ_LIBRARY})
-include_directories(${ZMQ_INCLUDE_DIR})
+if (${ZeroMQ_FOUND})
+    link_libraries(${ZeroMQ_LIBRARY})
+    include_directories(${ZeroMQ_INCLUDE_DIR})
+endif()
