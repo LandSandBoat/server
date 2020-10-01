@@ -19961,6 +19961,12 @@ INSERT INTO `item_mods` VALUES (16426,23,10);
 INSERT INTO `item_mods` VALUES (16428,165,3);
 INSERT INTO `item_mods` VALUES (16428,292,7);
 INSERT INTO `item_mods` VALUES (16429,431,1);
+INSERT INTO `item_mods` VALUES (16430,431,1);   -- Acid Claws (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (16430,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16430,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16430,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16430,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16430,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16431,431,1); -- Stun claws - Additional effect: "Stun"
 INSERT INTO `item_mods` VALUES (16433,23,3);
 INSERT INTO `item_mods` VALUES (16433,25,2);
@@ -19980,7 +19986,12 @@ INSERT INTO `item_mods` VALUES (16453,5,20);
 INSERT INTO `item_mods` VALUES (16453,12,2);
 INSERT INTO `item_mods` VALUES (16454,431,1);
 INSERT INTO `item_mods` VALUES (16458,431,1);
-INSERT INTO `item_mods` VALUES (16459,431,1);
+INSERT INTO `item_mods` VALUES (16459,431,1);   -- Acid Baselard (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (16459,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16459,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16459,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16459,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16459,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16461,5,10);
 INSERT INTO `item_mods` VALUES (16461,9,2);
 INSERT INTO `item_mods` VALUES (16461,10,2);
@@ -19992,7 +20003,12 @@ INSERT INTO `item_mods` VALUES (16470,59,8);
 INSERT INTO `item_mods` VALUES (16471,431,1);
 INSERT INTO `item_mods` VALUES (16472,431,1);
 INSERT INTO `item_mods` VALUES (16478,431,1);
-INSERT INTO `item_mods` VALUES (16479,431,1);
+INSERT INTO `item_mods` VALUES (16479,431,1);   -- Acid Kukri (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (16479,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16479,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16479,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16479,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16479,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16480,303,1);
 INSERT INTO `item_mods` VALUES (16481,2,26);
 INSERT INTO `item_mods` VALUES (16481,68,7);
@@ -20021,7 +20037,12 @@ INSERT INTO `item_mods` VALUES (16500,8,10);     -- aluh_jambiya STR+10
 INSERT INTO `item_mods` VALUES (16500,10,-10);   -- VIT-10
 INSERT INTO `item_mods` VALUES (16500,23,15);    -- Attack+15
 INSERT INTO `item_mods` VALUES (16500,421,3);    -- Crit Hit Damage+3%
-INSERT INTO `item_mods` VALUES (16501,431,1);
+INSERT INTO `item_mods` VALUES (16501,431,1);   -- Acid Knife (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (16501,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16501,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16501,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16501,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16501,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16504,250,2);
 INSERT INTO `item_mods` VALUES (16504,431,1);
 INSERT INTO `item_mods` VALUES (16508,431,1);
@@ -21234,7 +21255,12 @@ INSERT INTO `item_mods` VALUES (17597,346,1);
 INSERT INTO `item_mods` VALUES (17598,5,30);
 INSERT INTO `item_mods` VALUES (17598,117,5);
 INSERT INTO `item_mods` VALUES (17598,346,3);
-INSERT INTO `item_mods` VALUES (17605,431,1);
+INSERT INTO `item_mods` VALUES (17605,431,1);   -- Acid Dagger (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (17605,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17605,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17605,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17605,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17605,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17606,431,1);
 INSERT INTO `item_mods` VALUES (17607,431,1);
 INSERT INTO `item_mods` VALUES (17608,431,1);
@@ -21695,10 +21721,30 @@ INSERT INTO `item_mods` VALUES (18005,377,15);
 INSERT INTO `item_mods` VALUES (18007,26,12);
 INSERT INTO `item_mods` VALUES (18008,431,1);
 INSERT INTO `item_mods` VALUES (18009,345,1000);  -- Martial Knife: TP Bonus +1000
-INSERT INTO `item_mods` VALUES (18010,431,1);
-INSERT INTO `item_mods` VALUES (18011,431,1);
-INSERT INTO `item_mods` VALUES (18012,431,1);
-INSERT INTO `item_mods` VALUES (18013,431,1);
+INSERT INTO `item_mods` VALUES (18010,431,1);   -- Melt Dagger (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18010,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18010,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18010,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18010,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18010,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (18011,431,1);   -- Melt Knife (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18011,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18011,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18011,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18011,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18011,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (18012,431,1);   -- Melt Baselard (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18012,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18012,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18012,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18012,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18012,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (18013,431,1);   -- Melt Kukri (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18013,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18013,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18013,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18013,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18013,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18018,55,-7);
 INSERT INTO `item_mods` VALUES (18018,56,7);
 INSERT INTO `item_mods` VALUES (18018,431,1);
@@ -21887,7 +21933,12 @@ INSERT INTO `item_mods` VALUES (18146,57,10);
 INSERT INTO `item_mods` VALUES (18146,59,10);
 INSERT INTO `item_mods` VALUES (18147,24,20);
 INSERT INTO `item_mods` VALUES (18147,26,-12);
-INSERT INTO `item_mods` VALUES (18148,431,1);
+INSERT INTO `item_mods` VALUES (18148,431,1);   -- Acid Bolt (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18148,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18148,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18148,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18148,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18148,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18149,431,1);
 INSERT INTO `item_mods` VALUES (18150,431,1);
 INSERT INTO `item_mods` VALUES (18151,431,1);
@@ -22209,7 +22260,12 @@ INSERT INTO `item_mods` VALUES (18354,10,2);
 INSERT INTO `item_mods` VALUES (18354,107,3);
 INSERT INTO `item_mods` VALUES (18355,431,1);
 INSERT INTO `item_mods` VALUES (18356,345,1000);  -- Martial Knuckles: TP Bonus +1000
-INSERT INTO `item_mods` VALUES (18357,431,1);
+INSERT INTO `item_mods` VALUES (18357,431,1);   -- Melt Claws (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18357,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18357,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18357,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18357,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18357,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18359,431,1);
 INSERT INTO `item_mods` VALUES (18360,13,7);
 INSERT INTO `item_mods` VALUES (18360,826,2);
@@ -22265,7 +22321,12 @@ INSERT INTO `item_mods` VALUES (18406,2,31);
 INSERT INTO `item_mods` VALUES (18406,5,-31);
 INSERT INTO `item_mods` VALUES (18406,10,6);
 INSERT INTO `item_mods` VALUES (18409,5,-58);
-INSERT INTO `item_mods` VALUES (18410,431,1);
+INSERT INTO `item_mods` VALUES (18410,431,1);   -- Melt Katana (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (18410,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18410,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18410,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18410,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18410,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18411,8,2);
 INSERT INTO `item_mods` VALUES (18411,9,2);
 INSERT INTO `item_mods` VALUES (18411,11,2);
@@ -26158,8 +26219,12 @@ INSERT INTO `item_mods` VALUES (21311,24,30);    -- Quelling Bolt (iLvl 119) Ran
 INSERT INTO `item_mods` VALUES (21311,26,30);    -- Ranged Accuracy+30
 INSERT INTO `item_mods` VALUES (21311,28,30);    -- Magic Attack Bonus+30
 INSERT INTO `item_mods` VALUES (21311,30,20);    -- Magic Accuracy+30
-INSERT INTO `item_mods` VALUES (21314,26,15);     -- Abrasion Bolt (iLvl 117): Ranged Accuracy +15
-INSERT INTO `item_mods` VALUES (21314,431,1);     -- Additional effect: Weakens defense
+INSERT INTO `item_mods` VALUES (21314,431,1);   -- Abrasion Bolt (Additional effect: Weakens defense)
+INSERT INTO `item_mods` VALUES (21314,499,18);  -- Additional effect animation (subEffect) tpz.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (21314,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (21314,951,149); -- Additional effect Status ID tpz.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (21314,952,20);  -- Additional effect Status Potency 20
+INSERT INTO `item_mods` VALUES (21314,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (21318,24,5);
 INSERT INTO `item_mods` VALUES (21318,26,5);
 INSERT INTO `item_mods` VALUES (21319,24,10);
