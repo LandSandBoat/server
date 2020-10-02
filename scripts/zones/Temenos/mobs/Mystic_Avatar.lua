@@ -40,7 +40,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
         elseif mobID >= ID.mob.TEMENOS_C_MOB[2]+9 then
             local element_offset = mobID - ID.mob.TEMENOS_C_MOB[2]+8
             local partner_offset = element_offset % 6 -- Levithan's partner starts at 0
-            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.FIREDEF - 1 + element_offset)
+            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.FIREDEF - 1 + element_offset, -128)
             if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset):isAlive() then
                 DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset)
                 SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9 + partner_offset)
