@@ -33827,7 +33827,7 @@ INSERT INTO `item_mods` VALUES (25785,31,86);     -- Magic Evasion+86
 INSERT INTO `item_mods` VALUES (25785,68,60);     -- Evasion+60
 INSERT INTO `item_mods` VALUES (25785,165,4);     -- Crit Hit Rate+4
 INSERT INTO `item_mods` VALUES (25785,250,90);    -- Resist Slow+90
-INSERT INTO `item_mods` VALUES (25785,289,10);    -- Subtle Blow+10
+INSERT INTO `item_mods` VALUES (25785,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (25785,302,5);     -- Triple Attack+5
 INSERT INTO `item_mods` VALUES (25785,384,100);    -- Haste +1%
 INSERT INTO `item_mods` VALUES (25786,1,148);     -- ashera_harness DEF:148
@@ -34841,7 +34841,7 @@ INSERT INTO `item_mods` VALUES (26084,8,5);       -- sherida_earring STR+5
 INSERT INTO `item_mods` VALUES (26084,9,5);       -- DEX+5
 INSERT INTO `item_mods` VALUES (26084,73,5);      -- Store TP+5
 INSERT INTO `item_mods` VALUES (26084,288,5);     -- Double Attack+5
-INSERT INTO `item_mods` VALUES (26084,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26084,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26160,116,10);    -- Evanescence Ring: Dark magic skill +10
 INSERT INTO `item_mods` VALUES (26160,168,5);     -- Spell interruption rate down 5%
 INSERT INTO `item_mods` VALUES (26160,315,10);    -- Drain and Aspir potency +10%
@@ -34890,7 +34890,7 @@ INSERT INTO `item_mods` VALUES (26184,369,1);     -- Refresh+1
 INSERT INTO `item_mods` VALUES (26185,8,10);      -- niqmaddu_ring STR+10
 INSERT INTO `item_mods` VALUES (26185,9,10);      -- DEX+10
 INSERT INTO `item_mods` VALUES (26185,10,10);     -- VIT+10
-INSERT INTO `item_mods` VALUES (26185,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26185,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26185,430,3);     -- Quad Attack+3
 INSERT INTO `item_mods` VALUES (26186,1,10);      -- ilabrat_ring DEF:10
 INSERT INTO `item_mods` VALUES (26186,2,60);      -- HP+60
@@ -34983,11 +34983,13 @@ INSERT INTO `item_mods` VALUES (26340,8,15);      -- STR+15
 INSERT INTO `item_mods` VALUES (26340,9,15);      -- DEX+15
 INSERT INTO `item_mods` VALUES (26340,160,-5);    -- Damage Taken-5
 INSERT INTO `item_mods` VALUES (26340,302,6);     -- Triple Attack+6
+INSERT INTO `item_mods` VALUES (26340,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (26341,1,25);      -- moonbow_belt_+1 DEF:25
 INSERT INTO `item_mods` VALUES (26341,8,20);      -- STR+20
 INSERT INTO `item_mods` VALUES (26341,9,20);      -- DEX+20
 INSERT INTO `item_mods` VALUES (26341,160,-6);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
+INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64

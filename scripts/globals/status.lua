@@ -1120,6 +1120,7 @@ tpz.mod =
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1565,9 +1566,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 973, -- stuff
     -- SPARE = 974, -- stuff
     -- SPARE = 975, -- stuff
+    -- SPARE = 976, -- stuff
 }
 
 tpz.latent =

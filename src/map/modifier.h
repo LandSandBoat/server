@@ -804,11 +804,13 @@ enum class Mod
     CONQUEST_REGION_BONUS     = 934, // Increases the influence points awarded to the player's nation when receiving conquest points
     CAMPAIGN_BONUS            = 935, // Increases the evaluation for allied forces by percentage
 
+    SUBTLE_BLOW_II            = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 973, // stuff
     // SPARE = 974, // stuff
     // SPARE = 975, // stuff
+    // SPARE = 976, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it
