@@ -432,6 +432,18 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         session->shuttingDown = 2;
         Sql_Query(SqlHandle, "UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
+
+        if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+        {
+            // NOTE:
+            // Supposed non-losable items are reportely lost if this condition is met:
+            // https://ffxiclopedia.fandom.com/wiki/Lu_Shang%27s_Fishing_Rod
+            // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
+            // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
+
+            ShowWarning(CL_YELLOW "SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!\n" CL_RESET, PChar->GetName());
+            synthutils::doSynthFail(PChar);
+        }
     }
 
     if (PChar->loc.zone != nullptr)
