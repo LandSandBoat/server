@@ -2906,6 +2906,19 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     const auto EmoteID = data.ref<Emote>(0x0A);
     const auto emoteMode = data.ref<EmoteMode>(0x0B);
 
+    // Rate limit emotes
+    auto lastEmoteTime = PChar->GetLocalVar("LastEmoteTime");
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 5)
+    {
+        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
+    }
+    else
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x05D: Rate limiting emote packet for %s\n" CL_RESET, PChar->GetName());
+        return;
+    }
+
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
     {
