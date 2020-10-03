@@ -221,6 +221,7 @@ enum class Mod
     HASTE_GEAR                = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
     SPELLINTERRUPT            = 168, // % Spell Interruption Rate
     MOVE                      = 169, // % Movement Speed
+    MOUNT_MOVE                = 972, // % Mount Movement Speed
     FASTCAST                  = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST                 = 407, // uncapped fast cast
     CURE_CAST_TIME            = 519, // cure cast time reduction
@@ -433,6 +434,7 @@ enum class Mod
     HIGH_JUMP_ENMITY_REDUCTION = 363, // for gear that reduces more enmity from high jump
     FORCE_JUMP_CRIT           = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH   = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+    WYVERN_SUBJOB_TRAITS      = 974, // Adds subjob traits to wyvern on spawn
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -803,13 +805,14 @@ enum class Mod
     CONQUEST_REGION_BONUS     = 934, // Increases the influence points awarded to the player's nation when receiving conquest points
     CAMPAIGN_BONUS            = 935, // Increases the evaluation for allied forces by percentage
 
-    GARDENING_WILT_BONUS      = 936, // Increases the number of Vanadays a plant can survive before it wilts
+    SUBTLE_BLOW_II            = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
+    GARDENING_WILT_BONUS      = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 972, // stuff
-    // SPARE = 973, // stuff
-    // SPARE = 974, // stuff
+    // SPARE = 976, // stuff
+    // SPARE = 977, // stuff
+    // SPARE = 978, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

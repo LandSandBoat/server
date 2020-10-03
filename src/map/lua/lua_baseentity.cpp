@@ -2348,15 +2348,18 @@ inline int32 CLuaBaseEntity::sendGuild(lua_State* L)
     TPZ_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    // uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
+    /*
+     * No more guild holidays since 2014
     if (VanadielDay == holiday)
     {
         status = GUILD_HOLYDAY;
     }
-    else if ((VanadielHour < open) || (VanadielHour >= close))
+    */
+    if ((VanadielHour < open) || (VanadielHour >= close))
     {
         status = GUILD_CLOSE;
     }
@@ -3887,7 +3890,9 @@ inline int32 CLuaBaseEntity::createShop(lua_State *L)
 /************************************************************************
 *  Function: addShopItem()
 *  Purpose : Adds an item and established price to an existing shop
-*  Example : addShopItem(512,8000)
+*          : Optionally accepts a GuildID + Guild Rank requirement
+*  Example : addShopItem(512, 8000)                                                   --Regular item
+*          : addShopItem(512, 8000, tpz.skill.CLOTHCRAFT, tpz.craftRank.JOURNEYMAN)   --Guild-rank locked item
 *  Notes   : Use with createShop() - 16 Max Items in Shop
 ************************************************************************/
 
@@ -3896,11 +3901,11 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    uint16 itemID = (uint16)lua_tonumber(L, -2);
-    uint32 price = (uint32)lua_tonumber(L, -1);
+    uint16 itemID = (uint16)lua_tonumber(L, 1);
+    uint32 price = (uint32)lua_tonumber(L, 2);
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint8 slotID = PChar->Container->getItemsCount();
@@ -3911,6 +3916,14 @@ inline int32 CLuaBaseEntity::addShopItem(lua_State *L)
     // so track the shop's number of items separately from the container's size.
     PChar->Container->setExSize(PChar->Container->getExSize() + 1);
 
+    if(lua_isnumber(L, 3) && lua_isnumber(L, 4))
+    {
+        uint8 guildID = (uint8)lua_tonumber(L, 3);
+        uint16 guildRank = (uint16)lua_tonumber(L, 4);
+
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildID(slotID, guildID);
+        ((CCharEntity*)m_PBaseEntity)->Container->setGuildRank(slotID, guildRank);
+    }
     return 0;
 }
 
@@ -4064,7 +4077,7 @@ inline int32 CLuaBaseEntity::getFreeSlotsCount(lua_State *L)
 *  Notes   : Must use trade:confirmItem(slotID) first
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
+inline int32 CLuaBaseEntity::confirmTrade(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -4073,11 +4086,21 @@ inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
-        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF && PChar->TradeContainer->getConfirmedStatus(slotID))
+        if (PChar->TradeContainer->getInvSlotID(slotID) != 0xFF)
         {
-            uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
-            auto quantity = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), PChar->TradeContainer->getConfirmedStatus(slotID));
-            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            CItem* PItem = PChar->TradeContainer->getItem(slotID);
+            if (PItem)
+            {
+                uint8 confirmedItems = PChar->TradeContainer->getConfirmedStatus(slotID);
+                auto quantity = (int32)std::min<uint32>(PChar->TradeContainer->getQuantity(slotID), confirmedItems);
+
+                PItem->setReserve(PItem->getReserve() - quantity);
+                if (confirmedItems > 0)
+                {
+                    uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
+            }
         }
     }
     PChar->TradeContainer->Clean();
@@ -4092,7 +4115,7 @@ inline int32 CLuaBaseEntity::confirmTrade(lua_State *L)
 *  Notes   :
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::tradeComplete(lua_State *L)
+inline int32 CLuaBaseEntity::tradeComplete(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -4105,8 +4128,12 @@ inline int32 CLuaBaseEntity::tradeComplete(lua_State *L)
         {
             uint8 invSlotID = PChar->TradeContainer->getInvSlotID(slotID);
             int32 quantity = PChar->TradeContainer->getQuantity(slotID);
-
-            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            CItem* PItem = PChar->TradeContainer->getItem(slotID);
+            if (PItem)
+            {
+                PItem->setReserve(0);
+                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+            }
         }
     }
     PChar->TradeContainer->Clean();
@@ -4508,7 +4535,12 @@ inline int32 CLuaBaseEntity::storeWithPorterMoogle(lua_State *L)
                 // TODO: Items need to be checked for an in-progress magian trial before storing.
                 //auto item = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
                 //if (item->isType(ITEM_EQUIPMENT) && ((CItemEquipment*)item)->getTrialNumber() != 0)
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
+                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
+                if (PItem)
+                {
+                    PItem->setReserve(0);
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
+                }
                 //else
                 //{
                 //lua_pushinteger(L, 2);
@@ -5730,6 +5762,28 @@ inline int32 CLuaBaseEntity::levelRestriction(lua_State* L)
     }
     lua_pushinteger(L, PChar->m_LevelRestriction);
     return 1;
+}
+
+/************************************************************************
+*  Function: addJobTraits
+*  Purpose : Add job traits
+*  Example : player:addJobTraits(tpz.job.WHM, 75)
+************************************************************************/
+
+int32 CLuaBaseEntity::addJobTraits(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+
+    CBattleEntity* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    
+    if (PEntity != nullptr)
+    {
+        battleutils::AddTraits(PEntity, traits::GetTraits((uint8)lua_tointeger(L, 1)), (uint8)lua_tointeger(L, 2));
+    }
+
+    return 0;
 }
 
 /************************************************************************
@@ -14351,7 +14405,7 @@ const char CLuaBaseEntity::className[] = "CBaseEntity";
 Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 {
 
-    // Messaging System
+        // Messaging System
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,showText),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageText),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,PrintToPlayer),
@@ -14580,6 +14634,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setsLevel),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelCap),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelRestriction),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addJobTraits),
 
     // Player Titles and Fame
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTitle),
@@ -14925,7 +14980,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeAllManeuvers),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateAttachments),
 
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity, spawnTrust),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawnTrust),
 
     // Mob Entity-Specific
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),

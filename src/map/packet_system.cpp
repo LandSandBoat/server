@@ -710,9 +710,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     case 0x09: // jobability
     {
         uint16 JobAbilityID = data.ref<uint16>(0x0C);
-        //if ((JobAbilityID < 496 && !charutils::hasAbility(PChar, JobAbilityID - 16)) || JobAbilityID >= 496 && !charutils::hasPetAbility(PChar, JobAbilityID - 512))
-        //    return;
-        PChar->PAI->Ability(TargID, JobAbilityID - 16);
+        PChar->PAI->Ability(TargID, JobAbilityID);
     }
     break;
     case 0x0B: // homepoint
@@ -1354,22 +1352,25 @@ void SmallPacket0x036(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-            if ((PItem == nullptr) || (PItem->isSubType(ITEM_LOCKED)) || (PItem->getQuantity() < Quantity))
+            if (PItem == nullptr || PItem->getQuantity() < Quantity)
             {
                 ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade invalid item [to NPC]! \n" CL_RESET, PChar->GetName());
-
-                // Leave the items locked so people can't use invalid trade attempts to unlock arbitrary inventory slots
                 return;
             }
-            else
+
+            if (PItem->getReserve() > 0)
             {
-                PChar->TradeContainer->setItem(slotID, PItem->getID(), invSlotID, Quantity, PItem);
-                PItem->setSubType(ITEM_LOCKED);
+                ShowError(CL_RED "SmallPacket0x036: Player %s trying to trade a RESERVED item [to NPC]! \n" CL_RESET, PChar->GetName());
+                return;
             }
+
+            PItem->setReserve(Quantity);
+            PChar->TradeContainer->setItem(slotID, PItem->getID(), invSlotID, Quantity, PItem);
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
         luautils::OnTrade(PChar, PNpc);
+        PChar->TradeContainer->unreserveUnconfirmed();
     }
     return;
 }
@@ -2719,9 +2720,10 @@ void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x058(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    // uint16 skillID = data.ref<uint16>(0x04);
-    // uint16 skillLevel = data.ref<uint16>(0x06);
-    //PChar->pushPacket(new CSynthSuggestionPacket(recipeID));
+    uint16 skillID    = data.ref<uint16>(0x04);
+    uint16 skillLevel = data.ref<uint16>(0x06);
+
+    PChar->pushPacket(new CSynthSuggestionPacket(skillID, skillLevel));
 }
 
 /************************************************************************
@@ -2879,7 +2881,7 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         return;
     }
-    
+
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionPacket(PChar, TargetID, TargetIndex, EmoteID, emoteMode, extra));
 
     luautils::OnPlayerEmote(PChar, EmoteID);
@@ -3827,13 +3829,13 @@ void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowError(CL_RED"SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity);
+            ShowExploit(CL_RED"SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity);
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowError(CL_RED"SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, PItem->getID());
+            ShowExploit(CL_RED"SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, PItem->getID());
             return;
         }
 
@@ -6096,6 +6098,16 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     if (PTarget == nullptr || PTarget->id != PChar->BazaarID.id)
         return;
 
+    // Validate purchase quantity..
+    if (Quantity < 1)
+    {
+        // Exploit attempt..
+        ShowExploit(
+            CL_RED "Player %s purchasing invalid quantity %u from Player %s bazaar! \n" CL_RESET,
+            PChar->GetName(), Quantity, PTarget->GetName());
+        return;
+    }
+
     CItemContainer* PBazaar = PTarget->getStorage(LOC_INVENTORY);
     CItemContainer* PBuyerInventory = PChar->getStorage(LOC_INVENTORY);
 
@@ -6118,30 +6130,8 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         return;
     }
 
-    // Validate this player can afford said item..
-    if (PCharGil->getQuantity() < PBazaarItem->getCharPrice())
+    if ((PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
     {
-        // Exploit attempt..
-        ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
-        PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
-        return;
-    }
-
-    if ((PBazaarItem != nullptr) && (PBazaarItem->getCharPrice() != 0) && (PBazaarItem->getQuantity() >= Quantity))
-    {
-        CItem* PItem = itemutils::GetItem(PBazaarItem);
-
-        // Validate purchase quantity..
-        if (Quantity < 1)
-        {
-            // Exploit attempt..
-            ShowError(
-                CL_RED"Player %s purchasing invalid quantity %u of itemID %u from Player %s bazaar! \n" CL_RESET,
-                PChar->GetName(), Quantity, PItem->getID(), PTarget->GetName()
-            );
-            return;
-        }
-
         uint32 Price = (PBazaarItem->getCharPrice() * Quantity);
         uint32 PriceWithTax = (PChar->loc.zone->GetTax() * Price) / 10000 + Price;
 
@@ -6149,10 +6139,12 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowError(CL_RED"Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
+            ShowExploit(CL_RED "Bazaar purchase exploit attempt by: %s\n" CL_RESET, PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
+
+        CItem* PItem = itemutils::GetItem(PBazaarItem);
 
         PItem->setCharPrice(0);
         PItem->setQuantity(Quantity);

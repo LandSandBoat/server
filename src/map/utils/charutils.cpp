@@ -1636,7 +1636,7 @@ namespace charutils
                 case SLOT_SUB:
                 {
                     PChar->look.sub = 0;
-                    PChar->m_Weapons[SLOT_SUB] = itemutils::GetUnarmedItem();           // << equips "nothing" in the sub slot to prevent multi attack exploit
+                    PChar->m_Weapons[SLOT_SUB] = itemutils::GetUnarmedItem(); // << equips "nothing" in the sub slot to prevent multi attack exploit
                     PChar->health.tp = 0;
                     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
                     BuildingCharWeaponSkills(PChar);
@@ -2415,30 +2415,30 @@ namespace charutils
                 {
                     if (PetID == 8)
                     {
-                        if (PAbility->getID() >= 496 && PAbility->getID() < 505)
+                        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_SOOTHING_RUBY)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID >= 9 && PetID <= 15)
                     {
-                        if (PAbility->getID() >= (496 + ((PetID - 8) * 16)) && PAbility->getID() < (496 + ((PetID - 7) * 16)))
+                        if (PAbility->getID() >= (ABILITY_HEALING_RUBY + ((PetID - 8) * 16)) && PAbility->getID() < (ABILITY_HEALING_RUBY + ((PetID - 7) * 16)))
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID == 16)
                     {
-                        if (PAbility->getID() >= 640 && PAbility->getID() <= 656)
+                        if (PAbility->getID() >= ABILITY_CAMISADO && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                     else if (PetID == 20)
                     {
-                        if (PAbility->getID() >= 505 && PAbility->getID() <= 512)
+                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
                         {
-                            addPetAbility(PChar, PAbility->getID() - 496);
+                            addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
                 }
@@ -2449,7 +2449,7 @@ namespace charutils
             auto skillList {battleutils::GetMobSkillList(PPet->m_MobSkillList)};
             for (auto&& abilityid : skillList)
             {
-                addPetAbility(PChar, abilityid - 496);
+                addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
             }
         }
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -2480,7 +2480,7 @@ namespace charutils
 
             if (PChar->GetMLevel() >= PAbility->getLevel())
             {
-                if (PAbility->getID() < 496 && PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility))
+                if (PAbility->getID() < ABILITY_HEALING_RUBY && PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility))
                 {
                     addAbility(PChar, PAbility->getID());
                     Charge_t* charge = ability::GetCharge(PChar, PAbility->getRecastId());
@@ -2519,7 +2519,7 @@ namespace charutils
                     continue;
                 }
 
-                if (PAbility->getLevel() != 0 && PAbility->getID() < 496)
+                if (PAbility->getLevel() != 0 && PAbility->getID() < ABILITY_HEALING_RUBY)
                 {
                     if (PAbility->getID() != ABILITY_PET_COMMANDS && CheckAbilityAddtype(PChar, PAbility) && !(PAbility->getAddType() & ADDTYPE_MAIN_ONLY))
                     {
@@ -2726,6 +2726,9 @@ namespace charutils
         if ((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000))
         {
             uint16 CurSkill = PChar->RealSkills.skill[SkillID];
+            uint16 CapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
+            // Max skill this victim level will allow.
+            // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
             uint16 MaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
 
             int16  Diff = MaxSkill - CurSkill / 10;
@@ -2775,7 +2778,8 @@ namespace charutils
                     tier -= 1;
                     SkillAmount += 1;
                 }
-                MaxSkill = MaxSkill * 10;
+                // convert to 10th units
+                CapSkill = CapSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
                 if (map_config.skillup_amount_multiplier > 1)
@@ -2787,9 +2791,10 @@ namespace charutils
                     }
                 }
 
-                if (SkillAmount + CurSkill >= MaxSkill)
+                if (SkillAmount + CurSkill >= CapSkill)
                 {
-                    SkillAmount = MaxSkill - CurSkill;
+                    // skill is capped. set blue flag
+                    SkillAmount = CapSkill - CurSkill;
                     PChar->WorkingSkills.skill[SkillID] |= 0x8000;
                 }
 
