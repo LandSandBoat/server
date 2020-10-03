@@ -3,12 +3,15 @@
 # LuaJIT_LIBRARY - The libraries needed to use LuaJIT
 # LuaJIT_INCLUDE_DIR - The LuaJIT include directories
 
+if (WIN32)
+    set(LOCAL_LIB_PATH ${PROJECT_SOURCE_DIR}/ext/${libpath})
+endif()
+
 find_library(LuaJIT_LIBRARY 
     NAMES 
-        luajit
-    PATH_SUFFIXES
-        ${lib_dir}
+        luajit luajit_64 libluajit libluajit_64
     PATHS
+        ${LOCAL_LIB_PATH}
         ${LuaJIT_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
         /usr/include)
@@ -31,4 +34,5 @@ message(STATUS "LuaJIT_INCLUDE_DIR: ${LuaJIT_INCLUDE_DIR}")
 if (${LuaJIT_FOUND})
     link_libraries(${LuaJIT_LIBRARY})
     include_directories(${LuaJIT_INCLUDE_DIR})
+    include_directories(${MYSQL_INCLUDE_DIR}/../)
 endif()

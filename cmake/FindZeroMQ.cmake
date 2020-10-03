@@ -3,12 +3,15 @@
 # ZeroMQ_LIBRARY - The libraries needed to use ZeroMQ
 # ZeroMQ_INCLUDE_DIR - The ZeroMQ include directories
 
+if (WIN32)
+    set(LOCAL_LIB_PATH ${PROJECT_SOURCE_DIR}/ext/${libpath})
+endif()
+
 find_library(ZeroMQ_LIBRARY 
     NAMES 
-        zmq zmq64 libzmq libzmq-d libzmq_64 libzmq-d_64
-    PATH_SUFFIXES
-        ${lib_dir}
+        "zmq${lib_debug}" "zmq${lib_debug}_64" "libzmq${lib_debug}" "libzmq${lib_debug}_64"
     PATHS
+        ${LOCAL_LIB_PATH}
         ${ZeroMQ_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
         /usr/include)
@@ -31,4 +34,5 @@ message(STATUS "ZeroMQ_INCLUDE_DIR: ${ZeroMQ_INCLUDE_DIR}")
 if (${ZeroMQ_FOUND})
     link_libraries(${ZeroMQ_LIBRARY})
     include_directories(${ZeroMQ_INCLUDE_DIR})
+    include_directories(${MYSQL_INCLUDE_DIR}/../)
 endif()

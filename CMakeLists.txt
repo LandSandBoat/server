@@ -7,32 +7,14 @@ set_property(GLOBAL PROPERTY CXX_EXTENSIONS ON)
 set_property(GLOBAL PROPERTY LINKER_LANGUAGE CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(Platform)
 include(StandardProjectSettings)
-include(Cache)
 include(CompilerWarnings)
 
 message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 message(STATUS "CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
-
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(platform_suffix "64")
-    set(spacer "_")
-    set(lib_dir lib64)
-elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
-    set(platform_suffix "")
-    set(spacer "")
-    set(lib_dir lib)
-endif()
-
-#link_directories(${lib_dir})
-
-if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)
-    set(lib_debug "-d")
-else()
-    set(lib_debug "")
-endif()
 
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -50,12 +32,6 @@ find_package(ZeroMQ REQUIRED)
 
 # Find LuaJIT
 find_package(LuaJIT)
-
-# Fallback to using Lua 5.1
-if (NOT LuaJIT_FOUND)
-    message(WARNING "LuaJIT not found, looking for Lua...")
-    find_package(Lua REQUIRED)
-endif()
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)

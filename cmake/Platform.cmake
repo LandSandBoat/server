@@ -1,0 +1,17 @@
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(platform_suffix "64")
+    set(spacer "_")
+    set(lib_dir lib64)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set(platform_suffix "")
+    set(spacer "")
+    set(lib_dir lib)
+endif()
+
+if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)
+    set(lib_debug "-d")
+else()
+    set(lib_debug "")
+endif()
+
+set(libpath "lib${platform_suffix}")
