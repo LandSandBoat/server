@@ -3415,11 +3415,12 @@ namespace battleutils
 
         for (SpawnIDList_t::const_iterator it = PMasterSourceChar->SpawnMOBList.begin(); it != PMasterSourceChar->SpawnMOBList.end(); ++it)
         {
-            CMobEntity* PCurrentMob = static_cast<CMobEntity*>(it->second);
-
-            if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
+            if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(it->second))
             {
-                PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); //true for "cure v"
+                if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
+                {
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); //true for "cure v"
+                }
             }
         }
     }
