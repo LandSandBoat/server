@@ -55,6 +55,9 @@ end
 function onMobSpawn(mob)
     local master = mob:getMaster()
     mob:addMod(tpz.mod.DMG, -40)
+    if master:getMod(tpz.mod.WYVERN_SUBJOB_TRAITS) > 0 then
+        mob:addJobTraits(master:getSubJob(), master:getSubLvl())
+    end
     local wyvernType = wyvernTypes[master:getSubJob()]
     local healingbreath = 624
     if mob:getMainLvl() >= 80 then healingbreath = 623

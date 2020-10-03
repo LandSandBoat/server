@@ -1562,13 +1562,13 @@ tpz.mod =
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
     COVER_DURATION                  = 967, -- Increases Cover Duration
-
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 974, -- stuff
     -- SPARE = 975, -- stuff
     -- SPARE = 976, -- stuff
+    -- SPARE = 977, -- stuff
 }
 
 tpz.latent =
