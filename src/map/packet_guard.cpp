@@ -14,7 +14,7 @@ std::unordered_map<CHAR_SUBSTATE, std::unordered_set<uint16>> regular_client_pac
 #endif
 
 std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>> allowList;
-std::unordered_map<uint16, uint32> ratelimitList;
+std::unordered_map<uint16, uint32> ratelimitList; // Default will be 0 - No Limit
 
 void Init()
 {
@@ -35,22 +35,6 @@ void Init()
     allowList[SUBSTATE_IN_CS][0x0B6] = true; // Tell Message
     allowList[SUBSTATE_IN_CS][0x0F2] = true; // Update Player Zone Boundary
     allowList[SUBSTATE_IN_CS][0x114] = true; // Map Marker Request
-
-    // All packets rate-limited to 1-per-second
-    for (uint16 i = 0; i < 512; ++i)
-    {
-        ratelimitList[i] = 1;
-    }
-
-    // Special do-not-limit exceptions:
-    ratelimitList[0x015] = 0; // Player Sync
-    ratelimitList[0x016] = 0; // Information Request
-    ratelimitList[0x01A] = 0; // Action Packet
-    ratelimitList[0x061] = 0; // Equipment While Zoning
-
-    // Special extra-limits exceptions:
-    ratelimitList[0x04E] = 2; // Auction Actions
-    ratelimitList[0x05D] = 5; // Emotes
 }
 
 bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
