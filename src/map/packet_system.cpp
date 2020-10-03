@@ -940,6 +940,12 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8 container = data.ref<uint8>(0x08);
     uint8    slotID = data.ref<uint8>(0x09);
 
+    if (container >= MAX_CONTAINER_ID)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x028: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        return;
+    }
+
     CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
 
     if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
@@ -1388,6 +1394,12 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8  SlotID = data.ref<uint8>(0x0E);
     uint8  StorageID = data.ref<uint8>(0x10);
 
+    if (StorageID >= MAX_CONTAINER_ID)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x037: Invalid storage ID passed to packet %u by %s\n" CL_RESET, StorageID, PChar->GetName());
+        return;
+    }
+
     if (PChar->UContainer->GetType() != UCONTAINER_USEITEM)
         PChar->PAI->UseItem(TargetID, StorageID, SlotID);
     else
@@ -1404,7 +1416,15 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x03A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    CItemContainer* PItemContainer = PChar->getStorage(data.ref<uint8>(0x04));
+    uint8 container = data.ref<uint8>(0x04);
+
+    if (container >= MAX_CONTAINER_ID)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x03A: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        return;
+    }
+
+    CItemContainer* PItemContainer = PChar->getStorage(container);
 
     uint8 size = PItemContainer->GetSize();
 
@@ -1551,10 +1571,16 @@ void SmallPacket0x041(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     PrintPacket(data);
 
+    uint8 SlotID = data.ref<uint8>(0x04);
+
+    if (SlotID >= TREASUREPOOL_SIZE)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x041: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        return;
+    }
+
     if (PChar->PTreasurePool != nullptr)
     {
-        uint8 SlotID = data.ref<uint8>(0x04);
-
         if (!PChar->PTreasurePool->HasLottedItem(PChar, SlotID))
         {
             PChar->PTreasurePool->LotItem(PChar, SlotID,tpzrand::GetRandomNumber(1,1000)); //1 ~ 998+1
@@ -1572,10 +1598,16 @@ void SmallPacket0x042(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     PrintPacket(data);
 
+    uint8 SlotID = data.ref<uint8>(0x04);
+
+    if (SlotID >= TREASUREPOOL_SIZE)
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x042: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        return;
+    }
+
     if (PChar->PTreasurePool != nullptr)
     {
-        uint8 SlotID = data.ref<uint8>(0x04);
-
         if (!PChar->PTreasurePool->HasPassedItem(PChar, SlotID))
         {
             PChar->PTreasurePool->PassItem(PChar, SlotID);
