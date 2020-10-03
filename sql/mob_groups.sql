@@ -13931,7 +13931,7 @@ INSERT INTO `mob_groups` VALUES (36,5661,289,'Warder_of_Love',0,128,0,0,99999,12
 INSERT INTO `mob_groups` VALUES (37,5662,289,'Warders_phuabo',0,128,0,0,0,123,123,0);
 INSERT INTO `mob_groups` VALUES (38,5663,289,'Warders_xzomit',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (40,5664,289,'Warders_hpemde',0,128,0,0,0,123,124,0);
-INSERT INTO `mob_groups` VALUES (41,5665,289,'Warder_Of_Dignity',0,128,0,0,99999,124,124,0);
+INSERT INTO `mob_groups` VALUES (41,5665,289,'Warder_of_Dignity',0,128,0,0,99999,124,124,0);
 INSERT INTO `mob_groups` VALUES (42,5666,289,'Warder_of_Loyalty',0,128,0,0,99999,124,124,0);
 INSERT INTO `mob_groups` VALUES (43,5667,289,'Warder_of_Mercy',0,128,0,0,99999,125,125,0);
 INSERT INTO `mob_groups` VALUES (44,5632,289,'Eschan_Porxie',180,0,0,0,0,121,122,0);
@@ -13969,7 +13969,7 @@ INSERT INTO `mob_groups` VALUES (77,5696,289,'ArkAngelMRs_Karakul',0,128,0,0,0,1
 INSERT INTO `mob_groups` VALUES (78,235,289,'Ark_Angel_EV',0,128,0,0,99999,124,124,0);
 INSERT INTO `mob_groups` VALUES (79,236,289,'Ark_Angel_GK',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (80,241,289,'Ark_Angels_Wyvern',0,128,0,0,0,122,123,0);
-INSERT INTO `mob_groups` VALUES (81,5697,289,'Warder_Of_Courage',0,128,0,0,99999,125,127,0);
+INSERT INTO `mob_groups` VALUES (81,5697,289,'Warder_of_Courage',0,128,0,0,99999,125,127,0);
 INSERT INTO `mob_groups` VALUES (82,5698,289,'Warders_Wynav',0,128,0,0,0,122,123,0);
 INSERT INTO `mob_groups` VALUES (83,5631,289,'BalamorV2',180,0,0,0,0,121,122,0);
 INSERT INTO `mob_groups` VALUES (84,5634,289,'Naga_Raja',0,128,0,0,0,124,125,0);
@@ -14033,7 +14033,7 @@ INSERT INTO `mob_groups` VALUES (42,5579,291,'Crom_Dubh',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (43,5580,291,'Golden_Kist',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (44,5581,291,'Mauve-Wristed_Gomberry',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (45,5582,291,'Dazzling_Dolores',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (46,5583,291,'Taelmoth_The_Diremaw',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (46,5583,291,'Taelmoth_the_Diremaw',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (47,5584,291,'Belphegor',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (48,5585,291,'Kabandha',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (49,5586,291,'Selkit',0,128,0,0,0,125,127,0);
@@ -14071,7 +14071,7 @@ INSERT INTO `mob_groups` VALUES (78,5614,291,'Quetzalcoatls_Sibilus',0,128,0,0,0
 -- Reisenjima_Sanctorium (Zone 293)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4819,293,'Cloud_Of_Darkness',0,128,0,0,20000,130,130,0);
+INSERT INTO `mob_groups` VALUES (1,4819,293,'Cloud_of_Darkness',0,128,0,0,20000,130,130,0);
 INSERT INTO `mob_groups` VALUES (2,4821,293,'Darkness',0,128,0,0,0,130,130,0);
 
 /*!40000 ALTER TABLE `mob_groups` ENABLE KEYS */;
