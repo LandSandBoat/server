@@ -287,6 +287,7 @@
     <ClInclude Include="..\..\src\map\items\item_equipment.h" />
     <ClInclude Include="..\..\src\map\items\item_currency.h" />
     <ClInclude Include="..\..\src\map\items\item_fish.h" />
+    <ClInclude Include="..\..\src\map\items\item_flowerpot.h" />
     <ClInclude Include="..\..\src\map\items\item_furnishing.h" />
     <ClInclude Include="..\..\src\map\items\item_general.h" />
     <ClInclude Include="..\..\src\map\items\item_linkshell.h" />
@@ -453,6 +454,7 @@
     <ClInclude Include="..\..\src\map\utils\blueutils.h" />
     <ClInclude Include="..\..\src\map\utils\charutils.h" />
     <ClInclude Include="..\..\src\map\utils\fishingutils.h" />
+    <ClInclude Include="..\..\src\map\utils\gardenutils.h" />
     <ClInclude Include="..\..\src\map\utils\guildutils.h" />
     <ClInclude Include="..\..\src\map\utils\battlefieldutils.h" />
     <ClInclude Include="..\..\src\map\utils\instanceutils.h" />
@@ -544,6 +546,7 @@
     <ClCompile Include="..\..\src\map\items\item_equipment.cpp" />
     <ClCompile Include="..\..\src\map\items\item_currency.cpp" />
     <ClCompile Include="..\..\src\map\items\item_fish.cpp" />
+    <ClCompile Include="..\..\src\map\items\item_flowerpot.cpp" />
     <ClCompile Include="..\..\src\map\items\item_furnishing.cpp" />
     <ClCompile Include="..\..\src\map\items\item_general.cpp" />
     <ClCompile Include="..\..\src\map\items\item_linkshell.cpp" />
@@ -708,6 +711,7 @@
     <ClCompile Include="..\..\src\map\utils\blueutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\charutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\fishingutils.cpp" />
+    <ClCompile Include="..\..\src\map\utils\gardenutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\guildutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\battlefieldutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\instanceutils.cpp" />

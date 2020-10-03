@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -51,7 +51,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-18.04
     services:
       mysql:
-        image: mysql:5.6
+        image: mariadb:10.1
         env:
           MYSQL_DATABASE: tpzdb
           MYSQL_ROOT_PASSWORD: root
@@ -155,7 +155,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update

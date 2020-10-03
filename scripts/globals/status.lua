@@ -1054,7 +1054,8 @@ tpz.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE                            = 169,
+    MOVE                            = 169, -- % Movement Speed
+    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
     CURE_CAST_TIME                  = 519,
@@ -1119,6 +1120,7 @@ tpz.mod =
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1560,13 +1562,14 @@ tpz.mod =
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
     COVER_DURATION                  = 967, -- Increases Cover Duration
-
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
+    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 972, -- stuff
-    -- SPARE = 973, -- stuff
-    -- SPARE = 974, -- stuff
+    -- SPARE = 976, -- stuff
+    -- SPARE = 977, -- stuff
+    -- SPARE = 978, -- stuff
 }
 
 tpz.latent =
@@ -1627,7 +1630,10 @@ tpz.latent =
     ZONE_HOME_NATION         = 54, -- in zone and citizen of nation (aketons)
     MP_OVER                  = 55, -- mp greater than # - PARAM: MP #
     WEAPON_DRAWN_MP_OVER     = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
-    ELEVEN_ROLL_ACTIVE       = 57  -- corsair roll of 11 active
+    ELEVEN_ROLL_ACTIVE       = 57, -- corsair roll of 11 active
+    IN_ASSAULT               = 58, -- is in an Instance battle in a TOAU zone
+    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
+    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
 }
 
 ------------------------------------

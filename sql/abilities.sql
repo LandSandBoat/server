@@ -255,7 +255,7 @@ INSERT INTO `abilities` VALUES (232,'elemental_siphon',15,50,1,300,175,451,0,201
 INSERT INTO `abilities` VALUES (233,'sublimation',20,35,1,30,234,0,0,189,2000,0,6,20.0,0,1,80,0,0,'WOTG');
 INSERT INTO `abilities` VALUES (234,'addendum_white',20,10,1,1,231,0,0,191,2000,0,6,20.0,0,1,80,0,16,'WOTG');
 INSERT INTO `abilities` VALUES (235,'addendum_black',20,30,1,1,231,0,0,192,2000,0,6,20.0,0,1,80,0,32,'WOTG');
-INSERT INTO `abilities` VALUES (236,'collaborator',6,65,2,60,69,526,0,185,2000,0,6,20.0,0,0,0,0,0,'WOTG');
+INSERT INTO `abilities` VALUES (236,'collaborator',6,65,2,60,69,526,0,185,2000,0,6,12.6,0,0,0,0,0,'WOTG');
 INSERT INTO `abilities` VALUES (237,'saber_dance',19,75,1,180,219,0,0,207,2000,0,6,20.0,0,1,80,3200,1,'WOTG');
 INSERT INTO `abilities` VALUES (238,'fan_dance',19,75,1,180,224,0,0,208,2000,0,6,20.0,0,1,80,3202,1,'WOTG');
 INSERT INTO `abilities` VALUES (239,'no_foot_rise',19,75,1,180,223,560,560,209,2000,0,6,20.0,0,1,80,3204,1,'WOTG');

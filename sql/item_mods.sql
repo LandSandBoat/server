@@ -1873,6 +1873,7 @@ INSERT INTO `item_mods` VALUES (10683,2,46);
 INSERT INTO `item_mods` VALUES (10683,23,8);
 INSERT INTO `item_mods` VALUES (10683,68,8);
 INSERT INTO `item_mods` VALUES (10683,384,300);
+INSERT INTO `item_mods` VALUES (10683,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (10684,1,49);      -- Summoner's Doublet +2: DEF 49
 INSERT INTO `item_mods` VALUES (10684,5,28);      -- MP +28
 INSERT INTO `item_mods` VALUES (10684,165,6);     -- Crit Hit Rate+6
@@ -14169,6 +14170,7 @@ INSERT INTO `item_mods` VALUES (14513,1,50);
 INSERT INTO `item_mods` VALUES (14513,2,33);
 INSERT INTO `item_mods` VALUES (14513,110,15);
 INSERT INTO `item_mods` VALUES (14513,384,200);
+INSERT INTO `item_mods` VALUES (14513,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (14514,1,39);      -- Summoner's Doublet +1: DEF 39
 INSERT INTO `item_mods` VALUES (14514,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (14514,357,4);     -- Blood Pact ability delay -4
@@ -16117,6 +16119,7 @@ INSERT INTO `item_mods` VALUES (15100,1,49);
 INSERT INTO `item_mods` VALUES (15100,2,24);
 INSERT INTO `item_mods` VALUES (15100,110,15);
 INSERT INTO `item_mods` VALUES (15100,243,2);
+INSERT INTO `item_mods` VALUES (15100,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (15101,1,38);      -- Summoner's Doublet: DEF 38
 INSERT INTO `item_mods` VALUES (15101,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (15101,357,3);     -- Blood Pact ability delay -3
@@ -33827,7 +33830,7 @@ INSERT INTO `item_mods` VALUES (25785,31,86);     -- Magic Evasion+86
 INSERT INTO `item_mods` VALUES (25785,68,60);     -- Evasion+60
 INSERT INTO `item_mods` VALUES (25785,165,4);     -- Crit Hit Rate+4
 INSERT INTO `item_mods` VALUES (25785,250,90);    -- Resist Slow+90
-INSERT INTO `item_mods` VALUES (25785,289,10);    -- Subtle Blow+10
+INSERT INTO `item_mods` VALUES (25785,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (25785,302,5);     -- Triple Attack+5
 INSERT INTO `item_mods` VALUES (25785,384,100);    -- Haste +1%
 INSERT INTO `item_mods` VALUES (25786,1,148);     -- ashera_harness DEF:148
@@ -34841,7 +34844,7 @@ INSERT INTO `item_mods` VALUES (26084,8,5);       -- sherida_earring STR+5
 INSERT INTO `item_mods` VALUES (26084,9,5);       -- DEX+5
 INSERT INTO `item_mods` VALUES (26084,73,5);      -- Store TP+5
 INSERT INTO `item_mods` VALUES (26084,288,5);     -- Double Attack+5
-INSERT INTO `item_mods` VALUES (26084,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26084,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26160,116,10);    -- Evanescence Ring: Dark magic skill +10
 INSERT INTO `item_mods` VALUES (26160,168,5);     -- Spell interruption rate down 5%
 INSERT INTO `item_mods` VALUES (26160,315,10);    -- Drain and Aspir potency +10%
@@ -34890,7 +34893,7 @@ INSERT INTO `item_mods` VALUES (26184,369,1);     -- Refresh+1
 INSERT INTO `item_mods` VALUES (26185,8,10);      -- niqmaddu_ring STR+10
 INSERT INTO `item_mods` VALUES (26185,9,10);      -- DEX+10
 INSERT INTO `item_mods` VALUES (26185,10,10);     -- VIT+10
-INSERT INTO `item_mods` VALUES (26185,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26185,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26185,430,3);     -- Quad Attack+3
 INSERT INTO `item_mods` VALUES (26186,1,10);      -- ilabrat_ring DEF:10
 INSERT INTO `item_mods` VALUES (26186,2,60);      -- HP+60
@@ -34983,11 +34986,13 @@ INSERT INTO `item_mods` VALUES (26340,8,15);      -- STR+15
 INSERT INTO `item_mods` VALUES (26340,9,15);      -- DEX+15
 INSERT INTO `item_mods` VALUES (26340,160,-5);    -- Damage Taken-5
 INSERT INTO `item_mods` VALUES (26340,302,6);     -- Triple Attack+6
+INSERT INTO `item_mods` VALUES (26340,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (26341,1,25);      -- moonbow_belt_+1 DEF:25
 INSERT INTO `item_mods` VALUES (26341,8,20);      -- STR+20
 INSERT INTO `item_mods` VALUES (26341,9,20);      -- DEX+20
 INSERT INTO `item_mods` VALUES (26341,160,-6);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
+INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64
@@ -37050,6 +37055,7 @@ INSERT INTO `item_mods` VALUES (26826,29,2);
 INSERT INTO `item_mods` VALUES (26826,31,36);
 INSERT INTO `item_mods` VALUES (26826,68,31);
 INSERT INTO `item_mods` VALUES (26826,384,300);
+INSERT INTO `item_mods` VALUES (26826,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (26827,1,141);
 INSERT INTO `item_mods` VALUES (26827,2,82);
 INSERT INTO `item_mods` VALUES (26827,5,44);
@@ -37065,6 +37071,7 @@ INSERT INTO `item_mods` VALUES (26827,29,4);
 INSERT INTO `item_mods` VALUES (26827,31,53);
 INSERT INTO `item_mods` VALUES (26827,68,56);
 INSERT INTO `item_mods` VALUES (26827,384,300);
+INSERT INTO `item_mods` VALUES (26827,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (26828,1,90);
 INSERT INTO `item_mods` VALUES (26828,2,23);
 INSERT INTO `item_mods` VALUES (26828,5,100);
@@ -44002,6 +44009,7 @@ INSERT INTO `item_mods` VALUES (27739,31,28);
 INSERT INTO `item_mods` VALUES (27739,68,26);
 INSERT INTO `item_mods` VALUES (27739,288,3);
 INSERT INTO `item_mods` VALUES (27739,384,800);
+INSERT INTO `item_mods` VALUES (27740,1,105);      -- Outrider Mask: DEF 105
 INSERT INTO `item_mods` VALUES (27740,2,34);
 INSERT INTO `item_mods` VALUES (27740,5,22);
 INSERT INTO `item_mods` VALUES (27740,8,24);
@@ -44015,8 +44023,8 @@ INSERT INTO `item_mods` VALUES (27740,23,5);
 INSERT INTO `item_mods` VALUES (27740,29,2);
 INSERT INTO `item_mods` VALUES (27740,31,40);
 INSERT INTO `item_mods` VALUES (27740,68,29);
-INSERT INTO `item_mods` VALUES (27740,161,-2);
 INSERT INTO `item_mods` VALUES (27740,384,700);
+INSERT INTO `item_mods` VALUES (27741,1,94);      -- Espial Cap: DEF 94
 INSERT INTO `item_mods` VALUES (27741,2,32);
 INSERT INTO `item_mods` VALUES (27741,5,17);
 INSERT INTO `item_mods` VALUES (27741,8,20);
@@ -44031,7 +44039,7 @@ INSERT INTO `item_mods` VALUES (27741,29,3);
 INSERT INTO `item_mods` VALUES (27741,31,40);
 INSERT INTO `item_mods` VALUES (27741,68,37);
 INSERT INTO `item_mods` VALUES (27741,384,700);
-INSERT INTO `item_mods` VALUES (27741,421,2);
+INSERT INTO `item_mods` VALUES (27742,1,88);      -- Wayfarer Circlet: DEF 88
 INSERT INTO `item_mods` VALUES (27742,2,32);
 INSERT INTO `item_mods` VALUES (27742,5,31);
 INSERT INTO `item_mods` VALUES (27742,8,19);
@@ -45641,7 +45649,7 @@ INSERT INTO `item_mods` VALUES (27878,31,80);
 INSERT INTO `item_mods` VALUES (27878,68,41);
 INSERT INTO `item_mods` VALUES (27878,369,20);
 INSERT INTO `item_mods` VALUES (27878,384,300);
-INSERT INTO `item_mods` VALUES (27881,1,133);
+INSERT INTO `item_mods` VALUES (27881,1,133);       -- Outrider Mail DEF:133
 INSERT INTO `item_mods` VALUES (27881,2,55);
 INSERT INTO `item_mods` VALUES (27881,5,42);
 INSERT INTO `item_mods` VALUES (27881,8,26);
@@ -45656,7 +45664,7 @@ INSERT INTO `item_mods` VALUES (27881,29,3);
 INSERT INTO `item_mods` VALUES (27881,31,50);
 INSERT INTO `item_mods` VALUES (27881,68,37);
 INSERT INTO `item_mods` VALUES (27881,384,300);
-INSERT INTO `item_mods` VALUES (27882,1,122);
+INSERT INTO `item_mods` VALUES (27882,1,122);      -- Espial Gambison: DEF 122
 INSERT INTO `item_mods` VALUES (27882,2,53);
 INSERT INTO `item_mods` VALUES (27882,5,28);
 INSERT INTO `item_mods` VALUES (27882,8,22);
@@ -45670,8 +45678,8 @@ INSERT INTO `item_mods` VALUES (27882,25,6);
 INSERT INTO `item_mods` VALUES (27882,29,5);
 INSERT INTO `item_mods` VALUES (27882,31,60);
 INSERT INTO `item_mods` VALUES (27882,68,49);
-INSERT INTO `item_mods` VALUES (27882,165,10);
 INSERT INTO `item_mods` VALUES (27882,384,300);
+INSERT INTO `item_mods` VALUES (27883,1,116);      -- Wayfarer Robe: DEF 116
 INSERT INTO `item_mods` VALUES (27883,2,48);
 INSERT INTO `item_mods` VALUES (27883,5,57);
 INSERT INTO `item_mods` VALUES (27883,8,20);
@@ -47259,6 +47267,7 @@ INSERT INTO `item_mods` VALUES (28027,2,70);
 INSERT INTO `item_mods` VALUES (28027,8,20);
 INSERT INTO `item_mods` VALUES (28027,9,-13);
 INSERT INTO `item_mods` VALUES (28027,11,-13);
+INSERT INTO `item_mods` VALUES (28029,1,94);      -- Outrider Mittens: DEF 94
 INSERT INTO `item_mods` VALUES (28029,2,24);
 INSERT INTO `item_mods` VALUES (28029,8,6);
 INSERT INTO `item_mods` VALUES (28029,9,28);
@@ -47271,8 +47280,8 @@ INSERT INTO `item_mods` VALUES (28029,23,4);
 INSERT INTO `item_mods` VALUES (28029,29,1);
 INSERT INTO `item_mods` VALUES (28029,31,25);
 INSERT INTO `item_mods` VALUES (28029,68,19);
-INSERT INTO `item_mods` VALUES (28029,161,-2);
 INSERT INTO `item_mods` VALUES (28029,384,400);
+INSERT INTO `item_mods` VALUES (28030,1,82);      -- Espial Bracers: DEF 82
 INSERT INTO `item_mods` VALUES (28030,2,22);
 INSERT INTO `item_mods` VALUES (28030,5,8);
 INSERT INTO `item_mods` VALUES (28030,8,7);
@@ -47287,7 +47296,7 @@ INSERT INTO `item_mods` VALUES (28030,29,2);
 INSERT INTO `item_mods` VALUES (28030,31,25);
 INSERT INTO `item_mods` VALUES (28030,68,24);
 INSERT INTO `item_mods` VALUES (28030,384,400);
-INSERT INTO `item_mods` VALUES (28030,421,2);
+INSERT INTO `item_mods` VALUES (28031,1,77);      -- Wayfarer Cuffs: DEF 77
 INSERT INTO `item_mods` VALUES (28031,2,20);
 INSERT INTO `item_mods` VALUES (28031,5,14);
 INSERT INTO `item_mods` VALUES (28031,8,6);
@@ -47301,7 +47310,6 @@ INSERT INTO `item_mods` VALUES (28031,29,2);
 INSERT INTO `item_mods` VALUES (28031,30,4);
 INSERT INTO `item_mods` VALUES (28031,31,35);
 INSERT INTO `item_mods` VALUES (28031,68,19);
-INSERT INTO `item_mods` VALUES (28031,369,1);
 INSERT INTO `item_mods` VALUES (28031,384,300);
 INSERT INTO `item_mods` VALUES (28032,2,6);
 INSERT INTO `item_mods` VALUES (28032,5,11);
@@ -48807,6 +48815,7 @@ INSERT INTO `item_mods` VALUES (28166,31,60);
 INSERT INTO `item_mods` VALUES (28166,68,30);
 INSERT INTO `item_mods` VALUES (28166,384,600);
 INSERT INTO `item_mods` VALUES (28166,408,20);
+INSERT INTO `item_mods` VALUES (28168,1,116);      -- Outrider Hose: DEF 116
 INSERT INTO `item_mods` VALUES (28168,2,44);
 INSERT INTO `item_mods` VALUES (28168,8,31);
 INSERT INTO `item_mods` VALUES (28168,10,19);
@@ -48818,8 +48827,8 @@ INSERT INTO `item_mods` VALUES (28168,23,4);
 INSERT INTO `item_mods` VALUES (28168,29,2);
 INSERT INTO `item_mods` VALUES (28168,31,70);
 INSERT INTO `item_mods` VALUES (28168,68,19);
-INSERT INTO `item_mods` VALUES (28168,161,-2);
 INSERT INTO `item_mods` VALUES (28168,384,500);
+INSERT INTO `item_mods` VALUES (28169,1,105);     -- Espial Hose: DEF 105
 INSERT INTO `item_mods` VALUES (28169,2,42);
 INSERT INTO `item_mods` VALUES (28169,5,14);
 INSERT INTO `item_mods` VALUES (28169,8,27);
@@ -48832,7 +48841,7 @@ INSERT INTO `item_mods` VALUES (28169,29,5);
 INSERT INTO `item_mods` VALUES (28169,31,90);
 INSERT INTO `item_mods` VALUES (28169,68,39);
 INSERT INTO `item_mods` VALUES (28169,384,500);
-INSERT INTO `item_mods` VALUES (28169,421,2);
+INSERT INTO `item_mods` VALUES (28170,1,99);      -- Wayfarer Slops DEF 99
 INSERT INTO `item_mods` VALUES (28170,2,38);
 INSERT INTO `item_mods` VALUES (28170,5,28);
 INSERT INTO `item_mods` VALUES (28170,8,24);
@@ -48845,7 +48854,6 @@ INSERT INTO `item_mods` VALUES (28170,28,5);
 INSERT INTO `item_mods` VALUES (28170,29,5);
 INSERT INTO `item_mods` VALUES (28170,31,100);
 INSERT INTO `item_mods` VALUES (28170,68,24);
-INSERT INTO `item_mods` VALUES (28170,369,1);
 INSERT INTO `item_mods` VALUES (28170,384,500);
 INSERT INTO `item_mods` VALUES (28171,2,11);
 INSERT INTO `item_mods` VALUES (28171,5,22);
