@@ -16,6 +16,9 @@ ai.target =
     TARGET = 2,
     MASTER = 3,
     TANK   = 4,
+    MELEE  = 5,
+    RANGED = 6,
+    CASTER = 7,
 }
 ai.t = ai.target
 
@@ -70,7 +73,7 @@ ai.select =
 ai.s = ai.select
 
 -- TP Move Trigger
-ai.tp = 
+ai.tp =
 {
     ASAP   = 0,
     RANDOM = 1,
