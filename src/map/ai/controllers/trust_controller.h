@@ -69,6 +69,8 @@ private:
     time_point m_CombatEndTime;
     time_point m_LastHealTickTime;
     time_point m_LastRepositionTime;
+    bool m_InTransit;
+    uint8 m_failedRepositionAttempts;
 };
 
 #endif // _TRUSTCONTROLLER

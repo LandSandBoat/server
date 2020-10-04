@@ -82,15 +82,6 @@ void CTrustController::Tick(time_point tick)
     }
 }
 
-enum MOVEMENT_TYPE
-{
-    NO_MOVE,
-    MELEE_RANGE,
-    MID_RANGE,
-    LONG_RANGE,
-    LAST_MOVEMENT_TYPE,
-};
-
 void CTrustController::DoCombatTick(time_point tick)
 {
     if (!POwner->PMaster->PAI->IsEngaged())
@@ -106,10 +97,9 @@ void CTrustController::DoCombatTick(time_point tick)
         m_LastTopEnmity = nullptr;
     }
 
+    CTrustEntity* PTrust = static_cast<CTrustEntity*>(POwner);
     CCharEntity* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     PTarget = POwner->GetBattleTarget();
-
-    MOVEMENT_TYPE range = MELEE_RANGE;
 
     if (PTarget)
     {
@@ -125,28 +115,28 @@ void CTrustController::DoCombatTick(time_point tick)
 
             POwner->PAI->PathFind->LookAt(PTarget->loc.p);
 
-            switch (range)
+            switch (PTrust->m_MovementType)
             {
             case NO_MOVE:
             {
                 if (currentDistanceToMaster > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 0.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                 }
                 else if (currentDistanceToTarget > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 0.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                 }
                 break;
             }
             case MID_RANGE:
             {
-                PathOutToDistance(PTarget, 8.0f);
+                PathOutToDistance(PTarget, 6.0f);
                 break;
             }
             case LONG_RANGE:
             {
-                PathOutToDistance(PTarget, 15.0f);
+                PathOutToDistance(PTarget, 12.0f);
                 break;
             }
             case MELEE_RANGE:
@@ -177,6 +167,12 @@ void CTrustController::DoCombatTick(time_point tick)
             }
 
             POwner->PAI->PathFind->FollowPath();
+        }
+
+        // If repositioning, bail out until you arrive
+        if (m_InTransit)
+        {
+            return;
         }
 
         m_GambitsContainer->Tick(tick);
@@ -289,14 +285,28 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     if ((currentDistanceToTarget < amount || currentDistanceToTarget > amount + 5.0f) && m_Tick - m_LastRepositionTime > 3s)
     {
         // Away from target, +/- 45 degrees
-        auto angle = getangle(PTarget->loc.p, POwner->loc.p) + 128 + tpzrand::GetRandomNumber(-32, 32);
-        position_t potential_position = {POwner->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
-            PTarget->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0};
+        auto half_sector_size = 32 + (10 * m_failedRepositionAttempts);
+        auto angle = getangle(PTarget->loc.p, POwner->loc.p) + 128 + tpzrand::GetRandomNumber(-half_sector_size, half_sector_size);
+        position_t potential_position = {PTarget->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
+            PTarget->loc.p.y, PTarget->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0};
 
         // Validate position
         if (POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->loc.zone->m_navMesh->raycast(potential_position, PTarget->loc.p))
         {
+            m_InTransit = true;
             target_position = potential_position;
+            m_LastRepositionTime = m_Tick;
+        }
+        else
+        {
+            ++m_failedRepositionAttempts;
+        }
+
+        // If stuck, reset
+        if (m_failedRepositionAttempts > 3)
+        {
+            m_InTransit = true;
+            target_position = POwner->PMaster->loc.p;
             m_LastRepositionTime = m_Tick;
         }
     }
@@ -305,6 +315,11 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     if (distance(POwner->loc.p, target_position) > 2.0f && POwner->PAI->PathFind->PathAround(target_position, 0.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
     {
         POwner->PAI->PathFind->FollowPath();
+    }
+    else
+    {
+        m_failedRepositionAttempts = 0;
+        m_InTransit = false;
     }
 }
 
