@@ -280,6 +280,7 @@ public:
     int32 setsLevel(lua_State*);            // sets the character's level
     int32 levelCap(lua_State*);             // genkai
     int32 levelRestriction(lua_State*);     // Establish/return current level restriction
+    int32 addJobTraits(lua_State*);         // Add job traits
 
     // Player Titles and Fame
     int32 getTitle(lua_State*);             // Gets character's title

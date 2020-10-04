@@ -128,7 +128,7 @@ bool isRightRecipe(CCharEntity* PChar)
                 #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN"Current skill = %u, Recipe skill = %u\n" CL_RESET, currentSkill, skillValue*10);
                 #endif
-                if (currentSkill < (skillValue*10 - 150)) // Check player skill against recipe level. Range must be 14 or less. 
+                if (currentSkill < (skillValue*10 - 150)) // Check player skill against recipe level. Range must be 14 or less.
                 {
                     PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_NOSKILL));
                     #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
@@ -418,7 +418,7 @@ int32 doSynthSkillUp(CCharEntity* PChar)
         }
 
         uint8  skillRank = PChar->RealSkills.rank[skillID]; // Check character rank
-        uint16 maxSkill  = (skillRank+1)*100;               // Skill cap, depending on rank        
+        uint16 maxSkill  = (skillRank+1)*100;               // Skill cap, depending on rank
 
         int32  charSkill = PChar->RealSkills.skill[skillID]; // Compare against real character skill, without image support, gear or moghancements
         int32  baseDiff   = PChar->CraftContainer->getQuantity(skillID-40) - charSkill/10; //the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
@@ -791,7 +791,7 @@ int32 doSynthResult(CCharEntity* PChar)
         {
             // Attempted cheating - Did not spend enough time doing the synth animation.
             #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
-            ShowDebug(CL_CYAN"Caught player cheating by injecting synth done packet.\n");
+            ShowExploit(CL_CYAN"Caught player cheating by injecting synth done packet.\n");
             #endif
             // Check whether the cheat type action requires us to actively block the cheating attempt
             // Note: Due to technical reasons jail action also forces us to break the synth

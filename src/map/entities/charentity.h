@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <deque>
 #include <mutex>
 #include <bitset>
+#include <unordered_map>
 
 #include "battleentity.h"
 #include "petentity.h"
@@ -139,6 +140,13 @@ struct GearSetMod_t
     uint8	modNameId;
     Mod  	modId;
     uint16	modValue;
+};
+
+enum CHAR_SUBSTATE
+{
+    SUBSTATE_NONE = 0,
+    SUBSTATE_IN_CS,
+    SUBSTATE_LAST,
 };
 
 /************************************************************************
@@ -329,12 +337,16 @@ public:
     bool              m_EffectsChanged;
     time_point        m_LastSynthTime;
 
+    CHAR_SUBSTATE     m_Substate;
+
     int16 addTP(int16 tp) override;
     int32 addHP(int32 hp) override;
     int32 addMP(int32 mp) override;
 
     std::vector<GearSetMod_t> m_GearSetMods;		// The list of gear set mods currently applied to the character.
     std::vector<AuctionHistory_t> m_ah_history;		// AH history list (in the future consider using UContainer)
+
+    std::unordered_map<uint16, uint32> m_PacketRecievedTimestamps;
 
     void SetPlayTime(uint32 playTime);				// Set playtime
     uint32 GetPlayTime(bool needUpdate = true);		// Get playtime

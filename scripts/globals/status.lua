@@ -1121,6 +1121,7 @@ tpz.mod =
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1562,13 +1563,14 @@ tpz.mod =
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
     COVER_DURATION                  = 967, -- Increases Cover Duration
-
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
+    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 973, -- stuff
-    -- SPARE = 974, -- stuff
-    -- SPARE = 975, -- stuff
+    -- SPARE = 976, -- stuff
+    -- SPARE = 977, -- stuff
+    -- SPARE = 978, -- stuff
 }
 
 tpz.latent =

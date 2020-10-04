@@ -118,6 +118,7 @@ namespace luautils
         lua_register(LuaHandle, "GetPlayerByName", luautils::GetPlayerByName);
         lua_register(LuaHandle, "GetPlayerByID", luautils::GetPlayerByID);
         lua_register(LuaHandle, "GetMobAction", luautils::GetMobAction);
+        lua_register(LuaHandle, "JstMidnight", luautils::JstMidnight);
         lua_register(LuaHandle, "VanadielTime", luautils::VanadielTime);
         lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
         lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
@@ -446,6 +447,7 @@ namespace luautils
         return 0;
     }
 
+
     /************************************************************************
     *                                                                       *
     *  Узнаем страну, владеющую текущим регионом                            *
@@ -687,6 +689,19 @@ namespace luautils
     int32 VanadielDayElement(lua_State* L)
     {
         lua_pushinteger(L, CVanaTime::getInstance()->getWeekday());
+        return 1;
+    }
+
+
+    /************************************************************************
+    *                                                                       *
+    * JstMidnight - Returns UTC timestamp of upcoming JST midnight
+    *                                                                       *
+    ************************************************************************/
+
+    int32 JstMidnight(lua_State* L)
+    {
+        lua_pushinteger(L, CVanaTime::getInstance()->getJstMidnight());
         return 1;
     }
 
