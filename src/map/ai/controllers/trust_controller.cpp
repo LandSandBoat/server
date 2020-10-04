@@ -239,8 +239,7 @@ void CTrustController::DoRoamTick(time_point tick)
 
     if (POwner->CanRest() &&
         m_Tick - m_CombatEndTime > 10s &&
-        m_Tick - m_LastHealTickTime > 3s &&
-        PMaster != GetTopEnmity()) // TODO: Replace with reverse enmity container
+        m_Tick - m_LastHealTickTime > 3s)
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
@@ -282,7 +281,8 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     position_t target_position = POwner->loc.p;
 
     // Invalidate position and pick new one (limit: every 3s)
-    if ((currentDistanceToTarget < amount || currentDistanceToTarget > amount + 5.0f) && m_Tick - m_LastRepositionTime > 3s)
+    if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) &&
+        m_Tick - m_LastRepositionTime > 3s)
     {
         // Away from target, +/- 45 degrees
         auto half_sector_size = 32 + (10 * m_failedRepositionAttempts);
@@ -291,7 +291,9 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
             PTarget->loc.p.y, PTarget->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0};
 
         // Validate position
-        if (POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->loc.zone->m_navMesh->raycast(potential_position, PTarget->loc.p))
+        if (POwner->PAI->PathFind->ValidPosition(potential_position) &&
+            POwner->loc.zone->m_navMesh->raycast(PTarget->loc.p, potential_position) &&
+            !POwner->loc.zone->m_navMesh->findPath(POwner->loc.p, potential_position).empty())
         {
             m_InTransit = true;
             target_position = potential_position;
@@ -312,9 +314,9 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     }
 
     // Get somewhat close to the target destination
-    if (distance(POwner->loc.p, target_position) > 2.0f && POwner->PAI->PathFind->PathAround(target_position, 0.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+    if (distance(POwner->loc.p, target_position) > 2.5f)
     {
-        POwner->PAI->PathFind->FollowPath();
+        POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN | PATHFLAG_WALLHACK);
     }
     else
     {
