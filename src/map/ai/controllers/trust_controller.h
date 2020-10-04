@@ -48,6 +48,7 @@ public:
 
     static constexpr float RoamDistance{ 2.0f };
     static constexpr float SpawnDistance{ 3.0f };
+    static constexpr float CastingDistance { 15.0f };
     static constexpr float WarpDistance{ 30.0f };
 
     // TODO: Replace with reverse enmity container
@@ -59,11 +60,17 @@ private:
     void DoCombatTick(time_point tick) override;
     void DoRoamTick(time_point tick) override;
 
+    void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
+    void PathOutToDistance(CBattleEntity* PTarget, float amount);
+
     uint8 GetPartyPosition();
 
     CBattleEntity* m_LastTopEnmity;
     time_point m_CombatEndTime;
     time_point m_LastHealTickTime;
+    time_point m_LastRepositionTime;
+    bool m_InTransit;
+    uint8 m_failedRepositionAttempts;
 };
 
 #endif // _TRUSTCONTROLLER

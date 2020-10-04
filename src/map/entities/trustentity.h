@@ -24,6 +24,16 @@
 
 #include "mobentity.h"
 
+// PTrust->m_MovementType is read from 'behaviour' in a trust's mob_pool entry
+enum TRUST_MOVEMENT_TYPE
+{
+    MELEE_RANGE = 0, // Default
+    NO_MOVE = 1,
+    MID_RANGE = 2,
+    LONG_RANGE = 3,
+    LAST_MOVEMENT_TYPE = 4,
+};
+
 class CCharEntity;
 
 class CTrustEntity : public CMobEntity
@@ -45,6 +55,7 @@ public:
     void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action) override;
 
     uint32 m_TrustID{};
+    TRUST_MOVEMENT_TYPE m_MovementType;
 };
 
 #endif

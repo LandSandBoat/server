@@ -47,7 +47,7 @@ local rovKIBattlefieldIDs = set{
     1154, -- The Beast Within (BLU LB5)
 -- TODO: GEO LB5
 -- TODO: RUN LB5
-} 
+}
 
 tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     -- Trusts not allowed in an alliance
@@ -79,7 +79,7 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
         caster:messageSystem(tpz.msg.system.TRUST_DELAY_NEW_PARTY_MEMBER)
         return -1
     end
-    
+
     -- Trusts cannot be summoned if you have hate
     if caster:hasEnmity() then
         caster:messageSystem(tpz.msg.system.TRUST_NO_ENMITY)
@@ -148,7 +148,17 @@ tpz.trust.spawn = function(caster, spell)
 end
 
 tpz.trust.message = function(mob, message_offset)
-    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (mob:getTrustID() - 896) * 100
+    local shift_offset = 0
+    local trust_id = mob:getTrustID()
+
+    -- TODO: Excenmille (S)'s lines are at 948...
+    -- Should probably have each trust pass in their own
+    -- page offset
+    if trust_id > 947 and trust_id <= 952 then
+        shift_offset = shift_offset + 1
+    end
+
+    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (trust_id - 896 + shift_offset) * 100
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 

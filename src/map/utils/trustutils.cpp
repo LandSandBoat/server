@@ -51,6 +51,8 @@ struct Trust_t
     uint8 size; // размер модели
     uint16 m_Family;
 
+    uint16 behaviour;
+
     uint8 mJob;
     uint8 sJob;
     float HPscale; // HP boost percentage
@@ -191,7 +193,7 @@ void BuildTrust(uint32 TrustID)
             trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 8);
             trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 9);
             trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 10);
-            // Behaviour
+            trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, 11);
             trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 12);
             // SpellID
             trust->size      = Sql_GetUIntData(SqlHandle, 14);
@@ -300,6 +302,7 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     PTrust->status           = STATUS_NORMAL;
     PTrust->m_ModelSize      = trustData->size;
     PTrust->m_EcoSystem      = trustData->EcoSystem;
+    PTrust->m_MovementType   = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);
 
     PTrust->SetMJob(trustData->mJob);
     PTrust->SetSJob(trustData->sJob);

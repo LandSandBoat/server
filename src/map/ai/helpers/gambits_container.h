@@ -10,16 +10,22 @@
 #include "../../status_effect.h"
 #include "../../status_effect_container.h"
 
+#include <set>
+
 namespace gambits
 {
 
 enum class G_TARGET : uint16
 {
-    SELF   = 0,
-    PARTY  = 1,
-    TARGET = 2,
-    MASTER = 3,
-    TANK   = 4,
+    SELF       = 0,
+    PARTY      = 1,
+    TARGET     = 2,
+    MASTER     = 3,
+    TANK       = 4,
+    MELEE      = 5,
+    RANGED     = 6,
+    CASTER     = 7,
+    TOP_ENMITY = 8,
 };
 
 enum class G_CONDITION : uint16
@@ -159,7 +165,10 @@ struct TrustSkill_t
 class CGambitsContainer
 {
 public:
-    CGambitsContainer(CTrustEntity* trust) : POwner(trust) {}
+    CGambitsContainer(CTrustEntity* trust)
+        : POwner(trust)
+    {
+    }
     ~CGambitsContainer() = default;
 
     void AddGambit(Gambit_t gambit);
@@ -177,6 +186,36 @@ private:
     CTrustEntity* POwner;
     time_point m_lastAction;
     std::vector<Gambit_t> gambits;
+
+    std::set<JOBTYPE> melee_jobs =
+    {
+        JOB_WAR,
+        JOB_MNK,
+        JOB_THF,
+        JOB_PLD,
+        JOB_DRK,
+        JOB_BST,
+        JOB_SAM,
+        JOB_NIN,
+        JOB_DRG,
+        JOB_BLU,
+        JOB_PUP,
+        JOB_DNC,
+        JOB_RUN,
+    };
+
+    std::set<JOBTYPE> caster_jobs =
+    {
+        JOB_WHM,
+        JOB_BLM,
+        JOB_RDM,
+        JOB_BRD,
+        JOB_SMN,
+        JOB_BLU,
+        JOB_SCH,
+        JOB_GEO,
+        JOB_RUN,
+    };
 };
 
 } // namespace gambits
