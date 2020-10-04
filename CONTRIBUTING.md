@@ -78,32 +78,32 @@ Clang-Format is also an option for C++
   variable2 = thing2
   ```
   not like this:
-  ```
+  ```lua
   variable1 = thing1
    variable = thing
   ```
   and definitely not like this:
-  ```
+  ```lua
   if  variable == thing  then
   if variable2 == thing2 then
   ```
   
 * Large if statements should be broken up like so:
-```lua
--- Short
-if condition then
+  ```lua
+  -- Short
+  if condition then
     bla
-end
+  end
 
--- Long or many multiple conditions:
-if
+  -- Long or many multiple conditions:
+  if
     condition and
     condition or
     condition
-then
+  then
     stuff
-end
-```
+  end
+  ```
 
 ### SQL
 
