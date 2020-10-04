@@ -1,6 +1,7 @@
 ﻿#include "gambits_container.h"
 
 #include "../../ability.h"
+#include "../../enmity_container.h"
 #include "../../spell.h"
 #include "../../mobskill.h"
 #include "../../weapon_skill.h"
@@ -143,6 +144,21 @@ void CGambitsContainer::Tick(time_point tick)
             });
             return result;
         }
+        else if (predicate.target == G_TARGET::TOP_ENMITY)
+        {
+            auto result = false;
+            if (auto PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+            {
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && PMob->PEnmityContainer->GetHighestEnmity() == PMember)
+                    {
+                        result = true;
+                    }
+                });
+            }
+            return result;
+        }
 
         // Fallthrough
         return false;
@@ -239,6 +255,19 @@ void CGambitsContainer::Tick(time_point tick)
                         target = PMember;
                     }
                 });
+            }
+            else if (gambit.predicates[0].target == G_TARGET::TOP_ENMITY)
+            {
+                if (auto PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+                {
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
+                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) && PMob->PEnmityContainer->GetHighestEnmity() == PMember)
+                        {
+                            target = PMember;
+                        }
+                    });
+                }
             }
 
             if (!target)

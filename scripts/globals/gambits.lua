@@ -11,14 +11,15 @@ ai = ai or {}
 -- Target
 ai.target =
 {
-    SELF   = 0,
-    PARTY  = 1,
-    TARGET = 2,
-    MASTER = 3,
-    TANK   = 4,
-    MELEE  = 5,
-    RANGED = 6,
-    CASTER = 7,
+    SELF       = 0,
+    PARTY      = 1,
+    TARGET     = 2,
+    MASTER     = 3,
+    TANK       = 4,
+    MELEE      = 5,
+    RANGED     = 6,
+    CASTER     = 7,
+    TOP_ENMITY = 8,
 }
 ai.t = ai.target
 
