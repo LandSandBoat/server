@@ -18,14 +18,11 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    -- TODO: Why do you have Rahal's messages...
-    --[[
     tpz.trust.teamworkMessage(mob, {
-        [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_1,
-        [tpz.magic.spell.SHANTOTTO] = tpz.trust.message_offset.TEAMWORK_2,
-        [tpz.magic.spell.SHANTOTTO_II] = tpz.trust.message_offset.TEAMWORK_2,
+        [tpz.magic.spell.SHANTOTTO] = tpz.trust.message_offset.TEAMWORK_1,
+        [tpz.magic.spell.SHANTOTTO_II] = tpz.trust.message_offset.TEAMWORK_1,
+        [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_2,
     })
-    ]]--
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 5,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.CONVERT)
@@ -51,11 +48,9 @@ function onMobSpawn(mob)
 end
 
 function onMobDespawn(mob)
-    -- TODO: Why do you have Rahal's messages...
-    -- tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
+    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
 end
 
 function onMobDeath(mob)
-    -- TODO: Why do you have Rahal's messages...
-    -- tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
+    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
 end
