@@ -2,6 +2,7 @@
 --  PET: Wyvern
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/ability")
 require("scripts/globals/msg")
 
 local WYVERN_OFFENSIVE = 1
@@ -59,28 +60,29 @@ function onMobSpawn(mob)
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
     local wyvernType = wyvernTypes[master:getSubJob()]
-    local healingbreath = 624
-    if mob:getMainLvl() >= 80 then healingbreath = 623
-    elseif mob:getMainLvl() >= 40 then healingbreath = 626
-    elseif mob:getMainLvl() >= 20 then healingbreath = 625 end
+    local healingbreath = tpz.jobAbility.HEALING_BREATH
+    if mob:getMainLvl() >= 80 then healingbreath = tpz.jobAbility.HEALING_BREATH_IV
+    elseif mob:getMainLvl() >= 40 then healingbreath = tpz.jobAbility.HEALING_BREATH_III
+    elseif mob:getMainLvl() >= 20 then healingbreath = tpz.jobAbility.HEALING_BREATH_II
+	end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local party = player:getParty()
             for _, member in ipairs(party) do
                 if member:hasStatusEffect(tpz.effect.POISON) then
-                    player:getPet():useJobAbility(627, member)
+                    player:getPet():useJobAbility(tpz.jobAbility.REMOVE_POISON, member)
                     break
                 elseif member:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
-                    player:getPet():useJobAbility(628, member)
+                    player:getPet():useJobAbility(tpz.jobAbility.REMOVE_BLINDNESS, member)
                     break
                 elseif member:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
-                    player:getPet():useJobAbility(629, member)
+                    player:getPet():useJobAbility(tpz.jobAbility.REMOVE_PARALYSIS, member)
                     break
                 elseif (member:hasStatusEffect(tpz.effect.CURSE_I) or member:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
-                    player:getPet():useJobAbility(637, member)
+                    player:getPet():useJobAbility(tpz.jobAbility.REMOVE_CURSE, member)
                     break
                 elseif (member:hasStatusEffect(tpz.effect.DISEASE) or member:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
-                    player:getPet():useJobAbility(638, member)
+                    player:getPet():useJobAbility(tpz.jobAbility.REMOVE_DISEASE, member)
                     break
                 end
             end
@@ -107,13 +109,19 @@ function onMobSpawn(mob)
                 for mod = 0, 5 do
                     if target:getMod(tpz.mod.FIREDEF + mod) < target:getMod(tpz.mod.FIREDEF + weakness) then
                         breaths = {}
-                        table.insert(breaths, 630 + mod)
+                        table.insert(breaths, tpz.jobAbility.FLAME_BREATH + mod)
                     elseif target:getMod(tpz.mod.FIREDEF + mod) == target:getMod(tpz.mod.FIREDEF + weakness) then
-                        table.insert(breaths, 630 + mod)
+                        table.insert(breaths, tpz.jobAbility.FLAME_BREATH + mod)
                     end
                 end
             else
-                breaths = {630, 631, 632, 633, 634, 635}
+                breaths = {tpz.jobAbility.FLAME_BREATH,
+							tpz.jobAbility.FROST_BREATH,
+							tpz.jobAbility.GUST_BREATH,
+							tpz.jobAbility.SAND_BREATH,
+							tpz.jobAbility.LIGHTNING_BREATH,
+							tpz.jobAbility.HYDRO_BREATH
+						  }
             end
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
         end)
