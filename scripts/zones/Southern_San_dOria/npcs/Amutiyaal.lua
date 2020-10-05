@@ -10,6 +10,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -------------------------------------
 
 --[[
@@ -61,7 +62,7 @@ function onTrigger(player, npc)
         else
             if (WildcatSandy == 0) then
                 player:startEvent(813)
-            elseif (player:isMaskFull(WildcatSandy, 20) == true) then
+            elseif utils.mask.isFull(WildcatSandy, 20) then
                 player:startEvent(815)
             else
                 player:startEvent(814)

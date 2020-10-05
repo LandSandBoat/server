@@ -10,7 +10,9 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local exoticDelacacies = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
@@ -80,7 +82,7 @@ function onEventFinish(player, csid, option)
     if (csid == 5071) then
         player:confirmTrade()
         player:setMaskBit("ATWTTB_Payments", 2, true)
-        if (player:isMaskFull(player:getCharVar("ATWTTB_Payments"), 5)) then
+        if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
             npcUtil.giveKeyItem(tpz.ki.TARUTARU_SAUCE_RECEIPT)
         end
 

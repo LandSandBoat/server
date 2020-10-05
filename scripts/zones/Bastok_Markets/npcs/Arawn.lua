@@ -4,11 +4,12 @@
 -- Starts & Finishes Quest: Stamp Hunt
 -- !pos -121.492 -4.000 -123.923 235
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -22,7 +23,7 @@ function onTrigger(player, npc)
         player:startEvent(429)
     elseif (StampHunt == QUEST_AVAILABLE) then
         player:startEvent(225)
-    elseif (StampHunt == QUEST_ACCEPTED and player:isMaskFull(player:getCharVar("StampHunt_Mask"), 7) == true) then
+    elseif StampHunt == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar("StampHunt_Mask"), 7) then
         player:startEvent(226)
     else
         player:startEvent(114)
