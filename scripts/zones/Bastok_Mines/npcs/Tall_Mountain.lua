@@ -19,7 +19,7 @@ function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 3) then
         player:startEvent(182)
-    elseif (StampHunt == QUEST_ACCEPTED and utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 1) == false) then
+    elseif (StampHunt == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 1)) then
         player:startEvent(85)
     else
         player:startEvent(55)

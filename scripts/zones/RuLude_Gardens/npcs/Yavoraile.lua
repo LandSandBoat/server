@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatJeuno, 4) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 4)) then
         player:startEvent(10092)
     else
         player:startEvent(118)

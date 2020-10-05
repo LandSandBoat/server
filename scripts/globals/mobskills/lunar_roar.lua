@@ -19,7 +19,7 @@ function onMobWeaponSkill(target, mob, skill)
 
     for i, effect in ipairs(effects) do
         -- check mask bit for tpz.effectFlag.DISPELABLE
-        if (utils.mask.getBit(effect:getFlag(), 0) == true and effect:getType() ~= tpz.effect.RERAISE and num < 10) then
+        if (utils.mask.getBit(effect:getFlag(), 0) and effect:getType() ~= tpz.effect.RERAISE and num < 10) then
             target:delStatusEffect(effect:getType())
             num = num + 1
         end

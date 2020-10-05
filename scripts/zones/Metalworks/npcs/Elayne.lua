@@ -13,7 +13,7 @@ end
 function onTrigger(player, npc)
     local StampHunt = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
 
-    if (StampHunt == QUEST_ACCEPTED and utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 3) == false) then
+    if (StampHunt == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 3)) then
         player:startEvent(725)
     else
         player:startEvent(704)
