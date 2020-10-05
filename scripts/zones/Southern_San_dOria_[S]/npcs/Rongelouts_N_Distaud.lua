@@ -4,6 +4,7 @@
 -- !pos 0.067 2 -22 80
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -25,7 +26,6 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 25) then -- Gifts Of Griffon Trade
         player:tradeComplete()
-        local mask = player:getCharVar("GiftsOfGriffonPlumes")
-        player:setMaskBit(mask, "GiftsOfGriffonPlumes", 3, true)
+        player:setCharVar("GiftsOfGriffonPlumes", utils.mask.setBit(player:getCharVar("GiftsOfGriffonPlumes"), 3, true))
     end
 end

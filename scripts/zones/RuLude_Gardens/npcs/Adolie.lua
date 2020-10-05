@@ -4,6 +4,7 @@
 -- !pos -35 2 59 243
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -24,6 +25,6 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10091) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 3, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 3, true))
     end
 end

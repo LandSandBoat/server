@@ -4,12 +4,13 @@
 -- Starts and Finishes Quest: Child's Play
 -- !pos -60 0.1 -8 246
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/keyitems")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -48,6 +49,6 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     elseif (csid == 316) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 16, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 16, true))
     end
 end

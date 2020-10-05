@@ -4,6 +4,7 @@
 -- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -25,6 +26,6 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10089) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 0, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 0, true))
     end
 end

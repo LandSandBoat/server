@@ -5,10 +5,11 @@
 -- Starts & Finishes: The Usual
 -- !pos -163 -8 13 236
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -97,7 +98,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 255) then
         player:setCharVar("MissionStatus", 2)
     elseif (csid == 356) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 3, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 3, true))
     end
 
 end

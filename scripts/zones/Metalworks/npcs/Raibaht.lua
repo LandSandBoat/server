@@ -10,6 +10,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -69,7 +70,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         end
     elseif (csid == 933) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 5, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 5, true))
     end
 
 end

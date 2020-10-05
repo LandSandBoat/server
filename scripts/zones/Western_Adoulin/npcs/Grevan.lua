@@ -6,6 +6,7 @@
 -- !pos 50 0 6 256
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -40,6 +41,6 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 69) then
         -- Progresses Quest: 'Order Up'
-        player:setMaskBit("Order_Up_NPCs", 10, true)
+        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 10, true))
     end
 end

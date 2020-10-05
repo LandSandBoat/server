@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -26,6 +27,6 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 747 then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 13, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 13, true))
     end
 end

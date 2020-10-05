@@ -4,12 +4,13 @@
 -- !pos 122 -2 112 239
 -- CSID's missing in autoEventID please check the old forums under resources for all of shantotto's csid's. I found them all manually.
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/wsquest")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 local wsQuest = tpz.wsquest.retribution
@@ -181,7 +182,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 409) then
         player:setCharVar("ClassReunionProgress", 4)
     elseif (csid == 498) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 6, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 6, true))
     elseif (csid == 397) then
         player:addKeyItem(tpz.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GLOVE_OF_PERPETUAL_TWILIGHT)

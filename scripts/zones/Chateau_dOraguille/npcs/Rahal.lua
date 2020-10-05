@@ -4,10 +4,11 @@
 -- Involved in Quests: The Holy Crest, Lure of the Wildcat (San d'Oria)
 -- !pos -28 0.1 -6 233
 -----------------------------------
-require("scripts/globals/status")
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -69,7 +70,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DRAGON_CURSE_REMEDY)
     elseif (csid == 559) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 17, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 17, true))
     elseif (csid == 121) then
         if (option == 1) then
             player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)

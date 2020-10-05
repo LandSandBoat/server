@@ -4,6 +4,7 @@
 -- Involved in Quest: Grimy Signposts
 -------------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -------------------------------------
 
 function onTrade(player, npc, trade)
@@ -47,12 +48,12 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 6 and option == 1 then
-        player:setMaskBit(player:getCharVar("CleanSignPost"), "CleanSignPost", 0, true)
+        player:setCharVar("CleanSignPost", utils.mask.setBit(player:getCharVar("CleanSignPost"), 0, true))
     elseif csid == 7 and option == 1 then
-        player:setMaskBit(player:getCharVar("CleanSignPost"), "CleanSignPost", 1, true)
+        player:setCharVar("CleanSignPost", utils.mask.setBit(player:getCharVar("CleanSignPost"), 1, true))
     elseif csid == 8 and option == 1 then
-        player:setMaskBit(player:getCharVar("CleanSignPost"), "CleanSignPost", 2, true)
+        player:setCharVar("CleanSignPost", utils.mask.setBit(player:getCharVar("CleanSignPost"), 2, true))
     elseif csid == 9 and option == 1 then
-        player:setMaskBit(player:getCharVar("CleanSignPost"), "CleanSignPost", 3, true)
+        player:setCharVar("CleanSignPost", utils.mask.setBit(player:getCharVar("CleanSignPost"), 3, true))
     end
 end

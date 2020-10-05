@@ -3,8 +3,9 @@
 --  NPC: Red Ghost
 -- Standard Info NPC
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/pathfind")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 local path =
@@ -53,7 +54,7 @@ end
 
 function onEventFinish(player, csid, option, npc)
     if (csid == 314) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 15, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 15, true))
     end
 
     npc:wait(0)

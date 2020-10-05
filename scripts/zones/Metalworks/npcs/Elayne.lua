@@ -4,6 +4,7 @@
 -- Involved in Quest: Stamp Hunt
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -25,7 +26,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 725) then
-        player:setMaskBit(player:getCharVar("StampHunt_Mask"), "StampHunt_Mask", 3, true)
+        player:setCharVar("StampHunt_Mask", utils.mask.setBit(player:getCharVar("StampHunt_Mask"), 3, true))
     end
 
 end

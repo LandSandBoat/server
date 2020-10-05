@@ -5,13 +5,14 @@
 -- Starts and Finishes Quest: True Strength
 -- !pos 133 -19 34 237
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
+local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/status")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -67,7 +68,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
         end
     elseif (csid == 935) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 9, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 9, true))
     elseif (csid == 803 and option == 1) then
         player:setCharVar("FadedPromises", 2)
     elseif (csid == 804) then

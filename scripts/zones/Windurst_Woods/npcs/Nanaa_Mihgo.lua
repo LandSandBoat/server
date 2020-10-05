@@ -13,6 +13,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -147,7 +148,7 @@ function onEventFinish(player, csid, option)
 
         -- LURE OF THE WILDCAT (WINDURST)
     elseif csid == 732 then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 4, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
 
         -- THE TENSHODO SHOWDOWN
     elseif (csid == 496) then

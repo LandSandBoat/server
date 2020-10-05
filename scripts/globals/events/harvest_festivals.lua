@@ -1,15 +1,10 @@
----------------------------------------------------------
----------------------------------------------------------
-------------    Harvest Festivals    --------------------
----------------------------------------------------------
----------------------------------------------------------
-
-require("scripts/globals/status")
+------------------------------------
+-- Harvest Festivals
+------------------------------------
 require("scripts/globals/settings")
-
----------------------------------------------------------
----------------------------------------------------------
-
+require("scripts/globals/status")
+require("scripts/globals/utils")
+------------------------------------
 
 function isHalloweenEnabled()
     local option = 0
@@ -214,7 +209,7 @@ function onHalloweenTrade(player, trade, npc)
                 end
 
                 if (AlreadyTradedChk == false) then
-                    player:setMaskBit(harvestFestTreats, varName, itemInList, true)
+                    player:setCharVar(varName, utils.mask.setBit(harvestFestTreats, itemInList, true))
                 end
 
                 player:tradeComplete()

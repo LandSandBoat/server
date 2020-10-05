@@ -11,6 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
 local wsQuest = tpz.wsquest.savage_blade
@@ -94,7 +95,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)
     elseif (csid == 562) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 15, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     else
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SAVAGE_BLADE_LEARNED)
     end

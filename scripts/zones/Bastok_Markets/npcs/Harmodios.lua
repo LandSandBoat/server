@@ -6,7 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrigger(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
@@ -42,7 +44,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 430 then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 10, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 10, true))
     elseif csid == 490 then
         player:startEvent(491)
     elseif csid == 491 then

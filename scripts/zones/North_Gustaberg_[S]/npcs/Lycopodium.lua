@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Garlaige_Citadel_[S]/IDs")
 require("scripts/globals/npc_util")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -24,6 +25,6 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 113 then
-        player:setMaskBit(player:getCharVar("LycopodiumTeleport_Mask"), "LycopodiumTeleport_Mask", 2, true)
+        player:setCharVar("LycopodiumTeleport_Mask", utils.mask.setBit(player:getCharVar("LycopodiumTeleport_Mask"), 2, true))
     end
 end

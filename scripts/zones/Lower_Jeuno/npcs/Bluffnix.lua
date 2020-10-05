@@ -4,11 +4,12 @@
 -- Starts and Finishes Quests: Gobbiebags I-X
 -- !pos -43.099 5.900 -114.788 245
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -102,6 +103,6 @@ function onEventFinish(player, csid, option)
         player:completeQuest(JEUNO, TheGobbieBag[1])
         player:messageSpecial(ID.text.INVENTORY_INCREASED)
     elseif (csid == 10056) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 12, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 12, true))
     end
 end

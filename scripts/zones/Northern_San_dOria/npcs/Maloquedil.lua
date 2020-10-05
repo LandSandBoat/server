@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -66,6 +67,6 @@ function onEventFinish(player, csid, option)
             player:addFame(SANDORIA, 5)
         end
     elseif (csid == 807) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 7, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 7, true))
     end
 end

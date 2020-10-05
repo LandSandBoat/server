@@ -37,8 +37,10 @@ function onTrade(player, npc, trade)
     if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED) then
         local tradesMamaMia = player:getCharVar("tradesMamaMia")
         if (trade:hasItemQty(1202, 1) and trade:getItemCount() == 1) then -- Trade Bubbly water
-            wasSet = player:getMaskBit(tradesMamaMia, 0)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 0, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 0)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 0, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -48,8 +50,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1203, 1) and trade:getItemCount() == 1) then -- Trade Egil's torch
-            wasSet = player:getMaskBit(tradesMamaMia, 1)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 1, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 1)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 1, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -59,8 +63,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1204, 1) and trade:getItemCount() == 1) then -- Trade Eye of mept
-            wasSet = player:getMaskBit(tradesMamaMia, 2)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 2, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 2)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 2, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -70,8 +76,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1205, 1) and trade:getItemCount() == 1) then -- Trade Desert Light
-            wasSet = player:getMaskBit(tradesMamaMia, 3)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 3, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 3)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 3, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -81,8 +89,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1206, 1) and trade:getItemCount() == 1) then -- Trade Elder Branch
-            wasSet = player:getMaskBit(tradesMamaMia, 4)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 4, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 4)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 4, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -92,8 +102,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1207, 1) and trade:getItemCount() == 1) then -- Trade Rust 'B' Gone
-            wasSet = player:getMaskBit(tradesMamaMia, 5)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 5, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 5)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 5, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then
@@ -103,8 +115,10 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1208, 1) and trade:getItemCount() == 1) then -- Trade Ancients' Key
-            wasSet = player:getMaskBit(tradesMamaMia, 6)
-            tradesMamaMia = player:setMaskBit(tradesMamaMia, "tradesMamaMia", 6, true)
+            local wasSet = player:getMaskBit(tradesMamaMia, 6)
+            tradesMamaMia = utils.mask.setBit(tradesMamaMia, 6, true)
+            player:setCharVar("tradesMamaMia", tradesMamaMia)
+
             if utils.mask.isFull(tradesMamaMia, 7) then
                 player:startEvent(195) -- Traded all seven items
             elseif (wasSet) then

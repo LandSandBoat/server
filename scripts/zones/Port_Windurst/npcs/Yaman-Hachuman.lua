@@ -5,8 +5,9 @@
 --  Involved in Quests: Wonder Wands
 -- !pos -101.209 -4.25 110.886 240
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -34,7 +35,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 624) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 16, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 16, true))
     end
 
 end

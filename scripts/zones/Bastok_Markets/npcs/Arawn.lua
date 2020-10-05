@@ -53,7 +53,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13081)
         end
     elseif (csid == 429) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 11, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 11, true))
     end
 
 end

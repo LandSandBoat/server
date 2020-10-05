@@ -4,6 +4,7 @@
 -- Involved in Quest: Stamp Hunt
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -28,7 +29,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 726) then
-        player:setMaskBit(player:getCharVar("StampHunt_Mask"), "StampHunt_Mask", 4, true)
+        player:setCharVar("StampHunt_Mask", utils.mask.setBit(player:getCharVar("StampHunt_Mask"), 4, true))
     elseif csid == 802 then
         player:addQuest(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
         player:setCharVar("FadedPromises", 1)

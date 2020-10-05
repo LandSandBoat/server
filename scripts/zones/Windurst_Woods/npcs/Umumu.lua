@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -62,6 +63,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WINDURST_WOODS_SCOOP)
         player:setCharVar("QuestMakingHeadlines_var", prog+8)
     elseif csid == 731 then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 3, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 3, true))
     end
 end

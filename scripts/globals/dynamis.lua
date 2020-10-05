@@ -1,12 +1,16 @@
+------------------------------------
+-- Dynamis
+------------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
------------------------------------
+------------------------------------
 
 dynamis = {}
 
@@ -323,15 +327,16 @@ end
 
 dynamis.entryNpcOnEventFinish = function(player, csid, option)
     local info = entryInfo[player:getZoneID()]
+    local mask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
     if info.csSand and csid == info.csSand then
         npcUtil.giveKeyItem(player, tpz.ki.VIAL_OF_SHROUDED_SAND)
-        player:setMaskBit("Dynamis_Status", 0, false)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, 0, false))
 
     -- first visit cutscene
     elseif info.csFirst and csid == info.csFirst then
-        player:setMaskBit("Dynamis_Status", info.csBit, true)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
 
     -- victory cutscene
     elseif csid == info.csWin then
@@ -339,7 +344,7 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
 
     -- dynamis entry
     elseif csid == info.csDyna then
-        player:setMaskBit("Dynamis_Status", info.csBit, true)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
 
         if option == 0 or option == 1 then
             player:setCharVar("Dynamis_subjob", option)

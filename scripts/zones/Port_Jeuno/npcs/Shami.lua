@@ -4,9 +4,10 @@
 -- Orb Seller (BCNM)
 -- !pos -14 8 44 246
 -----------------------------------
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -454,6 +455,6 @@ function onEventFinish(player, csid, option)
         end
 -- TODO : Find cutscene that tells you where you can bring it.
     elseif (csid == 317) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 17, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 17, true))
     end
 end

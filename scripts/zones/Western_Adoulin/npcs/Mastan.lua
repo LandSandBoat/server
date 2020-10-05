@@ -6,9 +6,10 @@
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -38,7 +39,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 70) then
         -- Progresses Quest: 'Order Up'
-        player:setMaskBit("Order_Up_NPCs", 11, true)
+        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 11, true))
     elseif (csid == 184) then
         -- Progresses Quest: 'The Curious Case of Melvien'
         if (option == 1) then

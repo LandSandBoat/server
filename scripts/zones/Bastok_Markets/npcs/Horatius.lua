@@ -7,6 +7,8 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BREAKING_STONES) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 553)) then
@@ -37,6 +39,6 @@ function onEventFinish(player, csid, option)
             player:confirmTrade()
         end
     elseif (csid == 428) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 12, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 12, true))
     end
 end

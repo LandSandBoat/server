@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -55,6 +56,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 13201)
         player:addTitle(tpz.title.PURPLE_BELT)
     elseif (csid == 355) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 2, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 2, true))
     end
 end

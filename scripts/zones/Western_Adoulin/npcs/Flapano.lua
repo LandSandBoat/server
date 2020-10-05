@@ -81,7 +81,7 @@ function onEventFinish(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5071) then
         player:confirmTrade()
-        player:setMaskBit("ATWTTB_Payments", 2, true)
+        player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
             npcUtil.giveKeyItem(tpz.ki.TARUTARU_SAUCE_RECEIPT)
         end

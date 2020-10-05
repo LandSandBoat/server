@@ -8,6 +8,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/magic")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onSpawn(npc)
@@ -32,6 +33,6 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 623) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 15, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 15, true))
     end
 end

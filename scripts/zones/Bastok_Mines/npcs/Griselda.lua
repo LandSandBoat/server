@@ -6,7 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end
@@ -38,6 +40,6 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 507 then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 15, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 15, true))
     end
 end

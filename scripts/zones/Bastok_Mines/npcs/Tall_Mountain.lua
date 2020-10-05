@@ -8,6 +8,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -35,7 +36,7 @@ function onEventFinish(player, csid, option)
     if (csid == 182) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 85) then
-        player:setMaskBit(player:getCharVar("StampHunt_Mask"), "StampHunt_Mask", 1, true)
+        player:setCharVar("StampHunt_Mask", utils.mask.setBit(player:getCharVar("StampHunt_Mask"), 1, true))
     end
 
 end

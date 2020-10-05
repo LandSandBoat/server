@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 
@@ -382,7 +383,7 @@ end
 function onEventFinish(player, csid, option)
     -- LURE OF THE WILDCAT
     if csid == 313 then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 19, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
 
     -- purchase cosmocleanse
     elseif csid == 310 and option == 3 then

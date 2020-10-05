@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -38,7 +39,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 807) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 3, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
     elseif (csid == 663 and option == 0) then
         player:addKeyItem(tpz.ki.GOLDSMITHING_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GOLDSMITHING_ORDER)

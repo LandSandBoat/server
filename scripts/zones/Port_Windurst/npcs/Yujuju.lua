@@ -4,10 +4,11 @@
 --  Involved In Quest: Making Headlines
 -- !pos 201.523 -4.785 138.978 240
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
 local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -55,6 +56,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 592)    then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 10)
     elseif (csid == 621) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 19, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 19, true))
     end
 end

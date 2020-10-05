@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -20,7 +21,7 @@ function onTrigger(player, npc)
 
     if player:getCharVar("thePickpocket") == 1 and not player:getMaskBit(player:getCharVar("thePickpocketSkipNPC"), 4) then
         player:showText(npc, ID.text.PICKPOCKET_GUILBERDRIER)
-        player:setMaskBit(player:getCharVar("thePickpocketSkipNPC"), "thePickpocketSkipNPC", 4, true)
+        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(player:getCharVar("thePickpocketSkipNPC"), 4, true))
     elseif exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(522)
     elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then
