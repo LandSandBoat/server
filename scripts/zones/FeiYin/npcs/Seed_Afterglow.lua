@@ -43,7 +43,7 @@ function onTrigger(player, npc)
 
     elseif (needToZone and not player:hasStatusEffect(tpz.effect.MARK_OF_SEED)) then
         player:messageSpecial(ID.text.YOU_REACH_FOR_THE_LIGHT)
-    elseif (ACP >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not player:getMaskBit(progressMask, offset)) then
+    elseif (ACP >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
         player:setCharVar("SEED_AFTERGLOW_MASK", utils.mask.setBit(progressMask, offset, true))
         intensity = intensity + 1
         if (intensity == 9) then

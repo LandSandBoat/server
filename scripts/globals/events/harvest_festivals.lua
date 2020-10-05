@@ -146,7 +146,7 @@ function onHalloweenTrade(player, trade, npc)
                     itemInList = itemInList - 32
                 end
 
-                local AlreadyTradedChk = player:getMaskBit(harvestFestTreats, itemInList)
+                local AlreadyTradedChk = utils.mask.getBit(harvestFestTreats, itemInList)
                 if (itemReward ~= 0 and player:getFreeSlotsCount() >= 1 and math.random(1, 3) < 2) then -- Math.random added so you have 33% chance on getting item
 
                     player:messageSpecial(ID.text.HERE_TAKE_THIS)

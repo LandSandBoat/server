@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil", 5600}} )) then
-        local ATWTTB_Paid_Flapano = player:getMaskBit(player:getCharVar("ATWTTB_Payments"), 2)
+        local ATWTTB_Paid_Flapano = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 2)
         if (not ATWTTB_Paid_Flapano) then
             player:startEvent(5071)
         end

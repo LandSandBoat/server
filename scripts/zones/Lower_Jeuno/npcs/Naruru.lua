@@ -22,7 +22,7 @@ function onTrigger(player, npc)
     local TheKindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno, 13) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatJeuno, 13) == false) then
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then

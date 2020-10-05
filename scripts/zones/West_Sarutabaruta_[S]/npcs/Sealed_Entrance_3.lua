@@ -11,9 +11,9 @@ require("scripts/globals/utils")
 
 function onTrigger(player, npc)
     local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local maskBit1 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 0)
-    local maskBit2 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 1)
-    local maskBit3 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 2)
+    local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
+    local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
+    local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
 
     if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         if not maskBit3 then

@@ -11,7 +11,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getCharVar("thePickpocket") == 1 and not player:getMaskBit(player:getCharVar("thePickpocketSkipNPC"), 3) then
+    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(player:getCharVar("thePickpocketSkipNPC"), 3) then
         player:showText(npc, ID.text.PICKPOCKET_RODAILLECE)
         player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(player:getCharVar("thePickpocketSkipNPC"), 3, true))
     else

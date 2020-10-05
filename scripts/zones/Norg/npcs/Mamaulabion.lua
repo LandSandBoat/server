@@ -37,7 +37,7 @@ function onTrade(player, npc, trade)
     if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED) then
         local tradesMamaMia = player:getCharVar("tradesMamaMia")
         if (trade:hasItemQty(1202, 1) and trade:getItemCount() == 1) then -- Trade Bubbly water
-            local wasSet = player:getMaskBit(tradesMamaMia, 0)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 0)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 0, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -50,7 +50,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1203, 1) and trade:getItemCount() == 1) then -- Trade Egil's torch
-            local wasSet = player:getMaskBit(tradesMamaMia, 1)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 1)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 1, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -63,7 +63,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1204, 1) and trade:getItemCount() == 1) then -- Trade Eye of mept
-            local wasSet = player:getMaskBit(tradesMamaMia, 2)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 2)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 2, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -76,7 +76,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1205, 1) and trade:getItemCount() == 1) then -- Trade Desert Light
-            local wasSet = player:getMaskBit(tradesMamaMia, 3)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 3)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 3, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -89,7 +89,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1206, 1) and trade:getItemCount() == 1) then -- Trade Elder Branch
-            local wasSet = player:getMaskBit(tradesMamaMia, 4)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 4)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 4, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -102,7 +102,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1207, 1) and trade:getItemCount() == 1) then -- Trade Rust 'B' Gone
-            local wasSet = player:getMaskBit(tradesMamaMia, 5)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 5)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 5, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 
@@ -115,7 +115,7 @@ function onTrade(player, npc, trade)
             end
 
         elseif (trade:hasItemQty(1208, 1) and trade:getItemCount() == 1) then -- Trade Ancients' Key
-            local wasSet = player:getMaskBit(tradesMamaMia, 6)
+            local wasSet = utils.mask.getBit(tradesMamaMia, 6)
             tradesMamaMia = utils.mask.setBit(tradesMamaMia, 6, true)
             player:setCharVar("tradesMamaMia", tradesMamaMia)
 

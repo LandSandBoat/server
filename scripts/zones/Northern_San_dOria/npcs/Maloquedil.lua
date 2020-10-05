@@ -34,7 +34,7 @@ function onTrigger(player, npc)
     local warding = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 7) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatSandy, 7) == false) then
         player:startEvent(807)
     elseif (warding == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then --Quest available for fame superior or equal to 3
         player:startEvent(24)

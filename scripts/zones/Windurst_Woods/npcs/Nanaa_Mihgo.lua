@@ -59,7 +59,7 @@ function onTrigger(player, npc)
 
         -- LURE OF THE WILDCAT (WINDURST)
     elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not player:getMaskBit(wildcatWindurst, 4) then
+        not utils.mask.getBit(wildcatWindurst, 4) then
         player:startEvent(732)
 
         -- CRYING OVER ONIONS

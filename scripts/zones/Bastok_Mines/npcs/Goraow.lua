@@ -30,7 +30,7 @@ function onTrigger(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 16) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatBastok, 16) == false) then
         player:startEvent(506)
     elseif (Vengeful == QUEST_AVAILABLE and Fame >= 3) then
         player:startEvent(106)

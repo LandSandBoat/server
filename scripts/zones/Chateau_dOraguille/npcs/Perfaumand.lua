@@ -24,7 +24,7 @@ function onTrigger(player, npc)
         player:startEvent(50) -- Optional 6-2 CS
     elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
         player:startEvent(79) -- Optional 6-2 CS
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 18) == false then
+    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatSandy, 18) == false then
         player:startEvent(560)
     else
         player:startEvent(522)

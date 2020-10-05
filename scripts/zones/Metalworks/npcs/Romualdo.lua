@@ -14,7 +14,7 @@ function onTrigger(player, npc)
     local StampHunt = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
     local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
 
-    if (StampHunt == QUEST_ACCEPTED and player:getMaskBit(player:getCharVar("StampHunt_Mask"), 4) == false) then
+    if (StampHunt == QUEST_ACCEPTED and utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 4) == false) then
         player:startEvent(726)
     elseif (FadedPromises == QUEST_AVAILABLE and player:getMainJob() == tpz.job.NIN and player:getMainLvl() >= 20 and player:getFameLevel(NORG) >= 4) then
         player:startEvent(802)

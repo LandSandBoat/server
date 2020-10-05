@@ -34,13 +34,13 @@ function onTrigger(player, npc)
         player:startEvent(106)
     elseif SnakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         local PuttyUsed = 0
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 0) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0) then
             PuttyUsed = PuttyUsed +1
         end
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 1) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1) then
             PuttyUsed = PuttyUsed +1
         end
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 2) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2) then
             PuttyUsed = PuttyUsed +1
         end
         player:startEvent(104, 0, 0, 0, 0, 0, 0, 0, PuttyUsed)

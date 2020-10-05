@@ -14,7 +14,7 @@ end
 function onTrigger(player, npc)
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(WildcatWindurst, 1) then
+    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 1) then
         player:startEvent(734)
     else
         player:startEvent(422)

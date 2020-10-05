@@ -34,7 +34,7 @@ function onTrigger(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 5) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and utils.mask.getBit(WildcatBastok, 5) == false) then
         player:startEvent(933)
     elseif (darkLegacy == QUEST_AVAILABLE and mJob == tpz.job.DRK and mLvl >= AF1_QUEST_LEVEL) then
         player:startEvent(751) -- Start Quest "Dark Legacy"

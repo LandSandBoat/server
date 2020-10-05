@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getMaskBit(player:getCharVar("LycopodiumTeleport_Mask"), 0) then
+    if utils.mask.getBit(player:getCharVar("LycopodiumTeleport_Mask"), 0) then
         player:messageSpecial(ID.text.LYCOPODIUM_ENTRANCED)
     else
         player:messageSpecial(ID.text.LYCOPODIUM_ENTRANCED)

@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
     local Order_Up = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
-    local Order_Grevan = player:getMaskBit(player:getCharVar("Order_Up_NPCs"), 10)
+    local Order_Grevan = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 10)
 
     if ((Order_Up == QUEST_ACCEPTED) and (not Order_Grevan)) then
         -- Progresses Quest: 'Order Up'

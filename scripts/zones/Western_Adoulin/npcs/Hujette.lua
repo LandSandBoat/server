@@ -16,7 +16,7 @@ require("scripts/globals/shop")
 function onTrade(player, npc, trade)
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
-        local ATWTTB_Paid_Hujette = player:getMaskBit(player:getCharVar("ATWTTB_Payments"), 1)
+        local ATWTTB_Paid_Hujette = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 1)
         if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas( trade, {{"gil", 3000}} )) then
             player:startEvent(5070)
         end

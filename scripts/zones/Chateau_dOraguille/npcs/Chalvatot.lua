@@ -54,7 +54,7 @@ function onTrigger(player, npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (lureOfTheWildcat == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 19) == false) then
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and utils.mask.getBit(WildcatSandy, 19) == false) then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
