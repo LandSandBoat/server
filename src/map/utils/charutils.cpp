@@ -76,6 +76,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../weapon_skill.h"
 #include "../item_container.h"
 #include "../recast_container.h"
+#include "../roe.h"
 #include "../status_effect_container.h"
 #include "../linkshell.h"
 #include "../universal_container.h"
@@ -4006,6 +4007,9 @@ namespace charutils
 
     void SaveEminenceData(CCharEntity* PChar)
     {
+        if (!roeutils::RoeSystem.RoeEnabled)
+            return;
+
         const char* Query =
             "UPDATE chars "
             "SET "

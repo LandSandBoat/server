@@ -33,13 +33,16 @@
 #include "packets/roe_update.h"
 
 std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
-RoeSystemData roeutils::RoeCache;
+RoeSystemData roeutils::RoeSystem;
 
 namespace roeutils
 {
 void init()
 {
     lua_State* L = luautils::LuaHandle;
+    lua_getglobal(L, "ENABLE_ROE");
+    roeutils::RoeSystem.RoeEnabled = lua_isnil(L, -1) || lua_tointeger(L, -1);
+    lua_pop(L, 1);
     lua_register(L, "RoeRegisterHandler", roeutils::RegisterHandler);
     lua_register(L, "RoeParseRecords", roeutils::ParseRecords);
     RoeHandlers.fill(RoeCheckHandler());
@@ -84,9 +87,9 @@ int32 RegisterHandler(lua_State* L)
 
 int32 ParseRecords(lua_State* L)
 {
-    roeutils::RoeCache.ImplementedRecords.reset();
-    roeutils::RoeCache.RepeatableRecords.reset();
-    roeutils::RoeCache.NotifyThresholds.fill(1);
+    roeutils::RoeSystem.ImplementedRecords.reset();
+    roeutils::RoeSystem.RepeatableRecords.reset();
+    roeutils::RoeSystem.NotifyThresholds.fill(1);
 
     if (lua_isnil(L, -1) || !lua_istable(L, -1))
         return 0;
@@ -97,12 +100,12 @@ int32 ParseRecords(lua_State* L)
     {
         // Set Implemented bit.
         uint32 recordID = static_cast<uint32>(lua_tointeger(L, -2));
-        roeutils::RoeCache.ImplementedRecords.set(recordID);
+        roeutils::RoeSystem.ImplementedRecords.set(recordID);
 
         // Set notification threshold
         lua_getfield(L, -1, "notify");
         if (!lua_isnil(L, -1))
-            roeutils::RoeCache.NotifyThresholds[recordID] = static_cast<uint32>((lua_tointeger(L, -1)));
+            roeutils::RoeSystem.NotifyThresholds[recordID] = static_cast<uint32>((lua_tointeger(L, -1)));
         lua_pop(L, 1);
 
         // Set repeatability bit
@@ -112,7 +115,7 @@ int32 ParseRecords(lua_State* L)
             lua_getfield(L, -1, "repeatable");
             if (lua_toboolean(L, -1))
             {
-                roeutils::RoeCache.RepeatableRecords.set(recordID);
+                roeutils::RoeSystem.RepeatableRecords.set(recordID);
             }
             lua_pop(L, 1);
         }
@@ -126,7 +129,7 @@ int32 ParseRecords(lua_State* L)
 
 bool event(ROE_EVENT eventID, CCharEntity* PChar, RoeDatagramList payload)
 {
-    if (!PChar || PChar->objtype != TYPE_PC)
+    if (!RoeSystem.RoeEnabled || !PChar || PChar->objtype != TYPE_PC)
         return false;
 
     RoeCheckHandler& handler = RoeHandlers[eventID];
@@ -230,9 +233,8 @@ bool GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID)
 
 bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
 {
-
     // We deny taking records which aren't implemented in the Lua
-    if (!roeutils::RoeCache.ImplementedRecords.test(recordID))
+    if (!roeutils::RoeSystem.ImplementedRecords.test(recordID))
     {
         std::string message = "The record #" + std::to_string(recordID) + " is not implemented at this time.";
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_NS_SAY, message, "RoE System"));
@@ -240,7 +242,7 @@ bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
     }
 
     // Prevent packet-injection for re-taking completed records which aren't marked repeatable.
-    if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeCache.RepeatableRecords.test(recordID))
+    if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeSystem.RepeatableRecords.test(recordID))
         return false;
 
     // Per above, this i < 30 is correct.

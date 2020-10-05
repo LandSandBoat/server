@@ -6814,7 +6814,7 @@ inline int32 CLuaBaseEntity::setEminenceProgress(lua_State *L)
 
     // Determine threshold for sending progress messages
     bool progressNotify {true};
-    if (uint32 threshold = roeutils::RoeCache.NotifyThresholds[recordID]; threshold > 1)
+    if (uint32 threshold = roeutils::RoeSystem.NotifyThresholds[recordID]; threshold > 1)
     {
         uint32 prevStep = static_cast<uint32>(roeutils::GetEminenceRecordProgress(PChar, recordID) / threshold);
         uint32 nextStep = static_cast<uint32>(progress / threshold);
