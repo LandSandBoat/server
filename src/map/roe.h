@@ -52,6 +52,7 @@ enum ROE_EVENT
 
 struct RoeSystemData
 {
+    bool RoeEnabled;
     std::bitset<4096> ImplementedRecords;
     std::bitset<4096> RepeatableRecords;
     std::array<uint32, 4096> NotifyThresholds;
@@ -96,7 +97,7 @@ typedef std::vector<RoeDatagram> RoeDatagramList;
 
 namespace roeutils
 {
-extern RoeSystemData RoeCache;
+extern RoeSystemData RoeSystem;
 
 void init();
 int32 RegisterHandler(lua_State* L);
