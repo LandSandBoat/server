@@ -19,10 +19,11 @@ end
 function onTrigger(player, npc)
     local exitTheGambler = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER)
     local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
+    local pickpocketMask = player:getCharVar("thePickpocketSkipNPC")
 
-    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(player:getCharVar("thePickpocketSkipNPC"), 2) then
+    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(pickpocketMask, 2) then
         player:showText(npc, ID.text.PICKPOCKET_AUREGE)
-        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(player:getCharVar("thePickpocketSkipNPC"), 2, true))
+        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(pickpocketMask, 2, true))
     elseif exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(521)
     elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then

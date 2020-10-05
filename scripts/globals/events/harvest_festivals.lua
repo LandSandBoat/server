@@ -208,7 +208,7 @@ function onHalloweenTrade(player, trade, npc)
                     player:messageSpecial(ID.text.THANK_YOU)
                 end
 
-                if (AlreadyTradedChk == false) then
+                if not AlreadyTradedChk then
                     player:setCharVar(varName, utils.mask.setBit(harvestFestTreats, itemInList, true))
                 end
 

@@ -11,9 +11,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(player:getCharVar("thePickpocketSkipNPC"), 1) then
+    local pickpocketMask = player:getCharVar("thePickpocketSkipNPC")
+
+    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(pickpocketMask, 1) then
         player:showText(npc, ID.text.PICKPOCKET_COMITTIE)
-        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(player:getCharVar("thePickpocketSkipNPC"), 1, true))
+        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(pickpocketMask, 1, true))
     else
         player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
         player:openSendBox()

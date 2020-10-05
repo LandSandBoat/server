@@ -17,11 +17,11 @@ function onTrigger(player, npc)
 
     if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         if not maskBit3 then
+            player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 2, true))
+
             if not maskBit2 or not maskBit1 then
-                player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 2, true))
                 player:messageSpecial(ID.text.DOOR_OFFSET + 1, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             else
-                player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 2, true))
                 player:messageSpecial(ID.text.DOOR_OFFSET + 4, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
                 player:delKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             end

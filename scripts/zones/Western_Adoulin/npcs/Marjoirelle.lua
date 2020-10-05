@@ -16,7 +16,7 @@ function onTrigger(player, npc)
     local Order_Up = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
     local Order_Marjoirelle = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 8)
 
-    if ((Order_Up == QUEST_ACCEPTED) and (not Order_Marjoirelle)) then
+    if Order_Up == QUEST_ACCEPTED and not Order_Marjoirelle then
         -- Progresses Quest: 'Order Up'
         player:startEvent(68)
     else
@@ -29,7 +29,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 68) then
+    if csid == 68 then
         -- Progresses Quest: 'Order Up'
         player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 8, true))
     end
