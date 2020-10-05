@@ -291,13 +291,14 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
+    local mask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
-    if info.csSand and utils.mask.getBit(player:getCharVar("Dynamis_Status"), 0) then
+    if info.csSand and utils.mask.getBit(mask, 0) then
         player:startEvent(info.csSand)
 
     -- first visit cutscene
-    elseif info.csFirst and not utils.mask.getBit(player:getCharVar("Dynamis_Status"), info.csBit) then
+    elseif info.csFirst and not utils.mask.getBit(mask, info.csBit) then
         player:startEvent(info.csFirst)
 
     -- victory cutscene
