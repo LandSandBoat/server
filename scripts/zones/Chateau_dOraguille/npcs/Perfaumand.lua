@@ -4,9 +4,10 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -39 -3 69 233
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -23,7 +24,7 @@ function onTrigger(player, npc)
         player:startEvent(50) -- Optional 6-2 CS
     elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
         player:startEvent(79) -- Optional 6-2 CS
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 18) == false then
+    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 18) then
         player:startEvent(560)
     else
         player:startEvent(522)
@@ -37,7 +38,7 @@ end
 function onEventFinish(player, csid, option)
 
     if csid == 560 then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 18, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 18, true))
     end
 
 end

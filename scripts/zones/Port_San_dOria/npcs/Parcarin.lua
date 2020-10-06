@@ -6,13 +6,14 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(player:getCharVar("WildcatSandy"), 13) then
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("WildcatSandy"), 13) then
         player:startEvent(747)
     elseif player:getCharVar("thePickpocket") == 1 then
         player:showText(npc, ID.text.PICKPOCKET_PARCARIN)
@@ -26,6 +27,6 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 747 then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 13, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 13, true))
     end
 end

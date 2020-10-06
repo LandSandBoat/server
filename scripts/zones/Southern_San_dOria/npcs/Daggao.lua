@@ -5,6 +5,7 @@
 -- !pos 89 0 119 230
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -14,7 +15,7 @@ function onTrigger(player, npc)
 
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 0) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 0)) then
         player:startEvent(810)
     elseif (player:getCharVar("peaceForTheSpiritCS") == 3) then
         player:startEvent(72)
@@ -32,7 +33,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 810) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 0, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 0, true))
     elseif (csid == 72) then
         player:setCharVar("peaceForTheSpiritCS", 4)
     end

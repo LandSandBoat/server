@@ -11,6 +11,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -24,7 +25,7 @@ function onTrigger(player, npc)
     local MissionStatus = player:getCharVar("MissionStatus")
 
     -- Lure of the Wildcat San d'Oria
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 16) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 16)) then
         player:startEvent(558)
     -- Blackmail quest
     elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)) then
@@ -152,7 +153,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 502) then
         player:setCharVar("MissionStatus", 4)
     elseif (csid == 558) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 16, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
     elseif (csid == 504) then
         player:setCharVar("MissionStatus", 9)
     elseif (csid == 546) then
