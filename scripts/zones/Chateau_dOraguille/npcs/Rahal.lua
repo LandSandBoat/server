@@ -49,15 +49,64 @@ function onTrigger(player, npc)
         end
     elseif (player:getCharVar("KnightStalker_Option2") == 1) then
         player:startEvent(118) -- Optional CS after Knight Stalker
-        -- Mission 8-2 San dOria --
-    elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 1) then
-        player:startEvent(106)
-    elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 2) then
-        player:startEvent(107)
-    else
-        player:startEvent(529) -- standard dialogue
-    end
 
+    -- San d'Oria Rank 10 Epilogue (optional)
+    elseif player:getCharVar("SandoEpilogue") == 1 then
+        player:startEvent(41)
+
+    -- San d'Oria Missions
+    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
+        local missions = tpz.mission.id.sandoria
+        local currentMission = player:getCurrentMission(SANDORIA)
+        local missionStatus = player:getCharVar("MissionStatus")
+
+        -- San d'Oria 9-2 "The Heir to the Light" (optional)
+        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
+            if missionStatus > 4 then
+                player:startEvent(40)
+            else
+                player:startEvent(39)
+            end
+
+        -- San d'Oria 9-1 "Breaking Barrier" (optional)
+        elseif player:hasCompletedMission(SANDORIA, missions.BREAKING_BARRIERS) and
+            currentMission ~= missions.THE_HEIR_TO_THE_LIGHT
+        then
+            player:startEvent(37)
+
+        -- San d'Oria 8-2 "Lightbringer"
+        elseif player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+            player:getRank() == 9 and player:getRankPoints() == 0
+        then
+            player:startEvent(42) -- (optional)
+        elseif currentMission == missions.LIGHTBRINGER then
+            if missionStatus == 1 then
+                player:startEvent(106)
+            elseif missionStatus == 2 then
+                player:startEvent(107)
+            elseif missionStatus == 6 then
+                player:startEvent(105) -- (optional)
+            end
+
+        -- San d'Oria 5-2 "The Shadow Lord" (optional)
+        elseif player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            currentMission ~= missions.LEAUTE_S_LAST_WISHES
+        then
+            player:startEvent(77)
+
+        -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
+        elseif player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            currentMission ~= missions.THE_SHADOW_LORD
+        then
+            player:startEvent(544)
+
+        -- Default dialogue
+        else
+            player:startEvent(529)
+        end
+    else
+        player:startEvent(529)
+    end
 end
 
 function onEventUpdate(player, csid, option)
@@ -95,24 +144,3 @@ function onEventFinish(player, csid, option)
         end
     end
 end
-
--- Already in-use cutscenes are not listed
--- 563 - ToAU, brought a letter from "Sage Raillefal."
--- 564 - Show Raillefal's letter to Halver?  Goes to 563.
--- 9 - Destin gives an address, Mission CS, Rahal appears
--- 10 - Destin gives another speech, Mission CS, Claide reports on Rochefogne
--- 100 - Destin speech, mission, Lightbringer
--- 106 - Take this tpz.ki.CRYSTAL_DOWSER and go to Temple of Uggalepih
--- 107 - Short version/reminder for 106
--- 105 - Unable to locate Lightbringer, but Curilla found it
--- 42 - Had my doubts about treasure, but Curilla found it.  Why was it on that island?
--- 37 - Rochefogne slain?
--- 38 - Rites of Succession
--- 39 - Dedicates upcoming battle in Fei'Yin to fallen knights.
--- 40 - Thanks for help.  Wrap up for what 39 is suggesting?
--- 41 - Lightbringer sealed away.  Thanks for help.
--- 529 - I am Rahal S Lebrart of the Royal Knights.  Possible fall back dialog if nothing active?
--- 544 - "I understand his lordship's fervor, but the risk is too great for us.  I believe this requires utmost caution."
--- 77 - "Commendable work.  With our mortal enemy vanquished, we must now restore glory to San d'Oria.  Your cooperation is expected!"
--- 534 - Halver CS, re: Rank 5 fight in Fei'Yin
--- 559 - Lure of the Wildcat

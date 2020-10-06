@@ -14,17 +14,45 @@ end
 
 function onTrigger(player, npc)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local currentMission = player:getCurrentMission(SANDORIA)
-    local missionStatus = player:getCharVar("MissionStatus")
 
-    if currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and ((player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus == 3) or missionStatus == 4 or missionStatus == 5) then
-        player:startEvent(49) -- Optional 6-2 CS
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
-        player:startEvent(50) -- Optional 6-2 CS
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 7 then
-        player:startEvent(79) -- Optional 6-2 CS
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 18) == false then
+    -- "Lure of the Wildcat"
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getMaskBit(WildcatSandy, 18) == false
+    then
         player:startEvent(560)
+
+    -- San d'Oria Missions
+    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
+        local missions = tpz.mission.id.sandoria
+        local currentMission = player:getCurrentMission(SANDORIA)
+        local missionStatus = player:getCharVar("MissionStatus")
+
+        -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
+        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and
+            (missionStatus == 2 or missionStatus == 5)
+        then
+            if missionStatus == 5 then
+                playerStartEvent(7)
+            else
+                player:startEvent(2)
+            end
+
+        -- San d'Oria 6-2 "Ranperre's Final Rest" (optional dialogue)
+        elseif currentMission == missions.RANPERRE_S_FINAL_REST then
+            if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and
+                missionStatus > 2 and missionStatus < 6
+            then
+                player:startEvent(49)
+            elseif missionStatus == 6 then
+                player:startEvent(50)
+            elseif missionStatus == 7 then
+                player:startEvent(79)
+            end
+
+        -- Default dialogue
+        else
+            player:startEvent(522)
+        end
     else
         player:startEvent(522)
     end
