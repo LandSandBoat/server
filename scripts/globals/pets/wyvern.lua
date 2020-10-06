@@ -52,6 +52,27 @@ function doHealingBreath(player, threshold, breath)
     end
 end
 
+function doStatusBreath(target, player)
+    if target:hasStatusEffect(tpz.effect.POISON) then
+        player:getPet():useJobAbility(627, target)
+        return true
+    elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
+        player:getPet():useJobAbility(628, target)
+        return true
+    elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
+        player:getPet():useJobAbility(629, target)
+        return true
+    elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
+        player:getPet():useJobAbility(637, target)
+        return true
+    elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
+        player:getPet():useJobAbility(638, target)
+        return true
+    end
+
+    return false
+end
+
 function onMobSpawn(mob)
     local master = mob:getMaster()
     mob:addMod(tpz.mod.DMG, -40)
@@ -65,23 +86,12 @@ function onMobSpawn(mob)
     elseif mob:getMainLvl() >= 20 then healingbreath = 625 end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
-            local party = player:getParty()
-            for _, member in ipairs(party) do
-                if member:hasStatusEffect(tpz.effect.POISON) then
-                    player:getPet():useJobAbility(627, member)
-                    break
-                elseif member:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
-                    player:getPet():useJobAbility(628, member)
-                    break
-                elseif member:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
-                    player:getPet():useJobAbility(629, member)
-                    break
-                elseif (member:hasStatusEffect(tpz.effect.CURSE_I) or member:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
-                    player:getPet():useJobAbility(637, member)
-                    break
-                elseif (member:hasStatusEffect(tpz.effect.DISEASE) or member:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
-                    player:getPet():useJobAbility(638, member)
-                    break
+            if not doStatusBreath(player, player) then
+                local party = player:getParty()
+                for _, member in ipairs(party) do
+                    if doStatusBreath(member, player) then
+                        break
+                    end
                 end
             end
         end)
