@@ -72,6 +72,7 @@ struct map_config_t
     uint32 max_time_lastupdate;       // max interval wait of last update player char
     int32  vanadiel_time_epoch;      // current timestamp - vanadiel_time_epoch = vana'diel time
     int32  lightluggage_block;        // если значение отлично от нуля, то персонажи с lightluggage будут удаляться с сервера автоматически
+    bool   packetguard_enabled;       // Block and report any packets that aren't in the allow-list for a player's current state.
 
     uint16 ah_base_fee_single;        // Base AH fee for single items
     uint16 ah_base_fee_stacks;        // Base AH fee for stacks

@@ -4,9 +4,10 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -39 -3 69 233
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -65,7 +66,7 @@ end
 function onEventFinish(player, csid, option)
 
     if csid == 560 then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 18, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 18, true))
     end
 
 end

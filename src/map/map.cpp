@@ -45,6 +45,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "linkshell.h"
 #include "map.h"
 #include "mob_spell_list.h"
+#include "packet_guard.h"
 #include "packet_system.h"
 #include "party.h"
 #include "utils/petutils.h"
@@ -250,6 +251,8 @@ int32 do_init(int32 argc, char** argv)
 
     g_PBuff = new int8[map_config.buffer_size + 20];
     PTempBuff = new int8[map_config.buffer_size + 20];
+
+    PacketGuard::Init();
 
     ShowStatus("The map-server is " CL_GREEN"ready" CL_RESET" to work...\n");
     ShowMessage("=======================================================================\n");
@@ -584,18 +587,35 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
         if (PacketSize[SmallPD_Type] == SmallPD_Size || PacketSize[SmallPD_Type] == 0) // Tests incoming packets for the correct size prior to processing
         {
-            // если код текущего пакета меньше либо равен последнему полученному
-            // или больше глобального то игнорируем пакет
+            // Google Translate:
+            // if the code of the current package is less than or equal to the last received
+            // or more global then ignore the package
 
             if ((ref<uint16>(SmallPD_ptr, 2) <= map_session_data->client_packet_id) ||
                 (ref<uint16>(SmallPD_ptr, 2) > SmallPD_Code))
             {
                 continue;
             }
+
             if (SmallPD_Type != 0x15)
             {
                 ShowInfo("parse: %03hX | %04hX %04hX %02hX from user: %s\n", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
             }
+
+            if (map_config.packetguard_enabled && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
+            {
+                ShowError(CL_RED "Rate-limiting packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                continue; // skip this packet
+            }
+
+            if (map_config.packetguard_enabled && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
+            {
+                // TODO: Log exploit
+                ShowError(CL_RED "Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                // TODO: Plug in optional jailutils usage
+                continue; // skip this packet
+            }
+
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
                 ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A\n", PChar->GetName(), SmallPD_Type);
@@ -612,8 +632,9 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
     }
     map_session_data->client_packet_id = SmallPD_Code;
 
-    // здесь мы проверяем, получил ли клиент предыдущий пакет
-    // если не получил, то мы не создаем новый, а отправляем предыдущий
+    // Google Translate:
+    // here we check if the client received the previous package
+    // if not received, then we do not create a new one, but send the previous one
 
     if (ref<uint16>(buff, 2) != map_session_data->server_packet_id)
     {
@@ -627,7 +648,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         return -1;
     }
 
-    // увеличиваем номер отправленного пакета только в случае отправки новых данных
+    // GT: increase the number of the sent packet only if new data is sent
 
     map_session_data->server_packet_id += 1;
 
@@ -1000,6 +1021,7 @@ int32 map_config_default()
     map_config.blood_pact_shared_timer = 0;
     map_config.vanadiel_time_epoch = 0;
     map_config.lightluggage_block = 4;
+    map_config.packetguard_enabled = false;
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
     map_config.drop_rate_multiplier = 1.0f;
@@ -1100,6 +1122,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "lightluggage_block") == 0)
         {
             map_config.lightluggage_block = atoi(w2);
+        }
+        else if (strcmp(w1, "packetguard_enabled") == 0)
+        {
+            map_config.packetguard_enabled = atoi(w2);
         }
         else if (strcmp(w1, "ah_base_fee_single") == 0)
         {

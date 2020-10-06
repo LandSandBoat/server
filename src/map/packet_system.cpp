@@ -2787,6 +2787,7 @@ void SmallPacket0x05B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             //reset if this event did not initiate another event
             if (PChar->m_event.EventID == EventID)
             {
+                PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
                 PChar->m_event.reset();
             }
         }
@@ -2824,6 +2825,7 @@ void SmallPacket0x05C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             updatePosition = luautils::OnEventFinish(PChar, EventID, Result) == 1;
             if (PChar->m_event.EventID == EventID)
             {
+                PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
                 PChar->m_event.reset();
             }
         }
