@@ -433,9 +433,7 @@ utils.mask =
         local count = 0
 
         for i = 0, len - 1 do
-            if bit.band(mask, bit.lshift(1, i)) ~= 0 then
-                count = count + 1
-            end
+            count = count + bit.band(bit.rshift(mask, i), 1)
         end
 
         return count
