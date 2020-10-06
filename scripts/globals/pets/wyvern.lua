@@ -54,19 +54,19 @@ end
 
 function doStatusBreath(target, player)
     if target:hasStatusEffect(tpz.effect.POISON) then
-        player:getPet():useJobAbility(627, target)
+        player:getPet():useJobAbility(643, target)
         return true
     elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
-        player:getPet():useJobAbility(628, target)
+        player:getPet():useJobAbility(644, target)
         return true
     elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
-        player:getPet():useJobAbility(629, target)
+        player:getPet():useJobAbility(645, target)
         return true
     elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
-        player:getPet():useJobAbility(637, target)
+        player:getPet():useJobAbility(653, target)
         return true
     elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
-        player:getPet():useJobAbility(638, target)
+        player:getPet():useJobAbility(654, target)
         return true
     end
 
@@ -80,10 +80,10 @@ function onMobSpawn(mob)
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
     local wyvernType = wyvernTypes[master:getSubJob()]
-    local healingbreath = 624
-    if mob:getMainLvl() >= 80 then healingbreath = 623
-    elseif mob:getMainLvl() >= 40 then healingbreath = 626
-    elseif mob:getMainLvl() >= 20 then healingbreath = 625 end
+    local healingbreath = 640
+    if mob:getMainLvl() >= 80 then healingbreath = 639
+    elseif mob:getMainLvl() >= 40 then healingbreath = 642
+    elseif mob:getMainLvl() >= 20 then healingbreath = 641 end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
@@ -117,13 +117,13 @@ function onMobSpawn(mob)
                 for mod = 0, 5 do
                     if target:getMod(tpz.mod.FIREDEF + mod) < target:getMod(tpz.mod.FIREDEF + weakness) then
                         breaths = {}
-                        table.insert(breaths, 630 + mod)
+                        table.insert(breaths, 646 + mod)
                     elseif target:getMod(tpz.mod.FIREDEF + mod) == target:getMod(tpz.mod.FIREDEF + weakness) then
-                        table.insert(breaths, 630 + mod)
+                        table.insert(breaths, 646 + mod)
                     end
                 end
             else
-                breaths = {630, 631, 632, 633, 634, 635}
+                breaths = {646, 647, 648, 649, 650, 651}
             end
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
         end)
