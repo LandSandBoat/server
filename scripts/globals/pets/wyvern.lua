@@ -1,5 +1,5 @@
 -----------------------------------
---  PET: Wyvern
+-- PET: Wyvern
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -53,24 +53,23 @@ function doHealingBreath(player, threshold, breath)
 end
 
 function doStatusBreath(target, player)
+    local usedBreath = true
+
     if target:hasStatusEffect(tpz.effect.POISON) then
         player:getPet():useJobAbility(643, target)
-        return true
     elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
         player:getPet():useJobAbility(644, target)
-        return true
     elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
         player:getPet():useJobAbility(645, target)
-        return true
     elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
         player:getPet():useJobAbility(653, target)
-        return true
     elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
         player:getPet():useJobAbility(654, target)
-        return true
+    else
+        usedBreath = false
     end
 
-    return false
+    return usedBreath
 end
 
 function onMobSpawn(mob)
@@ -83,7 +82,8 @@ function onMobSpawn(mob)
     local healingbreath = 640
     if mob:getMainLvl() >= 80 then healingbreath = 639
     elseif mob:getMainLvl() >= 40 then healingbreath = 642
-    elseif mob:getMainLvl() >= 20 then healingbreath = 641 end
+    elseif mob:getMainLvl() >= 20 then healingbreath = 641
+    end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
@@ -123,7 +123,7 @@ function onMobSpawn(mob)
                     end
                 end
             else
-                breaths = {646, 647, 648, 649, 650, 651}
+                breaths = { 646, 647, 648, 649, 650, 651 }
             end
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
         end)
@@ -154,17 +154,17 @@ function onMobSpawn(mob)
         local pet = player:getPet()
         local prev_exp = pet:getLocalVar("wyvern_exp")
         if prev_exp < 1000 then
-        -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
+            -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
             local currentExp = exp
-            if prev_exp+exp > 1000 then
+            if prev_exp + exp > 1000 then
                 currentExp = 1000 - prev_exp
             end
-            local diff = math.floor((prev_exp + currentExp)/200) - math.floor(prev_exp/200)
+            local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
             if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
-                pet:addMod(tpz.mod.ACC, 6*diff)
-                pet:addMod(tpz.mod.HPP, 6*diff)
-                pet:addMod(tpz.mod.ATTP, 5*diff)
+                pet:addMod(tpz.mod.ACC, 6 * diff)
+                pet:addMod(tpz.mod.HPP, 6 * diff)
+                pet:addMod(tpz.mod.ATTP, 5 * diff)
                 pet:setHP(pet:getMaxHP())
                 player:messageBasic(tpz.msg.basic.STATUS_INCREASED, 0, 0, pet)
                 master:addMod(tpz.mod.ATTP, 4 * diff)
