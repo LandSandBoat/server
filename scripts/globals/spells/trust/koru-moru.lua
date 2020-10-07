@@ -9,6 +9,8 @@ require("scripts/globals/trust")
 require("scripts/globals/utils")
 -----------------------------------------
 
+local base_message_offset = 57
+
 function onMagicCastingCheck(caster, target, spell)
     return tpz.trust.canCast(caster, spell)
 end
@@ -18,7 +20,7 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    tpz.trust.teamworkMessage(mob, {
+    tpz.trust.offsetTeamworkMessage(mob, base_message_offset, {
         [tpz.magic.spell.SHANTOTTO] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.SHANTOTTO_II] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_2,
@@ -48,9 +50,9 @@ function onMobSpawn(mob)
 end
 
 function onMobDespawn(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
+    tpz.trust.offsetMessage(mob, base_message_offset, tpz.trust.message_offset.DESPAWN)
 end
 
 function onMobDeath(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
+    tpz.trust.offsetMessage(mob, base_message_offset, tpz.trust.message_offset.DEATH)
 end

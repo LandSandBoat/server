@@ -147,22 +147,21 @@ tpz.trust.spawn = function(caster, spell)
     return 0
 end
 
-tpz.trust.message = function(mob, message_offset)
-    local shift_offset = 0
-    local trust_id = mob:getTrustID()
-
-    -- TODO: Excenmille (S)'s lines are at 948...
-    -- Should probably have each trust pass in their own
-    -- page offset
-    if trust_id > 947 and trust_id <= 952 then
-        shift_offset = shift_offset + 1
-    end
-
-    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (trust_id - 896 + shift_offset) * 100
+-- custom_base_offset is: (summon_message_id - 1) / 100
+-- Example: Shantotto II summon message ID: 11201
+-- Offset: (11201 - 1) / 100 = 112
+tpz.trust.offsetMessage = function(mob, custom_base_offset, message_offset)
+    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (custom_base_offset * 100)
+    print(trust_offset + message_offset)
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 
-tpz.trust.teamworkMessage = function(mob, teamwork_messages)
+tpz.trust.message = function(mob, message_offset)
+    local trust_offset = mob:getTrustID() - 896
+    tpz.trust.offsetMessage(mob, trust_offset, message_offset)
+end
+
+tpz.trust.offsetTeamworkMessage = function(mob, custom_base_offset, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
@@ -178,11 +177,16 @@ tpz.trust.teamworkMessage = function(mob, teamwork_messages)
     end
 
     if table.getn(messages) > 0 then
-        tpz.trust.message(mob, messages[math.random(#messages)])
+        tpz.trust.offsetMessage(mob, custom_base_offset, messages[math.random(#messages)])
     else
         -- Defaults to regular spawn message
-        tpz.trust.message(mob, tpz.trust.message_offset.SPAWN)
+        tpz.trust.offsetMessage(mob, custom_base_offset, tpz.trust.message_offset.SPAWN)
     end
+end
+
+tpz.trust.teamworkMessage = function(mob, teamwork_messages)
+    local trust_offset = mob:getTrustID() - 896
+    tpz.trust.offsetTeamworkMessage(mob, trust_offset, teamwork_messages)
 end
 
 -- For debugging and lining up teamwork messages
