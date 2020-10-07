@@ -32,13 +32,15 @@ function onTrigger(player, npc)
         player:startEvent(73)
 
     -- San d'Oria 9-2 "The Heir to the Light" (optional)
-    elseif player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
+    elseif
+        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
         player:getCharVar("MissionStatus") > 5
     then
         player:startEvent(5)
 
     -- San d'Oria 8-2 "Lightbringer" (optional)
-    elseif player:getRank() == 9 and player:getRankPoints() == 0 and
+    elseif
+        player:getRank() == 9 and player:getRankPoints() == 0 and
         player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then

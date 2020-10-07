@@ -33,7 +33,8 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 8-2 "Lightbringer" (optional dialogue)
-        elseif player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 1)
@@ -41,7 +42,8 @@ function onTrigger(player, npc)
             player:startEvent(15)
         
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
             currentMission ~= missions.LEAUTE_S_LAST_WISHES
         then
             player:startEvent(12)

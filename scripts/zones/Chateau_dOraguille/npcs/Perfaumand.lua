@@ -17,7 +17,8 @@ function onTrigger(player, npc)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
     -- "Lure of the Wildcat"
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+    if
+        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         player:getMaskBit(WildcatSandy, 18) == false
     then
         player:startEvent(560)
@@ -29,9 +30,7 @@ function onTrigger(player, npc)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
-        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and
-            (missionStatus == 2 or missionStatus == 5)
-        then
+        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and (missionStatus == 2 or missionStatus == 5) then
             if missionStatus == 5 then
                 playerStartEvent(7)
             else
@@ -40,9 +39,7 @@ function onTrigger(player, npc)
 
         -- San d'Oria 6-2 "Ranperre's Final Rest" (optional dialogue)
         elseif currentMission == missions.RANPERRE_S_FINAL_REST then
-            if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and
-                missionStatus > 2 and missionStatus < 6
-            then
+            if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
                 player:startEvent(49)
             elseif missionStatus == 6 then
                 player:startEvent(50)

@@ -14,7 +14,8 @@ function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
     -- San d'Oria 9-2 "The Heir to the Light" (optional dialogues)
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
+    if
+        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
         (missionStatus == 2 or missionStatus == 5)
     then
         if missionStatus == 5 then

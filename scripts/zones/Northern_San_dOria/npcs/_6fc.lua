@@ -20,7 +20,8 @@ function onTrigger(player, npc)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
-        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 or
+        if
+            currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 or
             player:getCharVar("SandoEpilogue") == 1
         then
             player:startEvent(50)

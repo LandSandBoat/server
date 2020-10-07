@@ -22,33 +22,40 @@ function onTrigger(player, npc)
     local StalkerProgress = player:getCharVar("KnightStalker_Progress")
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 17)) then
+    if
+        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        not utils.mask.getBit(WildcatSandy, 17)
+    then
         player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
-    elseif (CrestProgress == 5 and RemedyKI == false) then
+    elseif CrestProgress == 5 and RemedyKI == false then
         player:startEvent(60) -- Gives key item
-    elseif (CrestProgress == 5 and RemedyKI == true) then
+    elseif CrestProgress == 5 and RemedyKI == true then
         player:startEvent(122) -- Reminder to go to Gelsba
+
      -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG) then
+    elseif
+        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
+        Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG
+    then
         if (player:getCharVar("KnightStalker_Declined") == 0) then
             player:startEvent(121) -- Start AF3
         else
             player:startEvent(120) -- Short version if they previously declined
         end
     elseif Stalker_Quest == QUEST_ACCEPTED then
-        if (StalkerProgress == 0) then
+        if StalkerProgress == 0 then
             player:startEvent(119) -- Reminder to go to Brugaire/Ceraulian
-        elseif (player:hasKeyItem(tpz.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) == true) then
-            if (StalkerProgress == 1) then
+        elseif player:hasKeyItem(tpz.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
+            if StalkerProgress == 1 then
                 player:startEvent(78) -- Reaction to challenge, go talk to Balasiel
-            elseif (StalkerProgress == 2) then
+            elseif StalkerProgress == 2 then
                 player:startEvent(69) -- Reminder to talk to Balasiel
-            elseif (StalkerProgress == 3) then
+            elseif StalkerProgress == 3 then
                 player:startEvent(110) -- To the south with you
             end
         end
-    elseif (player:getCharVar("KnightStalker_Option2") == 1) then
+    elseif player:getCharVar("KnightStalker_Option2") == 1 then
         player:startEvent(118) -- Optional CS after Knight Stalker
 
     -- San d'Oria Rank 10 Epilogue (optional)
@@ -70,13 +77,15 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 9-1 "Breaking Barrier" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.BREAKING_BARRIERS) and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.BREAKING_BARRIERS) and
             currentMission ~= missions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(37)
 
         -- San d'Oria 8-2 "Lightbringer"
-        elseif player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:startEvent(42) -- (optional)
@@ -90,13 +99,15 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
             currentMission ~= missions.LEAUTE_S_LAST_WISHES
         then
             player:startEvent(77)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= missions.THE_SHADOW_LORD
         then
             player:startEvent(544)

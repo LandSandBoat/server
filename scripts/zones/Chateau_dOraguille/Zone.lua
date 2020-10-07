@@ -19,19 +19,22 @@ function onZoneIn(player, prevZone)
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(14.872, 8.918, 24.002, 255)
     end
 
-    if (prevZone == tpz.zone.NORTHERN_SAN_DORIA and currentMission == tpz.mission.id.sandoria.THE_CRYSTAL_SPRING and player:getCharVar("MissionStatus") == 2) then
+    if
+        prevZone == tpz.zone.NORTHERN_SAN_DORIA and currentMission == tpz.mission.id.sandoria.THE_CRYSTAL_SPRING and
+        player:getCharVar("MissionStatus") == 2
+    then
         cs = 555
-    elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 1) then
+    elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 1 then
         cs = 10
-    elseif (prevZone == tpz.zone.NORTHERN_SAN_DORIA and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA)) then
+    elseif prevZone == tpz.zone.NORTHERN_SAN_DORIA and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) then
         cs = 509
-    elseif (player:getCharVar("SecretWeaponStatus") == 1) then
+    elseif player:getCharVar("SecretWeaponStatus") == 1 then
         cs = 0
-    elseif (currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 0) then
+    elseif currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 0 then
         cs = 116
     end
 

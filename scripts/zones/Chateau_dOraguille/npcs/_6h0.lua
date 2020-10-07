@@ -26,7 +26,8 @@ function onTrigger(player, npc)
     -- "Under Oath" (PLD AF Body)
     if player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(89)
-    elseif player:getMainJob() == tpz.job.PLD and mLvl >= AF2_QUEST_LEVEL and
+    elseif
+        player:getMainJob() == tpz.job.PLD and mLvl >= AF2_QUEST_LEVEL and
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
@@ -50,7 +51,8 @@ function onTrigger(player, npc)
             player:startEvent(3)
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
-        elseif player:getRank() == 9 and player:getRankPoints() == 0 and
+        elseif
+            player:getRank() == 9 and player:getRankPoints() == 0 and
             player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
             (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
         then
@@ -71,7 +73,8 @@ function onTrigger(player, npc)
             player:startEvent(547)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= missions.THE_SHADOW_LORD
         then
             player:startEvent(115)
