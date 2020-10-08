@@ -186,8 +186,8 @@ tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
 end
 
 -- For debugging and lining up teamwork messages
-tpz.trust.dumpMessages = function(mob)
+tpz.trust.dumpMessages = function(mob, page_offset)
     for i=0, 20 do
-        tpz.trust.message(mob, i)
+        tpz.trust.message(mob, page_offset, i)
     end
 end
