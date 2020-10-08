@@ -147,21 +147,15 @@ tpz.trust.spawn = function(caster, spell)
     return 0
 end
 
--- custom_base_offset is: (summon_message_id - 1) / 100
+-- page_offset is: (summon_message_id - 1) / 100
 -- Example: Shantotto II summon message ID: 11201
--- Offset: (11201 - 1) / 100 = 112
-tpz.trust.offsetMessage = function(mob, custom_base_offset, message_offset)
-    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (custom_base_offset * 100)
-    print(trust_offset + message_offset)
+-- page_offset: (11201 - 1) / 100 = 112
+tpz.trust.message = function(mob, page_offset, message_offset)
+    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (page_offset * 100)
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 
-tpz.trust.message = function(mob, message_offset)
-    local trust_offset = mob:getTrustID() - 896
-    tpz.trust.offsetMessage(mob, trust_offset, message_offset)
-end
-
-tpz.trust.offsetTeamworkMessage = function(mob, custom_base_offset, teamwork_messages)
+tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
@@ -177,16 +171,11 @@ tpz.trust.offsetTeamworkMessage = function(mob, custom_base_offset, teamwork_mes
     end
 
     if table.getn(messages) > 0 then
-        tpz.trust.offsetMessage(mob, custom_base_offset, messages[math.random(#messages)])
+        tpz.trust.message(mob, page_offset, messages[math.random(#messages)])
     else
         -- Defaults to regular spawn message
-        tpz.trust.offsetMessage(mob, custom_base_offset, tpz.trust.message_offset.SPAWN)
+        tpz.trust.message(mob, page_offset, tpz.trust.message_offset.SPAWN)
     end
-end
-
-tpz.trust.teamworkMessage = function(mob, teamwork_messages)
-    local trust_offset = mob:getTrustID() - 896
-    tpz.trust.offsetTeamworkMessage(mob, trust_offset, teamwork_messages)
 end
 
 -- For debugging and lining up teamwork messages

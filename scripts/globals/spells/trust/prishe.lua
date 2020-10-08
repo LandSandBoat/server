@@ -6,6 +6,8 @@ require("scripts/globals/magic")
 require("scripts/globals/trust")
 -----------------------------------------
 
+local message_page_offset = 17
+
 function onMagicCastingCheck(caster, target, spell)
     return tpz.trust.canCast(caster, spell, 1011)
 end
@@ -15,7 +17,7 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    tpz.trust.teamworkMessage(mob, {
+    tpz.trust.teamworkMessage(mob, message_page_offset, {
         [tpz.magic.spell.ULMIA] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.CHERUKIKI] = tpz.trust.message_offset.TEAMWORK_2,
         [tpz.magic.spell.KUKKI_CHEBUKKI] = tpz.trust.message_offset.TEAMWORK_3,
@@ -27,9 +29,9 @@ function onMobSpawn(mob)
 end
 
 function onMobDespawn(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
+    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
 function onMobDeath(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
+    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
