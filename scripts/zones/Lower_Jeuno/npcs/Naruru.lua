@@ -4,12 +4,13 @@
 -- Starts and Finishes Quests: Cook's Pride
 -- !pos -56 0.1 -138 245
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/keyitems")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
+require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -21,7 +22,7 @@ function onTrigger(player, npc)
     local TheKindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno, 13) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 13)) then
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then
@@ -71,6 +72,6 @@ function onEventFinish(player, csid, option)
             player:completeQuest(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
         end
     elseif (csid == 10053) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 13, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 13, true))
     end
 end

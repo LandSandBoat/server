@@ -19,7 +19,7 @@ function onTrigger(player, npc)
     else
         player:addTreasure(5374)
     end
-    instance:getEntity(bit.band(npc, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.DISAPPEAR)
+    GetNPCByID(npc, instance):setStatus(tpz.status.DISAPPEAR)
 end
 
 function onEventUpdate(player, csid, option)

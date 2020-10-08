@@ -5,10 +5,11 @@
 -- Starts & Finishes: The Usual
 -- !pos -163 -8 13 236
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
 local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -38,7 +39,7 @@ function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 1) then
         player:startEvent(255)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 3) == false) then
+    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
         player:startEvent(356)
     elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED) then
         if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_ACCEPTED) then
@@ -97,7 +98,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 255) then
         player:setCharVar("MissionStatus", 2)
     elseif (csid == 356) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 3, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 3, true))
     end
 
 end

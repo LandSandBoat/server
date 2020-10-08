@@ -669,118 +669,6 @@ inline int32 CLuaBaseEntity::resetLocalVars(lua_State* L)
 }
 
 /************************************************************************
-*  Function: getMaskBit()
-*  Purpose : Returns a single bit from a masked player variable
-*  Example : player:getMaskBit(player:getCharVar("CleanSignPost"),1)) then
-*  Notes   :
-************************************************************************/
-
-inline int32 CLuaBaseEntity::getMaskBit(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
-
-    uint8 bit = (uint8)lua_tointeger(L, -1);
-
-    TPZ_DEBUG_BREAK_IF(bit >= 32);
-
-    lua_pushboolean(L, (uint32)lua_tointeger(L, -2) & (1 << bit));
-    return 1;
-}
-
-/************************************************************************
-*  Function: setMaskBit()
-*  Purpose : Performs a bitwise operation and stores a single bit in var
-*  Example : player:setMaskBit("Order_Up_NPCs", 8, true);
-*  Notes   :
-************************************************************************/
-
-inline int32 CLuaBaseEntity::setMaskBit(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isboolean(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -3) || !lua_isstring(L, -3));
-
-    const char* varname = lua_tostring(L, -3);
-    int32 bit = (int32)lua_tointeger(L, -2);
-    bool state = (lua_toboolean(L, -1) == 0 ? false : true);
-
-    int32 value = (int32)lua_tointeger(L, -4);
-
-    if (state == true)
-    {
-        value |= (1 << bit); // Add
-    }
-    else
-    {
-        value &= ~(1 << bit); // Delete
-    }
-
-    const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-
-    Sql_Query(SqlHandle, fmtQuery, m_PBaseEntity->id, varname, value, value);
-
-    lua_pushinteger(L, value);
-    return 1;
-}
-
-/************************************************************************
-*  Function: countMaskBits()
-*  Purpose : Counts the number of true bits in a bit-masked variable
-*  Example : Unused, but ex: player:countMaskBits(player:getCharVar("Ex"))
-*  Notes   : Useful for quests such as Flyers for Regine
-************************************************************************/
-
-inline int32 CLuaBaseEntity::countMaskBits(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8  count = 0;
-    uint32 value = (uint32)lua_tointeger(L, 1);
-
-    for (uint8 bit = 0; bit < 32; bit++)
-    {
-        if (value & (1 << bit)) count++;
-    }
-    lua_pushinteger(L, count);
-    return 1;
-}
-
-/************************************************************************
-*  Function: isMaskFull()
-*  Purpose : Return true if var of specified size contains all set bits
-*  Example : if (player:isMaskFull(tradesMamaMia,7) == true) then
-*  Notes   :
-************************************************************************/
-
-inline int32 CLuaBaseEntity::isMaskFull(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isnumber(L, -2));
-
-    bool condition = false;
-
-    int32 value = (int32)lua_tointeger(L, -2);
-    int16 size = (int16)lua_tointeger(L, -1);
-
-    condition = (value == intpow32(2, size) - 1);
-
-    lua_pushboolean(L, condition);
-    return 1;
-}
-
-/************************************************************************
 *  Function: injectPacket()
 *  Purpose : Injects a packet to the player's client
 *  Example : player:injectPacket(packet)
@@ -5780,7 +5668,7 @@ int32 CLuaBaseEntity::addJobTraits(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     CBattleEntity* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    
+
     if (PEntity != nullptr)
     {
         battleutils::AddTraits(PEntity, traits::GetTraits((uint8)lua_tointeger(L, 1)), (uint8)lua_tointeger(L, 2));
@@ -14426,12 +14314,6 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLocalVar),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLocalVar),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetLocalVars),
-
-    // Masks and Bitwise Operations
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMaskBit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMaskBit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,countMaskBits),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isMaskFull),
 
     // Packets, Events, and Flags
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,injectPacket),

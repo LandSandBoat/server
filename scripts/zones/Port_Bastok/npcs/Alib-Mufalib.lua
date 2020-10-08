@@ -4,12 +4,14 @@
 -- Type: Warp NPC
 -- !pos 116.080 7.372 -31.820 236
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
+local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+-----------------------------------
 
 --[[
 Bitmask Designations:
@@ -58,7 +60,7 @@ function onTrigger(player, npc)
         else
             if (WildcatBastok == 0) then
                 player:startEvent(358)
-            elseif (player:isMaskFull(WildcatBastok, 20) == true) then
+            elseif utils.mask.isFull(WildcatBastok, 20) then
                 player:startEvent(360)
             else
                 player:startEvent(359)

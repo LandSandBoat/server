@@ -22,11 +22,11 @@ function onInstanceCreated(instance)
         SpawnMob(v, instance)
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC):setPos(420, -15, 72, 148)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC):setPos(415, -15, 75, 148)
-    instance:getEntity(bit.band(ID.npc._1jp, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._jja, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._jjb, 0xFFF), tpz.objType.NPC):setAnimation(8)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(420, -15, 72, 148)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(415, -15, 75, 148)
+    GetNPCByID(ID.npc._1jp, instance):setAnimation(8)
+    GetNPCByID(ID.npc._jja, instance):setAnimation(8)
+    GetNPCByID(ID.npc._jjb, instance):setAnimation(8)
 
     instance:setProgress(instance:getProgress() + (figureheadChest))
 
@@ -57,8 +57,8 @@ function onInstanceComplete(instance)
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC):setStatus(NORMAL)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC):setStatus(NORMAL)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(NORMAL)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(NORMAL)
 
 end
 

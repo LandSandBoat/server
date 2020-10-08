@@ -21,7 +21,7 @@ function onEventFinish(entity, eventid, result, door)
         SpawnMob(ID.mob[5][1].chariot, instance)
         SpawnMob(ID.mob[5][1].astrologer, instance)
         for i, v in pairs(ID.npc[5][1]) do
-            local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
+            local npc = GetNPCByID(v, instance)
             npc:untargetable(true)
         end
     end
