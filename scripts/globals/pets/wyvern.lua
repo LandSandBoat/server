@@ -54,17 +54,18 @@ end
 
 function doStatusBreath(target, player)
     local usedBreath = true
+    local wyvern = player:getPet()
 
     if target:hasStatusEffect(tpz.effect.POISON) then
-        player:getPet():useJobAbility(643, target)
-    elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and player:getPet():getMainLvl() > 20 then
-        player:getPet():useJobAbility(644, target)
-    elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and player:getPet():getMainLvl() > 40 then
-        player:getPet():useJobAbility(645, target)
-    elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and player:getPet():getMainLvl() > 60 then
-        player:getPet():useJobAbility(653, target)
-    elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and player:getPet():getMainLvl() > 80 then
-        player:getPet():useJobAbility(654, target)
+        wyvern:useJobAbility(643, target)
+    elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and wyvern:getMainLvl() > 20 then
+        wyvern:useJobAbility(644, target)
+    elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and wyvern:getMainLvl() > 40 then
+        wyvern:useJobAbility(645, target)
+    elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and wyvern:getMainLvl() > 60 then
+        wyvern:useJobAbility(653, target)
+    elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and wyvern:getMainLvl() > 80 then
+        wyvern:useJobAbility(654, target)
     else
         usedBreath = false
     end
