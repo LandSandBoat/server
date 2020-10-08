@@ -47,6 +47,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
+#include "entities/trustentity.h"
 #include "entities/charentity.h"
 #include "spell.h"
 #include "utils/synthutils.h"
@@ -658,6 +659,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         CBaseEntity* PTrust = PChar->GetEntity(TargID, TYPE_TRUST);
         if (PTrust != nullptr)
         {
+            ((CTrustEntity*)PTrust)->animation = ANIMATION_DESPAWN;
             PChar->RemoveTrust((CTrustEntity*)PTrust);
         }
 
