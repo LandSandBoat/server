@@ -493,6 +493,10 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
     auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
     if (trustIt != PTrusts.end())
     {
+        if (PTrust->animation == ANIMATION_DESPAWN)
+        {
+            luautils::OnMobDespawn(PTrust);
+        }
         PTrust->PAI->Despawn();
         PTrusts.erase(trustIt);
     }

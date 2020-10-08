@@ -10,6 +10,7 @@ require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")
 -----------------------------------------
 
+local message_page_offset = 2
 
 function onMagicCastingCheck(caster, target, spell)
     return tpz.trust.canCast(caster, spell)
@@ -27,7 +28,7 @@ function onSpellCast(caster, target, spell)
 end
 
 function onMobSpawn(mob)
-    tpz.trust.teamworkMessage(mob, {
+    tpz.trust.teamworkMessage(mob, message_page_offset, {
         [tpz.magic.spell.SHANTOTTO] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_2,
     })
@@ -61,9 +62,9 @@ function onMobSpawn(mob)
 end
 
 function onMobDespawn(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DESPAWN)
+    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
 function onMobDeath(mob)
-    tpz.trust.message(mob, tpz.trust.message_offset.DEATH)
+    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end

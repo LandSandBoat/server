@@ -24,6 +24,8 @@ tpz.trust.message_offset =
     SPECIAL_MOVE_1 = 18,
 }
 
+local MAX_MESSAGE_PAGE = 120
+
 local rovKIBattlefieldIDs = set{
     5,    -- Shattering Stars (WAR LB5)
     6,    -- Shattering Stars (BLM LB5)
@@ -147,22 +149,20 @@ tpz.trust.spawn = function(caster, spell)
     return 0
 end
 
-tpz.trust.message = function(mob, message_offset)
-    local shift_offset = 0
-    local trust_id = mob:getTrustID()
+-- page_offset is: (summon_message_id - 1) / 100
+-- Example: Shantotto II summon message ID: 11201
+-- page_offset: (11201 - 1) / 100 = 112
+tpz.trust.message = function(mob, page_offset, message_offset)
 
-    -- TODO: Excenmille (S)'s lines are at 948...
-    -- Should probably have each trust pass in their own
-    -- page offset
-    if trust_id > 947 and trust_id <= 952 then
-        shift_offset = shift_offset + 1
+    if page_offset > MAX_MESSAGE_PAGE then
+        return
     end
 
-    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (trust_id - 896 + shift_offset) * 100
+    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (page_offset * 100)
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 
-tpz.trust.teamworkMessage = function(mob, teamwork_messages)
+tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
@@ -178,16 +178,16 @@ tpz.trust.teamworkMessage = function(mob, teamwork_messages)
     end
 
     if table.getn(messages) > 0 then
-        tpz.trust.message(mob, messages[math.random(#messages)])
+        tpz.trust.message(mob, page_offset, messages[math.random(#messages)])
     else
         -- Defaults to regular spawn message
-        tpz.trust.message(mob, tpz.trust.message_offset.SPAWN)
+        tpz.trust.message(mob, page_offset, tpz.trust.message_offset.SPAWN)
     end
 end
 
 -- For debugging and lining up teamwork messages
-tpz.trust.dumpMessages = function(mob)
+tpz.trust.dumpMessages = function(mob, page_offset)
     for i=0, 20 do
-        tpz.trust.message(mob, i)
+        tpz.trust.message(mob, page_offset, i)
     end
 end
