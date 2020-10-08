@@ -9,7 +9,7 @@ require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 -----------------------------------------
 
-local message_page_offset = 114 -- Incorrect, this is one of the AAs
+local message_page_offset = 86
 
 function onMagicCastingCheck(caster, target, spell)
     return tpz.trust.canCast(caster, spell, 906)
