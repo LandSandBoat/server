@@ -9,7 +9,8 @@ local WYVERN_OFFENSIVE = 1
 local WYVERN_DEFENSIVE = 2
 local WYVERN_MULTI = 3
 
-local wyvernTypes = {
+local wyvernTypes =
+{
     [tpz.job.WAR] = WYVERN_OFFENSIVE,
     [tpz.job.MNK] = WYVERN_OFFENSIVE,
     [tpz.job.WHM] = WYVERN_DEFENSIVE,
@@ -31,7 +32,7 @@ local wyvernTypes = {
     [tpz.job.DNC] = WYVERN_OFFENSIVE,
     [tpz.job.SCH] = WYVERN_DEFENSIVE,
     [tpz.job.GEO] = WYVERN_DEFENSIVE,
-    [tpz.job.RUN] = WYVERN_MULTI
+    [tpz.job.RUN] = WYVERN_MULTI,
 }
 
 function doHealingBreath(player, threshold, breath)
@@ -64,7 +65,7 @@ function onMobSpawn(mob)
     if mob:getMainLvl() >= 80 then healingbreath = tpz.jobAbility.HEALING_BREATH_IV
     elseif mob:getMainLvl() >= 40 then healingbreath = tpz.jobAbility.HEALING_BREATH_III
     elseif mob:getMainLvl() >= 20 then healingbreath = tpz.jobAbility.HEALING_BREATH_II
-	end
+    end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local party = player:getParty()
@@ -115,13 +116,15 @@ function onMobSpawn(mob)
                     end
                 end
             else
-                breaths = {tpz.jobAbility.FLAME_BREATH,
-							tpz.jobAbility.FROST_BREATH,
-							tpz.jobAbility.GUST_BREATH,
-							tpz.jobAbility.SAND_BREATH,
-							tpz.jobAbility.LIGHTNING_BREATH,
-							tpz.jobAbility.HYDRO_BREATH
-						  }
+                breaths =
+                {
+                    tpz.jobAbility.FLAME_BREATH,
+                    tpz.jobAbility.FROST_BREATH,
+                    tpz.jobAbility.GUST_BREATH,
+                    tpz.jobAbility.SAND_BREATH,
+                    tpz.jobAbility.LIGHTNING_BREATH,
+                    tpz.jobAbility.HYDRO_BREATH,
+                }
             end
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
         end)
