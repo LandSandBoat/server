@@ -2,9 +2,6 @@
 -- Area: Emperial Paradox
 --  Mob: Kam'lanaut
 -- Apocalypse Nigh Final Fight
--- TODO:
---   Can perform three TP attacks upon reaching 100%+ TP, giving very little rest for healers.
---   He can do 3 Great Wheels in a row, devastating any melee jobs in range.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -20,10 +17,14 @@ local skillToAbsorb =
 }
 
 function onMobWeaponSkill(target, mob, skill)
-    -- when uses an en-spell weapon skill, absorb damage of that element type
-    local absorbId = skillToAbsorb[skill:getID()]
+    local skillId = skill:getID()
+    local absorbId = skillToAbsorb[skillId]
 
     if absorbId then
+        -- ----------------------------------------------------------------------
+        -- when using en-spell weapon skill, absorb damage of that element type
+        -- ----------------------------------------------------------------------
+
         -- remove previous absorb mod, if set
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
 
@@ -34,6 +35,26 @@ function onMobWeaponSkill(target, mob, skill)
         -- add new absorb mod
         mob:setLocalVar("currentAbsorb", absorbId)
         mob:setMod(absorbId, 100)
+
+    else
+        -- ----------------------------------------------------------------------
+        -- when using Light Blade or Great Wheel, can do up to three WS in a row
+        -- ----------------------------------------------------------------------
+
+        local wsCount = mob:getLocalVar("wsCount")
+        local wsMax = mob:getLocalVar("wsMax")
+
+        if wsCount == 0 then
+            wsMax = math.random(0, 2)
+            mob:setLocalVar("wsMax", wsMax)
+        end
+
+        if wsCount < wsMax then
+            mob:setLocalVar("wsCount", wsCount + 1)
+            mob:useMobAbility(skillId)
+        else
+            mob:setLocalVar("wsCount", 0)
+        end
     end
 end
 
