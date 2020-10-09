@@ -22,6 +22,7 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <set>
 #include <vector>
 #include <unordered_map>
 
@@ -475,6 +476,7 @@ class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
 class CRecastContainer;
+class CNotorietyContainer;
 struct action_t;
 
 class CBattleEntity : public CBaseEntity
@@ -669,9 +671,8 @@ public:
     CBattleEntity*	PLastAttacker;
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
-    std::unique_ptr<CRecastContainer> PRecastContainer;         //
-
-
+    std::unique_ptr<CRecastContainer> PRecastContainer;
+    std::unique_ptr<CNotorietyContainer> PNotorietyContainer;
 
 private:
 

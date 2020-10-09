@@ -438,6 +438,7 @@
     <ClInclude Include="..\..\src\map\party.h" />
     <ClInclude Include="..\..\src\map\recast_container.h" />
     <ClInclude Include="..\..\src\map\region.h" />
+    <ClInclude Include="..\..\src\map\notoriety_container.h" />
     <ClInclude Include="..\..\src\map\spell.h" />
     <ClInclude Include="..\..\src\map\status_effect.h" />
     <ClInclude Include="..\..\src\map\status_effect_container.h" />
@@ -695,6 +696,7 @@
     <ClCompile Include="..\..\src\map\party.cpp" />
     <ClCompile Include="..\..\src\map\recast_container.cpp" />
     <ClCompile Include="..\..\src\map\region.cpp" />
+    <ClCompile Include="..\..\src\map\notoriety_container.cpp" />
     <ClCompile Include="..\..\src\map\spell.cpp" />
     <ClCompile Include="..\..\src\map\status_effect.cpp" />
     <ClCompile Include="..\..\src\map\status_effect_container.cpp" />

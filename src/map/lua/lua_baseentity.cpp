@@ -49,6 +49,7 @@
 #include "../mob_modifier.h"
 #include "../mobskill.h"
 #include "../mob_spell_container.h"
+#include "../notoriety_container.h"
 #include "../recast_container.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
@@ -10543,6 +10544,58 @@ inline int32 CLuaBaseEntity::updateClaim(lua_State *L)
 }
 
 /************************************************************************
+*  Function: hasEnmity()
+*  Purpose : Check if a an entity is on any mob's enmity list
+*  Example : if player:hasEnmity() then ...
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::hasEnmity(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    bool hasEnmity = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer->hasEnmity();
+
+    lua_pushboolean(L, hasEnmity);
+
+    return 1;
+}
+
+/************************************************************************
+*  Function: getNotorietyList()
+*  Purpose : Return a list of mobs that hold enmity towards the player
+*  Example : local list = player:getNotorietyList()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getNotorietyList(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
+
+    int size = static_cast<int>(notorietyContainer->size());
+
+    lua_createtable(L, size, 0);
+    int i = 1;
+    for (auto entry : *notorietyContainer)
+    {
+        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)entry);
+        lua_pcall(L, 2, 1, 0);
+
+        lua_rawseti(L, -2, i++);
+    }
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: addStatusEffect(effect, power, tick, duration)
 *  Purpose : Adds a specified Status Effect to the Entity
 *  Example : target:addStatusEffect(EFFECT_ACCURACY_DOWN,20,3,60)
@@ -14745,6 +14798,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmityFromCure),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetEnmity),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateClaim),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasEnmity),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNotorietyList),
 
     // Status Effects
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addStatusEffect),
