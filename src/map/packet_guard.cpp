@@ -25,6 +25,7 @@ void Init()
     }
 
     // In Cutscene
+    allowList[SUBSTATE_IN_CS][0x00A] = true; // Log In To Zone
     allowList[SUBSTATE_IN_CS][0x015] = true; // Player Sync
     allowList[SUBSTATE_IN_CS][0x016] = true; // Entity Information Request
     allowList[SUBSTATE_IN_CS][0x01A] = true; // Player Action
