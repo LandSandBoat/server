@@ -355,18 +355,19 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     //float subHPGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
     float subMPGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
 
-    float base = 15.0f;
+    float hpBase = 14.0f;
+    float mpBase = 8.0f;
 
-    PTrust->health.maxhp = static_cast<uint16>(base * pow(mLvl, hpGrowth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
+    PTrust->health.maxhp = static_cast<uint16>(hpBase * pow(mLvl, hpGrowth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
 
     if (sjobMPGrade)
     {
-        PTrust->health.maxmp = static_cast<uint16>(base * pow(sLvl, subMPGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+        PTrust->health.maxmp = static_cast<uint16>(mpBase * pow(sLvl, subMPGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
     }
 
     if (jobMPGrade)
     {
-        PTrust->health.maxmp = static_cast<uint16>(base * pow(mLvl, mpGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+        PTrust->health.maxmp = static_cast<uint16>(mpBase * pow(mLvl, mpGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
     }
 
     PTrust->health.tp = 0;
