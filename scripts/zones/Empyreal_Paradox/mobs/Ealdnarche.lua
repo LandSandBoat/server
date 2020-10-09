@@ -3,7 +3,6 @@
 --  Mob: Eald'narche
 -- Apocalypse Nigh Final Fight
 -- TODO:
---   Initially facing the wrong direction.
 --   Highly evasive. Sushi and/or Madrigal recommended.
 --   Very high magic defense (e.g., Thunder IV ~65 dmg).
 -----------------------------------
