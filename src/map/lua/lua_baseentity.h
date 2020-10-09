@@ -64,12 +64,6 @@ public:
     int32 setLocalVar(lua_State*);
     int32 resetLocalVars(lua_State*);
 
-    // Masks and Bitwise Operations
-    int32 getMaskBit(lua_State*);           // Retrieves a single bit in a character variable
-    int32 setMaskBit(lua_State*);           // Sets a single bit in a character variable
-    int32 countMaskBits(lua_State*);        // Retrieves number of true bits in a character variable
-    int32 isMaskFull(lua_State*);           // Checks if a bitmask stored in a character varable of a specified size contains all set bits
-
     // Packets, Events, and Flags
     int32 injectPacket(lua_State*);         // Send the character a packet kept in a file
     int32 injectActionPacket(lua_State*);   // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
@@ -508,7 +502,8 @@ public:
     int32 updateEnmityFromCure(lua_State*);
     int32 resetEnmity(lua_State*);             //resets enmity to player for specificed mob
     int32 updateClaim(lua_State*);             // Adds Enmity to player for specified mob and claims
-    int32 hasEnmity(lua_State*);               // Checks if you have ANY enmity with ANY mob in the zone
+    int32 hasEnmity(lua_State*);               // Does the player have any enmity at all from any source
+    int32 getNotorietyList(lua_State*);        // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     int32 addStatusEffect(lua_State*);         // Adds status effect to character

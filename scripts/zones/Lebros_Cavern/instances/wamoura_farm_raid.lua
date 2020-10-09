@@ -110,8 +110,8 @@ function onInstanceComplete(instance)
         v:messageSpecial(ID.text.RUNE_UNLOCKED, 7, 8)
     end
 
-    local rune = instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC)
-    local box = instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC)
+    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
+    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
     rune:setPos(414.29, -40.64, 301.523, 247)
     rune:setStatus(tpz.status.NORMAL)
     box:setPos(410.41, -41.12, 300.743, 243)

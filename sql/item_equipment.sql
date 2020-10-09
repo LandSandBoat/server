@@ -12869,8 +12869,8 @@ INSERT INTO `item_equipment` VALUES (27288,'vanya_slops',99,119,1589788,395,0,0,
 INSERT INTO `item_equipment` VALUES (27289,'doyen_pants',99,119,3850780,209,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27291,'swimming_togs',1,0,4194303,404,0,0,128,256);
 INSERT INTO `item_equipment` VALUES (27292,'swimming_togs_+1',1,0,4194303,404,0,0,128,256);
-INSERT INTO `item_equipment` VALUES (27293,'cossie_bottom',1,0,4194303,404,0,0,128,256);
-INSERT INTO `item_equipment` VALUES (27294,'cossie_bottom_+1',1,0,4194303,404,0,0,128,256);
+INSERT INTO `item_equipment` VALUES (27293,'cossie_bottom',1,0,4194303,405,0,0,128,256);
+INSERT INTO `item_equipment` VALUES (27294,'cossie_bottom_+1',1,0,4194303,405,0,0,128,256);
 INSERT INTO `item_equipment` VALUES (27295,'samnuha_tights',99,119,2593826,401,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27296,'agent_pants',1,0,4194303,407,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27297,'starlet_skirt',1,0,4194303,408,0,0,128,0);

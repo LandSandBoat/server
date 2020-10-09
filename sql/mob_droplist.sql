@@ -7927,9 +7927,10 @@ INSERT INTO `mob_droplist` VALUES (1523,0,0,1000,2637,1000);
 INSERT INTO `mob_droplist` VALUES (1523,0,0,1000,11368,410);
 INSERT INTO `mob_droplist` VALUES (1523,0,0,1000,11369,420);
 INSERT INTO `mob_droplist` VALUES (1524,0,0,1000,3097,140);
-INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,853,100);
-INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,1277,110);
-INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,17983,100);
+INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,853,100);     -- Lindwurm ; Raptor skin ; Uncommon
+INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,1277,1000);   -- Lindwurm ; Lindwurm skin ; 100% + Very common
+INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,1277,240);    -- Lindwurm ; Lindwurm skin ; 100% + Very common
+INSERT INTO `mob_droplist` VALUES (1525,0,0,1000,17983,100);   -- Lindwurm ; Valiant knife ; Uncommon
 INSERT INTO `mob_droplist` VALUES (1526,2,0,1000,920,0);
 INSERT INTO `mob_droplist` VALUES (1526,0,0,1000,2614,1000);
 INSERT INTO `mob_droplist` VALUES (1526,0,0,1000,11367,470);

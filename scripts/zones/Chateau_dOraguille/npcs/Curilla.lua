@@ -11,6 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
 local wsQuest = tpz.wsquest.savage_blade
@@ -63,8 +64,7 @@ function onTrigger(player, npc)
         player:startEvent(573, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
     elseif wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        player:getMaskBit(WildcatSandy, 15) == false) then
+    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 15)) then
         player:startEvent(562)
     elseif (theGeneralSecret == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then
         player:startEvent(55) -- Start Quest "The General's Secret"
@@ -127,10 +127,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)
     elseif (csid == 562) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 15, true)
-    elseif csid == 573 and option == 2 then
-        player:addSpell(902, true, true)
-        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 902)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     else
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SAVAGE_BLADE_LEARNED)
     end

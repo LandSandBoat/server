@@ -914,6 +914,9 @@
     <ClInclude Include="..\..\src\map\ai\helpers\gambits_container.h">
       <Filter>Header Files\ai\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\notoriety_container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\map\ability.cpp">
@@ -1680,6 +1683,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\map\ai\helpers\gambits_container.cpp">
       <Filter>Source Files\ai\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\notoriety_container.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

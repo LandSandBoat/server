@@ -2207,6 +2207,16 @@ tpz.allegiance =
     WINDURST  = 4,
 }
 
+----------------------------------
+-- Targetting for auras relative to objtype
+----------------------------------
+
+tpz.auraTarget =
+{
+    ALLIES  = 0,
+    ENEMIES = 1,
+};
+
 ------------------------------------
 -- MOBMODs
 ------------------------------------

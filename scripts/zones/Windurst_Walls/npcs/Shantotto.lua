@@ -4,12 +4,13 @@
 -- !pos 122 -2 112 239
 -- CSID's missing in autoEventID please check the old forums under resources for all of shantotto's csid's. I found them all manually.
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/wsquest")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 local wsQuest = tpz.wsquest.retribution
@@ -101,8 +102,7 @@ function onTrigger(player, npc)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 7) then
         player:startEvent(397, 0, 0, 0, 282)
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        player:getMaskBit(WildcatWindurst, 6) == false) then
+    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
         player:startEvent(498)
     elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
@@ -239,7 +239,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 409) then
         player:setCharVar("ClassReunionProgress", 4)
     elseif (csid == 498) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 6, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 6, true))
     elseif (csid == 397) then
         player:addKeyItem(tpz.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GLOVE_OF_PERPETUAL_TWILIGHT)

@@ -14,6 +14,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 local TrustMemory = function(player)
@@ -104,7 +105,7 @@ function onTrigger(player, npc)
 
         -- LURE OF THE WILDCAT (WINDURST)
     elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not player:getMaskBit(wildcatWindurst, 4) then
+        not utils.mask.getBit(wildcatWindurst, 4) then
         player:startEvent(732)
 
         -- CRYING OVER ONIONS
@@ -183,7 +184,7 @@ function onEventFinish(player, csid, option)
 
         -- LURE OF THE WILDCAT (WINDURST)
     elseif csid == 732 then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 4, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
 
         -- THE TENSHODO SHOWDOWN
     elseif (csid == 496) then

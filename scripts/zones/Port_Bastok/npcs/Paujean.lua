@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -28,7 +29,7 @@ function onTrigger(player, npc)
     local SilenceOfTheRams = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SILENCE_OF_THE_RAMS)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 2) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 2)) then
         player:startEvent(355)
     elseif (SilenceOfTheRams == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 2) then
         player:startEvent(195)
@@ -55,6 +56,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 13201)
         player:addTitle(tpz.title.PURPLE_BELT)
     elseif (csid == 355) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 2, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 2, true))
     end
 end

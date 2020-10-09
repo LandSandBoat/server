@@ -39,6 +39,7 @@
 #include "../ai/states/despawn_state.h"
 #include "../attack.h"
 #include "../attackround.h"
+#include "../notoriety_container.h"
 #include "../weapon_skill.h"
 #include "../packets/action.h"
 #include "../utils/petutils.h"
@@ -75,6 +76,7 @@ CBattleEntity::CBattleEntity()
 
     StatusEffectContainer = std::make_unique<CStatusEffectContainer>(this);
     PRecastContainer = std::make_unique<CRecastContainer>(this);
+    PNotorietyContainer = std::make_unique<CNotorietyContainer>(this);
 
     m_modStat[Mod::SLASHRES] = 1000;
     m_modStat[Mod::PIERCERES] = 1000;
@@ -1260,6 +1262,7 @@ void CBattleEntity::Die()
     {
         PAI->EventHandler.triggerListener("DEATH", this);
     }
+    PNotorietyContainer->clear();
     SetBattleTargetID(0);
 }
 
