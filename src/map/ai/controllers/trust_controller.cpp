@@ -172,7 +172,8 @@ void CTrustController::DoCombatTick(time_point tick)
         // If repositioning, bail out until you arrive
         if (m_InTransit)
         {
-            return;
+            // TODO: This is too unreliable for now
+            // return;
         }
 
         m_GambitsContainer->Tick(tick);
@@ -239,7 +240,7 @@ void CTrustController::DoRoamTick(time_point tick)
 
     if (POwner->CanRest() &&
         m_Tick - m_CombatEndTime > 10s &&
-        m_Tick - m_LastHealTickTime > 3s)
+        m_Tick - m_LastHealTickTime > 10s)
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
