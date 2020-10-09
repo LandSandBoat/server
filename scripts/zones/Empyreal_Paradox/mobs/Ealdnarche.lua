@@ -2,9 +2,6 @@
 -- Area: Emperial Paradox
 --  Mob: Eald'narche
 -- Apocalypse Nigh Final Fight
--- TODO:
---   Highly evasive. Sushi and/or Madrigal recommended.
---   Very high magic defense (e.g., Thunder IV ~65 dmg).
 -----------------------------------
 
 function onMobInitialize(mob)
@@ -12,6 +9,11 @@ function onMobInitialize(mob)
     mob:setMobMod(tpz.mobMod.TELEPORT_START, 988)
     mob:setMobMod(tpz.mobMod.TELEPORT_END, 989)
     mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 1)
+    mob:setMod(tpz.mod.MDEF, 50);
+end
+
+function onMobSpawn(mob)
+    mob:addMod(tpz.mod.EVA, 50)
 end
 
 function onMobDeath(mob, player, isKiller)
