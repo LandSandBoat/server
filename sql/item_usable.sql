@@ -1694,6 +1694,7 @@ INSERT INTO `item_usable` VALUES (5892,'b.e.w._pitaru',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5907,'winterflower',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5908,'butterpear',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5910,'heavy_metal_pouch',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5911,'olde_rarab_tail',4,1,55,0,0,0,0,0); -- Need to verify animation
 INSERT INTO `item_usable` VALUES (5912,'gargouille_quiver',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5913,'adaman_bolt_quiver',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5914,'orichalcum_bullet_pouch',1,1,55,0,0,0,0,0);

@@ -116,7 +116,7 @@ tpz.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x0800)
             end
 
-            if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+            if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
                 -- "Rhapsody in White" key item reduces teleport fee by 80%
                 param = bit.bor(param, 0x2000)
             end
@@ -157,7 +157,7 @@ tpz.survivalGuide.onEventFinish = function(player, eventId, option)
                 -- If the player has the rhapsody in white, the cost is 10% of original gil or 20% of original tabs.
                 -- GIL: 1000 -> 200
                 -- TABS: 100 -> 10
-                if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+                if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
                     teleportCostGil = teleportCostGil * .2
                     teleportCostTabs = teleportCostTabs * .2
                 end

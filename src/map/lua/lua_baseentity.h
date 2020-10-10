@@ -308,6 +308,11 @@ public:
     int32 setMissionLogEx(lua_State*);      // Sets mission log extra data to correctly track progress in branching missions.
     int32 getMissionLogEx(lua_State*);      // Gets mission log extra data.
 
+    int32 setEminenceCompleted(lua_State *L);  // Sets the complete flag for a record of eminence
+    int32 getEminenceCompleted(lua_State *L);  // Gets the record completed flag
+    int32 setEminenceProgress(lua_State *L);   // Sets progress on a record of eminence
+    int32 getEminenceProgress(lua_State *L);   // gets progress on a record of eminence
+
     int32 addAssault(lua_State*);           // Add Mission
     int32 delAssault(lua_State*);           // Delete Mission from Mission Log
     int32 getCurrentAssault(lua_State*);    // Gets the current mission
@@ -428,6 +433,7 @@ public:
 
     int32 reloadParty(lua_State* L);
     int32 disableLevelSync(lua_State* L);
+    int32 isLevelSync(lua_State* L);
 
     int32 checkSoloPartyAlliance(lua_State*);        // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 

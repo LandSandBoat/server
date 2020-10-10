@@ -35,6 +35,9 @@ REGIME_WAIT = 1 -- Make people wait till 00:00 game time as in retail. If it's 0
 FOV_REWARD_ALLIANCE = 0 -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
 GOV_REWARD_ALLIANCE = 1 -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
+-- Records of Eminence
+ENABLE_ROE = 1
+
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active
 -- Set to 0 to disable caskets.
@@ -65,6 +68,8 @@ GIL_RATE        = 1.000 -- Multiplies gil earned from quests.  Won't always disp
 BAYLD_RATE      = 1.000 -- Multiples bayld earned from quests.
 EXP_RATE        = 1.000 -- Multiplies exp earned from fov and quests.
 TABS_RATE       = 1.000 -- Multiplies tabs earned from fov.
+ROE_EXP_RATE    = 1.000 -- Multiplies exp earned from records of eminence.
+SPARKS_RATE     = 1.000 -- Multiplies sparks earned from records of eminence.
 CURE_POWER      = 1.000 -- Multiplies amount healed from Healing Magic, including the relevant Blue Magic.
 ELEMENTAL_POWER = 1.000 -- Multiplies damage dealt by Elemental and non-drain Dark Magic.
 DIVINE_POWER    = 1.000 -- Multiplies damage dealt by Divine Magic.

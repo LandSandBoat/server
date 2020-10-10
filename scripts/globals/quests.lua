@@ -473,7 +473,7 @@ tpz.quest.id =
         EXPANDING_HORIZONS              = 134,
         BEYOND_THE_STARS                = 135,
         DORMANT_POWERS_DISLODGED        = 136,
-        BEYOND_INFINITY                 = 137,
+        BEYOND_INFINITY                 = 137, -- + --
         A_TRIAL_IN_TANDEM               = 160,
         A_TRIAL_IN_TANDEM_REDUX         = 161,
         YET_ANOTHER_TRIAL_IN_TANDEM     = 162,
@@ -483,7 +483,7 @@ tpz.quest.id =
         MARTIAL_MASTERY                 = 167,
         VW_OP_115_VALKURM_DUSTER        = 168,
         VW_OP_118_BUBURIMU_SQUALL       = 169,
-        PRELUDE_TO_PUISSANCE            = 170,
+        PRELUDE_TO_PUISSANCE            = 170, -- + --
 
         FULL_SPEED_AHEAD                = 179, -- + --
     },

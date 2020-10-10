@@ -1025,8 +1025,6 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     {
         PChar->PAutomaton->PMaster = nullptr;
     }
-
-    PChar->PNotorietyContainer->clear();
 }
 
 void CZone::CheckRegions(CCharEntity* PChar)

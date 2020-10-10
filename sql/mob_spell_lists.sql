@@ -621,7 +621,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,356,76,255);
 INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,357,75,255);
 INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,359,75,255);
 INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,360,75,255);
-INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,366,76,255);
+INSERT INTO `mob_spell_lists` VALUES ('Kam_Lanaut',21,366,75,255);
 INSERT INTO `mob_spell_lists` VALUES ('Eald_Narche',22,204,75,255);
 INSERT INTO `mob_spell_lists` VALUES ('Eald_Narche',22,206,75,255);
 INSERT INTO `mob_spell_lists` VALUES ('Eald_Narche',22,208,75,255);

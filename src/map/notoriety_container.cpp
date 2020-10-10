@@ -56,18 +56,6 @@ bool CNotorietyContainer::hasEnmity()
     return !m_Lookup.empty();
 }
 
-void CNotorietyContainer::clear()
-{
-    for (CBattleEntity* entity : m_Lookup)
-    {
-        if (CMobEntity* mob = dynamic_cast<CMobEntity*>(entity))
-        {
-            mob->PEnmityContainer->Clear(m_POwner->id);
-        }
-    }
-    m_Lookup.clear();
-}
-
 std::size_t CNotorietyContainer::size()
 {
     return m_Lookup.size();

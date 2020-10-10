@@ -311,9 +311,24 @@ tpz.msg.basic =
     DESPOIL_ACC_DOWN        = 598,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Accuracy Down.
     DESPOIL_SLOW            = 599,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Slow.
 
+    -- Records of Eminence
+    ROE_COMPLETE            = 690,  -- You have completed the following Records of Eminence objective: <record>.
+    ROE_REPEAT_OR_CANCEL    = 691,  -- This objective may be repeated, and can be cancelled from the menu.
+    ROE_RECEIVE_SPARKS      = 692,  -- You receive <amount> sparks of eminence, and now possess a total of <amount>.
+    ROE_BONUS_ITEM          = 693,  -- As a special bonus for your valiant efforts, you have been awarded <item>!
+    ROE_BONUS_SPARKS        = 694,  -- As a special bonus for your valiant efforts, you have been awarded <amount> sparks of eminence!
+    ROE_UNABLE_BONUS_ITEM   = 695,  -- Unable to receive special bonus. Make room in your inventory and receive your reward from the Records of Eminence menu.
+    ROE_YET_TO_RECEIVE      = 696,  -- You have yet to receive certain special bonuses from the objectives you have completed. Make room in your inventory and receive your reward from the Records of Eminence menu.
+    ROE_RECORD              = 697,  -- Records of Eminence: <record>.
+    ROE_PROGRESS            = 698,  -- Progress: <amount>/<amount>.
+    ROE_NEW_OBJECTIVE       = 699,  -- A new objective has been added!
+    ROE_OBTAINED_KEY_ITEM   = 706,  -- You have obtained <key item> as a special reward!
+    ROE_FIRST_TIME_SPARKS   = 707,  -- As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
+    ROE_BONUS_ITEM_PLURAL   = 709,  -- As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
+
     -- TRUST & ALTER EGO
-    TRUST_NO_CAST_TRUST    = 700,  -- You are unable to use Trust magic at this time.
-    TRUST_NO_CALL_AE       = 717,  -- You cannot call forth alter egos here.
+    TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.
+    TRUST_NO_CALL_AE        = 717,  -- You cannot call forth alter egos here.
 }
 
 ------------------------------------
