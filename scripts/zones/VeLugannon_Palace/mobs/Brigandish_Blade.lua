@@ -2,6 +2,7 @@
 -- Area: VeLugannon Palace
 --   NM: Brigandish Blade
 -----------------------------------
+local ID = require("scripts/zones/VeLugannon_Palace/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -14,4 +15,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
 end
