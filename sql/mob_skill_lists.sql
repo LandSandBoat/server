@@ -1594,14 +1594,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Iron_Giant',350,2624);
 INSERT INTO `mob_skill_lists` VALUES ('Iron_Giant',350,2625);
 INSERT INTO `mob_skill_lists` VALUES ('Iron_Giant',350,2626);
 INSERT INTO `mob_skill_lists` VALUES ('Iron_Giant',350,2627);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,823);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,824);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,825);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,826);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,827);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,828);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,829);
-INSERT INTO `mob_skill_lists` VALUES ('Kam_lanaut',351,830);
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Return to Delkfutt Tower)',351,829);
+INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Return to Delkfutt Tower)',351,830);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,933);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,934);
 INSERT INTO `mob_skill_lists` VALUES ('ArkAngel-EV',352,942);
@@ -3613,12 +3607,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3045); -- Concentric Pulse
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3051); -- Mending Halation
 INSERT INTO `mob_skill_lists` VALUES ('Luopan',1141,3052); -- Radial Arcana
 INSERT INTO `mob_skill_lists` VALUES ('Bashe',1142,370); -- Baleful Gaze
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,823); -- Fire Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,824); -- Frost Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,825); -- Wind Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,826); -- Earth Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,827); -- Lightning Blade
-INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,828); -- Water Blade
 INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,829); -- Great Wheel
 INSERT INTO `mob_skill_lists` VALUES ('Kamlanaut (Apoc Nigh)',1143,830); -- Light Blade
 INSERT INTO `mob_skill_lists` VALUES ('Ealdnarche (Apoc Nigh)',1144,985); -- Stellar Burst
