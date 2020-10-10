@@ -61,7 +61,7 @@ function onTrigger(player, npc)
             if currentBody == player:getCharVar("QuestAPoseByOtherName_equip") then
                 player:startEvent(96) -- complete quest
             else
-                player:startEvent(93, 0, 0, 0, player:getCharVar("QuestAPoseByOtherName_equip")) -- reminder
+                player:startEvent(93, 0, desiredBody, 0, player:getCharVar("QuestAPoseByOtherName_equip")) -- reminder
             end
         else
             player:startEvent(102) -- fail quest
