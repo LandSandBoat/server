@@ -1262,7 +1262,6 @@ void CBattleEntity::Die()
     {
         PAI->EventHandler.triggerListener("DEATH", this);
     }
-    PNotorietyContainer->clear();
     SetBattleTargetID(0);
 }
 
