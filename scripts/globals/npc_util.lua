@@ -6,6 +6,7 @@
     npcUtil.giveItem(player, items)
     npcUtil.giveKeyItem(player, keyitems)
     npcUtil.completeQuest(player, area, quest, params)
+    npcUtil.completeRecord(player, record, params)
     npcUtil.tradeHas(trade, items)
     npcUtil.queueMove(npc, point, delay)
     npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
@@ -13,6 +14,7 @@
 --]]
 require("scripts/globals/settings")
 require("scripts/globals/status")
+require("scripts/globals/msg")
 
 npcUtil = {}
 

@@ -130,6 +130,10 @@ enum MSGBASIC_ID : uint16
 	MSGBASIC_TREASURE_HUNTER_UP		= 603,  /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
 	/* DNC */
 	MSGBASIC_NO_FINISHINGMOVES		= 524,
+	/* ROE */
+	MSGBASIC_ROE_START              = 704,
+	MSGBASIC_ROE_RECORD             = 697, // Records of Eminence: <record>.
+	MSGBASIC_ROE_PROGRESS           = 698, // Progress: <amount>/<amount>.
 
 	/* DEBUG MESSAGES */
 	MSGBASIC_DEBUG_RESISTED_SPELL	= 66, /* Debug: Resisted spell! */

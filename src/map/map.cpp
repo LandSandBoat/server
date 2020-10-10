@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packet_system.h"
 #include "party.h"
 #include "utils/petutils.h"
+#include "roe.h"
 #include "spell.h"
 #include "time_server.h"
 #include "transport.h"
@@ -228,6 +229,7 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     mobutils::LoadCustomMods();
+    roeutils::init();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();

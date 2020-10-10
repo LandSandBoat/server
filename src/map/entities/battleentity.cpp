@@ -24,26 +24,27 @@
 
 #include "battleentity.h"
 
-#include "../lua/luautils.h"
-#include "../utils/battleutils.h"
-#include "../items/item_weapon.h"
-#include "../status_effect_container.h"
-#include "../recast_container.h"
 #include "../ai/ai_container.h"
 #include "../ai/states/attack_state.h"
-#include "../ai/states/magic_state.h"
 #include "../ai/states/death_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/weaponskill_state.h"
 #include "../ai/states/despawn_state.h"
+#include "../ai/states/inactive_state.h"
+#include "../ai/states/magic_state.h"
+#include "../ai/states/raise_state.h"
+#include "../ai/states/weaponskill_state.h"
 #include "../attack.h"
 #include "../attackround.h"
 #include "../notoriety_container.h"
-#include "../weapon_skill.h"
+#include "../items/item_weapon.h"
+#include "../lua/luautils.h"
 #include "../packets/action.h"
+#include "../recast_container.h"
+#include "../roe.h"
+#include "../status_effect_container.h"
+#include "../utils/battleutils.h"
 #include "../utils/petutils.h"
 #include "../utils/puppetutils.h"
+#include "../weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
 {
@@ -533,6 +534,13 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
 {
     PLastAttacker = attacker;
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
+
+    //RoE Damage Taken Trigger
+    if (this->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+    else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+
     return addHP(-amount);
 }
 
