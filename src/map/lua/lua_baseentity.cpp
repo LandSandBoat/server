@@ -49,7 +49,9 @@
 #include "../mob_modifier.h"
 #include "../mobskill.h"
 #include "../mob_spell_container.h"
+#include "../notoriety_container.h"
 #include "../recast_container.h"
+#include "../roe.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
 #include "../timetriggers.h"
@@ -129,6 +131,7 @@
 #include "../packets/position.h"
 #include "../packets/quest_mission_log.h"
 #include "../packets/release.h"
+#include "../packets/roe_questlog.h"
 #include "../packets/server_ip.h"
 #include "../packets/shop_items.h"
 #include "../packets/shop_menu.h"
@@ -6677,6 +6680,147 @@ inline int32 CLuaBaseEntity::getMissionLogEx(lua_State *L)
 }
 
 /************************************************************************
+*  Function: setEminenceCompleted()
+*  Purpose :
+*  Example : player:setEminenceCompleted(1)
+*  Notes   : optional arg 1 flags for repeat record (1/0) (Does not remove from log)
+*            optional arg 2 can set completion state explicitly (1/0)
+************************************************************************/
+
+inline int32 CLuaBaseEntity::setEminenceCompleted(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint16 recordID = (uint16)lua_tointeger(L, 1);
+
+    bool repeat = false;
+    if (lua_gettop(L) > 1)
+    {
+        repeat = lua_tointeger(L, 2) != 0;
+    }
+
+    bool status = true;
+    if (lua_gettop(L) > 2)
+    {
+        status = lua_tointeger(L, 3) != 0;
+    }
+
+    if (repeat)
+    {
+        roeutils::SetEminenceRecordProgress(PChar, recordID, 0);
+    }
+    else
+    {
+        roeutils::DelEminenceRecord(PChar, recordID);
+    }
+
+    roeutils::SetEminenceRecordCompletion(PChar, recordID, status);
+
+    return 0;
+}
+
+/************************************************************************
+*  Function: getEminenceCompleted()
+*  Purpose : Returns true if eminence is flagged complete for player
+*  Example : player:getEminenceCompleted(1)
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getEminenceCompleted(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint16 recordID = (uint16)lua_tointeger(L, 1);
+
+    lua_pushboolean(L, (bool)roeutils::GetEminenceRecordCompletion(PChar, recordID));
+
+    return 1;
+}
+
+/************************************************************************
+*  Function: setEminenceProgress(record, progress, total)
+*  Purpose :
+*  Example : player:setEminenceProgress(12, 3, 200)
+*  Notes   : The 3rd param is optional. However, no message will be shown if not given.
+************************************************************************/
+
+inline int32 CLuaBaseEntity::setEminenceProgress(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint16 recordID = static_cast<uint16>(lua_tointeger(L, 1));
+    uint32 progress = static_cast<uint32>(lua_tointeger(L, 2));
+    uint32 total = static_cast<uint32>(lua_tointeger(L, 3));
+
+    // Determine threshold for sending progress messages
+    bool progressNotify {true};
+    if (uint32 threshold = roeutils::RoeSystem.NotifyThresholds[recordID]; threshold > 1)
+    {
+        uint32 prevStep = static_cast<uint32>(roeutils::GetEminenceRecordProgress(PChar, recordID) / threshold);
+        uint32 nextStep = static_cast<uint32>(progress / threshold);
+        progressNotify = nextStep > prevStep;
+    }
+
+    bool result = roeutils::SetEminenceRecordProgress(PChar, recordID, progress);
+    lua_pushboolean(L, result);
+
+    if (total && progressNotify)
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recordID, 0, MSGBASIC_ROE_RECORD));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, progress, total, MSGBASIC_ROE_PROGRESS));
+    }
+
+    return 1;
+}
+
+/************************************************************************
+*  Function: getEminenceProgress(record)
+*  Purpose :
+*  Example : player:getEminenceProgress(19)
+*  Notes   : returns nil if player does not have the record.
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getEminenceProgress(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+    if(m_PBaseEntity->objtype != TYPE_PC)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    uint16 recordID = (uint16)lua_tointeger(L, 1);
+
+    if(roeutils::HasEminenceRecord(PChar, recordID))
+    {
+        uint32 progress = roeutils::GetEminenceRecordProgress(PChar, recordID);
+        lua_pushinteger(L, progress);
+    } else {
+        lua_pushnil(L);
+    }
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: addAssault()
 *  Purpose : Adds an assault mission to the player's log
 *  Example : player:addAssault(bit.rshift(option,4))
@@ -9100,6 +9244,27 @@ inline int32 CLuaBaseEntity::disableLevelSync(lua_State* L)
 }
 
 /************************************************************************
+*  Function: isLevelSync()
+*  Purpose :
+*  Example : player:isLevelSync()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::isLevelSync(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    if (PChar->PParty)
+        lua_pushboolean(L, (PChar->PParty->GetSyncTarget() && PChar->PParty->GetSyncTarget() != PChar) );
+    else
+        lua_pushboolean(L, false);
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: checkSoloPartyAlliance()
 *  Purpose : Checks if Entity is solo, in a party, or in an alliance
 *  Example : local popularityCheck = player:checkSoloPartyAlliance()
@@ -10540,6 +10705,58 @@ inline int32 CLuaBaseEntity::updateClaim(lua_State *L)
         battleutils::ClaimMob((CMobEntity*)m_PBaseEntity, (CBattleEntity*)PEntity->GetBaseEntity());
     }
     return 0;
+}
+
+/************************************************************************
+*  Function: hasEnmity()
+*  Purpose : Check if a an entity is on any mob's enmity list
+*  Example : if player:hasEnmity() then ...
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::hasEnmity(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    bool hasEnmity = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer->hasEnmity();
+
+    lua_pushboolean(L, hasEnmity);
+
+    return 1;
+}
+
+/************************************************************************
+*  Function: getNotorietyList()
+*  Purpose : Return a list of mobs that hold enmity towards the player
+*  Example : local list = player:getNotorietyList()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getNotorietyList(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
+
+    int size = static_cast<int>(notorietyContainer->size());
+
+    lua_createtable(L, size, 0);
+    int i = 1;
+    for (auto entry : *notorietyContainer)
+    {
+        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_pushstring(L, "new");
+        lua_gettable(L, -2);
+        lua_insert(L, -2);
+        lua_pushlightuserdata(L, (void*)entry);
+        lua_pcall(L, 2, 1, 0);
+
+        lua_rawseti(L, -2, i++);
+    }
+
+    return 1;
 }
 
 /************************************************************************
@@ -14552,6 +14769,10 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,completeMission),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMissionLogEx),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMissionLogEx),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEminenceCompleted),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setEminenceCompleted),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEminenceProgress),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setEminenceProgress),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addAssault),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,delAssault),
@@ -14672,6 +14893,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,reloadParty),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,disableLevelSync),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isLevelSync),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkSoloPartyAlliance),
 
@@ -14745,6 +14967,8 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmityFromCure),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetEnmity),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateClaim),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasEnmity),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNotorietyList),
 
     // Status Effects
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addStatusEffect),

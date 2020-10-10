@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
             })
         else
             npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
-                keyItem = tpz.ki.MAP_OF_GRAUBERG,
+                ki = tpz.ki.MAP_OF_GRAUBERG,
                 var = "lostInTranslocationCS"
             })
         end

@@ -21,7 +21,7 @@ function onTrade(player, npc, trade)
 
     if wsQuestEvent ~= nil then
         if wsQuestEvent == 448 then
-            player:startEvent(wsQuestEvent, nil, nil, tpz.keyItem.ANNALS_OF_TRUTH)
+            player:startEvent(wsQuestEvent, nil, nil, tpz.ki.ANNALS_OF_TRUTH)
         else
             player:startEvent(wsQuestEvent)
         end

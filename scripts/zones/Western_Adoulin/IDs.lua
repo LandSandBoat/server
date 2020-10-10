@@ -33,6 +33,8 @@ zones[tpz.zone.WESTERN_ADOULIN] =
         ANSEGUSELE_SHOP_TEXT    = 9853, -- Would you care for some fresh vegetables direct from the Rala Waterways? They're some of our most popular items!
         TEVIGOGO_SHOP_TEXT      = 9854, -- Hidey ho! Make sure not to forgetaru anything before heading out into the great unknown!
         MINNIFI_DIALOGUE        = 10237, -- Come, ladies and gentlemen, and enjoy our delightful array of frrresh vegetables!
+        SPARK_EXCHANGE          = 11352, -- Hm? Oh, spark exchange... Of course.
+        NOT_ENOUGH_SPARKS       = 11366, -- You do not possess enough sparks of eminence to complete the transaction.
     },
     mob =
     {

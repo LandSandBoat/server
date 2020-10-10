@@ -24,7 +24,7 @@ end
 function onInstanceCreated(instance)
 
     for i, v in pairs(ID.npc[1][1]) do
-        local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
+        local npc = GetNPCByID(v, instance)
         npc:setStatus(tpz.status.NORMAL)
     end
     instance:setStage(1)
@@ -58,15 +58,15 @@ function onInstanceProgressUpdate(instance, progress, elapsed)
     if instance:getStage() == 1 and progress == 10 then
         SpawnMob(ID.mob[1][2].rampart, instance)
     elseif instance:getStage() == 2 and progress == 2 then -- attempt to spawn slot
-        instance:getEntity(bit.band(ID.npc[2][2].SLOT, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc[2][2].SLOT, instance):setStatus(tpz.status.NORMAL)
     elseif instance:getStage() == 2 and progress == 3 then -- attempt to spawn socket
-        instance:getEntity(bit.band(ID.npc[2][2].SOCKET, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(tpz.status.NORMAL)
     elseif instance:getStage() == 3 and progress == 1 then
         SpawnMob(ID.mob[2][0].astrologer, instance)
     elseif instance:getStage() == 6 and progress == 1 then
-        instance:getEntity(bit.band(ID.npc[6].DOOR, 0xFFF), tpz.objType.NPC):setLocalVar("start", os.time())
+        GetNPCByID(ID.npc[6].DOOR, instance):setLocalVar("start", os.time())
     elseif instance:getStage() == 7 and progress == 0 then
-        local door = instance:getEntity(bit.band(ID.npc[6].DOOR, 0xFFF), tpz.objType.NPC)
+        local door = GetNPCByID(ID.npc[6].DOOR, instance)
         door:setLocalVar("current", os.time())
         if (door:getLocalVar("current") - door:getLocalVar("start") <= 420) then
             SpawnMob(ID.mob[6].treasure_hunter1, instance)

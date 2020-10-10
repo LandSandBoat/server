@@ -194,7 +194,7 @@ tpz.homepoint.onTrigger = function(player, csid, index)
         params = bit.bor(params, 0x10000) -- OR in New HP Bit Flag
     end
 
-    if player:hasKeyItem(tpz.keyItem.RHAPSODY_IN_WHITE) then
+    if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
         -- "Rhapsody in White" key item reduces teleport fee by 80%
         params = bit.bor(params, 0x20000)
     end

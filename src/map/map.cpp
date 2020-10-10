@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packet_system.h"
 #include "party.h"
 #include "utils/petutils.h"
+#include "roe.h"
 #include "spell.h"
 #include "time_server.h"
 #include "transport.h"
@@ -228,6 +229,7 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     mobutils::LoadCustomMods();
+    roeutils::init();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
@@ -604,14 +606,13 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (map_config.packetguard_enabled && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
             {
-                ShowError(CL_RED "Rate-limiting packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                ShowExploit(CL_RED "[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
                 continue; // skip this packet
             }
 
             if (map_config.packetguard_enabled && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
-                // TODO: Log exploit
-                ShowError(CL_RED "Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                ShowExploit(CL_RED "[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
             }

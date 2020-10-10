@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "alliance.h"
 #include "enmity_container.h"
+#include "notoriety_container.h"
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
@@ -58,11 +59,24 @@ void CEnmityContainer::Clear(uint32 EntityID)
 {
     if (EntityID == 0)
     {
+        for (const auto& entry : m_EnmityList)
+        {
+            if (const auto& enmity_obj = m_EnmityList.find(entry.first);
+                enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+            {
+                enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+            }
+        }
         m_EnmityList.clear();
         return;
     }
     else
     {
+        if (const auto& enmity_obj = m_EnmityList.find(EntityID);
+            enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+        {
+            enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+        }
         m_EnmityList.erase(EntityID);
     }
     m_tameable = true;
@@ -70,9 +84,7 @@ void CEnmityContainer::Clear(uint32 EntityID)
 
 void CEnmityContainer::LogoutReset(uint32 EntityID)
 {
-    auto enmity_obj = m_EnmityList.find(EntityID);
-
-    if (enmity_obj != m_EnmityList.end())
+    if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
     {
         enmity_obj->second.PEnmityOwner = nullptr;
         enmity_obj->second.active = false;
@@ -88,6 +100,7 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
     m_EnmityList.emplace(PChar->id, EnmityObject_t {PChar, 0, 0, false, 0});
+    PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
 
 /************************************************************************
@@ -171,6 +184,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         VE = std::clamp((int32)(VE * bonus), 0, EnmityCap);
 
         m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH});
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
 
         if (withMaster && PEntity->PMaster != nullptr)
         {
@@ -236,6 +250,7 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
     else
     {
         m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, std::clamp(CE, 0, EnmityCap), std::clamp(VE, 0, EnmityCap), true, 0});
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
     }
 }
 
@@ -397,6 +412,7 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
         {
             PEntity = zoneutils::GetChar(highest->first);
         }
+
         if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() ||
             PEntity->PInstance != m_EnmityHolder->PInstance)
         {

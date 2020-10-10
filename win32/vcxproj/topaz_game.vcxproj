@@ -416,6 +416,9 @@
     <ClInclude Include="..\..\src\map\packets\position.h" />
     <ClInclude Include="..\..\src\map\packets\quest_mission_log.h" />
     <ClInclude Include="..\..\src\map\packets\release.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_sparkupdate.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_questlog.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_update.h" />
     <ClInclude Include="..\..\src\map\packets\server_ip.h" />
     <ClInclude Include="..\..\src\map\packets\server_message.h" />
     <ClInclude Include="..\..\src\map\packets\shop_appraise.h" />
@@ -438,6 +441,8 @@
     <ClInclude Include="..\..\src\map\party.h" />
     <ClInclude Include="..\..\src\map\recast_container.h" />
     <ClInclude Include="..\..\src\map\region.h" />
+    <ClInclude Include="..\..\src\map\notoriety_container.h" />
+    <ClInclude Include="..\..\src\map\roe.h" />
     <ClInclude Include="..\..\src\map\spell.h" />
     <ClInclude Include="..\..\src\map\status_effect.h" />
     <ClInclude Include="..\..\src\map\status_effect_container.h" />
@@ -673,6 +678,9 @@
     <ClCompile Include="..\..\src\map\packets\position.cpp" />
     <ClCompile Include="..\..\src\map\packets\quest_mission_log.cpp" />
     <ClCompile Include="..\..\src\map\packets\release.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_sparkupdate.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_questlog.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_update.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_ip.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_message.cpp" />
     <ClCompile Include="..\..\src\map\packets\shop_appraise.cpp" />
@@ -695,6 +703,8 @@
     <ClCompile Include="..\..\src\map\party.cpp" />
     <ClCompile Include="..\..\src\map\recast_container.cpp" />
     <ClCompile Include="..\..\src\map\region.cpp" />
+    <ClCompile Include="..\..\src\map\notoriety_container.cpp" />
+    <ClCompile Include="..\..\src\map\roe.cpp" />
     <ClCompile Include="..\..\src\map\spell.cpp" />
     <ClCompile Include="..\..\src\map\status_effect.cpp" />
     <ClCompile Include="..\..\src\map\status_effect_container.cpp" />

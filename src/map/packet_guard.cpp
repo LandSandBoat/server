@@ -25,16 +25,29 @@ void Init()
     }
 
     // In Cutscene
+    allowList[SUBSTATE_IN_CS][0x00A] = true; // Log In To Zone
+    allowList[SUBSTATE_IN_CS][0x00C] = true; // Event Update (String Update)
+    allowList[SUBSTATE_IN_CS][0x00D] = true; // Player Leaving Zone(Dezone)  
+    allowList[SUBSTATE_IN_CS][0x00F] = true; // Player Information Request 
+    allowList[SUBSTATE_IN_CS][0x011] = true; // Player Zone Transition Confirmation
     allowList[SUBSTATE_IN_CS][0x015] = true; // Player Sync
     allowList[SUBSTATE_IN_CS][0x016] = true; // Entity Information Request
     allowList[SUBSTATE_IN_CS][0x01A] = true; // Player Action
     allowList[SUBSTATE_IN_CS][0x03A] = true; // Sort Inventory
+    allowList[SUBSTATE_IN_CS][0x053] = true; // LockStyleSet
+    allowList[SUBSTATE_IN_CS][0x05A] = true; // Map Update (Conquest, Besieged, Campaign)
     allowList[SUBSTATE_IN_CS][0x05B] = true; // Event Update (Completion or Update)
     allowList[SUBSTATE_IN_CS][0x05C] = true; // Event Update (Update Player Position)
+    allowList[SUBSTATE_IN_CS][0x061] = true; // Full Char Update
     allowList[SUBSTATE_IN_CS][0x0B5] = true; // Chat Message
     allowList[SUBSTATE_IN_CS][0x0B6] = true; // Tell Message
+    allowList[SUBSTATE_IN_CS][0x0DB] = true; // Set Preferred Language
+    allowList[SUBSTATE_IN_CS][0x0E0] = true; // Set Search Message
     allowList[SUBSTATE_IN_CS][0x0F2] = true; // Update Player Zone Boundary
+    allowList[SUBSTATE_IN_CS][0x112] = true; // Roe Quest Log Request
     allowList[SUBSTATE_IN_CS][0x114] = true; // Map Marker Request
+    allowList[SUBSTATE_IN_CS][0x118] = true; // Not Impl
+    allowList[SUBSTATE_IN_CS][0x11B] = true; // Not Impl
 }
 
 bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)

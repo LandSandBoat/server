@@ -104,7 +104,7 @@ function onEventFinish(player, csid, option)
     -- complete quest
     elseif csid == 96 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME, {
         item = 206, -- copy_of_ancient_blood
-        keyItem = tpz.ki.ANGELICAS_AUTOGRAPH,
+        ki = tpz.ki.ANGELICAS_AUTOGRAPH,
         fame = 75,
         title = tpz.title.SUPER_MODEL,
         var = {"QuestAPoseByOtherName_time", "QuestAPoseByOtherName_equip", "QuestAPoseByOtherName_prog"},
