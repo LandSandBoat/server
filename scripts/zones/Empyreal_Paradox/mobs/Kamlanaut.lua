@@ -16,6 +16,19 @@ local skillToAbsorb =
     [828] = tpz.mod.WATER_ABSORB, -- water_blade
 }
 
+function onMobEngaged(mob, target)
+    mob:setLocalVar("nextEnSkill", os.time() + 10)
+end
+
+function onMobFight(mob, target)
+    if os.time() > mob:getLocalVar("nextEnSkill") then
+        local skill = math.random(823, 828)
+        mob:setLocalVar("currentTP", mob:getTP())
+        mob:useMobAbility(skill)
+        mob:setLocalVar("nextEnSkill", os.time() + 30)
+    end
+end
+
 function onMobWeaponSkill(target, mob, skill)
     local skillId = skill:getID()
     local absorbId = skillToAbsorb[skillId]
@@ -36,6 +49,9 @@ function onMobWeaponSkill(target, mob, skill)
         mob:setLocalVar("currentAbsorb", absorbId)
         mob:setMod(absorbId, 100)
 
+        -- return TP
+        mob:setTP(mob:getLocalVar("currentTP"))
+
     else
         -- ----------------------------------------------------------------------
         -- when using Light Blade or Great Wheel, can do up to three WS in a row
@@ -51,7 +67,7 @@ function onMobWeaponSkill(target, mob, skill)
 
         if wsCount < wsMax then
             mob:setLocalVar("wsCount", wsCount + 1)
-            mob:useMobAbility(skillId)
+            mob:setTP(1000)
         else
             mob:setLocalVar("wsCount", 0)
         end
