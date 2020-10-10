@@ -112,7 +112,7 @@ local battlefields = {
 
     [36] = {                -- EMPYREAL PARADOX
         { 0, 1056,    0},   -- Dawn (PM8-4)
-     -- { 1, 1057,    0},   -- Apocalypse Nigh (Quest)
+        { 1, 1057,    0},   -- Apocalypse Nigh (Quest)
      -- { 2,    ?,    0},   -- Both Paths Taken (ROVM2-9-2)
      -- { 3,    ?,    0},   -- *Dawn (HTMBF)
      -- { 4,    ?,    0},   -- The Winds of Time (ROVM3-1-26)
