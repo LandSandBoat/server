@@ -248,6 +248,15 @@ uint32 param = static_cast<uint32>(input);
 uint32 param = (uint32)input;
 ```
 
+`Arg/Param spacing`
+```cpp
+// Correct ✔️ 
+auto f(0, 1, 2, 3, 4, 5, 6);
+
+// Wrong ❌
+auto f(0,1,2,3,4,5,6);
+```
+
 `Lambdas`
 
 Formatting tools have a famously difficult time with lamdas, here is an example lambda. If you're using them (lambdas, or tools), do your best!
