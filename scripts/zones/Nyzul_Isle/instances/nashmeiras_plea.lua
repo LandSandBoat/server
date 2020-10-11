@@ -39,7 +39,7 @@ function onInstanceProgressUpdate(instance, progress)
         DespawnMob(ID.mob[59].RAZFAHD, instance)
         for i, v in pairs(chars) do
             v:startEvent(203)
-            v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.r)
+            v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.rot)
         end
         SpawnMob(ID.mob[59].ALEXANDER, instance)
 
