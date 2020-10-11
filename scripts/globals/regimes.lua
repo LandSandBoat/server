@@ -982,18 +982,18 @@ end
 -- can stack each effect up to maxStack times, per https://ffxiclopedia.fandom.com/wiki/Grounds_of_Valor#Prowesses
 local prowessData =
 {
-    {effect = tpz.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
-    {effect = tpz.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
-    {effect = tpz.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
-    {effect = tpz.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
-    {effect = tpz.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
-    {effect = tpz.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
-    {effect = tpz.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
-    {effect = tpz.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
-    {effect = tpz.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
-    {effect = tpz.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
-    {effect = tpz.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
-    {effect = tpz.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
+    { effect = tpz.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
+    { effect = tpz.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
+    { effect = tpz.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
+    { effect = tpz.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
 }
 
 local function addGovProwessBonusEffect(player)
