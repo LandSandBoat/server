@@ -86,22 +86,22 @@ tpz.magic.dayElement =
 tpz.magic.elementAscendant =
 {
     [tpz.magic.element.FIRE]    = tpz.magic.element.ICE,
-    [tpz.magic.element.EARTH]   = tpz.magic.element.THUNDER,
-    [tpz.magic.element.WATER]   = tpz.magic.element.FIRE,
-    [tpz.magic.element.WIND]    = tpz.magic.element.EARTH,
     [tpz.magic.element.ICE]     = tpz.magic.element.WIND,
+    [tpz.magic.element.WIND]    = tpz.magic.element.EARTH,
+    [tpz.magic.element.EARTH]   = tpz.magic.element.THUNDER,
     [tpz.magic.element.THUNDER] = tpz.magic.element.WATER,
+    [tpz.magic.element.WATER]   = tpz.magic.element.FIRE,
     [tpz.magic.element.LIGHT]   = tpz.magic.element.DARK,
     [tpz.magic.element.DARK]    = tpz.magic.element.LIGHT,
 }
 
 tpz.magic.elementDescendant =
 {
-    [tpz.magic.element.ICE]      = tpz.magic.element.FIRE,
-    [tpz.magic.element.THUNDER]  = tpz.magic.element.EARTH,
     [tpz.magic.element.FIRE]     = tpz.magic.element.WATER,
-    [tpz.magic.element.EARTH]    = tpz.magic.element.WIND,
+    [tpz.magic.element.ICE]      = tpz.magic.element.FIRE,
     [tpz.magic.element.WIND]     = tpz.magic.element.ICE,
+    [tpz.magic.element.EARTH]    = tpz.magic.element.WIND,
+    [tpz.magic.element.THUNDER]  = tpz.magic.element.EARTH,
     [tpz.magic.element.WATER]    = tpz.magic.element.THUNDER,
     [tpz.magic.element.LIGHT]    = tpz.magic.element.DARK,
     [tpz.magic.element.DARK]     = tpz.magic.element.LIGHT,
