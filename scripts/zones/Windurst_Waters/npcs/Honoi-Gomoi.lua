@@ -12,7 +12,12 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getCharVar("CryingOverOnions") == 1 and npcUtil.tradeHas(trade, 1149) then
+    -- Trade "Star Spinel" for "Crying over Onions" after having talked to this NPC once
+    -- and optionally talked to Nanaa Mihgo (CryingOverOnions == 2)
+    if
+        (player:getCharVar("CryingOverOnions") == 1 or player:getCharVar("CryingOverOnions") == 2) and
+        npcUtil.tradeHas(trade, 1149)
+    then
         player:startEvent(775, 0, 1149)
     end
 end
@@ -26,9 +31,15 @@ function onTrigger(player, npc)
     local wildCard          = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WILD_CARD)
     local hatInHand         = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5 then
+    if
+        player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and
+        player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5
+    then
         player:startEvent(874) -- COP event
-    elseif (hatInHand == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and not testflag(player:getCharVar("QuestHatInHand_var"), 2) then
+    elseif
+        (hatInHand == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and
+        not testflag(player:getCharVar("QuestHatInHand_var"), 2)
+    then
         player:startEvent(59) -- Show Off Hat
     elseif wildCard == QUEST_COMPLETED then
         player:startEvent(783)
@@ -46,11 +57,11 @@ function onTrigger(player, npc)
         end
     elseif cryingOverOnions == QUEST_ACCEPTED then
         local cryingOverOnionsVar = player:getCharVar("CryingOverOnions")
-        if cryingOverOnionsVar == 3 then
+        if cryingOverOnionsVar == 4 then
             player:startEvent(776)
-        elseif cryingOverOnionsVar == 2 then
+        elseif cryingOverOnionsVar == 3 then
             player:startEvent(778)
-        elseif cryingOverOnionsVar == 1 then
+        elseif cryingOverOnionsVar >= 1 then
             player:startEvent(777)
         else
             player:startEvent(774, 0, 1149)
@@ -68,12 +79,17 @@ function onEventFinish(player, csid, option)
         player:setCharVar("CryingOverOnions", 1)
     elseif csid == 775 and npcUtil.giveItem(player, 13136) then
         player:confirmTrade()
-        player:setCharVar("CryingOverOnions", 2)
-    elseif csid == 776 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS, {fame=120, var="CryingOverOnions"}) then
+        player:setCharVar("CryingOverOnions", 3)
+    elseif csid == 776 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS, {
+        fame=120,
+        var="CryingOverOnions"
+    }) then
         player:needToZone(true)
     elseif csid == 780 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.WILD_CARD)
-    elseif csid == 782 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {title=tpz.title.DREAM_DWELLER, fame=135, var="WildCard"}) then
+    elseif csid == 782 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {
+        title=tpz.title.DREAM_DWELLER, fame=135, var="WildCard"
+    }) then
         player:needToZone(true)
     elseif csid == 59 then -- Show Off Hat
         player:addCharVar("QuestHatInHand_var", 2)

@@ -9,6 +9,7 @@
 -- Crying Over Onions,
 -- Wild Card,
 -- The Promise
+-- !pos -26.8 -6 190 240
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -47,7 +48,7 @@ function onTrigger(player, npc)
         player:startEvent(368)
     elseif
         KnowOnesOnions == QUEST_AVAILABLE and TruthJusticeOnionWay == QUEST_COMPLETED and
-        player:getMainLvl() >= 5 and player:getLocalVar('TruthZone') == 0  and Fame >=1
+        player:getMainLvl() >= 5 and player:getLocalVar('TruthZone') == 0 and Fame >=1
     then
         player:startEvent(391, 0, 4387)
     elseif KnowOnesOnions == QUEST_ACCEPTED and Level >= 5 and player:getCharVar("KnowOnesOnions") == 2 then
@@ -57,18 +58,18 @@ function onTrigger(player, npc)
         player:getLocalVar("KnowOneOnionZone") == 0 and Fame >=2
     then
         player:startEvent(413)
-    elseif InspectorsGadget == QUEST_ACCEPTED  and player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE) then
+    elseif InspectorsGadget == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE) then
         player:startEvent(421)
     elseif
         OnionRings == QUEST_AVAILABLE and InspectorsGadget == QUEST_COMPLETED and
         player:getLocalVar('InspectorsGadgetZone') == 0 and Fame >=3 and not player:hasKeyItem(tpz.ki.OLD_RING)
     then
         player:startEvent(429)
-    elseif  (OnionRings == QUEST_ACCEPTED or OnionRings == QUEST_AVAILABLE) and player:hasKeyItem(tpz.ki.OLD_RING) then
+    elseif (OnionRings == QUEST_ACCEPTED or OnionRings == QUEST_AVAILABLE) and player:hasKeyItem(tpz.ki.OLD_RING) then
         player:startEvent(430, 0, tpz.ki.OLD_RING) --TODO get correct time for quest to expire.
-    elseif  CryingOverOnions == QUEST_AVAILABLE and OnionRings == QUEST_COMPLETED and Fame >=3 then
+    elseif CryingOverOnions == QUEST_AVAILABLE and OnionRings == QUEST_COMPLETED and Fame >=3 then
         player:startEvent(496)
-    elseif CryingOverOnions == QUEST_ACCEPTED and player:getCharVar("CryingOverOnions") ==2 then
+    elseif CryingOverOnions == QUEST_ACCEPTED and player:getCharVar("CryingOverOnions") == 3 then
         player:startEvent(497)
     elseif WildCard == QUEST_ACCEPTED then
         player:startEvent(505)
@@ -78,7 +79,7 @@ function onTrigger(player, npc)
         player:startEvent(522, 0, tpz.ki.INVISIBLE_MAN_STICKER)
     elseif ThePromise == QUEST_COMPLETED then
         player:startEvent(544)
-    elseif  KnowOnesOnions == QUEST_COMPLETED then
+    elseif KnowOnesOnions == QUEST_COMPLETED then
         player:startEvent(401)
     elseif TruthJusticeOnionWay == QUEST_COMPLETED then
         player:startEvent(379)
@@ -139,7 +140,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 496 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
     elseif csid == 497 then
-        player:setCharVar("CryingOverOnions", 3)
+        player:setCharVar("CryingOverOnions", 4)
     elseif csid == 505 then
         player:setCharVar("WildCard", 1)
     elseif csid == 513 then
