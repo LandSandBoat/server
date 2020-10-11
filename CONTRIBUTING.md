@@ -406,6 +406,28 @@ then
 end
 ```
 
+`Placement of logical operators in long blocks`
+- `not` before, `and/or` after 
+```lua
+-- Correct ✔️
+if
+    condition1 and
+    condition2 or
+    not condition3
+then
+    bla()
+end
+
+-- Wrong ❌
+if
+    condition1
+    and condition2
+    or not condition3
+then
+    bla()
+end
+```
+
 `No excess whitespace inside of parentheses or solely for alignment`
 ```lua
 -- Correct ✔️ 
