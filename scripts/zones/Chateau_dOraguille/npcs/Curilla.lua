@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 local wsQuest = tpz.wsquest.savage_blade
-local questList = tpz.quest.id.sandoria
+local sandyQuests = tpz.quest.id.sandoria
 
 function onTrade(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
@@ -30,13 +30,13 @@ function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local theGeneralSecret = player:getQuestStatus(SANDORIA, questList.THE_GENERAL_S_SECRET)
-    local envelopedInDarkness = player:getQuestStatus(SANDORIA, questList.ENVELOPED_IN_DARKNESS)
-    local peaceForTheSpirit = player:getQuestStatus(SANDORIA, questList.PEACE_FOR_THE_SPIRIT)
+    local theGeneralSecret = player:getQuestStatus(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+    local envelopedInDarkness = player:getQuestStatus(SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+    local peaceForTheSpirit = player:getQuestStatus(SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
 
     -- "Lure of the Wildcat"
     if
-        player:getQuestStatus(SANDORIA, questList.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar("WildcatSandy"), 15)
     then
         player:startEvent(562)
@@ -79,7 +79,7 @@ function onTrigger(player, npc)
         end
     elseif
         mJob == tpz.job.RDM and mLvl >= AF2_QUEST_LEVEL and
-        player:getQuestStatus(SANDORIA, questList.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
+        player:getQuestStatus(SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
         envelopedInDarkness == QUEST_AVAILABLE
     then
         player:startEvent(94) -- Start
@@ -164,7 +164,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 55 and option == 1) then
-        player:addQuest(SANDORIA, questList.THE_GENERAL_S_SECRET)
+        player:addQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         player:addKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURILLAS_BOTTLE_EMPTY)
     elseif (csid == 54) then
@@ -175,14 +175,14 @@ function onEventFinish(player, csid, option)
             player:addItem(16409)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16409) -- Lynx Baghnakhs
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, questList.THE_GENERAL_S_SECRET)
+            player:completeQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         end
     elseif (csid == 94 and option == 1) then
-        player:addQuest(SANDORIA, questList.ENVELOPED_IN_DARKNESS)
+        player:addQuest(SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
         player:addKeyItem(tpz.ki.OLD_POCKET_WATCH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_POCKET_WATCH)
     elseif (csid == 109 and option == 1) then
-        player:addQuest(SANDORIA, questList.PEACE_FOR_THE_SPIRIT)
+        player:addQuest(SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
         player:setCharVar("needs_crawler_blood", 0)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)
