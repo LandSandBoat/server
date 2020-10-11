@@ -976,6 +976,64 @@ local function getFinishOpts(regimeType)
     end
     return out
 end
+
+-- first time an effect is applied, use basePower
+-- each additional time an effect is applied, use addPower
+-- can stack each effect up to maxStack times, per https://ffxiclopedia.fandom.com/wiki/Grounds_of_Valor#Prowesses
+local prowessData =
+{
+    {effect = tpz.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
+    {effect = tpz.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
+    {effect = tpz.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
+    {effect = tpz.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
+    {effect = tpz.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
+    {effect = tpz.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
+    {effect = tpz.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    {effect = tpz.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    {effect = tpz.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
+    {effect = tpz.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
+    {effect = tpz.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
+    {effect = tpz.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
+}
+
+local function addGovProwessBonusEffect(player)
+    -- make a table of prowesses that are not yet maxed
+    local availableProwesses = {}
+
+    for i = 1, #prowessData do
+        local p = prowessData[i]
+        local e = player:getStatusEffect(p.effect)
+
+        if not e or e:getPower() < (p.basePower + p.addPower * (p.maxStack - 1)) then
+            table.insert(availableProwesses, p)
+        end
+    end
+
+    -- pick one and apply
+    if #availableProwesses > 0 then
+        local p = availableProwesses[math.random(#availableProwesses)]
+        local e = player:getStatusEffect(p.effect)
+
+        -- get current power
+        local power = 0
+        if e then
+            power = e:getPower()
+            player:delStatusEffectSilent(p.effect)
+        end
+
+        -- add either basePower or addPower
+        if power == 0 then
+            power = p.basePower
+        else
+            power = power + p.addPower
+        end
+
+        -- set effect
+        player:addStatusEffectEx(p.effect, 0, power, 0, 0)
+        player:messageBasic(p.effect - 168)
+    end
+end
+
 -- function made global to be called by hunts.lua
 tpz.regime.clearRegimeVars = function(player)
     player:setCharVar("[regime]type", 0)
@@ -1297,52 +1355,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- prowess buffs from completing Grounds regimes
     if regimeType == tpz.regime.type.GROUNDS then
-        local prowess = math.random(tpz.effect.PROWESS_CASKET_RATE, tpz.effect.PROWESS_KILLER)
-        local power = 0
-
-        -- existing buff
-        if player:hasStatusEffect(prowess) then
-
-            -- stack up to 11 times
-            if prowess == tpz.effect.PROWESS_TH then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 1, 0, 11)
-            elseif prowess == tpz.effect.PROWESS_ATTACK_SPEED then
-                power = 400
-            elseif prowess == tpz.effect.PROWESS_HP_MP then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 1, 0, 14)
-            elseif prowess == tpz.effect.PROWESS_WS_DMG then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 2, 0, 22)
-            else
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 4, 0, 44)
-            end
-
-            -- reapply buff
-            player:delStatusEffectSilent(prowess)
-            player:addStatusEffectEx(prowess, 0, power, 0, 0)
-
-            -- message (prowess boosted)
-            player:messageBasic(prowess - 152)
-
-        -- new buff
-        else
-            if prowess == tpz.effect.PROWESS_TH then
-                power = 1
-            elseif prowess == tpz.effect.PROWESS_ATTACK_SPEED then
-                power = 400
-            elseif prowess == tpz.effect.PROWESS_HP_MP then
-                power = 3
-            elseif prowess == tpz.effect.PROWESS_WS_DMG then
-                power = 2
-            else
-                power = 4
-            end
-
-            -- apply buff
-            player:addStatusEffectEx(prowess, 0, power, 0, 0)
-
-            -- message (prowess attained)
-            player:messageBasic(prowess - 168)
-        end
+        addGovProwessBonusEffect(player)
 
         -- repeat clears bonus
         if player:hasStatusEffect(tpz.effect.PROWESS) then
@@ -1360,9 +1373,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
             -- keep track of number of clears
             player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
         end
-
     end
-    -- done with prowess buffs
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()

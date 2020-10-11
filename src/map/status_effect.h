@@ -696,7 +696,7 @@ enum EFFECT
     // GoV Prowess bonus effects, real effect at ID 474
     EFFECT_PROWESS_CASKET_RATE      = 777, // (Unimplemented)
     EFFECT_PROWESS_SKILL_RATE       = 778, // (Unimplemented)
-    EFFECT_PROWESS_CRYSTAL_YEILD    = 779, // (Unimplemented)
+    EFFECT_PROWESS_CRYSTAL_YIELD    = 779, // (Unimplemented)
     EFFECT_PROWESS_TH               = 780, // +1 per tier
     EFFECT_PROWESS_ATTACK_SPEED     = 781, // *flat 4% for now
     EFFECT_PROWESS_HP_MP            = 782, // Base 3% and another 1% per tier.
@@ -721,7 +721,7 @@ enum EFFECT
     EFFECT_DYNAMIS                  = 800,
     EFFECT_MEDITATE                 = 801, // Dummy effect for SAM Meditate JA
     EFFECT_ELEMENTALRES_DOWN        = 802, // Elemental resistance down
-    EFFECT_FULL_SPEED_AHEAD         = 803, // Used to track Full Speed Ahead quest minigame 
+    EFFECT_FULL_SPEED_AHEAD         = 803, // Used to track Full Speed Ahead quest minigame
     // EFFECT_PLACEHOLDER           = 804  // Description
     // 804-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
