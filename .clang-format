@@ -1,11 +1,18 @@
 ﻿---
-BasedOnStyle: WebKit
+# We base things of WebKit + Allman braces
+# BasedOnStyle: WebKit
 BreakBeforeBraces: Allman
-Cpp11BracedListStyle: 'true'
+BreakConstructorInitializers: BeforeComma
+CompactNamespaces: 'false'
+ConstructorInitializerIndentWidth: 0
+Cpp11BracedListStyle: 'false'
+IndentCaseLabels: 'true'
+IndentWidth: 4
 Language: Cpp
 PointerAlignment: Left
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'
+SpaceBeforeParens: ControlStatements
 Standard: Cpp11
 UseTab: Never
 
