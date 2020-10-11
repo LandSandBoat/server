@@ -19,7 +19,7 @@ function onTrigger(player, npc)
     -- "Lure of the Wildcat"
     if
         player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        player:getMaskBit(WildcatSandy, 18) == false
+        utils.mask.getBit(WildcatSandy, 18) == false
     then
         player:startEvent(560)
 

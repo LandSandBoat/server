@@ -37,7 +37,7 @@ function onTrigger(player, npc)
     -- "Lure of the Wildcat"
     if
         player:getQuestStatus(SANDORIA, questList.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        player:getMaskBit(player:getCharVar("WildcatSandy"), 15) == false
+        utils.mask.getBit(player:getCharVar("WildcatSandy"), 15) == false
     then
         player:startEvent(562)
 
@@ -127,8 +127,11 @@ function onTrigger(player, npc)
 
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            currentMission ~= missions.LEAUTE_S_LAST_WISHES
+            -- Directly after winning BCNM and up until next mission
+            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
+            (currentMission == missions.THE_SHADOW_LORD and MissionStatus == 5) or
+            (player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            currentMission ~= missions.LEAUTE_S_LAST_WISHES)
         then
             player:startEvent(56)
 

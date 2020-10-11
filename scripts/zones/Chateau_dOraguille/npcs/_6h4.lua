@@ -28,7 +28,8 @@ function onTrigger(player, npc)
         elseif currentMission == missions.BREAKING_BARRIERS and (missionStatus == 4 or missionStatus == 0) then
             if missionStatus == 4 then
                 if
-                    player:hasKeyItem(tpz.ki.FIGURE_OF_TITAN) and player:hasKeyItem(tpz.ki.FIGURE_OF_GARUDA) and
+                    player:hasKeyItem(tpz.ki.FIGURE_OF_TITAN) and
+                    player:hasKeyItem(tpz.ki.FIGURE_OF_GARUDA) and
                     player:hasKeyItem(tpz.ki.FIGURE_OF_LEVIATHAN)
                 then
                     player:startEvent(76)
