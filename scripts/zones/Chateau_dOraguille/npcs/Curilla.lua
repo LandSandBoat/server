@@ -128,10 +128,9 @@ function onTrigger(player, npc)
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         elseif
             -- Directly after winning BCNM and up until next mission
-            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
-            (currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5) or
-            (player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES)
+            currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
+            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 

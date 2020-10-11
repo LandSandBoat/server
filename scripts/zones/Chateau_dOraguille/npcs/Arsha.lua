@@ -19,13 +19,8 @@ function onTrigger(player, npc)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        if
-            -- Directly after winning BCNM and up until next mission
-            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
-            (currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5) or
-            (player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST))
-        then
+        -- Only after speaking to Halver and obtaining Rank 6 and before entering the Great Hall
+        if currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5 then
             player:startEvent(85)
         else
             player:startEvent(513)
