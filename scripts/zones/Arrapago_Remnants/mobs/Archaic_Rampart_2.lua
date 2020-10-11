@@ -10,12 +10,12 @@ require("scripts/globals/status")
 function onMobSpawn(mob)
 end
 
-function onMobFight(mob,target)
+function onMobFight(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
-    local PET1 = instance:getEntity(bit.band((mob:getID() +1), 0xFFF), tpz.objType.MOB)
-    local PET2 = instance:getEntity(bit.band((mob:getID() +2), 0xFFF), tpz.objType.MOB)
+    local PET1 = GetMobByID((mob:getID() +1), instance)
+    local PET2 = GetMobByID((mob:getID() +2), instance)
 
     if os.time() - popTime > 15 then
         if (not PET1:isSpawned()) then

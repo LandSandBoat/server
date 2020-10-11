@@ -1307,7 +1307,7 @@ local helmInfo =
 -- colored rocks. do not change this order!
 -------------------------------------------------
 
-local rocks = {769,771,770,772,773,774,776,775}
+local rocks = {769, 771, 770, 772, 773, 774, 776, 775}
 
 -------------------------------------------------
 -- local functions
@@ -1321,7 +1321,7 @@ local function doesToolBreak(player, info)
         roll = roll + (player:getMod(mod) / 10)
     end
 
-    if roll < _G[info.settingBreak] then
+    if roll <= _G[info.settingBreak] then
         player:tradeComplete()
         return true
     end
@@ -1333,7 +1333,7 @@ function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) >= _G[info.settingRate] then
+    if math.random(100) > _G[info.settingRate] then
         return 0
     end
 
@@ -1424,7 +1424,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- quest stuff
         if
             helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
             not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
             broke ~= 1 and
             zoneId == tpz.zone.WAJAOM_WOODLANDS

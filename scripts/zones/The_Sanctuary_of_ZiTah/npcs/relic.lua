@@ -8,7 +8,7 @@ local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
     local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- Mandau
@@ -21,14 +21,14 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 207 and npcUtil.giveItem(player, {18270, {1456, 30}}) then
         player:confirmTrade()
         player:setCharVar("RELIC_IN_PROGRESS", 0)

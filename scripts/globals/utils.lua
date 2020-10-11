@@ -32,7 +32,7 @@ function utils.stoneskin(target, dmg)
         skin = target:getMod(tpz.mod.STONESKIN)
         if (skin > 0) then
             if (skin > dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN,dmg)
+                target:delMod(tpz.mod.STONESKIN, dmg)
                 return 0
             else --absorbs some damage then wear
                 target:delStatusEffect(tpz.effect.STONESKIN)
@@ -127,7 +127,7 @@ end
 --    The arguments are skill rank (numerical), and level.  1 is A+, 2 is A-, and so on.
 -----------------------------------
 
-function utils.getSkillLvl(rank,level)
+function utils.getSkillLvl(rank, level)
 
     local skill = 0 --Failsafe
 
@@ -394,3 +394,60 @@ function utils.hasRelic(player, relic, tier)
 
     return false
 end
+
+-- utils.mask contains functions for bitmask variables
+utils.mask =
+{
+    -- return mask's pos-th bit as bool
+    getBit = function(mask, pos)
+        return bit.band(mask, bit.lshift(1, pos)) ~= 0
+    end,
+
+    -- return value of mask after setting its pos-th bit
+    -- val can be bool or number.  if number, any non-zero value will be treated as true.
+    setBit = function(mask, pos, val)
+        local state = false
+
+        if type(val) == "boolean" then
+            state = val
+        elseif type(val) == "number" then
+            state = (val ~= 0)
+        end
+
+        if state then
+            -- turn bit on
+            return bit.bor(mask, bit.lshift(1, pos))
+        else
+            -- turn bit off
+            return bit.band(mask, bit.bnot(bit.lshift(1, pos)))
+        end
+    end,
+
+    -- return number of true bits in mask of length len
+    -- if len is omitted, assume 32
+    countBits = function(mask, len)
+        if not len then
+            len = 32
+        end
+
+        local count = 0
+
+        for i = 0, len - 1 do
+            count = count + bit.band(bit.rshift(mask, i), 1)
+        end
+
+        return count
+    end,
+
+    -- are all bits true in mask of length len?
+    -- if len is omitted, assume 32
+    isFull = function(mask, len)
+        if not len then
+            len = 32
+        end
+
+        local fullMask = ((2 ^ len) - 1)
+
+        return bit.band(mask, fullMask) == fullMask
+    end,
+}

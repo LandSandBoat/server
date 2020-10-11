@@ -49,7 +49,7 @@ function onMobFight(mob, target)
         for i = mobId + 5, mobId + 6 do
             local pet = GetMobByID(i)
             if not pet:isSpawned() then
-                pet:setSpawn(x + math.random(-2,2), y, z + math.random(-2,2), r)
+                pet:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2), r)
                 pet:spawn()
             end
         end
@@ -61,7 +61,7 @@ function onMobFight(mob, target)
         for i = mobId + 7, mobId + 8 do
             local pet = GetMobByID(i)
             if not pet:isSpawned() then
-                pet:setSpawn(x + math.random(-2,2), y, z + math.random(-2,2), r)
+                pet:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2), r)
                 pet:spawn()
             end
         end

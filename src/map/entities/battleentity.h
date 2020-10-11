@@ -22,6 +22,7 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <set>
 #include <vector>
 #include <unordered_map>
 
@@ -410,7 +411,7 @@ enum IMMUNITY : uint16
     IMMUNITY_ELEGY = 0x200, // 512
     IMMUNITY_REQUIEM = 0x400, // 1024
     IMMUNITY_LIGHT_SLEEP = 0x800, // 2048
-    IMMUNITY_DARK_SLEEP = 01000, // 4096
+    IMMUNITY_DARK_SLEEP = 0x1000, // 4096
 };
 
 struct apAction_t
@@ -475,6 +476,7 @@ class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
 class CRecastContainer;
+class CNotorietyContainer;
 struct action_t;
 
 class CBattleEntity : public CBaseEntity
@@ -669,9 +671,8 @@ public:
     CBattleEntity*	PLastAttacker;
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
-    std::unique_ptr<CRecastContainer> PRecastContainer;         //
-
-
+    std::unique_ptr<CRecastContainer> PRecastContainer;
+    std::unique_ptr<CNotorietyContainer> PNotorietyContainer;
 
 private:
 

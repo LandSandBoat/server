@@ -9,7 +9,7 @@ function onTrigger(entity, npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(entity, eventid, result, door)
@@ -20,8 +20,8 @@ function onEventFinish(entity, eventid, result, door)
         door:setAnimation(8)
         SpawnMob(ID.mob[5][1].chariot, instance)
         SpawnMob(ID.mob[5][1].astrologer, instance)
-        for i,v in pairs(ID.npc[5][1]) do
-            local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
+        for i, v in pairs(ID.npc[5][1]) do
+            local npc = GetNPCByID(v, instance)
             npc:untargetable(true)
         end
     end

@@ -9,9 +9,10 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/globals/roe")
 -----------------------------------
 
-function onEffectGain(target,effect)
+function onEffectGain(target, effect)
     target:setAnimation(33)
 
     -- Dances with Luopans
@@ -36,7 +37,7 @@ function onEffectGain(target,effect)
     end
 end
 
-function onEffectTick(target,effect)
+function onEffectTick(target, effect)
 
     local healtime = effect:getTickCount()
 
@@ -51,6 +52,11 @@ function onEffectTick(target,effect)
                 healHP = 10 + (healtime - 2) + target:getMod(tpz.mod.HPHEAL)
             end
 
+            -- Records of Eminence: Heal Without Using Magic
+            if target:getEminenceProgress(4) and healHP > 0 and target:getHPP() < 100 then
+                tpz.roe.onRecordTrigger(target, 4)
+            end
+
             target:addHP(healHP)
             target:updateEnmityFromCure(target, healHP)
             target:addMP(12 + ((healtime - 2) * (1 + target:getMod(tpz.mod.CLEAR_MIND))) + target:getMod(tpz.mod.MPHEAL))
@@ -58,7 +64,7 @@ function onEffectTick(target,effect)
     end
 end
 
-function onEffectLose(target,effect)
+function onEffectLose(target, effect)
     target:setAnimation(0)
     target:delStatusEffect(tpz.effect.LEAVEGAME)
 

@@ -26,6 +26,7 @@ zones[tpz.zone.WEST_RONFAURE] =
         LAILLERA_DIALOG          = 7333,  -- I mustn't chat while on duty. Sorry.
         PICKPOCKET_GACHEMAGE     = 7334,  -- A pickpocket? Now that you mention it, I did see a woman flee the city. She ran west.
         PICKPOCKET_ADALEFONT     = 7335,  -- What, someone picked your pocket? And you call yourself an adventurer!
+        AAVELEON_HEALED          = 7339,  -- My wounds are healed, thanks to you!
         PALCOMONDAU_REPORT       = 7377,  -- Scout reporting! All is quiet on the road to Ghelsba!
         PALCOMONDAU_DIALOG       = 7378,  -- Let me be! I must patrol the road to Ghelsba.
         ZOVRIACE_REPORT          = 7380,  -- Scout reporting! All is quiet on the roads to La Theine!

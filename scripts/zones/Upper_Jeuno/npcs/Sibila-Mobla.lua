@@ -3,26 +3,27 @@
 --  NPC: Sibila-Mobla
 -- Standard Info NPC
 -----------------------------------
-require("scripts/globals/quests");
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-end;
+function onTrade(player, npc, trade)
+end
 
-function onTrigger(player,npc)
-    local WildcatJeuno = player:getCharVar("WildcatJeuno");
-    if (player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno,5) == false) then
-        player:startEvent(10083);
+function onTrigger(player, npc)
+    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 5)) then
+        player:startEvent(10083)
     else
-        player:startEvent(98);
+        player:startEvent(98)
     end
-end;
+end
 
-function onEventUpdate(player,csid,option)
-end;
+function onEventUpdate(player, csid, option)
+end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 10083) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"),"WildcatJeuno",5,true);
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 5, true))
     end
-end;
+end

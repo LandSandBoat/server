@@ -15,9 +15,6 @@ function reraiseGhul(mob, reraises, target)
     if target then
         mob:updateClaim(target)
     end
-    if reraises == 4 then
-        mob:getBattlefield():setLocalVar("lootSpawned", 0)
-    end
 end
 
 function onMobInitialize(mob)
@@ -46,4 +43,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    if mob:getLocalVar("RERAISES") == 4 then
+        mob:getBattlefield():setLocalVar("lootSpawned", 0)
+    end
 end

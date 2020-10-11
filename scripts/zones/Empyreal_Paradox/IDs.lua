@@ -18,6 +18,7 @@ zones[tpz.zone.EMPYREAL_PARADOX] =
         PRISHE_TEXT             = 7685, -- You're about to learn how strong the will to live makes us!
         SELHTEUS_TEXT           = 7698, -- The...Emptiness... Is this...how it was meant...to be...?
         PROMATHIA_TEXT          = 7701, -- Give thyself to the apathy within...
+        QM_TEXT                 = 7799, -- The air before you appears warped and distored...
     },
     mob =
     {

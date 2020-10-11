@@ -22,7 +22,7 @@ end
 
 function onSpellCast(caster, target, spell)
     local resist = applyResistanceAbility(caster, target, tpz.magic.ele.WIND, 0, 0)
-    local StealChance = math.random(1,100)
+    local StealChance = math.random(1, 100)
     local stolen = 0
 
     if resist > 0.0625 and StealChance < 90 then

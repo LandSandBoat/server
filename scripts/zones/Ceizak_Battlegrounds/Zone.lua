@@ -17,12 +17,12 @@ function onInitialize(zone)
     zone:registerRegion(2, 87.2, 8, 72.9, 0, 0, 0)
 end
 
-function onZoneIn(player,prevZone)
+function onZoneIn(player, prevZone)
     local cs = -1
     local onwardToAdoulin = player:getCurrentMission(SOA) == tpz.mission.id.soa.ONWARD_TO_ADOULIN
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(431,0,178,110)
+        player:setPos(431, 0, 178, 110)
     end
 
     if onwardToAdoulin then
@@ -42,7 +42,7 @@ local function triggerUncannySensationMessage(player)
     end
 end
 
-function onRegionEnter(player,region)
+function onRegionEnter(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function(x) triggerUncannySensationMessage(player) end,
@@ -50,16 +50,16 @@ function onRegionEnter(player,region)
     }
 end
 
-function onRegionLeave(player,region)
+function onRegionLeave(player, region)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 3 then
-        player:completeMission(SOA,tpz.mission.id.soa.ONWARD_TO_ADOULIN)
-        player:addMission(SOA,tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
+        player:completeMission(SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:addMission(SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
     end
 end

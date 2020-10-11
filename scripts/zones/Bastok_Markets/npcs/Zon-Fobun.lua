@@ -9,10 +9,10 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local cCollector = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR)
 
     if cCollector == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >=4 then
@@ -24,10 +24,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 251 then
         player:addQuest(BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR)
         npcUtil.giveKeyItem(player, tpz.ki.CURSEPAPER)

@@ -12,30 +12,28 @@ end
 
 function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getCharVar("MissionStatus")
 
     if
         currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and
-        MissionStatus == 1 and
+        missionStatus == 1 and
         not GetMobByID(ID.mob.CORRUPTED_YORGOS):isSpawned() and
         not GetMobByID(ID.mob.CORRUPTED_SOFFEIL):isSpawned() and
         not GetMobByID(ID.mob.CORRUPTED_ULBRIG):isSpawned()
     then
-        if player:getCharVar("Mission6-2MobKilled") == 1 then
-            player:setCharVar("Mission6-2MobKilled", 0)
-            player:setCharVar("MissionStatus", 2)
-        else
-            SpawnMob(ID.mob.CORRUPTED_YORGOS)
-            SpawnMob(ID.mob.CORRUPTED_SOFFEIL)
-            SpawnMob(ID.mob.CORRUPTED_ULBRIG)
-        end
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 2 then
-        player:startEvent(6)
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 3 then
-        player:startEvent(7)
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and MissionStatus == 8 then
+        SpawnMob(ID.mob.CORRUPTED_YORGOS)
+        SpawnMob(ID.mob.CORRUPTED_SOFFEIL)
+        SpawnMob(ID.mob.CORRUPTED_ULBRIG)
+    end
+    if currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 2 then -- NMs killed
+        player:setCharVar("MissionStatus", 3)
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and player:getXPos() > -39.019 then -- standing outside
+        player:startEvent(6) -- enter cutscene
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then -- inside
+        player:startEvent(7) -- exit cutscene
+    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
         player:startEvent(5)
-    elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 6 then
+    elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 6 then
         player:startEvent(14)
     else
         player:messageSpecial(ID.text.HEAVY_DOOR)
@@ -47,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 5 then
-        player:setCharVar("MissionStatus", 9)
+        player:setCharVar("MissionStatus", 7)
     elseif csid == 14 then
         player:setCharVar("MissionStatus", 7)
         -- at this point 3 optional cs are available and open until watched (add 3 var to char?)

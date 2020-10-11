@@ -2,6 +2,7 @@
 -- Area: Alzadaal Undersea Ruins
 --   NM: Oupire
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -15,6 +16,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 478)
     player:addTitle(tpz.title.OUPIRE_IMPALER)
 end
 

@@ -12,7 +12,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    player:showText(npc, ID.text.COLMAIE_DIALOG)
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
+        player:showText(npc, ID.text.COLMAIE_DIALOG + 5)
+    else
+        player:showText(npc, ID.text.COLMAIE_DIALOG)
+    end
 end
 
 function onEventUpdate(player, csid, option)

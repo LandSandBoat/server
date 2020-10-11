@@ -3833,7 +3833,7 @@ INSERT INTO `synth_recipes` VALUES (3716,0,0,0,0,0,0,0,0,0,110,4098,4240,2880,35
 INSERT INTO `synth_recipes` VALUES (3717,0,0,0,60,0,0,0,0,60,110,4096,4238,658,658,745,914,4014,0,0,0,20950,20951,20951,20951,1,1,1,1,'Terebrokath'); -- Terebrokath
 INSERT INTO `synth_recipes` VALUES (3718,0,0,0,60,0,0,0,0,60,113,4098,4240,658,719,932,3933,4014,0,0,0,21249,21250,21250,21250,1,1,1,1,'Iqonde Crossbow'); --  Iqonde Crossbow
 INSERT INTO `synth_recipes` VALUES (3719,0,0,0,60,0,0,0,0,0,113,4098,4240,3925,3927,3979,0,0,0,0,0,21202,21203,21203,21203,1,1,1,1,'Balsam Staff'); -- Balsam Staff
-INSERT INTO `synth_recipes` VALUES (3720,0,0,0,60,60,0,0,0,0,113,4098,4240,730,730,836,3870,3977,0,0,0,21239,21239,21239,21239,1,1,1,1,'Echidnas Bow'); -- Echidna's Bow
+INSERT INTO `synth_recipes` VALUES (3720,0,0,0,60,60,0,0,0,0,113,4098,4240,730,730,836,3870,3977,0,0,0,21239,21240,21240,21240,1,1,1,1,'Echidnas Bow'); -- Echidna's Bow
 INSERT INTO `synth_recipes` VALUES (3721,0,0,60,0,0,0,0,0,0,113,4098,4240,3549,3927,3977,0,0,0,0,0,21200,21201,21201,21201,1,1,1,1,'Atinian Staff'); -- Atinian Staff
 INSERT INTO `synth_recipes` VALUES (3722,0,0,0,0,0,0,0,0,0,100,4098,4240,733,845,0,0,0,0,0,0,18884,18885,18885,18885,1,1,1,1,'Vejovis Wand'); -- Vejovis Wand
 INSERT INTO `synth_recipes` VALUES (3723,0,0,0,0,0,0,0,0,100,0,4096,4238,720,735,1459,0,0,0,0,0,19788,19789,19789,19789,1,1,1,1,'Gorkhali Kukri'); -- Gorkhali Kukri
@@ -4166,7 +4166,7 @@ INSERT INTO `synth_recipes` VALUES (4049,0,0,0,0,0,8,0,0,0,0,4101,4243,4363,4370
 INSERT INTO `synth_recipes` VALUES (4050,0,0,0,0,0,8,0,0,0,0,4101,4243,2273,4363,0,0,0,0,0,0,2391,2391,2391,2391,1,1,1,1,'Shadow Apple'); -- shadow apple
 INSERT INTO `synth_recipes` VALUES (4051,0,0,0,0,0,10,0,0,0,0,4101,4243,8904,0,0,0,0,0,0,0,4422,4422,4422,4422,1,1,1,1,'Orange Juice'); -- orange juice (kit)
 INSERT INTO `synth_recipes` VALUES (4052,0,0,0,0,0,10,0,0,0,0,4101,4243,17396,17397,0,0,0,0,0,0,17905,17905,17905,17905,4,6,8,10,'Wormy Broth'); -- wormy broth
-INSERT INTO `synth_recipes` VALUES (4053,0,0,0,0,0,15,0,0,0,0,4098,4240,8905,0,0,0,0,0,0,0,16992,16992,16992,16992,1,1,1,1,'Slice Of Bluetail'); -- sliced bluetail (kit)
+INSERT INTO `synth_recipes` VALUES (4053,0,0,0,0,0,15,0,0,0,0,4098,4240,8905,0,0,0,0,0,0,0,16992,16992,16992,16992,4,4,4,4,'Slice Of Bluetail'); -- sliced bluetail (kit)
 INSERT INTO `synth_recipes` VALUES (4054,0,0,0,0,0,15,0,0,0,0,4096,4238,619,627,633,2237,4387,4435,4570,5740,5885,5885,5885,5885,2,4,6,8,'Saltena'); -- saltena
 INSERT INTO `synth_recipes` VALUES (4055,0,0,0,0,0,15,0,0,0,0,4096,4238,627,936,2237,4372,4390,4509,5688,5740,5889,5889,5889,5889,2,4,6,8,'Stuffed Pitaru'); -- stuffed pitaru
 INSERT INTO `synth_recipes` VALUES (4056,0,0,0,0,0,16,0,0,0,0,4101,4243,3942,17397,0,0,0,0,0,0,17914,17914,17914,17914,4,6,8,12,'Wispy Broth'); -- wispy broth
@@ -4676,6 +4676,23 @@ INSERT INTO `synth_recipes` VALUES (4559,1,0,0,0,0,0,15,0,0,0,4100,4242,16769,0,
 INSERT INTO `synth_recipes` VALUES (4560,1,0,0,0,45,0,0,0,0,0,4100,4242,12467,0,0,0,0,0,0,0,840,820,820,820,1,5,6,7,'Chocobo Feather'); -- Wool Cap (desynth)
 INSERT INTO `synth_recipes` VALUES (4561,1,0,0,0,0,0,0,0,0,66,4100,4242,17054,0,0,0,0,0,0,0,719,842,842,842,1,1,1,1,'Ebony Lumber'); -- Ebony Wand (desynth)
 INSERT INTO `synth_recipes` VALUES (4562,1,0,0,0,0,0,0,0,87,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Mercury'); -- Rising Sun (desynth)
+INSERT INTO `synth_recipes` VALUES (4563,1,0,0,0,0,0,0,53,0,0,4100,4242,19015,0,0,0,0,0,0,0,853,853,853,853,1,1,2,2,'Raptor Skin'); -- Raptor Strap (desynth)
+INSERT INTO `synth_recipes` VALUES (4564,1,0,0,0,0,0,0,53,0,0,4100,4242,19016,0,0,0,0,0,0,0,853,853,853,853,1,1,2,2,'Raptor Skin'); -- Raptor Strap +1 (desynth)
+INSERT INTO `synth_recipes` VALUES (4565,1,0,0,0,0,0,0,0,33,0,4100,4242,16966,0,0,0,0,0,0,0,852,818,651,657,1,1,1,1,'Lizard Skin'); -- Tachi (desynth)
+INSERT INTO `synth_recipes` VALUES (4566,1,0,0,0,0,0,0,0,33,0,4100,4242,16981,0,0,0,0,0,0,0,852,818,651,657,1,1,1,1,'Lizard Skin'); -- Tachi +1 (desynth)
+INSERT INTO `synth_recipes` VALUES (4567,0,0,0,0,93,0,0,0,0,0,4098,4240,843,843,0,0,0,0,0,0,1417,1417,1417,1417,6,8,10,12,'Giant Bird Fletchings'); -- giant bird fletchings
+INSERT INTO `synth_recipes` VALUES (4568,0,2011,0,0,93,0,0,0,0,0,4098,4240,843,843,843,843,843,843,2145,0,1417,1417,1417,1417,18,24,30,36,'Giant Bird Fletchings'); -- giant bird fletchings
+INSERT INTO `synth_recipes` VALUES (4569,1,0,0,0,0,0,95,0,0,0,4100,4242,13448,0,0,0,0,0,0,0,746,746,746,785,1,1,2,1,'Platinum Ingot'); -- Emerald Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4570,1,0,0,0,0,0,95,0,0,0,4100,4242,13449,0,0,0,0,0,0,0,746,746,746,786,1,1,2,1,'Platinum Ingot'); -- Ruby Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4571,1,0,0,0,0,0,95,0,0,0,4100,4242,13450,0,0,0,0,0,0,0,746,746,746,787,1,1,2,1,'Platinum Ingot'); -- Diamond Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4572,1,0,0,0,0,0,95,0,0,0,4100,4242,13451,0,0,0,0,0,0,0,746,746,746,804,1,1,2,1,'Platinum Ingot'); -- Spinel Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4573,1,0,0,0,0,0,95,0,0,0,4100,4242,13452,0,0,0,0,0,0,0,746,746,746,794,1,1,2,1,'Platinum Ingot'); -- Sapphire Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4574,1,0,0,0,0,0,95,0,0,0,4100,4242,13453,0,0,0,0,0,0,0,746,746,746,789,1,1,2,1,'Platinum Ingot'); -- Topaz Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4575,1,0,0,0,0,0,95,0,0,0,4100,4242,13462,0,0,0,0,0,0,0,746,746,746,812,1,1,2,1,'Platinum Ingot'); -- Death Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4576,1,0,0,0,0,0,95,0,0,0,4100,4242,13463,0,0,0,0,0,0,0,746,746,746,813,1,1,2,1,'Platinum Ingot'); -- Angels Ring (desynth)
+INSERT INTO `synth_recipes` VALUES (4577,0,0,0,0,115,0,0,60,0,0,4099,4241,4078,4082,9253,0,0,0,0,0,26268,26269,26269,26269,1,1,1,1,'Moonbeam Cape'); -- moonbeam cape
+INSERT INTO `synth_recipes` VALUES (4578,0,0,0,0,108,0,0,0,0,0,4099,4241,4074,4075,4076,9251,9251,9251,9251,0,26339,26339,26339,26339,1,1,1,1,'Comaa Belt'); -- comaa belt
+INSERT INTO `synth_recipes` VALUES (4579,0,0,0,0,115,0,0,60,60,0,4099,4241,4077,4078,4079,26339,0,0,0,0,26340,26341,26341,26341,1,1,1,1,'Moonbow Belt'); -- moonbow belt
 
 -- INSERT INTO `synth_recipes` VALUES (ID,Desynth,KeyItem,AL,BO,CL,CK,GO,LE,SM,WD,Crystal,HQCrystal,I1,I2,I3,I4,I5,I6,I7,I8,R1,R2,R3,R4,Q1,Q2,Q3,Q4,ResultName); -- template
 -- crystals = fire(4096,4238) ice(4097,4239) wind(4098,4240) earth(4099,4241) lightning(4100,4242) water(4101,4243) light(4102,4244) dark(4103,4245)

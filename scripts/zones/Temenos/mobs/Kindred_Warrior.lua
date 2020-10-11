@@ -2,20 +2,20 @@
 -- Area: Temenos N T
 --  Mob: Kindred Warrior
 -----------------------------------
-require("scripts/globals/limbus");
------------------------------------
+mixins = {require("scripts/mixins/job_special")}
+local ID = require("scripts/zones/Temenos/IDs")
 
 function onMobEngaged(mob,target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):updateEnmity(target)
+    GetMobByID(ID.mob.TEMENOS_N_MOB[4]+2):updateEnmity(target)
+end
 
-end;
-
-function onMobDeath(mob, player, isKiller)
- if (IsMobDead(16928797)==true and IsMobDead(16928798)==true  and IsMobDead(16928799)==true ) then
-       GetNPCByID(16928768+27):setPos(-120,-80,429);
-    GetNPCByID(16928768+27):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+161):setPos(-123,-80,429);
-    GetNPCByID(16928768+161):setStatus(tpz.status.NORMAL);
-    GetNPCByID(16928768+212):setPos(-117,-80,429);
-    GetNPCByID(16928768+212):setStatus(tpz.status.NORMAL);
- end
-end;
+function onMobDeath(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
+        if GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[4]+2):isDead() then
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_N_CRATE[4]+2):setStatus(tpz.status.NORMAL)
+        end
+    end
+end

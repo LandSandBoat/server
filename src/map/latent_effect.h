@@ -86,10 +86,11 @@ enum LATENT
     LATENT_WEAPON_DRAWN_MP_OVER     = 56, //while weapon is drawn and mp greater than # - PARAM: MP #
     LATENT_ELEVEN_ROLL_ACTIVE       = 57, //corsair roll of 11 active
     LATENT_IN_ASSAULT               = 58, // is in an Instance battle in a TOAU zone
-    LATENT_VS_ECOSYSTEM             = 59  // Vs. Ecosystem (e.g. Vs. Birds: Accuracy+3)
+    LATENT_VS_ECOSYSTEM             = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
+    LATENT_VS_FAMILY                = 60, // Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
 };
 
-#define MAX_LATENTEFFECTID    58
+#define MAX_LATENTEFFECTID    61
 
 /************************************************************************
 *																		*

@@ -12,7 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
         return 0
     end
@@ -42,7 +42,7 @@ function onMobWeaponSkill(target, mob, skill)
     else
         -- time to drain HP. 150-300
         local power = math.random(0, 151) + 150
-        dmg = MobFinalAdjustments(power,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.DARK,MOBPARAM_IGNORE_SHADOWS)
+        dmg = MobFinalAdjustments(power, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
 
         skill:setMsg(MobPhysicalDrainMove(mob, target, skill, MOBDRAIN_HP, dmg))
         return dmg

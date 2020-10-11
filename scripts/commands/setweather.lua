@@ -30,7 +30,7 @@ function onTrigger(player, weather)
 
     -- invert weather table
     local weatherByNum={}
-    for k,v in pairs(tpz.weather) do
+    for k, v in pairs(tpz.weather) do
         weatherByNum[v]=k
     end
 

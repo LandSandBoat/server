@@ -14,7 +14,7 @@ require("scripts/globals/status")
 function onMobSpawn(mob)
     mob:addMod(tpz.mod.SLEEPRES, 50)
     mob:addMod(tpz.mod.LULLABYRES, 50)
-    mob:setLocalVar("everyonesRancorHPP", math.random(20,30))
+    mob:setLocalVar("everyonesRancorHPP", math.random(20, 30))
 end
 
 function onMobFight(mob, target)

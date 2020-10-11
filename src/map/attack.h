@@ -93,6 +93,8 @@ public:
     bool                        CheckAnticipated();
     bool                        IsCountered();
     bool                        CheckCounter();
+    bool                        IsCovered();            // Returns the covered flag.
+    bool                        CheckCover();           // Sets the covered flag and returns it.
     void                        ProcessDamage();        // Processes the damage for this swing.
 
     void                        SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
@@ -109,6 +111,7 @@ private:
     bool                        m_isBlocked {false};            // Flag: Is this attack blocked by the victim?
     bool                        m_isEvaded {false};             // Flag: Is this attack evaded by the victim?
     bool                        m_isCountered {false};
+    bool                        m_isCovered {false};    // Flag: Is someone covering the victim?
     bool                        m_anticipated {false};
     bool                        m_isFirstSwing {false};         // Flag: Is this attack the first swing?
     float                       m_damageRatio {false};          // The damage ratio.

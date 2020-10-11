@@ -17,7 +17,7 @@ local function canUse_KaduruHaiduru_Service(player)
         return false
     end
     return true
-end;
+end
 
 function onTrigger(player, npc)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
@@ -67,7 +67,7 @@ function onTrade(player, npc, trade)
 end
 
 function onEventUpdate(player, csid, option)
-end;
+end
 
 function onEventFinish(player, csid, option)
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
@@ -92,4 +92,4 @@ function onEventFinish(player, csid, option)
         end
         player:tradeComplete()
     end
-end;
+end

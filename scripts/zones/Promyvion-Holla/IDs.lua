@@ -16,6 +16,7 @@ zones[tpz.zone.PROMYVION_HOLLA] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY = 6402, -- There is nothing out of the ordinary here.
+        BARRIER_WOVEN           = 7211, -- It appears to be a barrier woven from the energy of overflowing memories...
     },
     mob =
     {
@@ -44,10 +45,10 @@ zones[tpz.zone.PROMYVION_HOLLA] =
             [32]        = { 158, -4,  238,  162, 4,  242, {42}},    -- floor 3 return
             [41]        = { 118, -4, -322,  121, 4, -318, {33}},    -- floor 4 return
             [16843058]  = { -42, -4,  198,  -38, 4,  202, {37}},    -- floor 1 MR1
-            [16843054]  = {-240, -4,   38, -237, 4,   41, {33,34}}, -- floor 2 MR1
-            [16843055]  = {-282, -4,  -42, -278, 4,  -38, {33,34}}, -- floor 2 MR2
-            [16843056]  = {-162, -4, -202, -157, 4, -198, {33,34}}, -- floor 2 MR3
-            [16843057]  = {  -2, -4,  -42,    2, 4,  -38, {33,34}}, -- floor 2 MR4
+            [16843054]  = {-240, -4,   38, -237, 4,   41, {33, 34}}, -- floor 2 MR1
+            [16843055]  = {-282, -4,  -42, -278, 4,  -38, {33, 34}}, -- floor 2 MR2
+            [16843056]  = {-162, -4, -202, -157, 4, -198, {33, 34}}, -- floor 2 MR3
+            [16843057]  = {  -2, -4,  -42,    2, 4,  -38, {33, 34}}, -- floor 2 MR4
             [16843051]  = {-282, -4,  277, -278, 4,  282, {30}},    -- floor 3 MR1
             [16843052]  = {-362, -4,  237, -358, 4,  242, {30}},    -- floor 3 MR2
             [16843053]  = {-362, -4,  118, -358, 4,  122, {30}},    -- floor 3 MR3

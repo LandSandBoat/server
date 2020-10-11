@@ -17,12 +17,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local offset        = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local ACP           = player:getCurrentMission(ACP)
     local currentDay    = tonumber(os.date("%j"))
@@ -42,8 +43,8 @@ function onTrigger(player,npc)
 
     elseif (needToZone and not player:hasStatusEffect(tpz.effect.MARK_OF_SEED)) then
         player:messageSpecial(ID.text.YOU_REACH_FOR_THE_LIGHT)
-    elseif (ACP >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not player:getMaskBit(progressMask, offset)) then
-        player:setMaskBit(progressMask, "SEED_AFTERGLOW_MASK", offset, true)
+    elseif (ACP >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
+        player:setCharVar("SEED_AFTERGLOW_MASK", utils.mask.setBit(progressMask, offset, true))
         intensity = intensity + 1
         if (intensity == 9) then
             player:startEvent(28)
@@ -63,10 +64,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if csid == 28 then
         player:delStatusEffectSilent(tpz.effect.MARK_OF_SEED)
 

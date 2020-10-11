@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     local lanceTime = mob:getLocalVar("lanceTime")
     local lanceOut = mob:getLocalVar("lanceOut")
     if (not (target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(tpz.effect.MAGIC_SHIELD)))
@@ -27,9 +27,9 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 1
     local dmgmod = 1.6
 
-    local info = MobRangedMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
+    local info = MobRangedMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
 
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,tpz.attackType.RANGED,tpz.damageType.PIERCING,info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.PIERCING, info.hitslanded)
 
     mob:entityAnimationPacket("ids0")
     mob:setLocalVar("lanceTime", mob:getBattleTime())

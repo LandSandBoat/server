@@ -4,26 +4,26 @@
 -- Type: Standard NPC
 -- !pos ? ? ? 33
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs");
-require("scripts/globals/limbus");
+local ID = require("scripts/zones/AlTaieu/IDs")
+require("scripts/globals/limbus")
 
 function onTrade(player,npc,trade)
-end;
+end
 
 function onTrigger(player,npc)
-    local offset = npc:getID() - ID.npc.SWIRLING_VORTEX_OFFSET;
-    if (offset >= 0 and offset <= 1) then
-        player:startEvent(159 + offset);
+    local offset = npc:getID() - ID.npc.SWIRLING_VORTEX_OFFSET
+    if offset >= 0 and offset <= 1 then
+        player:startEvent(159 + offset)
     end
-end;
+end
 
 function onEventUpdate(player,csid,option)
-end;
+end
 
 function onEventFinish(player,csid,option)
-    if (csid == 160 and option == 1 ) then
-        enterApollyon(player,APOLLYON_NW_SW);
-    elseif (csid == 159 and option == 1 ) then
-        enterApollyon(player,APOLLYON_SE_NE);
+    if csid == 160 and option == 1 then
+        tpz.limbus.enter(player,1)
+    elseif csid == 159 and option == 1 then
+        tpz.limbus.enter(player,0)
     end
-end;
+end

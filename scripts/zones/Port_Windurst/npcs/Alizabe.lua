@@ -8,10 +8,10 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
 
-function onTrade(player,npc,trade)
+function onTrade(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     if player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_SAVAGE then
         if GetRegionOwner(tpz.region.TAVNAZIANARCH) ~= tpz.nation.WINDURST then
             player:showText(npc, ID.text.ALIZABE_CLOSED_DIALOG)
@@ -33,8 +33,8 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
 end

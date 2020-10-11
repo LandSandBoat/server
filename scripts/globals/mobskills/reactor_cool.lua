@@ -7,14 +7,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 
-function onMobSkillCheck(target,mob,skill)
+function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
 function onMobWeaponSkill(target, mob, skill)
     local typeEffect = tpz.effect.ICE_SPIKES
     local typeEffect2 = tpz.effect.DEFENSE_BOOST
-    local randy = math.random(15,30)
+    local randy = math.random(15, 30)
 
     -- Todo: check message behavior, this double setMsg() looks wrong
     skill:setMsg(MobBuffMove(mob, typeEffect, randy, 0, 60))

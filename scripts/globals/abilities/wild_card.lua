@@ -10,22 +10,22 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player,target,ability)
-    return 0,0
+function onAbilityCheck(player, target, ability)
+    return 0, 0
 end
 
-function onUseAbility(caster,target,ability,action)
+function onUseAbility(caster, target, ability, action)
     if (caster:getID() == target:getID()) then
-        local roll = math.random(1,6)
+        local roll = math.random(1, 6)
         caster:setLocalVar("corsairRollTotal", roll)
         action:speceffect(caster:getID(), roll)
     end
     local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster,target,ability,action,total)
+    return applyRoll(caster, target, ability, action, total)
 end
 
-function applyRoll(caster,target,ability,action,total)
-    caster:doWildCard(target,total)
+function applyRoll(caster, target, ability, action, total)
+    caster:doWildCard(target, total)
     ability:setMsg(435 + math.floor((total-1)/2)*2)
     action:animation(target:getID(), 132 + (total) - 1)
     return total

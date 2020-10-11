@@ -1,0 +1,848 @@
+"RegimeID", "Regime Type", "Page", "Book Area(s)/NM Area(s)", "Target(s)"
+    0,    Fields of Valor,    ,    None,    No regime.
+    1,    Fields of Valor,    ,    West Ronfaure,    Worms
+    2,    Fields of Valor,    ,    West Ronfaure,    Hares
+    3,    Fields of Valor,    ,    West Ronfaure,    Beetles/Funguars
+    4,    Fields of Valor,    ,    West Ronfaure,    Orcs/Beetles
+    5,    Fields of Valor,    ,    La Theine Plateau,    Saplings/Wasps
+    6,    Fields of Valor,    ,    La Theine Plateau,    Funguars
+    7,    Fields of Valor,    ,    Valkurm Dunes,    Lizards/Hares
+    8,    Fields of Valor,    ,    Valkurm Dunes,    Crabs/Lizards
+    9,    Fields of Valor,    ,    Valkurm Dunes,    Flies/Crabs
+   10,    Fields of Valor,    ,    Valkurm Dunes,    Sheep/Flies
+   11,    Fields of Valor,    ,    Jugner Forest,    Leeches
+   12,    Fields of Valor,    ,    Jugner Forest,    Beetles/Leeches
+   13,    Fields of Valor,    ,    Jugner Forest,    Funguars/Beetles
+   14,    Fields of Valor,    ,    Jugner Forest,    Funguars/Tigers
+   15,    Fields of Valor,    ,    Batallia Downs,    Flies/Bas
+   16,    Fields of Valor,    ,    North Gustaberg,    Worms
+   17,    Fields of Valor,    ,    North Gustaberg,    Hornets
+   18,    Fields of Valor,    ,    North Gustaberg,    Vultures/Saplings
+   19,    Fields of Valor,    ,    North Gustaberg,    Quadav/Lizards
+   20,    Fields of Valor,    ,    Konschtat Highlands,    Worms/Lizards
+   21,    Fields of Valor,    ,    Pashhow Marshlands,    Flies
+   22,    Fields of Valor,    ,    Pashhow Marshlands,    Leeches/Flies
+   23,    Fields of Valor,    ,    Pashhow Marshlands,    Crawlers/Leeches
+   24,    Fields of Valor,    ,    Pashhow Marshlands,    Funguars/Crawlers
+   25,    Fields of Valor,    ,    Rolanberry Fields,    Wasps/Crawlers
+   26,    Fields of Valor,    ,    West Sarutabaruta,    Mandragoras
+   27,    Fields of Valor,    ,    West Sarutabaruta,    Rarabs
+   28,    Fields of Valor,    ,    West Sarutabaruta,    Crawlers/Birds
+   29,    Fields of Valor,    ,    West Sarutabaruta,    Yagudo/Crawler
+   30,    Fields of Valor,    ,    Tahrongi Canyon,    Saplings/Bees
+   31,    Fields of Valor,    ,    Tahrongi Canyon,    Akababas
+   32,    Fields of Valor,    ,    Buburimu Peninsula,    Mandragoras/Rarabs
+   33,    Fields of Valor,    ,    Buburimu Peninsula,    Crawlers/Mandragoras
+   34,    Fields of Valor,    ,    Buburimu Peninsula,    Dhalmel/Crawlers
+   35,    Fields of Valor,    ,    Buburimu Peninsula,    Leeches/Dhalmel
+   36,    Fields of Valor,    ,    Meriphataud Mountains,    Flies
+   37,    Fields of Valor,    ,    Meriphataud Mountains,    Lizards/Flies
+   38,    Fields of Valor,    ,    Meriphataud Mountains,    Beetles/Lizards
+   39,    Fields of Valor,    ,    Meriphataud Mountains,    Raptors/Beetles
+   40,    Fields of Valor,    ,    Sauromugue Champaign,    Lizards/Beetles
+   41,    Fields of Valor,    ,    Qufim Island,    Clippers/Worms
+   42,    Fields of Valor,    ,    Qufim Island,    Clippers/Seeker Bats
+   43,    Fields of Valor,    ,    Qufim Island,    Pugils/Clippers
+   44,    Fields of Valor,    ,    Qufim Island,    Gigas/Pugils
+   45,    Fields of Valor,    ,    Qufim Island,    Acrophies/Gigas/Pugils
+   46,    Fields of Valor,    ,    Beaucedine Glacier,    Tigers/Goblins
+   47,    Fields of Valor,    ,    Beaucedine Glacier,    Tigers/Statues
+   48,    Fields of Valor,    ,    Beaucedine Glacier,    Bat Eyes/Statues
+   49,    Fields of Valor,    ,    Beaucedine Glacier,    Goblin/Bat Eyes/Statues
+   50,    Fields of Valor,    ,    Beaucedine Glacier,    Gigas/Goblin/Bat Eye
+   51,    Fields of Valor,    ,    Xarcabard,    Skeleton/Etemmu
+   52,    Fields of Valor,    ,    Xarcabard,    Skeleton/Evil Weapon
+   53,    Fields of Valor,    ,    Xarcabard,    Evil Eyes/Skeleton/Evil Weapons
+   54,    Fields of Valor,    ,    Xarcabard,    Gigas/Evil Eyes/Skeletons
+   55,    Fields of Valor,    ,    Xarcabard,    Demon/Gigas/Evil Eye
+   56,    Fields of Valor,    ,    West Ronfaure,    Sheep/Goblin
+   57,    Fields of Valor,    ,    Valkurm Dunes,    Leeches/Goblin
+   58,    Fields of Valor,    ,    Jugner Forest,    Sapling/Screamer
+   59,    Fields of Valor,    ,    North Gustaberg,    Quadav/Sheep
+   60,    Fields of Valor,    ,    Pashhow Marshlands,    Quadav/Funguar/Goobbue
+   61,    Fields of Valor,    ,    West Sarutabaruta,    Yagudo/Bee
+   62,    Fields of Valor,    ,    Buburimu Peninsula,    Pugil/Goblin
+   63,    Fields of Valor,    ,    Meriphataud Mountains,    Coeurls/Evil Weapons
+   64,    Fields of Valor,    ,    East Ronfaure,    Pugils
+   65,    Fields of Valor,    ,    East Ronfaure,    Worms
+   66,    Fields of Valor,    ,    East Ronfaure,    Hares
+   67,    Fields of Valor,    ,    East Ronfaure,    Orcs/Funguar
+   68,    Fields of Valor,    ,    East Ronfaure,    Sheep/Beetles
+   69,    Fields of Valor,    ,    Latheine Plateau (note the typo),    Sheep/Akbabas
+   70,    Fields of Valor,    ,    Latheine Plateau (note the typo),    Sheep/Crab
+   71,    Fields of Valor,    ,    Latheine Plateau (note the typo),    Bats/Funguar
+   72,    Fields of Valor,    ,    Battalia Downs,    Saplings/Flies
+   73,    Fields of Valor,    ,    Battalia Downs,    Saplings/Bas
+   74,    Fields of Valor,    ,    Battalia Downs,    Tigers/Goblins/Orcs
+   75,    Fields of Valor,    ,    Battalia Downs,    Tigers
+   76,    Fields of Valor,    ,    South Gustaberg,    Bees
+   77,    Fields of Valor,    ,    South Gustaberg,    Worms
+   78,    Fields of Valor,    ,    South Gustaberg,    Vultures/Saplings
+   79,    Fields of Valor,    ,    South Gustaberg,    Goblins
+   80,    Fields of Valor,    ,    South Gustaberg,    Lizards/Crabs
+   81,    Fields of Valor,    ,    Konschtat Highlands,    Saplings/Wasps
+   82,    Fields of Valor,    ,    Konschtat Highlands,    Wasps/Lizards
+   83,    Fields of Valor,    ,    Konschtat Highlands,    Quadav
+   84,    Fields of Valor,    ,    Konschtat Highlands,    Ambushers/Tinkerers/Butchers
+   85,    Fields of Valor,    ,    Rolanberry Fields,    Wasps/Leeches
+   86,    Fields of Valor,    ,    Rolanberry Fields,    Crawlers/Goblins
+   87,    Fields of Valor,    ,    Rolanberry Fields,    Crawlers/Quadav
+   88,    Fields of Valor,    ,    Rolanberry Fields,    Ochu
+   89,    Fields of Valor,    ,    East Sarutabaruta,    Mandragora
+   90,    Fields of Valor,    ,    East Sarutabaruta,    Bee
+   91,    Fields of Valor,    ,    East Sarutabaruta,    Rarabs
+   92,    Fields of Valor,    ,    East Sarutabaruta,    Crabs/Crawlers
+   93,    Fields of Valor,    ,    East Sarutabaruta,    Crows/Crawlers
+   94,    Fields of Valor,    ,    Tahrongi Canyon,    Rarabs/Pygmaioi
+   95,    Fields of Valor,    ,    Tahrongi Canyon,    Pygmaioi/Bees
+   96,    Fields of Valor,    ,    Tahrongi Canyon,    Crawlers/Dhalmel
+   97,    Fields of Valor,    ,    Sauromugue Champaign,    Raptors/Goblins
+   98,    Fields of Valor,    ,    Sauromugue Champaign,    Coeurls/Goblins
+   99,    Fields of Valor,    ,    Sauromugue Champaign,    Raptors/Yagudo
+  100,    Fields of Valor,    ,    Sauromugue Champaign,    Tabar Beaks/Evil Weapons
+  101,    Fields of Valor,    ,    Behemoth's Dominion,    Lesser Gaylas/Greater Gaylas
+  102,    Fields of Valor,    ,    Behemoth's Dominion,    Lesser Gayla/Evil Weapon
+  103,    Fields of Valor,    ,    Behemoth's Dominion,    Greater Gayla/Undead
+  104,    Fields of Valor,    ,    Cape Teriggan,    Bunnies/Lizards
+  105,    Fields of Valor,    ,    Cape Teriggan,    Crabs/Goblins
+  106,    Fields of Valor,    ,    Cape Teriggan,    Crabs/Raptors
+  107,    Fields of Valor,    ,    Cape Teriggan,    Crabs/Cockatrices
+  108,    Fields of Valor,    ,    Cape Teriggan,    Cockatrices/Manticores
+  109,    Fields of Valor,    ,    Eastern Altepa Desert,    Spiders
+  110,    Fields of Valor,    ,    Eastern Altepa Desert,    Auxiliarii/Fabers/Beetles
+  111,    Fields of Valor,    ,    Eastern Altepa Desert,    Funditors/Fabers/Dhalmel
+  112,    Fields of Valor,    ,    Eastern Altepa Desert,    Decurio/Sagittarii/Speculator/Manticore
+  113,    Fields of Valor,    ,    Eastern Altepa Desert,    Poachers/Robbers/Reapers/Manticore
+  114,    Fields of Valor,    ,    The Sanctuary of Zi'Tah,    Ogreflies/Goobbue
+  115,    Fields of Valor,    ,    The Sanctuary of Zi'Tah,    Myxomycetes/Ogreflies
+  116,    Fields of Valor,    ,    The Sanctuary of Zi'Tah,    Parasites/Myxomycetes
+  117,    Fields of Valor,    ,    The Sanctuary of Zi'Tah,    Coeurls/Parasites
+  118,    Fields of Valor,    ,    The Sanctuary of Zi'Tah,    Golems/Coeurls
+  119,    Fields of Valor,    ,    Ro'Maeve,    Killing/Ominous Weapons
+  120,    Fields of Valor,    ,    Ro'Maeve,    Flagons
+  121,    Fields of Valor,    ,    Ro'Maeve,    Cursed Puppets
+  122,    Fields of Valor,    ,    Ro'Maeve,    Apocalyptic Weapons/Golems
+  123,    Fields of Valor,    ,    Ro'Maeve,    Infernal Weapons/Golems
+  124,    Fields of Valor,    ,    Yuhtunga Jungle,    Mandragoras/Lizards
+  125,    Fields of Valor,    ,    Yuhtunga Jungle,    Bees/Goblins
+  126,    Fields of Valor,    ,    Yuhtunga Jungle,    Opo-opo
+  127,    Fields of Valor,    ,    Yuhtunga Jungle,    Sahagin/Makara
+  128,    Fields of Valor,    ,    Yuhtunga Jungle,    Opo-opo/Crawlers
+  129,    Fields of Valor,    ,    Yhoator Jungle,    Lizards/Goblins
+  130,    Fields of Valor,    ,    Yhoator Jungle,    Mandragora/Wasps
+  131,    Fields of Valor,    ,    Yhoator Jungle,    Opo-opo
+  132,    Fields of Valor,    ,    Yhoator Jungle,    Crawlers/Opo-opo
+  133,    Fields of Valor,    ,    Yhoator Jungle,    Tonberry
+  134,    Fields of Valor,    ,    Western Altepa Desert,    Spiders/Essedarii
+  135,    Fields of Valor,    ,    Western Altepa Desert,    Dhalmel/Equites/Retiarius
+  136,    Fields of Valor,    ,    Western Altepa Desert,    Beetles/Cactuar
+  137,    Fields of Valor,    ,    Western Altepa Desert,    Goblins/Scorpions
+  138,    Fields of Valor,    ,    Western Altepa Desert,    Secutors/Lanistae
+  139,    Fields of Valor,    ,    Valley of Sorrows,    Raptors/Perytons
+  140,    Fields of Valor,    ,    Valley of Sorrows,    Raptors/Manticores
+  141,    Fields of Valor,    ,    Valley of Sorrows,    Perytons/Manticores
+  142,    Fields of Valor,    ,    Ru'Aun Gardens,    Flamingo/Sprinkler
+  143,    Fields of Valor,    ,    Ru'Aun Gardens,    Sprinklers/Dolls
+  144,    Fields of Valor,    ,    Ru'Aun Gardens,    Dolls
+  145,    Fields of Valor,    ,    Ru'Aun Gardens,    Fire/Air/Thunder Elementals
+  146,    Fields of Valor,    ,    Ru'Aun Gardens,    Ice/Earth/Water Elementals
+"RegimeID", "Regime Type", "Page", "Book Area(s)/NM Area(s)", "Target(s)"
+  147,    Hunt Registry,    ,    ,    Fungus Beetle
+  148,    Hunt Registry,    ,    ,    Jaggedy-Eared Jack
+  149,    Hunt Registry,    ,    ,    Amanita
+  150,    Hunt Registry,    ,    ,    Swamfisk
+  151,    Hunt Registry,    ,    ,    Bigmouth Billy
+  152,    Hunt Registry,    ,    ,    Rambukk
+  153,    Hunt Registry,    ,    ,    Nihniknoovi
+  154,    Hunt Registry,    ,    ,    Tumbling Truffle
+  155,    Hunt Registry,    ,    ,    Slumbering Samwell
+  156,    Hunt Registry,    ,    ,    Lumbering Lambert
+  157,    Hunt Registry,    ,    ,    Panzer Percival
+  158,    Hunt Registry,    ,    ,    Fraelissa
+  159,    Hunt Registry,    ,    ,    Sappy Sycamore
+  160,    Hunt Registry,    ,    ,    Supplespine Mujwuj
+  161,    Hunt Registry,    ,    ,    Tottering Toby
+  162,    Hunt Registry,    ,    ,    Skirling Liger
+  163,    Hunt Registry,    ,    ,    Eyegouger
+  164,    Hunt Registry,    ,    ,    Prankster Maverix
+  165,    Hunt Registry,    ,    ,    Hercules Beetle
+  166,    Hunt Registry,    ,    ,    Mycophile
+  167,    Hunt Registry,    ,    ,    Orctrap
+  168,    Hunt Registry,    ,    ,    Tempest Tigon
+  169,    Hunt Registry,    ,    ,    Orcish Wallbreacher
+  170,    Hunt Registry,    ,    ,    Thousandarm Deshglesh
+  171,    Hunt Registry,    ,    ,    Orcish Barricader
+  172,    Hunt Registry,    ,    ,    Hundredscar Hajwaj
+  173,    Hunt Registry,    ,    ,    Kegpaunch Doshgnosh
+  174,    Hunt Registry,    ,    ,    Chariotbuster Byakzak
+  175,    Hunt Registry,    ,    ,    Barbastelle
+  176,    Hunt Registry,    ,    ,    Ankou
+  177,    Hunt Registry,    ,    ,    Gwyllgi
+  178,    Hunt Registry,    ,    ,    Arioch
+  179,    Hunt Registry,    ,    ,    Shii
+  180,    Hunt Registry,    ,    ,    Manes
+  181,    Hunt Registry,    ,    ,    Donggu
+  182,    Hunt Registry,    ,    ,    Bombast
+  183,    Hunt Registry,    ,    ,    Agar Agar
+  184,    Hunt Registry,    ,    ,    Skull of Gluttony
+  185,    Hunt Registry,    ,    ,    Skull of Greed
+  186,    Hunt Registry,    ,    ,    Skull of Sloth
+  187,    Hunt Registry,    ,    ,    Skull of Lust
+  188,    Hunt Registry,    ,    ,    Skull of Pride
+  189,    Hunt Registry,    ,    ,    Skull of Envy
+  190,    Hunt Registry,    ,    ,    Skull of Wrath
+  191,    Hunt Registry,    ,    ,    Cwn Cyrff
+  192,    Hunt Registry,    ,    ,    Hawkeyed Dnatbat
+  193,    Hunt Registry,    ,    ,    Tigerbane Bakdak
+  194,    Hunt Registry,    ,    ,    Steelbiter Gudrud
+  195,    Hunt Registry,    ,    ,    Poisonhand Gnadgad
+  196,    Hunt Registry,    ,    ,    Blubbery Bulge
+  197,    Hunt Registry,    ,    ,    Stinging Sophie
+  198,    Hunt Registry,    ,    ,    Maighdean Uaine
+  199,    Hunt Registry,    ,    ,    Bedrock Barry
+  200,    Hunt Registry,    ,    ,    Leaping Lizzy
+  201,    Hunt Registry,    ,    ,    Tococo
+  202,    Hunt Registry,    ,    ,    Carnero
+  203,    Hunt Registry,    ,    ,    Stray Mary
+  204,    Hunt Registry,    ,    ,    Ghillie Dhu
+  205,    Hunt Registry,    ,    ,    Rampaging Ram
+  206,    Hunt Registry,    ,    ,    Highlander Lizard
+  207,    Hunt Registry,    ,    ,    Metal Shears
+  207,    Hunt Registry,    ,    ,    Metal Shears
+  208,    Hunt Registry,    ,    ,    Golden Bat
+  208,    Hunt Registry,    ,    ,    Golden Bat
+  209,    Hunt Registry,    ,    ,    Valkurm Emperor
+  209,    Hunt Registry,    ,    ,    Valkurm Emperor
+  210,    Hunt Registry,    ,    ,    Hippomaritimus
+  210,    Hunt Registry,    ,    ,    Hippomaritimus
+  211,    Hunt Registry,    ,    ,    Bloodpool Vorax
+  212,    Hunt Registry,    ,    ,    Jolly Green
+  213,    Hunt Registry,    ,    ,    Toxic Tamlyn
+  214,    Hunt Registry,    ,    ,    Ni'Zho Bladebender
+  215,    Hunt Registry,    ,    ,    Black Triple Stars
+  216,    Hunt Registry,    ,    ,    Drooling Daisy
+  217,    Hunt Registry,    ,    ,    Ravenous Crawler
+  218,    Hunt Registry,    ,    ,    Eldritch Edge
+  219,    Hunt Registry,    ,    ,    Bu'Ghi Howlblade
+  220,    Hunt Registry,    ,    ,    Zi'Ghi Boneeater
+  221,    Hunt Registry,    ,    ,    Qu'Vho Deathhurler
+  222,    Hunt Registry,    ,    ,    Be'Hya Hundredwall
+  223,    Hunt Registry,    ,    ,    Teporingo
+  224,    Hunt Registry,    ,    ,    Chocoboleech
+  225,    Hunt Registry,    ,    ,    Geyser Lizard
+  226,    Hunt Registry,    ,    ,    Cargo Crab Colin
+  227,    Hunt Registry,    ,    ,    Falcatus Aranei
+  228,    Hunt Registry,    ,    ,    Dame Blanche
+  229,    Hunt Registry,    ,    ,    Thoon
+  230,    Hunt Registry,    ,    ,    Smothered Schmidt
+  231,    Hunt Registry,    ,    ,    Crushed Krause
+  232,    Hunt Registry,    ,    ,    Pulverized Pfeffer
+  233,    Hunt Registry,    ,    ,    Burned Bergmann
+  234,    Hunt Registry,    ,    ,    Wounded Wurfel
+  235,    Hunt Registry,    ,    ,    Asphyxiated Amsel
+  236,    Hunt Registry,    ,    ,    Demonic Tiphia
+  237,    Hunt Registry,    ,    ,    Dynast Beetle
+  238,    Hunt Registry,    ,    ,    Aqrabuamelu
+  239,    Hunt Registry,    ,    ,    Bi'Gho Headtaker
+  240,    Hunt Registry,    ,    ,    Ge'Dha Evileye
+  241,    Hunt Registry,    ,    ,    Da'Dha Hundredmask
+  242,    Hunt Registry,    ,    ,    Zo'Khu Blackcloud
+  243,    Hunt Registry,    ,    ,    Ga'Bhu Unvanquished
+  244,    Hunt Registry,    ,    ,    Bugbear Strongman
+  245,    Hunt Registry,    ,    ,    Goblin Wolfman
+  246,    Hunt Registry,    ,    ,    Bugbear Muscleman
+  247,    Hunt Registry,    ,    ,    Swashstox Beadblinker
+  248,    Hunt Registry,    ,    ,    Bugbear Matman
+  249,    Hunt Registry,    ,    ,    Sword Sorcerer Solisoq
+  250,    Hunt Registry,    ,    ,    Tom Tit Tat
+  251,    Hunt Registry,    ,    ,    Nunyenunc
+  252,    Hunt Registry,    ,    ,    Numbing Norman
+  253,    Hunt Registry,    ,    ,    Spiny Spipi
+  254,    Hunt Registry,    ,    ,    Sharp-Eared Ropipi
+  255,    Hunt Registry,    ,    ,    Duke Decapod
+  256,    Hunt Registry,    ,    ,    Yara Ma Yha Who
+  257,    Hunt Registry,    ,    ,    Serpopard Ishtar
+  258,    Hunt Registry,    ,    ,    Habrok
+  259,    Hunt Registry,    ,    ,    Herbage Hunter
+  260,    Hunt Registry,    ,    ,    Wake Warder Wanda
+  261,    Hunt Registry,    ,    ,    Buburimboo
+  262,    Hunt Registry,    ,    ,    Helldiver
+  263,    Hunt Registry,    ,    ,    Backoo
+  264,    Hunt Registry,    ,    ,    Serra
+  265,    Hunt Registry,    ,    ,    Intulo
+  266,    Hunt Registry,    ,    ,    Shankha
+  267,    Hunt Registry,    ,    ,    Splacknuck
+  268,    Hunt Registry,    ,    ,    Daggerclaw Dracos
+  269,    Hunt Registry,    ,    ,    Patripatan
+  270,    Hunt Registry,    ,    ,    Chonchon
+  271,    Hunt Registry,    ,    ,    Naa Zeku the Unwaiting
+  272,    Hunt Registry,    ,    ,    Deadly Dodo
+  273,    Hunt Registry,    ,    ,    Bashe
+  274,    Hunt Registry,    ,    ,    Thunderclaw Thuban
+  275,    Hunt Registry,    ,    ,    Blighting Brand
+  276,    Hunt Registry,    ,    ,    Sekhmet
+  277,    Hunt Registry,    ,    ,    Ambusher Antlion
+  278,    Hunt Registry,    ,    ,    Citipati
+  279,    Hunt Registry,    ,    ,    Sargas
+  280,    Hunt Registry,    ,    ,    Juu Duzu the Whirlwind
+  281,    Hunt Registry,    ,    ,    Hoo Mjuu the Torrent
+  282,    Hunt Registry,    ,    ,    Vuu Puqu the Beguiler
+  283,    Hunt Registry,    ,    ,    Quu Xijo the Illusory
+  284,    Hunt Registry,    ,    ,    Canal Moocher
+  285,    Hunt Registry,    ,    ,    Konjac
+  286,    Hunt Registry,    ,    ,    Brazen Bones
+  287,    Hunt Registry,    ,    ,    Nocuous Weapon
+  288,    Hunt Registry,    ,    ,    Maltha
+  289,    Hunt Registry,    ,    ,    Slendlix Spindlethumb
+  290,    Hunt Registry,    ,    ,    Desmodont
+  291,    Hunt Registry,    ,    ,    Ah Puch
+  292,    Hunt Registry,    ,    ,    Legalox Heftyhind
+  293,    Hunt Registry,    ,    ,    Trembler Tabitha
+  294,    Hunt Registry,    ,    ,    Lesath
+  295,    Hunt Registry,    ,    ,    Gloombound Lurker
+  296,    Hunt Registry,    ,    ,    Hellion
+  297,    Hunt Registry,    ,    ,    Peg Powler
+  298,    Hunt Registry,    ,    ,    Soulstealer Skullnix
+  299,    Hunt Registry,    ,    ,    Narasimha
+  300,    Hunt Registry,    ,    ,    Hazmat
+  301,    Hunt Registry,    ,    ,    Hovering Hotpot
+  302,    Hunt Registry,    ,    ,    Frogamander
+  303,    Hunt Registry,    ,    ,    Moo Ouzi the Swiftblade
+  304,    Hunt Registry,    ,    ,    Saa Doyi the Fervid
+  305,    Hunt Registry,    ,    ,    Yaa Haqa the Profane
+  306,    Hunt Registry,    ,    ,    Lii Jixa the Somnolist
+  307,    Hunt Registry,    ,    ,    Trickster Kinetix
+  308,    Hunt Registry,    ,    ,    Slippery Sucker
+  309,    Hunt Registry,    ,    ,    Qoofim
+  310,    Hunt Registry,    ,    ,    Atkorkamuy
+  311,    Hunt Registry,    ,    ,    Kirata
+  312,    Hunt Registry,    ,    ,    Gargantua
+  313,    Hunt Registry,    ,    ,    Calcabrina
+  314,    Hunt Registry,    ,    ,    Humbaba
+  315,    Hunt Registry,    ,    ,    Shadow Eye
+  316,    Hunt Registry,    ,    ,    Duke Focalor
+  317,    Hunt Registry,    ,    ,    Timeworn Warrior
+  318,    Hunt Registry,    ,    ,    Barbaric Weapon
+  319,    Hunt Registry,    ,    ,    Bonnacon
+  320,    Hunt Registry,    ,    ,    Frost Flambeau
+  321,    Hunt Registry,    ,    ,    Skvader
+  322,    Hunt Registry,    ,    ,    Magnotaur
+  323,    Hunt Registry,    ,    ,    Elusive Edwin
+  324,    Hunt Registry,    ,    ,    Keeper of Halidom
+  325,    Hunt Registry,    ,    ,    Bastet
+  326,    Hunt Registry,    ,    ,    Huwasi
+  327,    Hunt Registry,    ,    ,    Nightmare Vase
+  328,    Hunt Registry,    ,    ,    Rogue Receptacle
+  329,    Hunt Registry,    ,    ,    Martinet
+  330,    Hunt Registry,    ,    ,    Nargun
+  331,    Hunt Registry,    ,    ,    Enkelados
+  332,    Hunt Registry,    ,    ,    Ixtab
+  333,    Hunt Registry,    ,    ,    Autarch
+  334,    Hunt Registry,    ,    ,    Eurytos
+  335,    Hunt Registry,    ,    ,    Polybotes
+  336,    Hunt Registry,    ,    ,    Rhoitos
+  337,    Hunt Registry,    ,    ,    Ophion
+  338,    Hunt Registry,    ,    ,    Rhoikos
+  339,    Hunt Registry,    ,    ,    Ogygos
+  340,    Hunt Registry,    ,    ,    Epialtes
+  341,    Hunt Registry,    ,    ,    Hippolytos
+  342,    Hunt Registry,    ,    ,    Eurymedon
+  343,    Hunt Registry,    ,    ,    Tyrant
+  344,    Hunt Registry,    ,    ,    Hyakume
+  345,    Hunt Registry,    ,    ,    Mucoid Mass
+  346,    Hunt Registry,    ,    ,    Gloom Eye
+  347,    Hunt Registry,    ,    ,    Mind Hoarder
+  348,    Hunt Registry,    ,    ,    Jenglot
+  349,    Hunt Registry,    ,    ,    Sluagh
+  350,    Hunt Registry,    ,    ,    Marquis Naberius
+  351,    Hunt Registry,    ,    ,    Likho
+  352,    Hunt Registry,    ,    ,    Marquis Sabnock
+  353,    Hunt Registry,    ,    ,    Baronet Romwe
+  354,    Hunt Registry,    ,    ,    Baron Vapula
+  355,    Hunt Registry,    ,    ,    Count Bifrons
+  356,    Hunt Registry,    ,    ,    Viscount Morax
+  357,    Hunt Registry,    ,    ,    Ellyllon
+  358,    Hunt Registry,    ,    ,    Aquarius
+  359,    Hunt Registry,    ,    ,    Unut
+  360,    Hunt Registry,    ,    ,    Leshonki
+  361,    Hunt Registry,    ,    ,    Koropokkur
+  361,    Hunt Registry,    ,    ,    Koropokkur
+  362,    Hunt Registry,    ,    ,    Mischievous Micholas
+  362,    Hunt Registry,    ,    ,    Mischievous Micholas
+  363,    Hunt Registry,    ,    ,    Bayawak
+  363,    Hunt Registry,    ,    ,    Bayawak
+  364,    Hunt Registry,    ,    ,    Pyuu the Spatemaker
+  364,    Hunt Registry,    ,    ,    Pyuu the Spatemaker
+  365,    Hunt Registry,    ,    ,    Powderer Penny
+  365,    Hunt Registry,    ,    ,    Powderer Penny
+  366,    Hunt Registry,    ,    ,    Edacious Opo-opo
+  366,    Hunt Registry,    ,    ,    Edacious Opo-opo
+  367,    Hunt Registry,    ,    ,    Acolnahuacatl
+  367,    Hunt Registry,    ,    ,    Acolnahuacatl
+  368,    Hunt Registry,    ,    ,    Hoar-knuckled Rimberry
+  368,    Hunt Registry,    ,    ,    Hoar-knuckled Rimberry
+  369,    Hunt Registry,    ,    ,    Namtar
+  369,    Hunt Registry,    ,    ,    Namtar
+  370,    Hunt Registry,    ,    ,    Wuur the Sandcomber
+  370,    Hunt Registry,    ,    ,    Wuur the Sandcomber
+  371,    Hunt Registry,    ,    ,    Masan
+  371,    Hunt Registry,    ,    ,    Masan
+  372,    Hunt Registry,    ,    ,    Fyuu the Seabellow
+  372,    Hunt Registry,    ,    ,    Fyuu the Seabellow
+  373,    Hunt Registry,    ,    ,    Qull the Shellbuster
+  373,    Hunt Registry,    ,    ,    Qull the Shellbuster
+  374,    Hunt Registry,    ,    ,    Seww the Squidlimbed
+  374,    Hunt Registry,    ,    ,    Seww the Squidlimbed
+  375,    Hunt Registry,    ,    ,    Pahh the Gullcaller
+  375,    Hunt Registry,    ,    ,    Pahh the Gullcaller
+  376,    Hunt Registry,    ,    ,    Sea Hog
+  376,    Hunt Registry,    ,    ,    Sea Hog
+  377,    Hunt Registry,    ,    ,    Yarr the Pearleyed
+  377,    Hunt Registry,    ,    ,    Yarr the Pearleyed
+  378,    Hunt Registry,    ,    ,    Voll the Sharkfinned
+  378,    Hunt Registry,    ,    ,    Voll the Sharkfinned
+  379,    Hunt Registry,    ,    ,    Denn the Orcavoiced
+  379,    Hunt Registry,    ,    ,    Denn the Orcavoiced
+  380,    Hunt Registry,    ,    ,    Mouu the Waverider
+  380,    Hunt Registry,    ,    ,    Mouu the Waverider
+  381,    Hunt Registry,    ,    ,    Worr the Clawfisted
+  381,    Hunt Registry,    ,    ,    Worr the Clawfisted
+  382,    Hunt Registry,    ,    ,    Zuug the Shoreleaper
+  382,    Hunt Registry,    ,    ,    Zuug the Shoreleaper
+  383,    Hunt Registry,    ,    ,    Manipulator
+  383,    Hunt Registry,    ,    ,    Manipulator
+  384,    Hunt Registry,    ,    ,    Flauros
+  384,    Hunt Registry,    ,    ,    Flauros
+  385,    Hunt Registry,    ,    ,    Death from Above
+  385,    Hunt Registry,    ,    ,    Death from Above
+  386,    Hunt Registry,    ,    ,    Habetrot
+  386,    Hunt Registry,    ,    ,    Habetrot
+  387,    Hunt Registry,    ,    ,    Beryl-footed Molberry
+  387,    Hunt Registry,    ,    ,    Beryl-footed Molberry
+  388,    Hunt Registry,    ,    ,    Sozu Sarberry
+  388,    Hunt Registry,    ,    ,    Sozu Sarberry
+  389,    Hunt Registry,    ,    ,    Sozu Terberry
+  389,    Hunt Registry,    ,    ,    Sozu Terberry
+  390,    Hunt Registry,    ,    ,    Sozu Rogberry
+  390,    Hunt Registry,    ,    ,    Sozu Rogberry
+  391,    Hunt Registry,    ,    ,    Sacrificial Goblet
+  391,    Hunt Registry,    ,    ,    Sacrificial Goblet
+  392,    Hunt Registry,    ,    ,    Crimson-toothed Pawberry
+  392,    Hunt Registry,    ,    ,    Crimson-toothed Pawberry
+  393,    Hunt Registry,    ,    ,    Sozu Bliberry
+  393,    Hunt Registry,    ,    ,    Sozu Bliberry
+  394,    Hunt Registry,    ,    ,    Friar Rush
+  394,    Hunt Registry,    ,    ,    Friar Rush
+  395,    Hunt Registry,    ,    ,    Celeste-eyed Tozberry
+  395,    Hunt Registry,    ,    ,    Celeste-eyed Tozberry
+  396,    Hunt Registry,    ,    ,    Tawny-fingered Mugberry
+  396,    Hunt Registry,    ,    ,    Tawny-fingered Mugberry
+  397,    Hunt Registry,    ,    ,    Bistre-hearted Malberry
+  397,    Hunt Registry,    ,    ,    Bistre-hearted Malberry
+  398,    Hunt Registry,    ,    ,    Ogama
+  398,    Hunt Registry,    ,    ,    Ogama
+  399,    Hunt Registry,    ,    ,    Foreseer Oramix
+  399,    Hunt Registry,    ,    ,    Foreseer Oramix
+  400,    Hunt Registry,    ,    ,    Tyrannic Tunnok
+  400,    Hunt Registry,    ,    ,    Tyrannic Tunnok
+  401,    Hunt Registry,    ,    ,    Lindwurm
+  401,    Hunt Registry,    ,    ,    Lindwurm
+  402,    Hunt Registry,    ,    ,    Vouivre
+  402,    Hunt Registry,    ,    ,    Vouivre
+  403,    Hunt Registry,    ,    ,    Tarasque
+  403,    Hunt Registry,    ,    ,    Tarasque
+  404,    Hunt Registry,    ,    ,    Tegmine
+  405,    Hunt Registry,    ,    ,    Frostmane
+  406,    Hunt Registry,    ,    ,    Zmey Gorynych
+  407,    Hunt Registry,    ,    ,    Killer Jonny
+  408,    Hunt Registry,    ,    ,    Dune Widow
+  409,    Hunt Registry,    ,    ,    Nandi
+  410,    Hunt Registry,    ,    ,    Donnergugi
+  411,    Hunt Registry,    ,    ,    Sabotender Corrido
+  412,    Hunt Registry,    ,    ,    Cactuar Cantautor
+  413,    Hunt Registry,    ,    ,    Dahu
+  414,    Hunt Registry,    ,    ,    Picolaton
+  415,    Hunt Registry,    ,    ,    Calchas
+  416,    Hunt Registry,    ,    ,    Cancer
+  417,    Hunt Registry,    ,    ,    Sabotender Mariachi
+  418,    Hunt Registry,    ,    ,    Amemet
+  419,    Hunt Registry,    ,    ,    Yowie
+  420,    Hunt Registry,    ,    ,    Arachne
+  421,    Hunt Registry,    ,    ,    Bloodthirster Madkix
+  422,    Hunt Registry,    ,    ,    Pelican
+  423,    Hunt Registry,    ,    ,    Goblinsavior Heronox
+  424,    Hunt Registry,    ,    ,    Taxim
+  425,    Hunt Registry,    ,    ,    Baobhan Sith
+  426,    Hunt Registry,    ,    ,    Centurio X-I
+  427,    Hunt Registry,    ,    ,    Sagittarius X-XIII
+  428,    Hunt Registry,    ,    ,    Diamond Daig
+  429,    Hunt Registry,    ,    ,    Antican Magister
+  430,    Hunt Registry,    ,    ,    Antican Proconsul
+  431,    Hunt Registry,    ,    ,    Antican Praefectus
+  432,    Hunt Registry,    ,    ,    Antican Tribunus
+  433,    Hunt Registry,    ,    ,    Sabotender Bailarina
+  434,    Hunt Registry,    ,    ,    Tribunus VII-I
+  435,    Hunt Registry,    ,    ,    Nussknacker
+  436,    Hunt Registry,    ,    ,    Triarius X-XV
+  437,    Hunt Registry,    ,    ,    Proconsul XII
+  438,    Hunt Registry,    ,    ,    Sabotender Bailarina
+  439,    Hunt Registry,    ,    ,    Megalobugard
+  440,    Hunt Registry,    ,    ,    Yal-un Eke
+  441,    Hunt Registry,    ,    ,    Sengann
+  442,    Hunt Registry,    ,    ,    Flockbock
+  443,    Hunt Registry,    ,    ,    Odqan
+  444,    Hunt Registry,    ,    ,    Goaftrap
+  445,    Hunt Registry,    ,    ,    Ziphius
+  446,    Hunt Registry,    ,    ,    Okyupete
+  447,    Hunt Registry,    ,    ,    Zoraal Ja's Pkuucha
+  448,    Hunt Registry,    ,    ,    Jaded Jody
+  449,    Hunt Registry,    ,    ,    Chelicerata
+  450,    Hunt Registry,    ,    ,    Gharial
+  451,    Hunt Registry,    ,    ,    Harvestman
+  452,    Hunt Registry,    ,    ,    Emergent Elm
+  453,    Hunt Registry,    ,    ,    Nis Puk
+  454,    Hunt Registry,    ,    ,    Mahishasura
+  455,    Hunt Registry,    ,    ,    Energetic Eruca
+  456,    Hunt Registry,    ,    ,    Chary Apkallu
+  457,    Hunt Registry,    ,    ,    Ignamoth
+  458,    Hunt Registry,    ,    ,    Fahrafahr the Bloodied
+  459,    Hunt Registry,    ,    ,    Venomfang
+  460,    Hunt Registry,    ,    ,    Zizzy Zillah
+  461,    Hunt Registry,    ,    ,    Firedance Magmaal Ja
+  462,    Hunt Registry,    ,    ,    Lizardtrap
+  463,    Hunt Registry,    ,    ,    Crystal Eater
+  464,    Hunt Registry,    ,    ,    Bluestreak Gyugyuroon
+  465,    Hunt Registry,    ,    ,    Copper Borer
+  466,    Hunt Registry,    ,    ,    Big Bomb
+  467,    Hunt Registry,    ,    ,    Flammeri
+  468,    Hunt Registry,    ,    ,    Peallaidh
+  469,    Hunt Registry,    ,    ,    Zikko
+  470,    Hunt Registry,    ,    ,    Aynu-kaysey
+  471,    Hunt Registry,    ,    ,    Vidhuwa the Wrathborn
+  472,    Hunt Registry,    ,    ,    Bloody Bones
+  473,    Hunt Registry,    ,    ,    Amikiri
+  474,    Hunt Registry,    ,    ,    Euryale
+  475,    Hunt Registry,    ,    ,    Ungur
+  476,    Hunt Registry,    ,    ,    Boompadu
+  477,    Hunt Registry,    ,    ,    Cookieduster Lipiroon
+  478,    Hunt Registry,    ,    ,    Oupire
+  479,    Hunt Registry,    ,    ,    Skogs Fru
+  480,    Hunt Registry,    ,    ,    Myradrosh
+  481,    Hunt Registry,    ,    ,    Goblintrap
+  482,    Hunt Registry,    ,    ,    Melusine
+  483,    Hunt Registry,    ,    ,    Boll Weevil
+  484,    Hunt Registry,    ,    ,    Drumskull Zogdregg
+  485,    Hunt Registry,    ,    ,    Vulkodlac
+  486,    Hunt Registry,    ,    ,    Voirloup
+  487,    Hunt Registry,    ,    ,    Warabouc
+  488,    Hunt Registry,    ,    ,    Big Bang
+  489,    Hunt Registry,    ,    ,    Pallas
+  490,    Hunt Registry,    ,    ,    Judgmental Julika
+  491,    Hunt Registry,    ,    ,    La Velue
+  492,    Hunt Registry,    ,    ,    Chaneque
+  493,    Hunt Registry,    ,    ,    Habergoass
+  494,    Hunt Registry,    ,    ,    Burlibix Brawnback
+  495,    Hunt Registry,    ,    ,    Laelaps
+  496,    Hunt Registry,    ,    ,    Tethra
+  497,    Hunt Registry,    ,    ,    Ethniu
+  498,    Hunt Registry,    ,    ,    Gloomanita
+  499,    Hunt Registry,    ,    ,    Olgoi-Khorkhoi
+  500,    Hunt Registry,    ,    ,    Ankabut
+  501,    Hunt Registry,    ,    ,    Peaseblossom
+  502,    Hunt Registry,    ,    ,    Sarcopsylla
+  503,    Hunt Registry,    ,    ,    Scitalis
+  504,    Hunt Registry,    ,    ,    Kotan-kor Kamuy
+  505,    Hunt Registry,    ,    ,    Vasiliceratops
+  506,    Hunt Registry,    ,    ,    Croque-mitaine
+  507,    Hunt Registry,    ,    ,    Kinepikwa
+  508,    Hunt Registry,    ,    ,    Sugaar
+  509,    Hunt Registry,    ,    ,    Nommo
+  510,    Hunt Registry,    ,    ,    Lamina
+  511,    Hunt Registry,    ,    ,    Dyinyinga
+  512,    Hunt Registry,    ,    ,    Erle
+  513,    Hunt Registry,    ,    ,    Delicieuse Delphine
+  514,    Hunt Registry,    ,    ,    Abatwa
+  515,    Hunt Registry,    ,    ,    Morille Mortelle
+  516,    Hunt Registry,    ,    ,    Lugh
+  517,    Hunt Registry,    ,    ,    Jeduah
+  518,    Hunt Registry,    ,    ,    Belladonna
+  519,    Hunt Registry,    ,    ,    Ramponneau
+  520,    Hunt Registry,    ,    ,    Tiffenotte
+  521,    Hunt Registry,    ,    ,    Emela-ntouka
+  522,    Hunt Registry,    ,    ,    Ratatoskr
+  523,    Hunt Registry,    ,    ,    Kirtimukha
+  524,    Hunt Registry,    ,    ,    Demoiselle Desolee
+  525,    Hunt Registry,    ,    ,    Muq Shabeel
+  526,    Hunt Registry,    ,    ,    Bloodlapper
+  527,    Hunt Registry,    ,    ,    Hemodrosophila
+  528,    Hunt Registry,    ,    ,    Centipedal Centruroides
+  529,    Hunt Registry,    ,    ,    Balam-Quitz
+  530,    Hunt Registry,    ,    ,    Hyakinthos
+  531,    Hunt Registry,    ,    ,    Herensugue
+  532,    Hunt Registry,    ,    ,    Coquecigrue
+  533,    Hunt Registry,    ,    ,    Citadel Pipistrelles
+  534,    Hunt Registry,    ,    ,    Buarainech
+  535,    Hunt Registry,    ,    ,    Elatha
+  536,    Hunt Registry,    ,    ,    Came-cruse
+  536,    Hunt Registry,    ,    ,    Came-cruse
+  536,    Hunt Registry,    ,    ,    Came-cruse
+  537,    Hunt Registry,    ,    ,    Becut
+  537,    Hunt Registry,    ,    ,    Becut
+  537,    Hunt Registry,    ,    ,    Becut
+  538,    Hunt Registry,    ,    ,    Grand'Goule
+  538,    Hunt Registry,    ,    ,    Grand'Goule
+  538,    Hunt Registry,    ,    ,    Grand'Goule
+  539,    Hunt Registry,    ,    ,    Scylla
+  539,    Hunt Registry,    ,    ,    Scylla
+  539,    Hunt Registry,    ,    ,    Scylla
+  540,    Hunt Registry,    ,    ,    Tikbalang
+  540,    Hunt Registry,    ,    ,    Tikbalang
+  540,    Hunt Registry,    ,    ,    Tikbalang
+  541,    Hunt Registry,    ,    ,    Prince Orobas
+  541,    Hunt Registry,    ,    ,    Prince Orobas
+  541,    Hunt Registry,    ,    ,    Prince Orobas
+  542,    Hunt Registry,    ,    ,    Graoully
+  542,    Hunt Registry,    ,    ,    Graoully
+  542,    Hunt Registry,    ,    ,    Graoully
+  543,    Hunt Registry,    ,    ,    Zirnitra
+  543,    Hunt Registry,    ,    ,    Zirnitra
+  543,    Hunt Registry,    ,    ,    Zirnitra
+  544,    Hunt Registry,    ,    ,    Krabkatoa
+  545,    Hunt Registry,    ,    ,    Yacumama
+  546,    Hunt Registry,    ,    ,    Capricornus
+  547,    Hunt Registry,    ,    ,    Blobdingnag
+  548,    Hunt Registry,    ,    ,    Shoggoth
+  549,    Hunt Registry,    ,    ,    Lamprey Lord
+  550,    Hunt Registry,    ,    ,    Orcus
+  551,    Hunt Registry,    ,    ,    Jyeshtha
+  552,    Hunt Registry,    ,    ,    Farruca Fly
+  553,    Hunt Registry,    ,    ,    Verthandi
+  554,    Hunt Registry,    ,    ,    Urd
+  555,    Hunt Registry,    ,    ,    Skuld
+  556,    Hunt Registry,    ,    ,    Lord Ruthven
+  557,    Hunt Registry,    ,    ,    Erebus
+  558,    Hunt Registry,    ,    ,    Feuerunke
+  559,    Hunt Registry,    ,    ,    Yilbegan
+"RegimeID", "Regime Type", "Page", "Book Area(s)/NM Area(s)", "Target(s)"
+  560,    Dominion OPs,    ,    ,
+  xxx,    Dominion OPs,    ,    ,
+  601,    Dominion OPs,    ,    ,
+"RegimeID", "Regime Type", "Page", "Book Area(s)/NM Area(s)", "Target(s)"
+  602,    Grounds of Valor,    1,    Ranguemont Pass,    Wind Bats Wind Bats/Blade Bat Blade Bats
+  603,    Grounds of Valor,    2,    Ranguemont Pass,    Seeker Bats/Ooze Ooze
+  604,    Grounds of Valor,    3,    Ranguemont Pass,    Goblin Mugger/Goblin Gambler
+  605,    Grounds of Valor,    4,    Ranguemont Pass,    Goblin Leecher/Goblin Gambler
+  606,    Grounds of Valor,    5,    Ranguemont Pass,    Stirge/Hecteyes
+  607,    Grounds of Valor,    6,    Ranguemont Pass,    Bilesucker/Hovering Oculus
+  608,    Grounds of Valor,    7,    Ranguemont Pass,    Goblin Hoodoo/Goblin Chaser
+  609,    Grounds of Valor,    8,    Ranguemont Pass,    Goblin Tanner/Goblin Artificer
+  610,    Grounds of Valor,    1,    Bostaunieux Oubliette,    Dark Aspic
+  611,    Grounds of Valor,    2,    Bostaunieux Oubliette,    Funnel Bats/Werebat
+  612,    Grounds of Valor,    3,    Bostaunieux Oubliette,    Members of the hound family/Haunt
+  613,    Grounds of Valor,    4,    Bostaunieux Oubliette,    Bloodsucker
+  614,    Grounds of Valor,    5,    Bostaunieux Oubliette,    Dabilla/Panna Cotta
+  615,    Grounds of Valor,    6,    Bostaunieux Oubliette,    Blind Bat/Panna Cotta
+  616,    Grounds of Valor,    7,    Bostaunieux Oubliette,    Nachtmahr
+  617,    Grounds of Valor,    8,    Bostaunieux Oubliette,    Wurdalak/Blind Bat
+  618,    Grounds of Valor,    1,    Toraimarai Canal,    Hell Bat/Makara
+  619,    Grounds of Valor,    2,    Toraimarai Canal,    Fallen Knight/Lich/Dark Aspic
+  620,    Grounds of Valor,    3,    Toraimarai Canal,    Dark Aspic/Bloodsucker
+  621,    Grounds of Valor,    4,    Toraimarai Canal,    Scavenger Crab/Stygian Pugil
+  622,    Grounds of Valor,    5,    Toraimarai Canal,    Starborer/Deviling Bats
+  623,    Grounds of Valor,    6,    Toraimarai Canal,    Plunderer Crab/Sodden Bones
+  624,    Grounds of Valor,    7,    Toraimarai Canal,    Blackwater Pugil/Drowned Bones
+  625,    Grounds of Valor,    8,    Toraimarai Canal,    Flume Toad/Poroggo Excavator
+  626,    Grounds of Valor,    1,    Zeruhn Mines,    Ding Bats
+  627,    Grounds of Valor,    2,    Zeruhn Mines,    River Crab
+  628,    Grounds of Valor,    3,    Zeruhn Mines,    Colliery Bat/Soot Crab
+  629,    Grounds of Valor,    4,    Zeruhn Mines,    Colliery Bat/Burrower Worm
+  630,    Grounds of Valor,    5,    Zeruhn Mines,    Colliery Bat/Veindigger Leech
+  631,    Grounds of Valor,    1,    King Ranperre's Tomb,    Mouse Bat/Members of the Goblin family
+  632,    Grounds of Valor,    2,    King Ranperre's Tomb,    Stone Eater/Wind Bats
+  633,    Grounds of Valor,    3,    King Ranperre's Tomb,    Goblin Ambusher/Goblin Tinkerer/Goblin Butcher
+  634,    Grounds of Valor,    4,    King Ranperre's Tomb,    Plague Bats/Rock Eater
+  635,    Grounds of Valor,    5,    King Ranperre's Tomb,    Goblin Mugger/Goblin Leecher/Goblin Gambler
+  636,    Grounds of Valor,    6,    King Ranperre's Tomb,    Ossuary Worm/Lemures
+  637,    Grounds of Valor,    7,    King Ranperre's Tomb,    Spartoi Warrior/Hati
+  638,    Grounds of Valor,    8,    King Ranperre's Tomb,    Spartoi Sorcerer/Ogre Bat
+  639,    Grounds of Valor,    1,    Dangruf Wadi,    Stone Eater Stone Eaters/Rock Lizard
+  640,    Grounds of Valor,    2,    Dangruf Wadi,    Members of the Goblin family/Wadi Crab
+  641,    Grounds of Valor,    3,    Dangruf Wadi,    Wadi Hare/Wadi Leech
+  642,    Grounds of Valor,    4,    Dangruf Wadi,    Fume Lizard/Goblin Brigand
+  643,    Grounds of Valor,    5,    Dangruf Wadi,    Witchetty Grub/Goblin Headsman
+  644,    Grounds of Valor,    6,    Dangruf Wadi,    Prim Pika/Goblin Healer
+  645,    Grounds of Valor,    7,    Dangruf Wadi,    Goblin Conjurer/Goblin Bladesmith/Goblin Bushwhacker
+  646,    Grounds of Valor,    8,    Dangruf Wadi,    Trimmer Trimmers/Natty Gibbon
+  647,    Grounds of Valor,    1,    Inner Horutoto Ruins,    Battue Bats/Goblin Thug
+  648,    Grounds of Valor,    2,    Inner Horutoto Ruins,    Blade Bat/Goblin Weaver
+  649,    Grounds of Valor,    3,    Inner Horutoto Ruins,    Battle Bat/Blob
+  650,    Grounds of Valor,    4,    Inner Horutoto Ruins,    Members of the evil weapon family/Will-o'-the-Wisp
+  651,    Grounds of Valor,    5,    Inner Horutoto Ruins,    Troika Bats/Goblin Trailblazer
+  652,    Grounds of Valor,    6,    Inner Horutoto Ruins,    Deathwatch Beetle/Goblin Flesher
+  653,    Grounds of Valor,    7,    Inner Horutoto Ruins,    Covin Bat/Skinnymalinks
+  654,    Grounds of Valor,    8,    Inner Horutoto Ruins,    Goblin Lurcher/Skinnymajinx
+  655,    Grounds of Valor,    1,    Ordelle's Caves,    Stalking Sapling/Thread Leech
+  656,    Grounds of Valor,    2,    Ordelle's Caves,    Fly Agaric/Shrieker
+  657,    Grounds of Valor,    3,    Ordelle's Caves,    Members of the Goblin family/Will-o'-the-Wisp
+  658,    Grounds of Valor,    4,    Ordelle's Caves,    Seeker Bats/Vorpal Bunny
+  659,    Grounds of Valor,    5,    Ordelle's Caves,    Ancient Bat/Jelly
+  660,    Grounds of Valor,    6,    Ordelle's Caves,    Goliath Beetle/Stroper
+  661,    Grounds of Valor,    7,    Ordelle's Caves,    Buds Bunny/Targe Beetle
+  662,    Grounds of Valor,    8,    Ordelle's Caves,    Bilis Leech/Swagger Spruce
+  663,    Grounds of Valor,    1,    Outer Horutoto Ruins,    Four of Cups/Four of Batons/Four of Swords/Four of Coins
+  664,    Grounds of Valor,    2,    Outer Horutoto Ruins,    Five of Cups/Five of Batons/Five of Swords/Five of Coins
+  665,    Grounds of Valor,    3,    Outer Horutoto Ruins,    Six of Cups/Six of Batons/Six of Swords/Six of Coins
+  666,    Grounds of Valor,    4,    Outer Horutoto Ruins,    Seven of Cups/Seven of Batons/Seven of Swords/Seven of Coins
+  667,    Grounds of Valor,    5,    Outer Horutoto Ruins,    Eight of Cups/Eight of Batons/Eight of Swords/Eight of Coins
+  668,    Grounds of Valor,    6,    Outer Horutoto Ruins,    Nine of Cups/Nine of Batons/Nine of Swords/Nine of Coins
+  669,    Grounds of Valor,    7,    Outer Horutoto Ruins,    Fetor Bats/Fuligo
+  670,    Grounds of Valor,    8,    Outer Horutoto Ruins,    Thorn Bat/Fuligo
+  671,    Grounds of Valor,    1,    The Eldieme Necropolis,    Members of the skeleton family
+  672,    Grounds of Valor,    2,    The Eldieme Necropolis,    Members of the shadow family
+  673,    Grounds of Valor,    3,    The Eldieme Necropolis,    Members of the shadow family/Azer
+  674,    Grounds of Valor,    4,    The Eldieme Necropolis,    Lich/Blood Soul
+  675,    Grounds of Valor,    5,    The Eldieme Necropolis,    Tomb Wolf/Members of the skeleton family
+  676,    Grounds of Valor,    6,    The Eldieme Necropolis,    Tomb Warrior/Tomb Mage
+  677,    Grounds of Valor,    7,    The Eldieme Necropolis,    Hellbound Warrior/Nekros Hound
+  678,    Grounds of Valor,    8,    The Eldieme Necropolis,    Hellbound Warlock/Nekros Hound
+  679,    Grounds of Valor,    1,    Gusgen Mines,    Members of the skeleton family
+  680,    Grounds of Valor,    2,    Gusgen Mines,    Fly Agaric/Members of the skeleton family
+  681,    Grounds of Valor,    3,    Gusgen Mines,    Ore Eater/Bandersnatch
+  682,    Grounds of Valor,    4,    Gusgen Mines,    Greater Pugil/Amphisbaena/Mauthe Doog
+  683,    Grounds of Valor,    5,    Gusgen Mines,    Wight/Myconid
+  684,    Grounds of Valor,    6,    Gusgen Mines,    Ghast/Gallinipper
+  685,    Grounds of Valor,    7,    Gusgen Mines,    Accursed Soldier/Rockmill
+  686,    Grounds of Valor,    8,    Gusgen Mines,    Accursed Sorcerer/Madfly
+  687,    Grounds of Valor,    1,    Crawlers' Nest,    Worker Crawler/Death Jacket
+  688,    Grounds of Valor,    2,    Crawlers' Nest,    Soldier Crawler/Nest Beetle
+  689,    Grounds of Valor,    3,    Crawlers' Nest,    Labyrinth Lizard/Witch Hazel
+  690,    Grounds of Valor,    4,    Crawlers' Nest,    Exoray/Hornfly
+  691,    Grounds of Valor,    5,    Crawlers' Nest,    Rumble Crawler/Wespe Wespes/Dragonfly
+  692,    Grounds of Valor,    6,    Crawlers' Nest,    Helm Beetle/Knight Crawler
+  693,    Grounds of Valor,    7,    Crawlers' Nest,    King Crawler/Vespo
+  694,    Grounds of Valor,    8,    Crawlers' Nest,    Dancing Jewel/Olid Funguar
+  695,    Grounds of Valor,    1,    Maze of Shakhrami,    Members of the Goblin family/Stink Bats
+  696,    Grounds of Valor,    2,    Maze of Shakhrami,    Maze Maker Maze Makers/Combat
+  697,    Grounds of Valor,    3,    Maze of Shakhrami,    Ghoul Ghouls/Carnivorous Crawler
+  698,    Grounds of Valor,    4,    Maze of Shakhrami,    Caterchipillar/Ancient Bat
+  699,    Grounds of Valor,    5,    Maze of Shakhrami,    Abyss Worm/Ancient Bat
+  700,    Grounds of Valor,    6,    Maze of Shakhrami,    Abyss Worm/Labyrinth Scorpion
+  701,    Grounds of Valor,    7,    Maze of Shakhrami,    Chaser Bats/Bleeder Leech
+  702,    Grounds of Valor,    8,    Maze of Shakhrami,    Warren Bat/Crypterpillar
+  703,    Grounds of Valor,    1,    Garlaige Citadel,    Wingrats/Members of the skeleton family
+  704,    Grounds of Valor,    2,    Garlaige Citadel,    Siege Bat/Borer Beetle
+  705,    Grounds of Valor,    3,    Garlaige Citadel,    Members of the evil weapon family/Citadel Bats
+  706,    Grounds of Valor,    4,    Garlaige Citadel,    Funnel Bats/Explosure
+  707,    Grounds of Valor,    5,    Garlaige Citadel,    Droma/Chamber Beetle
+  708,    Grounds of Valor,    6,    Garlaige Citadel,    Over Weapon/Vault Weapon/Wraith Wraiths
+  709,    Grounds of Valor,    7,    Garlaige Citadel,    Donjon Bat/Kaboom
+  710,    Grounds of Valor,    8,    Garlaige Citadel,    Fortalice Bats/Warden Beetle
+  711,    Grounds of Valor,    1,    Fei'Yin,    Vampire Bat/Drone
+  712,    Grounds of Valor,    2,    Fei'Yin,    Members of the shadow family/Ore Golem
+  713,    Grounds of Valor,    3,    Fei'Yin,    Underworld Bats/Talos
+  714,    Grounds of Valor,    4,    Fei'Yin,    Underworld Bats/Droma
+  715,    Grounds of Valor,    5,    Fei'Yin,    Underworld Bats/Colossus
+  716,    Grounds of Valor,    6,    Fei'Yin,    Killing Weapon/Hellish Weapon
+  717,    Grounds of Valor,    7,    Fei'Yin,    Balayang/Wekufe
+  718,    Grounds of Valor,    8,    Fei'Yin,    Balayang/Sentient Carafe
+  719,    Grounds of Valor,    1,    The Boyahda Tree,    Death Cap/Bark Spider
+  720,    Grounds of Valor,    2,    The Boyahda Tree,    Mourioche/Robber Crab
+  721,    Grounds of Valor,    3,    The Boyahda Tree,    Mourioche/Moss Eater
+  722,    Grounds of Valor,    4,    The Boyahda Tree,    Korrigan/Elder Goobbue
+  723,    Grounds of Valor,    5,    The Boyahda Tree,    Skimmer/Steelshell
+  724,    Grounds of Valor,    6,    The Boyahda Tree,    Processionaire/Darter
+  725,    Grounds of Valor,    7,    The Boyahda Tree,    Boyahda Sapling/Bark Tarantula
+  726,    Grounds of Valor,    8,    The Boyahda Tree,    Viseclaw/Snaggletooth Peapuk/Mourning Crawler
+  727,    Grounds of Valor,    1,    Korroloka Tunnel,    Land Worm/Seeker Bats
+  728,    Grounds of Valor,    2,    Korroloka Tunnel,    Seeker Bats/Combat
+  729,    Grounds of Valor,    3,    Korroloka Tunnel,    Huge Spider/Jelly
+  730,    Grounds of Valor,    4,    Korroloka Tunnel,    Thread Leech
+  731,    Grounds of Valor,    5,    Korroloka Tunnel,    Clipper/Greater Pugil
+  732,    Grounds of Valor,    6,    Korroloka Tunnel,    Bogy
+  733,    Grounds of Valor,    7,    Korroloka Tunnel,    Members of the Gigas family
+  734,    Grounds of Valor,    8,    Korroloka Tunnel,    Lacerator/Spool Leech
+  735,    Grounds of Valor,    1,    Kuftal Tunnel,    Robber Crab/Sand Lizard
+  736,    Grounds of Valor,    2,    Kuftal Tunnel,    Robber Crab/Haunt
+  737,    Grounds of Valor,    3,    Kuftal Tunnel,    Cave Worm/Recluse Spider
+  738,    Grounds of Valor,    4,    Kuftal Tunnel,    Robber Crab/Sabotender Sediendo
+  739,    Grounds of Valor,    5,    Kuftal Tunnel,    Kuftal Digger/Recluse Spider
+  740,    Grounds of Valor,    6,    Kuftal Tunnel,    Deinonychus/Members of the Goblin family
+  741,    Grounds of Valor,    7,    Kuftal Tunnel,    Ovinnik/Greater Cockatrice
+  742,    Grounds of Valor,    8,    Kuftal Tunnel,    Kuftal Delver Kuftal Delvers/Machairodus
+  743,    Grounds of Valor,    1,    Ve'Lugannon Palace,    arcana-type creatures
+  744,    Grounds of Valor,    2,    Ve'Lugannon Palace,    Members of the evil weapon family
+  745,    Grounds of Valor,    3,    Ve'Lugannon Palace,    Dustbuster
+  746,    Grounds of Valor,    4,    Ve'Lugannon Palace,    Caretaker
+  747,    Grounds of Valor,    5,    Ve'Lugannon Palace,    Enkidu
+  748,    Grounds of Valor,    6,    Ve'Lugannon Palace,    Members of the elemental family
+  749,    Grounds of Valor,    1,    The Shrine of Ru'Avitau,    arcana-type creatures
+  750,    Grounds of Valor,    2,    The Shrine of Ru'Avitau,    Members of the elemental family
+  751,    Grounds of Valor,    3,    The Shrine of Ru'Avitau,    Aura Pot Aura Pots
+  752,    Grounds of Valor,    4,    The Shrine of Ru'Avitau,    Members of the doll family
+  753,    Grounds of Valor,    5,    The Shrine of Ru'Avitau,    Members of the evil weapon family
+  754,    Grounds of Valor,    6,    The Shrine of Ru'Avitau,    Members of the golem family
+  755,    Grounds of Valor,    1,    Ifrit's Cauldron,    Volcano Wasp/Volcanic Gas
+  756,    Grounds of Valor,    2,    Ifrit's Cauldron,    Old Opo-opo Old Opo-opos/Volcanic Gas
+  757,    Grounds of Valor,    3,    Ifrit's Cauldron,    Members of the Goblin family/Volcanic Gas
+  758,    Grounds of Valor,    4,    Ifrit's Cauldron,    Eotyrannus/Volcanic Gas
+  759,    Grounds of Valor,    5,    Ifrit's Cauldron,    Volcanic Gas/Sulfur Scorpion
+  760,    Grounds of Valor,    6,    Ifrit's Cauldron,    Nightmare Bats/Volcanic Bomb
+  761,    Grounds of Valor,    7,    Ifrit's Cauldron,    Ash Lizard/Volcanic Bomb
+  762,    Grounds of Valor,    8,    Ifrit's Cauldron,    Hurricane Wyvern/Volcanic Bomb
+  763,    Grounds of Valor,    1,    Gustav Tunnel,    Labyrinth Lizard/Labyrinth Leech/Members of the bat family
+  764,    Grounds of Valor,    2,    Gustav Tunnel,    Hawker/Makara/Members of the Goblin family
+  765,    Grounds of Valor,    3,    Gustav Tunnel,    Robber Crab/Members of the skeleton family/Members of the Goblin family
+  766,    Grounds of Valor,    4,    Gustav Tunnel,    Doom Warlock/Demonic Pugil
+  767,    Grounds of Valor,    5,    Gustav Tunnel,    Doom Guard/Erlik
+  768,    Grounds of Valor,    6,    Gustav Tunnel,    Doom Guard/Antares
+  769,    Grounds of Valor,    7,    Gustav Tunnel,    Doom Warlock/Typhoon Wyvern
+  770,    Grounds of Valor,    8,    Gustav Tunnel,    Boulder Eater/Pygmytoise
+  771,    Grounds of Valor,    1,    Labyrinth of Onzozo,    Labyrinth Leech Labyrinth Leeches/Members of the Goblin family
+  772,    Grounds of Valor,    2,    Labyrinth of Onzozo,    Cockatrice/Members of the Goblin family
+  773,    Grounds of Valor,    3,    Labyrinth of Onzozo,    Mushussu/Cockatrice
+  774,    Grounds of Valor,    4,    Labyrinth of Onzozo,    Members of the sea monk family/Members of the Goblin family
+  775,    Grounds of Valor,    5,    Labyrinth of Onzozo,    Torama/Labyrinth Manticore
+  776,    Grounds of Valor,    6,    Labyrinth of Onzozo,    Babaulas/Boribaba
+  777,    Grounds of Valor,    1,    Lower Delkfutt's Tower,    Members of the bat family/Members of the Goblin family
+  778,    Grounds of Valor,    2,    Lower Delkfutt's Tower,    Members of the bat family/Members of the Gigas family
+  779,    Grounds of Valor,    3,    Lower Delkfutt's Tower,    Members of the bat family/Chaos Idol
+  780,    Grounds of Valor,    4,    Lower Delkfutt's Tower,    Members of the bat family/Bogy
+  781,    Grounds of Valor,    5,    Lower Delkfutt's Tower,    Members of the bat family/Members of the magic pot family
+  782,    Grounds of Valor,    1,    Middle Delkfutt's Tower,    Members of the Goblin family/Members of the bat family
+  783,    Grounds of Valor,    2,    Middle Delkfutt's Tower,    Members of the Gigas family/Members of the bat family
+  784,    Grounds of Valor,    3,    Middle Delkfutt's Tower,    Members of the Goblin family/Members of the Gigas family
+  785,    Grounds of Valor,    1,    Upper Delkfutt's Tower,    Members of the Gigas family
+  786,    Grounds of Valor,    2,    Upper Delkfutt's Tower,    Jotunn Wallkeeper/Jotunn Gatekeeper/Members of the bat family
+  787,    Grounds of Valor,    3,    Upper Delkfutt's Tower,    Jotunn Hallkeeper/Jotunn Wildkeeper/Members of the bat family
+  788,    Grounds of Valor,    4,    Upper Delkfutt's Tower,    Jotunn Gatekeeper/Jotunn Hallkeeper/arcana-type creatures
+  789,    Grounds of Valor,    5,    Upper Delkfutt's Tower,    Jotunn Wildkeeper/Jotunn Wallkeeper/arcana-type creatures
+  790,    Grounds of Valor,    1,    Temple of Uggalepih,    Members of the Tonberry family/Members of the bee family
+  791,    Grounds of Valor,    2,    Temple of Uggalepih,    Members of the Tonberry family/Rumble Crawler
+  792,    Grounds of Valor,    3,    Temple of Uggalepih,    Members of the Tonberry family/Temple Opo-opo
+  793,    Grounds of Valor,    4,    Temple of Uggalepih,    Members of the Tonberry family/Temple Bee
+  794,    Grounds of Valor,    5,    Temple of Uggalepih,    Members of the Tonberry family/Hover Tank
+  795,    Grounds of Valor,    6,    Temple of Uggalepih,    Members of the Tonberry family/Iron Maiden
+  796,    Grounds of Valor,    1,    Den of Rancor,    Dire Bat/Cave Worm
+  797,    Grounds of Valor,    2,    Den of Rancor,    Dire Bat/Mousse
+  798,    Grounds of Valor,    3,    Den of Rancor,    Members of the Tonberry family
+  799,    Grounds of Valor,    4,    Den of Rancor,    Succubus Bats/Members of the Tonberry family
+  800,    Grounds of Valor,    5,    Den of Rancor,    Million Eyes/Members of the Tonberry family
+  801,    Grounds of Valor,    6,    Den of Rancor,    Demonic Pugil/Doom Toad
+  802,    Grounds of Valor,    7,    Den of Rancor,    Tormentor/Puck Pucks
+  803,    Grounds of Valor,    8,    Den of Rancor,    Tormentor/Bullbeggar
+  804,    Grounds of Valor,    1,    Sea Serpent Grotto,    Royal Leech/Undead Bats
+  805,    Grounds of Valor,    2,    Sea Serpent Grotto,    Ironshell/Members of the skeleton family
+  806,    Grounds of Valor,    3,    Sea Serpent Grotto,    Members of the Sahagin family/Vampire Bat
+  807,    Grounds of Valor,    4,    Sea Serpent Grotto,    Members of the Sahagin family/Bigclaw
+  808,    Grounds of Valor,    5,    Sea Serpent Grotto,    Members of the Sahagin family/Grotto Pugil
+  809,    Grounds of Valor,    6,    Sea Serpent Grotto,    Robber Crab/Dire Bat
+  810,    Grounds of Valor,    7,    Sea Serpent Grotto,    Robber Crab/Devil Manta
+  811,    Grounds of Valor,    8,    Sea Serpent Grotto,    Mindgazer/Greatclaw Greatclaws
+  812,    Grounds of Valor,    1,    Quicksand Caves,    Sand Spider/Members of the Antica family
+  813,    Grounds of Valor,    2,    Quicksand Caves,    Helm Beetle/Members of the Antica family
+  814,    Grounds of Valor,    3,    Quicksand Caves,    Members of the worm family/Members of the Antica family
+  815,    Grounds of Valor,    4,    Quicksand Caves,    Members of the Antica family
+  816,    Grounds of Valor,    5,    Quicksand Caves,    Members of the sabotender family/Members of the Antica family
+  817,    Grounds of Valor,    6,    Quicksand Caves,    Sand Lizard/Members of the Antica family
+  818,    Grounds of Valor,    7,    Quicksand Caves,    Girtab/Members of the Antica family
+  819,    Grounds of Valor,    8,    Quicksand Caves,    Sand Tarantula/Members of the Antica family

@@ -215,7 +215,7 @@ INSERT INTO `traits` VALUES (14,'store tp',12,70,4,73,25,NULL,0);
 INSERT INTO `traits` VALUES (14,'store tp',12,90,5,73,30,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (15,'double attack',1,25,1,288,10,NULL,0);
 INSERT INTO `traits` VALUES (15,'double attack',1,50,2,288,12,'ROV',0);
-INSERT INTO `traits` VALUES (15,'double attack',1,75,3,288,14,'ABYSSEA',0); -- level 76 prior to ROV update (05/14/2015), set Abby tag so it's removed from 75-cap servers 
+INSERT INTO `traits` VALUES (15,'double attack',1,75,3,288,14,'ABYSSEA',0); -- level 76 prior to ROV update (05/14/2015), set Abby tag so it's removed from 75-cap servers
 INSERT INTO `traits` VALUES (15,'double attack',1,85,4,288,16,'ROV',0);
 INSERT INTO `traits` VALUES (15,'double attack',1,99,5,288,18,'ROV',0);
 INSERT INTO `traits` VALUES (16,'triple attack',6,55,1,302,5,NULL,0);
@@ -613,6 +613,12 @@ INSERT INTO `traits` VALUES (112,'elemental celerity',4,90,5,901,30,'ABYSSEA',0)
 INSERT INTO `traits` VALUES (112,'elemental celerity',21,55,1,901,10,'SOA',0);
 INSERT INTO `traits` VALUES (112,'elemental celerity',21,75,2,901,15,'SOA',0); -- level needs to be verified
 INSERT INTO `traits` VALUES (112,'elemental celerity',21,95,3,901,20,'SOA',0); -- level needs to be verified (there's possibly a 4th tier)
+INSERT INTO `traits` VALUES (113,'dead aim',11,50,1,964,10,'SOA',0);
+INSERT INTO `traits` VALUES (113,'dead aim',11,60,2,964,20,'SOA',0);
+INSERT INTO `traits` VALUES (113,'dead aim',11,70,3,964,30,'SOA',0);
+INSERT INTO `traits` VALUES (113,'dead aim',11,80,4,964,35,'SOA',0);
+INSERT INTO `traits` VALUES (113,'dead aim',11,90,5,964,40,'SOA',0);
+INSERT INTO `traits` VALUES (113,'dead aim',11,99,6,964,45,'SOA',0);
 INSERT INTO `traits` VALUES (114,'tranquil heart',3,21,1,0,0,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (114,'tranquil heart',5,26,1,0,0,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (114,'tranquil heart',20,30,1,0,0,'ABYSSEA',0);
@@ -678,7 +684,10 @@ INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,245,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,246,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,247,15,'SOA',0);
 INSERT INTO `traits` VALUES (117,'tenacity',22,95,6,248,15,'SOA',0);
-
+INSERT INTO `traits` VALUES (118,'inquartata',22,15,1,963,5,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,45,2,963,7,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,75,3,963,9,'SOA',0);
+INSERT INTO `traits` VALUES (118,'inquartata',22,90,4,963,11,'SOA',0);
 INSERT INTO `traits` VALUES (119,'curative recantation',21,75,1,970,0,'SOA',3396);
 INSERT INTO `traits` VALUES (120,'primeval zeal',21,75,1,971,0,'SOA',3398);
 

@@ -68,6 +68,8 @@ zones[tpz.zone.WINDURST_WOODS] =
         CLOUD_GOOD_TRADE             = 10109, -- Here, take 'em and scram. And don't say I ain't never did nothin' for you!
         CLOUD_BAD_ITEM               = 10110, -- What the hell is this junk!? Why don't you try bringin' what I asked for before I shove one of my sandals up your...nose!
         CHOCOBO_DIALOG               = 10404, -- Kweh!
+        TRRRADE_IN_SPARKS            = 13821, -- You want to trrrade in sparks, do you?
+        NOT_ENOUGH_SPARKS            = 13841, -- You do not possess enough sparks of eminence to complete the transaction.
     },
     mob =
     {

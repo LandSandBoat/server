@@ -116,6 +116,9 @@
     <ClInclude Include="..\..\src\map\mob_modifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\packet_guard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\packet_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -213,6 +216,9 @@
       <Filter>Header Files\items</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\items\item_currency.h">
+      <Filter>Header Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\items\item_flowerpot.h">
       <Filter>Header Files\items</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\items\item_furnishing.h">
@@ -338,6 +344,9 @@
     <ClInclude Include="..\..\src\map\packets\entity_update.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\entity_enable_list.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\packets\event.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
@@ -413,6 +422,15 @@
     <ClInclude Include="..\..\src\map\packets\release.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\roe_questlog.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\roe_sparkupdate.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\roe_update.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\packets\server_ip.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
@@ -438,6 +456,9 @@
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\synth_message.h">
+      <Filter>Header Files\packets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\timer_bar_util.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\treasure_find_item.h">
@@ -662,6 +683,9 @@
     <ClInclude Include="..\..\src\map\utils\fishingutils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\utils\gardenutils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\map\utils\guildutils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -769,6 +793,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\map\lua\lua_instance.h">
       <Filter>Header Files\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\map\packets\independant_animation.h">
+      <Filter>Header Files\packets</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\map\packets\instance_entry.h">
       <Filter>Header Files\packets</Filter>
@@ -890,6 +917,9 @@
     <ClInclude Include="..\..\src\map\packets\trust_sync.h">
       <Filter>Header Files\packets</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\map\notoriety_container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\map\ability.cpp">
@@ -914,6 +944,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\modifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packet_guard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packet_system.cpp">
@@ -986,6 +1019,9 @@
       <Filter>Source Files\items</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\items\item_currency.cpp">
+      <Filter>Source Files\items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\items\item_flowerpot.cpp">
       <Filter>Source Files\items</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\items\item_furnishing.cpp">
@@ -1108,6 +1144,9 @@
     <ClCompile Include="..\..\src\map\packets\entity_update.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\entity_enable_list.cpp">
+      <Filter>Source Files\packets</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\map\packets\event.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
@@ -1183,6 +1222,15 @@
     <ClCompile Include="..\..\src\map\packets\release.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\roe_questlog.cpp">
+      <Filter>Header Files\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\roe_sparkupdate.cpp">
+      <Filter>Header Files\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\roe_update.cpp">
+      <Filter>Header Files\packets</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\map\packets\server_ip.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
@@ -1208,6 +1256,9 @@
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\synth_message.cpp">
+      <Filter>Source Files\packets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\timer_bar_util.cpp">
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\treasure_find_item.cpp">
@@ -1432,6 +1483,9 @@
     <ClCompile Include="..\..\src\map\utils\fishingutils.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\map\utils\gardenutils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\map\utils\guildutils.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
@@ -1515,6 +1569,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\map\lua\lua_instance.cpp">
       <Filter>Source Files\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\packets\independant_animation.cpp">
+      <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\packets\instance_entry.cpp">
       <Filter>Source Files\packets</Filter>
@@ -1631,6 +1688,9 @@
       <Filter>Source Files\packets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\map\timetriggers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\map\notoriety_container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

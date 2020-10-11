@@ -2,7 +2,8 @@
 -- Area: Giddeus (145)
 --   NM: Hoo Mjuu the Torrent
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")};
+require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 
 function onMobSpawn(mob)
@@ -12,7 +13,8 @@ function onMobSpawn(mob)
             {id = tpz.jsa.BENEDICTION, hpp = math.random(10, 50)},
         },
     })
-end;
+end
 
 function onMobDeath(mob, player, isKiller)
-end;
+    tpz.hunts.checkHunt(mob, player, 281)
+end

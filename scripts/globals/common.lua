@@ -28,7 +28,7 @@ end
 --  printf
 -----------------------------------
 
-function printf(s,...)
+function printf(s, ...)
     print(s:format(...))
 end
 
@@ -46,29 +46,10 @@ end
 
 -----------------------------------
 --  getMidnight
---  Returns midnight for the current day in epoch format
+--  Returns the next upcoming JST midnight
 -----------------------------------
 
-function getMidnight(day)
-    -- Get time, because this is going to get ugly.  Using ! for UTC won't work where we're going.
-    local hometime = os.date("*t")
-    if day ~= nil then
-        hometime = os.date("*t", day)
-    end
-    -- Set to 24:00 to get end of the day.
-    local midnight = os.time{year=hometime.year, month=hometime.month, day=hometime.day, hour=24}
-    -- And determine the timezone in seconds, because we'll need that to get UTC and LUA doesn't make it easy.
-    local timezone = os.difftime(os.time(), os.time(os.date("!*t")))
-
-    -- Midnight adjusted for timezone, then timezone offset * 3600 to get us where we want to be.
-    local finaltime = midnight + timezone - (TIMEZONE_OFFSET * 3600)
-    -- And make sure that the offset midnight isn't already passed
-    if day ~= nil and finaltime <= day or day == nil and finaltime <= os.time() then
-        finaltime = finaltime + 86400
-    end
-
-    return finaltime
-end
+getMidnight = JstMidnight
 
 -----------------------------------
 --  getVanaMidnight(day)

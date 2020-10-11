@@ -2,6 +2,7 @@
 -- Area: Jugner_Forest_[S]
 --   NM: Boll Weevil
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
 
@@ -14,6 +15,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 483)
 end
 
 function onMobDespawn(mob)

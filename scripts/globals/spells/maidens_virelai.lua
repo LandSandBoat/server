@@ -8,7 +8,7 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------------
 
-function onMagicCastingCheck(caster,target,spell)
+function onMagicCastingCheck(caster, target, spell)
     if (caster:getPet() ~= nil) then
         return tpz.msg.basic.ALREADY_HAS_A_PET
     elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
@@ -22,7 +22,7 @@ function onMagicCastingCheck(caster,target,spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+function onSpellCast(caster, target, spell)
     local dCHR = (caster:getStat(tpz.mod.CHR) - target:getStat(tpz.mod.CHR))
     local bonus = 0 -- No idea what value, but seems likely to need this edited later to get retail resist rates.
     local params = {}

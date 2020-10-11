@@ -82,7 +82,7 @@ std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE> g_SkillRanks;
 std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList;           // Holds all Weapon skills
-std::array<CMobSkill*, 4096> g_PMobSkillList;                   // List of mob skills
+std::array<CMobSkill*, MAX_MOBSKILL_ID> g_PMobSkillList;                   // List of mob skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 std::unordered_map<uint16, std::vector<uint16>>  g_PMobSkillLists;  // List of mob skills defined from mob_skill_lists.sql
@@ -1480,7 +1480,7 @@ namespace battleutils
         if (isCritical)
         {
             pdif *= 1.25;
-            int16 criticaldamage = PAttacker->getMod(Mod::CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
+            int16 criticaldamage = PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pdif *= ((100 + criticaldamage) / 100.0f);
         }
@@ -1723,6 +1723,10 @@ namespace battleutils
                     parryRate = parryRate + issekiganBonus;
                 }
 
+                // Inquartata grants a flat parry rate bonus.
+                int16 inquartataBonus = PDefender->getMod(Mod::INQUARTATA);
+                parryRate += inquartataBonus;
+
                 return parryRate;
             }
         }
@@ -1771,7 +1775,7 @@ namespace battleutils
     *                                                                       *
     ************************************************************************/
 
-    int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked, uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter)
+    int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked, uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter, bool isCovered, CBattleEntity* POriginalTarget)
     {
         auto weapon = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         giveTPtoAttacker = giveTPtoAttacker && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI);
@@ -1801,11 +1805,11 @@ namespace battleutils
             if (isRanged)
             {
                 attackType = ATTACK_RANGED;
-                damage = RangedDmgTaken(PDefender, damage, damageType);
+                damage = RangedDmgTaken(PDefender, damage, damageType, isCovered);
             }
             else
             {
-                damage = PhysicalDmgTaken(PDefender, damage, damageType);
+                damage = PhysicalDmgTaken(PDefender, damage, damageType, isCovered);
             }
 
             //absorb mods are handled in the above functions, but they do not affect counters
@@ -1933,7 +1937,10 @@ namespace battleutils
                 case TYPE_PC:
                     if (PAttacker->objtype == TYPE_MOB)
                     {
-                        ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                        if (isCovered)
+                            ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromCover(POriginalTarget, PDefender);
+                        else
+                            ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
                     }
                     break;
                 default:
@@ -1990,10 +1997,12 @@ namespace battleutils
             if (giveTPtoVictim)
             {
                 //account for attacker's subtle blow which reduces the baseTP gain for the defender
-                float sBlowMult = ((100.0f - std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), 0.0f, 50.0f)) / 100.0f);
+                float sBlow1 = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
+                float sBlow2 = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
+                float sBlowMult = ((100.0f - std::clamp((float)(sBlow1 + sBlow2), -75.0f, 75.0f)) / 100.0f);
 
                 //mobs hit get basetp+30 whereas pcs hit get basetp/3
-                if (PDefender->objtype == TYPE_PC)
+                if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
                 {
                     PDefender->addTP((int16)(tpMultiplier * ((baseTp / 3) * sBlowMult * (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))))); //yup store tp counts on hits taken too!
                 }
@@ -2008,6 +2017,7 @@ namespace battleutils
             PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
 
         return damage;
+
     }
 
     /************************************************************************
@@ -2115,7 +2125,9 @@ namespace battleutils
             }
 
             //account for attacker's subtle blow which reduces the baseTP gain for the defender
-            float sBlowMult = ((100.0f - std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), 0.0f, 50.0f)) / 100.0f);
+            float sBlow1 = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
+            float sBlow2 = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
+            float sBlowMult = ((100.0f - std::clamp((float)(sBlow1 + sBlow2), -75.0f, 75.0f)) / 100.0f);
 
             //mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC)
@@ -2328,7 +2340,7 @@ namespace battleutils
 
         if (PAttacker->objtype == TYPE_PC)
         {
-            ratioCap = 2.25f;
+            ratioCap = isCritical ? 3 : 2.25f;
         }
         if (PAttacker->objtype == TYPE_MOB)
         {
@@ -4245,7 +4257,7 @@ namespace battleutils
         return damage;
     }
 
-    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, int16 damageType)
+    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, int16 damageType, bool IsCovered)
     {
         float resist = 1.f + PDefender->getMod(Mod::UDMGPHYS) / 100.f;
         resist = std::max(resist, 0.f);
@@ -4270,16 +4282,16 @@ namespace battleutils
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
-            int16 absorbedMP = (int16)(damage * (PDefender->getMod(Mod::ABSORB_DMG_TO_MP) + PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP)) / 100);
-            if (absorbedMP > 0)
-                PDefender->addMP(absorbedMP);
+            
+            ConvertDmgToMP(PDefender, damage, IsCovered);
+
             damage = HandleFanDance(PDefender, damage);
         }
 
         return damage;
     }
 
-    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, int16 damageType)
+    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, int16 damageType, bool IsCovered)
     {
         float resist = 1.0f + PDefender->getMod(Mod::UDMGRANGE) / 100.f;
         resist = std::max(resist, 0.f);
@@ -4305,9 +4317,9 @@ namespace battleutils
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
-            int16 absorbedMP = (int16)(damage * (PDefender->getMod(Mod::ABSORB_DMG_TO_MP) + PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP)) / 100);
-            if (absorbedMP > 0)
-                PDefender->addMP(absorbedMP);
+
+            ConvertDmgToMP(PDefender, damage, IsCovered);
+
             damage = HandleFanDance(PDefender, damage);
         }
 
@@ -5634,5 +5646,133 @@ namespace battleutils
             default:
                 return DAMAGE_NONE;
         }
+    }
+
+    CBattleEntity* GetCoverAbilityUser(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PMob)
+    {
+        CBattleEntity* PCoverAbilityUser = nullptr;
+        uint32 coverAbilityTargetID      = PCoverAbilityTarget->id;
+
+        //If the cover ability target is in a party, try to find a cover ability user
+        if (PCoverAbilityTarget->PParty != nullptr)
+        {
+            for (uint8 i = 0; i < PCoverAbilityTarget->PParty->members.size(); ++i)
+            {
+                CBattleEntity* member = PCoverAbilityTarget->PParty->members.at(i);
+
+                if (coverAbilityTargetID == member->GetLocalVar("COVER_ABILITY_TARGET") &&
+                    member->StatusEffectContainer->HasStatusEffect(EFFECT_COVER) &&
+                    member->isAlive())
+                {
+                    PCoverAbilityUser = member;
+                    break;
+                }
+            }
+
+            if (PCoverAbilityUser != nullptr)
+            {
+                float coverAbilityTargetX  = PCoverAbilityTarget->loc.p.x;
+                float coverAbilityTargetZ  = PCoverAbilityTarget->loc.p.z;
+                float mobX                 = PMob->loc.p.x;
+                float mobZ                 = PMob->loc.p.z;
+
+                float xdif      = coverAbilityTargetX - mobX;
+                float zdif      = coverAbilityTargetZ - mobZ;
+                float slope     = 0;
+                float maxSlope  = 0;
+                float minSlope  = 0;
+                bool zDependent = true; //using a slope where z is dependent var
+
+                if (abs(xdif) <= abs(zdif))
+                {
+                    slope = xdif / zdif;
+
+                    float angle = (float)atan((double)1) * 2 - atan(slope);
+
+                    float zoffset   = cos(angle) / 2;
+                    float xoffset   = sin(angle) / 2;
+                    float maxXpoint = mobX + xoffset;
+                    float maxZpoint = mobZ - zoffset;
+                    float minXpoint = mobX - xoffset;
+                    float minZpoint = mobZ + zoffset;
+
+                    maxSlope = ((maxXpoint - coverAbilityTargetX) / (maxZpoint - coverAbilityTargetZ));
+                    minSlope = ((minXpoint - coverAbilityTargetX) / (minZpoint - coverAbilityTargetZ));
+
+                    zDependent = false;
+                }
+                else
+                {
+                    slope = zdif / xdif;
+
+                    float angle = (float)atan((double)1) * 2 - atan(slope);
+
+                    float xoffset   = cos(angle) / 2;
+                    float zoffset   = sin(angle) / 2;
+                    float maxXpoint = mobX - xoffset;
+                    float maxZpoint = mobZ + zoffset;
+                    float minXpoint = mobX + xoffset;
+                    float minZpoint = mobZ - zoffset;
+
+                    maxSlope = (maxZpoint - coverAbilityTargetZ) / (maxXpoint - coverAbilityTargetX);
+                    minSlope = (minZpoint - coverAbilityTargetZ) / (minXpoint - coverAbilityTargetX);
+                }
+
+                if (distance(PCoverAbilityUser->loc.p, PMob->loc.p) <= (float)PMob->GetMeleeRange() &&                   //make sure cover user is within melee range
+                   distance(PCoverAbilityUser->loc.p, PMob->loc.p) <= distance(PCoverAbilityTarget->loc.p, PMob->loc.p)) //make sure cover user is closer to the mob than cover target
+                {
+                    float coverAbilityUserXdif = PCoverAbilityUser->loc.p.x - coverAbilityTargetX;
+                    float coverAbilityUserZdif = PCoverAbilityUser->loc.p.z - coverAbilityTargetZ;
+                    if (zDependent)
+                    {
+                        if ((coverAbilityUserZdif <= coverAbilityUserXdif * maxSlope) &&
+                            (coverAbilityUserZdif >= coverAbilityUserXdif * minSlope))
+                        {
+                            return PCoverAbilityUser;
+                        }
+                    }
+                    else
+                    {
+                        if ((coverAbilityUserXdif <= coverAbilityUserZdif * maxSlope) &&
+                            (coverAbilityUserXdif >= coverAbilityUserZdif * minSlope))
+                        {
+                            return PCoverAbilityUser;
+                        }
+                    }
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    bool IsMagicCovered(CCharEntity* PCoverAbilityUser)
+    {
+        if (PCoverAbilityUser != nullptr &&
+            PCoverAbilityUser->getMod(Mod::COVER_MAGIC_AND_RANGED) == 1)
+            {
+                return true;
+            }
+        return false;
+    }
+
+    void ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered)
+    {
+        double dmgToMPMods = 0.0;
+
+        //If attack was covered, get cover ability user's COVER_TO_MP mod
+        if (IsCovered)
+            dmgToMPMods += PDefender->getMod(Mod::COVER_TO_MP);
+
+        //Get ABSORB_DMG_TO_MP mod
+        dmgToMPMods += PDefender->getMod(Mod::ABSORB_DMG_TO_MP);
+
+        //Get ABSORB_PHYSDMG_TO_MP mod
+        dmgToMPMods += PDefender->getMod(Mod::ABSORB_PHYSDMG_TO_MP);
+
+        //Calculate final absorbed MP
+        int16 absorbedMP = static_cast<int16>(damage * (dmgToMPMods / 100.0));
+
+        if (absorbedMP > 0)
+            PDefender->addMP(absorbedMP);
     }
 };

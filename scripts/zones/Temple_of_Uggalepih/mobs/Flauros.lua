@@ -2,6 +2,7 @@
 -- Area: Temple of Uggalepih
 --   NM: Flauros
 -----------------------------------
+require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
@@ -15,4 +16,5 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 384)
 end

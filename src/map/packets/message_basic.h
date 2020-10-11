@@ -88,6 +88,10 @@ enum MSGBASIC_ID : uint16
 	MSGBASIC_CANNOT_USE_ITEM_ON		= 92,  /* Cannot use the <item> on <target>. */
 	MSGBASIC_ITEM_FAILS_TO_ACTIVATE = 62,  /* The <item> fails to activate. */
 	MSGBASIC_FULL_INVENTORY         = 356, /* Cannot execute command. Your inventory is full. */
+	/* Gardening */
+	MSGBASIC_GARDENING_SEED_SOWN    = 256, /* In this flower pot: Seeds sown: <item>*/
+	MSGBASIC_GARDENING_CRYSTAL_NONE = 257, /* Crystal used: none*/
+	MSGBASIC_GARDENING_CRYSTAL_USED = 258, /* Crystal used: <item>*/ 
 	/* Ranged */
 	MSGBASIC_NO_RANGED_WEAPON		= 216, /* You do not have an appropriate ranged weapon equipped. */
 	MSGBASIC_CANNOT_SEE				= 217, /* You cannot see <target>. */
@@ -126,6 +130,10 @@ enum MSGBASIC_ID : uint16
 	MSGBASIC_TREASURE_HUNTER_UP		= 603,  /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
 	/* DNC */
 	MSGBASIC_NO_FINISHINGMOVES		= 524,
+	/* ROE */
+	MSGBASIC_ROE_START              = 704,
+	MSGBASIC_ROE_RECORD             = 697, // Records of Eminence: <record>.
+	MSGBASIC_ROE_PROGRESS           = 698, // Progress: <amount>/<amount>.
 
 	/* DEBUG MESSAGES */
 	MSGBASIC_DEBUG_RESISTED_SPELL	= 66, /* Debug: Resisted spell! */

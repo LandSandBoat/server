@@ -3,6 +3,7 @@
 --   NM: Barbaric Weapon
 -- TODO: "Gains a Dread Spikes effect whenever Whirl of Rage is used."
 -----------------------------------
+require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -11,4 +12,5 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
+    tpz.hunts.checkHunt(mob, player, 318)
 end
