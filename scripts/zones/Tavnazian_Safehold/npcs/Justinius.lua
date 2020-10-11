@@ -14,12 +14,15 @@ end
 function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(COP)
     local missionStatus = player:getCharVar("PromathiaStatus")
+    local missions = tpz.mission.id.cop
 
-    if currentMission == tpz.mission.id.cop.DISTANT_BELIEFS and missionStatus == 3 then
+    if currentMission == missions.DISTANT_BELIEFS and missionStatus == 3 then
         player:startEvent(113)
-    elseif currentMission == tpz.mission.id.cop.SHELTERING_DOUBT and missionStatus == 2 then
+    elseif currentMission == missions.AN_ETERNAL_MELODY and missionStatus == 1 then
+        player:startEvent(127)
+    elseif currentMission == missions.SHELTERING_DOUBT and missionStatus == 2 then
         player:startEvent(109)
-    elseif currentMission == tpz.mission.id.cop.THE_SAVAGE and missionStatus == 2 then
+    elseif currentMission == missions.THE_SAVAGE and missionStatus == 2 then
         player:startEvent(110)
     else
         player:startEvent(123)
