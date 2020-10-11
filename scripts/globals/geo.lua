@@ -20,6 +20,8 @@ tpz.geo.spawnLuopan = function(player, target, aura_effect, tick_effect, tick_po
     luopan:setLocalVar("MP_COST", spell:getMPCost())
 
     -- Change the luopans appearance to match the effect
+    -- TODO: This is should be the element of the spell being cast added as an offset
+    --       on top of a base model ID in core.
     local modelID = aura_effect
     luopan:setModelId(modelID)
 
