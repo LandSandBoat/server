@@ -42,24 +42,24 @@ function onTrigger(player, npc)
 
     -- San d'Oria Missions
     elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local missions = tpz.mission.id.sandoria
+        local sandyMissions = tpz.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional)
-        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 then
+        if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 then
             player:startEvent(3)
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
             player:getRank() == 9 and player:getRankPoints() == 0 and
-            player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+            player:hasCompletedMission(SANDORIA, sandyMissions.LIGHTBRINGER) and
             (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
         then
             player:startEvent(63)
 
         -- San d'Oria 6-2 "Ranperre's Final Rest"
-        elseif currentMission == missions.RANPERRE_S_FINAL_REST then
+        elseif currentMission == sandyMissions.RANPERRE_S_FINAL_REST then
             if missionStatus == 7 then
                 player:startEvent(79) -- optional
             elseif missionStatus == 5 then
@@ -69,18 +69,18 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 5-2 "The Shadow Lord"
-        elseif currentMission == missions.THE_SHADOW_LORD and missionStatus == 1 then
+        elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 1 then
             player:startEvent(547)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
-            currentMission ~= missions.THE_SHADOW_LORD
+            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(115)
 
         -- San d'Oria 3-1 "Infiltrate Davoi"
-        elseif currentMission == missions.INFILTRATE_DAVOI then
+        elseif currentMission == sandyMissions.INFILTRATE_DAVOI then
             if missionStatus == 4 then
                 player:startEvent(554, 0, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
             elseif missionStatus == 0 then

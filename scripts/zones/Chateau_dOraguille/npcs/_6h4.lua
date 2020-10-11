@@ -14,18 +14,18 @@ end
 
 function onTrigger(player, npc)
 
-    -- This NPC is relevant only to San d'Orians on missions apart from default
+    -- This NPC is relevant only to San d'Orians on missions
     if player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local missions = tpz.mission.id.sandoria
+        local sandyMissions = tpz.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San D'Oria 9-2 "The Heir to the Light"
-        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus == 5 then
+        if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus == 5 then
             player:startEvent(8)
 
         -- San D'Oria 9-1 "Breaking Barriers"
-        elseif currentMission == missions.BREAKING_BARRIERS and (missionStatus == 4 or missionStatus == 0) then
+        elseif currentMission == sandyMissions.BREAKING_BARRIERS and (missionStatus == 4 or missionStatus == 0) then
             if missionStatus == 4 then
                 if
                     player:hasKeyItem(tpz.ki.FIGURE_OF_TITAN) and
@@ -39,7 +39,7 @@ function onTrigger(player, npc)
             end
 
         -- San D'Oria 8-2 "Lightbringer"
-        elseif currentMission == missions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 0) then
+        elseif currentMission == sandyMissions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 0) then
             if missionStatus == 6 then
                 player:startEvent(104)
             else
@@ -47,15 +47,15 @@ function onTrigger(player, npc)
             end
 
         -- San D'Oria 6-1 "Leaute's Last Wishes"
-        elseif currentMission == missions.LEAUTE_S_LAST_WISHES and missionStatus == 1 then
+        elseif currentMission == sandyMissions.LEAUTE_S_LAST_WISHES and missionStatus == 1 then
             player:startEvent(87)
 
         -- San D'Oria 5-2 "The Shadow Lord"
-        elseif currentMission == missions.THE_SHADOW_LORD and missionStatus == 5 then
+        elseif currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 5 then
             player:startEvent(61)
 
         -- San D'Oria 3-3 "Appointment to Jeuno"
-        elseif currentMission == missions.APPOINTMENT_TO_JEUNO and missionStatus == 2 then
+        elseif currentMission == sandyMissions.APPOINTMENT_TO_JEUNO and missionStatus == 2 then
             player:startEvent(537)
 
         -- Default
