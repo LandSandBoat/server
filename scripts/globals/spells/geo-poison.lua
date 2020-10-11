@@ -23,5 +23,5 @@ function onSpellCast(caster, target, spell)
         power = 1
     end
 
-    tpz.geo.spawnLuopan(caster, target, 2863, tpz.effect.POISON_II, power, tpz.auraTarget.ENEMIES, spellCost)
+    tpz.geo.spawnLuopan(caster, target, 2863, tpz.effect.GEO_POISON, power, tpz.auraTarget.ENEMIES, spellCost)
 end
