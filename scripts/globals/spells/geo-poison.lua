@@ -17,11 +17,10 @@ end
 
 function onSpellCast(caster, target, spell)
     local geo_skill = caster:getCharSkillLevel(tpz.skill.GEOMANCY)
-    local spellCost = spell:getMPCost()
     local power = (geo_skill / 30) / 10
     if power < 1 then
         power = 1
     end
 
-    tpz.geo.spawnLuopan(caster, target, 2863, tpz.effect.GEO_POISON, power, tpz.auraTarget.ENEMIES, spellCost)
+    tpz.geo.spawnLuopan(caster, target, 2863, tpz.effect.GEO_POISON, power, tpz.auraTarget.ENEMIES, spell)
 end

@@ -1731,12 +1731,8 @@ namespace petutils
         else if (PPet->getPetType() == PETTYPE_LUOPAN && PMaster->objtype == TYPE_PC)
         {
             PPet->SetMLevel(PMaster->GetMLevel());
-            PPet->addModifier(Mod::DMG, -50);
-            PPet->setEntityFlags(131);
             PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
-            PPet->addModifier(Mod::REGEN_DOWN, PPet->GetMLevel() / 4);
             PPet->health.hp = PPet->health.maxhp;
-            PPet->PAI->GetController()->SetWeaponSkillEnabled(true);
 
             // Just sit, do nothing
             PPet->speed = 0;
