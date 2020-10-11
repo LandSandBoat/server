@@ -46,15 +46,24 @@ function onTrigger(player, npc)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.EASTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
         player:startEvent(565)
     elseif (pNation == tpz.nation.SANDORIA) then
-        -- Mission San D'Oria 9-2 The Heir to the Light
-        if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)) then
+        -- Rank 10 default dialogue
+        if player:getRank() == 10 then
             player:startEvent(31)
+        -- Mission San D'Oria 9-2 The Heir to the Light
         elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 7) then
             player:startEvent(9)
-        elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 6) then
+        elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 5) then
             player:startEvent(30)
-        elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus >= 2 and MissionStatus <=5) then
+        elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 4) then
+            player:showText(npc, ID.text.HEIR_TO_LIGHT_EXTRA)
+        elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 1) then
             player:startEvent(29)
+        -- Mission San d'Oria 9-1 Lightbringer (optional)
+        elseif (currentMission == tpz.mission.id.sandoria.BREAKING_BARRIERS and MissionStatus == 1) then
+            player:startEvent(1)
+        -- Mission San d'Oria 8-2 Lightbringer (optional)
+        elseif (currentMission == tpz.mission.id.sandoria.LIGHTBRINGER and MissionStatus == 6) then
+            player:showText(npc, ID.text.LIGHTBRINGER_EXTRA)
         -- Mission San d'Oria 8-1 Coming of Age --
         elseif (currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 3 and player:hasKeyItem(tpz.ki.DROPS_OF_AMNIO)) then
             player:startEvent(102)
@@ -95,6 +104,9 @@ function onTrigger(player, npc)
             player:startEvent(505)
         elseif (currentMission == tpz.mission.id.sandoria.JOURNEY_ABROAD) then
             player:startEvent(532)
+        -- Default dialogue
+        else
+            player:startEvent(577)
         end
     elseif (pNation == tpz.nation.BASTOK) then
         -- Bastok 2-3 San -> Win
