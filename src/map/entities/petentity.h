@@ -26,15 +26,14 @@
 
 enum PETTYPE
 {
-    PETTYPE_AVATAR            = 0,
-    PETTYPE_WYVERN            = 1,
-    PETTYPE_JUG_PET           = 2,
-    PETTYPE_CHARMED_MOB       = 3,
-    PETTYPE_AUTOMATON         = 4,
-    PETTYPE_ADVENTURING_FELLOW= 5,
-    PETTYPE_CHOCOBO           = 6,
-    PETTYPE_LUOPAN            = 7,
-
+    PETTYPE_AVATAR             = 0,
+    PETTYPE_WYVERN             = 1,
+    PETTYPE_JUG_PET            = 2,
+    PETTYPE_CHARMED_MOB        = 3,
+    PETTYPE_AUTOMATON          = 4,
+    PETTYPE_ADVENTURING_FELLOW = 5,
+    PETTYPE_CHOCOBO            = 6,
+    PETTYPE_LUOPAN             = 7,
 };
 
 enum WYVERNTYPE
