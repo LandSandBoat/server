@@ -75,25 +75,41 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
+    
+    -- "Crying over Onions"
     if csid == 774 then
         player:setCharVar("CryingOverOnions", 1)
     elseif csid == 775 and npcUtil.giveItem(player, 13136) then
         player:confirmTrade()
         player:setCharVar("CryingOverOnions", 3)
-    elseif csid == 776 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS, {
-        fame=120,
-        var="CryingOverOnions"
-    }) then
+    elseif
+        csid == 776 and
+        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS, {
+            fame=120,
+            var="CryingOverOnions",
+        })
+    then
         player:needToZone(true)
+
+    -- "Wild Card"
     elseif csid == 780 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.WILD_CARD)
-    elseif csid == 782 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {
-        title=tpz.title.DREAM_DWELLER, fame=135, var="WildCard"
-    }) then
+    elseif
+        csid == 782 and
+        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {
+            title=tpz.title.DREAM_DWELLER,
+            fame=135,
+            var="WildCard",
+        })
+    then
         player:needToZone(true)
+
+    -- "Hat in Hand"
     elseif csid == 59 then -- Show Off Hat
         player:addCharVar("QuestHatInHand_var", 2)
         player:addCharVar("QuestHatInHand_count", 1)
+
+    -- COP Misson 3-3B "Memories of a Maiden"
     elseif csid == 874 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 6)
         npcUtil.giveKeyItem(player, tpz.ki.CRACKED_MIMEO_MIRROR)
