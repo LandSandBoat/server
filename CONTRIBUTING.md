@@ -13,7 +13,7 @@ All contributions must be done through pull requests to the Topaz repository.  W
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 
-Please try to leave your PR alone after submission, unless it's to fix bugs you've noticed, or if we've requested changes. If you're still pushing commits after opening the PR, it makes it hard for reviewers to know when you're "finished" and if it's "safe" to begin their reviews.
+Please try to leave your PR alone after submission, unless it's to fix bugs you've noticed, or if we've requested changes. If you're still pushing commits after opening the PR, it makes it hard for reviewers to know when you're "finished" and if it's "safe" to begin their reviews. If you do want to push early for reviews of your in-progress work, you can open your PR as a "draft".
 
 After a pull request is made, if a staff member leaves feedback for you to change, you must either fix or address it for your pull request to be merged.
 
@@ -21,8 +21,9 @@ If you do not fill the checkboxes confirming that you agree to Project Topaz's L
 
 # Workflow Guide
 
+* It is **always** better to come into Discord and ask a question instead of investing a lot of time in work that we're going to ask your to rewrite or split up.
 * Cite your sources for things that aren't obvious. This can be comments in your code, or your commit messages. Pull Request descriptions and comments will get lost over time, information in the repo lasts forever.
-* If you're commiting work on someone else's behalf, use the `--author` tag so they get the credit they deserve.
+* If you're commiting work on someone else's behalf, use git's `--author` argument so they get the credit they deserve.
 * Make your commit messages meaningful, or amend/rebase once you're ready to push.
 
 # Style Guide
@@ -46,12 +47,12 @@ Clang-Format is also an option for C++
 
 ## General code guidlines (all languages):
 
+* Your code should strive to be obvious and readable by the casual observer. You aren't going to be the only person who reads/debugs your code.
 * Unix (LF) line ends, GitHub will tell you if you don't have one by putting a ⛔ symbol at the end of your file.
 * Try not to exceed 120 chars width. Exceptions will occur, but try.
 * 4 space indent (death to tabs)
 * No using tabs for alignment either.
 * Trim trailing whitespace.
-
 
 ## C++
 
@@ -77,9 +78,6 @@ if (x == 5)
 if (x == 5) {
     function();
 }
-
-// Sometimes ❓
-if (x == 5) { tinyFunction(); }
 ```
 
 `BreakConstructorInitializers: BeforeComma` & `ConstructorInitializerIndentWidth: 0`
@@ -229,6 +227,14 @@ if (x == 5)
 // Wrong ❌
 if (x == 5)
     function();
+
+// Wrong ❌
+if (x == 5)
+    function(21);
+else
+{
+    function(42);
+}
 ```
 
 ### C++ Misc & Naming
@@ -251,6 +257,12 @@ auto isEntityAlive = [&](CBigEntity* entity) -> bool
 {
     return entity->isAlive;
 };
+
+// Correct ✔️ 
+static_cast<CCharEntity>(PPlayer)->ForParty([&](CBattleEntity* entity)
+{
+    entity->doStuff();
+});
 
 // Wrong ❌
 auto isEntityAlive =
@@ -320,7 +332,7 @@ if (condition1 == 1) then
 end
 ```
 
-`No semicolons unless multiple statements on a single line`
+`No semicolons`
 ```lua
 -- Correct ✔️ 
 local x = 42
@@ -330,8 +342,8 @@ trigger(42)
 local x = 42;
 trigger(42);
 
--- Rarely ❓
-local x = 42; trigger(42)
+-- Wrong ❌
+local x = 42; trigger(42);
 ```
 
 `Formatting Conditional Blocks`
@@ -390,8 +402,28 @@ then
 end
 ```
 
+`Inline tables`
+
+**THIS IS THE ONE EXCEPTION TO THE GLOBAL NEWLINE-BRACE RULES** 
+```lua
+-- Correct ✔️ 
+tpz.func({
+  entry = 1,
+  entry = 2,
+})
+
+-- Wrong ❌
+tpz.func(
+    {
+        entry = 1,
+        entry = 2,
+    }
+)
+```
+
 ### Lua Misc & Naming
 * Our lua functions are typically lowerCamelCased, with few exceptions.
+* Make sure you check out `scripts/globals/npc_util.lua` for useful tools and helpers.
 * If you're going to cache a long table entry into a var with a shorter name, make sure that name still conveys the original meaning.
 ```lua
 -- Correct ✔️ 
