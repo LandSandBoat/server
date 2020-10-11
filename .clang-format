@@ -8,6 +8,7 @@ ConstructorInitializerIndentWidth: 0
 Cpp11BracedListStyle: 'false'
 IndentCaseLabels: 'true'
 IndentWidth: 4
+KeepEmptyLinesAtTheStartOfBlocks: 'false'
 Language: Cpp
 PointerAlignment: Left
 SortIncludes: 'true'

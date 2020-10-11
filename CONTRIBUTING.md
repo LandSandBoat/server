@@ -155,6 +155,22 @@ if (func())
 }
 ```
 
+`KeepEmptyLinesAtTheStartOfBlocks: 'false'`
+```cpp
+// Correct ✔️ 
+void function(int x)
+{
+    doSomething(x);
+}
+
+// Wrong ❌
+void function(int x)
+{
+
+    doSomething(x);
+}
+```
+
 `Language: Cpp`
 
 Yup.
