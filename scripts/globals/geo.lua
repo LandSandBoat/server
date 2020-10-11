@@ -8,7 +8,7 @@ require("scripts/globals/status")
 tpz = tpz or {}
 tpz.geo = tpz.geo or {}
 
-tpz.geo.spawnLuopan = function(player, target, aura_effect, tick_effect, tick_power, target_type, spell)
+tpz.geo.spawnLuopan = function(player, target, modelID, tick_effect, tick_power, target_type, spell)
 
     tpz.pet.spawnPet(player, tpz.pet.id.LUOPAN)
     local luopan = player:getPet()
@@ -22,7 +22,6 @@ tpz.geo.spawnLuopan = function(player, target, aura_effect, tick_effect, tick_po
     -- Change the luopans appearance to match the effect
     -- TODO: This is should be the element of the spell being cast added as an offset
     --       on top of a base model ID in core.
-    local modelID = aura_effect
     luopan:setModelId(modelID)
 
     -- Set HP loss over time

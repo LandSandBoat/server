@@ -22,5 +22,6 @@ function onSpellCast(caster, target, spell)
         power = 1
     end
 
+    -- NOTE: In the future the model ID (2863) will not be passed through here!
     tpz.geo.spawnLuopan(caster, target, 2863, tpz.effect.GEO_POISON, power, tpz.auraTarget.ENEMIES, spell)
 end
