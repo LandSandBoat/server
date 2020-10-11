@@ -34,12 +34,13 @@ end
 function onInstanceProgressUpdate(instance, progress)
     if (progress == 4) then
         local chars = instance:getChars()
-
-        for i, v in pairs(chars) do
-            v:startEvent(203)
-        end
+        local entryPos = instance:getEntryPos()
 
         DespawnMob(ID.mob[59].RAZFAHD, instance)
+        for i, v in pairs(chars) do
+            v:startEvent(203)
+            v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.r)
+        end
         SpawnMob(ID.mob[59].ALEXANDER, instance)
 
     elseif(progress == 5) then
