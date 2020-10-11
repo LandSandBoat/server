@@ -17,7 +17,7 @@ end
 
 function onSpellCast(caster, target, spell)
     local geo_skill = caster:getCharSkillLevel(tpz.skill.GEOMANCY)
-    local spellCost = 37
+    local spellCost = spell:getMPCost()
     local power = (geo_skill / 30) / 10
     if power < 1 then
         power = 1
