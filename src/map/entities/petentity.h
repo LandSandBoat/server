@@ -33,7 +33,8 @@ enum PETTYPE
     PETTYPE_AUTOMATON         = 4,
     PETTYPE_ADVENTURING_FELLOW= 5,
     PETTYPE_CHOCOBO           = 6,
-    PETTYPE_TRUST             = 7
+    PETTYPE_LUOPAN            = 7,
+
 };
 
 enum WYVERNTYPE

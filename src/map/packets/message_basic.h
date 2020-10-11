@@ -130,6 +130,13 @@ enum MSGBASIC_ID : uint16
 	MSGBASIC_TREASURE_HUNTER_UP		= 603,  /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
 	/* DNC */
 	MSGBASIC_NO_FINISHINGMOVES		= 524,
+    /* GEO */
+    MSGBASIC_SAME_EEFECT_LUOPAN     = 660, /* The same effect is already active on that luopan! */
+    MSGBASIC_LUOPAN_ALREADY_PLACED  = 661, /* <player> has already placed a luopan. Unable to use ability. */
+    MSGBASIC_REQUIRE_LUOPAN         = 662, /* This action requires a luopan. */
+    MSGBASIC_LUOPAN_HP_RATE_DOWN    = 663, /* <player> uses <ability>. The luopan's HP consumption rate has been reduced. */
+    MSGBASIC_LUOPAN_HP_RATE_UP      = 664, /* <player> uses <ability>. The luopan's HP consumption rate has been increased. */
+    MSGBASIC_HAS_LUOPON_NO_USE      = 665, /* <player> has a pet. Unable to use ability. */
 	/* ROE */
 	MSGBASIC_ROE_START              = 704,
 	MSGBASIC_ROE_RECORD             = 697, // Records of Eminence: <record>.
