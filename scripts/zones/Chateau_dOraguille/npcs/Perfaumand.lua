@@ -25,12 +25,12 @@ function onTrigger(player, npc)
 
     -- San d'Oria Missions
     elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local missions = tpz.mission.id.sandoria
+        local sandyMissions = tpz.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
-        if currentMission == missions.THE_HEIR_TO_THE_LIGHT and (missionStatus == 2 or missionStatus == 5) then
+        if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and (missionStatus == 2 or missionStatus == 5) then
             if missionStatus == 5 then
                 playerStartEvent(7)
             else
@@ -38,7 +38,7 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 6-2 "Ranperre's Final Rest" (optional dialogue)
-        elseif currentMission == missions.RANPERRE_S_FINAL_REST then
+        elseif currentMission == sandyMissions.RANPERRE_S_FINAL_REST then
             if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
                 player:startEvent(49)
             elseif missionStatus == 6 then
