@@ -8,6 +8,8 @@ require("scripts/globals/status")
 tpz = tpz or {}
 tpz.geo = tpz.geo or {}
 
+-- TODO: After elements are aligned in the codebase, this should become:
+-- tpz.geo.spawnLuopan = function(player, target, spell, tick_effect, tick_power, target_type)
 tpz.geo.spawnLuopan = function(player, target, modelID, tick_effect, tick_power, target_type, spell)
 
     tpz.pet.spawnPet(player, tpz.pet.id.LUOPAN)
