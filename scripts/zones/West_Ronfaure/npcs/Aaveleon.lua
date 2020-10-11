@@ -25,6 +25,8 @@ function onTrigger(player, npc)
         player:startEvent(101) -- "Ow! Ouch! Gah... If only I'd remembered that ointment!"
     elseif tradeFinished == 1 and not player:hasItem(601) then
         player:startEvent(126, 601) -- "Did you lose it?"
+    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
+        player:messageSpecial(ID.text.AAVELEON_HEALED + 26)
     else
         player:messageSpecial(ID.text.AAVELEON_HEALED) -- "My wounds are healed, thanks to you!"
     end
