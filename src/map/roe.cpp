@@ -85,16 +85,22 @@ int32 ParseRecords(lua_State* L)
         {
             uint32 trigger = static_cast<uint32>(lua_tointeger(L, -1));
             if (trigger > 0 && trigger < ROE_NONE)
+            {
                 RoeHandlers[trigger].bitmap.set(recordID);
+            }
             else
+            {
                 ShowError("ROEUtils: Unknown Record trigger index %d for record %d.", trigger, recordID);
+            }
         }
         lua_pop(L, 1);
 
         // Set notification threshold
         lua_getfield(L, -1, "notify");
         if (!lua_isnil(L, -1))
+        {
             roeutils::RoeSystem.NotifyThresholds[recordID] = static_cast<uint32>((lua_tointeger(L, -1)));
+        }
         lua_pop(L, 1);
 
         // Set flags
@@ -136,7 +142,7 @@ int32 ParseRecords(lua_State* L)
 int32 ParseTimedSchedule(lua_State* L)
 {
     if (lua_isnil(L, -1) || !lua_istable(L, -1))
-            return 0;
+        return 0;
 
     roeutils::RoeSystem.TimedRecords.reset();
     roeutils::RoeSystem.TimedRecordTable.fill(RecordTimetable_D{});
@@ -169,7 +175,7 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload
 
     // Bail if player has no records of this type.
     if ((PChar->m_eminenceCache.activemap & handler.bitmap).none())
-        return 0;
+        return false;
 
     lua_State* L = luautils::LuaHandle;
     uint32 stackTop = lua_gettop(L);
@@ -449,7 +455,9 @@ void CycleTimedRecords()
     zoneutils::ForEachZone([](CZone* PZone){
         PZone->ForEachChar([](CCharEntity* PChar){
             if (GetEminenceRecordCompletion(PChar, 1))
+            {
                 AddActiveTimedRecord(PChar);
+            }
         });
     });
 }

@@ -782,7 +782,9 @@ void CMobEntity::DistributeRewards()
             PChar->ForAlliance([this, PChar](CBattleEntity* PMember)
             {
                 if (PMember->getZone() == PChar->getZone())
+                {
                     roeutils::event(ROE_MOBKILL, (CCharEntity*)PChar, RoeDatagram("mob", (CMobEntity*)this));
+                }
             });
 
             DropItems(PChar);
