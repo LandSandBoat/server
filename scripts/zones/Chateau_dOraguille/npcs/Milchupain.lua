@@ -29,7 +29,8 @@ function onTrigger(player, npc)
             end
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+        elseif
+            player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 3)
@@ -37,8 +38,12 @@ function onTrigger(player, npc)
             player:startEvent(36)
         
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
-        elseif player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            currentMission ~= missions.LEAUTE_S_LAST_WISHES
+        elseif
+            -- Directly after winning BCNM and up until next mission
+            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
+            (currentMission == missions.THE_SHADOW_LORD and MissionStatus == 5) or
+            (player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            currentMission ~= missions.LEAUTE_S_LAST_WISHES)
         then
             player:startEvent(33)
 
