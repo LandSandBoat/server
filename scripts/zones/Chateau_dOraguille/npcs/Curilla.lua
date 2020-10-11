@@ -94,7 +94,7 @@ function onTrigger(player, npc)
         player:getNation() == tpz.nation.SANDORIA and
         (player:getCharVar("SandoEpilogue") == 1 or player:getRank() ~= 10)
     then
-        local missions = tpz.mission.id.sandoria
+        local sandyMissions = tpz.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -103,7 +103,7 @@ function onTrigger(player, npc)
             player:startEvent(20)
 
         -- San d'Oria 9-2 "The Heir to the Light"
-        elseif currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
+        elseif currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
             if missionStatus > 3 then
                 player:startEvent(19)
             else
@@ -112,13 +112,13 @@ function onTrigger(player, npc)
 
         -- San d'Oria 9-1 "Breaking Barrier"
         elseif
-            player:hasCompletedMission(SANDORIA, missions.BREAKING_BARRIERS) and
-            currentMission ~= missions.THE_HEIR_TO_THE_LIGHT
+            player:hasCompletedMission(SANDORIA, sandyMissions.BREAKING_BARRIERS) and
+            currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(16)
 
         -- San d'Oria 8-2 "Lightbringer"
-        elseif currentMission == missions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 2) then
+        elseif currentMission == sandyMissions.LIGHTBRINGER and (missionStatus == 6 or missionStatus == 2) then
             if missionStatus == 6 then
                 player:startEvent(103)
             else
@@ -128,17 +128,16 @@ function onTrigger(player, npc)
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         elseif
             -- Directly after winning BCNM and up until next mission
-            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
-            (currentMission == missions.THE_SHADOW_LORD and MissionStatus == 5) or
-            (player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            currentMission ~= missions.LEAUTE_S_LAST_WISHES)
+            currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
+            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, missions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
-            currentMission ~= missions.THE_SHADOW_LORD
+            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(545)
 

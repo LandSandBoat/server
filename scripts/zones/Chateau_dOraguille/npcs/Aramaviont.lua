@@ -16,7 +16,7 @@ function onTrigger(player, npc)
         player:startEvent(518)
 
     else
-        local missions = tpz.mission.id.sandoria
+        local sandyMissions = tpz.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -25,7 +25,7 @@ function onTrigger(player, npc)
             player:startEvent(11)
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
-        elseif currentMission == missions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
+        elseif currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
             if missionStatus > 4 then
                 player:startEvent(14)
             else
@@ -34,20 +34,19 @@ function onTrigger(player, npc)
 
         -- San d'Oria 8-2 "Lightbringer" (optional dialogue)
         elseif
-            player:hasCompletedMission(SANDORIA, missions.LIGHTBRINGER) and
+            player:hasCompletedMission(SANDORIA, sandyMissions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 1)
-        elseif currentMission == missions.LIGHTBRINGER and missionStatus == 6 then
+        elseif currentMission == sandyMissions.LIGHTBRINGER and missionStatus == 6 then
             player:startEvent(15)
         
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         elseif
             -- Directly after winning BCNM and up until next mission
-            -- Issue #1311 suggests the former only. Guides read like the latter. Let's keep both for now.
-            (currentMission == missions.THE_SHADOW_LORD and MissionStatus == 5) or
-            (player:hasCompletedMission(SANDORIA, missions.THE_SHADOW_LORD) and player:getRank() == 6 and
-            (currentMission ~= missions.LEAUTE_S_LAST_WISHES or currentMission ~= missions.RANPERRE_S_FINAL_REST))
+            currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
+            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(12)
 

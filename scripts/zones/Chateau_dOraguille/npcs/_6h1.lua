@@ -14,10 +14,10 @@ end
 
 function onTrigger(player, npc)
 
-    local quests = tpz.quest.id.sandoria
-    local whmAf1 = player:getQuestStatus(SANDORIA, quests.MESSENGER_FROM_BEYOND)
-    local whmAf2 = player:getQuestStatus(SANDORIA, quests.PRELUDE_OF_BLACK_AND_WHITE)
-    local whmAf3 = player:getQuestStatus(SANDORIA, quests.PIEUJE_S_DECISION)
+    local sandyQuests = tpz.quest.id.sandoria
+    local whmAf1 = player:getQuestStatus(SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
+    local whmAf2 = player:getQuestStatus(SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
+    local whmAf3 = player:getQuestStatus(SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
     if player:getMainJob() == tpz.job.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL then
