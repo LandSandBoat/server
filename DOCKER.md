@@ -2,7 +2,7 @@ Project Topaz Docker
 ==========
 
 This guide assumes you have Docker (https://www.docker.com/) installed on your machine.
-These are the config files used by Docker and are based off the default config files.
+The conf/docker files are the config files used by Docker and are based off the default config files.
 Only notable change is the `mysql_host` is set to `db` which is the name of the database service.
 
 ## How to start the server
