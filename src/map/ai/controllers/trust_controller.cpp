@@ -252,7 +252,7 @@ void CTrustController::DoRoamTick(time_point tick)
             POwner->addMP(recoverMP);
             m_LastHealTickTime = m_Tick;
             POwner->updatemask |= UPDATE_HP;
-            m_NumHealingTicks = std::clamp(++m_NumHealingTicks, 0U, m_tickDelays.size() - 1);
+            m_NumHealingTicks = std::clamp(++m_NumHealingTicks, 0U, m_tickDelays.size() - 1U);
         }
     }
 }
