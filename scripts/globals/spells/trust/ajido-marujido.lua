@@ -36,7 +36,7 @@ function onMobSpawn(mob)
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.SLOW, 60)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0,
-                        ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 30)
+                        ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 60)
 end
 
 function onMobDespawn(mob)
