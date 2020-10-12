@@ -2,6 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Tapoh Lihzeh
 -- Starts & Finishes Repeatable Quest: Paying Lip Service
+-- !pos 51.011 -3.749 54.402 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/npc_util")
@@ -17,10 +18,10 @@ function onTrade(player, npc, trade)
 
     -- PAYING LIP SERVICE
     elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {{912, 3}}) then
-            player:startEvent(479, 0, 912, 1016, 0, 1)
-        elseif npcUtil.tradeHas(trade, {{1016, 2}}) then
+        if npcUtil.tradeHas(trade, {{912, 3}}) then -- beehive_chip
             player:startEvent(479, 0, 912, 1016, 0, 0)
+        elseif npcUtil.tradeHas(trade, {{1016, 2}}) then -- remi_shell
+            player:startEvent(479, 0, 912, 1016, 0, 1)
         end
     end
 end
