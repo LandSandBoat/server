@@ -239,8 +239,9 @@ void CTrustController::DoRoamTick(time_point tick)
     }
 
     if (POwner->CanRest() &&
-        m_Tick - m_CombatEndTime > 10s &&
-        m_Tick - m_LastHealTickTime > 10s)
+        m_Tick - POwner->LastAttacked > m_tickDelays.at(0) &&
+        m_Tick - m_CombatEndTime > m_tickDelays.at(0) &&
+        m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks))
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
         {
@@ -251,6 +252,7 @@ void CTrustController::DoRoamTick(time_point tick)
             POwner->addMP(recoverMP);
             m_LastHealTickTime = m_Tick;
             POwner->updatemask |= UPDATE_HP;
+            m_NumHealingTicks = std::clamp(++m_NumHealingTicks, 0U, m_tickDelays.size() - 1);
         }
     }
 }

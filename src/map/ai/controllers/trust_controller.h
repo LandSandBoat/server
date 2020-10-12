@@ -66,11 +66,15 @@ private:
     uint8 GetPartyPosition();
 
     CBattleEntity* m_LastTopEnmity;
+
+    time_point m_LastRepositionTime;
+    uint8 m_failedRepositionAttempts;
+    bool m_InTransit;
+
     time_point m_CombatEndTime;
     time_point m_LastHealTickTime;
-    time_point m_LastRepositionTime;
-    bool m_InTransit;
-    uint8 m_failedRepositionAttempts;
+    std::vector<std::chrono::seconds> m_tickDelays = { 15s, 10s, 10s, 3s };
+    std::size_t m_NumHealingTicks = 0;
 };
 
 #endif // _TRUSTCONTROLLER
