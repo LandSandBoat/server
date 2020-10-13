@@ -170,6 +170,7 @@ int32 do_init(int32 argc, char** argv)
 
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);
+    map_config_from_env();
     ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
     ShowStatus("do_init: map_config is reading");
     ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
@@ -1054,6 +1055,18 @@ int32 map_config_default()
     map_config.skillup_bloodpact = true;
     map_config.anticheat_enabled = false;
     map_config.anticheat_jail_disable = false;
+    return 0;
+}
+
+int32 map_config_from_env()
+{
+    map_config.mysql_login     = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : map_config.mysql_login;
+    map_config.mysql_password  = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : map_config.mysql_password;
+    map_config.mysql_host      = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : map_config.mysql_host;
+    map_config.mysql_port      = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : map_config.mysql_port;
+    map_config.mysql_database  = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : map_config.mysql_database;
+    map_config.msg_server_ip   = std::getenv("TPZ_MSG_IP") ? std::getenv("TPZ_MSG_IP") : map_config.msg_server_ip;
+    map_config.msg_server_port = std::getenv("TPZ_MSG_PORT") ? std::stoi(std::getenv("TPZ_MSG_PORT")) : map_config.msg_server_port;
     return 0;
 }
 

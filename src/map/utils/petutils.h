@@ -56,9 +56,9 @@ enum PETID
     PETID_STORMWAKERFRAME    = 72,
     PETID_ADVENTURING_FELLOW = 73,
     PETID_CHOCOBO            = 74,
-    PETID_TRUST              = 75
+    PETID_LUOPAN             = 75,
+    MAX_PETID                = 76,
 };
-
 
 class CBattleEntity;
 class CPetEntity;

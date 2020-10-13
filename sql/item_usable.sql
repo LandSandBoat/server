@@ -1750,6 +1750,7 @@ INSERT INTO `item_usable` VALUES (5982,'senroh_skewer',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5983,'piscators_skewer',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5984,'branch_of_gnatbane',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5985,'sprig_of_hemlock',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5990,'scroll_of_instant_stoneskin',1,7,29,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5998,'bowl_of_adoulinian_soup',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5999,'bowl_of_adoulinian_soup_+1',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6009,'bowl_of_mog_pudding',1,1,26,0,0,0,0,0);

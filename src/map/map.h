@@ -204,6 +204,7 @@ void  map_versionscreen(int32 flag);                                            
 
 int32 map_config_read(const int8 *cfgName);                                             // Map-Server Config [venom]
 int32 map_config_default();
+int32 map_config_from_env();
 
 int32 map_cleanup(time_point tick,CTaskMgr::CTask *PTask);                              // Clean up timed out players
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data);

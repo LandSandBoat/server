@@ -78,7 +78,6 @@
 #include "../packets/status_effects.h"
 #include "../mobskill.h"
 
-
 CCharEntity::CCharEntity()
 {
     objtype = TYPE_PC;

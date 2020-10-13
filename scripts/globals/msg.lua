@@ -295,6 +295,14 @@ tpz.msg.basic =
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.
     SPECTRAL_JIG           = 532, -- <user> uses <ability>. <target> receives the effect of Sneak and Invisible.
 
+    -- GEO
+    SAME_EFFECT_LUOPAN     = 660, -- The same effect is already active on that luopan!.
+    LUOPAN_ALREADY_PLACED  = 661, -- <player> has already placed a luopan. Unable to use ability.
+    REQUIRE_LUOPAN         = 662, -- This action requires a luopan.
+    LUOPAN_HP_RATE_DOWN    = 663, -- <player> uses <ability>. The luopan's HP consumption rate has been reduced.
+    LUOPAN_HP_RATE_UP      = 664, -- <player> uses <ability>. The luopan's HP consumption rate has been increased.
+    HAS_LUOPON_NO_USE      = 665, -- <player> has a pet. Unable to use ability.
+
     -- Fields / Grounds of Valor
     FOV_DEFEATED_TARGET     = 558,  -- You defeated a designated target.${lb}(Progress: ${number}/${number2})
     FOV_COMPLETED_REGIME    = 559,  -- You have successfully completed the training regime.
