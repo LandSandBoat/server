@@ -12,7 +12,7 @@ RUN apt update && apt install -y net-tools nano build-essential software-propert
 # Copy everything from the host machine topaz folder to /code
 ADD . /code
 
-RUN cmake . && make -j $(nproc)
+RUN mkdir build && cd build && cmake .. && make -j $(nproc) && cd .. && rm -r /code/build
 
 # Copy the docker config files to the conf folder instead of the default config
 COPY /conf/docker/* conf/
