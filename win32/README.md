@@ -1,0 +1,1 @@
+Run generate_sln.cmd

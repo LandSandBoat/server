@@ -120,5 +120,8 @@ target_link_libraries(topaz_game
     project_options
     #project_warnings
 )
+set_target_properties(
+    topaz_game PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)
