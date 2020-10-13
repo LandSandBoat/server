@@ -34,7 +34,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../recast_container.h"
 #include "../../mob_spell_container.h"
 
-CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust) : CMobController(PTrust)
+CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
+: CMobController(PTrust)
 {
     m_GambitsContainer = std::make_unique<gambits::CGambitsContainer>(PTrust);
 }
@@ -178,13 +179,6 @@ void CTrustController::DoCombatTick(time_point tick)
 
         m_GambitsContainer->Tick(tick);
 
-        auto currentTopEnmity = GetTopEnmity();
-        if (m_LastTopEnmity != currentTopEnmity)
-        {
-            POwner->PAI->EventHandler.triggerListener("ENMITY_CHANGED", POwner, POwner->PMaster, PTarget);
-            m_LastTopEnmity = currentTopEnmity;
-        }
-
         POwner->PAI->EventHandler.triggerListener("COMBAT_TICK", POwner, POwner->PMaster, PTarget);
     }
 }
@@ -252,7 +246,7 @@ void CTrustController::DoRoamTick(time_point tick)
             POwner->addMP(recoverMP);
             m_LastHealTickTime = m_Tick;
             POwner->updatemask |= UPDATE_HP;
-            m_NumHealingTicks = std::clamp(++m_NumHealingTicks, static_cast<std::size_t>(0U), static_cast<std::size_t>(m_tickDelays.size() - 1U));
+            m_NumHealingTicks = std::clamp(m_NumHealingTicks + 1, static_cast<std::size_t>(0U), static_cast<std::size_t>(m_tickDelays.size() - 1U));
         }
     }
 }
