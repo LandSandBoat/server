@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    player:startEvent(2)
+    player:messageSpecial(ID.text.EVIL_PRESENCE)
 end
 
 function onEventUpdate(player, csid, option)

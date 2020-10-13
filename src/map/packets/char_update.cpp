@@ -103,6 +103,12 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     }
     ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
 
+    // GEO bubble effects, changes bubble effect depending on what effect is activated.
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_COLURE_ACTIVE))
+    {
+        ref<uint8>(0x58) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
+    }
+
     if (PChar->animation == ANIMATION_MOUNT)
         ref<uint16>(0x5B) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower();
 }

@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 
@@ -330,7 +331,7 @@ function onTrigger(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not player:getMaskBit(wildcatJeuno, 19) then
+    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)
@@ -382,7 +383,7 @@ end
 function onEventFinish(player, csid, option)
     -- LURE OF THE WILDCAT
     if csid == 313 then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 19, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
 
     -- purchase cosmocleanse
     elseif csid == 310 and option == 3 then

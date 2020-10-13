@@ -20,6 +20,7 @@ from migrations import spell_family_column
 from migrations import mission_blob_extra
 from migrations import cop_mission_ids
 from migrations import extend_mission_log
+from migrations import eminence_blob
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -32,6 +33,7 @@ migrations = [
     extend_mission_log,
     mission_blob_extra,
     cop_mission_ids,
+    eminence_blob,
 ]
 # These are the default 'protected' files
 player_data = [

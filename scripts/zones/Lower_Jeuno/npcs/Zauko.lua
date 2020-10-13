@@ -109,7 +109,7 @@ function onEventFinish(player, csid, option)
             -- repeat victory. offer membership card.
             params.fame = 15
             if (option == 1) then
-                params.keyItem = tpz.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
+                params.ki = tpz.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
         npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE, params)

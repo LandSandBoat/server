@@ -203,7 +203,8 @@ enum class Mod
     UDMGRANGE                 = 390, //
 
     CRITHITRATE               = 165, // Raises chance to crit
-    CRIT_DMG_INCREASE         = 421, // Raises the damage of critcal hit by percent %
+    CRIT_DMG_INCREASE         = 421, // Raises the damage of critical hit by percent %
+    RANGED_CRIT_DMG_INCREASE  = 964, // Increases ranged critical damage by a percent
     ENEMYCRITRATE             = 166, // Raises chance enemy will crit
     CRIT_DEF_BONUS            = 908, // Reduces crit hit damage
     MAGIC_CRITHITRATE         = 562, // Raises chance to magic crit
@@ -220,6 +221,7 @@ enum class Mod
     HASTE_GEAR                = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
     SPELLINTERRUPT            = 168, // % Spell Interruption Rate
     MOVE                      = 169, // % Movement Speed
+    MOUNT_MOVE                = 972, // % Mount Movement Speed
     FASTCAST                  = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST                 = 407, // uncapped fast cast
     CURE_CAST_TIME            = 519, // cure cast time reduction
@@ -285,6 +287,7 @@ enum class Mod
     AMNESIARES                = 253, // Enhances "Resist Amnesia" effect
     LULLABYRES                = 254, // Enhances "Resist Lullaby" effect
     DEATHRES                  = 255, // Used by gear and ATMA that give resistance to instance KO
+    STATUSRES                 = 958, // "Resistance to All Status Ailments"
 
     PARALYZE                  = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE             = 258, // Augments Mijin Gakure
@@ -352,6 +355,9 @@ enum class Mod
     SHIELD_MASTERY_TP         = 485, // Shield mastery TP bonus when blocking with a shield
     SENTINEL_EFFECT           = 837, // Sentinel effect in percents
     SHIELD_DEF_BONUS          = 905, // Shield Defense Bonus
+    COVER_TO_MP               = 965, // Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED    = 966, // Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION            = 967, // Increases Cover Duration
 
     // Dark Knight
     ARCANE_CIRCLE_DURATION    = 858, // Arcane Circle extended duration in seconds
@@ -428,6 +434,7 @@ enum class Mod
     HIGH_JUMP_ENMITY_REDUCTION = 363, // for gear that reduces more enmity from high jump
     FORCE_JUMP_CRIT           = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH   = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+    WYVERN_SUBJOB_TRAITS      = 974, // Adds subjob traits to wyvern on spawn
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -798,10 +805,14 @@ enum class Mod
     CONQUEST_REGION_BONUS     = 934, // Increases the influence points awarded to the player's nation when receiving conquest points
     CAMPAIGN_BONUS            = 935, // Increases the evaluation for allied forces by percentage
 
+    SUBTLE_BLOW_II            = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
+    GARDENING_WILT_BONUS      = 975, // Increases the number of Vanadays a plant can survive before it wilts
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 964, // stuff
-    // SPARE = 965, // stuff
+    // SPARE = 976, // stuff
+    // SPARE = 977, // stuff
+    // SPARE = 978, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

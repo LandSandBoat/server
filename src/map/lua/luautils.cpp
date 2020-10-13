@@ -49,6 +49,7 @@
 #include "../party.h"
 #include "../alliance.h"
 #include "../entities/mobentity.h"
+#include "../roe.h"
 #include "../spell.h"
 #include "../weapon_skill.h"
 #include "../vana_time.h"
@@ -122,6 +123,7 @@ namespace luautils
         lua_register(LuaHandle, "GetMobAction", luautils::GetMobAction);
         lua_register(LuaHandle, "GetMagianTrial", luautils::GetMagianTrial);
         lua_register(LuaHandle, "GetMagianTrialsWithParent", luautils::GetMagianTrialsWithParent);
+        lua_register(LuaHandle, "JstMidnight", luautils::JstMidnight);
         lua_register(LuaHandle, "VanadielTime", luautils::VanadielTime);
         lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
         lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
@@ -450,6 +452,7 @@ namespace luautils
         return 0;
     }
 
+
     /************************************************************************
     *                                                                       *
     *  Узнаем страну, владеющую текущим регионом                            *
@@ -691,6 +694,19 @@ namespace luautils
     int32 VanadielDayElement(lua_State* L)
     {
         lua_pushinteger(L, CVanaTime::getInstance()->getWeekday());
+        return 1;
+    }
+
+
+    /************************************************************************
+    *                                                                       *
+    * JstMidnight - Returns UTC timestamp of upcoming JST midnight
+    *                                                                       *
+    ************************************************************************/
+
+    int32 JstMidnight(lua_State* L)
+    {
+        lua_pushinteger(L, CVanaTime::getInstance()->getJstMidnight());
         return 1;
     }
 
@@ -2934,6 +2950,8 @@ namespace luautils
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
 
+        roeutils::event(ROE_MOBKILL, (CCharEntity*)PKiller, RoeDatagram("mob", (CMobEntity*)PMob));
+
         if (PChar && PMob->objtype == TYPE_MOB)
         {
             // onMobDeathEx
@@ -4415,7 +4433,7 @@ namespace luautils
     {
         TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
 
-        uint32 id = lua_tointeger(L, 1);
+        uint32 id = static_cast<uint32>(lua_tointeger(L, 1));
         CItem* PItem = itemutils::GetItemPointer(id);
         if (PItem)
         {

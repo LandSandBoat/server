@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/crafting")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -15,9 +14,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local guildRank = player:getSkillRank(tpz.skill.GOLDSMITHING)
-    local stock = tpz.shop.generalGuildStock[guild.goldsmithing]
-    tpz.shop.generalGuild(player, stock, guildRank)
+    local guildSkillId = tpz.skill.GOLDSMITHING
+    local stock = tpz.shop.generalGuildStock[guildSkillId]
+    tpz.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.TEERTH_SHOP_DIALOG)
 end
 

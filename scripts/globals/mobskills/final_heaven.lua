@@ -1,15 +1,12 @@
 ---------------------------------------------
---  Final Heaven
---
---  Description: Caestus/Spharai: Temporarily enhances Subtle Blow tpz.effect.
---  Type: Physical
---  Range: Melee
+-- Final Heaven
+-- Description: Caestus/Spharai: Temporarily enhances Subtle Blow tpz.effect.
+-- Type: Physical
+-- Range: Melee
 ---------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
 
 function onMobSkillCheck(target, mob, skill)

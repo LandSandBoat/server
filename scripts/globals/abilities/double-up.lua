@@ -46,15 +46,15 @@ function onUseAbility(caster, target, ability, action)
             caster:resetRecast(tpz.recast.ABILITY, 193)
         end
         caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(), roll-prev_roll:getSubPower())
+        action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
         checkForJobBonus(caster, job)
     end
     local total = caster:getLocalVar("corsairRollTotal")
     local prev_ability = getAbility(caster:getLocalVar("corsairActiveRoll"))
     if (prev_ability) then
         action:animation(target:getID(), prev_ability:getAnimation())
-        action:actionID(prev_ability:getID()+16)
-        dofile("scripts/globals/abilities/"..prev_ability:getName()..".lua")
+        action:actionID(prev_ability:getID())
+        dofile("scripts/globals/abilities/" .. prev_ability:getName() .. ".lua")
         local total = applyRoll(caster, target, ability, action, total)
         local msg = ability:getMsg()
         if msg == 420 then

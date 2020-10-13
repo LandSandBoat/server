@@ -151,6 +151,7 @@ namespace luautils
     int32 GetMagianTrial(lua_State*);
     int32 GetMagianTrialsWithParent(lua_State* L);
     int32 GetMobAction(lua_State*);                                             // Get Mobs current action
+    int32 JstMidnight(lua_State* L);
     int32 VanadielTime(lua_State*);                                             // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     int32 VanadielTOTD(lua_State*);                                             // текущее игровое время суток
     int32 VanadielHour(lua_State*);                                             // текущие Vanadiel часы

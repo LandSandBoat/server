@@ -6,6 +6,7 @@
 -- !pos -0.965 5.999 -15.567 234
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -17,7 +18,7 @@ function onTrigger(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 17) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 17)) then
         player:startEvent(505)
     elseif (SirensTear == QUEST_AVAILABLE) then
         player:startEvent(5)
@@ -32,7 +33,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 505) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 17, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 17, true))
     end
 
 end

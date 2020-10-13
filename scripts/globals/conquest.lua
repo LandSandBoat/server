@@ -833,7 +833,8 @@ local function canBuyExpRing(player, item)
     if ALLOW_MULTIPLE_EXP_RINGS ~= 1 then
         for i = 15761, 15763 do
             if player:hasItem(i) then
-                player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, item)
+                player:messageSpecial(text.CONQUEST + 60, 0, 0, item) -- You do not meet the requirements to purchase the <item>.
+                player:messageSpecial(text.CONQUEST + 50, 0, 0, item) -- Due to its special nature, you can only purchase or recharge <item> once until the conquest results tally is performed. Also, you cannot purchase this item if a similar item is already in your possession.
                 return false
             end
         end
@@ -842,6 +843,7 @@ local function canBuyExpRing(player, item)
     -- one exp ring per conquest tally
     if BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and player:getCharVar("CONQUEST_RING_RECHARGE") > os.time() then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
+        player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
         return false
     end
 

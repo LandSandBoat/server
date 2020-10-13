@@ -1833,6 +1833,7 @@ INSERT INTO `item_mods` VALUES (10676,1,72);
 INSERT INTO `item_mods` VALUES (10676,2,42);
 INSERT INTO `item_mods` VALUES (10676,27,7);
 INSERT INTO `item_mods` VALUES (10676,160,-4);
+INSERT INTO `item_mods` VALUES (10676,965,30);    -- Valor Surcoat +2 - Converts 30% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (10677,1,64);
 INSERT INTO `item_mods` VALUES (10677,2,38);
 INSERT INTO `item_mods` VALUES (10677,8,6);
@@ -1872,6 +1873,7 @@ INSERT INTO `item_mods` VALUES (10683,2,46);
 INSERT INTO `item_mods` VALUES (10683,23,8);
 INSERT INTO `item_mods` VALUES (10683,68,8);
 INSERT INTO `item_mods` VALUES (10683,384,300);
+INSERT INTO `item_mods` VALUES (10683,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (10684,1,49);      -- Summoner's Doublet +2: DEF 49
 INSERT INTO `item_mods` VALUES (10684,5,28);      -- MP +28
 INSERT INTO `item_mods` VALUES (10684,165,6);     -- Crit Hit Rate+6
@@ -2374,7 +2376,7 @@ INSERT INTO `item_mods` VALUES (10797,24,10); -- RATT
 INSERT INTO `item_mods` VALUES (10797,27,-1); -- ENMITY
 INSERT INTO `item_mods` VALUES (10798,2,70);
 INSERT INTO `item_mods` VALUES (10798,27,5);
-INSERT INTO `item_mods` VALUES (10798,255,5);
+INSERT INTO `item_mods` VALUES (10798,255,5); -- Eihwaz Ring "Resist Death"
 INSERT INTO `item_mods` VALUES (10799,8,3); -- SLJOR RING, STR+3 "Double Attack"+1% "Slow"+2%
 INSERT INTO `item_mods` VALUES (10799,288,1); -- DATT
 INSERT INTO `item_mods` VALUES (10799,384,-200); -- SLOW
@@ -2406,20 +2408,8 @@ INSERT INTO `item_mods` VALUES (10805,161,-7);    -- Physical Damage Taken-7
 INSERT INTO `item_mods` VALUES (10805,384,-200);   -- Haste-20
 INSERT INTO `item_mods` VALUES (10806,1,35);
 INSERT INTO `item_mods` VALUES (10806,160,-5);
-INSERT INTO `item_mods` VALUES (10806,240,20);
-INSERT INTO `item_mods` VALUES (10806,241,20);
-INSERT INTO `item_mods` VALUES (10806,242,20);
-INSERT INTO `item_mods` VALUES (10806,243,20);
-INSERT INTO `item_mods` VALUES (10806,244,20);
-INSERT INTO `item_mods` VALUES (10806,245,20);
-INSERT INTO `item_mods` VALUES (10806,246,20);
-INSERT INTO `item_mods` VALUES (10806,247,20);
-INSERT INTO `item_mods` VALUES (10806,248,20);
-INSERT INTO `item_mods` VALUES (10806,249,20);
-INSERT INTO `item_mods` VALUES (10806,250,20);
-INSERT INTO `item_mods` VALUES (10806,251,20);
-INSERT INTO `item_mods` VALUES (10806,252,20);
 INSERT INTO `item_mods` VALUES (10806,375,15);
+INSERT INTO `item_mods` VALUES (10806,958,20); -- Adamas "resistance to all status ailments" +20
 INSERT INTO `item_mods` VALUES (10807,1,1);
 INSERT INTO `item_mods` VALUES (10807,14,1);
 INSERT INTO `item_mods` VALUES (10808,1,1);
@@ -3165,22 +3155,7 @@ INSERT INTO `item_mods` VALUES (11049,13,2);      -- myrddin_pearl MND+2
 INSERT INTO `item_mods` VALUES (11049,30,2);      -- Magic Accuracy+2
 INSERT INTO `item_mods` VALUES (11050,1,7);       -- puissant_pearl DEF:+7
 INSERT INTO `item_mods` VALUES (11050,10,2);      -- VIT+2
-INSERT INTO `item_mods` VALUES (11051,240,5);     -- hearty_earring Resist Sleep+5
-INSERT INTO `item_mods` VALUES (11051,241,5);     -- Resist Poison+5
-INSERT INTO `item_mods` VALUES (11051,242,5);     -- Resist Paralyze+5
-INSERT INTO `item_mods` VALUES (11051,243,5);     -- Resist Blind+5
-INSERT INTO `item_mods` VALUES (11051,244,5);     -- Resist Silence+5
-INSERT INTO `item_mods` VALUES (11051,245,5);     -- Resist Virus+5
-INSERT INTO `item_mods` VALUES (11051,246,5);     -- Resist Petrify+5
-INSERT INTO `item_mods` VALUES (11051,247,5);     -- Resist Bind+5
-INSERT INTO `item_mods` VALUES (11051,248,5);     -- Resist Curse+5
-INSERT INTO `item_mods` VALUES (11051,249,5);     -- Resist Gravity+5
-INSERT INTO `item_mods` VALUES (11051,250,5);     -- Resist Slow+5
-INSERT INTO `item_mods` VALUES (11051,251,5);     -- Resist Stun+5
-INSERT INTO `item_mods` VALUES (11051,252,5);     -- Resist Charm+5
-INSERT INTO `item_mods` VALUES (11051,253,5);     -- Resist Amnesia+5
-INSERT INTO `item_mods` VALUES (11051,254,5);     -- Resist Lullaby+5
-INSERT INTO `item_mods` VALUES (11051,255,5);     -- Resist Death+5
+INSERT INTO `item_mods` VALUES (11051,958,5);     -- Hearty Earring "resistance to all status ailments" +5
 INSERT INTO `item_mods` VALUES (11052,357,-5);    -- esper_earring Blood Pact Delay-5
 INSERT INTO `item_mods` VALUES (11053,30,2);      -- choleric_earring Magic Accuracy+2
 INSERT INTO `item_mods` VALUES (11053,562,10);    -- Magic Critical Hit Rate+10
@@ -8425,6 +8400,7 @@ INSERT INTO `item_mods` VALUES (12515,1,24);
 INSERT INTO `item_mods` VALUES (12515,2,12);
 INSERT INTO `item_mods` VALUES (12515,13,3);
 INSERT INTO `item_mods` VALUES (12515,27,2);
+INSERT INTO `item_mods` VALUES (12515,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (12516,1,23);
 INSERT INTO `item_mods` VALUES (12516,2,12);
 INSERT INTO `item_mods` VALUES (12516,8,4);
@@ -14162,6 +14138,7 @@ INSERT INTO `item_mods` VALUES (14506,1,56);
 INSERT INTO `item_mods` VALUES (14506,2,30);
 INSERT INTO `item_mods` VALUES (14506,9,3);
 INSERT INTO `item_mods` VALUES (14506,27,5);
+INSERT INTO `item_mods` VALUES (14506,965,20);    -- Valor Surcoat +1 - Converts 20% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (14507,1,50);
 INSERT INTO `item_mods` VALUES (14507,2,27);
 INSERT INTO `item_mods` VALUES (14507,13,4);
@@ -14193,6 +14170,7 @@ INSERT INTO `item_mods` VALUES (14513,1,50);
 INSERT INTO `item_mods` VALUES (14513,2,33);
 INSERT INTO `item_mods` VALUES (14513,110,15);
 INSERT INTO `item_mods` VALUES (14513,384,200);
+INSERT INTO `item_mods` VALUES (14513,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (14514,1,39);      -- Summoner's Doublet +1: DEF 39
 INSERT INTO `item_mods` VALUES (14514,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (14514,357,4);     -- Blood Pact ability delay -4
@@ -16109,6 +16087,7 @@ INSERT INTO `item_mods` VALUES (15093,1,55);
 INSERT INTO `item_mods` VALUES (15093,2,23);
 INSERT INTO `item_mods` VALUES (15093,9,3);
 INSERT INTO `item_mods` VALUES (15093,27,4);
+INSERT INTO `item_mods` VALUES (15093,965,20);    -- Valor Surcoat - Converts 20% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (15094,1,49);
 INSERT INTO `item_mods` VALUES (15094,2,20);
 INSERT INTO `item_mods` VALUES (15094,13,4);
@@ -16140,6 +16119,7 @@ INSERT INTO `item_mods` VALUES (15100,1,49);
 INSERT INTO `item_mods` VALUES (15100,2,24);
 INSERT INTO `item_mods` VALUES (15100,110,15);
 INSERT INTO `item_mods` VALUES (15100,243,2);
+INSERT INTO `item_mods` VALUES (15100,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (15101,1,38);      -- Summoner's Doublet: DEF 38
 INSERT INTO `item_mods` VALUES (15101,5,20);      -- MP +20
 INSERT INTO `item_mods` VALUES (15101,357,3);     -- Blood Pact ability delay -3
@@ -16502,19 +16482,7 @@ INSERT INTO `item_mods` VALUES (15194,13,7);
 INSERT INTO `item_mods` VALUES (15194,14,7);
 INSERT INTO `item_mods` VALUES (15195,2,-20);
 INSERT INTO `item_mods` VALUES (15195,5,55);
-INSERT INTO `item_mods` VALUES (15196,240,2);
-INSERT INTO `item_mods` VALUES (15196,241,2);
-INSERT INTO `item_mods` VALUES (15196,242,2);
-INSERT INTO `item_mods` VALUES (15196,243,2);
-INSERT INTO `item_mods` VALUES (15196,244,2);
-INSERT INTO `item_mods` VALUES (15196,245,2);
-INSERT INTO `item_mods` VALUES (15196,246,2);
-INSERT INTO `item_mods` VALUES (15196,247,2);
-INSERT INTO `item_mods` VALUES (15196,248,2);
-INSERT INTO `item_mods` VALUES (15196,249,2);
-INSERT INTO `item_mods` VALUES (15196,250,2);
-INSERT INTO `item_mods` VALUES (15196,251,2);
-INSERT INTO `item_mods` VALUES (15196,252,2);
+INSERT INTO `item_mods` VALUES (15196,958,2); -- Elegant Ribbon "resistance to all status ailments" +2
 INSERT INTO `item_mods` VALUES (15197,1,17);
 INSERT INTO `item_mods` VALUES (15200,1,5);
 INSERT INTO `item_mods` VALUES (15200,54,5);
@@ -16671,6 +16639,7 @@ INSERT INTO `item_mods` VALUES (15231,1,28);
 INSERT INTO `item_mods` VALUES (15231,2,12);
 INSERT INTO `item_mods` VALUES (15231,13,6);
 INSERT INTO `item_mods` VALUES (15231,27,3);
+INSERT INTO `item_mods` VALUES (15231,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (15232,1,27);
 INSERT INTO `item_mods` VALUES (15232,2,12);
 INSERT INTO `item_mods` VALUES (15232,5,12);
@@ -16747,19 +16716,7 @@ INSERT INTO `item_mods` VALUES (15244,231,2);
 INSERT INTO `item_mods` VALUES (15244,232,2);
 INSERT INTO `item_mods` VALUES (15244,233,2);
 INSERT INTO `item_mods` VALUES (15244,234,2);
-INSERT INTO `item_mods` VALUES (15244,240,2);
-INSERT INTO `item_mods` VALUES (15244,241,2);
-INSERT INTO `item_mods` VALUES (15244,242,2);
-INSERT INTO `item_mods` VALUES (15244,243,2);
-INSERT INTO `item_mods` VALUES (15244,244,2);
-INSERT INTO `item_mods` VALUES (15244,245,2);
-INSERT INTO `item_mods` VALUES (15244,246,2);
-INSERT INTO `item_mods` VALUES (15244,247,2);
-INSERT INTO `item_mods` VALUES (15244,248,2);
-INSERT INTO `item_mods` VALUES (15244,249,2);
-INSERT INTO `item_mods` VALUES (15244,250,2);
-INSERT INTO `item_mods` VALUES (15244,251,2);
-INSERT INTO `item_mods` VALUES (15244,252,2);
+INSERT INTO `item_mods` VALUES (15244,958,2); -- Flawless Ribbon "resistance to all status ailments" +2
 INSERT INTO `item_mods` VALUES (15245,1,29);
 INSERT INTO `item_mods` VALUES (15245,9,6);
 INSERT INTO `item_mods` VALUES (15245,27,1);
@@ -20123,6 +20080,7 @@ INSERT INTO `item_mods` VALUES (16598,25,4);
 INSERT INTO `item_mods` VALUES (16599,8,2);
 INSERT INTO `item_mods` VALUES (16599,13,3);
 INSERT INTO `item_mods` VALUES (16599,14,1);
+INSERT INTO `item_mods` VALUES (16604,967,5);    -- Save the Queen - Cover Duration +5
 INSERT INTO `item_mods` VALUES (16605,432,5);
 INSERT INTO `item_mods` VALUES (16610,25,2);
 INSERT INTO `item_mods` VALUES (16611,25,2);
@@ -23802,20 +23760,7 @@ INSERT INTO `item_mods` VALUES (19188,235,2);
 INSERT INTO `item_mods` VALUES (19188,236,2);
 INSERT INTO `item_mods` VALUES (19188,237,2);
 INSERT INTO `item_mods` VALUES (19188,238,2);
-INSERT INTO `item_mods` VALUES (19188,240,2);
-INSERT INTO `item_mods` VALUES (19188,241,2);
-INSERT INTO `item_mods` VALUES (19188,242,2);
-INSERT INTO `item_mods` VALUES (19188,243,2);
-INSERT INTO `item_mods` VALUES (19188,244,2);
-INSERT INTO `item_mods` VALUES (19188,245,2);
-INSERT INTO `item_mods` VALUES (19188,246,2);
-INSERT INTO `item_mods` VALUES (19188,247,2);
-INSERT INTO `item_mods` VALUES (19188,248,2);
-INSERT INTO `item_mods` VALUES (19188,249,2);
-INSERT INTO `item_mods` VALUES (19188,250,2);
-INSERT INTO `item_mods` VALUES (19188,251,2);
-INSERT INTO `item_mods` VALUES (19188,252,2);
-INSERT INTO `item_mods` VALUES (19188,253,2);
+INSERT INTO `item_mods` VALUES (19188,958,2); -- Killer Shortbow "Resist All Status Ailments" +2
 INSERT INTO `item_mods` VALUES (19189,11,8);
 INSERT INTO `item_mods` VALUES (19189,13,8);
 INSERT INTO `item_mods` VALUES (19190,27,-5);
@@ -24928,21 +24873,7 @@ INSERT INTO `item_mods` VALUES (20515,73,10); -- iLvl 119 Godhands - STP+10
 INSERT INTO `item_mods` VALUES (20515,345,500); -- TP Bonus +500
 INSERT INTO `item_mods` VALUES (20516,25,25); -- Denouements: Accuracy+25
 INSERT INTO `item_mods` VALUES (20516,430,3); -- Quadruple Attack+3%
-INSERT INTO `item_mods` VALUES (20516,240,4); -- Enhances Resist Sleep effect
-INSERT INTO `item_mods` VALUES (20516,241,4); -- Enhances Resist Poison effect
-INSERT INTO `item_mods` VALUES (20516,242,4); -- Enhances Resist Paralyse effect
-INSERT INTO `item_mods` VALUES (20516,243,4); -- Enhances Resist Blind effect
-INSERT INTO `item_mods` VALUES (20516,244,4); -- Enhances Resist Silence effect
-INSERT INTO `item_mods` VALUES (20516,245,4); -- Enhances Resist Virus effect
-INSERT INTO `item_mods` VALUES (20516,246,4); -- Enhances Resist Petrify effect
-INSERT INTO `item_mods` VALUES (20516,247,4); -- Enhances Resist Bind effect
-INSERT INTO `item_mods` VALUES (20516,248,4); -- Enhances Resist Curse effect
-INSERT INTO `item_mods` VALUES (20516,249,4); -- Enhances Resist Gravity effect
-INSERT INTO `item_mods` VALUES (20516,250,4); -- Enhances Resist Slow effect
-INSERT INTO `item_mods` VALUES (20516,251,4); -- Enhances Resist Stun effect
-INSERT INTO `item_mods` VALUES (20516,252,4); -- Enhances Resist Charm effect
-INSERT INTO `item_mods` VALUES (20516,253,4); -- Enhances Resist Amnesia effect
-INSERT INTO `item_mods` VALUES (20516,254,4); -- Enhances Resist Lullaby effect
+INSERT INTO `item_mods` VALUES (20516,958,4); -- "resistance to all status ailments" +4
 INSERT INTO `item_mods` VALUES (20525,25,20); -- Blurred Claws - 20 Acc
 INSERT INTO `item_mods` VALUES (20526,25,25); -- Blurred Claws +1 - 25 Acc
 INSERT INTO `item_mods` VALUES (20526,173,20); -- Martial Arts +20
@@ -25060,6 +24991,7 @@ INSERT INTO `item_mods` VALUES (20604,25,27);
 INSERT INTO `item_mods` VALUES (20604,68,27);
 INSERT INTO `item_mods` VALUES (20604,289,9);
 INSERT INTO `item_mods` VALUES (20604,302,4);
+INSERT INTO `item_mods` VALUES (20605,255,13); -- Odium Reistance against "Death" +13
 INSERT INTO `item_mods` VALUES (20609,30,15); -- Jugo Kukri +1 - +21 Macc
 INSERT INTO `item_mods` VALUES (20609,68,22); -- 22 Evasion
 INSERT INTO `item_mods` VALUES (20609,302,3); -- Triple Atk 3%
@@ -25241,6 +25173,7 @@ INSERT INTO `item_mods` VALUES (20722,25,4);
 INSERT INTO `item_mods` VALUES (20722,29,1);
 INSERT INTO `item_mods` VALUES (20726,23,10);
 INSERT INTO `item_mods` VALUES (20726,25,15);
+INSERT INTO `item_mods` VALUES (20728,967,8);     -- Kheshig Blade - Cover Duration +8
 INSERT INTO `item_mods` VALUES (20733,8,10);      -- Anahera Saber (iLvl 119): STR +10
 INSERT INTO `item_mods` VALUES (20733,11,10);     -- AGI +10
 INSERT INTO `item_mods` VALUES (20733,288,2);     -- Double Attack +2%
@@ -25277,6 +25210,8 @@ INSERT INTO `item_mods` VALUES (20747,355,59); -- Torcleaver
 INSERT INTO `item_mods` VALUES (20748,10,20);  -- Caladbolg 119 AG - VIT+20
 INSERT INTO `item_mods` VALUES (20748,256,44); -- Aftermath
 INSERT INTO `item_mods` VALUES (20748,355,59); -- Torcleaver
+INSERT INTO `item_mods` VALUES (20754,255,15); -- Malfeasance Resistance against "Death" +15
+INSERT INTO `item_mods` VALUES (20755,255,16); -- Malfeasance +1 Resistance against "Death" +16
 INSERT INTO `item_mods` VALUES (20758,8,13);
 INSERT INTO `item_mods` VALUES (20758,23,35);
 INSERT INTO `item_mods` VALUES (20758,392,30);
@@ -27749,40 +27684,10 @@ INSERT INTO `item_mods` VALUES (22277,11,5);      -- Sasuke Shuriken +1: AGI+5
 INSERT INTO `item_mods` VALUES (22277,106,242);   -- Throwing skill +242
 INSERT INTO `item_mods` VALUES (22278,160,-2);    -- staunch_tathlum Damage Taken-2
 INSERT INTO `item_mods` VALUES (22278,168,10);    -- Spell Interruption Rate Down+10
-INSERT INTO `item_mods` VALUES (22278,240,10);    -- Resist Sleep+10
-INSERT INTO `item_mods` VALUES (22278,241,10);    -- Resist Poison+10
-INSERT INTO `item_mods` VALUES (22278,242,10);    -- Resist Paralyze+10
-INSERT INTO `item_mods` VALUES (22278,243,10);    -- Resist Blind+10
-INSERT INTO `item_mods` VALUES (22278,244,10);    -- Resist Silence+10
-INSERT INTO `item_mods` VALUES (22278,245,10);    -- Resist Virus+10
-INSERT INTO `item_mods` VALUES (22278,246,10);    -- Resist Petrify+10
-INSERT INTO `item_mods` VALUES (22278,247,10);    -- Resist Bind+10
-INSERT INTO `item_mods` VALUES (22278,248,10);    -- Resist Curse+10
-INSERT INTO `item_mods` VALUES (22278,249,10);    -- Resist Gravity+10
-INSERT INTO `item_mods` VALUES (22278,250,10);    -- Resist Slow+10
-INSERT INTO `item_mods` VALUES (22278,251,10);    -- Resist Stun+10
-INSERT INTO `item_mods` VALUES (22278,252,10);    -- Resist Charm+10
-INSERT INTO `item_mods` VALUES (22278,253,10);    -- Resist Amnesia+10
-INSERT INTO `item_mods` VALUES (22278,254,10);    -- Resist Lullaby+10
-INSERT INTO `item_mods` VALUES (22278,255,10);    -- Resist Death+10
+INSERT INTO `item_mods` VALUES (22278,958,10);    -- "resistance to all status ailments" +10
 INSERT INTO `item_mods` VALUES (22279,160,-3);    -- staunch_tathlum_+1 Damage Taken-3
 INSERT INTO `item_mods` VALUES (22279,168,11);    -- Spell Interruption Rate Down+11
-INSERT INTO `item_mods` VALUES (22279,240,11);    -- Resist Sleep+11
-INSERT INTO `item_mods` VALUES (22279,241,11);    -- Resist Poison+11
-INSERT INTO `item_mods` VALUES (22279,242,11);    -- Resist Paralyze+11
-INSERT INTO `item_mods` VALUES (22279,243,11);    -- Resist Blind+11
-INSERT INTO `item_mods` VALUES (22279,244,11);    -- Resist Silence+11
-INSERT INTO `item_mods` VALUES (22279,245,11);    -- Resist Virus+11
-INSERT INTO `item_mods` VALUES (22279,246,11);    -- Resist Petrify+11
-INSERT INTO `item_mods` VALUES (22279,247,11);    -- Resist Bind+11
-INSERT INTO `item_mods` VALUES (22279,248,11);    -- Resist Curse+11
-INSERT INTO `item_mods` VALUES (22279,249,11);    -- Resist Gravity+11
-INSERT INTO `item_mods` VALUES (22279,250,11);    -- Resist Slow+11
-INSERT INTO `item_mods` VALUES (22279,251,11);    -- Resist Stun+11
-INSERT INTO `item_mods` VALUES (22279,252,11);    -- Resist Charm+11
-INSERT INTO `item_mods` VALUES (22279,253,11);    -- Resist Amnesia+11
-INSERT INTO `item_mods` VALUES (22279,254,11);    -- Resist Lullaby+11
-INSERT INTO `item_mods` VALUES (22279,255,11);    -- Resist Death+11
+INSERT INTO `item_mods` VALUES (22279,958,11);    -- "resistance to all status ailments" +11
 INSERT INTO `item_mods` VALUES (22280,25,15);     -- yamarang Accuracy+15
 INSERT INTO `item_mods` VALUES (22280,30,15);     -- Magic Accuracy+15
 INSERT INTO `item_mods` VALUES (22280,31,15);     -- Magic Evasion+15
@@ -27919,6 +27824,8 @@ INSERT INTO `item_mods` VALUES (23046,31,42);     -- Magic Evasion+42
 INSERT INTO `item_mods` VALUES (23046,68,43);     -- Evasion+43
 INSERT INTO `item_mods` VALUES (23046,161,-6);    -- Physical Damage Taken-6
 INSERT INTO `item_mods` VALUES (23046,384,700);   -- Haste +7%
+INSERT INTO `item_mods` VALUES (23046,967,9);     -- Cover Duration +9
+INSERT INTO `item_mods` VALUES (23046,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23047,1,126);     -- ig._burgeonet_+2 DEF:126
 INSERT INTO `item_mods` VALUES (23047,2,61);      -- HP+61
 INSERT INTO `item_mods` VALUES (23047,5,34);      -- MP+34
@@ -28628,6 +28535,7 @@ INSERT INTO `item_mods` VALUES (23129,68,59);     -- Evasion+59
 INSERT INTO `item_mods` VALUES (23129,369,2);     -- Refresh+2
 INSERT INTO `item_mods` VALUES (23129,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23130,955,25);  -- WAR AF2 119 +2 Body Aggressor Duration +25
+INSERT INTO `item_mods` VALUES (23136,965,38);    -- Caballarius Surcoat +2 - Converts 38% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (23174,1,111);     -- pumm._mufflers_+2 DEF:111
 INSERT INTO `item_mods` VALUES (23174,2,55);      -- HP+55
 INSERT INTO `item_mods` VALUES (23174,8,23);      -- STR+23
@@ -29408,23 +29316,8 @@ INSERT INTO `item_mods` VALUES (23263,31,89);     -- Magic Evasion+89
 INSERT INTO `item_mods` VALUES (23263,68,48);     -- Evasion+48
 INSERT INTO `item_mods` VALUES (23263,111,17);    -- Divine Magic Skill+17
 INSERT INTO `item_mods` VALUES (23263,161,-4);    -- Physical Damage Taken-4
-INSERT INTO `item_mods` VALUES (23263,240,8);     -- Resist Sleep+8
-INSERT INTO `item_mods` VALUES (23263,241,8);     -- Resist Poison+8
-INSERT INTO `item_mods` VALUES (23263,242,8);     -- Resist Paralyze+8
-INSERT INTO `item_mods` VALUES (23263,243,8);     -- Resist Blind+8
-INSERT INTO `item_mods` VALUES (23263,244,8);     -- Resist Silence+8
-INSERT INTO `item_mods` VALUES (23263,245,8);     -- Resist Virus+8
-INSERT INTO `item_mods` VALUES (23263,246,8);     -- Resist Petrify+8
-INSERT INTO `item_mods` VALUES (23263,247,8);     -- Resist Bind+8
-INSERT INTO `item_mods` VALUES (23263,248,8);     -- Resist Curse+8
-INSERT INTO `item_mods` VALUES (23263,249,8);     -- Resist Gravity+8
-INSERT INTO `item_mods` VALUES (23263,250,8);     -- Resist Slow+8
-INSERT INTO `item_mods` VALUES (23263,251,8);     -- Resist Stun+8
-INSERT INTO `item_mods` VALUES (23263,252,8);     -- Resist Charm+8
-INSERT INTO `item_mods` VALUES (23263,253,8);     -- Resist Amnesia+8
-INSERT INTO `item_mods` VALUES (23263,254,8);     -- Resist Lullaby+8
-INSERT INTO `item_mods` VALUES (23263,255,8);     -- Resist Death+8
 INSERT INTO `item_mods` VALUES (23263,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23263,958,8);     -- "resistance to all status ailments" +8
 INSERT INTO `item_mods` VALUES (23308,1,93);      -- pumm._calligae_+2 DEF:93
 INSERT INTO `item_mods` VALUES (23308,2,45);      -- HP+45
 INSERT INTO `item_mods` VALUES (23308,8,19);      -- STR+19
@@ -29921,6 +29814,8 @@ INSERT INTO `item_mods` VALUES (23381,31,52);     -- Magic Evasion+52
 INSERT INTO `item_mods` VALUES (23381,68,53);     -- Evasion+53
 INSERT INTO `item_mods` VALUES (23381,161,-7);    -- Physical Damage Taken-7
 INSERT INTO `item_mods` VALUES (23381,384,700);   -- Haste +7%
+INSERT INTO `item_mods` VALUES (23381,967,10);    -- Cover Duration +10
+INSERT INTO `item_mods` VALUES (23381,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (23382,1,136);     -- ig._burgeonet_+3 DEF:136
 INSERT INTO `item_mods` VALUES (23382,2,71);      -- HP+71
 INSERT INTO `item_mods` VALUES (23382,5,44);      -- MP+44
@@ -30631,6 +30526,7 @@ INSERT INTO `item_mods` VALUES (23464,68,69);     -- Evasion+69
 INSERT INTO `item_mods` VALUES (23464,369,3);     -- Refresh+3
 INSERT INTO `item_mods` VALUES (23464,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23465,955,30);  -- WAR AF2 119 +3 Body Aggressor Duration +30
+INSERT INTO `item_mods` VALUES (23471,965,41);    -- Caballarius Surcoat +3 - Converts 41% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (23509,1,121);     -- pumm._mufflers_+3 DEF:121
 INSERT INTO `item_mods` VALUES (23509,2,65);      -- HP+65
 INSERT INTO `item_mods` VALUES (23509,8,28);      -- STR+28
@@ -31413,23 +31309,8 @@ INSERT INTO `item_mods` VALUES (23598,31,99);     -- Magic Evasion+99
 INSERT INTO `item_mods` VALUES (23598,68,58);     -- Evasion+58
 INSERT INTO `item_mods` VALUES (23598,111,19);    -- Divine Magic Skill+19
 INSERT INTO `item_mods` VALUES (23598,161,-5);    -- Physical Damage Taken-5
-INSERT INTO `item_mods` VALUES (23598,240,10);    -- Resist Sleep+10
-INSERT INTO `item_mods` VALUES (23598,241,10);    -- Resist Poison+10
-INSERT INTO `item_mods` VALUES (23598,242,10);    -- Resist Paralyze+10
-INSERT INTO `item_mods` VALUES (23598,243,10);    -- Resist Blind+10
-INSERT INTO `item_mods` VALUES (23598,244,10);    -- Resist Silence+10
-INSERT INTO `item_mods` VALUES (23598,245,10);    -- Resist Virus+10
-INSERT INTO `item_mods` VALUES (23598,246,10);    -- Resist Petrify+10
-INSERT INTO `item_mods` VALUES (23598,247,10);    -- Resist Bind+10
-INSERT INTO `item_mods` VALUES (23598,248,10);    -- Resist Curse+10
-INSERT INTO `item_mods` VALUES (23598,249,10);    -- Resist Gravity+10
-INSERT INTO `item_mods` VALUES (23598,250,10);    -- Resist Slow+10
-INSERT INTO `item_mods` VALUES (23598,251,10);    -- Resist Stun+10
-INSERT INTO `item_mods` VALUES (23598,252,10);    -- Resist Charm+10
-INSERT INTO `item_mods` VALUES (23598,253,10);    -- Resist Amnesia+10
-INSERT INTO `item_mods` VALUES (23598,254,10);    -- Resist Lullaby+10
-INSERT INTO `item_mods` VALUES (23598,255,10);    -- Resist Death+10
 INSERT INTO `item_mods` VALUES (23598,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23598,958,10);    -- "resistance to all status ailments" +10
 INSERT INTO `item_mods` VALUES (23643,1,103);     -- pumm._calligae_+3 DEF:103
 INSERT INTO `item_mods` VALUES (23643,2,55);      -- HP+55
 INSERT INTO `item_mods` VALUES (23643,8,24);      -- STR+24
@@ -32267,24 +32148,9 @@ INSERT INTO `item_mods` VALUES (23713,29,7);      -- Volte Cap: "Magic Def. Bonu
 INSERT INTO `item_mods` VALUES (23713,30,37);     -- Volte Cap: Magic Accuracy+37
 INSERT INTO `item_mods` VALUES (23713,31,102);    -- Volte Cap: Magic Evasion+102
 INSERT INTO `item_mods` VALUES (23713,68,85);     -- Volte Cap: Evasion+85
-INSERT INTO `item_mods` VALUES (23713,240,10);    -- Volte Cap: Resistance to all status ailments +10 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (23713,241,10);    -- Volte Cap: Resistance to all status ailments +10 (POISONRES)
-INSERT INTO `item_mods` VALUES (23713,242,10);    -- Volte Cap: Resistance to all status ailments +10 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (23713,243,10);    -- Volte Cap: Resistance to all status ailments +10 (BLINDRES)
-INSERT INTO `item_mods` VALUES (23713,244,10);    -- Volte Cap: Resistance to all status ailments +10 (SILENCERES)
-INSERT INTO `item_mods` VALUES (23713,245,10);    -- Volte Cap: Resistance to all status ailments +10 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (23713,246,10);    -- Volte Cap: Resistance to all status ailments +10 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (23713,247,10);    -- Volte Cap: Resistance to all status ailments +10 (BINDRES)
-INSERT INTO `item_mods` VALUES (23713,248,10);    -- Volte Cap: Resistance to all status ailments +10 (CURSERES)
-INSERT INTO `item_mods` VALUES (23713,249,10);    -- Volte Cap: Resistance to all status ailments +10 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (23713,250,10);    -- Volte Cap: Resistance to all status ailments +10 (SLOWRES)
-INSERT INTO `item_mods` VALUES (23713,251,10);    -- Volte Cap: Resistance to all status ailments +10 (STUNRES)
-INSERT INTO `item_mods` VALUES (23713,252,10);    -- Volte Cap: Resistance to all status ailments +10 (CHARMRES)
-INSERT INTO `item_mods` VALUES (23713,253,10);    -- Volte Cap: Resistance to all status ailments +10 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (23713,254,10);    -- Volte Cap: Resistance to all status ailments +10 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (23713,255,10);    -- Volte Cap: Resistance to all status ailments +10 (DEATHRES)
 INSERT INTO `item_mods` VALUES (23713,303,1);     -- Volte Cap: "Treasure Hunter"+1
 INSERT INTO `item_mods` VALUES (23713,384,500);   -- Volte Cap: Haste+5%
+INSERT INTO `item_mods` VALUES (23713,958,10);    -- Volte Cap: Resistance to all status ailments +10
 INSERT INTO `item_mods` VALUES (23714,1,130);     -- Volte Doublet: DEF:130
 INSERT INTO `item_mods` VALUES (23714,2,61);      -- Volte Doublet: HP+61
 INSERT INTO `item_mods` VALUES (23714,8,12);      -- Volte Doublet: STR+12
@@ -32356,24 +32222,9 @@ INSERT INTO `item_mods` VALUES (23717,29,7);      -- Volte Jupon: "Magic Def. Bo
 INSERT INTO `item_mods` VALUES (23717,30,37);     -- Volte Jupon: Magic Accuracy+37
 INSERT INTO `item_mods` VALUES (23717,31,102);    -- Volte Jupon: Magic Evasion+102
 INSERT INTO `item_mods` VALUES (23717,68,85);     -- Volte Jupon: Evasion+85
-INSERT INTO `item_mods` VALUES (23717,240,20);    -- Volte Jupon: Resistance to all status ailments +20 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (23717,241,20);    -- Volte Jupon: Resistance to all status ailments +20 (POISONRES)
-INSERT INTO `item_mods` VALUES (23717,242,20);    -- Volte Jupon: Resistance to all status ailments +20 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (23717,243,20);    -- Volte Jupon: Resistance to all status ailments +20 (BLINDRES)
-INSERT INTO `item_mods` VALUES (23717,244,20);    -- Volte Jupon: Resistance to all status ailments +20 (SILENCERES)
-INSERT INTO `item_mods` VALUES (23717,245,20);    -- Volte Jupon: Resistance to all status ailments +20 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (23717,246,20);    -- Volte Jupon: Resistance to all status ailments +20 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (23717,247,20);    -- Volte Jupon: Resistance to all status ailments +20 (BINDRES)
-INSERT INTO `item_mods` VALUES (23717,248,20);    -- Volte Jupon: Resistance to all status ailments +20 (CURSERES)
-INSERT INTO `item_mods` VALUES (23717,249,20);    -- Volte Jupon: Resistance to all status ailments +20 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (23717,250,20);    -- Volte Jupon: Resistance to all status ailments +20 (SLOWRES)
-INSERT INTO `item_mods` VALUES (23717,251,20);    -- Volte Jupon: Resistance to all status ailments +20 (STUNRES)
-INSERT INTO `item_mods` VALUES (23717,252,20);    -- Volte Jupon: Resistance to all status ailments +20 (CHARMRES)
-INSERT INTO `item_mods` VALUES (23717,253,20);    -- Volte Jupon: Resistance to all status ailments +20 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (23717,254,20);    -- Volte Jupon: Resistance to all status ailments +20 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (23717,255,20);    -- Volte Jupon: Resistance to all status ailments +20 (DEATHRES)
 INSERT INTO `item_mods` VALUES (23717,303,2);     -- Volte Jupon: "Treasure Hunter"+2
 INSERT INTO `item_mods` VALUES (23717,384,500);   -- Volte Jupon: Haste+5%
+INSERT INTO `item_mods` VALUES (23717,958,20);    -- Volte Jupon: Resistance to all status ailments +20
 INSERT INTO `item_mods` VALUES (23718,1,88);      -- Volte Gloves: DEF:88
 INSERT INTO `item_mods` VALUES (23718,9,19);      -- Volte Gloves: DEX+19
 INSERT INTO `item_mods` VALUES (23718,10,19);     -- Volte Gloves: VIT+19
@@ -32441,24 +32292,9 @@ INSERT INTO `item_mods` VALUES (23721,29,7);      -- Volte Bracers: "Magic Def. 
 INSERT INTO `item_mods` VALUES (23721,30,37);     -- Volte Bracers: Magic Accuracy+37
 INSERT INTO `item_mods` VALUES (23721,31,102);    -- Volte Bracers: Magic Evasion+102
 INSERT INTO `item_mods` VALUES (23721,68,85);     -- Volte Bracers: Evasion+85
-INSERT INTO `item_mods` VALUES (23721,240,10);    -- Volte Bracers: Resistance to all status ailments +10 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (23721,241,10);    -- Volte Bracers: Resistance to all status ailments +10 (POISONRES)
-INSERT INTO `item_mods` VALUES (23721,242,10);    -- Volte Bracers: Resistance to all status ailments +10 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (23721,243,10);    -- Volte Bracers: Resistance to all status ailments +10 (BLINDRES)
-INSERT INTO `item_mods` VALUES (23721,244,10);    -- Volte Bracers: Resistance to all status ailments +10 (SILENCERES)
-INSERT INTO `item_mods` VALUES (23721,245,10);    -- Volte Bracers: Resistance to all status ailments +10 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (23721,246,10);    -- Volte Bracers: Resistance to all status ailments +10 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (23721,247,10);    -- Volte Bracers: Resistance to all status ailments +10 (BINDRES)
-INSERT INTO `item_mods` VALUES (23721,248,10);    -- Volte Bracers: Resistance to all status ailments +10 (CURSERES)
-INSERT INTO `item_mods` VALUES (23721,249,10);    -- Volte Bracers: Resistance to all status ailments +10 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (23721,250,10);    -- Volte Bracers: Resistance to all status ailments +10 (SLOWRES)
-INSERT INTO `item_mods` VALUES (23721,251,10);    -- Volte Bracers: Resistance to all status ailments +10 (STUNRES)
-INSERT INTO `item_mods` VALUES (23721,252,10);    -- Volte Bracers: Resistance to all status ailments +10 (CHARMRES)
-INSERT INTO `item_mods` VALUES (23721,253,10);    -- Volte Bracers: Resistance to all status ailments +10 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (23721,254,10);    -- Volte Bracers: Resistance to all status ailments +10 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (23721,255,10);    -- Volte Bracers: Resistance to all status ailments +10 (DEATHRES)
 INSERT INTO `item_mods` VALUES (23721,303,1);     -- Volte Bracers: "Treasure Hunter"+1
 INSERT INTO `item_mods` VALUES (23721,384,500);   -- Volte Bracers: Haste+5%
+INSERT INTO `item_mods` VALUES (23721,958,10);    -- Volte Bracers: Resistance to all status ailments +10
 INSERT INTO `item_mods` VALUES (23722,1,112);     -- Volte Brais: DEF:112
 INSERT INTO `item_mods` VALUES (23722,2,54);      -- Volte Brais: HP+54
 INSERT INTO `item_mods` VALUES (23722,8,15);      -- Volte Brais: STR+15
@@ -32527,24 +32363,9 @@ INSERT INTO `item_mods` VALUES (23725,29,7);      -- Volte Hose: "Magic Def. Bon
 INSERT INTO `item_mods` VALUES (23725,30,37);     -- Volte Hose: Magic Accuracy+37
 INSERT INTO `item_mods` VALUES (23725,31,102);    -- Volte Hose: Magic Evasion+102
 INSERT INTO `item_mods` VALUES (23725,68,85);     -- Volte Hose: Evasion+85
-INSERT INTO `item_mods` VALUES (23725,240,10);    -- Volte Hose: Resistance to all status ailments +10 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (23725,241,10);    -- Volte Hose: Resistance to all status ailments +10 (POISONRES)
-INSERT INTO `item_mods` VALUES (23725,242,10);    -- Volte Hose: Resistance to all status ailments +10 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (23725,243,10);    -- Volte Hose: Resistance to all status ailments +10 (BLINDRES)
-INSERT INTO `item_mods` VALUES (23725,244,10);    -- Volte Hose: Resistance to all status ailments +10 (SILENCERES)
-INSERT INTO `item_mods` VALUES (23725,245,10);    -- Volte Hose: Resistance to all status ailments +10 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (23725,246,10);    -- Volte Hose: Resistance to all status ailments +10 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (23725,247,10);    -- Volte Hose: Resistance to all status ailments +10 (BINDRES)
-INSERT INTO `item_mods` VALUES (23725,248,10);    -- Volte Hose: Resistance to all status ailments +10 (CURSERES)
-INSERT INTO `item_mods` VALUES (23725,249,10);    -- Volte Hose: Resistance to all status ailments +10 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (23725,250,10);    -- Volte Hose: Resistance to all status ailments +10 (SLOWRES)
-INSERT INTO `item_mods` VALUES (23725,251,10);    -- Volte Hose: Resistance to all status ailments +10 (STUNRES)
-INSERT INTO `item_mods` VALUES (23725,252,10);    -- Volte Hose: Resistance to all status ailments +10 (CHARMRES)
-INSERT INTO `item_mods` VALUES (23725,253,10);    -- Volte Hose: Resistance to all status ailments +10 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (23725,254,10);    -- Volte Hose: Resistance to all status ailments +10 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (23725,255,10);    -- Volte Hose: Resistance to all status ailments +10 (DEATHRES)
 INSERT INTO `item_mods` VALUES (23725,303,1);     -- Volte Hose: "Treasure Hunter"+1
 INSERT INTO `item_mods` VALUES (23725,384,500);   -- Volte Hose: Haste+5%
+INSERT INTO `item_mods` VALUES (23725,958,10);    -- Volte Hose: Resistance to all status ailments +10
 INSERT INTO `item_mods` VALUES (23726,1,70);      -- Volte Gaiters: DEF:70
 INSERT INTO `item_mods` VALUES (23726,2,9);       -- Volte Gaiters: HP+9
 INSERT INTO `item_mods` VALUES (23726,8,2);       -- Volte Gaiters: STR+2
@@ -32614,24 +32435,9 @@ INSERT INTO `item_mods` VALUES (23729,29,7);      -- Volte Boots: "Magic Def. Bo
 INSERT INTO `item_mods` VALUES (23729,30,37);     -- Volte Boots: Magic Accuracy+37
 INSERT INTO `item_mods` VALUES (23729,31,102);    -- Volte Boots: Magic Evasion+102
 INSERT INTO `item_mods` VALUES (23729,68,85);     -- Volte Boots: Evasion+85
-INSERT INTO `item_mods` VALUES (23729,240,10);    -- Volte Boots: Resistance to all status ailments +10 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (23729,241,10);    -- Volte Boots: Resistance to all status ailments +10 (POISONRES)
-INSERT INTO `item_mods` VALUES (23729,242,10);    -- Volte Boots: Resistance to all status ailments +10 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (23729,243,10);    -- Volte Boots: Resistance to all status ailments +10 (BLINDRES)
-INSERT INTO `item_mods` VALUES (23729,244,10);    -- Volte Boots: Resistance to all status ailments +10 (SILENCERES)
-INSERT INTO `item_mods` VALUES (23729,245,10);    -- Volte Boots: Resistance to all status ailments +10 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (23729,246,10);    -- Volte Boots: Resistance to all status ailments +10 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (23729,247,10);    -- Volte Boots: Resistance to all status ailments +10 (BINDRES)
-INSERT INTO `item_mods` VALUES (23729,248,10);    -- Volte Boots: Resistance to all status ailments +10 (CURSERES)
-INSERT INTO `item_mods` VALUES (23729,249,10);    -- Volte Boots: Resistance to all status ailments +10 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (23729,250,10);    -- Volte Boots: Resistance to all status ailments +10 (SLOWRES)
-INSERT INTO `item_mods` VALUES (23729,251,10);    -- Volte Boots: Resistance to all status ailments +10 (STUNRES)
-INSERT INTO `item_mods` VALUES (23729,252,10);    -- Volte Boots: Resistance to all status ailments +10 (CHARMRES)
-INSERT INTO `item_mods` VALUES (23729,253,10);    -- Volte Boots: Resistance to all status ailments +10 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (23729,254,10);    -- Volte Boots: Resistance to all status ailments +10 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (23729,255,10);    -- Volte Boots: Resistance to all status ailments +10 (DEATHRES)
 INSERT INTO `item_mods` VALUES (23729,303,1);     -- Volte Boots: "Treasure Hunter"+1
 INSERT INTO `item_mods` VALUES (23729,384,500);   -- Volte Boots: Haste+5%
+INSERT INTO `item_mods` VALUES (23729,958,10);    -- Volte Boots: Resistance to all status ailments +10
 INSERT INTO `item_mods` VALUES (23730,1,1);       -- Karakul Cap: DEF:1
 INSERT INTO `item_mods` VALUES (23731,1,1);       -- Royal Chocobo Beret: DEF:1
 INSERT INTO `item_mods` VALUES (25417,23,15);     -- Warrior's Beads: Attack+15
@@ -32955,23 +32761,8 @@ INSERT INTO `item_mods` VALUES (25557,13,28);     -- Arke Zuchetto: MND+28
 INSERT INTO `item_mods` VALUES (25557,14,22);     -- Arke Zuchetto: CHR+22
 INSERT INTO `item_mods` VALUES (25557,25,40);     -- Arke Zuchetto: Accuracy+40
 INSERT INTO `item_mods` VALUES (25557,160,-8);    -- Arke Zuchetto: Damage taken -8%
-INSERT INTO `item_mods` VALUES (25557,240,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (25557,241,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (POISONRES)
-INSERT INTO `item_mods` VALUES (25557,242,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (25557,243,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (BLINDRES)
-INSERT INTO `item_mods` VALUES (25557,244,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (SILENCERES)
-INSERT INTO `item_mods` VALUES (25557,245,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (25557,246,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (25557,247,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (BINDRES)
-INSERT INTO `item_mods` VALUES (25557,248,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (CURSERES)
-INSERT INTO `item_mods` VALUES (25557,249,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (25557,250,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (SLOWRES)
-INSERT INTO `item_mods` VALUES (25557,251,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (STUNRES)
-INSERT INTO `item_mods` VALUES (25557,252,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (CHARMRES)
-INSERT INTO `item_mods` VALUES (25557,253,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (25557,254,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (25557,255,5);     -- Arke Zuchetto: Resistance to all status ailments +5 (DEATHRES)
 INSERT INTO `item_mods` VALUES (25557,384,700);   -- Arke Zuchetto: Haste+7%
+INSERT INTO `item_mods` VALUES (25557,958,5);     -- Arke Zuchetto: Resistance to all status ailments +5
 -- INSERT INTO `item_mods` VALUES (25557,,8);     -- Arke Zuchetto: Converts damage taken to TP +8
 INSERT INTO `item_mods` VALUES (25558,1,139);     -- Arke Zuchetto +1: DEF:139
 INSERT INTO `item_mods` VALUES (25558,2,156);     -- Arke Zuchetto +1: HP+156
@@ -32984,23 +32775,8 @@ INSERT INTO `item_mods` VALUES (25558,13,28);     -- Arke Zuchetto +1: MND+28
 INSERT INTO `item_mods` VALUES (25558,14,22);     -- Arke Zuchetto +1: CHR+22
 INSERT INTO `item_mods` VALUES (25558,25,50);     -- Arke Zuchetto +1: Accuracy+50
 INSERT INTO `item_mods` VALUES (25558,160,-9);    -- Arke Zuchetto +1: Damage taken -9%
-INSERT INTO `item_mods` VALUES (25558,240,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (SLEEPRES)
-INSERT INTO `item_mods` VALUES (25558,241,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (POISONRES)
-INSERT INTO `item_mods` VALUES (25558,242,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (PARALYZERES)
-INSERT INTO `item_mods` VALUES (25558,243,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (BLINDRES)
-INSERT INTO `item_mods` VALUES (25558,244,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (SILENCERES)
-INSERT INTO `item_mods` VALUES (25558,245,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (VIRUSRES)
-INSERT INTO `item_mods` VALUES (25558,246,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (PETRIFYRES)
-INSERT INTO `item_mods` VALUES (25558,247,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (BINDRES)
-INSERT INTO `item_mods` VALUES (25558,248,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (CURSERES)
-INSERT INTO `item_mods` VALUES (25558,249,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (GRAVITYRES)
-INSERT INTO `item_mods` VALUES (25558,250,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (SLOWRES)
-INSERT INTO `item_mods` VALUES (25558,251,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (STUNRES)
-INSERT INTO `item_mods` VALUES (25558,252,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (CHARMRES)
-INSERT INTO `item_mods` VALUES (25558,253,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (AMNESIARES)
-INSERT INTO `item_mods` VALUES (25558,254,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (LULLABYRES)
-INSERT INTO `item_mods` VALUES (25558,255,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6 (DEATHRES)
 INSERT INTO `item_mods` VALUES (25558,384,700);   -- Arke Zuchetto +1: Haste+7%
+INSERT INTO `item_mods` VALUES (25558,958,6);     -- Arke Zuchetto +1: Resistance to all status ailments +6
 -- INSERT INTO `item_mods` VALUES (25558,,10);    -- Arke Zuchetto +1: Converts damage taken to TP +10
 INSERT INTO `item_mods` VALUES (25559,1,105);     -- Pinga Crown: DEF:105
 INSERT INTO `item_mods` VALUES (25559,2,54);      -- Pinga Crown: HP+54
@@ -34054,7 +33830,7 @@ INSERT INTO `item_mods` VALUES (25785,31,86);     -- Magic Evasion+86
 INSERT INTO `item_mods` VALUES (25785,68,60);     -- Evasion+60
 INSERT INTO `item_mods` VALUES (25785,165,4);     -- Crit Hit Rate+4
 INSERT INTO `item_mods` VALUES (25785,250,90);    -- Resist Slow+90
-INSERT INTO `item_mods` VALUES (25785,289,10);    -- Subtle Blow+10
+INSERT INTO `item_mods` VALUES (25785,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (25785,302,5);     -- Triple Attack+5
 INSERT INTO `item_mods` VALUES (25785,384,100);    -- Haste +1%
 INSERT INTO `item_mods` VALUES (25786,1,148);     -- ashera_harness DEF:148
@@ -35068,7 +34844,7 @@ INSERT INTO `item_mods` VALUES (26084,8,5);       -- sherida_earring STR+5
 INSERT INTO `item_mods` VALUES (26084,9,5);       -- DEX+5
 INSERT INTO `item_mods` VALUES (26084,73,5);      -- Store TP+5
 INSERT INTO `item_mods` VALUES (26084,288,5);     -- Double Attack+5
-INSERT INTO `item_mods` VALUES (26084,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26084,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26160,116,10);    -- Evanescence Ring: Dark magic skill +10
 INSERT INTO `item_mods` VALUES (26160,168,5);     -- Spell interruption rate down 5%
 INSERT INTO `item_mods` VALUES (26160,315,10);    -- Drain and Aspir potency +10%
@@ -35117,7 +34893,7 @@ INSERT INTO `item_mods` VALUES (26184,369,1);     -- Refresh+1
 INSERT INTO `item_mods` VALUES (26185,8,10);      -- niqmaddu_ring STR+10
 INSERT INTO `item_mods` VALUES (26185,9,10);      -- DEX+10
 INSERT INTO `item_mods` VALUES (26185,10,10);     -- VIT+10
-INSERT INTO `item_mods` VALUES (26185,289,5);     -- Subtle Blow+5
+INSERT INTO `item_mods` VALUES (26185,973,5);     -- Subtle Blow II +5
 INSERT INTO `item_mods` VALUES (26185,430,3);     -- Quad Attack+3
 INSERT INTO `item_mods` VALUES (26186,1,10);      -- ilabrat_ring DEF:10
 INSERT INTO `item_mods` VALUES (26186,2,60);      -- HP+60
@@ -35210,11 +34986,13 @@ INSERT INTO `item_mods` VALUES (26340,8,15);      -- STR+15
 INSERT INTO `item_mods` VALUES (26340,9,15);      -- DEX+15
 INSERT INTO `item_mods` VALUES (26340,160,-5);    -- Damage Taken-5
 INSERT INTO `item_mods` VALUES (26340,302,6);     -- Triple Attack+6
+INSERT INTO `item_mods` VALUES (26340,973,10);    -- Subtle Blow II +10
 INSERT INTO `item_mods` VALUES (26341,1,25);      -- moonbow_belt_+1 DEF:25
 INSERT INTO `item_mods` VALUES (26341,8,20);      -- STR+20
 INSERT INTO `item_mods` VALUES (26341,9,20);      -- DEX+20
 INSERT INTO `item_mods` VALUES (26341,160,-6);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
+INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64
@@ -37039,6 +36817,7 @@ INSERT INTO `item_mods` VALUES (26812,31,32);
 INSERT INTO `item_mods` VALUES (26812,68,19);
 INSERT INTO `item_mods` VALUES (26812,160,-9);
 INSERT INTO `item_mods` VALUES (26812,384,300);
+INSERT INTO `item_mods` VALUES (26812,965,32);    -- Caballarius Surcoat - Converts 32% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (26813,1,151);
 INSERT INTO `item_mods` VALUES (26813,2,118);
 INSERT INTO `item_mods` VALUES (26813,5,90);
@@ -37055,6 +36834,7 @@ INSERT INTO `item_mods` VALUES (26813,31,48);
 INSERT INTO `item_mods` VALUES (26813,68,41);
 INSERT INTO `item_mods` VALUES (26813,160,-10);
 INSERT INTO `item_mods` VALUES (26813,384,300);
+INSERT INTO `item_mods` VALUES (26813,965,35);    -- Caballarius Surcoat +1 - Converts 35% Covered Physical Damage to MP
 INSERT INTO `item_mods` VALUES (26814,1,105);     -- Fallen's Cuirass: DEF 105
 INSERT INTO `item_mods` VALUES (26814,2,50);      -- HP +50
 INSERT INTO `item_mods` VALUES (26814,5,49);      -- MP +49
@@ -37275,6 +37055,7 @@ INSERT INTO `item_mods` VALUES (26826,29,2);
 INSERT INTO `item_mods` VALUES (26826,31,36);
 INSERT INTO `item_mods` VALUES (26826,68,31);
 INSERT INTO `item_mods` VALUES (26826,384,300);
+INSERT INTO `item_mods` VALUES (26826,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (26827,1,141);
 INSERT INTO `item_mods` VALUES (26827,2,82);
 INSERT INTO `item_mods` VALUES (26827,5,44);
@@ -37290,6 +37071,7 @@ INSERT INTO `item_mods` VALUES (26827,29,4);
 INSERT INTO `item_mods` VALUES (26827,31,53);
 INSERT INTO `item_mods` VALUES (26827,68,56);
 INSERT INTO `item_mods` VALUES (26827,384,300);
+INSERT INTO `item_mods` VALUES (26827,974,1);     -- Add subjob traits to wyvern
 INSERT INTO `item_mods` VALUES (26828,1,90);
 INSERT INTO `item_mods` VALUES (26828,2,23);
 INSERT INTO `item_mods` VALUES (26828,5,100);
@@ -38644,6 +38426,7 @@ INSERT INTO `item_mods` VALUES (26971,384,400); -- Haste +4
 INSERT INTO `item_mods` VALUES (26971,905,3);-- "Shield Def. Bonus"+3
 INSERT INTO `item_mods` VALUES (26971,369,2); -- "Refresh"+2
 INSERT INTO `item_mods` VALUES (26971,160,-8); -- Damage taken -8%
+INSERT INTO `item_mods` VALUES (26973,255,15); -- Samnuha Coat "Death" Resistance +15
 INSERT INTO `item_mods` VALUES (26976,1,70);
 INSERT INTO `item_mods` VALUES (26976,2,40);
 INSERT INTO `item_mods` VALUES (26976,8,11);
@@ -43056,6 +42839,7 @@ INSERT INTO `item_mods` VALUES (27531,120,3); -- String instrument skill +5
 INSERT INTO `item_mods` VALUES (27541,25,6); -- Cessance Earring: Accuracy+6
 INSERT INTO `item_mods` VALUES (27541,288,3); -- Double Attack+3
 INSERT INTO `item_mods` VALUES (27541,73,3); -- Store TP+3
+INSERT INTO `item_mods` VALUES (27555,255,10); -- Warden's Ring "Death" resistance +10
 INSERT INTO `item_mods` VALUES (27562,7,50);      -- Metamorph Ring: Converts 50 HP to MP
 INSERT INTO `item_mods` VALUES (27562,12,5);      -- INT +5
 INSERT INTO `item_mods` VALUES (27562,13,5);      -- MND +5
@@ -43373,6 +43157,7 @@ INSERT INTO `item_mods` VALUES (27669,31,21);
 INSERT INTO `item_mods` VALUES (27669,68,15);
 INSERT INTO `item_mods` VALUES (27669,161,-5);
 INSERT INTO `item_mods` VALUES (27669,384,600);
+INSERT INTO `item_mods` VALUES (27669,966,1);     -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (27670,1,83);
 INSERT INTO `item_mods` VALUES (27670,2,19);
 INSERT INTO `item_mods` VALUES (27670,5,19);
@@ -43723,6 +43508,8 @@ INSERT INTO `item_mods` VALUES (27690,31,32);
 INSERT INTO `item_mods` VALUES (27690,68,33);
 INSERT INTO `item_mods` VALUES (27690,161,-5);
 INSERT INTO `item_mods` VALUES (27690,384,700);
+INSERT INTO `item_mods` VALUES (27690,967,9);    -- Reverence Cornet +1 - Cover Duration +9
+INSERT INTO `item_mods` VALUES (27690,966,1);    -- Enhances Cover to redirect magic and ranged attacks to ability user
 INSERT INTO `item_mods` VALUES (27691,1,116);
 INSERT INTO `item_mods` VALUES (27691,2,41);
 INSERT INTO `item_mods` VALUES (27691,5,23);
@@ -44222,6 +44009,7 @@ INSERT INTO `item_mods` VALUES (27739,31,28);
 INSERT INTO `item_mods` VALUES (27739,68,26);
 INSERT INTO `item_mods` VALUES (27739,288,3);
 INSERT INTO `item_mods` VALUES (27739,384,800);
+INSERT INTO `item_mods` VALUES (27740,1,105);      -- Outrider Mask: DEF 105
 INSERT INTO `item_mods` VALUES (27740,2,34);
 INSERT INTO `item_mods` VALUES (27740,5,22);
 INSERT INTO `item_mods` VALUES (27740,8,24);
@@ -44235,8 +44023,8 @@ INSERT INTO `item_mods` VALUES (27740,23,5);
 INSERT INTO `item_mods` VALUES (27740,29,2);
 INSERT INTO `item_mods` VALUES (27740,31,40);
 INSERT INTO `item_mods` VALUES (27740,68,29);
-INSERT INTO `item_mods` VALUES (27740,161,-2);
 INSERT INTO `item_mods` VALUES (27740,384,700);
+INSERT INTO `item_mods` VALUES (27741,1,94);      -- Espial Cap: DEF 94
 INSERT INTO `item_mods` VALUES (27741,2,32);
 INSERT INTO `item_mods` VALUES (27741,5,17);
 INSERT INTO `item_mods` VALUES (27741,8,20);
@@ -44251,7 +44039,7 @@ INSERT INTO `item_mods` VALUES (27741,29,3);
 INSERT INTO `item_mods` VALUES (27741,31,40);
 INSERT INTO `item_mods` VALUES (27741,68,37);
 INSERT INTO `item_mods` VALUES (27741,384,700);
-INSERT INTO `item_mods` VALUES (27741,421,2);
+INSERT INTO `item_mods` VALUES (27742,1,88);      -- Wayfarer Circlet: DEF 88
 INSERT INTO `item_mods` VALUES (27742,2,32);
 INSERT INTO `item_mods` VALUES (27742,5,31);
 INSERT INTO `item_mods` VALUES (27742,8,19);
@@ -45861,7 +45649,7 @@ INSERT INTO `item_mods` VALUES (27878,31,80);
 INSERT INTO `item_mods` VALUES (27878,68,41);
 INSERT INTO `item_mods` VALUES (27878,369,20);
 INSERT INTO `item_mods` VALUES (27878,384,300);
-INSERT INTO `item_mods` VALUES (27881,1,133);
+INSERT INTO `item_mods` VALUES (27881,1,133);       -- Outrider Mail DEF:133
 INSERT INTO `item_mods` VALUES (27881,2,55);
 INSERT INTO `item_mods` VALUES (27881,5,42);
 INSERT INTO `item_mods` VALUES (27881,8,26);
@@ -45876,7 +45664,7 @@ INSERT INTO `item_mods` VALUES (27881,29,3);
 INSERT INTO `item_mods` VALUES (27881,31,50);
 INSERT INTO `item_mods` VALUES (27881,68,37);
 INSERT INTO `item_mods` VALUES (27881,384,300);
-INSERT INTO `item_mods` VALUES (27882,1,122);
+INSERT INTO `item_mods` VALUES (27882,1,122);      -- Espial Gambison: DEF 122
 INSERT INTO `item_mods` VALUES (27882,2,53);
 INSERT INTO `item_mods` VALUES (27882,5,28);
 INSERT INTO `item_mods` VALUES (27882,8,22);
@@ -45890,8 +45678,8 @@ INSERT INTO `item_mods` VALUES (27882,25,6);
 INSERT INTO `item_mods` VALUES (27882,29,5);
 INSERT INTO `item_mods` VALUES (27882,31,60);
 INSERT INTO `item_mods` VALUES (27882,68,49);
-INSERT INTO `item_mods` VALUES (27882,165,10);
 INSERT INTO `item_mods` VALUES (27882,384,300);
+INSERT INTO `item_mods` VALUES (27883,1,116);      -- Wayfarer Robe: DEF 116
 INSERT INTO `item_mods` VALUES (27883,2,48);
 INSERT INTO `item_mods` VALUES (27883,5,57);
 INSERT INTO `item_mods` VALUES (27883,8,20);
@@ -47479,6 +47267,7 @@ INSERT INTO `item_mods` VALUES (28027,2,70);
 INSERT INTO `item_mods` VALUES (28027,8,20);
 INSERT INTO `item_mods` VALUES (28027,9,-13);
 INSERT INTO `item_mods` VALUES (28027,11,-13);
+INSERT INTO `item_mods` VALUES (28029,1,94);      -- Outrider Mittens: DEF 94
 INSERT INTO `item_mods` VALUES (28029,2,24);
 INSERT INTO `item_mods` VALUES (28029,8,6);
 INSERT INTO `item_mods` VALUES (28029,9,28);
@@ -47491,8 +47280,8 @@ INSERT INTO `item_mods` VALUES (28029,23,4);
 INSERT INTO `item_mods` VALUES (28029,29,1);
 INSERT INTO `item_mods` VALUES (28029,31,25);
 INSERT INTO `item_mods` VALUES (28029,68,19);
-INSERT INTO `item_mods` VALUES (28029,161,-2);
 INSERT INTO `item_mods` VALUES (28029,384,400);
+INSERT INTO `item_mods` VALUES (28030,1,82);      -- Espial Bracers: DEF 82
 INSERT INTO `item_mods` VALUES (28030,2,22);
 INSERT INTO `item_mods` VALUES (28030,5,8);
 INSERT INTO `item_mods` VALUES (28030,8,7);
@@ -47507,7 +47296,7 @@ INSERT INTO `item_mods` VALUES (28030,29,2);
 INSERT INTO `item_mods` VALUES (28030,31,25);
 INSERT INTO `item_mods` VALUES (28030,68,24);
 INSERT INTO `item_mods` VALUES (28030,384,400);
-INSERT INTO `item_mods` VALUES (28030,421,2);
+INSERT INTO `item_mods` VALUES (28031,1,77);      -- Wayfarer Cuffs: DEF 77
 INSERT INTO `item_mods` VALUES (28031,2,20);
 INSERT INTO `item_mods` VALUES (28031,5,14);
 INSERT INTO `item_mods` VALUES (28031,8,6);
@@ -47521,7 +47310,6 @@ INSERT INTO `item_mods` VALUES (28031,29,2);
 INSERT INTO `item_mods` VALUES (28031,30,4);
 INSERT INTO `item_mods` VALUES (28031,31,35);
 INSERT INTO `item_mods` VALUES (28031,68,19);
-INSERT INTO `item_mods` VALUES (28031,369,1);
 INSERT INTO `item_mods` VALUES (28031,384,300);
 INSERT INTO `item_mods` VALUES (28032,2,6);
 INSERT INTO `item_mods` VALUES (28032,5,11);
@@ -49027,6 +48815,7 @@ INSERT INTO `item_mods` VALUES (28166,31,60);
 INSERT INTO `item_mods` VALUES (28166,68,30);
 INSERT INTO `item_mods` VALUES (28166,384,600);
 INSERT INTO `item_mods` VALUES (28166,408,20);
+INSERT INTO `item_mods` VALUES (28168,1,116);      -- Outrider Hose: DEF 116
 INSERT INTO `item_mods` VALUES (28168,2,44);
 INSERT INTO `item_mods` VALUES (28168,8,31);
 INSERT INTO `item_mods` VALUES (28168,10,19);
@@ -49038,8 +48827,8 @@ INSERT INTO `item_mods` VALUES (28168,23,4);
 INSERT INTO `item_mods` VALUES (28168,29,2);
 INSERT INTO `item_mods` VALUES (28168,31,70);
 INSERT INTO `item_mods` VALUES (28168,68,19);
-INSERT INTO `item_mods` VALUES (28168,161,-2);
 INSERT INTO `item_mods` VALUES (28168,384,500);
+INSERT INTO `item_mods` VALUES (28169,1,105);     -- Espial Hose: DEF 105
 INSERT INTO `item_mods` VALUES (28169,2,42);
 INSERT INTO `item_mods` VALUES (28169,5,14);
 INSERT INTO `item_mods` VALUES (28169,8,27);
@@ -49052,7 +48841,7 @@ INSERT INTO `item_mods` VALUES (28169,29,5);
 INSERT INTO `item_mods` VALUES (28169,31,90);
 INSERT INTO `item_mods` VALUES (28169,68,39);
 INSERT INTO `item_mods` VALUES (28169,384,500);
-INSERT INTO `item_mods` VALUES (28169,421,2);
+INSERT INTO `item_mods` VALUES (28170,1,99);      -- Wayfarer Slops DEF 99
 INSERT INTO `item_mods` VALUES (28170,2,38);
 INSERT INTO `item_mods` VALUES (28170,5,28);
 INSERT INTO `item_mods` VALUES (28170,8,24);
@@ -49065,7 +48854,6 @@ INSERT INTO `item_mods` VALUES (28170,28,5);
 INSERT INTO `item_mods` VALUES (28170,29,5);
 INSERT INTO `item_mods` VALUES (28170,31,100);
 INSERT INTO `item_mods` VALUES (28170,68,24);
-INSERT INTO `item_mods` VALUES (28170,369,1);
 INSERT INTO `item_mods` VALUES (28170,384,500);
 INSERT INTO `item_mods` VALUES (28171,2,11);
 INSERT INTO `item_mods` VALUES (28171,5,22);

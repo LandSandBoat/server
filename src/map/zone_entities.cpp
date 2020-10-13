@@ -46,6 +46,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "utils/battlefieldutils.h"
+#include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
@@ -286,7 +287,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
 
-    PChar->PClaimedMob = nullptr;
+    battleutils::RelinquishClaim(PChar);
 
     //remove pets
     if (PChar->PPet != nullptr)
