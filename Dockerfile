@@ -3,6 +3,13 @@ FROM ubuntu:18.04
 # Avoid any UI since we don't have one
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set env variables to override the configuration settings
+ENV TPZ_DB_HOST=db
+ENV TPZ_DB_PORT=3306
+ENV TPZ_DB_USER=topazadmin
+ENV TPZ_DB_USER_PASSWD=topazisawesome
+ENV TPZ_DB_NAME=tpzdb
+
 # Working directory will be /code meaning that the contents of topaz will exist in /code
 WORKDIR /code
 
@@ -15,7 +22,7 @@ ADD . /code
 RUN mkdir build && cd build && cmake .. && make -j $(nproc) && cd .. && rm -r /code/build
 
 # Copy the docker config files to the conf folder instead of the default config
-COPY /conf/docker/* conf/
+COPY /conf/default/* conf/
 
 # Startup the server when the container starts
 ENTRYPOINT nohup ./topaz_connect > topaz_connect.log & \
