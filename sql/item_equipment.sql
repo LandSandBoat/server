@@ -9015,8 +9015,8 @@ INSERT INTO `item_equipment` VALUES (19316,'fetter_lance',81,0,8192,209,0,0,1,0)
 INSERT INTO `item_equipment` VALUES (19317,'borian_spear',87,0,10305,204,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (19318,'borian_spear_+1',87,0,10305,204,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (19319,'mmm_fishing_rod',1,0,4194303,1,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (19320,'lu_sh._f._rod_+1',1,0,4194303,0,0,0,4,0);
-INSERT INTO `item_equipment` VALUES (19321,'ebisu_f._rod_+1',1,0,4194303,0,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (19320,'lu_sh._f._rod_+1',1,0,4194303,32782,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (19321,'ebisu_f._rod_+1',1,0,4194303,32783,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (19323,'mmm_minnow',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (19324,'dried_squid',1,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (19325,'judge_fly',1,0,4194303,0,0,0,8,0);
@@ -10651,6 +10651,7 @@ INSERT INTO `item_equipment` VALUES (21631,'mirage_sword',99,119,32768,278,0,0,3
 INSERT INTO `item_equipment` VALUES (21632,'luhlaza_sword',99,119,32768,278,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21633,'zomorrodnegar',99,119,32768,819,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21635,'malignance_sword',99,119,2097345,280,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (21636,'nihility',1,0,4194303,886,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21654,'arasy_claymore',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21655,'arasy_claymore_+1',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21656,'dyrnwyn',99,119,128,321,0,0,1,0);
@@ -11487,6 +11488,8 @@ INSERT INTO `item_equipment` VALUES (23749,'angantyr_tights',99,119,1720860,267,
 INSERT INTO `item_equipment` VALUES (23750,'hervor_sollerets',99,119,10689,276,0,0,256,0);
 INSERT INTO `item_equipment` VALUES (23751,'heidrek_boots',99,119,2462754,252,0,0,256,0);
 INSERT INTO `item_equipment` VALUES (23752,'angantyr_boots',99,119,1720860,267,0,0,256,0);
+INSERT INTO `item_equipment` VALUES (23753,'sandogasa',1,0,4194303,0,0,0,16,0);
+INSERT INTO `item_equipment` VALUES (23754,'sandogasa_+1',1,0,4194303,0,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (25417,'warriors_beads',99,0,1,0,0,0,512,0);
 INSERT INTO `item_equipment` VALUES (25418,'war._beads_+1',99,0,1,0,0,0,512,0);
 INSERT INTO `item_equipment` VALUES (25419,'war._beads_+2',99,0,1,0,0,0,512,0);
@@ -12866,8 +12869,8 @@ INSERT INTO `item_equipment` VALUES (27288,'vanya_slops',99,119,1589788,395,0,0,
 INSERT INTO `item_equipment` VALUES (27289,'doyen_pants',99,119,3850780,209,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27291,'swimming_togs',1,0,4194303,404,0,0,128,256);
 INSERT INTO `item_equipment` VALUES (27292,'swimming_togs_+1',1,0,4194303,404,0,0,128,256);
-INSERT INTO `item_equipment` VALUES (27293,'cossie_bottom',1,0,4194303,404,0,0,128,256);
-INSERT INTO `item_equipment` VALUES (27294,'cossie_bottom_+1',1,0,4194303,404,0,0,128,256);
+INSERT INTO `item_equipment` VALUES (27293,'cossie_bottom',1,0,4194303,405,0,0,128,256);
+INSERT INTO `item_equipment` VALUES (27294,'cossie_bottom_+1',1,0,4194303,405,0,0,128,256);
 INSERT INTO `item_equipment` VALUES (27295,'samnuha_tights',99,119,2593826,401,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27296,'agent_pants',1,0,4194303,407,0,0,128,0);
 INSERT INTO `item_equipment` VALUES (27297,'starlet_skirt',1,0,4194303,408,0,0,128,0);

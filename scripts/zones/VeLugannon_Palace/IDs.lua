@@ -17,6 +17,9 @@ zones[tpz.zone.VELUGANNON_PALACE] =
         NOTHING_OUT_OF_ORDINARY  = 6402,  -- There is nothing out of the ordinary here.
         CONQUEST_BASE            = 7049,  -- Tallying conquest results...
         CHEST_UNLOCKED           = 7216,  -- You unlock the chest!
+        EVIL_PRESENCE            = 7226,  -- You sense an evil presence lurking in the shadows...
+        KNIFE_CHANGES_SHAPE      = 7233,  -- The <item> begins to change shape.
+        NOTHING_HAPPENS          = 7234,  -- Nothing happens.
         REGIME_REGISTERED        = 10159, -- New training regime registered!
         PLAYER_OBTAINS_ITEM      = 11211, -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 11212, -- You were unable to obtain the item.
@@ -31,6 +34,7 @@ zones[tpz.zone.VELUGANNON_PALACE] =
     },
     npc =
     {
+        QM3             = 17502583,
         CASKET_BASE     = 17502585,
         Y_DOOR_OFFSET   = 17502608,
         B_DOOR_OFFSET   = 17502616,

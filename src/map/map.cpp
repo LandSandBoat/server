@@ -38,15 +38,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
+#include "utils/gardenutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
 #include "linkshell.h"
 #include "map.h"
 #include "mob_spell_list.h"
+#include "packet_guard.h"
 #include "packet_system.h"
 #include "party.h"
 #include "utils/petutils.h"
+#include "roe.h"
 #include "spell.h"
 #include "time_server.h"
 #include "transport.h"
@@ -167,6 +170,7 @@ int32 do_init(int32 argc, char** argv)
 
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);
+    map_config_from_env();
     ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
     ShowStatus("do_init: map_config is reading");
     ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
@@ -202,6 +206,10 @@ int32 do_init(int32 argc, char** argv)
     itemutils::Initialize();
     ShowMessage("\t\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
+    ShowStatus("do_init: loading plants");
+    gardenutils::Initialize();
+    ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
+
     // нужно будет написать один метод для инициализации всех данных в battleutils
     // и один метод для освобождения этих данных
 
@@ -224,6 +232,7 @@ int32 do_init(int32 argc, char** argv)
     petutils::LoadPetList();
     mobutils::LoadCustomMods();
     daily::LoadDailyItems();
+    roeutils::init();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
@@ -247,6 +256,8 @@ int32 do_init(int32 argc, char** argv)
 
     g_PBuff = new int8[map_config.buffer_size + 20];
     PTempBuff = new int8[map_config.buffer_size + 20];
+
+    PacketGuard::Init();
 
     ShowStatus("The map-server is " CL_GREEN"ready" CL_RESET" to work...\n");
     ShowMessage("=======================================================================\n");
@@ -581,18 +592,34 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
         if (PacketSize[SmallPD_Type] == SmallPD_Size || PacketSize[SmallPD_Type] == 0) // Tests incoming packets for the correct size prior to processing
         {
-            // если код текущего пакета меньше либо равен последнему полученному
-            // или больше глобального то игнорируем пакет
+            // Google Translate:
+            // if the code of the current package is less than or equal to the last received
+            // or more global then ignore the package
 
             if ((ref<uint16>(SmallPD_ptr, 2) <= map_session_data->client_packet_id) ||
                 (ref<uint16>(SmallPD_ptr, 2) > SmallPD_Code))
             {
                 continue;
             }
+
             if (SmallPD_Type != 0x15)
             {
                 ShowInfo("parse: %03hX | %04hX %04hX %02hX from user: %s\n", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
             }
+
+            if (map_config.packetguard_enabled && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
+            {
+                ShowExploit(CL_RED "[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                continue; // skip this packet
+            }
+
+            if (map_config.packetguard_enabled && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
+            {
+                ShowExploit(CL_RED "[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX\n" CL_RESET, PChar->GetName(), SmallPD_Type);
+                // TODO: Plug in optional jailutils usage
+                continue; // skip this packet
+            }
+
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
                 ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A\n", PChar->GetName(), SmallPD_Type);
@@ -609,8 +636,9 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
     }
     map_session_data->client_packet_id = SmallPD_Code;
 
-    // здесь мы проверяем, получил ли клиент предыдущий пакет
-    // если не получил, то мы не создаем новый, а отправляем предыдущий
+    // Google Translate:
+    // here we check if the client received the previous package
+    // if not received, then we do not create a new one, but send the previous one
 
     if (ref<uint16>(buff, 2) != map_session_data->server_packet_id)
     {
@@ -624,7 +652,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         return -1;
     }
 
-    // увеличиваем номер отправленного пакета только в случае отправки новых данных
+    // GT: increase the number of the sent packet only if new data is sent
 
     map_session_data->server_packet_id += 1;
 
@@ -967,14 +995,18 @@ int32 map_config_default()
     map_config.disable_gear_scaling = 0;
     map_config.all_jobs_widescan = 1;
     map_config.speed_mod = 0;
+    map_config.mount_speed_mod = 0;
     map_config.mob_speed_mod = 0;
-    map_config.skillup_chance_multiplier = 2.5f;
-    map_config.craft_chance_multiplier = 2.6f;
+    map_config.skillup_chance_multiplier = 1.0f;
+    map_config.craft_chance_multiplier = 1.0f;
     map_config.skillup_amount_multiplier = 1;
     map_config.craft_amount_multiplier = 1;
-    map_config.craft_day_matters = 1;
-    map_config.craft_moonphase_matters = 0;
-    map_config.craft_direction_matters = 0;
+    map_config.garden_day_matters = false;
+    map_config.garden_moonphase_matters = false;
+    map_config.garden_pot_matters = false;
+    map_config.garden_mh_aura_matters = false;
+    map_config.craft_common_cap = 700;
+    map_config.craft_specialization_points = 400;
     map_config.mob_tp_multiplier = 1.0f;
     map_config.player_tp_multiplier = 1.0f;
     map_config.nm_hp_multiplier = 1.0f;
@@ -993,6 +1025,7 @@ int32 map_config_default()
     map_config.blood_pact_shared_timer = 0;
     map_config.vanadiel_time_epoch = 0;
     map_config.lightluggage_block = 4;
+    map_config.packetguard_enabled = false;
     map_config.max_time_lastupdate = 60000;
     map_config.newstyle_skillups = 7;
     map_config.drop_rate_multiplier = 1.0f;
@@ -1019,6 +1052,18 @@ int32 map_config_default()
     map_config.anticheat_jail_disable = false;
     map_config.daily_tally_amount = 10;
     map_config.daily_tally_limit = 50000;
+    return 0;
+}
+
+int32 map_config_from_env()
+{
+    map_config.mysql_login     = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : map_config.mysql_login;
+    map_config.mysql_password  = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : map_config.mysql_password;
+    map_config.mysql_host      = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : map_config.mysql_host;
+    map_config.mysql_port      = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : map_config.mysql_port;
+    map_config.mysql_database  = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : map_config.mysql_database;
+    map_config.msg_server_ip   = std::getenv("TPZ_MSG_IP") ? std::getenv("TPZ_MSG_IP") : map_config.msg_server_ip;
+    map_config.msg_server_port = std::getenv("TPZ_MSG_PORT") ? std::stoi(std::getenv("TPZ_MSG_PORT")) : map_config.msg_server_port;
     return 0;
 }
 
@@ -1095,6 +1140,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "lightluggage_block") == 0)
         {
             map_config.lightluggage_block = atoi(w2);
+        }
+        else if (strcmp(w1, "packetguard_enabled") == 0)
+        {
+            map_config.packetguard_enabled = atoi(w2);
         }
         else if (strcmp(w1, "ah_base_fee_single") == 0)
         {
@@ -1236,6 +1285,10 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.speed_mod = atoi(w2);
         }
+        else if (strcmp(w1, "mount_speed_mod") == 0)
+        {
+            map_config.mount_speed_mod = atoi(w2);
+        }
         else if (strcmp(w1, "mob_speed_mod") == 0)
         {
             map_config.mob_speed_mod = atoi(w2);
@@ -1256,17 +1309,29 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.craft_amount_multiplier = (float)atof(w2);
         }
-        else if (strcmp(w1, "craft_day_matters") == 0)
+        else if (strcmp(w1, "craft_common_cap") == 0)
         {
-            map_config.craft_day_matters = atof(w2);
+            map_config.craft_common_cap = atoi(w2);
         }
-        else if (strcmp(w1, "craft_moonphase_matters") == 0)
+        else if (strcmp(w1, "craft_specialization_points") == 0)
         {
-            map_config.craft_moonphase_matters = atof(w2);
+            map_config.craft_specialization_points = atoi(w2);
         }
-        else if (strcmp(w1, "craft_direction_matters") == 0)
+        else if (strcmp(w1, "garden_day_matters") == 0)
         {
-            map_config.craft_direction_matters = atof(w2);
+            map_config.garden_day_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_moonphase_matters") == 0)
+        {
+            map_config.garden_moonphase_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_pot_matters") == 0)
+        {
+            map_config.garden_pot_matters = atof(w2);
+        }
+        else if (strcmp(w1, "garden_mh_aura_matters") == 0)
+        {
+            map_config.garden_mh_aura_matters = atof(w2);
         }
         else if (strcmp(w1, "mysql_host") == 0)
         {

@@ -24,25 +24,27 @@
 
 #include "battleentity.h"
 
-#include "../lua/luautils.h"
-#include "../utils/battleutils.h"
-#include "../items/item_weapon.h"
-#include "../status_effect_container.h"
-#include "../recast_container.h"
 #include "../ai/ai_container.h"
 #include "../ai/states/attack_state.h"
-#include "../ai/states/magic_state.h"
 #include "../ai/states/death_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/weaponskill_state.h"
 #include "../ai/states/despawn_state.h"
+#include "../ai/states/inactive_state.h"
+#include "../ai/states/magic_state.h"
+#include "../ai/states/raise_state.h"
+#include "../ai/states/weaponskill_state.h"
 #include "../attack.h"
 #include "../attackround.h"
-#include "../weapon_skill.h"
+#include "../notoriety_container.h"
+#include "../items/item_weapon.h"
+#include "../lua/luautils.h"
 #include "../packets/action.h"
+#include "../recast_container.h"
+#include "../roe.h"
+#include "../status_effect_container.h"
+#include "../utils/battleutils.h"
 #include "../utils/petutils.h"
 #include "../utils/puppetutils.h"
+#include "../weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
 {
@@ -75,6 +77,7 @@ CBattleEntity::CBattleEntity()
 
     StatusEffectContainer = std::make_unique<CStatusEffectContainer>(this);
     PRecastContainer = std::make_unique<CRecastContainer>(this);
+    PNotorietyContainer = std::make_unique<CNotorietyContainer>(this);
 
     m_modStat[Mod::SLASHRES] = 1000;
     m_modStat[Mod::PIERCERES] = 1000;
@@ -208,13 +211,25 @@ int32 CBattleEntity::GetMaxMP()
 
 /************************************************************************
 *                                                                       *
-*  Скорость перемещения с учетом модификаторов                          *
+*  Movement speed, taking into account modifiers                        *
+*  Note: retail speeds show as a float in the client,                   *
+*        yet in the packet it seems to be just one byte 0-255..         *
 *                                                                       *
 ************************************************************************/
 
 uint8 CBattleEntity::GetSpeed()
 {
-    return (isMounted() ? 50 + map_config.speed_mod : std::clamp<uint16>(speed * (100 + getMod(Mod::MOVE)) / 100, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max()));
+    int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed;
+
+    // Mod::MOVE (169)
+    // Mod::MOUNT_MOVE (972)
+    Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
+
+    float modAmount = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
+    float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
+    uint8 outputSpeed = static_cast<uint8>(modifiedSpeed);
+
+    return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
 
 bool CBattleEntity::CanRest()
@@ -519,6 +534,13 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
 {
     PLastAttacker = attacker;
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
+
+    //RoE Damage Taken Trigger
+    if (this->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+    else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
+        roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+
     return addHP(-amount);
 }
 
@@ -572,9 +594,13 @@ uint16 CBattleEntity::ATT()
     {
         ATT += (STR() * 3) / 4;
     }
+    else if (weapon && weapon->isHandToHand())
+    {
+        ATT += (STR() * 5) / 8;
+    }
     else
     {
-        ATT += (STR()) / 2;
+        ATT += (STR() * 3) / 4;
     }
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
@@ -608,7 +634,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
     {
         return 0;
     }
-    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR() / 2;
+    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
     return ATT + (ATT * m_modStat[Mod::RATTP] / 100) +
         std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
 }
@@ -628,7 +654,7 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
     }
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
-    acc += AGI() / 2;
+    acc += (AGI() * 3) / 4;
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
@@ -677,7 +703,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else
         {
-            ACC += (int16)(DEX() * 0.5);
+            ACC += (int16)(DEX() * 0.75);
         }
         ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
         auto PChar = dynamic_cast<CCharEntity *>(this);
@@ -1180,17 +1206,37 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     {
         if (!isDead())
         {
-            if (allegiance == (PInitiator->allegiance % 2 == 0 ? PInitiator->allegiance + 1 : PInitiator->allegiance - 1))
+            // Teams PVP
+            if (allegiance >= ALLEGIANCE_WYVERNS &&
+                PInitiator->allegiance >= ALLEGIANCE_WYVERNS)
             {
-                return true;
+                return allegiance != PInitiator->allegiance;
             }
+
+            // Nation PVP
+            if ((allegiance >= ALLEGIANCE_SAN_DORIA && allegiance <= ALLEGIANCE_WINDURST) &&
+                (PInitiator->allegiance >= ALLEGIANCE_SAN_DORIA && PInitiator->allegiance <= ALLEGIANCE_WINDURST))
+            {
+                return allegiance != PInitiator->allegiance;
+            }
+
+            // PVE
+            if (allegiance <= ALLEGIANCE_PLAYER &&
+                PInitiator->allegiance <= ALLEGIANCE_PLAYER)
+            {
+                return allegiance != PInitiator->allegiance;
+            }
+
+            return false;
         }
     }
+
     if ((targetFlags & TARGET_SELF) && (this == PInitiator || (PInitiator->objtype == TYPE_PET &&
         static_cast<CPetEntity*>(PInitiator)->getPetType() == PETTYPE_AUTOMATON && this == PInitiator->PMaster)))
     {
         return true;
     }
+
     return false;
 }
 
@@ -1234,6 +1280,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     auto PSpell = state.GetSpell();
     auto PActionTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    CBattleEntity* POriginalTarget = PActionTarget;
+    bool IsMagicCovered= false;
 
     luautils::OnSpellPrecast(this, PSpell);
 
@@ -1280,6 +1328,16 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
     else
     {
+        if (this->objtype == TYPE_MOB && PActionTarget->objtype == TYPE_PC)
+        {
+            CBattleEntity* PCoverAbilityUser = battleutils::GetCoverAbilityUser(PActionTarget, this);
+            IsMagicCovered = battleutils::IsMagicCovered((CCharEntity*) PCoverAbilityUser);
+
+            if (IsMagicCovered)
+            {
+                PActionTarget = PCoverAbilityUser;
+            }
+        }
         // only add target
         PAI->TargetFind->findSingleTarget(PActionTarget, flags);
     }
@@ -1371,7 +1429,14 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         }
         actionTarget.messageID = msg;
 
-        state.ApplyEnmity(PTarget, ce, ve);
+        if (IsMagicCovered)
+        {
+            state.ApplyMagicCoverEnmity(POriginalTarget, PActionTarget, (CMobEntity*)this);
+        }
+        else
+        {
+            state.ApplyEnmity(PTarget, ce, ve);
+        }
 
         if (PTarget->objtype == TYPE_MOB && msg != MSGBASIC_SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
@@ -1487,6 +1552,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     list.ActionTargetID = PTarget->id;
 
+    CBattleEntity* POriginalTarget = PTarget;
+
     /////////////////////////////////////////////////////////////////////////
     //	Start of the attack loop.
     /////////////////////////////////////////////////////////////////////////
@@ -1498,6 +1565,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
         // Set the swing animation.
         actionTarget.animation = attack.GetAnimationID();
+
+        if (attack.CheckCover())
+        {
+            PTarget = attackRound.GetCoverAbilityUserEntity();
+            list.ActionTargetID = PTarget->id;
+        }
 
         if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
         {
@@ -1623,7 +1696,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     actionTarget.reaction = REACTION_BLOCK;
                 }
 
-                actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true);
+                actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
                 if (actionTarget.param < 0)
                 {
                     actionTarget.param = -(actionTarget.param);

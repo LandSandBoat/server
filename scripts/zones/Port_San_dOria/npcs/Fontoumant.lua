@@ -59,6 +59,10 @@ function onTrigger(player, npc)
         else
             player:startEvent(560)
         end
+
+    -- post-quest default dialog
+    else
+        player:startEvent(561)
     end
 
 end

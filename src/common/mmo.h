@@ -210,6 +210,18 @@ struct campaignlog_t
 	bool   complete[512];
 };
 
+struct eminencelog_t
+{
+    uint16 active[31];   //slot 31 is for time-limited records
+    uint32 progress[31];
+    uint8 complete[512]; //bitmap of all 4096 possible records.
+};
+
+struct eminencecache_t
+{
+    std::bitset<4096> activemap;
+};
+
 struct nameflags_t
 {
 	union {

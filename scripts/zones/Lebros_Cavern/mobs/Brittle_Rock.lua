@@ -17,15 +17,15 @@ end
 function onMobDeath(mob, player, isKiller)
     local instance = mob:getInstance()
     if mob:getID() == ID.mob[21].BRITTLE_ROCK1 then
-        instance:getEntity(bit.band(ID.npc._1rx, 0xFFF), tpz.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc._1rx, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK2 then
-        instance:getEntity(bit.band(ID.npc._1ry, 0xFFF), tpz.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc._1ry, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK3 then
-        instance:getEntity(bit.band(ID.npc._1rz, 0xFFF), tpz.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc._1rz, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK4 then
-        instance:getEntity(bit.band(ID.npc._jr0, 0xFFF), tpz.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc._jr0, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK5 then
-        instance:getEntity(bit.band(ID.npc._jr1, 0xFFF), tpz.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc._jr1, instance):setAnimation(8)
     end
 end
 

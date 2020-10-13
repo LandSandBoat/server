@@ -22,7 +22,7 @@ function onTrigger(player, npc)
 
     -- Checked here to be fair to new players
     local DMEarrings = 0
-    for i=14739, 14743 do
+    for i = 14739, 14743 do
         if (player:hasItem(i)) then
             DMEarrings = DMEarrings + 1
         end
@@ -43,10 +43,7 @@ function onTrigger(player, npc)
         end
     elseif RhapsodiesMission == tpz.mission.id.rov.VOLTO_OSCURO then
         player:startEvent(279)
-    elseif
-        RhapsodiesMission == tpz.mission.id.rov.RING_MY_BELL and
-        tpz.rhapsodies.charactersAvailable(player)
-    then
+    elseif RhapsodiesMission == tpz.mission.id.rov.RING_MY_BELL and tpz.rhapsodies.charactersAvailable(player) then
         -- Below params change depending on how well you know COP characters. The precise COP mission values are
         -- currently unknown. What's known from retail is that a character that has never started COP gets Tenzen
         -- and Prishe params of 0, while characters who have completed it get Tenzen value of 2 and Prishe value of 1.
@@ -65,8 +62,11 @@ function onTrigger(player, npc)
         player:startEvent(169) -- Zilart Missions 11
     elseif (currentMission == tpz.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 1) then
         player:startEvent(98) -- Bastok Mission 6-2
-    elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then
+    elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <=
+        NUMBER_OF_DM_EARRINGS) then
         player:startEvent(172)
+    elseif player:getCharVar('ApocalypseNigh') == 6 and os.time() < player:getCharVar("Apoc_Nigh_Reward") then
+        player:startEvent(235)
     elseif RhapsodiesMission == tpz.mission.id.rov.RING_MY_BELL then
         player:startEvent(283)
     else

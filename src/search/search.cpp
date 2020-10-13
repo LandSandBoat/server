@@ -98,9 +98,11 @@ login_config_t login_config;
 
 void search_config_default();
 void search_config_read(const int8* file);
+void search_config_read_from_env();
 
 void login_config_default();
 void login_config_read(const int8* file);       // We only need the search server port defined here
+void login_config_read_from_env();
 
 /************************************************************************
 *                                                                       *
@@ -169,7 +171,9 @@ int32 main(int32 argc, char **argv)
 
     search_config_default();
     search_config_read((const int8*)SEARCH_CONF_FILENAME);
+    search_config_read_from_env();
     login_config_read((const int8*)LOGIN_CONF_FILENAME);
+    login_config_read_from_env();
 
 #ifdef WIN32
     // Initialize Winsock
@@ -398,6 +402,15 @@ void search_config_read(const int8* file)
     fclose(fp);
 }
 
+void search_config_read_from_env()
+{
+    search_config.mysql_login    = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : search_config.mysql_login;
+    search_config.mysql_password = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : search_config.mysql_password;
+    search_config.mysql_host     = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : search_config.mysql_host;
+    search_config.mysql_port     = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : search_config.mysql_port;
+    search_config.mysql_database = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : search_config.mysql_database;
+}
+
 /************************************************************************
 *                                                                       *
 *  login_topaz                                                          *
@@ -449,6 +462,11 @@ void login_config_read(const int8* file)
         }
     }
     fclose(fp);
+}
+
+void login_config_read_from_env()
+{
+    login_config.search_server_port = std::getenv("TPZ_SEARCH_PORT") ? std::getenv("TPZ_SEARCH_PORT") : login_config.search_server_port;
 }
 
 void TCPComm(SOCKET socket)

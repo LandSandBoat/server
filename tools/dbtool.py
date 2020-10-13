@@ -22,7 +22,7 @@ from migrations import cop_mission_ids
 from migrations import add_daily_tally_column
 from migrations import add_timecreated_column
 from migrations import extend_mission_log
-
+from migrations import eminence_blob
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -37,6 +37,7 @@ migrations = [
     cop_mission_ids,
     add_daily_tally_column,
     add_timecreated_column,
+    eminence_blob,
 ]
 # These are the default 'protected' files
 player_data = [

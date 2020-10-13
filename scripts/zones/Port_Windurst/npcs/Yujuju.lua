@@ -4,10 +4,11 @@
 --  Involved In Quest: Making Headlines
 -- !pos 201.523 -4.785 138.978 240
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
 local ID = require("scripts/zones/Port_Windurst/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -21,7 +22,7 @@ function onTrigger(player, npc)
     local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst, 19) == false) then
+    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 19)) then
         player:startEvent(621)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==9) then
         player:startEvent(592)--COP event
@@ -55,6 +56,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 592)    then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 10)
     elseif (csid == 621) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 19, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 19, true))
     end
 end

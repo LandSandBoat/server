@@ -62,6 +62,8 @@ zones[tpz.zone.BASTOK_MARKETS] =
         IF_YOU_WEAR_THIS            = 8272, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                   = 8273, -- Thank you...
         RETRIEVE_DIALOG_ID          = 12879, -- You retrieve <item> from the porter moogle's care.
+        TURNING_IN_SPARKS           = 14200, -- Ohohoho... Turning in sparks, I see.
+        NOT_ENOUGH_SPARKS           = 14225, -- You do not possess enough sparks of eminence to complete the transaction.
     },
     mob =
     {

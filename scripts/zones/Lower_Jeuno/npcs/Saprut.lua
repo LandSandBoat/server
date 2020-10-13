@@ -4,6 +4,7 @@
 -- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -13,7 +14,7 @@ function onTrigger(player, npc)
 
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno, 11) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 11)) then
         player:startEvent(10054)
     else
         player:startEvent(224)
@@ -25,6 +26,6 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10054) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 11, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 11, true))
     end
 end

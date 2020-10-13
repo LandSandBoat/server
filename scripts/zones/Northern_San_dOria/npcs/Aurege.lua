@@ -10,6 +10,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -18,10 +19,11 @@ end
 function onTrigger(player, npc)
     local exitTheGambler = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER)
     local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
+    local pickpocketMask = player:getCharVar("thePickpocketSkipNPC")
 
-    if player:getCharVar("thePickpocket") == 1 and not player:getMaskBit(player:getCharVar("thePickpocketSkipNPC"), 2) then
+    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(pickpocketMask, 2) then
         player:showText(npc, ID.text.PICKPOCKET_AUREGE)
-        player:setMaskBit(player:getCharVar("thePickpocketSkipNPC"), "thePickpocketSkipNPC", 2, true)
+        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(pickpocketMask, 2, true))
     elseif exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(521)
     elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then
@@ -38,6 +40,6 @@ function onEventFinish(player, csid, option)
     if csid == 521 and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE then
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER)
     elseif csid == 516 then
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER, {keyItem = tpz.ki.MAP_OF_KING_RANPERRES_TOMB, title = tpz.title.DAYBREAK_GAMBLER, xp = 2000})
+        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER, {ki = tpz.ki.MAP_OF_KING_RANPERRES_TOMB, title = tpz.title.DAYBREAK_GAMBLER, xp = 2000})
     end
 end

@@ -8,6 +8,8 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
+require("scripts/globals/roe")
 -----------------------------------
 
 tpz = tpz or {}
@@ -37,6 +39,7 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
+
 end
 
 -------------------------------------------------

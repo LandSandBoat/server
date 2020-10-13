@@ -46,7 +46,7 @@ tpz.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
         elseif stage == 5 then
             player:startEvent(npc_event_offset + 7)
         elseif stage == 6 then
-            player:startEvent(npc_event_offset + 8)
+            player:startEvent(npc_event_offset + 8, 0, 0, 0, tpz.ki.CONQUEST_PROMOTION_VOUCHER, 0, 0, 0)
         elseif stage == 7 then
             if mLevel < 4 then
                 player:startEvent(npc_event_offset + 9)

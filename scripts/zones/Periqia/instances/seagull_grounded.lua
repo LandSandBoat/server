@@ -18,17 +18,17 @@ function onInstanceCreated(instance)
         SpawnMob(v, instance)
     end
 
-    local rune = instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC)
-    local box = instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC)
+    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
+    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
     rune:setPos(-495, -9.899, -72, 0)
     box:setPos(-495, -9.695, -75, 0)
 
-    instance:getEntity(bit.band(ID.npc.EXCALIACE, 0xFFF), tpz.objType.NPC):setStatus(1)
-    instance:getEntity(bit.band(ID.npc._1K6, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._1KX, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._1KZ, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._JK1, 0xFFF), tpz.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._JK3, 0xFFF), tpz.objType.NPC):setAnimation(8)
+    GetNPCByID(ID.npc.EXCALIACE, instance):setStatus(1)
+    GetNPCByID(ID.npc._1K6, instance):setAnimation(8)
+    GetNPCByID(ID.npc._1KX, instance):setAnimation(8)
+    GetNPCByID(ID.npc._1KZ, instance):setAnimation(8)
+    GetNPCByID(ID.npc._JK1, instance):setAnimation(8)
+    GetNPCByID(ID.npc._JK3, instance):setAnimation(8)
 
 end
 
@@ -122,8 +122,8 @@ function onInstanceComplete(instance)
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 
-    local rune = instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC)
-    local box = instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC)
+    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
+    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
     rune:setStatus(tpz.status.NORMAL)
     box:setStatus(tpz.status.NORMAL)
 

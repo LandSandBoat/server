@@ -117,9 +117,9 @@ tpz.msg.basic =
     SKILL_ENFEEB_2         = 142, -- <user> uses <skill>. <target> receives the effect of <status> and <status>.
     ABILITIES_RECHARGED    = 360, -- <user> uses <skill>. All of <target>'s abilities are recharged.
 
-    -- Job Ability messages (offset JA by 16)
+    -- Job Ability messages
     JA_RECOVERS_HP         = 102, -- The <player> uses .. <target> recovers .. HP.
-    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP. (offset JA by 16)
+    JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     USES_JA                = 100, -- The <player> uses ..
     USES                   = 101, -- The <entity> uses ..
     USES_JA_TAKE_DAMAGE    = 317, -- The <player> uses .. <target> takes .. points of damage.
@@ -287,9 +287,21 @@ tpz.msg.basic =
 
     EFFECT_ALREADY_ACTIVE  = 523, -- The same effect is already active on <player>.
 
+    -- PLD
+    COVER_SUCCESS          = 311, -- The <player> covers <target>.
+    COVER_FAILURE          = 312, -- The <player>'s attempt to cover has no effect.
+
     -- DNC
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.
     SPECTRAL_JIG           = 532, -- <user> uses <ability>. <target> receives the effect of Sneak and Invisible.
+
+    -- GEO
+    SAME_EFFECT_LUOPAN     = 660, -- The same effect is already active on that luopan!.
+    LUOPAN_ALREADY_PLACED  = 661, -- <player> has already placed a luopan. Unable to use ability.
+    REQUIRE_LUOPAN         = 662, -- This action requires a luopan.
+    LUOPAN_HP_RATE_DOWN    = 663, -- <player> uses <ability>. The luopan's HP consumption rate has been reduced.
+    LUOPAN_HP_RATE_UP      = 664, -- <player> uses <ability>. The luopan's HP consumption rate has been increased.
+    HAS_LUOPON_NO_USE      = 665, -- <player> has a pet. Unable to use ability.
 
     -- Fields / Grounds of Valor
     FOV_DEFEATED_TARGET     = 558,  -- You defeated a designated target.${lb}(Progress: ${number}/${number2})
@@ -306,4 +318,19 @@ tpz.msg.basic =
     DESPOIL_EVA_DOWN        = 597,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Evasion Down.
     DESPOIL_ACC_DOWN        = 598,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Accuracy Down.
     DESPOIL_SLOW            = 599,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Slow.
+
+    -- Records of Eminence
+    ROE_COMPLETE            = 690,  -- You have completed the following Records of Eminence objective: <record>.
+    ROE_REPEAT_OR_CANCEL    = 691,  -- This objective may be repeated, and can be cancelled from the menu.
+    ROE_RECEIVE_SPARKS      = 692,  -- You receive <amount> sparks of eminence, and now possess a total of <amount>.
+    ROE_BONUS_ITEM          = 693,  -- As a special bonus for your valiant efforts, you have been awarded <item>!
+    ROE_BONUS_SPARKS        = 694,  -- As a special bonus for your valiant efforts, you have been awarded <amount> sparks of eminence!
+    ROE_UNABLE_BONUS_ITEM   = 695,  -- Unable to receive special bonus. Make room in your inventory and receive your reward from the Records of Eminence menu.
+    ROE_YET_TO_RECEIVE      = 696,  -- You have yet to receive certain special bonuses from the objectives you have completed. Make room in your inventory and receive your reward from the Records of Eminence menu.
+    ROE_RECORD              = 697,  -- Records of Eminence: <record>.
+    ROE_PROGRESS            = 698,  -- Progress: <amount>/<amount>.
+    ROE_NEW_OBJECTIVE       = 699,  -- A new objective has been added!
+    ROE_OBTAINED_KEY_ITEM   = 706,  -- You have obtained <key item> as a special reward!
+    ROE_FIRST_TIME_SPARKS   = 707,  -- As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
+    ROE_BONUS_ITEM_PLURAL   = 709,  -- As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
 }

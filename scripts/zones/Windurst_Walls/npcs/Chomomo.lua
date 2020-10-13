@@ -5,6 +5,7 @@
 -- !pos -1.262 -11 290.224 239
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -14,7 +15,7 @@ function onTrigger(player, npc)
 
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatWindurst, 8) == false) then
+    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 8)) then
         player:startEvent(499)
     else
         player:startEvent(325)
@@ -28,7 +29,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 499) then
-        player:setMaskBit(player:getCharVar("WildcatWindurst"), "WildcatWindurst", 8, true)
+        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 8, true))
     end
 
 end

@@ -53,13 +53,14 @@ CPetEntity::~CPetEntity()
 {
 }
 
-PETTYPE CPetEntity::getPetType(){
-  return m_PetType;
+PETTYPE CPetEntity::getPetType()
+{
+    return m_PetType;
 }
 
 bool CPetEntity::isBstPet()
 {
-  return getPetType()==PETTYPE_JUG_PET || objtype == TYPE_MOB;
+  return getPetType() == PETTYPE_JUG_PET || objtype == TYPE_MOB;
 }
 
 std::string CPetEntity::GetScriptName()
@@ -87,8 +88,8 @@ std::string CPetEntity::GetScriptName()
         case PETTYPE_CHOCOBO:
             return "chocobo";
             break;
-        case PETTYPE_TRUST:
-            return (const char*)GetName();
+        case PETTYPE_LUOPAN:
+            return "luopan";
             break;
         default:
             return "";
@@ -199,8 +200,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 
         action.id = this->id;
         action.actiontype = PAbility->getActionType();
-        //#TODO: unoffset this
-        action.actionid = PAbility->getID() + 16;
+        action.actionid = PAbility->getID();
         actionList_t& actionList = action.getNewActionList();
         actionList.ActionTargetID = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();

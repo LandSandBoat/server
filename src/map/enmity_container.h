@@ -69,6 +69,7 @@ public:
     int16   GetHighestTH() const;
     EnmityList_t* GetEnmityList();
     bool    IsTameable();
+    void    UpdateEnmityFromCover(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser);
 
 private:
     EnmityList_t    m_EnmityList;

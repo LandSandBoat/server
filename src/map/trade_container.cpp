@@ -21,9 +21,8 @@
 
 #include <string.h>
 
-#include "utils/itemutils.h"
 #include "trade_container.h"
-
+#include "utils/itemutils.h"
 
 CTradeContainer::CTradeContainer()
 {
@@ -80,7 +79,7 @@ uint32 CTradeContainer::getItemQuantity(uint16 itemID)
     uint32 quantity = 0;
     for (uint8 slotID = 0; slotID < m_PItem.size(); ++slotID)
     {
-        if( m_itemID[slotID] == itemID)
+        if (m_itemID[slotID] == itemID)
         {
             quantity += m_quantity[slotID];
         }
@@ -109,6 +108,24 @@ uint8 CTradeContainer::getSlotCount()
         }
     }
     return count;
+}
+
+uint8 CTradeContainer::getGuildID(uint8 slotID)
+{
+    if (slotID < m_PItem.size())
+    {
+        return m_guildID[slotID];
+    }
+    return 0;
+}
+
+uint16 CTradeContainer::getGuildRank(uint8 slotID)
+{
+    if (slotID < m_PItem.size())
+    {
+        return m_guildRank[slotID];
+    }
+    return 0;
 }
 
 void CTradeContainer::setItem(uint8 slotID, CItem* item)
@@ -171,6 +188,24 @@ void CTradeContainer::setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint
     return;
 }
 
+void CTradeContainer::setGuildID(uint8 slotID, uint8 guildID)
+{
+    if (slotID < m_PItem.size())
+    {
+        m_guildID[slotID] = guildID;
+    }
+    return;
+}
+
+void CTradeContainer::setGuildRank(uint8 slotID, uint16 guildRank)
+{
+    if (slotID < m_PItem.size())
+    {
+        m_guildRank[slotID] = guildRank;
+    }
+    return;
+}
+
 uint8 CTradeContainer::getSize()
 {
     return (uint8)m_PItem.size();
@@ -183,6 +218,18 @@ void CTradeContainer::setSize(uint8 size)
     m_slotID.resize(size, 0xFF);
     m_quantity.resize(size, 0);
     m_confirmed.resize(size, 0);
+    m_guildID.resize(size, 0);
+    m_guildRank.resize(size, 0);
+}
+
+uint8 CTradeContainer::getExSize()
+{
+    return m_exSize;
+}
+
+void CTradeContainer::setExSize(uint8 size)
+{
+    m_exSize = size;
 }
 
 uint8 CTradeContainer::getItemsCount()
@@ -215,6 +262,28 @@ void CTradeContainer::setCraftType(uint8 craftType)
     m_craftType = craftType;
 }
 
+void CTradeContainer::unreserveUnconfirmed()
+{
+    for (uint8 slotID = 0; slotID < CONTAINER_SIZE; ++slotID)
+    {
+        CItem* PItem = m_PItem[slotID];
+
+        if (PItem)
+        {
+            uint8 confirmedStatus = getConfirmedStatus(slotID);
+            if (confirmedStatus && confirmedStatus > 0)
+            {
+
+                PItem->setReserve(confirmedStatus);
+            }
+            else
+            {
+                PItem->setReserve(0);
+            }
+        }
+    }
+}
+
 void CTradeContainer::Clean()
 {
     for (auto PItem : m_PItem)
@@ -222,11 +291,13 @@ void CTradeContainer::Clean()
         if (PItem)
         {
             PItem->setReserve(0);
+            PItem->setSubType(ITEM_UNLOCKED);
         }
     }
     m_type = 0;
     m_craftType = 0;
     m_ItemsCount = 0;
+    m_exSize = 0;
 
     m_PItem.clear();
     m_PItem.resize(CONTAINER_SIZE, nullptr);
@@ -238,4 +309,8 @@ void CTradeContainer::Clean()
     m_quantity.resize(CONTAINER_SIZE, 0);
     m_confirmed.clear();
     m_confirmed.resize(CONTAINER_SIZE, 0);
+    m_guildID.clear();
+    m_guildID.resize(CONTAINER_SIZE, 0);
+    m_guildRank.clear();
+    m_guildRank.resize(CONTAINER_SIZE, 0);
 }

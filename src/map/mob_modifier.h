@@ -95,7 +95,9 @@ enum MOBMODIFIER : int
     MOBMOD_NO_MOVE            = 65, // Mob will not be able to move
     MOBMOD_MULTI_HIT          = 66, // Mob will have as many swings as defined.
     MOBMOD_NO_AGGRO           = 67, // If set, mob cannot aggro until unset.
-    MOBMOD_ALLI_HATE          = 68  // Range around target to add alliance member to enmity list.
+    MOBMOD_ALLI_HATE          = 68, // Range around target to add alliance member to enmity list.
+    MOBMOD_NO_LINK            = 69, // If set, mob cannot link until unset.
+    MOBMOD_NO_REST            = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
 };
 
 #endif

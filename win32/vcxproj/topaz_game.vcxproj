@@ -287,6 +287,7 @@
     <ClInclude Include="..\..\src\map\items\item_equipment.h" />
     <ClInclude Include="..\..\src\map\items\item_currency.h" />
     <ClInclude Include="..\..\src\map\items\item_fish.h" />
+    <ClInclude Include="..\..\src\map\items\item_flowerpot.h" />
     <ClInclude Include="..\..\src\map\items\item_furnishing.h" />
     <ClInclude Include="..\..\src\map\items\item_general.h" />
     <ClInclude Include="..\..\src\map\items\item_linkshell.h" />
@@ -415,6 +416,9 @@
     <ClInclude Include="..\..\src\map\packets\position.h" />
     <ClInclude Include="..\..\src\map\packets\quest_mission_log.h" />
     <ClInclude Include="..\..\src\map\packets\release.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_sparkupdate.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_questlog.h" />
+    <ClInclude Include="..\..\src\map\packets\roe_update.h" />
     <ClInclude Include="..\..\src\map\packets\server_ip.h" />
     <ClInclude Include="..\..\src\map\packets\server_message.h" />
     <ClInclude Include="..\..\src\map\packets\shop_appraise.h" />
@@ -432,10 +436,13 @@
     <ClInclude Include="..\..\src\map\packets\wide_scan_track.h" />
     <ClInclude Include="..\..\src\map\packets\zone_in.h" />
     <ClInclude Include="..\..\src\map\packets\zone_visited.h" />
+    <ClInclude Include="..\..\src\map\packet_guard.h" />
     <ClInclude Include="..\..\src\map\packet_system.h" />
     <ClInclude Include="..\..\src\map\party.h" />
     <ClInclude Include="..\..\src\map\recast_container.h" />
     <ClInclude Include="..\..\src\map\region.h" />
+    <ClInclude Include="..\..\src\map\notoriety_container.h" />
+    <ClInclude Include="..\..\src\map\roe.h" />
     <ClInclude Include="..\..\src\map\spell.h" />
     <ClInclude Include="..\..\src\map\status_effect.h" />
     <ClInclude Include="..\..\src\map\status_effect_container.h" />
@@ -452,6 +459,7 @@
     <ClInclude Include="..\..\src\map\utils\blueutils.h" />
     <ClInclude Include="..\..\src\map\utils\charutils.h" />
     <ClInclude Include="..\..\src\map\utils\fishingutils.h" />
+    <ClInclude Include="..\..\src\map\utils\gardenutils.h" />
     <ClInclude Include="..\..\src\map\utils\guildutils.h" />
     <ClInclude Include="..\..\src\map\utils\battlefieldutils.h" />
     <ClInclude Include="..\..\src\map\utils\instanceutils.h" />
@@ -544,6 +552,7 @@
     <ClCompile Include="..\..\src\map\items\item_equipment.cpp" />
     <ClCompile Include="..\..\src\map\items\item_currency.cpp" />
     <ClCompile Include="..\..\src\map\items\item_fish.cpp" />
+    <ClCompile Include="..\..\src\map\items\item_flowerpot.cpp" />
     <ClCompile Include="..\..\src\map\items\item_furnishing.cpp" />
     <ClCompile Include="..\..\src\map\items\item_general.cpp" />
     <ClCompile Include="..\..\src\map\items\item_linkshell.cpp" />
@@ -670,6 +679,9 @@
     <ClCompile Include="..\..\src\map\packets\position.cpp" />
     <ClCompile Include="..\..\src\map\packets\quest_mission_log.cpp" />
     <ClCompile Include="..\..\src\map\packets\release.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_sparkupdate.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_questlog.cpp" />
+    <ClCompile Include="..\..\src\map\packets\roe_update.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_ip.cpp" />
     <ClCompile Include="..\..\src\map\packets\server_message.cpp" />
     <ClCompile Include="..\..\src\map\packets\shop_appraise.cpp" />
@@ -687,10 +699,13 @@
     <ClCompile Include="..\..\src\map\packets\wide_scan_track.cpp" />
     <ClCompile Include="..\..\src\map\packets\zone_in.cpp" />
     <ClCompile Include="..\..\src\map\packets\zone_visited.cpp" />
+    <ClCompile Include="..\..\src\map\packet_guard.cpp" />
     <ClCompile Include="..\..\src\map\packet_system.cpp" />
     <ClCompile Include="..\..\src\map\party.cpp" />
     <ClCompile Include="..\..\src\map\recast_container.cpp" />
     <ClCompile Include="..\..\src\map\region.cpp" />
+    <ClCompile Include="..\..\src\map\notoriety_container.cpp" />
+    <ClCompile Include="..\..\src\map\roe.cpp" />
     <ClCompile Include="..\..\src\map\spell.cpp" />
     <ClCompile Include="..\..\src\map\status_effect.cpp" />
     <ClCompile Include="..\..\src\map\status_effect_container.cpp" />
@@ -707,6 +722,7 @@
     <ClCompile Include="..\..\src\map\utils\blueutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\charutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\fishingutils.cpp" />
+    <ClCompile Include="..\..\src\map\utils\gardenutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\guildutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\battlefieldutils.cpp" />
     <ClCompile Include="..\..\src\map\utils\instanceutils.cpp" />

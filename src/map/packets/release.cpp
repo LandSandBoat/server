@@ -36,6 +36,8 @@ CReleasePacket::CReleasePacket(CCharEntity * PChar, RELEASE_TYPE releaseType)
 	{
 		ref<uint16>(0x05) = PChar->m_event.EventID;
 	}
+
+    PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 }
 
 // типы release
