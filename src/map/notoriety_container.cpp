@@ -70,9 +70,9 @@ void CNotorietyContainer::tryClear()
         {
             if (CMobEntity* mob = dynamic_cast<CMobEntity*>(entry))
             {
-                auto mobEnmityList = mob->PEnmityContainer->GetEnmityList();
-                if ((mob->isAlive() && mobEnmityList->find(m_POwner->id) == mobEnmityList->end()) ||
-                    mob->isDead())
+                EnmityList_t* mobEnmityList = mob->PEnmityContainer->GetEnmityList();
+                bool notOnEnmityList = mobEnmityList->find(m_POwner->id) == mobEnmityList->end();
+                if ((mob->isAlive() && notOnEnmityList) || mob->isDead())
                 {
                     toRemove.emplace_back(entry);
                 }
