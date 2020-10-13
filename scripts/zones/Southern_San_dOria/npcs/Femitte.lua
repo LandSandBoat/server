@@ -4,19 +4,13 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria), Distant Loyalties
 -- !pos -17 2 10 230
 -------------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532, 1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
 end
 
 function onTrigger(player, npc)
@@ -25,7 +19,7 @@ function onTrigger(player, npc)
     local DistantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 3) == false) then
+    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 3)) then
         player:startEvent(807)
     elseif (player:getFameLevel(SANDORIA) >= 4 and DistantLoyalties == 0) then
         player:startEvent(663)
@@ -45,7 +39,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 807) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 3, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
     elseif (csid == 663 and option == 0) then
         player:addKeyItem(tpz.ki.GOLDSMITHING_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GOLDSMITHING_ORDER)

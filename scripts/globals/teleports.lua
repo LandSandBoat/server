@@ -203,7 +203,7 @@ local campaignDestinations =
     [16] = {-291.000, -10.000, -107.000, 212,  87}, --     Bastok Markets [S]
     [17] = { -31.442,  -5.000,  129.202, 128,  94}, -- {R} Windurst Waters [S}
     [18] = {-194.095,   0.000,   30.009,   0, 164}, -- {R} Garlaige Citdadel [S]
-    [19] = {  59.213, -32.158,  -38.022,  64, 171}, -- {R} Crawler's Nest [S]
+    [19] = {  59.213, -32.158,  -38.022,  64, 171}, -- {R} Crawlers' Nest [S]
     [20] = { 294.350, -27.500,   19.947,   0, 175}, -- {R} The Eldieme Necropolis [S]
 }
 
@@ -395,7 +395,7 @@ tpz.teleport.escape = function(player)
     elseif zone == 212 then                                                 -- From Gustav Tunnel
         player:setPos(-791, -6, 57, 192, 103)                                     -- To Valkurm Dunes at B-8
     elseif zone == 201 then                                                -- From Cloister of Gales
-        player:setPos(-291, -3, 494, 32, 113)                                     -- To Cape Terrigan F-5
+        player:setPos(-291, -3, 494, 32, 113)                                     -- To Cape Teriggan F-5
     -- Zulkheim {R}
     elseif zone == 196 then                                                 -- From Gusgen Mines
         player:setPos(680, 21, 204, 64, 108)                                     -- To Konschtat Highlands at L-7

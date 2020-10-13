@@ -7,25 +7,18 @@
 -- Starts and Finishes Quest: The Dismayed Customer
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532, 1) == true and trade:getItemCount() == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
 end
 
 function onTrigger(player, npc)
 
-    theDismayedCustomer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+    local theDismayedCustomer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
     if (theDismayedCustomer == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.GULEMONTS_DOCUMENT) == true) then
             player:startEvent(607)

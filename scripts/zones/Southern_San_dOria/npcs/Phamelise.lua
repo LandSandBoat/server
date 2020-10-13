@@ -5,18 +5,11 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    else
-        onHalloweenTrade(player, trade, npc)
-    end
+    onHalloweenTrade(player, trade, npc)
 end
 
 function onTrigger(player, npc)

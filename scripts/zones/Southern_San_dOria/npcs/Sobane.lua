@@ -6,19 +6,14 @@
 -- !pos -190 -3 97 230
 -- csid: 52  732  733  734  735  736  737  738  739  740  741
 -------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if npcUtil.tradeHas(trade, 532) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-
     -- SIGNED IN BLOOD
-    elseif npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
+    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
         player:startEvent(734, 0, 1662)
 
     -- RIDING ON THE CLOUDS

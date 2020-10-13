@@ -3,21 +3,12 @@
 --  NPC: Vemalpeau
 -- Involved in Quests: Under Oath
 -------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+-------------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
 end
 
 function onTrigger(player, npc)

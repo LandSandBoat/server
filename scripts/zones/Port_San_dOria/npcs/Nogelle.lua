@@ -4,22 +4,12 @@
 -- Starts Lufet's Lake Salt
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
     if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
         LufetSalt = trade:hasItemQty(1019, 3)

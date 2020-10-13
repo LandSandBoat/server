@@ -11,21 +11,14 @@ require("scripts/globals/missions")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532, 1) and trade:getItemCount() == 1) then -- Trade Magicmart_flyer
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
 end
 
 function onTrigger(player, npc)
 
-    pNation = player:getNation()
+    local pNation = player:getNation()
     if (pNation == tpz.nation.WINDURST) then
-        currentMission = player:getCurrentMission(pNation)
-        MissionStatus = player:getCharVar("MissionStatus")
+        local currentMission = player:getCurrentMission(pNation)
+        local MissionStatus = player:getCharVar("MissionStatus")
 
         if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
             if (MissionStatus == 2) then

@@ -18,7 +18,7 @@ function onAdditionalEffect(mob, target, damage)
 end
 
 function onMobDeath(mob, player, isKiller)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ECO_WARRIOR) ~= QUEST_AVAILABLE and player:getCharVar("ECO_WARRIOR_ACTIVE") == 238 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
+    if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
         local allFliesDead = true
         for i = ID.mob.WYRMFLY_OFFSET, ID.mob.WYRMFLY_OFFSET + 2 do
             if i ~= mob:getID() and GetMobByID(i):isAlive() then
@@ -26,7 +26,7 @@ function onMobDeath(mob, player, isKiller)
             end
         end
         if allFliesDead then
-            player:setCharVar("ECO_WAR_WIN-NMs_killed", 1)
+            player:setCharVar("EcoStatus", 202)
         end
     end
 end

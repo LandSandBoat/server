@@ -21,13 +21,14 @@
 
 #include "../../common/socket.h"
 
+#include "../../common/fmt/printf.h"
 #include "world_pass.h"
-
+#include <cinttypes>
 
 CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 {
-	this->type = 0x59;
-	this->size = 0x12;
+    this->type = 0x59;
+    this->size = 0x12;
 
     ref<uint32>(0x0C) = 10000;       // price
 
@@ -42,6 +43,11 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
         ref<uint8>(0x08) = 167;     // pass becomes invalid in (hours)
 
         ref<uint8>(0x20) = 0x06;
-        snprintf((char*)data+(0x10), 10, "%u", WorldPass);
+
+        /* Assumption made: MAX u32 value is 10 digits */
+        std::string strbuff = fmt::sprintf("%" PRIu32, WorldPass);
+        TPZ_DEBUG_BREAK_IF(strbuff.length() > 10);
+        memset(data + 0x10, 0, 10);
+        memcpy(data + 0x10, strbuff.c_str(), strbuff.length());
     }
 }

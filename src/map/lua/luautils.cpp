@@ -47,6 +47,7 @@
 #include "../party.h"
 #include "../alliance.h"
 #include "../entities/mobentity.h"
+#include "../roe.h"
 #include "../spell.h"
 #include "../weapon_skill.h"
 #include "../vana_time.h"
@@ -80,6 +81,7 @@
 #include "../ai/states/magic_state.h"
 #include <optional>
 #include "../battlefield.h"
+#include "../packets/char_emotion.h"
 
 namespace luautils
 {
@@ -117,6 +119,7 @@ namespace luautils
         lua_register(LuaHandle, "GetPlayerByName", luautils::GetPlayerByName);
         lua_register(LuaHandle, "GetPlayerByID", luautils::GetPlayerByID);
         lua_register(LuaHandle, "GetMobAction", luautils::GetMobAction);
+        lua_register(LuaHandle, "JstMidnight", luautils::JstMidnight);
         lua_register(LuaHandle, "VanadielTime", luautils::VanadielTime);
         lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
         lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
@@ -147,7 +150,7 @@ namespace luautils
         lua_register(LuaHandle, "terminate", luautils::terminate);
 
         lua_register(LuaHandle, "GetHealingTickDelay", luautils::GetHealingTickDelay);
-
+        lua_register(LuaHandle, "GetItem", luautils::GetItem);
         lua_register(LuaHandle, "getAbility", luautils::getAbility);
         lua_register(LuaHandle, "getSpell", luautils::getSpell);
 
@@ -445,6 +448,7 @@ namespace luautils
         return 0;
     }
 
+
     /************************************************************************
     *                                                                       *
     *  Узнаем страну, владеющую текущим регионом                            *
@@ -686,6 +690,19 @@ namespace luautils
     int32 VanadielDayElement(lua_State* L)
     {
         lua_pushinteger(L, CVanaTime::getInstance()->getWeekday());
+        return 1;
+    }
+
+
+    /************************************************************************
+    *                                                                       *
+    * JstMidnight - Returns UTC timestamp of upcoming JST midnight
+    *                                                                       *
+    ************************************************************************/
+
+    int32 JstMidnight(lua_State* L)
+    {
+        lua_pushinteger(L, CVanaTime::getInstance()->getJstMidnight());
         return 1;
     }
 
@@ -2795,6 +2812,8 @@ namespace luautils
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
 
+        roeutils::event(ROE_MOBKILL, (CCharEntity*)PKiller, RoeDatagram("mob", (CMobEntity*)PMob));
+
         if (PChar && PMob->objtype == TYPE_MOB)
         {
             // onMobDeathEx
@@ -4255,6 +4274,47 @@ namespace luautils
         return 1;
     }
 
+    /***************************************************************************
+    *                                                                          *
+    *  Creates an item object of the type specified by the itemID.             *
+    *  This item is ephemeral, and doesn't exist in-game but can and should    *
+    *  be used to lookup item information or access item functions when only   *
+    *  the ItemID is known.                                                    *
+    *                                                                          *
+    *  ## These items should be used to READ ONLY!                             *
+    *  ## Should lua functions be written which modify items, care must be     *
+    *     taken to ensure these are NEVER modified.                            *
+    *                                                                          *
+    *  example: local item = GetItem(16448)                                    *
+    *           item:GetName()                 --Bronze Dagger                 *
+    *           item:isTwoHanded()             --False                         *
+    *                                                                          *
+    ***************************************************************************/
+
+    int32 GetItem(lua_State* L)
+    {
+        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
+
+        uint32 id = static_cast<uint32>(lua_tointeger(L, 1));
+        CItem* PItem = itemutils::GetItemPointer(id);
+        if (PItem)
+        {
+            lua_getglobal(L, CLuaItem::className);
+            lua_pushstring(L, "new");
+            lua_gettable(L, -2);
+            lua_insert(L, -2);
+            lua_pushlightuserdata(L, (void*)PItem);
+
+            if (lua_pcall(L, 2, 1, 0))
+            {
+                return 0;
+            }
+            return 1;
+        }
+        lua_pushnil(L);
+        return 1;
+    }
+
     int32 getAbility(lua_State* L)
     {
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
@@ -4500,6 +4560,26 @@ namespace luautils
         {
             ShowError("luautils::onFurnitureRemoved: %s\n", lua_tostring(LuaHandle, -1));
             lua_pop(LuaHandle, 1);
+        }
+    }
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+    {
+        lua_prepscript("scripts/globals/player.lua");
+
+        if (prepFile(File, "onPlayerEmote"))
+            return;
+
+        CLuaBaseEntity LuaBaseEntity(PChar);
+        Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+
+        lua_pushinteger(LuaHandle, (uint8)EmoteID);
+
+        if (lua_pcall(LuaHandle, 2, 0, 0))
+        {
+            ShowError("luautils::onEmote: %s\n", lua_tostring(LuaHandle, -1));
+            lua_pop(LuaHandle, 1);
+            return;
         }
     }
 

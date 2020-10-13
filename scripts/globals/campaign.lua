@@ -41,7 +41,7 @@ function getSandOriaNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 16172, price = 4500}, -- Iron Ram Shield
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service
@@ -84,7 +84,7 @@ function getBastokNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 18727, price = 4500}, -- Fourth Gun
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service
@@ -127,7 +127,7 @@ function getWindurstNotesItem(i)
         [770] = {id = 14587, price = 1500}, -- Pilgrim Tunica
         [1026] = {id = 19150, price = 4500}, -- Cobra CLaymore
         [1282] = {id = 15841, price = 5000}, -- Recall Ring: Jugner
-        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashow
+        [1538] = {id = 15842, price = 5000}, -- Recall Ring: Pashhow
         [1794] = {id = 15843, price = 5000}, -- Recall Ring: Meriphataud
         [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
         -- Stars Service

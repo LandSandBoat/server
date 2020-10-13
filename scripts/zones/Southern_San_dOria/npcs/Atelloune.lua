@@ -4,22 +4,11 @@
 -- Starts and Finishes Quest: Atelloune's Lament
 -- !pos 122 0 82 230
 -------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
     -----lady bug
     if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(2506, 1) and trade:getItemCount() == 1) then
@@ -31,8 +20,8 @@ end
 
 function onTrigger(player, npc)
 
-    atellounesLament = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
-    sanFame = player:getFameLevel(SANDORIA)
+    local atellounesLament = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
+    local sanFame = player:getFameLevel(SANDORIA)
 
     if (atellounesLament == QUEST_AVAILABLE and sanFame >= 2) then
         player:startEvent(890)

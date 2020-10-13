@@ -3,14 +3,19 @@
 --  NPC: Nonterene
 -- Type: Adventurer's Assistant NPC
 -- !pos -6.347 0.000 -11.265 231
---
+-----------------------------------
+require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    player:startEvent(503)
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+        player:startEvent(523)
+    else
+        player:startEvent(503)
+    end
 end
 
 function onEventUpdate(player, csid, option)

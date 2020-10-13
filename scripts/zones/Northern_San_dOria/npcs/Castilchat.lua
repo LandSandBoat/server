@@ -6,20 +6,15 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-
-    -- "Flyers for Regine" conditional script
     local count = trade:getItemCount()
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and trade:hasItemQty(532, 1) and count == 1) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-    elseif (trade:hasItemQty(1545, 1) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
+    if (trade:hasItemQty(1545, 1) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
         player:startEvent(734, 0, 1545, 4, 20)
     end
-
 end
 
 function onTrigger(player, npc)

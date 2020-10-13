@@ -5,24 +5,15 @@
 -- !pos 123 0 106 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532, 1) == true and trade:getItemCount() == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
     if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (trade:getGil() >= 10) then
             player:startEvent(571)
         end
     end
-
 end
 
 function onTrigger(player, npc)

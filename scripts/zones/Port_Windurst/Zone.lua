@@ -13,8 +13,17 @@ function onInitialize(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onZoneIn(player, prevZone)
+function onZoneIn(player,prevZone)
     local cs = -1
+
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+        cs = 30035
+    end
+
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+        cs = 30036
+    end
+
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if NEW_CHARACTER_CUTSCENE == 1 then
@@ -51,5 +60,11 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 10002) then
         player:setPos(0, 0, 0, 0, 225)
+    elseif csid == 30035 then
+        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+    elseif csid == 30036 then
+        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

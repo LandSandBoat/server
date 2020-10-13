@@ -10,13 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
-require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-
     if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
         if (trade:hasItemQty(17391, 1) == true and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish Quest "Father and Son" (part2) (trading fishing rod)
@@ -30,28 +26,20 @@ function onTrade(player, npc, trade)
             player:startEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
         end
     end
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
 end
 
 function onTrigger(player, npc)
-    fatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
-    sharpeningTheSword = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
-    aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+    local fatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+    local sharpeningTheSword = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+    local aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
 
     -- Checking levels and jobs for af quest
-    mLvl = player:getMainLvl()
-    mJob = player:getMainJob()
+    local mLvl = player:getMainLvl()
+    local mJob = player:getMainJob()
     -- Check if they have key item "Ordelle whetStone"
-    OrdelleWhetstone = player:hasKeyItem(tpz.ki.ORDELLE_WHETSTONE)
-    sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
-    aBoysDreamCS = player:getCharVar("aBoysDreamCS")
+    local OrdelleWhetstone = player:hasKeyItem(tpz.ki.ORDELLE_WHETSTONE)
+    local sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
+    local aBoysDreamCS = player:getCharVar("aBoysDreamCS")
 
     -- "Father and Son" Event Dialogs
     if (fatherAndSon == QUEST_AVAILABLE) then

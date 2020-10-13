@@ -4,20 +4,14 @@
 -- (Corsair's Frac) !pos -59 -4 -39 232
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
-require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
 
-    -- magicmart flyer
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and trade:getItemCount() == 1 and trade:hasItemQty(532, 1)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
-
     -- gold chain, velvet cloth, red grass cloth, sailcloth
-    elseif (letterRed == 2 and trade:getItemCount() == 4 and trade:hasItemQty(761, 1) and trade:hasItemQty(828, 1) and trade:hasItemQty(1829, 1) and trade:hasItemQty(1997, 1)) then
+    if (letterRed == 2 and trade:getItemCount() == 4 and trade:hasItemQty(761, 1) and trade:hasItemQty(828, 1) and trade:hasItemQty(1829, 1) and trade:hasItemQty(1997, 1)) then
         player:startEvent(755) -- accepts materials, now bring me imperial gold piece
 
     -- imperial gold piece

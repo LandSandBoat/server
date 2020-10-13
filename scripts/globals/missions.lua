@@ -559,25 +559,25 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ROV]] =
     {
-        RHAPSODIES_OF_VANADIEL          = 0,
+        RHAPSODIES_OF_VANADIEL          = 0,   -- ± --
         -- CREATION_AND_REBIRTH         =  -- Category
-        RESONACE                        = 2,
-        EMISSARY_FROM_THE_SEAS          = 3,
-        SET_FREE                        = 4,
-        THE_BEGINNING                   = 6,
-        FLAMES_OF_PRAYER                = 10,
-        THE_PATH_UNTRAVELED             = 12,
-        AT_THE_HEAVENS_DOOR             = 18,
-        THE_LIONS_ROAR                  = 20,
-        EDDIES_OF_DESPAIR_I             = 22,
-        A_LAND_AFTER_TIME               = 26,
-        FATES_CALL                      = 28,
-        WHAT_LIES_BEYOND                = 30,
-        THE_TIES_THAT_BIND              = 32,
-        IMPURITY                        = 34,
-        THE_LOST_AVATAR                 = 36,
-        VOLTO_OSCURO                    = 40,
-        RING_MY_BELL                    = 42,
+        RESONACE                        = 2,   -- ± --
+        EMISSARY_FROM_THE_SEAS          = 3,   -- ± --
+        SET_FREE                        = 4,   -- ± --
+        THE_BEGINNING                   = 6,   -- ± --
+        FLAMES_OF_PRAYER                = 10,  -- ± --
+        THE_PATH_UNTRAVELED             = 12,  -- ± --
+        AT_THE_HEAVENS_DOOR             = 18,  -- ± --
+        THE_LIONS_ROAR                  = 20,  -- ± --
+        EDDIES_OF_DESPAIR_I             = 22,  -- ± --
+        A_LAND_AFTER_TIME               = 26,  -- ± --
+        FATES_CALL                      = 28,  -- ± --
+        WHAT_LIES_BEYOND                = 30,  -- ± --
+        THE_TIES_THAT_BIND              = 32,  -- ± --
+        IMPURITY                        = 34,  -- ± --
+        THE_LOST_AVATAR                 = 36,  -- ± --
+        VOLTO_OSCURO                    = 40,  -- ± --
+        RING_MY_BELL                    = 42,  -- ± --
         -- REVITALIZATION               =  -- Category
         SPIRITS_AWOKEN                  = 44,
         CRASHING_WAVES                  = 46,
@@ -804,7 +804,7 @@ function getMissionMask(player)
             if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == false and getMissionRankPoints(player, 11) == 1) then
+                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == true and getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 elseif (rank > 3 or getMissionRankPoints(player, 11) == 1) then

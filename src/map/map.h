@@ -72,6 +72,7 @@ struct map_config_t
     uint32 max_time_lastupdate;       // max interval wait of last update player char
     int32  vanadiel_time_epoch;      // current timestamp - vanadiel_time_epoch = vana'diel time
     int32  lightluggage_block;        // если значение отлично от нуля, то персонажи с lightluggage будут удаляться с сервера автоматически
+    bool   packetguard_enabled;       // Block and report any packets that aren't in the allow-list for a player's current state.
 
     uint16 ah_base_fee_single;        // Base AH fee for single items
     uint16 ah_base_fee_stacks;        // Base AH fee for stacks
@@ -83,21 +84,24 @@ struct map_config_t
     float  exp_rate;                  // множитель получаемого опыта
     float  exp_loss_rate;             // same as exp rate but applies when player dies
     uint8  exp_party_gap_penalties;   // if 1 Party Gap Penalties will apply
-    uint8  fov_allow_alliance;        // if 1 allow alliance to farm fov pages
     float  exp_retain;                // percentage of normally lost experience to retain upon death
     int8   exp_loss_level;            // Minimum main job level at which a character may lose experience points.
     bool   level_sync_enable;         // Enable/disable Level Sync
     bool   disable_gear_scaling;      // Disables ability to equip higher level gear when level cap/sync effect is on player.
     bool   all_jobs_widescan;         // Enable/disable jobs other than BST and RNG having widescan.
     int8   speed_mod;                 // Modifier to add to player speed
+    int8   mount_speed_mod;           // Modifier to add to mount speed
     int8   mob_speed_mod;             // Modifier to add to monster speed
     float  skillup_chance_multiplier; // Constant used in the skillup formula that has a strong effect on skill-up rates
     float  craft_chance_multiplier;   // Constant used in the crafting skill-up formula that has a strong effect on skill-up rates
     float  skillup_amount_multiplier; // Used to increase the amount of skill gained during skill up
     float  craft_amount_multiplier;   // Used to increase the amount of skill gained during skill up
-    bool   craft_day_matters;         // Enable/disable Element day factor in synthesis
-    bool   craft_moonphase_matters;   // Enable/disable Moon phase factor in synthesis
-    bool   craft_direction_matters;   // Enable/disable Compass direction factor in synthesis
+    bool   garden_day_matters;        // Enable/disable Element day factor in gardening results
+    bool   garden_moonphase_matters;  // Enable/disable Moon phase factor in gardening results
+    bool   garden_pot_matters;        // Enable/disable Pot element factor in gardening results
+    bool   garden_mh_aura_matters;    // Enable/disable Mog house aura factor in gardening results
+    uint16 craft_common_cap;            // Used in crafting, in synthutils.cpp. Defines skill limit before specialization system
+    uint16 craft_specialization_points; // Used in crafting, in synthutils.cpp. Defines the maximum points of the specialization system.
     float  mob_tp_multiplier;         // Multiplies the amount of TP mobs gain on any effect that would grant TP
     float  player_tp_multiplier;      // Multiplies the amount of TP players gain on any effect that would grant TP
     bool   mob_no_despawn;            // Toggle whether mobs roam home or despawn
@@ -196,6 +200,7 @@ void  map_versionscreen(int32 flag);                                            
 
 int32 map_config_read(const int8 *cfgName);                                             // Map-Server Config [venom]
 int32 map_config_default();
+int32 map_config_from_env();
 
 int32 map_cleanup(time_point tick,CTaskMgr::CTask *PTask);                              // Clean up timed out players
 int32 map_close_session(time_point tick, map_session_data_t* map_session_data);

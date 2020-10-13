@@ -4,12 +4,9 @@
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test
 -- !zone 230
 -------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/keyitems")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -34,25 +31,15 @@ function onTrade(player, npc, trade)
             player:startEvent(561)
         end
     end
-
-    -- "Flyers for Regine"
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
 end
 
 function onTrigger(player, npc)
 
     -- Checking Fame Level & Quest
-    sanFame = player:getFameLevel(SANDORIA)
-    theSteamStress = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
-    lizardSkins = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
-    blackTigerSkins = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
+    local sanFame = player:getFameLevel(SANDORIA)
+    local theSteamStress = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
+    local lizardSkins = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
+    local blackTigerSkins = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
 
     -- "The Seamstress" Quest Status
     if (theSteamStress == QUEST_AVAILABLE and player:getCharVar("theSeamStress") == 1) then

@@ -5,33 +5,24 @@
 -- !pos -159.082 12.000 253.794 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        if player:getCharVar("tradeGuilberdrier") == 0 then
-            player:messageSpecial(ID.text.FLYER_ACCEPTED)
-            player:messageSpecial(ID.text.FFR_GUILBERDRIER)
-            player:addCharVar("FFR", -1)
-            player:setCharVar("tradeGuilberdrier", 1)
-            player:confirmTrade()
-        else
-            player:messageSpecial(ID.text.FLYER_ALREADY)
-        end
-    end
+    quests.ffr.onTrade(player, npc, trade, 6) -- FLYERS FOR REGINE
 end
 
 function onTrigger(player, npc)
     local exitTheGambler = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER)
     local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
+    local pickpocketMask = player:getCharVar("thePickpocketSkipNPC")
 
-    if player:getCharVar("thePickpocket") == 1 and not player:getMaskBit(player:getCharVar("thePickpocketSkipNPC"), 4) then
+    if player:getCharVar("thePickpocket") == 1 and not utils.mask.getBit(pickpocketMask, 4) then
         player:showText(npc, ID.text.PICKPOCKET_GUILBERDRIER)
-        player:setMaskBit(player:getCharVar("thePickpocketSkipNPC"), "thePickpocketSkipNPC", 4, true)
+        player:setCharVar("thePickpocketSkipNPC", utils.mask.setBit(pickpocketMask, 4, true))
     elseif exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(522)
     elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then

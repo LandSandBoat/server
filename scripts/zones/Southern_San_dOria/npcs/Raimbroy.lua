@@ -5,15 +5,11 @@
 -- !zone 230
 -------------------------------------
 require("scripts/globals/settings")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/shop")
 require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-    local FlyerForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
     -- "The Sweetest Things" quest status var
     local theSweetestThings = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
 
@@ -24,15 +20,6 @@ function onTrade(player, npc, trade)
             player:startEvent(522)
         end
     end
-
-    if (FlyerForRegine == 1) then
-        local count = trade:getItemCount()
-        local MagicFlyer = trade:hasItemQty(532, 1)
-        if (MagicFlyer == true and count == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
-
 end
 
 function onTrigger(player, npc)

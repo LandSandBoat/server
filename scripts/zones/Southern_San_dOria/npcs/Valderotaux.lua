@@ -4,19 +4,10 @@
 --  General Info NPC
 -- !pos 97 0.1 113 230
 -------------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    -- "Flyers for Regine" conditional script
-
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(532, 1) and trade:getItemCount() == 1) then
-            player:messageSpecial(ID.text.FLYER_REFUSED)
-        end
-    end
 end
 
 function onTrigger(player, npc)

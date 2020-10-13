@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local flyersForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
@@ -18,8 +19,6 @@ function onTrade(player, npc, trade)
         if (npcUtil.giveItem(player, 532)) then
             player:confirmTrade()
         end
-    elseif (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532)) then
-        player:messageSpecial(ID.text.FLYER_REFUSED)
 
     -- THE BRUGAIRE CONSORTIUM
     elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 593)) then
@@ -28,16 +27,14 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local ffr = player:getCharVar("FFR")
+    local ffr = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     -- FLYERS FOR REGINE
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_AVAILABLE and ffr == 0) then
-        player:startEvent(601)
-    elseif (ffr == 1) then
+    if ffr == QUEST_AVAILABLE then -- ready to accept quest
         player:startEvent(510, 2)
-    elseif (player:getCharVar("FFR") == 2) then
+    elseif ffr == QUEST_ACCEPTED and player:getCharVar('[ffr]deliveryMask') == 32767 then -- all flyers delivered
         player:startEvent(603)
-    elseif (player:getCharVar("FFR") > 2 and not player:hasItem(532)) then
+    elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
         player:startEvent(510, 3)
 
     -- DEFAULT MENU
@@ -51,32 +48,19 @@ end
 
 function onEventFinish(player, csid, option)
     -- FLYERS FOR REGINE
-    if (csid == 601) then
-        player:setCharVar("FFR", 1)
-    elseif (csid == 510 and option == 2) then
-        if (npcUtil.giveItem(player, {{532, 12}, {532, 3}} )) then
+    if csid == 510 and option == 2 then
+        if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
             player:addQuest(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-            player:setCharVar("FFR", 17)
         end
-    elseif (csid == 603) then
-        if (npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE, {gil=440, title=tpz.title.ADVERTISING_EXECUTIVE})) then
-            player:setCharVar("tradeAnswald", 0)
-            player:setCharVar("tradePrietta", 0)
-            player:setCharVar("tradeMiene", 0)
-            player:setCharVar("tradePortaure", 0)
-            player:setCharVar("tradeAuvare", 0)
-            player:setCharVar("tradeGuilberdrier", 0)
-            player:setCharVar("tradeVilion", 0)
-            player:setCharVar("tradeCapiria", 0)
-            player:setCharVar("tradeBoncort", 0)
-            player:setCharVar("tradeCoullene", 0)
-            player:setCharVar("tradeLeuveret", 0)
-            player:setCharVar("tradeBlendare", 0)
-            player:setCharVar("tradeMaugie", 0)
-            player:setCharVar("tradeAdaunel", 0)
-            player:setCharVar("tradeRosel", 0)
-            player:setCharVar("FFR", 0)
-        end
+    elseif csid == 603 then
+        npcUtil.completeQuest(
+            player, SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE,
+            {
+                gil = 440,
+                title = tpz.title.ADVERTISING_EXECUTIVE,
+                var = '[ffr]deliveryMask',
+            }
+        )
 
     -- THE BRUGAIRE CONSORTIUM
     elseif (csid == 535) then

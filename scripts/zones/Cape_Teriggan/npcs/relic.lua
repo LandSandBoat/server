@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Cape Terrigan
+-- Area: Cape Teriggan
 --  NPC: <this space intentionally left blank>
 -- !pos 73 4 -174 113
 -----------------------------------

@@ -4,22 +4,13 @@
 -- Type: General Info NPC
 -------------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+-------------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        if player:getCharVar("tradeMaugie") == 0 then
-            player:messageSpecial(ID.text.FLYER_ACCEPTED)
-            player:messageSpecial(ID.text.FFR_MAUGIE)
-            player:addCharVar("FFR", -1)
-            player:setCharVar("tradeMaugie", 1)
-            player:confirmTrade()
-        else
-            player:messageSpecial(ID.text.FLYER_ALREADY)
-        end
-    end
+    quests.ffr.onTrade(player, npc, trade, 12) -- FLYERS FOR REGINE
 end
 
 function onTrigger(player, npc)

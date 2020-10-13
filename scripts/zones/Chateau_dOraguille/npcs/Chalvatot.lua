@@ -6,11 +6,12 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -105 0.1 72 233
 -----------------------------------
-require("scripts/globals/settings")
+local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -53,7 +54,7 @@ function onTrigger(player, npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (lureOfTheWildcat == QUEST_ACCEPTED and player:getMaskBit(WildcatSandy, 19) == false) then
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 19)) then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
@@ -96,7 +97,7 @@ function onEventFinish(player, csid, option)
 
     -- LURE OF THE WILDCAT
     elseif (csid == 561) then
-        player:setMaskBit(player:getCharVar("WildcatSandy"), "WildcatSandy", 19, true)
+        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 19, true))
 
     -- HER MAJESTY'S GARDEN
     elseif (csid == 84 and option == 1) then

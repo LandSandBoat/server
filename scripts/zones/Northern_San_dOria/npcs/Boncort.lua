@@ -4,24 +4,12 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/quests")
+require("scripts/quests/flyers_for_regine")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
-    -- FLYERS FOR REGINE
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
-        if player:getCharVar("tradeBoncort") == 0 then
-            player:messageSpecial(ID.text.FLYER_ACCEPTED)
-            player:messageSpecial(ID.text.FFR_BONCORT)
-            player:addCharVar("FFR", -1)
-            player:setCharVar("tradeBoncort", 1)
-            player:confirmTrade()
-        else
-            player:messageSpecial(ID.text.FLYER_ALREADY)
-        end
-    end
+    quests.ffr.onTrade(player, npc, trade, 7) -- FLYERS FOR REGINE
 end
 
 function onTrigger(player, npc)

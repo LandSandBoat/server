@@ -14,6 +14,7 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/keyitems")
 ------------------------------------
 
 tpz = tpz or {}
@@ -56,17 +57,17 @@ local regimeInfo = {
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0},
-            [ 21] = {act = "REPATRIATION",    cost = 50},
-            [ 37] = {act = "RERAISE",         cost = 10},
-            [ 53] = {act = "REGEN",           cost = 20},
-            [ 69] = {act = "REFRESH",         cost = 20},
-            [ 85] = {act = "PROTECT",         cost = 15},
-            [101] = {act = "SHELL",           cost = 15},
-            [117] = {act = "DRIED_MEAT",      cost = 50, food = true},
-            [133] = {act = "SALTED_FISH",     cost = 50, food = true},
-            [149] = {act = "HARD_COOKIE",     cost = 50, food = true},
-            [165] = {act = "INSTANT_NOODLES", cost = 50, food = true},
+            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
+            [ 21] = {act = "REPATRIATION",    cost = 50, discounted = 10},
+            [ 37] = {act = "RERAISE",         cost = 10, discounted =  5},
+            [ 53] = {act = "REGEN",           cost = 20, discounted = 10},
+            [ 69] = {act = "REFRESH",         cost = 20, discounted = 10},
+            [ 85] = {act = "PROTECT",         cost = 15, discounted =  5},
+            [101] = {act = "SHELL",           cost = 15, discounted =  5},
+            [117] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
+            [133] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
+            [149] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
+            [165] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
 
             -- TODO: implement elite training
             -- ELITE_INTRO     =  36,
@@ -468,24 +469,24 @@ local regimeInfo = {
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0},
-            [ 20] = {act = "REPATRIATION",    cost = 50},
-            [ 36] = {act = "CIRCUMSPECTION",  cost =  5},
-            [ 52] = {act = "HOMING_INSTINCT", cost = 50},
-            [ 68] = {act = "RERAISE",         cost = 10},
-            [ 84] = {act = "RERAISE_II",      cost = 20},
-            [100] = {act = "RERAISE_III",     cost = 30},
-            [116] = {act = "REGEN",           cost = 20},
-            [132] = {act = "REFRESH",         cost = 20},
-            [148] = {act = "PROTECT",         cost = 15},
-            [164] = {act = "SHELL",           cost = 15},
-            [180] = {act = "HASTE",           cost = 20},
-            [196] = {act = "DRIED_MEAT",      cost = 50, food = true},
-            [212] = {act = "SALTED_FISH",     cost = 50, food = true},
-            [228] = {act = "HARD_COOKIE",     cost = 50, food = true},
-            [244] = {act = "INSTANT_NOODLES", cost = 50, food = true},
-            [260] = {act = "DRIED_AGARICUS",  cost = 50, food = true},
-            [276] = {act = "INSTANT_RICE",    cost = 50, food = true},
+            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
+            [ 20] = {act = "REPATRIATION",    cost = 50, discounted = 10},
+            [ 36] = {act = "CIRCUMSPECTION",  cost =  5, discounted =  5},
+            [ 52] = {act = "HOMING_INSTINCT", cost = 50, discounted = 25},
+            [ 68] = {act = "RERAISE",         cost = 10, discounted =  5},
+            [ 84] = {act = "RERAISE_II",      cost = 20, discounted = 10},
+            [100] = {act = "RERAISE_III",     cost = 30, discounted = 15},
+            [116] = {act = "REGEN",           cost = 20, discounted = 10},
+            [132] = {act = "REFRESH",         cost = 20, discounted = 10},
+            [148] = {act = "PROTECT",         cost = 15, discounted =  5},
+            [164] = {act = "SHELL",           cost = 15, discounted =  5},
+            [180] = {act = "HASTE",           cost = 20, discounted = 10},
+            [196] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
+            [212] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
+            [228] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
+            [244] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
+            [260] = {act = "DRIED_AGARICUS",  cost = 50, discounted = 25, food = true},
+            [276] = {act = "INSTANT_RICE",    cost = 50, discounted = 25, food = true},
 
             -- TODO: implement Trust: Sakura and Trust: Koru-Moru (Alter Ego Extravaganza)
             -- CIPHER_SAKURA   = 292,
@@ -975,6 +976,64 @@ local function getFinishOpts(regimeType)
     end
     return out
 end
+
+-- first time an effect is applied, use basePower
+-- each additional time an effect is applied, use addPower
+-- can stack each effect up to maxStack times, per https://ffxiclopedia.fandom.com/wiki/Grounds_of_Valor#Prowesses
+local prowessData =
+{
+    { effect = tpz.effect.PROWESS_CASKET_RATE,   basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_SKILL_RATE,    basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_CRYSTAL_YIELD, basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_TH,            basePower = 1,   addPower = 1,   maxStack = 3  },
+    { effect = tpz.effect.PROWESS_ATTACK_SPEED,  basePower = 400, addPower = 400, maxStack = 4  },
+    { effect = tpz.effect.PROWESS_HP_MP,         basePower = 3,   addPower = 1,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_ACC_RACC,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_ATT_RATT,      basePower = 4,   addPower = 4,   maxStack = 11 },
+    { effect = tpz.effect.PROWESS_MACC_MATK,     basePower = 4,   addPower = 4,   maxStack = 10 },
+    { effect = tpz.effect.PROWESS_CURE_POTENCY,  basePower = 4,   addPower = 4,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_WS_DMG,        basePower = 2,   addPower = 2,   maxStack = 5  },
+    { effect = tpz.effect.PROWESS_KILLER,        basePower = 4,   addPower = 4,   maxStack = 2  },
+}
+
+local function addGovProwessBonusEffect(player)
+    -- make a table of prowesses that are not yet maxed
+    local availableProwesses = {}
+
+    for i = 1, #prowessData do
+        local p = prowessData[i]
+        local e = player:getStatusEffect(p.effect)
+
+        if not e or e:getPower() < (p.basePower + p.addPower * (p.maxStack - 1)) then
+            table.insert(availableProwesses, p)
+        end
+    end
+
+    -- pick one and apply
+    if #availableProwesses > 0 then
+        local p = availableProwesses[math.random(#availableProwesses)]
+        local e = player:getStatusEffect(p.effect)
+
+        -- get current power
+        local power = 0
+        if e then
+            power = e:getPower()
+            player:delStatusEffectSilent(p.effect)
+        end
+
+        -- add either basePower or addPower
+        if power == 0 then
+            power = p.basePower
+        else
+            power = power + p.addPower
+        end
+
+        -- set effect
+        player:addStatusEffectEx(p.effect, 0, power, 0, 0)
+        player:messageBasic(p.effect - 168)
+    end
+end
+
 -- function made global to be called by hunts.lua
 tpz.regime.clearRegimeVars = function(player)
     player:setCharVar("[regime]type", 0)
@@ -990,24 +1049,28 @@ tpz.regime.clearRegimeVars = function(player)
 end
 
 tpz.regime.bookOnTrigger = function(player, regimeType)
+    local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
-  if player:getCharVar("[hunt]status") >= 1 then
-     player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]page"))
+    if player:getCharVar("[hunt]status") >= 1 then
+        player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-  elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
-        local info = regimeInfo[regimeType].zone[player:getZoneID()]
-
+    elseif (regimeType == tpz.regime.type.FIELDS and ENABLE_FIELD_MANUALS == 1) or (regimeType == tpz.regime.type.GROUNDS and ENABLE_GROUNDS_TOMES == 1) then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
+        -- arg4 reduces prices of field suppord
         local pages = table.getn(info.page)
         local arg2 = 0
+        local arg4 = 0
         for i = 1, 10 do
             if i > pages then
                 arg2 = arg2 + 2^i
             end
         end
+        if player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
+            arg4 = 1
+        end
 
-        player:startEvent(info.event, 0, arg2, 0, 0, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
+        player:startEvent(info.event, 0, arg2, 0, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
     else
         player:PrintToPlayer("Disabled.")
     end
@@ -1054,8 +1117,13 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     local msgOffset = zones[zoneId].text.REGIME_REGISTERED
     local tabs = player:getCurrency("valor_point")
     local regimeRepeat = bit.band(option, 0x80000000)
+    local hasKI  = player:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
+
+    if option == 7 then
+      tpz.hunts.clearHuntVars(player)
+    end
 
     -- check valid option
     local opts = getFinishOpts(regimeType)
@@ -1065,12 +1133,15 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
         return
     end
 
-    if option == 7 then
-      tpz.hunts.clearHuntVars(player)
+    local cost = opt.cost
+
+    -- charges player differently if they hold RoV KeyItem
+    if cost and hasKI then
+        cost = opt.discounted
     end
 
     -- check player has enough tabs
-    if opt.cost and opt.cost > tabs then
+    if cost and cost > tabs then
         player:showText(player, msgOffset + 1032) -- You do not have enough tabs.
         return
     end
@@ -1084,7 +1155,7 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
     -- purchase a service
     if opt.act then
         local act = opt.act
-        player:delCurrency("valor_point", opt.cost)
+        player:delCurrency("valor_point", cost)
 
         if act == "CANCEL_REGIME" then
             tpz.regime.clearRegimeVars(player)
@@ -1202,6 +1273,16 @@ tpz.regime.bookOnEventFinish = function(player, option, regimeType)
 
             player:showText(player, msgOffset)
             player:showText(player, msgOffset + 1)
+
+            -- Records of Eminence: Undertake a FoV Training Regime
+            if player:getEminenceProgress(3) and regimeType == tpz.regime.type.FIELDS then
+                tpz.roe.onRecordTrigger(player, 3)
+            end
+
+            -- Records of Eminence: Undertake a GoV Training Regime
+            if player:getEminenceProgress(11) and regimeType == tpz.regime.type.GROUNDS then
+                tpz.roe.onRecordTrigger(player, 11)
+            end
         end
     end
 end
@@ -1213,8 +1294,13 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no Fields credit unless fov_allow_alliance is 1 in map.conf
-    if regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 and not player:checkFovAllianceAllowed() == 1 then
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if FOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+        return
+    end
+
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if GOV_REWARD_ALLIANCE ~= 1 and regimeType == tpz.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
@@ -1269,52 +1355,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- prowess buffs from completing Grounds regimes
     if regimeType == tpz.regime.type.GROUNDS then
-        local prowess = math.random(tpz.effect.PROWESS_CASKET_RATE, tpz.effect.PROWESS_KILLER)
-        local power = 0
-
-        -- existing buff
-        if player:hasStatusEffect(prowess) then
-
-            -- stack up to 11 times
-            if prowess == tpz.effect.PROWESS_TH then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 1, 0, 11)
-            elseif prowess == tpz.effect.PROWESS_ATTACK_SPEED then
-                power = 400
-            elseif prowess == tpz.effect.PROWESS_HP_MP then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 1, 0, 14)
-            elseif prowess == tpz.effect.PROWESS_WS_DMG then
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 2, 0, 22)
-            else
-                power = utils.clamp(player:getStatusEffect(prowess):getPower() + 4, 0, 44)
-            end
-
-            -- reapply buff
-            player:delStatusEffectSilent(prowess)
-            player:addStatusEffectEx(prowess, 0, power, 0, 0)
-
-            -- message (prowess boosted)
-            player:messageBasic(prowess - 152)
-
-        -- new buff
-        else
-            if prowess == tpz.effect.PROWESS_TH then
-                power = 1
-            elseif prowess == tpz.effect.PROWESS_ATTACK_SPEED then
-                power = 400
-            elseif prowess == tpz.effect.PROWESS_HP_MP then
-                power = 3
-            elseif prowess == tpz.effect.PROWESS_WS_DMG then
-                power = 2
-            else
-                power = 4
-            end
-
-            -- apply buff
-            player:addStatusEffectEx(prowess, 0, power, 0, 0)
-
-            -- message (prowess attained)
-            player:messageBasic(prowess - 168)
-        end
+        addGovProwessBonusEffect(player)
 
         -- repeat clears bonus
         if player:hasStatusEffect(tpz.effect.PROWESS) then
@@ -1332,9 +1373,7 @@ tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
             -- keep track of number of clears
             player:addStatusEffect(tpz.effect.PROWESS, 1, 0, 0)
         end
-
     end
-    -- done with prowess buffs
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()

@@ -6,6 +6,7 @@
     npcUtil.giveItem(player, items)
     npcUtil.giveKeyItem(player, keyitems)
     npcUtil.completeQuest(player, area, quest, params)
+    npcUtil.completeRecord(player, record, params)
     npcUtil.tradeHas(trade, items)
     npcUtil.queueMove(npc, point, delay)
     npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
@@ -13,6 +14,7 @@
 --]]
 require("scripts/globals/settings")
 require("scripts/globals/status")
+require("scripts/globals/msg")
 
 npcUtil = {}
 
@@ -325,8 +327,8 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.completeQuest(player, SANDORIA, ROSEL_THE_ARMORER, {
-            item = { {640, 2}, 641 },    -- see npcUtil.giveItem for formats
-            keyItem = tpz.ki.ZERUHN_REPORT,    -- see npcUtil.giveKeyItem for formats
+            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            ki = tpz.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -349,8 +351,8 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, params["keyItem"])
+    if params["ki"] ~= nil then
+        npcUtil.giveKeyItem(player, params["ki"])
     end
 
     if params["fame"] == nil then
