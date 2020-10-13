@@ -77,7 +77,6 @@
 #include "../packets/char_job_extra.h"
 #include "../packets/status_effects.h"
 #include "../mobskill.h"
-#include "../notoriety_container.h"
 
 CCharEntity::CCharEntity()
 {
@@ -529,8 +528,6 @@ void CCharEntity::Tick(time_point tick)
     {
         gardenutils::UpdateGardening(this, true);
     }
-
-    PNotorietyContainer->tryClear();
 }
 
 void CCharEntity::PostTick()

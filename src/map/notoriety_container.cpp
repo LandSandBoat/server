@@ -53,17 +53,8 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
 
 bool CNotorietyContainer::hasEnmity()
 {
-    return !m_Lookup.empty();
-}
-
-std::size_t CNotorietyContainer::size()
-{
-    return m_Lookup.size();
-}
-
-void CNotorietyContainer::tryClear()
-{
-    if (!m_POwner->GetBattleTarget() && hasEnmity())
+    // Make sure the container is up to date before reporting
+    if (!m_Lookup.empty())
     {
         std::vector<CBattleEntity*> toRemove;
         for (CBattleEntity* entry : *this)
@@ -84,4 +75,11 @@ void CNotorietyContainer::tryClear()
             remove(entry);
         }
     }
+
+    return !m_Lookup.empty();
+}
+
+std::size_t CNotorietyContainer::size()
+{
+    return m_Lookup.size();
 }
