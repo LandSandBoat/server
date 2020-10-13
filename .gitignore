@@ -167,8 +167,8 @@ log/tpz.leaks
 .vscode
 
 # Visual Studio
-*.vcxproj*
-win32/topaz.sln
+**/*.vcxproj*
+**/*.sln
 
 # CMake files
 CMakeCache.txt

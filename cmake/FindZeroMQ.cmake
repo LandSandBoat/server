@@ -23,7 +23,7 @@ find_path(ZeroMQ_INCLUDE_DIR
         zmq.h
     PATHS
         ${ZeroMQ_ADD_INCLUDE_PATH}
-        ${PROJECT_SOURCE_DIR}/win32/external/zmq
+        ${PROJECT_SOURCE_DIR}/ext/include/zmq
         /usr/include
         /usr/local/bin/
         /usr/bin/)

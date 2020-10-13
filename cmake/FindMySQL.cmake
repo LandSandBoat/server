@@ -23,7 +23,7 @@ find_path(MYSQL_INCLUDE_DIR
         mysql.h
     PATHS
         ${MYSQL_ADD_INCLUDE_PATH}
-        ${PROJECT_SOURCE_DIR}/win32/external/mysql
+        ${PROJECT_SOURCE_DIR}/ext/include/mysql
         /usr/include
         /usr/local/bin/
         /usr/bin/)
