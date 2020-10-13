@@ -50,24 +50,25 @@ void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool 
 	if (slotIndex < 20) {
 		if (dynamic_cast<CBlueSpell*>(PSpell))
         {
-            if (addingSpell)
+            // Blue spells in SetBlueSpells must be 0x200 ofsetted so it's 1 byte per spell.
+            if (PChar->m_SetBlueSpells[slotIndex] != 0)
             {
-                if (!IsSpellSet(PChar, PSpell) && HasEnoughSetPoints(PChar, PSpell, slotIndex))
+                CBlueSpell* POldSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slotIndex] + 0x200));
+                PChar->delModifiers(&POldSpell->modList);
+                PChar->m_SetBlueSpells[slotIndex] = 0x00;
+            }
+            if (addingSpell && !IsSpellSet(PChar, PSpell) && HasEnoughSetPoints(PChar, PSpell, slotIndex))
+            {
+                uint16 spellID = static_cast<uint16>(PSpell->getID());
+                if (charutils::hasSpell(PChar, spellID))
                 {
-				    // Blue spells in SetBlueSpells must be 0x200 ofsetted so it's 1 byte per spell.
-                    if (PChar->m_SetBlueSpells[slotIndex] != 0)
-                    {
-                        CBlueSpell* POldSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(PChar->m_SetBlueSpells[slotIndex] + 0x200));
-                        PChar->delModifiers(&POldSpell->modList);
-                    }
-				    PChar->m_SetBlueSpells[slotIndex] = static_cast<uint16>(PSpell->getID()) - 0x200;
-				    PChar->addModifiers(&PSpell->modList);
+                    PChar->m_SetBlueSpells[slotIndex] = spellID - 0x200;
+                    PChar->addModifiers(&PSpell->modList);
                 }
-			}
-			else
-            {
-				PChar->m_SetBlueSpells[slotIndex] = 0x00;
-				PChar->delModifiers(&PSpell->modList);
+                else
+                {
+                    ShowExploit(CL_RED "SetBlueSpell: Player %s trying to set spell ID %u they don't have! \n" CL_RESET, PChar->GetName(), spellID);
+                }
 			}
             SaveSetSpells(PChar);
 		}
