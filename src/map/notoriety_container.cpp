@@ -53,6 +53,29 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
 
 bool CNotorietyContainer::hasEnmity()
 {
+    // Make sure the container is up to date before reporting
+    if (!m_Lookup.empty())
+    {
+        std::vector<CBattleEntity*> toRemove;
+        for (CBattleEntity* entry : *this)
+        {
+            if (CMobEntity* mob = dynamic_cast<CMobEntity*>(entry))
+            {
+                EnmityList_t* mobEnmityList = mob->PEnmityContainer->GetEnmityList();
+                bool notOnEnmityList = mobEnmityList->find(m_POwner->id) == mobEnmityList->end();
+                if ((mob->isAlive() && notOnEnmityList) || mob->isDead())
+                {
+                    toRemove.emplace_back(entry);
+                }
+            }
+        }
+
+        for (CBattleEntity* entry : toRemove)
+        {
+            remove(entry);
+        }
+    }
+
     return !m_Lookup.empty();
 }
 
