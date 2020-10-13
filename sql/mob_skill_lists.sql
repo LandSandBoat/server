@@ -3602,11 +3602,24 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3469); -- Twirling D
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_King_of_Hearts',1104,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Morimar',1105,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Darrcuiln',1106,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AATT',1110,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,41);        -- Swift Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,103);       -- Cross Reaper
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,225);       -- Chant du Cygne
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,40);        -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,225);       -- Chant du Cygne
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,933);       -- Dominion Slash
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3710);      -- Arrogance Incarnate
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,69);        -- Rampage
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,70);        -- Calamity
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,76);        -- Cloudsplitter
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,932);       -- Havoc Spiral
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AATT',1110,102);       -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AATT',1110,935);       -- Amon Drive
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,150);       -- Tachi: Yukikaze
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,151);       -- Tachi: Gekko
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,152);       -- Tachi: Kasha
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,156);       -- Tachi: Fudo
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,937);       -- Dragonfall
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha',1112,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ygnas',1113,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Monberaux',1114,0);
