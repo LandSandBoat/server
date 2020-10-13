@@ -1792,6 +1792,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     battleutils::ClaimMob(PTarget, this);
     PAI->EventHandler.triggerListener("ATTACK", this, PTarget, &action);
     PTarget->PAI->EventHandler.triggerListener("ATTACKED", PTarget, this, &action);
+    PTarget->LastAttacked = server_clock::now();
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////
