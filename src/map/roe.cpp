@@ -278,11 +278,10 @@ bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
     // Prevent packet-injection for re-taking completed records which aren't marked repeatable.
     if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeSystem.RepeatableRecords.test(recordID))
         return false;
-    // Deny packet-injection from taking timed records as normal ones.
+    // Prevent packet-injection from taking timed records as normal ones.
     if (roeutils::RoeSystem.TimedRecords.test(recordID))
         return false;
 
-    // Per above, this i < 30 is correct.
     for (int i = 0; i < 30; i++)
     {
         if (PChar->m_eminenceLog.active[i] == 0)
@@ -363,6 +362,8 @@ bool SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progr
 
 void onCharLoad(CCharEntity* PChar)
 {
+    if (!RoeSystem.RoeEnabled)
+        return;
 
     // Build eminence lookup map
     for(int i = 0; i < 31; i++)
@@ -427,7 +428,7 @@ void AddActiveTimedRecord(CCharEntity* PChar)
 void ClearDailyRecords(CCharEntity* PChar)
 {
     // Set daily record progress to 0
-    for(int i = 0; i < 30 && PChar->m_eminenceLog.active[i] != 0; i++)
+    for (int i = 0; i < 30; i++)
     {
         if (auto recordID = PChar->m_eminenceLog.active[i]; RoeSystem.DailyRecords.test(recordID))
         {
@@ -452,6 +453,9 @@ void ClearDailyRecords(CCharEntity* PChar)
 
 void CycleTimedRecords()
 {
+    if (!RoeSystem.RoeEnabled)
+        return;
+
     zoneutils::ForEachZone([](CZone* PZone){
         PZone->ForEachChar([](CCharEntity* PChar){
             if (GetEminenceRecordCompletion(PChar, 1))
@@ -464,6 +468,9 @@ void CycleTimedRecords()
 
 void CycleDailyRecords()
 {
+    if (!RoeSystem.RoeEnabled)
+        return;
+
     zoneutils::ForEachZone([](CZone* PZone){
         PZone->ForEachChar([](CCharEntity* PChar){
             ClearDailyRecords(PChar);
