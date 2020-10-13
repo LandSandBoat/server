@@ -404,11 +404,11 @@ void search_config_read(const int8* file)
 
 void search_config_read_from_env()
 {
-    search_config.mysql_login   = std::getenv("DB_USER") ? std::getenv("DB_USER") : search_config.mysql_login;
-    search_config.mysql_password = std::getenv("DB_USER_PASSWD") ? std::getenv("DB_USER_PASSWD") : search_config.mysql_password;
-    search_config.mysql_host     = std::getenv("DB_HOST") ? std::getenv("DB_HOST") : search_config.mysql_host;
-    search_config.mysql_port     = std::getenv("DB_PORT") ? std::stoi(std::getenv("DB_PORT")) : search_config.mysql_port;
-    search_config.mysql_database = std::getenv("DB_NAME") ? std::getenv("DB_NAME") : search_config.mysql_database;
+    search_config.mysql_login    = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : search_config.mysql_login;
+    search_config.mysql_password = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : search_config.mysql_password;
+    search_config.mysql_host     = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : search_config.mysql_host;
+    search_config.mysql_port     = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : search_config.mysql_port;
+    search_config.mysql_database = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : search_config.mysql_database;
 }
 
 /************************************************************************
@@ -466,7 +466,7 @@ void login_config_read(const int8* file)
 
 void login_config_read_from_env()
 {
-    login_config.search_server_port = std::getenv("SEARCH_PORT") ? std::getenv("SEARCH_PORT") : login_config.search_server_port;
+    login_config.search_server_port = std::getenv("TPZ_SEARCH_PORT") ? std::getenv("TPZ_SEARCH_PORT") : login_config.search_server_port;
 }
 
 void TCPComm(SOCKET socket)

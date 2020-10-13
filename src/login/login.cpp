@@ -515,13 +515,13 @@ void login_config_default()
 
 void login_config_read_from_env()
 {
-    login_config.mysql_login     = std::getenv("DB_USER") ? std::getenv("DB_USER") : login_config.mysql_login;
-    login_config.mysql_password  = std::getenv("DB_USER_PASSWD") ? std::getenv("DB_USER_PASSWD") : login_config.mysql_password;
-    login_config.mysql_host      = std::getenv("DB_HOST") ? std::getenv("DB_HOST") : login_config.mysql_host;
-    login_config.mysql_port      = std::getenv("DB_PORT") ? std::stoi(std::getenv("DB_PORT")) : login_config.mysql_port;
-    login_config.mysql_database  = std::getenv("DB_NAME") ? std::getenv("DB_NAME") : login_config.mysql_database;
-    login_config.msg_server_ip   = std::getenv("MSG_IP") ? std::getenv("MSG_IP") : login_config.msg_server_ip;
-    login_config.msg_server_port = std::getenv("MSG_PORT") ? std::stoi(std::getenv("MSG_PORT")) : login_config.msg_server_port;
+    login_config.mysql_login     = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : login_config.mysql_login;
+    login_config.mysql_password  = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : login_config.mysql_password;
+    login_config.mysql_host      = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : login_config.mysql_host;
+    login_config.mysql_port      = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : login_config.mysql_port;
+    login_config.mysql_database  = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : login_config.mysql_database;
+    login_config.msg_server_ip   = std::getenv("TPZ_MSG_IP") ? std::getenv("TPZ_MSG_IP") : login_config.msg_server_ip;
+    login_config.msg_server_port = std::getenv("TPZ_MSG_PORT") ? std::stoi(std::getenv("TPZ_MSG_PORT")) : login_config.msg_server_port;
 }
 
 void version_info_default()
