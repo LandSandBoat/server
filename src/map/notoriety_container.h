@@ -39,6 +39,7 @@ public:
     void add(CBattleEntity* entity);
     void remove(CBattleEntity* entity);
     std::size_t size();
+    void tryClear();
 
     bool hasEnmity();
 

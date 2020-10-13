@@ -60,3 +60,28 @@ std::size_t CNotorietyContainer::size()
 {
     return m_Lookup.size();
 }
+
+void CNotorietyContainer::tryClear()
+{
+    if (!m_POwner->GetBattleTarget() && hasEnmity())
+    {
+        std::vector<CBattleEntity*> toRemove;
+        for (CBattleEntity* entry : *this)
+        {
+            if (CMobEntity* mob = dynamic_cast<CMobEntity*>(entry))
+            {
+                auto mobEnmityList = mob->PEnmityContainer->GetEnmityList();
+                if ((mob->isAlive() && mobEnmityList->find(m_POwner->id) == mobEnmityList->end()) ||
+                    mob->isDead())
+                {
+                    toRemove.emplace_back(entry);
+                }
+            }
+        }
+
+        for (CBattleEntity* entry : toRemove)
+        {
+            remove(entry);
+        }
+    }
+}
