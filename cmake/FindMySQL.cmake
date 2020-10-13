@@ -14,7 +14,9 @@ find_library(MYSQL_LIBRARY
         ${LOCAL_LIB_PATH}
         ${MYSQL_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 find_path(MYSQL_INCLUDE_DIR 
     NAMES 
@@ -22,7 +24,9 @@ find_path(MYSQL_INCLUDE_DIR
     PATHS
         ${MYSQL_ADD_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/win32/external/mysql
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 include (FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MySQL DEFAULT_MSG MYSQL_LIBRARY MYSQL_INCLUDE_DIR)

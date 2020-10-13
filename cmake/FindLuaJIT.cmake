@@ -9,12 +9,14 @@ endif()
 
 find_library(LuaJIT_LIBRARY 
     NAMES 
-        luajit luajit_64 libluajit libluajit_64
+        luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
         ${LOCAL_LIB_PATH}
         ${LuaJIT_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 find_path(LuaJIT_INCLUDE_DIR 
     NAMES 
@@ -22,7 +24,9 @@ find_path(LuaJIT_INCLUDE_DIR
     PATHS
         ${LuaJIT_ADD_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/src/common/lua
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 include (FindPackageHandleStandardArgs)
 find_package_handle_standard_args(LuaJIT DEFAULT_MSG LuaJIT_LIBRARY LuaJIT_INCLUDE_DIR)

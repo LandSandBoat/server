@@ -14,7 +14,9 @@ find_library(ZeroMQ_LIBRARY
         ${LOCAL_LIB_PATH}
         ${ZeroMQ_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 find_path(ZeroMQ_INCLUDE_DIR 
     NAMES 
@@ -22,7 +24,9 @@ find_path(ZeroMQ_INCLUDE_DIR
     PATHS
         ${ZeroMQ_ADD_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/win32/external/zmq
-        /usr/include)
+        /usr/include
+        /usr/local/bin/
+        /usr/bin/)
 
 include (FindPackageHandleStandardArgs)
 find_package_handle_standard_args(ZeroMQ DEFAULT_MSG ZeroMQ_LIBRARY ZeroMQ_INCLUDE_DIR)
