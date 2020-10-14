@@ -5,6 +5,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+require("scripts/globals/summon")
 -----------------------------------------
 
 function onAbilityCheck(player, target, ability)
@@ -12,8 +13,10 @@ function onAbilityCheck(player, target, ability)
 end
 
 function onPetAbility(target, pet, skill)
-    local duration = 60
-    local resm = applyPlayerResistance(pet, -1, target, pet:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), tpz.skill.ELEMENTAL_MAGIC, 5)
+    local duration = 90
+    local dINT = pet:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+    local bonus = getSummoningSkillOverCap(pet)
+    local resm = applyPlayerResistance(pet, -1, target, dINT, bonus, 5)
     if (resm < 0.5) then
         skill:setMsg(tpz.msg.basic.JA_MISS_2) -- resist message
         return tpz.effect.SLEEP_I
