@@ -25,6 +25,7 @@ RUN mkdir build && cd build && cmake .. && make -j $(nproc) && cd .. && rm -r /c
 COPY /conf/default/* conf/
 
 # Startup the server when the container starts
-ENTRYPOINT nohup ./topaz_connect > topaz_connect.log & \
+ENTRYPOINT ./tools/waitfordb.sh && \
+nohup ./topaz_connect > topaz_connect.log & \
 nohup ./topaz_game > topaz_game.log & \
 ./topaz_search > topaz_search.log

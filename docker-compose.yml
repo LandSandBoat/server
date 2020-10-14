@@ -29,10 +29,8 @@ services:
   code:
     # Build whatever is in the Dockerfile in the topaz root folder
     build: .
-    depends_on: 
+    depends_on:
       - "db"
-    # Wait for the DB to actually come up before launching. Without this you need to restart the game service after the DB is up and responsive
-    command: ["./tools/waitforit/wait-for-it.sh", "db:3306"]
     ports:
       # topaz_connect
       - "54230:54230/tcp"

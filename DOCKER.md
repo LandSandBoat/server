@@ -2,8 +2,6 @@ Project Topaz Docker
 ==========
 
 This guide assumes you have Docker (https://www.docker.com/) installed on your machine.
-The conf/docker files are the config files used by Docker and are based off the default config files.
-Only notable change is the `mysql_host` is set to `db` which is the name of the database service.
 
 ## How to start the server
 
@@ -12,13 +10,13 @@ Only notable change is the `mysql_host` is set to `db` which is the name of the 
 * Type `docker-compose up -d` (the `-d` is optional and will free up -detach- the terminal)
 * Wait till everything is complete. If you previously stopped or deleted the services then you may encounter `ERROR: The image for the service you're trying to recreate has been removed. If you continue, volume data could be lost. Consider backing up your data before continuing. Continue with the new image? [yN]`. You can enter `y` to force the install.
 
-Note the zone IPs are not updated in the DB and will default to 127.0.0.1 so you will need to use the `--hairpin` option when connecting to the server
+Note the zone IPs are not updated in the DB and will default to 127.0.0.1 so you will need to use the `--hairpin` option when connecting to the server.
 
 ## How to restart the Server/DB
 
 The server runs in the "code" service and the database in the "db" service and will likely be named something like `topaz_code_1` similarly the database will be something like `topaz_db_1`. To see the names assigned to your services type `docker ps`. To restart them you can use the `docker restart` command such as `docker restart topaz_code_1`.
 
-Alternatively you can stop and start individual services with `docker stop conainer_name` and `docker start container_name`. The order should be "database" then "code"
+Alternatively you can stop and start individual services with `docker stop conainer_name` and `docker start container_name` where `container_name` is the container name from the `docker ps` command. The run order should be "database" then "code".
 
 ## Connect to server terminal
 
