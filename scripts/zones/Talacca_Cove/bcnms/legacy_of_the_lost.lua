@@ -31,9 +31,11 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(TOAU) == tpz.mission.id.toau.LEGACY_OF_THE_LOST then
-        player:completeMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
+    if csid == 32001 then
         player:setTitle(tpz.title.GESSHOS_MERCY)
-        player:addMission(TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
+        if player:getCurrentMission(TOAU) == tpz.mission.id.toau.LEGACY_OF_THE_LOST then
+            player:completeMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
+            player:addMission(TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
+        end
     end
 end
