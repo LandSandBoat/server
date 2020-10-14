@@ -17,7 +17,7 @@ services:
       - "3306:3306"
 
   # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:topazisawesome
-  adminer:
+  db-admin-portal:
     image: adminer
     restart: always
     depends_on: 
@@ -26,7 +26,7 @@ services:
       - 8080:8080
 
   # The server service
-  code:
+  game:
     # Build whatever is in the Dockerfile in the topaz root folder
     build: .
     depends_on:
