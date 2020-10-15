@@ -190,16 +190,12 @@ function onTrade(player, npc, trade)
         return
     elseif relicId ~= nil then
         local relic = relics[relicId]
-        local acceptTrade = false
         local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER")
 
         if player:hasItem(relicId + 1) and not relicDupe == 1 then
             player:startEvent(20, relicId)
         elseif currentRelic == 0 then
-            if not relic[stageNumber] ~= 4 and tradeHasRequiredMaterials(trade, relicId, relic[requiredItems]) then
-                acceptTrade = true
-            end
-            if acceptTrade == true then
+            if relic[stageNumber] ~= 4 and tradeHasRequiredMaterials(trade, relicId, relic[requiredItems]) then
                 local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
                 local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
                 local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
