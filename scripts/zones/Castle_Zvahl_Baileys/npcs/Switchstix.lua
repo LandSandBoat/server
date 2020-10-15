@@ -203,7 +203,7 @@ function onTrade(player, npc, trade)
                 player:tradeComplete()
                 player:startEvent(11, relicId, requiredItem1, requiredItem2, requiredItem3, relic[currencyType], relic[currencyAmount], 0, relic[csParam])
             end
-        elseif currentRelic ~= 0 then
+        elseif currentRelic ~= 0 and relicId ~= currentRelic then
             player:startEvent(87)
         end
     elseif currentRelic ~= 0 then
