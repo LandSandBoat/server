@@ -106,9 +106,9 @@ LandKingSystem_NQ = 1
 LandKingSystem_HQ = 1
 
 -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
-NM_LOTTERYCHANCE = 1.0
+NM_LOTTERY_CHANCE = 1.0
 -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
-NM_LOTTERYCOOLDOWN = 1.0
+NM_LOTTERY_COOLDOWN = 1.0
 
 -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
@@ -125,9 +125,9 @@ FREE_COP_DYNAMIS = 0  -- Authorize player to entering inside COP Dynamis without
 AF1_QUEST_LEVEL = 40 -- Minimum level to start AF1 quest
 AF2_QUEST_LEVEL = 50 -- Minimum level to start AF2 quest
 AF3_QUEST_LEVEL = 50 -- Minimum level to start AF3 quest
-OldSchoolG1 = false -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-OldSchoolG2 = false -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-FrigiciteDuration = 30 -- When OldSChoolG2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+OLDSCHOOL_G1 = false -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
+OLDSCHOOL_G2 = false -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
+FRIGICITE_TIME = 30 -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
 
 -- SPELL SPECIFIC SETTINGS
 DIA_OVERWRITE = 1 --Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
