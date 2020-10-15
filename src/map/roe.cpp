@@ -43,7 +43,9 @@ RoeSystemData roeutils::RoeSystem;
 void SaveEminenceDataNice(CCharEntity* PChar)
 {
     if (PChar->m_eminenceCache.lastWriteout < time(nullptr) - ROE_CACHETIME)
+    {
         charutils::SaveEminenceData(PChar);
+    }
 }
 
 namespace roeutils
@@ -62,7 +64,9 @@ void init()
 int32 ParseRecords(lua_State* L)
 {
     if (lua_isnil(L, -1) || !lua_istable(L, -1))
+    {
         return 0;
+    }
 
     RoeHandlers.fill(RoeCheckHandler());
     roeutils::RoeSystem.ImplementedRecords.reset();
@@ -142,7 +146,9 @@ int32 ParseRecords(lua_State* L)
 int32 ParseTimedSchedule(lua_State* L)
 {
     if (lua_isnil(L, -1) || !lua_istable(L, -1))
+    {
         return 0;
+    }
 
     roeutils::RoeSystem.TimedRecords.reset();
     roeutils::RoeSystem.TimedRecordTable.fill(RecordTimetable_D{});
@@ -169,13 +175,17 @@ int32 ParseTimedSchedule(lua_State* L)
 bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload)
 {
     if (!RoeSystem.RoeEnabled || !PChar || PChar->objtype != TYPE_PC)
+    {
         return false;
+    }
 
     RoeCheckHandler& handler = RoeHandlers[eventID];
 
     // Bail if player has no records of this type.
     if ((PChar->m_eminenceCache.activemap & handler.bitmap).none())
+    {
         return false;
+    }
 
     lua_State* L = luautils::LuaHandle;
     uint32 stackTop = lua_gettop(L);
@@ -277,10 +287,14 @@ bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
 
     // Prevent packet-injection for re-taking completed records which aren't marked repeatable.
     if (roeutils::GetEminenceRecordCompletion(PChar, recordID) && !roeutils::RoeSystem.RepeatableRecords.test(recordID))
+    {
         return false;
+    }
     // Prevent packet-injection from taking timed records as normal ones.
     if (roeutils::RoeSystem.TimedRecords.test(recordID))
+    {
         return false;
+    }
 
     for (int i = 0; i < 30; i++)
     {
@@ -349,7 +363,9 @@ bool SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progr
         if (PChar->m_eminenceLog.active[i] == recordID)
         {
             if (PChar->m_eminenceLog.progress[i] == progress)
+            {
                 return true;
+            }
 
             PChar->m_eminenceLog.progress[i] = progress;
             PChar->pushPacket(new CRoeUpdatePacket(PChar));
@@ -363,10 +379,12 @@ bool SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progr
 void onCharLoad(CCharEntity* PChar)
 {
     if (!RoeSystem.RoeEnabled)
+    {
         return;
+    }
 
     // Build eminence lookup map
-    for(int i = 0; i < 31; i++)
+    for (int i = 0; i < 31; i++)
     {
         uint16 record = PChar->m_eminenceLog.active[i];
         if (record) PChar->m_eminenceCache.activemap.set(record);
@@ -387,7 +405,9 @@ void onCharLoad(CCharEntity* PChar)
             auto lastJstMidnight = timegm(jst) - JST_OFFSET;     // Unix timestamp of the last JST midnight
 
             if (lastOnline < lastJstMidnight)
+            {
                 ClearDailyRecords(PChar);
+            }
         }
 
         {   // 4hr Reset
@@ -398,7 +418,9 @@ void onCharLoad(CCharEntity* PChar)
             auto lastJstTimedBlock = timegm(jst) - JST_OFFSET;   // Unix timestamp of the start of the current 4-hr block
 
             if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
+            {
                 AddActiveTimedRecord(PChar);
+            }
         }
     }
 }
@@ -454,7 +476,9 @@ void ClearDailyRecords(CCharEntity* PChar)
 void CycleTimedRecords()
 {
     if (!RoeSystem.RoeEnabled)
+    {
         return;
+    }
 
     zoneutils::ForEachZone([](CZone* PZone){
         PZone->ForEachChar([](CCharEntity* PChar){
@@ -469,7 +493,9 @@ void CycleTimedRecords()
 void CycleDailyRecords()
 {
     if (!RoeSystem.RoeEnabled)
+    {
         return;
+    }
 
     zoneutils::ForEachZone([](CZone* PZone){
         PZone->ForEachChar([](CCharEntity* PChar){

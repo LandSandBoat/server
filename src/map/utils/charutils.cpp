@@ -445,7 +445,6 @@ namespace charutils
             PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1 ? true : false);
             PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
             PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
-
         }
 
         roeutils::onCharLoad(PChar);
@@ -3727,7 +3726,9 @@ namespace charutils
             //add normal exp
             PChar->jobs.exp[PChar->GetMJob()] += exp;
             if (PMob != PChar) // Only mob kills count for gain EXP records
+            {
                 roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
+            }
         }
 
         if (!expFromRaise)
@@ -4015,7 +4016,9 @@ namespace charutils
     void SaveEminenceData(CCharEntity* PChar)
     {
         if (!roeutils::RoeSystem.RoeEnabled)
+        {
             return;
+        }
 
         const char* Query =
             "UPDATE chars "
