@@ -231,11 +231,11 @@ function onTrigger(player, npc)
     local relicWait = player:getCharVar("RELIC_DUE_AT")
     local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
-    if currentRelic ~= 0 and relicWait ~= 0 then
+    if currentRelic ~= 0 and relicWait ~= 0 and relics[currentRelic][stageNumber] ~= 4 then
         local relic = relics[currentRelic]
         local currentStage = relic[stageNumber]
 
-        if relicWait ~= 0 and relicWait > os.time() then
+        if relicWait > os.time() then
             -- Not enough time has passed
             if currentStage == 1 then
                 player:startEvent(15, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
@@ -244,7 +244,7 @@ function onTrigger(player, npc)
             elseif currentStage == 3 then
                 player:startEvent(51, 0, 0, 0, 0, 0, 0, 0, relic[csParam])
             end
-        elseif relicWait ~= 0 and relicWait <= os.time() then
+        elseif relicWait <= os.time() then
             -- Enough time has passed
             if currentStage == 1 then
                 player:startEvent(16, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
