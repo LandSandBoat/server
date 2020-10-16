@@ -436,6 +436,18 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         session->shuttingDown = 2;
         Sql_Query(SqlHandle, "UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
+
+        if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+        {
+            // NOTE:
+            // Supposed non-losable items are reportely lost if this condition is met:
+            // https://ffxiclopedia.fandom.com/wiki/Lu_Shang%27s_Fishing_Rod
+            // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
+            // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
+
+            ShowExploit(CL_YELLOW "SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!\n" CL_RESET, PChar->GetName());
+            synthutils::doSynthFail(PChar);
+        }
     }
 
     if (PChar->loc.zone != nullptr)
@@ -445,6 +457,7 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     charutils::SaveCharStats(PChar);
     charutils::SaveCharExp(PChar, PChar->GetMJob());
+    charutils::SaveEminenceData(PChar);
 
     PChar->status = STATUS_DISAPPEAR;
     return;
@@ -944,6 +957,12 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8 container = data.ref<uint8>(0x08);
     uint8    slotID = data.ref<uint8>(0x09);
 
+    if (container >= MAX_CONTAINER_ID)
+    {
+        ShowExploit(CL_YELLOW "SmallPacket0x028: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        return;
+    }
+
     CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
 
     if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
@@ -971,7 +990,7 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         }
         return;
     }
-    ShowWarning(CL_YELLOW"SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
+    ShowExploit(CL_YELLOW "SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
     return;
 }
 
@@ -1392,6 +1411,12 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     uint8  SlotID = data.ref<uint8>(0x0E);
     uint8  StorageID = data.ref<uint8>(0x10);
 
+    if (StorageID >= MAX_CONTAINER_ID)
+    {
+        ShowExploit(CL_YELLOW "SmallPacket0x037: Invalid storage ID passed to packet %u by %s\n" CL_RESET, StorageID, PChar->GetName());
+        return;
+    }
+
     if (PChar->UContainer->GetType() != UCONTAINER_USEITEM)
         PChar->PAI->UseItem(TargetID, StorageID, SlotID);
     else
@@ -1408,7 +1433,15 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x03A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    CItemContainer* PItemContainer = PChar->getStorage(data.ref<uint8>(0x04));
+    uint8 container = data.ref<uint8>(0x04);
+
+    if (container >= MAX_CONTAINER_ID)
+    {
+        ShowExploit(CL_YELLOW "SmallPacket0x03A: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        return;
+    }
+
+    CItemContainer* PItemContainer = PChar->getStorage(container);
 
     uint8 size = PItemContainer->GetSize();
 
@@ -1555,10 +1588,16 @@ void SmallPacket0x041(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     PrintPacket(data);
 
+    uint8 SlotID = data.ref<uint8>(0x04);
+
+    if (SlotID >= TREASUREPOOL_SIZE)
+    {
+        ShowExploit(CL_YELLOW "SmallPacket0x041: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        return;
+    }
+
     if (PChar->PTreasurePool != nullptr)
     {
-        uint8 SlotID = data.ref<uint8>(0x04);
-
         if (!PChar->PTreasurePool->HasLottedItem(PChar, SlotID))
         {
             PChar->PTreasurePool->LotItem(PChar, SlotID,tpzrand::GetRandomNumber(1,1000)); //1 ~ 998+1
@@ -1576,10 +1615,16 @@ void SmallPacket0x042(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     PrintPacket(data);
 
+    uint8 SlotID = data.ref<uint8>(0x04);
+
+    if (SlotID >= TREASUREPOOL_SIZE)
+    {
+        ShowExploit(CL_YELLOW "SmallPacket0x042: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        return;
+    }
+
     if (PChar->PTreasurePool != nullptr)
     {
-        uint8 SlotID = data.ref<uint8>(0x04);
-
         if (!PChar->PTreasurePool->HasPassedItem(PChar, SlotID))
         {
             PChar->PTreasurePool->PassItem(PChar, SlotID);
@@ -2867,6 +2912,19 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     const auto TargetIndex = data.ref<uint16>(0x08);
     const auto EmoteID = data.ref<Emote>(0x0A);
     const auto emoteMode = data.ref<EmoteMode>(0x0B);
+
+    // Rate limit emotes
+    auto lastEmoteTime = PChar->GetLocalVar("LastEmoteTime");
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
+    {
+        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
+    }
+    else
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x05D: Rate limiting emote packet for %s\n" CL_RESET, PChar->GetName());
+        return;
+    }
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)

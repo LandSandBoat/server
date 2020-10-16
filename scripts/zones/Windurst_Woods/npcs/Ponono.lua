@@ -4,8 +4,8 @@
 -- Type: Clothcraft Guild Master
 -- !pos -38.243 -2.25 -120.954 241
 -- TODO Allow players to purchase additional Cuttings
--- TODO Allow players to cancel quest 
--- TODO Requre check for other 3 quests An Understanding General, A Generous General, 
+-- TODO Allow players to cancel quest
+-- TODO Requre check for other 3 quests An Understanding General, A Generous General,
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
@@ -13,12 +13,27 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.CLOTHCRAFT)
     local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
-    local tradeGil = trade:getGil()
-    if newRank ~= 0 then
+
+    if
+        newRank > 9 and
+        player:getCharVar("ClothcraftExpertQuest") == 1 and
+        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER)
+    then
+        if signed ~=0 then
+            player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
+            player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
+            player:setCharVar("ClothcraftExpertQuest", 0)
+            player:setLocalVar("ClothcraftTraded", 1)
+        else
+            player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
+        end
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
+        player:setLocalVar("ClothcraftTraded", 1)
     elseif moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
         if npcUtil.tradeHas(trade, {828, 830, {"gil", 10000}}) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
             player:setCharVar("moral", 3)
@@ -30,27 +45,43 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local getNewRank = 0
+    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+
     local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)
     local guildMember = isGuildMember(player, 3)
-    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
-    if guildMember == 1 then
-        guildMember = 10000
+    local rankCap = getCraftSkillCap(player, tpz.skill.CLOTHCRAFT)
+    local expertQuestStatus = 0
+    local Rank = player:getSkillRank(tpz.skill.CLOTHCRAFT)
+    local realSkill = (craftSkill - Rank) / 32
+
+    if guildMember == 1 then guildMember = 10000; end
+
+    if player:getCharVar("ClothcraftExpertQuest") == 1 then
+        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER) then
+            expertQuestStatus = 600
+        else
+            expertQuestStatus = 550
+        end
     end
-    if canGetNewRank(player, craftSkill, tpz.skill.CLOTHCRAFT) == 1 then
-        getNewRank = 100
-    end
+
     if moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 1 then
         player:startEvent(700)
     elseif moralManifest == QUEST_COMPLETE or moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") >= 4 then
         player:startEvent(704)
-    elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <=
-        os.time() then
+    elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <= os.time() then
         player:startEvent(705)
-    else
-        player:startEvent(10011, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
 
+    elseif expertQuestStatus == 600 then
+        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
+              possibly be due to an unimplemented packet or function (display recipe?) Work
+              around to present dialog to player to let them know the trade is ready to be
+              received by triggering with lower rank up parameters.  ]]--
+        player:showText(npc, 7339)
+        player:showText(npc, 7341)
+        player:startEvent(10011, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+    else
+        player:startEvent(10011, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
     end
 end
 
@@ -59,11 +90,17 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
+    local guildMember = isGuildMember(player, 3)
+
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then
         if npcUtil.giveItem(player, 1867) then
             player:setCharVar("moral", 4)
+        end
+    elseif csid == 10011 and option == 2 then
+        if guildMember == 1 then
+            player:setCharVar("ClothcraftExpertQuest",1)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
@@ -72,6 +109,11 @@ function onEventFinish(player, csid, option)
             player:addItem(4099) -- earth crystal
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4099)
             signupGuild(player, guild.clothcraft)
+        end
+    else
+        if player:getLocalVar("ClothcraftTraded") == 1 then
+            player:tradeComplete()
+            player:setLocalVar("ClothcraftTraded", 0)
         end
     end
 end

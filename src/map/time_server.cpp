@@ -23,6 +23,7 @@
 
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
+#include "roe.h"
 #include "time_server.h"
 #include "timetriggers.h"
 #include "transport.h"
@@ -87,7 +88,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
-            // roeutils::CycleDailyRecords();
+            roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
             lastTickedJstMidnight = tick;
         }
@@ -99,7 +100,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedRoeBlock + 1h))
         {
-            // roeutils::CycleTimedRecords();
+            roeutils::CycleTimedRecords();
             lastTickedRoeBlock = tick;
         }
     }

@@ -336,4 +336,5 @@ tpz.msg.basic =
     ROE_OBTAINED_KEY_ITEM   = 706,  -- You have obtained <key item> as a special reward!
     ROE_FIRST_TIME_SPARKS   = 707,  -- As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
     ROE_BONUS_ITEM_PLURAL   = 709,  -- As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
+    ROE_TIMED_CLEAR         = 710,  -- You are cleared to fulfill this objective once again.
 }
