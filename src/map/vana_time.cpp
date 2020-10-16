@@ -19,10 +19,6 @@
 ===========================================================================
 */
 
-#ifdef WIN32
-#define timegm _mkgmtime
-#endif
-
 #include "../common/showmsg.h"
 
 #include <time.h>
