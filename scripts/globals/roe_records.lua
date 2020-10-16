@@ -59,7 +59,6 @@ tpz.roe.records =
         reward =  { sparks = 100, xp = 500}
     },
 
-    --[[ TODO: Trusts
     [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
         reward =  { sparks = 100, xp = 300, item = { 10116 } }
     },
@@ -83,7 +82,6 @@ tpz.roe.records =
     [ 937] = { -- Alter Ego: Joachim
         reward =  { sparks = 100, xp = 500 }
     },
-    ]]
 
   ----------------------------------------
   -- Tutorial -> Intermediate           --
