@@ -541,7 +541,7 @@ bool CGambitsContainer::TryTrustSkill()
         {
             case G_SELECT::RANDOM:
             {
-                chosen_skill = tp_skills.at(tpzrand::GetRandomNumber(tp_skills.size() - 1));
+                chosen_skill = tp_skills.at(tpzrand::GetRandomNumber<std::size_t>(tp_skills.size()));
                 break;
             }
             case G_SELECT::HIGHEST: // Form the best possible skillchain
