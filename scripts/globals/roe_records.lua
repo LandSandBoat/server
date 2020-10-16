@@ -59,6 +59,7 @@ tpz.roe.records =
         reward =  { sparks = 100, xp = 500}
     },
 
+    --[[ TODO: Trusts
     [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
         reward =  { sparks = 100, xp = 300, item = { 10116 } }
     },
@@ -82,10 +83,12 @@ tpz.roe.records =
     [ 937] = { -- Alter Ego: Joachim
         reward =  { sparks = 100, xp = 500 }
     },
+    ]]
 
   ----------------------------------------
   -- Tutorial -> Intermediate           --
   ----------------------------------------
+    --[[ TODO
     [1045] = { -- Achieve Level 99 (gives Kupon A-PK109 x5)
         reward =  { sparks = 200, xp = 300, item = { 8733, 5 } }
     },
@@ -105,6 +108,7 @@ tpz.roe.records =
     [1049] = { -- Always Stand on 117 (gives Cipher: Koru-Moru)
         reward =  { sparks = 200, xp = 300, item = { 10140 }  }
     },
+    ]]
 
   --------------------------------------------
   -- Combat (Wide Area) -> Combat (General) --
