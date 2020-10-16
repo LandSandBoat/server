@@ -192,7 +192,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));
                 return false;
             }
-            roeutils::event(ROE_WSKILL_USE, PChar, RoeDatagram("mob", (CMobEntity*)PTarget));
+            roeutils::event(ROE_WSKILL_USE, PChar, RoeDatagramList{});
 
             return CController::WeaponSkill(targid, wsid);
         }

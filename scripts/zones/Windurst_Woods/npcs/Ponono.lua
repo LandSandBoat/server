@@ -69,13 +69,10 @@ function onTrigger(player, npc)
         player:startEvent(700)
     elseif moralManifest == QUEST_COMPLETE or moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") >= 4 then
         player:startEvent(704)
-    elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <=
-        os.time() then
+    elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <= os.time() then
         player:startEvent(705)
-    else
-        player:startEvent(10011, testItem, getNewRank, 30, guildMember, 44, 0, 0, 0)
 
-    if expertQuestStatus == 600 then
+    elseif expertQuestStatus == 600 then
         --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
               possibly be due to an unimplemented packet or function (display recipe?) Work
               around to present dialog to player to let them know the trade is ready to be
@@ -116,7 +113,7 @@ function onEventFinish(player, csid, option)
     else
         if player:getLocalVar("ClothcraftTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("ClothcraftTraded",0)
+            player:setLocalVar("ClothcraftTraded", 0)
         end
     end
 end

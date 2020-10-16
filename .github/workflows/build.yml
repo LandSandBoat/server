@@ -194,14 +194,14 @@ jobs:
         cat map-server.log
         cat search-server.log
 
-        if grep -q error login-server.log; then
+        if grep -qi "Error" login-server.log; then
             exit -1
         fi
 
-        if grep -q error map-server.log; then
+        if grep -qi "Error" map-server.log; then
             exit -1
         fi
 
-        if grep -q error search-server.log; then
+        if grep -qi "Error" search-server.log; then
             exit -1
         fi
