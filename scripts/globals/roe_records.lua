@@ -83,7 +83,7 @@ tpz.roe.records =
     [ 937] = { -- Alter Ego: Joachim
         reward =  { sparks = 100, xp = 500 }
     },
-    ]]--
+    ]]
 
   ----------------------------------------
   -- Tutorial -> Intermediate           --
@@ -108,7 +108,7 @@ tpz.roe.records =
     [1049] = { -- Always Stand on 117 (gives Cipher: Koru-Moru)
         reward =  { sparks = 200, xp = 300, item = { 10140 }  }
     },
-    ]]-
+    ]]
 
   --------------------------------------------
   -- Combat (Wide Area) -> Combat (General) --
