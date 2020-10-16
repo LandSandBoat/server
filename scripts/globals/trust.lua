@@ -4,6 +4,7 @@
 require("scripts/globals/common")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
+require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------------------
@@ -145,6 +146,11 @@ end
 
 tpz.trust.spawn = function(caster, spell)
     caster:spawnTrust(spell:getID())
+
+    -- Records of Eminence: Call Forth an Alter Ego
+    if caster:getEminenceProgress(932) then
+        tpz.roe.onRecordTrigger(caster, 932)
+    end
 
     return 0
 end
