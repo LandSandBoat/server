@@ -3491,7 +3491,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,3194); -- Royal Saviour
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,34);  -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,41);  -- Swift Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,42);  -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,238); -- Uriel Blade
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Joachim',1026,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem',1026,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3234); -- Nullifying Dropkick
