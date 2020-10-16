@@ -441,7 +441,7 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
             // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
 
-            ShowWarning(CL_YELLOW "SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!\n" CL_RESET, PChar->GetName());
+            ShowExploit(CL_YELLOW "SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!\n" CL_RESET, PChar->GetName());
             synthutils::doSynthFail(PChar);
         }
     }
@@ -954,7 +954,7 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (container >= MAX_CONTAINER_ID)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x028: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        ShowExploit(CL_YELLOW "SmallPacket0x028: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
         return;
     }
 
@@ -985,7 +985,7 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         }
         return;
     }
-    ShowWarning(CL_YELLOW"SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
+    ShowExploit(CL_YELLOW "SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
     return;
 }
 
@@ -1408,7 +1408,7 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (StorageID >= MAX_CONTAINER_ID)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x037: Invalid storage ID passed to packet %u by %s\n" CL_RESET, StorageID, PChar->GetName());
+        ShowExploit(CL_YELLOW "SmallPacket0x037: Invalid storage ID passed to packet %u by %s\n" CL_RESET, StorageID, PChar->GetName());
         return;
     }
 
@@ -1432,7 +1432,7 @@ void SmallPacket0x03A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (container >= MAX_CONTAINER_ID)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x03A: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
+        ShowExploit(CL_YELLOW "SmallPacket0x03A: Invalid container ID passed to packet %u by %s\n" CL_RESET, container, PChar->GetName());
         return;
     }
 
@@ -1587,7 +1587,7 @@ void SmallPacket0x041(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x041: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        ShowExploit(CL_YELLOW "SmallPacket0x041: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
         return;
     }
 
@@ -1614,7 +1614,7 @@ void SmallPacket0x042(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowWarning(CL_YELLOW "SmallPacket0x042: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
+        ShowExploit(CL_YELLOW "SmallPacket0x042: Invalid slot ID passed to packet %u by %s\n" CL_RESET, SlotID, PChar->GetName());
         return;
     }
 
@@ -2909,7 +2909,7 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     // Rate limit emotes
     auto lastEmoteTime = PChar->GetLocalVar("LastEmoteTime");
     auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 5)
+    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
     {
         PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
     }
