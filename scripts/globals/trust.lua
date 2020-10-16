@@ -197,3 +197,9 @@ tpz.trust.dumpMessages = function(mob, page_offset)
         tpz.trust.message(mob, page_offset, i)
     end
 end
+
+tpz.trust.dumpMessagePages = function(mob)
+    for i=0, 120 do
+        tpz.trust.message(mob, i, tpz.trust.message_offset.SPAWN)
+    end
+end
