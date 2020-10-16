@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+  # The DB service
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_USER: topazadmin
+      MYSQL_PASSWORD: topazisawesome
+      MYSQL_ROOT_PASSWORD: topazisawesome
+      MYSQL_DATABASE: tpzdb
+    # Run all the .sql files in the /sql directory to initalize the DB. This only hapens the first time this service is started and will not handle additions/modifications
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:topazisawesome
+  db-admin-portal:
+    image: adminer
+    restart: always
+    depends_on: 
+      - "db"
+    ports:
+      - 8080:8080
+
+  # The server service
+  game:
+    # Build whatever is in the Dockerfile in the topaz root folder
+    build: .
+    depends_on:
+      - "db"
+    ports:
+      # topaz_connect
+      - "54230:54230/tcp"
+      - "54231:54231/tcp"
+      - "54001:54001/tcp"
+      # topaz_search
+      - "54002:54002/tcp"
+      # topaz_game
+      - "54230:54230/udp"

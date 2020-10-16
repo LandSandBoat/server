@@ -62,6 +62,7 @@ INSERT INTO `item_furnishing` VALUES (43, 'wicker_box', 4, 514, 2, 2);
 INSERT INTO `item_furnishing` VALUES (46, 'armor_box', 5, 517, 5, 2);
 INSERT INTO `item_furnishing` VALUES (49, 'coffer', 5, 517, 5, 4);
 INSERT INTO `item_furnishing` VALUES (51, 'chest', 3, 517, 5, 4);
+INSERT INTO `item_furnishing` VALUES (54, 'chocobo_commode', 6, 0, 5, 0);
 INSERT INTO `item_furnishing` VALUES (55, 'cabinet', 7, 517, 5, 9);
 INSERT INTO `item_furnishing` VALUES (56, 'commode', 6, 517, 5, 9);
 INSERT INTO `item_furnishing` VALUES (57, 'cupboard', 6, 512, 0, 6);
