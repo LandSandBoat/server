@@ -36,7 +36,7 @@ class CSynthSuggestionPacket : public CBasicPacket
 {
 public:
 
-	CSynthSuggestionPacket(uint32 synthID);
+	CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel);
 };
 
 #endif

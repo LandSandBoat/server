@@ -14,9 +14,9 @@ function onMobFight(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
-    local PET1 = instance:getEntity(bit.band((mob:getID() +1), 0xFFF), tpz.objType.MOB)
-    local PET2 = instance:getEntity(bit.band((mob:getID() +2), 0xFFF), tpz.objType.MOB)
-    local PET3 = instance:getEntity(bit.band((mob:getID() +3), 0xFFF), tpz.objType.MOB)
+    local PET1 = GetMobByID((mob:getID() +1), instance)
+    local PET2 = GetMobByID((mob:getID() +2), instance)
+    local PET3 = GetMobByID((mob:getID() +3), instance)
 
 
     if os.time() - popTime > 15 then

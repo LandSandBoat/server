@@ -8,6 +8,8 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
+require("scripts/globals/npc_util")
+require("scripts/globals/roe")
 -----------------------------------
 
 tpz = tpz or {}
@@ -37,6 +39,7 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
+
 end
 
 -------------------------------------------------
@@ -58,6 +61,13 @@ end
 -- potential lottery placeholder was killed
 tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
+    
+    if NM_LOTTERYCHANCE then
+        chance = NM_LOTTERYCHANCE >= 0 and (chance * NM_LOTTERYCHANCE) or 100
+    end
+    if NM_LOTTERYCOOLDOWN then
+        cooldown = NM_LOTTERYCOOLDOWN >= 0 and (cooldown * NM_LOTTERYCOOLDOWN) or cooldown
+    end
 
     local phId = ph:getID()
     local nmId = phList[phId]
@@ -66,8 +76,9 @@ tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
         local nm = GetMobByID(nmId)
         if nm ~= nil then
             local pop = nm:getLocalVar("pop")
-
-            if os.time() > pop and not lotteryPrimed(phList) and math.random(100) <= chance then
+            
+            chance = math.ceil(chance * 10) -- chance / 1000.
+            if os.time() > pop and not lotteryPrimed(phList) and math.random(1000) <= chance then
 
                 -- on PH death, replace PH repop with NM repop
                 DisallowRespawn(phId, true)

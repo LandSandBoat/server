@@ -26,9 +26,22 @@ zones[tpz.zone.WAUGHROON_SHRINE] =
         ALL_TENTACLES_WOUNDED        = 7702, -- All of the sea creature's tentacles have been wounded.
 		SCORPION_IS_STUNNED			 = 7703, -- The platoon scorpion does not have enough energy to attack!
 		SCORPION_IS_BOUND			 = 7704, -- The platoon scorpion's legs are lodged in the rocks!
+        PROMISE_ME_YOU_WONT_GO_DOWN  = 7720, -- Promise you won't go down too easy, okay?
+        IM_JUST_GETTING_WARMED_UP    = 7721, -- Haha! I'm just getting warmed up!
+        YOU_PACKED_MORE_OF_A_PUNCH   = 7722, -- Hah! You pack more of a punch than I thoughtaru. But I won't go down as easy as old Maat!
+        WHATS_THIS_STRANGE_FEELING   = 7723, -- What's this strange feeling...? It's not supposed to end...like...
+        HUH_IS_THAT_ALL              = 7724, -- Huh? Is that all? I haven't even broken a sweataru...
+        YIKEY_WIKEYS                 = 7725, -- Yikey-wikeys! Get that thing away from meee!
+        WHATS_THE_MATTARU            = 7726, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
     mob =
     {
+        ATORI_TUTORI_QM =
+        {
+            17367332,
+            17367333,
+            17367334,
+        },
     },
     npc =
     {

@@ -151,6 +151,7 @@ namespace charutils
     void    SaveCharLook(CCharEntity* PChar);                           // Saves a character's appearance based on style locking.
     void	SaveCharPosition(CCharEntity* PChar);				        // сохраняем позицию персонажа
     void	SaveMissionsList(CCharEntity* PChar);                       // Save the missions list
+    void    SaveEminenceData(CCharEntity* PChar);                       // Save Eminence Record (RoE) data
     void	SaveQuestsList(CCharEntity* PChar);					        // сохраняем список ксевтов
     void    SaveFame(CCharEntity* PChar);                               // Save area fame / reputation
     void	SaveZonesVisited(CCharEntity* PChar);				        // сохраняем посещенные зоны

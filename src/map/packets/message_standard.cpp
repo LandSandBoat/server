@@ -36,6 +36,26 @@ CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 }
 
+CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
+{
+    this->type = 0x09;
+    this->size = 0x0E;
+
+    ref<uint16>(0x0A) = MessageID;
+
+    snprintf((char*)data + (0x0D), 16, "Para0 %d ", param0);
+}
+
+CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID)
+{
+    this->type = 0x09;
+    this->size = 0x24;
+
+    ref<uint16>(0x0A) = MessageID;
+
+    snprintf((char*)data + (0x0D), 24, "Para0 %d Para1 %d", param0, param1);
+}
+
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)
 {
 	this->type = 0x09;

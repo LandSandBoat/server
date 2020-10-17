@@ -62,12 +62,12 @@ function onEventFinish(player, csid, option)
         player:addQuest(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP)
     elseif csid == 107 then
         -- Finish Quest: Tenshodo Membership (Application Form)
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, keyItem=tpz.ki.TENSHODO_MEMBERS_CARD }) then
+        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, ki=tpz.ki.TENSHODO_MEMBERS_CARD }) then
             player:delKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)
         end
     elseif csid == 108 then
         -- Finish Quest: Tenshodo Membership (Invitation)
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, keyItem=tpz.ki.TENSHODO_MEMBERS_CARD }) then
+        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, ki=tpz.ki.TENSHODO_MEMBERS_CARD }) then
             player:confirmTrade()
             player:delKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)
         end

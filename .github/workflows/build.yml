@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -51,7 +51,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Build Solution
         shell: cmd
         run: |
@@ -118,6 +118,7 @@ jobs:
       run: |
         sh travis_lua.sh
     - name: Clang Format (C++ files)
+      if: 'false' # Don't run until fixed
       run: |
         clang-format --version
         echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
@@ -144,7 +145,7 @@ jobs:
     runs-on: ubuntu-18.04
     services:
       mysql:
-        image: mysql:5.6
+        image: mariadb:10.1
         env:
           MYSQL_DATABASE: tpzdb
           MYSQL_ROOT_PASSWORD: root
@@ -154,7 +155,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -193,14 +194,14 @@ jobs:
         cat map-server.log
         cat search-server.log
 
-        if grep -q error login-server.log; then
+        if grep -qi "Error" login-server.log; then
             exit -1
         fi
 
-        if grep -q error map-server.log; then
+        if grep -qi "Error" map-server.log; then
             exit -1
         fi
 
-        if grep -q error search-server.log; then
+        if grep -qi "Error" search-server.log; then
             exit -1
         fi

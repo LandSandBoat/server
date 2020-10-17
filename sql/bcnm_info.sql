@@ -66,7 +66,7 @@ INSERT INTO `bcnm_info` VALUES (16,139,'todays_horoscope','nobody',0,1800,1800,0
 INSERT INTO `bcnm_info` VALUES (17,139,'contaminated_colosseum','nobody',0,1800,1800,0,6,17,15,0);
 INSERT INTO `bcnm_info` VALUES (18,139,'kindergarten_cap','nobody',0,900,900,0,3,18,15,0);
 INSERT INTO `bcnm_info` VALUES (19,139,'last_orc-shunned_hero','nobody',0,1800,1800,0,6,19,15,0);
-INSERT INTO `bcnm_info` VALUES (20,139,'beyond_infinity','nobody',0,600,600,0,6,0,6,0);
+INSERT INTO `bcnm_info` VALUES (20,139,'beyond_infinity','nobody',0,600,600,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (32,140,'save_the_children','nobody',0,600,600,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (33,140,'holy_crest','nobody',0,600,600,0,6,0,7,0);
 INSERT INTO `bcnm_info` VALUES (34,140,'wings_of_fury','nobody',0,900,900,20,3,34,15,0);
@@ -94,7 +94,7 @@ INSERT INTO `bcnm_info` VALUES (81,144,'operation_desert_swarm','nobody',0,1800,
 INSERT INTO `bcnm_info` VALUES (82,144,'prehistoric_pigeons','nobody',0,1800,1800,0,6,82,15,0);
 INSERT INTO `bcnm_info` VALUES (83,144,'palborough_project','nobody',0,900,900,0,3,83,15,0);
 INSERT INTO `bcnm_info` VALUES (84,144,'shell_shocked','nobody',0,1800,1800,0,6,84,15,0);
-INSERT INTO `bcnm_info` VALUES (85,144,'beyond_infinity','nobody',0,600,600,99,6,0,6,0);
+INSERT INTO `bcnm_info` VALUES (85,144,'beyond_infinity','nobody',0,600,600,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (96,146,'rank_2_mission','nobody',0,1800,1800,25,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (97,146,'steamed_sprouts','nobody',0,1800,1800,40,6,97,15,0);
 INSERT INTO `bcnm_info` VALUES (98,146,'divine_punishers','nobody',0,1800,1800,60,6,98,15,0);
@@ -115,7 +115,7 @@ INSERT INTO `bcnm_info` VALUES (112,146,'royale_ramble','nobody',0,1800,1800,0,6
 INSERT INTO `bcnm_info` VALUES (113,146,'moa_constrictors','nobody',0,1800,1800,0,6,113,15,0);
 INSERT INTO `bcnm_info` VALUES (114,146,'v_formation','nobody',0,900,900,0,3,114,15,0);
 INSERT INTO `bcnm_info` VALUES (115,146,'avian_apostates','nobody',0,1800,1800,0,6,115,15,0);
-INSERT INTO `bcnm_info` VALUES (116,146,'beyond_infinity','nobody',0,600,600,99,6,0,6,0);
+INSERT INTO `bcnm_info` VALUES (116,146,'beyond_infinity','nobody',0,600,600,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (128,163,'temple_of_uggalepih','nobody',0,1800,1800,75,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (129,163,'jungle_boogymen','nobody',0,1800,1800,60,6,129,15,0);
 INSERT INTO `bcnm_info` VALUES (130,163,'amphibian_assault','nobody',0,1800,1800,60,6,130,15,0);
@@ -194,7 +194,7 @@ INSERT INTO `bcnm_info` VALUES (529,206,'mirror_images','nobody',0,900,900,50,1,
 INSERT INTO `bcnm_info` VALUES (530,206,'furious_finale','nobody',0,600,600,99,1,0,6,0);
 INSERT INTO `bcnm_info` VALUES (531,206,'clash_of_the_comrades','nobody',0,600,600,0,1,0,7,0);
 INSERT INTO `bcnm_info` VALUES (532,206,'those_who_lurk_in_shadows','nobody',0,1800,1800,99,6,0,5,0);
-INSERT INTO `bcnm_info` VALUES (533,206,'beyond_infinity','nobody',0,600,600,0,6,0,6,0);
+INSERT INTO `bcnm_info` VALUES (533,206,'beyond_infinity','nobody',0,600,600,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (544,207,'trial_by_fire','nobody',0,1800,1800,0,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (545,207,'trial-size_trial_by_fire','nobody',0,900,900,20,1,0,5,0);
 INSERT INTO `bcnm_info` VALUES (546,207,'waking_the_beast','nobody',0,1800,1800,0,18,0,5,0);

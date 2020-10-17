@@ -4,10 +4,11 @@
 -- Starts Quests: Vengeful Wrath
 -- !pos 38 .1 14 234
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -29,7 +30,7 @@ function onTrigger(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 16) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 16)) then
         player:startEvent(506)
     elseif (Vengeful == QUEST_AVAILABLE and Fame >= 3) then
         player:startEvent(106)
@@ -60,6 +61,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
         player:completeQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
     elseif (csid == 506) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 16, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 16, true))
     end
 end

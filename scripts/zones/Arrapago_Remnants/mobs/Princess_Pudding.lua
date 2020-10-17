@@ -8,7 +8,7 @@ require("scripts/globals/status")
 
 function onMobSpawn(mob)
     local instance = mob:getInstance()
-    local slot = instance:getEntity(bit.band(ID.npc[2][2].SLOT, 0xFFF), tpz.objType.NPC)
+    local slot = GetNPCByID(ID.npc[2][2].SLOT, instance)
         slot:setStatus(tpz.status.DISAPPEAR)
 end
 

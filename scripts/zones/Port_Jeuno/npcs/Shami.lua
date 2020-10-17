@@ -4,9 +4,10 @@
 -- Orb Seller (BCNM)
 -- !pos -14 8 44 246
 -----------------------------------
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -182,7 +183,7 @@ function onTrigger(player, npc)
         player:setCharVar("ShamiSacredKindredsCrest", 0)
     end
     -- TODO: player:startEvent(322, 0, 0, 0, 0, 1, 0, 1) -- First time talking to him WITH  beastmen seal in inventory
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatJeuno, 17) == false) then
+    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 17)) then
         player:startEvent(317)
     elseif (BeastmensSeal + KindredsSeal + KindredsCrest + HighKindredsCrest + SacredKindredsCrest == 0) then
         player:startEvent(23) -- Standard dialog ?
@@ -454,6 +455,6 @@ function onEventFinish(player, csid, option)
         end
 -- TODO : Find cutscene that tells you where you can bring it.
     elseif (csid == 317) then
-        player:setMaskBit(player:getCharVar("WildcatJeuno"), "WildcatJeuno", 17, true)
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 17, true))
     end
 end

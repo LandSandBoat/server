@@ -52,6 +52,7 @@ zones[tpz.zone.RULUDE_GARDENS] =
         YOUR_LEVEL_LIMIT_IS_NOW_95       = 12436, -- Your level limit is now 95!
         WINDURST_EMBASSY                 = 12437, -- I have a letter for you here from none other than Atori-Tutori. It reads, ahem...
         YOUR_LEVEL_LIMIT_IS_NOW_99       = 12516, -- Your level limit is now 99!
+        YOU_HAND_THE_THREE_SLIVERS       = 13735, -- You hand the three crystal slivers to Esha'ntarl.
         COMMON_SENSE_SURVIVAL            = 15684, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15944, -- There appears to be a tear in the fabric of space...
     },

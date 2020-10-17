@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/conquest")
 require("scripts/globals/settings")
-require("scripts/globals/crafting")
+require("scripts/globals/status")
 require("scripts/globals/keyitems")
 -----------------------------------
 
@@ -57,15 +57,13 @@ tpz.shop =
         stock is of form {itemId1, price1, guildID, guildRank, ...}
         log is default set to -1 as it's needed as part of createShop()
     ******************************************************************************* --]]
-    generalGuild = function(player, stock, guildRank)
+    generalGuild = function(player, stock, guildSkillId)
         local log = -1
 
         player:createShop(#stock / 3, log)
 
         for i = 1, #stock, 3 do
-            if guildRank >= stock[i+2] then
-                player:addShopItem(stock[i], stock[i+1])
-            end
+            player:addShopItem(stock[i], stock[i+1], guildSkillId, stock[i+2])
         end
 
         player:sendMenu(2)
@@ -157,7 +155,7 @@ tpz.shop =
     ******************************************************************************* --]]
     generalGuildStock =
     {
-        [guild.cooking] =
+        [tpz.skill.COOKING] =
         {
                  936,      16,      tpz.craftRank.AMATEUR,      -- Rock Salt
                 4509,      12,      tpz.craftRank.AMATEUR,      -- Distilled Water
@@ -196,7 +194,7 @@ tpz.shop =
                 8911,    5300,      tpz.craftRank.AMATEUR,      -- Cooking Kit 45
                 8912,    7600,      tpz.craftRank.AMATEUR       -- Cooking Kit 50
         },
-        [guild.clothcraft] =
+        [tpz.skill.CLOTHCRAFT] =
         {
                 2128,      75,      tpz.craftRank.AMATEUR,      -- Spindle
                 2145,      75,      tpz.craftRank.AMATEUR,      -- Zephyr Thread
@@ -221,7 +219,7 @@ tpz.shop =
                 8856,    7600,      tpz.craftRank.AMATEUR,      -- Clothcraft Kit 50
                 9251, 1126125,      tpz.craftRank.AMATEUR       -- Khoma Thread
         },
-        [guild.goldsmithing] =
+        [tpz.skill.GOLDSMITHING] =
         {
                 2144,      75,      tpz.craftRank.AMATEUR,      -- Workshop Anvil
                 2143,      75,      tpz.craftRank.AMATEUR,      -- Mandrel
@@ -267,7 +265,7 @@ tpz.shop =
                 8842,    7600,      tpz.craftRank.AMATEUR,      -- Goldsmithing Kit 50
                 9249, 1126125,      tpz.craftRank.AMATEUR       -- Ruthenium Ore
         },
-        [guild.woodworking] =
+        [tpz.skill.WOODWORKING] =
         {
                 1657,     100,      tpz.craftRank.AMATEUR,      -- Bundling Twine
                  688,      25,      tpz.craftRank.AMATEUR,      -- Arrowwood Log
@@ -297,7 +295,7 @@ tpz.shop =
                 8814,    7600,      tpz.craftRank.AMATEUR,      -- Smithing Kit 50
                 9245, 1126125,      tpz.craftRank.AMATEUR       -- Cypress Log
         },
-        [guild.alchemy] =
+        [tpz.skill.ALCHEMY] =
         {
                 2131,      75,      tpz.craftRank.AMATEUR,      -- Triturator
                  912,      40,      tpz.craftRank.AMATEUR,      -- Beehive Chip
@@ -329,7 +327,7 @@ tpz.shop =
                 8898,    7600,      tpz.craftRank.AMATEUR,      -- Alchemy Kit 50
                 9257, 1126125,      tpz.craftRank.AMATEUR       -- Azure Leaf
         },
-        [guild.bonecraft] =
+        [tpz.skill.BONECRAFT] =
         {
                 2130,      75,      tpz.craftRank.AMATEUR,      -- Shagreen File
                  880,     150,      tpz.craftRank.AMATEUR,      -- Bone Chip
@@ -358,7 +356,7 @@ tpz.shop =
                 8884,    7600,      tpz.craftRank.AMATEUR,      -- Bonecraft Kit 50
                 9255, 1126125,      tpz.craftRank.AMATEUR       -- Cyan Coral
         },
-        [guild.leathercraft] =
+        [tpz.skill.LEATHERCRAFT] =
         {
                 2129,      75,      tpz.craftRank.AMATEUR,      -- Tanning Vat
                  505,     100,      tpz.craftRank.AMATEUR,      -- Sheepskin
@@ -386,7 +384,7 @@ tpz.shop =
                 8870,    7600,      tpz.craftRank.AMATEUR,      -- Leathercraft Kit 50
                 9253, 1126125,      tpz.craftRank.AMATEUR       -- Synthetic Faulpie Leather
         },
-        [guild.smithing] =
+        [tpz.skill.SMITHING] =
         {
                 2144,      75,      tpz.craftRank.AMATEUR,      -- Workshop Anvil
                 2143,      75,      tpz.craftRank.AMATEUR,      -- Mandrel
@@ -426,8 +424,10 @@ tpz.shop =
         {
                 4112,     300,      tpz.ki.RHAPSODY_IN_WHITE,   -- Potion
                 4116,     600,      tpz.ki.RHAPSODY_IN_UMBER,   -- Hi-Potion
+                4120,    1200,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- X-Potion
                 4128,     650,      tpz.ki.RHAPSODY_IN_WHITE,   -- Ether
                 4132,    1300,      tpz.ki.RHAPSODY_IN_UMBER,   -- Hi-Ether
+                4136,    3000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Super Ether
                 4145,   15000,      tpz.ki.RHAPSODY_IN_AZURE,   -- Elixir
                 4148,     300,      tpz.ki.RHAPSODY_IN_WHITE,   -- Antidote
                 4150,    1000,      tpz.ki.RHAPSODY_IN_UMBER,   -- Eye Drops
@@ -450,6 +450,7 @@ tpz.shop =
                 4223,    3500,      tpz.ki.RHAPSODY_IN_UMBER,   -- Scorpion Quiver
                 4224,    7000,      tpz.ki.RHAPSODY_IN_AZURE,   -- Demon Quiver
                 5332,    8800,      tpz.ki.RHAPSODY_IN_AZURE,   -- Kabura Quiver
+                5819,    9900,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Antlion Quiver
                 4227,     400,      tpz.ki.RHAPSODY_IN_WHITE,   -- Bronze Bolt Quiver
                 5334,     800,      tpz.ki.RHAPSODY_IN_WHITE,   -- Blind Bolt Quiver
                 5335,    1250,      tpz.ki.RHAPSODY_IN_WHITE,   -- Acid Bolt Quiver
@@ -459,6 +460,8 @@ tpz.shop =
                 5336,    2400,      tpz.ki.RHAPSODY_IN_WHITE,   -- Holy Bolt Quiver
                 4228,    3500,      tpz.ki.RHAPSODY_IN_UMBER,   -- Mythril Bolt Quiver
                 4229,    5580,      tpz.ki.RHAPSODY_IN_AZURE,   -- Darksteel Bolt Quiver
+                5820,    9460,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Darkling Bolt Quiver
+                5821,    9790,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Fusion Bolt Quiver
                 5359,     400,      tpz.ki.RHAPSODY_IN_WHITE,   -- Bronze Bullet Pouch
                 5363,    1920,      tpz.ki.RHAPSODY_IN_WHITE,   -- Bullet Pouch
                 5341,    2400,      tpz.ki.RHAPSODY_IN_WHITE,   -- Spartan Bullet Pouch
@@ -466,10 +469,13 @@ tpz.shop =
                 5340,    4800,      tpz.ki.RHAPSODY_IN_UMBER,   -- Silver Bullet Pouch
                 5342,    7100,      tpz.ki.RHAPSODY_IN_AZURE,   -- Corsair Bullet Pouch
                 5416,    7600,      tpz.ki.RHAPSODY_IN_AZURE,   -- Steel Bullet Pouch
+                5822,    9680,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Dweomer Bullet Pouch
+                5823,    9900,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Oberon Bullet Pouch
                 6299,    1400,      tpz.ki.RHAPSODY_IN_WHITE,   -- Shuriken Pouch
                 6297,    2280,      tpz.ki.RHAPSODY_IN_WHITE,   -- Juji Shuriken Pouch
                 6298,    4640,      tpz.ki.RHAPSODY_IN_UMBER,   -- Manji Shuriken Pouch
                 6302,    7000,      tpz.ki.RHAPSODY_IN_AZURE,   -- Fuma Shuriken Pouch
+                6303,    9900,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Iga Shuriken Pouch
         },
         [curio.ninjutsuTools] =
         {
@@ -486,13 +492,18 @@ tpz.shop =
                 5318,    5000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Kodoku)
                 5319,    3000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Shinobi-Tabi)
                 5417,    3000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Sanjaku-Tenugui)
+                5734,    5000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Toolbag (Soshi)
         },
         [curio.foodStuffs] =
         {
                 4378,      60,      tpz.ki.RHAPSODY_IN_WHITE,   -- Selbina Milk
                 4299,     100,      tpz.ki.RHAPSODY_IN_WHITE,   -- Orange au Lait
                 5703,     100,      tpz.ki.RHAPSODY_IN_WHITE,   -- Uleguerand Milk
+                4300,     300,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Apple au Lait
+                4301,     600,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Pear au Lait
                 4422,     200,      tpz.ki.RHAPSODY_IN_WHITE,   -- Orange Juice
+                4424,    1100,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Melon Juice
+                4558,    2000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Yagudo Drink
                 4405,     160,      tpz.ki.RHAPSODY_IN_WHITE,   -- Rice Ball
                 4376,     120,      tpz.ki.RHAPSODY_IN_WHITE,   -- Meat Jerky
                 4371,     184,      tpz.ki.RHAPSODY_IN_WHITE,   -- Grilled Hare
@@ -503,19 +514,35 @@ tpz.shop =
                 4538,     900,      tpz.ki.RHAPSODY_IN_WHITE,   -- Roast Pipira
                 6217,     500,      tpz.ki.RHAPSODY_IN_AZURE,   -- Anchovy Slice
                 6215,     400,      tpz.ki.RHAPSODY_IN_UMBER,   -- Pepperoni Slice
+                5752,    3500,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Pot-auf-feu
                 4488,    1000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Jack-o'-Lantern
+                5176,    5000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Bream Sushi
+                5178,    4000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Dorado Sushi
+                5721,    1500,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Crab Sushi
                 5775,     500,      tpz.ki.RHAPSODY_IN_WHITE,   -- Chocolate Crepe
+                5766,    1000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Butter Crepe
                 4413,     320,      tpz.ki.RHAPSODY_IN_WHITE,   -- Apple Pie
                 4421,     800,      tpz.ki.RHAPSODY_IN_WHITE,   -- Melon Pie
+                4446,    1200,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Pumpkin Pie
                 4410,     344,      tpz.ki.RHAPSODY_IN_WHITE,   -- Roast Mushroom
                 4510,      24,      tpz.ki.RHAPSODY_IN_WHITE,   -- Acorn Cookie
                 4394,      12,      tpz.ki.RHAPSODY_IN_AZURE,   -- Ginger Cookie
                 5782,    1000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Sugar Rusk
+                5783,    2000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Chocolate Rusk
                 5779,    1000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Cherry Macaron
+                5780,    2000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Coffee Macaron
                 5885,    1000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Saltena
                 5886,    2000,      tpz.ki.RHAPSODY_IN_AZURE,   -- Elshena
+                5887,    2500,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Montagna
                 5889,    1000,      tpz.ki.RHAPSODY_IN_WHITE,   -- Stuffed Pitaru
                 5890,    2000,      tpz.ki.RHAPSODY_IN_AZURE,   -- Poultry Pitaru
+                5891,    2500,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Seafood Pitaru
+                6258,    3000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Shiromochi
+                6262,    3000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Kusamochi
+                6260,    3000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Akamochi
+                5547,   15000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Beef Stewpot
+                5727,   15000,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Zaru Soba
+                4466,     450,    tpz.ki.RHAPSODY_IN_CRIMSON,   -- Spicy Cracker
         },
         [curio.scrolls] =
         {

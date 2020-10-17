@@ -63,12 +63,6 @@ public:
     int32 setLocalVar(lua_State*);
     int32 resetLocalVars(lua_State*);
 
-    // Masks and Bitwise Operations
-    int32 getMaskBit(lua_State*);           // Retrieves a single bit in a character variable
-    int32 setMaskBit(lua_State*);           // Sets a single bit in a character variable
-    int32 countMaskBits(lua_State*);        // Retrieves number of true bits in a character variable
-    int32 isMaskFull(lua_State*);           // Checks if a bitmask stored in a character varable of a specified size contains all set bits
-
     // Packets, Events, and Flags
     int32 injectPacket(lua_State*);         // Send the character a packet kept in a file
     int32 injectActionPacket(lua_State*);   // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
@@ -278,6 +272,7 @@ public:
     int32 setsLevel(lua_State*);            // sets the character's level
     int32 levelCap(lua_State*);             // genkai
     int32 levelRestriction(lua_State*);     // Establish/return current level restriction
+    int32 addJobTraits(lua_State*);         // Add job traits
 
     // Player Titles and Fame
     int32 getTitle(lua_State*);             // Gets character's title
@@ -310,6 +305,11 @@ public:
     int32 completeMission(lua_State*);      // Complete Mission
     int32 setMissionLogEx(lua_State*);      // Sets mission log extra data to correctly track progress in branching missions.
     int32 getMissionLogEx(lua_State*);      // Gets mission log extra data.
+
+    int32 setEminenceCompleted(lua_State *L);  // Sets the complete flag for a record of eminence
+    int32 getEminenceCompleted(lua_State *L);  // Gets the record completed flag
+    int32 setEminenceProgress(lua_State *L);   // Sets progress on a record of eminence
+    int32 getEminenceProgress(lua_State *L);   // gets progress on a record of eminence
 
     int32 addAssault(lua_State*);           // Add Mission
     int32 delAssault(lua_State*);           // Delete Mission from Mission Log
@@ -430,6 +430,7 @@ public:
 
     int32 reloadParty(lua_State* L);
     int32 disableLevelSync(lua_State* L);
+    int32 isLevelSync(lua_State* L);
 
     int32 checkSoloPartyAlliance(lua_State*);        // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
@@ -504,6 +505,8 @@ public:
     int32 updateEnmityFromCure(lua_State*);
     int32 resetEnmity(lua_State*);             //resets enmity to player for specificed mob
     int32 updateClaim(lua_State*);             // Adds Enmity to player for specified mob and claims
+    int32 hasEnmity(lua_State*);               // Does the player have any enmity at all from any source
+    int32 getNotorietyList(lua_State*);        // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     int32 addStatusEffect(lua_State*);         // Adds status effect to character

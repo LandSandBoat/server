@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/crafting")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -15,9 +14,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local guildRank = player:getSkillRank(tpz.skill.CLOTHCRAFT)
-    local stock = tpz.shop.generalGuildStock[guild.clothcraft]
-    tpz.shop.generalGuild(player, stock, guildRank)
+    local guildSkillId = tpz.skill.CLOTHCRAFT
+    local stock = tpz.shop.generalGuildStock[guildSkillId]
+    tpz.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.MERIRI_DIALOG)
 end
 

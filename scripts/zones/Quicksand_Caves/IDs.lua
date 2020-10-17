@@ -55,7 +55,7 @@ zones[tpz.zone.QUICKSAND_CAVES] =
         },
         ANTICAN_PRAEFECTUS_PH =
         {
-            [17629409] = 17629412, -- -90.01 -0.567 -29.424
+            [17629280] = 17629281, -- -90.01 -0.567 -29.424
         },
         ANTICAN_PROCONSUL_PH  =
         {

@@ -21,7 +21,7 @@ function onEventFinish(entity, eventid, result, door)
         SpawnMob(ID.mob[4].treasure_hunter2, instance)
         SpawnMob(ID.mob[4].qiqirn_mine_2, instance)
         for i, v in pairs(ID.npc[4][1]) do
-            local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
+            local npc = GetNPCByID(v, instance)
             npc:untargetable(true)
         end
     end

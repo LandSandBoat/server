@@ -48,6 +48,11 @@ CREATE TABLE IF NOT EXISTS `mob_skills` (
 -- Table contents for `mob_skills`
 --
 
+INSERT INTO `mob_skills` VALUES (7,22,'howling_fist',0,5.0,2000,0,4,0,0,0,1,8,0);
+INSERT INTO `mob_skills` VALUES (9,24,'asuran_fists',0,5.0,2000,0,4,0,0,0,9,3,0);
+INSERT INTO `mob_skills` VALUES (10,25,'final_heaven',0,5.0,2000,0,4,0,0,0,13,11,0);
+INSERT INTO `mob_skills` VALUES (11,26,'ascetics_fury',0,5.0,2000,0,4,0,0,0,11,1,0);
+INSERT INTO `mob_skills` VALUES (14,29,'victory_smite',0,5.0,2000,0,4,0,0,0,13,12,0);
 INSERT INTO `mob_skills` VALUES (32,1,'fast_blade',0,7.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (33,2,'burning_blade',0,7.0,2000,0,4,0,0,0,3,0,0);
 INSERT INTO `mob_skills` VALUES (34,3,'red_lotus_blade',0,7.0,2000,0,4,0,0,0,0,0,0);
@@ -444,7 +449,7 @@ INSERT INTO `mob_skills` VALUES (620,364,'sweep',1,10.0,2000,1500,4,0,0,0,0,0,0)
 INSERT INTO `mob_skills` VALUES (621,969,'snowball',2,11.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (622,366,'helldive',0,9.0,2000,1500,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (623,367,'wing_cutter',4,10.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (624,434,'vulture_1',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (624,434,'vulture_1',0,7.0,2000,0,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (625,436,'vulture_2',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (626,437,'vulture_3',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (627,438,'vulture_4',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1676,7 +1681,7 @@ INSERT INTO `mob_skills` VALUES (1838,1221,'mine_blast',1,10.0,2000,1500,4,24,0,
 -- INSERT INTO `mob_skills` VALUES (1853,870,'self-destruct',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1854,1598,'stellar_burst',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1855,1599,'self-destruct',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1856,1600,'omega_javelin',0,7.0,2000,1500,4,0,0,0,0,0,0);
+   INSERT INTO `mob_skills` VALUES (1856,1600,'omega_javelin',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1857,1601,'self-destruct',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1858,1602,'tail_roll',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1859,1603,'tusk',0,7.0,2000,1500,4,0,0,0,0,0,0);

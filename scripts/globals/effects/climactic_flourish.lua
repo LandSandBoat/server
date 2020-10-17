@@ -1,9 +1,8 @@
 -----------------------------------
 --
---
+--  tpz.effect.CLIMACTIC_FLOURISH
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 
