@@ -6544,6 +6544,7 @@ void PacketParserInitialize()
         PacketSize[i] = 0;
         PacketParser[i] = &SmallPacket0x000;
     }
+    // clang-format off
     PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &SmallPacket0x00A;
     PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &SmallPacket0x00C;
     PacketSize[0x00D] = 0x04; PacketParser[0x00D] = &SmallPacket0x00D;
@@ -6654,6 +6655,7 @@ void PacketParserInitialize()
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
     PacketSize[0x116] = 0x02; PacketParser[0x116] = &SmallPacket0xFFF; // not implemented
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
+    // clang-format on
 }
 
 /************************************************************************
