@@ -64,6 +64,41 @@ Here are the points from `.clang-format` explained:
 
 When in doubt, defaulting to `WebKit style with Allman braces` is _seemingly_ a safe option.
 
+`AccessModifierOffset: -4`
+```cpp
+// Correct ✔️ 
+class Classname
+{
+public:
+    Classname();
+
+private:
+    int member;
+}
+
+// Wrong ❌
+class Classname
+{
+    public:
+    Classname();
+
+    private:
+    int member;
+}
+```
+
+`AllowShortFunctionsOnASingleLine: Empty`
+```cpp
+// Correct ✔️ 
+void f()
+{ 
+    foo(); 
+}
+
+// Wrong ❌
+void f() { foo(); }
+```
+
 `BreakBeforeBraces: Allman`
 
 Braces should _almost always_ be on a new line. 
@@ -255,7 +290,7 @@ else
 
 ### C++ Misc & Naming
 
-`Casting - static_cast over C-Style`
+`Casting - static_cast over C-Style (cppcoreguidelines-pro-type-cstyle-cast)`
 ```cpp
 // Correct ✔️ 
 uint32 param = static_cast<uint32>(input);
