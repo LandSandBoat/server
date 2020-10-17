@@ -1717,7 +1717,8 @@ namespace battleutils
         if (validWeapon && hasGuardSkillRank && PDefender->PAI->IsEngaged())
         {
             // assuming this is like parry
-            float skill = (float)PDefender->GetSkill(SKILL_GUARD) + PDefender->getMod(Mod::GUARD);
+            float gbase = (float)PDefender->GetSkill(SKILL_GUARD) + PDefender->getMod(Mod::GUARD);
+            float skill = (float)gbase + ((float)gbase * (PDefender->getMod(Mod::GUARD_PERCENT) / 100));
 
             if (PWeapon)
                 skill += PWeapon->getILvlParry(); //no weapon will ever have ilvl guard and parry

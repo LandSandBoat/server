@@ -215,6 +215,7 @@ enum class Mod
 
     SMITE                     = 898, // Raises attack when using H2H or 2H weapons (256 scale)
     TACTICAL_GUARD            = 899, // Tp increase when guarding
+    GUARD_PERCENT             = 976, // Guard Percent
 
     HASTE_MAGIC               = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
     HASTE_ABILITY             = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
@@ -810,9 +811,9 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 976, // stuff
     // SPARE = 977, // stuff
     // SPARE = 978, // stuff
+    // SPARE = 979, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it
