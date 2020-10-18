@@ -16603,6 +16603,15 @@ INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15123,10); -- Valor Breeches
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15140,10); -- Monster Gaiters
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15142,10); -- Scout's Socks
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,16360,10); -- Etoile Tights
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,1000); -- Hydra ; Hydra meat  210%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,1000); -- Hydra ; Hydra meat
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,100);  -- Hydra ; Hydra meat
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2158,1000); -- Hydra ; Hydra Fang  124%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2158,240);  -- Hydra ; Hydra Fang
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2172,1000); -- Hydra ; Hydra Scale 110%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2172,100);  -- Hydra ; Hydra Scale
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,15530,240); -- Hydra ; Berserker's Torque 24%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,17952,240); -- Hydra ; Sirius Axe 24%
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
