@@ -419,6 +419,7 @@ void onCharLoad(CCharEntity* PChar)
 
             if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
             {
+                PChar->m_eminenceCache.notifyTimedRecord = true;
                 AddActiveTimedRecord(PChar);
             }
         }
@@ -444,7 +445,12 @@ void AddActiveTimedRecord(CCharEntity* PChar)
     PChar->m_eminenceCache.activemap.set(timedRecordID);
     PChar->pushPacket(new CRoeUpdatePacket(PChar));
 
-    SetEminenceRecordCompletion(PChar, timedRecordID, false);
+    if (timedRecordID)
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED));
+        SetEminenceRecordCompletion(PChar, timedRecordID, false);
+    }
+
 }
 
 void ClearDailyRecords(CCharEntity* PChar)
