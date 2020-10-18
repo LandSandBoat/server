@@ -46,6 +46,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/jailutils.h"
 #include "linkshell.h"
 #include "map.h"
+#include "notoriety_container.h"
 #include "roe.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
@@ -923,16 +924,13 @@ void SmallPacket0x01A(map_session_data_t* PSession, CCharEntity* PChar, CBasicPa
                     // PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 202));
                     return;
                 }
-                // Retail prevents mounts if a player has enmity on any mob in the zone, need a function for this
-                for (auto it = PChar->SpawnMOBList.begin(); it != PChar->SpawnMOBList.end(); ++it)
+
+                if (PChar->PNotorietyContainer->hasEnmity())
                 {
-                    auto* PMob = dynamic_cast<CMobEntity*>(it->second);
-                    if (PMob->PEnmityContainer->HasID(PChar->id))
-                    {
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 339));
-                        return;
-                    }
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 339));
+                    return;
                 }
+
                 PChar->StatusEffectContainer->AddStatusEffect(
                     new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, 1800),
                     true);
