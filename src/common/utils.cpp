@@ -137,23 +137,53 @@ uint8 radianToRotation(float radian)
     return (uint8)((radian / (2 * M_PI)) * 256);
 }
 
-uint8 getangle(const position_t& A, const position_t& B)
+/****************************************************************************
+* Functions for entity-to-entity world angles, and facing differences.      *
+* Highly recommended to read Project Topaz's Wiki page to understand these. *
+*****************************************************************************/
+uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
 
     return (A.x > B.x ? angle + 128 : angle);
 }
 
-/************************************************************************
-*										       								                              *
-*  Check whether the target is in the field of view (coneAngle)	       	*
-*																		                                    *
-************************************************************************/
-
-bool isFaceing(const position_t& A, const position_t& B, uint8 coneAngle)
+int16 facingAngle(const position_t& A, const position_t& B)
 {
-    int32 angle = getangle(A, B);
-    return abs(int8(angle - A.rotation)) < (coneAngle >> 1);
+    uint8 cardinalAngle = worldAngle(A, B);
+    int16 degreeDiff = cardinalAngle - A.rotation;
+    uint8 absoluteDiff = abs(degreeDiff);
+    if (absoluteDiff > 128)
+    {
+        degreeDiff = 256 - absoluteDiff;
+    }
+    return degreeDiff;
+}
+
+bool facing(const position_t& A, const position_t& B, uint8 coneAngle)
+{
+    return infront(B, A, coneAngle); // If the target is in front of you, you're facing it!
+}
+
+bool infront(const position_t& A, const position_t& B, uint8 coneAngle)
+{
+    uint8 facingDiff = abs(facingAngle(B, A)); // Position swap intentional due to how angles are calculated
+    uint8 halfAngle = static_cast<uint8>(coneAngle / 2);
+    return (facingDiff < halfAngle);
+}
+
+bool behind(const position_t& A, const position_t& B, uint8 coneAngle)
+{
+    uint8 facingDiff = abs(facingAngle(B, A));
+    uint8 halfAngle = static_cast<uint8>(coneAngle / 2);
+    return (facingDiff > 128 - halfAngle); // Abs(Facing Angle) values are always less than 128
+}
+
+bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
+{
+    uint8 facingDiff = abs(facingAngle(B, A));
+    uint8 halfAngle = static_cast<uint8>(coneAngle / 2);
+    return (facingDiff > 64 - halfAngle) && (facingDiff < 64 + halfAngle);
 }
 
 /**

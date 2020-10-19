@@ -14,11 +14,11 @@ require("scripts/globals/utils")
 ---------------------------------------------
 
 function onMobSkillCheck(target, mob, skill)
-    if (mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES)) then
+    if mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES) then
         return 1
-    elseif (target:isBehind(mob, 48) == true) then
+    elseif not target:isInfront(mob) then
         return 1
-    elseif (mob:AnimationSub() == 1) then
+    elseif mob:AnimationSub() == 1 then
         return 1
     end
 
@@ -27,11 +27,7 @@ end
 
 function onMobWeaponSkill(target, mob, skill)
     local dmgmod = MobBreathMove(mob, target, 0.2, 1.25, tpz.magic.ele.FIRE, 1400)
-    local angle = mob:getAngle(target)
-
-    angle = mob:getRotPos() - angle
-    dmgmod = dmgmod * ((128-math.abs(angle))/128)
-    dmgmod = utils.clamp(dmgmod, 50, 1600)
+    dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.9)
 
     local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.FIRE, MOBPARAM_IGNORE_SHADOWS)
 

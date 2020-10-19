@@ -287,7 +287,7 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     // link only if I see him
     if (m_Detects & DETECT_SIGHT) {
 
-        if (!isFaceing(loc.p, *pos, 40))
+        if (!facing(loc.p, *pos, 64))
         {
             return false;
         }

@@ -96,6 +96,31 @@ function utils.takeShadows(target, dmg, shadowbehav)
     return dmg
 end
 
+function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimum_percentage)
+    local final_damage = 1
+    -- TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
+    -- have different angles and there's a method to fetch the angle, use a line like the below
+    -- local cone_angle = skill:getConalAngle()
+    local cone_angle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
+
+    local conal_angle_power = cone_angle - attacker:getFacingAngle(target)
+
+    if conal_angle_power < 0 then
+        print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
+        conal_angle_power = 0
+    end
+
+    -- Calculate the amount of damage to add above the minimum percentage based on how close
+    -- the target is to the center of the conal (0 degrees from the attacker's facing)
+    local minimum_damage = max_damage * minimum_percentage
+    local damage_per_angle = (max_damage - minimum_damage) / cone_angle
+    local additional_damage = damage_per_angle * conal_angle_power
+
+    final_damage = math.max(1, math.ceil(minimum_damage + additional_damage))
+
+    return final_damage
+end
+
 -- returns true if taken by third eye
 function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce

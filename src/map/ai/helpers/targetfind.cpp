@@ -170,7 +170,6 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
     m_findFlags = flags;
     m_conal = true;
 
-    // TODO: a point should be based on targets position
     m_APoint = &m_PBattleEntity->loc.p;
 
     float halfAngle = (angle * (256.0f / 360.0f)) / 2.0f;
