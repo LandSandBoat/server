@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Attohwa Chasm
---  NPC: ??? (qm1)
+--  NPC: ???
 -- !pos -402.574 3.999 -202.750 7
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
