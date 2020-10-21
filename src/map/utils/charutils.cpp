@@ -3769,10 +3769,6 @@ namespace charutils
         }
 
         PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, exp);
-        if (PMob != PChar) // Only mob kills count for gain EXP records
-        {
-            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
-        }
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -3856,6 +3852,11 @@ namespace charutils
 
         if (onLimitMode)
             PChar->pushPacket(new CMenuMeritPacket(PChar));
+
+        if (PMob != PChar) // Only mob kills count for gain EXP records
+        {
+            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
+        }
     }
 
     /************************************************************************
