@@ -98,15 +98,22 @@ end
 
 function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimum_percentage)
     local final_damage = 1
-    -- TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
+    -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
     -- local cone_angle = skill:getConalAngle()
     local cone_angle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
 
-    local conal_angle_power = cone_angle - attacker:getFacingAngle(target)
+    -- #TODO: Conal attacks hit targets in a cone with a center line of the "primary" target (the mob's
+    -- highest enmity target). These primary targets can be within 128 degrees of the mob's front. However,
+    -- there's currently no way for a conal skill to store (and later check) the primary target a mob skill
+    -- was trying to hit. Therefore the "damage drop off" here is based from an origin of the mob's rotation
+    -- instead. Should conal skills become capable of identifying their primary target, this should be changed
+    -- to be based on the degree difference from the primary target instead.
+    local conal_angle_power = cone_angle - math.abs(attacker:getFacingAngle(target))
 
     if conal_angle_power < 0 then
-        print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
+        -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
+        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
         conal_angle_power = 0
     end
 

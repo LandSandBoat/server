@@ -16,7 +16,7 @@ require("scripts/globals/utils")
 function onMobSkillCheck(target, mob, skill)
     if mob:hasStatusEffect(tpz.effect.INVINCIBLE) then
         return 1
-    elseif not target:isInfront(mob) then
+    elseif not target:isInfront(mob, 128) then
         return 1
     elseif mob:AnimationSub() ~= 0 then
         return 1

@@ -46,11 +46,13 @@ void getMSB(uint32* result,uint32 value);						// fast Most Significant Byte sea
 float rotationToRadian(uint8 rotation);
 uint8 radianToRotation(float radian);
 uint8 worldAngle(const position_t& A, const position_t& B);     // А - the main entity, B - target entity (vector projection onto the X-axis)
+uint8 relativeAngle(uint8 world, int16 diff);                   // Returns a new world angle which is diff degrees in a given (signed) direction
+int16 angleDifference(uint8 worldAngleA, uint8 aworldAngleB);   // Returns difference between two world angles (0~128), sign indicates direction
 int16 facingAngle(const position_t& A, const position_t& B);    // А - the main entity, B - target entity
-bool facing(const position_t& A, const position_t& B, uint8 coneAngle); // true if A is facing B within coneAngle degrees
-bool infront(const position_t& A, const position_t& B, uint8 coneAngle); // true if A is infront of B within coneAngle degrees
-bool behind(const position_t& A, const position_t& B, uint8 coneAngle); // true if A is behind of B within coneAngle degrees
-bool beside(const position_t& A, const position_t& B, uint8 coneAngle); // true if A is to a side of B within coneAngle degrees
+bool facing(const position_t& A, const position_t& B, uint8 coneAngle);   // true if A is facing B within coneAngle degrees
+bool infront(const position_t& A, const position_t& B, uint8 coneAngle);  // true if A is infront of B within coneAngle degrees
+bool behind(const position_t& A, const position_t& B, uint8 coneAngle);   // true if A is behind of B within coneAngle degrees
+bool beside(const position_t& A, const position_t& B, uint8 coneAngle);   // true if A is to a side of B within coneAngle degrees
 position_t nearPosition(const position_t& A, float offset, float radian); // Returns a position near the given position
 
 int32 hasBit(uint16 value, uint8* BitArray, uint32 size);		// Check for the presence of a bit in the array

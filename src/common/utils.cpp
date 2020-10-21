@@ -141,6 +141,8 @@ uint8 radianToRotation(float radian)
 * Functions for entity-to-entity world angles, and facing differences.      *
 * Highly recommended to read Project Topaz's Wiki page to understand these. *
 *****************************************************************************/
+// https://web.archive.org/web/https://github.com/project-topaz/topaz/wiki/Spatial-Orientation-and-Relative-Positions
+
 uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
@@ -148,16 +150,35 @@ uint8 worldAngle(const position_t& A, const position_t& B)
     return (A.x > B.x ? angle + 128 : angle);
 }
 
-int16 facingAngle(const position_t& A, const position_t& B)
+uint8 relativeAngle(uint8 world, int16 diff)
 {
-    uint8 cardinalAngle = worldAngle(A, B);
-    int16 degreeDiff = cardinalAngle - A.rotation;
+    uint8 angle = world + diff;
+    if (angle < 0)
+    {
+        angle = 256 - abs(angle);
+    }
+    else
+    {
+        angle = angle % 256;
+    }
+    return angle;
+}
+
+int16 angleDifference(uint8 worldAngleA, uint8 worldAngleB)
+{
+    int16 degreeDiff = worldAngleA - worldAngleB;
     uint8 absoluteDiff = abs(degreeDiff);
     if (absoluteDiff > 128)
     {
         degreeDiff = 256 - absoluteDiff;
     }
     return degreeDiff;
+}
+
+int16 facingAngle(const position_t& A, const position_t& B)
+{
+    uint8 cardinalAngle = worldAngle(A, B);
+    return angleDifference(cardinalAngle, A.rotation);
 }
 
 bool facing(const position_t& A, const position_t& B, uint8 coneAngle)
