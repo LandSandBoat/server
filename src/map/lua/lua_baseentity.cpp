@@ -7924,7 +7924,7 @@ inline int32 CLuaBaseEntity::delHP(lua_State *L)
 /************************************************************************
 *  Function: takeDamage()
 *  Purpose : Takes damage from the provided attacker. If no attacker is provided then it clears the last attacker.
-*  Example : target:takeDamage(500, attacker=nil, attackType=ATTACK_NONE, damageType=DAMAGE_NONE, shouldWakeUp=true)
+*  Example : target:takeDamage(500, attacker=nil, attackType=ATTACK_NONE, damageType=DAMAGE_NONE, flags={wakeUp=true})
 *  Notes   :
 ************************************************************************/
 
@@ -7936,23 +7936,62 @@ inline int32 CLuaBaseEntity::takeDamage(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     int32 damage = (int32)(lua_tointeger(L, 1));
-    if (damage > 0) {
-        // Attempt to retrieve the attacker
-        CBattleEntity* PAttacker = nullptr;
-        if (!lua_isnil(L, 2) && lua_isuserdata(L, 2)) {
-            CLuaBaseEntity* PLuaAttacker = Lunar<CLuaBaseEntity>::check(L, 2);
-            TPZ_DEBUG_BREAK_IF(PLuaAttacker == nullptr);
-            TPZ_DEBUG_BREAK_IF(PLuaAttacker->m_PBaseEntity->objtype == TYPE_NPC);
-            PAttacker = (CBattleEntity*)PLuaAttacker->m_PBaseEntity;
-        }
+
+    // Attempt to retrieve the attacker
+    CBattleEntity* PAttacker = nullptr;
+    if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
+    {
+        CLuaBaseEntity* PLuaAttacker = Lunar<CLuaBaseEntity>::check(L, 2);
+        TPZ_DEBUG_BREAK_IF(PLuaAttacker == nullptr);
+        TPZ_DEBUG_BREAK_IF(PLuaAttacker->m_PBaseEntity->objtype == TYPE_NPC);
+        PAttacker = dynamic_cast<CBattleEntity*>(PLuaAttacker->m_PBaseEntity);
+    }
+
+    CBattleEntity* PDefender = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+
+    // Check for special flags which may prevent damage from waking up the target
+    bool wakeUp = true;
+    bool breakBind = true;
+    bool removePetrify = true;
+
+    if (!lua_isnil(L, 5) && lua_istable(L, 5))
+    {
+        // Attempt to wake up the target unless wakeUp is provided and is false.
+        lua_getfield(L, 5, "wakeUp");
+        wakeUp = (lua_isnil(L, -1) || !lua_isboolean(L, -1) || lua_toboolean(L, -1));
+
+        // Remove petrification unless removePetrify is provided and is false
+        lua_getfield(L, 5, "removePetrify");
+        removePetrify = (lua_isnil(L, -1) || !lua_isboolean(L, -1) || lua_toboolean(L, -1));
+
+        // Attempt to break Bind unless breakBind is provided and is false
+        lua_getfield(L, 5, "breakBind");
+        breakBind = (lua_isnil(L, -1) || !lua_isboolean(L, -1) || lua_toboolean(L, -1));
+    }
+
+    // Deal damage and liberate target when applicable
+    if (damage > 0)
+    {
         ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? (ATTACKTYPE)lua_tointeger(L, 3) : ATTACK_NONE;
         DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? (DAMAGETYPE)lua_tointeger(L, 4) : DAMAGE_NONE;
 
-        ((CBattleEntity*)m_PBaseEntity)->takeDamage(damage, PAttacker, attackType, damageType);
+        PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
-        // Attempt to wake up the target unless shouldWakeUp is provided and is false
-        if (lua_isnil(L, 5) || !lua_isboolean(L, 5) || lua_toboolean(L, 5))
-            ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->WakeUp();
+        if (wakeUp)
+        {
+            PDefender->StatusEffectContainer->WakeUp();
+        }
+
+        if (removePetrify)
+        {
+            PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_PETRIFICATION);
+        }
+    }
+
+    // Bind has a chance to break from all direct attacks, even if they don't deal damage
+    if (PAttacker && breakBind)
+    {
+        battleutils::BindBreakCheck(PAttacker, PDefender);
     }
 
     return 0;

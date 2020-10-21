@@ -1733,9 +1733,11 @@ bool CStatusEffectContainer::CheckForElevenRoll()
 
 bool CStatusEffectContainer::IsAsleep()
 {
-    return HasStatusEffect({EFFECT_SLEEP,
+    return HasStatusEffect({
+        EFFECT_SLEEP,
         EFFECT_SLEEP_II,
-        EFFECT_LULLABY});
+        EFFECT_LULLABY
+    });
 }
 
 void CStatusEffectContainer::WakeUp()
