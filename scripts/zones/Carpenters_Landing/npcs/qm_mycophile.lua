@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Carpenters' Landing (2)
---  NPC: ??? (qm1)
+--  NPC: ???
 -- Note: Used to spawn Mycophile NM
 -- !pos 145.500 -9.000 -699.000 2
 -----------------------------------
