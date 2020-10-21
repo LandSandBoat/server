@@ -14,7 +14,7 @@ function error(player, msg)
     player:PrintToPlayer("!immortal {player}")
 end
 
-function onTrigger(player, hp, target)
+function onTrigger(player, target)
     -- validate target
     local targ
     local cursor_target = player:getCursorTarget()
@@ -37,10 +37,10 @@ function onTrigger(player, hp, target)
             local immortal = false
             if targ:isPC() then
                 if targ:getCharVar("Immortal") == 1 then
-                    targ:delStatusEffect(tpz.effect.ERGON_MIGHT)
+                    targ:delStatusEffectSilent(0)
                     targ:setCharVar("Immortal", 0)
                 else
-                    targ:addStatusEffect(tpz.effect.ERGON_MIGHT, 0, 0, 0)
+                    targ:addStatusEffectEx(0, tpz.effect.TRANSCENDENCY, 0, 0, 0)
                     targ:setCharVar("Immortal", 1)
                     immortal = true
                 end
