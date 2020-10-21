@@ -5193,7 +5193,11 @@ namespace charutils
         }
         else if (job == JOB_BST)
         {
-            if (level >= 60)
+            if (level >= 80)
+            {
+                return 300;
+            }
+            else if (level >= 60)
             {
                 return 250;
             }
@@ -5201,7 +5205,7 @@ namespace charutils
             {
                 return 200;
             }
-            else if (level >= 20)
+            else if (level >= 20 || map_config.all_jobs_widescan == 1)
             {
                 return 150;
             }
