@@ -174,8 +174,10 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
 
     uint8 halfAngle = static_cast<uint8>((angle * (256.0f / 360.0f)) / 2.0f);
 
-    uint8 angleToTarget = worldAngle(m_PBattleEntity->loc.p, PTarget->loc.p);
-
+    // Confirmation on the center of cones is still needed for mob skills; player skills seem to be facing angle
+    // uint8 angleToTarget = worldAngle(m_PBattleEntity->loc.p, PTarget->loc.p);
+    uint8 angleToTarget = m_APoint->rotation;
+    
     // "Left" and "Right" are like the entity's face - "left" means "turning to the left" NOT "left when looking overhead"
     // Remember that rotation increases when turning to the right, and decreases when turning to the left
     float leftAngle = rotationToRadian(relativeAngle(angleToTarget, -halfAngle));
