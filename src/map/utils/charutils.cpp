@@ -5174,7 +5174,12 @@ namespace charutils
         // Limit to BST and RNG, and try to use old distance values for tiers
         if (job == JOB_RNG)
         {
-            if (level >= 60)
+            // Range for RNG >=80 needs verification.
+            if (level >= 80)
+            {
+                return 350;
+            }
+            else if (level >= 60)
             {
                 return 300;
             }
