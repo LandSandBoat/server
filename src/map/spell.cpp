@@ -149,7 +149,7 @@ bool CSpell::tookEffect()
 
 bool CSpell::hasMPCost()
 {
-    return m_spellGroup != SPELLGROUP_SONG && m_spellGroup != SPELLGROUP_NINJUTSU;
+    return m_spellGroup != SPELLGROUP_SONG && m_spellGroup != SPELLGROUP_NINJUTSU && m_spellGroup != SPELLGROUP_TRUST;
 }
 
 bool CSpell::isHeal()
