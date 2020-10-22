@@ -123,6 +123,8 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     local acc = avatar:getACC() + getSummoningSkillOverCap(avatar)
     local eva = target:getEVA()
 
+    -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
+    -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
     local zoneId = avatar:getZone():getID()
 
     local shouldApplyLevelCorrection = (zoneId < 256) and not (zoneId == 183)
@@ -167,7 +169,6 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
     hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
     hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
-
 
     -- Compute hits first so we can exit early
     local firstHitLanded = false
@@ -225,8 +226,6 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
         numHitsProcessed = 0
 
-        local targetHP = target:getHP()
-
         if firstHitLanded then
             local wRatio = cRatio
             local isCrit = math.random() < critRate
@@ -246,9 +245,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
             numHitsProcessed = 1
         end
 
-        -- If the first hit kills the mob other hits are not computed in retail
-        -- This can easily be seen by using BPs on low level mobs where the first hit kills them
-        while numHitsProcessed < numHitsLanded and finaldmg < targetHP do
+        while numHitsProcessed < numHitsLanded do
             local wRatio = cRatio
             local isCrit = math.random() < critRate
             if isCrit then
@@ -271,10 +268,6 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
         -- apply ftp bonus
         if tpeffect == TP_DMG_BONUS then
             finaldmg = finaldmg * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300)
-        end
-
-        if finaldmg > 0 then
-            target:wakeUp()
         end
     end
 
