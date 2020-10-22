@@ -1,0 +1,25 @@
+---
+# https://clang.llvm.org/extra/clang-tidy/checks/list.html
+Checks: >
+  -*,
+  bugprone-*,
+  -bugprone-reserved-identifier,
+  cert-flp30-c,
+  cert-mem57-cpp,
+  cert-oop57-cpp,
+  cert-oop58-cpp,
+  clang-analyzer-*,
+  readability-*,
+  readability-braces-around-statements,
+  -readability-magic-numbers,
+  -readability-convert-member-functions-to-static,
+  -readability-implicit-bool-conversion,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  performance-*,
+  cppcoreguidelines-pro-type-cstyle-cast,
+  cppcoreguidelines-pro-type-static-cast-downcast,
+WarningsAsErrors: ''
+HeaderFilterRegex: '/src/*'
+AnalyzeTemporaryDtors: false
+...
