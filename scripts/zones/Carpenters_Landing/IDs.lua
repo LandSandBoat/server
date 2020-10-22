@@ -52,7 +52,7 @@ zones[tpz.zone.CARPENTERS_LANDING] =
             16785732,
             16785733,
             16785734,
-            16785784,
+            16785735,
         },
         LOGGING =
         {

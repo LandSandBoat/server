@@ -1,11 +1,12 @@
 ﻿#include "packet_guard.h"
 
-#include "entities/charentity.h"
+// #define PACKETGUARD_CAP_ENABLED 1
 
 #include <unordered_map> // Lookup
-#include <unordered_set> // Capture
 
-// #define PACKETGUARD_CAP_ENABLED 1
+#ifdef PACKETGUARD_CAP_ENABLED
+#include <unordered_set> // Capture
+#endif
 
 namespace PacketGuard
 {
@@ -27,8 +28,8 @@ void Init()
     // In Cutscene
     allowList[SUBSTATE_IN_CS][0x00A] = true; // Log In To Zone
     allowList[SUBSTATE_IN_CS][0x00C] = true; // Event Update (String Update)
-    allowList[SUBSTATE_IN_CS][0x00D] = true; // Player Leaving Zone(Dezone)  
-    allowList[SUBSTATE_IN_CS][0x00F] = true; // Player Information Request 
+    allowList[SUBSTATE_IN_CS][0x00D] = true; // Player Leaving Zone(Dezone)
+    allowList[SUBSTATE_IN_CS][0x00F] = true; // Player Information Request
     allowList[SUBSTATE_IN_CS][0x011] = true; // Player Zone Transition Confirmation
     allowList[SUBSTATE_IN_CS][0x015] = true; // Player Sync
     allowList[SUBSTATE_IN_CS][0x016] = true; // Entity Information Request
@@ -71,8 +72,9 @@ bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
 
 bool IsRateLimitedPacket(CCharEntity* PChar, uint16 SmallPD_Type)
 {
+    using namespace std::chrono;
     uint32 lastPacketRecievedTime = PChar->m_PacketRecievedTimestamps[SmallPD_Type];
-    uint32 timeNowSeconds = static_cast<uint32>(std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count());
+    uint32 timeNowSeconds = static_cast<uint32>(time_point_cast<seconds>(server_clock::now()).time_since_epoch().count());
     uint32 ratelimitTime = ratelimitList[SmallPD_Type];
 
     PChar->m_PacketRecievedTimestamps[SmallPD_Type] = timeNowSeconds;

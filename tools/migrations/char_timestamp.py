@@ -18,6 +18,6 @@ def needs_to_run(cur):
     return True
 
 def migrate(cur, db):
-    cur.execute("ALTER TABLE `chars` ADD COLUMN lastupdate TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;")
+    cur.execute("ALTER TABLE `chars` ADD COLUMN lastupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;")
     db.commit()
 

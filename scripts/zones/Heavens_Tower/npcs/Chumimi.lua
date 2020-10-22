@@ -25,7 +25,7 @@ function onTrade(player, npc, trade)
         trade:hasItemQty(1105, 1) and
         trade:getItemCount() == 1
     then
-        player:startEvent(271)
+        player:startEvent(271, 0, 520)
     elseif
         player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
         player:getCharVar("rootProblem") == 1 and
