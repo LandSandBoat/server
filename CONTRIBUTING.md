@@ -53,6 +53,7 @@ Clang-Format is also an option for C++
 * 4 space indent (death to tabs)
 * No using tabs for alignment either.
 * Trim trailing whitespace.
+* Space after starting comments (`-- Comment` and `// Comment`)
 
 ## C++
 We keep a `.clang-format` file in the root of the repo, but accept it can be difficult to set up for use on _just your changes_, as opposed to entire files that you're working with that might have legacy styling you don't want to mess with.
