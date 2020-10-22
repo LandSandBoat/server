@@ -63,8 +63,9 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*
 
-# .idea is created by CLion
+# Jetbrains directories
 .idea
+cmake-*
 
 # NCrunch
 *.ncrunch*
@@ -132,6 +133,9 @@ UpgradeLog*.XML
 /topaz_connect
 /topaz_game
 /topaz_search
+/topaz_connect_64
+/topaz_game_64
+/topaz_search_64
 
 # Generated files, mostly autotools-related
 .deps
