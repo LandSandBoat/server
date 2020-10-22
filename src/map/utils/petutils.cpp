@@ -1608,12 +1608,16 @@ namespace petutils
             {
                 ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
             }
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(PPet->GetMLevel() * 0.74f)));
 
-            if (PetID == PETID_CARBUNCLE)
+            //In a 2014 update SE updated Avatar base damage
+            //Based on testing this value appears to be Level now instead of Level * 0.74f
+            uint16 weaponDamage = 1 + PPet->GetMLevel();
+            if (PetID == PETID_CARBUNCLE || PETID_CAIT_SITH)
             {
-                ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(PPet->GetMLevel() * 0.67f)));
+                weaponDamage = (uint16)(floor(PPet->GetMLevel() * 0.9f));
             }
+
+            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
 
             //Set B+ weapon skill (assumed capped for level derp)
             //attack is madly high for avatars (roughly x2)
