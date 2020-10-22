@@ -256,7 +256,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     uint8 currentPartyPos = GetPartyPosition();
     for (auto POtherTrust : PMaster->PTrusts)
     {
-        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 2.0f)
+        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
         {
             auto angle = getangle(POwner->loc.p, PTarget->loc.p) + 64;
             auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
