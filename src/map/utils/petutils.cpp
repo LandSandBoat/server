@@ -1609,12 +1609,12 @@ namespace petutils
                 ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
             }
 
-            //In a 2014 update SE updated Avatar base damage
-            //Based on testing this value appears to be Level now instead of Level * 0.74f
+            // In a 2014 update SE updated Avatar base damage
+            // Based on testing this value appears to be Level now instead of Level * 0.74f
             uint16 weaponDamage = 1 + PPet->GetMLevel();
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                weaponDamage = (uint16)(floor(PPet->GetMLevel() * 0.9f));
+                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.9f));
             }
 
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
