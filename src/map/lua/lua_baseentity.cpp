@@ -194,7 +194,7 @@ inline int32 CLuaBaseEntity::showText(lua_State *L)
         if (PBaseEntity->objtype == TYPE_NPC)
         {
             PBaseEntity->m_TargID = m_PBaseEntity->targid;
-            PBaseEntity->loc.p.rotation = getangle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
+            PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
 
             PBaseEntity->loc.zone->PushPacket(
                 PBaseEntity,
@@ -1614,7 +1614,7 @@ inline int32 CLuaBaseEntity::lookAt(lua_State* L)
     point.y = posY;
     point.z = posZ;
 
-    m_PBaseEntity->loc.p.rotation = getangle(m_PBaseEntity->loc.p, point);
+    m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
 
     m_PBaseEntity->updatemask |= UPDATE_POS;
 
@@ -2337,58 +2337,14 @@ inline int32 CLuaBaseEntity::sendEmote(lua_State* L)
 }
 
 /************************************************************************
-*  Function: isBehind()
-*  Purpose : Returns true if entity is behind another entity
-*  Example : if (attacker:isBehind(target)) then
-*  Notes   : Can specify angle for wider/narrower ranges
+*  Function: getWorldAngle()
+*  Purpose : Returns angle between two entities, relative to cardinal direction
+*  Example : player:worldAngle(target)
+*  Notes   : Target is... 0: east; 64: south; 128: west, 192: north
+*            Default angle is 255-based mob rotation value - NOT a 360 angle
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::isBehind(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
-
-    auto angle = lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 42;
-
-    uint8 turn = PLuaBaseEntity->GetBaseEntity()->loc.p.rotation - getangle(PLuaBaseEntity->GetBaseEntity()->loc.p, m_PBaseEntity->loc.p);
-
-    lua_pushboolean(L, (turn > 128 - angle && turn < 128 + angle));
-
-    return 1;
-}
-
-/************************************************************************
-*  Function: isFacing()
-*  Purpose : Returns true if an entity is in front of another entity
-*  Example : if (attacker:isFacing(target)) then
-*  Notes   : Can specify angle for wider/narrower ranges
-************************************************************************/
-
-inline int32 CLuaBaseEntity::isFacing(lua_State *L)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
-
-    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 45);
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushboolean(L, isFaceing(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
-    return 1;
-}
-
-/************************************************************************
-*  Function: getAngle()
-*  Purpose : Returns the angle between two entities relative to front
-*  Example : player:getAngle(target)
-*  Notes   : 0 degrees front; 180 behind
-************************************************************************/
-
-inline int32 CLuaBaseEntity::getAngle(lua_State *L)
+inline int32 CLuaBaseEntity::getWorldAngle(lua_State *L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
@@ -2397,7 +2353,135 @@ inline int32 CLuaBaseEntity::getAngle(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
 
-    lua_pushnumber(L, getangle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p));
+    int16 angle = worldAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
+    int16 degrees = (int16)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 256);
+    if (degrees != 256)
+    {
+        if (degrees % 4 == 0)
+        {
+            angle = static_cast<int16>(round((angle * M_PI / 128) * (degrees / (2 * M_PI))));
+            angle = angle % degrees; // If we rounded up to the "final" angle, we want the starting angle
+        }
+        else
+        {
+            ShowError(CL_RED "getWorldAngle: Called with degrees %d which isn't multiple of 4 \n" CL_RESET, degrees);
+        }
+    }
+
+    lua_pushnumber(L, angle);
+    return 1;
+}
+
+/************************************************************************
+ *  Function: getFacingAngle()
+ *  Purpose : Returns angle comparison of where entity is facing versus where
+ *            a target is. Returned value is how many degrees the
+ *            entity would need to turn to directly face the target.
+ *  Example : attacker:getFacingAngle(defender)
+ *  Notes   : 0: directly facing; 64: to a side; 128 target behind entity
+ *            Returned angle is 255-based rotation value - NOT a 360 angle
+ *            Return value is signed to indicate this shortest turn direction.
+ *            Negative: counter-clockwise (left), Positive: clockwise (right)
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::getFacingAngle(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+
+    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+
+    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
+
+    lua_pushnumber(L, facingAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p));
+    return 1;
+}
+
+/************************************************************************
+ *  Function: isFacing()
+ *  Purpose : Returns true if an entity is facing another entity
+ *  Example : if (attacker:isFacing(target)) then
+ *  Notes   : Can specify angle for wider/narrower ranges
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::isFacing(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+
+    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+
+    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
+
+    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
+
+    lua_pushboolean(L, facing(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
+    return 1;
+}
+
+/************************************************************************
+ *  Function: isInfront()
+ *  Purpose : Returns true if an entity is in front of another entity
+ *  Example : if (attacker:isInfront(target)) then
+ *  Notes   : Can specify angle for wider/narrower ranges
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::isInfront(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+
+    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+
+    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
+
+    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
+
+    lua_pushboolean(L, infront(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
+    return 1;
+}
+
+/************************************************************************
+ *  Function: isBehind()
+ *  Purpose : Returns true if an entity is behind another entity
+ *  Example : if (attacker:isBehind(target)) then
+ *  Notes   : Can specify angle for wider/narrower ranges
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::isBehind(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+
+    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+
+    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
+
+    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
+
+    lua_pushboolean(L, behind(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
+    return 1;
+}
+
+/************************************************************************
+ *  Function: isBeside()
+ *  Purpose : Returns true if an entity is to the side of another entity
+ *  Example : if (attacker:isBeside(target)) then
+ *  Notes   : Can specify angle for wider/narrower ranges
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::isBeside(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+
+    CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+
+    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
+
+    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
+
+    lua_pushboolean(L, beside(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
     return 1;
 }
 
@@ -2835,7 +2919,7 @@ inline int32 CLuaBaseEntity::teleport(lua_State *L)
     else if (lua_isuserdata(L, 2))
     {
         CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 2);
-        m_PBaseEntity->loc.p.rotation = getangle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
+        m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
     }
 
     m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CPositionPacket(m_PBaseEntity));
@@ -14607,10 +14691,13 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendEmote),
 
     // Location and Positioning
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isBehind),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWorldAngle),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFacingAngle),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,isFacing),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAngle),
-
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isInfront),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isBehind),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isBeside),
+    
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZone),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZoneID),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZoneName),
