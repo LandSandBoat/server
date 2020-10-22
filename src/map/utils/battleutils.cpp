@@ -2502,7 +2502,7 @@ namespace battleutils
                 }
             }
             // Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
-            else if attackerType == TYPE_MOB || attackerType == TYPE_PET)
+            else if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
             {
                 if (attackerLvl > defenderLvl)
                 {
@@ -2619,14 +2619,15 @@ namespace battleutils
             lowerLimit = std::min(wRatio - 0.375f, maxRatio);
         }
 
-        qRatio = tpzrand::GetRandomNumber(lowerLimit, upperLimit);
-
         // https://www.bg-wiki.com/bg/Damage_Limit+
-        // See: "Physical damage limit +n%" is a multiplier to the total pDIF. 
+        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap. 
         // There is one more step here that I am skipping for Physical Damage +% from gear and augments.
         // I don't believe support for this modifier exists yet in the project.
-        // Physical Damage +% (PDL) is a flat % increase to the final qRatio value
-        // Meaning if a player has PDL+10% qRatio should become qRatio *= 1.1 here.
+        // Physical Damage +% (PDL) is a flat % increase to the final pDIF cap value
+        // Meaning if a player has PDL+10% and an uppwerLimit of 1 then this would become 1.1
+        // upperLimit = upperLimit * 1.1
+
+        qRatio = tpzrand::GetRandomNumber(lowerLimit, upperLimit);
 
         float pDIF = qRatio * tpzrand::GetRandomNumber(1.f, 1.05f);
 
