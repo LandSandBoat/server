@@ -2185,7 +2185,7 @@ namespace battleutils
 
     /************************************************************************
     *                                                                       *
-    *  Calculate Probability attack will hit (20% min cap - 95% max cap)    *
+    *  Calculate Probability attack will hit (20% min cap - 95~99% max cap) *
     *  attackNumber: 0=main, 1=sub, 2=kick                                  *
     *                                                                       *
     ************************************************************************/
@@ -2229,14 +2229,84 @@ namespace battleutils
             }
             //ShowDebug("Accuracy mod after direction checks: %d\n", offsetAccuracy);
 
-            hitrate = hitrate + (PAttacker->ACC(attackNumber, offsetAccuracy) - PDefender->EVA()) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
 
+            //Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
+            //For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
+            //bonuses cap at level diff of 38 based on this testing: 
+            //https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+
+            //Floor because hitrate can only be integer values
+            //https://www.bluegartr.com/threads/68786-Dexterity-s-impact-on-critical-hits?p=3209015&viewfull=1#post3209015
+
+            uint16 attackerAcc = PAttacker->ACC(attackNumber, offsetAccuracy);
+
+            //Enlight gives an ACC bonus not a hit rate bonus, ACC bonus is equal to damage dealt
             if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
             {
-                hitrate += PAttacker->getMod(Mod::ENSPELL_DMG);
+                attackerAcc += PAttacker->getMod(Mod::ENSPELL_DMG);
             }
 
-            hitrate = std::clamp(hitrate, 20, 95);
+            hitrate += std::floor((attackerAcc - PDefender->EVA()) / 2);
+
+            uint16 zoneId = PAttacker->getZone();
+            //Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
+            
+            //All zones from Adoulin onward have an id of 256+
+            //This includes Escha/Reisenjima and the new Dynamis zones
+            //(Not a post Adoulin Zone) && (Not Legion_A)
+            bool shouldApplyLevelCorrection = (zoneId < 256) && (zoneId != 183);
+
+            if(shouldApplyLevelCorrection) {
+                uint8 dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
+                //Skip penalties for avatars, this should likely be all pets and mobs but I have no proof
+                //of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
+                bool isPet = PAttacker->objtype == TYPE_PET;
+                bool isAvatar = false;
+                
+                if(isPet) {
+                    CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
+                    isAvatar = petEntity->getPetType() == PETTYPE_AVATAR;
+                }
+
+                if(isAvatar)
+                {
+                    if(dLvl > 0)
+                    {
+                        //Avatars have a known level difference cap of 38
+                        hitrate += std::min(dLvl, (uint8)38) * 2;
+                    }
+                }
+                else
+                {
+                    //Everything else has no known caps, though it's likely 38 like avatars
+                    hitrate += dLvl * 2;
+                }
+            }
+
+            //https://www.bg-wiki.com/bg/Hit_Rate
+            //Update Notes: https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
+            //The maximum accuracy of one-handed weapons equipped as the main weapon has been increased from 95% to 99%.
+            //* Owing to this change, the maximum accuracy of abilities that rely on main weapon accuracy has also been raised from 95% to 99%.
+            //Further, some monster damage types have been changed from hand-to-hand to blunt.* Fellows and alter egos enjoy this benefit as well.
+            //The maximum accuracy of beastmaster familiars, wyverns, avatars, and automatons has been increased from 95% to 99%.
+            //* In line with this change, familiars summoned using the following items have had their damage types changed from hand-to-hand to blunt.
+            //Carrot Broth / Famous Carrot Broth / Bug Broth / Quadav Bug Broth / Berbal Broth / Singing Herbal Broth / Carrion Broth / 
+            //Cold Carrion Broth / Meat Broth / Warm Meat Broth / Tree Sap / Scarlet Sap / Fish Broth / Fish Oil Broth / Seedbed Soil / Sun Water / 
+            //Grasshopper Broth / Noisy Grasshopper Broth / Mole Broth / Lively Mole Broth / Blood Broth / Clear Blood Broth / Antica Broth / Fragrant Antica Broth
+
+            int32 maxHitRate = 99;
+            auto targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+
+            //As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
+            bool isOffhand = attackNumber == 1;
+            bool isTwoHanded = targ_weapon->isTwoHanded();
+
+            if(isOffhand || isTwoHanded)
+            {
+                maxHitRate = 95;
+            }
+
+            hitrate = std::clamp(hitrate, 20, maxHitRate);
         }
         return (uint8)hitrate;
     }
@@ -2268,7 +2338,6 @@ namespace battleutils
         }
         else if (PAttacker->objtype == TYPE_PC && (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
         {
-
             if (abs(PDefender->loc.p.rotation - PAttacker->loc.p.rotation) < 23 || PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
             {
                 crithitrate = 100;
@@ -2312,15 +2381,58 @@ namespace battleutils
             }
             //ShowDebug("Crit rate mod after Innin/Yonin: %d\n", crithitrate);
 
-            int32 attackerdex = PAttacker->DEX();
-            int32 defenderagi = PDefender->AGI();
-
-            int32 dDEX = std::clamp(attackerdex - defenderagi, 0, 50);
-
-            crithitrate += (dDEX * 30) / 100 + PAttacker->getMod(Mod::CRITHITRATE) + PDefender->getMod(Mod::ENEMYCRITRATE);
+            crithitrate += GetDexCritBonus(PAttacker, PDefender);
+            crithitrate += PAttacker->getMod(Mod::CRITHITRATE);
+            crithitrate += PDefender->getMod(Mod::ENEMYCRITRATE);
             crithitrate = std::clamp(crithitrate, 0, 100);
         }
         return (uint8)crithitrate;
+    }
+
+    int8 GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    {
+        //https://www.bg-wiki.com/bg/Critical_Hit_Rate
+        int32 attackerdex = PAttacker->DEX();
+        int32 defenderagi = PDefender->AGI();
+        int32 dDex = attackerdex - defenderagi;
+        int32 dDexAbs = std::abs(dDex);
+        int32 sign = 1;
+        
+        if(dDex < 0)
+        {
+            //target has higher AGI so this will be a decrease to crit rate
+            sign = -1;
+        }
+
+        //default to +0 crit rate for a delta of 0-6
+        int32 critRate = 0;
+        if(dDexAbs > 39) 
+        {
+            //40-50: (dDEX-35)
+            critRate = dDexAbs - 35;
+        }
+        else if(dDexAbs > 29)
+        {
+            //30-39: +4
+            critRate = 4;
+        }
+        else if(dDexAbs > 19)
+        {
+            //20-29: +3
+            critRate = 3;
+        }
+        else if(dDexAbs > 13)
+        {
+            //14-19: +2
+            critRate = 2;
+        }
+        else if(dDexAbs > 6)
+        {
+            critRate = 1;
+        }
+
+        //Crit rate delta from stats caps at +-15
+        return std::min(critRate, 15) * sign;
     }
 
     /************************************************************************
@@ -2331,99 +2443,213 @@ namespace battleutils
 
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent)
     {
-        // used to apply a % of attack bonus
-        float attPercentBonus = 0;
-        if (bonusAttPercent >= 1)
-            attPercentBonus = PAttacker->ATT() * bonusAttPercent;
+        uint16 attack = PAttacker->ATT();
+        //Bonus attack currently only from footwork
+        if(bonusAttPercent >= 1) 
+        {
+            attack = attack * bonusAttPercent;
+        }
 
         //wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
-        float ratio = (float)(PAttacker->ATT() + attPercentBonus) / (float)((PDefender->DEF() == 0) ? 1 : PDefender->DEF());
-        float cRatioMax = 0;
-        float cRatioMin = 0;
-        float ratioCap = 2.0f;
-
-        if (PAttacker->objtype == TYPE_PC)
+        uint16 defense = PDefender->DEF();
+        if(defense == 0)
         {
-            ratioCap = isCritical ? 3 : 2.25f;
-        }
-        if (PAttacker->objtype == TYPE_MOB)
-        {
-            ratioCap = 4.f;
+            defense = 1;
         }
 
-        ratio = std::clamp<float>(ratio, 0, ratioCap);
+        //https://www.bg-wiki.com/bg/PDIF
+        //https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
+        float ratio = ((float)attack) / ((float)defense);
         float cRatio = ratio;
-        if (PAttacker->objtype == TYPE_PC)
+
+        //Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
+        //Level correction is only a penalty to players, a player does not get any bonus for fighting lower level monsters
+        //Level correct does give bonuses to Monsters and Avatars. For Avatars it caps at a level difference of 38
+        //I am going to assume that the 38 level difference cap applies to monsters as well
+        //https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        //This thread references the level correction cap for avatars and states that penalties are ignored for avatars
+        //Monster pDIF = Avatar pDIF = Pet pDIF
+        //Based on these points we know monsters and avatars ignore penalties from level correct and only get bonuses so
+        //I believe it is safe to assume all pets do this.
+
+        uint16 zoneId = PAttacker->getZone();
+        //All zones from Adoulin onward have an id of 256+
+        //This includes Escha/Reisenjima and the new Dynamis zones
+        //(Not a post Adoulin Zone) && (Not Legion_A)
+        bool shouldApplyLevelCorrection = (zoneId < 256) && (zoneId != 183);
+
+        ENTITYTYPE attackerType = PAttacker->objtype;
+
+        uint8 attackerLvl = PAttacker->GetMLevel();
+        uint8 defenderLvl = PDefender->GetMLevel();
+        uint8 dLvl = std::abs(attackerLvl - defenderLvl);
+        float correction = ((float)dLvl) * 0.05f;
+
+        //Assuming the cap for mobs is the same as Avatars
+        //Cap at 38 level diff so 38*0.05 = 1.9
+        float cappedCorrection = std::min(correction, 1.9f);
+        
+        if(shouldApplyLevelCorrection)
         {
-            if (PAttacker->GetMLevel() < PDefender->GetMLevel())
+            //Players only get penalties
+            if(attackerType == TYPE_PC)
             {
-                cRatio -= 0.050f * (PDefender->GetMLevel() - PAttacker->GetMLevel());
+                if(attackerLvl < defenderLvl)
+                {
+                    //Screw the players, no known cap
+                    cRatio -= correction;
+                }
             }
+            //Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
+            else if(attackerType == TYPE_MOB || attackerType == TYPE_PET)
+            {
+                if(attackerLvl > defenderLvl)
+                {
+                    cRatio += cappedCorrection;
+                }
+            }
+        }
+
+        float wRatio = cRatio;
+        
+        if(isCritical)
+        {
+            wRatio += 1;
+        }
+
+        float qRatio = wRatio;
+        float upperLimit = 0.0;
+        float lowerLimit = 0.0;
+
+        //https://www.bg-wiki.com/bg/PDIF
+        //Pre-Randomized values excluding Damage Limit+ trait
+        //Damage Limit+ trait adds 0.1/rank to these values
+        //type : non-crit : crit
+        //1H : 3.25 : 4.25
+        //H2H & GK : 3.5 : 4.5
+        //2H : 3.75 : 4.75
+        //Scythe : 4 : 5
+        //Archery & Throwing : 3.25 : 3.25*1.25
+        //Marksmanship : 3.5 : 3.5*1.25
+        
+        //https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        //Monster pDIF = Avatar pDIF = Pet pDIF
+
+        auto targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+
+        //Default for 1H is 3.25
+        float maxRatio = 3.25;
+
+        if(attackerType == TYPE_MOB || attackerType == TYPE_PET)
+        {
+            //Mobs and pets cap at 4.25 regardless of crit so no need to bother with crits for the max
+            maxRatio = 4.25;
         }
         else
         {
-            if (PAttacker->GetMLevel() > PDefender->GetMLevel())
+            if(targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
             {
-                cRatio += 0.050f * (PAttacker->GetMLevel() - PDefender->GetMLevel());
+                maxRatio = 3.5;
+            }
+            else if(targ_weapon->getSkillType() == SKILL_SCYTHE)
+            {
+                maxRatio = 4;
+            }
+            else if(targ_weapon->isTwoHanded())
+            {
+                maxRatio = 3.75;
+            }
+
+            //Skipping Ranged since that is handled in a separate function
+            
+            //default to 1H and check for +1 to max from crit
+            if(isCritical)
+            {
+                maxRatio += 1.0;
             }
         }
 
+        //https://www.bg-wiki.com/bg/Damage_Limit+
+        //There is an additional step here but I am skipping it for now because we do not have the data in the database.
+        //The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
+        
+        if(wRatio < 0.5)
+        {
+            upperLimit = std::max(wRatio + 0.5f, 0.5f);
+        }
+        else if(wRatio < 0.7)
+        {
+            upperLimit = 1;
+        }
+        else if(wRatio < 1.2)
+        {
+            upperLimit = wRatio + 0.3f;
+        }
+        else if(wRatio < 1.5)
+        {
+            upperLimit = wRatio * 1.25;
+        }
+        else
+        {
+            upperLimit = std::min(wRatio + 0.375f, maxRatio);
+        }
+
+        if(wRatio < 0.38)
+        {
+            lowerLimit = std::max(wRatio, 0.5f);
+        }
+        else if(wRatio < 1.25)
+        {
+            lowerLimit = (wRatio * (1176.0f/1024.0f)) - (448.0f/1024.0f);
+        }
+        else if(wRatio < 1.51)
+        {
+            lowerLimit = 1;
+        }
+        else if(wRatio < 2.44)
+        {
+            lowerLimit = (wRatio * (1176.0f/1024.0f)) - (755.0f/1024.0f);
+        }
+        else
+        {
+            lowerLimit = std::min(wRatio - 0.375f, maxRatio);
+        }
+
+        qRatio = tpzrand::GetRandomNumber(lowerLimit, upperLimit);
+
+        //https://www.bg-wiki.com/bg/Damage_Limit+
+        //See: "Physical damage limit +n%" is a multiplier to the total pDIF. 
+        //There is one more step here that I am skipping for Physical Damage +% from gear and augments.
+        //I don't believe support for this modifier exists yet in the project.
+        //Physical Damage +% (PDL) is a flat % increase to the final qRatio value
+        //Meaning if a player has PDL+10% qRatio should become qRatio *= 1.1 here.
+
+        float pDIF = qRatio * tpzrand::GetRandomNumber(1.f, 1.05f);
+
         if (isCritical)
         {
-            cRatio += 1;
-        }
-
-        cRatio = std::clamp<float>(cRatio, 0, ratioCap);
-
-        if ((0 <= cRatio) && (cRatio < 0.5)) {
-            cRatioMax = cRatio + 0.5f;
-        }
-        else if ((0.5 <= cRatio) && (cRatio <= 0.7)) {
-            cRatioMax = 1;
-        }
-        else if ((0.7 < cRatio) && (cRatio <= 1.2)) {
-            cRatioMax = cRatio + 0.3f;
-        }
-        else if ((1.2 < cRatio) && (cRatio <= 1.5)) {
-            cRatioMax = (cRatio * 0.25f) + cRatio;
-        }
-        else if ((1.5 < cRatio) && (cRatio <= 2.625)) {
-            cRatioMax = cRatio + 0.375f;
-        }
-        else if ((2.625 < cRatio) && (cRatio <= 3.25)) {
-            cRatioMax = 3;
-        }
-        else {
-            cRatioMax = cRatio;
-        }
-
-        if ((0 <= cRatio) && (cRatio < 0.38)) {
-            cRatioMin = 0;
-        }
-        else if ((0.38 <= cRatio) && (cRatio <= 1.25)) {
-            cRatioMin = cRatio * (float)(1176 / 1024) - (float)(448 / 1024);
-        }
-        else if ((1.25 < cRatio) && (cRatio <= 1.51)) {
-            cRatioMin = 1;
-        }
-        else if ((1.51 < cRatio) && (cRatio <= 2.44)) {
-            cRatioMin = cRatio * (float)(1176 / 1024) - (float)(775 / 1024);
-        }
-        else {
-            cRatioMin = cRatio - 0.375f;
-        }
-
-        float pDIF = tpzrand::GetRandomNumber(cRatioMin, cRatioMax);
-
-        if (isCritical)
-        {
+            //Crit Attack Bonus caps at +100% and is a flat increase to final crit damage
+            //so this is change to increase pDIF and not the qRatio
             int16 criticaldamage = PAttacker->getMod(Mod::CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
+
+            //Avatars get the Crit. Atk. Bonus II trait for a +8% crit damage increase
+            if(attackerType == TYPE_PET)
+            {
+                CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
+                if(petEntity)
+                {
+                    if(petEntity->getPetType() == PETTYPE_AVATAR)
+                    {
+                        criticaldamage += 8;
+                    }
+                }
+            }
+
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pDIF *= ((100 + criticaldamage) / 100.0f);
         }
 
-        //x1.00 ~ x1.05 final multiplier, giving max value 3*1.05 -> 3.15
-        return pDIF * tpzrand::GetRandomNumber(1.f, 1.05f);
+        return pDIF;
     }
 
     /************************************************************************
@@ -2486,6 +2712,25 @@ namespace battleutils
             // everything else
             if (fstr <= (-rank))
                 return (-rank);
+
+            //https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+            //fSTR has no upper cap for Avatars, this is likely true for monsters and all pets.
+            //Since I can only confirm Avatars and this has a much larger impact on balance I will
+            //Only change this logic for Avatars pending further testing.
+
+            ENTITYTYPE attackerType = PAttacker->objtype;
+            bool isAvatar = false;
+
+            if(attackerType == TYPE_PET)
+            {
+                CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
+                isAvatar = petEntity->getPetType() == PETTYPE_AVATAR;
+            }
+
+            if(isAvatar)
+            {
+                return fstr;
+            }
 
             if ((fstr > (-rank)) && (fstr <= rank + 8))
                 return fstr;
