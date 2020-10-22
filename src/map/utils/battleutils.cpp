@@ -2246,7 +2246,7 @@ namespace battleutils
                 attackerAcc += PAttacker->getMod(Mod::ENSPELL_DMG);
             }
 
-            hitrate += std::floor((attackerAcc - PDefender->EVA()) / 2);
+            hitrate += (int32)std::floor((attackerAcc - PDefender->EVA()) / 2);
 
             uint16 zoneId = PAttacker->getZone();
             //Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
@@ -2273,13 +2273,13 @@ namespace battleutils
                     if(dLvl > 0)
                     {
                         //Avatars have a known level difference cap of 38
-                        hitrate += std::min(dLvl, (uint8)38) * 2;
+                        hitrate += (int16)(std::min(dLvl, (uint8)38) * 2);
                     }
                 }
                 else
                 {
                     //Everything else has no known caps, though it's likely 38 like avatars
-                    hitrate += dLvl * 2;
+                    hitrate += (int16)(dLvl * 2);
                 }
             }
 
@@ -2409,7 +2409,7 @@ namespace battleutils
         if(dDexAbs > 39) 
         {
             //40-50: (dDEX-35)
-            critRate = dDexAbs - 35;
+            critRate = dDexAbs - (int32)35;
         }
         else if(dDexAbs > 29)
         {
@@ -2432,7 +2432,7 @@ namespace battleutils
         }
 
         //Crit rate delta from stats caps at +-15
-        return std::min(critRate, 15) * sign;
+        return std::min(critRate, (int32)15) * sign;
     }
 
     /************************************************************************
@@ -2447,7 +2447,7 @@ namespace battleutils
         //Bonus attack currently only from footwork
         if(bonusAttPercent >= 1) 
         {
-            attack = attack * bonusAttPercent;
+            attack = (uint16)(attack * bonusAttPercent);
         }
 
         //wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
@@ -2538,26 +2538,26 @@ namespace battleutils
         auto targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
 
         //Default for 1H is 3.25
-        float maxRatio = 3.25;
+        float maxRatio = 3.25f;
 
         if(attackerType == TYPE_MOB || attackerType == TYPE_PET)
         {
             //Mobs and pets cap at 4.25 regardless of crit so no need to bother with crits for the max
-            maxRatio = 4.25;
+            maxRatio = 4.25f;
         }
         else
         {
             if(targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
             {
-                maxRatio = 3.5;
+                maxRatio = 3.5f;
             }
             else if(targ_weapon->getSkillType() == SKILL_SCYTHE)
             {
-                maxRatio = 4;
+                maxRatio = 4.0f;
             }
             else if(targ_weapon->isTwoHanded())
             {
-                maxRatio = 3.75;
+                maxRatio = 3.75f;
             }
 
             //Skipping Ranged since that is handled in a separate function
@@ -2565,7 +2565,7 @@ namespace battleutils
             //default to 1H and check for +1 to max from crit
             if(isCritical)
             {
-                maxRatio += 1.0;
+                maxRatio += 1.0f;
             }
         }
 
@@ -2587,7 +2587,7 @@ namespace battleutils
         }
         else if(wRatio < 1.5)
         {
-            upperLimit = wRatio * 1.25;
+            upperLimit = wRatio * 1.25f;
         }
         else
         {
@@ -2604,7 +2604,7 @@ namespace battleutils
         }
         else if(wRatio < 1.51)
         {
-            lowerLimit = 1;
+            lowerLimit = 1.0f;
         }
         else if(wRatio < 2.44)
         {
@@ -2640,7 +2640,7 @@ namespace battleutils
                 {
                     if(petEntity->getPetType() == PETTYPE_AVATAR)
                     {
-                        criticaldamage += 8;
+                        criticaldamage += (uint16)8;
                     }
                 }
             }
