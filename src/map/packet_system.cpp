@@ -6478,6 +6478,13 @@ void SmallPacket0x112(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         // Current RoE quests
         PChar->pushPacket(new CRoeUpdatePacket(PChar));
 
+        // Players logging in to a new timed record get one-time message
+        if (PChar->m_eminenceCache.notifyTimedRecord)
+        {
+            PChar->m_eminenceCache.notifyTimedRecord = false;
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, roeutils::GetActiveTimedRecord(), 0, MSGBASIC_ROE_TIMED));
+        }
+
         // 4-part Eminence Completion bitmap
         for (int i = 0; i < 4; i++)
         {
