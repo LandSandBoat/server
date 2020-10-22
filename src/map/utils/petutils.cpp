@@ -1612,7 +1612,7 @@ namespace petutils
             //In a 2014 update SE updated Avatar base damage
             //Based on testing this value appears to be Level now instead of Level * 0.74f
             uint16 weaponDamage = 1 + PPet->GetMLevel();
-            if (PetID == PETID_CARBUNCLE || PETID_CAIT_SITH)
+            if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
                 weaponDamage = (uint16)(floor(PPet->GetMLevel() * 0.9f));
             }
