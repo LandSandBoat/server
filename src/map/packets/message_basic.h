@@ -139,6 +139,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_HAS_LUOPON_NO_USE      = 665, /* <player> has a pet. Unable to use ability. */
 	/* ROE */
 	MSGBASIC_ROE_START              = 704,
+	MSGBASIC_ROE_TIMED              = 705, // You have undertaken the timed record X.
 	MSGBASIC_ROE_RECORD             = 697, // Records of Eminence: <record>.
 	MSGBASIC_ROE_PROGRESS           = 698, // Progress: <amount>/<amount>.
 

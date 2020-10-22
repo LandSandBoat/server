@@ -53,19 +53,52 @@ Clang-Format is also an option for C++
 * 4 space indent (death to tabs)
 * No using tabs for alignment either.
 * Trim trailing whitespace.
+* Space after starting comments (`-- Comment` and `// Comment`)
 
 ## C++
-
 We keep a `.clang-format` file in the root of the repo, but accept it can be difficult to set up for use on _just your changes_, as opposed to entire files that you're working with that might have legacy styling you don't want to mess with.
 
 Here are the points from `.clang-format` explained:
 
-`# BasedOnStyle: WebKit`
-
+#### BasedOnStyle: WebKit
 When in doubt, defaulting to `WebKit style with Allman braces` is _seemingly_ a safe option.
 
-`BreakBeforeBraces: Allman`
+#### AccessModifierOffset: -4
+```cpp
+// Correct ✔️ 
+class Classname
+{
+public:
+    Classname();
 
+private:
+    int member;
+}
+
+// Wrong ❌
+class Classname
+{
+    public:
+    Classname();
+
+    private:
+    int member;
+}
+```
+
+#### AllowShortFunctionsOnASingleLine: Empty
+```cpp
+// Correct ✔️ 
+void f()
+{ 
+    foo(); 
+}
+
+// Wrong ❌
+void f() { foo(); }
+```
+
+#### BreakBeforeBraces: Allman
 Braces should _almost always_ be on a new line. 
 ```cpp
 // Correct ✔️ 
@@ -80,7 +113,7 @@ if (x == 5) {
 }
 ```
 
-`BreakConstructorInitializers: BeforeComma` & `ConstructorInitializerIndentWidth: 0`
+#### BreakConstructorInitializers: BeforeComma & ConstructorInitializerIndentWidth: 0
 ```cpp
 // Correct ✔️ 
 Constructor(int param0, int param1)
@@ -94,7 +127,7 @@ Constructor(int param0, int param1)
     : member0(param0), member1(param1){}
 ```
 
-`CompactNamespaces: 'false'`
+#### CompactNamespaces: 'false'
 ```cpp
 // Correct ✔️ 
 namespace Foo
@@ -109,7 +142,7 @@ namespace Foo { namespace Bar {
 }}
 ```
 
-`Cpp11BracedListStyle: 'false'`
+#### Cpp11BracedListStyle: 'false'
 ```cpp
 // Correct ✔️ 
 std::vector<int> x{ 1, 2, 3, 4 };
@@ -118,7 +151,7 @@ std::vector<int> x{ 1, 2, 3, 4 };
 std::vector<int> x{1, 2, 3, 4};
 ```
 
-`IndentCaseLabels: 'true'`
+#### IndentCaseLabels: 'true'
 ```cpp
 // Correct ✔️ 
 switch(x)
@@ -140,7 +173,7 @@ case 0:
 ```
 * **Note**: It doesn't matter if your `break;` is inside or outside the body of your case statement - as long as it's there (if you indend it to be).
 
-`IndentWidth: 4`
+#### IndentWidth: 4
 ```cpp
 // Correct ✔️ 
 if (func())
@@ -155,7 +188,7 @@ if (func())
 }
 ```
 
-`KeepEmptyLinesAtTheStartOfBlocks: 'false'`
+#### KeepEmptyLinesAtTheStartOfBlocks: 'false'
 ```cpp
 // Correct ✔️ 
 void function(int x)
@@ -171,11 +204,10 @@ void function(int x)
 }
 ```
 
-`Language: Cpp`
-
+#### Language: Cpp
 Yup.
 
-`PointerAlignment: Left`
+#### PointerAlignment: Left
 ```cpp
 // Correct ✔️ 
 void function(CBigType* type);
@@ -190,10 +222,10 @@ void function(CBigType * type);
 void function(CBigType & type);
 ```
 
-`SortIncludes: 'true'` & `SortUsingDeclarations: 'true'`
+#### SortIncludes: 'true' & SortUsingDeclarations: 'true'
 - Try to keep your `include` and `using` statements organised alphabetically, in logical blocks.
 
-`SpaceBeforeParens: ControlStatements`
+#### SpaceBeforeParens: ControlStatements
 ```cpp
 // Correct ✔️ 
 if (true)
@@ -208,7 +240,7 @@ if(true)
 }
 ```
 
-`Standard: Cpp11`
+#### Standard: Cpp11
 ```cpp
 // Correct ✔️ 
 A<A<int>>
@@ -217,7 +249,7 @@ A<A<int>>
 A<A<int> >
 ```
 
-`UseTab: Never`
+#### UseTab: Never
 ```cpp
 // Correct ✔️
 <4 spaces>
@@ -229,10 +261,8 @@ A<A<int> >
 <a half-tab>
 ```
 
-In the future we will also adopt a `.clang-tidy` file to apply additional rules. Until then, the most prominent rule from `clang-tidy` is braces around single-line statements:
-
-`-checks="readability-braces-around-statements"`
-
+#### Braces Around Statements
+`readability-braces-around-statements`
 ```cpp
 // Correct ✔️ 
 if (x == 5)
@@ -253,9 +283,61 @@ else
 }
 ```
 
-### C++ Misc & Naming
+#### Breaks between consecutive conditional statements
+```cpp
+// Correct ✔️ 
+if (thisThing())
+{
 
-`Casting - static_cast over C-Style`
+}
+else
+{
+
+}
+
+if (thatThing())
+{
+
+}
+
+// Correct ✔️ 
+if (thisThing())
+{
+
+}
+
+if (thatThing())
+{
+
+}
+
+// Wrong ❌
+if (thisThing())
+{
+
+}
+else
+{
+
+}
+if (thatThing())
+{
+
+}
+
+// Wrong ❌
+if (thisThing())
+{
+
+}
+if (thatThing())
+{
+
+}
+```
+
+#### Casting - static_cast over C-Style
+`cppcoreguidelines-pro-type-cstyle-cast`
 ```cpp
 // Correct ✔️ 
 uint32 param = static_cast<uint32>(input);
@@ -264,7 +346,28 @@ uint32 param = static_cast<uint32>(input);
 uint32 param = (uint32)input;
 ```
 
-`Arg/Param spacing`
+#### Don't use static_cast to downcast: Use dynamic_cast instead
+`cppcoreguidelines-pro-type-static-cast-downcast`
+```cpp
+// Correct ✔️ 
+if (auto PChar = dynamic_cast<CCharEntity*>(baseEntity))
+{
+    PChar->DoSomething()
+}
+
+// Wrong ❌
+auto PChar = static_cast<CCharEntity*>(baseEntity)
+PChar->DoSomething()
+// Wrong ❌
+
+if (auto PChar = static_cast<CCharEntity*>(baseEntity))
+{   
+    // The cast is forced, so PChar will _always_ be populated here....
+    PChar->DoSomething()
+}
+```
+
+#### Arg/Param spacing
 ```cpp
 // Correct ✔️ 
 auto f(0, 1, 2, 3, 4, 5, 6);
@@ -273,7 +376,7 @@ auto f(0, 1, 2, 3, 4, 5, 6);
 auto f(0,1,2,3,4,5,6);
 ```
 
-`Lambdas`
+#### Lambdas
 
 Formatting tools have a famously difficult time with lamdas, here is an example lambda. If you're using them (lambdas, or tools), do your best!
 ```cpp
@@ -304,6 +407,7 @@ auto isEntityAlive = [&](CBigEntity* entity) -> bool
 };
 // clang-format on
 ```
+#### C++ Naming & Misc
 
 * The STL is your friend, don't be afraid to use it.
 * Be careful with `auto`, it can mask important type details.
@@ -315,7 +419,7 @@ auto isEntityAlive = [&](CBigEntity* entity) -> bool
 
 A lot of the styling rules from the C++ guide can and should be applied to Lua code. Here are the important points to remember when styling your Lua:
 
-`Local vars are (almost) always preferred`
+####  Local vars are (almost) always preferred
 ```lua
 -- Correct ✔️ 
 local var = 0
@@ -324,7 +428,7 @@ local var = 0
 var = 0
 ```
 
-`Allman Braces`
+#### Allman Braces
 ```lua
 -- Correct ✔️ 
 local table =
@@ -339,7 +443,7 @@ local table = {
 ```
 * **NOTE:** The final entry in a multi-line table should have a comma after it.
 
-`No parentheses unless needed to clarify order of operations`
+#### No parentheses unless needed to clarify order of operations
 ```lua
 -- Correct ✔️ 
 if condition1 == 1 then
@@ -357,7 +461,7 @@ if (condition1 == 1) then
 end
 ```
 
-`No semicolons`
+#### No semicolons
 ```lua
 -- Correct ✔️ 
 local x = 42
@@ -371,7 +475,7 @@ trigger(42);
 local x = 42; trigger(42);
 ```
 
-`Formatting Conditional Blocks`
+#### Formatting Conditional Blocks
 ```lua
 -- Short - Correct ✔️
 if condition then
@@ -406,7 +510,7 @@ then
 end
 ```
 
-`Placement of logical operators in long blocks`
+#### Placement of logical operators in long blocks
 - `not` before, `and/or` after 
 ```lua
 -- Correct ✔️
@@ -428,7 +532,7 @@ then
 end
 ```
 
-`No excess whitespace inside of parentheses or solely for alignment`
+#### No excess whitespace inside of parentheses or solely for alignment
 ```lua
 -- Correct ✔️ 
 if condition1 and (condition2 or condition3) then
@@ -449,7 +553,7 @@ then
 end
 ```
 
-`Inline tables`
+#### Inline tables
 
 **THIS IS THE ONE EXCEPTION TO THE GLOBAL NEWLINE-BRACE RULES** 
 ```lua
@@ -468,7 +572,7 @@ tpz.func(
 )
 ```
 
-### Lua Misc & Naming
+#### Lua Misc & Naming
 * Our lua functions are typically lowerCamelCased, with few exceptions.
 * Make sure you check out `scripts/globals/npc_util.lua` for useful tools and helpers.
 * If you're going to cache a long table entry into a var with a shorter name, make sure that name still conveys the original meaning.
