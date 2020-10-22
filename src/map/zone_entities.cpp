@@ -555,27 +555,27 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
 {
-    for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
+    for (EntityList_t::const_iterator TrustItr = m_trustList.begin(); TrustItr != m_trustList.end(); ++TrustItr)
     {
-        if (CTrustEntity* PCurrentTrust = dynamic_cast<CTrustEntity*>(it->second))
+        if (CTrustEntity* PCurrentTrust = dynamic_cast<CTrustEntity*>(TrustItr->second))
         {
-            CCharEntity* master = static_cast<CCharEntity*>(PCurrentTrust->PMaster);
-            SpawnIDList_t::iterator TRUST = PChar->SpawnTRUSTList.lower_bound(PCurrentTrust->id);
+            SpawnIDList_t::iterator SpawnTrustItr = PChar->SpawnTRUSTList.lower_bound(PCurrentTrust->id);
+            CCharEntity* PMaster = dynamic_cast<CCharEntity*>(PCurrentTrust->PMaster);
 
-            if (PCurrentTrust->status == STATUS_NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
+            if (PMaster && PCurrentTrust->status == STATUS_NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
             {
-                if (TRUST == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, TRUST->first))
+                if (SpawnTrustItr == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first))
                 {
-                    PChar->SpawnTRUSTList.insert(TRUST, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
+                    PChar->SpawnTRUSTList.insert(SpawnTrustItr, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
                     PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
-                    PChar->pushPacket(new CTrustSyncPacket(master, PCurrentTrust));
+                    PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
                 }
             }
             else
             {
-                if (TRUST != PChar->SpawnTRUSTList.end() && !(PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, TRUST->first)))
+                if (SpawnTrustItr != PChar->SpawnTRUSTList.end() && !(PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first)))
                 {
-                    PChar->SpawnTRUSTList.erase(TRUST);
+                    PChar->SpawnTRUSTList.erase(SpawnTrustItr);
                     PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_DESPAWN, UPDATE_NONE));
                 }
             }
