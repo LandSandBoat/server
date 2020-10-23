@@ -45,33 +45,33 @@ CMobSkill::CMobSkill(uint16 id)
 
 bool CMobSkill::hasMissMsg() const
 {
-  return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
 }
 
 bool CMobSkill::isAoE() const
 {
-  return m_Aoe > 0 && m_Aoe < 4;
+    return m_Aoe > 0 && m_Aoe < 4;
 }
 
 bool CMobSkill::isConal() const
 {
-  return m_Aoe == 4;
+    return m_Aoe == 4;
 }
 
 bool CMobSkill::isSingle() const
 {
-  return m_Aoe == 0;
+    return m_Aoe == 0;
 }
 
 bool CMobSkill::isTwoHour() const
 {
-  // flag means this skill is a real two hour
-  return m_Flag & SKILLFLAG_TWO_HOUR;
+    // flag means this skill is a real two hour
+    return m_Flag & SKILLFLAG_TWO_HOUR;
 }
 
 bool CMobSkill::isAttackReplacement() const
 {
-  return m_Flag & SKILLFLAG_REPLACE_ATTACK;
+    return m_Flag & SKILLFLAG_REPLACE_ATTACK;
 }
 
 bool CMobSkill::isTpSkill() const
@@ -81,8 +81,8 @@ bool CMobSkill::isTpSkill() const
 
 bool CMobSkill::isSpecial() const
 {
-  // means it is a ranged attack or call beast, etc..
-  return m_Flag & SKILLFLAG_SPECIAL;
+    // means it is a ranged attack or call beast, etc..
+    return m_Flag & SKILLFLAG_SPECIAL;
 }
 
 void CMobSkill::setID(uint16 id)
@@ -174,36 +174,43 @@ uint16 CMobSkill::getPetAnimationID() const
     {
         return m_AnimID - 488;
     }
+
     // garuda
     if (m_AnimID >= 565 && m_AnimID <= 573)
     {
         return m_AnimID - 485;
     }
+
     // titan
     if (m_AnimID >= 539 && m_AnimID <= 547)
     {
         return m_AnimID - 491;
     }
+
     // ifrit
     if (m_AnimID >= 526 && m_AnimID <= 534)
     {
         return m_AnimID - 494;
     }
+
     // fenrir
     if (m_AnimID >= 513 && m_AnimID <= 521)
     {
         return m_AnimID - 497;
     }
+
     // shiva
     if (m_AnimID >= 578 && m_AnimID <= 586)
     {
         return m_AnimID - 482;
     }
+
     // rumah
     if (m_AnimID >= 591 && m_AnimID <= 599)
     {
         return m_AnimID - 479;
     }
+
     // carbuncle
     if (m_AnimID >= 605 && m_AnimID <= 611)
     {
@@ -216,7 +223,7 @@ uint16 CMobSkill::getPetAnimationID() const
         return m_AnimID - 493;
     }
 
-  return m_AnimID;
+    return m_AnimID;
 }
 
 int16 CMobSkill::getTP() const
@@ -305,18 +312,18 @@ float CMobSkill::getDistance() const
 
 float CMobSkill::getRadius() const
 {
-  if(m_Aoe == 2)
-  {
-    // centered around target, usually 8'
-    return 8.0f;
-  }
+    if (m_Aoe == 2)
+    {
+        // centered around target, usually 8'
+        return 8.0f;
+    }
 
-  return m_Distance;
+    return m_Distance;
 }
 
 int16 CMobSkill::getParam() const
 {
-  return m_Param;
+    return m_Param;
 }
 
 uint8 CMobSkill::getKnockback() const
@@ -326,12 +333,12 @@ uint8 CMobSkill::getKnockback() const
 
 bool CMobSkill::isDamageMsg()
 {
-  return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226;
+    return m_Message == 110 || m_Message == 185 || m_Message == 197 || m_Message == 264 || m_Message == 187 || m_Message == 225 || m_Message == 226;
 }
 
 void CMobSkill::setParam(int16 value)
 {
-  m_Param = value;
+    m_Param = value;
 }
 
 void CMobSkill::setKnockback(uint8 knockback)
