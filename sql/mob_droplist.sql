@@ -2285,7 +2285,8 @@ INSERT INTO `mob_droplist` VALUES (394,1,2,200,1324,240); -- (Byakko) a.abjurati
 INSERT INTO `mob_droplist` VALUES (394,1,2,200,1341,280); -- (Byakko) n.abjuration_hn. #2
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,722,200); -- (Byakko) divine_log
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,837,200); -- (Byakko) malboro_fiber
-INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,200); -- (Byakko) behemoth_hide
+INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,150); -- (Byakko) behemoth_hide
+INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,150); -- (Byakko) behemoth_hide #2
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,1311,20); -- (Byakko) oxblood
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,1110,10); -- (Byakko) beetle_blood
 INSERT INTO `mob_droplist` VALUES (395,0,0,1000,916,140);
