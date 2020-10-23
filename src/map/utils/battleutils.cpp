@@ -2387,11 +2387,6 @@ namespace battleutils
 
             // ShowDebug("Crit rate mod after Innin/Yonin: %d\n", crithitrate);
 
-            int32 attackerdex = PAttacker->DEX();
-            int32 defenderagi = PDefender->AGI();
-
-            int32 dDEX = std::clamp(attackerdex - defenderagi, 0, 50);
-
             crithitrate += GetDexCritBonus(PAttacker, PDefender);
             crithitrate += PAttacker->getMod(Mod::CRITHITRATE);
             crithitrate += PDefender->getMod(Mod::ENEMYCRITRATE);
