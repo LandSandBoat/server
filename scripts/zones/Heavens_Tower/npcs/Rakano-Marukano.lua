@@ -35,7 +35,7 @@ function onTrigger(player, npc)
             hasGil = 1
         end
 
-        player:startEvent(10002, 0, 1, player:getRank(), newNation, hasGil, cost)
+        player:startEvent(10002, 0, 1, player:getRank(newNation), newNation, hasGil, cost)
     end
 end
 

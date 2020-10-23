@@ -17,8 +17,10 @@ zones[tpz.zone.CHATEAU_DORAGUILLE] =
         KEYITEM_LOST            = 6600, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL     = 6601, -- You do not have enough gil.
         HALVER_OFFSET           = 6793, -- The princess is always speaking of your deeds for the Kingdom. Everyone here is counting on you, <name>.
+        LIGHTBRINGER_EXTRA      = 6836, -- Lightbringer has been found! This is the happiest day in my tenure as monarlais!
         CONQUEST_BASE           = 6879, -- Tallying conquest results...
         TOMBSTONE               = 7172, -- Here lies the beloved Queen Leaute. May Her Majesty's soul find Paradise.
+        HEIR_TO_LIGHT_EXTRA     = 7790, -- <name>! I never doubted your ability on the front line. We are truly in your debt. Proceed to the Audience Chamber. His Highness awaits!
         SAVAGE_BLADE_LEARNED    = 7940, -- You have learned the weapon skill Savage Blade!
         CELEBRATORY_GOODS       = 8452, -- An assortment of celebratory goods is available for purchase.
     },

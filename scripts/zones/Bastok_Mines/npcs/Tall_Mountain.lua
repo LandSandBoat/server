@@ -8,6 +8,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -18,7 +19,7 @@ function onTrigger(player, npc)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 3) then
         player:startEvent(182)
-    elseif (StampHunt == QUEST_ACCEPTED and player:getMaskBit(player:getCharVar("StampHunt_Mask"), 1) == false) then
+    elseif (StampHunt == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 1)) then
         player:startEvent(85)
     else
         player:startEvent(55)
@@ -35,7 +36,7 @@ function onEventFinish(player, csid, option)
     if (csid == 182) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 85) then
-        player:setMaskBit(player:getCharVar("StampHunt_Mask"), "StampHunt_Mask", 1, true)
+        player:setCharVar("StampHunt_Mask", utils.mask.setBit(player:getCharVar("StampHunt_Mask"), 1, true))
     end
 
 end

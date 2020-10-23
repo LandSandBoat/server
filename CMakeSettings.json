@@ -1,54 +1,52 @@
-{
-  "environments": [
-    {
-      "BuildDir": "${workspaceRoot}\\build\\${name}",
-      "InstallDir": "${workspaceRoot}\\build\\${name}\\bin"
-    }
-  ],
+﻿{
   "configurations": [
     {
       "name": "x86-Debug",
-      "generator": "Visual Studio 16 2019",
+      "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x86" ],
-      "buildRoot": "${env.BuildDir}",
-      "installRoot": "${env.InstallDir}",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v:detailed",
-      "ctestCommandArgs": ""
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "variables": []
     },
     {
       "name": "x86-Release",
-      "generator": "Visual Studio 16 2019",
-      "configurationType": "Release",
-      "inheritEnvironments": [ "msvc_x86" ],
-      "buildRoot": "${env.BuildDir}",
-      "installRoot": "${env.InstallDir}",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v:detailed",
-      "ctestCommandArgs": ""
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "variables": []
     },
     {
       "name": "x64-Debug",
-      "generator": "Visual Studio 16 2019 Win64",
+      "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x64" ],
-      "buildRoot": "${env.BuildDir}",
-      "installRoot": "${env.InstallDir}",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v:detailed",
-      "ctestCommandArgs": ""
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": []
     },
     {
       "name": "x64-Release",
-      "generator": "Visual Studio 16 2019 Win64",
-      "configurationType": "Release",
-      "inheritEnvironments": [ "msvc_x64" ],
-      "buildRoot": "${env.BuildDir}",
-      "installRoot": "${env.InstallDir}",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v:detailed",
-      "ctestCommandArgs": ""
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": []
     }
   ]
 }

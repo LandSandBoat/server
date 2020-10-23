@@ -59,6 +59,10 @@ set(SOURCES
     modifier.h
     navmesh.cpp
     navmesh.h
+    notoriety_container.cpp
+    notoriety_container.h
+    packet_guard.cpp
+    packet_guard.h
     packet_system.cpp
     packet_system.h
     party.cpp
@@ -67,6 +71,8 @@ set(SOURCES
     recast_container.h
     region.cpp
     region.h
+    roe.cpp
+    roe.h
     spell.cpp
     spell.h
     status_effect_container.cpp
@@ -105,13 +111,29 @@ add_subdirectory(lua)
 add_subdirectory(packets)
 add_subdirectory(utils)
 
+if(UNIX)
+    set(resource "")
+else()
+    set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
+endif()
+
 add_executable(topaz_game
     ${SOURCES}
     $<TARGET_OBJECTS:entities>
     $<TARGET_OBJECTS:items>
     $<TARGET_OBJECTS:lua>
     $<TARGET_OBJECTS:packets>
-    $<TARGET_OBJECTS:utils>)
+    $<TARGET_OBJECTS:utils>
+    ${resource})
+
+set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
+
+target_compile_definitions(
+    topaz_game
+    PUBLIC
+    -DdsUDPSERV
+    -DDEBUGLOGMAP
+)
 
 target_link_libraries(topaz_game
     PUBLIC
@@ -120,6 +142,11 @@ target_link_libraries(topaz_game
     project_options
     #project_warnings
 )
+
+if(APPLE)
+    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
+endif()
+
 set_target_properties(
     topaz_game PROPERTIES
     VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")

@@ -28,8 +28,8 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     local hitrate = 75
     local firsthit = 0
 
-    hitdiff = hitrate + math.floor(acc + bonusacc - eva)
-    firsthit = hitrate + math.floor(firstacc + bonusacc - eva)
+    hitdiff = hitrate + math.floor(acc - eva)
+    firsthit = hitrate + math.floor(firstacc - eva)
 
     hitrate = hitdiff / 100
     firsthit = firsthit / 100

@@ -61,6 +61,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
+#include "../packets/chat_message.h"
+#include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
 
 #include "../ability.h"
@@ -74,12 +76,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../weapon_skill.h"
 #include "../item_container.h"
 #include "../recast_container.h"
+#include "../roe.h"
 #include "../status_effect_container.h"
 #include "../linkshell.h"
 #include "../universal_container.h"
 #include "../latent_effect_container.h"
 #include "../treasure_pool.h"
 #include "../mob_modifier.h"
+#include "../roe.h"
 
 #include "../entities/charentity.h"
 #include "../entities/petentity.h"
@@ -351,10 +355,12 @@ namespace charutils
             "missions,"             // 21
             "assault,"              // 22
             "campaign,"             // 23
-            "playtime,"             // 24
-            "campaign_allegiance,"  // 25
-            "isstylelocked,"        // 26
-            "moghancement "         // 27
+            "eminence,"             // 24
+            "playtime,"             // 25
+            "campaign_allegiance,"  // 26
+            "isstylelocked,"        // 27
+            "moghancement,"         // 28
+            "UNIX_TIMESTAMP(`lastupdate`) " // 29
             "FROM chars "
             "WHERE charid = %u";
 
@@ -429,12 +435,19 @@ namespace charutils
             Sql_GetData(SqlHandle, 23, &campaign, &length);
             memcpy(&PChar->m_campaignLog, campaign, (length > sizeof(PChar->m_campaignLog) ? sizeof(PChar->m_campaignLog) : length));
 
-            PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 24));
-            PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 25);
-            PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 26) == 1 ? true : false);
-            PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 27));
+            length = 0;
+            char* eminence = nullptr;
+            Sql_GetData(SqlHandle, 24, &eminence, &length);
+            memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
+
+            PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
+            PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
+            PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1 ? true : false);
+            PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
+            PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
         }
 
+        roeutils::onCharLoad(PChar);
         LoadSpells(PChar);
 
         fmtQuery =
@@ -2726,6 +2739,9 @@ namespace charutils
         if ((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000))
         {
             uint16 CurSkill = PChar->RealSkills.skill[SkillID];
+            uint16 CapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
+            // Max skill this victim level will allow.
+            // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
             uint16 MaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
 
             int16  Diff = MaxSkill - CurSkill / 10;
@@ -2775,7 +2791,8 @@ namespace charutils
                     tier -= 1;
                     SkillAmount += 1;
                 }
-                MaxSkill = MaxSkill * 10;
+                // convert to 10th units
+                CapSkill = CapSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
                 if (map_config.skillup_amount_multiplier > 1)
@@ -2787,9 +2804,10 @@ namespace charutils
                     }
                 }
 
-                if (SkillAmount + CurSkill >= MaxSkill)
+                if (SkillAmount + CurSkill >= CapSkill)
                 {
-                    SkillAmount = MaxSkill - CurSkill;
+                    // skill is capped. set blue flag
+                    SkillAmount = CapSkill - CurSkill;
                     PChar->WorkingSkills.skill[SkillID] |= 0x8000;
                 }
 
@@ -3751,6 +3769,10 @@ namespace charutils
         }
 
         PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, exp);
+        if (PMob != PChar) // Only mob kills count for gain EXP records
+        {
+            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
+        }
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -3983,6 +4005,32 @@ namespace charutils
             PChar->profile.rank[1],
             PChar->profile.rank[2],
             PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save Eminence Records                                                *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveEminenceData(CCharEntity* PChar)
+    {
+        if (!roeutils::RoeSystem.RoeEnabled)
+        {
+            return;
+        }
+
+        const char* Query =
+            "UPDATE chars "
+            "SET "
+            "eminence = '%s' "
+            "WHERE charid = %u;";
+
+        char eminenceList[sizeof(PChar->m_eminenceLog) * 2 + 1];
+        Sql_EscapeStringLen(SqlHandle, eminenceList, (const char*)&PChar->m_eminenceLog, sizeof(PChar->m_eminenceLog));
+
+        Sql_Query(SqlHandle, Query, eminenceList, PChar->id);
+        PChar->m_eminenceCache.lastWriteout = static_cast<uint32>(time(nullptr));
     }
 
     /************************************************************************
@@ -4973,6 +5021,9 @@ namespace charutils
         const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+%d, %d), 0) WHERE charid = %u;";
 
         Sql_Query(SqlHandle, Query, type, type, amount, max, PChar->id);
+
+        if (strcmp(type, "spark_of_eminence") == 0)
+            PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     }
 
     void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
@@ -4980,6 +5031,9 @@ namespace charutils
         const char* Query = "UPDATE char_points SET %s = %d WHERE charid = %u;";
 
         Sql_Query(SqlHandle, Query, type, amount, PChar->id);
+
+        if (strcmp(type, "spark_of_eminence") == 0)
+            PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     }
 
     int32 GetPoints(CCharEntity* PChar, const char* type)

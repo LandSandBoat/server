@@ -791,7 +791,7 @@ tpz.effect =
     -- GoV Prowess bonus effects, real effect at ID 474
     PROWESS_CASKET_RATE      = 777, -- (Unimplemented)
     PROWESS_SKILL_RATE       = 778, -- (Unimplemented)
-    PROWESS_CRYSTAL_YEILD    = 779, -- (Unimplemented)
+    PROWESS_CRYSTAL_YIELD    = 779, -- (Unimplemented)
     PROWESS_TH               = 780, -- +1 per tier
     PROWESS_ATTACK_SPEED     = 781, -- *flat 4% for now
     PROWESS_HP_MP            = 782, -- Base 3% and another 1% per tier.
@@ -1120,6 +1120,7 @@ tpz.mod =
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1541,6 +1542,7 @@ tpz.mod =
     SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
+    GUARD_PERCENT                   = 976, -- Guard Percent
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
@@ -1561,13 +1563,14 @@ tpz.mod =
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
     COVER_DURATION                  = 967, -- Increases Cover Duration
-
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
+    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 973, -- stuff
-    -- SPARE = 974, -- stuff
-    -- SPARE = 975, -- stuff
+    -- SPARE = 977, -- stuff
+    -- SPARE = 978, -- stuff
+    -- SPARE = 979, -- stuff
 }
 
 tpz.latent =
@@ -2201,6 +2204,16 @@ tpz.allegiance =
     BASTOK    = 3,
     WINDURST  = 4,
 }
+
+----------------------------------
+-- Targetting for auras relative to objtype
+----------------------------------
+
+tpz.auraTarget =
+{
+    ALLIES  = 0,
+    ENEMIES = 1,
+};
 
 ------------------------------------
 -- MOBMODs

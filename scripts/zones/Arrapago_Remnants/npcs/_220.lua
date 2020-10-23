@@ -14,7 +14,7 @@ function onEventFinish(entity, eventid, result, door)
         local instance = door:getInstance()
         -- spawn mobs, etc
         for i, v in pairs(ID.npc[1][2]) do
-            local npc = instance:getEntity(bit.band(v, 0xFFF), tpz.objType.NPC)
+            local npc = GetNPCByID(v, instance)
             npc:setStatus(tpz.status.NORMAL)
         end
         for id = ID.mob[1][2].mobs_start, ID.mob[1][2].mobs_end do

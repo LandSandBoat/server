@@ -8,9 +8,25 @@ set(SOURCES
 
 add_subdirectory(packets)
 
+if(UNIX)
+    set(resource "")
+else()
+    set(resource "${CMAKE_SOURCE_DIR}/res/searchserver.rc")
+endif()
+
 add_executable(topaz_search
     ${SOURCES}
-    $<TARGET_OBJECTS:search_packets>)
+    $<TARGET_OBJECTS:search_packets>
+    ${resource})
+
+set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
+
+target_compile_definitions(
+    topaz_search
+    PUBLIC
+    -DDEBUGLOGSEARCH
+    -DDEFINE_OWN_MAIN
+)
 
 target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 

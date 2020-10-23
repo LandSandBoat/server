@@ -103,7 +103,7 @@ namespace attackutils
     ************************************************************************/
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (isFaceing(PDefender->loc.p, PAttacker->loc.p, 40))
+        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
             return (tpzrand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
         }
@@ -117,7 +117,7 @@ namespace attackutils
     ************************************************************************/
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (isFaceing(PDefender->loc.p, PAttacker->loc.p, 40))
+        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
             return(tpzrand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
         }
@@ -131,7 +131,7 @@ namespace attackutils
     ************************************************************************/
     bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (isFaceing(PDefender->loc.p, PAttacker->loc.p, 40) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
+        if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
         {
             return(tpzrand::GetRandomNumber(100) < battleutils::GetBlockRate(PAttacker, PDefender));
         }

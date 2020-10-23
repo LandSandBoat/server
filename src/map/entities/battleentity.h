@@ -22,6 +22,7 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <set>
 #include <vector>
 #include <unordered_map>
 
@@ -126,7 +127,7 @@ enum SKILLTYPE
     SKILL_WIND_INSTRUMENT = 42,
     SKILL_BLUE_MAGIC = 43,
     SKILL_GEOMANCY = 44,
-    SKILL_HND = 45,
+    SKILL_HANDBELL = 45,
     // 46-47 unused
     SKILL_FISHING = 48,
     SKILL_WOODWORKING = 49,
@@ -475,6 +476,7 @@ class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
 class CRecastContainer;
+class CNotorietyContainer;
 struct action_t;
 
 class CBattleEntity : public CBaseEntity
@@ -669,9 +671,8 @@ public:
     CBattleEntity*	PLastAttacker;
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
-    std::unique_ptr<CRecastContainer> PRecastContainer;         //
-
-
+    std::unique_ptr<CRecastContainer> PRecastContainer;
+    std::unique_ptr<CNotorietyContainer> PNotorietyContainer;
 
 private:
 

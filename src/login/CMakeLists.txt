@@ -12,7 +12,22 @@ set(SOURCES
     message_server.cpp
     message_server.h)
 
-add_executable(topaz_connect ${SOURCES})
+if(UNIX)
+    set(resource "")
+else()
+    set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
+endif()
+
+add_executable(topaz_connect ${SOURCES} ${resource})
+
+set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
+
+target_compile_definitions(
+    topaz_connect
+    PUBLIC
+    -DdsTCPSERV
+    -DDEBUGLOGLOGIN
+)
 
 target_link_libraries(topaz_connect
     PUBLIC

@@ -3,32 +3,35 @@
 # LuaJIT_LIBRARY - The libraries needed to use LuaJIT
 # LuaJIT_INCLUDE_DIR - The LuaJIT include directories
 
-if (WIN32)
-    set(LOCAL_LIB_PATH ${PROJECT_SOURCE_DIR}/ext/${libpath})
-endif()
-
 find_library(LuaJIT_LIBRARY 
     NAMES 
         luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
         ${LOCAL_LIB_PATH}
-        ${LuaJIT_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
-        /usr/include
+        /usr/
+        /usr/bin/
+        /usr/include/
+        /usr/lib/
+        /usr/local/
         /usr/local/bin/
-        /usr/bin/)
+        /opt/)
 
 find_path(LuaJIT_INCLUDE_DIR 
     NAMES 
         lua.h
     PATHS
-        ${LuaJIT_ADD_INCLUDE_PATH}
+        ${LOCAL_INCLUDE_PATH}
         ${PROJECT_SOURCE_DIR}/src/common/lua
-        /usr/include
+        /usr/
+        /usr/bin/
+        /usr/include/
+        /usr/lib/
+        /usr/local/
         /usr/local/bin/
-        /usr/bin/)
+        /opt/)
 
-include (FindPackageHandleStandardArgs)
+include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(LuaJIT DEFAULT_MSG LuaJIT_LIBRARY LuaJIT_INCLUDE_DIR)
 
 message(STATUS "LuaJIT_FOUND: ${LuaJIT_FOUND}")

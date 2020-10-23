@@ -9,12 +9,14 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
-        local ATWTTB_Paid_Hujette = player:getMaskBit(player:getCharVar("ATWTTB_Payments"), 1)
+        local ATWTTB_Paid_Hujette = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 1)
         if ((not ATWTTB_Paid_Hujette) and npcUtil.tradeHas( trade, {{"gil", 3000}} )) then
             player:startEvent(5070)
         end
@@ -41,8 +43,8 @@ function onEventFinish(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5070) then
         player:confirmTrade()
-        player:setMaskBit("ATWTTB_Payments", 1, true)
-        if (player:isMaskFull(player:getCharVar("ATWTTB_Payments"), 5)) then
+        player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
+        if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
             npcUtil.giveKeyItem(player, tpz.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end

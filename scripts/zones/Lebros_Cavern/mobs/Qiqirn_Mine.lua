@@ -37,13 +37,13 @@ function onMobWeaponSkill(target, mob, skill)
 
     if skill:getID() == 1838 then
         if (pos.x == 178 and pos.y == -40 and pos.z == 376) then
-            instance:getEntity(bit.band(ID.mob[21].BRITTLE_ROCK1, 0xFFF), tpz.objType.MOB):setHP(0)
+            GetMobByID(ID.mob[21].BRITTLE_ROCK1, instance):setHP(0)
         elseif (pos.x == 258 and pos.y == -30 and pos.z == 213) then
-            instance:getEntity(bit.band(ID.mob[21].BRITTLE_ROCK3, 0xFFF), tpz.objType.MOB):setHP(0)
+            GetMobByID(ID.mob[21].BRITTLE_ROCK3, instance):setHP(0)
         elseif (pos.x == 303 and pos.y == -30 and pos.z == 341) then
-            instance:getEntity(bit.band(ID.mob[21].BRITTLE_ROCK4, 0xFFF), tpz.objType.MOB):setHP(0)
+            GetMobByID(ID.mob[21].BRITTLE_ROCK4, instance):setHP(0)
         elseif (pos.x == 338 and pos.y == -30 and pos.z == 296) then
-            instance:getEntity(bit.band(ID.mob[21].BRITTLE_ROCK5, 0xFFF), tpz.objType.MOB):setHP(0)
+            GetMobByID(ID.mob[21].BRITTLE_ROCK5, instance):setHP(0)
         end
     end
 end

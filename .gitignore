@@ -63,6 +63,10 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*
 
+# Jetbrains directories
+.idea
+cmake-*
+
 # NCrunch
 *.ncrunch*
 .*crunch*.local.xml
@@ -129,6 +133,9 @@ UpgradeLog*.XML
 /topaz_connect
 /topaz_game
 /topaz_search
+/topaz_connect_64
+/topaz_game_64
+/topaz_search_64
 
 # Generated files, mostly autotools-related
 .deps
@@ -190,6 +197,3 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
-
-# Jetbrains files
-.idea/

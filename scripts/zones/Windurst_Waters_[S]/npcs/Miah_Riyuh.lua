@@ -9,6 +9,7 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -29,17 +30,17 @@ function onTrigger(player, npc)
         player:startEvent(103)
     elseif SnakeOnThePlains == QUEST_AVAILABLE and player:getCharVar("GREEN_R_LETTER_USED") == 1 then
         player:startEvent(105)
-    elseif SnakeOnThePlains == QUEST_ACCEPTED and player:isMaskFull(player:getCharVar("SEALED_DOORS"), 3) then
+    elseif SnakeOnThePlains == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar("SEALED_DOORS"), 3) then
         player:startEvent(106)
     elseif SnakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         local PuttyUsed = 0
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 0) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0) then
             PuttyUsed = PuttyUsed +1
         end
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 1) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1) then
             PuttyUsed = PuttyUsed +1
         end
-        if player:getMaskBit(player:getCharVar("SEALED_DOORS"), 2) then
+        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2) then
             PuttyUsed = PuttyUsed +1
         end
         player:startEvent(104, 0, 0, 0, 0, 0, 0, 0, PuttyUsed)

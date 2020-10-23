@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
+require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -16,6 +17,7 @@ end
 
 function onZoneIn(player, prevZone)
     local cs = -1
+    local dynamisMask = player:getCharVar("Dynamis_Status")
 
     local UnbridledPassionCS = player:getCharVar("unbridledPassion")
 
@@ -27,8 +29,12 @@ function onZoneIn(player, prevZone)
         player:setPos(-136.287, -23.268, 137.302, 91)
     end
 
-    if not player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and player:getRank() >= 6 and player:getMainLvl() >= 65 and bit.band(player:getCharVar("Dynamis_Status"), 1) == 0 then
-        player:setCharVar("Dynamis_Status", 1)
+    if
+        not player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
+        player:getRank() >= 6 and
+        player:getMainLvl() >= 65 and
+        not utils.mask.getBit(dynamisMask, 0)
+    then
         cs = 13
     elseif quests.rainbow.onZoneIn(player) then
         cs = 9
@@ -63,5 +69,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 4 then
         player:setCharVar("unbridledPassion", 4)
+    elseif csid == 13 then
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(player:getCharVar("Dynamis_Status"), 0, true))
     end
 end

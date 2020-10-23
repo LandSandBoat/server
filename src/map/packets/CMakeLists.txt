@@ -172,6 +172,12 @@ set(SOURCES
     release.h
     release_special.cpp
     release_special.h
+    roe_questlog.cpp
+    roe_questlog.h
+    roe_sparkupdate.cpp
+    roe_sparkupdate.h
+    roe_update.cpp
+    roe_update.h
     server_ip.cpp
     server_ip.h
     server_message.cpp

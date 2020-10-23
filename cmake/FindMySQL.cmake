@@ -3,32 +3,35 @@
 # MYSQL_LIBRARY - The libraries needed to use MYSQL
 # MYSQL_INCLUDE_DIR - The MYSQL include directories
 
-if (WIN32)
-    set(LOCAL_LIB_PATH ${PROJECT_SOURCE_DIR}/ext/${libpath})
-endif()
-
 find_library(MYSQL_LIBRARY 
     NAMES 
-        mysql mariadb libmysql libmariadb libmysql64 libmariadb64
+        libmysql libmariadb mysql mariadb libmysql64 libmariadb64
     PATHS
         ${LOCAL_LIB_PATH}
-        ${MYSQL_ADD_LIBRARIES_PATH}
         ${PROJECT_SOURCE_DIR}
-        /usr/include
+        /usr/
+        /usr/bin/
+        /usr/include/
+        /usr/lib/
+        /usr/local/
         /usr/local/bin/
-        /usr/bin/)
+        /opt/)
 
 find_path(MYSQL_INCLUDE_DIR 
     NAMES 
         mysql.h
     PATHS
-        ${MYSQL_ADD_INCLUDE_PATH}
-        ${PROJECT_SOURCE_DIR}/ext/include/mysql
-        /usr/include
+        ${LOCAL_INCLUDE_PATH}
+        ${LOCAL_INCLUDE_PATH}/mysql/
+        /usr/
+        /usr/bin/
+        /usr/include/
+        /usr/lib/
+        /usr/local/
         /usr/local/bin/
-        /usr/bin/)
+        /opt/)
 
-include (FindPackageHandleStandardArgs)
+include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MySQL DEFAULT_MSG MYSQL_LIBRARY MYSQL_INCLUDE_DIR)
 
 message(STATUS "MYSQL_FOUND: ${MYSQL_FOUND}")

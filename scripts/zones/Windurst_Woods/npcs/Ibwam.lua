@@ -11,6 +11,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 --[[
@@ -61,7 +62,7 @@ function onTrigger(player, npc)
         else
             if wildcatWindurst == 0 then
                 player:startEvent(737)
-            elseif player:isMaskFull(wildcatWindurst, 20) then
+            elseif utils.mask.isFull(wildcatWindurst, 20) then
                 player:startEvent(739)
             else
                 player:startEvent(738)
@@ -82,7 +83,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatWindurst", 0)
         npcUtil.giveKeyItem(player, tpz.ki.GREEN_SENTINEL_BADGE)
-    elseif csid == 739 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT, {fame=150, keyItem=tpz.ki.GREEN_INVITATION_CARD, var="WildcatWindurst"}) then
+    elseif csid == 739 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT, {fame=150, ki=tpz.ki.GREEN_INVITATION_CARD, var="WildcatWindurst"}) then
         player:delKeyItem(tpz.ki.GREEN_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_SENTINEL_BADGE)
     elseif csid == 794 then

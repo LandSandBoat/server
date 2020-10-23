@@ -5,13 +5,14 @@
 -- Starts and Finishes Quest: True Strength
 -- !pos 133 -19 34 237
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
+local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/Metalworks/IDs")
+require("scripts/globals/status")
+require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -30,7 +31,7 @@ function onTrigger(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
     local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 9) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
         player:startEvent(935)
     elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CRYSTAL_LINE and player:hasKeyItem(tpz.ki.C_L_REPORTS)) then
         player:startEvent(712)
@@ -67,7 +68,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
         end
     elseif (csid == 935) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 9, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 9, true))
     elseif (csid == 803 and option == 1) then
         player:setCharVar("FadedPromises", 2)
     elseif (csid == 804) then

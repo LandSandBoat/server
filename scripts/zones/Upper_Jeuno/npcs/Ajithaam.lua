@@ -3,12 +3,14 @@
 --  NPC: Ajithaam
 -- !pos -82 0.1 160 244
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
+local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+require("scripts/globals/missions")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+-----------------------------------
 
 --[[
 Bitmask Designations:
@@ -57,7 +59,7 @@ function onTrigger(player, npc)
         else
             if (WildcatJeuno == 0) then
                 player:startEvent(10089)
-            elseif (player:isMaskFull(WildcatJeuno, 20) == true) then
+            elseif utils.mask.isFull(WildcatJeuno, 20) then
                 player:startEvent(10091)
             else
                 player:startEvent(10090)

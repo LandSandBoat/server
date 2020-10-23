@@ -33,12 +33,42 @@ if(ENABLE_IPO)
   endif()
 endif()
 
-if(APPLE)
-    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
-endif()
+if(MSVC)
+    list(APPEND FLAGS_AND_DEFINES
+        -D_CONSOLE
+        -D_MBCS
+        -DNOMINMAX
+        -D_CRT_SECURE_NO_WARNINGS
+        -D_CRT_NONSTDC_NO_DEPRECATE
+        # TODO: This is being overwritten by /Ob0
+        # /Ob2 # Inline Function Expansion
+        /Oy- # Frame-Pointer Omission
+        /MP # Build with Multiple Processes
+    )
 
-if(WIN32)
-    # compiler_settings(/nologo /verbosity:minimal)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE -DNOMINMAX)
+    if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
+        list(APPEND FLAGS_AND_DEFINES
+            /ZI # Omit Default Library Name
+            /GR # Enable RTTI
+        )
+    else()
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL:NO /LTCG /OPT:REF /OPT:ICF")
+        list(APPEND FLAGS_AND_DEFINES
+            /Oi # Generate Intrinsic Functions
+            /GL # Whole Program Optimization
+            /Gy # Enable Function Level Linking
+            /TP # C++ Source Files
+        )
+    endif()
+
     link_libraries(WS2_32 dbghelp)
 endif()
+
+if(UNIX)
+
+endif()
+
+# TODO: These should be applied on a per-target level, not globally like this!
+string(REPLACE ";" " " FLAGS_AND_DEFINES_STR "${FLAGS_AND_DEFINES}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS_AND_DEFINES_STR}")

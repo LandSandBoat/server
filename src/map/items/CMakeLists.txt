@@ -5,6 +5,8 @@ set(SOURCES
     item_equipment.h
     item_fish.cpp
     item_fish.h
+    item_flowerpot.cpp
+    item_flowerpot.h
     item_furnishing.cpp
     item_furnishing.h
     item_general.cpp
