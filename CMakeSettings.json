@@ -6,7 +6,7 @@
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
-      "cmakeCommandArgs": "-DMYSQL_INCLUDE_DIR=${projectDir}\\ext\\include\\mysql -DMYSQL_LIBRARY=${projectDir}\\ext\\lib\\libmariadb.lib'",
+      "cmakeCommandArgs": "-DMYSQL_INCLUDE_DIR=${projectDir}\\ext\\include\\mysql -DMYSQL_LIBRARY=${projectDir}\\ext\\lib\\libmariadb.lib",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "msvc_x86" ],
