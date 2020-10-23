@@ -203,10 +203,16 @@ void CTrustController::DoRoamTick(time_point tick)
     {
         if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
         {
-            auto angle = getangle(POwner->loc.p, POtherTrust->loc.p) + 64;
+            auto diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
             auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos{ POwner->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
-                POtherTrust->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0 };
+            position_t new_pos =
+            {
+                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+                POtherTrust->loc.p.y,
+                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                0,
+                0,
+            };
 
             if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
@@ -258,10 +264,16 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     {
         if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
         {
-            auto angle = getangle(POwner->loc.p, PTarget->loc.p) + 64;
+            auto diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
             auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos {POwner->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
-                PTarget->loc.p.y, POwner->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0};
+            position_t new_pos = 
+            {
+                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+                PTarget->loc.p.y,
+                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                0,
+                0,
+            };
 
             if (POwner->PAI->PathFind->ValidPosition(new_pos))
             {
@@ -283,9 +295,15 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     {
         // Away from target, +/- 45 degrees
         auto half_sector_size = 32 + (10 * m_failedRepositionAttempts);
-        auto angle = getangle(PTarget->loc.p, POwner->loc.p) + 128 + tpzrand::GetRandomNumber(-half_sector_size, half_sector_size);
-        position_t potential_position = {PTarget->loc.p.x - (cosf(rotationToRadian(angle)) * amount),
-            PTarget->loc.p.y, PTarget->loc.p.z + (sinf(rotationToRadian(angle)) * amount), 0, 0};
+        auto diff_angle = worldAngle(PTarget->loc.p, POwner->loc.p) + 128 + tpzrand::GetRandomNumber(-half_sector_size, half_sector_size);
+        position_t potential_position =
+        {
+            PTarget->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+            PTarget->loc.p.y,
+            PTarget->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+            0,
+            0,
+        };
 
         // Validate position
         if (POwner->PAI->PathFind->ValidPosition(potential_position) &&
