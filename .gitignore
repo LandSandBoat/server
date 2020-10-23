@@ -164,20 +164,25 @@ navmeshes/*.nav
 tags
 log/tpz.leaks
 
-#Lua Developement Tools project files
+# Lua Developement Tools project files
 .metadata/**
 .project
 .vs
 /win32/.vs/topaz/v15
 
-#VS Code
+# VS Code
 .vscode
+
+# Visual Studio
+**/*.vcxproj*
+**/*.sln
 
 # CMake files
 CMakeCache.txt
 Makefile
 **/CMakeFiles
 cmake_install.cmake
+/cmake-**/**
 
 # ignore servers
 *-server

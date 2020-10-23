@@ -1,58 +1,41 @@
-cmake_minimum_required(VERSION 3.9)
-project(topaz)
-
-add_definitions(
-    -DdsTCPSERV
-    -DDEBUGLOGLOGIN
-)
-
-file(GLOB GENERATED_SOURCES CONFIGURE_DEPENDS *.cpp)
+set(SOURCES
+    account.cpp
+    account.h
+    lobby.cpp
+    lobby.h
+    login_auth.cpp
+    login_auth.h
+    login_session.cpp
+    login_session.h
+    login.cpp
+    login.h
+    message_server.cpp
+    message_server.h)
 
 if(UNIX)
     set(resource "")
 else()
-    set(resource "../../win32/vcxproj/connectserver.rc")
+    set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
 endif()
 
+add_executable(topaz_connect ${SOURCES} ${resource})
 
-add_executable(topaz_connect
-    ${GENERATED_SOURCES}
-    ../common/blowfish.cpp
-    ../common/kernel.cpp
-    ../common/md52.cpp
-    ../common/showmsg.cpp
-    ../common/socket.cpp
-    ../common/sql.cpp
-    ../common/taskmgr.cpp
-    ../common/timer.cpp
-    ../common/utils.cpp
-    ../common/zlib.cpp
-    ${resource}
+if(WIN32)
+    set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
+endif()
+
+target_compile_definitions(
+    topaz_connect
+    PUBLIC
+    -DdsTCPSERV
+    -DDEBUGLOGLOGIN
 )
 
-set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
+target_link_libraries(topaz_connect
+    PUBLIC
+    common
+    project_options
+    #project_warnings
+)
 
-if(UNIX)
-    target_include_directories(topaz_connect PRIVATE
-        ${MYSQLCLIENT_INCLUDE_DIRS}
-    )
-
-    target_link_libraries(topaz_connect
-        ${MYSQLCLIENT_LIBRARIES}
-        ${ZMQ_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
-    )
-else()
-    target_include_directories(topaz_connect PRIVATE
-        ../common
-        ../../win32/external
-        ../../win32/external/mysql
-        ../../win32/external/zmq
-    )
-
-    target_link_libraries(topaz_connect
-        libmariadb${platform_suffix}
-        libzmq${lib_debug}${spacer}${platform_suffix}
-        WS2_32
-    )
-endif()
+set_property(TARGET topaz_connect PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_PROJECT_SOURCE_DIR}")
