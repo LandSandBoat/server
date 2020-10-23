@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm15 (???)
--- Spawns Bloodeye Vileberry
--- !pos 539 24 714 15
+--  NPC: ???
+-- Spawns Lentor
+-- !pos -248.000 47.971 403.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
@@ -16,9 +16,7 @@ function onTrigger(player, npc)
 end
 
 function onEventUpdate(player, csid, option)
-    tpz.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    tpz.abyssea.qmOnEventFinish(player, csid, option)
 end

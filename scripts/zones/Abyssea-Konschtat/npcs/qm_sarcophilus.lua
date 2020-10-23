@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm10 (???)
--- Spawns Alkonost
--- !pos ? ? ? 15
+--  NPC: ???
+-- Spawns Sarcophilus
+-- !pos -235.000 -15.882 -120.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------

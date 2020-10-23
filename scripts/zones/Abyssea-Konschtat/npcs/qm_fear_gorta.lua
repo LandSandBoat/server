@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm3 (???)
--- Spawns Bombadeel
--- !pos ? ? ? 15
+--  NPC: ???
+-- Spawns Fear Gorta
+-- !pos 630.000 33.608 410.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------

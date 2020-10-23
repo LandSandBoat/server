@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm13 (???)
--- Spawns Eccentric Eve
--- !pos 230 32 280 15
+--  NPC: ???
+-- Spawns Hexenpilz
+-- !pos -182.000 2.858 32.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
@@ -16,9 +16,7 @@ function onTrigger(player, npc)
 end
 
 function onEventUpdate(player, csid, option)
-    tpz.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    tpz.abyssea.qmOnEventFinish(player, csid, option)
 end

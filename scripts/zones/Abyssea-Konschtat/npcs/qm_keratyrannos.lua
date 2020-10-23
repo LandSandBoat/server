@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm4 (???)
--- Spawns Hexenpilz
--- !pos ? ? ? 15
+--  NPC: ???
+-- Spawns Keratyrannos
+-- !pos -134.000 47.371 416.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------

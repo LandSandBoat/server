@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm11 (???)
--- Spawns Arimaspi
--- !pos ? ? ? 15
+--  NPC: ???
+-- Spawns Clingy Clare
+-- !pos 150.000 17.601 90.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
