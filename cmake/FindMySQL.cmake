@@ -21,7 +21,6 @@ find_path(MYSQL_INCLUDE_DIR
     NAMES 
         mysql.h
     PATHS
-        ${LOCAL_INCLUDE_PATH}
         ${LOCAL_INCLUDE_PATH}/mysql/
         /usr/
         /usr/bin/
