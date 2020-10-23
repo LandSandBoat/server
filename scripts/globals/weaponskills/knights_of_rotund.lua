@@ -1,6 +1,6 @@
 -----------------------------------
 -- Knights Of Rotund
--- Joke Sword Weapon Skill granted by Excalipoor+1
+-- Joke Sword Weapon Skill granted by ExcalipoorII
 -- Stat mods unknown
 -----------------------------------
 require("scripts/globals/weaponskills")
