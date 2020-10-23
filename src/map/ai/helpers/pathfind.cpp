@@ -396,7 +396,7 @@ void CPathFind::LookAt(const position_t& point)
 {
     // don't look if i'm at that point
     if (!AtPoint(point)) {
-        m_PTarget->loc.p.rotation = getangle(m_PTarget->loc.p, point);
+        m_PTarget->loc.p.rotation = worldAngle(m_PTarget->loc.p, point);
         m_PTarget->updatemask |= UPDATE_POS;
     }
 }

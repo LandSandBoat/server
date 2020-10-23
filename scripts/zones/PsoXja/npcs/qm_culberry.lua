@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Pso'xja
---  NPC: ??? (qm1)
+--  NPC: ???
 -- Notes: Used to spawn Golden-Tongued Culberry
 -- !pos -270.063 31.395 256.812 9
 -----------------------------------
