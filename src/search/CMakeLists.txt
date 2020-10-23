@@ -19,7 +19,9 @@ add_executable(topaz_search
     $<TARGET_OBJECTS:search_packets>
     ${resource})
 
-set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
+if(WIN32)
+    set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
+endif()
 
 target_compile_definitions(
     topaz_search

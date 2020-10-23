@@ -126,7 +126,9 @@ add_executable(topaz_game
     $<TARGET_OBJECTS:utils>
     ${resource})
 
-set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
+if(WIN32)
+    set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
+endif()
 
 target_compile_definitions(
     topaz_game
