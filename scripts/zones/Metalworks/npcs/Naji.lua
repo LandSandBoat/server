@@ -155,7 +155,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.BLUE_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.BLUE_INSTITUTE_CARD)
         npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.TRUST_BASTOK, {
-            keyItem = tpz.ki.BASTOK_TRUST_PERMIT,
+            ki = tpz.ki.BASTOK_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
             var = "BastokFirstTrust"
         })
@@ -166,7 +166,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.BLUE_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.BLUE_INSTITUTE_CARD)
         npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.TRUST_BASTOK, {
-            keyItem = tpz.ki.BASTOK_TRUST_PERMIT
+            ki = tpz.ki.BASTOK_TRUST_PERMIT
         })
     end
 end
