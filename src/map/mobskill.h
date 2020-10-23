@@ -50,6 +50,7 @@ public:
     bool        isSingle() const;
     bool        isTwoHour() const;
     bool        isSpecial() const;
+    bool        isAttackReplacement() const;
     bool        isTpSkill() const;
 
     uint16      getID() const;
