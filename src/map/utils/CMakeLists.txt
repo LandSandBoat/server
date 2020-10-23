@@ -31,6 +31,8 @@ set(SOURCES
     puppetutils.h
     synthutils.cpp
     synthutils.h
+    trustutils.cpp
+    trustutils.h
     zoneutils.cpp
     zoneutils.h)
 
