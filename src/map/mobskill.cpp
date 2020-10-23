@@ -69,9 +69,14 @@ bool CMobSkill::isTwoHour() const
   return m_Flag & SKILLFLAG_TWO_HOUR;
 }
 
+bool CMobSkill::isAttackReplacement() const
+{
+  return m_Flag & SKILLFLAG_REPLACE_ATTACK;
+}
+
 bool CMobSkill::isTpSkill() const
 {
-    return !isSpecial();
+    return !isSpecial() && !isAttackReplacement();
 }
 
 bool CMobSkill::isSpecial() const
