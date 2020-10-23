@@ -138,8 +138,8 @@ set(SOURCES
     merit_points_categories.h
     message_basic.cpp
     message_basic.h
-    message_debug.cpp
-    message_debug.h
+    message_combat.cpp
+    message_combat.h
     message_name.cpp
     message_name.h
     message_special.cpp
