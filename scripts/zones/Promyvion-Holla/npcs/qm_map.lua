@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Promyvion holla
--- ??? map acquisition
--- NPC ID 16843068
+--  NPC: ??? (map acquisition)
+-- !pos -35.988 -2.325 -196.000 16
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Holla/IDs")
 require("scripts/globals/keyitems")
