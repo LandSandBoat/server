@@ -1005,23 +1005,17 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
-        if (PNpc->status == STATUS_NORMAL && !PNpc->IsNameHidden() && !PNpc->IsUntargetable() && PNpc->widescan == 1)
+        if (PNpc->isWideScannable() && distance(PChar->loc.p, PNpc->loc.p) < radius)
         {
-            if (distance(PChar->loc.p, PNpc->loc.p) < radius)
-            {
-                PChar->pushPacket(new CWideScanPacket(PChar, PNpc));
-            }
+            PChar->pushPacket(new CWideScanPacket(PChar, PNpc));
         }
     }
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PMob = (CMobEntity*)it->second;
-        if (PMob->status != STATUS_DISAPPEAR && !PMob->IsUntargetable())
+        if (PMob->isWideScannable() && distance(PChar->loc.p, PMob->loc.p) < radius)
         {
-            if (distance(PChar->loc.p, PMob->loc.p) < radius)
-            {
-                PChar->pushPacket(new CWideScanPacket(PChar, PMob));
-            }
+            PChar->pushPacket(new CWideScanPacket(PChar, PMob));
         }
     }
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));

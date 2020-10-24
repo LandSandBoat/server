@@ -5296,167 +5296,7 @@ void SmallPacket0x0F2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F4(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    // Set Widescan range
-    // Distances need verified, based current values off what we had in traits.sql and data at http://wiki.ffxiclopedia.org/wiki/Wide_Scan
-    // NOTE: Widescan was formerly piggy backed onto traits (resist slow) but is not a real trait, any attempt to give it a trait will place a dot on characters trait menu.
-    if (map_config.all_jobs_widescan == 0)
-    {
-        // Limit to BST and RNG, and try to use old distance values for tiers
-        if (PChar->GetMJob() == JOB_RNG)
-        {
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetMJob() == JOB_BST)
-        {
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 50);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_RNG)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_BST)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 50);
-            }
-        }
-        else
-        {
-            // Not BST or RNG, get nothing!
-            PChar->loc.zone->WideScan(PChar, 0);
-            // The zero needs set or client will lag on map screen saying downloading data.
-        }
-    }
-    else if (map_config.all_jobs_widescan == 1)
-    {
-        // All jobs have 1st tier, and use current retail distance values for tiers
-        if (PChar->GetMJob() == JOB_RNG)
-        {
-            // Need verification
-            // if (PChar->GetMLevel() >= 80)
-            // {
-            //     PChar->loc.zone->WideScan(PChar,350);
-            // }
-            // else if (PChar->GetMLevel() >= 60)
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetMJob() == JOB_BST)
-        {
-            if (PChar->GetMLevel() >= 80)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_RNG)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_BST)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else
-        {
-            // Not BST or RNG, get base scan radius only!
-            PChar->loc.zone->WideScan(PChar, 150);
-        }
-    }
-    return;
+    PChar->loc.zone->WideScan(PChar, charutils::getWideScanRange(PChar));
 }
 
 /************************************************************************
@@ -5469,7 +5309,23 @@ void SmallPacket0x0F5(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 {
     uint16 TargID = data.ref<uint16>(0x04);
 
-    PChar->PWideScanTarget = PChar->GetEntity(TargID, TYPE_MOB | TYPE_NPC);
+    CBaseEntity* target = PChar->GetEntity(TargID, TYPE_MOB | TYPE_NPC);
+    if (target == nullptr)
+    {
+        // Target not found
+        PChar->PWideScanTarget = nullptr;
+        return;
+    }
+
+    uint16 widescanRange = charutils::getWideScanRange(PChar);
+    float dist = distance(PChar->loc.p, target->loc.p);
+
+    // Only allow players to track targets that are actually scannable, and within their wide scan range
+    if (target->isWideScannable() && dist <= widescanRange)
+    {
+        PChar->PWideScanTarget = target;
+    }
+
     return;
 }
 

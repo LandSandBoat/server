@@ -235,7 +235,8 @@ tpz.quest.id =
         FULLY_MENTAL_ALCHEMIST          = 88,
         SYNERGUSTIC_PURSUITS            = 89,
         THE_WONDROUS_WHATCHAMACALLIT    = 90,
-        TRUST_BASTOK                    = 91, -- ± --
+        SYNERGISTIC_SUPPORT             = 91,
+        TRUST_BASTOK                    = 92, -- ± --
     },
 
     -----------------------------------
