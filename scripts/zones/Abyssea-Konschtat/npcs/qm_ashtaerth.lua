@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm7 (???)
--- Spawns Bloodguzzler
--- !pos ? ? ? 15
+--  NPC: ???
+-- Spawns Ashtaerth the Gallvexed
+-- !pos 360.000 -16.043 -400.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
