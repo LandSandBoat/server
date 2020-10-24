@@ -28,7 +28,7 @@ class CCharEntity;
 class CRangeState : public CState
 {
 public:
-    CRangeState(CCharEntity* PEntity, uint16 targid);
+    CRangeState(CBattleEntity* PEntity, uint16 targid);
 
     void SpendCost();
     bool IsRapidShot() { return m_rapidShot; }
@@ -41,7 +41,7 @@ protected:
     bool CanUseRangedAttack(CBattleEntity* PTarget);
 
 private:
-    CCharEntity* const m_PEntity;
+    CBattleEntity* const m_PEntity;
     duration m_aimTime;
     bool m_rapidShot {false};
     position_t m_startPos;

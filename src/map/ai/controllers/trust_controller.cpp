@@ -33,6 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../packets/char.h"
 #include "../../recast_container.h"
 #include "../../mob_spell_container.h"
+#include "../../ai/states/range_state.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
@@ -141,7 +142,10 @@ void CTrustController::DoCombatTick(time_point tick)
             }
             case LONG_RANGE:
             {
-                PathOutToDistance(PTarget, 12.0f);
+                if (!TryRangedAttack(PTarget) && !POwner->PAI->IsCurrentState<CRangeState>())
+                {
+                    PathOutToDistance(PTarget, 12.0f);
+                }
                 break;
             }
             case MELEE_RANGE:
@@ -363,6 +367,18 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
     return false;
 }
 
+bool CTrustController::RangedAttack(uint16 targid)
+{
+    if (auto* PTrust = dynamic_cast<CTrustEntity*>(POwner))
+    {
+        if (PTrust->PAI->CanChangeState())
+        {
+            return PTrust->PAI->Internal_RangedAttack(targid);
+        }
+    }
+    return false;
+}
+
 bool CTrustController::Cast(uint16 targid, SpellID spellid)
 {
     FaceTarget(targid);
@@ -403,3 +419,16 @@ uint8 CTrustController::GetPartyPosition()
     }
     return 0;
 }
+
+bool CTrustController::TryRangedAttack(CBattleEntity* PTarget)
+{
+    if (m_Tick - m_LastRangedAttackTime > 5s)
+    {
+        FaceTarget(PTarget->targid);
+        RangedAttack(PTarget->targid);
+        m_LastRangedAttackTime = m_Tick;
+        return true;
+    }
+    return false;
+}
+

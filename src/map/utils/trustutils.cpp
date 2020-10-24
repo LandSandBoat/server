@@ -320,9 +320,16 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     auto adjustedDamage = baseDamage * damageMultiplier;
     auto finalDamage = std::max(adjustedDamage, 1.0f);
     ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage(static_cast<uint16>(finalDamage));
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_RANGED])->setDamage(static_cast<uint16>(finalDamage));
 
     ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDelay((trustData->cmbDelay * 1000) / 60);
     ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_RANGED])->setDelay((trustData->cmbDelay * 1000) / 60);
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_RANGED])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_AMMO])->setDelay((trustData->cmbDelay * 1000) / 60);
+    ((CItemWeapon*)PTrust->m_Weapons[SLOT_AMMO])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
 
     // Spell lists
     auto spellList = mobSpellList::GetMobSpellList(trustData->spellList);

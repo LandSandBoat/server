@@ -46,6 +46,8 @@ public:
     bool Ability(uint16 targid, uint16 abilityid) override;
     bool Cast(uint16 targid, SpellID spellid) override;
 
+    bool RangedAttack(uint16 targid);
+
     static constexpr float RoamDistance = { 2.0f };
     static constexpr float SpawnDistance = { 3.0f };
     static constexpr float CastingDistance = { 15.0f };
@@ -64,6 +66,8 @@ private:
 
     uint8 GetPartyPosition();
 
+    bool TryRangedAttack(CBattleEntity* PTarget);
+
     CBattleEntity* m_LastTopEnmity;
 
     time_point m_LastRepositionTime;
@@ -74,6 +78,8 @@ private:
     time_point m_LastHealTickTime;
     std::vector<std::chrono::seconds> m_tickDelays = { 15s, 10s, 10s, 3s };
     std::size_t m_NumHealingTicks = { 0 };
+
+    time_point m_LastRangedAttackTime;
 };
 
 #endif // _TRUSTCONTROLLER

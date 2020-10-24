@@ -4908,19 +4908,22 @@ namespace battleutils
     *   Get the Snapshot shot time reduction                                *
     *                                                                       *
     ************************************************************************/
-    int16 GetSnapshotReduction(CCharEntity* m_PChar, int16 delay)
+    int16 GetSnapshotReduction(CBattleEntity* battleEntity, int16 delay)
     {
-        auto SnapShotReductionPercent {m_PChar->getMod(Mod::SNAP_SHOT)};
+        auto SnapShotReductionPercent {battleEntity->getMod(Mod::SNAP_SHOT)};
 
-        if (charutils::hasTrait(m_PChar, TRAIT_SNAPSHOT))
+        if (auto PChar = dynamic_cast<CCharEntity*>(battleEntity))
         {
-            SnapShotReductionPercent += m_PChar->PMeritPoints->GetMeritValue(MERIT_SNAPSHOT, m_PChar);
+            if (charutils::hasTrait(PChar, TRAIT_SNAPSHOT))
+            {
+                SnapShotReductionPercent += PChar->PMeritPoints->GetMeritValue(MERIT_SNAPSHOT, PChar);
+            }
         }
 
         // Reduction from velocity shot mod
-        if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
+        if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
         {
-            SnapShotReductionPercent += m_PChar->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
+            SnapShotReductionPercent += battleEntity->getMod(Mod::VELOCITY_SNAPSHOT_BONUS);
         }
 
         return (int16)(delay * (100 - SnapShotReductionPercent) / 100.f);

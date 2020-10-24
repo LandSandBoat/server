@@ -35,6 +35,12 @@ enum TRUST_MOVEMENT_TYPE
 };
 
 class CCharEntity;
+class CAbilityState;
+class CRangeState;
+class CDespawnState;
+class CMagicState;
+class CMobSkillState;
+class CWeaponSkillState;
 
 class CTrustEntity : public CMobEntity
 {
@@ -47,6 +53,7 @@ public:
     void Die() override;
     void Spawn() override;
     void OnAbility(CAbilityState&, action_t&) override;
+    void OnRangedAttack(CRangeState&, action_t&);
     bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void OnDespawn(CDespawnState&) override;
 
