@@ -1,9 +1,10 @@
 -----------------------------------
 -- Flyers for Regine
 -----------------------------------
-require("scripts/globals/zone")
-require("scripts/globals/quests")
 require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
+require("scripts/globals/zone")
 -----------------------------------
 
 quests = quests or {}
@@ -70,7 +71,7 @@ quests.flyers_for_regine.onRegionEnter = function(player, region)
             for k, v in pairs(data) do
                 if v.region == regionId then
                     local mask = player:getCharVar('[ffr]deliveryMask')
-                    local alreadyDelivered = bit.band(mask, 2^k) ~= 0
+                    local alreadyDelivered = utils.mask.getBit(mask, k)
 
                     if not alreadyDelivered then
                         local ID = zones[zoneId]
@@ -89,7 +90,7 @@ quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
         local zoneId = player:getZoneID()
         local ID = zones[zoneId]
         local mask = player:getCharVar('[ffr]deliveryMask')
-        local alreadyDelivered = bit.band(mask, 2^ffrId) ~= 0
+        local alreadyDelivered = utils.mask.getBit(mask, ffrId)
 
         if alreadyDelivered then
             player:messageSpecial(ID.text.FLYER_ALREADY)
@@ -98,7 +99,7 @@ quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
 
             player:messageSpecial(ID.text.FLYER_ACCEPTED)
             player:showText(npc, ID.text['FFR_' .. string.upper(data.npc)])
-            player:setCharVar('[ffr]deliveryMask', bit.bor(mask, 2^ffrId))
+            player:setCharVar('[ffr]deliveryMask', utils.mask.setBit(mask, ffrId, true))
             player:confirmTrade()
         end
     end

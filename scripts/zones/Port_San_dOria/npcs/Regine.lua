@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
 
@@ -32,7 +33,7 @@ function onTrigger(player, npc)
     -- FLYERS FOR REGINE
     if ffr == QUEST_AVAILABLE then -- ready to accept quest
         player:startEvent(510, 2)
-    elseif ffr == QUEST_ACCEPTED and player:getCharVar('[ffr]deliveryMask') == 32767 then -- all flyers delivered
+    elseif ffr == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar('[ffr]deliveryMask'), 15) then -- all 15 flyers delivered
         player:startEvent(603)
     elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
         player:startEvent(510, 3)
