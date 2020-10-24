@@ -13,9 +13,9 @@ function onTrade(player, npc, trade)
         player:confirmTrade()
         player:startEvent(21 + offset) -- THUD!
 
-        -- toggle open/closed the four doors related to this hatch
-        local doorOffset = ID.npc.DOOR_OFFSET + math.min(offset, 2) * 4
-        for i = doorOffset, doorOffset + 3 do
+        -- trading to any hatch toggles all doors zone-wide
+        local doorOffset = ID.npc.DOOR_OFFSET
+        for i = doorOffset, doorOffset + 11 do
             local door = GetNPCByID(i)
             door:setAnimation((door:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.CLOSE_DOOR or tpz.anim.OPEN_DOOR)
         end
