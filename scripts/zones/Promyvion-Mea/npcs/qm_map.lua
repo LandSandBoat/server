@@ -4,6 +4,7 @@
 -- TODO: QM moves every 20-30 minutes. need retail cap of all possible positions
 -- known positions include:
 -- !pos 280.001 -2.328 280.000 20
+-- !pos 239.998 -2.329 120.000 20
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/globals/keyitems")
