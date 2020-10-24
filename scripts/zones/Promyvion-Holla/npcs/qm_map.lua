@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: Promyvion holla
 --  NPC: ??? (map acquisition)
+-- TODO: QM moves every 20-30 minutes. need retail cap of all possible positions
+-- known positions include:
 -- !pos -35.988 -2.325 -196.000 16
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Holla/IDs")

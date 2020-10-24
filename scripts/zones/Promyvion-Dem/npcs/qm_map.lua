@@ -1,7 +1,10 @@
 -----------------------------------
 -- Area: Promyvion Dem
--- ??? map acquisition
--- NPC ID 16834577
+--  NPC: ??? (map acquisition)
+-- TODO: QM moves every 20-30 minutes. need retail cap of all possible positions
+-- known positions include:
+-- !pos 319.996 -2.330 -80.000 18
+-- !pos 159.998 -2.327 0.000 18
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Dem/IDs")
 require("scripts/globals/keyitems")

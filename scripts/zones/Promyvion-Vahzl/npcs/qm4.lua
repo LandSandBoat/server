@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Promyvion-Vahzl
---  NPC: ??? (qm4)
--- Notes: Map Acquisition Floor 3
--- NPC ID: 16867714
+--  NPC: ??? (map acquisition)
+-- TODO: QM moves every 20-30 minutes. need retail cap of all possible positions
+-- known positions include:
+-- !pos 252.000 -2.326 -119.994 22
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/npc_util")

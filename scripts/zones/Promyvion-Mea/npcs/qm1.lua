@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Promyvion Mea
--- ??? map acquisition
--- NPC ID 16859468
+--  NPC: ??? (map acquisition)
+-- TODO: QM moves every 20-30 minutes. need retail cap of all possible positions
+-- known positions include:
+-- !pos 280.001 -2.328 280.000 20
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/globals/keyitems")
