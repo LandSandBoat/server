@@ -29,7 +29,7 @@ g_mixins.clear_doom = function(mob)
             for name, player in pairs(players) do
                 if mob:checkDistance(player) < 30 then
                     if player:delStatusEffectSilent(tpz.effect.DOOM) then
-                        player:messageBasic(tpz.msg.basic.NARROWLY_ESCAPE)
+                        player:messagePublic(tpz.msg.basic.NARROWLY_ESCAPE, player)
                     end
                 end
             end
