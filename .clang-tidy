@@ -14,6 +14,7 @@ Checks: >
   -readability-magic-numbers,
   -readability-convert-member-functions-to-static,
   -readability-implicit-bool-conversion,
+  -readability-uppercase-literal-suffix,
   modernize-*,
   -modernize-use-trailing-return-type,
   performance-*,
