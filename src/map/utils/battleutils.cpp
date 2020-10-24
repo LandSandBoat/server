@@ -1345,6 +1345,14 @@ namespace battleutils
         {
             acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
         }
+        else if (PAttacker->objtype == TYPE_TRUST)
+        {
+            auto archery_acc = PAttacker->RACC(SKILL_ARCHERY);
+            auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP);
+            auto throwing_acc = PAttacker->RACC(SKILL_THROWING);
+
+            acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
+        }
         // Check for Yonin evasion bonus while in front of target
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
         {

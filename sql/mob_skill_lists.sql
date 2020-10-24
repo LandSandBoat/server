@@ -3544,7 +3544,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat',1048,1034); -- Asuran Fists (
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cid',1052,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gilgamesh',1053,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Areuhat',1054,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3487); -- Sidewinder (Semih Lafihna)
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3488); -- Arching Arrow (Semih Lafihna)
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3489); -- Lux Arrow
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3490); -- Stellar Arrow
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
