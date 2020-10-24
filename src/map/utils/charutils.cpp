@@ -5164,4 +5164,77 @@ namespace charutils
         return 0;
     }
 
+    uint16 getWideScanRange(JOBTYPE job, uint8 level)
+    {
+        // Set Widescan range
+        // Distances need verified, based current values off what we had in traits.sql and data at http://wiki.ffxiclopedia.org/wiki/Wide_Scan
+        // NOTE: Widescan was formerly piggy backed onto traits (resist slow) but is not a real trait, any attempt to give it a trait will place a dot on
+        // characters trait menu.
+
+        // Limit to BST and RNG, and try to use old distance values for tiers
+        if (job == JOB_RNG)
+        {
+            // Range for RNG >=80 needs verification.
+            if (level >= 80)
+            {
+                return 350;
+            }
+            else if (level >= 60)
+            {
+                return 300;
+            }
+            else if (level >= 40)
+            {
+                return 250;
+            }
+            else if (level >= 20)
+            {
+                return 200;
+            }
+            else
+            {
+                return 150;
+            }
+        }
+        else if (job == JOB_BST)
+        {
+            if (level >= 80)
+            {
+                return 300;
+            }
+            else if (level >= 60)
+            {
+                return 250;
+            }
+            else if (level >= 40)
+            {
+                return 200;
+            }
+            else if (level >= 20 || map_config.all_jobs_widescan == 1)
+            {
+                return 150;
+            }
+            else
+            {
+                return 50;
+            }
+        }
+
+        // Default to base widescan if not RNG or BST
+        if (map_config.all_jobs_widescan == 1)
+        {
+            return 150;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    uint16 getWideScanRange(CCharEntity* PChar)
+    {
+        // Get maximum widescan range from main job or sub job
+        return std::max(getWideScanRange(PChar->GetMJob(), PChar->GetMLevel()), getWideScanRange(PChar->GetSJob(), PChar->GetSLevel()));
+    }
+
 }; // namespace charutils
