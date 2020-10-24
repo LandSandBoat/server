@@ -7,7 +7,7 @@ require("scripts/globals/zone")
 
 -----------------------------------------------
 -- battlefields by zone
--- captured from client 2017-10-02
+-- captured from client 2020-10-24
 -----------------------------------------------
 
 --[[
@@ -143,6 +143,10 @@ local battlefields = {
      -- { 7, 1297,    0},   -- Central Apollyon II
     },
 
+    [54] = {                -- ARRAPAGO REEF
+     -- { 0,    ?,    0},   -- Lamia Reprisal
+    },
+
     [57] = {                -- TALACCA COVE
      -- { 0, 1088,    0},   -- Call to Arms (ISNM)
      -- { 1, 1089,    0},   -- Compliments to the Chef (ISNM)
@@ -152,12 +156,20 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Legacy of the Lost (HTMBF)
     },
 
+    [62] = {                -- HALVUNG
+     -- { 0,    ?,    0},   -- Halvung Invasion
+    },
+
     [64] = {                -- NAVUKGO EXECUTION CHAMBER
      -- { 0, 1120,    0},   -- Tough Nut to Crack (ISNM)
      -- { 1, 1121,    0},   -- Happy Caster (ISNM)
      -- { 2, 1122,    0},   -- Omens (Quest)
         { 3, 1123, 2333},   -- Achieving True Power (PUP LB5)
         { 4, 1124,    0},   -- Shield of Diplomacy (TOAU22)
+    },
+
+    [65] = {                -- MAMOOK
+     -- { 0,    ?,    0},   -- Mamook Incursion
     },
 
     [67] = {                -- JADE SEPULCHER
@@ -171,6 +183,24 @@ local battlefields = {
 
     [78] = {                -- HAZHALM TESTING GROUNDS
      -- { 0, 1184,    0},   -- The Rider Cometh (Quest)
+    },
+
+    [85] = {                -- LA VAULE [S]
+     -- { 0,    ?,    0},   -- Splitting Heirs (S)
+     -- { 1,    ?,    0},   -- Purple, The New Black
+     -- { 2,    ?,    0},   -- The Blood-bathed Crown
+    },
+
+    [92] = {                -- BEADEAUX [S]
+     -- { 0,    ?,    0},   -- Cracking Shells (B)
+     -- { 1,    ?,    0},   -- The Buried God
+    },
+
+    [99] = {                -- CASTLE OZTROJA [S]
+     -- { 0,    ?,    0},   -- Plucking Wings (W)
+     -- { 1,    ?,    0},   -- A Malicious Manifest
+     -- { 2,    ?,    0},   -- Manifest Destiny
+     -- { 3,    ?,    0},   -- At Journey's End
     },
 
     [139] = {               -- HORLAIS PEAK
@@ -198,6 +228,10 @@ local battlefields = {
      -- {21,    ?, 4062},   -- *Tails of Woe (SKC10)
      -- {22,    ?, 4063},   -- *Dismemberment Brigade (SKC20)
      -- {23,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {24,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {26,    ?,    0},   -- Inv. from Excenmille
+     -- {27,    ?,    0},   -- Inv. from Excenmille and Co.
     },
 
     [140] = {               -- GHELSBA OUTPOST
@@ -235,6 +269,10 @@ local battlefields = {
      -- {22,    ?, 4062},   -- *The Worm's Tail (SKC10)
      -- {23,    ?, 4063},   -- *Grimshell Shocktroopers (SKC20)
      -- {24,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {26,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {27,    ?,    0},   -- Invitation from Naji
+     -- {28,    ?,    0},   -- Invitation from Naji and Co.
     },
 
     [146] = {               -- BALGA'S DIAS
@@ -262,6 +300,10 @@ local battlefields = {
      -- {21,    ?, 4062},   -- *Steamed Sprouts (SKC10)
      -- {22,    ?, 4063},   -- *Divine Punishers (SKC20)
      -- {23,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {24,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {26,    ?,    0},   -- Inv. from Kupipi
+     -- {27,    ?,    0},   -- Inv. from Kupipi and Co.
     },
 
     [156] = {               -- THRONE ROOM [S]
@@ -289,6 +331,8 @@ local battlefields = {
      -- { 4,  164,    0},   -- Smash! A Malevolent Menace (MKD14)
      -- { 5,    ?, 4063},   -- *Kindred Spirits (SKC20)
      -- { 6,    ?,    0},   -- *The Shadowlord Battle (HTMBF)
+     -- { 7,    ?,    0},   -- True Love
+     -- { 8,    ?,    0},   -- A Fond Farewell
     },
 
     [168] = {               -- CHAMBER OF ORACLES
@@ -323,6 +367,8 @@ local battlefields = {
      -- { 5,  261,    0},   -- Mercenary Camp (Mog Bonanza)
      -- { 6,  262,    0},   -- Ode of Life Bestowing (ACP11)
      -- { 7,    ?,    0},   -- *Return to Delkfutt's Tower (HTMBF)
+     -- { 8,    ?,    0},   -- True Love
+     -- { 9,    ?,    0},   -- A Fond Farewell
     },
 
     [180] = {               -- LALOFF AMPHITHEATER
