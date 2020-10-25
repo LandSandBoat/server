@@ -134,6 +134,7 @@ function onMobSpawn(mob)
                 for key, value in pairs(resistances) do
                     if value == lowest then
                         table.insert(breaths, key)
+                        break
                     end
                 end
             else
