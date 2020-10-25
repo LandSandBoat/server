@@ -2642,18 +2642,6 @@ namespace battleutils
             // so this is change to increase pDIF and not the qRatio
             int16 criticaldamage = PAttacker->getMod(Mod::CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
 
-            // Avatars get the Crit. Atk. Bonus II trait for a +8% crit damage increase
-            if (attackerType == TYPE_PET)
-            {
-                if (CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker))
-                {
-                    if (petEntity->getPetType() == PETTYPE_AVATAR)
-                    {
-                        criticaldamage += (uint16)8;
-                    }
-                }
-            }
-
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pDIF *= ((100 + criticaldamage) / 100.0f);
         }

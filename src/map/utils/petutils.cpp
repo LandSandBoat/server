@@ -1586,6 +1586,8 @@ namespace petutils
 
             PPet->setModifier(Mod::DMGPHYS, -50); //-50% PDT
 
+            PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); //Avatars have Crit Att Bonus II for +8 crit dmg
+
             if (PPet->GetMLevel() >= 70)
             {
                 PPet->setModifier(Mod::MATT, 32);

@@ -226,6 +226,8 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
         numHitsProcessed = 0
 
+        local critAttackBonus = 1 + ((avatar:getMod(tpz.mod.CRIT_DMG_INCREASE) - target:getMod(tpz.mod.CRIT_DEF_BONUS)) / 100)
+
         if firstHitLanded then
             local wRatio = cRatio
             local isCrit = math.random() < critRate
@@ -237,10 +239,11 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
             --Final pDif is qRatio randomized with a 1-1.05 multiplier
             local pDif = qRatio * (1 + (math.random() * 0.05))
-            --Avatars have Crit Atk Bonus II for +8% crit dmg
+
             if isCrit then
-                pDif = pDif * 1.08
+                pDif = pDif * critAttackBonus
             end
+            
             finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
             numHitsProcessed = 1
         end
@@ -251,16 +254,16 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
             if isCrit then
                 wRatio = wRatio + 1
             end
-            
             -- get a random ratio from min and max
             local qRatio = getRandRatio(wRatio)
 
             --Final pDif is qRatio randomized with a 1-1.05 multiplier
             local pDif = qRatio * (1 + (math.random() * 0.05))
-            --Avatars have Crit Atk Bonus II for +8% crit dmg
+            
             if isCrit then
-                pDif = pDif * 1.08
+                pDif = pDif * critAttackBonus
             end
+
             finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
         end
