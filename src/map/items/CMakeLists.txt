@@ -24,7 +24,7 @@ set(SOURCES
     item.cpp
     item.h)
 
-add_library(items OBJECT ${SOURCES})
+add_library(items STATIC ${SOURCES})
 
 target_link_libraries(items
     PUBLIC

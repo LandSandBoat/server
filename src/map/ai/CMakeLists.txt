@@ -12,6 +12,11 @@ add_library(ai STATIC
 target_link_libraries(ai
     PUBLIC
     common
+    entities
+    items
+    lua
+    packets
+    utils
     ai_controllers
     ai_helpers
     ai_states

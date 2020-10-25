@@ -16,7 +16,7 @@ set(SOURCES
     trustentity.cpp
     trustentity.h)
 
-add_library(entities OBJECT ${SOURCES})
+add_library(entities STATIC ${SOURCES})
 
 target_link_libraries(entities
     PUBLIC

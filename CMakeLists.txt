@@ -14,6 +14,7 @@ include(CompilerWarnings)
 include(Sanitizers)
 include(ClangTidy)
 
+message(STATUS "CMAKE_VERSION: ${CMAKE_VERSION}")
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
