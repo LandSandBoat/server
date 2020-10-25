@@ -1,50 +1,39 @@
-cmake_minimum_required(VERSION 3.9)
-project(topaz)
+set(SOURCES
+    data_loader.cpp
+    data_loader.h
+    search.cpp
+    search.h
+    tcp_request.cpp
+    tcp_request.h)
 
-add_definitions(
-    -DDEBUGLOGSEARCH
-)
-
-file(GLOB_RECURSE GENERATED_SOURCES CONFIGURE_DEPENDS *.cpp)
+add_subdirectory(packets)
 
 if(UNIX)
     set(resource "")
 else()
-    set(resource "../../win32/vcxproj/searchserver.rc")
+    set(resource "${CMAKE_SOURCE_DIR}/res/searchserver.rc")
 endif()
 
 add_executable(topaz_search
-    ${GENERATED_SOURCES}
-    ../common/blowfish.cpp
-    ../common/md52.cpp
-    ../common/showmsg.cpp
-    ../common/sql.cpp
-    ../common/taskmgr.cpp
-    ../common/timer.cpp
-    ../common/utils.cpp
-    ${resource}
+    ${SOURCES}
+    $<TARGET_OBJECTS:search_packets>
+    ${resource})
+
+if(WIN32)
+    set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
+endif()
+
+target_compile_definitions(
+    topaz_search
+    PUBLIC
+    -DDEBUGLOGSEARCH
+    -DDEFINE_OWN_MAIN
 )
 
-set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
+target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 
-if(UNIX)
-    target_include_directories(topaz_search PRIVATE
-        ${MYSQLCLIENT_INCLUDE_DIRS}
-    )
-
-    target_link_libraries(topaz_search
-        ${MYSQLCLIENT_LIBRARIES}
-        ${ZMQ_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
-    )
-else()
-    target_include_directories(topaz_search PRIVATE
-        ../common
-        ../../win32/external
-        ../../win32/external/mysql
-    )
-    target_link_libraries(topaz_search
-        libmariadb${platform_suffix}
-        WS2_32
-    )
-endif()
+target_link_libraries(topaz_search
+    common
+    project_options
+    #project_warnings
+)

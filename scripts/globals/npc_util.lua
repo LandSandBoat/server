@@ -353,6 +353,8 @@ function npcUtil.completeQuest(player, area, quest, params)
     -- key item(s), fame, gil, bayld, xp, and title
     if params["ki"] ~= nil then
         npcUtil.giveKeyItem(player, params["ki"])
+    elseif params["keyItem"] ~= nil then
+        npcUtil.giveKeyItem(player, params["keyItem"])
     end
 
     if params["fame"] == nil then
