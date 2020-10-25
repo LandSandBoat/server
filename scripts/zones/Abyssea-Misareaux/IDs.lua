@@ -26,6 +26,8 @@ zones[tpz.zone.ABYSSEA_MISAREAUX] =
     {
         QM_POPS =
         {
+            -- TODO: the first item, e.g. 'qm1', is unused and will be meaningless once I (Wren) finish entity-QC on all Abyssea zones.
+            -- When that is done, I will rewrite Abyssea global and adjust and neaten this table
             --  [17662556] = { 'qm1',      {3085},                                                                                     {}, 17662464}, -- Minax Bugard
             --  [17662557] = { 'qm2',      {3086},                                                                                     {}, 17662465}, -- Sirrush
             --  [17662558] = { 'qm3',      {3087},                                                                                     {}, 17662466}, -- Funeral Apkallu
