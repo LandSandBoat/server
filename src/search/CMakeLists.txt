@@ -16,7 +16,6 @@ endif()
 
 add_executable(topaz_search
     ${SOURCES}
-    $<TARGET_OBJECTS:search_packets>
     ${resource})
 
 if(WIN32)
@@ -34,6 +33,7 @@ target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 
 target_link_libraries(topaz_search
     common
+    search_packets
     project_options
     #project_warnings
 )
