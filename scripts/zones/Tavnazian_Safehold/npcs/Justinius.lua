@@ -18,14 +18,22 @@ function onTrigger(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
+    -- COP 2-3
     if copCurrentMission == copMissions.DISTANT_BELIEFS and copMissionStatus == 3 then
         player:startEvent(113)
+    -- COP 2-4
     elseif copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
         player:startEvent(127) -- optional dialogue
+    -- COP 4-1
     elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
         player:startEvent(109)
-    elseif copCurrentMission == copMissions.THE_SAVAGE and copMissionStatus == 2 then
-        player:startEvent(110)
+    -- COP 4-2
+    elseif copCurrentMission == copMissions.THE_SAVAGE then
+        if copMissionStatus == 2 then
+            player:startEvent(110) -- finish mission
+        else
+            player:startEvent(130) -- optional dialogue
+        end
     else
         player:startEvent(123)
     end

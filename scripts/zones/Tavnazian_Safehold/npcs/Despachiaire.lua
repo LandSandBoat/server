@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+-- TO DO: Quest giver for "X Marks the Spot" which requires COP 2-5 Ancient Vows completed
 
 function onTrade(player, npc, trade)
 end
@@ -23,6 +24,8 @@ function onTrigger(player, npc)
         player:startEvent(118)
     elseif (currentCOPMission  == tpz.mission.id.cop.THREE_PATHS and LouverancePathStatut == 1 ) then
         player:startEvent(134)
+    elseif player:getCurrentMission(COP) > tpz.mission.id.cop.DARKNESS_NAMED then
+        player:startEvent(315) -- new default dialogue "Jeuno offered its help"; might be earlier 
     else
         player:startEvent(106)
     end
