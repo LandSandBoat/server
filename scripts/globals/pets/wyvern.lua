@@ -125,7 +125,8 @@ function onMobSpawn(mob)
                     tpz.jobAbility.LIGHTNING_BREATH,
                     tpz.jobAbility.HYDRO_BREATH,
                 }
-                local resistances = {
+                local resistances =
+                {
                     target:getMod(tpz.mod.FIRERES),
                     target:getMod(tpz.mod.ICERES),
                     target:getMod(tpz.mod.WINDRES),
