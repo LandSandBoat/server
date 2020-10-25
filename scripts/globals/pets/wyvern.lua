@@ -116,27 +116,32 @@ function onMobSpawn(mob)
                 weaknessTargetChance = 100
             end
             if math.random(100) <= weaknessTargetChance then
-                local resistances =
+                local breathList =
                 {
-                    [tpz.jobAbility.FLAME_BREATH] = target:getMod(tpz.mod.FIRERES),
-                    [tpz.jobAbility.FROST_BREATH] = target:getMod(tpz.mod.ICERES),
-                    [tpz.jobAbility.GUST_BREATH] = target:getMod(tpz.mod.WINDRES),
-                    [tpz.jobAbility.SAND_BREATH] = target:getMod(tpz.mod.EARTHRES),
-                    [tpz.jobAbility.LIGHTNING_BREATH] = target:getMod(tpz.mod.THUNDERRES),
-                    [tpz.jobAbility.HYDRO_BREATH] = target:getMod(tpz.mod.WATERRES)
+                    tpz.jobAbility.FLAME_BREATH,
+                    tpz.jobAbility.FROST_BREATH,
+                    tpz.jobAbility.GUST_BREATH,
+                    tpz.jobAbility.SAND_BREATH,
+                    tpz.jobAbility.LIGHTNING_BREATH,
+                    tpz.jobAbility.HYDRO_BREATH,
                 }
-                local lowest = resistances[tpz.jobAbility.FLAME_BREATH]
-                for key, value in pairs(resistances) do
-                    if value < lowest then
-                        lowest = value
+                local resistances = {
+                    target:getMod(tpz.mod.FIRERES),
+                    target:getMod(tpz.mod.ICERES),
+                    target:getMod(tpz.mod.WINDRES),
+                    target:getMod(tpz.mod.EARTHRES),
+                    target:getMod(tpz.mod.THUNDERRES),
+                    target:getMod(tpz.mod.WATERRES),
+                }
+                local lowest = resistances[1]
+                local breath = breathList[1]
+                for i, v in ipairs(breathList) do
+                    if resistances[i] < lowest then
+                        lowest = resistances[i]
+                        breath = v
                     end
                 end
-                for key, value in pairs(resistances) do
-                    if value == lowest then
-                        table.insert(breaths, key)
-                        break
-                    end
-                end
+                table.insert(breaths, breath)
             else
                 breaths =
                 {
