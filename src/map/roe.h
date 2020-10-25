@@ -28,6 +28,7 @@
 #include <array>
 #include <bitset>
 #include <vector>
+#include <variant>
 
 #include "../common/cbasetypes.h"
 #include "ai/helpers/event_handler.h"
@@ -48,6 +49,11 @@ enum ROE_EVENT
     ROE_DMGTAKEN = 5,
     ROE_DMGDEALT = 6,
     ROE_EXPGAIN = 7,
+    ROE_HEALALLY = 8,
+    ROE_BUFFALLY = 9,
+    ROE_LEVELUP = 10,
+    ROE_QUEST_COMPLETE = 11,
+    ROE_MISSION_COMPLETE = 12,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
@@ -59,6 +65,7 @@ struct RoeSystemData
     RecordTimetable_W TimedRecordTable;
     std::bitset<4096> ImplementedRecords;
     std::bitset<4096> RepeatableRecords;
+    std::bitset<4096> RetroactiveRecords;
     std::bitset<4096> DailyRecords;
     std::vector<uint16> DailyRecordIDs;
     std::bitset<4096> TimedRecords;
@@ -77,32 +84,16 @@ struct RoeCheckHandler
 
 extern std::array<RoeCheckHandler, ROE_NONE> RoeHandlers;
 
-enum class RoeDatagramPayload
-{
-    mob,
-    uinteger,
-};
+typedef std::variant<uint32, CMobEntity*, std::string> RoeDatagramPayload;
 
 struct RoeDatagram
 {
-    RoeDatagramPayload type;
     std::string luaKey;
-    union data {
-        uint32 uinteger;
-        CMobEntity* mobEntity;
-        CItem* item;
-    } data;
+    RoeDatagramPayload data;
 
-    RoeDatagram(std::string param, uint32 id) : luaKey{param}
-    {
-        this->type = RoeDatagramPayload::uinteger;
-        this->data.uinteger = id;
-    }
-    RoeDatagram(std::string param, CMobEntity* PMob) : luaKey{param}
-    {
-        this->type = RoeDatagramPayload::mob;
-        this->data.mobEntity = PMob;
-    }
+    RoeDatagram(std::string param, uint32 payload) : luaKey{param}, data{payload} {}
+    RoeDatagram(std::string param, CMobEntity* payload) : luaKey{param}, data{payload} {}
+    RoeDatagram(std::string param, std::string payload) : luaKey{param}, data{payload} {}
 };
 
 typedef std::vector<RoeDatagram> RoeDatagramList;
@@ -127,6 +118,8 @@ bool   SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 pro
 uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID);
 
 void   onCharLoad(CCharEntity* PChar);
+bool   onRecordClaim(CCharEntity* PChar, uint16 recordID);
+void   onRecordTake(CCharEntity* PChar, uint16 recordID);
 
 void   ClearDailyRecords(CCharEntity* PChar);
 void   CycleDailyRecords();

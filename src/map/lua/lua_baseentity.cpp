@@ -6470,6 +6470,7 @@ inline int32 CLuaBaseEntity::completeQuest(lua_State *L)
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_CURRENT));
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, questLogID, LOG_QUEST_COMPLETE));
             charutils::SaveQuestsList(PChar);
+            roeutils::event(ROE_QUEST_COMPLETE, PChar, RoeDatagramList{});
         }
     }
     else
@@ -6685,6 +6686,7 @@ inline int32 CLuaBaseEntity::completeMission(lua_State *L)
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
 
             charutils::SaveMissionsList(PChar);
+            roeutils::event(ROE_MISSION_COMPLETE, PChar, RoeDatagramList{});
         }
     }
     else

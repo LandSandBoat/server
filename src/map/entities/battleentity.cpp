@@ -533,6 +533,7 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACKTYPE attackType /* = ATTACK_NONE*/, DAMAGETYPE damageType /* = DAMAGE_NONE*/)
 {
     PLastAttacker = attacker;
+    this->BattleHistory.lastHitTaken_atkType = attackType;
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
 
     //RoE Damage Taken Trigger
@@ -1441,6 +1442,21 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         if (PTarget->objtype == TYPE_MOB && msg != MSGBASIC_SHADOW_ABSORB) // If message isn't the shadow loss message, because I had to move this outside of the above check for it.
         {
             luautils::OnMagicHit(this, PTarget, PSpell);
+        }
+
+        if (this == PTarget || // Casting on self or ally
+            (this->PParty && PTarget->PParty &&
+            ((this->PParty == PTarget->PParty) || (this->PParty->m_PAlliance && this->PParty->m_PAlliance == PTarget->PParty->m_PAlliance))))
+        {
+            if (PSpell->isHeal())
+            {
+                roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
+            }
+            else if (this != PTarget && PSpell->isBuff() && actionTarget.param)
+            {
+                roeutils::event(ROE_BUFFALLY, static_cast<CCharEntity*>(this), RoeDatagramList{});
+            }
+
         }
     }
     if ((!(PSpell->isHeal()) || PSpell->tookEffect()) && PActionTarget->isAlive())
