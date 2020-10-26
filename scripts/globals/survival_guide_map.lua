@@ -8,10 +8,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^0,
         groupIndex = 1,
-        posX = -451,
-        posY = -19,
-        posZ = -217,
-        posRot = 64
+        posX = -451.4,
+        posY = -19.75,
+        posZ = -218,
+        posRot = 128
     },
     [11] =
     {
@@ -19,10 +19,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^1,
         groupIndex = 2,
-        posX = 138,
-        posY = -7,
+        posX = 137.9,
+        posY = -7.5,
         posZ = 97,
-        posRot = 64
+        posRot = 162
     },
     [16] =
     {
@@ -30,10 +30,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^2,
         groupIndex = 3,
-        posX = 62,
+        posX = 62.99,
         posY = 0,
-        posZ = -12,
-        posRot = 64
+        posZ = -12.75,
+        posRot = 65
     },
     [20] =
     {
@@ -41,10 +41,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^3,
         groupIndex = 4,
-        posX = -582,
+        posX = -581.84,
         posY = 40,
-        posZ = 52,
-        posRot = 64
+        posZ = 53.14,
+        posRot = 96
     },
     [24] =
     {
@@ -52,10 +52,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^4,
         groupIndex = 5,
-        posX = 467,
+        posX = 466.06,
         posY = 24,
-        posZ = 410,
-        posRot = 64
+        posZ = 410.91,
+        posRot = 32
     },
     [28] =
     {
@@ -63,10 +63,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^5,
         groupIndex = 6,
-        posX = -13,
+        posX = -14.75,
         posY = -12,
-        posZ = 315,
-        posRot = 64
+        posZ = 315.75,
+        posRot = 0
     },
     [33] =
     {
@@ -74,9 +74,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^6,
         groupIndex = 7,
-        posX = -487,
+        posX = -485.74,
         posY = -32,
-        posZ = 47,
+        posZ = 47.32,
         posRot = 64
     },
     [40] =
@@ -85,10 +85,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^7,
         groupIndex = 8,
-        posX = -28,
+        posX = -28.92,
         posY = -59,
-        posZ = -125,
-        posRot = 64
+        posZ = -124.07,
+        posRot = 32
     },
     [42] =
     {
@@ -96,10 +96,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^8,
         groupIndex = 9,
-        posX = 204,
-        posY = -24,
-        posZ = -203,
-        posRot = 64
+        posX = 203.98,
+        posY = -24.27,
+        posZ = -204.31,
+        posRot = 192
     },
     [44] =
     {
@@ -107,9 +107,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^9,
         groupIndex = 10,
-        posX = -252,
-        posY = -20,
-        posZ = 297,
+        posX = -251.98,
+        posY = -19.96,
+        posZ = 298.21,
         posRot = 64
     },
     [36] =
@@ -118,10 +118,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^10,
         groupIndex = 11,
-        posX = -297,
-        posY = 16,
-        posZ = 423,
-        posRot = 64
+        posX = -297.76,
+        posY = 17,
+        posZ = 422.22,
+        posRot = 224
     },
     [47] =
     {
@@ -129,9 +129,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^11,
         groupIndex = 12,
-        posX = -45,
-        posY = 0,
-        posZ = -151,
+        posX = -44.98,
+        posY = 0.27,
+        posZ = -149.86,
         posRot = 64
     },
     [50] =
@@ -140,10 +140,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^12,
         groupIndex = 13,
-        posX = -260,
-        posY = 8.5,
+        posX = -258.88,
+        posY = 8.6,
         posZ = -265,
-        posRot = 64
+        posRot = 128
     },
     [53] =
     {
@@ -151,10 +151,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^13,
         groupIndex = 14,
-        posX = -188,
-        posY = 8,
+        posX = -186.67,
+        posY = 7.9,
         posZ = -67,
-        posRot = 64
+        posRot = 128
     },
     [57] =
     {
@@ -162,9 +162,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^14,
         groupIndex = 15,
-        posX = -240,
+        posX = -239.51,
         posY = 0,
-        posZ = -404,
+        posZ = -402.77,
         posRot = 64
     },
     [61] =
@@ -173,10 +173,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^15,
         groupIndex = 16,
-        posX = 197,
+        posX = 197.82,
         posY = 0,
-        posZ = -81,
-        posRot = 64
+        posZ = -81.82,
+        posRot = 160
     },
     [66] =
     {
@@ -185,9 +185,9 @@ survivalGuides =
         groupMask = 2^16,
         groupIndex = 17,
         posX = -554,
-        posY = -6,
-        posZ = -56,
-        posRot = 64
+        posY = -6.2,
+        posZ = -57.11,
+        posRot = 192
     },
     [64] =
     {
@@ -195,10 +195,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^17,
         groupIndex = 18,
-        posX = 13,
-        posY = -54,
-        posZ = -593,
-        posRot = 64
+        posX = 12.99,
+        posY = -54.16,
+        posZ = -594.21,
+        posRot = 192
     },
     [65] =
     {
@@ -206,10 +206,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^18,
         groupIndex = 19,
-        posX = -260,
+        posX = -260.78,
         posY = 8,
-        posZ = -55,
-        posRot = 64
+        posZ = -54,
+        posRot = 128
     },
     [8] =
     {
@@ -217,10 +217,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^19,
         groupIndex = 20,
-        posX = -13,
-        posY = 0,
-        posZ = 25,
-        posRot = 64
+        posX = -12.88,
+        posY = 0.1,
+        posZ = 25.45,
+        posRot = 0
     },
     [29] =
     {
@@ -228,10 +228,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^20,
         groupIndex = 21,
-        posX = -308,
+        posX = -308.25,
         posY = 15,
-        posZ = 262,
-        posRot = 64
+        posZ = 260.78,
+        posRot = 192
     },
     [19] =
     {
@@ -239,10 +239,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^21,
         groupIndex = 22,
-        posX = 418,
-        posY = -52,
-        posZ = -99,
-        posRot = 64
+        posX = 419.21,
+        posY = -52.25,
+        posZ = -99.5,
+        posRot = 128
     },
     [27] =
     {
@@ -251,8 +251,8 @@ survivalGuides =
         groupMask = 2^22,
         groupIndex = 23,
         posX = 364,
-        posY = -32,
-        posZ = -23,
+        posY = -32.2,
+        posZ = -22.03,
         posRot = 64
     },
     [39] =
@@ -261,10 +261,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^23,
         groupIndex = 24,
-        posX = -383,
+        posX = -381.75,
         posY = -6,
-        posZ = 363,
-        posRot = 64
+        posZ = 363.5,
+        posRot = 128
     },
     [0] =
     {
@@ -272,10 +272,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^24,
         groupIndex = 25,
-        posX = -175,
+        posX = -175.21,
         posY = -4,
         posZ = 80,
-        posRot = 64
+        posRot = 0
     },
     [1] =
     {
@@ -283,10 +283,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^25,
         groupIndex = 26,
-        posX = 18,
+        posX = 18.82,
         posY = 0,
         posZ = -115,
-        posRot = 64
+        posRot = 0
     },
     [2] =
     {
@@ -294,9 +294,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^26,
         groupIndex = 27,
-        posX = -219,
-        posY = -8,
-        posZ = 179,
+        posX = -220,
+        posY = -8.09,
+        posZ = 180.15,
         posRot = 64
     },
     [3] =
@@ -305,10 +305,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^27,
         groupIndex = 28,
-        posX = 44,
+        posX = 44.25,
         posY = 10,
-        posZ = -68,
-        posRot = 64
+        posZ = -69,
+        posRot = 128
     },
     [10] =
     {
@@ -316,10 +316,10 @@ survivalGuides =
         group = 1,
         groupMask = 2^28,
         groupIndex = 29,
-        posX = 773,
+        posX = 774.35,
         posY = 29,
-        posZ = -18,
-        posRot = 64
+        posZ = -18.57,
+        posRot = 224
     },
     [17] =
     {
@@ -328,9 +328,9 @@ survivalGuides =
         groupMask = 2^29,
         groupIndex = 30,
         posX = -67,
-        posY = -2,
-        posZ = 449,
-        posRot = 64
+        posY = -1.7,
+        posZ = 448.25,
+        posRot = 192
     },
     [12] =
     {
@@ -339,9 +339,9 @@ survivalGuides =
         groupMask = 2^30,
         groupIndex = 31,
         posX = -223,
-        posY = 71,
-        posZ = 827,
-        posRot = 64
+        posY = 71.07,
+        posZ = 828,
+        posRot = 32
     },
     [25] =
     {
@@ -349,9 +349,9 @@ survivalGuides =
         group = 1,
         groupMask = 2^31,
         groupIndex = 32,
-        posX = -227,
-        posY = 4,
-        posZ = 386,
+        posX = -227.97,
+        posY = 4.54,
+        posZ = 386.94,
         posRot = 64
     },
     [32] =
@@ -361,9 +361,9 @@ survivalGuides =
         groupMask = 2^0,
         groupIndex = 1,
         posX = -160,
-        posY = 47,
-        posZ = 648,
-        posRot = 64
+        posY = 47.25,
+        posZ = 647.11,
+        posRot = 192
     },
     [37] =
     {
@@ -371,10 +371,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^1,
         groupIndex = 2,
-        posX = 344,
-        posY = 5,
-        posZ = -256,
-        posRot = 64
+        posX = 344.83,
+        posY = 6.22,
+        posZ = -255.3,
+        posRot = 96
     },
     [7] =
     {
@@ -382,10 +382,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^2,
         groupIndex = 3,
-        posX = -142,
-        posY = -20,
-        posZ = 7,
-        posRot = 64
+        posX = -142.24,
+        posY = -19.93,
+        posZ = 7.75,
+        posRot = 96
     },
     [26] =
     {
@@ -393,10 +393,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^3,
         groupIndex = 4,
-        posX = -264,
-        posY = 1,
-        posZ = 107,
-        posRot = 64
+        posX = -263.99,
+        posY = 1.59,
+        posZ = 105.86,
+        posRot = 192
     },
     [18] =
     {
@@ -404,10 +404,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^4,
         groupIndex = 5,
-        posX = 222,
+        posX = 221.75,
         posY = -1,
-        posZ = -9,
-        posRot = 64
+        posZ = -10,
+        posRot = 0
     },
     [38] =
     {
@@ -416,9 +416,9 @@ survivalGuides =
         groupMask = 2^5,
         groupIndex = 6,
         posX = -221,
-        posY = 0,
-        posZ = -13,
-        posRot = 64
+        posY = 0.25,
+        posZ = -14.25,
+        posRot = 192
     },
     [43] =
     {
@@ -427,8 +427,8 @@ survivalGuides =
         groupMask = 2^6,
         groupIndex = 7,
         posX = 372,
-        posY = -12,
-        posZ = -25,
+        posY = -12.05,
+        posZ = -23.85,
         posRot = 64
     },
     [41] =
@@ -437,10 +437,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^7,
         groupIndex = 8,
-        posX = -146,
-        posY = 4,
-        posZ = -298,
-        posRot = 64
+        posX = -145.24,
+        posY = 4.37,
+        posZ = -298.79,
+        posRot = 160
     },
     [46] =
     {
@@ -448,10 +448,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^8,
         groupIndex = 9,
-        posX = 464,
+        posX = 462.73,
         posY = 0,
         posZ = -51,
-        posRot = 64
+        posRot = 0
     },
     [9] =
     {
@@ -459,10 +459,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^9,
         groupIndex = 10,
-        posX = -120,
+        posX = -120.23,
         posY = 0,
-        posZ = 248,
-        posRot = 64
+        posZ = 248.57,
+        posRot = 0
     },
     [23] =
     {
@@ -470,10 +470,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^10,
         groupIndex = 11,
-        posX = -24,
-        posY = 0,
-        posZ = 1,
-        posRot = 64
+        posX = -23.16,
+        posY = 0.35,
+        posZ = 0.15,
+        posRot = 160
     },
     [30] =
     {
@@ -481,10 +481,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^11,
         groupIndex = 12,
-        posX = 453,
+        posX = 452.94,
         posY = -8,
-        posZ = 182,
-        posRot = 64
+        posZ = 181.07,
+        posRot = 192
     },
     [13] =
     {
@@ -492,10 +492,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^12,
         groupIndex = 13,
-        posX = -103.1,
+        posX = -102.91,
         posY = 0.1,
-        posZ = 633,
-        posRot = 64
+        posZ = 632.9,
+        posRot = 128
     },
     [14] =
     {
@@ -503,10 +503,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^13,
         groupIndex = 14,
-        posX = 59,
-        posY = -68,
-        posZ = -267,
-        posRot = 64
+        posX = 59.91,
+        posY = -67.93,
+        posZ = -267.18,
+        posRot = 192
     },
     [34] =
     {
@@ -514,10 +514,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^14,
         groupIndex = 15,
-        posX = -338,
-        posY = -12,
+        posX = -338.99,
+        posY = -12.21,
         posZ = -179,
-        posRot = 64
+        posRot = 0
     },
     [48] =
     {
@@ -525,10 +525,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^15,
         groupIndex = 16,
-        posX = 15,
-        posY = -28,
-        posZ = 53,
-        posRot = 64
+        posX = 13.75,
+        posY = -28.25,
+        posZ = 54.04,
+        posRot = 32
     },
     [51] =
     {
@@ -536,10 +536,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^16,
         groupIndex = 17,
-        posX = 420,
-        posY = -3,
-        posZ = 11,
-        posRot = 64
+        posX = 419.33,
+        posY = -3.12,
+        posZ = 11.68,
+        posRot = 32
     },
     [62] =
     {
@@ -547,9 +547,9 @@ survivalGuides =
         group = 2,
         groupMask = 2^17,
         groupIndex = 18,
-        posX = 60,
+        posX = 60.01,
         posY = -8,
-        posZ = 57,
+        posZ = 58.19,
         posRot = 64
     },
     [22] =
@@ -558,10 +558,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^18,
         groupIndex = 19,
-        posX = -463,
-        posY = -10,
-        posZ = -23,
-        posRot = 64
+        posX = -463.82,
+        posY = -10.08,
+        posZ = -22.2,
+        posRot = 32
     },
     [55] =
     {
@@ -569,10 +569,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^19,
         groupIndex = 20,
-        posX = -16,
-        posY = -20,
+        posX = -16.84,
+        posY = -20.47,
         posZ = -237,
-        posRot = 64
+        posRot = 0
     },
     [58] =
     {
@@ -580,10 +580,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^20,
         groupIndex = 21,
-        posX = 223,
-        posY = -24,
-        posZ = 335,
-        posRot = 64
+        posX = 223.97,
+        posY = -23.71,
+        posZ = 334.99,
+        posRot = 128
     },
     [56] =
     {
@@ -591,10 +591,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^21,
         groupIndex = 22,
-        posX = 296,
-        posY = -40,
-        posZ = 64,
-        posRot = 64
+        posX = 296.68,
+        posY = -40.42,
+        posZ = 64.68,
+        posRot = 96
     },
     [35] =
     {
@@ -602,10 +602,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^22,
         groupIndex = 23,
-        posX = -63,
-        posY = -20,
-        posZ = -280,
-        posRot = 64
+        posX = -62.3,
+        posY = -20.1,
+        posZ = -280.69,
+        posRot = 160
     },
     [15] =
     {
@@ -613,10 +613,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^23,
         groupIndex = 24,
-        posX = 225,
+        posX = 224.99,
         posY = -2,
-        posZ = -528,
-        posRot = 64
+        posZ = -529.26,
+        posRot = 192
     },
     [31] =
     {
@@ -624,10 +624,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^24,
         groupIndex = 25,
-        posX = 494,
-        posY = -3,
-        posZ = 729,
-        posRot = 64
+        posX = 493.72,
+        posY = -3.04,
+        posZ = 728.05,
+        posRot = 0
     },
     [67] =
     {
@@ -635,9 +635,9 @@ survivalGuides =
         group = 2,
         groupMask = 2^25,
         groupIndex = 26,
-        posX = -61,
-        posY = -30,
-        posZ = 261,
+        posX = -60.98,
+        posY = -29.96,
+        posZ = 262.22,
         posRot = 64
     },
     [68] =
@@ -646,10 +646,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^26,
         groupIndex = 27,
-        posX = 252,
+        posX = 253.18,
         posY = 0,
-        posZ = -266,
-        posRot = 64
+        posZ = -266.02,
+        posRot = 128
     },
     [69] =
     {
@@ -657,9 +657,9 @@ survivalGuides =
         group = 2,
         groupMask = 2^27,
         groupIndex = 28,
-        posX = -220,
+        posX = -219.99,
         posY = -12,
-        posZ = 57,
+        posZ = 58.27,
         posRot = 64
     },
     [70] =
@@ -668,9 +668,9 @@ survivalGuides =
         group = 2,
         groupMask = 2^28,
         groupIndex = 29,
-        posX = -839,
+        posX = -838.97,
         posY = -20,
-        posZ = 98,
+        posZ = 99.19,
         posRot = 64
     },
     [71] =
@@ -679,10 +679,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^29,
         groupIndex = 30,
-        posX = 218,
-        posY = -24,
-        posZ = -104,
-        posRot = 64
+        posX = 217.16,
+        posY = -23.84,
+        posZ = -103.14,
+        posRot = 32
     },
     [72] =
     {
@@ -690,10 +690,10 @@ survivalGuides =
         group = 2,
         groupMask = 2^30,
         groupIndex = 31,
-        posX = 4,
-        posY = 20,
-        posZ = -90,
-        posRot = 64
+        posX = 5,
+        posY = 20.67,
+        posZ = -89.98,
+        posRot = 128
     },
     [78] =
     {
@@ -701,9 +701,9 @@ survivalGuides =
         group = 2,
         groupMask = 2^31,
         groupIndex = 32,
-        posX = 662,
-        posY = -19,
-        posZ = -597,
+        posX = 662.02,
+        posY = -18.96,
+        posZ = -595.91,
         posRot = 64
     },
     [79] =
@@ -712,9 +712,9 @@ survivalGuides =
         group = 3,
         groupMask = 2^0,
         groupIndex = 1,
-        posX = -194,
-        posY = -7,
-        posZ = -495,
+        posX = -193.97,
+        posY = -7.75,
+        posZ = -493.8,
         posRot = 64
     },
     [85] =
@@ -723,10 +723,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^1,
         groupIndex = 2,
-        posX = -521,
-        posY = -32,
-        posZ = 207,
-        posRot = 64
+        posX = -521.01,
+        posY = -32.36,
+        posZ = 205.91,
+        posRot = 192
     },
     [80] =
     {
@@ -735,9 +735,9 @@ survivalGuides =
         groupMask = 2^2,
         groupIndex = 3,
         posX = -404,
-        posY = -16,
-        posZ = -163,
-        posRot = 64
+        posY = -16.02,
+        posZ = -164.28,
+        posRot = 192
     },
     [83] =
     {
@@ -746,9 +746,9 @@ survivalGuides =
         groupMask = 2^3,
         groupIndex = 4,
         posX = -289,
-        posY = 39,
-        posZ = 532,
-        posRot = 64
+        posY = 38.64,
+        posZ = 531.99,
+        posRot = 192
     },
     [84] =
     {
@@ -757,8 +757,8 @@ survivalGuides =
         groupMask = 2^4,
         groupIndex = 5,
         posX = 794,
-        posY = 71,
-        posZ = 772,
+        posY = 71.48,
+        posZ = 773.16,
         posRot = 64
     },
     [86] =
@@ -767,10 +767,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^5,
         groupIndex = 6,
-        posX = 549,
+        posX = 547.8,
         posY = 25,
         posZ = -341,
-        posRot = 64
+        posRot = 0
     },
     [87] =
     {
@@ -778,10 +778,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^6,
         groupIndex = 7,
-        posX = -37,
-        posY = 0,
-        posZ = -866,
-        posRot = 64
+        posX = -38,
+        posY = 0.5,
+        posZ = -866.97,
+        posRot = 224
     },
     [90] =
     {
@@ -790,9 +790,9 @@ survivalGuides =
         groupMask = 2^7,
         groupIndex = 8,
         posX = 83,
-        posY = -24,
-        posZ = 566,
-        posRot = 64
+        posY = -24.65,
+        posZ = 566.09,
+        posRot = 192
     },
     [91] =
     {
@@ -800,10 +800,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^8,
         groupIndex = 9,
-        posX = 126,
-        posY = -21,
-        posZ = 606,
-        posRot = 64
+        posX = 125.37,
+        posY = -20.91,
+        posZ = 605.38,
+        posRot = 224
     },
     [92] =
     {
@@ -811,10 +811,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^9,
         groupIndex = 10,
-        posX = 734,
-        posY = -33,
+        posX = 732.9,
+        posY = -33.5,
         posZ = -10,
-        posRot = 64
+        posRot = 0
     },
     [93] =
     {
@@ -822,10 +822,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^10,
         groupIndex = 11,
-        posX = 476,
-        posY = -8,
-        posZ = -437,
-        posRot = 64
+        posX = 475.97,
+        posY = -8.04,
+        posZ = -438.29,
+        posRot = 192
     },
     [95] =
     {
@@ -833,10 +833,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^11,
         groupIndex = 12,
-        posX = -144,
-        posY = -80,
-        posZ = 234,
-        posRot = 64
+        posX = -144.01,
+        posY = -80.13,
+        posZ = 232.59,
+        posRot = 192
     },
     [96] =
     {
@@ -845,8 +845,8 @@ survivalGuides =
         groupMask = 2^12,
         groupIndex = 13,
         posX = 372,
-        posY = -12,
-        posZ = -24,
+        posY = -12.05,
+        posZ = -23.78,
         posRot = 64
     },
     [94] =
@@ -855,10 +855,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^13,
         groupIndex = 14,
-        posX = -303,
-        posY = -6,
-        posZ = 127,
-        posRot = 64
+        posX = -301.8,
+        posY = -6.08,
+        posZ = 127.37,
+        posRot = 128
     },
     [88] =
     {
@@ -866,9 +866,9 @@ survivalGuides =
         group = 3,
         groupMask = 2^14,
         groupIndex = 15,
-        posX = 364,
-        posY = -32,
-        posZ = -22,
+        posX = 363.99,
+        posY = -32.2,
+        posZ = -22.07,
         posRot = 64
     },
     [81] =
@@ -877,10 +877,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^15,
         groupIndex = 16,
-        posX = 418,
-        posY = -52,
-        posZ = -99,
-        posRot = 64
+        posX = 419.29,
+        posY = -52.25,
+        posZ = -99.41,
+        posRot = 128
     },
     [59] =
     {
@@ -888,10 +888,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^16,
         groupIndex = 17,
-        posX = -41,
+        posX = -41.21,
         posY = -10,
         posZ = -93,
-        posRot = 64
+        posRot = 0
     },
     [60] =
     {
@@ -899,10 +899,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^17,
         groupIndex = 18,
-        posX = -13,
-        posY = 1,
-        posZ = -34,
-        posRot = 64
+        posX = -13.84,
+        posY = 1.1,
+        posZ = -33.14,
+        posRot = 32
     },
     [52] =
     {
@@ -910,9 +910,9 @@ survivalGuides =
         group = 3,
         groupMask = 2^18,
         groupIndex = 19,
-        posX = -3.5,
-        posY = -2.6,
-        posZ = -95,
+        posX = -3.41,
+        posY = -2.7,
+        posZ = -93.6,
         posRot = 64
     },
     [4] =
@@ -921,9 +921,9 @@ survivalGuides =
         group = 3,
         groupMask = 2^19,
         groupIndex = 20,
-        posX = -5,
-        posY = -28,
-        posZ = 103,
+        posX = -4.99,
+        posY = -28.08,
+        posZ = 103.1,
         posRot = 64
     },
     [5] =
@@ -932,10 +932,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^20,
         groupIndex = 21,
-        posX = 134,
+        posX = 133.13,
         posY = 0,
-        posZ = 17,
-        posRot = 64
+        posZ = 16.17,
+        posRot = 224
     },
     [74] =
     {
@@ -943,10 +943,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^21,
         groupIndex = 22,
-        posX = -20,
+        posX = -18.8,
         posY = 0,
-        posZ = -33,
-        posRot = 64
+        posZ = -33.01,
+        posRot = 128
     },
     [77] =
     {
@@ -954,9 +954,9 @@ survivalGuides =
         group = 3,
         groupMask = 2^22,
         groupIndex = 23,
-        posX = 82,
+        posX = 82.02,
         posY = 1,
-        posZ = -68,
+        posZ = -66.79,
         posRot = 64
     },
     [82] =
@@ -965,10 +965,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^23,
         groupIndex = 24,
-        posX = -247,
+        posX = -246.17,
         posY = 0,
-        posZ = 95,
-        posRot = 64
+        posZ = 94.13,
+        posRot = 160
     },
     [89] =
     {
@@ -976,10 +976,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^24,
         groupIndex = 25,
-        posX = -57,
-        posY = -6,
-        posZ = 216,
-        posRot = 64
+        posX = -57.08,
+        posY = -5.71,
+        posZ = 215.99,
+        posRot = 128
     },
     [76] =
     {
@@ -988,8 +988,8 @@ survivalGuides =
         groupMask = 2^25,
         groupIndex = 26,
         posX = -660,
-        posY = -13,
-        posZ = 343,
+        posY = -13.36,
+        posZ = 342.78,
         posRot = 64
     },
     [75] =
@@ -998,10 +998,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^26,
         groupIndex = 27,
-        posX = 475,
-        posY = -15.8,
+        posX = 475.97,
+        posY = -15.64,
         posZ = -20,
-        posRot = 64
+        posRot = 128
     },
     [73] =
     {
@@ -1009,10 +1009,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^27,
         groupIndex = 28,
-        posX = 503,
-        posY = -0.2,
-        posZ = 242,
-        posRot = 64
+        posX = 503.23,
+        posY = -0.17,
+        posZ = 241.76,
+        posRot = 32
     },
     [45] =
     {
@@ -1020,10 +1020,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^28,
         groupIndex = 29,
-        posX = 336.5,
-        posY = 26,
-        posZ = -74,
-        posRot = 64
+        posX = 337.41,
+        posY = 26.63,
+        posZ = -73.95,
+        posRot = 128
     },
     [49] =
     {
@@ -1031,10 +1031,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^29,
         groupIndex = 30,
-        posX = -60,
-        posY = -1,
-        posZ = -30,
-        posRot = 64
+        posX = -60.33,
+        posY = -1.17,
+        posZ = -33.69,
+        posRot = 160
     },
     [54] =
     {
@@ -1042,10 +1042,10 @@ survivalGuides =
         group = 3,
         groupMask = 2^30,
         groupIndex = 31,
-        posX = -162,
-        posY = -8,
-        posZ = 23,
-        posRot = 64
+        posX = -163.3,
+        posY = -8.29,
+        posZ = 23.04,
+        posRot = 0
     },
     [63] =
     {
@@ -1054,9 +1054,9 @@ survivalGuides =
         groupMask = 2^31,
         groupIndex = 32,
         posX = 89,
-        posY = 0,
-        posZ = -297,
-        posRot = 64
+        posY = 0.32,
+        posZ = -298.11,
+        posRot = 192
     },
     [21] =
     {
@@ -1064,10 +1064,10 @@ survivalGuides =
         group = 4,
         groupMask = 2^0,
         groupIndex = 1,
-        posX = -10,
+        posX = -10.05,
         posY = 0,
-        posZ = 7,
-        posRot = 64
+        posZ = 5.81,
+        posRot = 192
     },
     [97] =
     {
@@ -1075,9 +1075,9 @@ survivalGuides =
         group = 4,
         groupMask = 2^1,
         groupIndex = 2,
-        posX = -52.7,
-        posY = 0.1,
-        posZ = -116.7,
+        posX = -53.5,
+        posY = 0.15,
+        posZ = -116.93,
         posRot = 64
     }
 }
