@@ -5252,4 +5252,10 @@ namespace charutils
         auto timeLimitSeconds = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(dur).count());
         SendTimerPacket(PChar, timeLimitSeconds);
     }
+
+    void SendClearTimerPacket(CCharEntity* PChar)
+    {
+        auto timerPacket = new CTimerBarUtilPacket();
+        PChar->pushPacket(timerPacket);
+    }
 }; // namespace charutils

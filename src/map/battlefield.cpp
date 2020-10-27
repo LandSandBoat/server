@@ -446,7 +446,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             }
             luautils::OnBattlefieldLeave(PChar, this, leavecode);
         }
-        charutils::SendTimerPacket(PChar, 0);
+        charutils::SendClearTimerPacket(PChar);
     }
     else
     {
