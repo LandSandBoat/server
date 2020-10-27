@@ -36,11 +36,16 @@ set(SOURCES
     zoneutils.cpp
     zoneutils.h)
 
-add_library(utils OBJECT ${SOURCES})
+add_library(utils STATIC ${SOURCES})
 
 target_link_libraries(utils
     PUBLIC
     common
+    ai
+    entities
+    items
+    lua
+    packets
     project_options
     #project_warnings
 )

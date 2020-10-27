@@ -26,7 +26,7 @@ set(SOURCES
     luautils.cpp
     luautils.h)
 
-add_library(lua OBJECT ${SOURCES})
+add_library(lua STATIC ${SOURCES})
 
 target_link_libraries(lua
     PUBLIC

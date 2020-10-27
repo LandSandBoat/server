@@ -61,6 +61,9 @@ void CTrustController::Despawn()
 
 void CTrustController::Tick(time_point tick)
 {
+    TracyZoneScoped;
+    TracyZoneIString(POwner->GetName());
+
     m_Tick = tick;
 
     if (!POwner->PMaster)
@@ -85,6 +88,7 @@ void CTrustController::Tick(time_point tick)
 
 void CTrustController::DoCombatTick(time_point tick)
 {
+    TracyZoneScoped;
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
@@ -185,6 +189,8 @@ void CTrustController::DoCombatTick(time_point tick)
 
 void CTrustController::DoRoamTick(time_point tick)
 {
+    TracyZoneScoped;
+
     auto PMaster = static_cast<CCharEntity*>(POwner->PMaster);
     auto masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
     bool masterMeleeSwing = masterLastAttackTime > server_clock::now() - 1s;
@@ -259,6 +265,7 @@ void CTrustController::DoRoamTick(time_point tick)
 
 void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 {
+    TracyZoneScoped;
     uint8 currentPartyPos = GetPartyPosition();
     for (auto POtherTrust : PMaster->PTrusts)
     {
@@ -266,7 +273,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
         {
             auto diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
             auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos = 
+            position_t new_pos =
             {
                 POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
                 PTarget->loc.p.y,
@@ -286,6 +293,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 
 void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 {
+    TracyZoneScoped;
     float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
     position_t target_position = POwner->loc.p;
 
@@ -374,6 +382,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
 
 CBattleEntity* CTrustController::GetTopEnmity()
 {
+    TracyZoneScoped;
     CBattleEntity* PEntity = nullptr;
     if (auto PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
     {

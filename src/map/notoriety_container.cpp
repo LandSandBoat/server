@@ -53,6 +53,7 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
 
 bool CNotorietyContainer::hasEnmity()
 {
+    TracyZoneScoped;
     // Make sure the container is up to date before reporting
     if (!m_Lookup.empty())
     {

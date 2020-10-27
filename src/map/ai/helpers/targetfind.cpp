@@ -69,6 +69,7 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 flags)
 
 void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags)
 {
+    TracyZoneScoped;
     m_findFlags = flags;
     m_radius = radius;
     m_zone = m_PBattleEntity->getZone();
@@ -224,6 +225,7 @@ void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
 
 void CTargetFind::addAllInZone(CBattleEntity* PTarget, bool withPet)
 {
+    TracyZoneScoped;
 	zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar){
 		if (PChar){
 			addEntity(PChar, withPet);

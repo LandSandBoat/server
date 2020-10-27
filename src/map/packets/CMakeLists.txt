@@ -231,7 +231,7 @@ set(SOURCES
     zone_visited.cpp
     zone_visited.h)
 
-add_library(packets OBJECT ${SOURCES})
+add_library(packets STATIC ${SOURCES})
 
 target_link_libraries(packets
     PUBLIC

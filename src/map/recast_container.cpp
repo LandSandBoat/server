@@ -259,6 +259,7 @@ bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
 
 void CRecastContainer::Check()
 {
+    TracyZoneScoped;
     for (auto type : {RECAST_MAGIC, RECAST_ABILITY})
     {
         RecastList_t* PRecastList = GetRecastList(type);

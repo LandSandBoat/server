@@ -12,4 +12,4 @@ set(SOURCES
     search_list.cpp
     search_list.h)
 
-add_library(search_packets OBJECT ${SOURCES})
+add_library(search_packets STATIC ${SOURCES})

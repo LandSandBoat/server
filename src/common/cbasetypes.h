@@ -48,4 +48,6 @@ using server_clock = std::chrono::system_clock;
 using time_point = server_clock::time_point;
 using duration = server_clock::duration;
 
+#include "tracy.h"
+
 #endif /* _CBASETYPES_H_ */
