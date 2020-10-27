@@ -1489,6 +1489,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 {
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    TracyZoneScoped;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1509,6 +1510,7 @@ void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 
 void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 {
+    TracyZoneScoped;
     CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_POwner);
     AURATARGET auraTarget = static_cast<AURATARGET>(PStatusEffect->GetTier());
 
@@ -1566,6 +1568,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
 void CStatusEffectContainer::TickEffects(time_point tick)
 {
+    TracyZoneScoped;
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())
@@ -1596,6 +1599,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
 
 void CStatusEffectContainer::TickRegen(time_point tick)
 {
+    TracyZoneScoped;
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())

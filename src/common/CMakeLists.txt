@@ -44,3 +44,6 @@ target_link_libraries(
   # project_warnings
   )
  
+if(TRACY_ENABLE)
+    target_link_libraries(common PUBLIC tracy_client)
+endif(TRACY_ENABLE)

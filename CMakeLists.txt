@@ -13,6 +13,7 @@ include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
 include(ClangTidy)
+include(Tracy)
 
 message(STATUS "CMAKE_VERSION: ${CMAKE_VERSION}")
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")

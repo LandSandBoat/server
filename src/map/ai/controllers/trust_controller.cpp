@@ -55,6 +55,9 @@ void CTrustController::Despawn()
 
 void CTrustController::Tick(time_point tick)
 {
+    TracyZoneScoped;
+    TracyZoneIString(POwner->GetName());
+
     m_Tick = tick;
 
     if (POwner->PAI->IsEngaged())
@@ -69,6 +72,7 @@ void CTrustController::Tick(time_point tick)
 
 void CTrustController::DoCombatTick(time_point tick)
 {
+    TracyZoneScoped;
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
@@ -98,6 +102,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
 void CTrustController::DoRoamTick(time_point tick)
 {
+    TracyZoneScoped;
     if (POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Engage(POwner->PMaster->GetBattleTargetID());

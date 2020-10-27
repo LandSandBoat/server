@@ -66,7 +66,7 @@ if(MSVC)
 endif()
 
 if(UNIX)
-
+    link_libraries(dl)
 endif()
 
 # TODO: These should be applied on a per-target level, not globally like this!

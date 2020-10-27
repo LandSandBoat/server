@@ -71,6 +71,7 @@ void TOTDChange(TIMETYPE TOTD)
 
 void InitializeWeather()
 {
+    TracyZoneScoped;
     for (auto PZone : g_PZoneList)
     {
         if (!PZone.second->IsWeatherStatic())
@@ -627,6 +628,7 @@ CZone* CreateZone(uint16 ZoneID)
 
 void LoadZoneList()
 {
+    TracyZoneScoped;
     g_PTrigger = new CNpcEntity();  // нужно в конструкторе CNpcEntity задавать модель по умолчанию
 
     std::vector<uint16> zones;
