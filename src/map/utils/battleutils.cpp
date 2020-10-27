@@ -4068,6 +4068,7 @@ namespace battleutils
 
     void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
+        TracyZoneScoped;
         if (PDefender->objtype == TYPE_MOB)
         {
             CBattleEntity* original = PAttacker;

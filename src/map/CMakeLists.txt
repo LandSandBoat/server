@@ -145,6 +145,10 @@ target_link_libraries(topaz_game
     #project_warnings
 )
 
+if(TRACY_ENABLE)
+    target_link_libraries(topaz_game PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 if(APPLE)
     link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
 endif()

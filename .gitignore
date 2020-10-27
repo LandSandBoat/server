@@ -197,3 +197,6 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
+
+# Tracy download
+tracy/
