@@ -25144,7 +25144,7 @@ INSERT INTO `item_mods` VALUES (20707,122,10);    -- Blue Magic skill +10
 INSERT INTO `item_mods` VALUES (20707,369,5);     -- "Refresh"+1
 INSERT INTO `item_mods` VALUES (20711,25,15); -- Blurred Sword - 15 Acc
 INSERT INTO `item_mods` VALUES (20712,25,20); -- Blurred Sword +1 - 20 Acc
-INSERT INTO `item_mods` VALUES (20714,356,227); -- ExcalipoorII: Knights of Rotund
+INSERT INTO `item_mods` VALUES (20714,355,227); -- ExcalipoorII: Knights of Rotund
 INSERT INTO `item_mods` VALUES (20715,25,15);     -- Acclimator (iLvl 119): Accuracy +15
 INSERT INTO `item_mods` VALUES (20715,30,15);     -- Magic Accuracy +15
 INSERT INTO `item_mods` VALUES (20715,175,10);    -- Skillchain Bonus +10%
