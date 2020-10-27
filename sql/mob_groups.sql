@@ -11031,7 +11031,7 @@ INSERT INTO `mob_groups` VALUES (5,1003,174,'Dervos_Ghost',0,128,0,0,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (6,1609,174,'Gizerls_Ghost',0,128,0,0,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (7,3456,174,'Sand_Lizard',300,0,2153,0,0,61,64,0);
 INSERT INTO `mob_groups` VALUES (8,3375,174,'Robber_Crab',300,0,2110,0,0,60,63,0);
-INSERT INTO `mob_groups` VALUES (9,1900,174,'Haunt',300,0,1282,0,0,63,66,0);
+INSERT INTO `mob_groups` VALUES (9,1900,174,'Haunt',1200,0,1282,0,0,63,66,0);
 INSERT INTO `mob_groups` VALUES (10,668,174,'Cave_Worm',300,0,439,0,0,60,63,0);
 INSERT INTO `mob_groups` VALUES (11,1341,174,'Fire_Elemental',300,4,831,0,0,67,68,0);
 INSERT INTO `mob_groups` VALUES (12,71,174,'Air_Elemental',300,4,38,0,0,68,70,0);
