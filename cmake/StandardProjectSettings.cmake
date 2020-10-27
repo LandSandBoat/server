@@ -49,7 +49,8 @@ if(MSVC)
     if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL /SAFESEH:NO")
         list(APPEND FLAGS_AND_DEFINES
-            /ZI # Omit Default Library Name
+            # TODO: Restore old flag
+            # /ZI # Omit Default Library Name
             /GR # Enable RTTI
         )
     else()
