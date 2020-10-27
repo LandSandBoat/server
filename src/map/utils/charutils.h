@@ -52,7 +52,6 @@ enum class EMobDifficulty : uint8
 
 namespace charutils
 {
-
     void	LoadExpTable();
     void	LoadChar(CCharEntity* PChar);
     void    LoadSpells(CCharEntity* PChar);
@@ -206,6 +205,9 @@ namespace charutils
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
     uint16 getWideScanRange(CCharEntity* PChar);
+
+    void   SendTimerPacket(CCharEntity* PChar, uint32 seconds);
+    void   SendTimerPacket(CCharEntity* PChar, duration dur);
 };
 
-#endif
+#endif // _CHARUTILS_H

@@ -9855,7 +9855,7 @@ int32 CLuaBaseEntity::countdown(lua_State* L)
 
     auto seconds = static_cast<uint32>(lua_tonumber(L, 1));
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    auto packet = new CTimerBarUtilPacket(PChar);
+    auto packet = new CTimerBarUtilPacket();
 
     if (seconds)
     {

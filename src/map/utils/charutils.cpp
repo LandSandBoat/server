@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <stdio.h>
 #include <string.h>
 #include <array>
+#include <chrono>
 
 #include "../lua/luautils.h"
 
@@ -47,6 +48,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/char_stats.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
+#include "../packets/chat_message.h"
 #include "../packets/conquest_map.h"
 #include "../packets/delivery_box.h"
 #include "../packets/inventory_item.h"
@@ -61,9 +63,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
-#include "../packets/chat_message.h"
+
 #include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
+#include "../packets/timer_bar_util.h"
 
 #include "../ability.h"
 #include "../alliance.h"
@@ -5237,4 +5240,16 @@ namespace charutils
         return std::max(getWideScanRange(PChar->GetMJob(), PChar->GetMLevel()), getWideScanRange(PChar->GetSJob(), PChar->GetSLevel()));
     }
 
+    void sendTimerPacket(CCharEntity* PChar, uint32 seconds)
+    {
+        auto timerPacket = new CTimerBarUtilPacket();
+        timerPacket->addCountdown(seconds);
+        PChar->pushPacket(timerPacket);
+    }
+
+    void sendTimerPacket(CCharEntity* PChar, duration dur)
+    {
+        auto timeLimitSeconds = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(dur).count());
+        sendTimerPacket(PChar, timeLimitSeconds);
+    }
 }; // namespace charutils

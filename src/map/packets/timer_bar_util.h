@@ -7,12 +7,10 @@
 
 #include <string>
 
-class CCharEntity;
-
 class CTimerBarUtilPacket : public CBasicPacket
 {
 public:
-    CTimerBarUtilPacket(CCharEntity* PChar);
+    CTimerBarUtilPacket();
 
     void addCountdown(uint32 seconds);
     void addBar1(std::string name, uint8 value);
