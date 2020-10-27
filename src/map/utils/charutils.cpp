@@ -5240,16 +5240,16 @@ namespace charutils
         return std::max(getWideScanRange(PChar->GetMJob(), PChar->GetMLevel()), getWideScanRange(PChar->GetSJob(), PChar->GetSLevel()));
     }
 
-    void sendTimerPacket(CCharEntity* PChar, uint32 seconds)
+    void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
     {
         auto timerPacket = new CTimerBarUtilPacket();
         timerPacket->addCountdown(seconds);
         PChar->pushPacket(timerPacket);
     }
 
-    void sendTimerPacket(CCharEntity* PChar, duration dur)
+    void SendTimerPacket(CCharEntity* PChar, duration dur)
     {
         auto timeLimitSeconds = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(dur).count());
-        sendTimerPacket(PChar, timeLimitSeconds);
+        SendTimerPacket(PChar, timeLimitSeconds);
     }
 }; // namespace charutils
