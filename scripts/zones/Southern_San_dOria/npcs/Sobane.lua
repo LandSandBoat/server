@@ -45,9 +45,9 @@ function onTrigger(player, npc)
         elseif bloodProg >= 1 then
             player:startEvent(735)
         end
-    elseif blood == QUEST_COMPLETED and player:needToZone() then
+    elseif signedInBlood == QUEST_COMPLETED and player:needToZone() then
         player:startEvent(737)
-    elseif blood == QUEST_COMPLETED and teaWithATonberry == QUEST_AVAILABLE then
+    elseif signedInBlood == QUEST_COMPLETED and teaWithATonberry == QUEST_AVAILABLE then
         player:startEvent(738)
     elseif teaWithATonberry == QUEST_ACCEPTED then
         if player:getCharVar("TEA_WITH_A_TONBERRY_PROG") == 5 then
