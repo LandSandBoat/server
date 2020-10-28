@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-	teaProg = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
+	local teaProg = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
 
 	if teaProg == 3 then
 		player:messageSpecial(7920, 0, 1682)
