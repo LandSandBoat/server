@@ -51,7 +51,7 @@ function onTrigger(player, npc)
     elseif blood == QUEST_COMPLETED and teaWithATonberry == QUEST_AVAILABLE then
         player:startEvent(738)
     elseif teaWithATonberry == QUEST_ACCEPTED then
-        if teaProg == 4 then
+        if teaProg == 5 then
             player:startEvent(740)
         else
             player:startEvent(739)

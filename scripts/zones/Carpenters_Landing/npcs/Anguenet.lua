@@ -5,16 +5,14 @@
 -- !pos 214.672 -3.013 -527.561 2
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
+require("scripts/globals/npc_util")
 
 function onTrade(player, npc, trade)
-    local teaGinseng = player:getCharVar('TEA_WITH_A_TONBERRY_GINSENG')
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and teaGinseng == 1 then
-        if trade:getItemCount() == 1 and trade:hasItemQty(1683, 1) then
-            player:tradeComplete()
-            player:startEvent(29)
-        end
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
+            player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
+            npcUtil.tradeHas(trade, 1683) then
+        player:startEvent(29)
     end
-
 end
 
 function onTrigger(player, npc)
