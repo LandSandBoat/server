@@ -9,7 +9,7 @@ local removable = {
     tpz.effect.SILENCE,
     tpz.effect.BANE,
     tpz.effect.CURSE_II,
-    tpz.effect.CURSE,
+    tpz.effect.CURSE_I,
     tpz.effect.PARALYSIS,
     tpz.effect.PLAGUE,
     tpz.effect.POISON,

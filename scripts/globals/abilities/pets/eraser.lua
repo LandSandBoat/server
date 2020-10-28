@@ -21,7 +21,7 @@ function onPetAbility(target, automaton, skill, master, action)
         if target:delStatusEffect(tpz.effect.SILENCE) then return true end
         if target:delStatusEffect(tpz.effect.BANE) then return true end
         if target:delStatusEffect(tpz.effect.CURSE_II) then return true end
-        if target:delStatusEffect(tpz.effect.CURSE) then return true end
+        if target:delStatusEffect(tpz.effect.CURSE_I) then return true end
         if target:delStatusEffect(tpz.effect.PARALYSIS) then return true end
         if target:delStatusEffect(tpz.effect.PLAGUE) then return true end
         if target:delStatusEffect(tpz.effect.POISON) then return true end
