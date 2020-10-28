@@ -633,18 +633,18 @@ INSERT INTO `synth_recipes` VALUES (5508,0,0,115,70,0,0,0,0,0,0,4098,4240,1346,4
 -- INSERT INTO `synth_recipes` VALUES (9912,1,0,255,0,0,0,0,0,0,0,4100,4242,17523,0,0,0,0,0,0,0,651,711,711,711,1,1,1,1,'Quarterstaff (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9913,1,0,255,0,0,0,0,0,0,0,4100,4242,12290,0,0,0,0,0,0,0,708,650,708,708,1,1,2,2,'Maple Shield (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9914,1,0,255,0,0,0,0,0,0,0,4100,4242,17347,0,0,0,0,0,0,0,917,714,714,714,1,1,1,1,'Piccolo (desynth)');
--- INSERT INTO `synth_recipes` VALUES (9915,1,0,255,0,0,0,0,0,0,0,4100,4242,17590,0,0,0,0,0,0,0,771,771,771,771,1,1,1,1,'Primate Staff (desynth)');
+INSERT INTO `synth_recipes` VALUES (9915,1,0,99,0,0,0,0,0,0,0,4100,4242,17590,0,0,0,0,0,0,0,771,771,1228,1228,1,1,6,6,'Primate Staff (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9916,1,0,255,0,0,0,0,0,0,0,4100,4242,17101,0,0,0,0,0,0,0,720,720,720,720,2,2,2,2,'Mythic Pole (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9917,1,0,255,0,0,0,0,0,0,0,4100,4242,12359,0,0,0,0,0,0,0,1234,1234,1234,1234,4,6,6,6,'Hickory Shield (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9918,1,0,255,0,0,0,0,0,0,0,4100,4242,12292,0,0,0,0,0,0,0,717,717,651,651,1,2,1,1,'Mahogany Shield (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9919,1,0,255,0,0,0,0,0,0,0,4100,4242,17292,0,0,0,0,0,0,0,715,718,718,718,1,1,1,1,'Long Boomerang (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9920,1,0,255,0,0,0,0,0,0,0,4100,4242,17052,0,0,0,0,0,0,0,710,847,847,847,1,1,1,1,'Chestnut Wand (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9921,1,0,255,0,0,0,0,0,0,0,4100,4242,17388,0,0,0,0,0,0,0,707,820,820,820,1,1,1,1,'Fastwater F. Rod (desynth)');
--- INSERT INTO `synth_recipes` VALUES (9922,1,0,255,0,0,0,0,0,0,0,4100,4242,17219,0,0,0,0,0,0,0,932,717,1226,1226,1,1,6,6,'Arbalest (desynth)');
+INSERT INTO `synth_recipes` VALUES (9922,1,0,59,0,0,0,0,0,0,0,4100,4242,17219,0,0,0,0,0,0,0,932,717,1226,1226,1,1,4,6,'Arbalest (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9923,1,0,255,0,0,0,0,0,0,0,4100,4242,17100,0,0,0,0,0,0,0,719,719,719,719,1,1,2,2,'Ebony Pole (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9924,1,0,255,0,0,0,0,0,0,0,4100,4242,16839,0,0,0,0,0,0,0,715,822,1228,1228,1,1,6,6,'Partisan (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9925,1,0,255,0,0,0,0,0,0,0,4100,4242,17354,0,0,0,0,0,0,0,927,927,927,927,2,2,2,2,'Harp (desynth)');
--- INSERT INTO `synth_recipes` VALUES (9926,1,0,255,0,0,0,0,0,0,0,4100,4242,17348,0,0,0,0,0,0,0,917,716,716,716,1,1,1,1,'Traversiere (desynth)');
+INSERT INTO `synth_recipes` VALUES (9926,1,0,37,0,0,0,0,0,0,0,4100,4242,17348,0,0,0,0,0,0,0,917,917,716,716,1,1,1,1,'Traversiere (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9927,1,0,255,0,0,0,0,0,0,0,4100,4242,17117,0,0,0,0,0,0,0,714,788,788,788,1,1,1,1,'Hypno Staff (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9928,1,0,255,0,0,0,0,0,0,0,4100,4242,17218,0,0,0,0,0,0,0,927,716,716,716,1,1,1,1,'Zamburak (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9929,1,0,255,0,0,0,0,0,0,0,4100,4242,17170,0,0,0,0,0,0,0,712,816,816,816,1,3,3,3,'Speed Bow (desynth)');
@@ -668,7 +668,7 @@ INSERT INTO `synth_recipes` VALUES (5508,0,0,115,70,0,0,0,0,0,0,4098,4240,1346,4
 -- INSERT INTO `synth_recipes` VALUES (9947,1,0,255,0,0,0,0,0,0,0,4100,4242,12295,0,0,0,0,0,0,0,651,718,662,662,1,1,1,1,'Round Shield (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9948,1,0,255,0,0,0,0,0,0,0,4100,4242,17153,0,0,0,0,0,0,0,712,712,712,712,1,1,1,1,'Self Bow (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9949,1,0,255,0,0,0,0,0,0,0,4100,4242,17134,0,0,0,0,0,0,0,715,715,715,715,1,1,1,1,'Dolphin Staff (desynth)');
--- INSERT INTO `synth_recipes` VALUES (9950,1,0,255,0,0,0,0,0,0,0,4100,4242,17076,0,0,0,0,0,0,0,712,712,712,712,1,1,1,1,'Earth Wand (desynth)');
+INSERT INTO `synth_recipes` VALUES (9950,1,0,27,0,0,0,0,0,0,0,4100,4242,17076,0,0,0,0,0,0,0,712,712,712,712,1,1,1,1,'Earth Wand (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9951,1,0,255,0,0,0,0,0,0,0,4100,4242,17415,0,0,0,0,0,0,0,717,1226,1226,1226,1,6,6,6,'Shellbuster (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9952,1,0,255,0,0,0,0,0,0,0,4100,4242,17049,0,0,0,0,0,0,0,708,840,840,840,1,1,1,1,'Maple Wand (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (9953,1,0,255,0,0,0,0,0,0,0,4100,4242,17569,0,0,0,0,0,0,0,711,711,711,1229,1,1,2,6,'Iron-splitter (desynth)');
@@ -1296,7 +1296,7 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (15532,0,0,255,255,0,0,0,0,0,0,4096,4238,4077,4080,9246,16942,0,0,0,0,21656,21657,21657,21657,1,1,1,1,'Dyrnwyn');
 -- INSERT INTO `synth_recipes` VALUES (15533,0,1998,0,255,0,0,0,255,0,0,4102,4244,9005,9062,9249,9831,9844,9845,9845,9864,21582,21583,21584,21584,1,1,1,1,'Etoile Knife');
 -- INSERT INTO `synth_recipes` VALUES (19901,1,0,0,255,0,0,0,0,0,0,4100,4242,15288,0,0,0,0,0,0,0,672,850,850,850,1,4,4,4,'Pellet Belt (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19902,1,0,0,255,0,0,0,0,0,0,4100,4242,12299,0,0,0,0,0,0,0,715,649,649,649,1,3,3,3,'Aspis (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (19902,1,0,0,18,0,0,0,0,0,0,4100,4242,12299,0,0,0,0,0,0,0,715,649,649,649,1,3,3,3,'Aspis (desynth)'); --Yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (19903,1,0,0,255,0,0,0,0,0,0,4100,4242,16565,0,0,0,0,0,0,0,649,852,852,852,3,1,1,1,'Spatha (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19904,1,0,0,255,0,0,0,0,0,0,4100,4242,16531,0,0,0,0,0,0,0,650,650,650,650,1,1,1,1,'Brass Xiphos (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19905,1,0,0,255,0,0,0,0,0,0,4100,4242,16552,0,0,0,0,0,0,0,650,652,652,652,1,2,2,2,'Scimitar (desynth)');
@@ -1351,13 +1351,13 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (19954,1,0,0,255,0,0,0,0,0,0,4100,4242,12708,0,0,0,0,0,0,0,855,654,654,654,1,1,1,1,'Darksteel Mittens (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19955,1,0,0,255,0,0,0,0,0,0,4100,4242,16524,0,0,0,0,0,0,0,744,744,744,744,1,1,1,1,'Fleuret (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19956,1,0,0,255,0,0,0,0,0,0,4100,4242,566,0,0,0,0,0,0,0,649,649,649,649,1,1,1,1,'Goblin Cup (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19957,1,0,0,255,0,0,0,0,0,0,4100,4242,16796,0,0,0,0,0,0,0,817,1226,717,717,3,10,1,1,'Mythril Zaghnal (desynth)');
+INSERT INTO `synth_recipes` VALUES (19957,1,0,0,61,0,0,0,0,0,0,4100,4242,16796,0,0,0,0,0,0,0,817,1226,717,717,3,10,1,1,'Mythril Zaghnal (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19958,1,0,0,255,0,0,0,0,0,0,4100,4242,16544,0,0,0,0,0,0,0,649,649,649,649,1,1,1,1,'Ryl.Arc. Sword (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19959,1,0,0,255,0,0,0,0,0,0,4100,4242,16719,0,0,0,0,0,0,0,649,649,649,649,2,2,2,2,'Moth Axe (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19960,1,0,0,255,0,0,0,0,0,0,4100,4242,16783,0,0,0,0,0,0,0,817,651,715,715,3,1,1,1,'Plantreaper (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19961,1,0,0,255,0,0,0,0,0,0,4100,4242,14051,0,0,0,0,0,0,0,651,654,654,654,1,1,1,1,'Alumine Moufles (desynth)');
+INSERT INTO `synth_recipes` VALUES (19961,1,0,0,59,0,0,0,0,0,0,4100,4242,14051,0,0,0,0,0,0,0,651,651,654,654,1,1,1,1,'Alumine Moufles (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19962,1,0,0,255,0,0,0,0,0,0,4100,4242,16433,0,0,0,0,0,0,0,649,649,649,649,1,1,1,1,'Lgn. Knuckles (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19963,1,0,0,255,0,0,0,0,0,0,4100,4242,2161,0,0,0,0,0,0,0,649,649,649,649,2,2,2,2,'Troll Vambrace (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (19963,1,0,0,79,0,0,0,0,0,0,4100,4242,2161,0,0,0,0,0,0,0,649,649,649,649,2,2,2,2,'Troll Vambrace (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (19964,1,0,0,255,0,0,0,0,0,0,4098,4240,1162,0,0,0,0,0,0,0,660,660,660,660,1,1,1,1,'Tonberry Lantern (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19965,1,0,0,255,0,0,0,0,0,0,4100,4242,16575,0,0,0,0,0,0,0,744,1226,1226,1226,1,6,6,6,'Curtana (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19966,1,0,0,255,0,0,0,0,0,0,4100,4242,16452,0,0,0,0,0,0,0,654,654,654,654,1,1,1,1,'Misericorde (desynth)');
@@ -1365,10 +1365,10 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (19968,1,0,0,255,0,0,0,0,0,0,4100,4242,17487,0,0,0,0,0,0,0,937,937,937,937,1,1,1,1,'Corrosive Claws (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19969,1,0,0,255,0,0,0,0,0,0,4100,4242,2162,0,0,0,0,0,0,0,651,652,652,652,1,1,1,1,'Mamool Ja Helmet (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19970,1,0,0,255,0,0,0,0,0,0,4100,4242,16589,0,0,0,0,0,0,0,715,852,651,651,1,1,5,5,'Two-Hand. Sword (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19971,1,0,0,255,0,0,0,0,0,0,4100,4242,16707,0,0,0,0,0,0,0,1235,719,1228,1228,6,6,8,8,'Bhuj (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (19971,1,0,0,95,0,0,0,0,0,0,4100,4242,16707,0,0,0,0,0,0,0,1235,719,1228,1228,6,6,8,8,'Bhuj (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (19972,1,0,0,255,0,0,0,0,0,0,4100,4242,16392,0,0,0,0,0,0,0,714,651,651,651,1,2,2,2,'Metal Knuckles (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19973,1,0,0,255,0,0,0,0,0,0,4100,4242,16566,0,0,0,0,0,0,0,651,651,651,651,2,2,2,2,'Longsword (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19974,1,0,0,255,0,0,0,0,0,0,4100,4242,16406,0,0,0,0,0,0,0,651,651,651,651,1,1,1,1,'Baghnakhs (desynth)');
+INSERT INTO `synth_recipes` VALUES (19974,1,0,0,23,0,0,0,0,0,0,4100,4242,16406,0,0,0,0,0,0,0,651,651,651,651,1,1,1,1,'Baghnakhs (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19975,1,0,0,255,0,0,0,0,0,0,4100,4242,17083,0,0,0,0,0,0,0,651,652,654,654,1,1,1,1,'Time Hammer (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19976,1,0,0,255,0,0,0,0,0,0,4100,4242,16512,0,0,0,0,0,0,0,744,651,651,651,1,1,1,1,'Bilbo (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19977,1,0,0,255,0,0,0,0,0,0,4100,4242,17034,0,0,0,0,0,0,0,649,649,649,649,3,3,3,3,'Bronze Mace (desynth)');
@@ -1379,7 +1379,7 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (19982,1,0,0,255,0,0,0,0,0,0,4100,4242,14243,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Iron Cuisses (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19983,1,0,0,255,0,0,0,0,0,0,4100,4242,13088,0,0,0,0,0,0,0,816,654,654,654,1,1,1,1,'Darksteel Nodowa (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19984,1,0,0,255,0,0,0,0,0,0,4100,4242,13111,0,0,0,0,0,0,0,816,651,651,651,1,1,1,1,'Nodowa (desynth)');
--- INSERT INTO `synth_recipes` VALUES (19985,1,0,0,255,0,0,0,0,0,0,4100,4242,12684,0,0,0,0,0,0,0,850,651,654,654,1,1,1,1,'Thick Mufflers (desynth)');
+INSERT INTO `synth_recipes` VALUES (19985,1,0,0,84,0,0,0,0,0,0,4100,4242,12684,0,0,0,0,0,0,0,850,651,654,654,1,1,1,1,'Thick Mufflers (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19986,1,0,0,255,0,0,0,0,0,0,4100,4242,16650,0,0,0,0,0,0,0,715,652,652,652,1,1,1,1,'War Pick (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (19987,1,0,0,255,0,0,0,0,0,0,4100,4242,12832,0,0,0,0,0,0,0,649,817,850,850,1,3,1,1,'Bronze Subligar (desynth)');
 INSERT INTO `synth_recipes` VALUES (20001,0,0,0,0,1,0,0,0,0,0,4096,4238,642,642,642,0,0,0,0,0,1884,1884,1884,1884,1,1,1,1,'Zinc Oxide');
@@ -2023,40 +2023,40 @@ INSERT INTO `synth_recipes` VALUES (25514,0,0,0,0,118,0,0,0,0,0,4096,4238,3323,8
 -- INSERT INTO `synth_recipes` VALUES (25527,0,2004,0,0,255,0,0,0,0,0,4096,4238,4076,9250,16408,0,0,0,0,0,21513,21514,21514,21514,1,1,1,1,'Raetic Baghnakhs');
 -- INSERT INTO `synth_recipes` VALUES (25528,0,0,0,255,255,0,0,0,0,0,4096,4238,4077,4081,9248,16605,0,0,0,0,21606,21607,21607,21607,1,1,1,1,'Enriching Sword');
 -- INSERT INTO `synth_recipes` VALUES (25529,0,2005,0,0,255,0,255,0,0,0,4102,4244,9003,9062,9251,9832,9844,9845,9845,9852,21628,21629,21630,21630,1,1,1,1,'Valor Sword');
--- INSERT INTO `synth_recipes` VALUES (29901,1,0,0,0,255,0,0,0,0,0,4100,4242,13473,0,0,0,0,0,0,0,814,744,744,744,1,2,2,2,'Amber Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29901,1,0,0,0,255,0,0,0,0,0,4100,4242,13473,0,0,0,0,0,0,0,814,744,744,744,1,2,2,2,'Amber Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29902,1,0,0,0,255,0,0,0,0,0,4100,4242,16521,0,0,0,0,0,0,0,652,745,810,810,2,1,1,1,'Rapier (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29903,1,0,0,0,255,0,0,0,0,0,4100,4242,13317,0,0,0,0,0,0,0,792,653,653,653,1,2,2,2,'Pearl Earring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29904,1,0,0,0,255,0,0,0,0,0,4100,4242,12494,0,0,0,0,0,0,0,745,745,745,745,1,1,1,1,'Gold Hairpin (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29905,1,0,0,0,255,0,0,0,0,0,4100,4242,13481,0,0,0,0,0,0,0,815,653,653,653,1,2,2,2,'Sphene Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29906,1,0,0,0,255,0,0,0,0,0,4100,4242,13476,0,0,0,0,0,0,0,788,653,653,653,1,2,2,2,'Peridot Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29907,1,0,0,0,255,0,0,0,0,0,4100,4242,13444,0,0,0,0,0,0,0,807,744,744,744,1,2,2,2,'Sardonyx Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29908,1,0,0,0,255,0,0,0,0,0,4100,4242,13483,0,0,0,0,0,0,0,792,653,653,653,1,2,2,2,'Pearl Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29909,1,0,0,0,255,0,0,0,0,0,4100,4242,12801,0,0,0,0,0,0,0,851,653,653,653,1,2,2,2,'Mythril Cuisses (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29910,1,0,0,0,255,0,0,0,0,0,4100,4242,13479,0,0,0,0,0,0,0,811,653,653,653,1,2,2,2,'Ametrine Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29911,1,0,0,0,255,0,0,0,0,0,4100,4242,12495,0,0,0,0,0,0,0,744,744,744,744,1,1,1,1,'Silver Hairpin (desynth)');
+INSERT INTO `synth_recipes` VALUES (29904,1,0,0,0,58,0,0,0,0,0,4100,4242,12494,0,0,0,0,0,0,0,745,745,745,745,1,1,1,1,'Gold Hairpin (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29905,1,0,0,0,55,0,0,0,0,0,4100,4242,13481,0,0,0,0,0,0,0,815,653,653,653,1,2,2,2,'Sphene Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29906,1,0,0,0,55,0,0,0,0,0,4100,4242,13476,0,0,0,0,0,0,0,788,653,653,653,1,2,2,2,'Peridot Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29907,1,0,0,0,55,0,0,0,0,0,4100,4242,13444,0,0,0,0,0,0,0,807,744,744,744,1,2,2,2,'Sardonyx Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29908,1,0,0,0,55,0,0,0,0,0,4100,4242,13483,0,0,0,0,0,0,0,792,653,653,653,1,2,2,2,'Pearl Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29909,1,0,0,0,61,0,0,0,0,0,4100,4242,12801,0,0,0,0,0,0,0,851,653,653,653,1,2,2,2,'Mythril Cuisses (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29910,1,0,0,0,55,0,0,0,0,0,4100,4242,13479,0,0,0,0,0,0,0,811,653,653,653,1,2,2,2,'Ametrine Ring (desynth)'); --yield mismatch
+INSERT INTO `synth_recipes` VALUES (29911,1,0,0,0,27,0,0,0,0,0,4100,4242,12495,0,0,0,0,0,0,0,744,744,744,744,1,1,1,1,'Silver Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29912,1,0,0,0,255,0,0,0,0,0,4100,4242,13334,0,0,0,0,0,0,0,795,744,744,744,1,2,2,2,'Lapis Laz. Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29913,1,0,0,0,255,0,0,0,0,0,4100,4242,12307,0,0,0,0,0,0,0,715,651,1228,1228,2,2,6,6,'Heater Shield (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29914,1,0,0,0,255,0,0,0,0,0,4100,4242,13474,0,0,0,0,0,0,0,799,744,744,744,1,2,2,2,'Onyx Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29914,1,0,0,0,35,0,0,0,0,0,4100,4242,13474,0,0,0,0,0,0,0,799,744,744,744,1,2,2,2,'Onyx Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29915,1,0,0,0,255,0,0,0,0,0,4100,4242,12303,0,0,0,0,0,0,0,651,714,914,745,1,1,1,1,'Gold Buckler (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29916,1,0,0,0,255,0,0,0,0,0,4100,4242,13470,0,0,0,0,0,0,0,809,744,744,744,1,2,2,2,'Clear Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29916,1,0,0,0,35,0,0,0,0,0,4100,4242,13470,0,0,0,0,0,0,0,809,744,744,744,1,2,2,2,'Clear Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29917,1,0,0,0,255,0,0,0,0,0,4100,4242,17986,0,0,0,0,0,0,0,1234,1235,744,744,6,6,1,1,'Spark Baselard (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29918,1,0,0,0,255,0,0,0,0,0,4100,4242,13472,0,0,0,0,0,0,0,795,744,744,744,1,2,2,2,'Lapis Lazuli Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29919,1,0,0,0,255,0,0,0,0,0,4100,4242,13465,0,0,0,0,0,0,0,650,650,650,650,2,2,2,2,'Brass Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29920,1,0,0,0,255,0,0,0,0,0,4100,4242,17514,0,0,0,0,0,0,0,894,1235,653,653,1,6,1,1,'Hydro Claws (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29921,1,0,0,0,255,0,0,0,0,0,4100,4242,13330,0,0,0,0,0,0,0,806,744,744,744,1,2,2,2,'Tml. Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29922,1,0,0,0,255,0,0,0,0,0,4100,4242,17688,0,0,0,0,0,0,0,1235,1235,1235,1235,9,9,9,9,'Spark Degen (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29923,1,0,0,0,255,0,0,0,0,0,4100,4242,17281,0,0,0,0,0,0,0,818,744,653,653,1,1,1,1,'Wingedge (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29924,1,0,0,0,255,0,0,0,0,0,4100,4242,13333,0,0,0,0,0,0,0,800,744,744,744,1,2,2,2,'Amethyst Earring (desynth)');
+INSERT INTO `synth_recipes` VALUES (29923,1,0,0,0,51,0,0,0,0,0,4100,4242,17281,0,0,0,0,0,0,0,818,744,653,653,1,1,1,1,'Wingedge (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29924,1,0,0,0,25,0,0,0,0,0,4100,4242,13333,0,0,0,0,0,0,0,800,744,744,744,1,2,2,2,'Amethyst Earring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29925,1,0,0,0,255,0,0,0,0,0,4100,4242,13337,0,0,0,0,0,0,0,796,744,744,744,1,2,2,2,'Opal Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29926,1,0,0,0,255,0,0,0,0,0,4100,4242,13331,0,0,0,0,0,0,0,807,744,744,744,1,2,2,2,'Sardonyx Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29927,1,0,0,0,255,0,0,0,0,0,4100,4242,1374,0,0,0,0,0,0,0,648,931,745,746,1,1,1,1,'Cursed Schaller (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29928,1,0,0,0,255,0,0,0,0,0,4100,4242,13443,0,0,0,0,0,0,0,796,744,744,744,1,2,2,2,'Opal Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29928,1,0,0,0,35,0,0,0,0,0,4100,4242,13443,0,0,0,0,0,0,0,796,744,744,744,1,2,2,2,'Opal Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29929,1,0,0,0,255,0,0,0,0,0,4100,4242,16482,0,0,0,0,0,0,0,648,648,648,648,2,2,2,2,'Onion Dagger (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29930,1,0,0,0,255,0,0,0,0,0,4100,4242,17701,0,0,0,0,0,0,0,1235,744,744,744,4,1,1,1,'Shotel (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29931,1,0,0,0,255,0,0,0,0,0,4100,4242,13482,0,0,0,0,0,0,0,793,653,653,653,1,2,2,2,'Black Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29932,1,0,0,0,255,0,0,0,0,0,4100,4242,13477,0,0,0,0,0,0,0,790,653,653,653,1,2,2,2,'Garnet Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29933,1,0,0,0,255,0,0,0,0,0,4100,4242,13471,0,0,0,0,0,0,0,800,744,744,744,1,2,2,2,'Amethyst Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29934,1,0,0,0,255,0,0,0,0,0,4100,4242,16641,0,0,0,0,0,0,0,715,649,650,650,1,2,1,1,'Brass Axe (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29931,1,0,0,0,55,0,0,0,0,0,4100,4242,13482,0,0,0,0,0,0,0,793,653,653,653,1,2,2,2,'Black Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29932,1,0,0,0,55,0,0,0,0,0,4100,4242,13477,0,0,0,0,0,0,0,790,653,653,653,1,2,2,2,'Garnet Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29933,1,0,0,0,35,0,0,0,0,0,4100,4242,13471,0,0,0,0,0,0,0,800,744,744,744,1,2,2,2,'Amethyst Ring (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (29934,1,0,0,0,12,0,0,0,0,0,4100,4242,16641,0,0,0,0,0,0,0,715,649,650,650,1,2,1,1,'Brass Axe (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29935,1,0,0,0,255,0,0,0,0,0,4100,4242,16842,0,0,0,0,0,0,0,715,822,1228,745,1,1,6,1,'Golden Spear (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29936,1,0,0,0,255,0,0,0,0,0,4100,4242,13336,0,0,0,0,0,0,0,799,744,744,744,1,2,2,2,'Onyx Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29937,1,0,0,0,255,0,0,0,0,0,4100,4242,13335,0,0,0,0,0,0,0,814,744,744,744,1,2,2,2,'Amber Earring (desynth)');
@@ -2065,7 +2065,7 @@ INSERT INTO `synth_recipes` VALUES (25514,0,0,0,0,118,0,0,0,0,0,4096,4238,3323,8
 -- INSERT INTO `synth_recipes` VALUES (29940,1,0,0,0,255,0,0,0,0,0,4100,4242,17285,0,0,0,0,0,0,0,914,651,745,657,1,1,1,1,'Moonring Blade (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29941,1,0,0,0,255,0,0,0,0,0,4100,4242,13327,0,0,0,0,0,0,0,744,744,744,744,2,2,2,2,'Silver Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29942,1,0,0,0,255,0,0,0,0,0,4100,4242,16518,0,0,0,0,0,0,0,651,653,653,653,2,2,2,2,'Mythril Degen (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29943,1,0,0,0,255,0,0,0,0,0,4100,4242,12497,0,0,0,0,0,0,0,650,650,650,650,1,1,1,1,'Brass Hairpin (desynth)');
+INSERT INTO `synth_recipes` VALUES (29943,1,0,0,0,17,0,0,0,0,0,4100,4242,12497,0,0,0,0,0,0,0,650,650,650,650,1,1,1,1,'Brass Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29944,1,0,0,0,255,0,0,0,0,0,4100,4242,12433,0,0,0,0,0,0,0,650,650,650,650,1,1,1,1,'Brass Mask (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29945,1,0,0,0,255,0,0,0,0,0,4100,4242,13979,0,0,0,0,0,0,0,744,744,744,744,3,3,3,3,'Silver Bangles (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29946,1,0,0,0,255,0,0,0,0,0,4100,4242,17284,0,0,0,0,0,0,0,914,652,745,745,1,1,1,1,'Chakram (desynth)');
@@ -2073,12 +2073,12 @@ INSERT INTO `synth_recipes` VALUES (25514,0,0,0,0,118,0,0,0,0,0,4096,4238,3323,8
 -- INSERT INTO `synth_recipes` VALUES (29948,1,0,0,0,255,0,0,0,0,0,4100,4242,12802,0,0,0,0,0,0,0,914,851,931,745,1,1,1,1,'Gold Cuisses (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29949,1,0,0,0,255,0,0,0,0,0,4100,4242,12833,0,0,0,0,0,0,0,817,850,649,650,3,1,1,1,'Brass Subligar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,255,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,1226,1226,1226,1226,6,6,6,6,'Mythril Dagger (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,255,0,0,0,0,0,4100,4242,13478,0,0,0,0,0,0,0,808,653,653,653,1,2,2,2,'Goshenite Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,55,0,0,0,0,0,4100,4242,13478,0,0,0,0,0,0,0,808,653,653,653,1,2,2,2,'Goshenite Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,255,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,818,818,818,3,2,2,2,'Sabiki Rig (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29953,1,0,0,0,255,0,0,0,0,0,4100,4242,12673,0,0,0,0,0,0,0,817,850,653,1228,6,4,1,6,'Mythril Gauntlets (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29954,1,0,0,0,255,0,0,0,0,0,4100,4242,12426,0,0,0,0,0,0,0,648,850,850,850,1,1,1,1,'Banded Helm (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29955,1,0,0,0,255,0,0,0,0,0,4100,4242,13352,0,0,0,0,0,0,0,746,786,786,786,2,1,1,1,'Ruby Earring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (29956,1,0,0,0,255,0,0,0,0,0,4100,4242,12496,0,0,0,0,0,0,0,648,648,648,648,1,1,1,1,'Copper Hairpin (desynth)');
+INSERT INTO `synth_recipes` VALUES (29956,1,0,0,0,7,0,0,0,0,0,4100,4242,12496,0,0,0,0,0,0,0,648,648,648,648,1,1,1,1,'Copper Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29957,1,0,0,0,255,0,0,0,0,0,4100,4242,12301,0,0,0,0,0,0,0,653,653,653,653,1,1,1,1,'Buckler (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29958,1,0,0,0,255,0,0,0,0,0,4100,4242,13209,0,0,0,0,0,0,0,744,744,744,744,4,4,4,4,'Chain Belt (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29959,1,0,0,0,255,0,0,0,0,0,4100,4242,13144,0,0,0,0,0,0,0,653,653,653,653,3,3,3,3,'Wing Gorget (desynth)');
@@ -2651,12 +2651,12 @@ INSERT INTO `synth_recipes` VALUES (35513,0,0,0,0,0,118,0,0,0,0,4099,4241,1712,3
 INSERT INTO `synth_recipes` VALUES (39901,1,0,0,0,0,11,0,0,0,0,4100,4242,12456,0,0,0,0,0,0,0,817,817,817,817,3,4,5,6,'Hachimaki (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39902,1,0,0,0,0,255,0,0,0,0,4100,4242,12713,0,0,0,0,0,0,0,706,817,818,818,1,1,6,6,'Cotton Tekko (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39903,1,0,0,0,0,255,0,0,0,0,4098,4240,2153,0,0,0,0,0,0,0,2288,1155,1888,2305,1,1,1,1,'Qiqirn Sandbag (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39904,1,0,0,0,0,255,0,0,0,0,4100,4242,17405,0,0,0,0,0,0,0,891,840,937,937,1,1,1,1,'Fly Lure (desynth)');
+INSERT INTO `synth_recipes` VALUES (39904,1,0,0,0,0,30,0,0,0,0,4100,4242,17405,0,0,0,0,0,0,0,891,840,937,937,1,1,1,1,'Fly Lure (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39905,1,0,0,0,0,255,0,0,0,0,4100,4242,12504,0,0,0,0,0,0,0,932,821,821,821,1,1,1,1,'Rainbow Headband (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39906,1,0,0,0,0,255,0,0,0,0,4100,4242,12712,0,0,0,0,0,0,0,706,817,817,817,1,6,6,6,'Tekko (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39906,1,0,0,0,0,12,0,0,0,0,4100,4242,12712,0,0,0,0,0,0,0,706,817,817,817,1,6,6,6,'Tekko (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39907,1,0,0,0,0,255,0,0,0,0,4100,4242,14376,0,0,0,0,0,0,0,855,821,1235,1228,2,1,4,4,'Rasetsu Samue (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39908,1,0,0,0,0,255,0,0,0,0,4100,4242,12737,0,0,0,0,0,0,0,834,816,820,823,1,4,2,1,'White Mitts (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39909,1,0,0,0,0,255,0,0,0,0,4100,4242,14301,0,0,0,0,0,0,0,851,816,821,821,1,6,1,1,'Errant Slops (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39909,1,0,0,0,0,94,0,0,0,0,4100,4242,14301,0,0,0,0,0,0,0,851,816,821,821,1,6,1,1,'Errant Slops (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39910,1,0,0,0,0,255,0,0,0,0,4100,4242,12969,0,0,0,0,0,0,0,818,819,819,819,9,1,1,1,'Cotton Kyahan (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39911,1,0,0,0,0,255,0,0,0,0,4100,4242,12857,0,0,0,0,0,0,0,818,819,819,819,3,7,7,7,'Linen Slops (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39912,1,0,0,0,0,255,0,0,0,0,4100,4242,14856,0,0,0,0,0,0,0,818,834,850,850,10,1,1,1,'Seer\'s Mitts (desynth)');
@@ -2664,12 +2664,12 @@ INSERT INTO `synth_recipes` VALUES (39901,1,0,0,0,0,11,0,0,0,0,4100,4242,12456,0
 -- INSERT INTO `synth_recipes` VALUES (39914,1,0,0,0,0,255,0,0,0,0,4100,4242,12475,0,0,0,0,0,0,0,650,816,816,816,1,3,3,3,'Velvet Hat (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39915,1,0,0,0,0,255,0,0,0,0,4100,4242,12585,0,0,0,0,0,0,0,817,818,818,818,1,9,9,9,'Cotton Dogi (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39916,1,0,0,0,0,255,0,0,0,0,4100,4242,12584,0,0,0,0,0,0,0,817,817,817,817,10,10,10,10,'Kenpogi (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39917,1,0,0,0,0,255,0,0,0,0,4100,4242,13204,0,0,0,0,0,0,0,817,818,818,818,1,6,6,6,'Heko Obi (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39917,1,0,0,0,0,27,0,0,0,0,4100,4242,13204,0,0,0,0,0,0,0,817,818,818,818,1,6,6,6,'Heko Obi (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39918,1,0,0,0,0,255,0,0,0,0,4100,4242,14297,0,0,0,0,0,0,0,819,820,820,820,3,6,6,6,'Field Hose (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39919,1,0,0,0,0,255,0,0,0,0,4100,4242,12586,0,0,0,0,0,0,0,817,819,819,819,1,9,9,9,'Soil Gi (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39920,1,0,0,0,0,255,0,0,0,0,4100,4242,13206,0,0,0,0,0,0,0,823,823,823,823,1,1,1,1,'Gold Obi (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39921,1,0,0,0,0,255,0,0,0,0,4100,4242,14196,0,0,0,0,0,0,0,819,848,853,821,3,1,1,4,'Dance Shoes (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39922,1,0,0,0,0,255,0,0,0,0,4100,4242,12728,0,0,0,0,0,0,0,817,768,818,818,3,2,4,4,'Cuffs (desynth)');
+INSERT INTO `synth_recipes` VALUES (39921,1,0,0,0,0,98,0,0,0,0,4100,4242,14196,0,0,0,0,0,0,0,819,848,853,821,3,1,1,4,'Dance Shoes (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39922,1,0,0,0,0,5,0,0,0,0,4100,4242,12728,0,0,0,0,0,0,0,817,768,818,818,3,2,4,4,'Cuffs (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39923,1,0,0,0,0,255,0,0,0,0,4100,4242,14299,0,0,0,0,0,0,0,850,816,851,1228,1,4,1,4,'Rst. Hakama (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39924,1,0,0,0,0,255,0,0,0,0,4100,4242,14253,0,0,0,0,0,0,0,850,816,816,816,1,8,8,8,'Arhat\'s Hakama (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39925,1,0,0,0,0,255,0,0,0,0,4100,4242,14422,0,0,0,0,0,0,0,819,834,834,834,10,3,3,3,'Noct Doublet (desynth)');
@@ -2684,14 +2684,14 @@ INSERT INTO `synth_recipes` VALUES (39901,1,0,0,0,0,11,0,0,0,0,4100,4242,12456,0
 -- INSERT INTO `synth_recipes` VALUES (39934,1,0,0,0,0,255,0,0,0,0,4100,4242,14360,0,0,0,0,0,0,0,816,816,816,816,3,3,3,3,'R.K. Cloak +1 (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39935,1,0,0,0,0,255,0,0,0,0,4100,4242,13568,0,0,0,0,0,0,0,816,820,820,820,1,2,2,2,'Scarlet Ribbon (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39936,1,0,0,0,0,255,0,0,0,0,4100,4242,14436,0,0,0,0,0,0,0,816,823,821,1769,1,1,3,1,'Blessed Briault (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39937,1,0,0,0,0,255,0,0,0,0,4100,4242,12977,0,0,0,0,0,0,0,850,818,818,818,1,9,9,9,'Cotton Gaiters (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39937,1,0,0,0,0,17,0,0,0,0,4100,4242,12977,0,0,0,0,0,0,0,850,818,818,818,1,9,9,9,'Cotton Gaiters (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39938,1,0,0,0,0,255,0,0,0,0,4100,4242,13590,0,0,0,0,0,0,0,816,816,816,816,3,3,3,3,'Green Ribbon (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39939,1,0,0,0,0,255,0,0,0,0,4100,4242,12503,0,0,0,0,0,0,0,816,932,932,932,3,1,1,1,'Silk Headband (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39940,1,0,0,0,0,255,0,0,0,0,4100,4242,12847,0,0,0,0,0,0,0,816,855,1228,1228,1,1,4,4,'Yasha Hakama (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39941,1,0,0,0,0,255,0,0,0,0,4100,4242,14078,0,0,0,0,0,0,0,816,823,821,821,3,1,3,3,'Errant Cuffs (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39942,1,0,0,0,0,255,0,0,0,0,4100,4242,1639,0,0,0,0,0,0,0,818,816,823,823,6,1,1,1,'Corse Robe (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39943,1,0,0,0,0,255,0,0,0,0,4100,4242,14178,0,0,0,0,0,0,0,816,855,855,855,1,2,2,2,'Rasetsu Sune-Ate (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39944,1,0,0,0,0,255,0,0,0,0,4100,4242,12605,0,0,0,0,0,0,0,816,821,821,821,1,1,1,1,'Noble\'s Tunic (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39943,1,0,0,0,0,92,0,0,0,0,4100,4242,14178,0,0,0,0,0,0,0,816,855,855,855,1,2,2,2,'Rasetsu Sune-Ate (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (39944,1,0,0,0,0,87,0,0,0,0,4100,4242,12605,0,0,0,0,0,0,0,816,821,821,821,1,1,1,1,'Noble\'s Tunic (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (39945,1,0,0,0,0,255,0,0,0,0,4100,4242,12468,0,0,0,0,0,0,0,816,842,842,842,3,1,1,1,'Green Beret (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39946,1,0,0,0,0,255,0,0,0,0,4100,4242,13113,0,0,0,0,0,0,0,929,816,816,816,1,9,9,9,'Black Neckerchief (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39947,1,0,0,0,0,255,0,0,0,0,4100,4242,12588,0,0,0,0,0,0,0,816,651,651,651,5,1,1,1,'Shinobi Gi (desynth)');
@@ -2703,7 +2703,7 @@ INSERT INTO `synth_recipes` VALUES (39901,1,0,0,0,0,11,0,0,0,0,4100,4242,12456,0
 -- INSERT INTO `synth_recipes` VALUES (39953,1,0,0,0,0,255,0,0,0,0,4100,4242,1631,0,0,0,0,0,0,0,818,818,818,818,8,8,8,8,'Moblin Armor (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39954,1,0,0,0,0,255,0,0,0,0,4100,4242,12476,0,0,0,0,0,0,0,822,816,816,816,1,6,6,6,'Silk Hat (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39955,1,0,0,0,0,255,0,0,0,0,4100,4242,13577,0,0,0,0,0,0,0,816,822,820,820,2,1,4,4,'Black Cape (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39956,1,0,0,0,0,255,0,0,0,0,4100,4242,14023,0,0,0,0,0,0,0,816,819,1228,1228,6,1,12,12,'Arhat\'s Tekko (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (39956,1,0,0,0,0,87,0,0,0,0,4100,4242,14023,0,0,0,0,0,0,0,816,819,1228,1228,6,1,12,12,'Arhat\'s Tekko (desynth)'); --Recipe mismatch
 -- INSERT INTO `synth_recipes` VALUES (39957,1,0,0,0,0,255,0,0,0,0,4100,4242,15390,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Femina Subligar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39958,1,0,0,0,0,255,0,0,0,0,4100,4242,15389,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Vir Subligar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39959,1,0,0,0,0,255,0,0,0,0,4100,4242,12859,0,0,0,0,0,0,0,820,650,822,816,7,1,1,2,'Velvet Slops (desynth)');
@@ -3149,8 +3149,8 @@ INSERT INTO `synth_recipes` VALUES (45506,0,0,0,0,70,0,113,0,0,0,4099,4241,8722,
 -- INSERT INTO `synth_recipes` VALUES (49901,1,0,0,0,0,0,255,0,0,0,4100,4242,13588,0,0,0,0,0,0,0,857,820,820,820,1,1,1,1,'Dhalmel Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49902,1,0,0,0,0,0,255,0,0,0,4100,4242,16385,0,0,0,0,0,0,0,715,850,850,850,1,2,2,2,'Cesti (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49903,1,0,0,0,0,0,255,0,0,0,4100,4242,13918,0,0,0,0,0,0,0,861,820,851,1122,1,1,1,1,'Tiger Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49904,1,0,0,0,0,0,255,0,0,0,4100,4242,16388,0,0,0,0,0,0,0,715,850,852,853,1,2,1,1,'Himantes (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49905,1,0,0,0,0,0,255,0,0,0,4100,4242,14317,0,0,0,0,0,0,0,1680,1629,1629,1629,1,2,2,2,'Barone Cosciales (desynth)');
+INSERT INTO `synth_recipes` VALUES (49904,1,0,0,0,0,0,52,0,0,0,4100,4242,16388,0,0,0,0,0,0,0,715,850,852,853,1,2,1,1,'Himantes (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (49905,1,0,0,0,0,0,90,0,0,0,4100,4242,14317,0,0,0,0,0,0,0,1680,1629,1629,1629,1,2,2,2,'Barone Cosciales (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (49906,1,0,0,0,0,0,255,0,0,0,4100,4242,16386,0,0,0,0,0,0,0,715,852,850,850,1,1,2,2,'Lizard Cesti (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49907,1,0,0,0,0,0,255,0,0,0,4100,4242,12830,0,0,0,0,0,0,0,851,855,855,855,3,2,2,2,'Tiger Trousers (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49908,1,0,0,0,0,0,255,0,0,0,4100,4242,13469,0,0,0,0,0,0,0,848,848,848,848,1,1,1,1,'Leather Ring (desynth)');
@@ -3161,14 +3161,14 @@ INSERT INTO `synth_recipes` VALUES (45506,0,0,0,0,70,0,113,0,0,0,4099,4241,8722,
 -- INSERT INTO `synth_recipes` VALUES (49913,1,0,0,0,0,0,255,0,0,0,4100,4242,13081,0,0,0,0,0,0,0,817,851,851,851,1,1,1,1,'Leather Gorget (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49914,1,0,0,0,0,0,255,0,0,0,4100,4242,12954,0,0,0,0,0,0,0,848,651,651,651,1,2,2,2,'Studded Boots (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49915,1,0,0,0,0,0,255,0,0,0,4100,4242,12824,0,0,0,0,0,0,0,817,850,850,850,6,2,2,2,'Leather Trousers (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49916,1,0,0,0,0,0,255,0,0,0,4100,4242,13594,0,0,0,0,0,0,0,817,856,856,856,1,5,5,5,'Rabbit Mantle (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (49916,1,0,0,0,0,0,7,0,0,0,4100,4242,13594,0,0,0,0,0,0,0,817,856,856,856,1,5,5,5,'Rabbit Mantle (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (49917,1,0,0,0,0,0,255,0,0,0,4100,4242,12697,0,0,0,0,0,0,0,817,850,852,852,3,1,1,1,'Lizard Gloves (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49918,1,0,0,0,0,0,255,0,0,0,4100,4242,12952,0,0,0,0,0,0,0,649,850,850,850,1,3,3,3,'Leather Highboots (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49919,1,0,0,0,0,0,255,0,0,0,4100,4242,14372,0,0,0,0,0,0,0,851,855,1117,823,1,1,1,1,'Cardinal Vest (desynth)');
+INSERT INTO `synth_recipes` VALUES (49919,1,0,0,0,0,0,94,0,0,0,4100,4242,14372,0,0,0,0,0,0,0,851,855,1117,823,1,1,1,1,'Cardinal Vest (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49920,1,0,0,0,0,0,255,0,0,0,4100,4242,13754,0,0,0,0,0,0,0,851,855,855,855,1,1,1,1,'Black Cotehardie (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49921,1,0,0,0,0,0,255,0,0,0,4100,4242,12696,0,0,0,0,0,0,0,817,850,850,850,3,3,3,3,'Leather Gloves (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49922,1,0,0,0,0,0,255,0,0,0,4100,4242,13200,0,0,0,0,0,0,0,817,851,851,851,1,2,2,2,'Waistbelt (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,255,0,0,0,4100,4242,12826,0,0,0,0,0,0,0,817,817,817,817,6,6,6,6,'Studded Trousers (desynth)');
+INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,30,0,0,0,4100,4242,12826,0,0,0,0,0,0,0,817,817,817,817,6,6,6,6,'Studded Trousers (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49924,1,0,0,0,0,0,255,0,0,0,4100,4242,13593,0,0,0,0,0,0,0,817,853,853,853,1,2,2,2,'Raptor Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49925,1,0,0,0,0,0,255,0,0,0,4100,4242,13570,0,0,0,0,0,0,0,820,859,859,859,1,1,1,1,'Ram Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49926,1,0,0,0,0,0,255,0,0,0,4100,4242,12699,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Cuir Gloves (desynth)');
@@ -3185,15 +3185,15 @@ INSERT INTO `synth_recipes` VALUES (45506,0,0,0,0,70,0,113,0,0,0,4099,4241,8722,
 -- INSERT INTO `synth_recipes` VALUES (49937,1,0,0,0,0,0,255,0,0,0,4100,4242,13592,0,0,0,0,0,0,0,817,852,869,869,1,1,1,1,'Lizard Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49938,1,0,0,0,0,0,255,0,0,0,4100,4242,13203,0,0,0,0,0,0,0,850,924,924,924,1,1,1,1,'Barbarian\'s Belt (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49939,1,0,0,0,0,0,255,0,0,0,4100,4242,13705,0,0,0,0,0,0,0,850,506,1117,849,1,2,1,1,'Ogre Jerkin (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49940,1,0,0,0,0,0,255,0,0,0,4100,4242,13546,0,0,0,0,0,0,0,855,855,855,855,1,1,1,1,'Hard Leather Ring (desynth)');
+INSERT INTO `synth_recipes` VALUES (49940,1,0,0,0,0,0,62,0,0,0,4100,4242,13546,0,0,0,0,0,0,0,855,855,855,855,1,1,1,1,'Hard Leather Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49941,1,0,0,0,0,0,255,0,0,0,4100,4242,13591,0,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Behemoth Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49942,1,0,0,0,0,0,255,0,0,0,4098,4240,1196,0,0,0,0,0,0,0,879,879,879,879,1,1,1,1,'Qiqirn Cape (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49943,1,0,0,0,0,0,255,0,0,0,4100,4242,12441,0,0,0,0,0,0,0,850,852,852,852,2,2,2,2,'Lizard Helm (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49944,1,0,0,0,0,0,255,0,0,0,4100,4242,13703,0,0,0,0,0,0,0,850,852,851,851,1,3,1,1,'Brigandine (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49945,1,0,0,0,0,0,255,0,0,0,4100,4242,14182,0,0,0,0,0,0,0,816,851,849,821,1,2,1,1,'Errant Pigaches (desynth)');
+INSERT INTO `synth_recipes` VALUES (49944,1,0,0,0,0,0,57,0,0,0,4100,4242,13703,0,0,0,0,0,0,0,850,852,851,851,1,3,1,1,'Brigandine (desynth)');
+INSERT INTO `synth_recipes` VALUES (49945,1,0,0,0,0,0,91,0,0,0,4100,4242,14182,0,0,0,0,0,0,0,816,851,849,821,1,2,1,1,'Errant Pigaches (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49946,1,0,0,0,0,0,255,0,0,0,4100,4242,12442,0,0,0,0,0,0,0,850,651,651,651,1,1,1,1,'Studded Bandana (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49947,1,0,0,0,0,0,255,0,0,0,4100,4242,12993,0,0,0,0,0,0,0,850,848,848,848,1,1,1,1,'Sandals (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49948,1,0,0,0,0,0,255,0,0,0,4100,4242,13595,0,0,0,0,0,0,0,820,863,863,863,1,1,1,1,'Coeurl Mantle (desynth)');
+INSERT INTO `synth_recipes` VALUES (49948,1,0,0,0,0,0,85,0,0,0,4100,4242,13595,0,0,0,0,0,0,0,820,863,863,863,1,1,1,1,'Coeurl Mantle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49949,1,0,0,0,0,0,255,0,0,0,4098,4240,1638,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Moblin Mask (desynth)');
 INSERT INTO `synth_recipes` VALUES (50001,0,0,0,0,0,0,0,1,0,0,4098,4240,888,888,888,0,0,0,0,0,1883,1883,1883,1883,1,2,3,4,'Shell Powder');
 INSERT INTO `synth_recipes` VALUES (50002,0,2025,0,0,0,0,0,1,0,0,4098,4240,880,1642,1644,1648,0,0,0,0,2141,2141,2141,2141,1,1,1,1,'Wailing Bone Chip');
@@ -3565,13 +3565,13 @@ INSERT INTO `synth_recipes` VALUES (55524,0,0,0,0,0,0,0,117,0,0,4099,4241,9003,9
 -- INSERT INTO `synth_recipes` VALUES (55527,0,2028,0,0,0,0,0,255,0,0,4096,4238,4075,9255,9255,9256,9256,9256,21817,0,21818,21819,21819,21819,1,1,1,1,'Raetic Scythe');
 -- INSERT INTO `synth_recipes` VALUES (55528,0,0,0,0,0,0,0,255,255,0,4098,4240,929,930,9255,9255,9255,9893,0,0,22297,22298,22298,22298,1,1,1,1,'Aurgelmir Orb');
 -- INSERT INTO `synth_recipes` VALUES (55529,0,2029,0,0,255,0,0,255,0,0,4102,4244,9062,9064,9245,9837,9844,9845,9845,9853,21823,21824,21825,21825,1,1,1,1,'Abyss Scythe');
--- INSERT INTO `synth_recipes` VALUES (59901,1,0,0,0,0,0,0,255,0,0,4100,4242,16649,0,0,0,0,0,0,0,715,893,893,893,1,1,1,1,'Bone Pick (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59901,1,0,0,0,0,0,0,23,0,0,4100,4242,16649,0,0,0,0,0,0,0,715,893,893,893,1,1,1,1,'Bone Pick (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59902,1,0,0,0,0,0,0,255,0,0,4100,4242,17361,0,0,0,0,0,0,0,894,902,902,902,1,1,1,1,'Crumhorn (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59903,1,0,0,0,0,0,0,255,0,0,4100,4242,13323,0,0,0,0,0,0,0,894,744,744,744,1,2,2,2,'Beetle Earring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59904,1,0,0,0,0,0,0,255,0,0,4100,4242,17362,0,0,0,0,0,0,0,894,883,883,883,1,1,1,1,'Shofar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59905,1,0,0,0,0,0,0,255,0,0,4100,4242,13457,0,0,0,0,0,0,0,894,894,894,894,1,1,1,1,'Beetle Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59906,1,0,0,0,0,0,0,255,0,0,4100,4242,12454,0,0,0,0,0,0,0,880,880,880,880,1,1,1,1,'Bone Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59907,1,0,0,0,0,0,0,255,0,0,4100,4242,12505,0,0,0,0,0,0,0,880,880,880,880,1,1,1,1,'Bone Hairpin (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59906,1,0,0,0,0,0,0,18,0,0,4100,4242,12454,0,0,0,0,0,0,0,880,880,880,880,1,1,1,1,'Bone Mask (desynth)'); --yield mismatch
+INSERT INTO `synth_recipes` VALUES (59907,1,0,0,0,0,0,0,4,0,0,4100,4242,12505,0,0,0,0,0,0,0,880,880,880,880,1,1,1,1,'Bone Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59908,1,0,0,0,0,0,0,255,0,0,4100,4242,17612,0,0,0,0,0,0,0,894,716,716,716,1,1,1,1,'Beetle Knife (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59909,1,0,0,0,0,0,0,255,0,0,4100,4242,12506,0,0,0,0,0,0,0,885,885,885,885,1,1,1,1,'Shell Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59910,1,0,0,0,0,0,0,255,0,0,4100,4242,12711,0,0,0,0,0,0,0,889,852,852,852,1,2,2,2,'Beetle Mittens (desynth)');
@@ -3581,21 +3581,21 @@ INSERT INTO `synth_recipes` VALUES (55524,0,0,0,0,0,0,0,117,0,0,4099,4241,9003,9
 -- INSERT INTO `synth_recipes` VALUES (59914,1,0,0,0,0,0,0,255,0,0,4100,4242,16405,0,0,0,0,0,0,0,856,649,880,880,1,1,3,3,'Cat Baghnakhs (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59915,1,0,0,0,0,0,0,255,0,0,4100,4242,12709,0,0,0,0,0,0,0,887,506,506,506,1,1,1,1,'Coral Mittens (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59916,1,0,0,0,0,0,0,255,0,0,4100,4242,17610,0,0,0,0,0,0,0,893,711,711,711,1,1,1,1,'Bone Knife (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59917,1,0,0,0,0,0,0,255,0,0,4100,4242,17352,0,0,0,0,0,0,0,894,895,895,895,1,1,1,1,'Horn (desynth)');
+INSERT INTO `synth_recipes` VALUES (59917,1,0,0,0,0,0,0,47,0,0,4100,4242,17352,0,0,0,0,0,0,0,894,895,895,895,1,1,1,1,'Horn (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59918,1,0,0,0,0,0,0,255,0,0,4100,4242,16420,0,0,0,0,0,0,0,881,893,932,932,1,1,1,1,'Bone Patas (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59919,1,0,0,0,0,0,0,255,0,0,4100,4242,13199,0,0,0,0,0,0,0,817,924,893,893,1,1,1,1,'Blood Stone (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59920,1,0,0,0,0,0,0,255,0,0,4100,4242,17344,0,0,0,0,0,0,0,650,880,880,880,1,1,1,1,'Cornette (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59921,1,0,0,0,0,0,0,255,0,0,4100,4242,15159,0,0,0,0,0,0,0,506,1163,887,887,1,1,2,2,'Igqira Tiara (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59921,1,0,0,0,0,0,0,91,0,0,4100,4242,15159,0,0,0,0,0,0,0,506,1163,887,887,1,1,2,2,'Igqira Tiara (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59922,1,0,0,0,0,0,0,255,0,0,4100,4242,13110,0,0,0,0,0,0,0,818,893,893,893,1,1,1,1,'Beast Whistle (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59923,1,0,0,0,0,0,0,255,0,0,4100,4242,12451,0,0,0,0,0,0,0,896,851,851,851,1,1,1,1,'Scorpion Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59924,1,0,0,0,0,0,0,255,0,0,4100,4242,13312,0,0,0,0,0,0,0,744,887,887,887,1,1,1,1,'Coral Earring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59924,1,0,0,0,0,0,0,83,0,0,4100,4242,13312,0,0,0,0,0,0,0,744,887,887,887,1,1,1,1,'Coral Earring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59925,1,0,0,0,0,0,0,255,0,0,4100,4242,12717,0,0,0,0,0,0,0,816,850,1473,1473,3,2,1,1,'Scp. Gnt. +1 (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59926,1,0,0,0,0,0,0,255,0,0,4100,4242,13711,0,0,0,0,0,0,0,881,848,848,848,1,1,1,1,'Carapace Mask (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59926,1,0,0,0,0,0,0,45,0,0,4100,4242,13711,0,0,0,0,0,0,0,881,848,848,848,1,1,1,1,'Carapace Mask (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59927,1,0,0,0,0,0,0,255,0,0,4100,4242,13922,0,0,0,0,0,0,0,850,886,902,902,1,1,1,1,'Demon Helm (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59928,1,0,0,0,0,0,0,255,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Shell Ring (desynth)');
+INSERT INTO `synth_recipes` VALUES (59928,1,0,0,0,0,0,0,7,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Shell Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59929,1,0,0,0,0,0,0,255,0,0,4100,4242,13461,0,0,0,0,0,0,0,881,1226,653,653,1,4,1,1,'Carapace Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59930,1,0,0,0,0,0,0,255,0,0,4100,4242,12455,0,0,0,0,0,0,0,852,852,852,852,1,1,1,1,'Beetle Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59931,1,0,0,0,0,0,0,255,0,0,4100,4242,14305,0,0,0,0,0,0,0,1629,1629,1629,1629,1,1,1,1,'Dragon Subligar (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59930,1,0,0,0,0,0,0,28,0,0,4100,4242,12455,0,0,0,0,0,0,0,852,852,852,852,1,1,1,1,'Beetle Mask (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (59931,1,0,0,0,0,0,0,92,0,0,4100,4242,14305,0,0,0,0,0,0,0,1629,1629,1629,1629,1,1,1,1,'Dragon Subligar (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59932,1,0,0,0,0,0,0,255,0,0,4100,4242,14852,0,0,0,0,0,0,0,1163,1622,790,1618,1,1,1,1,'Igqira Manillas (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59933,1,0,0,0,0,0,0,255,0,0,4100,4242,12878,0,0,0,0,0,0,0,819,506,887,887,2,1,1,1,'Coral Subligar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59934,1,0,0,0,0,0,0,255,0,0,4100,4242,13713,0,0,0,0,0,0,0,864,864,864,864,1,1,1,1,'Carapace Mittens (desynth)');
@@ -3605,18 +3605,18 @@ INSERT INTO `synth_recipes` VALUES (55524,0,0,0,0,0,0,0,117,0,0,4099,4241,9003,9
 -- INSERT INTO `synth_recipes` VALUES (59938,1,0,0,0,0,0,0,255,0,0,4100,4242,13846,0,0,0,0,0,0,0,850,1230,1473,1473,1,6,1,1,'Scorpion Helm (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59939,1,0,0,0,0,0,0,255,0,0,4100,4242,14008,0,0,0,0,0,0,0,817,1193,850,850,3,1,3,3,'Cpc. Gauntlets (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59940,1,0,0,0,0,0,0,255,0,0,4100,4242,17849,0,0,0,0,0,0,0,2157,2171,2171,2171,1,1,1,1,'Hellish Bugle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59941,1,0,0,0,0,0,0,255,0,0,4100,4242,15211,0,0,0,0,0,0,0,887,792,793,793,1,1,1,1,'Reraise Hairpin (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59941,1,0,0,0,0,0,0,80,0,0,4100,4242,15211,0,0,0,0,0,0,0,887,792,793,793,1,1,1,1,'Reraise Hairpin (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59942,1,0,0,0,0,0,0,255,0,0,4100,4242,13108,0,0,0,0,0,0,0,850,887,887,887,1,1,1,1,'Coral Gorget (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59943,1,0,0,0,0,0,0,255,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,902,902,902,1,1,1,1,'Demon\'s Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59943,1,0,0,0,0,0,0,70,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,902,902,902,1,1,1,1,'Demon\'s Ring (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59944,1,0,0,0,0,0,0,255,0,0,4100,4242,12436,0,0,0,0,0,0,0,850,866,866,866,1,2,2,2,'Dragon Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59945,1,0,0,0,0,0,0,255,0,0,4100,4242,13458,0,0,0,0,0,0,0,896,896,896,896,1,1,1,1,'Scorpion Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59946,1,0,0,0,0,0,0,255,0,0,4100,4242,17257,0,0,0,0,0,0,0,893,893,893,893,1,1,1,1,'Bandit\'s Gun (desynth)');
+INSERT INTO `synth_recipes` VALUES (59945,1,0,0,0,0,0,0,60,0,0,4100,4242,13458,0,0,0,0,0,0,0,896,896,896,896,1,1,1,1,'Scorpion Ring (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59946,1,0,0,0,0,0,0,52,0,0,4100,4242,17257,0,0,0,0,0,0,0,893,893,893,893,1,1,1,1,'Bandit\'s Gun (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59947,1,0,0,0,0,0,0,255,0,0,4100,4242,12437,0,0,0,0,0,0,0,850,1587,1586,1586,1,1,1,1,'Gavial Mask (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59948,1,0,0,0,0,0,0,255,0,0,4100,4242,14426,0,0,0,0,0,0,0,816,816,816,816,1,1,1,1,'Shade Harness (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59949,1,0,0,0,0,0,0,255,0,0,4100,4242,16794,0,0,0,0,0,0,0,817,882,893,893,3,1,1,1,'Bone Scythe (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59949,1,0,0,0,0,0,0,57,0,0,4100,4242,16794,0,0,0,0,0,0,0,817,882,893,893,3,1,1,1,'Bone Scythe (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (59950,1,0,0,0,0,0,0,255,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Horn Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59951,1,0,0,255,0,0,0,255,0,0,4100,4242,16409,0,0,0,0,0,0,0,649,880,855,855,1,3,1,1,'Lynx Baghnakhs (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59952,1,0,0,0,0,0,0,255,0,0,4100,4242,14186,0,0,0,0,0,0,0,866,1629,1629,1629,1,2,2,2,'Dragon Leggings (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59952,1,0,0,0,0,0,0,96,0,0,4100,4242,14186,0,0,0,0,0,0,0,866,1629,1629,1629,1,2,2,2,'Dragon Leggings (desynth)');
 INSERT INTO `synth_recipes` VALUES (60001,0,0,0,0,0,0,0,0,1,0,4099,4241,3885,3886,3887,0,0,0,0,0,426,426,426,426,1,1,1,1,'Orchestrion');
 INSERT INTO `synth_recipes` VALUES (60002,0,0,0,0,0,0,0,0,1,0,4099,4241,4216,10875,0,0,0,0,0,0,26728,26728,26728,26728,1,1,1,1,'Frosty Cap');
 INSERT INTO `synth_recipes` VALUES (60003,0,0,0,0,0,0,0,0,1,0,4099,4241,3451,3452,3453,0,0,0,0,0,3676,3676,3676,3676,1,1,1,1,'Celestial Globe');
@@ -4170,16 +4170,16 @@ INSERT INTO `synth_recipes` VALUES (65512,0,0,0,0,0,0,0,0,118,0,4096,4238,9002,9
 -- INSERT INTO `synth_recipes` VALUES (65523,0,1982,0,0,0,255,0,0,255,0,4096,4238,664,682,3979,9006,9258,9258,0,0,25559,25560,25560,25560,1,1,1,1,'Pinga Crown');
 -- INSERT INTO `synth_recipes` VALUES (65524,0,1982,0,255,0,0,0,0,255,0,4096,4238,752,761,8752,9004,9004,9258,9258,9258,26531,26532,26532,26532,1,1,1,1,'Ratri Breastplate');
 -- INSERT INTO `synth_recipes` VALUES (65525,0,1983,0,0,0,255,0,0,255,0,4102,4244,9006,9062,9247,9833,9844,9845,9845,9867,21667,21668,21669,21669,1,1,1,1,'Futhark Claymore');
--- INSERT INTO `synth_recipes` VALUES (69901,1,0,0,0,0,0,0,0,255,0,4100,4242,16471,0,0,0,0,0,0,0,715,937,649,4163,1,1,1,1,'Blind Knife (desynth)');
+INSERT INTO `synth_recipes` VALUES (69901,1,0,0,0,0,0,0,0,34,0,4100,4242,16471,0,0,0,0,0,0,0,715,937,649,4163,1,1,1,1,'Blind Knife (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69902,1,0,0,0,0,0,0,0,255,0,4100,4242,16414,0,0,0,0,0,0,0,894,894,894,894,1,1,1,1,'Cermet Claws (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69903,1,0,0,0,0,0,0,0,255,0,4100,4242,13682,0,0,0,0,0,0,0,650,937,937,937,1,1,1,1,'Ether Tank (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69904,1,0,0,0,0,0,0,0,255,0,4100,4242,17403,0,0,0,0,0,0,0,650,933,933,933,1,1,1,1,'Frog Lure (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (69904,1,0,0,0,0,0,0,0,46,0,4100,4242,17403,0,0,0,0,0,0,0,650,933,933,933,1,1,1,1,'Frog Lure (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (69905,1,0,0,0,0,0,0,0,255,0,4100,4242,12946,0,0,0,0,0,0,0,851,933,933,933,1,1,1,1,'Suzaku\'s Sune-Ate (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69906,1,0,0,0,0,0,0,0,255,0,4100,4242,17605,0,0,0,0,0,0,0,937,937,937,937,1,1,1,1,'Acid Dagger (desynth)');
+INSERT INTO `synth_recipes` VALUES (69906,1,0,0,0,0,0,0,0,45,0,4100,4242,17605,0,0,0,0,0,0,0,937,937,937,937,1,1,1,1,'Acid Dagger (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69907,1,0,0,0,0,0,0,0,255,0,4100,4242,13683,0,0,0,0,0,0,0,650,850,850,850,1,1,1,1,'Water Tank (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69908,1,0,0,0,0,0,0,0,255,0,4100,4242,17402,0,0,0,0,0,0,0,937,933,933,933,1,1,1,1,'Shrimp Lure (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69909,1,0,0,0,0,0,0,0,255,0,4100,4242,16861,0,0,0,0,0,0,0,936,715,931,931,1,2,2,2,'Ice Lance (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69910,1,0,0,0,0,0,0,0,255,0,4100,4242,17407,0,0,0,0,0,0,0,648,933,933,933,1,1,1,1,'Minnow (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (69909,1,0,0,0,0,0,0,0,93,0,4100,4242,16861,0,0,0,0,0,0,0,936,715,931,931,1,2,2,2,'Ice Lance (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (69910,1,0,0,0,0,0,0,0,31,0,4100,4242,17407,0,0,0,0,0,0,0,648,933,933,933,1,1,1,1,'Minnow (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (69911,1,0,0,0,0,0,0,0,255,0,4100,4242,16387,0,0,0,0,0,0,0,852,850,937,4157,1,2,1,1,'Poison Cesti (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69912,1,0,0,0,0,0,0,0,255,0,4100,4242,16867,0,0,0,0,0,0,0,715,817,884,884,1,1,1,1,'Orc Piercer (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69913,1,0,0,0,0,0,0,0,255,0,4100,4242,16909,0,0,0,0,0,0,0,4158,707,651,657,1,1,1,1,'Kororito (desynth)');
@@ -4187,11 +4187,11 @@ INSERT INTO `synth_recipes` VALUES (65512,0,0,0,0,0,0,0,0,118,0,4096,4238,9002,9
 -- INSERT INTO `synth_recipes` VALUES (69915,1,0,0,0,0,0,0,0,255,0,4100,4242,17381,0,0,0,0,0,0,0,931,933,932,932,2,1,1,1,'Comp. Fishing Rod (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69916,1,0,0,0,0,0,0,0,255,0,4100,4242,17384,0,0,0,0,0,0,0,933,932,932,932,1,4,4,4,'Carbon Fish. Rod (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69917,1,0,0,0,0,0,0,0,255,0,4100,4242,16910,0,0,0,0,0,0,0,4159,707,1234,657,1,1,6,1,'Mamushito (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69918,1,0,0,0,0,0,0,0,255,0,4100,4242,16430,0,0,0,0,0,0,0,937,649,649,649,1,1,1,1,'Acid Claws (desynth)');
+INSERT INTO `synth_recipes` VALUES (69918,1,0,0,0,0,0,0,0,51,0,4100,4242,16430,0,0,0,0,0,0,0,937,649,649,649,1,1,1,1,'Acid Claws (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69919,1,0,0,0,0,0,0,0,255,0,4100,4242,1624,0,0,0,0,0,0,0,933,933,933,933,10,10,10,10,'Bugbear Mask (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (69920,1,0,0,0,0,0,0,0,255,0,4100,4242,16858,0,0,0,0,0,0,0,5306,1226,1226,1226,1,10,10,10,'Sacred Lance (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69921,1,0,0,0,0,0,0,0,255,0,4100,4242,16860,0,0,0,0,0,0,0,4154,1226,715,715,1,10,2,2,'Holy Lance (desynth)');
--- INSERT INTO `synth_recipes` VALUES (69922,1,0,0,0,0,0,0,0,255,0,4100,4242,17041,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,3,'Holy Mace (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (69921,1,0,0,0,0,0,0,0,83,0,4100,4242,16860,0,0,0,0,0,0,0,4154,1226,715,715,1,10,2,2,'Holy Lance (desynth)'); --yield mismatch
+-- INSERT INTO `synth_recipes` VALUES (69922,1,0,0,0,0,0,0,0,55,0,4100,4242,17041,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,3,'Holy Mace (desynth)'); --yield mismatch
 -- INSERT INTO `synth_recipes` VALUES (69923,1,0,0,0,0,0,0,0,255,0,4100,4242,12434,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Genbu\'s Kabuto (desynth)');
 INSERT INTO `synth_recipes` VALUES (70001,0,0,0,0,0,0,0,0,0,1,4101,4243,2203,2203,2343,4362,4509,0,0,0,2209,2209,2209,2209,2,4,6,8,'Worm Paste');
 INSERT INTO `synth_recipes` VALUES (70002,0,0,0,0,0,0,0,0,0,1,4103,4245,727,4378,0,0,0,0,0,0,5575,5575,5575,5575,4,6,9,12,'Yogurt');
