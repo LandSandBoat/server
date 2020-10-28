@@ -69,7 +69,7 @@ function onUseAbility(player, target, ability)
         if pet:delStatusEffect(tpz.effect.SILENCE) then return true end
         if pet:delStatusEffect(tpz.effect.BANE) then return true end
         if pet:delStatusEffect(tpz.effect.CURSE_II) then return true end
-        if pet:delStatusEffect(tpz.effect.CURSE) then return true end
+        if pet:delStatusEffect(tpz.effect.CURSE_I) then return true end
         if pet:delStatusEffect(tpz.effect.PARALYSIS) then return true end
         if pet:delStatusEffect(tpz.effect.PLAGUE) then return true end
         if pet:delStatusEffect(tpz.effect.POISON) then return true end
