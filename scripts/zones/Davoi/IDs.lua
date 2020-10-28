@@ -69,6 +69,7 @@ zones[tpz.zone.DAVOI] =
         PURPLEFLASH_BRUKDOK = 17387969,
         ONE_EYED_GWAJBOJ    = 17387970,
         THREE_EYED_PROZPUZ  = 17387971,
+        HEMATIC_CYST        = 17387972,
     },
     npc =
     {
