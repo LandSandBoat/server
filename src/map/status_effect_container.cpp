@@ -1035,12 +1035,18 @@ void CStatusEffectContainer::Fold(uint32 charid)
                 {
                     oldestRoll = PStatusEffect;
                 }
-                else if (oldestRoll->GetStatusID() != EFFECT_BUST && PStatusEffect->GetStatusID() == EFFECT_BUST)
+                else if (PStatusEffect->GetStatusID() == EFFECT_BUST)
                 {
-                    oldestRoll = PStatusEffect;
+                    if (oldestRoll->GetStatusID() == EFFECT_BUST)
+                    {
+                        oldestRoll = PStatusEffect->GetStartTime() > oldestRoll->GetStartTime() ? PStatusEffect : oldestRoll;
+                    }
+                    else
+                    {
+                        oldestRoll = PStatusEffect;
+                    }
                 }
-                else if (std::chrono::milliseconds(PStatusEffect->GetDuration()) + PStatusEffect->GetStartTime() <
-                    std::chrono::milliseconds(oldestRoll->GetDuration()) + oldestRoll->GetStartTime())
+                else if (oldestRoll->GetStatusID() != EFFECT_BUST && PStatusEffect->GetStartTime() > oldestRoll->GetStartTime())
                 {
                     oldestRoll = PStatusEffect;
                 }
@@ -1049,7 +1055,7 @@ void CStatusEffectContainer::Fold(uint32 charid)
     }
     if (oldestRoll != nullptr)
     {
-        DelStatusEffectSilent(oldestRoll->GetStatusID());
+        RemoveStatusEffect(oldestRoll);
         DelStatusEffectSilent(EFFECT_DOUBLE_UP_CHANCE);
     }
 }
