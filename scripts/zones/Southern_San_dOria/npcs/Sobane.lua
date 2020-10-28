@@ -29,7 +29,6 @@ function onTrigger(player, npc)
     local signedInBlood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
     local teaWithATonberry = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
-    teaProg = player:getCharVar("TEA_WITH_A_TONBERRY_PROG")
 
     -- SHARPENING THE SWORD
     if player:getCharVar("sharpeningTheSwordCS") >= 2 then
@@ -51,7 +50,7 @@ function onTrigger(player, npc)
     elseif blood == QUEST_COMPLETED and teaWithATonberry == QUEST_AVAILABLE then
         player:startEvent(738)
     elseif teaWithATonberry == QUEST_ACCEPTED then
-        if teaProg == 5 then
+        if player:getCharVar("TEA_WITH_A_TONBERRY_PROG") == 5 then
             player:startEvent(740)
         else
             player:startEvent(739)

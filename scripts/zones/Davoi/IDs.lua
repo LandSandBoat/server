@@ -28,6 +28,8 @@ zones[tpz.zone.DAVOI] =
         AN_ORCISH_STORAGE_HOLE      = 7450, -- An Orcish storage hole. There is something inside, but you cannot open it without a key.
         A_WELL                      = 7452, -- A well, presumably dug by Orcs.
         CHEST_UNLOCKED              = 7471, -- You unlock the chest!
+        NOTHING_TO_DO               = 7921, -- You have nothing left to do here.
+        UNDER_ATTACK                = 7923, -- You are under attack!
         COMMON_SENSE_SURVIVAL       = 7972, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
