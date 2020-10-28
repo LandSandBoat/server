@@ -122,7 +122,7 @@ function onItemCheck(target)
             }
             -- Make sure we can actually tele to that zone..
             for _, validZone in ipairs(validZoneList) do
-                if validZone == leaderZone then
+                if validZone == leaderZone and target:isZoneVisited(validZone) then
                     result = 0
                 end
             end
