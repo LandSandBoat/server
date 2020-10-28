@@ -783,7 +783,7 @@ void CMobEntity::DistributeRewards()
             {
                 if (PMember->getZone() == PChar->getZone())
                 {
-                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PChar, RoeDatagram("mob", (CMobEntity*)this));
+                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, RoeDatagram("mob", (CMobEntity*)this));
                 }
             });
 
