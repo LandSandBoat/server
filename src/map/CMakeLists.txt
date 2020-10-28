@@ -23,8 +23,6 @@ set(SOURCES
     commandhandler.h
     conquest_system.cpp
     conquest_system.h
-    daily_system.cpp
-    daily_system.h
     enmity_container.cpp
     enmity_container.h
     grades.cpp
