@@ -16,18 +16,19 @@ end
 function onItemUse(target)
     local pet = target:getPet()
     
-    local effects = {
-                    tpz.effect.PETRIFICATION,
-                    tpz.effect.SILENCE,
-                    tpz.effect.BANE,
-                    tpz.effect.CURSE_II,
-                    tpz.effect.CURSE_I,
-                    tpz.effect.PARALYSIS,
-                    tpz.effect.PLAGUE,
-                    tpz.effect.POISON,
-                    tpz.effect.DISEASE,
-                    tpz.effect.BLINDNESS
-                    }
+    local effects =
+    {
+        tpz.effect.PETRIFICATION,
+        tpz.effect.SILENCE,
+        tpz.effect.BANE,
+        tpz.effect.CURSE_II,
+        tpz.effect.CURSE_I,
+        tpz.effect.PARALYSIS,
+        tpz.effect.PLAGUE,
+        tpz.effect.POISON,
+        tpz.effect.DISEASE,
+        tpz.effect.BLINDNESS
+    }
 
     local count = 10
     local statusEffectTable = effects
