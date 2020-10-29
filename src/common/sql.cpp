@@ -201,7 +201,7 @@ int32 Sql_Keepalive(Sql_t* self)
 	uint32 timeout, ping_interval;
 
 	// set a default value first
-	timeout = 28800; // 8 hours
+	timeout = 7200; // 2 hours
 
 	// request the timeout value from the mysql server
 	Sql_GetTimeout(self, &timeout);
