@@ -420,7 +420,7 @@ void onCharLoad(CCharEntity* PChar)
 
             if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
             {
-                PChar->m_eminenceCache.notifyTimedRecord = true;
+                PChar->m_eminenceCache.notifyTimedRecord = static_cast<bool>(GetActiveTimedRecord());
                 AddActiveTimedRecord(PChar);
             }
         }
