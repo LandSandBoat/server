@@ -872,7 +872,7 @@ void CMobController::FollowRoamPath()
         PMob->PAI->PathFind->FollowPath();
 
         CBattleEntity* PPet = PMob->PPet;
-        if (PPet != nullptr && !PPet->PAI->IsEngaged())
+        if (PPet != nullptr && PPet->PAI->IsSpawned() && !PPet->PAI->IsEngaged())
         {
             // pet should follow me if roaming
             position_t targetPoint = nearPosition(PMob->loc.p, 2.1f, (float)M_PI);
