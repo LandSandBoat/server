@@ -17,7 +17,9 @@ local timedSchedule = {
     {     0,  4009,  4015,  4011,  4017,  4014}, -- Saturday
 }
 -- Load timetable for timed records
-RoeParseTimed(timedSchedule)
+if ENABLE_ROE_TIMED and ENABLE_ROE_TIMED > 0 then
+    RoeParseTimed(timedSchedule)
+end
 
 local defaults = {
     check = checks.masterCheck, -- Check function should return true/false

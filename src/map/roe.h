@@ -55,7 +55,7 @@ typedef std::array<uint16, 6> RecordTimetable_D;
 typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
 struct RoeSystemData
 {
-    bool RoeEnabled;
+    bool RoeEnabled = true;
     RecordTimetable_W TimedRecordTable;
     std::bitset<4096> ImplementedRecords;
     std::bitset<4096> RepeatableRecords;
@@ -63,6 +63,11 @@ struct RoeSystemData
     std::vector<uint16> DailyRecordIDs;
     std::bitset<4096> TimedRecords;
     std::array<uint32, 4096> NotifyThresholds;
+
+    RoeSystemData()
+    {
+        TimedRecordTable.fill(RecordTimetable_D{});
+    }
 };
 
 struct RoeCheckHandler

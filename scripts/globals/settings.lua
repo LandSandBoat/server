@@ -37,6 +37,7 @@ GOV_REWARD_ALLIANCE = 1 -- Allow Grounds of Valor rewards while being a member o
 
 -- Records of Eminence
 ENABLE_ROE = 1
+ENABLE_ROE_TIMED = 1 -- Enable 4-hour timed records
 
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active

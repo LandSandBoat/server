@@ -45,6 +45,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 
+#include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
@@ -290,6 +291,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
+                charutils::SendTimerPacket(PChar, m_TimeLimit);
             }
             else if (!IsRegistered(PChar))
             {
@@ -424,10 +426,11 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     auto found = false;
     if (PEntity->objtype == TYPE_PC)
     {
+        auto PChar = dynamic_cast<CCharEntity*>(PEntity);
         if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
-            static_cast<CCharEntity*>(PEntity)->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
         if (m_LevelCap)
-            static_cast<CCharEntity*>(PEntity)->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
 
         m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
 
@@ -443,8 +446,9 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PEntity->loc.p.y = 0;
                 PEntity->loc.p.z = 0;
             }
-            luautils::OnBattlefieldLeave(static_cast<CCharEntity*>(PEntity), this, leavecode);
+            luautils::OnBattlefieldLeave(PChar, this, leavecode);
         }
+        charutils::SendClearTimerPacket(PChar);
     }
     else
     {
