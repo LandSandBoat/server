@@ -13,6 +13,9 @@
 #include "../../utils/battleutils.h"
 #include "../../utils/trustutils.h"
 
+#include "../controllers/player_controller.h"
+#include "../../weapon_skill.h"
+
 namespace gambits
 {
 
@@ -594,6 +597,42 @@ bool CGambitsContainer::TryTrustSkill()
                         }
                     }
                 }
+                break;
+            }
+            case G_SELECT::SPECIAL_AYAME:
+            {
+                auto PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                auto PMasterController = static_cast<CPlayerController*>(PMaster->PAI->GetController());
+                auto PMasterLastWeaponSkill = PMasterController->getLastWeaponSkill();
+
+                if (PMasterLastWeaponSkill)
+                {
+                    for (auto& skill : tp_skills)
+                    {
+                        std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
+                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
+                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
+                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
+
+                        std::list<SKILLCHAIN_ELEMENT> skillProperties;
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                        skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                        if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties); possible_skillchain != SC_NONE)
+                        {
+                            if (possible_skillchain >= chosen_skillchain)
+                            {
+                                chosen_skill = skill;
+                                chosen_skillchain = possible_skillchain;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    chosen_skill = tp_skills.at(tp_skills.size() - 1);
+                }
+
                 break;
             }
             default: { break; }

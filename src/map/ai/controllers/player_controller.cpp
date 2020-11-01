@@ -68,7 +68,7 @@ bool CPlayerController::Engage(uint16 targid)
     {
         if (distance(PChar->loc.p, PTarget->loc.p) < 30)
         {
-            if (m_LastAttackTime + std::chrono::milliseconds(PChar->GetWeaponDelay(false)) < server_clock::now())
+            if (m_lastAttackTime + std::chrono::milliseconds(PChar->GetWeaponDelay(false)) < server_clock::now())
             {
                 if (CController::Engage(targid))
                 {
@@ -194,6 +194,8 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             }
             roeutils::event(ROE_WSKILL_USE, PChar, RoeDatagramList{});
 
+            m_lastWeaponSkill = PWeaponSkill;
+
             return CController::WeaponSkill(targid, wsid);
         }
         else if (errMsg)
@@ -210,12 +212,12 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
 time_point CPlayerController::getLastAttackTime()
 {
-    return m_LastAttackTime;
+    return m_lastAttackTime;
 }
 
-void CPlayerController::setLastAttackTime(time_point _LastAttackTime)
+void CPlayerController::setLastAttackTime(time_point _lastAttackTime)
 {
-    m_LastAttackTime = _LastAttackTime;
+    m_lastAttackTime = _lastAttackTime;
 }
 
 void CPlayerController::setLastErrMsgTime(time_point _LastErrMsgTime)
@@ -226,4 +228,9 @@ void CPlayerController::setLastErrMsgTime(time_point _LastErrMsgTime)
 time_point CPlayerController::getLastErrMsgTime()
 {
     return m_errMsgTime;
+}
+
+CWeaponSkill* CPlayerController::getLastWeaponSkill()
+{
+    return m_lastWeaponSkill;
 }

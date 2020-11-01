@@ -25,6 +25,7 @@
 #define _PLAYERCONTROLLER_H
 
 class CCharEntity;
+class CWeaponSkill;
 
 class CPlayerController : public CController
 {
@@ -46,12 +47,16 @@ public:
 
     time_point getLastAttackTime();
     void setLastAttackTime(time_point);
+
     void setLastErrMsgTime(time_point);
     time_point getLastErrMsgTime();
 
+    CWeaponSkill* getLastWeaponSkill();
+
 protected:
-    time_point m_LastAttackTime {server_clock::now()};
+    time_point m_lastAttackTime {server_clock::now()};
     time_point m_errMsgTime {server_clock::now()};
+    CWeaponSkill* m_lastWeaponSkill;
 };
 
 #endif // _PLAYERCONTROLLER
