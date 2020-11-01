@@ -5980,10 +5980,17 @@ void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     CBlueSpell* spell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(spellInQuestion + 0x200)); // the spells in this packet are offsetted by 0x200 from their spell IDs.
 
                     if (spell != nullptr) {
-                        blueutils::SetBlueSpell(PChar, spell, spellIndex, false);
+                        if (PChar->m_SetBlueSpells[spellIndex] == 0x00)
+                        {
+                            ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to unset BLU spell they don't have set! \n" CL_RESET, PChar->GetName());
+                        }
+                        else
+                        {
+                            blueutils::SetBlueSpell(PChar, spell, spellIndex, false);
+                        }
                     }
                     else {
-                        ShowDebug("Cannot resolve spell id \n");
+                        ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
                     }
                 }
             }
@@ -6017,7 +6024,7 @@ void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     PChar->UpdateHealth();
                 }
                 else {
-                    ShowDebug("Cannot resolve spell id \n");
+                    ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
                 }
             }
             else {

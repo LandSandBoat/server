@@ -4438,44 +4438,18 @@ namespace battleutils
     {
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_BIND))
         {
-            uint16 BindBreakChance = 0; // 0-1000 (100.0%) scale. Maybe change to a float later..
-            EMobDifficulty mobCheck = charutils::CheckMob(PAttacker->GetMLevel(), PDefender->GetMLevel());
+            uint16 BindBreakChance = 950; // 0-1000 (100.0%) scale. Maybe change to a float later..
 
-            // Todo: replace with an actual calculated value based on level difference. Not it, Bro!
-            // This entire block of conditionals should not exist. Lv diff really shouldn't be handled at the exp check level either.
-            // It might not even be in sync with the check values the entire way from lv 1 to lv 99 for all we know.
-            switch (mobCheck)
-            {
-            case EMobDifficulty::TooWeak:
-            case EMobDifficulty::IncrediblyEasyPrey:
-                BindBreakChance = 10;
-                break;
-
-            case EMobDifficulty::EasyPrey:
-            case EMobDifficulty::DecentChallenge:
-                BindBreakChance = 150;
-                break;
-
-            case EMobDifficulty::EvenMatch:
-                BindBreakChance = 300;
-                break;
-
-            case EMobDifficulty::Tough:
-                BindBreakChance = 750;
-                break;
-
-            case EMobDifficulty::VeryTough:
-            case EMobDifficulty::IncrediblyTough:
-                BindBreakChance = 990;
-                break;
-
-            default:
-                // no-op
-                break;
-            }
+            // Previously there was a tiered comparative level check here which gave different rates
+            // depending on the level difference between the attacker and the defender.
+            // These rates seemed very low, and have been removed, absent true research on retail.
+            // EMobDifficulty mobCheck = charutils::CheckMob(PAttacker->GetMLevel(), PDefender->GetMLevel());
+            // The level comparison and switch has been removed.
 
             if (BindBreakChance > tpzrand::GetRandomNumber(1000))
+            {
                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_BIND);
+            }
         }
     }
 

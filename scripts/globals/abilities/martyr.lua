@@ -44,7 +44,7 @@ function onUseAbility(player, target, ability)
     -- printf("Martyr Healed HP: %d", healHP)
 
     damageHP = utils.stoneskin(player, damageHP)
-    player:takeDamage(damageHP)
+    player:delHP(damageHP)
     target:addHP(healHP)
 
     return healHP
