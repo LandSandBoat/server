@@ -9859,7 +9859,7 @@ INSERT INTO `mob_groups` VALUES (46,964,149,'Deloknok',0,128,0,0,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (47,3233,149,'Purpleflash_Brukdok',600,0,2044,0,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (48,2980,149,'One-eyed_Gwajboj',0,128,1859,0,0,62,62,0);
 INSERT INTO `mob_groups` VALUES (49,6678,149,'Three-eyed_Prozpuz',0,128,307,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (50,1930,149,'Hematic_Cyst',0,128,0,0,0,40,40,0);
+INSERT INTO `mob_groups` VALUES (50,1930,149,'Hematic_Cyst',0,128,0,2400,0,40,40,0);
 
 INSERT INTO `mob_groups` VALUES (8047,3992,149,'Treasure_Chest',0,0,0,0,0,0,0,0);
 
