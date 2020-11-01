@@ -8,9 +8,11 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/npc_util")
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
-            player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
-            npcUtil.tradeHas(trade, 1683) then
+    if 
+        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
+        player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
+        npcUtil.tradeHas(trade, 1683)
+    then
         player:startEvent(29)
     end
 end
