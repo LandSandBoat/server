@@ -34,6 +34,9 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.STEALTH_SHOT)
 
+    -- Ranged Attack as much as possible (limited by "weapon" delay)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0)
+
     mob:SetAutoAttackEnabled(false)
 end
 

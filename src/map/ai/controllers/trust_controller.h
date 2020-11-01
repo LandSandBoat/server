@@ -66,8 +66,6 @@ private:
 
     uint8 GetPartyPosition();
 
-    bool TryRangedAttack(CBattleEntity* PTarget);
-
     CBattleEntity* m_LastTopEnmity;
 
     time_point m_LastRepositionTime;

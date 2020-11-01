@@ -8,6 +8,7 @@
 #include "../../ai/states/ability_state.h"
 #include "../../ai/states/mobskill_state.h"
 #include "../../ai/states/magic_state.h"
+#include "../../ai/states/range_state.h"
 #include "../../ai/states/weaponskill_state.h"
 #include "../../utils/battleutils.h"
 #include "../../utils/trustutils.h"
@@ -50,6 +51,7 @@ void CGambitsContainer::Tick(time_point tick)
     // TODO: Is this necessary?
     // Not already doing something
     if (POwner->PAI->IsCurrentState<CAbilityState>() ||
+        POwner->PAI->IsCurrentState<CRangeState>() ||
         POwner->PAI->IsCurrentState<CMagicState>() ||
         POwner->PAI->IsCurrentState<CWeaponSkillState>() ||
         POwner->PAI->IsCurrentState<CMobSkillState>())
@@ -279,7 +281,11 @@ void CGambitsContainer::Tick(time_point tick)
                 break;
             }
 
-            if (action.reaction == G_REACTION::MA)
+            if (action.reaction == G_REACTION::RATTACK)
+            {
+                controller->RangedAttack(target->targid);
+            }
+            else if (action.reaction == G_REACTION::MA)
             {
                 if (action.select == G_SELECT::SPECIFIC)
                 {

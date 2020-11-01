@@ -383,7 +383,7 @@ bool CNavMesh::validPosition(const position_t& position)
     return m_navMesh->isValidPolyRef(startRef);
 }
 
-bool CNavMesh::raycast(const position_t& start, const position_t& end)
+bool CNavMesh::raycast(const position_t& start, const position_t& end, bool lookOffMesh)
 {
     TracyZoneScoped;
 
@@ -463,7 +463,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end)
     // raycasted to - it needs to be on the navmesh. This will check to
     // see if the player is "off-mesh" and raycast to the nearest "on-mesh"
     // point instead. distanceToWall will be 0.0f if the player is "off-mesh".
-    if (distanceToWall < 0.01f)
+    if (distanceToWall < 0.01f && lookOffMesh)
     {
         // Overwrite epos with closest valid point
         status = m_navMeshQuery.closestPointOnPolyBoundary(startRef, epos, epos);

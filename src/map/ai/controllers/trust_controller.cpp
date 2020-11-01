@@ -128,11 +128,11 @@ void CTrustController::DoCombatTick(time_point tick)
             {
                 if (currentDistanceToMaster > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 5.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                 }
                 else if (currentDistanceToTarget > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 5.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
                 }
                 break;
             }
@@ -144,10 +144,6 @@ void CTrustController::DoCombatTick(time_point tick)
             case LONG_RANGE:
             {
                 PathOutToDistance(PTarget, 12.0f);
-                if (!m_InTransit)
-                {
-                    TryRangedAttack(PTarget);
-                }
                 break;
             }
             case MELEE_RANGE:
@@ -312,7 +308,8 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 
     // Invalidate position and pick new one (limit: every 3s)
     if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) &&
-       (m_Tick - m_LastRepositionTime > 3s || !m_InTransit))
+        m_Tick - m_LastRepositionTime > 3s &&
+        !m_InTransit)
     {
         std::vector<position_t> positions(5);
         for (unsigned int i = 0; i < positions.size(); ++i)
@@ -332,12 +329,13 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         for (auto& potential_position : positions)
         {
             // Validate position
-            if (POwner->PAI->PathFind->ValidPosition(potential_position) &&
-                POwner->PAI->PathFind->CanSeePoint(potential_position))
+            if (!position_found &&
+                POwner->PAI->PathFind->ValidPosition(potential_position) &&
+                POwner->PAI->PathFind->CanSeePoint(potential_position, false))
             {
                 position_found = true;
-                m_InTransit = true;
                 target_position = potential_position;
+                m_InTransit = true;
             }
         }
 
@@ -351,6 +349,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
     }
     else
     {
+        FaceTarget(PTarget->targid);
         m_InTransit = false;
     }
 }
@@ -376,12 +375,15 @@ bool CTrustController::RangedAttack(uint16 targid)
 {
     TracyZoneScoped;
 
-    if (auto* PTrust = dynamic_cast<CTrustEntity*>(POwner))
+    if (m_Tick - m_LastRangedAttackTime > 5s && !m_InTransit)
     {
-        if (PTrust->PAI->CanChangeState())
+        FaceTarget(PTarget->targid);
+        if (POwner->PAI->CanChangeState())
         {
-            return PTrust->PAI->Internal_RangedAttack(targid);
+            return POwner->PAI->Internal_RangedAttack(targid);
         }
+        m_LastRangedAttackTime = m_Tick;
+        return true;
     }
     return false;
 }
@@ -430,18 +432,4 @@ uint8 CTrustController::GetPartyPosition()
         }
     }
     return 0;
-}
-
-bool CTrustController::TryRangedAttack(CBattleEntity* PTarget)
-{
-    TracyZoneScoped;
-
-    if (m_Tick - m_LastRangedAttackTime > 5s)
-    {
-        FaceTarget(PTarget->targid);
-        RangedAttack(PTarget->targid);
-        m_LastRangedAttackTime = m_Tick;
-        return true;
-    }
-    return false;
 }

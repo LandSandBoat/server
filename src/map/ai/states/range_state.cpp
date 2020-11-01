@@ -56,7 +56,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid) :
             auto chance {PChar->getMod(Mod::RAPID_SHOT) + PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar)};
             if (tpzrand::GetRandomNumber(100) < chance)
             {
-                //reduce delay by 10%-50%
+                // reduce delay by 10%-50%
                 delay = (int16)(delay * (10 - tpzrand::GetRandomNumber(1, 6)) / 10.f);
                 m_rapidShot = true;
             }
@@ -125,16 +125,7 @@ bool CRangeState::Update(time_point tick)
         {
             m_errorMsg.reset();
 
-            // TODO: Move OnRangedAttack to CBattleEntity
-            if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
-            {
-                PChar->OnRangedAttack(*this, action);
-            }
-            else if (auto PTrust = dynamic_cast<CTrustEntity*>(m_PEntity))
-            {
-                PTrust->OnRangedAttack(*this, action);
-            }
-
+            m_PEntity->OnRangedAttack(*this, action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         }
         Complete();
