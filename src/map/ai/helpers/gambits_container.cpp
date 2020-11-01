@@ -19,6 +19,8 @@ namespace gambits
 // Check levels, etc.
 void CGambitsContainer::AddGambit(Gambit_t gambit)
 {
+    TracyZoneScoped;
+
     bool available = true;
     for (auto& action : gambit.actions)
     {
@@ -39,6 +41,7 @@ void CGambitsContainer::AddGambit(Gambit_t gambit)
 void CGambitsContainer::Tick(time_point tick)
 {
     TracyZoneScoped;
+
     if (tick < m_lastAction)
     {
         return;
@@ -385,6 +388,7 @@ void CGambitsContainer::Tick(time_point tick)
 bool CGambitsContainer::CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate)
 {
     TracyZoneScoped;
+
     auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
     switch (predicate.condition)
     {
@@ -493,6 +497,7 @@ bool CGambitsContainer::CheckTrigger(CBattleEntity* trigger_target, Predicate_t&
 bool CGambitsContainer::TryTrustSkill()
 {
     TracyZoneScoped;
+
     auto target = POwner->GetBattleTarget();
 
     auto checkTPTrigger = [&]() -> bool

@@ -90,6 +90,7 @@ void CTrustController::Tick(time_point tick)
 void CTrustController::DoCombatTick(time_point tick)
 {
     TracyZoneScoped;
+
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
@@ -267,6 +268,7 @@ void CTrustController::DoRoamTick(time_point tick)
 void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 {
     TracyZoneScoped;
+
     uint8 currentPartyPos = GetPartyPosition();
     for (auto POtherTrust : PMaster->PTrusts)
     {
@@ -295,6 +297,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 {
     TracyZoneScoped;
+
     float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
     position_t target_position = POwner->loc.p;
 
@@ -329,7 +332,8 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         for (auto& potential_position : positions)
         {
             // Validate position
-            if (POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->loc.zone->m_navMesh->raycast(PTarget->loc.p, potential_position))
+            if (POwner->PAI->PathFind->ValidPosition(potential_position) &&
+                POwner->PAI->PathFind->CanSeePoint(potential_position))
             {
                 position_found = true;
                 m_InTransit = true;
@@ -353,6 +357,8 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 
 bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
+    TracyZoneScoped;
+
     if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0))
     {
         return false;
@@ -368,6 +374,8 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 
 bool CTrustController::RangedAttack(uint16 targid)
 {
+    TracyZoneScoped;
+
     if (auto* PTrust = dynamic_cast<CTrustEntity*>(POwner))
     {
         if (PTrust->PAI->CanChangeState())
@@ -380,6 +388,8 @@ bool CTrustController::RangedAttack(uint16 targid)
 
 bool CTrustController::Cast(uint16 targid, SpellID spellid)
 {
+    TracyZoneScoped;
+
     FaceTarget(targid);
     if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellid)))
     {
@@ -398,6 +408,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
 CBattleEntity* CTrustController::GetTopEnmity()
 {
     TracyZoneScoped;
+
     CBattleEntity* PEntity = nullptr;
     if (auto PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
     {
@@ -408,6 +419,8 @@ CBattleEntity* CTrustController::GetTopEnmity()
 
 uint8 CTrustController::GetPartyPosition()
 {
+    TracyZoneScoped;
+
     auto& trustList = static_cast<CCharEntity*>(POwner->PMaster)->PTrusts;
     for (uint8 i = 0; i < trustList.size(); ++i)
     {
@@ -421,6 +434,8 @@ uint8 CTrustController::GetPartyPosition()
 
 bool CTrustController::TryRangedAttack(CBattleEntity* PTarget)
 {
+    TracyZoneScoped;
+
     if (m_Tick - m_LastRangedAttackTime > 5s)
     {
         FaceTarget(PTarget->targid);
