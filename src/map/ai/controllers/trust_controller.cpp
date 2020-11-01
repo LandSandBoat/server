@@ -34,6 +34,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../recast_container.h"
 #include "../../mob_spell_container.h"
 #include "../../ai/states/range_state.h"
+#include "../../items/item_weapon.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
@@ -128,11 +129,11 @@ void CTrustController::DoCombatTick(time_point tick)
             {
                 if (currentDistanceToMaster > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 5.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    PathOutToDistance(PTarget, 9.0f);
                 }
                 else if (currentDistanceToTarget > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 5.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    PathOutToDistance(PTarget, 9.0f);
                 }
                 break;
             }
@@ -375,14 +376,19 @@ bool CTrustController::RangedAttack(uint16 targid)
 {
     TracyZoneScoped;
 
-    if (m_Tick - m_LastRangedAttackTime > 5s && !m_InTransit)
+    duration rangedDelay = 10s;
+    if (CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(POwner->m_Weapons[SLOT_RANGED]))
+    {
+        rangedDelay = std::chrono::milliseconds(PRange->getDelay());
+    }
+
+    if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
     {
         FaceTarget(PTarget->targid);
-        if (POwner->PAI->CanChangeState())
+        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(targid))
         {
-            return POwner->PAI->Internal_RangedAttack(targid);
+            m_LastRangedAttackTime = m_Tick;
         }
-        m_LastRangedAttackTime = m_Tick;
         return true;
     }
     return false;
