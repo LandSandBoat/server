@@ -215,7 +215,9 @@ public:
     float           GetZPos();          // позиция по координате Z
     uint8           GetRotPos();
     void            HideName(bool hide); // hide / show name
-    bool            IsNameHidden();     // checks if name is hidden
+    bool            IsNameHidden();      // checks if name is hidden
+    bool            IsTargetable();      // checks if entity is targetable
+    virtual bool    isWideScannable();   // checks if the entity should show up on wide scan
 
     CBaseEntity*    GetEntity(uint16 targid, uint8 filter = -1);
 

@@ -7,7 +7,7 @@ require("scripts/globals/zone")
 
 -----------------------------------------------
 -- battlefields by zone
--- captured from client 2017-10-02
+-- captured from client 2020-10-24
 -----------------------------------------------
 
 --[[
@@ -17,7 +17,8 @@ require("scripts/globals/zone")
 --]]
 
 local battlefields = {
-    [6] = {                 -- BEARCLAW PINNACLE
+    [tpz.zone.BEARCLAW_PINNACLE] =
+    {
         { 0,  640,    0},   -- Flames of the Dead (PM5-3 U3)
      -- { 1,  641,    0},   -- Follow the White Rabbit (ENM)
      -- { 2,  642,    0},   -- When Hell Freezes Over (ENM)
@@ -26,7 +27,8 @@ local battlefields = {
      -- { 5,    ?, 3454},   -- Taurassic Park (HKC30)
     },
 
-    [8] = {                 -- BONEYARD GULLY
+    [tpz.zone.BONEYARD_GULLY] =
+    {
         { 0,  672,    0},   -- Head Wind (PM5-3 U2)
      -- { 1,  673,    0},   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle
      -- { 2,  674,    0},   -- Sheep in Antlion's Clothing (ENM)
@@ -38,14 +40,16 @@ local battlefields = {
      -- { 8,    ?,    0},   -- *Head Wind (HTMBF)
     },
 
-    [10] = {                -- THE SHROUDED MAW
+    [tpz.zone.THE_SHROUDED_MAW] =
+    {
         { 0,  704,    0},   -- Darkness Named (PM3-5)
      -- { 1,  705,    0},   -- Test Your Mite (ENM)
         { 2,  706,    0},   -- Waking Dreams (Quest)
      -- { 3,    ?,    0},   -- *Waking Dreams (HTMBF)
     },
 
-    [13] = {                -- MINE SHAFT 2716
+    [tpz.zone.MINE_SHAFT_2716] =
+    {
         { 0,  736,    0},   -- A Century of Hardship (PM5-3 L3)
      -- { 1,  737,    0},   -- Return to the Depths (Quest)
      -- { 2,  738,    0},   -- Bionic Bug (ENM)
@@ -54,40 +58,47 @@ local battlefields = {
      -- { 5,  741, 3455},   -- The Mobline Comedy (HKC50)
     },
 
-    [17] = {                -- SPIRE OF HOLLA
+    [tpz.zone.SPIRE_OF_HOLLA] =
+    {
         { 0,  768,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  769,    0},   -- Simulant (ENM)
      -- { 2,  770, 3351},   -- Empty Hopes (KC30)
     },
 
-    [19] = {                -- SPIRE OF DEM
+    [tpz.zone.SPIRE_OF_DEM] =
+    {
         { 0,  800,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  801,    0},   -- You Are What You Eat (ENM)
      -- { 2,  802, 3351},   -- Empty Dreams (KC30)
     },
 
-    [21] = {                -- SPIRE OF MEA
+    [tpz.zone.SPIRE_OF_MEA] =
+    {
         { 0,  832,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  833,    0},   -- Playing Host (ENM)
      -- { 2,  834, 3351},   -- Empty Desires (KC30)
     },
 
-    [23] = {                -- SPIRE OF VAHZL
+    [tpz.zone.SPIRE_OF_VAHZL] =
+    {
         { 0,  864,    0},   -- Desires of Emptiness (PM5-2)
      -- { 1,  865,    0},   -- Pulling the Plug (ENM)
      -- { 2,  866, 3352},   -- Empty Aspirations (KC50)
     },
 
-    [29] = {                -- RIVERNE SITE #B01
+    [tpz.zone.RIVERNE_SITE_B01] =
+    {
         { 0,  896,    0},   -- Storms of Fate (Quest)
      -- { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
     },
 
-    [30] = {                -- RIVERNE SITE #A01
+    [tpz.zone.RIVERNE_SITE_A01] =
+    {
      -- { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
     },
 
-    [31] = {                -- MONARCH LINN
+    [tpz.zone.MONARCH_LINN] =
+    {
         { 0,  960,    0},   -- Ancient Vows (PM2-5)
         { 1,  961,    0},   -- The Savage (PM4-2)
      -- { 2,  962,    0},   -- Fire in the Sky (ENM)
@@ -99,18 +110,21 @@ local battlefields = {
      -- { 8,    ?,    0},   -- *The Savage (HTMBF)
     },
 
-    [32] = {                -- SEALION'S DEN
+    [tpz.zone.SEALIONS_DEN] =
+    {
         { 0,  992,    0},   -- One to Be Feared (PM6-4)
         { 1,  993,    0},   -- The Warrior's Path (PM7-5)
      -- { 2,    ?,    0},   -- *The Warrior's Path (HTMBF)
      -- { 3,    ?,    0},   -- *One to Be Feared (HTMBF)
     },
 
-    [35] = {                -- THE GARDEN OF RU'HMET
+    [tpz.zone.THE_GARDEN_OF_RUHMET] =
+    {
         { 0, 1024,    0},   -- When Angels Fall (PM8-3)
     },
 
-    [36] = {                -- EMPYREAL PARADOX
+    [tpz.zone.EMPYREAL_PARADOX] =
+    {
         { 0, 1056,    0},   -- Dawn (PM8-4)
         { 1, 1057,    0},   -- Apocalypse Nigh (Quest)
      -- { 2,    ?,    0},   -- Both Paths Taken (ROVM2-9-2)
@@ -119,7 +133,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- Sealed Fate (Master Trial)
     },
 
-    [37] = {                -- TEMENOS
+    [tpz.zone.TEMENOS] =
+    {
      -- { 0, 1299,    0},   -- Northern Tower
      -- { 1, 1300,    0},   -- Eastern Tower
      -- { 2, 1298,    0},   -- Western Tower
@@ -132,7 +147,8 @@ local battlefields = {
      -- { 9, 1307,    0},   -- Central 4th Floor II
     },
 
-    [38] = {                -- APOLLYON
+    [tpz.zone.APOLLYON] =
+    {
      -- { 0, 1291,    0},   -- SW Apollyon
      -- { 1, 1290,    0},   -- NW Apollyon
      -- { 2, 1293,    0},   -- SE Apollyon
@@ -143,7 +159,13 @@ local battlefields = {
      -- { 7, 1297,    0},   -- Central Apollyon II
     },
 
-    [57] = {                -- TALACCA COVE
+    [tpz.zone.ARRAPAGO_REEF] =
+    {
+     -- { 0,    ?,    0},   -- Lamia Reprisal
+    },
+
+    [tpz.zone.TALACCA_COVE] =
+    {
      -- { 0, 1088,    0},   -- Call to Arms (ISNM)
      -- { 1, 1089,    0},   -- Compliments to the Chef (ISNM)
      -- { 2, 1090,    0},   -- Puppetmaster Blues (Quest)
@@ -152,7 +174,13 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Legacy of the Lost (HTMBF)
     },
 
-    [64] = {                -- NAVUKGO EXECUTION CHAMBER
+    [tpz.zone.HALVUNG] =
+    {
+     -- { 0,    ?,    0},   -- Halvung Invasion
+    },
+
+    [tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
+    {
      -- { 0, 1120,    0},   -- Tough Nut to Crack (ISNM)
      -- { 1, 1121,    0},   -- Happy Caster (ISNM)
      -- { 2, 1122,    0},   -- Omens (Quest)
@@ -160,7 +188,13 @@ local battlefields = {
         { 4, 1124,    0},   -- Shield of Diplomacy (TOAU22)
     },
 
-    [67] = {                -- JADE SEPULCHER
+    [tpz.zone.MAMOOK] =
+    {
+     -- { 0,    ?,    0},   -- Mamook Incursion
+    },
+
+    [tpz.zone.JADE_SEPULCHER] =
+    {
      -- { 0, 1152,    0},   -- Making a Mockery (ISNM)
      -- { 1, 1153,    0},   -- Shadows of the Mind (ISNM)
         { 2, 1154, 2331},   -- The Beast Within (BLU LB5)
@@ -169,11 +203,34 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Puppet in Peril (HTMBF)
     },
 
-    [78] = {                -- HAZHALM TESTING GROUNDS
+    [tpz.zone.HAZHALM_TESTING_GROUNDS] =
+    {
      -- { 0, 1184,    0},   -- The Rider Cometh (Quest)
     },
 
-    [139] = {               -- HORLAIS PEAK
+    [tpz.zone.LA_VAULE_S] =
+    {
+     -- { 0,    ?,    0},   -- Splitting Heirs (S)
+     -- { 1,    ?,    0},   -- Purple, The New Black
+     -- { 2,    ?,    0},   -- The Blood-bathed Crown
+    },
+
+    [tpz.zone.BEADEAUX_S] =
+    {
+     -- { 0,    ?,    0},   -- Cracking Shells (B)
+     -- { 1,    ?,    0},   -- The Buried God
+    },
+
+    [tpz.zone.CASTLE_OZTROJA_S] =
+    {
+     -- { 0,    ?,    0},   -- Plucking Wings (W)
+     -- { 1,    ?,    0},   -- A Malicious Manifest
+     -- { 2,    ?,    0},   -- Manifest Destiny
+     -- { 3,    ?,    0},   -- At Journey's End
+    },
+
+    [tpz.zone.HORLAIS_PEAK] =
+    {
         { 0,    0,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,    1, 1131},   -- Tails of Woe (BS40)
         { 2,    2, 1130},   -- Dismemberment Brigade (BS60)
@@ -198,9 +255,14 @@ local battlefields = {
      -- {21,    ?, 4062},   -- *Tails of Woe (SKC10)
      -- {22,    ?, 4063},   -- *Dismemberment Brigade (SKC20)
      -- {23,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {24,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {26,    ?,    0},   -- Inv. from Excenmille
+     -- {27,    ?,    0},   -- Inv. from Excenmille and Co.
     },
 
-    [140] = {               -- GHELSBA OUTPOST
+    [tpz.zone.GHELSBA_OUTPOST] =
+    {
         { 0,   32,    0},   -- Save the Children (Sandy 1-3)
         { 1,   33,    0},   -- The Holy Crest (Quest)
         { 2,   34, 1551},   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
@@ -209,7 +271,8 @@ local battlefields = {
      -- { 5,   37,    0},   -- Mirror, Mirror (Quest)
     },
 
-    [144] = {               -- WAUGHROON SHRINE
+    [tpz.zone.WAUGHROON_SHRINE] =
+    {
         { 0,   64,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,   65, 1131},   -- The Worm's Turn (BS40)
         { 2,   66, 1130},   -- Grimshell Shocktroopers (BS60)
@@ -235,9 +298,14 @@ local battlefields = {
      -- {22,    ?, 4062},   -- *The Worm's Tail (SKC10)
      -- {23,    ?, 4063},   -- *Grimshell Shocktroopers (SKC20)
      -- {24,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {26,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {27,    ?,    0},   -- Invitation from Naji
+     -- {28,    ?,    0},   -- Invitation from Naji and Co.
     },
 
-    [146] = {               -- BALGA'S DIAS
+    [tpz.zone.BALGAS_DAIS] =
+    {
         { 0,   96,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,   97, 1131},   -- Steamed Sprouts (BS40)
         { 2,   98, 1130},   -- Divine Punishers (BS60)
@@ -262,16 +330,22 @@ local battlefields = {
      -- {21,    ?, 4062},   -- *Steamed Sprouts (SKC10)
      -- {22,    ?, 4063},   -- *Divine Punishers (SKC20)
      -- {23,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {24,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {26,    ?,    0},   -- Inv. from Kupipi
+     -- {27,    ?,    0},   -- Inv. from Kupipi and Co.
     },
 
-    [156] = {               -- THRONE ROOM [S]
+    [tpz.zone.THRONE_ROOM_S] =
+    {
      -- { 0,  352,    0},   -- Fiat Lux (Campaign)
      -- { 1,  353,    0},   -- Darkness Descends (WOTG37)
      -- { 2,  354,    0},   -- Bonds of Mythril (Quest)
      -- { 3,    ?,    0},   -- Unafraid of the Dark (Merit Battlefield)
     },
 
-    [163] = {               -- SACRIFICIAL CHAMBER
+    [tpz.zone.SACRIFICIAL_CHAMBER] =
+    {
         { 0,  128,    0},   -- The Temple of Uggalepih (ZM4)
         { 1,  129, 1130},   -- Jungle Boogymen (BS60)
         { 2,  130, 1130},   -- Amphibian Assault (BS60)
@@ -281,7 +355,8 @@ local battlefields = {
      -- { 6,    ?, 4063},   -- *Amphibian Assault (SKC20)
     },
 
-    [165] = {               -- THRONE ROOM
+    [tpz.zone.THRONE_ROOM] =
+    {
         { 0,  160,    0},   -- The Shadow Lord Battle (Mission 5-2)
         { 1,  161,    0},   -- Where Two Paths Converge (Basty 9-2)
      -- { 2,  162, 1130},   -- Kindred Spirits (BS60)
@@ -289,9 +364,12 @@ local battlefields = {
      -- { 4,  164,    0},   -- Smash! A Malevolent Menace (MKD14)
      -- { 5,    ?, 4063},   -- *Kindred Spirits (SKC20)
      -- { 6,    ?,    0},   -- *The Shadowlord Battle (HTMBF)
+     -- { 7,    ?,    0},   -- True Love
+     -- { 8,    ?,    0},   -- A Fond Farewell
     },
 
-    [168] = {               -- CHAMBER OF ORACLES
+    [tpz.zone.CHAMBER_OF_ORACLES] =
+    {
         { 0,  192,    0},   -- Through the Quicksand Caves (ZM6)
         { 1,  193, 1130},   -- Legion XI Comitatensis (BS60)
         { 2,  194, 1437},   -- Shattering Stars (SAM LB5)
@@ -305,7 +383,8 @@ local battlefields = {
      -- {10,    ?, 4063},   -- *Legion XI Comitatensis (SKC20)
     },
 
-    [170] = {               -- FULL MOON FOUNTAIN
+    [tpz.zone.FULL_MOON_FOUNTAIN] =
+    {
         { 0,  224,    0},   -- The Moonlit Path (Quest)
         { 1,  225,    0},   -- Moon Reading (Windy 9-2)
      -- { 2,  226,    0},   -- Waking the Beast (Quest)
@@ -314,7 +393,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Waking the Beast (HTMBF)
     },
 
-    [179] = {               -- STELLAR FULCRUM
+    [tpz.zone.STELLAR_FULCRUM] =
+    {
         { 0,  256,    0},   -- Return to Delkfutt's Tower (ZM8)
      -- { 1,  257,    0},   -- The Indomitable Triumvirate (Mog Bonanza)
      -- { 2,  258,    0},   -- The Dauntless Duo (Mog Bonanza)
@@ -323,9 +403,12 @@ local battlefields = {
      -- { 5,  261,    0},   -- Mercenary Camp (Mog Bonanza)
      -- { 6,  262,    0},   -- Ode of Life Bestowing (ACP11)
      -- { 7,    ?,    0},   -- *Return to Delkfutt's Tower (HTMBF)
+     -- { 8,    ?,    0},   -- True Love
+     -- { 9,    ?,    0},   -- A Fond Farewell
     },
 
-    [180] = {               -- LALOFF AMPHITHEATER
+    [tpz.zone.LALOFF_AMPHITHEATER] =
+    {
         { 0,  288,    0},   -- Ark Angels 1 (ZM14)
         { 1,  289,    0},   -- Ark Angels 2 (ZM14)
         { 2,  290,    0},   -- Ark Angels 3 (ZM14)
@@ -340,19 +423,22 @@ local battlefields = {
      -- {11,    ?,    0},   -- *Divine Might (HTMBF)
     },
 
-    [181] = {               -- THE CELESTIAL NEXUS
+    [tpz.zone.THE_CELESTIAL_NEXUS] =
+    {
         { 0,  320,    0},   -- The Celestial Nexus (ZM16)
      -- { 1,    ?,    0},   -- *The Celestial Nexus (HTMBF)
     },
 
-    [182] = {               -- WALK OF ECHOES
+    [tpz.zone.WALK_OF_ECHOES] =
+    {
      -- { 0,    ?,    0},   -- When Wills Collide (WOTG46)
      -- { 1,  385,    0},   -- Maiden of the Dusk (WOTG51)
      -- { 2,    ?,    0},   -- Champion of the Dawn (Quest)
      -- { 3,    ?,    0},   -- A Forbidden Reunion (Quest)
     },
 
-    [201] = {               -- CLOISTER OF GALES
+    [tpz.zone.CLOISTER_OF_GALES] =
+    {
         { 0,  416,    0},   -- Trial by Wind (Quest)
         { 1,  417, 1174},   -- Carbuncle Debacle (Quest)
         { 2,  418, 1546},   -- Trial-size Trial by Wind (Quest)
@@ -361,7 +447,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Wind (HTMBF)
     },
 
-    [202] = {               -- CLOISTER OF STORMS
+    [tpz.zone.CLOISTER_OF_STORMS] =
+    {
         { 0,  448,    0},   -- Trial by Lightning (Quest)
         { 1,  449, 1172},   -- Carbuncle Debacle (Quest)
         { 2,  450, 1548},   -- Trial-size Trial by Lightning (Quest)
@@ -370,7 +457,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Lightning (HTMBF)
     },
 
-    [203] = {               -- CLOISTER OF FROST
+    [tpz.zone.CLOISTER_OF_FROST] =
+    {
         { 0,  480,    0},   -- Trial by Ice (Quest)
         { 1,  481, 1171},   -- Class Reunion (Quest)
         { 2,  482, 1545},   -- Trial-size Trial by Ice (Quest)
@@ -379,7 +467,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Ice (HTMBF)
     },
 
-    [206] = {               -- QU'BIA ARENA
+    [tpz.zone.QUBIA_ARENA] =
+    {
         { 0,  512,    0},   -- The Rank 5 Mission (Mission 5-1)
      -- { 1,  513, 1175},   -- Come Into My Parlor (KS30)
      -- { 2,  514, 1178},   -- E-vase-ive Action (KS30)
@@ -408,7 +497,8 @@ local battlefields = {
      -- {25,    ?,    0},   -- Mumor's Encore (Sunbreeze Festival)
     },
 
-    [207] = {               -- CLOISTER OF FLAMES
+    [tpz.zone.CLOISTER_OF_FLAMES] =
+    {
         { 0,  544,    0},   -- Trial by Fire (Quest)
         { 1,  545, 1544},   -- Trial-size Trial by Fire (Quest)
      -- { 2,  546,    0},   -- Waking the Beast (Quest)
@@ -416,7 +506,8 @@ local battlefields = {
      -- { 4,    ?,    0},   -- *Trial by Fire (HTMBF)
     },
 
-    [209] = {               -- CLOISTER OF TREMORS
+    [tpz.zone.CLOISTER_OF_TREMORS] =
+    {
         { 0,  576,    0},   -- Trial by Earth (Quest)
         { 1,  577, 1169},   -- The Puppet Master (Quest)
         { 2,  578, 1547},   -- Trial-size Trial by Earth (Quest)
@@ -425,7 +516,8 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Earth (HTMBF)
     },
 
-    [211] = {               -- CLOISTER OF TIDES
+    [tpz.zone.CLOISTER_OF_TIDES] =
+    {
         { 0,  608,    0},   -- Trial by Water (Quest)
         { 1,  609, 1549},   -- Trial-size Trial by Water (Quest)
      -- { 2,  610,    0},   -- Waking the Beast (Quest)

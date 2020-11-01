@@ -28,7 +28,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/timer.h"
 #include "../common/utils.h"
 
-#include <string.h>
+#include <cstring>
+
 #include "alliance.h"
 #include "utils/blueutils.h"
 #include "party.h"
@@ -45,7 +46,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/jailutils.h"
 #include "linkshell.h"
 #include "map.h"
+#include "notoriety_container.h"
 #include "roe.h"
+#include "entities/charentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
@@ -223,6 +226,7 @@ void SmallPacket0xFFF(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x00A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     data.ref<uint32>(0x5C) = 0;
 
     PChar->clearPacketList();
@@ -332,6 +336,7 @@ void SmallPacket0x00A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x00C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CInventorySizePacket(PChar));
     PChar->pushPacket(new CMenuConfigPacket(PChar));
     PChar->pushPacket(new CCharJobsPacket(PChar));
@@ -375,7 +380,7 @@ void SmallPacket0x00C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-
+    TracyZoneScoped;
     session->blowfish.status = BLOWFISH_WAITING;
 
     PChar->TradePending.clean();
@@ -477,6 +482,7 @@ void SmallPacket0x00D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x00F(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     charutils::SendKeyItems(PChar);
     charutils::SendQuestMissionLog(PChar);
 
@@ -505,6 +511,7 @@ void SmallPacket0x00F(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x011(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     session->blowfish.status = BLOWFISH_ACCEPTED;
 
     PChar->health.tp = 0;
@@ -538,6 +545,9 @@ void SmallPacket0x011(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x015(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
+    TracyZoneCString("Player Sync");
+
     if (PChar->status != STATUS_SHUTDOWN &&
         PChar->status != STATUS_DISAPPEAR)
     {
@@ -595,6 +605,7 @@ void SmallPacket0x015(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x016(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 targid = data.ref<uint16>(0x04);
 
     if (targid == PChar->targid)
@@ -630,6 +641,7 @@ void SmallPacket0x016(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x017(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 targid = data.ref<uint16>(0x04);
     uint32 npcid = data.ref<uint32>(0x08);
     uint8  type = data.ref<uint8>(0x12);
@@ -644,287 +656,317 @@ void SmallPacket0x017(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 *                                                                       *
 ************************************************************************/
 
-void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+void SmallPacket0x01A(map_session_data_t* PSession, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
+    TracyZoneCString("Player Action");
+
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
-    uint8  action = data.ref<uint8>(0x0A);
+    uint8 action = data.ref<uint8>(0x0A);
 
     switch (action)
     {
-    case 0x00: // trigger
-    {
-        if (PChar->StatusEffectContainer->HasPreventActionEffect())
-            return;
-
-        if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
+        case 0x00: // trigger
         {
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
-            return;
+            if (PChar->StatusEffectContainer->HasPreventActionEffect())
+            {
+                return;
+            }
+
+            if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
+            {
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+                return;
+            }
+
+            CBaseEntity* PNpc = nullptr;
+            PNpc = PChar->GetEntity(TargID, TYPE_NPC);
+
+            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
+            {
+                PNpc->PAI->Trigger(PChar->targid);
+            }
+
+            // Releasing a trust
+            // TODO: 0x0c is set to 0x1, not sure if that is relevant or not.
+            if (auto* PTrust = dynamic_cast<CTrustEntity*>(PChar->GetEntity(TargID, TYPE_TRUST)))
+            {
+                PChar->RemoveTrust(PTrust);
+            }
+
+            if (PChar->m_event.EventID == -1)
+            {
+                PChar->m_event.reset();
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+            }
         }
-
-        CBaseEntity* PNpc = nullptr;
-        PNpc = PChar->GetEntity(TargID, TYPE_NPC);
-
-        if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
+        break;
+        case 0x02: // attack
         {
-            PNpc->PAI->Trigger(PChar->targid);
+            if (PChar->isMounted())
+            {
+                PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
+            }
+
+            PChar->PAI->Engage(TargID);
         }
-
-        // Releasing a trust
-        // TODO: 0x0c is set to 0x1, not sure if that is relevant or not.
-        CBaseEntity* PTrust = PChar->GetEntity(TargID, TYPE_TRUST);
-        if (PTrust != nullptr)
+        break;
+        case 0x03: // spellcast
         {
-            ((CTrustEntity*)PTrust)->animation = ANIMATION_DESPAWN;
-            PChar->RemoveTrust((CTrustEntity*)PTrust);
+            auto spellID = static_cast<SpellID>(data.ref<uint16>(0x0C));
+            PChar->PAI->Cast(TargID, spellID);
         }
-
-        if (PChar->m_event.EventID == -1)
+        break;
+        case 0x04: // disengage
         {
-            PChar->m_event.reset();
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+            PChar->PAI->Disengage();
         }
-    }
-    break;
-    case 0x02: // attack
-    {
-        if (PChar->isMounted())
+        break;
+        case 0x05: // call for help
         {
+            if (PChar->StatusEffectContainer->HasPreventActionEffect())
+            {
+                return;
+            }
+
+            if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
+            {
+                if (!PMob->CalledForHelp() && PMob->PEnmityContainer->HasID(PChar->id))
+                {
+                    PMob->CallForHelp(true);
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageBasicPacket(PChar, PChar, 0, 0, 19));
+                    return;
+                }
+            }
+
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 22));
+        }
+        break;
+        case 0x07: // weaponskill
+        {
+            uint16 WSkillID = data.ref<uint16>(0x0C);
+            PChar->PAI->WeaponSkill(TargID, WSkillID);
+        }
+        break;
+        case 0x09: // jobability
+        {
+            uint16 JobAbilityID = data.ref<uint16>(0x0C);
+            PChar->PAI->Ability(TargID, JobAbilityID);
+        }
+        break;
+        case 0x0B: // homepoint
+        {
+            if (!PChar->isDead())
+            {
+                return;
+            }
+            charutils::HomePoint(PChar);
+        }
+        break;
+        case 0x0C: // assist
+        {
+            battleutils::assistTarget(PChar, TargID);
+        }
+        break;
+        case 0x0D: // raise menu
+        {
+            if (!PChar->m_hasRaise)
+            {
+                return;
+            }
+
+            if (data.ref<uint8>(0x0C) == 0)
+            { // ACCEPTED RAISE
+                PChar->Raise();
+            }
+            else
+            {
+                PChar->m_hasRaise = 0;
+            }
+        }
+        break;
+        case 0x0E: // Fishing
+        {
+            if (PChar->StatusEffectContainer->HasPreventActionEffect())
+            {
+                return;
+            }
+
+            fishingutils::StartFishing(PChar);
+        }
+        break;
+        case 0x0F: // change target
+        {
+            PChar->PAI->ChangeTarget(TargID);
+        }
+        break;
+        case 0x10: // rangedattack
+        {
+            PChar->PAI->RangedAttack(TargID);
+        }
+        break;
+        case 0x11: // chocobo digging
+        {
+            if (!PChar->isMounted())
+            {
+                return;
+            }
+
+            // bunch of gysahl greens
+            uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(4545);
+
+            if (slotID != ERROR_SLOTID)
+            {
+                // attempt to dig
+                if (luautils::OnChocoboDig(PChar, true))
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
+
+                    PChar->pushPacket(new CInventoryFinishPacket());
+                    PChar->pushPacket(new CChocoboDiggingPacket(PChar));
+
+                    // dig is possible
+                    luautils::OnChocoboDig(PChar, false);
+                }
+                else
+                {
+                    // unable to dig yet
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
+                }
+            }
+            else
+            {
+                // You don't have any gysahl greens
+                PChar->pushPacket(new CMessageSystemPacket(4545, 0, 39));
+            }
+        }
+        break;
+        case 0x12: // dismount
+        {
+            if (PChar->StatusEffectContainer->HasPreventActionEffect() || !PChar->isMounted())
+            {
+                return;
+            }
+
+            PChar->animation = ANIMATION_NONE;
+            PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
         }
-
-        PChar->PAI->Engage(TargID);
-    }
-    break;
-    case 0x03: // spellcast
-    {
-        SpellID spellID = (SpellID)data.ref<uint16>(0x0C);
-        PChar->PAI->Cast(TargID, spellID);
-    }
-    break;
-    case 0x04: // disengage
-    {
-        PChar->PAI->Disengage();
-    }
-    break;
-    case 0x05: // call for help
-    {
-        if(PChar->StatusEffectContainer->HasPreventActionEffect())
-            return;
-
-        if (auto PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
+        break;
+        case 0x13: // tractor menu
         {
-            if (!PMob->CalledForHelp() && PMob->PEnmityContainer->HasID(PChar->id))
+            if (data.ref<uint8>(0x0C) == 0 && PChar->m_hasTractor != 0) // ACCEPTED TRACTOR
             {
-                PMob->CallForHelp(true);
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageBasicPacket(PChar, PChar, 0, 0, 19));
-                return;
+                // PChar->PBattleAI->SetCurrentAction(ACTION_RAISE_MENU_SELECTION);
+                PChar->loc.p = PChar->m_StartActionPos;
+                PChar->loc.destination = PChar->getZone();
+                PChar->status = STATUS_DISAPPEAR;
+                PChar->loc.boundary = 0;
+                PChar->clearPacketList();
+                charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
             }
+
+            PChar->m_hasTractor = 0;
         }
-
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 22));
-    }
-    break;
-    case 0x07: // weaponskill
-    {
-        uint16 WSkillID = data.ref<uint16>(0x0C);
-        PChar->PAI->WeaponSkill(TargID, WSkillID);
-    }
-    break;
-    case 0x09: // jobability
-    {
-        uint16 JobAbilityID = data.ref<uint16>(0x0C);
-        PChar->PAI->Ability(TargID, JobAbilityID);
-    }
-    break;
-    case 0x0B: // homepoint
-    {
-        if (!PChar->isDead())
-            return;
-        charutils::HomePoint(PChar);
-    }
-    break;
-    case 0x0C: // assist
-    {
-        battleutils::assistTarget(PChar, TargID);
-    }
-    break;
-    case 0x0D: // raise menu
-    {
-        if (!PChar->m_hasRaise)
-            return;
-        if (data.ref<uint8>(0x0C) == 0) //ACCEPTED RAISE
-            PChar->Raise();
-        else
-            PChar->m_hasRaise = 0;
-    }
-    break;
-    case 0x0E: // Fishing
-    {
-        if(PChar->StatusEffectContainer->HasPreventActionEffect())
-            return;
-
-        fishingutils::StartFishing(PChar);
-    }
-    break;
-    case 0x0F: // change target
-    {
-        PChar->PAI->ChangeTarget(TargID);
-    }
-    break;
-    case 0x10: // rangedattack
-    {
-        PChar->PAI->RangedAttack(TargID);
-    }
-    break;
-    case 0x11: // chocobo digging
-    {
-        if (!PChar->isMounted())
-            return;
-
-        // bunch of gysahl greens
-        uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(4545);
-
-        if (slotID != ERROR_SLOTID)
+        break;
+        case 0x14: // complete character update
         {
-            // attempt to dig
-            if (luautils::OnChocoboDig(PChar, true))
+            if (PChar->m_moghouseID != 0)
             {
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
-
-                PChar->pushPacket(new CInventoryFinishPacket());
-                PChar->pushPacket(new CChocoboDiggingPacket(PChar));
-
-                // dig is possible
-                luautils::OnChocoboDig(PChar, false);
+                PChar->loc.zone->SpawnMoogle(PChar);
             }
-            else {
-                // unable to dig yet
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
+            else
+            {
+                PChar->loc.zone->SpawnPCs(PChar);
+                PChar->loc.zone->SpawnNPCs(PChar);
+                PChar->loc.zone->SpawnMOBs(PChar);
+                PChar->loc.zone->SpawnTRUSTs(PChar);
             }
         }
-        else{
-            // You don't have any gysahl greens
-            PChar->pushPacket(new CMessageSystemPacket(4545, 0, 39));
-        }
-    }
-    break;
-    case 0x12: // dismount
-    {
-        if (PChar->StatusEffectContainer->HasPreventActionEffect() || !PChar->isMounted())
-            return;
-
-        PChar->animation = ANIMATION_NONE;
-        PChar->updatemask |= UPDATE_HP;
-        PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
-    }
-    break;
-    case 0x13: // tractor menu
-    {
-        if (data.ref<uint8>(0x0C) == 0 && PChar->m_hasTractor != 0) //ACCEPTED TRACTOR
+        break;
+        case 0x15: // ballista - quarry
+        case 0x16: // ballista - sprint
+            break;
+        case 0x18: // blockaid
         {
-            //PChar->PBattleAI->SetCurrentAction(ACTION_RAISE_MENU_SELECTION);
-            PChar->loc.p = PChar->m_StartActionPos;
-            PChar->loc.destination = PChar->getZone();
-            PChar->status = STATUS_DISAPPEAR;
-            PChar->loc.boundary = 0;
-            PChar->clearPacketList();
-            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
-        }
+            if (!PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ALLIED_TAGS))
+            {
+                uint8 type = data.ref<uint8>(0x0C);
 
-        PChar->m_hasTractor = 0;
-    }
-    break;
-    case 0x14: // complete character update
-    {
-        if (PChar->m_moghouseID != 0)
+                if (type == 0x00 && PChar->getBlockingAid()) // /blockaid off
+                {
+                    // Blockaid canceled
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 222));
+                    PChar->setBlockingAid(false);
+                }
+                else if (type == 0x01 && !PChar->getBlockingAid()) // /blockaid on
+                {
+                    // Blockaid activated
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 221));
+                    PChar->setBlockingAid(true);
+                }
+                else if (type == 0x02) // /blockaid
+                {
+                    // Blockaid is currently active/inactive
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? 223 : 224));
+                }
+            }
+            else
+            {
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
+            }
+        }
+        break;
+        case 0x1A: // mounts
         {
-            PChar->loc.zone->SpawnMoogle(PChar);
-        }
-        else{
-            PChar->loc.zone->SpawnPCs(PChar);
-            PChar->loc.zone->SpawnNPCs(PChar);
-            PChar->loc.zone->SpawnMOBs(PChar);
-            PChar->loc.zone->SpawnTRUSTs(PChar);
-        }
-    }
-    break;
-    case 0x15: break; // ballista - quarry
-    case 0x16: break; // ballista - sprint
-    case 0x18: // blockaid
-    {
-        if (!PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ALLIED_TAGS))
-        {
-            uint8 type = data.ref<uint8>(0x0C);
+            uint8 MountID = data.ref<uint8>(0x0C);
 
-            if (type == 0x00 && PChar->getBlockingAid()) // /blockaid off
+            if (PChar->animation != ANIMATION_NONE)
             {
-                // Blockaid canceled
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 222));
-                PChar->setBlockingAid(false);
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 71));
             }
-            else if (type == 0x01 && !PChar->getBlockingAid()) // /blockaid on
+            else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
             {
-                // Blockaid activated
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 221));
-                PChar->setBlockingAid(true);
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
             }
-            else if (type == 0x02) // /blockaid
+            else if (PChar->GetMLevel() < 20)
             {
-                // Blockaid is currently active/inactive
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? 223 : 224));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 20, 0, 773));
             }
-        }
-        else
-            PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
-    }
-    break;
-    case 0x1A: // mounts
-    {
-        uint8 MountID = data.ref<uint8>(0x0C);
+            else if (charutils::hasKeyItem(PChar, 3072 + MountID))
+            {
+                if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, 256, 60))
+                {
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
 
-        if (PChar->animation != ANIMATION_NONE)
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 71));
-        else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
-        else if (PChar->GetMLevel() < 20)
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 20, 0, 773));
-        else if (charutils::hasKeyItem(PChar, 3072 + MountID))
-        {
-            if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, 256, 60))
-            {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 94));
+                    // add recast timer
+                    // PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 202));
+                    return;
+                }
 
-                // add recast timer
-                //PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 202));
-                return;
-            }
-            // Retail prevents mounts if a player has enmity on any mob in the zone, need a function for this
-            for (SpawnIDList_t::iterator it = PChar->SpawnMOBList.begin(); it != PChar->SpawnMOBList.end(); ++it)
-            {
-                CMobEntity* PMob = (CMobEntity*)it->second;
-
-                if (PMob->PEnmityContainer->HasID(PChar->id))
+                if (PChar->PNotorietyContainer->hasEnmity())
                 {
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 339));
                     return;
                 }
+
+                PChar->StatusEffectContainer->AddStatusEffect(
+                    new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, 1800),
+                    true);
+                PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
+                PChar->pushPacket(new CCharRecastPacket(PChar));
             }
-            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, 1800), true);
-            PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
-            PChar->pushPacket(new CCharRecastPacket(PChar));
         }
+        break;
+        default:
+        {
+            ShowWarning(CL_YELLOW "CLIENT PERFORMING UNHANDLED ACTION %02hX\n" CL_RESET, action);
+            return;
+        }
+        break;
     }
-    break;
-    default:
-    {
-        ShowWarning(CL_YELLOW"CLIENT PERFORMING UNHANDLED ACTION %02hX\n" CL_RESET, action);
-        return;
-    }
-    break;
-    }
-    ShowAction(CL_CYAN"CLIENT %s PERFORMING ACTION %02hX\n" CL_RESET, PChar->GetName(), action);
+    ShowAction(CL_CYAN "CLIENT %s PERFORMING ACTION %02hX\n" CL_RESET, PChar->GetName(), action);
 }
 
 /************************************************************************
@@ -935,6 +977,7 @@ void SmallPacket0x01A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x01B(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // 0 - world pass, 2 - gold world pass; +1 - purchase
 
     PChar->pushPacket(new CWorldPassPacket(data.ref<uint8>(0x04) & 1 ? (uint32)tpzrand::GetRandomNumber(9999999999) : 0));
@@ -950,6 +993,7 @@ void SmallPacket0x01B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x01C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PrintPacket(data);
     return;
 }
@@ -962,6 +1006,7 @@ void SmallPacket0x01C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     int32  quantity = data.ref<uint8>(0x04);
     uint8 container = data.ref<uint8>(0x08);
     uint8    slotID = data.ref<uint8>(0x09);
@@ -1011,6 +1056,7 @@ void SmallPacket0x028(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x029(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 quantity = data.ref<uint8>(0x04);
     uint8  FromLocationID = data.ref<uint8>(0x08);
     uint8  ToLocationID = data.ref<uint8>(0x09);
@@ -1120,6 +1166,7 @@ void SmallPacket0x029(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x032(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 charid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
 
@@ -1176,6 +1223,7 @@ void SmallPacket0x032(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x033(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
     if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
@@ -1278,6 +1326,7 @@ void SmallPacket0x033(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x034(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 quantity = data.ref<uint32>(0x04);
     uint16 itemID = data.ref<uint16>(0x08);
     uint8  invSlotID = data.ref<uint8>(0x0A);
@@ -1366,6 +1415,7 @@ void SmallPacket0x034(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x036(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 npcid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x3A);
 
@@ -1415,6 +1465,7 @@ void SmallPacket0x036(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // uint32 EntityID = data.ref<uint32>(0x04);
     uint16 TargetID = data.ref<uint16>(0x0C);
     uint8  SlotID = data.ref<uint8>(0x0E);
@@ -1442,6 +1493,9 @@ void SmallPacket0x037(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x03A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
+    TracyZoneCString("Sort Inventory");
+
     uint8 container = data.ref<uint8>(0x04);
 
     if (container >= MAX_CONTAINER_ID)
@@ -1518,6 +1572,7 @@ void SmallPacket0x03A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x03C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     ShowWarning(CL_YELLOW"SmallPacket0x03C\n" CL_RESET);
     return;
 }
@@ -1530,6 +1585,7 @@ void SmallPacket0x03C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x03D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     const int8* name = (const int8*)(data[0x08]);
     uint8 cmd = data.ref<uint8>(0x18);
 
@@ -1595,6 +1651,7 @@ void SmallPacket0x03D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x041(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PrintPacket(data);
 
     uint8 SlotID = data.ref<uint8>(0x04);
@@ -1622,6 +1679,7 @@ void SmallPacket0x041(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x042(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PrintPacket(data);
 
     uint8 SlotID = data.ref<uint8>(0x04);
@@ -1649,6 +1707,7 @@ void SmallPacket0x042(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x04B(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // uint8   msg_chunk = data.ref<uint8>(0x04); // The current chunk of the message to send.. (1 = start, 2 = rest of message)
     // uint8   msg_unknown1 = data.ref<uint8>(0x05); // Unknown.. always 0
     // uint8   msg_unknown2 = data.ref<uint8>(0x06); // Unknown.. always 1
@@ -1686,6 +1745,7 @@ void SmallPacket0x04B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x04D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 action = data.ref<uint8>(0x04);
     uint8 boxtype = data.ref<uint8>(0x05);
     uint8 slotID = data.ref<uint8>( 0x06);
@@ -2330,6 +2390,7 @@ void SmallPacket0x04D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x04E(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8  action = data.ref<uint8>(0x04);
     uint8  slotid = data.ref<uint8>(0x05);
     uint32 price = data.ref<uint32>(0x08);
@@ -2622,6 +2683,7 @@ void SmallPacket0x04E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x050(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->status != STATUS_NORMAL)
         return;
 
@@ -2652,6 +2714,7 @@ void SmallPacket0x050(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x051(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->status != STATUS_NORMAL)
         return;
 
@@ -2680,6 +2743,7 @@ void SmallPacket0x051(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x052(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     //Im guessing this is here to check if you can use A Item, as it seems useless to have this sent to server
     //as It will check requirements when it goes to equip the items anyway
     //0x05 is slot of updated item
@@ -2699,6 +2763,7 @@ void SmallPacket0x052(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 ************************************************************************/
 void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 count = data.ref<uint8>(0x04);
     uint8 type = data.ref<uint8>(0x05);
 
@@ -2778,6 +2843,7 @@ void SmallPacket0x053(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x058(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 skillID    = data.ref<uint16>(0x04);
     uint16 skillLevel = data.ref<uint16>(0x06);
 
@@ -2792,6 +2858,7 @@ void SmallPacket0x058(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x059(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->animation == ANIMATION_SYNTH)
     {
         synthutils::sendSynthDone(PChar);
@@ -2807,6 +2874,7 @@ void SmallPacket0x059(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CConquestPacket(PChar));
     PChar->pushPacket(new CCampaignPacket(PChar, 0));
     PChar->pushPacket(new CCampaignPacket(PChar, 1));
@@ -2825,6 +2893,7 @@ void SmallPacket0x05A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05B(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     //auto CharID = data.ref<uint32>(0x04);
     auto Result = data.ref<uint32>(0x08);
     //auto ZoneID = data.ref<uint16>(0x10);
@@ -2863,6 +2932,7 @@ void SmallPacket0x05B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     //auto CharID = data.ref<uint32>(0x10);
     auto Result = data.ref<uint32>(0x14);
     //auto ZoneID = data.ref<uint16>(0x18);
@@ -2911,6 +2981,7 @@ void SmallPacket0x05C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (jailutils::InPrison(PChar))
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
@@ -2968,6 +3039,7 @@ void SmallPacket0x05D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
@@ -3086,6 +3158,7 @@ void SmallPacket0x05E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x060(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // uint32 charid = data.ref<uint32>(0x04);
     int8* string = data[12];
     luautils::OnEventUpdate(PChar, string);
@@ -3104,6 +3177,7 @@ void SmallPacket0x060(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x061(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     PChar->pushPacket(new CCharHealthPacket(PChar));
     PChar->pushPacket(new CCharStatsPacket(PChar));
@@ -3125,6 +3199,7 @@ void SmallPacket0x061(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x063(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     return;
 }
 
@@ -3136,6 +3211,7 @@ void SmallPacket0x063(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x064(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 KeyTable = data.ref<uint8>(0x4A);
 
     if (KeyTable >= PChar->keys.tables.size())
@@ -3155,6 +3231,7 @@ void SmallPacket0x064(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x066(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     //PrintPacket(data);
 
     //uint32 charid = data.ref<uint32>(0x04);
@@ -3179,6 +3256,7 @@ void SmallPacket0x066(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 charid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
     // cannot invite yourself
@@ -3352,6 +3430,7 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x06F(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->PParty)
         switch (data.ref<uint8>(0x04))
     {
@@ -3411,6 +3490,7 @@ void SmallPacket0x06F(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x070(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->PParty && PChar->PParty->GetLeader() == PChar)
         switch (data.ref<uint8>(0x04))
     {
@@ -3447,6 +3527,7 @@ void SmallPacket0x070(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x071(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     switch (data.ref<uint8>(0x0A))
     {
     case 0: // party - party leader may remove member of his own party
@@ -3598,6 +3679,7 @@ void SmallPacket0x071(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x074(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     CCharEntity* PInviter = zoneutils::GetCharFromWorld(PChar->InvitePending.id, PChar->InvitePending.targid);
 
     uint8 InviteAnswer = data.ref<uint8>(0x04);
@@ -3707,6 +3789,7 @@ void SmallPacket0x074(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x076(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->PParty)
     {
         PChar->PParty->ReloadPartyMembers(PChar);
@@ -3727,6 +3810,7 @@ void SmallPacket0x076(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x077(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     switch (data.ref<uint8>(0x14))
     {
     case 0: // party
@@ -3795,6 +3879,7 @@ void SmallPacket0x077(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x078(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CPartySearchPacket(PChar));
     return;
 }
@@ -3807,6 +3892,7 @@ void SmallPacket0x078(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x083(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8  quantity = data.ref<uint8>(0x04);
     uint8  shopSlotID = data.ref<uint8>(0x0A);
 
@@ -3861,6 +3947,7 @@ void SmallPacket0x083(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x084(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->animation != ANIMATION_SYNTH)
     {
         uint32 quantity = data.ref<uint32>(0x04);
@@ -3890,6 +3977,7 @@ void SmallPacket0x084(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // Retrieve item-to-sell from last slot of the shop's container
     uint32 quantity = PChar->Container->getQuantity(PChar->Container->getExSize());
     uint16 itemID = PChar->Container->getItemID(PChar->Container->getExSize());
@@ -3936,6 +4024,7 @@ void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x096(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (jailutils::InPrison(PChar))
     {
         // Prevent crafting in prison
@@ -3994,6 +4083,7 @@ void SmallPacket0x096(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0AA(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 itemID = data.ref<uint16>(0x04);
     uint8  quantity = data.ref<uint8>(0x07);
     uint8  shopSlotID = PChar->PGuildShop->SearchItem(itemID);
@@ -4041,6 +4131,7 @@ void SmallPacket0x0AA(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0A2(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 diceroll = tpzrand::GetRandomNumber(1000);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageStandardPacket(PChar, diceroll, MsgStd::DiceRoll));
@@ -4055,6 +4146,7 @@ void SmallPacket0x0A2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0AB(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->PGuildShop != nullptr)
     {
         PChar->pushPacket(new CGuildMenuBuyPacket(PChar, PChar->PGuildShop));
@@ -4070,6 +4162,7 @@ void SmallPacket0x0AB(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0AC(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->animation != ANIMATION_SYNTH)
     {
         if (PChar->PGuildShop != nullptr)
@@ -4112,6 +4205,7 @@ void SmallPacket0x0AC(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0AD(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->PGuildShop != nullptr)
     {
         PChar->pushPacket(new CGuildMenuSellPacket(PChar, PChar->PGuildShop));
@@ -4127,6 +4221,7 @@ void SmallPacket0x0AD(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0B5(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (data.ref<uint8>(0x06) == '!' && !jailutils::InPrison(PChar) && CmdHandler.call(PChar, (const int8*)data[7]) == 0)
     {
         //this makes sure a command isn't sent to chat
@@ -4347,6 +4442,7 @@ void SmallPacket0x0B5(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0B6(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (jailutils::InPrison(PChar))
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
@@ -4386,7 +4482,7 @@ void SmallPacket0x0B6(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0BE(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-
+    TracyZoneScoped;
     uint8 operation = data.ref<uint8>(0x05);
 
     switch (data.ref<uint8>(0x04))
@@ -4453,6 +4549,7 @@ void SmallPacket0x0BE(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0C3(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 lsNum = data.ref<uint8>(0x05);
     CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
     if (lsNum == 2)
@@ -4482,6 +4579,7 @@ void SmallPacket0x0C3(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0C4(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 SlotID = data.ref<uint8>(0x06);
     uint8 LocationID = data.ref<uint8>(0x07);
     uint8 action = data.ref<uint8>(0x08);
@@ -4632,6 +4730,7 @@ void SmallPacket0x0C4(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0CB(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (data.ref<uint8>(0x04) == 1)
     {
         //open
@@ -4654,6 +4753,7 @@ void SmallPacket0x0CB(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0D2(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->ForAlliance([PChar](CBattleEntity* PPartyMember)
     {
         if (PPartyMember->getZone() == PChar->getZone() && ((CCharEntity*)PPartyMember)->m_moghouseID == PChar->m_moghouseID)
@@ -4674,6 +4774,7 @@ void SmallPacket0x0D2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0D3(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     return;
 }
 
@@ -4685,6 +4786,7 @@ void SmallPacket0x0D3(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0DB(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->search.language = data.ref<uint8>(0x24);
     return;
 }
@@ -4697,6 +4799,7 @@ void SmallPacket0x0DB(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0DC(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     switch (data.ref<uint32>(0x04))
     {
     case NFLAG_INVITE:
@@ -4807,6 +4910,7 @@ void SmallPacket0x0DC(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0DD(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint32 id = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
     uint8 type = data.ref<uint8>(0x0C);
@@ -4959,6 +5063,7 @@ void SmallPacket0x0DD(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0DE(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->bazaar.message.clear();
     PChar->bazaar.message.insert(0, (const char*)data[4]);
 
@@ -4977,6 +5082,7 @@ void SmallPacket0x0DE(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0E0(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->search.message.clear();
     PChar->search.message.insert(0, (const char*)data[4]);
 
@@ -5036,6 +5142,7 @@ void SmallPacket0x0E0(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0E1(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 slot = data.ref<uint8>(0x07);
     if (slot == PChar->equip[SLOT_LINK1] && PChar->PLinkshell1)
     {
@@ -5056,6 +5163,7 @@ void SmallPacket0x0E1(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0E2(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
     if (PChar->PLinkshell1 != nullptr && (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL)))
@@ -5107,6 +5215,7 @@ void SmallPacket0x0E2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0E7(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->status != STATUS_NORMAL)
         return;
 
@@ -5155,6 +5264,7 @@ void SmallPacket0x0E7(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0E8(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->status != STATUS_NORMAL)
         return;
 
@@ -5202,6 +5312,7 @@ void SmallPacket0x0E8(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0EA(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->status != STATUS_NORMAL)
         return;
 
@@ -5221,6 +5332,7 @@ void SmallPacket0x0EA(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0EB(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->m_event.EventID == -1)
         return;
 
@@ -5236,6 +5348,7 @@ void SmallPacket0x0EB(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F1(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 IconID = data.ref<uint16>(0x04);
 
     if (IconID)
@@ -5252,6 +5365,7 @@ void SmallPacket0x0F1(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F2(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->loc.boundary = data.ref<uint16>(0x06);
 
     charutils::SaveCharPosition(PChar);
@@ -5266,167 +5380,9 @@ void SmallPacket0x0F2(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F4(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
-    // Set Widescan range
-    // Distances need verified, based current values off what we had in traits.sql and data at http://wiki.ffxiclopedia.org/wiki/Wide_Scan
-    // NOTE: Widescan was formerly piggy backed onto traits (resist slow) but is not a real trait, any attempt to give it a trait will place a dot on characters trait menu.
-    if (map_config.all_jobs_widescan == 0)
-    {
-        // Limit to BST and RNG, and try to use old distance values for tiers
-        if (PChar->GetMJob() == JOB_RNG)
-        {
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetMJob() == JOB_BST)
-        {
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 50);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_RNG)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_BST)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 50);
-            }
-        }
-        else
-        {
-            // Not BST or RNG, get nothing!
-            PChar->loc.zone->WideScan(PChar, 0);
-            // The zero needs set or client will lag on map screen saying downloading data.
-        }
-    }
-    else if (map_config.all_jobs_widescan == 1)
-    {
-        // All jobs have 1st tier, and use current retail distance values for tiers
-        if (PChar->GetMJob() == JOB_RNG)
-        {
-            // Need verification
-            // if (PChar->GetMLevel() >= 80)
-            // {
-            //     PChar->loc.zone->WideScan(PChar,350);
-            // }
-            // else if (PChar->GetMLevel() >= 60)
-            if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetMJob() == JOB_BST)
-        {
-            if (PChar->GetMLevel() >= 80)
-            {
-                PChar->loc.zone->WideScan(PChar, 300);
-            }
-            else if (PChar->GetMLevel() >= 60)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetMLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_RNG)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 250);
-            }
-            else if (PChar->GetSLevel() >= 20)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else if (PChar->GetSJob() == JOB_BST)
-        {
-            if (PChar->GetSLevel() >= 40)
-            {
-                PChar->loc.zone->WideScan(PChar, 200);
-            }
-            else
-            {
-                PChar->loc.zone->WideScan(PChar, 150);
-            }
-        }
-        else
-        {
-            // Not BST or RNG, get base scan radius only!
-            PChar->loc.zone->WideScan(PChar, 150);
-        }
-    }
-    return;
+    TracyZoneScoped;
+    TracyZoneCString("Wide Scan");
+    PChar->loc.zone->WideScan(PChar, charutils::getWideScanRange(PChar));
 }
 
 /************************************************************************
@@ -5437,9 +5393,26 @@ void SmallPacket0x0F4(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F5(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 TargID = data.ref<uint16>(0x04);
 
-    PChar->PWideScanTarget = PChar->GetEntity(TargID, TYPE_MOB | TYPE_NPC);
+    CBaseEntity* target = PChar->GetEntity(TargID, TYPE_MOB | TYPE_NPC);
+    if (target == nullptr)
+    {
+        // Target not found
+        PChar->PWideScanTarget = nullptr;
+        return;
+    }
+
+    uint16 widescanRange = charutils::getWideScanRange(PChar);
+    float dist = distance(PChar->loc.p, target->loc.p);
+
+    // Only allow players to track targets that are actually scannable, and within their wide scan range
+    if (target->isWideScannable() && dist <= widescanRange)
+    {
+        PChar->PWideScanTarget = target;
+    }
+
     return;
 }
 
@@ -5451,6 +5424,7 @@ void SmallPacket0x0F5(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0F6(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->PWideScanTarget = nullptr;
     return;
 }
@@ -5463,6 +5437,7 @@ void SmallPacket0x0F6(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FA(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 ItemID = data.ref<uint16>(0x04);
 
     if (ItemID == 0)
@@ -5571,6 +5546,7 @@ void SmallPacket0x0FA(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FB(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 ItemID = data.ref<uint16>(0x04);
 
     if (ItemID == 0)
@@ -5652,6 +5628,7 @@ void SmallPacket0x0FB(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FC(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 potItemID = data.ref<uint16>(0x04);
     uint16 itemID = data.ref<uint16>(0x06);
 
@@ -5723,6 +5700,7 @@ void SmallPacket0x0FC(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FD(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 itemID = data.ref<uint16>(0x04);
     if (itemID == 0)
         return;
@@ -5779,6 +5757,7 @@ void SmallPacket0x0FD(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FE(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 ItemID = data.ref<uint16>(0x04);
     if (ItemID == 0)
         return;
@@ -5843,6 +5822,7 @@ void SmallPacket0x0FE(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x0FF(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint16 itemID = data.ref<uint16>(0x04);
     if (itemID == 0)
         return;
@@ -5879,6 +5859,7 @@ void SmallPacket0x0FF(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x100(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->loc.zone->CanUseMisc(MISC_MOGMENU) || PChar->m_moghouseID)
     {
         uint8 mjob = data.ref<uint8>(0x04);
@@ -5982,13 +5963,14 @@ void SmallPacket0x100(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 job = data.ref<uint8>(0x08);
     if ((PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU) && job == JOB_BLU) {
         // This may be a request to add or remove set spells, so lets check.
 
         uint8 spellToAdd = data.ref<uint8>(0x04); // this is non-zero if client wants to add.
         uint8 spellInQuestion = 0;
-        uint8 spellIndex = -1;
+        int8 spellIndex = -1;
 
         if (spellToAdd == 0x00) {
             for (uint8 i = 0x0C; i <= 0x1F; i++) {
@@ -5998,10 +5980,17 @@ void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     CBlueSpell* spell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(spellInQuestion + 0x200)); // the spells in this packet are offsetted by 0x200 from their spell IDs.
 
                     if (spell != nullptr) {
-                        blueutils::SetBlueSpell(PChar, spell, spellIndex, false);
+                        if (PChar->m_SetBlueSpells[spellIndex] == 0x00)
+                        {
+                            ShowExploit(CL_RED "SmallPacket0x102: Player %s trying to unset BLU spell they don't have set! \n" CL_RESET, PChar->GetName());
+                        }
+                        else
+                        {
+                            blueutils::SetBlueSpell(PChar, spell, spellIndex, false);
+                        }
                     }
                     else {
-                        ShowDebug("Cannot resolve spell id \n");
+                        ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
                     }
                 }
             }
@@ -6035,7 +6024,7 @@ void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     PChar->UpdateHealth();
                 }
                 else {
-                    ShowDebug("Cannot resolve spell id \n");
+                    ShowDebug("SmallPacket0x102: Cannot resolve spell id %u \n", spellInQuestion);
                 }
             }
             else {
@@ -6098,6 +6087,7 @@ void SmallPacket0x102(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x104(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->BazaarID.targid, TYPE_PC);
 
     if (PTarget != nullptr && PTarget->id == PChar->BazaarID.id)
@@ -6123,6 +6113,7 @@ void SmallPacket0x104(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x105(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     TPZ_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
     TPZ_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
 
@@ -6163,6 +6154,7 @@ void SmallPacket0x105(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8 Quantity = data.ref<uint8>(0x08);
     uint8 SlotID = data.ref<uint8>(0x04);
 
@@ -6287,6 +6279,7 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x109(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     CItemContainer* PStorage = PChar->getStorage(LOC_INVENTORY);
 
     for (uint8 slotID = 1; slotID <= PStorage->GetSize(); ++slotID)
@@ -6311,6 +6304,7 @@ void SmallPacket0x109(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10A(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     uint8  slotID = data.ref<uint8>(0x04);
     uint32 price = data.ref<uint32>(0x08);
 
@@ -6343,6 +6337,7 @@ void SmallPacket0x10A(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10B(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     for (uint16 i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {
         CCharEntity* PCustomer = (CCharEntity*)PChar->GetEntity(PChar->BazaarCustomers[i].targid, TYPE_PC);
@@ -6367,6 +6362,7 @@ void SmallPacket0x10B(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (roeutils::RoeSystem.RoeEnabled)
     {
         roeutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
@@ -6383,6 +6379,7 @@ void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10D(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (roeutils::RoeSystem.RoeEnabled)
     {
         roeutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
@@ -6399,6 +6396,7 @@ void SmallPacket0x10D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x10F(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CCurrencyPacket1(PChar));
     return;
 }
@@ -6411,6 +6409,7 @@ void SmallPacket0x10F(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x110(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     //PrintPacket(data);
     if (PChar->animation != ANIMATION_FISHING_START)
         return;
@@ -6435,6 +6434,7 @@ void SmallPacket0x110(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x111(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     charutils::SetStyleLock(PChar, data.ref<uint8>(0x04));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
     return;
@@ -6448,6 +6448,7 @@ void SmallPacket0x111(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x112(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     // Send spark updates
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
 
@@ -6455,6 +6456,13 @@ void SmallPacket0x112(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     {
         // Current RoE quests
         PChar->pushPacket(new CRoeUpdatePacket(PChar));
+
+        // Players logging in to a new timed record get one-time message
+        if (PChar->m_eminenceCache.notifyTimedRecord)
+        {
+            PChar->m_eminenceCache.notifyTimedRecord = false;
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, roeutils::GetActiveTimedRecord(), 0, MSGBASIC_ROE_TIMED));
+        }
 
         // 4-part Eminence Completion bitmap
         for (int i = 0; i < 4; i++)
@@ -6473,6 +6481,7 @@ void SmallPacket0x112(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 ************************************************************************/
 void SmallPacket0x113(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PrintPacket(data);
 
     if (PChar->status != STATUS_NORMAL)
@@ -6512,6 +6521,7 @@ void SmallPacket0x113(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x114(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CMapMarkerPacket(PChar));
 }
 
@@ -6523,6 +6533,7 @@ void SmallPacket0x114(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x115(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CCurrencyPacket2(PChar));
     return;
 }
@@ -6536,6 +6547,7 @@ void SmallPacket0x115(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void SmallPacket0x117(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     return;
 }
@@ -6548,11 +6560,13 @@ void SmallPacket0x117(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
 void PacketParserInitialize()
 {
+    TracyZoneScoped;
     for (uint16 i = 0; i < 512; ++i)
     {
         PacketSize[i] = 0;
         PacketParser[i] = &SmallPacket0x000;
     }
+    // clang-format off
     PacketSize[0x00A] = 0x2E; PacketParser[0x00A] = &SmallPacket0x00A;
     PacketSize[0x00C] = 0x00; PacketParser[0x00C] = &SmallPacket0x00C;
     PacketSize[0x00D] = 0x04; PacketParser[0x00D] = &SmallPacket0x00D;
@@ -6663,6 +6677,7 @@ void PacketParserInitialize()
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
     PacketSize[0x116] = 0x02; PacketParser[0x116] = &SmallPacket0xFFF; // not implemented
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
+    // clang-format on
 }
 
 /************************************************************************

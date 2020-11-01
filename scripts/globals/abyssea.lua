@@ -294,7 +294,7 @@ end
 tpz.abyssea.qmOnTrade = function(player, npc, trade)
     -- validate QM pop data
     local zoneId = player:getZoneID()
-    local pop = zones[zoneId].npc.QM_POPS[npc:getID()]
+    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
     if not pop then
         return false
     end
@@ -332,7 +332,7 @@ tpz.abyssea.qmOnTrigger = function(player, npc)
     -- validate QM pop data
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
-    local pop = zones[zoneId].npc.QM_POPS[npc:getID()]
+    local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
     if not pop then
         return false
     end
@@ -395,7 +395,7 @@ end
 tpz.abyssea.qmOnEventFinish = function(player, csid, option)
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
-    local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")]
+    local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
     player:setLocalVar("abysseaQM", 0)
     if not pop then
         return false

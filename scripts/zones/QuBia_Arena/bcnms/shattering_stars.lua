@@ -6,6 +6,7 @@ require("scripts/globals/battlefield")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onBattlefieldTick(battlefield, tick)
@@ -41,8 +42,8 @@ function onEventFinish(player, csid, option)
         local maatsCap = player:getCharVar("maatsCap")
         local pjob = player:getMainJob()
         player:setCharVar("maatDefeated", pjob)
-        if bit.band(maatsCap, bit.lshift(1, pjob - 1)) ~= 1 then
-            player:setCharVar("maatsCap", bit.bor(maatsCap, bit.lshift(1, pjob - 1)))
+        if not utils.mask.getBit(maatsCap, pjob - 1) then
+            player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
         end
     end
 end

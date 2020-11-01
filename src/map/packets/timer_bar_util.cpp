@@ -4,7 +4,7 @@
 
 #include "../entities/charentity.h"
 
-CTimerBarUtilPacket::CTimerBarUtilPacket(CCharEntity* PChar)
+CTimerBarUtilPacket::CTimerBarUtilPacket()
 {
     this->type = 0x75;
     this->size = 0x56;

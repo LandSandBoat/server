@@ -255,6 +255,10 @@ void CCharEntity::clearPacketList()
 
 void CCharEntity::pushPacket(CBasicPacket* packet)
 {
+    TracyZoneScoped;
+    TracyZoneIString(GetName());
+    TracyZoneHex16(packet->id());
+
     std::lock_guard<std::mutex> lk(m_PacketListMutex);
     PacketList.push_back(packet);
 }
@@ -517,6 +521,7 @@ void CCharEntity::ClearTrusts()
 
 void CCharEntity::Tick(time_point tick)
 {
+    TracyZoneScoped;
     CBattleEntity::Tick(tick);
     if (m_DeathTimestamp > 0 && tick >= m_deathSyncTime)
     {
@@ -533,6 +538,7 @@ void CCharEntity::Tick(time_point tick)
 
 void CCharEntity::PostTick()
 {
+    TracyZoneScoped;
     CBattleEntity::PostTick();
     if (m_EquipSwap)
     {
@@ -677,7 +683,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         PAI->Disengage();
         return false;
     }
-    else if (!isFaceing(this->loc.p, PTarget->loc.p, 40))
+    else if (!facing(this->loc.p, PTarget->loc.p, 64))
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
@@ -705,7 +711,7 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
             for (auto&& PPotentialTarget : this->SpawnMOBList)
             {
                 if (PPotentialTarget.second->animation == ANIMATION_ATTACK &&
-                    isFaceing(this->loc.p, PPotentialTarget.second->loc.p, 64) &&
+                    facing(this->loc.p, PPotentialTarget.second->loc.p, 64) &&
                     distance(this->loc.p, PPotentialTarget.second->loc.p) <= 10)
                 {
                     std::unique_ptr<CBasicPacket> errMsg;

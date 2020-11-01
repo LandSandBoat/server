@@ -535,6 +535,7 @@ namespace itemutils
 
     void Initialize()
     {
+        TracyZoneScoped;
         LoadItemList();
         LoadDropList();
         LoadLootList();

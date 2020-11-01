@@ -209,7 +209,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TRUST_WINDURST, {
-            keyItem = tpz.ki.WINDURST_TRUST_PERMIT,
+            ki = tpz.ki.WINDURST_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
             var = "WindurstFirstTrust" })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
@@ -219,6 +219,6 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TRUST_WINDURST, {
-            keyItem = tpz.ki.WINDURST_TRUST_PERMIT })
+            ki = tpz.ki.WINDURST_TRUST_PERMIT })
     end
 end

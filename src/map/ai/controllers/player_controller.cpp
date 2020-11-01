@@ -187,7 +187,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
         if (PTarget)
         {
-            if (!isFaceing(PChar->loc.p, PTarget->loc.p, 40) && PTarget != PChar)
+            if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));
                 return false;

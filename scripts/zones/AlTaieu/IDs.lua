@@ -19,6 +19,9 @@ zones[tpz.zone.ALTAIEU] =
         QUASILUMIN_01           = 7365, -- This is Al'Taieu. The celestial capital overflowing with the blessings of Altana.
         NOTHING_OF_INTEREST     = 7475, -- There is nothing of interest here.
         OMINOUS_SHADOW          = 7476, -- An ominous shadow falls over you...
+        AMULET_SHATTERED        = 7497, -- The mysterious amulet held by <player> has shattered...
+        LIGHT_STOLEN            = 7498, -- The light of <mea/holla/dem> was stolen by Nag'molada...
+        RETURN_AMULET_TO_PRISHE = 7523, -- You return the mysterious amulet to Prishe.
         HOMEPOINT_SET           = 7564, -- Home point set!
     },
     mob =

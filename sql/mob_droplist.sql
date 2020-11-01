@@ -2285,7 +2285,8 @@ INSERT INTO `mob_droplist` VALUES (394,1,2,200,1324,240); -- (Byakko) a.abjurati
 INSERT INTO `mob_droplist` VALUES (394,1,2,200,1341,280); -- (Byakko) n.abjuration_hn. #2
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,722,200); -- (Byakko) divine_log
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,837,200); -- (Byakko) malboro_fiber
-INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,200); -- (Byakko) behemoth_hide
+INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,150); -- (Byakko) behemoth_hide
+INSERT INTO `mob_droplist` VALUES (394,0,0,1000,860,150); -- (Byakko) behemoth_hide #2
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,1311,20); -- (Byakko) oxblood
 INSERT INTO `mob_droplist` VALUES (394,0,0,1000,1110,10); -- (Byakko) beetle_blood
 INSERT INTO `mob_droplist` VALUES (395,0,0,1000,916,140);
@@ -13747,6 +13748,7 @@ INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,18332,20);
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,1516,30);
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,1517,30);
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,1519,30);
+INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,3382,10); -- Odious Cryptex
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,3495,10);
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,11388,10);
 INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,15025,10);
@@ -13794,7 +13796,8 @@ INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,18332,20);
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,1516,30);
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,1517,30);
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,1519,30);
-INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,3380,10);
+INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,3380,10); -- Odious Scale
+INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,3495,10); -- Forgotten Touch
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,11388,10);
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,15025,10);
 INSERT INTO `mob_droplist` VALUES (2564,0,0,1000,15040,10);
@@ -16603,6 +16606,65 @@ INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15123,10); -- Valor Breeches
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15140,10); -- Monster Gaiters
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,15142,10); -- Scout's Socks
 INSERT INTO `mob_droplist` VALUES (3146,0,0,1000,16360,10); -- Etoile Tights
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,1000); -- (Hydra)  Hydra meat  210%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,1000); -- (Hydra)  Hydra meat
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,5564,100);  -- (Hydra)  Hydra meat
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2158,1000); -- (Hydra)  Hydra Fang  124%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2158,240);  -- (Hydra)  Hydra Fang
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2172,1000); -- (Hydra)  Hydra Scale 110%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,2172,100);  -- (Hydra)  Hydra Scale
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,15530,240); -- (Hydra)  Berserker's Torque 24%
+INSERT INTO `mob_droplist` VALUES (3147,0,0,1000,17952,240); -- (Hydra)  Sirius Axe 24%
+INSERT INTO `mob_droplist` VALUES (3148,2,0,1000,1452,0); -- O. Bronzepiece
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,18308,20);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,18290,20);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,18296,20);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,18332,20);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,1516,30);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,1517,30);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,1519,30);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,3383,10); -- Odious Strongbox
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,3495,10); -- Forgotten Touch
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,11388,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15025,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15040,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15074,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15081,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15108,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15118,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15125,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15127,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15129,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15132,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15136,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15145,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,15146,10);
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,16349,10);
+INSERT INTO `mob_droplist` VALUES (3149,2,0,1000,1452,0); -- O. Bronzepiece
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,18308,20);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,18290,20);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,18296,20);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,18332,20);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,1516,30);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,1517,30);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,1519,30);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,3381,10); -- Odious Leather
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,3495,10); -- Forgotten Touch
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,11388,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15025,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15040,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15074,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15081,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15108,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15118,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15125,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15127,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15129,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15132,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15136,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15145,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15146,10);
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,16349,10);
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

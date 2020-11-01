@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
-            keyItem = tpz.ki.SAN_DORIA_TRUST_PERMIT,
+            ki = tpz.ki.SAN_DORIA_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
             var = "SandoriaFirstTrust"
         })
@@ -80,7 +80,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
-            keyItem = tpz.ki.SAN_DORIA_TRUST_PERMIT
+            ki = tpz.ki.SAN_DORIA_TRUST_PERMIT
         })
     end
 end
