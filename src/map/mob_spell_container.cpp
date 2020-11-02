@@ -60,15 +60,15 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
         m_gaList.push_back(spellId);
 
     }
-    else if(spell->isSevere()){
+    else if (spell->isSevere())
+    {
         // select spells like death and impact
         m_severeList.push_back(spellId);
-        
     }
-    else if(spell->canTargetEnemy() && !spell->isSevere()){
+    else if (spell->canTargetEnemy() && !spell->isSevere())
+    {
         // add to damage list
         m_damageList.push_back(spellId);
-
     }
     else if(spell->isNa()){
         // na spell and erase
@@ -142,7 +142,8 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
     }
 
     // try something really destructive
-    if(HasSevereSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE)){
+    if (HasSevereSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE))
+    {
         return GetSevereSpell();
     }
 
