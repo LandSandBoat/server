@@ -23,6 +23,7 @@
 
 /*
 This is a list of mob specific modifiers. They can be added to pools / families / spawn points.
+Gets mapped for convenience in scripts/globals/status.lua#2223+ -- always edit both
 */
 
 enum MOBMODIFIER : int
@@ -40,26 +41,26 @@ enum MOBMODIFIER : int
     MOBMOD_SUBLINK             = 10, // sub link group
     MOBMOD_LINK_RADIUS         = 11, // link radius
     MOBMOD_DRAW_IN             = 12, // 1 - player draw in, 2 - alliance draw in -- only add as a spawn mod!
-    MOBMOD_RAGE                = 13, // define rage timer -- only add as a spawn mod! (OBSOLETE - use rage mixin)
+    MOBMOD_SEVERE_SPELL_CHANCE = 13, // % chance to use a severe spell like death or impact
     MOBMOD_SKILL_LIST          = 14, // uses given mob skill list
     MOBMOD_MUG_GIL             = 15, // amount gil carried for mugging
-    MOBMOD_MAIN_2HOUR          = 16, // give mob its main job two hour, value can maybe be sent to skill (OBSOLETE - use job_special mixin)
+    // 16 Available for use
     MOBMOD_NO_DESPAWN          = 17, // do not despawn when too far from spawn. Gob Diggers have this.
     MOBMOD_VAR                 = 18, // temp var for whatever. Gets cleared on spawn
-    MOBMOD_SUB_2HOUR           = 19, // give mob its sub job two hour (dynamis NM) (OBSOLETE - use job_special mixin)
+    // 19 Available for use
     MOBMOD_TP_USE_CHANCE       = 20, // % chance to use tp
     MOBMOD_PET_SPELL_LIST      = 21, // set pet spell list
     MOBMOD_NA_CHANCE           = 22, // % chance to cast -na
     MOBMOD_IMMUNITY            = 23, // immune to set status effects. This only works from the db, not scripts
-    MOBMOD_GRADUAL_RAGE        = 24, // gradually rages -- not impl
-    MOBMOD_BUILD_RESIST        = 25, // builds resistance to given effects -- not impl
+    MOBMOD_GRADUAL_RAGE        = 24, // (!) TODO: NOT YET IMPLEMENTED -- gradually rages
+    MOBMOD_BUILD_RESIST        = 25, // (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
     MOBMOD_SUPERLINK           = 26, // super link group. Only use this in mob_spawn_mods / scripts!
     MOBMOD_SPELL_LIST          = 27, // set spell list
     MOBMOD_EXP_BONUS           = 28, // bonus exp (bonus / 100) negative values reduce exp.
     MOBMOD_ASSIST              = 29, // mobs will assist me
     MOBMOD_SPECIAL_SKILL       = 30, // give special skill
     MOBMOD_ROAM_DISTANCE       = 31, // distance allowed to roam from spawn
-    MOBMOD_MULTI_2HOUR         = 32, // can use two hour multiple times (OBSOLETE - use job_special mixin)
+    // 32 Available for use
     MOBMOD_SPECIAL_COOL        = 33, // cool down for special
     MOBMOD_MAGIC_COOL          = 34, // cool down for magic
     MOBMOD_STANDBACK_COOL      = 35, // cool down time for standing back (casting spell while not in attack range)
@@ -77,7 +78,7 @@ enum MOBMODIFIER : int
     MOBMOD_SPAWN_LEASH         = 47, // forces a mob to not move farther from its spawn than its leash distance
     MOBMOD_SHARE_TARGET        = 48, // mob always targets same target as ID in this var
     MOBMOD_CHECK_AS_NM         = 49, // If set , mob will check as a NM
-    MOBMOD_PROC_2HOUR          = 50, // chance of mob's 2 hour activating 0-100% (OBSOLETE - use job_special mixin)
+    // 50 Available for use
     MOBMOD_ROAM_TURNS          = 51, // Maximum amount of turns during a roam
     MOBMOD_ROAM_RATE           = 52, // Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     MOBMOD_BEHAVIOR            = 53, // Add behaviors to mob
@@ -98,7 +99,6 @@ enum MOBMODIFIER : int
     MOBMOD_ALLI_HATE           = 68, // Range around target to add alliance member to enmity list.
     MOBMOD_NO_LINK             = 69, // If set, mob cannot link until unset.
     MOBMOD_NO_REST             = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
-    MOBMOD_SEVERE_SPELL_CHANCE = 71, // % chance to use a severe spell like death or impact
 };
 
 #endif
