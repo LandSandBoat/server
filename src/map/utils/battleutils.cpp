@@ -48,6 +48,7 @@
 #include "../party.h"
 #include "../alliance.h"
 #include "../mob_modifier.h"
+#include "../notoriety_container.h"
 #include "../recast_container.h"
 #include "../spell.h"
 #include "../trait.h"
@@ -3422,22 +3423,16 @@ namespace battleutils
         TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
 
         auto PMasterSource = PSource->PMaster ? PSource->PMaster : PSource;
-        auto PMasterSourceChar = static_cast<CCharEntity*>(PMasterSource);
-
-        for (SpawnIDList_t::const_iterator it = PMasterSourceChar->SpawnMOBList.begin(); it != PMasterSourceChar->SpawnMOBList.end(); ++it)
+        for (auto* entity : *PMasterSource->PNotorietyContainer)
         {
-            if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(it->second))
+            if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(entity))
             {
-                if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
-                {
-                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); //true for "cure v"
-                }
+                PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
             }
         }
     }
 
-    //Generate enmity for all targets in range
-
+    // Generate enmity for all targets in range
     void GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE)
     {
         TPZ_DEBUG_BREAK_IF(PSource == nullptr);
