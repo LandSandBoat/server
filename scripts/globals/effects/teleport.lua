@@ -28,6 +28,8 @@ function onEffectLose(target, effect)
         tpz.teleport.toLeader(target)
     elseif (destination == tpz.teleport.id.HOME_NATION) then
         tpz.teleport.toHomeNation(target)
+    elseif (destination == tpz.teleport.id.RETRACE) then
+        tpz.teleport.toAlliedNation(target)
     else
         tpz.teleport.to(target, destination)
     end
