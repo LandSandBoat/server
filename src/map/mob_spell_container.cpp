@@ -60,7 +60,12 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
         m_gaList.push_back(spellId);
 
     }
-    else if(spell->canTargetEnemy()){
+    else if(spell->isSevere()){
+        // select spells like death and impact
+        m_severeList.push_back(spellId);
+        
+    }
+    else if(spell->canTargetEnemy() && !spell->isSevere()){
         // add to damage list
         m_damageList.push_back(spellId);
 
@@ -134,6 +139,11 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
         if(naSpell){
             return naSpell.value();
         }
+    }
+
+    // try something really destructive
+    if(HasSevereSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE)){
+        return GetSevereSpell();
     }
 
     // try ga spell
@@ -236,6 +246,13 @@ std::optional<SpellID> CMobSpellContainer::GetNaSpell()
     return {};
 }
 
+std::optional<SpellID> CMobSpellContainer::GetSevereSpell()
+{
+    if(m_severeList.empty()) return {};
+
+    return m_severeList[tpzrand::GetRandomNumber(m_severeList.size())];
+}
+
 bool CMobSpellContainer::HasGaSpells() const
 {
     return !m_gaList.empty();
@@ -259,6 +276,11 @@ bool CMobSpellContainer::HasHealSpells() const
 bool CMobSpellContainer::HasNaSpells() const
 {
     return !m_naList.empty();
+}
+
+bool CMobSpellContainer::HasSevereSpells() const
+{
+    return !m_severeList.empty();
 }
 
 bool CMobSpellContainer::HasNaSpell(SpellID spellId) const
