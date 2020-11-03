@@ -112,7 +112,7 @@ class CPathFind
 
     // checks if raycast was broken between current point and given
     // returns true if raycast didn't hit any walls
-    bool CanSeePoint(const position_t& point);
+    bool CanSeePoint(const position_t& point, bool lookOffMesh = true);
 
     // returns the final destination of the current path
     const position_t& GetDestination() const;

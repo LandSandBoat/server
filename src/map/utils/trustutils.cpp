@@ -3,8 +3,8 @@
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 
-#include <math.h>
-#include <string.h>
+#include <cmath>
+#include <cstring>
 #include <vector>
 
 #include "battleutils.h"
@@ -130,9 +130,9 @@ void LoadTrustList()
         }
     }
 
-    for (uint32 index = 0; index < g_PTrustIDList.size(); index++)
+    for (auto& index : g_PTrustIDList)
     {
-        BuildTrust(g_PTrustIDList.at(index)->spellID);
+        BuildTrust(index->spellID);
     }
 }
 
@@ -276,10 +276,8 @@ void SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
 
 CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
 {
-    CTrustEntity* PTrust = new CTrustEntity(PMaster);
-    Trust_t* trustData   = new Trust_t();
-
-    trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t) { return t->trustID == TrustID; });
+    auto* PTrust = new CTrustEntity(PMaster);
+    auto trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t) { return t->trustID == TrustID; });
 
     PTrust->loc              = PMaster->loc;
     PTrust->m_OwnerID.id     = PMaster->id;
@@ -319,13 +317,22 @@ CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
     auto adjustedDamage = baseDamage * damageMultiplier;
     auto finalDamage = std::max(adjustedDamage, 1.0f);
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDamage(static_cast<uint16>(finalDamage));
 
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setDelay((trustData->cmbDelay * 1000) / 60);
-    ((CItemWeapon*)PTrust->m_Weapons[SLOT_MAIN])->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDamage(static_cast<uint16>(finalDamage));
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDamage(static_cast<uint16>(finalDamage));
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDamage(static_cast<uint16>(finalDamage));
+
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDelay((trustData->cmbDelay * 1000) / 60);
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDelay((trustData->cmbDelay * 1000) / 60);
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDelay((trustData->cmbDelay * 1000) / 60);
+    (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
 
     // Spell lists
-    auto spellList = mobSpellList::GetMobSpellList(trustData->spellList);
+    auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList);
     if (spellList)
     {
         mobutils::SetSpellList(PTrust, trustData->spellList);
@@ -462,7 +469,10 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
     PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
 
-    //natural magic evasion
+    PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
+    PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
+
+    // natural magic evasion
     PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));
 
     // add traits for sub and main
@@ -473,7 +483,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     // Skills
     using namespace gambits;
-    auto controller = static_cast<CTrustController*>(PTrust->PAI->GetController());
+    auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
 
     // Default TP selectors
     controller->m_GambitsContainer->tp_trigger = G_TP_TRIGGER::ASAP;

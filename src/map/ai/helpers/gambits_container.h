@@ -53,13 +53,13 @@ enum class G_CONDITION : uint16
 
 enum class G_REACTION : uint16
 {
-    ATTACK = 0,
-    ASSIST = 1,
-    MA     = 2,
-    JA     = 3,
-    WS     = 4,
-    MS     = 5,
-    MSG    = 6,
+    ATTACK  = 0,
+    RATTACK = 1,
+    MA      = 2,
+    JA      = 3,
+    WS      = 4,
+    MS      = 5,
+    MSG     = 6,
 };
 
 enum class G_SELECT : uint16

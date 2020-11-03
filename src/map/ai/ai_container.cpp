@@ -255,7 +255,7 @@ bool CAIContainer::Internal_Ability(uint16 targetid, uint16 abilityid)
 
 bool CAIContainer::Internal_RangedAttack(uint16 targetid)
 {
-    auto entity {dynamic_cast<CCharEntity*>(PEntity)};
+    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
     if (entity)
         return ChangeState<CRangeState>(entity, targetid);
     return false;

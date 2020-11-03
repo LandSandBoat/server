@@ -49,7 +49,7 @@ function onMobSpawn(mob)
         },
     })
 
-    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
+    mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AYAME)
 end
 
 function onMobDespawn(mob)

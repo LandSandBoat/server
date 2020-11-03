@@ -475,6 +475,7 @@ class CAttackState;
 class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
+class CRangeState;
 class CRecastContainer;
 class CNotorietyContainer;
 struct action_t;
@@ -634,6 +635,7 @@ public:
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
     virtual void OnAbility(CAbilityState&, action_t&) {}
+    virtual void OnRangedAttack(CRangeState&, action_t&) {}
     virtual void OnDeathTimer();
     virtual void OnRaise() {}
     virtual void TryHitInterrupt(CBattleEntity* PAttacker);

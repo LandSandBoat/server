@@ -567,13 +567,16 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
             SpawnIDList_t::iterator SpawnTrustItr = PChar->SpawnTRUSTList.lower_bound(PCurrentTrust->id);
             CCharEntity* PMaster = dynamic_cast<CCharEntity*>(PCurrentTrust->PMaster);
 
-            if (PMaster && PCurrentTrust->status == STATUS_NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
+            if (PCurrentTrust->status == STATUS_NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
             {
                 if (SpawnTrustItr == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first))
                 {
                     PChar->SpawnTRUSTList.insert(SpawnTrustItr, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
                     PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
-                    PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
+                    if (PMaster)
+                    {
+                        PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
+                    }  
                 }
             }
             else

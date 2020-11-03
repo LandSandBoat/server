@@ -51,13 +51,13 @@ ai.c = ai.condition
 -- Reaction
 ai.reaction =
 {
-    ATTACK = 0,
-    ASSIST = 1,
-    MA     = 2,
-    JA     = 3,
-    WS     = 4,
-    MS     = 5,
-    MSG    = 6,
+    ATTACK  = 0,
+    RATTACK = 1,
+    MA      = 2,
+    JA      = 3,
+    WS      = 4,
+    MS      = 5,
+    MSG     = 6,
 }
 ai.r = ai.reaction
 

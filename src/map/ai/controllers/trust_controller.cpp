@@ -33,6 +33,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../packets/char.h"
 #include "../../recast_container.h"
 #include "../../mob_spell_container.h"
+#include "../../ai/states/range_state.h"
+#include "../../items/item_weapon.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
@@ -89,6 +91,7 @@ void CTrustController::Tick(time_point tick)
 void CTrustController::DoCombatTick(time_point tick)
 {
     TracyZoneScoped;
+
     if (!POwner->PMaster->PAI->IsEngaged())
     {
         POwner->PAI->Internal_Disengage();
@@ -126,11 +129,11 @@ void CTrustController::DoCombatTick(time_point tick)
             {
                 if (currentDistanceToMaster > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PMaster->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    PathOutToDistance(PTarget, 9.0f);
                 }
                 else if (currentDistanceToTarget > CastingDistance)
                 {
-                    POwner->PAI->PathFind->PathAround(PTarget->loc.p, 10.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    PathOutToDistance(PTarget, 9.0f);
                 }
                 break;
             }
@@ -170,15 +173,11 @@ void CTrustController::DoCombatTick(time_point tick)
             {
                 Declump(PMaster, PTarget);
             }
-
-            POwner->PAI->PathFind->FollowPath();
         }
 
-        // If repositioning, bail out until you arrive
-        if (m_InTransit)
+        if (!m_InTransit)
         {
-            // TODO: This is too unreliable for now
-            // return;
+            POwner->PAI->PathFind->FollowPath();
         }
 
         m_GambitsContainer->Tick(tick);
@@ -266,6 +265,7 @@ void CTrustController::DoRoamTick(time_point tick)
 void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 {
     TracyZoneScoped;
+
     uint8 currentPartyPos = GetPartyPosition();
     for (auto POtherTrust : PMaster->PTrusts)
     {
@@ -294,62 +294,71 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
 void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 {
     TracyZoneScoped;
+
     float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
     position_t target_position = POwner->loc.p;
 
+    if (GetTopEnmity() == POwner)
+    {
+        ++m_failedRepositionAttempts;
+    }
+    else
+    {
+        m_failedRepositionAttempts = 0;
+    }
+
     // Invalidate position and pick new one (limit: every 3s)
     if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) &&
-        m_Tick - m_LastRepositionTime > 3s)
+        m_Tick - m_LastRepositionTime > 3s &&
+        !m_InTransit)
     {
-        // Away from target, +/- 45 degrees
-        auto half_sector_size = 32 + (10 * m_failedRepositionAttempts);
-        auto diff_angle = worldAngle(PTarget->loc.p, POwner->loc.p) + 128 + tpzrand::GetRandomNumber(-half_sector_size, half_sector_size);
-        position_t potential_position =
+        std::vector<position_t> positions(5);
+        for (unsigned int i = 0; i < positions.size(); ++i)
         {
-            PTarget->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
-            PTarget->loc.p.y,
-            PTarget->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
-            0,
-            0,
-        };
-
-        // Validate position
-        if (POwner->PAI->PathFind->ValidPosition(potential_position) &&
-            POwner->loc.zone->m_navMesh->raycast(PTarget->loc.p, potential_position) &&
-            !POwner->loc.zone->m_navMesh->findPath(POwner->loc.p, potential_position).empty())
-        {
-            m_InTransit = true;
-            target_position = potential_position;
-            m_LastRepositionTime = m_Tick;
-        }
-        else
-        {
-            ++m_failedRepositionAttempts;
+            int random_angle = tpzrand::GetRandomNumber(255);
+            position_t potential_position = {
+                PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
+                PTarget->loc.p.y,
+                PTarget->loc.p.z + (sinf(rotationToRadian(random_angle)) * amount),
+                0,
+                0,
+            };
+            positions[i] = potential_position;
         }
 
-        // If stuck, reset
-        if (m_failedRepositionAttempts > 3)
+        bool position_found = false;
+        for (auto& potential_position : positions)
         {
-            m_InTransit = true;
-            target_position = POwner->PMaster->loc.p;
-            m_LastRepositionTime = m_Tick;
+            // Validate position
+            if (!position_found &&
+                POwner->PAI->PathFind->ValidPosition(potential_position) &&
+                POwner->PAI->PathFind->CanSeePoint(potential_position, false))
+            {
+                position_found = true;
+                target_position = potential_position;
+                m_InTransit = true;
+            }
         }
+
+        m_LastRepositionTime = m_Tick;
     }
 
     // Get somewhat close to the target destination
-    if (distance(POwner->loc.p, target_position) > 2.5f)
+    if (distance(POwner->loc.p, target_position) > 2.0f && m_failedRepositionAttempts < 3)
     {
         POwner->PAI->PathFind->PathTo(target_position, PATHFLAG_RUN | PATHFLAG_WALLHACK);
     }
     else
     {
-        m_failedRepositionAttempts = 0;
+        FaceTarget(PTarget->targid);
         m_InTransit = false;
     }
 }
 
 bool CTrustController::Ability(uint16 targid, uint16 abilityid)
 {
+    TracyZoneScoped;
+
     if (static_cast<CMobEntity*>(POwner)->PRecastContainer->HasRecast(RECAST_ABILITY, abilityid, 0))
     {
         return false;
@@ -363,8 +372,32 @@ bool CTrustController::Ability(uint16 targid, uint16 abilityid)
     return false;
 }
 
+bool CTrustController::RangedAttack(uint16 targid)
+{
+    TracyZoneScoped;
+
+    duration rangedDelay = 10s;
+    if (CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(POwner->m_Weapons[SLOT_RANGED]))
+    {
+        rangedDelay = std::chrono::milliseconds(PRange->getDelay());
+    }
+
+    if (m_Tick - m_LastRangedAttackTime > rangedDelay && !m_InTransit)
+    {
+        FaceTarget(PTarget->targid);
+        if (POwner->PAI->CanChangeState() && POwner->PAI->Internal_RangedAttack(targid))
+        {
+            m_LastRangedAttackTime = m_Tick;
+        }
+        return true;
+    }
+    return false;
+}
+
 bool CTrustController::Cast(uint16 targid, SpellID spellid)
 {
+    TracyZoneScoped;
+
     FaceTarget(targid);
     if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellid)))
     {
@@ -383,6 +416,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
 CBattleEntity* CTrustController::GetTopEnmity()
 {
     TracyZoneScoped;
+
     CBattleEntity* PEntity = nullptr;
     if (auto PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
     {
@@ -393,6 +427,8 @@ CBattleEntity* CTrustController::GetTopEnmity()
 
 uint8 CTrustController::GetPartyPosition()
 {
+    TracyZoneScoped;
+
     auto& trustList = static_cast<CCharEntity*>(POwner->PMaster)->PTrusts;
     for (uint8 i = 0; i < trustList.size(); ++i)
     {
