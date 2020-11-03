@@ -43275,7 +43275,7 @@ INSERT INTO `item_mods` VALUES (27676,23,17); -- Attack+17
 INSERT INTO `item_mods` VALUES (27676,31,29); -- Magic Evasion+29
 INSERT INTO `item_mods` VALUES (27676,384,600); -- Haste+6%
 INSERT INTO `item_mods` VALUES (27676,5,19); -- MP+19
-INSERT INTO `item_mods` VALUES (27676,108,15); -- Evasion+15
+INSERT INTO `item_mods` VALUES (27676,68,15); -- Evasion+15
 INSERT INTO `item_mods` VALUES (27676,8,20); -- STR+20
 INSERT INTO `item_mods` VALUES (27676,9,14); -- DEX+14
 INSERT INTO `item_mods` VALUES (27697,1,109); -- vishap_armet_+1 - DEF:82
@@ -43288,7 +43288,7 @@ INSERT INTO `item_mods` VALUES (27697,23,22); -- Attack+17
 INSERT INTO `item_mods` VALUES (27697,31,43); -- Magic Evasion+29
 INSERT INTO `item_mods` VALUES (27697,384,600); -- Haste+6%
 INSERT INTO `item_mods` VALUES (27697,5,23); -- MP+19
-INSERT INTO `item_mods` VALUES (27697,108,33); -- Evasion+33
+INSERT INTO `item_mods` VALUES (27697,68,33); -- Evasion+33
 INSERT INTO `item_mods` VALUES (27697,8,27); -- STR+20
 INSERT INTO `item_mods` VALUES (27697,9,20); -- DEX+14
 INSERT INTO `item_mods` VALUES (27676,829,1);
