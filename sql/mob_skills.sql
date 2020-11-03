@@ -3311,10 +3311,10 @@ INSERT INTO `mob_skills` VALUES (3473,446,'stellar_burst',0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (3484,3228,'hemorrhaze',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3485,3229,'regulator',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3486,260,'tongue_lash',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3487,429,'sidewinder',0,16.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3488,428,'arching_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3489,430,'stellar_arrow',1,16.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3490,431,'lux_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (3487,429,'sidewinder',0,16.0,2000,1500,4,0,0,0,0,0,0); -- Semih Lafihna, TODO: Cap'd correctly, animation broken when used
+-- INSERT INTO `mob_skills` VALUES (3488,428,'arching_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
+-- INSERT INTO `mob_skills` VALUES (3489,430,'stellar_arrow',1,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
+-- INSERT INTO `mob_skills` VALUES (3490,431,'lux_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
 INSERT INTO `mob_skills` VALUES (3491,2029,'grapeshot',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3492,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3493,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,0,0,0);
