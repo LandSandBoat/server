@@ -45,6 +45,7 @@ public:
   std::optional<SpellID> GetBuffSpell(); // stoneskin, utsusemi, blink
   std::optional<SpellID> GetHealSpell(); // cures, regen, armys paeon
   std::optional<SpellID> GetNaSpell(); // silena, blindna etc
+  std::optional<SpellID> GetSevereSpell(); // select spells like death, impact, meteor
   std::optional<SpellID> GetSpell(); // return a random spell
 
   bool HasSpells() const;
@@ -55,6 +56,7 @@ public:
   bool HasBuffSpells() const;
   bool HasHealSpells() const;
   bool HasNaSpells() const;
+  bool HasSevereSpells() const;
 
   void ClearSpells();
   void AddSpell(SpellID spellId);
@@ -66,6 +68,7 @@ public:
   std::vector<SpellID> m_buffList;
   std::vector<SpellID> m_healList;
   std::vector<SpellID> m_naList;
+  std::vector<SpellID> m_severeList;
 
 private:
   CMobEntity* m_PMob;
