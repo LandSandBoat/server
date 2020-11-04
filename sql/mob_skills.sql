@@ -878,7 +878,7 @@ INSERT INTO `mob_skills` VALUES (1046,660,'horrid_roar_2',0,18.0,4000,1500,4,8,0
 -- INSERT INTO `mob_skills` VALUES (1050,479,'harden_shell',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1051,795,'earth_breath',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1052,796,'aqua_breath',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1053,797,'#797',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1053,432,'super_buff',0,1.0,2000,0,1,0,0,0,0,0,0); -- Nidhogg self buff
 -- INSERT INTO `mob_skills` VALUES (1054,798,'sabotender_dustdevil',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1055,799,'sabotender_duststop',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1056,800,'fanatic_dance',0,7.0,2000,1500,4,0,0,0,0,0,0);

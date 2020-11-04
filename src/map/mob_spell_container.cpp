@@ -57,24 +57,28 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
     // add spell to correct vector
     // try to add it to ga list first
     uint8 aoe = battleutils::GetSpellAoEType(m_PMob, spell);
-    if(aoe > 0 && spell->canTargetEnemy()){
-
+    if(aoe > 0 && spell->canTargetEnemy())
+    {
         m_gaList.push_back(spellId);
-
+    }
+    else if (spell->isSevere())
+    {
+        // select spells like death and impact
+        m_severeList.push_back(spellId);
+    }
+    else if (spell->canTargetEnemy() && !spell->isSevere())
+    {
+        // add to damage list
+        m_damageList.push_back(spellId);
     }
     else if (spell->isDebuff())
     {
         m_debuffList.push_back(spellId);
     }
-    else if(spell->canTargetEnemy()){
-        // add to damage list
-        m_damageList.push_back(spellId);
-
-    }
-    else if(spell->isNa()){
+    else if(spell->isNa())
+    {
         // na spell and erase
         m_naList.push_back(spellId);
-
     }
     else if(spell->isHeal()){ // includes blue mage healing spells, wild carrot etc
    // add to healing
@@ -206,6 +210,12 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
         }
     }
 
+    // try something really destructive
+    if (HasSevereSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE))
+    {
+        return GetSevereSpell();
+    }
+
     // try ga spell
     if(HasGaSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE)){
         return GetGaSpell();
@@ -318,6 +328,13 @@ std::optional<SpellID> CMobSpellContainer::GetNaSpell()
     return {};
 }
 
+std::optional<SpellID> CMobSpellContainer::GetSevereSpell()
+{
+    if(m_severeList.empty()) return {};
+
+    return m_severeList[tpzrand::GetRandomNumber(m_severeList.size())];
+}
+
 bool CMobSpellContainer::HasGaSpells() const
 {
     return !m_gaList.empty();
@@ -348,9 +365,13 @@ bool CMobSpellContainer::HasDebuffSpells() const
     return !m_debuffList.empty();
 }
 
+bool CMobSpellContainer::HasSevereSpells() const
+{
+    return !m_severeList.empty();
+}
+
 bool CMobSpellContainer::HasNaSpell(SpellID spellId) const
 {
-
     for(auto spell : m_naList)
     {
         if(spell == spellId)

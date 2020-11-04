@@ -3135,7 +3135,9 @@ INSERT INTO `item_mods` VALUES (11037,539,10);    -- Enhances Stoneskin effect +
 INSERT INTO `item_mods` VALUES (11038,23,7);
 INSERT INTO `item_mods` VALUES (11039,5,20);
 INSERT INTO `item_mods` VALUES (11040,2,10);      -- terminus_earring HP+10
+INSERT INTO `item_mods` VALUES (11040,64,1);      -- combat skill +1
 INSERT INTO `item_mods` VALUES (11041,5,10);      -- liminus_earring MP+10
+INSERT INTO `item_mods` VALUES (11041,65,1);      -- magic skill +1
 INSERT INTO `item_mods` VALUES (11042,8,2);
 INSERT INTO `item_mods` VALUES (11042,9,-1);
 INSERT INTO `item_mods` VALUES (11042,11,-1);
@@ -5515,6 +5517,7 @@ INSERT INTO `item_mods` VALUES (11675,117,4);
 INSERT INTO `item_mods` VALUES (11676,11,4);
 INSERT INTO `item_mods` VALUES (11677,2,10);      -- prouesse_ring HP+10
 INSERT INTO `item_mods` VALUES (11677,5,10);      -- MP+10
+INSERT INTO `item_mods` VALUES (11677,64,1);      -- Combat Skill Gain +1
 INSERT INTO `item_mods` VALUES (11678,8,2);
 INSERT INTO `item_mods` VALUES (11678,54,15);
 INSERT INTO `item_mods` VALUES (11678,55,15);
@@ -16484,6 +16487,10 @@ INSERT INTO `item_mods` VALUES (15195,2,-20);
 INSERT INTO `item_mods` VALUES (15195,5,55);
 INSERT INTO `item_mods` VALUES (15196,958,2); -- Elegant Ribbon "resistance to all status ailments" +2
 INSERT INTO `item_mods` VALUES (15197,1,17);
+INSERT INTO `item_mods` VALUES (15198,64,3);  -- Sprout Beret Combat Skill Gain +3
+INSERT INTO `item_mods` VALUES (15198,65,3);  --              Magic Skill Gain +3
+INSERT INTO `item_mods` VALUES (15199,64,3);  -- Guide  Beret Combat Skill Gain +3
+INSERT INTO `item_mods` VALUES (15199,65,3);  --              Magic Skill Gain +3
 INSERT INTO `item_mods` VALUES (15200,1,5);
 INSERT INTO `item_mods` VALUES (15200,54,5);
 INSERT INTO `item_mods` VALUES (15200,55,5);
@@ -33509,6 +33516,7 @@ INSERT INTO `item_mods` VALUES (25708,68,41); -- Evasion+41
 INSERT INTO `item_mods` VALUES (25708,31,80); -- Magic Evasion+80
 INSERT INTO `item_mods` VALUES (25708,29,6); -- Magic Def. Bonus+6
 INSERT INTO `item_mods` VALUES (25708,384,300); -- Haste+3%
+INSERT INTO `item_mods` VALUES (25714,64,1);      -- Track Shirt +1 Combat Skill Gain +1
 INSERT INTO `item_mods` VALUES (25718,1,133);     -- Herculean Vest: DEF+133
 INSERT INTO `item_mods` VALUES (25718,2,61);      -- HP+61
 INSERT INTO `item_mods` VALUES (25718,8,28);      -- STR+28
@@ -43267,7 +43275,7 @@ INSERT INTO `item_mods` VALUES (27676,23,17); -- Attack+17
 INSERT INTO `item_mods` VALUES (27676,31,29); -- Magic Evasion+29
 INSERT INTO `item_mods` VALUES (27676,384,600); -- Haste+6%
 INSERT INTO `item_mods` VALUES (27676,5,19); -- MP+19
-INSERT INTO `item_mods` VALUES (27676,65,15); -- Evasion+15
+INSERT INTO `item_mods` VALUES (27676,68,15); -- Evasion+15
 INSERT INTO `item_mods` VALUES (27676,8,20); -- STR+20
 INSERT INTO `item_mods` VALUES (27676,9,14); -- DEX+14
 INSERT INTO `item_mods` VALUES (27697,1,109); -- vishap_armet_+1 - DEF:82
@@ -43280,7 +43288,7 @@ INSERT INTO `item_mods` VALUES (27697,23,22); -- Attack+17
 INSERT INTO `item_mods` VALUES (27697,31,43); -- Magic Evasion+29
 INSERT INTO `item_mods` VALUES (27697,384,600); -- Haste+6%
 INSERT INTO `item_mods` VALUES (27697,5,23); -- MP+19
-INSERT INTO `item_mods` VALUES (27697,65,33); -- Evasion+15
+INSERT INTO `item_mods` VALUES (27697,68,33); -- Evasion+33
 INSERT INTO `item_mods` VALUES (27697,8,27); -- STR+20
 INSERT INTO `item_mods` VALUES (27697,9,20); -- DEX+14
 INSERT INTO `item_mods` VALUES (27676,829,1);
@@ -44066,6 +44074,7 @@ INSERT INTO `item_mods` VALUES (27743,13,9);
 INSERT INTO `item_mods` VALUES (27743,14,9);
 INSERT INTO `item_mods` VALUES (27743,29,1);
 INSERT INTO `item_mods` VALUES (27743,31,41);
+INSERT INTO `item_mods` VALUES (27743,64,1);  -- Tema. Headband Combat Skill Gain +1
 INSERT INTO `item_mods` VALUES (27743,68,8);
 INSERT INTO `item_mods` VALUES (27743,384,500);
 INSERT INTO `item_mods` VALUES (27744,1,107); -- Comment me
@@ -45707,6 +45716,7 @@ INSERT INTO `item_mods` VALUES (27884,13,14);
 INSERT INTO `item_mods` VALUES (27884,14,14);
 INSERT INTO `item_mods` VALUES (27884,29,2);
 INSERT INTO `item_mods` VALUES (27884,31,44);
+INSERT INTO `item_mods` VALUES (27884,65,1);       -- Temachtiani Shirt Magic Skill Gain +1
 INSERT INTO `item_mods` VALUES (27884,68,10);
 INSERT INTO `item_mods` VALUES (27884,384,200);
 INSERT INTO `item_mods` VALUES (27886,1,140);
@@ -47322,6 +47332,7 @@ INSERT INTO `item_mods` VALUES (28032,12,9);
 INSERT INTO `item_mods` VALUES (28032,13,16);
 INSERT INTO `item_mods` VALUES (28032,14,9);
 INSERT INTO `item_mods` VALUES (28032,31,20);
+INSERT INTO `item_mods` VALUES (28032,65,1);     -- Temachtiani Gloves Magic Skill Gain +1
 INSERT INTO `item_mods` VALUES (28032,68,5);
 INSERT INTO `item_mods` VALUES (28032,384,300);
 INSERT INTO `item_mods` VALUES (28034,1,84); -- Dynasty Mitts DEF:84
@@ -48866,6 +48877,7 @@ INSERT INTO `item_mods` VALUES (28171,13,12);
 INSERT INTO `item_mods` VALUES (28171,14,9);
 INSERT INTO `item_mods` VALUES (28171,29,1);
 INSERT INTO `item_mods` VALUES (28171,31,59);
+INSERT INTO `item_mods` VALUES (28171,64,1);  -- Temachtiani Pants Combat Skill Gain +1
 INSERT INTO `item_mods` VALUES (28171,68,6);
 INSERT INTO `item_mods` VALUES (28171,384,400);
 INSERT INTO `item_mods` VALUES (28172,1,107);
@@ -50563,6 +50575,7 @@ INSERT INTO `item_mods` VALUES (28309,13,9);
 INSERT INTO `item_mods` VALUES (28309,14,17);
 INSERT INTO `item_mods` VALUES (28309,29,1);
 INSERT INTO `item_mods` VALUES (28309,31,59);
+INSERT INTO `item_mods` VALUES (28309,64,1);      -- Temachtiani Boots Combat Skill Gain +1
 INSERT INTO `item_mods` VALUES (28309,68,13);
 INSERT INTO `item_mods` VALUES (28309,384,300);
 INSERT INTO `item_mods` VALUES (28310,1,74);      -- Vanir Boots: DEF 74
