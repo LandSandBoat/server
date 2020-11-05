@@ -775,13 +775,13 @@ INSERT INTO `mob_skills` VALUES (946,648,'tachi_yukikaze',0,7,2000,0,4,0,0,0,7,6
 INSERT INTO `mob_skills` VALUES (947,649,'tachi_gekko',0,7,2000,0,4,0,0,0,10,5,0);
 INSERT INTO `mob_skills` VALUES (948,650,'tachi_kasha',0,7,2000,0,4,0,0,0,11,2,0);
 -- INSERT INTO `mob_skills` VALUES (949,693,'flame_blast',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (950,694,'flame_blast',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (950,652,'flame_blast_alt',0,18.0,2000,0,4,16,0,0,0,0,0); -- KS99_Wyrm regular airborne attack
 INSERT INTO `mob_skills` VALUES (951,653,'hurricane_wing',1,30.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (952,654,'spike_flail',1,23.0,2000,2000,4,0,0,0,0,0,0); -- (fafnir) alliance only targeting version of spike flail
+INSERT INTO `mob_skills` VALUES (952,654,'spike_flail',1,23.0,2000,2000,4,0,0,0,0,0,0); -- Alliance only targeting version of spike flail
 INSERT INTO `mob_skills` VALUES (953,655,'dragon_breath',4,18.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (954,698,'touchdown',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (955,699,'flame_blast',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (956,432,'super_buff',0,18.0,2000,0,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (954,656,'touchdown',1,30.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (955,657,'flame_blast',1,30.0,2000,1500,4,0,0,0,0,0,0); -- KS99_Wyrm airborne fire AoE
+INSERT INTO `mob_skills` VALUES (956,658,'hurricane_wing_flying',1,30.0,2000,1500,4,0,0,0,0,0,0); -- KS99_Wyrm airborne Hurricane Wing
 INSERT INTO `mob_skills` VALUES (957,659,'absolute_terror',0,18.0,4000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (958,660,'horrid_roar_1',0,18.0,4000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (959,703,'sickle_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);
