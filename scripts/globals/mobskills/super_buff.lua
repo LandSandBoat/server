@@ -1,9 +1,9 @@
 ---------------------------------------------
--- Spike Flail
--- Deals extreme damage in a threefold attack to targets behind the user.
+-- Super Buff
+-- Raises physical attack, defense, magic attack and magic evasion
+-- Used by Nidhogg at will
 ---------------------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------

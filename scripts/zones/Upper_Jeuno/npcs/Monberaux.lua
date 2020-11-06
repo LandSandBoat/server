@@ -94,6 +94,8 @@ function onEventFinish(player, csid, option)
         player:startEvent(207)  --207
     elseif (csid == 82) then
         player:setCharVar("PromathiaStatus", 1)
+        player:delKeyItem(tpz.ki.MYSTERIOUS_AMULET_DRAINED)
+        player:messageSpecial(ID.text.LEND_PRISHE_AMULET, tpz.ki.MYSTERIOUS_AMULET_PRISHE)
     elseif (csid == 75) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)

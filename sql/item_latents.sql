@@ -201,6 +201,8 @@ INSERT INTO `item_latents` VALUES(11727, 68, 1, 16, 6);
 -- -------------------------------------------------------
 -- Destrier Beret
 -- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(11811,  64, 1, 50, 30);   -- Combat Skill Gain +1
+INSERT INTO `item_latents` VALUES(11811,  65, 1, 50, 30);   -- Magic Skill Gain +1
 INSERT INTO `item_latents` VALUES(11811, 369, 1, 50, 30);   -- Adds "Refresh"
 INSERT INTO `item_latents` VALUES(11811, 370, 1, 50, 30);   -- Adds "Regen"
 INSERT INTO `item_latents` VALUES(11811, 456, 1, 50, 30);   -- Adds "Reraise"

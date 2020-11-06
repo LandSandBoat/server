@@ -26,6 +26,8 @@ zones[tpz.zone.ABYSSEA_LA_THEINE] =
     {
         QM_POPS =
         {
+            -- TODO: the first item, e.g. 'qm1', is unused and will be meaningless once I (Wren) finish entity-QC on all Abyssea zones.
+            -- When that is done, I will rewrite Abyssea global and adjust and neaten this table
             --  [17318473] = { 'qm1', {2891},                                                                                                                      {}, 17318434}, -- Dozing Dorian
             --  [17318474] = { 'qm2', {2892},                                                                                                                      {}, 17318435}, -- Trudging Thomas
             --  [17318475] = { 'qm3', {2893},                                                                                                                      {}, 17318436}, -- Megantereon

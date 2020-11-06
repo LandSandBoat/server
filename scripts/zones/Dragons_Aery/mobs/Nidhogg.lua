@@ -26,9 +26,7 @@ function onMobFight(mob, target)
     end
 
     if battletime >= twohourTime then
-        mob:useMobAbility(956)
-        -- technically aerial hurricane wing, but I'm using 700 for his two hour
-        --(since I have no inclination to spend millions on a PI to cap one name you never see)
+        mob:useMobAbility(1053) -- Legitimately captured super_buff ID
         mob:setLocalVar("twohourTime", battletime + math.random(60, 120))
     end
 end

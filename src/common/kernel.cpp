@@ -234,7 +234,7 @@ void usercheck(void)
 *  CORE : MAINROUTINE													*
 *																		*
 ************************************************************************/
-
+#ifndef DEFINE_OWN_MAIN
 int main (int argc, char **argv)
 {
 	{// initialize program arguments
@@ -272,3 +272,4 @@ int main (int argc, char **argv)
     do_final(EXIT_SUCCESS);
 	return 0;
 }
+#endif

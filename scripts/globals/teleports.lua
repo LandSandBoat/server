@@ -12,65 +12,69 @@ tpz.teleport = tpz.teleport or {}
 -----------------------------------
 local ids =
 {
-    DEM                 = 1,
-    HOLLA               = 2,
-    YHOAT               = 3,
-    VAHZL               = 4,
-    MEA                 = 5,
-    ALTEP               = 6,
-    WARP                = 7,
-    ESCAPE              = 8,
-    JUGNER              = 9,
-    PASHH               = 10,
-    MERIPH              = 11,
-    AZOUPH              = 12,
-    BHAFLAU             = 13,
-    ZHAYOLM             = 14,
-    DVUCCA              = 15,
-    REEF                = 16,
-    ALZADAAL            = 17,
-    CUTTER              = 18,
-    Z_REM               = 19,
-    A_REM               = 20,
-    B_REM               = 21,
-    S_REM               = 22,
-    MAAT                = 23,
-    OUTPOST             = 24,
-    LEADER              = 25,
-    EXITPROMMEA         = 26,
-    EXITPROMHOLLA       = 27,
-    EXITPROMDEM         = 28,
-    LUFAISE             = 29,
-    CHOCO_WINDURST      = 30,
-    CHOCO_SANDORIA      = 31,
-    CHOCO_BASTOK        = 32,
-    DUCALGUARD          = 33,
-    PURGONORGO          = 34,
-    AZOUPH_SP           = 35,
-    DVUCCA_SP           = 36,
-    MAMOOL_SP           = 37,
-    HALVUNG_SP          = 38,
-    ILRUSI_SP           = 39,
-    NYZUL_SP            = 40,
-    SKY                 = 41,
-    CLOISTER_OF_FLAMES  = 42,
-    CLOISTER_OF_FROST   = 43,
-    CLOISTER_OF_GALES   = 44,
-    CLOISTER_OF_STORMS  = 45,
-    CLOISTER_OF_TIDES   = 46,
-    CLOISTER_OF_TREMORS = 47,
-    GHELSBA_HUT         = 48,
-    WAJAOM_LEYPOINT     = 49,
-    VALKURM_VORTEX      = 50,
-    QUFIM_VORTEX        = 51,
-    LUFAISE_VORTEX      = 52,
-    MISAREAUX_VORTEX    = 53,
-    MINESHAFT           = 54,
-    WHITEGATE           = 55,
-    SEA                 = 56,
-    HOME_NATION         = 57,
-    CHOCO_UPPER_JEUNO   = 58,
-    ZVAHL_KEEP          = 59
+    DEM                   = 1,
+    HOLLA                 = 2,
+    YHOAT                 = 3,
+    VAHZL                 = 4,
+    MEA                   = 5,
+    ALTEP                 = 6,
+    WARP                  = 7,
+    ESCAPE                = 8,
+    JUGNER                = 9,
+    PASHH                 = 10,
+    MERIPH                = 11,
+    AZOUPH                = 12,
+    BHAFLAU               = 13,
+    ZHAYOLM               = 14,
+    DVUCCA                = 15,
+    REEF                  = 16,
+    ALZADAAL              = 17,
+    CUTTER                = 18,
+    Z_REM                 = 19,
+    A_REM                 = 20,
+    B_REM                 = 21,
+    S_REM                 = 22,
+    MAAT                  = 23,
+    OUTPOST               = 24,
+    LEADER                = 25,
+    EXITPROMMEA           = 26,
+    EXITPROMHOLLA         = 27,
+    EXITPROMDEM           = 28,
+    LUFAISE               = 29,
+    CHOCO_WINDURST        = 30,
+    CHOCO_SANDORIA        = 31,
+    CHOCO_BASTOK          = 32,
+    DUCALGUARD            = 33,
+    PURGONORGO            = 34,
+    AZOUPH_SP             = 35,
+    DVUCCA_SP             = 36,
+    MAMOOL_SP             = 37,
+    HALVUNG_SP            = 38,
+    ILRUSI_SP             = 39,
+    NYZUL_SP              = 40,
+    SKY                   = 41,
+    CLOISTER_OF_FLAMES    = 42,
+    CLOISTER_OF_FROST     = 43,
+    CLOISTER_OF_GALES     = 44,
+    CLOISTER_OF_STORMS    = 45,
+    CLOISTER_OF_TIDES     = 46,
+    CLOISTER_OF_TREMORS   = 47,
+    GHELSBA_HUT           = 48,
+    WAJAOM_LEYPOINT       = 49,
+    VALKURM_VORTEX        = 50,
+    QUFIM_VORTEX          = 51,
+    LUFAISE_VORTEX        = 52,
+    MISAREAUX_VORTEX      = 53,
+    MINESHAFT             = 54,
+    WHITEGATE             = 55,
+    SEA                   = 56,
+    HOME_NATION           = 57,
+    CHOCO_UPPER_JEUNO     = 58,
+    ZVAHL_KEEP            = 59,
+    RETRACE               = 60,
+    SOUTHERN_SAN_DORIA_S  = 61,
+    BASTOK_MARKETS_S      = 62,
+    WINDURST_WATERS_S     = 63
 }
 tpz.teleport.id = ids
 
@@ -95,7 +99,7 @@ local destinations =
     [ids.DVUCCA]                = {-252.715,   -7.666,  -30.640, 128,  79}, -- {R}
     [ids.REEF]                  = {   9.304,   -7.376,  620.133,   0,  54}, -- {R}
     [ids.ALZADAAL]              = { 180.000,    0.000,   20.000,   0,  72}, -- {R}
-    [ids.CUTTER]                = {-456.000,   -3.000, -405.000, -405,  54},
+    [ids.CUTTER]                = {-456.000,   -3.000, -405.000, -405, 54},
     [ids.A_REM]                 = {-579.000,   -0.050, -100.000, 192,  72},
     [ids.B_REM]                 = { 620.000,    0.000, -260.640,  72,  72}, -- {R}
     [ids.S_REM]                 = { 580.000,    0.000,  500.000, 192,  72}, -- {R}
@@ -133,7 +137,10 @@ local destinations =
     [ids.MINESHAFT]             = { -93.657, -120.000, -583.561,   0,  13}, -- (R)
     [ids.WHITEGATE]             = {  27.424,   -6.000, -123.792, 192,  50}, -- {R}
     [ids.SEA]                   = { -31.800,    0.000, -618.700, 190,  33}, -- {R}
-    [ids.ZVAHL_KEEP]            = {-555.996,  -70.100,   59.989,   0, 162}
+    [ids.ZVAHL_KEEP]            = {-555.996,  -70.100,   59.989,   0, 162},
+    [ids.SOUTHERN_SAN_DORIA_S]  = { -98.000,    1.000,  -41.000, 224,  80},
+    [ids.BASTOK_MARKETS_S]      = {-291.000,  -10.000, -107.000, 212,  87},
+    [ids.WINDURST_WATERS_S]     = { -31.442,   -5.000,  129.202, 128,  94}
 }
 
 tpz.teleport.type =
@@ -268,6 +275,24 @@ tpz.teleport.toHomeNation = function(player)
         player:setPos(49, -1 , 29, 164, 231)
     else
         player:setPos(193, -12 , 220, 64, 240)
+    end
+end
+
+-----------------------------------
+-- TELEPORT TO ALLIED NATION
+-----------------------------------
+
+tpz.teleport.toAlliedNation = function(player)
+    local Allegiance = player:getCampaignAllegiance()
+    local sandoriaPos = destinations[ids.SOUTHERN_SAN_DORIA_S]
+    local bastokPos = destinations[ids.BASTOK_MARKETS_S]
+    local windurstPos = destinations[ids.WINDURST_WATERS_S]
+    if Allegiance == tpz.alliedNation.SANDORIA then
+        player:setPos(unpack(sandoriaPos))
+    elseif Allegiance == tpz.alliedNation.BASTOK then
+        player:setPos(unpack(bastokPos))
+    elseif Allegiance == tpz.alliedNation.WINDURST then
+        player:setPos(unpack(windurstPos))
     end
 end
 

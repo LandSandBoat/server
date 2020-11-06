@@ -48,12 +48,12 @@ Clang-Format is also an option for C++
 ## General code guidlines (all languages):
 
 * Your code should strive to be obvious and readable by the casual observer. You aren't going to be the only person who reads/debugs your code.
-* Unix (LF) line ends, GitHub will tell you if you don't have one by putting a ⛔ symbol at the end of your file.
+* Unix (LF) line ends at the end of every file. GitHub will tell you if you don't have one by putting a ⛔ symbol at the end of your file.
 * Try not to exceed 120 chars width. Exceptions will occur, but try.
-* 4 space indent (death to tabs)
-* No using tabs for alignment either.
+* 4 space indent, do not use tabs for alignment.
 * Trim trailing whitespace.
 * Space after starting comments (`-- Comment` and `// Comment`)
+* If you agree with staff and/or your  reviewers that some work in your pull request can be left as "to-do", make new issues on GitHub for your new `TODO` items and put the ID alongside the comment. The comment should also be sufficiently descriptive of what the missing work is, and why it was left out. eg. `// TODO: A Boy's Dream - PLD AF Quest 2 - Cannot be completed until fishing is implemented (GitHub Issue #12345)`
 
 ## C++
 We keep a `.clang-format` file in the root of the repo, but accept it can be difficult to set up for use on _just your changes_, as opposed to entire files that you're working with that might have legacy styling you don't want to mess with.
@@ -618,6 +618,30 @@ local quests = tpz.quest.id.sandoria
   ```
   insert into table_name
   ```
+#### Commenting in SQL
+Our SQL tables are big and confusing, and they are also modified by hand. It can be very helpful to leave _short_ comments on your additions and modifications to highlight what they are.
+
+**Example**
+
+Without a comment, this entry is not easily human-readable:
+
+```sql
+INSERT INTO `mob_droplist` VALUES (504,0,0,1000,888,340);
+```
+
+So we instead store it as:
+
+```sql
+INSERT INTO `mob_droplist` VALUES (504,0,0,1000,888,340); -- (Colossal Calamari) seashell
+```
+
+Conversely, `Combo` weaponskill doesn't need any additional comments because it has a name field:
+
+```sql
+INSERT INTO `weapon_skills` VALUES (1,'combo',0x02020000000200000000000002000000000202000000,1,5,0,16,2000,5,1,8,0,0,0,0);
+```
+
+The format of the comment isn't massively important, but it is preferred not to use ';' as a seperator in the middle of your comment. This is a little confusing, as it's the statement-terminator in SQL.
 
 ## SQL Migrations for Schema changes
 
