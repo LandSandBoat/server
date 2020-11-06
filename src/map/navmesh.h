@@ -74,10 +74,14 @@ public:
     std::vector<position_t> findPath(const position_t& start, const position_t& end);
     std::pair<int16, position_t> findRandomPosition(const position_t& start, float maxRadius);
 
-    // returns true if the point is in water
+    // Returns true if the point is in water
     bool inWater(const position_t& point);
-
-    // returns true if no wall was hit
+    
+    // Returns true if no wall was hit
+    //
+    // Recast Detour Docs:
+    // Casts a 'walkability' ray along the surface of the navigation mesh from the start position toward the end position.
+    // Note: This is not a point-to-point in 3D space calculation, it is 2D across the navmesh!
     bool raycast(const position_t& start, const position_t& end);
 
     bool validPosition(const position_t& position);

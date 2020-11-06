@@ -4,6 +4,7 @@
 require("scripts/globals/weather")
 require("scripts/globals/common")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -125,11 +126,11 @@ quests.i_can_hear_a_rainbow.onZoneIn = function(player)
 
         if data and data.zones[zone:getID()] then
             local mask = player:getCharVar('I_CAN_HEAR_A_RAINBOW')
-            local needsColor = bit.band(mask, 2^data.bit) == 0
+            local hasColor = utils.mask.getBit(mask, data.bit)
 
-            if needsColor then
+            if not hasColor then
                 trigger = true
-                player:setCharVar('I_CAN_HEAR_A_RAINBOW', bit.bor(mask, 2^data.bit))
+                player:setCharVar('I_CAN_HEAR_A_RAINBOW', utils.mask.setBit(mask, data.bit, true))
                 player:setLocalVar('[rainbow]weather', weather)
             end
         end
@@ -146,10 +147,10 @@ quests.i_can_hear_a_rainbow.onEventUpdate = function(player)
         weather = tpz.weather.NONE
     end
 
-    if player:getCharVar("I_CAN_HEAR_A_RAINBOW") < 127 then
-        player:updateEvent(0, 0, weather)
-    else
+    if utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7) then -- has collected all 7 colors?
         player:updateEvent(0, 0, weather, 6)
+    else
+        player:updateEvent(0, 0, weather)
     end
 end
 

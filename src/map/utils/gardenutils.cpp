@@ -82,6 +82,7 @@ namespace gardenutils
 
     void UpdateGardening(CCharEntity* PChar, bool sendPacket)
     {
+        TracyZoneScoped;
         uint32 vanatime = CVanaTime::getInstance()->getVanaTime();
         for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {

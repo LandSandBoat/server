@@ -26,6 +26,8 @@ zones[tpz.zone.ABYSSEA_VUNKERL] =
     {
         QM_POPS =
         {
+            -- TODO: the first item, e.g. 'qm1', is unused and will be meaningless once I (Wren) finish entity-QC on all Abyssea zones.
+            -- When that is done, I will rewrite Abyssea global and adjust and neaten this table
             --  [17666576] = { 'qm1', {3098},                                                                                          {}, 17666487}, -- Khalkotaur
             --  [17666577] = { 'qm2', {3099},                                                                                          {}, 17666488}, -- Quasimodo
             --  [17666578] = { 'qm3', {3100},                                                                                          {}, 17666489}, -- Iku-Turso

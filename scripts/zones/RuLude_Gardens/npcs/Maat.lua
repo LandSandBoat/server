@@ -11,6 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -87,7 +88,11 @@ function onTrigger(player, npc)
         player:startEvent(91, player:getMainJob()) -- During Quest "Shattering Stars"
     elseif (shatteringStars == QUEST_ACCEPTED and LvL >= 66 and mJob <= 15 and player:getCharVar("maatDefeated") >= 1) then
         player:startEvent(93) -- Finish Quest "Shattering Stars"
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_SUN) == QUEST_AVAILABLE and mJob <= 15 and player:getCharVar("maatsCap") == 32767) then
+    elseif
+        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_SUN) == QUEST_AVAILABLE and
+        mJob <= 15 and
+        utils.mask.isFull(player:getCharVar("maatsCap"), 15) -- defeated maat on 15 jobs
+    then
         player:startEvent(74) -- Finish Quest "Beyond The Sun"
     else
         player:showText(npc, ID.text.MAAT_DIALOG)

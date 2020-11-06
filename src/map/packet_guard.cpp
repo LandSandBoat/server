@@ -53,6 +53,7 @@ void Init()
 
 bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
 {
+    TracyZoneScoped;
 #if PACKETGUARD_CAP_ENABLED == 1
     regular_client_packets[PChar->m_Substate].insert(SmallPD_Type);
     for (uint8 state = SUBSTATE_IN_CS; state < SUBSTATE_LAST; ++state)
@@ -72,6 +73,7 @@ bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
 
 bool IsRateLimitedPacket(CCharEntity* PChar, uint16 SmallPD_Type)
 {
+    TracyZoneScoped;
     using namespace std::chrono;
     uint32 lastPacketRecievedTime = PChar->m_PacketRecievedTimestamps[SmallPD_Type];
     uint32 timeNowSeconds = static_cast<uint32>(time_point_cast<seconds>(server_clock::now()).time_since_epoch().count());

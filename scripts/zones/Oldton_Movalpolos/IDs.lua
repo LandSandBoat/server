@@ -34,7 +34,7 @@ zones[tpz.zone.OLDTON_MOVALPOLOS] =
     npc =
     {
         SCRAWLED_WRITING = 16822469,
-        OVERSEER_BASE    = 16822509,
+        OVERSEER_BASE    = 16822509, -- first Conquest_Banner in npc_list
         TREASURE_CHEST   = 16822531,
         MINING =
         {

@@ -100,6 +100,7 @@ namespace luautils
 
     int32 init()
     {
+        TracyZoneScoped;
         ShowStatus("luautils::init:lua initializing...");
         LuaHandle = luaL_newstate();
         luaL_openlibs(LuaHandle);
@@ -178,6 +179,8 @@ namespace luautils
 
         contentRestrictionEnabled = (GetSettingsVariable("RESTRICT_CONTENT") != 0);
 
+        TracyReportLuaMemory(LuaHandle);
+
         ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
         return 0;
     }
@@ -202,11 +205,15 @@ namespace luautils
 
     int32 garbageCollect()
     {
+        TracyZoneScoped;
+        TracyReportLuaMemory(LuaHandle);
 
         int32 top = lua_gettop(LuaHandle);
         ShowDebug(CL_CYAN"[Lua] Garbage Collected. Current State Top: %d\n" CL_RESET, top);
 
         lua_gc(LuaHandle, LUA_GCSTEP, 10);
+
+        TracyReportLuaMemory(LuaHandle);
 
         return 0;
     }
@@ -247,6 +254,11 @@ namespace luautils
 
     int32 prepFile(int8* File, const char* function)
     {
+        TracyZoneScoped;
+        TracyZoneCString(function);
+        TracyZoneIString(File);
+        TracyReportLuaMemory(LuaHandle);
+
         lua_pushnil(LuaHandle);
         lua_setglobal(LuaHandle, function);
 
@@ -338,6 +350,7 @@ namespace luautils
 
     int32 GetNPCByID(lua_State* L)
     {
+        TracyZoneScoped;
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32 npcid = (uint32)lua_tointeger(L, 1);
@@ -389,6 +402,7 @@ namespace luautils
 
     int32 GetMobByID(lua_State* L)
     {
+        TracyZoneScoped;
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32 mobid = (uint32)lua_tointeger(L, 1);
@@ -859,6 +873,7 @@ namespace luautils
     ************************************************************************/
     int32 SpawnMob(lua_State* L)
     {
+        TracyZoneScoped;
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32 mobid = (uint32)lua_tointeger(L, 1);
@@ -924,6 +939,7 @@ namespace luautils
 
     int32 DespawnMob(lua_State* L)
     {
+        TracyZoneScoped;
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32 mobid = (uint32)lua_tointeger(L, 1);
@@ -1461,6 +1477,7 @@ namespace luautils
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     {
+        TracyZoneScoped;
         lua_prepscript("scripts/zones/%s/npcs/%s.lua", PChar->loc.zone->GetName(), PNpc->GetName());
 
         PChar->m_event.reset();
@@ -1519,6 +1536,7 @@ namespace luautils
 
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras)
     {
+        TracyZoneScoped;
         lua_gettop(LuaHandle);
         lua_pushnil(LuaHandle);
         lua_setglobal(LuaHandle, "onEventUpdate");
@@ -1560,6 +1578,7 @@ namespace luautils
 
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
+        TracyZoneScoped;
         lua_pushnil(LuaHandle);
         lua_setglobal(LuaHandle, "onEventUpdate");
 
@@ -1595,6 +1614,7 @@ namespace luautils
 
     int32 OnEventUpdate(CCharEntity* PChar, int8* string)
     {
+        TracyZoneScoped;
         lua_pushnil(LuaHandle);
         lua_setglobal(LuaHandle, "onEventUpdate");
 
@@ -1632,6 +1652,7 @@ namespace luautils
 
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
+        TracyZoneScoped;
         lua_pushnil(LuaHandle);
         lua_setglobal(LuaHandle, "onEventFinish");
 
@@ -1674,6 +1695,7 @@ namespace luautils
 
     int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
     {
+        TracyZoneScoped;
         lua_prepscript("scripts/zones/%s/npcs/%s.lua", PChar->loc.zone->GetName(), PNpc->GetName());
 
         PChar->m_event.reset();
@@ -2505,6 +2527,7 @@ namespace luautils
 
     int32 OnPath(CBaseEntity* PEntity)
     {
+        TracyZoneScoped;
         TPZ_DEBUG_BREAK_IF(PEntity == nullptr);
 
         if (PEntity->objtype != TYPE_PC)
@@ -2744,6 +2767,7 @@ namespace luautils
 
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
+        TracyZoneScoped;
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
         TPZ_DEBUG_BREAK_IF(PTarget == nullptr || PTarget->objtype == TYPE_NPC);
 
@@ -2809,6 +2833,7 @@ namespace luautils
 
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
     {
+        TracyZoneScoped;
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
@@ -3098,6 +3123,7 @@ namespace luautils
 
     int32 OnGameHour(CZone* PZone)
     {
+        TracyZoneScoped;
         lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
 
         if (prepFile(File, "onGameHour"))
@@ -3979,6 +4005,7 @@ namespace luautils
 
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type)
     {
+        TracyZoneScoped;
         lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
 
         if (prepFile(File, "onConquestUpdate"))

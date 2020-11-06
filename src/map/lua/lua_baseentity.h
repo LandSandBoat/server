@@ -134,9 +134,14 @@ public:
     int32 sendEmote(lua_State*);             // Character emits emote packet.
 
     // Location and Positioning
-    int32 isBehind(lua_State*);              // true if you're behind the input target
+
+    int32 getWorldAngle(lua_State* L);       // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
+    int32 getFacingAngle(lua_State* L);      // return angle between entity rot and target pos, aligned to number of degrees of difference
     int32 isFacing(lua_State*);              // true if you are facing the target
-    int32 getAngle(lua_State* L);            // return angle (rot) between two points (vector from a to b)
+    int32 isInfront(lua_State*);             // true if you're infront of the input target
+    int32 isBehind(lua_State*);              // true if you're behind the input target
+    int32 isBeside(lua_State*);              // true if you're to the side of the input target
+
     int32 getZone(lua_State*);               // Get Entity zone
     int32 getZoneID(lua_State*);             // Get Entity zone ID
     int32 getZoneName(lua_State*);           // Get Entity zone name

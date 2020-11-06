@@ -35,6 +35,7 @@ zones[tpz.zone.UPPER_JEUNO] =
         KIRISOMANRISO_DIALOG             = 8071, -- Delivering goods to residences everywhere!
         ITEM_DELIVERY_DIALOG             = 8071, -- Delivering goods to residences everywhere!
         DECIMATION_LEARNED               = 8194, -- You have learned the weapon skill Decimation!
+        LEND_PRISHE_AMULET               = 8331, -- You lend the mysterious amulet to Prishe.
         UNLOCK_DANCER                    = 11825, -- You can now become a dancer!
     },
     mob =
