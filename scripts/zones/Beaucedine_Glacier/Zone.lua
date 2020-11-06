@@ -53,6 +53,8 @@ function onEventUpdate(player, csid, option)
         quests.rainbow.onEventUpdate(player)
     elseif csid == 116 then
         player:updateEvent(0, 0, 0, 0, 0, 4)
+    elseif csid == 206 then
+        player:updateEvent(0, tpz.ki.MYSTERIOUS_AMULET)
     end
 end
 

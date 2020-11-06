@@ -116,15 +116,33 @@ function onMobSpawn(mob)
                 weaknessTargetChance = 100
             end
             if math.random(100) <= weaknessTargetChance then
-                local weakness = 0
-                for mod = 0, 5 do
-                    if target:getMod(tpz.mod.FIREDEF + mod) < target:getMod(tpz.mod.FIREDEF + weakness) then
-                        breaths = {}
-                        table.insert(breaths, tpz.jobAbility.FLAME_BREATH + mod)
-                    elseif target:getMod(tpz.mod.FIREDEF + mod) == target:getMod(tpz.mod.FIREDEF + weakness) then
-                        table.insert(breaths, tpz.jobAbility.FLAME_BREATH + mod)
+                local breathList =
+                {
+                    tpz.jobAbility.FLAME_BREATH,
+                    tpz.jobAbility.FROST_BREATH,
+                    tpz.jobAbility.GUST_BREATH,
+                    tpz.jobAbility.SAND_BREATH,
+                    tpz.jobAbility.LIGHTNING_BREATH,
+                    tpz.jobAbility.HYDRO_BREATH,
+                }
+                local resistances =
+                {
+                    target:getMod(tpz.mod.FIRERES),
+                    target:getMod(tpz.mod.ICERES),
+                    target:getMod(tpz.mod.WINDRES),
+                    target:getMod(tpz.mod.EARTHRES),
+                    target:getMod(tpz.mod.THUNDERRES),
+                    target:getMod(tpz.mod.WATERRES),
+                }
+                local lowest = resistances[1]
+                local breath = breathList[1]
+                for i, v in ipairs(breathList) do
+                    if resistances[i] < lowest then
+                        lowest = resistances[i]
+                        breath = v
                     end
                 end
+                table.insert(breaths, breath)
             else
                 breaths =
                 {

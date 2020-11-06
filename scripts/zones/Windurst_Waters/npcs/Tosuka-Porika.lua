@@ -29,7 +29,7 @@ function onTrigger(player, npc)
     if
         currentMission == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 1 and not
-        player:hasKeyItem(tpz.ki.tpz.ki.OPTISTERY_RING)
+        player:hasKeyItem(tpz.ki.OPTISTERY_RING)
     then
         player:startEvent(801, 0, tpz.ki.OPTISTERY_RING)
         

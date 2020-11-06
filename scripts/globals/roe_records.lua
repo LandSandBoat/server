@@ -17,7 +17,9 @@ local timedSchedule = {
     {     0,  4009,  4015,  4011,  4017,  4014}, -- Saturday
 }
 -- Load timetable for timed records
-RoeParseTimed(timedSchedule)
+if ENABLE_ROE_TIMED and ENABLE_ROE_TIMED > 0 then
+    RoeParseTimed(timedSchedule)
+end
 
 local defaults = {
     check = checks.masterCheck, -- Check function should return true/false
@@ -2156,7 +2158,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4009] = {   -- Vanquish Beasts
@@ -2164,7 +2166,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4010] = {   -- Vanquish Plantoids
@@ -2172,7 +2174,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4011] = {   -- Vanquish Lizards
@@ -2180,7 +2182,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4012] = {   -- Vanquish Vermin
@@ -2188,7 +2190,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4013] = { -- Gain Experience
@@ -2211,7 +2213,7 @@ tpz.roe.records =
         goal = 3,
         reqs = { itemID = set{1126, 1127, 2955, 2956, 2957} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4015] = {   -- Vanquish Birds (TODO: No abyssea zone kills for vanquishes when exists)
@@ -2219,7 +2221,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.BIRD} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4016] = {   -- Vanquish Amorphs
@@ -2227,7 +2229,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.AMORPH} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4017] = {   -- Vanquish Undead
@@ -2235,7 +2237,7 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.UNDEAD} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4018] = {   -- Vanquish Arcana
@@ -2243,13 +2245,13 @@ tpz.roe.records =
         goal = 20,
         reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     [4019] = {   -- Crack Treasure Caskets (Triggered from caskets.lua)
         goal = 10,
         flags = set{"timed", "repeat"},
-        reward = { sparks = 300, exp = 1500, unity = 300, item = { 8711 } },
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
     -- [4020] = {  -- Physical Damage Kills

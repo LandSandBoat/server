@@ -687,6 +687,10 @@ int _vShowMessage(MSGTYPE flag, const std::string& string)
         }
     }
 
+#ifdef TRACY_ENABLE
+    TracyMessage(string.c_str(), string.size());
+#endif
+
     return 0;
 }
 void ClearScreen(void)

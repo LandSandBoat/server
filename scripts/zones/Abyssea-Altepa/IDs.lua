@@ -25,6 +25,8 @@ zones[tpz.zone.ABYSSEA_ALTEPA] =
     {
         QM_POPS =
         {
+            -- TODO: the first item, e.g. 'qm1', is unused and will be meaningless once I (Wren) finish entity-QC on all Abyssea zones.
+            -- When that is done, I will rewrite Abyssea global and adjust and neaten this table
             --  [17670591] = { 'qm1',      {3230, 3236},                                                          {}, 17670565}, -- Ironclad Smiter
             --  [17670592] = { 'qm2', {3231, 3232, 3238},                                                          {}, 17670567}, -- Amarok
             --  [17670593] = { 'qm3',      {3233, 3242},                                                          {}, 17670570}, -- Shaula

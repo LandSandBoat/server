@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Balgas_Dais/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onBattlefieldTick(battlefield, tick)
@@ -40,8 +41,8 @@ function onEventFinish(player, csid, option)
         local pjob = player:getMainJob()
         player:setCharVar("maatDefeated", pjob)
         local maatsCap = player:getCharVar("maatsCap")
-        if bit.band(maatsCap, bit.lshift(1, pjob - 1)) ~= 1 then
-            player:setCharVar("maatsCap", bit.bor(maatsCap, bit.lshift(1, pjob - 1)))
+        if not utils.mask.getBit(maatsCap, pjob - 1) then
+            player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
         end
         player:addTitle(tpz.title.MAAT_MASHER)
     end

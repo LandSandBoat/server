@@ -174,7 +174,7 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         }
     }
 
-    if (!isFaceing(m_PEntity->loc.p, PTarget->loc.p, 40))
+    if (!facing(m_PEntity->loc.p, PTarget->loc.p, 64))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
         return false;
