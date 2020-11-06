@@ -144,6 +144,7 @@ void UpdateGuildsStock()
 
 void UpdateGuildPointsPattern()
 {
+    TracyZoneScoped;
     uint8 pattern = tpzrand::GetRandomNumber(8);
 
     const char* query = "SELECT value FROM server_variables WHERE name = '[GUILD]pattern_update';";

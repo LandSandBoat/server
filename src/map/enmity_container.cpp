@@ -57,6 +57,7 @@ CEnmityContainer::~CEnmityContainer()
 
 void CEnmityContainer::Clear(uint32 EntityID)
 {
+    TracyZoneScoped;
     if (EntityID == 0)
     {
         for (const auto& entry : m_EnmityList)
@@ -99,6 +100,7 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
 
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
+    TracyZoneScoped;
     m_EnmityList.emplace(PChar->id, EnmityObject_t {PChar, 0, 0, false, 0});
     PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
@@ -136,6 +138,7 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 
 void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable)
 {
+    TracyZoneScoped;
     // you're too far away so i'm ignoring you
     if (!IsWithinEnmityRange(PEntity))
     {
@@ -218,6 +221,7 @@ bool CEnmityContainer::HasID(uint32 TargetID)
 
 void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, bool isCureV)
 {
+    TracyZoneScoped;
     if (!IsWithinEnmityRange(PEntity))
         return;
 
@@ -343,6 +347,7 @@ void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
 
 void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
 {
+    TracyZoneScoped;
     Damage = (Damage < 1 ? 1 : Damage);
     int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
@@ -363,6 +368,7 @@ void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Dama
 
 void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Damage)
 {
+    TracyZoneScoped;
     if (auto enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
     {
         float reduction = (100.f - std::min<int16>(PEntity->getMod(Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.f;
@@ -380,6 +386,7 @@ void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Dama
 
 CBattleEntity* CEnmityContainer::GetHighestEnmity()
 {
+    TracyZoneScoped;
     if (m_EnmityList.empty())
     {
         return nullptr;
@@ -471,6 +478,7 @@ bool CEnmityContainer::IsTameable()
 
 void CEnmityContainer::UpdateEnmityFromCover(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser)
 {
+    TracyZoneScoped;
     // Update Enmity if cover ability target and cover ability user are not nullptr
     if (PCoverAbilityTarget != nullptr && PCoverAbilityUser != nullptr)
     {

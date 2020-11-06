@@ -66,6 +66,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/char_update.h"
 #include "message.h"
 
+#ifdef TRACY_ENABLE
+void* operator new(std::size_t count)
+{
+    auto ptr = malloc(count);
+    TracyAlloc(ptr, count);
+    return ptr;
+}
+
+void operator delete(void* ptr) noexcept
+{
+    TracyFree(ptr);
+    free(ptr);
+}
+#endif // TRACY_ENABLE
 
 const char* MAP_CONF_FILENAME = nullptr;
 
@@ -112,6 +126,7 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
 
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
+    TracyZoneScoped;
     map_session_data_t* map_session_data = new map_session_data_t;
     memset(map_session_data, 0, sizeof(map_session_data_t));
 
@@ -147,6 +162,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
 int32 do_init(int32 argc, char** argv)
 {
+    TracyZoneScoped;
     ShowStatus("do_init: begin server initialization...");
     map_ip.s_addr = 0;
 
@@ -408,6 +424,9 @@ int32 do_sockets(fd_set* rfd, duration next)
             }
         }
     }
+
+    TracyReportLuaMemory(luautils::LuaHandle);
+
     return 0;
 }
 
@@ -570,12 +589,15 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
 int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
+    TracyZoneScoped;
     // начало обработки входящего пакета
 
     int8* PacketData_Begin = &buff[FFXI_HEADER_SIZE];
     int8* PacketData_End = &buff[*buffsize];
 
-    CCharEntity *PChar = map_session_data->PChar;
+    CCharEntity* PChar = map_session_data->PChar;
+
+    TracyZoneIString(PChar->GetName());
 
     uint16 SmallPD_Size = 0;
     uint16 SmallPD_Type = 0;
@@ -820,6 +842,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 
 int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     map_session_list_t::iterator it = map_session_list.begin();
 
     while (it != map_session_list.end())
@@ -1468,6 +1491,7 @@ int32 map_config_read(const int8* cfgName)
 
 int32 map_garbage_collect(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     luautils::garbageCollect();
     return 0;
 }

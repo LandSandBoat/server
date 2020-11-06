@@ -34,13 +34,13 @@
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
 
-
-int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
+int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     TIMETYPE VanadielTOTD = CVanaTime::getInstance()->SyncTime();
     // uint8 WeekDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
-    // weekly update for conquest (sunday at midnight)
+    // Weekly update for conquest (sunday at midnight)
     static time_point lastConquestTally = tick - 1h;
     static time_point lastConquestUpdate = tick - 1h;
     if (CVanaTime::getInstance()->getJstWeekDay() == 1  && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
@@ -51,7 +51,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
             lastConquestTally = tick;
         }
     }
-    // hourly conquest update
+    // Hourly conquest update
     else if (CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestUpdate + 1h))
@@ -82,7 +82,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
 
     }
 
-    //JST Midnight
+    // JST Midnight
     static time_point lastTickedJstMidnight = tick - 1h;
     if (CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
@@ -94,7 +94,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
         }
     }
 
-    //4-hour RoE Timed blocks
+    // 4-hour RoE Timed blocks
     static time_point lastTickedRoeBlock = tick - 1h;
     if (CVanaTime::getInstance()->getJstHour() % 4 == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
@@ -109,6 +109,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     static time_point lastVDailyUpdate = tick - 4800ms;
     if (CVanaTime::getInstance()->getHour() == 0 && CVanaTime::getInstance()->getMinute() == 0)
     {
+        TracyZoneScoped;
         if (tick > (lastVDailyUpdate + 4800ms))
         {
 			zoneutils::ForEachZone([](CZone* PZone)
@@ -129,6 +130,7 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
 
     if (VanadielTOTD != TIME_NONE)
     {
+        TracyZoneScoped;
         zoneutils::TOTDChange(VanadielTOTD);
 
         if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
@@ -147,6 +149,8 @@ int32 time_server(time_point tick,CTaskMgr::CTask* PTask)
     CTriggerHandler::getInstance()->triggerTimer();
     CTransportHandler::getInstance()->TransportTimer();
 
-	instanceutils::CheckInstance();
+    instanceutils::CheckInstance();
+
+    TracyFrameMark;
     return 0;
 }

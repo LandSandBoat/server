@@ -1,4 +1,4 @@
-/*
+﻿/*
  * roe.cpp
  *      Author: Kreidos | github.com/kreidos
  *
@@ -174,6 +174,7 @@ int32 ParseTimedSchedule(lua_State* L)
 
 bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload)
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled || !PChar || PChar->objtype != TYPE_PC)
     {
         return false;
@@ -419,7 +420,7 @@ void onCharLoad(CCharEntity* PChar)
 
             if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
             {
-                PChar->m_eminenceCache.notifyTimedRecord = true;
+                PChar->m_eminenceCache.notifyTimedRecord = static_cast<bool>(GetActiveTimedRecord());
                 AddActiveTimedRecord(PChar);
             }
         }
@@ -481,6 +482,7 @@ void ClearDailyRecords(CCharEntity* PChar)
 
 void CycleTimedRecords()
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled)
     {
         return;
@@ -498,6 +500,7 @@ void CycleTimedRecords()
 
 void CycleDailyRecords()
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled)
     {
         return;

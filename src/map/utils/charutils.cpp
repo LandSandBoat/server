@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <stdio.h>
 #include <string.h>
 #include <array>
+#include <chrono>
 
 #include "../lua/luautils.h"
 
@@ -47,6 +48,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/char_stats.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
+#include "../packets/chat_message.h"
 #include "../packets/conquest_map.h"
 #include "../packets/delivery_box.h"
 #include "../packets/inventory_item.h"
@@ -61,9 +63,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
 #include "../packets/quest_mission_log.h"
-#include "../packets/chat_message.h"
+
 #include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
+#include "../packets/timer_bar_util.h"
 
 #include "../ability.h"
 #include "../alliance.h"
@@ -3769,10 +3772,6 @@ namespace charutils
         }
 
         PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, exp);
-        if (PMob != PChar) // Only mob kills count for gain EXP records
-        {
-            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
-        }
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -3856,6 +3855,11 @@ namespace charutils
 
         if (onLimitMode)
             PChar->pushPacket(new CMenuMeritPacket(PChar));
+
+        if (PMob != PChar) // Only mob kills count for gain EXP records
+        {
+            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
+        }
     }
 
     /************************************************************************
@@ -5164,4 +5168,95 @@ namespace charutils
         return 0;
     }
 
+    uint16 getWideScanRange(JOBTYPE job, uint8 level)
+    {
+        // Set Widescan range
+        // Distances need verified, based current values off what we had in traits.sql and data at http://wiki.ffxiclopedia.org/wiki/Wide_Scan
+        // NOTE: Widescan was formerly piggy backed onto traits (resist slow) but is not a real trait, any attempt to give it a trait will place a dot on
+        // characters trait menu.
+
+        // Limit to BST and RNG, and try to use old distance values for tiers
+        if (job == JOB_RNG)
+        {
+            // Range for RNG >=80 needs verification.
+            if (level >= 80)
+            {
+                return 350;
+            }
+            else if (level >= 60)
+            {
+                return 300;
+            }
+            else if (level >= 40)
+            {
+                return 250;
+            }
+            else if (level >= 20)
+            {
+                return 200;
+            }
+            else
+            {
+                return 150;
+            }
+        }
+        else if (job == JOB_BST)
+        {
+            if (level >= 80)
+            {
+                return 300;
+            }
+            else if (level >= 60)
+            {
+                return 250;
+            }
+            else if (level >= 40)
+            {
+                return 200;
+            }
+            else if (level >= 20 || map_config.all_jobs_widescan == 1)
+            {
+                return 150;
+            }
+            else
+            {
+                return 50;
+            }
+        }
+
+        // Default to base widescan if not RNG or BST
+        if (map_config.all_jobs_widescan == 1)
+        {
+            return 150;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    uint16 getWideScanRange(CCharEntity* PChar)
+    {
+        // Get maximum widescan range from main job or sub job
+        return std::max(getWideScanRange(PChar->GetMJob(), PChar->GetMLevel()), getWideScanRange(PChar->GetSJob(), PChar->GetSLevel()));
+    }
+
+    void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
+    {
+        auto timerPacket = new CTimerBarUtilPacket();
+        timerPacket->addCountdown(seconds);
+        PChar->pushPacket(timerPacket);
+    }
+
+    void SendTimerPacket(CCharEntity* PChar, duration dur)
+    {
+        auto timeLimitSeconds = static_cast<uint32>(std::chrono::duration_cast<std::chrono::seconds>(dur).count());
+        SendTimerPacket(PChar, timeLimitSeconds);
+    }
+
+    void SendClearTimerPacket(CCharEntity* PChar)
+    {
+        auto timerPacket = new CTimerBarUtilPacket();
+        PChar->pushPacket(timerPacket);
+    }
 }; // namespace charutils

@@ -9,7 +9,7 @@ require("scripts/globals/status")
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.QUAD_ATTACK, effect:getPower())
     target:addMod(tpz.mod.TRIPLE_ATTACK, 100)
-    if (effect:getSubType() > 0) then
+    if (effect:getSubPower() > 0) then
         target:addMod(tpz.mod.CRITHITRATE, effect:getSubPower())
     end
 end
