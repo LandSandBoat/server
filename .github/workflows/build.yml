@@ -125,10 +125,10 @@ jobs:
         fi
 
   Full_Startup_Checks:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     services:
       mysql:
-        image: mariadb:10.1
+        image: mariadb
         env:
           MYSQL_DATABASE: tpzdb
           MYSQL_ROOT_PASSWORD: root
@@ -142,7 +142,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
     - name: Configure CMake
       run: |
         cmake .
