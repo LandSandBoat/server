@@ -3,6 +3,7 @@
 ---------------------------------------------------------
 require("scripts/globals/common")
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 require("scripts/globals/settings")
@@ -51,6 +52,39 @@ local rovKIBattlefieldIDs = set{
 -- TODO: GEO LB5
 -- TODO: RUN LB5
 }
+
+tpz.trust.onTradeCipher = function(player, trade, csid)
+    local hasPermit = player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) or
+                      player:hasKeyItem(tpz.ki.BASTOK_TRUST_PERMIT) or
+                      player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT)
+
+    local itemId = trade:getItemId(0)
+    local subId = trade:getItemSubId(0)
+    local isCipher = itemId >= 10112 and itemId <= 10193
+
+    if hasPermit and trade:getSlotCount() == 1 and subId ~= 0 and isCipher then
+        -- subId is a smallInt in the database (16 bits).
+        -- The bottom 12 bits of the subId are the spellId taught by the ciper
+        -- The top 4 bits of the subId are for the flags to be given to the csid
+        -- NOTE: ZEID is the first trust you can learn via cipher, so the id can
+        --       act as an offset.
+        local spellId = bit.band(encoded, 0x0FFF) + tpz.magic.spell.ZEID
+        local flags = bit.rshift(bit.band(encoded, 0xF000), 12)
+
+        -- To generate this packed subId for storage in the db:
+        -- local encoded = (spellId - tpz.magic.spell.ZEID) + bit.lshift(flags, 12)
+
+        player:setLocalVar("TradingTrustCipher", spellId)
+
+        -- Cipher type cs args (Wetata's text as example):
+        -- 0: Did you know that the person mentioned here is also a participant in the Trust initiative? All the stuffiest scholars... (Default)
+        -- 1: Wait a second... just who is that? How am I supposed to use <cipher> in conditions like these? (WOTG)
+        -- 2: You may be shocked to hear that there are trusts beyond the five races (Beasts & Monsters)
+        -- 3: How on earth did you get your hands on this? If it's a real cipher I have to try! (Special)
+        -- 4: Progressed leaps and bounds (?)
+        player:startEvent(csid, 0, 0, flags, trade:getItemId(0))
+    end
+end
 
 tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     -- Trusts not allowed in an alliance
