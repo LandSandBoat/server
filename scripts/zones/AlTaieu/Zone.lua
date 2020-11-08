@@ -45,6 +45,7 @@ function onEventFinish(player, csid, option)
             tpz.ki.LIGHT_OF_MEA
         }
         player:setCharVar("PromathiaStatus", 1)
+        player:delKeyItem(tpz.ki.MYSTERIOUS_AMULET_DRAINED)
         player:addKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)
         player:messageSpecial(ID.text.AMULET_SHATTERED, tpz.ki.MYSTERIOUS_AMULET)
         player:messageSpecial(ID.text.LIGHT_STOLEN, copCraigLights[math.random(#copCraigLights)])

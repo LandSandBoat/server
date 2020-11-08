@@ -21,7 +21,7 @@ Alternatively you can stop and start individual services with `docker stop conai
 
 ## Connect to server terminal
 
-If you need to access the terminal on the server you can enter `docker exe -it topaz_game_1 sh` where `topaz_game_1` is the container name from the `docker ps` command. To exit type `exit`.
+If you need to access the terminal on the server you can enter `docker exec -it topaz_game_1 bash` where `topaz_game_1` is the container name from the `docker ps` command. To exit type `exit`.
 
 ## Transfer files to server from local machine
 
