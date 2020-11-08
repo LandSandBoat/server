@@ -13,7 +13,7 @@ require("scripts/globals/trust")
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    tpz.trust.onTradeCipher(player, trade, 3503)
+    tpz.trust.onTradeCipher(player, trade, 3503, 3552, 3553)
 end
 
 function onTrigger(player, npc)
@@ -43,7 +43,7 @@ function onEventFinish(player, csid, option)
     if (csid == 3500 or csid == 3504) and option == 2 then
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
         npcUtil.giveKeyItem(player, tpz.ki.RED_INSTITUTE_CARD)
-    elseif csid == 3503 then
+    elseif csid == 3503 or csid == 3553 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
         player:addSpell(spellID, false, true)

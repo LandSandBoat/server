@@ -13,7 +13,7 @@ require("scripts/globals/trust")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    tpz.trust.onTradeCipher(player, trade, 437)
+    tpz.trust.onTradeCipher(player, trade, 437, 457, 458)
 end
 
 function onTrigger(player, npc)
@@ -43,7 +43,7 @@ function onEventFinish(player, csid, option)
     if (csid == 434 or csid == 438) and option == 2 then
         player:addQuest(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
         npcUtil.giveKeyItem(player, tpz.ki.BLUE_INSTITUTE_CARD)
-    elseif csid == 437 then
+    elseif csid == 437 or csid == 458 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
         player:addSpell(spellID, false, true)

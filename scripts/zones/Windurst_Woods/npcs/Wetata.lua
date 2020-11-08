@@ -13,7 +13,7 @@ require("scripts/globals/trust")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    tpz.trust.onTradeCipher(player, trade, 862)
+    tpz.trust.onTradeCipher(player, trade, 862, 901, 902)
 end
 
 function onTrigger(player, npc)
@@ -43,7 +43,7 @@ function onEventFinish(player, csid, option)
     if (csid == 863 or csid == 867) and option == 2 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
         npcUtil.giveKeyItem(player, tpz.ki.GREEN_INSTITUTE_CARD)
-    elseif csid == 862 then
+    elseif csid == 862 or csid == 902 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
         player:addSpell(spellID, false, true)
