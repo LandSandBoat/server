@@ -73,15 +73,17 @@ tpz.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
         -- local encoded = spellId + bit.lshift(flags, 12)
 
         -- Cipher type cs args (Wetata's text as example):
-        -- 0 (add 0)    : Did you know that the person mentioned here is also a participant in the Trust initiative? All the stuffiest scholars... (Default)
+        -- 0 (add 0)    : Did you know that the person mentioned here is also a participant in the Trust initiative?
+        --                All the stuffiest scholars... (Default)
         -- 1 (add 4096) : Wait a second... just who is that? How am I supposed to use <cipher> in conditions like these? (WOTG)
         -- 2 (add 8192) : You may be shocked to hear that there are trusts beyond the five races (Beasts & Monsters)
         -- 3 (add 12288): How on earth did you get your hands on this? If it's a real cipher I have to try! (Special)
-        -- 4 (add 16384): Progressed leaps and bounds (?)
+        -- 4 (add 16384): Progressed leaps and bounds. You and that person must have something truly special-wecial going on between you.
+        --                (Mainline story princesses and II trust versions??)
 
         player:setLocalVar("TradingTrustCipher", spellId)
 
-        -- TODO Blocking for ROV ciphers (uses csid: specialCsOffset)
+        -- TODO Blocking for ROV ciphers
         local rovBlock = false
         local arkAngelCipher = itemId >= 10188 and itemId <= 10192
 
