@@ -39,6 +39,7 @@ void Init()
     allowList[SUBSTATE_IN_CS][0x05A] = true; // Map Update (Conquest, Besieged, Campaign)
     allowList[SUBSTATE_IN_CS][0x05B] = true; // Event Update (Completion or Update)
     allowList[SUBSTATE_IN_CS][0x05C] = true; // Event Update (Update Player Position)
+    allowList[SUBSTATE_IN_CS][0x060] = true; // Event Update (String Update)  
     allowList[SUBSTATE_IN_CS][0x061] = true; // Full Char Update
     allowList[SUBSTATE_IN_CS][0x0B5] = true; // Chat Message
     allowList[SUBSTATE_IN_CS][0x0B6] = true; // Tell Message
