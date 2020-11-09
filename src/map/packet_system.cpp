@@ -3364,6 +3364,7 @@ void SmallPacket0x06E(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             {
                 PInvitee = zoneutils::GetChar(charid);
             }
+
             if (PInvitee)
             {
                 ShowDebug(CL_CYAN"%s sent alliance invite to %s\n" CL_RESET, PChar->GetName(), PInvitee->GetName());
@@ -3718,6 +3719,12 @@ void SmallPacket0x074(map_session_data_t* session, CCharEntity* PChar, CBasicPac
                     PInviter->PParty->m_PAlliance->addParty(PChar->PParty);
                     PChar->InvitePending.clean();
                     ShowDebug(CL_CYAN"%s party added to %s alliance\n" CL_RESET, PChar->GetName(), PInviter->GetName());
+                    return;
+                }
+                else if (PChar->PParty->HasTrusts() || PInviter->PParty->HasTrusts())
+                {
+                    // Cannot form alliance if you have Trusts
+                    PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::TrustCannotJoinAlliance));
                     return;
                 }
                 else

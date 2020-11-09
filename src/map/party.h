@@ -88,6 +88,7 @@ public:
     void SetPartyNumber(uint8 number);
 
     uint32 GetTimeLastMemberJoined();
+    bool HasTrusts();
 
     void PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet);		// отправляем пакет всем членам группы, за исключением PPartyMember
     void PushEffectsPacket();
