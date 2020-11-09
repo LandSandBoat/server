@@ -3,6 +3,7 @@
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <vector>
@@ -345,43 +346,128 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 {
     JOBTYPE mJob = PTrust->GetMJob();
     JOBTYPE sJob = PTrust->GetSJob();
-    uint8 mLvl   = PTrust->GetMLevel();
-    uint8 sLvl   = PTrust->GetSLevel();
+    uint8   mLvl = PTrust->GetMLevel();
+    uint8   sLvl = PTrust->GetSLevel();
 
-    // TODO: HP/MP should take into account family, job, etc.
-
-    uint8 jobHPGrade = grade::GetJobGrade(mJob, 0);
-    uint8 jobMPGrade = grade::GetJobGrade(mJob, 1);
-
-    //uint8 sjobHPGrade = grade::GetJobGrade(sJob, 0);
-    uint8 sjobMPGrade = grade::GetJobGrade(sJob, 1);
-
-    float hpGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
-    float mpGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
-
-    //float subHPGrowth = 1.0f + ((7.0f - (float)jobHPGrade) / 100.0f);
-    float subMPGrowth = 1.0f + ((7.0f - (float)jobMPGrade) / 100.0f);
-
-    float hpBase = 14.0f;
-    float mpBase = 8.0f;
-
-    PTrust->health.maxhp = static_cast<uint16>(hpBase * pow(mLvl, hpGrowth) * PTrust->HPscale * map_config.alter_ego_hp_multiplier);
-
-    if (sjobMPGrade)
+    // Helpers to map HP/MPScale around 100 to 1-7 grades
+    // std::clamp doesn't play nice with uint8, so -> unsigned int
+    auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd, unsigned int inputVal) -> unsigned int
     {
-        PTrust->health.maxmp = static_cast<uint16>(mpBase * pow(sLvl, subMPGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+        unsigned int inputRange = inputEnd - inputStart;
+        unsigned int outputRange = outputEnd - outputStart;
+
+        unsigned int output = (inputVal - inputStart) * outputRange / inputRange + outputStart;
+
+        return std::clamp(output, outputStart, outputEnd);
+    };
+
+    auto scaleToGrade = [mapRanges](float input) -> unsigned int
+    {
+        unsigned reverseMappedGrade = mapRanges(80U, 140U, 1U, 7U, static_cast<unsigned int>(input * 100U));
+        reverseMappedGrade += 1U; // Boost grades
+        return std::clamp(7U - reverseMappedGrade, 1U, 7U);
+    };
+
+    // HP/MP ========================
+    // This is the same system as used in charutils.cpp, but modified
+    // to use parts from mob_family_system instead of hardcoded player
+    // race tables.
+
+    // http://ffxi-stat-calc.sourceforge.net/cgi-bin/ffxistats.cgi?mode=document
+
+    // HP
+    float raceStat = 0;
+    float jobStat = 0;
+    float sJobStat = 0;
+    int32 bonusStat = 0;
+
+    int32 baseValueColumn = 0;
+    int32 scaleTo60Column = 1;
+    int32 scaleOver30Column = 2;
+    int32 scaleOver60Column = 3;
+    int32 scaleOver75Column = 4;
+    int32 scaleOver60 = 2;
+    int32 scaleOver75 = 3;
+
+    uint8 grade;
+
+    int32 mainLevelOver30 = std::clamp(mLvl - 30, 0, 30);
+    int32 mainLevelUpTo60 = (mLvl < 60 ? mLvl - 1 : 59);
+    int32 mainLevelOver60To75 = std::clamp(mLvl - 60, 0, 15);
+    int32 mainLevelOver75 = (mLvl < 75 ? 0 : mLvl - 75);
+
+    int32 mainLevelOver10 = (mLvl < 10 ? 0 : mLvl - 10);
+    int32 mainLevelOver50andUnder60 = std::clamp(mLvl - 50, 0, 10);
+    int32 mainLevelOver60 = (mLvl < 60 ? 0 : mLvl - 60);
+
+    int32 subLevelOver10 = std::clamp(sLvl - 10, 0, 20);
+    int32 subLevelOver30 = (sLvl < 30 ? 0 : sLvl - 30);
+
+    grade = scaleToGrade(PTrust->HPscale);
+
+    raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
+               (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
+               (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+
+    grade = grade = grade::GetJobGrade(mJob, 0);
+
+    jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
+              (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
+              (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+
+    bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
+
+    if (sLvl > 0)
+    {
+        grade = grade::GetJobGrade(sJob, 0);
+
+        sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) +
+                   (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
     }
 
-    if (jobMPGrade)
+    PTrust->health.maxhp = (int16)(map_config.alter_ego_hp_multiplier * (raceStat + jobStat + bonusStat + sJobStat));
+
+    // MP
+    raceStat = 0;
+    jobStat = 0;
+    sJobStat = 0;
+
+    grade = scaleToGrade(PTrust->MPscale);
+
+    if (grade::GetJobGrade(mJob, 1) == 0)
     {
-        PTrust->health.maxmp = static_cast<uint16>(mpBase * pow(mLvl, mpGrowth) * PTrust->MPscale * map_config.alter_ego_mp_multiplier);
+        if (grade::GetJobGrade(sJob, 1) != 0 && sLvl > 0)
+        {
+            raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) / map_config.sj_mp_divisor;
+        }
     }
+    else
+    {
+        raceStat =
+            grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+    }
+
+    grade = grade::GetJobGrade(mJob, 1);
+    if (grade > 0)
+    {
+        jobStat =
+            grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 + grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+    }
+
+    if (sLvl > 0)
+    {
+        grade = grade::GetJobGrade(sJob, 1);
+        sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
+    }
+
+    PTrust->health.maxmp = (int16)(map_config.alter_ego_mp_multiplier * (raceStat + jobStat + sJobStat));
 
     PTrust->health.tp = 0;
     PTrust->UpdateHealth();
     PTrust->health.hp = PTrust->GetMaxHP();
     PTrust->health.mp = PTrust->GetMaxMP();
 
+    // Stats ========================
     uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
     uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);
     uint16 fVIT = mobutils::GetBaseToRank(PTrust->vitRank, mLvl);
@@ -435,7 +521,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * map_config.alter_ego_stat_multiplier);
     PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * map_config.alter_ego_stat_multiplier);
 
-    // cap all stats for mLvl / job
+    // Skills =======================
     for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
     {
         uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
@@ -472,10 +558,10 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
     PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
 
-    // natural magic evasion
+    // Natural magic evasion
     PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));
 
-    // add traits for sub and main
+    // Add traits for sub and main
     battleutils::AddTraits(PTrust, traits::GetTraits(mJob), mLvl);
     battleutils::AddTraits(PTrust, traits::GetTraits(sJob), sLvl);
 
