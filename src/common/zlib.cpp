@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include <cassert>
+#include <memory>
 
 #if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || \
     (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) || \
@@ -67,24 +68,23 @@ static void swap32_if_be(uint32 *v, const size_t memb)
 
 static bool read_to_vector(const std::string &file, std::vector<uint32> &vec)
 {
-    FILE *f;
-    if (!(f = fopen(file.c_str(), "rb")))
+    std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(file.c_str(), "rb"), &fclose);
+    if (!fp)
     {
         ShowFatalError("zlib: can't open file <%s>\n", file.c_str());
         return false;
     }
 
-    fseek(f, 0, SEEK_END);
-    const size_t size = ftell(f);
-    fseek(f, 0, SEEK_SET);
+    fseek(fp.get(), 0, SEEK_END);
+    const size_t size = ftell(fp.get());
+    fseek(fp.get(), 0, SEEK_SET);
 
     vec.resize(size / sizeof(uint32));
-    if (fread(vec.data(), sizeof(uint32), vec.size(), f) != vec.size())
+    if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
         ShowFatalError("zlib: can't read file <%s>: %s\n", file.c_str(), strerror(errno));
         return false;
     }
-    fclose(f);
 
     swap32_if_be(vec.data(), vec.size());
     return true;
