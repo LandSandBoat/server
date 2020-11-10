@@ -534,6 +534,7 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
         case LATENT_JOB_LEVEL_EVEN:
         case LATENT_JOB_LEVEL_ODD:
         case LATENT_JOB_MULTIPLE_5:
+        case LATENT_JOB_MULTIPLE_8:
         case LATENT_JOB_MULTIPLE_10:
         case LATENT_JOB_MULTIPLE_13_NIGHT:
         case LATENT_JOB_LEVEL_BELOW:
@@ -948,6 +949,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     }
     case LATENT_JOB_MULTIPLE_5:
         expression = m_POwner->GetMLevel() % 5 == 0;
+        break;
+    case LATENT_JOB_MULTIPLE_8:
+        expression = m_POwner->GetMLevel() % 8 == 0;
         break;
     case LATENT_JOB_MULTIPLE_10:
         expression = m_POwner->GetMLevel() % 10 == 0;
