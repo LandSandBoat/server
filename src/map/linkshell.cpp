@@ -484,8 +484,9 @@ namespace linkshell
                     LinkshellList.erase(PItemLinkshell->GetLSID());
                 }
             }
-            catch (std::out_of_range&)
+            catch (std::out_of_range& exception)
             {
+                ShowError("linkshell::DelOnlineMember caught exception: %s\n", exception.what());
             }
         }
         return false;
