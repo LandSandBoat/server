@@ -646,7 +646,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             }
             else
             {
-                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
+                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
             }
         }
         else
@@ -900,7 +900,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         ShowDebug(CL_CYAN"map_cleanup: %s timed out, closing session\n" CL_RESET, PChar->GetName());
 
                         PChar->status = STATUS_SHUTDOWN;
-                        PacketParser[0x00D](map_session_data, PChar, 0);
+                        PacketParser[0x00D](map_session_data, PChar, std::move(CBasicPacket()));
                     }
                     else
                     {
