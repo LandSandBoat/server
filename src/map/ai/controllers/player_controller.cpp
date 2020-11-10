@@ -150,21 +150,30 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
         //#TODO: put all this in weaponskill_state
         CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
 
-        if (PWeaponSkill && !charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()))
+        if (PWeaponSkill == nullptr)
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS));
             return false;
         }
+
+        if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()))
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_WS));
+            return false;
+        }
+
         if (PChar->StatusEffectContainer->HasStatusEffect({EFFECT_AMNESIA, EFFECT_IMPAIRMENT}))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_ANY_WS));
             return false;
         }
+
         if (PChar->health.tp < 1000)
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_NOT_ENOUGH_TP));
             return false;
         }
+
         if (PWeaponSkill->getType() == SKILL_ARCHERY || PWeaponSkill->getType() == SKILL_MARKSMANSHIP)
         {
             auto PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
