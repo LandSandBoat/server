@@ -12,18 +12,11 @@ require("scripts/globals/settings")
 require("scripts/globals/trust")
 -----------------------------------
 
-function onTrade(player,npc,trade)
-    local hasPermit = player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) or
-                      player:hasKeyItem(tpz.ki.BASTOK_TRUST_PERMIT) or
-                      player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT)
-
-    if hasPermit and trade:getSlotCount() == 1 and trade:getItemSubId(0) ~= 0 and trade:getItemId(0) >= 10112 and trade:getItemId(0) <= 10193 then
-        player:setLocalVar("TradingTrustCipher", trade:getItemSubId(0))
-        player:startEvent(437, 0, 0, 0, trade:getItemId(0))
-    end
+function onTrade(player, npc, trade)
+    tpz.trust.onTradeCipher(player, trade, 437, 457, 458)
 end
 
-function onTrigger(player,npc)
+function onTrigger(player, npc)
     local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
     local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
@@ -43,14 +36,14 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+function onEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+function onEventFinish(player, csid, option)
     if (csid == 434 or csid == 438) and option == 2 then
         player:addQuest(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
         npcUtil.giveKeyItem(player, tpz.ki.BLUE_INSTITUTE_CARD)
-    elseif csid == 437 then
+    elseif csid == 437 or csid == 458 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
         player:addSpell(spellID, false, true)
