@@ -624,7 +624,7 @@ INSERT INTO `synth_recipes` VALUES (5508,0,0,115,70,0,0,0,0,0,0,4098,4240,1346,4
 -- INSERT INTO `synth_recipes` VALUES (9903,1,0,255,0,0,0,0,0,0,0,4100,4242,16833,0,0,0,0,0,0,0,715,817,649,649,1,1,1,1,'Bronze Spear (desynth)');
 INSERT INTO `synth_recipes` VALUES (9904,1,0,54,0,0,0,0,0,0,0,4100,4242,17030,0,0,0,0,0,0,0,649,649,717,717,1,1,1,1,'Great Club (desynth)'); -- Level based on level to synth
 INSERT INTO `synth_recipes` VALUES (9905,1,0,23,0,0,0,0,0,0,0,4100,4242,17051,0,0,0,0,0,0,0,841,713,713,713,1,1,1,1,'Yew Wand (desynth)'); -- Level based on level to synth
-INSERT INTO `synth_recipes` VALUES (9906,1,0,102,0,0,0,0,0,0,0,4100,4242,17592,0,0,0,0,0,0,0,771,771,1228,1225,1,4,4,4,'Kinkobo (desynth)'); -- Level based on level to synth
+INSERT INTO `synth_recipes` VALUES (9906,1,0,102,0,0,0,0,0,0,0,4100,4242,17592,0,0,0,0,0,0,0,771,771,1228,1225,1,1,4,4,'Kinkobo (desynth)'); -- Level based on level to synth
 INSERT INTO `synth_recipes` VALUES (9907,1,0,11,0,0,0,0,0,0,0,4100,4242,12984,0,0,0,0,0,0,0,715,715,850,850,1,1,1,1,'Ash Clogs (desynth)'); -- Level based on level to synth
 INSERT INTO `synth_recipes` VALUES (9908,1,0,19,0,0,0,0,0,0,0,4100,4242,17089,0,0,0,0,0,0,0,714,714,714,882,1,1,2,1,'Holly Staff (desynth)'); -- Level based on level to synth
 INSERT INTO `synth_recipes` VALUES (9909,1,0,24,0,0,0,0,0,0,0,4100,4242,17154,0,0,0,0,0,0,0,850,820,820,820,1,1,1,1,'Wrapped Bow (desynth)'); -- Level based on level to synth
