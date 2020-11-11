@@ -2946,8 +2946,7 @@ INSERT INTO `item_latents` VALUES(18850, 366, 5, 6, 1000);  -- DMG+5 while TP <1
 -- -------------------------------------------------------
 -- Octave Club
 -- -------------------------------------------------------
--- TODO: Optimize latent_efffect_container.cpp to allow a mod be overwritten with a higher value
--- INSERT INTO `item_latents` VALUES(18852, 977, 2, 38, 2); -- Occasionally attacks 2 times when mjob multiple of 2
+INSERT INTO `item_latents` VALUES(18852, 977, 2, 38, 2);    -- Occasionally attacks 2 times when mjob multiple of 2
 INSERT INTO `item_latents` VALUES(18852, 977, 8, 38, 8);    -- Occasionally attacks 2 to 8 times when mjob multiple of 8
 
 -- -------------------------------------------------------
