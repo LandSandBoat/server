@@ -54,7 +54,7 @@ CREATE TABLE `char_points` (
   `chocobuck_sandoria` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_bastok` smallint(4) unsigned NOT NULL DEFAULT '0',
   `chocobuck_windurst` smallint(4) unsigned NOT NULL DEFAULT '0',
-  `daily_tally` int(5) signed NOT NULL DEFAULT '-1'
+  `daily_tally` int(5) signed NOT NULL DEFAULT '-1',
   `research_mark` int(10) unsigned NOT NULL DEFAULT '0',
   `tunnel_worm` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `morion_worm` tinyint(3) unsigned NOT NULL DEFAULT '0',
