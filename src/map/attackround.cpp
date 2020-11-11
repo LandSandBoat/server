@@ -235,7 +235,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Existance of "Occasionally attacks X times" overwrites PWeapon hit count
     if (isPC && m_attacker->getMod(Mod::MAX_SWINGS))
     {
-        auto modSwings = (uint8)static_cast<CCharEntity*>(m_attacker)->getMod(Mod::MAX_SWINGS);
+        auto modSwings = std::min<uint8>((uint8)static_cast<CCharEntity*>(m_attacker)->getMod(Mod::MAX_SWINGS),8);
         num = battleutils::getHitCount(modSwings);
     }
 
