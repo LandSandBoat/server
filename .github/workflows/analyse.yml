@@ -1,0 +1,62 @@
+name: analyse
+
+on:
+  schedule:
+      # Once a day at midnight
+      - cron:  '0 0 * * *' 
+
+jobs:
+  sonarcloud:
+    name: "SonarCloud Scan"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common wget cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    
+    - name: Configure CMake
+      run: |
+        cmake .
+        
+    - name: Download Sonar Build Wrapper
+      run: |
+        wget -c https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
+        unzip build-wrapper-linux-x86.zip
+        cp ./build-wrapper-linux-x86/* ./
+    
+    - name: Build Wrapped Binaries
+      run: |
+        ./build-wrapper-linux-x86-64 --out-dir . make -j $(nproc)
+        
+    - name: Extract git info
+      run: |
+        GIT_TAG=`git describe --abbrev=0`
+        echo "GIT_TAG=${GIT_TAG}" >> $GITHUB_ENV
+        echo $GIT_TAG
+        
+        GIT_BRANCH=`git branch --show-current`
+        echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
+        echo $GIT_BRANCH
+    - name: Setup Sonar
+      uses: warchant/setup-sonar-scanner@v3
+      
+    - name: Run Sonar Scanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+           -Dsonar.organization=project-topaz
+           -Dsonar.projectKey=topaz
+           -Dsonar.branch.name=${{ env.GIT_BRANCH }}
+           -Dsonar.projectVersion=${{ env.GIT_TAG }}
+           -Dsonar.host.url=https://sonarcloud.io/
+           -Dsonar.sources=src
+           -Dsonar.exclusions=src/common/detour/**/*,src/common/fmt/**/*,src/common/lua/**/*,src/common/recast/**/*
+           -Dsonar.cfamily.build-wrapper-output=.
+           -Dsonar.cfamily.threads=2
+           -Dsonar.cfamily.cache.enabled=false
