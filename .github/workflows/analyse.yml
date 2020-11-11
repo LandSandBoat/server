@@ -52,7 +52,7 @@ jobs:
       run: sonar-scanner
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
            -Dsonar.organization=project-topaz
-           -Dsonar.projectKey=topaz
+           -Dsonar.projectKey=project-topaz_topaz
            -Dsonar.branch.name=${{ env.GIT_BRANCH }}
            -Dsonar.projectVersion=${{ env.GIT_TAG }}
            -Dsonar.host.url=https://sonarcloud.io/
