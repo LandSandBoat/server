@@ -43,6 +43,12 @@ jobs:
         GIT_BRANCH=`git branch --show-current`
         echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
         echo $GIT_BRANCH
+        
+        GIT_FULL_REPO_NAME=`git rev-parse --show-toplevel`
+        GIT_REPO_NAME=`basename $GIT_FULL_REPO_NAME`
+        echo "GIT_REPO_NAME=${GIT_REPO_NAME}" >> $GITHUB_ENV
+        echo $GIT_REPO_NAME
+        
     - name: Setup Sonar
       uses: warchant/setup-sonar-scanner@v3
       
@@ -51,8 +57,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: sonar-scanner
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-           -Dsonar.organization=project-topaz
-           -Dsonar.projectKey=project-topaz_topaz
+           -Dsonar.organization=${{ github.repository_owner }}
+           -Dsonar.projectKey=${{ github.repository_owner }}_${{ env.GIT_REPO_NAME }}
            -Dsonar.branch.name=${{ env.GIT_BRANCH }}
            -Dsonar.projectVersion=${{ env.GIT_TAG }}
            -Dsonar.host.url=https://sonarcloud.io/
