@@ -42,7 +42,7 @@ tpz.msg.channel =
     UNKNOWN_32     = 32, -- Looks the same as 31
     UNITY          = 33,
     JP_ASSIST      = 34,
-    NA_ASSIST      = 35
+    NA_ASSIST      = 35,
 }
 
 -- used by PrintToArea

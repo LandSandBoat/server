@@ -61,7 +61,7 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_UNKNOWN_32    = 32, // Looks the same as 31
     MESSAGE_UNITY         = 33,
     MESSAGE_JP_ASSIST     = 34,
-    MESSAGE_NA_ASSIST     = 35
+    MESSAGE_NA_ASSIST     = 35,
 };
 
 /************************************************************************
