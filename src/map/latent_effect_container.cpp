@@ -948,13 +948,22 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = m_POwner->GetMLevel() % 2 == 1;
         }
         // Check if level is multiple of divisor
-        else {
+        else
+        {
             expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0;
         }
         break;
     case LATENT_JOB_MULTIPLE_AT_NIGHT:
-        expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0 &&
-            CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
+        if (latentEffect.GetConditionsValue() == 0)
+        {
+            expression = m_POwner->GetMLevel() % 2 == 1 &&
+                CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
+        }
+        else
+        {
+            expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0 &&
+                CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
+        }
         break;
     case LATENT_WEAPON_DRAWN_HP_UNDER:
         expression = m_POwner->health.hp < latentEffect.GetConditionsValue() && m_POwner->animation == ANIMATION_ATTACK;
