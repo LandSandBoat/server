@@ -683,7 +683,7 @@ inline int32 CLuaBaseEntity::getLastOnline(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    if (auto PChar = static_cast<CCharEntity*>(m_PBaseEntity); PChar->objtype == TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         lua_pushinteger(L, PChar->lastOnline);
     }
