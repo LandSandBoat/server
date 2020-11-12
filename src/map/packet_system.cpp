@@ -794,8 +794,15 @@ void SmallPacket0x01A(map_session_data_t* PSession, CCharEntity* PChar, CBasicPa
             PChar->PAI->ChangeTarget(TargID);
         }
         break;
-        case 0x10: // rangedattack
+        case 0x10: // Ranged Attack
         {
+            uint8 currentAnimation = PChar->animation;
+            if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
+            {
+                ShowExploit(CL_YELLOW "SmallPacket0x01A: Player %s trying to Ranged Attack from invalid state\n" CL_RESET, PChar->GetName());
+                return;
+            }
+
             PChar->PAI->RangedAttack(TargID);
         }
         break;
