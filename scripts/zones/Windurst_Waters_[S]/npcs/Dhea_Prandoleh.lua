@@ -21,7 +21,7 @@ function onTrigger(player, npc)
         player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_COMPLETED and
         player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_AVAILABLE
     then
-        player:startEvent(135)
+        player:startEvent(133)
     elseif player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED then
         if player:getCharVar("TigressStrikesProg") < 3 then
             player:startEvent(131)
