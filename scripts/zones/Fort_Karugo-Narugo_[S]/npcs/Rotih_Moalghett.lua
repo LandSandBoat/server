@@ -2,7 +2,7 @@
 -- Area: Fort Karugo Narugo [S]
 --  NPC: Rotih_Moalghett
 -- Type: Quest
--- !pos -64 -75 3 96
+-- !pos -64 -75 4 96
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
