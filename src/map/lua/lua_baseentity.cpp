@@ -672,6 +672,30 @@ inline int32 CLuaBaseEntity::resetLocalVars(lua_State* L)
 }
 
 /************************************************************************
+*  Function: getLastOnline()
+*  Purpose : Returns the unix timestamp of the last time the char logged off or zoned
+*  Example : player:getLastOnline()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getLastOnline(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        lua_pushinteger(L, PChar->lastOnline);
+    }
+    else
+    {
+        lua_pushnil(L);
+    }
+
+    return 1;
+}
+
+/************************************************************************
 *  Function: injectPacket()
 *  Purpose : Injects a packet to the player's client
 *  Example : player:injectPacket(packet)
@@ -14661,6 +14685,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLocalVar),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLocalVar),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetLocalVars),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLastOnline),
 
     // Packets, Events, and Flags
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,injectPacket),
