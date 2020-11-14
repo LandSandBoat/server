@@ -1535,6 +1535,8 @@ tpz.mod =
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
+    WS_AGI_BONUS                    = 980, -- % bonus to agi_wsc.
+    WS_INT_BONUS                    = 981, -- % bonus to int_wsc.
 
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
@@ -1573,9 +1575,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 977, -- stuff
-    -- SPARE = 978, -- stuff
-    -- SPARE = 979, -- stuff
+    -- SPARE = 982, -- stuff
+    -- SPARE = 983, -- stuff
+    -- SPARE = 984, -- stuff
 }
 
 tpz.latent =

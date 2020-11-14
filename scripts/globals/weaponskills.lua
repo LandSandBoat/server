@@ -84,8 +84,18 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     end
 
     -- Check for and apply WS_DEX_BONUS
-    if (attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0) then
-        wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS)*.01)
+    if attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0 then
+        wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) / 100)
+    end
+
+    -- Check for and apply WS_AGI_BONUS
+    if attacker:getMod(tpz.mod.WS_AGI_BONUS) > 0 then
+        wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(tpz.mod.WS_AGI_BONUS) / 100)
+    end
+
+    -- Check for and apply WS_INT_BONUS
+    if attacker:getMod(tpz.mod.WS_INT_BONUS) > 0 then
+        wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(tpz.mod.WS_INT_BONUS) / 100)
     end
 
     local wsMods = calcParams.fSTR +
@@ -377,8 +387,18 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     if not shadowAbsorb(target) then
 
         -- Check for and apply WS_DEX_BONUS
-        if (attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0) then
-             wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) * 0.01)
+        if attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0 then
+            wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) / 100)
+        end
+
+        -- Check for and apply WS_AGI_BONUS
+        if attacker:getMod(tpz.mod.WS_AGI_BONUS) > 0 then
+            wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(tpz.mod.WS_AGI_BONUS) / 100)
+        end
+
+        -- Check for and apply WS_INT_BONUS
+        if attacker:getMod(tpz.mod.WS_INT_BONUS) > 0 then
+            wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(tpz.mod.WS_INT_BONUS) / 100)
         end
 
         dmg = attacker:getMainLvl() + 2 + (attacker:getStat(tpz.mod.STR) * wsParams.str_wsc + attacker:getStat(tpz.mod.DEX) * wsParams.dex_wsc +
