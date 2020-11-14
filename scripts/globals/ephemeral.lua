@@ -44,8 +44,7 @@ tpz.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
 
             -- Count clusters and subtract any that won't fit
             local hqQty = trade:getItemQty(v.cluster)
-            local hqToCrystal = math.min(hqQty * 12, math.floor(diff / 12))
-            hqQty = math.floor(hqToCrystal / 12)
+            hqQty = math.min(hqQty, math.floor(diff / 12))
             diff = math.max(diff - hqQty * 12, 0)
 
             -- Confirm the clusters in the trade

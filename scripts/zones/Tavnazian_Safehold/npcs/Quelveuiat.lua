@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
         if (SealionCrestKey and CoralCrestKey and Count == 2) then
             player:addKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY)
             player:tradeComplete()
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TEMPLE_KNIGHT_KEY)
         end
     end
 

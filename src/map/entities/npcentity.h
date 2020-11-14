@@ -39,6 +39,7 @@ public:
     bool        IsHPHidden();
     void        Untargetable(bool untargetable);
     bool        IsUntargetable();
+    virtual bool isWideScannable() override;
     virtual void PostTick() override;
     virtual void Tick(time_point) override {}
 

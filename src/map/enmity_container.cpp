@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "alliance.h"
 #include "enmity_container.h"
+#include "notoriety_container.h"
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
@@ -56,13 +57,27 @@ CEnmityContainer::~CEnmityContainer()
 
 void CEnmityContainer::Clear(uint32 EntityID)
 {
+    TracyZoneScoped;
     if (EntityID == 0)
     {
+        for (const auto& entry : m_EnmityList)
+        {
+            if (const auto& enmity_obj = m_EnmityList.find(entry.first);
+                enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+            {
+                enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+            }
+        }
         m_EnmityList.clear();
         return;
     }
     else
     {
+        if (const auto& enmity_obj = m_EnmityList.find(EntityID);
+            enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+        {
+            enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+        }
         m_EnmityList.erase(EntityID);
     }
     m_tameable = true;
@@ -70,9 +85,7 @@ void CEnmityContainer::Clear(uint32 EntityID)
 
 void CEnmityContainer::LogoutReset(uint32 EntityID)
 {
-    auto enmity_obj = m_EnmityList.find(EntityID);
-
-    if (enmity_obj != m_EnmityList.end())
+    if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
     {
         enmity_obj->second.PEnmityOwner = nullptr;
         enmity_obj->second.active = false;
@@ -87,7 +100,9 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
 
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
+    TracyZoneScoped;
     m_EnmityList.emplace(PChar->id, EnmityObject_t {PChar, 0, 0, false, 0});
+    PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
 
 /************************************************************************
@@ -123,6 +138,7 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 
 void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable)
 {
+    TracyZoneScoped;
     // you're too far away so i'm ignoring you
     if (!IsWithinEnmityRange(PEntity))
     {
@@ -171,6 +187,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         VE = std::clamp((int32)(VE * bonus), 0, EnmityCap);
 
         m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH});
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
 
         if (withMaster && PEntity->PMaster != nullptr)
         {
@@ -204,6 +221,7 @@ bool CEnmityContainer::HasID(uint32 TargetID)
 
 void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, bool isCureV)
 {
+    TracyZoneScoped;
     if (!IsWithinEnmityRange(PEntity))
         return;
 
@@ -236,6 +254,7 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
     else
     {
         m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, std::clamp(CE, 0, EnmityCap), std::clamp(VE, 0, EnmityCap), true, 0});
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
     }
 }
 
@@ -328,6 +347,7 @@ void CEnmityContainer::SetVE(CBattleEntity* PEntity, const int32 amount)
 
 void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage)
 {
+    TracyZoneScoped;
     Damage = (Damage < 1 ? 1 : Damage);
     int16 damageMod = battleutils::GetEnmityModDamage(m_EnmityHolder->GetMLevel());
 
@@ -348,6 +368,7 @@ void CEnmityContainer::UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Dama
 
 void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Damage)
 {
+    TracyZoneScoped;
     if (auto enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
     {
         float reduction = (100.f - std::min<int16>(PEntity->getMod(Mod::ENMITY_LOSS_REDUCTION), 100)) / 100.f;
@@ -365,6 +386,7 @@ void CEnmityContainer::UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Dama
 
 CBattleEntity* CEnmityContainer::GetHighestEnmity()
 {
+    TracyZoneScoped;
     if (m_EnmityList.empty())
     {
         return nullptr;
@@ -397,6 +419,7 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
         {
             PEntity = zoneutils::GetChar(highest->first);
         }
+
         if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() ||
             PEntity->PInstance != m_EnmityHolder->PInstance)
         {
@@ -455,6 +478,7 @@ bool CEnmityContainer::IsTameable()
 
 void CEnmityContainer::UpdateEnmityFromCover(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser)
 {
+    TracyZoneScoped;
     // Update Enmity if cover ability target and cover ability user are not nullptr
     if (PCoverAbilityTarget != nullptr && PCoverAbilityUser != nullptr)
     {

@@ -104,7 +104,8 @@ enum MSGTYPE
     MSG_SQL         = 0x0100,
     MSG_LUASCRIPT   = 0x0200,
     MSG_NAVMESH     = 0x0400,
-    MSG_ACTION      = 0x0800
+    MSG_ACTION      = 0x0800,
+    MSG_EXPLOIT     = 0x1000
 };
 
 void ClearScreen(void);
@@ -194,6 +195,13 @@ int32 ShowAction(const std::string& fmt_string, Args... args)
 {
     std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
     return _vShowMessage(MSG_ACTION, fmt_string_v);
+}
+
+template<typename... Args>
+int32 ShowExploit(const std::string& fmt_string, Args... args)
+{
+    std::string fmt_string_v = fmt::sprintf(fmt_string, args...);
+    return _vShowMessage(MSG_EXPLOIT, fmt_string_v);
 }
 
 #endif /* _SHOWMSG_H_ */

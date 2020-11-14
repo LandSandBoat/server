@@ -6,21 +6,22 @@
 local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrigger(player, npc)
     local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local maskBit1 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 0)
-    local maskBit2 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 1)
-    local maskBit3 = player:getMaskBit(player:getCharVar("SEALED_DOORS"), 2)
+    local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
+    local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
+    local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
 
     if snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY) then
         if not maskBit3 then
+            player:setCharVar("SEALED_DOORS", utils.mask.setBit(player:getCharVar("SEALED_DOORS"), 2, true))
+
             if not maskBit2 or not maskBit1 then
-                player:setMaskBit(player:getCharVar("SEALED_DOORS"), "SEALED_DOORS", 2, true)
                 player:messageSpecial(ID.text.DOOR_OFFSET + 1, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             else
-                player:setMaskBit(player:getCharVar("SEALED_DOORS"), "SEALED_DOORS", 2, true)
                 player:messageSpecial(ID.text.DOOR_OFFSET + 4, tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
                 player:delKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
             end

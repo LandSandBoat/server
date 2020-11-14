@@ -19,8 +19,8 @@ function onInstanceCreated(instance)
         SpawnMob(v, instance)
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC):setPos(-57, 1, -101, 49)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC):setPos(-57, 1, -104, 49)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-57, 1, -101, 49)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-57, 1, -104, 49)
 
 end
 
@@ -54,8 +54,8 @@ function onInstanceComplete(instance)
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.NORMAL)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), tpz.objType.NPC):setStatus(tpz.status.NORMAL)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(tpz.status.NORMAL)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(tpz.status.NORMAL)
 
 end
 

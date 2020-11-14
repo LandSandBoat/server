@@ -36,7 +36,7 @@ function onTrigger(player, npc)
             has_gil = 1
         end
 
-        player:startEvent(360, 0, 1, player:getRank(), new_nation, has_gil, cost)
+        player:startEvent(360, 0, 1, player:getRank(new_nation), new_nation, has_gil, cost)
     end
 
 end

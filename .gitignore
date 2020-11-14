@@ -63,6 +63,10 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*
 
+# Jetbrains directories
+.idea
+cmake-*
+
 # NCrunch
 *.ncrunch*
 .*crunch*.local.xml
@@ -129,6 +133,9 @@ UpgradeLog*.XML
 /topaz_connect
 /topaz_game
 /topaz_search
+/topaz_connect_64
+/topaz_game_64
+/topaz_search_64
 
 # Generated files, mostly autotools-related
 .deps
@@ -157,20 +164,25 @@ navmeshes/*.nav
 tags
 log/tpz.leaks
 
-#Lua Developement Tools project files
+# Lua Developement Tools project files
 .metadata/**
 .project
 .vs
 /win32/.vs/topaz/v15
 
-#VS Code
+# VS Code
 .vscode
+
+# Visual Studio
+**/*.vcxproj*
+**/*.sln
 
 # CMake files
 CMakeCache.txt
 Makefile
 **/CMakeFiles
 cmake_install.cmake
+/cmake-**/**
 
 # ignore servers
 *-server
@@ -185,3 +197,6 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
+
+# Tracy download
+tracy/

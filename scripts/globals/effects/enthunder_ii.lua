@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ENSPELL, 14)
+    target:addMod(tpz.mod.ENSPELL, tpz.magic.element.THUNDER + 8) -- Tier IIs have higher "enspell IDs"
     target:addMod(tpz.mod.ENSPELL_DMG, effect:getPower())
 end
 

@@ -40,6 +40,7 @@ zones[tpz.zone.GUSGEN_MINES] =
     {
         BLIND_MOBY          = 17580038,
         WANDERING_GHOST     = 17580337,
+        PUDDING_OFFSET      = 17580338,
         APPARATUS_ELEMENTAL = 17580340,
         AROMA_FLY           = 17580341,
     },

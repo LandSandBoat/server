@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onEffectGain(target, effect)
-    target:addMod(tpz.mod.ENSPELL, 16)
+    target:addMod(tpz.mod.ENSPELL, 17)
     target:addMod(tpz.mod.ENSPELL_DMG, 1)
 end
 

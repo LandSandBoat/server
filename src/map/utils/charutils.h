@@ -52,7 +52,6 @@ enum class EMobDifficulty : uint8
 
 namespace charutils
 {
-
     void	LoadExpTable();
     void	LoadChar(CCharEntity* PChar);
     void    LoadSpells(CCharEntity* PChar);
@@ -151,6 +150,7 @@ namespace charutils
     void    SaveCharLook(CCharEntity* PChar);                           // Saves a character's appearance based on style locking.
     void	SaveCharPosition(CCharEntity* PChar);				        // сохраняем позицию персонажа
     void	SaveMissionsList(CCharEntity* PChar);                       // Save the missions list
+    void    SaveEminenceData(CCharEntity* PChar);                       // Save Eminence Record (RoE) data
     void	SaveQuestsList(CCharEntity* PChar);					        // сохраняем список ксевтов
     void    SaveFame(CCharEntity* PChar);                               // Save area fame / reputation
     void	SaveZonesVisited(CCharEntity* PChar);				        // сохраняем посещенные зоны
@@ -202,6 +202,13 @@ namespace charutils
     bool    AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
     int32   GetCharVar(CCharEntity* PChar, const char* var);
+
+    uint16 getWideScanRange(JOBTYPE job, uint8 level);
+    uint16 getWideScanRange(CCharEntity* PChar);
+
+    void   SendTimerPacket(CCharEntity* PChar, uint32 seconds);
+    void   SendTimerPacket(CCharEntity* PChar, duration dur);
+    void   SendClearTimerPacket(CCharEntity* PChar);
 };
 
-#endif
+#endif // _CHARUTILS_H

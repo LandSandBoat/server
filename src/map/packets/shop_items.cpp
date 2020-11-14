@@ -51,6 +51,8 @@ CShopItemsPacket::CShopItemsPacket(CCharEntity * PChar)
 		ref<uint32>(i * 12 + 0x08) = PChar->Container->getQuantity(slotID);
 		ref<uint16>(i * 12 + 0x0C) = PChar->Container->getItemID(slotID);
 		ref<uint8>(i * 12 + 0x0E) = slotID;
+        ref<uint8>(i * 12 + 0x10) = PChar->Container->getGuildID(slotID);
+        ref<uint16>(i * 12 + 0x12) = (PChar->Container->getGuildRank(slotID) + 1) * 100;
         i++;
 	}
 }

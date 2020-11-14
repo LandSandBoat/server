@@ -14,7 +14,7 @@ end
 function onItemUse(target)
     local mMP = target:getMaxMP()
     local cMP = target:getMP()
-    if (VanadielDayElement() == LIGHTDAY) then
+    if (VanadielDayOfTheWeek() == tpz.day.LIGHTSDAY) then
         if (cMP < (mMP * .85)) then
             if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
                 target:addStatusEffect(tpz.effect.REFRESH, 2, 3, 1800)

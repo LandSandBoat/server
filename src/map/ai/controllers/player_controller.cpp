@@ -33,6 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../latent_effect_container.h"
 #include "../../status_effect_container.h"
 #include "../../weapon_skill.h"
+#include "../../roe.h"
 
 CPlayerController::CPlayerController(CCharEntity* _PChar) :
     CController(_PChar)
@@ -186,11 +187,12 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
         if (PTarget)
         {
-            if (!isFaceing(PChar->loc.p, PTarget->loc.p, 40) && PTarget != PChar)
+            if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));
                 return false;
             }
+            roeutils::event(ROE_WSKILL_USE, PChar, RoeDatagramList{});
 
             return CController::WeaponSkill(targid, wsid);
         }

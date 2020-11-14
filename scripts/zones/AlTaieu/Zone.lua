@@ -38,11 +38,22 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 1) then
+        local copCraigLights = -- Nag'molada steals one random light
+        {
+            tpz.ki.LIGHT_OF_HOLLA,
+            tpz.ki.LIGHT_OF_DEM,
+            tpz.ki.LIGHT_OF_MEA
+        }
         player:setCharVar("PromathiaStatus", 1)
+        player:delKeyItem(tpz.ki.MYSTERIOUS_AMULET_DRAINED)
         player:addKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)
+        player:messageSpecial(ID.text.AMULET_SHATTERED, tpz.ki.MYSTERIOUS_AMULET)
+        player:messageSpecial(ID.text.LIGHT_STOLEN, copCraigLights[math.random(#copCraigLights)])
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_ALTAIEU)
         player:addTitle(tpz.title.SEEKER_OF_THE_LIGHT)
     elseif (csid == 167) then
         player:setCharVar("PromathiaStatus", 1)
+        player:delKeyItem(tpz.ki.MYSTERIOUS_AMULET_PRISHE)
+        player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, tpz.ki.MYSTERIOUS_AMULET)
     end
 end

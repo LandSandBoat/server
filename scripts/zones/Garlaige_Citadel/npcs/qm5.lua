@@ -13,20 +13,20 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-
-    local hittingTheMarquisateHagainCS = player:getCharVar("hittingTheMarquisateHagainCS")
-
-    if (hittingTheMarquisateHagainCS == 3) then
+    if player:hasKeyItem(tpz.ki.BOMB_INCENSE) and player:getCharVar("hittingTheMarquisateHagainCS") == 3 then
         player:messageSpecial(ID.text.PRESENCE_FROM_CEILING)
-        player:setCharVar("hittingTheMarquisateHagainCS", 4)
+        player:startEvent(51, tpz.keyItem.BOMB_INCENSE)
+    else
+        player:messageSpecial(ID.text.HOLE_IN_THE_CEILING) -- Default
     end
-
 end
 
 function onEventUpdate(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 function onEventFinish(player, csid, option)
+    if csid == 51 and option == 1 then
+        player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 2) -- Presence moved south.
+        player:setCharVar("hittingTheMarquisateHagainCS", 4)
+    end
 end

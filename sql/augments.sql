@@ -1649,7 +1649,7 @@ INSERT INTO `augments` VALUES (1357, 0, 0, 0, 0, 0); -- Enhances "Paralyze II" e
 INSERT INTO `augments` VALUES (1358, 0, 0, 0, 0, 0); -- Enhances "Aura Steal" effect
 INSERT INTO `augments` VALUES (1359, 0, 0, 0, 0, 0); -- Enhances "Ambush" effect
 INSERT INTO `augments` VALUES (1360, 0, 0, 0, 0, 0); -- Enhances "Feint" effect
-INSERT INTO `augments` VALUES (1361, 0, 0, 0, 0, 0); -- Enh. "Assassins Charge" effect
+INSERT INTO `augments` VALUES (1361, 0, 886, 1, 0, 0); -- Enh. "Assassins Charge" effect
 INSERT INTO `augments` VALUES (1362, 0, 0, 0, 0, 0); -- 1362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1363, 0, 0, 0, 0, 0); -- 1363 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1364, 0, 0, 0, 0, 0); -- Enhances "Iron Will" effect

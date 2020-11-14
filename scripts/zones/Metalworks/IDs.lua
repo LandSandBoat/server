@@ -43,10 +43,10 @@ zones[tpz.zone.METALWORKS] =
         EXTENDED_MISSION_OFFSET     = 8598, -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
         STEEL_CYCLONE_LEARNED       = 9009, -- You have learned the weapon skill Steel Cyclone!
         DETONATOR_LEARNED           = 9034, -- You have learned the weapon skill Detonator!
-        TAKIYAH_CLOSED_DIALOG       = 9968, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
-        TAKIYAH_OPEN_DIALOG         = 9969, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
-        CELEBRATORY_GOODS           = 10816, -- An assortment of celebratory goods is available for purchase.
-        HOMEPOINT_SET               = 11004, -- Home point set!
+        TAKIYAH_CLOSED_DIALOG       = 9975, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
+        TAKIYAH_OPEN_DIALOG         = 9976, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
+        CELEBRATORY_GOODS           = 10823, -- An assortment of celebratory goods is available for purchase.
+        HOMEPOINT_SET               = 11011, -- Home point set!
     },
     mob =
     {

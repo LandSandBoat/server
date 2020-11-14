@@ -215,12 +215,14 @@ enum class Mod
 
     SMITE                     = 898, // Raises attack when using H2H or 2H weapons (256 scale)
     TACTICAL_GUARD            = 899, // Tp increase when guarding
+    GUARD_PERCENT             = 976, // Guard Percent
 
     HASTE_MAGIC               = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
     HASTE_ABILITY             = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
     HASTE_GEAR                = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
     SPELLINTERRUPT            = 168, // % Spell Interruption Rate
     MOVE                      = 169, // % Movement Speed
+    MOUNT_MOVE                = 972, // % Mount Movement Speed
     FASTCAST                  = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST                 = 407, // uncapped fast cast
     CURE_CAST_TIME            = 519, // cure cast time reduction
@@ -433,6 +435,7 @@ enum class Mod
     HIGH_JUMP_ENMITY_REDUCTION = 363, // for gear that reduces more enmity from high jump
     FORCE_JUMP_CRIT           = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH   = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+    WYVERN_SUBJOB_TRAITS      = 974, // Adds subjob traits to wyvern on spawn
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -570,27 +573,29 @@ enum class Mod
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG         = 347, // They're stored separately due to Magian stuff - they can grant different levels of
-    EARTH_AFFINITY_DMG        = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
-    WATER_AFFINITY_DMG        = 349, // Each level of damage affinity is +/-5% damage, acc is +/-10 acc, and perp is
-    ICE_AFFINITY_DMG          = 350, // +/-1 mp/tic. This means that anyone adding these modifiers will have to add
+    ICE_AFFINITY_DMG          = 348, // the damage/acc/perp affinity on the same weapon, so they must be separated.
+    WIND_AFFINITY_DMG         = 349, // Each level of damage affinity is +/-5% damage, acc is +/-10 acc, and perp is
+    EARTH_AFFINITY_DMG        = 350, // +/-1 mp/tic. This means that anyone adding these modifiers will have to add
     THUNDER_AFFINITY_DMG      = 351, // 1 to the wiki amount. For example, Fire Staff has 2 in fire affinity for
-    WIND_AFFINITY_DMG         = 352, // DMG, ACC, and PERP, while the wiki lists it as having 1 in each.
+    WATER_AFFINITY_DMG        = 352, // DMG, ACC, and PERP, while the wiki lists it as having 1 in each.
     LIGHT_AFFINITY_DMG        = 353,
     DARK_AFFINITY_DMG         = 354,
+
     FIRE_AFFINITY_ACC         = 544,
-    EARTH_AFFINITY_ACC        = 545,
-    WATER_AFFINITY_ACC        = 546,
-    ICE_AFFINITY_ACC          = 547,
+    ICE_AFFINITY_ACC          = 545,
+    WIND_AFFINITY_ACC         = 546,
+    EARTH_AFFINITY_ACC        = 547,
     THUNDER_AFFINITY_ACC      = 548,
-    WIND_AFFINITY_ACC         = 549,
+    WATER_AFFINITY_ACC        = 549,
     LIGHT_AFFINITY_ACC        = 550,
     DARK_AFFINITY_ACC         = 551,
+
     FIRE_AFFINITY_PERP        = 553,
-    EARTH_AFFINITY_PERP       = 554,
-    WATER_AFFINITY_PERP       = 555,
-    ICE_AFFINITY_PERP         = 556,
+    ICE_AFFINITY_PERP         = 554,
+    WIND_AFFINITY_PERP        = 555,
+    EARTH_AFFINITY_PERP       = 556,
     THUNDER_AFFINITY_PERP     = 557,
-    WIND_AFFINITY_PERP        = 558,
+    WATER_AFFINITY_PERP       = 558,
     LIGHT_AFFINITY_PERP       = 559,
     DARK_AFFINITY_PERP        = 560,
 
@@ -648,21 +653,21 @@ enum class Mod
 
     // Elemental Absorb Chance
     FIRE_ABSORB               = 459, // Occasionally absorbs fire elemental damage, in percents
-    EARTH_ABSORB              = 460, // Occasionally absorbs earth elemental damage, in percents
-    WATER_ABSORB              = 461, // Occasionally absorbs water elemental damage, in percents
-    WIND_ABSORB               = 462, // Occasionally absorbs wind elemental damage, in percents
-    ICE_ABSORB                = 463, // Occasionally absorbs ice elemental damage, in percents
-    LTNG_ABSORB               = 464, // Occasionally absorbs thunder elemental damage, in percents
+    ICE_ABSORB                = 460, // Occasionally absorbs ice elemental damage, in percents
+    WIND_ABSORB               = 461, // Occasionally absorbs wind elemental damage, in percents
+    EARTH_ABSORB              = 462, // Occasionally absorbs earth elemental damage, in percents
+    LTNG_ABSORB               = 463, // Occasionally absorbs thunder elemental damage, in percents
+    WATER_ABSORB              = 464, // Occasionally absorbs water elemental damage, in percents
     LIGHT_ABSORB              = 465, // Occasionally absorbs light elemental damage, in percents
     DARK_ABSORB               = 466, // Occasionally absorbs dark elemental damage, in percents
 
     // Elemental Null Chance
     FIRE_NULL                 = 467, //
-    EARTH_NULL                = 468, //
-    WATER_NULL                = 469, //
-    WIND_NULL                 = 470, //
-    ICE_NULL                  = 471, //
-    LTNG_NULL                 = 472, //
+    ICE_NULL                  = 468, //
+    WIND_NULL                 = 469, //
+    EARTH_NULL                = 470, //
+    LTNG_NULL                 = 471, //
+    WATER_NULL                = 472, //
     LIGHT_NULL                = 473, //
     DARK_NULL                 = 474, //
 
@@ -734,11 +739,11 @@ enum class Mod
     ENHANCES_REFRESH          = 529, // "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION     = 530, // % to not deplete MP on spellcast.
     FORCE_FIRE_DWBONUS        = 531, // Set to above 0 to force fire day/weather spell bonus/penalty.
-    FORCE_EARTH_DWBONUS       = 532, // Set to above 0 to force earth day/weather spell bonus/penalty.
-    FORCE_WATER_DWBONUS       = 533, // Set to above 0 to force water day/weather spell bonus/penalty.
-    FORCE_WIND_DWBONUS        = 534, // Set to above 0 to force wind day/weather spell bonus/penalty.
-    FORCE_ICE_DWBONUS         = 535, // Set to above 0 to force ice day/weather spell bonus/penalty.
-    FORCE_LIGHTNING_DWBONUS   = 536, // Set to above 0 to force lightning day/weather spell bonus/penalty.
+    FORCE_ICE_DWBONUS         = 532, // Set to above 0 to force ice day/weather spell bonus/penalty.
+    FORCE_WIND_DWBONUS        = 533, // Set to above 0 to force wind day/weather spell bonus/penalty.
+    FORCE_EARTH_DWBONUS       = 534, // Set to above 0 to force earth day/weather spell bonus/penalty.
+    FORCE_LIGHTNING_DWBONUS   = 535, // Set to above 0 to force lightning day/weather spell bonus/penalty.
+    FORCE_WATER_DWBONUS       = 536, // Set to above 0 to force water day/weather spell bonus/penalty.
     FORCE_LIGHT_DWBONUS       = 537, // Set to above 0 to force light day/weather spell bonus/penalty.
     FORCE_DARK_DWBONUS        = 538, // Set to above 0 to force dark day/weather spell bonus/penalty.
     STONESKIN_BONUS_HP        = 539, // Bonus "HP" granted to Stoneskin spell.
@@ -766,11 +771,11 @@ enum class Mod
     SYNTH_HQ_RATE             = 862, // High-quality success rate (not a percent)
     DESYNTH_SUCCESS           = 916, // Rate of desynthesis success
     SYNTH_FAIL_RATE_FIRE      = 917, // Amount synthesis failure rate is reduced when using a fire crystal
-    SYNTH_FAIL_RATE_EARTH     = 918, // Amount synthesis failure rate is reduced when using a earth crystal
-    SYNTH_FAIL_RATE_WATER     = 919, // Amount synthesis failure rate is reduced when using a water crystal
-    SYNTH_FAIL_RATE_WIND      = 920, // Amount synthesis failure rate is reduced when using a wind crystal
-    SYNTH_FAIL_RATE_ICE       = 921, // Amount synthesis failure rate is reduced when using a ice crystal
-    SYNTH_FAIL_RATE_LIGHTNING = 922, // Amount synthesis failure rate is reduced when using a lightning crystal
+    SYNTH_FAIL_RATE_ICE       = 918, // Amount synthesis failure rate is reduced when using a ice crystal
+    SYNTH_FAIL_RATE_WIND      = 919, // Amount synthesis failure rate is reduced when using a wind crystal
+    SYNTH_FAIL_RATE_EARTH     = 920, // Amount synthesis failure rate is reduced when using a earth crystal
+    SYNTH_FAIL_RATE_LIGHTNING = 921, // Amount synthesis failure rate is reduced when using a lightning crystal
+    SYNTH_FAIL_RATE_WATER     = 922, // Amount synthesis failure rate is reduced when using a water crystal
     SYNTH_FAIL_RATE_LIGHT     = 923, // Amount synthesis failure rate is reduced when using a light crystal
     SYNTH_FAIL_RATE_DARK      = 924, // Amount synthesis failure rate is reduced when using a dark crystal
     SYNTH_FAIL_RATE_WOOD      = 925, // Amount synthesis failure rate is reduced when doing woodworking
@@ -799,11 +804,14 @@ enum class Mod
     CONQUEST_REGION_BONUS     = 934, // Increases the influence points awarded to the player's nation when receiving conquest points
     CAMPAIGN_BONUS            = 935, // Increases the evaluation for allied forces by percentage
 
+    SUBTLE_BLOW_II            = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
+    GARDENING_WILT_BONUS      = 975, // Increases the number of Vanadays a plant can survive before it wilts
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 972, // stuff
-    // SPARE = 973, // stuff
-    // SPARE = 974, // stuff
+    // SPARE = 977, // stuff
+    // SPARE = 978, // stuff
+    // SPARE = 979, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

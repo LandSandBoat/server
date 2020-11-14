@@ -4,7 +4,6 @@
 -- BCNM: Crustacean Conundrum
 -- TODO: You can only do 0-2 damage no matter what your attack is.
 -----------------------------------
-require("scripts/globals/weather")
 require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -14,7 +13,7 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    if VanadielDayElement() == tpz.day.WATERSDAY then
+    if VanadielDayOfTheWeek() == tpz.day.WATERSDAY then
         mob:setMod(tpz.mod.REGEN, 6, 3, 0)
     end
 end

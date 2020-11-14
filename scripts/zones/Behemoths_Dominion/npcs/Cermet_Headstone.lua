@@ -27,11 +27,11 @@ function onTrigger(player, npc)
         else
             player:addKeyItem(tpz.ki.LIGHTNING_FRAGMENT)
             if (
+                player:hasKeyItem(tpz.ki.FIRE_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.ICE_FRAGMENT) and
+                player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
-                player:hasKeyItem(tpz.ki.FIRE_FRAGMENT) and
-                player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT)
             ) then
                 player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.LIGHTNING_FRAGMENT)

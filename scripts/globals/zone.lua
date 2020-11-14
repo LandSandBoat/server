@@ -88,6 +88,14 @@ tpz.nation =
     OTHER    = 4,
 }
 
+tpz.alliedNation =
+{
+    NONE     = 0,
+    SANDORIA = 1,
+    BASTOK   = 2,
+    WINDURST = 3,
+}
+
 tpz.zone =
 {
     UNKNOWN                         = 0,

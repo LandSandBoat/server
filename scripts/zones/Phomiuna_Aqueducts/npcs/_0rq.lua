@@ -16,9 +16,9 @@ function onTrigger(player, npc)
     player:messageSpecial(ID.text.LAMP_OFFSET+6) -- light lamp
     npc:openDoor(7) -- lamp animation
 
-    local element = VanadielDayElement()
+    local day = VanadielDayOfTheWeek()
 
-    if (element == 6 or element == 7) then -- lightday or darkday
+    if (day == tpz.day.LIGHTSDAY or day == tpz.day.DARKSDAY) then
         if (GetNPCByID(DoorOffset+1):getAnimation() == 8) then -- lamp dark open?
             GetNPCByID(DoorOffset-5):openDoor(15) -- Open Door _0rk
         end

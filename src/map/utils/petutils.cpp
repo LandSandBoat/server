@@ -1403,13 +1403,16 @@ namespace petutils
     void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
+        TPZ_DEBUG_BREAK_IF(PetID >= MAX_PETID);
 
         Pet_t* PPetData = new Pet_t();
 
         PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t) { return t->PetID == PetID; });
 
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
+        {
             return;
+        }
 
         if (PMaster->objtype == TYPE_PC)
         {
@@ -1523,6 +1526,10 @@ namespace petutils
         {
             petType = PETTYPE_AUTOMATON;
         }
+        else if (PetID == PETID_LUOPAN)
+        {
+            petType = PETTYPE_LUOPAN;
+        }
 
         CPetEntity* PPet = nullptr;
         if (petType == PETTYPE_AUTOMATON && PMaster->objtype == TYPE_PC)
@@ -1537,8 +1544,11 @@ namespace petutils
 
         PPet->loc = PMaster->loc;
 
-        // spawn me randomly around master
-        PPet->loc.p = nearPosition(PMaster->loc.p, CPetController::PetRoamDistance, (float)M_PI);
+        if (petType != PETTYPE_LUOPAN)
+        {
+            // spawn me randomly around master
+            PPet->loc.p = nearPosition(PMaster->loc.p, CPetController::PetRoamDistance, (float)M_PI);
+        }
 
         if (petType != PETTYPE_AUTOMATON)
         {
@@ -1576,6 +1586,8 @@ namespace petutils
 
             PPet->setModifier(Mod::DMGPHYS, -50); //-50% PDT
 
+            PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); //Avatars have Crit Att Bonus II for +8 crit dmg
+
             if (PPet->GetMLevel() >= 70)
             {
                 PPet->setModifier(Mod::MATT, 32);
@@ -1598,12 +1610,16 @@ namespace petutils
             {
                 ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
             }
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(PPet->GetMLevel() * 0.74f)));
 
-            if (PetID == PETID_CARBUNCLE)
+            // In a 2014 update SE updated Avatar base damage
+            // Based on testing this value appears to be Level now instead of Level * 0.74f
+            uint16 weaponDamage = 1 + PPet->GetMLevel();
+            if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(PPet->GetMLevel() * 0.67f)));
+                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.9f));
             }
+
+            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
 
             //Set B+ weapon skill (assumed capped for level derp)
             //attack is madly high for avatars (roughly x2)
@@ -1717,6 +1733,15 @@ namespace petutils
                 PPet->addModifier(Mod::EVA, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
                 PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
             }
+        }
+        else if (PPet->getPetType() == PETTYPE_LUOPAN && PMaster->objtype == TYPE_PC)
+        {
+            PPet->SetMLevel(PMaster->GetMLevel());
+            PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
+            PPet->health.hp = PPet->health.maxhp;
+
+            // Just sit, do nothing
+            PPet->speed = 0;
         }
 
         FinalizePetStatistics(PMaster, PPet);

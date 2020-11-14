@@ -900,6 +900,9 @@ enum class SpellID : uint16
     Bloodrake               = 743,
 
     Indi_Regen              = 768,
+    Indi_Poison             = 769,
+    Geo_Regen               = 798,
+    Geo_Poison              = 799,
 
     Distract                = 841,
     Distract_II             = 842,
@@ -920,6 +923,7 @@ public:
 
     bool        canTargetEnemy();
     bool        isBuff();
+    bool        isSevere(); // damage spells that have severe effects like Death or Impact
     bool        dealsDamage(); // checks if the spell deals hp damage to target, this is relative to message
 
     uint16      getTotalTargets();

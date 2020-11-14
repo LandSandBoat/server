@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/globals/weather")
+require("scripts/globals/world")
 local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
 -----------------------------------
 

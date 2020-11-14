@@ -359,6 +359,7 @@ void CLatentEffectContainer::CheckLatentsDay()
 ************************************************************************/
 void CLatentEffectContainer::CheckLatentsMoonPhase()
 {
+    TracyZoneScoped;
     ProcessLatentEffects([this](CLatentEffect& latentEffect)
     {
         switch (latentEffect.GetConditionsID())
@@ -410,6 +411,7 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
 ************************************************************************/
 void CLatentEffectContainer::CheckLatentsHours()
 {
+    TracyZoneScoped;
     ProcessLatentEffects([this](CLatentEffect& latentEffect)
     {
         switch (latentEffect.GetConditionsID())
@@ -688,6 +690,7 @@ void CLatentEffectContainer::ProcessLatentEffects(std::function <bool(CLatentEff
 // activation/deactivation and attempts to apply
 bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
 {
+    TracyZoneScoped;
     // Our default case un-finds our latent prevent us from toggling a latent we don't have programmed
     auto expression = false;
     auto latentFound = true;
