@@ -2946,8 +2946,8 @@ INSERT INTO `item_latents` VALUES(18850, 366, 5, 6, 1000);  -- DMG+5 while TP <1
 -- -------------------------------------------------------
 -- Octave Club
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(18852, 977, 2, 38, 2);    -- Occasionally attacks 2 times when mjob multiple of 2
-INSERT INTO `item_latents` VALUES(18852, 977, 6, 38, 8);    -- Occasionally attacks 2 to 8 times when mjob multiple of 8
+INSERT INTO `item_latents` VALUES(18852, 978, 2, 38, 2);    -- Occasionally attacks 2 times when mjob multiple of 2
+INSERT INTO `item_latents` VALUES(18852, 978, 6, 38, 8);    -- Occasionally attacks 2 to 8 times when mjob multiple of 8
 
 -- -------------------------------------------------------
 -- Kerykeion

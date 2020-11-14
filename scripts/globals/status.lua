@@ -1065,8 +1065,8 @@ tpz.mod =
     MARTIAL_ARTS                    = 173,
     SKILLCHAINBONUS                 = 174,
     SKILLCHAINDMG                   = 175,
-    MAX_SWINGS                      = 977,
-    ADDITIONAL_SWING_CHANCE         = 978,
+    MAX_SWINGS                      = 978,
+    ADDITIONAL_SWING_CHANCE         = 979,
     FOOD_HPP                        = 176,
     FOOD_HP_CAP                     = 177,
     FOOD_MPP                        = 178,
@@ -1570,9 +1570,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 979, -- stuff
     -- SPARE = 980, -- stuff
     -- SPARE = 981, -- stuff
+    -- SPARE = 982, -- stuff
 }
 
 tpz.latent =
