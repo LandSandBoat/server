@@ -4860,7 +4860,7 @@ INSERT INTO `item_basic` VALUES (5178,0,'plate_of_dorado_sushi','dorado_sushi',1
 INSERT INTO `item_basic` VALUES (5179,0,'plate_of_dorado_sushi_+1','dorado_sushi_+1',12,1548,53,0,565);
 INSERT INTO `item_basic` VALUES (5180,0,'bowl_of_sophic_stew','sophic_stew',1,1580,55,0,2775);
 INSERT INTO `item_basic` VALUES (5181,0,'tortilla_buena','tortilla_buena',12,1548,56,0,52);
-INSERT INTO `item_basic` VALUES (5182,0,'salty_bretzel','salty_bretzel',99,1548,56,0,638);
+INSERT INTO `item_basic` VALUES (5182,0,'salty_bretzel','salty_bretzel',99,1548,56,0,9);
 INSERT INTO `item_basic` VALUES (5183,0,'viking_herring','viking_herring',12,1548,53,0,184);
 INSERT INTO `item_basic` VALUES (5184,0,'plate_of_vegan_saute','vegan_saute',1,1580,54,0,183);          -- http://www.bg-wiki.com/bg/Vegan_Saute
 INSERT INTO `item_basic` VALUES (5185,0,'leremieu_salad','leremieu_salad',1,1580,54,0,384);
