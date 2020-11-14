@@ -4,7 +4,6 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 -----------------------------------
 

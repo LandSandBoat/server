@@ -16,13 +16,13 @@ function onTrigger(player, npc)
     player:messageSpecial(ID.text.LAMP_OFFSET+1) -- earth lamp
     npc:openDoor(7) -- lamp animation
 
-    local element = VanadielDayElement()
+    local day = VanadielDayOfTheWeek()
 
-    if (element == 3) then -- wind day
+    if (day == tpz.day.WINDSDAY) then
         if (GetNPCByID(DoorOffset+1):getAnimation() == 8) then -- lamp wind open?
             GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rl
         end
-    elseif (element == 1) then -- earth day
+    elseif (day == tpz.day.EARTHSDAY) then
         if (GetNPCByID(DoorOffset-3):getAnimation() == 8) then -- lamp lightning open?
             GetNPCByID(DoorOffset-7):openDoor(15) -- Open Door _0rl
         end

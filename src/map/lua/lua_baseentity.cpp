@@ -13834,7 +13834,7 @@ inline int32 CLuaBaseEntity::hasSpellList(lua_State* L)
 /************************************************************************
 *  Function: setSpellList()
 *  Purpose : Specify a spell list for a Mob to use
-*  Example : mob:setSpellList(118 + DayofWeek)
+*  Example : mob:setSpellList(118 + DayOfTheWeek)
 *  Notes   :
 ************************************************************************/
 

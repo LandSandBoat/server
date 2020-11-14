@@ -7,7 +7,7 @@
 
 local ID = require("scripts/zones/Beadeaux/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/weather")
+require("scripts/globals/world")
 -----------------------------------
 
 function onTrade(player, npc, trade)

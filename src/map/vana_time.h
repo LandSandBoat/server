@@ -103,21 +103,22 @@ public:
 
 private:
 
-	static CVanaTime * _instance;
+    static CVanaTime * _instance;
 
-	CVanaTime();
+    CVanaTime();
 
-	uint32	 m_vYear;								// Vanadiel Year
-	uint32	 m_vMon;								// Vanadiel Month
-	uint32	 m_vDate;								// Vanadiel Date (day of the month)
-	uint32	 m_vHour;								// Vanadiel Hour
-	uint32	 m_vMin;								// Vanadiel Minute
-	uint32	 m_vDay;								// Vanadiel Day (Day of the week, fire,earth,wind)
-	uint32	 m_vanaDate;							// Vanadiel time in integer format
+    uint32   m_vYear;                               // Vanadiel Year
+    uint32   m_vMon;                                // Vanadiel Month
+    uint32   m_vDate;                               // Vanadiel Date (day of the month)
+    uint32   m_vHour;                               // Vanadiel Hour
+    uint32   m_vMin;                                // Vanadiel Minute
+    uint32   m_vDay;                                // Vanadiel day of the week (fire, earth, wind, water, ice, lightning, light, dark)
+    uint8    m_vDayElement;                         // Vanadiel day's element (fire, ice, wind, earth, thunder, water, light dark)
+    uint32   m_vanaDate;                            // Vanadiel time in integer format
 
-	TIMETYPE m_TimeType;							// текущий тип времени
+    TIMETYPE m_TimeType;                            // текущий тип времени
 
-	int32	 m_customEpoch;						// Custom epoch to use instead of VTIME_BASEDATE
+    int32     m_customEpoch;                        // Custom epoch to use instead of VTIME_BASEDATE
 };
 
 #endif

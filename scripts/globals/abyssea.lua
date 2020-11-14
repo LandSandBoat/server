@@ -2,10 +2,12 @@
 -- Abyssea functions, vars, tables
 -- DO NOT mess with the order
 -- or change things to "elseif"!
+
+-- TODO: Change these to use enums!
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/zone")
------------------------------------
 
 tpz = tpz or {}
 tpz.abyssea = tpz.abyssea or {}
@@ -36,21 +38,21 @@ local redWeakness =
 local yellowWeakness =
 {
     --fire
-    [0] = { 146, 147, 176, 204, 591, 321, 455 },
-    --earth
-    [1] = { 161, 162, 191, 210, 555, 330, 458 },
-    --water
-    [2] = { 171, 172, 201, 515, 336, 454 },
-    --wind
-    [3] = { 156, 157, 186, 208, 534, 327, 457 },
+    [tpz.magic.element.FIRE] = { 146, 147, 176, 204, 591, 321, 455 },
     --ice
-    [4] = { 151, 152, 181, 206, 531, 324, 456 },
+    [tpz.magic.element.ICE] = { 151, 152, 181, 206, 531, 324, 456 },
+    --wind
+    [tpz.magic.element.WIND] = { 156, 157, 186, 208, 534, 327, 457 },
+    --earth
+    [tpz.magic.element.EARTH] = { 161, 162, 191, 210, 555, 330, 458 },
     --ltng
-    [5] = { 166, 167, 196, 212, 644, 333, 459 },
+    [tpz.magic.element.THUNDER] = { 166, 167, 196, 212, 644, 333, 459 },
+    --water
+    [tpz.magic.element.WATER] = { 171, 172, 201, 515, 336, 454 },
     --light
-    [6] = { 29, 30, 38, 39, 21, 112, 565, 461 },
+    [tpz.magic.element.LIGHT] = { 29, 30, 38, 39, 21, 112, 565, 461 },
     --dark
-    [7] = { 247, 245, 231, 260, 557, 348, 460 }
+    [tpz.magic.element.DARK] = { 247, 245, 231, 260, 557, 348, 460 }
 }
 
 local blueWeakness =
@@ -265,12 +267,12 @@ tpz.abyssea.getDemiluneAbyssite = function(player)
 end
 
 tpz.abyssea.getNewYellowWeakness = function(mob)
-    local day = VanadielDayElement()
+    local day = VanadielDayOfTheWeek()
     local weakness = math.random(day - 1, day + 1)
 
     if weakness < 0 then weakness = 7 elseif weakness > 7 then weakness = 0 end
-
-    return yellowWeakness[weakness][math.random(#yellowWeakness[weakness])]
+    local element = tpz.magic.dayElement[weakness]
+    return yellowWeakness[element][math.random(#yellowWeakness[element])]
 end
 
 tpz.abyssea.getNewRedWeakness = function(mob)

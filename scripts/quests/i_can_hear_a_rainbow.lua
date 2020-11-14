@@ -1,10 +1,10 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require("scripts/globals/weather")
 require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
+require("scripts/globals/world")
 require("scripts/globals/zone")
 -----------------------------------
 

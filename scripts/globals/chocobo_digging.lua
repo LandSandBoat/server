@@ -4,7 +4,6 @@
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
 require("scripts/globals/settings")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
@@ -935,7 +934,7 @@ local function getChocoboDiggingItem(player)
         end
     elseif itemId == 1255 then
         if weather >= tpz.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(tpz.skill.DIG) >= 7 then
-            itemId = oreMap[VanadielDayElement()]
+            itemId = oreMap[VanadielDayOfTheWeek()]
         else
             itemId = 0
         end
