@@ -25,7 +25,7 @@ end
 function onMobSpawn(mob)
     local battlefield = mob:getBattlefield()
     if battlefield and phaseChangeReady(battlefield) then
-       battlefield:setLocalVar("phaseChange", 0)
+        battlefield:setLocalVar("phaseChange", 0)
     end
 end
 

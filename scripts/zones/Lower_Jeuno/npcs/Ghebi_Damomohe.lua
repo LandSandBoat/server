@@ -18,10 +18,16 @@ function onTrade(player, npc, trade)
     if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DARKNESS_NAMED and
-           not player:hasKeyItem(tpz.ki.PSOXJA_PASS) and
-           player:getCharVar("PXPassGetGems") == 1 and
-           (npcUtil.tradeHas(trade, 1692) or npcUtil.tradeHas(trade, 1694) or npcUtil.tradeHas(trade, 1693)) then
+    elseif
+        player:getCurrentMission(COP) == tpz.mission.id.cop.DARKNESS_NAMED and
+        not player:hasKeyItem(tpz.ki.PSOXJA_PASS) and
+        player:getCharVar("PXPassGetGems") == 1 and
+        (
+            npcUtil.tradeHas(trade, 1692) or
+            npcUtil.tradeHas(trade, 1694) or
+            npcUtil.tradeHas(trade, 1693)
+        )
+    then
         player:startEvent(52, 500 * GIL_RATE)
     end
 end

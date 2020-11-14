@@ -136,9 +136,9 @@ function onRegionEnter(player, region)
         {
             [1] = function (x)
                 if (player:getCurrentMission(COP)==tpz.mission.id.cop.DAWN or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN) or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) ) then
-                   player:startEvent(101)
+                    player:startEvent(101)
                 else
-                   player:startEvent(155)
+                    player:startEvent(155)
                 end
             end, --101
 
