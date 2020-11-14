@@ -34,11 +34,11 @@ end
 
 function onMagicHit(caster, target, spell)
     local REGEN = target:getMod(tpz.mod.REGEN)
-    local DAY = VanadielDayElement()
+    local DAY = VanadielDayOfTheWeek()
     local ELEM = spell:getElement()
     if (GetServerVariable("AV_Regen_Reduction") < 60) then
         -- Had to serverVar the regen instead of localVar because localVar reset on claim loss.
-        if (ELEM == DAY and (caster:isPC() or caster:isPet())) then
+        if (ELEM == tpz.magic.dayElement[DAY] and (caster:isPC() or caster:isPet())) then
             SetServerVariable("AV_Regen_Reduction", 1+GetServerVariable("AV_Regen_Reduction"))
             target:addMod(tpz.mod.REGEN, -2)
         end

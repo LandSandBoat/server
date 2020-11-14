@@ -119,6 +119,16 @@ bool CBaseEntity::IsNameHidden()
 	return namevis & FLAG_HIDE_NAME;
 }
 
+bool CBaseEntity::IsTargetable()
+{
+    return (namevis & FLAG_UNTARGETABLE) == 0;
+}
+
+bool CBaseEntity::isWideScannable()
+{
+    return status != STATUS_DISAPPEAR && !IsNameHidden() && IsTargetable();
+}
+
 CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter)
 {
     if (targid == 0)

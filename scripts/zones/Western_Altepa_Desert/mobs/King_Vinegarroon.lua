@@ -2,8 +2,8 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
-require("scripts/globals/weather")
 require("scripts/globals/titles")
+require("scripts/globals/world")
 require("scripts/globals/mobs")
 -----------------------------------
 

@@ -15,9 +15,9 @@ zones[tpz.zone.EASTERN_ADOULIN] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         YOU_CAN_NOW_BECOME      = 7009, -- You can now become a [geomancer/rune fencer]!
-        MOG_LOCKER_OFFSET       = 7569, -- Your Mog Locker lease is valid until <timestamp>, kupo.
-        HOMEPOINT_SET           = 8285, -- Home point set!
-        COMMON_SENSE_SURVIVAL   = 13914, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        MOG_LOCKER_OFFSET       = 7574, -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        HOMEPOINT_SET           = 8290, -- Home point set!
+        COMMON_SENSE_SURVIVAL   = 13919, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

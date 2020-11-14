@@ -39,19 +39,8 @@ end
 
 function onAdditionalEffect(mob, target, damage)
     local element = mob:getLocalVar("element")
-    local index =
-    {
-        [1] = tpz.mob.ae.ENFIRE,
-        [2] = tpz.mob.ae.ENSTONE,
-        [3] = tpz.mob.ae.ENWATER,
-        [4] = tpz.mob.ae.ENAERO,
-        [5] = tpz.mob.ae.ENBLIZZARD,
-        [6] = tpz.mob.ae.ENTHUNDER,
-        [7] = tpz.mob.ae.ENLIGHT,
-        [8] = tpz.mob.ae.ENDARK
-    }
-    if index[element] then
-        return tpz.mob.onAddEffect(mob, target, damage, index[element], {chance = 1000})
+    if element > 0 then
+        return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENFIRE + element - 1, {chance = 1000})
     else
         return 0, 0, 0 -- Just in case its somehow not got a variable set
     end

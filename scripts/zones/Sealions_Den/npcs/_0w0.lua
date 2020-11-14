@@ -18,7 +18,7 @@ function onTrigger(player, npc)
         player:startEvent(13)
     elseif EventTriggerBCNM(player, npc) then
         return
-    elseif (player:getCurrentMission(COP) > tpz.mission.cop.THE_WARRIOR_S_PATH) then
+    elseif (player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
         player:startEvent(12)
     end
 end

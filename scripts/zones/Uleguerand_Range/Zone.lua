@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------

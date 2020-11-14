@@ -46,6 +46,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "utils/battlefieldutils.h"
+#include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
@@ -230,6 +231,7 @@ void CZoneEntities::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZoneEntities::WeatherChange(WEATHER weather)
 {
+    TracyZoneScoped;
     auto element = zoneutils::GetWeatherElement(weather);
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
@@ -285,8 +287,9 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+    TracyZoneScoped;
 
-    PChar->PClaimedMob = nullptr;
+    battleutils::RelinquishClaim(PChar);
 
     //remove pets
     if (PChar->PPet != nullptr)
@@ -387,6 +390,7 @@ void CZoneEntities::DespawnPC(CCharEntity* PChar)
 
 void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PCurrentMob = (CMobEntity*)it->second;
@@ -429,6 +433,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnPETs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_petList.begin(); it != m_petList.end(); ++it)
     {
         CPetEntity* PCurrentPet = (CPetEntity*)it->second;
@@ -457,6 +462,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (!PChar->m_moghouseID)
     {
         for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
@@ -490,6 +496,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
 
 void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PCurrentChar = (CCharEntity*)it->second;
@@ -760,6 +767,9 @@ CCharEntity* CZoneEntities::GetCharByID(uint32 id)
 
 void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
+    TracyZoneScoped;
+    TracyZoneHex16(packet->id());
+
     if (!packet) { return; }
     // Do not send packets that are updates of a hidden GM..
     if (packet->id() == 0x00D && PEntity != nullptr && PEntity->objtype == TYPE_PC && ((CCharEntity*)PEntity)->m_isGMHidden)
@@ -778,6 +788,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         {
             case CHAR_INRANGE_SELF:
             {
+                TracyZoneCString("CHAR_INRANGE_SELF");
                 if (PEntity->objtype == TYPE_PC)
                 {
                     ((CCharEntity*)PEntity)->pushPacket(new CBasicPacket(*packet));
@@ -785,6 +796,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             }
             case CHAR_INRANGE:
             {
+                TracyZoneCString("CHAR_INRANGE");
                 // todo: rewrite packet handlers and use enums instead of rawdog packet ids
                 // 30 yalms if action packet, 50 otherwise
                 const int checkDistanceSq = packet->id() == 0x0028 ? 900 : 2500;
@@ -854,6 +866,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             break;
             case CHAR_INSHOUT:
             {
+                TracyZoneCString("CHAR_INSHOUT");
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
                 {
                     CCharEntity* PCurrentChar = (CCharEntity*)it->second;
@@ -870,6 +883,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             break;
             case CHAR_INZONE:
             {
+                TracyZoneCString("CHAR_INZONE");
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
                 {
                     CCharEntity* PCurrentChar = (CCharEntity*)it->second;
@@ -891,27 +905,22 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
 void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 {
+    TracyZoneScoped;
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_BEGIN));
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
-        if (PNpc->status == STATUS_NORMAL && !PNpc->IsNameHidden() && !PNpc->IsUntargetable() && PNpc->widescan == 1)
+        if (PNpc->isWideScannable() && distance(PChar->loc.p, PNpc->loc.p) < radius)
         {
-            if (distance(PChar->loc.p, PNpc->loc.p) < radius)
-            {
-                PChar->pushPacket(new CWideScanPacket(PChar, PNpc));
-            }
+            PChar->pushPacket(new CWideScanPacket(PChar, PNpc));
         }
     }
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PMob = (CMobEntity*)it->second;
-        if (PMob->status != STATUS_DISAPPEAR && !PMob->IsUntargetable())
+        if (PMob->isWideScannable() && distance(PChar->loc.p, PMob->loc.p) < radius)
         {
-            if (distance(PChar->loc.p, PMob->loc.p) < radius)
-            {
-                PChar->pushPacket(new CWideScanPacket(PChar, PMob));
-            }
+            PChar->pushPacket(new CWideScanPacket(PChar, PMob));
         }
     }
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));
@@ -919,6 +928,9 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 
 void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 {
+    TracyZoneScoped;
+    TracyZoneIString(m_zone->GetName());
+
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PMob = (CMobEntity*)it->second;

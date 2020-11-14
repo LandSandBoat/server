@@ -727,8 +727,7 @@ tpz.caskets.onTrade = function(player, npc, trade)
     end
 
     if locked == 1 then
-        if npcUtil.tradeHasExactly(trade, 1022) then
-
+        if player:getMainJob() == tpz.job.THF and npcUtil.tradeHasExactly(trade, 1022) then
             local splitNumbers = {}
             local tradeAttempt = math.random()
             local firstAttempt = npc:getLocalVar("[caskets]HINT_TRADE")
@@ -937,6 +936,10 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                         if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then  -- is the chest shut?, then open it.
                            npc:AnimationSub(1)
                            npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
+                           -- RoE Timed Record #4019 - Crack Tresure Caskets
+                           if player:getEminenceProgress(4019) then
+                               tpz.roe.onRecordTrigger(player, 4019)
+                           end
                         end
                     end
                 else

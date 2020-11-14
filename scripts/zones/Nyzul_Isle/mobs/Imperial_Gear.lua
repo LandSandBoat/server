@@ -32,7 +32,7 @@ function onMobSpawn(mob)
 end
 
 function onMobEngaged(mob, target)
-    local naja = mob:getInstance():getEntity(bit.band(ID.mob[58].NAJA, 0xFFF))
+    local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
     naja:setLocalVar("ready", 1)
 end
 

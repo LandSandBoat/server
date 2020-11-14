@@ -1,9 +1,8 @@
 -----------------------------------
 --
---
---
+--     tpz.effect.EFFLUX
+--     
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

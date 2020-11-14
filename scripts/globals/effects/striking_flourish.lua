@@ -1,9 +1,8 @@
 -----------------------------------
 --
---
+--   tpz.effect.STRIKING_FLOURISH
 --
 -----------------------------------
-
 function onEffectGain(target, effect)
 end
 

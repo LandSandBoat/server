@@ -646,6 +646,9 @@ int _vShowMessage(MSGTYPE flag, const std::string& string)
         case MSG_ACTION: // Bright White  (mostly useless "player did this" info)
             strcat(prefix, CL_WHITE"[Action Info]" CL_RESET);
             break;
+        case MSG_EXPLOIT: // Bright Red (Detected a likely exploit)
+            strcat(prefix, CL_RED"[Possible Exploit]" CL_RESET);
+            break;
         default:
             ShowError("In function _vShowMessage() -> Invalid flag passed.\n");
             return 1;
@@ -683,6 +686,10 @@ int _vShowMessage(MSGTYPE flag, const std::string& string)
             fclose(fp);
         }
     }
+
+#ifdef TRACY_ENABLE
+    TracyMessage(string.c_str(), string.size());
+#endif
 
     return 0;
 }

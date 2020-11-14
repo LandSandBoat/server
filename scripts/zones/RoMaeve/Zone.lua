@@ -7,7 +7,6 @@ local ID = require("scripts/zones/RoMaeve/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -35,20 +34,38 @@ function onRegionEnter(player, region)
 end
 
 function onGameHour(zone)
-    local hour = VanadielHour()
+    local vanadielHour = VanadielHour()
+    
+    -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
+    if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
+        local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
+        local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
 
-    if IsMoonFull() and hour == 18 then
-        for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET+7 do
-            GetNPCByID(i):openDoor(1728)
-            GetNPCByID(i):untargetable(true)
+        if moongate1:getLocalVar("romaeveActive") == 0 then
+            -- Loop over the affected NPCs: Moongates, bridges and fountain
+            for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
+                GetNPCByID(i):setAnimation(tpz.anim.OPEN_DOOR) -- Open them
+            end
+            moongate2:untargetable(true)
+            moongate1:untargetable(true)
+            moongate1:setLocalVar("romaeveActive", 1) -- Make this loop unavailable after firing
         end
-    elseif hour == 6 then
-        for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET+7 do
-            GetNPCByID(i):untargetable(false)
+
+    -- Clean up at 6am
+    elseif vanadielHour == 6 then
+        local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
+        local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
+
+        if moongate1:getLocalVar("romaeveActive") == 1 then
+            for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
+                GetNPCByID(i):setAnimation(tpz.anim.CLOSE_DOOR)
+            end
+            moongate2:untargetable(false)
+            moongate1:untargetable(false)
+            moongate1:setLocalVar("romaeveActive", 0) -- Make loop available again
         end
     end
 end
-
 
 function onEventUpdate(player, csid, option)
 end

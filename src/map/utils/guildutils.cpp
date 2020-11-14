@@ -144,6 +144,7 @@ void UpdateGuildsStock()
 
 void UpdateGuildPointsPattern()
 {
+    TracyZoneScoped;
     uint8 pattern = tpzrand::GetRandomNumber(8);
 
     const char* query = "SELECT value FROM server_variables WHERE name = '[GUILD]pattern_update';";
@@ -153,7 +154,7 @@ void UpdateGuildPointsPattern()
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
-        if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getSysYearDay())
+        if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getJstYearDay())
         {
             update = true;
         }
@@ -166,7 +167,7 @@ void UpdateGuildPointsPattern()
     {
         //write the new pattern and update time to prevent other servers from updating the pattern
         Sql_Query(SqlHandle, "REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
-            CVanaTime::getInstance()->getSysYearDay(), pattern);
+            CVanaTime::getInstance()->getJstYearDay(), pattern);
         Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
     }
 

@@ -57,6 +57,7 @@ enum class MsgStd
     LinkshellNoLongerExists        = 110, // That linkshell group no longer exists. This item is unusable.
     LinkshellUnavailable           = 112, // The linkshell name you entered is already in use or otherwise unavailable.
     TellNotReceivedOffline         = 125, // Your tell was not received.  The recipient is currently away.
+    MoghouseCantPickUp             = 137, // Kupo... I can't pick anything right now, kupo.
     CurrentPollResultsSystem       = 140, // Player Name's proposal - Current poll results:
     FinalPollResultsSystem         = 141, // Player Name's proposal - Final poll results:
     PollProposalSay                = 146, // Player Name's proposal to all (cast vote with command: "/vote ?"):
@@ -106,9 +107,11 @@ class CMessageStandardPacket : public CBasicPacket
 public:
 
     CMessageStandardPacket(MsgStd MessageID);
-	CMessageStandardPacket(CCharEntity* PChar, uint32 param0, MsgStd MessageID);
-	CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID);
-	CMessageStandardPacket(uint32 param0, uint32 param1, uint32 param2, uint32 param3, MsgStd MessageID);
+    CMessageStandardPacket(uint32 param0, uint16 MessageID);
+    CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID);
+    CMessageStandardPacket(CCharEntity* PChar, uint32 param0, MsgStd MessageID);
+    CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID);
+    CMessageStandardPacket(uint32 param0, uint32 param1, uint32 param2, uint32 param3, MsgStd MessageID);
 };
 
 #endif

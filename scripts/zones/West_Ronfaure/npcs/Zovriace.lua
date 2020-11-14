@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/West_Ronfaure/IDs")
 require("scripts/globals/pathfind")
+require("scripts/globals/quests")
 -----------------------------------
 
 local path =
@@ -1023,7 +1024,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    player:showText(npc, ID.text.ZOVRIACE_DIALOG)
+    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
+        player:showText(npc, ID.text.ZOVRIACE_DIALOG + 2)
+    else
+        player:showText(npc, ID.text.ZOVRIACE_DIALOG)
+    end
     npc:wait()
 end
 

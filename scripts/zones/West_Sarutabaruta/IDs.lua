@@ -72,17 +72,17 @@ zones[tpz.zone.WEST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE     = 17248765,
-        SIGNPOST_OFFSET = 17248792,
-        OVERSEER_BASE   = 17248825,
+        CASKET_BASE     = 17248766,
+        SIGNPOST_OFFSET = 17248793,
+        OVERSEER_BASE   = 17248826, -- Naguipeillont_RK in npc_list
         HARVESTING =
         {
-            17248841,
             17248842,
             17248843,
             17248844,
             17248845,
             17248846,
+            17248847,
         },
     },
 }

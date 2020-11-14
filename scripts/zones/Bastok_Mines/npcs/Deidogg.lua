@@ -4,11 +4,12 @@
 -- Starts and Finishes Quest: The Talekeeper's Truth, The Talekeeper's Gift (start)
 -- !pos -13 7 29 234
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -38,7 +39,7 @@ function onTrigger(player, npc)
     local theTalekeeperGiftCS = player:getCharVar("theTalekeeperGiftCS")
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 18) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
         player:startEvent(504)
     elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 50) then
         if (theTalekeeperTruthCS == 1) then
@@ -98,7 +99,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
     elseif (csid == 504) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 18, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))
     end
 
 end

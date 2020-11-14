@@ -1,3 +1,5 @@
+require("scripts/globals/world")
+
 ------------------------------------
 --
 -- STATUSES AND MODS
@@ -791,7 +793,7 @@ tpz.effect =
     -- GoV Prowess bonus effects, real effect at ID 474
     PROWESS_CASKET_RATE      = 777, -- (Unimplemented)
     PROWESS_SKILL_RATE       = 778, -- (Unimplemented)
-    PROWESS_CRYSTAL_YEILD    = 779, -- (Unimplemented)
+    PROWESS_CRYSTAL_YIELD    = 779, -- (Unimplemented)
     PROWESS_TH               = 780, -- +1 per tier
     PROWESS_ATTACK_SPEED     = 781, -- *flat 4% for now
     PROWESS_HP_MP            = 782, -- Base 3% and another 1% per tier.
@@ -1054,7 +1056,8 @@ tpz.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE                            = 169,
+    MOVE                            = 169, -- % Movement Speed
+    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
     CURE_CAST_TIME                  = 519,
@@ -1119,6 +1122,7 @@ tpz.mod =
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1191,29 +1195,32 @@ tpz.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
     FIRE_AFFINITY_DMG               = 347,
-    EARTH_AFFINITY_DMG              = 348,
-    WATER_AFFINITY_DMG              = 349,
-    ICE_AFFINITY_DMG                = 350,
+    ICE_AFFINITY_DMG                = 348,
+    WIND_AFFINITY_DMG               = 349,
+    EARTH_AFFINITY_DMG              = 350,
     THUNDER_AFFINITY_DMG            = 351,
-    WIND_AFFINITY_DMG               = 352,
+    WATER_AFFINITY_DMG              = 352,
     LIGHT_AFFINITY_DMG              = 353,
     DARK_AFFINITY_DMG               = 354,
+
     FIRE_AFFINITY_ACC               = 544,
-    EARTH_AFFINITY_ACC              = 545,
-    WATER_AFFINITY_ACC              = 546,
-    ICE_AFFINITY_ACC                = 547,
+    ICE_AFFINITY_ACC                = 545,
+    WIND_AFFINITY_ACC               = 546,
+    EARTH_AFFINITY_ACC              = 547,
     THUNDER_AFFINITY_ACC            = 548,
-    WIND_AFFINITY_ACC               = 549,
+    WATER_AFFINITY_ACC              = 549,
     LIGHT_AFFINITY_ACC              = 550,
     DARK_AFFINITY_ACC               = 551,
+
     FIRE_AFFINITY_PERP              = 553,
-    EARTH_AFFINITY_PERP             = 554,
-    WATER_AFFINITY_PERP             = 555,
-    ICE_AFFINITY_PERP               = 556,
+    ICE_AFFINITY_PERP               = 554,
+    WIND_AFFINITY_PERP              = 555,
+    EARTH_AFFINITY_PERP             = 556,
     THUNDER_AFFINITY_PERP           = 557,
-    WIND_AFFINITY_PERP              = 558,
+    WATER_AFFINITY_PERP             = 558,
     LIGHT_AFFINITY_PERP             = 559,
     DARK_AFFINITY_PERP              = 560,
+
     ADDS_WEAPONSKILL                = 355,
     ADDS_WEAPONSKILL_DYN            = 356,
     BP_DELAY                        = 357,
@@ -1334,20 +1341,20 @@ tpz.mod =
     ENSPELL_DMG_BONUS               = 432,
 
     FIRE_ABSORB                     = 459, -- Occasionally absorbs fire elemental damage, in percents
-    EARTH_ABSORB                    = 460, -- Occasionally absorbs earth elemental damage, in percents
-    WATER_ABSORB                    = 461, -- Occasionally absorbs water elemental damage, in percents
-    WIND_ABSORB                     = 462, -- Occasionally absorbs wind elemental damage, in percents
-    ICE_ABSORB                      = 463, -- Occasionally absorbs ice elemental damage, in percents
-    LTNG_ABSORB                     = 464, -- Occasionally absorbs thunder elemental damage, in percents
+    ICE_ABSORB                      = 460, -- Occasionally absorbs ice elemental damage, in percents
+    WIND_ABSORB                     = 461, -- Occasionally absorbs wind elemental damage, in percents
+    EARTH_ABSORB                    = 462, -- Occasionally absorbs earth elemental damage, in percents
+    LTNG_ABSORB                     = 463, -- Occasionally absorbs thunder elemental damage, in percents
+    WATER_ABSORB                    = 464, -- Occasionally absorbs water elemental damage, in percents
     LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage, in percents
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage, in percents
 
     FIRE_NULL                       = 467, --
-    EARTH_NULL                      = 468, --
-    WATER_NULL                      = 469, --
-    WIND_NULL                       = 470, --
-    ICE_NULL                        = 471, --
-    LTNG_NULL                       = 472, --
+    ICE_NULL                        = 468, --
+    WIND_NULL                       = 469, --
+    EARTH_NULL                      = 470, --
+    LTNG_NULL                       = 471, --
+    WATER_NULL                      = 472, --
     LIGHT_NULL                      = 473, --
     DARK_NULL                       = 474, --
 
@@ -1434,11 +1441,11 @@ tpz.mod =
     ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.
     FORCE_FIRE_DWBONUS              = 531, -- Set to 1 to force fire day/weather spell bonus/penalty. Do not have it total more than 1.
-    FORCE_EARTH_DWBONUS             = 532, -- Set to 1 to force earth day/weather spell bonus/penalty. Do not have it total more than 1.
-    FORCE_WATER_DWBONUS             = 533, -- Set to 1 to force water day/weather spell bonus/penalty. Do not have it total more than 1.
-    FORCE_WIND_DWBONUS              = 534, -- Set to 1 to force wind day/weather spell bonus/penalty. Do not have it total more than 1.
-    FORCE_ICE_DWBONUS               = 535, -- Set to 1 to force ice day/weather spell bonus/penalty. Do not have it total more than 1.
-    FORCE_LIGHTNING_DWBONUS         = 536, -- Set to 1 to force lightning day/weather spell bonus/penalty. Do not have it total more than 1.
+    FORCE_ICE_DWBONUS               = 532, -- Set to 1 to force ice day/weather spell bonus/penalty. Do not have it total more than 1.
+    FORCE_WIND_DWBONUS              = 533, -- Set to 1 to force wind day/weather spell bonus/penalty. Do not have it total more than 1.
+    FORCE_EARTH_DWBONUS             = 534, -- Set to 1 to force earth day/weather spell bonus/penalty. Do not have it total more than 1.
+    FORCE_LIGHTNING_DWBONUS         = 535, -- Set to 1 to force lightning day/weather spell bonus/penalty. Do not have it total more than 1.
+    FORCE_WATER_DWBONUS             = 536, -- Set to 1 to force water day/weather spell bonus/penalty. Do not have it total more than 1.
     FORCE_LIGHT_DWBONUS             = 537, -- Set to 1 to force light day/weather spell bonus/penalty. Do not have it total more than 1.
     FORCE_DARK_DWBONUS              = 538, -- Set to 1 to force dark day/weather spell bonus/penalty. Do not have it total more than 1.
     STONESKIN_BONUS_HP              = 539, -- Bonus "HP" granted to Stoneskin spell.
@@ -1502,11 +1509,11 @@ tpz.mod =
     SYNTH_HQ_RATE                   = 862, -- High-quality success rate (not a percent)
     DESYNTH_SUCCESS                 = 916, -- Rate of desynthesis success
     SYNTH_FAIL_RATE_FIRE            = 917, -- Amount synthesis failure rate is reduced when using a fire crystal
-    SYNTH_FAIL_RATE_EARTH           = 918, -- Amount synthesis failure rate is reduced when using a earth crystal
-    SYNTH_FAIL_RATE_WATER           = 919, -- Amount synthesis failure rate is reduced when using a water crystal
-    SYNTH_FAIL_RATE_WIND            = 920, -- Amount synthesis failure rate is reduced when using a wind crystal
-    SYNTH_FAIL_RATE_ICE             = 921, -- Amount synthesis failure rate is reduced when using a ice crystal
-    SYNTH_FAIL_RATE_LIGHTNING       = 922, -- Amount synthesis failure rate is reduced when using a lightning crystal
+    SYNTH_FAIL_RATE_ICE             = 918, -- Amount synthesis failure rate is reduced when using a ice crystal
+    SYNTH_FAIL_RATE_WIND            = 919, -- Amount synthesis failure rate is reduced when using a wind crystal
+    SYNTH_FAIL_RATE_EARTH           = 920, -- Amount synthesis failure rate is reduced when using a earth crystal
+    SYNTH_FAIL_RATE_LIGHTNING       = 921, -- Amount synthesis failure rate is reduced when using a lightning crystal
+    SYNTH_FAIL_RATE_WATER           = 922, -- Amount synthesis failure rate is reduced when using a water crystal
     SYNTH_FAIL_RATE_LIGHT           = 923, -- Amount synthesis failure rate is reduced when using a light crystal
     SYNTH_FAIL_RATE_DARK            = 924, -- Amount synthesis failure rate is reduced when using a dark crystal
     SYNTH_FAIL_RATE_WOOD            = 925, -- Amount synthesis failure rate is reduced when doing woodworking
@@ -1536,6 +1543,7 @@ tpz.mod =
     SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
+    GUARD_PERCENT                   = 976, -- Guard Percent
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
@@ -1556,13 +1564,14 @@ tpz.mod =
     COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
     COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
     COVER_DURATION                  = 967, -- Increases Cover Duration
-
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
+    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 972, -- stuff
-    -- SPARE = 973, -- stuff
-    -- SPARE = 974, -- stuff
+    -- SPARE = 977, -- stuff
+    -- SPARE = 978, -- stuff
+    -- SPARE = 979, -- stuff
 }
 
 tpz.latent =
@@ -1618,7 +1627,7 @@ tpz.latent =
     FOOD_ACTIVE              = 49, -- food effect (foodId) active - PARAM: FOOD ITEMID
     JOB_LEVEL_BELOW          = 50, -- PARAM: level
     JOB_LEVEL_ABOVE          = 51, -- PARAM: level
-    WEATHER_ELEMENT          = 52, -- PARAM: 0: NONE, 1: FIRE, 2: EARTH, 3: WATER, 4: WIND, 5: ICE, 6: THUNDER, 7: LIGHT, 8: DARK
+    WEATHER_ELEMENT          = 52, -- PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND, 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
     NATION_CONTROL           = 53, -- checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
     ZONE_HOME_NATION         = 54, -- in zone and citizen of nation (aketons)
     MP_OVER                  = 55, -- mp greater than # - PARAM: MP #
@@ -2166,11 +2175,11 @@ tpz.damageType =
     HTH       = 4,
     ELEMENTAL = 5,
     FIRE      = 6,
-    EARTH     = 7,
-    WATER     = 8,
-    WIND      = 9,
-    ICE       = 10,
-    LIGHTNING = 11,
+    ICE       = 7,
+    WIND      = 8,
+    EARTH     = 9,
+    LIGHTNING = 10,
+    WATER     = 11,
     LIGHT     = 12,
     DARK      = 13,
 }
@@ -2197,8 +2206,20 @@ tpz.allegiance =
     WINDURST  = 4,
 }
 
+----------------------------------
+-- Targetting for auras relative to objtype
+----------------------------------
+
+tpz.auraTarget =
+{
+    ALLIES  = 0,
+    ENEMIES = 1,
+};
+
 ------------------------------------
 -- MOBMODs
+-- maps src/map/mob_modifier.h
+-- always edit both
 ------------------------------------
 
 tpz.mobMod =
@@ -2216,7 +2237,7 @@ tpz.mobMod =
     SUBLINK             = 10, -- sub link group
     LINK_RADIUS         = 11, -- link radius
     DRAW_IN             = 12, -- 1 - player draw in, 2 - alliance draw in -- only add as a spawn mod!
-    -- 13 Available for use
+    SEVERE_SPELL_CHANCE = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST          = 14, -- uses given mob skill list
     MUG_GIL             = 15, -- amount gil carried for mugging
     -- 16 Available for use
@@ -2227,8 +2248,8 @@ tpz.mobMod =
     PET_SPELL_LIST      = 21, -- set pet spell list
     NA_CHANCE           = 22, -- % chance to cast -na
     IMMUNITY            = 23, -- immune to set status effects. This only works from the db, not scripts
-    -- 24 Available for use
-    BUILD_RESIST        = 25, -- builds resistance to given effects -- not impl
+    GRADUAL_RAGE        = 24, -- (!) TODO: NOT YET IMPLEMENTED -- gradually rages
+    BUILD_RESIST        = 25, -- (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
     SUPERLINK           = 26, -- super link group. Only use this in mob_spawn_mods / scripts!
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.

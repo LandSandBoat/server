@@ -35,7 +35,7 @@ function onInstanceProgressUpdate(instance, progress)
     if(progress >= 10 and progress < 20) then
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif(progress == 24) then
-        local v = instance:getEntity(bit.band(ID.mob[58].NAJA, 0xFFF), tpz.objType.MOB)
+        local v = GetMobByID(ID.mob[58].NAJA, instance)
         v:setLocalVar("ready", 0)
         v:setLocalVar("Stage", 2)
 
@@ -45,7 +45,7 @@ function onInstanceProgressUpdate(instance, progress)
     elseif(progress == 48) then
         SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
 
-        local v = instance:getEntity(bit.band(ID.mob[58].NAJA, 0xFFF), tpz.objType.MOB)
+        local v = GetMobByID(ID.mob[58].NAJA, instance)
         v:setLocalVar("ready", 0)
         v:setLocalVar("Stage", 3)
 

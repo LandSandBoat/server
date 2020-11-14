@@ -1,12 +1,16 @@
+------------------------------------
+-- Dynamis
+------------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
------------------------------------
+------------------------------------
 
 dynamis = {}
 
@@ -264,7 +268,7 @@ local function arg3(player, bit)
 
     if csVar == 0 then
         return 1 + timeKI -- first time visiting any dynamis zone
-    elseif not player:getMaskBit(csVar, bit) then
+    elseif not utils.mask.getBit(csVar, bit) then
         return 2 + timeKI -- first time visiting this dynamis zone
     else
         return 3 + timeKI -- have visited this dynamis zone more than once
@@ -287,13 +291,14 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
+    local mask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
-    if info.csSand and player:getMaskBit(player:getCharVar("Dynamis_Status"), 0) then
+    if info.csSand and utils.mask.getBit(mask, 0) then
         player:startEvent(info.csSand)
 
     -- first visit cutscene
-    elseif info.csFirst and not player:getMaskBit(player:getCharVar("Dynamis_Status"), info.csBit) then
+    elseif info.csFirst and not utils.mask.getBit(mask, info.csBit) then
         player:startEvent(info.csFirst)
 
     -- victory cutscene
@@ -323,15 +328,16 @@ end
 
 dynamis.entryNpcOnEventFinish = function(player, csid, option)
     local info = entryInfo[player:getZoneID()]
+    local mask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
     if info.csSand and csid == info.csSand then
         npcUtil.giveKeyItem(player, tpz.ki.VIAL_OF_SHROUDED_SAND)
-        player:setMaskBit("Dynamis_Status", 0, false)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, 0, false))
 
     -- first visit cutscene
     elseif info.csFirst and csid == info.csFirst then
-        player:setMaskBit("Dynamis_Status", info.csBit, true)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
 
     -- victory cutscene
     elseif csid == info.csWin then
@@ -339,7 +345,7 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
 
     -- dynamis entry
     elseif csid == info.csDyna then
-        player:setMaskBit("Dynamis_Status", info.csBit, true)
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
 
         if option == 0 or option == 1 then
             player:setCharVar("Dynamis_subjob", option)

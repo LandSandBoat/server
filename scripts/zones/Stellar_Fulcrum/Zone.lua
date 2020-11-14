@@ -23,7 +23,7 @@ function onZoneIn(player, prevZone)
 
     local cs = -1
 
-    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") == 2) then
+    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") >= 0) then
         cs = 0
     end
 

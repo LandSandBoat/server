@@ -14,5 +14,10 @@ function onAbilityCheck(player, target, ability)
 end
 
 function onUseAbility(player, target, ability)
+    -- Reset the Activate ability.
+    local pet = player:getPet()
+    if pet:getHP() == pet:getMaxHP() then
+        player:resetRecast(tpz.recast.ABILITY, 205) -- activate
+    end
     target:despawnPet()
 end

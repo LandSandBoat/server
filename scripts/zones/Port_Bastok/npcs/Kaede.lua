@@ -5,10 +5,11 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos 48 -6 67 236
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/settings")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
@@ -29,7 +30,7 @@ function onTrigger(player, npc)
     local ayameKaede = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and player:getMaskBit(WildcatBastok, 0) == false) then
+    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 0)) then
         player:startEvent(352)
     elseif (ayameKaede == QUEST_AVAILABLE and player:getMainLvl() >= 30) then
         player:startEvent(240)
@@ -53,7 +54,7 @@ function onEventFinish(player, csid, option)
             player:addQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
         end
     elseif (csid == 352) then
-        player:setMaskBit(player:getCharVar("WildcatBastok"), "WildcatBastok", 0, true)
+        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 0, true))
     end
 
 end

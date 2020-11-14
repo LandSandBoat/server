@@ -21,7 +21,9 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.CAVE_HAS_BEEN_SEALED_OFF)
             player:messageSpecial(ID.text.MAY_BE_SOME_WAY_TO_BREAK)
-            player:setCharVar("miniQuestForORB_CS", 99)
+            if player:getCharVar("miniQuestForORB_CS") == 0 then -- Only set when not already active
+                player:setCharVar("miniQuestForORB_CS", 99)
+            end
         end
     end
 end

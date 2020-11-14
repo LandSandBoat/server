@@ -30,6 +30,11 @@ function onZoneIn(player, prevZone)
         cs = 30036
     end
 
+    -- San d'Oria Rank 10 Epilogue
+    if player:getCharVar("SandoEpilogue") == 1 then
+        cs = 0
+    end
+
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if NEW_CHARACTER_CUTSCENE == 1 then
@@ -66,7 +71,9 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if csid == 503 then
+    if csid == 0 then
+        player:setCharVar("SandoEpilogue", 0)
+    elseif csid == 503 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 758 then
         player:setCharVar("COP_louverance_story", 3)

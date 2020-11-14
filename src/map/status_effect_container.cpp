@@ -55,6 +55,7 @@ When a status effect is gained twice on a player. It can do one or more of the f
 #include "utils/itemutils.h"
 #include "enmity_container.h"
 #include "map.h"
+#include "notoriety_container.h"
 #include "latent_effect_container.h"
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
@@ -1034,12 +1035,18 @@ void CStatusEffectContainer::Fold(uint32 charid)
                 {
                     oldestRoll = PStatusEffect;
                 }
-                else if (oldestRoll->GetStatusID() != EFFECT_BUST && PStatusEffect->GetStatusID() == EFFECT_BUST)
+                else if (PStatusEffect->GetStatusID() == EFFECT_BUST)
                 {
-                    oldestRoll = PStatusEffect;
+                    if (oldestRoll->GetStatusID() == EFFECT_BUST)
+                    {
+                        oldestRoll = PStatusEffect->GetStartTime() > oldestRoll->GetStartTime() ? PStatusEffect : oldestRoll;
+                    }
+                    else
+                    {
+                        oldestRoll = PStatusEffect;
+                    }
                 }
-                else if (std::chrono::milliseconds(PStatusEffect->GetDuration()) + PStatusEffect->GetStartTime() <
-                    std::chrono::milliseconds(oldestRoll->GetDuration()) + oldestRoll->GetStartTime())
+                else if (oldestRoll->GetStatusID() != EFFECT_BUST && PStatusEffect->GetStartTime() > oldestRoll->GetStartTime())
                 {
                     oldestRoll = PStatusEffect;
                 }
@@ -1048,7 +1055,7 @@ void CStatusEffectContainer::Fold(uint32 charid)
     }
     if (oldestRoll != nullptr)
     {
-        DelStatusEffectSilent(oldestRoll->GetStatusID());
+        RemoveStatusEffect(oldestRoll);
         DelStatusEffectSilent(EFFECT_DOUBLE_UP_CHANCE);
     }
 }
@@ -1488,6 +1495,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 {
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    TracyZoneScoped;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1506,39 +1514,56 @@ void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 *                                                                       *
 ************************************************************************/
 
-
 void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 {
+    TracyZoneScoped;
     CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_POwner);
-    uint16 targetType = (uint16)PStatusEffect->GetTier();
+    AURATARGET auraTarget = static_cast<AURATARGET>(PStatusEffect->GetTier());
 
-    switch (targetType)
+    if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
     {
-    case ALLEGIANCE_PLAYER:
+        PEntity = PEntity->PMaster;
+    }
+
+    float aura_range = 6.25; // TODO: Add mods
+
+    if (PEntity->objtype == TYPE_PC)
     {
-        if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
+        if (auraTarget == AURATARGET_ALLIES)
         {
-            PEntity = PEntity->PMaster;
+            PEntity->ForParty([&](CBattleEntity* PMember) {
+                if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range && !PMember->isDead())
+                {
+                    CStatusEffect* PEffect = new CStatusEffect(
+                        (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                        (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                        (uint16)PStatusEffect->GetSubPower(), // Power
+                        3, // Tick
+                        4); // Duration
+                    PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                    PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                }
+            });
         }
-        PEntity->ForParty([&](CBattleEntity* PMember)
+        else if (auraTarget == AURATARGET_ENEMIES)
         {
-            if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= 6.25 && !PMember->isDead())
+            for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
             {
-                CStatusEffect* PEffect = new CStatusEffect(
-                    (EFFECT)PStatusEffect->GetSubID(), // Effect ID
-                    (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
-                    (uint16)PStatusEffect->GetSubPower(), // Power
-                    3, // Tick
-                    4); // Duration
-                PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range && !PTarget->isDead())
+                {
+                    CStatusEffect* PEffect = new CStatusEffect(
+                        (EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                        (uint16)PStatusEffect->GetSubID(), // Effect Icon (Associated with ID)
+                        (uint16)PStatusEffect->GetSubPower(), // Power
+                        3, // Tick
+                        4); // Duration
+                    PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                    PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                }
             }
-        });
+        }
     }
-    break;
-    default:
-        break;
-    }
+    // TODO: Mob Auras
 }
 
 /************************************************************************
@@ -1549,6 +1574,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
 void CStatusEffectContainer::TickEffects(time_point tick)
 {
+    TracyZoneScoped;
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())
@@ -1579,6 +1605,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
 
 void CStatusEffectContainer::TickRegen(time_point tick)
 {
+    TracyZoneScoped;
     TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())
@@ -1716,9 +1743,11 @@ bool CStatusEffectContainer::CheckForElevenRoll()
 
 bool CStatusEffectContainer::IsAsleep()
 {
-    return HasStatusEffect({EFFECT_SLEEP,
+    return HasStatusEffect({
+        EFFECT_SLEEP,
         EFFECT_SLEEP_II,
-        EFFECT_LULLABY});
+        EFFECT_LULLABY
+    });
 }
 
 void CStatusEffectContainer::WakeUp()

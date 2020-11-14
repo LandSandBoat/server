@@ -245,7 +245,11 @@ function MobMagicalMove(mob, target, skill, damage, element, dmgmod, tpeffect, t
     local resist = 1
 
     local mdefBarBonus = 0
-    if (element > 0 and element <= 6 and target:hasStatusEffect(tpz.magic.barSpell[element])) then -- bar- spell magic defense bonus
+    if
+        element >= tpz.magic.element.FIRE and
+        element <= tpz.magic.element.WATER and
+        target:hasStatusEffect(tpz.magic.barSpell[element])
+    then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[element]):getSubPower()
     end
     -- plus 100 forces it to be a number
@@ -365,7 +369,11 @@ function mobAddBonuses(caster, spell, target, dmg, ele)
     dmg = math.floor(dmg * burst)
 
     local mdefBarBonus = 0
-    if (ele > 0 and ele <= 6 and target:hasStatusEffect(tpz.magic.barSpell[ele])) then -- bar- spell magic defense bonus
+    if
+        ele >= tpz.magic.element.FIRE and
+        ele <= tpz.magic.element.WATER and
+        target:hasStatusEffect(tpz.magic.barSpell[ele])
+    then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(tpz.magic.barSpell[ele]):getSubPower()
     end
     mab = (100 + caster:getMod(tpz.mod.MATT)) / (100 + target:getMod(tpz.mod.MDEF) + mdefBarBonus)

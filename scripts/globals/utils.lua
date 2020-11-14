@@ -96,6 +96,38 @@ function utils.takeShadows(target, dmg, shadowbehav)
     return dmg
 end
 
+function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimum_percentage)
+    local final_damage = 1
+    -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
+    -- have different angles and there's a method to fetch the angle, use a line like the below
+    -- local cone_angle = skill:getConalAngle()
+    local cone_angle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
+
+    -- #TODO: Conal attacks hit targets in a cone with a center line of the "primary" target (the mob's
+    -- highest enmity target). These primary targets can be within 128 degrees of the mob's front. However,
+    -- there's currently no way for a conal skill to store (and later check) the primary target a mob skill
+    -- was trying to hit. Therefore the "damage drop off" here is based from an origin of the mob's rotation
+    -- instead. Should conal skills become capable of identifying their primary target, this should be changed
+    -- to be based on the degree difference from the primary target instead.
+    local conal_angle_power = cone_angle - math.abs(attacker:getFacingAngle(target))
+
+    if conal_angle_power < 0 then
+        -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
+        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
+        conal_angle_power = 0
+    end
+
+    -- Calculate the amount of damage to add above the minimum percentage based on how close
+    -- the target is to the center of the conal (0 degrees from the attacker's facing)
+    local minimum_damage = max_damage * minimum_percentage
+    local damage_per_angle = (max_damage - minimum_damage) / cone_angle
+    local additional_damage = damage_per_angle * conal_angle_power
+
+    final_damage = math.max(1, math.ceil(minimum_damage + additional_damage))
+
+    return final_damage
+end
+
 -- returns true if taken by third eye
 function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
@@ -394,3 +426,60 @@ function utils.hasRelic(player, relic, tier)
 
     return false
 end
+
+-- utils.mask contains functions for bitmask variables
+utils.mask =
+{
+    -- return mask's pos-th bit as bool
+    getBit = function(mask, pos)
+        return bit.band(mask, bit.lshift(1, pos)) ~= 0
+    end,
+
+    -- return value of mask after setting its pos-th bit
+    -- val can be bool or number.  if number, any non-zero value will be treated as true.
+    setBit = function(mask, pos, val)
+        local state = false
+
+        if type(val) == "boolean" then
+            state = val
+        elseif type(val) == "number" then
+            state = (val ~= 0)
+        end
+
+        if state then
+            -- turn bit on
+            return bit.bor(mask, bit.lshift(1, pos))
+        else
+            -- turn bit off
+            return bit.band(mask, bit.bnot(bit.lshift(1, pos)))
+        end
+    end,
+
+    -- return number of true bits in mask of length len
+    -- if len is omitted, assume 32
+    countBits = function(mask, len)
+        if not len then
+            len = 32
+        end
+
+        local count = 0
+
+        for i = 0, len - 1 do
+            count = count + bit.band(bit.rshift(mask, i), 1)
+        end
+
+        return count
+    end,
+
+    -- are all bits true in mask of length len?
+    -- if len is omitted, assume 32
+    isFull = function(mask, len)
+        if not len then
+            len = 32
+        end
+
+        local fullMask = ((2 ^ len) - 1)
+
+        return bit.band(mask, fullMask) == fullMask
+    end,
+}
