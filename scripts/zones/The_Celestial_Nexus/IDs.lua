@@ -14,6 +14,9 @@ zones[tpz.zone.THE_CELESTIAL_NEXUS] =
         ITEM_OBTAINED           = 6388, -- Obtained: <item>.
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> points.
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The <month> ≺year≻ Login Campaign is currently underway!
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login no. <number>...
         CONQUEST_BASE           = 7049, -- Tallying conquest results...
     },
     mob =

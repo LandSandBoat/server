@@ -16,6 +16,9 @@ zones[tpz.zone.PROMYVION_MEA] =
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY = 6402, -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> points.
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The <month> ≺year≻ Login Campaign is currently underway!
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login no. <number>...
         BARRIER_WOVEN           = 7211, -- It appears to be a barrier woven from the energy of overflowing memories...
     },
     mob =

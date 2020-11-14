@@ -16,6 +16,9 @@ zones[tpz.zone.FORT_GHELSBA] =
         GIL_OBTAINED            = 6548, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6550, -- Obtained key item: <keyitem>.
         FELLOW_MESSAGE_OFFSET   = 6576, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS     = 7158, -- You have carried over <number> points.
+        LOGIN_CAMPAIGN_UNDERWAY = 7159, -- The <month> ≺year≻ Login Campaign is currently underway!
+        LOGIN_NUMBER            = 7160, -- In celebration of your most recent login no. <number>...
         CHEST_UNLOCKED          = 7355, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL   = 7363, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
