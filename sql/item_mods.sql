@@ -25103,7 +25103,7 @@ INSERT INTO `item_mods` VALUES (20653,355,225); -- Chant du Cygne
 INSERT INTO `item_mods` VALUES (20654,9,20);    -- Almace 119 AG - DEX+20
 INSERT INTO `item_mods` VALUES (20654,256,44);  -- Aftermath
 INSERT INTO `item_mods` VALUES (20654,355,225); -- Chant du Cygne
-INSERT INTO `item_mods` VALUES (20672,981,10);  -- Ice Brand: WS INT +10%
+INSERT INTO `item_mods` VALUES (20672,983,10);  -- Ice Brand: WS INT +10%
 INSERT INTO `item_mods` VALUES (20678,954,15);  -- Firangi Berserk Duration + 15
 INSERT INTO `item_mods` VALUES (20685,23,60); -- Excalibur iLvL 119 AG - ATT +60
 INSERT INTO `item_mods` VALUES (20685,256,17); -- Aftermath
@@ -26400,7 +26400,7 @@ INSERT INTO `item_mods` VALUES (21565,311,217);   -- Tauret: Magic Damage+217
 INSERT INTO `item_mods` VALUES (21565,595,50);    -- Tauret: "Evisceration" damage +50%
 -- INSERT INTO `item_mods` VALUES (21565,,);      -- Tauret: Increases critical hit rate based with lower TP
 -- INSERT INTO `item_mods` VALUES (21565,,25);    -- Tauret: Main hand: "Evisceration"
-INSERT INTO `item_mods` VALUES (21570,980,10);    -- Air Knife: WS AGI +10%
+INSERT INTO `item_mods` VALUES (21570,982,10);    -- Air Knife: WS AGI +10%
 INSERT INTO `item_mods` VALUES (21573,25,30);     -- Assassin's Knife: Accuracy+30
 INSERT INTO `item_mods` VALUES (21573,26,30);     -- Assassin's Knife: Ranged Accuracy+30
 INSERT INTO `item_mods` VALUES (21573,30,30);     -- Assassin's Knife: Magic Accuracy+30
