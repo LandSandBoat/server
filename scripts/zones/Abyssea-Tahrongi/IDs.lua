@@ -25,6 +25,8 @@ zones[tpz.zone.ABYSSEA_TAHRONGI] =
     {
         QM_POPS =
         {
+            -- TODO: the first item, e.g. 'qm1', is unused and will be meaningless once I (Wren) finish entity-QC on all Abyssea zones.
+            -- When that is done, I will rewrite Abyssea global and adjust and neaten this table
             --  [16961954] = { 'qm1',           {2915},                                                                                                                     {}, 16961917}, -- Halimede
             --  [16961955] = { 'qm2',           {2916},                                                                                                                     {}, 16961918}, -- Vetehinen
             --  [16961956] = { 'qm3', {2917, 2945, 2946},                                                                                                                     {}, 16961919}, -- Ophanim

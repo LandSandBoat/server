@@ -1336,13 +1336,14 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
 
     -- determine type of key traded
     local keyTraded = nil
+    local isThief = player:getMainJob() == tpz.job.THF
     if npcUtil.tradeHasExactly(trade, info.key) then
         keyTraded = keyType.ZONE_KEY
-    elseif npcUtil.tradeHasExactly(trade, 1022) then
+    elseif isThief and npcUtil.tradeHasExactly(trade, 1022) then
         keyTraded = keyType.THIEF_TOOLS
-    elseif npcUtil.tradeHasExactly(trade, 1115) then
+    elseif isThief and npcUtil.tradeHasExactly(trade, 1115) then
         keyTraded = keyType.SKELETON_KEY
-    elseif npcUtil.tradeHasExactly(trade, 1023) then
+    elseif isThief and npcUtil.tradeHasExactly(trade, 1023) then
         keyTraded = keyType.LIVING_KEY
     end
 

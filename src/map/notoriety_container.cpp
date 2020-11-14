@@ -23,7 +23,7 @@
 #include "entities/mobentity.h"
 
 CNotorietyContainer::CNotorietyContainer(CBattleEntity* owner)
-    : m_POwner(owner)
+: m_POwner(owner)
 {
 }
 
@@ -44,7 +44,7 @@ void CNotorietyContainer::add(CBattleEntity* entity)
 
 void CNotorietyContainer::remove(CBattleEntity* entity)
 {
-    BattleEntitySet::iterator entity_itr = m_Lookup.find(entity);
+    auto entity_itr = m_Lookup.find(entity);
     if (entity_itr != m_Lookup.end())
     {
         m_Lookup.erase(*entity_itr);
@@ -53,16 +53,17 @@ void CNotorietyContainer::remove(CBattleEntity* entity)
 
 bool CNotorietyContainer::hasEnmity()
 {
+    TracyZoneScoped;
     // Make sure the container is up to date before reporting
     if (!m_Lookup.empty())
     {
         std::vector<CBattleEntity*> toRemove;
         for (CBattleEntity* entry : *this)
         {
-            if (CMobEntity* mob = dynamic_cast<CMobEntity*>(entry))
+            if (auto* mob = dynamic_cast<CMobEntity*>(entry))
             {
                 EnmityList_t* mobEnmityList = mob->PEnmityContainer->GetEnmityList();
-                bool notOnEnmityList = mobEnmityList->find(m_POwner->id) == mobEnmityList->end();
+                bool notOnEnmityList = mobEnmityList->find(static_cast<uint16>(m_POwner->id)) == mobEnmityList->end();
                 if ((mob->isAlive() && notOnEnmityList) || mob->isDead())
                 {
                     toRemove.emplace_back(entry);

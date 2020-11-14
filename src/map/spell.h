@@ -923,6 +923,7 @@ public:
 
     bool        canTargetEnemy();
     bool        isBuff();
+    bool        isSevere(); // damage spells that have severe effects like Death or Impact
     bool        dealsDamage(); // checks if the spell deals hp damage to target, this is relative to message
 
     uint16      getTotalTargets();

@@ -46,6 +46,7 @@ namespace conquest
 
 	void UpdateConquestSystem()
 	{
+        TracyZoneScoped;
 		zoneutils::ForEachZone([](CZone* PZone)
 		{
             //only find chars for zones that have had conquest updated
@@ -306,6 +307,7 @@ namespace conquest
 
 	void UpdateWeekConquest()
 	{
+        TracyZoneScoped;
 		//TODO: move to lobby server
 		//launch conquest message in all zone (monday server midnight)
 

@@ -13,7 +13,7 @@ on:
       - 'feature/**'
 
 jobs:
-  Linux_Build_32bit:
+  Linux_Build_Clang_64bit:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
@@ -22,31 +22,17 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7
-    - name: Build C++
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Configure CMake
       run: |
-        g++ --version
-        sh autogen.sh  "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
-        ./configure
-        make -j $(nproc)
-
-  Linux_Build_32bit_CMake:
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 0
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7 cmake
-    - name: Build C++
-      run: |
-        g++ --version
+        export CC=/usr/bin/clang
+        export CXX=/usr/bin/clang++
         cmake .
+    - name: Build
+      run: |
         make -j $(nproc)
 
-  Linux_Build_64bit:
+  Linux_Build_GCC_64bit:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
@@ -55,15 +41,17 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common g++-8 luajit-5.1-dev libzmq3-dev luarocks python3.7
-    - name: Build C++
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Configure CMake
       run: |
-        g++ --version
-        sh autogen.sh
-        ./configure "CFLAGS=-m64" "CXXFLAGS=-m64" "LDFLAGS=-m64"
+        export CC=/usr/bin/gcc
+        export CXX=/usr/bin/g++
+        CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake .
+    - name: Build
+      run: |
         make -j $(nproc)
 
-  Windows_Build_32bit:
+  Windows_Build_2019_32bit:
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -71,12 +59,17 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 0
-      - name: Build Solution
+      - name: Configure CMake
+        shell: cmd
+        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
+        run: |
+          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib/libmariadb.lib'
+      - name: Build
         shell: cmd
         run: |
-          "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=Win32
+          cmake --build .
 
-  Windows_Build_32bit_CMake:
+  Windows_Build_2019_64bit:
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -84,28 +77,18 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 0
-      - name: Build Solution
+      - name: Configure CMake
+        shell: cmd
+        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
+        run: |
+          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib64/libmariadb64.lib'
+      - name: Build
         shell: cmd
         run: |
-          cmake . -G "Visual Studio 16 2019"
-          "%MSBUILD_PATH%\MSBuild.exe" topaz.sln
-
-  Windows_Build_64bit:
-    runs-on: windows-2019
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
-      - name: Build Solution
-        shell: cmd
-        run: |
-          "%MSBUILD_PATH%\MSBuild.exe" win32/topaz.sln /property:Platform=x64
+          cmake --build .
 
   Style_Checks:
     runs-on: ubuntu-20.04
-    if: github.event_name == 'pull_request'
     steps:
     - uses: actions/checkout@v1
       with:
@@ -142,10 +125,10 @@ jobs:
         fi
 
   Full_Startup_Checks:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     services:
       mysql:
-        image: mariadb:10.1
+        image: mariadb
         env:
           MYSQL_DATABASE: tpzdb
           MYSQL_ROOT_PASSWORD: root
@@ -159,12 +142,12 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common mariadb-server-10.1 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev autoconf pkg-config zlib1g-dev libssl-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+    - name: Configure CMake
+      run: |
+        cmake .
     - name: Build Binaies
       run: |
-        g++ --version
-        sh autogen.sh
-        ./configure "CFLAGS=-m64" "CXXFLAGS=-m64" "LDFLAGS=-m64"
         make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
@@ -181,8 +164,9 @@ jobs:
         cp conf/default/* conf/
     - name: Run services (2 mins)
       env:
-        MYSQL_HOST: mydb
+        MYSQL_HOST: mysql
       run: |
+        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log

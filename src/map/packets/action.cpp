@@ -100,6 +100,8 @@ CActionPacket::CActionPacket(action_t& action)
         ref<uint8>(0x0C) = 0x1C;
         ref<uint8>(0x0D) = 0x5D;
         ref<uint8>(0x0E) = 0x19;
+
+        ActionType = ACTION_WEAPONSKILL_START;
     }
     break;
     case ACTION_MOBABILITY_FINISH:

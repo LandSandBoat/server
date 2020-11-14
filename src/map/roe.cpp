@@ -1,4 +1,4 @@
-/*
+﻿/*
  * roe.cpp
  *      Author: Kreidos | github.com/kreidos
  *
@@ -174,6 +174,7 @@ int32 ParseTimedSchedule(lua_State* L)
 
 bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload)
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled || !PChar || PChar->objtype != TYPE_PC)
     {
         return false;
@@ -419,6 +420,7 @@ void onCharLoad(CCharEntity* PChar)
 
             if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
             {
+                PChar->m_eminenceCache.notifyTimedRecord = static_cast<bool>(GetActiveTimedRecord());
                 AddActiveTimedRecord(PChar);
             }
         }
@@ -444,7 +446,12 @@ void AddActiveTimedRecord(CCharEntity* PChar)
     PChar->m_eminenceCache.activemap.set(timedRecordID);
     PChar->pushPacket(new CRoeUpdatePacket(PChar));
 
-    SetEminenceRecordCompletion(PChar, timedRecordID, false);
+    if (timedRecordID)
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED));
+        SetEminenceRecordCompletion(PChar, timedRecordID, false);
+    }
+
 }
 
 void ClearDailyRecords(CCharEntity* PChar)
@@ -475,6 +482,7 @@ void ClearDailyRecords(CCharEntity* PChar)
 
 void CycleTimedRecords()
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled)
     {
         return;
@@ -492,6 +500,7 @@ void CycleTimedRecords()
 
 void CycleDailyRecords()
 {
+    TracyZoneScoped;
     if (!RoeSystem.RoeEnabled)
     {
         return;

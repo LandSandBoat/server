@@ -7,6 +7,10 @@ local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
+function onMobSpawn(mob)
+    GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
+end
+
 function onMobEngaged(mob, target)
     local ce = mob:getCE(target)
     local ve = mob:getVE(target)
@@ -17,5 +21,5 @@ function onMobEngaged(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
-    GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar("pop", os.time() + 600) -- 10 minutes until Chandelier can be popped again
+    GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar("chandelierCooldown", os.time() + 600) -- 10 minute timeout
 end

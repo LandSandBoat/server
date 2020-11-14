@@ -1547,6 +1547,7 @@ tpz.mod =
     SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
+    GUARD_PERCENT                   = 976, -- Guard Percent
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
@@ -1572,9 +1573,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 976, -- stuff
     -- SPARE = 977, -- stuff
     -- SPARE = 978, -- stuff
+    -- SPARE = 979, -- stuff
 }
 
 tpz.latent =
@@ -2221,6 +2222,8 @@ tpz.auraTarget =
 
 ------------------------------------
 -- MOBMODs
+-- maps src/map/mob_modifier.h
+-- always edit both
 ------------------------------------
 
 tpz.mobMod =
@@ -2238,7 +2241,7 @@ tpz.mobMod =
     SUBLINK             = 10, -- sub link group
     LINK_RADIUS         = 11, -- link radius
     DRAW_IN             = 12, -- 1 - player draw in, 2 - alliance draw in -- only add as a spawn mod!
-    -- 13 Available for use
+    SEVERE_SPELL_CHANCE = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST          = 14, -- uses given mob skill list
     MUG_GIL             = 15, -- amount gil carried for mugging
     -- 16 Available for use
@@ -2249,8 +2252,8 @@ tpz.mobMod =
     PET_SPELL_LIST      = 21, -- set pet spell list
     NA_CHANCE           = 22, -- % chance to cast -na
     IMMUNITY            = 23, -- immune to set status effects. This only works from the db, not scripts
-    -- 24 Available for use
-    BUILD_RESIST        = 25, -- builds resistance to given effects -- not impl
+    GRADUAL_RAGE        = 24, -- (!) TODO: NOT YET IMPLEMENTED -- gradually rages
+    BUILD_RESIST        = 25, -- (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
     SUPERLINK           = 26, -- super link group. Only use this in mob_spawn_mods / scripts!
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.

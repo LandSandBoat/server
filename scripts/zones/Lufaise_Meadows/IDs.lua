@@ -50,7 +50,7 @@ zones[tpz.zone.LUFAISE_MEADOWS] =
     },
     npc =
     {
-        OVERSEER_BASE = 16875865,
+        OVERSEER_BASE = 16875865, -- Jemmoquel_RK in npc_list
         LOGGING       =
         {
             16875883,

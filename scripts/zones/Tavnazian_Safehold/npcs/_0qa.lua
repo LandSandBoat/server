@@ -4,6 +4,7 @@
 -- Involved in mission 2-4
 -- !pos 111 -41 41 26
 -----------------------------------
+local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -30,7 +31,11 @@ end
 
 function onEventFinish(player, csid, option)
 
-    if (csid == 104 or csid == 111) then
+    if csid == 104 then
+        player:setCharVar("PromathiaStatus", 1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTERIOUS_AMULET_DRAINED)
+        player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET_DRAINED)
+    elseif csid == 111 then
         player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 115) then
         player:setCharVar("PromathiaStatus", 0)

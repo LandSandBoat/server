@@ -47,6 +47,10 @@ end
 function onEventFinish(player, csid, option)
     if csid == 50 then
         player:setCharVar("PromathiaStatus", 1)
+        player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET_DRAINED)
+        player:addKeyItem(tpz.ki.LIGHT_OF_VAHZL)
+        player:messageSpecial(ID.text.AMULET_RETURNED, tpz.ki.MYSTERIOUS_AMULET)
+        player:messageSpecial(ID.text.LIGHT_OF_VAHZL, tpz.ki.LIGHT_OF_VAHZL)
     elseif csid == 45 and option == 1 then
         player:setPos(-379.947, 48.045, 334.059, 192, 9) -- To Pso'Xja {R}
     end
