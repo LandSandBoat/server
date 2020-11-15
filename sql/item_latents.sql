@@ -78,14 +78,9 @@ INSERT INTO `item_latents` VALUES(10975, 25, 13, 52, 8);   -- DARK WEATHER:ACC
 INSERT INTO `item_latents` VALUES(10975, 23, 13, 52, 8);   -- DARK WEATHER:ATT
 
 -- -------------------------------------------------------
--- Eerie Cloak +1
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(11300, 369, 1, 40, 0);    -- Level multiple of 13 and Nighttime: Refresh +1MP/tick
-
--- -------------------------------------------------------
 -- Eerie cloak +1
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(11301, 369, 1, 40, 0);    -- Refresh+1 at night when the level of the player's main job is a multiple of 13.
+INSERT INTO `item_latents` VALUES(11301, 369, 1, 39, 13);    -- Refresh+1 at night when the level of the player's main job is a multiple of 13.
 
 -- -------------------------------------------------------
 -- Rambler's Cloak
@@ -1742,14 +1737,14 @@ INSERT INTO `item_latents` VALUES(15784, 5, 30, 8, 3);      -- MP+30 when WHM su
 -- -------------------------------------------------------
 -- Divisor Ring (Active when level is divisible by 5)
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(15786, 23, 3, 38, 0);     -- Attack+3
-INSERT INTO `item_latents` VALUES(15786, 25, 6, 38, 0);     -- Accuracy+6
+INSERT INTO `item_latents` VALUES(15786, 23, 3, 38, 5);     -- Attack+3
+INSERT INTO `item_latents` VALUES(15786, 25, 6, 38, 5);     -- Accuracy+6
 
 -- -------------------------------------------------------
 -- Multiple Ring (Active when level is a multiple of 10)
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(15790, 1, 50, 39, 0);     -- HP+50
-INSERT INTO `item_latents` VALUES(15790, 5, 20, 39, 0);     -- MP+20
+INSERT INTO `item_latents` VALUES(15790, 1, 50, 38, 10);     -- HP+50
+INSERT INTO `item_latents` VALUES(15790, 5, 20, 38, 10);     -- MP+20
 
 -- -------------------------------------------------------
 -- Balrahn's Ring
@@ -1877,8 +1872,8 @@ INSERT INTO `item_latents` VALUES(16071, 165, 5, 13, 5);
 -- -------------------------------------------------------
 -- Coven Hat
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES(16076, 3, 3, 41, 0);      -- HP+3% is active when your current job level is odd.
-INSERT INTO `item_latents` VALUES(16076, 6, 3, 42, 0);      -- MP+3% is active when your current job level is even.
+INSERT INTO `item_latents` VALUES(16076, 3, 3, 38, 0);      -- HP+3% is active when your current job level is odd.
+INSERT INTO `item_latents` VALUES(16076, 6, 3, 38, 2);      -- MP+3% is active when your current job level is even.
 
 -- -------------------------------------------------------
 -- Mamool Ja Helm Latent Effect is active in Mamook, Arrapago Reef, and Halvung
@@ -2947,6 +2942,12 @@ INSERT INTO `item_latents` VALUES(18771, 23, 1, 16, 6);     -- ATT +1~4, party s
 INSERT INTO `item_latents` VALUES(18850, 23, 14, 6, 1000);  -- Attack+14 while TP <100%
 INSERT INTO `item_latents` VALUES(18850, 25, 5, 6, 1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES(18850, 366, 5, 6, 1000);  -- DMG+5 while TP <100%
+
+-- -------------------------------------------------------
+-- Octave Club
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(18852, 978, 2, 38, 2);    -- Occasionally attacks 2 times when mjob multiple of 2
+INSERT INTO `item_latents` VALUES(18852, 978, 6, 38, 8);    -- Occasionally attacks 2 to 8 times when mjob multiple of 8
 
 -- -------------------------------------------------------
 -- Kerykeion
