@@ -48,6 +48,68 @@ void SaveEminenceDataNice(CCharEntity* PChar)
     }
 }
 
+void call_onRecordTrigger(lua_State* L, CCharEntity* PChar, uint16 recordID, const RoeDatagramList& payload)
+{
+    uint32 stackTop = lua_gettop(L);
+
+    lua_getfield(L, -1, "onRecordTrigger");
+    if (lua_isnil(L, -1))
+    {
+        lua_settop(L, stackTop);
+        ShowError("roeutils::onRecordTrigger: unexpected lua stack state during call for record %d.", recordID);
+        return;
+    }
+
+    uint8 args { 0 };
+
+    CLuaBaseEntity LuaAllyEntity(PChar);
+    Lunar<CLuaBaseEntity>::push(L, &LuaAllyEntity);
+    args++;
+
+    // Record #
+    lua_pushinteger(L, recordID);
+    args++;
+
+    // param table
+    lua_newtable(L);
+    args++;
+
+    lua_pushinteger(L, roeutils::GetEminenceRecordProgress(PChar, recordID));
+    lua_setfield(L, -2, "progress");
+
+    for (auto& datagram : payload)  // Append datagrams to param table
+    {
+        lua_pushstring(L, datagram.luaKey.c_str());
+        if (auto value = std::get_if<uint32>(&datagram.data))
+        {
+            lua_pushinteger(L, *value);
+        }
+        else if (auto PMob = std::get_if<CMobEntity*>(&datagram.data))
+        {
+            CLuaBaseEntity LuaMobEntity(*PMob);
+            Lunar<CLuaBaseEntity>::push(L, &LuaMobEntity);
+        }
+        else if (auto text = std::get_if<std::string>(&datagram.data))
+        {
+            lua_pushstring(L, text->c_str());
+        }
+        else
+        {
+            lua_pushnil(L);
+            ShowWarning("roeutils::onRecordTrigger: Unhandled payload type for '%s' with record #%d.", datagram.luaKey, recordID);
+        }
+        lua_settable(L, -3);
+    }
+
+    if (lua_pcall(L, args, 0, 0))
+    {
+        ShowError("roeutils::onRecordTrigger: %s\n", lua_tostring(L, -1));
+        lua_pop(L, 1);
+    }
+
+    lua_settop(L, stackTop);
+}
+
 namespace roeutils
 {
 void init()
@@ -71,6 +133,7 @@ int32 ParseRecords(lua_State* L)
     RoeHandlers.fill(RoeCheckHandler());
     roeutils::RoeSystem.ImplementedRecords.reset();
     roeutils::RoeSystem.RepeatableRecords.reset();
+    roeutils::RoeSystem.RetroactiveRecords.reset();
     roeutils::RoeSystem.DailyRecords.reset();
     roeutils::RoeSystem.DailyRecordIDs.clear();
     roeutils::RoeSystem.NotifyThresholds.fill(1);
@@ -127,6 +190,10 @@ int32 ParseRecords(lua_State* L)
                 else if (flag == "repeat")
                 {
                     roeutils::RoeSystem.RepeatableRecords.set(recordID);
+                }
+                else if (flag == "retro")
+                {
+                    roeutils::RoeSystem.RetroactiveRecords.set(recordID);
                 }
                 else
                 {
@@ -197,51 +264,9 @@ bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload
     for (int i = 0; i < 31; i++)
     {
         // Check record is of this type
-        if (handler.bitmap.test(PChar->m_eminenceLog.active[i]))
+        if (uint16 recordID = PChar->m_eminenceLog.active[i]; handler.bitmap.test(recordID))
         {
-            lua_getfield(L, -1, "onRecordTrigger");
-            uint8 args { 0 };
-
-            CLuaBaseEntity LuaAllyEntity(PChar);
-            Lunar<CLuaBaseEntity>::push(L, &LuaAllyEntity);
-            args++;
-
-            // Record #
-            lua_pushinteger(L, PChar->m_eminenceLog.active[i]);
-            args++;
-
-            // param table
-            lua_newtable(L);
-            args++;
-
-            lua_pushinteger(L, PChar->m_eminenceLog.progress[i]);
-            lua_setfield(L, -2, "progress");
-
-            for (auto& datagram : payload)  // Append datagrams to param table
-            {
-                lua_pushstring(L, datagram.luaKey.c_str());
-                switch (datagram.type)
-                {
-                case RoeDatagramPayload::mob:
-                {
-                    CLuaBaseEntity LuaMobEntity(datagram.data.mobEntity);
-                    Lunar<CLuaBaseEntity>::push(L, &LuaMobEntity);
-                    break;
-                }
-                case RoeDatagramPayload::uinteger:
-                {
-                    lua_pushinteger(L, datagram.data.uinteger);
-                    break;
-                }
-                }
-                lua_settable(L, -3);
-            }
-
-            if (lua_pcall(L, args, 0, 0))
-            {
-                ShowError("roeutils::onRecordTrigger: %s\n", lua_tostring(L, -1));
-                lua_pop(L, 1);
-            }
+            call_onRecordTrigger(L, PChar, recordID, payload);
         }
     }
     lua_settop(L, stackTop);
@@ -425,6 +450,35 @@ void onCharLoad(CCharEntity* PChar)
             }
         }
     }
+}
+
+void onRecordTake(CCharEntity* PChar, uint16 recordID)
+{
+    if (RoeSystem.RetroactiveRecords.test(recordID))
+    {
+        lua_State* L = luautils::LuaHandle;
+        uint32 stackTop = lua_gettop(L);
+        lua_getglobal(L, "tpz");
+        lua_getfield(L, -1, "roe");
+        call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{});
+        lua_settop(L, stackTop);
+    }
+    return;
+}
+
+bool onRecordClaim(CCharEntity* PChar, uint16 recordID)
+{
+    if (roeutils::HasEminenceRecord(PChar, recordID))
+    {
+        lua_State* L = luautils::LuaHandle;
+        uint32 stackTop = lua_gettop(L);
+        lua_getglobal(L, "tpz");
+        lua_getfield(L, -1, "roe");
+        call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{RoeDatagram("claim", 1)});
+        lua_settop(L, stackTop);
+        return true;
+    }
+    return false;
 }
 
 uint16 GetActiveTimedRecord()

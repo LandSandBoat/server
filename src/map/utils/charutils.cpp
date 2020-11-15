@@ -3843,6 +3843,7 @@ namespace charutils
                 PChar->pushPacket(new CCharStatsPacket(PChar));
 
                 luautils::OnPlayerLevelUp(PChar);
+                roeutils::event(ROE_EVENT::ROE_LEVELUP, PChar, RoeDatagramList{});
                 PChar->updatemask |= UPDATE_HP;
                 return;
             }

@@ -8,13 +8,13 @@ local checks = tpz.roe.checks
 local timedSchedule = {
 -- 4-hour timeslots (6 per day) all days/times are in JST
 --    00-04  04-08  08-12  12-16  16-20  20-00
-    {     0,  4010,  4016,  4012,  4018,  4013}, -- Sunday
+    {  4021,  4010,  4016,  4012,  4018,  4013}, -- Sunday
     {  4015,  4011,  4017,  4014,  4019,  4008}, -- Monday
-    {  4016,  4012,  4018,  4013,     0,  4009}, -- Tuesday
-    {  4017,  4014,  4019,  4008,     0,  4010}, -- Wednesday
-    {  4018,  4013,     0,  4009,  4015,  4011}, -- Thursdsay
-    {  4019,  4008,     0,  4010,  4016,  4012}, -- Friday
-    {     0,  4009,  4015,  4011,  4017,  4014}, -- Saturday
+    {  4016,  4012,  4018,  4013,  4020,  4009}, -- Tuesday
+    {  4017,  4014,  4019,  4008,  4021,  4010}, -- Wednesday
+    {  4018,  4013,  4020,  4009,  4015,  4011}, -- Thursdsay
+    {  4019,  4008,  4021,  4010,  4016,  4012}, -- Friday
+    {  4020,  4009,  4015,  4011,  4017,  4014}, -- Saturday
 }
 -- Load timetable for timed records
 if ENABLE_ROE_TIMED and ENABLE_ROE_TIMED > 0 then
@@ -26,7 +26,11 @@ local defaults = {
     increment = 1,              -- Amount to increment per successful check
     notify = 1,                 -- Progress notifications shown every X increases
     goal = 1,                   -- Progress goal
-    flags = {},                 -- Special flags. Possible values: "timed" "repeat" "daily"
+    flags = {},                 -- Special flags. This should be a set. Possible values: 
+                                --        "timed"  - 4-hour record.
+                                --        "repeat" - Repeatable record.
+                                --        "daily"  - Daily record.
+                                --        "retro"  - Can be claimed retroactively. Calls check on taking record.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
 }
@@ -111,6 +115,197 @@ tpz.roe.records =
         reward =  { sparks = 200, xp = 300, item = { 10140 }  }
     },
     ]]
+
+  ----------------------------------------
+  -- Tutorial -> Quests 1               --
+  ----------------------------------------
+
+    [ 501] = { -- Mog House Exit: Bastok
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+    
+  ----------------------------------------
+  -- Tutorial -> Level Cap Increase     --
+  ----------------------------------------
+
+    [ 705] = { -- Level Cap Increase: 55
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 706] = { -- Level Cap Increase: 60
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 707] = { -- Level Cap Increase: 65
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 708] = { -- Level Cap Increase: 70
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 709] = { -- Level Cap Increase: 75
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 710] = { -- Level Cap Increase: 80
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 711] = { -- Level Cap Increase: 85
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 712] = { -- Level Cap Increase: 90
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 713] = { -- Level Cap Increase: 95
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 714] = { -- Level Cap Increase: 99
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+    
+  ----------------------------------------
+  -- Tutorial -> Storage Expansion      --
+  ----------------------------------------
+
+    [ 715] = { -- Inventory Expansion 35
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_I} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 716] = { -- Inventory Expansion 40
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_II} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 717] = { -- Inventory Expansion 45
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_III} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 718] = { -- Inventory Expansion 50
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IV} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 719] = { -- Inventory Expansion 55
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_V} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 720] = { -- Inventory Expansion 60
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VI} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 721] = { -- Inventory Expansion 65
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VII} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 722] = { -- Inventory Expansion 70
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 723] = { -- Inventory Expansion 75
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IX} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+    [ 724] = { -- Inventory Expansion 80
+        trigger = triggers.questComplete,
+        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_X} },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 300 },
+    },
+
+  ----------------------------------------
+  -- Tutorial -> Missions (Bastok)      --
+  ----------------------------------------
+
+    [1333] = { -- Bastok Rank 1-1
+        trigger = triggers.missionComplete,
+        reqs = { missionComplete = {BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT} },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500 },
+    },
+
+    [1334] = { -- Bastok Rank 1-2
+        trigger = triggers.missionComplete,
+        reqs = { missionComplete = {BASTOK, tpz.mission.id.bastok.A_GEOLOGICAL_SURVEY} },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500 },
+    },
+
+    [1335] = { -- Bastok Rank 1-3
+        trigger = triggers.missionComplete,
+        reqs = { missionComplete = {BASTOK, tpz.mission.id.bastok.FETICHISM} },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500 },
+    },
+
+    [1336] = { -- Bastok Rank 2-1
+        trigger = triggers.missionComplete,
+        reqs = { missionComplete = {BASTOK, tpz.mission.id.bastok.THE_CRYSTAL_LINE} },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500 },
+    },
 
   --------------------------------------------
   -- Combat (Wide Area) -> Combat (General) --
@@ -261,6 +456,51 @@ tpz.roe.records =
                 return false
             end
     },
+    
+    [  31] = { -- Total Healing I
+        trigger = triggers.healAlly,
+        goal = 10000,
+        increment = 0,
+        notify = 500,
+        reward = { sparks = 1000, xp = 2500, item = { 6182 } },
+        check = function(self, player, params)
+                if params.heal and params.heal > 0 then
+                    params.progress = params.progress + params.heal
+                    return true
+                end
+                return false
+            end
+    },
+    
+    [  32] = { -- Total Healing II
+        trigger = triggers.healAlly,
+        goal = 20000,
+        increment = 0,
+        notify = 1000,
+        reward = { sparks = 3000, xp = 7000, item = { 6185 } },
+        check = function(self, player, params)
+                if params.heal and params.heal > 0 then
+                    params.progress = params.progress + params.heal
+                    return true
+                end
+                return false
+            end
+    },
+
+    [ 699] = { -- Total Healing III
+        trigger = triggers.healAlly,
+        goal = 30000,
+        increment = 0,
+        notify = 1000,
+        reward = { sparks = 3000, xp = 7000, item = { 6185 } },
+        check = function(self, player, params)
+                if params.heal and params.heal > 0 then
+                    params.progress = params.progress + params.heal
+                    return true
+                end
+                return false
+            end
+    },
 
     [  33] = { -- Total Damage Taken I
         trigger = triggers.dmgTaken,
@@ -311,6 +551,20 @@ tpz.roe.records =
         trigger = triggers.wSkillUse,
         goal = 100,
         reward = { sparks = 500, xp = 2500 },
+    },
+
+    [ 488] = { -- Heal for 500+ HP
+        trigger = triggers.healAlly,
+        goal = 100,
+        reqs = { healMin = 500 },
+        reward = { sparks = 2000, xp = 6000 },
+    },
+
+    [ 700] = { -- Heal for 750+ HP
+        trigger = triggers.healAlly,
+        goal = 100,
+        reqs = { healMin = 750 },
+        reward = { sparks = 3000, xp = 7000, item = { 6183 } },
     },
 
   --------------------------------------------
@@ -2135,6 +2389,178 @@ tpz.roe.records =
   ----------------------------------------
   -- Combat (Region) - Escha 2          --
   ----------------------------------------
+  
+  ----------------------------------------
+  -- Achievements - Job Levels I        --
+  ----------------------------------------
+
+    [1200] = { -- Level 30 Warrior
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WAR, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6152, 12} } },
+    },
+
+    [1201] = { -- Level 50 Warrior
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WAR, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6151, 12} } },
+    },
+
+    [1202] = { -- Level 75 Warrior
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WAR, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3190, 4} } },
+    },
+
+    [1203] = { -- Level 99 Warrior
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WAR, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
+    },
+
+    [1204] = { -- Level 30 Monk
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.MNK, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6147, 12} } },
+    },
+
+    [1205] = { -- Level 50 Monk
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.MNK, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
+    },
+
+    [1206] = { -- Level 75 Monk
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.MNK, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3191, 4} } },
+    },
+
+    [1207] = { -- Level 99 Monk
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.MNK, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
+    },
+
+    [1208] = { -- Level 30 White Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WHM, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6167, 12} } },
+    },
+
+    [1209] = { -- Level 50 White Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WHM, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6166, 12} } },
+    },
+
+    [1210] = { -- Level 75 White Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WHM, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3192, 4} } },
+    },
+
+    [1211] = { -- Level 99 White Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.WHM, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
+    },
+
+    [1212] = { -- Level 30 Black Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.BLM, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6170, 12} } },
+    },
+
+    [1213] = { -- Level 50 Black Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.BLM, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6171, 12} } },
+    },
+
+    [1214] = { -- Level 75 Black Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.BLM, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3193, 4} } },
+    },
+
+    [1215] = { -- Level 99 Black Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.BLM, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
+    },
+
+    [1216] = { -- Level 30 Red Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.RDM, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6169, 12} } },
+    },
+
+    [1217] = { -- Level 50 Red Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.RDM, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6168, 12} } },
+    },
+
+    [1218] = { -- Level 75 Red Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.RDM, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3194, 4} } },
+    },
+
+    [1219] = { -- Level 99 Red Mage
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.RDM, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
+    },
+
+    [1220] = { -- Level 30 Thief
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.THF, 30 } },
+        flags = set{"retro"},
+        reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
+    },
+
+    [1221] = { -- Level 50 Thief
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.THF, 50 } },
+        flags = set{"retro"},
+        reward = { sparks = 200, xp = 500, item = { {6149, 12} } },
+    },
+
+    [1222] = { -- Level 75 Thief
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.THF, 75 } },
+        flags = set{"retro"},
+        reward = { sparks = 300, xp = 500, item = { {3195, 4} } },
+    },
+
+    [1223] = { -- Level 99 Thief
+        trigger = triggers.levelUp,
+        reqs = { jobLvl = { tpz.job.THF, 99 } },
+        flags = set{"retro"},
+        reward = { sparks = 400, xp = 500, item = { {4069, 2} } },
+    },
 
   ----------------------------------------
   -- Other - Daily Objectives           --
@@ -2146,6 +2572,21 @@ tpz.roe.records =
         reqs = { mobXP = true },
         flags = set{"daily"},
         reward = { sparks = 100, xp = 500, unity = 300, item = { 8711 } },
+    },
+
+    [4083] = { -- Buff Allies (D)
+        trigger = triggers.buffAlly,
+        goal = 20,
+        flags = set{"daily"},
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+    },
+
+    [4084] = { -- Heal for 500+ HP (D)
+        trigger = triggers.healAlly,
+        goal = 100,
+        reqs = { healMin = 500 },
+        flags = set{"daily"},
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
 
@@ -2254,8 +2695,21 @@ tpz.roe.records =
         reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
     },
 
-    -- [4020] = {  -- Physical Damage Kills
-    -- [4021] = {  -- Magic Damage Kills
+    [4020] = {  -- Physical Damage Kills
+        trigger = triggers.mobKill,
+        goal = 20,
+        reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL },
+        flags = set{"timed", "repeat"},
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+    },
+
+    [4021] = {  -- Magic Damage Kills
+        trigger = triggers.mobKill,
+        goal = 20,
+        reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL },
+        flags = set{"timed", "repeat"},
+        reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+    },
 }
 
 

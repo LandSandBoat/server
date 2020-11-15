@@ -6398,8 +6398,10 @@ void SmallPacket0x10C(map_session_data_t* session, CCharEntity* PChar, CBasicPac
     TracyZoneScoped;
     if (roeutils::RoeSystem.RoeEnabled)
     {
-        roeutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
+        uint16 recordID = data.ref<uint32>(0x04);
+        roeutils::AddEminenceRecord(PChar, recordID);
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+        roeutils::onRecordTake(PChar, recordID);
     }
     return;
 }
@@ -6419,6 +6421,22 @@ void SmallPacket0x10D(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     }
     return;
+}
+
+/************************************************************************
+*                                                                        *
+*  Claim completed eminence record                                       *
+*                                                                        *
+************************************************************************/
+
+void SmallPacket0x10E(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
+{
+    TracyZoneScoped;
+    if (roeutils::RoeSystem.RoeEnabled)
+    {
+        uint16 recordID = data.ref<uint16>(0x04);
+        roeutils::onRecordClaim(PChar, recordID);
+    }
 }
 
 /************************************************************************
@@ -6701,6 +6719,7 @@ void PacketParserInitialize()
     PacketSize[0x10B] = 0x00; PacketParser[0x10B] = &SmallPacket0x10B;
     PacketSize[0x10C] = 0x04; PacketParser[0x10C] = &SmallPacket0x10C;
     PacketSize[0x10D] = 0x04; PacketParser[0x10D] = &SmallPacket0x10D;
+    PacketSize[0x10E] = 0x04; PacketParser[0x10E] = &SmallPacket0x10E;
     PacketSize[0x10F] = 0x02; PacketParser[0x10F] = &SmallPacket0x10F;
     PacketSize[0x110] = 0x0A; PacketParser[0x110] = &SmallPacket0x110;
     PacketSize[0x111] = 0x00; PacketParser[0x111] = &SmallPacket0x111; // Lock Style Request
