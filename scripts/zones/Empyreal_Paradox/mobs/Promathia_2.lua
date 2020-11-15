@@ -17,7 +17,7 @@ end
 function onMobSpawn(mob)
     local battlefield = mob:getBattlefield()
     if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2):isDead() then
-       battlefield:setLocalVar("phaseChange", 0)
+        battlefield:setLocalVar("phaseChange", 0)
     end
 end
 

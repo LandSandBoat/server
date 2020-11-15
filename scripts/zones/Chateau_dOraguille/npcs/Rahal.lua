@@ -33,7 +33,7 @@ function onTrigger(player, npc)
     elseif CrestProgress == 5 and RemedyKI == true then
         player:startEvent(122) -- Reminder to go to Gelsba
 
-     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
+    -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
         player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
         Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG

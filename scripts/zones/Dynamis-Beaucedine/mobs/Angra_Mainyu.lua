@@ -33,12 +33,12 @@ function onMonsterMagicPrepare(mob, target)
     else
         -- Can cast Blindga, Death, Graviga, Silencega, and Sleepga II.
         -- Casts Graviga every time before he teleports.
-        rnd = math.random()
+        local rnd = math.random()
 
         if rnd < 0.2 then
             return 361 -- Blindga
         elseif rnd < 0.4 then
-             return 244 -- Death
+            return 244 -- Death
         elseif rnd < 0.6 then
             return 366 -- Graviga
         elseif rnd < 0.8 then

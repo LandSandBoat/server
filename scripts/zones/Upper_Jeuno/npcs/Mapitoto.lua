@@ -32,7 +32,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    local fsaQuest = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD) 
+    local fsaQuest = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
 
     if fsaQuest == QUEST_COMPLETED then
@@ -42,9 +42,9 @@ function onTrigger(player,npc)
     elseif fsaQuest == QUEST_ACCEPTED then -- Retry
         player:startEvent(10224, 1)
     elseif
-      player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) and
-      player:getMainLvl() >= 20 and
-      player:hasKeyItem(tpz.ki.MAP_OF_THE_JEUNO_AREA)
+        player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) and
+        player:getMainLvl() >= 20 and
+        player:hasKeyItem(tpz.ki.MAP_OF_THE_JEUNO_AREA)
     then
         player:startEvent(10223, 0, 0, 4)
     else

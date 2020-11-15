@@ -52,10 +52,12 @@ function onTrigger(player, npc)
     end
 
     if expertQuestStatus == 550 then
-        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
-              possibly be due to an unimplemented packet or function (display recipe?) Work
-              around to present dialog to player to let them know the trade is ready to be
-              received by triggering with lower rank up parameters.  ]]--
+        --[[
+        Feeding the proper parameter currently hangs the client in cutscene. This may
+        possibly be due to an unimplemented packet or function (display recipe?) Work
+        around to present dialog to player to let them know the trade is ready to be
+        received by triggering with lower rank up parameters.
+        --]]
         player:showText(npc, 7062)
         player:showText(npc, 7064)
         player:startEvent(621, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)

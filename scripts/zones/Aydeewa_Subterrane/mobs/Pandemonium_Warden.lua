@@ -31,7 +31,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.MDEF, 50)
     -- Make sure model is reset back to start
     mob:setModelId(1840)
-   -- Prevent death and hide HP until final phase
+    -- Prevent death and hide HP until final phase
     mob:setUnkillable(true)
     mob:hideHP(true)
 

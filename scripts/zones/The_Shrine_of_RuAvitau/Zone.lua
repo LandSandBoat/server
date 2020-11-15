@@ -41,11 +41,11 @@ function onInitialize(zone)
 end
 
 function onZoneIn(player, prevZone)
-   local cs = -1
-   local xPos = player:getXPos()
-   local yPos = player:getYPos()
-   local zPos = player:getZPos()
-   local ZilartMission = player:getCurrentMission(ZILART)
+    local cs = -1
+    local xPos = player:getXPos()
+    local yPos = player:getYPos()
+    local zPos = player:getZPos()
+    local ZilartMission = player:getCurrentMission(ZILART)
 
     -- Checked here to be fair to new players
     local DMEarrings = 0
@@ -56,9 +56,13 @@ function onZoneIn(player, prevZone)
     end
 
     -- ZM 15 -> ZM 16
-    if (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and player:getCharVar("ZilartStatus") == 1 and
-    xPos >= -45 and yPos >= -4 and zPos >= -240 and
-    xPos <= -33 and yPos <= 0 and zPos <= -226 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then -- Entered through main gate
+    if
+        ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and
+        player:getCharVar("ZilartStatus") == 1 and
+        xPos >= -45 and yPos >= -4 and zPos >= -240 and
+        xPos <= -33 and yPos <= 0 and zPos <= -226 and
+        DMEarrings <= NUMBER_OF_DM_EARRINGS
+    then -- Entered through main gate
         cs = 51
     end
 
@@ -66,7 +70,7 @@ function onZoneIn(player, prevZone)
         player:setPos(-3.38, 46.326, 60, 122)
     end
 
-   return cs
+    return cs
 end
 
 function onConquestUpdate(zone, updatetype)

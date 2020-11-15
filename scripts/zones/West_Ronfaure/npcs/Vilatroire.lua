@@ -23,7 +23,7 @@ function onTrigger(player, npc)
     local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
     if questIntroToTeamwork == QUEST_AVAILABLE and sandyFame >= 2 then
-         player:startEvent(135) -- Starts first quest - 6 members same alliance
+        player:startEvent(135) -- Starts first quest - 6 members same alliance
     elseif questIntroToTeamwork == QUEST_AVAILABLE and sandyFame < 2 then
         player:startEvent(134) -- You don't have the requirements to start the first quest
     elseif questIntroToTeamwork == QUEST_ACCEPTED then
@@ -108,7 +108,7 @@ function onEventUpdate(player, csid, option)
                     player:setLocalVar("intermedTmwrk_pass", 1)
                     player:updateEvent(15, 2) -- race requirements met
                 else
-                    
+
                     player:updateEvent(4) -- not the same race
                 end
             elseif questAdvancedTeamwork == QUEST_ACCEPTED then

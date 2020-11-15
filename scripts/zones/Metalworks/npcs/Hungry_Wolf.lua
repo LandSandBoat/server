@@ -14,16 +14,17 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE and
-      trade:hasItemQty(4395, 1) and trade:getItemCount() == 1) then
+    if
+        player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE and
+        trade:hasItemQty(4395, 1) and
+        trade:getItemCount() == 1
+    then
         player:startEvent(429)
     end
---]]
 end
 
 function onTrigger(player, npc)
-
- local SmokeOnTheMountain = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+    local SmokeOnTheMountain = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
 
     if (SmokeOnTheMountain == QUEST_AVAILABLE) then
         player:startEvent(428)

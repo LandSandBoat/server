@@ -25,11 +25,11 @@ function onTrigger(player, npc)
         haveimperialIDtag = 0
     end
 
---[[    if (rank > 0) then
+    --[[if (rank > 0) then
         player:startEvent(277, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(283) -- no rank
-   -- end
+    -- end
 end
 
 function onEventUpdate(player, csid, option)
