@@ -14,8 +14,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if not OldSchoolG2 or GetMobByID(ID.mob.BOREAL_TIGER):isDead() then
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) then
+    if not OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_TIGER):isDead() then
+        if
+            not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) and
+            player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+        then
             player:addKeyItem(tpz.ki.ROUND_FRIGICITE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ROUND_FRIGICITE)
         else

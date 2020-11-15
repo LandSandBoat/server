@@ -12,17 +12,20 @@ require("scripts/globals/quests")
 
 function onMobSpawn(mob)
     -- Failsafe to make sure NPC is down when NM is up
-    if OldSchoolG2 then
+    if OLDSCHOOL_G2 then
         GetNPCByID(ID.npc.BOREAL_TIGER_QM):showNPC(0)
     end
 end
 
 function onMobDeath(mob, player, isKiller)
-    if OldSchoolG2 then
+    if OLDSCHOOL_G2 then
         -- show ??? for desired duration
         -- notify people on the quest who need the KI
-        GetNPCByID(ID.npc.BOREAL_TIGER_QM):showNPC(FrigiciteDuration)
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) then
+        GetNPCByID(ID.npc.BOREAL_TIGER_QM):showNPC(FRIGICITE_TIME)
+        if
+            not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) and
+            player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+        then
             player:messageSpecial(ID.text.BLOCKS_OF_ICE)
         end
     end
