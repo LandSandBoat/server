@@ -14,7 +14,7 @@ target_link_libraries(ai
     common
     entities
     items
-    lua
+    lua_bindings
     packets
     utils
     ai_controllers

@@ -145,7 +145,7 @@ UpgradeLog*.XML
 /autom4te.cache
 /compile
 /configure
-**/config.*
+/config.*
 /depcomp
 /missing
 /install-sh

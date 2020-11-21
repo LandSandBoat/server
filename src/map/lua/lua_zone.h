@@ -23,7 +23,7 @@
 #define _LUAZONE_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CZone;
 class CLuaZone

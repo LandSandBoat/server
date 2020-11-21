@@ -138,7 +138,7 @@ target_link_libraries(topaz_game
     ai
     entities
     items
-    lua
+    lua_bindings
     packets
     utils
     project_options

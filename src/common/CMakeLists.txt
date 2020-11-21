@@ -29,20 +29,22 @@ set(SOURCES
 add_subdirectory(detour)
 add_subdirectory(fmt)
 add_subdirectory(lua)
+add_subdirectory(lunar)
 add_subdirectory(recast)
 
 add_library(common STATIC ${SOURCES})
 
 target_link_libraries(
-  common
-  PUBLIC
-  detour
-  fmt
-  lua_lib
-  recast
-  project_options
-  # project_warnings
-  )
+    common
+    PUBLIC
+    detour
+    fmt
+    lua_lib
+    lunar
+    recast
+    project_options
+    # project_warnings
+)
  
 if(TRACY_ENABLE)
     target_link_libraries(common PUBLIC tracy_client)

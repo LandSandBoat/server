@@ -42,7 +42,7 @@ target_link_libraries(utils
     ai
     entities
     items
-    lua
+    lua_bindings
     packets
     project_options
     #project_warnings

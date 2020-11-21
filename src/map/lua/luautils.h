@@ -23,11 +23,15 @@
 #define _LUAUTILS_H
 
 #include <optional>
+
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
 #include "../../common/taskmgr.h"
+#include "../../common/lua/lua.hpp"
+#include "../../common/lunar/lunar.h"
+
 #include "../items/item_equipment.h"
 #include "../spell.h"
+
 #include "lua_ability.h"
 #include "lua_baseentity.h"
 #include "lua_mobskill.h"
@@ -66,6 +70,20 @@ class CItemFurnishing;
 class CInstance;
 class CWeaponSkill;
 class CZone;
+
+class CLuaAbility;
+class CLuaAction;
+class CLuaBaseEntity;
+class CLuaBattlefield;
+class CLuaInstance;
+class CLuaItem;
+class CLuaMobSkill;
+class CLuaRegion;
+class CLuaSpell;
+class CLuaStatusEffect;
+class CLuaTradeContainer;
+class CLuaZone;
+
 struct action_t;
 struct actionList_t;
 struct actionTarget_t;
