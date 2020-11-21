@@ -183,7 +183,7 @@ local battlefields = {
     {
      -- { 0, 1120,    0},   -- Tough Nut to Crack (ISNM)
      -- { 1, 1121,    0},   -- Happy Caster (ISNM)
-     -- { 2, 1122,    0},   -- Omens (Quest)
+        { 2, 1122,    0},   -- Omens (BLU AF2)
         { 3, 1123, 2333},   -- Achieving True Power (PUP LB5)
         { 4, 1124,    0},   -- Shield of Diplomacy (TOAU22)
     },
@@ -669,6 +669,7 @@ function checkReqs(player, npc, bfid, registrant)
         [1090] = function() return ( player:hasKeyItem(tpz.ki.TOGGLE_SWITCH)                                                                                                ) end, -- Quest: Puppetmaster Blues
         [1091] = function() return ( mjob == tpz.job.COR and mlvl >= 66                                                                                                     ) end, -- Quest: Breaking the Bonds of Fate (COR LB5)
         [1092] = function() return ( toau == mi.toau.LEGACY_OF_THE_LOST                                                                                                     ) end, -- TOAU35: Legacy of the Lost
+        [1122] = function() return ( player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and player:getCharVar('OmensProgress') == 1           ) end, -- Quest: Omens (BLU AF Quest 2)
         [1123] = function() return ( mjob == tpz.job.PUP and mlvl >= 66                                                                                                     ) end, -- Quest: Achieving True Power (PUP LB5)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                  ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == tpz.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)

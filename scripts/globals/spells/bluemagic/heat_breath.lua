@@ -31,17 +31,18 @@ function onSpellCast(caster, target, spell)
     local resist = applyResistance(caster, target, spell, params)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-        params.damageType = tpz.damageType.FIRE
-        params.multiplier = multi
-        params.tMultiplier = 1.5
-        params.duppercap = 69
-        params.str_wsc = 0.0
-        params.dex_wsc = 0.0
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.0
-        params.int_wsc = 0.0
-        params.mnd_wsc = 0.3
-        params.chr_wsc = 0.0
+    params.attackType = tpz.attackType.BREATH
+    params.damageType = tpz.damageType.FIRE
+    params.multiplier = multi
+    params.tMultiplier = 1.5
+    params.duppercap = 69
+    params.str_wsc = 0.0
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.3
+    params.chr_wsc = 0.0
     damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
