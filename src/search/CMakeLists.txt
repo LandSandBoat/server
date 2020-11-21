@@ -37,3 +37,5 @@ target_link_libraries(topaz_search
     project_options
     #project_warnings
 )
+
+set_target_output_directory(topaz_search)

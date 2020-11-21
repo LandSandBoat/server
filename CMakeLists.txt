@@ -55,9 +55,6 @@ target_compile_features(project_options INTERFACE cxx_std_17)
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
 
-# Ouput executables into repo root
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
-
 add_subdirectory(src)
+
+include(CopyConfigs)
