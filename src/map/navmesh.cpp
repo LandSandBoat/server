@@ -20,9 +20,9 @@
 */
 
 #include "navmesh.h"
-#include "../common/detour/DetourNavMeshQuery.h"
-#include <float.h>
-#include <string.h>
+#include "../../ext/detour/detour/DetourNavMeshQuery.h"
+#include <cfloat>
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include "../common/utils.h"

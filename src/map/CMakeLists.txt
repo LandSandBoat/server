@@ -136,6 +136,7 @@ target_link_libraries(topaz_game
     PUBLIC
     common
     ai
+    detour
     entities
     items
     lua_bindings

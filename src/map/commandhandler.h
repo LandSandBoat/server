@@ -23,8 +23,9 @@
 #define _COMMAND_HANDLER_H
 
 #include "../common/cbasetypes.h"
-#include "../common/lua/lua.hpp"
 #include "../common/showmsg.h"
+
+#include "lua.hpp"
 
 #include <string>
 #include <list>

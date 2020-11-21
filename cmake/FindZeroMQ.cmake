@@ -7,8 +7,8 @@ find_library(ZeroMQ_LIBRARY
     NAMES 
         "zmq${lib_debug}" "zmq${lib_debug}_64" "libzmq${lib_debug}" "libzmq${lib_debug}_64"
     PATHS
-        ${LOCAL_LIB_PATH}
         ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/ext/zmq/${libpath}
         /usr/
         /usr/bin/
         /usr/include/
@@ -19,10 +19,9 @@ find_library(ZeroMQ_LIBRARY
 
 find_path(ZeroMQ_INCLUDE_DIR 
     NAMES 
-        zmq.h
+        zmq.hpp
     PATHS
-        ${LOCAL_INCLUDE_PATH}
-        ${LOCAL_INCLUDE_PATH}/zmq
+        ${PROJECT_SOURCE_DIR}/ext/zmq/include/zmq/
         /usr/
         /usr/bin/
         /usr/include/
@@ -41,5 +40,5 @@ message(STATUS "ZeroMQ_INCLUDE_DIR: ${ZeroMQ_INCLUDE_DIR}")
 if (${ZeroMQ_FOUND})
     link_libraries(${ZeroMQ_LIBRARY})
     include_directories(${ZeroMQ_INCLUDE_DIR})
-    include_directories(${MYSQL_INCLUDE_DIR}/../)
+    include_directories(${ZeroMQ_INCLUDE_DIR}/../)
 endif()

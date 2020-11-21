@@ -6,6 +6,7 @@ set(CONFIG_FILES
     packet_tcp.conf
     packet_udp.conf
     search_server.conf
+    server_message.conf
     version.conf
 )
 

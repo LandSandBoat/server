@@ -26,8 +26,9 @@
 
 #include "../../common/cbasetypes.h"
 #include "../../common/taskmgr.h"
-#include "../../common/lua/lua.hpp"
-#include "../../common/lunar/lunar.h"
+
+#include "lua.hpp"
+#include "../../../ext/lunar/lunar.h"
 
 #include "../items/item_equipment.h"
 #include "../spell.h"

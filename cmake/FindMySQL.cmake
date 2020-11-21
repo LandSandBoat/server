@@ -7,8 +7,7 @@ find_library(MYSQL_LIBRARY
     NAMES 
         libmysql libmariadb mysql mariadb libmysql64 libmariadb64
     PATHS
-        ${LOCAL_LIB_PATH}
-        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/ext/mysql/${libpath}/
         /usr/
         /usr/bin/
         /usr/include/
@@ -21,7 +20,7 @@ find_path(MYSQL_INCLUDE_DIR
     NAMES 
         mysql.h
     PATHS
-        ${LOCAL_INCLUDE_PATH}/mysql/
+        ${PROJECT_SOURCE_DIR}/ext/mysql/include/mysql/
         /usr/
         /usr/bin/
         /usr/include/

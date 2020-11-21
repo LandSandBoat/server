@@ -13,3 +13,9 @@ set(SOURCES
     search_list.h)
 
 add_library(search_packets STATIC ${SOURCES})
+
+target_link_libraries(search_packets
+    common
+    project_options
+    #project_warnings
+)
