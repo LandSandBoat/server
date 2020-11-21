@@ -1,4 +1,5 @@
 set(CONFIG_FILES
+    license.conf
     login.conf
     maint.conf
     map.conf
@@ -17,5 +18,5 @@ foreach(file ${CONFIG_FILES})
 endforeach()
 
 if (${copied_configs})
-    message(STATUS "Populated config files, don't forget to fill them in!")
+    message(STATUS "Populated config files, don't forget to change the default values!")
 endif()
