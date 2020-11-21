@@ -14,7 +14,9 @@ function onTrigger(player,npc)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     -- TRANSFORMATIONS
     if transformationsProgress == 4 then
-        player:startEvent(4)
+        -- TODO: Nepionic Soulflayer disabled until its skill list is fully implemented
+        -- player:startEvent(4)
+        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     elseif transformationsProgress == 5 then
         player:startEvent(5)
     else
