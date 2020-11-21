@@ -199,4 +199,4 @@ cmake_install.cmake
 /conf/server_message_fr.conf
 
 # Tracy download
-tracy/
+ext/tracy/
