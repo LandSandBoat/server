@@ -262,6 +262,7 @@ public:
     int32 speed(lua_State*);                // скорость передвижения сущности
 
     int32 getPlaytime(lua_State*);
+    int32 getTimeCreated(lua_State*);
 
     // Player Jobs and Levels
     int32 getMainJob(lua_State*);           // Returns Entity Main Job

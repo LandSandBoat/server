@@ -363,6 +363,8 @@ public:
     int32 GetSecondsElapsedSinceDeath();
     int32 GetTimeRemainingUntilDeathHomepoint();  // Amount of time remaining before the player should be forced back to homepoint while dead
 
+    int32 GetTimeCreated();
+
     void SetMoghancement(uint16 moghancementID);
     bool hasMoghancement(uint16 moghancementID);
     void UpdateMoghancement();

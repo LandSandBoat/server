@@ -38,6 +38,7 @@
 #include "../ability.h"
 #include "../alliance.h"
 #include "../battlefield.h"
+#include "../daily_system.h"
 #include "../enmity_container.h"
 #include "../guild.h"
 #include "../instance.h"
@@ -5317,6 +5318,24 @@ inline int32 CLuaBaseEntity::getPlaytime(lua_State *L)
 
     lua_pushinteger(L, PChar->GetPlayTime(update));
 
+    return 1;
+}
+
+/************************************************************************
+*  Function: getTimeCreated()
+*  Purpose : Get unix timestamp of when character was created
+*  Example : player:getTimeCreated()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getTimeCreated(lua_State *L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    lua_pushinteger(L, PChar->GetTimeCreated());
     return 1;
 }
 
@@ -14878,6 +14897,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,speed),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPlaytime),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTimeCreated),
 
     // Player Jobs and Levels
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMainJob),

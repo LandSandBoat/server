@@ -17,6 +17,7 @@ zones[tpz.zone.PORT_SAN_DORIA] =
         ITEM_OBTAINED                  = 6432, -- Obtained: <item>.
         GIL_OBTAINED                   = 6433, -- Obtained <number> gil.
         KEYITEM_OBTAINED               = 6435, -- Obtained key item: <keyitem>.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS   = 6468, -- You must wait another ≺number≻ [day/days] to perform that action.
         CARRIED_OVER_POINTS            = 6471, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 6472, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                   = 6473, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
