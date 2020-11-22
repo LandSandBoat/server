@@ -83,9 +83,36 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         end
     end
 
-    -- Check for and apply WS_DEX_BONUS
-    if (attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0) then
-        wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS)*.01)
+    -- Begin Checks for bonus wsc bonuses. See the following for details:
+    -- https://www.bg-wiki.com/bg/Utu_Grip
+    -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
+
+    if attacker:getMod(tpz.mod.WS_STR_BONUS) > 0 then
+        wsParams.str_wsc = wsParams.str_wsc + (attacker:getMod(tpz.mod.WS_STR_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0 then
+        wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_VIT_BONUS) > 0 then
+        wsParams.vit_wsc = wsParams.vit_wsc + (attacker:getMod(tpz.mod.WS_VIT_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_AGI_BONUS) > 0 then
+        wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(tpz.mod.WS_AGI_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_INT_BONUS) > 0 then
+        wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(tpz.mod.WS_INT_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_MND_BONUS) > 0 then
+        wsParams.mnd_wsc = wsParams.mnd_wsc + (attacker:getMod(tpz.mod.WS_MND_BONUS) / 100)
+    end
+
+    if attacker:getMod(tpz.mod.WS_CHR_BONUS) > 0 then
+        wsParams.chr_wsc = wsParams.chr_wsc + (attacker:getMod(tpz.mod.WS_CHR_BONUS) / 100)
     end
 
     local wsMods = calcParams.fSTR +
@@ -376,9 +403,36 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
     if not shadowAbsorb(target) then
 
-        -- Check for and apply WS_DEX_BONUS
-        if (attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0) then
-             wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) * 0.01)
+        -- Begin Checks for bonus wsc bonuses. See the following for details:
+        -- https://www.bg-wiki.com/bg/Utu_Grip
+        -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
+
+        if attacker:getMod(tpz.mod.WS_STR_BONUS) > 0 then
+            wsParams.str_wsc = wsParams.str_wsc + (attacker:getMod(tpz.mod.WS_STR_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_DEX_BONUS) > 0 then
+            wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(tpz.mod.WS_DEX_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_VIT_BONUS) > 0 then
+            wsParams.vit_wsc = wsParams.vit_wsc + (attacker:getMod(tpz.mod.WS_VIT_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_AGI_BONUS) > 0 then
+            wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(tpz.mod.WS_AGI_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_INT_BONUS) > 0 then
+            wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(tpz.mod.WS_INT_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_MND_BONUS) > 0 then
+            wsParams.mnd_wsc = wsParams.mnd_wsc + (attacker:getMod(tpz.mod.WS_MND_BONUS) / 100)
+        end
+
+        if attacker:getMod(tpz.mod.WS_CHR_BONUS) > 0 then
+            wsParams.chr_wsc = wsParams.chr_wsc + (attacker:getMod(tpz.mod.WS_CHR_BONUS) / 100)
         end
 
         dmg = attacker:getMainLvl() + 2 + (attacker:getStat(tpz.mod.STR) * wsParams.str_wsc + attacker:getStat(tpz.mod.DEX) * wsParams.dex_wsc +
