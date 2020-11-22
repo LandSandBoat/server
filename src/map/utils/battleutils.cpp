@@ -2255,7 +2255,7 @@ namespace battleutils
             bool shouldApplyLevelCorrection = (zoneId < 256) && (zoneId != 183);
 
             if (shouldApplyLevelCorrection) {
-                uint8 dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
+                int16 dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
                 // Skip penalties for avatars, this should likely be all pets and mobs but I have no proof
                 // of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
                 bool isPet = PAttacker->objtype == TYPE_PET;
@@ -2271,7 +2271,7 @@ namespace battleutils
                     if (dLvl > 0)
                     {
                         // Avatars have a known level difference cap of 38
-                        hitrate += static_cast<int16>(std::min(dLvl, (uint8)38) * 2);
+                        hitrate += static_cast<int16>(std::min(dLvl, (int16)38) * 2);
                     }
                 }
                 else
