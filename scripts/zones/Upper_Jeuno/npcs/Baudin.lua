@@ -16,8 +16,27 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 function onTrade(player, npc, trade)
     if (trade:hasItemQty(555, 1) and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
-        if (a == 0 or (a ~= 32 and a ~= 96 and a ~= 160 and a ~= 288 and a ~= 544 and a ~= 224 and a ~= 800 and a ~= 352 and
-           a ~= 672 and a ~= 416 and a ~= 608 and a ~= 480 and a ~= 736 and a ~= 864 and a ~= 928 and a ~= 992)) then
+        if
+            a == 0 or
+            (
+                a ~= 32 and
+                a ~= 96 and
+                a ~= 160 and
+                a ~= 288 and
+                a ~= 544 and
+                a ~= 224 and
+                a ~= 800 and
+                a ~= 352 and
+                a ~= 672 and
+                a ~= 416 and
+                a ~= 608 and
+                a ~= 480 and
+                a ~= 736 and
+                a ~= 864 and
+                a ~= 928 and
+                a ~= 992
+            )
+        then
             player:startEvent(177, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
     elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then

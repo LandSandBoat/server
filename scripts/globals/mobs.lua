@@ -62,12 +62,13 @@ end
 -- potential lottery placeholder was killed
 tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
-    
-    if NM_LOTTERYCHANCE then
-        chance = NM_LOTTERYCHANCE >= 0 and (chance * NM_LOTTERYCHANCE) or 100
+
+    if NM_LOTTERY_CHANCE then
+        chance = NM_LOTTERY_CHANCE >= 0 and (chance * NM_LOTTERY_CHANCE) or 100
     end
+
     if NM_LOTTERYCOOLDOWN then
-        cooldown = NM_LOTTERYCOOLDOWN >= 0 and (cooldown * NM_LOTTERYCOOLDOWN) or cooldown
+        cooldown = NM_LOTTERY_COOLDOWN >= 0 and (cooldown * NM_LOTTERY_COOLDOWN) or cooldown
     end
 
     local phId = ph:getID()
@@ -77,7 +78,7 @@ tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
         local nm = GetMobByID(nmId)
         if nm ~= nil then
             local pop = nm:getLocalVar("pop")
-            
+
             chance = math.ceil(chance * 10) -- chance / 1000.
             if os.time() > pop and not lotteryPrimed(phList) and math.random(1000) <= chance then
 

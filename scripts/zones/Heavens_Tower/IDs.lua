@@ -18,8 +18,11 @@ zones[tpz.zone.HEAVENS_TOWER] =
         GIL_OBTAINED            = 7130, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 7132, -- Obtained key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL     = 7134, -- You do not have enough gil.
+        CARRIED_OVER_POINTS     = 7168, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7169, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7170, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET  = 7366, -- You can't fish here.
-        CELEBRATORY_GOODS       = 9097, -- An assortment of celebratory goods is available for purchase.
+        CELEBRATORY_GOODS       = 9099, -- An assortment of celebratory goods is available for purchase.
     },
     mob =
     {

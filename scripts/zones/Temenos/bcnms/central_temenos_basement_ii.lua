@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Temenos
 -- Name:
+-----------------------------------
 require("scripts/globals/battlefield")
 -----------------------------------
-
-
 
 function onBattlefieldTick(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
@@ -23,15 +22,13 @@ end
 -- 4=Finish he dynamis
 
 function onBattlefieldLeave(player, battlefield, leavecode)
---print("leave code "..leavecode)
+    -- print("leave code "..leavecode)
 
     if leavecode == tpz.battlefield.leaveCode.WON then
-
         local name, clearTime, partySize = battlefield:getRecord()
-     --    player:setPos(0, 0, 0, 0, 0x00)
+        -- player:setPos(0, 0, 0, 0, 0x00)
     end
     if leavecode == tpz.battlefield.leaveCode.LOST then
         --SetServerVariable("[]UniqueID", 0)
     end
-
 end

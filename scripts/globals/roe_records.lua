@@ -902,7 +902,7 @@ tpz.roe.records =
     [ 237] = { -- Conflict: Ordelle's Caves
         trigger = triggers.mobKill,
         goal = 10,
-        reqs = { zone = set{102} },
+        reqs = { zone = set{193} },
         flags = set{"repeat"},
         reward = { sparks = 12, xp = 100, unity = 5, item = { 13470 } },
     },
@@ -1268,7 +1268,7 @@ tpz.roe.records =
     [ 288] = { -- Conflict: Castle Oztroja
         trigger = triggers.mobKill,
         goal = 10,
-        reqs = { zone = set{200} },
+        reqs = { zone = set{151} },
         flags = set{"repeat"},
         reward = { sparks = 13, xp = 650, unity = 5, item = { 13723 } },
     },

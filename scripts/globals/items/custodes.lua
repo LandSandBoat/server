@@ -3,7 +3,6 @@
 -- Item: Custodes
 -- Additional Effect: Paralysis
 -----------------------------------------
-require("scripts/globals/weather")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -12,7 +11,7 @@ require("scripts/globals/msg")
 function onAdditionalEffect(player, target, damage)
     local chance = 5
 
-    if (VanadielDayElement() == tpz.day.ICEDAY) then
+    if (VanadielDayOfTheWeek() == tpz.day.ICEDAY) then
         chance = chance+6
     end
 

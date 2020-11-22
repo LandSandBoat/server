@@ -28,12 +28,12 @@ function onTrigger(player, npc)
         else
             player:addKeyItem(tpz.ki.LIGHT_FRAGMENT)
             if
-                player:hasKeyItem(tpz.ki.ICE_FRAGMENT) and
-                player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
-                player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.FIRE_FRAGMENT) and
+                player:hasKeyItem(tpz.ki.ICE_FRAGMENT) and
+                player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
+                player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
                 player:hasKeyItem(tpz.ki.LIGHTNING_FRAGMENT) and
-                player:hasKeyItem(tpz.ki.WIND_FRAGMENT)
+                player:hasKeyItem(tpz.ki.WATER_FRAGMENT)
             then
                 player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.LIGHT_FRAGMENT)
                 player:addTitle(tpz.title.BEARER_OF_THE_EIGHT_PRAYERS)

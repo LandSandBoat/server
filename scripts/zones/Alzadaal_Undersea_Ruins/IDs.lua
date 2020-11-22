@@ -15,12 +15,16 @@ zones[tpz.zone.ALZADAAL_UNDERSEA_RUINS] =
         ITEM_OBTAINED           = 6388, -- Obtained: <item>.
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MOVE_CLOSER             = 7209, -- You must move closer.
         IMPERIAL_CONTROL        = 7210, -- This gate guards an area under Imperial control.
         STAGING_POINT_NYZUL     = 7216, -- Nyzul Isle Staging Point.
         CANNOT_LEAVE            = 7220, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                = 7229, -- There is no response...
         DEVICE_MALFUNCTIONING   = 7245, -- The device appears to be malfunctioning...
+        NOTHING_OUT_OF_ORDINARY = 7425, -- There is nothing out of the ordinary here.
         CANNOT_ENTER            = 7441, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL               = 7442, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS          = 7446, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
@@ -34,6 +38,7 @@ zones[tpz.zone.ALZADAAL_UNDERSEA_RUINS] =
     },
     mob =
     {
+        NEPIONIC_SOULFLAYER     = 17072129,
         COOKIEDUSTER_LIPIROON_PH =
         {
             [17072142] = 17072150,
@@ -43,11 +48,13 @@ zones[tpz.zone.ALZADAAL_UNDERSEA_RUINS] =
         CHEESE_HOARDER_GIGIROON = 17072172,
         ARMED_GEARS             = 17072178,
         WULGARU                 = 17072179,
+
     },
     npc =
     {
         RUNIC_PORTAL_NORTH      = 17072236,
         RUNIC_PORTAL_SOUTH      = 17072237,
+        NEPIONIC_QM             = 17072271,
     },
 }
 

@@ -11,8 +11,27 @@ require("scripts/globals/quests")
 function onTrade(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
-        if (a == 0 or (a ~= 8 and a ~= 9 and a ~= 10 and a ~= 12 and a ~= 24 and a ~= 11 and a ~= 28 and a ~= 13 and
-           a ~= 26 and a ~= 14 and a ~= 25 and a ~= 15 and a ~= 27 and a ~= 29 and a ~= 30 and a ~= 31)) then
+        if
+            a == 0 or
+            (
+                a ~= 8 and
+                a ~= 9 and
+                a ~= 10 and
+                a ~= 12 and
+                a ~= 24 and
+                a ~= 11 and
+                a ~= 28 and
+                a ~= 13 and
+                a ~= 26 and
+                a ~= 14 and
+                a ~= 25 and
+                a ~= 15 and
+                a ~= 27 and
+                a ~= 29 and
+                a ~= 30 and
+                a ~= 31
+            )
+        then
             player:startEvent(180, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
     end

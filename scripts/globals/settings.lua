@@ -107,34 +107,34 @@ LandKingSystem_NQ = 1
 LandKingSystem_HQ = 1
 
 -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
-NM_LOTTERYCHANCE = 1.0
+NM_LOTTERY_CHANCE = 1.0
 -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
-NM_LOTTERYCOOLDOWN = 1.0
+NM_LOTTERY_COOLDOWN = 1.0
 
 -- DYNAMIS SETTINGS
-    BETWEEN_2DYNA_WAIT_TIME = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
-        DYNA_MIDNIGHT_RESET = true     -- if true, makes the wait time count by number of server midnights instead of full 24 hour intervals
-             DYNA_LEVEL_MIN = 65       -- level min for entering in Dynamis
-    TIMELESS_HOURGLASS_COST = 500000   -- refund for the timeless hourglass for Dynamis.
-   PRISMATIC_HOURGLASS_COST = 50000    -- cost of the prismatic hourglass for Dynamis.
-     CURRENCY_EXCHANGE_RATE = 100      -- X Tier 1 ancient currency -> 1 Tier 2, and so on.  Certain values may conflict with shop items.  Not designed to exceed 198.
-RELIC_2ND_UPGRADE_WAIT_TIME = 7200     -- wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 7200s = 2 hours.
-RELIC_3RD_UPGRADE_WAIT_TIME = 3600     -- wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
-FREE_COP_DYNAMIS = 0  -- Authorize player to entering inside COP Dynamis without completing COP mission ( 1 = enable 0= disable)
+BETWEEN_2DYNA_WAIT_TIME  = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
+DYNA_MIDNIGHT_RESET      = true     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
+DYNA_LEVEL_MIN           = 65       -- Level min for entering in Dynamis
+TIMELESS_HOURGLASS_COST  = 500000   -- Refund for the timeless hourglass for Dynamis.
+PRISMATIC_HOURGLASS_COST = 50000    -- Cost of the prismatic hourglass for Dynamis.
+CURRENCY_EXCHANGE_RATE   = 100      -- X Tier 1 ancient currency -> 1 Tier 2, and so on. Certain values may conflict with shop items. Not designed to exceed 198.
+RELIC_2ND_UPGRADE_WAIT_TIME = 7200  -- Wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 7200s = 2 hours.
+RELIC_3RD_UPGRADE_WAIT_TIME = 3600  -- Wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
+FREE_COP_DYNAMIS = 0 -- Authorize player to entering inside COP Dynamis without completing COP mission (1 = enable 0 = disable)
 
 -- QUEST/MISSION SPECIFIC SETTINGS
-AF1_QUEST_LEVEL = 40 -- Minimum level to start AF1 quest
-AF2_QUEST_LEVEL = 50 -- Minimum level to start AF2 quest
-AF3_QUEST_LEVEL = 50 -- Minimum level to start AF3 quest
-OldSchoolG1 = false -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-OldSchoolG2 = false -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-FrigiciteDuration = 30 -- When OldSChoolG2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+AF1_QUEST_LEVEL = 40    -- Minimum level to start AF1 quest
+AF2_QUEST_LEVEL = 50    -- Minimum level to start AF2 quest
+AF3_QUEST_LEVEL = 50    -- Minimum level to start AF3 quest
+OLDSCHOOL_G1    = false -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
+OLDSCHOOL_G2    = false -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
+FRIGICITE_TIME  = 30    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
 
 -- SPELL SPECIFIC SETTINGS
-DIA_OVERWRITE = 1 --Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
-BIO_OVERWRITE = 0 --Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
-STONESKIN_CAP = 350 -- soft cap for hp absorbed by stoneskin
-BLINK_SHADOWS = 2   -- number of shadows supplied by Blink spell
+DIA_OVERWRITE = 1 -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
+BIO_OVERWRITE = 0 -- Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
+STONESKIN_CAP = 350 -- Soft cap for hp absorbed by stoneskin
+BLINK_SHADOWS = 2   -- Number of shadows supplied by Blink spell
 SPIKE_EFFECT_DURATION = 180 -- the duration of RDM, BLM spikes effects (not Reprisal)
 ELEMENTAL_DEBUFF_DURATION = 120 -- base duration of elemental debuffs
 AQUAVEIL_COUNTER = 1  -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.

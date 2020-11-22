@@ -7,7 +7,6 @@ local ID = require("scripts/zones/RoMaeve/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/weather")
 require("scripts/globals/status")
 -----------------------------------
 

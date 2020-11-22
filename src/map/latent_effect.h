@@ -79,7 +79,7 @@ enum LATENT
     LATENT_FOOD_ACTIVE              = 49, //food effect (foodId) active - PARAM: FOOD ITEMID
     LATENT_JOB_LEVEL_BELOW          = 50, //PARAM: level
     LATENT_JOB_LEVEL_ABOVE          = 51, //PARAM: level
-    LATENT_WEATHER_ELEMENT          = 52, //PARAM: 0: NONE, 1: FIRE, 2: EARTH, 3: WATER, 4: WIND, 5: ICE, 6: THUNDER, 7: LIGHT, 8: DARK
+    LATENT_WEATHER_ELEMENT          = 52, //PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
     LATENT_NATION_CONTROL           = 53, //checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
     LATENT_ZONE_HOME_NATION         = 54, //in zone and citizen of nation (aketons)
     LATENT_MP_OVER                  = 55, //mp greater than # - PARAM: MP #

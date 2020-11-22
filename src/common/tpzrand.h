@@ -18,7 +18,7 @@ public:
         mt().seed(seq);
     }
 
-    // Generates a random number in the half-open interval [min, max]
+    // Generates a random number in the half-open interval [min, max)
     // @param min
     // @param max
     // @returns result

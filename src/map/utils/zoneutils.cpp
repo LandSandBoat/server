@@ -987,6 +987,9 @@ int GetWeatherElement(WEATHER weather)
 {
     TPZ_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
 
+    // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
+    // order MUST be preserved due to the weather enums going in this order. Those enums will
+    // most likely have rippling effects, such as how weather data is stored in the db
     static uint8 Element[] =
     {
         0,  //WEATHER_NONE

@@ -1764,7 +1764,7 @@ void CCharEntity::UpdateMoghancement()
                 CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                 if (PFurniture->isInstalled())
                 {
-                    elements[PFurniture->getElement()] += PFurniture->getAura();
+                    elements[PFurniture->getElement() - 1] += PFurniture->getAura();
                 }
             }
         }
@@ -1774,9 +1774,9 @@ void CCharEntity::UpdateMoghancement()
     uint8 dominantElement = 0;
     uint16 dominantAura = 0;
     bool hasTiedElements = false;
-    for (uint8 elementID = 0; elementID < 8; ++elementID)
+    for (uint8 elementID = 1; elementID < 9; ++elementID)
     {
-        uint16 aura = elements[elementID];
+        uint16 aura = elements[elementID - 1];
         if (aura > dominantAura)
         {
             dominantElement = elementID;

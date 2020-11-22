@@ -15,11 +15,14 @@ zones[tpz.zone.PROMYVION_VAHZL] =
         ITEM_OBTAINED           = 6388, -- Obtained: <item>.
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         OVERFLOWING_MEMORIES    = 7211, -- It appears to be a barrier woven from the energy of overflowing memories...
         ON_NM_SPAWN             = 7215, -- You sense a dark, empty presence...
         EERIE_GREEN_GLOW        = 7217, -- The sphere is emitting an eerie green glow.
-        AMULET_RETURNED         = 7260, -- The mysterious amulet has been returned to you.
-        LIGHT_OF_VAHZL          = 7261, -- You cannot remember when exactly, but you have obtained the light of Vahzl!
+        AMULET_RETURNED         = 7260, -- The <item> has been returned to you.
+        LIGHT_OF_VAHZL          = 7261, -- You cannot remember when exactly, but you have obtained <item>!
         POPPED_NM_OFFSET        = 7297, -- Remnants of a cerebrator lie scattered about the area.
     },
     mob =

@@ -5,7 +5,6 @@
 require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/status')
-require('scripts/globals/weather')
 require('scripts/globals/zone')
 ------------------------------------
 tpz = tpz or {}
@@ -240,7 +239,7 @@ tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     only need to enable her on the appropriate day and disable her on the following day. ]]--
     local peddlestox = GetNPCByID(peddlestox)
 
-    if zoneData[zone].day == VanadielDayElement() then
+    if zoneData[zone].day == VanadielDayOfTheWeek() then
         peddlestox:setStatus(tpz.status.NORMAL)
     elseif peddlestox:getStatus() == tpz.status.NORMAL then
         --[[

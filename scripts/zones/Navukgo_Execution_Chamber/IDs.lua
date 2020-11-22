@@ -14,6 +14,9 @@ zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
         ITEM_OBTAINED           = 6388, -- Obtained: <item>.
         GIL_OBTAINED            = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         KARABABA_ENOUGH         = 7629, -- That's quite enough...
         KARABABA_ROUGH          = 7630, -- Time for me to start playing rough!
         KARABARA_FIRE           = 7631, -- Fuel for the fire! It doesn't pay to invoke my ire!
@@ -27,6 +30,11 @@ zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
     mob =
     {
         KARABABA_OFFSET = 17039401,
+        IMMORTAL_FLAN2  = 17039375, -- IMMORTAL_FLAN1 always pops in battlefield, other flans pop depending on party size
+        IMMORTAL_FLAN3  = 17039376,
+        IMMORTAL_FLAN4  = 17039377,
+        IMMORTAL_FLAN5  = 17039378,
+        IMMORTAL_FLAN6  = 17039379,
     },
     npc =
     {

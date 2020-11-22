@@ -1230,6 +1230,24 @@ INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010728,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010729,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010730,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010731,0);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039374,3); -- omens
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039375,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039376,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039377,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039378,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,1,17039379,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039381,3);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039382,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039383,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039384,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039385,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,2,17039386,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039388,3);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039389,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039390,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039391,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039392,2);
+INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039393,2);
 INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomacy
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
 

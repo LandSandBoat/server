@@ -12,8 +12,13 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 
 function onTrade(player, npc, trade)
     if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
-        if (trade:hasItemQty(1024, 1) == true and trade:hasItemQty(1025, 1) == true and trade:hasItemQty(1026, 1) == true and
-           trade:getGil() == 0 and trade:getItemCount() == 3) then
+        if
+            trade:hasItemQty(1024, 1) == true and
+            trade:hasItemQty(1025, 1) == true and
+            trade:hasItemQty(1026, 1) == true and
+            trade:getGil() == 0 and
+            trade:getItemCount() == 3
+        then
             player:startEvent(301) -- Ending quest "Kazham Airship Pass"
         else
             player:startEvent(302)

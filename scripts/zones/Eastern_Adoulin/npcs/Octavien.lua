@@ -12,16 +12,17 @@ local ID = require("scripts/zones/Eastern_Adoulin/IDs")
 
 -- Various quest states for Children Of The Rune (COTR).
 -- Corresponds to possible values for the char var "RUN_COTR".
-local RUN_COTR = {
-  -- Player triggered the quest but declined to accept the quest in the
-  -- dialog options. On next trigger jump to the quest continuation cutscene.
-  TRIGGERED = 1,
-  -- Player has not yet finished the rune enhacement phase of the quest.
-  -- On next trigger, jump straight to the rune enhancement cutscene.
-  RUNE_ENHANCEMENT = 2,
-  -- Player would have completed the quest, but had a full inventory. On
-  -- next interaction, jump to the final cutscene and try to issue the reward.
-  REWARD_PENDING = 3
+local RUN_COTR =
+{
+    -- Player triggered the quest but declined to accept the quest in the
+    -- dialog options. On next trigger jump to the quest continuation cutscene.
+    TRIGGERED = 1,
+    -- Player has not yet finished the rune enhacement phase of the quest.
+    -- On next trigger, jump straight to the rune enhancement cutscene.
+    RUNE_ENHANCEMENT = 2,
+    -- Player would have completed the quest, but had a full inventory. On
+    -- next interaction, jump to the final cutscene and try to issue the reward.
+    REWARD_PENDING = 3
 }
 
 function onTrade(player, npc, trade)
@@ -56,11 +57,11 @@ function onEventUpdate(player, csid, option)
         if option == 1 then
             -- Half the players MP and HP unless the HP is really low, to avoid
             -- killing the player.
-            hp = player:getHP()
+            local hp = player:getHP()
             if hp > 5 then
                 player:setHP(math.ceil(hp / 2))
             end
-            mp = player:getMP()
+            local mp = player:getMP()
             if mp > 5 then
                 player:setMP(math.ceil(mp / 2))
             end
@@ -71,11 +72,11 @@ end
 function onEventFinish(player, csid, option)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
-       if option == 0 then
-           player:setCharVar("RUN_COTR", RUN_COTR.TRIGGERED)
-       elseif option == 1 then
-           player:addQuest(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
-       end
+        if option == 0 then
+            player:setCharVar("RUN_COTR", RUN_COTR.TRIGGERED)
+        elseif option == 1 then
+            player:addQuest(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+        end
     elseif csid == 26 then
         if option == 0 then
             player:setCharVar("RUN_COTR", RUN_COTR.RUNE_ENHANCEMENT)

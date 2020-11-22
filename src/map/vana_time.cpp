@@ -268,13 +268,13 @@ TIMETYPE CVanaTime::SyncTime()
         lastTickedHour = m_vHour;
         switch (m_vHour)
         {
-            case  0: m_TimeType = TIME_NIGHT;   return TIME_MIDNIGHT;
-            case  4: m_TimeType = TIME_NEWDAY;  return TIME_NEWDAY;
-            case  6: m_TimeType = TIME_DAWN;    return TIME_DAWN;
-            case  7: m_TimeType = TIME_DAY;     return TIME_DAY;
-            case 17: m_TimeType = TIME_DUSK;    return TIME_DUSK;
-            case 18: m_TimeType = TIME_EVENING; return TIME_EVENING;
-            case 20: m_TimeType = TIME_NIGHT;   return TIME_NIGHT;
+            case  0: m_TimeType = TIME_MIDNIGHT; return TIME_MIDNIGHT;
+            case  4: m_TimeType = TIME_NEWDAY;   return TIME_NEWDAY;
+            case  6: m_TimeType = TIME_DAWN;     return TIME_DAWN;
+            case  7: m_TimeType = TIME_DAY;      return TIME_DAY;
+            case 17: m_TimeType = TIME_DUSK;     return TIME_DUSK;
+            case 18: m_TimeType = TIME_EVENING;  return TIME_EVENING;
+            case 20: m_TimeType = TIME_NIGHT;    return TIME_NIGHT;
         }
     }
     return TIME_NONE;

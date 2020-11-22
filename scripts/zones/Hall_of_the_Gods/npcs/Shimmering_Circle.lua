@@ -26,7 +26,7 @@ function onTrigger(player, npc)
                     roz == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and
                     rozStat > 0
                 )
-             )
+            )
         then
             player:startEvent(10)
         else

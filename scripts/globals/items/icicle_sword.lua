@@ -1,6 +1,6 @@
 -----------------------------------------
 -- ID: 16937
--- Ice Brand
+-- Icicle Sword
 -- Additional Effect: Ice Damage
 -----------------------------------------
 require("scripts/globals/status")

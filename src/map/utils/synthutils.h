@@ -36,14 +36,14 @@ namespace synthutils
 {
     enum SYNTHESIS_ELEMENT
     {
-        ELEMENT_FIRE		= 0,
-        ELEMENT_EARTH		= 1,
-        ELEMENT_WATER		= 2,
-        ELEMENT_WIND		= 3,
-        ELEMENT_ICE			= 4,
-        ELEMENT_LIGHTNING	= 5,
-        ELEMENT_LIGHT		= 6,
-        ELEMENT_DARK		= 7
+        ELEMENT_FIRE        = 0,
+        ELEMENT_ICE         = 1,
+        ELEMENT_WIND        = 2,
+        ELEMENT_EARTH       = 3,
+        ELEMENT_LIGHTNING   = 4,
+        ELEMENT_WATER       = 5,
+        ELEMENT_LIGHT       = 6,
+        ELEMENT_DARK        = 7
     };
 
     enum SYNTHESIS_RESULT
