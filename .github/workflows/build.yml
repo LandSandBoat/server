@@ -63,7 +63,7 @@ jobs:
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib/libmariadb.lib'
+          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib/libmariadb.lib'
       - name: Build
         shell: cmd
         run: |
@@ -81,7 +81,7 @@ jobs:
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib64/libmariadb64.lib'
+          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib64/libmariadb64.lib'
       - name: Build
         shell: cmd
         run: |
