@@ -7,8 +7,7 @@ find_library(LuaJIT_LIBRARY
     NAMES 
         luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
-        ${PROJECT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
+        ${PROJECT_SOURCE_DIR}/ext/lua/${libpath}
         /usr/
         /usr/bin/
         /usr/include/
@@ -21,7 +20,7 @@ find_path(LuaJIT_INCLUDE_DIR
     NAMES 
         lua.h
     PATHS
-        ${PROJECT_SOURCE_DIR}/ext/luajit/include/
+        ${PROJECT_SOURCE_DIR}/ext/lua/include/
         /usr/
         /usr/bin/
         /usr/include/

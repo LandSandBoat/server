@@ -28,7 +28,8 @@
 #include "../../common/taskmgr.h"
 
 #include "lua.hpp"
-#include "../../../ext/lunar/lunar.h"
+#include "lunar/lunar.h"
+#include "sol/sol.hpp"
 
 #include "../items/item_equipment.h"
 #include "../spell.h"

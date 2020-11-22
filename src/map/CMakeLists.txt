@@ -134,6 +134,7 @@ target_compile_definitions(
 
 target_link_libraries(topaz_game
     PUBLIC
+    sol2_single
     common
     ai
     detour

@@ -7,7 +7,6 @@ find_library(ZeroMQ_LIBRARY
     NAMES 
         "zmq${lib_debug}" "zmq${lib_debug}_64" "libzmq${lib_debug}" "libzmq${lib_debug}_64"
     PATHS
-        ${PROJECT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/ext/zmq/${libpath}
         /usr/
         /usr/bin/

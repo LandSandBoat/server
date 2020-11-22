@@ -87,6 +87,7 @@ namespace luautils
 {
 #define lua_prepscript(n,...) int8 File[255]; \
                               snprintf((char*)File, sizeof(File), n, ##__VA_ARGS__);
+
     lua_State*  LuaHandle = nullptr;
 
     bool contentRestrictionEnabled;
@@ -103,58 +104,59 @@ namespace luautils
         TracyZoneScoped;
         ShowStatus("luautils::init:lua initializing...");
         LuaHandle = luaL_newstate();
-        luaL_openlibs(LuaHandle);
 
-        lua_register(LuaHandle, "print", luautils::print);
-        lua_register(LuaHandle, "GetNPCByID", luautils::GetNPCByID);
-        lua_register(LuaHandle, "GetMobByID", luautils::GetMobByID);
-        lua_register(LuaHandle, "WeekUpdateConquest", luautils::WeekUpdateConquest);
-        lua_register(LuaHandle, "GetRegionOwner", luautils::GetRegionOwner);
-        lua_register(LuaHandle, "GetRegionInfluence", luautils::GetRegionInfluence);
-        lua_register(LuaHandle, "getNationRank", luautils::getNationRank);
-        lua_register(LuaHandle, "getConquestBalance", luautils::getConquestBalance);
-        lua_register(LuaHandle, "isConquestAlliance", luautils::isConquestAlliance);
-        lua_register(LuaHandle, "setMobPos", luautils::setMobPos);
-        lua_register(LuaHandle, "SpawnMob", luautils::SpawnMob);
-        lua_register(LuaHandle, "DespawnMob", luautils::DespawnMob);
-        lua_register(LuaHandle, "GetPlayerByName", luautils::GetPlayerByName);
-        lua_register(LuaHandle, "GetPlayerByID", luautils::GetPlayerByID);
-        lua_register(LuaHandle, "GetMobAction", luautils::GetMobAction);
-        lua_register(LuaHandle, "JstMidnight", luautils::JstMidnight);
-        lua_register(LuaHandle, "VanadielTime", luautils::VanadielTime);
-        lua_register(LuaHandle, "VanadielTOTD", luautils::VanadielTOTD);
-        lua_register(LuaHandle, "VanadielHour", luautils::VanadielHour);
-        lua_register(LuaHandle, "VanadielMinute", luautils::VanadielMinute);
-        lua_register(LuaHandle, "VanadielDayOfTheWeek", luautils::VanadielDayOfTheWeek);
-        lua_register(LuaHandle, "VanadielDayOfTheMonth", luautils::VanadielDayOfTheMonth);
-        lua_register(LuaHandle, "VanadielDayOfTheYear", luautils::VanadielDayOfTheYear);
-        lua_register(LuaHandle, "VanadielYear", luautils::VanadielYear);
-        lua_register(LuaHandle, "VanadielMonth", luautils::VanadielMonth);
-        lua_register(LuaHandle, "VanadielDayElement", luautils::VanadielDayElement);
-        lua_register(LuaHandle, "VanadielMoonPhase", luautils::VanadielMoonPhase);
-        lua_register(LuaHandle, "VanadielMoonDirection", luautils::VanadielMoonDirection);
-        lua_register(LuaHandle, "VanadielRSERace", luautils::VanadielRSERace);
-        lua_register(LuaHandle, "VanadielRSELocation", luautils::VanadielRSELocation);
-        lua_register(LuaHandle, "SetVanadielTimeOffset", luautils::SetVanadielTimeOffset);
-        lua_register(LuaHandle, "IsMoonNew", luautils::IsMoonNew);
-        lua_register(LuaHandle, "IsMoonFull", luautils::IsMoonFull);
-        lua_register(LuaHandle, "RunElevator", luautils::StartElevator);
-        lua_register(LuaHandle, "GetServerVariable", luautils::GetServerVariable);
-        lua_register(LuaHandle, "SetServerVariable", luautils::SetServerVariable);
-        lua_register(LuaHandle, "clearVarFromAll", luautils::clearVarFromAll);
-        lua_register(LuaHandle, "SendEntityVisualPacket", luautils::SendEntityVisualPacket);
-        lua_register(LuaHandle, "UpdateServerMessage", luautils::UpdateServerMessage);
-        lua_register(LuaHandle, "GetMobRespawnTime", luautils::GetMobRespawnTime);
-        lua_register(LuaHandle, "DisallowRespawn", luautils::DisallowRespawn);
-        lua_register(LuaHandle, "UpdateNMSpawnPoint", luautils::UpdateNMSpawnPoint);
-        lua_register(LuaHandle, "SetDropRate", luautils::SetDropRate);
-        lua_register(LuaHandle, "NearLocation", luautils::nearLocation);
-        lua_register(LuaHandle, "terminate", luautils::terminate);
+        sol::state_view lua(LuaHandle);
+        lua.open_libraries();
 
-        lua_register(LuaHandle, "GetHealingTickDelay", luautils::GetHealingTickDelay);
-        lua_register(LuaHandle, "GetItem", luautils::GetItem);
-        lua_register(LuaHandle, "getAbility", luautils::getAbility);
-        lua_register(LuaHandle, "getSpell", luautils::getSpell);
+        lua.set_function("print", &luautils::print);
+        lua.set_function("GetNPCByID", &luautils::GetNPCByID);
+        lua.set_function("GetMobByID", &luautils::GetMobByID);
+        lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
+        lua.set_function("GetRegionOwner", &luautils::GetRegionOwner);
+        lua.set_function("GetRegionInfluence", &luautils::GetRegionInfluence);
+        lua.set_function("getNationRank", &luautils::getNationRank);
+        lua.set_function("getConquestBalance", &luautils::getConquestBalance);
+        lua.set_function("isConquestAlliance", &luautils::isConquestAlliance);
+        lua.set_function("setMobPos", &luautils::setMobPos);
+        lua.set_function("SpawnMob", &luautils::SpawnMob);
+        lua.set_function("DespawnMob", &luautils::DespawnMob);
+        lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
+        lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
+        lua.set_function("GetMobAction", &luautils::GetMobAction);
+        lua.set_function("JstMidnight", &luautils::JstMidnight);
+        lua.set_function("VanadielTime", &luautils::VanadielTime);
+        lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
+        lua.set_function("VanadielHour", &luautils::VanadielHour);
+        lua.set_function("VanadielMinute", &luautils::VanadielMinute);
+        lua.set_function("VanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
+        lua.set_function("VanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
+        lua.set_function("VanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
+        lua.set_function("VanadielYear", &luautils::VanadielYear);
+        lua.set_function("VanadielMonth", &luautils::VanadielMonth);
+        lua.set_function("VanadielDayElement", &luautils::VanadielDayElement);
+        lua.set_function("VanadielMoonPhase", &luautils::VanadielMoonPhase);
+        lua.set_function("VanadielMoonDirection", &luautils::VanadielMoonDirection);
+        lua.set_function("VanadielRSERace", &luautils::VanadielRSERace);
+        lua.set_function("VanadielRSELocation", &luautils::VanadielRSELocation);
+        lua.set_function("SetVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
+        lua.set_function("IsMoonNew", &luautils::IsMoonNew);
+        lua.set_function("IsMoonFull", &luautils::IsMoonFull);
+        lua.set_function("RunElevator", &luautils::StartElevator);
+        lua.set_function("GetServerVariable", &luautils::GetServerVariable);
+        lua.set_function("SetServerVariable", &luautils::SetServerVariable);
+        lua.set_function("clearVarFromAll", &luautils::clearVarFromAll);
+        lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
+        lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
+        lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
+        lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
+        lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        lua.set_function("SetDropRate", &luautils::SetDropRate);
+        lua.set_function("NearLocation", &luautils::nearLocation);
+        lua.set_function("terminate", &luautils::terminate);
+        lua.set_function("GetHealingTickDelay", &luautils::GetHealingTickDelay);
+        lua.set_function("GetItem", &luautils::GetItem);
+        lua.set_function("getAbility", &luautils::getAbility);
+        lua.set_function("getSpell", &luautils::getSpell);
 
         Lunar<CLuaAbility>::Register(LuaHandle);
         Lunar<CLuaAction>::Register(LuaHandle);
@@ -168,8 +170,6 @@ namespace luautils
         Lunar<CLuaTradeContainer>::Register(LuaHandle);
         Lunar<CLuaZone>::Register(LuaHandle);
         Lunar<CLuaItem>::Register(LuaHandle);
-
-        luaL_dostring(LuaHandle, "if not bit then bit = require('bit') end");
 
         lua_getglobal(LuaHandle, "math");
         lua_pushstring(LuaHandle, "random");

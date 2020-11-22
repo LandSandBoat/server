@@ -32,6 +32,8 @@ target_link_libraries(
     common
     PUBLIC
     fmt
+    lunar
+    sol2_single
     project_options
     # project_warnings
 )
