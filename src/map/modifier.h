@@ -232,6 +232,8 @@ enum class Mod
     MARTIAL_ARTS              = 173, // The integer amount of delay to reduce from H2H weapons' base delay. (TRAIT)
     SKILLCHAINBONUS           = 174, // Damage bonus applied to skill chain damage.  Modifier from effects/traits
     SKILLCHAINDMG             = 175, // Damage bonus applied to skill chain damage.  Modifier from gear (multiplicative after effect/traits)
+    MAX_SWINGS                = 978, // Max swings for "Occasionally attacks X times"
+    ADDITIONAL_SWING_CHANCE   = 979, // Chance that allows for an additional swing despite of multiple hits, mostly for Amood weapons
 
     MAGIC_DAMAGE             = 311, // Magic damage added directly to the spell's base damage
 
@@ -813,9 +815,9 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 977, // stuff
-    // SPARE = 978, // stuff
-    // SPARE = 979, // stuff
+    // SPARE = 980, // stuff
+    // SPARE = 981, // stuff
+    // SPARE = 982, // stuff
 };
 
 //temporary workaround for using enum class as unordered_map key until compilers support it

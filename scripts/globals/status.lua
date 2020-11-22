@@ -1067,6 +1067,8 @@ tpz.mod =
     MARTIAL_ARTS                    = 173,
     SKILLCHAINBONUS                 = 174,
     SKILLCHAINDMG                   = 175,
+    MAX_SWINGS                      = 978,
+    ADDITIONAL_SWING_CHANCE         = 979,
     FOOD_HPP                        = 176,
     FOOD_HP_CAP                     = 177,
     FOOD_MPP                        = 178,
@@ -1573,9 +1575,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 977, -- stuff
-    -- SPARE = 978, -- stuff
-    -- SPARE = 979, -- stuff
+    -- SPARE = 980, -- stuff
+    -- SPARE = 981, -- stuff
+    -- SPARE = 982, -- stuff
 }
 
 tpz.latent =
@@ -1617,13 +1619,13 @@ tpz.latent =
     LIGHTNINGSDAY            = 35,
     LIGHTSDAY                = 36,
     MOON_PHASE               = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
-    JOB_MULTIPLE_5           = 38,
-    JOB_MULTIPLE_10          = 39,
-    JOB_MULTIPLE_13_NIGHT    = 40,
-    JOB_LEVEL_ODD            = 41,
-    JOB_LEVEL_EVEN           = 42,
+    JOB_MULTIPLE             = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    -- 40 free to use
+    -- 41 free to use
+    -- 42 free to use
     WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
-    --                       = 44  -- Unused
+    -- 44 free to use
     MP_UNDER_VISIBLE_GEAR    = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
     HP_OVER_VISIBLE_GEAR     = 46, -- hp more than or equal to %, calculated using HP bonuses from visible gear only
     WEAPON_BROKEN            = 47,
