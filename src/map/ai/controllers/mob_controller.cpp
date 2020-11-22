@@ -740,7 +740,7 @@ void CMobController::DoRoamTick(time_point tick)
             }
 
             // can't rest with poison or disease
-            if (PMob->CanRest())
+            if (PMob->CanRest() && PMob->getMobMod(MOBMOD_NO_REST) == 0)
             {
                 // recover 10% health
                 if (PMob->Rest(0.1f))
