@@ -8,6 +8,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -88,8 +89,14 @@ function onTrigger(player, npc)
         player:startEvent(598)
 
     -- TRUST
-    elseif player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(901) then
+    elseif
+        player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and
+        not player:hasSpell(tpz.magic.spell.NANAA_MIHGO) and
+        player:getLocalVar("TrustDialogue") == 0
+    then
         local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+
+        player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
 

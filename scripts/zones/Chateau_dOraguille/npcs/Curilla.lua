@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/wsquest")
 require("scripts/globals/quests")
@@ -61,7 +62,12 @@ function onTrigger(player, npc)
     local Rank3 = player:getRank() >= 3 and 1 or 0
 
     -- Trust: San d'Oria (Curilla)
-    if player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(902) then
+    if
+        player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and
+        not player:hasSpell(tpz.magic.spell.CURILLA) and
+        player:getLocalVar("TrustDialogue") == 0
+    then
+        player:setLocalVar("TrustDialogue", 1)
         player:startEvent(573, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
 
     -- "Lure of the Wildcat"

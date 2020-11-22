@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
@@ -73,7 +74,12 @@ function onTrigger(player, npc)
         player:startEvent(803)
     elseif (player:getCharVar("FadedPromises") == 3) then
         player:startEvent(804)
-    elseif player:hasKeyItem(tpz.ki.BASTOK_TRUST_PERMIT) and not player:hasSpell(900) then
+    elseif
+        player:hasKeyItem(tpz.ki.BASTOK_TRUST_PERMIT) and
+        not player:hasSpell(tpz.magic.spell.AYAME) and
+        player:getLocalVar("TrustDialogue") == 0
+    then
+        player:setLocalVar("TrustDialogue", 1)
         player:startEvent(985, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
     else
         player:startEvent(701) -- Standard dialog
