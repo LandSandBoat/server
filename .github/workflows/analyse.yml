@@ -1,9 +1,6 @@
 name: analyse
 
 on:
-  schedule:
-      # Once a day at midnight
-      - cron:  '0 0 * * *' 
   workflow_dispatch: # Manual triggering from Actions > analyse > Run workflow
 
 jobs:
