@@ -1,3 +1,4 @@
+require('scripts/globals/status')
 
 tpz = tpz or {}
 tpz.magic = tpz.magic or {}
@@ -52,17 +53,59 @@ tpz.magic.element =
 {
     NONE      = 0,
     FIRE      = 1,
-    EARTH     = 2,
-    WATER     = 3,
-    WIND      = 4,
-    ICE       = 5,
-    LIGHTNING = 6,
-    THUNDER   = 6,
+    ICE       = 2,
+    WIND      = 3,
+    EARTH     = 4,
+    LIGHTNING = 5,
+    THUNDER   = 5,
+    WATER     = 6,
     LIGHT     = 7,
     DARK      = 8,
 }
 tpz.magic.ele = tpz.magic.element
 
+------------------------------------
+-- Day to Element Mapping
+------------------------------------
+
+tpz.magic.dayElement =
+{
+    [tpz.day.FIRESDAY]     = tpz.magic.element.FIRE,
+    [tpz.day.ICEDAY]       = tpz.magic.element.ICE,
+    [tpz.day.WINDSDAY]     = tpz.magic.element.WIND,
+    [tpz.day.EARTHSDAY]    = tpz.magic.element.EARTH,
+    [tpz.day.LIGHTNINGDAY] = tpz.magic.element.THUNDER,
+    [tpz.day.WATERSDAY]    = tpz.magic.element.WATER,
+    [tpz.day.LIGHTSDAY]    = tpz.magic.element.LIGHT,
+    [tpz.day.DARKSDAY]     = tpz.magic.element.DARK,
+}
+
+------------------------------------
+-- Elemental Strength Ordering
+------------------------------------
+tpz.magic.elementAscendant =
+{
+    [tpz.magic.element.FIRE]    = tpz.magic.element.ICE,
+    [tpz.magic.element.ICE]     = tpz.magic.element.WIND,
+    [tpz.magic.element.WIND]    = tpz.magic.element.EARTH,
+    [tpz.magic.element.EARTH]   = tpz.magic.element.THUNDER,
+    [tpz.magic.element.THUNDER] = tpz.magic.element.WATER,
+    [tpz.magic.element.WATER]   = tpz.magic.element.FIRE,
+    [tpz.magic.element.LIGHT]   = tpz.magic.element.DARK,
+    [tpz.magic.element.DARK]    = tpz.magic.element.LIGHT,
+}
+
+tpz.magic.elementDescendant =
+{
+    [tpz.magic.element.FIRE]     = tpz.magic.element.WATER,
+    [tpz.magic.element.ICE]      = tpz.magic.element.FIRE,
+    [tpz.magic.element.WIND]     = tpz.magic.element.ICE,
+    [tpz.magic.element.EARTH]    = tpz.magic.element.WIND,
+    [tpz.magic.element.THUNDER]  = tpz.magic.element.EARTH,
+    [tpz.magic.element.WATER]    = tpz.magic.element.THUNDER,
+    [tpz.magic.element.LIGHT]    = tpz.magic.element.DARK,
+    [tpz.magic.element.DARK]     = tpz.magic.element.LIGHT,
+}
 ------------------------------------
 -- Spell Families
 ------------------------------------

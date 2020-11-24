@@ -26,6 +26,7 @@ function onSpellCast(caster, target, spell)
         multi = multi + 1.50
     end
     local params = {}
+    params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.WATER
     params.attribute = tpz.mod.INT
     params.skillType = tpz.skill.BLUE_MAGIC

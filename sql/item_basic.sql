@@ -3841,7 +3841,11 @@ INSERT INTO `item_basic` VALUES (4082,0,'piece_of_moonlight_coral','moonlight_co
 INSERT INTO `item_basic` VALUES (4083,0,'handful_of_beryllium_arrowheads','ber._arrowheads',99,4,0,0,134);
 INSERT INTO `item_basic` VALUES (4084,0,'bag_of_mixed_fletchings','mixed_fletchings',99,4,0,0,96);
 INSERT INTO `item_basic` VALUES (4085,0,'handful_of_beryllium_bolt_heads','ber._bolt_heads',99,4,0,0,235);
-INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,1,20);
+INSERT INTO `item_basic` VALUES (4086,0,'lustreless_scale','lustreless_scale',99,4,46,0,20);
+INSERT INTO `item_basic` VALUES (4087,0,'lustreless_hide','lustreless_hide',99,4,46,0,20);
+INSERT INTO `item_basic` VALUES (4088,0,'lustreless_wing','lustreless_wing',99,4,46,0,20);
+INSERT INTO `item_basic` VALUES (4089,0,'bonanza_pearl','bonanza_pearl',1,61536,0,1,0);
+INSERT INTO `item_basic` VALUES (4090,0,'dream_flower_petal','dream_fl._petal',12,4,0,1,0);
 INSERT INTO `item_basic` VALUES (4094,0,'bowl_of_goblin_stew_880','goblin_stew_880',1,61520,0,0,0);
 INSERT INTO `item_basic` VALUES (4095,0,'bismuth_sheet','bismuth_sheet',12,4,38,0,810);
 INSERT INTO `item_basic` VALUES (4096,0,'fire_crystal','fire_crystal',12,516,35,0,15);
@@ -4856,7 +4860,7 @@ INSERT INTO `item_basic` VALUES (5178,0,'plate_of_dorado_sushi','dorado_sushi',1
 INSERT INTO `item_basic` VALUES (5179,0,'plate_of_dorado_sushi_+1','dorado_sushi_+1',12,1548,53,0,565);
 INSERT INTO `item_basic` VALUES (5180,0,'bowl_of_sophic_stew','sophic_stew',1,1580,55,0,2775);
 INSERT INTO `item_basic` VALUES (5181,0,'tortilla_buena','tortilla_buena',12,1548,56,0,52);
-INSERT INTO `item_basic` VALUES (5182,0,'salty_bretzel','salty_bretzel',99,1548,56,0,638);
+INSERT INTO `item_basic` VALUES (5182,0,'salty_bretzel','salty_bretzel',99,1548,56,0,9);
 INSERT INTO `item_basic` VALUES (5183,0,'viking_herring','viking_herring',12,1548,53,0,184);
 INSERT INTO `item_basic` VALUES (5184,0,'plate_of_vegan_saute','vegan_saute',1,1580,54,0,183);          -- http://www.bg-wiki.com/bg/Vegan_Saute
 INSERT INTO `item_basic` VALUES (5185,0,'leremieu_salad','leremieu_salad',1,1580,54,0,384);
@@ -6187,6 +6191,35 @@ INSERT INTO `item_basic` VALUES (6570,80,'scroll_of_paralyze_ii','paralyze_ii',1
 INSERT INTO `item_basic` VALUES (6571,107,'scroll_of_phalanx_ii','phalanx_ii',1,34444,28,0,10000);
 INSERT INTO `item_basic` VALUES (6572,0,'coffer_of_swart_astral_detritus','coffer_(s_ast)',12,30296,0,0,0);
 INSERT INTO `item_basic` VALUES (6573,0,'coffer_of_murky_astral_detritus','coffer_(m_ast)',12,30296,0,0,0);
+INSERT INTO `item_basic` VALUES (6574,0,'veridical_conflux_shard','v._con._shard',1,63040,0,1,0);
+INSERT INTO `item_basic` VALUES (6575,0,'cheesesteak_sandwich','cheesestk._sand.',12,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6576,0,'turkey_with_rolanberry_sauce','rol._turkey',1,26184,0,1,0);
+INSERT INTO `item_basic` VALUES (6577,0,'bowl_of_clam_chowder','clam_chowder',12,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6578,0,'serving_of_popoto_gratin','popoto_gratin',99,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6579,0,'behemoth_sandwich','behemoth_sand.',12,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6580,0,'bowl_of_rustic_fish','rustic_fish',12,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6581,0,'piece_of_cornbread','cornbread',99,26188,0,1,0);
+INSERT INTO `item_basic` VALUES (6582,0,'watermelon_snow_cone','w._snow_cone',12,13900,0,1,0);
+INSERT INTO `item_basic` VALUES (6583,0,'serving_of_salted_dragonfly_trout','salted_dfly._trout',12,1548,53,0,0);
+INSERT INTO `item_basic` VALUES (6584,0,'serving_of_grilled_dragonfly_trout','grilled_dfly._trout',12,1548,53,0,0);
+INSERT INTO `item_basic` VALUES (6585,0,'chacharoons_grab_bag','ch._grab_bag',1,63048,0,1,0);
+INSERT INTO `item_basic` VALUES (6586,0,'susuroons_gift','susuroons_gift',1,63048,0,1,0);
+INSERT INTO `item_basic` VALUES (6590,0,'lustreless_scale_box','lu._scale_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6591,0,'lustreless_hide_box','lu._hide_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6592,0,'lustreless_wing_box','l._wing_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6593,0,'large_lustreless_scale_box','l._lu._scale_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6594,0,'large_lustreless_hide_box','l._lu._hide_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6595,0,'large_lustreless_wing_box','l._lu._wing_box',99,30300,0,1,0);
+INSERT INTO `item_basic` VALUES (6596,0,'moglophone','moglophone',1,63040,0,1,0);
+INSERT INTO `item_basic` VALUES (6597,0,'maats_concoction','maats_concoc.',1,30280,0,1,0);
+INSERT INTO `item_basic` VALUES (6598,0,'maats_mix','maats_mix',99,30280,0,1,0);
+INSERT INTO `item_basic` VALUES (6599,0,'egg_sandwich','egg_sandwich',12,1544,56,0,100);
+INSERT INTO `item_basic` VALUES (6600,0,'egg_sandwich_+1','egg_sand._+1',12,1544,56,0,100);
+INSERT INTO `item_basic` VALUES (6601,0,'omelette_sandwich','om._sandwich',12,1544,56,0,100);
+INSERT INTO `item_basic` VALUES (6602,0,'omelette_sandwich_+1','om._sand._+1',12,1544,56,0,100);
+INSERT INTO `item_basic` VALUES (6603,0,'bottle_of_rolanberry_854','rolanberry_854',12,1548,0,1,0);
+INSERT INTO `item_basic` VALUES (6604,0,'white_rolanberry','wh._rolanberry',12,1548,0,1,0);
+INSERT INTO `item_basic` VALUES (6605,0,'ripe_white_rolanberry','ri._wh._rolan.',12,1548,0,1,0);
 INSERT INTO `item_basic` VALUES (8193,0,'harlequin_head','harlequin_head',1,0,0,1,0);
 INSERT INTO `item_basic` VALUES (8194,0,'valoredge_x-900_head','valoredge_head',1,0,0,1,0);
 INSERT INTO `item_basic` VALUES (8195,0,'sharpshot_z-500_head','sharpshot_head',1,0,0,1,0);
@@ -7457,6 +7490,7 @@ INSERT INTO `item_basic` VALUES (10071,0,'♪levitus','♪levitus',1,61504,0,0,0
 INSERT INTO `item_basic` VALUES (10072,0,'♪adamantoise','♪adamantoise',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10073,0,'♪dhalmel','♪dhalmel',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10074,0,'♪doll','♪doll',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10076,0,'♪golden_bomb','♪golden_bomb',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10112,906,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,907,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,908,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);
@@ -14168,7 +14202,7 @@ INSERT INTO `item_basic` VALUES (16933,0,'darksteel_claymore_+1','dst._claymore_
 INSERT INTO `item_basic` VALUES (16934,0,'braveheart','braveheart',1,2052,4,0,1996);
 INSERT INTO `item_basic` VALUES (16935,0,'barbarians_sword','barbarians_sword',1,2052,4,0,3900);
 INSERT INTO `item_basic` VALUES (16936,0,'demonic_sword','demonic_sword',1,2052,4,0,3978);
-INSERT INTO `item_basic` VALUES (16937,0,'ice_brand','ice_brand',1,2052,4,0,5077);
+INSERT INTO `item_basic` VALUES (16937,0,'icicle_sword','icicle_sword',1,2052,4,0,5077);
 INSERT INTO `item_basic` VALUES (16938,0,'glorious_sword','glorious_sword',1,2052,4,0,6899);
 INSERT INTO `item_basic` VALUES (16939,0,'ram-dao_+1','ram-dao_+1',1,2080,4,0,9600);
 INSERT INTO `item_basic` VALUES (16940,0,'gerwitzs_sword','gerwitzs_sword',1,63552,0,1,0);
@@ -17222,6 +17256,7 @@ INSERT INTO `item_basic` VALUES (20561,0,'carnwenhan','carnwenhan',1,63552,0,1,0
 INSERT INTO `item_basic` VALUES (20562,0,'carnwenhan','carnwenhan',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20563,0,'twashtar','twashtar',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20564,0,'twashtar','twashtar',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (20571,0,'infiltrator','infiltrator',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20573,0,'aern_dagger','aern_dagger',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20576,0,'qutrub_knife','qutrub_knife',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20577,0,'chicken_knife_ii','chicken_knife_ii',1,63552,0,1,0);
@@ -17300,6 +17335,7 @@ INSERT INTO `item_basic` VALUES (20666,0,'blizzard_brand','blizzard_brand',1,307
 INSERT INTO `item_basic` VALUES (20667,0,'blizzard_brand_+1','blizzard_brand_+1',1,31808,0,0,0);
 INSERT INTO `item_basic` VALUES (20668,0,'firetongue','firetongue',1,30784,0,0,0);
 INSERT INTO `item_basic` VALUES (20669,0,'firetongue_+1','firetongue_+1',1,31808,0,0,0);
+INSERT INTO `item_basic` VALUES (20672,0,'ice_brand','ice_brand',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20674,0,'aern_sword','aern_sword',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (20677,0,'colada','colada',1,30801,0,0,0);
 INSERT INTO `item_basic` VALUES (20678,0,'firangi','firangi',1,63568,0,0,0);
@@ -18094,6 +18130,7 @@ INSERT INTO `item_basic` VALUES (21523,0,'sagitta','sagitta',1,2080,1,0,0);     
 INSERT INTO `item_basic` VALUES (21524,0,'pantin_fists','pantin_fists',1,2080,1,0,0);   -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21525,0,'pitre_fists','pitre_fists',1,2080,1,0,0);     -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21526,0,'xiucoatl','xiucoatl',1,2080,1,0,0);           -- Inscribable, Equippable
+INSERT INTO `item_basic` VALUES (21528,0,'dragon_fangs','dragon_fangs',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21554,0,'arasy_knife','arasy_knife',1,2084,2,0,0);
 INSERT INTO `item_basic` VALUES (21555,0,'arasy_knife_+1','arasy_knife_+1',1,2080,2,0,0);
 INSERT INTO `item_basic` VALUES (21556,0,'beryllium_kris','beryllium_kris',1,2084,2,0,0);
@@ -18107,6 +18144,7 @@ INSERT INTO `item_basic` VALUES (21563,0,'eletta_knife','eletta_knife',1,63552,0
 INSERT INTO `item_basic` VALUES (21564,0,'kaja_knife','kaja_knife',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21565,0,'tauret','tauret',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21566,0,'voluspa_knife','voluspa_knife',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (21570,0,'air_knife','air_knife',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21573,0,'assassins_knife','assassins_knife',1,2080,2,0,0);
 INSERT INTO `item_basic` VALUES (21574,0,'plunderers_knife','plun._knife',1,2080,2,0,0);
 INSERT INTO `item_basic` VALUES (21575,0,'gandring','gandring',1,2080,2,0,0);
@@ -18148,6 +18186,7 @@ INSERT INTO `item_basic` VALUES (21632,0,'luhlaza_sword','luhlaza_sword',1,2080,
 INSERT INTO `item_basic` VALUES (21633,0,'zomorrodnegar','zomorrodnegar',1,2080,3,0,0);     -- Inscribable, Equippable
 INSERT INTO `item_basic` VALUES (21635,0,'malignance_sword','malignance_sword',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21636,0,'nihility','nihility',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (21640,0,'onion_sword_iii','onion_sword_iii',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21654,0,'arasy_claymore','arasy_claymore',1,2084,4,0,0);
 INSERT INTO `item_basic` VALUES (21655,0,'arasy_claymore_+1','arasy_claymore_+1',1,2080,4,0,0);
 INSERT INTO `item_basic` VALUES (21656,0,'dyrnwyn','dyrnwyn',1,2084,4,0,0);
@@ -18206,6 +18245,7 @@ INSERT INTO `item_basic` VALUES (21719,0,'ajja_axe','ajja_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21720,0,'eletta_axe','eletta_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21721,0,'kaja_axe','kaja_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21722,0,'dolichenus','dolichenus',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (21725,0,'demons_axe','demons_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21741,0,'demonic_axe','demonic_axe',1,63568,0,0,0);
 INSERT INTO `item_basic` VALUES (21742,0,'aern_axe','aern_axe',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21744,0,'gramks_axe','gramks_axe',1,63552,0,0,0);
@@ -18222,9 +18262,11 @@ INSERT INTO `item_basic` VALUES (21755,0,'hodadenon','hodadenon',1,63568,0,0,0);
 INSERT INTO `item_basic` VALUES (21756,0,'bravura','bravura',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21757,0,'conqueror','conqueror',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21758,0,'ukonvasara','ukonvasara',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (21759,0,'autarchs_axe','autarchs_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21761,0,'zadha_chopper','zadha_chopper',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21762,0,'arasy_axe','arasy_axe',1,2084,6,0,0);
 INSERT INTO `item_basic` VALUES (21763,0,'arasy_axe_+1','arasy_axe_+1',1,2080,6,0,0);
+INSERT INTO `item_basic` VALUES (21764,0,'drastic_axe','drastic_axe',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21765,0,'hepatizon_axe','hepatizon_axe',1,2084,6,0,0);
 INSERT INTO `item_basic` VALUES (21766,0,'hepatizon_axe_+1','hepatizon_axe_+1',1,2080,6,0,0);
 INSERT INTO `item_basic` VALUES (21767,0,'raetic_chopper','raetic_chopper',1,2080,6,0,0);
@@ -18246,6 +18288,7 @@ INSERT INTO `item_basic` VALUES (21809,0,'liberator','liberator',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21810,0,'redemption','redemption',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (21812,0,'arasy_scythe','arasy_scythe',1,2084,7,0,0);
 INSERT INTO `item_basic` VALUES (21813,0,'arasy_scythe_+1','arasy_scythe_+1',1,2080,7,0,0);
+INSERT INTO `item_basic` VALUES (21814,0,'final_sickle','final_sickle',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21815,0,'maliya_sickle','maliya_sickle',1,2084,7,0,0);
 INSERT INTO `item_basic` VALUES (21816,0,'maliya_sickle_+1','maliya_sickle_+1',1,2080,7,0,0);
 INSERT INTO `item_basic` VALUES (21817,0,'rune_scythe','rune_scythe',1,2052,7,0,0);
@@ -18325,6 +18368,7 @@ INSERT INTO `item_basic` VALUES (21973,0,'eletta_tachi','eletta_tachi',1,63552,0
 INSERT INTO `item_basic` VALUES (21974,0,'kaja_tachi','kaja_tachi',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21975,0,'hachimonji','hachimonji',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (21976,0,'voluspa_tachi','voluspa_tachi',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (21980,0,'zanmato_+2','zanmato_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22004,0,'soulflayers_wand','soulflayers_wand',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22006,0,'voluspa_hammer','voluspa_hammer',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22015,0,'arasy_rod','arasy_rod',1,2084,11,0,0);
@@ -18388,6 +18432,7 @@ INSERT INTO `item_basic` VALUES (22096,0,'draumstafir','draumstafir',1,2080,12,0
 INSERT INTO `item_basic` VALUES (22097,0,'argute_staff','argute_staff',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22098,0,'pedagogy_staff','pedagogy_staff',1,2080,12,0,0);
 INSERT INTO `item_basic` VALUES (22099,0,'musa','musa',1,2080,12,0,0);
+INSERT INTO `item_basic` VALUES (22101,0,'sages_staff','sages_staff',1,64584,0,1,0);
 INSERT INTO `item_basic` VALUES (22107,0,'ullr','ullr',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22108,0,'tokko_bow','tokko_bow',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22109,0,'ajja_bow','ajja_bow',1,63552,0,1,0);
@@ -18426,6 +18471,7 @@ INSERT INTO `item_basic` VALUES (22141,0,'death_penalty','death_penalty',1,63552
 INSERT INTO `item_basic` VALUES (22142,0,'armageddon','armageddon',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22143,0,'fomalhaut','fomalhaut',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22144,0,'voluspa_gun','voluspa_gun',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (22145,0,'artemiss_bow_+1','artemiss_bow_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22147,0,'scouts_crossbow','scouts_crossbow',1,2080,13,0,0);
 INSERT INTO `item_basic` VALUES (22148,0,'arke_crossbow','arke_crossbow',1,2080,13,0,0);
 INSERT INTO `item_basic` VALUES (22149,0,'sharanga','sharanga',1,2080,13,0,0);
@@ -18454,6 +18500,7 @@ INSERT INTO `item_basic` VALUES (22216,0,'eletta_grip','eletta_grip',1,63552,0,1
 INSERT INTO `item_basic` VALUES (22217,0,'kaja_grip','kaja_grip',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22218,0,'khonsu','khonsu',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22219,0,'voluspa_grip','voluspa_grip',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (22249,0,'miracle_cheer','miracle_cheer',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22250,0,'seraphic_ampulla','seraphic_ampulla',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (22251,0,'grenade_core','grenade_core',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (22252,0,'sapience_orb','sapience_orb',1,63572,0,0,0);

@@ -16,6 +16,9 @@ zones[tpz.zone.ROMAEVE] =
         KEYITEM_OBTAINED         = 6391,  -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY  = 6402,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET    = 6417,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE            = 7049,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7208,  -- You can't fish here.
         SENSE_OMINOUS_PRESENCE   = 7394,  -- You sense an ominous presence...
@@ -49,15 +52,15 @@ zones[tpz.zone.ROMAEVE] =
     {
         BASTOK_7_1_QM_POS =
         {
-             [1] = {  162.000, -8.000,   21.000}, -- L-7
-             [2] = {  160.000, -6.000, -110.000}, -- L-10
-             [3] = {  105.000, -4.000, -112.000}, -- K-11
-             [4] = {  126.000, -3.000,  -75.000}, -- K-10
-             [5] = {   60.000, -6.000,    2.000}, -- I-8/J-8
-             [6] = {  -48.000, -4.000,  -32.000}, -- G-9
-             [7] = { -109.000, -4.000, -114.000}, -- E-11
-             [8] = { -137.000,  1.000,  -90.000}, -- E-10
-             [9] = { -105.000, -3.000,  -36.000}, -- E-9
+            [1] = {  162.000, -8.000,   21.000}, -- L-7
+            [2] = {  160.000, -6.000, -110.000}, -- L-10
+            [3] = {  105.000, -4.000, -112.000}, -- K-11
+            [4] = {  126.000, -3.000,  -75.000}, -- K-10
+            [5] = {   60.000, -6.000,    2.000}, -- I-8/J-8
+            [6] = {  -48.000, -4.000,  -32.000}, -- G-9
+            [7] = { -109.000, -4.000, -114.000}, -- E-11
+            [8] = { -137.000,  1.000,  -90.000}, -- E-10
+            [9] = { -105.000, -3.000,  -36.000}, -- E-9
             [10] = { -160.000, -6.000, -107.000}  -- D-10
         },
         CASKET_BASE     = 17277171,

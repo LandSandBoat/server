@@ -1747,6 +1747,23 @@ int32 CCharEntity::GetTimeRemainingUntilDeathHomepoint()
     return 0x0003A020 - (60 * GetSecondsElapsedSinceDeath());
 }
 
+
+int32 CCharEntity::GetTimeCreated()
+{
+    const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
+
+    int32 ret = Sql_Query(SqlHandle, fmtQuery, id);
+
+    if (ret != SQL_ERROR &&
+        Sql_NumRows(SqlHandle) != 0 &&
+        Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    {
+        return Sql_GetIntData(SqlHandle, 0);
+    }
+    
+    return 0;
+}
+
 bool CCharEntity::hasMoghancement(uint16 moghancementID)
 {
     return m_moghancementID == moghancementID;
@@ -1767,7 +1784,7 @@ void CCharEntity::UpdateMoghancement()
                 CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                 if (PFurniture->isInstalled())
                 {
-                    elements[PFurniture->getElement()] += PFurniture->getAura();
+                    elements[PFurniture->getElement() - 1] += PFurniture->getAura();
                 }
             }
         }
@@ -1777,9 +1794,9 @@ void CCharEntity::UpdateMoghancement()
     uint8 dominantElement = 0;
     uint16 dominantAura = 0;
     bool hasTiedElements = false;
-    for (uint8 elementID = 0; elementID < 8; ++elementID)
+    for (uint8 elementID = 1; elementID < 9; ++elementID)
     {
-        uint16 aura = elements[elementID];
+        uint16 aura = elements[elementID - 1];
         if (aura > dominantAura)
         {
             dominantElement = elementID;

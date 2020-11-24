@@ -16,16 +16,25 @@ local THE_ELDIEME_NECROPOLIS =
         click on any of the three Ancient Papyrus shred QMs
         ..............................................................................................]]
     papyrusQmOnTrigger = function(player, ki)
-        if not OldSchoolG1 then
-            if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and not player:hasItem(1088) and not player:hasKeyItem(ki) then
+        if not OLDSCHOOL_G1 then
+            local ANCIENT_PAPYRUS = 1088 -- Human readability
+
+            if
+                player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                not player:hasItem(ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
+            then
                 npcUtil.giveKeyItem(player, ki)
             end
 
-            if player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1) and player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2) and player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3) then
-                npcUtil.giveItem(player, 1088)
+            if
+                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1) and
+                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2) and
+                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3)
+            then
+                npcUtil.giveItem(player, ANCIENT_PAPYRUS)
             end
 
-            if player:hasItem(1088) then
+            if player:hasItem(ANCIENT_PAPYRUS) then
                 player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1)
                 player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2)
                 player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3)

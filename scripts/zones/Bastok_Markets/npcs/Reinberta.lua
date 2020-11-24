@@ -37,7 +37,7 @@ function onTrigger(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
     local guildMember = isGuildMember(player, 6)
-        local rankCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
+    local rankCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
     local expertQuestStatus = 0
     local Rank = player:getSkillRank(tpz.skill.GOLDSMITHING)
     local realSkill = (craftSkill - Rank) / 32
@@ -51,10 +51,12 @@ function onTrigger(player, npc)
     end
 
     if expertQuestStatus == 600 then
-        --[[  Feeding the proper parameter currently hangs the client in cutscene. This may
-              possibly be due to an unimplemented packet or function (display recipe?) Work
-              around to present dialog to player to let them know the trade is ready to be
-              received by triggering with lower rank up parameters.  ]]--
+        --[[
+        Feeding the proper parameter currently hangs the client in cutscene. This may
+        possibly be due to an unimplemented packet or function (display recipe?) Work
+        around to present dialog to player to let them know the trade is ready to be
+        received by triggering with lower rank up parameters.
+        --]]
         player:showText(npc, 7188)
         player:showText(npc, 7190)
         player:startEvent(300, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)

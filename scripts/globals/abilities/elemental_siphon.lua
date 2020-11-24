@@ -22,21 +22,9 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
-    local spiritEle = player:getPetID() + 1 -- get the spirit's ID, then make it line up with element value for the day order.
-    -- pet order: fire, ice, air, earth, thunder, water, light, dark
-    -- day order: fire, earth, water, wind, ice, thunder, light, dark
-    if (spiritEle == 2) then
-        spiritEle = 5
-    elseif (spiritEle == 3) then
-        spiritEle = 4
-    elseif (spiritEle == 4) then
-        spiritEle = 2
-    elseif (spiritEle == 5) then
-        spiritEle = 6
-    elseif (spiritEle == 6) then
-        spiritEle = 3
-    end
+function onUseAbility(player,target,ability)
+    local spiritEle = player:getPetID() + 1 -- get the spirit's ID, it is already aligned in proper element order
+    -- element order: fire, ice, wind, earth, thunder, water, light, dark
 
     local pEquipMods = player:getMod(tpz.mod.ENHANCES_ELEMENTAL_SIPHON)
     local basePower = player:getSkillLevel(tpz.skill.SUMMONING_MAGIC) + pEquipMods - 50

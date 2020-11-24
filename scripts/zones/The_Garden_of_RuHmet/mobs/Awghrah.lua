@@ -17,21 +17,21 @@ function onMobSpawn(mob)
     if (skin == 1161) then -- Fire
         mob:setMod(tpz.mod.ICERES, 27)
         mob:setMod(tpz.mod.WATERRES, -27)
-    elseif (skin == 1164) then --Earth
-        mob:setMod(tpz.mod.THUNDERRES, 27)
-        mob:setMod(tpz.mod.WINDRES, -27)
-    elseif (skin == 1162) then -- Water
-        mob:setMod(tpz.mod.THUNDERRES, -27)
-        mob:setMod(tpz.mod.FIRERES, 27)
+    elseif (skin == 1162) then --Ice
+        mob:setMod(tpz.mod.WINDRES, 27)
+        mob:setMod(tpz.mod.FIRERES, -27)
     elseif (skin == 1163) then -- Wind
         mob:setMod(tpz.mod.ICERES, -27)
         mob:setMod(tpz.mod.EARTHRES, 27)
-    elseif (skin == 1166) then --Ice
-        mob:setMod(tpz.mod.WINDRES, 27)
-        mob:setMod(tpz.mod.FIRERES, -27)
+    elseif (skin == 1164) then --Earth
+        mob:setMod(tpz.mod.THUNDERRES, 27)
+        mob:setMod(tpz.mod.WINDRES, -27)
     elseif (skin == 1165) then --Lightning
         mob:setMod(tpz.mod.WATERRES, 27)
         mob:setMod(tpz.mod.EARTHRES, -27)
+    elseif (skin == 1166) then -- Water
+        mob:setMod(tpz.mod.THUNDERRES, -27)
+        mob:setMod(tpz.mod.FIRERES, 27)
     elseif (skin == 1167) then --Light
         mob:setMod(tpz.mod.LIGHTRES, 27)
         mob:setMod(tpz.mod.DARKRES, -27)

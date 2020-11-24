@@ -4628,21 +4628,21 @@ namespace charutils
 
         static const Mod strong[8] = {
             Mod::FIRE_AFFINITY_PERP,
-            Mod::EARTH_AFFINITY_PERP,
-            Mod::WATER_AFFINITY_PERP,
-            Mod::WIND_AFFINITY_PERP,
             Mod::ICE_AFFINITY_PERP,
+            Mod::WIND_AFFINITY_PERP,
+            Mod::EARTH_AFFINITY_PERP,
             Mod::THUNDER_AFFINITY_PERP,
+            Mod::WATER_AFFINITY_PERP,
             Mod::LIGHT_AFFINITY_PERP,
             Mod::DARK_AFFINITY_PERP};
 
         static const WEATHER weatherStrong[8] = {
             WEATHER_HOT_SPELL,
-            WEATHER_DUST_STORM,
-            WEATHER_RAIN,
-            WEATHER_WIND,
             WEATHER_SNOW,
+            WEATHER_WIND,
+            WEATHER_DUST_STORM,
             WEATHER_THUNDER,
+            WEATHER_RAIN,
             WEATHER_AURORAS,
             WEATHER_GLOOM};
 
@@ -4652,7 +4652,7 @@ namespace charutils
 
         reduction = reduction + PChar->getMod(strong[element]);
 
-        if (CVanaTime::getInstance()->getWeekday() == element)
+        if (battleutils::GetDayElement() == element)
         {
             reduction = reduction + PChar->getMod(Mod::DAY_REDUCTION);
         }

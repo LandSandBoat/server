@@ -156,11 +156,11 @@ CurrentManeuvers CAutomatonController::GetCurrentManeuvers() const
     auto& statuses = PAutomaton->PMaster->StatusEffectContainer;
     return {
     statuses->GetEffectsCount(EFFECT_FIRE_MANEUVER),
-    statuses->GetEffectsCount(EFFECT_EARTH_MANEUVER),
-    statuses->GetEffectsCount(EFFECT_WATER_MANEUVER),
-    statuses->GetEffectsCount(EFFECT_WIND_MANEUVER),
     statuses->GetEffectsCount(EFFECT_ICE_MANEUVER),
+    statuses->GetEffectsCount(EFFECT_WIND_MANEUVER),
+    statuses->GetEffectsCount(EFFECT_EARTH_MANEUVER),
     statuses->GetEffectsCount(EFFECT_THUNDER_MANEUVER),
+    statuses->GetEffectsCount(EFFECT_WATER_MANEUVER),
     statuses->GetEffectsCount(EFFECT_LIGHT_MANEUVER),
     statuses->GetEffectsCount(EFFECT_DARK_MANEUVER)
     };
@@ -546,12 +546,12 @@ bool CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers)
     if (PAutomaton->getMod(Mod::AUTO_SCAN_RESISTS))
     {
         std::vector<std::pair<SpellID, int16>> reslist{
-            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDERRES)),
-            std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICERES)),
             std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRERES)),
+            std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICERES)),
             std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WINDRES)),
-            std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATERRES)),
-            std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTHRES))
+            std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTHRES)),
+            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDERRES)),
+            std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATERRES))
         };
         std::stable_sort(reslist.begin(), reslist.end(), resistanceComparator);
         for (std::pair<SpellID, int16>& res : reslist)

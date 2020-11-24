@@ -6672,7 +6672,7 @@ INSERT INTO `item_equipment` VALUES (16933,'dst._claymore_+1',54,0,2097345,65,0,
 INSERT INTO `item_equipment` VALUES (16934,'braveheart',18,0,2097345,66,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (16935,'barbarians_sword',24,0,2097345,66,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (16936,'demonic_sword',31,0,2097345,71,0,0,1,0);
-INSERT INTO `item_equipment` VALUES (16937,'ice_brand',39,0,2097345,72,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (16937,'icicle_sword',39,0,2097345,72,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (16938,'glorious_sword',53,0,2097345,68,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (16939,'ram-dao_+1',59,0,2097216,75,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (16940,'gerwitzs_sword',50,0,2097345,66,0,0,1,0);
@@ -9726,6 +9726,7 @@ INSERT INTO `item_equipment` VALUES (20561,'carnwenhan',99,119,512,427,0,1,3,0);
 INSERT INTO `item_equipment` VALUES (20562,'carnwenhan',99,119,512,563,0,1,3,0);
 INSERT INTO `item_equipment` VALUES (20563,'twashtar',99,119,262688,465,0,1,3,0);
 INSERT INTO `item_equipment` VALUES (20564,'twashtar',99,119,262688,571,0,1,3,0);
+INSERT INTO `item_equipment` VALUES (20571,'infiltrator',1,0,4194303,164,0,0,3,0); -- TODO: capture model from retail (using Onion Dagger model)
 INSERT INTO `item_equipment` VALUES (20573,'aern_dagger',1,0,4194303,826,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20576,'qutrub_knife',1,0,4194303,831,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20577,'chicken_knife_ii',1,0,4194303,784,0,0,3,0);
@@ -9804,6 +9805,7 @@ INSERT INTO `item_equipment` VALUES (20666,'blizzard_brand',1,0,4194303,782,0,0,
 INSERT INTO `item_equipment` VALUES (20667,'blizzard_brand_+1',1,0,4194303,782,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20668,'firetongue',1,0,4194303,783,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20669,'firetongue_+1',1,0,4194303,783,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (20672,'ice_brand',99,119,32848,265,0,0,3,0); -- TODO: capture model from retail (using Onion Sword model)
 INSERT INTO `item_equipment` VALUES (20674,'aern_sword',1,0,4194303,825,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20677,'colada',99,119,32848,390,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (20678,'firangi',99,119,2097345,445,0,0,3,0);
@@ -10598,6 +10600,7 @@ INSERT INTO `item_equipment` VALUES (21523,'sagitta',99,119,2,480,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21524,'pantin_fists',99,119,131072,121,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21525,'pitre_fists',99,119,131072,121,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21526,'xiucoatl',99,119,131072,480,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21528,'dragon_fangs',99,119,131074,126,0,0,1,0); -- TODO: capture model from retail (using Cesti model)
 INSERT INTO `item_equipment` VALUES (21554,'arasy_knife',99,119,474849,157,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21555,'arasy_knife_+1',99,119,474849,157,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21556,'beryllium_kris',99,119,1589256,346,0,0,3,0);
@@ -10611,6 +10614,7 @@ INSERT INTO `item_equipment` VALUES (21563,'eletta_knife',99,119,464688,724,0,0,
 INSERT INTO `item_equipment` VALUES (21564,'kaja_knife',99,119,464688,836,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21565,'tauret',99,119,464688,847,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21566,'voluspa_knife',99,119,474849,158,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (21570,'air_knife',99,119,262176,159,0,0,3,0); -- TODO: capture model from retail (using Onion Knife model)
 INSERT INTO `item_equipment` VALUES (21573,'assassins_knife',99,119,32,157,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21574,'plun._knife',99,119,32,157,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21575,'gandring',99,119,32,814,0,0,3,0);
@@ -10652,6 +10656,7 @@ INSERT INTO `item_equipment` VALUES (21632,'luhlaza_sword',99,119,32768,278,0,0,
 INSERT INTO `item_equipment` VALUES (21633,'zomorrodnegar',99,119,32768,819,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21635,'malignance_sword',99,119,2097345,280,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21636,'nihility',1,0,4194303,886,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (21640,'onion_sword_iii',99,119,4194303,787,0,0,3,0); -- TODO: capture model from retail (using Onion Sword II model)
 INSERT INTO `item_equipment` VALUES (21654,'arasy_claymore',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21655,'arasy_claymore_+1',99,119,2097345,69,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21656,'dyrnwyn',99,119,128,321,0,0,1,0);
@@ -10709,6 +10714,7 @@ INSERT INTO `item_equipment` VALUES (21719,'ajja_axe',99,119,2098561,81,0,0,3,0)
 INSERT INTO `item_equipment` VALUES (21720,'eletta_axe',99,119,2098561,591,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21721,'kaja_axe',99,119,2098561,850,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21722,'dolichenus',99,119,2098561,850,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (21725,'demons_axe',99,119,256,76,0,0,3,0); -- TODO: capture model from retail (using Bronze Axe model)
 INSERT INTO `item_equipment` VALUES (21741,'demonic_axe',1,0,4194303,793,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21742,'aern_axe',1,0,4194303,827,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21744,'gramks_axe',1,0,4194303,830,0,0,3,0);
@@ -10725,9 +10731,11 @@ INSERT INTO `item_equipment` VALUES (21755,'hodadenon',99,119,1,520,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21756,'bravura',99,119,1,548,0,1,1,0);
 INSERT INTO `item_equipment` VALUES (21757,'conqueror',99,119,1,555,0,1,1,0);
 INSERT INTO `item_equipment` VALUES (21758,'ukonvasara',99,119,1,575,0,1,1,0);
+INSERT INTO `item_equipment` VALUES (21759,'autarchs_axe',1,0,4194303,95,0,0,1,0); -- TODO: capture model from retail (using Greataxe model)
 INSERT INTO `item_equipment` VALUES (21761,'zadha_chopper',1,0,4194303,99,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21762,'arasy_axe',99,119,2097281,92,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21763,'arasy_axe_+1',99,119,2097281,92,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21764,'drastic_axe',99,119,1,95,0,0,1,0); -- TODO: capture model from retail (using Greataxe model)
 INSERT INTO `item_equipment` VALUES (21765,'hepatizon_axe',99,119,2097281,93,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21766,'hepatizon_axe_+1',99,119,2097281,93,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21767,'raetic_chopper',99,119,2638473,335,0,0,1,0);
@@ -10749,6 +10757,7 @@ INSERT INTO `item_equipment` VALUES (21809,'liberator',99,119,128,561,0,1,1,0);
 INSERT INTO `item_equipment` VALUES (21810,'redemption',99,119,128,576,0,1,1,0);
 INSERT INTO `item_equipment` VALUES (21812,'arasy_scythe',99,119,128,194,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21813,'arasy_scythe_+1',99,119,128,194,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21814,'final_sickle',99,119,128,195,0,0,1,0); -- TODO: capture model from retail (using Scythe model)
 INSERT INTO `item_equipment` VALUES (21815,'maliya_sickle',99,119,393,393,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21816,'maliya_sickle_+1',99,119,393,393,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21817,'rune_scythe',70,0,393,521,0,0,1,0);
@@ -10825,6 +10834,7 @@ INSERT INTO `item_equipment` VALUES (21973,'eletta_tachi',99,119,6144,155,0,0,1,
 INSERT INTO `item_equipment` VALUES (21974,'kaja_tachi',99,119,6144,844,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21975,'hachimonji',99,119,6144,844,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21976,'voluspa_tachi',99,119,2048,154,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21980,'zanmato_+2',99,119,2048,788,0,0,1,0); -- TODO: capture model from retail (using Zanmato +1 model)
 INSERT INTO `item_equipment` VALUES (22004,'soulflayers_wand',1,0,4194303,823,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (22006,'voluspa_hammer',99,119,1048580,112,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (22015,'arasy_rod',99,119,1589260,218,0,0,3,0);
@@ -10887,6 +10897,7 @@ INSERT INTO `item_equipment` VALUES (22096,'draumstafir',99,119,16384,820,0,0,1,
 INSERT INTO `item_equipment` VALUES (22097,'argute_staff',99,119,524288,326,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22098,'pedagogy_staff',99,119,524288,326,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22099,'musa',99,119,524288,820,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (22101,'sages_staff',99,119,16388,291,0,0,1,0); -- TODO: capture model from retail (using Onion Staff model)
 INSERT INTO `item_equipment` VALUES (22107,'ullr',99,119,7665,144,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (22108,'tokko_bow',99,119,7665,41,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (22109,'ajja_bow',99,119,7665,38,0,0,4,0);
@@ -10925,6 +10936,7 @@ INSERT INTO `item_equipment` VALUES (22141,'death_penalty',99,119,65536,107,0,1,
 INSERT INTO `item_equipment` VALUES (22142,'armageddon',99,119,66560,109,0,1,4,0);
 INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,134,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (22144,'voluspa_gun',99,119,66560,59,0,0,4,0);
+INSERT INTO `item_equipment` VALUES (22145,'artemiss_bow_+1',99,119,1024,138,0,0,4,0); -- TODO: capture model from retail (using Artemis's Bow model)
 INSERT INTO `item_equipment` VALUES (22147,'scouts_crossbow',99,119,1024,52,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (22148,'arke_crossbow',99,119,1024,52,0,0,4,0);
 INSERT INTO `item_equipment` VALUES (22149,'sharanga',99,119,1024,142,0,0,4,0);
@@ -10953,6 +10965,7 @@ INSERT INTO `item_equipment` VALUES (22216,'eletta_grip',99,0,3696777,0,0,0,2,0)
 INSERT INTO `item_equipment` VALUES (22217,'kaja_grip',99,0,3696777,0,0,0,2,0);
 INSERT INTO `item_equipment` VALUES (22218,'khonsu',99,0,3696777,0,0,0,2,0);
 INSERT INTO `item_equipment` VALUES (22219,'voluspa_grip',99,0,4194303,0,0,0,2,0);
+INSERT INTO `item_equipment` VALUES (22249,'miracle_cheer',99,0,512,68,0,0,4,0); -- TODO: capture model from retail (using Mary's Horn model)
 INSERT INTO `item_equipment` VALUES (22250,'seraphic_ampulla',99,0,1720332,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (22251,'grenade_core',99,0,2101409,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (22252,'sapience_orb',99,0,4194303,0,0,0,8,0);

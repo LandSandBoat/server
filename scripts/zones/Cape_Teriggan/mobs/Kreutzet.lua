@@ -2,7 +2,7 @@
 -- Area: Cape Teriggan
 --   NM: Kreutzet
 -----------------------------------
-require("scripts/globals/weather")
+require("scripts/globals/world")
 -----------------------------------
 
 function onMobRoam(mob)

@@ -16,6 +16,9 @@ zones[tpz.zone.DYNAMIS_SAN_DORIA_D] =
         KEYITEM_OBTAINED        = 6391, -- Obtained key item: <keyitem>.
         ITEMS_OBTAINED          = 6397, -- You obtain <number> <item>!
         NOTHING_OUT_OF_ORDINARY = 6402, -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS     = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE           = 7049, -- Tallying conquest results...
     },
     mob =

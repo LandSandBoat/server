@@ -23,6 +23,7 @@ end
 
 function onSpellCast(caster, target, spell)
     local params = {}
+    params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.FIRE
     params.multiplier = 1.375
     params.tMultiplier = 1.0

@@ -40,7 +40,9 @@ tpz.msg.channel =
     LINKSHELL3     = 30, -- Yes really it looks like a 3rd LS may have been planned at some point.
     NS_LINKSHELL3  = 31, -- (assumed as it follows pattern and color)
     UNKNOWN_32     = 32, -- Looks the same as 31
-    UNITY          = 33
+    UNITY          = 33,
+    JP_ASSIST      = 34,
+    NA_ASSIST      = 35,
 }
 
 -- used by PrintToArea

@@ -59,7 +59,9 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_LINKSHELL3    = 30, // Yes really, it looks like a 3rd LS may have been planned at some point.
     MESSAGE_NS_LINKSHELL3 = 31, // (assumed, as it follows pattern and color)
     MESSAGE_UNKNOWN_32    = 32, // Looks the same as 31
-    MESSAGE_UNITY         = 33
+    MESSAGE_UNITY         = 33,
+    MESSAGE_JP_ASSIST     = 34,
+    MESSAGE_NA_ASSIST     = 35,
 };
 
 /************************************************************************

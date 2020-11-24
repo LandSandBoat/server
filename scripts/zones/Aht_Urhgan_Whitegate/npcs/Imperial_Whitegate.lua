@@ -15,37 +15,42 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 function onTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0 then
-        if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
-                doRoyalPalaceArmorCheck(player) == true then
-            player:startEvent(3078, 0, 1, 0, 0, 0, 0, 0, 1, 0)
-        elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.SEAL_OF_THE_SERPENT then
-            player:startEvent(3111)
-        elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMPERIAL_CORONATION and
-                doRoyalPalaceArmorCheck(player) == true then
-            player:startEvent(3140, tpz.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
-        elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.IMPERIAL_CORONATION and
-                doRoyalPalaceArmorCheck(player) == true then
-            local ring = player:getCharVar("TOAU_RINGTIME")
-            local standard = player:hasItem(129)
+function onTrigger(player,npc)
+    local noWeapons = player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0
+    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        player:startEvent(3078, 0, 1, 0, 0, 0, 0, 0, 1, 0)
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
+        player:startEvent(3111)
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMPERIAL_CORONATION and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        player:startEvent(3140, tpz.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
+    elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.IMPERIAL_CORONATION and
+        doRoyalPalaceArmorCheck(player) and noWeapons then
+        local ring = player:getCharVar("TOAU_RINGTIME")
+        local standard = player:hasItem(129)
 
-            local ringParam = 0
+        local ringParam = 0
 
-            if ring == 0 then
-                ringParam = 1
-            end
-
-            local standardParam = 0
-
-            if standard == false then
-                standardParam = 1
-            end
-
-            if ringParam > 0 or standardParam > 0 then
-                player:startEvent(3155, standardParam, ringParam, 0, 0, 0, 0, 0, 0, 0)
-            end
+        if ring == 0 then
+            ringParam = 1
         end
+
+        local standardParam = 0
+
+        if standard == false then
+            standardParam = 1
+        end
+
+        if ringParam > 0 or standardParam > 0 then
+            player:startEvent(3155, standardParam, ringParam, 0, 0, 0, 0, 0, 0, 0)
+        end
+
+    -- TRANSFORMATIONS
+    elseif player:getCharVar("TransformationsProgress") == 1 then
+        player:startEvent(722)
+    else
+        player:messageSpecial(ID.text.GATE_IS_FIRMLY_CLOSED)
     end
 end
 
@@ -85,5 +90,9 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, 129)
+    elseif csid == 722 then
+        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+        player:setCharVar("TransformationsProgress", 2)
+        player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end
 end

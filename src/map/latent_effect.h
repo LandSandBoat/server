@@ -65,13 +65,13 @@ enum LATENT
     LATENT_LIGHTNINGSDAY            = 35,
     LATENT_LIGHTSDAY                = 36,
     LATENT_MOON_PHASE               = 37, //PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
-    LATENT_JOB_MULTIPLE_5           = 38,
-    LATENT_JOB_MULTIPLE_10          = 39,
-    LATENT_JOB_MULTIPLE_13_NIGHT    = 40,
-    LATENT_JOB_LEVEL_ODD            = 41,
-    LATENT_JOB_LEVEL_EVEN           = 42,
+    LATENT_JOB_MULTIPLE             = 38, //PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
+    LATENT_JOB_MULTIPLE_AT_NIGHT    = 39, //PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
+    // 40 free to use
+    // 41 free to use
+    // 42 free to use
     LATENT_WEAPON_DRAWN_HP_UNDER    = 43, //PARAM: HP PERCENT
-    //                              = 44  //Unused
+    // 44 free to use
     LATENT_MP_UNDER_VISIBLE_GEAR    = 45, //mp less than or equal to %, calculated using MP bonuses from visible gear only
     LATENT_HP_OVER_VISIBLE_GEAR     = 46, //hp more than or equal to %, calculated using HP bonuses from visible gear only
     LATENT_WEAPON_BROKEN            = 47,
@@ -79,7 +79,7 @@ enum LATENT
     LATENT_FOOD_ACTIVE              = 49, //food effect (foodId) active - PARAM: FOOD ITEMID
     LATENT_JOB_LEVEL_BELOW          = 50, //PARAM: level
     LATENT_JOB_LEVEL_ABOVE          = 51, //PARAM: level
-    LATENT_WEATHER_ELEMENT          = 52, //PARAM: 0: NONE, 1: FIRE, 2: EARTH, 3: WATER, 4: WIND, 5: ICE, 6: THUNDER, 7: LIGHT, 8: DARK
+    LATENT_WEATHER_ELEMENT          = 52, //PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
     LATENT_NATION_CONTROL           = 53, //checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
     LATENT_ZONE_HOME_NATION         = 54, //in zone and citizen of nation (aketons)
     LATENT_MP_OVER                  = 55, //mp greater than # - PARAM: MP #

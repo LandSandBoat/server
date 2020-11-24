@@ -63,6 +63,7 @@ public:
     int32 getLocalVar(lua_State*);
     int32 setLocalVar(lua_State*);
     int32 resetLocalVars(lua_State*);
+    int32 getLastOnline(lua_State*);        // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
     int32 injectPacket(lua_State*);         // Send the character a packet kept in a file
@@ -263,6 +264,7 @@ public:
     int32 speed(lua_State*);                // скорость передвижения сущности
 
     int32 getPlaytime(lua_State*);
+    int32 getTimeCreated(lua_State*);
 
     // Player Jobs and Levels
     int32 getMainJob(lua_State*);           // Returns Entity Main Job

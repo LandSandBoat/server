@@ -34,7 +34,9 @@ function onInitialize(zone)
     zone:registerRegion(20, 550, -2, 522, 557, 0, 529)  -- map 11 west porter (white)
     zone:registerRegion(21, -556, -2, -489, -550, 0, -483)  -- map 12 east porter (white)
     zone:registerRegion(22, -610, -2, -489, -603, 0, -483)  -- map 12 west porter (blue)
-    zone:registerRegion(23, 382, -1, -582, 399, 1, -572)    -- mission 9 TOAU
+    zone:registerRegion(23, 382, -1, -582, 399, 1, -572)  -- mission 9 TOAU
+    zone:registerRegion(24,  52, -1, 774, 67, 1, 778)  -- transformations (quest)
+    zone:registerRegion(25, 134, -1, -584, 146, 1, -577)  -- transformations (quest)
 end
 
 function onZoneIn(player, prevZone)
@@ -136,6 +138,16 @@ function onRegionEnter(player, region)
                 player:startEvent(1, tpz.besieged.getMercenaryRank(player))
             end
         end,
+        [24] = function (x)
+            if player:getCharVar("TransformationsProgress") == 2 then
+                player:startEvent(2)
+            end
+        end,
+        [25] = function (x)
+            if player:getCharVar("TransformationsProgress") == 3 then
+                player:startEvent(3)
+            end
+        end,
     }
 end
 
@@ -158,11 +170,17 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
+    local transformationsProgress = player:getCharVar("TransformationsProgress")
+
     if csid == 1 then
         player:addKeyItem(tpz.ki.ASTRAL_COMPASS)
         player:completeMission(TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
         player:addMission(TOAU, tpz.mission.id.toau.ASTRAL_WAVES)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASTRAL_COMPASS)
+    elseif csid == 2 then
+        player:setCharVar("TransformationsProgress", 3)
+    elseif csid == 3 then
+        player:setCharVar("TransformationsProgress", 4)
     elseif csid == 7 then
         player:completeMission(TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
         player:setTitle(tpz.title.NAJAS_COMRADEINARMS)

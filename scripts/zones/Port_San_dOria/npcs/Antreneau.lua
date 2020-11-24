@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-     player:startEvent(532) -- What's this?  I don't need this.
+    player:startEvent(532) -- What's this?  I don't need this.
 end
 
 function onTrigger(player, npc)

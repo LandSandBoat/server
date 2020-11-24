@@ -47,6 +47,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF2") ~= 1 then
+            local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
                 GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.ICEDEF, -128)
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+5):isAlive() then

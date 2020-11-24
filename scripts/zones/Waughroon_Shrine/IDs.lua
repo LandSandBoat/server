@@ -14,6 +14,9 @@ zones[tpz.zone.WAUGHROON_SHRINE] =
         ITEM_OBTAINED                = 6388, -- Obtained: <item>.
         GIL_OBTAINED                 = 6389, -- Obtained <number> gil.
         KEYITEM_OBTAINED             = 6391, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS          = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY      = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                 = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE                = 7049, -- Tallying conquest results...
         YOU_DECIDED_TO_SHOW_UP       = 7677, -- So, you decided to show up. Now it's time to see what you're really made of, heh heh heh.
         LOOKS_LIKE_YOU_WERENT_READY  = 7678, -- Looks like you weren't ready for me, were you? Now go home, wash your face, and come back when you think you've got what it takes.
@@ -24,6 +27,8 @@ zones[tpz.zone.WAUGHROON_SHRINE] =
         THAT_LL_HURT_IN_THE_MORNING  = 7683, -- Ungh... That'll hurt in the morning...
         ONE_TENTACLE_WOUNDED         = 7701, -- One of the sea creature's tentacles have been wounded.
         ALL_TENTACLES_WOUNDED        = 7702, -- All of the sea creature's tentacles have been wounded.
+		SCORPION_IS_STUNNED			 = 7703, -- The platoon scorpion does not have enough energy to attack!
+		SCORPION_IS_BOUND			 = 7704, -- The platoon scorpion's legs are lodged in the rocks!
         PROMISE_ME_YOU_WONT_GO_DOWN  = 7720, -- Promise you won't go down too easy, okay?
         IM_JUST_GETTING_WARMED_UP    = 7721, -- Haha! I'm just getting warmed up!
         YOU_PACKED_MORE_OF_A_PUNCH   = 7722, -- Hah! You pack more of a punch than I thoughtaru. But I won't go down as easy as old Maat!
@@ -43,6 +48,32 @@ zones[tpz.zone.WAUGHROON_SHRINE] =
     },
     npc =
     {
+    },
+    operationDesertSwarm = {
+        [1] = {
+            17367266,
+            17367267,
+            17367268,
+            17367269,
+            17367270,
+            17367271,
+        },
+        [2] = {
+            17367273,
+            17367274,
+            17367275,
+            17367276,
+            17367277,
+            17367278,
+        },
+        [3] = {
+            17367280,
+            17367281,
+            17367282,
+            17367283,
+            17367284,
+            17367285,
+        },
     },
 }
 

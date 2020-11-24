@@ -44,22 +44,22 @@ enum ENSPELL
 {
     ENSPELL_NONE = 0,
     ENSPELL_I_FIRE = 1,
-    ENSPELL_I_EARTH = 2,
-    ENSPELL_I_WATER = 3,
-    ENSPELL_I_WIND = 4,
-    ENSPELL_I_ICE = 5,
-    ENSPELL_I_THUNDER = 6,
+    ENSPELL_I_ICE = 2,
+    ENSPELL_I_WIND = 3,
+    ENSPELL_I_EARTH = 4,
+    ENSPELL_I_THUNDER = 5,
+    ENSPELL_I_WATER = 6,
     ENSPELL_I_LIGHT = 7,
     ENSPELL_I_DARK = 8,
     ENSPELL_II_FIRE = 9,
-    ENSPELL_II_EARTH = 10,
-    ENSPELL_II_WATER = 11,
-    ENSPELL_II_WIND = 12,
-    ENSPELL_II_ICE = 13,
-    ENSPELL_II_THUNDER = 14,
+    ENSPELL_II_ICE = 10,
+    ENSPELL_II_WIND = 11,
+    ENSPELL_II_EARTH = 12,
+    ENSPELL_II_THUNDER = 13,
+    ENSPELL_II_WATER = 14,
     ENSPELL_II_LIGHT = 15,
-    ENSPELL_BLOOD_WEAPON = 16,
-    ENSPELL_ROLLING_THUNDER = 17,
+    ENSPELL_II_DARK = 16,
+    ENSPELL_BLOOD_WEAPON = 17,
     ENSPELL_AUSPICE = 18,
     ENSPELL_DRAIN_SAMBA = 19,
     ENSPELL_ASPIR_SAMBA = 20,
@@ -85,11 +85,11 @@ enum ELEMENT
 {
     ELEMENT_NONE = 0,
     ELEMENT_FIRE = 1,
-    ELEMENT_EARTH = 2,
-    ELEMENT_WATER = 3,
-    ELEMENT_WIND = 4,
-    ELEMENT_ICE = 5,
-    ELEMENT_THUNDER = 6,
+    ELEMENT_ICE = 2,
+    ELEMENT_WIND = 3,
+    ELEMENT_EARTH = 4,
+    ELEMENT_THUNDER = 5,
+    ELEMENT_WATER = 6,
     ELEMENT_LIGHT = 7,
     ELEMENT_DARK = 8
 };
@@ -141,6 +141,7 @@ namespace battleutils
     uint8               GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber);
     uint8               GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
     uint8               GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack);
+    int8                GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8               GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8               GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8               GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
@@ -228,6 +229,7 @@ namespace battleutils
     void                assistTarget(CCharEntity* PChar, uint16 TargID);
 
     uint8               GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell);
+    ELEMENT             GetDayElement();
     WEATHER             GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER             GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool                WeatherMatchesElement(WEATHER weather, uint8 element);

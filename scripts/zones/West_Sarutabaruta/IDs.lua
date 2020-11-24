@@ -18,6 +18,9 @@ zones[tpz.zone.WEST_SARUTABARUTA] =
         KEYITEM_LOST                = 6392,  -- Lost key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY     = 6402,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET       = 6417,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS         = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY     = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET      = 7049,  -- You can't fish here.
         DIG_THROW_AWAY              = 7062,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                = 7064,  -- You dig and you dig, but find nothing.
@@ -72,17 +75,17 @@ zones[tpz.zone.WEST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE     = 17248765,
-        SIGNPOST_OFFSET = 17248792,
-        OVERSEER_BASE   = 17248825,
+        CASKET_BASE     = 17248766,
+        SIGNPOST_OFFSET = 17248793,
+        OVERSEER_BASE   = 17248826, -- Naguipeillont_RK in npc_list
         HARVESTING =
         {
-            17248841,
             17248842,
             17248843,
             17248844,
             17248845,
             17248846,
+            17248847,
         },
     },
 }
