@@ -558,17 +558,18 @@ INSERT INTO `guild_shops` VALUES (5262,951,90,350,255,48,100);       -- wijnruit
 INSERT INTO `guild_shops` VALUES (5262,1108,573,3213,255,48,100);    -- sulfur
 INSERT INTO `guild_shops` VALUES (5262,1109,930,4563,255,0,100);     -- artificial_lens
 INSERT INTO `guild_shops` VALUES (5262,2131,75,242,255,48,100);      -- triturator
-INSERT INTO `guild_shops` VALUES (5262,4112,682,728,80,16,32);       -- potion
-INSERT INTO `guild_shops` VALUES (5262,4116,3375,7560,55,0,22);      -- hi-potion
-INSERT INTO `guild_shops` VALUES (5262,4128,3624,17201,30,0,12);     -- ether
-INSERT INTO `guild_shops` VALUES (5262,4148,1200,1377,80,0,32);      -- antidote
-INSERT INTO `guild_shops` VALUES (5262,4150,1945,9549,80,0,32);      -- eye_drops
-INSERT INTO `guild_shops` VALUES (5262,4151,880,2944,80,0,32);       -- echo_drops
-INSERT INTO `guild_shops` VALUES (5262,4154,5250,13300,55,0,22);     -- holy_water
+-- TODO: All items purchasable from Curio Moogle commented out pending research on price changes
+-- INSERT INTO `guild_shops` VALUES (5262,4112,682,728,80,16,32);       -- potion
+-- INSERT INTO `guild_shops` VALUES (5262,4116,3375,7560,55,0,22);      -- hi-potion
+-- INSERT INTO `guild_shops` VALUES (5262,4128,3624,17201,30,0,12);     -- ether
+-- INSERT INTO `guild_shops` VALUES (5262,4148,1200,1377,80,0,32);      -- antidote
+-- INSERT INTO `guild_shops` VALUES (5262,4150,1945,9549,80,0,32);      -- eye_drops
+-- INSERT INTO `guild_shops` VALUES (5262,4151,880,2944,80,0,32);       -- echo_drops
+-- INSERT INTO `guild_shops` VALUES (5262,4154,5250,13300,55,0,22);     -- holy_water
 INSERT INTO `guild_shops` VALUES (5262,4162,5250,13300,80,0,32);     -- silencing_potion
-INSERT INTO `guild_shops` VALUES (5262,4164,1050,6832,165,0,65);     -- prism_powder
-INSERT INTO `guild_shops` VALUES (5262,4165,900,5712,165,0,65);
-INSERT INTO `guild_shops` VALUES (5262,4166,750,2080,165,0,65);
+-- INSERT INTO `guild_shops` VALUES (5262,4164,1050,6832,165,0,65);     -- prism_powder
+-- INSERT INTO `guild_shops` VALUES (5262,4165,900,5712,165,0,65);
+-- INSERT INTO `guild_shops` VALUES (5262,4166,750,2080,165,0,65);
 INSERT INTO `guild_shops` VALUES (5262,4171,750,2080,255,0,100);
 INSERT INTO `guild_shops` VALUES (5262,4443,750,2080,255,48,100);
 INSERT INTO `guild_shops` VALUES (5262,4509,9,58,375,0,150);
