@@ -98,6 +98,12 @@ tpz.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
 end
 
 tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
+
+    -- Trusts must be enabled in settings
+    if ENABLE_TRUST_CASTING == 0 then
+        return tpz.msg.basic.TRUST_NO_CAST_TRUST
+    end
+
     -- Trusts not allowed in an alliance
     if caster:checkSoloPartyAlliance() == 2 then
         return tpz.msg.basic.TRUST_NO_CAST_TRUST
