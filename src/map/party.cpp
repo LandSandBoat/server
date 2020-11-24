@@ -1191,6 +1191,21 @@ uint32 CParty::GetTimeLastMemberJoined()
     return (uint32)std::chrono::time_point_cast<std::chrono::seconds>(m_TimeLastMemberJoined).time_since_epoch().count();
 }
 
+bool CParty::HasTrusts()
+{
+    for (auto* PMember : members)
+    {
+        if (auto PCharMember = dynamic_cast<CCharEntity*>(PMember))
+        {
+            if (!PCharMember->PTrusts.empty())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
 {
     for (auto&& memberinfo : info)
