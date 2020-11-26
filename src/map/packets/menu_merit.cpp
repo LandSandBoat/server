@@ -52,7 +52,8 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 
     PChar->pushPacket(new CBasicPacket(*this));
 
-    // ver 30121205_4 second packet
+    // Update Type 3 : Monstrosity 1 (Possible to move these packets out of here?)
+    // --------------------------------------------
 
     this->size = 0x6E;
 
@@ -64,19 +65,25 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     };
 
 	memcpy(data+(0x04), &packet, sizeof(packet));
+
+    // This is a hack.  We really should clear all non-relevant bytes in memset
+    ref<uint8>(0x0C) = 0x00; // Temporary fix for Monstrosity Gladiator Rank.  This applies to next packet as well.
+
 	PChar->pushPacket(new CBasicPacket(*this));
 
-	// ver 30130319_5 third packet
+	// Update Type 4 : Monstrosity 2
+    // --------------------------------------------
 
-	this->size = 0x44;
+	this->size = 0x5A;
 
 	memset(data + 4, 0, sizeof(PACKET_SIZE -4));
 
 	uint8 packet2[] =
 	{
-		0x04, 0x00, 0x84
+		0x04, 0x00, 0xB0
 	};
 	memcpy(data+(0x04), &packet2, sizeof(packet2));
+
 }
 
 
