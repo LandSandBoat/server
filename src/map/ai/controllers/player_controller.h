@@ -54,9 +54,9 @@ public:
     CWeaponSkill* getLastWeaponSkill();
 
 protected:
-    time_point m_lastAttackTime {server_clock::now()};
-    time_point m_errMsgTime {server_clock::now()};
-    CWeaponSkill* m_lastWeaponSkill;
+    time_point m_lastAttackTime { server_clock::now() };
+    time_point m_errMsgTime { server_clock::now() };
+    CWeaponSkill* m_lastWeaponSkill { nullptr };
 };
 
 #endif // _PLAYERCONTROLLER
