@@ -605,7 +605,7 @@ bool CGambitsContainer::TryTrustSkill()
                 auto PMasterController = static_cast<CPlayerController*>(PMaster->PAI->GetController());
                 auto PMasterLastWeaponSkill = PMasterController->getLastWeaponSkill();
 
-                if (PMasterLastWeaponSkill)
+                if (PMasterLastWeaponSkill != nullptr)
                 {
                     for (auto& skill : tp_skills)
                     {

@@ -3646,7 +3646,38 @@ namespace battleutils
                 }
             }
         }
-        //no Trick attack party member available
+
+        // Check for trusts
+        // TODO: Roll this into all the loops above
+        if (auto PChar = dynamic_cast<CCharEntity*>(taUser))
+        {
+            PChar->ForPartyWithTrusts([&](CBattleEntity* member)
+            {
+                if (member->id != taUser->id && distance(member->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
+                {
+                    float memberXdif = member->loc.p.x - mobX;
+                    float memberZdif = member->loc.p.z - mobZ;
+                    if (zDependent)
+                    {
+                        if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
+                        {
+                            // finally found a TA partner
+                            return member;
+                        }
+                    }
+                    else
+                    {
+                        if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
+                        {
+                            // finally found a TA partner
+                            return member;
+                        }
+                    }
+                }
+            });
+        }
+
+        // No Trick attack party member available
         return nullptr;
     }
 
