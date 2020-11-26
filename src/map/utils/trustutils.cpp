@@ -363,9 +363,10 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
 
     auto scaleToGrade = [mapRanges](float input) -> unsigned int
     {
-        unsigned reverseMappedGrade = mapRanges(80U, 140U, 1U, 7U, static_cast<unsigned int>(input * 100U));
-        reverseMappedGrade += 1U; // Boost grades
-        return std::clamp(7U - reverseMappedGrade, 1U, 7U);
+        unsigned int multipliedInput = static_cast<unsigned int>(input * 100U);
+        unsigned int reverseMappedGrade = mapRanges(70U, 140U, 1U, 7U, multipliedInput);
+        unsigned int outputGrade = std::clamp(7U - reverseMappedGrade, 1U, 7U);
+        return outputGrade;
     };
 
     // HP/MP ========================
@@ -448,6 +449,7 @@ void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     }
 
     grade = grade::GetJobGrade(mJob, 1);
+
     if (grade > 0)
     {
         jobStat =
