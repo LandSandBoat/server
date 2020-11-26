@@ -55,7 +55,8 @@ function onEffectTick(target, effect)
             -- Records of Eminence: Heal Without Using Magic
             if
                 target:getObjType() == tpz.objType.PC and
-                target:getEminenceProgress(4) and healHP > 0 and
+                target:getEminenceProgress(4) and
+                healHP > 0 and
                 target:getHPP() < 100
             then
                 tpz.roe.onRecordTrigger(target, 4)
