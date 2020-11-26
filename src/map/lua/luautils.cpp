@@ -88,7 +88,8 @@ namespace luautils
 #define lua_prepscript(n,...) int8 File[255]; \
                               snprintf((char*)File, sizeof(File), n, ##__VA_ARGS__);
 
-    lua_State*  LuaHandle = nullptr;
+    sol::state lua;
+    lua_State* LuaHandle = nullptr;
 
     bool contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
@@ -103,11 +104,13 @@ namespace luautils
     {
         TracyZoneScoped;
         ShowStatus("luautils::init:lua initializing...");
-        LuaHandle = luaL_newstate();
 
-        sol::state_view lua(LuaHandle);
+        lua = sol::state();
+
+        // Legacy
+        LuaHandle = lua.lua_state();
+
         lua.open_libraries();
-
         lua.set_function("print", &luautils::print);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
@@ -171,6 +174,10 @@ namespace luautils
         Lunar<CLuaZone>::Register(LuaHandle);
         Lunar<CLuaItem>::Register(LuaHandle);
 
+        // TODO: Convert this to use Sol
+        luaL_dostring(LuaHandle, "if not bit then bit = require('bit') end");
+
+        // TODO: Convert this to use Sol
         lua_getglobal(LuaHandle, "math");
         lua_pushstring(LuaHandle, "random");
         lua_pushcfunction(LuaHandle, luautils::random);
