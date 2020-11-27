@@ -19,22 +19,43 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/blowfish.h"
-#include "../common/md52.h"
-#include "../common/showmsg.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
-#include "../common/version.h"
-#include "../common/zlib.h"
+#include "common/blowfish.h"
+#include "common/md52.h"
+#include "common/showmsg.h"
+#include "common/timer.h"
+#include "common/utils.h"
+#include "common/version.h"
+#include "common/zlib.h"
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <thread>
 
-#include "alliance.h"
 #include "ability.h"
+#include "alliance.h"
+#include "conquest_system.h"
+#include "linkshell.h"
+#include "map.h"
+#include "message.h"
+#include "mob_spell_list.h"
+#include "packet_guard.h"
+#include "packet_system.h"
+#include "party.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "time_server.h"
+#include "transport.h"
+#include "vana_time.h"
+
+#include "ai/controllers/automaton_controller.h"
+
+#include "lua/luautils.h"
+#include "packets/basic.h"
+#include "packets/char_update.h"
+
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -42,29 +63,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
-#include "linkshell.h"
-#include "map.h"
-#include "mob_spell_list.h"
-#include "packet_guard.h"
-#include "packet_system.h"
-#include "party.h"
-#include "utils/petutils.h"
-#include "roe.h"
-#include "spell.h"
-#include "time_server.h"
-#include "transport.h"
-#include "vana_time.h"
-#include "status_effect_container.h"
-#include "utils/zoneutils.h"
-#include "conquest_system.h"
 #include "utils/mobutils.h"
-#include "ai/controllers/automaton_controller.h"
+#include "utils/petutils.h"
+#include "utils/zoneutils.h"
 
-#include "lua/luautils.h"
-
-#include "packets/basic.h"
-#include "packets/char_update.h"
-#include "message.h"
+#ifdef DEBUG
+#include "filewatch/FileWatch.hpp"
+#endif
 
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
