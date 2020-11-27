@@ -3552,7 +3552,8 @@ namespace battleutils
         float slope = 0;
         float maxSlope = 0;
         float minSlope = 0;
-        bool zDependent = true; //using a slope where z is dependent var
+        bool zDependent = true; // using a slope where z is dependent var
+
         if (abs(xdif) <= abs(zdif))
         {
             slope = xdif / zdif;
@@ -3569,7 +3570,8 @@ namespace battleutils
             minSlope = ((minXpoint - mobX) / (minZpoint - mobZ));
             zDependent = false;
         }
-        else {
+        else
+        {
             slope = zdif / xdif;
 
             float angle = (float)atan((double)1) * 2 - atan(slope);
@@ -3583,6 +3585,50 @@ namespace battleutils
             maxSlope = (maxZpoint - mobZ) / (maxXpoint - mobX);
             minSlope = (minZpoint - mobZ) / (minXpoint - mobX);
         }
+
+        auto checkPosition = [&](CBattleEntity* PEntity) -> bool
+        {
+            if (taUser->id != PEntity->id && distance(PEntity->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
+            {
+                float memberXdif = PEntity->loc.p.x - mobX;
+                float memberZdif = PEntity->loc.p.z - mobZ;
+                if (zDependent)
+                {
+                    if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
+                    {
+                        // finally found a TA partner
+                        return true;
+                    }
+                }
+                else
+                {
+                    if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
+                    {
+                        // finally found a TA partner
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        };
+
+        auto checkTrusts = [&](CBattleEntity* PEntity) -> CBattleEntity*
+        {
+            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
+            {
+                for (auto* PTrust : PChar->PTrusts)
+                {
+                    if (checkPosition(PTrust))
+                    {
+                        return PTrust;
+                    }
+                }
+            }
+
+            return nullptr;
+        };
+
         if (taUser->PParty != nullptr)
         {
             if (taUser->PParty->m_PAlliance != nullptr)
@@ -3592,89 +3638,34 @@ namespace battleutils
                     for (uint8 i = 0; i < taUser->PParty->m_PAlliance->partyList.at(a)->members.size(); ++i)
                     {
                         CBattleEntity* member = taUser->PParty->m_PAlliance->partyList.at(a)->members.at(i);
-                        if (taUser->id != member->id && distance(member->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
+                        if (checkPosition(member))
                         {
-                            float memberXdif = member->loc.p.x - mobX;
-                            float memberZdif = member->loc.p.z - mobZ;
-                            if (zDependent)
-                            {
-                                if ((memberZdif <= memberXdif * maxSlope) &&
-                                    (memberZdif >= memberXdif * minSlope))
-                                {
-                                    //finally found a TA partner
-                                    return member;
-                                }
-                            }
-                            else {
-                                if ((memberXdif <= memberZdif * maxSlope) &&
-                                    (memberXdif >= memberZdif * minSlope))
-                                {
-                                    //finally found a TA partner
-                                    return member;
-                                }
-                            }
+                            return member;
+                        }
+
+                        if (auto* potentialTrust = checkTrusts(member))
+                        {
+                            return potentialTrust;
                         }
                     }
                 }
             }
-            else {//no alliance
+            else
+            { // No alliance
                 for (uint8 i = 0; i < taUser->PParty->members.size(); ++i)
                 {
                     CBattleEntity* member = taUser->PParty->members.at(i);
-                    if (member->id != taUser->id && distance(member->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
+                    if (checkPosition(member))
                     {
-                        float memberXdif = member->loc.p.x - mobX;
-                        float memberZdif = member->loc.p.z - mobZ;
-                        if (zDependent)
-                        {
-                            if ((memberZdif <= memberXdif * maxSlope) &&
-                                (memberZdif >= memberXdif * minSlope))
-                            {
-                                //finally found a TA partner
-                                return member;
-                            }
-                        }
-                        else {
-                            if ((memberXdif <= memberZdif * maxSlope) &&
-                                (memberXdif >= memberZdif * minSlope))
-                            {
-                                //finally found a TA partner
-                                return member;
-                            }
-                        }
+                        return member;
+                    }
+
+                    if (auto* potentialTrust = checkTrusts(member))
+                    {
+                        return potentialTrust;
                     }
                 }
             }
-        }
-
-        // Check for trusts
-        // TODO: Roll this into all the loops above
-        if (auto PChar = dynamic_cast<CCharEntity*>(taUser))
-        {
-            PChar->ForPartyWithTrusts([&](CBattleEntity* member)
-            {
-                if (member->id != taUser->id && distance(member->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
-                {
-                    float memberXdif = member->loc.p.x - mobX;
-                    float memberZdif = member->loc.p.z - mobZ;
-                    if (zDependent)
-                    {
-                        if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
-                        {
-                            // finally found a TA partner
-                            return member;
-                        }
-                    }
-                    else
-                    {
-                        if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
-                        {
-                            // finally found a TA partner
-                            return member;
-                        }
-                    }
-                }
-            });
         }
 
         // No Trick attack party member available
