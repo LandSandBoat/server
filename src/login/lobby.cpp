@@ -685,12 +685,12 @@ int32 lobbyview_parse(int32 fd)
                 }
                 else
                 {
-                    //creating new char
-                    char CharName[15];
+                    // creating new char
+                    char CharName[16];
                     memset(CharName, 0, sizeof(CharName));
-                    memcpy(CharName, session[fd]->rdata.data() + 32, sizeof(CharName));
+                    memcpy(CharName, session[fd]->rdata.data() + 32, sizeof(CharName) - 1);
 
-                    //find assigns
+                    // find assigns
                     const char *fmtQuery = "SELECT charname FROM chars WHERE charname LIKE '%s'";
 
                     std::string myNameIs(&CharName[0]);
@@ -768,7 +768,7 @@ int32 lobby_createchar(login_session_data_t *loginsd, int8 *buf)
     srand(clock());
     char_mini createchar;
 
-    memcpy(createchar.m_name, loginsd->charname, 15);
+    memcpy(createchar.m_name, loginsd->charname, 16);
     memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
