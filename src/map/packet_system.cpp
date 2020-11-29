@@ -4496,12 +4496,12 @@ void SmallPacket0x0B6(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
     }
-    string_t RecipientName = string_t((const char*)data[5], 15);
+    string_t RecipientName = string_t((const char*)data[6], 15);
 
     int8 packetData[64];
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
-    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[20]));
+    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
 
     if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
     {
@@ -4509,10 +4509,10 @@ void SmallPacket0x0B6(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         Sql_EscapeString(SqlHandle, escaped_speaker, (const char*)PChar->GetName());
 
         char escaped_recipient[16 * 2 + 1];
-        Sql_EscapeString(SqlHandle, escaped_recipient, (const char*)data[5]);
+        Sql_EscapeString(SqlHandle, escaped_recipient, &RecipientName[0]);
 
-        std::string escaped_full_string; escaped_full_string.reserve(strlen((const char*)data[20]) * 2 + 1);
-        Sql_EscapeString(SqlHandle, escaped_full_string.data(), (const char*)data[20]);
+        std::string escaped_full_string; escaped_full_string.reserve(strlen((const char*)data[21]) * 2 + 1);
+        Sql_EscapeString(SqlHandle, escaped_full_string.data(), (const char*)data[21]);
 
         const char* fmtQuery = "INSERT into audit_chat (speaker,type,recipient,message,datetime) VALUES('%s','TELL','%s','%s',current_timestamp())";
         if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_recipient, escaped_full_string.data()) == SQL_ERROR)
