@@ -203,7 +203,7 @@ bool CheckFisherLuck(CCharEntity* PChar)
                 // ловля предметов, необходимых для поисков
 
                 uint8 logid = (uint8)Sql_GetIntData(SqlHandle,5);
-                uint8 quest = (uint8)Sql_GetIntData(SqlHandle,6);
+                uint16 quest = (uint16)Sql_GetIntData(SqlHandle,6);
 
                 if(logid < MAX_QUESTAREA && quest < MAX_QUESTID)
 	            {

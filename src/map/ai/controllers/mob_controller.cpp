@@ -774,7 +774,7 @@ void CMobController::DoRoamTick(time_point tick)
                     // move back every 5 seconds
                     m_LastActionTime = m_Tick - (std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)) + 10s);
                 }
-                else if (!PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0 &&
+                else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) &&
                     !map_config.mob_no_despawn)
                 {
                     PMob->PAI->Despawn();

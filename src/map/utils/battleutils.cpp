@@ -556,7 +556,7 @@ namespace battleutils
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
 
-        switch (Action->spikesEffect)
+        switch (static_cast<SPIKES>(Action->spikesEffect))
         {
             case SPIKE_DREAD:
                 // drain same as damage taken
@@ -632,7 +632,7 @@ namespace battleutils
             // calculate damage
             Action->spikesParam = HandleStoneskin(PAttacker, CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage))));
 
-            switch (Action->spikesEffect)
+            switch (static_cast<SPIKES>(Action->spikesEffect))
             {
                 case SPIKE_BLAZE:
                 case SPIKE_ICE:
