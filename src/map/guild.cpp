@@ -120,7 +120,7 @@ std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
 
     auto GPItem = m_GPItems[rank - 3];
     auto curPoints = (uint16)charutils::GetCharVar(PChar, "[GUILD]daily_points");
-    if (curPoints == -1)
+    if (curPoints == 0)
     {
         return std::make_pair(GPItem[0].item->getID(), 0);
     }

@@ -1915,7 +1915,7 @@ namespace charutils
                                 {
                                     UnequipItem(PChar, SLOT_MAIN, false);
                                 }
-                                else if (!((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE)
+                                else if (!(((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
                                 {
                                     //allow Grips to be equipped
                                     return false;
@@ -2268,7 +2268,7 @@ namespace charutils
                 // Unequip if no main weapon or a non-grip subslot without DW
                 if (!PChar->getEquip(SLOT_MAIN) ||
                     (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) &&
-                     !((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
+                     !(((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE)))
                 {
                     UnequipItem(PChar, SLOT_SUB);
                     continue;

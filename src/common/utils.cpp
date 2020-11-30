@@ -152,16 +152,12 @@ uint8 worldAngle(const position_t& A, const position_t& B)
 
 uint8 relativeAngle(uint8 world, int16 diff)
 {
-    uint8 angle = world + diff;
+    int16 angle = world + diff;
     if (angle < 0)
     {
         angle = 256 - abs(angle);
     }
-    else
-    {
-        angle = angle % 256;
-    }
-    return angle;
+    return static_cast<uint8>(angle);
 }
 
 int16 angleDifference(uint8 worldAngleA, uint8 worldAngleB)
