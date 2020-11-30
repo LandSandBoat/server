@@ -15,6 +15,12 @@ include(Sanitizers)
 include(ClangTidy)
 include(Tracy)
 
+# CMake adds "/W3" by default on MSVC, remove it.
+# Fixed with CMake 3.15
+if(MSVC)
+    string(REGEX REPLACE "/W3[ ]" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+endif()
+
 message(STATUS "CMAKE_VERSION: ${CMAKE_VERSION}")
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
@@ -49,6 +55,10 @@ target_compile_features(project_options INTERFACE cxx_std_17)
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
+
+# Link this 'library' to disable all warnings
+add_library(no_warnings INTERFACE)
+set_no_warnings(no_warnings)
 
 add_subdirectory(ext)
 add_subdirectory(src)

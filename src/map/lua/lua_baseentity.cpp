@@ -723,17 +723,15 @@ inline int32 CLuaBaseEntity::injectPacket(lua_State *L)
             return 0;
         }
 
-        if (size <= 256)
+        fseek(File, 0, SEEK_SET);
+        if (fread(*PPacket, 1, size * 2, File) != size * 2)
         {
-            fseek(File, 0, SEEK_SET);
-            if (fread(*PPacket, 1, size * 2, File) != size * 2)
-            {
-                ShowError(CL_RED"CLuaBaseEntity::injectPacket : Did not read entire packet\n" CL_RESET);
-                return 0;
-            }
-
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(PPacket);
+            ShowError(CL_RED"CLuaBaseEntity::injectPacket : Did not read entire packet\n" CL_RESET);
+            return 0;
         }
+
+        ((CCharEntity*)m_PBaseEntity)->pushPacket(PPacket);
+
         fclose(File);
     }
     else
@@ -6292,7 +6290,7 @@ inline int32 CLuaBaseEntity::addQuest(lua_State *L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint8 questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 questID = (uint8)lua_tointeger(L, 2);
+    uint16 questID = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -6336,7 +6334,7 @@ inline int32 CLuaBaseEntity::delQuest(lua_State *L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint8 questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 questID = (uint8)lua_tointeger(L, 2);
+    uint16 questID = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -6382,7 +6380,7 @@ inline int32 CLuaBaseEntity::getQuestStatus(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 questID = (uint8)lua_tointeger(L, 2);
+    uint16 questID = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -6420,7 +6418,7 @@ inline int32 CLuaBaseEntity::hasCompletedQuest(lua_State *L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     uint8 questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 questID = (uint8)lua_tointeger(L, 2);
+    uint16 questID = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -6456,7 +6454,7 @@ inline int32 CLuaBaseEntity::completeQuest(lua_State *L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     uint8 questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint8 questID = (uint8)lua_tointeger(L, 2);
+    uint16 questID = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {

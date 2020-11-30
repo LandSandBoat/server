@@ -151,13 +151,13 @@ void CAlliance::removeParty(CParty * party)
 
 void CAlliance::delParty(CParty* party)
 {
-    //delete the party from the alliance list
+    // Delete the party from the alliance list
     party->m_PAlliance->partyList.erase(std::remove_if(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), [=](CParty* entry)
     {
         return party == entry;
     }));
 
-    for (auto entry : party->m_PAlliance->partyList)
+    for (auto* entry : party->m_PAlliance->partyList)
     {
         entry->ReloadParty();
     }
@@ -165,40 +165,34 @@ void CAlliance::delParty(CParty* party)
     party->m_PAlliance = nullptr;
     party->SetPartyNumber(0);
 
-    //remove party members from the alliance treasure pool
-    for (auto entry : party->members)
+    // Remove party members from the alliance treasure pool
+    for (auto* entry : party->members)
     {
-        auto member = dynamic_cast<CCharEntity*>(entry);
+        auto* member = dynamic_cast<CCharEntity*>(entry);
         if (member != nullptr && member->PTreasurePool != nullptr && member->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
         {
             member->PTreasurePool->DelMember(member);
         }
     }
 
-    //create a a new treasure pool for whoever is in the server from this party (if anyone)
-    CCharEntity* PChar = nullptr;
-    try
+    // Create a a new treasure pool for whoever is in the server from this party (if anyone)
+    if (!party->members.empty())
     {
-        PChar = (CCharEntity*)party->members.at(0);
-    }
-    catch (std::out_of_range&)
-    {
-        return;
-    }
-    PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
-    PChar->PTreasurePool->AddMember(PChar);
-    PChar->PTreasurePool->UpdatePool(PChar);
+        auto* PChar = dynamic_cast<CCharEntity*>(party->members.at(0));
 
-    for (uint8 i = 0; i < party->members.size(); ++i)
-    {
-        CCharEntity* PMember = (CCharEntity*)party->members.at(i);
-        //party->ReloadPartyMembers((CCharEntity*)party->members.at(i));
+        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
+        PChar->PTreasurePool->AddMember(PChar);
+        PChar->PTreasurePool->UpdatePool(PChar);
 
-        if (PChar != PMember)
+        for (uint8 i = 0; i < party->members.size(); ++i)
         {
-            PMember->PTreasurePool = PChar->PTreasurePool;
-            PChar->PTreasurePool->AddMember(PMember);
-            PChar->PTreasurePool->UpdatePool(PMember);
+            auto* PMember = dynamic_cast<CCharEntity*>(party->members.at(i));
+            if (PChar != PMember)
+            {
+                PMember->PTreasurePool = PChar->PTreasurePool;
+                PChar->PTreasurePool->AddMember(PMember);
+                PChar->PTreasurePool->UpdatePool(PMember);
+            }
         }
     }
 }
