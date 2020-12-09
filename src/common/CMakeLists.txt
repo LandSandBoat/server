@@ -28,14 +28,14 @@ set(SOURCES
 
 add_library(common STATIC ${SOURCES})
 
-target_link_libraries(
-    common
+target_link_libraries(common
     PUBLIC
     fmt
     lunar
     sol2_single
     project_options
-    # project_warnings
+    #PRIVATE
+    #project_warnings
 )
  
 if(TRACY_ENABLE)

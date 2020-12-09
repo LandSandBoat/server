@@ -32,10 +32,12 @@ target_compile_definitions(
 target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 
 target_link_libraries(topaz_search
+    PUBLIC
     common
     search_packets
     project_options
-    #project_warnings
+    PRIVATE
+    project_warnings
 )
 
 set_target_output_directory(topaz_search)

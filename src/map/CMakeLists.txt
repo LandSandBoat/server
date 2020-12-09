@@ -145,7 +145,8 @@ target_link_libraries(topaz_game
     packets
     utils
     project_options
-    #project_warnings
+    PRIVATE
+    project_warnings
 )
 
 if(TRACY_ENABLE)

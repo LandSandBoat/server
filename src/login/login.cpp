@@ -186,7 +186,7 @@ int32 do_init(int32 argc, char** argv)
                                 catch (...)
                                 {
                                     // set to invalid if string -> uint8 fails
-                                    mode = -1;
+                                    mode = 0;
                                 }
 
                                 if (mode < 0 || mode > 2)

@@ -56,9 +56,19 @@ target_compile_features(project_options INTERFACE cxx_std_17)
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
 
+<<<<<<< HEAD
+add_subdirectory(ext)
+=======
 # Link this 'library' to disable all warnings
 add_library(no_warnings INTERFACE)
 set_no_warnings(no_warnings)
 
-add_subdirectory(ext)
+# Ouput executables into repo root
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
+
+>>>>>>> zach/sonar_cleanup
 add_subdirectory(src)
+
+include(CopyConfigs)

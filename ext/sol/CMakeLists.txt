@@ -34,6 +34,7 @@ source_group(sol2_single FILES ${SOL2_SINGLE_HEADER_SOURCES})
 add_library(sol2_single INTERFACE)
 add_library(sol2::sol2_single ALIAS sol2_single)
 target_sources(sol2_single INTERFACE ${SOL2_SINGLE_HEADER_SOURCES})
+target_link_libraries(sol2_single INTERFACE no_warnings)
 set_target_properties(sol2_single
 	PROPERTIES
 	EXPORT_NAME sol2::sol2_single)

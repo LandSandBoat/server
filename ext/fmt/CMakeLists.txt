@@ -12,4 +12,5 @@ set(SOURCES
     fmt/time.h)
 
 add_library(fmt STATIC ${SOURCES})
+target_link_libraries(fmt PRIVATE no_warnings)
 target_include_directories(fmt PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -35,7 +35,8 @@ target_link_libraries(topaz_connect
     PUBLIC
     common
     project_options
-    #project_warnings
+    PRIVATE
+    project_warnings
 )
 
 set_target_output_directory(topaz_connect)
