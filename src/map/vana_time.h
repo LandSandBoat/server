@@ -113,7 +113,7 @@ private:
     uint32   m_vHour;                               // Vanadiel Hour
     uint32   m_vMin;                                // Vanadiel Minute
     uint32   m_vDay;                                // Vanadiel day of the week (fire, earth, wind, water, ice, lightning, light, dark)
-    uint8    m_vDayElement;                         // Vanadiel day's element (fire, ice, wind, earth, thunder, water, light dark)
+    //uint8    m_vDayElement;                         // Vanadiel day's element (fire, ice, wind, earth, thunder, water, light dark)
     uint32   m_vanaDate;                            // Vanadiel time in integer format
 
     TIMETYPE m_TimeType;                            // текущий тип времени

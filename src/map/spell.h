@@ -919,6 +919,7 @@ class CSpell
 public:
 
     CSpell(SpellID id);
+    virtual ~CSpell() = default;
     virtual std::unique_ptr<CSpell> clone();
 
     bool        canTargetEnemy();

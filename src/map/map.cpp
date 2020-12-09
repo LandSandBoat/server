@@ -49,13 +49,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "time_server.h"
 #include "transport.h"
 #include "vana_time.h"
-<<<<<<< HEAD
+
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
 #include "conquest_system.h"
 #include "daily_system.h"
+#include "ai/controllers/automaton_controller.h"
 #include "packets/basic.h"
-
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -65,6 +65,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
 #include "utils/petutils.h"
+#include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
 #ifdef DEBUG
@@ -654,7 +655,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             }
             else
             {
-                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
+                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
             }
         }
         else
@@ -908,7 +909,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         ShowDebug(CL_CYAN"map_cleanup: %s timed out, closing session\n" CL_RESET, PChar->GetName());
 
                         PChar->status = STATUS_SHUTDOWN;
-                        PacketParser[0x00D](map_session_data, PChar, std::move(CBasicPacket()));
+                        PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
                     }
                     else
                     {

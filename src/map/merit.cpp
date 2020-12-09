@@ -488,7 +488,7 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
 
 namespace meritNameSpace
 {
-	Merit_t GMeritsTemplate[MERITS_COUNT] = {0};		// global list of merits and their properties
+	Merit_t GMeritsTemplate[MERITS_COUNT] = {};		// global list of merits and their properties
 	int16 groupOffset[MCATEGORY_COUNT/64-1] = {0};		// the first merit offset of each catagory
 
     /************************************************************************
@@ -516,7 +516,7 @@ namespace meritNameSpace
 
 		    while( Sql_NextRow(SqlHandle) == SQL_SUCCESS )
 		    {
-                Merit_t Merit = {0};								// creat a new merit template.
+                Merit_t Merit = {};								// creat a new merit template.
 
 				Merit.id		= Sql_GetUIntData(SqlHandle,0);		// set data from db.
                 Merit.value		= Sql_GetUIntData(SqlHandle,1);

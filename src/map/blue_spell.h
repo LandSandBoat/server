@@ -29,6 +29,7 @@ class CBlueSpell : public CSpell
 public:
 
     CBlueSpell(SpellID id);
+    ~CBlueSpell() override = default;
     virtual std::unique_ptr<CSpell> clone() override;
 
     uint16		getMonsterSkillId();

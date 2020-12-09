@@ -38,6 +38,7 @@
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity) : m_PEntity(PEntity)
 {
     TPZ_DEBUG_BREAK_IF(m_PEntity == nullptr)
+    std::ignore = m_PEntity;
 }
 
 /************************************************************************
