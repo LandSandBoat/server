@@ -25,7 +25,6 @@
 
 #include "roe.h"
 #include "vana_time.h"
-#include "../common/lua/lunar.h"
 #include "lua/luautils.h"
 #include "packets/chat_message.h"
 #include "utils/charutils.h"

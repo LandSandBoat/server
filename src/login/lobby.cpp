@@ -218,18 +218,18 @@ int32 lobbydata_parse(int32 fd)
                 // from logging in or creating new characters
                 if (maint_config.maint_mode > 0 && i == 0)
                 {
-                    LOBBBY_ERROR_MESSAGE(ReservePacket);
-                    ref<uint16>(ReservePacket, 32) = 321;
+                    LOBBBY_ERROR_MESSAGE(ReservePacketEmptyList);
+                    ref<uint16>(ReservePacketEmptyList, 32) = 321;
                     //memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
                     unsigned char Hash[16];
-                    uint8 SendBuffSize = ref<uint8>(ReservePacket, 0);
+                    uint8 SendBuffSize = ref<uint8>(ReservePacketEmptyList, 0);
 
-                    memset(ReservePacket + 12, 0, sizeof(Hash));
-                    md5(ReservePacket, Hash, SendBuffSize);
+                    memset(ReservePacketEmptyList + 12, 0, sizeof(Hash));
+                    md5(ReservePacketEmptyList, Hash, SendBuffSize);
 
-                    memcpy(ReservePacket + 12, Hash, sizeof(Hash));
-                    session[sd->login_lobbyview_fd]->wdata.assign((const char*)ReservePacket, SendBuffSize);
+                    memcpy(ReservePacketEmptyList + 12, Hash, sizeof(Hash));
+                    session[sd->login_lobbyview_fd]->wdata.assign((const char*)ReservePacketEmptyList, SendBuffSize);
 
                     RFIFOSKIP(sd->login_lobbyview_fd, session[sd->login_lobbyview_fd]->rdata.size());
                     RFIFOFLUSH(sd->login_lobbyview_fd);
@@ -335,11 +335,11 @@ int32 lobbydata_parse(int32 fd)
                         if (Sql_Query(SqlHandle, fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr, (uint8)session[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
                             // Send error message to the client.
-                            LOBBBY_ERROR_MESSAGE(ReservePacket);
+                            LOBBBY_ERROR_MESSAGE(ReservePacketError);
                             // Set the error code:
                             //     Unable to connect to world server. Specified operation failed
-                            ref<uint16>(ReservePacket, 32) = 305;
-                            memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
+                            ref<uint16>(ReservePacketError, 32) = 305;
+                            memcpy(MainReservePacket, ReservePacketError, ref<uint8>(ReservePacketError, 0));
                         }
 
                         fmtQuery = "UPDATE char_stats SET zoning = 2 WHERE charid = %u";
@@ -347,19 +347,19 @@ int32 lobbydata_parse(int32 fd)
                     }
                     else
                     {
-                        LOBBBY_ERROR_MESSAGE(ReservePacket);
+                        LOBBBY_ERROR_MESSAGE(ReservePacketError);
                         ref<uint16>(ReservePacket, 32) = 321;
-                        memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
+                        memcpy(MainReservePacket, ReservePacketError, ref<uint8>(ReservePacketError, 0));
                     }
                 }
                 else
                 {
                     //either there is no character for this charid/accid, or there is no zone for this char's zone
-                    LOBBBY_ERROR_MESSAGE(ReservePacket);
+                    LOBBBY_ERROR_MESSAGE(ReservePacketError);
                     // Set the error code:
                     //     Unable to connect to world server. Specified operation failed
-                    ref<uint16>(ReservePacket, 32) = 305;
-                    memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
+                    ref<uint16>(ReservePacketError, 32) = 305;
+                    memcpy(MainReservePacket, ReservePacketError, ref<uint8>(ReservePacketError, 0));
                 }
 
                 unsigned char Hash[16];
@@ -434,7 +434,6 @@ int32 do_close_lobbydata(login_session_data_t *loginsd, int32 fd)
         do_close_tcp(fd);
         return 0;
     }
-    return -1;
 }
 
 int32 connect_client_lobbyview(int32 listenfd)

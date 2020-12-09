@@ -23,7 +23,7 @@
 #define _LUATRADECONTAINER_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CTradeContainer;
 class CLuaTradeContainer

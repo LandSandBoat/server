@@ -23,7 +23,7 @@
 #define _LUASPELL_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CSpell;
 class CLuaSpell

@@ -23,11 +23,23 @@
 #define _LUAUTILS_H
 
 #include <optional>
+
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
 #include "../../common/taskmgr.h"
+
+#include "lua.hpp"
+#include "lunar/lunar.h"
+
+#define SOL_ALL_SAFETIES_ON 1
+#include "sol/sol.hpp"
+
+#define SOL_START(BaseTypeName, BindingTypeName) luautils::lua.new_usertype<BindingTypeName>(#BaseTypeName
+#define SOL_REGISTER(Func) , #Func, &Func
+#define SOL_END() );
+
 #include "../items/item_equipment.h"
 #include "../spell.h"
+
 #include "lua_ability.h"
 #include "lua_baseentity.h"
 #include "lua_mobskill.h"
@@ -66,6 +78,20 @@ class CItemFurnishing;
 class CInstance;
 class CWeaponSkill;
 class CZone;
+
+class CLuaAbility;
+class CLuaAction;
+class CLuaBaseEntity;
+class CLuaBattlefield;
+class CLuaInstance;
+class CLuaItem;
+class CLuaMobSkill;
+class CLuaRegion;
+class CLuaSpell;
+class CLuaStatusEffect;
+class CLuaTradeContainer;
+class CLuaZone;
+
 struct action_t;
 struct actionList_t;
 struct actionTarget_t;
@@ -75,6 +101,7 @@ enum class Emote : uint8;
 
 namespace luautils
 {
+    extern sol::state lua;
     extern struct lua_State* LuaHandle;
 
     int32 init();

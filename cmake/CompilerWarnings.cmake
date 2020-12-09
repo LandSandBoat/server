@@ -108,7 +108,7 @@ function(set_no_warnings project_name)
     if(UNIX)
       target_compile_options(${project_name} INTERFACE "-Wno-everything")
     elseif(WIN32)
-      target_compile_options(${project_name} INTERFACE "/w")
+      #target_compile_options(${project_name} INTERFACE "/w")
     endif()
   endif()
 endfunction() # set_no_warnings

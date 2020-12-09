@@ -23,7 +23,7 @@
 #define _LUAACTION_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 struct action_t;
 struct actionList_t;

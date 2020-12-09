@@ -21,7 +21,7 @@
 
 #include "../../common/socket.h"
 
-#include "../../common/fmt/printf.h"
+#include "fmt/printf.h"
 #include "world_pass.h"
 #include <cinttypes>
 

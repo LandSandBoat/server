@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _LUABATTLEFIELD_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CBattlefield;
 

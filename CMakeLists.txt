@@ -34,11 +34,6 @@ message(STATUS "CMAKE_GENERATOR_PLATFORM: ${CMAKE_GENERATOR_PLATFORM}")
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-set(LOCAL_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/ext/include)
-set(LOCAL_LIB_PATH ${PROJECT_SOURCE_DIR}/ext/${libpath})
-message(STATUS "LOCAL_INCLUDE_PATH: ${LOCAL_INCLUDE_PATH}")
-message(STATUS "LOCAL_LIB_PATH: ${LOCAL_LIB_PATH}")
-
 # Find Threads (pthread)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -51,7 +46,7 @@ find_package(MySQL REQUIRED)
 find_package(ZeroMQ REQUIRED)
 
 # Find LuaJIT
-find_package(LuaJIT)
+find_package(LuaJIT REQUIRED)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
@@ -65,9 +60,5 @@ set_project_warnings(project_warnings)
 add_library(no_warnings INTERFACE)
 set_no_warnings(no_warnings)
 
-# Ouput executables into repo root
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
-
+add_subdirectory(ext)
 add_subdirectory(src)
