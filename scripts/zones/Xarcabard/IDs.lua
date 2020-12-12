@@ -29,16 +29,16 @@ zones[tpz.zone.XARCABARD] =
         BLOCKS_OF_ICE                  = 7718,  -- You can hear blocks of ice moving from deep within the cave.
         PERENNIAL_SNOW_DEFAULT         = 7719,  -- How many millennia has this snow been here, hidden from the rays of the sun?
         PERENNIAL_SNOW_WAIT            = 7721,  -- The <keyitem> you buried is not yet purified.
-        YOU_CANNOT_ENTER_DYNAMIS       = 7843,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
-        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7845,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        DYNA_NPC_DEFAULT_MESSAGE       = 7856,  -- There is an unusual arrangement of pebbles here.
-        PLAYER_OBTAINS_ITEM            = 8160,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM          = 8161,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM       = 8162,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP           = 8163,  -- You already possess that temporary item.
-        NO_COMBINATION                 = 8168,  -- You were unable to enter a combination.
-        REGIME_REGISTERED              = 10346, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 11531, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        YOU_CANNOT_ENTER_DYNAMIS       = 7861,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7863,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        DYNA_NPC_DEFAULT_MESSAGE       = 7874,  -- There is an unusual arrangement of pebbles here.
+        PLAYER_OBTAINS_ITEM            = 8178,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM          = 8179,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM       = 8180,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP           = 8181,  -- You already possess that temporary item.
+        NO_COMBINATION                 = 8186,  -- You were unable to enter a combination.
+        REGIME_REGISTERED              = 10364, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL          = 11549, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

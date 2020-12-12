@@ -34,7 +34,7 @@ zones[tpz.zone.EAST_RONFAURE] =
         PLAYER_OBTAINS_TEMP_ITEM = 7499, -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP     = 7500, -- You already possess that temporary item.
         NO_COMBINATION           = 7505, -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9865, -- New training regime registered!
+        REGIME_REGISTERED        = 9883, -- New training regime registered!
     },
     mob =
     {

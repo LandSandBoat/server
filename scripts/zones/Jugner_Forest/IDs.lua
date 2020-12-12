@@ -27,13 +27,13 @@ zones[tpz.zone.JUGNER_FOREST] =
         FIND_NOTHING             = 7719,  -- You dig and you dig, but find nothing.
         LOGGING_IS_POSSIBLE_HERE = 7897,  -- Logging is possible here if you have <item>.
         CONQUEST                 = 8048,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM      = 8639,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8640,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8641,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8642,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8647,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10852, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 13081, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 8657,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8658,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8659,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8660,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8665,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 10870, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 13099, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

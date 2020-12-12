@@ -24,9 +24,9 @@ zones[tpz.zone.GIDDEUS] =
         FISHING_MESSAGE_OFFSET      = 7208, -- You can't fish here.
         SPRING_FILL_UP              = 7354, -- You fill your flask with water.
         SPRING_DEFAULT              = 7355, -- Sparkling clear water bubbles up from the ground. If you have a container, you can fill it here.
-        CHEST_UNLOCKED              = 7388, -- You unlock the chest!
-        HARVESTING_IS_POSSIBLE_HERE = 7396, -- Harvesting is possible here if you have <item>.
-        HOMEPOINT_SET               = 7424, -- Home point set!
+        CHEST_UNLOCKED              = 7405, -- You unlock the chest!
+        HARVESTING_IS_POSSIBLE_HERE = 7413, -- Harvesting is possible here if you have <item>.
+        HOMEPOINT_SET               = 7441, -- Home point set!
     },
     mob =
     {

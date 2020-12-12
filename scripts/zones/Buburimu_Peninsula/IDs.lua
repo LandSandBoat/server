@@ -36,16 +36,16 @@ zones[tpz.zone.BUBURIMU_PENINSULA] =
         SIGN_5                         = 7395,  -- West: Mhaura Northwest: Tahrongi Canyon
         LOGGING_IS_POSSIBLE_HERE       = 7396,  -- Logging is possible here if you have <item>.
         CONQUEST                       = 7412,  -- You've earned conquest points!
-        YOU_CANNOT_ENTER_DYNAMIS       = 7888,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
-        DYNA_NPC_DEFAULT_MESSAGE       = 7889,  -- You hear a mysterious, floating voice: The guiding aura has not yet faded... Bring forth the <item>.
-        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7890,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        PLAYER_OBTAINS_ITEM            = 8100,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM          = 8101,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM       = 8102,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP           = 8103,  -- You already possess that temporary item.
-        NO_COMBINATION                 = 8108,  -- You were unable to enter a combination.
-        REGIME_REGISTERED              = 10286, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 12307, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        YOU_CANNOT_ENTER_DYNAMIS       = 7906,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        DYNA_NPC_DEFAULT_MESSAGE       = 7907,  -- You hear a mysterious, floating voice: The guiding aura has not yet faded... Bring forth the <item>.
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7908,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        PLAYER_OBTAINS_ITEM            = 8118,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM          = 8119,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM       = 8120,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP           = 8121,  -- You already possess that temporary item.
+        NO_COMBINATION                 = 8126,  -- You were unable to enter a combination.
+        REGIME_REGISTERED              = 10304, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL          = 12325, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
