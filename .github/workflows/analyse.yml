@@ -2,6 +2,8 @@ name: analyse
 
 on:
   workflow_dispatch: # Manual triggering from Actions > analyse > Run workflow
+  schedule:
+    - cron: '0 0 * * SUN' # Every Sunday
 
 jobs:
   sonarcloud:
