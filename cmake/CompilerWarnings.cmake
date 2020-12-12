@@ -63,11 +63,9 @@ function(set_project_warnings project_name)
       # TODO: -Wdouble-promotion # warn if float is implicit promoted to double
       -Wformat=2 # warn on security issues around functions that format output (ie printf)
 
-      # TODO: Remove this
+      # TODO: Remove these
       -Wno-format-nonliteral
-      # TODO: Remove this
       -Wno-unused-parameter
-      # TODO: Remove this
       -Wno-error=sizeof-pointer-memaccess
       -Wno-sizeof-pointer-memaccess
   )
@@ -80,14 +78,14 @@ function(set_project_warnings project_name)
       -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
       # TODO: -Wuseless-cast # warn if you perform a cast to the same type
       
-      # TODO: Remove this
+      # TODO: Remove these
       -Wno-implicit-fallthrough
       -Wno-non-virtual-dtor
       -Wno-overloaded-virtual
       -Wno-type-limits
       -Wno-extra
-      -Wno-class-memaccess
       -Wno-restrict
+      -Wno-duplicated-branches
   )
 
   if(MSVC)
@@ -115,7 +113,7 @@ endfunction() #set_project_warnings
 function(set_no_warnings project_name)
   if(WARNINGS_AS_ERRORS)
     if(UNIX)
-      target_compile_options(${project_name} INTERFACE "-Wno-everything")
+      target_compile_options(${project_name} INTERFACE "-w")
     elseif(WIN32)
       #target_compile_options(${project_name} INTERFACE "/w")
     endif()
