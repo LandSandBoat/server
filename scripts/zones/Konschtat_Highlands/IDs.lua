@@ -64,7 +64,7 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
     },
     npc =
     {
-        CASKET_BASE = 17220111,
+        CASKET_BASE = 17220110,
     },
 }
 

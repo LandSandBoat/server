@@ -55,8 +55,8 @@ zones[tpz.zone.EASTERN_ALTEPA_DESERT] =
     },
     npc =
     {
-        CASKET_BASE   = 17244596,
-        OVERSEER_BASE = 17244627,
+        CASKET_BASE   = 17244595,
+        OVERSEER_BASE = 17244626, -- Eaulevisat_RK in npc_list
     },
 }
 

@@ -55,16 +55,16 @@ zones[tpz.zone.JUGNER_FOREST] =
     },
     npc =
     {
-        CASKET_BASE   = 17203786,
-        OVERSEER_BASE = 17203848,
+        CASKET_BASE   = 17203785,
+        OVERSEER_BASE = 17203847, -- Chaplion_RK in npc_list
         LOGGING =
         {
+            17203863,
             17203864,
             17203865,
             17203866,
             17203867,
             17203868,
-            17203869,
         },
     },
 }

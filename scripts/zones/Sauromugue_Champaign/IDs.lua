@@ -59,8 +59,8 @@ zones[tpz.zone.SAUROMUGUE_CHAMPAIGN] =
     },
     npc =
     {
-        CASKET_BASE = 17269190,
-        QM2         = 17269228,
+        CASKET_BASE = 17269189,
+        QM2         = 17269227,
     },
 }
 

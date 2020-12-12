@@ -68,17 +68,17 @@ zones[tpz.zone.BUBURIMU_PENINSULA] =
     },
     npc =
     {
-        CASKET_BASE     = 17261113,
-        OVERSEER_BASE   = 17261150,
-        SIGNPOST_OFFSET = 17261165,
+        CASKET_BASE     = 17261112,
+        OVERSEER_BASE   = 17261149, -- Bonbavour_RK in npc_list
+        SIGNPOST_OFFSET = 17261164,
         LOGGING =
         {
+            17261174,
             17261175,
             17261176,
             17261177,
             17261178,
             17261179,
-            17261180,
         },
     },
 }

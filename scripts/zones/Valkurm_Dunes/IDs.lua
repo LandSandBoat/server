@@ -67,9 +67,9 @@ zones[tpz.zone.VALKURM_DUNES] =
     },
     npc =
     {
-        CASKET_BASE   = 17199672,
-        SUNSAND_QM    = 17199699,
-        OVERSEER_BASE = 17199709,
+        CASKET_BASE   = 17199671,
+        SUNSAND_QM    = 17199698, -- qm1 in npc_list
+        OVERSEER_BASE = 17199708, -- Quanteilleron_RK in npc_list
     },
 }
 

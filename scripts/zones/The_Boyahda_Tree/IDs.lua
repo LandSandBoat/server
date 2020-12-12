@@ -87,8 +87,8 @@ zones[tpz.zone.THE_BOYAHDA_TREE] =
     },
     npc =
     {
-        CASKET_BASE     = 17404357,
-        TREASURE_COFFER = 17404394,
+        CASKET_BASE     = 17404358,
+        TREASURE_COFFER = 17404395,
     },
 }
 

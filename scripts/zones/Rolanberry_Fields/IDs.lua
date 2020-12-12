@@ -58,7 +58,7 @@ zones[tpz.zone.ROLANBERRY_FIELDS] =
     },
     npc =
     {
-        CASKET_BASE = 17228319,
+        CASKET_BASE = 17228318,
     },
 }
 

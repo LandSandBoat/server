@@ -58,8 +58,8 @@ zones[tpz.zone.MERIPHATAUD_MOUNTAINS] =
     },
     npc =
     {
-        CASKET_BASE   = 17265219,
-        OVERSEER_BASE = 17265271,
+        CASKET_BASE   = 17265218,
+        OVERSEER_BASE = 17265270, -- Chegourt_RK in npc_list
     },
 }
 

@@ -74,11 +74,11 @@ zones[tpz.zone.XARCABARD] =
     },
     npc =
     {
-        CASKET_BASE        = 17236255,
-        OVERSEER_BASE      = 17236290,
-        BOREAL_TIGER_QM    = 17236308,
-        BOREAL_COEURL_QM   = 17236309,
-        BOREAL_HOUND_QM    = 17236310,
+        CASKET_BASE        = 17236254,
+        OVERSEER_BASE      = 17236289, -- Jeantelas_RK in npc_list
+        BOREAL_TIGER_QM    = 17236307, -- qm2 in npc_list
+        BOREAL_COEURL_QM   = 17236308, -- qm3 in npc_list
+        BOREAL_HOUND_QM    = 17236309, -- qm4 in npc_list
     },
 }
 

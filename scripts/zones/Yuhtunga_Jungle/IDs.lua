@@ -65,37 +65,37 @@ zones[tpz.zone.YUHTUNGA_JUNGLE] =
     },
     npc =
     {
-        CASKET_BASE           = 17281559,
-        BLUE_RAFFLESIA_OFFSET = 17281586,
-        TUNING_OUT_QM         = 17281590,
-        OVERSEER_BASE         = 17281600,
-        CERMET_HEADSTONE      = 17281625,
-        PEDDLESTOX            = 17281640,
+        CASKET_BASE           = 17281558,
+        BLUE_RAFFLESIA_OFFSET = 17281585,
+        TUNING_OUT_QM         = 17281589, -- qm2 in npc_list
+        OVERSEER_BASE         = 17281599, -- Zorchorevi_RK in npc_list
+        CERMET_HEADSTONE      = 17281624,
+        PEDDLESTOX            = 17281639,
         BEASTMEN_TREASURE     =
         {
-            17281643, -- qm3
-            17281644, -- qm4
-            17281645, -- qm5
-            17281646, -- qm6
-            17281647, -- qm7
-            17281648, -- qm8
-            17281649, -- qm9
-            17281650, -- qm10
+            17281642, -- qm3
+            17281643, -- qm4
+            17281644, -- qm5
+            17281645, -- qm6
+            17281646, -- qm7
+            17281647, -- qm8
+            17281648, -- qm9
+            17281649, -- qm10
         },
         HARVESTING =
         {
+            17281635,
             17281636,
             17281637,
-            17281638,
         },
         LOGGING =
         {
+            17281629,
             17281630,
             17281631,
             17281632,
             17281633,
             17281634,
-            17281635,
         },
     },
 }
