@@ -8,6 +8,7 @@ AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
 AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeComma
 # This is not the ACTUAL column limit, this is just to make
@@ -24,6 +25,7 @@ PointerAlignment: Left
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'
 SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 4
 Standard: Cpp11
 UseTab: Never
 
