@@ -4529,7 +4529,7 @@ INSERT INTO `item_weapon` VALUES (21719,'ajja_axe',5,0,223,223,223,2,1,288,168,0
 INSERT INTO `item_weapon` VALUES (21720,'eletta_axe',5,0,231,231,231,2,1,288,176,0);      -- DMG:176 Delay:288
 INSERT INTO `item_weapon` VALUES (21721,'kaja_axe',5,0,242,242,242,2,1,288,188,0);        -- DMG:188 Delay:288
 INSERT INTO `item_weapon` VALUES (21722,'dolichenus',5,0,250,250,250,2,1,288,200,0);      -- DMG:200 Delay:288
-INSERT INTO `item_weapon` VALUES (21725,'demons_axe',5,0,269,269,269,2,1,340,234,0);
+INSERT INTO `item_weapon` VALUES (21725,'malefic_axe',5,0,269,269,269,2,1,340,234,0);
 INSERT INTO `item_weapon` VALUES (21741,'demonic_axe',5,0,0,0,0,2,1,288,1,0);             -- DMG:1 Delay:288
 INSERT INTO `item_weapon` VALUES (21742,'aern_axe',5,0,0,0,0,2,1,288,1,0);                -- DMG:1 Delay:288
 INSERT INTO `item_weapon` VALUES (21744,'gramks_axe',5,0,0,0,0,2,1,288,1,0);              -- DMG:1 Delay:288
@@ -4799,6 +4799,7 @@ INSERT INTO `item_weapon` VALUES (22295,'hauksbok_bullet',26,0,0,0,0,1,1,240,300
 INSERT INTO `item_weapon` VALUES (22296,'voluspa_tathlum',0,0,0,0,0,1,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22297,'aurgelmir_orb',0,0,0,0,0,1,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22298,'aurgelmir_orb_+1',0,0,0,0,0,1,1,999,0,0);
+INSERT INTO `item_weapon` VALUES (22299,'per._lucky_egg',0,0,0,0,0,1,1,999,0,0);
 
 /*!40000 ALTER TABLE `item_weapon` ENABLE KEYS */;
 UNLOCK TABLES;
