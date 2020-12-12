@@ -392,7 +392,7 @@ inline int32 CLuaInstance::insertAlly(lua_State* L)
 *  declare lua function													*
 *																		*
 ************************************************************************/
-
+// clang-format off
 const char CLuaInstance::className[] = "CInstance";
 Lunar<CLuaInstance>::Register_t CLuaInstance::methods[] =
 {
@@ -421,3 +421,4 @@ Lunar<CLuaInstance>::Register_t CLuaInstance::methods[] =
     LUNAR_DECLARE_METHOD(CLuaInstance, insertAlly),
     { nullptr, nullptr }
 };
+// clang-format on

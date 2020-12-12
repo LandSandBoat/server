@@ -162,7 +162,7 @@ inline int32 CLuaMobSkill::getMobHPP(lua_State* L)
 *  declare lua function                                                 *
 *                                                                       *
 ************************************************************************/
-
+// clang-format off
 const char CLuaMobSkill::className[] = "CMobSkill";
 Lunar<CLuaMobSkill>::Register_t CLuaMobSkill::methods[] =
 {
@@ -179,3 +179,4 @@ Lunar<CLuaMobSkill>::Register_t CLuaMobSkill::methods[] =
     LUNAR_DECLARE_METHOD(CLuaMobSkill,getMobHPP),
     {nullptr,nullptr}
 };
+// clang-format on

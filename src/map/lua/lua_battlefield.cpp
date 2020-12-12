@@ -448,7 +448,7 @@ inline int32 CLuaBattlefield::lose(lua_State* L)
 *  declare lua function													*
 *																		*
 ************************************************************************/
-
+// clang-format off
 const char CLuaBattlefield::className[] = "CBattlefield";
 Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
 {
@@ -483,3 +483,4 @@ Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBattlefield,lose),
     { nullptr,nullptr }
 };
+// clang-format on

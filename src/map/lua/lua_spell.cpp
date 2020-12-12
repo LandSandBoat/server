@@ -210,7 +210,7 @@ inline int32 CLuaSpell::getFlag(lua_State *L)
 *  Инициализация методов в lua											*
 *																		*
 ************************************************************************/
-
+// clang-format off
 const char CLuaSpell::className[] = "CSpell";
 Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
 {
@@ -233,3 +233,4 @@ Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
     LUNAR_DECLARE_METHOD(CLuaSpell,castTime),
     {nullptr,nullptr}
 };
+// clang-format on

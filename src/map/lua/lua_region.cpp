@@ -117,7 +117,7 @@ inline int32 CLuaRegion::DelCount(lua_State *L)
 *  Инициализация методов в lua											*
 *																		*
 ************************************************************************/
-
+// clang-format off
 const char CLuaRegion::className[] = "CRegion";
 
 Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
@@ -128,3 +128,4 @@ Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
     LUNAR_DECLARE_METHOD(CLuaRegion,DelCount),
     {nullptr,nullptr}
 };
+// clang-format on

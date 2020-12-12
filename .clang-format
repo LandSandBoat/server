@@ -3,6 +3,10 @@
 # We base things of WebKit + Allman braces
 # BasedOnStyle: WebKit
 AccessModifierOffset: -4
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: None
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeComma

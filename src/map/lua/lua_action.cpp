@@ -263,7 +263,7 @@ int32 CLuaAction::addEffectMessage(lua_State* L)
     return 0;
 }
 
-// Initialize Lua Methods
+// clang-format off
 const char CLuaAction::className[] = "CAction";
 
 Lunar<CLuaAction>::Register_t CLuaAction::methods[] =
@@ -281,3 +281,4 @@ Lunar<CLuaAction>::Register_t CLuaAction::methods[] =
     LUNAR_DECLARE_METHOD(CLuaAction, addEffectMessage),
     {nullptr,nullptr}
 };
+// clang-format on

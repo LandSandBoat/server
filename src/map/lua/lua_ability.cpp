@@ -161,7 +161,7 @@ inline int32 CLuaAbility::setRange(lua_State *L)
 *  Инициализация методов в lua											*
 *																		*
 ************************************************************************/
-
+// clang-format off
 const char CLuaAbility::className[] = "CAbility";
 
 Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
@@ -180,3 +180,4 @@ Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
     LUNAR_DECLARE_METHOD(CLuaAbility,setRange),
     {nullptr,nullptr}
 };
+// clang-format on

@@ -197,7 +197,7 @@ inline int32 CLuaZone::getWeather(lua_State *L)
 *  Initializing Methods in LUA                                          *
 *                                                                       *
 ************************************************************************/
-
+// clang-format off
 const char CLuaZone::className[] = "CZone";
 Lunar<CLuaZone>::Register_t CLuaZone::methods[] =
 {
@@ -212,3 +212,4 @@ Lunar<CLuaZone>::Register_t CLuaZone::methods[] =
     LUNAR_DECLARE_METHOD(CLuaZone,getWeather),
     {nullptr,nullptr}
 };
+// clang-format on

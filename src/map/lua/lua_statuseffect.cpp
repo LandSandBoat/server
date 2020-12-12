@@ -313,7 +313,7 @@ inline int32 CLuaStatusEffect::unsetFlag(lua_State* L)
 }
 
 //======================================================//
-
+// clang-format off
 const char CLuaStatusEffect::className[] = "CLuaStatusEffect";
 
 Lunar<CLuaStatusEffect>::Register_t CLuaStatusEffect::methods[] =
@@ -343,3 +343,4 @@ Lunar<CLuaStatusEffect>::Register_t CLuaStatusEffect::methods[] =
     LUNAR_DECLARE_METHOD(CLuaStatusEffect,unsetFlag),
     {nullptr,nullptr}
 };
+// clang-format on

@@ -339,7 +339,7 @@ inline int32 CLuaItem::getSignature(lua_State* L)
     return 1;
 }
 //==========================================================//
-
+// clang-format off
 const char CLuaItem::className[] = "CItem";
 
 Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
@@ -371,3 +371,4 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,getSignature),
     {nullptr,nullptr}
 };
+// clang-format on

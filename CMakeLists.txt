@@ -7,11 +7,15 @@ set_property(GLOBAL PROPERTY CXX_EXTENSIONS ON)
 set_property(GLOBAL PROPERTY LINKER_LANGUAGE CXX)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+# Cache all cpp/h files
+file(GLOB_RECURSE ALL_SOURCE_FILES src/*.cpp src/*.h src/*.hpp)
+
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
+include(ClangFormat)
 include(ClangTidy)
 include(Tracy)
 

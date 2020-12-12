@@ -279,7 +279,7 @@ inline int32 CLuaTradeContainer::confirmSlot(lua_State *L)
 }
 
 //======================================================//
-
+// clang-format off
 const char CLuaTradeContainer::className[] = "TradeContainer";
 Lunar<CLuaTradeContainer>::Register_t CLuaTradeContainer::methods[] =
 {
@@ -296,3 +296,4 @@ Lunar<CLuaTradeContainer>::Register_t CLuaTradeContainer::methods[] =
     LUNAR_DECLARE_METHOD(CLuaTradeContainer,confirmSlot),
     {nullptr,nullptr}
 };
+// clang-format on

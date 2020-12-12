@@ -16,6 +16,7 @@ Checks: >
   -readability-implicit-bool-conversion,
   -readability-uppercase-literal-suffix,
   modernize-*,
+  -modernize-use-auto,
   -modernize-use-trailing-return-type,
   performance-*,
   cppcoreguidelines-pro-type-cstyle-cast,
