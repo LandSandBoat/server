@@ -8152,7 +8152,7 @@ inline int32 CLuaBaseEntity::takeDamage(lua_State *L)
     // Deal damage and liberate target when applicable
     if (damage > 0)
     {
-        ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? (ATTACKTYPE)lua_tointeger(L, 3) : ATTACK_NONE;
+        ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? static_cast<ATTACKTYPE>(lua_tointeger(L, 3)) : ATTACKTYPE::NONE;
         DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? (DAMAGETYPE)lua_tointeger(L, 4) : DAMAGE_NONE;
 
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);

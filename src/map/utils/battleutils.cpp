@@ -639,7 +639,7 @@ namespace battleutils
                 case SPIKE_BLAZE:
                 case SPIKE_ICE:
                 case SPIKE_SHOCK:
-                    PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+                    PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
                     break;
 
                 case SPIKE_DREAD:
@@ -671,14 +671,14 @@ namespace battleutils
                             }
                             PDefender->addHP(Action->spikesParam);
                         }
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_MAGICAL, DAMAGE_DARK);
+                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGE_DARK);
                     }
                     break;
 
                 case SPIKE_REPRISAL:
                     if (Action->reaction == REACTION_BLOCK)
                     {
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_MAGICAL, DAMAGE_LIGHT);
+                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGE_LIGHT);
                         auto PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
                         if (PEffect)
                         {
@@ -775,7 +775,7 @@ namespace battleutils
             {
                 auto ratio = std::clamp<uint8>(damage / 4, 1, 255);
                 Action->spikesParam = HandleStoneskin(PAttacker, damage - tpzrand::GetRandomNumber<uint16>(ratio) + tpzrand::GetRandomNumber<uint16>(ratio));
-                PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_MAGICAL, GetSpikesDamageType(spikesType));
+                PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, GetSpikesDamageType(spikesType));
             }
 
             // Temp till moved to script.
@@ -919,7 +919,7 @@ namespace battleutils
                     Action->addEffectMessage = 384;
                 }
 
-                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACKTYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
             }
             else if (enspell <= ENSPELL_II_DARK) // Elemental enspells
             {
@@ -955,7 +955,7 @@ namespace battleutils
                         Action->addEffectMessage = 163;
                     }
 
-                    PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+                    PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACKTYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
                 }
             }
         }
@@ -1756,11 +1756,11 @@ namespace battleutils
         giveTPtoVictim = giveTPtoVictim && physicalAttackType != PHYSICAL_ATTACK_TYPE::DAKEN;
         bool isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
         int32 baseDamage = damage;
-        ATTACKTYPE attackType = ATTACK_PHYSICAL;
+        ATTACKTYPE attackType = ATTACKTYPE::PHYSICAL;
         DAMAGETYPE damageType = DAMAGE_NONE;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FORMLESS_STRIKES) && !isCounter)
         {
-            attackType = ATTACK_SPECIAL;
+            attackType = ATTACKTYPE::SPECIAL;
             uint8 formlessMod = 70;
 
             if (PAttacker->objtype == TYPE_PC)
@@ -1778,7 +1778,7 @@ namespace battleutils
 
             if (isRanged)
             {
-                attackType = ATTACK_RANGED;
+                attackType = ATTACKTYPE::RANGED;
                 damage = RangedDmgTaken(PDefender, damage, damageType, isCovered);
             }
             else
@@ -3353,7 +3353,7 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
-        PDefender->takeDamage(damage, PAttacker, ATTACK_SPECIAL, appliedEle == ELEMENT_NONE ? DAMAGE_NONE : (DAMAGETYPE)(DAMAGE_ELEMENTAL + appliedEle));
+        PDefender->takeDamage(damage, PAttacker, ATTACKTYPE::SPECIAL, appliedEle == ELEMENT_NONE ? DAMAGE_NONE : (DAMAGETYPE)(DAMAGE_ELEMENTAL + appliedEle));
 
         battleutils::ClaimMob(PDefender, PAttacker);
         PDefender->updatemask |= UPDATE_STATUS;
