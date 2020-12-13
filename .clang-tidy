@@ -16,11 +16,13 @@ Checks: >
   -readability-implicit-bool-conversion,
   -readability-uppercase-literal-suffix,
   modernize-*,
+  -modernize-avoid-c-arrays,
   -modernize-use-auto,
   -modernize-use-trailing-return-type,
   performance-*,
   cppcoreguidelines-pro-type-cstyle-cast,
-  cppcoreguidelines-pro-type-static-cast-downcast,
+#  TODO: This is important, but very destructive. Use with caution!
+#  cppcoreguidelines-pro-type-static-cast-downcast,
 WarningsAsErrors: ''
 HeaderFilterRegex: '/src/*'
 AnalyzeTemporaryDtors: false

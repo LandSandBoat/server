@@ -25,7 +25,7 @@ PointerAlignment: Left
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'
 SpaceBeforeParens: ControlStatements
-SpacesBeforeTrailingComments: 4
+SpacesBeforeTrailingComments: 1
 Standard: Cpp11
 UseTab: Never
 
