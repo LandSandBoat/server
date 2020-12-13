@@ -45,7 +45,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 {
     objtype = TYPE_TRUST;
-    m_EcoSystem = SYSTEM_UNCLASSIFIED;
+    m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
     allegiance = ALLEGIANCE_PLAYER;
     m_MobSkillList = 0;
     PMaster = PChar;

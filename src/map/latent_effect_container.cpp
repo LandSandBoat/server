@@ -1127,7 +1127,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     case LATENT_VS_ECOSYSTEM:
         if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
         {
-            expression = PTarget->m_EcoSystem == latentEffect.GetConditionsValue();
+            expression = static_cast<uint16>(PTarget->m_EcoSystem) == latentEffect.GetConditionsValue();
         }
         break;
     case LATENT_VS_FAMILY:

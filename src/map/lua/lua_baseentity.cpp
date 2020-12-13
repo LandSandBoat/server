@@ -13641,7 +13641,7 @@ inline int32 CLuaBaseEntity::getSystem(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint8 system = ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem;
+    uint8 system = static_cast<uint8>(((CBattleEntity*)m_PBaseEntity)->m_EcoSystem);
 
     lua_pushinteger(L, system);
     return 1;
@@ -13703,7 +13703,7 @@ inline int32 CLuaBaseEntity::isUndead(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem == SYSTEM_UNDEAD);
+    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem == ECOSYSTEM::UNDEAD);
     return 1;
 }
 

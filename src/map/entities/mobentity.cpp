@@ -79,7 +79,7 @@ CMobEntity::CMobEntity()
     m_Type = MOBTYPE_NORMAL;
     m_Behaviour = BEHAVIOUR_NONE;
     m_SpawnType = SPAWNTYPE_NORMAL;
-    m_EcoSystem = SYSTEM_UNCLASSIFIED;
+    m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
     m_Element = 0;
     m_HiPCLvl = 0;
     m_HiPartySize = 0;

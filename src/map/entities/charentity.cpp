@@ -81,7 +81,7 @@
 CCharEntity::CCharEntity()
 {
     objtype = TYPE_PC;
-    m_EcoSystem = SYSTEM_HUMANOID;
+    m_EcoSystem = ECOSYSTEM::HUMANOID;
 
     m_event.reset();
 

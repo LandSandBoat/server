@@ -730,7 +730,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             castPriority.push_back(SpellID::Aspir);
         }
 
-        if (PAutomaton->GetHPP() <= 75 && PTarget->m_EcoSystem != SYSTEM_UNDEAD) // HPP <= 75 -> Drain
+        if (PAutomaton->GetHPP() <= 75 && PTarget->m_EcoSystem != ECOSYSTEM::UNDEAD) // HPP <= 75 -> Drain
             castPriority.push_back(SpellID::Drain);
 
         if (maneuvers.dark) // Dark -> Access to Enfeebles

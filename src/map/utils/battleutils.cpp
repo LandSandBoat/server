@@ -643,7 +643,7 @@ namespace battleutils
                     break;
 
                 case SPIKE_DREAD:
-                    if (PAttacker->m_EcoSystem == SYSTEM_UNDEAD)
+                    if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
                     {
                         // is undead no effect
                         Action->spikesEffect = (SUBEFFECT)0;
@@ -879,7 +879,7 @@ namespace battleutils
                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_HASTE_DAZE, PAttacker->id);
                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->id);
             }
-            if ((PDefender->m_EcoSystem != SYSTEM_UNDEAD) || (previous_daze == EFFECT_HASTE_DAZE))
+            if ((PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD) || (previous_daze == EFFECT_HASTE_DAZE))
             {
                 PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze,
                     0, previous_daze_power,
@@ -1611,7 +1611,7 @@ namespace battleutils
         else if (PDefender->objtype == TYPE_MOB && PDefender->GetMJob() == JOB_PLD)
         {
             CMobEntity* PMob = (CMobEntity*)PDefender;
-            if (PMob->m_EcoSystem != SYSTEM_UNDEAD && PMob->m_EcoSystem != SYSTEM_BEASTMEN)
+            if (PMob->m_EcoSystem != ECOSYSTEM::UNDEAD && PMob->m_EcoSystem != ECOSYSTEM::BEASTMAN)
                 return 0;
         }
         else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PETTYPE_AUTOMATON && PDefender->GetMJob() == JOB_PLD)
@@ -2940,22 +2940,53 @@ namespace battleutils
 
         switch (PAttacker->m_EcoSystem)
         {
-            case SYSTEM_AMORPH:     KillerEffect = PDefender->getMod(Mod::AMORPH_KILLER);   break;
-            case SYSTEM_AQUAN:      KillerEffect = PDefender->getMod(Mod::AQUAN_KILLER);    break;
-            case SYSTEM_ARCANA:     KillerEffect = PDefender->getMod(Mod::ARCANA_KILLER);   break;
-            case SYSTEM_BEAST:      KillerEffect = PDefender->getMod(Mod::BEAST_KILLER);    break;
-            case SYSTEM_BIRD:       KillerEffect = PDefender->getMod(Mod::BIRD_KILLER);     break;
-            case SYSTEM_DEMON:      KillerEffect = PDefender->getMod(Mod::DEMON_KILLER);    break;
-            case SYSTEM_DRAGON:     KillerEffect = PDefender->getMod(Mod::DRAGON_KILLER);   break;
-            case SYSTEM_EMPTY:      KillerEffect = PDefender->getMod(Mod::EMPTY_KILLER);    break;
-            case SYSTEM_HUMANOID:   KillerEffect = PDefender->getMod(Mod::HUMANOID_KILLER); break;
-            case SYSTEM_LIZARD:     KillerEffect = PDefender->getMod(Mod::LIZARD_KILLER);   break;
-            case SYSTEM_LUMINION:   KillerEffect = PDefender->getMod(Mod::LUMINION_KILLER); break;
-            case SYSTEM_LUMORIAN:   KillerEffect = PDefender->getMod(Mod::LUMORIAN_KILLER); break;
-            case SYSTEM_PLANTOID:   KillerEffect = PDefender->getMod(Mod::PLANTOID_KILLER); break;
-            case SYSTEM_UNDEAD:     KillerEffect = PDefender->getMod(Mod::UNDEAD_KILLER);   break;
-            case SYSTEM_VERMIN:     KillerEffect = PDefender->getMod(Mod::VERMIN_KILLER);   break;
-            default: break;
+            case ECOSYSTEM::AMORPH:
+                KillerEffect = PDefender->getMod(Mod::AMORPH_KILLER);
+                break;
+            case ECOSYSTEM::AQUAN:
+                KillerEffect = PDefender->getMod(Mod::AQUAN_KILLER);
+                break;
+            case ECOSYSTEM::ARCANA:
+                KillerEffect = PDefender->getMod(Mod::ARCANA_KILLER);
+                break;
+            case ECOSYSTEM::BEAST:
+                KillerEffect = PDefender->getMod(Mod::BEAST_KILLER);
+                break;
+            case ECOSYSTEM::BIRD:
+                KillerEffect = PDefender->getMod(Mod::BIRD_KILLER);
+                break;
+            case ECOSYSTEM::DEMON:
+                KillerEffect = PDefender->getMod(Mod::DEMON_KILLER);
+                break;
+            case ECOSYSTEM::DRAGON:
+                KillerEffect = PDefender->getMod(Mod::DRAGON_KILLER);
+                break;
+            case ECOSYSTEM::EMPTY:
+                KillerEffect = PDefender->getMod(Mod::EMPTY_KILLER);
+                break;
+            case ECOSYSTEM::HUMANOID:
+                KillerEffect = PDefender->getMod(Mod::HUMANOID_KILLER);
+                break;
+            case ECOSYSTEM::LIZARD:
+                KillerEffect = PDefender->getMod(Mod::LIZARD_KILLER);
+                break;
+            case ECOSYSTEM::LUMINION:
+                KillerEffect = PDefender->getMod(Mod::LUMINION_KILLER);
+                break;
+            case ECOSYSTEM::LUMORIAN:
+                KillerEffect = PDefender->getMod(Mod::LUMORIAN_KILLER);
+                break;
+            case ECOSYSTEM::PLANTOID:
+                KillerEffect = PDefender->getMod(Mod::PLANTOID_KILLER);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                KillerEffect = PDefender->getMod(Mod::UNDEAD_KILLER);
+                break;
+            case ECOSYSTEM::VERMIN:
+                KillerEffect = PDefender->getMod(Mod::VERMIN_KILLER);
+                break;
+            default:
+                break;
         }
 
         // Add intimidation rate from Bully
