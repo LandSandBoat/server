@@ -76,7 +76,7 @@ struct actionTarget_t
     uint16            spikesMessage;        // 10 bits
 
     actionTarget_t() : reaction(REACTION::NONE), animation(0),
-        speceffect(SPECEFFECT_NONE), knockback(0), param(0),
+        speceffect(SPECEFFECT::NONE), knockback(0), param(0),
         messageID(0), additionalEffect(SUBEFFECT_NONE),
         addEffectParam(0), addEffectMessage(0),
         spikesEffect(SUBEFFECT_NONE), spikesParam(0),

@@ -205,7 +205,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         actionList.ActionTargetID = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.reaction = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT_RECOIL;
+        actionTarget.speceffect = SPECEFFECT::RECOIL;
         actionTarget.animation = PAbility->getAnimationID();
         actionTarget.param = 0;
         auto prevMsg = actionTarget.messageID;

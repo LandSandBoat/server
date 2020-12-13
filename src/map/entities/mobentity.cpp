@@ -667,7 +667,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         list.ActionTargetID = PTarget->id;
         target.reaction = REACTION::HIT;
-        target.speceffect = SPECEFFECT_HIT;
+        target.speceffect = SPECEFFECT::HIT;
         target.animation = PSkill->getAnimationID();
         target.messageID = PSkill->getMsg();
 
@@ -703,7 +703,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (PSkill->hasMissMsg())
         {
             target.reaction = REACTION::MISS;
-            target.speceffect = SPECEFFECT_NONE;
+            target.speceffect = SPECEFFECT::NONE;
             if (msg == PSkill->getAoEMsg())
                 msg = 282;
         }
@@ -712,9 +712,9 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             target.reaction = REACTION::HIT;
         }
 
-        if (target.speceffect & SPECEFFECT_HIT)
+        if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
-            target.speceffect = SPECEFFECT_RECOIL;
+            target.speceffect = SPECEFFECT::RECOIL;
             target.knockback = PSkill->getKnockback();
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {

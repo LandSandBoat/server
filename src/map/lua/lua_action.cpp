@@ -166,7 +166,7 @@ int32 CLuaAction::speceffect(lua_State* L)
             }
             else
             {
-                lua_pushinteger(L, actionList.actionTargets[0].speceffect);
+                lua_pushinteger(L, static_cast<uint16>(actionList.actionTargets[0].speceffect));
                 return 1;
             }
         }

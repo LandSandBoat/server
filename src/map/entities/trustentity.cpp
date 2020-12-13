@@ -120,7 +120,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
         actionList.ActionTargetID = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.reaction = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT_RECOIL;
+        actionTarget.speceffect = SPECEFFECT::RECOIL;
         actionTarget.animation = PAbility->getAnimationID();
         actionTarget.param = 0;
         auto prevMsg = actionTarget.messageID;
@@ -157,7 +157,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.reaction = REACTION::HIT;		//0x10
-    actionTarget.speceffect = SPECEFFECT_HIT;		//0x60 (SPECEFFECT_HIT + SPECEFFECT_RECOIL)
+    actionTarget.speceffect = SPECEFFECT::HIT;		//0x60 (SPECEFFECT_HIT + SPECEFFECT_RECOIL)
     actionTarget.messageID = 352;
 
     /*
@@ -209,7 +209,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             actionTarget.messageID = 32;
             actionTarget.reaction = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT_NONE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
             hitCount = i; // end barrage, shot missed
         }
         else if (tpzrand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
@@ -226,7 +226,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
                 if (isCritical)
                 {
-                    actionTarget.speceffect = SPECEFFECT_CRITICAL_HIT;
+                    actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
                     actionTarget.messageID = 353;
                 }
 
@@ -268,7 +268,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         else //miss
         {
             actionTarget.reaction = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT_NONE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID = 354;
             hitCount = i; // end barrage, shot missed
         }
@@ -308,7 +308,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         {
             actionTarget.messageID = 352;
             actionTarget.reaction = REACTION::HIT;
-            actionTarget.speceffect = SPECEFFECT_CRITICAL_HIT;
+            actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
         }
 
         actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
@@ -345,8 +345,8 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
     }
 
-    if (actionTarget.speceffect == SPECEFFECT_HIT && actionTarget.param > 0)
-        actionTarget.speceffect = SPECEFFECT_RECOIL;
+    if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
+        actionTarget.speceffect = SPECEFFECT::RECOIL;
 
     // remove barrage effect if present
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0)) {
@@ -449,7 +449,7 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
 
             actionTarget.reaction = REACTION::NONE;
-            actionTarget.speceffect = SPECEFFECT_NONE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.animation = PWeaponSkill->getAnimationId();
             actionTarget.messageID = 0;
             std::tie(damage, tpHitsLanded, extraHitsLanded) = luautils::OnUseWeaponSkill(this, PTarget, PWeaponSkill, tp, primary, action, taChar);

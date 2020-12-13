@@ -1365,7 +1365,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
         actionTarget.reaction = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT_NONE;
+        actionTarget.speceffect = SPECEFFECT::NONE;
         actionTarget.animation = PSpell->getAnimationID();
         actionTarget.param = 0;
         actionTarget.messageID = MSGBASIC_NONE;
@@ -1579,7 +1579,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         {
             actionTarget.messageID = 32;
             actionTarget.reaction = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT_NONE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
         }
         else if ((tpzrand::GetRandomNumber(100) < attack.GetHitRate() || attackRound.GetSATAOccured()) &&
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
@@ -1596,7 +1596,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             {
                 actionTarget.messageID = 70;
                 actionTarget.reaction = REACTION::PARRY;
-                actionTarget.speceffect = SPECEFFECT_NONE;
+                actionTarget.speceffect = SPECEFFECT::NONE;
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
             }
@@ -1606,12 +1606,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 {
                     actionTarget.messageID = 30;
                     actionTarget.reaction = REACTION::EVADE;
-                    actionTarget.speceffect = SPECEFFECT_NONE;
+                    actionTarget.speceffect = SPECEFFECT::NONE;
                 }
                 if (attack.IsCountered())
                 {
                     actionTarget.reaction = REACTION::EVADE;
-                    actionTarget.speceffect = SPECEFFECT_NONE;
+                    actionTarget.speceffect = SPECEFFECT::NONE;
                     actionTarget.param = 0;
                     actionTarget.messageID = 0;
                     actionTarget.spikesEffect = SUBEFFECT_COUNTER;
@@ -1656,7 +1656,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 if (attack.IsCritical())
                 {
                     actionTarget.reaction = REACTION::HIT;
-                    actionTarget.speceffect = SPECEFFECT_CRITICAL_HIT;
+                    actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
                     actionTarget.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 353 : 67;
 
                     if (PTarget->objtype == TYPE_MOB)
@@ -1672,7 +1672,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 else
                 {
                     actionTarget.reaction = REACTION::HIT;
-                    actionTarget.speceffect = SPECEFFECT_HIT;
+                    actionTarget.speceffect = SPECEFFECT::HIT;
                     actionTarget.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 352 : 1;
                 }
 
@@ -1742,7 +1742,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         {
             // misses the target
             actionTarget.reaction = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT_NONE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID = 15;
             attack.SetEvaded(true);
 
@@ -1761,9 +1761,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
-        if (actionTarget.speceffect == SPECEFFECT_HIT && actionTarget.param > 0)
+        if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
         {
-            actionTarget.speceffect = SPECEFFECT_RECOIL;
+            actionTarget.speceffect = SPECEFFECT::RECOIL;
         }
 
         //try zanshin only on single swing attack rounds - it is last priority in the multi-hit order

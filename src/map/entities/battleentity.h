@@ -272,14 +272,14 @@ enum class REACTION
     GUARD = 0x14		// mnk guard (20 dec)
 };
 
-enum SPECEFFECT
+enum class SPECEFFECT
 {
-    SPECEFFECT_NONE = 0x00,
-    SPECEFFECT_BLOOD = 0x02,
-    SPECEFFECT_HIT = 0x10,
-    SPECEFFECT_RAISE = 0x11,
-    SPECEFFECT_RECOIL = 0x20,
-    SPECEFFECT_CRITICAL_HIT = 0x22
+    NONE = 0x00,
+    BLOOD = 0x02,
+    HIT = 0x10,
+    RAISE = 0x11,
+    RECOIL = 0x20,
+    CRITICAL_HIT = 0x22
 };
 
 enum SUBEFFECT
@@ -435,7 +435,7 @@ struct apAction_t
         ActionTarget = nullptr;
         reaction = REACTION::NONE;
         animation = 0;
-        speceffect = SPECEFFECT_NONE;
+        speceffect = SPECEFFECT::NONE;
         param = 0;
         messageID = 0;
         additionalEffect = SUBEFFECT_NONE;
