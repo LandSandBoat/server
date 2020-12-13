@@ -21,7 +21,7 @@
 
 #include "../common/blowfish.h"
 
-#include <string.h>
+#include <cstring>
 
 // clang-format off
 uint8 subkey[4168] =
@@ -292,18 +292,17 @@ uint8 subkey[4168] =
 
 inline uint32 TT(uint32 working, uint32* S)
 {
-	return (((S[256+((working>>8)&0xff)]&1)^32)+((S[768+(working >> 24)]&1)^32)+S[512+((working>>16)&0xff)]+S[working&0xff]);
+    return (((S[256 + ((working >> 8) & 0xff)] & 1) ^ 32) + ((S[768 + (working >> 24)] & 1) ^ 32) + S[512 + ((working >> 16) & 0xff)] + S[working & 0xff]);
 }
 
-void blowfish_encipher(uint32* xl, uint32* xr, uint32* P, uint32* S)
+void blowfish_encipher(uint32* xl, uint32* xr, const uint32* P, uint32* S)
 {
+#if defined(WIN32) && defined(_M_X86)
 
-#if defined (WIN32) && defined (_M_X86)
+    uint32 Xr;
+    uint32 i;
 
-	uint32  Xr;
-	uint32   i;
-
-	_asm {
+    _asm {
 
 		mov		eax,dword ptr [xl]
 		mov		ebx,dword ptr [eax]
@@ -358,51 +357,50 @@ cycle:
 		mov		dword ptr [eax],ecx
 		mov		eax,dword ptr [xr]
 		mov		dword ptr [eax],ebx
-	}
+    }
 
 #else
 
-	uint32 Xl;
-	uint32 Xr;
-	uint32 temp;
-	uint16	      i;
+    uint32 Xl;
+    uint32 Xr;
+    uint32 temp;
+    uint16 i;
 
-	const int32 N = 16;
-	Xl = *xl;
-	Xr = *xr;
+    const int32 N = 16;
+    Xl            = *xl;
+    Xr            = *xr;
 
-	for( i = 0; i < N; ++i)
-	{
-	    Xl = Xl^P[i];
-	    Xr = TT(Xl,S)^Xr;
-
-	    temp = Xl;
-	    Xl   = Xr;
-	    Xr   = temp;
-	}
+    for (i = 0; i < N; ++i)
+    {
+        Xl = Xl ^ P[i];
+        Xr = TT(Xl, S) ^ Xr;
 
         temp = Xl;
-	Xl = Xr;
-	Xr = temp;
+        Xl   = Xr;
+        Xr   = temp;
+    }
 
-	Xr = Xr^P[N];
-	Xl = Xl^P[N+1];
+    temp = Xl;
+    Xl   = Xr;
+    Xr   = temp;
 
-	*xl = Xl;
-	*xr = Xr;
+    Xr = Xr ^ P[N];
+    Xl = Xl ^ P[N + 1];
+
+    *xl = Xl;
+    *xr = Xr;
 
 #endif
 }
 
-void blowfish_decipher(uint32* xl, uint32* xr, uint32* P, uint32* S)
+void blowfish_decipher(uint32* xl, uint32* xr, const uint32* P, uint32* S)
 {
+#if defined(WIN32) && defined(_M_X86)
 
-#if defined (WIN32) && defined (_M_X86)
+    uint32 Xr;
+    uint32 i;
 
-   uint32  Xr;
-   uint32   i;
-
-   	_asm {
+    _asm {
 
 		mov		eax,dword ptr [xl]
 		mov		ebx,dword ptr [eax]
@@ -457,93 +455,94 @@ cycle:
 		mov		dword ptr [eax],ecx
 		mov		eax,dword ptr [xr]
 		mov		dword ptr [eax],ebx
-	}
+    }
 
 #else
 
-	uint32 Xl;
-	uint32 Xr;
-	uint32 temp;
-	uint16 i;
+    uint32 Xl;
+    uint32 Xr;
+    uint32 temp;
+    uint16 i;
 
-	Xl = *xl;
-	Xr = *xr;
-	const int32 N = 16;
-	for(i = N+1; i > 1; --i)
-	{
-	  Xl = Xl^P[i];
-	  Xr = TT(Xl,S)^Xr;
+    Xl            = *xl;
+    Xr            = *xr;
+    const int32 N = 16;
+    for (i = N + 1; i > 1; --i)
+    {
+        Xl = Xl ^ P[i];
+        Xr = TT(Xl, S) ^ Xr;
 
-	  /*Exchange Xl and Xr*/
-	  temp = Xl;
-	  Xl = Xr;
- 	  Xr = temp;
-	}
+        /*Exchange Xl and Xr*/
+        temp = Xl;
+        Xl   = Xr;
+        Xr   = temp;
+    }
 
-	/*Exchange Xl and Xr*/
-	  temp = Xl;
-	  Xl = Xr;
- 	  Xr = temp;
+    /*Exchange Xl and Xr*/
+    temp = Xl;
+    Xl   = Xr;
+    Xr   = temp;
 
-	Xr = Xr^P[1];
-	Xl = Xl^P[0];
+    Xr = Xr ^ P[1];
+    Xl = Xl ^ P[0];
 
-	*xl = Xl;
-	*xr = Xr;
+    *xl = Xl;
+    *xr = Xr;
 
 #endif
 }
 
-uint32* blowfish_init(int8 key[], int16 keybytes, uint32* P, uint32* S)
+uint32* blowfish_init(const int8 key[], int16 keybytes, uint32* P, uint32* S)
 {
-	int16          i;
-	int16          j;
-	int16          k;
-	uint32		 data;
-	uint32		 datal;
-	uint32		 datar;
+    int16  i;
+    int16  j;
+    int16  k;
+    uint32 data;
+    uint32 datal;
+    uint32 datar;
 
-	const int32 N = 16;
-	memcpy(P, subkey, 72);
-	memcpy(S, subkey+72, 4096);
+    const int32 N = 16;
+    memcpy(P, subkey, 72);
+    memcpy(S, subkey + 72, 4096);
 
-	j = 0;
+    j = 0;
 
     for (i = 0; i < N + 2; ++i)
-	{
-		data = 0;
-		for (k = 0; k < 4; ++k)
-		{
-			data = (data << 8) | key[j];
-			j = j + 1;
-			if (j >= keybytes) {
-				j = 0;
-			}
-		}
-		P[i] = P[i] ^ data;
-	}
+    {
+        data = 0;
+        for (k = 0; k < 4; ++k)
+        {
+            data = (data << 8) | key[j];
+            j    = j + 1;
+            if (j >= keybytes)
+            {
+                j = 0;
+            }
+        }
+        P[i] = P[i] ^ data;
+    }
 
-	datal = 0;
-	datar = 0;
+    datal = 0;
+    datar = 0;
 
-	for (i = 0; i < N + 2; i += 2)
-	{
-		blowfish_encipher(&datal, &datar, P, S);
+    for (i = 0; i < N + 2; i += 2)
+    {
+        blowfish_encipher(&datal, &datar, P, S);
 
-		P[i] = datal;
-		P[i + 1] = datar;
-	}
+        P[i]     = datal;
+        P[i + 1] = datar;
+    }
 
-	for (i = 0; i < 4; ++i)
-	{
-		for (j = 0; j < 256; j += 2)
-		{
-			blowfish_encipher(&datal, &datar, P, S);
+    for (i = 0; i < 4; ++i)
+    {
+        for (j = 0; j < 256; j += 2)
+        {
+            blowfish_encipher(&datal, &datar, P, S);
 
-			S[i*256+j] = datal;
-			S[i*256+j + 1] = datar;
-		}
-	}
+            S[i * 256 + j]     = datal;
+            S[i * 256 + j + 1] = datar;
+        }
+    }
 
-	return P;
+    return P;
 }
