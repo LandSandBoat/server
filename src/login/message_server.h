@@ -18,16 +18,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+#include "../common/mmo.h"
 #include "../common/socket.h"
 #include "../common/sql.h"
-#include "../common/mmo.h"
 
 #include "../common/zmq.hpp"
 
 struct chat_message_t
 {
-    uint64 dest;
-    MSGSERVTYPE type;
+    uint64         dest;
+    MSGSERVTYPE    type;
     zmq::message_t data;
     zmq::message_t packet;
 };

@@ -25,24 +25,23 @@
 #include "../common/cbasetypes.h"
 //*
 /*
-*
-*   STATUS CODES
-*
-*/
+ *
+ *   STATUS CODES
+ *
+ */
 //
 #define ACCST_NORMAL 0x01
 #define ACCST_BANNED 0x02
 
 //*
 /*
-*
-*  PRIVILIGIES CODES
-*/
+ *
+ *  PRIVILIGIES CODES
+ */
 //*
 
 #define ACCPRIV_USER  0x01
 #define ACCPRIV_ADMIN 0x02
 #define ACCPRIV_ROOT  0x04
-
 
 #endif

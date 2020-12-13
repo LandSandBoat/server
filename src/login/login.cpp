@@ -21,19 +21,18 @@
 #include "../common/mmo.h"
 #include "../common/showmsg.h"
 #include "../common/timer.h"
-#include "../common/version.h"
 #include "../common/utils.h"
+#include "../common/version.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <limits>
-#include <thread>
-#include <iostream>
-#include <functional>
+#include <cstdio>
 #include <cstdlib>
+#include <functional>
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include <string>
+#include <thread>
+#include <vector>
 
 #ifdef WIN32
 #include <io.h>
@@ -42,43 +41,52 @@
 #include <unistd.h>
 #endif
 
+#include "lobby.h"
 #include "login.h"
 #include "login_auth.h"
-#include "lobby.h"
 #include "message_server.h"
 
-const char* LOGIN_CONF_FILENAME = nullptr;
+const char* LOGIN_CONF_FILENAME   = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
-const char* MAINT_CONF_FILENAME = nullptr;
+const char* MAINT_CONF_FILENAME   = nullptr;
 
 volatile bool consoleThreadRun = true;
 
-login_config_t login_config;    //main settings
+login_config_t login_config; // main settings
 version_info_t version_info;
 maint_config_t maint_config;
 
-Sql_t *SqlHandle = nullptr;
+Sql_t*      SqlHandle = nullptr;
 std::thread messageThread;
 std::thread consoleInputThread;
 
 int32 do_init(int32 argc, char** argv)
 {
     int32 i;
-    LOGIN_CONF_FILENAME = "conf/login.conf";
+    LOGIN_CONF_FILENAME   = "conf/login.conf";
     VERSION_INFO_FILENAME = "conf/version.conf";
-    MAINT_CONF_FILENAME = "conf/maint.conf";
+    MAINT_CONF_FILENAME   = "conf/maint.conf";
 
-    //srand(gettick());
+    // srand(gettick());
 
-    for (i = 1; i < argc; i++) {
+    for (i = 1; i < argc; i++)
+    {
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "--h") == 0 || strcmp(argv[i], "--?") == 0 || strcmp(argv[i], "/?") == 0)
+        {
             login_helpscreen(1);
+        }
         else if (strcmp(argv[i], "--version") == 0 || strcmp(argv[i], "--v") == 0 || strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "/v") == 0)
+        {
             login_versionscreen(1);
+        }
         else if (strcmp(argv[i], "--login_config") == 0 || strcmp(argv[i], "--login-config") == 0)
+        {
             LOGIN_CONF_FILENAME = argv[i + 1];
-        else if (strcmp(argv[i], "--run_once") == 0)    // close the map-server as soon as its done.. for testing [Celest]
+        }
+        else if (strcmp(argv[i], "--run_once") == 0)
+        { // close the map-server as soon as its done.. for testing [Celest]
             runflag = 0;
+        }
     }
 
     login_config_default();
@@ -92,26 +100,23 @@ int32 do_init(int32 argc, char** argv)
     config_read(MAINT_CONF_FILENAME, "maint", maint_config_read);
 
     login_fd = makeListenBind_tcp(login_config.login_auth_ip.c_str(), login_config.login_auth_port, connect_client_login);
-    ShowStatus("The login-server-auth is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_auth_port);
+    ShowStatus("The login-server-auth is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_auth_port);
 
     login_lobbydata_fd = makeListenBind_tcp(login_config.login_data_ip.c_str(), login_config.login_data_port, connect_client_lobbydata);
-    ShowStatus("The login-server-lobbydata is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_data_port);
+    ShowStatus("The login-server-lobbydata is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_data_port);
 
     login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
-    ShowStatus("The login-server-lobbyview is " CL_GREEN"ready" CL_RESET" (Server is listening on the port %u).\n\n", login_config.login_view_port);
+    ShowStatus("The login-server-lobbyview is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_view_port);
 
     SqlHandle = Sql_Malloc();
-    if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(),
-        login_config.mysql_password.c_str(),
-        login_config.mysql_host.c_str(),
-        login_config.mysql_port,
-        login_config.mysql_database.c_str()) == SQL_ERROR)
+    if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
+                    login_config.mysql_database.c_str()) == SQL_ERROR)
     {
         exit(EXIT_FAILURE);
     }
     Sql_Keepalive(SqlHandle);
 
-    const char *fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
+    const char* fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
                            `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
                            `char_skills`, `char_titles`, `char_effects`, `char_exp`;";
 
@@ -121,19 +126,18 @@ int32 do_init(int32 argc, char** argv)
     }
 
     messageThread = std::thread(message_server_init);
-    ShowStatus("The login-server is " CL_GREEN"ready" CL_RESET" to work...\n");
+    ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " to work...\n");
 
-    if(!login_config.account_creation)
+    if (!login_config.account_creation)
     {
-        ShowStatus("New account creation is " CL_RED"disabled" CL_RESET" in login_config.\n");
+        ShowStatus("New account creation is " CL_RED "disabled" CL_RESET " in login_config.\n");
     }
 
     bool attached = isatty(0);
 
     if (attached)
     {
-        consoleInputThread = std::thread([&]()
-        {
+        consoleInputThread = std::thread([&]() {
             ShowStatus("Console input thread is ready..\r\n");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
@@ -143,23 +147,23 @@ int32 do_init(int32 argc, char** argv)
                 {
                     std::string line;
                     std::getline(std::cin, line);
-                    std::istringstream stream(line);
-                    std::string input;
+                    std::istringstream       stream(line);
+                    std::string              input;
                     std::vector<std::string> inputs;
                     while (stream >> input)
                     {
                         inputs.push_back(input);
                     }
 
-                    if (inputs.size() > 0)
+                    if (!inputs.empty())
                     {
                         if (inputs[0] == "verlock")
                         {
                             // handle wrap around from 2->3 as 0
-                            auto temp = (++version_info.ver_lock) % 3;
+                            auto temp             = (++version_info.ver_lock) % 3;
                             version_info.ver_lock = temp;
 
-                            auto value = "";
+                            const auto* value = "";
                             switch (version_info.ver_lock)
                             {
                                 case 0:
@@ -233,7 +237,7 @@ void do_final(int code)
     {
         consoleInputThread.join();
     }
-    if(SqlHandle)
+    if (SqlHandle)
     {
         Sql_Free(SqlHandle);
         SqlHandle = nullptr;
@@ -245,7 +249,7 @@ void do_final(int code)
     exit(code);
 }
 
-void do_abort(void)
+void do_abort()
 {
     do_final(EXIT_FAILURE);
 }
@@ -258,13 +262,12 @@ void set_server_type()
 int do_sockets(fd_set* rfd, duration next)
 {
     struct timeval timeout;
-    int ret, i;
-
+    int            ret;
+    int            i;
 
     // can timeout until the next tick
-    timeout.tv_sec = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
     timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
-
 
     memcpy(rfd, &readfds, sizeof(*rfd));
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
@@ -290,9 +293,7 @@ int do_sockets(fd_set* rfd, duration next)
         {
             session[fd]->func_recv(fd);
 
-            if (fd != login_fd &&
-                fd != login_lobbydata_fd &&
-                fd != login_lobbyview_fd)
+            if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
             {
                 session[fd]->func_parse(fd);
 
@@ -313,15 +314,14 @@ int do_sockets(fd_set* rfd, duration next)
 
             if (session[i])
             {
-
-                if (i != login_fd &&
-                    i != login_lobbydata_fd &&
-                    i != login_lobbyview_fd)
+                if (i != login_fd && i != login_lobbydata_fd && i != login_lobbyview_fd)
                 {
                     session[i]->func_parse(i);
 
                     if (!session[i])
+                    {
                         continue;
+                    }
 
                     //                          RFIFOFLUSH(fd);
                 }
@@ -356,24 +356,27 @@ int do_sockets(fd_set* rfd, duration next)
         RFIFOFLUSH(i);
     }*/
 
-
     for (i = 1; i < fd_max; i++)
     {
         if (!session[i])
+        {
             continue;
+        }
 
         if (!session[i]->wdata.empty())
+        {
             session[i]->func_send(i);
+        }
     }
     return 0;
 }
 
-int parse_console(char *buf)
+int parse_console(char* buf)
 {
     return 0;
 }
 
-void login_config_read(const char *key, const char *value)
+void login_config_read(const char* key, const char* value)
 {
     if (strcmpi(key, "timestamp_format") == 0)
     {
@@ -466,7 +469,7 @@ void login_config_read(const char *key, const char *value)
     }
 }
 
-void version_info_read(const char *key, const char *value)
+void version_info_read(const char* key, const char* value)
 {
     if (strcmp(key, "CLIENT_VER") == 0)
     {
@@ -490,26 +493,26 @@ void version_info_read(const char *key, const char *value)
 
 void login_config_default()
 {
-    login_config.login_data_ip = "127.0.0.1";
+    login_config.login_data_ip   = "127.0.0.1";
     login_config.login_data_port = 54230;
-    login_config.login_view_ip = "127.0.0.1";
+    login_config.login_view_ip   = "127.0.0.1";
     login_config.login_view_port = 54001;
-    login_config.login_auth_ip = "127.0.0.1";
+    login_config.login_auth_ip   = "127.0.0.1";
     login_config.login_auth_port = 54231;
 
     login_config.servername = "Topaz";
 
-    login_config.mysql_host = "";
-    login_config.mysql_login = "";
+    login_config.mysql_host     = "";
+    login_config.mysql_login    = "";
     login_config.mysql_password = "";
     login_config.mysql_database = "";
-    login_config.mysql_port = 3306;
+    login_config.mysql_port     = 3306;
 
     login_config.search_server_port = 54002;
-    login_config.msg_server_port = 54003;
-    login_config.msg_server_ip = "127.0.0.1";
+    login_config.msg_server_port    = 54003;
+    login_config.msg_server_ip      = "127.0.0.1";
 
-    login_config.log_user_ip = "false";
+    login_config.log_user_ip      = "false";
     login_config.account_creation = "true";
 }
 
@@ -527,7 +530,7 @@ void login_config_read_from_env()
 void version_info_default()
 {
     version_info.client_ver = "99999999_9"; // xxYYMMDD_m = xx:MajorRelease YY:year MM:month DD:day _m:MinorRelease
-    version_info.ver_lock = 2;
+    version_info.ver_lock   = 2;
 }
 
 void maint_config_read(const char* key, const char* value)
@@ -565,10 +568,12 @@ std::string maint_config_write(const char* key)
     return std::string();
 }
 
-int32 config_read(const char* fileName, const char *config, std::function<void(const char*, const char*)> method)
+int32 config_read(const char* fileName, const char* config, const std::function<void(const char*, const char*)>& method)
 {
-    char line[1024], key[1024], value[1024];
-    FILE *fp;
+    char  line[1024];
+    char  key[1024];
+    char  value[1024];
+    FILE* fp;
 
     fp = fopen(fileName, "r");
     if (fp == nullptr)
@@ -582,13 +587,20 @@ int32 config_read(const char* fileName, const char *config, std::function<void(c
         char* ptr;
 
         if (line[0] == '#')
+        {
             continue;
+        }
         if (sscanf(line, "%[^:]: %[^\t\r\n]", key, value) < 2)
+        {
             continue;
+        }
 
-        //Strip trailing spaces
+        // Strip trailing spaces
         ptr = value + strlen(value);
-        while (--ptr >= value && *ptr == ' ');
+        while (--ptr >= value && *ptr == ' ')
+        {
+            ;
+        }
         ptr++;
         *ptr = '\0';
 
@@ -599,11 +611,13 @@ int32 config_read(const char* fileName, const char *config, std::function<void(c
     return 0;
 }
 
-int32 config_write(const char* fileName, const char *config, std::function<std::string(const char*)> method)
+int32 config_write(const char* fileName, const char* config, const std::function<std::string(const char*)>& method)
 {
-    char line[1024], key[1024], value[1024];
+    char                     line[1024];
+    char                     key[1024];
+    char                     value[1024];
     std::vector<std::string> lines;
-    FILE *fp;
+    FILE*                    fp;
 
     fp = fopen(fileName, "r");
     if (fp == nullptr)
@@ -616,20 +630,22 @@ int32 config_write(const char* fileName, const char *config, std::function<std::
     {
         char* ptr;
 
-        if (line[0] == '#' ||
-            sscanf(line, "%[^:]: %[^\t\r\n]", key, value) < 2)
+        if (line[0] == '#' || sscanf(line, "%[^:]: %[^\t\r\n]", key, value) < 2)
         {
-            lines.push_back(line);
+            lines.emplace_back(line);
             continue;
         }
 
-        //Strip trailing spaces
+        // Strip trailing spaces
         ptr = value + strlen(value);
-        while (--ptr >= value && *ptr == ' ');
+        while (--ptr >= value && *ptr == ' ')
+        {
+            ;
+        }
         ptr++;
         *ptr = '\0';
 
-        auto replace = method(key);
+        auto replace  = method(key);
         auto new_line = std::string(key);
         new_line.append(": ");
         new_line.append(replace);
@@ -654,24 +670,29 @@ int32 config_write(const char* fileName, const char *config, std::function<std::
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET"\n",
-        TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
+    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
     ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttps://github.com/topaz-next/topaz\n");
-    if (flag) exit(EXIT_FAILURE);
+    if (flag)
+    {
+        exit(EXIT_FAILURE);
+    }
 }
 
 void login_helpscreen(int32 flag)
 {
     ShowMessage("Usage: login-server [options]\n");
     ShowMessage("Options:\n");
-    ShowMessage(CL_WHITE"  Commands\t\t\tDescription\n" CL_RESET);
+    ShowMessage(CL_WHITE "  Commands\t\t\tDescription\n" CL_RESET);
     ShowMessage("-----------------------------------------------------------------------------\n");
     ShowMessage("  --help, --h, --?, /?     Displays this help screen\n");
     ShowMessage("  --login-config <file>    Load login-server configuration from <file>\n");
     ShowMessage("  --lan-config   <file>    Load lan configuration from <file>\n");
     ShowMessage("  --version, --v, -v, /v   Displays the server's version\n");
     ShowMessage("\n");
-    if (flag) exit(EXIT_FAILURE);
+    if (flag)
+    {
+        exit(EXIT_FAILURE);
+    }
 }
 
 void log_init(int argc, char** argv)
