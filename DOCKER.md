@@ -1,4 +1,4 @@
-Project Topaz Docker
+Topaz Next Docker
 ==========
 
 This guide assumes you have Docker (https://www.docker.com/) installed on your machine.

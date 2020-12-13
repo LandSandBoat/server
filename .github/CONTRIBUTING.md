@@ -7,7 +7,7 @@
 
 # Pull Request Contributions:
 
-**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](https://github.com/topaz-next/topaz/blob/release/.github/CONTRIBUTOR_AGREEMENT.md)**
+**By submitting a pull request to Topaz Next, you agree to our [Limited Contributor License Agreement](https://github.com/topaz-next/topaz/blob/release/.github/CONTRIBUTOR_AGREEMENT.md)**
 
 All contributions must be done through pull requests to the Topaz repository.  We don't take fixes from Discord to apply ourselves.  If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
@@ -17,7 +17,7 @@ Please try to leave your PR alone after submission, unless it's to fix bugs you'
 
 After a pull request is made, if a staff member leaves feedback for you to change, you must either fix or address it for your pull request to be merged.
 
-If you do not fill the checkboxes confirming that you agree to Project Topaz's Limited Contributor License Agreement and that you've tested your code - your PR will not be reviewed.
+If you do not fill the checkboxes confirming that you agree to Topaz Next's Limited Contributor License Agreement and that you've tested your code - your PR will not be reviewed.
 
 # Workflow Guide
 

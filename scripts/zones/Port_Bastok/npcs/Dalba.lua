@@ -105,7 +105,7 @@ function onTrigger(player, npc)
     --     OtherQuests = OtherQuests - 128 -- Chasing Dreams(pt.2).
     -- end
 
--- *This quest, as of the time this script was written, is not yet defined in Project Topaz.
+-- *This quest, as of the time this script was written, is not yet defined in Topaz Next.
     -- if (player:hasCompletedQuest(**Unknown**, MONSTROSITY)) then
     --     OtherQuests = OtherQuests - 256 -- Monstrosity.
     -- end
