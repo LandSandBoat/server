@@ -27,8 +27,8 @@
 
 CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
 {
-	this->type = 0x18;
-	this->size = 0x25;
+	this->id(0x118);
+	this->length(132);
 
     const char* query = "SELECT bayld, kinetic_unit, imprimaturs, obsidian_fragment, lebondopt_wing, \
                          pulchridopt_wing, mweya_plasm FROM char_points WHERE charid = %d";
