@@ -2,7 +2,7 @@
 
 [![release build](https://img.shields.io/github/workflow/status/topaz-next/topaz/build/release?label=release)](https://github.com/topaz-next/topaz/actions?query=workflow%3Abuild+branch%3Arelease)
 [![canary build](https://img.shields.io/github/workflow/status/topaz-next/topaz/build/canary?label=canary)](https://github.com/topaz-next/topaz/actions?query=workflow%3Abuild+branch%3Acanary)
-[![Discord](https://img.shields.io/discord/785766425829572608.svg?label=discord&logo=discord)](https://discord.gg/0cQjvnFUN26nRt7y)
+[![Discord](https://img.shields.io/discord/785766425829572608.svg?label=discord&logo=discord)](https://discord.gg/YvM9mDHGKb)
 [![GitHub contributors](https://img.shields.io/github/contributors/topaz-next/topaz.svg)](https://GitHub.com/topaz-next/topaz/graphs/contributors/)
 ![License](https://img.shields.io/github/license/topaz-next/topaz)
 
@@ -10,7 +10,7 @@
 Welcome to Topaz Next, an open source server emulator for FFXI.
 
 ## Discord
-https://discord.gg/0cQjvnFUN26nRt7y
+https://discord.gg/YvM9mDHGKb
 
 ## Getting Started
 
