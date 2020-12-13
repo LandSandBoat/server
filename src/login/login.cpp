@@ -656,7 +656,7 @@ void login_versionscreen(int32 flag)
 {
     ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET"\n",
         TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
-    ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttps://github.com/project-topaz/topaz\n");
+    ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttps://github.com/topaz-next/topaz\n");
     if (flag) exit(EXIT_FAILURE);
 }
 

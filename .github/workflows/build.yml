@@ -116,8 +116,6 @@ jobs:
         else
             echo "Problem with formatting!"
             echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo "Windows and Linux installation instructions for these tools are available here:"
-            echo "https://github.com/project-topaz/topaz/wiki/Developer-Workflow"
             echo "" 
             echo "$diff" 
 

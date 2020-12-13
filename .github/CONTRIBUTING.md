@@ -1,7 +1,3 @@
-**NOTICE: AS OF NOVEMBER 16TH, 2020, PROJECT TOPAZ IS ONLY ACCEPTING COMMUNITY PULL REQUESTS FOR CRITICAL CRASH FIXES, EXPLOIT FIXES, AND VERSION UPDATES. ANY PULL REQUEST FOR ANOTHER PURPOSE -- SUCH AS NEW CONTENT, REFACTORING, OR NON-VITAL FIXES -- WILL BE CLOSED WITHOUT COMMENT OR REVIEW.**
-
-----
-
 # Issue Report Contributions:
 
 * If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
@@ -11,7 +7,7 @@
 
 # Pull Request Contributions:
 
-**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](http://project-topaz.com/blob/release/CONTRIBUTOR_AGREEMENT.md)**
+**By submitting a pull request to Project Topaz, you agree to our [Limited Contributor License Agreement](https://github.com/topaz-next/topaz/blob/release/.github/CONTRIBUTOR_AGREEMENT.md)**
 
 All contributions must be done through pull requests to the Topaz repository.  We don't take fixes from Discord to apply ourselves.  If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 

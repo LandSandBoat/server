@@ -140,6 +140,7 @@ uint8 radianToRotation(float radian)
 /****************************************************************************
 * Functions for entity-to-entity world angles, and facing differences.      *
 * Highly recommended to read Project Topaz's Wiki page to understand these. *
+* (Also backed up to the Topaz Next wiki)                                   *
 *****************************************************************************/
 // https://web.archive.org/web/https://github.com/project-topaz/topaz/wiki/Spatial-Orientation-and-Relative-Positions
 
