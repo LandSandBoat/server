@@ -61,7 +61,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
 
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-    actionTarget.reaction = REACTION_NONE;
+    actionTarget.reaction = REACTION::NONE;
     actionTarget.speceffect = SPECEFFECT_NONE;
     actionTarget.animation = 0;
     actionTarget.param = m_PSkill->getID();

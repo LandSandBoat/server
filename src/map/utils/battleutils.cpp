@@ -585,7 +585,7 @@ namespace battleutils
             // Retaliation rate is based on player acc vs mob evasion. Missed retaliations do not even display in log.
             // Other theories exist but were not proven or reliably tested (I have to assume too many things to even consider JP translations about weapon delay), this at least has data to back it up.
             // https://web.archive.org/web/20141228105335/http://www.bluegartr.com/threads/120193-Retaliation-Testing?s=7a6221e10ffdfaa6a7f5e8f0387f787d&p=4620727&viewfull=1#post4620727
-            Action->reaction = REACTION_HIT;
+            Action->reaction = REACTION::HIT;
             Action->spikesEffect = SUBEFFECT_COUNTER;
 
             if (battleutils::IsAbsorbByShadow(PAttacker)) // Struck a shadow
@@ -676,7 +676,7 @@ namespace battleutils
                     break;
 
                 case SPIKE_REPRISAL:
-                    if (Action->reaction == REACTION_BLOCK)
+                    if (Action->reaction == REACTION::BLOCK)
                     {
                         PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGETYPE::LIGHT);
                         auto PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);

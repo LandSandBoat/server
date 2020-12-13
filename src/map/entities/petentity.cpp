@@ -204,7 +204,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         actionList_t& actionList = action.getNewActionList();
         actionList.ActionTargetID = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.reaction = REACTION_NONE;
+        actionTarget.reaction = REACTION::NONE;
         actionTarget.speceffect = SPECEFFECT_RECOIL;
         actionTarget.animation = PAbility->getAnimationID();
         actionTarget.param = 0;

@@ -857,7 +857,7 @@ inline int32 CLuaBaseEntity::injectActionPacket(lua_State* L)
 
         Action.spellgroup = castType;
         Action.actiontype = actiontype;
-        target.reaction = REACTION_NONE;
+        target.reaction = REACTION::NONE;
         target.speceffect = SPECEFFECT_NONE;
         if (lua_isnil(L, 3))
         {

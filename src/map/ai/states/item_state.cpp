@@ -118,7 +118,7 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
 
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-    actionTarget.reaction = REACTION_NONE;
+    actionTarget.reaction = REACTION::NONE;
     actionTarget.speceffect = SPECEFFECT_NONE;
     actionTarget.animation = 0;
     actionTarget.param = m_PItem->getID();
@@ -239,7 +239,7 @@ void CItemState::InterruptItem(action_t& action)
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-        actionTarget.reaction = REACTION_NONE;
+        actionTarget.reaction = REACTION::NONE;
         actionTarget.speceffect = SPECEFFECT_NONE;
         actionTarget.animation = 54;
         actionTarget.param = 0;

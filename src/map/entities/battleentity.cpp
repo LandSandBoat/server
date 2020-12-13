@@ -1364,7 +1364,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-        actionTarget.reaction = REACTION_NONE;
+        actionTarget.reaction = REACTION::NONE;
         actionTarget.speceffect = SPECEFFECT_NONE;
         actionTarget.animation = PSpell->getAnimationID();
         actionTarget.param = 0;
@@ -1578,7 +1578,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
         {
             actionTarget.messageID = 32;
-            actionTarget.reaction = REACTION_EVADE;
+            actionTarget.reaction = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT_NONE;
         }
         else if ((tpzrand::GetRandomNumber(100) < attack.GetHitRate() || attackRound.GetSATAOccured()) &&
@@ -1588,14 +1588,14 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
             {
                 actionTarget.messageID = 0;
-                actionTarget.reaction = REACTION_EVADE;
+                actionTarget.reaction = REACTION::EVADE;
                 attack.SetEvaded(true);
                 PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, 1, 31));
             }
             else if (attack.IsParried())
             {
                 actionTarget.messageID = 70;
-                actionTarget.reaction = REACTION_PARRY;
+                actionTarget.reaction = REACTION::PARRY;
                 actionTarget.speceffect = SPECEFFECT_NONE;
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
@@ -1605,12 +1605,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 if (attack.IsAnticipated())
                 {
                     actionTarget.messageID = 30;
-                    actionTarget.reaction = REACTION_EVADE;
+                    actionTarget.reaction = REACTION::EVADE;
                     actionTarget.speceffect = SPECEFFECT_NONE;
                 }
                 if (attack.IsCountered())
                 {
-                    actionTarget.reaction = REACTION_EVADE;
+                    actionTarget.reaction = REACTION::EVADE;
                     actionTarget.speceffect = SPECEFFECT_NONE;
                     actionTarget.param = 0;
                     actionTarget.messageID = 0;
@@ -1655,7 +1655,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Critical hit.
                 if (attack.IsCritical())
                 {
-                    actionTarget.reaction = REACTION_HIT;
+                    actionTarget.reaction = REACTION::HIT;
                     actionTarget.speceffect = SPECEFFECT_CRITICAL_HIT;
                     actionTarget.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 353 : 67;
 
@@ -1671,7 +1671,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Not critical hit.
                 else
                 {
-                    actionTarget.reaction = REACTION_HIT;
+                    actionTarget.reaction = REACTION::HIT;
                     actionTarget.speceffect = SPECEFFECT_HIT;
                     actionTarget.messageID = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 352 : 1;
                 }
@@ -1679,7 +1679,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Guarded. TODO: Stuff guards that shouldn't.
                 if (attack.IsGuarded())
                 {
-                    actionTarget.reaction = REACTION_GUARD;
+                    actionTarget.reaction = REACTION::GUARD;
                     battleutils::HandleTacticalGuard(PTarget);
                 }
 
@@ -1696,7 +1696,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Try shield block
                 if (attack.IsBlocked())
                 {
-                    actionTarget.reaction = REACTION_BLOCK;
+                    actionTarget.reaction = REACTION::BLOCK;
                 }
 
                 actionTarget.param = battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1, attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
@@ -1741,7 +1741,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         else
         {
             // misses the target
-            actionTarget.reaction = REACTION_EVADE;
+            actionTarget.reaction = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT_NONE;
             actionTarget.messageID = 15;
             attack.SetEvaded(true);
@@ -1750,12 +1750,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleAfflatusMiseryAccuracyBonus(this);
         }
 
-        if (actionTarget.reaction != REACTION_HIT && actionTarget.reaction != REACTION_BLOCK && actionTarget.reaction != REACTION_GUARD)
+        if (actionTarget.reaction != REACTION::HIT && actionTarget.reaction != REACTION::BLOCK && actionTarget.reaction != REACTION::GUARD)
         {
             actionTarget.param = 0;
         }
 
-        if (actionTarget.reaction != REACTION_EVADE && actionTarget.reaction != REACTION_PARRY)
+        if (actionTarget.reaction != REACTION::EVADE && actionTarget.reaction != REACTION::PARRY)
         {
             battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()], attack.GetDamage());
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
@@ -1773,7 +1773,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
             zanshinChance = std::clamp<uint16>(zanshinChance, 0, 100);
             //zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
-            if (((actionTarget.reaction == REACTION_EVADE || actionTarget.reaction == REACTION_GUARD ||
+            if (((actionTarget.reaction == REACTION::EVADE || actionTarget.reaction == REACTION::GUARD ||
                   actionTarget.spikesEffect == SUBEFFECT_COUNTER) && tpzrand::GetRandomNumber(100) < zanshinChance) ||
                 (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && tpzrand::GetRandomNumber(100) < (zanshinChance / 4)))
             {

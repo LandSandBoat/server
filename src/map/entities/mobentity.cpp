@@ -666,7 +666,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         actionTarget_t& target = list.getNewActionTarget();
 
         list.ActionTargetID = PTarget->id;
-        target.reaction = REACTION_HIT;
+        target.reaction = REACTION::HIT;
         target.speceffect = SPECEFFECT_HIT;
         target.animation = PSkill->getAnimationID();
         target.messageID = PSkill->getMsg();
@@ -702,14 +702,14 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (PSkill->hasMissMsg())
         {
-            target.reaction = REACTION_MISS;
+            target.reaction = REACTION::MISS;
             target.speceffect = SPECEFFECT_NONE;
             if (msg == PSkill->getAoEMsg())
                 msg = 282;
         }
         else
         {
-            target.reaction = REACTION_HIT;
+            target.reaction = REACTION::HIT;
         }
 
         if (target.speceffect & SPECEFFECT_HIT)

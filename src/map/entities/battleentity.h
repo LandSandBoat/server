@@ -240,7 +240,7 @@ enum class ATTACKTYPE
     MAGICAL = 2,
     RANGED = 3,
     SPECIAL = 4,
-    BREATH = 5,
+    BREATH = 5
 };
 
 enum class DAMAGETYPE : uint16
@@ -258,18 +258,18 @@ enum class DAMAGETYPE : uint16
     LIGHTNING = 10,
     WATER = 11,
     LIGHT = 12,
-    DARK = 13,
+    DARK = 13
 };
 
-enum REACTION
+enum class REACTION
 {
-    REACTION_NONE = 0x00,		// отсутствие реакции
-    REACTION_MISS = 0x01,		// промах
-    REACTION_PARRY = 0x03,		// блокирование оружием (MISS + PARRY)
-    REACTION_BLOCK = 0x04,		// блокирование щитом
-    REACTION_HIT = 0x08,		// попадание
-    REACTION_EVADE = 0x09,		// уклонение (MISS + HIT)
-    REACTION_GUARD = 0x14,		// mnk guard (20 dec)
+    NONE = 0x00,		// No Reaction
+    MISS = 0x01,        // Miss
+    PARRY = 0x03,		// Block with weapons (MISS + PARRY)
+    BLOCK = 0x04,		// Block with shield
+    HIT = 0x08,         // Hit
+    EVADE = 0x09,		// Evasion (MISS + HIT)
+    GUARD = 0x14		// mnk guard (20 dec)
 };
 
 enum SPECEFFECT
@@ -433,7 +433,7 @@ struct apAction_t
     apAction_t()
     {
         ActionTarget = nullptr;
-        reaction = REACTION_NONE;
+        reaction = REACTION::NONE;
         animation = 0;
         speceffect = SPECEFFECT_NONE;
         param = 0;
