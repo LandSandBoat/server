@@ -243,22 +243,22 @@ enum class ATTACKTYPE
     BREATH = 5,
 };
 
-enum DAMAGETYPE
+enum class DAMAGETYPE : uint16
 {
-    DAMAGE_NONE = 0,
-    DAMAGE_PIERCING = 1,
-    DAMAGE_SLASHING = 2,
-    DAMAGE_IMPACT = 3,
-    DAMAGE_HTH = 4,
-    DAMAGE_ELEMENTAL = 5,
-    DAMAGE_FIRE = 6,
-    DAMAGE_ICE = 7,
-    DAMAGE_WIND = 8,
-    DAMAGE_EARTH = 9,
-    DAMAGE_LIGHTNING = 10,
-    DAMAGE_WATER = 11,
-    DAMAGE_LIGHT = 12,
-    DAMAGE_DARK = 13,
+    NONE = 0,
+    PIERCING = 1,
+    SLASHING = 2,
+    IMPACT = 3,
+    HTH = 4,
+    ELEMENTAL = 5,
+    FIRE = 6,
+    ICE = 7,
+    WIND = 8,
+    EARTH = 9,
+    LIGHTNING = 10,
+    WATER = 11,
+    LIGHT = 12,
+    DARK = 13,
 };
 
 enum REACTION
@@ -545,7 +545,7 @@ public:
     virtual int32 	addMP(int32 mp);			// увеличиваем/уменьшаем количество mp
 
     //Deals damage and updates the last attacker which is used when sending a player death message
-    virtual int32   takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACKTYPE attackType = ATTACKTYPE::NONE, DAMAGETYPE damageType = DAMAGE_NONE);
+    virtual int32   takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACKTYPE attackType = ATTACKTYPE::NONE, DAMAGETYPE damageType = DAMAGETYPE::NONE);
 
     int16		    getMod(Mod modID);		// величина модификатора
 

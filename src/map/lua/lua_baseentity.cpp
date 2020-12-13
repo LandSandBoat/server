@@ -8153,7 +8153,7 @@ inline int32 CLuaBaseEntity::takeDamage(lua_State *L)
     if (damage > 0)
     {
         ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? static_cast<ATTACKTYPE>(lua_tointeger(L, 3)) : ATTACKTYPE::NONE;
-        DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? (DAMAGETYPE)lua_tointeger(L, 4) : DAMAGE_NONE;
+        DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 4)) : DAMAGETYPE::NONE;
 
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
@@ -12131,7 +12131,7 @@ inline int32 CLuaBaseEntity::physicalDmgTaken(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    int16 damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? (int16)lua_tointeger(L, 2) : 0;
+    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
 
     lua_pushinteger(L, battleutils::PhysicalDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12173,7 +12173,7 @@ inline int32 CLuaBaseEntity::rangedDmgTaken(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    int16 damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? (int16)lua_tointeger(L, 2) : 0;
+    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
 
     lua_pushinteger(L, battleutils::RangedDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12484,7 +12484,7 @@ inline int32 CLuaBaseEntity::getWeaponDamageType(lua_State *L)
             lua_pushinteger(L, 0);
             return 1;
         }
-        lua_pushinteger(L, weapon->getDmgType());
+        lua_pushinteger(L, static_cast<uint16>(weapon->getDmgType()));
         return 1;
     }
     ShowError(CL_RED"lua::getWeaponDamageType :: Invalid slot specified!" CL_RESET);

@@ -5949,13 +5949,13 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             else if (prevsjob == JOB_BLU)
                 blueutils::UnequipAllBlueSpells(PChar);
 
-            uint16 subType = 0;
+            DAMAGETYPE subType = DAMAGETYPE::NONE;
             if (auto weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
             {
                 subType = weapon->getDmgType();
             }
 
-            if (subType > 0 && subType < 4)
+            if (subType > DAMAGETYPE::NONE && subType < DAMAGETYPE::HTH)
             {
                 charutils::UnequipItem(PChar, SLOT_SUB);
             }

@@ -269,8 +269,8 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
         {
             WeaponDelay -= getMod(Mod::MARTIAL_ARTS) * 1000 / 60;
         }
-        else if (auto subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]); subweapon && subweapon->getDmgType() > 0 &&
-            subweapon->getDmgType() < 4)
+        else if (auto subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]); subweapon && subweapon->getDmgType() > DAMAGETYPE::NONE &&
+            subweapon->getDmgType() < DAMAGETYPE::HTH)
         {
             MinimumDelay += subweapon->getDelay();
             WeaponDelay += subweapon->getDelay();

@@ -37,7 +37,7 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
     m_defender = defender;
     m_kickAttackOccured = false;
     m_sataOccured = false;
-    m_subWeaponType = 0;
+    m_subWeaponType = DAMAGETYPE::NONE;
 
     if (auto weapon = dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_SUB]))
     {

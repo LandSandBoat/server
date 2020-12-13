@@ -399,7 +399,7 @@ namespace itemutils
                         ((CItemWeapon*)PItem)->setILvlMacc(Sql_GetUIntData(SqlHandle, 27));
                         ((CItemWeapon*)PItem)->setDelay((Sql_GetIntData(SqlHandle,28)*1000)/60);
                         ((CItemWeapon*)PItem)->setDamage(Sql_GetUIntData(SqlHandle,29));
-                        ((CItemWeapon*)PItem)->setDmgType(Sql_GetUIntData(SqlHandle,30));
+                        ((CItemWeapon*)PItem)->setDmgType(static_cast<DAMAGETYPE>(Sql_GetUIntData(SqlHandle,30)));
                         ((CItemWeapon*)PItem)->setMaxHit(Sql_GetUIntData(SqlHandle,31));
                         ((CItemWeapon*)PItem)->setUnlockablePoints(Sql_GetUIntData(SqlHandle,32));
                     }
@@ -542,13 +542,13 @@ namespace itemutils
 
         PUnarmedItem = new CItemWeapon(0);
 
-        PUnarmedItem->setDmgType(DAMAGE_NONE);
+        PUnarmedItem->setDmgType(DAMAGETYPE::NONE);
         PUnarmedItem->setSkillType(SKILL_NONE);
         PUnarmedItem->setDamage(3);
 
         PUnarmedH2HItem = new CItemWeapon(0);
 
-        PUnarmedH2HItem->setDmgType(DAMAGE_HTH);
+        PUnarmedH2HItem->setDmgType(DAMAGETYPE::HTH);
         PUnarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
         PUnarmedH2HItem->setDamage(3);
     }
