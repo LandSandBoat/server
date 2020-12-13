@@ -21,35 +21,35 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <thread>
 
-#include "../common/cbasetypes.h"
 #include "../common/blowfish.h"
+#include "../common/cbasetypes.h"
 #include "../common/md52.h"
 #include "../common/mmo.h"
 #include "../common/showmsg.h"
 #include "../common/socket.h"
-#include "../common/utils.h"
-#include "../common/taskmgr.h"
 #include "../common/sql.h"
+#include "../common/taskmgr.h"
 #include "../common/timer.h"
+#include "../common/utils.h"
 
 #ifdef WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
+#include <cerrno>
 #include <netdb.h>
 #include <netinet/in.h>
-#include <errno.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
 typedef u_int SOCKET;
-#define INVALID_SOCKET  (SOCKET)(~0)
-#define SOCKET_ERROR            (-1)
+#define INVALID_SOCKET (SOCKET)(~0)
+#define SOCKET_ERROR   (-1)
 #endif
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sstream>
 
 #include "data_loader.h"
@@ -62,11 +62,11 @@ typedef u_int SOCKET;
 #include "packets/party_list.h"
 #include "packets/search_list.h"
 
-#define DEFAULT_BUFLEN  1024
-#define CODE_LVL 17
-#define CODE_JOB 13
-#define CODE_ZONE 20
-#define CODE_ZONE_ALL 16
+#define DEFAULT_BUFLEN 1024
+#define CODE_LVL       17
+#define CODE_JOB       13
+#define CODE_ZONE      20
+#define CODE_ZONE_ALL  16
 
 struct SearchCommInfo
 {
@@ -79,36 +79,35 @@ void TaskManagerThread();
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
-
 const char* SEARCH_CONF_FILENAME = "./conf/search_server.conf";
-const char* LOGIN_CONF_FILENAME = "./conf/login.conf";
+const char* LOGIN_CONF_FILENAME  = "./conf/login.conf";
 
 void TCPComm(SOCKET socket);
 
-extern void HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
-extern void HandleSearchComment(CTCPRequestPacket& PTCPRequest);
-extern void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
-extern void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
-extern void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
-extern search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void        HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void        HandleSearchComment(CTCPRequestPacket& PTCPRequest);
+extern void        HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
+extern void        HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
+extern void        HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
+extern search_req  _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
 extern std::string toStr(int number);
 
 search_config_t search_config;
-login_config_t login_config;
+login_config_t  login_config;
 
 void search_config_default();
 void search_config_read(const int8* file);
 void search_config_read_from_env();
 
 void login_config_default();
-void login_config_read(const int8* file);       // We only need the search server port defined here
+void login_config_read(const int8* file); // We only need the search server port defined here
 void login_config_read_from_env();
 
 /************************************************************************
-*                                                                       *
-*  Prints the contents of the packet in `data` to the console.          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Prints the contents of the packet in `data` to the console.          *
+ *                                                                       *
+ ************************************************************************/
 
 void PrintPacket(char* data, int size)
 {
@@ -138,7 +137,7 @@ void PrintPacket(char* data, int size)
     printf("\n");
 }
 
-int32 main(int32 argc, char **argv)
+int32 main(int32 argc, char** argv)
 {
 #ifdef WIN32
     WSADATA wsaData;
@@ -152,11 +151,12 @@ int32 main(int32 argc, char **argv)
     logFile = "log/search-server.log";
 #endif
 
-
     for (int i = 0; i < argc; i++)
     {
         if (strcmp(argv[i], "--log") == 0)
+        {
             logFile = argv[i + 1];
+        }
     }
 
     InitializeLog(logFile);
@@ -166,7 +166,7 @@ int32 main(int32 argc, char **argv)
     SOCKET ListenSocket = INVALID_SOCKET;
     SOCKET ClientSocket = INVALID_SOCKET;
 
-    struct addrinfo *result = nullptr;
+    struct addrinfo* result = nullptr;
     struct addrinfo  hints;
 
     search_config_default();
@@ -189,10 +189,10 @@ int32 main(int32 argc, char **argv)
     memset(&hints, 0, sizeof(hints));
 #endif
 
-    hints.ai_family = AF_INET;
+    hints.ai_family   = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
-    hints.ai_flags = AI_PASSIVE;
+    hints.ai_flags    = AI_PASSIVE;
 
     // Resolve the server address and port
     iResult = getaddrinfo(nullptr, login_config.search_server_port.c_str(), &hints, &result);
@@ -253,12 +253,14 @@ int32 main(int32 argc, char **argv)
         return 1;
     }
 
-    ShowMessage(CL_WHITE"========================================================\n\n" CL_RESET);
-    ShowMessage(CL_WHITE"topaz_search\n\n");
-    ShowMessage(CL_WHITE"========================================================\n\n" CL_RESET);
-    if (search_config.expire_auctions == 1) {
-        ShowMessage(CL_GREEN"AH task to return items older than %u days is running\n" CL_RESET, search_config.expire_days);
-        CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup, std::chrono::seconds(search_config.expire_interval));
+    ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
+    ShowMessage(CL_WHITE "topaz_search\n\n");
+    ShowMessage(CL_WHITE "========================================================\n\n" CL_RESET);
+    if (search_config.expire_auctions == 1)
+    {
+        ShowMessage(CL_GREEN "AH task to return items older than %u days is running\n" CL_RESET, search_config.expire_days);
+        CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
+                                         std::chrono::seconds(search_config.expire_interval));
     }
     //  ShowMessage(CL_CYAN"[TASKMGR] Starting task manager thread..\n" CL_RESET);
 
@@ -312,32 +314,34 @@ int32 main(int32 argc, char **argv)
 }
 
 /************************************************************************
-*                                                                       *
-*  topaz_search default config                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  topaz_search default config                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void search_config_default()
 {
-    search_config.mysql_host = "127.0.0.1";
-    search_config.mysql_login = "root";
-    search_config.mysql_password = "root";
-    search_config.mysql_database = "tpzdb";
-    search_config.mysql_port = 3306;
-    search_config.expire_auctions = 1;
-    search_config.expire_days = 3;
+    search_config.mysql_host      = "127.0.0.1";
+    search_config.mysql_login     = "root";
+    search_config.mysql_password  = "root";
+    search_config.mysql_database  = "tpzdb";
+    search_config.mysql_port      = 3306;
+    search_config.expire_auctions = true;
+    search_config.expire_days     = 3;
     search_config.expire_interval = 3600;
 }
 
 /************************************************************************
-*                                                                       *
-*  topaz_search config                                               *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  topaz_search config                                               *
+ *                                                                       *
+ ************************************************************************/
 
 void search_config_read(const int8* file)
 {
-    char line[1024], w1[1024], w2[1024];
+    char  line[1024];
+    char  w1[1024];
+    char  w2[1024];
     FILE* fp;
 
     fp = fopen((const char*)file, "r");
@@ -352,13 +356,20 @@ void search_config_read(const int8* file)
         char* ptr;
 
         if (line[0] == '#')
+        {
             continue;
+        }
         if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
+        {
             continue;
+        }
 
-        //Strip trailing spaces
+        // Strip trailing spaces
         ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ');
+        while (--ptr >= w2 && *ptr == ' ')
+        {
+            ;
+        }
         ptr++;
         *ptr = '\0';
 
@@ -396,7 +407,7 @@ void search_config_read(const int8* file)
         }
         else
         {
-            ShowWarning(CL_YELLOW"Unknown setting '%s' in file %s\n" CL_RESET, w1, file);
+            ShowWarning(CL_YELLOW "Unknown setting '%s' in file %s\n" CL_RESET, w1, file);
         }
     }
     fclose(fp);
@@ -412,26 +423,27 @@ void search_config_read_from_env()
 }
 
 /************************************************************************
-*                                                                       *
-*  login_topaz                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  login_topaz                                                          *
+ *                                                                       *
+ ************************************************************************/
 
 void login_config_default()
 {
     login_config.search_server_port = "54002";
 }
 
-
 /************************************************************************
-*                                                                       *
-*  login_topaz                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  login_topaz                                                          *
+ *                                                                       *
+ ************************************************************************/
 
 void login_config_read(const int8* file)
 {
-    char line[1024], w1[1024], w2[1024];
+    char  line[1024];
+    char  w1[1024];
+    char  w2[1024];
     FILE* fp;
 
     fp = fopen((const char*)file, "r");
@@ -446,13 +458,20 @@ void login_config_read(const int8* file)
         char* ptr;
 
         if (line[0] == '#')
+        {
             continue;
+        }
         if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
+        {
             continue;
+        }
 
-        //Strip trailing spaces
+        // Strip trailing spaces
         ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ');
+        while (--ptr >= w2 && *ptr == ' ')
+        {
+            ;
+        }
         ptr++;
         *ptr = '\0';
 
@@ -471,7 +490,7 @@ void login_config_read_from_env()
 
 void TCPComm(SOCKET socket)
 {
-    //ShowMessage("TCP connection from client with port: %u\n", htons(CommInfo.port));
+    // ShowMessage("TCP connection from client with port: %u\n", htons(CommInfo.port));
 
     CTCPRequestPacket PTCPRequest(&socket);
 
@@ -479,57 +498,57 @@ void TCPComm(SOCKET socket)
     {
         return;
     }
-    //PrintPacket((int8*)PTCPRequest->GetData(), PTCPRequest->GetSize());
+    // PrintPacket((int8*)PTCPRequest->GetData(), PTCPRequest->GetSize());
     ShowMessage("= = = = = = = \nType: %u Size: %u \n", PTCPRequest.GetPacketType(), PTCPRequest.GetSize());
 
     switch (PTCPRequest.GetPacketType())
     {
-    case TCP_SEARCH:
-    case TCP_SEARCH_ALL:
-    {
-        ShowMessage("Search \n");
-        HandleSearchRequest(PTCPRequest);
-    }
-    break;
-    case TCP_SEARCH_COMMENT:
-    {
-        ShowMessage("Search comment \n");
-        HandleSearchComment(PTCPRequest);
-    }
-    break;
-    case TCP_GROUP_LIST:
-    {
-        ShowMessage("Search group\n");
-        HandleGroupListRequest(PTCPRequest);
-    }
-    break;
-    case TCP_AH_REQUEST:
-    case TCP_AH_REQUEST_MORE:
-    {
-        HandleAuctionHouseRequest(PTCPRequest);
-    }
-    break;
-    case TCP_AH_HISTORY_SINGL:
-    case TCP_AH_HISTORY_STACK:
-    {
-        HandleAuctionHouseHistory(PTCPRequest);
-    }
-    break;
+        case TCP_SEARCH:
+        case TCP_SEARCH_ALL:
+        {
+            ShowMessage("Search \n");
+            HandleSearchRequest(PTCPRequest);
+        }
+        break;
+        case TCP_SEARCH_COMMENT:
+        {
+            ShowMessage("Search comment \n");
+            HandleSearchComment(PTCPRequest);
+        }
+        break;
+        case TCP_GROUP_LIST:
+        {
+            ShowMessage("Search group\n");
+            HandleGroupListRequest(PTCPRequest);
+        }
+        break;
+        case TCP_AH_REQUEST:
+        case TCP_AH_REQUEST_MORE:
+        {
+            HandleAuctionHouseRequest(PTCPRequest);
+        }
+        break;
+        case TCP_AH_HISTORY_SINGL:
+        case TCP_AH_HISTORY_STACK:
+        {
+            HandleAuctionHouseHistory(PTCPRequest);
+        }
+        break;
     }
 }
 
 /************************************************************************
-*                                                                       *
-*  Character list request (party/linkshell)                             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Character list request (party/linkshell)                             *
+ *                                                                       *
+ ************************************************************************/
 
 void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 {
     uint8* data = (uint8*)PTCPRequest.GetData();
 
-    uint16 partyid = ref<uint16>(data, 0x10);
-    uint16 allianceid = ref<uint16>(data, 0x14);
+    uint16 partyid      = ref<uint16>(data, 0x10);
+    uint16 allianceid   = ref<uint16>(data, 0x14);
     uint32 linkshellid1 = ref<uint32>(data, 0x18);
     uint32 linkshellid2 = ref<uint32>(data, 0x1C);
 
@@ -544,9 +563,9 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 
         CPartyListPacket PPartyPacket(partyid, (uint32)PartyList.size());
 
-        for (std::list<SearchEntity*>::iterator it = PartyList.begin(); it != PartyList.end(); ++it)
+        for (auto& it : PartyList)
         {
-            PPartyPacket.AddPlayer(*it);
+            PPartyPacket.AddPlayer(it);
         }
 
         PrintPacket((char*)PPartyPacket.GetData(), PPartyPacket.GetSize());
@@ -554,14 +573,14 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
     }
     else if (linkshellid1 != 0 || linkshellid2 != 0)
     {
-        uint32 linkshellid = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
+        uint32                   linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
         std::list<SearchEntity*> LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
 
         CLinkshellListPacket PLinkshellPacket(linkshellid, (uint32)LinkshellList.size());
 
-        for (std::list<SearchEntity*>::iterator it = LinkshellList.begin(); it != LinkshellList.end(); ++it)
+        for (auto& it : LinkshellList)
         {
-            PLinkshellPacket.AddPlayer(*it);
+            PLinkshellPacket.AddPlayer(it);
         }
 
         PrintPacket((char*)PLinkshellPacket.GetData(), PLinkshellPacket.GetSize());
@@ -571,82 +590,76 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleSearchComment(CTCPRequestPacket& PTCPRequest)
 {
-    uint8 packet[] =
-    {
-        0xCC, 0x00, 0x00, 0x00, 0x49, 0x58, 0x46, 0x46, 0x20, 0x9B, 0x16, 0xC8, 0x4C, 0x76, 0x07, 0x02,
-        0x17, 0x71, 0xB9, 0xA8, 0xF5, 0xB6, 0xCF, 0xED, 0xF1, 0xFF, 0x70, 0x52, 0xA9, 0xAE, 0x81, 0xB6,
-        0x1B, 0x2B, 0x7B, 0xA0, 0xC1, 0xD2, 0xD1, 0xFD, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D,
-        0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x0C, 0x04, 0x13, 0xC0, 0x89, 0x17, 0x8F, 0x72,
-        0x93, 0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC, 0x93, 0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC,
-        0x93, 0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC, 0x38, 0x25, 0x69, 0x79, 0x00, 0xC6, 0x7E, 0xDC,
-        0x80, 0x3D, 0x99, 0x85, 0xF4, 0xDF, 0xCF, 0xFC, 0x1A, 0x72, 0xE2, 0x0D
-    };
+    uint8 packet[] = { 0xCC, 0x00, 0x00, 0x00, 0x49, 0x58, 0x46, 0x46, 0x20, 0x9B, 0x16, 0xC8, 0x4C, 0x76, 0x07, 0x02, 0x17, 0x71, 0xB9, 0xA8, 0xF5, 0xB6, 0xCF,
+                       0xED, 0xF1, 0xFF, 0x70, 0x52, 0xA9, 0xAE, 0x81, 0xB6, 0x1B, 0x2B, 0x7B, 0xA0, 0xC1, 0xD2, 0xD1, 0xFD, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74,
+                       0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08,
+                       0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37,
+                       0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80,
+                       0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43,
+                       0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x61, 0x43, 0x80, 0x37, 0x08, 0x74, 0xC5, 0x8D, 0x0C, 0x04, 0x13, 0xC0, 0x89, 0x17, 0x8F, 0x72, 0x93,
+                       0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC, 0x93, 0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC, 0x93, 0xD6, 0x90, 0xF1, 0x21, 0x7A, 0xA5, 0xAC,
+                       0x38, 0x25, 0x69, 0x79, 0x00, 0xC6, 0x7E, 0xDC, 0x80, 0x3D, 0x99, 0x85, 0xF4, 0xDF, 0xCF, 0xFC, 0x1A, 0x72, 0xE2, 0x0D };
     PTCPRequest.SendRawToSocket(packet, sizeof(packet));
 }
 
 void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 {
-    search_req sr = _HandleSearchRequest(PTCPRequest);
-    int totalCount = 0;
+    search_req sr         = _HandleSearchRequest(PTCPRequest);
+    int        totalCount = 0;
 
-    CDataLoader PDataLoader;
+    CDataLoader              PDataLoader;
     std::list<SearchEntity*> SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
-    //PDataLoader->GetPlayersCount(sr)
+    // PDataLoader->GetPlayersCount(sr)
     CSearchListPacket PSearchPacket(totalCount);
 
-    for (std::list<SearchEntity*>::iterator it = SearchList.begin(); it != SearchList.end(); ++it)
+    for (auto& it : SearchList)
     {
-        PSearchPacket.AddPlayer(*it);
+        PSearchPacket.AddPlayer(it);
     }
 
-    //PrintPacket((int8*)PSearchPacket->GetData(), PSearchPacket->GetSize());
+    // PrintPacket((int8*)PSearchPacket->GetData(), PSearchPacket->GetSize());
     PTCPRequest.SendToSocket(PSearchPacket.GetData(), PSearchPacket.GetSize());
 }
 
 void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data = (uint8*)PTCPRequest.GetData();
+    uint8* data    = (uint8*)PTCPRequest.GetData();
     uint8  AHCatID = ref<uint8>(data, 0x16);
 
-    //2 - level
-    //3 - race
-    //4 - job
-    //5 - damage
-    //6 - delay
-    //7 - defense
-    //8 - resistance
-    //9 - name
+    // 2 - level
+    // 3 - race
+    // 4 - job
+    // 5 - damage
+    // 6 - delay
+    // 7 - defense
+    // 8 - resistance
+    // 9 - name
     string_t OrderByString = "ORDER BY";
-    uint8 paramCount = ref<uint8>(data, 0x12);
+    uint8    paramCount    = ref<uint8>(data, 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);
         ShowMessage(" Param%u: %u\n", i, param);
-        switch (param) {
-        case 2:
-            OrderByString.append(" item_equipment.level DESC,");
-        case 5:
-            OrderByString.append(" item_weapon.dmg DESC,");
-        case 6:
-            OrderByString.append(" item_weapon.delay DESC,");
-        case 9:
-            OrderByString.append(" item_basic.sortname,");
+        switch (param)
+        {
+            case 2:
+                OrderByString.append(" item_equipment.level DESC,");
+            case 5:
+                OrderByString.append(" item_weapon.dmg DESC,");
+            case 6:
+                OrderByString.append(" item_weapon.delay DESC,");
+            case 9:
+                OrderByString.append(" item_basic.sortname,");
         }
     }
 
     OrderByString.append(" item_basic.itemid");
     int8* OrderByArray = (int8*)OrderByString.data();
 
-    CDataLoader PDataLoader;
+    CDataLoader          PDataLoader;
     std::vector<ahItem*> ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
 
-    uint8 PacketsCount = (uint8)((ItemList.size() / 20) + (ItemList.size() % 20 != 0) + (ItemList.size() == 0));
+    uint8 PacketsCount = (uint8)((ItemList.size() / 20) + (ItemList.size() % 20 != 0) + (ItemList.empty()));
 
     for (uint8 i = 0; i < PacketsCount; ++i)
     {
@@ -665,18 +678,18 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data = (uint8*)PTCPRequest.GetData();
+    uint8* data   = (uint8*)PTCPRequest.GetData();
     uint16 ItemID = ref<uint16>(data, 0x12);
-    uint8  stack = ref<uint8>(data, 0x15);
+    uint8  stack  = ref<uint8>(data, 0x15);
 
     CAHHistoryPacket PAHPacket(ItemID);
 
-    CDataLoader PDataLoader;
+    CDataLoader             PDataLoader;
     std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHystory(ItemID, stack != 0);
 
-    for (uint8 i = 0; i < HistoryList.size(); ++i)
+    for (auto& i : HistoryList)
     {
-        PAHPacket.AddItem(HistoryList.at(i));
+        PAHPacket.AddItem(i);
     }
 
     PTCPRequest.SendToSocket(PAHPacket.GetData(), PAHPacket.GetSize());
@@ -690,17 +703,17 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     uint32 bitOffset = 0;
 
     unsigned char sortDescending = 0;
-    unsigned char isPresent = 0;
-    unsigned char areaCount = 0;
+    unsigned char isPresent      = 0;
+    unsigned char areaCount      = 0;
 
-    char name[16];
+    char  name[16];
     uint8 nameLen = 0;
 
     uint8 minLvl = 0;
     uint8 maxLvl = 0;
 
-    uint8 jobid = 0;
-    uint8 raceid = 255;   // 255 cause race 0 is an actual filter (hume)
+    uint8 jobid    = 0;
+    uint8 raceid   = 255; // 255 cause race 0 is an actual filter (hume)
     uint8 nationid = 255; // 255 cause nation 0 is an actual filter (sandoria)
 
     uint8 minRank = 0;
@@ -710,14 +723,13 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
     uint32 flags = 0;
 
-
     uint8* data = (uint8*)PTCPRequest.GetData();
     uint8  size = ref<uint8>(data, 0x10);
 
     uint16 workloadBits = size * 8;
 
     memset(areas, 0, sizeof(areas));
-    //ShowMessage("Received a search packet with size %u byte\n", size);
+    // ShowMessage("Received a search packet with size %u byte\n", size);
 
     while (bitOffset < workloadBits)
     {
@@ -730,12 +742,9 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
         uint8 EntryType = (uint8)unpackBitsLE(&data[0x11], bitOffset, 5);
         bitOffset += 5;
 
-        if ((EntryType != SEARCH_FRIEND) &&
-            (EntryType != SEARCH_LINKSHELL) &&
-            (EntryType != SEARCH_COMMENT) &&
-            (EntryType != SEARCH_FLAGS2))
+        if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
-            if ((bitOffset + 3) >= workloadBits) //so 0000000 at the end does not get interpretet as name entry ...
+            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpretet as name entry ...
             {
                 bitOffset = workloadBits;
                 break;
@@ -749,198 +758,199 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
         switch (EntryType)
         {
-        case SEARCH_NAME:
-        {
-            if (isPresent == 0x1) //Name send
+            case SEARCH_NAME:
             {
-                if ((bitOffset + 5) >= workloadBits)
+                if (isPresent == 0x1) // Name send
                 {
-                    bitOffset = workloadBits;
-                    break;
+                    if ((bitOffset + 5) >= workloadBits)
+                    {
+                        bitOffset = workloadBits;
+                        break;
+                    }
+                    nameLen       = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 5);
+                    name[nameLen] = '\0';
+
+                    bitOffset += 5;
+
+                    for (unsigned char i = 0; i < nameLen; i++)
+                    {
+                        name[i] = (char)unpackBitsLE(&data[0x11], bitOffset, 7);
+                        bitOffset += 7;
+                    }
+                    // printf("SEARCH::Name Entry Found. (%s).\n",name);
                 }
-                nameLen = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 5);
-                name[nameLen] = '\0';
-
-                bitOffset += 5;
-
-                for (unsigned char i = 0; i < nameLen; i++)
+                // printf("SEARCH::SortByName: %s.\n",(sortDescending == 0 ? "ascending" : "descending"));
+                // packetData.sortDescendingByName=sortDescending;
+                break;
+            }
+            case SEARCH_AREA: // Area Code Entry - 10 bit
+            {
+                if (isPresent == 0) // no more Area entries
                 {
-                    name[i] = (char)unpackBitsLE(&data[0x11], bitOffset, 7);
-                    bitOffset += 7;
+                    // printf("SEARCH::Area List End found.\n");
                 }
-                //printf("SEARCH::Name Entry Found. (%s).\n",name);
+                else // 8 Bit = 1 Byte per Area Code
+                {
+                    areas[areaCount] = (uint16)unpackBitsLE(&data[0x11], bitOffset, 10);
+                    areaCount++;
+                    bitOffset += 10;
+                    //  printf("SEARCH::Area List Entry found(%2X)!\n",areas[areaCount-1]);
+                }
+                break;
             }
-            //printf("SEARCH::SortByName: %s.\n",(sortDescending == 0 ? "ascending" : "descending"));
-            //packetData.sortDescendingByName=sortDescending;
-            break;
-        }
-        case SEARCH_AREA: //Area Code Entry - 10 bit
-        {
-            if (isPresent == 0) //no more Area entries
+            case SEARCH_NATION: // Country - 2 bit
             {
-                //printf("SEARCH::Area List End found.\n");
-            }
-            else // 8 Bit = 1 Byte per Area Code
-            {
-                areas[areaCount] = (uint16)unpackBitsLE(&data[0x11], bitOffset, 10);
-                areaCount++;
-                bitOffset += 10;
-                //  printf("SEARCH::Area List Entry found(%2X)!\n",areas[areaCount-1]);
-            }
-            break;
-        }
-        case SEARCH_NATION: //Country - 2 bit
-        {
-            if (isPresent == 0x1)
-            {
-                unsigned char country = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 2);
-                bitOffset += 2;
-                nationid = country;
+                if (isPresent == 0x1)
+                {
+                    unsigned char country = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 2);
+                    bitOffset += 2;
+                    nationid = country;
 
-                printf("SEARCH::Nationality Entry found. (%2X) Sorting: (%s).\n", country, (sortDescending == 0x00) ? "ascending" : "descending");
+                    printf("SEARCH::Nationality Entry found. (%2X) Sorting: (%s).\n", country, (sortDescending == 0x00) ? "ascending" : "descending");
+                }
+                break;
             }
-            break;
-        }
-        case SEARCH_JOB: //Job - 5 bit
-        {
-            if (isPresent == 0x1)
+            case SEARCH_JOB: // Job - 5 bit
             {
-                unsigned char job = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 5);
-                bitOffset += 5;
-                jobid = job;
-                //printf("SEARCH::Job Entry found. (%2X) Sorting: (%s).\n",job,(sortDescending==0x00)?"ascending":"descending");
+                if (isPresent == 0x1)
+                {
+                    unsigned char job = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 5);
+                    bitOffset += 5;
+                    jobid = job;
+                    // printf("SEARCH::Job Entry found. (%2X) Sorting: (%s).\n",job,(sortDescending==0x00)?"ascending":"descending");
+                }
+                // packetData.sortDescendingByJob=sortDescending;
+                // printf("SEARCH::SortByJob: %s.\n",(sortDescending==0x00)?"ascending":"descending");
+                break;
             }
-            //packetData.sortDescendingByJob=sortDescending;
-            //printf("SEARCH::SortByJob: %s.\n",(sortDescending==0x00)?"ascending":"descending");
-            break;
-        }
-        case SEARCH_LEVEL: //Level- 16 bit
-        {
-            if (isPresent == 0x1)
+            case SEARCH_LEVEL: // Level- 16 bit
             {
-                unsigned char fromLvl = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
-                bitOffset += 8;
-                unsigned char toLvl = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
-                bitOffset += 8;
-                minLvl = fromLvl;
-                maxLvl = toLvl;
-                //printf("SEARCH::Level Entry found. (%d - %d) Sorting: (%s).\n",fromLvl,toLvl,(sortDescending==0x00)?"ascending":"descending");
+                if (isPresent == 0x1)
+                {
+                    unsigned char fromLvl = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
+                    bitOffset += 8;
+                    unsigned char toLvl = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
+                    bitOffset += 8;
+                    minLvl = fromLvl;
+                    maxLvl = toLvl;
+                    // printf("SEARCH::Level Entry found. (%d - %d) Sorting: (%s).\n",fromLvl,toLvl,(sortDescending==0x00)?"ascending":"descending");
+                }
+                // packetData.sortDescendingByLevel=sortDescending;
+                // printf("SEARCH::SortByLevel: %s.\n",(sortDescending==0x00)?"ascending":"descending");
+                break;
             }
-            //packetData.sortDescendingByLevel=sortDescending;
-            //printf("SEARCH::SortByLevel: %s.\n",(sortDescending==0x00)?"ascending":"descending");
-            break;
-        }
-        case SEARCH_RACE: //Race - 4 bit
-        {
-            if (isPresent == 0x1)
+            case SEARCH_RACE: // Race - 4 bit
             {
-                unsigned char race = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 4);
-                bitOffset += 4;
-                raceid = race;
+                if (isPresent == 0x1)
+                {
+                    unsigned char race = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 4);
+                    bitOffset += 4;
+                    raceid = race;
 
-                printf("SEARCH::Race Entry found. (%2X) Sorting: (%s).\n", race, (sortDescending == 0x00) ? "ascending" : "descending");
+                    printf("SEARCH::Race Entry found. (%2X) Sorting: (%s).\n", race, (sortDescending == 0x00) ? "ascending" : "descending");
+                }
+                printf("SEARCH::SortByRace: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
+                // packetData.sortDescendingByRace=sortDescending;
+                break;
             }
-            printf("SEARCH::SortByRace: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
-            //packetData.sortDescendingByRace=sortDescending;
-            break;
-        }
-        case SEARCH_RANK: //Rank - 2 byte
-        {
-            if (isPresent == 0x1)
+            case SEARCH_RANK: // Rank - 2 byte
             {
-                unsigned char fromRank = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
-                bitOffset += 8;
-                minRank = fromRank;
-                unsigned char toRank = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
-                bitOffset += 8;
-                maxRank = toRank;
+                if (isPresent == 0x1)
+                {
+                    unsigned char fromRank = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
+                    bitOffset += 8;
+                    minRank              = fromRank;
+                    unsigned char toRank = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 8);
+                    bitOffset += 8;
+                    maxRank = toRank;
 
-                printf("SEARCH::Rank Entry found. (%d - %d) Sorting: (%s).\n", fromRank, toRank, (sortDescending == 0x00) ? "ascending" : "descending");
+                    printf("SEARCH::Rank Entry found. (%d - %d) Sorting: (%s).\n", fromRank, toRank, (sortDescending == 0x00) ? "ascending" : "descending");
+                }
+                printf("SEARCH::SortByRank: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
+                // packetData.sortDescendingByRank=sortDescending;
+                break;
             }
-            printf("SEARCH::SortByRank: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
-            //packetData.sortDescendingByRank=sortDescending;
-            break;
-        }
-        case SEARCH_COMMENT: //4 Byte
-        {
-            unsigned int comment = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
-            bitOffset += 32;
-
-            printf("SEARCH::Comment Entry found. (%8X).\n", comment);
-            break;
-        }
-        //the following 4 Entries were generated with /sea (ballista|friend|linkshell|away|inv)
-        //so they may be off
-        case SEARCH_LINKSHELL: // 4 Byte
-        {
-            unsigned int lsId = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
-            bitOffset += 32;
-
-            printf("SEARCH::Linkshell Entry found. Value: %.8X\n", lsId);
-            break;
-        }
-        case SEARCH_FRIEND: // Friend Packet, 0 byte
-        {
-            printf("SEARCH::Friend Entry found.\n");
-            break;
-        }
-        case SEARCH_FLAGS1: // Flag Entry #1, 2 byte,
-        {
-            if (isPresent == 0x1)
+            case SEARCH_COMMENT: // 4 Byte
             {
-                unsigned short flags1 = (unsigned short)unpackBitsLE(&data[0x11], bitOffset, 16);
-                bitOffset += 16;
+                unsigned int comment = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
+                bitOffset += 32;
 
-                printf("SEARCH::Flag Entry #1 (%.4X) found. Sorting: (%s).\n", flags1, (sortDescending == 0x00) ? "ascending" : "descending");
-
-                flags = flags1;
+                printf("SEARCH::Comment Entry found. (%8X).\n", comment);
+                break;
             }
-            printf("SEARCH::SortByFlags: %s\n", (sortDescending == 0 ? "ascending" : "descending"));
-            //packetData.sortDescendingByFlags=sortDescending;
-            break;
-        }
-        case SEARCH_FLAGS2: // Flag Entry #2 - 4 byte
-        {
-            unsigned int flags2 = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
-
-            bitOffset += 32;
-            flags = flags2;
-            /*
-            if ((flags & 0xFFFF)!=(packetData.flags1))
+            // the following 4 Entries were generated with /sea (ballista|friend|linkshell|away|inv)
+            // so they may be off
+            case SEARCH_LINKSHELL: // 4 Byte
             {
-            printf("SEARCH::Flag mismatch: %.8X != %.8X\n",flags,packetData.flags1&0xFFFF);
+                unsigned int lsId = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
+                bitOffset += 32;
+
+                printf("SEARCH::Linkshell Entry found. Value: %.8X\n", lsId);
+                break;
             }
-            packetData.flags2=flags;
-            printf("SEARCH::Flag Entry #2 (%.8X) found.\n",packetData.flags2);
-            */
-            break;
-        }
-        default:
-        {
-            printf("SEARCH::Unknown Search Param %.2X!\n", EntryType);
-            //outputPacket=true;
-            break;
-        }
+            case SEARCH_FRIEND: // Friend Packet, 0 byte
+            {
+                printf("SEARCH::Friend Entry found.\n");
+                break;
+            }
+            case SEARCH_FLAGS1: // Flag Entry #1, 2 byte,
+            {
+                if (isPresent == 0x1)
+                {
+                    unsigned short flags1 = (unsigned short)unpackBitsLE(&data[0x11], bitOffset, 16);
+                    bitOffset += 16;
+
+                    printf("SEARCH::Flag Entry #1 (%.4X) found. Sorting: (%s).\n", flags1, (sortDescending == 0x00) ? "ascending" : "descending");
+
+                    flags = flags1;
+                }
+                printf("SEARCH::SortByFlags: %s\n", (sortDescending == 0 ? "ascending" : "descending"));
+                // packetData.sortDescendingByFlags=sortDescending;
+                break;
+            }
+            case SEARCH_FLAGS2: // Flag Entry #2 - 4 byte
+            {
+                unsigned int flags2 = (unsigned int)unpackBitsLE(&data[0x11], bitOffset, 32);
+
+                bitOffset += 32;
+                flags = flags2;
+                /*
+                if ((flags & 0xFFFF)!=(packetData.flags1))
+                {
+                printf("SEARCH::Flag mismatch: %.8X != %.8X\n",flags,packetData.flags1&0xFFFF);
+                }
+                packetData.flags2=flags;
+                printf("SEARCH::Flag Entry #2 (%.8X) found.\n",packetData.flags2);
+                */
+                break;
+            }
+            default:
+            {
+                printf("SEARCH::Unknown Search Param %.2X!\n", EntryType);
+                // outputPacket=true;
+                break;
+            }
         }
     }
     printf("\n");
 
-    ShowMessage("Name: %s Job: %u Lvls: %u ~ %u \n", (nameLen > 0 ? name : 0), jobid, minLvl, maxLvl);
+    ShowMessage("Name: %s Job: %u Lvls: %u ~ %u \n", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
 
     search_req sr;
-    sr.jobid = jobid;
+    sr.jobid  = jobid;
     sr.maxlvl = maxLvl;
     sr.minlvl = minLvl;
 
-    sr.race = raceid;
-    sr.nation = nationid;
+    sr.race    = raceid;
+    sr.nation  = nationid;
     sr.minRank = minRank;
     sr.maxRank = maxRank;
-    sr.flags = flags;
+    sr.flags   = flags;
 
     sr.nameLen = nameLen;
     memcpy(sr.zoneid, areas, sizeof(sr.zoneid));
-    if (nameLen > 0){
+    if (nameLen > 0)
+    {
         sr.name.insert(0, name);
     }
 
@@ -950,10 +960,10 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 }
 
 /************************************************************************
-*                                                                       *
-*  Task Manager Thread                                                  *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Task Manager Thread                                                  *
+ *                                                                       *
+ ************************************************************************/
 
 void TaskManagerThread()
 {
@@ -966,14 +976,14 @@ void TaskManagerThread()
 }
 
 /************************************************************************
-*                                                                       *
-*  Task Manager Callbacks                                               *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Task Manager Callbacks                                               *
+ *                                                                       *
+ ************************************************************************/
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
-    //ShowMessage(CL_YELLOW"[TASK] ah_cleanup tick..\n" CL_RESET);
+    // ShowMessage(CL_YELLOW"[TASK] ah_cleanup tick..\n" CL_RESET);
 
     CDataLoader data;
     data.ExpireAHItems();

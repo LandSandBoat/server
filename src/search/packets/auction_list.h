@@ -24,21 +24,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../common/cbasetypes.h"
 
-
 class CAHItemsListPacket
 {
 public:
-
     CAHItemsListPacket(uint16 offset);
 
     void AddItem(ahItem* item);
     void SetItemCount(uint16 count);
 
     uint8* GetData();
-    uint16 GetSize();
+    uint16 GetSize() const;
 
 private:
-
     uint8  m_count;
     uint16 m_offset;
 

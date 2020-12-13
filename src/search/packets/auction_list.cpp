@@ -18,7 +18,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include <string.h>
+#include <cstring>
 
 #include "../../common/showmsg.h"
 #include "../../common/socket.h"
@@ -27,31 +27,30 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "auction_list.h"
 
-
 /************************************************************************
-*                                                                       *
-*  If the number of items exceeds 20, then we send several packets.     *
-*  The `offset` is used to denote which set of items this packet        *
-*  contains, relative to the total number of items across all           *
-*  packets in the list.                                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  If the number of items exceeds 20, then we send several packets.     *
+ *  The `offset` is used to denote which set of items this packet        *
+ *  contains, relative to the total number of items across all           *
+ *  packets in the list.                                                 *
+ *                                                                       *
+ ************************************************************************/
 
 CAHItemsListPacket::CAHItemsListPacket(uint16 offset)
 {
-    m_count = 0;
+    m_count  = 0;
     m_offset = offset;
 
     memset(m_PData, 0, sizeof(m_PData));
 
-    ref<uint8>(m_PData, (0x0B)) = 0x95;                       // packet type
+    ref<uint8>(m_PData, (0x0B)) = 0x95; // packet type
 }
 
 /************************************************************************
-*                                                                       *
-*  Add an item to the packet (10 bytes per item).                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Add an item to the packet (10 bytes per item).                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CAHItemsListPacket::AddItem(ahItem* item)
 {
@@ -64,10 +63,10 @@ void CAHItemsListPacket::AddItem(ahItem* item)
 }
 
 /************************************************************************
-*                                                                       *
-*  Set the total number of items sent in the packet.                    *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Set the total number of items sent in the packet.                    *
+ *                                                                       *
+ ************************************************************************/
 
 void CAHItemsListPacket::SetItemCount(uint16 count)
 {
@@ -75,7 +74,7 @@ void CAHItemsListPacket::SetItemCount(uint16 count)
 
     if ((count - m_offset) <= 20)
     {
-        ref<uint8>(m_PData, (0x0A)) = 0x80;
+        ref<uint8>(m_PData, (0x0A))  = 0x80;
         ref<uint16>(m_PData, (0x08)) = 0x18 + 0x0A * (count - m_offset);
     }
     else
@@ -85,10 +84,10 @@ void CAHItemsListPacket::SetItemCount(uint16 count)
 }
 
 /************************************************************************
-*                                                                       *
-* Return the data for the packet.                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ * Return the data for the packet.                                       *
+ *                                                                       *
+ ************************************************************************/
 
 uint8* CAHItemsListPacket::GetData()
 {
@@ -96,12 +95,12 @@ uint8* CAHItemsListPacket::GetData()
 }
 
 /************************************************************************
-*                                                                       *
-*  Return the total size of the packet.                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Return the total size of the packet.                                 *
+ *                                                                       *
+ ************************************************************************/
 
-uint16 CAHItemsListPacket::GetSize()
+uint16 CAHItemsListPacket::GetSize() const
 {
     return 0x18 + 0x0A * m_count + 28;
 }
