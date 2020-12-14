@@ -192,7 +192,7 @@ int32 do_init(int32 argc, char** argv)
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);
     map_config_from_env();
-    ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
+    ShowMessage("\t - " CL_GREEN"[OK]" CL_RESET"\n");
     ShowStatus("do_init: map_config is reading");
     ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
 
