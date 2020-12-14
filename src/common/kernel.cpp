@@ -216,7 +216,7 @@ void signals_init()
 
 static void display_title()
 {
-    ShowInfo("Topaz");
+    ShowInfo("Topaz\n");
 }
 
 /************************************************************************
