@@ -626,41 +626,41 @@ int _vShowMessage(MSGTYPE flag, const std::string& string)
         case MSG_NONE: // direct printf replacement
             break;
         case MSG_STATUS: // Bright Green (To inform about good things)
-            logMessage = logMessage + CL_GREEN + " [Status] " + CL_RESET;
+            logMessage += CL_GREEN + std::string(" [Status] ") + CL_RESET;
             break;
         case MSG_SQL: // Bright Violet (For dumping out anything related with SQL) <- Actually, this is mostly used for SQL errors with the database, as
                       // successes can as well just be anything else... [Skotlex]
-            logMessage = logMessage + CL_MAGENTA + " [SQL] " + CL_RESET;
+            logMessage += CL_MAGENTA + std::string(" [SQL] ") + CL_RESET;
             break;
         case MSG_INFORMATION: // Bright White (Variable information)
-            logMessage = logMessage + CL_WHITE + " [Info] " + CL_RESET;
+            logMessage += CL_WHITE + std::string(" [Info] ") + CL_RESET;
             break;
         case MSG_NOTICE: // Bright White (Less than a warning)
-            logMessage = logMessage + CL_WHITE + " [Notice] " + CL_RESET;
+            logMessage += CL_WHITE + std::string(" [Notice] ") + CL_RESET;
             break;
         case MSG_WARNING: // Bright Yellow
-            logMessage = logMessage + CL_YELLOW + " [Warning] " + CL_RESET;
+            logMessage += CL_YELLOW + std::string(" [Warning] ") + CL_RESET;
             break;
         case MSG_DEBUG: // Bright Cyan, important stuff!
-            logMessage = logMessage + CL_CYAN + " [Debug] " + CL_RESET;
+            logMessage += CL_CYAN + std::string(" [Debug] ") + CL_RESET;
             break;
         case MSG_ERROR: // Bright Red  (Regular errors)
-            logMessage = logMessage + CL_RED + " [Error] " + CL_RESET;
+            logMessage += CL_RED + std::string(" [Error] ") + CL_RESET;
             break;
         case MSG_FATALERROR: // Bright Red (Fatal errors, abort(); if possible)
-            logMessage = logMessage + CL_RED + " [Fatal Error] " + CL_RESET;
+            logMessage += CL_RED + std::string(" [Fatal Error] ") + CL_RESET;
             break;
         case MSG_LUASCRIPT: // Bright Cyan
-            logMessage = logMessage + CL_CYAN + " [LUA Script] " + CL_RESET;
+            logMessage += CL_CYAN + std::string(" [LUA Script] ") + CL_RESET;
             break;
         case MSG_NAVMESH: // Bright Red  (Navmesh related errors)
-            logMessage = logMessage + CL_RED + " [Navmesh Error] " + CL_RESET;
+            logMessage += CL_RED + std::string(" [Navmesh Error] ") + CL_RESET;
             break;
         case MSG_ACTION: // Bright White  (mostly useless "player did this" info)
-            logMessage = logMessage + CL_WHITE + " [Action Info] " + CL_RESET;
+            logMessage += CL_WHITE + std::string(" [Action Info] ") + CL_RESET;
             break;
         case MSG_EXPLOIT: // Bright Red (Detected a likely exploit)
-            logMessage = logMessage + CL_RED + " [Possible Exploit] " + CL_RESET;
+            logMessage += CL_RED + std::string(" [Possible Exploit] ") + CL_RESET;
             break;
         default:
             ShowError("In function _vShowMessage() -> Invalid flag passed.\n");
