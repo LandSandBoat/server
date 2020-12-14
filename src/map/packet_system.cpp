@@ -5281,8 +5281,8 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
         uint8 ExitType = (data.ref<uint8>(0x06) == 1 ? 7 : 35);
 
         if (PChar->PPet == nullptr ||
-            (PChar->PPet->m_EcoSystem != SYSTEM_AVATAR &&
-            PChar->PPet->m_EcoSystem != SYSTEM_ELEMENTAL))
+            (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR &&
+            PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL))
         {
             PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
         }
@@ -5326,8 +5326,8 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
 
         if (PChar->PPet == nullptr ||
-            (PChar->PPet->m_EcoSystem != SYSTEM_AVATAR &&
-            PChar->PPet->m_EcoSystem != SYSTEM_ELEMENTAL &&
+            (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR &&
+            PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL &&
             !PChar->PAI->IsEngaged()))
         {
             PChar->PAI->ClearStateStack();
@@ -5949,13 +5949,13 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             else if (prevsjob == JOB_BLU)
                 blueutils::UnequipAllBlueSpells(PChar);
 
-            uint16 subType = 0;
+            DAMAGETYPE subType = DAMAGETYPE::NONE;
             if (auto weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
             {
                 subType = weapon->getDmgType();
             }
 
-            if (subType > 0 && subType < 4)
+            if (subType > DAMAGETYPE::NONE && subType < DAMAGETYPE::HTH)
             {
                 charutils::UnequipItem(PChar, SLOT_SUB);
             }

@@ -69,7 +69,7 @@ private:
     std::vector<CAttack>		m_attackSwings;				// The list of attacks for this round.
     bool						m_sataOccured;				// Flag: Did SATA occur during the round?
     bool						m_kickAttackOccured;		// Flag: Did a kick attack occur during the round?
-    uint16						m_subWeaponType;			// The sub weapon type.
+    DAMAGETYPE					m_subWeaponType;			// The sub weapon type.
 
 };
 

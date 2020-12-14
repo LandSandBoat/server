@@ -33,30 +33,30 @@
 #include "../alliance.h"
 #include "../modifier.h"
 
-enum ECOSYSTEM
+enum class ECOSYSTEM : uint8
 {
-    SYSTEM_ERROR = 0,
-    SYSTEM_AMORPH = 1,
-    SYSTEM_AQUAN = 2,
-    SYSTEM_ARCANA = 3,
-    SYSTEM_ARCHAICMACHINE = 4,
-    SYSTEM_AVATAR = 5,
-    SYSTEM_BEAST = 6,
-    SYSTEM_BEASTMEN = 7,
-    SYSTEM_BIRD = 8,
-    SYSTEM_DEMON = 9,
-    SYSTEM_DRAGON = 10,
-    SYSTEM_ELEMENTAL = 11,
-    SYSTEM_EMPTY = 12,
-    SYSTEM_HUMANOID = 13,
-    SYSTEM_LIZARD = 14,
-    SYSTEM_LUMORIAN = 15,
-    SYSTEM_LUMINION = 16,
-    SYSTEM_PLANTOID = 17,
-    SYSTEM_UNCLASSIFIED = 18,
-    SYSTEM_UNDEAD = 19,
-    SYSTEM_VERMIN = 20,
-    SYSTEM_VORAGEAN = 21,
+    ECO_ERROR = 0,
+    AMORPH = 1,
+    AQUAN = 2,
+    ARCANA = 3,
+    ARCHAICMACHINE = 4,
+    AVATAR = 5,
+    BEAST = 6,
+    BEASTMAN = 7, // Resolve conflict with conquest_system.h BEASTMEN definition
+    BIRD = 8,
+    DEMON = 9,
+    DRAGON = 10,
+    ELEMENTAL = 11,
+    EMPTY = 12,
+    HUMANOID = 13,
+    LIZARD = 14,
+    LUMORIAN = 15,
+    LUMINION = 16,
+    PLANTOID = 17,
+    UNCLASSIFIED = 18,
+    UNDEAD = 19,
+    VERMIN = 20,
+    VORAGEAN = 21
 };
 
 enum JOBTYPE
@@ -233,53 +233,53 @@ enum SLOTTYPE
 // для возможности различить эти орудия при экипировке и избавиться от ошибки
 // использования пуль с арбалетом и арбалетных стрел с огнестрельным оружием (только персонажи)
 
-enum ATTACKTYPE
+enum class ATTACKTYPE
 {
-    ATTACK_NONE = 0,
-    ATTACK_PHYSICAL = 1,
-    ATTACK_MAGICAL = 2,
-    ATTACK_RANGED = 3,
-    ATTACK_SPECIAL = 4,
-    ATTACK_BREATH = 5,
+    NONE = 0,
+    PHYSICAL = 1,
+    MAGICAL = 2,
+    RANGED = 3,
+    SPECIAL = 4,
+    BREATH = 5
 };
 
-enum DAMAGETYPE
+enum class DAMAGETYPE : uint16
 {
-    DAMAGE_NONE = 0,
-    DAMAGE_PIERCING = 1,
-    DAMAGE_SLASHING = 2,
-    DAMAGE_IMPACT = 3,
-    DAMAGE_HTH = 4,
-    DAMAGE_ELEMENTAL = 5,
-    DAMAGE_FIRE = 6,
-    DAMAGE_ICE = 7,
-    DAMAGE_WIND = 8,
-    DAMAGE_EARTH = 9,
-    DAMAGE_LIGHTNING = 10,
-    DAMAGE_WATER = 11,
-    DAMAGE_LIGHT = 12,
-    DAMAGE_DARK = 13,
+    NONE = 0,
+    PIERCING = 1,
+    SLASHING = 2,
+    IMPACT = 3,
+    HTH = 4,
+    ELEMENTAL = 5,
+    FIRE = 6,
+    ICE = 7,
+    WIND = 8,
+    EARTH = 9,
+    LIGHTNING = 10,
+    WATER = 11,
+    LIGHT = 12,
+    DARK = 13
 };
 
-enum REACTION
+enum class REACTION
 {
-    REACTION_NONE = 0x00,		// отсутствие реакции
-    REACTION_MISS = 0x01,		// промах
-    REACTION_PARRY = 0x03,		// блокирование оружием (MISS + PARRY)
-    REACTION_BLOCK = 0x04,		// блокирование щитом
-    REACTION_HIT = 0x08,		// попадание
-    REACTION_EVADE = 0x09,		// уклонение (MISS + HIT)
-    REACTION_GUARD = 0x14,		// mnk guard (20 dec)
+    NONE = 0x00,		// No Reaction
+    MISS = 0x01,        // Miss
+    PARRY = 0x03,		// Block with weapons (MISS + PARRY)
+    BLOCK = 0x04,		// Block with shield
+    HIT = 0x08,         // Hit
+    EVADE = 0x09,		// Evasion (MISS + HIT)
+    GUARD = 0x14		// mnk guard (20 dec)
 };
 
-enum SPECEFFECT
+enum class SPECEFFECT
 {
-    SPECEFFECT_NONE = 0x00,
-    SPECEFFECT_BLOOD = 0x02,
-    SPECEFFECT_HIT = 0x10,
-    SPECEFFECT_RAISE = 0x11,
-    SPECEFFECT_RECOIL = 0x20,
-    SPECEFFECT_CRITICAL_HIT = 0x22
+    NONE = 0x00,
+    BLOOD = 0x02,
+    HIT = 0x10,
+    RAISE = 0x11,
+    RECOIL = 0x20,
+    CRITICAL_HIT = 0x22
 };
 
 enum SUBEFFECT
@@ -433,9 +433,9 @@ struct apAction_t
     apAction_t()
     {
         ActionTarget = nullptr;
-        reaction = REACTION_NONE;
+        reaction = REACTION::NONE;
         animation = 0;
-        speceffect = SPECEFFECT_NONE;
+        speceffect = SPECEFFECT::NONE;
         param = 0;
         messageID = 0;
         additionalEffect = SUBEFFECT_NONE;
@@ -545,7 +545,7 @@ public:
     virtual int32 	addMP(int32 mp);			// увеличиваем/уменьшаем количество mp
 
     //Deals damage and updates the last attacker which is used when sending a player death message
-    virtual int32   takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACKTYPE attackType = ATTACK_NONE, DAMAGETYPE damageType = DAMAGE_NONE);
+    virtual int32   takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACKTYPE attackType = ATTACKTYPE::NONE, DAMAGETYPE damageType = DAMAGETYPE::NONE);
 
     int16		    getMod(Mod modID);		// величина модификатора
 

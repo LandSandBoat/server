@@ -43,7 +43,7 @@ CItemWeapon::CItemWeapon(uint16 id) : CItemEquipment(id)
     m_iLvlMacc      = 0;
 	m_damage		= 0;
     m_effect		= 0;
-	m_dmgType		= DAMAGE_NONE;
+	m_dmgType		= DAMAGETYPE::NONE;
 	m_delay			= 8000;
 	m_baseDelay		= 8000;		//this should only be needed for mobs (specifically mnks)
     m_maxHit		= 0;
@@ -285,12 +285,12 @@ uint16 CItemWeapon::getDamage()
 *                                                                       *
 ************************************************************************/
 
-void CItemWeapon::setDmgType(uint16 dmgType)
+void CItemWeapon::setDmgType(DAMAGETYPE dmgType)
 {
 	m_dmgType = dmgType;
 }
 
-uint16 CItemWeapon::getDmgType()
+DAMAGETYPE CItemWeapon::getDmgType()
 {
 	return m_dmgType;
 }

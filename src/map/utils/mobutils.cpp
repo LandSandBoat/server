@@ -510,7 +510,7 @@ void CalculateStats(CMobEntity * PMob)
     SetupRoaming(PMob);
 
     // All beastmen drop gil
-    if (PMob->m_EcoSystem == SYSTEM_BEASTMEN)
+    if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
     {
         PMob->defaultMobMod(MOBMOD_GIL_BONUS, 100);
     }
@@ -637,7 +637,7 @@ void SetupJob(CMobEntity* PMob)
     {
         case JOB_THF:
             // thfs drop more gil
-            if (PMob->m_EcoSystem == SYSTEM_BEASTMEN)
+            if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
             {
                 // 50% bonus
                 PMob->defaultMobMod(MOBMOD_GIL_BONUS, 150);
@@ -703,7 +703,7 @@ void SetupRoaming(CMobEntity* PMob)
 
     switch(PMob->m_EcoSystem)
     {
-        case SYSTEM_BEASTMEN:
+        case ECOSYSTEM::BEASTMAN:
             distance = 20;
             turns = 5;
             cool = 45;
@@ -927,20 +927,47 @@ void InitializeMob(CMobEntity* PMob, CZone* PZone)
     // Killer Effect
     switch (PMob->m_EcoSystem)
       {
-        case SYSTEM_AMORPH:   PMob->addModifier(Mod::BIRD_KILLER,     5); break;
-        case SYSTEM_AQUAN:    PMob->addModifier(Mod::AMORPH_KILLER,   5); break;
-        case SYSTEM_ARCANA:   PMob->addModifier(Mod::UNDEAD_KILLER,   5); break;
-        case SYSTEM_BEAST:    PMob->addModifier(Mod::LIZARD_KILLER,   5); break;
-        case SYSTEM_BIRD:     PMob->addModifier(Mod::AQUAN_KILLER,    5); break;
-        case SYSTEM_DEMON:    PMob->addModifier(Mod::DRAGON_KILLER,   5); break;
-        case SYSTEM_DRAGON:   PMob->addModifier(Mod::DEMON_KILLER,    5); break;
-        case SYSTEM_LIZARD:   PMob->addModifier(Mod::VERMIN_KILLER,   5); break;
-        case SYSTEM_LUMINION: PMob->addModifier(Mod::LUMORIAN_KILLER, 5); break;
-        case SYSTEM_LUMORIAN: PMob->addModifier(Mod::LUMINION_KILLER, 5); break;
-        case SYSTEM_PLANTOID: PMob->addModifier(Mod::BEAST_KILLER,    5); break;
-        case SYSTEM_UNDEAD:   PMob->addModifier(Mod::ARCANA_KILLER,   5); break;
-        case SYSTEM_VERMIN:   PMob->addModifier(Mod::PLANTOID_KILLER, 5); break;
-        default: break;
+        case ECOSYSTEM::AMORPH:
+            PMob->addModifier(Mod::BIRD_KILLER, 5);
+            break;
+        case ECOSYSTEM::AQUAN:
+            PMob->addModifier(Mod::AMORPH_KILLER, 5);
+            break;
+        case ECOSYSTEM::ARCANA:
+            PMob->addModifier(Mod::UNDEAD_KILLER, 5);
+            break;
+        case ECOSYSTEM::BEAST:
+            PMob->addModifier(Mod::LIZARD_KILLER, 5);
+            break;
+        case ECOSYSTEM::BIRD:
+            PMob->addModifier(Mod::AQUAN_KILLER, 5);
+            break;
+        case ECOSYSTEM::DEMON:
+            PMob->addModifier(Mod::DRAGON_KILLER, 5);
+            break;
+        case ECOSYSTEM::DRAGON:
+            PMob->addModifier(Mod::DEMON_KILLER, 5);
+            break;
+        case ECOSYSTEM::LIZARD:
+            PMob->addModifier(Mod::VERMIN_KILLER, 5);
+            break;
+        case ECOSYSTEM::LUMINION:
+            PMob->addModifier(Mod::LUMORIAN_KILLER, 5);
+            break;
+        case ECOSYSTEM::LUMORIAN:
+            PMob->addModifier(Mod::LUMINION_KILLER, 5);
+            break;
+        case ECOSYSTEM::PLANTOID:
+            PMob->addModifier(Mod::BEAST_KILLER, 5);
+            break;
+        case ECOSYSTEM::UNDEAD:
+            PMob->addModifier(Mod::ARCANA_KILLER, 5);
+            break;
+        case ECOSYSTEM::VERMIN:
+            PMob->addModifier(Mod::PLANTOID_KILLER, 5);
+            break;
+        default:
+            break;
       }
 
     if (PMob->m_maxLevel == 0 && PMob->m_minLevel == 0)

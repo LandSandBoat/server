@@ -287,7 +287,7 @@ std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
 
 std::optional<SpellID> CMobSpellContainer::GetHealSpell()
 {
-    if(m_PMob->m_EcoSystem == SYSTEM_UNDEAD || m_healList.empty()) return {};
+    if(m_PMob->m_EcoSystem == ECOSYSTEM::UNDEAD || m_healList.empty()) return {};
 
     return m_healList[tpzrand::GetRandomNumber(m_healList.size())];
 }

@@ -857,8 +857,8 @@ inline int32 CLuaBaseEntity::injectActionPacket(lua_State* L)
 
         Action.spellgroup = castType;
         Action.actiontype = actiontype;
-        target.reaction = REACTION_NONE;
-        target.speceffect = SPECEFFECT_NONE;
+        target.reaction = REACTION::NONE;
+        target.speceffect = SPECEFFECT::NONE;
         if (lua_isnil(L, 3))
         {
             target.animation = 0;
@@ -8152,8 +8152,8 @@ inline int32 CLuaBaseEntity::takeDamage(lua_State *L)
     // Deal damage and liberate target when applicable
     if (damage > 0)
     {
-        ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? (ATTACKTYPE)lua_tointeger(L, 3) : ATTACK_NONE;
-        DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? (DAMAGETYPE)lua_tointeger(L, 4) : DAMAGE_NONE;
+        ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? static_cast<ATTACKTYPE>(lua_tointeger(L, 3)) : ATTACKTYPE::NONE;
+        DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 4)) : DAMAGETYPE::NONE;
 
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
@@ -12131,7 +12131,7 @@ inline int32 CLuaBaseEntity::physicalDmgTaken(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    int16 damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? (int16)lua_tointeger(L, 2) : 0;
+    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
 
     lua_pushinteger(L, battleutils::PhysicalDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12173,7 +12173,7 @@ inline int32 CLuaBaseEntity::rangedDmgTaken(lua_State *L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    int16 damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? (int16)lua_tointeger(L, 2) : 0;
+    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
 
     lua_pushinteger(L, battleutils::RangedDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12484,7 +12484,7 @@ inline int32 CLuaBaseEntity::getWeaponDamageType(lua_State *L)
             lua_pushinteger(L, 0);
             return 1;
         }
-        lua_pushinteger(L, weapon->getDmgType());
+        lua_pushinteger(L, static_cast<uint16>(weapon->getDmgType()));
         return 1;
     }
     ShowError(CL_RED"lua::getWeaponDamageType :: Invalid slot specified!" CL_RESET);
@@ -13641,7 +13641,7 @@ inline int32 CLuaBaseEntity::getSystem(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint8 system = ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem;
+    uint8 system = static_cast<uint8>(((CBattleEntity*)m_PBaseEntity)->m_EcoSystem);
 
     lua_pushinteger(L, system);
     return 1;
@@ -13703,7 +13703,7 @@ inline int32 CLuaBaseEntity::isUndead(lua_State *L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem == SYSTEM_UNDEAD);
+    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem == ECOSYSTEM::UNDEAD);
     return 1;
 }
 

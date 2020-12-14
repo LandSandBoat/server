@@ -23,6 +23,7 @@
 #define _CITEMWEAPON_H
 
 #include "../../common/cbasetypes.h"
+#include "../entities/battleentity.h"
 
 #include "item_equipment.h"
 
@@ -42,7 +43,7 @@ public:
 	int16	getDelay();
 	int16	getBaseDelay();
 	uint16	getDamage();
-	uint16	getDmgType();
+	DAMAGETYPE	getDmgType();
     uint8   getAdditionalEffect();
     uint8   getHitCount();
 	uint16  getUnlockPoints();
@@ -66,7 +67,7 @@ public:
 	void	setDelay(uint16 delay);
 	void	setBaseDelay(uint16 delay); //should ONLY be set by zoneutils!
 	void	setDamage(uint16 damage);
-	void	setDmgType(uint16 dmgType);
+	void	setDmgType(DAMAGETYPE dmgType);
     void    setAdditionalEffect(uint8 effect);
     void    setMaxHit(uint8 hit);
 	void    setUnlockablePoints(uint16 points);
@@ -82,7 +83,7 @@ private:
 	uint16	m_damage;
 	int16	m_delay;    //can be -ve e.g. ammo/ranged weapons
 	int16	m_baseDelay;
-	uint16	m_dmgType;
+	DAMAGETYPE	m_dmgType;
     uint8   m_effect;
     uint8   m_maxHit;
 

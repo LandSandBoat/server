@@ -79,7 +79,7 @@ CMobEntity::CMobEntity()
     m_Type = MOBTYPE_NORMAL;
     m_Behaviour = BEHAVIOUR_NONE;
     m_SpawnType = SPAWNTYPE_NORMAL;
-    m_EcoSystem = SYSTEM_UNCLASSIFIED;
+    m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
     m_Element = 0;
     m_HiPCLvl = 0;
     m_HiPartySize = 0;
@@ -666,8 +666,8 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         actionTarget_t& target = list.getNewActionTarget();
 
         list.ActionTargetID = PTarget->id;
-        target.reaction = REACTION_HIT;
-        target.speceffect = SPECEFFECT_HIT;
+        target.reaction = REACTION::HIT;
+        target.speceffect = SPECEFFECT::HIT;
         target.animation = PSkill->getAnimationID();
         target.messageID = PSkill->getMsg();
 
@@ -702,19 +702,19 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (PSkill->hasMissMsg())
         {
-            target.reaction = REACTION_MISS;
-            target.speceffect = SPECEFFECT_NONE;
+            target.reaction = REACTION::MISS;
+            target.speceffect = SPECEFFECT::NONE;
             if (msg == PSkill->getAoEMsg())
                 msg = 282;
         }
         else
         {
-            target.reaction = REACTION_HIT;
+            target.reaction = REACTION::HIT;
         }
 
-        if (target.speceffect & SPECEFFECT_HIT)
+        if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
-            target.speceffect = SPECEFFECT_RECOIL;
+            target.speceffect = SPECEFFECT::RECOIL;
             target.knockback = PSkill->getKnockback();
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {

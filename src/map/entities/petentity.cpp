@@ -41,7 +41,7 @@ CPetEntity::CPetEntity(PETTYPE petType)
 {
 	objtype = TYPE_PET;
 	m_PetType = petType;
-	m_EcoSystem = SYSTEM_UNCLASSIFIED;
+	m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
 	allegiance = ALLEGIANCE_PLAYER;
     m_MobSkillList = 0;
     m_HasSpellScript = 0;
@@ -169,7 +169,7 @@ void CPetEntity::Spawn()
 {
     //we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
 
-    if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == SYSTEM_ELEMENTAL)
+    if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == ECOSYSTEM::ELEMENTAL)
     {
         this->defaultMobMod(MOBMOD_MAGIC_DELAY, 12);
         this->defaultMobMod(MOBMOD_MAGIC_COOL, 48);
@@ -204,8 +204,8 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         actionList_t& actionList = action.getNewActionList();
         actionList.ActionTargetID = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.reaction = REACTION_NONE;
-        actionTarget.speceffect = SPECEFFECT_RECOIL;
+        actionTarget.reaction = REACTION::NONE;
+        actionTarget.speceffect = SPECEFFECT::RECOIL;
         actionTarget.animation = PAbility->getAnimationID();
         actionTarget.param = 0;
         auto prevMsg = actionTarget.messageID;
