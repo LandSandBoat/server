@@ -11308,8 +11308,7 @@ INSERT INTO `mob_groups` VALUES (15,3763,177,'Steam_Cleaner',7200,0,2326,10000,0
 INSERT INTO `mob_groups` VALUES (16,4504,177,'Zipacna',10800,0,2800,10000,0,83,85,0);
 INSERT INTO `mob_groups` VALUES (17,4719,177,'Uptala',0,128,0,0,0,95,96,0);
 INSERT INTO `mob_groups` VALUES (18,4718,177,'Bisa',0,128,0,0,5000,91,92,0);
-
-INSERT INTO `mob_groups` VALUES (13741,4717,177,'Trna',0,128,0,0,5000,91,92,0);
+INSERT INTO `mob_groups` VALUES (19,4717,177,'Trna',0,128,0,0,5000,91,92,0);
 
 -- ------------------------------------------------------------
 -- The_Shrine_of_RuAvitau (Zone 178)
