@@ -98,9 +98,9 @@ function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
     elseif dSTR >= -15 then
         fSTR = (dSTR + 10) / 4
     elseif dSTR >= -21 then
-        fSTR = (dif + 12) / 4
+        fSTR = (dSTR + 12) / 4
     else
-        fSTR = (dif + 13) / 4
+        fSTR = (dSTR + 13) / 4
     end
 
     local min = math.floor(weaponDmg/9)
@@ -128,7 +128,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     local zoneId = avatar:getZone():getID()
 
     local shouldApplyLevelCorrection = (zoneId < 256) and not (zoneId == 183)
-    
+
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
     -- https://www.bg-wiki.com/bg/Hit_Rate
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
@@ -139,7 +139,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
     -- Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
     -- For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
-    -- bonuses cap at level diff of 38 based on this testing: 
+    -- bonuses cap at level diff of 38 based on this testing:
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- If there are penalties they seem to be applied differently similarly to monsters.
     local baseHitRate = 75
@@ -158,7 +158,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     end
     -- Delta acc / 2 for hit rate
     local dAcc = math.floor((acc - eva)/2)
-    
+
     -- Normal hits computed first
     hitrateSubsequent = baseHitRate + dAcc + levelCorrection
     -- First hit gets bonus hit rate
@@ -203,7 +203,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
         local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(tpz.mod.CRITHITRATE)
         critRate = critRate / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
-        
+
         local weaponDmg = avatar:getWeaponDmg()
 
         local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT))
@@ -243,7 +243,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
             if isCrit then
                 pDif = pDif * critAttackBonus
             end
-            
+
             finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
             numHitsProcessed = 1
         end
@@ -259,7 +259,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
             --Final pDif is qRatio randomized with a 1-1.05 multiplier
             local pDif = qRatio * (1 + (math.random() * 0.05))
-            
+
             if isCrit then
                 pDif = pDif * critAttackBonus
             end
