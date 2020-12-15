@@ -21,66 +21,67 @@
 
 #include "blue_spell.h"
 
-CBlueSpell::CBlueSpell(SpellID id) : CSpell(id)
+CBlueSpell::CBlueSpell(SpellID id)
+: CSpell(id)
 {
 }
 
 std::unique_ptr<CSpell> CBlueSpell::clone()
 {
-  return std::unique_ptr<CBlueSpell>(new CBlueSpell(*this));
+    return std::unique_ptr<CBlueSpell>(new CBlueSpell(*this));
 }
 
-uint16 CBlueSpell::getMonsterSkillId()
+uint16 CBlueSpell::getMonsterSkillId() const
 {
-	return m_monsterSkillId;
+    return m_monsterSkillId;
 }
 
 void CBlueSpell::setMonsterSkillId(uint16 skillid)
 {
-	m_monsterSkillId = skillid;
+    m_monsterSkillId = skillid;
 }
 
-uint8 CBlueSpell::getSetPoints()
+uint8 CBlueSpell::getSetPoints() const
 {
-	return m_setPoints;
+    return m_setPoints;
 }
 
 void CBlueSpell::setSetPoints(uint8 setpoints)
 {
-	m_setPoints = setpoints;
+    m_setPoints = setpoints;
 }
 
-uint8 CBlueSpell::getEcosystem()
+uint8 CBlueSpell::getEcosystem() const
 {
-	return m_ecosystem;
+    return m_ecosystem;
 }
 
 void CBlueSpell::setEcosystem(uint8 ecosystem)
 {
-	m_ecosystem = ecosystem;
+    m_ecosystem = ecosystem;
 }
 
-uint8 CBlueSpell::getTraitCategory()
+uint8 CBlueSpell::getTraitCategory() const
 {
-	return m_traitCategory;
+    return m_traitCategory;
 }
 
 void CBlueSpell::setTraitCategory(uint8 category)
 {
-	m_traitCategory = category;
+    m_traitCategory = category;
 }
 
-uint8 CBlueSpell::getTraitWeight()
+uint8 CBlueSpell::getTraitWeight() const
 {
-	return m_traitWeight;
+    return m_traitWeight;
 }
 
 void CBlueSpell::setTraitWeight(uint8 weight)
 {
-	m_traitWeight = weight;
+    m_traitWeight = weight;
 }
 
-uint8 CBlueSpell::getPrimarySkillchain()
+uint8 CBlueSpell::getPrimarySkillchain() const
 {
     return m_PrimarySkillchain;
 }
@@ -90,7 +91,7 @@ void CBlueSpell::setPrimarySkillchain(uint8 sc)
     m_PrimarySkillchain = sc;
 }
 
-uint8 CBlueSpell::getSecondarySkillchain()
+uint8 CBlueSpell::getSecondarySkillchain() const
 {
     return m_SecondarySkillchain;
 }

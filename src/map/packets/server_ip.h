@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CServerIPPacket : public CBasicPacket
 {
 public:
-
-	CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp);
+    CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp);
 };
 
 #endif

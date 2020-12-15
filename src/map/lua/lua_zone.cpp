@@ -23,18 +23,18 @@
 
 #include "../region.h"
 
-#include "lua_zone.h"
-#include "lua_baseentity.h"
-#include "../zone.h"
 #include "../entities/charentity.h"
+#include "../zone.h"
+#include "lua_baseentity.h"
+#include "lua_zone.h"
 
 /************************************************************************
-*                                                                       *
-*  Конструктор                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Конструктор                                                          *
+ *                                                                       *
+ ************************************************************************/
 
-CLuaZone::CLuaZone(lua_State *L)
+CLuaZone::CLuaZone(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -48,10 +48,10 @@ CLuaZone::CLuaZone(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Конструктор                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Конструктор                                                          *
+ *                                                                       *
+ ************************************************************************/
 
 CLuaZone::CLuaZone(CZone* PZone)
 {
@@ -59,27 +59,24 @@ CLuaZone::CLuaZone(CZone* PZone)
 }
 
 /************************************************************************
-*                                                                       *
-*  Регистрируем активную область в зоне                                 *
-*  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2              *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Регистрируем активную область в зоне                                 *
+ *  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2              *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaZone::registerRegion(lua_State *L)
+inline int32 CLuaZone::registerRegion(lua_State* L)
 {
     if (m_pLuaZone != nullptr)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1) &&
-            !lua_isnil(L, 2) && lua_isnumber(L, 2) &&
-            !lua_isnil(L, 3) && lua_isnumber(L, 3) &&
-            !lua_isnil(L, 4) && lua_isnumber(L, 4) &&
-            !lua_isnil(L, 5) && lua_isnumber(L, 5) &&
-            !lua_isnil(L, 6) && lua_isnumber(L, 6) &&
-            !lua_isnil(L, 7) && lua_isnumber(L, 7))
+        if (!lua_isnil(L, 1) && lua_isnumber(L, 1) && !lua_isnil(L, 2) && lua_isnumber(L, 2) && !lua_isnil(L, 3) && lua_isnumber(L, 3) && !lua_isnil(L, 4) &&
+            lua_isnumber(L, 4) && !lua_isnil(L, 5) && lua_isnumber(L, 5) && !lua_isnil(L, 6) && lua_isnumber(L, 6) && !lua_isnil(L, 7) && lua_isnumber(L, 7))
         {
             bool circleRegion = false;
             if (lua_tointeger(L, 5) == 0 && lua_tointeger(L, 6) == 0 && lua_tointeger(L, 7) == 0)
+            {
                 circleRegion = true; // Parameters were 0, we must be a circle.
+            }
 
             CRegion* Region = new CRegion((uint32)lua_tointeger(L, 1), circleRegion);
 
@@ -91,7 +88,7 @@ inline int32 CLuaZone::registerRegion(lua_State *L)
         }
         else
         {
-            ShowWarning(CL_YELLOW"Region cannot be registered. Please check the parameters.\n" CL_RESET);
+            ShowWarning(CL_YELLOW "Region cannot be registered. Please check the parameters.\n" CL_RESET);
         }
     }
     lua_pushnil(L);
@@ -99,16 +96,15 @@ inline int32 CLuaZone::registerRegion(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Устанавливаем ограничение уровня для зоны                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Устанавливаем ограничение уровня для зоны                            *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaZone::levelRestriction(lua_State *L)
+inline int32 CLuaZone::levelRestriction(lua_State* L)
 {
     if (m_pLuaZone != nullptr)
     {
-
     }
     lua_pushnil(L);
     return 1;
@@ -165,9 +161,13 @@ inline int32 CLuaZone::getBattlefieldByInitiator(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     if (m_pLuaZone->m_BattlefieldHandler)
+    {
         lua_pushlightuserdata(L, (void*)m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator((uint32)lua_tointeger(L, 1)));
+    }
     else
+    {
         lua_pushnil(L);
+    }
     return 1;
 }
 
@@ -180,11 +180,11 @@ inline int32 CLuaZone::battlefieldsFull(lua_State* L)
 }
 
 /************************************************************************
-*  Function: getWeather()
-*  Purpose : Returns the current weather status
-************************************************************************/
+ *  Function: getWeather()
+ *  Purpose : Returns the current weather status
+ ************************************************************************/
 
-inline int32 CLuaZone::getWeather(lua_State *L)
+inline int32 CLuaZone::getWeather(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
     WEATHER weather = m_pLuaZone->GetWeather();
@@ -193,10 +193,10 @@ inline int32 CLuaZone::getWeather(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Initializing Methods in LUA                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Initializing Methods in LUA                                          *
+ *                                                                       *
+ ************************************************************************/
 // clang-format off
 const char CLuaZone::className[] = "CZone";
 Lunar<CLuaZone>::Register_t CLuaZone::methods[] =

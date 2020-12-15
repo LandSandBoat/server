@@ -29,15 +29,15 @@ class CZone;
 class CLuaZone
 {
     CZone* m_pLuaZone;
-public:
 
-    static const char className[];
+public:
+    static const char                  className[];
     static Lunar<CLuaZone>::Register_t methods[];
 
     CLuaZone(lua_State*);
     CLuaZone(CZone*);
 
-    CZone* GetZone()const
+    CZone* GetZone() const
     {
         return m_pLuaZone;
     }

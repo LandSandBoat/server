@@ -21,17 +21,17 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../common/socket.h"
 
-#include "../utils/charutils.h"
-#include "inventory_size.h"
 #include "../entities/charentity.h"
 #include "../item_container.h"
+#include "../utils/charutils.h"
+#include "inventory_size.h"
 
 /************************************************************************
-*																		*
-*  Отсутствие значения в 0x1C управляет доступом к MOGLOCKER.			*
-*  По сюжету он заблокирован до выполнения соответствующей задачи		*
-*																		*
-************************************************************************/
+ *																		*
+ *  Отсутствие значения в 0x1C управляет доступом к MOGLOCKER.			*
+ *  По сюжету он заблокирован до выполнения соответствующей задачи		*
+ *																		*
+ ************************************************************************/
 
 CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
 {
@@ -57,9 +57,13 @@ CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
     ref<uint16>(0x18) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
     ref<uint16>(0x1A) = 1 + PChar->getStorage(LOC_TEMPITEMS)->GetBuff();
     if (charutils::hasMogLockerAccess(PChar))
+    {
         ref<uint16>(0x1C) = 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff();
+    }
     else
+    {
         ref<uint16>(0x1C) = 0x00;
+    }
 
     ref<uint16>(0x1E) = 1 + PChar->getStorage(LOC_MOGSATCHEL)->GetBuff();
     ref<uint16>(0x20) = 1 + PChar->getStorage(LOC_MOGSACK)->GetBuff();

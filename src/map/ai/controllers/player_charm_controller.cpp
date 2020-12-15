@@ -21,14 +21,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "player_charm_controller.h"
 
-#include "../ai_container.h"
-#include "../../status_effect_container.h"
+#include "../../../common/utils.h"
 #include "../../entities/charentity.h"
 #include "../../packets/char.h"
-#include "../../../common/utils.h"
+#include "../../status_effect_container.h"
+#include "../ai_container.h"
 
 CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
-    : CPlayerController(PChar)
+: CPlayerController(PChar)
 {
     POwner->PAI->PathFind = std::make_unique<CPathFind>(PChar);
 }
@@ -46,7 +46,8 @@ CPlayerCharmController::~CPlayerCharmController()
 void CPlayerCharmController::Tick(time_point tick)
 {
     m_Tick = tick;
-    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive()) {
+    if (POwner->PMaster == nullptr || !POwner->PMaster->isAlive())
+    {
         POwner->StatusEffectContainer->DelStatusEffect(EFFECT_CHARM);
         return;
     }
@@ -71,7 +72,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
     }
-    auto PTarget {POwner->GetBattleTarget()};
+    auto PTarget{ POwner->GetBattleTarget() };
     if (PTarget)
     {
         if (POwner->PAI->CanFollowPath())

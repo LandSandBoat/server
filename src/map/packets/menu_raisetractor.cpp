@@ -21,17 +21,16 @@
 
 #include "../../common/socket.h"
 
-#include "menu_raisetractor.h"
 #include "../entities/charentity.h"
+#include "menu_raisetractor.h"
 
-
-CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity * PChar, REVIVAL_TYPE type)
+CRaiseTractorMenuPacket::CRaiseTractorMenuPacket(CCharEntity* PChar, REVIVAL_TYPE type)
 {
-	this->type = 0xF9;
-	this->size = 0x06;
+    this->type = 0xF9;
+    this->size = 0x06;
 
-	ref<uint32>(0x04) = PChar->id;
-	ref<uint16>(0x08) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->targid;
 
-	ref<uint8>(0x0A) = type;
+    ref<uint8>(0x0A) = type;
 }

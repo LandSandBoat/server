@@ -21,13 +21,13 @@
 
 #include "item_shop.h"
 
-
-CItemShop::CItemShop(uint16 id) : CItem(id)
+CItemShop::CItemShop(uint16 id)
+: CItem(id)
 {
-	m_MinPrice = 0;
-	m_MaxPrice = 0;
+    m_MinPrice = 0;
+    m_MaxPrice = 0;
 
-	m_DailyIncrease = 0;
+    m_DailyIncrease   = 0;
     m_InitialQuantity = 0;
 }
 
@@ -35,15 +35,14 @@ CItemShop::~CItemShop()
 {
 }
 
-uint32 CItemShop::getMinPrice()
+uint32 CItemShop::getMinPrice() const
 {
-	return m_MinPrice;
+    return m_MinPrice;
 }
 
-
-uint32 CItemShop::getMaxPrice()
+uint32 CItemShop::getMaxPrice() const
 {
-	return m_MaxPrice;
+    return m_MaxPrice;
 }
 
 bool CItemShop::IsInMenu()
@@ -51,19 +50,19 @@ bool CItemShop::IsInMenu()
     return getQuantity() != 0;
 }
 
-bool CItemShop::IsDailyIncrease()
+bool CItemShop::IsDailyIncrease() const
 {
-	return m_DailyIncrease != 0;
+    return m_DailyIncrease != 0;
 }
 
 void CItemShop::setMinPrice(uint32 price)
 {
-	m_MinPrice = price;
+    m_MinPrice = price;
 }
 
 void CItemShop::setMaxPrice(uint32 price)
 {
-	m_MaxPrice = price;
+    m_MaxPrice = price;
 }
 
 void CItemShop::setDailyIncrease(uint16 increase)
@@ -71,7 +70,7 @@ void CItemShop::setDailyIncrease(uint16 increase)
     m_DailyIncrease = increase;
 }
 
-uint16 CItemShop::getDailyIncrease()
+uint16 CItemShop::getDailyIncrease() const
 {
     return m_DailyIncrease;
 }
@@ -81,19 +80,19 @@ void CItemShop::setInitialQuantity(uint16 increase)
     m_InitialQuantity = increase;
 }
 
-uint16 CItemShop::getInitialQuantity()
+uint16 CItemShop::getInitialQuantity() const
 {
     return m_InitialQuantity;
 }
 
 uint16 CItemShop::getSellPrice()
 {
-	if (getID() >= 0x2800 && getID() <= 0x6FFF)
-	{
-		return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
-	}
-	else
-	{
-		return getBasePrice() / 3;
-	}
+    if (getID() >= 0x2800 && getID() <= 0x6FFF)
+    {
+        return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
+    }
+    else
+    {
+        return getBasePrice() / 3;
+    }
 }

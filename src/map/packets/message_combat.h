@@ -27,17 +27,16 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CMessageCombatPacket : public CBasicPacket
 {
 public:
-
     CMessageCombatPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID);
 };
 

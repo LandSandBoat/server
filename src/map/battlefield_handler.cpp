@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include <string.h>
 #include <algorithm>
+#include <cstring>
 
 #include "ai/states/death_state.h"
 
@@ -48,10 +48,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "zone.h"
 
-
 CBattlefieldHandler::CBattlefieldHandler(CZone* PZone)
 {
-    m_PZone = PZone;
+    m_PZone           = PZone;
     m_MaxBattlefields = luautils::OnBattlefieldHandlerInitialise(PZone);
 }
 
@@ -62,7 +61,9 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
     for (auto& PBattlefield : m_Battlefields)
     {
         if (!PBattlefield.second->CanCleanup())
+        {
             PBattlefield.second->onTick(tick);
+        }
     }
 
     // can't std::remove_if in map so i'll workaround it
@@ -107,9 +108,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
 
         auto ret = Sql_Query(SqlHandle, fmtQuery, battlefieldID);
 
-        if (ret == SQL_ERROR ||
-            Sql_NumRows(SqlHandle) == 0 ||
-            Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+        if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
         {
             ShowError("Cannot load battlefield : %u \n", battlefieldID);
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
@@ -118,15 +117,15 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
         {
             auto PBattlefield = new CBattlefield(battlefieldID, m_PZone, area, PChar);
 
-            auto name = Sql_GetData(SqlHandle, 0);
-            auto recordholder = Sql_GetData(SqlHandle, 1);
-            auto recordtime = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
-            auto recordPartySize = Sql_GetUIntData(SqlHandle, 3);
-            auto timelimit = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
-            auto levelcap = Sql_GetUIntData(SqlHandle, 5);
-            auto lootid = Sql_GetUIntData(SqlHandle, 6);
-            auto maxplayers = Sql_GetUIntData(SqlHandle, 7);
-            auto rulemask = Sql_GetUIntData(SqlHandle, 8);
+            auto name                 = Sql_GetData(SqlHandle, 0);
+            auto recordholder         = Sql_GetData(SqlHandle, 1);
+            auto recordtime           = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
+            auto recordPartySize      = Sql_GetUIntData(SqlHandle, 3);
+            auto timelimit            = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
+            auto levelcap             = Sql_GetUIntData(SqlHandle, 5);
+            auto lootid               = Sql_GetUIntData(SqlHandle, 6);
+            auto maxplayers           = Sql_GetUIntData(SqlHandle, 7);
+            auto rulemask             = Sql_GetUIntData(SqlHandle, 8);
             PBattlefield->m_isMission = Sql_GetUIntData(SqlHandle, 9);
 
             PBattlefield->SetName((char*)name);
@@ -151,7 +150,9 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
             PBattlefield->InsertEntity(PChar, true);
 
             if (lootid != 0)
+            {
                 PBattlefield->SetLocalVar("loot", lootid);
+            }
 
             luautils::OnBattlefieldInitialise(PBattlefield);
             return BATTLEFIELD_RETURN_CODE_CUTSCENE;
@@ -169,7 +170,9 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
         for (auto& battlefield : m_Battlefields)
         {
             if (battlefield.second->IsRegistered(static_cast<CCharEntity*>(entity)))
+            {
                 return battlefield.second;
+            }
         }
         return nullptr;
     }
@@ -177,7 +180,9 @@ CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool che
     for (auto& battlefield : m_Battlefields)
     {
         if (battlefield.second->GetEntity(entity))
+        {
             return battlefield.second;
+        }
     }
     return nullptr;
 }
@@ -193,7 +198,9 @@ CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
     for (auto& battlefield : m_Battlefields)
     {
         if (battlefield.second->GetInitiator().id == charID)
+        {
             return battlefield.second;
+        }
     }
     return nullptr;
 }
@@ -227,7 +234,9 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
         {
             // players havent started fighting yet, try entering
             if (area != PBattlefield->GetArea())
+            {
                 return BATTLEFIELD_RETURN_CODE_INCREMENT_REQUEST;
+            }
 
             return PBattlefield->InsertEntity(PChar, false) ? BATTLEFIELD_RETURN_CODE_CUTSCENE : BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL;
         }
@@ -247,12 +256,14 @@ bool CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefie
     return PBattlefield ? PBattlefield->RemoveEntity(PEntity, leavecode) : false;
 }
 
-bool CBattlefieldHandler::IsRegistered(CCharEntity * PChar)
+bool CBattlefieldHandler::IsRegistered(CCharEntity* PChar)
 {
     for (const auto& battlefield : m_Battlefields)
     {
         if (battlefield.second->IsRegistered(PChar))
+        {
             return true;
+        }
     }
     return false;
 }
@@ -261,20 +272,24 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
 {
     // area all areas full
     if (m_Battlefields.size() >= (size_t)m_MaxBattlefields)
+    {
         return true;
+    }
 
     // we have at least one free area and id has been passed so lets look it up
     if (battlefieldId != -1)
     {
         std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
-        auto ret = Sql_Query(SqlHandle, query.c_str(), battlefieldId);
+        auto        ret = Sql_Query(SqlHandle, query.c_str(), battlefieldId);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
                 auto area = Sql_GetUIntData(SqlHandle, 0);
                 if (m_Battlefields.find(area) == m_Battlefields.end())
+                {
                     return false; // this area hasnt been loaded in for this battlefield
+                }
             }
         }
         // all areas for this battlefield are full

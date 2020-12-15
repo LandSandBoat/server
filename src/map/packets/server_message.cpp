@@ -19,20 +19,20 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
 #include "server_message.h"
+#include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-CServerMessagePacket::CServerMessagePacket(const string_t message, int8 language, int32 timestamp, int32 message_offset)
+CServerMessagePacket::CServerMessagePacket(const string_t& message, int8 language, int32 timestamp, int32 message_offset)
 {
     this->type = 0x4D;
     this->size = 0x0E;
 
-    ref<uint8>(0x04) = message_offset == 0 ? 1 : 2;
-    ref<uint8>(0x05) = 1;
-    ref<uint8>(0x06) = 1;
-    ref<uint8>(0x07) = language;
+    ref<uint8>(0x04)  = message_offset == 0 ? 1 : 2;
+    ref<uint8>(0x05)  = 1;
+    ref<uint8>(0x06)  = 1;
+    ref<uint8>(0x07)  = language;
     ref<uint32>(0x08) = (uint32)(timestamp == 0 ? time(0) : timestamp);
     ref<uint32>(0x0C) = 0; // Message Length.. (Total)
     ref<uint32>(0x10) = 0; // Message Offset..
@@ -45,12 +45,12 @@ CServerMessagePacket::CServerMessagePacket(const string_t message, int8 language
         auto sndLength = (msgLength - message_offset) > 236 ? 236 : (msgLength - message_offset);
 
         ref<uint32>(0x0C) = (uint32)message.length(); // Message Length.. (Total)
-        ref<uint32>(0x10) = message_offset;   // Message Offset..
+        ref<uint32>(0x10) = message_offset;           // Message Offset..
         ref<uint32>(0x14) = (uint32)sndLength;        // Message Length..
 
-        memcpy((data + (0x18)) , message.c_str() + message_offset, sndLength);
+        memcpy((data + (0x18)), message.c_str() + message_offset, sndLength);
 
         auto textSize = (uint8)(sndLength + sndLength % 2);
-        this->size = ((((0x14 + textSize) + 4) >> 1) & 0xFE);
+        this->size    = ((((0x14 + textSize) + 4) >> 1) & 0xFE);
     }
 }

@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CTradeRequestPacket : public CBasicPacket
 {
-	public:
-
-	CTradeRequestPacket(CCharEntity* PChar);
+public:
+    CTradeRequestPacket(CCharEntity* PChar);
 };
 
 #endif

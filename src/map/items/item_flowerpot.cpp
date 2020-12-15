@@ -194,13 +194,13 @@ FLOWERPOT_ELEMENT_TYPE CItemFlowerpot::getCommonCrystalFeed()
 
 int16 CItemFlowerpot::getItemFromElement(FLOWERPOT_ELEMENT_TYPE element)
 {
-    //Element and crystal item id ordering is the same with an offset
+    // Element and crystal item id ordering is the same with an offset
     return element + 4095;
 }
 
 FLOWERPOT_ELEMENT_TYPE CItemFlowerpot::getElementFromItem(int16 itemID)
 {
-    //Element and crystal item id ordering is the same with an offset
+    // Element and crystal item id ordering is the same with an offset
     return (FLOWERPOT_ELEMENT_TYPE)(itemID - 4095);
 }
 

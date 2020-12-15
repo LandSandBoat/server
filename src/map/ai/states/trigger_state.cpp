@@ -21,13 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "trigger_state.h"
 
-#include "../ai_container.h"
-#include "../../lua/luautils.h"
 #include "../../entities/charentity.h"
 #include "../../entities/npcentity.h"
+#include "../../lua/luautils.h"
+#include "../ai_container.h"
 
-CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid) :
-    CState(PEntity, targid)
+CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid)
+: CState(PEntity, targid)
 {
 }
 
@@ -38,7 +38,7 @@ bool CTriggerState::Update(time_point tick)
         auto PChar = static_cast<CCharEntity*>(GetTarget());
         if (PChar && luautils::OnTrigger(PChar, m_PEntity) == -1 && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
         {
-            close = true;
+            close                = true;
             m_PEntity->animation = ANIMATION_OPEN_DOOR;
             m_PEntity->updatemask |= UPDATE_HP;
         }

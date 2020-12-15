@@ -30,7 +30,7 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
     this->type = 0x59;
     this->size = 0x12;
 
-    ref<uint32>(0x0C) = 10000;       // price
+    ref<uint32>(0x0C) = 10000; // price
 
     ref<uint8>(0x1C) = 0xD0;
     ref<uint8>(0x1D) = 0x19;
@@ -39,8 +39,8 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 
     if (WorldPass != 0)
     {
-        ref<uint8>(0x04) =   1;     // number of uses left
-        ref<uint8>(0x08) = 167;     // pass becomes invalid in (hours)
+        ref<uint8>(0x04) = 1;   // number of uses left
+        ref<uint8>(0x08) = 167; // pass becomes invalid in (hours)
 
         ref<uint8>(0x20) = 0x06;
 

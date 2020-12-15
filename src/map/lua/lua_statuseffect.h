@@ -28,17 +28,16 @@
 class CStatusEffect;
 class CLuaStatusEffect
 {
-    CStatusEffect *m_PLuaStatusEffect;
+    CStatusEffect* m_PLuaStatusEffect;
 
 public:
-
-    static const char className[];
+    static const char                          className[];
     static Lunar<CLuaStatusEffect>::Register_t methods[];
 
     CLuaStatusEffect(lua_State*);
     CLuaStatusEffect(CStatusEffect*);
 
-    CStatusEffect* GetStatusEffect()const
+    CStatusEffect* GetStatusEffect() const
     {
         return m_PLuaStatusEffect;
     }

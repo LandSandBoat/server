@@ -27,10 +27,10 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 class CItemContainer;
@@ -38,8 +38,7 @@ class CItemContainer;
 class CGuildMenuBuyPacket : public CBasicPacket
 {
 public:
-
-	CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild);
+    CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild);
 };
 
 #endif

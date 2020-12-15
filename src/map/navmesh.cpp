@@ -21,35 +21,36 @@
 
 #include "navmesh.h"
 #include "../../ext/detour/detour/DetourNavMeshQuery.h"
+#include "../common/tpzrand.h"
+#include "../common/utils.h"
 #include <cfloat>
 #include <cstring>
-#include <iostream>
 #include <fstream>
-#include "../common/utils.h"
-#include "../common/tpzrand.h"
+#include <iostream>
 
 const int8 CNavMesh::ERROR_NEARESTPOLY;
 
-void CNavMesh::ToFFXIPos(const position_t* pos, float* out) {
+void CNavMesh::ToFFXIPos(const position_t* pos, float* out)
+{
     float y = pos->y;
     float z = pos->z;
 
     out[0] = pos->x;
     out[1] = y * -1;
     out[2] = z * -1;
-
 }
 
-void CNavMesh::ToFFXIPos(float* out) {
+void CNavMesh::ToFFXIPos(float* out)
+{
     float y = out[1];
     float z = out[2];
 
     out[1] = y * -1;
     out[2] = z * -1;
-
 }
 
-void CNavMesh::ToFFXIPos(position_t* out) {
+void CNavMesh::ToFFXIPos(position_t* out)
+{
     float y = out->y;
     float z = out->z;
 
@@ -57,39 +58,39 @@ void CNavMesh::ToFFXIPos(position_t* out) {
     out->z = z * -1;
 }
 
-void CNavMesh::ToDetourPos(float* out) {
+void CNavMesh::ToDetourPos(float* out)
+{
     float y = out[1];
     float z = out[2];
 
     out[1] = y * -1;
     out[2] = z * -1;
-
 }
 
-void CNavMesh::ToDetourPos(position_t* out) {
+void CNavMesh::ToDetourPos(position_t* out)
+{
     float y = out->y;
     float z = out->z;
 
     out->y = y * -1;
     out->z = z * -1;
-
 }
 
-void CNavMesh::ToDetourPos(const position_t* pos, float* out) {
+void CNavMesh::ToDetourPos(const position_t* pos, float* out)
+{
     float y = pos->y;
     float z = pos->z;
 
     out[0] = pos->x;
     out[1] = y * -1;
     out[2] = z * -1;
-
 }
 
 CNavMesh::CNavMesh(uint16 zoneID)
 {
-    m_zoneID = zoneID;
-    m_navMesh = nullptr;
-    m_hit.path = m_hitPath;
+    m_zoneID      = zoneID;
+    m_navMesh     = nullptr;
+    m_hit.path    = m_hitPath;
     m_hit.maxPath = 20;
 }
 
@@ -138,15 +139,19 @@ bool CNavMesh::load(const std::string& filename)
         NavMeshTileHeader tileHeader;
         file.read(reinterpret_cast<char*>(&tileHeader), sizeof(tileHeader));
         if (!tileHeader.tileRef || !tileHeader.dataSize)
+        {
             break;
+        }
 
         unsigned char* data = (unsigned char*)dtAlloc(tileHeader.dataSize, DT_ALLOC_PERM);
-        if (!data) break;
+        if (!data)
+        {
+            break;
+        }
         memset(data, 0, tileHeader.dataSize);
         file.read(reinterpret_cast<char*>(data), tileHeader.dataSize);
 
         m_navMesh->addTile(data, tileHeader.dataSize, DT_TILE_FREE_DATA, tileHeader.tileRef, 0);
-
     }
 
     // init detour nav mesh path finder
@@ -164,7 +169,6 @@ bool CNavMesh::load(const std::string& filename)
 
 void CNavMesh::outputError(uint32 status)
 {
-
     if (status & DT_WRONG_MAGIC)
     {
         ShowNavError("Detour wrong magic\n");
@@ -200,7 +204,7 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
 {
     TracyZoneScoped;
     std::vector<position_t> ret;
-    dtStatus status;
+    dtStatus                status;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -249,10 +253,10 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
         return ret;
     }
 
-    dtPolyRef m_polys[MAX_NAV_POLYS];
-    float straightPath[MAX_NAV_POLYS * 3];
+    dtPolyRef     m_polys[MAX_NAV_POLYS];
+    float         straightPath[MAX_NAV_POLYS * 3];
     unsigned char straightPathFlags[MAX_NAV_POLYS];
-    dtPolyRef straightPathPolys[MAX_NAV_POLYS];
+    dtPolyRef     straightPathPolys[MAX_NAV_POLYS];
 
     // not sure what this is for?
     int32 pathCount = 0;
@@ -270,7 +274,8 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
     {
         int32 straightPathCount = MAX_NAV_POLYS * 3;
 
-        status = m_navMeshQuery.findStraightPath(snearest, enearest, m_polys, pathCount, straightPath, straightPathFlags, straightPathPolys, &straightPathCount, MAX_NAV_POLYS);
+        status = m_navMeshQuery.findStraightPath(snearest, enearest, m_polys, pathCount, straightPath, straightPathFlags, straightPathPolys, &straightPathCount,
+                                                 MAX_NAV_POLYS);
 
         if (dtStatusFailed(status))
         {
@@ -280,7 +285,7 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
         }
 
         // i starts at 3 so the start position is ignored
-        for (int i = 3; i < straightPathCount * 3; )
+        for (int i = 3; i < straightPathCount * 3;)
         {
             float pathPos[3];
             pathPos[0] = straightPath[i++];
@@ -289,7 +294,7 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.push_back({pathPos[0], pathPos[1], pathPos[2], 0, 0});
+            ret.push_back({ pathPos[0], pathPos[1], pathPos[2], 0, 0 });
         }
     }
 
@@ -334,7 +339,8 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
-    status = m_navMeshQuery.findRandomPointAroundCircle(startRef, spos, maxRadius, &filter, []() -> float { return tpzrand::GetRandomNumber(1.f); }, &randomRef, randomPt);
+    status = m_navMeshQuery.findRandomPointAroundCircle(
+        startRef, spos, maxRadius, &filter, []() -> float { return tpzrand::GetRandomNumber(1.f); }, &randomRef, randomPt);
 
     if (dtStatusFailed(status))
     {
@@ -345,7 +351,7 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
 
     CNavMesh::ToFFXIPos(randomPt);
 
-    return std::make_pair(0, position_t{randomPt[0], randomPt[1], randomPt[2], 0, 0});
+    return std::make_pair(0, position_t{ randomPt[0], randomPt[1], randomPt[2], 0, 0 });
 }
 
 bool CNavMesh::inWater(const position_t& point)
@@ -410,7 +416,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     filter.setExcludeFlags(0);
 
     dtPolyRef startRef;
-    float snearest[3];
+    float     snearest[3];
 
     status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 
@@ -428,7 +434,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     }
 
     dtPolyRef endRef;
-    float enearest[3];
+    float     enearest[3];
 
     status = m_navMeshQuery.findNearestPoly(epos, polyPickExt, &filter, &endRef, enearest);
 

@@ -25,8 +25,8 @@
 #include <vector>
 
 #include "../items/item.h"
-#include "../items/item_equipment.h"
 #include "../items/item_currency.h"
+#include "../items/item_equipment.h"
 #include "../items/item_fish.h"
 #include "../items/item_furnishing.h"
 #include "../items/item_general.h"
@@ -35,10 +35,10 @@
 #include "../items/item_usable.h"
 #include "../items/item_weapon.h"
 
-#define MAX_ITEMID  32768
-#define MAX_DROPID  5000
-#define MAX_LOOTID  1300
-#define MAX_DROP_GROUP_ID  255
+#define MAX_ITEMID        32768
+#define MAX_DROPID        5000
+#define MAX_LOOTID        1300
+#define MAX_DROP_GROUP_ID 255
 
 enum DROP_TYPE
 {
@@ -51,7 +51,7 @@ enum DROP_TYPE
 struct DropItem_t
 {
     DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate);
-    uint8 DropType;
+    uint8  DropType;
     uint16 ItemID;
     uint16 DropRate;
 };
@@ -59,13 +59,13 @@ struct DropItem_t
 struct DropGroup_t
 {
     DropGroup_t(uint16 GroupRate);
-    uint16 GroupRate;
+    uint16                  GroupRate;
     std::vector<DropItem_t> Items;
 };
 
 struct DropList_t
 {
-    std::vector<DropItem_t> Items;
+    std::vector<DropItem_t>  Items;
     std::vector<DropGroup_t> Groups;
 };
 
@@ -79,20 +79,20 @@ struct LootItem_t
 typedef std::vector<LootItem_t> LootList_t;
 
 /************************************************************************
-*                                                                       *
-*  The namespace for working with a global lists of items               *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  The namespace for working with a global lists of items               *
+ *                                                                       *
+ ************************************************************************/
 
 namespace itemutils
 {
-    void    Initialize();
-    void    FreeItemList();
+    void Initialize();
+    void FreeItemList();
 
-    CItem*  GetItem(CItem* PItem);
-    CItem*  GetItem(uint16 ItemID);
-    CItem*  GetItemPointer(uint16 ItemID);
-    bool 	IsItemPointer(CItem* item);
+    CItem* GetItem(CItem* PItem);
+    CItem* GetItem(uint16 ItemID);
+    CItem* GetItemPointer(uint16 ItemID);
+    bool   IsItemPointer(CItem* item);
 
     CItemWeapon* GetUnarmedItem();
     CItemWeapon* GetUnarmedH2HItem();
@@ -100,5 +100,5 @@ namespace itemutils
     DropList_t* GetDropList(uint16 DropID);
     LootList_t* GetLootList(uint16 LootDropID);
 
-};
+}; // namespace itemutils
 #endif

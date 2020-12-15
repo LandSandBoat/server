@@ -38,24 +38,24 @@ enum PETTYPE
 
 enum WYVERNTYPE
 {
-    WYVERNTYPE_NONE = 0,
-    WYVERNTYPE_DEFENSIVE = 1,
+    WYVERNTYPE_NONE         = 0,
+    WYVERNTYPE_DEFENSIVE    = 1,
     WYVERNTYPE_MULTIPURPOSE = 2,
-    WYVERNTYPE_OFFENSIVE = 3
+    WYVERNTYPE_OFFENSIVE    = 3
 };
 
 class CPetEntity : public CMobEntity
 {
 public:
-	 CPetEntity(PETTYPE petType);						// конструктор
-	~CPetEntity();						// деструктор
-	PETTYPE getPetType();
-    bool isBstPet();
-	uint8 m_Element;
-	uint32 m_PetID;
+    CPetEntity(PETTYPE petType); // конструктор
+    ~CPetEntity();               // деструктор
+    PETTYPE     getPetType();
+    bool        isBstPet();
+    uint8       m_Element;
+    uint32      m_PetID;
     std::string GetScriptName();
 
-    WYVERNTYPE getWyvernType();
+    WYVERNTYPE   getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;
     virtual void Die() override;
@@ -64,7 +64,7 @@ public:
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
 
 private:
-	PETTYPE m_PetType;					//the type of pet e.g. avatar/wyvern/jugpet etc
+    PETTYPE m_PetType; // the type of pet e.g. avatar/wyvern/jugpet etc
 };
 
 #endif

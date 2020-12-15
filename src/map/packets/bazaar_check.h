@@ -28,23 +28,22 @@
 
 enum BAZAARCHECK
 {
-	BAZAAR_ENTER = 0,
-	BAZAAR_LEAVE = 1
+    BAZAAR_ENTER = 0,
+    BAZAAR_LEAVE = 1
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CBazaarCheckPacket : public CBasicPacket
 {
 public:
-
-	CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type);
+    CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type);
 };
 
 #endif

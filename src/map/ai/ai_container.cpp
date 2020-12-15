@@ -21,41 +21,41 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "ai_container.h"
 
-#include "states/ability_state.h"
-#include "states/attack_state.h"
-#include "states/death_state.h"
-#include "states/despawn_state.h"
-#include "states/item_state.h"
-#include "states/inactive_state.h"
-#include "states/magic_state.h"
-#include "states/mobskill_state.h"
-#include "states/raise_state.h"
-#include "states/trigger_state.h"
-#include "states/weaponskill_state.h"
-#include "states/range_state.h"
-#include "states/respawn_state.h"
-#include "controllers/player_controller.h"
-#include "controllers/mob_controller.h"
 #include "../entities/baseentity.h"
 #include "../entities/battleentity.h"
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"
 #include "../packets/entity_animation.h"
+#include "controllers/mob_controller.h"
+#include "controllers/player_controller.h"
+#include "states/ability_state.h"
+#include "states/attack_state.h"
+#include "states/death_state.h"
+#include "states/despawn_state.h"
+#include "states/inactive_state.h"
+#include "states/item_state.h"
+#include "states/magic_state.h"
+#include "states/mobskill_state.h"
+#include "states/raise_state.h"
+#include "states/range_state.h"
+#include "states/respawn_state.h"
+#include "states/trigger_state.h"
+#include "states/weaponskill_state.h"
 
-CAIContainer::CAIContainer(CBaseEntity* _PEntity) :
-    CAIContainer(_PEntity, nullptr, nullptr, nullptr)
+CAIContainer::CAIContainer(CBaseEntity* _PEntity)
+: CAIContainer(_PEntity, nullptr, nullptr, nullptr)
 {
 }
 
-CAIContainer::CAIContainer(CBaseEntity* _PEntity, std::unique_ptr<CPathFind>&& _pathfind,
-    std::unique_ptr<CController>&& _controller, std::unique_ptr<CTargetFind>&& _targetfind) :
-    TargetFind(std::move(_targetfind)),
-    PathFind(std::move(_pathfind)),
-    Controller(std::move(_controller)),
-    m_Tick(server_clock::now()),
-    m_PrevTick(server_clock::now()),
-    PEntity(_PEntity),
-    ActionQueue(_PEntity)
+CAIContainer::CAIContainer(CBaseEntity* _PEntity, std::unique_ptr<CPathFind>&& _pathfind, std::unique_ptr<CController>&& _controller,
+                           std::unique_ptr<CTargetFind>&& _targetfind)
+: TargetFind(std::move(_targetfind))
+, PathFind(std::move(_pathfind))
+, Controller(std::move(_controller))
+, m_Tick(server_clock::now())
+, m_PrevTick(server_clock::now())
+, PEntity(_PEntity)
+, ActionQueue(_PEntity)
 {
 }
 
@@ -165,7 +165,7 @@ bool CAIContainer::Inactive(duration _duration, bool canChangeState)
 bool CAIContainer::Internal_Engage(uint16 targetid)
 {
     //#TODO: pet engage/disengage
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
 
     if (entity && entity->PAI->IsEngaged())
     {
@@ -194,18 +194,20 @@ bool CAIContainer::Internal_Engage(uint16 targetid)
 
 bool CAIContainer::Internal_Cast(uint16 targetid, SpellID spellid)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CMagicState>(entity, targetid, spellid);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
     {
-        if(IsEngaged() || targetid == 0)
+        if (IsEngaged() || targetid == 0)
         {
             entity->SetBattleTargetID(targetid);
             return true;
@@ -220,8 +222,8 @@ bool CAIContainer::Internal_ChangeTarget(uint16 targetid)
 
 bool CAIContainer::Internal_Disengage()
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
-    if(entity)
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
+    if (entity)
     {
         entity->SetBattleTargetID(0);
         return true;
@@ -231,57 +233,71 @@ bool CAIContainer::Internal_Disengage()
 
 bool CAIContainer::Internal_WeaponSkill(uint16 targid, uint16 wsid)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CWeaponSkillState>(entity, targid, wsid);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
 {
-    auto entity {dynamic_cast<CMobEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CMobEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CMobSkillState>(entity, targid, wsid);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_Ability(uint16 targetid, uint16 abilityid)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CAbilityState>(entity, targetid, abilityid);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_RangedAttack(uint16 targetid)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CRangeState>(entity, targetid);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_Die(duration deathTime)
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CDeathState>(entity, deathTime);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_Raise()
 {
-    auto entity {dynamic_cast<CBattleEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CBattleEntity*>(PEntity) };
     if (entity)
+    {
         return ForceChangeState<CRaiseState>(entity);
+    }
     return false;
 }
 
 bool CAIContainer::Internal_UseItem(uint16 targetid, uint8 loc, uint8 slotid)
 {
-    auto entity {dynamic_cast<CCharEntity*>(PEntity)};
+    auto entity{ dynamic_cast<CCharEntity*>(PEntity) };
     if (entity)
+    {
         return ChangeState<CItemState>(entity, targetid, loc, slotid);
+    }
     return false;
 }
 
@@ -336,7 +352,7 @@ void CAIContainer::Tick(time_point _tick)
 {
     TracyZoneScoped;
     m_PrevTick = m_Tick;
-    m_Tick = _tick;
+    m_Tick     = _tick;
 
     //#TODO: timestamp in the event?
     EventHandler.triggerListener("TICK", PEntity);
@@ -349,7 +365,8 @@ void CAIContainer::Tick(time_point _tick)
     if (!Controller && CanFollowPath())
     {
         PathFind->FollowPath();
-        if (PathFind->OnPoint()) {
+        if (PathFind->OnPoint())
+        {
             luautils::OnPath(PEntity);
         }
     }
@@ -458,7 +475,6 @@ bool CAIContainer::Internal_Respawn(duration _duration)
         return ForceChangeState<CRespawnState>(PEntity, _duration);
     }
     return false;
-
 }
 
 void CAIContainer::CheckCompletedStates()

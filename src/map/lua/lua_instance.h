@@ -29,9 +29,9 @@ class CInstance;
 class CLuaInstance
 {
     CInstance* m_PLuaInstance;
-public:
 
-    static const char className[];
+public:
+    static const char                      className[];
     static Lunar<CLuaInstance>::Register_t methods[];
 
     CLuaInstance(lua_State*);

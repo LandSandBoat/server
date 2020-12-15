@@ -48,10 +48,10 @@ public:
 
     bool RangedAttack(uint16 targid);
 
-    static constexpr float RoamDistance = { 2.0f };
-    static constexpr float SpawnDistance = { 3.0f };
+    static constexpr float RoamDistance    = { 2.0f };
+    static constexpr float SpawnDistance   = { 3.0f };
     static constexpr float CastingDistance = { 15.0f };
-    static constexpr float WarpDistance = { 30.0f };
+    static constexpr float WarpDistance    = { 30.0f };
 
     CBattleEntity* GetTopEnmity();
 
@@ -69,13 +69,13 @@ private:
     CBattleEntity* m_LastTopEnmity;
 
     time_point m_LastRepositionTime;
-    uint8 m_failedRepositionAttempts;
-    bool m_InTransit;
+    uint8      m_failedRepositionAttempts;
+    bool       m_InTransit;
 
-    time_point m_CombatEndTime;
-    time_point m_LastHealTickTime;
-    std::vector<std::chrono::seconds> m_tickDelays = { 15s, 10s, 10s, 3s };
-    std::size_t m_NumHealingTicks = { 0 };
+    time_point                        m_CombatEndTime;
+    time_point                        m_LastHealTickTime;
+    std::vector<std::chrono::seconds> m_tickDelays      = { 15s, 10s, 10s, 3s };
+    std::size_t                       m_NumHealingTicks = { 0 };
 
     time_point m_LastRangedAttackTime;
 };

@@ -19,34 +19,33 @@
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
-#include "petentity.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
+#include "../../common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/helpers/pathfind.h"
 #include "../ai/helpers/targetfind.h"
 #include "../ai/states/ability_state.h"
-#include "../utils/battleutils.h"
-#include "../utils/petutils.h"
-#include "../utils/mobutils.h"
-#include "../../common/utils.h"
 #include "../mob_modifier.h"
+#include "../mob_spell_container.h"
+#include "../mob_spell_list.h"
+#include "../packets/entity_update.h"
+#include "../packets/pet_sync.h"
+#include "../utils/battleutils.h"
+#include "../utils/mobutils.h"
+#include "../utils/petutils.h"
+#include "petentity.h"
 
 CPetEntity::CPetEntity(PETTYPE petType)
 {
-	objtype = TYPE_PET;
-	m_PetType = petType;
-	m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
-	allegiance = ALLEGIANCE_PLAYER;
-    m_MobSkillList = 0;
+    objtype          = TYPE_PET;
+    m_PetType        = petType;
+    m_EcoSystem      = ECOSYSTEM::UNCLASSIFIED;
+    allegiance       = ALLEGIANCE_PLAYER;
+    m_MobSkillList   = 0;
     m_HasSpellScript = 0;
-    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this),
-        std::make_unique<CTargetFind>(this));
+    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
 CPetEntity::~CPetEntity()
@@ -60,7 +59,7 @@ PETTYPE CPetEntity::getPetType()
 
 bool CPetEntity::isBstPet()
 {
-  return getPetType() == PETTYPE_JUG_PET || objtype == TYPE_MOB;
+    return getPetType() == PETTYPE_JUG_PET || objtype == TYPE_MOB;
 }
 
 std::string CPetEntity::GetScriptName()
@@ -99,36 +98,36 @@ std::string CPetEntity::GetScriptName()
 
 WYVERNTYPE CPetEntity::getWyvernType()
 {
-  TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
+    TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
 
-  switch(PMaster->GetSJob())
-  {
-    case JOB_BLM:
-    case JOB_BLU:
-    case JOB_SMN:
-    case JOB_WHM:
-    case JOB_RDM:
-    case JOB_SCH:
-    case JOB_GEO:
-      return WYVERNTYPE_DEFENSIVE;
-    case JOB_DRK:
-    case JOB_PLD:
-    case JOB_NIN:
-    case JOB_BRD:
-    case JOB_RUN:
-      return WYVERNTYPE_MULTIPURPOSE;
-    case JOB_WAR:
-    case JOB_SAM:
-    case JOB_THF:
-    case JOB_BST:
-    case JOB_RNG:
-    case JOB_COR:
-    case JOB_DNC:
-      return WYVERNTYPE_OFFENSIVE;
+    switch (PMaster->GetSJob())
+    {
+        case JOB_BLM:
+        case JOB_BLU:
+        case JOB_SMN:
+        case JOB_WHM:
+        case JOB_RDM:
+        case JOB_SCH:
+        case JOB_GEO:
+            return WYVERNTYPE_DEFENSIVE;
+        case JOB_DRK:
+        case JOB_PLD:
+        case JOB_NIN:
+        case JOB_BRD:
+        case JOB_RUN:
+            return WYVERNTYPE_MULTIPURPOSE;
+        case JOB_WAR:
+        case JOB_SAM:
+        case JOB_THF:
+        case JOB_BST:
+        case JOB_RNG:
+        case JOB_COR:
+        case JOB_DNC:
+            return WYVERNTYPE_OFFENSIVE;
 
-    default:
-      return WYVERNTYPE_OFFENSIVE;
-  };
+        default:
+            return WYVERNTYPE_OFFENSIVE;
+    };
 }
 
 void CPetEntity::PostTick()
@@ -167,7 +166,7 @@ void CPetEntity::Die()
 
 void CPetEntity::Spawn()
 {
-    //we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
+    // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
 
     if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == ECOSYSTEM::ELEMENTAL)
     {
@@ -183,7 +182,7 @@ void CPetEntity::Spawn()
 void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 {
     auto PAbility = state.GetAbility();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -192,33 +191,40 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             return;
         }
-        if (battleutils::IsParalyzed(this)) {
+        if (battleutils::IsParalyzed(this))
+        {
             // display paralyzed
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
             return;
         }
 
-        action.id = this->id;
-        action.actiontype = PAbility->getActionType();
-        action.actionid = PAbility->getID();
-        actionList_t& actionList = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        action.id                    = this->id;
+        action.actiontype            = PAbility->getActionType();
+        action.actionid              = PAbility->getID();
+        actionList_t& actionList     = action.getNewActionList();
+        actionList.ActionTargetID    = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.reaction = REACTION::NONE;
-        actionTarget.speceffect = SPECEFFECT::RECOIL;
-        actionTarget.animation = PAbility->getAnimationID();
-        actionTarget.param = 0;
-        auto prevMsg = actionTarget.messageID;
+        actionTarget.reaction        = REACTION::NONE;
+        actionTarget.speceffect      = SPECEFFECT::RECOIL;
+        actionTarget.animation       = PAbility->getAnimationID();
+        actionTarget.param           = 0;
+        auto prevMsg                 = actionTarget.messageID;
 
         int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
-        if (prevMsg == actionTarget.messageID) actionTarget.messageID = PAbility->getMessage();
-        if (actionTarget.messageID == 0) actionTarget.messageID = MSGBASIC_USES_JA;
+        if (prevMsg == actionTarget.messageID)
+        {
+            actionTarget.messageID = PAbility->getMessage();
+        }
+        if (actionTarget.messageID == 0)
+        {
+            actionTarget.messageID = MSGBASIC_USES_JA;
+        }
         actionTarget.param = value;
 
         if (value < 0)
         {
             actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
-            actionTarget.param = -value;
+            actionTarget.param     = -value;
         }
     }
 }

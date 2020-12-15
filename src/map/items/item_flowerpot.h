@@ -94,31 +94,31 @@ public:
     bool isDried();
     bool canGrow();
 
-    void setPlant(FLOWERPOT_PLANT_TYPE plant);
-    FLOWERPOT_PLANT_TYPE getPlant();
-    static uint16 getSeedID(FLOWERPOT_PLANT_TYPE plantType);
+    void                        setPlant(FLOWERPOT_PLANT_TYPE plant);
+    FLOWERPOT_PLANT_TYPE        getPlant();
+    static uint16               getSeedID(FLOWERPOT_PLANT_TYPE plantType);
     static FLOWERPOT_PLANT_TYPE getPlantFromSeed(uint16 seedID);
 
-    void setStage(FLOWERPOT_STAGE_TYPE stage);
+    void                 setStage(FLOWERPOT_STAGE_TYPE stage);
     FLOWERPOT_STAGE_TYPE getStage();
 
-    void setFirstCrystalFeed(FLOWERPOT_ELEMENT_TYPE element);
-    void setSecondCrystalFeed(FLOWERPOT_ELEMENT_TYPE element);
-    FLOWERPOT_ELEMENT_TYPE getExtraCrystalFeed();
-    FLOWERPOT_ELEMENT_TYPE getCommonCrystalFeed();
-    static int16 getItemFromElement(FLOWERPOT_ELEMENT_TYPE element);
+    void                          setFirstCrystalFeed(FLOWERPOT_ELEMENT_TYPE element);
+    void                          setSecondCrystalFeed(FLOWERPOT_ELEMENT_TYPE element);
+    FLOWERPOT_ELEMENT_TYPE        getExtraCrystalFeed();
+    FLOWERPOT_ELEMENT_TYPE        getCommonCrystalFeed();
+    static int16                  getItemFromElement(FLOWERPOT_ELEMENT_TYPE element);
     static FLOWERPOT_ELEMENT_TYPE getElementFromItem(int16 itemID);
 
-    void setPlantTimestamp(uint32 vanatime);
+    void   setPlantTimestamp(uint32 vanatime);
     uint32 getPlantTimestamp();
-    void setStageTimestamp(uint32 vanatime);
+    void   setStageTimestamp(uint32 vanatime);
     uint32 getStageTimestamp();
 
     void clearExamined();
     void markExamined();
     bool wasExamined();
 
-    void setStrength(uint8 strength);
+    void  setStrength(uint8 strength);
     uint8 getStrength();
 };
 

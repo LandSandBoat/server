@@ -27,10 +27,10 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 class CBattleEntity;
@@ -38,8 +38,7 @@ class CBattleEntity;
 class CLockOnPacket : public CBasicPacket
 {
 public:
-
-	CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget);
+    CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget);
 };
 
 #endif

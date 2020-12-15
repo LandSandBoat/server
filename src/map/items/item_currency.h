@@ -29,12 +29,10 @@
 class CItemCurrency : public CItem
 {
 public:
-
-	CItemCurrency(uint16);
-	virtual ~CItemCurrency();
+    CItemCurrency(uint16);
+    virtual ~CItemCurrency();
 
 private:
-
 };
 
 #endif

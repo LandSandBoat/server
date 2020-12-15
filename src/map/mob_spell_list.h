@@ -29,41 +29,39 @@
 
 #include "spell.h"
 
-#define MAX_MOBSPELLLIST_ID		500
+#define MAX_MOBSPELLLIST_ID 500
 
 typedef struct
 {
-	SpellID spellId;
-	uint16 min_level;
-	uint16 max_level;
+    SpellID spellId;
+    uint16  min_level;
+    uint16  max_level;
 } MobSpell_t;
 
 class CMobSpellList
 {
 public:
+    CMobSpellList();
 
-	CMobSpellList();
+    void AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl);
 
-  void AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl);
-
-  // main spell list
-  std::vector<MobSpell_t> m_spellList;
+    // main spell list
+    std::vector<MobSpell_t> m_spellList;
 
 private:
-
 };
 
 /************************************************************************
-*                                                                       *
-*  namespase для работы с заклинаниями                                  *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  namespase для работы с заклинаниями                                  *
+ *                                                                       *
+ ************************************************************************/
 
 namespace mobSpellList
 {
     void LoadMobSpellList();
 
     CMobSpellList* GetMobSpellList(uint16 MobSpellListID);
-};
+}; // namespace mobSpellList
 
 #endif

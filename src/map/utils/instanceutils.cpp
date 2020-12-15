@@ -30,28 +30,28 @@ std::unique_ptr<CInstanceLoader> Loader;
 
 namespace instanceutils
 {
-	void CheckInstance()
-	{
-		if (Loader)
-		{
-			if (Loader->Check())
-			{
+    void CheckInstance()
+    {
+        if (Loader)
+        {
+            if (Loader->Check())
+            {
                 // instance load finished
                 Loader.reset();
-			}
-		}
-	}
+            }
+        }
+    }
 
-	void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester)
-	{
+    void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester)
+    {
         CZone* PZone = zoneutils::GetZone(zoneid);
-		if (!Loader && PZone)
-		{
-			Loader = std::make_unique<CInstanceLoader>(instanceid, PZone, PRequester);
-		}
-		else
-		{
-			luautils::OnInstanceCreated(PRequester, nullptr);
-		}
-	}
-};
+        if (!Loader && PZone)
+        {
+            Loader = std::make_unique<CInstanceLoader>(instanceid, PZone, PRequester);
+        }
+        else
+        {
+            luautils::OnInstanceCreated(PRequester, nullptr);
+        }
+    }
+}; // namespace instanceutils

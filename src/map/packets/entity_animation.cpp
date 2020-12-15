@@ -27,16 +27,16 @@
 
 const char* CEntityAnimationPacket::Fade_Out = "kesu";
 
-CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity * PEntity, const char type[4])
+CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity* PEntity, const char type[4])
 {
-	this->type = 0x38;
-	this->size = 0x0A;
+    this->type = 0x38;
+    this->size = 0x0A;
 
-	ref<uint32>(0x04) = PEntity->id;
-	ref<uint32>(0x08) = PEntity->id;
+    ref<uint32>(0x04) = PEntity->id;
+    ref<uint32>(0x08) = PEntity->id;
 
-	memcpy(data + ((0x0C)), type, 4);
+    memcpy(data + ((0x0C)), type, 4);
 
-	ref<uint16>(0x10) = PEntity->targid;
-	ref<uint16>(0x12) = PEntity->targid;
+    ref<uint16>(0x10) = PEntity->targid;
+    ref<uint16>(0x12) = PEntity->targid;
 }

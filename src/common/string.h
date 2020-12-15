@@ -33,133 +33,133 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace marshal
 {
-template <std::size_t capacity, bool precise = false>
-class string
-{
-private:
-    char buffer[capacity] = {};
+    template <std::size_t capacity, bool precise = false>
+    class string
+    {
+    private:
+        char buffer[capacity] = {};
 
-    template <bool condition = precise>
-    typename std::enable_if<condition>::type cleanup(std::size_t index)
-    {
-        std::fill_n(buffer + index, capacity - index, '\0');
-    }
-    template <bool condition = precise>
-    typename std::enable_if<!condition>::type cleanup(std::size_t index)
-    {
-        buffer[std::min(index, capacity - 1)] = '\0';
-    }
+        template <bool condition = precise>
+        typename std::enable_if<condition>::type cleanup(std::size_t index)
+        {
+            std::fill_n(buffer + index, capacity - index, '\0');
+        }
+        template <bool condition = precise>
+        typename std::enable_if<!condition>::type cleanup(std::size_t index)
+        {
+            buffer[std::min(index, capacity - 1)] = '\0';
+        }
 
-    void assign(std::string const& text)
-    {
-        auto index = std::min(text.length(), capacity);
-        std::copy_n(text.begin(), index, buffer);
+        void assign(std::string const& text)
+        {
+            auto index = std::min(text.length(), capacity);
+            std::copy_n(text.begin(), index, buffer);
 
-        cleanup(index);
-    }
+            cleanup(index);
+        }
 
-public:
-    // Constructors
-    string()
-    {
-    }
+    public:
+        // Constructors
+        string()
+        {
+        }
 
-    // Copy
-    template <std::size_t R, bool C>
-    string(string<R, C> const& other)
-    : string(std::string(other))
-    {
-    }
-    string(char const* text)
-    : string(std::string(text))
-    {
-    }
+        // Copy
+        template <std::size_t R, bool C>
+        string(string<R, C> const& other)
+        : string(std::string(other))
+        {
+        }
+        string(char const* text)
+        : string(std::string(text))
+        {
+        }
 
-    string(std::string const& text)
-    {
-        assign(text);
-    }
+        string(std::string const& text)
+        {
+            assign(text);
+        }
 
-    // Conversions
-    operator std::string() const
-    {
-        return std::string(buffer, buffer + capacity);
-    }
+        // Conversions
+        operator std::string() const
+        {
+            return std::string(buffer, buffer + capacity);
+        }
 
-    // Indexing
-    char& operator[](std::size_t index)
-    {
-        return buffer[index];
-    }
+        // Indexing
+        char& operator[](std::size_t index)
+        {
+            return buffer[index];
+        }
 
-    // Dereference
-    char& operator*()
-    {
-        return *buffer;
-    }
+        // Dereference
+        char& operator*()
+        {
+            return *buffer;
+        }
 
-    // Bool conversion, true if non-empty
-    explicit operator bool() const
-    {
-        return buffer[0] != '\0';
-    }
+        // Bool conversion, true if non-empty
+        explicit operator bool() const
+        {
+            return buffer[0] != '\0';
+        }
 
-    // Container functions
-    char* begin()
-    {
-        return buffer;
-    }
+        // Container functions
+        char* begin()
+        {
+            return buffer;
+        }
 
-    char* end()
-    {
-        return buffer + capacity;
-    }
+        char* end()
+        {
+            return buffer + capacity;
+        }
 
-    char const* cbegin()
-    {
-        return buffer;
-    }
+        char const* cbegin()
+        {
+            return buffer;
+        }
 
-    char const* cend()
-    {
-        return buffer + capacity;
-    }
+        char const* cend()
+        {
+            return buffer + capacity;
+        }
 
-    char const* data()
-    {
-        return buffer;
-    }
+        char const* data()
+        {
+            return buffer;
+        }
 
-    std::size_t size()
-    {
-        return capacity;
-    }
-    std::size_t max_size()
-    {
-        return capacity;
-    }
+        std::size_t size()
+        {
+            return capacity;
+        }
+        std::size_t max_size()
+        {
+            return capacity;
+        }
 
-    // Stream operators
+        // Stream operators
+        template <std::size_t N, bool C>
+        friend std::ostream operator<<(std::ostream& stream, string const& str);
+        template <std::size_t N, bool C>
+        friend std::istream operator>>(std::istream& stream, string& str);
+    };
+
     template <std::size_t N, bool C>
-    friend std::ostream operator<<(std::ostream& stream, string const& str);
+    std::ostream& operator<<(std::ostream& stream, string<N, C> const& str)
+    {
+        return stream << std::string(str);
+    }
+
     template <std::size_t N, bool C>
-    friend std::istream operator>>(std::istream& stream, string& str);
-};
-
-template <std::size_t N, bool C>
-std::ostream& operator<<(std::ostream& stream, string<N, C> const& str)
-{
-    return stream << std::string(str);
-}
-
-template <std::size_t N, bool C>
-std::istream& operator>>(std::istream& stream, string<N, C>& str)
-{
-    std::string value;
-    stream >> value;
-    str.assign(value);
-    return stream;
-}
+    std::istream& operator>>(std::istream& stream, string<N, C>& str)
+    {
+        std::string value;
+        stream >> value;
+        str.assign(value);
+        return stream;
+    }
 } // namespace marshal
 
 #if defined(_MSC_VER)

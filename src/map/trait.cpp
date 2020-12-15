@@ -19,107 +19,107 @@
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
 #include "lua/luautils.h"
 
+#include "blue_trait.h"
 #include "entities/battleentity.h"
 #include "map.h"
 #include "trait.h"
-#include "blue_trait.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 CTrait::CTrait(uint8 id)
-    : m_id(id)
+: m_id(id)
 {
 }
 
 /************************************************************************
-*                                                                       *
-*  Namespace for trait loading                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Namespace for trait loading                                          *
+ *                                                                       *
+ ************************************************************************/
 namespace traits
 {
     TraitList_t PTraitsList[MAX_JOBTYPE]; // Trait lists by job
 
     /************************************************************************
-    *                                                                       *
-    *  LoadTraitList                                                        *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *  LoadTraitList                                                        *
+     *                                                                       *
+     ************************************************************************/
     void LoadTraitsList()
     {
-	    const char* Query = "SELECT traitid, job, level, rank, modifier, value, content_tag, meritid \
+        const char* Query = "SELECT traitid, job, level, rank, modifier, value, content_tag, meritid \
 							 FROM traits \
                              WHERE traitid < %u \
 							 ORDER BY job, traitid ASC, rank DESC";
 
-	    int32 ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        int32 ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
 
-	    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
-	    {
-		    while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-		    {
-				char* contentTag = nullptr;
-				Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                char* contentTag = nullptr;
+                Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
 
-				if (luautils::IsContentEnabled(contentTag)==false)
+                if (luautils::IsContentEnabled(contentTag) == false)
                 {
-					continue;
-				}
+                    continue;
+                }
 
-			    CTrait* PTrait = new CTrait(Sql_GetIntData(SqlHandle,0));
+                CTrait* PTrait = new CTrait(Sql_GetIntData(SqlHandle, 0));
 
-			    PTrait->setJob(Sql_GetIntData(SqlHandle,1));
-			    PTrait->setLevel(Sql_GetIntData(SqlHandle,2));
-                PTrait->setRank(Sql_GetIntData(SqlHandle,3));
-                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle,4)));
-                PTrait->setValue(Sql_GetIntData(SqlHandle,5));
+                PTrait->setJob(Sql_GetIntData(SqlHandle, 1));
+                PTrait->setLevel(Sql_GetIntData(SqlHandle, 2));
+                PTrait->setRank(Sql_GetIntData(SqlHandle, 3));
+                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle, 4)));
+                PTrait->setValue(Sql_GetIntData(SqlHandle, 5));
                 PTrait->setMeritId(Sql_GetIntData(SqlHandle, 7));
 
-			    PTraitsList[PTrait->getJob()].push_back(PTrait);
-		    }
-	    }
+                PTraitsList[PTrait->getJob()].push_back(PTrait);
+            }
+        }
 
-	    Query = "SELECT trait_category, trait_points_needed, traitid, modifier, value \
+        Query = "SELECT trait_category, trait_points_needed, traitid, modifier, value \
 							 FROM blue_traits \
                              WHERE traitid < %u \
 							 ORDER BY trait_category ASC, trait_points_needed DESC";
 
-	    ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
 
-	    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
-	    {
-		    while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-		    {
-			    CBlueTrait* PTrait = new CBlueTrait(Sql_GetIntData(SqlHandle,0), Sql_GetIntData(SqlHandle,2));
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                CBlueTrait* PTrait = new CBlueTrait(Sql_GetIntData(SqlHandle, 0), Sql_GetIntData(SqlHandle, 2));
 
-			    PTrait->setJob(JOB_BLU);
+                PTrait->setJob(JOB_BLU);
                 PTrait->setRank(1);
-                PTrait->setPoints(Sql_GetIntData(SqlHandle,1));
-                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle,3)));
-                PTrait->setValue(Sql_GetIntData(SqlHandle,4));
+                PTrait->setPoints(Sql_GetIntData(SqlHandle, 1));
+                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle, 3)));
+                PTrait->setValue(Sql_GetIntData(SqlHandle, 4));
 
-			    PTraitsList[JOB_BLU].push_back(PTrait);
-		    }
-	    }
+                PTraitsList[JOB_BLU].push_back(PTrait);
+            }
+        }
     }
 
     /************************************************************************
-    *                                                                       *
-    *  Get List of Traits by Main Job or Sub Job                            *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *  Get List of Traits by Main Job or Sub Job                            *
+     *                                                                       *
+     ************************************************************************/
 
     TraitList_t* GetTraits(uint8 JobID)
     {
         TPZ_DEBUG_BREAK_IF(JobID >= MAX_JOBTYPE);
 
-	    return &PTraitsList[JobID];
+        return &PTraitsList[JobID];
     }
-};
+}; // namespace traits

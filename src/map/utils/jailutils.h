@@ -41,10 +41,10 @@ TODO: Common actions/procedures/needs include:
 */
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CCharEntity;
 
@@ -54,6 +54,6 @@ namespace jailutils
 
     void Add(CCharEntity* PChar);
     void Del(CCharEntity* PChar);
-};
+}; // namespace jailutils
 
 #endif

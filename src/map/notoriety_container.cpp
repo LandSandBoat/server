@@ -62,8 +62,8 @@ bool CNotorietyContainer::hasEnmity()
         {
             if (auto* mob = dynamic_cast<CMobEntity*>(entry))
             {
-                EnmityList_t* mobEnmityList = mob->PEnmityContainer->GetEnmityList();
-                bool notOnEnmityList = mobEnmityList->find(static_cast<uint16>(m_POwner->id)) == mobEnmityList->end();
+                EnmityList_t* mobEnmityList   = mob->PEnmityContainer->GetEnmityList();
+                bool          notOnEnmityList = mobEnmityList->find(static_cast<uint16>(m_POwner->id)) == mobEnmityList->end();
                 if ((mob->isAlive() && notOnEnmityList) || mob->isDead())
                 {
                     toRemove.emplace_back(entry);

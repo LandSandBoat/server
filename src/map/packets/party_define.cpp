@@ -52,9 +52,12 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint16 targid = 0;
-                CCharEntity* PChar = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
-                if (PChar) targid = PChar->targid;
+                uint16       targid = 0;
+                CCharEntity* PChar  = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
+                if (PChar)
+                {
+                    targid = PChar->targid;
+                }
                 ref<uint32>(12 * i + 0x08) = Sql_GetUIntData(SqlHandle, 0);
                 ref<uint16>(12 * i + 0x0C) = targid;
                 ref<uint16>(12 * i + 0x0E) = Sql_GetUIntData(SqlHandle, 1);

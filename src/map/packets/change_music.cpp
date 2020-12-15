@@ -35,6 +35,6 @@ CChangeMusicPacket::CChangeMusicPacket(uint8 BlockID, uint8 MusicTrackID)
     this->type = 0x5F;
     this->size = 0x04;
 
-    ref<uint8>(0x04) = BlockID;        // block
-    ref<uint8>(0x06) = MusicTrackID;   // music
+    ref<uint8>(0x04) = BlockID;      // block
+    ref<uint8>(0x06) = MusicTrackID; // music
 }

@@ -16,9 +16,9 @@ namespace trustutils
     void SpawnTrust(CCharEntity* PMaster, uint32 TrustID);
 
     // Internal
-    void BuildTrust(uint32 TrustID);
+    void          BuildTrust(uint32 TrustID);
     CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID);
-    void LoadTrustStatsAndSkills(CTrustEntity* PTrust);
+    void          LoadTrustStatsAndSkills(CTrustEntity* PTrust);
 }; // namespace trustutils
 
 #endif

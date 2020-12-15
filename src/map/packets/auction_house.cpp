@@ -21,15 +21,14 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "auction_house.h"
 
-#include "../map.h"
 #include "../entities/charentity.h"
-#include "../vana_time.h"
+#include "../map.h"
 #include "../utils/itemutils.h"
-
+#include "../vana_time.h"
 
 bool IsAuctionOpen = true; // Trading is allowed at the auction
 
@@ -60,42 +59,42 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, CItem* PItem, uint8 quant
     }
     else // This is a single item.
     {
-        auctionFee = (uint32)(map_config.ah_base_fee_single  + (price * map_config.ah_tax_rate_single / 100));
+        auctionFee = (uint32)(map_config.ah_base_fee_single + (price * map_config.ah_tax_rate_single / 100));
     }
 
     auctionFee = std::clamp<uint32>(auctionFee, 0, map_config.ah_max_fee);
 
-    ref<uint8>(0x04) = action;
-    ref<uint8>(0x05) = 0xFF;
-    ref<uint8>(0x06) = IsAuctionOpen;
-    ref<uint8>(0x07) = 0x02;
+    ref<uint8>(0x04)  = action;
+    ref<uint8>(0x05)  = 0xFF;
+    ref<uint8>(0x06)  = IsAuctionOpen;
+    ref<uint8>(0x07)  = 0x02;
     ref<uint32>(0x08) = auctionFee;
 
     ref<uint32>(0x0E) = PItem->getID();
-    ref<uint8>(0x0C) = PItem->getSlotID();
+    ref<uint8>(0x0C)  = PItem->getSlotID();
 
     ref<uint8>(0x10) = quantity;
     ref<uint8>(0x30) = AUCTION_ID;
 }
 
-//e.g. client history, client probes a slot number which you give the correct itemId+price
+// e.g. client history, client probes a slot number which you give the correct itemId+price
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 slot, CCharEntity* PChar)
 {
     this->type = 0x4C;
     this->size = 0x1E;
 
     ref<uint8>(0x04) = action;
-    ref<uint8>(0x05) = slot;          // Serial number of the subject
+    ref<uint8>(0x05) = slot; // Serial number of the subject
     ref<uint8>(0x06) = IsAuctionOpen;
 
     if (slot < 7 && slot < PChar->m_ah_history.size())
     {
         ref<uint8>(0x14) = 0x03;
-        ref<uint8>(0x16) = 0x01;                                   // Value is changed, the purpose is unknown UNKNOWN
+        ref<uint8>(0x16) = 0x01; // Value is changed, the purpose is unknown UNKNOWN
 
         ref<uint16>(0x28) = PChar->m_ah_history.at(slot).itemid;    // Item ID of item in slot
-        ref<uint8>(0x2A) = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size
-        ref<uint8>(0x2B) = 0x02;                                   // Number of items stack size?
+        ref<uint8>(0x2A)  = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size
+        ref<uint8>(0x2B)  = 0x02;                                   // Number of items stack size?
         ref<uint32>(0x2C) = PChar->m_ah_history.at(slot).price;     // Selling price
 
         ref<uint8>(0x30) = AUCTION_ID;
@@ -107,8 +106,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 ite
     this->type = 0x4C;
     this->size = 0x1E;
 
-    ref<uint8>(0x04) = action;
-    ref<uint8>(0x06) = message;
+    ref<uint8>(0x04)  = action;
+    ref<uint8>(0x06)  = message;
     ref<uint32>(0x08) = price;
     ref<uint16>(0x0C) = itemid;
 }
@@ -128,11 +127,11 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntit
         ref<uint8>(0x14) = 0x03;
         ref<uint8>(0x16) = 0x01; // Value is changed, the purpose is unknown UNKNOWN
 
-        memcpy(data+(0x18), PChar->GetName(), PChar->name.size());
+        memcpy(data + (0x18), PChar->GetName(), PChar->name.size());
 
         ref<uint16>(0x28) = PChar->m_ah_history.at(slot).itemid;    // Id sell items item id
-        ref<uint8>(0x2A) = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size
-        ref<uint8>(0x2B) = 0x02;                                   // Number of items stack size?
+        ref<uint8>(0x2A)  = 1 - PChar->m_ah_history.at(slot).stack; // Number of items stack size
+        ref<uint8>(0x2B)  = 0x02;                                   // Number of items stack size?
         ref<uint32>(0x2C) = PChar->m_ah_history.at(slot).price;     // Price selling price
 
         ref<uint8>(0x30) = AUCTION_ID;

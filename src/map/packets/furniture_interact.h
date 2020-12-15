@@ -27,17 +27,16 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CItem;
 
 class CFurnitureInteractPacket : public CBasicPacket
 {
 public:
-
     CFurnitureInteractPacket(CItem* PItem, uint8 LocationID, uint8 slotID);
 };
 

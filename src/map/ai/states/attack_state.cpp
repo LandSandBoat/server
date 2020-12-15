@@ -23,13 +23,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../entities/battleentity.h"
 
-#include "../../utils/battleutils.h"
 #include "../../packets/action.h"
+#include "../../utils/battleutils.h"
 #include "../ai_container.h"
 
-CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid) :
-    CState(PEntity, targid),
-    m_PEntity(PEntity)
+CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
+: CState(PEntity, targid)
+, m_PEntity(PEntity)
 {
     PEntity->SetBattleTargetID(targid);
     PEntity->SetBattleStartTime(server_clock::now());
@@ -56,7 +56,7 @@ bool CAttackState::Update(time_point tick)
     {
         if (CanAttack(PTarget))
         {
-            //CanAttack may have set target id to 0 (disengage from out of range)
+            // CanAttack may have set target id to 0 (disengage from out of range)
             if (m_PEntity->GetBattleTargetID() == 0)
             {
                 return true;
@@ -85,7 +85,10 @@ bool CAttackState::Update(time_point tick)
 
 void CAttackState::Cleanup(time_point tick)
 {
-    if (!m_PEntity->isDead()) m_PEntity->OnDisengage(*this);
+    if (!m_PEntity->isDead())
+    {
+        m_PEntity->OnDisengage(*this);
+    }
 }
 
 void CAttackState::ResetAttackTimer()
@@ -96,8 +99,8 @@ void CAttackState::ResetAttackTimer()
 void CAttackState::UpdateTarget(uint16 targid)
 {
     m_errorMsg.reset();
-    auto newTargid {m_PEntity->GetBattleTargetID()};
-    CBattleEntity* PNewTarget {nullptr};
+    auto           newTargid{ m_PEntity->GetBattleTargetID() };
+    CBattleEntity* PNewTarget{ nullptr };
     if (newTargid != 0)
     {
         PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);

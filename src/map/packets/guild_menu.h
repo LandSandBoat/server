@@ -28,22 +28,21 @@
 
 enum GUILDSTATUS
 {
-	GUILD_OPEN		= 0,
-	GUILD_CLOSE		= 1,
-	GUILD_HOLYDAY	= 2
+    GUILD_OPEN    = 0,
+    GUILD_CLOSE   = 1,
+    GUILD_HOLYDAY = 2
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CGuildMenuPacket : public CBasicPacket
 {
 public:
-
-	CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday);
+    CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday);
 };
 
 #endif

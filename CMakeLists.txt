@@ -16,7 +16,6 @@ include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
 include(ClangFormat)
-include(ClangTidy)
 include(Tracy)
 
 # CMake adds "/W3" by default on MSVC, remove it.
@@ -65,4 +64,6 @@ add_library(no_warnings INTERFACE)
 set_no_warnings(no_warnings)
 
 add_subdirectory(ext)
+
+include(ClangTidy)
 add_subdirectory(src)

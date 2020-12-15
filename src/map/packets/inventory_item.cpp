@@ -22,13 +22,12 @@
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "inventory_item.h"
 
 #include "../utils/itemutils.h"
 #include "../vana_time.h"
-
 
 CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {
@@ -43,7 +42,7 @@ CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8
         ref<uint32>(0x04) = PItem->getQuantity();
         ref<uint32>(0x08) = PItem->getCharPrice();
         ref<uint16>(0x0C) = PItem->getID();
-        memcpy(data + 0x11 , PItem->m_extra, sizeof(PItem->m_extra));
+        memcpy(data + 0x11, PItem->m_extra, sizeof(PItem->m_extra));
 
         if (PItem->isSubType(ITEM_CHARGED))
         {
@@ -64,7 +63,7 @@ CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8
                 else
                 {
                     uint32 CurrentTime = CVanaTime::getInstance()->getVanaTime();
-                    ref<uint32>(0x15) = ((CItemUsable*)PItem)->getNextUseTime();
+                    ref<uint32>(0x15)  = ((CItemUsable*)PItem)->getNextUseTime();
 
                     // Not sent if the item is unequipped.
 

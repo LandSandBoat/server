@@ -21,17 +21,16 @@
 
 #include "../../common/showmsg.h"
 
-#include "lua_mobskill.h"
 #include "../mobskill.h"
-
+#include "lua_mobskill.h"
 
 /************************************************************************
-*                                                                       *
-*  Constructor                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Constructor                                                          *
+ *                                                                       *
+ ************************************************************************/
 
-CLuaMobSkill::CLuaMobSkill(lua_State *L)
+CLuaMobSkill::CLuaMobSkill(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -45,10 +44,10 @@ CLuaMobSkill::CLuaMobSkill(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Constructor                                                          *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Constructor                                                          *
+ *                                                                       *
+ ************************************************************************/
 
 CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 {
@@ -56,12 +55,12 @@ CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 }
 
 /************************************************************************
-*                                                                       *
-*  Set the tp skill message to be displayed (cure/damage/enfeeb)        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Set the tp skill message to be displayed (cure/damage/enfeeb)        *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaMobSkill::setMsg(lua_State *L)
+inline int32 CLuaMobSkill::setMsg(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -70,7 +69,7 @@ inline int32 CLuaMobSkill::setMsg(lua_State *L)
     return 0;
 }
 
-inline int32 CLuaMobSkill::hasMissMsg(lua_State *L)
+inline int32 CLuaMobSkill::hasMissMsg(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -78,7 +77,7 @@ inline int32 CLuaMobSkill::hasMissMsg(lua_State *L)
     return 1;
 }
 
-inline int32 CLuaMobSkill::isSingle(lua_State *L)
+inline int32 CLuaMobSkill::isSingle(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -86,7 +85,7 @@ inline int32 CLuaMobSkill::isSingle(lua_State *L)
     return 1;
 }
 
-inline int32 CLuaMobSkill::isAoE(lua_State *L)
+inline int32 CLuaMobSkill::isAoE(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -94,7 +93,7 @@ inline int32 CLuaMobSkill::isAoE(lua_State *L)
     return 1;
 }
 
-inline int32 CLuaMobSkill::isConal(lua_State *L)
+inline int32 CLuaMobSkill::isConal(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -102,7 +101,7 @@ inline int32 CLuaMobSkill::isConal(lua_State *L)
     return 1;
 }
 
-inline int32 CLuaMobSkill::getTotalTargets(lua_State *L)
+inline int32 CLuaMobSkill::getTotalTargets(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -110,7 +109,7 @@ inline int32 CLuaMobSkill::getTotalTargets(lua_State *L)
     return 1;
 }
 
-inline int32 CLuaMobSkill::getMsg(lua_State *L)
+inline int32 CLuaMobSkill::getMsg(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaMobSkill == nullptr);
 
@@ -158,10 +157,10 @@ inline int32 CLuaMobSkill::getMobHPP(lua_State* L)
 }
 
 /************************************************************************
-*                                                                       *
-*  declare lua function                                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  declare lua function                                                 *
+ *                                                                       *
+ ************************************************************************/
 // clang-format off
 const char CLuaMobSkill::className[] = "CMobSkill";
 Lunar<CLuaMobSkill>::Register_t CLuaMobSkill::methods[] =

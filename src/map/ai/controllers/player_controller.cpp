@@ -21,27 +21,28 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "player_controller.h"
 
-#include "../ai_container.h"
-#include "../states/death_state.h"
 #include "../../entities/charentity.h"
 #include "../../items/item_weapon.h"
+#include "../../latent_effect_container.h"
 #include "../../packets/char_update.h"
 #include "../../packets/lock_on.h"
+#include "../../recast_container.h"
+#include "../../roe.h"
+#include "../../status_effect_container.h"
 #include "../../utils/battleutils.h"
 #include "../../utils/charutils.h"
-#include "../../recast_container.h"
-#include "../../latent_effect_container.h"
-#include "../../status_effect_container.h"
 #include "../../weapon_skill.h"
-#include "../../roe.h"
+#include "../ai_container.h"
+#include "../states/death_state.h"
 
-CPlayerController::CPlayerController(CCharEntity* _PChar) :
-    CController(_PChar)
+CPlayerController::CPlayerController(CCharEntity* _PChar)
+: CController(_PChar)
 {
 }
 
 void CPlayerController::Tick(time_point)
-{}
+{
+}
 
 bool CPlayerController::Cast(uint16 targid, SpellID spellid)
 {
@@ -61,8 +62,8 @@ bool CPlayerController::Engage(uint16 targid)
 {
     //#TODO: pet engage/disengage
     std::unique_ptr<CBasicPacket> errMsg;
-    auto PChar = static_cast<CCharEntity*>(POwner);
-    auto PTarget = PChar->IsValidTarget(targid, TARGET_ENEMY, errMsg);
+    auto                          PChar   = static_cast<CCharEntity*>(POwner);
+    auto                          PTarget = PChar->IsValidTarget(targid, TARGET_ENEMY, errMsg);
 
     if (PTarget)
     {
@@ -162,7 +163,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
             return false;
         }
 
-        if (PChar->StatusEffectContainer->HasStatusEffect({EFFECT_AMNESIA, EFFECT_IMPAIRMENT}))
+        if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_ANY_WS));
             return false;
@@ -176,15 +177,12 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
 
         if (PWeaponSkill->getType() == SKILL_ARCHERY || PWeaponSkill->getType() == SKILL_MARKSMANSHIP)
         {
-            auto PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+            auto PItem  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
             auto weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_RANGED]);
-            auto ammo = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_AMMO]);
+            auto ammo   = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_AMMO]);
 
             // before allowing ranged weapon skill...
-            if (PItem == nullptr ||
-                !weapon || !weapon->isRanged() ||
-                !ammo || !ammo->isRanged() ||
-                PChar->equip[SLOT_AMMO] == 0)
+            if (PItem == nullptr || !weapon || !weapon->isRanged() || !ammo || !ammo->isRanged() || PChar->equip[SLOT_AMMO] == 0)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON));
                 return false;

@@ -26,17 +26,17 @@
 
 enum FISHACTION
 {
-    FISHACTION_CHECK    = 2,  // This is always the first 0x110 packet. //
-    FISHACTION_FINISH   = 3,  // This is the next 0x110 after 0x115. //
-    FISHACTION_END      = 4,
-    FISHACTION_WARNING  = 5   // This is the 0x110 packet if the time is going on too long. //
+    FISHACTION_CHECK   = 2, // This is always the first 0x110 packet. //
+    FISHACTION_FINISH  = 3, // This is the next 0x110 after 0x115. //
+    FISHACTION_END     = 4,
+    FISHACTION_WARNING = 5 // This is the 0x110 packet if the time is going on too long. //
 };
 
 /************************************************************************
-*																		*
-*  Все методы, необходимые для реализации рыбалки						*
-*																		*
-************************************************************************/
+ *																		*
+ *  Все методы, необходимые для реализации рыбалки						*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
@@ -46,6 +46,6 @@ namespace fishingutils
 
     void StartFishing(CCharEntity* PChar);
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special);
-};
+}; // namespace fishingutils
 
 #endif

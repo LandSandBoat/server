@@ -22,7 +22,7 @@
 #include "lua_action.h"
 #include "../packets/action.h"
 
-CLuaAction::CLuaAction(lua_State *L)
+CLuaAction::CLuaAction(lua_State* L)
 {
     if (!lua_isnil(L, -1) && !lua_isnil(L, -2))
     {
@@ -39,7 +39,6 @@ CLuaAction::CLuaAction(action_t* Action)
 {
     m_PLuaAction = Action;
 }
-
 
 int32 CLuaAction::ID(lua_State* L)
 {
@@ -239,7 +238,6 @@ inline int32 CLuaAction::addEffectParam(lua_State* L)
     }
     return 0;
 }
-
 
 int32 CLuaAction::addEffectMessage(lua_State* L)
 {

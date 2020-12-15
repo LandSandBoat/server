@@ -6,11 +6,11 @@
 
 CIndependantAnimationPacket::CIndependantAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, uint16 animId, uint8 type)
 {
-	this->type = 0x3A;
-	this->size = 0x14;
+    this->type = 0x3A;
+    this->size = 0x14;
 
-	if (PEntity)
-	{
+    if (PEntity)
+    {
         ref<uint32>(0x04) = PEntity->id;
         ref<uint32>(0x08) = PTarget->id;
 
@@ -20,5 +20,5 @@ CIndependantAnimationPacket::CIndependantAnimationPacket(CBaseEntity* PEntity, C
         ref<uint16>(0x10) = animId;
 
         ref<uint8>(0x12) = type;
-	}
+    }
 }

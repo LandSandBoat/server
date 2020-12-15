@@ -23,18 +23,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "player_controller.h"
 
 #include "../../ability.h"
-#include "../ai_container.h"
-#include "../../status_effect_container.h"
-#include "../../enmity_container.h"
-#include "../../ai/states/despawn_state.h"
 #include "../../ai/helpers/gambits_container.h"
+#include "../../ai/states/despawn_state.h"
+#include "../../ai/states/range_state.h"
+#include "../../enmity_container.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
+#include "../../items/item_weapon.h"
+#include "../../mob_spell_container.h"
 #include "../../packets/char.h"
 #include "../../recast_container.h"
-#include "../../mob_spell_container.h"
-#include "../../ai/states/range_state.h"
-#include "../../items/item_weapon.h"
+#include "../../status_effect_container.h"
+#include "../ai_container.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
@@ -50,13 +50,13 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
-    POwner->status = STATUS_DISAPPEAR;
-    m_LastTopEnmity = nullptr;
+    POwner->status     = STATUS_DISAPPEAR;
+    m_LastTopEnmity    = nullptr;
 }
 
 void CTrustController::Despawn()
 {
-    POwner->PMaster = nullptr;
+    POwner->PMaster   = nullptr;
     POwner->animation = ANIMATION_DESPAWN;
     CMobController::Despawn();
 }
@@ -105,9 +105,9 @@ void CTrustController::DoCombatTick(time_point tick)
         m_LastTopEnmity = nullptr;
     }
 
-    CTrustEntity* PTrust = static_cast<CTrustEntity*>(POwner);
-    CCharEntity* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
-    PTarget = POwner->GetBattleTarget();
+    CTrustEntity* PTrust  = static_cast<CTrustEntity*>(POwner);
+    CCharEntity*  PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+    PTarget               = POwner->GetBattleTarget();
 
     if (PTarget)
     {
@@ -125,48 +125,49 @@ void CTrustController::DoCombatTick(time_point tick)
 
             switch (PTrust->m_MovementType)
             {
-            case NO_MOVE:
-            {
-                if (currentDistanceToMaster > CastingDistance)
+                case NO_MOVE:
                 {
-                    PathOutToDistance(PTarget, 9.0f);
-                }
-                else if (currentDistanceToTarget > CastingDistance)
-                {
-                    PathOutToDistance(PTarget, 9.0f);
-                }
-                break;
-            }
-            case MID_RANGE:
-            {
-                PathOutToDistance(PTarget, 6.0f);
-                break;
-            }
-            case LONG_RANGE:
-            {
-                PathOutToDistance(PTarget, 12.0f);
-                break;
-            }
-            case MELEE_RANGE:
-            default:
-            {
-                std::unique_ptr<CBasicPacket> err;
-                if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
-                {
-                    if (currentDistanceToTarget > RoamDistance)
+                    if (currentDistanceToMaster > CastingDistance)
                     {
-                        if (currentDistanceToTarget < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                        PathOutToDistance(PTarget, 9.0f);
+                    }
+                    else if (currentDistanceToTarget > CastingDistance)
+                    {
+                        PathOutToDistance(PTarget, 9.0f);
+                    }
+                    break;
+                }
+                case MID_RANGE:
+                {
+                    PathOutToDistance(PTarget, 6.0f);
+                    break;
+                }
+                case LONG_RANGE:
+                {
+                    PathOutToDistance(PTarget, 12.0f);
+                    break;
+                }
+                case MELEE_RANGE:
+                default:
+                {
+                    std::unique_ptr<CBasicPacket> err;
+                    if (!POwner->CanAttack(PTarget, err) && POwner->speed > 0)
+                    {
+                        if (currentDistanceToTarget > RoamDistance)
                         {
-                            POwner->PAI->PathFind->FollowPath();
-                        }
-                        else if (POwner->GetSpeed() > 0)
-                        {
-                            POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
+                            if (currentDistanceToTarget < RoamDistance * 3.0f &&
+                                POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+                            {
+                                POwner->PAI->PathFind->FollowPath();
+                            }
+                            else if (POwner->GetSpeed() > 0)
+                            {
+                                POwner->PAI->PathFind->StepTo(PTarget->loc.p, true);
+                            }
                         }
                     }
+                    break;
                 }
-                break;
-            }
             }
 
             if (!POwner->PAI->PathFind->IsFollowingPath())
@@ -190,9 +191,9 @@ void CTrustController::DoRoamTick(time_point tick)
 {
     TracyZoneScoped;
 
-    auto PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+    auto PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
     auto masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
-    bool masterMeleeSwing = masterLastAttackTime > server_clock::now() - 1s;
+    bool masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
     bool trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
 
     if (PMaster->PAI->IsEngaged() && trustEngageCondition)
@@ -200,18 +201,17 @@ void CTrustController::DoRoamTick(time_point tick)
         POwner->PAI->Internal_Engage(PMaster->GetBattleTargetID());
     }
 
-    uint8 currentPartyPos = GetPartyPosition();
-    CBattleEntity* PFollowTarget = (GetPartyPosition() > 0) ? (CBattleEntity*)PMaster->PTrusts.at(currentPartyPos - 1) : POwner->PMaster;
-    float currentDistance = distance(POwner->loc.p, PFollowTarget->loc.p);
+    uint8          currentPartyPos = GetPartyPosition();
+    CBattleEntity* PFollowTarget   = (GetPartyPosition() > 0) ? (CBattleEntity*)PMaster->PTrusts.at(currentPartyPos - 1) : POwner->PMaster;
+    float          currentDistance = distance(POwner->loc.p, PFollowTarget->loc.p);
 
     for (auto POtherTrust : PMaster->PTrusts)
     {
         if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
         {
-            auto diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
-            auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos =
-            {
+            auto       diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
+            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+            position_t new_pos    = {
                 POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
                 POtherTrust->loc.p.y,
                 POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
@@ -243,9 +243,7 @@ void CTrustController::DoRoamTick(time_point tick)
         }
     }
 
-    if (POwner->CanRest() &&
-        m_Tick - POwner->LastAttacked > m_tickDelays.at(0) &&
-        m_Tick - m_CombatEndTime > m_tickDelays.at(0) &&
+    if (POwner->CanRest() && m_Tick - POwner->LastAttacked > m_tickDelays.at(0) && m_Tick - m_CombatEndTime > m_tickDelays.at(0) &&
         m_Tick - m_LastHealTickTime > m_tickDelays.at(m_NumHealingTicks))
     {
         if (POwner->health.hp != POwner->health.maxhp || POwner->health.mp != POwner->health.maxmp)
@@ -271,10 +269,9 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     {
         if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
         {
-            auto diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
-            auto amount = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos =
-            {
+            auto       diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
+            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+            position_t new_pos    = {
                 POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
                 PTarget->loc.p.y,
                 POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
@@ -295,8 +292,8 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 {
     TracyZoneScoped;
 
-    float currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
-    position_t target_position = POwner->loc.p;
+    float      currentDistanceToTarget = distance(POwner->loc.p, PTarget->loc.p);
+    position_t target_position         = POwner->loc.p;
 
     if (GetTopEnmity() == POwner)
     {
@@ -309,13 +306,12 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
 
     // Invalidate position and pick new one (limit: every 3s)
     if ((currentDistanceToTarget < amount - 2.5f || currentDistanceToTarget > amount + 2.5f || !POwner->PAI->PathFind->ValidPosition(POwner->loc.p)) &&
-        m_Tick - m_LastRepositionTime > 3s &&
-        !m_InTransit)
+        m_Tick - m_LastRepositionTime > 3s && !m_InTransit)
     {
         std::vector<position_t> positions(5);
         for (unsigned int i = 0; i < positions.size(); ++i)
         {
-            int random_angle = tpzrand::GetRandomNumber(255);
+            int        random_angle       = tpzrand::GetRandomNumber(255);
             position_t potential_position = {
                 PTarget->loc.p.x - (cosf(rotationToRadian(random_angle)) * amount),
                 PTarget->loc.p.y,
@@ -330,13 +326,11 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         for (auto& potential_position : positions)
         {
             // Validate position
-            if (!position_found &&
-                POwner->PAI->PathFind->ValidPosition(potential_position) &&
-                POwner->PAI->PathFind->CanSeePoint(potential_position, false))
+            if (!position_found && POwner->PAI->PathFind->ValidPosition(potential_position) && POwner->PAI->PathFind->CanSeePoint(potential_position, false))
             {
-                position_found = true;
+                position_found  = true;
                 target_position = potential_position;
-                m_InTransit = true;
+                m_InTransit     = true;
             }
         }
 

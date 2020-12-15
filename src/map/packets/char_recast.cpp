@@ -22,13 +22,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../common/socket.h"
 #include "../../common/timer.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "../entities/charentity.h"
 
-#include "char_recast.h"
 #include "../recast_container.h"
-
+#include "char_recast.h"
 
 CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 {
@@ -51,12 +50,12 @@ CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
         else if (recast.ID != 0)
         {
             ref<uint32>(0x0C + count * 8) = recasttime;
-            ref<uint8>(0x0F + count * 8) = (uint8)recast.ID;
+            ref<uint8>(0x0F + count * 8)  = (uint8)recast.ID;
             count++;
         }
         else
         {
-            ref<uint32>(0x04) = recasttime;  // 2h ability (recast id is 0)
+            ref<uint32>(0x04) = recasttime; // 2h ability (recast id is 0)
         }
     }
 }

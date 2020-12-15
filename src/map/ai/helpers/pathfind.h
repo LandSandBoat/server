@@ -25,30 +25,31 @@ The PathFind class provides an interface for getting an entity to a destination.
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
-#include "../../../common/showmsg.h"
 #include "../../../common/mmo.h"
+#include "../../../common/showmsg.h"
 
 #include <vector>
 
 class CBaseEntity;
 
 // no path can be longer than this
-#define MAX_PATH_POINTS 50
-#define MAX_TURN_POINTS 5
+#define MAX_PATH_POINTS     50
+#define MAX_TURN_POINTS     5
 #define VERTICAL_PATH_LIMIT 3.5
 
-enum PATHFLAG {
-  PATHFLAG_NONE			= 0x00,
-  PATHFLAG_RUN			= 0x01, // run twice the speed
-  PATHFLAG_WALLHACK		= 0x02, // run through walls if path is too long
-  PATHFLAG_REVERSE		= 0x04, // reverse the path
-  PATHFLAG_SCRIPT		= 0x08,	// don't overwrite this path before completion (except via another script)
-  PATHFLAG_SLIDE                = 0x10  // Slide to end point if close enough (so no over shoot)
+enum PATHFLAG
+{
+    PATHFLAG_NONE     = 0x00,
+    PATHFLAG_RUN      = 0x01, // run twice the speed
+    PATHFLAG_WALLHACK = 0x02, // run through walls if path is too long
+    PATHFLAG_REVERSE  = 0x04, // reverse the path
+    PATHFLAG_SCRIPT   = 0x08, // don't overwrite this path before completion (except via another script)
+    PATHFLAG_SLIDE    = 0x10  // Slide to end point if close enough (so no over shoot)
 };
 
 class CPathFind
 {
-  public:
+public:
     CPathFind(CBaseEntity* PTarget);
     ~CPathFind();
 
@@ -74,7 +75,7 @@ class CPathFind
     void FollowPath();
 
     // returns true if entity is on a way point
-    bool OnPoint();
+    bool OnPoint() const;
 
     // stops pathfinding after moving the given distance
     // this can be used to prevent mobs from walking
@@ -117,8 +118,7 @@ class CPathFind
     // returns the final destination of the current path
     const position_t& GetDestination() const;
 
-  private:
-
+private:
     // find a valid path using polys
     bool FindPath(const position_t& start, const position_t& end);
 
@@ -133,16 +133,16 @@ class CPathFind
 
     void FinishedPath();
 
-    CBaseEntity* m_PTarget;
+    CBaseEntity*            m_PTarget;
     std::vector<position_t> m_points;
     std::vector<position_t> m_turnPoints;
-    position_t m_originalPoint;
-    float m_distanceFromPoint;
+    position_t              m_originalPoint;
+    float                   m_distanceFromPoint;
 
-    uint8 m_pathFlags;
+    uint8  m_pathFlags;
     uint16 m_roamFlags;
-    bool m_onPoint;
-    int16 m_currentPoint;
+    bool   m_onPoint;
+    int16  m_currentPoint;
 
     uint8 m_currentTurn;
 

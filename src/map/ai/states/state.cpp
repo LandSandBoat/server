@@ -22,9 +22,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "state.h"
 #include "../../entities/baseentity.h"
 
-CState::CState(CBaseEntity* PEntity, uint16 _targid) :
-    m_PEntity(PEntity),
-    m_targid(_targid) {}
+CState::CState(CBaseEntity* PEntity, uint16 _targid)
+: m_PEntity(PEntity)
+, m_targid(_targid)
+{
+}
 
 void CState::UpdateTarget(uint16 targid)
 {

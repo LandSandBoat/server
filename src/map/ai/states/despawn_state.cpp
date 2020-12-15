@@ -23,12 +23,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
 #include "../../packets/entity_animation.h"
-#include "../ai_container.h"
 #include "../../zone.h"
+#include "../ai_container.h"
 
-CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime) :
-    CState(_PEntity, _PEntity->targid),
-    m_spawnTime(spawnTime)
+CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime)
+: CState(_PEntity, _PEntity->targid)
+, m_spawnTime(spawnTime)
 {
     if (_PEntity->status != STATUS_DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN))
     {
@@ -36,9 +36,10 @@ CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime) :
     }
 }
 
-CDespawnState::CDespawnState(CBaseEntity* _PEntity) :
-    CDespawnState(_PEntity, 0s)
-{}
+CDespawnState::CDespawnState(CBaseEntity* _PEntity)
+: CDespawnState(_PEntity, 0s)
+{
+}
 
 bool CDespawnState::Update(time_point tick)
 {

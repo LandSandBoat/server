@@ -20,14 +20,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "action_queue.h"
-#include "../ai_container.h"
 #include "../../entities/baseentity.h"
-#include "../../lua/luautils.h"
 #include "../../lua/lua_baseentity.h"
+#include "../../lua/luautils.h"
+#include "../ai_container.h"
 
-CAIActionQueue::CAIActionQueue(CBaseEntity* _PEntity) :
-    PEntity(_PEntity)
-{}
+CAIActionQueue::CAIActionQueue(CBaseEntity* _PEntity)
+: PEntity(_PEntity)
+{
+}
 
 void CAIActionQueue::pushAction(queueAction_t&& action)
 {
@@ -52,19 +53,24 @@ void CAIActionQueue::checkAction(time_point tick)
             timerQueue.pop();
             handleAction(action);
         }
-        else break;
+        else
+        {
+            break;
+        }
     }
     while (!actionQueue.empty())
     {
         auto& topaction = actionQueue.top();
-        if (tick > topaction.start_time + topaction.delay &&
-            (!topaction.checkState || PEntity->PAI->CanChangeState()))
+        if (tick > topaction.start_time + topaction.delay && (!topaction.checkState || PEntity->PAI->CanChangeState()))
         {
             auto action = actionQueue.top();
             actionQueue.pop();
             handleAction(action);
         }
-        else break;
+        else
+        {
+            break;
+        }
     }
 }
 

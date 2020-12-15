@@ -24,8 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../common/cbasetypes.h"
 #include <array>
-#include <vector>
 #include <string>
+#include <vector>
 
 #define GP_ITEM_RANKS 7
 
@@ -40,8 +40,9 @@ struct GPItem_t
     uint16 points;
 
     GPItem_t(CItem* _item, uint16 _maxpoints, uint16 _points)
-        : item(_item), maxpoints(_maxpoints), points(_points)
-    {};
+    : item(_item)
+    , maxpoints(_maxpoints)
+    , points(_points){};
 };
 
 class CGuild
@@ -52,17 +53,17 @@ public:
 
     std::vector<CItemContainer*> guildShops;
 
-    uint8 id();
+    uint8 id() const;
 
-    void updateGuildPointsPattern(uint8 pattern);
-    uint8 addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdded);
-    std::pair<uint16,uint16> getDailyGPItem(CCharEntity* PChar);
+    void                      updateGuildPointsPattern(uint8 pattern);
+    uint8                     addGuildPoints(CCharEntity* PChar, CItem* PItem, int16& pointsAdded);
+    std::pair<uint16, uint16> getDailyGPItem(CCharEntity* PChar);
 
 private:
-    uint8 m_id;
+    uint8       m_id;
     std::string pointsName;
 
-    std::array<uint8, GP_ITEM_RANKS> m_GPItemsRank;
+    std::array<uint8, GP_ITEM_RANKS>                 m_GPItemsRank;
     std::array<std::vector<GPItem_t>, GP_ITEM_RANKS> m_GPItems;
 };
 

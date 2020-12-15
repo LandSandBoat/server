@@ -4,7 +4,7 @@
 
 #include "entity_enable_list.h"
 
-CEntityEnableList::CEntityEnableList(std::vector<uint32> list)
+CEntityEnableList::CEntityEnableList(const std::vector<uint32>& list)
 {
     this->type = 0x77;
     this->size = 0x88;

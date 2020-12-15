@@ -27,19 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
-
 class CBazaarPurchasePacket : public CBasicPacket
 {
-	public:
-
-	CBazaarPurchasePacket(CCharEntity* PChar, bool result);
+public:
+    CBazaarPurchasePacket(CCharEntity* PChar, bool result);
 };
 
 #endif

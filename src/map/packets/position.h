@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CPositionPacket : public CBasicPacket
 {
 public:
-
-	CPositionPacket(CBaseEntity* PEntity);
+    CPositionPacket(CBaseEntity* PEntity);
 };
 
 #endif

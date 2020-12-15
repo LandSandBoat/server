@@ -27,8 +27,8 @@
 
 CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 {
-	this->id(0x113);
-	this->length(252);
+    this->id(0x113);
+    this->length(252);
 
     const char* query = "SELECT sandoria_cp, bastok_cp, windurst_cp, beastman_seal, kindred_seal, kindred_crest, \
                         high_kindred_crest, sacred_kindred_crest, ancient_beastcoin, valor_point, scyld, \
@@ -56,13 +56,13 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint32>(0x08) = Sql_GetIntData(SqlHandle, 1); // bastok_cp
         ref<uint32>(0x0C) = Sql_GetIntData(SqlHandle, 2); // windurst_cp
 
-        ref<uint16>(0x10) = Sql_GetUIntData(SqlHandle, 3); // beastman_seal
-        ref<uint16>(0x12) = Sql_GetUIntData(SqlHandle, 4); // kindred_seal
-        ref<uint16>(0x14) = Sql_GetUIntData(SqlHandle, 5); // kindred_crest
-        ref<uint16>(0x16) = Sql_GetUIntData(SqlHandle, 6); // high_kindred_crest
-        ref<uint16>(0x18) = Sql_GetUIntData(SqlHandle, 7); // sacred_kindred_crest
-        ref<uint16>(0x1A) = Sql_GetUIntData(SqlHandle, 8); // ancient_beastcoin
-        ref<uint16>(0x1C) = Sql_GetUIntData(SqlHandle, 9); // valor_point
+        ref<uint16>(0x10) = Sql_GetUIntData(SqlHandle, 3);  // beastman_seal
+        ref<uint16>(0x12) = Sql_GetUIntData(SqlHandle, 4);  // kindred_seal
+        ref<uint16>(0x14) = Sql_GetUIntData(SqlHandle, 5);  // kindred_crest
+        ref<uint16>(0x16) = Sql_GetUIntData(SqlHandle, 6);  // high_kindred_crest
+        ref<uint16>(0x18) = Sql_GetUIntData(SqlHandle, 7);  // sacred_kindred_crest
+        ref<uint16>(0x1A) = Sql_GetUIntData(SqlHandle, 8);  // ancient_beastcoin
+        ref<uint16>(0x1C) = Sql_GetUIntData(SqlHandle, 9);  // valor_point
         ref<uint16>(0x1E) = Sql_GetUIntData(SqlHandle, 10); // scyld
 
         ref<uint32>(0x20) = Sql_GetIntData(SqlHandle, 11); // guild_fishing
@@ -75,33 +75,33 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint32>(0x3C) = Sql_GetIntData(SqlHandle, 18); // guild_alchemy
         ref<uint32>(0x40) = Sql_GetIntData(SqlHandle, 19); // guild_cooking
 
-        ref<uint32>(0x44) = Sql_GetIntData(SqlHandle, 20); // cinder
-        ref<uint8>(0x48) = Sql_GetUIntData(SqlHandle, 21); // fire_fewell
-        ref<uint8>(0x49) = Sql_GetUIntData(SqlHandle, 22); // ice_fewell
-        ref<uint8>(0x4A) = Sql_GetUIntData(SqlHandle, 23); // wind_fewell
-        ref<uint8>(0x4B) = Sql_GetUIntData(SqlHandle, 24); // earth_fewell
-        ref<uint8>(0x4C) = Sql_GetUIntData(SqlHandle, 25); // lightning_fewell
-        ref<uint8>(0x4D) = Sql_GetUIntData(SqlHandle, 26); // water_fewell
-        ref<uint8>(0x4E) = Sql_GetUIntData(SqlHandle, 27); // light_fewell
-        ref<uint8>(0x4F) = Sql_GetUIntData(SqlHandle, 28); // dark_fewell
+        ref<uint32>(0x44) = Sql_GetIntData(SqlHandle, 20);  // cinder
+        ref<uint8>(0x48)  = Sql_GetUIntData(SqlHandle, 21); // fire_fewell
+        ref<uint8>(0x49)  = Sql_GetUIntData(SqlHandle, 22); // ice_fewell
+        ref<uint8>(0x4A)  = Sql_GetUIntData(SqlHandle, 23); // wind_fewell
+        ref<uint8>(0x4B)  = Sql_GetUIntData(SqlHandle, 24); // earth_fewell
+        ref<uint8>(0x4C)  = Sql_GetUIntData(SqlHandle, 25); // lightning_fewell
+        ref<uint8>(0x4D)  = Sql_GetUIntData(SqlHandle, 26); // water_fewell
+        ref<uint8>(0x4E)  = Sql_GetUIntData(SqlHandle, 27); // light_fewell
+        ref<uint8>(0x4F)  = Sql_GetUIntData(SqlHandle, 28); // dark_fewell
 
-        ref<uint32>(0x50) = Sql_GetIntData(SqlHandle, 29); // ballista_point
-        ref<uint32>(0x54) = Sql_GetIntData(SqlHandle, 30); // fellow_point
+        ref<uint32>(0x50) = Sql_GetIntData(SqlHandle, 29);  // ballista_point
+        ref<uint32>(0x54) = Sql_GetIntData(SqlHandle, 30);  // fellow_point
         ref<uint16>(0x58) = Sql_GetUIntData(SqlHandle, 31); // chocobuck_sandoria
         ref<uint16>(0x5A) = Sql_GetUIntData(SqlHandle, 32); // chocobuck_bastok
         ref<uint16>(0x5C) = Sql_GetUIntData(SqlHandle, 33); // chocobuck_windurst
         ref<uint16>(0x5E) = Sql_GetUIntData(SqlHandle, 34); // daily_tally
-        ref<uint32>(0x60) = Sql_GetIntData(SqlHandle, 35); // research_mark
-        ref<uint8>(0x64) = Sql_GetUIntData(SqlHandle, 36); // tunnel_worm
-        ref<uint8>(0x65) = Sql_GetUIntData(SqlHandle, 37); // morion_worm
-        ref<uint8>(0x66) = Sql_GetUIntData(SqlHandle, 38); // phantom_worm
-        ref<uint32>(0x68) = Sql_GetIntData(SqlHandle, 39); // moblin_marble
+        ref<uint32>(0x60) = Sql_GetIntData(SqlHandle, 35);  // research_mark
+        ref<uint8>(0x64)  = Sql_GetUIntData(SqlHandle, 36); // tunnel_worm
+        ref<uint8>(0x65)  = Sql_GetUIntData(SqlHandle, 37); // morion_worm
+        ref<uint8>(0x66)  = Sql_GetUIntData(SqlHandle, 38); // phantom_worm
+        ref<uint32>(0x68) = Sql_GetIntData(SqlHandle, 39);  // moblin_marble
 
         ref<uint16>(0x6C) = Sql_GetUIntData(SqlHandle, 40); // infamy
         ref<uint16>(0x6E) = Sql_GetUIntData(SqlHandle, 41); // prestige
-        ref<uint32>(0x70) = Sql_GetIntData(SqlHandle, 42); // legion_point
-        ref<uint32>(0x74) = Sql_GetIntData(SqlHandle, 43); // spark_of_eminence
-        ref<uint32>(0x78) = Sql_GetIntData(SqlHandle, 44); // shining_star
+        ref<uint32>(0x70) = Sql_GetIntData(SqlHandle, 42);  // legion_point
+        ref<uint32>(0x74) = Sql_GetIntData(SqlHandle, 43);  // spark_of_eminence
+        ref<uint32>(0x78) = Sql_GetIntData(SqlHandle, 44);  // shining_star
 
         ref<uint32>(0x7C) = Sql_GetIntData(SqlHandle, 45); // imperial_standing
         ref<uint32>(0x80) = Sql_GetIntData(SqlHandle, 46); // leujaoam_assault_point
@@ -119,14 +119,14 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint16>(0xA8) = Sql_GetUIntData(SqlHandle, 56); // aman_vouchers
         ref<uint16>(0xAA) = Sql_GetUIntData(SqlHandle, 57); // login_points
 
-        ref<uint32>(0xAC) = Sql_GetIntData(SqlHandle, 58); // cruor
-        ref<uint32>(0xB0) = Sql_GetIntData(SqlHandle, 59); // resistance_credit
-        ref<uint32>(0xB4) = Sql_GetIntData(SqlHandle, 60); // dominion_note
-        ref<uint8>(0xB8) = Sql_GetUIntData(SqlHandle, 61); // fifth_echelon_trophy
-        ref<uint8>(0xB9) = Sql_GetUIntData(SqlHandle, 62); // fourth_echelon_trophy
-        ref<uint8>(0xBA) = Sql_GetUIntData(SqlHandle, 63); // third_echelon_trophy
-        ref<uint8>(0xBB) = Sql_GetUIntData(SqlHandle, 64); // second_echelon_trophy
-        ref<uint8>(0xBC) = Sql_GetUIntData(SqlHandle, 65); // first_echelon_trophy
+        ref<uint32>(0xAC) = Sql_GetIntData(SqlHandle, 58);  // cruor
+        ref<uint32>(0xB0) = Sql_GetIntData(SqlHandle, 59);  // resistance_credit
+        ref<uint32>(0xB4) = Sql_GetIntData(SqlHandle, 60);  // dominion_note
+        ref<uint8>(0xB8)  = Sql_GetUIntData(SqlHandle, 61); // fifth_echelon_trophy
+        ref<uint8>(0xB9)  = Sql_GetUIntData(SqlHandle, 62); // fourth_echelon_trophy
+        ref<uint8>(0xBA)  = Sql_GetUIntData(SqlHandle, 63); // third_echelon_trophy
+        ref<uint8>(0xBB)  = Sql_GetUIntData(SqlHandle, 64); // second_echelon_trophy
+        ref<uint8>(0xBC)  = Sql_GetUIntData(SqlHandle, 65); // first_echelon_trophy
 
         ref<uint8>(0xBD) = Sql_GetUIntData(SqlHandle, 66); // cave_points
 
@@ -152,7 +152,7 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint8>(0xD7) = Sql_GetUIntData(SqlHandle, 82); // rems_ch10
 
         ref<uint16>(0xE0) = Sql_GetUIntData(SqlHandle, 83); // reclamation_marks
-        ref<uint32>(0xE4) = Sql_GetIntData(SqlHandle, 84); // unity_accolades
+        ref<uint32>(0xE4) = Sql_GetIntData(SqlHandle, 84);  // unity_accolades
 
         // Crystal storage
         ref<uint16>(0xE8) = Sql_GetUIntData(SqlHandle, 85); // Fire Crystals

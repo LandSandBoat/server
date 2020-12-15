@@ -28,21 +28,20 @@
 
 enum ITEM_PUPPET_EQUIPSLOT
 {
-    ITEM_PUPPET_HEAD = 1,
-    ITEM_PUPPET_FRAME = 2,
+    ITEM_PUPPET_HEAD       = 1,
+    ITEM_PUPPET_FRAME      = 2,
     ITEM_PUPPET_ATTACHMENT = 3
 };
 
 class CItemPuppet : public CItem
 {
 public:
+    CItemPuppet(uint16);
+    virtual ~CItemPuppet();
 
-	CItemPuppet(uint16);
-	virtual ~CItemPuppet();
-
-    uint8  getEquipSlot();
+    uint8  getEquipSlot() const;
     void   setEquipSlot(uint32 slot);
-    uint32 getElementSlots();
+    uint32 getElementSlots() const;
     void   setElementSlots(uint32 slots);
 
 private:

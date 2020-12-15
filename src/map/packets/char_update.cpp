@@ -19,19 +19,19 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
 #include "../../common/showmsg.h"
+#include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char_update.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/states/death_state.h"
 #include "../entities/charentity.h"
+#include "../status_effect_container.h"
 #include "../utils/itemutils.h"
 #include "../vana_time.h"
-#include "../status_effect_container.h"
 
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {
@@ -41,7 +41,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     memcpy(data + (0x04), PChar->StatusEffectContainer->m_StatusIcons, 32);
 
     ref<uint32>(0x24) = PChar->id;
-    ref<uint8>(0x2A) = PChar->GetHPP();
+    ref<uint8>(0x2A)  = PChar->GetHPP();
 
     ref<uint8>(0x28) = (PChar->nameflags.byte2 << 1);
     ref<uint8>(0x2B) = (PChar->nameflags.byte4 << 5) + PChar->nameflags.byte3;
@@ -58,9 +58,13 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     }
 
     if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
+    {
         ref<uint8>(0x38) |= 0x10; // Mentor flag.
+    }
     if (PChar->isNewPlayer())
+    {
         ref<uint8>(0x38) |= 0x08; // New player ?
+    }
 
     ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + управляем ростом: 0x02 - 0; 0x08 - 1; 0x10 - 2;
     ref<uint8>(0x2C) = PChar->GetSpeed();
@@ -81,17 +85,19 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     {
         ref<uint16>(0x34) = PChar->PPet->targid << 3;
     }
-    //Status flag: bit 4: frozen anim (terror),
+    // Status flag: bit 4: frozen anim (terror),
     //  bit 6/7/8 related to Ballista (6 set - normal, 7 set san d'oria, 6+7 set bastok, 8 set windurst)
     uint8 flag = (PChar->allegiance << 5);
 
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
+    {
         flag |= 0x08;
+    }
 
     ref<uint8>(0x36) = flag;
 
     uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();
-    ref<uint32>(0x3C) = timeRemainingToForcedHomepoint;
+    ref<uint32>(0x3C)                     = timeRemainingToForcedHomepoint;
 
     // Vanatime at which the player should be forced back to homepoint while dead. Vanatime is in seconds so we must convert the time remaining to seconds.
     ref<uint32>(0x40) = CVanaTime::getInstance()->getVanaTime() + timeRemainingToForcedHomepoint / 60;
@@ -99,7 +105,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        ref<uint8>(0x4A) = 0x0D; //was 0x10
+        ref<uint8>(0x4A) = 0x0D; // was 0x10
     }
     ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
 
@@ -110,5 +116,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     }
 
     if (PChar->animation == ANIMATION_MOUNT)
+    {
         ref<uint16>(0x5B) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower();
+    }
 }

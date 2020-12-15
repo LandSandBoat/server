@@ -31,20 +31,30 @@ public:
     CRangeState(CBattleEntity* PEntity, uint16 targid);
 
     void SpendCost();
-    bool IsRapidShot() { return m_rapidShot; }
+    bool IsRapidShot()
+    {
+        return m_rapidShot;
+    }
+
 protected:
     virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override { return false; }
-    virtual bool CanInterrupt() override { return true; }
+    virtual bool CanFollowPath() override
+    {
+        return false;
+    }
+    virtual bool CanInterrupt() override
+    {
+        return true;
+    }
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
-    bool CanUseRangedAttack(CBattleEntity* PTarget);
+    bool         CanUseRangedAttack(CBattleEntity* PTarget);
 
 private:
     CBattleEntity* const m_PEntity;
-    duration m_aimTime;
-    bool m_rapidShot {false};
-    position_t m_startPos;
+    duration             m_aimTime;
+    bool                 m_rapidShot{ false };
+    position_t           m_startPos;
 };
 
 #endif

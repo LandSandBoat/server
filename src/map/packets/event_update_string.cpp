@@ -21,26 +21,14 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "event_update_string.h"
 #include "../entities/charentity.h"
+#include "event_update_string.h"
 
-
-CEventUpdateStringPacket::CEventUpdateStringPacket(
-    const std::string& string0,
-    const std::string& string1,
-    const std::string& string2,
-    const std::string& string3,
-    uint32 param0,
-    uint32 param1,
-    uint32 param2,
-    uint32 param3,
-    uint32 param4,
-    uint32 param5,
-    uint32 param6,
-    uint32 param7,
-    uint32 param8)
+CEventUpdateStringPacket::CEventUpdateStringPacket(const std::string& string0, const std::string& string1, const std::string& string2,
+                                                   const std::string& string3, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4,
+                                                   uint32 param5, uint32 param6, uint32 param7, uint32 param8)
 {
     this->type = 0x5D;
     this->size = 0x2C;

@@ -14,7 +14,7 @@ namespace daily
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        int selection;
+        int                 selection;
         std::vector<uint16> dialItems;
         switch (dial)
         {
@@ -58,16 +58,16 @@ namespace daily
 
     void LoadDailyItems()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        int32  ret = Sql_Query(SqlHandle, "SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
         uint16 itemid, aH, flags;
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                itemid = Sql_GetUIntData(SqlHandle,0);
-                aH = Sql_GetUIntData(SqlHandle,1);
-                flags = Sql_GetUIntData(SqlHandle,2);
+                itemid = Sql_GetUIntData(SqlHandle, 0);
+                aH     = Sql_GetUIntData(SqlHandle, 1);
+                flags  = Sql_GetUIntData(SqlHandle, 2);
                 specialDialItems.push_back(itemid);
                 switch (aH)
                 {
@@ -128,11 +128,11 @@ namespace daily
                     {
                         switch (itemid)
                         {
-                            case 605: // pickaxe
-                            case 1020: // sickle
-                            case 1021: // hatchet
-                            case 1022: // thief's tools
-                            case 1023: // living key
+                            case 605:   // pickaxe
+                            case 1020:  // sickle
+                            case 1021:  // hatchet
+                            case 1022:  // thief's tools
+                            case 1023:  // living key
                             case 15453: // lugworm belt
                             case 15454: // little worm belt
                             {
@@ -177,4 +177,4 @@ namespace daily
             ShowError("Failed to delete daily tally char_vars entries");
         }
     }
-}
+} // namespace daily

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
 #include "trade_container.h"
 #include "utils/itemutils.h"
@@ -180,9 +180,9 @@ void CTradeContainer::setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint
     {
         m_ItemsCount += 1;
 
-        m_PItem[slotID] = item;
-        m_itemID[slotID] = itemID;
-        m_slotID[slotID] = invSlotID;
+        m_PItem[slotID]    = item;
+        m_itemID[slotID]   = itemID;
+        m_slotID[slotID]   = invSlotID;
         m_quantity[slotID] = quantity;
     }
     return;
@@ -222,7 +222,7 @@ void CTradeContainer::setSize(uint8 size)
     m_guildRank.resize(size, 0);
 }
 
-uint8 CTradeContainer::getExSize()
+uint8 CTradeContainer::getExSize() const
 {
     return m_exSize;
 }
@@ -232,7 +232,7 @@ void CTradeContainer::setExSize(uint8 size)
     m_exSize = size;
 }
 
-uint8 CTradeContainer::getItemsCount()
+uint8 CTradeContainer::getItemsCount() const
 {
     return m_ItemsCount;
 }
@@ -242,7 +242,7 @@ void CTradeContainer::setItemsCount(uint8 count)
     m_ItemsCount = count;
 }
 
-uint8 CTradeContainer::getType()
+uint8 CTradeContainer::getType() const
 {
     return m_type;
 }
@@ -252,7 +252,7 @@ void CTradeContainer::setType(uint8 type)
     m_type = type;
 }
 
-uint8 CTradeContainer::getCraftType()
+uint8 CTradeContainer::getCraftType() const
 {
     return m_craftType;
 }
@@ -273,7 +273,6 @@ void CTradeContainer::unreserveUnconfirmed()
             uint8 confirmedStatus = getConfirmedStatus(slotID);
             if (confirmedStatus && confirmedStatus > 0)
             {
-
                 PItem->setReserve(confirmedStatus);
             }
             else
@@ -294,10 +293,10 @@ void CTradeContainer::Clean()
             PItem->setSubType(ITEM_UNLOCKED);
         }
     }
-    m_type = 0;
-    m_craftType = 0;
+    m_type       = 0;
+    m_craftType  = 0;
     m_ItemsCount = 0;
-    m_exSize = 0;
+    m_exSize     = 0;
 
     m_PItem.clear();
     m_PItem.resize(CONTAINER_SIZE, nullptr);

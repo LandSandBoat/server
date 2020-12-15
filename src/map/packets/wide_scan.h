@@ -28,15 +28,15 @@
 
 enum WIDESCAN_STATUS
 {
-	WIDESCAN_BEGIN		= 1,
-	WIDESCAN_END		= 2
+    WIDESCAN_BEGIN = 1,
+    WIDESCAN_END   = 2
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 class CCharEntity;
@@ -44,9 +44,8 @@ class CCharEntity;
 class CWideScanPacket : public CBasicPacket
 {
 public:
-
-	CWideScanPacket(WIDESCAN_STATUS status);
-	CWideScanPacket(CCharEntity* PChar, CBaseEntity* PEntity);
+    CWideScanPacket(WIDESCAN_STATUS status);
+    CWideScanPacket(CCharEntity* PChar, CBaseEntity* PEntity);
 };
 
 #endif

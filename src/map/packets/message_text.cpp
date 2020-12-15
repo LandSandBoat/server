@@ -21,25 +21,24 @@
 
 #include "../../common/socket.h"
 
-#include "message_text.h"
 #include "../entities/baseentity.h"
-
+#include "message_text.h"
 
 CMessageTextPacket::CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, bool showName, uint8 mode)
 {
-	this->type = 0x36;
-	this->size = 0x08;
+    this->type = 0x36;
+    this->size = 0x08;
 
-	// если в качестве объекта передается персонаж,
-	// то не будем отображать имя
+    // если в качестве объекта передается персонаж,
+    // то не будем отображать имя
 
-	if (PEntity->objtype == TYPE_PC || showName == false)
-	{
-		messageID += 0x8000;
-	}
+    if (PEntity->objtype == TYPE_PC || showName == false)
+    {
+        messageID += 0x8000;
+    }
 
-	ref<uint32>(0x04) = PEntity->id;
-	ref<uint16>(0x08) = PEntity->targid;
-	ref<uint16>(0x0A) = messageID;
-    ref<uint8>(0x0C) = mode;
+    ref<uint32>(0x04) = PEntity->id;
+    ref<uint16>(0x08) = PEntity->targid;
+    ref<uint16>(0x0A) = messageID;
+    ref<uint8>(0x0C)  = mode;
 }

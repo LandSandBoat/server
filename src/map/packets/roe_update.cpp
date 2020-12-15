@@ -27,19 +27,18 @@
 
 CRoeUpdatePacket::CRoeUpdatePacket(CCharEntity* PChar)
 {
-	this->id(0x111);
-	this->length(0x104);
+    this->id(0x111);
+    this->length(0x104);
 
-	/*  Each 4-bit nibble in the 4-byte chunk is labeled here. The second number is it's position.
-	            (0 is the lowest order. IE the right-most bits)
-	            A1A0 B0A2 B2B1 B4B3  ||  A = Record ID B = Progress                                 */
+    /*  Each 4-bit nibble in the 4-byte chunk is labeled here. The second number is it's position.
+                    (0 is the lowest order. IE the right-most bits)
+                    A1A0 B0A2 B2B1 B4B3  ||  A = Record ID B = Progress                                 */
 
-	for(uint32 i = 0; i < 31; i++)
-	{
-	    uint32 id = PChar->m_eminenceLog.active[i];
-	    uint32 progress = PChar->m_eminenceLog.progress[i];
-	    int c_offset = i < 30 ? i * 0x04 : 0xFC;  // The time-limited record is a special case, it goes at the end (0x100).
-	    ref<uint32>(0x04 + c_offset) = ((progress & 0xFFFFF) << 12) + (id & 0xFFF);
-	}
-
+    for (uint32 i = 0; i < 31; i++)
+    {
+        uint32 id                    = PChar->m_eminenceLog.active[i];
+        uint32 progress              = PChar->m_eminenceLog.progress[i];
+        int    c_offset              = i < 30 ? i * 0x04 : 0xFC; // The time-limited record is a special case, it goes at the end (0x100).
+        ref<uint32>(0x04 + c_offset) = ((progress & 0xFFFFF) << 12) + (id & 0xFFF);
+    }
 }
