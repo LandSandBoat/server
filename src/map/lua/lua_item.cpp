@@ -244,7 +244,7 @@ inline int32 CLuaItem::getSkillType(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
-    auto PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
 
     if (PItem)
     {
@@ -262,7 +262,7 @@ inline int32 CLuaItem::getWeaponskillPoints(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
-    auto PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
 
     if (PItem)
     {

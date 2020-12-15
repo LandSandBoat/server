@@ -51,7 +51,7 @@ namespace puppetutils
             if (PChar->PAutomaton != nullptr)
             {
                 // Make sure we don't delete a pet that is active
-                auto PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
+                auto* PZone = zoneutils::GetZone(PChar->PAutomaton->getZone());
                 if (PZone == nullptr || PZone->GetEntity(PChar->PAutomaton->targid, TYPE_PET) == nullptr)
                 {
                     delete PChar->PAutomaton;

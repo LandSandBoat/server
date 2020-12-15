@@ -256,8 +256,6 @@ namespace battleutils
                 g_SkillChainDamageModifiers[level][count] = value;
             }
         }
-
-        return;
     }
 
     /************************************************************************
@@ -323,14 +321,10 @@ namespace battleutils
 
     bool CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill)
     {
-        if ((((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
-               (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
-              (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
-             (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()))))
-        {
-            return true;
-        }
-        return false;
+        return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
+                 (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
+                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
+               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()));
     }
 
     /************************************************************************
@@ -424,8 +418,8 @@ namespace battleutils
         // Tier 1 enspells have their damaged pre-calculated AT CAST TIME and is stored in Mod::ENSPELL_DMG
         if (Tier == 1)
         {
-            damage     = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
-            auto PChar = dynamic_cast<CCharEntity*>(PAttacker);
+            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
                 damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar);
@@ -458,7 +452,7 @@ namespace battleutils
             }
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
 
-            auto PChar = dynamic_cast<CCharEntity*>(PAttacker);
+            auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
                 damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar) * 2;
@@ -635,7 +629,7 @@ namespace battleutils
                 {
                     // Check for skillup
                     uint8 skilltype = 0;
-                    if (auto weapon = dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]))
+                    if (auto* weapon = dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]))
                     {
                         skilltype = weapon->getSkillType();
                     }
@@ -694,7 +688,7 @@ namespace battleutils
 
                         if (PDefender->isAlive())
                         {
-                            auto PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
+                            auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
                             if (PEffect)
                             {
                                 // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
@@ -718,7 +712,7 @@ namespace battleutils
                     if (Action->reaction == REACTION::BLOCK)
                     {
                         PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGETYPE::LIGHT);
-                        auto PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
+                        auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
                         if (PEffect)
                         {
                             // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
@@ -840,7 +834,7 @@ namespace battleutils
         {
             case SUBEFFECT_CURSE_SPIKES:
             {
-                if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE) == false)
+                if (!PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE))
                 {
                     PAttacker->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_CURSE, EFFECT_CURSE, 15, 0, 180));
                 }
@@ -848,7 +842,7 @@ namespace battleutils
             }
             case SUBEFFECT_ICE_SPIKES:
             {
-                if (tpzrand::GetRandomNumber(100) < 20 + lvlDiff && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_PARALYSIS) == false)
+                if (tpzrand::GetRandomNumber(100) < 20 + lvlDiff && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_PARALYSIS))
                 {
                     PAttacker->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_PARALYSIS, EFFECT_PARALYSIS, 20, 0, 30));
                 }
@@ -856,7 +850,7 @@ namespace battleutils
             }
             case SUBEFFECT_SHOCK_SPIKES:
             {
-                if (tpzrand::GetRandomNumber(100) < 30 + lvlDiff && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) == false)
+                if (tpzrand::GetRandomNumber(100) < 30 + lvlDiff && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STUN))
                 {
                     PAttacker->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_STUN, EFFECT_STUN, 1, 0, 3));
                 }
@@ -907,11 +901,11 @@ namespace battleutils
         {
             if (PAttacker->PParty != nullptr)
             {
-                for (uint8 i = 0; i < PAttacker->PParty->members.size(); i++)
+                for (auto& member : PAttacker->PParty->members)
                 {
-                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PParty->members[i]->id);
-                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PParty->members[i]->id);
-                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id);
+                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DRAIN_DAZE, member->id);
+                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_HASTE_DAZE, member->id);
+                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_ASPIR_DAZE, member->id);
                 }
             }
             else
@@ -1042,24 +1036,24 @@ namespace battleutils
                 uint16 power = 0;
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    for (uint8 i = 0; i < PAttacker->PParty->members.size(); i++)
+                    for (auto& member : PAttacker->PParty->members)
                     {
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PParty->members[i]->id))
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_DAZE, member->id))
                         {
                             daze  = EFFECT_DRAIN_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_DAZE, member->id)->GetPower();
                             break;
                         }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PParty->members[i]->id))
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_DAZE, member->id))
                         {
                             daze  = EFFECT_HASTE_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_HASTE_DAZE, member->id)->GetPower();
                             break;
                         }
-                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id))
+                        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_DAZE, member->id))
                         {
                             daze  = EFFECT_ASPIR_DAZE;
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, PAttacker->PParty->members[i]->id)->GetPower();
+                            power = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_DAZE, member->id)->GetPower();
                             break;
                         }
                     }
@@ -1667,7 +1661,7 @@ namespace battleutils
         int8   shieldSize   = 3;
         int32  base         = 0;
         float  blockRateMod = (100.0f + PDefender->getMod(Mod::SHIELDBLOCKRATE)) / 100.0f;
-        auto   weapon       = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+        auto*  weapon       = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
         uint16 attackskill  = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
         uint16 blockskill   = PDefender->GetSkill(SKILL_SHIELD);
 
@@ -1852,7 +1846,7 @@ namespace battleutils
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter, bool isCovered,
                              CBattleEntity* POriginalTarget)
     {
-        auto weapon           = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
+        auto* weapon          = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         giveTPtoAttacker      = giveTPtoAttacker && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI);
         giveTPtoVictim        = giveTPtoVictim && physicalAttackType != PHYSICAL_ATTACK_TYPE::DAKEN;
         bool       isRanged   = (slot == SLOT_AMMO || slot == SLOT_RANGED);
@@ -2067,7 +2061,7 @@ namespace battleutils
             else
             {
                 int16 delay      = PAttacker->GetWeaponDelay(true);
-                auto  sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
+                auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
                 if (sub_weapon && sub_weapon->getDmgType() > DAMAGETYPE::NONE && sub_weapon->getDmgType() < DAMAGETYPE::HTH &&
                     weapon->getSkillType() != SKILL_HAND_TO_HAND)
@@ -2141,8 +2135,8 @@ namespace battleutils
     int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACKTYPE attackType, DAMAGETYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
     {
-        auto weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
-        bool isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
+        auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
+        bool  isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
 
         if (damage > 0)
         {
@@ -2217,7 +2211,7 @@ namespace battleutils
             {
                 int16 delay = PAttacker->GetWeaponDelay(true);
 
-                auto sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
+                auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
                 if (sub_weapon && sub_weapon->getDmgType() > DAMAGETYPE::NONE && sub_weapon->getDmgType() < DAMAGETYPE::HTH &&
                     weapon->getSkillType() != SKILL_HAND_TO_HAND)
@@ -2431,7 +2425,7 @@ namespace battleutils
             // Broth
 
             int32 maxHitRate  = 99;
-            auto  targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+            auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
 
             // As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
             bool isOffhand   = attackNumber == 1;
@@ -2680,7 +2674,7 @@ namespace battleutils
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
 
-        auto targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
 
         // Default for 1H is 3.25
         float maxRatio = 3.25f;
@@ -3333,7 +3327,7 @@ namespace battleutils
      *  Gets SkillChain Effect                                               *
      *                                                                       *
      ************************************************************************/
-#define PAIR(x, y) ((x << 8) + y)
+#define PAIR(x, y) (((x) << 8) + (y))
 
     uint8 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain)
     {
@@ -3441,9 +3435,9 @@ namespace battleutils
 
     SKILLCHAIN_ELEMENT FormSkillchain(const std::list<SKILLCHAIN_ELEMENT>& resonance, const std::list<SKILLCHAIN_ELEMENT>& skill)
     {
-        for (auto& resonance_element : resonance)
+        for (const auto& resonance_element : resonance)
         {
-            for (auto& skill_element : skill)
+            for (const auto& skill_element : skill)
             {
                 if (auto skillchain = skillchain_map.find({ skill_element, resonance_element }); skillchain != skillchain_map.end())
                 {
@@ -3715,7 +3709,7 @@ namespace battleutils
         auto damage = (int32)floor((double)(abs(lastSkillDamage)) * g_SkillChainDamageModifiers[chainLevel][chainCount] / 1000 *
                                    (100 + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100 * (100 + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 100);
 
-        auto PChar = dynamic_cast<CCharEntity*>(PAttacker);
+        auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PChar->loc.p, PDefender->loc.p, 64))
         {
             damage = (int32)(damage * (1.f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar) / 100.f));
@@ -4012,11 +4006,11 @@ namespace battleutils
         {
             if (taUser->PParty->m_PAlliance != nullptr)
             {
-                for (uint8 a = 0; a < taUser->PParty->m_PAlliance->partyList.size(); ++a)
+                for (auto& a : taUser->PParty->m_PAlliance->partyList)
                 {
-                    for (uint8 i = 0; i < taUser->PParty->m_PAlliance->partyList.at(a)->members.size(); ++i)
+                    for (uint8 i = 0; i < a->members.size(); ++i)
                     {
-                        CBattleEntity* member = taUser->PParty->m_PAlliance->partyList.at(a)->members.at(i);
+                        CBattleEntity* member = a->members.at(i);
                         if (checkPosition(member))
                         {
                             return member;
@@ -4031,9 +4025,8 @@ namespace battleutils
             }
             else
             { // No alliance
-                for (uint8 i = 0; i < taUser->PParty->members.size(); ++i)
+                for (auto member : taUser->PParty->members)
                 {
-                    CBattleEntity* member = taUser->PParty->members.at(i);
                     if (checkPosition(member))
                     {
                         return member;
@@ -4063,7 +4056,7 @@ namespace battleutils
         TPZ_DEBUG_BREAK_IF(PSource == nullptr);
         TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
 
-        auto PMasterSource = PSource->PMaster ? PSource->PMaster : PSource;
+        auto* PMasterSource = PSource->PMaster ? PSource->PMaster : PSource;
         for (auto* entity : *PMasterSource->PNotorietyContainer)
         {
             if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(entity))
@@ -4324,7 +4317,7 @@ namespace battleutils
         }
 
         // multihit's just multiply jump damage
-        auto  sub                = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
+        auto* sub                = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
         uint8 numattacksLeftHand = 0;
 
         // sub weapon is equipped
@@ -4333,7 +4326,7 @@ namespace battleutils
             numattacksLeftHand = battleutils::CheckMultiHits(PAttacker, sub);
         }
 
-        auto PWeapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+        auto* PWeapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
 
         // h2h equipped
         if (PWeapon && PWeapon->getSkillType() == SKILL_HAND_TO_HAND)
@@ -5701,7 +5694,7 @@ namespace battleutils
     {
         auto SnapShotReductionPercent{ battleEntity->getMod(Mod::SNAP_SHOT) };
 
-        if (auto PChar = dynamic_cast<CCharEntity*>(battleEntity))
+        if (auto* PChar = dynamic_cast<CCharEntity*>(battleEntity))
         {
             if (charutils::hasTrait(PChar, TRAIT_SNAPSHOT))
             {
@@ -6219,7 +6212,7 @@ namespace battleutils
 
         if (PEntity->objtype == TYPE_PC)
         {
-            auto  PChar   = static_cast<CCharEntity*>(PEntity);
+            auto* PChar   = static_cast<CCharEntity*>(PEntity);
             uint8 damslot = SLOT_MAIN;
             if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 221)
             {
@@ -6409,10 +6402,8 @@ namespace battleutils
         // If the cover ability target is in a party, try to find a cover ability user
         if (PCoverAbilityTarget->PParty != nullptr)
         {
-            for (uint8 i = 0; i < PCoverAbilityTarget->PParty->members.size(); ++i)
+            for (auto member : PCoverAbilityTarget->PParty->members)
             {
-                CBattleEntity* member = PCoverAbilityTarget->PParty->members.at(i);
-
                 if (coverAbilityTargetID == member->GetLocalVar("COVER_ABILITY_TARGET") && member->StatusEffectContainer->HasStatusEffect(EFFECT_COVER) &&
                     member->isAlive())
                 {
@@ -6498,11 +6489,7 @@ namespace battleutils
 
     bool IsMagicCovered(CCharEntity* PCoverAbilityUser)
     {
-        if (PCoverAbilityUser != nullptr && PCoverAbilityUser->getMod(Mod::COVER_MAGIC_AND_RANGED) == 1)
-        {
-            return true;
-        }
-        return false;
+        return PCoverAbilityUser != nullptr && PCoverAbilityUser->getMod(Mod::COVER_MAGIC_AND_RANGED) == 1;
     }
 
     void ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered)

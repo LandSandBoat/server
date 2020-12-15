@@ -27,9 +27,7 @@ CItemPuppet::CItemPuppet(uint16 id)
     setType(ITEM_PUPPET);
 }
 
-CItemPuppet::~CItemPuppet()
-{
-}
+CItemPuppet::~CItemPuppet() = default;
 
 uint8 CItemPuppet::getEquipSlot() const
 {

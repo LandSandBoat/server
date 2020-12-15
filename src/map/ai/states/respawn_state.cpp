@@ -33,7 +33,7 @@ CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
 bool CRespawnState::Update(time_point tick)
 {
     // make sure that the respawn time is up to date
-    auto PMob = dynamic_cast<CMobEntity*>(m_PEntity);
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
         if (!PMob->m_AllowRespawn)

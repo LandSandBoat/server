@@ -25,7 +25,7 @@ namespace gambits
         TracyZoneScoped;
 
         bool available = true;
-        for (auto& action : gambit.actions)
+        for (const auto& action : gambit.actions)
         {
             if (action.reaction == G_REACTION::MA && action.select == G_SELECT::SPECIFIC)
             {
@@ -61,7 +61,7 @@ namespace gambits
         auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
         m_lastAction       = tick + random_offset;
 
-        auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+        auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
 
         // Deal with TP skills before any gambits
         // TODO: Should this be its own special gambit?
@@ -145,7 +145,7 @@ namespace gambits
             else if (predicate.target == G_TARGET::TOP_ENMITY)
             {
                 auto result = false;
-                if (auto PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+                if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
                 {
                     static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
                         if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && PMob->PEnmityContainer->GetHighestEnmity() == PMember)
@@ -199,8 +199,8 @@ namespace gambits
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TARGET)
                 {
-                    auto mob = POwner->GetBattleTarget();
-                    target   = CheckTrigger(mob, gambit.predicates[0]) ? mob : nullptr;
+                    auto* mob = POwner->GetBattleTarget();
+                    target    = CheckTrigger(mob, gambit.predicates[0]) ? mob : nullptr;
                 }
                 else if (gambit.predicates[0].target == G_TARGET::PARTY)
                 {
@@ -257,7 +257,7 @@ namespace gambits
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TOP_ENMITY)
                 {
-                    if (auto PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
+                    if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
                     {
                         static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
                             if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
@@ -388,7 +388,7 @@ namespace gambits
     {
         TracyZoneScoped;
 
-        auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+        auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
         switch (predicate.condition)
         {
             case G_CONDITION::ALWAYS:
@@ -448,19 +448,19 @@ namespace gambits
             }
             case G_CONDITION::SC_AVAILABLE:
             {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
                 return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
                 break;
             }
             case G_CONDITION::NOT_SC_AVAILABLE:
             {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
                 return PSCEffect == nullptr;
                 break;
             }
             case G_CONDITION::MB_AVAILABLE:
             {
-                auto PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                auto* PSCEffect = trigger_target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
                 return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() > 0;
                 break;
             }
@@ -501,7 +501,7 @@ namespace gambits
     {
         TracyZoneScoped;
 
-        auto target = POwner->GetBattleTarget();
+        auto* target = POwner->GetBattleTarget();
 
         auto checkTPTrigger = [&]() -> bool {
             if (POwner->health.tp >= 3000)
@@ -530,7 +530,7 @@ namespace gambits
                 }
                 case G_TP_TRIGGER::CLOSER:
                 {
-                    auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                    auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
 
                     // TODO: ...and has a valid WS...
 
@@ -558,7 +558,7 @@ namespace gambits
                 }
                 case G_SELECT::HIGHEST: // Form the best possible skillchain
                 {
-                    auto PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+                    auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
 
                     if (!PSCEffect) // Opener
                     {
@@ -597,9 +597,9 @@ namespace gambits
                 }
                 case G_SELECT::SPECIAL_AYAME:
                 {
-                    auto PMaster                = static_cast<CCharEntity*>(POwner->PMaster);
-                    auto PMasterController      = static_cast<CPlayerController*>(PMaster->PAI->GetController());
-                    auto PMasterLastWeaponSkill = PMasterController->getLastWeaponSkill();
+                    auto* PMaster                = static_cast<CCharEntity*>(POwner->PMaster);
+                    auto* PMasterController      = static_cast<CPlayerController*>(PMaster->PAI->GetController());
+                    auto* PMasterLastWeaponSkill = PMasterController->getLastWeaponSkill();
 
                     if (PMasterLastWeaponSkill != nullptr)
                     {
@@ -641,7 +641,7 @@ namespace gambits
 
         if (chosen_skill)
         {
-            auto controller = static_cast<CTrustController*>(POwner->PAI->GetController());
+            auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);

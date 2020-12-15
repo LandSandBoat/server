@@ -38,9 +38,7 @@ CGuild::CGuild(uint8 id, const char* _pointsName)
     pointsName = _pointsName;
 }
 
-CGuild::~CGuild()
-{
-}
+CGuild::~CGuild() = default;
 
 uint8 CGuild::id() const
 {

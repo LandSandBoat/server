@@ -446,7 +446,7 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
                     auto inZone = 0;
                     for (size_t m = 0; m < members; ++m)
                     {
-                        auto PMember = (CCharEntity*)m_POwner->PParty->members.at(m);
+                        auto* PMember = (CCharEntity*)m_POwner->PParty->members.at(m);
                         if (PMember->getZone() == m_POwner->getZone())
                         {
                             inZone++;
@@ -751,7 +751,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             auto inZone = 0;
             if (m_POwner->PParty != nullptr)
             {
-                for (auto member : m_POwner->PParty->members)
+                for (auto* member : m_POwner->PParty->members)
                 {
                     if (member->getZone() == m_POwner->getZone())
                     {
@@ -765,11 +765,11 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT_AVATAR_IN_PARTY:
             if (m_POwner->PParty != nullptr)
             {
-                for (auto member : m_POwner->PParty->members)
+                for (auto* member : m_POwner->PParty->members)
                 {
                     if (member->PPet != nullptr)
                     {
-                        auto PPet = (CPetEntity*)member->PPet;
+                        auto* PPet = (CPetEntity*)member->PPet;
                         if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
                         {
                             expression = true;
@@ -780,7 +780,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
-                auto PPet = (CPetEntity*)m_POwner->PPet;
+                auto* PPet = (CPetEntity*)m_POwner->PPet;
                 if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
                 {
                     expression = true;
@@ -790,7 +790,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT_JOB_IN_PARTY:
             if (m_POwner->PParty != nullptr)
             {
-                for (auto member : m_POwner->PParty->members)
+                for (auto* member : m_POwner->PParty->members)
                 {
                     if (member->id != m_POwner->id)
                     {
@@ -800,7 +800,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                             break;
                         }
                     }
-                    for (auto trust : static_cast<CCharEntity*>(member)->PTrusts)
+                    for (auto* trust : static_cast<CCharEntity*>(member)->PTrusts)
                     {
                         if (trust->GetMJob() == latentEffect.GetConditionsValue())
                         {
@@ -1016,8 +1016,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT_WEAPON_BROKEN:
         {
-            auto slot = latentEffect.GetSlot();
-            auto item = (CItemWeapon*)m_POwner->getEquip((SLOTTYPE)slot);
+            auto  slot = latentEffect.GetSlot();
+            auto* item = (CItemWeapon*)m_POwner->getEquip((SLOTTYPE)slot);
             switch (slot)
             {
                 case SLOT_MAIN:
@@ -1081,8 +1081,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 break;
             }
 
-            auto PZone  = m_POwner->loc.zone;
-            auto region = (REGIONTYPE)latentEffect.GetConditionsValue();
+            auto* PZone  = m_POwner->loc.zone;
+            auto  region = (REGIONTYPE)latentEffect.GetConditionsValue();
 
             switch (region)
             {

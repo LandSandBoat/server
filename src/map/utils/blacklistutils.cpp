@@ -77,7 +77,7 @@ namespace blacklistutils
             uint32   accid_target = Sql_GetUIntData(SqlHandle, 0);
             string_t targetName   = (const char*)(Sql_GetData(SqlHandle, 1));
 
-            blacklist.push_back(std::make_pair(accid_target, targetName));
+            blacklist.emplace_back(accid_target, targetName);
             currentCount++;
 
             if (currentCount >= 12)
@@ -89,7 +89,7 @@ namespace blacklistutils
         }
 
         // Push remaining entries..
-        if (blacklist.size() != 0)
+        if (!blacklist.empty())
         {
             PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
         }

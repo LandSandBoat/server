@@ -233,7 +233,7 @@ namespace synthutils
                 break;
         }
 
-        return (PChar->getMod(ModID) != 0 ? false : true);
+        return (PChar->getMod(ModID) == 0);
     }
 
     /**************************************************************************************
@@ -833,7 +833,7 @@ namespace synthutils
         }
 
         // remove crystal
-        auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->CraftContainer->getInvSlotID(0));
+        auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->CraftContainer->getInvSlotID(0));
         PItem->setReserve(PItem->getReserve() - 1);
         charutils::UpdateItem(PChar, LOC_INVENTORY, PChar->CraftContainer->getInvSlotID(0), -1);
 
@@ -946,7 +946,7 @@ namespace synthutils
 #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
                         ShowDebug(CL_CYAN "Removing quantity %u from inventory slot %u\n" CL_RESET, removeCount, invSlotID);
 #endif
-                        auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+                        auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
                         PItem->setSubType(ITEM_UNLOCKED);
                         PItem->setReserve(PItem->getReserve() - removeCount);
                         charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)removeCount);

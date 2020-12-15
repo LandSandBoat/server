@@ -21,6 +21,8 @@
 
 #include "blue_spell.h"
 
+#include <memory>
+
 CBlueSpell::CBlueSpell(SpellID id)
 : CSpell(id)
 {
@@ -28,7 +30,7 @@ CBlueSpell::CBlueSpell(SpellID id)
 
 std::unique_ptr<CSpell> CBlueSpell::clone()
 {
-    return std::unique_ptr<CBlueSpell>(new CBlueSpell(*this));
+    return std::make_unique<CBlueSpell>(*this);
 }
 
 uint16 CBlueSpell::getMonsterSkillId() const

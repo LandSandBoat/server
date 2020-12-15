@@ -72,7 +72,7 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
             if (PLeader != nullptr)
             {
-                for (auto PTrust : PLeader->PTrusts)
+                for (auto* PTrust : PLeader->PTrusts)
                 {
                     ref<uint32>(12 * i + (0x08)) = PTrust->id;
                     ref<uint16>(12 * i + (0x0C)) = PTrust->targid;

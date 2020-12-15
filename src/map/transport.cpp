@@ -235,9 +235,9 @@ void CTransportHandler::TransportTimer()
     uint16 shipTimerOffset = 0;
 
     // Loop through town zones and update transportion accordingly
-    for (uint32 i = 0; i < townZoneList.size(); ++i)
+    for (auto& i : townZoneList)
     {
-        TransportZone_Town* townZone = &townZoneList.at(i);
+        TransportZone_Town* townZone = &i;
 
         shipTimerOffset = ((vanaTime - townZone->ship.timeOffset) % townZone->ship.timeInterval);
 
@@ -317,9 +317,9 @@ void CTransportHandler::TransportTimer()
     }
 
     // Loop through voyage zones and zone passengers accordingly
-    for (uint32 i = 0; i < voyageZoneList.size(); i++)
+    for (auto& i : voyageZoneList)
     {
-        TransportZone_Voyage* zoneIterator = &voyageZoneList.at(i);
+        TransportZone_Voyage* zoneIterator = &i;
 
         shipTimerOffset = ((vanaTime - zoneIterator->timeOffset) % zoneIterator->timeInterval);
 
@@ -372,9 +372,9 @@ void CTransportHandler::TransportTimer()
     }
 
     // Loop through elevators
-    for (uint32 i = 0; i < ElevatorList.size(); ++i)
+    for (auto& i : ElevatorList)
     {
-        Elevator_t* elevator = &ElevatorList.at(i);
+        Elevator_t* elevator = &i;
 
         if (elevator->activated)
         {
@@ -408,9 +408,9 @@ void CTransportHandler::TransportTimer()
 void CTransportHandler::insertElevator(Elevator_t elevator)
 {
     // check to see if this elevator already exists
-    for (uint32 i = 0; i < ElevatorList.size(); ++i)
+    for (auto& i : ElevatorList)
     {
-        Elevator_t* PElevator = &ElevatorList.at(i);
+        Elevator_t* PElevator = &i;
 
         if (PElevator->Elevator->GetName() == elevator.Elevator->GetName() && PElevator->zoneID == elevator.zoneID)
         {
@@ -459,7 +459,6 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_OPEN_DOOR : ANIMATION_CLOSE_DOOR;
 
     ElevatorList.push_back(elevator);
-    return;
 }
 
 /************************************************************************
@@ -470,9 +469,9 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
 
 void CTransportHandler::startElevator(int32 elevatorID)
 {
-    for (uint32 i = 0; i < ElevatorList.size(); ++i)
+    for (auto& i : ElevatorList)
     {
-        Elevator_t* elevator = &ElevatorList.at(i);
+        Elevator_t* elevator = &i;
 
         if (elevator->id == elevatorID)
         {

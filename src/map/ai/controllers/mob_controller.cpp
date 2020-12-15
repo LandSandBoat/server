@@ -151,9 +151,9 @@ void CMobController::TryLink()
     // Handle monster linking if they are close enough
     if (PMob->PParty != nullptr)
     {
-        for (uint16 i = 0; i < PMob->PParty->members.size(); ++i)
+        for (auto& member : PMob->PParty->members)
         {
-            CMobEntity* PPartyMember = (CMobEntity*)PMob->PParty->members[i];
+            CMobEntity* PPartyMember = (CMobEntity*)member;
 
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
             {
@@ -289,7 +289,7 @@ bool CMobController::MobSkill(int wsList)
 
     for (auto skillid : skillList)
     {
-        auto PMobSkill{ battleutils::GetMobSkill(skillid) };
+        auto* PMobSkill{ battleutils::GetMobSkill(skillid) };
         if (!PMobSkill)
         {
             continue;
@@ -598,7 +598,7 @@ void CMobController::Move()
 
         if (!skillList.empty())
         {
-            auto skill{ battleutils::GetMobSkill(skillList.front()) };
+            auto* skill{ battleutils::GetMobSkill(skillList.front()) };
             if (skill)
             {
                 attack_range = skill->getDistance();
@@ -689,13 +689,13 @@ void CMobController::HandleEnmity()
 
         if (!PMob->GetBattleTargetID())
         {
-            auto PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+            auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
             ChangeTarget(PTarget ? PTarget->targid : 0);
         }
     }
     else
     {
-        auto PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+        auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
         if (PTarget)
         {
             ChangeTarget(PTarget->targid);
@@ -1038,12 +1038,7 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
         return false;
     }
 
-    if (PMob->PMaster == nullptr && PMob->PAI->IsSpawned() && !PMob->PAI->IsEngaged() && CanDetectTarget(PTarget))
-    {
-        return true;
-    }
-
-    return false;
+    return PMob->PMaster == nullptr && PMob->PAI->IsSpawned() && !PMob->PAI->IsEngaged() && CanDetectTarget(PTarget);
 }
 
 void CMobController::TapDeaggroTime()
@@ -1075,12 +1070,7 @@ bool CMobController::CanMoveForward(float currentDistance)
         PMob->GetHPP() >= PMob->getMobMod(MOBMOD_HP_STANDBACK))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
-        if (PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells())
-        {
-            return true;
-        }
-
-        return false;
+        return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
     }
 
     if (PMob->getMobMod(MOBMOD_SPAWN_LEASH) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(MOBMOD_SPAWN_LEASH))
@@ -1111,12 +1101,7 @@ bool CMobController::IsSpecialSkillReady(float currentDistance)
         bonusTime = PMob->getBigMobMod(MOBMOD_STANDBACK_COOL);
     }
 
-    if (m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime))
-    {
-        return true;
-    }
-
-    return false;
+    return m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime);
 }
 
 bool CMobController::IsSpellReady(float currentDistance)

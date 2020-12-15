@@ -47,9 +47,9 @@ void CTriggerHandler::triggerTimer()
     uint32     timeCount = 0;
     Trigger_t* trigger   = nullptr;
 
-    for (uint32 i = 0; i < triggerList.size(); ++i)
+    for (auto& i : triggerList)
     {
-        trigger   = &triggerList.at(i);
+        trigger   = &i;
         timeCount = (vanaTime - trigger->minuteOffset) / trigger->period;
 
         if (timeCount > trigger->lastTrigger)

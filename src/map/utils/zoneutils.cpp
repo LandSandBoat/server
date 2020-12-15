@@ -284,7 +284,7 @@ namespace zoneutils
             {
                 const char* contentTag = (const char*)Sql_GetData(SqlHandle, 16);
 
-                if (luautils::IsContentEnabled(contentTag) == false)
+                if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }

@@ -59,7 +59,9 @@ namespace daily
     void LoadDailyItems()
     {
         int32  ret = Sql_Query(SqlHandle, "SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
-        uint16 itemid, aH, flags;
+        uint16 itemid;
+        uint16 aH;
+        uint16 flags;
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

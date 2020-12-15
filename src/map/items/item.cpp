@@ -52,9 +52,7 @@ CItem::CItem(uint16 id)
     memset(m_extra, 0, sizeof m_extra);
 }
 
-CItem::~CItem()
-{
-}
+CItem::~CItem() = default;
 
 /************************************************************************
  *                                                                       *

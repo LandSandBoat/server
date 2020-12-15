@@ -38,9 +38,7 @@ CZoneInstance::CZoneInstance(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE C
 {
 }
 
-CZoneInstance::~CZoneInstance()
-{
-}
+CZoneInstance::~CZoneInstance() = default;
 
 CCharEntity* CZoneInstance::GetCharByName(int8* name)
 {

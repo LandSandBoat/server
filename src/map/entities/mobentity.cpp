@@ -73,7 +73,7 @@ CMobEntity::CMobEntity()
     m_name_prefix  = 0;
     m_MobSkillList = 0;
 
-    m_AllowRespawn = 0;
+    m_AllowRespawn = false;
     m_DropItemTime = 0;
     m_Family       = 0;
     m_Type         = MOBTYPE_NORMAL;
@@ -347,9 +347,9 @@ bool CMobEntity::CanBeNeutral() const
 
 uint16 CMobEntity::TPUseChance()
 {
-    auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
+    const auto& MobSkillList = battleutils::GetMobSkillList(getMobMod(MOBMOD_SKILL_LIST));
 
-    if (health.tp < 1000 || MobSkillList.empty() == true || !static_cast<CMobController*>(PAI->GetController())->IsWeaponSkillEnabled())
+    if (health.tp < 1000 || MobSkillList.empty() || !static_cast<CMobController*>(PAI->GetController())->IsWeaponSkillEnabled())
     {
         return 0;
     }
@@ -582,8 +582,8 @@ void CMobEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& actio
 
 void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 {
-    auto PSkill  = state.GetSkill();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSkill  = state.GetSkill();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     static_cast<CMobController*>(PAI->GetController())->TapDeaggroTime();
 
@@ -828,7 +828,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     DropList_t* DropList = itemutils::GetDropList(m_DropID);
     // ShowDebug(CL_CYAN"DropID: %u dropping with TH Level: %u\n" CL_RESET, PMob->m_DropID, PMob->m_THLvl);
 
-    if (DropList != nullptr && !getMobMod(MOBMOD_NO_DROPS) && (DropList->Items.size() || DropList->Groups.size()))
+    if (DropList != nullptr && !getMobMod(MOBMOD_NO_DROPS) && (!DropList->Items.empty() || !DropList->Groups.empty()))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
         int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
@@ -1057,17 +1057,13 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
         auto skillList{ battleutils::GetMobSkillList(skill_list_id) };
         if (!skillList.empty())
         {
-            auto skill{ battleutils::GetMobSkill(skillList.front()) };
+            auto* skill{ battleutils::GetMobSkill(skillList.front()) };
             if (skill)
             {
                 attack_range = (uint8)skill->getDistance();
             }
         }
-        if ((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > attack_range || !PAI->GetController()->IsAutoAttackEnabled())
-        {
-            return false;
-        }
-        return true;
+        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
     }
     else
     {
@@ -1119,7 +1115,7 @@ void CMobEntity::OnDeathTimer()
     }
 }
 
-void CMobEntity::OnDespawn(CDespawnState&)
+void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     FadeOut();
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));

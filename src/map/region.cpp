@@ -123,7 +123,7 @@ void CRegion::SetLRCorner(float x, float y, float z)
 
 bool CRegion::isPointInside(position_t pos) const
 {
-    if (circle == true)
+    if (circle)
     {
         // Get the distance between their X coordinate and ours.
         float dX = pos.x - x1;
@@ -135,12 +135,7 @@ bool CRegion::isPointInside(position_t pos) const
 
         // Check if were within range of the target.
         // In this case of a circle, 'y' is the radius.
-        if (distance <= y1)
-        {
-            return true;
-        }
-
-        return false;
+        return distance <= y1;
     }
 
     return (x1 <= pos.x && y1 <= pos.y && z1 <= pos.z && x2 >= pos.x && y2 >= pos.y && z2 >= pos.z);

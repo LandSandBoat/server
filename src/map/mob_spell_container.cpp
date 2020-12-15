@@ -113,9 +113,9 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
 
 std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
 {
-    auto spell         = spell::GetSpell(spellId);
-    bool hasEnoughMP   = spell->getMPCost() <= m_PMob->health.mp;
-    bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
+    auto* spell         = spell::GetSpell(spellId);
+    bool  hasEnoughMP   = spell->getMPCost() <= m_PMob->health.mp;
+    bool  isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
     return (isNotInRecast && hasEnoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
 }
@@ -126,10 +126,10 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
     auto                 searchInList = [&](std::vector<SpellID>& list) {
         for (auto id : list)
         {
-            auto spell         = spell::GetSpell(id);
-            bool sameFamily    = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
-            bool hasEnoughMP   = spell->getMPCost() <= m_PMob->health.mp;
-            bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
+            auto* spell         = spell::GetSpell(id);
+            bool  sameFamily    = (family == SPELLFAMILY_NONE) ? true : spell->getSpellFamily() == family;
+            bool  hasEnoughMP   = spell->getMPCost() <= m_PMob->health.mp;
+            bool  isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
             if (sameFamily && hasEnoughMP && isNotInRecast)
             {
                 matches.push_back(id);

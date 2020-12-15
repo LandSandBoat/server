@@ -40,7 +40,7 @@ CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 
     for (auto&& recast : *RecastList)
     {
-        uint32 recasttime = (recast.RecastTime == 0 ? 0 : ((recast.RecastTime - (uint32)(time(0) - recast.TimeStamp))));
+        uint32 recasttime = (recast.RecastTime == 0 ? 0 : ((recast.RecastTime - (uint32)(time(nullptr) - recast.TimeStamp))));
 
         if (recast.ID == 256) // borrowing this id for mount recast
         {

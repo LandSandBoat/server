@@ -68,7 +68,7 @@ namespace traits
                 char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
 
-                if (luautils::IsContentEnabled(contentTag) == false)
+                if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }

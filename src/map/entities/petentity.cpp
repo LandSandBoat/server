@@ -48,9 +48,7 @@ CPetEntity::CPetEntity(PETTYPE petType)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
-CPetEntity::~CPetEntity()
-{
-}
+CPetEntity::~CPetEntity() = default;
 
 PETTYPE CPetEntity::getPetType()
 {
@@ -132,7 +130,7 @@ WYVERNTYPE CPetEntity::getWyvernType()
 
 void CPetEntity::PostTick()
 {
-    CBattleEntity::PostTick();
+    CMobEntity::PostTick();
     if (loc.zone && updatemask && status != STATUS_DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
@@ -157,7 +155,7 @@ void CPetEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     luautils::OnMobDeath(this, nullptr);
-    CBattleEntity::Die();
+    CMobEntity::Die();
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
     {
         petutils::DetachPet(PMaster);
@@ -175,14 +173,14 @@ void CPetEntity::Spawn()
         mobutils::GetAvailableSpells(this);
     }
 
-    CBattleEntity::Spawn();
+    CMobEntity::Spawn();
     luautils::OnMobSpawn(this);
 }
 
 void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 {
-    auto PAbility = state.GetAbility();
-    auto PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PAbility = state.GetAbility();
+    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))

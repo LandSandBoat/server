@@ -35,7 +35,7 @@ CItem* CTradeContainer::getItem(uint8 slotID)
     {
         return m_PItem[slotID];
     }
-    return 0;
+    return nullptr;
 }
 
 uint16 CTradeContainer::getItemID(uint8 slotID)
@@ -134,7 +134,6 @@ void CTradeContainer::setItem(uint8 slotID, CItem* item)
     {
         m_PItem[slotID] = item;
     }
-    return;
 }
 
 void CTradeContainer::setItemID(uint8 slotID, uint16 itemID)
@@ -143,7 +142,6 @@ void CTradeContainer::setItemID(uint8 slotID, uint16 itemID)
     {
         m_itemID[slotID] = itemID;
     }
-    return;
 }
 
 void CTradeContainer::setInvSlotID(uint8 slotID, uint8 invSlotID)
@@ -152,7 +150,6 @@ void CTradeContainer::setInvSlotID(uint8 slotID, uint8 invSlotID)
     {
         m_slotID[slotID] = invSlotID;
     }
-    return;
 }
 
 void CTradeContainer::setQuantity(uint8 slotID, uint32 quantity)
@@ -161,7 +158,6 @@ void CTradeContainer::setQuantity(uint8 slotID, uint32 quantity)
     {
         m_quantity[slotID] = quantity;
     }
-    return;
 }
 
 bool CTradeContainer::setConfirmedStatus(uint8 slotID, uint32 amount)
@@ -185,7 +181,6 @@ void CTradeContainer::setItem(uint8 slotID, uint16 itemID, uint8 invSlotID, uint
         m_slotID[slotID]   = invSlotID;
         m_quantity[slotID] = quantity;
     }
-    return;
 }
 
 void CTradeContainer::setGuildID(uint8 slotID, uint8 guildID)
@@ -194,7 +189,6 @@ void CTradeContainer::setGuildID(uint8 slotID, uint8 guildID)
     {
         m_guildID[slotID] = guildID;
     }
-    return;
 }
 
 void CTradeContainer::setGuildRank(uint8 slotID, uint16 guildRank)
@@ -203,7 +197,6 @@ void CTradeContainer::setGuildRank(uint8 slotID, uint16 guildRank)
     {
         m_guildRank[slotID] = guildRank;
     }
-    return;
 }
 
 uint8 CTradeContainer::getSize()
@@ -285,7 +278,7 @@ void CTradeContainer::unreserveUnconfirmed()
 
 void CTradeContainer::Clean()
 {
-    for (auto PItem : m_PItem)
+    for (auto* PItem : m_PItem)
     {
         if (PItem)
         {

@@ -211,7 +211,7 @@ inline int32 CLuaTradeContainer::hasItemQty(lua_State* L)
 
             uint32 tradeQuantity = m_pMyTradeContainer->getItemQuantity(itemID);
 
-            lua_pushboolean(L, (quantity == tradeQuantity ? true : false));
+            lua_pushboolean(L, (quantity == tradeQuantity));
         }
         else
         {

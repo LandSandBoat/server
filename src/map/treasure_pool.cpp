@@ -104,7 +104,7 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
     // ^ TODO: verify what happens when a winner leaves zone
     for (int i = 0; i < 10; i++)
     {
-        if (m_PoolItems[i].Lotters.size() > 0)
+        if (!m_PoolItems[i].Lotters.empty())
         {
             for (size_t j = 0; j < m_PoolItems[i].Lotters.size(); j++)
             {
@@ -158,9 +158,9 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
         case 1127: // kindred seal
         case 2955: // kindred crest
         case 2956: // high kindred crest
-            for (uint32 i = 0; i < members.size(); ++i)
+            for (auto& member : members)
             {
-                members[i]->PRecastContainer->Add(RECAST_LOOT, 1, 300); // 300 = 5 min cooldown
+                member->PRecastContainer->Add(RECAST_LOOT, 1, 300); // 300 = 5 min cooldown
             }
             break;
     }
@@ -226,9 +226,9 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
     m_PoolItems[FreeSlotID].ID        = ItemID;
     m_PoolItems[FreeSlotID].TimeStamp = server_clock::now() - treasure_checktime;
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureFindItemPacket(&m_PoolItems[FreeSlotID], PEntity, false));
+        member->pushPacket(new CTreasureFindItemPacket(&m_PoolItems[FreeSlotID], PEntity, false));
     }
     if (m_TreasurePoolType == TREASUREPOOL_SOLO)
     {
@@ -250,9 +250,9 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
 
     if (PChar->status != STATUS_DISAPPEAR)
     {
-        for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
+        for (auto& m_PoolItem : m_PoolItems)
         {
-            PChar->pushPacket(new CTreasureFindItemPacket(&m_PoolItems[i], nullptr, true));
+            PChar->pushPacket(new CTreasureFindItemPacket(&m_PoolItem, nullptr, true));
         }
     }
 }
@@ -292,9 +292,9 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // Player lots Item for XXX message
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, Lot));
+        member->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, Lot));
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -320,12 +320,12 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
     bool hasLottedBefore = false;
 
     // if this member has lotted on this item previously, set their lot to 0.
-    for (size_t i = 0; i < m_PoolItems[SlotID].Lotters.size(); i++)
+    for (auto& Lotter : m_PoolItems[SlotID].Lotters)
     {
-        if (m_PoolItems[SlotID].Lotters[i].member->id == PChar->id)
+        if (Lotter.member->id == PChar->id)
         {
-            m_PoolItems[SlotID].Lotters[i].lot = 0;
-            hasLottedBefore                    = true;
+            Lotter.lot      = 0;
+            hasLottedBefore = true;
             break;
         }
     }
@@ -349,9 +349,9 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
 
     uint16 PassedLot = 65535; // passed mask is FF FF
     // Player lots Item for XXX message
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, PassedLot));
+        member->pushPacket(new CTreasureLotItemPacket(highestLotter, highestLot, PChar, SlotID, PassedLot));
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -370,9 +370,9 @@ bool CTreasurePool::HasLottedItem(CCharEntity* PChar, uint8 SlotID)
 
     std::vector<LotInfo> lotters = m_PoolItems[SlotID].Lotters;
 
-    for (size_t i = 0; i < lotters.size(); i++)
+    for (auto& lotter : lotters)
     {
-        if (lotters[i].member->id == PChar->id)
+        if (lotter.member->id == PChar->id)
         {
             return true;
         }
@@ -390,11 +390,11 @@ bool CTreasurePool::HasPassedItem(CCharEntity* PChar, uint8 SlotID)
 
     std::vector<LotInfo> lotters = m_PoolItems[SlotID].Lotters;
 
-    for (size_t i = 0; i < lotters.size(); i++)
+    for (auto& lotter : lotters)
     {
-        if (lotters[i].member->id == PChar->id)
+        if (lotter.member->id == PChar->id)
         {
-            return lotters[i].lot == 0;
+            return lotter.lot == 0;
         }
     }
 
@@ -442,9 +442,8 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
         // Find item's highest lotter
         LotInfo highestInfo = { 0, nullptr };
 
-        for (uint8 i = 0; i < m_PoolItems[SlotID].Lotters.size(); ++i)
+        for (auto curInfo : m_PoolItems[SlotID].Lotters)
         {
-            LotInfo curInfo = m_PoolItems[SlotID].Lotters[i];
             if (curInfo.lot > highestInfo.lot)
             {
                 highestInfo = curInfo;
@@ -476,16 +475,16 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
         {
             // No one has lotted on this item - Give to random member who has not passed
             std::vector<CCharEntity*> candidates;
-            for (uint8 i = 0; i < members.size(); ++i)
+            for (auto& member : members)
             {
-                if (charutils::HasItem(members[i], m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
+                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
                 {
                     continue;
                 }
 
-                if (members[i]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(members[i], SlotID))
+                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(member, SlotID))
                 {
-                    candidates.push_back(members[i]);
+                    candidates.push_back(member);
                 }
             }
 
@@ -526,9 +525,9 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 
     roeutils::event(ROE_EVENT::ROE_LOOTITEM, winner, RoeDatagram("itemid", m_PoolItems[SlotID].ID));
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureLotItemPacket(winner, SlotID, 0, ITEMLOT_WIN));
+        member->pushPacket(new CTreasureLotItemPacket(winner, SlotID, 0, ITEMLOT_WIN));
     }
     m_count--;
 
@@ -550,9 +549,9 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureLotItemPacket(winner, SlotID, -1, ITEMLOT_WINERROR));
+        member->pushPacket(new CTreasureLotItemPacket(winner, SlotID, -1, ITEMLOT_WINERROR));
     }
     m_count--;
 
@@ -572,9 +571,9 @@ void CTreasurePool::TreasureLost(uint8 SlotID)
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        members[i]->pushPacket(new CTreasureLotItemPacket(SlotID, ITEMLOT_WINERROR));
+        member->pushPacket(new CTreasureLotItemPacket(SlotID, ITEMLOT_WINERROR));
     }
     m_count--;
 
@@ -590,9 +589,9 @@ void CTreasurePool::TreasureLost(uint8 SlotID)
 
 bool CTreasurePool::CanAddSeal()
 {
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        if (members[i]->PRecastContainer->Has(RECAST_LOOT, 1))
+        if (member->PRecastContainer->Has(RECAST_LOOT, 1))
         {
             return false;
         }

@@ -444,7 +444,7 @@ namespace charutils
 
             PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
             PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
-            PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1 ? true : false);
+            PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1);
             PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
             PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
         }
@@ -1401,7 +1401,7 @@ namespace charutils
             return 0;
         }
 
-        auto PState = dynamic_cast<CItemState*>(PChar->PAI->GetCurrentState());
+        auto* PState = dynamic_cast<CItemState*>(PChar->PAI->GetCurrentState());
         if (PState)
         {
             CItem* item = PState->GetItem();
@@ -1699,7 +1699,7 @@ namespace charutils
 
                     if (PChar->PAI->IsEngaged())
                     {
-                        auto state = dynamic_cast<CAttackState*>(PChar->PAI->GetCurrentState());
+                        auto* state = dynamic_cast<CAttackState*>(PChar->PAI->GetCurrentState());
                         if (state)
                         {
                             state->ResetAttackTimer();
@@ -1766,11 +1766,11 @@ namespace charutils
         if (equipSlotID == SLOT_MAIN)
         {
             if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) &&
-                  ((((CItemWeapon*)PItem)->isTwoHanded() == true) && (((CItemWeapon*)oldItem)->isTwoHanded() == true))))
+                  ((((CItemWeapon*)PItem)->isTwoHanded()) && (((CItemWeapon*)oldItem)->isTwoHanded()))))
             {
                 CItemEquipment* PSubItem = PChar->getEquip(SLOT_SUB);
 
-                if (PSubItem != nullptr && PSubItem->isType(ITEM_EQUIPMENT) && (PSubItem->IsShield() != true))
+                if (PSubItem != nullptr && PSubItem->isType(ITEM_EQUIPMENT) && (!PSubItem->IsShield()))
                 {
                     RemoveSub(PChar);
                 }
@@ -1862,7 +1862,7 @@ namespace charutils
                         }
                         if (PChar->PAI->IsEngaged())
                         {
-                            auto state = dynamic_cast<CAttackState*>(PChar->PAI->GetCurrentState());
+                            auto* state = dynamic_cast<CAttackState*>(PChar->PAI->GetCurrentState());
                             if (state)
                             {
                                 state->ResetAttackTimer();
@@ -2041,16 +2041,16 @@ namespace charutils
         {
             for (uint8 i = 0; i < SLOT_LINK1; i++)
             {
-                auto PItem           = PChar->getEquip((SLOTTYPE)i);
+                auto* PItem          = PChar->getEquip((SLOTTYPE)i);
                 PChar->styleItems[i] = (PItem == nullptr) ? 0 : PItem->getID();
             }
             memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
         }
         else
         {
-            for (uint8 i = 0; i < SLOT_LINK1; i++)
+            for (unsigned short& styleItem : PChar->styleItems)
             {
-                PChar->styleItems[i] = 0;
+                styleItem = 0;
             }
         }
 
@@ -2068,8 +2068,8 @@ namespace charutils
             return;
         }
 
-        auto appearance      = (CItemEquipment*)itemutils::GetItem(PChar->styleItems[equipSlotID]);
-        auto appearanceModel = (appearance == nullptr) ? 0 : appearance->getModelId();
+        auto* appearance      = (CItemEquipment*)itemutils::GetItem(PChar->styleItems[equipSlotID]);
+        auto  appearanceModel = (appearance == nullptr) ? 0 : appearance->getModelId();
 
         switch (equipSlotID)
         {
@@ -2129,9 +2129,9 @@ namespace charutils
             return;
         }
 
-        auto itemID          = PChar->styleItems[equipSlotID];
-        auto appearance      = (CItemEquipment*)itemutils::GetItem(itemID);
-        auto appearanceModel = (appearance == nullptr || !HasItem(PChar, itemID)) ? 0 : appearance->getModelId();
+        auto  itemID          = PChar->styleItems[equipSlotID];
+        auto* appearance      = (CItemEquipment*)itemutils::GetItem(itemID);
+        auto  appearanceModel = (appearance == nullptr || !HasItem(PChar, itemID)) ? 0 : appearance->getModelId();
 
         if (!canEquipItemOnAnyJob(PChar, appearance))
         {
@@ -2414,9 +2414,9 @@ namespace charutils
         }
 
         // add in melee ws
-        PItem                 = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
-        uint8 skill           = PItem ? PItem->getSkillType() : SKILL_HAND_TO_HAND;
-        auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
+        PItem                       = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+        uint8       skill           = PItem ? PItem->getSkillType() : SKILL_HAND_TO_HAND;
+        const auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
         for (auto&& PSkill : WeaponSkillList)
         {
             if (battleutils::CanUseWeaponskill(PChar, PSkill) || PSkill->getID() == main_ws || (isInDynamis && (PSkill->getID() == main_ws_dyn)))
@@ -2429,8 +2429,8 @@ namespace charutils
         PItem = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         if (PItem != nullptr && PItem->isType(ITEM_WEAPON) && PItem->getSkillType() != SKILL_THROWING)
         {
-            skill                 = PItem ? PItem->getSkillType() : 0;
-            auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
+            skill                       = PItem ? PItem->getSkillType() : 0;
+            const auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
             for (auto&& PSkill : WeaponSkillList)
             {
                 if ((battleutils::CanUseWeaponskill(PChar, PSkill)) || PSkill->getID() == range_ws || (isInDynamis && (PSkill->getID() == range_ws_dyn)))
@@ -2457,10 +2457,8 @@ namespace charutils
         {
             std::vector<CAbility*> AbilitiesList = ability::GetAbilities(JOB_SMN);
 
-            for (size_t i = 0; i < AbilitiesList.size(); ++i)
+            for (auto PAbility : AbilitiesList)
             {
-                CAbility* PAbility = AbilitiesList.at(i);
-
                 if (PPet->GetMLevel() >= PAbility->getLevel() && PetID >= 8 && PetID <= 20 && CheckAbilityAddtype(PChar, PAbility))
                 {
                     if (PetID == 8)
@@ -2520,10 +2518,8 @@ namespace charutils
 
         AbilitiesList = ability::GetAbilities(PChar->GetMJob());
 
-        for (size_t i = 0; i < AbilitiesList.size(); ++i)
+        for (auto PAbility : AbilitiesList)
         {
-            CAbility* PAbility = AbilitiesList.at(i);
-
             if (PAbility == nullptr)
             {
                 continue;
@@ -2562,10 +2558,8 @@ namespace charutils
 
         AbilitiesList = ability::GetAbilities(PChar->GetSJob());
 
-        for (size_t i = 0; i < AbilitiesList.size(); ++i)
+        for (auto PAbility : AbilitiesList)
         {
-            CAbility* PAbility = AbilitiesList.at(i);
-
             if (PChar->GetSLevel() >= PAbility->getLevel())
             {
                 if (PAbility == nullptr)
@@ -2936,13 +2930,13 @@ namespace charutils
 
     void CheckWeaponSkill(CCharEntity* PChar, uint8 skill)
     {
-        auto weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
+        auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
         if (!weapon || weapon->getSkillType() != skill)
         {
             return;
         }
-        auto&  WeaponSkillList = battleutils::GetWeaponSkills(skill);
-        uint16 curSkill        = PChar->RealSkills.skill[skill] / 10;
+        const auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
+        uint16      curSkill        = PChar->RealSkills.skill[skill] / 10;
 
         for (auto&& PSkill : WeaponSkillList)
         {
@@ -3347,11 +3341,11 @@ namespace charutils
             });
 
             // all members might not be in range
-            if (members.size() > 0)
+            if (!members.empty())
             {
                 // distribute gil
                 int32 gilPerPerson = static_cast<int32>(gil / members.size());
-                for (auto PMember : members)
+                for (auto* PMember : members)
                 {
                     // Check for gilfinder
                     gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
@@ -3374,7 +3368,7 @@ namespace charutils
         uint8 tries    = 0;
         uint8 maxTries = 1;
         uint8 bonus    = 0;
-        if (auto PMob = dynamic_cast<CMobEntity*>(PEntity))
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
@@ -3401,8 +3395,9 @@ namespace charutils
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
         uint8      pcinzone = 0;
-        uint8      minlevel = 0, maxlevel = PChar->GetMLevel();
-        REGIONTYPE region = PChar->loc.zone->GetRegionID();
+        uint8      minlevel = 0;
+        uint8      maxlevel = PChar->GetMLevel();
+        REGIONTYPE region   = PChar->loc.zone->GetRegionID();
 
         if (PChar->PParty)
         {
@@ -3968,7 +3963,7 @@ namespace charutils
         bool   onLimitMode = false;
 
         // Incase player de-levels to 74 on the field
-        if (PChar->MeritMode == true && PChar->jobs.job[PChar->GetMJob()] > 74 && expFromRaise == false)
+        if (PChar->MeritMode && PChar->jobs.job[PChar->GetMJob()] > 74 && !expFromRaise)
         {
             onLimitMode = true;
         }
@@ -5004,7 +4999,6 @@ namespace charutils
         PChar->UContainer->SetType(UCONTAINER_DELIVERYBOX);
 
         PChar->pushPacket(new CDeliveryBoxPacket(0x0D, 2, 0, 0x01));
-        return;
     }
 
     bool CheckAbilityAddtype(CCharEntity* PChar, CAbility* PAbility)
@@ -5251,7 +5245,7 @@ namespace charutils
             // once parties and alliances have been reassembled, reload the party/parties
             if (PChar->PParty->m_PAlliance)
             {
-                for (auto party : PChar->PParty->m_PAlliance->partyList)
+                for (auto* party : PChar->PParty->m_PAlliance->partyList)
                 {
                     party->ReloadParty();
                 }
@@ -5509,7 +5503,7 @@ namespace charutils
 
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
     {
-        auto timerPacket = new CTimerBarUtilPacket();
+        auto* timerPacket = new CTimerBarUtilPacket();
         timerPacket->addCountdown(seconds);
         PChar->pushPacket(timerPacket);
     }
@@ -5522,7 +5516,7 @@ namespace charutils
 
     void SendClearTimerPacket(CCharEntity* PChar)
     {
-        auto timerPacket = new CTimerBarUtilPacket();
+        auto* timerPacket = new CTimerBarUtilPacket();
         PChar->pushPacket(timerPacket);
     }
 }; // namespace charutils

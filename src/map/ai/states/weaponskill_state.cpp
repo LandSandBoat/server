@@ -31,14 +31,14 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
-    auto skill = battleutils::GetWeaponSkill(wsid);
+    auto* skill = battleutils::GetWeaponSkill(wsid);
     if (!skill)
     {
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(PEntity, PEntity, 0, 0, MSGBASIC_CANNOT_USE_WS));
     }
 
-    auto target_flags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
-    auto PTarget      = m_PEntity->IsValidTarget(m_targid, target_flags, m_errorMsg);
+    auto  target_flags = battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY;
+    auto* PTarget      = m_PEntity->IsValidTarget(m_targid, target_flags, m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -112,7 +112,7 @@ bool CWeaponSkillState::Update(time_point tick)
         action_t action;
         m_PEntity->OnWeaponSkillFinished(*this, action);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
-        auto PTarget{ GetTarget() };
+        auto* PTarget{ GetTarget() };
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", m_PEntity, PTarget, m_PSkill->getID(), m_spent, &action);
         PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTarget, m_PEntity, m_PSkill->getID(), m_spent, &action);
         auto delay   = m_PSkill->getAnimationTime();

@@ -57,7 +57,7 @@ bool CDeathState::Update(time_point tick)
     }
     else if (m_PEntity->objtype == TYPE_PC && tick > GetEntryTime() + 8s && !IsCompleted() && !m_raiseSent && m_PEntity->isDead())
     {
-        auto PChar = static_cast<CCharEntity*>(m_PEntity);
+        auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->m_hasRaise)
         {
             PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));

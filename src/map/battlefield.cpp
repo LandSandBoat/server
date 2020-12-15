@@ -270,7 +270,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 
 bool CBattlefield::IsOccupied() const
 {
-    return m_EnteredPlayers.size() > 0;
+    return !m_EnteredPlayers.empty();
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -318,7 +318,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         // mobs
         if (!ally)
         {
-            auto pet = dynamic_cast<CPetEntity*>(PEntity);
+            auto* pet = dynamic_cast<CPetEntity*>(PEntity);
 
             // dont enter player pet
             if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
@@ -360,7 +360,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         }
     }
 
-    auto entity = dynamic_cast<CBattleEntity*>(PEntity);
+    auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
 
     // set their battlefield to this as they're now physically inside that battlefield
     if (enter)
@@ -415,7 +415,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
         }
         else if (PEntity->allegiance == ALLEGIANCE_PLAYER)
         {
-            for (auto PAlly : m_AllyList)
+            for (auto* PAlly : m_AllyList)
             {
                 if (PAlly->id == PEntity->id)
                 {
@@ -426,7 +426,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     }
     else if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
     {
-        if (auto POwner = dynamic_cast<CCharEntity*>(static_cast<CBattleEntity*>(PEntity)->PMaster))
+        if (auto* POwner = dynamic_cast<CCharEntity*>(static_cast<CBattleEntity*>(PEntity)->PMaster))
         {
             for (const auto id : m_EnteredPlayers)
             {
@@ -439,7 +439,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        for (auto PNpc : m_NpcList)
+        for (auto* PNpc : m_NpcList)
         {
             if (PNpc->id == PEntity->id)
             {
@@ -466,7 +466,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     auto found = false;
     if (PEntity->objtype == TYPE_PC)
     {
-        auto PChar = dynamic_cast<CCharEntity*>(PEntity);
+        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
         if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
         {
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
@@ -524,7 +524,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                     static_cast<CPetEntity*>(PEntity)->Die();
                 }
 
-                if (m_AllyList.size() > 0)
+                if (!m_AllyList.empty())
                 {
                     m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                 }
@@ -549,7 +549,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     }
 
     // Remove enmity from valid battle entities
-    if (auto PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity))
+    if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity))
     {
         PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
         PBattleEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
@@ -592,7 +592,7 @@ bool CBattlefield::CanCleanup(bool cleanup)
         m_Cleanup = cleanup;
     }
 
-    return m_Cleanup || m_EnteredPlayers.size() == 0;
+    return m_Cleanup || m_EnteredPlayers.empty();
 }
 
 void CBattlefield::Cleanup()
@@ -632,11 +632,11 @@ void CBattlefield::Cleanup()
     {
         RemoveEntity(mob.PMob);
     }
-    for (auto npc : tempNpcs)
+    for (auto* npc : tempNpcs)
     {
         RemoveEntity(npc);
     }
-    for (auto ally : tempAllies)
+    for (auto* ally : tempAllies)
     {
         RemoveEntity(ally);
     }
@@ -645,7 +645,7 @@ void CBattlefield::Cleanup()
 
     for (auto id : tempPlayers)
     {
-        auto PChar = GetZone()->GetCharByID(id);
+        auto* PChar = GetZone()->GetCharByID(id);
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
@@ -675,7 +675,7 @@ void CBattlefield::Cleanup()
 bool CBattlefield::LoadMobs()
 {
     // get ids from DB
-    auto fmtQuery = "SELECT monsterId, conditions \
+    const auto* fmtQuery = "SELECT monsterId, conditions \
                             FROM bcnm_battlefield \
                             WHERE bcnmId = %u AND battlefieldNumber = %u";
 
@@ -689,9 +689,9 @@ bool CBattlefield::LoadMobs()
     {
         while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            auto mobid     = Sql_GetUIntData(SqlHandle, 0);
-            auto condition = Sql_GetUIntData(SqlHandle, 1);
-            auto PMob      = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET));
+            auto  mobid     = Sql_GetUIntData(SqlHandle, 0);
+            auto  condition = Sql_GetUIntData(SqlHandle, 1);
+            auto* PMob      = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET));
 
             if (PMob)
             {
@@ -711,8 +711,8 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
 {
     if (!PEntity)
     {
-        auto fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
-        auto ret      = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
+        const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
+        auto        ret      = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
 
         if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
         {
@@ -754,7 +754,7 @@ void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
 bool CBattlefield::CheckInProgress()
 {
     ForEachEnemy([&](CMobEntity* PMob) {
-        if (PMob->PEnmityContainer->GetEnmityList()->size())
+        if (!PMob->PEnmityContainer->GetEnmityList()->empty())
         {
             if (m_Status == BATTLEFIELD_STATUS_OPEN)
             {
@@ -800,7 +800,7 @@ void CBattlefield::ForEachAdditionalEnemy(const std::function<void(CMobEntity*)>
 
 void CBattlefield::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
 {
-    for (auto npc : m_NpcList)
+    for (auto* npc : m_NpcList)
     {
         func(npc);
     }
@@ -808,7 +808,7 @@ void CBattlefield::ForEachNpc(const std::function<void(CNpcEntity*)>& func)
 
 void CBattlefield::ForEachAlly(const std::function<void(CMobEntity*)>& func)
 {
-    for (auto ally : m_AllyList)
+    for (auto* ally : m_AllyList)
     {
         func(ally);
     }

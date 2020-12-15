@@ -144,12 +144,12 @@ bool CLatentEffect::Deactivate()
             {
                 if (GetModValue() == Mod::ADDITIONAL_EFFECT)
                 {
-                    for (uint8 i = 0; i < weapon->modList.size(); ++i)
+                    for (auto& i : weapon->modList)
                     {
                         // ensure the additional effect is fully removed from the weapon
-                        if (weapon->modList.at(i).getModID() == Mod::ADDITIONAL_EFFECT)
+                        if (i.getModID() == Mod::ADDITIONAL_EFFECT)
                         {
-                            weapon->modList.at(i).setModAmount(0);
+                            i.setModAmount(0);
                         }
                     }
                 }

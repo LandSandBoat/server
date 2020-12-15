@@ -42,7 +42,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     {
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
     }
-    auto PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -75,7 +75,7 @@ CAbility* CAbilityState::GetAbility()
 
 void CAbilityState::ApplyEnmity()
 {
-    auto PTarget = GetTarget();
+    auto* PTarget = GetTarget();
     if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
     {
         if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
@@ -106,7 +106,7 @@ bool CAbilityState::Update(time_point tick)
             m_PEntity->OnAbility(*this, action);
             m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
-            if (auto target = GetTarget())
+            if (auto* target = GetTarget())
             {
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
             }
@@ -127,8 +127,8 @@ bool CAbilityState::CanUseAbility()
 {
     if (m_PEntity->objtype == TYPE_PC)
     {
-        auto PAbility = GetAbility();
-        auto PChar    = static_cast<CCharEntity*>(m_PEntity);
+        auto* PAbility = GetAbility();
+        auto* PChar    = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
@@ -142,7 +142,7 @@ bool CAbilityState::CanUseAbility()
             return false;
         }
         std::unique_ptr<CBasicPacket> errMsg;
-        auto                          PTarget = GetTarget();
+        auto*                         PTarget = GetTarget();
         if (PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())

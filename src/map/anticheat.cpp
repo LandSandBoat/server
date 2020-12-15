@@ -92,7 +92,7 @@ namespace anticheat
     // Jail character
     bool JailChar(CCharEntity* PChar, uint32 cellid)
     {
-        if (PChar == NULL)
+        if (PChar == nullptr)
         {
             return false;
         }
@@ -119,11 +119,11 @@ namespace anticheat
     // Log and possibly jail
     bool ReportCheatIncident(CCharEntity* PChar, CheatID cheatid, uint32 cheatarg, const char* description)
     {
-        if (PChar == NULL)
+        if (PChar == nullptr)
         {
             return false;
         }
-        if (map_config.anticheat_enabled == false)
+        if (!map_config.anticheat_enabled)
         {
             return false;
         }
@@ -134,7 +134,7 @@ namespace anticheat
         {
             // Log intgo cheat_incidents table
             const char* fmtQuery = "INSERT INTO cheat_incidents SET charid = %u, cheatid = %u, cheatarg = %u, description= '%s';";
-            Sql_Query(SqlHandle, fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != NULL ? description : "");
+            Sql_Query(SqlHandle, fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
         }
         if (action & CHEAT_ACTION_WARN)
         {

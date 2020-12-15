@@ -1265,7 +1265,7 @@ void CStatusEffectContainer::UpdateStatusIcons()
         return;
     }
 
-    auto PChar = static_cast<CCharEntity*>(m_POwner);
+    auto* PChar = static_cast<CCharEntity*>(m_POwner);
 
     m_Flags = 0;
     memset(m_StatusIcons, EFFECT_NONE, sizeof(m_StatusIcons));
@@ -1737,7 +1737,7 @@ bool CStatusEffectContainer::HasPreventActionEffect()
 
 uint16 CStatusEffectContainer::GetConfrontationEffect()
 {
-    for (auto PEffect : m_StatusEffectSet)
+    for (auto* PEffect : m_StatusEffectSet)
     {
         if (PEffect->GetFlag() & EFFECTFLAG_CONFRONTATION)
         {
@@ -1749,7 +1749,7 @@ uint16 CStatusEffectContainer::GetConfrontationEffect()
 
 void CStatusEffectContainer::CopyConfrontationEffect(CBattleEntity* PEntity)
 {
-    for (auto PEffect : m_StatusEffectSet)
+    for (auto* PEffect : m_StatusEffectSet)
     {
         if (PEffect->GetFlag() & EFFECTFLAG_CONFRONTATION)
         {

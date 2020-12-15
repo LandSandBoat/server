@@ -31,9 +31,7 @@ CItemLinkshell::CItemLinkshell(uint16 id)
     setType(ITEM_LINKSHELL);
 }
 
-CItemLinkshell::~CItemLinkshell()
-{
-}
+CItemLinkshell::~CItemLinkshell() = default;
 
 uint32 CItemLinkshell::GetLSID()
 {

@@ -357,7 +357,7 @@ namespace ability
                 char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 20, &contentTag, nullptr);
 
-                if (luautils::IsContentEnabled(contentTag) == false)
+                if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
@@ -536,9 +536,8 @@ namespace ability
     Charge_t* GetCharge(CBattleEntity* PUser, uint16 chargeID)
     {
         Charge_t* charge = nullptr;
-        for (std::vector<Charge_t*>::iterator it = PChargesList.begin(); it != PChargesList.end(); ++it)
+        for (auto PCharge : PChargesList)
         {
-            Charge_t* PCharge = *it;
             if (PCharge->ID == chargeID)
             {
                 if (PUser->GetMJob() == PCharge->job)

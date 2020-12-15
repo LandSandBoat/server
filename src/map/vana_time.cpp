@@ -88,7 +88,7 @@ uint32 CVanaTime::getWeekday() const
 
 uint32 CVanaTime::getSysHour()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm*    ltm = localtime(&now);
 
     return ltm->tm_hour;
@@ -96,7 +96,7 @@ uint32 CVanaTime::getSysHour()
 
 uint32 CVanaTime::getSysMinute()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm*    ltm = localtime(&now);
 
     return ltm->tm_min;
@@ -104,7 +104,7 @@ uint32 CVanaTime::getSysMinute()
 
 uint32 CVanaTime::getSysSecond()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm*    ltm = localtime(&now);
 
     return ltm->tm_sec;
@@ -112,7 +112,7 @@ uint32 CVanaTime::getSysSecond()
 
 uint32 CVanaTime::getSysWeekDay()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm*    ltm = localtime(&now);
 
     return ltm->tm_wday;
@@ -120,7 +120,7 @@ uint32 CVanaTime::getSysWeekDay()
 
 uint32 CVanaTime::getSysYearDay()
 {
-    time_t now = time(0);
+    time_t now = time(nullptr);
     tm*    ltm = localtime(&now);
 
     return ltm->tm_yday;

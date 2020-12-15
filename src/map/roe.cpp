@@ -216,7 +216,7 @@ namespace roeutils
                 lua_pushinteger(L, PChar->m_eminenceLog.progress[i]);
                 lua_setfield(L, -2, "progress");
 
-                for (auto& datagram : payload) // Append datagrams to param table
+                for (const auto& datagram : payload) // Append datagrams to param table
                 {
                     lua_pushstring(L, datagram.luaKey.c_str());
                     switch (datagram.type)
@@ -388,9 +388,8 @@ namespace roeutils
         }
 
         // Build eminence lookup map
-        for (int i = 0; i < 31; i++)
+        for (unsigned short record : PChar->m_eminenceLog.active)
         {
-            uint16 record = PChar->m_eminenceLog.active[i];
             if (record)
             {
                 PChar->m_eminenceCache.activemap.set(record);

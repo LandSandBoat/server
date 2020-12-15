@@ -201,7 +201,6 @@ void PrintPacket(CBasicPacket data)
 void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     ShowWarning(CL_YELLOW "parse: Unhandled game packet %03hX from user: %s\n" CL_RESET, (data.ref<uint16>(0) & 0x1FF), PChar->GetName());
-    return;
 }
 
 /************************************************************************
@@ -213,7 +212,6 @@ void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0xFFF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     ShowDebug(CL_CYAN "parse: SmallPacket is not implemented Type<%03hX>\n" CL_RESET, (data.ref<uint16>(0) & 0x1FF));
-    return;
 }
 
 /************************************************************************
@@ -347,7 +345,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->loc.zone->SpawnTransport(PChar);
 
     // respawn any pets from last zone
-    if (PChar->petZoningInfo.respawnPet == true)
+    if (PChar->petZoningInfo.respawnPet)
     {
         // only repawn pet in valid zones
         if (PChar->loc.zone->CanUseMisc(MISC_PET) && !PChar->m_moghouseID)
@@ -367,7 +365,6 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     // Reset the petZoning info
     PChar->resetPetZoningInfo();
-    return;
 }
 
 /************************************************************************
@@ -469,7 +466,6 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveEminenceData(PChar);
 
     PChar->status = STATUS_DISAPPEAR;
-    return;
 }
 
 /************************************************************************
@@ -495,8 +491,6 @@ void SmallPacket0x00F(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Note: This sends the stop downloading packet!
     blacklistutils::SendBlacklist(PChar);
-
-    return;
 }
 
 /************************************************************************
@@ -531,7 +525,6 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
         // if ((bool)Sql_GetUIntData(SqlHandle, 0))
         // PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Server does not support this client version."));
     }
-    return;
 }
 
 /************************************************************************
@@ -589,7 +582,6 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -625,7 +617,6 @@ void SmallPacket0x016(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->pushPacket(new CEntityUpdatePacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -642,7 +633,6 @@ void SmallPacket0x017(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8  type   = data.ref<uint8>(0x12);
 
     ShowWarning(CL_YELLOW "SmallPacket0x17: Incorrect NPC(%u,%u) type(%u)\n" CL_RESET, targid, npcid, type);
-    return;
 }
 
 /************************************************************************
@@ -981,7 +971,6 @@ void SmallPacket0x01B(map_session_data_t* const PSession, CCharEntity* const PCh
     // 0 - world pass, 2 - gold world pass; +1 - purchase
 
     PChar->pushPacket(new CWorldPassPacket(data.ref<uint8>(0x04) & 1 ? (uint32)tpzrand::GetRandomNumber(9999999999) : 0));
-    return;
 }
 
 /************************************************************************
@@ -995,7 +984,6 @@ void SmallPacket0x01C(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PrintPacket(std::move(data));
-    return;
 }
 
 /************************************************************************
@@ -1045,7 +1033,6 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
     ShowExploit(CL_YELLOW "SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u\n" CL_RESET, slotID);
-    return;
 }
 
 /************************************************************************
@@ -1159,7 +1146,6 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
     PChar->pushPacket(new CInventoryFinishPacket());
-    return;
 }
 
 /************************************************************************
@@ -1215,7 +1201,6 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         PTarget->TradePending.targid = PChar->targid;
         PTarget->pushPacket(new CTradeRequestPacket(PChar));
     }
-    return;
 }
 
 /************************************************************************
@@ -1318,7 +1303,6 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
             break;
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -1413,7 +1397,6 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             PTarget->UContainer->UnLock();
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -1464,7 +1447,6 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
         luautils::OnTrade(PChar, PNpc);
         PChar->TradeContainer->unreserveUnconfirmed();
     }
-    return;
 }
 
 /************************************************************************
@@ -1495,8 +1477,6 @@ void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 56));
     }
-
-    return;
 }
 
 /************************************************************************
@@ -1572,7 +1552,6 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
     PChar->pushPacket(new CInventoryFinishPacket());
-    return;
 }
 
 /************************************************************************
@@ -1586,7 +1565,6 @@ void SmallPacket0x03C(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     ShowWarning(CL_YELLOW "SmallPacket0x03C\n" CL_RESET);
-    return;
 }
 
 /************************************************************************
@@ -1759,7 +1737,6 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
                                                      "Report bugs on Topaz bugtracker if server admin confirms the bug occurs on stock Topaz."));
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -2164,10 +2141,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     if (!commit || !Sql_TransactionCommit(SqlHandle))
                     {
-                        if (PItem)
-                        {
-                            delete PItem;
-                        }
+                        delete PItem;
+
                         Sql_TransactionRollback(SqlHandle);
                         ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d\n", PChar->id, boxtype, slotID);
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0xEB));
@@ -2412,7 +2387,6 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
     // Open mail, close mail..
 
     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 1));
-    return;
 }
 
 /************************************************************************
@@ -2687,7 +2661,6 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    return;
 }
 
 /************************************************************************
@@ -2726,7 +2699,6 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
-    return;
 }
 /************************************************************************
  *                                                                       *
@@ -2757,7 +2729,6 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
-    return;
 }
 /************************************************************************
  *                                                                        *
@@ -2777,7 +2748,6 @@ void SmallPacket0x052(map_session_data_t* const PSession, CCharEntity* const PCh
     // Should Push 0x116 (size 68) in responce
     // 0x04 is start, contains 16 4 byte parts repersently each slot in order
     PChar->pushPacket(new CAddtoEquipSet(data));
-    return;
 }
 
 /************************************************************************
@@ -2821,7 +2791,7 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
                 continue;
             }
 
-            auto PItem = itemutils::GetItem(itemId);
+            auto* PItem = itemutils::GetItem(itemId);
             if (PItem == nullptr || !(PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT)))
             {
                 itemId = 0;
@@ -2862,8 +2832,6 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharAppearancePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
-
-    return;
 }
 
 /************************************************************************
@@ -2894,7 +2862,6 @@ void SmallPacket0x059(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         synthutils::sendSynthDone(PChar);
     }
-    return;
 }
 
 /************************************************************************
@@ -2909,11 +2876,6 @@ void SmallPacket0x05A(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CConquestPacket(PChar));
     PChar->pushPacket(new CCampaignPacket(PChar, 0));
     PChar->pushPacket(new CCampaignPacket(PChar, 1));
-
-    // May Require Sending of 0x0F
-    //    PChar->pushPacket(new CStopDownloadingPacket(PChar));
-    //    luautils::CheckForGearSet(PChar); // also check for gear set
-    return;
 }
 
 /************************************************************************
@@ -3004,7 +2966,6 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CPositionPacket(PChar));
     }
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
-    return;
 }
 
 /************************************************************************
@@ -3220,7 +3181,6 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     uint64 ipp = zoneutils::GetZoneIPP(PChar->loc.destination == 0 ? PChar->getZone() : PChar->loc.destination);
 
     charutils::SendToZone(PChar, 2, ipp);
-    return;
 }
 
 /************************************************************************
@@ -3241,8 +3201,6 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_UNKNOWN));
-
-    return;
 }
 
 /************************************************************************
@@ -3263,8 +3221,6 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CStatusEffectPacket(PChar));
-
-    return;
 }
 
 /************************************************************************
@@ -3276,7 +3232,6 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x063(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    return;
 }
 
 /************************************************************************
@@ -3298,7 +3253,6 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
     memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
 
     charutils::SaveKeyItems(PChar);
-    return;
 }
 
 /************************************************************************
@@ -3324,8 +3278,6 @@ void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
     }
-
-    return;
 }
 
 /************************************************************************
@@ -3508,7 +3460,6 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
             ShowError(CL_RED "SmallPacket0x06E : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x0A));
             break;
     }
-    return;
 }
 
 /************************************************************************
@@ -3571,7 +3522,6 @@ void SmallPacket0x06F(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -3610,7 +3560,6 @@ void SmallPacket0x070(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -3767,7 +3716,6 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
             ShowError(CL_RED "SmallPacket0x071 : unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x0A));
             break;
     }
-    return;
 }
 
 /************************************************************************
@@ -3884,7 +3832,6 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
         ShowDebug(CL_CYAN "(Party)Sent invite packet to send to lobby server for %s\n" CL_RESET, PChar->GetName());
     }
     PChar->InvitePending.clean();
-    return;
 }
 
 /************************************************************************
@@ -3905,7 +3852,6 @@ void SmallPacket0x076(map_session_data_t* const PSession, CCharEntity* const PCh
         // previous CPartyDefine was dropped or otherwise didn't work?
         PChar->pushPacket(new CPartyDefinePacket(nullptr, false));
     }
-    return;
 }
 
 /************************************************************************
@@ -3972,7 +3918,6 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             ShowError(CL_RED "SmallPacket0x077 : changing role packet with unknown byte <%.2X>\n" CL_RESET, data.ref<uint8>(0x14));
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -3985,7 +3930,6 @@ void SmallPacket0x078(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->pushPacket(new CPartySearchPacket(PChar));
-    return;
 }
 
 /************************************************************************
@@ -4040,7 +3984,6 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -4114,11 +4057,10 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
         ShowNotice(CL_CYAN "SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] \n" CL_RESET, PChar->GetName(), quantity, itemID);
-        PChar->pushPacket(new CMessageStandardPacket(0, itemID, quantity, MsgStd::Sell));
+        PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));
         PChar->pushPacket(new CInventoryFinishPacket());
         PChar->Container->setItem(PChar->Container->getSize() - 1, 0, -1, 0);
     }
-    return;
 }
 
 /************************************************************************
@@ -4168,7 +4110,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
         slotQty[invSlotID]++;
 
-        auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+        auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
         if (PItem && PItem->getID() == ItemID && slotQty[invSlotID] <= (PItem->getQuantity() - PItem->getReserve()))
         {
@@ -4177,7 +4119,6 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     synthutils::startSynth(PChar);
-    return;
 }
 
 /************************************************************************
@@ -4226,7 +4167,6 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
     // TODO: error messages!
-    return;
 }
 
 /************************************************************************
@@ -4241,7 +4181,6 @@ void SmallPacket0x0A2(map_session_data_t* const PSession, CCharEntity* const PCh
     uint16 diceroll = tpzrand::GetRandomNumber(1000);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageStandardPacket(PChar, diceroll, MsgStd::DiceRoll));
-    return;
 }
 
 /************************************************************************
@@ -4257,7 +4196,6 @@ void SmallPacket0x0AB(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->pushPacket(new CGuildMenuBuyPacket(PChar, PChar->PGuildShop));
     }
-    return;
 }
 
 /************************************************************************
@@ -4317,7 +4255,6 @@ void SmallPacket0x0AD(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->pushPacket(new CGuildMenuSellPacket(PChar, PChar->PGuildShop));
     }
-    return;
 }
 
 /************************************************************************
@@ -4335,7 +4272,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else if (data.ref<uint8>(0x06) == '#' && PChar->m_GMlevel > 0)
     {
-        message::send(MSG_CHAT_SERVMES, 0, 0, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_1, (const char*)data[7]));
+        message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_1, (const char*)data[7]));
     }
     else
     {
@@ -4550,8 +4487,6 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
     }
-
-    return;
 }
 
 /************************************************************************
@@ -4663,7 +4598,6 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    return;
 }
 
 /************************************************************************
@@ -4694,7 +4628,6 @@ void SmallPacket0x0C3(map_session_data_t* const PSession, CCharEntity* const PCh
             charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl);
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -4847,7 +4780,6 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CInventoryFinishPacket());
         PChar->pushPacket(new CCharUpdatePacket(PChar));
     }
-    return;
 }
 
 /************************************************************************
@@ -4888,8 +4820,6 @@ void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->pushPacket(new CPartyMapPacket((CCharEntity*)PPartyMember));
         }
     });
-
-    return;
 }
 
 /************************************************************************
@@ -4902,7 +4832,6 @@ void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    return;
 }
 
 /************************************************************************
@@ -4915,7 +4844,6 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->search.language = data.ref<uint8>(0x24);
-    return;
 }
 
 /************************************************************************
@@ -5042,7 +4970,6 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CMenuConfigPacket(PChar));
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     PChar->pushPacket(new CCharSyncPacket(PChar));
-    return;
 }
 
 /************************************************************************
@@ -5204,7 +5131,7 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 CCharEntity* PTarget = (CCharEntity*)PEntity;
 
-                if (PChar->m_isGMHidden == false || (PChar->m_isGMHidden == true && PTarget->m_GMlevel >= PChar->m_GMlevel))
+                if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
                 {
                     PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::Examine));
                 }
@@ -5219,7 +5146,6 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -5238,7 +5164,6 @@ void SmallPacket0x0DE(map_session_data_t* const PSession, CCharEntity* const PCh
     Sql_EscapeString(SqlHandle, message, (const char*)data[4]);
 
     Sql_Query(SqlHandle, "UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u;", message, PChar->id);
-    return;
 }
 
 /************************************************************************
@@ -5254,51 +5179,6 @@ void SmallPacket0x0E0(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->search.message.insert(0, (const char*)data[4]);
 
     PChar->search.messagetype = data.ref<uint8>(0xA4);
-
-    // No response is needed to be sent from this packet.
-    // This is only used when searching for a character.
-    //                 s   a   l   u   t
-    // e0  4c  c2  00  73  61  6c  75  74  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20
-    // 20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  00
-    // 00  00  00  00  2f  15  4c  4b  57  49  4e  08  3f  00  00  00
-    // ff  00  00  00  11  00  00  00
-
-    // Message Max of 120, 3 lines of 40 characters, starting from 5th byte.
-    // Message Type - 4th from the end.
-
-    // EXP party
-    //  0x11 - seek party
-    //  0x12 - find member
-    //  0x13 - other
-    // Mission
-    //  0x21 - seek party
-    //  0x22 - find member
-    //  0x23 - other
-    // Quest
-    //  0x31 - seek party
-    //  0x32 - find member
-    //  0x33 - other
-    // Battlefield
-    //  0x41 - seek party
-    //  0x42 - find member
-    //  0x43 - other
-    // Item
-    //  0x51 - Want to Sell
-    //  0x52 - Want to Buy
-    //  0x53 - Other
-    // Synthesis
-    //  0x61 - Need Made
-    //  0x62 - Can Make
-    //  0x63 - Other
-    // Others
-    //  0x73 - others
-    return;
 }
 
 /************************************************************************
@@ -5319,7 +5199,6 @@ void SmallPacket0x0E1(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->PLinkshell2->PushLinkshellMessage(PChar, false);
     }
-    return;
 }
 
 /************************************************************************
@@ -5369,7 +5248,6 @@ void SmallPacket0x0E2(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
     PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoAccess));
-    return;
 }
 
 /************************************************************************
@@ -5421,7 +5299,6 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEAVEGAME, 0, ExitType, 5, 0));
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -5472,7 +5349,6 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    return;
 }
 
 /************************************************************************
@@ -5496,7 +5372,6 @@ void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->animation = (PChar->animation == ANIMATION_SIT ? ANIMATION_NONE : ANIMATION_SIT);
     PChar->updatemask |= UPDATE_HP;
-    return;
 }
 
 /************************************************************************
@@ -5514,7 +5389,6 @@ void SmallPacket0x0EB(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     PChar->pushPacket(new CSpecialReleasePacket(PChar));
-    return;
 }
 
 /************************************************************************
@@ -5532,8 +5406,6 @@ void SmallPacket0x0F1(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->StatusEffectContainer->DelStatusEffectsByIcon(IconID);
     }
-
-    return;
 }
 
 /************************************************************************
@@ -5548,7 +5420,6 @@ void SmallPacket0x0F2(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->loc.boundary = data.ref<uint16>(0x06);
 
     charutils::SaveCharPosition(PChar);
-    return;
 }
 
 /************************************************************************
@@ -5591,8 +5462,6 @@ void SmallPacket0x0F5(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->PWideScanTarget = target;
     }
-
-    return;
 }
 
 /************************************************************************
@@ -5605,7 +5474,6 @@ void SmallPacket0x0F6(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->PWideScanTarget = nullptr;
-    return;
 }
 
 /************************************************************************
@@ -5715,7 +5583,6 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
         PChar->pushPacket(new CInventoryFinishPacket());
     }
-    return;
 }
 
 /************************************************************************
@@ -5794,7 +5661,6 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
             ShowError(CL_RED "SmallPacket0x0FB: furnishing can't be removed\n" CL_RESET);
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -6120,7 +5986,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             DAMAGETYPE subType = DAMAGETYPE::NONE;
-            if (auto weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
+            if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
             {
                 subType = weapon->getDmgType();
             }
@@ -6164,7 +6030,6 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CMenuMeritPacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
-    return;
 }
 
 /************************************************************************
@@ -6301,8 +6166,6 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
         puppetutils::SaveAutomaton(PChar);
     }
-
-    return;
 }
 
 /************************************************************************
@@ -6329,7 +6192,6 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
         PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_LEAVE));
     }
     PChar->BazaarID.clean();
-    return;
 }
 
 /************************************************************************
@@ -6370,7 +6232,6 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -6499,7 +6360,6 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
     PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
-    return;
 }
 
 /************************************************************************
@@ -6524,7 +6384,6 @@ void SmallPacket0x109(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
     }
-    return;
 }
 
 /************************************************************************
@@ -6558,7 +6417,6 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, slotID));
         PChar->pushPacket(new CInventoryFinishPacket());
     }
-    return;
 }
 
 /************************************************************************
@@ -6583,7 +6441,6 @@ void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->nameflags.flags &= ~FLAG_BAZAAR;
     PChar->updatemask |= UPDATE_HP;
-    return;
 }
 
 /************************************************************************
@@ -6600,7 +6457,6 @@ void SmallPacket0x10C(map_session_data_t* const PSession, CCharEntity* const PCh
         roeutils::AddEminenceRecord(PChar, data.ref<uint32>(0x04));
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     }
-    return;
 }
 
 /************************************************************************
@@ -6617,7 +6473,6 @@ void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PCh
         roeutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
     }
-    return;
 }
 
 /************************************************************************
@@ -6630,7 +6485,6 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->pushPacket(new CCurrencyPacket1(PChar));
-    return;
 }
 
 /************************************************************************
@@ -6656,8 +6510,6 @@ void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint8 ukn2 = data.ref<uint8>(0x0F);
     uint32 special = data.ref<uint32>(0x10);
     fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
-
-    return;
 }
 
 /************************************************************************
@@ -6671,7 +6523,6 @@ void SmallPacket0x111(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     charutils::SetStyleLock(PChar, data.ref<uint8>(0x04));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
-    return;
 }
 
 /************************************************************************
@@ -6704,8 +6555,6 @@ void SmallPacket0x112(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
         }
     }
-
-    return;
 }
 
 /************************************************************************
@@ -6750,7 +6599,6 @@ void SmallPacket0x113(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->animation = PChar->animation == chairId ? ANIMATION_NONE : chairId;
     PChar->updatemask |= UPDATE_HP;
-    return;
 }
 
 /************************************************************************
@@ -6775,7 +6623,6 @@ void SmallPacket0x115(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->pushPacket(new CCurrencyPacket2(PChar));
-    return;
 }
 
 /************************************************************************
@@ -6789,7 +6636,6 @@ void SmallPacket0x117(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
-    return;
 }
 
 /************************************************************************

@@ -1158,14 +1158,14 @@ Usage:
         if (PFamilyMods != nullptr)
         {
             // add them
-            for (std::vector<CModifier*>::iterator it = PFamilyMods->mods.begin(); it != PFamilyMods->mods.end(); ++it)
+            for (auto& mod : PFamilyMods->mods)
             {
-                PMob->addModifier((*it)->getModID(), (*it)->getModAmount());
+                PMob->addModifier(mod->getModID(), mod->getModAmount());
             }
             // TODO: don't store mobmods in a CModifier
-            for (std::vector<CModifier*>::iterator it = PFamilyMods->mobMods.begin(); it != PFamilyMods->mobMods.end(); ++it)
+            for (auto& mobMod : PFamilyMods->mobMods)
             {
-                PMob->setMobMod(static_cast<uint16>((*it)->getModID()), (*it)->getModAmount());
+                PMob->setMobMod(static_cast<uint16>(mobMod->getModID()), mobMod->getModAmount());
             }
         }
 
@@ -1175,14 +1175,14 @@ Usage:
         if (PPoolMods != nullptr)
         {
             // add them
-            for (std::vector<CModifier*>::iterator it = PPoolMods->mods.begin(); it != PPoolMods->mods.end(); ++it)
+            for (auto& mod : PPoolMods->mods)
             {
-                PMob->addModifier((*it)->getModID(), (*it)->getModAmount());
+                PMob->addModifier(mod->getModID(), mod->getModAmount());
             }
 
-            for (std::vector<CModifier*>::iterator it = PPoolMods->mobMods.begin(); it != PPoolMods->mobMods.end(); ++it)
+            for (auto& mobMod : PPoolMods->mobMods)
             {
-                PMob->setMobMod(static_cast<uint16>((*it)->getModID()), (*it)->getModAmount());
+                PMob->setMobMod(static_cast<uint16>(mobMod->getModID()), mobMod->getModAmount());
             }
         }
 
@@ -1192,14 +1192,14 @@ Usage:
         if (PSpawnMods != nullptr)
         {
             // add them
-            for (std::vector<CModifier*>::iterator it = PSpawnMods->mods.begin(); it != PSpawnMods->mods.end(); ++it)
+            for (auto& mod : PSpawnMods->mods)
             {
-                PMob->addModifier((*it)->getModID(), (*it)->getModAmount());
+                PMob->addModifier(mod->getModID(), mod->getModAmount());
             }
 
-            for (std::vector<CModifier*>::iterator it = PSpawnMods->mobMods.begin(); it != PSpawnMods->mobMods.end(); ++it)
+            for (auto& mobMod : PSpawnMods->mobMods)
             {
-                PMob->setMobMod(static_cast<uint16>((*it)->getModID()), (*it)->getModAmount());
+                PMob->setMobMod(static_cast<uint16>(mobMod->getModID()), mobMod->getModAmount());
             }
         }
     }

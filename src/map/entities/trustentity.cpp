@@ -54,7 +54,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 
 void CTrustEntity::PostTick()
 {
-    CBattleEntity::PostTick();
+    CMobEntity::PostTick();
     if (loc.zone && updatemask && status != STATUS_DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
@@ -69,7 +69,7 @@ void CTrustEntity::PostTick()
 
 void CTrustEntity::FadeOut()
 {
-    CBaseEntity::FadeOut();
+    CMobEntity::FadeOut();
     loc.zone->PushPacket(this, (loc.zone->m_BattlefieldHandler) ? CHAR_INZONE : CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
 }
 
@@ -79,21 +79,21 @@ void CTrustEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     ((CCharEntity*)PMaster)->RemoveTrust(this);
-    CBattleEntity::Die();
+    CMobEntity::Die();
 }
 
 void CTrustEntity::Spawn()
 {
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
-    CBattleEntity::Spawn();
+    CMobEntity::Spawn();
     luautils::OnMobSpawn(this);
     ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 {
-    auto PAbility = state.GetAbility();
-    auto PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PAbility = state.GetAbility();
+    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -147,7 +147,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int32 damage      = 0;
     int32 totalDamage = 0;
@@ -304,7 +304,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
 
     // if a hit did occur (even without barrage)
-    if (hitOccured == true)
+    if (hitOccured)
     {
         // any misses with barrage cause remaing shots to miss, meaning we must check Action.reaction
         if (actionTarget.reaction == REACTION::EVADE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
@@ -397,7 +397,7 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
 }
 
-void CTrustEntity::OnDespawn(CDespawnState&)
+void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     if (GetHPP())
     {
@@ -410,9 +410,9 @@ void CTrustEntity::OnDespawn(CDespawnState&)
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
-    CBattleEntity::OnCastFinished(state, action);
+    CMobEntity::OnCastFinished(state, action);
 
-    auto PSpell = state.GetSpell();
+    auto* PSpell = state.GetSpell();
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 }
@@ -424,10 +424,10 @@ void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
 void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
-    CBattleEntity::OnWeaponSkillFinished(state, action);
+    CMobEntity::OnWeaponSkillFinished(state, action);
 
-    auto PWeaponSkill  = state.GetSkill();
-    auto PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PWeaponSkill  = state.GetSkill();
+    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);

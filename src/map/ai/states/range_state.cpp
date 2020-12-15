@@ -33,7 +33,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
-    auto PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -49,7 +49,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     delay      = battleutils::GetSnapshotReduction(m_PEntity, delay);
 
     // TODO: Allow trusts to use this
-    if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
         if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT))
         {
@@ -94,7 +94,7 @@ bool CRangeState::Update(time_point tick)
 {
     if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
     {
-        auto PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
+        auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
         CanUseRangedAttack(PTarget);
         if (m_startPos.x != m_PEntity->loc.p.x || m_startPos.y != m_PEntity->loc.p.y)
@@ -103,7 +103,7 @@ bool CRangeState::Update(time_point tick)
         }
 
         action_t action;
-        auto     cast_errorMsg = dynamic_cast<CMessageBasicPacket*>(m_errorMsg.get());
+        auto*    cast_errorMsg = dynamic_cast<CMessageBasicPacket*>(m_errorMsg.get());
         if (m_errorMsg && (!cast_errorMsg || cast_errorMsg->getMessageID() != MSGBASIC_CANNOT_SEE))
         {
             action.id         = m_PEntity->id;
@@ -115,7 +115,7 @@ bool CRangeState::Update(time_point tick)
             actionTarget_t& actionTarget = actionList.getNewActionTarget();
             actionTarget.animation       = ANIMATION_RANGED;
 
-            if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+            if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
                 PChar->pushPacket(m_errorMsg.release());
             }
@@ -131,11 +131,7 @@ bool CRangeState::Update(time_point tick)
         Complete();
     }
 
-    if (IsCompleted() && tick > GetEntryTime() + m_aimTime + 1.5s)
-    {
-        return true;
-    }
-    return false;
+    return IsCompleted() && tick > GetEntryTime() + m_aimTime + 1.5s;
 }
 
 void CRangeState::Cleanup(time_point tick)
@@ -150,7 +146,7 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         return false;
     }
 
-    if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
         CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         CItemWeapon* PAmmo   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));

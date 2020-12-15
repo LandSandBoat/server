@@ -47,7 +47,7 @@ CAttackState::CAttackState(CBattleEntity* PEntity, uint16 targid)
 
 bool CAttackState::Update(time_point tick)
 {
-    auto PTarget = static_cast<CBattleEntity*>(GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(GetTarget());
     if (!PTarget || PTarget->isDead())
     {
         return true;

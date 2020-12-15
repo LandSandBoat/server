@@ -595,7 +595,7 @@ char timestamp_format[20] = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, 
 int _vShowMessage(MSGTYPE flag, const std::string& string)
 {
     char        timeString[80];
-    std::string logMessage = "";
+    std::string logMessage;
     FILE*       fp;
 
     if (string.empty())

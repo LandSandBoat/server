@@ -40,9 +40,7 @@ CItemFlowerpot::CItemFlowerpot(uint16 id)
 {
 }
 
-CItemFlowerpot::~CItemFlowerpot()
-{
-}
+CItemFlowerpot::~CItemFlowerpot() = default;
 
 void CItemFlowerpot::cleanPot()
 {

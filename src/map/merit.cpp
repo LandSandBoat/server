@@ -144,8 +144,8 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 6, 10, 7 },  // MCATEGORY_SHC_2
 };
 
-#define GetMeritCategory(merit) ((merit >> 6) - 1)    // получаем категорию из merit
-#define GetMeritID(merit)       ((merit & 0x3F) >> 1) // получаем смещение в категории из merit
+#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // получаем категорию из merit
+#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // получаем смещение в категории из merit
 
 /************************************************************************
  *                                                                       *
@@ -221,12 +221,12 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
             {
                 uint32 meritID  = Sql_GetUIntData(SqlHandle, 0);
                 uint32 upgrades = Sql_GetUIntData(SqlHandle, 1);
-                for (uint16 i = 0; i < MERITS_COUNT; i++)
+                for (auto& merit : merits)
                 {
-                    if (merits[i].id == meritID)
+                    if (merit.id == meritID)
                     {
-                        merits[i].count = upgrades;
-                        merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
+                        merit.count = upgrades;
+                        merit.next  = upgrade[merit.upgradeid][merit.count];
                     }
                 }
             }
@@ -242,16 +242,16 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
 
 void CMeritPoints::SaveMeritPoints(uint32 charid)
 {
-    for (uint16 i = 0; i < MERITS_COUNT; ++i)
+    for (auto& merit : merits)
     {
-        if (merits[i].count > 0)
+        if (merit.count > 0)
         {
             Sql_Query(SqlHandle, "INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
-                      merits[i].id, merits[i].count, merits[i].count);
+                      merit.id, merit.count, merit.count);
         }
         else
         {
-            Sql_Query(SqlHandle, "DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merits[i].id);
+            Sql_Query(SqlHandle, "DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
         }
     }
 }

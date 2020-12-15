@@ -33,7 +33,7 @@ CEventPacket::CEventPacket(CCharEntity* PChar, uint16 EventID, uint8 numOfParams
     this->size = 0x0A;
 
     uint32 npcID = 0;
-    auto   PNpc  = PChar->m_event.Target;
+    auto*  PNpc  = PChar->m_event.Target;
     if (PNpc)
     {
         npcID = PNpc->id;

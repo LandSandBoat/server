@@ -32,7 +32,7 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 {
-    auto skill = battleutils::GetMobSkill(wsid);
+    auto* skill = battleutils::GetMobSkill(wsid);
     if (!skill)
     {
         throw CStateInitException(nullptr);
@@ -43,7 +43,7 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
         throw CStateInitException(nullptr);
     }
 
-    auto PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -103,7 +103,7 @@ bool CMobSkillState::Update(time_point tick)
     }
     if (IsCompleted() && tick > m_finishTime)
     {
-        auto PTarget = GetTarget();
+        auto* PTarget = GetTarget();
         if (PTarget && PTarget->objtype == TYPE_MOB && PTarget != m_PEntity && m_PEntity->allegiance == ALLEGIANCE_PLAYER)
         {
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);

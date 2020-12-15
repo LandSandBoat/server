@@ -41,9 +41,7 @@ CAutomatonEntity::CAutomatonEntity()
     PAI->SetController(nullptr);
 }
 
-CAutomatonEntity::~CAutomatonEntity()
-{
-}
+CAutomatonEntity::~CAutomatonEntity() = default;
 
 void CAutomatonEntity::setFrame(AUTOFRAMETYPE frame)
 {
@@ -185,8 +183,8 @@ void CAutomatonEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     CMobEntity::OnCastFinished(state, action);
 
-    auto PSpell  = state.GetSpell();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSpell  = state.GetSpell();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -200,8 +198,8 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
 {
     CMobEntity::OnMobSkillFinished(state, action);
 
-    auto PSkill  = state.GetSkill();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSkill  = state.GetSkill();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     // Ranged attack skill up
     if (PSkill->getID() == 1949 && !PSkill->hasMissMsg())

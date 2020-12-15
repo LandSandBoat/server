@@ -28,6 +28,4 @@ CItemCurrency::CItemCurrency(uint16 id)
     setStackSize(999999999);
 }
 
-CItemCurrency::~CItemCurrency()
-{
-}
+CItemCurrency::~CItemCurrency() = default;

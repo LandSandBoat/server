@@ -489,7 +489,7 @@ namespace itemutils
             {
                 uint16 DropID = (uint16)Sql_GetUIntData(SqlHandle, 0);
 
-                if (g_pDropList[DropID] == 0)
+                if (g_pDropList[DropID] == nullptr)
                 {
                     g_pDropList[DropID] = new DropList_t;
                 }

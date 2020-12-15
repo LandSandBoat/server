@@ -121,9 +121,9 @@ void CParty::DisbandParty(bool playerInitiated)
     {
         PushPacket(0, 0, new CPartyDefinePacket(nullptr));
 
-        for (uint8 i = 0; i < members.size(); ++i)
+        for (auto& member : members)
         {
-            CCharEntity* PChar = (CCharEntity*)members.at(i);
+            CCharEntity* PChar = (CCharEntity*)member;
             PChar->ClearTrusts();
 
             PChar->PParty = nullptr;
@@ -194,7 +194,6 @@ void CParty::AssignPartyRole(int8* MemberName, uint8 role)
     uint8 data[4]{};
     ref<uint32>(data, 0) = m_PartyID;
     message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
-    return;
 }
 
 /************************************************************************
@@ -207,9 +206,8 @@ uint8 CParty::MemberCount(uint16 ZoneID)
 {
     uint8 count = 0;
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto member : members)
     {
-        auto* member = members.at(i);
         if (member->getZone() == ZoneID)
         {
             count++;
@@ -233,11 +231,11 @@ CBattleEntity* CParty::GetMemberByName(const int8* MemberName)
 {
     TPZ_DEBUG_BREAK_IF(m_PartyType != PARTY_PCS);
 
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
+        if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
         {
-            return members.at(i);
+            return member;
         }
     }
 
@@ -750,7 +748,7 @@ void CParty::ReloadParty()
                         alliance = memberinfo.flags & (PARTY_SECOND | PARTY_THIRD);
                         j        = 0;
                     }
-                    auto PPartyMember = zoneutils::GetChar(memberinfo.id);
+                    auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                     if (PPartyMember)
                     {
                         PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
@@ -773,9 +771,9 @@ void CParty::ReloadParty()
         RefreshFlags(info);
         CBattleEntity* PLeader = GetLeader();
         // regular party
-        for (uint8 i = 0; i < members.size(); ++i)
+        for (auto& member : members)
         {
-            CCharEntity* PChar = (CCharEntity*)members.at(i);
+            CCharEntity* PChar = (CCharEntity*)member;
 
             PChar->PLatentEffectContainer->CheckLatentsPartyJobs();
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
@@ -789,7 +787,7 @@ void CParty::ReloadParty()
             uint8 j = 0;
             for (auto&& memberinfo : info)
             {
-                auto PPartyMember = zoneutils::GetChar(memberinfo.id);
+                auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                 if (PPartyMember)
                 {
                     PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
@@ -800,7 +798,7 @@ void CParty::ReloadParty()
                     CBattleEntity* PLeader = GetLeader();
                     if (PLeader != nullptr)
                     {
-                        for (auto PTrust : ((CCharEntity*)PLeader)->PTrusts)
+                        for (auto* PTrust : ((CCharEntity*)PLeader)->PTrusts)
                         {
                             j++;
                             // trusts don't persist over zonelines, so we know their zone has be the same as the leader.
@@ -898,9 +896,9 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
         }
         else if (PChar->PParty->m_PAlliance == nullptr)
         {
-            for (uint8 i = 0; i < members.size(); ++i)
+            for (auto& member : members)
             {
-                CCharEntity* PPartyMember = (CCharEntity*)members.at(i);
+                CCharEntity* PPartyMember = (CCharEntity*)member;
 
                 if (PPartyMember != PChar && PPartyMember->PTreasurePool != nullptr && PPartyMember->getZone() == PChar->getZone())
                 {
@@ -1008,23 +1006,23 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
             }
             else
             {
-                for (uint8 i = 0; i < members.size(); ++i)
+                for (auto& member : members)
                 {
-                    if (members.at(i)->StatusEffectContainer->HasStatusEffect({ EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_SYNC }))
+                    if (member->StatusEffectContainer->HasStatusEffect({ EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_SYNC }))
                     {
                         ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 543));
                         return;
                     }
                 }
                 m_PSyncTarget = PChar;
-                for (uint8 i = 0; i < members.size(); ++i)
+                for (auto& i : members)
                 {
-                    if (members.at(i)->objtype != TYPE_PC)
+                    if (i->objtype != TYPE_PC)
                     {
                         continue;
                     }
 
-                    CCharEntity* member = (CCharEntity*)members.at(i);
+                    CCharEntity* member = (CCharEntity*)i;
 
                     if (member->status != STATUS_DISAPPEAR && member->getZone() == PChar->getZone())
                     {
@@ -1045,14 +1043,14 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
             if (m_PSyncTarget != nullptr)
             {
                 // disable level sync
-                for (uint8 i = 0; i < members.size(); ++i)
+                for (auto& i : members)
                 {
-                    if (members.at(i)->objtype != TYPE_PC)
+                    if (i->objtype != TYPE_PC)
                     {
                         continue;
                     }
 
-                    CCharEntity* member = (CCharEntity*)members.at(i);
+                    CCharEntity* member = (CCharEntity*)i;
 
                     if (member->status != STATUS_DISAPPEAR)
                     {
@@ -1102,14 +1100,14 @@ void CParty::SetQuarterMaster(const char* MemberName)
 
 void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet)
 {
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& i : members)
     {
-        if (members.at(i) == nullptr || members.at(i)->objtype != TYPE_PC)
+        if (i == nullptr || i->objtype != TYPE_PC)
         {
             continue;
         }
 
-        CCharEntity* member = (CCharEntity*)members.at(i);
+        CCharEntity* member = (CCharEntity*)i;
 
         if (member->id != senderID && member->status != STATUS_DISAPPEAR && !jailutils::InPrison(member))
         {
@@ -1130,13 +1128,13 @@ void CParty::PushEffectsPacket()
 
         for (auto& PMember : members)
         {
-            auto PMemberChar = static_cast<CCharEntity*>(PMember);
-            auto effects     = std::make_unique<CPartyEffectsPacket>();
+            auto* PMemberChar = static_cast<CCharEntity*>(PMember);
+            auto  effects     = std::make_unique<CPartyEffectsPacket>();
             for (auto& memberinfo : info)
             {
                 if (memberinfo.partyid == m_PartyID && memberinfo.id != PMemberChar->id)
                 {
-                    auto PPartyMember = zoneutils::GetChar(memberinfo.id);
+                    auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                     if (PPartyMember && PPartyMember->getZone() == PMemberChar->getZone())
                     {
                         effects->AddMemberEffects(PPartyMember);
@@ -1168,14 +1166,14 @@ void CParty::RefreshSync()
     {
         SetSyncTarget(nullptr, 554);
     }
-    for (uint8 i = 0; i < members.size(); ++i)
+    for (auto& i : members)
     {
-        if (members.at(i)->objtype != TYPE_PC || members.at(i)->getZone() != sync->getZone())
+        if (i->objtype != TYPE_PC || i->getZone() != sync->getZone())
         {
             continue;
         }
 
-        CCharEntity* member = (CCharEntity*)members.at(i);
+        CCharEntity* member = (CCharEntity*)i;
 
         uint8 NewMLevel = 0;
 
@@ -1222,7 +1220,7 @@ bool CParty::HasTrusts()
 {
     for (auto* PMember : members)
     {
-        if (auto PCharMember = dynamic_cast<CCharEntity*>(PMember))
+        if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
         {
             if (!PCharMember->PTrusts.empty())
             {
@@ -1242,7 +1240,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
             if (memberinfo.flags & PARTY_LEADER)
             {
                 bool found = false;
-                for (auto member : members)
+                for (auto* member : members)
                 {
                     if (member->id == memberinfo.id)
                     {
@@ -1258,7 +1256,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
             if (memberinfo.flags & PARTY_QM)
             {
                 bool found = false;
-                for (auto member : members)
+                for (auto* member : members)
                 {
                     if (member->id == memberinfo.id)
                     {
@@ -1274,7 +1272,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
             if (memberinfo.flags & PARTY_SYNC)
             {
                 bool found = false;
-                for (auto member : members)
+                for (auto* member : members)
                 {
                     if (member->id == memberinfo.id)
                     {
@@ -1290,7 +1288,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
             if (memberinfo.flags & ALLIANCE_LEADER && m_PAlliance)
             {
                 bool found = false;
-                for (auto member : members)
+                for (auto* member : members)
                 {
                     if (member->id == memberinfo.id)
                     {

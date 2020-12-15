@@ -152,11 +152,7 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
             break;
         }
     }
-    if (members.empty())
-    {
-        return false;
-    }
-    return true;
+    return !members.empty();
 }
 
 /************************************************************************
@@ -173,11 +169,11 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 
     if (newId == 514 || newId == 515)
     {
-        for (uint32 i = 0; i < members.size(); ++i)
+        for (auto& member : members)
         {
-            if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
+            if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
             {
-                CCharEntity* PMember = (CCharEntity*)members.at(i);
+                CCharEntity* PMember = (CCharEntity*)member;
 
                 SLOTTYPE slot = SLOT_LINK1;
                 int      lsID = 1;
@@ -247,11 +243,11 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell)
 {
     uint32 lsid = m_id;
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        if (strcmp((const char*)MemberName, (const char*)members.at(i)->GetName()) == 0)
+        if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
         {
-            CCharEntity* PMember = (CCharEntity*)members.at(i);
+            CCharEntity* PMember = (CCharEntity*)member;
 
             CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK1);
             SLOTTYPE        slot           = SLOT_LINK1;
@@ -337,7 +333,7 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
     DecodeStringLinkshell(lsname, signature);
 
     // break logged in and equipped members
-    while (members.size() > 0)
+    while (!members.empty())
     {
         RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
     }
@@ -353,12 +349,12 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
 
 void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
 {
-    for (uint32 i = 0; i < members.size(); ++i)
+    for (auto& member : members)
     {
-        if (members.at(i)->id != senderID && members.at(i)->status != STATUS_DISAPPEAR && !jailutils::InPrison(members.at(i)))
+        if (member->id != senderID && member->status != STATUS_DISAPPEAR && !jailutils::InPrison(member))
         {
             CBasicPacket* newPacket = new CBasicPacket(*packet);
-            if (members.at(i)->PLinkshell2 == this)
+            if (member->PLinkshell2 == this)
             {
                 if (newPacket->id() == CChatMessagePacket::id)
                 {
@@ -369,7 +365,7 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
                     newPacket->ref<uint8>(0x05) |= 0x40;
                 }
             }
-            members.at(i)->pushPacket(newPacket);
+            member->pushPacket(newPacket);
         }
     }
     delete packet;

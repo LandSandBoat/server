@@ -26,9 +26,7 @@
 #include "map.h"
 #include "mob_spell_list.h"
 
-CMobSpellList::CMobSpellList()
-{
-}
+CMobSpellList::CMobSpellList() = default;
 
 void CMobSpellList::AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl)
 {

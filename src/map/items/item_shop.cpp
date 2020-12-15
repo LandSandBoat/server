@@ -31,9 +31,7 @@ CItemShop::CItemShop(uint16 id)
     m_InitialQuantity = 0;
 }
 
-CItemShop::~CItemShop()
-{
-}
+CItemShop::~CItemShop() = default;
 
 uint32 CItemShop::getMinPrice() const
 {

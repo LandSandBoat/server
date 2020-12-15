@@ -278,7 +278,7 @@ namespace trustutils
     CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     {
         auto* PTrust    = new CTrustEntity(PMaster);
-        auto  trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t) { return t->trustID == TrustID; });
+        auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t) { return t->trustID == TrustID; });
 
         PTrust->loc              = PMaster->loc;
         PTrust->m_OwnerID.id     = PMaster->id;

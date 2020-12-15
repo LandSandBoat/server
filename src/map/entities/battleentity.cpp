@@ -89,9 +89,7 @@ CBattleEntity::CBattleEntity()
     m_unkillable = false;
 }
 
-CBattleEntity::~CBattleEntity()
-{
-}
+CBattleEntity::~CBattleEntity() = default;
 
 bool CBattleEntity::isDead()
 {
@@ -266,7 +264,7 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
         return 1700;
     }
     uint16 WeaponDelay = 9999;
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         uint16 MinimumDelay = weapon->getDelay(); // Track base delay.  We will need this later.  Mod::DELAY is ignored for now.
         WeaponDelay         = weapon->getDelay() - getMod(Mod::DELAY);
@@ -274,7 +272,7 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
         {
             WeaponDelay -= getMod(Mod::MARTIAL_ARTS) * 1000 / 60;
         }
-        else if (auto subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]);
+        else if (auto* subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]);
                  subweapon && subweapon->getDmgType() > DAMAGETYPE::NONE && subweapon->getDmgType() < DAMAGETYPE::HTH)
         {
             MinimumDelay += subweapon->getDelay();
@@ -352,7 +350,7 @@ int16 CBattleEntity::GetAmmoDelay()
 
 uint16 CBattleEntity::GetMainWeaponDmg()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
@@ -372,7 +370,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
 uint16 CBattleEntity::GetSubWeaponDmg()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
@@ -393,7 +391,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
 uint16 CBattleEntity::GetRangedWeaponDmg()
 {
     uint16 dmg = 0;
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
@@ -408,7 +406,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             dmg += weapon->getDamage();
         }
     }
-    if (auto ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
+    if (auto* ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
     {
         if ((ammo->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
@@ -428,7 +426,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
 uint16 CBattleEntity::GetMainWeaponRank()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         return (weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK)) / 9;
     }
@@ -437,7 +435,7 @@ uint16 CBattleEntity::GetMainWeaponRank()
 
 uint16 CBattleEntity::GetSubWeaponRank()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
         return (weapon->getDamage() + getMod(Mod::SUB_DMG_RANK)) / 9;
     }
@@ -446,7 +444,7 @@ uint16 CBattleEntity::GetSubWeaponRank()
 
 uint16 CBattleEntity::GetRangedWeaponRank()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
     {
         return (weapon->getDamage() + getMod(Mod::RANGED_DMG_RANK)) / 9;
     }
@@ -614,7 +612,7 @@ uint16 CBattleEntity::ATT()
 {
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
-    auto  weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
     if (weapon && weapon->isTwoHanded())
     {
         ATT += (STR() * 3) / 4;
@@ -655,7 +653,7 @@ uint16 CBattleEntity::ATT()
 
 uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
 {
-    auto PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
+    auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
     {
         return 0;
@@ -666,7 +664,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
 
 uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
 {
-    auto PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
+    auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
     {
         return 0;
@@ -691,7 +689,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         uint16 iLvlSkill = 0;
         if (attackNumber == 0)
         {
-            if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+            if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
             {
                 skill     = weapon->getSkillType();
                 iLvlSkill = weapon->getILvlSkill();
@@ -703,13 +701,13 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else if (attackNumber == 1)
         {
-            if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
+            if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
             {
                 skill     = weapon->getSkillType();
                 iLvlSkill = weapon->getILvlSkill();
                 if (skill == SKILL_NONE && GetSkill(SKILL_HAND_TO_HAND) > 0)
                 {
-                    auto main_weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+                    auto* main_weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
                     if (main_weapon && (main_weapon->getSkillType() == SKILL_NONE || main_weapon->getSkillType() == SKILL_HAND_TO_HAND))
                     {
                         skill = SKILL_HAND_TO_HAND;
@@ -719,7 +717,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else if (attackNumber == 2)
         {
-            if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+            if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
             {
                 iLvlSkill = weapon->getILvlSkill();
             }
@@ -727,7 +725,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         int16 ACC = GetSkill(skill) + iLvlSkill;
         ACC       = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
-        if (auto weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded() == true)
+        if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
         {
             ACC += (int16)(DEX() * 0.75);
         }
@@ -735,8 +733,8 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         {
             ACC += (int16)(DEX() * 0.75);
         }
-        ACC        = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
-        auto PChar = dynamic_cast<CCharEntity*>(this);
+        ACC         = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
+        auto* PChar = dynamic_cast<CCharEntity*>(this);
         if (PChar)
         {
             ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
@@ -904,31 +902,31 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
 {
     if (GetMLevel() >= itemLevel)
     {
-        for (uint16 i = 0; i < modList->size(); ++i)
+        for (auto& i : *modList)
         {
             if (slotid == SLOT_SUB)
             {
-                if (modList->at(i).getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] += modList->at(i).getModAmount();
+                    m_modStat[Mod::SUB_DMG_RANK] += i.getModAmount();
                 }
                 else
                 {
-                    m_modStat[modList->at(i).getModID()] += modList->at(i).getModAmount();
+                    m_modStat[i.getModID()] += i.getModAmount();
                 }
             }
             else
             {
-                m_modStat[modList->at(i).getModID()] += modList->at(i).getModAmount();
+                m_modStat[i.getModID()] += i.getModAmount();
             }
         }
     }
     else
     {
-        for (uint16 i = 0; i < modList->size(); ++i)
+        for (auto& i : *modList)
         {
-            int16 modAmount = GetMLevel() * modList->at(i).getModAmount();
-            switch (modList->at(i).getModID())
+            int16 modAmount = GetMLevel() * i.getModAmount();
+            switch (i.getModID())
             {
                 case Mod::DEF:
                 case Mod::MAIN_DMG_RATING:
@@ -963,18 +961,18 @@ void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             modAmount /= itemLevel;
             if (slotid == SLOT_SUB)
             {
-                if (modList->at(i).getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
                     m_modStat[Mod::SUB_DMG_RANK] += modAmount;
                 }
                 else
                 {
-                    m_modStat[modList->at(i).getModID()] += modAmount;
+                    m_modStat[i.getModID()] += modAmount;
                 }
             }
             else
             {
-                m_modStat[modList->at(i).getModID()] += modAmount;
+                m_modStat[i.getModID()] += modAmount;
             }
         }
     }
@@ -999,9 +997,9 @@ void CBattleEntity::setModifier(Mod type, int16 amount)
 
 void CBattleEntity::setModifiers(std::vector<CModifier>* modList)
 {
-    for (uint16 i = 0; i < modList->size(); ++i)
+    for (auto& i : *modList)
     {
-        m_modStat[modList->at(i).getModID()] = modList->at(i).getModAmount();
+        m_modStat[i.getModID()] = i.getModAmount();
     }
 }
 
@@ -1034,9 +1032,9 @@ void CBattleEntity::restoreModifiers()
 
 void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
 {
-    for (uint16 i = 0; i < modList->size(); ++i)
+    for (auto& i : *modList)
     {
-        m_modStat[modList->at(i).getModID()] -= modList->at(i).getModAmount();
+        m_modStat[i.getModID()] -= i.getModAmount();
     }
 }
 
@@ -1044,31 +1042,31 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
 {
     if (GetMLevel() >= itemLevel)
     {
-        for (uint16 i = 0; i < modList->size(); ++i)
+        for (auto& i : *modList)
         {
             if (slotid == SLOT_SUB)
             {
-                if (modList->at(i).getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
-                    m_modStat[Mod::SUB_DMG_RANK] -= modList->at(i).getModAmount();
+                    m_modStat[Mod::SUB_DMG_RANK] -= i.getModAmount();
                 }
                 else
                 {
-                    m_modStat[modList->at(i).getModID()] -= modList->at(i).getModAmount();
+                    m_modStat[i.getModID()] -= i.getModAmount();
                 }
             }
             else
             {
-                m_modStat[modList->at(i).getModID()] -= modList->at(i).getModAmount();
+                m_modStat[i.getModID()] -= i.getModAmount();
             }
         }
     }
     else
     {
-        for (uint16 i = 0; i < modList->size(); ++i)
+        for (auto& i : *modList)
         {
-            int16 modAmount = GetMLevel() * modList->at(i).getModAmount();
-            switch (modList->at(i).getModID())
+            int16 modAmount = GetMLevel() * i.getModAmount();
+            switch (i.getModID())
             {
                 case Mod::DEF:
                 case Mod::MAIN_DMG_RATING:
@@ -1103,18 +1101,18 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
             modAmount /= itemLevel;
             if (slotid == SLOT_SUB)
             {
-                if (modList->at(i).getModID() == Mod::MAIN_DMG_RANK)
+                if (i.getModID() == Mod::MAIN_DMG_RANK)
                 {
                     m_modStat[Mod::SUB_DMG_RANK] -= modAmount;
                 }
                 else
                 {
-                    m_modStat[modList->at(i).getModID()] -= modAmount;
+                    m_modStat[i.getModID()] -= modAmount;
                 }
             }
             else
             {
-                m_modStat[modList->at(i).getModID()] -= modAmount;
+                m_modStat[i.getModID()] -= modAmount;
             }
         }
     }
@@ -1266,14 +1264,9 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         }
     }
 
-    if ((targetFlags & TARGET_SELF) &&
-        (this == PInitiator ||
-         (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PETTYPE_AUTOMATON && this == PInitiator->PMaster)))
-    {
-        return true;
-    }
-
-    return false;
+    return (targetFlags & TARGET_SELF) &&
+           (this == PInitiator ||
+            (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PETTYPE_AUTOMATON && this == PInitiator->PMaster));
 }
 
 bool CBattleEntity::CanUseSpell(CSpell* PSpell)
@@ -1315,8 +1308,8 @@ void CBattleEntity::OnDeathTimer()
 
 void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
-    auto           PSpell          = state.GetSpell();
-    auto           PActionTarget   = static_cast<CBattleEntity*>(state.GetTarget());
+    auto*          PSpell          = state.GetSpell();
+    auto*          PActionTarget   = static_cast<CBattleEntity*>(state.GetTarget());
     CBattleEntity* POriginalTarget = PActionTarget;
     bool           IsMagicCovered  = false;
 
@@ -1391,7 +1384,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     uint16 msg = MSGBASIC_NONE;
 
-    for (auto PTarget : PAI->TargetFind->m_targets)
+    for (auto* PTarget : PAI->TargetFind->m_targets)
     {
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = PTarget->id;
@@ -1521,7 +1514,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
 
 void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
-    auto PWeaponskill = state.GetSkill();
+    auto* PWeaponskill = state.GetSkill();
 
     action.id         = id;
     action.actiontype = ACTION_WEAPONSKILL_FINISH;
@@ -1530,11 +1523,7 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 
 bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
-    if ((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled())
-    {
-        return false;
-    }
-    return true;
+    return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
 }
 
 void CBattleEntity::OnDisengage(CAttackState& s)
@@ -1559,7 +1548,7 @@ CBattleEntity* CBattleEntity::GetBattleTarget()
 
 bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 {
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (PTarget->objtype == TYPE_PC)
     {
@@ -1655,7 +1644,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     else
                     {
                         int16 naturalh2hDMG = 0;
-                        if (auto targ_weapon = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
+                        if (auto* targ_weapon = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
                             (targ_weapon && targ_weapon->getSkillType() == SKILL_HAND_TO_HAND) ||
                             (PTarget->objtype == TYPE_MOB && PTarget->GetMJob() == JOB_MNK))
                         {
@@ -1669,7 +1658,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         actionTarget.spikesMessage = 33;
                         if (PTarget->objtype == TYPE_PC)
                         {
-                            auto  targ_weapon = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
+                            auto* targ_weapon = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
                             uint8 skilltype   = (targ_weapon == nullptr ? SKILL_HAND_TO_HAND : targ_weapon->getSkillType());
                             charutils::TrySkillUP((CCharEntity*)PTarget, (SKILLTYPE)skilltype, GetMLevel());
                         } // In case the Automaton can counter
@@ -1847,7 +1836,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
-    auto PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
+    auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
 
     return PTarget;
 }
@@ -1867,7 +1856,7 @@ void CBattleEntity::TryHitInterrupt(CBattleEntity* PAttacker)
     }
 }
 
-void CBattleEntity::OnDespawn(CDespawnState&)
+void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     FadeOut();
     //#event despawn
@@ -1885,7 +1874,7 @@ duration CBattleEntity::GetBattleTime()
     return server_clock::now() - m_battleStartTime;
 }
 
-void CBattleEntity::Tick(time_point)
+void CBattleEntity::Tick(time_point /*unused*/)
 {
 }
 

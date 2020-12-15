@@ -172,7 +172,7 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
 
     auto i = 1;
 
-    if (required && m_PLuaBattlefield->m_RequiredEnemyList.size() > 0)
+    if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
             lua_getglobal(L, CLuaBaseEntity::className);
@@ -186,7 +186,7 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
         });
     }
 
-    if (adds && m_PLuaBattlefield->m_AdditionalEnemyList.size() > 0)
+    if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
             lua_getglobal(L, CLuaBaseEntity::className);
@@ -341,9 +341,9 @@ inline int32 CLuaBattlefield::setRecord(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    auto name      = lua_tostring(L, 1);
-    auto time      = lua_tointeger(L, 2);
-    auto partySize = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? m_PLuaBattlefield->GetPlayerCount() : lua_tointeger(L, 1);
+    const auto* name      = lua_tostring(L, 1);
+    auto        time      = lua_tointeger(L, 2);
+    auto        partySize = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? m_PLuaBattlefield->GetPlayerCount() : lua_tointeger(L, 1);
     m_PLuaBattlefield->SetRecord((char*)name, std::chrono::seconds(time), partySize);
     return 0;
 }
@@ -379,8 +379,8 @@ inline int32 CLuaBattlefield::insertEntity(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
 
-    auto PLuaEntity = !lua_isnumber(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1) : nullptr;
-    auto PEntity    = PLuaEntity ? PLuaEntity->GetBaseEntity() : nullptr;
+    auto* PLuaEntity = !lua_isnumber(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1) : nullptr;
+    auto* PEntity    = PLuaEntity ? PLuaEntity->GetBaseEntity() : nullptr;
 
     auto                    targid        = PEntity ? PEntity->targid : lua_tointeger(L, 1);
     bool                    ally          = !lua_isnil(L, 2) ? lua_toboolean(L, 2) : false;

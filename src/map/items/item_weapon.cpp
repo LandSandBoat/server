@@ -52,9 +52,7 @@ CItemWeapon::CItemWeapon(uint16 id)
     m_wsunlockpoints = 0;
 }
 
-CItemWeapon::~CItemWeapon()
-{
-}
+CItemWeapon::~CItemWeapon() = default;
 
 void CItemWeapon::resetDelay()
 {
@@ -116,7 +114,7 @@ bool CItemWeapon::isUnlockable() const
         return false;
     }
 
-    return (m_wsunlockpoints > 0 ? true : false);
+    return (m_wsunlockpoints > 0);
 }
 
 bool CItemWeapon::isUnlocked()

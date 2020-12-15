@@ -44,9 +44,7 @@ CStatusEffect::CStatusEffect(EFFECT id, uint16 icon, uint16 power, uint32 tick, 
     }
 }
 
-CStatusEffect::~CStatusEffect()
-{
-}
+CStatusEffect::~CStatusEffect() = default;
 
 const int8* CStatusEffect::GetName()
 {
@@ -205,13 +203,13 @@ void CStatusEffect::SetName(string_t name)
 
 void CStatusEffect::addMod(Mod modType, int16 amount)
 {
-    for (uint32 i = 0; i < modList.size(); ++i)
+    for (auto& i : modList)
     {
-        if (modList.at(i).getModID() == modType)
+        if (i.getModID() == modType)
         {
-            modList.at(i).setModAmount(modList.at(i).getModAmount() + amount);
+            i.setModAmount(i.getModAmount() + amount);
             return;
         }
     }
-    modList.push_back(CModifier(modType, amount));
+    modList.emplace_back(modType, amount);
 }

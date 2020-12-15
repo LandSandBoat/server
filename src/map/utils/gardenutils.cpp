@@ -41,9 +41,7 @@ constexpr uint32 VANATIME_FOR_WILT_STAGE    = 65535 * VANADAY_SECONDS;
 
 std::map<uint32, GardenResultList_t> g_pGardenResultMap; // global map of gardening results
 
-GardenResult_t::GardenResult_t()
-{
-}
+GardenResult_t::GardenResult_t() = default;
 GardenResult_t::GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuantity, uint8 Weight)
 : ItemID(ItemID)
 , MinQuantity(MinQuantity)

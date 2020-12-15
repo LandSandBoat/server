@@ -82,7 +82,7 @@ namespace guildutils
                 g_PGuildShopList.push_back(new CItemContainer(Sql_GetIntData(SqlHandle, 0)));
             }
         }
-        for (auto PGuildShop : g_PGuildShopList)
+        for (auto* PGuildShop : g_PGuildShopList)
         {
             fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity \
 				    FROM guild_shops \
@@ -125,7 +125,7 @@ namespace guildutils
 
     void UpdateGuildsStock()
     {
-        for (auto PGuildShop : g_PGuildShopList)
+        for (auto* PGuildShop : g_PGuildShopList)
         {
             for (uint8 slotid = 1; slotid <= PGuildShop->GetSize(); ++slotid)
             {
@@ -179,7 +179,7 @@ namespace guildutils
             pattern = Sql_GetUIntData(SqlHandle, 0);
         }
 
-        for (auto PGuild : g_PGuildList)
+        for (auto* PGuild : g_PGuildList)
         {
             PGuild->updateGuildPointsPattern(pattern);
         }
@@ -195,7 +195,7 @@ namespace guildutils
 
     CItemContainer* GetGuildShop(uint16 GuildShopID)
     {
-        for (auto PGuildShop : g_PGuildShopList)
+        for (auto* PGuildShop : g_PGuildShopList)
         {
             if (PGuildShop->GetID() == GuildShopID)
             {

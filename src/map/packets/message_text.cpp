@@ -32,7 +32,7 @@ CMessageTextPacket::CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, b
     // если в качестве объекта передается персонаж,
     // то не будем отображать имя
 
-    if (PEntity->objtype == TYPE_PC || showName == false)
+    if (PEntity->objtype == TYPE_PC || !showName)
     {
         messageID += 0x8000;
     }

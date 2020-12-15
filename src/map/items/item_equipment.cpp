@@ -202,11 +202,11 @@ void CItemEquipment::addModifier(CModifier modifier)
 
 int16 CItemEquipment::getModifier(Mod mod)
 {
-    for (uint16 i = 0; i < modList.size(); ++i)
+    for (auto& i : modList)
     {
-        if (modList.at(i).getModID() == mod)
+        if (i.getModID() == mod)
         {
-            return modList.at(i).getModAmount();
+            return i.getModAmount();
         }
     }
     return 0;

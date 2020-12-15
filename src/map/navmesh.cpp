@@ -94,9 +94,7 @@ CNavMesh::CNavMesh(uint16 zoneID)
     m_hit.maxPath = 20;
 }
 
-CNavMesh::~CNavMesh()
-{
-}
+CNavMesh::~CNavMesh() = default;
 
 bool CNavMesh::load(const std::string& filename)
 {
@@ -151,7 +149,7 @@ bool CNavMesh::load(const std::string& filename)
         memset(data, 0, tileHeader.dataSize);
         file.read(reinterpret_cast<char*>(data), tileHeader.dataSize);
 
-        m_navMesh->addTile(data, tileHeader.dataSize, DT_TILE_FREE_DATA, tileHeader.tileRef, 0);
+        m_navMesh->addTile(data, tileHeader.dataSize, DT_TILE_FREE_DATA, tileHeader.tileRef, nullptr);
     }
 
     // init detour nav mesh path finder
@@ -492,10 +490,5 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     }
 
     // no wall was hit
-    if (m_hit.t == FLT_MAX)
-    {
-        return true;
-    }
-
-    return false;
+    return m_hit.t == FLT_MAX;
 }

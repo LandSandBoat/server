@@ -122,11 +122,11 @@ namespace message
                     {
                         if (PChar->PParty->m_PAlliance != nullptr)
                         {
-                            for (uint8 i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
+                            for (auto& i : PChar->PParty->m_PAlliance->partyList)
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
                                 memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
-                                ((CParty*)PChar->PParty->m_PAlliance->partyList.at(i))->PushPacket(ref<uint32>((uint8*)extra->data(), 4), 0, newPacket);
+                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra->data(), 4), 0, newPacket);
                             }
                         }
                         else
@@ -501,7 +501,7 @@ namespace message
 
                     if (PChar && PChar->loc.zone)
                     {
-                        if (ref<bool>((uint8*)extra->data(), 1) == true)
+                        if (ref<bool>((uint8*)extra->data(), 1))
                         {
                             PChar->loc.p.x         = ref<float>((uint8*)extra->data(), 6);
                             PChar->loc.p.y         = ref<float>((uint8*)extra->data(), 10);

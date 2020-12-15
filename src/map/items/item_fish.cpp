@@ -39,9 +39,7 @@ CItemFish::CItemFish(const CItem& PItem)
     m_rodflag   = 0;
 }
 
-CItemFish::~CItemFish()
-{
-}
+CItemFish::~CItemFish() = default;
 
 uint16 CItemFish::GetLength()
 {

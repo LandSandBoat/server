@@ -12,7 +12,7 @@ CEntityEnableList::CEntityEnableList(const std::vector<uint32>& list)
     ref<uint32>(0x04) = 1;
 
     uint32 offset = 0;
-    for (auto& value : list)
+    for (const auto& value : list)
     {
         ref<uint32>(0x08 + offset) = value;
         offset += 4;

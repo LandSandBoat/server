@@ -824,7 +824,7 @@ namespace petutils
                 PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
             }
             // apply stats from previous zone if this pet is being transfered
-            if (spawningFromZone == true)
+            if (spawningFromZone)
             {
                 PPet->health.tp = (int16)((CCharEntity*)PMaster)->petZoningInfo.petTP;
                 PPet->health.hp = ((CCharEntity*)PMaster)->petZoningInfo.petHP;
@@ -926,7 +926,7 @@ namespace petutils
                 PMob->m_giveExp = PMob->GetHPP() == 100;
 
                 // master using leave command
-                auto state = dynamic_cast<CAbilityState*>(PMaster->PAI->GetCurrentState());
+                auto* state = dynamic_cast<CAbilityState*>(PMaster->PAI->GetCurrentState());
                 if ((state && state->GetAbility()->getID() == ABILITY_LEAVE) || PChar->loc.zoning || PChar->isDead())
                 {
                     PMob->PEnmityContainer->Clear();
@@ -1635,7 +1635,7 @@ namespace petutils
             return true;
         }
 
-        if (auto PPetEntity = dynamic_cast<CPetEntity*>(PPet))
+        if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet))
         {
             if (petmod == PetModType::Avatar && PPetEntity->getPetType() == PETTYPE_AVATAR)
             {

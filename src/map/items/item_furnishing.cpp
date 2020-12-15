@@ -33,9 +33,7 @@ CItemFurnishing::CItemFurnishing(uint16 id)
     m_aura         = 0;
 }
 
-CItemFurnishing::~CItemFurnishing()
-{
-}
+CItemFurnishing::~CItemFurnishing() = default;
 
 void CItemFurnishing::setInstalled(bool installed)
 {

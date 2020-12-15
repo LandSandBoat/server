@@ -431,7 +431,7 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
     bool          haveHate = false;
     EnmityList_t* enmityList;
 
-    auto PMob = dynamic_cast<CMobEntity*>(PTarget);
+    auto* PMob = dynamic_cast<CMobEntity*>(PTarget);
     if (PMob)
     {
         enmityList            = PMob->PEnmityContainer->GetEnmityList();
@@ -450,7 +450,7 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         {
             uint16 selfEnmity   = selfEnmity_obj->second.CE + selfEnmity_obj->second.VE;
             uint16 masterEnmity = masterEnmity_obj->second.CE + masterEnmity_obj->second.VE;
-            haveHate            = selfEnmity > masterEnmity ? true : false;
+            haveHate            = selfEnmity > masterEnmity;
         }
     }
 
@@ -1093,9 +1093,8 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
 
     if (maneuvers.water && PAutomaton->getHead() == HEAD_SOULSOOTHER && PAutomaton->PMaster->PParty) // Water + Soulsoother head -> Remove party's statuses
     {
-        for (uint8 i = 0; i < PAutomaton->PMaster->PParty->members.size(); ++i)
+        for (auto member : PAutomaton->PMaster->PParty->members)
         {
-            CBattleEntity* member = PAutomaton->PMaster->PParty->members.at(i);
             if (member->id != PAutomaton->PMaster->id)
             {
                 castPriority.clear();
@@ -1138,7 +1137,7 @@ bool CAutomatonController::TryEnhance()
     }
 
     EnmityList_t* enmityList;
-    auto          PMob = dynamic_cast<CMobEntity*>(PTarget);
+    auto*         PMob = dynamic_cast<CMobEntity*>(PTarget);
     if (PMob)
     {
         enmityList = PMob->PEnmityContainer->GetEnmityList();
@@ -1457,7 +1456,7 @@ bool CAutomatonController::TryTPMove()
 
         for (auto skillid : FamilySkills)
         {
-            auto PSkill = battleutils::GetMobSkill(skillid);
+            auto* PSkill = battleutils::GetMobSkill(skillid);
             if (PSkill && PAutomaton->GetSkill(skilltype) > PSkill->getParam() && PSkill->getParam() != -1 &&
                 distance(PAutomaton->loc.p, PTarget->loc.p) < PSkill->getRadius())
             {
@@ -1487,7 +1486,7 @@ bool CAutomatonController::TryTPMove()
                     }
                 }
 
-                for (auto PSkill : validSkills)
+                for (auto* PSkill : validSkills)
                 {
                     if (PSkill->getParam() > currentSkill)
                     {
@@ -1508,7 +1507,7 @@ bool CAutomatonController::TryTPMove()
 
         if (!attemptChain || (currentManeuvers == -1 && PAutomaton->PMaster && PAutomaton->PMaster->health.tp < PAutomaton->getMod(Mod::AUTO_TP_EFFICIENCY)))
         {
-            for (auto PSkill : validSkills)
+            for (auto* PSkill : validSkills)
             {
                 int8 maneuvers = luautils::OnMobAutomatonSkillCheck(PTarget, PAutomaton, PSkill);
                 if (maneuvers > -1 && (maneuvers > currentManeuvers || (maneuvers == currentManeuvers && PSkill->getParam() > currentSkill)))

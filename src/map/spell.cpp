@@ -140,11 +140,7 @@ bool CSpell::isBuff() const
 
 bool CSpell::tookEffect() const
 {
-    if (m_message == 75 || m_message == 284 || m_message == 283 || m_message == 85)
-    {
-        return false;
-    }
-    return true;
+    return !(m_message == 75 || m_message == 284 || m_message == 283 || m_message == 85);
 }
 
 bool CSpell::hasMPCost()
@@ -502,7 +498,7 @@ namespace spell
                 char* contentTag;
                 Sql_GetData(SqlHandle, 7, &contentTag, nullptr);
 
-                if (luautils::IsContentEnabled(contentTag) == false)
+                if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
@@ -553,7 +549,7 @@ namespace spell
                 char* contentTag;
                 Sql_GetData(SqlHandle, 2, &contentTag, nullptr);
 
-                if (luautils::IsContentEnabled(contentTag) == false)
+                if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }

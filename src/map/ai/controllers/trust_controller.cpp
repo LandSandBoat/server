@@ -191,10 +191,10 @@ void CTrustController::DoRoamTick(time_point tick)
 {
     TracyZoneScoped;
 
-    auto PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
-    auto masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
-    bool masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
-    bool trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
+    auto* PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
+    auto  masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
+    bool  masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
+    bool  trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
 
     if (PMaster->PAI->IsEngaged() && trustEngageCondition)
     {
@@ -205,7 +205,7 @@ void CTrustController::DoRoamTick(time_point tick)
     CBattleEntity* PFollowTarget   = (GetPartyPosition() > 0) ? (CBattleEntity*)PMaster->PTrusts.at(currentPartyPos - 1) : POwner->PMaster;
     float          currentDistance = distance(POwner->loc.p, PFollowTarget->loc.p);
 
-    for (auto POtherTrust : PMaster->PTrusts)
+    for (auto* POtherTrust : PMaster->PTrusts)
     {
         if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
         {
@@ -265,7 +265,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     TracyZoneScoped;
 
     uint8 currentPartyPos = GetPartyPosition();
-    for (auto POtherTrust : PMaster->PTrusts)
+    for (auto* POtherTrust : PMaster->PTrusts)
     {
         if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
         {
@@ -309,7 +309,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
         m_Tick - m_LastRepositionTime > 3s && !m_InTransit)
     {
         std::vector<position_t> positions(5);
-        for (unsigned int i = 0; i < positions.size(); ++i)
+        for (auto& position : positions)
         {
             int        random_angle       = tpzrand::GetRandomNumber(255);
             position_t potential_position = {
@@ -319,7 +319,7 @@ void CTrustController::PathOutToDistance(CBattleEntity* PTarget, float amount)
                 0,
                 0,
             };
-            positions[i] = potential_position;
+            position = potential_position;
         }
 
         bool position_found = false;
@@ -398,13 +398,13 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
         return false;
     }
 
-    auto PSpell = spell::GetSpell(spellid);
+    auto* PSpell = spell::GetSpell(spellid);
     if (PSpell->getValidTarget() == TARGET_SELF)
     {
         targid = POwner->targid;
     }
 
-    return CController::Cast(targid, spellid);
+    return CMobController::Cast(targid, spellid);
 }
 
 CBattleEntity* CTrustController::GetTopEnmity()
@@ -412,7 +412,7 @@ CBattleEntity* CTrustController::GetTopEnmity()
     TracyZoneScoped;
 
     CBattleEntity* PEntity = nullptr;
-    if (auto PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
+    if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->PMaster->GetBattleTarget()))
     {
         return PMob->PEnmityContainer->GetHighestEnmity();
     }

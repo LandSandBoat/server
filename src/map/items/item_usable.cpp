@@ -42,9 +42,7 @@ CItemUsable::CItemUsable(uint16 id)
     m_AoE            = 0;
 }
 
-CItemUsable::~CItemUsable()
-{
-}
+CItemUsable::~CItemUsable() = default;
 
 void CItemUsable::setUseDelay(uint8 UseDelay)
 {

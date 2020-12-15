@@ -44,8 +44,8 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
 , m_location(loc)
 , m_slot(slotid)
 {
-    auto PItem = dynamic_cast<CItemUsable*>(m_PEntity->getStorage(loc)->GetItem(slotid));
-    m_PItem    = PItem;
+    auto* PItem = dynamic_cast<CItemUsable*>(m_PEntity->getStorage(loc)->GetItem(slotid));
+    m_PItem     = PItem;
 
     if (m_PItem && m_PItem->isType(ITEM_USABLE))
     {
@@ -77,7 +77,7 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, 56));
     }
 
-    auto PTarget = m_PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(targid, m_PItem->getValidTarget(), m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
@@ -173,7 +173,7 @@ void CItemState::Cleanup(time_point tick)
         m_PItem->setSubType(ITEM_UNLOCKED);
     }
 
-    auto PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);
+    auto* PItem = m_PEntity->getStorage(m_location)->GetItem(m_slot);
 
     if (PItem && PItem == m_PItem)
     {

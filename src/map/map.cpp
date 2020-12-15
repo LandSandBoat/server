@@ -330,7 +330,7 @@ void do_final(int code)
  *                                                                       *
  ************************************************************************/
 
-void do_abort(void)
+void do_abort()
 {
     do_final(EXIT_FAILURE);
 }
@@ -457,7 +457,8 @@ int32 parse_console(int8* buf)
 
 int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_session_data_t* map_session_data)
 {
-    uint16 tmp, i;
+    uint16 tmp;
+    uint16 i;
 
     // counting blocks whose size = 4 byte
     tmp = (uint16)((size - FFXI_HEADER_SIZE) / 4);
@@ -1009,9 +1010,9 @@ int32 map_config_default()
     map_config.exp_loss_rate               = 1.0f;
     map_config.exp_retain                  = 0.0f;
     map_config.exp_loss_level              = 4;
-    map_config.level_sync_enable           = 0;
-    map_config.disable_gear_scaling        = 0;
-    map_config.all_jobs_widescan           = 1;
+    map_config.level_sync_enable           = false;
+    map_config.disable_gear_scaling        = false;
+    map_config.all_jobs_widescan           = true;
     map_config.speed_mod                   = 0;
     map_config.mount_speed_mod             = 0;
     map_config.mob_speed_mod               = 0;
@@ -1059,13 +1060,13 @@ int32 map_config_default()
     map_config.max_merit_points            = 30;
     map_config.yell_cooldown               = 30;
     map_config.audit_gm_cmd                = 0;
-    map_config.audit_chat                  = 0;
-    map_config.audit_say                   = 0;
-    map_config.audit_shout                 = 0;
-    map_config.audit_tell                  = 0;
-    map_config.audit_yell                  = 0;
-    map_config.audit_party                 = 0;
-    map_config.audit_linkshell             = 0;
+    map_config.audit_chat                  = false;
+    map_config.audit_say                   = false;
+    map_config.audit_shout                 = false;
+    map_config.audit_tell                  = false;
+    map_config.audit_yell                  = false;
+    map_config.audit_party                 = false;
+    map_config.audit_linkshell             = false;
     map_config.msg_server_port             = 54003;
     map_config.msg_server_ip               = "127.0.0.1";
     map_config.healing_tick_delay          = 10;
@@ -1097,7 +1098,9 @@ int32 map_config_from_env()
 
 int32 map_config_read(const int8* cfgName)
 {
-    char  line[1024], w1[1024], w2[1024];
+    char  line[1024];
+    char  w1[1024];
+    char  w2[1024];
     FILE* fp;
 
     fp = fopen((const char*)cfgName, "r");

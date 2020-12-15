@@ -61,9 +61,7 @@ CZoneEntities::CZoneEntities(CZone* zone)
     m_Transport = nullptr;
 }
 
-CZoneEntities::~CZoneEntities()
-{
-}
+CZoneEntities::~CZoneEntities() = default;
 
 void CZoneEntities::HealAllMobs()
 {
@@ -380,7 +378,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     }
 
     // remove trusts
-    for (auto trust : PChar->PTrusts)
+    for (auto* trust : PChar->PTrusts)
     {
         for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
         {
@@ -613,14 +611,14 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             {
                 if (PC == PChar->SpawnPCList.end())
                 {
-                    if (PCurrentChar->m_isGMHidden == false)
+                    if (!PCurrentChar->m_isGMHidden)
                     {
                         PChar->SpawnPCList[PCurrentChar->id] = PCurrentChar;
                         PChar->pushPacket(new CCharPacket(PCurrentChar, ENTITY_SPAWN, UPDATE_ALL_CHAR));
                         PChar->pushPacket(new CCharSyncPacket(PCurrentChar));
                     }
 
-                    if (PChar->m_isGMHidden == false)
+                    if (!PChar->m_isGMHidden)
                     {
                         PCurrentChar->SpawnPCList[PChar->id] = PChar;
                         PCurrentChar->pushPacket(new CCharPacket(PChar, ENTITY_SPAWN, UPDATE_ALL_CHAR));
@@ -629,7 +627,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
                 }
                 else
                 {
-                    if (PCurrentChar->m_isGMHidden == true)
+                    if (PCurrentChar->m_isGMHidden)
                     {
                         PChar->SpawnPCList.erase(PC);
                     }

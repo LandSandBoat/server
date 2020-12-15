@@ -69,7 +69,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
     // can't std::remove_if in map so i'll workaround it
     for (auto it = m_Battlefields.begin(); it != m_Battlefields.end();)
     {
-        auto PBattlefield = it->second;
+        auto* PBattlefield = it->second;
         if (PBattlefield->CanCleanup())
         {
             PBattlefield->Cleanup();
@@ -102,7 +102,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
             return BATTLEFIELD_RETURN_CODE_CUTSCENE;
         }
 
-        auto fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize, timeLimit, levelCap, lootDropId, partySize, rules, isMission\
+        const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize, timeLimit, levelCap, lootDropId, partySize, rules, isMission\
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
@@ -115,17 +115,17 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
         }
         else
         {
-            auto PBattlefield = new CBattlefield(battlefieldID, m_PZone, area, PChar);
+            auto* PBattlefield = new CBattlefield(battlefieldID, m_PZone, area, PChar);
 
-            auto name                 = Sql_GetData(SqlHandle, 0);
-            auto recordholder         = Sql_GetData(SqlHandle, 1);
-            auto recordtime           = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
-            auto recordPartySize      = Sql_GetUIntData(SqlHandle, 3);
-            auto timelimit            = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
-            auto levelcap             = Sql_GetUIntData(SqlHandle, 5);
-            auto lootid               = Sql_GetUIntData(SqlHandle, 6);
-            auto maxplayers           = Sql_GetUIntData(SqlHandle, 7);
-            auto rulemask             = Sql_GetUIntData(SqlHandle, 8);
+            auto* name                = Sql_GetData(SqlHandle, 0);
+            auto* recordholder        = Sql_GetData(SqlHandle, 1);
+            auto  recordtime          = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
+            auto  recordPartySize     = Sql_GetUIntData(SqlHandle, 3);
+            auto  timelimit           = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
+            auto  levelcap            = Sql_GetUIntData(SqlHandle, 5);
+            auto  lootid              = Sql_GetUIntData(SqlHandle, 6);
+            auto  maxplayers          = Sql_GetUIntData(SqlHandle, 7);
+            auto  rulemask            = Sql_GetUIntData(SqlHandle, 8);
             PBattlefield->m_isMission = Sql_GetUIntData(SqlHandle, 9);
 
             PBattlefield->SetName((char*)name);
@@ -163,7 +163,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
 
 CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool checkRegistered)
 {
-    auto entity = dynamic_cast<CBattleEntity*>(PEntity);
+    auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
 
     if (checkRegistered && entity && entity->objtype == TYPE_PC)
     {
@@ -213,7 +213,7 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
         return BATTLEFIELD_RETURN_CODE_WAIT;
     }
     // attempt to add to an existing battlefield
-    auto PBattlefield = GetBattlefield(PChar, true);
+    auto* PBattlefield = GetBattlefield(PChar, true);
 
     // couldnt find this character registered, try find by id and initiator
     if (!PBattlefield)

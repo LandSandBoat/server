@@ -1408,8 +1408,6 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return;
         }
-
-        return;
     }
 
     /************************************************************************
@@ -3305,7 +3303,7 @@ namespace luautils
         bool  criticalHit     = lua_toboolean(LuaHandle, -2);
         int32 dmg             = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
 
-        if (criticalHit == true)
+        if (criticalHit)
         {
             luautils::OnCriticalHit((CBattleEntity*)PMob, (CBattleEntity*)PChar);
         }
@@ -3666,7 +3664,7 @@ namespace luautils
         return 0;
     }
 
-    int32 terminate(lua_State*)
+    int32 terminate(lua_State* /*unused*/)
     {
         zoneutils::ForEachZone([](CZone* PZone) {
             PZone->ForEachChar([](CCharEntity* PChar) {
@@ -3731,8 +3729,6 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return;
         }
-
-        return;
     }
 
     int32 OnInstanceLoadFailed(CZone* PZone)
@@ -4353,11 +4349,11 @@ namespace luautils
 
         if (DropList != nullptr)
         {
-            for (uint8 i = 0; i < DropList->Items.size(); ++i)
+            for (auto& Item : DropList->Items)
             {
-                if (DropList->Items.at(i).ItemID == lua_tointeger(L, 2))
+                if (Item.ItemID == lua_tointeger(L, 2))
                 {
-                    DropList->Items.at(i).DropRate = (uint16)lua_tointeger(L, 3);
+                    Item.DropRate = (uint16)lua_tointeger(L, 3);
                     return 1;
                 }
             }

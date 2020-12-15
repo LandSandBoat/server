@@ -351,7 +351,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
     m_points       = m_PTarget->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
 
-    if (m_points.size() <= 0)
+    if (m_points.empty())
     {
         ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path\n", m_PTarget->GetName(), m_PTarget->id);
         return false;
@@ -385,12 +385,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     m_points       = m_PTarget->loc.zone->m_navMesh->findPath(start, m_turnPoints[0]);
     m_currentPoint = 0;
 
-    if (m_points.empty())
-    {
-        return false;
-    }
-
-    return true;
+    return !m_points.empty();
 }
 
 bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)

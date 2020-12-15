@@ -141,10 +141,10 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
         // Finally, store the contents of the map of ingredients
         //     into the proper offsets in the packet before sending
         uint8 pointer_ref = 0x10u;
-        for (auto it = ingredients.begin(); it != ingredients.end(); ++it)
+        for (auto& ingredient : ingredients)
         {
-            ref<uint16>(pointer_ref)        = it->first;
-            ref<uint16>(pointer_ref + 0x10) = it->second;
+            ref<uint16>(pointer_ref)        = ingredient.first;
+            ref<uint16>(pointer_ref + 0x10) = ingredient.second;
             pointer_ref += 0x02u;
             if (pointer_ref > 0x1E)
             {

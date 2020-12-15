@@ -64,7 +64,7 @@ void CUContainer::Clean()
     }
     m_ContainerType = UCONTAINER_EMPTY;
 
-    m_lock   = 0;
+    m_lock   = false;
     m_count  = 0;
     m_target = 0;
 

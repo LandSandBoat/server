@@ -72,7 +72,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
     {
         POwner->PAI->Internal_ChangeTarget(POwner->PMaster->GetBattleTargetID());
     }
-    auto PTarget{ POwner->GetBattleTarget() };
+    auto* PTarget{ POwner->GetBattleTarget() };
     if (PTarget)
     {
         if (POwner->PAI->CanFollowPath())

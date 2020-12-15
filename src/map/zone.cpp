@@ -140,7 +140,7 @@ CZone::CZone(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID)
     m_zoneType           = ZONETYPE_NONE;
     m_regionID           = RegionID;
     m_continentID        = ContinentID;
-    m_TreasurePool       = 0;
+    m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;
     m_WeatherChangeTime  = 0;
@@ -311,7 +311,7 @@ void CZone::LoadZoneWeather()
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
         Sql_NextRow(SqlHandle);
-        auto weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
+        auto* weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
@@ -922,7 +922,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (m_BattlefieldHandler)
     {
-        if (auto PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true))
+        if (auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true))
         {
             PBattlefield->InsertEntity(PChar, true);
         }

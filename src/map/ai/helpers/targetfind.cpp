@@ -277,9 +277,9 @@ void CTargetFind::addAllInEnmityList()
         CMobEntity*   mob        = (CMobEntity*)m_PBattleEntity;
         EnmityList_t* enmityList = mob->PEnmityContainer->GetEnmityList();
 
-        for (EnmityList_t::iterator it = enmityList->begin(); it != enmityList->end(); ++it)
+        for (auto& it : *enmityList)
         {
-            EnmityObject_t& PEnmityObject = it->second;
+            EnmityObject_t& PEnmityObject = it.second;
             if (PEnmityObject.PEnmityOwner)
             {
                 addEntity(PEnmityObject.PEnmityOwner, false);
@@ -298,9 +298,9 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, uint8 alle
         if (PTarget && PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
-            for (auto& list : { PChar->SpawnPCList, PChar->SpawnPETList })
+            for (const auto& list : { PChar->SpawnPCList, PChar->SpawnPETList })
             {
-                for (auto& pair : list)
+                for (const auto& pair : list)
                 {
                     CBattleEntity* PBattleEntity = static_cast<CBattleEntity*>(pair.second);
                     if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() && PBattleEntity->allegiance == ALLEGIANCE_PLAYER)
@@ -426,11 +426,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         }
         else if (m_findType == FIND_MONSTER_MONSTER || m_findType == FIND_PLAYER_PLAYER)
         {
-            if (PTarget->objtype == TYPE_TRUST)
-            {
-                return true;
-            }
-            return false;
+            return PTarget->objtype == TYPE_TRUST;
         }
     }
 

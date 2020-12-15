@@ -116,7 +116,7 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 {
     int enmityBonus = PEntity->getMod(Mod::ENMITY);
 
-    if (auto PChar = dynamic_cast<CCharEntity*>(PEntity))
+    if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
     {
         enmityBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_INCREASE, PChar) - PChar->PMeritPoints->GetMeritValue(MERIT_ENMITY_DECREASE, PChar);
 
@@ -411,7 +411,7 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
 
         if (Enmity >= HighestEnmity && ((PEnmityObject.active == active) || (PEnmityObject.active && !active)))
         {
-            auto POwner = PEnmityObject.PEnmityOwner;
+            auto* POwner = PEnmityObject.PEnmityOwner;
             if (!POwner || (POwner->allegiance != m_EnmityHolder->allegiance))
             {
                 active        = PEnmityObject.active;
@@ -440,9 +440,9 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
 
 void CEnmityContainer::DecayEnmity()
 {
-    for (auto it = m_EnmityList.begin(); it != m_EnmityList.end(); ++it)
+    for (auto& it : m_EnmityList)
     {
-        EnmityObject_t& PEnmityObject = it->second;
+        EnmityObject_t& PEnmityObject = it.second;
         constexpr int   decay_amount  = (int)(60 / server_tick_rate);
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
@@ -461,9 +461,9 @@ int16 CEnmityContainer::GetHighestTH() const
     CBattleEntity* PEntity = nullptr;
     int16          THLvl   = 0;
 
-    for (auto it = m_EnmityList.cbegin(); it != m_EnmityList.cend(); ++it)
+    for (const auto& it : m_EnmityList)
     {
-        const EnmityObject_t& PEnmityObject = it->second;
+        const EnmityObject_t& PEnmityObject = it.second;
         PEntity                             = PEnmityObject.PEnmityOwner;
 
         if (PEntity != nullptr && !PEntity->isDead() && PEnmityObject.maxTH > THLvl)

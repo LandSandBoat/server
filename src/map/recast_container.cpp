@@ -170,7 +170,7 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
 
     if (type == RECAST_ABILITY)
     {
-        if (auto recast = GetRecast(RECAST_ABILITY, id))
+        if (auto* recast = GetRecast(RECAST_ABILITY, id))
         {
             recast->RecastTime = 0;
         }
@@ -223,23 +223,22 @@ bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    for (uint16 i = 0; i < PRecastList->size(); ++i)
+    for (auto& i : *PRecastList)
     {
-        if (PRecastList->at(i).ID == id && PRecastList->at(i).RecastTime > 0)
+        if (i.ID == id && i.RecastTime > 0)
         {
-            if (PRecastList->at(i).chargeTime == 0)
+            if (i.chargeTime == 0)
             {
                 return true;
             }
             else
             {
                 // a request to use more charges than the maximum only applies to abilities who share normal recasts with charges (ie. sic)
-                if (recast > PRecastList->at(i).maxCharges)
+                if (recast > i.maxCharges)
                 {
                     return true;
                 }
-                auto charges = PRecastList->at(i).maxCharges -
-                               ((PRecastList->at(i).RecastTime - (uint32)(time(nullptr) - PRecastList->at(i).TimeStamp)) / (PRecastList->at(i).chargeTime)) - 1;
+                auto charges = i.maxCharges - ((i.RecastTime - (uint32)(time(nullptr) - i.TimeStamp)) / (i.chargeTime)) - 1;
 
                 if (charges < recast)
                 {

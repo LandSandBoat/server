@@ -39,7 +39,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 , m_PSpell(nullptr)
 , m_flags(flags)
 {
-    auto PSpell = spell::GetSpell(spellid);
+    auto* PSpell = spell::GetSpell(spellid);
     if (PSpell == nullptr)
     {
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(spellid), 0, MSGBASIC_CANNOT_CAST_SPELL));
@@ -47,7 +47,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
 
     m_PSpell = PSpell->clone();
 
-    auto PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
+    auto* PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
     if (!PTarget || m_errorMsg)
     {
         throw CStateInitException(std::move(m_errorMsg));
@@ -92,7 +92,7 @@ bool CMagicState::Update(time_point tick)
 {
     if (tick > GetEntryTime() + m_castTime && !IsCompleted())
     {
-        auto        PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
+        auto*       PTarget = m_PEntity->IsValidTarget(m_targid, m_PSpell->getValidTarget(), m_errorMsg);
         MSGBASIC_ID msg     = MSGBASIC_IS_INTERRUPTED;
 
         action_t action;
@@ -297,7 +297,7 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     {
         if (PTarget->objtype == TYPE_MOB && PTarget->allegiance != m_PEntity->allegiance)
         {
-            if (auto mob = dynamic_cast<CMobEntity*>(PTarget))
+            if (auto* mob = dynamic_cast<CMobEntity*>(PTarget))
             {
                 if (PTarget->isDead())
                 {

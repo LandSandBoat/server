@@ -35,7 +35,7 @@ bool CTriggerState::Update(time_point tick)
 {
     if (!IsCompleted())
     {
-        auto PChar = static_cast<CCharEntity*>(GetTarget());
+        auto* PChar = static_cast<CCharEntity*>(GetTarget());
         if (PChar && luautils::OnTrigger(PChar, m_PEntity) == -1 && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
         {
             close                = true;

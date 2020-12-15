@@ -42,9 +42,7 @@ CNpcEntity::CNpcEntity()
     PAI        = std::make_unique<CAIContainer>(this);
 }
 
-CNpcEntity::~CNpcEntity()
-{
-}
+CNpcEntity::~CNpcEntity() = default;
 
 uint32 CNpcEntity::getEntityFlags() const
 {

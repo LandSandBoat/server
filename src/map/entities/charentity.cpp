@@ -150,10 +150,10 @@ CCharEntity::CCharEntity()
     m_missionLog[4].current = 0;   // MISSION_TOAU
     m_missionLog[5].current = 0;   // MISSION_WOTG
     m_missionLog[6].current = 101; // MISSION_COP
-    for (uint8 i = 0; i < MAX_MISSIONAREA; ++i)
+    for (auto& i : m_missionLog)
     {
-        m_missionLog[i].logExUpper = 0;
-        m_missionLog[i].logExLower = 0;
+        i.logExUpper = 0;
+        i.logExLower = 0;
     }
 
     m_copCurrent = 0;
@@ -206,7 +206,7 @@ CCharEntity::CCharEntity()
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
-    m_reloadParty = 0;
+    m_reloadParty = false;
 
     m_LastYell       = 0;
     m_moghouseID     = 0;
@@ -372,7 +372,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
     }
 
     TPZ_DEBUG_BREAK_IF(LocationID >= MAX_CONTAINER_ID); // неразрешенный ID хранилища
-    return 0;
+    return nullptr;
 }
 
 int8 CCharEntity::getShieldSize()
@@ -524,7 +524,7 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
 
 void CCharEntity::ClearTrusts()
 {
-    for (auto PTrust : PTrusts)
+    for (auto* PTrust : PTrusts)
     {
         PTrust->PAI->Despawn();
     }
@@ -711,11 +711,11 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 
 bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 {
-    auto controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
 
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (PTarget->isDead())
     {
@@ -742,8 +742,8 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     CBattleEntity::OnCastFinished(state, action);
 
-    auto PSpell  = state.GetSpell();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PSpell  = state.GetSpell();
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -754,7 +754,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
             if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
                 StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) && static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
-                auto      PBlueSpell = static_cast<CBlueSpell*>(PSpell);
+                auto*     PBlueSpell = static_cast<CBlueSpell*>(PSpell);
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
                 if (effect != SUBEFFECT_NONE)
                 {
@@ -800,7 +800,7 @@ void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBAS
 {
     CBattleEntity::OnCastInterrupted(state, action, msg);
 
-    auto message = state.GetErrorMsg();
+    auto* message = state.GetErrorMsg();
 
     if (message)
     {
@@ -812,8 +812,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 {
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
-    auto PWeaponSkill  = state.GetSkill();
-    auto PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PWeaponSkill  = state.GetSkill();
+    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
@@ -955,7 +955,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 {
-    auto PAbility = state.GetAbility();
+    auto* PAbility = state.GetAbility();
     if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
         pushPacket(new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_WAIT_LONGER));
@@ -966,7 +966,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         pushPacket(new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
         return;
     }
-    auto                          PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto*                         PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
     {
@@ -1000,7 +1000,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             meritRecastReduction = PMeritPoints->GetMeritValue((MERIT_TYPE)PAbility->getMeritModID(), this);
         }
 
-        auto charge = ability::GetCharge(this, PAbility->getRecastId());
+        auto* charge = ability::GetCharge(this, PAbility->getRecastId());
         if (charge && PAbility->getID() != ABILITY_SIC)
         {
             action.recast = charge->chargeTime * PAbility->getRecastTime() - meritRecastReduction;
@@ -1113,7 +1113,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 }
                 else
                 {
-                    auto PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());
+                    auto* PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());
                     if (PMobSkill)
                     {
                         if (PMobSkill->getValidTargets() & TARGET_ENEMY)
@@ -1265,7 +1265,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int32 damage      = 0;
     int32 totalDamage = 0;
@@ -1414,7 +1414,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
 
     // if a hit did occur (even without barrage)
-    if (hitOccured == true)
+    if (hitOccured)
     {
         // any misses with barrage cause remaing shots to miss, meaning we must check Action.reaction
         if (actionTarget.reaction == REACTION::EVADE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
@@ -1621,8 +1621,8 @@ void CCharEntity::OnRaise()
 
 void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    auto PItem   = static_cast<CItemUsable*>(state.GetItem());
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PItem   = static_cast<CItemUsable*>(state.GetItem());
 
     //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
@@ -1682,7 +1682,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
-    auto PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
+    auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
     if (PTarget)
     {
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
@@ -1892,7 +1892,7 @@ void CCharEntity::UpdateMoghancement()
     // Always show which moghancement the player has if they have one at all
     if (newMoghancementID != 0)
     {
-        pushPacket(new CMessageSpecialPacket(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, 0));
+        pushPacket(new CMessageSpecialPacket(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false));
     }
 
     if (newMoghancementID != m_moghancementID)
@@ -2177,7 +2177,7 @@ void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 
 bool CCharEntity::OnAttackError(CAttackState& state)
 {
-    auto controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     if (controller->getLastErrMsgTime() + std::chrono::milliseconds(this->GetWeaponDelay(false)) < PAI->getTick())
     {
         controller->setLastErrMsgTime(PAI->getTick());

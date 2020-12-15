@@ -39,7 +39,7 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
     m_sataOccured       = false;
     m_subWeaponType     = DAMAGETYPE::NONE;
 
-    if (auto weapon = dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_SUB]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(attacker->m_Weapons[SLOT_SUB]))
     {
         m_subWeaponType = weapon->getDmgType();
     }
@@ -93,9 +93,7 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
  *  Destructor.															*
  *																		*
  ************************************************************************/
-CAttackRound::~CAttackRound()
-{
-}
+CAttackRound::~CAttackRound() = default;
 
 /************************************************************************
  *																		*
@@ -174,7 +172,7 @@ CBattleEntity* CAttackRound::GetCoverAbilityUserEntity()
  ************************************************************************/
 bool CAttackRound::IsH2H()
 {
-    if (auto weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_MAIN]))
     {
         return weapon->getSkillType() == SKILL_HAND_TO_HAND;
     }
@@ -437,7 +435,7 @@ void CAttackRound::CreateDakenAttack()
 {
     if (m_attacker->objtype == TYPE_PC)
     {
-        auto PAmmo = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_AMMO]);
+        auto* PAmmo = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_AMMO]);
         if (PAmmo && PAmmo->isShuriken())
         {
             uint16 daken = m_attacker->getMod(Mod::DAKEN);

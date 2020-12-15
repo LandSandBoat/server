@@ -107,7 +107,7 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     }
 }
 
-uint32 CAlliance::partyCount(void) const
+uint32 CAlliance::partyCount() const
 {
     int ret = Sql_Query(SqlHandle, "SELECT * FROM accounts_parties WHERE allianceid = %d GROUP BY partyid;", m_AllianceID, PARTY_SECOND | PARTY_THIRD);
 
@@ -185,9 +185,9 @@ void CAlliance::delParty(CParty* party)
         PChar->PTreasurePool->AddMember(PChar);
         PChar->PTreasurePool->UpdatePool(PChar);
 
-        for (uint8 i = 0; i < party->members.size(); ++i)
+        for (auto& member : party->members)
         {
-            auto* PMember = dynamic_cast<CCharEntity*>(party->members.at(i));
+            auto* PMember = dynamic_cast<CCharEntity*>(member);
             if (PChar != PMember)
             {
                 PMember->PTreasurePool = PChar->PTreasurePool;
@@ -301,7 +301,7 @@ void CAlliance::assignAllianceLeader(const char* name)
         // in case leader's on another server
         this->aLeader = nullptr;
 
-        for (auto PParty : partyList)
+        for (auto* PParty : partyList)
         {
             if (PParty->GetMemberByName((const int8*)name))
             {
