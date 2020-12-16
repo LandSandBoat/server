@@ -5158,10 +5158,10 @@ void SmallPacket0x0DE(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PChar->bazaar.message.clear();
-    PChar->bazaar.message.insert(0, (const char*)data[4]);
+    PChar->bazaar.message.insert(0, (const char*)data[4], 120); // Maximum bazaar message limit: 120 characters
 
     char message[256];
-    Sql_EscapeString(SqlHandle, message, (const char*)data[4]);
+    Sql_EscapeString(SqlHandle, message, PChar->bazaar.message.c_str());
 
     Sql_Query(SqlHandle, "UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u;", message, PChar->id);
 }
