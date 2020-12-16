@@ -143,7 +143,7 @@ inline int32 CLuaZone::getRegionID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
 
-    lua_pushinteger(L, m_pLuaZone->GetRegionID());
+    lua_pushinteger(L, static_cast<uint8>(m_pLuaZone->GetRegionID()));
 
     return 1;
 }

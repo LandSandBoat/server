@@ -2751,7 +2751,7 @@ inline int32 CLuaBaseEntity::getCurrentRegion(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    lua_pushinteger(L, zoneutils::GetCurrentRegion(m_PBaseEntity->getZone()));
+    lua_pushinteger(L, static_cast<uint8>(zoneutils::GetCurrentRegion(m_PBaseEntity->getZone())));
     return 1;
 }
 

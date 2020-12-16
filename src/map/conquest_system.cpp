@@ -49,7 +49,7 @@ namespace conquest
         TracyZoneScoped;
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= 18)
+            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Update);
                 PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsZone(); });
@@ -59,7 +59,7 @@ namespace conquest
 
     void UpdateInfluencePoints(int points, unsigned int nation, REGIONTYPE region)
     {
-        if (region == REGIONTYPE::REGION_UNKNOWN)
+        if (region == REGIONTYPE::UNKNOWN)
         {
             return;
         }
@@ -131,41 +131,41 @@ namespace conquest
 
         switch (region)
         {
-            case REGION_RONFAURE:
-            case REGION_GUSTABERG:
-            case REGION_SARUTABARUTA:
+            case REGIONTYPE::RONFAURE:
+            case REGIONTYPE::GUSTABERG:
+            case REGIONTYPE::SARUTABARUTA:
             {
                 points = 10;
                 break;
             }
-            case REGION_ZULKHEIM:
-            case REGION_KOLSHUSHU:
-            case REGION_NORVALLEN:
-            case REGION_DERFLAND:
-            case REGION_ARAGONEU:
+            case REGIONTYPE::ZULKHEIM:
+            case REGIONTYPE::KOLSHUSHU:
+            case REGIONTYPE::NORVALLEN:
+            case REGIONTYPE::DERFLAND:
+            case REGIONTYPE::ARAGONEU:
             {
                 points = 50;
                 break;
             }
-            case REGION_QUFIMISLAND:
-            case REGION_LITELOR:
-            case REGION_KUZOTZ:
-            case REGION_ELSHIMOLOWLANDS:
+            case REGIONTYPE::QUFIMISLAND:
+            case REGIONTYPE::LITELOR:
+            case REGIONTYPE::KUZOTZ:
+            case REGIONTYPE::ELSHIMOLOWLANDS:
             {
                 points = 75;
                 break;
             }
-            case REGION_VOLLBOW:
-            case REGION_VALDEAUNIA:
-            case REGION_FAUREGANDI:
-            case REGION_ELSHIMOUPLANDS:
+            case REGIONTYPE::VOLLBOW:
+            case REGIONTYPE::VALDEAUNIA:
+            case REGIONTYPE::FAUREGANDI:
+            case REGIONTYPE::ELSHIMOUPLANDS:
             {
                 points = 300;
                 break;
             }
-            case REGION_TULIA:
-            case REGION_MOVALPOLOS:
-            case REGION_TAVNAZIA:
+            case REGIONTYPE::TULIA:
+            case REGIONTYPE::MOVALPOLOS:
+            case REGIONTYPE::TAVNAZIA:
             {
                 points = 600;
                 break;
@@ -360,7 +360,7 @@ namespace conquest
 
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= 18)
+            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
             }
@@ -384,7 +384,7 @@ namespace conquest
 
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= 18)
+            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
                 PZone->ForEachChar([](CCharEntity* PChar) {
@@ -665,7 +665,7 @@ namespace conquest
 
         REGIONTYPE region = PChar->loc.zone->GetRegionID();
 
-        if (region != REGION_UNKNOWN)
+        if (region != REGIONTYPE::UNKNOWN)
         {
             // 10% if region control is player's nation
             // 15% otherwise
