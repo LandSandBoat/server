@@ -29,14 +29,14 @@
 
 #include "modifier.h"
 
-enum EFFECTOVERWRITE
+enum class EFFECTOVERWRITE : uint8
 {
-    EFFECTOVERWRITE_EQUAL_HIGHER = 0, // only overwrite if equal or higher (tier, power)
-    EFFECTOVERWRITE_HIGHER       = 1, // only overwrite if higher (tier, power)
-    EFFECTOVERWRITE_NEVER        = 2, // never overwrite
-    EFFECTOVERWRITE_ALWAYS       = 3, // always overwrite no matter
-    EFFECTOVERWRITE_IGNORE       = 4, // ignore dupes
-    EFFECTOVERWRITE_TIER_HIGHER  = 5  // only overwrite if tier is higher (regardless of power)
+    EQUAL_HIGHER      = 0, // only overwrite if equal or higher (tier, power)
+    HIGHER            = 1, // only overwrite if higher (tier, power)
+    NEVER             = 2, // never overwrite
+    ALWAYS            = 3, // always overwrite no matter
+    IGNORE_DUPLICATE  = 4, // ignore dupes
+    TIER_HIGHER       = 5  // only overwrite if tier is higher (regardless of power)
 };
 
 enum EFFECTFLAG
