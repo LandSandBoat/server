@@ -90,13 +90,13 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         ref<uint8>(0x1D)  = PEntity->speedsub;
     }
 
-    if (PEntity->allegiance == ALLEGIANCE_PLAYER && PEntity->status == STATUS_MOB)
+    if (PEntity->allegiance == ALLEGIANCE_PLAYER && PEntity->status == STATUSTYPE::MOB)
     {
-        ref<uint8>(0x20) = STATUS_NORMAL;
+        ref<uint8>(0x20) = static_cast<uint8>(STATUSTYPE::NORMAL);
     }
     else
     {
-        ref<uint8>(0x20) = PEntity->status;
+        ref<uint8>(0x20) = static_cast<uint8>(PEntity->status);
     }
 
     switch (PEntity->objtype)

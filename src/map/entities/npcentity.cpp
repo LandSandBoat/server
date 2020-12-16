@@ -90,7 +90,7 @@ bool CNpcEntity::IsUntargetable() const
 
 bool CNpcEntity::isWideScannable()
 {
-    return widescan == 1 && status == STATUS_NORMAL && CBaseEntity::isWideScannable();
+    return widescan == 1 && status == STATUSTYPE::NORMAL && CBaseEntity::isWideScannable();
 }
 
 void CNpcEntity::PostTick()

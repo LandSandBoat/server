@@ -995,7 +995,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
 
     PChar->loc.zone = nullptr;
 
-    if (PChar->status == STATUS_SHUTDOWN)
+    if (PChar->status == STATUSTYPE::SHUTDOWN)
     {
         PChar->loc.destination = m_zoneID;
     }

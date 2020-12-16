@@ -55,7 +55,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 void CTrustEntity::PostTick()
 {
     CMobEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUS_DISAPPEAR)
+    if (loc.zone && updatemask && status != STATUSTYPE::DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
 

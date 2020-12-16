@@ -50,7 +50,7 @@ CTrustController::~CTrustController()
     }
     POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_PLAYER;
-    POwner->status     = STATUS_DISAPPEAR;
+    POwner->status     = STATUSTYPE::DISAPPEAR;
     m_LastTopEnmity    = nullptr;
 }
 

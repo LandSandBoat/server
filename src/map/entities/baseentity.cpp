@@ -32,7 +32,7 @@ CBaseEntity::CBaseEntity()
     id       = 0;
     targid   = 0;
     objtype  = ENTITYTYPE::TYPE_NONE;
-    status   = STATUS_DISAPPEAR;
+    status   = STATUSTYPE::DISAPPEAR;
     m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));
@@ -59,7 +59,7 @@ CBaseEntity::~CBaseEntity()
 
 void CBaseEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUS_MOB : STATUS_NORMAL;
+    status = allegiance == ALLEGIANCE_MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
@@ -68,7 +68,7 @@ void CBaseEntity::Spawn()
 
 void CBaseEntity::FadeOut()
 {
-    status = STATUS_DISAPPEAR;
+    status = STATUSTYPE::DISAPPEAR;
     updatemask |= UPDATE_HP;
 }
 
@@ -128,7 +128,7 @@ bool CBaseEntity::IsTargetable() const
 
 bool CBaseEntity::isWideScannable()
 {
-    return status != STATUS_DISAPPEAR && !IsNameHidden() && IsTargetable();
+    return status != STATUSTYPE::DISAPPEAR && !IsNameHidden() && IsTargetable();
 }
 
 CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const

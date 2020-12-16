@@ -5385,7 +5385,7 @@ namespace charutils
         PChar->loc.p           = PChar->profile.home_point.p;
         PChar->loc.destination = PChar->profile.home_point.destination;
 
-        PChar->status    = STATUS_DISAPPEAR;
+        PChar->status    = STATUSTYPE::DISAPPEAR;
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
 

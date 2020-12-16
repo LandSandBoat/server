@@ -350,7 +350,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
         else
         {
-            PChar->PPet->status = STATUS_DISAPPEAR;
+            PChar->PPet->status = STATUSTYPE::DISAPPEAR;
             if (((CPetEntity*)(PChar->PPet))->getPetType() == PETTYPE_AVATAR)
             {
                 PChar->setModifier(Mod::AVATAR_PERPETUATION, 0);
@@ -467,7 +467,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
         float CurrentDistance = distance(PChar->loc.p, PCurrentMob->loc.p);
 
-        if (PCurrentMob->status != STATUS_DISAPPEAR && CurrentDistance < 50)
+        if (PCurrentMob->status != STATUSTYPE::DISAPPEAR && CurrentDistance < 50)
         {
             if (MOB == PChar->SpawnMOBList.end() || PChar->SpawnMOBList.key_comp()(PCurrentMob->id, MOB->first))
             {
@@ -512,7 +512,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
         CPetEntity*             PCurrentPet = (CPetEntity*)it->second;
         SpawnIDList_t::iterator PET         = PChar->SpawnPETList.lower_bound(PCurrentPet->id);
 
-        if ((PCurrentPet->status == STATUS_NORMAL || PCurrentPet->status == STATUS_MOB) && distance(PChar->loc.p, PCurrentPet->loc.p) < 50)
+        if ((PCurrentPet->status == STATUSTYPE::NORMAL || PCurrentPet->status == STATUSTYPE::MOB) && distance(PChar->loc.p, PCurrentPet->loc.p) < 50)
         {
             if (PET == PChar->SpawnPETList.end() || PChar->SpawnPETList.key_comp()(PCurrentPet->id, PET->first))
             {
@@ -541,7 +541,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             CNpcEntity*             PCurrentNpc = (CNpcEntity*)it->second;
             SpawnIDList_t::iterator NPC         = PChar->SpawnNPCList.lower_bound(PCurrentNpc->id);
 
-            if (PCurrentNpc->status == STATUS_NORMAL || PCurrentNpc->status == STATUS_MOB)
+            if (PCurrentNpc->status == STATUSTYPE::NORMAL || PCurrentNpc->status == STATUSTYPE::MOB)
             {
                 if (distance(PChar->loc.p, PCurrentNpc->loc.p) < 50)
                 {
@@ -573,7 +573,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
             SpawnIDList_t::iterator SpawnTrustItr = PChar->SpawnTRUSTList.lower_bound(PCurrentTrust->id);
             CCharEntity*            PMaster       = dynamic_cast<CCharEntity*>(PCurrentTrust->PMaster);
 
-            if (PCurrentTrust->status == STATUS_NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
+            if (PCurrentTrust->status == STATUSTYPE::NORMAL && distance(PChar->loc.p, PCurrentTrust->loc.p) < 50)
             {
                 if (SpawnTrustItr == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first))
                 {
@@ -662,9 +662,9 @@ void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 
         if (PCurrentNpc->loc.p.z == 1.5 && PCurrentNpc->look.face == 0x52)
         {
-            PCurrentNpc->status = STATUS_NORMAL;
+            PCurrentNpc->status = STATUSTYPE::NORMAL;
             PChar->pushPacket(new CEntityUpdatePacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB));
-            PCurrentNpc->status = STATUS_DISAPPEAR;
+            PCurrentNpc->status = STATUSTYPE::DISAPPEAR;
             return;
         }
     }
@@ -1086,7 +1086,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             PPet->StatusEffectContainer->TickEffects(tick);
         }
         PPet->PAI->Tick(tick);
-        if (PPet->status == STATUS_DISAPPEAR)
+        if (PPet->status == STATUSTYPE::DISAPPEAR)
         {
             for (auto PMobIt : m_mobList)
             {
@@ -1118,7 +1118,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 PTrust->StatusEffectContainer->TickEffects(tick);
             }
             PTrust->PAI->Tick(tick);
-            if (PTrust->status == STATUS_DISAPPEAR)
+            if (PTrust->status == STATUSTYPE::DISAPPEAR)
             {
                 for (auto PMobIt : m_mobList)
                 {
@@ -1154,7 +1154,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     {
         CCharEntity* PChar = (CCharEntity*)it->second;
 
-        if (PChar->status != STATUS_SHUTDOWN)
+        if (PChar->status != STATUSTYPE::SHUTDOWN)
         {
             PChar->PRecastContainer->Check();
             PChar->StatusEffectContainer->CheckEffectsExpiry(tick);

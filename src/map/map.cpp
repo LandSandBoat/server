@@ -543,13 +543,13 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 memcpy(map_session_data->blowfish.key, strSessionKey, 20);
             }
 
-            // наверное создание персонажа лучше вынести в метод charutils::LoadChar() и загрузку инвентаря туда же сунуть
+            // probably it is better to put the character creation into the charutils :: LoadChar () method and put the inventory loading there too
             CCharEntity* PChar = new CCharEntity();
             PChar->id          = CharID;
 
             charutils::LoadChar(PChar);
 
-            PChar->status = STATUS_DISAPPEAR;
+            PChar->status = STATUSTYPE::DISAPPEAR;
 
             map_session_data->PChar = PChar;
         }
@@ -859,7 +859,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
             {
                 PChar->nameflags.flags |= FLAG_DC;
                 PChar->updatemask |= UPDATE_HP;
-                if (PChar->status == STATUS_NORMAL)
+                if (PChar->status == STATUSTYPE::NORMAL)
                 {
                     PChar->loc.zone->SpawnPCs(PChar);
                 }
@@ -899,7 +899,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                         ShowDebug(CL_CYAN "map_cleanup: %s timed out, closing session\n" CL_RESET, PChar->GetName());
 
-                        PChar->status = STATUS_SHUTDOWN;
+                        PChar->status = STATUSTYPE::SHUTDOWN;
                         PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
                     }
                     else
@@ -935,7 +935,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
             PChar->nameflags.flags &= ~FLAG_DC;
             PChar->updatemask |= UPDATE_HP;
 
-            if (PChar->status == STATUS_NORMAL)
+            if (PChar->status == STATUSTYPE::NORMAL)
             {
                 PChar->loc.zone->SpawnPCs(PChar);
             }
