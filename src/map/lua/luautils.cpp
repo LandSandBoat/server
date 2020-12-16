@@ -499,16 +499,16 @@ namespace luautils
         uint8 balance = conquest::GetBalance();
         switch (lua_tointeger(L, 1))
         {
-            case SANDORIA:
+            case NATION_SANDORIA:
                 balance &= 0x3U;
                 lua_pushinteger(L, balance);
                 return 1;
-            case BASTOK:
+            case NATION_BASTOK:
                 balance &= 0xCU;
                 balance >>= 2;
                 lua_pushinteger(L, balance);
                 return 1;
-            case WINDURST:
+            case NATION_WINDURST:
                 balance >>= 4;
                 lua_pushinteger(L, balance);
                 return 1;

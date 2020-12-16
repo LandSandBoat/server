@@ -115,7 +115,7 @@ bool CBattleEntity::isInAssault()
     if (loc.zone != nullptr)
     {
         return loc.zone->GetType() == ZONETYPE_DUNGEON_INSTANCED &&
-               (loc.zone->GetRegionID() >= REGION_WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_ALZADAAL);
+               (loc.zone->GetRegionID() >= REGIONTYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGIONTYPE::ALZADAAL);
     }
     return false;
 }

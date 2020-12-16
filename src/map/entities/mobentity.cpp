@@ -982,25 +982,25 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         if (m_Element > 0)
         {
-            uint8 regionID = PChar->loc.zone->GetRegionID();
+            REGIONTYPE regionID = PChar->loc.zone->GetRegionID();
             switch (regionID)
             {
                 // Sanction Regions
-                case REGION_WEST_AHT_URHGAN:
-                case REGION_MAMOOL_JA_SAVAGE:
-                case REGION_HALVUNG:
-                case REGION_ARRAPAGO:
+                case REGIONTYPE::WEST_AHT_URHGAN:
+                case REGIONTYPE::MAMOOL_JA_SAVAGE:
+                case REGIONTYPE::HALVUNG:
+                case REGIONTYPE::ARRAPAGO:
                     effect = 2;
                     break;
                 // Sigil Regions
-                case REGION_RONFAURE_FRONT:
-                case REGION_NORVALLEN_FRONT:
-                case REGION_GUSTABERG_FRONT:
-                case REGION_DERFLAND_FRONT:
-                case REGION_SARUTA_FRONT:
-                case REGION_ARAGONEAU_FRONT:
-                case REGION_FAUREGANDI_FRONT:
-                case REGION_VALDEAUNIA_FRONT:
+                case REGIONTYPE::RONFAURE_FRONT:
+                case REGIONTYPE::NORVALLEN_FRONT:
+                case REGIONTYPE::GUSTABERG_FRONT:
+                case REGIONTYPE::DERFLAND_FRONT:
+                case REGIONTYPE::SARUTA_FRONT:
+                case REGIONTYPE::ARAGONEAU_FRONT:
+                case REGIONTYPE::FAUREGANDI_FRONT:
+                case REGIONTYPE::VALDEAUNIA_FRONT:
                     effect = 3;
                     break;
                 // Signet Regions

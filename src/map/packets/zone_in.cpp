@@ -38,23 +38,24 @@ uint16 GetMogHouseID(CCharEntity* PChar)
 {
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
-        case REGION_WEST_AHT_URHGAN:
+        case REGIONTYPE::WEST_AHT_URHGAN:
             return ZONE_214;
-        case REGION_RONFAURE_FRONT:
+        case REGIONTYPE::RONFAURE_FRONT:
             return ZONE_189;
-        case REGION_GUSTABERG_FRONT:
+        case REGIONTYPE::GUSTABERG_FRONT:
             return ZONE_199;
-        case REGION_SARUTA_FRONT:
+        case REGIONTYPE::SARUTA_FRONT:
             return ZONE_219;
-        case REGION_SANDORIA:
+        case REGIONTYPE::SANDORIA:
             return (PChar->profile.nation == 0 ? 0x0121 : 0x0101);
-        case REGION_BASTOK:
+        case REGIONTYPE::BASTOK:
             return (PChar->profile.nation == 1 ? 0x0122 : 0x0102);
-        case REGION_WINDURST:
+        case REGIONTYPE::WINDURST:
             return (PChar->profile.nation == 2 ? 0x0123 : 0x0120);
-        case REGION_JEUNO:
+        case REGIONTYPE::JEUNO:
             return 0x0100;
         default:
+            ShowWarning("Default case reached for GetMogHouseID by %s", PChar->GetName());
             return 0x0100;
     }
 }
@@ -69,27 +70,27 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
 {
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
-        case REGION_WEST_AHT_URHGAN:
+        case REGIONTYPE::WEST_AHT_URHGAN:
             if (PChar->profile.mhflag & 0x10)
             {
                 return 5;
             }
-        case REGION_SANDORIA:
+        case REGIONTYPE::SANDORIA:
             if (PChar->profile.mhflag & 0x01)
             {
                 return 1;
             }
-        case REGION_BASTOK:
+        case REGIONTYPE::BASTOK:
             if (PChar->profile.mhflag & 0x02)
             {
                 return 2;
             }
-        case REGION_WINDURST:
+        case REGIONTYPE::WINDURST:
             if (PChar->profile.mhflag & 0x04)
             {
                 return 3;
             }
-        case REGION_JEUNO:
+        case REGIONTYPE::JEUNO:
             if (PChar->profile.mhflag & 0x08)
             {
                 return 4;

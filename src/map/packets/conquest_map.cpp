@@ -94,7 +94,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
             int64 total         = san_inf + bas_inf + win_inf;
             int64 totalBeastmen = total + bst_inf;
 
-            if (PChar->loc.zone->GetRegionID() == regionid)
+            if (PChar->loc.zone->GetRegionID() == static_cast<REGIONTYPE>(regionid))
             {
                 ref<uint8>(0x86) = (uint8)((san_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));
                 ref<uint8>(0x87) = (uint8)((bas_inf * 100) / (totalBeastmen == 0 ? 1 : totalBeastmen));

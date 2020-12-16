@@ -26,11 +26,11 @@
 
 #include "zone.h"
 
-#define SANDORIA 0x00
-#define BASTOK   0x01
-#define WINDURST 0x02
-#define BEASTMEN 0x03
-#define NEUTRAL  0xFF
+#define NATION_SANDORIA 0x00
+#define NATION_BASTOK   0x01
+#define NATION_WINDURST 0x02
+#define NATION_BEASTMEN 0x03
+#define NATION_NEUTRAL  0xFF
 
 enum ConquestUpdate : uint8
 {

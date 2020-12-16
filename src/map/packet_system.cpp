@@ -3098,7 +3098,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             auto startingRegion            = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion         = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions       = { REGION_SANDORIA, REGION_BASTOK, REGION_WINDURST, REGION_JEUNO, REGION_WEST_AHT_URHGAN };
+            auto moghouseExitRegions       = { REGIONTYPE::SANDORIA, REGIONTYPE::BASTOK, REGIONTYPE::WINDURST, REGIONTYPE::JEUNO, REGIONTYPE::WEST_AHT_URHGAN };
             auto moghouseQuestComplete     = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
             bool moghouseExitQuestZoneline = moghouseQuestComplete && startingRegion == destinationRegion && PChar->m_moghouseID > 0 &&
                                              std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
