@@ -176,7 +176,7 @@ namespace conquest
             }
         }
 
-        conquest::UpdateInfluencePoints(points, BEASTMEN, region);
+        conquest::UpdateInfluencePoints(points, NATION_BEASTMEN, region);
     }
 
     /************************************************************************
@@ -647,7 +647,7 @@ namespace conquest
         {
             return Sql_GetIntData(SqlHandle, 0);
         }
-        return NEUTRAL;
+        return NATION_NEUTRAL;
     }
 
     /************************************************************************
