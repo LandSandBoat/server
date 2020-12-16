@@ -9094,8 +9094,8 @@ INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2668,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2673,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2719,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2724,10);
-INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3419,20); -- fiendish_tome_chapter_16
-INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3420,20); -- fiendish_tome_chapter_17
+INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3485,20); -- fiendish_tome_II_chapter_16
+INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3486,20); -- fiendish_tome_II_chapter_17
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3493,70); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3494,70); -- forgotten_hope
 INSERT INTO `mob_droplist` VALUES (1787,2,0,1000,1449,0); -- (Nightmare_Crab Nightmare_Scorpion Nightmare_Dhalmel, Bu Lo)
@@ -9362,8 +9362,8 @@ INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2668,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2673,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2719,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2724,10);
-INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3419,20); -- fiendish_tome_chapter_16
-INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3420,20); -- fiendish_tome_chapter_17
+INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3485,20); -- fiendish_tome_II_chapter_16
+INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3486,20); -- fiendish_tome_II_chapter_17
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3493,70); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3494,70); -- forgotten_hope
 INSERT INTO `mob_droplist` VALUES (1797,2,0,1000,1452,0); -- (Nightmare_Makara, Ta)
