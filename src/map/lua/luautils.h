@@ -30,12 +30,17 @@
 #include "lua.hpp"
 #include "lunar/lunar.h"
 
+/*
+#define SOL_LUA_VERSION 501
+#define SOL_LUAJIT_VERSION 20000
+#define SOL_LUAJIT 1
 #define SOL_ALL_SAFETIES_ON 1
 #include "sol/sol.hpp"
 
 #define SOL_START(BaseTypeName, BindingTypeName) luautils::lua.new_usertype<BindingTypeName>(#BaseTypeName
 #define SOL_REGISTER(Func) , #Func, &Func
 #define SOL_END() );
+*/
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -100,7 +105,7 @@ enum class Emote : uint8;
 
 namespace luautils
 {
-    extern sol::state        lua;
+    //extern sol::state        lua;
     extern struct lua_State* LuaHandle;
 
     int32 init();
