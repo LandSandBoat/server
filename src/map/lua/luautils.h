@@ -30,17 +30,17 @@
 #include "lua.hpp"
 #include "lunar/lunar.h"
 
-/*
-#define SOL_LUA_VERSION 501
-#define SOL_LUAJIT_VERSION 20000
-#define SOL_LUAJIT 1
 #define SOL_ALL_SAFETIES_ON 1
 #include "sol/sol.hpp"
+
+// sol changes this behaviour to return 0 rather than truncating
+// we rely on that, so change it back
+#undef lua_tointeger
+#define lua_tointeger(L, n) static_cast<lua_Integer>(std::floor(lua_tonumber(L, n)))
 
 #define SOL_START(BaseTypeName, BindingTypeName) luautils::lua.new_usertype<BindingTypeName>(#BaseTypeName
 #define SOL_REGISTER(Func) , #Func, &Func
 #define SOL_END() );
-*/
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -105,7 +105,7 @@ enum class Emote : uint8;
 
 namespace luautils
 {
-    //extern sol::state        lua;
+    extern sol::state        lua;
     extern struct lua_State* LuaHandle;
 
     int32 init();
@@ -206,8 +206,6 @@ namespace luautils
 
     void pushFunc(int lua_func, int index = 0);
     void callFunc(int nargs);
-
-    int32 random(lua_State*);
 
     int32 SendEntityVisualPacket(lua_State*); // временное решение для работы гейзеров в Dangruf_Wadi
     int32 GetNPCByID(lua_State*);             // Returns NPC By Id
