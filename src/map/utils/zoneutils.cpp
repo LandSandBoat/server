@@ -487,7 +487,7 @@ namespace zoneutils
 
                     PMob->m_Pool = Sql_GetUIntData(SqlHandle, 59);
 
-                    PMob->allegiance = Sql_GetUIntData(SqlHandle, 60);
+                    PMob->allegiance = static_cast<ALLEGIANCETYPE>(Sql_GetUIntData(SqlHandle, 60));
                     PMob->namevis    = Sql_GetUIntData(SqlHandle, 61);
                     PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 62);
 

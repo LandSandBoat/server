@@ -134,7 +134,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
     else
     {
         // handle this as a mob
-        if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == ALLEGIANCE_PLAYER)
+        if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == ALLEGIANCETYPE::PLAYER)
         {
             m_findType = FIND_MONSTER_PLAYER;
         }
@@ -160,7 +160,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
             // Is the monster casting on a player..
             if (m_findType == FIND_MONSTER_PLAYER)
             {
-                if (m_PBattleEntity->allegiance == ALLEGIANCE_PLAYER)
+                if (m_PBattleEntity->allegiance == ALLEGIANCETYPE::PLAYER)
                 {
                     addAllInZone(m_PMasterTarget, withPet);
                 }
@@ -288,12 +288,12 @@ void CTargetFind::addAllInEnmityList()
     }
 }
 
-void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, uint8 allegiance)
+void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCETYPE allegiance)
 {
     m_radius        = radius;
     m_PRadiusAround = &(m_PBattleEntity->loc.p);
 
-    if (allegiance == ALLEGIANCE_PLAYER)
+    if (allegiance == ALLEGIANCETYPE::PLAYER)
     {
         if (PTarget && PTarget->objtype == TYPE_PC)
         {
@@ -303,7 +303,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, uint8 alle
                 for (const auto& pair : list)
                 {
                     CBattleEntity* PBattleEntity = static_cast<CBattleEntity*>(pair.second);
-                    if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() && PBattleEntity->allegiance == ALLEGIANCE_PLAYER)
+                    if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() && PBattleEntity->allegiance == ALLEGIANCETYPE::PLAYER)
                     {
                         m_targets.push_back(PBattleEntity);
                     }

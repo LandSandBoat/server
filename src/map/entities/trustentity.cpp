@@ -45,7 +45,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 {
     objtype        = TYPE_TRUST;
     m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    allegiance     = ALLEGIANCE_PLAYER;
+    allegiance     = ALLEGIANCETYPE::PLAYER;
     m_MobSkillList = 0;
     PMaster        = PChar;
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),

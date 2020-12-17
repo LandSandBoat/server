@@ -941,7 +941,7 @@ namespace petutils
             }
 
             PMob->isCharmed  = false;
-            PMob->allegiance = ALLEGIANCE_MOB;
+            PMob->allegiance = ALLEGIANCETYPE::MOB;
             PMob->charmTime  = time_point::min();
             PMob->PMaster    = nullptr;
 

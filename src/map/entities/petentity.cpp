@@ -42,7 +42,7 @@ CPetEntity::CPetEntity(PETTYPE petType)
     objtype          = TYPE_PET;
     m_PetType        = petType;
     m_EcoSystem      = ECOSYSTEM::UNCLASSIFIED;
-    allegiance       = ALLEGIANCE_PLAYER;
+    allegiance       = ALLEGIANCETYPE::PLAYER;
     m_MobSkillList   = 0;
     m_HasSpellScript = 0;
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));

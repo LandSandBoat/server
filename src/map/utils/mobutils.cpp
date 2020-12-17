@@ -1312,7 +1312,7 @@ Usage:
 
                 PMob->m_Pool = Sql_GetUIntData(SqlHandle, 54);
 
-                PMob->allegiance      = Sql_GetUIntData(SqlHandle, 55);
+                PMob->allegiance      = static_cast<ALLEGIANCETYPE>(Sql_GetUIntData(SqlHandle, 55));
                 PMob->namevis         = Sql_GetUIntData(SqlHandle, 56);
                 PMob->m_Aggro         = Sql_GetUIntData(SqlHandle, 57);
                 PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 58);

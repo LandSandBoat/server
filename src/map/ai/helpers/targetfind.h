@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../../common/cbasetypes.h"
 #include "../../../common/mmo.h"
+#include "../../entities/baseentity.h"
 #include <vector>
 
 class CBattleEntity;
@@ -106,7 +107,7 @@ public:
     void addAllInParty(CBattleEntity* PTarget, bool withPet);
     void addAllInMobList(CBattleEntity* PTarget, bool withPet);
     void addAllInEnmityList();
-    void addAllInRange(CBattleEntity* PTarget, float radius, uint8 allegiance);
+    void addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCETYPE allegiance);
     void addEntity(CBattleEntity* PTarget, bool withPet);
 
     // helpers

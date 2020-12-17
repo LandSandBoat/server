@@ -210,7 +210,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
 
 void CAutomatonEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
+    status = allegiance == ALLEGIANCETYPE::MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
     updatemask |= UPDATE_HP;
     PAI->Reset();
     PAI->EventHandler.triggerListener("SPAWN", this);

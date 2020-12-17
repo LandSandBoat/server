@@ -42,7 +42,7 @@ CBaseEntity::CBaseEntity()
     speed        = 50 + map_config.speed_mod;
     speedsub     = 50 + map_config.speed_mod;
     namevis      = 1;
-    allegiance   = 0;
+    allegiance   = ALLEGIANCETYPE::MOB;
     updatemask   = 0;
     PAI          = nullptr;
     PBattlefield = nullptr;
@@ -59,7 +59,7 @@ CBaseEntity::~CBaseEntity()
 
 void CBaseEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
+    status = allegiance == ALLEGIANCETYPE::MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();

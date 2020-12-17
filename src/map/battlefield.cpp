@@ -396,7 +396,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     }
     else if (PEntity->objtype == TYPE_MOB)
     {
-        if (PEntity->allegiance == ALLEGIANCE_MOB)
+        if (PEntity->allegiance == ALLEGIANCETYPE::MOB)
         {
             for (const auto& mob : m_AdditionalEnemyList)
             {
@@ -413,7 +413,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
                 }
             }
         }
-        else if (PEntity->allegiance == ALLEGIANCE_PLAYER)
+        else if (PEntity->allegiance == ALLEGIANCETYPE::PLAYER)
         {
             for (auto* PAlly : m_AllyList)
             {

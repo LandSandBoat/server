@@ -208,7 +208,7 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
 
             PMob->m_Pool = Sql_GetUIntData(SqlInstanceHandle, 58);
 
-            PMob->allegiance = Sql_GetUIntData(SqlInstanceHandle, 59);
+            PMob->allegiance = static_cast<ALLEGIANCETYPE>(Sql_GetUIntData(SqlInstanceHandle, 59));
             PMob->namevis    = Sql_GetUIntData(SqlInstanceHandle, 60);
 
             uint32 aggro  = Sql_GetUIntData(SqlInstanceHandle, 61);
