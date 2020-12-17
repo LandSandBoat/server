@@ -29,9 +29,9 @@ CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
     this->type = 0x52;
     this->size = 0x04;
 
-    ref<uint8>(0x04) = releaseType;
+    ref<uint8>(0x04) = static_cast<uint8>(releaseType);
 
-    if (releaseType == RELEASE_SKIPPING)
+    if (releaseType == RELEASE_TYPE::SKIPPING)
     {
         ref<uint16>(0x05) = PChar->m_event.EventID;
     }

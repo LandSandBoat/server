@@ -1368,16 +1368,16 @@ inline int32 CLuaBaseEntity::release(lua_State* L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-    RELEASE_TYPE releaseType = RELEASE_STANDARD;
+    RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
 
     if (PChar->m_event.EventID != -1)
     {
         // Message: Event skipped
-        releaseType = RELEASE_SKIPPING;
+        releaseType = RELEASE_TYPE::SKIPPING;
         PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
     }
     PChar->pushPacket(new CReleasePacket(PChar, releaseType));
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
     return 0;
 }
 

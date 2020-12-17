@@ -661,7 +661,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
             {
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
                 return;
             }
 
@@ -683,7 +683,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->m_event.EventID == -1)
             {
                 PChar->m_event.reset();
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
             }
         }
         break;
@@ -2916,7 +2916,7 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
     PChar->updatemask |= UPDATE_HP;
 }
 
@@ -2965,7 +2965,7 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCSPositionPacket(PChar));
         PChar->pushPacket(new CPositionPacket(PChar));
     }
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
 }
 
 /************************************************************************
@@ -3199,8 +3199,8 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
     int8* string = data[12];
     luautils::OnEventUpdate(PChar, string);
 
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_UNKNOWN));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::UNKNOWN));
 }
 
 /************************************************************************
