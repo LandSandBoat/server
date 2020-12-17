@@ -38,7 +38,7 @@ CCSPositionPacket::CCSPositionPacket(CCharEntity* PChar)
     ref<uint32>(0x10) = PChar->id;
     ref<uint16>(0x14) = PChar->targid;
 
-    if (PChar->status == STATUS_DISAPPEAR)
+    if (PChar->status == STATUSTYPE::DISAPPEAR)
     {
         ref<uint8>(0x16) = 0x05;
         ref<uint8>(0x1C) = 0x01;

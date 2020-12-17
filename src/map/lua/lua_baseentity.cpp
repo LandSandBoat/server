@@ -1638,7 +1638,7 @@ inline int32 CLuaBaseEntity::getStatus(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    lua_pushinteger(L, m_PBaseEntity->status);
+    lua_pushinteger(L, static_cast<uint8>(m_PBaseEntity->status));
     return 1;
 }
 
@@ -1655,7 +1655,7 @@ inline int32 CLuaBaseEntity::setStatus(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    m_PBaseEntity->status = (STATUSTYPE)lua_tointeger(L, 1);
+    m_PBaseEntity->status = static_cast<STATUSTYPE>(lua_tointeger(L, 1));
     m_PBaseEntity->updatemask |= UPDATE_HP;
     return 0;
 }
@@ -2195,11 +2195,11 @@ inline int32 CLuaBaseEntity::showNPC(lua_State* L)
 
     uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
-    m_PBaseEntity->status = STATUS_NORMAL;
+    m_PBaseEntity->status = STATUSTYPE::NORMAL;
     m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
 
     m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-        PNpc->status = STATUS_DISAPPEAR;
+        PNpc->status = STATUSTYPE::DISAPPEAR;
         PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE));
     }));
 
@@ -2218,15 +2218,15 @@ inline int32 CLuaBaseEntity::hideNPC(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    if (m_PBaseEntity->status == STATUS_NORMAL)
+    if (m_PBaseEntity->status == STATUSTYPE::NORMAL)
     {
         uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
-        m_PBaseEntity->status = STATUS_DISAPPEAR;
+        m_PBaseEntity->status = STATUSTYPE::DISAPPEAR;
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE));
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-            PNpc->status = STATUS_NORMAL;
+            PNpc->status = STATUSTYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
@@ -2245,12 +2245,12 @@ inline int32 CLuaBaseEntity::updateNPCHideTime(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    if (m_PBaseEntity->status == STATUS_DISAPPEAR)
+    if (m_PBaseEntity->status == STATUSTYPE::DISAPPEAR)
     {
         uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-            PNpc->status = STATUS_NORMAL;
+            PNpc->status = STATUSTYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
@@ -2447,7 +2447,7 @@ inline int32 CLuaBaseEntity::leavegame(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    ((CCharEntity*)m_PBaseEntity)->status = STATUS_SHUTDOWN;
+    ((CCharEntity*)m_PBaseEntity)->status = STATUSTYPE::SHUTDOWN;
     charutils::SendToZone((CCharEntity*)m_PBaseEntity, 1, 0);
 
     return 0;
@@ -2951,7 +2951,7 @@ inline int32 CLuaBaseEntity::setPos(lua_State* L)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUS_DISAPPEAR)
+        if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUSTYPE::DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
             return 0;
@@ -3007,14 +3007,14 @@ inline int32 CLuaBaseEntity::setPos(lua_State* L)
             }
 
             ((CCharEntity*)m_PBaseEntity)->loc.destination = (uint16)lua_tointeger(L, 5);
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_DISAPPEAR;
+            ((CCharEntity*)m_PBaseEntity)->status          = STATUSTYPE::DISAPPEAR;
             ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
             ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
             ((CCharEntity*)m_PBaseEntity)->clearPacketList();
             charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
             //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_DISAPPEAR)
+        else if (((CCharEntity*)m_PBaseEntity)->status != STATUSTYPE::DISAPPEAR)
         {
             ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
         }
@@ -3041,7 +3041,7 @@ inline int32 CLuaBaseEntity::warp(lua_State* L)
     ((CCharEntity*)m_PBaseEntity)->loc.p           = ((CCharEntity*)m_PBaseEntity)->profile.home_point.p;
     ((CCharEntity*)m_PBaseEntity)->loc.destination = ((CCharEntity*)m_PBaseEntity)->profile.home_point.destination;
 
-    ((CCharEntity*)m_PBaseEntity)->status    = STATUS_DISAPPEAR;
+    ((CCharEntity*)m_PBaseEntity)->status    = STATUSTYPE::DISAPPEAR;
     ((CCharEntity*)m_PBaseEntity)->animation = ANIMATION_NONE;
 
     ((CCharEntity*)m_PBaseEntity)->clearPacketList();
@@ -5085,7 +5085,7 @@ inline int32 CLuaBaseEntity::costume(lua_State* L)
     {
         uint16 costume = static_cast<uint16>(lua_tointeger(L, 1));
 
-        if (PChar->m_Costume != costume && PChar->status != STATUS_SHUTDOWN && PChar->status != STATUS_DISAPPEAR)
+        if (PChar->m_Costume != costume && PChar->status != STATUSTYPE::SHUTDOWN && PChar->status != STATUSTYPE::DISAPPEAR)
         {
             PChar->m_Costume = costume;
             PChar->updatemask |= UPDATE_LOOK;
@@ -5116,7 +5116,7 @@ inline int32 CLuaBaseEntity::costume2(lua_State* L)
     {
         uint16 model = (uint16)lua_tointeger(L, 1);
 
-        if (PChar->m_Monstrosity != model && PChar->status != STATUS_SHUTDOWN && PChar->status != STATUS_DISAPPEAR)
+        if (PChar->m_Monstrosity != model && PChar->status != STATUSTYPE::SHUTDOWN && PChar->status != STATUSTYPE::DISAPPEAR)
         {
             PChar->m_Monstrosity = model;
             PChar->updatemask |= UPDATE_LOOK;
@@ -6030,7 +6030,7 @@ inline int32 CLuaBaseEntity::levelRestriction(lua_State* L)
             PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
             charutils::ApplyAllEquipMods(PChar);
 
-            if (PChar->status != STATUS_DISAPPEAR)
+            if (PChar->status != STATUSTYPE::DISAPPEAR)
             {
                 blueutils::ValidateBlueSpells(PChar);
                 charutils::BuildingCharSkillsTable(PChar);
@@ -13340,7 +13340,7 @@ inline int32 CLuaBaseEntity::hasPet(lua_State* L)
 
     CBattleEntity* PTarget = (CBattleEntity*)m_PBaseEntity;
 
-    lua_pushboolean(L, (PTarget->PPet != nullptr && PTarget->PPet->status != STATUS_DISAPPEAR));
+    lua_pushboolean(L, (PTarget->PPet != nullptr && PTarget->PPet->status != STATUSTYPE::DISAPPEAR));
     return 1;
 }
 

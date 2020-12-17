@@ -390,15 +390,15 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
     {
         EFFECTOVERWRITE overwrite = effects::EffectsParams[statusEffect].Overwrite;
 
-        if (overwrite == EFFECTOVERWRITE_ALWAYS || overwrite == EFFECTOVERWRITE_IGNORE)
+        if (overwrite == EFFECTOVERWRITE::ALWAYS || overwrite == EFFECTOVERWRITE::IGNORE_DUPLICATE)
         {
             return true;
         }
-        else if (overwrite == EFFECTOVERWRITE_NEVER)
+        else if (overwrite == EFFECTOVERWRITE::NEVER)
         {
             return false;
         }
-        else if (overwrite == EFFECTOVERWRITE_EQUAL_HIGHER)
+        else if (overwrite == EFFECTOVERWRITE::EQUAL_HIGHER)
         {
             if (PStatusEffect->GetTier() != 0 && existingEffect->GetTier() != 0)
             {
@@ -406,7 +406,7 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
             }
             return PStatusEffect->GetPower() >= existingEffect->GetPower();
         }
-        else if (overwrite == EFFECTOVERWRITE_HIGHER)
+        else if (overwrite == EFFECTOVERWRITE::HIGHER)
         {
             if (PStatusEffect->GetTier() != 0 && existingEffect->GetTier() != 0)
             {
@@ -414,7 +414,7 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
             }
             return PStatusEffect->GetPower() > existingEffect->GetPower();
         }
-        else if (overwrite == EFFECTOVERWRITE_TIER_HIGHER)
+        else if (overwrite == EFFECTOVERWRITE::TIER_HIGHER)
         {
             if (PStatusEffect->GetTier() != 0 && existingEffect->GetTier() != 0)
             {
@@ -433,7 +433,7 @@ void CStatusEffectContainer::OverwriteStatusEffect(CStatusEffect* StatusEffect)
     uint16 statusEffect = (uint16)StatusEffect->GetStatusID();
     // remove effect
     EFFECTOVERWRITE overwrite = effects::EffectsParams[statusEffect].Overwrite;
-    if (overwrite != EFFECTOVERWRITE_IGNORE)
+    if (overwrite != EFFECTOVERWRITE::IGNORE_DUPLICATE)
     {
         DelStatusEffectSilent((EFFECT)statusEffect);
     }
@@ -453,12 +453,12 @@ void CStatusEffectContainer::OverwriteStatusEffect(CStatusEffect* StatusEffect)
     }
 }
 
-/************************************************************************
- *                                                                       *
- *  Добавляем статус-эффект в контейнер                                  *
- *  Если не ошибаюсь, то максимально-возможное количество эффектов 32    *
- *                                                                       *
- ************************************************************************/
+/**************************************************************************
+ *                                                                         *
+ *  Adding a status effect to the container                                *
+ *  If I'm not mistaken, then the maximum possible number of effects is 32 *
+ *                                                                         *
+ **************************************************************************/
 
 bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool silent)
 {

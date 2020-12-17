@@ -248,7 +248,7 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
     TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
-    if (PChar->status != STATUS_DISAPPEAR)
+    if (PChar->status != STATUSTYPE::DISAPPEAR)
     {
         for (auto& m_PoolItem : m_PoolItems)
         {

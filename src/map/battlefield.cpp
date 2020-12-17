@@ -309,7 +309,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        PEntity->status = STATUS_NORMAL;
+        PEntity->status = STATUSTYPE::NORMAL;
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
@@ -509,7 +509,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         if (PEntity->objtype == TYPE_NPC)
         {
-            PEntity->status = STATUS_DISAPPEAR;
+            PEntity->status = STATUSTYPE::DISAPPEAR;
             PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
             m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
         }
@@ -528,7 +528,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 {
                     m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                 }
-                PEntity->status = STATUS_DISAPPEAR;
+                PEntity->status = STATUSTYPE::DISAPPEAR;
                 return found;
             }
             else
