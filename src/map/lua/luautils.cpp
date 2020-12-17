@@ -452,7 +452,7 @@ namespace luautils
     {
         TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-        lua_pushinteger(L, conquest::GetRegionOwner((REGIONTYPE)lua_tointeger(L, 1)));
+        lua_pushinteger(L, conquest::GetRegionOwner(static_cast<REGION_TYPE>(lua_tointeger(L, 1))));
         return 1;
     }
 
@@ -460,7 +460,7 @@ namespace luautils
     {
         TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-        lua_pushinteger(L, conquest::GetInfluenceGraphics((REGIONTYPE)lua_tointeger(L, 1)));
+        lua_pushinteger(L, conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(lua_tointeger(L, 1))));
         return 1;
     }
 

@@ -1592,7 +1592,7 @@ inline int32 CLuaBaseEntity::isAlly(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    lua_pushboolean(L, m_PBaseEntity->objtype == TYPE_MOB && m_PBaseEntity->allegiance == ALLEGIANCETYPE::PLAYER);
+    lua_pushboolean(L, m_PBaseEntity->objtype == TYPE_MOB && m_PBaseEntity->allegiance == ALLEGIANCE_TYPE::PLAYER);
     return 1;
 }
 
@@ -1655,7 +1655,7 @@ inline int32 CLuaBaseEntity::setStatus(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    m_PBaseEntity->status = static_cast<STATUSTYPE>(lua_tointeger(L, 1));
+    m_PBaseEntity->status = static_cast<STATUS_TYPE>(lua_tointeger(L, 1));
     m_PBaseEntity->updatemask |= UPDATE_HP;
     return 0;
 }
@@ -2195,11 +2195,11 @@ inline int32 CLuaBaseEntity::showNPC(lua_State* L)
 
     uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
-    m_PBaseEntity->status = STATUSTYPE::NORMAL;
+    m_PBaseEntity->status = STATUS_TYPE::NORMAL;
     m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
 
     m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-        PNpc->status = STATUSTYPE::DISAPPEAR;
+        PNpc->status = STATUS_TYPE::DISAPPEAR;
         PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE));
     }));
 
@@ -2218,15 +2218,15 @@ inline int32 CLuaBaseEntity::hideNPC(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    if (m_PBaseEntity->status == STATUSTYPE::NORMAL)
+    if (m_PBaseEntity->status == STATUS_TYPE::NORMAL)
     {
         uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
-        m_PBaseEntity->status = STATUSTYPE::DISAPPEAR;
+        m_PBaseEntity->status = STATUS_TYPE::DISAPPEAR;
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE));
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-            PNpc->status = STATUSTYPE::NORMAL;
+            PNpc->status = STATUS_TYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
@@ -2245,12 +2245,12 @@ inline int32 CLuaBaseEntity::updateNPCHideTime(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    if (m_PBaseEntity->status == STATUSTYPE::DISAPPEAR)
+    if (m_PBaseEntity->status == STATUS_TYPE::DISAPPEAR)
     {
         uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
-            PNpc->status = STATUSTYPE::NORMAL;
+            PNpc->status = STATUS_TYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
@@ -2447,7 +2447,7 @@ inline int32 CLuaBaseEntity::leavegame(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    ((CCharEntity*)m_PBaseEntity)->status = STATUSTYPE::SHUTDOWN;
+    ((CCharEntity*)m_PBaseEntity)->status = STATUS_TYPE::SHUTDOWN;
     charutils::SendToZone((CCharEntity*)m_PBaseEntity, 1, 0);
 
     return 0;
@@ -2819,7 +2819,7 @@ inline int32 CLuaBaseEntity::updateToEntireZone(lua_State* L)
 
     CNpcEntity* PNpc = (CNpcEntity*)m_PBaseEntity;
 
-    PNpc->status    = (STATUSTYPE)lua_tointeger(L, 1);
+    PNpc->status    = static_cast<STATUS_TYPE>(lua_tointeger(L, 1));
     PNpc->animation = (uint8)lua_tointeger(L, 2);
 
     // If this flag is high, update the NPC's name to match the current time
@@ -2951,7 +2951,7 @@ inline int32 CLuaBaseEntity::setPos(lua_State* L)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUSTYPE::DISAPPEAR)
+        if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUS_TYPE::DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
             return 0;
@@ -3007,14 +3007,14 @@ inline int32 CLuaBaseEntity::setPos(lua_State* L)
             }
 
             ((CCharEntity*)m_PBaseEntity)->loc.destination = (uint16)lua_tointeger(L, 5);
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUSTYPE::DISAPPEAR;
+            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
             ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
             ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
             ((CCharEntity*)m_PBaseEntity)->clearPacketList();
             charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
             //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUSTYPE::DISAPPEAR)
+        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
         {
             ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
         }
@@ -3041,7 +3041,7 @@ inline int32 CLuaBaseEntity::warp(lua_State* L)
     ((CCharEntity*)m_PBaseEntity)->loc.p           = ((CCharEntity*)m_PBaseEntity)->profile.home_point.p;
     ((CCharEntity*)m_PBaseEntity)->loc.destination = ((CCharEntity*)m_PBaseEntity)->profile.home_point.destination;
 
-    ((CCharEntity*)m_PBaseEntity)->status    = STATUSTYPE::DISAPPEAR;
+    ((CCharEntity*)m_PBaseEntity)->status    = STATUS_TYPE::DISAPPEAR;
     ((CCharEntity*)m_PBaseEntity)->animation = ANIMATION_NONE;
 
     ((CCharEntity*)m_PBaseEntity)->clearPacketList();
@@ -5085,7 +5085,7 @@ inline int32 CLuaBaseEntity::costume(lua_State* L)
     {
         uint16 costume = static_cast<uint16>(lua_tointeger(L, 1));
 
-        if (PChar->m_Costume != costume && PChar->status != STATUSTYPE::SHUTDOWN && PChar->status != STATUSTYPE::DISAPPEAR)
+        if (PChar->m_Costume != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
         {
             PChar->m_Costume = costume;
             PChar->updatemask |= UPDATE_LOOK;
@@ -5116,7 +5116,7 @@ inline int32 CLuaBaseEntity::costume2(lua_State* L)
     {
         uint16 model = (uint16)lua_tointeger(L, 1);
 
-        if (PChar->m_Monstrosity != model && PChar->status != STATUSTYPE::SHUTDOWN && PChar->status != STATUSTYPE::DISAPPEAR)
+        if (PChar->m_Monstrosity != model && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
         {
             PChar->m_Monstrosity = model;
             PChar->updatemask |= UPDATE_LOOK;
@@ -5263,7 +5263,7 @@ inline int32 CLuaBaseEntity::setAllegiance(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    ALLEGIANCETYPE allegiance = static_cast<ALLEGIANCETYPE>(lua_tointeger(L, 1));
+    ALLEGIANCE_TYPE allegiance = static_cast<ALLEGIANCE_TYPE>(lua_tointeger(L, 1));
 
     m_PBaseEntity->allegiance = allegiance;
     m_PBaseEntity->updatemask |= UPDATE_HP;
@@ -6030,7 +6030,7 @@ inline int32 CLuaBaseEntity::levelRestriction(lua_State* L)
             PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
             charutils::ApplyAllEquipMods(PChar);
 
-            if (PChar->status != STATUSTYPE::DISAPPEAR)
+            if (PChar->status != STATUS_TYPE::DISAPPEAR)
             {
                 blueutils::ValidateBlueSpells(PChar);
                 charutils::BuildingCharSkillsTable(PChar);
@@ -8407,8 +8407,8 @@ inline int32 CLuaBaseEntity::takeDamage(lua_State* L)
     // Deal damage and liberate target when applicable
     if (damage > 0)
     {
-        ATTACKTYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? static_cast<ATTACKTYPE>(lua_tointeger(L, 3)) : ATTACKTYPE::NONE;
-        DAMAGETYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 4)) : DAMAGETYPE::NONE;
+        ATTACK_TYPE attackType = !lua_isnil(L, 3) && lua_isnumber(L, 3) ? static_cast<ATTACK_TYPE>(lua_tointeger(L, 3)) : ATTACK_TYPE::NONE;
+        DAMAGE_TYPE damageType = !lua_isnil(L, 4) && lua_isnumber(L, 4) ? static_cast<DAMAGE_TYPE>(lua_tointeger(L, 4)) : DAMAGE_TYPE::NONE;
 
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
@@ -12410,7 +12410,7 @@ inline int32 CLuaBaseEntity::physicalDmgTaken(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
+    DAMAGE_TYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGE_TYPE>(lua_tointeger(L, 2)) : DAMAGE_TYPE::NONE;
 
     lua_pushinteger(L, battleutils::PhysicalDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12456,7 +12456,7 @@ inline int32 CLuaBaseEntity::rangedDmgTaken(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    DAMAGETYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGETYPE>(lua_tointeger(L, 2)) : DAMAGETYPE::NONE;
+    DAMAGE_TYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGE_TYPE>(lua_tointeger(L, 2)) : DAMAGE_TYPE::NONE;
 
     lua_pushinteger(L, battleutils::RangedDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
     return 1;
@@ -12891,15 +12891,15 @@ int32 CLuaBaseEntity::takeWeaponskillDamage(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 8) || !lua_isnumber(L, 8));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 9) || !lua_isnumber(L, 9));
 
-    auto*      PChar              = static_cast<CCharEntity*>(Lunar<CLuaBaseEntity>::check(L, 1)->m_PBaseEntity);
-    auto       damage             = (int32)lua_tointeger(L, 2);
-    ATTACKTYPE attackType         = (ATTACKTYPE)lua_tointeger(L, 3);
-    DAMAGETYPE damageType         = (DAMAGETYPE)lua_tointeger(L, 4);
-    auto       slot               = (uint8)lua_tointeger(L, 5);
-    auto       primary            = lua_toboolean(L, 6);
-    auto       tpMultiplier       = (float)lua_tonumber(L, 7);
-    auto       bonusTP            = (uint16)lua_tointeger(L, 8);
-    auto       targetTPMultiplier = (float)lua_tonumber(L, 9);
+    auto*       PChar              = static_cast<CCharEntity*>(Lunar<CLuaBaseEntity>::check(L, 1)->m_PBaseEntity);
+    auto        damage             = (int32)lua_tointeger(L, 2);
+    ATTACK_TYPE attackType         = static_cast<ATTACK_TYPE>(lua_tointeger(L, 3));
+    DAMAGE_TYPE damageType         = static_cast<DAMAGE_TYPE>(lua_tointeger(L, 4));
+    auto        slot               = (uint8)lua_tointeger(L, 5);
+    auto        primary            = lua_toboolean(L, 6);
+    auto        tpMultiplier       = (float)lua_tonumber(L, 7);
+    auto        bonusTP            = (uint16)lua_tointeger(L, 8);
+    auto        targetTPMultiplier = (float)lua_tonumber(L, 9);
 
     lua_pushinteger(L, (lua_Integer)battleutils::TakeWeaponskillDamage(PChar, static_cast<CBattleEntity*>(m_PBaseEntity), damage, attackType, damageType, slot,
                                                                        primary, tpMultiplier, bonusTP, targetTPMultiplier));
@@ -12922,11 +12922,11 @@ int32 CLuaBaseEntity::takeSpellDamage(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 4));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 5));
 
-    auto*      PChar      = static_cast<CCharEntity*>(Lunar<CLuaBaseEntity>::check(L, 1)->m_PBaseEntity);
-    auto*      PSpell     = Lunar<CLuaSpell>::check(L, 2)->GetSpell();
-    auto       damage     = (int32)lua_tointeger(L, 3);
-    ATTACKTYPE attackType = (ATTACKTYPE)lua_tointeger(L, 4);
-    DAMAGETYPE damageType = (DAMAGETYPE)lua_tointeger(L, 5);
+    auto*       PChar      = static_cast<CCharEntity*>(Lunar<CLuaBaseEntity>::check(L, 1)->m_PBaseEntity);
+    auto*       PSpell     = Lunar<CLuaSpell>::check(L, 2)->GetSpell();
+    auto        damage     = (int32)lua_tointeger(L, 3);
+    ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(lua_tointeger(L, 4));
+    DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(lua_tointeger(L, 5));
 
     lua_pushinteger(L, (lua_Integer)battleutils::TakeSpellDamage(static_cast<CBattleEntity*>(m_PBaseEntity), PChar, PSpell, damage, attackType, damageType));
     return 1;
@@ -13340,7 +13340,7 @@ inline int32 CLuaBaseEntity::hasPet(lua_State* L)
 
     CBattleEntity* PTarget = (CBattleEntity*)m_PBaseEntity;
 
-    lua_pushboolean(L, (PTarget->PPet != nullptr && PTarget->PPet->status != STATUSTYPE::DISAPPEAR));
+    lua_pushboolean(L, (PTarget->PPet != nullptr && PTarget->PPet->status != STATUS_TYPE::DISAPPEAR));
     return 1;
 }
 

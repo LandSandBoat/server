@@ -941,7 +941,7 @@ namespace petutils
             }
 
             PMob->isCharmed  = false;
-            PMob->allegiance = ALLEGIANCETYPE::MOB;
+            PMob->allegiance = ALLEGIANCE_TYPE::MOB;
             PMob->charmTime  = time_point::min();
             PMob->PMaster    = nullptr;
 
@@ -1567,7 +1567,7 @@ namespace petutils
         }
 
         FinalizePetStatistics(PMaster, PPet);
-        PPet->status      = STATUSTYPE::NORMAL;
+        PPet->status      = STATUS_TYPE::NORMAL;
         PPet->m_ModelSize = PPetData->size;
         PPet->m_EcoSystem = PPetData->EcoSystem;
 

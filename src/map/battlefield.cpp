@@ -309,7 +309,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        PEntity->status = STATUSTYPE::NORMAL;
+        PEntity->status = STATUS_TYPE::NORMAL;
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
@@ -396,7 +396,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
     }
     else if (PEntity->objtype == TYPE_MOB)
     {
-        if (PEntity->allegiance == ALLEGIANCETYPE::MOB)
+        if (PEntity->allegiance == ALLEGIANCE_TYPE::MOB)
         {
             for (const auto& mob : m_AdditionalEnemyList)
             {
@@ -413,7 +413,7 @@ CBaseEntity* CBattlefield::GetEntity(CBaseEntity* PEntity)
                 }
             }
         }
-        else if (PEntity->allegiance == ALLEGIANCETYPE::PLAYER)
+        else if (PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
             for (auto* PAlly : m_AllyList)
             {
@@ -509,7 +509,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         if (PEntity->objtype == TYPE_NPC)
         {
-            PEntity->status = STATUSTYPE::DISAPPEAR;
+            PEntity->status = STATUS_TYPE::DISAPPEAR;
             PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
             m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
         }
@@ -528,7 +528,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 {
                     m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                 }
-                PEntity->status = STATUSTYPE::DISAPPEAR;
+                PEntity->status = STATUS_TYPE::DISAPPEAR;
                 return found;
             }
             else

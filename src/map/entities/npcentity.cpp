@@ -38,7 +38,7 @@ CNpcEntity::CNpcEntity()
     objtype    = TYPE_NPC;
     look.face  = 0x32;
     widescan   = 1;
-    allegiance = ALLEGIANCETYPE::MOB;
+    allegiance = ALLEGIANCE_TYPE::MOB;
     PAI        = std::make_unique<CAIContainer>(this);
 }
 
@@ -90,7 +90,7 @@ bool CNpcEntity::IsUntargetable() const
 
 bool CNpcEntity::isWideScannable()
 {
-    return widescan == 1 && status == STATUSTYPE::NORMAL && CBaseEntity::isWideScannable();
+    return widescan == 1 && status == STATUS_TYPE::NORMAL && CBaseEntity::isWideScannable();
 }
 
 void CNpcEntity::PostTick()

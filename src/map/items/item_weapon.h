@@ -33,21 +33,21 @@ public:
     CItemWeapon(uint16);
     virtual ~CItemWeapon();
 
-    uint8      getSkillType() const;
-    uint8      getSubSkillType() const;
-    uint16     getILvlSkill() const;
-    uint16     getILvlParry() const;
-    uint16     getILvlMacc() const;
-    int16      getDelay() const;
-    int16      getBaseDelay() const;
-    uint16     getDamage() const;
-    DAMAGETYPE getDmgType();
-    uint8      getAdditionalEffect() const;
-    uint8      getHitCount() const;
-    uint16     getUnlockPoints() const;
-    uint16     getCurrentUnlockPoints();
-    void       resetDelay();
-    bool       addWsPoints(uint16 points);
+    uint8       getSkillType() const;
+    uint8       getSubSkillType() const;
+    uint16      getILvlSkill() const;
+    uint16      getILvlParry() const;
+    uint16      getILvlMacc() const;
+    int16       getDelay() const;
+    int16       getBaseDelay() const;
+    uint16      getDamage() const;
+    DAMAGE_TYPE getDmgType();
+    uint8       getAdditionalEffect() const;
+    uint8       getHitCount() const;
+    uint16      getUnlockPoints() const;
+    uint16      getCurrentUnlockPoints();
+    void        resetDelay();
+    bool        addWsPoints(uint16 points);
 
     bool isRanged() const;
     bool isThrowing() const;
@@ -65,24 +65,24 @@ public:
     void setDelay(uint16 delay);
     void setBaseDelay(uint16 delay); // should ONLY be set by zoneutils!
     void setDamage(uint16 damage);
-    void setDmgType(DAMAGETYPE dmgType);
+    void setDmgType(DAMAGE_TYPE dmgType);
     void setAdditionalEffect(uint8 effect);
     void setMaxHit(uint8 hit);
     void setUnlockablePoints(uint16 points);
     void setCurrentUnlockPoints(uint16 points);
 
 private:
-    uint8      m_skillType;
-    uint8      m_subSkillType; // gun vs crossbow, any other exclusives
-    uint16     m_iLvlSkill;
-    uint16     m_iLvlParry;
-    uint16     m_iLvlMacc;
-    uint16     m_damage;
-    int16      m_delay; // can be -ve e.g. ammo/ranged weapons
-    int16      m_baseDelay;
-    DAMAGETYPE m_dmgType;
-    uint8      m_effect;
-    uint8      m_maxHit;
+    uint8       m_skillType;
+    uint8       m_subSkillType; // gun vs crossbow, any other exclusives
+    uint16      m_iLvlSkill;
+    uint16      m_iLvlParry;
+    uint16      m_iLvlMacc;
+    uint16      m_damage;
+    int16       m_delay; // can be -ve e.g. ammo/ranged weapons
+    int16       m_baseDelay;
+    DAMAGE_TYPE m_dmgType;
+    uint8       m_effect;
+    uint8       m_maxHit;
 
     uint16 m_wsunlockpoints;
 

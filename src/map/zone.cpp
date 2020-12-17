@@ -131,13 +131,13 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
  *                                                                       *
  ************************************************************************/
 
-CZone::CZone(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID)
+CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 {
     std::ignore = m_useNavMesh;
     ZoneTimer   = nullptr;
 
     m_zoneID             = ZoneID;
-    m_zoneType           = ZONETYPE::NONE;
+    m_zoneType           = ZONE_TYPE::NONE;
     m_regionID           = RegionID;
     m_continentID        = ContinentID;
     m_TreasurePool       = nullptr;
@@ -171,17 +171,17 @@ ZONEID CZone::GetID()
     return m_zoneID;
 }
 
-ZONETYPE CZone::GetType()
+ZONE_TYPE CZone::GetType()
 {
     return m_zoneType;
 }
 
-REGIONTYPE CZone::GetRegionID()
+REGION_TYPE CZone::GetRegionID()
 {
     return m_regionID;
 }
 
-CONTINENTTYPE CZone::GetContinentID()
+CONTINENT_TYPE CZone::GetContinentID()
 {
     return m_continentID;
 }
@@ -368,7 +368,7 @@ void CZone::LoadZoneSettings()
         m_tax                   = (uint16)(Sql_GetFloatData(SqlHandle, 7) * 100); // tax for bazaar
         m_miscMask              = (uint16)Sql_GetUIntData(SqlHandle, 8);
 
-        m_zoneType = (ZONETYPE)Sql_GetUIntData(SqlHandle, 9);
+        m_zoneType = static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 9));
 
         if (Sql_GetData(SqlHandle, 10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
         {
@@ -571,7 +571,7 @@ void CZone::UpdateWeather()
     }
 
     // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
-    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONETYPE::CITY))
+    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONE_TYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -914,7 +914,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->PTreasurePool->AddMember(PChar);
     }
 
-    if (m_zoneType != ZONETYPE::DUNGEON_INSTANCED)
+    if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;
@@ -995,7 +995,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
 
     PChar->loc.zone = nullptr;
 
-    if (PChar->status == STATUSTYPE::SHUTDOWN)
+    if (PChar->status == STATUS_TYPE::SHUTDOWN)
     {
         PChar->loc.destination = m_zoneID;
     }

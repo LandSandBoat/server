@@ -47,11 +47,11 @@ void Transport_Ship::setVisible(bool visible) const
 {
     if (visible)
     {
-        this->npc->status = STATUSTYPE::NORMAL;
+        this->npc->status = STATUS_TYPE::NORMAL;
     }
     else
     {
-        this->npc->status = STATUSTYPE::DISAPPEAR;
+        this->npc->status = STATUS_TYPE::DISAPPEAR;
     }
 }
 

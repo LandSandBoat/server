@@ -414,7 +414,7 @@ void CAIContainer::InterruptStates()
 
 bool CAIContainer::IsSpawned()
 {
-    return PEntity->status != STATUSTYPE::DISAPPEAR;
+    return PEntity->status != STATUS_TYPE::DISAPPEAR;
 }
 
 bool CAIContainer::IsRoaming()

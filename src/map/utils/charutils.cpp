@@ -3394,10 +3394,10 @@ namespace charutils
 
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
-        uint8      pcinzone = 0;
-        uint8      minlevel = 0;
-        uint8      maxlevel = PChar->GetMLevel();
-        REGIONTYPE region   = PChar->loc.zone->GetRegionID();
+        uint8       pcinzone = 0;
+        uint8       minlevel = 0;
+        uint8       maxlevel = PChar->GetMLevel();
+        REGION_TYPE region   = PChar->loc.zone->GetRegionID();
 
         if (PChar->PParty)
         {
@@ -3474,7 +3474,7 @@ namespace charutils
                         }
                     }
 
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= REGIONTYPE::RONFAURE && region <= REGIONTYPE::JEUNO)
+                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO)
                     {
                         switch (pcinzone)
                         {
@@ -3501,7 +3501,8 @@ namespace charutils
                                 break;
                         }
                     }
-                    else if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && region >= REGIONTYPE::WEST_AHT_URHGAN && region <= REGIONTYPE::ALZADAAL)
+                    else if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && region >= REGION_TYPE::WEST_AHT_URHGAN &&
+                             region <= REGION_TYPE::ALZADAAL)
                     {
                         switch (pcinzone)
                         {
@@ -4033,17 +4034,17 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            REGIONTYPE region = PChar->loc.zone->GetRegionID();
+            REGION_TYPE region = PChar->loc.zone->GetRegionID();
 
             // Should this user be awarded conquest points..
-            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && (region >= REGIONTYPE::RONFAURE && region <= REGIONTYPE::JEUNO))
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && (region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO))
             {
                 // Add influence for the players region..
                 conquest::AddConquestPoints(PChar, exp);
             }
 
             // Should this user be awarded imperial standing..
-            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && (region >= REGIONTYPE::WEST_AHT_URHGAN && region <= REGIONTYPE::ALZADAAL))
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && (region >= REGION_TYPE::WEST_AHT_URHGAN && region <= REGION_TYPE::ALZADAAL))
             {
                 charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.1f));
                 PChar->pushPacket(new CConquestPacket(PChar));
@@ -4051,7 +4052,7 @@ namespace charutils
 
             // Cruor Drops in Abyssea zones.
             uint16 Pzone = PChar->getZone();
-            if (zoneutils::GetCurrentRegion(Pzone) == REGIONTYPE::ABYSSEA)
+            if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 uint32 Total  = charutils::GetPoints(PChar, "cruor");
@@ -5385,7 +5386,7 @@ namespace charutils
         PChar->loc.p           = PChar->profile.home_point.p;
         PChar->loc.destination = PChar->profile.home_point.destination;
 
-        PChar->status    = STATUSTYPE::DISAPPEAR;
+        PChar->status    = STATUS_TYPE::DISAPPEAR;
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;
 

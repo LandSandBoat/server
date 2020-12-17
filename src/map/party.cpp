@@ -291,7 +291,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     }
                     if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
                     {
-                        if (PChar->status != STATUSTYPE::DISAPPEAR)
+                        if (PChar->status != STATUS_TYPE::DISAPPEAR)
                         {
                             CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                             if (sync && sync->GetDuration() == 0)
@@ -368,7 +368,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
                     }
                     if (m_PSyncTarget != nullptr && m_PSyncTarget != PChar)
                     {
-                        if (PChar->status != STATUSTYPE::DISAPPEAR)
+                        if (PChar->status != STATUS_TYPE::DISAPPEAR)
                         {
                             CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                             if (sync && sync->GetDuration() == 0)
@@ -1024,7 +1024,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
 
                     CCharEntity* member = (CCharEntity*)i;
 
-                    if (member->status != STATUSTYPE::DISAPPEAR && member->getZone() == PChar->getZone())
+                    if (member->status != STATUS_TYPE::DISAPPEAR && member->getZone() == PChar->getZone())
                     {
                         member->pushPacket(new CMessageStandardPacket(PChar->GetMLevel(), 0, 0, 0, static_cast<MsgStd>(message)));
                         member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0, 0), true);
@@ -1052,7 +1052,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
 
                     CCharEntity* member = (CCharEntity*)i;
 
-                    if (member->status != STATUSTYPE::DISAPPEAR)
+                    if (member->status != STATUS_TYPE::DISAPPEAR)
                     {
                         CStatusEffect* sync = member->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
@@ -1109,7 +1109,7 @@ void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet)
 
         CCharEntity* member = (CCharEntity*)i;
 
-        if (member->id != senderID && member->status != STATUSTYPE::DISAPPEAR && !jailutils::InPrison(member))
+        if (member->id != senderID && member->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(member))
         {
             if (ZoneID == 0 || member->getZone() == ZoneID)
             {

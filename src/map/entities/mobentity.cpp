@@ -65,7 +65,7 @@ CMobEntity::CMobEntity()
     MPscale = 1.0;
     m_flags = 0;
 
-    allegiance = ALLEGIANCETYPE::MOB;
+    allegiance = ALLEGIANCE_TYPE::MOB;
 
     // default to normal roaming
     m_roamFlags    = ROAMFLAG_NONE;
@@ -982,25 +982,25 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         if (m_Element > 0)
         {
-            REGIONTYPE regionID = PChar->loc.zone->GetRegionID();
+            REGION_TYPE regionID = PChar->loc.zone->GetRegionID();
             switch (regionID)
             {
                 // Sanction Regions
-                case REGIONTYPE::WEST_AHT_URHGAN:
-                case REGIONTYPE::MAMOOL_JA_SAVAGE:
-                case REGIONTYPE::HALVUNG:
-                case REGIONTYPE::ARRAPAGO:
+                case REGION_TYPE::WEST_AHT_URHGAN:
+                case REGION_TYPE::MAMOOL_JA_SAVAGE:
+                case REGION_TYPE::HALVUNG:
+                case REGION_TYPE::ARRAPAGO:
                     effect = 2;
                     break;
                 // Sigil Regions
-                case REGIONTYPE::RONFAURE_FRONT:
-                case REGIONTYPE::NORVALLEN_FRONT:
-                case REGIONTYPE::GUSTABERG_FRONT:
-                case REGIONTYPE::DERFLAND_FRONT:
-                case REGIONTYPE::SARUTA_FRONT:
-                case REGIONTYPE::ARAGONEAU_FRONT:
-                case REGIONTYPE::FAUREGANDI_FRONT:
-                case REGIONTYPE::VALDEAUNIA_FRONT:
+                case REGION_TYPE::RONFAURE_FRONT:
+                case REGION_TYPE::NORVALLEN_FRONT:
+                case REGION_TYPE::GUSTABERG_FRONT:
+                case REGION_TYPE::DERFLAND_FRONT:
+                case REGION_TYPE::SARUTA_FRONT:
+                case REGION_TYPE::ARAGONEAU_FRONT:
+                case REGION_TYPE::FAUREGANDI_FRONT:
+                case REGION_TYPE::VALDEAUNIA_FRONT:
                     effect = 3;
                     break;
                 // Signet Regions

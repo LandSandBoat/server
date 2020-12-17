@@ -341,7 +341,7 @@ enum ZONEID : uint16
 
 #define MAX_ZONEID 299
 
-enum class REGIONTYPE : uint8
+enum class REGION_TYPE : uint8
 {
     RONFAURE         = 0,
     ZULKHEIM         = 1,
@@ -393,7 +393,7 @@ enum class REGIONTYPE : uint8
     UNKNOWN = 255
 };
 
-enum class CONTINENTTYPE : uint8
+enum class CONTINENT_TYPE : uint8
 {
     THE_MIDDLE_LANDS       = 1,
     THE_ARADJIAH_CONTINENT = 2,
@@ -401,7 +401,7 @@ enum class CONTINENTTYPE : uint8
     OTHER_AREAS            = 4
 };
 
-enum class ZONETYPE : uint8
+enum class ZONE_TYPE : uint8
 {
     NONE              = 0,
     CITY              = 1,
@@ -527,21 +527,21 @@ int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 class CZone
 {
 public:
-    ZONEID        GetID();
-    ZONETYPE      GetType();
-    REGIONTYPE    GetRegionID();
-    CONTINENTTYPE GetContinentID();
-    uint32        GetIP() const;
-    uint16        GetPort() const;
-    uint16        GetTax() const;
-    WEATHER       GetWeather();
-    uint32        GetWeatherChangeTime() const;
-    const int8*   GetName();
-    uint8         GetSoloBattleMusic() const;
-    uint8         GetPartyBattleMusic() const;
-    uint8         GetBackgroundMusicDay() const;
-    uint8         GetBackgroundMusicNight() const;
-    zoneLine_t*   GetZoneLine(uint32 zoneLineID);
+    ZONEID         GetID();
+    ZONE_TYPE      GetType();
+    REGION_TYPE    GetRegionID();
+    CONTINENT_TYPE GetContinentID();
+    uint32         GetIP() const;
+    uint16         GetPort() const;
+    uint16         GetTax() const;
+    WEATHER        GetWeather();
+    uint32         GetWeatherChangeTime() const;
+    const int8*    GetName();
+    uint8          GetSoloBattleMusic() const;
+    uint8          GetPartyBattleMusic() const;
+    uint8          GetBackgroundMusicDay() const;
+    uint8          GetBackgroundMusicNight() const;
+    zoneLine_t*    GetZoneLine(uint32 zoneLineID);
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
@@ -597,7 +597,7 @@ public:
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func);
     virtual void ForEachNpc(std::function<void(CNpcEntity*)> func);
 
-    CZone(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID);
+    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
@@ -605,14 +605,14 @@ public:
     CNavMesh* m_navMesh; // zones navmesh for finding paths
 
 private:
-    ZONEID        m_zoneID; // ID зоны
-    ZONETYPE      m_zoneType;
-    REGIONTYPE    m_regionID;    // ID области
-    CONTINENTTYPE m_continentID; // ID континента
-    string_t      m_zoneName;    // имя зоны
-    uint16        m_zonePort;    // порт зоны
-    uint32        m_zoneIP;      // IP зоны
-    bool          m_useNavMesh;  // Use navmesh for roaming, chasing
+    ZONEID         m_zoneID; // ID зоны
+    ZONE_TYPE      m_zoneType;
+    REGION_TYPE    m_regionID;    // ID области
+    CONTINENT_TYPE m_continentID; // ID континента
+    string_t       m_zoneName;    // имя зоны
+    uint16         m_zonePort;    // порт зоны
+    uint32         m_zoneIP;      // IP зоны
+    bool           m_useNavMesh;  // Use navmesh for roaming, chasing
 
     WEATHER        m_Weather;           // текущая погода
     uint32         m_WeatherChangeTime; // время начала текущей погоды

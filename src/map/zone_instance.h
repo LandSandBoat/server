@@ -68,7 +68,7 @@ public:
 
     CInstance* CreateInstance(uint8 instanceid);
 
-    CZoneInstance(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID);
+    CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
     ~CZoneInstance();
 
 private:

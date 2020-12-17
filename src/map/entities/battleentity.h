@@ -233,7 +233,7 @@ enum SLOTTYPE
 // для возможности различить эти орудия при экипировке и избавиться от ошибки
 // использования пуль с арбалетом и арбалетных стрел с огнестрельным оружием (только персонажи)
 
-enum class ATTACKTYPE
+enum class ATTACK_TYPE
 {
     NONE     = 0,
     PHYSICAL = 1,
@@ -243,7 +243,7 @@ enum class ATTACKTYPE
     BREATH   = 5
 };
 
-enum class DAMAGETYPE : uint16
+enum class DAMAGE_TYPE : uint16
 {
     NONE      = 0,
     PIERCING  = 1,
@@ -544,8 +544,8 @@ public:
     virtual int32 addMP(int32 mp); // увеличиваем/уменьшаем количество mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
-    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACKTYPE attackType = ATTACKTYPE::NONE,
-                             DAMAGETYPE damageType = DAMAGETYPE::NONE);
+    virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE,
+                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE);
 
     int16 getMod(Mod modID); // величина модификатора
 
