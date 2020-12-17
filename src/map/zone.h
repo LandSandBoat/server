@@ -393,7 +393,7 @@ enum class REGIONTYPE : uint8
     UNKNOWN = 255
 };
 
-enum CONTINENTTYPE : uint8
+enum class CONTINENTTYPE : uint8
 {
     THE_MIDDLE_LANDS       = 1,
     THE_ARADJIAH_CONTINENT = 2,

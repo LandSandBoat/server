@@ -977,7 +977,7 @@ namespace zoneutils
 
     CONTINENTTYPE GetCurrentContinent(uint16 ZoneID)
     {
-        return GetCurrentRegion(ZoneID) != REGIONTYPE::UNKNOWN ? THE_MIDDLE_LANDS : OTHER_AREAS;
+        return GetCurrentRegion(ZoneID) != REGIONTYPE::UNKNOWN ? CONTINENTTYPE::THE_MIDDLE_LANDS : CONTINENTTYPE::OTHER_AREAS;
     }
 
     int GetWeatherElement(WEATHER weather)

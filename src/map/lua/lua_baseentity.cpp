@@ -2766,7 +2766,7 @@ inline int32 CLuaBaseEntity::getContinentID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    lua_pushinteger(L, m_PBaseEntity->loc.zone->GetContinentID());
+    lua_pushinteger(L, static_cast<uint8>(m_PBaseEntity->loc.zone->GetContinentID()));
     return 1;
 }
 
