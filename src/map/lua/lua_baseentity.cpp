@@ -3101,11 +3101,11 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State* L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-    uint8  type = (uint8)lua_tointeger(L, 1);
+    TELEPORT_TYPE  type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
     uint32 bit  = 1 << (uint32)lua_tointeger(L, 2);
     uint8  set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
 
-    if ((type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL) && (lua_isnil(L, 3) || set > 3))
+    if ((type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL) && (lua_isnil(L, 3) || set > 3))
     {
         ShowError("Lua::addteleport : Attempt to index array out-of-bounds or parameter is nil.");
         return 0;
@@ -3113,34 +3113,34 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State* L)
 
     switch (type)
     {
-        case TELEPORT_OUTPOST_SANDY:
+        case TELEPORT_TYPE::OUTPOST_SANDY:
             PChar->teleport.outpostSandy |= bit;
             break;
-        case TELEPORT_OUTPOST_BASTOK:
+        case TELEPORT_TYPE::OUTPOST_BASTOK:
             PChar->teleport.outpostBastok |= bit;
             break;
-        case TELEPORT_OUTPOST_WINDY:
+        case TELEPORT_TYPE::OUTPOST_WINDY:
             PChar->teleport.outpostWindy |= bit;
             break;
-        case TELEPORT_RUNIC_PORTAL:
+        case TELEPORT_TYPE::RUNIC_PORTAL:
             PChar->teleport.runicPortal |= bit;
             break;
-        case TELEPORT_PAST_MAW:
+        case TELEPORT_TYPE::PAST_MAW:
             PChar->teleport.pastMaw |= bit;
             break;
-        case TELEPORT_CAMPAIGN_SANDY:
+        case TELEPORT_TYPE::CAMPAIGN_SANDY:
             PChar->teleport.campaignSandy |= bit;
             break;
-        case TELEPORT_CAMPAIGN_BASTOK:
+        case TELEPORT_TYPE::CAMPAIGN_BASTOK:
             PChar->teleport.campaignBastok |= bit;
             break;
-        case TELEPORT_CAMPAIGN_WINDY:
+        case TELEPORT_TYPE::CAMPAIGN_WINDY:
             PChar->teleport.campaignWindy |= bit;
             break;
-        case TELEPORT_HOMEPOINT:
+        case TELEPORT_TYPE::HOMEPOINT:
             PChar->teleport.homepoint.access[set] |= bit;
             break;
-        case TELEPORT_SURVIVAL:
+        case TELEPORT_TYPE::SURVIVAL:
             PChar->teleport.survival.access[set] |= bit;
             break;
         default:
@@ -3165,36 +3165,36 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    uint8        type  = (uint8)lua_tointeger(L, 1);
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    TELEPORT_TYPE  type  = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
+    CCharEntity*   PChar = (CCharEntity*)m_PBaseEntity;
 
     switch (type)
     {
-        case TELEPORT_OUTPOST_SANDY:
+        case TELEPORT_TYPE::OUTPOST_SANDY:
             lua_pushinteger(L, PChar->teleport.outpostSandy);
             break;
-        case TELEPORT_OUTPOST_BASTOK:
+        case TELEPORT_TYPE::OUTPOST_BASTOK:
             lua_pushinteger(L, PChar->teleport.outpostBastok);
             break;
-        case TELEPORT_OUTPOST_WINDY:
+        case TELEPORT_TYPE::OUTPOST_WINDY:
             lua_pushinteger(L, PChar->teleport.outpostWindy);
             break;
-        case TELEPORT_RUNIC_PORTAL:
+        case TELEPORT_TYPE::RUNIC_PORTAL:
             lua_pushinteger(L, PChar->teleport.runicPortal);
             break;
-        case TELEPORT_PAST_MAW:
+        case TELEPORT_TYPE::PAST_MAW:
             lua_pushinteger(L, PChar->teleport.pastMaw);
             break;
-        case TELEPORT_CAMPAIGN_SANDY:
+        case TELEPORT_TYPE::CAMPAIGN_SANDY:
             lua_pushinteger(L, PChar->teleport.campaignSandy);
             break;
-        case TELEPORT_CAMPAIGN_BASTOK:
+        case TELEPORT_TYPE::CAMPAIGN_BASTOK:
             lua_pushinteger(L, PChar->teleport.campaignBastok);
             break;
-        case TELEPORT_CAMPAIGN_WINDY:
+        case TELEPORT_TYPE::CAMPAIGN_WINDY:
             lua_pushinteger(L, PChar->teleport.campaignWindy);
             break;
-        case TELEPORT_HOMEPOINT:
+        case TELEPORT_TYPE::HOMEPOINT:
             lua_newtable(L);
             for (uint8 x = 0; x < 4; x++)
             {
@@ -3202,7 +3202,7 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State* L)
                 lua_rawseti(L, -2, x + 1);
             }
             break;
-        case TELEPORT_SURVIVAL:
+        case TELEPORT_TYPE::SURVIVAL:
             lua_newtable(L);
             for (uint8 x = 0; x < 4; x++)
             {
@@ -3233,11 +3233,11 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State* L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-    uint8 type = (uint8)lua_tointeger(L, 1);
+    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
     uint8 bit  = (uint8)lua_tointeger(L, 2);
     uint8 set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
 
-    if (type == TELEPORT_HOMEPOINT || type == TELEPORT_SURVIVAL)
+    if (type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL)
     {
         if (lua_isnil(L, 3) || set > 3)
         {
@@ -3245,7 +3245,7 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State* L)
             return 0;
         }
 
-        if (type == TELEPORT_HOMEPOINT)
+        if (type == TELEPORT_TYPE::HOMEPOINT)
         {
             lua_pushboolean(L, PChar->teleport.homepoint.access[set] & (1 << bit));
         }
@@ -3258,28 +3258,28 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State* L)
 
     switch (type)
     {
-        case TELEPORT_OUTPOST_SANDY:
+        case TELEPORT_TYPE::OUTPOST_SANDY:
             lua_pushboolean(L, PChar->teleport.outpostSandy & (1 << bit));
             break;
-        case TELEPORT_OUTPOST_BASTOK:
+        case TELEPORT_TYPE::OUTPOST_BASTOK:
             lua_pushboolean(L, PChar->teleport.outpostBastok & (1 << bit));
             break;
-        case TELEPORT_OUTPOST_WINDY:
+        case TELEPORT_TYPE::OUTPOST_WINDY:
             lua_pushboolean(L, PChar->teleport.outpostWindy & (1 << bit));
             break;
-        case TELEPORT_RUNIC_PORTAL:
+        case TELEPORT_TYPE::RUNIC_PORTAL:
             lua_pushboolean(L, PChar->teleport.runicPortal & (1 << bit));
             break;
-        case TELEPORT_PAST_MAW:
+        case TELEPORT_TYPE::PAST_MAW:
             lua_pushboolean(L, PChar->teleport.pastMaw & (1 << bit));
             break;
-        case TELEPORT_CAMPAIGN_SANDY:
+        case TELEPORT_TYPE::CAMPAIGN_SANDY:
             lua_pushboolean(L, PChar->teleport.campaignSandy & (1 << bit));
             break;
-        case TELEPORT_CAMPAIGN_BASTOK:
+        case TELEPORT_TYPE::CAMPAIGN_BASTOK:
             lua_pushboolean(L, PChar->teleport.campaignBastok & (1 << bit));
             break;
-        case TELEPORT_CAMPAIGN_WINDY:
+        case TELEPORT_TYPE::CAMPAIGN_WINDY:
             lua_pushboolean(L, PChar->teleport.campaignWindy & (1 << bit));
             break;
         default:
@@ -3304,14 +3304,14 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State* L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-    uint8 type = (uint8)lua_tointeger(L, 1);
+    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
     if (!lua_istable(L, 2))
     {
         ShowError("LuaBaseEntity::setteleportMenu : Table not passed in Parameter 2.\n");
         return 0;
     }
 
-    if (type != TELEPORT_HOMEPOINT && type != TELEPORT_SURVIVAL)
+    if (type != TELEPORT_TYPE::HOMEPOINT && type != TELEPORT_TYPE::SURVIVAL)
     {
         ShowError("LuaBaseEntity::setteleportMenu : Incorrect value for Parameter 1.\n");
         return 0;
@@ -3323,7 +3323,7 @@ inline int32 CLuaBaseEntity::setTeleportMenu(lua_State* L)
 
     while (lua_next(L, index))
     {
-        if (type == TELEPORT_HOMEPOINT)
+        if (type == TELEPORT_TYPE::HOMEPOINT)
         {
             PChar->teleport.homepoint.menu[x++] = (int32)lua_tointeger(L, -1);
         }
@@ -3351,10 +3351,10 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    uint8        type  = (uint8)lua_tointeger(L, 1);
+    CCharEntity*  PChar = (CCharEntity*)m_PBaseEntity;
+    TELEPORT_TYPE type  = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
 
-    if (type != TELEPORT_HOMEPOINT && type != TELEPORT_SURVIVAL)
+    if (type != TELEPORT_TYPE::HOMEPOINT && type != TELEPORT_TYPE::SURVIVAL)
     {
         ShowError("LuaBaseEntity::getTeleportMenu : Incorrect value or parameter 1.\n");
         return 0;
@@ -3364,7 +3364,7 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State* L)
 
     for (uint8 x = 0; x < 10; x++)
     {
-        if (type == TELEPORT_HOMEPOINT)
+        if (type == TELEPORT_TYPE::HOMEPOINT)
         {
             lua_pushnumber(L, PChar->teleport.homepoint.menu[x]);
         }

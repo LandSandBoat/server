@@ -4774,46 +4774,46 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    void SaveTeleport(CCharEntity* PChar, uint8 type)
+    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type)
     {
         const char* column = "";
         uint32      value  = 0;
 
         switch (type)
         {
-            case TELEPORT_OUTPOST_SANDY:
+            case TELEPORT_TYPE::OUTPOST_SANDY:
                 column = "outpost_sandy";
                 value  = PChar->teleport.outpostSandy;
                 break;
-            case TELEPORT_OUTPOST_BASTOK:
+            case TELEPORT_TYPE::OUTPOST_BASTOK:
                 column = "outpost_bastok";
                 value  = PChar->teleport.outpostBastok;
                 break;
-            case TELEPORT_OUTPOST_WINDY:
+            case TELEPORT_TYPE::OUTPOST_WINDY:
                 column = "outpost_windy";
                 value  = PChar->teleport.outpostWindy;
                 break;
-            case TELEPORT_RUNIC_PORTAL:
+            case TELEPORT_TYPE::RUNIC_PORTAL:
                 column = "runic_portal";
                 value  = PChar->teleport.runicPortal;
                 break;
-            case TELEPORT_PAST_MAW:
+            case TELEPORT_TYPE::PAST_MAW:
                 column = "maw";
                 value  = PChar->teleport.pastMaw;
                 break;
-            case TELEPORT_CAMPAIGN_SANDY:
+            case TELEPORT_TYPE::CAMPAIGN_SANDY:
                 column = "campaign_sandy";
                 value  = PChar->teleport.campaignSandy;
                 break;
-            case TELEPORT_CAMPAIGN_BASTOK:
+            case TELEPORT_TYPE::CAMPAIGN_BASTOK:
                 column = "campaign_bastok";
                 value  = PChar->teleport.campaignBastok;
                 break;
-            case TELEPORT_CAMPAIGN_WINDY:
+            case TELEPORT_TYPE::CAMPAIGN_WINDY:
                 column = "campaign_windy";
                 value  = PChar->teleport.campaignWindy;
                 break;
-            case TELEPORT_HOMEPOINT:
+            case TELEPORT_TYPE::HOMEPOINT:
             {
                 char buf[sizeof(PChar->teleport.homepoint) * 2 + 1];
                 Sql_EscapeStringLen(SqlHandle, buf, (const char*)&PChar->teleport.homepoint, sizeof(PChar->teleport.homepoint));
@@ -4821,7 +4821,7 @@ namespace charutils
                 Sql_Query(SqlHandle, query, buf, PChar->id);
                 return;
             }
-            case TELEPORT_SURVIVAL:
+            case TELEPORT_TYPE::SURVIVAL:
             {
                 char buf[sizeof(PChar->teleport.survival) * 2 + 1];
                 Sql_EscapeStringLen(SqlHandle, buf, (const char*)&PChar->teleport.survival, sizeof(PChar->teleport.survival));
