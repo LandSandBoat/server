@@ -292,7 +292,7 @@ namespace zoneutils
                 uint32 NpcID  = Sql_GetUIntData(SqlHandle, 0);
                 uint16 ZoneID = (NpcID - 0x1000000) >> 12;
 
-                if (GetZone(ZoneID)->GetType() != ZONETYPE_DUNGEON_INSTANCED)
+                if (GetZone(ZoneID)->GetType() != ZONETYPE::DUNGEON_INSTANCED)
                 {
                     CNpcEntity* PNpc = new CNpcEntity;
                     PNpc->targid     = NpcID & 0xFFF;
@@ -372,7 +372,7 @@ namespace zoneutils
                 uint16   ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 ZONETYPE zoneType = GetZone(ZoneID)->GetType();
 
-                if (zoneType != ZONETYPE_DUNGEON_INSTANCED)
+                if (zoneType != ZONETYPE::DUNGEON_INSTANCED)
                 {
                     CMobEntity* PMob = new CMobEntity;
 
@@ -502,7 +502,7 @@ namespace zoneutils
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
                     if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-                        PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
+                        PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONETYPE::BATTLEFIELD || zoneType == ZONETYPE::DYNAMIS)
                     {
                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                     }
@@ -599,7 +599,7 @@ namespace zoneutils
 
         if (Sql_Query(SqlHandle, Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            if ((ZONETYPE)Sql_GetUIntData(SqlHandle, 0) == ZONETYPE_DUNGEON_INSTANCED)
+            if ((ZONETYPE)Sql_GetUIntData(SqlHandle, 0) == ZONETYPE::DUNGEON_INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
             }

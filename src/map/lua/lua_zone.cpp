@@ -151,7 +151,7 @@ inline int32 CLuaZone::getRegionID(lua_State* L)
 inline int32 CLuaZone::getType(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    lua_pushinteger(L, m_pLuaZone->GetType());
+    lua_pushinteger(L, static_cast<uint8>(m_pLuaZone->GetType()));
     return 1;
 }
 

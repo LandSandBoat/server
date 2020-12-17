@@ -401,15 +401,15 @@ enum class CONTINENTTYPE : uint8
     OTHER_AREAS            = 4
 };
 
-enum ZONETYPE
+enum class ZONETYPE : uint8
 {
-    ZONETYPE_NONE              = 0,
-    ZONETYPE_CITY              = 1,
-    ZONETYPE_OUTDOORS          = 2,
-    ZONETYPE_DUNGEON           = 3,
-    ZONETYPE_BATTLEFIELD       = 4,
-    ZONETYPE_DYNAMIS           = 5,
-    ZONETYPE_DUNGEON_INSTANCED = 6
+    NONE              = 0,
+    CITY              = 1,
+    OUTDOORS          = 2,
+    DUNGEON           = 3,
+    BATTLEFIELD       = 4,
+    DYNAMIS           = 5,
+    DUNGEON_INSTANCED = 6
 };
 
 enum GLOBAL_MESSAGE_TYPE

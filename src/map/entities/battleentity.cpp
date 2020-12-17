@@ -105,7 +105,7 @@ bool CBattleEntity::isInDynamis()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONETYPE_DYNAMIS;
+        return loc.zone->GetType() == ZONETYPE::DYNAMIS;
     }
     return false;
 }
@@ -114,7 +114,7 @@ bool CBattleEntity::isInAssault()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONETYPE_DUNGEON_INSTANCED &&
+        return loc.zone->GetType() == ZONETYPE::DUNGEON_INSTANCED &&
                (loc.zone->GetRegionID() >= REGIONTYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGIONTYPE::ALZADAAL);
     }
     return false;

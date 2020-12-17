@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstanceLoader::CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PRequester)
 {
-    TPZ_DEBUG_BREAK_IF(PZone->GetType() != ZONETYPE_DUNGEON_INSTANCED);
+    TPZ_DEBUG_BREAK_IF(PZone->GetType() != ZONETYPE::DUNGEON_INSTANCED);
 
     requester           = PRequester;
     zone                = PZone;

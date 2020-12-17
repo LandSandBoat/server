@@ -536,15 +536,15 @@ namespace mobutils
 
         PMob->m_Behaviour |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-        if (zoneType == ZONETYPE_DUNGEON)
+        if (zoneType == ZONETYPE::DUNGEON)
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONETYPE_BATTLEFIELD)
+        else if (zoneType == ZONETYPE::BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
         }
-        else if (zoneType == ZONETYPE_DYNAMIS)
+        else if (zoneType == ZONETYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
         }

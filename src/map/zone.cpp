@@ -127,7 +127,7 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 
 /************************************************************************
  *                                                                       *
- *  Класс CZone                                                          *
+ *  Class CZone                                                          *
  *                                                                       *
  ************************************************************************/
 
@@ -137,7 +137,7 @@ CZone::CZone(ZONEID ZoneID, REGIONTYPE RegionID, CONTINENTTYPE ContinentID)
     ZoneTimer   = nullptr;
 
     m_zoneID             = ZoneID;
-    m_zoneType           = ZONETYPE_NONE;
+    m_zoneType           = ZONETYPE::NONE;
     m_regionID           = RegionID;
     m_continentID        = ContinentID;
     m_TreasurePool       = nullptr;
@@ -571,7 +571,7 @@ void CZone::UpdateWeather()
     }
 
     // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
-    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONETYPE_CITY))
+    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONETYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -914,7 +914,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->PTreasurePool->AddMember(PChar);
     }
 
-    if (m_zoneType != ZONETYPE_DUNGEON_INSTANCED)
+    if (m_zoneType != ZONETYPE::DUNGEON_INSTANCED)
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;
