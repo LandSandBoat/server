@@ -36,12 +36,12 @@ enum PETTYPE
     PETTYPE_LUOPAN             = 7,
 };
 
-enum WYVERNTYPE
+enum class WYVERN_TYPE : uint8
 {
-    WYVERNTYPE_NONE         = 0,
-    WYVERNTYPE_DEFENSIVE    = 1,
-    WYVERNTYPE_MULTIPURPOSE = 2,
-    WYVERNTYPE_OFFENSIVE    = 3
+    NONE         = 0,
+    DEFENSIVE    = 1,
+    MULTIPURPOSE = 2,
+    OFFENSIVE    = 3
 };
 
 class CPetEntity : public CMobEntity
@@ -55,7 +55,7 @@ public:
     uint32      m_PetID;
     std::string GetScriptName();
 
-    WYVERNTYPE   getWyvernType();
+    WYVERN_TYPE  getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;
     virtual void Die() override;

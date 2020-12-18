@@ -94,7 +94,7 @@ std::string CPetEntity::GetScriptName()
     }
 }
 
-WYVERNTYPE CPetEntity::getWyvernType()
+WYVERN_TYPE CPetEntity::getWyvernType()
 {
     TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
 
@@ -107,13 +107,13 @@ WYVERNTYPE CPetEntity::getWyvernType()
         case JOB_RDM:
         case JOB_SCH:
         case JOB_GEO:
-            return WYVERNTYPE_DEFENSIVE;
+            return WYVERN_TYPE::DEFENSIVE;
         case JOB_DRK:
         case JOB_PLD:
         case JOB_NIN:
         case JOB_BRD:
         case JOB_RUN:
-            return WYVERNTYPE_MULTIPURPOSE;
+            return WYVERN_TYPE::MULTIPURPOSE;
         case JOB_WAR:
         case JOB_SAM:
         case JOB_THF:
@@ -121,10 +121,10 @@ WYVERNTYPE CPetEntity::getWyvernType()
         case JOB_RNG:
         case JOB_COR:
         case JOB_DNC:
-            return WYVERNTYPE_OFFENSIVE;
+            return WYVERN_TYPE::OFFENSIVE;
 
         default:
-            return WYVERNTYPE_OFFENSIVE;
+            return WYVERN_TYPE::OFFENSIVE;
     };
 }
 
