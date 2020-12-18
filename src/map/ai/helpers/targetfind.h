@@ -39,10 +39,10 @@ class CBattleEntity;
 // allow pets to recieve buffs from protectra, curaga etc
 #define PETS_CAN_AOE_BUFF false
 
-enum AOERADIUS
+enum class AOE_RADIUS : uint8
 {
-    AOERADIUS_ATTACKER = 1,
-    AOERADIUS_TARGET   = 2
+    ATTACKER = 1,
+    TARGET   = 2
 };
 
 enum AURATARGET
@@ -98,7 +98,7 @@ public:
 
     // Main methods for finding targets
     void findSingleTarget(CBattleEntity* PTarget, uint8 flags = FINDFLAGS_NONE);
-    void findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
+    void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
     void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags = FINDFLAGS_NONE);
 
     // add all targets in contexts

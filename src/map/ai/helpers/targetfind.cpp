@@ -67,14 +67,14 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 flags)
     addEntity(PTarget, false);
 }
 
-void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags)
+void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags)
 {
     TracyZoneScoped;
     m_findFlags = flags;
     m_radius    = radius;
     m_zone      = m_PBattleEntity->getZone();
 
-    if (radiusType == AOERADIUS_ATTACKER)
+    if (radiusType == AOE_RADIUS::ATTACKER)
     {
         m_PRadiusAround = &m_PBattleEntity->loc.p;
     }
@@ -211,7 +211,7 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
     // calculate scalar
     m_scalar = (m_BPoint.x * m_CPoint.z) - (m_BPoint.z * m_CPoint.x);
 
-    findWithinArea(PTarget, AOERADIUS_ATTACKER, distance);
+    findWithinArea(PTarget, AOE_RADIUS::ATTACKER, distance);
 }
 
 void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)

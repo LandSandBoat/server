@@ -1347,7 +1347,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         float distance = spell::GetSpellRadius(PSpell, this);
 
-        PAI->TargetFind->findWithinArea(PActionTarget, AOERADIUS_TARGET, distance, flags);
+        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags);
     }
     else if (aoeType == SPELLAOE_CONAL)
     {

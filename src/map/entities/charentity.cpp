@@ -832,7 +832,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         //#TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PBattleTarget, AOERADIUS_TARGET, 10);
+            PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10);
         }
         else
         {
@@ -1136,7 +1136,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             float distance = PAbility->getRange();
 
-            PAI->TargetFind->findWithinArea(this, AOERADIUS_ATTACKER, distance);
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
 
             uint16 msg = 0;
             for (auto&& PTarget : PAI->TargetFind->m_targets)

@@ -474,7 +474,7 @@ void CMobController::CastSpell(SpellID spellid)
                 {
                     // chance to target party
                     PMob->PAI->TargetFind->reset();
-                    PMob->PAI->TargetFind->findWithinArea(PMob, AOERADIUS_ATTACKER, PSpell->getRange());
+                    PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange());
 
                     if (!PMob->PAI->TargetFind->m_targets.empty())
                     {

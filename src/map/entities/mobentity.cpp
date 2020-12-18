@@ -624,7 +624,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     {
         if (PSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PTarget, (AOERADIUS)PSkill->getAoe(), PSkill->getRadius(), findFlags);
+            PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags);
         }
         else if (PSkill->isConal())
         {
