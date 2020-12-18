@@ -462,12 +462,12 @@ namespace itemutils
                 uint16 ItemID      = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 Mod    modID       = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
                 int16  value       = (int16)Sql_GetIntData(SqlHandle, 2);
-                uint16 latentId    = (uint16)Sql_GetIntData(SqlHandle, 3);
+                LATENT latentId    = static_cast<LATENT>(Sql_GetIntData(SqlHandle, 3));
                 uint16 latentParam = (uint16)Sql_GetIntData(SqlHandle, 4);
 
                 if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
                 {
-                    ((CItemEquipment*)g_pItemList[ItemID])->addLatent((LATENT)latentId, latentParam, modID, value);
+                    ((CItemEquipment*)g_pItemList[ItemID])->addLatent(latentId, latentParam, modID, value);
                 }
             }
         }

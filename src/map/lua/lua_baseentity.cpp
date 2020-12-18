@@ -11875,7 +11875,7 @@ inline int32 CLuaBaseEntity::addLatent(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
 
-    LATENT conditionID    = (LATENT)lua_tointeger(L, 1);
+    LATENT conditionID    = static_cast<LATENT>(lua_tointeger(L, 1));
     uint16 conditionValue = (uint16)lua_tointeger(L, 2);
     Mod    modID          = static_cast<Mod>(lua_tointeger(L, 3));
     int16  modValue       = (int16)lua_tointeger(L, 4);
@@ -11902,7 +11902,7 @@ inline int32 CLuaBaseEntity::delLatent(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
 
-    LATENT conditionID    = (LATENT)lua_tointeger(L, 1);
+    LATENT conditionID    = static_cast<LATENT>(lua_tointeger(L, 1));
     uint16 conditionValue = (uint16)lua_tointeger(L, 2);
     Mod    modID          = static_cast<Mod>(lua_tointeger(L, 3));
     int16  modValue       = (int16)lua_tointeger(L, 4);
