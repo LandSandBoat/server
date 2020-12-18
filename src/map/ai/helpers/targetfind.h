@@ -80,13 +80,13 @@ If monster -> monster
 I can hit all monsters in my party.
 
 */
-enum FINDTYPE
+enum class FIND_TYPE : uint8
 {
-    FIND_NONE            = 0,
-    FIND_PLAYER_PLAYER   = 1,
-    FIND_MONSTER_MONSTER = 2,
-    FIND_PLAYER_MONSTER  = 3,
-    FIND_MONSTER_PLAYER  = 4
+    NONE            = 0,
+    PLAYER_PLAYER   = 1,
+    MONSTER_MONSTER = 2,
+    PLAYER_MONSTER  = 3,
+    MONSTER_PLAYER  = 4
 };
 
 class CTargetFind
@@ -135,9 +135,9 @@ protected:
     CBattleEntity* m_PMasterTarget; // mater of target
     CBattleEntity* m_PTarget;       // first target
 
-    uint16   m_zone;
-    FINDTYPE m_findType;
-    uint8    m_findFlags;
+    uint16    m_zone;
+    FIND_TYPE m_findType;
+    uint8     m_findFlags;
 
     // conal vars
     bool        m_conal;
