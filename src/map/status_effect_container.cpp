@@ -1554,7 +1554,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 {
     TracyZoneScoped;
     CBattleEntity* PEntity    = static_cast<CBattleEntity*>(m_POwner);
-    AURATARGET     auraTarget = static_cast<AURATARGET>(PStatusEffect->GetTier());
+    AURA_TARGET    auraTarget = static_cast<AURA_TARGET>(PStatusEffect->GetTier());
 
     if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
     {
@@ -1565,7 +1565,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
     if (PEntity->objtype == TYPE_PC)
     {
-        if (auraTarget == AURATARGET_ALLIES)
+        if (auraTarget == AURA_TARGET::ALLIES)
         {
             PEntity->ForParty([&](CBattleEntity* PMember) {
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
@@ -1581,7 +1581,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 }
             });
         }
-        else if (auraTarget == AURATARGET_ENEMIES)
+        else if (auraTarget == AURA_TARGET::ENEMIES)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
             {

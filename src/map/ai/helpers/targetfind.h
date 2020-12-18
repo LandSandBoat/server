@@ -45,10 +45,10 @@ enum class AOE_RADIUS : uint8
     TARGET   = 2
 };
 
-enum AURATARGET
+enum class AURA_TARGET : uint8
 {
-    AURATARGET_ALLIES  = 0,
-    AURATARGET_ENEMIES = 1,
+    ALLIES  = 0,
+    ENEMIES = 1
 };
 
 enum FINDFLAGS
