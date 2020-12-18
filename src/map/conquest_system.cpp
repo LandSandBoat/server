@@ -49,7 +49,7 @@ namespace conquest
         TracyZoneScoped;
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Update);
                 PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsZone(); });
@@ -57,9 +57,9 @@ namespace conquest
         });
     }
 
-    void UpdateInfluencePoints(int points, unsigned int nation, REGIONTYPE region)
+    void UpdateInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
     {
-        if (region == REGIONTYPE::UNKNOWN)
+        if (region == REGION_TYPE::UNKNOWN)
         {
             return;
         }
@@ -126,46 +126,46 @@ namespace conquest
 
     void LoseInfluencePoints(CCharEntity* PChar)
     {
-        REGIONTYPE region = PChar->loc.zone->GetRegionID();
+        REGION_TYPE region = PChar->loc.zone->GetRegionID();
         int        points = 0;
 
         switch (region)
         {
-            case REGIONTYPE::RONFAURE:
-            case REGIONTYPE::GUSTABERG:
-            case REGIONTYPE::SARUTABARUTA:
+            case REGION_TYPE::RONFAURE:
+            case REGION_TYPE::GUSTABERG:
+            case REGION_TYPE::SARUTABARUTA:
             {
                 points = 10;
                 break;
             }
-            case REGIONTYPE::ZULKHEIM:
-            case REGIONTYPE::KOLSHUSHU:
-            case REGIONTYPE::NORVALLEN:
-            case REGIONTYPE::DERFLAND:
-            case REGIONTYPE::ARAGONEU:
+            case REGION_TYPE::ZULKHEIM:
+            case REGION_TYPE::KOLSHUSHU:
+            case REGION_TYPE::NORVALLEN:
+            case REGION_TYPE::DERFLAND:
+            case REGION_TYPE::ARAGONEU:
             {
                 points = 50;
                 break;
             }
-            case REGIONTYPE::QUFIMISLAND:
-            case REGIONTYPE::LITELOR:
-            case REGIONTYPE::KUZOTZ:
-            case REGIONTYPE::ELSHIMOLOWLANDS:
+            case REGION_TYPE::QUFIMISLAND:
+            case REGION_TYPE::LITELOR:
+            case REGION_TYPE::KUZOTZ:
+            case REGION_TYPE::ELSHIMOLOWLANDS:
             {
                 points = 75;
                 break;
             }
-            case REGIONTYPE::VOLLBOW:
-            case REGIONTYPE::VALDEAUNIA:
-            case REGIONTYPE::FAUREGANDI:
-            case REGIONTYPE::ELSHIMOUPLANDS:
+            case REGION_TYPE::VOLLBOW:
+            case REGION_TYPE::VALDEAUNIA:
+            case REGION_TYPE::FAUREGANDI:
+            case REGION_TYPE::ELSHIMOUPLANDS:
             {
                 points = 300;
                 break;
             }
-            case REGIONTYPE::TULIA:
-            case REGIONTYPE::MOVALPOLOS:
-            case REGIONTYPE::TAVNAZIA:
+            case REGION_TYPE::TULIA:
+            case REGION_TYPE::MOVALPOLOS:
+            case REGION_TYPE::TAVNAZIA:
             {
                 points = 600;
                 break;
@@ -265,7 +265,7 @@ namespace conquest
         }
     }
 
-    uint8 GetInfluenceGraphics(REGIONTYPE regionid)
+    uint8 GetInfluenceGraphics(REGION_TYPE regionid)
     {
         int32       sandoria = 0;
         int32       bastok   = 0;
@@ -360,7 +360,7 @@ namespace conquest
 
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
             }
@@ -384,7 +384,7 @@ namespace conquest
 
         zoneutils::ForEachZone([](CZone* PZone) {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGIONTYPE::TAVNAZIA)
+            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
                 PZone->ForEachChar([](CCharEntity* PChar) {
@@ -637,7 +637,7 @@ namespace conquest
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetRegionOwner(REGIONTYPE RegionID)
+    uint8 GetRegionOwner(REGION_TYPE RegionID)
     {
         const char* Query = "SELECT region_control FROM conquest_system WHERE region_id = %d";
 
@@ -663,9 +663,9 @@ namespace conquest
         // ВНИМЕНИЕ: не нужно отправлять персонажу CConquestPacket,
         // т.к. клиент сам запрашивает этот пакет через фиксированный промежуток времени
 
-        REGIONTYPE region = PChar->loc.zone->GetRegionID();
+        REGION_TYPE region = PChar->loc.zone->GetRegionID();
 
-        if (region != REGIONTYPE::UNKNOWN)
+        if (region != REGION_TYPE::UNKNOWN)
         {
             // 10% if region control is player's nation
             // 15% otherwise

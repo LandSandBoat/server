@@ -95,7 +95,7 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
 
                 ref<uint8>(0x27) = (PChar->isCharmed ? 0x08 : 0x00);
 
-                ref<uint8>(0x29) = PChar->allegiance;
+                ref<uint8>(0x29) = static_cast<uint8>(PChar->allegiance);
 
                 // Mentor flag..
                 if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)

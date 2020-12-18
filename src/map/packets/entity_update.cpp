@@ -90,9 +90,9 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         ref<uint8>(0x1D)  = PEntity->speedsub;
     }
 
-    if (PEntity->allegiance == ALLEGIANCE_PLAYER && PEntity->status == STATUSTYPE::MOB)
+    if (PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER && PEntity->status == STATUS_TYPE::MOB)
     {
-        ref<uint8>(0x20) = static_cast<uint8>(STATUSTYPE::NORMAL);
+        ref<uint8>(0x20) = static_cast<uint8>(STATUS_TYPE::NORMAL);
     }
     else
     {
@@ -110,7 +110,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x2A) |= PEntity->animationsub;
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
                 ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
-                ref<uint8>(0x29)  = PEntity->allegiance;
+                ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
             }
         }
@@ -135,7 +135,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                     }
                     ref<uint8>(0x28) |= (PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00);
                     ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
-                    ref<uint8>(0x29) = PEntity->allegiance;
+                    ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                     ref<uint8>(0x2B) = PEntity->namevis;
                 }
                 if (updatemask & UPDATE_STATUS)

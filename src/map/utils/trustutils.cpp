@@ -299,7 +299,7 @@ namespace trustutils
         PTrust->speed            = trustData->speed;
         PTrust->m_HasSpellScript = trustData->hasSpellScript;
         PTrust->m_TrustID        = trustData->trustID;
-        PTrust->status           = STATUSTYPE::NORMAL;
+        PTrust->status           = STATUS_TYPE::NORMAL;
         PTrust->m_ModelSize      = trustData->size;
         PTrust->m_EcoSystem      = trustData->EcoSystem;
         PTrust->m_MovementType   = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);

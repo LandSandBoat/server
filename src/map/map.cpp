@@ -549,7 +549,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             charutils::LoadChar(PChar);
 
-            PChar->status = STATUSTYPE::DISAPPEAR;
+            PChar->status = STATUS_TYPE::DISAPPEAR;
 
             map_session_data->PChar = PChar;
         }
@@ -859,7 +859,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
             {
                 PChar->nameflags.flags |= FLAG_DC;
                 PChar->updatemask |= UPDATE_HP;
-                if (PChar->status == STATUSTYPE::NORMAL)
+                if (PChar->status == STATUS_TYPE::NORMAL)
                 {
                     PChar->loc.zone->SpawnPCs(PChar);
                 }
@@ -899,7 +899,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
                         ShowDebug(CL_CYAN "map_cleanup: %s timed out, closing session\n" CL_RESET, PChar->GetName());
 
-                        PChar->status = STATUSTYPE::SHUTDOWN;
+                        PChar->status = STATUS_TYPE::SHUTDOWN;
                         PacketParser[0x00D](map_session_data, PChar, CBasicPacket());
                     }
                     else
@@ -935,7 +935,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
             PChar->nameflags.flags &= ~FLAG_DC;
             PChar->updatemask |= UPDATE_HP;
 
-            if (PChar->status == STATUSTYPE::NORMAL)
+            if (PChar->status == STATUS_TYPE::NORMAL)
             {
                 PChar->loc.zone->SpawnPCs(PChar);
             }

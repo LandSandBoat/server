@@ -108,7 +108,7 @@ namespace anticheat
         PChar->loc.p.z         = (float)g_jailCells[cellid - 1][2];
         PChar->loc.p.rotation  = (uint8)g_jailCells[cellid - 1][3];
         PChar->loc.destination = ZONEID::ZONE_MORDION_GAOL;
-        PChar->status          = STATUSTYPE::DISAPPEAR;
+        PChar->status          = STATUS_TYPE::DISAPPEAR;
         PChar->loc.boundary    = 0;
         PChar->m_moghouseID    = 0;
         PChar->clearPacketList();

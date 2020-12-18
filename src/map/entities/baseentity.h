@@ -40,7 +40,7 @@ enum ENTITYTYPE
     TYPE_FELLOW = 0x40
 };
 
-enum class STATUSTYPE : uint8
+enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
     MOB           = 1,   // STATUS_UPDATE        = 1,
@@ -129,15 +129,15 @@ enum MOUNTTYPE
     MOUNT_DOLL           = 27,
 };
 
-enum ALLEGIANCETYPE
+enum class ALLEGIANCE_TYPE : uint8
 {
-    ALLEGIANCE_MOB       = 0,
-    ALLEGIANCE_PLAYER    = 1,
-    ALLEGIANCE_SAN_DORIA = 2,
-    ALLEGIANCE_BASTOK    = 3,
-    ALLEGIANCE_WINDURST  = 4,
-    ALLEGIANCE_WYVERNS   = 5,
-    ALLEGIANCE_GRIFFONS  = 6,
+    MOB       = 0,
+    PLAYER    = 1,
+    SAN_DORIA = 2,
+    BASTOK    = 3,
+    WINDURST  = 4,
+    WYVERNS   = 5,
+    GRIFFONS  = 6,
 };
 
 enum UPDATETYPE
@@ -233,22 +233,22 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&){};
 
-    uint32     id;           // global identifier unique on the server
-    uint16     targid;       // local identifier unique to the zone
-    ENTITYTYPE objtype;      // тип сущности
-    STATUSTYPE status;       // статус сущности (разные сущности - разные статусы)
-    uint16     m_TargID;     // targid объекта, на который смотрит сущность
-    string_t   name;         // имя сущности
-    look_t     look;         // внешний вид всех сущностей
-    look_t     mainlook;     // only used if mob use changeSkin() or player /lockstyle
-    location_t loc;          // местоположение сущности
-    uint8      animation;    // анимация
-    uint8      animationsub; // дополнительный параметры анимации
-    uint8      speed;        // скорость передвижения
-    uint8      speedsub;     // подолнительный параметр скорости передвижения
-    uint8      namevis;
-    uint8      allegiance; // what types of targets the entity can fight
-    uint8      updatemask; // what to update next server tick to players nearby
+    uint32          id;           // global identifier unique on the server
+    uint16          targid;       // local identifier unique to the zone
+    ENTITYTYPE      objtype;      // тип сущности
+    STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
+    uint16          m_TargID;     // targid объекта, на который смотрит сущность
+    string_t        name;         // имя сущности
+    look_t          look;         // внешний вид всех сущностей
+    look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
+    location_t      loc;          // местоположение сущности
+    uint8           animation;    // анимация
+    uint8           animationsub; // дополнительный параметры анимации
+    uint8           speed;        // скорость передвижения
+    uint8           speedsub;     // подолнительный параметр скорости передвижения
+    uint8           namevis;
+    ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
+    uint8           updatemask; // what to update next server tick to players nearby
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

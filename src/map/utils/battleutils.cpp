@@ -672,7 +672,7 @@ namespace battleutils
                 case SPIKE_BLAZE:
                 case SPIKE_ICE:
                 case SPIKE_SHOCK:
-                    PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+                    PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
                     break;
 
                 case SPIKE_DREAD:
@@ -704,14 +704,14 @@ namespace battleutils
                             }
                             PDefender->addHP(Action->spikesParam);
                         }
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGETYPE::DARK);
+                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::DARK);
                     }
                     break;
 
                 case SPIKE_REPRISAL:
                     if (Action->reaction == REACTION::BLOCK)
                     {
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, DAMAGETYPE::LIGHT);
+                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                         auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
                         if (PEffect)
                         {
@@ -810,7 +810,7 @@ namespace battleutils
             {
                 auto ratio          = std::clamp<uint8>(damage / 4, 1, 255);
                 Action->spikesParam = HandleStoneskin(PAttacker, damage - tpzrand::GetRandomNumber<uint16>(ratio) + tpzrand::GetRandomNumber<uint16>(ratio));
-                PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACKTYPE::MAGICAL, GetSpikesDamageType(spikesType));
+                PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
             }
 
             // Temp till moved to script.
@@ -953,7 +953,7 @@ namespace battleutils
                     Action->addEffectMessage = 384;
                 }
 
-                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACKTYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
             }
             else if (enspell <= ENSPELL_II_DARK) // Elemental enspells
             {
@@ -988,7 +988,7 @@ namespace battleutils
                         Action->addEffectMessage = 163;
                     }
 
-                    PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACKTYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
+                    PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
                 }
             }
         }
@@ -1849,13 +1849,13 @@ namespace battleutils
         auto* weapon          = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         giveTPtoAttacker      = giveTPtoAttacker && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI);
         giveTPtoVictim        = giveTPtoVictim && physicalAttackType != PHYSICAL_ATTACK_TYPE::DAKEN;
-        bool       isRanged   = (slot == SLOT_AMMO || slot == SLOT_RANGED);
-        int32      baseDamage = damage;
-        ATTACKTYPE attackType = ATTACKTYPE::PHYSICAL;
-        DAMAGETYPE damageType = DAMAGETYPE::NONE;
+        bool        isRanged   = (slot == SLOT_AMMO || slot == SLOT_RANGED);
+        int32       baseDamage = damage;
+        ATTACK_TYPE attackType = ATTACK_TYPE::PHYSICAL;
+        DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FORMLESS_STRIKES) && !isCounter)
         {
-            attackType        = ATTACKTYPE::SPECIAL;
+            attackType        = ATTACK_TYPE::SPECIAL;
             uint8 formlessMod = 70;
 
             if (PAttacker->objtype == TYPE_PC)
@@ -1871,11 +1871,11 @@ namespace battleutils
         }
         else
         {
-            damageType = weapon ? weapon->getDmgType() : DAMAGETYPE::NONE;
+            damageType = weapon ? weapon->getDmgType() : DAMAGE_TYPE::NONE;
 
             if (isRanged)
             {
-                attackType = ATTACKTYPE::RANGED;
+                attackType = ATTACK_TYPE::RANGED;
                 damage     = RangedDmgTaken(PDefender, damage, damageType, isCovered);
             }
             else
@@ -1895,16 +1895,16 @@ namespace battleutils
             {
                 switch (damageType)
                 {
-                    case DAMAGETYPE::PIERCING:
+                    case DAMAGE_TYPE::PIERCING:
                         damage = (damage * (PDefender->getMod(Mod::PIERCERES))) / 1000;
                         break;
-                    case DAMAGETYPE::SLASHING:
+                    case DAMAGE_TYPE::SLASHING:
                         damage = (damage * (PDefender->getMod(Mod::SLASHRES))) / 1000;
                         break;
-                    case DAMAGETYPE::IMPACT:
+                    case DAMAGE_TYPE::IMPACT:
                         damage = (damage * (PDefender->getMod(Mod::IMPACTRES))) / 1000;
                         break;
-                    case DAMAGETYPE::HTH:
+                    case DAMAGE_TYPE::HTH:
                         damage = (damage * (PDefender->getMod(Mod::HTHRES))) / 1000;
                         break;
                     default:
@@ -2063,7 +2063,7 @@ namespace battleutils
                 int16 delay      = PAttacker->GetWeaponDelay(true);
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
-                if (sub_weapon && sub_weapon->getDmgType() > DAMAGETYPE::NONE && sub_weapon->getDmgType() < DAMAGETYPE::HTH &&
+                if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
                     weapon->getSkillType() != SKILL_HAND_TO_HAND)
                 {
                     delay = delay / 2;
@@ -2132,7 +2132,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACKTYPE attackType, DAMAGETYPE damageType, uint8 slot,
+    int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
     {
         auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
@@ -2213,7 +2213,7 @@ namespace battleutils
 
                 auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
 
-                if (sub_weapon && sub_weapon->getDmgType() > DAMAGETYPE::NONE && sub_weapon->getDmgType() < DAMAGETYPE::HTH &&
+                if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
                     weapon->getSkillType() != SKILL_HAND_TO_HAND)
                 {
                     delay /= 2;
@@ -2285,7 +2285,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACKTYPE attackType, DAMAGETYPE damageType)
+    int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
@@ -3724,8 +3724,9 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
-        uint16 elementOffset = static_cast<uint16>(DAMAGETYPE::ELEMENTAL) + static_cast<uint16>(appliedEle);
-        PDefender->takeDamage(damage, PAttacker, ATTACKTYPE::SPECIAL, appliedEle == ELEMENT_NONE ? DAMAGETYPE::NONE : static_cast<DAMAGETYPE>(elementOffset));
+        uint16 elementOffset = static_cast<uint16>(DAMAGE_TYPE::ELEMENTAL) + static_cast<uint16>(appliedEle);
+        PDefender->takeDamage(damage, PAttacker, ATTACK_TYPE::SPECIAL,
+                              appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset));
 
         battleutils::ClaimMob(PDefender, PAttacker);
         PDefender->updatemask |= UPDATE_STATUS;
@@ -4321,7 +4322,7 @@ namespace battleutils
         uint8 numattacksLeftHand = 0;
 
         // sub weapon is equipped
-        if (sub && sub->getDmgType() > DAMAGETYPE::NONE && sub->getDmgType() < DAMAGETYPE::HTH)
+        if (sub && sub->getDmgType() > DAMAGE_TYPE::NONE && sub->getDmgType() < DAMAGE_TYPE::HTH)
         {
             numattacksLeftHand = battleutils::CheckMultiHits(PAttacker, sub);
         }
@@ -4932,7 +4933,7 @@ namespace battleutils
 
         if (damage > 0 && PDefender->objtype == TYPE_PET && PDefender->getMod(Mod::AUTO_STEAM_JACKET) > 1)
         {
-            damage = HandleSteamJacket(PDefender, damage, DAMAGETYPE::ELEMENTAL);
+            damage = HandleSteamJacket(PDefender, damage, DAMAGE_TYPE::ELEMENTAL);
         }
 
         if (tpzrand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) ||
@@ -4960,7 +4961,7 @@ namespace battleutils
         return damage;
     }
 
-    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGETYPE damageType, bool IsCovered)
+    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered)
     {
         float resist = 1.f + PDefender->getMod(Mod::UDMGPHYS) / 100.f;
         resist       = std::max(resist, 0.f);
@@ -5001,7 +5002,7 @@ namespace battleutils
         return damage;
     }
 
-    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGETYPE damageType, bool IsCovered)
+    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered)
     {
         float resist = 1.0f + PDefender->getMod(Mod::UDMGRANGE) / 100.f;
         resist       = std::max(resist, 0.f);
@@ -5041,9 +5042,9 @@ namespace battleutils
         return damage;
     }
 
-    int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGETYPE damageType)
+    int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType)
     {
-        auto  steamJacketType = static_cast<DAMAGETYPE>(PDefender->GetLocalVar("steam_jacket_type"));
+        auto  steamJacketType = static_cast<DAMAGE_TYPE>(PDefender->GetLocalVar("steam_jacket_type"));
         int16 steamJacketHits = (int16)PDefender->GetLocalVar("steam_jacket_hits");
 
         if (steamJacketType != damageType)
@@ -5539,7 +5540,7 @@ namespace battleutils
         std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember) {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUSTYPE::CUTSCENE_ONLY)
+            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
             {
                 // don't draw in dead players for now!
                 // see tractor
@@ -6335,62 +6336,62 @@ namespace battleutils
         }
     }
 
-    DAMAGETYPE GetSpikesDamageType(SUBEFFECT spikesType)
+    DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType)
     {
         switch (spikesType)
         {
             // Action packet animation string order
             case SUBEFFECT_BLAZE_SPIKES:
-                return DAMAGETYPE::FIRE;
+                return DAMAGE_TYPE::FIRE;
             case SUBEFFECT_ICE_SPIKES:
-                return DAMAGETYPE::ICE;
+                return DAMAGE_TYPE::ICE;
             case SUBEFFECT_DREAD_SPIKES:
-                return DAMAGETYPE::DARK;
+                return DAMAGE_TYPE::DARK;
             case SUBEFFECT_CURSE_SPIKES:
-                return DAMAGETYPE::NONE;
+                return DAMAGE_TYPE::NONE;
             case SUBEFFECT_SHOCK_SPIKES:
-                return DAMAGETYPE::LIGHTNING;
+                return DAMAGE_TYPE::LIGHTNING;
             case SUBEFFECT_REPRISAL:
-                return DAMAGETYPE::LIGHT;
+                return DAMAGE_TYPE::LIGHT;
             case SUBEFFECT_GALE_SPIKES:
-                return DAMAGETYPE::WIND;
+                return DAMAGE_TYPE::WIND;
             case SUBEFFECT_CLOD_SPIKES:
-                return DAMAGETYPE::EARTH;
+                return DAMAGE_TYPE::EARTH;
             default:
-                return DAMAGETYPE::NONE;
+                return DAMAGE_TYPE::NONE;
         }
     }
 
-    DAMAGETYPE GetEnspellDamageType(ENSPELL enspellType)
+    DAMAGE_TYPE GetEnspellDamageType(ENSPELL enspellType)
     {
         switch (enspellType)
         {
             case ENSPELL_I_FIRE:
             case ENSPELL_II_FIRE:
-                return DAMAGETYPE::FIRE;
+                return DAMAGE_TYPE::FIRE;
             case ENSPELL_I_ICE:
             case ENSPELL_II_ICE:
-                return DAMAGETYPE::ICE;
+                return DAMAGE_TYPE::ICE;
             case ENSPELL_I_WIND:
             case ENSPELL_II_WIND:
-                return DAMAGETYPE::WIND;
+                return DAMAGE_TYPE::WIND;
             case ENSPELL_I_EARTH:
             case ENSPELL_II_EARTH:
-                return DAMAGETYPE::EARTH;
+                return DAMAGE_TYPE::EARTH;
             case ENSPELL_I_THUNDER:
             case ENSPELL_II_THUNDER:
-                return DAMAGETYPE::LIGHTNING;
+                return DAMAGE_TYPE::LIGHTNING;
             case ENSPELL_I_WATER:
             case ENSPELL_II_WATER:
-                return DAMAGETYPE::WATER;
+                return DAMAGE_TYPE::WATER;
             case ENSPELL_I_LIGHT:
             case ENSPELL_II_LIGHT:
-                return DAMAGETYPE::LIGHT;
+                return DAMAGE_TYPE::LIGHT;
             case ENSPELL_I_DARK:
             case ENSPELL_II_DARK:
-                return DAMAGETYPE::DARK;
+                return DAMAGE_TYPE::DARK;
             default:
-                return DAMAGETYPE::NONE;
+                return DAMAGE_TYPE::NONE;
         }
     }
 

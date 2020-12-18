@@ -93,7 +93,7 @@ CBattleEntity::~CBattleEntity() = default;
 
 bool CBattleEntity::isDead()
 {
-    return (health.hp <= 0 || status == STATUSTYPE::DISAPPEAR || PAI->IsCurrentState<CDeathState>() || PAI->IsCurrentState<CDespawnState>());
+    return (health.hp <= 0 || status == STATUS_TYPE::DISAPPEAR || PAI->IsCurrentState<CDeathState>() || PAI->IsCurrentState<CDespawnState>());
 }
 
 bool CBattleEntity::isAlive()
@@ -105,7 +105,7 @@ bool CBattleEntity::isInDynamis()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONETYPE_DYNAMIS;
+        return loc.zone->GetType() == ZONE_TYPE::DYNAMIS;
     }
     return false;
 }
@@ -114,8 +114,8 @@ bool CBattleEntity::isInAssault()
 {
     if (loc.zone != nullptr)
     {
-        return loc.zone->GetType() == ZONETYPE_DUNGEON_INSTANCED &&
-               (loc.zone->GetRegionID() >= REGIONTYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGIONTYPE::ALZADAAL);
+        return loc.zone->GetType() == ZONE_TYPE::DUNGEON_INSTANCED &&
+               (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
     }
     return false;
 }
@@ -273,7 +273,7 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
             WeaponDelay -= getMod(Mod::MARTIAL_ARTS) * 1000 / 60;
         }
         else if (auto* subweapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]);
-                 subweapon && subweapon->getDmgType() > DAMAGETYPE::NONE && subweapon->getDmgType() < DAMAGETYPE::HTH)
+                 subweapon && subweapon->getDmgType() > DAMAGE_TYPE::NONE && subweapon->getDmgType() < DAMAGE_TYPE::HTH)
         {
             MinimumDelay += subweapon->getDelay();
             WeaponDelay += subweapon->getDelay();
@@ -548,8 +548,8 @@ int32 CBattleEntity::addMP(int32 mp)
     return abs(mp);
 }
 
-int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACKTYPE attackType /* = ATTACK_NONE*/,
-                                DAMAGETYPE damageType /* = DAMAGE_NONE*/)
+int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
+                                DAMAGE_TYPE damageType /* = DAMAGE_NONE*/)
 {
     PLastAttacker = attacker;
     PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
@@ -1242,20 +1242,20 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         if (!isDead())
         {
             // Teams PVP
-            if (allegiance >= ALLEGIANCE_WYVERNS && PInitiator->allegiance >= ALLEGIANCE_WYVERNS)
+            if (allegiance >= ALLEGIANCE_TYPE::WYVERNS && PInitiator->allegiance >= ALLEGIANCE_TYPE::WYVERNS)
             {
                 return allegiance != PInitiator->allegiance;
             }
 
             // Nation PVP
-            if ((allegiance >= ALLEGIANCE_SAN_DORIA && allegiance <= ALLEGIANCE_WINDURST) &&
-                (PInitiator->allegiance >= ALLEGIANCE_SAN_DORIA && PInitiator->allegiance <= ALLEGIANCE_WINDURST))
+            if ((allegiance >= ALLEGIANCE_TYPE::SAN_DORIA && allegiance <= ALLEGIANCE_TYPE::WINDURST) &&
+                (PInitiator->allegiance >= ALLEGIANCE_TYPE::SAN_DORIA && PInitiator->allegiance <= ALLEGIANCE_TYPE::WINDURST))
             {
                 return allegiance != PInitiator->allegiance;
             }
 
             // PVE
-            if (allegiance <= ALLEGIANCE_PLAYER && PInitiator->allegiance <= ALLEGIANCE_PLAYER)
+            if (allegiance <= ALLEGIANCE_TYPE::PLAYER && PInitiator->allegiance <= ALLEGIANCE_TYPE::PLAYER)
             {
                 return allegiance != PInitiator->allegiance;
             }

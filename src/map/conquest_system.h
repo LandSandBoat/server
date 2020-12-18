@@ -56,7 +56,7 @@ namespace conquest
     void LoseInfluencePoints(CCharEntity* PChar);                // Lose influence for player's nation and gain for beastmen influence
 
     uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf); // Get number for graphics in conquest menu (arrows)
-    uint8 GetInfluenceGraphics(REGIONTYPE RegionID);                                        // Get number for graphics in conquest menu (arrows)
+    uint8 GetInfluenceGraphics(REGION_TYPE RegionID);                                       // Get number for graphics in conquest menu (arrows)
     uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf);
     uint8 GetInfluenceRanking(int32 san_inf, int32 bas_inf, int32 win_inf);
 
@@ -69,9 +69,9 @@ namespace conquest
     uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst); // Determine if losing nations are allied
     uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst,  // Determine if losing nations are allied
                       uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
-    bool  IsAlliance();                        // Determine if losing nations are allied
-    uint8 GetNexTally();                       // Next tally (weekly or every hour ?)
-    uint8 GetRegionOwner(REGIONTYPE RegionID); // Get owner of the region
+    bool  IsAlliance();                         // Determine if losing nations are allied
+    uint8 GetNexTally();                        // Next tally (weekly or every hour ?)
+    uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points
 };                                                            // namespace conquest

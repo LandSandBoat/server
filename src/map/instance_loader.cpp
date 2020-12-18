@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstanceLoader::CInstanceLoader(uint8 instanceid, CZone* PZone, CCharEntity* PRequester)
 {
-    TPZ_DEBUG_BREAK_IF(PZone->GetType() != ZONETYPE_DUNGEON_INSTANCED);
+    TPZ_DEBUG_BREAK_IF(PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED);
 
     requester           = PRequester;
     zone                = PZone;
@@ -208,7 +208,7 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
 
             PMob->m_Pool = Sql_GetUIntData(SqlInstanceHandle, 58);
 
-            PMob->allegiance = Sql_GetUIntData(SqlInstanceHandle, 59);
+            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlInstanceHandle, 59));
             PMob->namevis    = Sql_GetUIntData(SqlInstanceHandle, 60);
 
             uint32 aggro  = Sql_GetUIntData(SqlInstanceHandle, 61);
@@ -276,7 +276,7 @@ CInstance* CInstanceLoader::LoadInstance(CInstance* instance)
                 PNpc->animationsub = (uint8)Sql_GetIntData(SqlInstanceHandle, 10);
 
                 PNpc->namevis = (uint8)Sql_GetIntData(SqlInstanceHandle, 11);
-                PNpc->status  = (STATUSTYPE)Sql_GetIntData(SqlInstanceHandle, 12);
+                PNpc->status  = static_cast<STATUS_TYPE>(Sql_GetIntData(SqlInstanceHandle, 12));
                 PNpc->m_flags = (uint32)Sql_GetUIntData(SqlInstanceHandle, 13);
 
                 PNpc->name_prefix = (uint8)Sql_GetIntData(SqlInstanceHandle, 15);

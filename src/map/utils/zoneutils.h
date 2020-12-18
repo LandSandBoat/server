@@ -44,8 +44,8 @@ namespace zoneutils
     void TOTDChange(TIMETYPE TOTD); // реакция мира на смену времени суток
     void SavePlayTime();
 
-    REGIONTYPE    GetCurrentRegion(uint16 ZoneID);
-    CONTINENTTYPE GetCurrentContinent(uint16 ZoneID);
+    REGION_TYPE    GetCurrentRegion(uint16 ZoneID);
+    CONTINENT_TYPE GetCurrentContinent(uint16 ZoneID);
 
     int GetWeatherElement(WEATHER weather);
 

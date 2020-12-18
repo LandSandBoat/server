@@ -88,7 +88,7 @@ CCharEntity::CCharEntity()
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
-    allegiance = ALLEGIANCE_PLAYER;
+    allegiance = ALLEGIANCE_TYPE::PLAYER;
 
     TradeContainer = new CTradeContainer();
     Container      = new CTradeContainer();
@@ -1751,7 +1751,7 @@ void CCharEntity::Die(duration _duration)
     PAI->Internal_Die(_duration);
 
     // If player allegiance is not reset on death they will auto-homepoint
-    allegiance = ALLEGIANCE_PLAYER;
+    allegiance = ALLEGIANCE_TYPE::PLAYER;
 
     // reraise modifiers
     if (this->getMod(Mod::RERAISE_I) > 0)

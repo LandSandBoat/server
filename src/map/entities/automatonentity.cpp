@@ -152,7 +152,7 @@ void CAutomatonEntity::PostTick()
 {
     auto pre_mask = updatemask;
     CPetEntity::PostTick();
-    if (pre_mask && status != STATUSTYPE::DISAPPEAR)
+    if (pre_mask && status != STATUS_TYPE::DISAPPEAR)
     {
         if (PMaster && PMaster->objtype == TYPE_PC)
         {
@@ -210,7 +210,7 @@ void CAutomatonEntity::OnMobSkillFinished(CMobSkillState& state, action_t& actio
 
 void CAutomatonEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUSTYPE::MOB : STATUSTYPE::NORMAL;
+    status = allegiance == ALLEGIANCE_TYPE::MOB ? STATUS_TYPE::MOB : STATUS_TYPE::NORMAL;
     updatemask |= UPDATE_HP;
     PAI->Reset();
     PAI->EventHandler.triggerListener("SPAWN", this);

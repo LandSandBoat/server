@@ -93,7 +93,7 @@ namespace message
             case MSG_CHAT_TELL:
             {
                 CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra->data() + 4);
-                if (PChar && PChar->status != STATUSTYPE::DISAPPEAR && !jailutils::InPrison(PChar))
+                if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
                 {
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
                     memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
@@ -424,7 +424,7 @@ namespace message
                     PChar->loc.destination = zoneId;
                     PChar->m_moghouseID    = moghouseID;
                     PChar->loc.boundary    = 0;
-                    PChar->status          = STATUSTYPE::DISAPPEAR;
+                    PChar->status          = STATUS_TYPE::DISAPPEAR;
                     PChar->animation       = ANIMATION_NONE;
                     PChar->clearPacketList();
 
@@ -458,7 +458,7 @@ namespace message
 
                         ref<bool>(&buf, 1) = true; // Found, so initiate warp back on the requesting server
 
-                        if (Entity->status == STATUSTYPE::DISAPPEAR)
+                        if (Entity->status == STATUS_TYPE::DISAPPEAR)
                         {
                             if (spawnedOnly)
                             {
@@ -513,7 +513,7 @@ namespace message
                             PChar->loc.boundary = 0;
                             PChar->updatemask   = 0;
 
-                            PChar->status    = STATUSTYPE::DISAPPEAR;
+                            PChar->status    = STATUS_TYPE::DISAPPEAR;
                             PChar->animation = ANIMATION_NONE;
 
                             PChar->clearPacketList();

@@ -292,7 +292,7 @@ namespace zoneutils
                 uint32 NpcID  = Sql_GetUIntData(SqlHandle, 0);
                 uint16 ZoneID = (NpcID - 0x1000000) >> 12;
 
-                if (GetZone(ZoneID)->GetType() != ZONETYPE_DUNGEON_INSTANCED)
+                if (GetZone(ZoneID)->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
                 {
                     CNpcEntity* PNpc = new CNpcEntity;
                     PNpc->targid     = NpcID & 0xFFF;
@@ -315,7 +315,7 @@ namespace zoneutils
                     PNpc->animationsub = (uint8)Sql_GetIntData(SqlHandle, 10);
 
                     PNpc->namevis = (uint8)Sql_GetIntData(SqlHandle, 11);
-                    PNpc->status  = (STATUSTYPE)Sql_GetIntData(SqlHandle, 12);
+                    PNpc->status  = static_cast<STATUS_TYPE>(Sql_GetIntData(SqlHandle, 12));
                     PNpc->m_flags = (uint32)Sql_GetUIntData(SqlHandle, 13);
 
                     PNpc->name_prefix = (uint8)Sql_GetIntData(SqlHandle, 15);
@@ -369,10 +369,10 @@ namespace zoneutils
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint16   ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
-                ZONETYPE zoneType = GetZone(ZoneID)->GetType();
+                uint16    ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
+                ZONE_TYPE zoneType = GetZone(ZoneID)->GetType();
 
-                if (zoneType != ZONETYPE_DUNGEON_INSTANCED)
+                if (zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
                 {
                     CMobEntity* PMob = new CMobEntity;
 
@@ -487,7 +487,7 @@ namespace zoneutils
 
                     PMob->m_Pool = Sql_GetUIntData(SqlHandle, 59);
 
-                    PMob->allegiance = Sql_GetUIntData(SqlHandle, 60);
+                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 60));
                     PMob->namevis    = Sql_GetUIntData(SqlHandle, 61);
                     PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 62);
 
@@ -502,7 +502,7 @@ namespace zoneutils
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
                     if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
-                        PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONETYPE_BATTLEFIELD || zoneType == ZONETYPE_DYNAMIS)
+                        PMob->m_Type & MOBTYPE_NOTORIOUS || zoneType == ZONE_TYPE::BATTLEFIELD || zoneType == ZONE_TYPE::DYNAMIS)
                     {
                         PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                     }
@@ -599,7 +599,7 @@ namespace zoneutils
 
         if (Sql_Query(SqlHandle, Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            if ((ZONETYPE)Sql_GetUIntData(SqlHandle, 0) == ZONETYPE_DUNGEON_INSTANCED)
+            if (static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 0)) == ZONE_TYPE::DUNGEON_INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
             }
@@ -674,7 +674,7 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    REGIONTYPE GetCurrentRegion(uint16 ZoneID)
+    REGION_TYPE GetCurrentRegion(uint16 ZoneID)
     {
         switch (ZoneID)
         {
@@ -686,14 +686,14 @@ namespace zoneutils
             case ZONE_KING_RANPERRES_TOMB:
             case ZONE_WEST_RONFAURE:
             case ZONE_YUGHOTT_GROTTO:
-                return REGIONTYPE::RONFAURE;
+                return REGION_TYPE::RONFAURE;
             case ZONE_GUSGEN_MINES:
             case ZONE_KONSCHTAT_HIGHLANDS:
             case ZONE_LA_THEINE_PLATEAU:
             case ZONE_ORDELLES_CAVES:
             case ZONE_SELBINA:
             case ZONE_VALKURM_DUNES:
-                return REGIONTYPE::ZULKHEIM;
+                return REGION_TYPE::ZULKHEIM;
             case ZONE_BATALLIA_DOWNS:
             case ZONE_CARPENTERS_LANDING:
             case ZONE_DAVOI:
@@ -701,7 +701,7 @@ namespace zoneutils
             case ZONE_JUGNER_FOREST:
             case ZONE_MONASTIC_CAVERN:
             case ZONE_PHANAUET_CHANNEL:
-                return REGIONTYPE::NORVALLEN;
+                return REGION_TYPE::NORVALLEN;
             case ZONE_DANGRUF_WADI:
             case ZONE_KORROLOKA_TUNNEL:
             case ZONE_NORTH_GUSTABERG:
@@ -709,13 +709,13 @@ namespace zoneutils
             case ZONE_SOUTH_GUSTABERG:
             case ZONE_WAUGHROON_SHRINE:
             case ZONE_ZERUHN_MINES:
-                return REGIONTYPE::GUSTABERG;
+                return REGION_TYPE::GUSTABERG;
             case ZONE_BEADEAUX:
             case ZONE_CRAWLERS_NEST:
             case ZONE_PASHHOW_MARSHLANDS:
             case ZONE_QULUN_DOME:
             case ZONE_ROLANBERRY_FIELDS:
-                return REGIONTYPE::DERFLAND;
+                return REGION_TYPE::DERFLAND;
             case ZONE_BALGAS_DAIS:
             case ZONE_EAST_SARUTABARUTA:
             case ZONE_FULL_MOON_FOUNTAIN:
@@ -724,7 +724,7 @@ namespace zoneutils
             case ZONE_OUTER_HORUTOTO_RUINS:
             case ZONE_TORAIMARAI_CANAL:
             case ZONE_WEST_SARUTABARUTA:
-                return REGIONTYPE::SARUTABARUTA;
+                return REGION_TYPE::SARUTABARUTA;
             case ZONE_BIBIKI_BAY:
             case ZONE_BUBURIMU_PENINSULA:
             case ZONE_LABYRINTH_OF_ONZOZO:
@@ -732,7 +732,7 @@ namespace zoneutils
             case ZONE_MAZE_OF_SHAKHRAMI:
             case ZONE_MHAURA:
             case ZONE_TAHRONGI_CANYON:
-                return REGIONTYPE::KOLSHUSHU;
+                return REGION_TYPE::KOLSHUSHU;
             case ZONE_ALTAR_ROOM:
             case ZONE_ATTOHWA_CHASM:
             case ZONE_BONEYARD_GULLY:
@@ -740,7 +740,7 @@ namespace zoneutils
             case ZONE_GARLAIGE_CITADEL:
             case ZONE_MERIPHATAUD_MOUNTAINS:
             case ZONE_SAUROMUGUE_CHAMPAIGN:
-                return REGIONTYPE::ARAGONEU;
+                return REGION_TYPE::ARAGONEU;
             case ZONE_BEAUCEDINE_GLACIER:
             case ZONE_CLOISTER_OF_FROST:
             case ZONE_FEIYIN:
@@ -748,46 +748,46 @@ namespace zoneutils
             case ZONE_QUBIA_ARENA:
             case ZONE_RANGUEMONT_PASS:
             case ZONE_THE_SHROUDED_MAW:
-                return REGIONTYPE::FAUREGANDI;
+                return REGION_TYPE::FAUREGANDI;
             case ZONE_BEARCLAW_PINNACLE:
             case ZONE_CASTLE_ZVAHL_BAILEYS:
             case ZONE_CASTLE_ZVAHL_KEEP:
             case ZONE_THRONE_ROOM:
             case ZONE_ULEGUERAND_RANGE:
             case ZONE_XARCABARD:
-                return REGIONTYPE::VALDEAUNIA;
+                return REGION_TYPE::VALDEAUNIA;
             case ZONE_BEHEMOTHS_DOMINION:
             case ZONE_LOWER_DELKFUTTS_TOWER:
             case ZONE_MIDDLE_DELKFUTTS_TOWER:
             case ZONE_QUFIM_ISLAND:
             case ZONE_STELLAR_FULCRUM:
             case ZONE_UPPER_DELKFUTTS_TOWER:
-                return REGIONTYPE::QUFIMISLAND;
+                return REGION_TYPE::QUFIMISLAND;
             case ZONE_THE_BOYAHDA_TREE:
             case ZONE_CLOISTER_OF_STORMS:
             case ZONE_DRAGONS_AERY:
             case ZONE_HALL_OF_THE_GODS:
             case ZONE_ROMAEVE:
             case ZONE_THE_SANCTUARY_OF_ZITAH:
-                return REGIONTYPE::LITELOR;
+                return REGION_TYPE::LITELOR;
             case ZONE_CLOISTER_OF_TREMORS:
             case ZONE_EASTERN_ALTEPA_DESERT:
             case ZONE_CHAMBER_OF_ORACLES:
             case ZONE_QUICKSAND_CAVES:
             case ZONE_RABAO:
             case ZONE_WESTERN_ALTEPA_DESERT:
-                return REGIONTYPE::KUZOTZ;
+                return REGION_TYPE::KUZOTZ;
             case ZONE_CAPE_TERIGGAN:
             case ZONE_CLOISTER_OF_GALES:
             case ZONE_GUSTAV_TUNNEL:
             case ZONE_KUFTAL_TUNNEL:
             case ZONE_VALLEY_OF_SORROWS:
-                return REGIONTYPE::VOLLBOW;
+                return REGION_TYPE::VOLLBOW;
             case ZONE_KAZHAM:
             case ZONE_NORG:
             case ZONE_SEA_SERPENT_GROTTO:
             case ZONE_YUHTUNGA_JUNGLE:
-                return REGIONTYPE::ELSHIMOLOWLANDS;
+                return REGION_TYPE::ELSHIMOLOWLANDS;
             case ZONE_CLOISTER_OF_FLAMES:
             case ZONE_CLOISTER_OF_TIDES:
             case ZONE_DEN_OF_RANCOR:
@@ -795,17 +795,17 @@ namespace zoneutils
             case ZONE_SACRIFICIAL_CHAMBER:
             case ZONE_TEMPLE_OF_UGGALEPIH:
             case ZONE_YHOATOR_JUNGLE:
-                return REGIONTYPE::ELSHIMOUPLANDS;
+                return REGION_TYPE::ELSHIMOUPLANDS;
             case ZONE_THE_CELESTIAL_NEXUS:
             case ZONE_LALOFF_AMPHITHEATER:
             case ZONE_RUAUN_GARDENS:
             case ZONE_THE_SHRINE_OF_RUAVITAU:
             case ZONE_VELUGANNON_PALACE:
-                return REGIONTYPE::TULIA;
+                return REGION_TYPE::TULIA;
             case ZONE_MINE_SHAFT_2716:
             case ZONE_NEWTON_MOVALPOLOS:
             case ZONE_OLDTON_MOVALPOLOS:
-                return REGIONTYPE::MOVALPOLOS;
+                return REGION_TYPE::MOVALPOLOS;
             case ZONE_LUFAISE_MEADOWS:
             case ZONE_MISAREAUX_COAST:
             case ZONE_MONARCH_LINN:
@@ -814,30 +814,30 @@ namespace zoneutils
             case ZONE_RIVERNE_SITE_B01:
             case ZONE_SACRARIUM:
             case ZONE_SEALIONS_DEN:
-                return REGIONTYPE::TAVNAZIA;
+                return REGION_TYPE::TAVNAZIA;
             case ZONE_TAVNAZIAN_SAFEHOLD:
-                return REGIONTYPE::TAVNAZIAN_MARQ;
+                return REGION_TYPE::TAVNAZIAN_MARQ;
             case ZONE_SOUTHERN_SANDORIA:
             case ZONE_NORTHERN_SANDORIA:
             case ZONE_PORT_SANDORIA:
             case ZONE_CHATEAU_DORAGUILLE:
-                return REGIONTYPE::SANDORIA;
+                return REGION_TYPE::SANDORIA;
             case ZONE_BASTOK_MINES:
             case ZONE_BASTOK_MARKETS:
             case ZONE_PORT_BASTOK:
             case ZONE_METALWORKS:
-                return REGIONTYPE::BASTOK;
+                return REGION_TYPE::BASTOK;
             case ZONE_WINDURST_WATERS:
             case ZONE_WINDURST_WALLS:
             case ZONE_PORT_WINDURST:
             case ZONE_WINDURST_WOODS:
             case ZONE_HEAVENS_TOWER:
-                return REGIONTYPE::WINDURST;
+                return REGION_TYPE::WINDURST;
             case ZONE_RULUDE_GARDENS:
             case ZONE_UPPER_JEUNO:
             case ZONE_LOWER_JEUNO:
             case ZONE_PORT_JEUNO:
-                return REGIONTYPE::JEUNO;
+                return REGION_TYPE::JEUNO;
             case ZONE_DYNAMIS_BASTOK:
             case ZONE_DYNAMIS_BEAUCEDINE:
             case ZONE_DYNAMIS_BUBURIMU:
@@ -848,7 +848,7 @@ namespace zoneutils
             case ZONE_DYNAMIS_VALKURM:
             case ZONE_DYNAMIS_WINDURST:
             case ZONE_DYNAMIS_XARCABARD:
-                return REGIONTYPE::DYNAMIS;
+                return REGION_TYPE::DYNAMIS;
             case ZONE_PROMYVION_DEM:
             case ZONE_PROMYVION_HOLLA:
             case ZONE_PROMYVION_MEA:
@@ -858,31 +858,31 @@ namespace zoneutils
             case ZONE_SPIRE_OF_MEA:
             case ZONE_SPIRE_OF_VAHZL:
             case ZONE_HALL_OF_TRANSFERENCE:
-                return REGIONTYPE::PROMYVION;
+                return REGION_TYPE::PROMYVION;
             case ZONE_ALTAIEU:
             case ZONE_EMPYREAL_PARADOX:
             case ZONE_THE_GARDEN_OF_RUHMET:
             case ZONE_GRAND_PALACE_OF_HUXZOI:
-                return REGIONTYPE::LUMORIA;
+                return REGION_TYPE::LUMORIA;
             case ZONE_APOLLYON:
             case ZONE_TEMENOS:
-                return REGIONTYPE::LIMBUS;
+                return REGION_TYPE::LIMBUS;
             case ZONE_AL_ZAHBI:
             case ZONE_AHT_URHGAN_WHITEGATE:
             case ZONE_BHAFLAU_THICKETS:
             case ZONE_THE_COLOSSEUM:
-                return REGIONTYPE::WEST_AHT_URHGAN;
+                return REGION_TYPE::WEST_AHT_URHGAN;
             case ZONE_MAMOOL_JA_TRAINING_GROUNDS:
             case ZONE_MAMOOK:
             case ZONE_WAJAOM_WOODLANDS:
             case ZONE_AYDEEWA_SUBTERRANE:
             case ZONE_JADE_SEPULCHER:
-                return REGIONTYPE::MAMOOL_JA_SAVAGE;
+                return REGION_TYPE::MAMOOL_JA_SAVAGE;
             case ZONE_HALVUNG:
             case ZONE_MOUNT_ZHAYOLM:
             case ZONE_LEBROS_CAVERN:
             case ZONE_NAVUKGO_EXECUTION_CHAMBER:
-                return REGIONTYPE::HALVUNG;
+                return REGION_TYPE::HALVUNG;
             case ZONE_ARRAPAGO_REEF:
             case ZONE_CAEDARVA_MIRE:
             case ZONE_LEUJAOAM_SANCTUM:
@@ -890,49 +890,49 @@ namespace zoneutils
             case ZONE_HAZHALM_TESTING_GROUNDS:
             case ZONE_TALACCA_COVE:
             case ZONE_PERIQIA:
-                return REGIONTYPE::ARRAPAGO;
+                return REGION_TYPE::ARRAPAGO;
             case ZONE_NYZUL_ISLE:
             case ZONE_ARRAPAGO_REMNANTS:
             case ZONE_ALZADAAL_UNDERSEA_RUINS:
             case ZONE_SILVER_SEA_REMNANTS:
-                return REGIONTYPE::ALZADAAL;
+                return REGION_TYPE::ALZADAAL;
             case ZONE_SOUTHERN_SAN_DORIA_S:
             case ZONE_EAST_RONFAURE_S:
-                return REGIONTYPE::RONFAURE_FRONT;
+                return REGION_TYPE::RONFAURE_FRONT;
             case ZONE_BASTOK_MARKETS_S:
             case ZONE_NORTH_GUSTABERG_S:
             case ZONE_RUHOTZ_SILVERMINES:
             case ZONE_GRAUBERG_S:
-                return REGIONTYPE::GUSTABERG_FRONT;
+                return REGION_TYPE::GUSTABERG_FRONT;
             case ZONE_WINDURST_WATERS_S:
             case ZONE_WEST_SARUTABARUTA_S:
             case ZONE_GHOYUS_REVERIE:
             case ZONE_FORT_KARUGO_NARUGO_S:
-                return REGIONTYPE::SARUTA_FRONT;
+                return REGION_TYPE::SARUTA_FRONT;
             case ZONE_BATALLIA_DOWNS_S:
             case ZONE_JUGNER_FOREST_S:
             case ZONE_LA_VAULE_S:
             case ZONE_EVERBLOOM_HOLLOW:
             case ZONE_THE_ELDIEME_NECROPOLIS_S:
-                return REGIONTYPE::NORVALLEN_FRONT;
+                return REGION_TYPE::NORVALLEN_FRONT;
             case ZONE_ROLANBERRY_FIELDS_S:
             case ZONE_PASHHOW_MARSHLANDS_S:
             case ZONE_CRAWLERS_NEST_S:
             case ZONE_BEADEAUX_S:
             case ZONE_VUNKERL_INLET_S:
-                return REGIONTYPE::DERFLAND_FRONT;
+                return REGION_TYPE::DERFLAND_FRONT;
             case ZONE_SAUROMUGUE_CHAMPAIGN_S:
             case ZONE_MERIPHATAUD_MOUNTAINS_S:
             case ZONE_CASTLE_OZTROJA_S:
             case ZONE_GARLAIGE_CITADEL_S:
-                return REGIONTYPE::ARAGONEAU_FRONT;
+                return REGION_TYPE::ARAGONEAU_FRONT;
             case ZONE_BEAUCEDINE_GLACIER_S:
-                return REGIONTYPE::FAUREGANDI_FRONT;
+                return REGION_TYPE::FAUREGANDI_FRONT;
             case ZONE_XARCABARD_S:
             case ZONE_CASTLE_ZVAHL_BAILEYS_S:
             case ZONE_CASTLE_ZVAHL_KEEP_S:
             case ZONE_THRONE_ROOM_S:
-                return REGIONTYPE::VALDEAUNIA_FRONT;
+                return REGION_TYPE::VALDEAUNIA_FRONT;
             case ZONE_ABYSSEA_ALTEPA:
             case ZONE_ABYSSEA_ATTOHWA:
             case ZONE_ABYSSEA_EMPYREAL_PARADOX:
@@ -943,19 +943,19 @@ namespace zoneutils
             case ZONE_ABYSSEA_TAHRONGI:
             case ZONE_ABYSSEA_ULEGUERAND:
             case ZONE_ABYSSEA_VUNKERL:
-                return REGIONTYPE::ABYSSEA;
+                return REGION_TYPE::ABYSSEA;
             case ZONE_WALK_OF_ECHOES:
-                return REGIONTYPE::THE_THRESHOLD;
+                return REGION_TYPE::THE_THRESHOLD;
             case ZONE_DIORAMA_ABDHALJS_GHELSBA:
             case ZONE_ABDHALJS_ISLE_PURGONORGO:
             case ZONE_MAQUETTE_ABDHALJS_LEGION_A:
             case ZONE_MAQUETTE_ABDHALJS_LEGION_B:
-                return REGIONTYPE::ABDHALJS;
+                return REGION_TYPE::ABDHALJS;
             case ZONE_WESTERN_ADOULIN:
             case ZONE_EASTERN_ADOULIN:
             case ZONE_RALA_WATERWAYS:
             case ZONE_RALA_WATERWAYS_U:
-                return REGIONTYPE::ADOULIN_ISLANDS;
+                return REGION_TYPE::ADOULIN_ISLANDS;
             case ZONE_CEIZAK_BATTLEGROUNDS:
             case ZONE_FORET_DE_HENNETIEL:
             case ZONE_SIH_GATES:
@@ -964,9 +964,9 @@ namespace zoneutils
             case ZONE_CIRDAS_CAVERNS_U:
             case ZONE_YAHSE_HUNTING_GROUNDS:
             case ZONE_MORIMAR_BASALT_FIELDS:
-                return REGIONTYPE::EAST_ULBUKA;
+                return REGION_TYPE::EAST_ULBUKA;
         }
-        return REGIONTYPE::UNKNOWN;
+        return REGION_TYPE::UNKNOWN;
     }
 
     /************************************************************************
@@ -975,9 +975,9 @@ namespace zoneutils
      *                                                                       *
      ************************************************************************/
 
-    CONTINENTTYPE GetCurrentContinent(uint16 ZoneID)
+    CONTINENT_TYPE GetCurrentContinent(uint16 ZoneID)
     {
-        return GetCurrentRegion(ZoneID) != REGIONTYPE::UNKNOWN ? THE_MIDDLE_LANDS : OTHER_AREAS;
+        return GetCurrentRegion(ZoneID) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
     }
 
     int GetWeatherElement(WEATHER weather)

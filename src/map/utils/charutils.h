@@ -170,7 +170,7 @@ namespace charutils
     void SaveCampaignAllegiance(CCharEntity* PChar);        // Save the character's campaign allegiance.
     void SaveCharMoghancement(CCharEntity* PChar);          // Save the character's current moghancement
     void SaveCharSkills(CCharEntity* PChar, uint8 skillID); // сохраняем указанный skill персонажа
-    void SaveTeleport(CCharEntity* PChar, uint8 type);      // Homepoints, outposts, etc
+    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type);      // Homepoints, outposts, etc
     void SaveDeathTime(CCharEntity* PChar);                 // Saves when this character last died.
     void SavePlayTime(CCharEntity* PChar);                  // Saves this characters total play time.
     bool hasMogLockerAccess(CCharEntity* PChar);            // true if have access, false otherwise.

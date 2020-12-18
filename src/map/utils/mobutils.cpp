@@ -225,11 +225,11 @@ namespace mobutils
         PMob->restoreModifiers();
         PMob->restoreMobModifiers();
 
-        bool     isNM     = PMob->m_Type & MOBTYPE_NOTORIOUS;
-        JOBTYPE  mJob     = PMob->GetMJob();
-        JOBTYPE  sJob     = PMob->GetSJob();
-        uint8    mLvl     = PMob->GetMLevel();
-        ZONETYPE zoneType = PMob->loc.zone->GetType();
+        bool      isNM     = PMob->m_Type & MOBTYPE_NOTORIOUS;
+        JOBTYPE   mJob     = PMob->GetMJob();
+        JOBTYPE   sJob     = PMob->GetSJob();
+        uint8     mLvl     = PMob->GetMLevel();
+        ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
         if (PMob->HPmodifier == 0)
         {
@@ -536,15 +536,15 @@ namespace mobutils
 
         PMob->m_Behaviour |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-        if (zoneType == ZONETYPE_DUNGEON)
+        if (zoneType == ZONE_TYPE::DUNGEON)
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONETYPE_BATTLEFIELD)
+        else if (zoneType == ZONE_TYPE::BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
         }
-        else if (zoneType == ZONETYPE_DYNAMIS)
+        else if (zoneType == ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
         }
@@ -1312,7 +1312,7 @@ Usage:
 
                 PMob->m_Pool = Sql_GetUIntData(SqlHandle, 54);
 
-                PMob->allegiance      = Sql_GetUIntData(SqlHandle, 55);
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 55));
                 PMob->namevis         = Sql_GetUIntData(SqlHandle, 56);
                 PMob->m_Aggro         = Sql_GetUIntData(SqlHandle, 57);
                 PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 58);

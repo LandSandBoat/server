@@ -45,7 +45,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 {
     objtype        = TYPE_TRUST;
     m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    allegiance     = ALLEGIANCE_PLAYER;
+    allegiance     = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList = 0;
     PMaster        = PChar;
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
@@ -55,7 +55,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 void CTrustEntity::PostTick()
 {
     CMobEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUSTYPE::DISAPPEAR)
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
 

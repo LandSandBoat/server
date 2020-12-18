@@ -229,7 +229,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->clearPacketList();
 
-    if (PChar->status == STATUSTYPE::DISAPPEAR)
+    if (PChar->status == STATUS_TYPE::DISAPPEAR)
     {
         if (PChar->loc.zone != nullptr)
         {
@@ -297,7 +297,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->loc.zoning = true;
             }
         }
-        PChar->status = STATUSTYPE::NORMAL;
+        PChar->status = STATUS_TYPE::NORMAL;
     }
     else
     {
@@ -393,7 +393,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->ClearTrusts();
     }
 
-    if (PChar->status == STATUSTYPE::SHUTDOWN)
+    if (PChar->status == STATUS_TYPE::SHUTDOWN)
     {
         if (PChar->PParty != nullptr)
         {
@@ -465,7 +465,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharExp(PChar, PChar->GetMJob());
     charutils::SaveEminenceData(PChar);
 
-    PChar->status = STATUSTYPE::DISAPPEAR;
+    PChar->status = STATUS_TYPE::DISAPPEAR;
 }
 
 /************************************************************************
@@ -539,7 +539,7 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     TracyZoneCString("Player Sync");
 
-    if (PChar->status != STATUSTYPE::SHUTDOWN && PChar->status != STATUSTYPE::DISAPPEAR)
+    if (PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
     {
         bool moved = ((PChar->loc.p.x != data.ref<float>(0x04)) || (PChar->loc.p.z != data.ref<float>(0x0C)) || (PChar->m_TargID != data.ref<uint16>(0x16)));
 
@@ -576,7 +576,7 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             PChar->pushPacket(new CWideScanTrackPacket(PChar->PWideScanTarget));
 
-            if (PChar->PWideScanTarget->status == STATUSTYPE::DISAPPEAR)
+            if (PChar->PWideScanTarget->status == STATUS_TYPE::DISAPPEAR)
             {
                 PChar->PWideScanTarget = nullptr;
             }
@@ -661,7 +661,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
             {
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
                 return;
             }
 
@@ -683,7 +683,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->m_event.EventID == -1)
             {
                 PChar->m_event.reset();
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_STANDARD));
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
             }
         }
         break;
@@ -853,7 +853,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 // PChar->PBattleAI->SetCurrentAction(ACTION_RAISE_MENU_SELECTION);
                 PChar->loc.p           = PChar->m_StartActionPos;
                 PChar->loc.destination = PChar->getZone();
-                PChar->status          = STATUSTYPE::DISAPPEAR;
+                PChar->status          = STATUS_TYPE::DISAPPEAR;
                 PChar->loc.boundary    = 0;
                 PChar->clearPacketList();
                 charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
@@ -1508,7 +1508,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             ShowWarning(CL_YELLOW "lightluggage detected: <%s> will be removed from server\n" CL_RESET, PChar->GetName());
 
-            PChar->status = STATUSTYPE::SHUTDOWN;
+            PChar->status = STATUS_TYPE::SHUTDOWN;
             charutils::SendToZone(PChar, 1, 0);
         }
         return;
@@ -2672,7 +2672,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }
@@ -2709,7 +2709,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }
@@ -2916,7 +2916,7 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
     PChar->updatemask |= UPDATE_HP;
 }
 
@@ -2965,7 +2965,7 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCSPositionPacket(PChar));
         PChar->pushPacket(new CPositionPacket(PChar));
     }
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
 }
 
 /************************************************************************
@@ -3051,9 +3051,9 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->ClearTrusts();
 
-    if (PChar->status == STATUSTYPE::NORMAL)
+    if (PChar->status == STATUS_TYPE::NORMAL)
     {
-        PChar->status       = STATUSTYPE::DISAPPEAR;
+        PChar->status       = STATUS_TYPE::DISAPPEAR;
         PChar->loc.boundary = 0;
 
         // Exiting Mog House..
@@ -3098,11 +3098,11 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             auto startingRegion            = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion         = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions       = { REGIONTYPE::SANDORIA, REGIONTYPE::BASTOK, REGIONTYPE::WINDURST, REGIONTYPE::JEUNO, REGIONTYPE::WEST_AHT_URHGAN };
+            auto moghouseExitRegions = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
             auto moghouseQuestComplete     = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
             bool moghouseExitQuestZoneline = moghouseQuestComplete && startingRegion == destinationRegion && PChar->m_moghouseID > 0 &&
                                              std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
-                                                         [&destinationRegion](REGIONTYPE acceptedReg) { return destinationRegion == acceptedReg; });
+                                                         [&destinationRegion](REGION_TYPE acceptedReg) { return destinationRegion == acceptedReg; });
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
 
@@ -3115,7 +3115,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                PChar->status = STATUSTYPE::NORMAL;
+                PChar->status = STATUS_TYPE::NORMAL;
                 ShowWarning(CL_YELLOW "SmallPacket0x05E: Moghouse zoneline abuse by %s\n" CL_RESET, PChar->GetName());
                 return;
             }
@@ -3134,7 +3134,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 2));
                 PChar->pushPacket(new CCSPositionPacket(PChar));
 
-                PChar->status = STATUSTYPE::NORMAL;
+                PChar->status = STATUS_TYPE::NORMAL;
                 return;
             }
             else
@@ -3150,7 +3150,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->pushPacket(new CMessageSystemPacket(0, 0, 2));
                     PChar->pushPacket(new CCSPositionPacket(PChar));
 
-                    PChar->status = STATUSTYPE::NORMAL;
+                    PChar->status = STATUS_TYPE::NORMAL;
                     return;
                 }
                 else if (PZoneLine->m_toZone == 0)
@@ -3199,8 +3199,8 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
     int8* string = data[12];
     luautils::OnEventUpdate(PChar, string);
 
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_EVENT));
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_UNKNOWN));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::UNKNOWN));
 }
 
 /************************************************************************
@@ -5261,7 +5261,7 @@ void SmallPacket0x0E2(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }
@@ -5273,7 +5273,7 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_moghouseID || PChar->nameflags.flags & FLAG_GM || PChar->m_GMlevel > 0)
     {
-        PChar->status = STATUSTYPE::SHUTDOWN;
+        PChar->status = STATUS_TYPE::SHUTDOWN;
         charutils::SendToZone(PChar, 1, 0);
     }
     else if (PChar->animation == ANIMATION_NONE)
@@ -5310,7 +5310,7 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }
@@ -5360,7 +5360,7 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }
@@ -5985,13 +5985,13 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
                 blueutils::UnequipAllBlueSpells(PChar);
             }
 
-            DAMAGETYPE subType = DAMAGETYPE::NONE;
+            DAMAGE_TYPE subType = DAMAGE_TYPE::NONE;
             if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
             {
                 subType = weapon->getDmgType();
             }
 
-            if (subType > DAMAGETYPE::NONE && subType < DAMAGETYPE::HTH)
+            if (subType > DAMAGE_TYPE::NONE && subType < DAMAGE_TYPE::HTH)
             {
                 charutils::UnequipItem(PChar, SLOT_SUB);
             }
@@ -6567,7 +6567,7 @@ void SmallPacket0x113(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     PrintPacket(data);
 
-    if (PChar->status != STATUSTYPE::NORMAL)
+    if (PChar->status != STATUS_TYPE::NORMAL)
     {
         return;
     }

@@ -37,5 +37,5 @@ CWideScanTrackPacket::CWideScanTrackPacket(CBaseEntity* PEntity)
 
     ref<uint8>(0x10)  = 1;
     ref<uint16>(0x12) = PEntity->targid;
-    ref<uint8>(0x14)  = PEntity->status == STATUSTYPE::DISAPPEAR ? 2 : 1;
+    ref<uint8>(0x14)  = PEntity->status == STATUS_TYPE::DISAPPEAR ? 2 : 1;
 }

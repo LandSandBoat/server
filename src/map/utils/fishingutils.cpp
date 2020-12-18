@@ -81,7 +81,7 @@ namespace fishingutils
         if (PChar->animation != ANIMATION_NONE)
         {
             PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_FISHING));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
 
@@ -90,7 +90,7 @@ namespace fishingutils
         if (MessageOffset == 0)
         {
             ShowWarning(CL_YELLOW "Player wants to fish in %s\n" CL_RESET, PChar->loc.zone->GetName());
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_FISHING));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
 
@@ -103,7 +103,7 @@ namespace fishingutils
             // сообщение: "You can't fish without a rod in your hands"
 
             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + 0x01));
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_FISHING));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
 
@@ -114,7 +114,7 @@ namespace fishingutils
             // сообщение: "You can't fish without bait on the hook"
 
             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + 0x02));
-            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_FISHING));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             return;
         }
 
