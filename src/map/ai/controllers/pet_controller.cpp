@@ -57,7 +57,7 @@ void CPetController::DoRoamTick(time_point tick)
     }
 
     // automaton, wyvern
-    if (PPet->getPetType() == PETTYPE_WYVERN || PPet->getPetType() == PETTYPE_AUTOMATON)
+    if (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON)
     {
         if (PetIsHealing())
         {

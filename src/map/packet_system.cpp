@@ -352,9 +352,9 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             switch (PChar->petZoningInfo.petType)
             {
-                case PETTYPE_AUTOMATON:
-                case PETTYPE_JUG_PET:
-                case PETTYPE_WYVERN:
+                case PET_TYPE::AUTOMATON:
+                case PET_TYPE::JUG_PET:
+                case PET_TYPE::WYVERN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
                     break;
 
@@ -5333,7 +5333,7 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
                 (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR && PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL && !PChar->PAI->IsEngaged()))
             {
                 PChar->PAI->ClearStateStack();
-                if (PChar->PPet && PChar->PPet->objtype == TYPE_PET && ((CPetEntity*)PChar->PPet)->getPetType() == PETTYPE_AUTOMATON)
+                if (PChar->PPet && PChar->PPet->objtype == TYPE_PET && ((CPetEntity*)PChar->PPet)->getPetType() == PET_TYPE::AUTOMATON)
                 {
                     PChar->PPet->PAI->Disengage();
                 }

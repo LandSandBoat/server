@@ -477,7 +477,7 @@ int16 CBattleEntity::addTP(int16 tp)
         }
         else if (objtype == TYPE_PET)
         {
-            if (static_cast<CPetEntity*>(this)->getPetType() != PETTYPE_AUTOMATON || !this->PMaster)
+            if (static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON || !this->PMaster)
             {
                 TPMulti = map_config.mob_tp_multiplier * 3;
             }
@@ -644,7 +644,7 @@ uint16 CBattleEntity::ATT()
             }
         }
     }
-    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PETTYPE_AUTOMATON)
+    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
@@ -742,7 +742,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
         return std::max<int16>(0, ACC);
     }
-    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PETTYPE_AUTOMATON)
+    else if (this->objtype == TYPE_PET && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)
     {
         int16 ACC = this->GetSkill(SKILL_AUTOMATON_MELEE);
         ACC       = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
@@ -1266,7 +1266,7 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     return (targetFlags & TARGET_SELF) &&
            (this == PInitiator ||
-            (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PETTYPE_AUTOMATON && this == PInitiator->PMaster));
+            (PInitiator->objtype == TYPE_PET && static_cast<CPetEntity*>(PInitiator)->getPetType() == PET_TYPE::AUTOMATON && this == PInitiator->PMaster));
 }
 
 bool CBattleEntity::CanUseSpell(CSpell* PSpell)
@@ -1663,7 +1663,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                             charutils::TrySkillUP((CCharEntity*)PTarget, (SKILLTYPE)skilltype, GetMLevel());
                         } // In case the Automaton can counter
                         else if (PTarget->objtype == TYPE_PET && PTarget->PMaster && PTarget->PMaster->objtype == TYPE_PC &&
-                                 static_cast<CPetEntity*>(PTarget)->getPetType() == PETTYPE_AUTOMATON)
+                                 static_cast<CPetEntity*>(PTarget)->getPetType() == PET_TYPE::AUTOMATON)
                         {
                             puppetutils::TrySkillUP((CAutomatonEntity*)PTarget, SKILL_AUTOMATON_MELEE, GetMLevel());
                         }

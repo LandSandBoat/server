@@ -6052,7 +6052,7 @@ inline int32 CLuaBaseEntity::levelRestriction(lua_State* L)
             if (PChar->PPet)
             {
                 CPetEntity* PPet = (CPetEntity*)PChar->PPet;
-                if (PPet->getPetType() == PETTYPE_WYVERN)
+                if (PPet->getPetType() == PET_TYPE::WYVERN)
                 {
                     petutils::LoadWyvernStatistics(PChar, PPet, true);
                 }
@@ -11189,7 +11189,7 @@ inline int32 CLuaBaseEntity::updateEnmityFromCure(lua_State* L)
         {
             return static_cast<CBattleEntity*>(m_PBaseEntity);
         }
-        else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PETTYPE_AUTOMATON)
+        else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
         {
             auto* PMaster = static_cast<CPetEntity*>(m_PBaseEntity)->PMaster;
             if (PMaster->objtype == TYPE_PC)
@@ -12160,7 +12160,7 @@ inline int32 CLuaBaseEntity::addBurden(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PETTYPE_AUTOMATON)
+    if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
         lua_pushinteger(L, ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden((uint8)lua_tointeger(L, 1), (int8)lua_tointeger(L, 2)));
     }
@@ -13293,7 +13293,7 @@ inline int32 CLuaBaseEntity::isJugPet(lua_State* L)
     {
         if (((CBattleEntity*)m_PBaseEntity)->PPet)
         {
-            lua_pushboolean(L, ((CPetEntity*)(((CBattleEntity*)m_PBaseEntity)->PPet))->getPetType() == PETTYPE_JUG_PET);
+            lua_pushboolean(L, ((CPetEntity*)(((CBattleEntity*)m_PBaseEntity)->PPet))->getPetType() == PET_TYPE::JUG_PET);
             return 1;
         }
     }
@@ -13483,17 +13483,17 @@ inline int32 CLuaBaseEntity::setPetName(lua_State* L)
 
     int32 n = lua_gettop(L);
 
-    uint8 petType = (uint8)lua_tointeger(L, 1);
+    PET_TYPE petType = static_cast<PET_TYPE>(lua_tointeger(L, 1));
 
     if (n == 2)
     {
         uint16 value = (uint16)lua_tointeger(L, 2);
 
-        if (petType == PETTYPE_WYVERN)
+        if (petType == PET_TYPE::WYVERN)
         {
             Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
         }
-        else if (petType == PETTYPE_AUTOMATON)
+        else if (petType == PET_TYPE::AUTOMATON)
         {
             Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
                       value);
@@ -13512,7 +13512,7 @@ inline int32 CLuaBaseEntity::setPetName(lua_State* L)
     }
     else if (n == 3)
     {
-        if (petType == PETTYPE_CHOCOBO)
+        if (petType == PET_TYPE::CHOCOBO)
         {
             uint32 chocoboname1 = lua_tointeger(L, 2) & 0x0000FFFF;
             uint32 chocoboname2 = (uint32)(lua_tointeger(L, 3) << 16);
@@ -13761,7 +13761,7 @@ inline int32 CLuaBaseEntity::getAutomatonName(lua_State* L)
 int32 CLuaBaseEntity::getAutomatonFrame(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PETTYPE_AUTOMATON);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
 
     lua_pushinteger(L, static_cast<CAutomatonEntity*>(m_PBaseEntity)->getFrame());
 
@@ -13778,7 +13778,7 @@ int32 CLuaBaseEntity::getAutomatonFrame(lua_State* L)
 int32 CLuaBaseEntity::getAutomatonHead(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PETTYPE_AUTOMATON);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
 
     lua_pushinteger(L, static_cast<CAutomatonEntity*>(m_PBaseEntity)->getHead());
 

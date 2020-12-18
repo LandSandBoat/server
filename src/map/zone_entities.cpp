@@ -351,7 +351,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         else
         {
             PChar->PPet->status = STATUS_TYPE::DISAPPEAR;
-            if (((CPetEntity*)(PChar->PPet))->getPetType() == PETTYPE_AVATAR)
+            if (((CPetEntity*)(PChar->PPet))->getPetType() == PET_TYPE::AVATAR)
             {
                 PChar->setModifier(Mod::AVATAR_PERPETUATION, 0);
             }
@@ -1093,7 +1093,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                 PCurrentMob->PEnmityContainer->Clear(PPet->id);
             }
-            if (PPet->getPetType() != PETTYPE_AUTOMATON || !PPet->PMaster)
+            if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
             {
                 delete pit->second;
             }

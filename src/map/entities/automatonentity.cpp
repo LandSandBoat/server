@@ -36,7 +36,7 @@
 #include "../utils/puppetutils.h"
 
 CAutomatonEntity::CAutomatonEntity()
-: CPetEntity(PETTYPE_AUTOMATON)
+: CPetEntity(PET_TYPE::AUTOMATON)
 {
     PAI->SetController(nullptr);
 }

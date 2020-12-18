@@ -199,7 +199,7 @@ CCharEntity::CCharEntity()
 
     petZoningInfo.respawnPet = false;
     petZoningInfo.petID      = 0;
-    petZoningInfo.petType    = PETTYPE_AVATAR; // dummy data, the bool tells us to respawn if required
+    petZoningInfo.petType    = PET_TYPE::AVATAR; // dummy data, the bool tells us to respawn if required
     petZoningInfo.petHP      = 0;
     petZoningInfo.petMP      = 0;
     petZoningInfo.petTP      = 0;
@@ -306,9 +306,9 @@ void CCharEntity::setPetZoningInfo()
     {
         switch (((CPetEntity*)PPet)->getPetType())
         {
-            case PETTYPE_JUG_PET:
-            case PETTYPE_AUTOMATON:
-            case PETTYPE_WYVERN:
+            case PET_TYPE::JUG_PET:
+            case PET_TYPE::AUTOMATON:
+            case PET_TYPE::WYVERN:
                 petZoningInfo.petHP   = PPet->health.hp;
                 petZoningInfo.petTP   = PPet->health.tp;
                 petZoningInfo.petMP   = PPet->health.mp;
@@ -327,7 +327,7 @@ void CCharEntity::resetPetZoningInfo()
     petZoningInfo.petTP      = 0;
     petZoningInfo.petMP      = 0;
     petZoningInfo.respawnPet = false;
-    petZoningInfo.petType    = PETTYPE_AVATAR;
+    petZoningInfo.petType    = PET_TYPE::AVATAR;
 }
 /************************************************************************
  *																		*

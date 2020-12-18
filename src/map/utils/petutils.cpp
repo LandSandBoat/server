@@ -955,7 +955,7 @@ namespace petutils
             }
             CPetEntity* PPetEnt = (CPetEntity*)PPet;
 
-            if (PPetEnt->getPetType() == PETTYPE_AVATAR)
+            if (PPetEnt->getPetType() == PET_TYPE::AVATAR)
             {
                 PMaster->setModifier(Mod::AVATAR_PERPETUATION, 0);
             }
@@ -963,7 +963,7 @@ namespace petutils
             ((CCharEntity*)PMaster)->PLatentEffectContainer->CheckLatentsPetType();
             PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
 
-            if (PPetEnt->getPetType() != PETTYPE_AUTOMATON)
+            if (PPetEnt->getPetType() != PET_TYPE::AUTOMATON)
             {
                 PPetEnt->PMaster = nullptr;
             }
@@ -1244,16 +1244,16 @@ namespace petutils
             ((CCharEntity*)PMaster)->petZoningInfo.petID = PetID;
         }
 
-        PETTYPE petType = PETTYPE_JUG_PET;
+        PET_TYPE petType = PET_TYPE::JUG_PET;
 
         if (PetID <= PETID_CAIT_SITH)
         {
-            petType = PETTYPE_AVATAR;
+            petType = PET_TYPE::AVATAR;
         }
         // TODO: move this out of modifying the global pet list
         else if (PetID == PETID_WYVERN)
         {
-            petType = PETTYPE_WYVERN;
+            petType = PET_TYPE::WYVERN;
 
             const char* Query = "SELECT\
                 pet_name.name,\
@@ -1305,7 +1305,7 @@ namespace petutils
         */
         else if (PetID == PETID_CHOCOBO)
         {
-            petType = PETTYPE_CHOCOBO;
+            petType = PET_TYPE::CHOCOBO;
 
             const char* Query = "SELECT\
                 char_pet.chocoboid\
@@ -1346,15 +1346,15 @@ namespace petutils
         }
         else if (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME)
         {
-            petType = PETTYPE_AUTOMATON;
+            petType = PET_TYPE::AUTOMATON;
         }
         else if (PetID == PETID_LUOPAN)
         {
-            petType = PETTYPE_LUOPAN;
+            petType = PET_TYPE::LUOPAN;
         }
 
         CPetEntity* PPet = nullptr;
-        if (petType == PETTYPE_AUTOMATON && PMaster->objtype == TYPE_PC)
+        if (petType == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
             PPet = ((CCharEntity*)PMaster)->PAutomaton;
             PPet->PAI->SetController(std::make_unique<CAutomatonController>(static_cast<CAutomatonEntity*>(PPet)));
@@ -1366,13 +1366,13 @@ namespace petutils
 
         PPet->loc = PMaster->loc;
 
-        if (petType != PETTYPE_LUOPAN)
+        if (petType != PET_TYPE::LUOPAN)
         {
             // spawn me randomly around master
             PPet->loc.p = nearPosition(PMaster->loc.p, CPetController::PetRoamDistance, (float)M_PI);
         }
 
-        if (petType != PETTYPE_AUTOMATON)
+        if (petType != PET_TYPE::AUTOMATON)
         {
             PPet->look = PPetData->look;
             PPet->name = PPetData->name;
@@ -1388,7 +1388,7 @@ namespace petutils
         PPet->m_Element = PPetData->m_Element;
         PPet->m_PetID   = PPetData->PetID;
 
-        if (PPet->getPetType() == PETTYPE_AVATAR)
+        if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
             if (PMaster->GetMJob() == JOB_SMN)
             {
@@ -1482,7 +1482,7 @@ namespace petutils
 
             PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, PPet->GetMLevel()));
         }
-        else if (PPet->getPetType() == PETTYPE_JUG_PET)
+        else if (PPet->getPetType() == PET_TYPE::JUG_PET)
         {
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
 
@@ -1506,11 +1506,11 @@ namespace petutils
             PPet->SetMLevel(highestLvl);
             LoadJugStats(PPet, PPetData); // follow monster calcs (w/o SJ)
         }
-        else if (PPet->getPetType() == PETTYPE_WYVERN)
+        else if (PPet->getPetType() == PET_TYPE::WYVERN)
         {
             LoadWyvernStatistics(PMaster, PPet, false);
         }
-        else if (PPet->getPetType() == PETTYPE_AUTOMATON && PMaster->objtype == TYPE_PC)
+        else if (PPet->getPetType() == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
             CAutomatonEntity* PAutomaton = (CAutomatonEntity*)PPet;
             switch (PAutomaton->getFrame())
@@ -1556,7 +1556,7 @@ namespace petutils
                 PPet->addModifier(Mod::MDEF, PChar->PMeritPoints->GetMeritValue(MERIT_FINE_TUNING, PChar));
             }
         }
-        else if (PPet->getPetType() == PETTYPE_LUOPAN && PMaster->objtype == TYPE_PC)
+        else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {
             PPet->SetMLevel(PMaster->GetMLevel());
             PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
@@ -1637,15 +1637,15 @@ namespace petutils
 
         if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PPet))
         {
-            if (petmod == PetModType::Avatar && PPetEntity->getPetType() == PETTYPE_AVATAR)
+            if (petmod == PetModType::Avatar && PPetEntity->getPetType() == PET_TYPE::AVATAR)
             {
                 return true;
             }
-            if (petmod == PetModType::Wyvern && PPetEntity->getPetType() == PETTYPE_WYVERN)
+            if (petmod == PetModType::Wyvern && PPetEntity->getPetType() == PET_TYPE::WYVERN)
             {
                 return true;
             }
-            if (petmod >= PetModType::Automaton && petmod <= PetModType::Stormwaker && PPetEntity->getPetType() == PETTYPE_AUTOMATON)
+            if (petmod >= PetModType::Automaton && petmod <= PetModType::Stormwaker && PPetEntity->getPetType() == PET_TYPE::AUTOMATON)
             {
                 if (petmod == PetModType::Automaton || (uint16)petmod + 28 == (uint16) static_cast<CAutomatonEntity*>(PPetEntity)->getFrame())
                 {

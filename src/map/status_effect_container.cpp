@@ -1709,7 +1709,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             if (m_POwner->health.mp == 0 && m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET)
             {
                 CPetEntity* PPet = (CPetEntity*)m_POwner->PPet;
-                if (PPet->getPetType() == PETTYPE_AVATAR)
+                if (PPet->getPetType() == PET_TYPE::AVATAR)
                 {
                     petutils::DespawnPet(m_POwner);
                 }
@@ -1722,7 +1722,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
 
         m_POwner->addTP(regain);
 
-        if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PETTYPE_AUTOMATON)
+        if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
         {
             ((CAutomatonEntity*)(m_POwner->PPet))->burdenTick();
         }

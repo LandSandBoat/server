@@ -606,7 +606,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
 
     action.id = id;
-    if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)
+    if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)
     {
         action.actiontype = ACTION_PET_MOBABILITY_FINISH;
     }
@@ -684,9 +684,9 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         // reset the skill's message back to default
         PSkill->setMsg(defaultMessage);
 
-        if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PETTYPE_JUG_PET)
+        if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
-            if (static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_WYVERN)
+            if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
             {
                 target.animation = PSkill->getPetAnimationID();
             }
@@ -760,7 +760,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         battleutils::DirtyExp(PTarget, this);
     }
     PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PETTYPE_AVATAR)))
+    if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
     {
         battleutils::ClaimMob(PTarget, this);
     }

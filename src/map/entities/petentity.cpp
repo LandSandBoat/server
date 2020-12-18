@@ -37,7 +37,7 @@
 #include "../utils/petutils.h"
 #include "petentity.h"
 
-CPetEntity::CPetEntity(PETTYPE petType)
+CPetEntity::CPetEntity(PET_TYPE petType)
 {
     objtype          = TYPE_PET;
     m_PetType        = petType;
@@ -50,42 +50,42 @@ CPetEntity::CPetEntity(PETTYPE petType)
 
 CPetEntity::~CPetEntity() = default;
 
-PETTYPE CPetEntity::getPetType()
+PET_TYPE CPetEntity::getPetType()
 {
     return m_PetType;
 }
 
 bool CPetEntity::isBstPet()
 {
-    return getPetType() == PETTYPE_JUG_PET || objtype == TYPE_MOB;
+    return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
 
 std::string CPetEntity::GetScriptName()
 {
     switch (getPetType())
     {
-        case PETTYPE_AVATAR:
+        case PET_TYPE::AVATAR:
             return "avatar";
             break;
-        case PETTYPE_WYVERN:
+        case PET_TYPE::WYVERN:
             return "wyvern";
             break;
-        case PETTYPE_JUG_PET:
+        case PET_TYPE::JUG_PET:
             return "jug";
             break;
-        case PETTYPE_CHARMED_MOB:
+        case PET_TYPE::CHARMED_MOB:
             return "charmed";
             break;
-        case PETTYPE_AUTOMATON:
+        case PET_TYPE::AUTOMATON:
             return "automaton";
             break;
-        case PETTYPE_ADVENTURING_FELLOW:
+        case PET_TYPE::ADVENTURING_FELLOW:
             return "fellow";
             break;
-        case PETTYPE_CHOCOBO:
+        case PET_TYPE::CHOCOBO:
             return "chocobo";
             break;
-        case PETTYPE_LUOPAN:
+        case PET_TYPE::LUOPAN:
             return "luopan";
             break;
         default:

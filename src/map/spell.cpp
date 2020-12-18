@@ -608,7 +608,7 @@ namespace spell
             uint8 JobSLVL      = spell->getJob(PCaster->GetSJob());
             uint8 requirements = spell->getRequirements();
 
-            if (PCaster->objtype == TYPE_MOB || (PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() == PETTYPE_AUTOMATON) ||
+            if (PCaster->objtype == TYPE_MOB || (PCaster->objtype == TYPE_PET && static_cast<CPetEntity*>(PCaster)->getPetType() == PET_TYPE::AUTOMATON) ||
                 PCaster->objtype == TYPE_TRUST)
             {
                 // cant cast cause im hidden or untargetable
