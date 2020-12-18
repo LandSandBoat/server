@@ -3274,9 +3274,9 @@ void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint8 ukn2 = data.ref<uint8>(0x0F);
     uint32 special = data.ref<uint32>(0x10);
 
-    if ((FISHACTION)action != FISHACTION_FINISH || PChar->animation == ANIMATION_FISHING_FISH)
+    if (static_cast<FISH_ACTION>(action) != FISH_ACTION::FINISH || PChar->animation == ANIMATION_FISHING_FISH)
     {
-        fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
+        fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
     }
 }
 
@@ -6509,7 +6509,7 @@ void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 action = data.ref<uint8>(0x0E);
     // uint8 ukn2 = data.ref<uint8>(0x0F);
     uint32 special = data.ref<uint32>(0x10);
-    fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
+    fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
 }
 
 /************************************************************************
