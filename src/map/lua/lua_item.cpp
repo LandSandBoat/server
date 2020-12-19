@@ -22,12 +22,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_item.h"
 
 #include "../../common/showmsg.h"
-#include "../utils/itemutils.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
-#include "../items/item_weapon.h"
 #include "../items/item_general.h"
-
+#include "../items/item_weapon.h"
+#include "../utils/itemutils.h"
 
 CLuaItem::CLuaItem(lua_State* L)
 {
@@ -196,12 +195,12 @@ inline int32 CLuaItem::addMod(lua_State* L)
 
     // Checks if this item is just a pointer created by GetItem()
     // All item-modifying functions in this file should check this!
-    if(itemutils::IsItemPointer(PItem))
+    if (itemutils::IsItemPointer(PItem))
     {
         return 0;
     }
 
-    Mod mod = static_cast<Mod>(lua_tointeger(L, 1));
+    Mod  mod   = static_cast<Mod>(lua_tointeger(L, 1));
     auto power = (int16)lua_tointeger(L, 2);
 
     PItem->addModifier(CModifier(mod, power));
@@ -216,7 +215,7 @@ inline int32 CLuaItem::delMod(lua_State* L)
 
     CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
 
-    Mod mod = static_cast<Mod>(lua_tointeger(L, 1));
+    Mod  mod   = static_cast<Mod>(lua_tointeger(L, 1));
     auto power = (int16)lua_tointeger(L, 2);
 
     PItem->addModifier(CModifier(mod, -power));
@@ -230,10 +229,10 @@ inline int32 CLuaItem::getAugment(lua_State* L)
 
     CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
 
-    auto slot = (uint8)lua_tointeger(L, 1);
-    uint16 augment = PItem->getAugment(slot);
-    uint16 augmentid = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
-    uint8 augmentVal = (uint8)unpackBitsBE((uint8*)(&augment), 11, 5);
+    auto   slot       = (uint8)lua_tointeger(L, 1);
+    uint16 augment    = PItem->getAugment(slot);
+    uint16 augmentid  = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
+    uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augment), 11, 5);
 
     lua_pushinteger(L, augmentid);
     lua_pushinteger(L, augmentVal);
@@ -245,12 +244,16 @@ inline int32 CLuaItem::getSkillType(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
-    auto PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
 
     if (PItem)
+    {
         lua_pushinteger(L, PItem->getSkillType());
+    }
     else
+    {
         lua_pushinteger(L, -1);
+    }
 
     return 1;
 }
@@ -259,12 +262,16 @@ inline int32 CLuaItem::getWeaponskillPoints(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
-    auto PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
+    auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
 
     if (PItem)
+    {
         lua_pushinteger(L, PItem->getCurrentUnlockPoints());
+    }
     else
+    {
         lua_pushinteger(L, 0);
+    }
 
     return 1;
 }
@@ -279,7 +286,7 @@ inline int32 CLuaItem::isTwoHanded(lua_State* L)
     }
     else
     {
-        ShowError(CL_RED"CLuaItem::isTwoHanded - not a valid Weapon.\n" CL_RESET);
+        ShowError(CL_RED "CLuaItem::isTwoHanded - not a valid Weapon.\n" CL_RESET);
         lua_pushboolean(L, 0);
     }
 
@@ -296,7 +303,7 @@ inline int32 CLuaItem::isHandToHand(lua_State* L)
     }
     else
     {
-        ShowError(CL_RED"CLuaItem::isHandToHand - not a valid Weapon.\n" CL_RESET);
+        ShowError(CL_RED "CLuaItem::isHandToHand - not a valid Weapon.\n" CL_RESET);
         lua_pushboolean(L, 0);
     }
 
@@ -313,7 +320,7 @@ inline int32 CLuaItem::isShield(lua_State* L)
     }
     else
     {
-        ShowError(CL_RED"CLuaItem::isShield - not a valid Armor.\n" CL_RESET);
+        ShowError(CL_RED "CLuaItem::isShield - not a valid Armor.\n" CL_RESET);
         lua_pushboolean(L, 0);
     }
 
@@ -339,7 +346,7 @@ inline int32 CLuaItem::getSignature(lua_State* L)
     return 1;
 }
 //==========================================================//
-
+// clang-format off
 const char CLuaItem::className[] = "CItem";
 
 Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
@@ -371,3 +378,4 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,getSignature),
     {nullptr,nullptr}
 };
+// clang-format on

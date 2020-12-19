@@ -21,38 +21,37 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "shop_items.h"
 #include "../entities/charentity.h"
 #include "../trade_container.h"
+#include "shop_items.h"
 
-
-CShopItemsPacket::CShopItemsPacket(CCharEntity * PChar)
+CShopItemsPacket::CShopItemsPacket(CCharEntity* PChar)
 {
-	this->type = 0x3C;
-	this->size = 0x04;
+    this->type = 0x3C;
+    this->size = 0x04;
 
-	uint8 ItemsCount = PChar->Container->getItemsCount();
+    uint8 ItemsCount = PChar->Container->getItemsCount();
 
     uint8 i = 0;
-	for (uint8 slotID = 0; slotID < ItemsCount; ++slotID)
-	{
+    for (uint8 slotID = 0; slotID < ItemsCount; ++slotID)
+    {
         if (i == 20)
         {
             PChar->pushPacket(new CBasicPacket(*this));
 
-            i = 0;
+            i          = 0;
             this->size = 0x04;
             memset(data + 4, 0, PACKET_SIZE - 8);
         }
-		this->size += 0x06;
+        this->size += 0x06;
 
-		ref<uint32>(i * 12 + 0x08) = PChar->Container->getQuantity(slotID);
-		ref<uint16>(i * 12 + 0x0C) = PChar->Container->getItemID(slotID);
-		ref<uint8>(i * 12 + 0x0E) = slotID;
-        ref<uint8>(i * 12 + 0x10) = PChar->Container->getGuildID(slotID);
+        ref<uint32>(i * 12 + 0x08) = PChar->Container->getQuantity(slotID);
+        ref<uint16>(i * 12 + 0x0C) = PChar->Container->getItemID(slotID);
+        ref<uint8>(i * 12 + 0x0E)  = slotID;
+        ref<uint8>(i * 12 + 0x10)  = PChar->Container->getGuildID(slotID);
         ref<uint16>(i * 12 + 0x12) = (PChar->Container->getGuildRank(slotID) + 1) * 100;
         i++;
-	}
+    }
 }

@@ -23,7 +23,7 @@
 #define _LUAABILITY_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CAbility;
 
@@ -32,8 +32,7 @@ class CLuaAbility
     CAbility* m_PLuaAbility;
 
 public:
-
-    static const char className[];
+    static const char                     className[];
     static Lunar<CLuaAbility>::Register_t methods[];
 
     CLuaAbility(lua_State*);

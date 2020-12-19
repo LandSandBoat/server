@@ -21,13 +21,13 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "char_job_extra.h"
 #include "../utils/puppetutils.h"
+#include "char_job_extra.h"
 
-#include "../entities/charentity.h"
 #include "../entities/automatonentity.h"
+#include "../entities/charentity.h"
 #include "../merit.h"
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
@@ -38,9 +38,13 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
     JOBTYPE job = JOB_NON;
 
     if (mjob)
+    {
         job = PChar->GetMJob();
+    }
     else
+    {
         job = PChar->GetSJob();
+    }
 
     ref<uint8>(0x04) = job;
     if (!mjob)
@@ -50,7 +54,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 
     if (job == JOB_BLU)
     {
-        memcpy(data+(0x08), &PChar->m_SetBlueSpells, 20);
+        memcpy(data + (0x08), &PChar->m_SetBlueSpells, 20);
     }
     else if (job == JOB_PUP && PChar->PAutomaton != nullptr)
     {
@@ -72,7 +76,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint32>(0x18) = PChar->m_unlockedAttachments.heads;
         ref<uint32>(0x1C) = PChar->m_unlockedAttachments.frames;
 
-        //unlocked attachments: bit # = itemID (second itemID, 8000+ one) & 0x1F (0-31), or itemID & 0xFF - (32*element)
+        // unlocked attachments: bit # = itemID (second itemID, 8000+ one) & 0x1F (0-31), or itemID & 0xFF - (32*element)
         ref<uint32>(0x38) = PChar->m_unlockedAttachments.attachments[0];
         ref<uint32>(0x3C) = PChar->m_unlockedAttachments.attachments[1];
         ref<uint32>(0x40) = PChar->m_unlockedAttachments.attachments[2];
@@ -82,7 +86,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint32>(0x50) = PChar->m_unlockedAttachments.attachments[6];
         ref<uint32>(0x54) = PChar->m_unlockedAttachments.attachments[7];
 
-        memcpy(data+(0x58),PChar->PAutomaton->GetName(),PChar->PAutomaton->name.size());
+        memcpy(data + (0x58), PChar->PAutomaton->GetName(), PChar->PAutomaton->name.size());
 
         ref<uint16>(0x68) = PChar->PAutomaton->health.hp == 0 ? PChar->PAutomaton->GetMaxHP() : PChar->PAutomaton->health.hp;
         ref<uint16>(0x6A) = PChar->PAutomaton->GetMaxHP();
@@ -90,19 +94,19 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x6E) = PChar->PAutomaton->GetMaxMP();
 
         // TODO: this is a lot of calculations that could be avoided if these were properly initialized in the Automaton when first loading your character
-        int32 meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
-        uint16 ameCap = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MELEE);
-        uint16 ameBonus = PChar->getMod(Mod::AUTO_MELEE_SKILL) + meritbonus;
+        int32  meritbonus = PChar->PMeritPoints->GetMeritValue(MERIT_AUTOMATON_SKILLS, PChar);
+        uint16 ameCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MELEE);
+        uint16 ameBonus   = PChar->getMod(Mod::AUTO_MELEE_SKILL) + meritbonus;
         ref<uint16>(0x70) = std::min(ameCap, PChar->GetSkill(SKILL_AUTOMATON_MELEE)) + ameBonus;
         ref<uint16>(0x72) = ameCap + ameBonus;
 
-        uint16 araCap = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED);
-        uint16 araBonus = PChar->getMod(Mod::AUTO_RANGED_SKILL) + meritbonus;
+        uint16 araCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_RANGED);
+        uint16 araBonus   = PChar->getMod(Mod::AUTO_RANGED_SKILL) + meritbonus;
         ref<uint16>(0x74) = std::min(araCap, PChar->GetSkill(SKILL_AUTOMATON_RANGED)) + araBonus;
         ref<uint16>(0x76) = araCap + araBonus;
 
-        uint16 amaCap = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC);
-        uint16 amaBonus = PChar->getMod(Mod::AUTO_MAGIC_SKILL) + meritbonus;
+        uint16 amaCap     = puppetutils::getSkillCap(PChar, SKILL_AUTOMATON_MAGIC);
+        uint16 amaBonus   = PChar->getMod(Mod::AUTO_MAGIC_SKILL) + meritbonus;
         ref<uint16>(0x78) = std::min(amaCap, PChar->GetSkill(SKILL_AUTOMATON_MAGIC)) + amaBonus;
         ref<uint16>(0x7A) = amaCap + amaBonus;
 
@@ -121,7 +125,6 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x98) = PChar->PAutomaton->stats.CHR;
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
-        ref<uint8>(0x9C) = 0; //extra elemental capacity from gifts
+        ref<uint8>(0x9C) = 0; // extra elemental capacity from gifts
     }
-
 }

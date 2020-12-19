@@ -10,8 +10,11 @@ require("scripts/globals/keyitems")
 
 function onTrade(player, npc, trade)
     if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME) == QUEST_ACCEPTED) then
-        if ((trade:hasItemQty(2796, 1) and trade:hasItemQty(582, 1) and trade:getItemCount() == 2) or (trade:hasItemQty(2796, 1) and trade:hasItemQty(3319, 1) and trade:getItemCount() == 2)
-         or (trade:hasItemQty(2796, 1) and trade:hasItemQty(3300, 12) and trade:getItemCount() == 13)) then
+        if
+            (trade:hasItemQty(2796, 1) and trade:hasItemQty(582, 1) and trade:getItemCount() == 2) or
+            (trade:hasItemQty(2796, 1) and trade:hasItemQty(3319, 1) and trade:getItemCount() == 2) or
+            (trade:hasItemQty(2796, 1) and trade:hasItemQty(3300, 12) and trade:getItemCount() == 13)
+        then
             player:startEvent(22)
         end
     end

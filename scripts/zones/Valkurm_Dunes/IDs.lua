@@ -18,6 +18,9 @@ zones[tpz.zone.VALKURM_DUNES] =
         KEYITEM_LOST                   = 6414,  -- Lost key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY        = 6424,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET          = 6439,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS            = 7021, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY        = 7022, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                   = 7023, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE                  = 7071,  -- Tallying conquest results...
         BEASTMEN_BANNER                = 7152,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET         = 7230,  -- You can't fish here.
@@ -28,18 +31,18 @@ zones[tpz.zone.VALKURM_DUNES] =
         SIGNPOST2                      = 7359,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands West: Selbina
         SIGNPOST1                      = 7360,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands Southwest: Selbina
         CONQUEST                       = 7370,  -- You've earned conquest points!
-        AN_EMPTY_LIGHT_SWIRLS          = 7748,  -- An empty light swirls about the cave, eating away at the surroundings...
-        MONSTERS_KILLED_ADVENTURERS    = 7824,  -- Long ago, monsters killed many adventurers and merchants just off the coast here. If you find any vestige of the victims and return it to the sea, perhaps it would appease the spirits of the dead.
-        DYNA_NPC_DEFAULT_MESSAGE       = 7850,  -- You hear a mysterious, floating voice: Bring forth the <item>...
-        YOU_CANNOT_ENTER_DYNAMIS       = 7862,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
-        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7864,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        PLAYER_OBTAINS_ITEM            = 8074,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM          = 8075,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM       = 8076,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP           = 8077,  -- You already possess that temporary item.
-        NO_COMBINATION                 = 8082,  -- You were unable to enter a combination.
-        REGIME_REGISTERED              = 10260, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 12314, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        AN_EMPTY_LIGHT_SWIRLS          = 7766,  -- An empty light swirls about the cave, eating away at the surroundings...
+        MONSTERS_KILLED_ADVENTURERS    = 7842,  -- Long ago, monsters killed many adventurers and merchants just off the coast here. If you find any vestige of the victims and return it to the sea, perhaps it would appease the spirits of the dead.
+        DYNA_NPC_DEFAULT_MESSAGE       = 7868,  -- You hear a mysterious, floating voice: Bring forth the <item>...
+        YOU_CANNOT_ENTER_DYNAMIS       = 7880,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7882,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        PLAYER_OBTAINS_ITEM            = 8092,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM          = 8093,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM       = 8094,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP           = 8095,  -- You already possess that temporary item.
+        NO_COMBINATION                 = 8100,  -- You were unable to enter a combination.
+        REGIME_REGISTERED              = 10278, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL          = 12332, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -64,9 +67,9 @@ zones[tpz.zone.VALKURM_DUNES] =
     },
     npc =
     {
-        CASKET_BASE   = 17199672,
-        SUNSAND_QM    = 17199699,
-        OVERSEER_BASE = 17199709,
+        CASKET_BASE   = 17199671,
+        SUNSAND_QM    = 17199698, -- qm1 in npc_list
+        OVERSEER_BASE = 17199708, -- Quanteilleron_RK in npc_list
     },
 }
 

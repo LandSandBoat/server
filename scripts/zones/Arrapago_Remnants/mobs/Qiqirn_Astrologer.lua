@@ -11,7 +11,7 @@ require("scripts/globals/msg")
 -----------------------------------
 
 function onMobSpawn(mob)
-   mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
 function onMobDisengage(mob)

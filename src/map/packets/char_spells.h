@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CCharSpellsPacket : public CBasicPacket
 {
 public:
-
-	CCharSpellsPacket(CCharEntity* PChar);
+    CCharSpellsPacket(CCharEntity* PChar);
 };
 
 #endif

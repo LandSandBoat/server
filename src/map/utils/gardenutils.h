@@ -34,10 +34,10 @@ struct GardenResult_t
 {
     GardenResult_t();
     GardenResult_t(uint16 ItemID, uint8 MinQuantity, uint8 MaxQuantity, uint8 Weight);
-    uint16 ItemID = 0;
-    uint8 MinQuantity = 0;
-    uint8 MaxQuantity = 0;
-    uint8 Weight = 0;
+    uint16 ItemID      = 0;
+    uint8  MinQuantity = 0;
+    uint8  MaxQuantity = 0;
+    uint8  Weight      = 0;
 };
 
 typedef std::vector<GardenResult_t> GardenResultList_t;
@@ -46,10 +46,10 @@ namespace gardenutils
 {
     void Initialize();
 
-    void UpdateGardening(CCharEntity* PChar, bool sendPacket);
+    void                      UpdateGardening(CCharEntity* PChar, bool sendPacket);
     std::tuple<uint16, uint8> CalculateResults(CCharEntity* PChar, CItemFlowerpot* PItem);
-    void GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed = false);
-    uint8 GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
-}
+    void                      GrowToNextStage(CItemFlowerpot* PItem, bool growFromFeed = false);
+    uint8                     GetStageDuration(CItemFlowerpot* PItem, bool growFromFeed = false);
+} // namespace gardenutils
 
 #endif // _GARDENUTILS_H

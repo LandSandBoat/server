@@ -10714,7 +10714,7 @@ INSERT INTO `item_equipment` VALUES (21719,'ajja_axe',99,119,2098561,81,0,0,3,0)
 INSERT INTO `item_equipment` VALUES (21720,'eletta_axe',99,119,2098561,591,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21721,'kaja_axe',99,119,2098561,850,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21722,'dolichenus',99,119,2098561,850,0,0,3,0);
-INSERT INTO `item_equipment` VALUES (21725,'demons_axe',99,119,256,76,0,0,3,0); -- TODO: capture model from retail (using Bronze Axe model)
+INSERT INTO `item_equipment` VALUES (21725,'malefic_axe',99,119,256,76,0,0,3,0); -- TODO: capture model from retail (using Bronze Axe model)
 INSERT INTO `item_equipment` VALUES (21741,'demonic_axe',1,0,4194303,793,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21742,'aern_axe',1,0,4194303,827,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21744,'gramks_axe',1,0,4194303,830,0,0,3,0);
@@ -11009,6 +11009,7 @@ INSERT INTO `item_equipment` VALUES (22295,'hauksbok_bullet',99,119,66560,0,0,0,
 INSERT INTO `item_equipment` VALUES (22296,'voluspa_tathlum',99,0,2569522,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (22297,'aurgelmir_orb',99,0,2473971,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (22298,'aurgelmir_orb_+1',99,0,2473971,0,0,0,8,0);
+INSERT INTO `item_equipment` VALUES (22299,'per._lucky_egg',99,0,4194303,0,0,0,8,0);
 INSERT INTO `item_equipment` VALUES (23040,'pummelers_mask_+2',99,119,1,64,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (23041,'anch._crown_+2',99,119,2,66,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (23042,'theophany_cap_+2',99,119,4,68,0,0,16,0);

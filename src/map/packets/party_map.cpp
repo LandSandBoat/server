@@ -25,19 +25,18 @@
 
 #include "../entities/charentity.h"
 
-
 CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
 {
-	this->type = 0xA0;
-	this->size = 0x0C;
+    this->type = 0xA0;
+    this->size = 0x0C;
 
-	TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
 
-	ref<uint32>(0x04) = PChar->id;
-	ref<uint16>(0x08) = PChar->getZone();
-	ref<uint16>(0x0A) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->getZone();
+    ref<uint16>(0x0A) = PChar->targid;
 
-	ref<float>(0x0C) = PChar->loc.p.x;
-	ref<float>(0x10) = PChar->loc.p.y;
-	ref<float>(0x14) = PChar->loc.p.z;
+    ref<float>(0x0C) = PChar->loc.p.x;
+    ref<float>(0x10) = PChar->loc.p.y;
+    ref<float>(0x14) = PChar->loc.p.z;
 }

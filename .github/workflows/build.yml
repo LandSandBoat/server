@@ -63,7 +63,7 @@ jobs:
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib/libmariadb.lib'
+          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib/libmariadb.lib'
       - name: Build
         shell: cmd
         run: |
@@ -81,7 +81,7 @@ jobs:
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/lib64/libmariadb64.lib'
+          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib64/libmariadb64.lib'
       - name: Build
         shell: cmd
         run: |
@@ -99,7 +99,7 @@ jobs:
         sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
     - name: Lua Checks
       run: |
-        sh travis_lua.sh
+        sh tools/ci_lua.sh
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |
@@ -116,8 +116,6 @@ jobs:
         else
             echo "Problem with formatting!"
             echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo "Windows and Linux installation instructions for these tools are available here:"
-            echo "https://github.com/project-topaz/topaz/wiki/Developer-Workflow"
             echo "" 
             echo "$diff" 
 

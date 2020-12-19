@@ -22,6 +22,9 @@ zones[tpz.zone.NORTH_GUSTABERG] =
         ITEMS_OBTAINED                = 6578,  -- You obtain <number> <item>!
         NOTHING_OUT_OF_ORDINARY       = 6583,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET         = 6598,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS           = 7180, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7181, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                  = 7182, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET        = 7230,  -- You can't fish here.
         DIG_THROW_AWAY                = 7243,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7245,  -- You dig and you dig, but find nothing.
@@ -29,15 +32,15 @@ zones[tpz.zone.NORTH_GUSTABERG] =
         SHINING_OBJECT_SLIPS_AWAY     = 7438,  -- The shining object slips through your fingers and is washed further down the stream.
         REACH_WATER_FROM_HERE         = 7445,  -- You can reach the water from here.
         CONQUEST                      = 7481,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA             = 7833,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7839,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 8064,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8065,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8066,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8067,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8072,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10393, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12466, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEMS_ITEMS_LA_LA             = 7851,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7857,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 8082,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8083,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8084,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8085,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8090,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10411, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12484, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -73,8 +76,8 @@ zones[tpz.zone.NORTH_GUSTABERG] =
     },
     npc =
     {
-        CASKET_BASE   = 17212023,
-        OVERSEER_BASE = 17212060,
+        CASKET_BASE   = 17212022,
+        OVERSEER_BASE = 17212059, -- Ennigreaud_RK in npc_list
     },
 }
 

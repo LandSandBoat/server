@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _MOB_CONTROLLER_H
 #define _MOB_CONTROLLER_H
 
-#include "controller.h"
 #include "../../entities/mobentity.h"
+#include "controller.h"
 
 class CMobController : public CController
 {
@@ -37,44 +37,46 @@ public:
     virtual void Reset() override;
 
     virtual bool MobSkill(uint16 targid, uint16 wsid);
-    virtual bool Ability(uint16 targid, uint16 abilityid) override { return false; }
+    virtual bool Ability(uint16 targid, uint16 abilityid) override
+    {
+        return false;
+    }
     bool MobSkill(int list = 0);
     bool TryCastSpell();
     bool TrySpecialSkill();
 
-    bool CanAggroTarget(CBattleEntity*);
-    void TapDeaggroTime();
-    void TapDeclaimTime();
+    bool         CanAggroTarget(CBattleEntity*);
+    void         TapDeaggroTime();
+    void         TapDeclaimTime();
     virtual bool Cast(uint16 targid, SpellID spellid) override;
 
 protected:
     virtual bool TryDeaggro();
 
-
     virtual void TryLink();
-    bool CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
-    bool CanPursueTarget(CBattleEntity* PTarget);
-    bool CheckHide(CBattleEntity* PTarget);
-    bool CheckDetection(CBattleEntity* PTarget);
-    bool CanSeePoint(position_t pos);
+    bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
+    bool         CanPursueTarget(CBattleEntity* PTarget);
+    bool         CheckHide(CBattleEntity* PTarget);
+    bool         CheckDetection(CBattleEntity* PTarget);
+    bool         CanSeePoint(position_t pos);
     virtual bool CanCastSpells();
-    void CastSpell(SpellID spellid);
+    void         CastSpell(SpellID spellid);
     virtual void Move();
 
     virtual void DoCombatTick(time_point tick);
-    void FaceTarget(uint16 targid = 0);
+    void         FaceTarget(uint16 targid = 0);
     virtual void HandleEnmity();
 
     virtual void DoRoamTick(time_point tick);
-    void Wait(duration _duration);
-    void FollowRoamPath();
-    bool CanMoveForward(float currentDistance);
-    bool IsSpecialSkillReady(float currentDistance);
-    bool IsSpellReady(float currentDistance);
+    void         Wait(duration _duration);
+    void         FollowRoamPath();
+    bool         CanMoveForward(float currentDistance);
+    bool         IsSpecialSkillReady(float currentDistance);
+    bool         IsSpellReady(float currentDistance);
 
-    CBattleEntity* PTarget {nullptr};
+    CBattleEntity* PTarget{ nullptr };
+
 private:
-
     CMobEntity* const PMob;
 
     time_point m_LastActionTime;
@@ -86,8 +88,8 @@ private:
     time_point m_NeutralTime;
     time_point m_WaitTime;
 
-    bool m_firstSpell{ true };
-    time_point m_LastRoamScript {time_point::min()};
+    bool       m_firstSpell{ true };
+    time_point m_LastRoamScript{ time_point::min() };
 };
 
 #endif // _AI_CONTROLLER_H

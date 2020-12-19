@@ -22,22 +22,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../common/showmsg.h"
 #include "../../common/timer.h"
 
-#include "lua_battlefield.h"
-#include "lua_baseentity.h"
 #include "../battlefield.h"
 #include "../entities/charentity.h"
+#include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
-#include "../status_effect_container.h"
-
+#include "lua_baseentity.h"
+#include "lua_battlefield.h"
 
 /************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Constructor															*
+ *																		*
+ ************************************************************************/
 
-CLuaBattlefield::CLuaBattlefield(lua_State *L)
+CLuaBattlefield::CLuaBattlefield(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -51,10 +50,10 @@ CLuaBattlefield::CLuaBattlefield(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Constructor															*
+ *																		*
+ ************************************************************************/
 
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 {
@@ -62,10 +61,10 @@ CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 }
 
 /************************************************************************
-*                                                                       *
-*						Get methods								        *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *						Get methods								        *
+ *                                                                       *
+ ************************************************************************/
 
 inline int32 CLuaBattlefield::getID(lua_State* L)
 {
@@ -113,7 +112,8 @@ inline int32 CLuaBattlefield::getFightTick(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
 
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetFightTime() - m_PLuaBattlefield->GetStartTime()).count());
+    lua_pushinteger(
+        L, (lua_Integer)std::chrono::duration_cast<std::chrono::seconds>(m_PLuaBattlefield->GetFightTime() - m_PLuaBattlefield->GetStartTime()).count());
     return 1;
 }
 
@@ -142,8 +142,7 @@ inline int32 CLuaBattlefield::getPlayers(lua_State* L)
     lua_createtable(L, (int)m_PLuaBattlefield->m_EnteredPlayers.size(), 0);
     int i = 1;
 
-    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
-    {
+    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
             lua_getglobal(L, CLuaBaseEntity::className);
@@ -164,19 +163,18 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
 
     // do we want just required mobs, all mobs, or just mobs not needed to win
     auto required = lua_isnil(L, 1) ? true : lua_toboolean(L, 1);
-    auto adds = lua_isnil(L, 2) ? false : lua_toboolean(L, 2);
+    auto adds     = lua_isnil(L, 2) ? false : lua_toboolean(L, 2);
 
     auto size = required ? m_PLuaBattlefield->m_RequiredEnemyList.size() : 0;
-    size = size + (adds ? m_PLuaBattlefield->m_AdditionalEnemyList.size() : 0);
+    size      = size + (adds ? m_PLuaBattlefield->m_AdditionalEnemyList.size() : 0);
 
     lua_createtable(L, (int)size, 0);
 
     auto i = 1;
 
-    if (required && m_PLuaBattlefield->m_RequiredEnemyList.size() > 0)
+    if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob)
-        {
+        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
             lua_getglobal(L, CLuaBaseEntity::className);
             lua_pushstring(L, "new");
             lua_gettable(L, -2);
@@ -188,10 +186,9 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
         });
     }
 
-    if (adds && m_PLuaBattlefield->m_AdditionalEnemyList.size() > 0)
+    if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob)
-        {
+        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
             lua_getglobal(L, CLuaBaseEntity::className);
             lua_pushstring(L, "new");
             lua_gettable(L, -2);
@@ -199,9 +196,7 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
             lua_pushlightuserdata(L, (void*)PMob);
             lua_pcall(L, 2, 1, 0);
 
-
             lua_rawseti(L, -2, i++);
-
         });
     }
     return 1;
@@ -214,8 +209,7 @@ inline int32 CLuaBattlefield::getNPCs(lua_State* L)
     lua_createtable(L, (int)m_PLuaBattlefield->m_NpcList.size(), 0);
     int i = 1;
 
-    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc)
-    {
+    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
         lua_getglobal(L, CLuaBaseEntity::className);
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
@@ -236,8 +230,7 @@ inline int32 CLuaBattlefield::getAllies(lua_State* L)
     lua_gettop(L);
     int i = 1;
 
-    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly)
-    {
+    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
         lua_getglobal(L, CLuaBaseEntity::className);
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
@@ -245,7 +238,9 @@ inline int32 CLuaBattlefield::getAllies(lua_State* L)
         lua_pushlightuserdata(L, PAlly);
 
         if (lua_pcall(L, 2, 1, 0))
+        {
             return;
+        }
 
         lua_rawseti(L, -2, i++);
     });
@@ -346,9 +341,9 @@ inline int32 CLuaBattlefield::setRecord(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    auto name = lua_tostring(L, 1);
-    auto time = lua_tointeger(L, 2);
-    auto partySize = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? m_PLuaBattlefield->GetPlayerCount() : lua_tointeger(L, 1);
+    const auto* name      = lua_tostring(L, 1);
+    auto        time      = lua_tointeger(L, 2);
+    auto        partySize = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? m_PLuaBattlefield->GetPlayerCount() : lua_tointeger(L, 1);
     m_PLuaBattlefield->SetRecord((char*)name, std::chrono::seconds(time), partySize);
     return 0;
 }
@@ -384,19 +379,22 @@ inline int32 CLuaBattlefield::insertEntity(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
 
-    auto PLuaEntity = !lua_isnumber(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1) : nullptr;
-    auto PEntity = PLuaEntity ? PLuaEntity->GetBaseEntity() : nullptr;
+    auto* PLuaEntity = !lua_isnumber(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1) : nullptr;
+    auto* PEntity    = PLuaEntity ? PLuaEntity->GetBaseEntity() : nullptr;
 
-    auto targid = PEntity ? PEntity->targid : lua_tointeger(L, 1);
-    bool ally = !lua_isnil(L, 2) ? lua_toboolean(L, 2) : false;
-    bool inBattlefield = !lua_isnil(L, 3) ? lua_toboolean(L, 3) : false;
-    BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(!lua_isnil(L, 4) ? lua_tointeger(L, 4) : 0);
+    auto                    targid        = PEntity ? PEntity->targid : lua_tointeger(L, 1);
+    bool                    ally          = !lua_isnil(L, 2) ? lua_toboolean(L, 2) : false;
+    bool                    inBattlefield = !lua_isnil(L, 3) ? lua_toboolean(L, 3) : false;
+    BATTLEFIELDMOBCONDITION conditions    = static_cast<BATTLEFIELDMOBCONDITION>(!lua_isnil(L, 4) ? lua_tointeger(L, 4) : 0);
 
     // entity type
     ENTITYTYPE filter = static_cast<ENTITYTYPE>(0x1F);
 
     if (!PEntity)
-        PEntity = ally ? mobutils::InstantiateAlly((uint32)targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity((uint16)targid, filter);
+    {
+        PEntity =
+            ally ? mobutils::InstantiateAlly((uint32)targid, m_PLuaBattlefield->GetZoneID()) : m_PLuaBattlefield->GetZone()->GetEntity((uint16)targid, filter);
+    }
 
     if (PEntity)
     {
@@ -444,11 +442,11 @@ inline int32 CLuaBattlefield::lose(lua_State* L)
 }
 
 /************************************************************************
-*																		*
-*  declare lua function													*
-*																		*
-************************************************************************/
-
+ *																		*
+ *  declare lua function													*
+ *																		*
+ ************************************************************************/
+// clang-format off
 const char CLuaBattlefield::className[] = "CBattlefield";
 Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
 {
@@ -483,3 +481,4 @@ Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBattlefield,lose),
     { nullptr,nullptr }
 };
+// clang-format on

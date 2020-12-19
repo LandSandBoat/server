@@ -1053,6 +1053,7 @@ tpz.title =
     ETERNAL_COMMUNER                          = 1128,
     DESTINY_DESTROYER_DESTROYER               = 1129,
     FULLY_BAKED_HERO                          = 1130,
+    GHDWK_VSHDNHU                             = 1131,
 }
 
 -----------------------------------

@@ -5,8 +5,12 @@
 -----------------------------------
 
 function onEffectGain(target, effect)
-    if (target:getPet()) then
+    if target:getPet() then
         target:getPet():addStatusEffect(effect)
+    end
+
+    if target:getObjType() == tpz.objType.PC then
+        target:clearTrusts()
     end
 end
 

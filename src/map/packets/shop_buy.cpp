@@ -23,12 +23,11 @@
 
 #include "shop_buy.h"
 
-
 CShopBuyPacket::CShopBuyPacket(uint8 slotID, uint32 quantity)
 {
-	this->type = 0x3F;
-	this->size = 0x06;
+    this->type = 0x3F;
+    this->size = 0x06;
 
-	ref<uint8>(0x04) = slotID;
-	ref<uint32>(0x08) = quantity;
+    ref<uint8>(0x04)  = slotID;
+    ref<uint32>(0x08) = quantity;
 }

@@ -242,6 +242,14 @@ function getCureAsNukeFinal(caster, spell, power, divisor, constant, basepower)
     return getCureFinal(caster, spell, power, divisor, constant, basepower)
 end
 
+function isValidHealTarget(caster, target)
+    return target:getAllegiance() == caster:getAllegiance() and
+            (target:getObjType() == tpz.objType.PC or
+            target:getObjType() == tpz.objType.MOB or
+            target:getObjType() == tpz.objType.TRUST or
+            target:getObjType() == tpz.objType.FELLOW)
+end
+
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
 -----------------------------------

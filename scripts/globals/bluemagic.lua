@@ -7,6 +7,7 @@ TPMOD_CRITICAL = 1
 TPMOD_DAMAGE = 2
 TPMOD_ACC = 3
 TPMOD_ATTACK = 4
+TPMOD_DURATION = 5
 
 -- The SC the spell makes
 SC_IMPACTION = 0
@@ -230,8 +231,9 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
+    local attackType = params.attackType or tpz.attackType.NONE
     local damageType = params.damageType or tpz.damageType.NONE
-    target:takeSpellDamage(caster, spell, dmg, tpz.attackType.PHYSICAL, damageType)
+    target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
     -- TP has already been dealt with.

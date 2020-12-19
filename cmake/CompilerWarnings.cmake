@@ -3,11 +3,26 @@
 # https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md
 
 function(set_project_warnings project_name)
-  option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" TRUE)
-
   set(MSVC_WARNINGS
       /W4 # Baseline reasonable warnings
-      /w14242 # 'identifier': conversion from 'type1' to 'type1', possible loss of data
+
+      # TODO: Remove all of these disables
+      # /wd Disable
+      /wd4100 # unreferenced formal parameter
+      /wd4127 # conditional expression is constant
+      /wd4201 # nonstandard extension used: nameless struct/union
+      /wd4242 # 'identifier': conversion from 'type1' to 'type1', possible loss of data
+      /wd4244 # 'argument': conversion from 'const type1' to 'type2', possible loss of data
+      /wd4245 # 'argument': conversion from 'const type1' to 'type2', singed/unsigned mismatch
+      /wd4456 # declaration of 'var' hides local declaration
+      /wd4457 # declaration of 'var' hides function parameter
+      /wd4458 # declaration of 'var' hides class member
+      /wd4459 # declaration of 'var' hides global declaration
+      /wd4701 # potentially uninitialized local variable used
+      /wd4702 # unreachable code
+      /wd4703 # potentially uninitialized local pointer variable used
+
+      # /w1 Promote to level 1
       /w14254 # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
       /w14263 # 'function': member function does not override any base class virtual member function
       /w14265 # 'classname': class has virtual functions, but destructor is not virtual instances of this class may not
@@ -29,9 +44,6 @@ function(set_project_warnings project_name)
       /w14906 # string literal cast to 'LPWSTR'
       /w14928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
       /permissive- # standards conformance mode for MSVC compiler.
-
-      # TODO:
-      /w4100 # unreferenced formal parameter
   )
 
   set(CLANG_WARNINGS
@@ -41,7 +53,7 @@ function(set_project_warnings project_name)
       -Wnon-virtual-dtor # warn the user if a class with virtual functions has a non-virtual destructor. This helps
                          # catch hard to track down memory errors
       # TODO: -Wold-style-cast # warn for c-style casts
-      -Wcast-align # warn for potential performance problem casts
+      # TODO: -Wcast-align # warn for potential performance problem casts
       # TODO: -Wunused # warn on anything being unused
       -Woverloaded-virtual # warn if you overload (not override) a virtual function
       # TODO: -Wpedantic # warn if non-standard C++ is used
@@ -51,19 +63,12 @@ function(set_project_warnings project_name)
       # TODO: -Wdouble-promotion # warn if float is implicit promoted to double
       -Wformat=2 # warn on security issues around functions that format output (ie printf)
 
-      # TODO: Remove this
+      # TODO: Remove these
       -Wno-format-nonliteral
-      # TODO: Remove this
       -Wno-unused-parameter
-      # TODO: Remove this
       -Wno-error=sizeof-pointer-memaccess
       -Wno-sizeof-pointer-memaccess
   )
-
-  if(WARNINGS_AS_ERRORS)
-    set(CLANG_WARNINGS ${CLANG_WARNINGS} -Werror)
-    set(MSVC_WARNINGS ${MSVC_WARNINGS} /WX)
-  endif()
 
   set(GCC_WARNINGS
       ${CLANG_WARNINGS}
@@ -73,14 +78,14 @@ function(set_project_warnings project_name)
       -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
       # TODO: -Wuseless-cast # warn if you perform a cast to the same type
       
-      # TODO: Remove this
+      # TODO: Remove these
       -Wno-implicit-fallthrough
       -Wno-non-virtual-dtor
       -Wno-overloaded-virtual
       -Wno-type-limits
       -Wno-extra
-      -Wno-class-memaccess
       -Wno-restrict
+      -Wno-duplicated-branches
   )
 
   if(MSVC)
@@ -93,6 +98,24 @@ function(set_project_warnings project_name)
     message(AUTHOR_WARNING "No compiler warnings set for '${CMAKE_CXX_COMPILER_ID}' compiler.")
   endif()
 
-  target_compile_options(${project_name} INTERFACE ${PROJECT_WARNINGS})
+  option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" TRUE)
+  if(WARNINGS_AS_ERRORS)
+    if(UNIX)
+      set(ERRORS "-Werror")
+    elseif(WIN32)
+      set(ERRORS "/WX")
+    endif()
+  endif()
 
-endfunction()
+  target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
+endfunction() #set_project_warnings
+
+function(set_no_warnings project_name)
+  if(WARNINGS_AS_ERRORS)
+    if(UNIX)
+      target_compile_options(${project_name} INTERFACE "-w")
+    elseif(WIN32)
+      #target_compile_options(${project_name} INTERFACE "/w")
+    endif()
+  endif()
+endfunction() # set_no_warnings

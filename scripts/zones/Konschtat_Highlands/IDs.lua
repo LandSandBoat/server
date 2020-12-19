@@ -17,6 +17,9 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
         KEYITEM_OBTAINED             = 6391,  -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY      = 6402,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET        = 6417,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS          = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY      = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                 = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE                = 7049,  -- Tallying conquest results...
         ALREADY_OBTAINED_TELE        = 7208,  -- You already possess the gate crystal for this telepoint.
         DIG_THROW_AWAY               = 7225,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
@@ -26,14 +29,14 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
         SIGNPOST_DIALOG_1            = 7385,  -- North: Valkurm Dunes South: To Gustaberg
         SIGNPOST_DIALOG_2            = 7386,  -- You see something stuck behind the signpost.
         SOMETHING_BURIED_HERE        = 7387,  -- Something has been buried here.
-        TELEPOINT_HAS_BEEN_SHATTERED = 7476,  -- The telepoint has been shattered into a thousand pieces...
-        PLAYER_OBTAINS_ITEM          = 7594,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM        = 7595,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM     = 7596,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP         = 7597,  -- You already possess that temporary item.
-        NO_COMBINATION               = 7602,  -- You were unable to enter a combination.
-        REGIME_REGISTERED            = 9780,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL        = 11906, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TELEPOINT_HAS_BEEN_SHATTERED = 7494,  -- The telepoint has been shattered into a thousand pieces...
+        PLAYER_OBTAINS_ITEM          = 7612,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM        = 7613,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM     = 7614,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP         = 7615,  -- You already possess that temporary item.
+        NO_COMBINATION               = 7620,  -- You were unable to enter a combination.
+        REGIME_REGISTERED            = 9798,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL        = 11924, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -61,7 +64,7 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
     },
     npc =
     {
-        CASKET_BASE = 17220111,
+        CASKET_BASE = 17220110,
     },
 }
 

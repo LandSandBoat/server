@@ -52,6 +52,7 @@ function onSpellCast(caster, target, spell)
         dmg = target:getHP()
     end
 
+    params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.DARK
     dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
     caster:addHP(dmg)

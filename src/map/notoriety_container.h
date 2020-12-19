@@ -36,15 +36,15 @@ public:
     std::set<CBattleEntity*>::iterator begin();
     std::set<CBattleEntity*>::iterator end();
 
-    void add(CBattleEntity* entity);
-    void remove(CBattleEntity* entity);
+    void        add(CBattleEntity* entity);
+    void        remove(CBattleEntity* entity);
     std::size_t size();
 
     bool hasEnmity();
 
 private:
     using BattleEntitySet = std::set<CBattleEntity*>;
-    CBattleEntity* m_POwner;
+    CBattleEntity*  m_POwner;
     BattleEntitySet m_Lookup;
 };
 

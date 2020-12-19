@@ -22,11 +22,12 @@
 #ifndef _CTRANSPORT_H
 #define _CTRANSPORT_H
 
-#include <vector>
 #include "../common/cbasetypes.h"
 #include "entities/npcentity.h"
+#include <vector>
 
-enum TRANSPORTSTATE {
+enum TRANSPORTSTATE
+{
     STATE_TRANSPORT_INIT = 0,
     STATE_TRANSPORT_ARRIVING,
     STATE_TRANSPORT_DOCKED,
@@ -34,7 +35,8 @@ enum TRANSPORTSTATE {
     STATE_TRANSPORT_AWAY
 };
 
-enum TRANSPORTZONESTATE {
+enum TRANSPORTZONESTATE
+{
     STATE_TRANSPORTZONE_INIT = 0,
     STATE_TRANSPORTZONE_VOYAGE,
     STATE_TRANSPORTZONE_EVICT,
@@ -42,8 +44,9 @@ enum TRANSPORTZONESTATE {
     STATE_TRANSPORTZONE_DOCKED
 };
 
-enum ELEVATORSTATE {
-    STATE_ELEVATOR_BOTTOM =0,
+enum ELEVATORSTATE
+{
+    STATE_ELEVATOR_BOTTOM = 0,
     STATE_ELEVATOR_TOP,
     STATE_ELEVATOR_ASCEND,
     STATE_ELEVATOR_DESCEND
@@ -60,18 +63,18 @@ struct Transport_Time
 
 struct Transport_Ship : Transport_Time
 {
-    uint8  animationArrive;
-    uint8  animationDepart;
-    uint8  state;
+    uint8 animationArrive;
+    uint8 animationDepart;
+    uint8 state;
 
     CBaseEntity* npc;
     location_t   dock;
 
-    void setVisible(bool);
-    void animateSetup(uint8, uint32);
-    void spawn();
-    //void Despawn();
-    void setName(uint32);
+    void setVisible(bool) const;
+    void animateSetup(uint8, uint32) const;
+    void spawn() const;
+    // void Despawn();
+    void setName(uint32) const;
 };
 
 struct TransportZone_Town
@@ -80,16 +83,16 @@ struct TransportZone_Town
 
     CBaseEntity* npcDoor;
 
-    void updateShip();
-    void openDoor(bool);
-    void closeDoor(bool);
-    void depart();
+    void updateShip() const;
+    void openDoor(bool) const;
+    void closeDoor(bool) const;
+    void depart() const;
 };
 
 struct TransportZone_Voyage : Transport_Time
 {
     CZone* voyageZone;
-    uint8 state;
+    uint8  state;
 };
 
 struct Elevator_t
@@ -103,18 +106,17 @@ struct Elevator_t
     uint16 interval;
     uint16 movetime;
 
-    CNpcEntity * Elevator;
-    CNpcEntity * LowerDoor;
-    CNpcEntity * UpperDoor;
+    CNpcEntity* Elevator;
+    CNpcEntity* LowerDoor;
+    CNpcEntity* UpperDoor;
 
     bool activated;
     bool isPermanent;
     bool animationsReversed;
 
-    void closeDoor(CNpcEntity*);
-    void openDoor(CNpcEntity*);
+    void closeDoor(CNpcEntity*) const;
+    void openDoor(CNpcEntity*) const;
 };
-
 
 class CTransportHandler
 {
@@ -129,16 +131,15 @@ public:
     void InitializeTransport();
 
 private:
-
     static std::unique_ptr<CTransportHandler> _instance;
 
     CTransportHandler() = default;
 
-    void startElevator(Elevator_t *);
-    void arriveElevator(Elevator_t *);
+    void startElevator(Elevator_t*);
+    void arriveElevator(Elevator_t*);
 
-    std::vector<Elevator_t> ElevatorList;
-    std::vector<TransportZone_Town> townZoneList;
+    std::vector<Elevator_t>           ElevatorList;
+    std::vector<TransportZone_Town>   townZoneList;
     std::vector<TransportZone_Voyage> voyageZoneList;
 };
 

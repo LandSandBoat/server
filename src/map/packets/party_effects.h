@@ -27,23 +27,22 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBattleEntity;
 
 class CPartyEffectsPacket : public CBasicPacket
 {
 public:
-
     CPartyEffectsPacket();
     void AddMemberEffects(CBattleEntity* PMember);
     void AddMemberEffects(uint32 id);
 
 private:
-    int members {0};
+    int members{ 0 };
 };
 
 #endif

@@ -22,7 +22,7 @@
 #include "../../common/socket.h"
 #include "../../common/utils.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "entity_update.h"
 
@@ -30,6 +30,7 @@
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../entities/petentity.h"
+#include "../entities/trustentity.h"
 #include "../status_effect_container.h"
 
 CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
@@ -39,14 +40,14 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
     ref<uint32>(0x04) = PEntity->id;
     ref<uint16>(0x08) = PEntity->targid;
-    ref<uint8>(0x0A) = updatemask;
+    ref<uint8>(0x0A)  = updatemask;
 
     switch (type)
     {
         case ENTITY_DESPAWN:
         {
             ref<uint8>(0x0A) = 0x20;
-            updatemask = UPDATE_ALL_MOB;
+            updatemask       = UPDATE_ALL_MOB;
         }
         break;
         case ENTITY_SPAWN:
@@ -58,14 +59,16 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             }
             if (PEntity->objtype == TYPE_TRUST)
             {
-              //  ref<uint8>(0x28) = 0x45;
+                //  ref<uint8>(0x28) = 0x45;
             }
             if (PEntity->look.size == MODEL_EQUIPED || PEntity->look.size == MODEL_CHOCOBO)
             {
                 updatemask = 0x57;
             }
             if (PEntity->animationsub != 0)
+            {
                 ref<uint8>(0x2A) = 4;
+            }
             ref<uint8>(0x0A) = updatemask;
         }
         break;
@@ -75,21 +78,26 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         }
     }
 
-    if (updatemask & UPDATE_POS) {
-        ref<uint8>(0x0B) = PEntity->loc.p.rotation;
-        ref<float>(0x0C) = PEntity->loc.p.x;
-        ref<float>(0x10) = PEntity->loc.p.y;
-        ref<float>(0x14) = PEntity->loc.p.z;
+    if (updatemask & UPDATE_POS)
+    {
+        ref<uint8>(0x0B)  = PEntity->loc.p.rotation;
+        ref<float>(0x0C)  = PEntity->loc.p.x;
+        ref<float>(0x10)  = PEntity->loc.p.y;
+        ref<float>(0x14)  = PEntity->loc.p.z;
         ref<uint16>(0x18) = PEntity->loc.p.moving;
         ref<uint16>(0x1A) = PEntity->m_TargID << 1;
-        ref<uint8>(0x1C) = PEntity->speed;
-        ref<uint8>(0x1D) = PEntity->speedsub;
+        ref<uint8>(0x1C)  = PEntity->speed;
+        ref<uint8>(0x1D)  = PEntity->speedsub;
     }
 
-    if (PEntity->allegiance == ALLEGIANCE_PLAYER && PEntity->status == STATUS_MOB)
-        ref<uint8>(0x20) = STATUS_NORMAL;
+    if (PEntity->allegiance == ALLEGIANCE_TYPE::PLAYER && PEntity->status == STATUS_TYPE::MOB)
+    {
+        ref<uint8>(0x20) = static_cast<uint8>(STATUS_TYPE::NORMAL);
+    }
     else
-        ref<uint8>(0x20) = PEntity->status;
+    {
+        ref<uint8>(0x20) = static_cast<uint8>(PEntity->status);
+    }
 
     switch (PEntity->objtype)
     {
@@ -101,9 +109,9 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
-                ref<uint8>(0x27) = ((CNpcEntity*)PEntity)->name_prefix;     // gender and something else
-                ref<uint8>(0x29) = PEntity->allegiance;
-                ref<uint8>(0x2B) = PEntity->namevis;
+                ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
+                ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
+                ref<uint8>(0x2B)  = PEntity->namevis;
             }
         }
         break;
@@ -112,19 +120,6 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case TYPE_TRUST:
         {
             CMobEntity* PMob = (CMobEntity*)PEntity;
-
-            //if(PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC &&
-            //	PMob->PBattleAI->GetCurrentAction() == ACTION_FALL)
-            //{
-            //    ref<uint8>(data,(0x21)) = 0x99;
-            //    //ref<uint8> (data,(0x27)) = 0x28;
-            //    ref<uint8>(data,(0x1E)) = 0x00; //0% HP
-            //    ref<uint8>(data,(0x1F)) = ANIMATION_DEATH; //death anim
-            //    ref<uint8>(data,(0x20)) = STATUS_NORMAL;
-            //	  ref<uint8>(data,(0x29)) = PEntity->allegiance;
-            //	  ref<uint8>(data,(0x2B)) = PEntity->namevis;
-            //}
-            //else
             {
                 if (updatemask & UPDATE_HP)
                 {
@@ -132,13 +127,15 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                     ref<uint8>(0x1F) = PEntity->animation;
                     ref<uint8>(0x2A) |= PEntity->animationsub;
                     ref<uint32>(0x21) = PMob->m_flags;
-                    ref<uint8>(0x25) = PMob->health.hp > 0 ? 0x08 : 0;
-                    ref<uint8>(0x27) = PMob->m_name_prefix;
+                    ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
+                    ref<uint8>(0x27)  = PMob->m_name_prefix;
                     if (PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
+                    {
                         ref<uint8>(0x27) |= 0x08;
+                    }
                     ref<uint8>(0x28) |= (PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00);
                     ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
-                    ref<uint8>(0x29) = PEntity->allegiance;
+                    ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                     ref<uint8>(0x2B) = PEntity->namevis;
                 }
                 if (updatemask & UPDATE_STATUS)
@@ -148,12 +145,16 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             }
             if (updatemask & UPDATE_NAME)
             {
-                //depending on size of name, this can be 0x20, 0x22, or 0x24
+                // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->size = 0x24;
                 if (PMob->packetName.empty())
+                {
                     memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+                }
                 else
+                {
                     memcpy(data + (0x34), PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
+                }
             }
         }
         break;
@@ -166,11 +167,11 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     // TODO: Read from the trust model itself
     if (PEntity->objtype == TYPE_TRUST)
     {
-        ref<uint32>(0x21) = 0x21b;
-        ref<uint8>(0x2B) = 0x06;
-        ref<uint8>(0x2A) = 0x08;
-        ref<uint8>(0x25) = 0x0f;
-        ref<uint8>(0x27) = 0x28;
+        // ref<uint32>(0x21) = 0x21b;
+        // ref<uint8>(0x2B) = 0x06;
+        // ref<uint8>(0x2A) = 0x08;
+        // ref<uint8>(0x25) = 0x0f;
+        // ref<uint8>(0x27) = 0x28;
         ref<uint8>(0x28) = 0x45;
     }
 

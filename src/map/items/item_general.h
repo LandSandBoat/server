@@ -29,12 +29,10 @@
 class CItemGeneral : public CItem
 {
 public:
-
-	CItemGeneral(uint16);
-	virtual ~CItemGeneral();
+    CItemGeneral(uint16);
+    virtual ~CItemGeneral();
 
 private:
-
 };
 
 #endif

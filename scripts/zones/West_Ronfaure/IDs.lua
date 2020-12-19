@@ -16,6 +16,9 @@ zones[tpz.zone.WEST_RONFAURE] =
         KEYITEM_OBTAINED         = 6413,  -- Obtained key item: <keyitem>.
         KEYITEM_LOST             = 6414,  -- Lost key item: <keyitem>.
         FELLOW_MESSAGE_OFFSET    = 6439,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7021, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7022, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7023, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE            = 7071,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7230,  -- You can't fish here.
         DIG_THROW_AWAY           = 7243,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
@@ -33,13 +36,13 @@ zones[tpz.zone.WEST_RONFAURE] =
         ZOVRIACE_DIALOG          = 7382,  -- Let me be! I return to Southgate with word on La Theine.
         DISMAYED_CUSTOMER        = 7408,  -- You find some worthless scraps of paper.
         CONQUEST                 = 7530,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM      = 8048,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8049,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8050,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8051,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8056,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10421, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12422, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 8066,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8067,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8068,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8069,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8074,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 10439, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 12440, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -63,9 +66,9 @@ zones[tpz.zone.WEST_RONFAURE] =
     },
     npc =
     {
-        CASKET_BASE     = 17187467,
-        SIGNPOST_OFFSET = 17187505,
-        OVERSEER_BASE   = 17187525,
+        CASKET_BASE     = 17187466,
+        SIGNPOST_OFFSET = 17187504,
+        OVERSEER_BASE   = 17187524, -- Doladepaiton_RK in npc_list
     },
 }
 

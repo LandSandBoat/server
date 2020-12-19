@@ -43,6 +43,9 @@ zones[tpz.zone.PORT_WINDURST] =
         KEYITEM_OBTAINED                = 10974, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                    = 10975, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL             = 10976, -- You do not have enough gil.
+        CARRIED_OVER_POINTS             = 11010, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY         = 11011, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER                    = 11012, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         HOMEPOINT_SET                   = 11062, -- Home point set!
         YOU_ACCEPT_THE_MISSION          = 11155, -- You have accepted the mission.
         KHEL_PAHLHAMA_SHOP_DIALOG       = 11201, -- These magic shells are full of mysteries...
@@ -67,8 +70,8 @@ zones[tpz.zone.PORT_WINDURST] =
         ALIZABE_OPEN_DIALOG             = 12879, -- Don't tell anybody, but I've managed to get my hands on some items from Tavnazia! Take a look!
         ALIZABE_CLOSED_DIALOG           = 12880, -- Pssst! Have you heard of Tavnazia? Boy, do they have some sweet items on those islands...
         ALIZABE_COP_NOT_COMPLETED       = 12881, -- It won't be long before I set up shop right here in this very place. And once I start, there won't be no stoppin' me!
-        RETRIEVE_DIALOG_ID              = 15889, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL           = 16291, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RETRIEVE_DIALOG_ID              = 15890, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL           = 16292, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

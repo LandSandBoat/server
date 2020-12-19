@@ -12,9 +12,10 @@ require("scripts/globals/equipment")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
+-----------------------------------
 
-body_list = {12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595}
-legs_list = {12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851}
+local body_list = {12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595}
+local legs_list = {12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851}
 
 function onTrade(player, npc, trade)
     local BrygidReturns = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
@@ -30,13 +31,13 @@ function onTrade(player, npc, trade)
     elseif (BrygidReturns == QUEST_ACCEPTED and wantsSubligar ~= 0) then
         if (wantsSubligar==13) then
             if (trade:getItemCount() == 1 and trade:hasItemQty(15375+wantsSubligar, 1)) then
-            player:tradeComplete()
-            player:startEvent(383)
+                player:tradeComplete()
+                player:startEvent(383)
             end
         else
             if (trade:getItemCount() == 1 and trade:hasItemQty(15374+wantsSubligar, 1)) then
-            player:tradeComplete()
-            player:startEvent(383)
+                player:tradeComplete()
+                player:startEvent(383)
             end
         end
     end
@@ -60,9 +61,17 @@ function onTrigger(player, npc)
 
     if (BrygidTheStylist == QUEST_ACCEPTED and BrygidSet == 1) then
         player:startEvent(311)
-    elseif ((BrygidReturns ~= QUEST_ACCEPTED and BrygidTheStylist == QUEST_COMPLETED) and
-           (isArtifactArmor(head) or isArtifactArmor(body) or isArtifactArmor(hands)
-            or isArtifactArmor(legs) or isArtifactArmor(feet))) then
+    elseif
+        BrygidReturns ~= QUEST_ACCEPTED and
+        BrygidTheStylist == QUEST_COMPLETED and
+        (
+            isArtifactArmor(head) or
+            isArtifactArmor(body) or
+            isArtifactArmor(hands) or
+            isArtifactArmor(legs) or
+            isArtifactArmor(feet)
+        )
+    then
             -- Randomize and store sets here
             repeat
                 getBody = body_list[math.random(1, 20)]
@@ -83,9 +92,9 @@ function onTrigger(player, npc)
     elseif (BrygidReturns == QUEST_ACCEPTED and wantsSubligar ~= 0) then
         -- Remind player what subligar they need to turn in and the reward
         if (wantsSubligar==13) then
-        player:startEvent(385, 0, 14400+wantsSubligar, 15375+wantsSubligar)
+            player:startEvent(385, 0, 14400+wantsSubligar, 15375+wantsSubligar)
         else
-        player:startEvent(385, 0, 14400+wantsSubligar, 15374+wantsSubligar)
+            player:startEvent(385, 0, 14400+wantsSubligar, 15374+wantsSubligar)
         end
     elseif (BrygidTheStylist ~= QUEST_COMPLETED) then
         player:startEvent(310)
@@ -99,8 +108,12 @@ function onEventUpdate(player, csid, option)
     if (csid == 382) then
         local canEquip = 0
         local hasBody = 0
-        if (player:canEquipItem(14400+option, true)) then    canEquip = 1; end
-        if not(player:hasItem(14400+option)) then hasBody = 1; end
+        if player:canEquipItem(14400+option, true) then
+            canEquip = 1
+        end
+        if not player:hasItem(14400+option) then
+            hasBody = 1
+        end
         player:updateEvent(0, option-1, hasBody, canEquip)
     end
 end

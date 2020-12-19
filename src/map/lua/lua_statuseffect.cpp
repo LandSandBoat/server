@@ -22,8 +22,8 @@
 #include "../../common/showmsg.h"
 #include "../../common/timer.h"
 
-#include "lua_statuseffect.h"
 #include "../status_effect.h"
+#include "lua_statuseffect.h"
 
 //======================================================//
 
@@ -109,15 +109,16 @@ inline int32 CLuaStatusEffect::getStartTime(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
 
-    lua_pushinteger(L, (lua_Integer)std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaStatusEffect->GetStartTime() - get_server_start_time()).count());
+    lua_pushinteger(L,
+                    (lua_Integer)std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaStatusEffect->GetStartTime() - get_server_start_time()).count());
     return 1;
 }
 
 /************************************************************************
-*                                                                       *
-* Returns remaining ticks until expiry                                  *
-*																		*
-************************************************************************/
+ *                                                                       *
+ * Returns remaining ticks until expiry                                  *
+ *																		*
+ ************************************************************************/
 
 inline int32 CLuaStatusEffect::getLastTick(lua_State* L)
 {
@@ -127,20 +128,19 @@ inline int32 CLuaStatusEffect::getLastTick(lua_State* L)
 
     if (m_PLuaStatusEffect->GetTickTime() != 0)
     {
-        auto total_ticks = m_PLuaStatusEffect->GetDuration() / m_PLuaStatusEffect->GetTickTime();
+        auto total_ticks   = m_PLuaStatusEffect->GetDuration() / m_PLuaStatusEffect->GetTickTime();
         auto elapsed_ticks = m_PLuaStatusEffect->GetElapsedTickCount();
-        total = total_ticks - elapsed_ticks;
+        total              = total_ticks - elapsed_ticks;
     }
     lua_pushinteger(L, (lua_Integer)total);
     return 1;
 }
 
-
 /************************************************************************
-*                                                                       *
-*  Return how long is left until the effect expires (miliseconds)       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Return how long is left until the effect expires (miliseconds)       *
+ *                                                                       *
+ ************************************************************************/
 
 inline int32 CLuaStatusEffect::getTimeRemaining(lua_State* L)
 {
@@ -149,7 +149,8 @@ inline int32 CLuaStatusEffect::getTimeRemaining(lua_State* L)
     if (m_PLuaStatusEffect->GetDuration() > 0)
     {
         remaining = (uint32)std::max((m_PLuaStatusEffect->GetDuration() -
-            std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - m_PLuaStatusEffect->GetStartTime()).count()), std::chrono::seconds::rep{});
+                                      std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - m_PLuaStatusEffect->GetStartTime()).count()),
+                                     std::chrono::seconds::rep{});
     }
 
     lua_pushinteger(L, remaining);
@@ -157,10 +158,10 @@ inline int32 CLuaStatusEffect::getTimeRemaining(lua_State* L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Returns number of elapsed ticks                                      *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Returns number of elapsed ticks                                      *
+ *                                                                       *
+ ************************************************************************/
 
 inline int32 CLuaStatusEffect::getTickCount(lua_State* L)
 {
@@ -245,10 +246,10 @@ inline int32 CLuaStatusEffect::setTick(lua_State* L)
 }
 
 /************************************************************************
-*                                                                       *
-*  Перезапускаем эффект                                                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Перезапускаем эффект                                                 *
+ *                                                                       *
+ ************************************************************************/
 
 inline int32 CLuaStatusEffect::resetStartTime(lua_State* L)
 {
@@ -263,7 +264,6 @@ inline int32 CLuaStatusEffect::setStartTime(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
 
     m_PLuaStatusEffect->SetStartTime(get_server_start_time() + std::chrono::milliseconds(lua_tointeger(L, 1)));
     return 0;
@@ -313,7 +313,7 @@ inline int32 CLuaStatusEffect::unsetFlag(lua_State* L)
 }
 
 //======================================================//
-
+// clang-format off
 const char CLuaStatusEffect::className[] = "CLuaStatusEffect";
 
 Lunar<CLuaStatusEffect>::Register_t CLuaStatusEffect::methods[] =
@@ -343,3 +343,4 @@ Lunar<CLuaStatusEffect>::Register_t CLuaStatusEffect::methods[] =
     LUNAR_DECLARE_METHOD(CLuaStatusEffect,unsetFlag),
     {nullptr,nullptr}
 };
+// clang-format on

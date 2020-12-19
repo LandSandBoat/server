@@ -22,14 +22,13 @@
 #include "lua_ability.h"
 #include "../ability.h"
 
-
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
-CLuaAbility::CLuaAbility(lua_State *L)
+CLuaAbility::CLuaAbility(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -43,24 +42,23 @@ CLuaAbility::CLuaAbility(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
 CLuaAbility::CLuaAbility(CAbility* PAbility)
 {
     m_PLuaAbility = PAbility;
 }
 
-inline int32 CLuaAbility::getID(lua_State *L)
+inline int32 CLuaAbility::getID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
 
     lua_pushinteger(L, m_PLuaAbility->getID());
     return 1;
 }
-
 
 int32 CLuaAbility::getMsg(lua_State* L)
 {
@@ -102,7 +100,7 @@ int32 CLuaAbility::getAnimation(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaAbility::setMsg(lua_State *L)
+inline int32 CLuaAbility::setMsg(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -111,7 +109,7 @@ inline int32 CLuaAbility::setMsg(lua_State *L)
     return 0;
 }
 
-inline int32 CLuaAbility::setAnimation(lua_State *L)
+inline int32 CLuaAbility::setAnimation(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -147,7 +145,7 @@ inline int32 CLuaAbility::setVE(lua_State* L)
     return 0;
 }
 
-inline int32 CLuaAbility::setRange(lua_State *L)
+inline int32 CLuaAbility::setRange(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -157,11 +155,11 @@ inline int32 CLuaAbility::setRange(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
-
+ *																		*
+ *  Инициализация методов в lua											*
+ *																		*
+ ************************************************************************/
+// clang-format off
 const char CLuaAbility::className[] = "CAbility";
 
 Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
@@ -180,3 +178,4 @@ Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
     LUNAR_DECLARE_METHOD(CLuaAbility,setRange),
     {nullptr,nullptr}
 };
+// clang-format on

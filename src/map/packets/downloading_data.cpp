@@ -23,6 +23,6 @@
 
 CDownloadingDataPacket::CDownloadingDataPacket()
 {
-	this->type = 0x4F;
-	this->size = 0x04;
+    this->type = 0x4F;
+    this->size = 0x04;
 }

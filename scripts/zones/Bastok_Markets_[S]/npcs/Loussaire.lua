@@ -29,8 +29,17 @@ function onTrigger(player, npc)
     if (player:getCharVar("AF_SCH_COMPLETE") == 0) then
 
         -- They have a piece in progress.
-        if ((loafersQuestProgress == 1 or pantsQuestProgress == 1 or gownQuestProgress == 1 or
-             loafersQuestProgress == 2 or pantsQuestProgress == 2 or gownQuestProgress == 2) and AFProgress > 0) then
+        if
+            AFProgress > 0 and
+            (
+                loafersQuestProgress == 1 or
+                pantsQuestProgress == 1 or
+                gownQuestProgress == 1 or
+                loafersQuestProgress == 2 or
+                pantsQuestProgress == 2 or
+                gownQuestProgress == 2
+            )
+        then
 
             local itemid   = 14580 -- Scholar's Gown
             local FristKI  = tpz.ki.PEISTE_DUNG
@@ -52,7 +61,7 @@ function onTrigger(player, npc)
         -- Nothing in progress and meet the starting requirements.
         elseif (downwardHelix == QUEST_COMPLETED and mJob == tpz.job.SCH and mLvl >= AF2_QUEST_LEVEL) then
 
-             -- If a player has completed any of the paths, it will be a different cutscene.
+            -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0
             if (loafersQuestProgress == 4) then
                 counter = counter + 1

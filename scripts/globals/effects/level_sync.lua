@@ -6,6 +6,10 @@
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
+
+    if target:getObjType() == tpz.objType.PC then
+        target:clearTrusts()
+    end
 end
 
 function onEffectTick(target, effect)

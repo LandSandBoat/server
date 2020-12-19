@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Altar Room 
+-- Area: Altar Room
 -- NPC: Stone Lid
 -- !pos -316.4390, 24.7654, 12.1590
 -----------------------------------
@@ -35,9 +35,16 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 48 then
-        local mobs = {ID.mob.YAGUDO_AVATAR, ID.mob.DUU_MASA_THE_ONECUT, ID.mob.FEE_JUGE_THE_RAMFIST,
-                      ID.mob.GOO_PAKE_THE_BLOODHOUND, ID.mob.KEE_TAW_THE_NIGHTINGALE, ID.mob.LAA_YAKU_THE_AUSTERE,
-                      ID.mob.POO_YOZO_THE_BABBLER}
+        local mobs =
+        {
+            ID.mob.YAGUDO_AVATAR,
+            ID.mob.DUU_MASA_THE_ONECUT,
+            ID.mob.FEE_JUGE_THE_RAMFIST,
+            ID.mob.GOO_PAKE_THE_BLOODHOUND,
+            ID.mob.KEE_TAW_THE_NIGHTINGALE,
+            ID.mob.LAA_YAKU_THE_AUSTERE,
+            ID.mob.POO_YOZO_THE_BABBLER,
+        }
         if npcUtil.popFromQM(player, npc, mobs, {
             hide = 1
         }) then

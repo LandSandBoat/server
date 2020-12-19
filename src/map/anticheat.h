@@ -79,6 +79,6 @@ namespace anticheat
     // returns true on success, false on failure
     bool ReportCheatIncident(CCharEntity* PChar, CheatID cheatid, uint32 cheatarg = 0, const char* description = NULL);
 
-};
+}; // namespace anticheat
 
 #endif

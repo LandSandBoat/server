@@ -396,12 +396,12 @@ INSERT INTO `mob_pets` VALUES (16797891, 1, 15);
 INSERT INTO `mob_pets` VALUES (16797917, 1, 15);
 INSERT INTO `mob_pets` VALUES (16797925, 1, 15);
 INSERT INTO `mob_pets` VALUES (16797959, 1, 15);
-INSERT INTO `mob_pets` VALUES (16809985, 3, 15);
-INSERT INTO `mob_pets` VALUES (16809990, 3, 15);
-INSERT INTO `mob_pets` VALUES (16809995, 3, 15);
-INSERT INTO `mob_pets` VALUES (16810084, 3, 15);
-INSERT INTO `mob_pets` VALUES (16810090, 3, 15);
-INSERT INTO `mob_pets` VALUES (16810096, 3, 15);
+INSERT INTO `mob_pets` VALUES (16809985, 3, 14); -- Shikaree_Z: Head Wind
+INSERT INTO `mob_pets` VALUES (16809990, 3, 14); -- Shikaree_Z: Head Wind
+INSERT INTO `mob_pets` VALUES (16809995, 3, 14); -- Shikaree_Z: Head Wind
+INSERT INTO `mob_pets` VALUES (16810084, 3, 14); -- Shikaree_Z: Requiem of Sin
+INSERT INTO `mob_pets` VALUES (16810090, 3, 14); -- Shikaree_Z: Requiem of Sin
+INSERT INTO `mob_pets` VALUES (16810096, 3, 14); -- Shikaree_Z: Requiem of Sin
 INSERT INTO `mob_pets` VALUES (16814119, 1, 15);
 INSERT INTO `mob_pets` VALUES (16814122, 1, 15);
 INSERT INTO `mob_pets` VALUES (16814133, 1, 15);
@@ -429,9 +429,6 @@ INSERT INTO `mob_pets` VALUES (16998518, 1, 15);
 INSERT INTO `mob_pets` VALUES (16998742, 1, 15);
 INSERT INTO `mob_pets` VALUES (16998789, 1, 15);
 INSERT INTO `mob_pets` VALUES (16998816, 1, 15);
-INSERT INTO `mob_pets` VALUES (17056158, 1, 15);
-INSERT INTO `mob_pets` VALUES (17056168, 1, 15);
-INSERT INTO `mob_pets` VALUES (17056169, 1, 15);
 INSERT INTO `mob_pets` VALUES (17534996, 1, 15);
 INSERT INTO `mob_pets` VALUES (17535006, 1, 15);
 INSERT INTO `mob_pets` VALUES (17535010, 1, 15);
@@ -644,16 +641,10 @@ INSERT INTO `mob_pets` VALUES (17432851, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432857, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432861, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432868, 1, 15);
-INSERT INTO `mob_pets` VALUES (17432919, 1, 15);
-INSERT INTO `mob_pets` VALUES (17432928, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432936, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432961, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432965, 1, 15);
-INSERT INTO `mob_pets` VALUES (17432969, 1, 15);
 INSERT INTO `mob_pets` VALUES (17432985, 1, 15);
-INSERT INTO `mob_pets` VALUES (17432989, 1, 15);
-INSERT INTO `mob_pets` VALUES (17432991, 1, 15);
-INSERT INTO `mob_pets` VALUES (17433003, 1, 15);
 INSERT INTO `mob_pets` VALUES (17436745, 1, 15);
 INSERT INTO `mob_pets` VALUES (17436749, 1, 15);
 INSERT INTO `mob_pets` VALUES (17436837, 1, 15);
@@ -1257,7 +1248,7 @@ INSERT INTO `mob_pets` VALUES (17117400, 1, 9); -- Gigas_s_Tiger
 INSERT INTO `mob_pets` VALUES (17117415, 1, 9); -- Gigas_s_Tiger
 INSERT INTO `mob_pets` VALUES (17150191, 1, 9); -- Goblin_s_Crawler
 INSERT INTO `mob_pets` VALUES (17145878, 1, 9); -- Goblin_s_Dragonfly
-INSERT INTO `mob_pets` VALUES (17145919, 1, 9); -- Goblin_s_Dragonfly
+INSERT INTO `mob_pets` VALUES (17145918, 2, 9); -- Goblin_s_Dragonfly
 INSERT INTO `mob_pets` VALUES (17174530, 1, 15); -- Yagudo_s_Elemental
 INSERT INTO `mob_pets` VALUES (17174537, 1, 15); -- Yagudo_s_Elemental
 INSERT INTO `mob_pets` VALUES (17178740, 1, 9); -- Goblin_s_Beetle

@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*                                                                       *
-*  Отправляем PartyID, по которому осуществляется поиск                 *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Отправляем PartyID, по которому осуществляется поиск                 *
+ *                                                                       *
+ ************************************************************************/
 
 class CCharEntity;
 
 class CPartySearchPacket : public CBasicPacket
 {
 public:
-
-	CPartySearchPacket(CCharEntity* PChar);
+    CPartySearchPacket(CCharEntity* PChar);
 };
 
 #endif

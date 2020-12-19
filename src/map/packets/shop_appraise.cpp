@@ -23,12 +23,11 @@
 
 #include "shop_appraise.h"
 
-
 CShopAppraisePacket::CShopAppraisePacket(uint8 slotID, uint32 sellPrice)
 {
-	this->type = 0x3D;
-	this->size = 0x08;
+    this->type = 0x3D;
+    this->size = 0x08;
 
-	ref<uint32>(0x04) = sellPrice;
-	ref<uint8>(0x08) = slotID;
+    ref<uint32>(0x04) = sellPrice;
+    ref<uint8>(0x08)  = slotID;
 }

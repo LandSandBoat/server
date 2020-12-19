@@ -17,6 +17,9 @@ zones[tpz.zone.JUGNER_FOREST] =
         KEYITEM_OBTAINED         = 6413,  -- Obtained key item: <keyitem>.
         KEYITEM_LOST             = 6414,  -- Lost key item: <keyitem>.
         FELLOW_MESSAGE_OFFSET    = 6439,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS      = 7021, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7022, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7023, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE            = 7071,  -- Tallying conquest results...
         BEASTMEN_BANNER          = 7152,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET   = 7704,  -- You can't fish here.
@@ -24,13 +27,13 @@ zones[tpz.zone.JUGNER_FOREST] =
         FIND_NOTHING             = 7719,  -- You dig and you dig, but find nothing.
         LOGGING_IS_POSSIBLE_HERE = 7897,  -- Logging is possible here if you have <item>.
         CONQUEST                 = 8048,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM      = 8639,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8640,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8641,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8642,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8647,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10852, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 13081, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 8657,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8658,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8659,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8660,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8665,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 10870, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 13099, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -52,16 +55,16 @@ zones[tpz.zone.JUGNER_FOREST] =
     },
     npc =
     {
-        CASKET_BASE   = 17203786,
-        OVERSEER_BASE = 17203848,
+        CASKET_BASE   = 17203785,
+        OVERSEER_BASE = 17203847, -- Chaplion_RK in npc_list
         LOGGING =
         {
+            17203863,
             17203864,
             17203865,
             17203866,
             17203867,
             17203868,
-            17203869,
         },
     },
 }

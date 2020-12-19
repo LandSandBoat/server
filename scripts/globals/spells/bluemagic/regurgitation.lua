@@ -23,17 +23,18 @@ end
 
 function onSpellCast(caster, target, spell)
     local params = {}
-        params.damageType = tpz.damageType.WATER
-        params.multiplier = 1.83
-        params.tMultiplier = 2.0
-        params.duppercap = 69
-        params.str_wsc = 0.0
-        params.dex_wsc = 0.0
-        params.vit_wsc = 0.0
-        params.agi_wsc = 0.0
-        params.int_wsc = 0.0
-        params.mnd_wsc = 0.30
-        params.chr_wsc = 0.0
+    params.attackType = tpz.attackType.MAGICAL
+    params.damageType = tpz.damageType.WATER
+    params.multiplier = 1.83
+    params.tMultiplier = 2.0
+    params.duppercap = 69
+    params.str_wsc = 0.0
+    params.dex_wsc = 0.0
+    params.vit_wsc = 0.0
+    params.agi_wsc = 0.0
+    params.int_wsc = 0.0
+    params.mnd_wsc = 0.30
+    params.chr_wsc = 0.0
     damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     if (caster:isBehind(target, 15)) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)

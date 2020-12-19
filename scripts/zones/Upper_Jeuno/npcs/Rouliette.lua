@@ -21,8 +21,10 @@ end
 function onTrigger(player, npc)
     --Prerequisites for this quest : A_CANDLELIGHT_VIGIL ACCEPTED
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) ~= QUEST_COMPLETED and
-       player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED) then
+    if
+        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) ~= QUEST_COMPLETED and
+        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED
+    then
         player:startEvent(36)  -- Start Quest Candle-making
     else
         player:startEvent(30)  --Standard dialog

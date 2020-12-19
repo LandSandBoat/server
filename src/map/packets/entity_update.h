@@ -28,29 +28,28 @@
 
 enum MODELTYPE
 {
-	MODEL_STANDARD	= 0,
-	MODEL_EQUIPED	= 1,
-	MODEL_DOOR		= 2,
-	MODEL_ELEVATOR	= 3,
-	MODEL_SHIP		= 4,
-	MODEL_UNK_5		= 5,
-	MODEL_AUTOMATON	= 6,    // все куклы входят в эту категорию. но помимо них есть еще и некоторые монстры
-    MODEL_CHOCOBO   = 7
+    MODEL_STANDARD = 0,
+    MODEL_EQUIPED  = 1,
+    MODEL_DOOR     = 2,
+    MODEL_ELEVATOR = 3,
+    MODEL_SHIP     = 4,
+    MODEL_UNK_5    = 5,
+    MODEL_AUTOMATON = 6, // все куклы входят в эту категорию. но помимо них есть еще и некоторые монстры
+    MODEL_CHOCOBO = 7
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
-class CEntityUpdatePacket: public CBasicPacket
+class CEntityUpdatePacket : public CBasicPacket
 {
 public:
-
-	CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
+    CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
 };
 
 #endif

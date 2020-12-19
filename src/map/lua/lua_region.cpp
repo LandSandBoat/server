@@ -23,12 +23,12 @@
 #include "../region.h"
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
-CLuaRegion::CLuaRegion(lua_State *L)
+CLuaRegion::CLuaRegion(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -42,10 +42,10 @@ CLuaRegion::CLuaRegion(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
 CLuaRegion::CLuaRegion(CRegion* PRegion)
 {
@@ -55,12 +55,12 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::GetRegionID(lua_State *L)
+inline int32 CLuaRegion::GetRegionID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
 
@@ -69,12 +69,12 @@ inline int32 CLuaRegion::GetRegionID(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::GetCount(lua_State *L)
+inline int32 CLuaRegion::GetCount(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
 
@@ -83,12 +83,12 @@ inline int32 CLuaRegion::GetCount(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::AddCount(lua_State *L)
+inline int32 CLuaRegion::AddCount(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -98,12 +98,12 @@ inline int32 CLuaRegion::AddCount(lua_State *L)
 }
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaRegion::DelCount(lua_State *L)
+inline int32 CLuaRegion::DelCount(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -113,11 +113,11 @@ inline int32 CLuaRegion::DelCount(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
-
+ *																		*
+ *  Инициализация методов в lua											*
+ *																		*
+ ************************************************************************/
+// clang-format off
 const char CLuaRegion::className[] = "CRegion";
 
 Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
@@ -128,3 +128,4 @@ Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
     LUNAR_DECLARE_METHOD(CLuaRegion,DelCount),
     {nullptr,nullptr}
 };
+// clang-format on

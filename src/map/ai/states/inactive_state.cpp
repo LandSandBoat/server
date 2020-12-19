@@ -20,21 +20,24 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "inactive_state.h"
-#include "../ai_container.h"
 #include "../../entities/battleentity.h"
 #include "../../status_effect_container.h"
+#include "../ai_container.h"
 
-CInactiveState::CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState) :
-    CState(PEntity, 0),
-    m_duration(_duration),
-    m_canChangeState(canChangeState)
+CInactiveState::CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState)
+: CState(PEntity, 0)
+, m_duration(_duration)
+, m_canChangeState(canChangeState)
 {
-    if (!canChangeState) PEntity->PAI->InterruptStates();
+    if (!canChangeState)
+    {
+        PEntity->PAI->InterruptStates();
+    }
 }
 
 bool CInactiveState::Update(time_point tick)
 {
-    auto PBattleEntity {dynamic_cast<CBattleEntity*>(m_PEntity)};
+    auto* PBattleEntity{ dynamic_cast<CBattleEntity*>(m_PEntity) };
     if (PBattleEntity && m_duration == 0ms)
     {
         if (PBattleEntity->isDead())
@@ -48,13 +51,9 @@ bool CInactiveState::Update(time_point tick)
         }
     }
 
-    if (m_duration > 0ms && tick > GetEntryTime() + m_duration)
-    {
-        return true;
-    }
-
-    return false;
+    return m_duration > 0ms && tick > GetEntryTime() + m_duration;
 }
 
 void CInactiveState::Cleanup(time_point tick)
-{}
+{
+}

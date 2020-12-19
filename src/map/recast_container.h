@@ -26,30 +26,29 @@
 
 #include <vector>
 
-
 enum RECASTTYPE
 {
-    RECAST_ITEM     = 0,
-    RECAST_MAGIC    = 1,
-    RECAST_ABILITY  = 2,
-	RECAST_LOOT     = 3
+    RECAST_ITEM    = 0,
+    RECAST_MAGIC   = 1,
+    RECAST_ABILITY = 2,
+    RECAST_LOOT    = 3
 };
-#define MAX_RECASTTPE_SIZE   4
+#define MAX_RECASTTPE_SIZE 4
 
 struct Recast_t
 {
-    uint16     ID;
-    time_t     TimeStamp;
-    uint32     RecastTime;
-    uint32     chargeTime;
-    uint8      maxCharges;
+    uint16 ID;
+    time_t TimeStamp;
+    uint32 RecastTime;
+    uint32 chargeTime;
+    uint8  maxCharges;
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CBattleEntity;
 
@@ -57,34 +56,35 @@ typedef std::vector<Recast_t> RecastList_t;
 
 class CRecastContainer
 {
-    public:
-
+public:
     virtual void Check();
 
     virtual void Del(RECASTTYPE type);
     virtual void Del(RECASTTYPE type, uint16 id);
-	virtual void DeleteByIndex(RECASTTYPE type, uint8 index);
-    bool Has(RECASTTYPE type, uint16 id);
-    bool HasRecast(RECASTTYPE type, uint16 id, uint32 recast);
+    virtual void DeleteByIndex(RECASTTYPE type, uint8 index);
+    bool         Has(RECASTTYPE type, uint16 id);
+    bool         HasRecast(RECASTTYPE type, uint16 id, uint32 recast);
     virtual void Add(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
-    Recast_t* Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
+    Recast_t*    Load(RECASTTYPE type, uint16 id, uint32 duration, uint32 chargeTime = 0, uint8 maxCharges = 0);
     virtual void ResetAbilities();
-    virtual void ChangeJob() {}
+    virtual void ChangeJob()
+    {
+    }
 
     virtual RecastList_t* GetRecastList(RECASTTYPE type);
-    Recast_t*     GetRecast(RECASTTYPE type, uint16 id);
+    Recast_t*             GetRecast(RECASTTYPE type, uint16 id);
 
-	CRecastContainer(CBattleEntity* PChar);
-    virtual ~CRecastContainer(){}
+    CRecastContainer(CBattleEntity* PChar);
+    virtual ~CRecastContainer()
+    {
+    }
 
-    protected:
-
+protected:
     RecastList_t RecastMagicList;
     RecastList_t RecastAbilityList;
 
-    private:
-
-	CBattleEntity* m_PEntity;
+private:
+    CBattleEntity* m_PEntity;
 };
 
 #endif

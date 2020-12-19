@@ -23,9 +23,8 @@
 
 #include "menu_mog.h"
 
-
 CMenuMogPacket::CMenuMogPacket()
 {
-	this->type = 0x2E;
-	this->size = 0x02;
+    this->type = 0x2E;
+    this->size = 0x02;
 }

@@ -27,19 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
-
 
 class CCheckPacket : public CBasicPacket
 {
 public:
-
-	CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget);
+    CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget);
 };
 
 #endif

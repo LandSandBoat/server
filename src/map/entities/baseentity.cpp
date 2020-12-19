@@ -18,46 +18,48 @@
 
 ===========================================================================
 */
-#include <string.h>
+#include <cstring>
 
-#include "baseentity.h"
+#include "../ai/ai_container.h"
+#include "../battlefield.h"
+#include "../instance.h"
 #include "../map.h"
 #include "../zone.h"
-#include "../ai/ai_container.h"
-#include "../instance.h"
-#include "../battlefield.h"
+#include "baseentity.h"
 
 CBaseEntity::CBaseEntity()
 {
-    id = 0;
-    targid = 0;
-    objtype = ENTITYTYPE::TYPE_NONE;
-    status = STATUS_DISAPPEAR;
+    id       = 0;
+    targid   = 0;
+    objtype  = ENTITYTYPE::TYPE_NONE;
+    status   = STATUS_TYPE::DISAPPEAR;
     m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));
     memset(&loc, 0, sizeof(loc));
-    animation = ANIMATION_NONE;
+    animation    = ANIMATION_NONE;
     animationsub = 0;
-    speed = 50 + map_config.speed_mod;
-    speedsub = 50 + map_config.speed_mod;
-    namevis = 1;
-    allegiance = 0;
-    updatemask = 0;
-    PAI = nullptr;
+    speed        = 50 + map_config.speed_mod;
+    speedsub     = 50 + map_config.speed_mod;
+    namevis      = 1;
+    allegiance   = ALLEGIANCE_TYPE::MOB;
+    updatemask   = 0;
+    PAI          = nullptr;
     PBattlefield = nullptr;
-    PInstance = nullptr;
+    PInstance    = nullptr;
 }
 
 CBaseEntity::~CBaseEntity()
 {
     if (PBattlefield)
+    {
         PBattlefield->RemoveEntity(this, BATTLEFIELD_LEAVE_CODE_WARPDC);
+    }
 }
 
 void CBaseEntity::Spawn()
 {
-    status = allegiance == ALLEGIANCE_MOB ? STATUS_MOB : STATUS_NORMAL;
+    status = allegiance == ALLEGIANCE_TYPE::MOB ? STATUS_TYPE::MOB : STATUS_TYPE::NORMAL;
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
@@ -66,77 +68,83 @@ void CBaseEntity::Spawn()
 
 void CBaseEntity::FadeOut()
 {
-    status = STATUS_DISAPPEAR;
+    status = STATUS_TYPE::DISAPPEAR;
     updatemask |= UPDATE_HP;
 }
 
 const int8* CBaseEntity::GetName()
 {
-	return (const int8*)name.c_str();
+    return (const int8*)name.c_str();
 }
 
-uint16 CBaseEntity::getZone()
+uint16 CBaseEntity::getZone() const
 {
     return loc.zone != nullptr ? loc.zone->GetID() : loc.destination;
 }
 
-float CBaseEntity::GetXPos()
+float CBaseEntity::GetXPos() const
 {
-	return loc.p.x;
+    return loc.p.x;
 }
 
-float CBaseEntity::GetYPos()
+float CBaseEntity::GetYPos() const
 {
-	return loc.p.y;
+    return loc.p.y;
 }
 
-float CBaseEntity::GetZPos()
+float CBaseEntity::GetZPos() const
 {
-	return loc.p.z;
+    return loc.p.z;
 }
 
-uint8 CBaseEntity::GetRotPos()
+uint8 CBaseEntity::GetRotPos() const
 {
-	return loc.p.rotation;
+    return loc.p.rotation;
 }
 
 void CBaseEntity::HideName(bool hide)
 {
-	if(hide)
-	{
-		// I totally guessed this number
-		namevis |= FLAG_HIDE_NAME;
-	}
-	else
-	{
-		namevis &= ~FLAG_HIDE_NAME;
-	}
+    if (hide)
+    {
+        // I totally guessed this number
+        namevis |= FLAG_HIDE_NAME;
+    }
+    else
+    {
+        namevis &= ~FLAG_HIDE_NAME;
+    }
     updatemask |= UPDATE_HP;
 }
 
-bool CBaseEntity::IsNameHidden()
+bool CBaseEntity::IsNameHidden() const
 {
-	return namevis & FLAG_HIDE_NAME;
+    return namevis & FLAG_HIDE_NAME;
 }
 
-bool CBaseEntity::IsTargetable()
+bool CBaseEntity::IsTargetable() const
 {
     return (namevis & FLAG_UNTARGETABLE) == 0;
 }
 
 bool CBaseEntity::isWideScannable()
 {
-    return status != STATUS_DISAPPEAR && !IsNameHidden() && IsTargetable();
+    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && IsTargetable();
 }
 
-CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter)
+CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
 {
     if (targid == 0)
+    {
         return nullptr;
+    }
     else if (PInstance)
+    {
         return PInstance->GetEntity(targid, filter);
+    }
     else
+    {
         return loc.zone->GetEntity(targid, filter);
+    }
 }
 
 void CBaseEntity::ResetLocalVars()
@@ -159,7 +167,7 @@ void CBaseEntity::SetModelId(uint16 modelid)
     look.modelid = modelid;
 }
 
-uint16 CBaseEntity::GetModelId()
+uint16 CBaseEntity::GetModelId() const
 {
     return look.modelid;
 }

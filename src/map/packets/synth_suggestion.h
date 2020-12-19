@@ -27,16 +27,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CSynthSuggestionPacket : public CBasicPacket
 {
 public:
-
-	CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel);
+    CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel);
 };
 
 #endif

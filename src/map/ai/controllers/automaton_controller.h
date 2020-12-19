@@ -22,10 +22,10 @@
 #ifndef _AUTOMATONCONTROLLER_H
 #define _AUTOMATONCONTROLLER_H
 
-#include "pet_controller.h"
 #include "../../entities/automatonentity.h"
-#include "../../status_effect.h"
 #include "../../spell.h"
+#include "../../status_effect.h"
+#include "pet_controller.h"
 #include <optional>
 
 struct CurrentManeuvers
@@ -42,10 +42,10 @@ struct CurrentManeuvers
 
 struct AutomatonSpell
 {
-    uint16 skilllevel{ 0 };
-    uint8 heads{ 0 };
-    EFFECT enfeeble{ EFFECT_KO };
-    IMMUNITY immunity{ IMMUNITY_NONE };
+    uint16              skilllevel{ 0 };
+    uint8               heads{ 0 };
+    EFFECT              enfeeble{ EFFECT_KO };
+    IMMUNITY            immunity{ IMMUNITY_NONE };
     std::vector<EFFECT> removes;
 };
 
@@ -57,12 +57,13 @@ public:
     CAutomatonController(CAutomatonEntity* PPet);
 
     virtual bool Disengage() override;
+
 protected:
     virtual void DoCombatTick(time_point tick) override;
     virtual void Move() override;
 
-    void setCooldowns();
-    void setMagicCooldowns();
+    void         setCooldowns();
+    void         setMagicCooldowns();
     virtual bool CanCastSpells() override;
     virtual bool Cast(uint16 targid, SpellID spellid) override;
     virtual bool MobSkill(uint16 targid, uint16 wsid) override;
@@ -85,16 +86,16 @@ private:
 
     CAutomatonEntity* PAutomaton;
 
-    duration m_actionCooldown{ 3s };
-    duration m_rangedCooldown;
+    duration             m_actionCooldown{ 3s };
+    duration             m_rangedCooldown;
     static constexpr int m_RangedAbility{ 1949 };
-    duration m_magicCooldown;
-    duration m_enfeebleCooldown;
-    duration m_elementalCooldown;
-    duration m_healCooldown;
-    duration m_enhanceCooldown;
-    duration m_statusCooldown;
-    duration m_shieldbashCooldown;
+    duration             m_magicCooldown;
+    duration             m_enfeebleCooldown;
+    duration             m_elementalCooldown;
+    duration             m_healCooldown;
+    duration             m_enhanceCooldown;
+    duration             m_statusCooldown;
+    duration             m_shieldbashCooldown;
     static constexpr int m_ShieldBashAbility{ 1944 };
 
     time_point m_LastActionTime;
@@ -110,10 +111,10 @@ private:
 
 namespace autoSpell
 {
-    void LoadAutomatonSpellList();
-    bool CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
-    bool CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
+    void                   LoadAutomatonSpellList();
+    bool                   CanUseSpell(CAutomatonEntity* PCaster, SpellID spellid);
+    bool                   CanUseEnfeeble(CBattleEntity* PTarget, SpellID spell);
     std::optional<SpellID> FindNaSpell(CStatusEffect* PStatus);
-};
+}; // namespace autoSpell
 
 #endif

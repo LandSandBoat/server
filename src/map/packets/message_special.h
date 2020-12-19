@@ -27,25 +27,18 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CMessageSpecialPacket : public CBasicPacket
 {
 public:
-
-	CMessageSpecialPacket(
-		CBaseEntity* PEntity,
-		uint16 messageID,
-		uint32 param0 = 0,
-		uint32 param1 = 0,
-		uint32 param2 = 0,
-		uint32 param3 = 0,
-		bool ShowName = false);
+    CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0,
+                          bool ShowName = false);
 };
 
 #endif

@@ -12,9 +12,7 @@ require("scripts/globals/weaponskillids")
 -----------------------------------
 
 function getQuestId(mainJobId)
-
     return tpz.quest.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId
-
 end
 
 function onTrade(player, npc, trade)
@@ -30,7 +28,7 @@ function onTrade(player, npc, trade)
                 elseif wsPoints <= 249 then
                     player:startEvent(10093)
                 elseif wsPoints >= 250 then
-                     player:startEvent(10088, i)
+                    player:startEvent(10088, i)
                 end
             end
 

@@ -26,6 +26,7 @@ tpz.zoneMisc =
     TREASURE   = 0x0100, -- Presence in the global zone TreasurePool
     AH         = 0x0200, -- Ability to use the auction house
     YELL       = 0x0400, -- Send and receive /yell commands
+    TRUST      = 0x0800, -- Ability to cast trust magic
 }
 
 ------------------------------------
@@ -1067,6 +1068,8 @@ tpz.mod =
     MARTIAL_ARTS                    = 173,
     SKILLCHAINBONUS                 = 174,
     SKILLCHAINDMG                   = 175,
+    MAX_SWINGS                      = 978,
+    ADDITIONAL_SWING_CHANCE         = 979,
     FOOD_HPP                        = 176,
     FOOD_HP_CAP                     = 177,
     FOOD_MPP                        = 178,
@@ -1534,7 +1537,13 @@ tpz.mod =
     -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
+    WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
+    WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
+    WS_AGI_BONUS                    = 982, -- % bonus to agi_wsc.
+    WS_INT_BONUS                    = 983, -- % bonus to int_wsc.
+    WS_MND_BONUS                    = 984, -- % bonus to mnd_wsc.
+    WS_CHR_BONUS                    = 985, -- % bonus to chr_wsc.
 
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
@@ -1573,9 +1582,9 @@ tpz.mod =
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 977, -- stuff
-    -- SPARE = 978, -- stuff
-    -- SPARE = 979, -- stuff
+    -- SPARE = 986, -- stuff
+    -- SPARE = 987, -- stuff
+    -- SPARE = 988, -- stuff
 }
 
 tpz.latent =
@@ -1617,13 +1626,13 @@ tpz.latent =
     LIGHTNINGSDAY            = 35,
     LIGHTSDAY                = 36,
     MOON_PHASE               = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
-    JOB_MULTIPLE_5           = 38,
-    JOB_MULTIPLE_10          = 39,
-    JOB_MULTIPLE_13_NIGHT    = 40,
-    JOB_LEVEL_ODD            = 41,
-    JOB_LEVEL_EVEN           = 42,
+    JOB_MULTIPLE             = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    -- 40 free to use
+    -- 41 free to use
+    -- 42 free to use
     WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
-    --                       = 44  -- Unused
+    -- 44 free to use
     MP_UNDER_VISIBLE_GEAR    = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
     HP_OVER_VISIBLE_GEAR     = 46, -- hp more than or equal to %, calculated using HP bonuses from visible gear only
     WEAPON_BROKEN            = 47,
@@ -2145,11 +2154,13 @@ tpz.MAX_SLOTID  = 15
 
 tpz.objType =
 {
-    PC   = 0x01,
-    NPC  = 0x02,
-    MOB  = 0x04,
-    PET  = 0x08,
-    SHIP = 0x10,
+    PC     = 0x01,
+    NPC    = 0x02,
+    MOB    = 0x04,
+    PET    = 0x08,
+    SHIP   = 0x10,
+    TRUST  = 0x20,
+    FELLOW = 0x40,
 }
 
 ----------------------------------

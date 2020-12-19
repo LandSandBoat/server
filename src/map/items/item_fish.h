@@ -27,47 +27,45 @@
 #include "item.h"
 
 /************************************************************************
-*                                                                       *
-*  Fishing items.                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Fishing items.                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CItemFish : public CItem
 {
 public:
+    CItemFish(const CItem& PItem);
 
-	CItemFish(const CItem &PItem);
+    uint8  GetMin();
+    uint8  GetMax();
+    uint8  GetWatertype();
+    uint8  GetSize();
+    uint8  GetStamina();
+    uint8  GetRodFlag();
+    uint16 GetLength();
+    uint16 GetWeight();
+    bool   IsRanked();
 
-    uint8   GetMin();
-    uint8   GetMax();
-    uint8   GetWatertype();
-    uint8   GetSize();
-    uint8   GetStamina();
-    uint8   GetRodFlag();
-    uint16  GetLength();
-    uint16  GetWeight();
-    bool    IsRanked();
-
-    void    SetMin(uint8);
-    void    SetMax(uint8);
-    void    SetWatertype(uint8);
-    void    SetSize(uint8);
-    void    SetStamina(uint8);
-    void    SetRodFlag(uint8);
-    void    SetLength(uint16);
-    void    SetWeight(uint16);
-    void    SetRank(bool);
+    void SetMin(uint8);
+    void SetMax(uint8);
+    void SetWatertype(uint8);
+    void SetSize(uint8);
+    void SetStamina(uint8);
+    void SetRodFlag(uint8);
+    void SetLength(uint16);
+    void SetWeight(uint16);
+    void SetRank(bool);
 
     virtual ~CItemFish();
 
 private:
-
-    uint8   m_min;
-    uint8   m_max;
-    uint8   m_watertype;
-    uint8   m_size;
-    uint8   m_stamina;
-    uint8   m_rodflag;
+    uint8 m_min;
+    uint8 m_max;
+    uint8 m_watertype;
+    uint8 m_size;
+    uint8 m_stamina;
+    uint8 m_rodflag;
 };
 
 #endif

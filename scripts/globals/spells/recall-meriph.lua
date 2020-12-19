@@ -11,12 +11,14 @@ function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
-    if target:hasKeyItem(tpz.ki.MERIPHATAUD_GATE_CRYSTAL) == true then
-        target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.MERIPH, 0, 4.7)
-        spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
-    else
-        spell:setMsg(tpz.msg.basic.NONE)
+function onSpellCast(caster,target,spell)
+    if target:getObjType() == tpz.objType.PC then
+        if target:hasKeyItem(tpz.ki.MERIPHATAUD_GATE_CRYSTAL) then
+            target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.MERIPH, 0, 4.7)
+            spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
+        else
+            spell:setMsg(tpz.msg.basic.NONE)
+        end
     end
     return 0
 end

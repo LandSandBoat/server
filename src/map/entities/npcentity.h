@@ -27,25 +27,26 @@
 
 #include "baseentity.h"
 
-class CNpcEntity : public CBaseEntity {
+class CNpcEntity : public CBaseEntity
+{
 public:
-
-    uint32      m_flags;
-    uint8       name_prefix;
-    uint8       widescan;
-    uint32      getEntityFlags();                        // Returns the current value in m_flags
-    void        setEntityFlags(uint32 EntityFlags);      // Change the current value in m_flags
-    void        HideHP(bool hide);
-    bool        IsHPHidden();
-    void        Untargetable(bool untargetable);
-    bool        IsUntargetable();
+    uint32       m_flags;
+    uint8        name_prefix;
+    uint8        widescan;
+    uint32       getEntityFlags() const;             // Returns the current value in m_flags
+    void         setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
+    void         HideHP(bool hide);
+    bool         IsHPHidden() const;
+    void         Untargetable(bool untargetable);
+    bool         IsUntargetable() const;
     virtual bool isWideScannable() override;
     virtual void PostTick() override;
-    virtual void Tick(time_point) override {}
+    virtual void Tick(time_point) override
+    {
+    }
 
-     CNpcEntity();              // конструктор
-    ~CNpcEntity();              // деструктор
-
+    CNpcEntity();  // конструктор
+    ~CNpcEntity(); // деструктор
 
 private:
 };

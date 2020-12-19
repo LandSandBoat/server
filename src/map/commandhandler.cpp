@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include <sstream>
 #include "commandhandler.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
+#include <sstream>
 
 void CCommandHandler::init(lua_State* L)
 {
@@ -33,7 +33,7 @@ void CCommandHandler::init(lua_State* L)
 int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
 {
     std::istringstream clstream((char*)commandline);
-    std::string cmdname;
+    std::string        cmdname;
     clstream >> cmdname;
 
     if (!PChar)
@@ -134,10 +134,12 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
             char escaped_name[16 * 2 + 1];
             Sql_EscapeString(SqlHandle, escaped_name, PChar->name.c_str());
 
-            std::string escaped_gm_cmd; escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
+            std::string escaped_gm_cmd;
+            escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
             Sql_EscapeString(SqlHandle, escaped_gm_cmd.data(), (char*)cmdname.c_str());
 
-            std::string escaped_full_string; escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
+            std::string escaped_full_string;
+            escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
             Sql_EscapeString(SqlHandle, escaped_full_string.data(), (char*)commandline);
 
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
@@ -164,14 +166,14 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
 
     // Push the calling character (if exists)..
     CLuaBaseEntity LuaCmdCaller(PChar);
-    int32 cntparam = 0;
+    int32          cntparam = 0;
 
     Lunar<CLuaBaseEntity>::push(m_LState, &LuaCmdCaller);
     cntparam += 1;
 
     // Prepare parameters..
-    std::string param;
-    std::string cmdparameters(parameters);
+    std::string                 param;
+    std::string                 cmdparameters(parameters);
     std::string::const_iterator parameter = cmdparameters.cbegin();
 
     // Parse and push parameters based on symbol string..
@@ -181,41 +183,41 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
 
         switch (*parameter)
         {
-        case 'b':
-            lua_pushstring(m_LState, (const char*)commandline);
-            ++cntparam;
-            break;
-
-        case 's':
-            if (cmdparameters.size() == 1)
-            {
-                std::string str = param;
-                while (!clstream.eof())
-                {
-                    clstream >> param;
-                    str += " " + param;
-                }
-                lua_pushstring(m_LState, str.c_str());
+            case 'b':
+                lua_pushstring(m_LState, (const char*)commandline);
                 ++cntparam;
                 break;
-            }
-            lua_pushstring(m_LState, param.c_str());
-            ++cntparam;
-            break;
 
-        case 'i':
-            lua_pushnumber(m_LState, atoi(param.c_str()));
-            ++cntparam;
-            break;
+            case 's':
+                if (cmdparameters.size() == 1)
+                {
+                    std::string str = param;
+                    while (!clstream.eof())
+                    {
+                        clstream >> param;
+                        str += " " + param;
+                    }
+                    lua_pushstring(m_LState, str.c_str());
+                    ++cntparam;
+                    break;
+                }
+                lua_pushstring(m_LState, param.c_str());
+                ++cntparam;
+                break;
 
-        case 'd':
-            lua_pushnumber(m_LState, atof(param.c_str()));
-            ++cntparam;
-            break;
+            case 'i':
+                lua_pushnumber(m_LState, atoi(param.c_str()));
+                ++cntparam;
+                break;
 
-        default:
-            ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s\n", cmdname.c_str(), *parameter);
-            break;
+            case 'd':
+                lua_pushnumber(m_LState, atof(param.c_str()));
+                ++cntparam;
+                break;
+
+            default:
+                ShowError("cmdhandler::call: (%s) undefined type for param; symbol: %s\n", cmdname.c_str(), *parameter);
+                break;
         }
 
         ++parameter;

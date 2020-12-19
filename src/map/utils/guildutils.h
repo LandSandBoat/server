@@ -25,22 +25,22 @@
 #include "../../common/cbasetypes.h"
 
 /************************************************************************
-*																		*
-*																		*
-*																		*
-************************************************************************/
+ *																		*
+ *																		*
+ *																		*
+ ************************************************************************/
 
 class CItemContainer;
 class CGuild;
 
 namespace guildutils
 {
-	void Initialize();
+    void Initialize();
     void UpdateGuildsStock();
     void UpdateGuildPointsPattern();
 
-	CItemContainer* GetGuildShop(uint16 GuildShopID);
-    CGuild* GetGuild(uint8 GuildID);
-}
+    CItemContainer* GetGuildShop(uint16 GuildShopID);
+    CGuild*         GetGuild(uint8 GuildID);
+} // namespace guildutils
 
 #endif

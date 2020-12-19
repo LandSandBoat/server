@@ -37,8 +37,14 @@ public:
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
     virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override { return false; }
-    virtual bool CanInterrupt() override { return m_interruptable; }
+    virtual bool CanFollowPath() override
+    {
+        return false;
+    }
+    virtual bool CanInterrupt() override
+    {
+        return m_interruptable;
+    }
 
     virtual void TryInterrupt(CBattleEntity* PAttacker) override;
 
@@ -52,13 +58,13 @@ protected:
 
     CCharEntity* m_PEntity;
     CItemUsable* m_PItem;
-    uint8 m_location;
-    uint8 m_slot;
-    duration m_castTime;
-    duration m_animationTime;
-    position_t m_startPos;
-    bool m_interrupted {false};
-    bool m_interruptable {true};
+    uint8        m_location;
+    uint8        m_slot;
+    duration     m_castTime;
+    duration     m_animationTime;
+    position_t   m_startPos;
+    bool         m_interrupted{ false };
+    bool         m_interruptable{ true };
 };
 
 #endif

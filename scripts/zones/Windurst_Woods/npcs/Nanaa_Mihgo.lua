@@ -6,7 +6,9 @@
 -- Involved in Mission 2-1
 -- !pos 62 -4 240 241
 -----------------------------------
+local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/magic")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -15,6 +17,35 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+
+local TrustMemory = function(player)
+    local memories = 0
+    -- 2 - Saw her at the start of the game
+    if player:getNation() == tpz.nation.WINDURST then
+        memories = memories + 2
+    end
+    -- 4 - ROCK_RACKETEER
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
+        memories = memories + 4
+    end
+    -- 8 - HITTING_THE_MARQUISATE
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
+        memories = memories + 8
+    end
+    -- 16 - CRYING_OVER_ONIONS
+    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
+        memories = memories + 16
+    end
+    -- 32 - hasItem(286) Nanaa Mihgo statue
+    if player:hasItem(286) then
+        memories = memories + 32
+    end
+    -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
+    if player:hasCompletedMission(AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
+        memories = memories + 64
+    end
+    return memories
+end
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, {{498, 4}}) then -- Yagudo Necklace x4
@@ -56,6 +87,18 @@ function onTrigger(player, npc)
     -- Should be available at all times, variable gets increased to remove it from her logic to not block anything
     elseif player:getCharVar("CryingOverOnions") == 1 then
         player:startEvent(598)
+
+    -- TRUST
+    elseif
+        player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) and
+        not player:hasSpell(tpz.magic.spell.NANAA_MIHGO) and
+        player:getLocalVar("TrustDialogue") == 0
+    then
+        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+
+        player:setLocalVar("TrustDialogue", 1)
+
+        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
 
     -- WINDURST 2-1: LOST FOR WORDS
     elseif
@@ -220,5 +263,9 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.CAT_BURGLAR_GROUPIE)
         player:addGil(GIL_RATE * 200)
         player:addFame(NORG, 30)
+
+    elseif csid == 865 and option == 2 then
+        player:addSpell(901, true, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
     end
 end

@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CMOBSKILL_TATE_H
 #define _CMOBSKILL_TATE_H
 
-#include "state.h"
 #include "../../mobskill.h"
+#include "state.h"
 
 class CMobEntity;
 
@@ -34,21 +34,34 @@ public:
 
     CMobSkill* GetSkill();
 
-    int16 GetSpentTP() { return m_spentTP; }
+    int16 GetSpentTP()
+    {
+        return m_spentTP;
+    }
+
 protected:
-    virtual bool CanChangeState() override { return false; }
-    virtual bool CanFollowPath() override { return false; }
-    virtual bool CanInterrupt() override { return true; }
+    virtual bool CanChangeState() override
+    {
+        return false;
+    }
+    virtual bool CanFollowPath() override
+    {
+        return false;
+    }
+    virtual bool CanInterrupt() override
+    {
+        return true;
+    }
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
-    void SpendCost();
+    void         SpendCost();
 
 private:
-    CMobEntity* const m_PEntity;
+    CMobEntity* const          m_PEntity;
     std::unique_ptr<CMobSkill> m_PSkill;
-    time_point m_finishTime;
-    duration m_castTime;
-    int16 m_spentTP;
+    time_point                 m_finishTime;
+    duration                   m_castTime;
+    int16                      m_spentTP;
 };
 
 #endif

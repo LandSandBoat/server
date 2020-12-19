@@ -24,27 +24,27 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #if defined(_MSC_VER)
 #pragma warning(push)
-#pragma warning(disable: 4351 4996)
+#pragma warning(disable : 4351 4996)
 #endif
 
-#include <string>
 #include <algorithm>
 #include <sstream>
+#include <string>
 
 namespace marshal
 {
-    template<std::size_t capacity, bool precise = false>
+    template <std::size_t capacity, bool precise = false>
     class string
     {
     private:
         char buffer[capacity] = {};
 
-        template<bool condition = precise>
+        template <bool condition = precise>
         typename std::enable_if<condition>::type cleanup(std::size_t index)
         {
             std::fill_n(buffer + index, capacity - index, '\0');
         }
-        template<bool condition = precise>
+        template <bool condition = precise>
         typename std::enable_if<!condition>::type cleanup(std::size_t index)
         {
             buffer[std::min(index, capacity - 1)] = '\0';
@@ -61,16 +61,19 @@ namespace marshal
     public:
         // Constructors
         string()
-        {}
+        {
+        }
 
         // Copy
-        template<std::size_t R, bool C>
+        template <std::size_t R, bool C>
         string(string<R, C> const& other)
-            : string(std::string(other))
-        {}
+        : string(std::string(other))
+        {
+        }
         string(char const* text)
-            : string(std::string(text))
-        {}
+        : string(std::string(text))
+        {
+        }
 
         string(std::string const& text)
         {
@@ -84,13 +87,13 @@ namespace marshal
         }
 
         // Indexing
-        char& operator [](std::size_t index)
+        char& operator[](std::size_t index)
         {
             return buffer[index];
         }
 
         // Dereference
-        char& operator *()
+        char& operator*()
         {
             return *buffer;
         }
@@ -137,27 +140,27 @@ namespace marshal
         }
 
         // Stream operators
-        template<std::size_t N, bool C>
-        friend std::ostream operator <<(std::ostream& stream, string const& str);
-        template<std::size_t N, bool C>
-        friend std::istream operator >>(std::istream& stream, string& str);
+        template <std::size_t N, bool C>
+        friend std::ostream operator<<(std::ostream& stream, string const& str);
+        template <std::size_t N, bool C>
+        friend std::istream operator>>(std::istream& stream, string& str);
     };
 
-    template<std::size_t N, bool C>
-    std::ostream& operator <<(std::ostream& stream, string<N, C> const& str)
+    template <std::size_t N, bool C>
+    std::ostream& operator<<(std::ostream& stream, string<N, C> const& str)
     {
         return stream << std::string(str);
     }
 
-    template<std::size_t N, bool C>
-    std::istream& operator >>(std::istream& stream, string<N, C>& str)
+    template <std::size_t N, bool C>
+    std::istream& operator>>(std::istream& stream, string<N, C>& str)
     {
         std::string value;
         stream >> value;
         str.assign(value);
         return stream;
     }
-}
+} // namespace marshal
 
 #if defined(_MSC_VER)
 #pragma warning(pop)

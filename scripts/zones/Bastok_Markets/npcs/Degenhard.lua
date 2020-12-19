@@ -24,7 +24,7 @@ function onTrigger(player, npc)
     if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
         player:startEvent(14)
     elseif player:getCharVar("BeatAroundTheBushin") == 3 then
-        player:startEvent(342)player:startEvent(15)
+        player:startEvent(342)
     elseif player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
         player:startEvent(256)
     else

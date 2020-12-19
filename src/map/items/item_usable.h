@@ -29,46 +29,44 @@
 class CItemUsable : public CItem
 {
 public:
+    CItemUsable(uint16);
+    virtual ~CItemUsable();
 
-	CItemUsable(uint16);
-	virtual ~CItemUsable();
+    uint8  getUseDelay() const;
+    uint8  getCurrentCharges();
+    uint8  getMaxCharges() const;
+    uint16 getAnimationID() const;
+    uint16 getAnimationTime() const;
+    uint16 getActivationTime() const;
+    uint8  getValidTarget() const;
+    uint32 getReuseTime();
+    uint32 getReuseDelay() const;
+    uint32 getLastUseTime();
+    uint32 getNextUseTime();
+    uint16 getAoE() const;
 
-	uint8	getUseDelay();
-	uint8	getCurrentCharges();
-	uint8	getMaxCharges();
-	uint16	getAnimationID();
-	uint16	getAnimationTime();
-	uint16	getActivationTime();
-	uint8	getValidTarget();
-    uint32  getReuseTime();
-	uint32	getReuseDelay();
-	uint32	getLastUseTime();
-    uint32  getNextUseTime();
-    uint16  getAoE();
-
-	void	setUseDelay(uint8 UseDelay);
-	void	setCurrentCharges(uint8 CurrCharges);
-	void	setMaxCharges(uint8 MaxCharges);
-	void	setAnimationID(uint16 Animation);
-	void	setAnimationTime(uint16 AnimationTime);
-	void	setActivationTime(uint16 ActivationTime);
-	void	setValidTarget(uint8 ValidTarget);
-	void	setReuseDelay(uint32 ReuseDelay);
-	void	setLastUseTime(uint32 LastUseTime);
-    void    setAssignTime(uint32 VanaTime);
-	void    setAoE(uint16 AoE);
+    void setUseDelay(uint8 UseDelay);
+    void setCurrentCharges(uint8 CurrCharges);
+    void setMaxCharges(uint8 MaxCharges);
+    void setAnimationID(uint16 Animation);
+    void setAnimationTime(uint16 AnimationTime);
+    void setActivationTime(uint16 ActivationTime);
+    void setValidTarget(uint8 ValidTarget);
+    void setReuseDelay(uint32 ReuseDelay);
+    void setLastUseTime(uint32 LastUseTime);
+    void setAssignTime(uint32 VanaTime);
+    void setAoE(uint16 AoE);
 
 private:
-
-	uint8	m_UseDelay;         // задержка использования после экипировки
-	uint8	m_MaxCharges;       // максимальное количество зарядов предмета
-	uint16	m_Animation;
-	uint16	m_AnimationTime;    // время анимации для правильного отображения сообщения (эффектов)
-	uint16	m_ActivationTime;   // время активации предмета во время использования
-	uint8	m_ValidTarget;
-	uint32	m_ReuseDelay;       // задержка между использованием предмета
-    uint32  m_AssignTime;       // время экипировки предмета
-    uint16  m_AoE;
+    uint8  m_UseDelay;   // задержка использования после экипировки
+    uint8  m_MaxCharges; // максимальное количество зарядов предмета
+    uint16 m_Animation;
+    uint16 m_AnimationTime;  // время анимации для правильного отображения сообщения (эффектов)
+    uint16 m_ActivationTime; // время активации предмета во время использования
+    uint8  m_ValidTarget;
+    uint32 m_ReuseDelay; // задержка между использованием предмета
+    uint32 m_AssignTime; // время экипировки предмета
+    uint16 m_AoE;
 };
 
 #endif

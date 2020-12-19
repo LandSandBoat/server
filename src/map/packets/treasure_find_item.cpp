@@ -30,17 +30,17 @@ CTreasureFindItemPacket::CTreasureFindItemPacket(TreasurePoolItem* PItem, CBaseE
     this->id(0x0D2);
     this->length(60);
 
-    ref<uint32>(0x04) = 1;                   // Item Quantity
-    ref<uint16>(0x0C) = 0;                   // TODO: Gil Found
-    ref<uint16>(0x10) = PItem->ID;           // Item ID
-    ref<uint8>(0x14) = PItem->SlotID;        // Treasure Pool Slot
-    ref<uint8>(0x15) = isOldItem ? 1 : 0;    // Old Item
+    ref<uint32>(0x04) = 1;                 // Item Quantity
+    ref<uint16>(0x0C) = 0;                 // TODO: Gil Found
+    ref<uint16>(0x10) = PItem->ID;         // Item ID
+    ref<uint8>(0x14)  = PItem->SlotID;     // Treasure Pool Slot
+    ref<uint8>(0x15)  = isOldItem ? 1 : 0; // Old Item
     ref<uint32>(0x18) = (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(PItem->TimeStamp - get_server_start_time()).count();
 
     if (PEntity != nullptr)
     {
-        ref<uint32>(0x08) = PEntity->id;         // Entity ID
-        ref<uint16>(0x12) = PEntity->targid;     // Entity Index
-        ref<uint8>(0x16) = PEntity->objtype == TYPE_NPC;
+        ref<uint32>(0x08) = PEntity->id;     // Entity ID
+        ref<uint16>(0x12) = PEntity->targid; // Entity Index
+        ref<uint8>(0x16)  = PEntity->objtype == TYPE_NPC;
     }
 }

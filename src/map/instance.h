@@ -38,16 +38,16 @@ class CInstance : public CZoneEntities
 public:
     void RegisterChar(CCharEntity*);
 
-    uint8 GetID();
-    uint8 GetLevelCap();
+    uint8       GetID() const;
+    uint8       GetLevelCap() const;
     const int8* GetName();
-    position_t GetEntryLoc();                 // Get entry location
-    duration GetTimeLimit();                  // Get instance time limit
-    duration GetLastTimeUpdate();             // Get last time a "Time Remaining:" message was displayed
-    uint32 GetProgress();                     // Tracks the progress through the current stage
-    uint32 GetStage();                        // Tracks the progress through the instance (eg. floor #)
-    duration GetWipeTime();                   // Get time wipe happened (elapsed since start)
-    duration GetElapsedTime(time_point tick); // Get elapsed time so far
+    position_t  GetEntryLoc();                   // Get entry location
+    duration    GetTimeLimit();                  // Get instance time limit
+    duration    GetLastTimeUpdate();             // Get last time a "Time Remaining:" message was displayed
+    uint32      GetProgress() const;             // Tracks the progress through the current stage
+    uint32      GetStage() const;                // Tracks the progress through the instance (eg. floor #)
+    duration    GetWipeTime();                   // Get time wipe happened (elapsed since start)
+    duration    GetElapsedTime(time_point tick); // Get elapsed time so far
 
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location
@@ -77,23 +77,23 @@ public:
 private:
     void LoadInstance();
 
-    uint8 m_instanceid {0};
-    uint16 m_entrance {0};
-    string_t m_instanceName;
-    uint32 m_commander {0};
-    uint8 m_levelcap {0};
-    duration m_timeLimit {duration::zero()};
-    time_point m_startTime;
-    duration m_lastTimeUpdate {duration::zero()};
-    time_point m_lastTimeCheck;
-    time_point m_wipeTimer;
-    uint32 m_progress {0};
-    uint32 m_stage {0};
-    position_t m_entryloc {};
-    zoneMusic_t m_zone_music_override {};
-    INSTANCE_STATUS m_status {INSTANCE_NORMAL};
+    uint8               m_instanceid{ 0 };
+    uint16              m_entrance{ 0 };
+    string_t            m_instanceName;
+    uint32              m_commander{ 0 };
+    uint8               m_levelcap{ 0 };
+    duration            m_timeLimit{ duration::zero() };
+    time_point          m_startTime;
+    duration            m_lastTimeUpdate{ duration::zero() };
+    time_point          m_lastTimeCheck;
+    time_point          m_wipeTimer;
+    uint32              m_progress{ 0 };
+    uint32              m_stage{ 0 };
+    position_t          m_entryloc{};
+    zoneMusic_t         m_zone_music_override{};
+    INSTANCE_STATUS     m_status{ INSTANCE_NORMAL };
     std::vector<uint32> m_registeredChars;
-    std::set<uint32> m_enteredChars;
+    std::set<uint32>    m_enteredChars;
 };
 
 #endif

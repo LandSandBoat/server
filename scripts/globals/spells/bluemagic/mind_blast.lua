@@ -23,6 +23,7 @@ end
 
 function onSpellCast(caster, target, spell)
     local params = {}
+    params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.LIGHTNING
     params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
     params.attribute = tpz.mod.INT

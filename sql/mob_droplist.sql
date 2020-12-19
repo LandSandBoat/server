@@ -9094,8 +9094,8 @@ INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2668,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2673,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2719,10);
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,2724,10);
-INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3419,20); -- fiendish_tome_chapter_16
-INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3420,20); -- fiendish_tome_chapter_17
+INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3485,20); -- fiendish_tome_II_chapter_16
+INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3486,20); -- fiendish_tome_II_chapter_17
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3493,70); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (1786,0,0,1000,3494,70); -- forgotten_hope
 INSERT INTO `mob_droplist` VALUES (1787,2,0,1000,1449,0); -- (Nightmare_Crab Nightmare_Scorpion Nightmare_Dhalmel, Bu Lo)
@@ -9362,8 +9362,8 @@ INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2668,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2673,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2719,10);
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,2724,10);
-INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3419,20); -- fiendish_tome_chapter_16
-INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3420,20); -- fiendish_tome_chapter_17
+INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3485,20); -- fiendish_tome_II_chapter_16
+INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3486,20); -- fiendish_tome_II_chapter_17
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3493,70); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (1796,0,0,1000,3494,70); -- forgotten_hope
 INSERT INTO `mob_droplist` VALUES (1797,2,0,1000,1452,0); -- (Nightmare_Makara, Ta)
@@ -11387,8 +11387,6 @@ INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,1741,10);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,1829,100);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,4272,30);
 INSERT INTO `mob_droplist` VALUES (2163,0,0,1000,11526,100);
-INSERT INTO `mob_droplist` VALUES (2164,0,0,1000,3369,10);
-INSERT INTO `mob_droplist` VALUES (2165,0,0,1000,3368,10);
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,503);
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,403);
 INSERT INTO `mob_droplist` VALUES (2166,0,0,1000,1721,303);
@@ -16665,6 +16663,24 @@ INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15136,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15145,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,15146,10);
 INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,16349,10);
+
+-- Dynamis - Xarcabard -> Satellite
+INSERT INTO `mob_droplist` VALUES (3151,0,0,1000,3364,100); -- Mystic goad on Satellite Knuckles
+INSERT INTO `mob_droplist` VALUES (3152,0,0,1000,3365,100); -- Ornate Goad on Satellite Daggers
+INSERT INTO `mob_droplist` VALUES (3153,0,0,1000,3366,100); -- Holy Goad on Satellite Longswords
+INSERT INTO `mob_droplist` VALUES (3154,0,0,1000,3367,100); -- Intricate Goad on Satellite Claymores
+INSERT INTO `mob_droplist` VALUES (3155,0,0,1000,3368,100); -- runaeic Goad on Satellite Tabars
+INSERT INTO `mob_droplist` VALUES (3156,0,0,1000,3369,100); -- Seraphic Goad on Satellite Great Axes
+INSERT INTO `mob_droplist` VALUES (3157,0,0,1000,3370,100); -- Tenebrous Goad on Satellite Scythes
+INSERT INTO `mob_droplist` VALUES (3158,0,0,1000,3371,100); -- Stellar Goad on Satellite Spears
+INSERT INTO `mob_droplist` VALUES (3159,0,0,1000,3372,100); -- Demoniac Goad on Satellite Kunai
+INSERT INTO `mob_droplist` VALUES (3160,0,0,1000,3373,100); -- Divine Goad on Satellite Tachi
+INSERT INTO `mob_droplist` VALUES (3161,0,0,1000,3374,100); -- Heavenly Goad on Satellite Hammers
+INSERT INTO `mob_droplist` VALUES (3162,0,0,1000,3375,100); -- Celestial goad on Satellite Staves
+INSERT INTO `mob_droplist` VALUES (3163,0,0,1000,3376,100); -- Snarled Goad on Satellite Longbows
+INSERT INTO `mob_droplist` VALUES (3164,0,0,1000,3377,100); -- Ethereal Goad on Satellite Guns
+INSERT INTO `mob_droplist` VALUES (3165,0,0,1000,3378,100); -- Mysterial Goad on Satellite Horns
+INSERT INTO `mob_droplist` VALUES (3166,0,0,1000,3379,100); -- Supernal Goad on Satellite Shield
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

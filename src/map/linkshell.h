@@ -28,10 +28,10 @@
 #include <vector>
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CBasicPacket;
 class CCharEntity;
@@ -40,57 +40,55 @@ class CItemLinkshell;
 class CLinkshell
 {
 public:
-
     CLinkshell(uint32 id);
 
-    uint32      getID();
-    uint16      getColor();
-    uint8       getPostRights();
+    uint32 getID() const;
+    uint16 getColor() const;
+    uint8  getPostRights();
 
-    void        setColor(uint16 color);
-    void        setPostRights(uint8 postrights); // Updates lsmes privilege and writes to db
+    void setColor(uint16 color);
+    void setPostRights(uint8 postrights); // Updates lsmes privilege and writes to db
 
     const int8* getName();
-	void		setName(int8* name);
-	void		setMessage(const int8* message, const int8* poster);
+    void        setName(int8* name);
+    void        setMessage(const int8* message, const int8* poster);
 
-    void        AddMember(CCharEntity* PChar,int8 type, uint8 lsNum);
-    bool        DelMember(CCharEntity* PChar);
+    void AddMember(CCharEntity* PChar, int8 type, uint8 lsNum);
+    bool DelMember(CCharEntity* PChar);
 
-    void        BreakLinkshell(int8* lsname, bool gm);
-    void        RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell = false);
-	void		ChangeMemberRank(int8* MemberName, uint8 toSack);
+    void BreakLinkshell(int8* lsname, bool gm);
+    void RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool breakLinkshell = false);
+    void ChangeMemberRank(int8* MemberName, uint8 toSack);
 
-    void        PushPacket(uint32 senderID, CBasicPacket* packet);
-    void        PushLinkshellMessage(CCharEntity* PChar, bool ls1);
+    void PushPacket(uint32 senderID, CBasicPacket* packet);
+    void PushLinkshellMessage(CCharEntity* PChar, bool ls1);
 
     std::vector<CCharEntity*> members; // список участников linkshell
-    uint8       m_postRights;
+    uint8                     m_postRights;
 
 private:
+    uint32 m_id;
+    uint16 m_color;
 
-    uint32      m_id;
-    uint16      m_color;
-
-    string_t    m_name;
+    string_t m_name;
 };
 
 /************************************************************************
-*                                                                       *
-*  namespase для работы с Linkshells                                    *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  namespase для работы с Linkshells                                    *
+ *                                                                       *
+ ************************************************************************/
 
 namespace linkshell
 {
     CLinkshell* LoadLinkshell(uint32 id);
-    void UnloadLinkshell(uint32 id);
+    void        UnloadLinkshell(uint32 id);
 
     bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum);
     bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell);
 
-    uint32 RegisterNewLinkshell(const int8* name, uint16 color);
-	CLinkshell* GetLinkshell(uint32 id);
-};
+    uint32      RegisterNewLinkshell(const int8* name, uint16 color);
+    CLinkshell* GetLinkshell(uint32 id);
+}; // namespace linkshell
 
 #endif

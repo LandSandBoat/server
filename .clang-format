@@ -3,7 +3,12 @@
 # We base things of WebKit + Allman braces
 # BasedOnStyle: WebKit
 AccessModifierOffset: -4
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeComma
 # This is not the ACTUAL column limit, this is just to make
@@ -16,10 +21,13 @@ IndentCaseLabels: 'true'
 IndentWidth: 4
 KeepEmptyLinesAtTheStartOfBlocks: 'false'
 Language: Cpp
+NamespaceIndentation: All
 PointerAlignment: Left
+ReflowComments: true
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'
 SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 1
 Standard: Cpp11
 UseTab: Never
 

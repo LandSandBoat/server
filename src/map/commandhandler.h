@@ -23,21 +23,26 @@
 #define _COMMAND_HANDLER_H
 
 #include "../common/cbasetypes.h"
-#include "../common/lua/lua.hpp"
 #include "../common/showmsg.h"
 
-#include <string>
+#include "lua.hpp"
+
 #include <list>
+#include <string>
 
 class CCharEntity;
 
 class CCommandHandler
 {
-    lua_State*      m_LState;
+    lua_State* m_LState;
 
 public:
-    CCommandHandler()   {}
-    ~CCommandHandler()  {}
+    CCommandHandler()
+    {
+    }
+    ~CCommandHandler()
+    {
+    }
 
     void  init(lua_State* L);
     int32 call(CCharEntity* PChar, const int8* commandline);

@@ -20,6 +20,9 @@ zones[tpz.zone.THE_SANCTUARY_OF_ZITAH] =
         NOTHING_OUT_OF_ORDINARY    = 6402,  -- There is nothing out of the ordinary here.
         SENSE_OF_FOREBODING        = 6403,  -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET      = 6417,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS        = 6999, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY    = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER               = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE              = 7049,  -- Tallying conquest results...
         BEASTMEN_BANNER            = 7130,  -- There is a beastmen's banner.
         CONQUEST                   = 7217,  -- You've earned conquest points!
@@ -32,14 +35,14 @@ zones[tpz.zone.THE_SANCTUARY_OF_ZITAH] =
         FOUND_ALL_FRAGS            = 7739,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT            = 7740,  -- It is an ancient Zilart monument.
         STURDY_BRANCH              = 7763,  -- It is a beautiful, sturdy branch.
-        SENSE_OMINOUS_PRESENCE     = 7843,  -- You sense an ominous presence...
-        PLAYER_OBTAINS_ITEM        = 8077,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 8078,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 8079,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 8080,  -- You already possess that temporary item.
-        NO_COMBINATION             = 8085,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 10263, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 12252, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE     = 7861,  -- You sense an ominous presence...
+        PLAYER_OBTAINS_ITEM        = 8095,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 8096,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 8097,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 8098,  -- You already possess that temporary item.
+        NO_COMBINATION             = 8103,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 10281, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 12270, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -60,9 +63,9 @@ zones[tpz.zone.THE_SANCTUARY_OF_ZITAH] =
     },
     npc =
     {
-        CASKET_BASE      = 17273338,
-        OVERSEER_BASE    = 17273365,
-        CERMET_HEADSTONE = 17273390,
+        CASKET_BASE      = 17273337,
+        OVERSEER_BASE    = 17273364, -- Credaurion_RK in npc_list
+        CERMET_HEADSTONE = 17273389,
     },
 }
 

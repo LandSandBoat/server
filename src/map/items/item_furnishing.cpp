@@ -22,26 +22,29 @@
 #include "item_furnishing.h"
 #include "../map.h"
 
-CItemFurnishing::CItemFurnishing(uint16 id) : CItem(id)
+CItemFurnishing::CItemFurnishing(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_FURNISHING);
+    setType(ITEM_FURNISHING);
 
-	m_storage      = 0;
-	m_moghancement = 0;
-	m_element      = 0;
-	m_aura         = 0;
+    m_storage      = 0;
+    m_moghancement = 0;
+    m_element      = 0;
+    m_aura         = 0;
 }
 
-CItemFurnishing::~CItemFurnishing()
-{
-}
+CItemFurnishing::~CItemFurnishing() = default;
 
 void CItemFurnishing::setInstalled(bool installed)
 {
     if (installed)
+    {
         ref<uint8>(m_extra, 0x01) |= 0x40;
+    }
     else
+    {
         ref<uint8>(m_extra, 0x01) &= ~0x40;
+    }
 }
 
 bool CItemFurnishing::isInstalled()
@@ -51,47 +54,47 @@ bool CItemFurnishing::isInstalled()
 
 void CItemFurnishing::setStorage(uint8 storage)
 {
-	m_storage = std::min<uint8>(storage, 80);
+    m_storage = std::min<uint8>(storage, 80);
 }
 
-uint8 CItemFurnishing::getStorage()
+uint8 CItemFurnishing::getStorage() const
 {
-	return m_storage;
+    return m_storage;
 }
 
 void CItemFurnishing::setMoghancement(uint16 moghancement)
 {
-	m_moghancement = moghancement;
+    m_moghancement = moghancement;
 }
 
-uint16 CItemFurnishing::getMoghancement()
+uint16 CItemFurnishing::getMoghancement() const
 {
-	return m_moghancement;
+    return m_moghancement;
 }
 
 void CItemFurnishing::setElement(uint8 element)
 {
-	m_element = element;
+    m_element = element;
 }
 
-uint8 CItemFurnishing::getElement()
+uint8 CItemFurnishing::getElement() const
 {
-	return m_element;
+    return m_element;
 }
 
 void CItemFurnishing::setAura(uint8 aura)
 {
-	m_aura = aura;
+    m_aura = aura;
 }
 
-uint8 CItemFurnishing::getAura()
+uint8 CItemFurnishing::getAura() const
 {
-	return m_aura;
+    return m_aura;
 }
 
 void CItemFurnishing::setCol(uint8 col)
 {
-	ref<uint8>(m_extra, 0x06) = col;
+    ref<uint8>(m_extra, 0x06) = col;
 }
 
 uint8 CItemFurnishing::getCol()

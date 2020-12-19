@@ -26,18 +26,17 @@
 #include "../entities/battleentity.h"
 #include "../entities/charentity.h"
 
-
 CLockOnPacket::CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget)
 {
-	this->type = 0x58;
-	this->size = 0x08;
+    this->type = 0x58;
+    this->size = 0x08;
 
-	ref<uint32>(0x04) = PChar->id;
-	ref<uint16>(0x0C) = PChar->targid;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x0C) = PChar->targid;
 
-	if (PTarget != nullptr)
-	{
-		ref<uint32>(0x08) = PTarget->id;
-		ref<uint16>(0x0E) = PTarget->targid;
-	}
+    if (PTarget != nullptr)
+    {
+        ref<uint32>(0x08) = PTarget->id;
+        ref<uint16>(0x0E) = PTarget->targid;
+    }
 }

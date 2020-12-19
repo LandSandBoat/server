@@ -21,20 +21,19 @@
 
 #include "../../common/socket.h"
 
-#include "position.h"
 #include "../entities/baseentity.h"
-
+#include "position.h"
 
 CPositionPacket::CPositionPacket(CBaseEntity* PEntity)
 {
-	this->type = 0x5B;
-	this->size = 0x0E;
+    this->type = 0x5B;
+    this->size = 0x0E;
 
-	ref<float>(0x04) = PEntity->loc.p.x;
-	ref<float>(0x08) = PEntity->loc.p.y;
-	ref<float>(0x0C) = PEntity->loc.p.z;
-	ref<uint8>(0x17) = PEntity->loc.p.rotation;
+    ref<float>(0x04) = PEntity->loc.p.x;
+    ref<float>(0x08) = PEntity->loc.p.y;
+    ref<float>(0x0C) = PEntity->loc.p.z;
+    ref<uint8>(0x17) = PEntity->loc.p.rotation;
 
-	ref<uint32>(0x10) = PEntity->id;
-	ref<uint16>(0x14) = PEntity->targid;
+    ref<uint32>(0x10) = PEntity->id;
+    ref<uint16>(0x14) = PEntity->targid;
 }

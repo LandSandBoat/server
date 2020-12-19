@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
     if
         player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 6
-     then
+    then
         if trade:hasItemQty(1127, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_3", 0)
             player:tradeComplete()
@@ -23,9 +23,10 @@ function onTrade(player, npc, trade)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SOMBER_STONE)
         end
     elseif
-        player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and npcUtil.tradeHas(trade, {{9083, 3}}) and
+        player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and
+        npcUtil.tradeHas(trade, {{9083, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 2
-     then
+    then
         player:startEvent(370)
     end
 end

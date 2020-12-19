@@ -23,12 +23,12 @@
 
 #include "linkshell_message.h"
 
-#include <string.h>
+#include <cstring>
 
 CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1)
 {
     CBasicPacket::id(id);
-	this->size = 0x58;
+    this->size = 0x58;
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x90;
@@ -38,7 +38,7 @@ CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8*
 
     if (!ls1)
     {
-        ref<uint8>(0x05) |= 0x40; //LS2
+        ref<uint8>(0x05) |= 0x40; // LS2
     }
     if (message)
     {

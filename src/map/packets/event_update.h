@@ -27,24 +27,16 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CEventUpdatePacket : public CBasicPacket
 {
 public:
-
-	CEventUpdatePacket(
-		uint32 param0 = 0,
-		uint32 param1 = 0,
-		uint32 param2 = 0,
-		uint32 param3 = 0,
-		uint32 param4 = 0,
-		uint32 param5 = 0,
-		uint32 param6 = 0,
-		uint32 param7 = 0);
+    CEventUpdatePacket(uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0, uint32 param4 = 0, uint32 param5 = 0, uint32 param6 = 0,
+                       uint32 param7 = 0);
 };
 
 #endif

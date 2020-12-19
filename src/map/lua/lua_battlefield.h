@@ -23,16 +23,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _LUABATTLEFIELD_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CBattlefield;
 
 class CLuaBattlefield
 {
-    CBattlefield *m_PLuaBattlefield;
-public:
+    CBattlefield* m_PLuaBattlefield;
 
-    static const char className[];
+public:
+    static const char                         className[];
     static Lunar<CLuaBattlefield>::Register_t methods[];
 
     CLuaBattlefield(lua_State*);
