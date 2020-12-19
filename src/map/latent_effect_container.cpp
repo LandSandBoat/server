@@ -50,7 +50,7 @@ void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLa
 {
     for (auto& latent : latentList)
     {
-        if (m_POwner->GetMLevel() >= reqLvl || latent.ConditionsValue == LATENT_JOB_LEVEL_ABOVE)
+        if (m_POwner->GetMLevel() >= reqLvl || latent.ConditionsValue == static_cast<uint16>(LATENT::JOB_LEVEL_ABOVE))
         {
             if (latent.ModValue == Mod::MAIN_DMG_RATING && slot == SLOT_SUB)
             {
@@ -109,13 +109,13 @@ void CLatentEffectContainer::CheckLatentsHP()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_HP_UNDER_PERCENT:
-            case LATENT_HP_OVER_PERCENT:
-            case LATENT_HP_UNDER_TP_UNDER_100:
-            case LATENT_HP_OVER_TP_UNDER_100:
-            case LATENT_SANCTION_REGEN_BONUS:
-            case LATENT_SIGIL_REGEN_BONUS:
-            case LATENT_HP_OVER_VISIBLE_GEAR:
+            case LATENT::HP_UNDER_PERCENT:
+            case LATENT::HP_OVER_PERCENT:
+            case LATENT::HP_UNDER_TP_UNDER_100:
+            case LATENT::HP_OVER_TP_UNDER_100:
+            case LATENT::SANCTION_REGEN_BONUS:
+            case LATENT::SIGIL_REGEN_BONUS:
+            case LATENT::HP_OVER_VISIBLE_GEAR:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -136,12 +136,12 @@ void CLatentEffectContainer::CheckLatentsTP()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_TP_UNDER:
-            case LATENT_TP_OVER:
-            case LATENT_HP_UNDER_TP_UNDER_100:
-            case LATENT_HP_OVER_TP_UNDER_100:
-            case LATENT_SANCTION_REFRESH_BONUS:
-            case LATENT_SIGIL_REFRESH_BONUS:
+            case LATENT::TP_UNDER:
+            case LATENT::TP_OVER:
+            case LATENT::HP_UNDER_TP_UNDER_100:
+            case LATENT::HP_OVER_TP_UNDER_100:
+            case LATENT::SANCTION_REFRESH_BONUS:
+            case LATENT::SIGIL_REFRESH_BONUS:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -163,11 +163,11 @@ void CLatentEffectContainer::CheckLatentsMP()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_MP_UNDER_PERCENT:
-            case LATENT_MP_UNDER:
-            case LATENT_MP_OVER:
-            case LATENT_WEAPON_DRAWN_MP_OVER:
-            case LATENT_MP_UNDER_VISIBLE_GEAR:
+            case LATENT::MP_UNDER_PERCENT:
+            case LATENT::MP_UNDER:
+            case LATENT::MP_OVER:
+            case LATENT::WEAPON_DRAWN_MP_OVER:
+            case LATENT::MP_UNDER_VISIBLE_GEAR:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -208,10 +208,10 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
         {
             switch (latentEffect.GetConditionsID())
             {
-                case LATENT_WEAPON_DRAWN:
+                case LATENT::WEAPON_DRAWN:
                     return latentEffect.Activate();
                     break;
-                case LATENT_WEAPON_DRAWN_MP_OVER:
+                case LATENT::WEAPON_DRAWN_MP_OVER:
                     if (m_POwner->health.mp > latentEffect.GetConditionsValue())
                     {
                         return latentEffect.Activate();
@@ -221,7 +221,7 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                         return latentEffect.Deactivate();
                     }
                     break;
-                case LATENT_WEAPON_DRAWN_HP_UNDER:
+                case LATENT::WEAPON_DRAWN_HP_UNDER:
                     if (m_POwner->health.hp < latentEffect.GetConditionsValue())
                     {
                         return latentEffect.Activate();
@@ -231,7 +231,7 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
                         return latentEffect.Deactivate();
                     }
                     break;
-                case LATENT_WEAPON_SHEATHED:
+                case LATENT::WEAPON_SHEATHED:
                     return latentEffect.Deactivate();
                     break;
                 default:
@@ -242,12 +242,12 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
         {
             switch (latentEffect.GetConditionsID())
             {
-                case LATENT_WEAPON_DRAWN:
-                case LATENT_WEAPON_DRAWN_MP_OVER:
-                case LATENT_WEAPON_DRAWN_HP_UNDER:
+                case LATENT::WEAPON_DRAWN:
+                case LATENT::WEAPON_DRAWN_MP_OVER:
+                case LATENT::WEAPON_DRAWN_HP_UNDER:
                     return latentEffect.Deactivate();
                     break;
-                case LATENT_WEAPON_SHEATHED:
+                case LATENT::WEAPON_SHEATHED:
                     return latentEffect.Activate();
                     break;
                 default:
@@ -269,9 +269,9 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_STATUS_EFFECT_ACTIVE:
-            case LATENT_WEATHER_ELEMENT:
-            case LATENT_NATION_CONTROL:
+            case LATENT::STATUS_EFFECT_ACTIVE:
+            case LATENT::WEATHER_ELEMENT:
+            case LATENT::NATION_CONTROL:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -293,8 +293,8 @@ void CLatentEffectContainer::CheckLatentsFoodEffect()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_FOOD_ACTIVE:
-            case LATENT_NO_FOOD_ACTIVE:
+            case LATENT::FOOD_ACTIVE:
+            case LATENT::NO_FOOD_ACTIVE:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -315,8 +315,8 @@ void CLatentEffectContainer::CheckLatentsRollSong()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_SONG_ROLL_ACTIVE:
-            case LATENT_ELEVEN_ROLL_ACTIVE:
+            case LATENT::SONG_ROLL_ACTIVE:
+            case LATENT::ELEVEN_ROLL_ACTIVE:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -339,7 +339,7 @@ void CLatentEffectContainer::CheckLatentsDay()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_TIME_OF_DAY:
+            case LATENT::TIME_OF_DAY:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -360,7 +360,7 @@ void CLatentEffectContainer::CheckLatentsMoonPhase()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_MOON_PHASE:
+            case LATENT::MOON_PHASE:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -381,14 +381,14 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_FIRESDAY:
-            case LATENT_EARTHSDAY:
-            case LATENT_WATERSDAY:
-            case LATENT_WINDSDAY:
-            case LATENT_DARKSDAY:
-            case LATENT_ICEDAY:
-            case LATENT_LIGHTNINGSDAY:
-            case LATENT_LIGHTSDAY:
+            case LATENT::FIRESDAY:
+            case LATENT::EARTHSDAY:
+            case LATENT::WATERSDAY:
+            case LATENT::WINDSDAY:
+            case LATENT::DARKSDAY:
+            case LATENT::ICEDAY:
+            case LATENT::LIGHTNINGSDAY:
+            case LATENT::LIGHTSDAY:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -410,7 +410,7 @@ void CLatentEffectContainer::CheckLatentsHours()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_HOUR_OF_DAY:
+            case LATENT::HOUR_OF_DAY:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -431,7 +431,7 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
     ProcessLatentEffects([this, members](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_PARTY_MEMBERS:
+            case LATENT::PARTY_MEMBERS:
                 if (latentEffect.GetConditionsValue() <= members)
                 {
                     return latentEffect.Activate();
@@ -440,7 +440,7 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
                 {
                     return latentEffect.Deactivate();
                 }
-            case LATENT_PARTY_MEMBERS_IN_ZONE:
+            case LATENT::PARTY_MEMBERS_IN_ZONE:
                 if (latentEffect.GetConditionsValue() <= members)
                 {
                     auto inZone = 0;
@@ -479,7 +479,7 @@ void CLatentEffectContainer::CheckLatentsPartyJobs()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_JOB_IN_PARTY:
+            case LATENT::JOB_IN_PARTY:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -500,7 +500,7 @@ void CLatentEffectContainer::CheckLatentsPartyAvatar()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_AVATAR_IN_PARTY:
+            case LATENT::AVATAR_IN_PARTY:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -521,8 +521,8 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_JOB_MULTIPLE:
-            case LATENT_JOB_MULTIPLE_AT_NIGHT:
+            case LATENT::JOB_MULTIPLE:
+            case LATENT::JOB_MULTIPLE_AT_NIGHT:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -543,7 +543,7 @@ void CLatentEffectContainer::CheckLatentsPetType()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_PET_ID:
+            case LATENT::PET_ID:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -574,7 +574,7 @@ void CLatentEffectContainer::CheckLatentsTime()
 void CLatentEffectContainer::CheckLatentsWeaponBreak(uint8 slot)
 {
     ProcessLatentEffects([this, slot](CLatentEffect& latentEffect) {
-        if (latentEffect.GetConditionsID() == LATENT_WEAPON_BROKEN && latentEffect.GetConditionsValue() == slot)
+        if (latentEffect.GetConditionsID() == LATENT::WEAPON_BROKEN && latentEffect.GetConditionsValue() == slot)
         {
             return ProcessLatentEffect(latentEffect);
         }
@@ -592,12 +592,12 @@ void CLatentEffectContainer::CheckLatentsZone()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_ZONE:
-            case LATENT_IN_ASSAULT:
-            case LATENT_IN_DYNAMIS:
-            case LATENT_WEATHER_ELEMENT:
-            case LATENT_NATION_CONTROL:
-            case LATENT_ZONE_HOME_NATION:
+            case LATENT::ZONE:
+            case LATENT::IN_ASSAULT:
+            case LATENT::IN_DYNAMIS:
+            case LATENT::WEATHER_ELEMENT:
+            case LATENT::NATION_CONTROL:
+            case LATENT::ZONE_HOME_NATION:
                 return ProcessLatentEffect(latentEffect);
                 break;
             default:
@@ -620,7 +620,7 @@ void CLatentEffectContainer::CheckLatentsWeather()
 void CLatentEffectContainer::CheckLatentsWeather(uint16 weather)
 {
     ProcessLatentEffects([this, weather](CLatentEffect& latent) {
-        if (latent.GetConditionsID() == LATENT_WEATHER_ELEMENT)
+        if (latent.GetConditionsID() == LATENT::WEATHER_ELEMENT)
         {
             auto element = zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false, weather));
             return ApplyLatentEffect(latent, latent.GetConditionsValue() == element);
@@ -634,9 +634,9 @@ void CLatentEffectContainer::CheckLatentsTargetChange()
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
         switch (latentEffect.GetConditionsID())
         {
-            case LATENT_SIGNET_BONUS:
-            case LATENT_VS_ECOSYSTEM:
-            case LATENT_VS_FAMILY:
+            case LATENT::SIGNET_BONUS:
+            case LATENT::VS_ECOSYSTEM:
+            case LATENT::VS_FAMILY:
                 return ProcessLatentEffect(latentEffect);
             default:
                 break;
@@ -678,78 +678,78 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     // find the latent type from the enum and find the expression to tests againts
     switch (latentEffect.GetConditionsID())
     {
-        case LATENT_HP_UNDER_PERCENT:
+        case LATENT::HP_UNDER_PERCENT:
             expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue();
             break;
-        case LATENT_HP_OVER_PERCENT:
+        case LATENT::HP_OVER_PERCENT:
             expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue();
             break;
-        case LATENT_HP_UNDER_TP_UNDER_100:
+        case LATENT::HP_UNDER_TP_UNDER_100:
             expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
-        case LATENT_HP_OVER_TP_UNDER_100:
+        case LATENT::HP_OVER_TP_UNDER_100:
             expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
-        case LATENT_MP_UNDER_PERCENT:
+        case LATENT::MP_UNDER_PERCENT:
             expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 <= latentEffect.GetConditionsValue();
             break;
-        case LATENT_MP_UNDER:
+        case LATENT::MP_UNDER:
             expression = m_POwner->health.mp <= latentEffect.GetConditionsValue();
             break;
-        case LATENT_TP_UNDER:
+        case LATENT::TP_UNDER:
             expression = m_POwner->health.tp < latentEffect.GetConditionsValue();
             break;
-        case LATENT_TP_OVER:
+        case LATENT::TP_OVER:
             expression = m_POwner->health.tp > latentEffect.GetConditionsValue();
             break;
-        case LATENT_SUBJOB:
+        case LATENT::SUBJOB:
             expression = m_POwner->GetSJob() == latentEffect.GetConditionsValue();
             break;
-        case LATENT_PET_ID:
+        case LATENT::PET_ID:
             expression =
                 m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET && ((CPetEntity*)m_POwner->PPet)->m_PetID == latentEffect.GetConditionsValue();
             break;
-        case LATENT_WEAPON_DRAWN:
+        case LATENT::WEAPON_DRAWN:
             expression = m_POwner->animation == ANIMATION_ATTACK;
             break;
-        case LATENT_WEAPON_SHEATHED:
+        case LATENT::WEAPON_SHEATHED:
             expression = m_POwner->animation != ANIMATION_ATTACK;
             break;
-        case LATENT_SIGNET_BONUS:
+        case LATENT::SIGNET_BONUS:
         {
             CBattleEntity* PTarget = m_POwner->GetBattleTarget();
             expression =
                 PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
             break;
         }
-        case LATENT_SANCTION_REGEN_BONUS:
+        case LATENT::SANCTION_REGEN_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
-        case LATENT_SANCTION_REFRESH_BONUS:
+        case LATENT::SANCTION_REFRESH_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
-        case LATENT_SIGIL_REGEN_BONUS:
+        case LATENT::SIGIL_REGEN_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
-        case LATENT_SIGIL_REFRESH_BONUS:
+        case LATENT::SIGIL_REFRESH_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
-        case LATENT_STATUS_EFFECT_ACTIVE:
+        case LATENT::STATUS_EFFECT_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect((EFFECT)latentEffect.GetConditionsValue());
             break;
-        case LATENT_NO_FOOD_ACTIVE:
+        case LATENT::NO_FOOD_ACTIVE:
             expression = !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD);
             break;
-        case LATENT_PARTY_MEMBERS:
+        case LATENT::PARTY_MEMBERS:
             expression = m_POwner->PParty != nullptr && latentEffect.GetConditionsValue() <= m_POwner->PParty->members.size();
             break;
-        case LATENT_PARTY_MEMBERS_IN_ZONE:
+        case LATENT::PARTY_MEMBERS_IN_ZONE:
         {
             auto inZone = 0;
             if (m_POwner->PParty != nullptr)
@@ -765,7 +765,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = latentEffect.GetConditionsValue() <= inZone;
             break;
         }
-        case LATENT_AVATAR_IN_PARTY:
+        case LATENT::AVATAR_IN_PARTY:
             if (m_POwner->PParty != nullptr)
             {
                 for (auto* member : m_POwner->PParty->members)
@@ -790,7 +790,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 }
             }
             break;
-        case LATENT_JOB_IN_PARTY:
+        case LATENT::JOB_IN_PARTY:
             if (m_POwner->PParty != nullptr)
             {
                 for (auto* member : m_POwner->PParty->members)
@@ -814,16 +814,16 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 }
             }
             break;
-        case LATENT_ZONE:
+        case LATENT::ZONE:
             expression = latentEffect.GetConditionsValue() == m_POwner->getZone();
             break;
-        case LATENT_SYNTH_TRAINEE:
+        case LATENT::SYNTH_TRAINEE:
             // todo: figure this out
             break;
-        case LATENT_SONG_ROLL_ACTIVE:
+        case LATENT::SONG_ROLL_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_ROLL | EFFECTFLAG_SONG);
             break;
-        case LATENT_TIME_OF_DAY:
+        case LATENT::TIME_OF_DAY:
         {
             uint32 VanadielHour = CVanaTime::getInstance()->getHour();
             switch (latentEffect.GetConditionsValue())
@@ -843,7 +843,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_HOUR_OF_DAY:
+        case LATENT::HOUR_OF_DAY:
         {
             uint32 VanadielHour = CVanaTime::getInstance()->getHour();
             switch (latentEffect.GetConditionsValue())
@@ -875,31 +875,31 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_FIRESDAY:
+        case LATENT::FIRESDAY:
             expression = CVanaTime::getInstance()->getWeekday() == FIRESDAY;
             break;
-        case LATENT_EARTHSDAY:
+        case LATENT::EARTHSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == EARTHSDAY;
             break;
-        case LATENT_WATERSDAY:
+        case LATENT::WATERSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == WATERSDAY;
             break;
-        case LATENT_WINDSDAY:
+        case LATENT::WINDSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == WINDSDAY;
             break;
-        case LATENT_DARKSDAY:
+        case LATENT::DARKSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == DARKSDAY;
             break;
-        case LATENT_ICEDAY:
+        case LATENT::ICEDAY:
             expression = CVanaTime::getInstance()->getWeekday() == ICEDAY;
             break;
-        case LATENT_LIGHTNINGSDAY:
+        case LATENT::LIGHTNINGSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == LIGHTNINGDAY;
             break;
-        case LATENT_LIGHTSDAY:
+        case LATENT::LIGHTSDAY:
             expression = CVanaTime::getInstance()->getWeekday() == LIGHTSDAY;
             break;
-        case LATENT_MOON_PHASE:
+        case LATENT::MOON_PHASE:
         {
             uint32 MoonPhase     = CVanaTime::getInstance()->getMoonPhase();
             uint32 MoonDirection = CVanaTime::getInstance()->getMoonDirection(); // directions: 1 = waning, 2 = waxing, 0 = neither
@@ -940,7 +940,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_JOB_MULTIPLE:
+        case LATENT::JOB_MULTIPLE:
             // Check if level is odd
             if (latentEffect.GetConditionsValue() == 0)
             {
@@ -952,7 +952,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0;
             }
             break;
-        case LATENT_JOB_MULTIPLE_AT_NIGHT:
+        case LATENT::JOB_MULTIPLE_AT_NIGHT:
             if (latentEffect.GetConditionsValue() == 0)
             {
                 expression = m_POwner->GetMLevel() % 2 == 1 && CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
@@ -962,10 +962,10 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 expression = m_POwner->GetMLevel() % latentEffect.GetConditionsValue() == 0 && CVanaTime::getInstance()->SyncTime() == TIME_NIGHT;
             }
             break;
-        case LATENT_WEAPON_DRAWN_HP_UNDER:
+        case LATENT::WEAPON_DRAWN_HP_UNDER:
             expression = m_POwner->health.hp < latentEffect.GetConditionsValue() && m_POwner->animation == ANIMATION_ATTACK;
             break;
-        case LATENT_MP_UNDER_VISIBLE_GEAR:
+        case LATENT::MP_UNDER_VISIBLE_GEAR:
             // TODO: figure out if this is actually right
             // CItemEquipment* head = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HEAD]));
             // CItemEquipment* body = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_BODY]));
@@ -991,7 +991,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             //    m_LatentEffectList.at(i)->Deactivate();
             //}
             break;
-        case LATENT_HP_OVER_VISIBLE_GEAR:
+        case LATENT::HP_OVER_VISIBLE_GEAR:
             // TODO: figure out if this is actually right
             // CItemEquipment* head = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HEAD]));
             // CItemEquipment* body = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_BODY]));
@@ -1017,7 +1017,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             //    m_LatentEffectList.at(i)->Deactivate();
             //}
             break;
-        case LATENT_WEAPON_BROKEN:
+        case LATENT::WEAPON_BROKEN:
         {
             auto  slot = latentEffect.GetSlot();
             auto* item = (CItemWeapon*)m_POwner->getEquip((SLOTTYPE)slot);
@@ -1031,26 +1031,26 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_IN_DYNAMIS:
+        case LATENT::IN_DYNAMIS:
             expression = m_POwner->isInDynamis();
             break;
-        case LATENT_IN_ASSAULT:
+        case LATENT::IN_ASSAULT:
             expression = m_POwner->isInAssault();
             break;
-        case LATENT_FOOD_ACTIVE:
+        case LATENT::FOOD_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FOOD) &&
                          m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_FOOD)->GetSubID() == latentEffect.GetConditionsValue();
             break;
-        case LATENT_JOB_LEVEL_BELOW:
+        case LATENT::JOB_LEVEL_BELOW:
             expression = m_POwner->GetMLevel() < latentEffect.GetConditionsValue();
             break;
-        case LATENT_JOB_LEVEL_ABOVE:
+        case LATENT::JOB_LEVEL_ABOVE:
             expression = m_POwner->GetMLevel() >= latentEffect.GetConditionsValue();
             break;
-        case LATENT_WEATHER_ELEMENT:
+        case LATENT::WEATHER_ELEMENT:
             expression = latentEffect.GetConditionsValue() == zoneutils::GetWeatherElement(battleutils::GetWeather((CBattleEntity*)m_POwner, false));
             break;
-        case LATENT_NATION_CONTROL:
+        case LATENT::NATION_CONTROL:
         {
             // player is logging in/zoning
             if (m_POwner->loc.zone == nullptr)
@@ -1078,7 +1078,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_ZONE_HOME_NATION:
+        case LATENT::ZONE_HOME_NATION:
         {
             // player is logging in/zoning
             if (m_POwner->loc.zone == nullptr)
@@ -1105,22 +1105,22 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
             break;
         }
-        case LATENT_MP_OVER:
+        case LATENT::MP_OVER:
             expression = m_POwner->health.mp >= latentEffect.GetConditionsValue();
             break;
-        case LATENT_WEAPON_DRAWN_MP_OVER:
+        case LATENT::WEAPON_DRAWN_MP_OVER:
             expression = m_POwner->health.mp > latentEffect.GetConditionsValue() && m_POwner->animation == ANIMATION_ATTACK;
             break;
-        case LATENT_ELEVEN_ROLL_ACTIVE:
+        case LATENT::ELEVEN_ROLL_ACTIVE:
             expression = m_POwner->StatusEffectContainer->CheckForElevenRoll();
             break;
-        case LATENT_VS_ECOSYSTEM:
+        case LATENT::VS_ECOSYSTEM:
             if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
             {
                 expression = static_cast<uint16>(PTarget->m_EcoSystem) == latentEffect.GetConditionsValue();
             }
             break;
-        case LATENT_VS_FAMILY:
+        case LATENT::VS_FAMILY:
             if (CBattleEntity* PTarget = m_POwner->GetBattleTarget())
             {
                 CMobEntity* PMob = dynamic_cast<CMobEntity*>(PTarget);
@@ -1132,7 +1132,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         default:
             latentFound = false;
-            ShowWarning("Latent ID %d unhandled in ProcessLatentEffect\n", latentEffect.GetConditionsID());
+            ShowWarning("Latent ID %d unhandled in ProcessLatentEffect\n", static_cast<uint16>(latentEffect.GetConditionsID()));
             break;
     }
 

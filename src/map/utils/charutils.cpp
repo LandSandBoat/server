@@ -682,7 +682,7 @@ namespace charutils
                 PChar->petZoningInfo.petHP      = petHP;
                 PChar->petZoningInfo.petID      = Sql_GetUIntData(SqlHandle, 9);
                 PChar->petZoningInfo.petMP      = Sql_GetIntData(SqlHandle, 12);
-                PChar->petZoningInfo.petType    = (PETTYPE)Sql_GetUIntData(SqlHandle, 10);
+                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(Sql_GetUIntData(SqlHandle, 10));
                 PChar->petZoningInfo.respawnPet = true;
             }
         }
@@ -2492,7 +2492,7 @@ namespace charutils
                 }
             }
         }
-        if (PPet->getPetType() == PETTYPE_JUG_PET)
+        if (PPet->getPetType() == PET_TYPE::JUG_PET)
         {
             auto skillList{ battleutils::GetMobSkillList(PPet->m_MobSkillList) };
             for (auto&& abilityid : skillList)
@@ -4473,7 +4473,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем часть текущих характеристик персонажа                      *
+     *  Save some of the current characteristics of the character            *
      *                                                                       *
      ************************************************************************/
 
@@ -4485,7 +4485,7 @@ namespace charutils
                             "WHERE charid = %u;";
 
         Sql_Query(SqlHandle, Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
-                  PChar->petZoningInfo.petID, PChar->petZoningInfo.petType, PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->id);
+                  PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->id);
     }
 
     /************************************************************************
@@ -5042,14 +5042,14 @@ namespace charutils
         if ((PAbility->getAddType() & (ADDTYPE_JUGPET | ADDTYPE_CHARMPET)) == (ADDTYPE_JUGPET | ADDTYPE_CHARMPET))
         {
             if (!PChar->PPet || !(PChar->PPet->objtype == TYPE_MOB ||
-                                  (PChar->PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PETTYPE_JUG_PET)))
+                                  (PChar->PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(PChar->PPet)->getPetType() == PET_TYPE::JUG_PET)))
             {
                 return false;
             }
         }
         if ((PAbility->getAddType() & (ADDTYPE_JUGPET | ADDTYPE_CHARMPET)) == ADDTYPE_JUGPET)
         {
-            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PETTYPE_JUG_PET)
+            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PET_TYPE::JUG_PET)
             {
                 return false;
             }
@@ -5063,14 +5063,14 @@ namespace charutils
         }
         if (PAbility->getAddType() & ADDTYPE_AVATAR)
         {
-            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PETTYPE_AVATAR)
+            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PET_TYPE::AVATAR)
             {
                 return false;
             }
         }
         if (PAbility->getAddType() & ADDTYPE_AUTOMATON)
         {
-            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PETTYPE_AUTOMATON)
+            if (!PChar->PPet || PChar->PPet->objtype != TYPE_PET || static_cast<CPetEntity*>(PChar->PPet)->getPetType() != PET_TYPE::AUTOMATON)
             {
                 return false;
             }

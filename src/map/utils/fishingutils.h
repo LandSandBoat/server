@@ -24,12 +24,12 @@
 
 #include "../../common/cbasetypes.h"
 
-enum FISHACTION
+enum class FISH_ACTION : uint8
 {
-    FISHACTION_CHECK   = 2, // This is always the first 0x110 packet. //
-    FISHACTION_FINISH  = 3, // This is the next 0x110 after 0x115. //
-    FISHACTION_END     = 4,
-    FISHACTION_WARNING = 5 // This is the 0x110 packet if the time is going on too long. //
+    CHECK   = 2, // This is always the first 0x110 packet. //
+    FINISH  = 3, // This is the next 0x110 after 0x115. //
+    END     = 4,
+    WARNING = 5 // This is the 0x110 packet if the time is going on too long. //
 };
 
 /************************************************************************
@@ -45,7 +45,7 @@ namespace fishingutils
     void LoadFishingMessages();
 
     void StartFishing(CCharEntity* PChar);
-    void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special);
+    void FishingAction(CCharEntity* PChar, FISH_ACTION action, uint16 stamina, uint32 special);
 }; // namespace fishingutils
 
 #endif

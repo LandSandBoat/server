@@ -352,9 +352,9 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             switch (PChar->petZoningInfo.petType)
             {
-                case PETTYPE_AUTOMATON:
-                case PETTYPE_JUG_PET:
-                case PETTYPE_WYVERN:
+                case PET_TYPE::AUTOMATON:
+                case PET_TYPE::JUG_PET:
+                case PET_TYPE::WYVERN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
                     break;
 
@@ -3274,9 +3274,9 @@ void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint8 ukn2 = data.ref<uint8>(0x0F);
     uint32 special = data.ref<uint32>(0x10);
 
-    if ((FISHACTION)action != FISHACTION_FINISH || PChar->animation == ANIMATION_FISHING_FISH)
+    if (static_cast<FISH_ACTION>(action) != FISH_ACTION::FINISH || PChar->animation == ANIMATION_FISHING_FISH)
     {
-        fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
+        fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
     }
 }
 
@@ -5333,7 +5333,7 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
                 (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR && PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL && !PChar->PAI->IsEngaged()))
             {
                 PChar->PAI->ClearStateStack();
-                if (PChar->PPet && PChar->PPet->objtype == TYPE_PET && ((CPetEntity*)PChar->PPet)->getPetType() == PETTYPE_AUTOMATON)
+                if (PChar->PPet && PChar->PPet->objtype == TYPE_PET && ((CPetEntity*)PChar->PPet)->getPetType() == PET_TYPE::AUTOMATON)
                 {
                     PChar->PPet->PAI->Disengage();
                 }
@@ -6509,7 +6509,7 @@ void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 action = data.ref<uint8>(0x0E);
     // uint8 ukn2 = data.ref<uint8>(0x0F);
     uint32 special = data.ref<uint32>(0x10);
-    fishingutils::FishingAction(PChar, (FISHACTION)action, stamina, special);
+    fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
 }
 
 /************************************************************************

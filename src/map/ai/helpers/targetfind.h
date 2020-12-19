@@ -39,16 +39,16 @@ class CBattleEntity;
 // allow pets to recieve buffs from protectra, curaga etc
 #define PETS_CAN_AOE_BUFF false
 
-enum AOERADIUS
+enum class AOE_RADIUS : uint8
 {
-    AOERADIUS_ATTACKER = 1,
-    AOERADIUS_TARGET   = 2
+    ATTACKER = 1,
+    TARGET   = 2
 };
 
-enum AURATARGET
+enum class AURA_TARGET : uint8
 {
-    AURATARGET_ALLIES  = 0,
-    AURATARGET_ENEMIES = 1,
+    ALLIES  = 0,
+    ENEMIES = 1
 };
 
 enum FINDFLAGS
@@ -80,13 +80,13 @@ If monster -> monster
 I can hit all monsters in my party.
 
 */
-enum FINDTYPE
+enum class FIND_TYPE : uint8
 {
-    FIND_NONE            = 0,
-    FIND_PLAYER_PLAYER   = 1,
-    FIND_MONSTER_MONSTER = 2,
-    FIND_PLAYER_MONSTER  = 3,
-    FIND_MONSTER_PLAYER  = 4
+    NONE            = 0,
+    PLAYER_PLAYER   = 1,
+    MONSTER_MONSTER = 2,
+    PLAYER_MONSTER  = 3,
+    MONSTER_PLAYER  = 4
 };
 
 class CTargetFind
@@ -98,7 +98,7 @@ public:
 
     // Main methods for finding targets
     void findSingleTarget(CBattleEntity* PTarget, uint8 flags = FINDFLAGS_NONE);
-    void findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
+    void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
     void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags = FINDFLAGS_NONE);
 
     // add all targets in contexts
@@ -135,9 +135,9 @@ protected:
     CBattleEntity* m_PMasterTarget; // mater of target
     CBattleEntity* m_PTarget;       // first target
 
-    uint16   m_zone;
-    FINDTYPE m_findType;
-    uint8    m_findFlags;
+    uint16    m_zone;
+    FIND_TYPE m_findType;
+    uint8     m_findFlags;
 
     // conal vars
     bool        m_conal;

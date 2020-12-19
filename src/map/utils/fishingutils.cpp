@@ -373,13 +373,13 @@ namespace fishingutils
      *																		*
      ************************************************************************/
 
-    void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
+    void FishingAction(CCharEntity* PChar, FISH_ACTION action, uint16 stamina, uint32 special)
     {
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
 
         switch (action)
         {
-            case FISHACTION_CHECK:
+            case FISH_ACTION::CHECK:
             {
                 if (CheckFisherLuck(PChar))
                 {
@@ -400,7 +400,7 @@ namespace fishingutils
                 }
             }
             break;
-            case FISHACTION_FINISH:
+            case FISH_ACTION::FINISH:
             {
                 if (stamina == 0)
                 {
@@ -462,7 +462,7 @@ namespace fishingutils
                 PChar->UContainer->Clean();
             }
             break;
-            case FISHACTION_WARNING:
+            case FISH_ACTION::WARNING:
             {
                 // сообщение: "You don't know how much longer you can keep this one on the line..."
 
@@ -470,7 +470,7 @@ namespace fishingutils
                 return;
             }
             break;
-            case FISHACTION_END:
+            case FISH_ACTION::END:
             {
                 // skillup
 

@@ -44,7 +44,7 @@ CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 
 void CTargetFind::reset()
 {
-    m_findType = FIND_NONE;
+    m_findType = FIND_TYPE::NONE;
     m_targets.clear();
     m_conal     = false;
     m_radius    = 0.0f;
@@ -67,14 +67,14 @@ void CTargetFind::findSingleTarget(CBattleEntity* PTarget, uint8 flags)
     addEntity(PTarget, false);
 }
 
-void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, float radius, uint8 flags)
+void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags)
 {
     TracyZoneScoped;
     m_findFlags = flags;
     m_radius    = radius;
     m_zone      = m_PBattleEntity->getZone();
 
-    if (radiusType == AOERADIUS_ATTACKER)
+    if (radiusType == AOE_RADIUS::ATTACKER)
     {
         m_PRadiusAround = &m_PBattleEntity->loc.p;
     }
@@ -103,7 +103,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
         if (m_PMasterTarget->objtype == TYPE_PC)
         {
             // players will never need to add whole alliance
-            m_findType = FIND_PLAYER_PLAYER;
+            m_findType = FIND_TYPE::PLAYER_PLAYER;
 
             if (m_PMasterTarget->PParty != nullptr)
             {
@@ -126,7 +126,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
         }
         else
         {
-            m_findType = FIND_PLAYER_MONSTER;
+            m_findType = FIND_TYPE::PLAYER_MONSTER;
             // special case to add all mobs in range
             addAllInMobList(m_PMasterTarget, false);
         }
@@ -136,20 +136,20 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
         // handle this as a mob
         if (m_PMasterTarget->objtype == TYPE_PC || m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
         {
-            m_findType = FIND_MONSTER_PLAYER;
+            m_findType = FIND_TYPE::MONSTER_PLAYER;
         }
         else
         {
-            m_findType = FIND_MONSTER_MONSTER;
+            m_findType = FIND_TYPE::MONSTER_MONSTER;
         }
 
         // do not include pets in monster AoE buffs
-        if (m_findType == FIND_MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
+        if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget->PMaster == nullptr)
         {
             withPet = PETS_CAN_AOE_BUFF;
         }
 
-        if (m_findFlags & FINDFLAGS_HIT_ALL || (m_findType == FIND_MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->CalledForHelp()))
+        if (m_findFlags & FINDFLAGS_HIT_ALL || (m_findType == FIND_TYPE::MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->CalledForHelp()))
         {
             addAllInZone(m_PMasterTarget, withPet);
         }
@@ -158,7 +158,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOERADIUS radiusType, f
             addAllInAlliance(m_PMasterTarget, withPet);
 
             // Is the monster casting on a player..
-            if (m_findType == FIND_MONSTER_PLAYER)
+            if (m_findType == FIND_TYPE::MONSTER_PLAYER)
             {
                 if (m_PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
                 {
@@ -211,7 +211,7 @@ void CTargetFind::findWithinCone(CBattleEntity* PTarget, float distance, float a
     // calculate scalar
     m_scalar = (m_BPoint.x * m_CPoint.z) - (m_BPoint.z * m_CPoint.x);
 
-    findWithinArea(PTarget, AOERADIUS_ATTACKER, distance);
+    findWithinArea(PTarget, AOE_RADIUS::ATTACKER, distance);
 }
 
 void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
@@ -411,21 +411,21 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     // shouldn't add if target is charmed by the enemy
     if (PTarget->PMaster != nullptr)
     {
-        if (m_findType == FIND_MONSTER_PLAYER)
+        if (m_findType == FIND_TYPE::MONSTER_PLAYER)
         {
             if (PTarget->PMaster->objtype == TYPE_MOB)
             {
                 return false;
             }
         }
-        else if (m_findType == FIND_PLAYER_MONSTER)
+        else if (m_findType == FIND_TYPE::PLAYER_MONSTER)
         {
             if (PTarget->PMaster->objtype == TYPE_PC)
             {
                 return false;
             }
         }
-        else if (m_findType == FIND_MONSTER_MONSTER || m_findType == FIND_PLAYER_PLAYER)
+        else if (m_findType == FIND_TYPE::MONSTER_MONSTER || m_findType == FIND_TYPE::PLAYER_PLAYER)
         {
             return PTarget->objtype == TYPE_TRUST;
         }

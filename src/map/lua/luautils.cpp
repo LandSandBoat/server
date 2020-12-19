@@ -3566,7 +3566,7 @@ namespace luautils
         if (PMob->objtype == TYPE_PET && map_config.skillup_bloodpact)
         {
             CPetEntity* PPet = (CPetEntity*)PMob;
-            if (PPet->getPetType() == PETTYPE_AVATAR && PPet->PMaster->objtype == TYPE_PC)
+            if (PPet->getPetType() == PET_TYPE::AVATAR && PPet->PMaster->objtype == TYPE_PC)
             {
                 CCharEntity* PMaster = (CCharEntity*)PPet->PMaster;
                 if (PMaster->GetMJob() == JOB_SMN)

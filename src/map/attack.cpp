@@ -554,7 +554,7 @@ void CAttack::ProcessDamage()
         }
 
         if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
-            static_cast<CPetEntity*>(m_attacker)->getPetType() == PETTYPE_AUTOMATON)
+            static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
         }

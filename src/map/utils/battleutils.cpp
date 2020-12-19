@@ -1400,7 +1400,7 @@ namespace battleutils
                 acc += ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_AMBUSH, (CCharEntity*)PAttacker);
             }
         }
-        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PETTYPE_AUTOMATON)
+        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
         }
@@ -1462,7 +1462,7 @@ namespace battleutils
                 }
             }
         }
-        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PETTYPE_AUTOMATON)
+        else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             rAttack = PAttacker->RATT(SKILL_AUTOMATON_RANGED);
         }
@@ -1700,7 +1700,7 @@ namespace battleutils
                 return 0;
             }
         }
-        else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PETTYPE_AUTOMATON && PDefender->GetMJob() == JOB_PLD)
+        else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PET_TYPE::AUTOMATON && PDefender->GetMJob() == JOB_PLD)
         {
             float skillmodifier = (PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackskill) * 0.215f;
             base                = PDefender->getMod(Mod::SHIELDBLOCKRATE);
@@ -2407,7 +2407,7 @@ namespace battleutils
                 if (isPet)
                 {
                     CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
-                    isAvatar              = petEntity->getPetType() == PETTYPE_AVATAR;
+                    isAvatar              = petEntity->getPetType() == PET_TYPE::AVATAR;
                 }
 
                 if (isAvatar)
@@ -2883,7 +2883,7 @@ namespace battleutils
             {
                 if (CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker))
                 {
-                    isAvatar = petEntity->getPetType() == PETTYPE_AVATAR;
+                    isAvatar = petEntity->getPetType() == PET_TYPE::AVATAR;
                 }
             }
 
