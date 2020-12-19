@@ -59,7 +59,7 @@ void call_onRecordTrigger(lua_State* L, CCharEntity* PChar, uint16 recordID, con
         return;
     }
 
-    uint8 args { 0 };
+    uint8 args{ 0 };
 
     CLuaBaseEntity LuaAllyEntity(PChar);
     Lunar<CLuaBaseEntity>::push(L, &LuaAllyEntity);
@@ -76,7 +76,7 @@ void call_onRecordTrigger(lua_State* L, CCharEntity* PChar, uint16 recordID, con
     lua_pushinteger(L, roeutils::GetEminenceRecordProgress(PChar, recordID));
     lua_setfield(L, -2, "progress");
 
-    for (auto& datagram : payload)  // Append datagrams to param table
+    for (auto& datagram : payload) // Append datagrams to param table
     {
         lua_pushstring(L, datagram.luaKey.c_str());
         if (auto value = std::get_if<uint32>(&datagram.data))
@@ -132,7 +132,7 @@ namespace roeutils
         RoeHandlers.fill(RoeCheckHandler());
         roeutils::RoeSystem.ImplementedRecords.reset();
         roeutils::RoeSystem.RepeatableRecords.reset();
-        roeutils::RoeSystem.RetroactiveRecords.reset();        
+        roeutils::RoeSystem.RetroactiveRecords.reset();
         roeutils::RoeSystem.DailyRecords.reset();
         roeutils::RoeSystem.DailyRecordIDs.clear();
         roeutils::RoeSystem.NotifyThresholds.fill(1);
@@ -154,7 +154,6 @@ namespace roeutils
                 {
                     RoeHandlers[trigger].bitmap.set(recordID);
                 }
-
                 else
                 {
                     ShowError("ROEUtils: Unknown Record trigger index %d for record %d.", trigger, recordID);
@@ -194,7 +193,7 @@ namespace roeutils
                     else if (flag == "retro")
                     {
                         roeutils::RoeSystem.RetroactiveRecords.set(recordID);
-                    }                    
+                    }
                     else
                     {
                         ShowError("ROEUtils: Unknown flag %s for record #%d.", flag, recordID);
@@ -260,13 +259,14 @@ namespace roeutils
         lua_getglobal(L, "tpz");
         lua_getfield(L, -1, "roe");
 
-    // Call onRecordTrigger for each record of this type
-    for (int i = 0; i < 31; i++)
-    {
-        // Check record is of this type
-        if (uint16 recordID = PChar->m_eminenceLog.active[i]; handler.bitmap.test(recordID))
+        // Call onRecordTrigger for each record of this type
+        for (int i = 0; i < 31; i++)
         {
-            call_onRecordTrigger(L, PChar, recordID, payload);
+            // Check record is of this type
+            if (uint16 recordID = PChar->m_eminenceLog.active[i]; handler.bitmap.test(recordID))
+            {
+                call_onRecordTrigger(L, PChar, recordID, payload);
+            }
         }
         lua_settop(L, stackTop);
         return true;
@@ -457,60 +457,60 @@ namespace roeutils
         }
     }
 
-void onRecordTake(CCharEntity* PChar, uint16 recordID)
-{
-    if (RoeSystem.RetroactiveRecords.test(recordID))
+    void onRecordTake(CCharEntity* PChar, uint16 recordID)
     {
-        lua_State* L = luautils::LuaHandle;
-        uint32 stackTop = lua_gettop(L);
-        lua_getglobal(L, "tpz");
-        lua_getfield(L, -1, "roe");
-        call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{});
-        lua_settop(L, stackTop);
+        if (RoeSystem.RetroactiveRecords.test(recordID))
+        {
+            lua_State* L        = luautils::LuaHandle;
+            uint32     stackTop = lua_gettop(L);
+            lua_getglobal(L, "tpz");
+            lua_getfield(L, -1, "roe");
+            call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{});
+            lua_settop(L, stackTop);
+        }
+        return;
     }
-    return;
-}
 
-bool onRecordClaim(CCharEntity* PChar, uint16 recordID)
-{
-    if (roeutils::HasEminenceRecord(PChar, recordID))
+    bool onRecordClaim(CCharEntity* PChar, uint16 recordID)
     {
-        lua_State* L = luautils::LuaHandle;
-        uint32 stackTop = lua_gettop(L);
-        lua_getglobal(L, "tpz");
-        lua_getfield(L, -1, "roe");
-        call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{RoeDatagram("claim", 1)});
-        lua_settop(L, stackTop);
-        return true;
+        if (roeutils::HasEminenceRecord(PChar, recordID))
+        {
+            lua_State* L        = luautils::LuaHandle;
+            uint32     stackTop = lua_gettop(L);
+            lua_getglobal(L, "tpz");
+            lua_getfield(L, -1, "roe");
+            call_onRecordTrigger(L, PChar, recordID, RoeDatagramList{ RoeDatagram("claim", 1) });
+            lua_settop(L, stackTop);
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
-uint16 GetActiveTimedRecord()
-{
-    uint8 day = static_cast<uint8>(CVanaTime::getInstance()->getJstWeekDay());
-    uint8 block = static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4);
-    return RoeSystem.TimedRecordTable[day][block];
-}
-
-void AddActiveTimedRecord(CCharEntity* PChar)
-{
-    // Clear old timed entries from log
-    PChar->m_eminenceLog.progress[30] = 0;
-    PChar->m_eminenceCache.activemap &= ~RoeSystem.TimedRecords;
-
-    // Add current timed record to slot 31
-    auto timedRecordID = GetActiveTimedRecord();
-    PChar->m_eminenceLog.active[30] = timedRecordID;
-    PChar->m_eminenceCache.activemap.set(timedRecordID);
-    PChar->pushPacket(new CRoeUpdatePacket(PChar));
-
-    if (timedRecordID)
+    uint16 GetActiveTimedRecord()
     {
+        uint8 day   = static_cast<uint8>(CVanaTime::getInstance()->getJstWeekDay());
+        uint8 block = static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4);
+        return RoeSystem.TimedRecordTable[day][block];
+    }
+
+    void AddActiveTimedRecord(CCharEntity* PChar)
+    {
+        // Clear old timed entries from log
+        PChar->m_eminenceLog.progress[30] = 0;
+        PChar->m_eminenceCache.activemap &= ~RoeSystem.TimedRecords;
+
+        // Add current timed record to slot 31
+        auto timedRecordID              = GetActiveTimedRecord();
+        PChar->m_eminenceLog.active[30] = timedRecordID;
+        PChar->m_eminenceCache.activemap.set(timedRecordID);
+        PChar->pushPacket(new CRoeUpdatePacket(PChar));
+
+        if (timedRecordID)
+        {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED));
             SetEminenceRecordCompletion(PChar, timedRecordID, false);
+        }
     }
-}
 
     void ClearDailyRecords(CCharEntity* PChar)
     {

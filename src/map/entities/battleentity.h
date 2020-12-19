@@ -358,13 +358,13 @@ enum SUBEFFECT
 
 enum TARGETTYPE
 {
-    TARGET_SELF            = 0x01,
-    TARGET_PLAYER_PARTY    = 0x02,
-    TARGET_ENEMY           = 0x04,
-    TARGET_PLAYER_ALLIANCE = 0x08,
-    TARGET_PLAYER          = 0x10,
-    TARGET_PLAYER_DEAD     = 0x20,
-    TARGET_NPC = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
+    TARGET_SELF                    = 0x01,
+    TARGET_PLAYER_PARTY            = 0x02,
+    TARGET_ENEMY                   = 0x04,
+    TARGET_PLAYER_ALLIANCE         = 0x08,
+    TARGET_PLAYER                  = 0x10,
+    TARGET_PLAYER_DEAD             = 0x20,
+    TARGET_NPC                     = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100
 };
@@ -464,7 +464,7 @@ struct health_t
 
 struct battlehistory_t
 {
-    ATTACKTYPE  lastHitTaken_atkType;
+    ATTACK_TYPE lastHitTaken_atkType;
 };
 
 typedef std::vector<apAction_t> ActionList_t;
@@ -529,7 +529,7 @@ public:
     int32 GetMaxHP() const; // максимальное количество hp
     uint8 GetMPP() const;   // количество mp в процентах
     int32 GetMaxMP() const; // максимальное количество mp
-    void  UpdateHealth(); // пересчет максимального количества hp и mp, а так же корректировка их текущих значений
+    void  UpdateHealth();   // пересчет максимального количества hp и mp, а так же корректировка их текущих значений
 
     int16  GetWeaponDelay(bool tp);       // returns delay of combined weapons
     uint8  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
@@ -684,10 +684,10 @@ public:
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
 
-    uint8     m_ModelSize; // размер модели сущности, для расчета дальности физической атаки
-    ECOSYSTEM m_EcoSystem; // эко-система сущности
+    uint8           m_ModelSize;  // размер модели сущности, для расчета дальности физической атаки
+    ECOSYSTEM       m_EcoSystem;  // эко-система сущности
     CItemEquipment* m_Weapons[4]; // четыре основных ячейки, используемыж для хранения оружия (только оружия)
-    bool            m_dualWield; // True/false depending on if the entity is using two weapons
+    bool            m_dualWield;  // True/false depending on if the entity is using two weapons
 
     TraitList_t TraitList; // список постянно активных способностей в виде указателей
 
@@ -696,11 +696,12 @@ public:
     ActionList_t m_ActionList; // список совершенных действий за одну атаку (нужно будет написать структуру, включающую ActionList в которой будут категории
                                // анимации и т.д.)
 
-    CParty*			PParty;					    // описание группы, в которой состоит сущность
-    CBattleEntity*	PPet;					    // питомец сущности
-    CBattleEntity*	PMaster;				    // владелец/хозяин сущности (распространяется на все боевые сущности)
-    CBattleEntity*	PLastAttacker;
-    battlehistory_t BattleHistory;              // Stores info related to most recent combat actions taken towards this entity.
+    CParty*         PParty;  // описание группы, в которой состоит сущность
+    CBattleEntity*  PPet;    // питомец сущности
+    CBattleEntity*  PMaster; // владелец/хозяин сущности (распространяется на все боевые сущности)
+    CBattleEntity*  PLastAttacker;
+    time_point      LastAttacked;
+    battlehistory_t BattleHistory; // Stores info related to most recent combat actions taken towards this entity.
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * roe.h
  *      Author: Kreidos | github.com/kreidos
  *
@@ -27,8 +27,8 @@
 
 #include <array>
 #include <bitset>
-#include <vector>
 #include <variant>
+#include <vector>
 
 #include "../common/cbasetypes.h"
 #include "ai/helpers/event_handler.h"
@@ -42,16 +42,16 @@ class CBaseEntity;
 
 enum ROE_EVENT
 {
-    ROE_MOBKILL      = 1,
-    ROE_WSKILL_USE   = 2,
-    ROE_LOOTITEM     = 3,
-    ROE_SYNTHSUCCESS = 4,
-    ROE_DMGTAKEN     = 5,
-    ROE_DMGDEALT     = 6,
-    ROE_EXPGAIN      = 7,
-    ROE_HEALALLY     = 8,
-    ROE_BUFFALLY     = 9,
-    ROE_LEVELUP      = 10,
+    ROE_MOBKILL          = 1,
+    ROE_WSKILL_USE       = 2,
+    ROE_LOOTITEM         = 3,
+    ROE_SYNTHSUCCESS     = 4,
+    ROE_DMGTAKEN         = 5,
+    ROE_DMGDEALT         = 6,
+    ROE_EXPGAIN          = 7,
+    ROE_HEALALLY         = 8,
+    ROE_BUFFALLY         = 9,
+    ROE_LEVELUP          = 10,
     ROE_QUEST_COMPLETE   = 11,
     ROE_MISSION_COMPLETE = 12,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
@@ -88,22 +88,24 @@ typedef std::variant<uint32, CMobEntity*, std::string> RoeDatagramPayload;
 
 struct RoeDatagram
 {
-    std::string luaKey;
+    std::string        luaKey;
     RoeDatagramPayload data;
 
-    RoeDatagram(std::string param, uint32 id)
+    RoeDatagram(std::string param, uint32 payload)
     : luaKey{ param }
+    , data{ payload }
     {
-        this->type          = RoeDatagramPayload::uinteger;
-        this->data.uinteger = id;
     }
-    RoeDatagram(std::string param, CMobEntity* PMob)
+    RoeDatagram(std::string param, CMobEntity* payload)
     : luaKey{ param }
+    , data{ payload }
     {
-        this->type           = RoeDatagramPayload::mob;
-        this->data.mobEntity = PMob;
     }
-    RoeDatagram(std::string param, std::string payload) : luaKey{param}, data{payload} {}
+    RoeDatagram(std::string param, std::string payload)
+    : luaKey{ param }
+    , data{ payload }
+    {
+    }
 };
 
 typedef std::vector<RoeDatagram> RoeDatagramList;
@@ -127,9 +129,9 @@ namespace roeutils
     bool   SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress);
     uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID);
 
-    void   onCharLoad(CCharEntity* PChar);
-    bool   onRecordClaim(CCharEntity* PChar, uint16 recordID);
-    void   onRecordTake(CCharEntity* PChar, uint16 recordID);
+    void onCharLoad(CCharEntity* PChar);
+    bool onRecordClaim(CCharEntity* PChar, uint16 recordID);
+    void onRecordTake(CCharEntity* PChar, uint16 recordID);
 
     void ClearDailyRecords(CCharEntity* PChar);
     void CycleDailyRecords();
