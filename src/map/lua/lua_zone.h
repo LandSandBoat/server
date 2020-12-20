@@ -22,7 +22,7 @@
 #ifndef _LUAZONE_H
 #define _LUAZONE_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CZone;
@@ -31,10 +31,6 @@ class CLuaZone
     CZone* m_pLuaZone;
 
 public:
-    static const char                  className[];
-    static Lunar<CLuaZone>::Register_t methods[];
-
-    CLuaZone(lua_State*);
     CLuaZone(CZone*);
 
     CZone* GetZone() const
@@ -43,14 +39,16 @@ public:
     }
 
     int32 registerRegion(lua_State*);
-    int32 levelRestriction(lua_State*);
-    int32 getPlayers(lua_State*);
-    int32 getID(lua_State*);
-    int32 getRegionID(lua_State*);
-    int32 getType(lua_State*);
+    sol::object levelRestriction();
+    sol::table getPlayers();
+    ZONEID     getID();
+    REGIONTYPE getRegionID();
+    ZONETYPE getType();
     int32 getBattlefieldByInitiator(lua_State*);
-    int32 battlefieldsFull(lua_State*);
-    int32 getWeather(lua_State*);
+    bool    battlefieldsFull(int battlefieldId);
+    WEATHER getWeather();
+
+    static void Register(sol::state& lua);
 };
 
 #endif

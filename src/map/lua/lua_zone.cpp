@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/showmsg.h"
+#include "common/showmsg.h"
 
 #include "../region.h"
 
@@ -34,28 +34,9 @@
  *                                                                       *
  ************************************************************************/
 
-CLuaZone::CLuaZone(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_pLuaZone = (CZone*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_pLuaZone = nullptr;
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Конструктор                                                          *
- *                                                                       *
- ************************************************************************/
-
 CLuaZone::CLuaZone(CZone* PZone)
+: m_pLuaZone(PZone)
 {
-    m_pLuaZone = PZone;
 }
 
 /************************************************************************
@@ -101,58 +82,34 @@ inline int32 CLuaZone::registerRegion(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaZone::levelRestriction(lua_State* L)
+inline sol::object CLuaZone::levelRestriction()
 {
-    if (m_pLuaZone != nullptr)
+    return sol::nil;
+}
+
+sol::table CLuaZone::getPlayers()
+{
+    sol::table list;
+    m_pLuaZone->ForEachChar([&list](CCharEntity* PChar)
     {
-    }
-    lua_pushnil(L);
-    return 1;
-}
-
-inline int32 CLuaZone::getPlayers(lua_State* L)
-{
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_newtable(L);
-    int newTable = lua_gettop(L);
-
-    m_pLuaZone->ForEachChar([&L, &newTable](CCharEntity* PChar) {
-        lua_getglobal(L, CLuaBaseEntity::className);
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PChar);
-        lua_pcall(L, 2, 1, 0);
-        lua_setfield(L, newTable, (const char*)PChar->GetName());
+        list.add(CLuaBaseEntity{PChar});
     });
-
-    return 1;
+    return list;
 }
 
-inline int32 CLuaZone::getID(lua_State* L)
+inline ZONEID CLuaZone::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_pushinteger(L, m_pLuaZone->GetID());
-
-    return 1;
+    return m_pLuaZone->GetID();
 }
 
-inline int32 CLuaZone::getRegionID(lua_State* L)
+inline REGIONTYPE CLuaZone::getRegionID()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-
-    lua_pushinteger(L, static_cast<uint8>(m_pLuaZone->GetRegionID()));
-
-    return 1;
+    return m_pLuaZone->GetRegionID();
 }
 
-inline int32 CLuaZone::getType(lua_State* L)
+inline ZONETYPE CLuaZone::getType()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    lua_pushinteger(L, static_cast<uint8>(m_pLuaZone->GetType()));
-    return 1;
+    return m_pLuaZone->GetType();
 }
 
 inline int32 CLuaZone::getBattlefieldByInitiator(lua_State* L)
@@ -171,12 +128,10 @@ inline int32 CLuaZone::getBattlefieldByInitiator(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaZone::battlefieldsFull(lua_State* L)
+inline bool CLuaZone::battlefieldsFull(int battlefieldId)
 {
     TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    int battlefieldId = lua_isnil(L, 1) ? -1 : (int)lua_tointeger(L, 1);
-    lua_pushboolean(L, (int)(m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId)));
-    return 1;
+    return m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId);
 }
 
 /************************************************************************
@@ -184,32 +139,23 @@ inline int32 CLuaZone::battlefieldsFull(lua_State* L)
  *  Purpose : Returns the current weather status
  ************************************************************************/
 
-inline int32 CLuaZone::getWeather(lua_State* L)
+inline WEATHER CLuaZone::getWeather()
 {
     TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    WEATHER weather = m_pLuaZone->GetWeather();
-    lua_pushinteger(L, weather);
-    return 1;
+    return m_pLuaZone->GetWeather();
 }
 
-/************************************************************************
- *                                                                       *
- *  Initializing Methods in LUA                                          *
- *                                                                       *
- ************************************************************************/
-// clang-format off
-const char CLuaZone::className[] = "CZone";
-Lunar<CLuaZone>::Register_t CLuaZone::methods[] =
+void CLuaZone::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaZone,registerRegion),
-    LUNAR_DECLARE_METHOD(CLuaZone,levelRestriction),
-    LUNAR_DECLARE_METHOD(CLuaZone,getPlayers),
-    LUNAR_DECLARE_METHOD(CLuaZone,getID),
-    LUNAR_DECLARE_METHOD(CLuaZone,getRegionID),
-    LUNAR_DECLARE_METHOD(CLuaZone,getType),
-    LUNAR_DECLARE_METHOD(CLuaZone,getBattlefieldByInitiator),
-    LUNAR_DECLARE_METHOD(CLuaZone,battlefieldsFull),
-    LUNAR_DECLARE_METHOD(CLuaZone,getWeather),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_START(CZone, CLuaZone)
+    SOL_REGISTER(registerRegion)
+    SOL_REGISTER(levelRestriction)
+    SOL_REGISTER(getPlayers)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getRegionID)
+    SOL_REGISTER(getType)
+    SOL_REGISTER(getBattlefieldByInitiator)
+    SOL_REGISTER(battlefieldsFull)
+    SOL_REGISTER(getWeather)
+    SOL_END()
+}

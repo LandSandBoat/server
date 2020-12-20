@@ -28,7 +28,6 @@
 #include "../../common/taskmgr.h"
 
 #include "lua.hpp"
-#include "lunar/lunar.h"
 
 #define SOL_ALL_SAFETIES_ON 1
 #include "sol/sol.hpp"
@@ -115,97 +114,6 @@ namespace luautils
     void  unregister_fp(int);
     int32 print(lua_State*);
     int32 prepFile(int8*, const char*);
-
-    template <class T, class L>
-    void pushLuaType(T* obj)
-    {
-        Lunar<L>::push(LuaHandle, new L(obj), true);
-    }
-
-    // TODO: if the classes themselves held the lua method declarations, this voodoo to get the wrappers wouldn't be needed!
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CBaseEntity* arg)
-    {
-        pushLuaType<CBaseEntity, CLuaBaseEntity>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CAbility* arg)
-    {
-        pushLuaType<CAbility, CLuaAbility>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CMobSkill* arg)
-    {
-        pushLuaType<CMobSkill, CLuaMobSkill>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(action_t* arg)
-    {
-        pushLuaType<action_t, CLuaAction>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CBattlefield* arg)
-    {
-        pushLuaType<CBattlefield, CLuaBattlefield>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CInstance* arg)
-    {
-        pushLuaType<CInstance, CLuaInstance>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CRegion* arg)
-    {
-        pushLuaType<CRegion, CLuaRegion>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CSpell* arg)
-    {
-        pushLuaType<CSpell, CLuaSpell>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CStatusEffect* arg)
-    {
-        pushLuaType<CStatusEffect, CLuaStatusEffect>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CTradeContainer* arg)
-    {
-        pushLuaType<CTradeContainer, CLuaTradeContainer>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CZone* arg)
-    {
-        pushLuaType<CZone, CLuaZone>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CItem* arg)
-    {
-        pushLuaType<CItem, CLuaItem>(arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_integral<T>::value> pushArg(T arg)
-    {
-        lua_pushinteger(LuaHandle, arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_floating_point<T>::value> pushArg(T arg)
-    {
-        lua_pushnumber(LuaHandle, arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_same<bool, T>::value> pushArg(T arg)
-    {
-        lua_pushboolean(LuaHandle, arg);
-    }
-    template <class T>
-    typename std::enable_if_t<std::is_same<std::nullptr_t, T>::value> pushArg(T arg)
-    {
-        lua_pushnil(LuaHandle);
-    }
-
-    void pushFunc(int lua_func, int index = 0);
-    void callFunc(int nargs);
 
     int32 SendEntityVisualPacket(lua_State*); // временное решение для работы гейзеров в Dangruf_Wadi
     int32 GetNPCByID(lua_State*);             // Returns NPC By Id

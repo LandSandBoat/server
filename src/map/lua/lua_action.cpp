@@ -22,19 +22,6 @@
 #include "lua_action.h"
 #include "../packets/action.h"
 
-CLuaAction::CLuaAction(lua_State* L)
-{
-    if (!lua_isnil(L, -1) && !lua_isnil(L, -2))
-    {
-        m_PLuaAction = (action_t*)(lua_touserdata(L, 1));
-        lua_pop(L, 2);
-    }
-    else
-    {
-        m_PLuaAction = nullptr;
-    }
-}
-
 CLuaAction::CLuaAction(action_t* Action)
 {
     m_PLuaAction = Action;
@@ -261,22 +248,23 @@ int32 CLuaAction::addEffectMessage(lua_State* L)
     return 0;
 }
 
-// clang-format off
-const char CLuaAction::className[] = "CAction";
+//==========================================================//
 
-Lunar<CLuaAction>::Register_t CLuaAction::methods[] =
+void CLuaAction::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaAction, ID),
-    LUNAR_DECLARE_METHOD(CLuaAction, recast),
-    LUNAR_DECLARE_METHOD(CLuaAction, actionID),
-    LUNAR_DECLARE_METHOD(CLuaAction, param),
-    LUNAR_DECLARE_METHOD(CLuaAction, messageID),
-    LUNAR_DECLARE_METHOD(CLuaAction, animation),
-    LUNAR_DECLARE_METHOD(CLuaAction, speceffect),
-    LUNAR_DECLARE_METHOD(CLuaAction, reaction),
-    LUNAR_DECLARE_METHOD(CLuaAction, additionalEffect),
-    LUNAR_DECLARE_METHOD(CLuaAction, addEffectParam),
-    LUNAR_DECLARE_METHOD(CLuaAction, addEffectMessage),
-    {nullptr,nullptr}
+    SOL_START(CAction, CLuaAction)
+    SOL_REGISTER(ID)
+    SOL_REGISTER(recast)
+    SOL_REGISTER(actionID)
+    SOL_REGISTER(param)
+    SOL_REGISTER(messageID)
+    SOL_REGISTER(animation)
+    SOL_REGISTER(speceffect)
+    SOL_REGISTER(reaction)
+    SOL_REGISTER(additionalEffect)
+    SOL_REGISTER(addEffectParam)
+    SOL_REGISTER(addEffectMessage)
+    SOL_END()
 };
-// clang-format on
+
+//==========================================================//

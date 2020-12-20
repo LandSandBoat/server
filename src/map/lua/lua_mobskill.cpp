@@ -30,25 +30,6 @@
  *                                                                       *
  ************************************************************************/
 
-CLuaMobSkill::CLuaMobSkill(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaMobSkill = (CMobSkill*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaMobSkill = nullptr;
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Constructor                                                          *
- *                                                                       *
- ************************************************************************/
-
 CLuaMobSkill::CLuaMobSkill(CMobSkill* PSkill)
 {
     m_PLuaMobSkill = PSkill;
@@ -156,26 +137,23 @@ inline int32 CLuaMobSkill::getMobHPP(lua_State* L)
     return 1;
 }
 
-/************************************************************************
- *                                                                       *
- *  declare lua function                                                 *
- *                                                                       *
- ************************************************************************/
-// clang-format off
-const char CLuaMobSkill::className[] = "CMobSkill";
-Lunar<CLuaMobSkill>::Register_t CLuaMobSkill::methods[] =
+//======================================================//
+
+void CLuaMobSkill::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,hasMissMsg),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isAoE),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isConal),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,isSingle),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getParam),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getID),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getTotalTargets),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getTP),
-    LUNAR_DECLARE_METHOD(CLuaMobSkill,getMobHPP),
-    {nullptr,nullptr}
+    SOL_START(CMobSkill, CLuaMobSkill)
+    SOL_REGISTER(setMsg)
+    SOL_REGISTER(getMsg)
+    SOL_REGISTER(hasMissMsg)
+    SOL_REGISTER(isAoE)
+    SOL_REGISTER(isConal)
+    SOL_REGISTER(isSingle)
+    SOL_REGISTER(getParam)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getTotalTargets)
+    SOL_REGISTER(getTP)
+    SOL_REGISTER(getMobHPP)
+    SOL_END()
 };
-// clang-format on
+
+//======================================================//

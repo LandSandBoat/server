@@ -28,21 +28,6 @@
 
 //======================================================//
 
-CLuaTradeContainer::CLuaTradeContainer(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_pMyTradeContainer = (CTradeContainer*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_pMyTradeContainer = nullptr;
-    }
-}
-
-//======================================================//
-
 CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade)
 {
     m_pMyTradeContainer = pTrade;
@@ -72,7 +57,7 @@ inline int32 CLuaTradeContainer::getItem(lua_State* L)
         {
             SlotID = (uint8)lua_tonumber(L, 1);
         }
-        lua_getglobal(L, CLuaItem::className);
+        lua_getglobal(L, "CTradeContainer");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -262,6 +247,8 @@ inline int32 CLuaTradeContainer::confirmItem(lua_State* L)
     return 1;
 }
 
+//======================================================//
+
 inline int32 CLuaTradeContainer::confirmSlot(lua_State* L)
 {
     if (m_pMyTradeContainer != nullptr)
@@ -283,21 +270,22 @@ inline int32 CLuaTradeContainer::confirmSlot(lua_State* L)
 }
 
 //======================================================//
-// clang-format off
-const char CLuaTradeContainer::className[] = "TradeContainer";
-Lunar<CLuaTradeContainer>::Register_t CLuaTradeContainer::methods[] =
+
+void CLuaTradeContainer::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getGil),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getItem),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getItemId),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getItemSubId),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getItemCount),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getSlotCount),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getItemQty),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,getSlotQty),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,hasItemQty),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,confirmItem),
-    LUNAR_DECLARE_METHOD(CLuaTradeContainer,confirmSlot),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_START(CTradeContainer, CLuaTradeContainer)
+    SOL_REGISTER(getGil)
+    SOL_REGISTER(getItem)
+    SOL_REGISTER(getItemId)
+    SOL_REGISTER(getItemSubId)
+    SOL_REGISTER(getItemCount)
+    SOL_REGISTER(getSlotCount)
+    SOL_REGISTER(getItemQty)
+    SOL_REGISTER(getSlotQty)
+    SOL_REGISTER(hasItemQty)
+    SOL_REGISTER(confirmItem)
+    SOL_REGISTER(confirmSlot)
+    SOL_END()
+}
+
+//======================================================//

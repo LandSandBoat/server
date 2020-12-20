@@ -35,25 +35,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
  *																		*
  ************************************************************************/
 
-CLuaInstance::CLuaInstance(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaInstance = (CInstance*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaInstance = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Constructor															*
- *																		*
- ************************************************************************/
-
 CLuaInstance::CLuaInstance(CInstance* PInstance)
 {
     m_PLuaInstance = PInstance;
@@ -76,7 +57,7 @@ inline int32 CLuaInstance::getAllies(lua_State* L)
     int i = 1;
     for (auto member : m_PLuaInstance->m_allyList)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -97,7 +78,7 @@ inline int32 CLuaInstance::getChars(lua_State* L)
     int i = 1;
     for (auto member : m_PLuaInstance->m_charList)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -118,7 +99,7 @@ inline int32 CLuaInstance::getMobs(lua_State* L)
     int i = 1;
     for (auto member : m_PLuaInstance->m_mobList)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -139,7 +120,7 @@ inline int32 CLuaInstance::getNpcs(lua_State* L)
     int i = 1;
     for (auto member : m_PLuaInstance->m_npcList)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -160,7 +141,7 @@ inline int32 CLuaInstance::getPets(lua_State* L)
     int i = 1;
     for (auto member : m_PLuaInstance->m_petList)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -250,7 +231,7 @@ inline int32 CLuaInstance::getEntity(lua_State* L)
 
     if (PEntity)
     {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -371,7 +352,7 @@ inline int32 CLuaInstance::insertAlly(lua_State* L)
     {
         m_PLuaInstance->InsertAlly(PAlly);
 
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -386,38 +367,35 @@ inline int32 CLuaInstance::insertAlly(lua_State* L)
     return 1;
 }
 
-/************************************************************************
- *																		*
- *  declare lua function													*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaInstance::className[] = "CInstance";
-Lunar<CLuaInstance>::Register_t CLuaInstance::methods[] =
+//==========================================================//
+
+void CLuaInstance::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaInstance, getID),
-    LUNAR_DECLARE_METHOD(CLuaInstance, setLevelCap),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getAllies),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getChars),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getMobs),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getNpcs),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getPets),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getTimeLimit),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getEntryPos),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaInstance, setLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getProgress),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getEntity),
-    LUNAR_DECLARE_METHOD(CLuaInstance, setProgress),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaInstance, setWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaInstance, getStage),
-    LUNAR_DECLARE_METHOD(CLuaInstance, setStage),
-    LUNAR_DECLARE_METHOD(CLuaInstance, fail),
-    LUNAR_DECLARE_METHOD(CLuaInstance, failed),
-    LUNAR_DECLARE_METHOD(CLuaInstance, complete),
-    LUNAR_DECLARE_METHOD(CLuaInstance, completed),
-    LUNAR_DECLARE_METHOD(CLuaInstance, insertAlly),
-    { nullptr, nullptr }
+    SOL_START(CInstance, CLuaInstance)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(setLevelCap)
+    SOL_REGISTER(getAllies)
+    SOL_REGISTER(getChars)
+    SOL_REGISTER(getMobs)
+    SOL_REGISTER(getNpcs)
+    SOL_REGISTER(getPets)
+    SOL_REGISTER(getTimeLimit)
+    SOL_REGISTER(getEntryPos)
+    SOL_REGISTER(getLastTimeUpdate)
+    SOL_REGISTER(setLastTimeUpdate)
+    SOL_REGISTER(getProgress)
+    SOL_REGISTER(getEntity)
+    SOL_REGISTER(setProgress)
+    SOL_REGISTER(getWipeTime)
+    SOL_REGISTER(setWipeTime)
+    SOL_REGISTER(getStage)
+    SOL_REGISTER(setStage)
+    SOL_REGISTER(fail)
+    SOL_REGISTER(failed)
+    SOL_REGISTER(complete)
+    SOL_REGISTER(completed)
+    SOL_REGISTER(insertAlly)
+    SOL_END()
 };
-// clang-format on
+
+//======================================================//

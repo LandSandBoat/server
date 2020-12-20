@@ -31,10 +31,6 @@ class CLuaItem
     CItem* m_PLuaItem;
 
 public:
-    static const char                  className[];
-    static Lunar<CLuaItem>::Register_t methods[];
-
-    CLuaItem(lua_State*);
     CLuaItem(CItem*);
 
     CItem* GetItem() const
@@ -79,6 +75,8 @@ public:
     int32 isShield(lua_State*);     // is a Shield
 
     int32 getSignature(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

@@ -31,10 +31,6 @@ class CLuaInstance
     CInstance* m_PLuaInstance;
 
 public:
-    static const char                      className[];
-    static Lunar<CLuaInstance>::Register_t methods[];
-
-    CLuaInstance(lua_State*);
     CLuaInstance(CInstance*);
 
     CInstance* GetInstance() const
@@ -68,6 +64,8 @@ public:
     int32 completed(lua_State*);
 
     int32 insertAlly(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

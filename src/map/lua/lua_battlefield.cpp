@@ -36,25 +36,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
  *																		*
  ************************************************************************/
 
-CLuaBattlefield::CLuaBattlefield(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaBattlefield = (CBattlefield*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaBattlefield = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Constructor															*
- *																		*
- ************************************************************************/
-
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
 {
     m_PLuaBattlefield = PBattlefield;
@@ -145,7 +126,7 @@ inline int32 CLuaBattlefield::getPlayers(lua_State* L)
     m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
-            lua_getglobal(L, CLuaBaseEntity::className);
+            lua_getglobal(L, "CBaseEntity");
             lua_pushstring(L, "new");
             lua_gettable(L, -2);
             lua_insert(L, -2);
@@ -175,7 +156,7 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
-            lua_getglobal(L, CLuaBaseEntity::className);
+            lua_getglobal(L, "CBaseEntity");
             lua_pushstring(L, "new");
             lua_gettable(L, -2);
             lua_insert(L, -2);
@@ -189,7 +170,7 @@ inline int32 CLuaBattlefield::getMobs(lua_State* L)
     if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
-            lua_getglobal(L, CLuaBaseEntity::className);
+            lua_getglobal(L, "CBaseEntity");
             lua_pushstring(L, "new");
             lua_gettable(L, -2);
             lua_insert(L, -2);
@@ -210,7 +191,7 @@ inline int32 CLuaBattlefield::getNPCs(lua_State* L)
     int i = 1;
 
     m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -231,7 +212,7 @@ inline int32 CLuaBattlefield::getAllies(lua_State* L)
     int i = 1;
 
     m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -369,13 +350,14 @@ inline int32 CLuaBattlefield::loadMobs(lua_State* L)
 inline int32 CLuaBattlefield::spawnLoot(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    CBaseEntity* PEntity = !lua_isnil(L, 1) && lua_isuserdata(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1)->GetBaseEntity() : nullptr;
-    lua_pushboolean(L, m_PLuaBattlefield->SpawnLoot(PEntity));
+    //CBaseEntity* PEntity = !lua_isnil(L, 1) && lua_isuserdata(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1)->GetBaseEntity() : nullptr;
+    //lua_pushboolean(L, m_PLuaBattlefield->SpawnLoot(PEntity));
     return 1;
 }
 
 inline int32 CLuaBattlefield::insertEntity(lua_State* L)
 {
+    /*
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
 
@@ -400,7 +382,7 @@ inline int32 CLuaBattlefield::insertEntity(lua_State* L)
     {
         m_PLuaBattlefield->InsertEntity(PEntity, inBattlefield, conditions, ally);
 
-        lua_getglobal(L, CLuaBaseEntity::className);
+        lua_getglobal(L, "CBaseEntity");
         lua_pushstring(L, "new");
         lua_gettable(L, -2);
         lua_insert(L, -2);
@@ -412,6 +394,7 @@ inline int32 CLuaBattlefield::insertEntity(lua_State* L)
         ShowError(CL_RED "CLuaBattlefield::insertEntity - targid ID %u not found!" CL_RESET, targid);
         lua_pushnil(L);
     }
+    */
     return 1;
 }
 
@@ -441,44 +424,41 @@ inline int32 CLuaBattlefield::lose(lua_State* L)
     return 0;
 }
 
-/************************************************************************
- *																		*
- *  declare lua function													*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaBattlefield::className[] = "CBattlefield";
-Lunar<CLuaBattlefield>::Register_t CLuaBattlefield::methods[] =
+//==========================================================//
+
+void CLuaBattlefield::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getID),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getArea),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getTimeLimit),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getRemainingTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getTimeInside),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getFightTick),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getFightTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getPlayers),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getMobs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getNPCs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getAllies),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getRecord),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getStatus),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getInitiator),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,getLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setLastTimeUpdate),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setTimeLimit),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setWipeTime),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setRecord),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,setStatus),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,loadMobs),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,spawnLoot),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,insertEntity),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,cleanup),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,win),
-    LUNAR_DECLARE_METHOD(CLuaBattlefield,lose),
-    { nullptr,nullptr }
+    SOL_START(CBattlefield, CLuaBattlefield)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getArea)
+    SOL_REGISTER(getTimeLimit)
+    SOL_REGISTER(getRemainingTime)
+    SOL_REGISTER(getTimeInside)
+    SOL_REGISTER(getFightTick)
+    SOL_REGISTER(getWipeTime)
+    SOL_REGISTER(getFightTime)
+    SOL_REGISTER(getPlayers)
+    SOL_REGISTER(getMobs)
+    SOL_REGISTER(getNPCs)
+    SOL_REGISTER(getAllies)
+    SOL_REGISTER(getRecord)
+    SOL_REGISTER(getStatus)
+    SOL_REGISTER(getLastTimeUpdate)
+    SOL_REGISTER(getInitiator)
+    SOL_REGISTER(getLocalVar)
+    SOL_REGISTER(setLocalVar)
+    SOL_REGISTER(setLastTimeUpdate)
+    SOL_REGISTER(setTimeLimit)
+    SOL_REGISTER(setWipeTime)
+    SOL_REGISTER(setRecord)
+    SOL_REGISTER(setStatus)
+    SOL_REGISTER(loadMobs)
+    SOL_REGISTER(spawnLoot)
+    SOL_REGISTER(insertEntity)
+    SOL_REGISTER(cleanup)
+    SOL_REGISTER(win)
+    SOL_REGISTER(lose)
+    SOL_END()
 };
-// clang-format on
+
+//==========================================================//

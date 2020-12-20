@@ -31,10 +31,6 @@ class CLuaRegion
     CRegion* m_PLuaRegion;
 
 public:
-    static const char                    className[];
-    static Lunar<CLuaRegion>::Register_t methods[];
-
-    CLuaRegion(lua_State*);
     CLuaRegion(CRegion*);
 
     CRegion* GetRegion() const
@@ -46,6 +42,8 @@ public:
     int32 GetCount(lua_State*);
     int32 AddCount(lua_State*);
     int32 DelCount(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

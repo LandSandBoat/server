@@ -33,10 +33,6 @@ class CLuaBaseEntity
     CBaseEntity* m_PBaseEntity;
 
 public:
-    static const char                        className[];
-    static Lunar<CLuaBaseEntity>::Register_t methods[];
-
-    CLuaBaseEntity(lua_State*);
     CLuaBaseEntity(CBaseEntity*);
 
     CBaseEntity* GetBaseEntity() const
@@ -715,6 +711,8 @@ public:
     int32 getDespoilDebuff(lua_State*); // gets the status effect id to apply to the mob on successful despoil
     int32 itemStolen(lua_State*);       // sets mob's ItemStolen var = true
     int32 getTHlevel(lua_State*);       // Returns the Monster's current Treasure Hunter Tier
+
+    static void Register(sol::state& lua);
 };
 
 #endif

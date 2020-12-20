@@ -31,10 +31,6 @@ class CLuaSpell
     CSpell* m_PLuaSpell;
 
 public:
-    static const char                   className[];
-    static Lunar<CLuaSpell>::Register_t methods[];
-
-    CLuaSpell(lua_State*);
     CLuaSpell(CSpell*);
 
     CSpell* GetSpell() const
@@ -60,6 +56,8 @@ public:
     int32 getSpellGroup(lua_State*);
     int32 getFlag(lua_State*);
     int32 castTime(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

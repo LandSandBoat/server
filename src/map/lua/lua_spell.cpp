@@ -31,25 +31,6 @@
  *																		*
  ************************************************************************/
 
-CLuaSpell::CLuaSpell(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaSpell = (CSpell*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaSpell = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Конструктор															*
- *																		*
- ************************************************************************/
-
 CLuaSpell::CLuaSpell(CSpell* PSpell)
 {
     m_PLuaSpell = PSpell;
@@ -208,32 +189,29 @@ inline int32 CLuaSpell::getFlag(lua_State* L)
     return 1;
 }
 
-/************************************************************************
- *																		*
- *  Инициализация методов в lua											*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaSpell::className[] = "CSpell";
-Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
+//======================================================//
+
+void CLuaSpell::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaSpell,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setAoE),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setFlag),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setRadius),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setAnimation),
-    LUNAR_DECLARE_METHOD(CLuaSpell,setMPCost),
-    LUNAR_DECLARE_METHOD(CLuaSpell,isAoE),
-    LUNAR_DECLARE_METHOD(CLuaSpell,tookEffect),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getMagicBurstMessage),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getElement),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getTotalTargets),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getSkillType),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getID),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getMPCost),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getSpellGroup),
-    LUNAR_DECLARE_METHOD(CLuaSpell,getFlag),
-    LUNAR_DECLARE_METHOD(CLuaSpell,castTime),
-    {nullptr,nullptr}
+    SOL_START(CSpell, CLuaSpell)
+    SOL_REGISTER(setMsg)
+    SOL_REGISTER(setAoE)
+    SOL_REGISTER(setFlag)
+    SOL_REGISTER(setRadius)
+    SOL_REGISTER(setAnimation)
+    SOL_REGISTER(setMPCost)
+    SOL_REGISTER(isAoE)
+    SOL_REGISTER(tookEffect)
+    SOL_REGISTER(getMagicBurstMessage)
+    SOL_REGISTER(getElement)
+    SOL_REGISTER(getTotalTargets)
+    SOL_REGISTER(getSkillType)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getMPCost)
+    SOL_REGISTER(getSpellGroup)
+    SOL_REGISTER(getFlag)
+    SOL_REGISTER(castTime)
+    SOL_END()
 };
-// clang-format on
+
+//======================================================//

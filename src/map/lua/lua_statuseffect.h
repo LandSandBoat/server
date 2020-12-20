@@ -31,10 +31,6 @@ class CLuaStatusEffect
     CStatusEffect* m_PLuaStatusEffect;
 
 public:
-    static const char                          className[];
-    static Lunar<CLuaStatusEffect>::Register_t methods[];
-
-    CLuaStatusEffect(lua_State*);
     CLuaStatusEffect(CStatusEffect*);
 
     CStatusEffect* GetStatusEffect() const
@@ -68,6 +64,8 @@ public:
     int32 getFlag(lua_State*);
     int32 setFlag(lua_State*);
     int32 unsetFlag(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

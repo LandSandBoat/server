@@ -28,25 +28,6 @@
  *																		*
  ************************************************************************/
 
-CLuaRegion::CLuaRegion(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaRegion = (CRegion*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaRegion = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Конструктор															*
- *																		*
- ************************************************************************/
-
 CLuaRegion::CLuaRegion(CRegion* PRegion)
 {
     TPZ_DEBUG_BREAK_IF(PRegion == nullptr);
@@ -112,20 +93,15 @@ inline int32 CLuaRegion::DelCount(lua_State* L)
     return 1;
 }
 
-/************************************************************************
- *																		*
- *  Инициализация методов в lua											*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaRegion::className[] = "CRegion";
+//======================================================//
 
-Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
+void CLuaRegion::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetRegionID),
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,AddCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,DelCount),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_START(CRegion, CLuaRegion)
+    SOL_REGISTER(GetRegionID)
+    SOL_REGISTER(AddCount)
+    SOL_REGISTER(DelCount)
+    SOL_END()
+}
+
+//======================================================//

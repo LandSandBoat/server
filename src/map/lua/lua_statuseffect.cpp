@@ -27,21 +27,6 @@
 
 //======================================================//
 
-CLuaStatusEffect::CLuaStatusEffect(lua_State* L)
-{
-    if (!lua_isnil(L, 1))
-    {
-        m_PLuaStatusEffect = (CStatusEffect*)lua_touserdata(L, 1);
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaStatusEffect = nullptr;
-    }
-}
-
-//======================================================//
-
 CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 {
     m_PLuaStatusEffect = StatusEffect;
@@ -313,34 +298,34 @@ inline int32 CLuaStatusEffect::unsetFlag(lua_State* L)
 }
 
 //======================================================//
-// clang-format off
-const char CLuaStatusEffect::className[] = "CLuaStatusEffect";
 
-Lunar<CLuaStatusEffect>::Register_t CLuaStatusEffect::methods[] =
+void CLuaStatusEffect::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getType),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getSubType),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setIcon),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getPower),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setPower),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getDuration),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setDuration),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getStartTime),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getLastTick),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getTimeRemaining),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getTickCount),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,resetStartTime),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,addMod),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getSubPower),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setSubPower),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getTier),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setTier),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getTick),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setTick),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setStartTime),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,getFlag),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,setFlag),
-    LUNAR_DECLARE_METHOD(CLuaStatusEffect,unsetFlag),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_START(CStatusEffect, CLuaStatusEffect)
+    SOL_REGISTER(getType)
+    SOL_REGISTER(getSubType)
+    SOL_REGISTER(setIcon)
+    SOL_REGISTER(getPower)
+    SOL_REGISTER(setPower)
+    SOL_REGISTER(getDuration)
+    SOL_REGISTER(setDuration)
+    SOL_REGISTER(getStartTime)
+    SOL_REGISTER(getLastTick)
+    SOL_REGISTER(getTimeRemaining)
+    SOL_REGISTER(getTickCount)
+    SOL_REGISTER(resetStartTime)
+    SOL_REGISTER(addMod)
+    SOL_REGISTER(getSubPower)
+    SOL_REGISTER(setSubPower)
+    SOL_REGISTER(getTier)
+    SOL_REGISTER(setTier)
+    SOL_REGISTER(getTick)
+    SOL_REGISTER(setTick)
+    SOL_REGISTER(setStartTime)
+    SOL_REGISTER(getFlag)
+    SOL_REGISTER(setFlag)
+    SOL_REGISTER(unsetFlag)
+    SOL_END()
+}
+
+//======================================================//

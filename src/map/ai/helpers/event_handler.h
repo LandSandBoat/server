@@ -55,10 +55,11 @@ public:
         {
             for (auto&& event : eventListener->second)
             {
-                int nargs = sizeof...(args);
-                luautils::pushFunc(event.lua_func);
-                pushArg(std::forward<Args&&>(args)...);
-                luautils::callFunc(nargs);
+                std::ignore = event;
+                //int nargs = sizeof...(args);
+                //luautils::pushFunc(event.lua_func);
+                //pushArg(std::forward<Args&&>(args)...);
+                //luautils::callFunc(nargs);
             }
         }
     }
@@ -70,8 +71,9 @@ public:
         {
             for (auto&& event : eventListener->second)
             {
-                luautils::pushFunc(event.lua_func, nargs);
-                luautils::callFunc(nargs);
+                std::ignore = event;
+                //luautils::pushFunc(event.lua_func, nargs);
+                //luautils::callFunc(nargs);
             }
         }
     }
@@ -83,13 +85,13 @@ private:
     template <class T>
     void pushArg(T&& arg)
     {
-        luautils::pushArg<std::decay_t<T>>(std::forward<T>(arg));
+        // luautils::pushArg<std::decay_t<T>>(std::forward<T>(arg));
     }
     template <class T, class... Args>
     void pushArg(T&& arg, Args&&... args)
     {
-        pushArg(std::forward<T>(arg));
-        pushArg(std::forward<Args&&>(args)...);
+        // pushArg(std::forward<T>(arg));
+        // pushArg(std::forward<Args&&>(args)...);
     }
 };
 

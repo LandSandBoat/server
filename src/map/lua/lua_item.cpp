@@ -29,19 +29,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../items/item_weapon.h"
 #include "../utils/itemutils.h"
 
-CLuaItem::CLuaItem(lua_State* L)
-{
-    if (!lua_isnil(L, 1))
-    {
-        m_PLuaItem = (CItem*)lua_touserdata(L, 1);
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaItem = nullptr;
-    }
-}
-
 CLuaItem::CLuaItem(CItem* PItem)
 {
     m_PLuaItem = PItem;
@@ -394,37 +381,36 @@ inline int32 CLuaItem::getSignature(lua_State* L)
     return 1;
 }
 //==========================================================//
-// clang-format off
-const char CLuaItem::className[] = "CItem";
 
-Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
+void CLuaItem::Register(sol::state& lua)
 {
-    LUNAR_DECLARE_METHOD(CLuaItem,getID),
-    LUNAR_DECLARE_METHOD(CLuaItem,getSubID),
-    LUNAR_DECLARE_METHOD(CLuaItem,getFlag),
-    LUNAR_DECLARE_METHOD(CLuaItem,getAHCat),
-    LUNAR_DECLARE_METHOD(CLuaItem,getQuantity),
-    LUNAR_DECLARE_METHOD(CLuaItem,getLocationID),
-    LUNAR_DECLARE_METHOD(CLuaItem,getBasePrice),
-    LUNAR_DECLARE_METHOD(CLuaItem,getSlotID),
-    LUNAR_DECLARE_METHOD(CLuaItem,getTrialNumber),
-    LUNAR_DECLARE_METHOD(CLuaItem,getMatchingTrials),
-    LUNAR_DECLARE_METHOD(CLuaItem,getWornItem),
-    LUNAR_DECLARE_METHOD(CLuaItem,isType),
-    LUNAR_DECLARE_METHOD(CLuaItem,isSubType),
-    LUNAR_DECLARE_METHOD(CLuaItem,getName),
-    LUNAR_DECLARE_METHOD(CLuaItem,getILvl),
-    LUNAR_DECLARE_METHOD(CLuaItem,getReqLvl),
-    LUNAR_DECLARE_METHOD(CLuaItem,getMod),
-    LUNAR_DECLARE_METHOD(CLuaItem,addMod),
-    LUNAR_DECLARE_METHOD(CLuaItem,delMod),
-    LUNAR_DECLARE_METHOD(CLuaItem,getAugment),
-    LUNAR_DECLARE_METHOD(CLuaItem,getSkillType),
-    LUNAR_DECLARE_METHOD(CLuaItem,getWeaponskillPoints),
-    LUNAR_DECLARE_METHOD(CLuaItem,isTwoHanded),
-    LUNAR_DECLARE_METHOD(CLuaItem,isHandToHand),
-    LUNAR_DECLARE_METHOD(CLuaItem,isShield),
-    LUNAR_DECLARE_METHOD(CLuaItem,getSignature),
-    {nullptr,nullptr}
+    SOL_START(CItem, CLuaItem)
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getSubID)
+    SOL_REGISTER(getFlag)
+    SOL_REGISTER(getAHCat)
+    SOL_REGISTER(getQuantity)
+    SOL_REGISTER(getLocationID)
+    SOL_REGISTER(getBasePrice)
+    SOL_REGISTER(getSlotID)
+    SOL_REGISTER(getTrialNumber)
+    SOL_REGISTER(getMatchingTrials)
+    SOL_REGISTER(getWornItem)
+    SOL_REGISTER(isType)
+    SOL_REGISTER(isSubType)
+    SOL_REGISTER(getName)
+    SOL_REGISTER(getILvl)
+    SOL_REGISTER(getReqLvl)
+    SOL_REGISTER(getMod)
+    SOL_REGISTER(addMod)
+    SOL_REGISTER(delMod)
+    SOL_REGISTER(getAugment)
+    SOL_REGISTER(getSkillType)
+    SOL_REGISTER(getWeaponskillPoints)
+    SOL_REGISTER(isTwoHanded)
+    SOL_REGISTER(isHandToHand)
+    SOL_REGISTER(isShield)
+    SOL_REGISTER(getSignature)
 };
-// clang-format on
+
+//======================================================//

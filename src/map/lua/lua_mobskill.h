@@ -32,10 +32,6 @@ class CLuaMobSkill
     CMobSkill* m_PLuaMobSkill;
 
 public:
-    static const char                      className[];
-    static Lunar<CLuaMobSkill>::Register_t methods[];
-
-    CLuaMobSkill(lua_State*);
     CLuaMobSkill(CMobSkill*);
 
     CMobSkill* GetMobSkill() const
@@ -53,6 +49,8 @@ public:
     int32 setMsg(lua_State*);
     int32 getMsg(lua_State*);
     int32 getTotalTargets(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

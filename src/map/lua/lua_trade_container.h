@@ -31,10 +31,6 @@ class CLuaTradeContainer
     CTradeContainer* m_pMyTradeContainer;
 
 public:
-    static const char                            className[];
-    static Lunar<CLuaTradeContainer>::Register_t methods[];
-
-    CLuaTradeContainer(lua_State*);
     CLuaTradeContainer(CTradeContainer*);
 
     CTradeContainer* GetTradeContainer() const
@@ -53,6 +49,8 @@ public:
     int32 getSlotCount(lua_State*);
     int32 confirmItem(lua_State*);
     int32 confirmSlot(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

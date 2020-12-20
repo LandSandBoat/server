@@ -1,4 +1,4 @@
-﻿/*
+/*
  * roe.cpp
  *      Author: Kreidos | github.com/kreidos
  *

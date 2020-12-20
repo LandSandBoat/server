@@ -32,10 +32,6 @@ class CLuaAction
     action_t* m_PLuaAction;
 
 public:
-    static const char                    className[];
-    static Lunar<CLuaAction>::Register_t methods[];
-
-    CLuaAction(lua_State*);
     CLuaAction(action_t*);
 
     action_t* GetAction() const
@@ -54,6 +50,8 @@ public:
     int32 addEffectParam(lua_State*);
     int32 addEffectMessage(lua_State*);
     int32 additionalEffect(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif

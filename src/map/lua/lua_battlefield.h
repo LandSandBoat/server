@@ -32,10 +32,6 @@ class CLuaBattlefield
     CBattlefield* m_PLuaBattlefield;
 
 public:
-    static const char                         className[];
-    static Lunar<CLuaBattlefield>::Register_t methods[];
-
-    CLuaBattlefield(lua_State*);
     CLuaBattlefield(CBattlefield*);
 
     CBattlefield* GetBattlefield() const
@@ -73,6 +69,8 @@ public:
     int32 cleanup(lua_State*);
     int32 win(lua_State*);
     int32 lose(lua_State*);
+
+    static void Register(sol::state& lua);
 };
 
 #endif
