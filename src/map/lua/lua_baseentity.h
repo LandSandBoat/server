@@ -53,13 +53,13 @@ public:
     int32 messageCombat(lua_State* L); // Sends Combat Message
 
     // Variables
-    int32 getCharVar(lua_State*); // Returns a character variable
-    int32 setCharVar(lua_State*); // Sets a character variable
-    int32 addCharVar(lua_State*); // Increments/decriments/sets a character variable
-    int32 getLocalVar(lua_State*);
-    int32 setLocalVar(lua_State*);
-    int32 resetLocalVars(lua_State*);
-    int32 getLastOnline(lua_State*); // Returns the unix timestamp of last time the player logged out or zoned
+    int32     getCharVar(std::string& varName); // Returns a character variable
+    void   setCharVar(std::string& varname, int32 value); // Sets a character variable
+    void      addCharVar(std::string& varname, int32 value); // Increments/decriments/sets a character variable
+    uint32    getLocalVar(std::string& var);
+    void      setLocalVar(std::string& var, uint32 val);
+    void resetLocalVars();
+    uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
     int32 injectPacket(lua_State*);       // Send the character a packet kept in a file
@@ -664,7 +664,7 @@ public:
 
     int32 setAggressive(lua_State* L);
     int32 setTrueDetection(lua_State* L);
-    int32 setUnkillable(lua_State* L);
+    void  setUnkillable(bool unkillable);
     int32 untargetable(lua_State* L);
 
     int32 setDelay(lua_State*);  // sets a mobs weapon delay

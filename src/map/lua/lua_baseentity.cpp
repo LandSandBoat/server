@@ -605,17 +605,11 @@ int32 CLuaBaseEntity::messageCombat(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCharVar(lua_State* L)
+int32 CLuaBaseEntity::getCharVar(std::string& varName)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    const char* varname = lua_tostring(L, 1);
-
-    lua_pushinteger(L, charutils::GetCharVar((CCharEntity*)m_PBaseEntity, varname));
-    return 1;
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::GetCharVar(PChar, varName.c_str());
 }
 
 /************************************************************************
@@ -625,29 +619,19 @@ inline int32 CLuaBaseEntity::getCharVar(lua_State* L)
  *  Notes   : Passing a '0' value will delete the variable
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setCharVar(lua_State* L)
+void CLuaBaseEntity::setCharVar(std::string& varname, int32 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isstring(L, -2));
-
-    const char* varname = lua_tostring(L, -2);
-    int32       value   = (int32)lua_tointeger(L, -1);
 
     if (value == 0)
     {
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", m_PBaseEntity->id, varname);
-        return 0;
+        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", m_PBaseEntity->id, varname.c_str());
     }
-
-    const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-
-    Sql_Query(SqlHandle, fmtQuery, m_PBaseEntity->id, varname, value, value);
-
-    lua_pushnil(L);
-    return 1;
+    else
+    {
+        const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
+        Sql_Query(SqlHandle, fmtQuery, m_PBaseEntity->id, varname.c_str(), value, value);
+    }
 }
 
 /************************************************************************
@@ -657,22 +641,13 @@ inline int32 CLuaBaseEntity::setCharVar(lua_State* L)
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addCharVar(lua_State* L)
+void CLuaBaseEntity::addCharVar(std::string& varname, int32 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isstring(L, -2));
-
-    const char* varname = lua_tostring(L, -2);
-    int32       value   = (int32)lua_tointeger(L, -1);
 
     const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
     Sql_Query(SqlHandle, Query, m_PBaseEntity->id, varname, value, value);
-
-    return 0;
 }
 
 /************************************************************************
@@ -682,16 +657,9 @@ inline int32 CLuaBaseEntity::addCharVar(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getLocalVar(lua_State* L)
+uint32 CLuaBaseEntity::getLocalVar(std::string& var)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    const char* var = lua_tostring(L, 1);
-
-    lua_pushinteger(L, m_PBaseEntity->GetLocalVar(var));
-
-    return 1;
+    return m_PBaseEntity->GetLocalVar(var.c_str());
 }
 
 /************************************************************************
@@ -701,18 +669,9 @@ inline int32 CLuaBaseEntity::getLocalVar(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setLocalVar(lua_State* L)
+void CLuaBaseEntity::setLocalVar(std::string& var, uint32 val)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    const char* var = lua_tostring(L, 1);
-    auto        val = (uint32)lua_tointeger(L, 2);
-
-    m_PBaseEntity->SetLocalVar(var, val);
-
-    return 0;
+    m_PBaseEntity->SetLocalVar(var.c_str(), val);
 }
 
 /************************************************************************
@@ -722,13 +681,9 @@ inline int32 CLuaBaseEntity::setLocalVar(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::resetLocalVars(lua_State* L)
+void CLuaBaseEntity::resetLocalVars()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     m_PBaseEntity->ResetLocalVars();
-
-    return 0;
 }
 
 /************************************************************************
@@ -738,21 +693,16 @@ inline int32 CLuaBaseEntity::resetLocalVars(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getLastOnline(lua_State* L)
+inline uint32 CLuaBaseEntity::getLastOnline()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        lua_pushinteger(L, PChar->lastOnline);
-    }
-    else
-    {
-        lua_pushnil(L);
+        return PChar->lastOnline;
     }
 
-    return 1;
+    return 0;
 }
 
 /************************************************************************
@@ -14364,14 +14314,11 @@ inline int32 CLuaBaseEntity::setTrueDetection(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setUnkillable(lua_State* L)
+void CLuaBaseEntity::setUnkillable(bool unkillable)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    ((CBattleEntity*)m_PBaseEntity)->m_unkillable = lua_toboolean(L, 1);
-
-    return 0;
+    dynamic_cast<CBattleEntity*>(m_PBaseEntity)->m_unkillable = unkillable;
 }
 
 /************************************************************************
@@ -15312,13 +15259,13 @@ void CLuaBaseEntity::Register(sol::state& lua)
     //SOL_REGISTER(messageCombat),
 
     // Variables
-    //SOL_REGISTER(getCharVar),
-    //SOL_REGISTER(setCharVar),
-    //SOL_REGISTER(addCharVar),
-    //SOL_REGISTER(getLocalVar),
-    //SOL_REGISTER(setLocalVar),
-    //SOL_REGISTER(resetLocalVars),
-    //SOL_REGISTER(getLastOnline),
+    SOL_REGISTER(getCharVar)
+    SOL_REGISTER(setCharVar)
+    SOL_REGISTER(addCharVar)
+    SOL_REGISTER(getLocalVar)
+    SOL_REGISTER(setLocalVar)
+    SOL_REGISTER(resetLocalVars)
+    SOL_REGISTER(getLastOnline)
 
     // Packets, Events, and Flags
     //SOL_REGISTER(injectPacket),
@@ -15920,7 +15867,7 @@ void CLuaBaseEntity::Register(sol::state& lua)
 
     //SOL_REGISTER(setAggressive),
     //SOL_REGISTER(setTrueDetection),
-    //SOL_REGISTER(setUnkillable),
+    SOL_REGISTER(setUnkillable)
     //SOL_REGISTER(untargetable),
 
     //SOL_REGISTER(setDelay),
