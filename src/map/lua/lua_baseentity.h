@@ -177,7 +177,7 @@ public:
     int32 bringPlayer(lua_State*); // warps target to self
 
     // Items
-    int32 getEquipID(lua_State*);      // Gets the Item Id of the item in specified slot
+    uint16 getEquipID(SLOTTYPE slot);  // Gets the Item Id of the item in specified slot
     int32 getEquippedItem(lua_State*); // Returns the item object from specified slot
     int32 hasItem(lua_State*);         // Check to see if Entity has item in inventory (hasItem(itemNumber))
     int32 addItem(lua_State*);         // Add item to Entity inventory (additem(itemNumber,quantity))
@@ -210,9 +210,9 @@ public:
 
     int32 getShieldSize(lua_State*); // Gets shield size of character
 
-    int32 hasGearSetMod(lua_State*);    // Checks if character already has a gear set mod
-    int32 addGearSetMod(lua_State*);    // Sets the characters gear set mod
-    int32 clearGearSetMods(lua_State*); // Clears a characters gear set mods
+    bool hasGearSetMod(uint8 modNameId);                             // Checks if character already has a gear set mod
+    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue); // Sets the characters gear set mod
+    void clearGearSetMods();                                         // Clears a characters gear set mods
 
     int32 getStorageItem(lua_State*); // returns item object player:getStorageItem(containerid, slotid, equipslotid)
     int32 storeWithPorterMoogle(lua_State* L);

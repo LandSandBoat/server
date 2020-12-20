@@ -3561,31 +3561,24 @@ inline int32 CLuaBaseEntity::bringPlayer(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getEquipID(lua_State* L)
+uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC && m_PBaseEntity->objtype != TYPE_PET && m_PBaseEntity->objtype != TYPE_MOB);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        uint8 SLOT = (uint8)lua_tointeger(L, 1);
+        TPZ_DEBUG_BREAK_IF(slot > 15);
 
-        TPZ_DEBUG_BREAK_IF(SLOT > 15);
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        CItem* PItem = PChar->getEquip(slot);
 
-        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-        CItem* PItem = PChar->getEquip((SLOTTYPE)SLOT);
-
-        if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
+        if (PItem && PItem->isType(ITEM_EQUIPMENT))
         {
-            lua_pushinteger(L, PItem->getID());
-            return 1;
+            return PItem->getID();
         }
     }
-    lua_pushinteger(L, 0);
-    return 1;
+
+    return 0;
 }
 
 /************************************************************************
@@ -4566,26 +4559,22 @@ inline int32 CLuaBaseEntity::getShieldSize(lua_State* L)
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasGearSetMod(lua_State* L)
+bool CLuaBaseEntity::hasGearSetMod(uint8 modNameId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    auto         modNameId = (uint8)lua_tonumber(L, 1);
-    CCharEntity* PChar     = (CCharEntity*)m_PBaseEntity;
-
-    for (auto exsistingMod : PChar->m_GearSetMods)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        if (modNameId == exsistingMod.modNameId)
+        for (auto exsistingMod : PChar->m_GearSetMods)
         {
-            lua_pushboolean(L, true);
-            return 1;
+            if (modNameId == exsistingMod.modNameId)
+            {
+                return true;
+            }
         }
     }
 
-    lua_pushboolean(L, false);
-    return 1;
+    return false;
 }
 
 /************************************************************************
@@ -4595,36 +4584,27 @@ inline int32 CLuaBaseEntity::hasGearSetMod(lua_State* L)
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addGearSetMod(lua_State* L)
+void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-
     GearSetMod_t gearSetMod;
-    gearSetMod.modNameId = (uint8)lua_tonumber(L, 1);
-    gearSetMod.modId     = static_cast<Mod>(lua_tointeger(L, 2));
-    gearSetMod.modValue  = (uint16)lua_tonumber(L, 3);
+    gearSetMod.modNameId = modNameId;
+    gearSetMod.modId     = modId;
+    gearSetMod.modValue  = modValue;
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
-    for (auto exsistingMod : PChar->m_GearSetMods)
+    for (auto& exsistingMod : PChar->m_GearSetMods)
     {
         if (gearSetMod.modNameId == exsistingMod.modNameId)
         {
-            lua_pushnil(L);
-            return 1;
+            return;
         }
     }
 
     PChar->m_GearSetMods.push_back(gearSetMod);
     PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
-
-    lua_pushnil(L);
-    return 1;
 }
 
 /************************************************************************
@@ -4634,22 +4614,17 @@ inline int32 CLuaBaseEntity::addGearSetMod(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::clearGearSetMods(lua_State* L)
+void CLuaBaseEntity::clearGearSetMods()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
-        PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
+        for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
+        {
+            GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
+            PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
+        }
+        PChar->m_GearSetMods.clear();
     }
-    PChar->m_GearSetMods.clear();
-
-    lua_pushnil(L);
-    return 1;
 }
 
 /************************************************************************
@@ -15318,697 +15293,683 @@ inline int32 CLuaBaseEntity::getTHlevel(lua_State* L)
     return 1;
 }
 
-/*
-//=======================================================//
-// clang-format off
-const char CLuaBaseEntity::className[] = "CBaseEntity";
-
-Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
-{
-    // Messaging System
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,showText),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageText),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,PrintToPlayer),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,PrintToArea),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageBasic),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messagePublic),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageSpecial),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageSystem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageCombat),
-
-    // Variables
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCharVar),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCharVar),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addCharVar),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLocalVar),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetLocalVars),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLastOnline),
-
-    // Packets, Events, and Flags
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,injectPacket),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,injectActionPacket),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,entityVisualPacket),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,entityAnimationPacket),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,startEvent),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,startEventString),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEvent),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEventString),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEventTarget),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,release),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setFlag),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,moghouseFlag),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,needToZone),
-
-    // Object Identification
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getShortID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCursorTarget),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getObjType),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isPC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isNPC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isMob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isPet),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isAlly),
-
-    // AI and Control
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,initNpcAi),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetAI),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStatus),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setStatus),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentAction),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,lookAt),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,clearTargID),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,atPoint),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,pathTo),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,pathThrough),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isFollowingPath),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,clearPath),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkDistance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,wait),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,openDoor),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,closeDoor),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setElevator),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addPeriodicTrigger),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,showNPC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hideNPC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateNPCHideTime),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeather),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setWeather),
-
-    // PC Instructions
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,ChangeMusic),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendMenu),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendGuild),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,openSendBox),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,leavegame),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendEmote),
-
-    // Location and Positioning
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWorldAngle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFacingAngle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isFacing),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isInfront),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isBehind),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isBeside),
-    
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZone),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZoneID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZoneName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isZoneVisited),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPreviousZone),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentRegion),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getContinentID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isInMogHouse),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,showPosition),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getXPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getYPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getZPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRotPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setPos),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,warp),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,teleport),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTeleport),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTeleport),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTeleport),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTeleportMenu),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTeleportMenu),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHomePoint),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetPlayer),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,goToEntity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,gotoPlayer),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,bringPlayer),
-
-    // Items
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquipID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEquippedItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addUsedItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTempItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasWornItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,createWornItem),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,createShop),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addShopItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentGPItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,breakLinkshell),
-
-    // Trading
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getContainerSize),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,changeContainerSize),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFreeSlotsCount),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,confirmTrade),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,tradeComplete),
-
-    // Equipping
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canEquipItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,equipItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,unequipItem),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setEquipBlock),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,lockEquipSlot),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,unlockEquipSlot),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getShieldSize),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasGearSetMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addGearSetMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,clearGearSetMods),
-
-    // Storing
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStorageItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,storeWithPorterMoogle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRetrievableItemsForSlip),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,retrieveItemFromSlip),
-
-    // Player Appearance
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRace),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getGender),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hideName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkNameFlags),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getModelId),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setModelId),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,costume),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,costume2),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAnimation),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setAnimation),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,AnimationSub),
-
-    // Player Status
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNation),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setNation),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAllegiance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setAllegiance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCampaignAllegiance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCampaignAllegiance),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isSeekingParty),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNewPlayer),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setNewPlayer),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMentor),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMentor),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getGMLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setGMLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getGMHidden),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setGMHidden),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isJailed),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,jail),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canUseMisc),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,speed),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPlaytime),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTimeCreated),
-
-    // Player Jobs and Levels
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMainJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSubJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,changeJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,changesJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,unlockJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasJob),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMainLvl),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSubLvl),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getJobLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setsLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelCap),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,levelRestriction),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addJobTraits),
-
-    // Player Titles and Fame
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTitle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTitle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTitle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTitle),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delTitle),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFame),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addFame),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setFame),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFameLevel),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRankPoints),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addRankPoints),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setRankPoints),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addQuest),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delQuest),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getQuestStatus),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasCompletedQuest),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,completeQuest),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addMission),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delMission),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentMission),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasCompletedMission),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,completeMission),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMissionLogEx),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMissionLogEx),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEminenceCompleted),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setEminenceCompleted),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEminenceProgress),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setEminenceProgress),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addAssault),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delAssault),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrentAssault),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasCompletedAssault),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,completeAssault),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addKeyItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delKeyItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasKeyItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,seenKeyItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,unseenKeyItem),
-
-    // Player Points
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addExp),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delExp),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMerit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMeritCount),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMerits),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getGil),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addGil),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setGil),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delGil),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addCP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delCP),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSeals),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSeals),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delSeals),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCurrency),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addCurrency),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCurrency),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delCurrency),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAssaultPoint),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addAssaultPoint),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delAssaultPoint),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addGuildPoints),
-
-    // Health and Status
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getHPP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMaxHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBaseHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,restoreHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delHP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,takeDamage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hideHP),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMP),
-    // Got an MPP? Well, I then you don't know me...
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMaxMP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBaseMP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addMP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,restoreMP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delMP),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTP),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delTP),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateHealth),
-
-    // Skills and Abilities
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,capSkill),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,capAllSkills),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSkillLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setSkillLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMaxSkillLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSkillRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setSkillRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCharSkillLevel),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addLearnedWeaponskill),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasLearnedWeaponskill),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delLearnedWeaponskill),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addWeaponSkillPoints),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addLearnedAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasLearnedAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canLearnAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delLearnedAbility),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSpell),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasSpell),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canLearnSpell),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delSpell),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,recalculateSkillsTable),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,recalculateAbilitiesTable),
-
-    // Parties and Alliances
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getParty),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyWithTrusts),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartySize),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasPartyJob),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyMember),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyLeader),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getLeaderID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPartyLastMemberJoinedTime),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,forMembersInRange),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addPartyEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasPartyEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,removePartyEffect),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAlliance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAllianceSize),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,reloadParty),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,disableLevelSync),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isLevelSync),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkSoloPartyAlliance),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkKillCredit),
-
-    // Instances
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getInstance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setInstance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,createInstance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,instanceEntry),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getConfrontationEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,copyConfrontationEffect),
-
-    // Battlefields
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBattlefield),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBattlefieldID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,registerBattlefield),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,battlefieldAtCapacity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,enterBattlefield),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,leaveBattlefield),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isInDynamis),
-
-    // Battle Utilities
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isAlive),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isDead),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendRaise),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendReraise),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sendTractor),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,messageCombat),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,countdown),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,enableEntities),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,independantAnimation),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,engage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isEngaged),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,disengage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,timer),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,queue),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addRecast),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasRecast),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetRecast),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetRecasts),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addListener),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeListener),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,triggerListener),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEntity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNearbyEntities),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canChangeState),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,wakeUp),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,recalculateStats),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,checkImbuedItems),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isDualWielding),
-
-    // Enmity
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCE),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getVE),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setCE),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setVE),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,lowerEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,transferEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmityFromDamage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateEnmityFromCure),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateClaim),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasEnmity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNotorietyList),
-
-    // Status Effects
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addStatusEffectEx),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStatusEffects),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStatusEffectElement),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,canGainStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasStatusEffectByFlag),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,countEffect),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delStatusEffectsByFlag),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delStatusEffectSilent),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,eraseStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,eraseAllStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,dispelStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,dispelAllStatusEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,stealStatusEffect),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delMod),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addLatent),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delLatent),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,fold),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,doWildCard),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addCorsairRoll),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasCorsairEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasBustEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,numBustEffects),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,healingWaltz),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addBardSong),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,charm),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,uncharm),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addBurden),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setStatDebilitation),
-
-    // Damage Calculation
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStat),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getACC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEVA),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRACC),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRATT),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getILvlMacc),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isSpellAoE),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,physicalDmgTaken),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,magicDmgTaken),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,rangedDmgTaken),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,breathDmgTaken),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,handleAfflatusMiseryDamage),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isWeaponTwoHanded),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMeleeHitDamage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponDmg),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponDmgRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getOffhandDmg),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getOffhandDmgRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRangedDmg),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRangedDmgRank),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAmmoDmg),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeAmmo),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponSkillLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponDamageType),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponSkillType),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWeaponSubSkillType),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getWSSkillchainProp),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,takeWeaponskillDamage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,takeSpellDamage),
-
-    // Pets and Automations
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawnPet),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,despawnPet),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isJugPet),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasValidJugPetItem),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasPet),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPet),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPetID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPetElement),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMaster),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPetName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setPetName),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getCharmChance),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,charmPet),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,petAttack),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,petAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,petRetreat),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,familiar),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addPetMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setPetMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delPetMod),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasAttachment),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAutomatonName),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAutomatonFrame),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getAutomatonHead),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,unlockAttachment),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getActiveManeuvers),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeOldestManeuver),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,removeAllManeuvers),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateAttachments),
-
-    // Trust related
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawnTrust),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,clearTrusts),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTrustID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,trustPartyMessage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addSimpleGambit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addFullGambit),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTrustTPSkillSettings),
-
-    // Mob Entity-Specific
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobLevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSystem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getFamily),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isMobType),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isUndead),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isNM),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getModelSize),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobFlags),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMobFlags),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,spawn),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,isSpawned),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getSpawnPos),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setSpawn),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getRespawnTime),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setRespawnTime),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,instantiateMob),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTrait),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasImmunity),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setAggressive),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setTrueDetection),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setUnkillable),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,untargetable),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setDelay),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setDamage),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasSpellList),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setSpellList),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,SetAutoAttackEnabled),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,SetMagicCastingEnabled),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,SetMobAbilityEnabled),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,SetMobSkillAttack),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getMobMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setMobMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addMobMod),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,delMobMod),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBattleTime),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getBehaviour),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setBehaviour),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTarget),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateTarget),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getEnmityList),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTrickAttackChar),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,actionQueueEmpty),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,castSpell),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,useJobAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,useMobAbility),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasTPMoves),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,weaknessTrigger),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,hasPreventActionEffect),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,stun),
-
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPool),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getDropID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,setDropID),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTreasure),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStealItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getDespoilItem),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getDespoilDebuff),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,itemStolen),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTHlevel),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getPlayerRegionInZone),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,updateToEntireZone),
-
-    {nullptr,nullptr}
-};
-// clang-format on
-*/
-
 //==========================================================//
 
 void CLuaBaseEntity::Register(sol::state& lua)
 {
     SOL_START(CBaseEntity, CLuaBaseEntity)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getShortID)
-    SOL_REGISTER(getCursorTarget)
+
+    // Messaging System
+    //SOL_REGISTER(showText),
+    //SOL_REGISTER(messageText),
+    //SOL_REGISTER(PrintToPlayer),
+    //SOL_REGISTER(PrintToArea),
+    //SOL_REGISTER(messageBasic),
+    //SOL_REGISTER(messageName),
+    //SOL_REGISTER(messagePublic),
+    //SOL_REGISTER(messageSpecial),
+    //SOL_REGISTER(messageSystem),
+    //SOL_REGISTER(messageCombat),
+
+    // Variables
+    //SOL_REGISTER(getCharVar),
+    //SOL_REGISTER(setCharVar),
+    //SOL_REGISTER(addCharVar),
+    //SOL_REGISTER(getLocalVar),
+    //SOL_REGISTER(setLocalVar),
+    //SOL_REGISTER(resetLocalVars),
+    //SOL_REGISTER(getLastOnline),
+
+    // Packets, Events, and Flags
+    //SOL_REGISTER(injectPacket),
+    //SOL_REGISTER(injectActionPacket),
+    //SOL_REGISTER(entityVisualPacket),
+    //SOL_REGISTER(entityAnimationPacket),
+
+    //SOL_REGISTER(startEvent),
+    //SOL_REGISTER(startEventString),
+    //SOL_REGISTER(updateEvent),
+    //SOL_REGISTER(updateEventString),
+    //SOL_REGISTER(getEventTarget),
+    //SOL_REGISTER(release),
+
+    //SOL_REGISTER(setFlag),
+    //SOL_REGISTER(moghouseFlag),
+    //SOL_REGISTER(needToZone),
+
+    // Object Identification
+    //SOL_REGISTER(getID),
+    //SOL_REGISTER(getShortID),
+    //SOL_REGISTER(getCursorTarget),
+
+    //SOL_REGISTER(getObjType),
+    //SOL_REGISTER(isPC),
+    //SOL_REGISTER(isNPC),
+    //SOL_REGISTER(isMob),
+    //SOL_REGISTER(isPet),
+    //SOL_REGISTER(isAlly),
+
+    // AI and Control
+    //SOL_REGISTER(initNpcAi),
+    //SOL_REGISTER(resetAI),
+    //SOL_REGISTER(getStatus),
+    //SOL_REGISTER(setStatus),
+    //SOL_REGISTER(getCurrentAction),
+
+    //SOL_REGISTER(lookAt),
+    //SOL_REGISTER(clearTargID),
+
+    //SOL_REGISTER(atPoint),
+    //SOL_REGISTER(pathTo),
+    //SOL_REGISTER(pathThrough),
+    //SOL_REGISTER(isFollowingPath),
+    //SOL_REGISTER(clearPath),
+    //SOL_REGISTER(checkDistance),
+    //SOL_REGISTER(wait),
+
+    //SOL_REGISTER(openDoor),
+    //SOL_REGISTER(closeDoor),
+    //SOL_REGISTER(setElevator),
+
+    //SOL_REGISTER(addPeriodicTrigger),
+    //SOL_REGISTER(showNPC),
+    //SOL_REGISTER(hideNPC),
+    //SOL_REGISTER(updateNPCHideTime),
+
+    //SOL_REGISTER(getWeather),
+    //SOL_REGISTER(setWeather),
+
+    // PC Instructions
+    //SOL_REGISTER(ChangeMusic),
+    //SOL_REGISTER(sendMenu),
+    //SOL_REGISTER(sendGuild),
+    //SOL_REGISTER(openSendBox),
+    //SOL_REGISTER(leavegame),
+    //SOL_REGISTER(sendEmote),
+
+    // Location and Positioning
+    //SOL_REGISTER(getWorldAngle),
+    //SOL_REGISTER(getFacingAngle),
+    //SOL_REGISTER(isFacing),
+    //SOL_REGISTER(isInfront),
+    //SOL_REGISTER(isBehind),
+    //SOL_REGISTER(isBeside),
+
+    //SOL_REGISTER(getZone),
+    //SOL_REGISTER(getZoneID),
+    //SOL_REGISTER(getZoneName),
+    //SOL_REGISTER(isZoneVisited),
+    //SOL_REGISTER(getPreviousZone),
+    //SOL_REGISTER(getCurrentRegion),
+    //SOL_REGISTER(getContinentID),
+    //SOL_REGISTER(isInMogHouse),
+
+    //SOL_REGISTER(getPos),
+    //SOL_REGISTER(showPosition),
+    //SOL_REGISTER(getXPos),
+    //SOL_REGISTER(getYPos),
+    //SOL_REGISTER(getZPos),
+    //SOL_REGISTER(getRotPos),
+    //SOL_REGISTER(setPos),
+
+    //SOL_REGISTER(warp),
+    //SOL_REGISTER(teleport),
+    //SOL_REGISTER(addTeleport),
+    //SOL_REGISTER(getTeleport),
+    //SOL_REGISTER(hasTeleport),
+    //SOL_REGISTER(setTeleportMenu),
+    //SOL_REGISTER(getTeleportMenu),
+    //SOL_REGISTER(setHomePoint),
+    //SOL_REGISTER(resetPlayer),
+
+    //SOL_REGISTER(goToEntity),
+    //SOL_REGISTER(gotoPlayer),
+    //SOL_REGISTER(bringPlayer),
+
+    // Items
+    SOL_REGISTER(getEquipID)
+    //SOL_REGISTER(getEquippedItem),
+    //SOL_REGISTER(hasItem),
+    //SOL_REGISTER(addItem),
+    //SOL_REGISTER(delItem),
+    //SOL_REGISTER(addUsedItem),
+    //SOL_REGISTER(addTempItem),
+    //SOL_REGISTER(hasWornItem),
+    //SOL_REGISTER(createWornItem),
+
+    //SOL_REGISTER(createShop),
+    //SOL_REGISTER(addShopItem),
+    //SOL_REGISTER(getCurrentGPItem),
+    //SOL_REGISTER(breakLinkshell),
+
+    // Trading
+    //SOL_REGISTER(getContainerSize),
+    //SOL_REGISTER(changeContainerSize),
+    //SOL_REGISTER(getFreeSlotsCount),
+    //SOL_REGISTER(confirmTrade),
+    //SOL_REGISTER(tradeComplete),
+
+    // Equipping
+    //SOL_REGISTER(canEquipItem),
+    //SOL_REGISTER(equipItem),
+    //SOL_REGISTER(unequipItem),
+
+    //SOL_REGISTER(setEquipBlock),
+    //SOL_REGISTER(lockEquipSlot),
+    //SOL_REGISTER(unlockEquipSlot),
+
+    //SOL_REGISTER(getShieldSize),
+
+    SOL_REGISTER(hasGearSetMod)
+    SOL_REGISTER(addGearSetMod)
+    SOL_REGISTER(clearGearSetMods)
+
+    // Storing
+    //SOL_REGISTER(getStorageItem),
+    //SOL_REGISTER(storeWithPorterMoogle),
+    //SOL_REGISTER(getRetrievableItemsForSlip),
+    //SOL_REGISTER(retrieveItemFromSlip),
+
+    // Player Appearance
+    //SOL_REGISTER(getRace),
+    //SOL_REGISTER(getGender),
+    //SOL_REGISTER(getName),
+    //SOL_REGISTER(hideName),
+    //SOL_REGISTER(checkNameFlags),
+    //SOL_REGISTER(getModelId),
+    //SOL_REGISTER(setModelId),
+    //SOL_REGISTER(costume),
+    //SOL_REGISTER(costume2),
+
+    //SOL_REGISTER(getAnimation),
+    //SOL_REGISTER(setAnimation),
+    //SOL_REGISTER(AnimationSub),
+
+    // Player Status
+    //SOL_REGISTER(getNation),
+    //SOL_REGISTER(setNation),
+    //SOL_REGISTER(getAllegiance),
+    //SOL_REGISTER(setAllegiance),
+    //SOL_REGISTER(getCampaignAllegiance),
+    //SOL_REGISTER(setCampaignAllegiance),
+
+    //SOL_REGISTER(isSeekingParty),
+    //SOL_REGISTER(getNewPlayer),
+    //SOL_REGISTER(setNewPlayer),
+    //SOL_REGISTER(getMentor),
+    //SOL_REGISTER(setMentor),
+
+    //SOL_REGISTER(getGMLevel),
+    //SOL_REGISTER(setGMLevel),
+    //SOL_REGISTER(getGMHidden),
+    //SOL_REGISTER(setGMHidden),
+
+    //SOL_REGISTER(isJailed),
+    //SOL_REGISTER(jail),
+
+    //SOL_REGISTER(canUseMisc),
+
+    //SOL_REGISTER(speed),
+
+    //SOL_REGISTER(getPlaytime),
+    //SOL_REGISTER(getTimeCreated),
+
+    // Player Jobs and Levels
+    //SOL_REGISTER(getMainJob),
+    //SOL_REGISTER(getSubJob),
+    //SOL_REGISTER(changeJob),
+    //SOL_REGISTER(changesJob),
+    //SOL_REGISTER(unlockJob),
+    //SOL_REGISTER(hasJob),
+
+    //SOL_REGISTER(getMainLvl),
+    //SOL_REGISTER(getSubLvl),
+    //SOL_REGISTER(getJobLevel),
+    //SOL_REGISTER(setLevel),
+    //SOL_REGISTER(setsLevel),
+    //SOL_REGISTER(levelCap),
+    //SOL_REGISTER(levelRestriction),
+    //SOL_REGISTER(addJobTraits),
+
+    // Player Titles and Fame
+    //SOL_REGISTER(getTitle),
+    //SOL_REGISTER(hasTitle),
+    //SOL_REGISTER(addTitle),
+    //SOL_REGISTER(setTitle),
+    //SOL_REGISTER(delTitle),
+
+    //SOL_REGISTER(getFame),
+    //SOL_REGISTER(addFame),
+    //SOL_REGISTER(setFame),
+    //SOL_REGISTER(getFameLevel),
+
+    //SOL_REGISTER(getRank),
+    //SOL_REGISTER(setRank),
+    //SOL_REGISTER(getRankPoints),
+    //SOL_REGISTER(addRankPoints),
+    //SOL_REGISTER(setRankPoints),
+
+    //SOL_REGISTER(addQuest),
+    //SOL_REGISTER(delQuest),
+    //SOL_REGISTER(getQuestStatus),
+    //SOL_REGISTER(hasCompletedQuest),
+    //SOL_REGISTER(completeQuest),
+
+    //SOL_REGISTER(addMission),
+    //SOL_REGISTER(delMission),
+    //SOL_REGISTER(getCurrentMission),
+    //SOL_REGISTER(hasCompletedMission),
+    //SOL_REGISTER(completeMission),
+    //SOL_REGISTER(setMissionLogEx),
+    //SOL_REGISTER(getMissionLogEx),
+    //SOL_REGISTER(getEminenceCompleted),
+    //SOL_REGISTER(setEminenceCompleted),
+    //SOL_REGISTER(getEminenceProgress),
+    //SOL_REGISTER(setEminenceProgress),
+
+    //SOL_REGISTER(addAssault),
+    //SOL_REGISTER(delAssault),
+    //SOL_REGISTER(getCurrentAssault),
+    //SOL_REGISTER(hasCompletedAssault),
+    //SOL_REGISTER(completeAssault),
+
+    //SOL_REGISTER(addKeyItem),
+    //SOL_REGISTER(delKeyItem),
+    //SOL_REGISTER(hasKeyItem),
+    //SOL_REGISTER(seenKeyItem),
+    //SOL_REGISTER(unseenKeyItem),
+
+    // Player Points
+    //SOL_REGISTER(addExp),
+    //SOL_REGISTER(delExp),
+    //SOL_REGISTER(getMerit),
+    //SOL_REGISTER(getMeritCount),
+    //SOL_REGISTER(setMerits),
+
+    //SOL_REGISTER(getGil),
+    //SOL_REGISTER(addGil),
+    //SOL_REGISTER(setGil),
+    //SOL_REGISTER(delGil),
+
+    //SOL_REGISTER(getCP),
+    //SOL_REGISTER(addCP),
+    //SOL_REGISTER(delCP),
+
+    //SOL_REGISTER(getSeals),
+    //SOL_REGISTER(addSeals),
+    //SOL_REGISTER(delSeals),
+
+    //SOL_REGISTER(getCurrency),
+    //SOL_REGISTER(addCurrency),
+    //SOL_REGISTER(setCurrency),
+    //SOL_REGISTER(delCurrency),
+
+    //SOL_REGISTER(getAssaultPoint),
+    //SOL_REGISTER(addAssaultPoint),
+    //SOL_REGISTER(delAssaultPoint),
+
+    //SOL_REGISTER(addGuildPoints),
+
+    // Health and Status
+    //SOL_REGISTER(getHP),
+    //SOL_REGISTER(getHPP),
+    //SOL_REGISTER(getMaxHP),
+    //SOL_REGISTER(getBaseHP),
+    //SOL_REGISTER(addHP),
+    //SOL_REGISTER(setHP),
+    //SOL_REGISTER(restoreHP),
+    //SOL_REGISTER(delHP),
+    //SOL_REGISTER(takeDamage),
+    //SOL_REGISTER(hideHP),
+
+    //SOL_REGISTER(getMP),
+    // Got an MPP? Well, I then you don't know me...
+    //SOL_REGISTER(getMaxMP),
+    //SOL_REGISTER(getBaseMP),
+    //SOL_REGISTER(addMP),
+    //SOL_REGISTER(setMP),
+    //SOL_REGISTER(restoreMP),
+    //SOL_REGISTER(delMP),
+
+    //SOL_REGISTER(getTP),
+    //SOL_REGISTER(addTP),
+    //SOL_REGISTER(setTP),
+    //SOL_REGISTER(delTP),
+
+    //SOL_REGISTER(updateHealth),
+
+    // Skills and Abilities
+    //SOL_REGISTER(capSkill),
+    //SOL_REGISTER(capAllSkills),
+
+    //SOL_REGISTER(getSkillLevel),
+    //SOL_REGISTER(setSkillLevel),
+    //SOL_REGISTER(getMaxSkillLevel),
+    //SOL_REGISTER(getSkillRank),
+    //SOL_REGISTER(setSkillRank),
+    //SOL_REGISTER(getCharSkillLevel),
+
+    //SOL_REGISTER(addLearnedWeaponskill),
+    //SOL_REGISTER(hasLearnedWeaponskill),
+    //SOL_REGISTER(delLearnedWeaponskill),
+
+    //SOL_REGISTER(addWeaponSkillPoints),
+
+    //SOL_REGISTER(addLearnedAbility),
+    //SOL_REGISTER(hasLearnedAbility),
+    //SOL_REGISTER(canLearnAbility),
+    //SOL_REGISTER(delLearnedAbility),
+
+    //SOL_REGISTER(addSpell),
+    //SOL_REGISTER(hasSpell),
+    //SOL_REGISTER(canLearnSpell),
+    //SOL_REGISTER(delSpell),
+
+    //SOL_REGISTER(recalculateSkillsTable),
+    //SOL_REGISTER(recalculateAbilitiesTable),
+
+    // Parties and Alliances
+    //SOL_REGISTER(getParty),
+    //SOL_REGISTER(getPartyWithTrusts),
+    //SOL_REGISTER(getPartySize),
+    //SOL_REGISTER(hasPartyJob),
+    //SOL_REGISTER(getPartyMember),
+    //SOL_REGISTER(getPartyLeader),
+    //SOL_REGISTER(getLeaderID),
+    //SOL_REGISTER(getPartyLastMemberJoinedTime),
+    //SOL_REGISTER(forMembersInRange),
+
+    //SOL_REGISTER(addPartyEffect),
+    //SOL_REGISTER(hasPartyEffect),
+    //SOL_REGISTER(removePartyEffect),
+
+    //SOL_REGISTER(getAlliance),
+    //SOL_REGISTER(getAllianceSize),
+
+    //SOL_REGISTER(reloadParty),
+    //SOL_REGISTER(disableLevelSync),
+    //SOL_REGISTER(isLevelSync),
+
+    //SOL_REGISTER(checkSoloPartyAlliance),
+
+    //SOL_REGISTER(checkKillCredit),
+
+    // Instances
+    //SOL_REGISTER(getInstance),
+    //SOL_REGISTER(setInstance),
+    //SOL_REGISTER(createInstance),
+    //SOL_REGISTER(instanceEntry),
+
+    //SOL_REGISTER(getConfrontationEffect),
+    //SOL_REGISTER(copyConfrontationEffect),
+
+    // Battlefields
+    //SOL_REGISTER(getBattlefield),
+    //SOL_REGISTER(getBattlefieldID),
+    //SOL_REGISTER(registerBattlefield),
+    //SOL_REGISTER(battlefieldAtCapacity),
+    //SOL_REGISTER(enterBattlefield),
+    //SOL_REGISTER(leaveBattlefield),
+    //SOL_REGISTER(isInDynamis),
+
+    //// Battle Utilities
+    //SOL_REGISTER(isAlive),
+    //SOL_REGISTER(isDead),
+
+    //SOL_REGISTER(sendRaise),
+    //SOL_REGISTER(sendReraise),
+    //SOL_REGISTER(sendTractor),
+
+    //SOL_REGISTER(messageCombat),
+    //SOL_REGISTER(countdown),
+    //SOL_REGISTER(enableEntities),
+    //SOL_REGISTER(independantAnimation),
+
+    //SOL_REGISTER(engage),
+    //SOL_REGISTER(isEngaged),
+    //SOL_REGISTER(disengage),
+    //SOL_REGISTER(timer),
+    //SOL_REGISTER(queue),
+    //SOL_REGISTER(addRecast),
+    //SOL_REGISTER(hasRecast),
+    //SOL_REGISTER(resetRecast),
+    //SOL_REGISTER(resetRecasts),
+
+    //SOL_REGISTER(addListener),
+    //SOL_REGISTER(removeListener),
+    //SOL_REGISTER(triggerListener),
+
+    //SOL_REGISTER(getEntity),
+    //SOL_REGISTER(getNearbyEntities),
+    //SOL_REGISTER(canChangeState),
+
+    //SOL_REGISTER(wakeUp),
+
+    //SOL_REGISTER(recalculateStats),
+    //SOL_REGISTER(checkImbuedItems),
+
+    //SOL_REGISTER(isDualWielding),
+
+    // Enmity
+    //SOL_REGISTER(getCE),
+    //SOL_REGISTER(getVE),
+    //SOL_REGISTER(setCE),
+    //SOL_REGISTER(setVE),
+    //SOL_REGISTER(addEnmity),
+    //SOL_REGISTER(lowerEnmity),
+    //SOL_REGISTER(updateEnmity),
+    //SOL_REGISTER(transferEnmity),
+    //SOL_REGISTER(updateEnmityFromDamage),
+    //SOL_REGISTER(updateEnmityFromCure),
+    //SOL_REGISTER(resetEnmity),
+    //SOL_REGISTER(updateClaim),
+    //SOL_REGISTER(hasEnmity),
+    //SOL_REGISTER(getNotorietyList),
+
+    // Status Effects
+    //SOL_REGISTER(addStatusEffect),
+    //SOL_REGISTER(addStatusEffectEx),
+    //SOL_REGISTER(getStatusEffect),
+    //SOL_REGISTER(getStatusEffects),
+    //SOL_REGISTER(getStatusEffectElement),
+    //SOL_REGISTER(canGainStatusEffect),
+    //SOL_REGISTER(hasStatusEffect),
+    //SOL_REGISTER(hasStatusEffectByFlag),
+    //SOL_REGISTER(countEffect),
+
+    //SOL_REGISTER(delStatusEffect),
+    //SOL_REGISTER(delStatusEffectsByFlag),
+    //SOL_REGISTER(delStatusEffectSilent),
+    //SOL_REGISTER(eraseStatusEffect),
+    //SOL_REGISTER(eraseAllStatusEffect),
+    //SOL_REGISTER(dispelStatusEffect),
+    //SOL_REGISTER(dispelAllStatusEffect),
+    //SOL_REGISTER(stealStatusEffect),
+
+    //SOL_REGISTER(addMod),
+    //SOL_REGISTER(getMod),
+    //SOL_REGISTER(setMod),
+    //SOL_REGISTER(delMod),
+
+    //SOL_REGISTER(addLatent),
+    //SOL_REGISTER(delLatent),
+
+    //SOL_REGISTER(fold),
+    //SOL_REGISTER(doWildCard),
+    //SOL_REGISTER(addCorsairRoll),
+    //SOL_REGISTER(hasCorsairEffect),
+    //SOL_REGISTER(hasBustEffect),
+    //SOL_REGISTER(numBustEffects),
+    //SOL_REGISTER(healingWaltz),
+    //SOL_REGISTER(addBardSong),
+
+    //SOL_REGISTER(charm),
+    //SOL_REGISTER(uncharm),
+
+    //SOL_REGISTER(addBurden),
+    //SOL_REGISTER(setStatDebilitation),
+
+    // Damage Calculation
+    //SOL_REGISTER(getStat),
+    //SOL_REGISTER(getACC),
+    //SOL_REGISTER(getEVA),
+    //SOL_REGISTER(getRACC),
+    //SOL_REGISTER(getRATT),
+    //SOL_REGISTER(getILvlMacc),
+
+    //SOL_REGISTER(isSpellAoE),
+
+    //SOL_REGISTER(physicalDmgTaken),
+    //SOL_REGISTER(magicDmgTaken),
+    //SOL_REGISTER(rangedDmgTaken),
+    //SOL_REGISTER(breathDmgTaken),
+    //SOL_REGISTER(handleAfflatusMiseryDamage),
+
+    //SOL_REGISTER(isWeaponTwoHanded),
+    //SOL_REGISTER(getMeleeHitDamage),
+    //SOL_REGISTER(getWeaponDmg),
+    //SOL_REGISTER(getWeaponDmgRank),
+    //SOL_REGISTER(getOffhandDmg),
+    //SOL_REGISTER(getOffhandDmgRank),
+    //SOL_REGISTER(getRangedDmg),
+    //SOL_REGISTER(getRangedDmgRank),
+    //SOL_REGISTER(getAmmoDmg),
+
+    //SOL_REGISTER(removeAmmo),
+
+    //SOL_REGISTER(getWeaponSkillLevel),
+    //SOL_REGISTER(getWeaponDamageType),
+    //SOL_REGISTER(getWeaponSkillType),
+    //SOL_REGISTER(getWeaponSubSkillType),
+    //SOL_REGISTER(getWSSkillchainProp),
+
+    //SOL_REGISTER(takeWeaponskillDamage),
+    //SOL_REGISTER(takeSpellDamage),
+
+    // Pets and Automations
+    //SOL_REGISTER(spawnPet),
+    //SOL_REGISTER(despawnPet),
+
+    //SOL_REGISTER(isJugPet),
+    //SOL_REGISTER(hasValidJugPetItem),
+
+    //SOL_REGISTER(hasPet),
+    //SOL_REGISTER(getPet),
+    //SOL_REGISTER(getPetID),
+    //SOL_REGISTER(getPetElement),
+    //SOL_REGISTER(getMaster),
+
+    //SOL_REGISTER(getPetName),
+    //SOL_REGISTER(setPetName),
+
+    //SOL_REGISTER(getCharmChance),
+    //SOL_REGISTER(charmPet),
+
+    //SOL_REGISTER(petAttack),
+    //SOL_REGISTER(petAbility),
+    //SOL_REGISTER(petRetreat),
+    //SOL_REGISTER(familiar),
+
+    //SOL_REGISTER(addPetMod),
+    //SOL_REGISTER(setPetMod),
+    //SOL_REGISTER(delPetMod),
+
+    //SOL_REGISTER(hasAttachment),
+    //SOL_REGISTER(getAutomatonName),
+    //SOL_REGISTER(getAutomatonFrame),
+    //SOL_REGISTER(getAutomatonHead),
+    //SOL_REGISTER(unlockAttachment),
+
+    //SOL_REGISTER(getActiveManeuvers),
+    //SOL_REGISTER(removeOldestManeuver),
+    //SOL_REGISTER(removeAllManeuvers),
+    //SOL_REGISTER(updateAttachments),
+
+    // Trust related
+    //SOL_REGISTER(spawnTrust),
+    //SOL_REGISTER(clearTrusts),
+    //SOL_REGISTER(getTrustID),
+    //SOL_REGISTER(trustPartyMessage),
+    //SOL_REGISTER(addSimpleGambit),
+    //SOL_REGISTER(addFullGambit),
+    //SOL_REGISTER(setTrustTPSkillSettings),
+
+    // Mob Entity-Specific
+    //SOL_REGISTER(setMobLevel),
+    //SOL_REGISTER(getSystem),
+    //SOL_REGISTER(getFamily),
+    //SOL_REGISTER(isMobType),
+    //SOL_REGISTER(isUndead),
+    //SOL_REGISTER(isNM),
+
+    //SOL_REGISTER(getModelSize),
+    //SOL_REGISTER(setMobFlags),
+    //SOL_REGISTER(getMobFlags),
+
+    //SOL_REGISTER(spawn),
+    //SOL_REGISTER(isSpawned),
+    //SOL_REGISTER(getSpawnPos),
+    //SOL_REGISTER(setSpawn),
+    //SOL_REGISTER(getRespawnTime),
+    //SOL_REGISTER(setRespawnTime),
+
+    //SOL_REGISTER(instantiateMob),
+
+    //SOL_REGISTER(hasTrait),
+    //SOL_REGISTER(hasImmunity),
+
+    //SOL_REGISTER(setAggressive),
+    //SOL_REGISTER(setTrueDetection),
+    //SOL_REGISTER(setUnkillable),
+    //SOL_REGISTER(untargetable),
+
+    //SOL_REGISTER(setDelay),
+    //SOL_REGISTER(setDamage),
+    //SOL_REGISTER(hasSpellList),
+    //SOL_REGISTER(setSpellList),
+    //SOL_REGISTER(SetAutoAttackEnabled),
+    //SOL_REGISTER(SetMagicCastingEnabled),
+    //SOL_REGISTER(SetMobAbilityEnabled),
+    //SOL_REGISTER(SetMobSkillAttack),
+
+    //SOL_REGISTER(getMobMod),
+    //SOL_REGISTER(setMobMod),
+    //SOL_REGISTER(addMobMod),
+    //SOL_REGISTER(delMobMod),
+
+    //SOL_REGISTER(getBattleTime),
+
+    //SOL_REGISTER(getBehaviour),
+    //SOL_REGISTER(setBehaviour),
+
+    //SOL_REGISTER(getTarget),
+    //SOL_REGISTER(updateTarget),
+    //SOL_REGISTER(getEnmityList),
+    //SOL_REGISTER(getTrickAttackChar),
+
+    //SOL_REGISTER(actionQueueEmpty),
+
+    //SOL_REGISTER(castSpell),
+    //SOL_REGISTER(useJobAbility),
+    //SOL_REGISTER(useMobAbility),
+    //SOL_REGISTER(hasTPMoves),
+
+    //SOL_REGISTER(weaknessTrigger),
+    //SOL_REGISTER(hasPreventActionEffect),
+    //SOL_REGISTER(stun),
+
+    //SOL_REGISTER(getPool),
+    //SOL_REGISTER(getDropID),
+    //SOL_REGISTER(setDropID),
+    //SOL_REGISTER(addTreasure),
+    //SOL_REGISTER(getStealItem),
+    //SOL_REGISTER(getDespoilItem),
+    //SOL_REGISTER(getDespoilDebuff),
+    //SOL_REGISTER(itemStolen),
+    //SOL_REGISTER(getTHlevel),
+    //SOL_REGISTER(getPlayerRegionInZone),
+    //SOL_REGISTER(updateToEntireZone),
+
     SOL_END()
 };
 
