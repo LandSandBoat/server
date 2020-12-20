@@ -11,7 +11,12 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
+    if ENABLE_MAGIAN_TRIALS ~= 1 then
+        return
+    end
+
     player:startEvent(10133)
+
 end
 
 function onEventUpdate(player,csid,option)
