@@ -84,7 +84,7 @@ void CLuaAbility::setCE(uint16 ce)
     m_PLuaAbility->setCE(ce);
 }
 
-int32 CLuaAbility::setVE(uint16 ve)
+void CLuaAbility::setVE(uint16 ve)
 {
     m_PLuaAbility->setVE(ve);
 }

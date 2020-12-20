@@ -42,8 +42,8 @@ public:
     sol::object levelRestriction();
     sol::table getPlayers();
     ZONEID     getID();
-    REGIONTYPE getRegionID();
-    ZONETYPE getType();
+    REGION_TYPE getRegionID();
+    ZONE_TYPE getType();
     int32 getBattlefieldByInitiator(lua_State*);
     bool    battlefieldsFull(int battlefieldId);
     WEATHER getWeather();

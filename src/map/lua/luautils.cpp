@@ -1393,6 +1393,7 @@ namespace luautils
             {
                 // Cache contentTag lookups in a map so that we don't re-hit the Lua file every time
                 contentEnabled                     = (GetSettingsVariable(contentVariable.c_str()) != 0);
+
                 contentEnabledMap[contentVariable] = contentEnabled;
             }
 
@@ -1415,6 +1416,7 @@ namespace luautils
 
     int32 OnZoneInitialise(uint16 ZoneID)
     {
+        /*
         CZone* PZone = zoneutils::GetZone(ZoneID);
 
         lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
@@ -1432,7 +1434,7 @@ namespace luautils
             ShowError("luautils::onInitialize: %s\n", err.what());
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -1444,6 +1446,7 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning)
     {
+        /*
         lua_prepscript("scripts/globals/player.lua");
 
         if (prepFile(File, "onGameIn"))
@@ -1463,7 +1466,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -1475,6 +1478,7 @@ namespace luautils
 
     int32 OnZoneIn(CCharEntity* PChar)
     {
+        /*
         lua_prepscript("scripts/zones/%s/Zone.lua",
                        PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName());
 
@@ -1498,10 +1502,13 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     void AfterZoneIn(CBaseEntity* PChar)
     {
+        /*
         lua_prepscript("scripts/zones/%s/Zone.lua", PChar->loc.zone->GetName());
 
         if (prepFile(File, "afterZoneIn"))
@@ -1518,6 +1525,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return;
         }
+        */
     }
 
     /************************************************************************
@@ -1528,6 +1536,7 @@ namespace luautils
 
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion)
     {
+        /*
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1562,6 +1571,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
         return 0;
     }
 
@@ -1573,6 +1583,7 @@ namespace luautils
 
     int32 OnRegionLeave(CCharEntity* PChar, CRegion* PRegion)
     {
+        /*
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1606,6 +1617,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
         return 0;
     }
 
@@ -1618,6 +1630,7 @@ namespace luautils
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     {
+        /*
         TracyZoneScoped;
         lua_prepscript("scripts/zones/%s/npcs/%s.lua", PChar->loc.zone->GetName(), PNpc->GetName());
 
@@ -1668,6 +1681,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     /************************************************************************
@@ -1864,6 +1879,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
 
         return 0;
     }
@@ -1881,13 +1897,14 @@ namespace luautils
 
         CLuaBaseEntity LuaBaseEntity(PNpc);
         //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
+        /*
         if (lua_pcall(LuaHandle, 1, 0, 0))
         {
             ShowError("luautils::onNpcSpawn: %s\n", lua_tostring(LuaHandle, -1));
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
 
         return 0;
     }
@@ -1966,6 +1983,7 @@ namespace luautils
 
     int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        /*
         lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
 
         if (prepFile(File, "onEffectGain"))
@@ -1985,7 +2003,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -1997,6 +2015,7 @@ namespace luautils
 
     int32 OnEffectTick(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        /*
         lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
 
         if (prepFile(File, "onEffectTick"))
@@ -2016,7 +2035,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -2029,6 +2048,7 @@ namespace luautils
 
     int32 OnEffectLose(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        /*
         lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
 
         if (prepFile(File, "onEffectLose"))
@@ -2273,6 +2293,7 @@ namespace luautils
 
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PSpell == nullptr);
 
         lua_prepscript(PSpell->getSpellGroup() == SPELLGROUP_BLUE    ? "scripts/globals/spells/bluemagic/%s.lua"
@@ -2304,6 +2325,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     /************************************************************************
@@ -2459,6 +2482,7 @@ namespace luautils
 
     int32 OnMobInitialize(CBaseEntity* PMob)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
@@ -2477,12 +2501,13 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
     int32 ApplyMixins(CBaseEntity* PMob)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         if (PMob->objtype == TYPE_MOB)
@@ -2538,11 +2563,13 @@ namespace luautils
                 lua_pop(LuaHandle, 1);
             }
         }
+        */
         return 0;
     }
 
     int32 ApplyZoneMixins(CBaseEntity* PMob)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         if (PMob->objtype == TYPE_MOB)
@@ -2659,11 +2686,13 @@ namespace luautils
                 }
             }
         }
+        */
         return 0;
     }
 
     int32 OnPath(CBaseEntity* PEntity)
     {
+        /*
         TracyZoneScoped;
         TPZ_DEBUG_BREAK_IF(PEntity == nullptr);
 
@@ -2686,6 +2715,7 @@ namespace luautils
                 return -1;
             }
         }
+        */
         return 0;
     }
 
@@ -2927,6 +2957,8 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
+
         return 0;
     }
 
@@ -3129,6 +3161,7 @@ namespace luautils
 
     int32 OnMobSpawn(CBaseEntity* PMob)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PMob == nullptr);
 
         int8 File[255];
@@ -3186,7 +3219,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -3198,6 +3231,7 @@ namespace luautils
 
     int32 OnMobRoam(CBaseEntity* PMob)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PMob == nullptr || PMob->objtype != TYPE_MOB)
 
         CLuaBaseEntity LuaMobEntity(PMob);
@@ -3217,7 +3251,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -3273,6 +3307,7 @@ namespace luautils
 
     int32 OnGameDay(CZone* PZone)
     {
+        /*
         lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
 
         if (prepFile(File, "onGameDay"))
@@ -3286,7 +3321,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -3298,6 +3333,7 @@ namespace luautils
 
     int32 OnGameHour(CZone* PZone)
     {
+        /*
         TracyZoneScoped;
         lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
 
@@ -3314,12 +3350,13 @@ namespace luautils
             ShowError("luautils::onGameHour: %s\n", err.what());
             return -1;
         }
-
+        */
         return 0;
     }
 
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather)
     {
+        /*
         lua_prepscript("scripts/zones/%s/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
 
         if (prepFile(File, "onZoneWeatherChange"))
@@ -3335,12 +3372,13 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD)
     {
+        /*
         lua_prepscript("scripts/zones/%s/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
 
         if (prepFile(File, "onTOTDChange"))
@@ -3428,6 +3466,7 @@ namespace luautils
 
     int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
     {
+        /*
         lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
         if (!prepFile(File, "onMobWeaponSkill"))
@@ -3474,6 +3513,8 @@ namespace luautils
         int32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     /***********************************************************************
@@ -3484,6 +3525,7 @@ namespace luautils
 
     int32 OnMobSkillCheck(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill)
     {
+        /*
         lua_prepscript("scripts/globals/mobskills/%s.lua", PMobSkill->getName());
 
         if (prepFile(File, "onMobSkillCheck"))
@@ -3510,6 +3552,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : -5);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     int32 OnMobAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
@@ -3540,6 +3584,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : -5);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     /***********************************************************************
@@ -3550,6 +3596,7 @@ namespace luautils
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell)
     {
+        /*
         lua_prepscript(PSpell->getSpellGroup() == SPELLGROUP_BLUE    ? "scripts/globals/spells/bluemagic/%s.lua"
                        : PSpell->getSpellGroup() == SPELLGROUP_TRUST ? "scripts/globals/spells/trust/%s.lua"
                                                                      : "scripts/globals/spells/%s.lua",
@@ -3590,6 +3637,7 @@ namespace luautils
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget)
     {
+        /*
         TPZ_DEBUG_BREAK_IF(PAbility == nullptr);
 
         char filePath[40] = "scripts/globals/abilities/%s.lua";
@@ -3659,6 +3707,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : -5);
         lua_pop(LuaHandle, 2);
         return retVal;
+        */
+        return 0;
     }
 
     /***********************************************************************
@@ -3725,6 +3775,7 @@ namespace luautils
 
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action)
     {
+        /*        
         std::string path = "scripts/globals/abilities/%s.lua";
         if (PUser->objtype == TYPE_PET)
         {
@@ -3759,6 +3810,8 @@ namespace luautils
         int32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     int32 clearVarFromAll(lua_State* L)
@@ -4767,7 +4820,7 @@ namespace luautils
     {
         TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
         TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-        //CLuaBaseEntity* PLuaBaseEntity = Lunar<CLuaBaseEntity>::check(L, 1);
+        //CLuaBaseEntity* PLuaBaseEntity = nullptr;
         //CCharEntity*    player         = (CCharEntity*)PLuaBaseEntity->GetBaseEntity();
         //lua_pushinteger(L, daily::SelectItem(player, (uint8)lua_tointeger(L, 2)));
         return 1;

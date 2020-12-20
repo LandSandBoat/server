@@ -50,7 +50,7 @@ public:
     void        setAnimation(uint16 animationID);
     void  setRecast(uint16 recastTime);
     void  setCE(uint16 ce);
-    int32 setVE(uint16 ve);
+    void setVE(uint16 ve);
     void  setRange(float range);
 
     static void Register(sol::state& lua);

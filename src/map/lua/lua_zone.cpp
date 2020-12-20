@@ -102,12 +102,12 @@ inline ZONEID CLuaZone::getID()
     return m_pLuaZone->GetID();
 }
 
-inline REGIONTYPE CLuaZone::getRegionID()
+inline REGION_TYPE CLuaZone::getRegionID()
 {
     return m_pLuaZone->GetRegionID();
 }
 
-inline ZONETYPE CLuaZone::getType()
+inline ZONE_TYPE CLuaZone::getType()
 {
     return m_pLuaZone->GetType();
 }
@@ -141,9 +141,10 @@ inline bool CLuaZone::battlefieldsFull(int battlefieldId)
 
 inline WEATHER CLuaZone::getWeather()
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
     return m_pLuaZone->GetWeather();
 }
+
+//======================================================//
 
 void CLuaZone::Register(sol::state& lua)
 {
@@ -159,3 +160,5 @@ void CLuaZone::Register(sol::state& lua)
     SOL_REGISTER(getWeather)
     SOL_END()
 }
+
+//======================================================//

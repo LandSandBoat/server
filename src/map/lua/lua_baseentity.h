@@ -79,9 +79,9 @@ public:
     int32 needToZone(lua_State*); // Check if player has zoned since the flag has been raised
 
     // Object Identification
-    int32 getID(lua_State* L); // Gets Entity Id
-    int32 getShortID(lua_State* L);
-    int32 getCursorTarget(lua_State* L); // Returns the ID any object under players in game cursor.
+    int32 getID();
+    int16 getShortID();
+    std::shared_ptr<CLuaBaseEntity> getCursorTarget(); // Returns the ID any object under players in game cursor.
 
     int32 getObjType(lua_State*);
     int32 isPC(lua_State*);
