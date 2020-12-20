@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CZoneVisitedPacket : public CBasicPacket
 {
 public:
-
-	CZoneVisitedPacket(CCharEntity* PChar);
+    CZoneVisitedPacket(CCharEntity* PChar);
 };
 
 #endif

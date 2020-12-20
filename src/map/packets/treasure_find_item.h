@@ -27,19 +27,18 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
-class  CBaseEntity;
+class CBaseEntity;
 struct TreasurePoolItem;
 
 class CTreasureFindItemPacket : public CBasicPacket
 {
 public:
-
-	CTreasureFindItemPacket(TreasurePoolItem* PItem, CBaseEntity* PEntity, bool isOldItem);
+    CTreasureFindItemPacket(TreasurePoolItem* PItem, CBaseEntity* PEntity, bool isOldItem);
 };
 
 #endif

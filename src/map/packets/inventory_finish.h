@@ -27,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
-class CInventoryFinishPacket: public CBasicPacket
+class CInventoryFinishPacket : public CBasicPacket
 {
 public:
-
-	CInventoryFinishPacket();
+    CInventoryFinishPacket();
 };
 
 #endif

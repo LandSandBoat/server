@@ -26,9 +26,9 @@ set(SOURCES
     luautils.cpp
     luautils.h)
 
-add_library(lua STATIC ${SOURCES})
+add_library(lua_bindings STATIC ${SOURCES})
 
-target_link_libraries(lua
+target_link_libraries(lua_bindings
     PUBLIC
     common
     project_options

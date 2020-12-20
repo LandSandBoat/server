@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CBaseEntity;
 
 class CMessageTextPacket : public CBasicPacket
 {
 public:
-
-	CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, bool showName = true, uint8 mode = 0);
+    CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, bool showName = true, uint8 mode = 0);
 };
 
 #endif

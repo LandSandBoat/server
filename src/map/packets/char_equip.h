@@ -27,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CEquipPacket : public CBasicPacket
 {
 public:
-
-	CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID);
+    CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID);
 };
 
 #endif

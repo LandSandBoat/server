@@ -16,6 +16,7 @@ zones[tpz.zone.AHT_URHGAN_WHITEGATE] =
         GIL_OBTAINED                  = 226, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 228, -- Obtained key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL           = 230, -- You do not have enough gil.
+        YOU_MUST_WAIT_ANOTHER_N_DAYS  = 833, -- You must wait another <number> [day/days] to perform that action.
         CARRIED_OVER_POINTS           = 836, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 837, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                  = 838, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.

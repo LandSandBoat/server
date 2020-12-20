@@ -136,6 +136,7 @@ tpz.quest.id =
         ATELLOUNE_S_LAMENT              = 114,
         THICK_SHELLS                    = 117, -- ± --
         FOREST_FOR_THE_TREES            = 118,
+        TRUST_SANDORIA                  = 119, -- ± --
     },
 
     -----------------------------------
@@ -235,7 +236,7 @@ tpz.quest.id =
         SYNERGUSTIC_PURSUITS            = 89,
         THE_WONDROUS_WHATCHAMACALLIT    = 90,
         SYNERGISTIC_SUPPORT             = 91,
-        TRUST_BASTOK                    = 92,
+        TRUST_BASTOK                    = 92, -- ± --
     },
 
     -----------------------------------
@@ -332,6 +333,7 @@ tpz.quest.id =
         WAKING_DREAMS                   = 93, -- + --
         LURE_OF_THE_WILDCAT             = 94, -- + --
         BABBAN_NY_MHEILLEA              = 95,
+        TRUST_WINDURST                  = 96, -- + --
     },
 
     -----------------------------------

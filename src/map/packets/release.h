@@ -26,28 +26,27 @@
 
 #include "basic.h"
 
-enum RELEASE_TYPE
+enum class RELEASE_TYPE : uint8
 {
-	RELEASE_STANDARD	= 0,
-	RELEASE_EVENT		= 1,
-	RELEASE_SKIPPING	= 2,
-	RELEASE_UNKNOWN     = 3, /* Used by Event Update (String Update) - Packet 0x060  */
-	RELEASE_FISHING		= 4
+    STANDARD = 0,
+    EVENT    = 1,
+    SKIPPING = 2,
+    UNKNOWN  = 3, /* Used by Event Update (String Update) - Packet 0x060  */
+    FISHING  = 4
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CReleasePacket : public CBasicPacket
 {
 public:
-
-	CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType = RELEASE_STANDARD);
+    CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD);
 };
 
 #endif

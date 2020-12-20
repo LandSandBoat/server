@@ -19,11 +19,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#include "../common/cbasetypes.h"
+#include "../common/mmo.h"
 #include "../common/socket.h"
 #include "../common/sql.h"
-#include "../common/mmo.h"
 #include "../common/zmq.hpp"
-#include "../common/cbasetypes.h"
 
 class CBasicPacket;
 
@@ -39,4 +39,4 @@ namespace message
     void init(const char* chatIp, uint16 chatPort);
     void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet);
     void close();
-};
+}; // namespace message

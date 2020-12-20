@@ -29,14 +29,14 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
         SIGNPOST_DIALOG_1            = 7385,  -- North: Valkurm Dunes South: To Gustaberg
         SIGNPOST_DIALOG_2            = 7386,  -- You see something stuck behind the signpost.
         SOMETHING_BURIED_HERE        = 7387,  -- Something has been buried here.
-        TELEPOINT_HAS_BEEN_SHATTERED = 7476,  -- The telepoint has been shattered into a thousand pieces...
-        PLAYER_OBTAINS_ITEM          = 7594,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM        = 7595,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM     = 7596,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP         = 7597,  -- You already possess that temporary item.
-        NO_COMBINATION               = 7602,  -- You were unable to enter a combination.
-        REGIME_REGISTERED            = 9780,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL        = 11906, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TELEPOINT_HAS_BEEN_SHATTERED = 7494,  -- The telepoint has been shattered into a thousand pieces...
+        PLAYER_OBTAINS_ITEM          = 7612,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM        = 7613,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM     = 7614,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP         = 7615,  -- You already possess that temporary item.
+        NO_COMBINATION               = 7620,  -- You were unable to enter a combination.
+        REGIME_REGISTERED            = 9798,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL        = 11924, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -64,7 +64,7 @@ zones[tpz.zone.KONSCHTAT_HIGHLANDS] =
     },
     npc =
     {
-        CASKET_BASE = 17220111,
+        CASKET_BASE = 17220110,
     },
 }
 

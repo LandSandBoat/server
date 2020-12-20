@@ -29,15 +29,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CLinkshellMessagePacket : public CBasicPacket
 {
 public:
-    static const uint16 id {0xCC};
+    static const uint16 id{ 0xCC };
     CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1);
 };
 

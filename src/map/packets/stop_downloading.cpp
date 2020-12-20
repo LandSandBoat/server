@@ -21,23 +21,23 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "stop_downloading.h"
 #include "../entities/charentity.h"
+#include "stop_downloading.h"
 
-CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector< std::pair< uint32, string_t > > blacklist)
+CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, string_t>> blacklist)
 {
-	this->type = 0x41;
-	this->size = 0x7C;
+    this->type = 0x41;
+    this->size = 0x7C;
 
-	for (size_t x = 0; x < blacklist.size(); x++)
-	{
-		auto offset = (uint32)(0x04 + (20 * x)) ;
-		ref<uint32>(offset) = blacklist[x].first;
-		memcpy(data + offset + 4, blacklist[x].second.c_str(), blacklist[x].second.size());
-	}
+    for (size_t x = 0; x < blacklist.size(); x++)
+    {
+        auto offset         = (uint32)(0x04 + (20 * x));
+        ref<uint32>(offset) = blacklist[x].first;
+        memcpy(data + offset + 4, blacklist[x].second.c_str(), blacklist[x].second.size());
+    }
 
-	ref<uint8>(0xF4) = 3; // Unknown but important!
-	ref<uint8>(0xF5) = (int8)blacklist.size();
+    ref<uint8>(0xF4) = 3; // Unknown but important!
+    ref<uint8>(0xF5) = (int8)blacklist.size();
 }

@@ -21,50 +21,37 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
-#include "event_string.h"
 #include "../entities/charentity.h"
+#include "event_string.h"
 
-
-CEventStringPacket::CEventStringPacket(
-	CCharEntity* PChar,
-	uint16 EventID,
-    const std::string& string0,
-    const std::string& string1,
-    const std::string& string2,
-    const std::string& string3,
-	uint32 param0,
-	uint32 param1,
-	uint32 param2,
-	uint32 param3,
-	uint32 param4,
-	uint32 param5,
-	uint32 param6,
-	uint32 param7)
+CEventStringPacket::CEventStringPacket(CCharEntity* PChar, uint16 EventID, const std::string& string0, const std::string& string1, const std::string& string2,
+                                       const std::string& string3, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4, uint32 param5,
+                                       uint32 param6, uint32 param7)
 {
-	this->type = 0x33;
-	this->size = 0x38;
+    this->type = 0x33;
+    this->size = 0x38;
 
-	ref<uint32>(0x04) = PChar->id;
-	ref<uint16>(0x08) = PChar->m_TargID;
+    ref<uint32>(0x04) = PChar->id;
+    ref<uint16>(0x08) = PChar->m_TargID;
     ref<uint16>(0x0A) = PChar->getZone();
-	ref<uint16>(0x0C) = EventID;
-	ref<uint8>(0x0E) = 8; // camera "jumps" behind the character if < 8 params
+    ref<uint16>(0x0C) = EventID;
+    ref<uint8>(0x0E)  = 8; // camera "jumps" behind the character if < 8 params
 
-    memcpy(data+(0x10), string0.c_str(), string0.size());
-    memcpy(data+(0x20), string1.c_str(), string1.size());
-    memcpy(data+(0x30), string2.c_str(), string2.size());
-    memcpy(data+(0x40), string3.c_str(), string3.size());
+    memcpy(data + (0x10), string0.c_str(), string0.size());
+    memcpy(data + (0x20), string1.c_str(), string1.size());
+    memcpy(data + (0x30), string2.c_str(), string2.size());
+    memcpy(data + (0x40), string3.c_str(), string3.size());
 
-	ref<uint32>(0x50) = param0;
-	ref<uint32>(0x54) = param1;
-	ref<uint32>(0x58) = param2;
-	ref<uint32>(0x5C) = param3;
-	ref<uint32>(0x60) = param4;
-	ref<uint32>(0x64) = param5;
-	ref<uint32>(0x68) = param6;
-	ref<uint32>(0x6C) = param7;
+    ref<uint32>(0x50) = param0;
+    ref<uint32>(0x54) = param1;
+    ref<uint32>(0x58) = param2;
+    ref<uint32>(0x5C) = param3;
+    ref<uint32>(0x60) = param4;
+    ref<uint32>(0x64) = param5;
+    ref<uint32>(0x68) = param6;
+    ref<uint32>(0x6C) = param7;
 
-	PChar->m_event.EventID = EventID;
+    PChar->m_event.EventID = EventID;
 }

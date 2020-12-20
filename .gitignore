@@ -145,7 +145,7 @@ UpgradeLog*.XML
 /autom4te.cache
 /compile
 /configure
-**/config.*
+/config.*
 /depcomp
 /missing
 /install-sh
@@ -188,6 +188,7 @@ cmake_install.cmake
 *-server
 
 # non-default config files containing server specific things
+/conf/license.conf
 /conf/version.conf
 /conf/login.conf
 /conf/maint.conf
@@ -199,4 +200,4 @@ cmake_install.cmake
 /conf/server_message_fr.conf
 
 # Tracy download
-tracy/
+ext/tracy/

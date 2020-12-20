@@ -27,12 +27,12 @@ zones[tpz.zone.EAST_SARUTABARUTA] =
         HEIH_PORHIAAP_DIALOG     = 7389, -- These grrrasslands make up East Sarutabaruta. Lately the number of monsters has drrramatically increased, causing us all sorts of trrrouble.
         SAMA_GOHJIMA_PREDIALOG   = 7391, -- The ministerrr of the Orastery is in the laborrratory beneath here. To get there, you should check the walls verrry carrrefully.
         SAMA_GOHJIMA_POSTDIALOG  = 7392, -- Were you able to find the laborrratory? There are many such hidden passages in the Horutoto Ruins.
-        PLAYER_OBTAINS_ITEM      = 7551, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7552, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7553, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7554, -- You already possess that temporary item.
-        NO_COMBINATION           = 7559, -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9919, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM      = 7569, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7570, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7571, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7572, -- You already possess that temporary item.
+        NO_COMBINATION           = 7577, -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9937, -- New training regime registered!
     },
     mob =
     {
@@ -51,7 +51,7 @@ zones[tpz.zone.EAST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE = 17253006,
+        CASKET_BASE = 17253005,
     },
 }
 

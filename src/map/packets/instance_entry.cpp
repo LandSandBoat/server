@@ -24,12 +24,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../entities/baseentity.h"
 
-
 CInstanceEntryPacket::CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response)
 {
-	this->type = 0xBF;
-	this->size = 0x0E;
+    this->type = 0xBF;
+    this->size = 0x0E;
 
-	ref<uint8>(0x06) = response;
-	ref<uint16>(0x0C) = PEntrance->targid;
+    ref<uint8>(0x06)  = response;
+    ref<uint16>(0x0C) = PEntrance->targid;
 }

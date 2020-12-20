@@ -28,15 +28,15 @@
 
 enum CHAT_MESSAGE_TYPE
 {
-    MESSAGE_SAY           = 0,
-    MESSAGE_SHOUT         = 1,
-    MESSAGE_UNKNOWN       = 2,
-    MESSAGE_TELL          = 3,
-    MESSAGE_PARTY         = 4,
-    MESSAGE_LINKSHELL     = 5,
-    MESSAGE_SYSTEM_1      = 6, // Standard "PrintToPlayer" default if no type specified
-    MESSAGE_SYSTEM_2      = 7, // Login / world announcement messages
-    MESSAGE_EMOTION       = 8,
+    MESSAGE_SAY       = 0,
+    MESSAGE_SHOUT     = 1,
+    MESSAGE_UNKNOWN   = 2,
+    MESSAGE_TELL      = 3,
+    MESSAGE_PARTY     = 4,
+    MESSAGE_LINKSHELL = 5,
+    MESSAGE_SYSTEM_1  = 6, // Standard "PrintToPlayer" default if no type specified
+    MESSAGE_SYSTEM_2  = 7, // Login / world announcement messages
+    MESSAGE_EMOTION   = 8,
     // 9 / 10 / 11 = Does not work / nothing
     MESSAGE_GMPROMPT      = 12, // Menu prompt from GM
     MESSAGE_NS_SAY        = 13, // Same as MESSAGESAY but has no speaker object displayed
@@ -65,17 +65,17 @@ enum CHAT_MESSAGE_TYPE
 };
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CChatMessagePacket : public CBasicPacket
 {
 public:
-    static const uint16 id {0x17};
+    static const uint16 id{ 0x17 };
     CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender = std::string());
 };
 

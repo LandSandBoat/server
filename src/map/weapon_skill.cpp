@@ -19,42 +19,42 @@
 ===========================================================================
 */
 
-#include <string.h>
 #include "weapon_skill.h"
+#include <cstring>
 
 CWeaponSkill::CWeaponSkill(uint16 id)
 {
-	m_ID = id;
+    m_ID     = id;
     m_TypeID = 0;
     memset(m_Job, 0, sizeof(m_Job));
-    m_Skilllevel = 0;
-	m_AnimationId = 0;
-    m_Element = 0;
-    m_PrimarySkillchain = SC_NONE;
+    m_Skilllevel          = 0;
+    m_AnimationId         = 0;
+    m_Element             = 0;
+    m_PrimarySkillchain   = SC_NONE;
     m_SecondarySkillchain = SC_NONE;
-    m_TertiarySkillchain = SC_NONE;
-    m_Range = 0;
-    m_AOE = 0;
-    m_mainOnly = 0;
-    m_unlockId = 0;
+    m_TertiarySkillchain  = SC_NONE;
+    m_Range               = 0;
+    m_AOE                 = 0;
+    m_mainOnly            = 0;
+    m_unlockId            = 0;
 }
 
 void CWeaponSkill::setID(uint16 id)
 {
-	m_ID = id;
+    m_ID = id;
 }
 
 void CWeaponSkill::setType(uint8 type)
 {
-	m_TypeID = type;
+    m_TypeID = type;
 }
 
-bool CWeaponSkill::isAoE()
+bool CWeaponSkill::isAoE() const
 {
     return m_AOE == 2;
 }
 
-bool CWeaponSkill::mainOnly()
+bool CWeaponSkill::mainOnly() const
 {
     return m_mainOnly;
 }
@@ -71,17 +71,17 @@ void CWeaponSkill::setUnlockId(uint8 id)
 
 void CWeaponSkill::setJob(int8* jobs)
 {
-	memcpy(&m_Job[1], jobs, 22);
+    memcpy(&m_Job[1], jobs, 22);
 }
 
 void CWeaponSkill::setSkillLevel(uint16 level)
 {
-	m_Skilllevel = level;
+    m_Skilllevel = level;
 }
 
 const int8* CWeaponSkill::getName()
 {
-	return (const int8*)m_name.c_str();
+    return (const int8*)m_name.c_str();
 }
 
 void CWeaponSkill::setElement(uint8 element)
@@ -91,7 +91,7 @@ void CWeaponSkill::setElement(uint8 element)
 
 void CWeaponSkill::setPrimarySkillchain(uint8 skillchain)
 {
-	m_PrimarySkillchain = skillchain;
+    m_PrimarySkillchain = skillchain;
 }
 
 void CWeaponSkill::setSecondarySkillchain(uint8 skillchain)
@@ -106,13 +106,13 @@ void CWeaponSkill::setTertiarySkillchain(uint8 skillchain)
 
 void CWeaponSkill::setName(int8* name)
 {
-	m_name.clear();
-	m_name.insert(0, (const char*)name);
+    m_name.clear();
+    m_name.insert(0, (const char*)name);
 }
 
 void CWeaponSkill::setAnimationId(int8 id)
 {
-	m_AnimationId = id;
+    m_AnimationId = id;
 }
 
 void CWeaponSkill::setAnimationTime(duration time)
@@ -122,52 +122,52 @@ void CWeaponSkill::setAnimationTime(duration time)
 
 void CWeaponSkill::setAoe(uint8 aoe)
 {
-	m_AOE = aoe;
+    m_AOE = aoe;
 }
 
 void CWeaponSkill::setRange(uint8 range)
 {
-	m_Range = range;
+    m_Range = range;
 }
 
-uint16 CWeaponSkill::getID()
+uint16 CWeaponSkill::getID() const
 {
-	return m_ID;
+    return m_ID;
 }
 
-uint8 CWeaponSkill::getType()
+uint8 CWeaponSkill::getType() const
 {
-	return m_TypeID;
+    return m_TypeID;
 }
 
-uint8 CWeaponSkill::getUnlockId()
+uint8 CWeaponSkill::getUnlockId() const
 {
     return m_unlockId;
 }
 
 uint8 CWeaponSkill::getJob(JOBTYPE job)
 {
-	return m_Job[job];
+    return m_Job[job];
 }
 
-uint16 CWeaponSkill::getSkillLevel()
+uint16 CWeaponSkill::getSkillLevel() const
 {
-	return m_Skilllevel;
+    return m_Skilllevel;
 }
 
-uint8 CWeaponSkill::getElement()
+uint8 CWeaponSkill::getElement() const
 {
-	return m_Element;
+    return m_Element;
 }
 
-bool CWeaponSkill::isElemental()
+bool CWeaponSkill::isElemental() const
 {
     return m_Element != 0;
 }
 
-uint8 CWeaponSkill::getAnimationId()
+uint8 CWeaponSkill::getAnimationId() const
 {
-	return m_AnimationId;
+    return m_AnimationId;
 }
 
 duration CWeaponSkill::getAnimationTime()
@@ -175,27 +175,27 @@ duration CWeaponSkill::getAnimationTime()
     return m_AnimationTime;
 }
 
-uint8 CWeaponSkill::getAoe()
+uint8 CWeaponSkill::getAoe() const
 {
-	return m_AOE;
+    return m_AOE;
 }
 
-uint8 CWeaponSkill::getRange()
+uint8 CWeaponSkill::getRange() const
 {
-	return m_Range;
+    return m_Range;
 }
 
-uint8 CWeaponSkill::getPrimarySkillchain()
+uint8 CWeaponSkill::getPrimarySkillchain() const
 {
     return m_PrimarySkillchain;
 }
 
-uint8 CWeaponSkill::getSecondarySkillchain()
+uint8 CWeaponSkill::getSecondarySkillchain() const
 {
     return m_SecondarySkillchain;
 }
 
-uint8 CWeaponSkill::getTertiarySkillchain()
+uint8 CWeaponSkill::getTertiarySkillchain() const
 {
     return m_TertiarySkillchain;
 }

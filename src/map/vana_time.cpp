@@ -21,10 +21,10 @@
 
 #include "../common/showmsg.h"
 
-#include <time.h>
+#include <ctime>
 
-#include "vana_time.h"
 #include "utils/zoneutils.h"
+#include "vana_time.h"
 
 CVanaTime* CVanaTime::_instance = nullptr;
 
@@ -44,84 +44,84 @@ CVanaTime* CVanaTime::getInstance()
 
 void CVanaTime::delInstance()
 {
-    if(_instance)
+    if (_instance)
     {
         delete _instance;
         _instance = nullptr;
     }
 }
 
-uint32 CVanaTime::getDate()
+uint32 CVanaTime::getDate() const
 {
     return m_vanaDate;
 }
 
-uint32 CVanaTime::getYear()
+uint32 CVanaTime::getYear() const
 {
     return m_vYear;
 }
 
-uint32 CVanaTime::getMonth()
+uint32 CVanaTime::getMonth() const
 {
     return m_vMon;
 }
 
-uint32 CVanaTime::getDayOfTheMonth()
+uint32 CVanaTime::getDayOfTheMonth() const
 {
     return m_vDate;
 }
 
-uint32 CVanaTime::getHour()
+uint32 CVanaTime::getHour() const
 {
     return m_vHour;
 }
 
-uint32 CVanaTime::getMinute()
+uint32 CVanaTime::getMinute() const
 {
     return m_vMin;
 }
 
-uint32 CVanaTime::getWeekday()
+uint32 CVanaTime::getWeekday() const
 {
     return m_vDay;
 }
 
 uint32 CVanaTime::getSysHour()
 {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(nullptr);
+    tm*    ltm = localtime(&now);
 
     return ltm->tm_hour;
 }
 
 uint32 CVanaTime::getSysMinute()
 {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(nullptr);
+    tm*    ltm = localtime(&now);
 
     return ltm->tm_min;
 }
 
 uint32 CVanaTime::getSysSecond()
 {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(nullptr);
+    tm*    ltm = localtime(&now);
 
     return ltm->tm_sec;
 }
 
 uint32 CVanaTime::getSysWeekDay()
 {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(nullptr);
+    tm*    ltm = localtime(&now);
 
     return ltm->tm_wday;
 }
 
 uint32 CVanaTime::getSysYearDay()
 {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(nullptr);
+    tm*    ltm = localtime(&now);
 
     return ltm->tm_yday;
 }
@@ -129,7 +129,7 @@ uint32 CVanaTime::getSysYearDay()
 uint32 CVanaTime::getJstHour()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_hour;
 }
@@ -137,7 +137,7 @@ uint32 CVanaTime::getJstHour()
 uint32 CVanaTime::getJstMinute()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_min;
 }
@@ -145,7 +145,7 @@ uint32 CVanaTime::getJstMinute()
 uint32 CVanaTime::getJstSecond()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_sec;
 }
@@ -153,7 +153,7 @@ uint32 CVanaTime::getJstSecond()
 uint32 CVanaTime::getJstWeekDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_wday;
 }
@@ -161,7 +161,7 @@ uint32 CVanaTime::getJstWeekDay()
 uint32 CVanaTime::getJstDayOfMonth()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_mday;
 }
@@ -169,28 +169,28 @@ uint32 CVanaTime::getJstDayOfMonth()
 uint32 CVanaTime::getJstYearDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm *jtm = gmtime(&now);
+    tm*  jtm = gmtime(&now);
 
     return jtm->tm_yday;
 }
 
 uint32 CVanaTime::getJstMidnight()
 {
-    auto now = time(nullptr) + JST_OFFSET;
-    tm* jst = gmtime(&now);
+    auto now     = time(nullptr) + JST_OFFSET;
+    tm*  jst     = gmtime(&now);
     jst->tm_hour = 0;
-    jst->tm_min = 0;
-    jst->tm_sec = 0;
-    return static_cast<uint32>(timegm(jst) - JST_OFFSET + (60 * 60 * 24));     // Unix timestamp of the upcoming JST midnight
+    jst->tm_min  = 0;
+    jst->tm_sec  = 0;
+    return static_cast<uint32>(timegm(jst) - JST_OFFSET + (60 * 60 * 24)); // Unix timestamp of the upcoming JST midnight
 }
 
-uint32 CVanaTime::getVanaTime()
+uint32 CVanaTime::getVanaTime() const
 {
-    //all functions/variables for in game time should be derived from this
+    // all functions/variables for in game time should be derived from this
     return (uint32)time(nullptr) - (m_customEpoch ? m_customEpoch : VTIME_BASEDATE);
 }
 
-int32 CVanaTime::getCustomEpoch()
+int32 CVanaTime::getCustomEpoch() const
 {
     return m_customEpoch;
 }
@@ -198,7 +198,7 @@ int32 CVanaTime::getCustomEpoch()
 void CVanaTime::setCustomEpoch(int32 epoch)
 {
     m_customEpoch = epoch;
-    m_TimeType = SyncTime();
+    m_TimeType    = SyncTime();
 }
 
 TIMETYPE CVanaTime::GetCurrentTOTD()
@@ -206,9 +206,9 @@ TIMETYPE CVanaTime::GetCurrentTOTD()
     return m_TimeType;
 }
 
-uint32 CVanaTime::getMoonPhase()
+uint32 CVanaTime::getMoonPhase() const
 {
-    int32 phase = 0;
+    int32  phase   = 0;
     double daysmod = (int32)(((m_vanaDate / VTIME_DAY) + 26) % 84);
 
     if (daysmod >= 42)
@@ -223,44 +223,45 @@ uint32 CVanaTime::getMoonPhase()
     return phase;
 }
 
-uint8 CVanaTime::getMoonDirection()
+uint8 CVanaTime::getMoonDirection() const
 {
     double daysmod = (int32)(((m_vanaDate / VTIME_DAY) + 26) % 84);
 
     if (daysmod == 42 || daysmod == 0)
     {
-        return 0; //neither waxing nor waning
+        return 0; // neither waxing nor waning
     }
     else if (daysmod < 42)
     {
-        return 1;   //waning
+        return 1; // waning
     }
     else
     {
-        return 2;   //waxing
+        return 2; // waxing
     }
 }
 
-uint8 CVanaTime::getRSERace()
+uint8 CVanaTime::getRSERace() const
 {
     return (uint8)(((m_vanaDate / VTIME_WEEK) - 22) % 8) + 1;
 }
 
-uint8 CVanaTime::getRSELocation()
+uint8 CVanaTime::getRSELocation() const
 {
     return (uint8)(((m_vanaDate / VTIME_WEEK) - 21) % 3);
 }
 
 TIMETYPE CVanaTime::SyncTime()
 {
-    m_vanaDate  = (uint32)(this->getVanaTime() / 60.0 * 25) + 886 * VTIME_YEAR; //convert vana time (from SE epoch in earth seconds) to vanadiel minutes and add 886 vana years
+    m_vanaDate = (uint32)(this->getVanaTime() / 60.0 * 25) +
+                 886 * VTIME_YEAR; // convert vana time (from SE epoch in earth seconds) to vanadiel minutes and add 886 vana years
 
-    m_vYear = (uint32)( m_vanaDate / VTIME_YEAR);
+    m_vYear = (uint32)(m_vanaDate / VTIME_YEAR);
     m_vMon  = (uint32)((m_vanaDate / VTIME_MONTH) % 12) + 1;
-    m_vDate = (uint32)((m_vanaDate / VTIME_DAY) % 30 ) + 1;
-    m_vDay  = (uint32)((m_vanaDate % VTIME_WEEK)  / VTIME_DAY);
-    m_vHour = (uint32)((m_vanaDate % VTIME_DAY)   / VTIME_HOUR);
-    m_vMin  = (uint32)( m_vanaDate % VTIME_HOUR);
+    m_vDate = (uint32)((m_vanaDate / VTIME_DAY) % 30) + 1;
+    m_vDay  = (uint32)((m_vanaDate % VTIME_WEEK) / VTIME_DAY);
+    m_vHour = (uint32)((m_vanaDate % VTIME_DAY) / VTIME_HOUR);
+    m_vMin  = (uint32)(m_vanaDate % VTIME_HOUR);
 
     static uint8 lastTickedHour = m_vHour;
     if (m_vHour == (lastTickedHour + 1) % 24u)
@@ -268,13 +269,27 @@ TIMETYPE CVanaTime::SyncTime()
         lastTickedHour = m_vHour;
         switch (m_vHour)
         {
-            case  0: m_TimeType = TIME_MIDNIGHT; return TIME_MIDNIGHT;
-            case  4: m_TimeType = TIME_NEWDAY;   return TIME_NEWDAY;
-            case  6: m_TimeType = TIME_DAWN;     return TIME_DAWN;
-            case  7: m_TimeType = TIME_DAY;      return TIME_DAY;
-            case 17: m_TimeType = TIME_DUSK;     return TIME_DUSK;
-            case 18: m_TimeType = TIME_EVENING;  return TIME_EVENING;
-            case 20: m_TimeType = TIME_NIGHT;    return TIME_NIGHT;
+            case 0:
+                m_TimeType = TIME_MIDNIGHT;
+                return TIME_MIDNIGHT;
+            case 4:
+                m_TimeType = TIME_NEWDAY;
+                return TIME_NEWDAY;
+            case 6:
+                m_TimeType = TIME_DAWN;
+                return TIME_DAWN;
+            case 7:
+                m_TimeType = TIME_DAY;
+                return TIME_DAY;
+            case 17:
+                m_TimeType = TIME_DUSK;
+                return TIME_DUSK;
+            case 18:
+                m_TimeType = TIME_EVENING;
+                return TIME_EVENING;
+            case 20:
+                m_TimeType = TIME_NIGHT;
+                return TIME_NIGHT;
         }
     }
     return TIME_NONE;

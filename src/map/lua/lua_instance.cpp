@@ -24,19 +24,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_instance.h"
 
-#include "lua_baseentity.h"
-#include "luautils.h"
 #include "../instance.h"
 #include "../utils/mobutils.h"
-
+#include "lua_baseentity.h"
+#include "luautils.h"
 
 /************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Constructor															*
+ *																		*
+ ************************************************************************/
 
-CLuaInstance::CLuaInstance(lua_State *L)
+CLuaInstance::CLuaInstance(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -50,10 +49,10 @@ CLuaInstance::CLuaInstance(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Constructor															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Constructor															*
+ *																		*
+ ************************************************************************/
 
 CLuaInstance::CLuaInstance(CInstance* PInstance)
 {
@@ -178,7 +177,7 @@ inline int32 CLuaInstance::getTimeLimit(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaInstance == nullptr);
 
-    auto limit = std::chrono::duration_cast<std::chrono::minutes>( m_PLuaInstance->GetTimeLimit()).count();
+    auto limit = std::chrono::duration_cast<std::chrono::minutes>(m_PLuaInstance->GetTimeLimit()).count();
 
     lua_pushinteger(L, limit);
 
@@ -388,11 +387,11 @@ inline int32 CLuaInstance::insertAlly(lua_State* L)
 }
 
 /************************************************************************
-*																		*
-*  declare lua function													*
-*																		*
-************************************************************************/
-
+ *																		*
+ *  declare lua function													*
+ *																		*
+ ************************************************************************/
+// clang-format off
 const char CLuaInstance::className[] = "CInstance";
 Lunar<CLuaInstance>::Register_t CLuaInstance::methods[] =
 {
@@ -421,3 +420,4 @@ Lunar<CLuaInstance>::Register_t CLuaInstance::methods[] =
     LUNAR_DECLARE_METHOD(CLuaInstance, insertAlly),
     { nullptr, nullptr }
 };
+// clang-format on

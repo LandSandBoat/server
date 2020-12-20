@@ -14,6 +14,31 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
 
+local function TrustMemory(player)
+    local memories = 0
+    -- 2 - LIGHTBRINGER
+    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) then
+        memories = memories + 2
+    end
+    -- 4 - IMMORTAL_SENTRIES
+    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+        memories = memories + 4
+    end
+    -- 8 - UNDER_OATH
+    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) then
+        memories = memories + 8
+    end
+    -- 16 - FIT_FOR_A_PRINCE
+    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+        memories = memories + 16
+    end
+    -- 32 - Hero's Combat BCNM
+    -- if (playervar for Hero's Combat) then
+    --  memories = memories + 32
+    -- end
+    return memories
+end
+
 function onTrade(player, npc, trade)
 
 end
@@ -31,6 +56,10 @@ function onTrigger(player, npc)
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
+
+    -- Trust: San d'Oria (Trion)
+    elseif player:getRank() == 6 and player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+        player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
     elseif player:getCharVar("aBoysDreamCS") == 8 then
@@ -86,7 +115,7 @@ function onTrigger(player, npc)
             elseif missionStatus == 0 then
                 player:startEvent(553, 0, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
             end
-        
+
         -- Default dialogue
         else
             player:startEvent(522)
@@ -123,7 +152,7 @@ function onEventFinish(player, csid, option)
             player:addFame(SANDORIA, 40)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
         end
-    elseif (csid == 90 and option ==1) then
+    elseif (csid == 90 and option == 1) then
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
     elseif (csid == 89) then
@@ -143,6 +172,9 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 6)
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2", 1)
+    elseif csid == 574 and option == 2 then
+        player:addSpell(905, false, true)
+        player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 905)
     end
 
 end

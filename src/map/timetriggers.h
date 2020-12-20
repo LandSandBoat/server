@@ -23,31 +23,31 @@
 #define _CTIMETRIGGERS_H
 
 #include "../common/cbasetypes.h"
-#include <vector>
 #include "entities/npcentity.h"
+#include <vector>
 
 struct Trigger_t
 {
-    uint8 id;                       //trigger id unique to the NPC.
+    uint8 id; // trigger id unique to the NPC.
 
-    CNpcEntity* npc;                //NPC entity that the trigger belongs to
+    CNpcEntity* npc; // NPC entity that the trigger belongs to
 
-    uint16 period;                  //The time in vanadiel minutes between two firings of the trigger
-    uint16 minuteOffset;            //The time in vanadiel minutes after SE epoch which the period syncs to
+    uint16 period;       // The time in vanadiel minutes between two firings of the trigger
+    uint16 minuteOffset; // The time in vanadiel minutes after SE epoch which the period syncs to
 
-    uint32 lastTrigger;             //Used to store the last firing of the trigger
+    uint32 lastTrigger; // Used to store the last firing of the trigger
 };
 
 class CTriggerHandler
 {
 public:
     virtual ~CTriggerHandler() = default;
-    static	CTriggerHandler* getInstance();
+    static CTriggerHandler* getInstance();
 
     void insertTrigger(Trigger_t);
     void triggerTimer();
-private:
 
+private:
     static std::unique_ptr<CTriggerHandler> _instance;
 
     CTriggerHandler() = default;

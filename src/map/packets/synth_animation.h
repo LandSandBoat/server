@@ -26,34 +26,33 @@
 
 #include "basic.h"
 
-#define RESULT_SUCCESS	0x00
-#define RESULT_FAIL		0x01
-#define RESULT_HQ		0x02
-#define RESULT_HQ2		0x03
-#define RESULT_HQ3		0x04
+#define RESULT_SUCCESS 0x00
+#define RESULT_FAIL    0x01
+#define RESULT_HQ      0x02
+#define RESULT_HQ2     0x03
+#define RESULT_HQ3     0x04
 
-#define EFFECT_WATERSYNTH		0x0010
-#define EFFECT_WINDSYNTH		0x0011
-#define EFFECT_FIRESYNTH		0x0012
-#define EFFECT_EARTHSYNTH		0x0013
-#define EFFECT_LIGHTNINGSYNTH	0x0014
-#define EFFECT_ICESYNTH			0x0015
-#define EFFECT_LIGHTSYNTH		0x0016
-#define EFFECT_DARKSYNTH		0x0017
+#define EFFECT_WATERSYNTH     0x0010
+#define EFFECT_WINDSYNTH      0x0011
+#define EFFECT_FIRESYNTH      0x0012
+#define EFFECT_EARTHSYNTH     0x0013
+#define EFFECT_LIGHTNINGSYNTH 0x0014
+#define EFFECT_ICESYNTH       0x0015
+#define EFFECT_LIGHTSYNTH     0x0016
+#define EFFECT_DARKSYNTH      0x0017
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CSynthAnimationPacket : public CBasicPacket
 {
 public:
-
-	CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param);
+    CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param);
 };
 
 #endif

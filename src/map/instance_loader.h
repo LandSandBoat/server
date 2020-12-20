@@ -39,15 +39,15 @@ public:
     ~CInstanceLoader();
 
     CInstance* GetInstance();
-    bool Check();
+    bool       Check();
+
 private:
-    CZone* zone;
-    CCharEntity* requester;
-    Sql_t* SqlInstanceHandle;
+    CZone*                  zone;
+    CCharEntity*            requester;
+    Sql_t*                  SqlInstanceHandle;
     std::future<CInstance*> task;
 
     CInstance* LoadInstance(CInstance* instance);
-
 };
 
 #endif

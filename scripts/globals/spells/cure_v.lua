@@ -66,7 +66,7 @@ function onSpellCast(caster, target, spell)
         end
     end
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == tpz.objType.PC or target:getObjType() == tpz.objType.MOB)) then -- e.g. is a PC and not a monster (?)
+    if isValidHealTarget(caster, target) then -- e.g. is a PC and not a monster (?)
         if (USE_OLD_CURE_FORMULA == true) then
             basecure = getBaseCureOld(power, divisor, constant)
         else

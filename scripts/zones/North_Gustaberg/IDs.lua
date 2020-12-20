@@ -32,15 +32,15 @@ zones[tpz.zone.NORTH_GUSTABERG] =
         SHINING_OBJECT_SLIPS_AWAY     = 7438,  -- The shining object slips through your fingers and is washed further down the stream.
         REACH_WATER_FROM_HERE         = 7445,  -- You can reach the water from here.
         CONQUEST                      = 7481,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA             = 7833,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7839,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 8064,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8065,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8066,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8067,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8072,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10393, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12466, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEMS_ITEMS_LA_LA             = 7851,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7857,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 8082,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8083,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8084,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8085,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8090,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10411, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12484, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -76,8 +76,8 @@ zones[tpz.zone.NORTH_GUSTABERG] =
     },
     npc =
     {
-        CASKET_BASE   = 17212023,
-        OVERSEER_BASE = 17212060,
+        CASKET_BASE   = 17212022,
+        OVERSEER_BASE = 17212059, -- Ennigreaud_RK in npc_list
     },
 }
 

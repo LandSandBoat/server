@@ -56,7 +56,7 @@ tpz.msg.area =
 }
 
 ------------------------------------
--- Message Basic
+-- Basic Messages
 ------------------------------------
 
 tpz.msg.basic =
@@ -339,4 +339,23 @@ tpz.msg.basic =
     ROE_FIRST_TIME_SPARKS   = 707,  -- As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
     ROE_BONUS_ITEM_PLURAL   = 709,  -- As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
     ROE_TIMED_CLEAR         = 710,  -- You are cleared to fulfill this objective once again.
+
+    -- TRUST & ALTER EGO
+    TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.
+    TRUST_NO_CALL_AE        = 717,  -- You cannot call forth alter egos here.
+}
+
+------------------------------------
+-- System Messages
+------------------------------------
+
+tpz.msg.system =
+{
+    GLOBAL_TRUST_OFFSET          = 0,
+    TRUST_NO_SEEKING_PARTY       = 296, -- You cannot use Trust magic while seeking a party.
+    TRUST_DELAY_NEW_PARTY_MEMBER = 297, -- While inviting a party member, you must wait a while before using Trust magic.
+    TRUST_MAXIMUM_NUMBER         = 298, -- You have called forth your maximum number of alter egos.
+    TRUST_ALREADY_CALLED         = 299, -- That alter ego has already been called forth.
+    TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
+    TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }

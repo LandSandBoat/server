@@ -28,10 +28,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifdef WIN32
 #include <winsock2.h>
 #else
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <errno.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 typedef u_int SOCKET;
 #endif
 
@@ -48,29 +48,27 @@ enum TCPREQUESTTYPE
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CTCPRequestPacket
 {
 public:
-
     CTCPRequestPacket(SOCKET* socket);
     ~CTCPRequestPacket();
 
     uint8* GetData();
-    int32 GetSize();
-    uint8 GetPacketType();
+    int32  GetSize() const;
+    uint8  GetPacketType();
 
     int32 ReceiveFromSocket();
     int32 SendToSocket(uint8* data, uint32 length);
     int32 SendRawToSocket(uint8* data, uint32 length);
 
 private:
-
-    uint8*   m_data;
+    uint8*  m_data;
     int32   m_size;
     SOCKET* m_socket;
 

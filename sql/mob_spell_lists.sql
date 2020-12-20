@@ -2522,6 +2522,8 @@ INSERT INTO `mob_spell_lists` VALUES ('Ghul-I-Beaban_BLM',305,179,1,255); -- bli
 INSERT INTO `mob_spell_lists` VALUES ('Saa_Doyi_the_Fervid',306,320,1,255); -- katon_ichi
 INSERT INTO `mob_spell_lists` VALUES ('Frost_Flambeau',307,180,1,255); -- blizzaga_ii
 
+-- Trusts
+
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto',308,144,13,255);       -- Fire
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto',308,145,38,255);       -- Fire II
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Shantotto',308,146,62,255);       -- Fire III
@@ -2561,6 +2563,13 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,3,21,255);            -
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,4,41,255);            -- Cure IV
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,5,61,255);            -- Cure V
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,6,80,255);            -- Cure VI
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,14,6,255);            -- Poisona
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,15,9,255);            -- Paralyna
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,16,14,255);           -- Blindna
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,17,19,255);           -- Silena
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,18,39,255);           -- Stona
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,19,34,255);           -- Viruna
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,20,29,255);           -- Cursna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,56,13,255);           -- Slow
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,58,6,255);            -- Paralyze
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kupipi',310,112,45,255);          -- Flash

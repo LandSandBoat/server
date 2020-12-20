@@ -15,9 +15,9 @@ function onMobFight(mob, target)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
     if target:isPet() then
-        mob:setMod(dsp.mod.FASTCAST, 100)
+        mob:setMod(tpz.mod.FASTCAST, 100)
         mob:castSpell(367, target) -- Insta-death any pet with most enmity.
-        mob:setMod(dsp.mod.FASTCAST, 10)
+        mob:setMod(tpz.mod.FASTCAST, 10)
     end
 end
 

@@ -25,19 +25,18 @@
 
 #include "entity_visual.h"
 
-
-CEntityVisualPacket::CEntityVisualPacket(CBaseEntity * PEntity, const char type[4])
+CEntityVisualPacket::CEntityVisualPacket(CBaseEntity* PEntity, const char type[4])
 {
-	this->type = 0x39;
-	this->size = 0x0A;
+    this->type = 0x39;
+    this->size = 0x0A;
 
-	if (PEntity)
-	{
-		ref<uint32>(0x04) = PEntity->id;
-		ref<uint32>(0x08) = PEntity->id;
+    if (PEntity)
+    {
+        ref<uint32>(0x04) = PEntity->id;
+        ref<uint32>(0x08) = PEntity->id;
 
-		ref<uint16>(0x10) = PEntity->targid;
-		ref<uint16>(0x12) = PEntity->targid;
-	}
-	memcpy(data + ((0x0C) ), type, 4);
+        ref<uint16>(0x10) = PEntity->targid;
+        ref<uint16>(0x12) = PEntity->targid;
+    }
+    memcpy(data + ((0x0C)), type, 4);
 }

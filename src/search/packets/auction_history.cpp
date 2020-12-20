@@ -18,7 +18,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include <string.h>
+#include <cstring>
 
 #include "../../common/showmsg.h"
 #include "../../common/socket.h"
@@ -27,7 +27,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "auction_history.h"
 
-
 CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
 {
     m_count = 0;
@@ -35,8 +34,8 @@ CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
     memset(m_PData, 0, sizeof(m_PData));
 
     ref<uint8>(m_PData, (0x0A)) = 0x80;
-    ref<uint8>(m_PData, (0x0B)) = 0x85;                       // packet type
-    ref<uint16>(m_PData, 0x10) = ItemID;
+    ref<uint8>(m_PData, (0x0B)) = 0x85; // packet type
+    ref<uint16>(m_PData, 0x10)  = ItemID;
 }
 
 void CAHHistoryPacket::AddItem(ahHistory* item)
@@ -55,10 +54,10 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
 }
 
 /************************************************************************
-*                                                                       *
-*  Returns the packet's data.                                           *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Returns the packet's data.                                           *
+ *                                                                       *
+ ************************************************************************/
 
 uint8* CAHHistoryPacket::GetData()
 {
@@ -66,12 +65,12 @@ uint8* CAHHistoryPacket::GetData()
 }
 
 /************************************************************************
-*                                                                       *
-*  Returns the size of the packet.                                      *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Returns the size of the packet.                                      *
+ *                                                                       *
+ ************************************************************************/
 
-uint16 CAHHistoryPacket::GetSize()
+uint16 CAHHistoryPacket::GetSize() const
 {
     return 0x20 + 40 * m_count + 28;
 }

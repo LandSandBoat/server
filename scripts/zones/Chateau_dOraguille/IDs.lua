@@ -19,6 +19,7 @@ zones[tpz.zone.CHATEAU_DORAGUILLE] =
         CARRIED_OVER_POINTS     = 6635, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 6636, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 6637, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        YOU_LEARNED_TRUST       = 6659, -- You learned Trust: <name>!
         HALVER_OFFSET           = 6793, -- The princess is always speaking of your deeds for the Kingdom. Everyone here is counting on you, <name>.
         LIGHTBRINGER_EXTRA      = 6836, -- Lightbringer has been found! This is the happiest day in my tenure as monarlais!
         CONQUEST_BASE           = 6879, -- Tallying conquest results...

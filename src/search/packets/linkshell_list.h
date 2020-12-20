@@ -28,19 +28,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CLinkshellListPacket
 {
 public:
-
     CLinkshellListPacket(uint32 linkshellid, uint32 Total);
-    ~CLinkshellListPacket();
+    ~CLinkshellListPacket() = default;
 
     void AddPlayer(SearchEntity* PPlayer);
 
     uint8* GetData();
-    uint16 GetSize();
+    uint16 GetSize() const;
 
 private:
     uint32 m_linkshellid;
     uint32 m_offset;
-    uint8 m_data[1024];
+    uint8  m_data[1024];
 };
 
 #endif

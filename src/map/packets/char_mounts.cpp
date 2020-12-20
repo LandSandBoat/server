@@ -21,17 +21,16 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "char_mounts.h"
 
 #include "../entities/charentity.h"
-
 
 CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar)
 {
     this->type = 0xAE;
     this->size = 0x06;
 
-    memcpy(data+(0x04), &(PChar->keys.tables[6].keyList), 0x0C);
+    memcpy(data + (0x04), &(PChar->keys.tables[6].keyList), 0x0C);
 }

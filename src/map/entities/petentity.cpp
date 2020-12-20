@@ -19,76 +19,73 @@
 ===========================================================================
 */
 
-#include <string.h>
+#include <cstring>
 
-#include "petentity.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
+#include "../../common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/helpers/pathfind.h"
 #include "../ai/helpers/targetfind.h"
 #include "../ai/states/ability_state.h"
-#include "../utils/battleutils.h"
-#include "../utils/petutils.h"
-#include "../utils/mobutils.h"
-#include "../../common/utils.h"
 #include "../mob_modifier.h"
+#include "../mob_spell_container.h"
+#include "../mob_spell_list.h"
+#include "../packets/entity_update.h"
+#include "../packets/pet_sync.h"
+#include "../utils/battleutils.h"
+#include "../utils/mobutils.h"
+#include "../utils/petutils.h"
+#include "petentity.h"
 
-CPetEntity::CPetEntity(PETTYPE petType)
+CPetEntity::CPetEntity(PET_TYPE petType)
 {
-	objtype = TYPE_PET;
-	m_PetType = petType;
-	m_EcoSystem = SYSTEM_UNCLASSIFIED;
-	allegiance = ALLEGIANCE_PLAYER;
-    m_MobSkillList = 0;
+    objtype          = TYPE_PET;
+    m_PetType        = petType;
+    m_EcoSystem      = ECOSYSTEM::UNCLASSIFIED;
+    allegiance       = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList   = 0;
     m_HasSpellScript = 0;
-    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this),
-        std::make_unique<CTargetFind>(this));
+    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
-CPetEntity::~CPetEntity()
-{
-}
+CPetEntity::~CPetEntity() = default;
 
-PETTYPE CPetEntity::getPetType()
+PET_TYPE CPetEntity::getPetType()
 {
     return m_PetType;
 }
 
 bool CPetEntity::isBstPet()
 {
-  return getPetType() == PETTYPE_JUG_PET || objtype == TYPE_MOB;
+    return getPetType() == PET_TYPE::JUG_PET || objtype == TYPE_MOB;
 }
 
 std::string CPetEntity::GetScriptName()
 {
     switch (getPetType())
     {
-        case PETTYPE_AVATAR:
+        case PET_TYPE::AVATAR:
             return "avatar";
             break;
-        case PETTYPE_WYVERN:
+        case PET_TYPE::WYVERN:
             return "wyvern";
             break;
-        case PETTYPE_JUG_PET:
+        case PET_TYPE::JUG_PET:
             return "jug";
             break;
-        case PETTYPE_CHARMED_MOB:
+        case PET_TYPE::CHARMED_MOB:
             return "charmed";
             break;
-        case PETTYPE_AUTOMATON:
+        case PET_TYPE::AUTOMATON:
             return "automaton";
             break;
-        case PETTYPE_ADVENTURING_FELLOW:
+        case PET_TYPE::ADVENTURING_FELLOW:
             return "fellow";
             break;
-        case PETTYPE_CHOCOBO:
+        case PET_TYPE::CHOCOBO:
             return "chocobo";
             break;
-        case PETTYPE_LUOPAN:
+        case PET_TYPE::LUOPAN:
             return "luopan";
             break;
         default:
@@ -97,44 +94,44 @@ std::string CPetEntity::GetScriptName()
     }
 }
 
-WYVERNTYPE CPetEntity::getWyvernType()
+WYVERN_TYPE CPetEntity::getWyvernType()
 {
-  TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
+    TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
 
-  switch(PMaster->GetSJob())
-  {
-    case JOB_BLM:
-    case JOB_BLU:
-    case JOB_SMN:
-    case JOB_WHM:
-    case JOB_RDM:
-    case JOB_SCH:
-    case JOB_GEO:
-      return WYVERNTYPE_DEFENSIVE;
-    case JOB_DRK:
-    case JOB_PLD:
-    case JOB_NIN:
-    case JOB_BRD:
-    case JOB_RUN:
-      return WYVERNTYPE_MULTIPURPOSE;
-    case JOB_WAR:
-    case JOB_SAM:
-    case JOB_THF:
-    case JOB_BST:
-    case JOB_RNG:
-    case JOB_COR:
-    case JOB_DNC:
-      return WYVERNTYPE_OFFENSIVE;
+    switch (PMaster->GetSJob())
+    {
+        case JOB_BLM:
+        case JOB_BLU:
+        case JOB_SMN:
+        case JOB_WHM:
+        case JOB_RDM:
+        case JOB_SCH:
+        case JOB_GEO:
+            return WYVERN_TYPE::DEFENSIVE;
+        case JOB_DRK:
+        case JOB_PLD:
+        case JOB_NIN:
+        case JOB_BRD:
+        case JOB_RUN:
+            return WYVERN_TYPE::MULTIPURPOSE;
+        case JOB_WAR:
+        case JOB_SAM:
+        case JOB_THF:
+        case JOB_BST:
+        case JOB_RNG:
+        case JOB_COR:
+        case JOB_DNC:
+            return WYVERN_TYPE::OFFENSIVE;
 
-    default:
-      return WYVERNTYPE_OFFENSIVE;
-  };
+        default:
+            return WYVERN_TYPE::OFFENSIVE;
+    };
 }
 
 void CPetEntity::PostTick()
 {
-    CBattleEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUS_DISAPPEAR)
+    CMobEntity::PostTick();
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
 
@@ -158,7 +155,7 @@ void CPetEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     luautils::OnMobDeath(this, nullptr);
-    CBattleEntity::Die();
+    CMobEntity::Die();
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
     {
         petutils::DetachPet(PMaster);
@@ -167,23 +164,23 @@ void CPetEntity::Die()
 
 void CPetEntity::Spawn()
 {
-    //we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
+    // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
 
-    if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == SYSTEM_ELEMENTAL)
+    if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == ECOSYSTEM::ELEMENTAL)
     {
         this->defaultMobMod(MOBMOD_MAGIC_DELAY, 12);
         this->defaultMobMod(MOBMOD_MAGIC_COOL, 48);
         mobutils::GetAvailableSpells(this);
     }
 
-    CBattleEntity::Spawn();
+    CMobEntity::Spawn();
     luautils::OnMobSpawn(this);
 }
 
 void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
 {
-    auto PAbility = state.GetAbility();
-    auto PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PAbility = state.GetAbility();
+    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -192,33 +189,40 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         {
             return;
         }
-        if (battleutils::IsParalyzed(this)) {
+        if (battleutils::IsParalyzed(this))
+        {
             // display paralyzed
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
             return;
         }
 
-        action.id = this->id;
-        action.actiontype = PAbility->getActionType();
-        action.actionid = PAbility->getID();
-        actionList_t& actionList = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        action.id                    = this->id;
+        action.actiontype            = PAbility->getActionType();
+        action.actionid              = PAbility->getID();
+        actionList_t& actionList     = action.getNewActionList();
+        actionList.ActionTargetID    = PTarget->id;
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.reaction = REACTION_NONE;
-        actionTarget.speceffect = SPECEFFECT_RECOIL;
-        actionTarget.animation = PAbility->getAnimationID();
-        actionTarget.param = 0;
-        auto prevMsg = actionTarget.messageID;
+        actionTarget.reaction        = REACTION::NONE;
+        actionTarget.speceffect      = SPECEFFECT::RECOIL;
+        actionTarget.animation       = PAbility->getAnimationID();
+        actionTarget.param           = 0;
+        auto prevMsg                 = actionTarget.messageID;
 
         int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
-        if (prevMsg == actionTarget.messageID) actionTarget.messageID = PAbility->getMessage();
-        if (actionTarget.messageID == 0) actionTarget.messageID = MSGBASIC_USES_JA;
+        if (prevMsg == actionTarget.messageID)
+        {
+            actionTarget.messageID = PAbility->getMessage();
+        }
+        if (actionTarget.messageID == 0)
+        {
+            actionTarget.messageID = MSGBASIC_USES_JA;
+        }
         actionTarget.param = value;
 
         if (value < 0)
         {
             actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
-            actionTarget.param = -value;
+            actionTarget.param     = -value;
         }
     }
 }

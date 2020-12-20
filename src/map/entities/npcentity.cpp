@@ -21,33 +21,30 @@
 
 #include "../../common/taskmgr.h"
 
-#include "npcentity.h"
 #include "../ai/ai_container.h"
 #include "../utils/zoneutils.h"
+#include "npcentity.h"
 
 #include "../packets/entity_update.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 CNpcEntity::CNpcEntity()
 {
-    objtype = TYPE_NPC;
-    look.face = 0x32;
-        widescan = 1;
-    allegiance = ALLEGIANCE_MOB;
-    PAI = std::make_unique<CAIContainer>(this);
+    objtype    = TYPE_NPC;
+    look.face  = 0x32;
+    widescan   = 1;
+    allegiance = ALLEGIANCE_TYPE::MOB;
+    PAI        = std::make_unique<CAIContainer>(this);
 }
 
-CNpcEntity::~CNpcEntity()
-{
+CNpcEntity::~CNpcEntity() = default;
 
-}
-
-uint32 CNpcEntity::getEntityFlags()
+uint32 CNpcEntity::getEntityFlags() const
 {
     return m_flags;
 }
@@ -69,7 +66,7 @@ void CNpcEntity::HideHP(bool hide)
     }
 }
 
-bool CNpcEntity::IsHPHidden()
+bool CNpcEntity::IsHPHidden() const
 {
     return (m_flags & 0x800) == 0x800;
 }
@@ -86,14 +83,14 @@ void CNpcEntity::Untargetable(bool untargetable)
     }
 }
 
-bool CNpcEntity::IsUntargetable()
+bool CNpcEntity::IsUntargetable() const
 {
     return (m_flags & 0x800) == 0x800;
 }
 
 bool CNpcEntity::isWideScannable()
 {
-    return widescan == 1 && status == STATUS_NORMAL && CBaseEntity::isWideScannable();
+    return widescan == 1 && status == STATUS_TYPE::NORMAL && CBaseEntity::isWideScannable();
 }
 
 void CNpcEntity::PostTick()

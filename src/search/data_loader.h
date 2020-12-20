@@ -25,9 +25,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/cbasetypes.h"
 
 #include <list>
-#include <vector>
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 struct Sql_t;
 struct search_req;
@@ -71,19 +71,18 @@ struct SearchEntity
 };
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CDataLoader
 {
 public:
-
     CDataLoader();
     ~CDataLoader();
 
-    uint32 GetPlayersCount(search_req sr);
+    uint32 GetPlayersCount(const search_req& sr);
 
     std::vector<ahHistory*>  GetAHItemHystory(uint16 ItemID, bool stack);
     std::list<SearchEntity*> GetPartyList(uint16 PartyID, uint16 AllianceID);
@@ -93,7 +92,6 @@ public:
     void                     ExpireAHItems();
 
 private:
-
     Sql_t* SqlHandle;
 };
 

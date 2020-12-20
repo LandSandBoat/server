@@ -30,10 +30,10 @@
 
 enum KEYS_TABLE
 {
-	KEYS_TABLE_0,
-	KEYS_TABLE_1,
-	KEYS_TABLE_2,
-	KEYS_TABLE_3,
+    KEYS_TABLE_0,
+    KEYS_TABLE_1,
+    KEYS_TABLE_2,
+    KEYS_TABLE_3,
     KEYS_TABLE_4,
     KEYS_TABLE_5,
     KEYS_TABLE_6
@@ -42,18 +42,17 @@ enum KEYS_TABLE
 #define MAX_KEYS_TABLE 7
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CKeyItemsPacket : public CBasicPacket
 {
 public:
-
-	CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable);
+    CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable);
 };
 
 #endif

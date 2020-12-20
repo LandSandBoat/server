@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*                                                                       *
-*  Отправляем LinkshellID, по которому осуществляется поиск             *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Отправляем LinkshellID, по которому осуществляется поиск             *
+ *                                                                       *
+ ************************************************************************/
 
 class CCharEntity;
 
 class CLinkshellEquipPacket : public CBasicPacket
 {
 public:
-
-	CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
+    CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
 };
 
 #endif

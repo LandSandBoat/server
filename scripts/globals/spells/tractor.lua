@@ -15,10 +15,10 @@ function onMagicCastingCheck(caster, target, spell)
 end
 
 function onSpellCast(caster, target, spell)
-    -- printf("Caster Zone: %u", caster:getZoneID())
-    target:sendTractor(caster:getXPos(), caster:getYPos(), caster:getZPos(), target:getRotPos())
-
-    spell:setMsg(tpz.msg.basic.MAGIC_CASTS_ON)
-
-    return 1
+    if target:getObjType() == tpz.objType.PC then
+        target:sendTractor(caster:getXPos(), caster:getYPos(), caster:getZPos(), target:getRotPos())
+        spell:setMsg(tpz.msg.basic.MAGIC_CASTS_ON)
+        return 1
+    end
+    return 0
 end

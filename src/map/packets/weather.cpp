@@ -28,5 +28,5 @@ CWeatherPacket::CWeatherPacket(uint32 ChangeTime, WEATHER WeatherEffect, uint8 T
 
     ref<uint32>(0x04) = ChangeTime;
     ref<uint16>(0x08) = WeatherEffect;
-    ref<uint8>(0x0A) = TransitionTime;
+    ref<uint8>(0x0A)  = TransitionTime;
 }

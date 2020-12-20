@@ -28,25 +28,25 @@
 
 enum ITEMLOTTYPE
 {
-	ITEMLOT_WIN			= 0x01,
-	ITEMLOT_WINERROR	= 0x02,
-	ITEMLOT_LOST		= 0x03,
+    ITEMLOT_WIN      = 0x01,
+    ITEMLOT_WINERROR = 0x02,
+    ITEMLOT_LOST     = 0x03,
 };
 
 class CBaseEntity;
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CTreasureLotItemPacket : public CBasicPacket
 {
 public:
-	CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint16 HighestLot, CBaseEntity* PLotter, uint8 SlotID, uint16 Lot);
-	CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE MessageType);
-	CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 SlotID, uint16 Lot, ITEMLOTTYPE MessageType);
+    CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint16 HighestLot, CBaseEntity* PLotter, uint8 SlotID, uint16 Lot);
+    CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE MessageType);
+    CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 SlotID, uint16 Lot, ITEMLOTTYPE MessageType);
 };
 
 #endif

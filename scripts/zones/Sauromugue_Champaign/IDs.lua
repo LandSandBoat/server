@@ -29,13 +29,13 @@ zones[tpz.zone.SAUROMUGUE_CHAMPAIGN] =
         FIND_NOTHING             = 7253,  -- You dig and you dig, but find nothing.
         THF_AF_MOB               = 7415,  -- Something has come down from the tower!
         THF_AF_WALL_OFFSET       = 7434,  -- It is impossible to climb this wall with your bare hands.
-        PLAYER_OBTAINS_ITEM      = 7497,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7498,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7499,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7500,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7505,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9806,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12494, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 7515,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7516,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7517,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7518,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7523,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9824,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 12512, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -59,8 +59,8 @@ zones[tpz.zone.SAUROMUGUE_CHAMPAIGN] =
     },
     npc =
     {
-        CASKET_BASE = 17269190,
-        QM2         = 17269228,
+        CASKET_BASE = 17269189,
+        QM2         = 17269227,
     },
 }
 

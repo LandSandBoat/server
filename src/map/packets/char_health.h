@@ -27,10 +27,10 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 class CTrustEntity;
@@ -38,8 +38,7 @@ class CTrustEntity;
 class CCharHealthPacket : public CBasicPacket
 {
 public:
-
-	CCharHealthPacket(CCharEntity* PChar);
+    CCharHealthPacket(CCharEntity* PChar);
     CCharHealthPacket(CTrustEntity* PTrust);
 };
 

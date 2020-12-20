@@ -21,16 +21,15 @@
 
 #include "item_puppet.h"
 
-CItemPuppet::CItemPuppet(uint16 id) : CItem(id)
+CItemPuppet::CItemPuppet(uint16 id)
+: CItem(id)
 {
-	setType(ITEM_PUPPET);
+    setType(ITEM_PUPPET);
 }
 
-CItemPuppet::~CItemPuppet()
-{
-}
+CItemPuppet::~CItemPuppet() = default;
 
-uint8 CItemPuppet::getEquipSlot()
+uint8 CItemPuppet::getEquipSlot() const
 {
     return m_equipSlot;
 }
@@ -38,7 +37,7 @@ void CItemPuppet::setEquipSlot(uint32 slot)
 {
     m_equipSlot = slot;
 }
-uint32 CItemPuppet::getElementSlots()
+uint32 CItemPuppet::getElementSlots() const
 {
     return m_elementSlots;
 }

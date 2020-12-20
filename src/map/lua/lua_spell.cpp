@@ -21,18 +21,17 @@
 
 #include "../../common/showmsg.h"
 
-#include "lua_spell.h"
 #include "../spell.h"
 #include "../utils/battleutils.h"
-
+#include "lua_spell.h"
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
-CLuaSpell::CLuaSpell(lua_State *L)
+CLuaSpell::CLuaSpell(lua_State* L)
 {
     if (!lua_isnil(L, -1))
     {
@@ -46,10 +45,10 @@ CLuaSpell::CLuaSpell(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Конструктор															*
-*																		*
-************************************************************************/
+ *																		*
+ *  Конструктор															*
+ *																		*
+ ************************************************************************/
 
 CLuaSpell::CLuaSpell(CSpell* PSpell)
 {
@@ -57,12 +56,12 @@ CLuaSpell::CLuaSpell(CSpell* PSpell)
 }
 
 /************************************************************************
-*                                                                       *
-*  Устанавливаем сообщение заклинания                                   *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Устанавливаем сообщение заклинания                                   *
+ *                                                                       *
+ ************************************************************************/
 
-inline int32 CLuaSpell::setMsg(lua_State *L)
+inline int32 CLuaSpell::setMsg(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -71,7 +70,7 @@ inline int32 CLuaSpell::setMsg(lua_State *L)
     return 0;
 }
 
-inline int32 CLuaSpell::setAoE(lua_State *L)
+inline int32 CLuaSpell::setAoE(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -80,7 +79,7 @@ inline int32 CLuaSpell::setAoE(lua_State *L)
     return 0;
 }
 
-inline int32 CLuaSpell::setFlag(lua_State *L)
+inline int32 CLuaSpell::setFlag(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
@@ -121,9 +120,13 @@ inline int32 CLuaSpell::castTime(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
 
     if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+    {
         m_PLuaSpell->setCastTime((uint32)lua_tointeger(L, 1));
+    }
     else
+    {
         lua_pushinteger(L, m_PLuaSpell->getCastTime());
+    }
 
     return 1;
 }
@@ -149,14 +152,14 @@ inline int32 CLuaSpell::getMagicBurstMessage(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaSpell::getElement(lua_State *L)
+inline int32 CLuaSpell::getElement(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, m_PLuaSpell->getElement());
     return 1;
 }
 
-inline int32 CLuaSpell::isAoE(lua_State *L)
+inline int32 CLuaSpell::isAoE(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, m_PLuaSpell->getAOE());
@@ -170,7 +173,7 @@ inline int32 CLuaSpell::tookEffect(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaSpell::getID(lua_State *L)
+inline int32 CLuaSpell::getID(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, static_cast<uint16>(m_PLuaSpell->getID()));
@@ -184,21 +187,21 @@ inline int32 CLuaSpell::getMPCost(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaSpell::getSkillType(lua_State *L)
+inline int32 CLuaSpell::getSkillType(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, m_PLuaSpell->getSkillType());
     return 1;
 }
 
-inline int32 CLuaSpell::getSpellGroup(lua_State *L)
+inline int32 CLuaSpell::getSpellGroup(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, m_PLuaSpell->getSpellGroup());
     return 1;
 }
 
-inline int32 CLuaSpell::getFlag(lua_State *L)
+inline int32 CLuaSpell::getFlag(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     lua_pushinteger(L, m_PLuaSpell->getFlag());
@@ -206,11 +209,11 @@ inline int32 CLuaSpell::getFlag(lua_State *L)
 }
 
 /************************************************************************
-*																		*
-*  Инициализация методов в lua											*
-*																		*
-************************************************************************/
-
+ *																		*
+ *  Инициализация методов в lua											*
+ *																		*
+ ************************************************************************/
+// clang-format off
 const char CLuaSpell::className[] = "CSpell";
 Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
 {
@@ -233,3 +236,4 @@ Lunar<CLuaSpell>::Register_t CLuaSpell::methods[] =
     LUNAR_DECLARE_METHOD(CLuaSpell,castTime),
     {nullptr,nullptr}
 };
+// clang-format on

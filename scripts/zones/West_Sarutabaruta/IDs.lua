@@ -42,15 +42,15 @@ zones[tpz.zone.WEST_SARUTABARUTA] =
         MELT_BARE_HANDS             = 7402,  -- It looks like it would melt if you touched it with your bare hands...
         HARVESTING_IS_POSSIBLE_HERE = 7438,  -- Harvesting is possible here if you have <item>.
         CONQUEST                    = 7454,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM         = 7855,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM       = 7856,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM    = 7857,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP        = 7858,  -- You already possess that temporary item.
-        NO_COMBINATION              = 7863,  -- You were unable to enter a combination.
-        REGIME_REGISTERED           = 10183, -- New training regime registered!
-        DONT_SWAP_JOBS              = 10184, -- hanging your job will result in the cancellation of your current training regime.
-        REGIME_CANCELED             = 10185, -- Training regime canceled.
-        COMMON_SENSE_SURVIVAL       = 12334, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM         = 7873,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM       = 7874,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM    = 7875,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP        = 7876,  -- You already possess that temporary item.
+        NO_COMBINATION              = 7881,  -- You were unable to enter a combination.
+        REGIME_REGISTERED           = 10201, -- New training regime registered!
+        DONT_SWAP_JOBS              = 10202, -- hanging your job will result in the cancellation of your current training regime.
+        REGIME_CANCELED             = 10203, -- Training regime canceled.
+        COMMON_SENSE_SURVIVAL       = 12352, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -75,17 +75,17 @@ zones[tpz.zone.WEST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE     = 17248766,
-        SIGNPOST_OFFSET = 17248793,
-        OVERSEER_BASE   = 17248826, -- Naguipeillont_RK in npc_list
+        CASKET_BASE     = 17248769,
+        SIGNPOST_OFFSET = 17248796,
+        OVERSEER_BASE   = 17248829, -- Naguipeillont_RK in npc_list
         HARVESTING =
         {
-            17248842,
-            17248843,
-            17248844,
             17248845,
             17248846,
             17248847,
+            17248848,
+            17248849,
+            17248850,
         },
     },
 }

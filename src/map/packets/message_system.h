@@ -27,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CMessageSystemPacket : public CBasicPacket
 {
 public:
-
-	CMessageSystemPacket(uint32 param0, uint32 param1, uint16 messageID);
+    CMessageSystemPacket(uint32 param0, uint32 param1, uint16 messageID);
 };
 
 #endif

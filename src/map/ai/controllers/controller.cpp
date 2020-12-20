@@ -21,13 +21,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "controller.h"
 
-#include "../ai_container.h"
 #include "../../entities/battleentity.h"
+#include "../ai_container.h"
 
-CController::CController(CBattleEntity* _POwner) :
-    m_Tick(server_clock::now()),
-    POwner(_POwner)
-{}
+CController::CController(CBattleEntity* _POwner)
+: m_Tick(server_clock::now())
+, POwner(_POwner)
+{
+}
 
 void CController::Despawn()
 {
@@ -86,7 +87,7 @@ bool CController::WeaponSkill(uint16 targid, uint16 wsid)
     return false;
 }
 
-bool CController::IsAutoAttackEnabled()
+bool CController::IsAutoAttackEnabled() const
 {
     return m_AutoAttackEnabled;
 }
@@ -96,7 +97,7 @@ void CController::SetAutoAttackEnabled(bool enabled)
     m_AutoAttackEnabled = enabled;
 }
 
-bool CController::IsWeaponSkillEnabled()
+bool CController::IsWeaponSkillEnabled() const
 {
     return m_WeaponSkillEnabled;
 }
@@ -106,7 +107,7 @@ void CController::SetWeaponSkillEnabled(bool enabled)
     m_WeaponSkillEnabled = enabled;
 }
 
-bool CController::IsMagicCastingEnabled()
+bool CController::IsMagicCastingEnabled() const
 {
     return m_MagicCastingEnabled;
 }

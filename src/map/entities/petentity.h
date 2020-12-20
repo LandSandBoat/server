@@ -24,38 +24,38 @@
 
 #include "mobentity.h"
 
-enum PETTYPE
+enum class PET_TYPE : uint8
 {
-    PETTYPE_AVATAR             = 0,
-    PETTYPE_WYVERN             = 1,
-    PETTYPE_JUG_PET            = 2,
-    PETTYPE_CHARMED_MOB        = 3,
-    PETTYPE_AUTOMATON          = 4,
-    PETTYPE_ADVENTURING_FELLOW = 5,
-    PETTYPE_CHOCOBO            = 6,
-    PETTYPE_LUOPAN             = 7,
+    AVATAR             = 0,
+    WYVERN             = 1,
+    JUG_PET            = 2,
+    CHARMED_MOB        = 3,
+    AUTOMATON          = 4,
+    ADVENTURING_FELLOW = 5,
+    CHOCOBO            = 6,
+    LUOPAN             = 7,
 };
 
-enum WYVERNTYPE
+enum class WYVERN_TYPE : uint8
 {
-    WYVERNTYPE_NONE = 0,
-    WYVERNTYPE_DEFENSIVE = 1,
-    WYVERNTYPE_MULTIPURPOSE = 2,
-    WYVERNTYPE_OFFENSIVE = 3
+    NONE         = 0,
+    DEFENSIVE    = 1,
+    MULTIPURPOSE = 2,
+    OFFENSIVE    = 3
 };
 
 class CPetEntity : public CMobEntity
 {
 public:
-	 CPetEntity(PETTYPE petType);						// конструктор
-	~CPetEntity();						// деструктор
-	PETTYPE getPetType();
-    bool isBstPet();
-	uint8 m_Element;
-	uint32 m_PetID;
+    CPetEntity(PET_TYPE petType); // конструктор
+    ~CPetEntity();               // деструктор
+    PET_TYPE    getPetType();
+    bool        isBstPet();
+    uint8       m_Element;
+    uint32      m_PetID;
     std::string GetScriptName();
 
-    WYVERNTYPE getWyvernType();
+    WYVERN_TYPE  getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;
     virtual void Die() override;
@@ -64,7 +64,7 @@ public:
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
 
 private:
-	PETTYPE m_PetType;					//the type of pet e.g. avatar/wyvern/jugpet etc
+    PET_TYPE m_PetType; // the type of pet e.g. avatar/wyvern/jugpet etc
 };
 
 #endif

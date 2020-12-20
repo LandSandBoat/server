@@ -22,7 +22,7 @@
 #include "lua_action.h"
 #include "../packets/action.h"
 
-CLuaAction::CLuaAction(lua_State *L)
+CLuaAction::CLuaAction(lua_State* L)
 {
     if (!lua_isnil(L, -1) && !lua_isnil(L, -2))
     {
@@ -39,7 +39,6 @@ CLuaAction::CLuaAction(action_t* Action)
 {
     m_PLuaAction = Action;
 }
-
 
 int32 CLuaAction::ID(lua_State* L)
 {
@@ -166,7 +165,7 @@ int32 CLuaAction::speceffect(lua_State* L)
             }
             else
             {
-                lua_pushinteger(L, actionList.actionTargets[0].speceffect);
+                lua_pushinteger(L, static_cast<uint16>(actionList.actionTargets[0].speceffect));
                 return 1;
             }
         }
@@ -188,7 +187,7 @@ int32 CLuaAction::reaction(lua_State* L)
             }
             else
             {
-                lua_pushinteger(L, actionList.actionTargets[0].reaction);
+                lua_pushinteger(L, static_cast<uint16>(actionList.actionTargets[0].reaction));
                 return 1;
             }
         }
@@ -240,7 +239,6 @@ inline int32 CLuaAction::addEffectParam(lua_State* L)
     return 0;
 }
 
-
 int32 CLuaAction::addEffectMessage(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
@@ -263,7 +261,7 @@ int32 CLuaAction::addEffectMessage(lua_State* L)
     return 0;
 }
 
-// Initialize Lua Methods
+// clang-format off
 const char CLuaAction::className[] = "CAction";
 
 Lunar<CLuaAction>::Register_t CLuaAction::methods[] =
@@ -281,3 +279,4 @@ Lunar<CLuaAction>::Register_t CLuaAction::methods[] =
     LUNAR_DECLARE_METHOD(CLuaAction, addEffectMessage),
     {nullptr,nullptr}
 };
+// clang-format on

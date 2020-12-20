@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CCampaignPacket : public CBasicPacket
 {
 public:
-
-	CCampaignPacket(CCharEntity* PChar, uint8 number);
+    CCampaignPacket(CCharEntity* PChar, uint8 number);
 };
 
 #endif

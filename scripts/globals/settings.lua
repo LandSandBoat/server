@@ -82,6 +82,10 @@ WEAPON_SKILL_POWER  = 1.000 -- Multiplies damage dealt by Weapon Skills.
 WEAPON_SKILL_POINTS = 1.000 -- Multiplies points earned during weapon unlocking.
 USE_ADOULIN_WEAPON_SKILL_CHANGES = true -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
+-- TRUSTS
+ENABLE_TRUST_CASTING = 0
+ENABLE_TRUST_QUESTS  = 0
+
 HARVESTING_BREAK_CHANCE = 33 -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
 EXCAVATION_BREAK_CHANCE = 33 -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
 LOGGING_BREAK_CHANCE    = 33 -- % chance for the hatchet to break during logging.  Set between 0 and 100.
@@ -164,3 +168,4 @@ DIG_GRANT_BURROW = 0 -- Set to 1 to grant burrow ability
 DIG_GRANT_BORE = 0 -- Set to 1 to grant bore ability
 ENM_COOLDOWN = 120  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
 FORCE_SPAWN_QM_RESET_TIME = 300 -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
+GOBBIE_BOX_MIN_AGE  = 45 -- Minimum character age in days before a character can sign up for Gobbie Mystery Box

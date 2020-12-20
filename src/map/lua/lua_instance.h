@@ -23,15 +23,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _LUAINSTANCE_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CInstance;
 class CLuaInstance
 {
     CInstance* m_PLuaInstance;
-public:
 
-    static const char className[];
+public:
+    static const char                      className[];
     static Lunar<CLuaInstance>::Register_t methods[];
 
     CLuaInstance(lua_State*);

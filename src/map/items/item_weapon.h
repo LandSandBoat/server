@@ -23,72 +23,70 @@
 #define _CITEMWEAPON_H
 
 #include "../../common/cbasetypes.h"
+#include "../entities/battleentity.h"
 
 #include "item_equipment.h"
-
 
 class CItemWeapon : public CItemEquipment
 {
 public:
+    CItemWeapon(uint16);
+    virtual ~CItemWeapon();
 
-	CItemWeapon(uint16);
-	virtual ~CItemWeapon();
+    uint8       getSkillType() const;
+    uint8       getSubSkillType() const;
+    uint16      getILvlSkill() const;
+    uint16      getILvlParry() const;
+    uint16      getILvlMacc() const;
+    int16       getDelay() const;
+    int16       getBaseDelay() const;
+    uint16      getDamage() const;
+    DAMAGE_TYPE getDmgType();
+    uint8       getAdditionalEffect() const;
+    uint8       getHitCount() const;
+    uint16      getUnlockPoints() const;
+    uint16      getCurrentUnlockPoints();
+    void        resetDelay();
+    bool        addWsPoints(uint16 points);
 
-	uint8	getSkillType();
-	uint8	getSubSkillType();
-    uint16  getILvlSkill();
-    uint16  getILvlParry();
-    uint16  getILvlMacc();
-	int16	getDelay();
-	int16	getBaseDelay();
-	uint16	getDamage();
-	uint16	getDmgType();
-    uint8   getAdditionalEffect();
-    uint8   getHitCount();
-	uint16  getUnlockPoints();
-    uint16  getCurrentUnlockPoints();
-    void    resetDelay();
-    bool    addWsPoints(uint16 points);
+    bool isRanged() const;
+    bool isThrowing() const;
+    bool isShuriken() const;
+    bool isTwoHanded() const;
+    bool isHandToHand() const;
+    bool isUnlockable() const;
+    bool isUnlocked();
 
-    bool    isRanged();
-    bool    isThrowing();
-    bool    isShuriken();
-    bool    isTwoHanded();
-    bool    isHandToHand();
-	bool    isUnlockable();
-    bool    isUnlocked();
-
-	void	setSkillType(uint8 skillType);
-	void	setSubSkillType(uint8 subSkillType);
-    void    setILvlSkill(uint16 skill);
-    void    setILvlParry(uint16 parry);
-    void    setILvlMacc(uint16 macc);
-	void	setDelay(uint16 delay);
-	void	setBaseDelay(uint16 delay); //should ONLY be set by zoneutils!
-	void	setDamage(uint16 damage);
-	void	setDmgType(uint16 dmgType);
-    void    setAdditionalEffect(uint8 effect);
-    void    setMaxHit(uint8 hit);
-	void    setUnlockablePoints(uint16 points);
-    void    setCurrentUnlockPoints(uint16 points);
+    void setSkillType(uint8 skillType);
+    void setSubSkillType(uint8 subSkillType);
+    void setILvlSkill(uint16 skill);
+    void setILvlParry(uint16 parry);
+    void setILvlMacc(uint16 macc);
+    void setDelay(uint16 delay);
+    void setBaseDelay(uint16 delay); // should ONLY be set by zoneutils!
+    void setDamage(uint16 damage);
+    void setDmgType(DAMAGE_TYPE dmgType);
+    void setAdditionalEffect(uint8 effect);
+    void setMaxHit(uint8 hit);
+    void setUnlockablePoints(uint16 points);
+    void setCurrentUnlockPoints(uint16 points);
 
 private:
+    uint8       m_skillType;
+    uint8       m_subSkillType; // gun vs crossbow, any other exclusives
+    uint16      m_iLvlSkill;
+    uint16      m_iLvlParry;
+    uint16      m_iLvlMacc;
+    uint16      m_damage;
+    int16       m_delay; // can be -ve e.g. ammo/ranged weapons
+    int16       m_baseDelay;
+    DAMAGE_TYPE m_dmgType;
+    uint8       m_effect;
+    uint8       m_maxHit;
 
-	uint8	m_skillType;
-	uint8	m_subSkillType; //gun vs crossbow, any other exclusives
-    uint16  m_iLvlSkill;
-    uint16  m_iLvlParry;
-    uint16  m_iLvlMacc;
-	uint16	m_damage;
-	int16	m_delay;    //can be -ve e.g. ammo/ranged weapons
-	int16	m_baseDelay;
-	uint16	m_dmgType;
-    uint8   m_effect;
-    uint8   m_maxHit;
+    uint16 m_wsunlockpoints;
 
-    uint16  m_wsunlockpoints;
-
-    bool    m_ranged;
-    bool    m_twoHanded;
+    bool m_ranged;
+    bool m_twoHanded;
 };
 #endif

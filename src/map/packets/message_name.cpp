@@ -23,25 +23,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../entities/baseentity.h"
 
-CMessageNamePacket::CMessageNamePacket(
-    CBaseEntity* PActor,
-    uint16 messageID,
-    CBaseEntity* PNameActor/* = nullptr*/,
-    int32 param0/* = 0*/,
-    int32 param1/* = 0*/,
-    int32 param2/* = 0*/,
-    int32 param3/* = 0*/,
-    int32 chatType/* = 4*/,
-    bool showSender/* = false*/)
+CMessageNamePacket::CMessageNamePacket(CBaseEntity* PActor, uint16 messageID, CBaseEntity* PNameActor /* = nullptr*/, int32 param0 /* = 0*/,
+                                       int32 param1 /* = 0*/, int32 param2 /* = 0*/, int32 param3 /* = 0*/, int32 chatType /* = 4*/,
+                                       bool showSender /* = false*/)
 {
     this->id(0x27);
     this->length(0x70);
 
-    ref<int32>(0x04) = PActor->id;
+    ref<int32>(0x04)  = PActor->id;
     ref<uint16>(0x08) = PActor->targid;
 
     if (!showSender)
+    {
         messageID |= 0x8000;
+    }
 
     ref<uint16>(0x0A) = messageID;
 

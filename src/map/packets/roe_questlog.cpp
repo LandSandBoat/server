@@ -30,6 +30,6 @@ CRoeQuestLogPacket::CRoeQuestLogPacket(CCharEntity* PChar, uint8 order)
     this->id(0x112);
     this->length(0x88);
     ref<uint32>(0x84) = order;
-    
-    memcpy(data + 0x04, &(PChar->m_eminenceLog.complete[order*128]), 128);
+
+    memcpy(data + 0x04, &(PChar->m_eminenceLog.complete[order * 128]), 128);
 }

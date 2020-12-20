@@ -23,16 +23,16 @@
 #define _LUAMOBSKILL_H
 
 #include "../../common/cbasetypes.h"
-#include "../../common/lua/lunar.h"
+#include "luautils.h"
 
 class CMobSkill;
 
 class CLuaMobSkill
 {
-    CMobSkill *m_PLuaMobSkill;
-public:
+    CMobSkill* m_PLuaMobSkill;
 
-    static const char className[];
+public:
+    static const char                      className[];
     static Lunar<CLuaMobSkill>::Register_t methods[];
 
     CLuaMobSkill(lua_State*);

@@ -27,16 +27,15 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
-class CShopAppraisePacket: public CBasicPacket
+class CShopAppraisePacket : public CBasicPacket
 {
 public:
-
-	CShopAppraisePacket(uint8 slotID, uint32 sellPrice);
+    CShopAppraisePacket(uint8 slotID, uint32 sellPrice);
 };
 
 #endif

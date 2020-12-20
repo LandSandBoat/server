@@ -25,7 +25,6 @@
 
 #include "../entities/charentity.h"
 
-
 CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 {
     this->type = 0xB4;

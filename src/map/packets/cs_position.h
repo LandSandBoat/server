@@ -27,18 +27,17 @@
 #include "basic.h"
 
 /************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
 
 class CCharEntity;
 
 class CCSPositionPacket : public CBasicPacket
 {
 public:
-
-	CCSPositionPacket(CCharEntity* PChar);
+    CCSPositionPacket(CCharEntity* PChar);
 };
 
 #endif

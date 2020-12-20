@@ -33,19 +33,19 @@ zones[tpz.zone.TAHRONGI_CANYON] =
         POISONOUS_LOOKING_BUDS       = 7410,  -- The flowers have poisonous-looking buds.
         CANT_TAKE_ANY_MORE           = 7411,  -- You can't take any more.
         MINING_IS_POSSIBLE_HERE      = 7432,  -- Mining is possible here if you have <item>.
-        TELEPOINT_HAS_BEEN_SHATTERED = 7506,  -- The telepoint has been shattered into a thousand pieces...
-        SPROUT_LOOKS_WITHERED        = 7549,  -- There is something sprouting from the ground here. It looks a little withered.
-        REPULSIVE_CREATURE_EMERGES   = 7550,  -- A repulsive creature emerges from the ground!
-        SPROUT_DOES_NOT_NEED_WATER   = 7551,  -- The sprout does not need any more water now.
-        NOTHING_HAPPENS              = 7552,  -- Nothing happens.
-        SPROUT_LOOKING_BETTER        = 7553,  -- The sprout is looking better.
-        PLAYER_OBTAINS_ITEM          = 7558,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM        = 7559,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM     = 7560,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP         = 7561,  -- You already possess that temporary item.
-        NO_COMBINATION               = 7566,  -- You were unable to enter a combination.
-        REGIME_REGISTERED            = 9818,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL        = 11935, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TELEPOINT_HAS_BEEN_SHATTERED = 7524,  -- The telepoint has been shattered into a thousand pieces...
+        SPROUT_LOOKS_WITHERED        = 7567,  -- There is something sprouting from the ground here. It looks a little withered.
+        REPULSIVE_CREATURE_EMERGES   = 7568,  -- A repulsive creature emerges from the ground!
+        SPROUT_DOES_NOT_NEED_WATER   = 7569,  -- The sprout does not need any more water now.
+        NOTHING_HAPPENS              = 7570,  -- Nothing happens.
+        SPROUT_LOOKING_BETTER        = 7571,  -- The sprout is looking better.
+        PLAYER_OBTAINS_ITEM          = 7576,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM        = 7577,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM     = 7578,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP         = 7579,  -- You already possess that temporary item.
+        NO_COMBINATION               = 7584,  -- You were unable to enter a combination.
+        REGIME_REGISTERED            = 9836,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL        = 11953, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -63,16 +63,16 @@ zones[tpz.zone.TAHRONGI_CANYON] =
     },
     npc =
     {
-        CASKET_BASE     = 17257008,
-        SIGNPOST_OFFSET = 17257033,
+        CASKET_BASE     = 17257007,
+        SIGNPOST_OFFSET = 17257032,
         EXCAVATION =
         {
+            17257054,
             17257055,
             17257056,
             17257057,
             17257058,
             17257059,
-            17257060,
         },
     },
 }

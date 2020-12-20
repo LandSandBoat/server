@@ -17,10 +17,9 @@ require("scripts/globals/utils")
 function onMobSkillCheck(target, mob, skill)
     if not target:isInfront(mob, 128) then
         return 1
-    elseif mob:AnimationSub() ~= 0 then
+    elseif mob:AnimationSub() == 1 then
         return 1
     end
-
     return 0
 end
 

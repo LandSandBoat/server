@@ -21,7 +21,7 @@
 
 #include "../../common/socket.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "guild_menu_buy_update.h"
 
@@ -38,7 +38,6 @@ CGuildMenuBuyUpdatePacket::CGuildMenuBuyUpdatePacket(CCharEntity* PChar, uint8 s
     TPZ_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint16>(0x04) = itemID;
-    ref<uint8>(0x06) = stock;
-    ref<uint8>(0x07) = quantity;
-
+    ref<uint8>(0x06)  = stock;
+    ref<uint8>(0x07)  = quantity;
 }
