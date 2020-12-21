@@ -112,79 +112,84 @@ namespace luautils
         // Compatability with old style
         LuaHandle = lua.lua_state();
 
-        lua.set_function("print", &luautils::print);
-        lua.set_function("GetNPCByID", &luautils::GetNPCByID);
-        lua.set_function("GetMobByID", &luautils::GetMobByID);
-        lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
-        lua.set_function("GetRegionOwner", &luautils::GetRegionOwner);
-        lua.set_function("GetRegionInfluence", &luautils::GetRegionInfluence);
-        lua.set_function("getNationRank", &luautils::getNationRank);
-        lua.set_function("getConquestBalance", &luautils::getConquestBalance);
-        lua.set_function("isConquestAlliance", &luautils::isConquestAlliance);
-        lua.set_function("setMobPos", &luautils::setMobPos);
-        lua.set_function("SpawnMob", &luautils::SpawnMob);
-        lua.set_function("DespawnMob", &luautils::DespawnMob);
-        lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
-        lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
-        lua.set_function("GetMobAction", &luautils::GetMobAction);
-        lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
-        lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
-        lua.set_function("JstMidnight", &luautils::JstMidnight);
-        lua.set_function("VanadielTime", &luautils::VanadielTime);
-        lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
-        lua.set_function("VanadielHour", &luautils::VanadielHour);
-        lua.set_function("VanadielMinute", &luautils::VanadielMinute);
-        lua.set_function("VanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
-        lua.set_function("VanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
-        lua.set_function("VanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
-        lua.set_function("VanadielYear", &luautils::VanadielYear);
-        lua.set_function("VanadielMonth", &luautils::VanadielMonth);
-        lua.set_function("VanadielDayElement", &luautils::VanadielDayElement);
-        lua.set_function("VanadielMoonPhase", &luautils::VanadielMoonPhase);
-        lua.set_function("VanadielMoonDirection", &luautils::VanadielMoonDirection);
-        lua.set_function("VanadielRSERace", &luautils::VanadielRSERace);
-        lua.set_function("VanadielRSELocation", &luautils::VanadielRSELocation);
-        lua.set_function("SetVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
-        lua.set_function("IsMoonNew", &luautils::IsMoonNew);
-        lua.set_function("IsMoonFull", &luautils::IsMoonFull);
-        lua.set_function("RunElevator", &luautils::StartElevator);
-        lua.set_function("GetServerVariable", &luautils::GetServerVariable);
-        lua.set_function("SetServerVariable", &luautils::SetServerVariable);
-        lua.set_function("clearVarFromAll", &luautils::clearVarFromAll);
-        lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
-        lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
-        lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
-        lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
-        lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
-        lua.set_function("SetDropRate", &luautils::SetDropRate);
-        lua.set_function("NearLocation", &luautils::nearLocation);
-        lua.set_function("terminate", &luautils::terminate);
-        lua.set_function("GetHealingTickDelay", &luautils::GetHealingTickDelay);
-        lua.set_function("GetItem", &luautils::GetItem);
-        lua.set_function("getAbility", &luautils::getAbility);
-        lua.set_function("getSpell", &luautils::getSpell);
-
-        // Register Sol Bindings
-        CLuaAbility::Register(lua);
-        CLuaAction::Register(lua);
-        CLuaBaseEntity::Register(lua);
-        CLuaBattlefield::Register(lua);
-        CLuaInstance::Register(lua);
-        CLuaMobSkill::Register(lua);
-        CLuaRegion::Register(lua);
-        CLuaSpell::Register(lua);
-        CLuaStatusEffect::Register(lua);
-        CLuaTradeContainer::Register(lua);
-        CLuaZone::Register(lua);
-        CLuaItem::Register(lua);
-
+        // Globally require bit library
         lua.do_string("if not bit then bit = require('bit') end");
 
+        // Bind print() and math.random() globally
+        lua.set_function("print", &luautils::print);
         lua["math"]["random"] = sol::overload([]() { return tpzrand::GetRandomNumber(1.0f); },
                                               [](int n) { return tpzrand::GetRandomNumber<int>(1, n); },
                                               [](float n) { return tpzrand::GetRandomNumber<float>(0.0f, n); },
                                               [](int n, int m) { return tpzrand::GetRandomNumber<int>(n, m + 1); },
                                               [](float n, float m) { return tpzrand::GetRandomNumber<float>(n, m); });
+
+        // Get-or-create tpz.core
+        auto tpz = lua["tpz"].get_or_create<sol::table>();
+        auto tpz_core = tpz["core"].get_or_create<sol::table>();
+
+        // Bind core functions to tpz.core
+        tpz_core.set_function("getNPCByID", &luautils::GetNPCByID);
+        tpz_core.set_function("getMobByID", &luautils::GetMobByID);
+        tpz_core.set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
+        tpz_core.set_function("getRegionOwner", &luautils::GetRegionOwner);
+        tpz_core.set_function("getRegionInfluence", &luautils::GetRegionInfluence);
+        tpz_core.set_function("getNationRank", &luautils::getNationRank);
+        tpz_core.set_function("getConquestBalance", &luautils::getConquestBalance);
+        tpz_core.set_function("isConquestAlliance", &luautils::isConquestAlliance);
+        tpz_core.set_function("setMobPos", &luautils::setMobPos);
+        tpz_core.set_function("spawnMob", &luautils::SpawnMob);
+        tpz_core.set_function("despawnMob", &luautils::DespawnMob);
+        tpz_core.set_function("getPlayerByName", &luautils::GetPlayerByName);
+        tpz_core.set_function("getPlayerByID", &luautils::GetPlayerByID);
+        tpz_core.set_function("getMobAction", &luautils::GetMobAction);
+        tpz_core.set_function("jstMidnight", &luautils::JstMidnight);
+        tpz_core.set_function("vanadielTime", &luautils::VanadielTime);
+        tpz_core.set_function("vanadielTOTD", &luautils::VanadielTOTD);
+        tpz_core.set_function("vanadielHour", &luautils::VanadielHour);
+        tpz_core.set_function("vanadielMinute", &luautils::VanadielMinute);
+        tpz_core.set_function("vanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
+        tpz_core.set_function("vanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
+        tpz_core.set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
+        tpz_core.set_function("vanadielYear", &luautils::VanadielYear);
+        tpz_core.set_function("vanadielMonth", &luautils::VanadielMonth);
+        tpz_core.set_function("vanadielDayElement", &luautils::VanadielDayElement);
+        tpz_core.set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
+        tpz_core.set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
+        tpz_core.set_function("vanadielRSERace", &luautils::VanadielRSERace);
+        tpz_core.set_function("vanadielRSELocation", &luautils::VanadielRSELocation);
+        tpz_core.set_function("setVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
+        tpz_core.set_function("isMoonNew", &luautils::IsMoonNew);
+        tpz_core.set_function("isMoonFull", &luautils::IsMoonFull);
+        tpz_core.set_function("runElevator", &luautils::StartElevator);
+        tpz_core.set_function("getServerVariable", &luautils::GetServerVariable);
+        tpz_core.set_function("setServerVariable", &luautils::SetServerVariable);
+        tpz_core.set_function("clearVarFromAll", &luautils::clearVarFromAll);
+        tpz_core.set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
+        tpz_core.set_function("updateServerMessage", &luautils::UpdateServerMessage);
+        tpz_core.set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
+        tpz_core.set_function("disallowRespawn", &luautils::DisallowRespawn);
+        tpz_core.set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        tpz_core.set_function("setDropRate", &luautils::SetDropRate);
+        tpz_core.set_function("nearLocation", &luautils::nearLocation);
+        tpz_core.set_function("terminate", &luautils::terminate);
+        tpz_core.set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
+        tpz_core.set_function("getItem", &luautils::GetItem);
+        tpz_core.set_function("getAbility", &luautils::getAbility);
+        tpz_core.set_function("getSpell", &luautils::getSpell);
+
+        // Register Sol Bindings
+        CLuaAbility::Register();
+        CLuaAction::Register();
+        CLuaBaseEntity::Register();
+        CLuaBattlefield::Register();
+        CLuaInstance::Register();
+        CLuaMobSkill::Register();
+        CLuaRegion::Register();
+        CLuaSpell::Register();
+        CLuaStatusEffect::Register();
+        CLuaTradeContainer::Register();
+        CLuaZone::Register();
+        CLuaItem::Register();
 
         contentRestrictionEnabled = (GetSettingsVariable("RESTRICT_CONTENT") != 0);
 
