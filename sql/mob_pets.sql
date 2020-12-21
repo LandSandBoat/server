@@ -100,6 +100,7 @@ INSERT INTO `mob_pets` VALUES (16810086,2,9,'Shikaree_X','Shikaree_Xs_Rabbit');
 INSERT INTO `mob_pets` VALUES (16810090,3,14,'Shikaree_Z','Shikaree_Zs_Wyvern');
 INSERT INTO `mob_pets` VALUES (16810092,2,9,'Shikaree_X','Shikaree_Xs_Rabbit');
 INSERT INTO `mob_pets` VALUES (16810096,3,14,'Shikaree_Z','Shikaree_Zs_Wyvern');
+INSERT INTO `mob_pets` VALUES (16810098,2,9,'Shikaree_X','Shikaree_Xs_Rabbit');
 
 -- ------------------------------------------------------------
 -- PsoXja (Zone 9)
@@ -406,12 +407,17 @@ INSERT INTO `mob_pets` VALUES (16949374,1,14,'Kindred_Dragoon','Kindreds_Wyvern'
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_pets` VALUES (16973829,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16973831,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
 INSERT INTO `mob_pets` VALUES (16973838,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16973840,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
 INSERT INTO `mob_pets` VALUES (16973847,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16973849,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
 INSERT INTO `mob_pets` VALUES (16973903,1,9,'Thunderclap_Sareel_Ja','Thunderbolt_Piraal_Ja');
 INSERT INTO `mob_pets` VALUES (16974027,1,15,'Lamia_Commandress','Lamias_Elemental');
 INSERT INTO `mob_pets` VALUES (16974036,1,15,'Lamia_Commandress','Lamias_Elemental');
 INSERT INTO `mob_pets` VALUES (16974045,1,15,'Lamia_Commandress','Lamias_Elemental');
+INSERT INTO `mob_pets` VALUES (16974062,1,14,'Assault_Draugar','Draugars_Wyvern');
+INSERT INTO `mob_pets` VALUES (16974064,1,14,'Assault_Draugar','Draugars_Wyvern');
 INSERT INTO `mob_pets` VALUES (16974108,1,15,'Lamia_No9','Lamias_Elemental');
 
 -- ------------------------------------------------------------
@@ -578,10 +584,20 @@ INSERT INTO `mob_pets` VALUES (17150191,1,9,'Goblin_Patrolman','Goblins_Crawler'
 -- West_Sarutabaruta_[S] (Zone 95)
 -- ------------------------------------------------------------
 
+INSERT INTO `mob_pets` VALUES (17166431,1,9,'Goblin_Patrolman','Goblins_Rarab');
+INSERT INTO `mob_pets` VALUES (17166484,1,9,'Goblin_Patrolman','Goblins_Rarab');
+INSERT INTO `mob_pets` VALUES (17166488,1,9,'Goblin_Patrolman','Goblins_Rarab');
+INSERT INTO `mob_pets` VALUES (17166579,1,9,'Goblin_Patrolman','Goblins_Rarab');
 INSERT INTO `mob_pets` VALUES (17166627,1,15,'Yagudo_Mendicant','Yagudos_Elemental');
 INSERT INTO `mob_pets` VALUES (17166633,1,15,'Yagudo_Mendicant','Yagudos_Elemental');
 INSERT INTO `mob_pets` VALUES (17166638,1,15,'Yagudo_Mendicant','Yagudos_Elemental');
 INSERT INTO `mob_pets` VALUES (17166645,1,15,'Yagudo_Mendicant','Yagudos_Elemental');
+
+-- ------------------------------------------------------------
+-- Fort Karugo-Narugo [S] (Zone 96)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_pets` VALUES (17170499,1,9,'Kirtimukha','Death_Jacket');
 
 -- ------------------------------------------------------------
 -- Meriphataud_Mountains_[S] (Zone 97)
@@ -812,6 +828,7 @@ INSERT INTO `mob_pets` VALUES (17293576,1,9,'Giant_Trapper','Gigass_Leech');
 -- Dynamis-Beaucedine (Zone 134)
 -- ------------------------------------------------------------
 
+INSERT INTO `mob_pets` VALUES (17326093,1,14,'Taquede','Taquedes_Wyvern');
 INSERT INTO `mob_pets` VALUES (17326103,1,9,'Vanguard_Beasttender','Vanguards_Scorpion');
 INSERT INTO `mob_pets` VALUES (17326111,1,14,'Vanguard_Drakekeeper','Vanguards_Wyvern');
 INSERT INTO `mob_pets` VALUES (17326124,1,15,'Vanguard_Undertaker','Vanguards_Avatar');
@@ -892,6 +909,8 @@ INSERT INTO `mob_pets` VALUES (17326783,1,9,'Hydra_Beastmaster','Hydras_Hound');
 -- Dynamis-Xarcabard (Zone 135)
 -- ------------------------------------------------------------
 
+INSERT INTO `mob_pets` VALUES (17330186,1,9,'Marquis_Caim','Caims_Vouivre');
+INSERT INTO `mob_pets` VALUES (17330189,1,15,'Count_Haagenti','Haagentis_Avatar');
 INSERT INTO `mob_pets` VALUES (17330219,1,9,'Kindred_Beastmaster','Kindreds_Vouivre');
 INSERT INTO `mob_pets` VALUES (17330228,1,15,'Kindred_Summoner','Kindreds_Avatar');
 INSERT INTO `mob_pets` VALUES (17330232,1,14,'Kindred_Dragoon','Kindreds_Wyvern');
@@ -1506,6 +1525,8 @@ INSERT INTO `mob_pets` VALUES (17535179,1,14,'Vanguard_Impaler','Vanguards_Wyver
 INSERT INTO `mob_pets` VALUES (17535181,1,15,'Vanguard_Dollmaster','Vanguards_Avatar');
 INSERT INTO `mob_pets` VALUES (17535191,1,15,'Vanguard_Dollmaster','Vanguards_Avatar');
 INSERT INTO `mob_pets` VALUES (17535203,1,15,'Vanguard_Dollmaster','Vanguards_Avatar');
+INSERT INTO `mob_pets` VALUES (17535208,1,9,'Steelshank_Kratzvatz','Kratzvatzs_Hecteyes');
+INSERT INTO `mob_pets` VALUES (17535211,1,14,'Spellspear_Djokvukk','Djokvukks_Wyvern');
 
 -- ------------------------------------------------------------
 -- Dynamis-Bastok (Zone 186)
@@ -1572,6 +1593,7 @@ INSERT INTO `mob_pets` VALUES (17543431,1,14,'Vanguard_Partisan','Vanguards_Wyve
 INSERT INTO `mob_pets` VALUES (17543442,1,15,'Vanguard_Oracle','Vanguards_Avatar');
 INSERT INTO `mob_pets` VALUES (17543444,1,15,'Vanguard_Oracle','Vanguards_Avatar');
 INSERT INTO `mob_pets` VALUES (17543459,1,15,'Vanguard_Oracle','Vanguards_Avatar');
+INSERT INTO `mob_pets` VALUES (17543464,1,15,'Xuu_Bhoqa_the_Enigma','Xuu_Bhoqas_Avatar');
 
 -- ------------------------------------------------------------
 -- Dynamis-Jeuno (Zone 188)
@@ -1603,6 +1625,8 @@ INSERT INTO `mob_pets` VALUES (17547452,1,14,'Vanguard_Dragontamer','Vanguards_W
 INSERT INTO `mob_pets` VALUES (17547454,1,9,'Rutrix_Hamgams','Vanguards_Slime');
 INSERT INTO `mob_pets` VALUES (17547483,1,9,'Vanguard_Pathfinder','Vanguards_Slime');
 INSERT INTO `mob_pets` VALUES (17547487,1,9,'Blazox_Boneybod','Vanguards_Slime');
+INSERT INTO `mob_pets` VALUES (17547494,1,9,'Feralox_Honeylips','Feraloxs_Slime');
+INSERT INTO `mob_pets` VALUES (17547496,1,14,'Scourquix_Scaleskin','Scourquixs_Wyvern');
 
 -- ------------------------------------------------------------
 -- King_Ranperres_Tomb (Zone 190)
@@ -1627,6 +1651,7 @@ INSERT INTO `mob_pets` VALUES (17588628,1,9,'Goblin_Pathfinder','Goblins_Bat');
 INSERT INTO `mob_pets` VALUES (17588633,1,9,'Goblin_Pathfinder','Goblins_Bat');
 INSERT INTO `mob_pets` VALUES (17588651,1,9,'Goblin_Pathfinder','Goblins_Bat');
 INSERT INTO `mob_pets` VALUES (17588656,1,9,'Goblin_Pathfinder','Goblins_Bat');
+INSERT INTO `mob_pets` VALUES (17588666,1,9,'Goblin_Pathfinder','Goblins_Bat');
 
 -- ------------------------------------------------------------
 -- Ifrits_Cauldron (Zone 205)
