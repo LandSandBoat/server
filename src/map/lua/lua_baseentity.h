@@ -28,6 +28,8 @@
 class CBaseEntity;
 class CCharEntity;
 
+enum CHAT_MESSAGE_TYPE : int;
+
 class CLuaBaseEntity
 {
     CBaseEntity* m_PBaseEntity;
@@ -43,7 +45,7 @@ public:
     // Messaging System
     int32 showText(lua_State*); // Displays Dialog for npc
     int32 messageText(lua_State* L);
-    int32 PrintToPlayer(lua_State* L); // for sending debugging messages/command confirmations to the player's client
+    void PrintToPlayer(std::string& message, CHAT_MESSAGE_TYPE messageType, std::string& name); // for sending debugging messages/command confirmations to the player's client
     int32 PrintToArea(lua_State* L);   // for sending area messages to multiple players at once
     int32 messageBasic(lua_State*);    // Sends Basic Message
     int32 messageName(lua_State* L);   // Sends a Message with a Name
@@ -222,7 +224,7 @@ public:
     // Player Appearance
     int32 getRace(lua_State*);   // Gets Race of Entity
     int32 getGender(lua_State*); // Returns the player character's gender
-    int32 getName(lua_State* L); // Gets Entity Name
+    const char* getName(); // Gets Entity Name
     int32 hideName(lua_State* L);
     int32 checkNameFlags(lua_State* L); // this is check and not get because it tests for a flag, it doesn't return all flags
     int32 getModelId(lua_State* L);

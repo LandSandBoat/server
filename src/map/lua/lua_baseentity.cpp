@@ -285,18 +285,12 @@ inline int32 CLuaBaseEntity::messageText(lua_State* L)
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::PrintToPlayer(lua_State* L)
+void CLuaBaseEntity::PrintToPlayer(std::string& message, CHAT_MESSAGE_TYPE messageType, std::string& name)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    CHAT_MESSAGE_TYPE messageType = (lua_isnil(L, 2) || !lua_isnumber(L, 2)) ? MESSAGE_SYSTEM_1 : (CHAT_MESSAGE_TYPE)lua_tointeger(L, 2);
-    std::string       name        = (lua_isnil(L, 3) || !lua_isstring(L, 3)) ? std::string() : lua_tostring(L, 3);
-
-    ((CCharEntity*)m_PBaseEntity)->pushPacket(new CChatMessagePacket((CCharEntity*)m_PBaseEntity, messageType, (char*)lua_tostring(L, 1), name));
-    return 0;
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->pushPacket(new CChatMessagePacket(PChar, messageType, message.c_str(), name));
+    }
 }
 
 /************************************************************************
@@ -4842,12 +4836,10 @@ inline int32 CLuaBaseEntity::getGender(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getName(lua_State* L)
+const char* CLuaBaseEntity::getName()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushstring(L, (const char*)m_PBaseEntity->GetName());
-    return 1;
+    // TODO: Fix C-style cast
+    return (const char*)m_PBaseEntity->GetName();
 }
 
 /************************************************************************
@@ -15249,7 +15241,7 @@ void CLuaBaseEntity::Register(sol::state& lua)
     // Messaging System
     //SOL_REGISTER(showText),
     //SOL_REGISTER(messageText),
-    //SOL_REGISTER(PrintToPlayer),
+    SOL_REGISTER(PrintToPlayer)
     //SOL_REGISTER(PrintToArea),
     //SOL_REGISTER(messageBasic),
     //SOL_REGISTER(messageName),
@@ -15285,9 +15277,9 @@ void CLuaBaseEntity::Register(sol::state& lua)
     //SOL_REGISTER(needToZone),
 
     // Object Identification
-    //SOL_REGISTER(getID),
-    //SOL_REGISTER(getShortID),
-    //SOL_REGISTER(getCursorTarget),
+    SOL_REGISTER(getID)
+    SOL_REGISTER(getShortID)
+    SOL_REGISTER(getCursorTarget)
 
     //SOL_REGISTER(getObjType),
     //SOL_REGISTER(isPC),
@@ -15420,7 +15412,7 @@ void CLuaBaseEntity::Register(sol::state& lua)
     // Player Appearance
     //SOL_REGISTER(getRace),
     //SOL_REGISTER(getGender),
-    //SOL_REGISTER(getName),
+    SOL_REGISTER(getName)
     //SOL_REGISTER(hideName),
     //SOL_REGISTER(checkNameFlags),
     //SOL_REGISTER(getModelId),
