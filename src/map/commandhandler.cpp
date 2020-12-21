@@ -20,101 +20,82 @@
 */
 
 #include "commandhandler.h"
+
 #include "entities/charentity.h"
+#include "fmt/format.h"
+#include "lua/luautils.h"
 #include "lua/lua_baseentity.h"
+
 #include <sstream>
 
-void CCommandHandler::init(lua_State* L)
+int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* commandline)
 {
-    TPZ_DEBUG_BREAK_IF(L == nullptr);
-    m_LState = L;
-}
+    auto top = lua_gettop(lua.lua_state());
 
-int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
-{
     std::istringstream clstream((char*)commandline);
     std::string        cmdname;
+
     clstream >> cmdname;
 
     if (!PChar)
     {
         ShowError("cmdhandler::call: nullptr character attempted to use command\n");
+
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
+
     if (cmdname.empty())
     {
         ShowError("cmdhandler::call: function name was empty\n");
+
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    char filePath[255] = { 0 };
-    snprintf(filePath, sizeof(filePath), "scripts/commands/%s.lua", cmdname.c_str());
-
-    if (luaL_loadfile(m_LState, filePath) || lua_pcall(m_LState, 0, 0, 0))
+    if (auto result = lua.script_file(fmt::format("scripts/commands/{}.lua", cmdname.c_str())); !result.valid())
     {
-        ShowError("cmdhandler::call: (%s): %s\n", cmdname.c_str(), lua_tostring(m_LState, -1));
-        lua_pop(m_LState, 1);
+        sol::error err = result;
+        ShowError("cmdhandler::call: (%s): %s\n", cmdname.c_str(),err.what());
+
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    lua_getglobal(m_LState, "cmdprops");
-    if (lua_isnil(m_LState, -1) || !lua_istable(m_LState, -1))
+    if (!lua["cmdprops"].valid())
     {
-        lua_pop(m_LState, -1);
         ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table\n", cmdname.c_str());
+
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    // Attempt to obtain the command permissions..
-    lua_pushstring(m_LState, "permission");
-    lua_gettable(m_LState, -2);
-
-    if (lua_isnil(m_LState, -1) || !lua_isnumber(m_LState, -1))
+    if (!lua["cmdprops"]["permission"].valid())
     {
-        lua_pop(m_LState, -1);
         ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops\n", cmdname.c_str());
 
         // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
+        lua_pushnil(lua.lua_state());
+        lua_setglobal(lua.lua_state(), "cmdprops");
 
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    int8 permission = (int8)lua_tonumber(m_LState, -1);
-    lua_pop(m_LState, 1); // pop number..
-
-    // Attempt to obtain the command parameters..
-    lua_pushstring(m_LState, "parameters");
-    lua_gettable(m_LState, -2);
-
-    if (lua_isnil(m_LState, -1) || !lua_isstring(m_LState, -1))
+    if (!lua["cmdprops"]["parameters"].valid())
     {
-        lua_pop(m_LState, -1);
-        ShowError("cmdhandler::call: (%s): Invalid or no parameter field set in cmdprops\n", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops\n", cmdname.c_str());
 
         // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
+        lua_pushnil(lua.lua_state());
+        lua_setglobal(lua.lua_state(), "cmdprops");
 
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    const char* parameters = luaL_checkstring(m_LState, -1);
-    if (parameters == nullptr)
-    {
-        lua_pop(m_LState, -1);
-        ShowError("cmdhandler::call: (%s): Invalid or no parameter field set in cmdprops\n", cmdname.c_str());
-
-        // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
-
-        return -1;
-    }
-
-    lua_pop(m_LState, 1); // pop string..
-    lua_pop(m_LState, 1); // pop table..
+    int8 permission = lua["cmdprops"]["permission"];
+    std::string parameters = lua["cmdprops"]["parameters"];
 
     // Ensure this user can use this command..
     if (permission > PChar->m_GMlevel)
@@ -122,9 +103,10 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
         ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s\n", PChar->name.c_str(), cmdname.c_str());
 
         // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
+        lua_pushnil(lua.lua_state());
+        lua_setglobal(lua.lua_state(), "cmdprops");
 
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
     else
@@ -151,25 +133,24 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
     }
 
     // Ensure the onTrigger function exists for this command..
-    lua_getglobal(m_LState, "onTrigger");
-    if (lua_isnil(m_LState, -1) || !lua_isfunction(m_LState, -1))
+    if (!lua["onTrigger"].valid())
     {
-        lua_pop(m_LState, -1);
         ShowError("cmdhandler::call: (%s) missing onTrigger function\n", cmdname.c_str());
 
         // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
+        lua_pushnil(lua.lua_state());
+        lua_setglobal(lua.lua_state(), "cmdprops");
 
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    // Push the calling character (if exists)..
-    CLuaBaseEntity LuaCmdCaller(PChar);
-    int32          cntparam = 0;
+    // Push onTrigger onto stack
+    lua_getglobal(lua.lua_state(), "onTrigger");
 
-    //Lunar<CLuaBaseEntity>::push(m_LState, &LuaCmdCaller);
-    //cntparam += 1;
+    // Push the calling character (if exists)..
+    sol::stack::push(lua.lua_state(), CLuaBaseEntity(PChar));
+    int32 cntparam = 1;
 
     // Prepare parameters..
     std::string                 param;
@@ -184,7 +165,7 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
         switch (*parameter)
         {
             case 'b':
-                lua_pushstring(m_LState, (const char*)commandline);
+                lua_pushstring(lua.lua_state(), (const char*)commandline);
                 ++cntparam;
                 break;
 
@@ -197,21 +178,21 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
                         clstream >> param;
                         str += " " + param;
                     }
-                    lua_pushstring(m_LState, str.c_str());
+                    lua_pushstring(lua.lua_state(), str.c_str());
                     ++cntparam;
                     break;
                 }
-                lua_pushstring(m_LState, param.c_str());
+                lua_pushstring(lua.lua_state(), param.c_str());
                 ++cntparam;
                 break;
 
             case 'i':
-                lua_pushnumber(m_LState, atoi(param.c_str()));
+                lua_pushnumber(lua.lua_state(), atoi(param.c_str()));
                 ++cntparam;
                 break;
 
             case 'd':
-                lua_pushnumber(m_LState, atof(param.c_str()));
+                lua_pushnumber(lua.lua_state(), atof(param.c_str()));
                 ++cntparam;
                 break;
 
@@ -224,22 +205,24 @@ int32 CCommandHandler::call(CCharEntity* PChar, const int8* commandline)
     }
 
     // Call the function..
-    int32 status = lua_pcall(m_LState, cntparam, 0, 0);
+    int32 status = lua_pcall(lua.lua_state(), cntparam, 0, 0);
     if (status)
     {
-        ShowError("cmdhandler::call: (%s) error: %s\n", cmdname.c_str(), lua_tostring(m_LState, -1));
-        lua_pop(m_LState, -1);
+        ShowError("cmdhandler::call: (%s) error: %s\n", cmdname.c_str(), lua_tostring(lua.lua_state(), -1));
+        lua_pop(lua.lua_state(), -1);
 
         // Delete the cmdprops table..
-        lua_pushnil(m_LState);
-        lua_setglobal(m_LState, "cmdprops");
+        lua_pushnil(lua.lua_state());
+        lua_setglobal(lua.lua_state(), "cmdprops");
 
+        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
     // Delete the cmdprops table..
-    lua_pushnil(m_LState);
-    lua_setglobal(m_LState, "cmdprops");
+    lua_pushnil(lua.lua_state());
+    lua_setglobal(lua.lua_state(), "cmdprops");
 
+    lua_settop(lua.lua_state(), top);
     return 0;
 }

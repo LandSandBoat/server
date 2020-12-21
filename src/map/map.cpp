@@ -101,7 +101,6 @@ uint16  map_port = 0;
 
 map_config_t       map_config; // map server settings
 map_session_list_t map_session_list;
-CCommandHandler    CmdHandler;
 
 std::thread messageThread;
 
@@ -199,7 +198,6 @@ int32 do_init(int32 argc, char** argv)
     ShowMessage("\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
 
     luautils::init();
-    CmdHandler.init(luautils::LuaHandle);
     PacketParserInitialize();
     SqlHandle = Sql_Malloc();
 
