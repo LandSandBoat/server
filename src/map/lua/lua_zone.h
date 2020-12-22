@@ -38,17 +38,17 @@ public:
         return m_pLuaZone;
     }
 
-    int32 registerRegion(lua_State*);
+    int32       registerRegion(lua_State*);
     sol::object levelRestriction();
-    sol::table getPlayers();
-    ZONEID     getID();
+    sol::table  getPlayers();
+    ZONEID      getID();
     REGION_TYPE getRegionID();
-    ZONE_TYPE getType();
-    int32 getBattlefieldByInitiator(lua_State*);
-    bool    battlefieldsFull(int battlefieldId);
-    WEATHER getWeather();
+    ZONE_TYPE   getType();
+    int32       getBattlefieldByInitiator(lua_State*);
+    bool        battlefieldsFull(int battlefieldId);
+    WEATHER     getWeather();
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

@@ -51,7 +51,7 @@ public:
     int32 addEffectMessage(lua_State*);
     int32 additionalEffect(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

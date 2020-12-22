@@ -191,27 +191,26 @@ inline int32 CLuaSpell::getFlag(lua_State* L)
 
 //======================================================//
 
-void CLuaSpell::Register(sol::state& lua)
+void CLuaSpell::Register()
 {
-    SOL_START(CSpell, CLuaSpell)
-    SOL_REGISTER(setMsg)
-    SOL_REGISTER(setAoE)
-    SOL_REGISTER(setFlag)
-    SOL_REGISTER(setRadius)
-    SOL_REGISTER(setAnimation)
-    SOL_REGISTER(setMPCost)
-    SOL_REGISTER(isAoE)
-    SOL_REGISTER(tookEffect)
-    SOL_REGISTER(getMagicBurstMessage)
-    SOL_REGISTER(getElement)
-    SOL_REGISTER(getTotalTargets)
-    SOL_REGISTER(getSkillType)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getMPCost)
-    SOL_REGISTER(getSpellGroup)
-    SOL_REGISTER(getFlag)
-    SOL_REGISTER(castTime)
-    SOL_END()
-};
+    SOL_USERTYPE("CSpell", CLuaSpell);
+    SOL_REGISTER("setMsg", CLuaSpell::setMsg);
+    SOL_REGISTER("setAoE", CLuaSpell::setAoE);
+    SOL_REGISTER("setFlag", CLuaSpell::setFlag);
+    SOL_REGISTER("setRadius", CLuaSpell::setRadius);
+    SOL_REGISTER("setAnimation", CLuaSpell::setAnimation);
+    SOL_REGISTER("setMPCost", CLuaSpell::setMPCost);
+    SOL_REGISTER("isAoE", CLuaSpell::isAoE);
+    SOL_REGISTER("tookEffect", CLuaSpell::tookEffect);
+    SOL_REGISTER("getMagicBurstMessage", CLuaSpell::getMagicBurstMessage);
+    SOL_REGISTER("getElement", CLuaSpell::getElement);
+    SOL_REGISTER("getTotalTargets", CLuaSpell::getTotalTargets);
+    SOL_REGISTER("getSkillType", CLuaSpell::getSkillType);
+    SOL_REGISTER("getID", CLuaSpell::getID);
+    SOL_REGISTER("getMPCost", CLuaSpell::getMPCost);
+    SOL_REGISTER("getSpellGroup", CLuaSpell::getSpellGroup);
+    SOL_REGISTER("getFlag", CLuaSpell::getFlag);
+    SOL_REGISTER("castTime", CLuaSpell::castTime);
+}
 
 //======================================================//

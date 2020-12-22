@@ -65,7 +65,7 @@ public:
 
     int32 insertAlly(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

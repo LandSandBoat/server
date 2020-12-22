@@ -350,8 +350,8 @@ inline int32 CLuaBattlefield::loadMobs(lua_State* L)
 inline int32 CLuaBattlefield::spawnLoot(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaBattlefield == nullptr);
-    //CBaseEntity* PEntity = !lua_isnil(L, 1) && lua_isuserdata(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1)->GetBaseEntity() : nullptr;
-    //lua_pushboolean(L, m_PLuaBattlefield->SpawnLoot(PEntity));
+    // CBaseEntity* PEntity = !lua_isnil(L, 1) && lua_isuserdata(L, 1) ? Lunar<CLuaBaseEntity>::check(L, 1)->GetBaseEntity() : nullptr;
+    // lua_pushboolean(L, m_PLuaBattlefield->SpawnLoot(PEntity));
     return 1;
 }
 
@@ -426,39 +426,38 @@ inline int32 CLuaBattlefield::lose(lua_State* L)
 
 //==========================================================//
 
-void CLuaBattlefield::Register(sol::state& lua)
+void CLuaBattlefield::Register()
 {
-    SOL_START(CBattlefield, CLuaBattlefield)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getArea)
-    SOL_REGISTER(getTimeLimit)
-    SOL_REGISTER(getRemainingTime)
-    SOL_REGISTER(getTimeInside)
-    SOL_REGISTER(getFightTick)
-    SOL_REGISTER(getWipeTime)
-    SOL_REGISTER(getFightTime)
-    SOL_REGISTER(getPlayers)
-    SOL_REGISTER(getMobs)
-    SOL_REGISTER(getNPCs)
-    SOL_REGISTER(getAllies)
-    SOL_REGISTER(getRecord)
-    SOL_REGISTER(getStatus)
-    SOL_REGISTER(getLastTimeUpdate)
-    SOL_REGISTER(getInitiator)
-    SOL_REGISTER(getLocalVar)
-    SOL_REGISTER(setLocalVar)
-    SOL_REGISTER(setLastTimeUpdate)
-    SOL_REGISTER(setTimeLimit)
-    SOL_REGISTER(setWipeTime)
-    SOL_REGISTER(setRecord)
-    SOL_REGISTER(setStatus)
-    SOL_REGISTER(loadMobs)
-    SOL_REGISTER(spawnLoot)
-    SOL_REGISTER(insertEntity)
-    SOL_REGISTER(cleanup)
-    SOL_REGISTER(win)
-    SOL_REGISTER(lose)
-    SOL_END()
+    SOL_USERTYPE("CBattlefield", CLuaBattlefield);
+    SOL_REGISTER("getID", CLuaBattlefield::getID);
+    SOL_REGISTER("getArea", CLuaBattlefield::getArea);
+    SOL_REGISTER("getTimeLimit", CLuaBattlefield::getTimeLimit);
+    SOL_REGISTER("getRemainingTime", CLuaBattlefield::getRemainingTime);
+    SOL_REGISTER("getTimeInside", CLuaBattlefield::getTimeInside);
+    SOL_REGISTER("getFightTick", CLuaBattlefield::getFightTick);
+    SOL_REGISTER("getWipeTime", CLuaBattlefield::getWipeTime);
+    SOL_REGISTER("getFightTime", CLuaBattlefield::getFightTime);
+    SOL_REGISTER("getPlayers", CLuaBattlefield::getPlayers);
+    SOL_REGISTER("getMobs", CLuaBattlefield::getMobs);
+    SOL_REGISTER("getNPCs", CLuaBattlefield::getNPCs);
+    SOL_REGISTER("getAllies", CLuaBattlefield::getAllies);
+    SOL_REGISTER("getRecord", CLuaBattlefield::getRecord);
+    SOL_REGISTER("getStatus", CLuaBattlefield::getStatus);
+    SOL_REGISTER("getLastTimeUpdate", CLuaBattlefield::getLastTimeUpdate);
+    SOL_REGISTER("getInitiator", CLuaBattlefield::getInitiator);
+    SOL_REGISTER("getLocalVar", CLuaBattlefield::getLocalVar);
+    SOL_REGISTER("setLocalVar", CLuaBattlefield::setLocalVar);
+    SOL_REGISTER("setLastTimeUpdate", CLuaBattlefield::setLastTimeUpdate);
+    SOL_REGISTER("setTimeLimit", CLuaBattlefield::setTimeLimit);
+    SOL_REGISTER("setWipeTime", CLuaBattlefield::setWipeTime);
+    SOL_REGISTER("setRecord", CLuaBattlefield::setRecord);
+    SOL_REGISTER("setStatus", CLuaBattlefield::setStatus);
+    SOL_REGISTER("loadMobs", CLuaBattlefield::loadMobs);
+    SOL_REGISTER("spawnLoot", CLuaBattlefield::spawnLoot);
+    SOL_REGISTER("insertEntity", CLuaBattlefield::insertEntity);
+    SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
+    SOL_REGISTER("win", CLuaBattlefield::win);
+    SOL_REGISTER("lose", CLuaBattlefield::lose);
 };
 
 //==========================================================//

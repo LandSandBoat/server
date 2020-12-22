@@ -96,21 +96,20 @@ void CLuaAbility::setRange(float range)
 
 //==========================================================//
 
-void CLuaAbility::Register(sol::state& lua)
+void CLuaAbility::Register()
 {
-    SOL_START(CAbility, CLuaAbility)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getMsg)
-    SOL_REGISTER(getRecast)
-    SOL_REGISTER(getRange)
-    SOL_REGISTER(getAnimation)
-    SOL_REGISTER(setMsg)
-    SOL_REGISTER(setAnimation)
-    SOL_REGISTER(setRecast)
-    SOL_REGISTER(setCE)
-    SOL_REGISTER(setVE)
-    SOL_REGISTER(setRange)
-    SOL_END()
+    SOL_USERTYPE("CAbility", CLuaAbility);
+    SOL_REGISTER("getID", CLuaAbility::getID);
+    SOL_REGISTER("getMsg", CLuaAbility::getMsg);
+    SOL_REGISTER("getRecast", CLuaAbility::getRecast);
+    SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
+    SOL_REGISTER("setMsg", CLuaAbility::setMsg);
+    SOL_REGISTER("setAnimation", CLuaAbility::setAnimation);
+    SOL_REGISTER("setRecast", CLuaAbility::setRecast);
+    SOL_REGISTER("setCE", CLuaAbility::setCE);
+    SOL_REGISTER("setVE", CLuaAbility::setVE);
+    SOL_REGISTER("setRange", CLuaAbility::setRange);
 }
 
 //==========================================================//

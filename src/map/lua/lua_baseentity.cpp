@@ -180,7 +180,7 @@ inline int32 CLuaBaseEntity::showText(lua_State* L)
 
     auto messageID = (uint16)lua_tointeger(L, 2);
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr; //nullptr;
+    CLuaBaseEntity* PLuaBaseEntity = nullptr; // nullptr;
 
     if (PLuaBaseEntity != nullptr)
     {
@@ -240,7 +240,7 @@ inline int32 CLuaBaseEntity::messageText(lua_State* L)
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    CLuaBaseEntity* PLuaBaseEntity =  nullptr; //nullptr;
+    CLuaBaseEntity* PLuaBaseEntity = nullptr; // nullptr;
     CBaseEntity*    PTarget        = nullptr; // PLuaBaseEntity->m_PBaseEntity;
 
     auto messageID = (uint16)lua_tointeger(L, 2);
@@ -285,11 +285,11 @@ inline int32 CLuaBaseEntity::messageText(lua_State* L)
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(std::string& message, CHAT_MESSAGE_TYPE messageType, std::string& name)
+void CLuaBaseEntity::PrintToPlayer(std::string const& message, int messageType, std::string const& name)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket(new CChatMessagePacket(PChar, messageType, message.c_str(), name));
+        PChar->pushPacket(new CChatMessagePacket(PChar, static_cast<CHAT_MESSAGE_TYPE>(messageType), message.c_str(), name));
     }
 }
 
@@ -599,7 +599,7 @@ int32 CLuaBaseEntity::messageCombat(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::getCharVar(std::string& varName)
+int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -613,7 +613,7 @@ int32 CLuaBaseEntity::getCharVar(std::string& varName)
  *  Notes   : Passing a '0' value will delete the variable
  ************************************************************************/
 
-void CLuaBaseEntity::setCharVar(std::string& varname, int32 value)
+void CLuaBaseEntity::setCharVar(std::string const& varname, int32 value)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -635,7 +635,7 @@ void CLuaBaseEntity::setCharVar(std::string& varname, int32 value)
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-void CLuaBaseEntity::addCharVar(std::string& varname, int32 value)
+void CLuaBaseEntity::addCharVar(std::string const& varname, int32 value)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -651,7 +651,7 @@ void CLuaBaseEntity::addCharVar(std::string& varname, int32 value)
  *  Notes   :
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getLocalVar(std::string& var)
+uint32 CLuaBaseEntity::getLocalVar(std::string const& var)
 {
     return m_PBaseEntity->GetLocalVar(var.c_str());
 }
@@ -663,7 +663,7 @@ uint32 CLuaBaseEntity::getLocalVar(std::string& var)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setLocalVar(std::string& var, uint32 val)
+void CLuaBaseEntity::setLocalVar(std::string const& var, uint32 val)
 {
     m_PBaseEntity->SetLocalVar(var.c_str(), val);
 }
@@ -1881,8 +1881,8 @@ inline int32 CLuaBaseEntity::checkDistance(lua_State* L)
 
     if (lua_isuserdata(L, 1))
     {
-        //CLuaBaseEntity* PLuaBaseEntity = nullptr;
-        //calcdistance                   = distance(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
+        // CLuaBaseEntity* PLuaBaseEntity = nullptr;
+        // calcdistance                   = distance(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
     }
     else
     {
@@ -3018,9 +3018,9 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State* L)
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
-    TELEPORT_TYPE  type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
-    uint32 bit  = 1 << (uint32)lua_tointeger(L, 2);
-    uint8  set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
+    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
+    uint32        bit  = 1 << (uint32)lua_tointeger(L, 2);
+    uint8         set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
 
     if ((type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL) && (lua_isnil(L, 3) || set > 3))
     {
@@ -3082,8 +3082,8 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State* L)
 
     TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    TELEPORT_TYPE  type  = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
-    CCharEntity*   PChar = (CCharEntity*)m_PBaseEntity;
+    TELEPORT_TYPE type  = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
+    CCharEntity*  PChar = (CCharEntity*)m_PBaseEntity;
 
     switch (type)
     {
@@ -3151,8 +3151,8 @@ inline int32 CLuaBaseEntity::hasTeleport(lua_State* L)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
     TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
-    uint8 bit  = (uint8)lua_tointeger(L, 2);
-    uint8 set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
+    uint8         bit  = (uint8)lua_tointeger(L, 2);
+    uint8         set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
 
     if (type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL)
     {
@@ -3514,7 +3514,7 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
         TPZ_DEBUG_BREAK_IF(slot > 15);
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-        CItem* PItem = PChar->getEquip(slot);
+        CItem*       PItem = PChar->getEquip(slot);
 
         if (PItem && PItem->isType(ITEM_EQUIPMENT))
         {
@@ -9420,9 +9420,9 @@ inline int32 CLuaBaseEntity::forMembersInRange(lua_State* L)
         if (target->loc.zone == member->loc.zone && distanceSquared(target->loc.p, member->loc.p) < (range * range))
         {
             std::ignore = member;
-            //luautils::pushFunc(function);
-            //luautils::pushArg<CBattleEntity*>(member);
-            //luautils::callFunc(1);
+            // luautils::pushFunc(function);
+            // luautils::pushArg<CBattleEntity*>(member);
+            // luautils::callFunc(1);
         }
     });
 
@@ -10977,8 +10977,8 @@ int32 CLuaBaseEntity::transferEnmity(lua_State* L)
 
     // TODO:
     CBaseEntity* PEntity = nullptr;
-    auto  percent = (uint8)lua_tointeger(L, 2);
-    auto  range   = lua_tonumber(L, 3);
+    auto         percent = (uint8)lua_tointeger(L, 2);
+    auto         range   = lua_tonumber(L, 3);
 
     auto* PIterEntity = [&]() -> CCharEntity* {
         if (m_PBaseEntity->objtype == TYPE_PC)
@@ -15234,682 +15234,680 @@ inline int32 CLuaBaseEntity::getTHlevel(lua_State* L)
 
 //==========================================================//
 
-void CLuaBaseEntity::Register(sol::state& lua)
+void CLuaBaseEntity::Register()
 {
-    SOL_START(CBaseEntity, CLuaBaseEntity)
+    SOL_USERTYPE("CBaseEntity", CLuaBaseEntity);
 
     // Messaging System
-    //SOL_REGISTER(showText),
-    //SOL_REGISTER(messageText),
-    SOL_REGISTER(PrintToPlayer)
-    //SOL_REGISTER(PrintToArea),
-    //SOL_REGISTER(messageBasic),
-    //SOL_REGISTER(messageName),
-    //SOL_REGISTER(messagePublic),
-    //SOL_REGISTER(messageSpecial),
-    //SOL_REGISTER(messageSystem),
-    //SOL_REGISTER(messageCombat),
+    // SOL_REGISTER("showText", CLuaBaseEntity::showText);
+    // SOL_REGISTER(messageText),
+    SOL_REGISTER("PrintToPlayer", CLuaBaseEntity::PrintToPlayer);
+    // SOL_REGISTER(PrintToArea),
+    // SOL_REGISTER(messageBasic),
+    // SOL_REGISTER(messageName),
+    // SOL_REGISTER(messagePublic),
+    // SOL_REGISTER(messageSpecial),
+    // SOL_REGISTER(messageSystem),
+    // SOL_REGISTER(messageCombat),
 
     // Variables
-    SOL_REGISTER(getCharVar)
-    SOL_REGISTER(setCharVar)
-    SOL_REGISTER(addCharVar)
-    SOL_REGISTER(getLocalVar)
-    SOL_REGISTER(setLocalVar)
-    SOL_REGISTER(resetLocalVars)
-    SOL_REGISTER(getLastOnline)
+    SOL_REGISTER("getCharVar", CLuaBaseEntity::getCharVar);
+    SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
+    SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
+    SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
+    SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
+    SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
+    SOL_REGISTER("getLastOnline", CLuaBaseEntity::getLastOnline);
 
     // Packets, Events, and Flags
-    //SOL_REGISTER(injectPacket),
-    //SOL_REGISTER(injectActionPacket),
-    //SOL_REGISTER(entityVisualPacket),
-    //SOL_REGISTER(entityAnimationPacket),
+    // SOL_REGISTER(injectPacket),
+    // SOL_REGISTER(injectActionPacket),
+    // SOL_REGISTER(entityVisualPacket),
+    // SOL_REGISTER(entityAnimationPacket),
 
-    //SOL_REGISTER(startEvent),
-    //SOL_REGISTER(startEventString),
-    //SOL_REGISTER(updateEvent),
-    //SOL_REGISTER(updateEventString),
-    //SOL_REGISTER(getEventTarget),
-    //SOL_REGISTER(release),
+    // SOL_REGISTER(startEvent),
+    // SOL_REGISTER(startEventString),
+    // SOL_REGISTER(updateEvent),
+    // SOL_REGISTER(updateEventString),
+    // SOL_REGISTER(getEventTarget),
+    // SOL_REGISTER(release),
 
-    //SOL_REGISTER(setFlag),
-    //SOL_REGISTER(moghouseFlag),
-    //SOL_REGISTER(needToZone),
+    // SOL_REGISTER(setFlag),
+    // SOL_REGISTER(moghouseFlag),
+    // SOL_REGISTER(needToZone),
 
     // Object Identification
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getShortID)
-    SOL_REGISTER(getCursorTarget)
+    SOL_REGISTER("getID", CLuaBaseEntity::getID);
+    SOL_REGISTER("getShortID", CLuaBaseEntity::getShortID);
+    SOL_REGISTER("getCursorTarget", CLuaBaseEntity::getCursorTarget);
 
-    //SOL_REGISTER(getObjType),
-    //SOL_REGISTER(isPC),
-    //SOL_REGISTER(isNPC),
-    //SOL_REGISTER(isMob),
-    //SOL_REGISTER(isPet),
-    //SOL_REGISTER(isAlly),
+    // SOL_REGISTER(getObjType),
+    // SOL_REGISTER(isPC),
+    // SOL_REGISTER(isNPC),
+    // SOL_REGISTER(isMob),
+    // SOL_REGISTER(isPet),
+    // SOL_REGISTER(isAlly),
 
     // AI and Control
-    //SOL_REGISTER(initNpcAi),
-    //SOL_REGISTER(resetAI),
-    //SOL_REGISTER(getStatus),
-    //SOL_REGISTER(setStatus),
-    //SOL_REGISTER(getCurrentAction),
+    // SOL_REGISTER(initNpcAi),
+    // SOL_REGISTER(resetAI),
+    // SOL_REGISTER(getStatus),
+    // SOL_REGISTER(setStatus),
+    // SOL_REGISTER(getCurrentAction),
 
-    //SOL_REGISTER(lookAt),
-    //SOL_REGISTER(clearTargID),
+    // SOL_REGISTER(lookAt),
+    // SOL_REGISTER(clearTargID),
 
-    //SOL_REGISTER(atPoint),
-    //SOL_REGISTER(pathTo),
-    //SOL_REGISTER(pathThrough),
-    //SOL_REGISTER(isFollowingPath),
-    //SOL_REGISTER(clearPath),
-    //SOL_REGISTER(checkDistance),
-    //SOL_REGISTER(wait),
+    // SOL_REGISTER(atPoint),
+    // SOL_REGISTER(pathTo),
+    // SOL_REGISTER(pathThrough),
+    // SOL_REGISTER(isFollowingPath),
+    // SOL_REGISTER(clearPath),
+    // SOL_REGISTER(checkDistance),
+    // SOL_REGISTER(wait),
 
-    //SOL_REGISTER(openDoor),
-    //SOL_REGISTER(closeDoor),
-    //SOL_REGISTER(setElevator),
+    // SOL_REGISTER(openDoor),
+    // SOL_REGISTER(closeDoor),
+    // SOL_REGISTER(setElevator),
 
-    //SOL_REGISTER(addPeriodicTrigger),
-    //SOL_REGISTER(showNPC),
-    //SOL_REGISTER(hideNPC),
-    //SOL_REGISTER(updateNPCHideTime),
+    // SOL_REGISTER(addPeriodicTrigger),
+    // SOL_REGISTER(showNPC),
+    // SOL_REGISTER(hideNPC),
+    // SOL_REGISTER(updateNPCHideTime),
 
-    //SOL_REGISTER(getWeather),
-    //SOL_REGISTER(setWeather),
+    // SOL_REGISTER(getWeather),
+    // SOL_REGISTER(setWeather),
 
     // PC Instructions
-    //SOL_REGISTER(ChangeMusic),
-    //SOL_REGISTER(sendMenu),
-    //SOL_REGISTER(sendGuild),
-    //SOL_REGISTER(openSendBox),
-    //SOL_REGISTER(leavegame),
-    //SOL_REGISTER(sendEmote),
+    // SOL_REGISTER(ChangeMusic),
+    // SOL_REGISTER(sendMenu),
+    // SOL_REGISTER(sendGuild),
+    // SOL_REGISTER(openSendBox),
+    // SOL_REGISTER(leavegame),
+    // SOL_REGISTER(sendEmote),
 
     // Location and Positioning
-    //SOL_REGISTER(getWorldAngle),
-    //SOL_REGISTER(getFacingAngle),
-    //SOL_REGISTER(isFacing),
-    //SOL_REGISTER(isInfront),
-    //SOL_REGISTER(isBehind),
-    //SOL_REGISTER(isBeside),
+    // SOL_REGISTER(getWorldAngle),
+    // SOL_REGISTER(getFacingAngle),
+    // SOL_REGISTER(isFacing),
+    // SOL_REGISTER(isInfront),
+    // SOL_REGISTER(isBehind),
+    // SOL_REGISTER(isBeside),
 
-    //SOL_REGISTER(getZone),
-    //SOL_REGISTER(getZoneID),
-    //SOL_REGISTER(getZoneName),
-    //SOL_REGISTER(isZoneVisited),
-    //SOL_REGISTER(getPreviousZone),
-    //SOL_REGISTER(getCurrentRegion),
-    //SOL_REGISTER(getContinentID),
-    //SOL_REGISTER(isInMogHouse),
+    // SOL_REGISTER(getZone),
+    // SOL_REGISTER(getZoneID),
+    // SOL_REGISTER(getZoneName),
+    // SOL_REGISTER(isZoneVisited),
+    // SOL_REGISTER(getPreviousZone),
+    // SOL_REGISTER(getCurrentRegion),
+    // SOL_REGISTER(getContinentID),
+    // SOL_REGISTER(isInMogHouse),
 
-    //SOL_REGISTER(getPos),
-    //SOL_REGISTER(showPosition),
-    //SOL_REGISTER(getXPos),
-    //SOL_REGISTER(getYPos),
-    //SOL_REGISTER(getZPos),
-    //SOL_REGISTER(getRotPos),
-    //SOL_REGISTER(setPos),
+    // SOL_REGISTER(getPos),
+    // SOL_REGISTER(showPosition),
+    // SOL_REGISTER(getXPos),
+    // SOL_REGISTER(getYPos),
+    // SOL_REGISTER(getZPos),
+    // SOL_REGISTER(getRotPos),
+    // SOL_REGISTER(setPos),
 
-    //SOL_REGISTER(warp),
-    //SOL_REGISTER(teleport),
-    //SOL_REGISTER(addTeleport),
-    //SOL_REGISTER(getTeleport),
-    //SOL_REGISTER(hasTeleport),
-    //SOL_REGISTER(setTeleportMenu),
-    //SOL_REGISTER(getTeleportMenu),
-    //SOL_REGISTER(setHomePoint),
-    //SOL_REGISTER(resetPlayer),
+    // SOL_REGISTER(warp),
+    // SOL_REGISTER(teleport),
+    // SOL_REGISTER(addTeleport),
+    // SOL_REGISTER(getTeleport),
+    // SOL_REGISTER(hasTeleport),
+    // SOL_REGISTER(setTeleportMenu),
+    // SOL_REGISTER(getTeleportMenu),
+    // SOL_REGISTER(setHomePoint),
+    // SOL_REGISTER(resetPlayer),
 
-    //SOL_REGISTER(goToEntity),
-    //SOL_REGISTER(gotoPlayer),
-    //SOL_REGISTER(bringPlayer),
+    // SOL_REGISTER(goToEntity),
+    // SOL_REGISTER(gotoPlayer),
+    // SOL_REGISTER(bringPlayer),
 
     // Items
-    SOL_REGISTER(getEquipID)
-    //SOL_REGISTER(getEquippedItem),
-    //SOL_REGISTER(hasItem),
-    //SOL_REGISTER(addItem),
-    //SOL_REGISTER(delItem),
-    //SOL_REGISTER(addUsedItem),
-    //SOL_REGISTER(addTempItem),
-    //SOL_REGISTER(hasWornItem),
-    //SOL_REGISTER(createWornItem),
+    SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
+    // SOL_REGISTER(getEquippedItem),
+    // SOL_REGISTER(hasItem),
+    // SOL_REGISTER(addItem),
+    // SOL_REGISTER(delItem),
+    // SOL_REGISTER(addUsedItem),
+    // SOL_REGISTER(addTempItem),
+    // SOL_REGISTER(hasWornItem),
+    // SOL_REGISTER(createWornItem),
 
-    //SOL_REGISTER(createShop),
-    //SOL_REGISTER(addShopItem),
-    //SOL_REGISTER(getCurrentGPItem),
-    //SOL_REGISTER(breakLinkshell),
+    // SOL_REGISTER(createShop),
+    // SOL_REGISTER(addShopItem),
+    // SOL_REGISTER(getCurrentGPItem),
+    // SOL_REGISTER(breakLinkshell),
 
     // Trading
-    //SOL_REGISTER(getContainerSize),
-    //SOL_REGISTER(changeContainerSize),
-    //SOL_REGISTER(getFreeSlotsCount),
-    //SOL_REGISTER(confirmTrade),
-    //SOL_REGISTER(tradeComplete),
+    // SOL_REGISTER(getContainerSize),
+    // SOL_REGISTER(changeContainerSize),
+    // SOL_REGISTER(getFreeSlotsCount),
+    // SOL_REGISTER(confirmTrade),
+    // SOL_REGISTER(tradeComplete),
 
     // Equipping
-    //SOL_REGISTER(canEquipItem),
-    //SOL_REGISTER(equipItem),
-    //SOL_REGISTER(unequipItem),
+    // SOL_REGISTER(canEquipItem),
+    // SOL_REGISTER(equipItem),
+    // SOL_REGISTER(unequipItem),
 
-    //SOL_REGISTER(setEquipBlock),
-    //SOL_REGISTER(lockEquipSlot),
-    //SOL_REGISTER(unlockEquipSlot),
+    // SOL_REGISTER(setEquipBlock),
+    // SOL_REGISTER(lockEquipSlot),
+    // SOL_REGISTER(unlockEquipSlot),
 
-    //SOL_REGISTER(getShieldSize),
+    // SOL_REGISTER(getShieldSize),
 
-    SOL_REGISTER(hasGearSetMod)
-    SOL_REGISTER(addGearSetMod)
-    SOL_REGISTER(clearGearSetMods)
+    SOL_REGISTER("hasGearSetMod", CLuaBaseEntity::hasGearSetMod);
+    SOL_REGISTER("addGearSetMod", CLuaBaseEntity::addGearSetMod);
+    SOL_REGISTER("clearGearSetMods", CLuaBaseEntity::clearGearSetMods);
 
     // Storing
-    //SOL_REGISTER(getStorageItem),
-    //SOL_REGISTER(storeWithPorterMoogle),
-    //SOL_REGISTER(getRetrievableItemsForSlip),
-    //SOL_REGISTER(retrieveItemFromSlip),
+    // SOL_REGISTER(getStorageItem),
+    // SOL_REGISTER(storeWithPorterMoogle),
+    // SOL_REGISTER(getRetrievableItemsForSlip),
+    // SOL_REGISTER(retrieveItemFromSlip),
 
     // Player Appearance
-    //SOL_REGISTER(getRace),
-    //SOL_REGISTER(getGender),
-    SOL_REGISTER(getName)
-    //SOL_REGISTER(hideName),
-    //SOL_REGISTER(checkNameFlags),
-    //SOL_REGISTER(getModelId),
-    //SOL_REGISTER(setModelId),
-    //SOL_REGISTER(costume),
-    //SOL_REGISTER(costume2),
+    // SOL_REGISTER(getRace),
+    // SOL_REGISTER(getGender),
+    SOL_REGISTER("getName", CLuaBaseEntity::getName);
+    // SOL_REGISTER(hideName),
+    // SOL_REGISTER(checkNameFlags),
+    // SOL_REGISTER(getModelId),
+    // SOL_REGISTER(setModelId),
+    // SOL_REGISTER(costume),
+    // SOL_REGISTER(costume2),
 
-    //SOL_REGISTER(getAnimation),
-    //SOL_REGISTER(setAnimation),
-    //SOL_REGISTER(AnimationSub),
+    // SOL_REGISTER(getAnimation),
+    // SOL_REGISTER(setAnimation),
+    // SOL_REGISTER(AnimationSub),
 
     // Player Status
-    //SOL_REGISTER(getNation),
-    //SOL_REGISTER(setNation),
-    //SOL_REGISTER(getAllegiance),
-    //SOL_REGISTER(setAllegiance),
-    //SOL_REGISTER(getCampaignAllegiance),
-    //SOL_REGISTER(setCampaignAllegiance),
+    // SOL_REGISTER(getNation),
+    // SOL_REGISTER(setNation),
+    // SOL_REGISTER(getAllegiance),
+    // SOL_REGISTER(setAllegiance),
+    // SOL_REGISTER(getCampaignAllegiance),
+    // SOL_REGISTER(setCampaignAllegiance),
 
-    //SOL_REGISTER(isSeekingParty),
-    //SOL_REGISTER(getNewPlayer),
-    //SOL_REGISTER(setNewPlayer),
-    //SOL_REGISTER(getMentor),
-    //SOL_REGISTER(setMentor),
+    // SOL_REGISTER(isSeekingParty),
+    // SOL_REGISTER(getNewPlayer),
+    // SOL_REGISTER(setNewPlayer),
+    // SOL_REGISTER(getMentor),
+    // SOL_REGISTER(setMentor),
 
-    //SOL_REGISTER(getGMLevel),
-    //SOL_REGISTER(setGMLevel),
-    //SOL_REGISTER(getGMHidden),
-    //SOL_REGISTER(setGMHidden),
+    // SOL_REGISTER(getGMLevel),
+    // SOL_REGISTER(setGMLevel),
+    // SOL_REGISTER(getGMHidden),
+    // SOL_REGISTER(setGMHidden),
 
-    //SOL_REGISTER(isJailed),
-    //SOL_REGISTER(jail),
+    // SOL_REGISTER(isJailed),
+    // SOL_REGISTER(jail),
 
-    //SOL_REGISTER(canUseMisc),
+    // SOL_REGISTER(canUseMisc),
 
-    //SOL_REGISTER(speed),
+    // SOL_REGISTER(speed),
 
-    //SOL_REGISTER(getPlaytime),
-    //SOL_REGISTER(getTimeCreated),
+    // SOL_REGISTER(getPlaytime),
+    // SOL_REGISTER(getTimeCreated),
 
     // Player Jobs and Levels
-    //SOL_REGISTER(getMainJob),
-    //SOL_REGISTER(getSubJob),
-    //SOL_REGISTER(changeJob),
-    //SOL_REGISTER(changesJob),
-    //SOL_REGISTER(unlockJob),
-    //SOL_REGISTER(hasJob),
+    // SOL_REGISTER(getMainJob),
+    // SOL_REGISTER(getSubJob),
+    // SOL_REGISTER(changeJob),
+    // SOL_REGISTER(changesJob),
+    // SOL_REGISTER(unlockJob),
+    // SOL_REGISTER(hasJob),
 
-    //SOL_REGISTER(getMainLvl),
-    //SOL_REGISTER(getSubLvl),
-    //SOL_REGISTER(getJobLevel),
-    //SOL_REGISTER(setLevel),
-    //SOL_REGISTER(setsLevel),
-    //SOL_REGISTER(levelCap),
-    //SOL_REGISTER(levelRestriction),
-    //SOL_REGISTER(addJobTraits),
+    // SOL_REGISTER(getMainLvl),
+    // SOL_REGISTER(getSubLvl),
+    // SOL_REGISTER(getJobLevel),
+    // SOL_REGISTER(setLevel),
+    // SOL_REGISTER(setsLevel),
+    // SOL_REGISTER(levelCap),
+    // SOL_REGISTER(levelRestriction),
+    // SOL_REGISTER(addJobTraits),
 
     // Player Titles and Fame
-    //SOL_REGISTER(getTitle),
-    //SOL_REGISTER(hasTitle),
-    //SOL_REGISTER(addTitle),
-    //SOL_REGISTER(setTitle),
-    //SOL_REGISTER(delTitle),
+    // SOL_REGISTER(getTitle),
+    // SOL_REGISTER(hasTitle),
+    // SOL_REGISTER(addTitle),
+    // SOL_REGISTER(setTitle),
+    // SOL_REGISTER(delTitle),
 
-    //SOL_REGISTER(getFame),
-    //SOL_REGISTER(addFame),
-    //SOL_REGISTER(setFame),
-    //SOL_REGISTER(getFameLevel),
+    // SOL_REGISTER(getFame),
+    // SOL_REGISTER(addFame),
+    // SOL_REGISTER(setFame),
+    // SOL_REGISTER(getFameLevel),
 
-    //SOL_REGISTER(getRank),
-    //SOL_REGISTER(setRank),
-    //SOL_REGISTER(getRankPoints),
-    //SOL_REGISTER(addRankPoints),
-    //SOL_REGISTER(setRankPoints),
+    // SOL_REGISTER(getRank),
+    // SOL_REGISTER(setRank),
+    // SOL_REGISTER(getRankPoints),
+    // SOL_REGISTER(addRankPoints),
+    // SOL_REGISTER(setRankPoints),
 
-    //SOL_REGISTER(addQuest),
-    //SOL_REGISTER(delQuest),
-    //SOL_REGISTER(getQuestStatus),
-    //SOL_REGISTER(hasCompletedQuest),
-    //SOL_REGISTER(completeQuest),
+    // SOL_REGISTER(addQuest),
+    // SOL_REGISTER(delQuest),
+    // SOL_REGISTER(getQuestStatus),
+    // SOL_REGISTER(hasCompletedQuest),
+    // SOL_REGISTER(completeQuest),
 
-    //SOL_REGISTER(addMission),
-    //SOL_REGISTER(delMission),
-    //SOL_REGISTER(getCurrentMission),
-    //SOL_REGISTER(hasCompletedMission),
-    //SOL_REGISTER(completeMission),
-    //SOL_REGISTER(setMissionLogEx),
-    //SOL_REGISTER(getMissionLogEx),
-    //SOL_REGISTER(getEminenceCompleted),
-    //SOL_REGISTER(setEminenceCompleted),
-    //SOL_REGISTER(getEminenceProgress),
-    //SOL_REGISTER(setEminenceProgress),
+    // SOL_REGISTER(addMission),
+    // SOL_REGISTER(delMission),
+    // SOL_REGISTER(getCurrentMission),
+    // SOL_REGISTER(hasCompletedMission),
+    // SOL_REGISTER(completeMission),
+    // SOL_REGISTER(setMissionLogEx),
+    // SOL_REGISTER(getMissionLogEx),
+    // SOL_REGISTER(getEminenceCompleted),
+    // SOL_REGISTER(setEminenceCompleted),
+    // SOL_REGISTER(getEminenceProgress),
+    // SOL_REGISTER(setEminenceProgress),
 
-    //SOL_REGISTER(addAssault),
-    //SOL_REGISTER(delAssault),
-    //SOL_REGISTER(getCurrentAssault),
-    //SOL_REGISTER(hasCompletedAssault),
-    //SOL_REGISTER(completeAssault),
+    // SOL_REGISTER(addAssault),
+    // SOL_REGISTER(delAssault),
+    // SOL_REGISTER(getCurrentAssault),
+    // SOL_REGISTER(hasCompletedAssault),
+    // SOL_REGISTER(completeAssault),
 
-    //SOL_REGISTER(addKeyItem),
-    //SOL_REGISTER(delKeyItem),
-    //SOL_REGISTER(hasKeyItem),
-    //SOL_REGISTER(seenKeyItem),
-    //SOL_REGISTER(unseenKeyItem),
+    // SOL_REGISTER(addKeyItem),
+    // SOL_REGISTER(delKeyItem),
+    // SOL_REGISTER(hasKeyItem),
+    // SOL_REGISTER(seenKeyItem),
+    // SOL_REGISTER(unseenKeyItem),
 
     // Player Points
-    //SOL_REGISTER(addExp),
-    //SOL_REGISTER(delExp),
-    //SOL_REGISTER(getMerit),
-    //SOL_REGISTER(getMeritCount),
-    //SOL_REGISTER(setMerits),
+    // SOL_REGISTER(addExp),
+    // SOL_REGISTER(delExp),
+    // SOL_REGISTER(getMerit),
+    // SOL_REGISTER(getMeritCount),
+    // SOL_REGISTER(setMerits),
 
-    //SOL_REGISTER(getGil),
-    //SOL_REGISTER(addGil),
-    //SOL_REGISTER(setGil),
-    //SOL_REGISTER(delGil),
+    // SOL_REGISTER(getGil),
+    // SOL_REGISTER(addGil),
+    // SOL_REGISTER(setGil),
+    // SOL_REGISTER(delGil),
 
-    //SOL_REGISTER(getCP),
-    //SOL_REGISTER(addCP),
-    //SOL_REGISTER(delCP),
+    // SOL_REGISTER(getCP),
+    // SOL_REGISTER(addCP),
+    // SOL_REGISTER(delCP),
 
-    //SOL_REGISTER(getSeals),
-    //SOL_REGISTER(addSeals),
-    //SOL_REGISTER(delSeals),
+    // SOL_REGISTER(getSeals),
+    // SOL_REGISTER(addSeals),
+    // SOL_REGISTER(delSeals),
 
-    //SOL_REGISTER(getCurrency),
-    //SOL_REGISTER(addCurrency),
-    //SOL_REGISTER(setCurrency),
-    //SOL_REGISTER(delCurrency),
+    // SOL_REGISTER(getCurrency),
+    // SOL_REGISTER(addCurrency),
+    // SOL_REGISTER(setCurrency),
+    // SOL_REGISTER(delCurrency),
 
-    //SOL_REGISTER(getAssaultPoint),
-    //SOL_REGISTER(addAssaultPoint),
-    //SOL_REGISTER(delAssaultPoint),
+    // SOL_REGISTER(getAssaultPoint),
+    // SOL_REGISTER(addAssaultPoint),
+    // SOL_REGISTER(delAssaultPoint),
 
-    //SOL_REGISTER(addGuildPoints),
+    // SOL_REGISTER(addGuildPoints),
 
     // Health and Status
-    //SOL_REGISTER(getHP),
-    //SOL_REGISTER(getHPP),
-    //SOL_REGISTER(getMaxHP),
-    //SOL_REGISTER(getBaseHP),
-    //SOL_REGISTER(addHP),
-    //SOL_REGISTER(setHP),
-    //SOL_REGISTER(restoreHP),
-    //SOL_REGISTER(delHP),
-    //SOL_REGISTER(takeDamage),
-    //SOL_REGISTER(hideHP),
+    // SOL_REGISTER(getHP),
+    // SOL_REGISTER(getHPP),
+    // SOL_REGISTER(getMaxHP),
+    // SOL_REGISTER(getBaseHP),
+    // SOL_REGISTER(addHP),
+    // SOL_REGISTER(setHP),
+    // SOL_REGISTER(restoreHP),
+    // SOL_REGISTER(delHP),
+    // SOL_REGISTER(takeDamage),
+    // SOL_REGISTER(hideHP),
 
-    //SOL_REGISTER(getMP),
+    // SOL_REGISTER(getMP),
     // Got an MPP? Well, I then you don't know me...
-    //SOL_REGISTER(getMaxMP),
-    //SOL_REGISTER(getBaseMP),
-    //SOL_REGISTER(addMP),
-    //SOL_REGISTER(setMP),
-    //SOL_REGISTER(restoreMP),
-    //SOL_REGISTER(delMP),
+    // SOL_REGISTER(getMaxMP),
+    // SOL_REGISTER(getBaseMP),
+    // SOL_REGISTER(addMP),
+    // SOL_REGISTER(setMP),
+    // SOL_REGISTER(restoreMP),
+    // SOL_REGISTER(delMP),
 
-    //SOL_REGISTER(getTP),
-    //SOL_REGISTER(addTP),
-    //SOL_REGISTER(setTP),
-    //SOL_REGISTER(delTP),
+    // SOL_REGISTER(getTP),
+    // SOL_REGISTER(addTP),
+    // SOL_REGISTER(setTP),
+    // SOL_REGISTER(delTP),
 
-    //SOL_REGISTER(updateHealth),
+    // SOL_REGISTER(updateHealth),
 
     // Skills and Abilities
-    //SOL_REGISTER(capSkill),
-    //SOL_REGISTER(capAllSkills),
+    // SOL_REGISTER(capSkill),
+    // SOL_REGISTER(capAllSkills),
 
-    //SOL_REGISTER(getSkillLevel),
-    //SOL_REGISTER(setSkillLevel),
-    //SOL_REGISTER(getMaxSkillLevel),
-    //SOL_REGISTER(getSkillRank),
-    //SOL_REGISTER(setSkillRank),
-    //SOL_REGISTER(getCharSkillLevel),
+    // SOL_REGISTER(getSkillLevel),
+    // SOL_REGISTER(setSkillLevel),
+    // SOL_REGISTER(getMaxSkillLevel),
+    // SOL_REGISTER(getSkillRank),
+    // SOL_REGISTER(setSkillRank),
+    // SOL_REGISTER(getCharSkillLevel),
 
-    //SOL_REGISTER(addLearnedWeaponskill),
-    //SOL_REGISTER(hasLearnedWeaponskill),
-    //SOL_REGISTER(delLearnedWeaponskill),
+    // SOL_REGISTER(addLearnedWeaponskill),
+    // SOL_REGISTER(hasLearnedWeaponskill),
+    // SOL_REGISTER(delLearnedWeaponskill),
 
-    //SOL_REGISTER(addWeaponSkillPoints),
+    // SOL_REGISTER(addWeaponSkillPoints),
 
-    //SOL_REGISTER(addLearnedAbility),
-    //SOL_REGISTER(hasLearnedAbility),
-    //SOL_REGISTER(canLearnAbility),
-    //SOL_REGISTER(delLearnedAbility),
+    // SOL_REGISTER(addLearnedAbility),
+    // SOL_REGISTER(hasLearnedAbility),
+    // SOL_REGISTER(canLearnAbility),
+    // SOL_REGISTER(delLearnedAbility),
 
-    //SOL_REGISTER(addSpell),
-    //SOL_REGISTER(hasSpell),
-    //SOL_REGISTER(canLearnSpell),
-    //SOL_REGISTER(delSpell),
+    // SOL_REGISTER(addSpell),
+    // SOL_REGISTER(hasSpell),
+    // SOL_REGISTER(canLearnSpell),
+    // SOL_REGISTER(delSpell),
 
-    //SOL_REGISTER(recalculateSkillsTable),
-    //SOL_REGISTER(recalculateAbilitiesTable),
+    // SOL_REGISTER(recalculateSkillsTable),
+    // SOL_REGISTER(recalculateAbilitiesTable),
 
     // Parties and Alliances
-    //SOL_REGISTER(getParty),
-    //SOL_REGISTER(getPartyWithTrusts),
-    //SOL_REGISTER(getPartySize),
-    //SOL_REGISTER(hasPartyJob),
-    //SOL_REGISTER(getPartyMember),
-    //SOL_REGISTER(getPartyLeader),
-    //SOL_REGISTER(getLeaderID),
-    //SOL_REGISTER(getPartyLastMemberJoinedTime),
-    //SOL_REGISTER(forMembersInRange),
+    // SOL_REGISTER(getParty),
+    // SOL_REGISTER(getPartyWithTrusts),
+    // SOL_REGISTER(getPartySize),
+    // SOL_REGISTER(hasPartyJob),
+    // SOL_REGISTER(getPartyMember),
+    // SOL_REGISTER(getPartyLeader),
+    // SOL_REGISTER(getLeaderID),
+    // SOL_REGISTER(getPartyLastMemberJoinedTime),
+    // SOL_REGISTER(forMembersInRange),
 
-    //SOL_REGISTER(addPartyEffect),
-    //SOL_REGISTER(hasPartyEffect),
-    //SOL_REGISTER(removePartyEffect),
+    // SOL_REGISTER(addPartyEffect),
+    // SOL_REGISTER(hasPartyEffect),
+    // SOL_REGISTER(removePartyEffect),
 
-    //SOL_REGISTER(getAlliance),
-    //SOL_REGISTER(getAllianceSize),
+    // SOL_REGISTER(getAlliance),
+    // SOL_REGISTER(getAllianceSize),
 
-    //SOL_REGISTER(reloadParty),
-    //SOL_REGISTER(disableLevelSync),
-    //SOL_REGISTER(isLevelSync),
+    // SOL_REGISTER(reloadParty),
+    // SOL_REGISTER(disableLevelSync),
+    // SOL_REGISTER(isLevelSync),
 
-    //SOL_REGISTER(checkSoloPartyAlliance),
+    // SOL_REGISTER(checkSoloPartyAlliance),
 
-    //SOL_REGISTER(checkKillCredit),
+    // SOL_REGISTER(checkKillCredit),
 
     // Instances
-    //SOL_REGISTER(getInstance),
-    //SOL_REGISTER(setInstance),
-    //SOL_REGISTER(createInstance),
-    //SOL_REGISTER(instanceEntry),
+    // SOL_REGISTER(getInstance),
+    // SOL_REGISTER(setInstance),
+    // SOL_REGISTER(createInstance),
+    // SOL_REGISTER(instanceEntry),
 
-    //SOL_REGISTER(getConfrontationEffect),
-    //SOL_REGISTER(copyConfrontationEffect),
+    // SOL_REGISTER(getConfrontationEffect),
+    // SOL_REGISTER(copyConfrontationEffect),
 
     // Battlefields
-    //SOL_REGISTER(getBattlefield),
-    //SOL_REGISTER(getBattlefieldID),
-    //SOL_REGISTER(registerBattlefield),
-    //SOL_REGISTER(battlefieldAtCapacity),
-    //SOL_REGISTER(enterBattlefield),
-    //SOL_REGISTER(leaveBattlefield),
-    //SOL_REGISTER(isInDynamis),
+    // SOL_REGISTER(getBattlefield),
+    // SOL_REGISTER(getBattlefieldID),
+    // SOL_REGISTER(registerBattlefield),
+    // SOL_REGISTER(battlefieldAtCapacity),
+    // SOL_REGISTER(enterBattlefield),
+    // SOL_REGISTER(leaveBattlefield),
+    // SOL_REGISTER(isInDynamis),
 
     //// Battle Utilities
-    //SOL_REGISTER(isAlive),
-    //SOL_REGISTER(isDead),
+    // SOL_REGISTER(isAlive),
+    // SOL_REGISTER(isDead),
 
-    //SOL_REGISTER(sendRaise),
-    //SOL_REGISTER(sendReraise),
-    //SOL_REGISTER(sendTractor),
+    // SOL_REGISTER(sendRaise),
+    // SOL_REGISTER(sendReraise),
+    // SOL_REGISTER(sendTractor),
 
-    //SOL_REGISTER(messageCombat),
-    //SOL_REGISTER(countdown),
-    //SOL_REGISTER(enableEntities),
-    //SOL_REGISTER(independantAnimation),
+    // SOL_REGISTER(messageCombat),
+    // SOL_REGISTER(countdown),
+    // SOL_REGISTER(enableEntities),
+    // SOL_REGISTER(independantAnimation),
 
-    //SOL_REGISTER(engage),
-    //SOL_REGISTER(isEngaged),
-    //SOL_REGISTER(disengage),
-    //SOL_REGISTER(timer),
-    //SOL_REGISTER(queue),
-    //SOL_REGISTER(addRecast),
-    //SOL_REGISTER(hasRecast),
-    //SOL_REGISTER(resetRecast),
-    //SOL_REGISTER(resetRecasts),
+    // SOL_REGISTER(engage),
+    // SOL_REGISTER(isEngaged),
+    // SOL_REGISTER(disengage),
+    // SOL_REGISTER(timer),
+    // SOL_REGISTER(queue),
+    // SOL_REGISTER(addRecast),
+    // SOL_REGISTER(hasRecast),
+    // SOL_REGISTER(resetRecast),
+    // SOL_REGISTER(resetRecasts),
 
-    //SOL_REGISTER(addListener),
-    //SOL_REGISTER(removeListener),
-    //SOL_REGISTER(triggerListener),
+    // SOL_REGISTER(addListener),
+    // SOL_REGISTER(removeListener),
+    // SOL_REGISTER(triggerListener),
 
-    //SOL_REGISTER(getEntity),
-    //SOL_REGISTER(getNearbyEntities),
-    //SOL_REGISTER(canChangeState),
+    // SOL_REGISTER(getEntity),
+    // SOL_REGISTER(getNearbyEntities),
+    // SOL_REGISTER(canChangeState),
 
-    //SOL_REGISTER(wakeUp),
+    // SOL_REGISTER(wakeUp),
 
-    //SOL_REGISTER(recalculateStats),
-    //SOL_REGISTER(checkImbuedItems),
+    // SOL_REGISTER(recalculateStats),
+    // SOL_REGISTER(checkImbuedItems),
 
-    //SOL_REGISTER(isDualWielding),
+    // SOL_REGISTER(isDualWielding),
 
     // Enmity
-    //SOL_REGISTER(getCE),
-    //SOL_REGISTER(getVE),
-    //SOL_REGISTER(setCE),
-    //SOL_REGISTER(setVE),
-    //SOL_REGISTER(addEnmity),
-    //SOL_REGISTER(lowerEnmity),
-    //SOL_REGISTER(updateEnmity),
-    //SOL_REGISTER(transferEnmity),
-    //SOL_REGISTER(updateEnmityFromDamage),
-    //SOL_REGISTER(updateEnmityFromCure),
-    //SOL_REGISTER(resetEnmity),
-    //SOL_REGISTER(updateClaim),
-    //SOL_REGISTER(hasEnmity),
-    //SOL_REGISTER(getNotorietyList),
+    // SOL_REGISTER(getCE),
+    // SOL_REGISTER(getVE),
+    // SOL_REGISTER(setCE),
+    // SOL_REGISTER(setVE),
+    // SOL_REGISTER(addEnmity),
+    // SOL_REGISTER(lowerEnmity),
+    // SOL_REGISTER(updateEnmity),
+    // SOL_REGISTER(transferEnmity),
+    // SOL_REGISTER(updateEnmityFromDamage),
+    // SOL_REGISTER(updateEnmityFromCure),
+    // SOL_REGISTER(resetEnmity),
+    // SOL_REGISTER(updateClaim),
+    // SOL_REGISTER(hasEnmity),
+    // SOL_REGISTER(getNotorietyList),
 
     // Status Effects
-    //SOL_REGISTER(addStatusEffect),
-    //SOL_REGISTER(addStatusEffectEx),
-    //SOL_REGISTER(getStatusEffect),
-    //SOL_REGISTER(getStatusEffects),
-    //SOL_REGISTER(getStatusEffectElement),
-    //SOL_REGISTER(canGainStatusEffect),
-    //SOL_REGISTER(hasStatusEffect),
-    //SOL_REGISTER(hasStatusEffectByFlag),
-    //SOL_REGISTER(countEffect),
+    // SOL_REGISTER(addStatusEffect),
+    // SOL_REGISTER(addStatusEffectEx),
+    // SOL_REGISTER(getStatusEffect),
+    // SOL_REGISTER(getStatusEffects),
+    // SOL_REGISTER(getStatusEffectElement),
+    // SOL_REGISTER(canGainStatusEffect),
+    // SOL_REGISTER(hasStatusEffect),
+    // SOL_REGISTER(hasStatusEffectByFlag),
+    // SOL_REGISTER(countEffect),
 
-    //SOL_REGISTER(delStatusEffect),
-    //SOL_REGISTER(delStatusEffectsByFlag),
-    //SOL_REGISTER(delStatusEffectSilent),
-    //SOL_REGISTER(eraseStatusEffect),
-    //SOL_REGISTER(eraseAllStatusEffect),
-    //SOL_REGISTER(dispelStatusEffect),
-    //SOL_REGISTER(dispelAllStatusEffect),
-    //SOL_REGISTER(stealStatusEffect),
+    // SOL_REGISTER(delStatusEffect),
+    // SOL_REGISTER(delStatusEffectsByFlag),
+    // SOL_REGISTER(delStatusEffectSilent),
+    // SOL_REGISTER(eraseStatusEffect),
+    // SOL_REGISTER(eraseAllStatusEffect),
+    // SOL_REGISTER(dispelStatusEffect),
+    // SOL_REGISTER(dispelAllStatusEffect),
+    // SOL_REGISTER(stealStatusEffect),
 
-    //SOL_REGISTER(addMod),
-    //SOL_REGISTER(getMod),
-    //SOL_REGISTER(setMod),
-    //SOL_REGISTER(delMod),
+    // SOL_REGISTER(addMod),
+    // SOL_REGISTER(getMod),
+    // SOL_REGISTER(setMod),
+    // SOL_REGISTER(delMod),
 
-    //SOL_REGISTER(addLatent),
-    //SOL_REGISTER(delLatent),
+    // SOL_REGISTER(addLatent),
+    // SOL_REGISTER(delLatent),
 
-    //SOL_REGISTER(fold),
-    //SOL_REGISTER(doWildCard),
-    //SOL_REGISTER(addCorsairRoll),
-    //SOL_REGISTER(hasCorsairEffect),
-    //SOL_REGISTER(hasBustEffect),
-    //SOL_REGISTER(numBustEffects),
-    //SOL_REGISTER(healingWaltz),
-    //SOL_REGISTER(addBardSong),
+    // SOL_REGISTER(fold),
+    // SOL_REGISTER(doWildCard),
+    // SOL_REGISTER(addCorsairRoll),
+    // SOL_REGISTER(hasCorsairEffect),
+    // SOL_REGISTER(hasBustEffect),
+    // SOL_REGISTER(numBustEffects),
+    // SOL_REGISTER(healingWaltz),
+    // SOL_REGISTER(addBardSong),
 
-    //SOL_REGISTER(charm),
-    //SOL_REGISTER(uncharm),
+    // SOL_REGISTER(charm),
+    // SOL_REGISTER(uncharm),
 
-    //SOL_REGISTER(addBurden),
-    //SOL_REGISTER(setStatDebilitation),
+    // SOL_REGISTER(addBurden),
+    // SOL_REGISTER(setStatDebilitation),
 
     // Damage Calculation
-    //SOL_REGISTER(getStat),
-    //SOL_REGISTER(getACC),
-    //SOL_REGISTER(getEVA),
-    //SOL_REGISTER(getRACC),
-    //SOL_REGISTER(getRATT),
-    //SOL_REGISTER(getILvlMacc),
+    // SOL_REGISTER(getStat),
+    // SOL_REGISTER(getACC),
+    // SOL_REGISTER(getEVA),
+    // SOL_REGISTER(getRACC),
+    // SOL_REGISTER(getRATT),
+    // SOL_REGISTER(getILvlMacc),
 
-    //SOL_REGISTER(isSpellAoE),
+    // SOL_REGISTER(isSpellAoE),
 
-    //SOL_REGISTER(physicalDmgTaken),
-    //SOL_REGISTER(magicDmgTaken),
-    //SOL_REGISTER(rangedDmgTaken),
-    //SOL_REGISTER(breathDmgTaken),
-    //SOL_REGISTER(handleAfflatusMiseryDamage),
+    // SOL_REGISTER(physicalDmgTaken),
+    // SOL_REGISTER(magicDmgTaken),
+    // SOL_REGISTER(rangedDmgTaken),
+    // SOL_REGISTER(breathDmgTaken),
+    // SOL_REGISTER(handleAfflatusMiseryDamage),
 
-    //SOL_REGISTER(isWeaponTwoHanded),
-    //SOL_REGISTER(getMeleeHitDamage),
-    //SOL_REGISTER(getWeaponDmg),
-    //SOL_REGISTER(getWeaponDmgRank),
-    //SOL_REGISTER(getOffhandDmg),
-    //SOL_REGISTER(getOffhandDmgRank),
-    //SOL_REGISTER(getRangedDmg),
-    //SOL_REGISTER(getRangedDmgRank),
-    //SOL_REGISTER(getAmmoDmg),
+    // SOL_REGISTER(isWeaponTwoHanded),
+    // SOL_REGISTER(getMeleeHitDamage),
+    // SOL_REGISTER(getWeaponDmg),
+    // SOL_REGISTER(getWeaponDmgRank),
+    // SOL_REGISTER(getOffhandDmg),
+    // SOL_REGISTER(getOffhandDmgRank),
+    // SOL_REGISTER(getRangedDmg),
+    // SOL_REGISTER(getRangedDmgRank),
+    // SOL_REGISTER(getAmmoDmg),
 
-    //SOL_REGISTER(removeAmmo),
+    // SOL_REGISTER(removeAmmo),
 
-    //SOL_REGISTER(getWeaponSkillLevel),
-    //SOL_REGISTER(getWeaponDamageType),
-    //SOL_REGISTER(getWeaponSkillType),
-    //SOL_REGISTER(getWeaponSubSkillType),
-    //SOL_REGISTER(getWSSkillchainProp),
+    // SOL_REGISTER(getWeaponSkillLevel),
+    // SOL_REGISTER(getWeaponDamageType),
+    // SOL_REGISTER(getWeaponSkillType),
+    // SOL_REGISTER(getWeaponSubSkillType),
+    // SOL_REGISTER(getWSSkillchainProp),
 
-    //SOL_REGISTER(takeWeaponskillDamage),
-    //SOL_REGISTER(takeSpellDamage),
+    // SOL_REGISTER(takeWeaponskillDamage),
+    // SOL_REGISTER(takeSpellDamage),
 
     // Pets and Automations
-    //SOL_REGISTER(spawnPet),
-    //SOL_REGISTER(despawnPet),
+    // SOL_REGISTER(spawnPet),
+    // SOL_REGISTER(despawnPet),
 
-    //SOL_REGISTER(isJugPet),
-    //SOL_REGISTER(hasValidJugPetItem),
+    // SOL_REGISTER(isJugPet),
+    // SOL_REGISTER(hasValidJugPetItem),
 
-    //SOL_REGISTER(hasPet),
-    //SOL_REGISTER(getPet),
-    //SOL_REGISTER(getPetID),
-    //SOL_REGISTER(getPetElement),
-    //SOL_REGISTER(getMaster),
+    // SOL_REGISTER(hasPet),
+    // SOL_REGISTER(getPet),
+    // SOL_REGISTER(getPetID),
+    // SOL_REGISTER(getPetElement),
+    // SOL_REGISTER(getMaster),
 
-    //SOL_REGISTER(getPetName),
-    //SOL_REGISTER(setPetName),
+    // SOL_REGISTER(getPetName),
+    // SOL_REGISTER(setPetName),
 
-    //SOL_REGISTER(getCharmChance),
-    //SOL_REGISTER(charmPet),
+    // SOL_REGISTER(getCharmChance),
+    // SOL_REGISTER(charmPet),
 
-    //SOL_REGISTER(petAttack),
-    //SOL_REGISTER(petAbility),
-    //SOL_REGISTER(petRetreat),
-    //SOL_REGISTER(familiar),
+    // SOL_REGISTER(petAttack),
+    // SOL_REGISTER(petAbility),
+    // SOL_REGISTER(petRetreat),
+    // SOL_REGISTER(familiar),
 
-    //SOL_REGISTER(addPetMod),
-    //SOL_REGISTER(setPetMod),
-    //SOL_REGISTER(delPetMod),
+    // SOL_REGISTER(addPetMod),
+    // SOL_REGISTER(setPetMod),
+    // SOL_REGISTER(delPetMod),
 
-    //SOL_REGISTER(hasAttachment),
-    //SOL_REGISTER(getAutomatonName),
-    //SOL_REGISTER(getAutomatonFrame),
-    //SOL_REGISTER(getAutomatonHead),
-    //SOL_REGISTER(unlockAttachment),
+    // SOL_REGISTER(hasAttachment),
+    // SOL_REGISTER(getAutomatonName),
+    // SOL_REGISTER(getAutomatonFrame),
+    // SOL_REGISTER(getAutomatonHead),
+    // SOL_REGISTER(unlockAttachment),
 
-    //SOL_REGISTER(getActiveManeuvers),
-    //SOL_REGISTER(removeOldestManeuver),
-    //SOL_REGISTER(removeAllManeuvers),
-    //SOL_REGISTER(updateAttachments),
+    // SOL_REGISTER(getActiveManeuvers),
+    // SOL_REGISTER(removeOldestManeuver),
+    // SOL_REGISTER(removeAllManeuvers),
+    // SOL_REGISTER(updateAttachments),
 
     // Trust related
-    //SOL_REGISTER(spawnTrust),
-    //SOL_REGISTER(clearTrusts),
-    //SOL_REGISTER(getTrustID),
-    //SOL_REGISTER(trustPartyMessage),
-    //SOL_REGISTER(addSimpleGambit),
-    //SOL_REGISTER(addFullGambit),
-    //SOL_REGISTER(setTrustTPSkillSettings),
+    // SOL_REGISTER(spawnTrust),
+    // SOL_REGISTER(clearTrusts),
+    // SOL_REGISTER(getTrustID),
+    // SOL_REGISTER(trustPartyMessage),
+    // SOL_REGISTER(addSimpleGambit),
+    // SOL_REGISTER(addFullGambit),
+    // SOL_REGISTER(setTrustTPSkillSettings),
 
     // Mob Entity-Specific
-    //SOL_REGISTER(setMobLevel),
-    //SOL_REGISTER(getSystem),
-    //SOL_REGISTER(getFamily),
-    //SOL_REGISTER(isMobType),
-    //SOL_REGISTER(isUndead),
-    //SOL_REGISTER(isNM),
+    // SOL_REGISTER(setMobLevel),
+    // SOL_REGISTER(getSystem),
+    // SOL_REGISTER(getFamily),
+    // SOL_REGISTER(isMobType),
+    // SOL_REGISTER(isUndead),
+    // SOL_REGISTER(isNM),
 
-    //SOL_REGISTER(getModelSize),
-    //SOL_REGISTER(setMobFlags),
-    //SOL_REGISTER(getMobFlags),
+    // SOL_REGISTER(getModelSize),
+    // SOL_REGISTER(setMobFlags),
+    // SOL_REGISTER(getMobFlags),
 
-    //SOL_REGISTER(spawn),
-    //SOL_REGISTER(isSpawned),
-    //SOL_REGISTER(getSpawnPos),
-    //SOL_REGISTER(setSpawn),
-    //SOL_REGISTER(getRespawnTime),
-    //SOL_REGISTER(setRespawnTime),
+    // SOL_REGISTER(spawn),
+    // SOL_REGISTER(isSpawned),
+    // SOL_REGISTER(getSpawnPos),
+    // SOL_REGISTER(setSpawn),
+    // SOL_REGISTER(getRespawnTime),
+    // SOL_REGISTER(setRespawnTime),
 
-    //SOL_REGISTER(instantiateMob),
+    // SOL_REGISTER(instantiateMob),
 
-    //SOL_REGISTER(hasTrait),
-    //SOL_REGISTER(hasImmunity),
+    // SOL_REGISTER(hasTrait),
+    // SOL_REGISTER(hasImmunity),
 
-    //SOL_REGISTER(setAggressive),
-    //SOL_REGISTER(setTrueDetection),
-    SOL_REGISTER(setUnkillable)
-    //SOL_REGISTER(untargetable),
+    // SOL_REGISTER(setAggressive),
+    // SOL_REGISTER(setTrueDetection),
+    SOL_REGISTER("setUnkillable", CLuaBaseEntity::setUnkillable);
+    // SOL_REGISTER(untargetable),
 
-    //SOL_REGISTER(setDelay),
-    //SOL_REGISTER(setDamage),
-    //SOL_REGISTER(hasSpellList),
-    //SOL_REGISTER(setSpellList),
-    //SOL_REGISTER(SetAutoAttackEnabled),
-    //SOL_REGISTER(SetMagicCastingEnabled),
-    //SOL_REGISTER(SetMobAbilityEnabled),
-    //SOL_REGISTER(SetMobSkillAttack),
+    // SOL_REGISTER(setDelay),
+    // SOL_REGISTER(setDamage),
+    // SOL_REGISTER(hasSpellList),
+    // SOL_REGISTER(setSpellList),
+    // SOL_REGISTER(SetAutoAttackEnabled),
+    // SOL_REGISTER(SetMagicCastingEnabled),
+    // SOL_REGISTER(SetMobAbilityEnabled),
+    // SOL_REGISTER(SetMobSkillAttack),
 
-    //SOL_REGISTER(getMobMod),
-    //SOL_REGISTER(setMobMod),
-    //SOL_REGISTER(addMobMod),
-    //SOL_REGISTER(delMobMod),
+    // SOL_REGISTER(getMobMod),
+    // SOL_REGISTER(setMobMod),
+    // SOL_REGISTER(addMobMod),
+    // SOL_REGISTER(delMobMod),
 
-    //SOL_REGISTER(getBattleTime),
+    // SOL_REGISTER(getBattleTime),
 
-    //SOL_REGISTER(getBehaviour),
-    //SOL_REGISTER(setBehaviour),
+    // SOL_REGISTER(getBehaviour),
+    // SOL_REGISTER(setBehaviour),
 
-    //SOL_REGISTER(getTarget),
-    //SOL_REGISTER(updateTarget),
-    //SOL_REGISTER(getEnmityList),
-    //SOL_REGISTER(getTrickAttackChar),
+    // SOL_REGISTER(getTarget),
+    // SOL_REGISTER(updateTarget),
+    // SOL_REGISTER(getEnmityList),
+    // SOL_REGISTER(getTrickAttackChar),
 
-    //SOL_REGISTER(actionQueueEmpty),
+    // SOL_REGISTER(actionQueueEmpty),
 
-    //SOL_REGISTER(castSpell),
-    //SOL_REGISTER(useJobAbility),
-    //SOL_REGISTER(useMobAbility),
-    //SOL_REGISTER(hasTPMoves),
+    // SOL_REGISTER(castSpell),
+    // SOL_REGISTER(useJobAbility),
+    // SOL_REGISTER(useMobAbility),
+    // SOL_REGISTER(hasTPMoves),
 
-    //SOL_REGISTER(weaknessTrigger),
-    //SOL_REGISTER(hasPreventActionEffect),
-    //SOL_REGISTER(stun),
+    // SOL_REGISTER(weaknessTrigger),
+    // SOL_REGISTER(hasPreventActionEffect),
+    // SOL_REGISTER(stun),
 
-    //SOL_REGISTER(getPool),
-    //SOL_REGISTER(getDropID),
-    //SOL_REGISTER(setDropID),
-    //SOL_REGISTER(addTreasure),
-    //SOL_REGISTER(getStealItem),
-    //SOL_REGISTER(getDespoilItem),
-    //SOL_REGISTER(getDespoilDebuff),
-    //SOL_REGISTER(itemStolen),
-    //SOL_REGISTER(getTHlevel),
-    //SOL_REGISTER(getPlayerRegionInZone),
-    //SOL_REGISTER(updateToEntireZone),
-
-    SOL_END()
-};
+    // SOL_REGISTER(getPool),
+    // SOL_REGISTER(getDropID),
+    // SOL_REGISTER(setDropID),
+    // SOL_REGISTER(addTreasure),
+    // SOL_REGISTER(getStealItem),
+    // SOL_REGISTER(getDespoilItem),
+    // SOL_REGISTER(getDespoilDebuff),
+    // SOL_REGISTER(itemStolen),
+    // SOL_REGISTER(getTHlevel),
+    // SOL_REGISTER(getPlayerRegionInZone),
+    // SOL_REGISTER(updateToEntireZone),
+}
 
 //==========================================================//

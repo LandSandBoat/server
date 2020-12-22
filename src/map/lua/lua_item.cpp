@@ -382,35 +382,34 @@ inline int32 CLuaItem::getSignature(lua_State* L)
 }
 //==========================================================//
 
-void CLuaItem::Register(sol::state& lua)
+void CLuaItem::Register()
 {
-    SOL_START(CItem, CLuaItem)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getSubID)
-    SOL_REGISTER(getFlag)
-    SOL_REGISTER(getAHCat)
-    SOL_REGISTER(getQuantity)
-    SOL_REGISTER(getLocationID)
-    SOL_REGISTER(getBasePrice)
-    SOL_REGISTER(getSlotID)
-    SOL_REGISTER(getTrialNumber)
-    SOL_REGISTER(getMatchingTrials)
-    SOL_REGISTER(getWornItem)
-    SOL_REGISTER(isType)
-    SOL_REGISTER(isSubType)
-    SOL_REGISTER(getName)
-    SOL_REGISTER(getILvl)
-    SOL_REGISTER(getReqLvl)
-    SOL_REGISTER(getMod)
-    SOL_REGISTER(addMod)
-    SOL_REGISTER(delMod)
-    SOL_REGISTER(getAugment)
-    SOL_REGISTER(getSkillType)
-    SOL_REGISTER(getWeaponskillPoints)
-    SOL_REGISTER(isTwoHanded)
-    SOL_REGISTER(isHandToHand)
-    SOL_REGISTER(isShield)
-    SOL_REGISTER(getSignature)
-};
+    SOL_USERTYPE("CItem", CLuaItem);
+    SOL_REGISTER("getID", CLuaItem::getID);
+    SOL_REGISTER("getSubID", CLuaItem::getSubID);
+    SOL_REGISTER("getFlag", CLuaItem::getFlag);
+    SOL_REGISTER("getAHCat", CLuaItem::getAHCat);
+    SOL_REGISTER("getQuantity", CLuaItem::getQuantity);
+    SOL_REGISTER("getLocationID", CLuaItem::getLocationID);
+    SOL_REGISTER("getBasePrice", CLuaItem::getBasePrice);
+    SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
+    SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
+    SOL_REGISTER("getWornItem", CLuaItem::getWornItem);
+    SOL_REGISTER("isType", CLuaItem::isType);
+    SOL_REGISTER("isSubType", CLuaItem::isSubType);
+    SOL_REGISTER("getName", CLuaItem::getName);
+    SOL_REGISTER("getILvl", CLuaItem::getILvl);
+    SOL_REGISTER("getReqLvl", CLuaItem::getReqLvl);
+    SOL_REGISTER("getMod", CLuaItem::getMod);
+    SOL_REGISTER("addMod", CLuaItem::addMod);
+    SOL_REGISTER("delMod", CLuaItem::delMod);
+    SOL_REGISTER("getAugment", CLuaItem::getAugment);
+    SOL_REGISTER("getSkillType", CLuaItem::getSkillType);
+    SOL_REGISTER("getWeaponskillPoints", CLuaItem::getWeaponskillPoints);
+    SOL_REGISTER("isTwoHanded", CLuaItem::isTwoHanded);
+    SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
+    SOL_REGISTER("isShield", CLuaItem::isShield);
+    SOL_REGISTER("getSignature", CLuaItem::getSignature);
+}
 
 //======================================================//

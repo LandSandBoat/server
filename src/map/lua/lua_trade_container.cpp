@@ -271,21 +271,20 @@ inline int32 CLuaTradeContainer::confirmSlot(lua_State* L)
 
 //======================================================//
 
-void CLuaTradeContainer::Register(sol::state& lua)
+void CLuaTradeContainer::Register()
 {
-    SOL_START(CTradeContainer, CLuaTradeContainer)
-    SOL_REGISTER(getGil)
-    SOL_REGISTER(getItem)
-    SOL_REGISTER(getItemId)
-    SOL_REGISTER(getItemSubId)
-    SOL_REGISTER(getItemCount)
-    SOL_REGISTER(getSlotCount)
-    SOL_REGISTER(getItemQty)
-    SOL_REGISTER(getSlotQty)
-    SOL_REGISTER(hasItemQty)
-    SOL_REGISTER(confirmItem)
-    SOL_REGISTER(confirmSlot)
-    SOL_END()
+    SOL_USERTYPE("CTradeContainer", CLuaTradeContainer);
+    SOL_REGISTER("getGil", CLuaTradeContainer::getGil);
+    SOL_REGISTER("getItem", CLuaTradeContainer::getItem);
+    SOL_REGISTER("getItemId", CLuaTradeContainer::getItemId);
+    SOL_REGISTER("getItemSubId", CLuaTradeContainer::getItemSubId);
+    SOL_REGISTER("getItemCount", CLuaTradeContainer::getItemCount);
+    SOL_REGISTER("getSlotCount", CLuaTradeContainer::getSlotCount);
+    SOL_REGISTER("getItemQty", CLuaTradeContainer::getItemQty);
+    SOL_REGISTER("getSlotQty", CLuaTradeContainer::getSlotQty);
+    SOL_REGISTER("hasItemQty", CLuaTradeContainer::hasItemQty);
+    SOL_REGISTER("confirmItem", CLuaTradeContainer::confirmItem);
+    SOL_REGISTER("confirmSlot", CLuaTradeContainer::confirmSlot);
 }
 
 //======================================================//

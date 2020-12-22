@@ -42,18 +42,18 @@ public:
     uint16 getID();
     int16  getMsg();
     uint16 getRecast();
-    uint16      getRange();
-    const char* getName();
-    uint16      getAnimation();
+    uint16 getRange();
+    auto   getName() -> const char*;
+    uint16 getAnimation();
 
-    void        setMsg(uint16 messageID);
-    void        setAnimation(uint16 animationID);
-    void  setRecast(uint16 recastTime);
-    void  setCE(uint16 ce);
+    void setMsg(uint16 messageID);
+    void setAnimation(uint16 animationID);
+    void setRecast(uint16 recastTime);
+    void setCE(uint16 ce);
     void setVE(uint16 ve);
-    void  setRange(float range);
+    void setRange(float range);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

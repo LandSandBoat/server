@@ -65,7 +65,7 @@ public:
     int32 setFlag(lua_State*);
     int32 unsetFlag(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

@@ -43,7 +43,7 @@ public:
     int32 AddCount(lua_State*);
     int32 DelCount(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

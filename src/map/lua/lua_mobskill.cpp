@@ -139,21 +139,20 @@ inline int32 CLuaMobSkill::getMobHPP(lua_State* L)
 
 //======================================================//
 
-void CLuaMobSkill::Register(sol::state& lua)
+void CLuaMobSkill::Register()
 {
-    SOL_START(CMobSkill, CLuaMobSkill)
-    SOL_REGISTER(setMsg)
-    SOL_REGISTER(getMsg)
-    SOL_REGISTER(hasMissMsg)
-    SOL_REGISTER(isAoE)
-    SOL_REGISTER(isConal)
-    SOL_REGISTER(isSingle)
-    SOL_REGISTER(getParam)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getTotalTargets)
-    SOL_REGISTER(getTP)
-    SOL_REGISTER(getMobHPP)
-    SOL_END()
-};
+    SOL_USERTYPE("CMobSkill", CLuaMobSkill);
+    SOL_REGISTER("setMsg", CLuaMobSkill::setMsg);
+    SOL_REGISTER("getMsg", CLuaMobSkill::getMsg);
+    SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
+    SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);
+    SOL_REGISTER("isConal", CLuaMobSkill::isConal);
+    SOL_REGISTER("isSingle", CLuaMobSkill::isSingle);
+    SOL_REGISTER("getParam", CLuaMobSkill::getParam);
+    SOL_REGISTER("getID", CLuaMobSkill::getID);
+    SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
+    SOL_REGISTER("getTP", CLuaMobSkill::getTP);
+    SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+}
 
 //======================================================//

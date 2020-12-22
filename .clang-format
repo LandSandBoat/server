@@ -11,9 +11,8 @@ AllowShortFunctionsOnASingleLine: None
 AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeComma
-# This is not the ACTUAL column limit, this is just to make
-# clang-format chill out! Use your best judgement!
-ColumnLimit: 160
+# This is just to make clang-format chill out! Use your best judgement!
+ColumnLimit: 0
 CompactNamespaces: 'false'
 ConstructorInitializerIndentWidth: 0
 Cpp11BracedListStyle: 'false'

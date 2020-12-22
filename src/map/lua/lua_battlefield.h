@@ -70,7 +70,7 @@ public:
     int32 win(lua_State*);
     int32 lose(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

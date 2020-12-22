@@ -250,21 +250,20 @@ int32 CLuaAction::addEffectMessage(lua_State* L)
 
 //==========================================================//
 
-void CLuaAction::Register(sol::state& lua)
+void CLuaAction::Register()
 {
-    SOL_START(CAction, CLuaAction)
-    SOL_REGISTER(ID)
-    SOL_REGISTER(recast)
-    SOL_REGISTER(actionID)
-    SOL_REGISTER(param)
-    SOL_REGISTER(messageID)
-    SOL_REGISTER(animation)
-    SOL_REGISTER(speceffect)
-    SOL_REGISTER(reaction)
-    SOL_REGISTER(additionalEffect)
-    SOL_REGISTER(addEffectParam)
-    SOL_REGISTER(addEffectMessage)
-    SOL_END()
+    SOL_USERTYPE("CAction", CLuaAction);
+    SOL_REGISTER("ID", CLuaAction::ID);
+    SOL_REGISTER("recast", CLuaAction::recast);
+    SOL_REGISTER("actionID", CLuaAction::actionID);
+    SOL_REGISTER("param", CLuaAction::param);
+    SOL_REGISTER("messageID", CLuaAction::messageID);
+    SOL_REGISTER("animation", CLuaAction::animation);
+    SOL_REGISTER("speceffect", CLuaAction::speceffect);
+    SOL_REGISTER("reaction", CLuaAction::reaction);
+    SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
+    SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
+    SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);
 };
 
 //==========================================================//

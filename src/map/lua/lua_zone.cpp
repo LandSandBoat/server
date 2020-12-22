@@ -90,10 +90,7 @@ inline sol::object CLuaZone::levelRestriction()
 sol::table CLuaZone::getPlayers()
 {
     sol::table list;
-    m_pLuaZone->ForEachChar([&list](CCharEntity* PChar)
-    {
-        list.add(CLuaBaseEntity{PChar});
-    });
+    m_pLuaZone->ForEachChar([&list](CCharEntity* PChar) { list.add(CLuaBaseEntity{ PChar }); });
     return list;
 }
 
@@ -146,19 +143,18 @@ inline WEATHER CLuaZone::getWeather()
 
 //======================================================//
 
-void CLuaZone::Register(sol::state& lua)
+void CLuaZone::Register()
 {
-    SOL_START(CZone, CLuaZone)
-    SOL_REGISTER(registerRegion)
-    SOL_REGISTER(levelRestriction)
-    SOL_REGISTER(getPlayers)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(getRegionID)
-    SOL_REGISTER(getType)
-    SOL_REGISTER(getBattlefieldByInitiator)
-    SOL_REGISTER(battlefieldsFull)
-    SOL_REGISTER(getWeather)
-    SOL_END()
+    SOL_USERTYPE("CZone", CLuaZone);
+    SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
+    SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
+    SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
+    SOL_REGISTER("getID", CLuaZone::getID);
+    SOL_REGISTER("getRegionID", CLuaZone::getRegionID);
+    SOL_REGISTER("getType", CLuaZone::getType);
+    SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);
+    SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
+    SOL_REGISTER("getWeather", CLuaZone::getWeather);
 }
 
 //======================================================//

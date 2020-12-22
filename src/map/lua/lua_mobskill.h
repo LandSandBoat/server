@@ -50,7 +50,7 @@ public:
     int32 getMsg(lua_State*);
     int32 getTotalTargets(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

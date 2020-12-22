@@ -57,7 +57,7 @@ public:
     int32 getFlag(lua_State*);
     int32 castTime(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

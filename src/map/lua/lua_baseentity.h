@@ -28,8 +28,6 @@
 class CBaseEntity;
 class CCharEntity;
 
-enum CHAT_MESSAGE_TYPE : int;
-
 class CLuaBaseEntity
 {
     CBaseEntity* m_PBaseEntity;
@@ -45,22 +43,22 @@ public:
     // Messaging System
     int32 showText(lua_State*); // Displays Dialog for npc
     int32 messageText(lua_State* L);
-    void PrintToPlayer(std::string& message, CHAT_MESSAGE_TYPE messageType, std::string& name); // for sending debugging messages/command confirmations to the player's client
-    int32 PrintToArea(lua_State* L);   // for sending area messages to multiple players at once
-    int32 messageBasic(lua_State*);    // Sends Basic Message
-    int32 messageName(lua_State* L);   // Sends a Message with a Name
-    int32 messagePublic(lua_State*);   // Sends a public Basic Message
-    int32 messageSpecial(lua_State*);  // Sends Special Message
-    int32 messageSystem(lua_State*);   // Sends System Message
-    int32 messageCombat(lua_State* L); // Sends Combat Message
+    void  PrintToPlayer(std::string const& message, int messageType, std::string const& name); // for sending debugging messages/command confirmations to the player's client
+    int32 PrintToArea(lua_State* L);                                                           // for sending area messages to multiple players at once
+    int32 messageBasic(lua_State*);                                                            // Sends Basic Message
+    int32 messageName(lua_State* L);                                                           // Sends a Message with a Name
+    int32 messagePublic(lua_State*);                                                           // Sends a public Basic Message
+    int32 messageSpecial(lua_State*);                                                          // Sends Special Message
+    int32 messageSystem(lua_State*);                                                           // Sends System Message
+    int32 messageCombat(lua_State* L);                                                         // Sends Combat Message
 
     // Variables
-    int32     getCharVar(std::string& varName); // Returns a character variable
-    void   setCharVar(std::string& varname, int32 value); // Sets a character variable
-    void      addCharVar(std::string& varname, int32 value); // Increments/decriments/sets a character variable
-    uint32    getLocalVar(std::string& var);
-    void      setLocalVar(std::string& var, uint32 val);
-    void resetLocalVars();
+    int32  getCharVar(std::string const& varName);              // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
+    void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    uint32 getLocalVar(std::string const& var);
+    void   setLocalVar(std::string const& var, uint32 val);
+    void   resetLocalVars();
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
@@ -83,7 +81,7 @@ public:
     // Object Identification
     int32 getID();
     int16 getShortID();
-    std::shared_ptr<CLuaBaseEntity> getCursorTarget(); // Returns the ID any object under players in game cursor.
+    auto  getCursorTarget() -> std::shared_ptr<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
 
     int32 getObjType(lua_State*);
     int32 isPC(lua_State*);
@@ -179,15 +177,15 @@ public:
     int32 bringPlayer(lua_State*); // warps target to self
 
     // Items
-    uint16 getEquipID(SLOTTYPE slot);  // Gets the Item Id of the item in specified slot
-    int32 getEquippedItem(lua_State*); // Returns the item object from specified slot
-    int32 hasItem(lua_State*);         // Check to see if Entity has item in inventory (hasItem(itemNumber))
-    int32 addItem(lua_State*);         // Add item to Entity inventory (additem(itemNumber,quantity))
-    int32 delItem(lua_State*);
-    int32 addUsedItem(lua_State*);    // Add charged item with timer already on full cooldown
-    int32 addTempItem(lua_State*);    // Add temp item to Entity Temp inventory
-    int32 hasWornItem(lua_State*);    // Check if the item is already worn (player:hasWornItem(itemid))
-    int32 createWornItem(lua_State*); // Update this item in worn item (player:createWornItem(itemid))
+    uint16 getEquipID(SLOTTYPE slot);   // Gets the Item Id of the item in specified slot
+    int32  getEquippedItem(lua_State*); // Returns the item object from specified slot
+    int32  hasItem(lua_State*);         // Check to see if Entity has item in inventory (hasItem(itemNumber))
+    int32  addItem(lua_State*);         // Add item to Entity inventory (additem(itemNumber,quantity))
+    int32  delItem(lua_State*);
+    int32  addUsedItem(lua_State*);    // Add charged item with timer already on full cooldown
+    int32  addTempItem(lua_State*);    // Add temp item to Entity Temp inventory
+    int32  hasWornItem(lua_State*);    // Check if the item is already worn (player:hasWornItem(itemid))
+    int32  createWornItem(lua_State*); // Update this item in worn item (player:createWornItem(itemid))
 
     int32 createShop(lua_State*);       // Prepare the container for work of shop ??
     int32 addShopItem(lua_State*);      // Adds item to shop container (16 max)
@@ -222,9 +220,9 @@ public:
     int32 retrieveItemFromSlip(lua_State* L);
 
     // Player Appearance
-    int32 getRace(lua_State*);   // Gets Race of Entity
-    int32 getGender(lua_State*); // Returns the player character's gender
-    const char* getName(); // Gets Entity Name
+    int32 getRace(lua_State*);      // Gets Race of Entity
+    int32 getGender(lua_State*);    // Returns the player character's gender
+    auto  getName() -> const char*; // Gets Entity Name
     int32 hideName(lua_State* L);
     int32 checkNameFlags(lua_State* L); // this is check and not get because it tests for a flag, it doesn't return all flags
     int32 getModelId(lua_State* L);
@@ -714,7 +712,7 @@ public:
     int32 itemStolen(lua_State*);       // sets mob's ItemStolen var = true
     int32 getTHlevel(lua_State*);       // Returns the Monster's current Treasure Hunter Tier
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

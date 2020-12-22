@@ -95,13 +95,12 @@ inline int32 CLuaRegion::DelCount(lua_State* L)
 
 //======================================================//
 
-void CLuaRegion::Register(sol::state& lua)
+void CLuaRegion::Register()
 {
-    SOL_START(CRegion, CLuaRegion)
-    SOL_REGISTER(GetRegionID)
-    SOL_REGISTER(AddCount)
-    SOL_REGISTER(DelCount)
-    SOL_END()
+    SOL_USERTYPE("CRegion", CLuaRegion);
+    SOL_REGISTER("GetRegionID", CLuaRegion::GetRegionID);
+    SOL_REGISTER("AddCount", CLuaRegion::AddCount);
+    SOL_REGISTER("DelCount", CLuaRegion::DelCount);
 }
 
 //======================================================//

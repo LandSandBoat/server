@@ -369,33 +369,32 @@ inline int32 CLuaInstance::insertAlly(lua_State* L)
 
 //==========================================================//
 
-void CLuaInstance::Register(sol::state& lua)
+void CLuaInstance::Register()
 {
-    SOL_START(CInstance, CLuaInstance)
-    SOL_REGISTER(getID)
-    SOL_REGISTER(setLevelCap)
-    SOL_REGISTER(getAllies)
-    SOL_REGISTER(getChars)
-    SOL_REGISTER(getMobs)
-    SOL_REGISTER(getNpcs)
-    SOL_REGISTER(getPets)
-    SOL_REGISTER(getTimeLimit)
-    SOL_REGISTER(getEntryPos)
-    SOL_REGISTER(getLastTimeUpdate)
-    SOL_REGISTER(setLastTimeUpdate)
-    SOL_REGISTER(getProgress)
-    SOL_REGISTER(getEntity)
-    SOL_REGISTER(setProgress)
-    SOL_REGISTER(getWipeTime)
-    SOL_REGISTER(setWipeTime)
-    SOL_REGISTER(getStage)
-    SOL_REGISTER(setStage)
-    SOL_REGISTER(fail)
-    SOL_REGISTER(failed)
-    SOL_REGISTER(complete)
-    SOL_REGISTER(completed)
-    SOL_REGISTER(insertAlly)
-    SOL_END()
-};
+    SOL_USERTYPE("CInstance", CLuaInstance);
+    SOL_REGISTER("getID", CLuaInstance::getID);
+    SOL_REGISTER("setLevelCap", CLuaInstance::setLevelCap);
+    SOL_REGISTER("getAllies", CLuaInstance::getAllies);
+    SOL_REGISTER("getChars", CLuaInstance::getChars);
+    SOL_REGISTER("getMobs", CLuaInstance::getMobs);
+    SOL_REGISTER("getNpcs", CLuaInstance::getNpcs);
+    SOL_REGISTER("getPets", CLuaInstance::getPets);
+    SOL_REGISTER("getTimeLimit", CLuaInstance::getTimeLimit);
+    SOL_REGISTER("getEntryPos", CLuaInstance::getEntryPos);
+    SOL_REGISTER("getLastTimeUpdate", CLuaInstance::getLastTimeUpdate);
+    SOL_REGISTER("setLastTimeUpdate", CLuaInstance::setLastTimeUpdate);
+    SOL_REGISTER("getProgress", CLuaInstance::getProgress);
+    SOL_REGISTER("getEntity", CLuaInstance::getEntity);
+    SOL_REGISTER("setProgress", CLuaInstance::setProgress);
+    SOL_REGISTER("getWipeTime", CLuaInstance::getWipeTime);
+    SOL_REGISTER("setWipeTime", CLuaInstance::setWipeTime);
+    SOL_REGISTER("getStage", CLuaInstance::getStage);
+    SOL_REGISTER("setStage", CLuaInstance::setStage);
+    SOL_REGISTER("fail", CLuaInstance::fail);
+    SOL_REGISTER("failed", CLuaInstance::failed);
+    SOL_REGISTER("complete", CLuaInstance::complete);
+    SOL_REGISTER("completed", CLuaInstance::completed);
+    SOL_REGISTER("insertAlly", CLuaInstance::insertAlly);
+}
 
 //======================================================//

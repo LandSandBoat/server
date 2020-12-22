@@ -30,18 +30,20 @@ void CAIEventHandler::removeListener(std::string identifier)
 {
     for (auto&& eventListener : eventListeners)
     {
-        eventListener.second.erase(std::remove_if(eventListener.second.begin(), eventListener.second.end(),
-                                                  [&identifier](const ai_event_t& event) {
-                                                      if (identifier == event.identifier)
-                                                      {
-                                                          if (event.lua_func)
-                                                          {
-                                                              luautils::unregister_fp(event.lua_func);
-                                                          }
-                                                          return true;
-                                                      }
-                                                      return false;
-                                                  }),
-                                   eventListener.second.end());
+        auto remove = [&identifier](const ai_event_t& event)
+        {
+            if (identifier == event.identifier)
+            {
+                if (event.lua_func)
+                {
+                    luautils::unregister_fp(event.lua_func);
+                }
+                return true;
+            }
+            return false;
+        };
+
+        auto it = std::remove_if(eventListener.second.begin(), eventListener.second.end(), remove);
+        eventListener.second.erase(it, eventListener.second.end());
     }
 }

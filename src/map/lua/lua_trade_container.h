@@ -50,7 +50,7 @@ public:
     int32 confirmItem(lua_State*);
     int32 confirmSlot(lua_State*);
 
-    static void Register(sol::state& lua);
+    static void Register();
 };
 
 #endif

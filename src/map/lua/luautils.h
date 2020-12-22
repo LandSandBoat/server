@@ -37,9 +37,10 @@
 #undef lua_tointeger
 #define lua_tointeger(L, n) static_cast<lua_Integer>(std::floor(lua_tonumber(L, n)))
 
-#define SOL_START(BaseTypeName, BindingTypeName) luautils::lua.new_usertype<BindingTypeName>(#BaseTypeName
-#define SOL_REGISTER(Func) , #Func, &Func
-#define SOL_END() );
+#define SOL_USERTYPE(TypeName, BindingTypeName) \
+    std::string className = TypeName;           \
+    luautils::lua.new_usertype<BindingTypeName>(className)
+#define SOL_REGISTER(FuncName, Func) luautils::lua[className][FuncName] = &Func
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -114,6 +115,96 @@ namespace luautils
     void  unregister_fp(int);
     int32 print(lua_State*);
     int32 prepFile(int8*, const char*);
+    void pushFunc(int lua_func, int index = 0);
+    void callFunc(int nargs);
+
+    template <class T, class L>
+    void pushLuaType(T* obj)
+    {
+        sol::stack::push<L>(LuaHandle, L(obj));
+    }
+
+    // TODO: if the classes themselves held the lua method declarations, this voodoo to get the wrappers wouldn't be needed!
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CBaseEntity* arg)
+    {
+        pushLuaType<CBaseEntity, CLuaBaseEntity>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CAbility* arg)
+    {
+        pushLuaType<CAbility, CLuaAbility>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CMobSkill* arg)
+    {
+        pushLuaType<CMobSkill, CLuaMobSkill>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(action_t* arg)
+    {
+        pushLuaType<action_t, CLuaAction>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CBattlefield* arg)
+    {
+        pushLuaType<CBattlefield, CLuaBattlefield>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CInstance* arg)
+    {
+        pushLuaType<CInstance, CLuaInstance>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CRegion* arg)
+    {
+        pushLuaType<CRegion, CLuaRegion>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CSpell* arg)
+    {
+        pushLuaType<CSpell, CLuaSpell>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CStatusEffect* arg)
+    {
+        pushLuaType<CStatusEffect, CLuaStatusEffect>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CTradeContainer* arg)
+    {
+        pushLuaType<CTradeContainer, CLuaTradeContainer>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CZone* arg)
+    {
+        pushLuaType<CZone, CLuaZone>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_pointer<T>::value> pushArg(CItem* arg)
+    {
+        pushLuaType<CItem, CLuaItem>(arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_integral<T>::value> pushArg(T arg)
+    {
+        lua_pushinteger(LuaHandle, arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_floating_point<T>::value> pushArg(T arg)
+    {
+        lua_pushnumber(LuaHandle, arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_same<bool, T>::value> pushArg(T arg)
+    {
+        lua_pushboolean(LuaHandle, arg);
+    }
+    template <class T>
+    typename std::enable_if_t<std::is_same<std::nullptr_t, T>::value> pushArg(T arg)
+    {
+        lua_pushnil(LuaHandle);
+    }
 
     int32 SendEntityVisualPacket(lua_State*); // временное решение для работы гейзеров в Dangruf_Wadi
     int32 GetNPCByID(lua_State*);             // Returns NPC By Id
@@ -182,13 +273,12 @@ namespace luautils
     int32 OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
 
-    int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc); // triggered when user targets npc and clicks action button
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result,
-                        uint16 extras); // triggered when game triggers event update during cutscene with extra parameters (battlefield)
-    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result); // triggered when game triggers event update during cutscene
-    int32 OnEventUpdate(CCharEntity* PChar, int8* string);                  // triggered when game triggers event update during cutscene
-    int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result); // triggered when cutscene/event is completed
-    int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);                   // triggers when a trade completes with an npc
+    int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
+    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras); // triggered when game triggers event update during cutscene with extra parameters (battlefield)
+    int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when game triggers event update during cutscene
+    int32 OnEventUpdate(CCharEntity* PChar, int8* string);                                 // triggered when game triggers event update during cutscene
+    int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when cutscene/event is completed
+    int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);                                  // triggers when a trade completes with an npc
 
     int32 OnNpcSpawn(CBaseEntity* PNpc); // triggers when a patrol npc spawns
 
@@ -202,17 +292,16 @@ namespace luautils
     int32 OnManeuverLose(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
     int32 OnUpdateAttachment(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
 
-    int32                           OnItemUse(CBaseEntity* PTarget, CItem* PItem); // triggers when item is used
-    std::tuple<int32, int32, int32> OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE,
-                                                CBaseEntity* PCaster = nullptr); // check to see if item can be used
-    int32                           CheckForGearSet(CBaseEntity* PTarget);       // check for gear sets
+    int32 OnItemUse(CBaseEntity* PTarget, CItem* PItem);                                                                                                         // triggers when item is used
+    auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
+    int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32                  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell); // triggers when a player attempts to cast a spell
-    int32                  OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);   // triggered when casting a spell
-    int32                  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                        // triggered just before casting a spell
-    std::optional<SpellID> OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget);      // triggered when monster wants to use a spell on target
-    int32                  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell); // triggered when spell cast on monster
-    int32                  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill); // Triggered when Weaponskill strikes monster
+    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
+    int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
+    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
+    auto  OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
+    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
+    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
@@ -231,8 +320,7 @@ namespace luautils
     int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
-    int32 OnBattlefieldInitialise(
-        CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
+    int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
     int32 OnBattlefieldTick(CBattlefield* PBattlefield);
     int32 OnBattlefieldStatusChange(CBattlefield* PBattlefield);
 
@@ -243,28 +331,24 @@ namespace luautils
     int32 OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
 
     int32 OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action); // triggers when mob weapon skill is used
-    int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob,
-                          CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
+    int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                    // triggers before mob weapon skill is used, returns 0 if the move is valid
     int32 OnMobAutomatonSkillCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
 
-    int32                           OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility,
-                                                   CBaseEntity** PMsgTarget); // triggers when a player attempts to use a job ability or roll
-    int32                           OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster,
-                                                 action_t* action); // triggers when pet uses an ability
-    std::tuple<int32, uint8, uint8> OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action,
-                                                     CBattleEntity* taChar);                                // returns: damage, tphits landed, extra hits landed
-    int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action); // triggers when job ability is used
+    int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);                                                                               // triggers when a player attempts to use a job ability or roll
+    int32 OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                  // triggers when pet uses an ability
+    auto  OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
+    int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
 
-    int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance); // triggered on zone in to instance
-    void  AfterInstanceRegister(CBaseEntity* PChar);                  // triggers after a character is registered and zoned into an instance (the first time)
-    int32 OnInstanceLoadFailed(CZone* PZone);                         // triggers when an instance load is failed (ie. instance no longer exists)
+    int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
+    void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
+    int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
     int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time); // triggers every second for an instance
     int32 OnInstanceFailure(CInstance* PInstance);                               // triggers when an instance is failed
-    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance); // triggers when an instance is created (per character - waiting outside for entry)
-    int32 OnInstanceCreated(CInstance* PInstance);                     // triggers when an instance is created (instance setup)
-    int32 OnInstanceProgressUpdate(CInstance* PInstance);              // triggers when progress is updated in an instance
-    int32 OnInstanceStageChange(CInstance* PInstance);                 // triggers when stage is changed in an instance
-    int32 OnInstanceComplete(CInstance* PInstance);                    // triggers when an instance is completed
+    int32 OnInstanceCreated(CCharEntity* PChar, CInstance* PInstance);           // triggers when an instance is created (per character - waiting outside for entry)
+    int32 OnInstanceCreated(CInstance* PInstance);                               // triggers when an instance is created (instance setup)
+    int32 OnInstanceProgressUpdate(CInstance* PInstance);                        // triggers when progress is updated in an instance
+    int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
+    int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
     int32 GetMobRespawnTime(lua_State* L);  // get the respawn time of a mob
     int32 DisallowRespawn(lua_State* L);    // Allow or prevent a mob from spawning
@@ -272,9 +356,8 @@ namespace luautils
     int32 SetDropRate(lua_State*);          // Set drop rate of a mob setDropRate(dropid,itemid,newrate)
     int32 UpdateServerMessage(lua_State*);  // update server message, first modify in conf and update
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action,
-                             uint32 damage);                                                                         // for items with additional effects
-    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage); // for mobs with spikes
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
+    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
 
     int32 nearLocation(lua_State*);
 

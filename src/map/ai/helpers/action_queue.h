@@ -31,11 +31,13 @@ class CBaseEntity;
 
 struct queueAction_t
 {
-    time_point                        start_time{ server_clock::now() };
-    duration                          delay{ 0ms };
-    bool                              checkState{ false };
-    int                               lua_func{ 0 };
-    std::function<void(CBaseEntity*)> func{};
+    using EntityFunc_t = std::function<void(CBaseEntity*)>;
+
+    time_point   start_time{ server_clock::now() };
+    duration     delay{ 0ms };
+    bool         checkState{ false };
+    int          lua_func{ 0 };
+    EntityFunc_t func{};
 
     queueAction_t(int _ms, bool _checkstate, int _lua_func)
     : delay(std::chrono::milliseconds(_ms))
@@ -43,6 +45,7 @@ struct queueAction_t
     , lua_func(_lua_func)
     {
     }
+
     queueAction_t(duration _ms, bool _checkstate, std::function<void(CBaseEntity*)> _func)
     : delay(_ms)
     , checkState(_checkstate)
@@ -81,9 +84,11 @@ public:
     bool isEmpty();
 
 private:
-    CBaseEntity*                                                                                PEntity;
-    std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>> actionQueue;
-    std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>> timerQueue;
+    using ActionPQ_t = std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>>;
+
+    CBaseEntity* PEntity;
+    ActionPQ_t actionQueue;
+    ActionPQ_t timerQueue;
 };
 
 #endif

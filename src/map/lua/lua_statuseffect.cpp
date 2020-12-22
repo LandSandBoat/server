@@ -299,33 +299,32 @@ inline int32 CLuaStatusEffect::unsetFlag(lua_State* L)
 
 //======================================================//
 
-void CLuaStatusEffect::Register(sol::state& lua)
+void CLuaStatusEffect::Register()
 {
-    SOL_START(CStatusEffect, CLuaStatusEffect)
-    SOL_REGISTER(getType)
-    SOL_REGISTER(getSubType)
-    SOL_REGISTER(setIcon)
-    SOL_REGISTER(getPower)
-    SOL_REGISTER(setPower)
-    SOL_REGISTER(getDuration)
-    SOL_REGISTER(setDuration)
-    SOL_REGISTER(getStartTime)
-    SOL_REGISTER(getLastTick)
-    SOL_REGISTER(getTimeRemaining)
-    SOL_REGISTER(getTickCount)
-    SOL_REGISTER(resetStartTime)
-    SOL_REGISTER(addMod)
-    SOL_REGISTER(getSubPower)
-    SOL_REGISTER(setSubPower)
-    SOL_REGISTER(getTier)
-    SOL_REGISTER(setTier)
-    SOL_REGISTER(getTick)
-    SOL_REGISTER(setTick)
-    SOL_REGISTER(setStartTime)
-    SOL_REGISTER(getFlag)
-    SOL_REGISTER(setFlag)
-    SOL_REGISTER(unsetFlag)
-    SOL_END()
+    SOL_USERTYPE("CStatusEffect", CLuaStatusEffect);
+    SOL_REGISTER("getType", CLuaStatusEffect::getType);
+    SOL_REGISTER("getSubType", CLuaStatusEffect::getSubType);
+    SOL_REGISTER("setIcon", CLuaStatusEffect::setIcon);
+    SOL_REGISTER("getPower", CLuaStatusEffect::getPower);
+    SOL_REGISTER("setPower", CLuaStatusEffect::setPower);
+    SOL_REGISTER("getDuration", CLuaStatusEffect::getDuration);
+    SOL_REGISTER("setDuration", CLuaStatusEffect::setDuration);
+    SOL_REGISTER("getStartTime", CLuaStatusEffect::getStartTime);
+    SOL_REGISTER("getLastTick", CLuaStatusEffect::getLastTick);
+    SOL_REGISTER("getTimeRemaining", CLuaStatusEffect::getTimeRemaining);
+    SOL_REGISTER("getTickCount", CLuaStatusEffect::getTickCount);
+    SOL_REGISTER("resetStartTime", CLuaStatusEffect::resetStartTime);
+    SOL_REGISTER("addMod", CLuaStatusEffect::addMod);
+    SOL_REGISTER("getSubPower", CLuaStatusEffect::getSubPower);
+    SOL_REGISTER("setSubPower", CLuaStatusEffect::setSubPower);
+    SOL_REGISTER("getTier", CLuaStatusEffect::getTier);
+    SOL_REGISTER("setTier", CLuaStatusEffect::setTier);
+    SOL_REGISTER("getTick", CLuaStatusEffect::getTick);
+    SOL_REGISTER("setTick", CLuaStatusEffect::setTick);
+    SOL_REGISTER("setStartTime", CLuaStatusEffect::setStartTime);
+    SOL_REGISTER("getFlag", CLuaStatusEffect::getFlag);
+    SOL_REGISTER("setFlag", CLuaStatusEffect::setFlag);
+    SOL_REGISTER("unsetFlag", CLuaStatusEffect::unsetFlag);
 }
 
 //======================================================//
