@@ -23,9 +23,9 @@ function onMobDeath(mob, player, isKiller)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK3 then
         GetNPCByID(ID.npc._1rz, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK4 then
-        GetNPCByID(ID.npc._jr0, instance):setAnimation(8)
+        GetNPCByID(ID.npc._ir0, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[21].BRITTLE_ROCK5 then
-        GetNPCByID(ID.npc._jr1, instance):setAnimation(8)
+        GetNPCByID(ID.npc._ir1, instance):setAnimation(8)
     end
 end
 
