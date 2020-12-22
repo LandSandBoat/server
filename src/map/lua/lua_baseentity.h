@@ -72,29 +72,29 @@ public:
     int32 updateEvent(lua_State*);       // Updates event
     int32 updateEventString(lua_State*); // (string, string, string, string, uint32, ...)
     int32 getEventTarget(lua_State*);    //
-    int32 release(lua_State*);           // Stops event
+    void  release();                     // Stops event
 
-    int32 setFlag(lua_State*);
+    void  setFlag(uint32 flags);
     int32 moghouseFlag(lua_State*);
     int32 needToZone(lua_State*); // Check if player has zoned since the flag has been raised
 
     // Object Identification
-    int32 getID();
-    int16 getShortID();
-    auto  getCursorTarget() -> std::shared_ptr<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
+    uint32 getID();
+    uint16 getShortID();
+    auto   getCursorTarget() -> std::shared_ptr<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
 
-    int32 getObjType(lua_State*);
-    int32 isPC(lua_State*);
-    int32 isNPC(lua_State*);
-    int32 isMob(lua_State*);
-    int32 isPet(lua_State*);
-    int32 isAlly(lua_State*);
+    uint8 getObjType();
+    bool  isPC();
+    bool  isNPC();
+    bool  isMob();
+    bool  isPet();
+    bool  isAlly();
 
     // AI and Control
-    int32 initNpcAi(lua_State* L);
-    int32 resetAI(lua_State* L);
-    int32 getStatus(lua_State*);
-    int32 setStatus(lua_State*); // Sets Character's Status
+    void  initNpcAi();
+    void  resetAI();
+    uint8 getStatus();
+    void  setStatus(uint8 status); // Sets Character's Status
     int32 getCurrentAction(lua_State* L);
 
     int32 lookAt(lua_State* L);    // look at given position
@@ -128,7 +128,7 @@ public:
     int32 sendMenu(lua_State*);      // Displays a menu (AH,Raise,Tractor,MH etc)
     int32 sendGuild(lua_State*);     // Sends guild shop menu
     int32 openSendBox(lua_State*);   // Opens send box (to deliver items)
-    int32 leavegame(lua_State*);     // Character leaving game
+    void  leaveGame();               // Character leaving game
     int32 sendEmote(lua_State*);     // Character emits emote packet.
 
     // Location and Positioning
@@ -220,26 +220,27 @@ public:
     int32 retrieveItemFromSlip(lua_State* L);
 
     // Player Appearance
-    int32 getRace(lua_State*);      // Gets Race of Entity
-    int32 getGender(lua_State*);    // Returns the player character's gender
-    auto  getName() -> const char*; // Gets Entity Name
-    int32 hideName(lua_State* L);
-    int32 checkNameFlags(lua_State* L); // this is check and not get because it tests for a flag, it doesn't return all flags
-    int32 getModelId(lua_State* L);
-    int32 setModelId(lua_State* L);
-    int32 costume(lua_State*);      // get or set user costume
-    int32 costume2(lua_State*);     // set monstrosity costume
-    int32 getAnimation(lua_State*); // Get Entity Animation
-    int32 setAnimation(lua_State*); // Set Entity Animation
-    int32 AnimationSub(lua_State*); // get or set animationsub
+    uint8  getRace();
+    uint8  getGender();              // Returns the player character's gender
+    auto   getName() -> const char*; // Gets Entity Name
+    void   hideName(bool isHidden);
+    bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
+    uint16 getModelId();
+    void   setModelId(uint16 modelId, uint8 slot);
+    void   setCostume(uint16 costume);
+    uint16 getCostume();
+    int32  costume2(lua_State*);     // set monstrosity costume
+    int32  getAnimation(lua_State*); // Get Entity Animation
+    int32  setAnimation(lua_State*); // Set Entity Animation
+    int32  AnimationSub(lua_State*); // get or set animationsub
 
     // Player Status
-    int32 getNation(lua_State*); // Gets Nation of Entity
-    int32 setNation(lua_State*); // Sets Nation of Entity
-    int32 getAllegiance(lua_State* L);
-    int32 setAllegiance(lua_State* L);
-    int32 getCampaignAllegiance(lua_State*); // Gets Campaign Allegiance of Entity
-    int32 setCampaignAllegiance(lua_State*); // Sets Campaign Allegiance of Entity
+    uint8 getNation();             // Gets Nation of Entity
+    void  setNation(uint8 nation); // Sets Nation of Entity
+    uint8 getAllegiance();
+    void  setAllegiance(uint8 allegiance);
+    uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
+    void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 
     int32 isSeekingParty(lua_State* L);
     int32 getNewPlayer(lua_State* L);
@@ -263,17 +264,17 @@ public:
     int32 getTimeCreated(lua_State*);
 
     // Player Jobs and Levels
-    int32 getMainJob(lua_State*); // Returns Entity Main Job
-    int32 getSubJob(lua_State*);  // Get Entity Sub Job
-    int32 changeJob(lua_State*);  // changes the job of a char (testing only!)
-    int32 changesJob(lua_State*); // changes the sub job of a char (testing only!)
-    int32 unlockJob(lua_State*);  // Unlocks a job for the entity, sets job level to 1
-    int32 hasJob(lua_State*);     // Check to see if JOBTYPE is unlocked for a character
+    uint8 getMainJob();             // Returns Entity Main Job
+    uint8 getSubJob();              // Get Entity Sub Job
+    void  changeJob(uint8 newJob);  // changes the job of a char (testing only!)
+    void  changesJob(uint8 subJob); // changes the sub job of a char (testing only!)
+    void  unlockJob(uint8 JobID);   // Unlocks a job for the entity, sets job level to 1
+    bool  hasJob(uint8 job);        // Check to see if JOBTYPE is unlocked for a character
 
-    int32 getMainLvl(lua_State*);       // Gets Entity Main Job Level
-    int32 getSubLvl(lua_State*);        // Get Entity Sub Job Level
-    int32 getJobLevel(lua_State*);      // Gets character job level for specified JOBTYPE
-    int32 setLevel(lua_State*);         // sets the character's level
+    uint8 getMainLvl();                 // Gets Entity Main Job Level
+    uint8 getSubLvl();                  // Get Entity Sub Job Level
+    uint8 getJobLevel(uint8 JobID);     // Gets character job level for specified JOBTYPE
+    void  setLevel(uint8 level);        // sets the character's level
     int32 setsLevel(lua_State*);        // sets the character's level
     int32 levelCap(lua_State*);         // genkai
     int32 levelRestriction(lua_State*); // Establish/return current level restriction
@@ -291,11 +292,12 @@ public:
     int32 setFame(lua_State*);      // Sets Fame
     int32 getFameLevel(lua_State*); // Gets Fame Level for specified nation
 
-    int32 getRank(lua_State*);       // Get Current Rank
-    int32 setRank(lua_State*);       // Set Rank
-    int32 getRankPoints(lua_State*); // Get Current Rank points
-    int32 addRankPoints(lua_State*); // Add rank points to existing rank point total
-    int32 setRankPoints(lua_State*); // Set Current Rank points
+    uint8  getRank();                        // Get Rank for current active nation
+    uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
+    void   setRank(uint8 rank);              // Set Rank
+    uint32 getRankPoints();                  // Get Current Rank points
+    void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
+    void   setRankPoints(uint32 rankpoints); // Set Current Rank points
 
     int32 addQuest(lua_State*);          // Add Quest to Entity Quest Log
     int32 delQuest(lua_State*);          // Remove quest from quest log (should be used for debugging only)
@@ -360,15 +362,15 @@ public:
     int32 addGuildPoints(lua_State*); // add guild points
 
     // Health and Status
-    int32 getHP(lua_State*);      // Returns Entity Health
-    int32 getHPP(lua_State*);     // Returns Entity Health %
-    int32 getMaxHP(lua_State*);   // Get max hp of entity
-    int32 getBaseHP(lua_State*);  // Returns Entity base Health before modifiers
-    int32 addHP(lua_State*);      // Modify hp of Entity +/-
-    int32 setHP(lua_State*);      // Set hp of Entity to value
-    int32 restoreHP(lua_State*);  // Modify hp of Entity, but check if alive first
-    int32 delHP(lua_State*);      // Subtract hp of Entity
-    int32 takeDamage(lua_State*); // Takes damage from the provided attacker
+    int32 getHP();                     // Returns Entity Health
+    uint8 getHPP();                    // Returns Entity Health %
+    int32 getMaxHP();                  // Get max hp of entity
+    int32 getBaseHP();                 // Returns Entity base Health before modifiers
+    int32 addHP(int32 hpAdd);          // Modify hp of Entity +/-
+    void  setHP(int32 value);          // Set hp of Entity to value
+    int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
+    void  delHP(int32 delAmt);         // Subtract hp of Entity
+    int32 takeDamage(lua_State*);      // Takes damage from the provided attacker
     int32 hideHP(lua_State* L);
 
     int32 getMP(lua_State*);     // Gets MP of Entity
@@ -387,15 +389,15 @@ public:
     int32 updateHealth(lua_State* L);
 
     // Skills and Abilities
-    int32 capSkill(lua_State*);     // Caps the given skill id for the job you're on (GM COMMAND)
-    int32 capAllSkills(lua_State*); // Caps All skills, GM command
+    void capSkill(uint8 skill); // Caps the given skill id for the job you're on (GM COMMAND)
+    void capAllSkills();        // Caps All skills, GM command
 
-    int32 getSkillLevel(lua_State*);     // Get Current Skill Level
-    int32 setSkillLevel(lua_State*);     // Set Current Skill Level
-    int32 getMaxSkillLevel(lua_State*);  // Get Skill Cap for skill and rank
-    int32 getSkillRank(lua_State*);      // Get your current skill craft Rank
-    int32 setSkillRank(lua_State*);      // Set new skill craft rank
-    int32 getCharSkillLevel(lua_State*); // Get char skill level
+    uint16 getSkillLevel(uint16 skillId);                             // Get Current Skill Level
+    void   setSkillLevel(uint8 SkillID, uint16 SkillAmount);          // Set Current Skill Level
+    uint16 getMaxSkillLevel(uint8 skillId, uint8 jobId, uint8 level); // Get Skill Cap for skill and rank
+    uint8  getSkillRank(uint8 rankID);                                // Get your current skill craft Rank
+    void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
+    uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level
 
     int32 addLearnedWeaponskill(lua_State*);
     int32 hasLearnedWeaponskill(lua_State*);

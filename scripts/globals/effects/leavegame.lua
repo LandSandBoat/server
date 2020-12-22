@@ -11,7 +11,7 @@ end
 
 function onEffectTick(target, effect)
     if (effect:getTickCount() > 5) then
-        target:leavegame()
+        target:leaveGame()
     else
         target:messageSystem(effect:getPower(), 30-effect:getTickCount()*5)
     end
