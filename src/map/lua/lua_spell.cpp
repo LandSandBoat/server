@@ -27,7 +27,7 @@
 
 /************************************************************************
  *																		*
- *  Конструктор															*
+ *  Constructor															*
  *																		*
  ************************************************************************/
 
@@ -38,155 +38,122 @@ CLuaSpell::CLuaSpell(CSpell* PSpell)
 
 /************************************************************************
  *                                                                       *
- *  Устанавливаем сообщение заклинания                                   *
+ *  Setting the Spell Message                                            *
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaSpell::setMsg(lua_State* L)
+void CLuaSpell::setMsg(uint16 messageID)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setMessage((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setMessage(messageID);
 }
 
-inline int32 CLuaSpell::setAoE(lua_State* L)
+void CLuaSpell::setAoE(uint8 aoe)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setAOE((uint8)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setAOE(aoe);
 }
 
-inline int32 CLuaSpell::setFlag(lua_State* L)
+void CLuaSpell::setFlag(uint8 flags)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setFlag((uint8)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaSpell->setFlag(flags);
 }
 
-inline int32 CLuaSpell::setRadius(lua_State* L)
+void CLuaSpell::setRadius(float radius)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setRadius((float)lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setRadius(radius);
 }
 
-inline int32 CLuaSpell::setAnimation(lua_State* L)
+void CLuaSpell::setAnimation(uint16 animationID)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setAnimationID((uint16)lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setAnimationID(animationID);
 }
 
-inline int32 CLuaSpell::setMPCost(lua_State* L)
+void CLuaSpell::setMPCost(uint16 mpcost)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaSpell->setMPCost((uint16)lua_tonumber(L, -1));
-    return 0;
+    m_PLuaSpell->setMPCost(mpcost);
 }
 
-inline int32 CLuaSpell::castTime(lua_State* L)
+uint32 CLuaSpell::getCastTime()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-    {
-        m_PLuaSpell->setCastTime((uint32)lua_tointeger(L, 1));
-    }
-    else
-    {
-        lua_pushinteger(L, m_PLuaSpell->getCastTime());
-    }
-
-    return 1;
+    return m_PLuaSpell->getCastTime();
 }
 
-inline int32 CLuaSpell::canTargetEnemy(lua_State* L)
+void CLuaSpell::setCastTime(uint32 casttime)
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushboolean(L, m_PLuaSpell->canTargetEnemy());
-    return 1;
+    m_PLuaSpell->setCastTime(casttime);
 }
 
-inline int32 CLuaSpell::getTotalTargets(lua_State* L)
+bool CLuaSpell::canTargetEnemy()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getTotalTargets());
-    return 1;
+    return m_PLuaSpell->canTargetEnemy();
 }
 
-inline int32 CLuaSpell::getMagicBurstMessage(lua_State* L)
+uint16 CLuaSpell::getTotalTargets()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getMagicBurstMessage());
-    return 1;
+    return m_PLuaSpell->getTotalTargets();
 }
 
-inline int32 CLuaSpell::getElement(lua_State* L)
+uint16 CLuaSpell::getMagicBurstMessage()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getElement());
-    return 1;
+    return m_PLuaSpell->getMagicBurstMessage();
 }
 
-inline int32 CLuaSpell::isAoE(lua_State* L)
+uint16 CLuaSpell::getElement()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getAOE());
-    return 1;
+    return m_PLuaSpell->getElement();
 }
 
-inline int32 CLuaSpell::tookEffect(lua_State* L)
+uint8 CLuaSpell::isAoE()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushboolean(L, m_PLuaSpell->tookEffect());
-    return 1;
+    return m_PLuaSpell->getAOE();
 }
 
-inline int32 CLuaSpell::getID(lua_State* L)
+bool CLuaSpell::tookEffect()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, static_cast<uint16>(m_PLuaSpell->getID()));
-    return 1;
+    return m_PLuaSpell->tookEffect();
 }
 
-inline int32 CLuaSpell::getMPCost(lua_State* L)
+uint16 CLuaSpell::getID()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, static_cast<uint16>(m_PLuaSpell->getMPCost()));
-    return 1;
+    return static_cast<uint16>(m_PLuaSpell->getID());
 }
 
-inline int32 CLuaSpell::getSkillType(lua_State* L)
+uint16 CLuaSpell::getMPCost()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getSkillType());
-    return 1;
+    return static_cast<uint16>(m_PLuaSpell->getMPCost());
 }
 
-inline int32 CLuaSpell::getSpellGroup(lua_State* L)
+uint8 CLuaSpell::getSkillType()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getSpellGroup());
-    return 1;
+    return m_PLuaSpell->getSkillType();
 }
 
-inline int32 CLuaSpell::getFlag(lua_State* L)
+uint8 CLuaSpell::getSpellGroup()
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
-    lua_pushinteger(L, m_PLuaSpell->getFlag());
-    return 1;
+    return static_cast<uint8>(m_PLuaSpell->getSpellGroup());
+}
+
+uint8 CLuaSpell::getFlag()
+{
+    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
+    return m_PLuaSpell->getFlag();
 }
 
 //======================================================//
@@ -199,6 +166,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("setFlag", CLuaSpell::setFlag);
     SOL_REGISTER("setRadius", CLuaSpell::setRadius);
     SOL_REGISTER("setAnimation", CLuaSpell::setAnimation);
+    SOL_REGISTER("setCastTime", CLuaSpell::setCastTime);
     SOL_REGISTER("setMPCost", CLuaSpell::setMPCost);
     SOL_REGISTER("isAoE", CLuaSpell::isAoE);
     SOL_REGISTER("tookEffect", CLuaSpell::tookEffect);
@@ -210,7 +178,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("getMPCost", CLuaSpell::getMPCost);
     SOL_REGISTER("getSpellGroup", CLuaSpell::getSpellGroup);
     SOL_REGISTER("getFlag", CLuaSpell::getFlag);
-    SOL_REGISTER("castTime", CLuaSpell::castTime);
+    SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
 }
 
 //======================================================//
