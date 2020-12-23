@@ -120,16 +120,16 @@ public:
     void hideNPC(sol::object const& seconds);                           // hide an NPC
     void updateNPCHideTime(sol::object const& seconds);                 // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
-    int32 getWeather(lua_State*); // Get Weather condition
-    int32 setWeather(lua_State*); // Set Weather condition (GM COMMAND)
+    uint8 getWeather();
+    void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    int32 ChangeMusic(lua_State* L); // Sets the specified music Track for specified music block.
-    int32 sendMenu(lua_State*);      // Displays a menu (AH,Raise,Tractor,MH etc)
-    int32 sendGuild(lua_State*);     // Sends guild shop menu
-    int32 openSendBox(lua_State*);   // Opens send box (to deliver items)
-    void  leaveGame();               // Character leaving game
-    int32 sendEmote(lua_State*);     // Character emits emote packet.
+    void  ChangeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
+    void  sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
+    bool  sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
+    void  openSendBox();                                                     // Opens send box (to deliver items)
+    void  leaveGame();                                                       // Character leaving game
+    int32 sendEmote(lua_State*);                                             // Character emits emote packet.
 
     // Location and Positioning
 

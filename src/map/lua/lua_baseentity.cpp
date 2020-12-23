@@ -2112,26 +2112,22 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
  *  Function: getWeather()
  *  Purpose : Returns the current weather status
  *  Example : if (player:getWeather() == WEATHER_WIND) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getWeather(lua_State* L)
+uint8 CLuaBaseEntity::getWeather()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     WEATHER weather = WEATHER_NONE;
+
     if (m_PBaseEntity->objtype & TYPE_PC || m_PBaseEntity->objtype & TYPE_MOB)
     {
-        weather = battleutils::GetWeather((CBattleEntity*)m_PBaseEntity, false);
+        weather = battleutils::GetWeather(static_cast<CBattleEntity*>(m_PBaseEntity), false);
     }
     else
     {
         weather = zoneutils::GetZone(m_PBaseEntity->getZone())->GetWeather();
     }
 
-    lua_pushinteger(L, weather);
-
-    return 1;
+    return static_cast<uint8>(weather);
 }
 
 /************************************************************************
@@ -2141,19 +2137,13 @@ inline int32 CLuaBaseEntity::getWeather(lua_State* L)
  *  Notes   : Only used for GM command: scripts/commands/setweather.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setWeather(lua_State* L)
+void CLuaBaseEntity::setWeather(uint8 weatherType)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8 weather = (uint8)lua_tointeger(L, 1);
-
-    if (weather < MAX_WEATHER_ID)
+    if (weatherType < MAX_WEATHER_ID)
     {
-        zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather((WEATHER)weather);
-        luautils::OnZoneWeatherChange(m_PBaseEntity->getZone(), weather);
+        zoneutils::GetZone(m_PBaseEntity->getZone())->SetWeather(static_cast<WEATHER>(weatherType));
+        luautils::OnZoneWeatherChange(m_PBaseEntity->getZone(), weatherType);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -2163,40 +2153,25 @@ inline int32 CLuaBaseEntity::setWeather(lua_State* L)
  *  Notes   : Used for mounting Chocobo and changing Jeuno music in Winter
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::ChangeMusic(lua_State* L)
+void CLuaBaseEntity::ChangeMusic(uint8 blockID, uint8 musicTrackID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint8 BlockID      = (uint32)lua_tointeger(L, 1);
-    uint8 MusicTrackID = (uint32)lua_tointeger(L, 2);
-
-    PChar->pushPacket(new CChangeMusicPacket(BlockID, MusicTrackID));
-    return 0;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->pushPacket(new CChangeMusicPacket(blockID, musicTrackID));
 }
 
 /************************************************************************
  *  Function: sendMenu()
  *  Purpose : Sends a menu to the PC (Ex: Auction, Mog House, Shop)
  *  Example : player:sendMenu(3)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendMenu(lua_State* L)
+void CLuaBaseEntity::sendMenu(uint32 menu)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint32 menu = (uint32)lua_tointeger(L, 1);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     switch (menu)
     {
@@ -2214,7 +2189,6 @@ inline int32 CLuaBaseEntity::sendMenu(lua_State* L)
             ShowDebug("Menu %i not implemented, yet.\n", menu);
             break;
     }
-    return 0;
 }
 
 /************************************************************************
@@ -2224,21 +2198,9 @@ inline int32 CLuaBaseEntity::sendMenu(lua_State* L)
  *  Notes   : L2 and L3 only need simplified 24-hour time format (1,2,etc)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendGuild(lua_State* L)
+bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
-
-    uint16 GuildID = (uint16)lua_tonumber(L, 1);
-    uint8  open    = (uint8)lua_tonumber(L, 2);
-    uint8  close   = (uint8)lua_tonumber(L, 3);
-    uint8  holiday = (uint8)lua_tonumber(L, 4);
-
     TPZ_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
@@ -2257,33 +2219,32 @@ inline int32 CLuaBaseEntity::sendGuild(lua_State* L)
     {
         status = GUILD_CLOSE;
     }
-    CItemContainer* PGuildShop                = guildutils::GetGuildShop(GuildID);
-    ((CCharEntity*)m_PBaseEntity)->PGuildShop = PGuildShop;
-    ((CCharEntity*)m_PBaseEntity)->pushPacket(new CGuildMenuPacket(status, open, close, holiday));
+
+    CItemContainer* PGuildShop = guildutils::GetGuildShop(guildID);
+    auto*           PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->PGuildShop = PGuildShop;
+    PChar->pushPacket(new CGuildMenuPacket(status, open, close, holiday));
+
     if (status == GUILD_OPEN)
     {
-        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CGuildMenuBuyPacket((CCharEntity*)m_PBaseEntity, PGuildShop));
+        PChar->pushPacket(new CGuildMenuBuyPacket(PChar, PGuildShop));
     }
 
-    lua_pushboolean(L, status == GUILD_OPEN);
-    return 1;
+    return status == GUILD_OPEN;
 }
 
 /************************************************************************
  *  Function: openSendBox()
  *  Purpose : Opens the send box for a PC
  *  Example : player:openSendBox()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::openSendBox(lua_State* L)
+void CLuaBaseEntity::openSendBox()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    charutils::OpenSendBox((CCharEntity*)m_PBaseEntity);
-
-    return 0;
+    charutils::OpenSendBox(static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
@@ -14763,19 +14724,19 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setElevator", CLuaBaseEntity::setElevator);
 
     SOL_REGISTER("addPeriodicTrigger", CLuaBaseEntity::addPeriodicTrigger);
-    // SOL_REGISTER(showNPC),
-    // SOL_REGISTER(hideNPC),
-    // SOL_REGISTER(updateNPCHideTime),
+    SOL_REGISTER("showNPC", CLuaBaseEntity::showNPC);
+    SOL_REGISTER("hideNPC", CLuaBaseEntity::hideNPC);
+    SOL_REGISTER("updateNPCHideTime", CLuaBaseEntity::updateNPCHideTime);
 
-    // SOL_REGISTER(getWeather),
-    // SOL_REGISTER(setWeather),
+    SOL_REGISTER("getWeather", CLuaBaseEntity::getWeather);
+    SOL_REGISTER("setWeather", CLuaBaseEntity::setWeather);
 
     // PC Instructions
-    // SOL_REGISTER(ChangeMusic),
-    // SOL_REGISTER(sendMenu),
-    // SOL_REGISTER(sendGuild),
-    // SOL_REGISTER(openSendBox),
-    SOL_REGISTER("leaveGame", CLuaBaseEntity::leaveGame),
+    SOL_REGISTER("ChangeMusic", CLuaBaseEntity::ChangeMusic);
+    SOL_REGISTER("sendMenu", CLuaBaseEntity::sendMenu);
+    SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
+    SOL_REGISTER("openSendBox", CLuaBaseEntity::openSendBox);
+    SOL_REGISTER("leaveGame", CLuaBaseEntity::leaveGame);
         // SOL_REGISTER(sendEmote),
 
         // Location and Positioning
