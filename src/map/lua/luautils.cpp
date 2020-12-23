@@ -256,13 +256,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 print(lua_State* LuaHandle)
+    void print(std::string const& str)
     {
-        if (!lua_isnil(LuaHandle, -1) && lua_isstring(LuaHandle, -1))
-        {
-            ShowScript("%s\n", lua_tostring(LuaHandle, -1));
-        }
-        return 0;
+        ShowScript("%s\n", str);
     }
 
     int32 prepFile(int8* File, const char* function)
@@ -318,23 +314,12 @@ namespace luautils
         }
     }
 
-    int32 SendEntityVisualPacket(lua_State* L)
+    void SendEntityVisualPacket(uint32 npcid, const char* command)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        if (CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC))
         {
-            uint32      npcid   = (uint32)lua_tointeger(L, 1);
-            const char* command = lua_tostring(L, 2);
-
-            CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
-
-            if (PNpc != nullptr)
-            {
-                PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityVisualPacket(PNpc, command));
-            }
-            return 0;
+            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityVisualPacket(PNpc, command));
         }
-        lua_pushnil(L);
-        return 1;
     }
 
     int32 GetNPCByID(lua_State* L)
@@ -389,48 +374,28 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetMobByID(lua_State* L)
+    std::shared_ptr<CLuaBaseEntity> GetMobByID(uint32 mobid, CLuaInstance* PLuaInstance)
     {
         TracyZoneScoped;
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        CInstance*   PInstance = PLuaInstance->GetInstance();
+        CBaseEntity* PMob{ nullptr };
+
+        if (PInstance)
         {
-            uint32       mobid = (uint32)lua_tointeger(L, 1);
-            CInstance*   PInstance{ nullptr };
-            CBaseEntity* PMob{ nullptr };
-
-            if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
-            {
-                // CLuaInstance* PLuaInstance = Lunar<CLuaInstance>::check(L, 2);
-                // PInstance                  = PLuaInstance->GetInstance();
-            }
-            if (PInstance)
-            {
-                PMob = PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB | TYPE_PET);
-            }
-            else
-            {
-                PMob = zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET);
-            }
-
-            if (!PMob)
-            {
-                ShowWarning("luautils::GetMobByID Mob doesn't exist (%d)\n", mobid);
-                lua_pushnil(L);
-            }
-            else
-            {
-                lua_getglobal(L, "CBaseEntity");
-                lua_pushstring(L, "new");
-                lua_gettable(L, -2);
-                lua_insert(L, -2);
-                lua_pushlightuserdata(L, (void*)PMob);
-                lua_pcall(L, 2, 1, 0);
-            }
-
-            return 1;
+            PMob = PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB | TYPE_PET);
         }
-        lua_pushnil(L);
-        return 1;
+        else
+        {
+            PMob = zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET);
+        }
+
+        if (!PMob)
+        {
+            ShowWarning("luautils::GetMobByID Mob doesn't exist (%d)\n", mobid);
+            return nullptr;
+        }
+
+        return std::make_shared<CLuaBaseEntity>(PMob);
     }
 
     /************************************************************************
@@ -3252,7 +3217,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -3342,7 +3307,6 @@ namespace luautils
 
     int32 OnGameDay(CZone* PZone)
     {
-        /*
         lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
 
         if (prepFile(File, "onGameDay"))
@@ -3449,18 +3413,13 @@ namespace luautils
             return std::tuple<int32, uint8, uint8>();
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PMob);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
+        sol::stack::push(LuaHandle, CLuaBaseEntity(PChar));
 
         lua_pushinteger(LuaHandle, wskill->getID());
         lua_pushnumber(LuaHandle, tp);
         lua_pushboolean(LuaHandle, primary);
 
-        CLuaAction LuaAction(&action);
-        // Lunar<CLuaAction>::push(LuaHandle, &LuaAction);
+        sol::stack::push(LuaHandle, CLuaAction(&action));
 
         if (taChar == nullptr)
         {
@@ -3468,8 +3427,7 @@ namespace luautils
         }
         else
         {
-            CLuaBaseEntity LuaTrickAttackEntity(taChar);
-            // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaTrickAttackEntity);
+            sol::stack::push(LuaHandle, CLuaBaseEntity(taChar));
         }
 
         if (lua_pcall(LuaHandle, 7, 4, 0))

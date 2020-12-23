@@ -113,10 +113,10 @@ namespace luautils
     int32 garbageCollect(); // performs a full garbage collecting cycle
     int   register_fp(int index);
     void  unregister_fp(int);
-    int32 print(lua_State*);
+    void  print(std::string const& str);
     int32 prepFile(int8*, const char*);
-    void pushFunc(int lua_func, int index = 0);
-    void callFunc(int nargs);
+    void  pushFunc(int lua_func, int index = 0);
+    void  callFunc(int nargs);
 
     template <class T, class L>
     void pushLuaType(T* obj)
@@ -206,9 +206,9 @@ namespace luautils
         lua_pushnil(LuaHandle);
     }
 
-    int32 SendEntityVisualPacket(lua_State*); // временное решение для работы гейзеров в Dangruf_Wadi
+    void  SendEntityVisualPacket(uint32 npcid, const char* command); // temporary solution for geysers in Dangruf_Wadi
     int32 GetNPCByID(lua_State*);             // Returns NPC By Id
-    int32 GetMobByID(lua_State*);             // Returns Mob By Id
+    auto  GetMobByID(uint32 mobid, CLuaInstance* PLuaInstance) -> std::shared_ptr<CLuaBaseEntity>;
     int32 WeekUpdateConquest(lua_State*);
     int32 GetRegionOwner(lua_State*);     // узнаем страну, владеющую текущим регионом
     int32 GetRegionInfluence(lua_State*); // Return influence graphics

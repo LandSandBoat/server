@@ -285,11 +285,14 @@ inline int32 CLuaBaseEntity::messageText(lua_State* L)
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(std::string const& message, int messageType, std::string const& name)
+void CLuaBaseEntity::PrintToPlayer(const char* message, sol::object messageType, sol::object name)
 {
+    CHAT_MESSAGE_TYPE int_messageType = (messageType == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageType.as<CHAT_MESSAGE_TYPE>();
+    const char*       cstr_name       = (name == sol::lua_nil) ? "" : name.as<const char*>();
+
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket(new CChatMessagePacket(PChar, static_cast<CHAT_MESSAGE_TYPE>(messageType), message.c_str(), name));
+        PChar->pushPacket(new CChatMessagePacket(PChar, int_messageType, message, cstr_name));
     }
 }
 

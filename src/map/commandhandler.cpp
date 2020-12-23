@@ -133,7 +133,8 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     }
 
     // Ensure the onTrigger function exists for this command..
-    if (!lua["onTrigger"].valid())
+    auto onTrigger = lua.get<sol::function>("onTrigger");
+    if (!onTrigger.valid())
     {
         ShowError("cmdhandler::call: (%s) missing onTrigger function\n", cmdname.c_str());
 
@@ -145,11 +146,10 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         return -1;
     }
 
-    // Push onTrigger onto stack
-    lua_getglobal(lua.lua_state(), "onTrigger");
+    sol::stack::push(lua.lua_state(), onTrigger);
 
-    // Push the calling character (if exists)..
-    sol::stack::push(lua.lua_state(), CLuaBaseEntity(PChar));
+    // Push the calling character
+    sol::stack::push<CLuaBaseEntity>(lua.lua_state(), CLuaBaseEntity(PChar));
     int32 cntparam = 1;
 
     // Prepare parameters..

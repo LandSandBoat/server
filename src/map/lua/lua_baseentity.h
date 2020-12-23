@@ -43,14 +43,14 @@ public:
     // Messaging System
     int32 showText(lua_State*); // Displays Dialog for npc
     int32 messageText(lua_State* L);
-    void  PrintToPlayer(std::string const& message, int messageType, std::string const& name); // for sending debugging messages/command confirmations to the player's client
-    int32 PrintToArea(lua_State* L);                                                           // for sending area messages to multiple players at once
-    int32 messageBasic(lua_State*);                                                            // Sends Basic Message
-    int32 messageName(lua_State* L);                                                           // Sends a Message with a Name
-    int32 messagePublic(lua_State*);                                                           // Sends a public Basic Message
-    int32 messageSpecial(lua_State*);                                                          // Sends Special Message
-    int32 messageSystem(lua_State*);                                                           // Sends System Message
-    int32 messageCombat(lua_State* L);                                                         // Sends Combat Message
+    void  PrintToPlayer(const char* message, sol::object messageType, sol::object name); // for sending debugging messages/command confirmations to the player's client
+    int32 PrintToArea(lua_State* L);                                                     // for sending area messages to multiple players at once
+    int32 messageBasic(lua_State*);                                                      // Sends Basic Message
+    int32 messageName(lua_State* L);                                                     // Sends a Message with a Name
+    int32 messagePublic(lua_State*);                                                     // Sends a public Basic Message
+    int32 messageSpecial(lua_State*);                                                    // Sends Special Message
+    int32 messageSystem(lua_State*);                                                     // Sends System Message
+    int32 messageCombat(lua_State* L);                                                   // Sends Combat Message
 
     // Variables
     int32  getCharVar(std::string const& varName);              // Returns a character variable
