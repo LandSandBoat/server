@@ -5857,36 +5857,26 @@ int32 CLuaBaseEntity::addJobTraits(lua_State* L)
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
  *  Example : if (player:getTitle()) == 123) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getTitle(lua_State* L)
+uint16 CLuaBaseEntity::getTitle()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    lua_pushinteger(L, ((CCharEntity*)m_PBaseEntity)->profile.title);
-    return 1;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->profile.title;
 }
 
 /************************************************************************
  *  Function: hasTitle()
  *  Purpose : Returns true if a player's current title matches a value
  *  Example : if (player:hasTitle(AWESOME_SAUCE)) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasTitle(lua_State* L)
+bool CLuaBaseEntity::hasTitle(uint16 titleID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 TitleID = (uint16)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, (charutils::hasTitle((CCharEntity*)m_PBaseEntity, TitleID) != 0));
-    return 1;
+    return charutils::hasTitle(static_cast<CCharEntity*>(m_PBaseEntity), titleID) != 0;
 }
 
 /************************************************************************
@@ -5896,77 +5886,55 @@ inline int32 CLuaBaseEntity::hasTitle(lua_State* L)
  *  Notes   : Use setTitle to both change and add
  ************************************************************************/
 
-inline int CLuaBaseEntity::addTitle(lua_State* L)
+void CLuaBaseEntity::addTitle(uint16 titleID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 TitleID = (uint16)lua_tointeger(L, 1);
-
-    PChar->profile.title = TitleID;
+    PChar->profile.title = titleID;
     PChar->pushPacket(new CCharStatsPacket(PChar));
 
-    charutils::addTitle(PChar, TitleID);
+    charutils::addTitle(PChar, titleID);
     charutils::SaveTitles(PChar);
-    return 0;
 }
 
 /************************************************************************
  *  Function: setTitle()
  *  Purpose : Updates the player's current title and adds to their profile
  *  Example : player:setTitle(SOB_SUPERHERO)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setTitle(lua_State* L)
+void CLuaBaseEntity::setTitle(uint16 titleID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 TitleID = (uint16)lua_tointeger(L, 1);
-
-    charutils::setTitle(PChar, TitleID);
-
-    return 0;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::setTitle(PChar, titleID);
 }
 
 /************************************************************************
  *  Function: delTitle()
  *  Purpose : Deletes a title from a character's profile
  *  Example : player:delTitle(IXION_HORNBREAKER)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delTitle(lua_State* L)
+void CLuaBaseEntity::delTitle(uint16 titleID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 TitleID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::delTitle(PChar, TitleID))
+    if (charutils::delTitle(PChar, titleID))
     {
-        if (PChar->profile.title == TitleID)
+        if (PChar->profile.title == titleID)
         {
             PChar->profile.title = 0;
         }
-        PChar->pushPacket(new CCharStatsPacket(PChar));
 
+        PChar->pushPacket(new CCharStatsPacket(PChar));
         charutils::SaveTitles(PChar);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -14984,11 +14952,11 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(addJobTraits),
 
     // Player Titles and Fame
-    // SOL_REGISTER(getTitle),
-    // SOL_REGISTER(hasTitle),
-    // SOL_REGISTER(addTitle),
-    // SOL_REGISTER(setTitle),
-    // SOL_REGISTER(delTitle),
+    SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);
+    SOL_REGISTER("hasTitle", CLuaBaseEntity::hasTitle);
+    SOL_REGISTER("addTitle", CLuaBaseEntity::addTitle);
+    SOL_REGISTER("setTitle", CLuaBaseEntity::setTitle);
+    SOL_REGISTER("delTitle", CLuaBaseEntity::delTitle);
 
     // SOL_REGISTER(getFame),
     // SOL_REGISTER(addFame),

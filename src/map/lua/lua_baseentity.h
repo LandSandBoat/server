@@ -281,11 +281,11 @@ public:
     int32 addJobTraits(lua_State*);     // Add job traits
 
     // Player Titles and Fame
-    int32 getTitle(lua_State*); // Gets character's title
-    int32 hasTitle(lua_State*);
-    int32 addTitle(lua_State*);
-    int32 setTitle(lua_State*); // Sets character's title
-    int32 delTitle(lua_State*);
+    uint16 getTitle(); // Gets character's title
+    bool   hasTitle(uint16 titleID);
+    void   addTitle(uint16 titleID);
+    void   setTitle(uint16 titleID); // Sets character's title
+    void   delTitle(uint16 titleID);
 
     int32 getFame(lua_State*);      // Gets Fame
     int32 addFame(lua_State*);      // Adds Fame
