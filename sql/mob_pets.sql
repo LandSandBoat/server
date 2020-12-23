@@ -451,6 +451,11 @@ INSERT INTO `mob_pets` VALUES (16990435,1,9,'Mamool_Ja_Stabler','Mamool_Jas_Rapt
 INSERT INTO `mob_pets` VALUES (16990437,1,9,'Mamool_Ja_Stabler','Mamool_Jas_Raptor');
 INSERT INTO `mob_pets` VALUES (16990440,1,14,'Mamool_Ja_Pikeman','Mamool_Jas_Wyvern');
 INSERT INTO `mob_pets` VALUES (16990442,1,14,'Mamool_Ja_Pikeman','Mamool_Jas_Wyvern');
+INSERT INTO `mob_pets` VALUES (16990477,1,15,'Lamia_Commandress','Lamias_Elemental');
+INSERT INTO `mob_pets` VALUES (16990486,1,15,'Lamia_Commandress','Lamias_Elemental');
+INSERT INTO `mob_pets` VALUES (16990495,1,15,'Lamia_Commandress','Lamias_Elemental');
+INSERT INTO `mob_pets` VALUES (16990512,1,14,'Assault_Draugar','Draugars_Wyvern');
+INSERT INTO `mob_pets` VALUES (16990514,1,14,'Assault_Draugar','Draugars_Wyvern');
 
 -- ------------------------------------------------------------
 -- Arrapago_Reef (Zone 54)

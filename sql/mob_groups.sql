@@ -2523,32 +2523,37 @@ INSERT INTO `mob_groups` VALUES (52,1802,52,'Greater_Colibri',330,0,1225,0,0,81,
 INSERT INTO `mob_groups` VALUES (53,4355,52,'Wivre',330,0,2952,0,0,78,83,0);
 INSERT INTO `mob_groups` VALUES (54,2423,52,'Lividroot_Amooshah',0,128,1526,30000,0,85,87,0);
 INSERT INTO `mob_groups` VALUES (55,930,52,'Dea',0,128,577,25000,0,82,84,0);
-
-INSERT INTO `mob_groups` VALUES (1727,39,52,'Acrolith',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1731,272,52,'Assault_Bhoot',0,128,0,0,0,15,17,0);
-INSERT INTO `mob_groups` VALUES (1732,273,52,'Assault_Draugar',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1744,1112,52,'Draugars_Wyvern',0,128,0,0,0,60,64,0);
-INSERT INTO `mob_groups` VALUES (1752,1505,52,'Gespenst',0,128,0,0,0,64,67,0);
-INSERT INTO `mob_groups` VALUES (1758,2327,52,'Lamia_Commandress',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1759,2336,52,'Lamia_Immolator',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1760,2337,52,'Lamia_Jaeger',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1761,2342,52,'Lamia_No15',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1762,2346,52,'Lamia_No2',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1763,2347,52,'Lamia_No21',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1764,2350,52,'Lamia_No3',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1765,2351,52,'Lamia_No34',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1766,2353,52,'Lamia_No9',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1767,2356,52,'Lamia_Rover',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1768,2358,52,'Lamias_Avatar',0,128,0,0,0,67,72,0);
-INSERT INTO `mob_groups` VALUES (1769,2359,52,'Lamias_Elemental',0,128,0,0,0,67,72,0);
-INSERT INTO `mob_groups` VALUES (1782,2606,52,'Medusa',0,128,1651,0,0,90,95,0);
-INSERT INTO `mob_groups` VALUES (1784,2618,52,'Merrow_Cantatrice',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1785,2622,52,'Merrow_No11',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1786,2623,52,'Merrow_No12',0,128,0,0,0,85,90,0);
-INSERT INTO `mob_groups` VALUES (1787,2626,52,'Merrow_Seafarer',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1788,2628,52,'Merrow_Shiranuhi',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1791,3295,52,'Qutrub_Extortionist',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (1792,3297,52,'Qutrub_Wastrel',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (56,2336,52,'Lamia_Immolator',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (57,2337,52,'Lamia_Jaeger',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (58,2327,52,'Lamia_Commandress',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (59,2359,52,'Lamias_Elemental',0,128,0,0,0,67,72,0);
+INSERT INTO `mob_groups` VALUES (60,2358,52,'Lamias_Avatar',0,128,0,0,0,67,72,0);
+INSERT INTO `mob_groups` VALUES (61,2356,52,'Lamia_Rover',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (62,2626,52,'Merrow_Seafarer',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (63,2618,52,'Merrow_Cantatrice',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (64,2628,52,'Merrow_Shiranuhi',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (65,1505,52,'Gespenst',0,128,0,0,0,64,67,0);
+INSERT INTO `mob_groups` VALUES (66,1520,52,'Assault_Draugar_blm',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (67,6719,52,'Assault_Draugar_thf',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (68,6721,52,'Assault_Draugar_drk',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (69,273,52,'Assault_Draugar_drg',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (70,1112,52,'Draugars_Wyvern',0,128,0,0,0,60,64,0);
+INSERT INTO `mob_groups` VALUES (71,272,52,'Assault_Bhoot',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (72,3295,52,'Qutrub_Extortionist',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (73,3297,52,'Qutrub_Wastrel',0,128,0,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (74,1276,52,'Expunger',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (75,2606,52,'Medusa',0,128,1651,0,0,90,95,0);
+INSERT INTO `mob_groups` VALUES (76,2351,52,'Lamia_No34',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (77,2347,52,'Lamia_No21',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (78,2342,52,'Lamia_No15',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (79,2622,52,'Merrow_No11',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (80,2353,52,'Lamia_No9',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (81,2359,52,'Lamias_Elemental',0,128,0,0,0,67,72,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (82,2358,52,'Lamias_Avatar',0,128,0,0,0,67,72,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (83,2623,52,'Merrow_No12',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (84,2350,52,'Lamia_No3',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (85,2346,52,'Lamia_No2',0,128,0,0,0,85,90,0);
+INSERT INTO `mob_groups` VALUES (86,39,52,'Acrolith',0,128,0,0,0,75,80,0);
 
 -- ------------------------------------------------------------
 -- Arrapago_Reef (Zone 54)
