@@ -2802,21 +2802,21 @@ INSERT INTO `mob_groups` VALUES (15,3207,58,'Proteus',0,128,2025,0,0,79,79,0);
 -- Silver_Sea_route_to_Al_Zahbi (Zone 59)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (2000,23,59,'Abyssal_Pugil',0,128,0,0,0,54,55,0);
-INSERT INTO `mob_groups` VALUES (2001,71,59,'Air_Elemental',0,128,38,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2002,94,59,'Almighty_Apkallu',0,128,52,0,0,55,59,0);
-INSERT INTO `mob_groups` VALUES (2003,197,59,'Apkallu',0,128,145,0,0,54,56,0);
-INSERT INTO `mob_groups` VALUES (2004,359,59,'Bathybic_Kulshedra',0,128,0,0,0,63,64,0);
-INSERT INTO `mob_groups` VALUES (2005,413,59,'Bigclaw',0,128,272,0,0,49,49,0);
-INSERT INTO `mob_groups` VALUES (2006,879,59,'Cyan_Deep_Crab',0,128,93,0,0,49,49,0);
-INSERT INTO `mob_groups` VALUES (2007,880,59,'Cyan_Deep_Pugil',0,128,37,0,0,50,55,0);
-INSERT INTO `mob_groups` VALUES (2008,2065,59,'Imp',0,128,1002,0,0,54,54,0);
-INSERT INTO `mob_groups` VALUES (2009,2296,59,'Kulshedra',0,128,1464,0,0,61,63,0);
-INSERT INTO `mob_groups` VALUES (2010,3059,59,'Orobon',0,128,969,0,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (2011,3805,59,'Submarine_Nipper',0,128,93,0,0,52,53,0);
-INSERT INTO `mob_groups` VALUES (2012,3885,59,'Thalassic_Pugil',0,128,37,0,0,52,54,0);
-INSERT INTO `mob_groups` VALUES (2013,3912,59,'Thunder_Elemental',0,128,2410,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2014,4112,59,'Utukku',0,128,2091,0,0,55,56,0);
+INSERT INTO `mob_groups` VALUES (1,879,59,'Cyan_Deep_Crab',0,128,93,0,0,49,49,0);
+INSERT INTO `mob_groups` VALUES (2,3805,59,'Submarine_Nipper',0,128,93,0,0,52,53,0);
+INSERT INTO `mob_groups` VALUES (3,3885,59,'Thalassic_Pugil',0,128,37,0,0,52,54,0);
+INSERT INTO `mob_groups` VALUES (4,23,59,'Abyssal_Pugil',0,128,0,0,0,54,55,0);
+INSERT INTO `mob_groups` VALUES (5,359,59,'Bathybic_Kulshedra',0,128,0,0,0,63,64,0);
+INSERT INTO `mob_groups` VALUES (6,3059,59,'Orobon',0,128,969,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (7,197,59,'Apkallu',0,128,145,0,0,54,56,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (8,413,59,'Bigclaw',0,128,272,0,0,49,49,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (9,880,59,'Cyan_Deep_Pugil',0,128,37,0,0,50,55,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (10,2296,59,'Kulshedra',0,128,1464,0,0,61,63,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (11,4112,59,'Utukku',300,1,2091,0,0,55,56,0);
+INSERT INTO `mob_groups` VALUES (12,2065,59,'Imp',300,1,1002,0,0,54,54,0);
+INSERT INTO `mob_groups` VALUES (13,71,59,'Air_Elemental',300,4,38,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (14,3912,59,'Thunder_Elemental',300,4,2410,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (15,94,59,'Almighty_Apkallu',0,128,52,0,0,55,59,0);
 
 -- ------------------------------------------------------------
 -- The_Ashu_Talif (Zone 60)
