@@ -200,20 +200,21 @@ public:
     void  tradeComplete();                                     // Complete trade with an npc
 
     // Equipping
-    int32 canEquipItem(lua_State*); // returns true if the player is able to equip the item
-    int32 equipItem(lua_State*);
-    int32 unequipItem(lua_State* L);
+    bool canEquipItem(uint16 itemID, sol::object const& chkLevel); // returns true if the player is able to equip the item
+    void equipItem(uint16 itemID, sol::object const& container);
+    void unequipItem(uint8 itemID);
 
-    int32 setEquipBlock(lua_State* L);
-    int32 lockEquipSlot(lua_State*);   // блокируем ячейку экипировки
-    int32 unlockEquipSlot(lua_State*); // снимаем блокировку с ячейки экипировки
+    void setEquipBlock(uint16 equipBlock);
+    void lockEquipSlot(uint8 slot);   // блокируем ячейку экипировки
+    void unlockEquipSlot(uint8 slot); // снимаем блокировку с ячейки экипировки
 
-    int32 getShieldSize(lua_State*); // Gets shield size of character
+    int8 getShieldSize(); // Gets shield size of character
 
     bool hasGearSetMod(uint8 modNameId);                             // Checks if character already has a gear set mod
     void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue); // Sets the characters gear set mod
     void clearGearSetMods();                                         // Clears a characters gear set mods
 
+    // Storing
     int32 getStorageItem(lua_State*); // returns item object player:getStorageItem(containerid, slotid, equipslotid)
     int32 storeWithPorterMoogle(lua_State* L);
     int32 getRetrievableItemsForSlip(lua_State* L);

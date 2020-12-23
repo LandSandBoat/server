@@ -4175,38 +4175,26 @@ void CLuaBaseEntity::tradeComplete()
  *  Notes   : CItemEquipment* is a pointer to weapons or armor
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::canEquipItem(lua_State* L)
+bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 itemID = (uint16)lua_tointeger(L, 1);
     TPZ_DEBUG_BREAK_IF(itemID > MAX_ITEMID);
 
-    bool checkLevel = false;
-    if (!lua_isnil(L, 2) && lua_isboolean(L, 2))
-    {
-        checkLevel = lua_toboolean(L, 2);
-    }
+    bool checkLevel = (chkLevel != sol::nil) ? chkLevel.as<bool>() : false;
 
-    CItemEquipment* PItem = (CItemEquipment*)itemutils::GetItem(itemID);
-    CBattleEntity*  PChar = (CBattleEntity*)m_PBaseEntity;
+    auto* PItem = static_cast<CItemEquipment*>(itemutils::GetItem(itemID));
+    auto* PChar = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     if (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))))
     {
-        lua_pushboolean(L, false);
-        return 1;
+        return false;
     }
     if (checkLevel && (PItem->getReqLvl() > PChar->GetMLevel()))
     {
-        lua_pushboolean(L, false);
-        return 1;
+        return false;
     }
     // ShowDebug("Item ID: %u Item Jobs: %u Player Job: %u\n",itemID,PItem->getJobs(),PChar->GetMJob());
-    lua_pushboolean(L, true);
-    return 1;
+    return true;
 }
 
 /************************************************************************
@@ -4216,36 +4204,24 @@ inline int32 CLuaBaseEntity::canEquipItem(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::equipItem(lua_State* L)
+void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 itemID = (uint16)lua_tointeger(L, 1);
-    uint8  containerID;
-    if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-    {
-        containerID = LOC_INVENTORY;
-    }
-    else
-    {
-        containerID = (uint8)lua_tointeger(L, 2);
-    }
-    uint8           SLOT = PChar->getStorage(containerID)->SearchItem(itemID);
+    uint8           containerID = (container != sol::nil) ? container.as<uint8>() : LOC_INVENTORY;
+    uint8           SLOT        = PChar->getStorage(containerID)->SearchItem(itemID);
     CItemEquipment* PItem;
 
     if (SLOT != ERROR_SLOTID)
     {
-        PItem = (CItemEquipment*)PChar->getStorage(containerID)->GetItem(SLOT);
+        PItem = static_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(SLOT));
+
         charutils::EquipItem(PChar, SLOT, PItem->getSlotType(), containerID);
         charutils::SaveCharEquip(PChar);
         charutils::SaveCharLook(PChar);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -4255,16 +4231,13 @@ inline int32 CLuaBaseEntity::equipItem(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::unequipItem(lua_State* L)
+void CLuaBaseEntity::unequipItem(uint8 itemID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
-        charutils::UnequipItem(PChar, (uint8)lua_tointeger(L, 1));
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        charutils::UnequipItem(PChar, itemID);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -4274,17 +4247,14 @@ int32 CLuaBaseEntity::unequipItem(lua_State* L)
  *  Notes   : Used exclusively for Encumbrance
  ************************************************************************/
 
-int32 CLuaBaseEntity::setEquipBlock(lua_State* L)
+void CLuaBaseEntity::setEquipBlock(uint16 equipBlock)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
-        PChar->m_EquipBlock = (uint16)lua_tointeger(L, 1);
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        PChar->m_EquipBlock = equipBlock;
         PChar->pushPacket(new CCharJobsPacket(PChar));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -4294,28 +4264,20 @@ int32 CLuaBaseEntity::setEquipBlock(lua_State* L)
  *  Notes   : Currently not implemented in any file, imagine this is for Salvage
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::lockEquipSlot(lua_State* L)
+void CLuaBaseEntity::lockEquipSlot(uint8 slot)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(slot > 15);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8 SLOT = (uint8)lua_tointeger(L, 1);
+    charutils::EquipItem(PChar, 0, slot, LOC_INVENTORY);
 
-    TPZ_DEBUG_BREAK_IF(SLOT > 15);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    charutils::EquipItem(PChar, 0, SLOT, LOC_INVENTORY);
-
-    PChar->m_EquipBlock |= 1 << SLOT;
+    PChar->m_EquipBlock |= 1 << slot;
     PChar->pushPacket(new CCharAppearancePacket(PChar));
-    PChar->pushPacket(new CEquipPacket(0, SLOT, LOC_INVENTORY));
+    PChar->pushPacket(new CEquipPacket(0, slot, LOC_INVENTORY));
     PChar->pushPacket(new CCharJobsPacket(PChar));
     PChar->updatemask |= UPDATE_LOOK;
-
-    return 0;
 }
 
 /************************************************************************
@@ -4325,23 +4287,15 @@ inline int32 CLuaBaseEntity::lockEquipSlot(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::unlockEquipSlot(lua_State* L)
+void CLuaBaseEntity::unlockEquipSlot(uint8 slot)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    TPZ_DEBUG_BREAK_IF(slot > 15);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8 SLOT = (uint8)lua_tointeger(L, 1);
-
-    TPZ_DEBUG_BREAK_IF(SLOT > 15);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    PChar->m_EquipBlock &= ~(1 << SLOT);
+    PChar->m_EquipBlock &= ~(1 << slot);
     PChar->pushPacket(new CCharJobsPacket(PChar));
-
-    return 0;
 }
 
 /************************************************************************
@@ -4351,19 +4305,16 @@ inline int32 CLuaBaseEntity::unlockEquipSlot(lua_State* L)
  *  Notes   : Returns 0 if player does not have shield equipped
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getShieldSize(lua_State* L)
+int8 CLuaBaseEntity::getShieldSize()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC && m_PBaseEntity->objtype != TYPE_PET);
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        lua_pushinteger(L, ((CCharEntity*)m_PBaseEntity)->getShieldSize());
-        return 1;
+        return static_cast<CCharEntity*>(m_PBaseEntity)->getShieldSize();
     }
 
-    lua_pushinteger(L, 0);
-    return 1;
+    return 0;
 }
 
 /************************************************************************
@@ -14767,22 +14718,22 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(breakLinkshell),
 
     // Trading
-    // SOL_REGISTER(getContainerSize),
-    // SOL_REGISTER(changeContainerSize),
-    // SOL_REGISTER(getFreeSlotsCount),
-    // SOL_REGISTER(confirmTrade),
-    // SOL_REGISTER(tradeComplete),
+    SOL_REGISTER("getContainerSize", CLuaBaseEntity::getContainerSize);
+    SOL_REGISTER("changeContainerSize", CLuaBaseEntity::changeContainerSize);
+    SOL_REGISTER("getFreeSlotsCount", CLuaBaseEntity::getFreeSlotsCount);
+    SOL_REGISTER("confirmTrade", CLuaBaseEntity::confirmTrade);
+    SOL_REGISTER("tradeComplete", CLuaBaseEntity::tradeComplete);
 
     // Equipping
-    // SOL_REGISTER(canEquipItem),
-    // SOL_REGISTER(equipItem),
-    // SOL_REGISTER(unequipItem),
+    SOL_REGISTER("canEquipItem", CLuaBaseEntity::canEquipItem);
+    SOL_REGISTER("equipItem", CLuaBaseEntity::equipItem);
+    SOL_REGISTER("unequipItem", CLuaBaseEntity::unequipItem);
 
-    // SOL_REGISTER(setEquipBlock),
-    // SOL_REGISTER(lockEquipSlot),
-    // SOL_REGISTER(unlockEquipSlot),
+    SOL_REGISTER("setEquipBlock", CLuaBaseEntity::setEquipBlock);
+    SOL_REGISTER("lockEquipSlot", CLuaBaseEntity::lockEquipSlot);
+    SOL_REGISTER("unlockEquipSlot", CLuaBaseEntity::unlockEquipSlot);
 
-    // SOL_REGISTER(getShieldSize),
+    SOL_REGISTER("getShieldSize", CLuaBaseEntity::getShieldSize);
 
     SOL_REGISTER("hasGearSetMod", CLuaBaseEntity::hasGearSetMod);
     SOL_REGISTER("addGearSetMod", CLuaBaseEntity::addGearSetMod);
