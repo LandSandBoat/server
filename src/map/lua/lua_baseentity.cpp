@@ -5122,13 +5122,11 @@ void CLuaBaseEntity::setCampaignAllegiance(uint8 allegiance)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isSeekingParty(lua_State* L)
+bool CLuaBaseEntity::isSeekingParty()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    lua_pushboolean(L, (((CCharEntity*)m_PBaseEntity)->nameflags.flags & FLAG_INVITE));
-    return 1;
+    return (static_cast<CCharEntity*>(m_PBaseEntity)->nameflags.flags & FLAG_INVITE);
 }
 
 /************************************************************************
@@ -5138,13 +5136,11 @@ inline int32 CLuaBaseEntity::isSeekingParty(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getNewPlayer(lua_State* L)
+bool CLuaBaseEntity::getNewPlayer()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    lua_pushboolean(L, (((CCharEntity*)m_PBaseEntity)->menuConfigFlags.flags & NFLAG_NEWPLAYER) == 0);
-    return 1;
+    return (static_cast<CCharEntity*>(m_PBaseEntity)->menuConfigFlags.flags & NFLAG_NEWPLAYER) == 0;
 }
 
 /************************************************************************
@@ -7961,7 +7957,6 @@ void CLuaBaseEntity::delHP(int32 delAmt)
  *  Function: takeDamage()
  *  Purpose : Takes damage from the provided attacker. If no attacker is provided then it clears the last attacker.
  *  Example : target:takeDamage(500, attacker=nil, attackType=ATTACK_NONE, damageType=DAMAGE_NONE, flags={wakeUp=true})
- *  Notes   :
  ************************************************************************/
 
 inline int32 CLuaBaseEntity::takeDamage(lua_State* L)
@@ -8062,77 +8057,59 @@ inline int32 CLuaBaseEntity::hideHP(lua_State* L)
  *  Function: getMP()
  *  Purpose : Returns the current Mana Points of an entity
  *  Example : player:getMP()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getMP(lua_State* L)
+int32 CLuaBaseEntity::getMP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->health.mp);
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->health.mp;
 }
 
 /************************************************************************
  *  Function: getMaxMP()
  *  Purpose : Returns the Max Mana Points of an entity
  *  Example : player:getMaxMP()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getMaxMP(lua_State* L)
+int32 CLuaBaseEntity::getMaxMP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->GetMaxMP());
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMaxMP();
 }
 
 /************************************************************************
  *  Function: getBaseMP()
  *  Purpose : Returns the Base Mana Points of an entity
  *  Example : player:getBaseMP()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getBaseMP(lua_State* L)
+int32 CLuaBaseEntity::getBaseMP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-
-    lua_pushnumber(L, PEntity->health.maxmp);
-    return 1;
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->health.maxmp;
 }
 
 /************************************************************************
  *  Function: addMP()
  *  Purpose : Adds Mana Points to an entity
  *  Example : player:addMP(50)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addMP(lua_State* L)
+int32 CLuaBaseEntity::addMP(int32 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    int32 result = ((CBattleEntity*)m_PBaseEntity)->addMP((int32)lua_tointeger(L, 1));
-
-    lua_pushinteger(L, result);
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->addMP(amount);
 }
 
 /************************************************************************
  *  Function: setMP()
  *  Purpose : Sets the Mana Points of an entity to a specified amount
  *  Example : player:setMP(player:getMaxMP())
- *  Notes   :
  ************************************************************************/
 
 inline int32 CLuaBaseEntity::setMP(lua_State* L)
@@ -8156,114 +8133,86 @@ inline int32 CLuaBaseEntity::setMP(lua_State* L)
  *  Notes   : Returns the restored amount if not dead
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::restoreMP(lua_State* L)
+int32 CLuaBaseEntity::restoreMP(int32 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     if (m_PBaseEntity->animation != ANIMATION_DEATH)
     {
-        int32 result = ((CBattleEntity*)m_PBaseEntity)->addMP((int32)lua_tointeger(L, 1));
-
-        lua_pushinteger(L, result);
-        return 1;
+        return static_cast<CBattleEntity*>(m_PBaseEntity)->addMP(amount);
     }
-    lua_pushinteger(L, 0);
-    return 1;
+
+    return 0;
 }
 
 /************************************************************************
  *  Function: delMP()
  *  Purpose : Subtracts Mana Points from an Entity
  *  Example : player:delMP(1000)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delMP(lua_State* L)
+void CLuaBaseEntity::delMP(int32 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    ((CBattleEntity*)m_PBaseEntity)->addMP((int32)(-lua_tointeger(L, 1)));
-
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->addMP(-amount);
 }
 
 /************************************************************************
  *  Function: getTP()
  *  Purpose : Returns the current Tactical Points of an Entity
  *  Example : if (player:getTP() > 1000) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getTP(lua_State* L)
+float CLuaBaseEntity::getTP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushnumber(L, (float)((CBattleEntity*)m_PBaseEntity)->health.tp);
-    return 1;
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return static_cast<float>(PBattle->health.tp);
 }
 
 /************************************************************************
  *  Function: addTP()
  *  Purpose : Adds Tactical Points to an Entity
  *  Example : player:addTP(1000) - Icarus Wing
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addTP(lua_State* L)
+void CLuaBaseEntity::addTP(int16 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    ((CBattleEntity*)m_PBaseEntity)->addTP((int16)lua_tointeger(L, 1));
-
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(amount);
 }
 
 /************************************************************************
  *  Function: setTP()
  *  Purpose : Sets the Tactical Points of an entity
  *  Example : player:setTP(1000)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setTP(lua_State* L)
+void CLuaBaseEntity::setTP(int16 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    int16 value = (int16)((lua_tointeger(L, 1)) - ((CBattleEntity*)m_PBaseEntity)->health.tp);
-    ((CBattleEntity*)m_PBaseEntity)->addTP(value);
-
-    return 0;
+    PBattle->health.tp    = 0;
+    int16 available_value = value - (PBattle->health.tp);
+    PBattle->addTP(available_value);
 }
 
 /************************************************************************
  *  Function: delTP()
  *  Purpose : Subtracts Tactical Points from an Entity
  *  Example : player:delTP(50)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delTP(lua_State* L)
+void CLuaBaseEntity::delTP(int16 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    ((CBattleEntity*)m_PBaseEntity)->addTP((int16)(-lua_tointeger(L, 1)));
-
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(-amount);
 }
 
 /************************************************************************
@@ -8274,11 +8223,9 @@ inline int32 CLuaBaseEntity::delTP(lua_State* L)
  *  Notes   : Level Sync is handled by CParty::SetSyncTarget
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateHealth(lua_State* L)
+void CLuaBaseEntity::updateHealth()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    ((CBattleEntity*)m_PBaseEntity)->UpdateHealth();
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->UpdateHealth();
 }
 
 /************************************************************************
@@ -8473,22 +8420,16 @@ uint16 CLuaBaseEntity::getCharSkillLevel(uint8 skillID)
  *  Notes   : Do not see implemented in any script
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addLearnedWeaponskill(lua_State* L)
+void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    auto wsid = (uint8)lua_tointeger(L, 1);
-
-    charutils::addLearnedWeaponskill(PChar, wsid);
+    charutils::addLearnedWeaponskill(PChar, wsID);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-    return 0;
 }
 
 /************************************************************************
@@ -8498,17 +8439,11 @@ inline int32 CLuaBaseEntity::addLearnedWeaponskill(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasLearnedWeaponskill(lua_State* L)
+bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto wsid = (uint8)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, (charutils::hasLearnedWeaponskill((CCharEntity*)m_PBaseEntity, wsid) != 0));
-    return 1;
+    return (charutils::hasLearnedWeaponskill(static_cast<CCharEntity*>(m_PBaseEntity), wsID) != 0);
 }
 
 /************************************************************************
@@ -8518,22 +8453,16 @@ inline int32 CLuaBaseEntity::hasLearnedWeaponskill(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delLearnedWeaponskill(lua_State* L)
+void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    auto wsid = (uint8)lua_tointeger(L, 1);
-
-    charutils::delLearnedWeaponskill(PChar, wsid);
+    charutils::delLearnedWeaponskill(PChar, wsID);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-    return 0;
 }
 
 /************************************************************************
@@ -8543,21 +8472,14 @@ inline int32 CLuaBaseEntity::delLearnedWeaponskill(lua_State* L)
  *  Notes   : Returns true if points were successfully added.
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addWeaponSkillPoints(lua_State* L)
+bool CLuaBaseEntity::addWeaponSkillPoints(uint8 slotID, uint16 points)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto  slot  = static_cast<SLOTTYPE>(slotID);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    SLOTTYPE slot   = (SLOTTYPE)lua_tointeger(L, 1);
-    uint16   points = (uint16)lua_tointeger(L, 2);
-
-    lua_pushboolean(L, charutils::AddWeaponSkillPoints(PChar, slot, points));
-    return 1;
+    return charutils::AddWeaponSkillPoints(PChar, slot, points);
 }
 
 /************************************************************************
@@ -9761,11 +9683,9 @@ inline int32 CLuaBaseEntity::isInDynamis(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::isAlive(lua_State* L)
+bool CLuaBaseEntity::isAlive()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    lua_pushboolean(L, static_cast<CBattleEntity*>(m_PBaseEntity)->isAlive());
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->isAlive();
 }
 
 /************************************************************************
@@ -9775,11 +9695,9 @@ int32 CLuaBaseEntity::isAlive(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::isDead(lua_State* L)
+bool CLuaBaseEntity::isDead()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    lua_pushboolean(L, static_cast<CBattleEntity*>(m_PBaseEntity)->isDead());
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->isDead();
 }
 
 /************************************************************************
@@ -9789,27 +9707,21 @@ int32 CLuaBaseEntity::isDead(lua_State* L)
  *  Notes   : Sending the Raise menu is handled by CDeathState::Update
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendRaise(lua_State* L)
+void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint8 RaiseLevel = (uint8)lua_tonumber(L, 1);
-
-    if (RaiseLevel == 0 || RaiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 3)
     {
-        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
+        ShowDebug(CL_CYAN "lua::sendRaise raise value is not valid!\n" CL_RESET);
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
-        PChar->m_hasRaise = RaiseLevel;
+        PChar->m_hasRaise = raiseLevel;
         PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9819,26 +9731,20 @@ inline int32 CLuaBaseEntity::sendRaise(lua_State* L)
  *  Notes   : Sending the Reraise menu is handled by CDeathState::Update
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendReraise(lua_State* L)
+void CLuaBaseEntity::sendReraise(uint8 raiseLevel)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint8 RaiseLevel = (uint8)lua_tonumber(L, 1);
-
-    if (RaiseLevel == 0 || RaiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 3)
     {
         ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
     }
     else if (PChar->m_hasRaise == 0)
     {
-        PChar->m_hasRaise = RaiseLevel;
+        PChar->m_hasRaise = raiseLevel;
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9848,30 +9754,23 @@ inline int32 CLuaBaseEntity::sendReraise(lua_State* L)
  *  Notes   : Sets position to Tractor to, Tractor available flag, and shows menu to PC
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendTractor(lua_State* L)
+void CLuaBaseEntity::sendTractor(float xPos, float yPos, float zPos, uint8 rotation)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
         PChar->m_hasTractor = 1;
 
-        PChar->m_StartActionPos.x        = (float)lua_tonumber(L, 1);
-        PChar->m_StartActionPos.y        = (float)lua_tonumber(L, 2);
-        PChar->m_StartActionPos.z        = (float)lua_tonumber(L, 3);
-        PChar->m_StartActionPos.rotation = (uint8)lua_tointeger(L, 4);
+        PChar->m_StartActionPos.x        = xPos;
+        PChar->m_StartActionPos.y        = yPos;
+        PChar->m_StartActionPos.z        = zPos;
+        PChar->m_StartActionPos.rotation = rotation;
 
         PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_TRACTOR));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -11748,55 +11647,55 @@ int32 CLuaBaseEntity::setStatDebilitation(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getStat(lua_State* L)
+uint16 CLuaBaseEntity::getStat(uint16 statId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto*  PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    uint16 value   = 0;
 
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-
-    switch (static_cast<Mod>(lua_tointeger(L, 1)))
+    switch (static_cast<Mod>(statId))
     {
         case Mod::STR:
-            lua_pushinteger(L, PEntity->STR());
+            value = PEntity->STR();
             break;
         case Mod::DEX:
-            lua_pushinteger(L, PEntity->DEX());
+            value = PEntity->DEX();
             break;
         case Mod::VIT:
-            lua_pushinteger(L, PEntity->VIT());
+            value = PEntity->VIT();
             break;
         case Mod::AGI:
-            lua_pushinteger(L, PEntity->AGI());
+            value = PEntity->AGI();
             break;
         case Mod::INT:
-            lua_pushinteger(L, PEntity->INT());
+            value = PEntity->INT();
             break;
         case Mod::MND:
-            lua_pushinteger(L, PEntity->MND());
+            value = PEntity->MND();
             break;
         case Mod::CHR:
-            lua_pushinteger(L, PEntity->CHR());
+            value = PEntity->CHR();
             break;
         case Mod::ATT:
-            lua_pushinteger(L, PEntity->ATT());
+            value = PEntity->ATT();
             break;
         case Mod::DEF:
-            lua_pushinteger(L, PEntity->DEF());
+            value = PEntity->DEF();
             break;
         case Mod::EVA:
-            lua_pushinteger(L, PEntity->EVA());
+            value = PEntity->EVA();
             break;
         // TODO: support getStat for ACC/RACC/RATT
         // case Mod::ACC:  lua_pushinteger(L, PEntity->ACC()); break;
         // case Mod::RACC: lua_pushinteger(L, PEntity->RACC()); break;
         // case Mod::RATT: lua_pushinteger(L, PEntity->RATT()); break;
         default:
-            lua_pushnil(L);
+            // We should probably show a warning here
+            break;
     }
-    return 1;
+
+    return value;
 }
 
 /************************************************************************
@@ -11806,16 +11705,12 @@ inline int32 CLuaBaseEntity::getStat(lua_State* L)
  *  Notes   : Uses the ACC member of CBattleEntity for calculation
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getACC(lua_State* L)
+uint16 CLuaBaseEntity::getACC()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-    uint16         ACC     = PEntity->ACC(0, 0); // (attackNumber = 0, offsetAcc = 0)
-
-    lua_pushinteger(L, ACC);
-    return 1;
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->ACC(0, 0); // (attackNumber = 0, offsetAcc = 0)
 }
 
 /************************************************************************
@@ -11825,15 +11720,10 @@ inline int32 CLuaBaseEntity::getACC(lua_State* L)
  *  Notes   : Uses the EVA member of CBattleEntity for calculation
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getEVA(lua_State* L)
+uint16 CLuaBaseEntity::getEVA()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-    uint16         EVA     = PEntity->EVA();
-
-    lua_pushinteger(L, EVA);
-    return 1;
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->EVA();
 }
 
 /************************************************************************
@@ -11844,31 +11734,31 @@ inline int32 CLuaBaseEntity::getEVA(lua_State* L)
  *and return result
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getRACC(lua_State* L)
+int CLuaBaseEntity::getRACC()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    auto* weapon = dynamic_cast<CItemWeapon*>(((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_RANGED]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_RANGED]);
 
     if (weapon == nullptr)
     {
         ShowDebug(CL_CYAN "lua::getRACC weapon in ranged slot is NULL!\n" CL_RESET);
         return 0;
     }
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     int skill = PEntity->GetSkill(weapon->getSkillType());
     int acc   = skill;
+
     if (skill > 200)
     {
         acc = (int)(200 + (skill - 200) * 0.9);
     }
+
     acc += PEntity->getMod(Mod::RACC);
     acc += PEntity->AGI() / 2;
     acc = acc + std::min<int16>(((100 + PEntity->getMod(Mod::FOOD_RACCP)) * acc / 100), PEntity->getMod(Mod::FOOD_RACC_CAP));
 
-    lua_pushinteger(L, acc);
-    return 1;
+    return acc;
 }
 
 /************************************************************************
@@ -11878,12 +11768,11 @@ inline int32 CLuaBaseEntity::getRACC(lua_State* L)
  *  Notes   : Calls the RATT member function of CBattleEntity for calculation
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getRATT(lua_State* L)
+uint16 CLuaBaseEntity::getRATT()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* weapon = dynamic_cast<CItemWeapon*>(((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_RANGED]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_RANGED]);
 
     if (weapon == nullptr)
     {
@@ -11891,8 +11780,7 @@ inline int32 CLuaBaseEntity::getRATT(lua_State* L)
         return 0;
     }
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->RATT(weapon->getSkillType(), weapon->getILvlSkill()));
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->RATT(weapon->getSkillType(), weapon->getILvlSkill());
 }
 
 /************************************************************************
@@ -11902,20 +11790,14 @@ inline int32 CLuaBaseEntity::getRATT(lua_State* L)
  *  Notes   : Value of m_iLvlMacc (private member of CItemWeapon)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getILvlMacc(lua_State* L)
+uint16 CLuaBaseEntity::getILvlMacc()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    if (auto* weapon = dynamic_cast<CItemWeapon*>(((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
     {
-        lua_pushinteger(L, weapon->getILvlMacc());
-    }
-    else
-    {
-        lua_pushinteger(L, 0);
+        return weapon->getILvlMacc();
     }
 
-    return 1;
+    return 0;
 }
 
 /************************************************************************
@@ -11925,24 +11807,17 @@ inline int32 CLuaBaseEntity::getILvlMacc(lua_State* L)
  *  Notes   : Only found in scripts/globals/magic.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isSpellAoE(lua_State* L)
+bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-    CSpell*        PSpell  = spell::GetSpell(static_cast<SpellID>(lua_tointeger(L, 1)));
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CSpell*        PSpell  = spell::GetSpell(static_cast<SpellID>(spellId));
 
     if (PSpell != nullptr)
     {
-        lua_pushboolean(L, battleutils::GetSpellAoEType(PEntity, PSpell) > 0);
-    }
-    else
-    {
-        lua_pushboolean(L, false);
+        return battleutils::GetSpellAoEType(PEntity, PSpell) > 0;
     }
 
-    return 1;
+    return false;
 }
 
 /************************************************************************
@@ -11953,17 +11828,13 @@ inline int32 CLuaBaseEntity::isSpellAoE(lua_State* L)
  *            DamageType is optional and defaults to weapon type if not provided.
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::physicalDmgTaken(lua_State* L)
+int32 CLuaBaseEntity::physicalDmgTaken(int32 damage, sol::object const& dmgType)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    DAMAGE_TYPE damageType = (dmgType != sol::nil) ? dmgType.as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
 
-    DAMAGE_TYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGE_TYPE>(lua_tointeger(L, 2)) : DAMAGE_TYPE::NONE;
-
-    lua_pushinteger(L, battleutils::PhysicalDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
-    return 1;
+    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage, damageType);
 }
 
 /************************************************************************
@@ -11999,17 +11870,13 @@ inline int32 CLuaBaseEntity::magicDmgTaken(lua_State* L)
  *  Notes   : Passes argument to RangedDmgTaken member of battleutils
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::rangedDmgTaken(lua_State* L)
+int32 CLuaBaseEntity::rangedDmgTaken(int32 damage, sol::object const& dmgType)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    DAMAGE_TYPE damageType = (dmgType != sol::nil) ? dmgType.as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
 
-    DAMAGE_TYPE damageType = !lua_isnil(L, 2) && lua_isnumber(L, 2) ? static_cast<DAMAGE_TYPE>(lua_tointeger(L, 2)) : DAMAGE_TYPE::NONE;
-
-    lua_pushinteger(L, battleutils::RangedDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1), damageType));
-    return 1;
+    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage, damageType);
 }
 
 /************************************************************************
@@ -12019,15 +11886,11 @@ inline int32 CLuaBaseEntity::rangedDmgTaken(lua_State* L)
  *  Notes   : Passes argument to BreathDmgTaken member of battleutils
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::breathDmgTaken(lua_State* L)
+int32 CLuaBaseEntity::breathDmgTaken(int32 damage)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    lua_pushinteger(L, battleutils::BreathDmgTaken((CBattleEntity*)m_PBaseEntity, (int32)lua_tointeger(L, 1)));
-    return 1;
+    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
 }
 
 /************************************************************************
@@ -12037,17 +11900,11 @@ inline int32 CLuaBaseEntity::breathDmgTaken(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::handleAfflatusMiseryDamage(lua_State* L)
+void CLuaBaseEntity::handleAfflatusMiseryDamage(int32 damage)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto damage = (int32)lua_tointeger(L, 1);
 
     battleutils::HandleAfflatusMiseryDamage(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
-
-    return 0;
 }
 
 /************************************************************************
@@ -12057,20 +11914,19 @@ int32 CLuaBaseEntity::handleAfflatusMiseryDamage(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isWeaponTwoHanded(lua_State* L)
+bool CLuaBaseEntity::isWeaponTwoHanded()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* weapon = dynamic_cast<CItemWeapon*>(((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]);
 
     if (weapon == nullptr)
     {
         ShowDebug(CL_CYAN "lua::getWeaponDmg weapon in main slot is NULL!\n" CL_RESET);
         return 0;
     }
-    lua_pushboolean(L, weapon->isTwoHanded());
-    return 1;
+
+    return weapon->isTwoHanded();
 }
 
 /************************************************************************
@@ -15089,8 +14945,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCampaignAllegiance", CLuaBaseEntity::getCampaignAllegiance);
     SOL_REGISTER("setCampaignAllegiance", CLuaBaseEntity::setCampaignAllegiance);
 
-    // SOL_REGISTER(isSeekingParty),
-    // SOL_REGISTER(getNewPlayer),
+    SOL_REGISTER("isSeekingParty", CLuaBaseEntity::isSeekingParty);
+    SOL_REGISTER("getNewPlayer", CLuaBaseEntity::getNewPlayer);
     // SOL_REGISTER(setNewPlayer),
     // SOL_REGISTER(getMentor),
     // SOL_REGISTER(setMentor),
@@ -15218,21 +15074,22 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(takeDamage),
     // SOL_REGISTER(hideHP),
 
-    // SOL_REGISTER(getMP),
+    SOL_REGISTER("getMP", CLuaBaseEntity::getMP);
     // Got an MPP? Well, I then you don't know me... (+1)
-    // SOL_REGISTER(getMaxMP),
-    // SOL_REGISTER(getBaseMP),
-    // SOL_REGISTER(addMP),
+    SOL_REGISTER("getMaxMP", CLuaBaseEntity::getMaxMP);
+    SOL_REGISTER("getBaseMP", CLuaBaseEntity::getBaseMP);
+    SOL_REGISTER("addMP", CLuaBaseEntity::addMP);
     SOL_REGISTER("setMP", CLuaBaseEntity::setMP);
-    // SOL_REGISTER(restoreMP),
-    // SOL_REGISTER(delMP),
+    SOL_REGISTER("restoreMP", CLuaBaseEntity::restoreMP);
+    SOL_REGISTER("delMP", CLuaBaseEntity::delMP);
 
-    // SOL_REGISTER(getTP),
-    // SOL_REGISTER(addTP),
-    // SOL_REGISTER(setTP),
-    // SOL_REGISTER(delTP),
 
-    // SOL_REGISTER(updateHealth),
+    SOL_REGISTER("getTP", CLuaBaseEntity::getTP);
+    SOL_REGISTER("addTP", CLuaBaseEntity::addTP);
+    SOL_REGISTER("setTP", CLuaBaseEntity::setTP);
+    SOL_REGISTER("delTP", CLuaBaseEntity::delTP);
+
+    SOL_REGISTER("updateHealth", CLuaBaseEntity::updateHealth);
 
     // Skills and Abilities
     SOL_REGISTER("capSkill", CLuaBaseEntity::capSkill);
@@ -15244,11 +15101,11 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setSkillRank", CLuaBaseEntity::setSkillRank);
     SOL_REGISTER("getCharSkillLevel", CLuaBaseEntity::getCharSkillLevel);
 
-    // SOL_REGISTER(addLearnedWeaponskill),
-    // SOL_REGISTER(hasLearnedWeaponskill),
-    // SOL_REGISTER(delLearnedWeaponskill),
+    SOL_REGISTER("addLearnedWeaponskill", CLuaBaseEntity::addLearnedWeaponskill);
+    SOL_REGISTER("hasLearnedWeaponskill", CLuaBaseEntity::hasLearnedWeaponskill);
+    SOL_REGISTER("delLearnedWeaponskill", CLuaBaseEntity::delLearnedWeaponskill);
 
-    // SOL_REGISTER(addWeaponSkillPoints),
+    SOL_REGISTER("addWeaponSkillPoints", CLuaBaseEntity::addWeaponSkillPoints);
 
     // SOL_REGISTER(addLearnedAbility),
     // SOL_REGISTER(hasLearnedAbility),
@@ -15308,12 +15165,12 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(isInDynamis),
 
     //// Battle Utilities
-    // SOL_REGISTER(isAlive),
-    // SOL_REGISTER(isDead),
+    SOL_REGISTER("isAlive", CLuaBaseEntity::isAlive);
+    SOL_REGISTER("isDead", CLuaBaseEntity::isDead);
 
-    // SOL_REGISTER(sendRaise),
-    // SOL_REGISTER(sendReraise),
-    // SOL_REGISTER(sendTractor),
+    SOL_REGISTER("sendRaise", CLuaBaseEntity::sendRaise);
+    SOL_REGISTER("sendReraise", CLuaBaseEntity::sendReraise);
+    SOL_REGISTER("sendTractor", CLuaBaseEntity::sendTractor);
 
     // SOL_REGISTER(messageCombat),
     // SOL_REGISTER(countdown),
@@ -15408,22 +15265,22 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(setStatDebilitation),
 
     // Damage Calculation
-    // SOL_REGISTER(getStat),
-    // SOL_REGISTER(getACC),
-    // SOL_REGISTER(getEVA),
-    // SOL_REGISTER(getRACC),
-    // SOL_REGISTER(getRATT),
-    // SOL_REGISTER(getILvlMacc),
+    SOL_REGISTER("getStat", CLuaBaseEntity::getStat);
+    SOL_REGISTER("getACC", CLuaBaseEntity::getACC);
+    SOL_REGISTER("getEVA", CLuaBaseEntity::getEVA);
+    SOL_REGISTER("getRACC", CLuaBaseEntity::getRACC);
+    SOL_REGISTER("getRATT", CLuaBaseEntity::getRATT);
+    SOL_REGISTER("getILvlMacc", CLuaBaseEntity::getILvlMacc);
 
-    // SOL_REGISTER(isSpellAoE),
+    SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
-    // SOL_REGISTER(physicalDmgTaken),
+    SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
     // SOL_REGISTER(magicDmgTaken),
-    // SOL_REGISTER(rangedDmgTaken),
-    // SOL_REGISTER(breathDmgTaken),
-    // SOL_REGISTER(handleAfflatusMiseryDamage),
+    SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);
+    SOL_REGISTER("breathDmgTaken", CLuaBaseEntity::breathDmgTaken);
+    SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
 
-    // SOL_REGISTER(isWeaponTwoHanded),
+    SOL_REGISTER("isWeaponTwoHanded", CLuaBaseEntity::isWeaponTwoHanded);
     // SOL_REGISTER(getMeleeHitDamage),
     // SOL_REGISTER(getWeaponDmg),
     // SOL_REGISTER(getWeaponDmgRank),

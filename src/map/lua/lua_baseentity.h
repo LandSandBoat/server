@@ -242,8 +242,8 @@ public:
     uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
     void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 
-    int32 isSeekingParty(lua_State* L);
-    int32 getNewPlayer(lua_State* L);
+    bool  isSeekingParty();
+    bool  getNewPlayer();
     int32 setNewPlayer(lua_State* L);
     int32 getMentor(lua_State* L);
     int32 setMentor(lua_State* L);
@@ -373,20 +373,20 @@ public:
     int32 takeDamage(lua_State*);      // Takes damage from the provided attacker
     int32 hideHP(lua_State* L);
 
-    int32 getMP(lua_State*);     // Gets MP of Entity
-    int32 getMaxMP(lua_State*);  // Get max mp of entity
-    int32 getBaseMP(lua_State*); // Gets base MP before modifiers of Entity
-    int32 addMP(lua_State*);     // Modify mp of Entity +/-
-    int32 setMP(lua_State*);     // Set mp of Entity to value
-    int32 restoreMP(lua_State*); // Modify mp of Entity, but check if alive first
-    int32 delMP(lua_State*);     // Subtract mp of Entity
+    int32 getMP();
+    int32 getMaxMP();
+    int32 getBaseMP();
+    int32 addMP(int32 amount);     // Modify mp of Entity +/-
+    int32 setMP(lua_State*);       // Set mp of Entity to value
+    int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
+    void  delMP(int32 amount);     // Subtract mp of Entity
 
-    int32 getTP(lua_State*); // Get tp of Entity
-    int32 addTP(lua_State*); // Modify tp of Entity +/-
-    int32 setTP(lua_State*); // Set tp of Entity to value
-    int32 delTP(lua_State*); // Subtract tp of Entity
+    float getTP();
+    void  addTP(int16 amount); // Modify tp of Entity +/-
+    void  setTP(int16 value);  // Set tp of Entity to value
+    void  delTP(int16 amount); // Subtract tp of Entity
 
-    int32 updateHealth(lua_State* L);
+    void updateHealth();
 
     // Skills and Abilities
     void capSkill(uint8 skill); // Caps the given skill id for the job you're on (GM COMMAND)
@@ -399,11 +399,11 @@ public:
     void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
     uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level
 
-    int32 addLearnedWeaponskill(lua_State*);
-    int32 hasLearnedWeaponskill(lua_State*);
-    int32 delLearnedWeaponskill(lua_State*);
+    void addLearnedWeaponskill(uint8 wsID);
+    bool hasLearnedWeaponskill(uint8 wsID);
+    void delLearnedWeaponskill(uint8 wsID);
 
-    int32 addWeaponSkillPoints(lua_State*); // Adds weapon skill points to an equipped weapon
+    bool addWeaponSkillPoints(uint8 slotID, uint16 points); // Adds weapon skill points to an equipped weapon
 
     int32 addLearnedAbility(lua_State*); // Add spell to Entity spell list
     int32 hasLearnedAbility(lua_State*); // Check to see if character has item in spell list
@@ -464,11 +464,11 @@ public:
     int32 isInDynamis(lua_State*);           // If player is in Dynamis return true else false
 
     // Battle Utilities
-    int32 isAlive(lua_State* L);
-    int32 isDead(lua_State* L);
-    int32 sendRaise(lua_State*);   // send raise request to char
-    int32 sendReraise(lua_State*); // send raise request to char
-    int32 sendTractor(lua_State*); // send tractor request to char
+    bool isAlive();
+    bool isDead();
+    void sendRaise(uint8 raiseLevel);
+    void sendReraise(uint8 raiseLevel);
+    void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
 
     int32 countdown(lua_State* L);
     int32 enableEntities(lua_State* L);
@@ -562,21 +562,21 @@ public:
     int32 setStatDebilitation(lua_State* L);
 
     // Damage Calculation
-    int32 getStat(lua_State*); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
-    int32 getACC(lua_State*);  // Get total ACC
-    int32 getEVA(lua_State*);  // Get total EVA
-    int32 getRACC(lua_State*); // Get total r.acc
-    int32 getRATT(lua_State*); // Get total r.attack
-    int32 getILvlMacc(lua_State* L);
-    int32 isSpellAoE(lua_State* L);
+    uint16 getStat(uint16 statId); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
+    uint16 getACC();
+    uint16 getEVA();
+    int    getRACC();
+    uint16 getRATT();
+    uint16 getILvlMacc();
+    bool   isSpellAoE(uint16 spellId);
 
-    int32 physicalDmgTaken(lua_State* L);
+    int32 physicalDmgTaken(int32 damage, sol::object const& dmgType);
     int32 magicDmgTaken(lua_State* L);
-    int32 rangedDmgTaken(lua_State* L);
-    int32 breathDmgTaken(lua_State* L);
-    int32 handleAfflatusMiseryDamage(lua_State* L);
+    int32 rangedDmgTaken(int32 damage, sol::object const& dmgType);
+    int32 breathDmgTaken(int32 damage);
+    void  handleAfflatusMiseryDamage(int32 damage);
 
-    int32 isWeaponTwoHanded(lua_State*);
+    bool  isWeaponTwoHanded();
     int32 getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
     int32 getWeaponDmg(lua_State*);      // gets the current equipped weapons' DMG rating
     int32 getWeaponDmgRank(lua_State*);  // gets the current equipped weapons' DMG rating for Rank calc
