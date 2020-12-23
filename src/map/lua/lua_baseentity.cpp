@@ -1923,17 +1923,15 @@ inline int32 CLuaBaseEntity::wait(lua_State* L)
  *  Function: openDoor()
  *  Purpose : Opens a door for 7 seconds; different time can be specified
  *  Example : npc:openDoor(30) -- Open for 30 sec; npc:openDoor() -- 7 sec
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::openDoor(lua_State* L)
+void CLuaBaseEntity::openDoor(sol::object const& seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
     if (m_PBaseEntity->animation == ANIMATION_CLOSE_DOOR)
     {
-        uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 7000;
+        uint32 OpenTime = (seconds != sol::nil) ? seconds.as<uint32>() * 1000 : 7000;
 
         m_PBaseEntity->animation = ANIMATION_OPEN_DOOR;
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
@@ -1943,24 +1941,22 @@ inline int32 CLuaBaseEntity::openDoor(lua_State* L)
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
-    return 0;
 }
 
 /************************************************************************
  *  Function: closeDoor()
  *  Purpose : Closes a door for 7 seconds; different delay can be specified
  *  Example : npc:closeDoor(); GetNPCByID(Lantern_ID):closeDoor(1)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::closeDoor(lua_State* L)
+void CLuaBaseEntity::closeDoor(sol::object const& seconds)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
     if (m_PBaseEntity->animation == ANIMATION_OPEN_DOOR)
     {
-        uint32 CloseTime         = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 7000;
+        uint32 CloseTime         = (seconds != sol::nil) ? seconds.as<uint32>() * 1000 : 7000;
         m_PBaseEntity->animation = ANIMATION_CLOSE_DOOR;
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
 
@@ -1969,41 +1965,33 @@ inline int32 CLuaBaseEntity::closeDoor(lua_State* L)
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
-    return 0;
 }
 
 /************************************************************************
  *  Function: setElevator()
  *  Purpose : Initializes an elevator or something that moves regularly
- *  Example : Too long to display
+ *  Example : See Comments Below
  *  Notes   : See: scripts/zones/Metalworks/npcs/_6lt.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setElevator(lua_State* L)
+void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed)
 {
     // Usage: setElevator(id, lower door id, upper door id, elevator platform id, animations reversed bool)
     // If giving the elevator ANIMATION_ELEVATOR_UP makes it go down, set this bool to true
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 5) || !lua_isboolean(L, 5));
 
     Elevator_t elevator;
 
-    elevator.id                 = (uint8)lua_tointeger(L, 1);
-    elevator.LowerDoor          = (CNpcEntity*)zoneutils::GetEntity((uint32)lua_tointeger(L, 2), TYPE_NPC);
-    elevator.UpperDoor          = (CNpcEntity*)zoneutils::GetEntity((uint32)lua_tointeger(L, 3), TYPE_NPC);
-    elevator.Elevator           = (CNpcEntity*)zoneutils::GetEntity((uint32)lua_tointeger(L, 4), TYPE_NPC);
-    elevator.animationsReversed = (bool)lua_toboolean(L, 5);
+    elevator.id                 = id;
+    elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
+    elevator.UpperDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(upperDoor, TYPE_NPC));
+    elevator.Elevator           = static_cast<CNpcEntity*>(zoneutils::GetEntity(elevatorId, TYPE_NPC));
+    elevator.animationsReversed = reversed;
 
     if (!elevator.Elevator || !elevator.LowerDoor || !elevator.UpperDoor)
     {
-        ShowWarning("Elevator id %d initialization failed - an ID resolved to no entity.", lua_tointeger(L, 4));
-        return 0;
+        ShowWarning("Elevator id %d initialization failed - an ID resolved to no entity.", elevatorId);
+        return;
     }
 
     // ID of 0 means it is a timed, automatic elevator
@@ -2017,8 +2005,6 @@ inline int32 CLuaBaseEntity::setElevator(lua_State* L)
 
     elevator.Elevator->name.resize(10);
     CTransportHandler::getInstance()->insertElevator(elevator);
-
-    return 0;
 }
 
 /************************************************************************
@@ -2028,36 +2014,29 @@ inline int32 CLuaBaseEntity::setElevator(lua_State* L)
  *  Notes   : See usage below
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addPeriodicTrigger(lua_State* L)
+void CLuaBaseEntity::addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffset)
 {
     // Usage npc:addPeriodicTrigger( triggerID, period, minute offset )
     // triggerID is an ID unique to the NPC
     // period is the time in vanadiel minutes that separates two triggers of the event
     // minute offset is the time in vanadiel minutes after the se epoch that the trigger period should synchronize to
 
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
 
     Trigger_t trigger;
 
-    trigger.id           = (uint8)lua_tointeger(L, 1);
-    trigger.period       = (uint16)lua_tointeger(L, 2);
-    trigger.minuteOffset = (uint16)lua_tointeger(L, 3);
-    trigger.npc          = (CNpcEntity*)zoneutils::GetEntity((uint32)m_PBaseEntity->id, TYPE_NPC);
+    trigger.id           = id;
+    trigger.period       = period;
+    trigger.minuteOffset = minOffset;
+    trigger.npc          = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PBaseEntity->id, TYPE_NPC));
 
     if (!trigger.npc)
     {
         ShowWarning("Trigger initialization failed - npc ID %d resolved to no entity.", m_PBaseEntity->id);
-        return 0;
+        return;
     }
 
     CTriggerHandler::getInstance()->insertTrigger(trigger);
-
-    return 0;
 }
 
 /************************************************************************
@@ -2067,22 +2046,19 @@ inline int32 CLuaBaseEntity::addPeriodicTrigger(lua_State* L)
  *  Notes   : Default is 15 seconds
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::showNPC(lua_State* L)
+void CLuaBaseEntity::showNPC(sol::object const& seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
+    uint32 showTime = (seconds != sol::nil) ? seconds.as<uint32>() * 1000 : 15000;
 
     m_PBaseEntity->status = STATUS_TYPE::NORMAL;
     m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
 
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc) {
         PNpc->status = STATUS_TYPE::DISAPPEAR;
         PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE));
     }));
-
-    return 0;
 }
 
 /************************************************************************
@@ -2092,24 +2068,22 @@ inline int32 CLuaBaseEntity::showNPC(lua_State* L)
  *  Notes   : Default is 15 seconds
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hideNPC(lua_State* L)
+void CLuaBaseEntity::hideNPC(sol::object const& seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
     if (m_PBaseEntity->status == STATUS_TYPE::NORMAL)
     {
-        uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
+        uint32 hideTime = (seconds != sol::nil) ? seconds.as<uint32>() * 1000 : 15000;
 
         m_PBaseEntity->status = STATUS_TYPE::DISAPPEAR;
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE));
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
             PNpc->status = STATUS_TYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -2119,21 +2093,19 @@ inline int32 CLuaBaseEntity::hideNPC(lua_State* L)
  *  Notes   : Default is 15 seconds
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateNPCHideTime(lua_State* L)
+void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
     if (m_PBaseEntity->status == STATUS_TYPE::DISAPPEAR)
     {
-        uint32 OpenTime = (!lua_isnil(L, 1) && lua_isnumber(L, 1)) ? (uint32)lua_tointeger(L, 1) * 1000 : 15000;
+        uint32 hideTime = (seconds != sol::nil) ? seconds.as<uint32>() * 1000 : 15000;
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
             PNpc->status = STATUS_TYPE::NORMAL;
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
         }));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -14786,11 +14758,11 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(checkDistance),
     // SOL_REGISTER(wait),
 
-    // SOL_REGISTER(openDoor),
-    // SOL_REGISTER(closeDoor),
-    // SOL_REGISTER(setElevator),
+    SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);
+    SOL_REGISTER("closeDoor", CLuaBaseEntity::closeDoor);
+    SOL_REGISTER("setElevator", CLuaBaseEntity::setElevator);
 
-    // SOL_REGISTER(addPeriodicTrigger),
+    SOL_REGISTER("addPeriodicTrigger", CLuaBaseEntity::addPeriodicTrigger);
     // SOL_REGISTER(showNPC),
     // SOL_REGISTER(hideNPC),
     // SOL_REGISTER(updateNPCHideTime),

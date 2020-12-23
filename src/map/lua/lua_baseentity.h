@@ -111,14 +111,14 @@ public:
     // int32 RoamAround(lua_State* L);       // pick a random point to walk to
     // int32 LimitDistance(lua_State* L);    // limits the current path distance to given max distance
 
-    int32 openDoor(lua_State*);  // открываем дверь
-    int32 closeDoor(lua_State*); // npc.closeDoor(timeToStayClosed)
-    int32 setElevator(lua_State* L);
+    void openDoor(sol::object const& seconds);
+    void closeDoor(sol::object const& seconds);
+    void setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed);
 
-    int32 addPeriodicTrigger(lua_State* L); // Adds a periodic trigger to the NPC that allows time based scripting
-    int32 showNPC(lua_State*);              // Show an NPC
-    int32 hideNPC(lua_State*);              // hide an NPC
-    int32 updateNPCHideTime(lua_State*);    // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
+    void addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffset); // Adds a periodic trigger to the NPC that allows time based scripting
+    void showNPC(sol::object const& seconds);                           // Show an NPC
+    void hideNPC(sol::object const& seconds);                           // hide an NPC
+    void updateNPCHideTime(sol::object const& seconds);                 // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
     int32 getWeather(lua_State*); // Get Weather condition
     int32 setWeather(lua_State*); // Set Weather condition (GM COMMAND)
