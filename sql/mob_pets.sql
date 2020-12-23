@@ -427,6 +427,12 @@ INSERT INTO `mob_pets` VALUES (16974108,1,15,'Lamia_No9','Lamias_Elemental');
 INSERT INTO `mob_pets` VALUES (16986133,1,9,'Fomor_Beastmaster','Fomors_Bats');
 INSERT INTO `mob_pets` VALUES (16986164,1,9,'Fomor_Beastmaster','Fomors_Bats');
 INSERT INTO `mob_pets` VALUES (16986197,1,9,'Zoraal_Jas_Pkuucha','Percipient_Zoraal_Ja');
+INSERT INTO `mob_pets` VALUES (16986436,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16986438,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
+INSERT INTO `mob_pets` VALUES (16986445,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16986447,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
+INSERT INTO `mob_pets` VALUES (16986454,1,9,'Mamool_Ja_Handler','Mamool_Jas_Lizard');
+INSERT INTO `mob_pets` VALUES (16986456,1,14,'Mamool_Ja_Cataphract','Mamool_Jas_Wyvern');
 
 -- ------------------------------------------------------------
 -- Bhaflau_Thickets (Zone 52)
