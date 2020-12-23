@@ -193,11 +193,11 @@ public:
     int32 breakLinkshell(lua_State*);   // Breaks all pearls/sacks
 
     // Trading
-    int32 getContainerSize(lua_State*);    // Gets the current capacity of a container
-    int32 changeContainerSize(lua_State*); // Increase/Decreases container size
-    int32 getFreeSlotsCount(lua_State*);   // Gets value of free slots in Entity inventory
-    int32 confirmTrade(lua_State*);        // Complete trade with an npc, only removing confirmed items
-    int32 tradeComplete(lua_State*);       // Complete trade with an npc
+    uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
+    void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
+    uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
+    void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
+    void  tradeComplete();                                     // Complete trade with an npc
 
     // Equipping
     int32 canEquipItem(lua_State*); // returns true if the player is able to equip the item

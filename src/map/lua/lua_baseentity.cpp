@@ -4052,19 +4052,14 @@ inline int32 CLuaBaseEntity::breakLinkshell(lua_State* L)
  *  Function: getContainerSize()
  *  Purpose : Returns the size of an item container
  *  Example : player:getContainerSize(LOC_INVENTORY)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getContainerSize(lua_State* L)
+uint8 CLuaBaseEntity::getContainerSize(uint8 locationID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
-    lua_pushinteger(L, PChar->getStorage((uint8)lua_tointeger(L, 1))->GetSize());
-    return 1;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->getStorage(locationID)->GetSize();
 }
 
 /************************************************************************
@@ -4074,29 +4069,22 @@ inline int32 CLuaBaseEntity::getContainerSize(lua_State* L)
  *  Notes   : Used primarily for Gobbie Bag quests
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::changeContainerSize(lua_State* L)
+void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1) && !lua_isnil(L, 2) && lua_isnumber(L, 2))
+    if (locationID < MAX_CONTAINER_ID)
     {
-        uint8 LocationID = (uint8)lua_tointeger(L, 1);
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-        if (LocationID < MAX_CONTAINER_ID)
-        {
-            CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
-
-            PChar->getStorage(LocationID)->AddBuff((int8)lua_tointeger(L, 2));
-            PChar->pushPacket(new CInventorySizePacket(PChar));
-            charutils::SaveCharInventoryCapacity(PChar);
-        }
-        else
-        {
-            ShowError(CL_RED "CLuaBaseEntity::changeContainerSize: bad container id (%u)\n", LocationID);
-        }
+        PChar->getStorage(locationID)->AddBuff(newSize);
+        PChar->pushPacket(new CInventorySizePacket(PChar));
+        charutils::SaveCharInventoryCapacity(PChar);
     }
-    return 0;
+    else
+    {
+        ShowError(CL_RED "CLuaBaseEntity::changeContainerSize: bad container id (%u)\n", locationID);
+    }
 }
 
 /************************************************************************
@@ -4106,23 +4094,12 @@ inline int32 CLuaBaseEntity::changeContainerSize(lua_State* L)
  *  Notes   : Default slot is inventory; add value to specify containers
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getFreeSlotsCount(lua_State* L)
+uint8 CLuaBaseEntity::getFreeSlotsCount(sol::object const& locID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 locationID = LOC_INVENTORY;
-
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-    {
-        locationID = (uint8)lua_tointeger(L, 1);
-        locationID = (locationID < MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
-    }
-
-    uint8 FreeSlots = ((CCharEntity*)m_PBaseEntity)->getStorage(locationID)->GetFreeSlotsCount();
-
-    lua_pushinteger(L, FreeSlots);
-    return 1;
+    uint8 locationID = (locID != sol::nil) ? locID.as<CONTAINER_ID>() : LOC_INVENTORY;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->getStorage(locationID)->GetFreeSlotsCount();
 }
 
 /************************************************************************
@@ -4132,12 +4109,11 @@ inline int32 CLuaBaseEntity::getFreeSlotsCount(lua_State* L)
  *  Notes   : Must use trade:confirmItem(slotID) first
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::confirmTrade(lua_State* L)
+void CLuaBaseEntity::confirmTrade()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4160,22 +4136,19 @@ inline int32 CLuaBaseEntity::confirmTrade(lua_State* L)
     }
     PChar->TradeContainer->Clean();
     PChar->pushPacket(new CInventoryFinishPacket());
-    return 0;
 }
 
 /************************************************************************
  *  Function: tradeComplete()
  *  Purpose : Completes trade and removes all items in trade container
  *  Example : player:tradeComplete()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::tradeComplete(lua_State* L)
+void CLuaBaseEntity::tradeComplete()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4193,7 +4166,6 @@ inline int32 CLuaBaseEntity::tradeComplete(lua_State* L)
     }
     PChar->TradeContainer->Clean();
     PChar->pushPacket(new CInventoryFinishPacket());
-    return 0;
 }
 
 /************************************************************************
@@ -14737,49 +14709,49 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
     SOL_REGISTER("openSendBox", CLuaBaseEntity::openSendBox);
     SOL_REGISTER("leaveGame", CLuaBaseEntity::leaveGame);
-        // SOL_REGISTER(sendEmote),
+    // SOL_REGISTER(sendEmote),
 
-        // Location and Positioning
-        // SOL_REGISTER(getWorldAngle),
-        // SOL_REGISTER(getFacingAngle),
-        // SOL_REGISTER(isFacing),
-        // SOL_REGISTER(isInfront),
-        // SOL_REGISTER(isBehind),
-        // SOL_REGISTER(isBeside),
+    // Location and Positioning
+    // SOL_REGISTER(getWorldAngle),
+    // SOL_REGISTER(getFacingAngle),
+    // SOL_REGISTER(isFacing),
+    // SOL_REGISTER(isInfront),
+    // SOL_REGISTER(isBehind),
+    // SOL_REGISTER(isBeside),
 
-        // SOL_REGISTER(getZone),
-        // SOL_REGISTER(getZoneID),
-        // SOL_REGISTER(getZoneName),
-        // SOL_REGISTER(isZoneVisited),
-        // SOL_REGISTER(getPreviousZone),
-        // SOL_REGISTER(getCurrentRegion),
-        // SOL_REGISTER(getContinentID),
-        // SOL_REGISTER(isInMogHouse),
+    // SOL_REGISTER(getZone),
+    // SOL_REGISTER(getZoneID),
+    // SOL_REGISTER(getZoneName),
+    // SOL_REGISTER(isZoneVisited),
+    // SOL_REGISTER(getPreviousZone),
+    // SOL_REGISTER(getCurrentRegion),
+    // SOL_REGISTER(getContinentID),
+    // SOL_REGISTER(isInMogHouse),
 
-        // SOL_REGISTER(getPos),
-        // SOL_REGISTER(showPosition),
-        // SOL_REGISTER(getXPos),
-        // SOL_REGISTER(getYPos),
-        // SOL_REGISTER(getZPos),
-        // SOL_REGISTER(getRotPos),
-        // SOL_REGISTER(setPos),
+    // SOL_REGISTER(getPos),
+    // SOL_REGISTER(showPosition),
+    // SOL_REGISTER(getXPos),
+    // SOL_REGISTER(getYPos),
+    // SOL_REGISTER(getZPos),
+    // SOL_REGISTER(getRotPos),
+    // SOL_REGISTER(setPos),
 
-        // SOL_REGISTER(warp),
-        // SOL_REGISTER(teleport),
-        // SOL_REGISTER(addTeleport),
-        // SOL_REGISTER(getTeleport),
-        // SOL_REGISTER(hasTeleport),
-        // SOL_REGISTER(setTeleportMenu),
-        // SOL_REGISTER(getTeleportMenu),
-        // SOL_REGISTER(setHomePoint),
-        // SOL_REGISTER(resetPlayer),
+    // SOL_REGISTER(warp),
+    // SOL_REGISTER(teleport),
+    // SOL_REGISTER(addTeleport),
+    // SOL_REGISTER(getTeleport),
+    // SOL_REGISTER(hasTeleport),
+    // SOL_REGISTER(setTeleportMenu),
+    // SOL_REGISTER(getTeleportMenu),
+    // SOL_REGISTER(setHomePoint),
+    // SOL_REGISTER(resetPlayer),
 
-        // SOL_REGISTER(goToEntity),
-        // SOL_REGISTER(gotoPlayer),
-        // SOL_REGISTER(bringPlayer),
+    // SOL_REGISTER(goToEntity),
+    // SOL_REGISTER(gotoPlayer),
+    // SOL_REGISTER(bringPlayer),
 
-        // Items
-        SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
+    // Items
+    SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     // SOL_REGISTER(getEquippedItem),
     // SOL_REGISTER(hasItem),
     // SOL_REGISTER(addItem),
