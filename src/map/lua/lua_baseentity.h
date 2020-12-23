@@ -331,35 +331,35 @@ public:
     int32 unseenKeyItem(lua_State*); // Attempt to remove the keyitem from the seen key item collection, only works on logout
 
     // Player Points
-    int32 addExp(lua_State*); // Add to Character Experience
-    int32 delExp(lua_State*); // Subtracts from Character Experience
-    int32 getMerit(lua_State*);
-    int32 getMeritCount(lua_State*); // Gets a players current merit count.
-    int32 setMerits(lua_State*);     // set merits (testing only!)
+    void  addExp(uint32 exp);
+    void  delExp(uint32 exp);
+    int32 getMerit(uint16 merit);
+    uint8 getMeritCount();
+    void  setMerits(uint8 numPoints); // set merits (testing only!)
 
-    int32 getGil(lua_State*); // Gets character's gil amount
-    int32 addGil(lua_State*); // adds gil to character
-    int32 setGil(lua_State*); // sets gil to value
-    int32 delGil(lua_State*); // removes gil from character
+    uint32 getGil();
+    void   addGil(int32 gil);
+    void   setGil(int32 amount);
+    bool   delGil(int32 gil);
 
-    int32 getCurrency(lua_State*); // Get Currency
-    int32 addCurrency(lua_State*); // Add Currency
-    int32 setCurrency(lua_State*); // Set Currency
-    int32 delCurrency(lua_State*); // Delete Currency
+    int32 getCurrency(std::string const& currencyType);
+    void  addCurrency(std::string const& currencyType, int32 amount);
+    void  setCurrency(std::string const& currencyType, int32 amount);
+    void  delCurrency(std::string const& currencyType, int32 amount);
 
-    int32 getCP(lua_State*); // Get CP
-    int32 addCP(lua_State*); // Add CP
-    int32 delCP(lua_State*); // Delete CP
+    int32 getCP(); // Conquest points, not to be confused with Capacity Points
+    void  addCP(int32 cp);
+    void  delCP(int32 cp);
 
-    int32 getSeals(lua_State*); // Get Seals (beastman seals, etc)
-    int32 addSeals(lua_State*); // Add Seals
-    int32 delSeals(lua_State*); // Delete Seals
+    int32 getSeals(uint8 sealType);
+    void  addSeals(int32 points, uint8 sealType);
+    void  delSeals(int32 points, uint8 sealType);
 
-    int32 getAssaultPoint(lua_State*); // Get points for an assault area
-    int32 addAssaultPoint(lua_State*); // Add points for an assault area
-    int32 delAssaultPoint(lua_State*); // Delete points for an assault area
+    int32 getAssaultPoint(uint8 region);
+    void  addAssaultPoint(uint8 region, int32 points);
+    void  delAssaultPoint(uint8 region, int32 points);
 
-    int32 addGuildPoints(lua_State*); // add guild points
+    auto addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<uint8, int16>;
 
     // Health and Status
     int32 getHP();                     // Returns Entity Health
