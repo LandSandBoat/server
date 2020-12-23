@@ -44,115 +44,96 @@ CLuaSpell::CLuaSpell(CSpell* PSpell)
 
 void CLuaSpell::setMsg(uint16 messageID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setMessage(messageID);
 }
 
 void CLuaSpell::setAoE(uint8 aoe)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setAOE(aoe);
 }
 
 void CLuaSpell::setFlag(uint8 flags)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setFlag(flags);
 }
 
 void CLuaSpell::setRadius(float radius)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setRadius(radius);
 }
 
 void CLuaSpell::setAnimation(uint16 animationID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setAnimationID(animationID);
 }
 
 void CLuaSpell::setMPCost(uint16 mpcost)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setMPCost(mpcost);
 }
 
 uint32 CLuaSpell::getCastTime()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getCastTime();
 }
 
 void CLuaSpell::setCastTime(uint32 casttime)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     m_PLuaSpell->setCastTime(casttime);
 }
 
 bool CLuaSpell::canTargetEnemy()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->canTargetEnemy();
 }
 
 uint16 CLuaSpell::getTotalTargets()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getTotalTargets();
 }
 
 uint16 CLuaSpell::getMagicBurstMessage()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getMagicBurstMessage();
 }
 
 uint16 CLuaSpell::getElement()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getElement();
 }
 
 uint8 CLuaSpell::isAoE()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getAOE();
 }
 
 bool CLuaSpell::tookEffect()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->tookEffect();
 }
 
 uint16 CLuaSpell::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return static_cast<uint16>(m_PLuaSpell->getID());
 }
 
 uint16 CLuaSpell::getMPCost()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return static_cast<uint16>(m_PLuaSpell->getMPCost());
 }
 
 uint8 CLuaSpell::getSkillType()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getSkillType();
 }
 
 uint8 CLuaSpell::getSpellGroup()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return static_cast<uint8>(m_PLuaSpell->getSpellGroup());
 }
 
 uint8 CLuaSpell::getFlag()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaSpell == nullptr);
     return m_PLuaSpell->getFlag();
 }
 

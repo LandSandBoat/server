@@ -1297,10 +1297,9 @@ inline int32 CLuaBaseEntity::getEventTarget(lua_State* L)
 
 void CLuaBaseEntity::release()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
 
@@ -1323,10 +1322,9 @@ void CLuaBaseEntity::release()
 
 void CLuaBaseEntity::setFlag(uint32 flags)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    ((CCharEntity*)m_PBaseEntity)->nameflags.flags ^= flags;
+    dynamic_cast<CCharEntity*>(m_PBaseEntity)->nameflags.flags ^= flags;
     m_PBaseEntity->updatemask |= UPDATE_HP;
 }
 
@@ -1342,7 +1340,7 @@ inline int32 CLuaBaseEntity::moghouseFlag(lua_State* L)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
     {
@@ -1427,8 +1425,6 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getCursorTarget()
 
 uint8 CLuaBaseEntity::getObjType()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype;
 }
 
@@ -1441,8 +1437,6 @@ uint8 CLuaBaseEntity::getObjType()
 
 bool CLuaBaseEntity::isPC()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype == TYPE_PC;
 }
 
@@ -1455,8 +1449,6 @@ bool CLuaBaseEntity::isPC()
 
 bool CLuaBaseEntity::isNPC()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype == TYPE_NPC;
 }
 
@@ -1469,8 +1461,6 @@ bool CLuaBaseEntity::isNPC()
 
 bool CLuaBaseEntity::isMob()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype == TYPE_MOB;
 }
 
@@ -1483,8 +1473,6 @@ bool CLuaBaseEntity::isMob()
 
 bool CLuaBaseEntity::isPet()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype == TYPE_PET;
 }
 
@@ -1497,8 +1485,6 @@ bool CLuaBaseEntity::isPet()
 
 bool CLuaBaseEntity::isAlly()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->objtype == TYPE_MOB && m_PBaseEntity->allegiance == ALLEGIANCE_TYPE::PLAYER;
 }
 
@@ -1511,7 +1497,6 @@ bool CLuaBaseEntity::isAlly()
 
 void CLuaBaseEntity::initNpcAi()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
     m_PBaseEntity->PAI = std::make_unique<CAIContainer>(m_PBaseEntity, std::make_unique<CPathFind>(m_PBaseEntity), nullptr, nullptr);
@@ -1526,8 +1511,6 @@ void CLuaBaseEntity::initNpcAi()
 
 void CLuaBaseEntity::resetAI()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     m_PBaseEntity->PAI->Reset();
 }
 
@@ -1540,8 +1523,6 @@ void CLuaBaseEntity::resetAI()
 
 uint8 CLuaBaseEntity::getStatus()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return static_cast<uint8>(m_PBaseEntity->status);
 }
 
@@ -1554,8 +1535,6 @@ uint8 CLuaBaseEntity::getStatus()
 
 void CLuaBaseEntity::setStatus(uint8 status)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     m_PBaseEntity->status = static_cast<STATUS_TYPE>(status);
     m_PBaseEntity->updatemask |= UPDATE_HP;
 }
@@ -2344,11 +2323,12 @@ inline int32 CLuaBaseEntity::openSendBox(lua_State* L)
 
 void CLuaBaseEntity::leaveGame()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    dynamic_cast<CCharEntity*>(m_PBaseEntity)->status = STATUS_TYPE::SHUTDOWN;
-    charutils::SendToZone(dynamic_cast<CCharEntity*>(m_PBaseEntity), 1, 0);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->status = STATUS_TYPE::SHUTDOWN;
+    charutils::SendToZone(PChar, 1, 0);
 }
 
 /************************************************************************
@@ -4788,7 +4768,6 @@ inline int32 CLuaBaseEntity::retrieveItemFromSlip(lua_State* L)
 
 uint8 CLuaBaseEntity::getRace()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->look.race;
@@ -4802,7 +4781,6 @@ uint8 CLuaBaseEntity::getRace()
 
 uint8 CLuaBaseEntity::getGender()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -4831,8 +4809,6 @@ const char* CLuaBaseEntity::getName()
 
 void CLuaBaseEntity::hideName(bool isHidden)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     m_PBaseEntity->HideName(isHidden);
 }
 
@@ -4843,7 +4819,6 @@ void CLuaBaseEntity::hideName(bool isHidden)
 
 bool CLuaBaseEntity::checkNameFlags(uint32 flags)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
@@ -4865,8 +4840,6 @@ bool CLuaBaseEntity::checkNameFlags(uint32 flags)
 
 uint16 CLuaBaseEntity::getModelId()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return m_PBaseEntity->GetModelId();
 }
 
@@ -4879,8 +4852,6 @@ uint16 CLuaBaseEntity::getModelId()
 
 void CLuaBaseEntity::setModelId(uint16 modelId, uint8 slot = 0)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         switch (static_cast<SLOTTYPE>(slot))
@@ -4931,7 +4902,6 @@ void CLuaBaseEntity::setModelId(uint16 modelId, uint8 slot = 0)
 
 void CLuaBaseEntity::setCostume(uint16 costume)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -4952,7 +4922,6 @@ void CLuaBaseEntity::setCostume(uint16 costume)
 
 uint16 CLuaBaseEntity::getCostume()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5071,10 +5040,9 @@ inline int32 CLuaBaseEntity::AnimationSub(lua_State* L)
 
 uint8 CLuaBaseEntity::getNation()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->profile.nation;
+    return dynamic_cast<CCharEntity*>(m_PBaseEntity)->profile.nation;
 }
 
 /************************************************************************
@@ -5086,7 +5054,6 @@ uint8 CLuaBaseEntity::getNation()
 
 void CLuaBaseEntity::setNation(uint8 nation)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5103,8 +5070,6 @@ void CLuaBaseEntity::setNation(uint8 nation)
 
 uint8 CLuaBaseEntity::getAllegiance()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     return static_cast<uint8>(m_PBaseEntity->allegiance);
 }
 
@@ -5116,8 +5081,6 @@ uint8 CLuaBaseEntity::getAllegiance()
 
 void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
     m_PBaseEntity->updatemask |= UPDATE_HP;
 }
@@ -5131,10 +5094,9 @@ void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 
 uint8 CLuaBaseEntity::getCampaignAllegiance()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    return static_cast<CCharEntity*>(m_PBaseEntity)->profile.campaign_allegiance;
+    return dynamic_cast<CCharEntity*>(m_PBaseEntity)->profile.campaign_allegiance;
 }
 
 /************************************************************************
@@ -5145,7 +5107,6 @@ uint8 CLuaBaseEntity::getCampaignAllegiance()
 
 void CLuaBaseEntity::setCampaignAllegiance(uint8 allegiance)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5474,10 +5435,9 @@ inline int32 CLuaBaseEntity::getTimeCreated(lua_State* L)
 
 uint8 CLuaBaseEntity::getMainJob()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMJob();
+    return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetMJob();
 }
 
 /************************************************************************
@@ -5489,10 +5449,9 @@ uint8 CLuaBaseEntity::getMainJob()
 
 uint8 CLuaBaseEntity::getSubJob()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetSJob();
+    return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetSJob();
 }
 
 /************************************************************************
@@ -5504,7 +5463,6 @@ uint8 CLuaBaseEntity::getSubJob()
 
 void CLuaBaseEntity::changeJob(uint8 newJob)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5566,7 +5524,6 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
 
 void CLuaBaseEntity::changesJob(uint8 subJob)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5596,7 +5553,6 @@ void CLuaBaseEntity::changesJob(uint8 subJob)
 
 void CLuaBaseEntity::unlockJob(uint8 JobID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -5627,7 +5583,6 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
 
 bool CLuaBaseEntity::hasJob(uint8 job)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     JOBTYPE JobID = static_cast<JOBTYPE>(job);
@@ -5647,7 +5602,6 @@ bool CLuaBaseEntity::hasJob(uint8 job)
 
 uint8 CLuaBaseEntity::getMainLvl()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetMLevel();
@@ -5661,7 +5615,6 @@ uint8 CLuaBaseEntity::getMainLvl()
 
 uint8 CLuaBaseEntity::getSubLvl()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetSLevel();
@@ -5675,7 +5628,6 @@ uint8 CLuaBaseEntity::getSubLvl()
 
 uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     TPZ_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
@@ -5693,7 +5645,6 @@ uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 
 void CLuaBaseEntity::setLevel(uint8 level)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     TPZ_DEBUG_BREAK_IF(level > 99);
@@ -6310,7 +6261,6 @@ inline int32 CLuaBaseEntity::getFameLevel(lua_State* L)
 
 uint8 CLuaBaseEntity::getRank()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -6326,7 +6276,6 @@ uint8 CLuaBaseEntity::getRank()
 
 uint8 CLuaBaseEntity::getOtherRank(uint8 nation)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -6342,7 +6291,6 @@ uint8 CLuaBaseEntity::getOtherRank(uint8 nation)
 
 void CLuaBaseEntity::setRank(uint8 rank)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -6360,7 +6308,6 @@ void CLuaBaseEntity::setRank(uint8 rank)
 
 uint32 CLuaBaseEntity::getRankPoints()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     return dynamic_cast<CCharEntity*>(m_PBaseEntity)->profile.rankpoints;
@@ -6375,7 +6322,6 @@ uint32 CLuaBaseEntity::getRankPoints()
 
 void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -6394,7 +6340,6 @@ void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
 
 void CLuaBaseEntity::setRankPoints(uint32 rankpoints)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -8014,10 +7959,9 @@ inline int32 CLuaBaseEntity::addGuildPoints(lua_State* L)
 
 int32 CLuaBaseEntity::getHP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->health.hp;
+    return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->health.hp;
 }
 
 /************************************************************************
@@ -8029,10 +7973,9 @@ int32 CLuaBaseEntity::getHP()
 
 uint8 CLuaBaseEntity::getHPP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetHPP();
+    return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetHPP();
 }
 
 /************************************************************************
@@ -8044,10 +7987,9 @@ uint8 CLuaBaseEntity::getHPP()
 
 int32 CLuaBaseEntity::getMaxHP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMaxHP();
+    return dynamic_cast<CBattleEntity*>(m_PBaseEntity)->GetMaxHP();
 }
 
 /************************************************************************
@@ -8059,10 +8001,9 @@ int32 CLuaBaseEntity::getMaxHP()
 
 int32 CLuaBaseEntity::getBaseHP()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
 
     return PEntity->health.maxhp;
 }
@@ -8076,10 +8017,9 @@ int32 CLuaBaseEntity::getBaseHP()
 
 int32 CLuaBaseEntity::addHP(int32 hpAdd)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
 
     int32 result = PBattle->addHP(hpAdd);
 
@@ -8100,17 +8040,18 @@ int32 CLuaBaseEntity::addHP(int32 hpAdd)
 
 void CLuaBaseEntity::setHP(int32 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->health.hp = 0;
-    static_cast<CBattleEntity*>(m_PBaseEntity)->addHP(value);
+    auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+
+    PBattle->health.hp = 0;
+    PBattle->addHP(value);
     m_PBaseEntity->updatemask |= UPDATE_HP;
 
     // When setting the HP to 0 the entity "falls to the ground" so the last attacker needs to be cleared
     if (value == 0)
     {
-        static_cast<CBattleEntity*>(m_PBaseEntity)->PLastAttacker = nullptr;
+        PBattle->PLastAttacker = nullptr;
     }
 }
 
@@ -8123,12 +8064,11 @@ void CLuaBaseEntity::setHP(int32 value)
 
 int32 CLuaBaseEntity::restoreHP(int32 restoreAmt)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     if (m_PBaseEntity->animation != ANIMATION_DEATH)
     {
-        int32 result = static_cast<CBattleEntity*>(m_PBaseEntity)->addHP(restoreAmt);
+        int32 result = dynamic_cast<CBattleEntity*>(m_PBaseEntity)->addHP(restoreAmt);
 
         return result;
     }
@@ -8145,10 +8085,9 @@ int32 CLuaBaseEntity::restoreHP(int32 restoreAmt)
 
 void CLuaBaseEntity::delHP(int32 delAmt)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->takeDamage(delAmt);
+    dynamic_cast<CBattleEntity*>(m_PBaseEntity)->takeDamage(delAmt);
 }
 
 /************************************************************************
@@ -8484,12 +8423,11 @@ inline int32 CLuaBaseEntity::updateHealth(lua_State* L)
 
 void CLuaBaseEntity::capSkill(uint8 skill)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     if (skill < MAX_SKILLTYPE)
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
         // CItemWeapon* PItem = ((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN];
         /* let's just ignore this part for the moment
         //remove modifiers if valid
@@ -8524,10 +8462,9 @@ void CLuaBaseEntity::capSkill(uint8 skill)
 
 void CLuaBaseEntity::capAllSkills()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 i = 1; i < 45; ++i)
     {
@@ -8559,7 +8496,6 @@ void CLuaBaseEntity::capAllSkills()
 
 uint16 CLuaBaseEntity::getSkillLevel(uint16 skillId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype & TYPE_NPC);
 
     TPZ_DEBUG_BREAK_IF(skillId >= MAX_SKILLTYPE);
@@ -8576,7 +8512,6 @@ uint16 CLuaBaseEntity::getSkillLevel(uint16 skillId)
 
 void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     TPZ_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
@@ -8602,8 +8537,6 @@ void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 
 uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 skillId, uint8 jobId, uint8 level)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     auto skill = static_cast<SKILLTYPE>(skillId);
     auto job   = static_cast<JOBTYPE>(jobId);
 
@@ -8619,9 +8552,7 @@ uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 skillId, uint8 jobId, uint8 level)
 
 uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     return PChar->RealSkills.rank[rankID];
 }
@@ -8635,10 +8566,9 @@ uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 
 void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->WorkingSkills.rank[skillID]  = newrank;
     PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
@@ -8659,11 +8589,9 @@ void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 
 uint16 CLuaBaseEntity::getCharSkillLevel(uint8 skillID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
         return PChar->RealSkills.skill[skillID];
     }
