@@ -11087,49 +11087,42 @@ inline int32 CLuaBaseEntity::getNotorietyList(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addStatusEffect(lua_State* L)
+bool CLuaBaseEntity::addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                                     sol::object const& arg4, sol::object const& arg5, sol::object const& arg6)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    if (lua_isuserdata(L, 1))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        CLuaStatusEffect* PStatusEffect = nullptr;
+        return false;
+    }
 
-        lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(new CStatusEffect(*PStatusEffect->GetStatusEffect())));
+    if (arg0.is<sol::userdata>())
+    {
+        auto PStatusEffect = arg0.as<CLuaStatusEffect>();
+        return PBattleEntity->StatusEffectContainer->AddStatusEffect(new CStatusEffect(*PStatusEffect.GetStatusEffect()));
     }
     else
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
+        CStatusEffect* PEffect = new CStatusEffect(arg0.as<EFFECT>(),                           // Effect ID
+                                                   arg0.as<uint16>(),                           // Effect Icon (Associated with ID)
+                                                   arg1.as<uint16>(),                           // Power
+                                                   arg2.as<uint16>(),                           // Tick
+                                                   arg3.as<uint16>(),                           // Duration
+                                                   (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // SubID
+                                                   (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Power
+                                                   (arg6 != sol::nil) ? arg5.as<uint16>() : 0); // Tier
 
-        int32 n = lua_gettop(L);
-
-        CStatusEffect* PEffect = new CStatusEffect((EFFECT)lua_tointeger(L, 1),                 // Effect ID
-                                                   (uint16)lua_tointeger(L, 1),                 // Effect Icon (Associated with ID)
-                                                   (uint16)lua_tointeger(L, 2),                 // Power
-                                                   (uint16)lua_tointeger(L, 3),                 // Tick
-                                                   (uint16)lua_tointeger(L, 4),                 // Duration
-                                                   (n >= 5 ? (uint16)lua_tointeger(L, 5) : 0),  // SubID
-                                                   (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0),  // Sub Power
-                                                   (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0)); // Tier
-
-        CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
-        if (PEffect->GetStatusID() == EFFECT_FOOD && PEntity)
+        if (PEffect->GetStatusID() == EFFECT_FOOD)
         {
-            int16 durationModifier = PEntity->getMod(Mod::FOOD_DURATION);
+            int16 durationModifier = PBattleEntity->getMod(Mod::FOOD_DURATION);
             if (durationModifier)
             {
                 PEffect->SetDuration((uint32)(PEffect->GetDuration() + PEffect->GetDuration() * (durationModifier / 100.0f)));
             }
         }
 
-        lua_pushboolean(L, PEntity->StatusEffectContainer->AddStatusEffect(PEffect));
+        return PBattleEntity->StatusEffectContainer->AddStatusEffect(PEffect);
     }
-
-    return 1;
 }
 
 /************************************************************************
@@ -15577,7 +15570,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(getNotorietyList),
 
     // Status Effects
-    // SOL_REGISTER(addStatusEffect),
+    SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
     // SOL_REGISTER(addStatusEffectEx),
     // SOL_REGISTER(getStatusEffect),
     // SOL_REGISTER(getStatusEffects),

@@ -516,7 +516,8 @@ public:
     int32 getNotorietyList(lua_State*); // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
-    int32 addStatusEffect(lua_State*);   // Adds status effect to character
+    bool addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                          sol::object const& arg4, sol::object const& arg5, sol::object const& arg6); // Adds status effect to character
     int32 addStatusEffectEx(lua_State*); // Adds status effect to character
     int32 getStatusEffect(lua_State*);
     int32 getStatusEffects(lua_State*);
