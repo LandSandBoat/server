@@ -2782,21 +2782,21 @@ INSERT INTO `mob_groups` VALUES (1984,4468,57,'Yazquhl',0,128,0,0,0,0,0,0);
 -- Silver_Sea_route_to_Nashmau (Zone 58)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1985,23,58,'Abyssal_Pugil',0,128,0,0,0,54,55,0);
-INSERT INTO `mob_groups` VALUES (1986,71,58,'Air_Elemental',0,128,38,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (1987,197,58,'Apkallu',0,128,145,0,0,54,56,0);
-INSERT INTO `mob_groups` VALUES (1988,359,58,'Bathybic_Kulshedra',0,128,0,0,0,63,64,0);
-INSERT INTO `mob_groups` VALUES (1989,413,58,'Bigclaw',0,128,272,0,0,49,49,0);
-INSERT INTO `mob_groups` VALUES (1990,879,58,'Cyan_Deep_Crab',0,128,555,0,0,49,49,0);
-INSERT INTO `mob_groups` VALUES (1991,880,58,'Cyan_Deep_Pugil',0,128,37,0,0,50,55,0);
-INSERT INTO `mob_groups` VALUES (1992,2065,58,'Imp',0,128,1002,0,0,54,54,0);
-INSERT INTO `mob_groups` VALUES (1993,2296,58,'Kulshedra',0,128,504,0,0,61,63,0);
-INSERT INTO `mob_groups` VALUES (1994,3059,58,'Orobon',0,128,969,0,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (1995,3207,58,'Proteus',0,128,2025,0,0,62,66,0);
-INSERT INTO `mob_groups` VALUES (1996,3805,58,'Submarine_Nipper',0,128,93,0,0,52,53,0);
-INSERT INTO `mob_groups` VALUES (1997,3885,58,'Thalassic_Pugil',0,128,37,0,0,52,54,0);
-INSERT INTO `mob_groups` VALUES (1998,3912,58,'Thunder_Elemental',0,128,2410,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (1999,4112,58,'Utukku',0,128,2091,0,0,55,56,0);
+INSERT INTO `mob_groups` VALUES (1,879,58,'Cyan_Deep_Crab',0,128,555,0,0,49,49,0);
+INSERT INTO `mob_groups` VALUES (2,3805,58,'Submarine_Nipper',0,128,93,0,0,52,53,0);
+INSERT INTO `mob_groups` VALUES (3,3885,58,'Thalassic_Pugil',0,128,37,0,0,52,54,0);
+INSERT INTO `mob_groups` VALUES (4,23,58,'Abyssal_Pugil',0,128,0,0,0,54,55,0);
+INSERT INTO `mob_groups` VALUES (5,359,58,'Bathybic_Kulshedra',0,128,0,0,0,63,64,0);
+INSERT INTO `mob_groups` VALUES (6,3059,58,'Orobon',0,128,969,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (7,197,58,'Apkallu',0,128,145,0,0,54,56,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (8,413,58,'Bigclaw',0,128,272,0,0,49,50,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (9,880,58,'Cyan_Deep_Pugil',0,128,37,0,0,50,55,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (10,2296,58,'Kulshedra',0,128,504,0,0,61,63,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (11,4112,58,'Utukku',300,1,2091,0,0,55,56,0);
+INSERT INTO `mob_groups` VALUES (12,2065,58,'Imp',300,1,1002,0,0,54,54,0);
+INSERT INTO `mob_groups` VALUES (13,71,58,'Air_Elemental',300,4,38,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (14,3912,58,'Thunder_Elemental',300,4,2410,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (15,3207,58,'Proteus',0,128,2025,0,0,79,79,0);
 
 -- ------------------------------------------------------------
 -- Silver_Sea_route_to_Al_Zahbi (Zone 59)
@@ -3358,7 +3358,7 @@ INSERT INTO `mob_groups` VALUES (29,978,74,'Demonic_Rose',0,128,608,0,0,73,75,0)
 INSERT INTO `mob_groups` VALUES (30,1018,74,'Devil_Manta',0,128,643,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (31,219,74,'Archaic_Gears',0,128,158,0,0,74,75,0);
 INSERT INTO `mob_groups` VALUES (33,976,74,'Demonic_Pugil',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (34,3059,74,'Orobon',0,128,1605,0,0,68,69,0);
+INSERT INTO `mob_groups` VALUES (34,6722,74,'Orobon',0,128,1605,0,0,68,69,0);
 INSERT INTO `mob_groups` VALUES (35,216,74,'Archaic_Chariot',0,128,151,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (36,2762,74,'Mourioche',0,128,1745,0,0,68,69,0);
 INSERT INTO `mob_groups` VALUES (37,1761,74,'Goobbue_Wanderer',0,128,1203,0,0,70,73,0);
