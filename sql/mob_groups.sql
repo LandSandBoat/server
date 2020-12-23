@@ -2190,22 +2190,21 @@ INSERT INTO `mob_groups` VALUES (51,4566,45,'Iratham',0,0,0,0,999,90,90,0);
 INSERT INTO `mob_groups` VALUES (52,1845,45,'Gully_Clionid',0,0,1256,0,999,79,80,0);
 INSERT INTO `mob_groups` VALUES (53,1843,45,'Gulch_Limule',0,0,1254,0,999,79,80,0);
 
-
 -- ------------------------------------------------------------
 -- Open_sea_route_to_Al_Zahbi (Zone 46)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1464,445,46,'Blanched_Kraken',0,128,290,0,0,45,45,0);
-INSERT INTO `mob_groups` VALUES (1465,1837,46,'Gugru_Crab',0,128,1248,0,0,33,35,0);
-INSERT INTO `mob_groups` VALUES (1466,1838,46,'Gugru_Jagil',0,128,37,0,0,34,37,0);
-INSERT INTO `mob_groups` VALUES (1467,1839,46,'Gugru_Orobon',0,128,1249,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (1468,2906,46,'Northern_Piranu',0,128,0,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (1469,2935,46,'Ocean_Jagil',0,128,37,0,0,34,36,0);
-INSERT INTO `mob_groups` VALUES (1470,2936,46,'Ocean_Kraken',0,128,290,0,0,41,43,0);
-INSERT INTO `mob_groups` VALUES (1471,3102,46,'Passage_Crab',0,128,555,0,0,35,35,0);
-INSERT INTO `mob_groups` VALUES (1472,3358,46,'Revenant',0,128,2091,0,0,36,36,0);
-INSERT INTO `mob_groups` VALUES (1473,3912,46,'Thunder_Elemental',0,128,2410,0,0,39,40,0);
-INSERT INTO `mob_groups` VALUES (1474,4309,46,'Water_Elemental',0,128,2629,0,0,39,39,0);
+INSERT INTO `mob_groups` VALUES (1,3102,46,'Passage_Crab',0,128,555,0,0,35,35,0);
+INSERT INTO `mob_groups` VALUES (2,1838,46,'Gugru_Jagil',0,128,37,0,0,34,37,0);
+INSERT INTO `mob_groups` VALUES (3,445,46,'Blanched_Kraken',0,128,290,0,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (4,1839,46,'Gugru_Orobon',0,128,1249,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (5,2906,46,'Northern_Piranu',0,128,0,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (6,1837,46,'Gugru_Crab',0,128,1248,0,0,33,35,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (7,2935,46,'Ocean_Jagil',0,128,37,0,0,34,36,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (8,2936,46,'Ocean_Kraken',0,128,290,0,0,41,43,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (9,3358,46,'Revenant',300,1,2091,0,0,41,41,0);
+INSERT INTO `mob_groups` VALUES (10,3912,46,'Thunder_Elemental',300,4,2410,0,0,39,40,0);
+INSERT INTO `mob_groups` VALUES (11,4309,46,'Water_Elemental',300,4,2629,0,0,39,40,0);
 
 -- ------------------------------------------------------------
 -- Open_sea_route_to_Mhaura (Zone 47)
