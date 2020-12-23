@@ -2210,17 +2210,17 @@ INSERT INTO `mob_groups` VALUES (11,4309,46,'Water_Elemental',300,4,2629,0,0,39,
 -- Open_sea_route_to_Mhaura (Zone 47)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1475,445,47,'Blanched_Kraken',0,128,290,0,0,45,45,0);
-INSERT INTO `mob_groups` VALUES (1476,1837,47,'Gugru_Crab',0,128,1248,0,0,33,35,0);
-INSERT INTO `mob_groups` VALUES (1477,1838,47,'Gugru_Jagil',0,128,37,0,0,34,37,0);
-INSERT INTO `mob_groups` VALUES (1478,1839,47,'Gugru_Orobon',0,128,969,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (1479,2935,47,'Ocean_Jagil',0,128,37,0,0,34,36,0);
-INSERT INTO `mob_groups` VALUES (1480,2936,47,'Ocean_Kraken',0,128,290,0,0,44,44,0);
-INSERT INTO `mob_groups` VALUES (1481,3102,47,'Passage_Crab',0,128,555,0,0,35,35,0);
-INSERT INTO `mob_groups` VALUES (1482,3358,47,'Revenant',0,128,2091,0,0,36,36,0);
-INSERT INTO `mob_groups` VALUES (1483,3708,47,'Southern_Piranu',0,128,0,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (1484,3912,47,'Thunder_Elemental',0,128,2410,0,0,39,40,0);
-INSERT INTO `mob_groups` VALUES (1485,4309,47,'Water_Elemental',0,128,2629,0,0,39,40,0);
+INSERT INTO `mob_groups` VALUES (1,3102,47,'Passage_Crab',0,128,555,0,0,35,35,0);
+INSERT INTO `mob_groups` VALUES (2,1838,47,'Gugru_Jagil',0,128,37,0,0,34,37,0);
+INSERT INTO `mob_groups` VALUES (3,445,47,'Blanched_Kraken',0,128,290,0,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (4,1839,47,'Gugru_Orobon',0,128,969,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (5,3708,47,'Southern_Piranu',0,128,0,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (6,1837,47,'Gugru_Crab',0,128,1248,0,0,33,35,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (7,2935,47,'Ocean_Jagil',0,128,37,0,0,34,36,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (8,2936,47,'Ocean_Kraken',0,128,290,0,0,41,43,0); -- TODO: get respawn timer from retail
+INSERT INTO `mob_groups` VALUES (9,3358,47,'Revenant',300,1,2091,0,0,41,41,0);
+INSERT INTO `mob_groups` VALUES (10,3912,47,'Thunder_Elemental',300,4,2410,0,0,39,40,0);
+INSERT INTO `mob_groups` VALUES (11,4309,47,'Water_Elemental',300,4,2629,0,0,39,40,0);
 
 -- ------------------------------------------------------------
 -- Al_Zahbi (Zone 48)
