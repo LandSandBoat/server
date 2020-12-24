@@ -30,8 +30,6 @@
 
 CLuaRegion::CLuaRegion(CRegion* PRegion)
 {
-    TPZ_DEBUG_BREAK_IF(PRegion == nullptr);
-
     m_PLuaRegion = PRegion;
 }
 
@@ -41,12 +39,9 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::GetRegionID(lua_State* L)
+uint32 CLuaRegion::GetRegionID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetRegionID());
-    return 1;
+    return m_PLuaRegion->GetRegionID();
 }
 
 /************************************************************************
@@ -55,12 +50,9 @@ inline int32 CLuaRegion::GetRegionID(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::GetCount(lua_State* L)
+int16 CLuaRegion::GetCount()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetCount());
-    return 1;
+    return m_PLuaRegion->GetCount();
 }
 
 /************************************************************************
@@ -69,13 +61,9 @@ inline int32 CLuaRegion::GetCount(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::AddCount(lua_State* L)
+int16 CLuaRegion::AddCount(int16 count)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->AddCount((int16)lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->AddCount(count);
 }
 
 /************************************************************************
@@ -84,13 +72,9 @@ inline int32 CLuaRegion::AddCount(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::DelCount(lua_State* L)
+int16 CLuaRegion::DelCount(int16 count)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->DelCount((int16)lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->DelCount(count);
 }
 
 //======================================================//

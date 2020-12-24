@@ -38,10 +38,10 @@ public:
         return m_PLuaRegion;
     }
 
-    int32 GetRegionID(lua_State*);
-    int32 GetCount(lua_State*);
-    int32 AddCount(lua_State*);
-    int32 DelCount(lua_State*);
+    uint32 GetRegionID();
+    int16  GetCount();
+    int16  AddCount(int16 count);
+    int16  DelCount(int16 count);
 
     static void Register();
 };
