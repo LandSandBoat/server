@@ -4251,7 +4251,7 @@ void CLuaBaseEntity::setEquipBlock(uint16 equipBlock)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
         PChar->m_EquipBlock = equipBlock;
         PChar->pushPacket(new CCharJobsPacket(PChar));
     }
@@ -6844,57 +6844,43 @@ inline int32 CLuaBaseEntity::getEminenceProgress(lua_State* L)
  *  Notes   : See scripts/zones/Aht_Urhgan_Whitegate/npcs/Famad.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addAssault(lua_State* L)
+void CLuaBaseEntity::addAssault(uint8 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8 MissionID = (uint8)lua_tointeger(L, 1);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (PChar->m_assaultLog.current != 0)
     {
         ShowWarning(CL_YELLOW "Lua::addAssault: player has a current assault\n" CL_RESET);
     }
-    PChar->m_assaultLog.current = MissionID;
+
+    PChar->m_assaultLog.current = missionID;
     PChar->pushPacket(new CQuestMissionLogPacket(PChar, MISSION_ASSAULT, LOG_MISSION_CURRENT));
 
     charutils::SaveMissionsList(PChar);
-
-    return 0;
 }
 
 /************************************************************************
  *  Function: delAssault()
  *  Purpose : Deletes an assault mission from a player's log
  *  Example : player:delAssault(currentAssault)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delAssault(lua_State* L)
+void CLuaBaseEntity::delAssault(uint8 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar   = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto  current = static_cast<uint8>(PChar->m_assaultLog.current);
 
-    uint8 MissionID = (uint8)lua_tointeger(L, 1);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    auto current = (uint8)PChar->m_assaultLog.current;
-
-    if (current == MissionID)
+    if (current == missionID)
     {
         PChar->m_assaultLog.current = 0;
         PChar->pushPacket(new CQuestMissionLogPacket(PChar, MISSION_ASSAULT, LOG_MISSION_CURRENT));
     }
-    charutils::SaveMissionsList(PChar);
 
-    return 0;
+    charutils::SaveMissionsList(PChar);
 }
 
 /************************************************************************
@@ -6904,15 +6890,12 @@ inline int32 CLuaBaseEntity::delAssault(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCurrentAssault(lua_State* L)
+uint8 CLuaBaseEntity::getCurrentAssault()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 MissionID = (uint8)((CCharEntity*)m_PBaseEntity)->m_assaultLog.current;
-
-    lua_pushinteger(L, MissionID);
-    return 1;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return static_cast<uint8>(PChar->m_assaultLog.current);
 }
 
 /************************************************************************
@@ -6922,19 +6905,11 @@ inline int32 CLuaBaseEntity::getCurrentAssault(lua_State* L)
  *  Notes   : See scripts/zones/Leujaoam_Sanctum/npcs/rune_of_release.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasCompletedAssault(lua_State* L)
+bool CLuaBaseEntity::hasCompletedAssault(uint8 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8 MissionID = (uint8)lua_tointeger(L, 1);
-
-    bool complete = ((CCharEntity*)m_PBaseEntity)->m_assaultLog.complete[MissionID];
-
-    lua_pushboolean(L, complete);
-    return 1;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->m_assaultLog.complete[missionID];
 }
 
 /************************************************************************
@@ -6944,29 +6919,23 @@ inline int32 CLuaBaseEntity::hasCompletedAssault(lua_State* L)
  *  Notes   : See scripts/zones/Aht_Urhgan_Whitegate/npcs/Rytaal.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::completeAssault(lua_State* L)
+void CLuaBaseEntity::completeAssault(uint8 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8 MissionID = (uint8)lua_tointeger(L, 1);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    if (PChar->m_assaultLog.current != MissionID)
+    if (PChar->m_assaultLog.current != missionID)
     {
         ShowWarning(CL_YELLOW "Lua::completeAssault: completion of not current assault\n" CL_RESET);
     }
+
     PChar->m_assaultLog.current             = 0;
-    PChar->m_assaultLog.complete[MissionID] = true;
+    PChar->m_assaultLog.complete[missionID] = true;
     PChar->pushPacket(new CQuestMissionLogPacket(PChar, MISSION_ASSAULT, LOG_MISSION_CURRENT));
     PChar->pushPacket(new CQuestMissionLogPacket(PChar, MISSION_ASSAULT, LOG_MISSION_COMPLETE));
 
     charutils::SaveMissionsList(PChar);
-
-    return 0;
 }
 
 /************************************************************************
@@ -14843,11 +14812,11 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(getEminenceProgress),
     // SOL_REGISTER(setEminenceProgress),
 
-    // SOL_REGISTER(addAssault),
-    // SOL_REGISTER(delAssault),
-    // SOL_REGISTER(getCurrentAssault),
-    // SOL_REGISTER(hasCompletedAssault),
-    // SOL_REGISTER(completeAssault),
+    SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
+    SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
+    SOL_REGISTER("getCurrentAssault", CLuaBaseEntity::getCurrentAssault);
+    SOL_REGISTER("hasCompletedAssault", CLuaBaseEntity::hasCompletedAssault);
+    SOL_REGISTER("completeAssault", CLuaBaseEntity::completeAssault);
 
     // SOL_REGISTER(addKeyItem),
     // SOL_REGISTER(delKeyItem),

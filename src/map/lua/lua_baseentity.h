@@ -319,11 +319,11 @@ public:
     int32 setEminenceProgress(lua_State* L);  // Sets progress on a record of eminence
     int32 getEminenceProgress(lua_State* L);  // gets progress on a record of eminence
 
-    int32 addAssault(lua_State*);          // Add Mission
-    int32 delAssault(lua_State*);          // Delete Mission from Mission Log
-    int32 getCurrentAssault(lua_State*);   // Gets the current mission
-    int32 hasCompletedAssault(lua_State*); // Checks if mission has been completed
-    int32 completeAssault(lua_State*);     // Complete Mission
+    void  addAssault(uint8 missionID);          // Add Mission
+    void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
+    uint8 getCurrentAssault();                  // Gets the current mission
+    bool  hasCompletedAssault(uint8 missionID); // Checks if mission has been completed
+    void  completeAssault(uint8 missionID);     // Complete Mission
 
     int32 addKeyItem(lua_State*);    // Add key item to Entity Key Item collection
     int32 hasKeyItem(lua_State*);    // Checks Entity key item collection to see if Entity has the key item
