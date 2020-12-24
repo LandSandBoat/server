@@ -2496,12 +2496,9 @@ inline int32 CLuaBaseEntity::getZone(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getZoneID(lua_State* L)
+uint16 CLuaBaseEntity::getZoneID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushinteger(L, m_PBaseEntity->getZone());
-    return 1;
+    return m_PBaseEntity->getZone();
 }
 
 /************************************************************************
@@ -2511,13 +2508,12 @@ inline int32 CLuaBaseEntity::getZoneID(lua_State* L)
  *  Notes   : Highly useful for the above example
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getZoneName(lua_State* L)
+auto CLuaBaseEntity::getZoneName() -> const char*
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone == nullptr);
 
-    lua_pushstring(L, (const char*)m_PBaseEntity->loc.zone->GetName());
-    return 1;
+    // TODO: Fix c-style cast
+    return (const char*)m_PBaseEntity->loc.zone->GetName();
 }
 
 /************************************************************************
@@ -2527,17 +2523,12 @@ inline int32 CLuaBaseEntity::getZoneName(lua_State* L)
  *  Notes   : Mainly used for teleport items (like to Bibiki Bay)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isZoneVisited(lua_State* L)
+bool CLuaBaseEntity::isZoneVisited(uint16 zone)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    lua_pushboolean(L, hasBit((uint16)lua_tointeger(L, 1), PChar->m_ZonesList, sizeof(PChar->m_ZonesList)));
-    return 1;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return hasBit(zone, PChar->m_ZonesList, sizeof(PChar->m_ZonesList));
 }
 
 /************************************************************************
@@ -2547,12 +2538,9 @@ inline int32 CLuaBaseEntity::isZoneVisited(lua_State* L)
  *  Notes   : Useful for returning players to their last position
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getPreviousZone(lua_State* L)
+uint16 CLuaBaseEntity::getPreviousZone()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushinteger(L, m_PBaseEntity->loc.prevzone);
-    return 1;
+    return m_PBaseEntity->loc.prevzone;
 }
 
 /************************************************************************
@@ -2562,12 +2550,9 @@ inline int32 CLuaBaseEntity::getPreviousZone(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCurrentRegion(lua_State* L)
+uint8 CLuaBaseEntity::getCurrentRegion()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushinteger(L, static_cast<uint8>(zoneutils::GetCurrentRegion(m_PBaseEntity->getZone())));
-    return 1;
+    return static_cast<uint8>(zoneutils::GetCurrentRegion(m_PBaseEntity->getZone()));
 }
 
 /************************************************************************
@@ -2577,12 +2562,9 @@ inline int32 CLuaBaseEntity::getCurrentRegion(lua_State* L)
  *  Notes   : Used in Signet/Sanction applications
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getContinentID(lua_State* L)
+uint8 CLuaBaseEntity::getContinentID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushinteger(L, static_cast<uint8>(m_PBaseEntity->loc.zone->GetContinentID()));
-    return 1;
+    return static_cast<uint8>(m_PBaseEntity->loc.zone->GetContinentID());
 }
 
 /************************************************************************
@@ -2592,13 +2574,11 @@ inline int32 CLuaBaseEntity::getContinentID(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isInMogHouse(lua_State* L)
+bool CLuaBaseEntity::isInMogHouse()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    lua_pushboolean(L, ((CCharEntity*)m_PBaseEntity)->m_moghouseID);
-    return 1;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->m_moghouseID;
 }
 /************************************************************************
 *  Function: getPlayerRegionInZone
@@ -2843,26 +2823,24 @@ inline int32 CLuaBaseEntity::setPos(lua_State* L)
  *  Function: warp()
  *  Purpose : Warps a PC to their established homepoint
  *  Example : player:warp()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::warp(lua_State* L)
+void CLuaBaseEntity::warp()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-    ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-    ((CCharEntity*)m_PBaseEntity)->loc.p           = ((CCharEntity*)m_PBaseEntity)->profile.home_point.p;
-    ((CCharEntity*)m_PBaseEntity)->loc.destination = ((CCharEntity*)m_PBaseEntity)->profile.home_point.destination;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    ((CCharEntity*)m_PBaseEntity)->status    = STATUS_TYPE::DISAPPEAR;
-    ((CCharEntity*)m_PBaseEntity)->animation = ANIMATION_NONE;
+    PChar->loc.boundary    = 0;
+    PChar->m_moghouseID    = 0;
+    PChar->loc.p           = PChar->profile.home_point.p;
+    PChar->loc.destination = PChar->profile.home_point.destination;
 
-    ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-    charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+    PChar->status    = STATUS_TYPE::DISAPPEAR;
+    PChar->animation = ANIMATION_NONE;
 
-    return 0;
+    PChar->clearPacketList();
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
 }
 
 /************************************************************************
@@ -2906,24 +2884,19 @@ inline int32 CLuaBaseEntity::teleport(lua_State* L)
  *  Notes   : Param 2 is bits to shift, not exponentiated value
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addTeleport(lua_State* L)
+void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(teleType);
+    uint32        bit  = 1 << bitval;
+    uint8         set  = (setval != sol::nil) ? setval.as<uint8>() : 0;
 
-    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
-    uint32        bit  = 1 << (uint32)lua_tointeger(L, 2);
-    uint8         set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
-
-    if ((type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL) && (lua_isnil(L, 3) || set > 3))
+    if ((type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL) && ((setval == sol::nil) || set > 3))
     {
         ShowError("Lua::addteleport : Attempt to index array out-of-bounds or parameter is nil.");
-        return 0;
     }
 
     switch (type)
@@ -2960,10 +2933,9 @@ inline int32 CLuaBaseEntity::addTeleport(lua_State* L)
             break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.\n");
-            return 0;
+            return;
     }
     charutils::SaveTeleport(PChar, type);
-    return 0;
 }
 
 /************************************************************************
@@ -11102,14 +11074,10 @@ inline int32 CLuaBaseEntity::delLatent(lua_State* L)
  *  Notes   : Calls the Fold member of CStatusEffectContainer for calculation
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::fold(lua_State* L)
+void CLuaBaseEntity::fold()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
     PEntity->StatusEffectContainer->Fold(PEntity->id);
-
-    return 0;
 }
 
 /************************************************************************
@@ -11180,15 +11148,11 @@ inline int32 CLuaBaseEntity::addCorsairRoll(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasCorsairEffect(lua_State* L)
+bool CLuaBaseEntity::hasCorsairEffect()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-
-    lua_pushboolean(L, PEntity->StatusEffectContainer->HasCorsairEffect(PEntity->id));
-
-    return 1;
+    return PEntity->StatusEffectContainer->HasCorsairEffect(PEntity->id);
 }
 
 /************************************************************************
@@ -11198,19 +11162,12 @@ inline int32 CLuaBaseEntity::hasCorsairEffect(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasBustEffect(lua_State* L)
+bool CLuaBaseEntity::hasBustEffect(uint16 id)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    bool hasEffect = false;
-
-    hasEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->HasBustEffect((EFFECT)lua_tointeger(L, 1));
-
-    lua_pushboolean(L, hasEffect);
-    return 1;
+    auto* PBattleEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PBattleEntity->StatusEffectContainer->HasBustEffect(static_cast<EFFECT>(id));
 }
 
 /************************************************************************
@@ -11220,15 +11177,12 @@ inline int32 CLuaBaseEntity::hasBustEffect(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::numBustEffects(lua_State* L)
+uint8 CLuaBaseEntity::numBustEffects()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint8 numEffects = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->GetEffectsCount(EFFECT_BUST);
-
-    lua_pushinteger(L, numEffects);
-    return 1;
+    auto* PBattleEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PBattleEntity->StatusEffectContainer->GetEffectsCount(EFFECT_BUST);
 }
 
 /************************************************************************
@@ -11238,13 +11192,12 @@ inline int32 CLuaBaseEntity::numBustEffects(lua_State* L)
  *  Notes   : Erases one random effect if it's 'Waltzable'
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::healingWaltz(lua_State* L)
+uint16 CLuaBaseEntity::healingWaltz()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->HealingWaltz());
-    return 1;
+    auto* PBattleEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return static_cast<uint16>(PBattleEntity->StatusEffectContainer->HealingWaltz());
 }
 
 /************************************************************************
@@ -11320,13 +11273,9 @@ inline int32 CLuaBaseEntity::charm(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::uncharm(lua_State* L)
+void CLuaBaseEntity::uncharm()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    battleutils::unCharm((CBattleEntity*)m_PBaseEntity);
-
-    return 0;
+    battleutils::unCharm(static_cast<CBattleEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
@@ -11334,24 +11283,19 @@ inline int32 CLuaBaseEntity::uncharm(lua_State* L)
  *  Purpose : Adds a Burden to a Target
  *  Example : local overload = target:addBurden(ELE_EARTH-1, burden)
  *  Notes   : Used for Automation abilities
+ *  TODO    : Make these multiple casts easier to read
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addBurden(lua_State* L)
+uint8 CLuaBaseEntity::addBurden(uint8 element, uint8 burden)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
     if (((CBattleEntity*)m_PBaseEntity)->PPet && ((CPetEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        lua_pushinteger(L, ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden((uint8)lua_tointeger(L, 1), (int8)lua_tointeger(L, 2)));
+        return ((CAutomatonEntity*)((CBattleEntity*)m_PBaseEntity)->PPet)->addBurden(element, burden);
     }
-    else
-    {
-        lua_pushinteger(L, 0);
-    }
-    return 1;
+
+    return 0;
 }
 
 /************************************************************************
@@ -11361,17 +11305,16 @@ inline int32 CLuaBaseEntity::addBurden(lua_State* L)
  *  Notes   : Used only through scripts/globals/effects/debilitation.lua
  ************************************************************************/
 
-int32 CLuaBaseEntity::setStatDebilitation(lua_State* L)
+void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
-        PChar->m_StatsDebilitation = (uint16)lua_tointeger(L, 1);
+        PChar->m_StatsDebilitation = statDebil;
         PChar->pushPacket(new CCharJobsPacket(PChar));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -13154,15 +13097,13 @@ inline int32 CLuaBaseEntity::setMobFlags(lua_State* L)
  *  Example : Not in use in scripts
  *  Notes   : Currently only used through !getMobFlags command
  ************************************************************************/
-inline int32 CLuaBaseEntity::getMobFlags(lua_State* L)
+uint32 CLuaBaseEntity::getMobFlags()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
-        lua_pushinteger(L, PMob->getEntityFlags());
-        return 1;
+        return PMob->getEntityFlags();
     }
 
     return 0;
@@ -13175,21 +13116,20 @@ inline int32 CLuaBaseEntity::getMobFlags(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::spawn(lua_State* L)
+void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& respawnSec)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    CMobEntity* PMob = (CMobEntity*)m_PBaseEntity;
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+    if (despawnSec != sol::nil)
     {
-        PMob->SetDespawnTime(std::chrono::seconds(lua_tointeger(L, 1)));
+        PMob->SetDespawnTime(std::chrono::seconds(despawnSec.as<uint32>()));
     }
 
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+    if (respawnSec != sol::nil)
     {
-        PMob->m_RespawnTime  = (uint32)lua_tointeger(L, 2) * 1000;
+        PMob->m_RespawnTime  = respawnSec.as<uint32>() * 1000;
         PMob->m_AllowRespawn = true;
     }
     else
@@ -13203,7 +13143,6 @@ inline int32 CLuaBaseEntity::spawn(lua_State* L)
             ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
         }
     }
-    return 0;
 }
 
 /************************************************************************
@@ -13213,14 +13152,11 @@ inline int32 CLuaBaseEntity::spawn(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isSpawned(lua_State* L)
+bool CLuaBaseEntity::isSpawned()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    lua_pushboolean(L, static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned());
-
-    return 1;
+    return static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned();
 }
 
 /************************************************************************
@@ -13403,20 +13339,14 @@ inline int32 CLuaBaseEntity::instantiateMob(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasTrait(lua_State* L)
+bool CLuaBaseEntity::hasTrait(uint8 traitID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        lua_pushboolean(L, false);
-        return 1;
+        return false;
     }
 
-    lua_pushboolean(L, charutils::hasTrait((CCharEntity*)m_PBaseEntity, (uint8)lua_tointeger(L, 1)));
-    return 1;
+    return charutils::hasTrait(static_cast<CCharEntity*>(m_PBaseEntity), traitID);
 }
 
 /************************************************************************
@@ -13426,13 +13356,9 @@ inline int32 CLuaBaseEntity::hasTrait(lua_State* L)
  *  Notes   : Arguments are dec to bin, so powers of 2 (max 256) -- Listed in mobentity.h
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasImmunity(lua_State* L)
+bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->hasImmunity((uint32)lua_tointeger(L, 1)));
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->hasImmunity(immunityID);
 }
 
 /************************************************************************
@@ -13442,15 +13368,11 @@ inline int32 CLuaBaseEntity::hasImmunity(lua_State* L)
  *  Notes   : Different integer values to specify method of aggro?
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setAggressive(lua_State* L)
+void CLuaBaseEntity::setAggressive(bool aggressive)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    ((CMobEntity*)m_PBaseEntity)->m_Aggro = lua_tointeger(L, -1);
-
-    return 0;
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_Aggro = aggressive;
 }
 
 /************************************************************************
@@ -13460,15 +13382,11 @@ inline int32 CLuaBaseEntity::setAggressive(lua_State* L)
  *  Notes   : Different integer values for True Hearing/Sight?
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setTrueDetection(lua_State* L)
+void CLuaBaseEntity::setTrueDetection(bool truedetection)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    ((CMobEntity*)m_PBaseEntity)->m_TrueDetection = lua_tointeger(L, -1);
-
-    return 0;
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_TrueDetection = truedetection;
 }
 
 /************************************************************************
@@ -13487,80 +13405,66 @@ void CLuaBaseEntity::setUnkillable(bool unkillable)
 
 /************************************************************************
  *  Function: untargetable()
- *  Purpose : Returns true if a Mob or NPC is untargetable
+ *  Purpose : Returns true if a Mob or NPC is untargetable (Not True)
  *  Example : if (target:untargetable()) then
- *  Notes   :
+ *  Notes   : This does not return a value, but instead sets state!
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::untargetable(lua_State* L)
+void CLuaBaseEntity::untargetable(bool untargetable)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isboolean(L, 1));
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_NPC);
 
     if (m_PBaseEntity->objtype == TYPE_MOB)
     {
-        ((CMobEntity*)m_PBaseEntity)->Untargetable(lua_toboolean(L, 1));
+        static_cast<CMobEntity*>(m_PBaseEntity)->Untargetable(untargetable);
     }
     else if (m_PBaseEntity->objtype == TYPE_NPC)
     {
-        ((CNpcEntity*)m_PBaseEntity)->Untargetable(lua_toboolean(L, 1));
+        static_cast<CMobEntity*>(m_PBaseEntity)->Untargetable(untargetable);
     }
+
     m_PBaseEntity->updatemask |= UPDATE_HP;
-    return 0;
 }
 
 /************************************************************************
  *  Function: setDelay()
  *  Purpose : Override default delay settings for a Mob
  *  Example : mob:setDelay(2400)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setDelay(lua_State* L)
+void CLuaBaseEntity::setDelay(uint16 delay)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    ((CItemWeapon*)((CMobEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN])->setDelay((uint16)lua_tonumber(L, 1));
-    return 0;
+    auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
+    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDelay(delay);
 }
 
 /************************************************************************
  *  Function: setDamage()
  *  Purpose : Override default damage settings for a Mob
  *  Example : mob:setDamage(40)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setDamage(lua_State* L)
+void CLuaBaseEntity::setDamage(uint16 damage)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    ((CItemWeapon*)((CMobEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN])->setDamage((uint16)lua_tonumber(L, 1));
-    return 0;
+    auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
+    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDamage(damage);
 }
 
 /************************************************************************
  *  Function: hasSpellList()
  *  Purpose : Returns true if a Mob has spells to cast
  *  Example : if (mob:hasSpellList()) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasSpellList(lua_State* L)
+bool CLuaBaseEntity::hasSpellList()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
 
-    lua_pushboolean(L, (static_cast<CMobEntity*>(m_PBaseEntity))->SpellContainer->HasSpells());
-
-    return 1;
+    return static_cast<CMobEntity*>(m_PBaseEntity)->SpellContainer->HasSpells();
 }
 
 /************************************************************************
@@ -13570,16 +13474,11 @@ inline int32 CLuaBaseEntity::hasSpellList(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setSpellList(lua_State* L)
+void CLuaBaseEntity::setSpellList(uint16 spellList)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    mobutils::SetSpellList(static_cast<CMobEntity*>(m_PBaseEntity), (uint16)lua_tonumber(L, 1));
-
-    return 0;
+    mobutils::SetSpellList(static_cast<CMobEntity*>(m_PBaseEntity), spellList);
 }
 
 /************************************************************************
@@ -13589,14 +13488,9 @@ inline int32 CLuaBaseEntity::setSpellList(lua_State* L)
  *  Notes   : See scripts/zones/Throne_Room/mobs/Shadow_Lord.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::SetAutoAttackEnabled(lua_State* L)
+void CLuaBaseEntity::SetAutoAttackEnabled(bool state)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isboolean(L, 1));
-
-    m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(lua_toboolean(L, 1));
-
-    return 0;
+    m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(state);
 }
 
 /************************************************************************
@@ -13606,14 +13500,9 @@ inline int32 CLuaBaseEntity::SetAutoAttackEnabled(lua_State* L)
  *  Notes   : Used primarily for Mob behavior and battle control
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::SetMagicCastingEnabled(lua_State* L)
+void CLuaBaseEntity::SetMagicCastingEnabled(bool state)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isboolean(L, 1));
-
-    m_PBaseEntity->PAI->GetController()->SetMagicCastingEnabled(lua_toboolean(L, 1));
-
-    return 0;
+    m_PBaseEntity->PAI->GetController()->SetMagicCastingEnabled(state);
 }
 
 /************************************************************************
@@ -13623,14 +13512,9 @@ inline int32 CLuaBaseEntity::SetMagicCastingEnabled(lua_State* L)
  *  Notes   : See Bahamut.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::SetMobAbilityEnabled(lua_State* L)
+void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isboolean(L, 1));
-
-    m_PBaseEntity->PAI->GetController()->SetWeaponSkillEnabled(lua_toboolean(L, 1));
-
-    return 0;
+    m_PBaseEntity->PAI->GetController()->SetWeaponSkillEnabled(state);
 }
 
 /************************************************************************
@@ -13640,15 +13524,11 @@ inline int32 CLuaBaseEntity::SetMobAbilityEnabled(lua_State* L)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::SetMobSkillAttack(lua_State* L)
+void CLuaBaseEntity::SetMobSkillAttack(int16 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, (int16)lua_tointeger(L, 1));
-
-    return 0;
+    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, value);
 }
 
 /************************************************************************
@@ -14507,13 +14387,13 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(isBeside),
 
     // SOL_REGISTER(getZone),
-    // SOL_REGISTER(getZoneID),
-    // SOL_REGISTER(getZoneName),
-    // SOL_REGISTER(isZoneVisited),
-    // SOL_REGISTER(getPreviousZone),
-    // SOL_REGISTER(getCurrentRegion),
-    // SOL_REGISTER(getContinentID),
-    // SOL_REGISTER(isInMogHouse),
+    SOL_REGISTER("getZoneID", CLuaBaseEntity::getZoneID);
+    SOL_REGISTER("getZoneName", CLuaBaseEntity::getZoneName);
+    SOL_REGISTER("isZoneVisited", CLuaBaseEntity::isZoneVisited);
+    SOL_REGISTER("getPreviousZone", CLuaBaseEntity::getPreviousZone);
+    SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
+    SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
+    SOL_REGISTER("isInMogHouse", CLuaBaseEntity::isInMogHouse);
 
     // SOL_REGISTER(getPos),
     // SOL_REGISTER(showPosition),
@@ -14523,9 +14403,9 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(getRotPos),
     // SOL_REGISTER(setPos),
 
-    // SOL_REGISTER(warp),
+    SOL_REGISTER("warp", CLuaBaseEntity::warp);
     // SOL_REGISTER(teleport),
-    // SOL_REGISTER(addTeleport),
+    SOL_REGISTER("addTeleport", CLuaBaseEntity::addTeleport);
     // SOL_REGISTER(getTeleport),
     // SOL_REGISTER(hasTeleport),
     // SOL_REGISTER(setTeleportMenu),
@@ -14906,23 +14786,22 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delMaddLatentod", CLuaBaseEntity::addLatent);
     SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
 
-    // COR
-    // SOL_REGISTER(fold),
+    SOL_REGISTER("fold", CLuaBaseEntity::fold);
     // SOL_REGISTER(doWildCard),
     // SOL_REGISTER(addCorsairRoll),
-    // SOL_REGISTER(hasCorsairEffect),
-    // SOL_REGISTER(hasBustEffect),
-    // SOL_REGISTER(numBustEffects),
-    // SOL_REGISTER(healingWaltz),
+    SOL_REGISTER("hasCorsairEffect", CLuaBaseEntity::hasCorsairEffect);
+    SOL_REGISTER("hasBustEffect", CLuaBaseEntity::hasBustEffect);
+    SOL_REGISTER("numBustEffects", CLuaBaseEntity::numBustEffects);
+    SOL_REGISTER("healingWaltz", CLuaBaseEntity::healingWaltz);
     // SOL_REGISTER(addBardSong),
 
     // BST
     // SOL_REGISTER(charm),
-    // SOL_REGISTER(uncharm),
+    SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
 
     // PUP
-    // SOL_REGISTER(addBurden),
-    // SOL_REGISTER(setStatDebilitation),
+    SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
+    SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
 
     // Damage Calculation
     SOL_REGISTER("getStat", CLuaBaseEntity::getStat);
@@ -15019,10 +14898,10 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getModelSize", CLuaBaseEntity::getModelSize);
     // SOL_REGISTER(setMobFlags),
-    // SOL_REGISTER(getMobFlags),
+    SOL_REGISTER("getMobFlags", CLuaBaseEntity::getMobFlags);
 
-    // SOL_REGISTER(spawn),
-    // SOL_REGISTER(isSpawned),
+    SOL_REGISTER("spawn", CLuaBaseEntity::spawn);
+    SOL_REGISTER("isSpawned", CLuaBaseEntity::isSpawned);
     // SOL_REGISTER(getSpawnPos),
     // SOL_REGISTER(setSpawn),
     // SOL_REGISTER(getRespawnTime),
@@ -15030,22 +14909,22 @@ void CLuaBaseEntity::Register()
 
     // SOL_REGISTER(instantiateMob),
 
-    // SOL_REGISTER(hasTrait),
-    // SOL_REGISTER(hasImmunity),
+    SOL_REGISTER("hasTrait", CLuaBaseEntity::hasTrait);
+    SOL_REGISTER("hasImmunity", CLuaBaseEntity::hasImmunity);
 
-    // SOL_REGISTER(setAggressive),
-    // SOL_REGISTER(setTrueDetection),
+    SOL_REGISTER("setAggressive", CLuaBaseEntity::setAggressive);
+    SOL_REGISTER("setTrueDetection", CLuaBaseEntity::setTrueDetection);
     SOL_REGISTER("setUnkillable", CLuaBaseEntity::setUnkillable);
-    // SOL_REGISTER(untargetable),
+    SOL_REGISTER("untargetable", CLuaBaseEntity::untargetable);
 
-    // SOL_REGISTER(setDelay),
-    // SOL_REGISTER(setDamage),
-    // SOL_REGISTER(hasSpellList),
-    // SOL_REGISTER(setSpellList),
-    // SOL_REGISTER(SetAutoAttackEnabled),
-    // SOL_REGISTER(SetMagicCastingEnabled),
-    // SOL_REGISTER(SetMobAbilityEnabled),
-    // SOL_REGISTER(SetMobSkillAttack),
+    SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
+    SOL_REGISTER("setDamage", CLuaBaseEntity::setDamage);
+    SOL_REGISTER("hasSpellList", CLuaBaseEntity::hasSpellList);
+    SOL_REGISTER("setSpellList", CLuaBaseEntity::setSpellList);
+    SOL_REGISTER("SetAutoAttackEnabled", CLuaBaseEntity::SetAutoAttackEnabled);
+    SOL_REGISTER("SetMagicCastingEnabled", CLuaBaseEntity::SetMagicCastingEnabled);
+    SOL_REGISTER("SetMobAbilityEnabled", CLuaBaseEntity::SetMobAbilityEnabled);
+    SOL_REGISTER("SetMobSkillAttack", CLuaBaseEntity::SetMobSkillAttack);
 
     // SOL_REGISTER(getMobMod),
     // SOL_REGISTER(setMobMod),

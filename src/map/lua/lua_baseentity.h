@@ -140,14 +140,14 @@ public:
     int32 isBehind(lua_State*);         // true if you're behind the input target
     int32 isBeside(lua_State*);         // true if you're to the side of the input target
 
-    int32 getZone(lua_State*);          // Get Entity zone
-    int32 getZoneID(lua_State*);        // Get Entity zone ID
-    int32 getZoneName(lua_State*);      // Get Entity zone name
-    int32 isZoneVisited(lua_State*);    // true если указанная зона посещалась персонажем ранее
-    int32 getPreviousZone(lua_State*);  // Get Entity previous zone
-    int32 getCurrentRegion(lua_State*); // Get Entity conquest region
-    int32 getContinentID(lua_State*);   // узнаем континент, на котором находится сущность
-    int32 isInMogHouse(lua_State*);     // Check if entity inside a mog house
+    int32  getZone(lua_State*);          // Get Entity zone
+    uint16 getZoneID();                  // Get Entity zone ID
+    auto   getZoneName() -> const char*; // Get Entity zone name
+    bool   isZoneVisited(uint16 zone);   // true если указанная зона посещалась персонажем ранее
+    uint16 getPreviousZone();            // Get Entity previous zone
+    uint8  getCurrentRegion();           // Get Entity conquest region
+    uint8  getContinentID();             // узнаем континент, на котором находится сущность
+    bool   isInMogHouse();               // Check if entity inside a mog house
 
     int32 getPlayerRegionInZone(lua_State*); // Returns the player's current region in the zone. (regions made with registerRegion)
     int32 updateToEntireZone(lua_State*);    // Forces an update packet to update the NPC entity zone-wide
@@ -160,15 +160,15 @@ public:
     int32 getRotPos(lua_State*);    // Get Entity Rot position
 
     int32 setPos(lua_State*);   // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
-    int32 warp(lua_State*);     // Returns Character to home point
+    void  warp();               // Returns Character to home point
     int32 teleport(lua_State*); // Set Entity position (without entity despawn/spawn packets)
 
-    int32 addTeleport(lua_State*);     // Add new teleport means to char unlocks
-    int32 getTeleport(lua_State*);     // Get unlocked teleport means
-    int32 hasTeleport(lua_State*);     // Has access to specific teleport
-    int32 setTeleportMenu(lua_State*); // Set favorites or menu layout preferences for homepoints or survival guides
-    int32 getTeleportMenu(lua_State*); // Get favorites and menu layout preferences
-    int32 setHomePoint(lua_State*);    // Sets character's homepoint
+    void  addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
+    int32 getTeleport(lua_State*);                                               // Get unlocked teleport means
+    int32 hasTeleport(lua_State*);                                               // Has access to specific teleport
+    int32 setTeleportMenu(lua_State*);                                           // Set favorites or menu layout preferences for homepoints or survival guides
+    int32 getTeleportMenu(lua_State*);                                           // Get favorites and menu layout preferences
+    int32 setHomePoint(lua_State*);                                              // Sets character's homepoint
 
     int32 resetPlayer(lua_State*); // if player is stuck, GM command @resetPlayer name
 
@@ -547,20 +547,20 @@ public:
     int32 addLatent(lua_State*); // Adds a latent effect
     int32 delLatent(lua_State*); // Removes a latent effect
 
-    int32 fold(lua_State*);
-    int32 doWildCard(lua_State*);
-    int32 addCorsairRoll(lua_State*); // Adds corsair roll effect
-    int32 hasCorsairEffect(lua_State*);
-    int32 hasBustEffect(lua_State*);  // Checks to see if a character has a specified busted corsair roll
-    int32 numBustEffects(lua_State*); // Gets the number of bust effects on the player
-    int32 healingWaltz(lua_State*);   // Used with "Healing Waltz" ability
-    int32 addBardSong(lua_State*);    // Adds bard song effect
+    void   fold();
+    int32  doWildCard(lua_State*);
+    int32  addCorsairRoll(lua_State*); // Adds corsair roll effect
+    bool   hasCorsairEffect();
+    bool   hasBustEffect(uint16 id); // Checks to see if a character has a specified busted corsair roll
+    uint8  numBustEffects();         // Gets the number of bust effects on the player
+    uint16 healingWaltz();           // Used with "Healing Waltz" ability
+    int32  addBardSong(lua_State*);  // Adds bard song effect
 
-    int32 charm(lua_State*);   // applies charm on target
-    int32 uncharm(lua_State*); // removes charm on target
+    int32 charm(lua_State*); // applies charm on target
+    void  uncharm();         // removes charm on target
 
-    int32 addBurden(lua_State* L);
-    int32 setStatDebilitation(lua_State* L);
+    uint8 addBurden(uint8 element, uint8 burden);
+    void  setStatDebilitation(uint16 statDebil);
 
     // Damage Calculation
     uint16 getStat(uint16 statId); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
@@ -652,12 +652,12 @@ public:
     bool   isUndead();               // True if mob is undead
     bool   isNM();
 
-    uint8 getModelSize();
-    int32 setMobFlags(lua_State*); // Used to manipulate the mob's flags for testing.
-    int32 getMobFlags(lua_State*);
+    uint8  getModelSize();
+    int32  setMobFlags(lua_State*); // Used to manipulate the mob's flags for testing.
+    uint32 getMobFlags();
 
-    int32 spawn(lua_State* L);
-    int32 isSpawned(lua_State*);
+    void  spawn(sol::object const& despawnSec, sol::object const& respawnSec);
+    bool  isSpawned();
     int32 getSpawnPos(lua_State*); // Get Mob spawn position (x,y,z)
     int32 setSpawn(lua_State*);    // Sets spawn point
     int32 getRespawnTime(lua_State*);
@@ -665,22 +665,22 @@ public:
 
     int32 instantiateMob(lua_State* L);
 
-    int32 hasTrait(lua_State*);
-    int32 hasImmunity(lua_State*); // Check if the mob has immunity for a type of spell (list at mobentity.h)
+    bool hasTrait(uint8 traitID);
+    bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
-    int32 setAggressive(lua_State* L);
-    int32 setTrueDetection(lua_State* L);
-    void  setUnkillable(bool unkillable);
-    int32 untargetable(lua_State* L);
+    void setAggressive(bool aggressive);
+    void setTrueDetection(bool truedetection);
+    void setUnkillable(bool unkillable);
+    void untargetable(bool untargetable);
 
-    int32 setDelay(lua_State*);  // sets a mobs weapon delay
-    int32 setDamage(lua_State*); // sets a mobs weapon damage
-    int32 hasSpellList(lua_State*);
-    int32 setSpellList(lua_State*);
-    int32 SetAutoAttackEnabled(lua_State*);   // halts/resumes auto attack of entity
-    int32 SetMagicCastingEnabled(lua_State*); // halt/resumes casting magic
-    int32 SetMobAbilityEnabled(lua_State*);   // halt/resumes mob skills
-    int32 SetMobSkillAttack(lua_State*);      // enable/disable using mobskills as regular attacks
+    void setDelay(uint16 delay);   // sets a mobs weapon delay
+    void setDamage(uint16 damage); // sets a mobs weapon damage
+    bool hasSpellList();
+    void setSpellList(uint16 spellList);
+    void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
 
     int32 getMobMod(lua_State*);
     int32 setMobMod(lua_State*);
