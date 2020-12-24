@@ -48,8 +48,11 @@ public:
     int32 messageBasic(lua_State*);                                                      // Sends Basic Message
     int32 messageName(lua_State* L);                                                     // Sends a Message with a Name
     int32 messagePublic(lua_State*);                                                     // Sends a public Basic Message
-    int32 messageSpecial(lua_State*);                                                    // Sends Special Message
-    int32 messageSystem(lua_State*);                                                     // Sends System Message
+
+    void messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2,
+                        sol::object const& p3, sol::object const& dispName); // Sends Special Message
+
+    void  messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
     int32 messageCombat(lua_State* L);                                                   // Sends Combat Message
 
     // Variables
@@ -97,16 +100,16 @@ public:
     void  setStatus(uint8 status); // Sets Character's Status
     int32 getCurrentAction(lua_State* L);
 
-    int32 lookAt(lua_State* L);    // look at given position
-    int32 clearTargID(lua_State*); // clears target of entity
+    int32 lookAt(lua_State* L); // look at given position
+    void  clearTargID();        // clears target of entity
 
-    int32 atPoint(lua_State* L);         // is at given point
-    int32 pathTo(lua_State* L);          // set new path to point without changing action
-    int32 pathThrough(lua_State* L);     // walk at normal speed through the given points
-    int32 isFollowingPath(lua_State* L); // checks if the entity is following a path
-    int32 clearPath(lua_State* L);       // removes current pathfind and stops moving
-    int32 checkDistance(lua_State*);     // Check Distacnce and returns distance number
-    int32 wait(lua_State* L);            // make the npc wait a number of ms and then back into roam
+    int32 atPoint(lua_State* L);                                       // is at given point
+    void  pathTo(float x, float y, float z, sol::object const& flags); // set new path to point without changing action
+    int32 pathThrough(lua_State* L);                                   // walk at normal speed through the given points
+    int32 isFollowingPath(lua_State* L);                               // checks if the entity is following a path
+    int32 clearPath(lua_State* L);                                     // removes current pathfind and stops moving
+    int32 checkDistance(lua_State*);                                   // Check Distacnce and returns distance number
+    int32 wait(lua_State* L);                                          // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_State* L);           // warp to the given point
     // int32 RoamAround(lua_State* L);       // pick a random point to walk to
     // int32 LimitDistance(lua_State* L);    // limits the current path distance to given max distance
@@ -149,8 +152,8 @@ public:
     uint8  getContinentID();             // узнаем континент, на котором находится сущность
     bool   isInMogHouse();               // Check if entity inside a mog house
 
-    int32 getPlayerRegionInZone(lua_State*); // Returns the player's current region in the zone. (regions made with registerRegion)
-    int32 updateToEntireZone(lua_State*);    // Forces an update packet to update the NPC entity zone-wide
+    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     int32 getPos(lua_State*);       // Get Entity position (x,y,z)
     int32 showPosition(lua_State*); // Display current position of character
@@ -276,7 +279,7 @@ public:
     uint8 getSubLvl();                  // Get Entity Sub Job Level
     uint8 getJobLevel(uint8 JobID);     // Gets character job level for specified JOBTYPE
     void  setLevel(uint8 level);        // sets the character's level
-    int32 setsLevel(lua_State*);        // sets the character's level
+    void  setsLevel(uint8 slevel);      // sets the character's level
     int32 levelCap(lua_State*);         // genkai
     int32 levelRestriction(lua_State*); // Establish/return current level restriction
     int32 addJobTraits(lua_State*);     // Add job traits
@@ -325,11 +328,11 @@ public:
     bool  hasCompletedAssault(uint8 missionID); // Checks if mission has been completed
     void  completeAssault(uint8 missionID);     // Complete Mission
 
-    int32 addKeyItem(lua_State*);    // Add key item to Entity Key Item collection
-    int32 hasKeyItem(lua_State*);    // Checks Entity key item collection to see if Entity has the key item
-    int32 delKeyItem(lua_State*);    // Removes key item from Entity key item collection
-    int32 seenKeyItem(lua_State*);   // If Key Item is viewed, add it to the seen key item collection
-    int32 unseenKeyItem(lua_State*); // Attempt to remove the keyitem from the seen key item collection, only works on logout
+    void addKeyItem(uint16 keyItemID);    // Add key item to Entity Key Item collection
+    bool hasKeyItem(uint16 keyItemID);    // Checks Entity key item collection to see if Entity has the key item
+    void delKeyItem(uint16 keyItemID);    // Removes key item from Entity key item collection
+    bool seenKeyItem(uint16 keyItemID);   // If Key Item is viewed, add it to the seen key item collection
+    void unseenKeyItem(uint16 keyItemID); // Attempt to remove the keyitem from the seen key item collection, only works on logout
 
     // Player Points
     void  addExp(uint32 exp);
@@ -457,12 +460,12 @@ public:
 
     // Battlefields
     int32 getBattlefield(lua_State* L);      // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID(lua_State*);      // returns entity->PBattlefield->GetID() or -1 if not available
+    int32 getBattlefieldID();                // returns entity->PBattlefield->GetID() or -1 if not available
     int32 registerBattlefield(lua_State*);   // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
     int32 battlefieldAtCapacity(lua_State*); // 1 if this battlefield is full
     int32 enterBattlefield(lua_State*);      // enter a battlefield entity is registered with
-    int32 leaveBattlefield(lua_State*);      // leave battlefield if inside one
-    int32 isInDynamis(lua_State*);           // If player is in Dynamis return true else false
+    bool  leaveBattlefield(uint8 leavecode); // leave battlefield if inside one
+    bool  isInDynamis();                     // If player is in Dynamis return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -480,7 +483,7 @@ public:
     int32 disengage(lua_State* L);
     int32 timer(lua_State* L); // execute lua closure after some time
     int32 queue(lua_State* L);
-    int32 addRecast(lua_State*);
+    void  addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
     int32 hasRecast(lua_State*);
     int32 resetRecast(lua_State*);  // Reset one recast ID
     int32 resetRecasts(lua_State*); // Reset recasts for the caller
@@ -498,7 +501,7 @@ public:
     int32 recalculateStats(lua_State* L);
     int32 checkImbuedItems(lua_State* L);
 
-    int32 isDualWielding(lua_State*); // Checks if the battle entity is dual wielding
+    bool isDualWielding(); // Checks if the battle entity is dual wielding
 
     // Enmity
     int32 getCE(lua_State*);        // gets current CE the mob has towards the player
@@ -577,15 +580,15 @@ public:
     int32 breathDmgTaken(int32 damage);
     void  handleAfflatusMiseryDamage(int32 damage);
 
-    bool  isWeaponTwoHanded();
-    int32 getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
-    int32 getWeaponDmg(lua_State*);      // gets the current equipped weapons' DMG rating
-    int32 getWeaponDmgRank(lua_State*);  // gets the current equipped weapons' DMG rating for Rank calc
-    int32 getOffhandDmg(lua_State*);     // gets the current equipped offhand's DMG rating (used in WS calcs)
-    int32 getOffhandDmgRank(lua_State*); // gets the current equipped offhand's DMG rating for Rank calc
-    int32 getRangedDmg(lua_State*);      // Get ranged weapon DMG rating
-    int32 getRangedDmgRank(lua_State*);  // Get ranged weapond DMG rating used for calculating rank
-    int32 getAmmoDmg(lua_State*);        // Get ammo DMG rating
+    bool   isWeaponTwoHanded();
+    int32  getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
+    uint16 getWeaponDmg();                // gets the current equipped weapons' DMG rating
+    int32  getWeaponDmgRank(lua_State*);  // gets the current equipped weapons' DMG rating for Rank calc
+    int32  getOffhandDmg(lua_State*);     // gets the current equipped offhand's DMG rating (used in WS calcs)
+    int32  getOffhandDmgRank(lua_State*); // gets the current equipped offhand's DMG rating for Rank calc
+    int32  getRangedDmg(lua_State*);      // Get ranged weapon DMG rating
+    int32  getRangedDmgRank(lua_State*);  // Get ranged weapond DMG rating used for calculating rank
+    int32  getAmmoDmg(lua_State*);        // Get ammo DMG rating
 
     int32 removeAmmo(lua_State* L);
 
@@ -689,8 +692,8 @@ public:
 
     int32 getBattleTime(lua_State*); // Get the time in second of the battle
 
-    int32 getBehaviour(lua_State* L);
-    int32 setBehaviour(lua_State* L);
+    uint16 getBehaviour();
+    void   setBehaviour(uint16 behavior);
 
     int32 getTarget(lua_State*);
     int32 updateTarget(lua_State*); // Force mob to update target from enmity container (ie after updateEnmity)
@@ -708,15 +711,15 @@ public:
     int32 hasPreventActionEffect(lua_State*);
     int32 stun(lua_State* L);
 
-    int32 getPool(lua_State* L); // Returns a mobs pool ID. If entity is not a mob, returns nil.
-    int32 getDropID(lua_State* L);
-    int32 setDropID(lua_State* L);
-    int32 addTreasure(lua_State*);      // Add item to directly to treasure pool
-    int32 getStealItem(lua_State*);     // gets ItemID of droplist steal item from mob
-    int32 getDespoilItem(lua_State*);   // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
-    int32 getDespoilDebuff(lua_State*); // gets the status effect id to apply to the mob on successful despoil
-    int32 itemStolen(lua_State*);       // sets mob's ItemStolen var = true
-    int32 getTHlevel(lua_State*);       // Returns the Monster's current Treasure Hunter Tier
+    int32  getPool(lua_State* L); // Returns a mobs pool ID. If entity is not a mob, returns nil.
+    uint32 getDropID();
+    void   setDropID(uint32 dropID);
+    int32  addTreasure(lua_State*);      // Add item to directly to treasure pool
+    uint16 getStealItem();               // gets ItemID of droplist steal item from mob
+    int32  getDespoilItem(lua_State*);   // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
+    int32  getDespoilDebuff(lua_State*); // gets the status effect id to apply to the mob on successful despoil
+    bool   itemStolen();                 // sets mob's ItemStolen var = true
+    int16  getTHlevel();                 // Returns the Monster's current Treasure Hunter Tier
 
     static void Register();
 };
