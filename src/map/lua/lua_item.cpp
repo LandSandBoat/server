@@ -34,76 +34,49 @@ CLuaItem::CLuaItem(CItem* PItem)
     m_PLuaItem = PItem;
 }
 
-inline int32 CLuaItem::getID(lua_State* L)
+uint16 CLuaItem::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getID());
-    return 1;
+    return m_PLuaItem->getID();
 }
 
-inline int32 CLuaItem::getSubID(lua_State* L)
+uint16 CLuaItem::getSubID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getSubID());
-    return 1;
+    return m_PLuaItem->getSubID();
 }
 
-inline int32 CLuaItem::getFlag(lua_State* L)
+uint16 CLuaItem::getFlag()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getFlag());
-    return 1;
+    return m_PLuaItem->getFlag();
 }
 
-inline int32 CLuaItem::getAHCat(lua_State* L)
+uint8 CLuaItem::getAHCat()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getAHCat());
-    return 1;
+    return m_PLuaItem->getAHCat();
 }
 
-inline int32 CLuaItem::getQuantity(lua_State* L)
+uint32 CLuaItem::getQuantity()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getQuantity());
-    return 1;
+    return m_PLuaItem->getQuantity();
 }
 
-inline int32 CLuaItem::getBasePrice(lua_State* L)
+uint32 CLuaItem::getBasePrice()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    uint32 basePrice = static_cast<CItem*>(m_PLuaItem)->getBasePrice();
-    lua_pushinteger(L, basePrice);
-    return 1;
+    return static_cast<CItem*>(m_PLuaItem)->getBasePrice();
 }
 
-inline int32 CLuaItem::getLocationID(lua_State* L)
+uint8 CLuaItem::getLocationID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getLocationID());
-    return 1;
+    return m_PLuaItem->getLocationID();
 }
 
-inline int32 CLuaItem::getSlotID(lua_State* L)
+uint8 CLuaItem::getSlotID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->getSlotID());
-    return 1;
+    return m_PLuaItem->getSlotID();
 }
 
-inline int32 CLuaItem::getTrialNumber(lua_State* L)
+uint16 CLuaItem::getTrialNumber()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    uint16 trialID = static_cast<CItemEquipment*>(m_PLuaItem)->getTrialNumber();
-    lua_pushinteger(L, trialID);
-    return 1;
+    return static_cast<CItemEquipment*>(m_PLuaItem)->getTrialNumber();
 }
 
 inline int32 CLuaItem::getMatchingTrials(lua_State* L)
@@ -155,124 +128,76 @@ inline int32 CLuaItem::getMatchingTrials(lua_State* L)
 
 inline int32 CLuaItem::getWornItem(lua_State* L)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushinteger(L, m_PLuaItem->m_extra[0]);
-    return 1;
+    return m_PLuaItem->m_extra[0];
 }
 
-inline int32 CLuaItem::isType(lua_State* L)
+bool CLuaItem::isType(uint8 type)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto type = (uint8)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, m_PLuaItem->isType((ITEM_TYPE)type));
-    return 1;
+    return m_PLuaItem->isType(static_cast<ITEM_TYPE>(type));
 }
 
-inline int32 CLuaItem::isSubType(lua_State* L)
+bool CLuaItem::isSubType(uint8 subtype)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto subtype = (uint8)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, m_PLuaItem->isSubType((ITEM_SUBTYPE)subtype));
-    return 1;
+    return m_PLuaItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
 
-inline int32 CLuaItem::getName(lua_State* L)
+auto CLuaItem::getName() -> const char*
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
-    lua_pushstring(L, (const char*)m_PLuaItem->getName());
-    return 1;
+    // TODO: Fix c-style cast
+    return (const char*)m_PLuaItem->getName();
 }
 
-inline int32 CLuaItem::getILvl(lua_State* L)
+uint16 CLuaItem::getILvl()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    uint16 ilvl = static_cast<CItemEquipment*>(m_PLuaItem)->getILvl();
-    lua_pushinteger(L, ilvl);
-    return 1;
+    return static_cast<CItemEquipment*>(m_PLuaItem)->getILvl();
 }
 
-inline int32 CLuaItem::getReqLvl(lua_State* L)
+uint16 CLuaItem::getReqLvl()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    uint16 lvl = static_cast<CItemEquipment*>(m_PLuaItem)->getReqLvl();
-    lua_pushinteger(L, lvl);
-    return 1;
+    return static_cast<CItemEquipment*>(m_PLuaItem)->getReqLvl();
 }
 
-inline int32 CLuaItem::getMod(lua_State* L)
+int16 CLuaItem::getMod(uint16 modID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
+    Mod   mod   = static_cast<Mod>(modID);
 
-    CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
-
-    Mod mod = static_cast<Mod>(lua_tointeger(L, 1));
-
-    lua_pushinteger(L, PItem->getModifier(mod));
-    return 1;
+    return PItem->getModifier(mod);
 }
 
-inline int32 CLuaItem::addMod(lua_State* L)
+void CLuaItem::addMod(uint16 modID, int16 power)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
+    auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 
     // Checks if this item is just a pointer created by GetItem()
     // All item-modifying functions in this file should check this!
     if (itemutils::IsItemPointer(PItem))
     {
-        return 0;
+        return;
     }
 
-    Mod  mod   = static_cast<Mod>(lua_tointeger(L, 1));
-    auto power = (int16)lua_tointeger(L, 2);
+    Mod mod = static_cast<Mod>(modID);
 
     PItem->addModifier(CModifier(mod, power));
-    return 0;
 }
 
-inline int32 CLuaItem::delMod(lua_State* L)
+void CLuaItem::delMod(uint16 modID, int16 power)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
-
-    Mod  mod   = static_cast<Mod>(lua_tointeger(L, 1));
-    auto power = (int16)lua_tointeger(L, 2);
+    auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
+    Mod   mod   = static_cast<Mod>(modID);
 
     PItem->addModifier(CModifier(mod, -power));
-    return 0;
 }
 
-inline int32 CLuaItem::getAugment(lua_State* L)
+auto CLuaItem::getAugment(uint8 slot) -> std::tuple<uint16, uint8>
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 
-    CItemEquipment* PItem = (CItemEquipment*)m_PLuaItem;
-
-    auto   slot       = (uint8)lua_tointeger(L, 1);
     uint16 augment    = PItem->getAugment(slot);
     uint16 augmentid  = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
     uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augment), 11, 5);
 
-    lua_pushinteger(L, augmentid);
-    lua_pushinteger(L, augmentVal);
-
-    return 2;
+    return { augmentid, augmentVal };
 }
 
 inline int32 CLuaItem::getSkillType(lua_State* L)
@@ -293,79 +218,63 @@ inline int32 CLuaItem::getSkillType(lua_State* L)
     return 1;
 }
 
-inline int32 CLuaItem::getWeaponskillPoints(lua_State* L)
+uint16 CLuaItem::getWeaponskillPoints()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
     auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
 
     if (PItem)
     {
-        lua_pushinteger(L, PItem->getCurrentUnlockPoints());
-    }
-    else
-    {
-        lua_pushinteger(L, 0);
+        return  PItem->getCurrentUnlockPoints();
     }
 
-    return 1;
+    return 0;
 }
 
-inline int32 CLuaItem::isTwoHanded(lua_State* L)
+bool CLuaItem::isTwoHanded()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
     if (CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(m_PLuaItem))
     {
-        lua_pushboolean(L, PWeapon->isTwoHanded());
+        return PWeapon->isTwoHanded();
     }
     else
     {
         ShowError(CL_RED "CLuaItem::isTwoHanded - not a valid Weapon.\n" CL_RESET);
-        lua_pushboolean(L, 0);
     }
 
-    return 1;
+    return false;
 }
 
-inline int32 CLuaItem::isHandToHand(lua_State* L)
+bool CLuaItem::isHandToHand()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
     if (CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(m_PLuaItem))
     {
-        lua_pushboolean(L, PWeapon->isHandToHand());
+        return PWeapon->isHandToHand();
     }
     else
     {
         ShowError(CL_RED "CLuaItem::isHandToHand - not a valid Weapon.\n" CL_RESET);
-        lua_pushboolean(L, 0);
     }
 
-    return 1;
+    return false;
 }
 
-inline int32 CLuaItem::isShield(lua_State* L)
+bool CLuaItem::isShield()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
     if (CItemEquipment* PArmor = dynamic_cast<CItemEquipment*>(m_PLuaItem))
     {
-        lua_pushboolean(L, PArmor->IsShield());
+        return PArmor->IsShield();
     }
     else
     {
         ShowError(CL_RED "CLuaItem::isShield - not a valid Armor.\n" CL_RESET);
-        lua_pushboolean(L, 0);
     }
 
-    return 1;
+    return false;
 }
 
-inline int32 CLuaItem::getSignature(lua_State* L)
+auto CLuaItem::getSignature() -> const char*
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
     int8 signature[21];
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
@@ -376,9 +285,8 @@ inline int32 CLuaItem::getSignature(lua_State* L)
         DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
     }
 
-    lua_pushstring(L, (const char*)signature);
-
-    return 1;
+    // TODO: Fix c-style cast
+    return (const char*)signature;
 }
 //==========================================================//
 
