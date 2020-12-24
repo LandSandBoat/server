@@ -4947,7 +4947,6 @@ void CLuaBaseEntity::setCampaignAllegiance(uint8 allegiance)
  *  Function: isSeekingParty()
  *  Purpose : Returns true if a player is seeking a party
  *  Example : if player:isSeekingParty() then
- *  Notes   :
  ************************************************************************/
 
 bool CLuaBaseEntity::isSeekingParty()
@@ -4961,7 +4960,6 @@ bool CLuaBaseEntity::isSeekingParty()
  *  Function: getNewPlayer()
  *  Purpose : Returns true if a player is new
  *  Example : if not (player:getNewPlayer()) then
- *  Notes   :
  ************************************************************************/
 
 bool CLuaBaseEntity::getNewPlayer()
@@ -4975,18 +4973,15 @@ bool CLuaBaseEntity::getNewPlayer()
  *  Function: setNewPlayer()
  *  Purpose : Marks a player as being new and calls charutils to update DB
  *  Example : player:setNewPlayer(1)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setNewPlayer(lua_State* L)
+void CLuaBaseEntity::setNewPlayer(bool newplayer)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isboolean(L, 1));
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (lua_toboolean(L, 1))
+    if (newplayer == true)
     {
         PChar->menuConfigFlags.flags |= NFLAG_NEWPLAYER;
     }
@@ -4998,116 +4993,95 @@ inline int32 CLuaBaseEntity::setNewPlayer(lua_State* L)
     PChar->updatemask |= UPDATE_HP;
 
     charutils::SaveMenuConfigFlags(PChar);
-
-    return 0;
 }
 
 /************************************************************************
  *  Function: getMentor()
  *  Purpose : Returns true if a player is flagged as a mentor
- *  Example :
- *  Notes   :
+ *  Notes   : Test me!  Changing retval to bool
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getMentor(lua_State* L)
+bool CLuaBaseEntity::getMentor()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    lua_pushnumber(L, PChar->m_mentorUnlocked ? 1 : 0);
-    return 1;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->m_mentorUnlocked ? true : false;
 }
 
 /************************************************************************
  *  Function: setMentor()
  *  Purpose : Sets the mentor flag for a character
  *  Example : player:setMentor(1)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setMentor(lua_State* L)
+void CLuaBaseEntity::setMentor(bool mentor)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    CCharEntity* PChar      = (CCharEntity*)m_PBaseEntity;
-    PChar->m_mentorUnlocked = (uint8)lua_tonumber(L, 1) == 1;
+    CCharEntity* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->m_mentorUnlocked = mentor;
 
     charutils::SaveMentorFlag(PChar);
     PChar->updatemask |= UPDATE_HP;
-    return 0;
 }
 
 /************************************************************************
  *  Function: getGMLevel()
  *  Purpose : Returns the GM level (0-5)
  *  Example : if (player:getGMLevel() == 5) then -- kill pixies
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getGMLevel(lua_State* L)
+uint8 CLuaBaseEntity::getGMLevel()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    lua_pushnumber(L, PChar->m_GMlevel);
-    return 1;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->m_GMlevel;
 }
 
 /************************************************************************
  *  Function: setGMLevel()
  *  Purpose : Updates a player's GM status (0-5)
  *  Example : player:setGMLevel(3)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setGMLevel(lua_State* L)
+void CLuaBaseEntity::setGMLevel(uint8 level)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->m_GMlevel = (uint8)lua_tonumber(L, 1);
+    PChar->m_GMlevel = level;
     charutils::SaveCharGMLevel(PChar);
-    return 0;
 }
 
 /************************************************************************
  *  Function: getGMHidden()
  *  Purpose : Returns true if a GM is currently hidden
  *  Example : if (player:getGMHidden()) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getGMHidden(lua_State* L)
+bool CLuaBaseEntity::getGMHidden()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-    lua_pushboolean(L, PChar->m_isGMHidden);
-    return 1;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->m_isGMHidden;
 }
 
 /************************************************************************
  *  Function: setGMHidden()
  *  Purpose : Sets a GM to hidden mode
  *  Example : player:setGMHidden(1)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setGMHidden(lua_State* L)
+void CLuaBaseEntity::setGMHidden(bool isHidden)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
-    PChar->m_isGMHidden = lua_toboolean(L, 1);
+    auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->m_isGMHidden = isHidden;
 
     if (PChar->loc.zone)
     {
@@ -5120,40 +5094,32 @@ inline int32 CLuaBaseEntity::setGMHidden(lua_State* L)
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CCharPacket(PChar, ENTITY_SPAWN, 0));
         }
     }
-
-    return 0;
 }
 
 /************************************************************************
  *  Function: isJailed()
  *  Purpose : Returns true if a player is a violent felon
  *  Example : if (player:isJailed()) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isJailed(lua_State* L)
+bool CLuaBaseEntity::isJailed()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    lua_pushboolean(L, (jailutils::InPrison((CCharEntity*)m_PBaseEntity)));
-    return 1;
+    return jailutils::InPrison(static_cast<CCharEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
  *  Function: jail()
  *  Purpose : Locks up a misbehaving Elvaan
  *  Example : player:jail()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::jail(lua_State* L)
+void CLuaBaseEntity::jail()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     jailutils::Add(static_cast<CCharEntity*>(m_PBaseEntity));
-    return 0;
 }
 
 /************************************************************************
@@ -5163,14 +5129,11 @@ inline int32 CLuaBaseEntity::jail(lua_State* L)
  *  Notes   : Checks if specified MISC flag is set in current zone
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::canUseMisc(lua_State* L)
+bool CLuaBaseEntity::canUseMisc(uint16 misc)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    lua_pushboolean(L, m_PBaseEntity->loc.zone->CanUseMisc((uint16)lua_tointeger(L, 1)));
-    return 1;
+    return m_PBaseEntity->loc.zone->CanUseMisc(misc);
 }
 
 /************************************************************************
@@ -5214,40 +5177,29 @@ inline int32 CLuaBaseEntity::speed(lua_State* L)
  *  Notes   : See scripts/zones/Port_Bastok/Zone.lua for no playtime example
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getPlaytime(lua_State* L)
+uint32 CLuaBaseEntity::getPlaytime(sol::object const& shouldUpdate)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    bool update = true;
-    if (!lua_isnil(L, 1) && lua_isboolean(L, 1))
-    {
-        update = lua_toboolean(L, 1);
-    }
+    bool  update = (shouldUpdate != sol::nil) ? shouldUpdate.as<bool>() : true;
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    lua_pushinteger(L, PChar->GetPlayTime(update));
-
-    return 1;
+    return PChar->GetPlayTime(update);
 }
 
 /************************************************************************
  *  Function: getTimeCreated()
  *  Purpose : Get unix timestamp of when character was created
  *  Example : player:getTimeCreated()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getTimeCreated(lua_State* L)
+int32 CLuaBaseEntity::getTimeCreated()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    lua_pushinteger(L, PChar->GetTimeCreated());
-    return 1;
+    return PChar->GetTimeCreated();
 }
 
 /************************************************************************
@@ -14487,24 +14439,25 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isSeekingParty", CLuaBaseEntity::isSeekingParty);
     SOL_REGISTER("getNewPlayer", CLuaBaseEntity::getNewPlayer);
-    // SOL_REGISTER(setNewPlayer),
-    // SOL_REGISTER(getMentor),
-    // SOL_REGISTER(setMentor),
+    SOL_REGISTER("setNewPlayer", CLuaBaseEntity::setNewPlayer);
+    SOL_REGISTER("getMentor", CLuaBaseEntity::getMentor);
+    SOL_REGISTER("setMentor", CLuaBaseEntity::setMentor);
 
-    // SOL_REGISTER(getGMLevel),
-    // SOL_REGISTER(setGMLevel),
-    // SOL_REGISTER(getGMHidden),
-    // SOL_REGISTER(setGMHidden),
+    SOL_REGISTER("getGMLevel", CLuaBaseEntity::getGMLevel);
+    SOL_REGISTER("setGMLevel", CLuaBaseEntity::setGMLevel);
+    SOL_REGISTER("getGMHidden", CLuaBaseEntity::getGMHidden);
+    SOL_REGISTER("setGMHidden", CLuaBaseEntity::setGMHidden);
 
-    // SOL_REGISTER(isJailed),
-    // SOL_REGISTER(jail),
+    SOL_REGISTER("isJailed", CLuaBaseEntity::isJailed);
+    SOL_REGISTER("jail", CLuaBaseEntity::jail);
 
-    // SOL_REGISTER(canUseMisc),
+    SOL_REGISTER("canUseMisc", CLuaBaseEntity::canUseMisc);
 
-    // SOL_REGISTER(speed),
+    // SOL_REGISTER("getSpeed", CLuaBaseEntity::getSpeed);
+    // SOL_REGISTER("setSpeed", CLuaBaseEntity::setSpeed);
 
-    // SOL_REGISTER(getPlaytime),
-    // SOL_REGISTER(getTimeCreated),
+    SOL_REGISTER("getPlaytime", CLuaBaseEntity::getPlaytime);
+    SOL_REGISTER("getTimeCreated", CLuaBaseEntity::getTimeCreated);
 
     // Player Jobs and Levels
     SOL_REGISTER("getMainJob", CLuaBaseEntity::getMainJob);

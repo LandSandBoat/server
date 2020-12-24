@@ -243,26 +243,26 @@ public:
     uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
     void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 
-    bool  isSeekingParty();
-    bool  getNewPlayer();
-    int32 setNewPlayer(lua_State* L);
-    int32 getMentor(lua_State* L);
-    int32 setMentor(lua_State* L);
+    bool isSeekingParty();
+    bool getNewPlayer();
+    void setNewPlayer(bool newplayer);
+    bool getMentor();
+    void setMentor(bool mentor);
 
-    int32 getGMLevel(lua_State* L);
-    int32 setGMLevel(lua_State* L);
-    int32 getGMHidden(lua_State* L);
-    int32 setGMHidden(lua_State* L);
+    uint8 getGMLevel();
+    void  setGMLevel(uint8 level);
+    bool  getGMHidden();
+    void  setGMHidden(bool isHidden);
 
-    int32 isJailed(lua_State* L); // Is the player jailed
-    int32 jail(lua_State* L);
+    bool isJailed(); // Is the player jailed
+    void jail();
 
-    int32 canUseMisc(lua_State*); // Check misc flags of current zone.
+    bool canUseMisc(uint16 misc); // Check misc flags of current zone.
 
     int32 speed(lua_State*); // скорость передвижения сущности
 
-    int32 getPlaytime(lua_State*);
-    int32 getTimeCreated(lua_State*);
+    uint32 getPlaytime(sol::object const& shouldUpdate);
+    int32  getTimeCreated();
 
     // Player Jobs and Levels
     uint8 getMainJob();             // Returns Entity Main Job
