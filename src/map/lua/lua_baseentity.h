@@ -406,24 +406,24 @@ public:
 
     bool addWeaponSkillPoints(uint8 slotID, uint16 points); // Adds weapon skill points to an equipped weapon
 
-    int32 addLearnedAbility(lua_State*); // Add spell to Entity spell list
-    int32 hasLearnedAbility(lua_State*); // Check to see if character has item in spell list
-    int32 canLearnAbility(lua_State*);   // Check to see if character can learn spell, 0 if so
-    int32 delLearnedAbility(lua_State*); // Remove spell from Entity spell list
+    void   addLearnedAbility(uint16 abilityID); // Add spell to Entity spell list
+    bool   hasLearnedAbility(uint16 abilityID); // Check to see if character has item in spell list
+    uint32 canLearnAbility(uint16 abilityID);   // Check to see if character can learn spell, 0 if so
+    void   delLearnedAbility(uint16 abilityID); // Remove spell from Entity spell list
 
-    int32 addSpell(lua_State*);      // Add spell to Entity spell list
-    int32 hasSpell(lua_State*);      // Check to see if character has item in spell list
-    int32 canLearnSpell(lua_State*); // Check to see if character can learn spell, 0 if so
-    int32 delSpell(lua_State*);      // Remove spell from Entity spell list
+    void   addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save); // Add spell to Entity spell list
+    bool   hasSpell(uint16 spellID);                                                             // Check to see if character has item in spell list
+    uint32 canLearnSpell(uint16 spellID);                                                        // Check to see if character can learn spell, 0 if so
+    void   delSpell(uint16 spellID);                                                             // Remove spell from Entity spell list
 
-    int32 recalculateSkillsTable(lua_State*);
-    int32 recalculateAbilitiesTable(lua_State*);
+    void recalculateSkillsTable();
+    void recalculateAbilitiesTable();
 
     // Parties and Alliances
     int32 getParty(lua_State* L);
     int32 getPartyWithTrusts(lua_State* L);
     int32 getPartySize(lua_State* L); // Get the size of a party in an entity's alliance
-    int32 hasPartyJob(lua_State*);
+    bool  hasPartyJob(uint8 job);
     int32 getPartyMember(lua_State* L); // Get a character entity from another entity's party or alliance
     int32 getPartyLeader(lua_State* L);
     int32 getLeaderID(lua_State* L); // Get the id of the alliance/party leader *falls back to player id if no party*
@@ -602,13 +602,13 @@ public:
     int32 spawnPet(lua_State*);   // Calls Pet
     int32 despawnPet(lua_State*); // Despawns Pet
 
-    int32 spawnTrust(lua_State*);
-    int32 clearTrusts(lua_State*);
-    int32 getTrustID(lua_State*);
-    int32 trustPartyMessage(lua_State*);
-    int32 addSimpleGambit(lua_State*);
-    int32 addFullGambit(lua_State*);
-    int32 setTrustTPSkillSettings(lua_State*);
+    void   spawnTrust(uint16 trustId);
+    void   clearTrusts();
+    uint32 getTrustID();
+    void   trustPartyMessage(uint32 message_id);
+    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
+    int32  addFullGambit(lua_State*);
+    void   setTrustTPSkillSettings(uint16 trigger, uint16 select);
 
     int32 isJugPet(lua_State*); // If the entity has a pet, test if it is a jug pet.
     int32 hasValidJugPetItem(lua_State*);
@@ -645,15 +645,15 @@ public:
     int32 updateAttachments(lua_State*);
 
     // Mob Entity-Specific
-    int32 setMobLevel(lua_State*);
-    int32 getSystem(lua_State*);
-    int32 getFamily(lua_State*);
-    int32 isMobType(lua_State*); // True if mob is of type passed to function
-    int32 isUndead(lua_State*);  // True if mob is undead
-    int32 isNM(lua_State* L);
+    void   setMobLevel(uint8 level);
+    uint8  getSystem();
+    uint16 getFamily();
+    bool   isMobType(uint8 mobType); // True if mob is of type passed to function
+    bool   isUndead();               // True if mob is undead
+    bool   isNM();
 
-    int32 getModelSize(lua_State* L); // Gets model size
-    int32 setMobFlags(lua_State*);    // Used to manipulate the mob's flags for testing.
+    uint8 getModelSize();
+    int32 setMobFlags(lua_State*); // Used to manipulate the mob's flags for testing.
     int32 getMobFlags(lua_State*);
 
     int32 spawn(lua_State* L);

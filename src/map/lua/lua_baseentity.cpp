@@ -8282,25 +8282,19 @@ bool CLuaBaseEntity::addWeaponSkillPoints(uint8 slotID, uint16 points)
  *  Notes   : Used exclusively for Corsair Die usage
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addLearnedAbility(lua_State* L)
+void CLuaBaseEntity::addLearnedAbility(uint16 abilityID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 AbilityID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::addLearnedAbility(PChar, AbilityID))
+    if (charutils::addLearnedAbility(PChar, abilityID))
     {
-        charutils::addAbility(PChar, AbilityID);
+        charutils::addAbility(PChar, abilityID);
         charutils::SaveLearnedAbilities(PChar);
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 442));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -8310,46 +8304,37 @@ inline int32 CLuaBaseEntity::addLearnedAbility(lua_State* L)
  *  Notes   : Although canLearnAbility is similar, they have distinct diff
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasLearnedAbility(lua_State* L)
+bool CLuaBaseEntity::hasLearnedAbility(uint16 abilityID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 AbilityID = (uint16)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, (charutils::hasLearnedAbility((CCharEntity*)m_PBaseEntity, AbilityID) != 0));
-    return 1;
+    return charutils::hasLearnedAbility(static_cast<CCharEntity*>(m_PBaseEntity), abilityID) != 0;
 }
 
 /************************************************************************
  *  Function: canLearnAbility()
  *  Purpose : Returns true if player can learn the ability
  *  Example : if (player:canLearnAbility(89)) -- Chaos Roll
- *  Notes   :
+ *  Notes   : Purpose doesn't match function, returns uint32 Message,
+ *          : not bool type, according to header, 0 is can learn
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::canLearnAbility(lua_State* L)
+uint32 CLuaBaseEntity::canLearnAbility(uint16 abilityID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    uint32 Message = 0;
 
-    uint32 Message   = 0;
-    uint16 AbilityID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::hasLearnedAbility((CCharEntity*)m_PBaseEntity, AbilityID))
+    if (charutils::hasLearnedAbility(static_cast<CCharEntity*>(m_PBaseEntity), abilityID))
     {
         Message = 444;
     }
-    else if (!ability::CanLearnAbility((CCharEntity*)m_PBaseEntity, AbilityID))
+    else if (!ability::CanLearnAbility(static_cast<CCharEntity*>(m_PBaseEntity), abilityID))
     {
         Message = 443;
     }
-    lua_pushinteger(L, Message);
-    return 1;
+
+    return Message;
 }
 
 /************************************************************************
@@ -8359,23 +8344,17 @@ inline int32 CLuaBaseEntity::canLearnAbility(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delLearnedAbility(lua_State* L)
+void CLuaBaseEntity::delLearnedAbility(uint16 abilityID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 AbilityID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::delLearnedAbility(PChar, AbilityID))
+    if (charutils::delLearnedAbility(PChar, abilityID))
     {
         charutils::SaveLearnedAbilities(PChar);
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -8385,30 +8364,16 @@ inline int32 CLuaBaseEntity::delLearnedAbility(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addSpell(lua_State* L)
+void CLuaBaseEntity::addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
-    bool         silent = false;
-    bool         save   = true;
+    bool silent = (arg_silent != sol::nil) ? arg_silent.as<bool>() : false;
+    bool save   = (arg_save != sol::nil) ? arg_save.as<bool>() : true;
 
-    int32 n = lua_gettop(L);
-    if (n > 1)
-    {
-        silent = lua_toboolean(L, 2);
-        if (n > 2)
-        {
-            save = lua_toboolean(L, 3);
-        }
-    }
-
-    uint16 SpellID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::addSpell(PChar, SpellID))
+    if (charutils::addSpell(PChar, spellID))
     {
         if (!silent)
         {
@@ -8418,10 +8383,9 @@ inline int32 CLuaBaseEntity::addSpell(lua_State* L)
 
         if (save)
         {
-            charutils::SaveSpell(PChar, SpellID);
+            charutils::SaveSpell(PChar, spellID);
         }
     }
-    return 0;
 }
 
 /************************************************************************
@@ -8431,72 +8395,56 @@ inline int32 CLuaBaseEntity::addSpell(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasSpell(lua_State* L)
+bool CLuaBaseEntity::hasSpell(uint16 spellID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 SpellID = (uint16)lua_tointeger(L, 1);
-
-    lua_pushboolean(L, (charutils::hasSpell((CCharEntity*)m_PBaseEntity, SpellID) != 0));
-    return 1;
+    return charutils::hasSpell(static_cast<CCharEntity*>(m_PBaseEntity), spellID) != 0;
 }
 
 /************************************************************************
  *  Function: canLearnSpell()
  *  Purpose : Returns true if a player can learn a particular spell
  *  Example : if (player:canLearnSpell(528)) then
- *  Notes   :
+ *  Notes   : Just like learned ability, message or 0 (for can learn), not bool
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::canLearnSpell(lua_State* L)
+uint32 CLuaBaseEntity::canLearnSpell(uint16 spellID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
+    auto*  PChar   = static_cast<CCharEntity*>(m_PBaseEntity);
     uint32 Message = 0;
-    uint16 spellID = (uint16)lua_tointeger(L, 1);
 
-    if (charutils::hasSpell((CCharEntity*)m_PBaseEntity, spellID))
+    if (charutils::hasSpell(PChar, spellID))
     {
         Message = 96;
     }
-    else if (!spell::CanUseSpell((CCharEntity*)m_PBaseEntity, static_cast<SpellID>(spellID)))
+    else if (!spell::CanUseSpell(PChar, static_cast<SpellID>(spellID)))
     {
         Message = 95;
     }
-    lua_pushinteger(L, Message);
-    return 1;
+
+    return Message;
 }
 
 /************************************************************************
  *  Function: delSpell()
  *  Purpose : Deletes a learned spell from a player
  *  Example : player:delSpell(528)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delSpell(lua_State* L)
+void CLuaBaseEntity::delSpell(uint16 spellID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 SpellID = (uint16)lua_tointeger(L, 1);
-
-    if (charutils::delSpell(PChar, SpellID))
+    if (charutils::delSpell(PChar, spellID))
     {
-        charutils::DeleteSpell(PChar, SpellID);
+        charutils::DeleteSpell(PChar, spellID);
         PChar->pushPacket(new CCharSpellsPacket(PChar));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -8506,12 +8454,11 @@ inline int32 CLuaBaseEntity::delSpell(lua_State* L)
  *  Notes   : Used exclusively for Scholar abilities
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::recalculateSkillsTable(lua_State* L)
+void CLuaBaseEntity::recalculateSkillsTable()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     charutils::BuildingCharSkillsTable(PChar);
     charutils::BuildingCharWeaponSkills(PChar);
@@ -8519,7 +8466,6 @@ inline int32 CLuaBaseEntity::recalculateSkillsTable(lua_State* L)
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-    return 0;
 }
 
 /************************************************************************
@@ -8529,23 +8475,24 @@ inline int32 CLuaBaseEntity::recalculateSkillsTable(lua_State* L)
  *  Notes   : Used exlusively for Scholar abilities and Astral Flow
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::recalculateAbilitiesTable(lua_State* L)
+void CLuaBaseEntity::recalculateAbilitiesTable()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     charutils::BuildingCharAbilityTable(PChar);
     charutils::BuildingCharTraitsTable(PChar);
     charutils::BuildingCharWeaponSkills(PChar);
+
     if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_PET)
     {
-        charutils::BuildingCharPetAbilityTable(PChar, (CPetEntity*)PChar->PPet, ((CPetEntity*)PChar->PPet)->m_PetID);
+        auto* PPetEntity = static_cast<CPetEntity*>(PChar->PPet);
+
+        charutils::BuildingCharPetAbilityTable(PChar, PPetEntity, PPetEntity->m_PetID);
     }
 
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-    return 0;
 }
 
 /************************************************************************
@@ -8664,36 +8611,30 @@ inline int32 CLuaBaseEntity::getPartySize(lua_State* L)
  *  Notes   : Highly useful for future addition of features
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasPartyJob(lua_State* L)
+bool CLuaBaseEntity::hasPartyJob(uint8 job)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto job = lua_tointeger(L, 1);
-
-    if (((CCharEntity*)m_PBaseEntity)->PParty != nullptr)
+    if (static_cast<CCharEntity*>(m_PBaseEntity)->PParty != nullptr)
     {
-        for (auto& member : ((CCharEntity*)m_PBaseEntity)->PParty->members)
+        for (auto& member : static_cast<CCharEntity*>(m_PBaseEntity)->PParty->members)
         {
-            CCharEntity* PTarget = (CCharEntity*)member;
+            CCharEntity* PTarget = static_cast<CCharEntity*>(member);
+
             if (PTarget->GetMJob() == job)
             {
-                lua_pushboolean(L, true);
-                return 1;
+                return true;
             }
+
             for (auto* PTrust : PTarget->PTrusts)
             {
                 if (PTrust->GetMJob() == job)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
             }
         }
     }
-    lua_pushboolean(L, false);
-    return 1;
+
+    return false;
 }
 
 /************************************************************************
@@ -12202,76 +12143,54 @@ inline int32 CLuaBaseEntity::spawnPet(lua_State* L)
  *  Function: spawnTrust()
  *  Purpose : Spawns a Trust if a few correct conditions are met
  *  Example : caster:spawnTrust(TRUST_SHANTOTTO)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::spawnTrust(lua_State* L)
+void CLuaBaseEntity::spawnTrust(uint16 trustId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC); // only PCs can spawn trusts
-    if (!lua_isnil(L, 1) && lua_isstring(L, 1))
-    {
-        uint16 trustId = (uint16)lua_tointeger(L, 1);
-        trustutils::SpawnTrust((CCharEntity*)m_PBaseEntity, trustId);
-    }
-    else
-    {
-        ShowError(CL_RED "CLuaBaseEntity::spawnTrust : TrustID is NULL\n" CL_RESET);
-    }
-    return 0;
+
+    trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId);
 }
 
 /************************************************************************
  *  Function: clearTrusts()
  *  Purpose :
  *  Example : caster:clearTrusts()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::clearTrusts(lua_State* L)
+void CLuaBaseEntity::clearTrusts()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC); // only PCs can spawn trusts
 
     static_cast<CCharEntity*>(m_PBaseEntity)->ClearTrusts();
-
-    return 0;
 }
 
 /************************************************************************
  *  Function: getTrustID()
  *  Purpose :
  *  Example : trust:getTrustID()
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getTrustID(lua_State* L)
+uint32 CLuaBaseEntity::getTrustID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
-    lua_pushinteger(L, ((CTrustEntity*)m_PBaseEntity)->m_TrustID);
-    return 1;
+    return static_cast<CTrustEntity*>(m_PBaseEntity)->m_TrustID;
 }
 
 /************************************************************************
  *  Function: trustPartyMessage()
  *  Purpose :
  *  Example : mob:trustPartyMessage(message_id)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
+void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    auto* PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster);
 
-    auto message_id = (uint32)lua_tointeger(L, 1);
-
-    auto* PMaster = static_cast<CCharEntity*>(PTrust->PMaster);
     if (PMaster)
     {
         PMaster->ForParty([&](CBattleEntity* PMember) {
@@ -12279,8 +12198,6 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
             PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, message_id, 0, 711));
         });
     }
-
-    return 0;
 }
 
 /************************************************************************
@@ -12290,34 +12207,20 @@ inline int32 CLuaBaseEntity::trustPartyMessage(lua_State* L)
  *  Notes   : Adds a behaviour to the gambit system
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addSimpleGambit(lua_State* L)
+void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 5) || !lua_isnumber(L, 5));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 6) || !lua_isnumber(L, 6));
 
     using namespace gambits;
 
-    auto target        = static_cast<G_TARGET>(lua_tointeger(L, 1));
-    auto condition     = static_cast<G_CONDITION>(lua_tointeger(L, 2));
-    auto condition_arg = static_cast<uint32>(lua_tointeger(L, 3));
+    auto target    = static_cast<G_TARGET>(targ);
+    auto condition = static_cast<G_CONDITION>(cond);
 
-    auto reaction     = static_cast<G_REACTION>(lua_tointeger(L, 4));
-    auto selector     = static_cast<G_SELECT>(lua_tointeger(L, 5));
-    auto selector_arg = static_cast<uint32>(lua_tointeger(L, 6));
+    auto reaction = static_cast<G_REACTION>(react);
+    auto selector = static_cast<G_SELECT>(select);
 
     // Optional
-    auto retry_delay = 0;
-    if (!lua_isnil(L, 7) && lua_isnumber(L, 7))
-    {
-        retry_delay = (uint16)lua_tointeger(L, 7);
-    }
+    uint16 retry_delay = (retry != sol::nil) ? retry.as<uint16>() : 0;
 
     Gambit_t g;
     g.predicates.emplace_back(Predicate_t{ target, condition, condition_arg });
@@ -12328,8 +12231,6 @@ inline int32 CLuaBaseEntity::addSimpleGambit(lua_State* L)
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
     controller->m_GambitsContainer->AddGambit(g);
-
-    return 0;
 }
 
 /************************************************************************
@@ -12444,24 +12345,19 @@ inline int32 CLuaBaseEntity::addFullGambit(lua_State* L)
  *  Function: setTrustTPSkillSettings(trigger, select)
  *  Purpose :
  *  Example : mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
- *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::setTrustTPSkillSettings(lua_State* L)
+void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
-    TPZ_DEBUG_BREAK_IF(!lua_isnumber(L, 1) || !lua_isnumber(L, 2));
 
     using namespace gambits;
 
     auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(lua_tointeger(L, 1));
-    controller->m_GambitsContainer->tp_select  = static_cast<G_SELECT>(lua_tointeger(L, 2));
-
-    return 0;
+    controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(trigger);
+    controller->m_GambitsContainer->tp_select  = static_cast<G_SELECT>(select);
 }
 
 /************************************************************************
@@ -13087,21 +12983,16 @@ inline int32 CLuaBaseEntity::updateAttachments(lua_State* L)
  *  Notes   : CalculateStats will refill mobs hp/mp as well
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setMobLevel(lua_State* L)
+void CLuaBaseEntity::setMobLevel(uint8 level)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
-        PMob->SetMLevel((uint8)lua_tointeger(L, 1));
+        PMob->SetMLevel(level);
         mobutils::CalculateStats(PMob);
         mobutils::GetAvailableSpells(PMob);
     }
-
-    return 0;
 }
 
 /************************************************************************
@@ -13111,15 +13002,12 @@ inline int32 CLuaBaseEntity::setMobLevel(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getSystem(lua_State* L)
+uint8 CLuaBaseEntity::getSystem()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint8 system = static_cast<uint8>(((CBattleEntity*)m_PBaseEntity)->m_EcoSystem);
-
-    lua_pushinteger(L, system);
-    return 1;
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return static_cast<uint8>(PBattle->m_EcoSystem);
 }
 
 /************************************************************************
@@ -13129,15 +13017,12 @@ inline int32 CLuaBaseEntity::getSystem(lua_State* L)
  *  Notes   : To Do: Enumerate Mob Families in global script
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getFamily(lua_State* L)
+uint16 CLuaBaseEntity::getFamily()
 {
     auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
     TPZ_DEBUG_BREAK_IF(!entity);
 
-    uint16 family = entity->m_Family;
-
-    lua_pushinteger(L, family);
-    return 1;
+    return entity->m_Family;
 }
 
 /************************************************************************
@@ -13148,60 +13033,45 @@ inline int32 CLuaBaseEntity::getFamily(lua_State* L)
  *  Notes   : To Do: This isn't the intended function for NM checks...
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isMobType(lua_State* L)
+bool CLuaBaseEntity::isMobType(uint8 mobType)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
-        lua_pushboolean(L, false);
-        return 1;
+        return false;
     }
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
-    CMobEntity* PMob = (CMobEntity*)m_PBaseEntity;
-
-    lua_pushboolean(L, PMob->m_Type & lua_tointeger(L, 1));
-    return 1;
+    return PMob->m_Type & mobType;
 }
 
 /************************************************************************
  *  Function: isUndead()
  *  Purpose : Returns true if Entity is Undead
  *  Example : if (target:isUndead()) then
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isUndead(lua_State* L)
+bool CLuaBaseEntity::isUndead()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->m_EcoSystem == ECOSYSTEM::UNDEAD);
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->m_EcoSystem == ECOSYSTEM::UNDEAD;
 }
 
 /************************************************************************
  *  Function: isNM()
  *  Purpose : Returns true if Mob is a Notorious Monster
  *  Example : if (mob:isNM())
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isNM(lua_State* L)
+bool CLuaBaseEntity::isNM()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    if (m_PBaseEntity->objtype == TYPE_MOB && static_cast<CMobEntity*>(m_PBaseEntity)->m_Type & MOBTYPE_NOTORIOUS)
+    {
+        return true;
+    }
 
-    if (m_PBaseEntity->objtype == TYPE_MOB && ((CMobEntity*)m_PBaseEntity)->m_Type & MOBTYPE_NOTORIOUS)
-    {
-        lua_pushboolean(L, true);
-    }
-    else
-    {
-        lua_pushboolean(L, false);
-    }
-    return 1;
+    return false;
 }
 
 /************************************************************************
@@ -13211,14 +13081,11 @@ inline int32 CLuaBaseEntity::isNM(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getModelSize(lua_State* L)
+uint8 CLuaBaseEntity::getModelSize()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    CBattleEntity* PEntity = (CBattleEntity*)m_PBaseEntity;
-
-    lua_pushinteger(L, PEntity->m_ModelSize);
-    return 1;
+    return PEntity->m_ModelSize;
 }
 
 /************************************************************************
@@ -14900,18 +14767,18 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addWeaponSkillPoints", CLuaBaseEntity::addWeaponSkillPoints);
 
-    // SOL_REGISTER(addLearnedAbility),
-    // SOL_REGISTER(hasLearnedAbility),
-    // SOL_REGISTER(canLearnAbility),
-    // SOL_REGISTER(delLearnedAbility),
+    SOL_REGISTER("addLearnedAbility", CLuaBaseEntity::addLearnedAbility);
+    SOL_REGISTER("hasLearnedAbility", CLuaBaseEntity::hasLearnedAbility);
+    SOL_REGISTER("canLearnAbility", CLuaBaseEntity::canLearnAbility);
+    SOL_REGISTER("delLearnedAbility", CLuaBaseEntity::delLearnedAbility);
 
-    // SOL_REGISTER(addSpell),
-    // SOL_REGISTER(hasSpell),
-    // SOL_REGISTER(canLearnSpell),
-    // SOL_REGISTER(delSpell),
+    SOL_REGISTER("addSpell", CLuaBaseEntity::addSpell);
+    SOL_REGISTER("hasSpell", CLuaBaseEntity::hasSpell);
+    SOL_REGISTER("canLearnSpell", CLuaBaseEntity::canLearnSpell);
+    SOL_REGISTER("delSpell", CLuaBaseEntity::delSpell);
 
-    // SOL_REGISTER(recalculateSkillsTable),
-    // SOL_REGISTER(recalculateAbilitiesTable),
+    SOL_REGISTER("recalculateSkillsTable", CLuaBaseEntity::recalculateSkillsTable);
+    SOL_REGISTER("recalculateAbilitiesTable", CLuaBaseEntity::recalculateAbilitiesTable);
 
     // Parties and Alliances
     // SOL_REGISTER(getParty),
@@ -15134,23 +15001,23 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(updateAttachments),
 
     // Trust related
-    // SOL_REGISTER(spawnTrust),
-    // SOL_REGISTER(clearTrusts),
-    // SOL_REGISTER(getTrustID),
-    // SOL_REGISTER(trustPartyMessage),
-    // SOL_REGISTER(addSimpleGambit),
+    SOL_REGISTER("spawnTrust", CLuaBaseEntity::spawnTrust);
+    SOL_REGISTER("clearTrusts", CLuaBaseEntity::clearTrusts);
+    SOL_REGISTER("getTrustID", CLuaBaseEntity::getTrustID);
+    SOL_REGISTER("trustPartyMessage", CLuaBaseEntity::trustPartyMessage);
+    SOL_REGISTER("addSimpleGambit", CLuaBaseEntity::addSimpleGambit);
     // SOL_REGISTER(addFullGambit),
-    // SOL_REGISTER(setTrustTPSkillSettings),
+    SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
 
     // Mob Entity-Specific
-    // SOL_REGISTER(setMobLevel),
-    // SOL_REGISTER(getSystem),
-    // SOL_REGISTER(getFamily),
-    // SOL_REGISTER(isMobType),
-    // SOL_REGISTER(isUndead),
-    // SOL_REGISTER(isNM),
+    SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
+    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem);
+    SOL_REGISTER("getFamily", CLuaBaseEntity::getFamily);
+    SOL_REGISTER("isMobType", CLuaBaseEntity::isMobType);
+    SOL_REGISTER("isUndead", CLuaBaseEntity::isUndead);
+    SOL_REGISTER("isNM", CLuaBaseEntity::isNM);
 
-    // SOL_REGISTER(getModelSize),
+    SOL_REGISTER("getModelSize", CLuaBaseEntity::getModelSize);
     // SOL_REGISTER(setMobFlags),
     // SOL_REGISTER(getMobFlags),
 
