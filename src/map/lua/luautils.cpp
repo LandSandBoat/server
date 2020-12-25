@@ -1443,32 +1443,24 @@ namespace luautils
 
     int32 OnZoneIn(CCharEntity* PChar)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/Zone.lua",
-                       PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName());
 
-        if (prepFile(File, "onZoneIn"))
+        lua.script_file(fmt::format("scripts/zones/{0}/Zone.lua",
+                       PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName()));
+
+        if (!lua["onZoneIn"].valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, PChar->loc.prevzone);
-
-        if (lua_pcall(LuaHandle, 2, 1, 0))
+        auto result = lua["onZoneIn"](CLuaBaseEntity(PChar), PChar->loc.prevzone);
+        if (!result.valid())
         {
-            ShowError("luautils::onZoneIn: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onZoneIn: %s\n", err.what());
             return -1;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return -1;
+        return 0;
     }
 
     void AfterZoneIn(CBaseEntity* PChar)

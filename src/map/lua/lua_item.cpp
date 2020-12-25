@@ -285,7 +285,7 @@ auto CLuaItem::getSignature() -> const char*
         DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
     }
 
-    // TODO: Fix c-style cast
+    // TODO: Fix c-style cast, and the fact we might lose this, and this is most likely broken
     return (const char*)signature;
 }
 //==========================================================//

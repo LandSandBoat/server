@@ -201,3 +201,5 @@ cmake_install.cmake
 
 # Tracy download
 ext/tracy/
+
+scripts/commands/testcmd.lua

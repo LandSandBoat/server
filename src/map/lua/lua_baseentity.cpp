@@ -170,61 +170,31 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
  *  Notes   : Mainly used for showing retail text specific to an NPC
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::showText(lua_State* L)
+void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    // TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    CBaseEntity* PBaseEntity = mob->GetBaseEntity();
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    auto messageID = (uint16)lua_tointeger(L, 2);
-
-    CLuaBaseEntity* PLuaBaseEntity = nullptr; // nullptr;
-
-    if (PLuaBaseEntity != nullptr)
+    if (PBaseEntity->objtype == TYPE_NPC)
     {
-        CBaseEntity* PBaseEntity = PLuaBaseEntity->GetBaseEntity();
-        if (PBaseEntity->objtype == TYPE_NPC)
-        {
-            PBaseEntity->m_TargID       = m_PBaseEntity->targid;
-            PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
+        PBaseEntity->m_TargID       = m_PBaseEntity->targid;
+        PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
 
-            PBaseEntity->loc.zone->PushPacket(PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS));
-        }
-
-        uint32 param0 = 0;
-        uint32 param1 = 0;
-        uint32 param2 = 0;
-        uint32 param3 = 0;
-
-        if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-        {
-            param0 = (uint32)lua_tointeger(L, 3);
-        }
-        if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
-        {
-            param1 = (uint32)lua_tointeger(L, 4);
-        }
-        if (!lua_isnil(L, 5) && lua_isnumber(L, 5))
-        {
-            param2 = (uint32)lua_tointeger(L, 5);
-        }
-        if (!lua_isnil(L, 6) && lua_isnumber(L, 6))
-        {
-            param3 = (uint32)lua_tointeger(L, 6);
-        }
-
-        if (m_PBaseEntity->objtype == TYPE_PC)
-        {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CMessageSpecialPacket(PBaseEntity, messageID, param0, param1, param2, param3));
-        }
-        else
-        {
-            m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CMessageSpecialPacket(PBaseEntity, messageID, param0, param1, param3));
-        }
+        PBaseEntity->loc.zone->PushPacket(PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS));
     }
-    return 0;
+
+    uint32 param0 = (p0 != sol::nil) ? p0.as<uint32>() : 0;
+    uint32 param1 = (p1 != sol::nil) ? p1.as<uint32>() : 0;
+    uint32 param2 = (p2 != sol::nil) ? p2.as<uint32>() : 0;
+    uint32 param3 = (p3 != sol::nil) ? p3.as<uint32>() : 0;
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageSpecialPacket(PBaseEntity, messageID, param0, param1, param2, param3));
+    }
+    else
+    {
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CMessageSpecialPacket(PBaseEntity, messageID, param0, param1, param3));
+    }
 }
 
 /************************************************************************
@@ -1077,64 +1047,21 @@ inline int32 CLuaBaseEntity::startEventString(lua_State* L)
  *  Notes   : Ex: CoP ring selection uses this to redisplay correct order of rings
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateEvent(lua_State* L)
+void CLuaBaseEntity::updateEvent(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                                 sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    int32 n = lua_gettop(L);
+    uint32 param0 = (arg0 != sol::nil) ? arg0.as<uint32>() : 0;
+    uint32 param1 = (arg1 != sol::nil) ? arg1.as<uint32>() : 0;
+    uint32 param2 = (arg2 != sol::nil) ? arg2.as<uint32>() : 0;
+    uint32 param3 = (arg3 != sol::nil) ? arg3.as<uint32>() : 0;
+    uint32 param4 = (arg4 != sol::nil) ? arg4.as<uint32>() : 0;
+    uint32 param5 = (arg5 != sol::nil) ? arg5.as<uint32>() : 0;
+    uint32 param6 = (arg6 != sol::nil) ? arg6.as<uint32>() : 0;
+    uint32 param7 = (arg7 != sol::nil) ? arg7.as<uint32>() : 0;
 
-    if (n > 8)
-    {
-        ShowError("CLuaBaseEntity::updateEvent: Could not update event, Lack of arguments.\n");
-        lua_settop(L, -n);
-        return 0;
-    }
-
-    uint32 param0 = 0;
-    uint32 param1 = 0;
-    uint32 param2 = 0;
-    uint32 param3 = 0;
-    uint32 param4 = 0;
-    uint32 param5 = 0;
-    uint32 param6 = 0;
-    uint32 param7 = 0;
-
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-    {
-        param0 = (uint32)lua_tointeger(L, 1);
-    }
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-    {
-        param1 = (uint32)lua_tointeger(L, 2);
-    }
-    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-    {
-        param2 = (uint32)lua_tointeger(L, 3);
-    }
-    if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
-    {
-        param3 = (uint32)lua_tointeger(L, 4);
-    }
-    if (!lua_isnil(L, 5) && lua_isnumber(L, 5))
-    {
-        param4 = (uint32)lua_tointeger(L, 5);
-    }
-    if (!lua_isnil(L, 6) && lua_isnumber(L, 6))
-    {
-        param5 = (uint32)lua_tointeger(L, 6);
-    }
-    if (!lua_isnil(L, 7) && lua_isnumber(L, 7))
-    {
-        param6 = (uint32)lua_tointeger(L, 7);
-    }
-    if (!lua_isnil(L, 8) && lua_isnumber(L, 8))
-    {
-        param7 = (uint32)lua_tointeger(L, 8);
-    }
-
-    ((CCharEntity*)m_PBaseEntity)->pushPacket(new CEventUpdatePacket(param0, param1, param2, param3, param4, param5, param6, param7));
-    return 0;
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEventUpdatePacket(param0, param1, param2, param3, param4, param5, param6, param7));
 }
 
 /************************************************************************
@@ -2214,31 +2141,21 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::sendEmote(lua_State* L)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 {
-    /*
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-
     auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    CCharEntity* const PTarget = nullptr;
-
+    auto* const PTarget = dynamic_cast<CCharEntity*>(target->GetBaseEntity());
 
     if (PChar && PTarget)
     {
-        const auto emoteID   = static_cast<Emote>(lua_tointeger(L, 2));
-        const auto emoteMode = static_cast<EmoteMode>(lua_tointeger(L, 3));
+        const auto emoteID   = static_cast<Emote>(emID);
+        const auto emoteMode = static_cast<EmoteMode>(emMode);
 
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
-                                    new CCharEmotionPacket(PChar, PTarget->GetBaseEntity()->id, PTarget->GetBaseEntity()->targid, emoteID, emoteMode, 0));
+                                    new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
     }
-    */
-
-    return 0;
 }
 
 /************************************************************************
@@ -2249,18 +2166,11 @@ inline int32 CLuaBaseEntity::sendEmote(lua_State* L)
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getWorldAngle(lua_State* L)
+int16 CLuaBaseEntity::getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    int16 angle   = worldAngle(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p);
+    int16 degrees = (deg != sol::nil) ? deg.as<int16>() : 256;
 
-    // TODO:
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    int16 angle   = worldAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
-    int16 degrees = (int16)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 256);
     if (degrees != 256)
     {
         if (degrees % 4 == 0)
@@ -2274,8 +2184,7 @@ inline int32 CLuaBaseEntity::getWorldAngle(lua_State* L)
         }
     }
 
-    lua_pushnumber(L, angle);
-    return 1;
+    return angle;
 }
 
 /************************************************************************
@@ -2290,17 +2199,9 @@ inline int32 CLuaBaseEntity::getWorldAngle(lua_State* L)
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getFacingAngle(lua_State* L)
+int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushnumber(L, facingAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p));
-    return 1;
+    return facingAngle(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p);
 }
 
 /************************************************************************
@@ -2310,19 +2211,11 @@ inline int32 CLuaBaseEntity::getFacingAngle(lua_State* L)
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isFacing(lua_State* L)
+bool CLuaBaseEntity::isFacing(CLuaBaseEntity const* target, sol::object const& angleArg)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    uint8 angle = (angleArg != sol::nil) ? angleArg.as<uint8>() : 64;
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushboolean(L, facing(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
-    return 1;
+    return facing(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p, angle);
 }
 
 /************************************************************************
@@ -2332,19 +2225,11 @@ inline int32 CLuaBaseEntity::isFacing(lua_State* L)
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isInfront(lua_State* L)
+bool CLuaBaseEntity::isInfront(CLuaBaseEntity const* target, sol::object const& angleArg)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    uint8 angle = (angleArg != sol::nil) ? angleArg.as<uint8>() : 64;
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushboolean(L, infront(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
-    return 1;
+    return infront(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p, angle);
 }
 
 /************************************************************************
@@ -2354,19 +2239,11 @@ inline int32 CLuaBaseEntity::isInfront(lua_State* L)
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isBehind(lua_State* L)
+bool CLuaBaseEntity::isBehind(CLuaBaseEntity const* target, sol::object const& angleArg)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    uint8 angle = (angleArg != sol::nil) ? angleArg.as<uint8>() : 64;
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushboolean(L, behind(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
-    return 1;
+    return behind(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p, angle);
 }
 
 /************************************************************************
@@ -2376,19 +2253,11 @@ inline int32 CLuaBaseEntity::isBehind(lua_State* L)
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::isBeside(lua_State* L)
+bool CLuaBaseEntity::isBeside(CLuaBaseEntity const* target, sol::object const& angleArg)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
+    uint8 angle = (angleArg != sol::nil) ? angleArg.as<uint8>() : 64;
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr;
-
-    auto angle = (uint8)(lua_gettop(L) > 1 ? lua_tointeger(L, 2) : 64);
-
-    TPZ_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-
-    lua_pushboolean(L, beside(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p, angle));
-    return 1;
+    return beside(m_PBaseEntity->loc.p, target->GetBaseEntity()->loc.p, angle);
 }
 
 /************************************************************************
@@ -2571,24 +2440,16 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
  *  Notes   : Access values with key identifiers (pos.x or pos.y)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getPos(lua_State* L)
+auto CLuaBaseEntity::getPos() -> std::map<std::string, float>
 {
-    lua_createtable(L, 4, 0);
-    int8 newTable = lua_gettop(L);
+    std::map<std::string, float> pos;
 
-    lua_pushnumber(L, m_PBaseEntity->loc.p.x);
-    lua_setfield(L, newTable, "x");
+    pos["x"]   = m_PBaseEntity->loc.p.x;
+    pos["y"]   = m_PBaseEntity->loc.p.y;
+    pos["z"]   = m_PBaseEntity->loc.p.z;
+    pos["rot"] = m_PBaseEntity->loc.p.rotation;
 
-    lua_pushnumber(L, m_PBaseEntity->loc.p.y);
-    lua_setfield(L, newTable, "y");
-
-    lua_pushnumber(L, m_PBaseEntity->loc.p.z);
-    lua_setfield(L, newTable, "z");
-
-    lua_pushnumber(L, m_PBaseEntity->loc.p.rotation);
-    lua_setfield(L, newTable, "rot");
-
-    return 1;
+    return pos;
 }
 
 /************************************************************************
@@ -2598,15 +2459,14 @@ inline int32 CLuaBaseEntity::getPos(lua_State* L)
  *  Notes   : Format: x,y,z,rot
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::showPosition(lua_State* L)
+void CLuaBaseEntity::showPosition()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    ((CCharEntity*)m_PBaseEntity)
+    // TODO: Fix c-style cast
+    static_cast<CCharEntity*>(m_PBaseEntity)
         ->pushPacket(new CMessageStandardPacket((int32)m_PBaseEntity->loc.p.x, (int32)m_PBaseEntity->loc.p.y, (int32)m_PBaseEntity->loc.p.z,
                                                 m_PBaseEntity->loc.p.rotation, MsgStd::Compass));
-    return 0;
 }
 
 /************************************************************************
@@ -2616,12 +2476,9 @@ inline int32 CLuaBaseEntity::showPosition(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getXPos(lua_State* L)
+float CLuaBaseEntity::getXPos()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushnumber(L, m_PBaseEntity->GetXPos());
-    return 1;
+    return m_PBaseEntity->GetXPos();
 }
 
 /************************************************************************
@@ -2631,12 +2488,9 @@ inline int32 CLuaBaseEntity::getXPos(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getYPos(lua_State* L)
+float CLuaBaseEntity::getYPos()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushnumber(L, m_PBaseEntity->GetYPos());
-    return 1;
+    return m_PBaseEntity->GetYPos();
 }
 
 /************************************************************************
@@ -2646,12 +2500,9 @@ inline int32 CLuaBaseEntity::getYPos(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getZPos(lua_State* L)
+float CLuaBaseEntity::getZPos()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushnumber(L, m_PBaseEntity->GetZPos());
-    return 1;
+    return m_PBaseEntity->GetZPos();
 }
 
 /************************************************************************
@@ -2661,12 +2512,9 @@ inline int32 CLuaBaseEntity::getZPos(lua_State* L)
  *  Notes   : Rot = Rotation of 0-359 degrees
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getRotPos(lua_State* L)
+uint8 CLuaBaseEntity::getRotPos()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushnumber(L, m_PBaseEntity->GetRotPos());
-    return 1;
+    return m_PBaseEntity->GetRotPos();
 }
 
 /************************************************************************
@@ -2676,83 +2524,68 @@ inline int32 CLuaBaseEntity::getRotPos(lua_State* L)
  *  Notes   : Using without zone will send player to coordinates on same map
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setPos(lua_State* L)
+// TODO: Make sure we cover all types of argument cases, or standardize!
+void CLuaBaseEntity::setPos(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3, sol::object const& arg4)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUS_TYPE::DISAPPEAR)
+        if (arg4 != sol::nil && static_cast<CCharEntity*>(m_PBaseEntity)->status == STATUS_TYPE::DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
-            return 0;
+            return;
         }
     }
 
-    if (lua_isnumber(L, 1))
+    bool isTable = false;
+
+    if (arg0.is<double>()) // is<double>() returns true on both float and int-types
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            m_PBaseEntity->loc.p.x = (float)lua_tonumber(L, 1);
-        }
-        if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-        {
-            m_PBaseEntity->loc.p.y = (float)lua_tonumber(L, 2);
-        }
-        if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-        {
-            m_PBaseEntity->loc.p.z = (float)lua_tonumber(L, 3);
-        }
-        if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
-        {
-            m_PBaseEntity->loc.p.rotation = (uint8)lua_tointeger(L, 4);
-        }
+        // Just in case we don't have sufficient parameters, default to current coordinate
+        m_PBaseEntity->loc.p.x        = (arg0 != sol::nil) ? arg0.as<float>() : m_PBaseEntity->loc.p.x;
+        m_PBaseEntity->loc.p.y        = (arg1 != sol::nil) ? arg1.as<float>() : m_PBaseEntity->loc.p.y;
+        m_PBaseEntity->loc.p.z        = (arg2 != sol::nil) ? arg2.as<float>() : m_PBaseEntity->loc.p.z;
+        m_PBaseEntity->loc.p.rotation = (arg3 != sol::nil) ? arg3.as<uint8>() : m_PBaseEntity->loc.p.rotation;
     }
     else
     {
         // its a table
-        lua_rawgeti(L, 1, 1);
-        m_PBaseEntity->loc.p.x = (float)lua_tonumber(L, -1);
-        lua_pop(L, 1);
+        auto pos = arg0.as<std::vector<float>>();
 
-        lua_rawgeti(L, 1, 2);
-        m_PBaseEntity->loc.p.y = (float)lua_tonumber(L, -1);
-        lua_pop(L, 1);
+        m_PBaseEntity->loc.p.x        = pos[0];
+        m_PBaseEntity->loc.p.y        = pos[1];
+        m_PBaseEntity->loc.p.z        = pos[2];
+        m_PBaseEntity->loc.p.rotation = static_cast<uint8>(pos[3]);
 
-        lua_rawgeti(L, 1, 3);
-        m_PBaseEntity->loc.p.z = (float)lua_tonumber(L, -1);
-        lua_pop(L, 1);
-
-        lua_rawgeti(L, 1, 4);
-        m_PBaseEntity->loc.p.rotation = (uint8)lua_tointeger(L, -1);
-        lua_pop(L, 1);
+        isTable = true;
     }
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (!lua_isnil(L, 5) && lua_isnumber(L, 5))
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+        if ((arg4 != sol::nil && arg4.is<int>()) || (isTable && arg1 != sol::nil))
         {
-            if ((uint16)lua_tointeger(L, 5) >= MAX_ZONEID)
+            uint16 zone = isTable ? arg1.as<uint16>() : arg4.as<uint16>();
+
+            if (zone >= MAX_ZONEID)
             {
-                return 0;
+                return;
             }
 
-            ((CCharEntity*)m_PBaseEntity)->loc.destination = (uint16)lua_tointeger(L, 5);
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
-            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+            PChar->loc.destination = zone;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+            PChar->loc.boundary    = 0;
+            PChar->m_moghouseID    = 0;
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
             //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
+        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            PChar->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
-
-    return 0;
 }
 
 /************************************************************************
@@ -3378,29 +3211,23 @@ inline int32 CLuaBaseEntity::getEquippedItem(lua_State* L)
  *  Notes   : Send with an L2 value to specify container
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasItem(lua_State* L)
+bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    uint16 ItemID = (uint16)lua_tointeger(L, 1);
-
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+    if (location != sol::nil)
     {
         uint8 locationID = LOC_INVENTORY;
 
-        locationID = (uint8)lua_tointeger(L, 2);
+        locationID = location.as<uint8>();
         locationID = (locationID < MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
 
-        lua_pushboolean(L, PChar->getStorage(locationID)->SearchItem(ItemID) != ERROR_SLOTID);
-        return 1;
+        return PChar->getStorage(locationID)->SearchItem(itemID) != ERROR_SLOTID;
     }
-    lua_pushboolean(L, charutils::HasItem(PChar, ItemID));
-    return 1;
+
+    return charutils::HasItem(PChar, itemID);
 }
 
 /************************************************************************
@@ -9910,15 +9737,11 @@ bool CLuaBaseEntity::isDualWielding()
  *  Notes   : See Ventriloquy and Atonement
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCE(lua_State* L)
+int32 CLuaBaseEntity::getCE(CLuaBaseEntity const* target)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
 
-    CLuaBaseEntity* PEntity = nullptr;
-
-    lua_pushinteger(L, ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->GetCE((CBattleEntity*)PEntity->GetBaseEntity()));
-    return 1;
+    return static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->GetCE(static_cast<CBattleEntity*>(target->GetBaseEntity()));
 }
 
 /************************************************************************
@@ -9928,15 +9751,11 @@ inline int32 CLuaBaseEntity::getCE(lua_State* L)
  *  Notes   : See Ventriloquy and Atonement
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getVE(lua_State* L)
+int32 CLuaBaseEntity::getVE(CLuaBaseEntity const* target)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
 
-    CLuaBaseEntity* PEntity = nullptr;
-
-    lua_pushinteger(L, ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->GetVE((CBattleEntity*)PEntity->GetBaseEntity()));
-    return 1;
+    return static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->GetVE(static_cast<CBattleEntity*>(target->GetBaseEntity()));
 }
 
 /************************************************************************
@@ -10799,15 +10618,11 @@ void CLuaBaseEntity::addMod(uint16 type, int16 amount)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getMod(lua_State* L)
+int16 CLuaBaseEntity::getMod(uint16 modID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->getMod(static_cast<Mod>(lua_tointeger(L, 1))));
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->getMod(static_cast<Mod>(modID));
 }
 
 /************************************************************************
@@ -10817,16 +10632,11 @@ inline int32 CLuaBaseEntity::getMod(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setMod(lua_State* L)
+void CLuaBaseEntity::setMod(uint16 modID, int16 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    ((CBattleEntity*)m_PBaseEntity)->setModifier(static_cast<Mod>(lua_tointeger(L, 1)), (int16)lua_tointeger(L, 2));
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->setModifier(static_cast<Mod>(modID), value);
 }
 
 /************************************************************************
@@ -10836,16 +10646,11 @@ inline int32 CLuaBaseEntity::setMod(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delMod(lua_State* L)
+void CLuaBaseEntity::delMod(uint16 modID, int16 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    ((CBattleEntity*)m_PBaseEntity)->delModifier(static_cast<Mod>(lua_tointeger(L, 1)), (int16)lua_tointeger(L, 2));
-    return 0;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->delModifier(static_cast<Mod>(modID), value);
 }
 
 /************************************************************************
@@ -11087,18 +10892,11 @@ inline int32 CLuaBaseEntity::addBardSong(lua_State* L)
  *  Function: charm()
  *  Purpose : Charms an entity target
  *  Example : mob:charm(target)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::charm(lua_State* L)
+void CLuaBaseEntity::charm(CLuaBaseEntity const* target)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PTarget = nullptr;
-    battleutils::applyCharm((CBattleEntity*)m_PBaseEntity, (CBattleEntity*)PTarget->GetBaseEntity());
-
-    return 0;
+    battleutils::applyCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()));
 }
 
 /************************************************************************
@@ -12265,7 +12063,7 @@ auto CLuaBaseEntity::getPetName() -> const char*
 
     if (PBattle->PPet)
     {
-        PBattle->PPet->name.c_str();
+        return PBattle->PPet->name.c_str();
     }
 
     return std::string("").c_str(); // Might be overkill, but being safe?
@@ -13987,7 +13785,7 @@ void CLuaBaseEntity::Register()
     SOL_USERTYPE("CBaseEntity", CLuaBaseEntity);
 
     // Messaging System
-    // SOL_REGISTER("showText", CLuaBaseEntity::showText);
+    SOL_REGISTER("showText", CLuaBaseEntity::showText);
     // SOL_REGISTER(messageText),
     SOL_REGISTER("PrintToPlayer", CLuaBaseEntity::PrintToPlayer);
     // SOL_REGISTER(PrintToArea),
@@ -14072,15 +13870,15 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
     SOL_REGISTER("openSendBox", CLuaBaseEntity::openSendBox);
     SOL_REGISTER("leaveGame", CLuaBaseEntity::leaveGame);
-    // SOL_REGISTER(sendEmote),
+    SOL_REGISTER("sendEmote", CLuaBaseEntity::sendEmote);
 
     // Location and Positioning
-    // SOL_REGISTER(getWorldAngle),
-    // SOL_REGISTER(getFacingAngle),
-    // SOL_REGISTER(isFacing),
-    // SOL_REGISTER(isInfront),
-    // SOL_REGISTER(isBehind),
-    // SOL_REGISTER(isBeside),
+    SOL_REGISTER("getWorldAngle", CLuaBaseEntity::getWorldAngle);
+    SOL_REGISTER("getFacingAngle", CLuaBaseEntity::getFacingAngle);
+    SOL_REGISTER("isFacing", CLuaBaseEntity::isFacing);
+    SOL_REGISTER("isInfront", CLuaBaseEntity::isInfront);
+    SOL_REGISTER("isBehind", CLuaBaseEntity::isBehind);
+    SOL_REGISTER("isBeside", CLuaBaseEntity::isBeside);
 
     // SOL_REGISTER(getZone),
     SOL_REGISTER("getZoneID", CLuaBaseEntity::getZoneID);
@@ -14091,13 +13889,13 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
     SOL_REGISTER("isInMogHouse", CLuaBaseEntity::isInMogHouse);
 
-    // SOL_REGISTER(getPos),
-    // SOL_REGISTER(showPosition),
-    // SOL_REGISTER(getXPos),
-    // SOL_REGISTER(getYPos),
-    // SOL_REGISTER(getZPos),
-    // SOL_REGISTER(getRotPos),
-    // SOL_REGISTER(setPos),
+    SOL_REGISTER("getPos", CLuaBaseEntity::getPos);
+    SOL_REGISTER("showPosition", CLuaBaseEntity::showPosition);
+    SOL_REGISTER("getXPos", CLuaBaseEntity::getXPos);
+    SOL_REGISTER("getYPos", CLuaBaseEntity::getYPos);
+    SOL_REGISTER("getZPos", CLuaBaseEntity::getZPos);
+    SOL_REGISTER("getRotPos", CLuaBaseEntity::getRotPos);
+    SOL_REGISTER("setPos", CLuaBaseEntity::setPos);
 
     SOL_REGISTER("warp", CLuaBaseEntity::warp);
     // SOL_REGISTER(teleport),
@@ -14116,7 +13914,7 @@ void CLuaBaseEntity::Register()
     // Items
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     // SOL_REGISTER(getEquippedItem),
-    // SOL_REGISTER(hasItem),
+    SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     // SOL_REGISTER(addItem),
     // SOL_REGISTER(delItem),
     // SOL_REGISTER(addUsedItem),
@@ -14440,8 +14238,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
 
     // Enmity
-    // SOL_REGISTER(getCE),
-    // SOL_REGISTER(getVE),
+    SOL_REGISTER("getCE", CLuaBaseEntity::getCE);
+    SOL_REGISTER("getVE", CLuaBaseEntity::getVE);
     // SOL_REGISTER(setCE),
     // SOL_REGISTER(setVE),
     // SOL_REGISTER(addEnmity),
