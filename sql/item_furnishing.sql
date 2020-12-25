@@ -414,7 +414,7 @@ INSERT INTO `item_furnishing` VALUES (3629, 'culinarians_stall', 20, 561, 3, 11)
 INSERT INTO `item_furnishing` VALUES (3630, 'tanners_stall', 20, 558, 2, 11);
 INSERT INTO `item_furnishing` VALUES (3631, 'fishermens_stall', 20, 553, 6, 11);
 INSERT INTO `item_furnishing` VALUES (3632, 'carpenters_stall', 20, 554, 4, 11);
-INSERT INTO `item_furnishing` VALUES (3633, 'alchemists_stall', 20, 551, 5, 11);
+INSERT INTO `item_furnishing` VALUES (3633, 'alchemists_stall', 20, 560, 5, 11);
 INSERT INTO `item_furnishing` VALUES (3634, 'starlight_cake', 1, 514, 3, 4);
 INSERT INTO `item_furnishing` VALUES (3635, 'buche_des_etoiles', 1, 561, 3, 2);
 INSERT INTO `item_furnishing` VALUES (3636, 'serving_of_bavarois_potiron', 1, 512, 1, 1);
