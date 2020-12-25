@@ -583,27 +583,27 @@ public:
     bool   isWeaponTwoHanded();
     int32  getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
     uint16 getWeaponDmg();                // gets the current equipped weapons' DMG rating
-    int32  getWeaponDmgRank(lua_State*);  // gets the current equipped weapons' DMG rating for Rank calc
-    int32  getOffhandDmg(lua_State*);     // gets the current equipped offhand's DMG rating (used in WS calcs)
-    int32  getOffhandDmgRank(lua_State*); // gets the current equipped offhand's DMG rating for Rank calc
-    int32  getRangedDmg(lua_State*);      // Get ranged weapon DMG rating
-    int32  getRangedDmgRank(lua_State*);  // Get ranged weapond DMG rating used for calculating rank
-    int32  getAmmoDmg(lua_State*);        // Get ammo DMG rating
+    uint16 getWeaponDmgRank();            // gets the current equipped weapons' DMG rating for Rank calc
+    uint16 getOffhandDmg();               // gets the current equipped offhand's DMG rating (used in WS calcs)
+    uint16 getOffhandDmgRank();           // gets the current equipped offhand's DMG rating for Rank calc
+    uint16 getRangedDmg();                // Get ranged weapon DMG rating
+    uint16 getRangedDmgRank();            // Get ranged weapond DMG rating used for calculating rank
+    uint16 getAmmoDmg();                  // Get ammo DMG rating
 
-    int32 removeAmmo(lua_State* L);
+    void removeAmmo();
 
-    int32 getWeaponSkillLevel(lua_State*);   // Get Skill for equipped weapon
-    int32 getWeaponDamageType(lua_State*);   // gets the type of weapon equipped
-    int32 getWeaponSkillType(lua_State*);    // gets the type of weapon equipped
-    int32 getWeaponSubSkillType(lua_State*); // gets the subskill of weapon equipped
-    int32 getWSSkillchainProp(lua_State* L); // returns weapon skill's skillchain properties (up to 3)
+    uint8  getWeaponSkillLevel(uint8 slotID);                        // Get Skill for equipped weapon
+    uint16 getWeaponDamageType(uint8 slotID);                        // gets the type of weapon equipped
+    uint8  getWeaponSkillType(uint8 slotID);                         // gets the type of weapon equipped
+    uint8  getWeaponSubSkillType(uint8 slotID);                      // gets the subskill of weapon equipped
+    auto   getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>; // returns weapon skill's skillchain properties (up to 3)
 
     int32 takeWeaponskillDamage(lua_State* L);
     int32 takeSpellDamage(lua_State* L);
 
     // Pets and Automations
-    int32 spawnPet(lua_State*);   // Calls Pet
-    int32 despawnPet(lua_State*); // Despawns Pet
+    int32 spawnPet(lua_State*); // Calls Pet
+    void  despawnPet();         // Despawns Pet
 
     void   spawnTrust(uint16 trustId);
     void   clearTrusts();
@@ -613,16 +613,16 @@ public:
     int32  addFullGambit(lua_State*);
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select);
 
-    int32 isJugPet(lua_State*); // If the entity has a pet, test if it is a jug pet.
-    int32 hasValidJugPetItem(lua_State*);
+    bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
+    bool hasValidJugPetItem();
 
-    int32 hasPet(lua_State*);   // returns true if the player has a pet
-    int32 getPet(lua_State*);   // Creates an LUA reference to a pet entity
-    int32 getPetID(lua_State*); // If the entity has a pet, returns the PetID to identify pet type.
-    int32 getMaster(lua_State*);
-    int32 getPetElement(lua_State*);
+    bool   hasPet();           // returns true if the player has a pet
+    int32  getPet(lua_State*); // Creates an LUA reference to a pet entity
+    uint32 getPetID();         // If the entity has a pet, returns the PetID to identify pet type.
+    int32  getMaster(lua_State*);
+    uint8  getPetElement();
 
-    int32 getPetName(lua_State*);
+    auto  getPetName() -> const char*;
     int32 setPetName(lua_State*);
 
     int32 getCharmChance(lua_State*); // Gets the chance the entity has to charm its target.
@@ -630,22 +630,22 @@ public:
 
     int32 petAttack(lua_State*); // Despawns Pet
     int32 petAbility(lua_State*);
-    int32 petRetreat(lua_State*);
-    int32 familiar(lua_State*); // familiar on pet
+    void  petRetreat();
+    void  familiar();
 
-    int32 addPetMod(lua_State*);
-    int32 setPetMod(lua_State*);
-    int32 delPetMod(lua_State*);
+    void addPetMod(uint16 modID, int16 amount);
+    void setPetMod(uint16 modID, int16 amount);
+    void delPetMod(uint16 modID, int16 amount);
 
-    int32 hasAttachment(lua_State*);
-    int32 getAutomatonName(lua_State*);
-    int32 getAutomatonFrame(lua_State* L);
-    int32 getAutomatonHead(lua_State* L);
-    int32 unlockAttachment(lua_State* L);
-    int32 getActiveManeuvers(lua_State*);
-    int32 removeOldestManeuver(lua_State*);
-    int32 removeAllManeuvers(lua_State*);
-    int32 updateAttachments(lua_State*);
+    bool  hasAttachment(uint16 itemID);
+    auto  getAutomatonName() -> const char*;
+    uint8 getAutomatonFrame();
+    uint8 getAutomatonHead();
+    bool  unlockAttachment(uint16 itemID);
+    uint8 getActiveManeuvers();
+    void  removeOldestManeuver();
+    void  removeAllManeuvers();
+    void  updateAttachments();
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
