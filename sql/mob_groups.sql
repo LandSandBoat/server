@@ -3089,6 +3089,8 @@ INSERT INTO `mob_groups` VALUES (65,2089,65,'Iriri_Samariri',0,128,1367,28000,0,
 INSERT INTO `mob_groups` VALUES (66,4295,65,'Wartkin',0,128,0,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (67,2541,65,'Mamool_Jas_Wyvern',300,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (68,0,65,'Venomfang',0,128,0,0,0,78,78,0);
+INSERT INTO `mob_groups` VALUES (69,0,65,'Yalungur',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (70,0,65,'Predatory_Colibri',0,128,0,0,0,99,99,0);
 
 INSERT INTO `mob_groups` VALUES (2227,4493,65,'Zazarg',0,128,0,0,0,0,0,0);
 
