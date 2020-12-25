@@ -2897,7 +2897,10 @@ INSERT INTO `mob_groups` VALUES (51,6685,61,'Troll_Cuirasser',0,128,0,0,0,73,75,
 INSERT INTO `mob_groups` VALUES (52,6684,61,'Troll_Artilleryman',0,128,0,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (53,4019,61,'Troll_Hammersmith',0,128,0,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (54,3465,61,'Sarameya',0,128,2162,50000,0,88,89,0);
-INSERT INTO `mob_groups` VALUES (55,5191,61,'Vanasarvik',0,128,0,0,25000,94,95,0);
+INSERT INTO `mob_groups` VALUES (55,5191,61,'Vanasarvik',0,128,0,0,25000,99,99,0);
+INSERT INTO `mob_groups` VALUES (56,0,61,'Elders_Imp',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (57,0,61,'Grand_Grenade',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (58,0,61,'Sarama',0,128,0,0,0,99,99,0);
 
 INSERT INTO `mob_groups` VALUES (2058,3327,61,'Raubahn',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (2060,3581,61,'Shailham',0,128,0,0,0,0,0,0);
