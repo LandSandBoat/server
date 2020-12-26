@@ -89,7 +89,9 @@ zones[tpz.zone.DYNAMIS_XARCABARD] =
                 {mob = 17330484, eye = dynamis.eye.BLUE },
             },
         },
+        DYNAMIS_LORD         = 17330177,
         YING                 = 17330183,
+        YANG                 = 17330184,
         COUNT_ZAEBOS_PH      = {[17330376] = 17330377}, -- Kindred_Warrior
         DUKE_GOMORY_PH       = {[17330303] = 17330304}, -- Kindred_Monk
         PRINCE_SEERE_PH      = {[17330331] = 17330332}, -- Kindred_White_Mage

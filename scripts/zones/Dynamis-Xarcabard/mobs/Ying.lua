@@ -2,6 +2,7 @@
 -- Area: Dynamis - Xarcabard
 --   NM: Ying
 -----------------------------------
+local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -9,7 +10,7 @@ function onMobInitialize(mob, target)
 end
 
 function onMobSpawn(mob)
-    local dynaLord = GetMobByID(17330177)
+    local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     if (dynaLord:getLocalVar("magImmune") < 2) then -- both dragons have not been killed initially
         dynaLord:setMod(tpz.mod.UDMGMAGIC, -100)
         dynaLord:setMod(tpz.mod.UDMGBREATH, -100)
@@ -21,12 +22,13 @@ function onMobSpawn(mob)
 end
 
 function onMobFight(mob, target)
-    local YangID = 17330184
-    local YangToD = mob:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
-    if (GetMobAction(YangID) == tpz.act.NONE and os.time() > YangToD+30) then
-        GetMobByID(YangID):setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
-        SpawnMob(YangID):updateEnmity(target)
+    local yang = GetMobByID(ID.mob.YANG)
+    local YangToD = mob:getLocalVar("YangToD")
+    if yang:getCurrentAction() == tpz.act.NONE and os.time() > YangToD+30 then
+        yang:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+        yang:spawn()
+        yang:updateEnmity(target)
     end
 end
 
@@ -34,8 +36,8 @@ function onMobDeath(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)
-    local Yang = GetMobByID(17330184)
-    local dynaLord = GetMobByID(17330177)
+    local Yang = GetMobByID(ID.mob.YANG)
+    local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     -- localVars clear on death, so setting it on its partner
     Yang:setLocalVar("YingToD", os.time())
     if (dynaLord:getLocalVar("magImmune") == 0) then
