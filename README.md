@@ -10,7 +10,7 @@
 Welcome to Topaz Next, an open source server emulator for FFXI.
 
 ## Discord
-https://discord.gg/YvM9mDHGKb
+https://discord.gg/26dAmXTtCa
 
 ## Getting Started
 

@@ -194,7 +194,7 @@ enum SPELLFAMILY
     SPELLFAMILY_GEO_BUFF           = 146,
     SPELLFAMILY_GEO_DEBUFF         = 147,
     SPELLFAMILY_FIRA               = 148,
-    SPELFAMILY_BLIZZARA            = 149,
+    SPELLFAMILY_BLIZZARA           = 149,
     SPELLFAMILY_AERORA             = 150,
     SPELLFAMILY_STONERA            = 151,
     SPELLFAMILY_THUNDARA           = 152,
