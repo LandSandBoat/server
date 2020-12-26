@@ -101,7 +101,7 @@ local function CharCreate(player)
 
     -- set initial level cap
     if INITIAL_LEVEL_CAP ~= 50 then
-        player:levelCap(INITIAL_LEVEL_CAP)
+        player:setLevelCap(INITIAL_LEVEL_CAP)
     end
 
     -- increase starting inventory

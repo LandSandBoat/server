@@ -276,12 +276,13 @@ public:
     void  unlockJob(uint8 JobID);   // Unlocks a job for the entity, sets job level to 1
     bool  hasJob(uint8 job);        // Check to see if JOBTYPE is unlocked for a character
 
-    uint8 getMainLvl();                 // Gets Entity Main Job Level
-    uint8 getSubLvl();                  // Get Entity Sub Job Level
-    uint8 getJobLevel(uint8 JobID);     // Gets character job level for specified JOBTYPE
-    void  setLevel(uint8 level);        // sets the character's level
-    void  setsLevel(uint8 slevel);      // sets the character's level
-    int32 levelCap(lua_State*);         // genkai
+    uint8 getMainLvl();             // Gets Entity Main Job Level
+    uint8 getSubLvl();              // Get Entity Sub Job Level
+    uint8 getJobLevel(uint8 JobID); // Gets character job level for specified JOBTYPE
+    void  setLevel(uint8 level);    // sets the character's level
+    void  setsLevel(uint8 slevel);  // sets the character's level
+    uint8 getLevelCap();            // genkai
+    void  setLevelCap(uint8 cap);
     int32 levelRestriction(lua_State*); // Establish/return current level restriction
     int32 addJobTraits(lua_State*);     // Add job traits
 
@@ -497,7 +498,7 @@ public:
     int32 getNearbyEntities(lua_State* L);
     int32 canChangeState(lua_State* L);
 
-    int32 wakeUp(lua_State*); // wakes target if necessary
+    void wakeUp(); // wakes target if necessary
 
     int32 recalculateStats(lua_State* L);
     int32 checkImbuedItems(lua_State* L);
@@ -548,8 +549,8 @@ public:
     void  setMod(uint16 modID, int16 value); // Sets Modifier Value
     void  delMod(uint16 modID, int16 value); // Subtracts Modifier Value
 
-    int32 addLatent(lua_State*); // Adds a latent effect
-    int32 delLatent(lua_State*); // Removes a latent effect
+    void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Adds a latent effect
+    bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Removes a latent effect
 
     void   fold();
     int32  doWildCard(lua_State*);
@@ -626,8 +627,8 @@ public:
     auto  getPetName() -> const char*;
     int32 setPetName(lua_State*);
 
-    int32 getCharmChance(lua_State*); // Gets the chance the entity has to charm its target.
-    int32 charmPet(lua_State*);       // Charms Pet (Beastmaster ability only)
+    float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
+    void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
 
     int32 petAttack(lua_State*); // Despawns Pet
     int32 petAbility(lua_State*);
@@ -660,14 +661,14 @@ public:
     int32  setMobFlags(lua_State*); // Used to manipulate the mob's flags for testing.
     uint32 getMobFlags();
 
-    void  spawn(sol::object const& despawnSec, sol::object const& respawnSec);
-    bool  isSpawned();
-    int32 getSpawnPos(lua_State*); // Get Mob spawn position (x,y,z)
-    int32 setSpawn(lua_State*);    // Sets spawn point
-    int32 getRespawnTime(lua_State*);
-    int32 setRespawnTime(lua_State*); // set respawn time
+    void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
+    bool   isSpawned();
+    auto   getSpawnPos() -> std::map<std::string, float>; // Get Mob spawn position (x,y,z)
+    int32  setSpawn(lua_State*);                          // Sets spawn point
+    uint32 getRespawnTime();
+    void   setRespawnTime(uint32 seconds); // set respawn time
 
-    int32 instantiateMob(lua_State* L);
+    void instantiateMob(uint32 groupID);
 
     bool hasTrait(uint8 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
@@ -686,10 +687,10 @@ public:
     void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
     void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
 
-    int32 getMobMod(lua_State*);
-    int32 setMobMod(lua_State*);
-    int32 addMobMod(lua_State*);
-    int32 delMobMod(lua_State*);
+    int16 getMobMod(uint16 mobModID);
+    void  setMobMod(uint16 mobModID, int16 value);
+    void  addMobMod(uint16 mobModID, int16 value);
+    void  delMobMod(uint16 mobModID, int16 value);
 
     int32 getBattleTime(lua_State*); // Get the time in second of the battle
 
@@ -697,11 +698,11 @@ public:
     void   setBehaviour(uint16 behavior);
 
     int32 getTarget(lua_State*);
-    int32 updateTarget(lua_State*); // Force mob to update target from enmity container (ie after updateEnmity)
+    void  updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
     int32 getEnmityList(lua_State* L);
     int32 getTrickAttackChar(lua_State*); // true if TA target is available
 
-    int32 actionQueueEmpty(lua_State*); // returns whether the action queue is empty or not
+    bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
     int32 castSpell(lua_State*);     // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     int32 useJobAbility(lua_State*); // forces a job ability use (players/pets only)
