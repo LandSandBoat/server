@@ -11183,7 +11183,7 @@ CStatusEffect* CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object cons
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return nullptr;
     }
 
     CStatusEffect* PStatusEffect = nullptr;
@@ -11216,7 +11216,7 @@ sol::table CLuaBaseEntity::getStatusEffects()
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return {};
     }
 
     sol::table table;
@@ -11310,7 +11310,7 @@ uint16 CLuaBaseEntity::hasStatusEffectByFlag(uint16 StatusID)
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
@@ -11331,7 +11331,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
@@ -11430,7 +11430,7 @@ uint16 CLuaBaseEntity::eraseStatusEffect()
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     auto effect = PBattleEntity->StatusEffectContainer->EraseStatusEffect();
@@ -11451,7 +11451,7 @@ uint8 CLuaBaseEntity::eraseAllStatusEffect()
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     return PBattleEntity->StatusEffectContainer->EraseAllStatusEffect();
@@ -11471,7 +11471,7 @@ int32 CLuaBaseEntity::dispelStatusEffect(sol::object const& flagObj)
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
@@ -11493,7 +11493,7 @@ uint8 CLuaBaseEntity::dispelAllStatusEffect(sol::object const& flagObj)
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
-        return false;
+        return 0;
     }
 
     uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
