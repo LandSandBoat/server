@@ -22,7 +22,7 @@ function onInstanceCreated(instance)
 
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(290.857, -3.424, 132.339, 148)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(293.637, -3.376, 130.364, 148)
-    GetNPCByID(ID.npc._jo, instance):setAnimation(8)
+    GetNPCByID(ID.npc._1jo, instance):setAnimation(8)
     GetNPCByID(ID.npc._jj3, instance):setAnimation(8)
     GetNPCByID(ID.npc._jj5, instance):setAnimation(8)
     GetNPCByID(ID.npc._jjc, instance):setAnimation(8)
