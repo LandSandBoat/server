@@ -11132,38 +11132,41 @@ bool CLuaBaseEntity::addStatusEffect(sol::object const& arg0, sol::object const&
  *  Notes   : For instance, Chocobo status, Fireflights, Teleport
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addStatusEffectEx(lua_State* L)
+bool CLuaBaseEntity::addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                                       sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
+                                       sol::object const& arg8, sol::object const& arg9)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 4) || !lua_isnumber(L, 4));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 5) || !lua_isnumber(L, 5));
-
-    int32 n      = lua_gettop(L);
-    bool  silent = false;
-    if (lua_isboolean(L, -1))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        silent = lua_toboolean(L, -1);
-        n--;
+        return false;
+    }
+
+    auto isNil = [](auto& item) { return item == sol::nil; };
+    std::vector<sol::object> args = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 };
+    args.erase(std::remove_if(args.begin(), args.end(), isNil), args.end());
+
+    bool silent = false;
+    auto lastElement = args.at(args.size() - 1);
+    if (lastElement.is<bool>())
+    {
+        silent = lastElement.as<bool>();
     }
 
     CStatusEffect* PEffect =
-        new CStatusEffect((EFFECT)lua_tointeger(L, 1),                 // Effect ID
-                          (uint16)lua_tointeger(L, 2),                 // Effect Icon ID
-                          (uint16)lua_tointeger(L, 3),                 // Power
-                          (uint16)lua_tointeger(L, 4),                 // Tick
-                          (uint16)lua_tointeger(L, 5),                 // Duration
-                          (n >= 6 ? (uint16)lua_tointeger(L, 6) : 0),  // Sub Effect ID
-                          (n >= 7 ? (uint16)lua_tointeger(L, 7) : 0),  // Sub Power
-                          (n >= 8 ? (uint16)lua_tointeger(L, 8) : 0),  // Tier
-                          (n >= 9 ? (uint32)lua_tointeger(L, 9) : 0)); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
+        new CStatusEffect(arg0.as<EFFECT>(),                           // Effect ID
+                          arg1.as<uint16>(),                           // Effect Icon ID
+                          arg2.as<uint16>(),                           // Power
+                          arg3.as<uint16>(),                           // Tick
+                          arg4.as<uint16>(),                           // Duration
+                          (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Effect ID
+                          (arg6 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Power
+                          (arg7 != sol::nil) ? arg5.as<uint16>() : 0,  // Tier
+                          (arg8 != sol::nil) ? arg5.as<uint16>() : 0); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
 
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent));
-    return 1;
+    return PBattleEntity->StatusEffectContainer->AddStatusEffect(PEffect, silent);
 }
 
 /************************************************************************
@@ -11173,43 +11176,30 @@ inline int32 CLuaBaseEntity::addStatusEffectEx(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getStatusEffect(lua_State* L)
+CStatusEffect* CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    CStatusEffect* PStatusEffect;
-
-    if (lua_gettop(L) >= 2)
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        PStatusEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->GetStatusEffect((EFFECT)lua_tointeger(L, 1), (uint16)lua_tointeger(L, 2));
+        return false;
+    }
+
+    CStatusEffect* PStatusEffect = nullptr;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+
+    if (SubID != sol::nil)
+    {
+        auto uint16_SubID = SubID.as<uint16>();
+        PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
     }
     else
     {
-        PStatusEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->GetStatusEffect((EFFECT)lua_tointeger(L, 1));
+        PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID);
     }
 
-    if (PStatusEffect == nullptr)
-    {
-        lua_pushnil(L);
-    }
-    else
-    {
-        lua_pop(L, 1);
-        lua_getglobal(L, "CStatusEffect");
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PStatusEffect);
-
-        if (lua_pcall(L, 2, 1, 0))
-        {
-            return 0;
-        }
-    }
-    return 1;
+    return PStatusEffect;
 }
 
 /************************************************************************
@@ -11219,27 +11209,22 @@ inline int32 CLuaBaseEntity::getStatusEffect(lua_State* L)
  *  Notes   : Currently only used to check for Snake Eyes in ability.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getStatusEffects(lua_State* L)
+sol::table CLuaBaseEntity::getStatusEffects()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    int count = 0;
-    lua_newtable(L);
-    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&](CStatusEffect* PEffect) {
-        lua_getglobal(L, "CStatusEffect");
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PEffect);
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
-        if (lua_pcall(L, 2, 1, 0))
-        {
-            return;
-        }
-        lua_rawseti(L, -2, ++count);
+    sol::table table;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&](CStatusEffect* PEffect) {
+        table.add(CLuaStatusEffect(PEffect));
     });
-    return 1;
+
+    return table;
 }
 
 /************************************************************************
@@ -11249,17 +11234,11 @@ inline int32 CLuaBaseEntity::getStatusEffects(lua_State* L)
  *  Notes   : For instnace, Bind = Ice, Slow = Earth
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getStatusEffectElement(lua_State* L)
+int16 CLuaBaseEntity::getStatusEffectElement(uint16 statusId)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto statusId = (uint16)lua_tointeger(L, 1);
-
-    lua_pushinteger(L, effects::GetEffectElement(statusId));
-    return 1;
+    return effects::GetEffectElement(statusId);
 }
 
 /************************************************************************
@@ -11269,21 +11248,19 @@ inline int32 CLuaBaseEntity::getStatusEffectElement(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::canGainStatusEffect(lua_State* L)
+bool CLuaBaseEntity::canGainStatusEffect(uint16 effect, uint16 power)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
-    bool hasEffect = false;
+    CStatusEffect statusEffect(static_cast<EFFECT>(effect), 0, power, 0, 0);
 
-    CStatusEffect effect((EFFECT)lua_tointeger(L, 1), 0, (uint16)lua_tointeger(L, 2), 0, 0);
-
-    hasEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->CanGainStatusEffect(&effect);
-
-    lua_pushboolean(L, hasEffect);
-    return 1;
+    return PBattleEntity->StatusEffectContainer->CanGainStatusEffect(&statusEffect);
 }
 
 /************************************************************************
@@ -11293,25 +11270,30 @@ inline int32 CLuaBaseEntity::canGainStatusEffect(lua_State* L)
  *  Notes   : More specific in scope than hasStatusEffectByFlag()
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasStatusEffect(lua_State* L)
+bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
     bool hasEffect = false;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
-    if (lua_gettop(L) >= 2)
+    if (SubID != sol::nil)
     {
-        hasEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->HasStatusEffect((EFFECT)lua_tointeger(L, 1), (uint16)lua_tointeger(L, 2));
+        auto uint16_SubID = SubID.as<uint16>();
+        hasEffect = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID, uint16_SubID);
     }
     else
     {
-        hasEffect = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->HasStatusEffect((EFFECT)lua_tointeger(L, 1));
+        hasEffect = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID);
     }
-    lua_pushboolean(L, hasEffect);
-    return 1;
+
+    return hasEffect;
 }
 
 /************************************************************************
@@ -11321,15 +11303,18 @@ inline int32 CLuaBaseEntity::hasStatusEffect(lua_State* L)
  *  Notes   : More broad in scope than hasStatusEffect()
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasStatusEffectByFlag(lua_State* L)
+uint16 CLuaBaseEntity::hasStatusEffectByFlag(uint16 StatusID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
-    lua_pushboolean(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->HasStatusEffectByFlag((EFFECT)lua_tointeger(L, 1)));
-    return 1;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+    return PBattleEntity->StatusEffectContainer->HasStatusEffectByFlag(effect_StatusID);
 }
 
 /************************************************************************
@@ -11339,17 +11324,18 @@ inline int32 CLuaBaseEntity::hasStatusEffectByFlag(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::countEffect(lua_State* L)
+uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
-    uint8 numEffects = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->GetEffectsCount((EFFECT)lua_tointeger(L, 1));
-
-    lua_pushinteger(L, numEffects);
-    return 1;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+    return PBattleEntity->StatusEffectContainer->GetEffectsCount(effect_StatusID);
 }
 
 /************************************************************************
@@ -11359,29 +11345,32 @@ inline int32 CLuaBaseEntity::countEffect(lua_State* L)
  *  Notes   : Can specify Power of the Effect as an option
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delStatusEffect(lua_State* L)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
     bool result = false;
 
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+    bool hasEffect = false;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+
+    if (SubID != sol::nil)
     {
-        if (lua_gettop(L) >= 2)
-        {
-            /* Delete matching status effect with matching power */
-            result = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DelStatusEffect((EFFECT)lua_tointeger(L, 1), (uint16)lua_tointeger(L, 2));
-        }
-        else
-        {
-            /* Delete matching status effect any power */
-            result = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DelStatusEffect((EFFECT)lua_tointeger(L, 1));
-        }
+        auto uint16_SubID = SubID.as<uint16>();
+        result = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
+    }
+    else
+    {
+        result = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID);
     }
 
-    lua_pushboolean(L, result);
-    return 1;
+    return result;
 }
 
 /************************************************************************
@@ -11391,17 +11380,19 @@ inline int32 CLuaBaseEntity::delStatusEffect(lua_State* L)
  *  Notes   : Used for removal of multiple effects with matching flag
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delStatusEffectsByFlag(lua_State* L)
+void CLuaBaseEntity::delStatusEffectsByFlag(uint16 flag, sol::object const& silent)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    bool silent = lua_isnil(L, 2) ? false : lua_toboolean(L, 2);
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return;
+    }
 
-    ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DelStatusEffectsByFlag((EFFECTFLAG)lua_tointeger(L, 1), silent);
+    bool bool_silent = silent.is<bool>() ? silent.as<bool>() : false;
 
-    return 1;
+    PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(static_cast<EFFECTFLAG>(flag), bool_silent);
 }
 
 /************************************************************************
@@ -11411,16 +11402,18 @@ inline int32 CLuaBaseEntity::delStatusEffectsByFlag(lua_State* L)
  *  Notes   : Used specifically for Status Effects that are not supposed to show a message once worn
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delStatusEffectSilent(lua_State* L)
+bool CLuaBaseEntity::delStatusEffectSilent(uint16 StatusID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
 
-    bool result = ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DelStatusEffectSilent((EFFECT)lua_tointeger(L, 1));
-
-    lua_pushboolean(L, result);
-    return 1;
+    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+    return PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID);
 }
 
 /************************************************************************
@@ -11430,13 +11423,18 @@ inline int32 CLuaBaseEntity::delStatusEffectSilent(lua_State* L)
  *  Notes   : Can specify which type to remove, if Erasable
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::eraseStatusEffect(lua_State* L)
+uint16 CLuaBaseEntity::eraseStatusEffect()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->EraseStatusEffect());
-    return 1;
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
+
+    auto effect = PBattleEntity->StatusEffectContainer->EraseStatusEffect();
+    return static_cast<uint16>(effect);
 }
 
 /************************************************************************
@@ -11446,13 +11444,17 @@ inline int32 CLuaBaseEntity::eraseStatusEffect(lua_State* L)
  *  Notes   : Can specify which type to remove, if Erasable
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::eraseAllStatusEffect(lua_State* L)
+uint8 CLuaBaseEntity::eraseAllStatusEffect()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->EraseAllStatusEffect());
-    return 1;
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return false;
+    }
+
+    return PBattleEntity->StatusEffectContainer->EraseAllStatusEffect();
 }
 
 /************************************************************************
@@ -11462,23 +11464,19 @@ inline int32 CLuaBaseEntity::eraseAllStatusEffect(lua_State* L)
  *  Notes   : Can specify which type to remove, if Dispelable
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::dispelStatusEffect(lua_State* L)
+int32 CLuaBaseEntity::dispelStatusEffect(sol::object const& flagObj)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint32 flag;
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        flag = (uint32)lua_tonumber(L, 1);
-    }
-    else
-    {
-        flag = EFFECTFLAG_DISPELABLE;
+        return false;
     }
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DispelStatusEffect((EFFECTFLAG)flag));
-    return 1;
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+
+    return PBattleEntity->StatusEffectContainer->DispelStatusEffect(static_cast<EFFECTFLAG>(flag));
 }
 
 /************************************************************************
@@ -11488,57 +11486,55 @@ inline int32 CLuaBaseEntity::dispelStatusEffect(lua_State* L)
  *  Notes   : Can specify which types to remove, if Dispelable
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::dispelAllStatusEffect(lua_State* L)
+uint8 CLuaBaseEntity::dispelAllStatusEffect(sol::object const& flagObj)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    uint32 flag;
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        flag = (uint32)lua_tonumber(L, 1);
-    }
-    else
-    {
-        flag = EFFECTFLAG_DISPELABLE;
+        return false;
     }
 
-    lua_pushinteger(L, ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->DispelAllStatusEffect((EFFECTFLAG)flag));
-    return 1;
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+
+    return PBattleEntity->StatusEffectContainer->DispelAllStatusEffect(static_cast<EFFECTFLAG>(flag));
 }
 
 /************************************************************************
  *  Function: stealStatusEffect()
  *  Purpose : Removes a dispellable status effect from one Entity and transfers it to the other
  *  Example : target:stealStatusEffect()
- *  Notes   : Returns a Lua table with the information on the Status Effect stolen
+ *  Notes   : 
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::stealStatusEffect(lua_State* L)
+uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    CLuaBaseEntity* PEntity = nullptr;
-
-    EFFECTFLAG flag = EFFECTFLAG_DISPELABLE;
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
     {
-        flag = (EFFECTFLAG)lua_tointeger(L, 2);
+        return 0;
     }
 
-    if (CStatusEffect* PStatusEffect = ((CBattleEntity*)PEntity->m_PBaseEntity)->StatusEffectContainer->StealStatusEffect(flag))
+    auto* PTargetBattleEntity = dynamic_cast<CBattleEntity*>(PTargetEntity->GetBaseEntity());
+    if (!PTargetBattleEntity)
     {
-        ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PStatusEffect);
-        lua_pushinteger(L, PStatusEffect->GetStatusID());
+        return 0;
+    }
+
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+
+    if (CStatusEffect* PStatusEffect = PTargetBattleEntity->StatusEffectContainer->StealStatusEffect(static_cast<EFFECTFLAG>(flag)))
+    {
+        PBattleEntity->StatusEffectContainer->AddStatusEffect(PStatusEffect);
+        return PStatusEffect->GetStatusID();
     }
     else
     {
-        lua_pushinteger(L, 0);
+        return 0;
     }
-
-    return 1;
 }
 
 /************************************************************************
@@ -11548,16 +11544,17 @@ inline int32 CLuaBaseEntity::stealStatusEffect(lua_State* L)
  *  Notes   : If Mod ID already exists, adds the amount to existing amount
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addMod(lua_State* L)
+void CLuaBaseEntity::addMod(uint16 type, int16 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (!PBattleEntity)
+    {
+        return;
+    }
 
-    ((CBattleEntity*)m_PBaseEntity)->addModifier(static_cast<Mod>(lua_tointeger(L, 1)), (int16)lua_tointeger(L, 2));
-    return 0;
+    PBattleEntity->addModifier(static_cast<Mod>(type), amount);
 }
 
 /************************************************************************
@@ -15431,7 +15428,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(getMaxMP),
     // SOL_REGISTER(getBaseMP),
     // SOL_REGISTER(addMP),
-    // SOL_REGISTER(setMP),
+    SOL_REGISTER("setMP", CLuaBaseEntity::setMP);
     // SOL_REGISTER(restoreMP),
     // SOL_REGISTER(delMP),
 
@@ -15571,32 +15568,33 @@ void CLuaBaseEntity::Register()
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
-    // SOL_REGISTER(addStatusEffectEx),
-    // SOL_REGISTER(getStatusEffect),
-    // SOL_REGISTER(getStatusEffects),
-    // SOL_REGISTER(getStatusEffectElement),
-    // SOL_REGISTER(canGainStatusEffect),
-    // SOL_REGISTER(hasStatusEffect),
-    // SOL_REGISTER(hasStatusEffectByFlag),
-    // SOL_REGISTER(countEffect),
+    SOL_REGISTER("addStatusEffectEx", CLuaBaseEntity::addStatusEffectEx);
+    SOL_REGISTER("getStatusEffect", CLuaBaseEntity::getStatusEffect);
+    SOL_REGISTER("getStatusEffects", CLuaBaseEntity::getStatusEffects);
+    SOL_REGISTER("getStatusEffectElement", CLuaBaseEntity::getStatusEffectElement);
+    SOL_REGISTER("canGainStatusEffect", CLuaBaseEntity::canGainStatusEffect);
+    SOL_REGISTER("hasStatusEffect", CLuaBaseEntity::hasStatusEffect);
+    SOL_REGISTER("hasStatusEffectByFlag", CLuaBaseEntity::hasStatusEffectByFlag);
+    SOL_REGISTER("countEffect", CLuaBaseEntity::countEffect);
 
-    // SOL_REGISTER(delStatusEffect),
-    // SOL_REGISTER(delStatusEffectsByFlag),
-    // SOL_REGISTER(delStatusEffectSilent),
-    // SOL_REGISTER(eraseStatusEffect),
-    // SOL_REGISTER(eraseAllStatusEffect),
-    // SOL_REGISTER(dispelStatusEffect),
-    // SOL_REGISTER(dispelAllStatusEffect),
-    // SOL_REGISTER(stealStatusEffect),
+    SOL_REGISTER("delStatusEffect", CLuaBaseEntity::delStatusEffect);
+    SOL_REGISTER("delStatusEffectsByFlag", CLuaBaseEntity::delStatusEffectsByFlag);
+    SOL_REGISTER("delStatusEffectSilent", CLuaBaseEntity::delStatusEffectSilent);
+    SOL_REGISTER("eraseStatusEffect", CLuaBaseEntity::eraseStatusEffect);
+    SOL_REGISTER("eraseAllStatusEffect", CLuaBaseEntity::eraseAllStatusEffect);
+    SOL_REGISTER("dispelStatusEffect", CLuaBaseEntity::dispelStatusEffect);
+    SOL_REGISTER("dispelAllStatusEffect", CLuaBaseEntity::dispelAllStatusEffect);
+    SOL_REGISTER("stealStatusEffect", CLuaBaseEntity::stealStatusEffect);
 
-    // SOL_REGISTER(addMod),
-    // SOL_REGISTER(getMod),
-    // SOL_REGISTER(setMod),
-    // SOL_REGISTER(delMod),
+    SOL_REGISTER("addMod", CLuaBaseEntity::addMod);
+    SOL_REGISTER("getMod", CLuaBaseEntity::getMod);
+    SOL_REGISTER("setMod", CLuaBaseEntity::setMod);
+    SOL_REGISTER("delMod", CLuaBaseEntity::delMod);
 
-    // SOL_REGISTER(addLatent),
-    // SOL_REGISTER(delLatent),
+    SOL_REGISTER("delMaddLatentod", CLuaBaseEntity::addLatent);
+    SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
 
+    // COR
     // SOL_REGISTER(fold),
     // SOL_REGISTER(doWildCard),
     // SOL_REGISTER(addCorsairRoll),
@@ -15606,9 +15604,11 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(healingWaltz),
     // SOL_REGISTER(addBardSong),
 
+    // BST
     // SOL_REGISTER(charm),
     // SOL_REGISTER(uncharm),
 
+    // PUP
     // SOL_REGISTER(addBurden),
     // SOL_REGISTER(setStatDebilitation),
 

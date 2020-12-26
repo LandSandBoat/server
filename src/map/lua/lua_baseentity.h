@@ -517,26 +517,28 @@ public:
 
     // Status Effects
     bool addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                          sol::object const& arg4, sol::object const& arg5, sol::object const& arg6); // Adds status effect to character
-    int32 addStatusEffectEx(lua_State*); // Adds status effect to character
-    int32 getStatusEffect(lua_State*);
-    int32 getStatusEffects(lua_State*);
-    int32 getStatusEffectElement(lua_State*); // returns the element of the status effect
-    int32 canGainStatusEffect(lua_State*);    // Returns true if the effect can be added
-    int32 hasStatusEffect(lua_State*);        // Checks to see if character has specified effect
-    int32 hasStatusEffectByFlag(lua_State*);  // Checks to see if a character has an effect with the specified flag
-    int32 countEffect(lua_State*);            // Gets the number of effects of a specific type on the player
+                         sol::object const& arg4, sol::object const& arg5, sol::object const& arg6);
+    bool addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                           sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
+                           sol::object const& arg8, sol::object const& arg9);
+    auto getStatusEffect(uint16 StatusID, sol::object const& SubID) -> CStatusEffect*;
+    auto   getStatusEffects() -> sol::table;
+    int16 getStatusEffectElement(uint16 statusId);
+    bool   canGainStatusEffect(uint16 effect, uint16 power);           // Returns true if the effect can be added
+    bool hasStatusEffect(uint16 StatusID, sol::object const& SubID);// Checks to see if character has specified effect
+    uint16 hasStatusEffectByFlag(uint16 StatusID);  // Checks to see if a character has an effect with the specified flag
+    uint8 countEffect(uint16 StatusID);            // Gets the number of effects of a specific type on the player
 
-    int32 delStatusEffect(lua_State*);        // Removes Status Effect
-    int32 delStatusEffectsByFlag(lua_State*); // Removes Status Effects by Flag
-    int32 delStatusEffectSilent(lua_State*);  // Removes Status Effect, suppresses message
-    int32 eraseStatusEffect(lua_State*);      // Used with "Erase" spell
-    int32 eraseAllStatusEffect(lua_State*);   // Erases all effects and returns number erased
-    int32 dispelStatusEffect(lua_State*);     // Used with "Dispel" spell
-    int32 dispelAllStatusEffect(lua_State*);  // Dispels all effects and returns number erased
-    int32 stealStatusEffect(lua_State*);      // Used in mob skills to steal effects
+    bool delStatusEffect(uint16 StatusID, sol::object const& SubID);        // Removes Status Effect
+    void delStatusEffectsByFlag(uint16 flag, sol::object const& silent); // Removes Status Effects by Flag
+    bool delStatusEffectSilent(uint16 StatusID);  // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();      // Used with "Erase" spell
+    uint8 eraseAllStatusEffect();   // Erases all effects and returns number erased
+    int32 dispelStatusEffect(sol::object const& flagObj); // Used with "Dispel" spell
+    uint8 dispelAllStatusEffect(sol::object const& flagObj); // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
 
-    int32 addMod(lua_State*); // Adds Modifier Value
+    void  addMod(uint16 type, int16 amount); // Adds Modifier Value
     int32 getMod(lua_State*); // Retrieves Modifier Value
     int32 setMod(lua_State*); // Sets Modifier Value
     int32 delMod(lua_State*); // Subtracts Modifier Value
