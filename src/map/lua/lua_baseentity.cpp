@@ -7562,18 +7562,14 @@ int32 CLuaBaseEntity::addMP(int32 amount)
  *  Example : player:setMP(player:getMaxMP())
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setMP(lua_State* L)
+void CLuaBaseEntity::setMP(int32 value)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    ((CBattleEntity*)m_PBaseEntity)->health.mp = 0;
-    int32 value                                = (int32)(lua_tointeger(L, 1) - ((CBattleEntity*)m_PBaseEntity)->health.mp);
-    ((CBattleEntity*)m_PBaseEntity)->addMP(value);
-
-    return 0;
+    PBattle->health.mp = 0;
+    PBattle->addMP(value);
 }
 
 /************************************************************************

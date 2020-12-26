@@ -383,7 +383,7 @@ public:
     int32 getMaxMP();
     int32 getBaseMP();
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
-    int32 setMP(lua_State*);       // Set mp of Entity to value
+    void  setMP(int32 value);      // Set mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
     void  delMP(int32 amount);     // Subtract mp of Entity
 
