@@ -5363,41 +5363,32 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getFame(lua_State* L)
+uint16 CLuaBaseEntity::getFame(uint8 fameArea)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "fame_area");
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    uint8 fameArea = (uint8)lua_tointeger(L, -1);
+    uint16 fame = 0;
 
     if (fameArea <= 15)
     {
-        uint16       fame           = 0;
-        float        fameMultiplier = map_config.fame_multiplier;
-        CCharEntity* PChar          = (CCharEntity*)m_PBaseEntity;
+        float fameMultiplier = map_config.fame_multiplier;
+        auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
 
         switch (fameArea)
         {
             case 0: // San d'Oria
             case 1: // Bastok
             case 2: // Windurst
-                fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                fame = static_cast<uint16>(PChar->profile.fame[fameArea] * fameMultiplier);
                 break;
             case 3: // Jeuno
-                fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                fame = static_cast<uint16>(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
                 break;
             case 4: // Selbina / Rabao
-                fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                fame = static_cast<uint16>((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
                 break;
             case 5: // Norg
-                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                fame = static_cast<uint16>(PChar->profile.fame[3] * fameMultiplier);
                 break;
             // Abyssea
             case 6:  // Konschtat
@@ -5409,20 +5400,19 @@ inline int32 CLuaBaseEntity::getFame(lua_State* L)
             case 12: // Altepa
             case 13: // Grauberg
             case 14: // Uleguerand
-                fame = (uint16)(PChar->profile.fame[fameArea - 1] * fameMultiplier);
+                fame = static_cast<uint16>(PChar->profile.fame[fameArea - 1] * fameMultiplier);
                 break;
             case 15: // Adoulin
-                fame = (uint16)(PChar->profile.fame[14] * fameMultiplier);
+                fame = static_cast<uint16>(PChar->profile.fame[14] * fameMultiplier);
                 break;
         }
-        lua_pushinteger(L, fame);
     }
     else
     {
         ShowError(CL_RED "Lua::getFame: fameArea %i is invalid\n" CL_RESET, fameArea);
-        lua_pushinteger(L, 0);
     }
-    return 1;
+
+    return fame;
 }
 
 /************************************************************************
@@ -5432,25 +5422,13 @@ inline int32 CLuaBaseEntity::getFame(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addFame(lua_State* L)
+void CLuaBaseEntity::addFame(uint8 fameArea, uint16 fame)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "fame_area");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    uint8  fameArea = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 fame     = (uint16)lua_tointeger(L, 2);
 
     if (fameArea <= 15)
     {
-        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
         switch (fameArea)
         {
@@ -5491,7 +5469,6 @@ inline int32 CLuaBaseEntity::addFame(lua_State* L)
     {
         ShowError(CL_RED "Lua::addFame: fameArea %i is invalid\n" CL_RESET, fameArea);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -5501,40 +5478,30 @@ inline int32 CLuaBaseEntity::addFame(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setFame(lua_State* L)
+void CLuaBaseEntity::setFame(uint8 fameArea, uint16 fame)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "fame_area");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    uint8  fameArea = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 fame     = (uint16)lua_tointeger(L, 2);
 
     if (fameArea <= 15)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
         switch (fameArea)
         {
             case 0: // San d'Oria
             case 1: // Bastok
             case 2: // Windurst
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[fameArea] = fame;
+                PChar->profile.fame[fameArea] = fame;
                 break;
             case 3: // Jeuno
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[4] = fame;
+                PChar->profile.fame[4] = fame;
                 break;
             case 4: // Selbina / Rabao
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[0] = fame;
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[1] = fame;
+                PChar->profile.fame[0] = fame;
+                PChar->profile.fame[1] = fame;
                 break;
             case 5: // Norg
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[3] = fame;
+                PChar->profile.fame[3] = fame;
                 break;
             // Abyssea
             case 6:  // Konschtat
@@ -5546,19 +5513,19 @@ inline int32 CLuaBaseEntity::setFame(lua_State* L)
             case 12: // Altepa
             case 13: // Grauberg
             case 14: // Uleguerand
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[fameArea - 1] = fame;
+                PChar->profile.fame[fameArea - 1] = fame;
                 break;
             case 15: // Adoulin
-                ((CCharEntity*)m_PBaseEntity)->profile.fame[14] = fame;
+                PChar->profile.fame[14] = fame;
                 break;
         }
-        charutils::SaveFame((CCharEntity*)m_PBaseEntity);
+
+        charutils::SaveFame(PChar);
     }
     else
     {
         ShowError(CL_RED "Lua::setFame: fameArea %i is invalid\n" CL_RESET, fameArea);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -5568,25 +5535,15 @@ inline int32 CLuaBaseEntity::setFame(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getFameLevel(lua_State* L)
+uint8 CLuaBaseEntity::getFameLevel(uint8 fameArea)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "fame_area");
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    uint8 fameArea = (uint8)lua_tointeger(L, -1);
+    uint8 fameLevel = 1;
 
     if (fameArea <= 15)
     {
-        this->getFame(L);
-        uint16 fame      = (uint16)lua_tointeger(L, -1);
-        uint8  fameLevel = 1;
+        uint16 fame = this->getFame(fameArea);
 
         if (fame >= 613)
         {
@@ -5625,15 +5582,13 @@ inline int32 CLuaBaseEntity::getFameLevel(lua_State* L)
         {
             fameLevel = 6; // Abyssea areas cap out at level 6 fame.
         }
-
-        lua_pushinteger(L, fameLevel);
     }
     else
     {
         ShowError(CL_RED "Lua::getFameLevel: fameArea %i is invalid\n" CL_RESET, fameArea);
-        lua_pushinteger(L, 1);
     }
-    return 1;
+
+    return fameLevel;
 }
 
 /************************************************************************
@@ -5742,7 +5697,7 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5774,7 +5729,7 @@ void CLuaBaseEntity::delQuest(uint8 questLogID, uint16 questID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5857,7 +5812,7 @@ void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5959,7 +5914,7 @@ uint16 CLuaBaseEntity::getCurrentMission(uint8 missionLogID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint16 MissionID    = 0;
+    uint16 MissionID = 0;
 
     if (missionLogID < MAX_MISSIONAREA)
     {
@@ -13415,10 +13370,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setTitle", CLuaBaseEntity::setTitle);
     SOL_REGISTER("delTitle", CLuaBaseEntity::delTitle);
 
-    // SOL_REGISTER(getFame),
-    // SOL_REGISTER(addFame),
-    // SOL_REGISTER(setFame),
-    // SOL_REGISTER(getFameLevel),
+    SOL_REGISTER("getFame", CLuaBaseEntity::getFame);
+    SOL_REGISTER("addFame", CLuaBaseEntity::addFame);
+    SOL_REGISTER("setFame", CLuaBaseEntity::setFame);
+    SOL_REGISTER("getFameLevel", CLuaBaseEntity::getFameLevel);
 
     SOL_REGISTER("getRank", CLuaBaseEntity::getRank);
     SOL_REGISTER("setRank", CLuaBaseEntity::setRank);

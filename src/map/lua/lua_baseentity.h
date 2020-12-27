@@ -295,10 +295,10 @@ public:
     void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
-    int32 getFame(lua_State*);      // Gets Fame
-    int32 addFame(lua_State*);      // Adds Fame
-    int32 setFame(lua_State*);      // Sets Fame
-    int32 getFameLevel(lua_State*); // Gets Fame Level for specified nation
+    uint16 getFame(uint8 fameArea);              // Gets Fame
+    void   addFame(uint8 fameArea, uint16 fame); // Adds Fame
+    void   setFame(uint8 fameArea, uint16 fame); // Sets Fame
+    uint8  getFameLevel(uint8 fameArea);         // Gets Fame Level for specified nation
 
     uint8  getRank();                        // Get Rank for current active nation
     uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
