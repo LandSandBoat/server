@@ -1701,6 +1701,7 @@ namespace luautils
     int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
     {
         TracyZoneScoped;
+        /*
         lua_prepscript("scripts/zones/%s/npcs/%s.lua", PChar->loc.zone->GetName(), PNpc->GetName());
 
         PChar->m_event.reset();
@@ -1916,7 +1917,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -3065,6 +3066,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
+        */
         return 0;
     }
 
@@ -3192,7 +3194,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -3265,7 +3267,7 @@ namespace luautils
             lua_pop(LuaHandle, 1);
             return -1;
         }
-
+        */
         return 0;
     }
 
@@ -3423,6 +3425,7 @@ namespace luautils
 
     int32 OnMobAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
     {
+        /*
         lua_prepscript("scripts/globals/abilities/pets/%s.lua", PMobSkill->getName());
 
         if (prepFile(File, "onMobSkillCheck"))
@@ -3492,6 +3495,8 @@ namespace luautils
         uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : -5);
         lua_pop(LuaHandle, 1);
         return retVal;
+        */
+        return 0;
     }
 
     /***********************************************************************

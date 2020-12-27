@@ -1,4 +1,4 @@
-/*
+﻿/*
  * roe.cpp
  *      Author: Kreidos | github.com/kreidos
  *
@@ -62,7 +62,7 @@ void call_onRecordTrigger(lua_State* L, CCharEntity* PChar, uint16 recordID, con
     uint8 args{ 0 };
 
     CLuaBaseEntity LuaAllyEntity(PChar);
-    Lunar<CLuaBaseEntity>::push(L, &LuaAllyEntity);
+    sol::stack::push(luautils::LuaHandle, LuaAllyEntity);
     args++;
 
     // Record #
@@ -86,7 +86,7 @@ void call_onRecordTrigger(lua_State* L, CCharEntity* PChar, uint16 recordID, con
         else if (auto PMob = std::get_if<CMobEntity*>(&datagram.data))
         {
             CLuaBaseEntity LuaMobEntity(*PMob);
-            Lunar<CLuaBaseEntity>::push(L, &LuaMobEntity);
+            sol::stack::push(luautils::LuaHandle, LuaMobEntity);
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {

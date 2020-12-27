@@ -79,7 +79,7 @@ uint16 CLuaItem::getTrialNumber()
     return static_cast<CItemEquipment*>(m_PLuaItem)->getTrialNumber();
 }
 
-inline int32 CLuaItem::getMatchingTrials(lua_State* L)
+auto CLuaItem::getMatchingTrials() -> sol::table
 {
     TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
@@ -111,22 +111,22 @@ inline int32 CLuaItem::getMatchingTrials(lua_State* L)
             augs[0][0], augs[1][0], augs[2][0], augs[3][0],
             augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
-    lua_newtable(L);
+    sol::table table;
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
         int32 trialCount {0};
         while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            lua_pushinteger(L, ++trialCount);
-            lua_pushinteger(L, (int32)Sql_GetIntData(SqlHandle, 0));
-            lua_settable(L,-3);
+            auto count = ++trialCount;
+            auto id    = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
+            table.add(count, id);
         }
     }
-    return 1;
 
+    return table;
 }
 
-inline int32 CLuaItem::getWornItem(lua_State* L)
+uint8 CLuaItem::getWornItem()
 {
     return m_PLuaItem->m_extra[0];
 }
@@ -302,6 +302,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getBasePrice", CLuaItem::getBasePrice);
     SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
+    SOL_REGISTER("getMatchingTrials", CLuaItem::getMatchingTrials);
     SOL_REGISTER("getWornItem", CLuaItem::getWornItem);
     SOL_REGISTER("isType", CLuaItem::isType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);

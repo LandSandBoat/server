@@ -49,7 +49,7 @@ public:
     uint8  getLocationID(); // get the location id (container id)
     uint8  getSlotID();     // get the slot id
     uint16 getTrialNumber();
-    int32  getMatchingTrials(lua_State* L);  // returns a table of trial #'s which match this item precisely
+    auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
     uint8  getWornItem();  // check if the item has been used
     uint32 getBasePrice(); // get the base sell price
 
