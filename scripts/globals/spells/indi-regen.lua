@@ -7,11 +7,11 @@ require("scripts/globals/msg")
 
 function onMagicCastingCheck(caster, target, spell)
     if caster:hasStatusEffect(tpz.effect.COLURE_ACTIVE) then
-    	local effect = caster:getStatusEffect(tpz.effect.COLURE_ACTIVE)
-		if effect:getSubType() ==  tpz.effect.GEO_REGEN then
-		    return tpz.msg.basic.EFFECT_ALREADY_ACTIVE
-		end
-	end
+        local effect = caster:getStatusEffect(tpz.effect.COLURE_ACTIVE)
+        if effect:getSubType() == tpz.effect.GEO_REGEN then
+            return tpz.msg.basic.EFFECT_ALREADY_ACTIVE
+        end
+    end
     return 0
 end
 

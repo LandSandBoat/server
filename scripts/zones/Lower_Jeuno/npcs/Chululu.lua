@@ -56,7 +56,7 @@ function onTrigger(player, npc)
         if cdate >= os.time() then
             player:startEvent(10111) -- During quest "All in the Cards" and same AllInTheCards_date value
         elseif cdate == 0 then
-            player:startEvent(10113) -- Start quest "All in the Cards"	repeat with option
+            player:startEvent(10113) -- Start quest "All in the Cards" repeat with option
         elseif cdate < os.time() then
             player:startEvent(10112) -- During quest "All in the Cards"  THIS ONE GIVES ANOTHER BATCH
         end

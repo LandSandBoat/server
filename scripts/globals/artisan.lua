@@ -10,16 +10,18 @@ require('scripts/globals/status')
 tpz = tpz or {}
 tpz.artisan = tpz.artisan or {}
 
-local event = {
+local event =
+{
     [tpz.zone.BASTOK_MARKETS] = 544,
     [tpz.zone.WINDURST_WOODS] = 833,
     [tpz.zone.RULUDE_GARDENS] = 10162,
     [tpz.zone.SOUTHERN_SAN_DORIA] = 960
 }
-local menuFlags = {
-	expand = 0x8,
-	abags = 0x4,
-	aexpand = 0x2,
+local menuFlags =
+{
+    expand = 0x8,
+    abags = 0x4,
+    aexpand = 0x2,
 }
 
 tpz.artisan.moogleOnTrigger = function(player, npc)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Ability: Sepulcher
 -- Description: Lowers accuracy, evasion, magic accuracy, magic evasion and TP gain for undead.
--- Obtained: PLD Level 	87
+-- Obtained: PLD Level 87
 -- Recast Time: 00:05:00
 -- Duration: 00:03:00
 -----------------------------------
