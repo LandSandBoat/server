@@ -46,8 +46,9 @@ public:
     void  PrintToPlayer(const char* message, sol::object messageType, sol::object name); // for sending debugging messages/command confirmations to the player's client
     int32 PrintToArea(lua_State* L);                                                     // for sending area messages to multiple players at once
     int32 messageBasic(lua_State*);                                                      // Sends Basic Message
-    int32 messageName(lua_State* L);                                                     // Sends a Message with a Name
-    int32 messagePublic(lua_State*);                                                     // Sends a public Basic Message
+    void  messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
+                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
+    void  messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
 
     void messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2,
                         sol::object const& p3, sol::object const& dispName); // Sends Special Message
@@ -144,14 +145,14 @@ public:
     bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
     bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
 
-    int32  getZone(lua_State*);          // Get Entity zone
-    uint16 getZoneID();                  // Get Entity zone ID
-    auto   getZoneName() -> const char*; // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);   // true если указанная зона посещалась персонажем ранее
-    uint16 getPreviousZone();            // Get Entity previous zone
-    uint8  getCurrentRegion();           // Get Entity conquest region
-    uint8  getContinentID();             // узнаем континент, на котором находится сущность
-    bool   isInMogHouse();               // Check if entity inside a mog house
+    auto   getZone(sol::object const& arg0) -> CZone*; // Get Entity zone
+    uint16 getZoneID();                                // Get Entity zone ID
+    auto   getZoneName() -> const char*;               // Get Entity zone name
+    bool   isZoneVisited(uint16 zone);                 // true если указанная зона посещалась персонажем ранее
+    uint16 getPreviousZone();                          // Get Entity previous zone
+    uint8  getCurrentRegion();                         // Get Entity conquest region
+    uint8  getContinentID();                           // узнаем континент, на котором находится сущность
+    bool   isInMogHouse();                             // Check if entity inside a mog house
 
     uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
@@ -176,25 +177,25 @@ public:
 
     int32 resetPlayer(lua_State*); // if player is stuck, GM command @resetPlayer name
 
-    int32 goToEntity(lua_State*);  // Warps self to NPC or Mob; works across multiple game servers
-    int32 gotoPlayer(lua_State*);  // warps self to target player
-    int32 bringPlayer(lua_State*); // warps target to self
+    void goToEntity(uint32 targetID, sol::object const& option); // Warps self to NPC or Mob; works across multiple game servers
+    bool gotoPlayer(std::string const& playerName);              // warps self to target player
+    bool bringPlayer(std::string const& playerName);             // warps target to self
 
     // Items
     uint16 getEquipID(SLOTTYPE slot);                           // Gets the Item Id of the item in specified slot
     int32  getEquippedItem(lua_State*);                         // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location); // Check to see if Entity has item in inventory (hasItem(itemNumber))
     int32  addItem(lua_State*);                                 // Add item to Entity inventory (additem(itemNumber,quantity))
-    int32  delItem(lua_State*);
-    int32  addUsedItem(lua_State*);    // Add charged item with timer already on full cooldown
-    int32  addTempItem(lua_State*);    // Add temp item to Entity Temp inventory
-    int32  hasWornItem(lua_State*);    // Check if the item is already worn (player:hasWornItem(itemid))
-    int32  createWornItem(lua_State*); // Update this item in worn item (player:createWornItem(itemid))
+    bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
+    bool   addUsedItem(uint16 itemID);                          // Add charged item with timer already on full cooldown
+    bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
+    bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
+    void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
 
-    int32 createShop(lua_State*);       // Prepare the container for work of shop ??
-    int32 addShopItem(lua_State*);      // Adds item to shop container (16 max)
-    int32 getCurrentGPItem(lua_State*); // Gets current GP item id and max points
-    int32 breakLinkshell(lua_State*);   // Breaks all pearls/sacks
+    void  createShop(uint8 size, sol::object const& arg1); // Prepare the container for work of shop ??
+    int32 addShopItem(lua_State*);                         // Adds item to shop container (16 max)
+    int32 getCurrentGPItem(lua_State*);                    // Gets current GP item id and max points
+    int32 breakLinkshell(lua_State*);                      // Breaks all pearls/sacks
 
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
@@ -319,10 +320,10 @@ public:
     int32 setMissionLogEx(lua_State*);     // Sets mission log extra data to correctly track progress in branching missions.
     int32 getMissionLogEx(lua_State*);     // Gets mission log extra data.
 
-    int32 setEminenceCompleted(lua_State* L); // Sets the complete flag for a record of eminence
-    int32 getEminenceCompleted(lua_State* L); // Gets the record completed flag
-    int32 setEminenceProgress(lua_State* L);  // Sets progress on a record of eminence
-    int32 getEminenceProgress(lua_State* L);  // gets progress on a record of eminence
+    void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
+    bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
+    bool   setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
+    uint32 getEminenceProgress(uint16 recordID);                                                    // gets progress on a record of eminence
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -457,17 +458,17 @@ public:
     int32 instanceEntry(lua_State* L);
     int32 isInAssault(lua_State*); // If player is in a Instanced Assault Dungeon returns true
 
-    int32 getConfrontationEffect(lua_State* L);
-    int32 copyConfrontationEffect(lua_State* L); // copy confrontation effect, param = targetEntity:getShortID()
+    uint16 getConfrontationEffect();
+    uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
 
     // Battlefields
-    int32 getBattlefield(lua_State* L);      // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID();                // returns entity->PBattlefield->GetID() or -1 if not available
-    int32 registerBattlefield(lua_State*);   // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    int32 battlefieldAtCapacity(lua_State*); // 1 if this battlefield is full
-    int32 enterBattlefield(lua_State*);      // enter a battlefield entity is registered with
-    bool  leaveBattlefield(uint8 leavecode); // leave battlefield if inside one
-    bool  isInDynamis();                     // If player is in Dynamis return true else false
+    auto  getBattlefield() -> CBattlefield*;                                                              // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
+    int32 enterBattlefield(lua_State*);                                                                   // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
+    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -480,15 +481,15 @@ public:
     int32 enableEntities(lua_State* L);
     int32 independantAnimation(lua_State* L);
 
-    int32 engage(lua_State* L);
-    int32 isEngaged(lua_State* L);
-    int32 disengage(lua_State* L);
+    void  engage(uint16 requestedTarget);
+    bool  isEngaged();
+    void  disengage();
     int32 timer(lua_State* L); // execute lua closure after some time
     int32 queue(lua_State* L);
     void  addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
-    int32 hasRecast(lua_State*);
-    int32 resetRecast(lua_State*);  // Reset one recast ID
-    int32 resetRecasts(lua_State*); // Reset recasts for the caller
+    bool  hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
+    void  resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
+    void  resetRecasts();                            // Reset recasts for the caller
 
     int32 addListener(lua_State* L);
     int32 removeListener(lua_State* L);
@@ -600,12 +601,14 @@ public:
     uint8  getWeaponSubSkillType(uint8 slotID);                      // gets the subskill of weapon equipped
     auto   getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>; // returns weapon skill's skillchain properties (up to 3)
 
-    int32 takeWeaponskillDamage(lua_State* L);
+    int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
+                                float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
+
     int32 takeSpellDamage(lua_State* L);
 
     // Pets and Automations
-    int32 spawnPet(lua_State*); // Calls Pet
-    void  despawnPet();         // Despawns Pet
+    void spawnPet(sol::object const& arg0); // Calls Pet
+    void despawnPet();                      // Despawns Pet
 
     void   spawnTrust(uint16 trustId);
     void   clearTrusts();
@@ -707,7 +710,7 @@ public:
     int32 castSpell(lua_State*);     // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     int32 useJobAbility(lua_State*); // forces a job ability use (players/pets only)
     int32 useMobAbility(lua_State*); // forces a mob to use a mobability (parameter = skill ID)
-    int32 hasTPMoves(lua_State*);
+    bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);
     bool hasPreventActionEffect();
