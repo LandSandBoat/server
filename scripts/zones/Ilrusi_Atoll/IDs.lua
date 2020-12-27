@@ -88,6 +88,10 @@ zones[tpz.zone.ILRUSI_ATOLL] =
             CARRION_LEECH8  = 17002538,
             CARRION_TOAD1   = 17002539,
             CARRION_TOAD2   = 17002540,
+            UNDEAD_CRAB     = 17002541,
+            UNDEAD_LEECH    = 17002542,
+            UNDEAD_SLIME    = 17002543,
+            UNDEAD_TOAD     = 17002544,
         },
     },
     npc =
