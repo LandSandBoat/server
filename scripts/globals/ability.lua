@@ -431,7 +431,7 @@ tpz.jobAbility =
     CRIMSON_HOWL       = 548,
     FIRE_IV            = 549,
     FLAMING_CRUSH      = 550,
-	METEOR_STRIKE      = 551,
+    METEOR_STRIKE      = 551,
     INFERNO            = 552,
     INFERNO_HOWL       = 553,
     CONFLAG_STRIKE     = 554,
@@ -670,8 +670,6 @@ tpz.jobAbility =
     TORNADO_II         = 968,
     WINDS_BLESSING     = 969,
     HYSTERIC_ASSAULT   = 970,
-	
-
 }
 tpz.ja = tpz.jobAbility
 
