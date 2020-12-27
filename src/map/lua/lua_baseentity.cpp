@@ -869,7 +869,7 @@ void CLuaBaseEntity::startEvent(sol::object const& EventIDObj, sol::variadic_arg
     }
 
     std::vector<uint32> args(8, 0);
-    int32 textTable = -1;
+    int32               textTable = -1;
 
     uint8 count = 0;
     for (auto v : va)
@@ -881,13 +881,13 @@ void CLuaBaseEntity::startEvent(sol::object const& EventIDObj, sol::variadic_arg
 
         if (count < 8)
         {
-            uint32 value = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
+            uint32 value  = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
             args[count++] = value;
         }
         else
         {
             int32 value = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
-            textTable = value;
+            textTable   = value;
         }
     }
 
@@ -9729,17 +9729,11 @@ int32 CLuaBaseEntity::getVE(CLuaBaseEntity const* target)
  *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setCE(lua_State* L)
+void CLuaBaseEntity::setCE(CLuaBaseEntity* target, uint16 amount)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
 
-    CLuaBaseEntity* PEntity = nullptr;
-    auto            amount  = (uint16)lua_tointeger(L, 2);
-
-    ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->SetCE((CBattleEntity*)PEntity->GetBaseEntity(), amount);
-    return 0;
+    static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->SetCE(static_cast<CBattleEntity*>(target->GetBaseEntity()), amount);
 }
 
 /************************************************************************
@@ -9749,17 +9743,11 @@ inline int32 CLuaBaseEntity::setCE(lua_State* L)
  *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setVE(lua_State* L)
+void CLuaBaseEntity::setVE(CLuaBaseEntity* target, uint16 amount)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
 
-    CLuaBaseEntity* PEntity = nullptr;
-    auto            amount  = (uint16)lua_tointeger(L, 2);
-
-    ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->SetVE((CBattleEntity*)PEntity->GetBaseEntity(), amount);
-    return 0;
+    static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->SetVE(static_cast<CBattleEntity*>(target->GetBaseEntity()), amount);
 }
 
 /************************************************************************
@@ -9769,18 +9757,9 @@ inline int32 CLuaBaseEntity::setVE(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addEnmity(lua_State* L)
+void CLuaBaseEntity::addEnmity(CLuaBaseEntity* PEntity, int32 CE, int32 VE)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PEntity = nullptr;
-    int32           CE      = (int32)lua_tointeger(L, 2);
-    int32           VE      = (int32)lua_tointeger(L, 3);
-
-    CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
     if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_PET || (m_PBaseEntity->objtype == TYPE_MOB && PMob->isCharmed))
     {
@@ -9796,7 +9775,6 @@ inline int32 CLuaBaseEntity::addEnmity(lua_State* L)
             PMob->PEnmityContainer->UpdateEnmity(static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), CE, VE);
         }
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9806,21 +9784,14 @@ inline int32 CLuaBaseEntity::addEnmity(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::lowerEnmity(lua_State* L)
+void CLuaBaseEntity::lowerEnmity(CLuaBaseEntity* PEntity, uint8 percent)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CLuaBaseEntity* PEntity = nullptr;
 
     if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
     {
-        ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->LowerEnmityByPercent((CBattleEntity*)PEntity->GetBaseEntity(), (uint8)lua_tonumber(L, 2), nullptr);
+        static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->LowerEnmityByPercent(static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), percent, nullptr);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9830,21 +9801,14 @@ inline int32 CLuaBaseEntity::lowerEnmity(lua_State* L)
  *  Notes   : Mob will aggro an Entity, but be unclaimed until engaged
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateEnmity(lua_State* L)
+void CLuaBaseEntity::updateEnmity(CLuaBaseEntity* PEntity)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    // TPZ_DEBUG_BREAK_IF(lua_gettop(L) > 1);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PEntity = nullptr;
 
     if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
     {
-        ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->AddBaseEnmity((CBattleEntity*)PEntity->GetBaseEntity());
+        static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->AddBaseEnmity(static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9854,20 +9818,9 @@ inline int32 CLuaBaseEntity::updateEnmity(lua_State* L)
  *  Notes   : See scripts/globals/abilities/accomplice.lua
  ************************************************************************/
 
-int32 CLuaBaseEntity::transferEnmity(lua_State* L)
+void CLuaBaseEntity::transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_tointeger(L, 2) < 0);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    // TODO:
-    CBaseEntity* PEntity = nullptr;
-    auto         percent = (uint8)lua_tointeger(L, 2);
-    auto         range   = lua_tonumber(L, 3);
+    CBaseEntity* PEntity = entity->GetBaseEntity();
 
     auto* PIterEntity = [&]() -> CCharEntity* {
         if (m_PBaseEntity->objtype == TYPE_PC)
@@ -9908,7 +9861,6 @@ int32 CLuaBaseEntity::transferEnmity(lua_State* L)
             }
         }
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9918,15 +9870,8 @@ int32 CLuaBaseEntity::transferEnmity(lua_State* L)
  *  Notes   : Used in most Weaponskills and damaging abilities scripts
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateEnmityFromDamage(lua_State* L)
+void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CLuaBaseEntity* PEntity = nullptr;
-    int32           damage  = (int32)lua_tointeger(L, 2);
-
     auto* PBaseMob = static_cast<CMobEntity*>(m_PBaseEntity);
 
     // This is a mob attacking a target and losing enmity from doing damage
@@ -9945,7 +9890,6 @@ inline int32 CLuaBaseEntity::updateEnmityFromDamage(lua_State* L)
             PBaseMob->PEnmityContainer->UpdateEnmityFromDamage(static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), damage);
         }
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9955,17 +9899,9 @@ inline int32 CLuaBaseEntity::updateEnmityFromDamage(lua_State* L)
  *  Notes   : Used in nearly all Cure scripts and abilities which heal
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateEnmityFromCure(lua_State* L)
+void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_tointeger(L, 2) < 0);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PEntity = nullptr;
-    auto            amount  = (int32)lua_tointeger(L, 2);
+    TPZ_DEBUG_BREAK_IF(amount < 0);
 
     auto* PCurer = [&]() -> CBattleEntity* {
         if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
@@ -9987,8 +9923,6 @@ inline int32 CLuaBaseEntity::updateEnmityFromCure(lua_State* L)
     {
         battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount);
     }
-
-    return 0;
 }
 
 /************************************************************************
@@ -9998,21 +9932,14 @@ inline int32 CLuaBaseEntity::updateEnmityFromCure(lua_State* L)
  *  Notes   : Used in Mob special abilities which reset Enmity
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::resetEnmity(lua_State* L)
+void CLuaBaseEntity::resetEnmity(CLuaBaseEntity* PEntity)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
-    // TPZ_DEBUG_BREAK_IF(lua_gettop(L) > 1);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-
-    CLuaBaseEntity* PEntity = nullptr;
 
     if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
     {
-        ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->LowerEnmityByPercent((CBattleEntity*)PEntity->GetBaseEntity(), 100, nullptr);
+        static_cast<CMobEntity*>(m_PBaseEntity)->PEnmityContainer->LowerEnmityByPercent(static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), 100, nullptr);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -10022,28 +9949,26 @@ inline int32 CLuaBaseEntity::resetEnmity(lua_State* L)
  *  Notes   : Used mostly in QM (???) scripts
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::updateClaim(lua_State* L)
+void CLuaBaseEntity::updateClaim(sol::object const& entity)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == NULL);
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
-        return 0;
+        return;
     }
 
-    if (lua_isnil(L, 1) || !lua_isuserdata(L, 1))
+    if ((entity != sol::nil) || !entity.is<CLuaBaseEntity*>())
     {
         static_cast<CMobEntity*>(m_PBaseEntity)->m_OwnerID.clean();
         static_cast<CMobEntity*>(m_PBaseEntity)->updatemask |= UPDATE_STATUS;
-        return 0;
+        return;
     }
 
-    CLuaBaseEntity* PEntity = nullptr;
+    CLuaBaseEntity* PEntity = entity.as<CLuaBaseEntity*>();
 
     if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
     {
-        battleutils::ClaimMob((CMobEntity*)m_PBaseEntity, (CBattleEntity*)PEntity->GetBaseEntity());
+        battleutils::ClaimMob(static_cast<CMobEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -10053,16 +9978,11 @@ inline int32 CLuaBaseEntity::updateClaim(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasEnmity(lua_State* L)
+bool CLuaBaseEntity::hasEnmity()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    bool hasEnmity = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer->hasEnmity();
-
-    lua_pushboolean(L, hasEnmity);
-
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer->hasEnmity();
 }
 
 /************************************************************************
@@ -10162,11 +10082,11 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::object const& arg0, sol::object cons
         return false;
     }
 
-    auto isNil = [](auto& item) { return item == sol::nil; };
-    std::vector<sol::object> args = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 };
+    auto                     isNil = [](auto& item) { return item == sol::nil; };
+    std::vector<sol::object> args  = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 };
     args.erase(std::remove_if(args.begin(), args.end(), isNil), args.end());
 
-    bool silent = false;
+    bool silent      = false;
     auto lastElement = args.at(args.size() - 1);
     if (lastElement.is<bool>())
     {
@@ -10204,13 +10124,13 @@ CStatusEffect* CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object cons
         return nullptr;
     }
 
-    CStatusEffect* PStatusEffect = nullptr;
-    auto effect_StatusID = static_cast<EFFECT>(StatusID);
+    CStatusEffect* PStatusEffect   = nullptr;
+    auto           effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::nil)
     {
         auto uint16_SubID = SubID.as<uint16>();
-        PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
+        PStatusEffect     = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID, uint16_SubID);
     }
     else
     {
@@ -10298,13 +10218,13 @@ bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubID)
         return false;
     }
 
-    bool hasEffect = false;
+    bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::nil)
     {
         auto uint16_SubID = SubID.as<uint16>();
-        hasEffect = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID, uint16_SubID);
+        hasEffect         = PBattleEntity->StatusEffectContainer->HasStatusEffect(effect_StatusID, uint16_SubID);
     }
     else
     {
@@ -10375,13 +10295,13 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 
     bool result = false;
 
-    bool hasEffect = false;
+    bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::nil)
     {
         auto uint16_SubID = SubID.as<uint16>();
-        result = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
+        result            = PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID, uint16_SubID);
     }
     else
     {
@@ -13396,15 +13316,11 @@ inline int32 CLuaBaseEntity::hasTPMoves(lua_State* L)
  *  Notes   : Used in scripts/mixins/abyssea_nm.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::weaknessTrigger(lua_State* L)
+void CLuaBaseEntity::weaknessTrigger(uint8 level)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
-    mobutils::WeaknessTrigger(m_PBaseEntity, (WeaknessType)lua_tointeger(L, 1));
-
-    return 0;
+    mobutils::WeaknessTrigger(m_PBaseEntity, static_cast<WeaknessType>(level));
 }
 
 /************************************************************************
@@ -13414,14 +13330,11 @@ inline int32 CLuaBaseEntity::weaknessTrigger(lua_State* L)
  *  Notes   : Used in scripts/globals/abilities/stay.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasPreventActionEffect(lua_State* L)
+bool CLuaBaseEntity::hasPreventActionEffect()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    lua_pushboolean(L, (static_cast<CBattleEntity*>(m_PBaseEntity))->StatusEffectContainer->HasPreventActionEffect());
-
-    return 1;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->HasPreventActionEffect();
 }
 
 /************************************************************************
@@ -13431,14 +13344,9 @@ inline int32 CLuaBaseEntity::hasPreventActionEffect(lua_State* L)
  *  Notes   : To Do: Change to seconds for standardization?
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::stun(lua_State* L)
+void CLuaBaseEntity::stun(uint32 milliseconds)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(lua_tointeger(L, 1)), false);
-
-    return 0;
+    m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(milliseconds), false);
 }
 
 /************************************************************************
@@ -13992,7 +13900,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreMP", CLuaBaseEntity::restoreMP);
     SOL_REGISTER("delMP", CLuaBaseEntity::delMP);
 
-
     SOL_REGISTER("getTP", CLuaBaseEntity::getTP);
     SOL_REGISTER("addTP", CLuaBaseEntity::addTP);
     SOL_REGISTER("setTP", CLuaBaseEntity::setTP);
@@ -14114,17 +14021,17 @@ void CLuaBaseEntity::Register()
     // Enmity
     SOL_REGISTER("getCE", CLuaBaseEntity::getCE);
     SOL_REGISTER("getVE", CLuaBaseEntity::getVE);
-    // SOL_REGISTER(setCE),
-    // SOL_REGISTER(setVE),
-    // SOL_REGISTER(addEnmity),
-    // SOL_REGISTER(lowerEnmity),
-    // SOL_REGISTER(updateEnmity),
-    // SOL_REGISTER(transferEnmity),
-    // SOL_REGISTER(updateEnmityFromDamage),
-    // SOL_REGISTER(updateEnmityFromCure),
-    // SOL_REGISTER(resetEnmity),
-    // SOL_REGISTER(updateClaim),
-    // SOL_REGISTER(hasEnmity),
+    SOL_REGISTER("setCE", CLuaBaseEntity::setCE);
+    SOL_REGISTER("setVE", CLuaBaseEntity::setVE);
+    SOL_REGISTER("addEnmity", CLuaBaseEntity::addEnmity);
+    SOL_REGISTER("lowerEnmity", CLuaBaseEntity::lowerEnmity);
+    SOL_REGISTER("updateEnmity", CLuaBaseEntity::updateEnmity);
+    SOL_REGISTER("transferEnmity", CLuaBaseEntity::transferEnmity);
+    SOL_REGISTER("updateEnmityFromDamage", CLuaBaseEntity::updateEnmityFromDamage);
+    SOL_REGISTER("updateEnmityFromCure", CLuaBaseEntity::updateEnmityFromCure);
+    SOL_REGISTER("resetEnmity", CLuaBaseEntity::resetEnmity);
+    SOL_REGISTER("updateClaim", CLuaBaseEntity::updateClaim);
+    SOL_REGISTER("hasEnmity", CLuaBaseEntity::hasEnmity);
     // SOL_REGISTER(getNotorietyList),
 
     // Status Effects
@@ -14317,9 +14224,9 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(useMobAbility),
     // SOL_REGISTER(hasTPMoves),
 
-    // SOL_REGISTER(weaknessTrigger),
-    // SOL_REGISTER(hasPreventActionEffect),
-    // SOL_REGISTER(stun),
+    SOL_REGISTER("weaknessTrigger", CLuaBaseEntity::weaknessTrigger);
+    SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
+    SOL_REGISTER("stun", CLuaBaseEntity::stun);
 
     // SOL_REGISTER(getPool),
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);

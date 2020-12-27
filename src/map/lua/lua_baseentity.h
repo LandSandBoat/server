@@ -506,42 +506,42 @@ public:
     bool isDualWielding(); // Checks if the battle entity is dual wielding
 
     // Enmity
-    int32 getCE(CLuaBaseEntity const* target); // gets current CE the mob has towards the player
-    int32 getVE(CLuaBaseEntity const* target); // gets current VE the mob has towards the player
-    int32 setCE(lua_State*);                   // sets current CE the mob has towards the player
-    int32 setVE(lua_State*);                   // sets current VE the mob has towards the player
-    int32 addEnmity(lua_State*);               // Add specified amount of enmity (target, CE, VE)
-    int32 lowerEnmity(lua_State*);             // lower enmity to player for specificed mob
-    int32 updateEnmity(lua_State*);            // Adds Enmity to player for specified mob
-    int32 transferEnmity(lua_State*);
-    int32 updateEnmityFromDamage(lua_State*); // Adds Enmity to player for specified mob for the damage specified
-    int32 updateEnmityFromCure(lua_State*);
-    int32 resetEnmity(lua_State*);      // resets enmity to player for specificed mob
-    int32 updateClaim(lua_State*);      // Adds Enmity to player for specified mob and claims
-    int32 hasEnmity(lua_State*);        // Does the player have any enmity at all from any source
-    int32 getNotorietyList(lua_State*); // Returns a table with all of the entities on a chars notoriety list
+    int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
+    int32 getVE(CLuaBaseEntity const* target);                    // gets current VE the mob has towards the player
+    void  setCE(CLuaBaseEntity* target, uint16 amount);           // sets current CE the mob has towards the player
+    void  setVE(CLuaBaseEntity* target, uint16 amount);           // sets current VE the mob has towards the player
+    void  addEnmity(CLuaBaseEntity* PEntity, int32 CE, int32 VE); // Add specified amount of enmity (target, CE, VE)
+    void  lowerEnmity(CLuaBaseEntity* PEntity, uint8 percent);    // lower enmity to player for specificed mob
+    void  updateEnmity(CLuaBaseEntity* PEntity);                  // Adds Enmity to player for specified mob
+    void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
+    void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
+    void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount);
+    void  resetEnmity(CLuaBaseEntity* PEntity);   // resets enmity to player for specificed mob
+    void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
+    bool  hasEnmity();                            // Does the player have any enmity at all from any source
+    int32 getNotorietyList(lua_State*);           // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
-    bool addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                         sol::object const& arg4, sol::object const& arg5, sol::object const& arg6);
-    bool addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                           sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
-                           sol::object const& arg8, sol::object const& arg9);
-    auto getStatusEffect(uint16 StatusID, sol::object const& SubID) -> CStatusEffect*;
+    bool   addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                           sol::object const& arg4, sol::object const& arg5, sol::object const& arg6);
+    bool   addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
+                             sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
+                             sol::object const& arg8, sol::object const& arg9);
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> CStatusEffect*;
     auto   getStatusEffects() -> sol::table;
-    int16 getStatusEffectElement(uint16 statusId);
+    int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, uint16 power);           // Returns true if the effect can be added
-    bool hasStatusEffect(uint16 StatusID, sol::object const& SubID);// Checks to see if character has specified effect
-    uint16 hasStatusEffectByFlag(uint16 StatusID);  // Checks to see if a character has an effect with the specified flag
-    uint8 countEffect(uint16 StatusID);            // Gets the number of effects of a specific type on the player
+    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID); // Checks to see if character has specified effect
+    uint16 hasStatusEffectByFlag(uint16 StatusID);                     // Checks to see if a character has an effect with the specified flag
+    uint8  countEffect(uint16 StatusID);                               // Gets the number of effects of a specific type on the player
 
-    bool delStatusEffect(uint16 StatusID, sol::object const& SubID);        // Removes Status Effect
-    void delStatusEffectsByFlag(uint16 flag, sol::object const& silent); // Removes Status Effects by Flag
-    bool delStatusEffectSilent(uint16 StatusID);  // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();      // Used with "Erase" spell
-    uint8 eraseAllStatusEffect();   // Erases all effects and returns number erased
-    int32 dispelStatusEffect(sol::object const& flagObj); // Used with "Dispel" spell
-    uint8 dispelAllStatusEffect(sol::object const& flagObj); // Dispels all effects and returns number erased
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubID);                   // Removes Status Effect
+    void   delStatusEffectsByFlag(uint16 flag, sol::object const& silent);               // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                               // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                            // Dispels all effects and returns number erased
     uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
 
     void  addMod(uint16 type, int16 amount); // Adds Modifier Value
@@ -709,9 +709,9 @@ public:
     int32 useMobAbility(lua_State*); // forces a mob to use a mobability (parameter = skill ID)
     int32 hasTPMoves(lua_State*);
 
-    int32 weaknessTrigger(lua_State* L);
-    int32 hasPreventActionEffect(lua_State*);
-    int32 stun(lua_State* L);
+    void weaknessTrigger(uint8 level);
+    bool hasPreventActionEffect();
+    void stun(uint32 milliseconds);
 
     int32  getPool(lua_State* L); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
