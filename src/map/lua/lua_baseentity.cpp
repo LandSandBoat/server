@@ -204,46 +204,38 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
  *  Notes   : Mainly used for sending retail text messages
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::messageText(lua_State* L)
+void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+    CBaseEntity* PTarget  = PLuaBaseEntity->m_PBaseEntity;
+    bool         showName = true;
+    uint8        mode     = 0;
 
-    CLuaBaseEntity* PLuaBaseEntity = nullptr; // nullptr;
-    CBaseEntity*    PTarget        = nullptr; // PLuaBaseEntity->m_PBaseEntity;
-
-    auto messageID = (uint16)lua_tointeger(L, 2);
-
-    bool  showName = true;
-    uint8 mode     = 0;
-
-    if (!lua_isnil(L, 3))
+    // TODO: Clean this up.  We could potentially accept two int vals for optional args, which could cause unexpected showName behavior.
+    if (arg2 != sol::nil)
     {
-        if (lua_isboolean(L, 3))
+        if (arg2.is<bool>())
         {
-            showName = lua_toboolean(L, 3);
+            showName = arg2.as<bool>();
         }
-        else if (lua_isnumber(L, 3))
+        else if (arg2.is<int>())
         {
-            mode = (uint8)lua_tointeger(L, 3);
+            mode = arg2.as<uint8>();
         }
     }
 
-    if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
+    if (arg3 != sol::nil)
     {
-        mode = (uint8)lua_tointeger(L, 4);
+        mode = arg3.as<uint8>();
     }
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CMessageTextPacket(PTarget, messageID, showName, mode));
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageTextPacket(PTarget, messageID, showName, mode));
     }
     else
     { // broadcast in range
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CMessageTextPacket(PTarget, messageID, showName, mode));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -255,7 +247,7 @@ inline int32 CLuaBaseEntity::messageText(lua_State* L)
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(const char* message, sol::object messageType, sol::object name)
+void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object messageType, sol::object name)
 {
     CHAT_MESSAGE_TYPE int_messageType = (messageType == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageType.as<CHAT_MESSAGE_TYPE>();
     const char*       cstr_name       = (name == sol::lua_nil) ? "" : name.as<const char*>();
@@ -273,44 +265,40 @@ void CLuaBaseEntity::PrintToPlayer(const char* message, sol::object messageType,
  *          : would print a shout type message from Pinocchio to the entire server
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::PrintToArea(lua_State* L)
+void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
-    CHAT_MESSAGE_TYPE messageLook  = (lua_isnil(L, 2) || !lua_isnumber(L, 2)) ? MESSAGE_SYSTEM_1 : (CHAT_MESSAGE_TYPE)lua_tointeger(L, 2);
-    uint8             messageRange = (lua_isnil(L, 3) || !lua_isnumber(L, 3)) ? 0 : (CHAT_MESSAGE_TYPE)lua_tointeger(L, 3);
-    std::string       name         = (lua_isnil(L, 4) || !lua_isstring(L, 4)) ? std::string() : lua_tostring(L, 4);
+    CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
+    uint8             messageRange = (arg2 == sol::nil) ? 0 : arg2.as<CHAT_MESSAGE_TYPE>();
+    std::string       name         = (arg3 == sol::nil) ? std::string() : arg3.as<std::string>();
 
     if (messageRange == 0) // All zones world wide
     {
-        message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, messageLook, (char*)lua_tostring(L, 1), name));
+        message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
     else if (messageRange == 1) // Say range
     {
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, messageLook, (char*)lua_tostring(L, 1), name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, messageLook, message, name));
     }
     else if (messageRange == 2) // Shout
     {
-        PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, messageLook, (char*)lua_tostring(L, 1), name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, messageLook, message, name));
     }
     else if (messageRange == 3) // Party and Alliance
     {
-        message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, (char*)lua_tostring(L, 1), name));
+        message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
     else if (messageRange == 4) // Yell zones only
     {
-        message::send(MSG_CHAT_YELL, nullptr, 0, new CChatMessagePacket(PChar, messageLook, (char*)lua_tostring(L, 1), name));
+        message::send(MSG_CHAT_YELL, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
     /*
     Todo: Unity, LS 1 and LS 2 for the lols?
     */
-
-    return 0;
 }
 
 /************************************************************************
@@ -320,40 +308,21 @@ inline int32 CLuaBaseEntity::PrintToArea(lua_State* L)
  *  Notes   : Mainly used when effects are applied
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::messageBasic(lua_State* L)
+void CLuaBaseEntity::messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 messageID = (uint16)lua_tointeger(L, 1);
-
-    uint32 param0  = 0;
-    uint32 param1  = 0;
-    auto*  PTarget = m_PBaseEntity;
-
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-    {
-        param0 = (uint32)lua_tointeger(L, 2);
-    }
-    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-    {
-        param1 = (uint32)lua_tointeger(L, 3);
-    }
-    if (!lua_isnil(L, 4) && lua_isuserdata(L, 4))
-    {
-        PTarget = nullptr; // Lunar<CLuaBaseEntity>::check(L, 4)->m_PBaseEntity;
-    }
+    uint32 param0  = (p0 != sol::nil) ? p0.as<uint32>() : 0;
+    uint32 param1  = (p1 != sol::nil) ? p1.as<uint32>() : 0;
+    auto*  PTarget = (target != sol::nil) ? target.as<CLuaBaseEntity*>()->m_PBaseEntity : m_PBaseEntity;
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CMessageBasicPacket(m_PBaseEntity, PTarget, param0, param1, messageID));
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageBasicPacket(m_PBaseEntity, PTarget, param0, param1, messageID));
     }
     else
-    { // broadcast in range
+    {
+        // Broadcast in range
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CMessageBasicPacket(m_PBaseEntity, PTarget, param0, param1, messageID));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -1722,21 +1691,14 @@ inline int32 CLuaBaseEntity::checkDistance(lua_State* L)
  *  Notes   : Default is 4 seconds unless specified in ms
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::wait(lua_State* L)
+void CLuaBaseEntity::wait(sol::object const& milliseconds)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_PC);
 
-    CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
+    auto* PBattle  = static_cast<CBattleEntity*>(m_PBaseEntity);
+    int32 waitTime = (milliseconds != sol::nil) ? milliseconds.as<uint32>() : 4000;
 
-    int32 waitTime = 4000;
-
-    if (lua_isnumber(L, 1))
-    {
-        waitTime = (int32)lua_tonumber(L, 1);
-    }
     PBattle->PAI->Inactive(std::chrono::milliseconds(waitTime), true);
-
-    return 0;
 }
 
 /************************************************************************
@@ -4434,12 +4396,9 @@ inline int32 CLuaBaseEntity::costume2(lua_State* L)
  *  Notes   : ANIMATION_ATTACK
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getAnimation(lua_State* L)
+uint8 CLuaBaseEntity::getAnimation()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    lua_pushinteger(L, m_PBaseEntity->animation);
-    return 1;
+    return m_PBaseEntity->animation;
 }
 
 /************************************************************************
@@ -4449,20 +4408,13 @@ inline int32 CLuaBaseEntity::getAnimation(lua_State* L)
  *  Notes   : Look at scripts/zones/VeLugannon_Palace/npcs/Monolith.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setAnimation(lua_State* L)
+void CLuaBaseEntity::setAnimation(uint8 animation)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint8 animation = (uint8)lua_tointeger(L, 1);
-
     if (m_PBaseEntity->animation != animation)
     {
         m_PBaseEntity->animation = animation;
         m_PBaseEntity->updatemask |= UPDATE_HP;
     }
-    return 0;
 }
 
 /************************************************************************
@@ -8221,21 +8173,20 @@ inline int32 CLuaBaseEntity::getAlliance(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getAllianceSize(lua_State* L)
+uint8 CLuaBaseEntity::getAllianceSize()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
+    auto* PBattle      = static_cast<CBattleEntity*>(m_PBaseEntity);
     uint8 alliancesize = 1;
 
-    if (((CBattleEntity*)m_PBaseEntity)->PParty != nullptr)
+    if (PBattle->PParty != nullptr)
     {
-        if (((CBattleEntity*)m_PBaseEntity)->PParty->m_PAlliance != nullptr)
+        if (PBattle->PParty->m_PAlliance != nullptr)
         {
-            alliancesize = (uint8)((CBattleEntity*)m_PBaseEntity)->PParty->m_PAlliance->partyList.size();
+            alliancesize = static_cast<uint8>(PBattle->PParty->m_PAlliance->partyList.size());
         }
     }
-    lua_pushnumber(L, alliancesize);
-    return 1;
+
+    return alliancesize;
 }
 
 /************************************************************************
@@ -8371,14 +8322,14 @@ inline int32 CLuaBaseEntity::isLevelSync(lua_State* L)
  *  Notes   : Returns 0 (Solo), 1 (Party), or 2 (Alliance)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::checkSoloPartyAlliance(lua_State* L)
+uint8 CLuaBaseEntity::checkSoloPartyAlliance()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     uint8 SoloPartyAlliance = 0;
+
     if (PChar->PParty != nullptr)
     {
         SoloPartyAlliance = 1;
@@ -8388,8 +8339,7 @@ inline int32 CLuaBaseEntity::checkSoloPartyAlliance(lua_State* L)
         }
     }
 
-    lua_pushinteger(L, SoloPartyAlliance);
-    return 1;
+    return SoloPartyAlliance;
 }
 
 /************************************************************************
@@ -9121,26 +9071,15 @@ int32 CLuaBaseEntity::triggerListener(lua_State* L)
  *  Notes   : Currently used in Assault Missions and some Mobs
  ************************************************************************/
 
-int32 CLuaBaseEntity::getEntity(lua_State* L)
+CBaseEntity* CLuaBaseEntity::getEntity(uint16 targetID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    auto* PEntity{ m_PBaseEntity->GetEntity((uint16)lua_tointeger(L, 1)) };
+    auto* PEntity{ m_PBaseEntity->GetEntity(targetID) };
     if (PEntity)
     {
-        lua_getglobal(L, "CBaseEntity");
-        lua_pushstring(L, "new");
-        lua_gettable(L, -2);
-        lua_insert(L, -2);
-        lua_pushlightuserdata(L, (void*)PEntity);
-        lua_pcall(L, 2, 1, 0);
+        return PEntity;
     }
-    else
-    {
-        lua_pushnil(L);
-    }
-    return 1;
+
+    return nullptr;
 }
 
 /************************************************************************
@@ -9195,11 +9134,9 @@ inline int32 CLuaBaseEntity::getNearbyEntities(lua_State* L)
  *  Notes   : Only used in scripts/mixins/abyssea_nm.lua currently
  ************************************************************************/
 
-int32 CLuaBaseEntity::canChangeState(lua_State* L)
+bool CLuaBaseEntity::canChangeState()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    lua_pushboolean(L, m_PBaseEntity->PAI->CanChangeState());
-    return 1;
+    return m_PBaseEntity->PAI->CanChangeState();
 }
 
 /************************************************************************
@@ -9232,10 +9169,8 @@ void CLuaBaseEntity::wakeUp()
  *  Notes   : See scripts/globals/effects/obliviscence.lua
  ************************************************************************/
 
-int32 CLuaBaseEntity::recalculateStats(lua_State* L)
+void CLuaBaseEntity::recalculateStats()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
@@ -9256,7 +9191,6 @@ int32 CLuaBaseEntity::recalculateStats(lua_State* L)
         PChar->pushPacket(new CMenuMeritPacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -9266,9 +9200,8 @@ int32 CLuaBaseEntity::recalculateStats(lua_State* L)
  *  Notes   : See scripts/zones/Alzadaal_Undersea_Ruins/npcs/_20t.lua
  ************************************************************************/
 
-int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
+bool CLuaBaseEntity::checkImbuedItems()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
@@ -9282,14 +9215,14 @@ int32 CLuaBaseEntity::checkImbuedItems(lua_State* L)
                 found = true;
             }
         });
+
         if (found)
         {
-            lua_pushboolean(L, true);
-            return 1;
+            return true;
         }
     }
-    lua_pushboolean(L, false);
-    return 1;
+
+    return false;
 }
 
 /************************************************************************
@@ -12919,21 +12852,16 @@ void CLuaBaseEntity::stun(uint32 milliseconds)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getPool(lua_State* L)
+uint32 CLuaBaseEntity::getPool()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    if (m_PBaseEntity->objtype != TYPE_MOB)
+    if (m_PBaseEntity->objtype == TYPE_MOB)
     {
-        lua_pushnil(L);
-    }
-    else
-    {
-        CMobEntity* PMob = (CMobEntity*)m_PBaseEntity;
-        lua_pushinteger(L, PMob->m_Pool);
+        CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+        return PMob->m_Pool;
     }
 
-    return 1;
+    TPZ_DEBUG_BREAK_IF(true); // TODO: Examine impact of returning 0
+    return 0;
 }
 
 /************************************************************************
@@ -13044,53 +12972,41 @@ uint16 CLuaBaseEntity::getStealItem()
  *  Notes   : Defaults to getStealItem() if no despoil item exists
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getDespoilItem(lua_State* L)
+uint16 CLuaBaseEntity::getDespoilItem()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
     if (PMob)
     {
         DropList_t* PDropList = itemutils::GetDropList(PMob->m_DropID);
+
         if (PDropList && !PMob->m_ItemStolen)
         {
             for (const DropItem_t& drop : PDropList->Items)
             {
                 if (drop.DropType == DROP_DESPOIL)
                 {
-                    lua_pushinteger(L, drop.ItemID);
-                    return 1;
+                    return drop.ItemID;
                 }
             }
         }
     }
 
-    return getStealItem();
+    return this->getStealItem();
 }
 
 /************************************************************************
  *  Function: getDespoilDebuff()
  *  Purpose : Used to get a status effect id to apply to a mob on successful despoil
  *  Example : effect = player:getDespoilDebuff()
- *  Notes   :
+ *  Notes   : Check what happens if 0 is returned instead of nil
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getDespoilDebuff(lua_State* L)
+uint16 CLuaBaseEntity::getDespoilDebuff(uint16 itemID)
 {
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    uint16 effectId = luautils::GetDespoilDebuff((uint16)lua_tointeger(L, 1));
-    if (effectId > 0)
-    {
-        lua_pushinteger(L, effectId);
-    }
-    else
-    {
-        lua_pushnil(L);
-    }
-
-    return 1;
+    return luautils::GetDespoilDebuff(itemID);
 }
 
 /************************************************************************
@@ -13130,10 +13046,10 @@ void CLuaBaseEntity::Register()
 
     // Messaging System
     SOL_REGISTER("showText", CLuaBaseEntity::showText);
-    // SOL_REGISTER(messageText),
+    SOL_REGISTER("messageText", CLuaBaseEntity::messageText);
     SOL_REGISTER("PrintToPlayer", CLuaBaseEntity::PrintToPlayer);
-    // SOL_REGISTER(PrintToArea),
-    // SOL_REGISTER(messageBasic),
+    SOL_REGISTER("PrintToArea", CLuaBaseEntity::PrintToArea);
+    SOL_REGISTER("messageBasic", CLuaBaseEntity::messageBasic);
     SOL_REGISTER("messageName", CLuaBaseEntity::messageName);
     SOL_REGISTER("messagePublic", CLuaBaseEntity::messagePublic);
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
@@ -13160,7 +13076,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(updateEvent),
     // SOL_REGISTER(updateEventString),
     // SOL_REGISTER(getEventTarget),
-    // SOL_REGISTER(release),
+    SOL_REGISTER("release", CLuaBaseEntity::release);
 
     SOL_REGISTER("setFlag", CLuaBaseEntity::setFlag);
     // SOL_REGISTER(moghouseFlag),
@@ -13194,7 +13110,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(isFollowingPath),
     // SOL_REGISTER(clearPath),
     // SOL_REGISTER(checkDistance),
-    // SOL_REGISTER(wait),
+    SOL_REGISTER("wait", CLuaBaseEntity::wait);
 
     SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);
     SOL_REGISTER("closeDoor", CLuaBaseEntity::closeDoor);
@@ -13311,8 +13227,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
     // SOL_REGISTER(costume2),
 
-    // SOL_REGISTER(getAnimation),
-    // SOL_REGISTER(setAnimation),
+    SOL_REGISTER("getAnimation", CLuaBaseEntity::getAnimation);
+    SOL_REGISTER("setAnimation", CLuaBaseEntity::setAnimation);
     // SOL_REGISTER(AnimationSub),
 
     // Player Status
@@ -13515,13 +13431,13 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(removePartyEffect),
 
     // SOL_REGISTER(getAlliance),
-    // SOL_REGISTER(getAllianceSize),
+    SOL_REGISTER("getAllianceSize", CLuaBaseEntity::getAllianceSize);
 
     // SOL_REGISTER(reloadParty),
     // SOL_REGISTER(disableLevelSync),
     // SOL_REGISTER(isLevelSync),
 
-    // SOL_REGISTER(checkSoloPartyAlliance),
+    SOL_REGISTER("checkSoloPartyAlliance", CLuaBaseEntity::checkSoloPartyAlliance);
 
     // SOL_REGISTER(checkKillCredit),
 
@@ -13570,14 +13486,14 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(removeListener),
     // SOL_REGISTER(triggerListener),
 
-    // SOL_REGISTER(getEntity),
+    SOL_REGISTER("getEntity", CLuaBaseEntity::getEntity);
     // SOL_REGISTER(getNearbyEntities),
-    // SOL_REGISTER(canChangeState),
+    SOL_REGISTER("canChangeState", CLuaBaseEntity::canChangeState);
 
-    // SOL_REGISTER(wakeUp),
+    SOL_REGISTER("wakeUp", CLuaBaseEntity::wakeUp);
 
-    // SOL_REGISTER(recalculateStats),
-    // SOL_REGISTER(checkImbuedItems),
+    SOL_REGISTER("recalculateStats", CLuaBaseEntity::recalculateStats);
+    SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
 
@@ -13791,13 +13707,13 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
 
-    // SOL_REGISTER(getPool),
+    SOL_REGISTER("getPool", CLuaBaseEntity::getPool);
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);
     SOL_REGISTER("setDropID", CLuaBaseEntity::setDropID);
     // SOL_REGISTER(addTreasure),
     SOL_REGISTER("getStealItem", CLuaBaseEntity::getStealItem);
-    // SOL_REGISTER(getDespoilItem),
-    // SOL_REGISTER(getDespoilDebuff),
+    SOL_REGISTER("getDespoilItem", CLuaBaseEntity::getDespoilItem);
+    SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
     SOL_REGISTER("itemStolen", CLuaBaseEntity::itemStolen);
     SOL_REGISTER("getTHlevel", CLuaBaseEntity::getTHlevel);
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);

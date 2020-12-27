@@ -42,14 +42,14 @@ public:
     }
 
     // Messaging System
-    void  showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
-    int32 messageText(lua_State* L);
-    void  PrintToPlayer(const char* message, sol::object messageType, sol::object name); // for sending debugging messages/command confirmations to the player's client
-    int32 PrintToArea(lua_State* L);                                                     // for sending area messages to multiple players at once
-    int32 messageBasic(lua_State*);                                                      // Sends Basic Message
-    void  messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
-                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
-    void  messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
+    void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
+    void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
+    void PrintToPlayer(std::string const& message, sol::object messageType, sol::object name);                               // for sending debugging messages/command confirmations to the player's client
+    void PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // for sending area messages to multiple players at once
+    void messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target);            // Sends Basic Message
+    void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
+                     sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
+    void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
 
     void messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2,
                         sol::object const& p3, sol::object const& dispName); // Sends Special Message
@@ -112,10 +112,10 @@ public:
     int32 isFollowingPath(lua_State* L);                               // checks if the entity is following a path
     int32 clearPath(lua_State* L);                                     // removes current pathfind and stops moving
     int32 checkDistance(lua_State*);                                   // Check Distacnce and returns distance number
-    int32 wait(lua_State* L);                                          // make the npc wait a number of ms and then back into roam
-    // int32 WarpTo(lua_State* L);           // warp to the given point
-    // int32 RoamAround(lua_State* L);       // pick a random point to walk to
-    // int32 LimitDistance(lua_State* L);    // limits the current path distance to given max distance
+    void  wait(sol::object const& milliseconds);                       // make the npc wait a number of ms and then back into roam
+    // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
+    // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
+    // int32 LimitDistance(lua_Stat* L);    // limits the current path distance to given max distance
 
     void openDoor(sol::object const& seconds);
     void closeDoor(sol::object const& seconds);
@@ -236,10 +236,10 @@ public:
     void   setModelId(uint16 modelId, uint8 slot);
     void   setCostume(uint16 costume);
     uint16 getCostume();
-    int32  costume2(lua_State*);     // set monstrosity costume
-    int32  getAnimation(lua_State*); // Get Entity Animation
-    int32  setAnimation(lua_State*); // Set Entity Animation
-    int32  AnimationSub(lua_State*); // get or set animationsub
+    int32  costume2(lua_State*);          // set monstrosity costume
+    uint8  getAnimation();                // Get Entity Animation
+    void   setAnimation(uint8 animation); // Set Entity Animation
+    int32  AnimationSub(lua_State*);      // get or set animationsub
 
     // Player Status
     uint8 getNation();             // Gets Nation of Entity
@@ -442,13 +442,13 @@ public:
     int32 removePartyEffect(lua_State*); // Removes Effect from all party members
 
     int32 getAlliance(lua_State* L);
-    int32 getAllianceSize(lua_State* L); // Get the size of an entity's alliance
+    uint8 getAllianceSize(); // Get the size of an entity's alliance
 
     int32 reloadParty(lua_State* L);
     int32 disableLevelSync(lua_State* L);
     int32 isLevelSync(lua_State* L);
 
-    int32 checkSoloPartyAlliance(lua_State*); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
+    uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
     int32 checkKillCredit(lua_State*);
 
@@ -496,14 +496,14 @@ public:
     int32 removeListener(lua_State* L);
     int32 triggerListener(lua_State* L);
 
-    int32 getEntity(lua_State* L);
+    auto  getEntity(uint16 targetID) -> CBaseEntity*;
     int32 getNearbyEntities(lua_State* L);
-    int32 canChangeState(lua_State* L);
+    bool  canChangeState();
 
     void wakeUp(); // wakes target if necessary
 
-    int32 recalculateStats(lua_State* L);
-    int32 checkImbuedItems(lua_State* L);
+    void recalculateStats();
+    bool checkImbuedItems();
 
     bool isDualWielding(); // Checks if the battle entity is dual wielding
 
@@ -718,15 +718,15 @@ public:
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
 
-    int32  getPool(lua_State* L); // Returns a mobs pool ID. If entity is not a mob, returns nil.
+    uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
     void   setDropID(uint32 dropID);
-    int32  addTreasure(lua_State*);      // Add item to directly to treasure pool
-    uint16 getStealItem();               // gets ItemID of droplist steal item from mob
-    int32  getDespoilItem(lua_State*);   // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
-    int32  getDespoilDebuff(lua_State*); // gets the status effect id to apply to the mob on successful despoil
-    bool   itemStolen();                 // sets mob's ItemStolen var = true
-    int16  getTHlevel();                 // Returns the Monster's current Treasure Hunter Tier
+    int32  addTreasure(lua_State*);         // Add item to directly to treasure pool
+    uint16 getStealItem();                  // gets ItemID of droplist steal item from mob
+    uint16 getDespoilItem();                // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
+    uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil
+    bool   itemStolen();                    // sets mob's ItemStolen var = true
+    int16  getTHlevel();                    // Returns the Monster's current Treasure Hunter Tier
 
     static void Register();
 };
