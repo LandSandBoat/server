@@ -1,3 +1,13 @@
+# General Guidelines
+
+* By contributing to Topaz Next, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide, and in our [Code of Conduct](https://github.com/topaz-next/topaz/blob/release/CODE_OF_CONDUCT.md).
+* Remember that "weaponizing" the code of conduct and purposely trying to use it to trap or harass others is in itself; harassment.
+* We are targetting the final released version of Final Fantasy XI. Until that version is released, we will be targetting the current retail release.
+* We do not support old client installs or DAT file modification. If you want to use or discuss such things, please do it elsewhere.
+* We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game we all love.
+* It is not acceptable to 'patch' a missing fight or mechanic to allow other content to be completed. For example: If a quest relies on fishing but fishing doesn't work; that quest should remain blocked until fishing is implemented.
+* Users are encouraged to modify their servers in any whatever way they see fit to achieve their desired experience, especially if that experience doesn't align with our goals.
+
 # Issue Report Contributions:
 
 * If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
