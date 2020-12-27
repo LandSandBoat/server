@@ -841,31 +841,23 @@ inline int32 CLuaBaseEntity::entityAnimationPacket(lua_State* L)
  *  Function: startEvent()
  *  Purpose : Starts an event (cutscene)
  *  Example : player:startEvent(4)
+ *          : player:startEvent(csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)
  *  Notes   : Cutscene ID must be associated with the zone
+ *            https://sol2.readthedocs.io/en/latest/api/variadic_args.html
+ *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::startEvent(lua_State* L)
+void CLuaBaseEntity::startEvent(sol::object const& EventIDObj, sol::variadic_args va)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
 
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (!PChar)
     {
         ShowError("CLuaBaseEntity::startEvent: Could not start event, Base Entity is not a Character Entity.\n");
-        return 0;
+        return;
     }
 
-    int32 n = lua_gettop(L);
-
-    if (n > 10)
-    {
-        ShowError("CLuaBaseEntity::startEvent: Could not start event, Lack of arguments.\n");
-        lua_settop(L, -n);
-        return 0;
-    }
     if (PChar->animation == ANIMATION_HEALING)
     {
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
@@ -876,66 +868,40 @@ inline int32 CLuaBaseEntity::startEvent(lua_State* L)
         PChar->PPet->PAI->Disengage();
     }
 
-    uint16 EventID = (uint16)lua_tointeger(L, 1);
+    std::vector<uint32> args(8, 0);
+    int32 textTable = -1;
 
-    uint32 param0    = 0;
-    uint32 param1    = 0;
-    uint32 param2    = 0;
-    uint32 param3    = 0;
-    uint32 param4    = 0;
-    uint32 param5    = 0;
-    uint32 param6    = 0;
-    uint32 param7    = 0;
-    int16  textTable = -1;
+    uint8 count = 0;
+    for (auto v : va)
+    {
+        if (v.get_type() == sol::type::nil)
+        {
+            break;
+        }
 
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-    {
-        param0 = (uint32)lua_tointeger(L, 2);
-    }
-    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-    {
-        param1 = (uint32)lua_tointeger(L, 3);
-    }
-    if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
-    {
-        param2 = (uint32)lua_tointeger(L, 4);
-    }
-    if (!lua_isnil(L, 5) && lua_isnumber(L, 5))
-    {
-        param3 = (uint32)lua_tointeger(L, 5);
-    }
-    if (!lua_isnil(L, 6) && lua_isnumber(L, 6))
-    {
-        param4 = (uint32)lua_tointeger(L, 6);
-    }
-    if (!lua_isnil(L, 7) && lua_isnumber(L, 7))
-    {
-        param5 = (uint32)lua_tointeger(L, 7);
-    }
-    if (!lua_isnil(L, 8) && lua_isnumber(L, 8))
-    {
-        param6 = (uint32)lua_tointeger(L, 8);
-    }
-    if (!lua_isnil(L, 9) && lua_isnumber(L, 9))
-    {
-        param7 = (uint32)lua_tointeger(L, 9);
-    }
-    if (!lua_isnil(L, 10) && lua_isnumber(L, 10))
-    {
-        textTable = (int16)lua_tointeger(L, 10);
+        if (count < 8)
+        {
+            uint32 value = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
+            args[count++] = value;
+        }
+        else
+        {
+            int32 value = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
+            textTable = value;
+        }
     }
 
-    PChar->pushPacket(new CEventPacket(PChar, EventID, n - 1, param0, param1, param2, param3, param4, param5, param6, param7, textTable));
+    PChar->pushPacket(new CEventPacket(PChar, EventIDObj.as<uint32>(), count,
+                                       args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7],
+                                       textTable));
 
-    // если требуется вернуть фиктивный результат, то делаем это
-    if (!lua_isnil(L, 10) && lua_isnumber(L, 10))
+    // if you want to return a dummy result, then do it
+    if (textTable != -1)
     {
-        PChar->m_event.Option = (int32)lua_tointeger(L, 10);
+        PChar->m_event.Option = textTable;
     }
 
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_IN_CS;
-
-    return 0;
 }
 
 /************************************************************************
@@ -1192,6 +1158,7 @@ void CLuaBaseEntity::release()
         releaseType = RELEASE_TYPE::SKIPPING;
         PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
     }
+
     PChar->pushPacket(new CReleasePacket(PChar, releaseType));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
 }
@@ -13717,7 +13684,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(entityVisualPacket),
     // SOL_REGISTER(entityAnimationPacket),
 
-    // SOL_REGISTER(startEvent),
+    SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
     // SOL_REGISTER(startEventString),
     // SOL_REGISTER(updateEvent),
     // SOL_REGISTER(updateEventString),

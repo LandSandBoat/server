@@ -70,7 +70,7 @@ public:
     int32 entityVisualPacket(lua_State* L);
     int32 entityAnimationPacket(lua_State* L);
 
-    int32 startEvent(lua_State*);       // Begins Event
+    void  startEvent(sol::object const& EventIDObj, sol::variadic_args va);
     int32 startEventString(lua_State*); // Begins Event with string param (0x33 packet)
     void  updateEvent(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
                       sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7); // Updates event

@@ -52,8 +52,8 @@ struct jobs_t
 
 struct event_t
 {
-    int32 EventID; // номер события
-    int32 Option;  // фиктивный возвращаемый результат
+    int32 EventID;
+    int32 Option;  // dummy return result
 
     CBaseEntity* Target; // инициатор события
 
