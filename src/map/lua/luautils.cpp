@@ -322,50 +322,28 @@ namespace luautils
         }
     }
 
-    int32 GetNPCByID(lua_State* L)
+    std::shared_ptr<CLuaBaseEntity> GetNPCByID(uint32 npcid, sol::object const& instanceObj)
     {
         TracyZoneScoped;
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+
+        CInstance* PInstance = nullptr;
+        if (instanceObj.is<CLuaInstance>())
         {
-            uint32 npcid = (uint32)lua_tointeger(L, 1);
-
-            CInstance* PInstance = nullptr;
-
-            if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
-            {
-                // CLuaInstance* PLuaInstance = Lunar<CLuaInstance>::check(L, 2);
-                // PInstance                  = PLuaInstance->GetInstance();
-            }
-
-            CBaseEntity* PNpc = nullptr;
-
-            if (PInstance)
-            {
-                PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
-            }
-            else
-            {
-                PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
-            }
-
-            if (PNpc == nullptr)
-            {
-                lua_pushnil(L);
-            }
-            else
-            {
-                lua_getglobal(L, "CBaseEntity");
-                lua_pushstring(L, "new");
-                lua_gettable(L, -2);
-                lua_insert(L, -2);
-                lua_pushlightuserdata(L, (void*)PNpc);
-                lua_pcall(L, 2, 1, 0);
-            }
-
-            return 1;
+            PInstance = instanceObj.as<CLuaInstance>().GetInstance();
         }
-        lua_pushnil(L);
-        return 1;
+
+        CBaseEntity* PNpc{ nullptr }
+        ;
+        if (PInstance)
+        {
+            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
+        }
+        else
+        {
+            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
+        }
+
+        return std::make_shared<CLuaBaseEntity>(PNpc);
     }
 
     /************************************************************************
@@ -374,10 +352,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::shared_ptr<CLuaBaseEntity> GetMobByID(uint32 mobid, CLuaInstance* PLuaInstance)
+    std::shared_ptr<CLuaBaseEntity> GetMobByID(uint32 mobid, sol::object const& instanceObj)
     {
         TracyZoneScoped;
-        CInstance*   PInstance = PLuaInstance->GetInstance();
+
+        CInstance* PInstance = nullptr;
+        if (instanceObj.is<CLuaInstance>())
+        {
+            PInstance = instanceObj.as<CLuaInstance>().GetInstance();
+        }
+
         CBaseEntity* PMob{ nullptr };
 
         if (PInstance)
@@ -836,69 +820,56 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Spawn a mob using mob ID.                                            *
+     *  Spawn a mob using mob ID. Returns that mob.                          *
      *                                                                       *
      ************************************************************************/
-    int32 SpawnMob(lua_State* L)
+    std::shared_ptr<CLuaBaseEntity> SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3)
     {
-        /*
         TracyZoneScoped;
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+
+        CMobEntity* PMob = nullptr;
+
+        if (arg2.is<CLuaInstance>())
         {
-            uint32 mobid = (uint32)lua_tointeger(L, 1);
+            auto PInstance = arg2.as<CLuaInstance>().GetInstance();
+            auto PEntity   = PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB);
+            PMob           = dynamic_cast<CMobEntity*>(PEntity);
+        }
+        else if (((mobid >> 12) & 0x0FFF) < MAX_ZONEID)
+        {
+            PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB));
+        }
 
-            CMobEntity* PMob = nullptr;
-
-            if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
+        if (PMob != nullptr)
+        {
+            if (arg2.is<uint32>())
             {
-                //CLuaInstance* PLuaInstance = Lunar<CLuaInstance>::check(L, 2);
-                //PMob                       = (CMobEntity*)PLuaInstance->GetInstance()->GetEntity(mobid & 0xFFF, TYPE_MOB);
+                PMob->SetDespawnTime(std::chrono::seconds(arg2.as<uint32>()));
             }
-            else if (((mobid >> 12) & 0x0FFF) < MAX_ZONEID)
-            {
-                PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-            }
-            if (PMob != nullptr)
-            {
-                if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-                {
-                    PMob->SetDespawnTime(std::chrono::seconds(lua_tointeger(L, 2)));
-                }
 
-                if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-                {
-                    PMob->m_RespawnTime  = (uint32)lua_tointeger(L, 3) * 1000;
-                    PMob->m_AllowRespawn = true;
-                }
-                else
-                {
-                    if (!PMob->PAI->IsSpawned())
-                    {
-                        PMob->Spawn();
-                    }
-                    else
-                    {
-                        ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
-                    }
-                }
-                lua_getglobal(L, "CBaseEntity");
-                lua_pushstring(L, "new");
-                lua_gettable(L, -2);
-                lua_insert(L, -2);
-                lua_pushlightuserdata(L, (void*)PMob);
-                lua_pcall(L, 2, 1, 0);
-                return 1;
+            if (arg3.is<uint32>())
+            {
+                PMob->m_RespawnTime  = arg3.as<uint32>() * 1000;
+                PMob->m_AllowRespawn = true;
             }
             else
             {
-                ShowDebug(CL_RED "SpawnMob: mob <%u> not found\n" CL_RESET, mobid);
+                if (!PMob->PAI->IsSpawned())
+                {
+                    PMob->Spawn();
+                }
+                else
+                {
+                    ShowDebug(CL_CYAN "SpawnMob: %u <%s> is already spawned\n" CL_RESET, PMob->id, PMob->GetName());
+                }
             }
-            return 0;
         }
-        lua_pushnil(L);
-        return 1;
-        */
-        return 0;
+        else
+        {
+            ShowDebug(CL_RED "SpawnMob: mob <%u> not found\n" CL_RESET, mobid);
+        }
+
+        return std::make_shared<CLuaBaseEntity>(PMob);
     }
 
     /************************************************************************
@@ -1388,7 +1359,6 @@ namespace luautils
 
     int32 OnZoneInitialise(uint16 ZoneID)
     {
-        /*
         CZone* PZone = zoneutils::GetZone(ZoneID);
 
         lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
@@ -1406,7 +1376,7 @@ namespace luautils
             ShowError("luautils::onInitialize: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -1443,8 +1413,7 @@ namespace luautils
 
     int32 OnZoneIn(CCharEntity* PChar)
     {
-
-        lua.script_file(fmt::format("scripts/zones/{0}/Zone.lua",
+        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua",
                        PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName()));
 
         if (!lua["onZoneIn"].valid())
@@ -1460,29 +1429,24 @@ namespace luautils
             return -1;
         }
 
-        return 0;
+        return result;
     }
 
     void AfterZoneIn(CBaseEntity* PChar)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/Zone.lua", PChar->loc.zone->GetName());
+        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName()));
 
-        if (prepFile(File, "afterZoneIn"))
+        if (!lua["afterZoneIn"].valid())
         {
             return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = lua["afterZoneIn"](CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::afterZoneIn: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return;
+            sol::error err = result;
+            ShowError("luautils::afterZoneIn: %s\n", err.what());
         }
-        */
     }
 
     /************************************************************************
@@ -1493,7 +1457,6 @@ namespace luautils
 
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion)
     {
-        /*
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1512,23 +1475,20 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        if (prepFile((int8*)filename.c_str(), "onRegionEnter"))
+        lua.script_file(fmt::format(filename));
+
+        if (!lua["onRegionEnter"].valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-        CLuaRegion LuaRegion(PRegion);
-        //Lunar<CLuaRegion>::push(LuaHandle, &LuaRegion);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = lua["onRegionEnter"](CLuaBaseEntity(PChar), CLuaRegion(PRegion));
         {
-            ShowError("luautils::onRegionEnter: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onRegionEnter: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -1540,7 +1500,6 @@ namespace luautils
 
     int32 OnRegionLeave(CCharEntity* PChar, CRegion* PRegion)
     {
-        /*
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1558,23 +1517,20 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        if (prepFile((int8*)filename.c_str(), "onRegionLeave"))
+        lua.script_file(fmt::format(filename));
+
+        if (!lua["onRegionLeave"].valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-        CLuaRegion LuaRegion(PRegion);
-        // Lunar<CLuaRegion>::push(LuaHandle, &LuaRegion);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = lua["onRegionLeave"](CLuaBaseEntity(PChar), CLuaRegion(PRegion));
         {
-            ShowError("luautils::onRegionLeave: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onRegionLeave: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 

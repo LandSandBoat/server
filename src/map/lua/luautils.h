@@ -207,8 +207,8 @@ namespace luautils
     }
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command); // temporary solution for geysers in Dangruf_Wadi
-    int32 GetNPCByID(lua_State*);             // Returns NPC By Id
-    auto  GetMobByID(uint32 mobid, CLuaInstance* PLuaInstance) -> std::shared_ptr<CLuaBaseEntity>;
+    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>; // Returns NPC By Id
+    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>;
     int32 WeekUpdateConquest(lua_State*);
     int32 GetRegionOwner(lua_State*);     // узнаем страну, владеющую текущим регионом
     int32 GetRegionInfluence(lua_State*); // Return influence graphics
@@ -223,13 +223,13 @@ namespace luautils
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
-    int32 SpawnMob(lua_State*);                                                 // Spawn Mob By Mob Id - NMs, BCNM...
-    int32 DespawnMob(lua_State*);                                               // Despawn (Fade Out) Mob By Id
-    int32 GetPlayerByName(lua_State*);                                          // Gets Player ref from a name supplied
-    int32 GetPlayerByID(lua_State*);                                            // Gets Player ref from an Id supplied
+    auto  SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    int32 DespawnMob(lua_State*);      // Despawn (Fade Out) Mob By Id
+    int32 GetPlayerByName(lua_State*); // Gets Player ref from a name supplied
+    int32 GetPlayerByID(lua_State*);   // Gets Player ref from an Id supplied
     int32 GetMagianTrial(lua_State*);
     int32 GetMagianTrialsWithParent(lua_State* L);
-    int32 GetMobAction(lua_State*);                                             // Get Mobs current action
+    int32 GetMobAction(lua_State*);    // Get Mobs current action
     int32 JstMidnight(lua_State* L);
     int32 VanadielTime(lua_State*);            // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     int32 VanadielTOTD(lua_State*);            // текущее игровое время суток
