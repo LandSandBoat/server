@@ -140,7 +140,6 @@ namespace luautils
         tpz_core.set_function("despawnMob", &luautils::DespawnMob);
         tpz_core.set_function("getPlayerByName", &luautils::GetPlayerByName);
         tpz_core.set_function("getPlayerByID", &luautils::GetPlayerByID);
-        tpz_core.set_function("getMobAction", &luautils::GetMobAction);
         tpz_core.set_function("jstMidnight", &luautils::JstMidnight);
         tpz_core.set_function("vanadielTime", &luautils::VanadielTime);
         tpz_core.set_function("vanadielTOTD", &luautils::VanadielTOTD);
@@ -1153,81 +1152,6 @@ namespace luautils
         {
             lua_pushnil(L);
         }
-        return 1;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  ** DEPRECATED **                                                     *
-     *  Get Current Mob Action by Mob ID.                                    *
-     *                                                                       *
-     ************************************************************************/
-
-    int32 GetMobAction(lua_State* L)
-    {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-        uint32 mobid = (uint32)lua_tointeger(L, -1);
-
-        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET);
-        if (PMob != nullptr)
-        {
-            if (PMob->PAI->IsStateStackEmpty())
-            {
-                lua_pushinteger(L, 16);
-            }
-            else if (PMob->PAI->IsCurrentState<CRespawnState>())
-            {
-                lua_pushinteger(L, 0);
-            }
-            else if (PMob->PAI->IsCurrentState<CAttackState>())
-            {
-                lua_pushinteger(L, 1);
-            }
-            else if (PMob->PAI->IsCurrentState<CRangeState>())
-            {
-                lua_pushinteger(L, 12);
-            }
-            else if (PMob->PAI->IsCurrentState<CWeaponSkillState>())
-            {
-                lua_pushinteger(L, 3);
-            }
-            else if (PMob->PAI->IsCurrentState<CMagicState>())
-            {
-                lua_pushinteger(L, 30);
-            }
-            else if (PMob->PAI->IsCurrentState<CItemState>())
-            {
-                lua_pushinteger(L, 28);
-            }
-            else if (PMob->PAI->IsCurrentState<CAbilityState>())
-            {
-                lua_pushinteger(L, 6);
-            }
-            else if (PMob->PAI->IsCurrentState<CInactiveState>())
-            {
-                lua_pushinteger(L, 27);
-            }
-            else if (PMob->PAI->IsCurrentState<CDeathState>())
-            {
-                lua_pushinteger(L, 22);
-            }
-            else if (PMob->PAI->IsCurrentState<CRaiseState>())
-            {
-                lua_pushinteger(L, 37);
-            }
-            else if (PMob->PAI->IsCurrentState<CMobSkillState>())
-            {
-                lua_pushinteger(L, 34);
-            }
-            else
-            {
-                lua_pushnil(L);
-            }
-            return 1;
-        }
-        ShowError(CL_RED "luautils::GetMobAction: mob <%u> was not found\n" CL_RESET, mobid);
-        lua_pushnil(L);
         return 1;
     }
 

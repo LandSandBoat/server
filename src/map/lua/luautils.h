@@ -229,7 +229,6 @@ namespace luautils
     int32 GetPlayerByID(lua_State*);   // Gets Player ref from an Id supplied
     int32 GetMagianTrial(lua_State*);
     int32 GetMagianTrialsWithParent(lua_State* L);
-    int32 GetMobAction(lua_State*);    // Get Mobs current action
     int32 JstMidnight(lua_State* L);
     int32 VanadielTime(lua_State*);            // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     int32 VanadielTOTD(lua_State*);            // текущее игровое время суток
