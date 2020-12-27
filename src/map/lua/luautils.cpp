@@ -1460,66 +1460,41 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Персонаж обращается к какому-либо npc. Пытаемся отреагировать на     *
-     *  его действие                                                         *
+     * The character refers to some npc. Trying to respond to its action.    *
      *                                                                       *
      ************************************************************************/
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     {
-        /*
         TracyZoneScoped;
-        lua_prepscript("scripts/zones/%s/npcs/%s.lua", PChar->loc.zone->GetName(), PNpc->GetName());
+
+        auto filename = fmt::format("scripts/zones/{}/npcs/{}.lua", PChar->loc.zone->GetName(), PNpc->GetName());
 
         PChar->m_event.reset();
         PChar->m_event.Target = PNpc;
-        PChar->m_event.Script.insert(0, (const char*)File);
+        PChar->m_event.Script.insert(0, filename.c_str());
+
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
-        lua_pushnil(LuaHandle);
-        lua_setglobal(LuaHandle, "onTrigger");
+        lua.script_file(filename);
 
-        auto ret = luaL_loadfile(LuaHandle, (const char*)File);
-        if (ret)
+        sol::function onTrigger = lua["onTrigger"];
+
+        if (!onTrigger.valid())
         {
-            ShowWarning("luautils::%s: %s\n", "onTrigger", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            ShowWarning("luautils::onTrigger\n");
             return -1;
         }
 
-        ret = lua_pcall(LuaHandle, 0, 0, 0);
-        if (ret)
+        sol::protected_function_result result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc)); 
+        if (!result.valid())
         {
-            ShowError("luautils::%s: %s\n", "onTrigger", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onTrigger: %s\n", err.what());
             return -1;
         }
 
-        lua_getglobal(LuaHandle, "onTrigger");
-        if (lua_isnil(LuaHandle, -1))
-        {
-            lua_pop(LuaHandle, 1);
-            return -1;
-        }
-
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaBaseEntityTarg(PNpc);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntityTarg);
-
-        if (lua_pcall(LuaHandle, 2, 1, 0))
-        {
-            ShowError("luautils::onTrigger: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
-        }
-
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : 0;
     }
 
     /************************************************************************
