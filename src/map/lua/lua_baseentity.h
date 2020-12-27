@@ -289,10 +289,10 @@ public:
     int32 addJobTraits(lua_State*);                   // Add job traits
 
     // Player Titles and Fame
-    uint16 getTitle(); // Gets character's title
+    uint16 getTitle();
     bool   hasTitle(uint16 titleID);
     void   addTitle(uint16 titleID);
-    void   setTitle(uint16 titleID); // Sets character's title
+    void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
     int32 getFame(lua_State*);      // Gets Fame
@@ -307,19 +307,19 @@ public:
     void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
     void   setRankPoints(uint32 rankpoints); // Set Current Rank points
 
-    int32 addQuest(lua_State*);          // Add Quest to Entity Quest Log
-    int32 delQuest(lua_State*);          // Remove quest from quest log (should be used for debugging only)
-    int32 getQuestStatus(lua_State*);    // Get Quest Status
-    int32 hasCompletedQuest(lua_State*); // Checks if quest has been completed
-    int32 completeQuest(lua_State*);     // Set a quest status to complete
+    void  addQuest(uint8 questLogID, uint16 questID);          // Add Quest to Entity Quest Log
+    void  delQuest(uint8 questLogID, uint16 questID);          // Remove quest from quest log (should be used for debugging only)
+    uint8 getQuestStatus(uint8 questLogID, uint16 questID);    // Get Quest Status
+    bool  hasCompletedQuest(uint8 questLogID, uint16 questID); // Checks if quest has been completed
+    void  completeQuest(uint8 questLogID, uint16 questID);     // Set a quest status to complete
 
-    void  addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
-    int32 delMission(lua_State*);                                    // Delete Mission from Mission Log
-    int32 getCurrentMission(lua_State*);                             // Gets the current mission
-    bool  hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
-    int32 completeMission(lua_State*);                               // Complete Mission
-    int32 setMissionLogEx(lua_State*);                               // Sets mission log extra data to correctly track progress in branching missions.
-    int32 getMissionLogEx(lua_State*);                               // Gets mission log extra data.
+    void   addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
+    void   delMission(uint8 missionLogID, uint16 missionID);          // Delete Mission from Mission Log
+    uint16 getCurrentMission(uint8 missionLogID);                     // Gets the current mission
+    bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
+    void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
+    int32  setMissionLogEx(lua_State*);                               // Sets mission log extra data to correctly track progress in branching missions.
+    int32  getMissionLogEx(lua_State*);                               // Gets mission log extra data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag

@@ -5738,22 +5738,11 @@ void CLuaBaseEntity::setRankPoints(uint32 rankpoints)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::addQuest(lua_State* L)
+void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "quest_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CCharEntity* PChar      = (CCharEntity*)m_PBaseEntity;
-    uint8        questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16       questID    = (uint16)lua_tointeger(L, 2);
+    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5772,7 +5761,6 @@ inline int32 CLuaBaseEntity::addQuest(lua_State* L)
     {
         ShowError(CL_RED "Lua::addQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -5782,22 +5770,11 @@ inline int32 CLuaBaseEntity::addQuest(lua_State* L)
  *  Notes   : Doesn't delete any player variables associated with quest
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delQuest(lua_State* L)
+void CLuaBaseEntity::delQuest(uint8 questLogID, uint16 questID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "quest_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CCharEntity* PChar      = (CCharEntity*)m_PBaseEntity;
-    uint8        questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16       questID    = (uint16)lua_tointeger(L, 2);
+    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5819,46 +5796,33 @@ inline int32 CLuaBaseEntity::delQuest(lua_State* L)
     {
         ShowError(CL_RED "Lua::delQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
     }
-    return 0;
 }
 
 /************************************************************************
  *  Function: getQuestStatus()
  *  Purpose : Gets the current quest status of the player
  *  Example : player:getQuestStatus(WINDURST,MAKING_THE_GRADE)
- *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getQuestStatus(lua_State* L)
+uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "quest_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    uint8  questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 questID    = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
-        uint8 current  = ((CCharEntity*)m_PBaseEntity)->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
-        uint8 complete = ((CCharEntity*)m_PBaseEntity)->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
+        auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
+        uint8 current  = PChar->m_questLog[questLogID].current[questID / 8] & (1 << (questID % 8));
+        uint8 complete = PChar->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
 
-        lua_pushinteger(L, (complete != 0 ? 2 : (current != 0 ? 1 : 0)));
-        return 1;
+        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
     }
     else
     {
         ShowError(CL_RED "Lua::getQuestStatus: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
     }
-    lua_pushnil(L);
-    return 1;
+
+    TPZ_DEBUG_BREAK_IF(true); // We shouldn't get here.  If you did, fix the lua call.
+    return 0;
 }
 
 /************************************************************************
@@ -5867,32 +5831,19 @@ inline int32 CLuaBaseEntity::getQuestStatus(lua_State* L)
  *  Example : if (player:hasCompletedQuest(JEUNO,BEYOND_INFINITY)) then
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasCompletedQuest(lua_State* L)
+bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "quest_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    uint8  questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 questID    = (uint16)lua_tointeger(L, 2);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
-        uint8 complete = ((CCharEntity*)m_PBaseEntity)->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
+        uint8 complete = static_cast<CCharEntity*>(m_PBaseEntity)->m_questLog[questLogID].complete[questID / 8] & (1 << (questID % 8));
 
-        lua_pushboolean(L, (complete != 0));
-        return 1;
+        return complete != 0;
     }
+
     ShowError(CL_RED "Lua::hasCompletedQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
-    lua_pushboolean(L, false);
-    return 1;
+    return false;
 }
 
 /************************************************************************
@@ -5902,22 +5853,11 @@ inline int32 CLuaBaseEntity::hasCompletedQuest(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::completeQuest(lua_State* L)
+void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "quest_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    CCharEntity* PChar      = (CCharEntity*)m_PBaseEntity;
-    uint8        questLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16       questID    = (uint16)lua_tointeger(L, 2);
+    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (questLogID < MAX_QUESTAREA && questID < MAX_QUESTID)
     {
@@ -5938,7 +5878,6 @@ inline int32 CLuaBaseEntity::completeQuest(lua_State* L)
     {
         ShowError(CL_RED "Lua::completeQuest: questLogID %i or QuestID %i is invalid\n" CL_RESET, questLogID, questID);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -5968,7 +5907,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, MissionID);
+        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
     }
 }
 
@@ -5980,46 +5919,33 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
  *          : This function no longer accepts tables!
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::delMission(lua_State* L)
+void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
+    if (missionLogID < MAX_MISSIONAREA && missionID < MAX_MISSIONID)
     {
-        lua_getfield(L, 1, "mission_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8  missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 MissionID    = (uint16)lua_tointeger(L, 2);
+        uint16 current  = PChar->m_missionLog[missionLogID].current;
+        bool   complete = (missionLogID == MISSION_COP || missionID >= 64) ? false : PChar->m_missionLog[missionLogID].complete[missionID];
 
-    if (missionLogID < MAX_MISSIONAREA && MissionID < MAX_MISSIONID)
-    {
-        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-        auto current  = (uint16)PChar->m_missionLog[missionLogID].current;
-        bool complete = (missionLogID == MISSION_COP || MissionID >= 64) ? false : PChar->m_missionLog[missionLogID].complete[MissionID];
-
-        if (current == MissionID)
+        if (current == missionID)
         {
             PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
         }
         if (complete)
         {
-            PChar->m_missionLog[missionLogID].complete[MissionID] = false;
+            PChar->m_missionLog[missionLogID].complete[missionID] = false;
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_COMPLETE));
         }
         charutils::SaveMissionsList(PChar);
     }
     else
     {
-        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, MissionID);
+        ShowError(CL_RED "Lua::delMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -6029,31 +5955,21 @@ inline int32 CLuaBaseEntity::delMission(lua_State* L)
  *  Notes   : Specify the area to pass a Lua table object
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCurrentMission(lua_State* L)
+uint16 CLuaBaseEntity::getCurrentMission(uint8 missionLogID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
-    if (lua_istable(L, 1))
-    {
-        lua_getfield(L, 1, "mission_log");
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    uint8  missionLogID = (uint8)lua_tointeger(L, -1);
     uint16 MissionID    = 0;
 
     if (missionLogID < MAX_MISSIONAREA)
     {
-        MissionID = (uint16)((CCharEntity*)m_PBaseEntity)->m_missionLog[missionLogID].current;
+        MissionID = static_cast<CCharEntity*>(m_PBaseEntity)->m_missionLog[missionLogID].current;
     }
     else
     {
         ShowError(CL_RED "Lua::getCurrentMission: missionLogID %i is invalid\n" CL_RESET, missionLogID);
     }
-    lua_pushinteger(L, MissionID);
-    return 1;
+    return MissionID;
 }
 
 /************************************************************************
@@ -6090,36 +6006,24 @@ bool CLuaBaseEntity::hasCompletedMission(uint8 missionLogID, uint16 missionID)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::completeMission(lua_State* L)
+void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || (!lua_isnumber(L, 1) && !lua_istable(L, 1)));
-    if (lua_istable(L, 1))
+    if (missionLogID < MAX_MISSIONAREA && missionID < MAX_MISSIONID)
     {
-        lua_getfield(L, 1, "mission_log");
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-    }
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8  missionLogID = (uint8)lua_tointeger(L, lua_isnumber(L, 1) ? 1 : -1);
-    uint16 MissionID    = (uint16)lua_tointeger(L, 2);
-
-    if (missionLogID < MAX_MISSIONAREA && MissionID < MAX_MISSIONID)
-    {
-        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-        if (PChar->m_missionLog[missionLogID].current != MissionID)
+        if (PChar->m_missionLog[missionLogID].current != missionID)
         {
             ShowWarning(CL_YELLOW "Lua::completeMission: can't complete non current mission\n" CL_RESET, missionLogID);
         }
         else
         {
             PChar->m_missionLog[missionLogID].current = missionLogID > 2 ? 0 : -1;
-            if ((missionLogID != MISSION_COP) && (MissionID < 64))
+            if ((missionLogID != MISSION_COP) && (missionID < 64))
             {
-                PChar->m_missionLog[missionLogID].complete[MissionID] = true;
+                PChar->m_missionLog[missionLogID].complete[missionID] = true;
                 PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_COMPLETE));
             }
             PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
@@ -6130,9 +6034,8 @@ inline int32 CLuaBaseEntity::completeMission(lua_State* L)
     }
     else
     {
-        ShowError(CL_RED "Lua::completeMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, MissionID);
+        ShowError(CL_RED "Lua::completeMission: missionLogID %i or Mission %i is invalid\n" CL_RESET, missionLogID, missionID);
     }
-    return 0;
 }
 
 /************************************************************************
@@ -13523,17 +13426,17 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addRankPoints", CLuaBaseEntity::addRankPoints);
     SOL_REGISTER("setRankPoints", CLuaBaseEntity::setRankPoints);
 
-    // SOL_REGISTER(addQuest),
-    // SOL_REGISTER(delQuest),
-    // SOL_REGISTER(getQuestStatus),
-    // SOL_REGISTER(hasCompletedQuest),
-    // SOL_REGISTER(completeQuest),
+    SOL_REGISTER("addQuest", CLuaBaseEntity::addQuest);
+    SOL_REGISTER("delQuest", CLuaBaseEntity::delQuest);
+    SOL_REGISTER("getQuestStatus", CLuaBaseEntity::getQuestStatus);
+    SOL_REGISTER("hasCompletedQuest", CLuaBaseEntity::hasCompletedQuest);
+    SOL_REGISTER("completeQuest", CLuaBaseEntity::completeQuest);
 
-    // SOL_REGISTER(addMission),
-    // SOL_REGISTER(delMission),
-    // SOL_REGISTER(getCurrentMission),
-    // SOL_REGISTER(hasCompletedMission),
-    // SOL_REGISTER(completeMission),
+    SOL_REGISTER("addMission", CLuaBaseEntity::addMission);
+    SOL_REGISTER("delMission", CLuaBaseEntity::delMission);
+    SOL_REGISTER("getCurrentMission", CLuaBaseEntity::getCurrentMission);
+    SOL_REGISTER("hasCompletedMission", CLuaBaseEntity::hasCompletedMission);
+    SOL_REGISTER("completeMission", CLuaBaseEntity::completeMission);
     // SOL_REGISTER(setMissionLogEx),
     // SOL_REGISTER(getMissionLogEx),
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
