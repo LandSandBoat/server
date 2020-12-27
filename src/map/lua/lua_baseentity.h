@@ -27,6 +27,7 @@
 
 class CBaseEntity;
 class CCharEntity;
+class CLuaInstance;
 
 class CLuaBaseEntity
 {
@@ -192,10 +193,10 @@ public:
     bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
     void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
 
-    void  createShop(uint8 size, sol::object const& arg1); // Prepare the container for work of shop ??
-    int32 addShopItem(lua_State*);                         // Adds item to shop container (16 max)
-    int32 getCurrentGPItem(lua_State*);                    // Gets current GP item id and max points
-    int32 breakLinkshell(lua_State*);                      // Breaks all pearls/sacks
+    void createShop(uint8 size, sol::object const& arg1);                                            // Prepare the container for work of shop ??
+    void addShopItem(uint16 itemID, uint32 price, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
+    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                              // Gets current GP item id and max points
+    bool breakLinkshell(std::string const& lsname);                                                  // Breaks all pearls/sacks
 
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
@@ -284,8 +285,8 @@ public:
     void  setsLevel(uint8 slevel);  // sets the character's level
     uint8 getLevelCap();            // genkai
     void  setLevelCap(uint8 cap);
-    int32 levelRestriction(lua_State*); // Establish/return current level restriction
-    int32 addJobTraits(lua_State*);     // Add job traits
+    uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
+    int32 addJobTraits(lua_State*);                   // Add job traits
 
     // Player Titles and Fame
     uint16 getTitle(); // Gets character's title
@@ -312,13 +313,13 @@ public:
     int32 hasCompletedQuest(lua_State*); // Checks if quest has been completed
     int32 completeQuest(lua_State*);     // Set a quest status to complete
 
-    int32 addMission(lua_State*);          // Add Mission
-    int32 delMission(lua_State*);          // Delete Mission from Mission Log
-    int32 getCurrentMission(lua_State*);   // Gets the current mission
-    int32 hasCompletedMission(lua_State*); // Checks if mission has been completed
-    int32 completeMission(lua_State*);     // Complete Mission
-    int32 setMissionLogEx(lua_State*);     // Sets mission log extra data to correctly track progress in branching missions.
-    int32 getMissionLogEx(lua_State*);     // Gets mission log extra data.
+    void  addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
+    int32 delMission(lua_State*);                                    // Delete Mission from Mission Log
+    int32 getCurrentMission(lua_State*);                             // Gets the current mission
+    bool  hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
+    int32 completeMission(lua_State*);                               // Complete Mission
+    int32 setMissionLogEx(lua_State*);                               // Sets mission log extra data to correctly track progress in branching missions.
+    int32 getMissionLogEx(lua_State*);                               // Gets mission log extra data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
@@ -378,7 +379,7 @@ public:
     int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);         // Subtract hp of Entity
     int32 takeDamage(lua_State*);      // Takes damage from the provided attacker
-    int32 hideHP(lua_State* L);
+    void  hideHP(bool value);
 
     int32 getMP();
     int32 getMaxMP();
@@ -452,11 +453,11 @@ public:
     int32 checkKillCredit(lua_State*);
 
     // Instances
-    int32 getInstance(lua_State* L);
-    int32 setInstance(lua_State* L);
-    int32 createInstance(lua_State* L);
-    int32 instanceEntry(lua_State* L);
-    int32 isInAssault(lua_State*); // If player is in a Instanced Assault Dungeon returns true
+    auto getInstance() -> CInstance*;
+    void setInstance(CLuaInstance* PLuaInstance);
+    void createInstance(uint8 instanceID, uint16 zoneID);
+    void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
+    // int32 isInAssault(lua_State*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 
     uint16 getConfrontationEffect();
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
@@ -554,8 +555,9 @@ public:
     bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Removes a latent effect
 
     void   fold();
-    int32  doWildCard(lua_State*);
-    int32  addCorsairRoll(lua_State*); // Adds corsair roll effect
+    void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);
+    bool   addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 effectID, uint16 power, uint32 tick, uint32 duration,
+                          sol::object const& arg6, sol::object const& arg7, sol::object const& arg8); // Adds corsair roll effect
     bool   hasCorsairEffect();
     bool   hasBustEffect(uint16 id); // Checks to see if a character has a specified busted corsair roll
     uint8  numBustEffects();         // Gets the number of bust effects on the player
@@ -627,16 +629,16 @@ public:
     int32  getMaster(lua_State*);
     uint8  getPetElement();
 
-    auto  getPetName() -> const char*;
-    int32 setPetName(lua_State*);
+    auto getPetName() -> const char*;
+    void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
 
     float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
     void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
 
-    int32 petAttack(lua_State*); // Despawns Pet
-    int32 petAbility(lua_State*);
-    void  petRetreat();
-    void  familiar();
+    void petAttack(CLuaBaseEntity* PEntity); // Despawns Pet
+    void petAbility(uint16 abilityID);       // Function exists, but is not implemented.  Warning will be displayed.
+    void petRetreat();
+    void familiar();
 
     void addPetMod(uint16 modID, int16 amount);
     void setPetMod(uint16 modID, int16 amount);
@@ -707,9 +709,9 @@ public:
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    int32 castSpell(lua_State*);     // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    int32 useJobAbility(lua_State*); // forces a job ability use (players/pets only)
-    int32 useMobAbility(lua_State*); // forces a mob to use a mobability (parameter = skill ID)
+    int32 castSpell(lua_State*);                                 // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void  useJobAbility(uint16 skillID, sol::object const& pet); // forces a job ability use (players/pets only)
+    int32 useMobAbility(lua_State*);                             // forces a mob to use a mobability (parameter = skill ID)
     bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);
