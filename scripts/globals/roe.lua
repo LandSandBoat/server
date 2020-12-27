@@ -2,19 +2,28 @@
 -- Records of Eminence
 ------------------------------------
 require("scripts/globals/status")
+require("scripts/globals/quests")
+require("scripts/globals/missions")
+require("scripts/globals/log_ids")
+------------------------------------
 
 tpz = tpz or {}
 tpz.roe = tpz.roe or {}
 
 tpz.roe.triggers =
 {
-    mobKill = 1,        -- Player kills a Mob (Counts for mobs killed by partymembers)
-    wSkillUse = 2,      -- Player Weapon skill used
-    itemLooted = 3,     -- Player successfully loots an item
-    synthSuccess = 4,   -- Player synth success
-    dmgTaken = 5,       -- Player takes Damage
-    dmgDealt = 6,       -- Player deals Damage
-    expGain = 7,        -- Player gains EXP
+    mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
+    wSkillUse = 2,          -- Player Weapon skill used
+    itemLooted = 3,         -- Player successfully loots an item
+    synthSuccess = 4,       -- Player synth success
+    dmgTaken = 5,           -- Player takes Damage
+    dmgDealt = 6,           -- Player deals Damage
+    expGain = 7,            -- Player gains EXP
+    healAlly = 8,           -- Player heals self/ally with spell
+    buffAlly = 9,           -- Player buffs ally
+    levelUp = 10,           -- Player levelup
+    questComplete = 11,     -- Player completes quest
+    missionComplete = 12,   -- Player completes mission
 }
 
 tpz.roe.checks = {}
@@ -56,6 +65,14 @@ checks.dmgMax = function(self, player, params)  -- Maximum Dmg Dealt/Taken
     return (params.dmg and params.dmg <= self.reqs.dmgMax) and true or false
 end
 
+checks.atkType = function(self, player, params)  -- Dmg Type is
+    return (params.atkType == self.reqs.atkType) and true or false
+end
+
+checks.healMin = function(self, player, params)  -- Minimum Amount healed
+    return (params.heal and params.heal >= self.reqs.healMin) and true or false
+end
+
 checks.zone = function(self, player, params)  -- Player in Zone
     return (self.reqs.zone[player:getZoneID()]) and true or false
 end
@@ -71,6 +88,19 @@ end
 checks.levelSync = function(self, player, params)  -- Player is Level Sync'd
     return self.reqs.levelSync and player:isLevelSync() and true or false
 end
+
+checks.jobLvl = function(self, player, params)  -- Player has job at minimum level X
+    return player:getJobLevel(self.reqs.jobLvl[1]) >= self.reqs.jobLvl[2] and true or false
+end
+
+checks.questComplete = function(self, player, params) -- Player has {KINGDOM, QUEST} marked complete
+    return player:getQuestStatus(self.reqs.questComplete[1], self.reqs.questComplete[2]) == QUEST_COMPLETED
+end
+
+checks.missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
+    return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
+end
+
 
 -- Load Records
 package.loaded["scripts/globals/roe_records"] = nil
@@ -124,7 +154,6 @@ local function completeRecord(player, record)
         npcUtil.giveKeyItem(player, rewards["keyItem"])
     end
 
-    -- successfully complete the record
     if recordFlags["repeat"] then
         if recordFlags["timed"] then
             player:messageBasic(tpz.msg.basic.ROE_TIMED_CLEAR)
@@ -143,13 +172,25 @@ end
 -- have record information entered in roe_records.lua. This keeps everything neat.
 
 function tpz.roe.onRecordTrigger(player, recordID, params)
+    params = params or {}
+    params.progress = params.progress or player:getEminenceProgress(recordID)
     local entry = tpz.roe.records[recordID]
-    if entry and entry:check(player, params) then
-        local progress = (params and params.progress or player:getEminenceProgress(recordID)) + entry.increment
-        if progress >= entry.goal then
-            completeRecord(player, recordID)
-        else
-            player:setEminenceProgress(recordID, progress, entry.goal)
+    local isClaiming = params.claim
+
+    if entry and params.progress then
+        local awaitingClaim = params.progress >= entry.goal
+        if awaitingClaim and not isClaiming then
+            player:messageBasic(tpz.msg.basic.ROE_YET_TO_RECEIVE)
+            return
+        elseif isClaiming or entry:check(player, params) then
+            params.progress = params.progress + (isClaiming and 0 or entry.increment)
+            if params.progress >= entry.goal then
+                if not completeRecord(player, recordID) and not awaitingClaim then
+                    player:setEminenceProgress(recordID, entry.goal)
+                end
+            else
+                player:setEminenceProgress(recordID, params.progress, entry.goal)
+            end
         end
     end
 end
