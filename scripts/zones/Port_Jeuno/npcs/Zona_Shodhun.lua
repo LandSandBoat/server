@@ -82,7 +82,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 10023 and option == 4002) then
-        player:moghouseFlag(8)
+        player:setMoghouseFlag(8)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
         player:addFame(JEUNO, 30)
         player:tradeComplete()

@@ -70,7 +70,7 @@ public:
     int32 injectPacket(lua_State*);       // Send the character a packet kept in a file
     int32 injectActionPacket(lua_State*); // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
     int32 entityVisualPacket(lua_State* L);
-    int32 entityAnimationPacket(lua_State* L);
+    void  entityAnimationPacket(const char* command);
 
     void  startEvent(sol::object const& EventIDObj, sol::variadic_args va);
     int32 startEventString(lua_State*); // Begins Event with string param (0x33 packet)
@@ -81,7 +81,8 @@ public:
     void  release();                                                                                                       // Stops event
 
     void  setFlag(uint32 flags);
-    int32 moghouseFlag(lua_State*);
+    uint8 getMoghouseFlag();
+    void  setMoghouseFlag(uint8 flag);
     int32 needToZone(lua_State*); // Check if player has zoned since the flag has been raised
 
     // Object Identification
@@ -165,16 +166,16 @@ public:
     float getZPos();                                // Get Entity Z position
     uint8 getRotPos();                              // Get Entity Rot position
 
-    void  setPos(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3, sol::object const& arg4); // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
-    void  warp();                                                                                                                              // Returns Character to home point
-    int32 teleport(lua_State*);                                                                                                                // Set Entity position (without entity despawn/spawn packets)
+    void setPos(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3, sol::object const& arg4); // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
+    void warp();                                                                                                                              // Returns Character to home point
+    void teleport(std::map<std::string, float> pos, sol::object const& arg1);                                                                 // Set Entity position (without entity despawn/spawn packets)
 
     void  addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
     int32 getTeleport(lua_State*);                                               // Get unlocked teleport means
-    int32 hasTeleport(lua_State*);                                               // Has access to specific teleport
+    bool  hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
     int32 setTeleportMenu(lua_State*);                                           // Set favorites or menu layout preferences for homepoints or survival guides
     int32 getTeleportMenu(lua_State*);                                           // Get favorites and menu layout preferences
-    int32 setHomePoint(lua_State*);                                              // Sets character's homepoint
+    void  setHomePoint();                                                        // Sets character's homepoint
 
     int32 resetPlayer(lua_State*); // if player is stuck, GM command @resetPlayer name
 

@@ -771,22 +771,16 @@ inline int32 CLuaBaseEntity::entityVisualPacket(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::entityAnimationPacket(lua_State* L)
+void CLuaBaseEntity::entityAnimationPacket(const char* command)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    const char* command = lua_tostring(L, 1);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CEntityAnimationPacket(m_PBaseEntity, command));
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CEntityAnimationPacket(m_PBaseEntity, command));
     }
     else
     {
         m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityAnimationPacket(m_PBaseEntity, command));
     }
-    return 0;
 }
 
 /************************************************************************
@@ -1131,27 +1125,35 @@ void CLuaBaseEntity::setFlag(uint32 flags)
 }
 
 /************************************************************************
- *  Function: moghouseFlag()
+ *  Function: setMoghouseFlag()
  *  Purpose : Creates or returns exit flag for Mog House
  *  Example : player:moghouseFlag(2)
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::moghouseFlag(lua_State* L)
+void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-    {
-        PChar->profile.mhflag |= (uint8)lua_tointeger(L, 1);
-        charutils::SaveCharStats(PChar);
-        return 0;
-    }
-    lua_pushinteger(L, PChar->profile.mhflag);
-    return 1;
+    PChar->profile.mhflag |= flag;
+    charutils::SaveCharStats(PChar);
+}
+
+/************************************************************************
+ *  Function: getMoghouseFlag()
+ *  Purpose : Returns exit flag for Mog House
+ *  Example :
+ *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getMoghouseFlag()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->profile.mhflag;
 }
 
 /************************************************************************
@@ -2515,31 +2517,24 @@ void CLuaBaseEntity::warp()
  *  Notes   : scripts/globals/mobskills/tarutaru_warp_ii.lua
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::teleport(lua_State* L)
+void CLuaBaseEntity::teleport(std::map<std::string, float> pos, sol::object const& arg1)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
+    m_PBaseEntity->loc.p.x = pos["x"];
+    m_PBaseEntity->loc.p.y = pos["y"];
+    m_PBaseEntity->loc.p.z = pos["z"];
 
-    lua_getfield(L, 1, "x");
-    m_PBaseEntity->loc.p.x = (float)lua_tonumber(L, -1);
-    lua_getfield(L, 1, "y");
-    m_PBaseEntity->loc.p.y = (float)lua_tonumber(L, -1);
-    lua_getfield(L, 1, "z");
-    m_PBaseEntity->loc.p.z = (float)lua_tonumber(L, -1);
-
-    if (lua_isnumber(L, 2))
+    if (arg1.is<int>())
     {
-        m_PBaseEntity->loc.p.rotation = (uint8)lua_tonumber(L, 2);
+        m_PBaseEntity->loc.p.rotation = arg1.as<uint8>();
     }
-    else if (lua_isuserdata(L, 2))
+    else if (arg1.is<CLuaBaseEntity*>())
     {
-        CLuaBaseEntity* PLuaBaseEntity = nullptr;
+        CLuaBaseEntity* PLuaBaseEntity = arg1.as<CLuaBaseEntity*>();
         m_PBaseEntity->loc.p.rotation  = worldAngle(m_PBaseEntity->loc.p, PLuaBaseEntity->GetBaseEntity()->loc.p);
     }
 
     m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CPositionPacket(m_PBaseEntity));
     m_PBaseEntity->updatemask |= UPDATE_POS;
-    return 0;
 }
 
 /************************************************************************
@@ -2673,72 +2668,69 @@ inline int32 CLuaBaseEntity::getTeleport(lua_State* L)
  *  Function: hasTeleport(uint8 type, uint8 bit, uint8 set (optional))
  *  Purpose : Returns true if player has HP, false otherwise
  *  Example : player:hasTeleport(tpz.teleport.type.HOMEPOINT, bit, set)
- *  Notes   :
+ *  Notes   : Refactor this to reduce the amount of returns
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::hasTeleport(lua_State* L)
+bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(lua_tointeger(L, 1));
-    uint8         bit  = (uint8)lua_tointeger(L, 2);
-    uint8         set  = lua_isnil(L, 3) ? 0 : (uint8)lua_tointeger(L, 3);
+    TELEPORT_TYPE type = static_cast<TELEPORT_TYPE>(tType);
+    uint8         set  = (arg2 == sol::nil) ? 0 : arg2.as<uint8>();
 
     if (type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL)
     {
-        if (lua_isnil(L, 3) || set > 3)
+        if ((arg2 == sol::nil) || set > 3)
         {
             ShowError("Lua::addTeleport : Attempt to index array out-of-bounds or parameter is nil.");
-            return 0;
+            return false;
         }
 
         if (type == TELEPORT_TYPE::HOMEPOINT)
         {
-            lua_pushboolean(L, PChar->teleport.homepoint.access[set] & (1 << bit));
+            return PChar->teleport.homepoint.access[set] & (1 << bit);
         }
         else
         {
-            lua_pushboolean(L, PChar->teleport.survival.access[set] & (1 << bit));
+            return PChar->teleport.survival.access[set] & (1 << bit);
         }
-        return 1;
     }
 
     switch (type)
     {
         case TELEPORT_TYPE::OUTPOST_SANDY:
-            lua_pushboolean(L, PChar->teleport.outpostSandy & (1 << bit));
+            return PChar->teleport.outpostSandy & (1 << bit);
             break;
         case TELEPORT_TYPE::OUTPOST_BASTOK:
-            lua_pushboolean(L, PChar->teleport.outpostBastok & (1 << bit));
+            return PChar->teleport.outpostBastok & (1 << bit);
             break;
         case TELEPORT_TYPE::OUTPOST_WINDY:
-            lua_pushboolean(L, PChar->teleport.outpostWindy & (1 << bit));
+            return PChar->teleport.outpostWindy & (1 << bit);
             break;
         case TELEPORT_TYPE::RUNIC_PORTAL:
-            lua_pushboolean(L, PChar->teleport.runicPortal & (1 << bit));
+            return PChar->teleport.runicPortal & (1 << bit);
             break;
         case TELEPORT_TYPE::PAST_MAW:
-            lua_pushboolean(L, PChar->teleport.pastMaw & (1 << bit));
+            return PChar->teleport.pastMaw & (1 << bit);
             break;
         case TELEPORT_TYPE::CAMPAIGN_SANDY:
-            lua_pushboolean(L, PChar->teleport.campaignSandy & (1 << bit));
+            return PChar->teleport.campaignSandy & (1 << bit);
             break;
         case TELEPORT_TYPE::CAMPAIGN_BASTOK:
-            lua_pushboolean(L, PChar->teleport.campaignBastok & (1 << bit));
+            return PChar->teleport.campaignBastok & (1 << bit);
             break;
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
-            lua_pushboolean(L, PChar->teleport.campaignWindy & (1 << bit));
+            return PChar->teleport.campaignWindy & (1 << bit);
             break;
         default:
             ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.\n");
-            return 0;
+            return false;
     }
-    return 1;
+
+    TPZ_DEBUG_BREAK_IF(true); // We should never get here
+    return false;
 }
 
 /************************************************************************
@@ -2836,12 +2828,11 @@ inline int32 CLuaBaseEntity::getTeleportMenu(lua_State* L)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::setHomePoint(lua_State* L)
+void CLuaBaseEntity::setHomePoint()
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->profile.home_point.p           = PChar->loc.p;
     PChar->profile.home_point.destination = PChar->getZone();
@@ -2852,7 +2843,6 @@ inline int32 CLuaBaseEntity::setHomePoint(lua_State* L)
 
     Sql_Query(SqlHandle, fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
               PChar->profile.home_point.p.y, PChar->profile.home_point.p.z, PChar->id);
-    return 0;
 }
 
 /************************************************************************
@@ -13069,7 +13059,7 @@ void CLuaBaseEntity::Register()
     // SOL_REGISTER(injectPacket),
     // SOL_REGISTER(injectActionPacket),
     // SOL_REGISTER(entityVisualPacket),
-    // SOL_REGISTER(entityAnimationPacket),
+    SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
     // SOL_REGISTER(startEventString),
@@ -13079,7 +13069,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("release", CLuaBaseEntity::release);
 
     SOL_REGISTER("setFlag", CLuaBaseEntity::setFlag);
-    // SOL_REGISTER(moghouseFlag),
+    SOL_REGISTER("getMoghouseFlag", CLuaBaseEntity::getMoghouseFlag);
+    SOL_REGISTER("setMoghouseFlag", CLuaBaseEntity::setMoghouseFlag);
     // SOL_REGISTER(needToZone),
 
     // Object Identification
@@ -13158,13 +13149,13 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setPos", CLuaBaseEntity::setPos);
 
     SOL_REGISTER("warp", CLuaBaseEntity::warp);
-    // SOL_REGISTER(teleport),
+    SOL_REGISTER("teleport", CLuaBaseEntity::teleport);
     SOL_REGISTER("addTeleport", CLuaBaseEntity::addTeleport);
     // SOL_REGISTER(getTeleport),
-    // SOL_REGISTER(hasTeleport),
+    SOL_REGISTER("hasTeleport", CLuaBaseEntity::hasTeleport);
     // SOL_REGISTER(setTeleportMenu),
     // SOL_REGISTER(getTeleportMenu),
-    // SOL_REGISTER(setHomePoint),
+    SOL_REGISTER("setHomePoint", CLuaBaseEntity::setHomePoint);
     // SOL_REGISTER(resetPlayer),
 
     SOL_REGISTER("goToEntity", CLuaBaseEntity::goToEntity);
