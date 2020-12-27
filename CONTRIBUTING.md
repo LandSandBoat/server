@@ -3,13 +3,11 @@
 * If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
 * Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
 
-----
-
 # Pull Request Contributions:
 
 **By submitting a pull request to Topaz Next, you agree to our [Limited Contributor License Agreement](https://github.com/topaz-next/topaz/blob/release/.github/CONTRIBUTOR_AGREEMENT.md)**
 
-All contributions must be done through pull requests to the Topaz repository.  We don't take fixes from Discord to apply ourselves.  If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
+All contributions must be done through pull requests to the Topaz repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 
@@ -17,7 +15,7 @@ Please try to leave your PR alone after submission, unless it's to fix bugs you'
 
 After a pull request is made, if a staff member leaves feedback for you to change, you must either fix or address it for your pull request to be merged.
 
-If you do not fill the checkboxes confirming that you agree to Topaz Next's Limited Contributor License Agreement and that you've tested your code - your PR will not be reviewed.
+If you do not fill the checkboxes confirming that you agree to Topaz Next's Limited Contributor License Agreement, that you've read the supporting documentation, and that you've tested your code - your PR will not be reviewed.
 
 # Workflow Guide
 
@@ -53,7 +51,7 @@ Clang-Format is also an option for C++
 * 4 space indent, do not use tabs for alignment.
 * Trim trailing whitespace.
 * Space after starting comments (`-- Comment` and `// Comment`)
-* If you agree with staff and/or your  reviewers that some work in your pull request can be left as "to-do", make new issues on GitHub for your new `TODO` items and put the ID alongside the comment. The comment should also be sufficiently descriptive of what the missing work is, and why it was left out. eg. `// TODO: A Boy's Dream - PLD AF Quest 2 - Cannot be completed until fishing is implemented (GitHub Issue #12345)`
+* If you agree with staff and/or your reviewers that some work in your pull request can be left as "to-do", make new issues on GitHub for your new `TODO` items and put the ID alongside the comment. The comment should also be sufficiently descriptive of what the missing work is, and why it was left out. eg. `// TODO: A Boy's Dream - PLD AF Quest 2 - Cannot be completed until fishing is implemented (GitHub Issue #12345)`
 
 ## C++
 We keep a `.clang-format` file in the root of the repo, but accept it can be difficult to set up for use on _just your changes_, as opposed to entire files that you're working with that might have legacy styling you don't want to mess with.
