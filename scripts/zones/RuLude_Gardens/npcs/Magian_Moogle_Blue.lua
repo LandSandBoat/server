@@ -10,7 +10,11 @@ require("scripts/globals/magiantrials")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (trade:getItemCount() == 1) then
+    if ENABLE_MAGIAN_TRIALS ~= 1 then
+        return
+    end
+
+    if trade:getItemCount() == 1 then
         local ItemID = trade:getItemId()
         local TrialInfo = getRelicTrialInfo(ItemID)
         local invalid = 0
@@ -24,6 +28,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
+    if ENABLE_MAGIAN_TRIALS ~= 1 then
+        return
+    end
+
     if (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
         player:startEvent(10141)
     else

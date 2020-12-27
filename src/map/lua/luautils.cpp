@@ -24,6 +24,8 @@
 #include "../../common/utils.h"
 
 #include <unordered_map>
+#include <string>
+#include <array>
 
 #include "lua_action.h"
 #include "lua_battlefield.h"
@@ -125,6 +127,8 @@ namespace luautils
         lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
         lua.set_function("GetMobAction", &luautils::GetMobAction);
+        lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
+        lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);        
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
         lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
@@ -1071,6 +1075,140 @@ namespace luautils
             }
         }
         lua_pushnil(L);
+        return 1;
+    }
+
+    /*******************************************************************************
+    *                                                                              *
+    *  Returns data of Magian trials                                               *
+    *  Will return a single table with keys matching the SQL table column          *
+    *  names if given one trial #, or will return a table of likewise trial        *
+    *  columns if given a table of trial #s.                                       *
+    *  examples: GetMagianTrial(2)          returns {column = value, ...}          *
+    *            GetMagianTrial({2, 16})    returns { 2 = { column = value, ...},  *
+    *                                                16 = { column = value, ...}}  *
+    *******************************************************************************/
+
+    int32 GetMagianTrial(lua_State* L)
+    {
+        if (!lua_isnil(L, 1))
+        {
+            // Get all magian table columns to build lua keys
+            const char* ColumnQuery = "SHOW COLUMNS FROM `magian`;";
+            std::vector<std::string> magianColumns;
+            if (Sql_Query(SqlHandle, ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
+            {
+                while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                {
+                    magianColumns.push_back((const char*)Sql_GetData(SqlHandle, 0));
+                }
+            } else {
+                ShowError("Error: No columns in `magian` table?");
+                lua_pushnil(L);
+                return 1;
+            }
+
+            const char* Query = "SELECT * FROM `magian` WHERE trialId = %u;";
+
+            if (lua_isnumber(L, 1))
+            {
+                int32 trial = (lua_tointeger(L, 1));
+                int32 field {0};
+                lua_newtable(L);
+                if (Sql_Query(SqlHandle, Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                {
+                    for(auto column: magianColumns)
+                    {
+                        lua_pushstring(L, column.c_str());
+                        lua_pushinteger(L, (int32)Sql_GetIntData(SqlHandle, field++));
+                        lua_settable(L,-3);
+                    }
+                }
+            }
+            else if (lua_istable(L, 1))
+            {
+                // parse provided trial's from table
+                std::vector<int32> trials;
+                for(int i = 1, j = lua_objlen(L,1); i <= j; i++)
+                {
+                    lua_pushinteger(L, i);
+                    lua_gettable(L, 1);
+                    if(!lua_tointeger(L, -1))
+                    {
+                        lua_pop(L, 1);
+                        continue;
+                    }
+                    trials.push_back(lua_tointeger(L, -1));
+                    lua_pop(L, 1);
+                }
+
+                // Build outer table
+                lua_newtable(L);
+                // one inner table each trial { trial# = { column = value, ... } }
+                for(auto trial: trials)
+                {
+                    int32 ret = Sql_Query(SqlHandle, Query, trial);
+                    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                    {
+                        lua_pushinteger(L, trial);
+                        lua_newtable(L);
+                        int32 field {0};
+                        for(auto column: magianColumns)
+                        {
+                            lua_pushstring(L, column.c_str());
+                            int t = (int32)Sql_GetIntData(SqlHandle, field++);
+                            lua_pushinteger(L, t);
+                            lua_settable(L,-3);
+                        }
+                        lua_settable(L,-3);
+                    }
+                }
+            } else {
+                return 0;
+            }
+            return 1;
+        }
+        lua_pushnil(L);
+        return 1;
+    }
+
+    /*******************************************************************************
+    *                                                                              *
+    *  Returns a list of trial numbers who have the given parent trial             *
+    *                                                                              *
+    *******************************************************************************/
+
+    int32 GetMagianTrialsWithParent(lua_State* L)
+    {
+        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+
+        if (lua_isnumber(L, 1))
+        {
+            int32 parentTrial = lua_tointeger(L, 1);
+            const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
+
+            int32 ret = Sql_Query(SqlHandle, Query, parentTrial);
+            if(ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+            {
+                lua_newtable(L);
+                int32 field {0};
+                while(Sql_NextRow(SqlHandle) == 0)
+                {
+                    int32 childTrial = Sql_GetIntData(SqlHandle, 0);
+                    lua_pushinteger(L, ++field);
+                    lua_pushinteger(L, childTrial);
+                    lua_settable(L, -3);
+                }
+            }
+            else
+            {
+                lua_pushnil(L);
+            }
+        }
+        else
+        {
+            lua_pushnil(L);
+        }
         return 1;
     }
 

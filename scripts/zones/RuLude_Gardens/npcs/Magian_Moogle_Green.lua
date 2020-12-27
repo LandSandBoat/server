@@ -11,6 +11,10 @@ require("scripts/globals/magiantrials")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    if ENABLE_MAGIAN_TRIALS ~= 1 then
+        return
+    end
+
     if (trade:getItemCount() == 1) then
         local ItemID = trade:getItemId()
         local TrialInfo = getEmoteTrialInfo(ItemID)
@@ -25,6 +29,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
+    if ENABLE_MAGIAN_TRIALS ~= 1 then
+        return
+    end
+
     local LearnerLog = player:hasKeyItem(tpz.ki.MAGIAN_LEARNERS_LOG)
     local TrialLog = player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
     if (player:getMainLvl() < 30) then

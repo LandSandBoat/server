@@ -39,6 +39,9 @@ GOV_REWARD_ALLIANCE = 1 -- Allow Grounds of Valor rewards while being a member o
 ENABLE_ROE = 1
 ENABLE_ROE_TIMED = 1 -- Enable 4-hour timed records
 
+-- Magian Trials
+ENABLE_MAGIAN_TRIALS = 1
+
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active
 -- Set to 0 to disable caskets.
