@@ -28,8 +28,11 @@ function onTrigger(player, npc)
     local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
     local starsMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
-    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
-	   not nextMissionFinished and not starsMissionFinished then
+    if
+        currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        not nextMissionFinished and
+        not starsMissionFinished
+    then
         if missionStatus == 0 then
             player:startEvent(121)
         elseif missionStatus == 1 then

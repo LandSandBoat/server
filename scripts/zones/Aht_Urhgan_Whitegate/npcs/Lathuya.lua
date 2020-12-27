@@ -1,4 +1,4 @@
- -----------------------------------
+-----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Lathuya
 -- Standard Info NPC
@@ -30,7 +30,7 @@ local craftingItems = {
         currency = 2186,
         currencyAmt = 4,
         result = 14521
-    }  
+    }
 }
 
 function onTrade(player, npc, trade)
@@ -46,9 +46,9 @@ function onTrade(player, npc, trade)
                 player:startEvent(732 + AFoffset, item.result, item.currency, item.currencyAmt)
             elseif craftingStage == 1 and npcUtil.tradeHasExactly(trade, {{item.currency, item.currencyAmt}}) then
                 player:startEvent(734 + AFoffset, 0, item.currency, item.currencyAmt)
-           end
-       end
-   end
+            end
+        end
+    end
 end
 
 function onTrigger(player, npc)
@@ -177,7 +177,7 @@ function onEventFinish(player, csid, option)
                 -- Player is finished with Lathuya
                 player:setCharVar("[BLUAF]RestingDay", 0)
             else
-                player:setCharVar("[BLUAF]RestingDay", vanaDay())  
+                player:setCharVar("[BLUAF]RestingDay", vanaDay())
             end
 
             player:delKeyItem(tpz.ki.MAGUS_ORDER_SLIP)
