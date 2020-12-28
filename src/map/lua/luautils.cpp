@@ -1271,13 +1271,14 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning)
     {
-        if (!lua["tpz"]["globals"]["player"]["onGameIn"].valid())
+        auto onGameIn = lua["tpz"]["player"]["onGameIn"];
+        if (!onGameIn.valid())
         {
             ShowError("luautils::onGameIn");
             return -1;
         }
 
-        auto result = lua["onGameIn"](CLuaBaseEntity(PChar), PChar->GetPlayTime(false) == 0, zoning);
+        auto result = onGameIn(CLuaBaseEntity(PChar), PChar->GetPlayTime(false) == 0, zoning);
         if (!result.valid())
         {
             sol::error err = result;

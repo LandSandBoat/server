@@ -317,7 +317,7 @@ public:
 
     void   addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
     void   delMission(uint8 missionLogID, uint16 missionID);          // Delete Mission from Mission Log
-    uint16 getCurrentMission(uint8 missionLogID);                     // Gets the current mission
+    uint16 getCurrentMission(sol::table const& missionLogTable);      // Gets the current mission
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
     int32  setMissionLogEx(lua_State*);                               // Sets mission log extra data to correctly track progress in branching missions.

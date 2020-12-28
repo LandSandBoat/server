@@ -5804,20 +5804,28 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
  *  Notes   : Specify the area to pass a Lua table object
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getCurrentMission(uint8 missionLogID)
+uint16 CLuaBaseEntity::getCurrentMission(sol::table const& missionLogTable)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint16 MissionID = 0;
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        return 0;
+    }
+
+    uint8  missionLogID = missionLogTable["mission_log"];
+    uint16 MissionID    = 0;
 
     if (missionLogID < MAX_MISSIONAREA)
     {
-        MissionID = static_cast<CCharEntity*>(m_PBaseEntity)->m_missionLog[missionLogID].current;
+        MissionID = PChar->m_missionLog[missionLogID].current;
     }
     else
     {
         ShowError(CL_RED "Lua::getCurrentMission: missionLogID %i is invalid\n" CL_RESET, missionLogID);
     }
+
     return MissionID;
 }
 
