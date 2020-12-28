@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 function onMobEngaged(mob, target)
 
     if (mob:AnimationSub() == 3) then
-        SetDropRate(114, 1578, 1000)
+        tpz.core.setDropRate(114, 1578, 1000)
     else
-        SetDropRate(114, 1578, 0)
+        tpz.core.setDropRate(114, 1578, 0)
     end
 
     target:showText(mob, ID.text.ANIMATED_SPEAR_DIALOG)

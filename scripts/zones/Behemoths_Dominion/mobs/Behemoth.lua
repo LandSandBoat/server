@@ -14,7 +14,7 @@ function onMobSpawn(mob)
         GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(tpz.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
-        SetDropRate(270, 3342, 0) -- do not drop savory_shank
+        tpz.core.setDropRate(270, 3342, 0) -- do not drop savory_shank
     end
 
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes

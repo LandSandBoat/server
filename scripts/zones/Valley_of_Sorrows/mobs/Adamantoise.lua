@@ -14,7 +14,7 @@ function onMobSpawn(mob)
         GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
-        SetDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
+        tpz.core.setDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
     end
 
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes

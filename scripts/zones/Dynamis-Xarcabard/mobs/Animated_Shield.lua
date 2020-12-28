@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 function onMobEngaged(mob, target)
 
     if (mob:AnimationSub() == 3) then
-        SetDropRate(113, 1822, 1000)
+        tpz.core.setDropRate(113, 1822, 1000)
     else
-        SetDropRate(113, 1822, 0)
+        tpz.core.setDropRate(113, 1822, 0)
     end
 
     target:showText(mob, ID.text.ANIMATED_SHIELD_DIALOG)

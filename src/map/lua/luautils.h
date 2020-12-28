@@ -219,9 +219,10 @@ namespace luautils
     int32 setMobPos(lua_State*);                        // set a mobs position (only if mob is not in combat)
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
-    int32 GetItem(lua_State* L);     // Returns a newly minted item object of the specified ID
-    int32 getAbility(lua_State*);
-    int32 getSpell(lua_State*);
+
+    auto  GetReadOnlyItem(uint32 id) -> std::shared_ptr<CLuaItem>; // Returns a read only lookup item object of the specified ID
+    auto  GetAbility(uint16 id) -> std::shared_ptr<CLuaAbility>;
+    auto  GetSpell(uint16 id) -> std::shared_ptr<CLuaSpell>;
 
     auto  SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
     int32 DespawnMob(lua_State*);      // Despawn (Fade Out) Mob By Id
@@ -350,16 +351,16 @@ namespace luautils
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
     int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
-    int32 GetMobRespawnTime(lua_State* L);  // get the respawn time of a mob
+    int32 GetMobRespawnTime(uint32 mobid);  // get the respawn time of a mob
     int32 DisallowRespawn(lua_State* L);    // Allow or prevent a mob from spawning
     int32 UpdateNMSpawnPoint(lua_State* L); // Update the spawn point of an NM
-    int32 SetDropRate(lua_State*);          // Set drop rate of a mob setDropRate(dropid,itemid,newrate)
-    int32 UpdateServerMessage(lua_State*);  // update server message, first modify in conf and update
+    void  SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob tpz.core.setDropRate(dropid,itemid,newrate)
+    int32 UpdateServerMessage();            // update server message, first modify in conf and update
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
 
-    int32 nearLocation(lua_State*);
+    auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
 
     void OnPlayerLevelUp(CCharEntity* PChar);
     void OnPlayerLevelDown(CCharEntity* PChar);

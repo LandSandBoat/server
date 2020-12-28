@@ -162,7 +162,7 @@ struct position_t
     float  x;
     float  y; // Entity height, relative to "sea level"
     float  z;
-    uint16 moving; // Somehing like the travel distance, the number of steps required for correct rendering in the client.
+    uint16 moving; // Something like the travel distance, the number of steps required for correct rendering in the client.
 
     // The angle of rotation of the entity relative to its position. A maximum rotation value of
     // 255 is used as the rotation is stored in `uint8`. Use `rotationToRadian()` and

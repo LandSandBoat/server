@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 function onMobEngaged(mob, target)
 
     if (mob:AnimationSub() == 3) then
-        SetDropRate(109, 1579, 1000)
+        tpz.core.setDropRate(109, 1579, 1000)
     else
-        SetDropRate(109, 1579, 0)
+        tpz.core.setDropRate(109, 1579, 0)
     end
 
     target:showText(mob, ID.text.ANIMATED_KUNAI_DIALOG)

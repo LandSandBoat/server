@@ -12,11 +12,11 @@ function onMobSpawn(mob)
     local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
     local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
     if (math.random(0, 1) > 0) then
-        SetDropRate(4398, 1851, chance * 10) -- Deed Of Placidity
-        SetDropRate(4398, 1901, 0)
+        tpz.core.setDropRate(4398, 1851, chance * 10) -- Deed Of Placidity
+        tpz.core.setDropRate(4398, 1901, 0)
     else
-        SetDropRate(4398, 1851, 0)
-        SetDropRate(4398, 1901, chance * 10) -- Vice of Antipathy
+        tpz.core.setDropRate(4398, 1851, 0)
+        tpz.core.setDropRate(4398, 1901, chance * 10) -- Vice of Antipathy
     end
     qm:setLocalVar("[SEA]IxAern_DropRate", 0)
 

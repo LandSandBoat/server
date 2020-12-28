@@ -117,10 +117,15 @@ namespace luautils
 
         // Bind print() and math.random() globally
         lua.set_function("print", &luautils::print);
-        lua["math"]["random"] = sol::overload([]() { return tpzrand::GetRandomNumber(1.0f); }, [](int n) { return tpzrand::GetRandomNumber<int>(1, n); },
-                                              [](float n) { return tpzrand::GetRandomNumber<float>(0.0f, n); },
-                                              [](int n, int m) { return tpzrand::GetRandomNumber<int>(n, m + 1); },
-                                              [](float n, float m) { return tpzrand::GetRandomNumber<float>(n, m); });
+
+        // clang-format off
+        lua["math"]["random"] =
+            sol::overload([]() { return tpzrand::GetRandomNumber(1.0f); },
+                          [](int n) { return tpzrand::GetRandomNumber<int>(1, n); },
+                          [](float n) { return tpzrand::GetRandomNumber<float>(0.0f, n); },
+                          [](int n, int m) { return tpzrand::GetRandomNumber<int>(n, m + 1); },
+                          [](float n, float m) { return tpzrand::GetRandomNumber<float>(n, m); });
+        // clang-format on
 
         // Get-or-create tpz.core
         auto tpz      = lua["tpz"].get_or_create<sol::table>();
@@ -168,12 +173,12 @@ namespace luautils
         tpz_core.set_function("disallowRespawn", &luautils::DisallowRespawn);
         tpz_core.set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         tpz_core.set_function("setDropRate", &luautils::SetDropRate);
-        tpz_core.set_function("nearLocation", &luautils::nearLocation);
+        tpz_core.set_function("nearLocation", &luautils::NearLocation);
         tpz_core.set_function("terminate", &luautils::terminate);
         tpz_core.set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
-        tpz_core.set_function("getItem", &luautils::GetItem);
-        tpz_core.set_function("getAbility", &luautils::getAbility);
-        tpz_core.set_function("getSpell", &luautils::getSpell);
+        tpz_core.set_function("getReadOnlyItem", &luautils::GetReadOnlyItem);
+        tpz_core.set_function("getAbility", &luautils::GetAbility);
+        tpz_core.set_function("getSpell", &luautils::GetSpell);
         tpz_core.set_function("selectDailyItem", &luautils::SelectDailyItem);
 
         // Register Sol Bindings
@@ -4305,22 +4310,17 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetMobRespawnTime(lua_State* L)
+    int32 GetMobRespawnTime(uint32 mobid)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-        uint32      mobid = (uint32)lua_tointeger(L, -1);
         CMobEntity* PMob  = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
 
         if (PMob != nullptr)
         {
-            uint32 RespawnTime = (uint32)PMob->m_RespawnTime / 1000;
-            lua_pushinteger(L, RespawnTime);
-            return 1;
+            return PMob->m_RespawnTime / 1000;
         }
+
         ShowError(CL_RED "luautils::GetMobAction: mob <%u> was not found\n" CL_RESET, mobid);
-        lua_pushnil(L);
-        return 1;
+        return 0;
     }
 
     /************************************************************************
@@ -4330,23 +4330,21 @@ namespace luautils
      *   3rd number: new rate                                                *
      ************************************************************************/
 
-    int32 SetDropRate(lua_State* L)
+    void SetDropRate(uint16 dropid, uint16 itemid, uint16 rate)
     {
-        DropList_t* DropList = itemutils::GetDropList((uint16)lua_tointeger(L, 1));
+        TracyZoneScoped;
+        DropList_t* DropList = itemutils::GetDropList(dropid);
 
         if (DropList != nullptr)
         {
             for (auto& Item : DropList->Items)
             {
-                if (Item.ItemID == lua_tointeger(L, 2))
+                if (Item.ItemID == itemid)
                 {
-                    Item.DropRate = (uint16)lua_tointeger(L, 3);
-                    return 1;
+                    Item.DropRate = rate;
                 }
             }
         }
-
-        return 0;
     }
 
     uint8 GetHealingTickDelay()
@@ -4365,74 +4363,37 @@ namespace luautils
      *  ## Should lua functions be written which modify items, care must be     *
      *     taken to ensure these are NEVER modified.                            *
      *                                                                          *
-     *  example: local item = GetItem(16448)                                    *
+     *  example: local item = GetReadOnlyItem(16448)                            *
      *           item:GetName()                 --Bronze Dagger                 *
      *           item:isTwoHanded()             --False                         *
      *                                                                          *
      ***************************************************************************/
 
-    int32 GetItem(lua_State* L)
+    std::shared_ptr<CLuaItem> GetReadOnlyItem(uint32 id)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-        uint32 id    = static_cast<uint32>(lua_tointeger(L, 1));
+        TracyZoneScoped;
         CItem* PItem = itemutils::GetItemPointer(id);
-        if (PItem)
-        {
-            lua_getglobal(L, "CItem");
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PItem);
-
-            if (lua_pcall(L, 2, 1, 0))
-            {
-                return 0;
-            }
-            return 1;
-        }
-        lua_pushnil(L);
-        return 1;
+        return PItem ? std::make_shared<CLuaItem>(PItem) : nullptr;
     }
 
-    int32 getAbility(lua_State* L)
+    std::shared_ptr<CLuaAbility> GetAbility(uint16 id)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            CAbility* PAbility = ability::GetAbility((uint16)lua_tointeger(L, 1));
-
-            lua_getglobal(L, "CAbility");
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PAbility);
-            lua_pcall(L, 2, 1, 0);
-
-            return 1;
-        }
-        return 0;
+        TracyZoneScoped;
+        CAbility* PAbility = ability::GetAbility(id);
+        return PAbility ? std::make_shared<CLuaAbility>(PAbility) : nullptr;
     }
 
-    int32 getSpell(lua_State* L)
+    std::shared_ptr<CLuaSpell> GetSpell(uint16 id)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(lua_tointeger(L, 1)));
-
-            lua_getglobal(L, "CSpell");
-            lua_pushstring(L, "new");
-            lua_gettable(L, -2);
-            lua_insert(L, -2);
-            lua_pushlightuserdata(L, (void*)PSpell);
-            lua_pcall(L, 2, 1, 0);
-
-            return 1;
-        }
-        return 0;
+        TracyZoneScoped;
+        CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(id));
+        return PSpell ? std::make_shared<CLuaSpell>(PSpell) : nullptr;
     }
 
-    int32 UpdateServerMessage(lua_State* L)
+    int32 UpdateServerMessage()
     {
+        TracyZoneScoped;
+
         int8  line[1024];
         FILE* fp;
 
@@ -4464,40 +4425,24 @@ namespace luautils
         return 0;
     }
 
-    inline int32 nearLocation(lua_State* L)
+    sol::table NearLocation(sol::table const& table, float radius, float theta)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isnumber(L, 3));
+        TracyZoneScoped;
 
         position_t center;
-        lua_getfield(L, 1, "x");
-        center.x = (float)lua_tonumber(L, -1);
-        lua_getfield(L, 1, "y");
-        center.y = (float)lua_tonumber(L, -1);
-        lua_getfield(L, 1, "z");
-        center.z = (float)lua_tonumber(L, -1);
-        lua_getfield(L, 1, "rot");
-        center.rotation = (uint8)lua_tonumber(L, -1);
-
-        float radius = (float)lua_tonumber(L, 2);
-        float theta  = (float)lua_tonumber(L, 3);
+        center.x = table.get<float>("x");
+        center.y = table.get<float>("y");
+        center.z = table.get<float>("z");
+        center.rotation = table.get<uint8>("rot");
 
         position_t pos = nearPosition(center, radius, theta);
 
-        lua_createtable(L, 3, 0);
-        int8 newTable = lua_gettop(L);
+        sol::table nearPos;
+        nearPos.add("x", pos.x);
+        nearPos.add("y", pos.y);
+        nearPos.add("z", pos.z);
 
-        lua_pushnumber(L, pos.x);
-        lua_setfield(L, newTable, "x");
-
-        lua_pushnumber(L, pos.y);
-        lua_setfield(L, newTable, "y");
-
-        lua_pushnumber(L, pos.z);
-        lua_setfield(L, newTable, "z");
-
-        return 1;
+        return nearPos;
     }
 
     void OnPlayerLevelUp(CCharEntity* PChar)

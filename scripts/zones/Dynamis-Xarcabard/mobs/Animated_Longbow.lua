@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 function onMobEngaged(mob, target)
 
     if (mob:AnimationSub() == 3) then
-        SetDropRate(110, 1583, 1000)
+        tpz.core.setDropRate(110, 1583, 1000)
     else
-        SetDropRate(110, 1583, 0)
+        tpz.core.setDropRate(110, 1583, 0)
     end
 
     target:showText(mob, ID.text.ANIMATED_LONGBOW_DIALOG)

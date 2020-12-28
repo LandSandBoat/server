@@ -73,7 +73,7 @@ function onUseAbility(player, target, ability, action)
         hit = 3
         dmg = base * pdif
 
-        local spell = getSpell(252)
+        local spell = tpz.core.getSpell(252)
         local params = {}
         params.diff = 0
         params.skillType = player:getWeaponSkillType(tpz.slot.MAIN)

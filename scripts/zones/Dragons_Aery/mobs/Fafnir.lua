@@ -14,7 +14,7 @@ function onMobSpawn(mob)
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
-        SetDropRate(918, 3340, 0) -- do not drop cup_of_sweet_tea
+        tpz.core.setDropRate(918, 3340, 0) -- do not drop cup_of_sweet_tea
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
