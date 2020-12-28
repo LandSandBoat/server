@@ -10,18 +10,18 @@ require("scripts/globals/missions")
 
 function onMobDeath(mob, player, isKiller)
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 2) then
+    if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
         local aernKills =
         {
-            [ID.mob.AERNS_TOWER_SOUTH + 0] = "Ru_aern_1-1KILL",
-            [ID.mob.AERNS_TOWER_SOUTH + 1] = "Ru_aern_1-2KILL",
-            [ID.mob.AERNS_TOWER_SOUTH + 2] = "Ru_aern_1-3KILL",
-            [ID.mob.AERNS_TOWER_WEST  + 0] = "Ru_aern_2-1KILL",
-            [ID.mob.AERNS_TOWER_WEST  + 1] = "Ru_aern_2-2KILL",
-            [ID.mob.AERNS_TOWER_WEST  + 2] = "Ru_aern_2-3KILL",
-            [ID.mob.AERNS_TOWER_EAST  + 0] = "Ru_aern_3-1KILL",
-            [ID.mob.AERNS_TOWER_EAST  + 1] = "Ru_aern_3-2KILL",
-            [ID.mob.AERNS_TOWER_EAST  + 2] = "Ru_aern_3-3KILL",
+            [ID.mob.RUAERN_BASE + 0] = "Ru_aern_1-1KILL",
+            [ID.mob.RUAERN_BASE + 1] = "Ru_aern_1-2KILL",
+            [ID.mob.RUAERN_BASE + 2] = "Ru_aern_1-3KILL",
+            [ID.mob.RUAERN_BASE + 3] = "Ru_aern_2-1KILL",
+            [ID.mob.RUAERN_BASE + 4] = "Ru_aern_2-2KILL",
+            [ID.mob.RUAERN_BASE + 5] = "Ru_aern_2-3KILL",
+            [ID.mob.RUAERN_BASE + 6] = "Ru_aern_3-1KILL",
+            [ID.mob.RUAERN_BASE + 7] = "Ru_aern_3-2KILL",
+            [ID.mob.RUAERN_BASE + 8] = "Ru_aern_3-3KILL",
         }
 
         local varToSet = aernKills[mob:getID()]
