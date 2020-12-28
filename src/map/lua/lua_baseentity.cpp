@@ -7993,33 +7993,19 @@ inline int32 CLuaBaseEntity::getPartyLeader(lua_State* L)
 /************************************************************************
  *  Function: forMembersInRange()
  *  Purpose : Apply function to party members within range
- *  Example : forMembersInRange(target, distance, function)
+ *  Example : target:forMembersInRange(distance, function() end)
  *  Notes   :
  ************************************************************************/
 
-inline int32 CLuaBaseEntity::forMembersInRange(lua_State* L)
+void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isfunction(L, 2));
-
     auto* target   = (CBattleEntity*)m_PBaseEntity;
-    auto  range    = (uint8)lua_tointeger(L, 1);
-    auto  function = luautils::register_fp(2);
-
     target->ForParty([&target, &range, &function](CBattleEntity* member) {
         if (target->loc.zone == member->loc.zone && distanceSquared(target->loc.p, member->loc.p) < (range * range))
         {
-            std::ignore = member;
-            // luautils::pushFunc(function);
-            // luautils::pushArg<CBattleEntity*>(member);
-            // luautils::callFunc(1);
+            function(CLuaBaseEntity(member));
         }
     });
-
-    luautils::unregister_fp(function);
-
-    return 0;
 }
 
 /************************************************************************
@@ -8860,17 +8846,9 @@ void CLuaBaseEntity::disengage()
  *  Notes   : See scripts/zones/Nyzul_Isle/mobs/Raubahn.lua
  ************************************************************************/
 
-int32 CLuaBaseEntity::timer(lua_State* L)
+void CLuaBaseEntity::timer(int ms, sol::function func)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isfunction(L, 2));
-
-    auto ms = (int)lua_tointeger(L, 1);
-
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, false, luautils::register_fp(2)));
-
-    return 0;
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, false, func));
 }
 
 /************************************************************************
@@ -8883,17 +8861,9 @@ int32 CLuaBaseEntity::timer(lua_State* L)
  *          : Ability is delayed until 100% (essentially loops into Action Queue)
  ************************************************************************/
 
-int32 CLuaBaseEntity::queue(lua_State* L)
+void CLuaBaseEntity::queue(int ms, sol::function func)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isfunction(L, 2));
-
-    auto ms = (int)lua_tointeger(L, 1);
-
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, true, luautils::register_fp(2)));
-
-    return 0;
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(ms, true, func));
 }
 
 /************************************************************************
@@ -8999,19 +8969,9 @@ void CLuaBaseEntity::resetRecasts()
  *  Notes   : Function along with statements must be passed in L3
  ************************************************************************/
 
-int32 CLuaBaseEntity::addListener(lua_State* L)
+void CLuaBaseEntity::addListener(std::string eventName, std::string identifier, sol::function func)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isstring(L, 2));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 3) || !lua_isfunction(L, 3));
-
-    const auto* eventName  = lua_tostring(L, 1);
-    const auto* identifier = lua_tostring(L, 2);
-
-    m_PBaseEntity->PAI->EventHandler.addListener(eventName, luautils::register_fp(3), identifier);
-
-    return 0;
+    m_PBaseEntity->PAI->EventHandler.addListener(eventName, func, identifier);
 }
 
 /************************************************************************
@@ -9021,16 +8981,9 @@ int32 CLuaBaseEntity::addListener(lua_State* L)
  *  Notes   : Used heavily in Pup Ability scripts
  ************************************************************************/
 
-int32 CLuaBaseEntity::removeListener(lua_State* L)
+void CLuaBaseEntity::removeListener(std::string identifier)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    const auto* identifier = lua_tostring(L, 1);
-
     m_PBaseEntity->PAI->EventHandler.removeListener(identifier);
-
-    return 0;
 }
 
 /************************************************************************
@@ -9041,17 +8994,9 @@ int32 CLuaBaseEntity::removeListener(lua_State* L)
  *  Notes   : Manually triggered through Aern scripts for some reason
  ************************************************************************/
 
-int32 CLuaBaseEntity::triggerListener(lua_State* L)
+void CLuaBaseEntity::triggerListener(std::string eventName, sol::variadic_args args)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isstring(L, 1));
-
-    const auto* eventName = lua_tostring(L, 1);
-    auto        top       = lua_gettop(L);
-
-    m_PBaseEntity->PAI->EventHandler.triggerListener(eventName, top - 1);
-
-    return 0;
+    m_PBaseEntity->PAI->EventHandler.triggerListener(eventName, sol::as_args(args));
 }
 
 /************************************************************************
@@ -13466,8 +13411,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("engage", CLuaBaseEntity::engage);
     SOL_REGISTER("isEngaged", CLuaBaseEntity::isEngaged);
     SOL_REGISTER("disengage", CLuaBaseEntity::disengage);
-    // SOL_REGISTER(timer),
-    // SOL_REGISTER(queue),
+    SOL_REGISTER("timer", CLuaBaseEntity::timer);
+    SOL_REGISTER("queue", CLuaBaseEntity::queue);
     SOL_REGISTER("addRecast", CLuaBaseEntity::addRecast);
     SOL_REGISTER("hasRecast", CLuaBaseEntity::hasRecast);
     SOL_REGISTER("resetRecast", CLuaBaseEntity::resetRecast);

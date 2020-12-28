@@ -25,7 +25,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../../common/cbasetypes.h"
 #include "../../../common/mmo.h"
 #include <functional>
+#include <memory>
 #include <queue>
+
+#include "sol/sol.hpp"
 
 class CBaseEntity;
 
@@ -33,13 +36,13 @@ struct queueAction_t
 {
     using EntityFunc_t = std::function<void(CBaseEntity*)>;
 
-    time_point   start_time{ server_clock::now() };
-    duration     delay{ 0ms };
-    bool         checkState{ false };
-    int          lua_func{ 0 };
-    EntityFunc_t func{};
+    time_point    start_time{ server_clock::now() };
+    duration      delay{ 0ms };
+    bool          checkState{ false };
+    sol::function lua_func{};
+    EntityFunc_t  func{};
 
-    queueAction_t(int _ms, bool _checkstate, int _lua_func)
+    queueAction_t(int _ms, bool _checkstate, sol::function _lua_func)
     : delay(std::chrono::milliseconds(_ms))
     , checkState(_checkstate)
     , lua_func(_lua_func)

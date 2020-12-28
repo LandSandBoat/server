@@ -63,6 +63,10 @@ set_project_warnings(project_warnings)
 add_library(no_warnings INTERFACE)
 set_no_warnings(no_warnings)
 
+# Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere
+# add_compile_definitions() comes with CMake 3.12
+add_definitions(-DSOL_ALL_SAFETIES_ON=1)
+
 add_subdirectory(ext)
 
 include(ClangTidy)

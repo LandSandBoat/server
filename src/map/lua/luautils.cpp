@@ -240,25 +240,6 @@ namespace luautils
         return 0;
     }
 
-    int register_fp(int index)
-    {
-        if (lua_isfunction(LuaHandle, index))
-        {
-            lua_pushvalue(LuaHandle, index);
-            return luaL_ref(LuaHandle, LUA_REGISTRYINDEX);
-        }
-        else
-        {
-            ShowWarning("[Lua] register_fp: index %d not a function\n", index);
-        }
-        return 0;
-    }
-
-    void unregister_fp(int r)
-    {
-        luaL_unref(LuaHandle, LUA_REGISTRYINDEX, r);
-    }
-
     /************************************************************************
      *                                                                       *
      *  Переопределение официальной lua функции print                        *
@@ -306,21 +287,6 @@ namespace luautils
             return -1;
         }
         return 0;
-    }
-
-    void pushFunc(int lua_func, int index)
-    {
-        lua_rawgeti(LuaHandle, LUA_REGISTRYINDEX, lua_func);
-        lua_insert(LuaHandle, -(index + 1));
-    }
-
-    void callFunc(int nargs)
-    {
-        if (lua_pcall(LuaHandle, nargs, 0, 0))
-        {
-            ShowError("[Lua] Anonymous function: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-        }
     }
 
     // temporary solution for geysers in Dangruf_Wadi

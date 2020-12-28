@@ -436,7 +436,7 @@ public:
     int32 getPartyLeader(lua_State* L);
     int32 getLeaderID(lua_State* L); // Get the id of the alliance/party leader *falls back to player id if no party*
     int32 getPartyLastMemberJoinedTime(lua_State* L);
-    int32 forMembersInRange(lua_State* L);
+    void  forMembersInRange(float range, sol::function function);
 
     int32 addPartyEffect(lua_State*);    // Adds Effect to all party members
     int32 hasPartyEffect(lua_State*);    // Has Effect from all party members
@@ -486,16 +486,16 @@ public:
     void  engage(uint16 requestedTarget);
     bool  isEngaged();
     void  disengage();
-    int32 timer(lua_State* L); // execute lua closure after some time
-    int32 queue(lua_State* L);
+    void  timer(int ms, sol::function func); // execute lua closure after some time
+    void  queue(int ms, sol::function func);
     void  addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
     bool  hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
     void  resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
     void  resetRecasts();                            // Reset recasts for the caller
 
-    int32 addListener(lua_State* L);
-    int32 removeListener(lua_State* L);
-    int32 triggerListener(lua_State* L);
+    void  addListener(std::string eventName, std::string identifier, sol::function func);
+    void  removeListener(std::string identifier);
+    void  triggerListener(std::string eventName, sol::variadic_args args);
 
     auto  getEntity(uint16 targetID) -> CBaseEntity*;
     int32 getNearbyEntities(lua_State* L);

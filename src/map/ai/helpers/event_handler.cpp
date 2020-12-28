@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "event_handler.h"
 
-void CAIEventHandler::addListener(const std::string& eventname, int lua_func, const std::string& identifier)
+void CAIEventHandler::addListener(const std::string& eventname, sol::function lua_func, const std::string& identifier)
 {
     eventListeners[eventname].emplace_back(identifier, lua_func);
 }
@@ -32,15 +32,7 @@ void CAIEventHandler::removeListener(std::string identifier)
     {
         auto remove = [&identifier](const ai_event_t& event)
         {
-            if (identifier == event.identifier)
-            {
-                if (event.lua_func)
-                {
-                    luautils::unregister_fp(event.lua_func);
-                }
-                return true;
-            }
-            return false;
+            return identifier == event.identifier;
         };
 
         auto it = std::remove_if(eventListener.second.begin(), eventListener.second.end(), remove);
