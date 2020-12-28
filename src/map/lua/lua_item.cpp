@@ -273,7 +273,7 @@ bool CLuaItem::isShield()
     return false;
 }
 
-auto CLuaItem::getSignature() -> const char*
+auto CLuaItem::getSignature() -> std::string
 {
     int8 signature[21];
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
@@ -285,8 +285,8 @@ auto CLuaItem::getSignature() -> const char*
         DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
     }
 
-    // TODO: Fix c-style cast, and the fact we might lose this, and this is most likely broken
-    return (const char*)signature;
+    // TODO: wwe might lose this...
+    return std::string(reinterpret_cast<const char*>(signature));
 }
 //==========================================================//
 

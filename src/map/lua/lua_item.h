@@ -74,7 +74,7 @@ public:
     bool isHandToHand(); // is a hand to hand weapon (or unarmed H2H)
     bool isShield();     // is a Shield
 
-    auto getSignature() -> const char*;
+    auto getSignature() -> std::string;
 
     static void Register();
 };
