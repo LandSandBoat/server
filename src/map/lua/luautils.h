@@ -206,20 +206,20 @@ namespace luautils
         lua_pushnil(LuaHandle);
     }
 
-    void  SendEntityVisualPacket(uint32 npcid, const char* command); // temporary solution for geysers in Dangruf_Wadi
-    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>; // Returns NPC By Id
+    void  SendEntityVisualPacket(uint32 npcid, const char* command);
+    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>;
     auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>;
-    int32 WeekUpdateConquest(lua_State*);
-    int32 GetRegionOwner(lua_State*);     // узнаем страну, владеющую текущим регионом
-    int32 GetRegionInfluence(lua_State*); // Return influence graphics
-    int32 getNationRank(lua_State* L);
-    int32 getConquestBalance(lua_State* L);
-    int32 isConquestAlliance(lua_State* L);
+    void  WeekUpdateConquest(sol::variadic_args va);
+    uint8 GetRegionOwner(uint8 type);
+    uint8 GetRegionInfluence(uint8 type); // Return influence graphics
+    uint8 getNationRank(uint8 nation);
+    uint8 getConquestBalance();
+    bool  isConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
     int32 setMobPos(lua_State*);                        // set a mobs position (only if mob is not in combat)
 
-    int32 GetHealingTickDelay(lua_State* L); // Returns the configured healing tick delay
-    int32 GetItem(lua_State* L);             // Returns a newly minted item object of the specified ID
+    uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
+    int32 GetItem(lua_State* L);     // Returns a newly minted item object of the specified ID
     int32 getAbility(lua_State*);
     int32 getSpell(lua_State*);
 
@@ -230,8 +230,8 @@ namespace luautils
     int32 GetMagianTrial(lua_State*);
     int32 GetMagianTrialsWithParent(lua_State* L);
     int32 JstMidnight(lua_State* L);
-    int32 VanadielTime(lua_State*);            // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
-    int32 VanadielTOTD(lua_State*);            // текущее игровое время суток
+    uint32 VanadielTime();                     // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
+    uint8  VanadielTOTD();                     // текущее игровое время суток
     int32 VanadielHour(lua_State*);            // текущие Vanadiel часы
     int32 VanadielMinute(lua_State*);          // текущие Vanadiel минуты
     int32 VanadielDayOfTheYear(lua_State*);    // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
@@ -248,6 +248,7 @@ namespace luautils
     int32 IsMoonNew(lua_State* L);  // Returns true if the moon is new
     int32 IsMoonFull(lua_State* L); // Returns true if the moon is full
     int32 StartElevator(lua_State*);
+
     int32 GetServerVariable(lua_State*);
     int32 SetServerVariable(lua_State*);
     int32 clearVarFromAll(lua_State*); // Deletes a specific player variable from all players
@@ -360,8 +361,8 @@ namespace luautils
 
     int32 nearLocation(lua_State*);
 
-    int32 OnPlayerLevelUp(CCharEntity* PChar);
-    int32 OnPlayerLevelDown(CCharEntity* PChar);
+    void OnPlayerLevelUp(CCharEntity* PChar);
+    void OnPlayerLevelDown(CCharEntity* PChar);
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
     bool LoadEventScript(CCharEntity* PChar, const char* functionName); // Utility method: checks for and loads a lua function for events
@@ -371,7 +372,7 @@ namespace luautils
     void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* itemId);
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
-    int32 SelectDailyItem(lua_State* L);
+    uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
 
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
 }; // namespace luautils

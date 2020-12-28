@@ -174,6 +174,7 @@ namespace luautils
         tpz_core.set_function("getItem", &luautils::GetItem);
         tpz_core.set_function("getAbility", &luautils::getAbility);
         tpz_core.set_function("getSpell", &luautils::getSpell);
+        tpz_core.set_function("selectDailyItem", &luautils::SelectDailyItem);
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -189,7 +190,11 @@ namespace luautils
         CLuaZone::Register();
         CLuaItem::Register();
 
-        contentRestrictionEnabled = (GetSettingsVariable("RESTRICT_CONTENT") != 0);
+        // Load globals
+        lua.require_file("scripts/globals/player", "scripts/globals/player.lua");
+
+        // Handle settings
+        contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -313,6 +318,7 @@ namespace luautils
         }
     }
 
+    // temporary solution for geysers in Dangruf_Wadi
     void SendEntityVisualPacket(uint32 npcid, const char* command)
     {
         if (CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC))
@@ -383,86 +389,70 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     * WeekUpdateConquest        *
+     * WeekUpdateConquest                                                    *
      *                                                                       *
      ************************************************************************/
 
-    int32 WeekUpdateConquest(lua_State* L)
+    void WeekUpdateConquest(sol::variadic_args va)
     {
         ConquestUpdate type = Conquest_Tally_Start;
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        if (va.size())
         {
-            type = (ConquestUpdate)lua_tointeger(L, 1);
+            type = static_cast<ConquestUpdate>(va.get<uint8>(0));
         }
         conquest::UpdateConquestGM(type);
-
-        return 0;
     }
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем страну, владеющую текущим регионом                            *
+     *  Find out the country that owns the current region                    *
      *                                                                       *
      ************************************************************************/
 
-    int32 GetRegionOwner(lua_State* L)
+    uint8 GetRegionOwner(uint8 type)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-        lua_pushinteger(L, conquest::GetRegionOwner(static_cast<REGION_TYPE>(lua_tointeger(L, 1))));
-        return 1;
+        return conquest::GetRegionOwner(static_cast<REGION_TYPE>(type));
     }
 
-    int32 GetRegionInfluence(lua_State* L)
+    uint8 GetRegionInfluence(uint8 type)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-        lua_pushinteger(L, conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(lua_tointeger(L, 1))));
-        return 1;
+        return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
     }
 
     /************************************************************************
      *                                                                       *
-     * Get Rank of Nations in Conquest       *
+     * Get Rank of Nations in Conquest                                       *
      *                                                                       *
      ************************************************************************/
 
-    int32 getNationRank(lua_State* L)
+    uint8 getNationRank(uint8 nation)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
         uint8 balance = conquest::GetBalance();
-        switch (lua_tointeger(L, 1))
+        switch (nation)
         {
             case NATION_SANDORIA:
                 balance &= 0x3U;
-                lua_pushinteger(L, balance);
-                return 1;
+                return balance;
             case NATION_BASTOK:
                 balance &= 0xCU;
                 balance >>= 2;
-                lua_pushinteger(L, balance);
-                return 1;
+                return balance;
             case NATION_WINDURST:
                 balance >>= 4;
-                lua_pushinteger(L, balance);
-                return 1;
+                return balance;
             default:
-                lua_pushinteger(L, 0);
-                return 1;
+                return 0;
         }
     }
 
-    int32 getConquestBalance(lua_State* L)
+    uint8 getConquestBalance()
     {
-        lua_pushinteger(L, conquest::GetBalance());
-        return 1;
+        return conquest::GetBalance();
     }
 
-    int32 isConquestAlliance(lua_State* L)
+    bool isConquestAlliance()
     {
-        lua_pushboolean(L, conquest::IsAlliance());
-        return 1;
+        return conquest::IsAlliance();
     }
 
     /************************************************************************
@@ -534,10 +524,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielTime(lua_State* L)
+    uint32 VanadielTime()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getVanaTime());
-        return 1;
+        return CVanaTime::getInstance()->getVanaTime();
     }
 
     /************************************************************************
@@ -546,10 +535,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielTOTD(lua_State* L)
+    uint8 VanadielTOTD()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->GetCurrentTOTD());
-        return 1;
+        return CVanaTime::getInstance()->GetCurrentTOTD();
     }
 
     /************************************************************************
@@ -1312,9 +1300,9 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning)
     {
-        lua.script_file("scripts/globals/player.lua");
-        if (!lua["onGameIn"].valid())
+        if (!lua["tpz"]["globals"]["player"]["onGameIn"].valid())
         {
+            ShowError("luautils::onGameIn");
             return -1;
         }
 
@@ -4361,10 +4349,9 @@ namespace luautils
         return 0;
     }
 
-    int32 GetHealingTickDelay(lua_State* L)
+    uint8 GetHealingTickDelay()
     {
-        lua_pushnumber(L, map_config.healing_tick_delay);
-        return 1;
+        return map_config.healing_tick_delay;
     }
 
     /***************************************************************************
@@ -4513,73 +4500,68 @@ namespace luautils
         return 1;
     }
 
-    int32 OnPlayerLevelUp(CCharEntity* PChar)
+    void OnPlayerLevelUp(CCharEntity* PChar)
     {
-        lua_prepscript("scripts/globals/player.lua");
-        if (prepFile(File, "onPlayerLevelUp"))
+        TracyZoneScoped;
+
+        auto onPlayerLevelUp = lua["tpz"]["player"]["onPlayerLevelUp"];
+        if (!onPlayerLevelUp.valid())
         {
-            return -1;
+            ShowWarning("luautils::onPlayerLevelUp\n");
+            return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onPlayerLevelUp(CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::onPlayerLevelUp: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
+            sol::error err = result;
+            ShowError("luautils::onPlayerLevelUp: %s\n", err.what());
+            return;
         }
-
-        return 0;
     }
 
-    int32 OnPlayerLevelDown(CCharEntity* PChar)
+    void OnPlayerLevelDown(CCharEntity* PChar)
     {
-        lua_prepscript("scripts/globals/player.lua");
-        if (prepFile(File, "onPlayerLevelDown"))
+        TracyZoneScoped;
+
+        auto onPlayerLevelDown = lua["tpz"]["player"]["onPlayerLevelDown"];
+        if (!onPlayerLevelDown.valid())
         {
-            return -1;
+            ShowWarning("luautils::onPlayerLevelDown\n");
+            return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onPlayerLevelDown(CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::onPlayerLevelDown: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
+            sol::error err = result;
+            ShowError("luautils::onPlayerLevelDown: %s\n", err.what());
+            return;
         }
-
-        return 0;
     }
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre)
     {
-        lua_prepscript("scripts/zones/%s/Zone.lua", PChar->loc.zone->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onChocoboDig"))
+        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName()));
+
+        auto onChocoboDig = lua.get<sol::function>("onChocoboDig");
+        if (!onChocoboDig.valid())
         {
+            ShowWarning("luautils::onChocoboDig\n");
             return false;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushboolean(LuaHandle, pre);
-
-        if (lua_pcall(LuaHandle, 2, 1, 0))
+        auto result = onChocoboDig(CLuaBaseEntity(PChar), pre);
+        if (!result.valid())
         {
-            ShowError("luautils::onChocoboDig: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onChocoboDig: %s\n", err.what());
             return false;
         }
 
-        bool canDig = lua_toboolean(LuaHandle, -1);
-        lua_pop(LuaHandle, 1);
-
-        return canDig;
+        return result.return_count() ? result.get<bool>() : false;
     }
 
     /************************************************************************
@@ -4592,6 +4574,8 @@ namespace luautils
      ************************************************************************/
     bool LoadEventScript(CCharEntity* PChar, const char* functionName)
     {
+        TracyZoneScoped;
+
         auto searchLuaFileForFunction = [&functionName](const std::string& filename) {
             if (!(luaL_loadfile(LuaHandle, filename.c_str()) || lua_pcall(LuaHandle, 0, 0, 0)))
             {
@@ -4613,6 +4597,8 @@ namespace luautils
 
     uint16 GetDespoilDebuff(uint16 itemId)
     {
+        TracyZoneScoped;
+
         uint16 effectId = 0;
         int32  ret      = Sql_Query(SqlHandle, "SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
@@ -4625,80 +4611,74 @@ namespace luautils
 
     void OnFurniturePlaced(CCharEntity* PChar, CItemFurnishing* PItem)
     {
-        /*
-        lua_prepscript("scripts/globals/items/%s.lua", PItem->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onFurniturePlaced"))
+        lua.script_file(fmt::format("scripts/globals/items/{}.lua", PItem->getName()));
+
+        auto onFurniturePlaced = lua.get<sol::function>("onFurniturePlaced");
+        if (!onFurniturePlaced.valid())
         {
+            ShowWarning("luautils::onFurniturePlaced\n");
             return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onFurniturePlaced(CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::onFurniturePlaced: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onFurniturePlaced: %s\n", err.what());
+            return;
         }
-        */
     }
 
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* PItem)
     {
-        /*
-        lua_prepscript("scripts/globals/items/%s.lua", PItem->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onFurnitureRemoved"))
+        lua.script_file(fmt::format("scripts/globals/items/{}.lua", PItem->getName()));
+
+        auto onFurnitureRemoved = lua.get<sol::function>("onFurnitureRemoved");
+        if (!onFurnitureRemoved.valid())
         {
+            ShowWarning("luautils::onFurnitureRemoved\n");
             return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onFurnitureRemoved(CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::onFurnitureRemoved: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onFurnitureRemoved: %s\n", err.what());
+            return;
         }
-        */
     }
 
-    int32 SelectDailyItem(lua_State* L)
+    uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isuserdata(L, 1));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-        //CLuaBaseEntity* PLuaBaseEntity = nullptr;
-        //CCharEntity*    player         = (CCharEntity*)PLuaBaseEntity->GetBaseEntity();
-        //lua_pushinteger(L, daily::SelectItem(player, (uint8)lua_tointeger(L, 2)));
-        */
-        return 1;
+        TracyZoneScoped;
+
+        CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
+        return daily::SelectItem(player, dial);
     }
 
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
     {
-        /*
-        lua_prepscript("scripts/globals/player.lua");
+        TracyZoneScoped;
 
-        if (prepFile(File, "onPlayerEmote"))
+        auto onPlayerEmote = lua["tpz"]["player"]["onPlayerEmote"];
+        if (!onPlayerEmote.valid())
         {
+            ShowWarning("luautils::onPlayerEmote\n");
             return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, (uint8)EmoteID);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
+        if (!result.valid())
         {
-            ShowError("luautils::onEmote: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onPlayerEmote: %s\n", err.what());
             return;
         }
-        */
     }
 
 }; // namespace luautils

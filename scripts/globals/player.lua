@@ -135,8 +135,11 @@ end
 -- public functions
 -----------------------------------
 
+tpz = tpz or {}
+tpz.player = {}
+
 -- called by core after a player logs into the server or zones
-function onGameIn(player, firstLogin, zoning)
+tpz.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
         -- things checked ONLY during logon go here
         if firstLogin then
@@ -190,14 +193,16 @@ function onGameIn(player, firstLogin, zoning)
     player:setLocalVar("ZoneInTime", os.time())
 end
 
-function onPlayerLevelUp(player)
+tpz.player.onPlayerLevelUp = function(player)
 end
 
-function onPlayerLevelDown(player)
+tpz.player.onPlayerLevelDown = function(player)
 end
 
-function onPlayerEmote(player, emoteId)   
+tpz.player.onPlayerEmote = function(player, emoteId)
     if emoteId == tpz.emote.CHEER and player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
         tpz.fsa.onCheer(player)
     end
 end
+
+return tpz.player
