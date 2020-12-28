@@ -54,7 +54,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 
 void CTrustEntity::PostTick()
 {
-    CMobEntity::PostTick();
+    CBattleEntity::PostTick();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
@@ -69,7 +69,7 @@ void CTrustEntity::PostTick()
 
 void CTrustEntity::FadeOut()
 {
-    CMobEntity::FadeOut();
+    CBaseEntity::FadeOut();
     loc.zone->PushPacket(this, (loc.zone->m_BattlefieldHandler) ? CHAR_INZONE : CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
 }
 
@@ -79,13 +79,13 @@ void CTrustEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     ((CCharEntity*)PMaster)->RemoveTrust(this);
-    CMobEntity::Die();
+    CBattleEntity::Die();
 }
 
 void CTrustEntity::Spawn()
 {
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
-    CMobEntity::Spawn();
+    CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
     ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
 }
@@ -410,7 +410,7 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
-    CMobEntity::OnCastFinished(state, action);
+    CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell = state.GetSpell();
 
@@ -424,7 +424,7 @@ void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
 void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
-    CMobEntity::OnWeaponSkillFinished(state, action);
+    CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
     auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
