@@ -33,7 +33,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
         x = tonumber(arg1)
         y = tonumber(arg2)
         z = tonumber(arg3)
-        if (GetPlayerByName(arg4) == nil) then
+        if (tpz.core.getPlayerByName(arg4) == nil) then
             zoneId = arg4
         else
             target = arg4
@@ -50,7 +50,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
     if (target == nil) then
         targ = player
     else
-        targ = GetPlayerByName(target)
+        targ = tpz.core.getPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return

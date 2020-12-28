@@ -927,28 +927,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetPlayerByName(lua_State* L)
+    std::shared_ptr<CLuaBaseEntity> GetPlayerByName(std::string name)
     {
-        if (!lua_isnil(L, -1) && lua_isstring(L, -1))
+        CCharEntity* PTargetChar = zoneutils::GetCharByName((int8*)name.c_str());
+
+        if (PTargetChar != nullptr)
         {
-            int8* name = (int8*)lua_tolstring(L, -1, nullptr);
-
-            CCharEntity* PTargetChar = zoneutils::GetCharByName(name);
-
-            if (PTargetChar != nullptr)
-            {
-                lua_getglobal(L, "CBaseEntity");
-                lua_pushstring(L, "new");
-                lua_gettable(L, -2);
-                lua_insert(L, -2);
-                lua_pushlightuserdata(L, (void*)PTargetChar);
-                lua_pcall(L, 2, 1, 0);
-                return 1;
-            }
+            return std::make_shared<CLuaBaseEntity>(PTargetChar);
         }
-        ShowError(CL_RED "GetPlayerByName :: Input string is not valid.\n" CL_RESET);
-        lua_pushnil(L);
-        return 1;
+
+        return nullptr;
     }
 
     /************************************************************************
@@ -957,27 +945,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetPlayerByID(lua_State* L)
+    std::shared_ptr<CLuaBaseEntity> GetPlayerByID(uint32 pid)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        CCharEntity* PTargetChar = zoneutils::GetChar(pid);
+
+        if (PTargetChar != nullptr)
         {
-            uint32 pid = (uint32)lua_tointeger(L, 1);
-
-            CCharEntity* PTargetChar = zoneutils::GetChar(pid);
-
-            if (PTargetChar != nullptr)
-            {
-                lua_getglobal(L, "CBaseEntity");
-                lua_pushstring(L, "new");
-                lua_gettable(L, -2);
-                lua_insert(L, -2);
-                lua_pushlightuserdata(L, (void*)PTargetChar);
-                lua_pcall(L, 2, 1, 0);
-                return 1;
-            }
+            return std::make_shared<CLuaBaseEntity>(PTargetChar);
         }
-        lua_pushnil(L);
-        return 1;
+
+        return nullptr;
     }
 
     /*******************************************************************************

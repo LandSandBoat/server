@@ -31,7 +31,7 @@ function onTrigger(player, target)
     if (target == nil) then
         AddAllAttachments(player)
     else
-        local targ = GetPlayerByName(target)
+        local targ = tpz.core.getPlayerByName(target)
         if (targ == nil) then
             player:PrintToPlayer(string.format( "Player named '%s' not found!", target ))
         else

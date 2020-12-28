@@ -24,7 +24,7 @@ function onTrigger(player, arg1, arg2)
         power = tonumber(arg1)
         target = arg2
     elseif (arg1 ~= nil) then
-        if (GetPlayerByName(arg1) == nil) then
+        if (tpz.core.getPlayerByName(arg1) == nil) then
             power = tonumber(arg1)
         else
             target = arg1
@@ -42,7 +42,7 @@ function onTrigger(player, arg1, arg2)
     if (target == nil) then
         targ = player
     else
-        targ = GetPlayerByName(target)
+        targ = tpz.core.getPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return

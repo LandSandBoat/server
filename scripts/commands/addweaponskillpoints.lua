@@ -33,7 +33,7 @@ function onTrigger(player, slot, points, target)
     if target == nil then
         target = player
     else
-        target = GetPlayerByName(target)
+        target = tpz.core.getPlayerByName(target)
         if target == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return

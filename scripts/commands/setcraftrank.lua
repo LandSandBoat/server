@@ -52,7 +52,7 @@ function onTrigger(player, craftName, tier, target)
             end
         end
     else
-        targ = GetPlayerByName(target)
+        targ = tpz.core.getPlayerByName(target)
         if targ == nil then
             player:PrintToPlayer(string.format("Player named '%s' not found!", target))
             return

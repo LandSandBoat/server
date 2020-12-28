@@ -61,7 +61,7 @@ end
 function onGameHour(zone)
     local VanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
-    local playerOnQuest = GetPlayerByID(playerOnQuestId)
+    local playerOnQuest = tpz.core.getPlayerByID(playerOnQuestId)
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
@@ -84,7 +84,7 @@ function onGameHour(zone)
 
     -- 9PM: notify the person on the quest that they can begin lighting lamps
     elseif VanadielHour == 21 then
-        local playerOnQuest = GetPlayerByID(GetServerVariable("[JEUNO]CommService"))
+        local playerOnQuest = tpz.core.getPlayerByID(GetServerVariable("[JEUNO]CommService"))
         if playerOnQuest then
             playerOnQuest:startEvent(114)
         end

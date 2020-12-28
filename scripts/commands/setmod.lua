@@ -29,7 +29,7 @@ function onTrigger(player, modifier, amount, target)
     end
 
     if target then
-        target = GetPlayerByName(target)
+        target = tpz.core.getPlayerByName(target)
     else
         target = player:getCursorTarget()
     end
