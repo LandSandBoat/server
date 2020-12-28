@@ -156,10 +156,10 @@ namespace luautils
     int32 IsMoonFull(lua_State* L); // Returns true if the moon is full
     int32 StartElevator(lua_State*);
 
-    int32 GetServerVariable(lua_State*);
-    int32 SetServerVariable(lua_State*);
-    int32 clearVarFromAll(lua_State*); // Deletes a specific player variable from all players
-    int32 terminate(lua_State*);       // Logs off all characters and terminates the server
+    int32 GetServerVariable(std::string varName);
+    void  SetServerVariable(std::string name, int32 value);
+    void  ClearVarFromAll(std::string varName); // Deletes a specific player variable from all players
+    void  Terminate();                          // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
     uint8 GetSettingsVariable(const char* variable);              // Gets a Variable Value from Settings.lua

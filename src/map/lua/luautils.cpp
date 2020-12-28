@@ -166,7 +166,7 @@ namespace luautils
         tpz_core.set_function("runElevator", &luautils::StartElevator);
         tpz_core.set_function("getServerVariable", &luautils::GetServerVariable);
         tpz_core.set_function("setServerVariable", &luautils::SetServerVariable);
-        tpz_core.set_function("clearVarFromAll", &luautils::clearVarFromAll);
+        tpz_core.set_function("clearVarFromAll", &luautils::ClearVarFromAll);
         tpz_core.set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         tpz_core.set_function("updateServerMessage", &luautils::UpdateServerMessage);
         tpz_core.set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
@@ -174,7 +174,7 @@ namespace luautils
         tpz_core.set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         tpz_core.set_function("setDropRate", &luautils::SetDropRate);
         tpz_core.set_function("nearLocation", &luautils::NearLocation);
-        tpz_core.set_function("terminate", &luautils::terminate);
+        tpz_core.set_function("terminate", &luautils::Terminate);
         tpz_core.set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
         tpz_core.set_function("getReadOnlyItem", &luautils::GetReadOnlyItem);
         tpz_core.set_function("getAbility", &luautils::GetAbility);
@@ -3596,18 +3596,12 @@ namespace luautils
         return 0;
     }
 
-    int32 clearVarFromAll(lua_State* L)
+    void ClearVarFromAll(std::string varName)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isstring(L, -1));
-
-        const char* varname = lua_tostring(L, -1);
-
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varname);
-
-        return 0;
+        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
     }
 
-    int32 terminate(lua_State* /*unused*/)
+    void Terminate()
     {
         zoneutils::ForEachZone([](CZone* PZone) {
             PZone->ForEachChar([](CCharEntity* PChar) {
@@ -3920,20 +3914,18 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetServerVariable(lua_State* L)
+    int32 GetServerVariable(std::string varName)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isstring(L, -1));
-
         int32 value = 0;
 
-        int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", lua_tostring(L, -1));
+        int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             value = (int32)Sql_GetIntData(SqlHandle, 0);
         }
-        lua_pushinteger(L, value);
-        return 1;
+
+        return value;
     }
 
     /************************************************************************
@@ -3942,22 +3934,14 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 SetServerVariable(lua_State* L)
+    void SetServerVariable(std::string name, int32 value)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isstring(L, -2));
-
-        const char* name  = lua_tostring(L, -2);
-        int32       value = (int32)lua_tointeger(L, -1);
-
         if (value == 0)
         {
             Sql_Query(SqlHandle, "DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
-            return 0;
+            return;
         }
         Sql_Query(SqlHandle, "INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
-
-        return 0;
     }
 
     /************************************************************************
