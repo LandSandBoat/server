@@ -241,7 +241,8 @@ public:
     void   setCostume2(uint16 costume);
     uint8  getAnimation();                // Get Entity Animation
     void   setAnimation(uint8 animation); // Set Entity Animation
-    int32  AnimationSub(lua_State*);      // get or set animationsub
+    uint8  getAnimationSub();
+    void   setAnimationSub(uint8 animationsub);
 
     // Player Status
     uint8 getNation();             // Gets Nation of Entity
@@ -267,7 +268,8 @@ public:
 
     bool canUseMisc(uint16 misc); // Check misc flags of current zone.
 
-    int32 speed(lua_State*); // скорость передвижения сущности
+    uint8 getSpeed(); // скорость передвижения сущности
+    void  setSpeed(uint8 speedVal);
 
     uint32 getPlaytime(sol::object const& shouldUpdate);
     int32  getTimeCreated();
@@ -430,16 +432,15 @@ public:
     void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    int32  getParty(lua_State* L);
+    auto   getParty(lua_State* L) -> sol::table;
     auto   getPartyWithTrusts() -> sol::table;
     uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
     bool   hasPartyJob(uint8 job);
-    int32  getPartyMember(lua_State* L); // Get a character entity from another entity's party or alliance
+    auto   getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*; // Get a character entity from another entity's party or alliance
     auto   getPartyLeader() -> CBaseEntity*;
     uint32 getLeaderID(); // Get the id of the alliance/party leader *falls back to player id if no party*
-    int32  getPartyLastMemberJoinedTime(lua_State* L);
-    void  forMembersInRange(float range, sol::function function);
-
+    uint32 getPartyLastMemberJoinedTime();
+    void   forMembersInRange(float range, sol::function function);
 
     int32 addPartyEffect(lua_State*);    // Adds Effect to all party members
     int32 hasPartyEffect(lua_State*);    // Has Effect from all party members
@@ -486,19 +487,19 @@ public:
     void  enableEntities(std::vector<uint32> data);
     int32 independantAnimation(lua_State* L);
 
-    void  engage(uint16 requestedTarget);
-    bool  isEngaged();
-    void  disengage();
-    void  timer(int ms, sol::function func); // execute lua closure after some time
-    void  queue(int ms, sol::function func);
-    void  addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
-    bool  hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
-    void  resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
-    void  resetRecasts();                            // Reset recasts for the caller
+    void engage(uint16 requestedTarget);
+    bool isEngaged();
+    void disengage();
+    void timer(int ms, sol::function func); // execute lua closure after some time
+    void queue(int ms, sol::function func);
+    void addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
+    bool hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
+    void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
+    void resetRecasts();                            // Reset recasts for the caller
 
-    void  addListener(std::string eventName, std::string identifier, sol::function func);
-    void  removeListener(std::string identifier);
-    void  triggerListener(std::string eventName, sol::variadic_args args);
+    void addListener(std::string eventName, std::string identifier, sol::function func);
+    void removeListener(std::string identifier);
+    void triggerListener(std::string eventName, sol::variadic_args args);
 
     auto  getEntity(uint16 targetID) -> CBaseEntity*;
     int32 getNearbyEntities(lua_State* L);
@@ -610,7 +611,7 @@ public:
     int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
                                 float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
 
-    int32 takeSpellDamage(lua_State* L);
+    int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
 
     // Pets and Automations
     void spawnPet(sol::object const& arg0); // Calls Pet
@@ -701,7 +702,7 @@ public:
     void  addMobMod(uint16 mobModID, int16 value);
     void  delMobMod(uint16 mobModID, int16 value);
 
-    int32 getBattleTime(lua_State*); // Get the time in second of the battle
+    uint32 getBattleTime(); // Get the time in second of the battle
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
