@@ -114,12 +114,12 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
 
             PAHItem->ItemID = Sql_GetIntData(SqlHandle, 0);
 
-            PAHItem->SinglAmount = Sql_GetIntData(SqlHandle, 2);
+            PAHItem->SingleAmount = Sql_GetIntData(SqlHandle, 2);
             PAHItem->StackAmount = Sql_GetIntData(SqlHandle, 3);
 
             if (Sql_GetIntData(SqlHandle, 1) == 1)
             {
-                PAHItem->StackAmount = 0;
+                PAHItem->StackAmount = -1;
             }
 
             ItemList.push_back(PAHItem);

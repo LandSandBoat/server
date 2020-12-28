@@ -35,7 +35,7 @@ struct search_req;
 struct ahItem
 {
     uint16 ItemID;
-    uint32 SinglAmount;
+    uint32 SingleAmount;
     uint32 StackAmount;
 };
 

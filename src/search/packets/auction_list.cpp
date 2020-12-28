@@ -55,7 +55,7 @@ CAHItemsListPacket::CAHItemsListPacket(uint16 offset)
 void CAHItemsListPacket::AddItem(ahItem* item)
 {
     ref<uint16>(m_PData, (0x18 + 0x0A * m_count) + 0) = item->ItemID;
-    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SinglAmount;
+    ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 2) = item->SingleAmount;
     ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
 
     m_count++;
