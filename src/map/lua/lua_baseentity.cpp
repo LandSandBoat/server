@@ -1966,17 +1966,15 @@ bool CLuaBaseEntity::isBeside(CLuaBaseEntity const* target, sol::object const& a
  *  they are in the process of zoning (for use in onZoneIn)
  ************************************************************************/
 
-CZone* CLuaBaseEntity::getZone(sol::object const& arg0)
+std::shared_ptr<CLuaZone> CLuaBaseEntity::getZone(sol::object const& arg0)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->loc.zone)
     {
-        return m_PBaseEntity->loc.zone;
+        return std::make_shared<CLuaZone>(m_PBaseEntity->loc.zone);
     }
     else if (m_PBaseEntity->loc.destination && (arg0 != sol::nil) && arg0.is<bool>() && arg0.as<bool>() != false)
     {
-        return zoneutils::GetZone(m_PBaseEntity->loc.destination);
+        return std::make_shared<CLuaZone>(zoneutils::GetZone(m_PBaseEntity->loc.destination));
     }
 
     return nullptr;
@@ -2802,7 +2800,7 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
  *  Notes   :
  ************************************************************************/
 
-CItem* CLuaBaseEntity::getEquippedItem(uint8 slot)
+std::shared_ptr<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2815,7 +2813,7 @@ CItem* CLuaBaseEntity::getEquippedItem(uint8 slot)
 
         if (slotItem)
         {
-            return slotItem;
+            return std::make_shared<CLuaItem>(slotItem);
         }
     }
 
@@ -7549,7 +7547,7 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
  *  Notes   : Passed value is position in party? What is this used for?
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -7575,7 +7573,7 @@ CBaseEntity* CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
 
     if (PTargetChar != nullptr)
     {
-        return PTargetChar;
+        return std::make_shared<CLuaBaseEntity>(PTargetChar);
     }
 
     ShowError(CL_RED "Lua::getPartyMember :: Member or Alliance Number is not valid.\n" CL_RESET);
@@ -7589,7 +7587,7 @@ CBaseEntity* CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
  *  Notes   : Todo: also add ability for find Alliance Leader via lua?
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getPartyLeader()
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -7600,7 +7598,7 @@ CBaseEntity* CLuaBaseEntity::getPartyLeader()
         CBattleEntity* PLeader = PChar->PParty->GetLeader();
         if (PLeader != nullptr)
         {
-            return PLeader;
+            return std::make_shared<CLuaBaseEntity>(PLeader);
         }
     }
 
@@ -7941,11 +7939,11 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
  *  Notes   :
  ************************************************************************/
 
-CInstance* CLuaBaseEntity::getInstance()
+std::shared_ptr<CLuaInstance> CLuaBaseEntity::getInstance()
 {
     if (m_PBaseEntity->PInstance)
     {
-        return m_PBaseEntity->PInstance;
+        return std::make_shared<CLuaInstance>(m_PBaseEntity->PInstance);
     }
 
     return nullptr;
@@ -8045,13 +8043,13 @@ uint16 CLuaBaseEntity::copyConfrontationEffect(uint16 targetID)
  *  Notes   : Used to check if entity is inside a battlefield
  ************************************************************************/
 
-CBattlefield* CLuaBaseEntity::getBattlefield()
+std::shared_ptr<CLuaBattlefield> CLuaBaseEntity::getBattlefield()
 {
     auto* PBattlefield = m_PBaseEntity->PBattlefield;
 
     if (PBattlefield)
     {
-        return PBattlefield;
+        return std::make_shared<CLuaBattlefield>(PBattlefield);
     }
 
     return nullptr;
@@ -8538,12 +8536,12 @@ void CLuaBaseEntity::triggerListener(std::string eventName, sol::variadic_args a
  *  Notes   : Currently used in Assault Missions and some Mobs
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getEntity(uint16 targetID)
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getEntity(uint16 targetID)
 {
     auto* PEntity{ m_PBaseEntity->GetEntity(targetID) };
     if (PEntity)
     {
-        return PEntity;
+        return std::make_shared<CLuaBaseEntity>(PEntity);
     }
 
     return nullptr;
@@ -9078,7 +9076,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::object const& arg0, sol::object cons
  *  Notes   :
  ************************************************************************/
 
-CStatusEffect* CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
+std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -9101,7 +9099,7 @@ CStatusEffect* CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object cons
         PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID);
     }
 
-    return PStatusEffect;
+    return std::make_shared<CLuaStatusEffect>(PStatusEffect);
 }
 
 /************************************************************************
@@ -10606,13 +10604,13 @@ bool CLuaBaseEntity::hasPet()
  *  Notes   :
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getPet()
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPet()
 {
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     if (PBattle->PPet != nullptr)
     {
-        return PBattle->PPet;
+        return std::make_shared<CLuaBaseEntity>(PBattle->PPet);
     }
 
     return nullptr;
@@ -10665,7 +10663,7 @@ uint8 CLuaBaseEntity::getPetElement()
  *  Notes   :
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getMaster()
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getMaster()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -10674,7 +10672,7 @@ CBaseEntity* CLuaBaseEntity::getMaster()
     if (PBattle->PMaster != nullptr)
     {
         CBaseEntity* PMaster = PBattle->PMaster;
-        return PMaster;
+        return std::make_shared<CLuaBaseEntity>(PMaster);
     }
 
     return nullptr;
@@ -11686,7 +11684,7 @@ void CLuaBaseEntity::setBehaviour(uint16 behavior)
  *  Notes   :
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getTarget()
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTarget()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -11694,7 +11692,7 @@ CBaseEntity* CLuaBaseEntity::getTarget()
 
     if (PBattleTarget)
     {
-        return PBattleTarget;
+        return std::make_shared<CLuaBaseEntity>(PBattleTarget);
     }
 
     return nullptr;
@@ -11766,7 +11764,7 @@ sol::table CLuaBaseEntity::getEnmityList()
  *  Notes   : For some reason, only used in Jump/High-Jump?
  ************************************************************************/
 
-CBaseEntity* CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
+std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -11777,7 +11775,7 @@ CBaseEntity* CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
         {
-            return taTarget;
+            return std::make_shared<CLuaBaseEntity>(taTarget);
         }
     }
 
