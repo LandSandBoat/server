@@ -38,32 +38,32 @@ public:
         return m_PLuaStatusEffect;
     }
 
-    int32 getType(lua_State*);
-    int32 getSubType(lua_State*);
-    int32 getPower(lua_State*);
-    int32 getSubPower(lua_State*);
-    int32 getTier(lua_State*);
-    int32 getDuration(lua_State*);
-    int32 getStartTime(lua_State*);
-    int32 getLastTick(lua_State*);
-    int32 getTimeRemaining(lua_State*);
-    int32 getTickCount(lua_State*);
-    int32 getTick(lua_State*);
+    uint32 getType();
+    uint32 getSubType();
+    uint16 getPower();
+    uint16 getSubPower();
+    uint16 getTier();
+    uint32 getDuration();
+    uint32 getStartTime();
+    uint32 getLastTick();
+    uint32 getTimeRemaining();
+    uint32 getTickCount();
+    uint32 getTick();
 
-    int32 setIcon(lua_State*);
-    int32 setPower(lua_State*);
-    int32 setSubPower(lua_State*);
-    int32 setTier(lua_State*);
-    int32 setDuration(lua_State*);
-    int32 setTick(lua_State*);
-    int32 setStartTime(lua_State*);
+    void setIcon(uint16 icon);
+    void setPower(uint16 power);
+    void setSubPower(uint16 subpower);
+    void setTier(uint16 tier);
+    void setDuration(uint32 duration);
+    void setTick(uint32 tick);
 
-    int32 resetStartTime(lua_State*);
+    void setStartTime(uint32 time);
+    void resetStartTime();
 
-    int32 addMod(lua_State*);
-    int32 getFlag(lua_State*);
-    int32 setFlag(lua_State*);
-    int32 unsetFlag(lua_State*);
+    void   addMod(uint16 mod, int16 amount);
+    uint32 getFlag();
+    void   setFlag(uint32 flag);
+    void   unsetFlag(uint32 flag);
 
     static void Register();
 };

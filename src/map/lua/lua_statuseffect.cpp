@@ -34,69 +34,47 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getType(lua_State* L)
+uint32 CLuaStatusEffect::getType()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetStatusID());
-    return 1;
+    return m_PLuaStatusEffect->GetStatusID();
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getSubType(lua_State* L)
+uint32 CLuaStatusEffect::getSubType()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetSubID());
-    return 1;
+    return m_PLuaStatusEffect->GetSubID();
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getPower(lua_State* L)
+uint16 CLuaStatusEffect::getPower()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetPower());
-    return 1;
+    return m_PLuaStatusEffect->GetPower();
 }
 
-inline int32 CLuaStatusEffect::getSubPower(lua_State* L)
+uint16 CLuaStatusEffect::getSubPower()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetSubPower());
-    return 1;
+    return m_PLuaStatusEffect->GetSubPower();
 }
 
-inline int32 CLuaStatusEffect::getTier(lua_State* L)
+uint16 CLuaStatusEffect::getTier()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetTier());
-    return 1;
+    return m_PLuaStatusEffect->GetTier();
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getDuration(lua_State* L)
+uint32 CLuaStatusEffect::getDuration()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetDuration() / 1000);
-    return 1;
+    return m_PLuaStatusEffect->GetDuration() / 1000;
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getStartTime(lua_State* L)
+uint32 CLuaStatusEffect::getStartTime()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L,
-                    (lua_Integer)std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaStatusEffect->GetStartTime() - get_server_start_time()).count());
-    return 1;
+    return (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaStatusEffect->GetStartTime() - get_server_start_time()).count();
 }
 
 /************************************************************************
@@ -105,20 +83,18 @@ inline int32 CLuaStatusEffect::getStartTime(lua_State* L)
  *																		*
  ************************************************************************/
 
-inline int32 CLuaStatusEffect::getLastTick(lua_State* L)
+uint32 CLuaStatusEffect::getLastTick()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    long long total = 0;
+    uint32 total = 0;
 
     if (m_PLuaStatusEffect->GetTickTime() != 0)
     {
-        auto total_ticks   = m_PLuaStatusEffect->GetDuration() / m_PLuaStatusEffect->GetTickTime();
-        auto elapsed_ticks = m_PLuaStatusEffect->GetElapsedTickCount();
-        total              = total_ticks - elapsed_ticks;
+        uint32 total_ticks   = m_PLuaStatusEffect->GetDuration() / m_PLuaStatusEffect->GetTickTime();
+        uint32 elapsed_ticks = m_PLuaStatusEffect->GetElapsedTickCount();
+        total                = total_ticks - elapsed_ticks;
     }
-    lua_pushinteger(L, (lua_Integer)total);
-    return 1;
+
+    return total;
 }
 
 /************************************************************************
@@ -127,19 +103,16 @@ inline int32 CLuaStatusEffect::getLastTick(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaStatusEffect::getTimeRemaining(lua_State* L)
+uint32 CLuaStatusEffect::getTimeRemaining()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
     uint32 remaining = 0;
     if (m_PLuaStatusEffect->GetDuration() > 0)
     {
-        remaining = (uint32)std::max((m_PLuaStatusEffect->GetDuration() -
-                                      std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - m_PLuaStatusEffect->GetStartTime()).count()),
-                                     std::chrono::seconds::rep{});
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - m_PLuaStatusEffect->GetStartTime()).count();
+        remaining     = (uint32)std::max(m_PLuaStatusEffect->GetDuration() - duration, std::chrono::seconds::rep{});
     }
 
-    lua_pushinteger(L, remaining);
-    return 1;
+    return remaining;
 }
 
 /************************************************************************
@@ -148,153 +121,90 @@ inline int32 CLuaStatusEffect::getTimeRemaining(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaStatusEffect::getTickCount(lua_State* L)
+uint32 CLuaStatusEffect::getTickCount()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetElapsedTickCount());
-    return 1;
+    return m_PLuaStatusEffect->GetElapsedTickCount();
 }
 
-inline int32 CLuaStatusEffect::getTick(lua_State* L)
+uint32 CLuaStatusEffect::getTick()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetTickTime());
-    return 1;
+    return m_PLuaStatusEffect->GetTickTime();
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::setIcon(lua_State* L)
+void CLuaStatusEffect::setIcon(uint16 icon)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetIcon((uint16)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetIcon(icon);
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::setPower(lua_State* L)
+void CLuaStatusEffect::setPower(uint16 power)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetPower((uint16)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetPower(power);
 }
 
-inline int32 CLuaStatusEffect::setSubPower(lua_State* L)
+void CLuaStatusEffect::setSubPower(uint16 subpower)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetSubPower((uint16)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetSubPower(subpower);
 }
 
-inline int32 CLuaStatusEffect::setTier(lua_State* L)
+void CLuaStatusEffect::setTier(uint16 tier)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetTier((uint16)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetTier(tier);
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::setDuration(lua_State* L)
+void CLuaStatusEffect::setDuration(uint32 duration)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetDuration((uint32)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetDuration(duration);
 }
 
-inline int32 CLuaStatusEffect::setTick(lua_State* L)
+void CLuaStatusEffect::setTick(uint32 tick)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetTickTime((uint32)lua_tointeger(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetTickTime(tick);
 }
 
 /************************************************************************
  *                                                                       *
- *  Перезапускаем эффект                                                 *
+ * Restarting the effect                                                 *
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaStatusEffect::resetStartTime(lua_State* L)
+void CLuaStatusEffect::resetStartTime()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
     m_PLuaStatusEffect->SetStartTime(server_clock::now());
-    return 0;
 }
 
-inline int32 CLuaStatusEffect::setStartTime(lua_State* L)
+void CLuaStatusEffect::setStartTime(uint32 time)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetStartTime(get_server_start_time() + std::chrono::milliseconds(lua_tointeger(L, 1)));
-    return 0;
+    m_PLuaStatusEffect->SetStartTime(get_server_start_time() + std::chrono::milliseconds(time));
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::addMod(lua_State* L)
+void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 2) || !lua_isnumber(L, 2));
-
-    m_PLuaStatusEffect->addMod(static_cast<Mod>(lua_tointeger(L, 1)), (int16)lua_tointeger(L, 2));
-    return 0;
+    m_PLuaStatusEffect->addMod(static_cast<Mod>(mod), amount);
 }
 
 //======================================================//
 
-inline int32 CLuaStatusEffect::getFlag(lua_State* L)
+uint32 CLuaStatusEffect::getFlag()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    lua_pushinteger(L, m_PLuaStatusEffect->GetFlag());
-    return 1;
+    return m_PLuaStatusEffect->GetFlag();
 }
 
-inline int32 CLuaStatusEffect::setFlag(lua_State* L)
+void CLuaStatusEffect::setFlag(uint32 flag)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->SetFlag((uint32)lua_tonumber(L, 1));
-    return 0;
+    m_PLuaStatusEffect->SetFlag(flag);
 }
 
-inline int32 CLuaStatusEffect::unsetFlag(lua_State* L)
+void CLuaStatusEffect::unsetFlag(uint32 flag)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaStatusEffect == nullptr);
-
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
-    m_PLuaStatusEffect->UnsetFlag((uint32)lua_tonumber(L, 1));
-    return 0;
+    m_PLuaStatusEffect->UnsetFlag(flag);
 }
 
 //======================================================//
