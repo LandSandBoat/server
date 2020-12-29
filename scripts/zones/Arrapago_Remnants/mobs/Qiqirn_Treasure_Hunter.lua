@@ -15,7 +15,7 @@ function onMobRoamAction(mob)
     local prog = instance:getProgress()
 
     if (mob:isFollowingPath() == false) then
-        mob:speed(40)
+        mob:setSpeed(40)
         mob:pathThrough(ID.points[stage][prog].route, 9)
     end
 end
