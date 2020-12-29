@@ -50,10 +50,10 @@ function onEventFinish(player, csid, option)
             local allies = battlefield:getAllies()
             if #allies == 0 then
                 local trion = battlefield:insertEntity(14183, true, true)
-                trion:setSpawn(allyPos[inst].trionPos)
+                trion:setSpawn(unpack(allyPos[inst].trionPos))
                 trion:spawn()
             end
-            player:setPos(allyPos[inst].playerPos)
+            player:setPos(unpack(allyPos[inst].playerPos))
         end
     end
 end

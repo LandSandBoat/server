@@ -28,6 +28,7 @@
 class CBaseEntity;
 class CCharEntity;
 class CLuaInstance;
+class CLuaSpell;
 
 class CLuaBaseEntity
 {
@@ -54,8 +55,8 @@ public:
     void messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2,
                         sol::object const& p3, sol::object const& dispName); // Sends Special Message
 
-    void  messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
-    int32 messageCombat(lua_State* L);                                                   // Sends Combat Message
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
 
     // Variables
     int32  getCharVar(std::string const& varName);              // Returns a character variable
@@ -67,9 +68,9 @@ public:
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
-    int32 injectPacket(lua_State*);       // Send the character a packet kept in a file
-    int32 injectActionPacket(lua_State*); // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
-    int32 entityVisualPacket(lua_State* L);
+    void  injectPacket(std::string const& filename); // Send the character a packet kept in a file
+    int32 injectActionPacket(lua_State*);            // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
+    void  entityVisualPacket(std::string const& command, sol::object const& entity);
     void  entityAnimationPacket(const char* command);
 
     void  startEvent(sol::object const& EventIDObj, sol::variadic_args va);
@@ -83,7 +84,7 @@ public:
     void  setFlag(uint32 flags);
     uint8 getMoghouseFlag();
     void  setMoghouseFlag(uint8 flag);
-    int32 needToZone(lua_State*); // Check if player has zoned since the flag has been raised
+    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
     uint32 getID();
@@ -102,16 +103,16 @@ public:
     void  resetAI();
     uint8 getStatus();
     void  setStatus(uint8 status); // Sets Character's Status
-    int32 getCurrentAction(lua_State* L);
+    uint8 getCurrentAction();
 
-    int32 lookAt(lua_State* L); // look at given position
-    void  clearTargID();        // clears target of entity
+    void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
+    void clearTargID();                                                                     // clears target of entity
 
     int32 atPoint(lua_State* L);                                       // is at given point
     void  pathTo(float x, float y, float z, sol::object const& flags); // set new path to point without changing action
     int32 pathThrough(lua_State* L);                                   // walk at normal speed through the given points
-    int32 isFollowingPath(lua_State* L);                               // checks if the entity is following a path
-    int32 clearPath(lua_State* L);                                     // removes current pathfind and stops moving
+    bool  isFollowingPath();                                           // checks if the entity is following a path
+    void  clearPath();                                                 // removes current pathfind and stops moving
     int32 checkDistance(lua_State*);                                   // Check Distacnce and returns distance number
     void  wait(sol::object const& milliseconds);                       // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
@@ -177,7 +178,7 @@ public:
     int32 getTeleportMenu(lua_State*);                                           // Get favorites and menu layout preferences
     void  setHomePoint();                                                        // Sets character's homepoint
 
-    int32 resetPlayer(lua_State*); // if player is stuck, GM command @resetPlayer name
+    void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
     void goToEntity(uint32 targetID, sol::object const& option); // Warps self to NPC or Mob; works across multiple game servers
     bool gotoPlayer(std::string const& playerName);              // warps self to target player
@@ -185,7 +186,7 @@ public:
 
     // Items
     uint16 getEquipID(SLOTTYPE slot);                           // Gets the Item Id of the item in specified slot
-    int32  getEquippedItem(lua_State*);                         // Returns the item object from specified slot
+    auto   getEquippedItem(uint8 slot) -> CItem*;               // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location); // Check to see if Entity has item in inventory (hasItem(itemNumber))
     int32  addItem(lua_State*);                                 // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
@@ -224,8 +225,8 @@ public:
     // Storing
     int32 getStorageItem(lua_State*); // returns item object player:getStorageItem(containerid, slotid, equipslotid)
     int32 storeWithPorterMoogle(lua_State* L);
-    int32 getRetrievableItemsForSlip(lua_State* L);
-    int32 retrieveItemFromSlip(lua_State* L);
+    auto  getRetrievableItemsForSlip(uint16 slipId) -> sol::table;
+    void  retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 extraId, uint8 extraData);
 
     // Player Appearance
     uint8  getRace();
@@ -237,10 +238,12 @@ public:
     void   setModelId(uint16 modelId, uint8 slot);
     void   setCostume(uint16 costume);
     uint16 getCostume();
-    int32  costume2(lua_State*);          // set monstrosity costume
+    uint16 getCostume2(); // set monstrosity costume
+    void   setCostume2(uint16 costume);
     uint8  getAnimation();                // Get Entity Animation
     void   setAnimation(uint8 animation); // Set Entity Animation
-    int32  AnimationSub(lua_State*);      // get or set animationsub
+    uint8  getAnimationSub();
+    void   setAnimationSub(uint8 animationsub);
 
     // Player Status
     uint8 getNation();             // Gets Nation of Entity
@@ -266,7 +269,8 @@ public:
 
     bool canUseMisc(uint16 misc); // Check misc flags of current zone.
 
-    int32 speed(lua_State*); // скорость передвижения сущности
+    uint8 getSpeed(); // скорость передвижения сущности
+    void  setSpeed(uint8 speedVal);
 
     uint32 getPlaytime(sol::object const& shouldUpdate);
     int32  getTimeCreated();
@@ -287,7 +291,7 @@ public:
     uint8 getLevelCap();            // genkai
     void  setLevelCap(uint8 cap);
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
-    int32 addJobTraits(lua_State*);                   // Add job traits
+    void  addJobTraits(uint8 jobID, uint8 level);     // Add job traits
 
     // Player Titles and Fame
     uint16 getTitle();
@@ -379,7 +383,8 @@ public:
     void  setHP(int32 value);          // Set hp of Entity to value
     int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
     void  delHP(int32 delAmt);         // Subtract hp of Entity
-    int32 takeDamage(lua_State*);      // Takes damage from the provided attacker
+    void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
+                     sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
     void  hideHP(bool value);
 
     int32 getMP();
@@ -428,37 +433,37 @@ public:
     void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    int32 getParty(lua_State* L);
-    int32 getPartyWithTrusts(lua_State* L);
-    int32 getPartySize(lua_State* L); // Get the size of a party in an entity's alliance
-    bool  hasPartyJob(uint8 job);
-    int32 getPartyMember(lua_State* L); // Get a character entity from another entity's party or alliance
-    int32 getPartyLeader(lua_State* L);
-    int32 getLeaderID(lua_State* L); // Get the id of the alliance/party leader *falls back to player id if no party*
-    int32 getPartyLastMemberJoinedTime(lua_State* L);
-    void  forMembersInRange(float range, sol::function function);
+    auto   getParty(lua_State* L) -> sol::table;
+    auto   getPartyWithTrusts() -> sol::table;
+    uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
+    bool   hasPartyJob(uint8 job);
+    auto   getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*; // Get a character entity from another entity's party or alliance
+    auto   getPartyLeader() -> CBaseEntity*;
+    uint32 getLeaderID(); // Get the id of the alliance/party leader *falls back to player id if no party*
+    uint32 getPartyLastMemberJoinedTime();
+    void   forMembersInRange(float range, sol::function function);
 
     int32 addPartyEffect(lua_State*);    // Adds Effect to all party members
     int32 hasPartyEffect(lua_State*);    // Has Effect from all party members
     int32 removePartyEffect(lua_State*); // Removes Effect from all party members
 
-    int32 getAlliance(lua_State* L);
+    auto  getAlliance() -> sol::table;
     uint8 getAllianceSize(); // Get the size of an entity's alliance
 
-    int32 reloadParty(lua_State* L);
-    int32 disableLevelSync(lua_State* L);
-    int32 isLevelSync(lua_State* L);
+    void reloadParty();
+    void disableLevelSync();
+    bool isLevelSync();
 
     uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
-    int32 checkKillCredit(lua_State*);
+    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
     // Instances
     auto getInstance() -> CInstance*;
     void setInstance(CLuaInstance* PLuaInstance);
     void createInstance(uint8 instanceID, uint16 zoneID);
     void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
-    // int32 isInAssault(lua_State*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
+    // int32 isInAssault(lua_Stat*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 
     uint16 getConfrontationEffect();
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
@@ -468,7 +473,7 @@ public:
     int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
     uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
     bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
-    int32 enterBattlefield(lua_State*);                                                                   // enter a battlefield entity is registered with
+    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
     bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
     bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
 
@@ -480,22 +485,22 @@ public:
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
 
     int32 countdown(lua_State* L);
-    int32 enableEntities(lua_State* L);
+    void  enableEntities(std::vector<uint32> data);
     int32 independantAnimation(lua_State* L);
 
-    void  engage(uint16 requestedTarget);
-    bool  isEngaged();
-    void  disengage();
-    void  timer(int ms, sol::function func); // execute lua closure after some time
-    void  queue(int ms, sol::function func);
-    void  addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
-    bool  hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
-    void  resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
-    void  resetRecasts();                            // Reset recasts for the caller
+    void engage(uint16 requestedTarget);
+    bool isEngaged();
+    void disengage();
+    void timer(int ms, sol::function func); // execute lua closure after some time
+    void queue(int ms, sol::function func);
+    void addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
+    bool hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
+    void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
+    void resetRecasts();                            // Reset recasts for the caller
 
-    void  addListener(std::string eventName, std::string identifier, sol::function func);
-    void  removeListener(std::string identifier);
-    void  triggerListener(std::string eventName, sol::variadic_args args);
+    void addListener(std::string eventName, std::string identifier, sol::function func);
+    void removeListener(std::string identifier);
+    void triggerListener(std::string eventName, sol::variadic_args args);
 
     auto  getEntity(uint16 targetID) -> CBaseEntity*;
     int32 getNearbyEntities(lua_State* L);
@@ -522,7 +527,7 @@ public:
     void  resetEnmity(CLuaBaseEntity* PEntity);   // resets enmity to player for specificed mob
     void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
     bool  hasEnmity();                            // Does the player have any enmity at all from any source
-    int32 getNotorietyList(lua_State*);           // Returns a table with all of the entities on a chars notoriety list
+    auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     bool   addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
@@ -563,7 +568,8 @@ public:
     bool   hasBustEffect(uint16 id); // Checks to see if a character has a specified busted corsair roll
     uint8  numBustEffects();         // Gets the number of bust effects on the player
     uint16 healingWaltz();           // Used with "Healing Waltz" ability
-    int32  addBardSong(lua_State*);  // Adds bard song effect
+    bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
+                       uint16 duration, uint16 subID, uint16 subPower, uint16 tier); // Adds bard song effect
 
     void charm(CLuaBaseEntity const* target); // applies charm on target
     void uncharm();                           // removes charm on target
@@ -581,20 +587,20 @@ public:
     bool   isSpellAoE(uint16 spellId);
 
     int32 physicalDmgTaken(int32 damage, sol::object const& dmgType);
-    int32 magicDmgTaken(lua_State* L);
+    int32 magicDmgTaken(int32 damage, sol::object const& eleType);
     int32 rangedDmgTaken(int32 damage, sol::object const& dmgType);
     int32 breathDmgTaken(int32 damage);
     void  handleAfflatusMiseryDamage(int32 damage);
 
     bool   isWeaponTwoHanded();
-    int32  getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
-    uint16 getWeaponDmg();                // gets the current equipped weapons' DMG rating
-    uint16 getWeaponDmgRank();            // gets the current equipped weapons' DMG rating for Rank calc
-    uint16 getOffhandDmg();               // gets the current equipped offhand's DMG rating (used in WS calcs)
-    uint16 getOffhandDmgRank();           // gets the current equipped offhand's DMG rating for Rank calc
-    uint16 getRangedDmg();                // Get ranged weapon DMG rating
-    uint16 getRangedDmgRank();            // Get ranged weapond DMG rating used for calculating rank
-    uint16 getAmmoDmg();                  // Get ammo DMG rating
+    int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1); // gets the damage of a single hit vs the specified mob
+    uint16 getWeaponDmg();                                                             // gets the current equipped weapons' DMG rating
+    uint16 getWeaponDmgRank();                                                         // gets the current equipped weapons' DMG rating for Rank calc
+    uint16 getOffhandDmg();                                                            // gets the current equipped offhand's DMG rating (used in WS calcs)
+    uint16 getOffhandDmgRank();                                                        // gets the current equipped offhand's DMG rating for Rank calc
+    uint16 getRangedDmg();                                                             // Get ranged weapon DMG rating
+    uint16 getRangedDmgRank();                                                         // Get ranged weapond DMG rating used for calculating rank
+    uint16 getAmmoDmg();                                                               // Get ammo DMG rating
 
     void removeAmmo();
 
@@ -607,7 +613,7 @@ public:
     int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
                                 float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
 
-    int32 takeSpellDamage(lua_State* L);
+    int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
 
     // Pets and Automations
     void spawnPet(sol::object const& arg0); // Calls Pet
@@ -624,10 +630,10 @@ public:
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
     bool hasValidJugPetItem();
 
-    bool   hasPet();           // returns true if the player has a pet
-    int32  getPet(lua_State*); // Creates an LUA reference to a pet entity
-    uint32 getPetID();         // If the entity has a pet, returns the PetID to identify pet type.
-    int32  getMaster(lua_State*);
+    bool   hasPet();                 // returns true if the player has a pet
+    auto   getPet() -> CBaseEntity*; // Creates an LUA reference to a pet entity
+    uint32 getPetID();               // If the entity has a pet, returns the PetID to identify pet type.
+    auto   getMaster() -> CBaseEntity*;
     uint8  getPetElement();
 
     auto getPetName() -> const char*;
@@ -669,8 +675,8 @@ public:
 
     void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
     bool   isSpawned();
-    auto   getSpawnPos() -> std::map<std::string, float>; // Get Mob spawn position (x,y,z)
-    int32  setSpawn(lua_State*);                          // Sets spawn point
+    auto   getSpawnPos() -> std::map<std::string, float>;               // Get Mob spawn position (x,y,z)
+    void   setSpawn(float x, float y, float z, sol::object const& rot); // Sets spawn point
     uint32 getRespawnTime();
     void   setRespawnTime(uint32 seconds); // set respawn time
 
@@ -698,21 +704,21 @@ public:
     void  addMobMod(uint16 mobModID, int16 value);
     void  delMobMod(uint16 mobModID, int16 value);
 
-    int32 getBattleTime(lua_State*); // Get the time in second of the battle
+    uint32 getBattleTime(); // Get the time in second of the battle
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
 
-    int32 getTarget(lua_State*);
+    auto  getTarget() -> CBaseEntity*;
     void  updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
     int32 getEnmityList(lua_State* L);
-    int32 getTrickAttackChar(lua_State*); // true if TA target is available
+    auto  getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> CBaseEntity*; // true if TA target is available
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    int32 castSpell(lua_State*);                                 // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    void  useJobAbility(uint16 skillID, sol::object const& pet); // forces a job ability use (players/pets only)
-    int32 useMobAbility(lua_State*);                             // forces a mob to use a mobability (parameter = skill ID)
+    void  castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void  useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
+    int32 useMobAbility(lua_State*);                               // forces a mob to use a mobability (parameter = skill ID)
     bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);
@@ -722,12 +728,12 @@ public:
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
     void   setDropID(uint32 dropID);
-    int32  addTreasure(lua_State*);         // Add item to directly to treasure pool
-    uint16 getStealItem();                  // gets ItemID of droplist steal item from mob
-    uint16 getDespoilItem();                // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
-    uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil
-    bool   itemStolen();                    // sets mob's ItemStolen var = true
-    int16  getTHlevel();                    // Returns the Monster's current Treasure Hunter Tier
+    void   addTreasure(uint16 itemID, sol::object const& arg1, sol::object const& arg2); // Add item to directly to treasure pool
+    uint16 getStealItem();                                                               // gets ItemID of droplist steal item from mob
+    uint16 getDespoilItem();                                                             // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
+    uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
+    bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
+    int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
 
     static void Register();
 };

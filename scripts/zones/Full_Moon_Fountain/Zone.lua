@@ -70,10 +70,10 @@ function onEventFinish(player, csid, option)
             local allies = battlefield:getAllies()
             if #allies == 0 then
                 local ajido = battlefield:insertEntity(14184, true, true)
-                ajido:setSpawn(allyPos[inst].ajidoPos)
+                ajido:setSpawn(unpack(allyPos[inst].ajidoPos))
                 ajido:spawn()
             end
-            player:setPos(allyPos[inst].playerPos)
+            player:setPos(unpack(allyPos[inst].playerPos))
         end
     end
 end
