@@ -15,7 +15,7 @@ require("scripts/globals/monstertpmoves")
 function onMobSkillCheck(target, mob, skill)
     if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON)) then
         return 1
-    elseif (mob:AnimationSub() == 1) then
+    elseif (mob:getAnimationSub() == 1) then
         return 1
     elseif (target:isBehind(mob, 48) == true) then
         return 1

@@ -33,7 +33,7 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function enterShell(mob)
-    mob:AnimationSub(mob:AnimationSub() + 1)
+    mob:setAnimationSub(mob:getAnimationSub() + 1)
     mob:SetAutoAttackEnabled(false)
     mob:addMod(tpz.mod.UDMGPHYS, -75)
     mob:addMod(tpz.mod.UDMGRANGE, -75)
@@ -45,7 +45,7 @@ local function enterShell(mob)
 end
 
 local function exitShell(mob)
-    mob:AnimationSub(mob:AnimationSub() - 1)
+    mob:setAnimationSub(mob:getAnimationSub() - 1)
     mob:SetAutoAttackEnabled(true)
     mob:delMod(tpz.mod.UDMGPHYS, -75)
     mob:delMod(tpz.mod.UDMGRANGE, -75)
@@ -92,7 +92,7 @@ g_mixins.families.uragnite = function(mob)
 
     mob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
         if attackType == tpz.attackType.PHYSICAL then
-            if math.random(100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:AnimationSub(), 1) == 0 then
+            if math.random(100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:getAnimationSub(), 1) == 0 then
                 enterShell(mob)
                 local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
                 mob:timer(timeInShell * 1000, function(mob)

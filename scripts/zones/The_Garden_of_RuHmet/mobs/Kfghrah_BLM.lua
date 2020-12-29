@@ -8,7 +8,7 @@ require("scripts/globals/magic") -- no spells are currently set due to lack of i
 
 function onMobSpawn(mob)
     -- Set core Skin and mob elemental bonus
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
     mob:setLocalVar("roamTime", os.time())
     mob:setModelId(1168) -- Dark
 end
@@ -21,7 +21,7 @@ function onMobRoam(mob)
         if (roamForm == 1) then
             roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
         end
-        mob:AnimationSub(roamForm)
+        mob:setAnimationSub(roamForm)
         mob:setLocalVar("roamTime", os.time())
     end
 end
@@ -35,7 +35,7 @@ function onMobFight(mob, target)
         if (battleForm == 1) then
             battleForm = 0
         end
-        mob:AnimationSub(battleForm)
+        mob:setAnimationSub(battleForm)
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end

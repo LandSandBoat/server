@@ -11,7 +11,7 @@ require("scripts/globals/status")
 
 function onMobSpawn(mob)
     -- Set AnimationSub to 0, put it in pot form
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
     onPath(mob)
 end
 
@@ -29,23 +29,23 @@ function onMobFight(mob)
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
 
-    if (mob:AnimationSub() == 0 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(2, 3))
+    if (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(2, 3))
         mob:setLocalVar("changeTime", mob:getBattleTime())
-    elseif (mob:AnimationSub() == 1 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(2, 3))
+    elseif (mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(2, 3))
         mob:setLocalVar("changeTime", mob:getBattleTime())
-    elseif (mob:AnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
+    elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
         local aniChance = math.random(0, 1)
         if (aniChance == 0) then
-            mob:AnimationSub(0)
+            mob:setAnimationSub(0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         else
-            mob:AnimationSub(3)
+            mob:setAnimationSub(3)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
-    elseif (mob:AnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(0, 2))
+    elseif (mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(0, 2))
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 

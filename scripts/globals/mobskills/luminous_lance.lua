@@ -34,7 +34,7 @@ function onMobWeaponSkill(target, mob, skill)
     mob:entityAnimationPacket("ids0")
     mob:setLocalVar("lanceTime", mob:getBattleTime())
     mob:setLocalVar("lanceOut", 0)
-    target:AnimationSub(3)
+    target:setAnimationSub(3)
 
     -- Cannot be resisted
     target:addStatusEffect(tpz.effect.STUN, 0, 0, 20)

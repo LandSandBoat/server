@@ -20,11 +20,11 @@ g_mixins.weapon_break = function(mob)
 
     mob:addListener("CRITICAL_TAKE", "BREAK_CRITICAL_TAKE", function(mob)
         if math.random(100) <= mob:getLocalVar("BreakChance") then
-            local animationSub = mob:AnimationSub()
+            local animationSub = mob:getAnimationSub()
 
             -- break weapon
             if animationSub == 0 then
-                mob:AnimationSub(1)
+                mob:setAnimationSub(1)
             end
         end
 

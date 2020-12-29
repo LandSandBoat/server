@@ -13,7 +13,7 @@ require("scripts/globals/status")
 function onMobSkillCheck(target, mob, skill)
     local currentForm = mob:getLocalVar("form") -- Proto-Omega's script sets this.
 
-    if (mob:AnimationSub() == 2 and currentForm == 1) then -- omega first bipedform
+    if (mob:getAnimationSub() == 2 and currentForm == 1) then -- omega first bipedform
         return 0
     end
     return 1

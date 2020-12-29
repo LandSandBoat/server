@@ -9,7 +9,7 @@ require("scripts/globals/status")
 
 function onMobSkillCheck(target, mob, skill)
     -- animsub 1= standing, animsub 0 = all fours
-    if (mob:AnimationSub() == 0) then
+    if (mob:getAnimationSub() == 0) then
         return 1
     end
 

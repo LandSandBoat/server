@@ -17,9 +17,9 @@ function onGameHour(zone)
 
     -- Next ferry is Al Zhabi for higher values.
     if timer >= 576 then
-        GetNPCByID(ID.npc.LAUGHING_BISON):AnimationSub(1)
+        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(1)
     else
-        GetNPCByID(ID.npc.LAUGHING_BISON):AnimationSub(0)
+        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
     SetServerVariable("Mhaura_Deastination", math.random(1, 100))
 end

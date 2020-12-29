@@ -36,7 +36,7 @@ function onMobFight(mob, target)
 
     -- Return to ground at 33% HP
     if
-        mob:AnimationSub() == 1 and -- is flying
+        mob:getAnimationSub() == 1 and -- is flying
         mob:getHPP() <= 33 and
         notBusy(mob)
     then
@@ -56,10 +56,10 @@ function onMobFight(mob, target)
     elseif
         mob:getHPP() > 33 and
         mob:getHPP() <= 66 and
-        mob:AnimationSub() == 0 and -- is on ground
+        mob:getAnimationSub() == 0 and -- is on ground
         notBusy(mob)
     then
-        mob:AnimationSub(1) -- flying model stance
+        mob:setAnimationSub(1) -- flying model stance
         mob:addStatusEffectEx(tpz.effect.TOO_HIGH, 0, 1, 0, 0) -- melee attacks miss now
         mob:SetMobSkillAttack(1146) -- change default attack to ranged fire magic damage
         mob:setMobMod(tpz.mobMod.SKILL_LIST, 1147) -- change skill set to flying moves

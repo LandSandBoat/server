@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 
 function onMobSpawn(mob)
     -- Change animation to open
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
 end
 
 function onMobFight(mob)
@@ -18,10 +18,10 @@ function onMobFight(mob)
 
     if mob:getBattleTime() - changeTime > randomTime then
         -- Change close to open.
-        if (mob:AnimationSub() == 1) then
-            mob:AnimationSub(2)
+        if (mob:getAnimationSub() == 1) then
+            mob:setAnimationSub(2)
         else -- Change from open to close
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end

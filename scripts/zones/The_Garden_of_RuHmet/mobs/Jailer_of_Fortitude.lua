@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     })
 
     -- Change animation to humanoid w/ prismatic core
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
     mob:setModelId(1169)
 end
 
@@ -51,7 +51,7 @@ function onMagicHit(caster, target, spell)
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
         target:setLocalVar("reflectTime", target:getBattleTime())
-        target:AnimationSub(1)
+        target:setAnimationSub(1)
     end
 
     return 1

@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 
 function onMobEngaged(mob, target)
 
-    if (mob:AnimationSub() == 3) then
+    if (mob:getAnimationSub() == 3) then
         tpz.core.setDropRate(113, 1822, 1000)
     else
         tpz.core.setDropRate(113, 1822, 0)

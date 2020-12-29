@@ -46,7 +46,7 @@ function onMobSpawn(mob)
 end
 
 function onMobFight(mob, target)
-    if mob:AnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
+    if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
         mob:setLocalVar("jobChanged", 1)
         mob:setSpellList(297) -- Set WHM spell list.
         -- set new JSA parameters
@@ -62,15 +62,15 @@ end
 
 function onCriticalHit(mob)
     local RND = math.random(1, 100)
-    if mob:AnimationSub() == 0 and RND <= 10 then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and RND <= 10 then
+        mob:setAnimationSub(1)
     end
 end
 
 function onWeaponskillHit(mob, attacker, weaponskill)
     local RND = math.random(1, 100)
-    if mob:AnimationSub() == 0 and RND <= 10 then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and RND <= 10 then
+        mob:setAnimationSub(1)
     end
 
     return 0

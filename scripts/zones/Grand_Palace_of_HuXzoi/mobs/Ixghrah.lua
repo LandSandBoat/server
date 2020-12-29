@@ -17,7 +17,7 @@ function onMobFight(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
 
     if (mob:getBattleTime() - changeTime > 60) then
-        mob:AnimationSub(math.random(0, 3))
+        mob:setAnimationSub(math.random(0, 3))
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end

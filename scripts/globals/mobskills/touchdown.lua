@@ -20,6 +20,6 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.NONE)
     mob:delStatusEffect(tpz.effect.TOO_HIGH)
     mob:SetMobSkillAttack(0)
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
     return dmg
 end

@@ -203,7 +203,7 @@ end
 -- Desc: Despawn a chest and reset its local var's
 ----------------------------------------------------------------------------------
 local function removeChest(npc)
-    npc:AnimationSub(0)
+    npc:setAnimationSub(0)
     npc:setStatus(tpz.status.DISAPPEAR)
     npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.DESPAWNED)
 end
@@ -235,7 +235,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     if npc ~= nil then
         npc:resetLocalVars()
         npc:setAnimation(0)
-        npc:AnimationSub(4)
+        npc:setAnimationSub(4)
         -------------------------------------
         -- Chest data
         -------------------------------------
@@ -684,7 +684,7 @@ tpz.caskets.onTrigger = function(player, npc)
     -- Chest Unlocked
     -------------------------------------------------
         if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then      -- is the chest shut?, then open it.
-            npc:AnimationSub(1)
+            npc:setAnimationSub(1)
             npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
         end
 
@@ -934,7 +934,7 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                         npc:setLocalVar("[caskets]LOCKED", 0)
 
                         if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then  -- is the chest shut?, then open it.
-                           npc:AnimationSub(1)
+                           npc:setAnimationSub(1)
                            npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
                            -- RoE Timed Record #4019 - Crack Tresure Caskets
                            if player:getEminenceProgress(4019) then

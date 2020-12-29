@@ -20,7 +20,7 @@ function onMobWeaponSkill(target, mob, skill)
     local typeEffect = tpz.effect.PHYSICAL_SHIELD
 
     mob:addStatusEffect(tpz.effect.PHYSICAL_SHIELD, 0, 0, 0)
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
 
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     return tpz.effect.PHYSICAL_SHIELD

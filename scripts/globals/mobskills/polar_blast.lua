@@ -22,7 +22,7 @@ function onMobSkillCheck(target, mob, skill)
         end
     end
 
-    if (mob:AnimationSub() <= 1) then
+    if (mob:getAnimationSub() <= 1) then
         return 0
     else
         return 1
@@ -38,7 +38,7 @@ function onMobWeaponSkill(target, mob, skill)
 
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.ICE)
 
-    if (mob:getFamily() == 313 and bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) == 0 and mob:AnimationSub() == 1) then -- re-enable no turn if third head is dead (Tinnin), else it's re-enabled after the upcoming Pyric Blast
+    if (mob:getFamily() == 313 and bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) == 0 and mob:getAnimationSub() == 1) then -- re-enable no turn if third head is dead (Tinnin), else it's re-enabled after the upcoming Pyric Blast
         mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
     end
 

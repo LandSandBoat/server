@@ -29,8 +29,8 @@ function onMobEngaged(mob, target)
 end
 
 function onMobFight(mob, target)
-    if mob:AnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
-        mob:AnimationSub(0)
+    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
+        mob:setAnimationSub(0)
         mob:stun(1500)
     end
 

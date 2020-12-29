@@ -27,7 +27,7 @@ function onMobSpawn(mob)
         },
     })
 
-    mob:AnimationSub(0) -- Mouth closed
+    mob:setAnimationSub(0) -- Mouth closed
     mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(tpz.mod.TRIPLE_ATTACK, 20)
     mob:setMod(tpz.mod.REGEN, 10)
@@ -69,12 +69,12 @@ function onMobDespawn(mob)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
     if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
         secondPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
-        secondPrudence:AnimationSub(3) -- Mouth Open
+        secondPrudence:setAnimationSub(3) -- Mouth Open
         secondPrudence:addMod(tpz.mod.ATTP, 100)
         secondPrudence:delMod(tpz.mod.DEFP, -50)
     else
         firstPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
-        firstPrudence:AnimationSub(3) -- Mouth Open
+        firstPrudence:setAnimationSub(3) -- Mouth Open
         firstPrudence:addMod(tpz.mod.ATTP, 100)
         firstPrudence:delMod(tpz.mod.DEFP, -50)
     end

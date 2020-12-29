@@ -17,11 +17,11 @@ end
 
 function onCriticalHit(mob, attacker)
     if math.random(100) <= mob:getLocalVar("BreakChance") then
-        local animationSub = mob:AnimationSub()
+        local animationSub = mob:getAnimationSub()
         if animationSub == 4 then
-            mob:AnimationSub(1) -- 1 horn broken
+            mob:setAnimationSub(1) -- 1 horn broken
         elseif animationSub == 1 then
-            mob:AnimationSub(2) -- both horns broken
+            mob:setAnimationSub(2) -- both horns broken
         end
     end
 end

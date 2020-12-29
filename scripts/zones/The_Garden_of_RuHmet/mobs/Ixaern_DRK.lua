@@ -26,7 +26,7 @@ function onMobInitialize(mob)
             mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mob)
                 mob:setHP(mob:getMaxHP())
-                mob:AnimationSub(3)
+                mob:setAnimationSub(3)
                 mob:resetAI()
                 mob:stun(3000)
                 local new_target = mob:getEntity(targetid)
@@ -46,13 +46,13 @@ function onMobInitialize(mob)
     mob:addListener("AERN_RERAISE", "IX_DRK_RERAISE", function(mob, timesReraised)
         mob:setLocalVar("AERN_RERAISES", timesReraised + 1)
         mob:timer(5000, function(mob)
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end)
     end)
 end
 
 function onMobSpawn(mob)
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
 
     tpz.mix.jobSpecial.config(mob, {
         specials =
