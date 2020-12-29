@@ -131,55 +131,69 @@ namespace luautils
         auto tpz      = lua["tpz"].get_or_create<sol::table>();
         auto tpz_core = tpz["core"].get_or_create<sol::table>();
 
-        // Bind core functions to tpz.core
-        tpz_core.set_function("getNPCByID", &luautils::GetNPCByID);
-        tpz_core.set_function("getMobByID", &luautils::GetMobByID);
-        tpz_core.set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
-        tpz_core.set_function("getRegionOwner", &luautils::GetRegionOwner);
-        tpz_core.set_function("getRegionInfluence", &luautils::GetRegionInfluence);
-        tpz_core.set_function("getNationRank", &luautils::getNationRank);
-        tpz_core.set_function("getConquestBalance", &luautils::getConquestBalance);
-        tpz_core.set_function("isConquestAlliance", &luautils::isConquestAlliance);
-        tpz_core.set_function("setMobPos", &luautils::setMobPos);
-        tpz_core.set_function("spawnMob", &luautils::SpawnMob);
-        tpz_core.set_function("despawnMob", &luautils::DespawnMob);
-        tpz_core.set_function("getPlayerByName", &luautils::GetPlayerByName);
-        tpz_core.set_function("getPlayerByID", &luautils::GetPlayerByID);
-        tpz_core.set_function("jstMidnight", &luautils::JstMidnight);
-        tpz_core.set_function("vanadielTime", &luautils::VanadielTime);
-        tpz_core.set_function("vanadielTOTD", &luautils::VanadielTOTD);
-        tpz_core.set_function("vanadielHour", &luautils::VanadielHour);
-        tpz_core.set_function("vanadielMinute", &luautils::VanadielMinute);
-        tpz_core.set_function("vanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
-        tpz_core.set_function("vanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
-        tpz_core.set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
-        tpz_core.set_function("vanadielYear", &luautils::VanadielYear);
-        tpz_core.set_function("vanadielMonth", &luautils::VanadielMonth);
-        tpz_core.set_function("vanadielDayElement", &luautils::VanadielDayElement);
-        tpz_core.set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
-        tpz_core.set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
-        tpz_core.set_function("vanadielRSERace", &luautils::VanadielRSERace);
-        tpz_core.set_function("vanadielRSELocation", &luautils::VanadielRSELocation);
-        tpz_core.set_function("setVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
-        tpz_core.set_function("isMoonNew", &luautils::IsMoonNew);
-        tpz_core.set_function("isMoonFull", &luautils::IsMoonFull);
-        tpz_core.set_function("runElevator", &luautils::StartElevator);
-        tpz_core.set_function("getServerVariable", &luautils::GetServerVariable);
-        tpz_core.set_function("setServerVariable", &luautils::SetServerVariable);
-        tpz_core.set_function("clearVarFromAll", &luautils::ClearVarFromAll);
-        tpz_core.set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
-        tpz_core.set_function("updateServerMessage", &luautils::UpdateServerMessage);
-        tpz_core.set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
-        tpz_core.set_function("disallowRespawn", &luautils::DisallowRespawn);
-        tpz_core.set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
-        tpz_core.set_function("setDropRate", &luautils::SetDropRate);
-        tpz_core.set_function("nearLocation", &luautils::NearLocation);
-        tpz_core.set_function("terminate", &luautils::Terminate);
-        tpz_core.set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
-        tpz_core.set_function("getReadOnlyItem", &luautils::GetReadOnlyItem);
-        tpz_core.set_function("getAbility", &luautils::GetAbility);
-        tpz_core.set_function("getSpell", &luautils::GetSpell);
-        tpz_core.set_function("selectDailyItem", &luautils::SelectDailyItem);
+        // Set functions in both global namespace and as part of tpz.core
+        // Example:
+        // set_function("getNPCByID", &luautils::GetNPCByID);
+        // -> GetNPCByID() or tpz.core.getNPCByID()
+        auto set_function = [&](std::string name, auto&& func) {
+            auto lowerName = name;
+            auto upperName = name;
+
+            lowerName[0] = std::tolower(lowerName[0]);
+            upperName[0] = std::toupper(upperName[0]);
+
+            tpz_core.set_function(lowerName, func);
+            lua.set_function(upperName, func);
+        };
+
+        set_function("getNPCByID", &luautils::GetNPCByID);
+        set_function("getMobByID", &luautils::GetMobByID);
+        set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
+        set_function("getRegionOwner", &luautils::GetRegionOwner);
+        set_function("getRegionInfluence", &luautils::GetRegionInfluence);
+        set_function("getNationRank", &luautils::getNationRank);
+        set_function("getConquestBalance", &luautils::getConquestBalance);
+        set_function("isConquestAlliance", &luautils::isConquestAlliance);
+        set_function("setMobPos", &luautils::setMobPos);
+        set_function("spawnMob", &luautils::SpawnMob);
+        set_function("despawnMob", &luautils::DespawnMob);
+        set_function("getPlayerByName", &luautils::GetPlayerByName);
+        set_function("getPlayerByID", &luautils::GetPlayerByID);
+        set_function("jstMidnight", &luautils::JstMidnight);
+        set_function("vanadielTime", &luautils::VanadielTime);
+        set_function("vanadielTOTD", &luautils::VanadielTOTD);
+        set_function("vanadielHour", &luautils::VanadielHour);
+        set_function("vanadielMinute", &luautils::VanadielMinute);
+        set_function("vanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
+        set_function("vanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
+        set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
+        set_function("vanadielYear", &luautils::VanadielYear);
+        set_function("vanadielMonth", &luautils::VanadielMonth);
+        set_function("vanadielDayElement", &luautils::VanadielDayElement);
+        set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
+        set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
+        set_function("vanadielRSERace", &luautils::VanadielRSERace);
+        set_function("vanadielRSELocation", &luautils::VanadielRSELocation);
+        set_function("setVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
+        set_function("isMoonNew", &luautils::IsMoonNew);
+        set_function("isMoonFull", &luautils::IsMoonFull);
+        set_function("runElevator", &luautils::StartElevator);
+        set_function("getServerVariable", &luautils::GetServerVariable);
+        set_function("setServerVariable", &luautils::SetServerVariable);
+        set_function("clearVarFromAll", &luautils::ClearVarFromAll);
+        set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
+        set_function("updateServerMessage", &luautils::UpdateServerMessage);
+        set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
+        set_function("disallowRespawn", &luautils::DisallowRespawn);
+        set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        set_function("setDropRate", &luautils::SetDropRate);
+        set_function("nearLocation", &luautils::NearLocation);
+        set_function("terminate", &luautils::Terminate);
+        set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
+        set_function("getReadOnlyItem", &luautils::GetReadOnlyItem);
+        set_function("getAbility", &luautils::GetAbility);
+        set_function("getSpell", &luautils::GetSpell);
+        set_function("selectDailyItem", &luautils::SelectDailyItem);
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -1221,16 +1235,19 @@ namespace luautils
     {
         CZone* PZone = zoneutils::GetZone(ZoneID);
 
-        lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
+        lua.script_file(filename);
 
-        if(!lua["onInitialize"].valid())
+        auto onInitialize = lua.get<sol::function>("onInitialize");
+        if (!onInitialize.valid())
         {
             return -1;
         }
 
         CLuaZone LuaZone(PZone);
 
-        if (auto result = lua["onInitialize"](LuaZone); !result.valid())
+        auto result = onInitialize(LuaZone);
+        if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onInitialize: %s\n", err.what());
@@ -1248,6 +1265,8 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning)
     {
+        TracyZoneScoped;
+
         auto onGameIn = lua["tpz"]["player"]["onGameIn"];
         if (!onGameIn.valid())
         {
@@ -1274,6 +1293,8 @@ namespace luautils
 
     int32 OnZoneIn(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         lua.script_file(fmt::format("scripts/zones/{}/Zone.lua",
                        PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName()));
 
@@ -1295,6 +1316,8 @@ namespace luautils
 
     void AfterZoneIn(CBaseEntity* PChar)
     {
+        TracyZoneScoped;
+
         lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName()));
 
         if (!lua["afterZoneIn"].valid())
@@ -1318,6 +1341,8 @@ namespace luautils
 
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion)
     {
+        TracyZoneScoped;
+
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1338,12 +1363,14 @@ namespace luautils
 
         lua.script_file(fmt::format(filename));
 
-        if (!lua["onRegionEnter"].valid())
+        auto onRegionEnter = lua.get<sol ::function>("onRegionEnter");
+        if (!onRegionEnter.valid())
         {
             return -1;
         }
 
-        auto result = lua["onRegionEnter"](CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        auto result = onRegionEnter(CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onRegionEnter: %s\n", err.what());
@@ -1361,6 +1388,8 @@ namespace luautils
 
     int32 OnRegionLeave(CCharEntity* PChar, CRegion* PRegion)
     {
+        TracyZoneScoped;
+
         std::string filename;
         if (PChar->PInstance)
         {
@@ -1380,12 +1409,14 @@ namespace luautils
 
         lua.script_file(fmt::format(filename));
 
-        if (!lua["onRegionLeave"].valid())
+        auto onRegionLeave = lua.get<sol::function>("onRegionLeave");
+        if (!onRegionLeave.valid())
         {
             return -1;
         }
 
-        auto result = lua["onRegionLeave"](CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        auto result = onRegionLeave(CLuaBaseEntity(PChar), CLuaRegion(PRegion));
+        if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onRegionLeave: %s\n", err.what());
@@ -1415,15 +1446,14 @@ namespace luautils
 
         lua.script_file(filename);
 
-        sol::function onTrigger = lua["onTrigger"];
-
+        auto onTrigger = lua.get<sol::function>("onTrigger");
         if (!onTrigger.valid())
         {
             ShowWarning("luautils::onTrigger\n");
             return -1;
         }
 
-        sol::protected_function_result result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc)); 
+        auto result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc)); 
         if (!result.valid())
         {
             sol::error err = result;
@@ -3120,7 +3150,7 @@ namespace luautils
     {
         /*
         TracyZoneScoped;
-        lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
+        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName()));
 
         if (!lua["onGameHour"].valid())
         {
@@ -3142,7 +3172,7 @@ namespace luautils
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather)
     {
         /*
-        lua_prepscript("scripts/zones/%s/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+        lua_prepscript("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
 
         if (prepFile(File, "onZoneWeatherChange"))
         {
@@ -3164,7 +3194,7 @@ namespace luautils
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD)
     {
         /*
-        lua_prepscript("scripts/zones/%s/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+        lua_prepscript("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
 
         if (prepFile(File, "onTOTDChange"))
         {
@@ -3974,34 +4004,32 @@ namespace luautils
         return 0;
     }
 
-    int32 OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID)
+    void OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID)
     {
-        lua_prepscript("scripts/zones/%s/npcs/%s.lua", PNpc->loc.zone->GetName(), PNpc->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onTimeTrigger"))
+        auto filename = fmt::format("scripts/zones/{}/npcs/{}.lua", PNpc->loc.zone->GetName(), PNpc->GetName());
+        lua.script_file(filename);
+
+        auto onTimeTrigger = lua.get<sol::function>("onTimeTrigger");
+        if (!onTimeTrigger.valid())
         {
-            return -1;
+            return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PNpc);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, triggerID);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onTimeTrigger(CLuaBaseEntity(PNpc), triggerID);
+        if (!result.valid())
         {
-            ShowError("luautils::onTimeTrigger: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
+            sol::error err = result;
+            ShowError("luautils::onTimeTrigger: %s\n", err.what());
+            return;
         }
-
-        return 0;
     }
 
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type)
     {
         TracyZoneScoped;
-        lua.script_file(fmt::format("scripts/zones/%s/Zone.lua", PZone->GetName()));
+        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName()));
 
         CLuaZone LuaZone(PZone);
 

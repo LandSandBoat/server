@@ -81,7 +81,7 @@ tpz.chocobo.initZone = function(zone)
         SetServerVariable("[CHOCOBO][" .. zoneId .. "]price", info.basePrice)
         SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
     else
-        printf("[warning] bad zoneId %i in tpz.chocobo.initZone", zoneId)
+        printf("[warning] bad zoneId %i in tpz.chocobo.initZone (%s)", zoneId, zone:getName())
     end
 end
 

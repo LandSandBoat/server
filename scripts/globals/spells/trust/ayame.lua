@@ -31,23 +31,8 @@ function onMobSpawn(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
         ai.r.JA, ai.s.SPECIFIC, tpz.ja.THIRD_EYE)
 
-    mob:addFullGambit({
-        ['predicates'] =
-        {
-            {
-                ['target'] = ai.t.SELF, ['condition'] = ai.c.TP_LT, ['argument'] = 1000,
-            },
-            {
-                ['target'] = ai.t.MASTER, ['condition'] = ai.c.TP_GTE, ['argument'] = 1000,
-            },
-        },
-        ['actions'] =
-        {
-            {
-                ['reaction'] = ai.r.JA, ['select'] = ai.s.SPECIFIC, ['argument'] = tpz.ja.MEDITATE,
-            },
-        },
-    })
+    mob:addSimpleGambit(ai.t.SELF, ai.c.TP_LT, 1000,
+        ai.r.JA, ai.s.SPECIFIC, tpz.ja.MEDITATE)
 
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AYAME)
 end

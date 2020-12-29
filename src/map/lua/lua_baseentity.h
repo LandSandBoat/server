@@ -28,6 +28,7 @@
 class CBaseEntity;
 class CCharEntity;
 class CLuaInstance;
+class CLuaItem;
 class CLuaSpell;
 
 class CLuaBaseEntity
@@ -69,17 +70,16 @@ public:
 
     // Packets, Events, and Flags
     void  injectPacket(std::string const& filename); // Send the character a packet kept in a file
-    int32 injectActionPacket(lua_State*);            // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
+    void  injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message);
     void  entityVisualPacket(std::string const& command, sol::object const& entity);
     void  entityAnimationPacket(const char* command);
 
     void  startEvent(sol::object const& EventIDObj, sol::variadic_args va);
-    int32 startEventString(lua_State*); // Begins Event with string param (0x33 packet)
-    void  updateEvent(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                      sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7); // Updates event
-    int32 updateEventString(lua_State*);                                                                                   // (string, string, string, string, uint32, ...)
-    int32 getEventTarget(lua_State*);                                                                                      //
-    void  release();                                                                                                       // Stops event
+    void  startEventString(uint16 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
+    void  updateEvent(sol::variadic_args va); // Updates event
+    void  updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
+    auto  getEventTarget() -> std::shared_ptr<CLuaBaseEntity>;
+    void  release();                          // Stops event
 
     void  setFlag(uint32 flags);
     uint8 getMoghouseFlag();
@@ -108,12 +108,12 @@ public:
     void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
     void clearTargID();                                                                     // clears target of entity
 
-    int32 atPoint(lua_State* L);                                       // is at given point
+    bool  atPoint(sol::variadic_args va);                              // is at given point
     void  pathTo(float x, float y, float z, sol::object const& flags); // set new path to point without changing action
-    int32 pathThrough(lua_State* L);                                   // walk at normal speed through the given points
+    bool  pathThrough(sol::table const& pointsTable, sol::object const& flagsObj); // walk at normal speed through the given points
     bool  isFollowingPath();                                           // checks if the entity is following a path
     void  clearPath();                                                 // removes current pathfind and stops moving
-    int32 checkDistance(lua_State*);                                   // Check Distacnce and returns distance number
+    float checkDistance(sol::variadic_args va);        // Check Distacnce and returns distance number
     void  wait(sol::object const& milliseconds);                       // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
@@ -140,7 +140,6 @@ public:
     void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode);       // Character emits emote packet.
 
     // Location and Positioning
-
     int16 getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg);  // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
     int16 getFacingAngle(CLuaBaseEntity const* target);                         // return angle between entity rot and target pos, aligned to number of degrees of difference
     bool  isFacing(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you are facing the target
@@ -172,11 +171,11 @@ public:
     void teleport(std::map<std::string, float> pos, sol::object const& arg1);                                                                 // Set Entity position (without entity despawn/spawn packets)
 
     void  addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
-    int32 getTeleport(lua_State*);                                               // Get unlocked teleport means
+    auto  getTeleport(uint8 type) -> sol::lua_value;             // Get unlocked teleport means
     bool  hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
-    int32 setTeleportMenu(lua_State*);                                           // Set favorites or menu layout preferences for homepoints or survival guides
-    int32 getTeleportMenu(lua_State*);                                           // Get favorites and menu layout preferences
-    void  setHomePoint();                                                        // Sets character's homepoint
+    void  setTeleportMenu(uint16 type, sol::table const& favs);  // Set favorites or menu layout preferences for homepoints or survival guides
+    auto  getTeleportMenu(uint8 type) -> sol::table;                             // Get favorites and menu layout preferences
+    void  setHomePoint(); // Sets character's homepoint
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
@@ -188,7 +187,7 @@ public:
     uint16 getEquipID(SLOTTYPE slot);                           // Gets the Item Id of the item in specified slot
     auto   getEquippedItem(uint8 slot) -> CItem*;               // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location); // Check to see if Entity has item in inventory (hasItem(itemNumber))
-    int32  addItem(lua_State*);                                 // Add item to Entity inventory (additem(itemNumber,quantity))
+    bool   addItem(sol::variadic_args va);      // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                          // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
@@ -223,8 +222,8 @@ public:
     void clearGearSetMods();                                         // Clears a characters gear set mods
 
     // Storing
-    int32 getStorageItem(lua_State*); // returns item object player:getStorageItem(containerid, slotid, equipslotid)
-    int32 storeWithPorterMoogle(lua_State* L);
+    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::shared_ptr<CLuaItem>; // returns item object player:getStorageItem(containerid, slotid, equipslotid)
+    uint8 storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable);
     auto  getRetrievableItemsForSlip(uint16 slipId) -> sol::table;
     void  retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 extraId, uint8 extraData);
 
@@ -323,8 +322,9 @@ public:
     uint16 getCurrentMission(sol::table const& missionLogTable);      // Gets the current mission
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
-    int32  setMissionLogEx(lua_State*);                               // Sets mission log extra data to correctly track progress in branching missions.
-    int32  getMissionLogEx(lua_State*);                               // Gets mission log extra data.
+
+    void   setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission log extra data to correctly track progress in branching missions.
+    uint32 getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj);                  // Gets mission log extra data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
@@ -388,6 +388,7 @@ public:
     void  hideHP(bool value);
 
     int32 getMP();
+    uint8 getMPP();
     int32 getMaxMP();
     int32 getBaseMP();
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
@@ -433,7 +434,7 @@ public:
     void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    auto   getParty(lua_State* L) -> sol::table;
+    auto   getParty() -> sol::table;
     auto   getPartyWithTrusts() -> sol::table;
     uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
     bool   hasPartyJob(uint8 job);
@@ -443,9 +444,9 @@ public:
     uint32 getPartyLastMemberJoinedTime();
     void   forMembersInRange(float range, sol::function function);
 
-    int32 addPartyEffect(lua_State*);    // Adds Effect to all party members
-    int32 hasPartyEffect(lua_State*);    // Has Effect from all party members
-    int32 removePartyEffect(lua_State*); // Removes Effect from all party members
+    void  addPartyEffect(sol::variadic_args va); // Adds Effect to all party members
+    bool  hasPartyEffect(uint16 effectid);       // Has Effect from all party members
+    void  removePartyEffect(uint16 effectid);    // Removes Effect from all party members
 
     auto  getAlliance() -> sol::table;
     uint8 getAllianceSize(); // Get the size of an entity's alliance
@@ -484,9 +485,11 @@ public:
     void sendReraise(uint8 raiseLevel);
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
 
-    int32 countdown(lua_State* L);
+    void  countdown(sol::object const& secondsObj,
+                    sol::object const& bar1NameObj, sol::object const& bar1ValObj,
+                    sol::object const& bar2NameObj, sol::object const& bar2ValObj);
     void  enableEntities(std::vector<uint32> data);
-    int32 independantAnimation(lua_State* L);
+    void  independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
     void engage(uint16 requestedTarget);
     bool isEngaged();
@@ -503,7 +506,6 @@ public:
     void triggerListener(std::string eventName, sol::variadic_args args);
 
     auto  getEntity(uint16 targetID) -> CBaseEntity*;
-    int32 getNearbyEntities(lua_State* L);
     bool  canChangeState();
 
     void wakeUp(); // wakes target if necessary
@@ -670,7 +672,7 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
-    int32  setMobFlags(lua_State*); // Used to manipulate the mob's flags for testing.
+    void   setMobFlags(uint32 flags, uint32 mobid); // Used to manipulate the mob's flags for testing.
     uint32 getMobFlags();
 
     void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
@@ -711,14 +713,14 @@ public:
 
     auto  getTarget() -> CBaseEntity*;
     void  updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
-    int32 getEnmityList(lua_State* L);
+    auto  getEnmityList() -> sol::table;
     auto  getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> CBaseEntity*; // true if TA target is available
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
     void  castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void  useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
-    int32 useMobAbility(lua_State*);                               // forces a mob to use a mobability (parameter = skill ID)
+    void  useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
     bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);

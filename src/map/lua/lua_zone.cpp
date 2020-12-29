@@ -46,34 +46,21 @@ CLuaZone::CLuaZone(CZone* PZone)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaZone::registerRegion(lua_State* L)
+void CLuaZone::registerRegion(uint16 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
-    if (m_pLuaZone != nullptr)
+    bool circleRegion = false;
+    if (x2 == 0 && y2 == 0 && z2 == 0)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1) && !lua_isnil(L, 2) && lua_isnumber(L, 2) && !lua_isnil(L, 3) && lua_isnumber(L, 3) && !lua_isnil(L, 4) &&
-            lua_isnumber(L, 4) && !lua_isnil(L, 5) && lua_isnumber(L, 5) && !lua_isnil(L, 6) && lua_isnumber(L, 6) && !lua_isnil(L, 7) && lua_isnumber(L, 7))
-        {
-            bool circleRegion = false;
-            if (lua_tointeger(L, 5) == 0 && lua_tointeger(L, 6) == 0 && lua_tointeger(L, 7) == 0)
-            {
-                circleRegion = true; // Parameters were 0, we must be a circle.
-            }
-
-            CRegion* Region = new CRegion((uint32)lua_tointeger(L, 1), circleRegion);
-
-            // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
-            Region->SetULCorner((float)lua_tointeger(L, 2), (float)lua_tointeger(L, 3), (float)lua_tointeger(L, 4));
-            Region->SetLRCorner((float)lua_tointeger(L, 5), (float)lua_tointeger(L, 6), (float)lua_tointeger(L, 7));
-
-            m_pLuaZone->InsertRegion(Region);
-        }
-        else
-        {
-            ShowWarning(CL_YELLOW "Region cannot be registered. Please check the parameters.\n" CL_RESET);
-        }
+        circleRegion = true; // Parameters were 0, we must be a circle.
     }
-    lua_pushnil(L);
-    return 1;
+
+    CRegion* Region = new CRegion((uint32)RegionID, circleRegion);
+
+    // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
+    Region->SetULCorner(x1, y1, z1);
+    Region->SetLRCorner(x2, y1, z2);
+
+    m_pLuaZone->InsertRegion(Region);
 }
 
 /************************************************************************
@@ -97,6 +84,11 @@ sol::table CLuaZone::getPlayers()
 inline ZONEID CLuaZone::getID()
 {
     return m_pLuaZone->GetID();
+}
+
+std::string CLuaZone::getName()
+{
+    return reinterpret_cast<const char*>(m_pLuaZone->GetName());
 }
 
 inline REGION_TYPE CLuaZone::getRegionID()
@@ -150,6 +142,7 @@ void CLuaZone::Register()
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getID", CLuaZone::getID);
+    SOL_REGISTER("getName", CLuaZone::getName);
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);
     SOL_REGISTER("getType", CLuaZone::getType);
     SOL_REGISTER("getBattlefieldByInitiator", CLuaZone::getBattlefieldByInitiator);

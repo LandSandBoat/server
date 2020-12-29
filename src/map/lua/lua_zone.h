@@ -38,10 +38,11 @@ public:
         return m_pLuaZone;
     }
 
-    int32       registerRegion(lua_State*);
+    void        registerRegion(uint16 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
     sol::object levelRestriction();
     sol::table  getPlayers();
     ZONEID      getID();
+    std::string getName();
     REGION_TYPE getRegionID();
     ZONE_TYPE   getType();
     int32       getBattlefieldByInitiator(lua_State*);

@@ -28,24 +28,6 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 60)
 
-    mob:addFullGambit({
-        ['predicates'] =
-        {
-            {
-                ['target'] = ai.t.TARGET, ['condition'] = ai.c.MB_AVAILABLE, ['argument'] = 0,
-            }
-        },
-        ['actions'] =
-        {
-            {
-                ['reaction'] = ai.r.MA, ['select'] = ai.s.HIGHEST, ['argument'] = tpz.magic.spellFamily.NONE,
-            },
-            {
-                ['reaction'] = ai.r.MSG, ['select'] = ai.s.SPECIFIC, ['argument'] = tpz.trust.message_offset.SPECIAL_MOVE_1, -- Ohohoho!
-            },
-        },
-    })
-
     local power = mob:getMainLvl() / 10
     mob:addMod(tpz.mod.MATT, power)
     mob:addMod(tpz.mod.MACC, power)
