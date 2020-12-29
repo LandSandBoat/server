@@ -45,7 +45,7 @@ public:
     std::string getName();
     REGION_TYPE getRegionID();
     ZONE_TYPE   getType();
-    int32       getBattlefieldByInitiator(lua_State*);
+    auto        getBattlefieldByInitiator(uint32 charID) -> std::shared_ptr<CLuaBattlefield>;
     bool        battlefieldsFull(int battlefieldId);
     WEATHER     getWeather();
 

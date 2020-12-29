@@ -28,12 +28,6 @@
 #include "lua_baseentity.h"
 #include "lua_zone.h"
 
-/************************************************************************
- *                                                                       *
- *  Конструктор                                                          *
- *                                                                       *
- ************************************************************************/
-
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
 {
@@ -41,8 +35,8 @@ CLuaZone::CLuaZone(CZone* PZone)
 
 /************************************************************************
  *                                                                       *
- *  Регистрируем активную область в зоне                                 *
- *  Формат входных данных: RegionID, x1, y1, z1, x2, y2, z2              *
+ * Registering the active area in the zone                               *
+ * Input data format: RegionID, x1, y1, z1, x2, y2, z2                   *
  *                                                                       *
  ************************************************************************/
 
@@ -67,11 +61,11 @@ void CLuaZone::registerRegion(uint16 RegionID, float x1, float y1, float z1, flo
 
 /************************************************************************
  *                                                                       *
- *  Устанавливаем ограничение уровня для зоны                            *
+ *  Setting the level limit for the zone                                 *
  *                                                                       *
  ************************************************************************/
 
-inline sol::object CLuaZone::levelRestriction()
+sol::object CLuaZone::levelRestriction()
 {
     return sol::nil;
 }
@@ -83,7 +77,7 @@ sol::table CLuaZone::getPlayers()
     return list;
 }
 
-inline ZONEID CLuaZone::getID()
+ZONEID CLuaZone::getID()
 {
     return m_pLuaZone->GetID();
 }
@@ -93,44 +87,31 @@ std::string CLuaZone::getName()
     return reinterpret_cast<const char*>(m_pLuaZone->GetName());
 }
 
-inline REGION_TYPE CLuaZone::getRegionID()
+REGION_TYPE CLuaZone::getRegionID()
 {
     return m_pLuaZone->GetRegionID();
 }
 
-inline ZONE_TYPE CLuaZone::getType()
+ZONE_TYPE CLuaZone::getType()
 {
     return m_pLuaZone->GetType();
 }
 
-inline int32 CLuaZone::getBattlefieldByInitiator(lua_State* L)
+std::shared_ptr<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID)
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
-
     if (m_pLuaZone->m_BattlefieldHandler)
     {
-        lua_pushlightuserdata(L, (void*)m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator((uint32)lua_tointeger(L, 1)));
+        return std::make_shared<CLuaBattlefield>(m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID));
     }
-    else
-    {
-        lua_pushnil(L);
-    }
-    return 1;
+    return nullptr;
 }
 
-inline bool CLuaZone::battlefieldsFull(int battlefieldId)
+bool CLuaZone::battlefieldsFull(int battlefieldId)
 {
-    TPZ_DEBUG_BREAK_IF(m_pLuaZone == nullptr);
     return m_pLuaZone->m_BattlefieldHandler && m_pLuaZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldId);
 }
 
-/************************************************************************
- *  Function: getWeather()
- *  Purpose : Returns the current weather status
- ************************************************************************/
-
-inline WEATHER CLuaZone::getWeather()
+WEATHER CLuaZone::getWeather()
 {
     return m_pLuaZone->GetWeather();
 }
