@@ -2,7 +2,7 @@
 -- Area: Balga's Dais
 --  Mob: Wyrm
 -- KSNM: Early Bird Catches the Wyrm
--- For future reference: Trusts are not allowed in this fight 
+-- For future reference: Trusts are not allowed in this fight
 -----------------------------------
 require("scripts/globals/status")
 
@@ -42,7 +42,7 @@ function onMobFight(mob, target)
     then
         mob:useMobAbility(954)
         -- Touchdown will set the following for us in the skill script:
-        -- lifted wings model stance: mob:AnimationSub(2)
+        -- lifted wings model stance: mob:setAnimationSub(2)
         -- reset default attack:      mob:SetMobSkillAttack(0)
         -- reset melee attacks:       mob:delStatusEffect(tpz.effect.TOO_HIGH)
         mob:addStatusEffect(tpz.effect.EVASION_BOOST, 75, 0, 0)
