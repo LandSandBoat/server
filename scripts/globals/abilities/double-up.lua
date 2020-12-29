@@ -29,7 +29,7 @@ function onUseAbility(caster, target, ability, action)
         caster:setLocalVar("corsairActiveRoll", du_effect:getSubType())
         local snake_eye = caster:getStatusEffect(tpz.effect.SNAKE_EYE)
         if (snake_eye) then
-            if (prev_roll:getPower() > 5 and math.random(100) < snake_eye:getPower()) then
+            if (prev_roll:getPower() >= 5 and math.random(100) < snake_eye:getPower()) then
                 roll = 11
             else
                 roll = roll + 1
