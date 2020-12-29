@@ -303,6 +303,22 @@ namespace luautils
         return 0;
     }
 
+    sol::function loadFunctionFromFile(std::string funcName, std::string fileName)
+    {
+        // Erase previous copies of the function, if they're left over from previous calls
+        lua.set(funcName, sol::nil);
+
+        // Run script
+        lua.script_file(fileName);
+
+        auto func = lua.get<sol::function>(funcName);
+        if (!func.valid())
+        {
+            return sol::nil;
+        }
+        return func;
+    }
+
     // temporary solution for geysers in Dangruf_Wadi
     void SendEntityVisualPacket(uint32 npcid, const char* command)
     {
@@ -1236,9 +1252,8 @@ namespace luautils
         CZone* PZone = zoneutils::GetZone(ZoneID);
 
         auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
-        lua.script_file(filename);
 
-        auto onInitialize = lua.get<sol::function>("onInitialize");
+        auto onInitialize = loadFunctionFromFile("onInitialize", filename);
         if (!onInitialize.valid())
         {
             return -1;
@@ -1363,7 +1378,7 @@ namespace luautils
 
         lua.script_file(fmt::format(filename));
 
-        auto onRegionEnter = lua.get<sol ::function>("onRegionEnter");
+        auto onRegionEnter = lua.get<sol::function>("onRegionEnter");
         if (!onRegionEnter.valid())
         {
             return -1;

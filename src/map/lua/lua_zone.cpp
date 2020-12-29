@@ -49,7 +49,9 @@ CLuaZone::CLuaZone(CZone* PZone)
 void CLuaZone::registerRegion(uint16 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
     bool circleRegion = false;
-    if (x2 == 0 && y2 == 0 && z2 == 0)
+    if (approximatelyEqual(x2, 0.0f) &&
+        approximatelyEqual(y2, 0.0f) &&
+        approximatelyEqual(z2, 0.0f))
     {
         circleRegion = true; // Parameters were 0, we must be a circle.
     }
