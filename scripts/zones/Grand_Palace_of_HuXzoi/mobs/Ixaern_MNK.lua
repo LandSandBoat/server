@@ -20,7 +20,7 @@ function onMobSpawn(mob)
     end
     qm:setLocalVar("[SEA]IxAern_DropRate", 0)
 
-    mob:AnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
+    mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
 end
 
 function onMobFight(mob, target)
@@ -30,7 +30,7 @@ function onMobFight(mob, target)
         if (mob:getHPP() < math.random(50, 60)) then
             -- Go into bracer mode
             mob:setLocalVar("BracerMode", 1)
-            mob:AnimationSub(2)
+            mob:setAnimationSub(2)
             mob:addMod(tpz.mod.ATT, 200)
             mob:addMod(tpz.mod.HASTE_ABILITY, 1500)
             mob:useMobAbility(3411) -- Hundred Fists

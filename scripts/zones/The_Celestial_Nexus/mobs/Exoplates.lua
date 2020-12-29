@@ -13,7 +13,7 @@ function onMobInitialize(mob)
 end
 
 function onMobSpawn(mob)
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
     mob:SetAutoAttackEnabled(false)
     mob:setUnkillable(true)
 end
@@ -22,22 +22,22 @@ function onMobFight(mob, target)
     local shifts = mob:getLocalVar("shifts")
     local shiftTime = mob:getLocalVar("shiftTime")
 
-    if (mob:AnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
+    if (mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
         mob:useMobAbility(993)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:AnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
+    elseif (mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
         mob:useMobAbility(997)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:AnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
+    elseif (mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
         mob:useMobAbility(1001)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:getHPP() <= 67 and mob:AnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
-        mob:AnimationSub(1)
-    elseif (mob:getHPP() <= 33 and mob:AnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
-        mob:AnimationSub(2)
+    elseif (mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
+        mob:setAnimationSub(1)
+    elseif (mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
+        mob:setAnimationSub(2)
     end
 end
 

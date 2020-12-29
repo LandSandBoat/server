@@ -24,7 +24,7 @@ function onMobSkillCheck(target, mob, skill)
     end
   end
    -- TODO: Used only when second/left head is alive (animationsub 0 or 1)
-   if (mob:AnimationSub() <= 1) then
+   if (mob:getAnimationSub() <= 1) then
       return 0
    else
       return 1

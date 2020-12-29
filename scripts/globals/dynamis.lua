@@ -548,7 +548,7 @@ dynamis.refillStatueOnSpawn = function(mob)
             for _, m in pairs(g) do
                 if m.mob == mobId then
                     found = true
-                    mob:AnimationSub(m.eye)
+                    mob:setAnimationSub(m.eye)
                     break
                 end
             end
@@ -611,7 +611,7 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
                         end
                     end
                 end
-                mob:AnimationSub(dynamis.eye.NONE)
+                mob:setAnimationSub(dynamis.eye.NONE)
 
                 -- spawn a new mob in this group
                 local nextId = group[math.random(#group)]

@@ -31,7 +31,7 @@ function onMobWeaponSkill(target, mob, skill)
     -- These are here as it doesn't look right otherwise
     mob:hideName(false)
     mob:untargetable(false)
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
     mob:setLocalVar("AMBUSH", 1) -- Used it for the last time!
 
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)

@@ -32,7 +32,7 @@ function onMobEngaged (mob, target)
             DespawnMob(mobId)
             replaceWithCrate(mob)
         else
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end
     end
 end

@@ -40,8 +40,8 @@ end
 function onMobRoam(mob)
     -- Regen head
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:AnimationSub() == 2 and os.time() > headTimer) then
-        mob:AnimationSub(1)
+    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+        mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
@@ -52,8 +52,8 @@ function onMobRoam(mob)
             mob:addHP(mob:getMaxHP() * .05)
         end
 
-    elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
-        mob:AnimationSub(0)
+    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+        mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
@@ -70,8 +70,8 @@ end
 
 function onMobFight(mob, target)
     local headTimer = mob:getLocalVar("headTimer")
-    if (mob:AnimationSub() == 2 and os.time() > headTimer) then
-        mob:AnimationSub(1)
+    if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
+        mob:setAnimationSub(1)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
@@ -88,8 +88,8 @@ function onMobFight(mob, target)
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
 
-    elseif (mob:AnimationSub() == 1 and os.time() > headTimer) then
-        mob:AnimationSub(0)
+    elseif (mob:getAnimationSub() == 1 and os.time() > headTimer) then
+        mob:setAnimationSub(0)
         mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
@@ -115,11 +115,11 @@ function onCriticalHit(mob)
     local critNum = mob:getLocalVar("crits")
 
     if ((critNum+1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
-        if (mob:AnimationSub() == 0) then
-            mob:AnimationSub(1)
+        if (mob:getAnimationSub() == 0) then
+            mob:setAnimationSub(1)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
-        elseif (mob:AnimationSub() == 1) then
-            mob:AnimationSub(2)
+        elseif (mob:getAnimationSub() == 1) then
+            mob:setAnimationSub(2)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         else
             -- Meh

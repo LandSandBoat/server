@@ -12,7 +12,7 @@ require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------
 function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() <= 1) then -- omega four leg form
+    if (mob:getAnimationSub() <= 1) then -- omega four leg form
         return 0
     end
     return 1

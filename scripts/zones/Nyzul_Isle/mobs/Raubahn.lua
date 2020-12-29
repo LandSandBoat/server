@@ -32,7 +32,7 @@ function onMobSpawn(mob)
 
             mob:timer(12000, function(mob)
                 mob:setHP(mob:getMaxHP())
-                mob:AnimationSub(3)
+                mob:setAnimationSub(3)
                 mob:resetAI()
                 mob:stun(3000)
                 local new_target = mob:getEntity(targetid)

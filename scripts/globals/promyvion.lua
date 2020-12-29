@@ -71,7 +71,7 @@ tpz.promyvion.strayOnSpawn = function(mob)
 
     if mother ~= nil and mother:isSpawned() then
         mob:setPos(mother:getXPos(), mother:getYPos() - 5, mother:getZPos())
-        mother:AnimationSub(1)
+        mother:setAnimationSub(1)
     end
 end
 
@@ -91,7 +91,7 @@ tpz.promyvion.receptacleOnFight = function(mob, target)
             end
         end
     else
-        mob:AnimationSub(2)
+        mob:setAnimationSub(2)
     end
 end
 
@@ -103,7 +103,7 @@ tpz.promyvion.receptacleOnDeath = function(mob, isKiller)
         local streamId = ID.mob.MEMORY_RECEPTACLES[mobId][3]
         local stream = GetNPCByID(streamId)
 
-        mob:AnimationSub(0)
+        mob:setAnimationSub(0)
 
         -- open floor exit portal
         if stream:getLocalVar("[promy]floorExit") == 1 then

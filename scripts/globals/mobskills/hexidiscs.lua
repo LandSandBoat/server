@@ -17,7 +17,7 @@ require("scripts/globals/status")
 -- if not in Ball form, then ignore.
 ---------------------------------------------------
 function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() ~=0) then
+    if (mob:getAnimationSub() ~=0) then
         return 1
     else
         return 0

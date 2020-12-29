@@ -39,21 +39,21 @@ function onMobFight(mob, target)
 
     if currentForm == 1 then
         if formTime < os.time() then
-            if mob:AnimationSub() == 1 then
-                mob:AnimationSub(2)
+            if mob:getAnimationSub() == 1 then
+                mob:setAnimationSub(2)
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
                 if not GetMobByID(mobID + 1):isSpawned() and math.random(0,1) == 1 then
                     mob:useMobAbility(1532)
                 end 
             else
                 mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
-                mob:AnimationSub(1)
+                mob:setAnimationSub(1)
             end
             mob:setLocalVar("formWait", os.time() + 60)
         end
 
         if lifePercent < 30 then
-            mob:AnimationSub(2)
+            mob:setAnimationSub(2)
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
             mob:setMod(tpz.mod.UDMGPHYS, -50)
             mob:setMod(tpz.mod.UDMGRANGE, -50)

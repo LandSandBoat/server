@@ -40,12 +40,12 @@ function onMobFight(mob, target)
         mob:setLocalVar("usedMainSpec", 1)
     end
     if mob:getBattleTime() == changeTime then
-        if mob:AnimationSub() == 0 then
-            mob:AnimationSub(1)
+        if mob:getAnimationSub() == 0 then
+            mob:setAnimationSub(1)
             mob:setSpellList(0)
             mob:setLocalVar("changeTime", mob:getBattleTime() + 150)
         else
-            mob:AnimationSub(0)
+            mob:setAnimationSub(0)
             mob:setSpellList(302)
             mob:setLocalVar("changeTime", mob:getBattleTime() + 150)
         end
@@ -53,7 +53,7 @@ function onMobFight(mob, target)
 end
 
 function onMagicHit(caster, target, spell)
-    if spell:tookEffect() and target:AnimationSub() == 1 and (caster:isPC() or caster:isPet()) then
+    if spell:tookEffect() and target:getAnimationSub() == 1 and (caster:isPC() or caster:isPet()) then
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
     end

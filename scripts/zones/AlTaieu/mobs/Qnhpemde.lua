@@ -7,21 +7,21 @@ local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
 
 function onMobSpawn(mob)
-    mob:AnimationSub(6) -- Mouth Closed
+    mob:setAnimationSub(6) -- Mouth Closed
 end
 
 function onMobFight(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
 
-    if (mob:AnimationSub() == 6 and mob:getBattleTime() - changeTime > 30) then
-        mob:AnimationSub(3) -- Mouth Open
+    if (mob:getAnimationSub() == 6 and mob:getBattleTime() - changeTime > 30) then
+        mob:setAnimationSub(3) -- Mouth Open
         mob:addMod(tpz.mod.ATTP, 100)
         mob:addMod(tpz.mod.DEFP, -50)
         mob:addMod(tpz.mod.DMGMAGIC, -50)
         mob:setLocalVar("changeTime", mob:getBattleTime())
 
-    elseif (mob:AnimationSub() == 3 and mob:getBattleTime() - changeTime > 30) then
-        mob:AnimationSub(6) -- Mouth Closed
+    elseif (mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > 30) then
+        mob:setAnimationSub(6) -- Mouth Closed
         mob:addMod(tpz.mod.ATTP, -100)
         mob:addMod(tpz.mod.DEFP, 50)
         mob:addMod(tpz.mod.DMGMAGIC, 50)

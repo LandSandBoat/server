@@ -10,7 +10,7 @@ require("scripts/globals/monstertpmoves")
 ---------------------------------------------------
 
 function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() ~= 2) then
+    if (mob:getAnimationSub() ~= 2) then
         return 1
     end
     return 0

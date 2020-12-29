@@ -22,7 +22,7 @@ local minionGroup =
 function onMobEngaged(mob, target)
     mob:hideName(false)
     mob:untargetable(false)
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
 end
 
 function onMobFight(mob, target)

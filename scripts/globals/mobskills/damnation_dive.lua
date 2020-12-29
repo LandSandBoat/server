@@ -18,7 +18,7 @@ require("scripts/globals/status")
 -- if not in Bird form, then ignore.
 ---------------------------------------------------
 function onMobSkillCheck(target, mob, skill)
-    if ((mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and mob:AnimationSub() ~= 3) then
+    if ((mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and mob:getAnimationSub() ~= 3) then
         return 1
     else
         return 0

@@ -17,7 +17,7 @@ function onMobSkillCheck(target, mob, skill)
         return 1
     elseif (target:isBehind(mob, 48) == true) then
         return 1
-    elseif (mob:AnimationSub() == 1) then
+    elseif (mob:getAnimationSub() == 1) then
         return 1
     end
     return 0

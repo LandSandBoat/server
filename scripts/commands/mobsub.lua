@@ -54,5 +54,5 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- set animation sub
-    targ:AnimationSub( animationId )
+    targ:setAnimationSub( animationId )
 end

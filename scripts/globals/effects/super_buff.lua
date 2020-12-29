@@ -13,7 +13,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.MATT, power)
     target:addMod(tpz.mod.MEVA, power)
     -- The following only applies to Nidhogg.  If this buff is to be used anywhere else, a check on mob name (NOT ID) would be a good choice
-    target:AnimationSub(2)
+    target:setAnimationSub(2)
 end
 
 function onEffectTick(target, effect)
@@ -25,5 +25,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.DEFP, power)
     target:delMod(tpz.mod.MATT, power)
     target:delMod(tpz.mod.MEVA, power)
-    target:AnimationSub(0)
+    target:setAnimationSub(0)
 end
