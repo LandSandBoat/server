@@ -123,39 +123,39 @@ namespace luautils
     uint8 getConquestBalance();
     bool  isConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-    int32 setMobPos(lua_State*);                        // set a mobs position (only if mob is not in combat)
+    int32 setMobPos();                                  // set a mobs position (only if mob is not in combat)
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
-    auto  GetReadOnlyItem(uint32 id) -> std::shared_ptr<CLuaItem>; // Returns a read only lookup item object of the specified ID
-    auto  GetAbility(uint16 id) -> std::shared_ptr<CLuaAbility>;
-    auto  GetSpell(uint16 id) -> std::shared_ptr<CLuaSpell>;
+    auto GetReadOnlyItem(uint32 id) -> std::shared_ptr<CLuaItem>; // Returns a read only lookup item object of the specified ID
+    auto GetAbility(uint16 id) -> std::shared_ptr<CLuaAbility>;
+    auto GetSpell(uint16 id) -> std::shared_ptr<CLuaSpell>;
 
-    auto  SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
-    int32 DespawnMob(lua_State*);      // Despawn (Fade Out) Mob By Id
-    auto GetPlayerByName(std::string name) -> std::shared_ptr<CLuaBaseEntity>;
-    auto GetPlayerByID(uint32 pid) -> std::shared_ptr<CLuaBaseEntity>;
-    int32 GetMagianTrial(lua_State*);
-    int32 GetMagianTrialsWithParent(lua_State* L);
-    int32 JstMidnight(lua_State* L);
-    uint32 VanadielTime();                     // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
-    uint8  VanadielTOTD();                     // текущее игровое время суток
-    int32 VanadielHour(lua_State*);            // текущие Vanadiel часы
-    int32 VanadielMinute(lua_State*);          // текущие Vanadiel минуты
-    int32 VanadielDayOfTheYear(lua_State*);    // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
-    int32 VanadielDayOfTheMonth(lua_State*);   // Gets day of the month (Feb 6 = Day 6)
-    int32 VanadielDayOfTheWeek(lua_State*);    // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
-    int32 VanadielYear(lua_State*);            // Gets the current Vanadiel Year
-    int32 VanadielMonth(lua_State*);           // Gets the current Vanadiel Month
-    int32 VanadielDayElement(lua_State*);      // Gets element of the day (1: fire, 2: ice, 3: wind, 4: earth, 5: thunder, 6: water, 7: light, 8: dark)
-    int32 VanadielMoonPhase(lua_State*);       // Gets the current Vanadiel Moon Phase
-    int32 VanadielMoonDirection(lua_State* L); // Gets the current Vanadiel Moon Phasing direction (waxing, waning, neither)
-    int32 VanadielRSERace(lua_State* L);       // Gets the current Race for RSE gear quest
-    int32 VanadielRSELocation(lua_State* L);   // Gets the current Location for RSE gear quest
-    int32 SetVanadielTimeOffset(lua_State* L);
-    int32 IsMoonNew(lua_State* L);  // Returns true if the moon is new
-    int32 IsMoonFull(lua_State* L); // Returns true if the moon is full
-    int32 StartElevator(lua_State*);
+    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    int32  DespawnMob();                                                                                                // Despawn (Fade Out) Mob By Id
+    auto   GetPlayerByName(std::string name) -> std::shared_ptr<CLuaBaseEntity>;
+    auto   GetPlayerByID(uint32 pid) -> std::shared_ptr<CLuaBaseEntity>;
+    int32  GetMagianTrial();
+    int32  GetMagianTrialsWithParent();
+    uint32 JstMidnight();
+    uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
+    uint8  VanadielTOTD();          // текущее игровое время суток
+    uint32 VanadielHour();          // текущие Vanadiel часы
+    uint32 VanadielMinute();        // текущие Vanadiel минуты
+    uint32 VanadielDayOfTheYear();  // Gets Integer Value for Day of the Year (Jan 01 = Day 1)
+    uint32 VanadielDayOfTheMonth(); // Gets day of the month (Feb 6 = Day 6)
+    uint32 VanadielDayOfTheWeek();  // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
+    uint32 VanadielYear();          // Gets the current Vanadiel Year
+    uint32 VanadielMonth();         // Gets the current Vanadiel Month
+    uint8  VanadielDayElement();    // Gets element of the day (1: fire, 2: ice, 3: wind, 4: earth, 5: thunder, 6: water, 7: light, 8: dark)
+    uint32 VanadielMoonPhase();     // Gets the current Vanadiel Moon Phase
+    uint8  VanadielMoonDirection(); // Gets the current Vanadiel Moon Phasing direction (waxing, waning, neither)
+    uint8  VanadielRSERace();       // Gets the current Race for RSE gear quest
+    uint8  VanadielRSELocation();   // Gets the current Location for RSE gear quest
+    bool   SetVanadielTimeOffset(int32 offset);
+    bool   IsMoonNew();  // Returns true if the moon is new
+    bool   IsMoonFull(); // Returns true if the moon is full
+    void   StartElevator(uint32 ElevatorID);
 
     int32 GetServerVariable(std::string varName);
     void  SetServerVariable(std::string name, int32 value);
@@ -232,11 +232,11 @@ namespace luautils
     int32 OnBattlefieldTick(CBattlefield* PBattlefield);
     int32 OnBattlefieldStatusChange(CBattlefield* PBattlefield);
 
-    int32 OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);                  // triggers when enter a bcnm
-    int32 OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
+    void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);                  // triggers when enter a bcnm
+    void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
 
-    int32 OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
-    int32 OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
+    void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
+    void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
 
     int32 OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action); // triggers when mob weapon skill is used
     int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                    // triggers before mob weapon skill is used, returns 0 if the move is valid
@@ -258,11 +258,11 @@ namespace luautils
     int32 OnInstanceStageChange(CInstance* PInstance);                           // triggers when stage is changed in an instance
     int32 OnInstanceComplete(CInstance* PInstance);                              // triggers when an instance is completed
 
-    int32 GetMobRespawnTime(uint32 mobid);  // get the respawn time of a mob
-    int32 DisallowRespawn(lua_State* L);    // Allow or prevent a mob from spawning
-    int32 UpdateNMSpawnPoint(lua_State* L); // Update the spawn point of an NM
-    void  SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob tpz.core.setDropRate(dropid,itemid,newrate)
-    int32 UpdateServerMessage();            // update server message, first modify in conf and update
+    uint32 GetMobRespawnTime(uint32 mobid);                        // get the respawn time of a mob
+    void   DisallowRespawn(uint32 mobid, bool allowRespawn);       // Allow or prevent a mob from spawning
+    void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
+    void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob tpz.core.setDropRate(dropid,itemid,newrate)
+    int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes

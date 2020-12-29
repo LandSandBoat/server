@@ -23,9 +23,9 @@
 #include "../../common/timer.h"
 #include "../../common/utils.h"
 
-#include <unordered_map>
-#include <string>
 #include <array>
+#include <string>
+#include <unordered_map>
 
 #include "lua_action.h"
 #include "lua_battlefield.h"
@@ -338,8 +338,7 @@ namespace luautils
             PInstance = instanceObj.as<CLuaInstance>().GetInstance();
         }
 
-        CBaseEntity* PNpc{ nullptr }
-        ;
+        CBaseEntity* PNpc{ nullptr };
         if (PInstance)
         {
             PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
@@ -538,7 +537,7 @@ namespace luautils
 
     uint8 VanadielTOTD()
     {
-        return CVanaTime::getInstance()->GetCurrentTOTD();
+        return static_cast<uint8>(CVanaTime::getInstance()->GetCurrentTOTD());
     }
 
     /************************************************************************
@@ -547,10 +546,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielYear(lua_State* L)
+    uint32 VanadielYear()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getYear());
-        return 1;
+        return CVanaTime::getInstance()->getYear();
     }
 
     /************************************************************************
@@ -559,10 +557,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielMonth(lua_State* L)
+    uint32 VanadielMonth()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getMonth());
-        return 1;
+        return CVanaTime::getInstance()->getMonth();
     }
 
     /************************************************************************
@@ -571,7 +568,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielDayOfTheYear(lua_State* L)
+    uint32 VanadielDayOfTheYear()
     {
         int32 day;
         int32 month;
@@ -579,8 +576,7 @@ namespace luautils
         day   = CVanaTime::getInstance()->getDayOfTheMonth();
         month = CVanaTime::getInstance()->getMonth();
 
-        lua_pushinteger(L, (month * 30 - 30) + day);
-        return 1;
+        return (month * 30 - 30) + day;
     }
 
     /************************************************************************
@@ -589,10 +585,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielDayOfTheMonth(lua_State* L)
+    uint32 VanadielDayOfTheMonth()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getDayOfTheMonth());
-        return 1;
+        return CVanaTime::getInstance()->getDayOfTheMonth();
     }
 
     /************************************************************************
@@ -604,10 +599,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielDayOfTheWeek(lua_State* L)
+    uint32 VanadielDayOfTheWeek()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getWeekday());
-        return 1;
+        return CVanaTime::getInstance()->getWeekday();
     }
 
     /************************************************************************
@@ -616,10 +610,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielHour(lua_State* L)
+    uint32 VanadielHour()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getHour());
-        return 1;
+        return CVanaTime::getInstance()->getHour();
     }
 
     /************************************************************************
@@ -628,10 +621,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielMinute(lua_State* L)
+    uint32 VanadielMinute()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getMinute());
-        return 1;
+        return CVanaTime::getInstance()->getMinute();
     }
 
     /************************************************************************
@@ -643,10 +635,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielDayElement(lua_State* L)
+    uint8 VanadielDayElement()
     {
-        lua_pushinteger(L, battleutils::GetDayElement());
-        return 1;
+        return static_cast<uint8>(battleutils::GetDayElement());
     }
 
     /************************************************************************
@@ -655,10 +646,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 JstMidnight(lua_State* L)
+    uint32 JstMidnight()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getJstMidnight());
-        return 1;
+        return CVanaTime::getInstance()->getJstMidnight();
     }
 
     /************************************************************************
@@ -667,25 +657,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielMoonPhase(lua_State* L)
+    uint32 VanadielMoonPhase()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getMoonPhase());
-        return 1;
+        return CVanaTime::getInstance()->getMoonPhase();
     }
 
-    int32 SetVanadielTimeOffset(lua_State* L)
+    bool SetVanadielTimeOffset(int32 offset)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            int32 offset = (int32)lua_tointeger(L, 1);
-            int32 custom = CVanaTime::getInstance()->getCustomEpoch();
-            CVanaTime::getInstance()->setCustomEpoch((custom ? custom : VTIME_BASEDATE) - offset);
-
-            lua_pushboolean(L, true);
-            return 1;
-        }
-        lua_pushnil(L);
-        return 1;
+        int32 custom = CVanaTime::getInstance()->getCustomEpoch();
+        CVanaTime::getInstance()->setCustomEpoch((custom ? custom : VTIME_BASEDATE) - offset);
+        return true;
     }
 
     /************************************************************************
@@ -694,10 +675,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielMoonDirection(lua_State* L)
+    uint8 VanadielMoonDirection()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getMoonDirection());
-        return 1;
+        return CVanaTime::getInstance()->getMoonDirection();
     }
 
     /************************************************************************
@@ -706,10 +686,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielRSERace(lua_State* L)
+    uint8 VanadielRSERace()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getRSERace());
-        return 1;
+        return CVanaTime::getInstance()->getRSERace();
     }
 
     /************************************************************************
@@ -718,10 +697,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 VanadielRSELocation(lua_State* L)
+    uint8 VanadielRSELocation()
     {
-        lua_pushinteger(L, CVanaTime::getInstance()->getRSELocation());
-        return 1;
+        return CVanaTime::getInstance()->getRSELocation();
     }
 
     /************************************************************************
@@ -730,7 +708,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 IsMoonNew(lua_State* L)
+    bool IsMoonNew()
     {
         // New moon occurs when:
         // Waning (decreasing) from 10% to 0%,
@@ -743,26 +721,21 @@ namespace luautils
             case 0: // None
                 if (phase == 0)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
-
             case 1: // Waning (decending)
                 if (phase <= 10 && phase >= 0)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
-
             case 2: // Waxing (increasing)
                 if (phase >= 0 && phase <= 5)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
         }
-        lua_pushboolean(L, false);
-        return 1;
+
+        return false;
     }
 
     /************************************************************************
@@ -771,7 +744,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 IsMoonFull(lua_State* L)
+    bool IsMoonFull()
     {
         // Full moon occurs when:
         // Waxing (increasing) from 90% to 100%,
@@ -784,26 +757,21 @@ namespace luautils
             case 0: // None
                 if (phase == 100)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
-
             case 1: // Waning (decending)
                 if (phase >= 95 && phase <= 100)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
-
             case 2: // Waxing (increasing)
                 if (phase >= 90 && phase <= 100)
                 {
-                    lua_pushboolean(L, true);
-                    return 1;
+                    return true;
                 }
         }
-        lua_pushboolean(L, false);
-        return 1;
+
+        return false;
     }
 
     /************************************************************************
@@ -866,9 +834,11 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 DespawnMob(lua_State* L)
+    int32 DespawnMob()
     {
         TracyZoneScoped;
+        auto L = LuaHandle;
+
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32      mobid = (uint32)lua_tointeger(L, 1);
@@ -906,8 +876,9 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 setMobPos(lua_State* L)
+    int32 setMobPos()
     {
+        auto L = LuaHandle;
         if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
         {
             uint32 mobid = (uint32)lua_tointeger(L, 1);
@@ -998,20 +969,24 @@ namespace luautils
     *                                                16 = { column = value, ...}}  *
     *******************************************************************************/
 
-    int32 GetMagianTrial(lua_State* L)
+    int32 GetMagianTrial()
     {
+        auto L = LuaHandle;
+
         if (!lua_isnil(L, 1))
         {
             // Get all magian table columns to build lua keys
-            const char* ColumnQuery = "SHOW COLUMNS FROM `magian`;";
+            const char*              ColumnQuery = "SHOW COLUMNS FROM `magian`;";
             std::vector<std::string> magianColumns;
             if (Sql_Query(SqlHandle, ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
             {
-                while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
                     magianColumns.push_back((const char*)Sql_GetData(SqlHandle, 0));
                 }
-            } else {
+            }
+            else
+            {
                 ShowError("Error: No columns in `magian` table?");
                 lua_pushnil(L);
                 return 1;
@@ -1022,15 +997,15 @@ namespace luautils
             if (lua_isnumber(L, 1))
             {
                 int32 trial = (lua_tointeger(L, 1));
-                int32 field {0};
+                int32 field{ 0 };
                 lua_newtable(L);
                 if (Sql_Query(SqlHandle, Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
-                    for(auto column: magianColumns)
+                    for (auto column : magianColumns)
                     {
                         lua_pushstring(L, column.c_str());
                         lua_pushinteger(L, (int32)Sql_GetIntData(SqlHandle, field++));
-                        lua_settable(L,-3);
+                        lua_settable(L, -3);
                     }
                 }
             }
@@ -1038,11 +1013,11 @@ namespace luautils
             {
                 // parse provided trial's from table
                 std::vector<int32> trials;
-                for(int i = 1, j = lua_objlen(L,1); i <= j; i++)
+                for (int i = 1, j = lua_objlen(L, 1); i <= j; i++)
                 {
                     lua_pushinteger(L, i);
                     lua_gettable(L, 1);
-                    if(!lua_tointeger(L, -1))
+                    if (!lua_tointeger(L, -1))
                     {
                         lua_pop(L, 1);
                         continue;
@@ -1054,25 +1029,27 @@ namespace luautils
                 // Build outer table
                 lua_newtable(L);
                 // one inner table each trial { trial# = { column = value, ... } }
-                for(auto trial: trials)
+                for (auto trial : trials)
                 {
                     int32 ret = Sql_Query(SqlHandle, Query, trial);
                     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                     {
                         lua_pushinteger(L, trial);
                         lua_newtable(L);
-                        int32 field {0};
-                        for(auto column: magianColumns)
+                        int32 field{ 0 };
+                        for (auto column : magianColumns)
                         {
                             lua_pushstring(L, column.c_str());
                             int t = (int32)Sql_GetIntData(SqlHandle, field++);
                             lua_pushinteger(L, t);
-                            lua_settable(L,-3);
+                            lua_settable(L, -3);
                         }
-                        lua_settable(L,-3);
+                        lua_settable(L, -3);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 return 0;
             }
             return 1;
@@ -1087,21 +1064,21 @@ namespace luautils
     *                                                                              *
     *******************************************************************************/
 
-    int32 GetMagianTrialsWithParent(lua_State* L)
+    int32 GetMagianTrialsWithParent()
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, 1) || !lua_isnumber(L, 1));
+        auto L = LuaHandle;
 
         if (lua_isnumber(L, 1))
         {
-            int32 parentTrial = lua_tointeger(L, 1);
-            const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
+            int32       parentTrial = lua_tointeger(L, 1);
+            const char* Query       = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
 
             int32 ret = Sql_Query(SqlHandle, Query, parentTrial);
-            if(ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
             {
                 lua_newtable(L);
-                int32 field {0};
-                while(Sql_NextRow(SqlHandle) == 0)
+                int32 field{ 0 };
+                while (Sql_NextRow(SqlHandle) == 0)
                 {
                     int32 childTrial = Sql_GetIntData(SqlHandle, 0);
                     lua_pushinteger(L, ++field);
@@ -1310,15 +1287,16 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua",
-                       PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName()));
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua",
+                                    PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName());
 
-        if (!lua["onZoneIn"].valid())
+        auto onZoneIn = loadFunctionFromFile("onZoneIn", filename);
+        if (!onZoneIn.valid())
         {
             return -1;
         }
 
-        auto result = lua["onZoneIn"](CLuaBaseEntity(PChar), PChar->loc.prevzone);
+        auto result = onZoneIn(CLuaBaseEntity(PChar), PChar->loc.prevzone);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1333,14 +1311,15 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName()));
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
 
-        if (!lua["afterZoneIn"].valid())
+        auto afterZoneIn = loadFunctionFromFile("afterZoneIn", filename);
+        if (!afterZoneIn.valid())
         {
             return;
         }
 
-        auto result = lua["afterZoneIn"](CLuaBaseEntity(PChar));
+        auto result = afterZoneIn(CLuaBaseEntity(PChar));
         if (!result.valid())
         {
             sol::error err = result;
@@ -1376,9 +1355,7 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        lua.script_file(fmt::format(filename));
-
-        auto onRegionEnter = lua.get<sol::function>("onRegionEnter");
+        auto onRegionEnter = loadFunctionFromFile("onRegionEnter", filename);
         if (!onRegionEnter.valid())
         {
             return -1;
@@ -1422,9 +1399,7 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        lua.script_file(fmt::format(filename));
-
-        auto onRegionLeave = lua.get<sol::function>("onRegionLeave");
+        auto onRegionLeave = loadFunctionFromFile("onRegionLeave", filename);
         if (!onRegionLeave.valid())
         {
             return -1;
@@ -1461,14 +1436,14 @@ namespace luautils
 
         lua.script_file(filename);
 
-        auto onTrigger = lua.get<sol::function>("onTrigger");
+        auto onTrigger = loadFunctionFromFile("onTrigger", filename);
         if (!onTrigger.valid())
         {
             ShowWarning("luautils::onTrigger\n");
             return -1;
         }
 
-        auto result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc)); 
+        auto result = onTrigger(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc));
         if (!result.valid())
         {
             sol::error err = result;
@@ -1780,101 +1755,66 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Начало работы статус-эффекта. Возвращаемое значение 0 или номер      *
-     *  сообщения                                                            *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
-        /*
-        lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
+        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
-        if (prepFile(File, "onEffectGain"))
+        auto onEffectGain = loadFunctionFromFile("onEffectGain", filename);
+        if (!onEffectGain.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaStatusEffect LuaStatusEffect(PStatusEffect);
-        //Lunar<CLuaStatusEffect>::push(LuaHandle, &LuaStatusEffect);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onEffectGain(CLuaBaseEntity(PEntity), CLuaStatusEffect(PStatusEffect));
+        if (!result.valid())
         {
-            ShowError("luautils::onEffectGain: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onEffectGain: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Повторяемое действие в процессе работы статус-оффекта                *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnEffectTick(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
-        /*
-        lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
+        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
-        if (prepFile(File, "onEffectTick"))
+        auto onEffectTick = loadFunctionFromFile("onEffectTick", filename);
+        if (!onEffectTick.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaStatusEffect LuaStatusEffect(PStatusEffect);
-        //Lunar<CLuaStatusEffect>::push(LuaHandle, &LuaStatusEffect);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onEffectTick(CLuaBaseEntity(PEntity), CLuaStatusEffect(PStatusEffect));
+        if (!result.valid())
         {
-            ShowError("luautils::onEffectTick: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onEffectTick: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Завершение работы статус-эффекта. Возвращаемое значение -1 или       *
-     *  номер сообщения                                                      *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnEffectLose(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
-        /*
-        lua_prepscript("scripts/%s.lua", PStatusEffect->GetName());
+        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
-        if (prepFile(File, "onEffectLose"))
+        auto onEffectLose = loadFunctionFromFile("onEffectLose", filename);
+        if (!onEffectLose.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaStatusEffect LuaStatusEffect(PStatusEffect);
-        //Lunar<CLuaStatusEffect>::push(LuaHandle, &LuaStatusEffect);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onEffectLose(CLuaBaseEntity(PEntity), CLuaStatusEffect(PStatusEffect));
+        if (!result.valid())
         {
-            ShowError("luautils::onEffectLose: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onEffectLose: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -2073,13 +2013,17 @@ namespace luautils
 
     int32 CheckForGearSet(CBaseEntity* PTarget)
     {
-        lua.script_file("scripts/globals/gear_sets.lua");
-        if (!lua["checkForGearSet"].valid())
+        TracyZoneScoped;
+
+        auto filename = "scripts/globals/gear_sets.lua";
+
+        auto checkForGearSet = loadFunctionFromFile("checkForGearSet", filename);
+        if (!checkForGearSet.valid())
         {
             return 56;
         }
 
-        auto result = lua["checkForGearSet"](CLuaBaseEntity(PTarget));
+        auto result = checkForGearSet(CLuaBaseEntity(PTarget));
         if (!result.valid())
         {
             sol::error err = result;
@@ -2297,26 +2241,24 @@ namespace luautils
 
     int32 OnMobInitialize(CBaseEntity* PMob)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
+        TracyZoneScoped;
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-        if (prepFile(File, "onMobInitialize"))
+        auto onMobInitialize = loadFunctionFromFile("onMobInitialize", filename);
+        if (!onMobInitialize.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onMobInitialize(CLuaBaseEntity(PMob));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobInitialize: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobInitialize: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -2638,7 +2580,7 @@ namespace luautils
     /************************************************************************
      *                                                                       *
      *  Сalled when a monster engages a target for the first time            *
-     *       Added by request (for doing stuff when mobs first engage)       *
+     *                                                                       *
      ************************************************************************/
 
     int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget)
@@ -3602,52 +3544,44 @@ namespace luautils
 
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action)
     {
-        /*
-        std::string path = "scripts/globals/abilities/%s.lua";
+        TracyZoneScoped;
+
+        std::string filename;
         if (PUser->objtype == TYPE_PET)
         {
-            path = "scripts/globals/abilities/pets/%s.lua";
+            filename = fmt::format("scripts/globals/abilities/pets/{}.lua", PAbility->getName());
         }
-        lua_prepscript(path.c_str(), PAbility->getName());
+        else
+        {
+            filename = fmt::format("scripts/globals/abilities/{}.lua", PAbility->getName());
+        }
 
-        if (prepFile(File, "onUseAbility"))
+        auto onUseAbility = loadFunctionFromFile("onUseAbility", filename);
+        if (!onUseAbility.valid())
         {
             return 0;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PUser);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        CLuaAbility LuaAbility(PAbility);
-        //Lunar<CLuaAbility>::push(LuaHandle, &LuaAbility);
-
-        CLuaAction LuaAction(action);
-        //Lunar<CLuaAction>::push(LuaHandle, &LuaAction);
-
-        if (lua_pcall(LuaHandle, 4, 1, 0))
+        auto result = onUseAbility(CLuaBaseEntity(PUser), CLuaBaseEntity(PTarget), CLuaAbility(PAbility), CLuaAction(action));
+        if (!result.valid())
         {
-            ShowError("luautils::onUseAbility: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onUseAbility: %s\n", err.what());
             return 0;
         }
 
-        int32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : false;
     }
 
     void ClearVarFromAll(std::string varName)
     {
+        TracyZoneScoped;
         Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
     }
 
     void Terminate()
     {
+        TracyZoneScoped;
         zoneutils::ForEachZone([](CZone* PZone) {
             PZone->ForEachChar([](CCharEntity* PChar) {
                 charutils::SaveCharPosition(PChar);
@@ -3943,13 +3877,10 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 StartElevator(lua_State* L)
+    void StartElevator(uint32 ElevatorID)
     {
-        TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-        uint32 ElevatorID = (uint32)lua_tointeger(L, -1);
+        TracyZoneScoped;
         CTransportHandler::getInstance()->startElevator(ElevatorID);
-        return 0;
     }
 
     /************************************************************************
@@ -3961,6 +3892,8 @@ namespace luautils
 
     int32 GetServerVariable(std::string varName)
     {
+        TracyZoneScoped;
+
         int32 value = 0;
 
         int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
@@ -3981,6 +3914,8 @@ namespace luautils
 
     void SetServerVariable(std::string name, int32 value)
     {
+        TracyZoneScoped;
+
         if (value == 0)
         {
             Sql_Query(SqlHandle, "DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
@@ -3989,30 +3924,23 @@ namespace luautils
         Sql_Query(SqlHandle, "INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
     {
-        lua_prepscript("scripts/zones/%s/Zone.lua", PChar->loc.zone->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onTransportEvent"))
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
+
+        auto onTransportEvent = loadFunctionFromFile("onTransportEvent", filename);
+        if (!onTransportEvent.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, TransportID);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onTransportEvent(CLuaBaseEntity(PChar), TransportID);
+        if (!result.valid())
         {
-            ShowError("luautils::onTransportEvent: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onTransportEvent: %s\n", err.what());
             return -1;
         }
 
@@ -4024,9 +3952,8 @@ namespace luautils
         TracyZoneScoped;
 
         auto filename = fmt::format("scripts/zones/{}/npcs/{}.lua", PNpc->loc.zone->GetName(), PNpc->GetName());
-        lua.script_file(filename);
 
-        auto onTimeTrigger = lua.get<sol::function>("onTimeTrigger");
+        auto onTimeTrigger = loadFunctionFromFile("onTimeTrigger", filename);
         if (!onTimeTrigger.valid())
         {
             return;
@@ -4044,11 +3971,19 @@ namespace luautils
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type)
     {
         TracyZoneScoped;
-        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName()));
+
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
+
+        auto onConquestUpdate = loadFunctionFromFile("onConquestUpdate", filename);
+        if (!onConquestUpdate.valid())
+        {
+            return -1;
+        }
 
         CLuaZone LuaZone(PZone);
 
-        if (auto result = lua["onConquestUpdate"](LuaZone, type); !result.valid())
+        auto result = onConquestUpdate(LuaZone, type);
+        if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onConquestUpdate: %s\n", err.what());
@@ -4061,31 +3996,26 @@ namespace luautils
     /********************************************************************
         onBattlefieldEnter - callback when you enter a BCNM via a lua call to bcnmEnter(bcnmid)
     *********************************************************************/
-    int32 OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield)
+    void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield)
     {
+        TracyZoneScoped;
+
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-        lua_prepscript("scripts/zones/%s/bcnms/%s.lua", PZone->GetName(), PBattlefield->GetName().c_str());
+        auto filename = fmt::format("scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
 
-        if (prepFile(File, "onBattlefieldEnter"))
+        auto onBattlefieldEnter = loadFunctionFromFile("onBattlefieldEnter", filename);
+        if (!onBattlefieldEnter.valid())
         {
-            return 0;
+            return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBattlefield LuaBattlefieldEntity(PBattlefield);
-        // Lunar<CLuaBattlefield>::push(LuaHandle, &LuaBattlefieldEntity);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onBattlefieldEnter(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
+        if (!result.valid())
         {
-            ShowError("luautils::onBattlefieldEnter: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onBattlefieldEnter: %s\n", err.what());
         }
-
-        return 0;
     }
 
     /********************************************************************
@@ -4098,37 +4028,30 @@ namespace luautils
         This callback is executed for everyone in the BCNM when they leave
         so if they leave via win, this will be called for each char.
     *********************************************************************/
-    int32 OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode)
+    void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode)
     {
+        TracyZoneScoped;
+
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-        lua_prepscript("scripts/zones/%s/bcnms/%s.lua", PZone->GetName(), PBattlefield->GetName().c_str());
+        auto filename = fmt::format("scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
 
-        if (prepFile(File, "onBattlefieldLeave"))
+        auto onBattlefieldLeave = loadFunctionFromFile("onBattlefieldLeave", filename);
+        if (!onBattlefieldLeave.valid())
         {
-            return 0;
+            return;
         }
-
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBattlefield LuaBattlefieldEntity(PBattlefield);
-        // Lunar<CLuaBattlefield>::push(LuaHandle, &LuaBattlefieldEntity);
-
-        lua_pushinteger(LuaHandle, LeaveCode);
 
         PChar->m_event.reset();
         PChar->m_event.Target = PChar;
-        PChar->m_event.Script.insert(0, (const char*)File);
+        PChar->m_event.Script.insert(0, filename.c_str());
 
-        if (lua_pcall(LuaHandle, 3, 0, 0))
+        auto result = onBattlefieldLeave(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
+        if (!result.valid())
         {
-            ShowError("luautils::onBattlefieldLeave: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onBattlefieldLeave: %s\n", err.what());
         }
-
-        return 0;
     }
 
     /********************************************************************
@@ -4138,89 +4061,68 @@ namespace luautils
         This callback is called only for the character initiating the
         registration, and after CBattlefield:init() procedure.
     *********************************************************************/
-    int32 OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield)
+    void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield)
     {
+        TracyZoneScoped;
+
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-        lua_prepscript("scripts/zones/%s/bcnms/%s.lua", PZone->GetName(), PBattlefield->GetName().c_str());
+        auto filename = fmt::format("scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
 
-        if (prepFile(File, "onBattlefieldRegister"))
+        auto onBattlefieldRegister = loadFunctionFromFile("onBattlefieldRegister", filename);
+        if (!onBattlefieldRegister.valid())
         {
-            return 0;
+            return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBattlefield LuaBattlefieldEntity(PBattlefield);
-        // Lunar<CLuaBattlefield>::push(LuaHandle, &LuaBattlefieldEntity);
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onBattlefieldRegister(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
+        if (!result.valid())
         {
-            ShowError("luautils::onBattlefieldRegister: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onBattlefieldRegister: %s\n", err.what());
         }
-
-        return 0;
     }
 
     /********************************************************************
     onBattlefieldDestroy - called when BCNM is destroyed (cleanup)
     *********************************************************************/
-    int32 OnBattlefieldDestroy(CBattlefield* PBattlefield)
+    void OnBattlefieldDestroy(CBattlefield* PBattlefield)
     {
-        lua_prepscript("scripts/zones/%s/bcnms/%s.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName().c_str());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onBattlefieldDestroy"))
+        auto filename = fmt::format("scripts/zones/{}/bcnms/{}.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName());
+
+        auto onBattlefieldDestroy = loadFunctionFromFile("onBattlefieldDestroy", filename);
+        if (!onBattlefieldDestroy.valid())
         {
-            return 0;
+            return;
         }
 
-        CLuaBattlefield LuaBattlefieldEntity(PBattlefield);
-        // Lunar<CLuaBattlefield>::push(LuaHandle, &LuaBattlefieldEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onBattlefieldDestroy(CLuaBattlefield(PBattlefield));
+        if (!result.valid())
         {
-            ShowError("luautils::onBattlefieldDestroy: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onBattlefieldDestroy: %s\n", err.what());
         }
-
-        return 0;
     }
     /************************************************************************
      *                                                                       *
      * Set SpawnType of mob to scripted (128) or normal (0) usind mob id     *
      *                                                                       *
      ************************************************************************/
-    int32 DisallowRespawn(lua_State* L)
+    void DisallowRespawn(uint32 mobid, bool allowRespawn)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            uint32      mobid = (uint32)lua_tointeger(L, 1);
-            CMobEntity* PMob  = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        TracyZoneScoped;
 
-            if (PMob != nullptr)
-            {
-                if (!lua_isnil(L, 2) && lua_isboolean(L, 2))
-                {
-                    PMob->m_AllowRespawn = !lua_toboolean(L, 2);
-                    // ShowDebug(CL_RED"DisallowRespawn: Mob <%u> DisallowRespawn is now <%s>.\n" CL_RESET, mobid, PMob->m_AllowRespawn ? "true" : "false");
-                    return 0;
-                }
-                else
-                {
-                    ShowDebug(CL_RED "DisallowRespawn: Boolean parameter not given, mob <%u> SpawnType unchanged.\n" CL_RESET, mobid);
-                }
-            }
-            else
-            {
-                ShowDebug(CL_RED "DisallowRespawn: mob <%u> not found\n" CL_RESET, mobid);
-            }
-            return 0;
+        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        if (PMob != nullptr)
+        {
+            PMob->m_AllowRespawn = !allowRespawn;
         }
-        lua_pushnil(L);
-        return 1;
+        else
+        {
+            ShowDebug(CL_RED "DisallowRespawn: mob <%u> not found\n" CL_RESET, mobid);
+        }
     }
 
     /************************************************************************
@@ -4229,50 +4131,44 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 UpdateNMSpawnPoint(lua_State* L)
+    void UpdateNMSpawnPoint(uint32 mobid)
     {
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        TracyZoneScoped;
+
+        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        if (PMob != nullptr)
         {
-            uint32      mobid = (uint32)lua_tointeger(L, 1);
-            CMobEntity* PMob  = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-
-            if (PMob != nullptr)
+            int32 r   = 0;
+            int32 ret = Sql_Query(SqlHandle, "SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
+            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
             {
-                int32 r   = 0;
-                int32 ret = Sql_Query(SqlHandle, "SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
-                {
-                    r = tpzrand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
-                }
-                else
-                {
-                    ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.\n" CL_RESET, mobid);
-                    return 0;
-                }
-
-                ret = Sql_Query(SqlHandle, "SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-                {
-                    PMob->m_SpawnPoint.rotation = tpzrand::GetRandomNumber(256);
-                    PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
-                    PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
-                    PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
-                    // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i\n" CL_RESET, r,
-                    // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
-                }
-                else
-                {
-                    ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.\n" CL_RESET, mobid);
-                }
+                r = tpzrand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
             }
             else
             {
-                ShowDebug(CL_RED "UpdateNMSpawnPoint: mob <%u> not found\n" CL_RESET, mobid);
+                ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error: No entries for mobid <%u> found.\n" CL_RESET, mobid);
+                return;
             }
-            return 0;
+
+            ret = Sql_Query(SqlHandle, "SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
+            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                PMob->m_SpawnPoint.rotation = tpzrand::GetRandomNumber(256);
+                PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
+                PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
+                PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
+                // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i\n" CL_RESET, r,
+                // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
+            }
+            else
+            {
+                ShowDebug(CL_RED "UpdateNMSpawnPoint: SQL error or NM <%u> not found in nmspawnpoints table.\n" CL_RESET, mobid);
+            }
         }
-        lua_pushnil(L);
-        return 1;
+        else
+        {
+            ShowDebug(CL_RED "UpdateNMSpawnPoint: mob <%u> not found\n" CL_RESET, mobid);
+        }
     }
 
     /************************************************************************
@@ -4281,9 +4177,11 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 GetMobRespawnTime(uint32 mobid)
+    uint32 GetMobRespawnTime(uint32 mobid)
     {
-        CMobEntity* PMob  = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        TracyZoneScoped;
+
+        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
 
         if (PMob != nullptr)
         {
@@ -4304,6 +4202,7 @@ namespace luautils
     void SetDropRate(uint16 dropid, uint16 itemid, uint16 rate)
     {
         TracyZoneScoped;
+
         DropList_t* DropList = itemutils::GetDropList(dropid);
 
         if (DropList != nullptr)
@@ -4320,6 +4219,7 @@ namespace luautils
 
     uint8 GetHealingTickDelay()
     {
+        TracyZoneScoped;
         return map_config.healing_tick_delay;
     }
 
@@ -4387,7 +4287,7 @@ namespace luautils
 
         fclose(fp);
 
-        // Ensure both messages have nullptr terminates..
+        // Ensure both messages have NULL terminates..
         if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
         {
             map_config.server_message += (char)0x00;
@@ -4401,9 +4301,9 @@ namespace luautils
         TracyZoneScoped;
 
         position_t center;
-        center.x = table.get<float>("x");
-        center.y = table.get<float>("y");
-        center.z = table.get<float>("z");
+        center.x        = table.get<float>("x");
+        center.y        = table.get<float>("y");
+        center.z        = table.get<float>("z");
         center.rotation = table.get<uint8>("rot");
 
         position_t pos = nearPosition(center, radius, theta);
@@ -4460,9 +4360,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName()));
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
 
-        auto onChocoboDig = lua.get<sol::function>("onChocoboDig");
+        auto onChocoboDig = loadFunctionFromFile("onChocoboDig", filename);
         if (!onChocoboDig.valid())
         {
             ShowWarning("luautils::onChocoboDig\n");
@@ -4529,9 +4429,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        lua.script_file(fmt::format("scripts/globals/items/{}.lua", PItem->getName()));
+        auto filename = fmt::format("scripts/globals/items/{}.lua", PItem->getName());
 
-        auto onFurniturePlaced = lua.get<sol::function>("onFurniturePlaced");
+        auto onFurniturePlaced = loadFunctionFromFile("onFurniturePlaced", filename);
         if (!onFurniturePlaced.valid())
         {
             ShowWarning("luautils::onFurniturePlaced\n");
@@ -4551,9 +4451,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        lua.script_file(fmt::format("scripts/globals/items/{}.lua", PItem->getName()));
+        auto filename = fmt::format("scripts/globals/items/{}.lua", PItem->getName());
 
-        auto onFurnitureRemoved = lua.get<sol::function>("onFurnitureRemoved");
+        auto onFurnitureRemoved = loadFunctionFromFile("onFurnitureRemoved", filename);
         if (!onFurnitureRemoved.valid())
         {
             ShowWarning("luautils::onFurnitureRemoved\n");
