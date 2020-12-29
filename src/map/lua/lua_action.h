@@ -39,17 +39,17 @@ public:
         return m_PLuaAction;
     }
 
-    int32 ID(lua_State*);
-    int32 recast(lua_State*);
-    int32 actionID(lua_State*);
-    int32 param(lua_State*);
-    int32 messageID(lua_State*);
-    int32 animation(lua_State*);
-    int32 speceffect(lua_State*);
-    int32 reaction(lua_State*);
-    int32 addEffectParam(lua_State*);
-    int32 addEffectMessage(lua_State*);
-    int32 additionalEffect(lua_State*);
+    void ID(uint32 actionTargetID, uint16 newActionTargetID);
+    void recast(uint16 recast);
+    void actionID(uint16 actionid);
+    void param(uint32 actionTargetID, int32 param);
+    void messageID(uint32 actionTargetID, uint16 messageID);
+    void animation(uint32 actionTargetID, uint16 animation);
+    void speceffect(uint32 actionTargetID, uint8 speceffect);
+    void reaction(uint32 actionTargetID, uint8 reaction);
+    void additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
+    void addEffectParam(uint32 actionTargetID, int32 addEffectParam);
+    void addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
 
     static void Register();
 };

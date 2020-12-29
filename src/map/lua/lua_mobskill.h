@@ -39,7 +39,7 @@ public:
         return m_PLuaMobSkill;
     }
     float  getTP();
-    uint8  getMobHPP(lua_State*);
+    uint8  getMobHPP();
     uint16 getID();
     int16  getParam();
     bool   isAoE();

@@ -98,7 +98,7 @@ float CLuaMobSkill::getTP()
 }
 
 // Retrieves the Monsters HP% as it was at the start of mobskill
-uint8 CLuaMobSkill::getMobHPP(lua_State* L)
+uint8 CLuaMobSkill::getMobHPP()
 {
     return m_PLuaMobSkill->getHPP();
 }
