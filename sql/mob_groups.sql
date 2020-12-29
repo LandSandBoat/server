@@ -3060,9 +3060,9 @@ INSERT INTO `mob_groups` VALUES (3,2539,66,'Mamool_Jas_Lizard',0,128,0,0,0,70,70
 INSERT INTO `mob_groups` VALUES (4,2544,66,'Mamool_Ja_Warder_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (5,1037,66,'Dilapidated_Gate',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (6,3225,66,'Puk_Executioner',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (7,2515,66,'Mamool_Ja_Executioner',0,128,0,0,9999,77,78,0);
-INSERT INTO `mob_groups` VALUES (8,5467,66,'Mamool_Ja_Executioner',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (9,6501,66,'Mamool_Ja_Executioner',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (7,2515,66,'Mamool_Ja_Executioner_wh',0,128,0,0,9999,77,78,0);
+INSERT INTO `mob_groups` VALUES (8,5467,66,'Mamool_Ja_Executioner_bu',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (9,6501,66,'Mamool_Ja_Executioner_ni',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (10,3437,66,'Sagelord_Molaal_Ja',0,128,0,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (11,2542,66,'Mamool_Ja_Trainee_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (12,5466,66,'Mamool_Ja_Warder_whm',0,128,0,0,0,77,78,0);
@@ -3075,26 +3075,26 @@ INSERT INTO `mob_groups` VALUES (18,2516,66,'Mamool_Ja_Farrier',0,128,0,0,0,76,7
 INSERT INTO `mob_groups` VALUES (19,3060,66,'Orochi',0,128,0,25000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (20,6675,66,'Mamool_Ja_Trainee_bst',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (21,6676,66,'Mamool_Ja_Trainee_blu',0,128,0,0,0,77,78,0);
-
-INSERT INTO `mob_groups` VALUES (2230,478,66,'Bluethunder_Kaqool_Ja',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2231,557,66,'Bugard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2234,1327,66,'Festive_Firedrake',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2235,2002,66,'Huge_Spider',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2236,2385,66,'Leech',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2241,2531,66,'Mamool_Ja_Recruit',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2246,2723,66,'Molted_Bugard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2247,2724,66,'Molted_Lindwurm',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2248,2725,66,'Molted_Mamool_Ja',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2249,2726,66,'Molted_Puk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2250,2727,66,'Molted_Ziz',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2252,3142,66,'Pit_Bugard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2253,3144,66,'Pit_Lindwurm',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2254,3146,66,'Pit_Puk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2255,3147,66,'Pit_Spider',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2256,3177,66,'Poroggo',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2257,3223,66,'Puk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2259,3255,66,'Qiqirn_Huckster',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2261,3666,66,'Slavering_Lizard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,2531,66,'Mamool_Ja_Recruit',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (23,4815,66,'Mamool_Ja_Trainer',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (24,3223,66,'Puk',0,128,0,0,0,62,67,0);
+INSERT INTO `mob_groups` VALUES (25,3142,66,'Pit_Bugard',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (26,3144,66,'Pit_Lindwurm',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (27,3146,66,'Pit_Puk',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (28,3147,66,'Pit_Spider',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (29,2726,66,'Molted_Puk',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (30,2724,66,'Molted_Lindwurm',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (31,2723,66,'Molted_Bugard',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (32,2727,66,'Molted_Ziz',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (33,2725,66,'Molted_Mamool_Ja',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (34,478,66,'Bluethunder_Kaqool_Ja',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (35,1327,66,'Festive_Firedrake',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (36,557,66,'Bugard',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (37,3177,66,'Poroggo',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (38,2002,66,'Huge_Spider',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (39,2385,66,'Leech',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (40,3666,66,'Slavering_Lizard',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (41,3255,66,'Qiqirn_Huckster',0,128,0,0,0,75,75,0);
 
 -- ------------------------------------------------------------
 -- Jade_Sepulcher (Zone 67)
