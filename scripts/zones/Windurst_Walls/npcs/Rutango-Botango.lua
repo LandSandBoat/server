@@ -5,7 +5,6 @@
 -- Working 100%
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 
