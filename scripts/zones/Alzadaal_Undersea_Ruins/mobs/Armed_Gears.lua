@@ -16,7 +16,7 @@ require("scripts/globals/status")
 function onMobInitialize(mob)
     mob:addMod(tpz.mod.MDEF, 60)
     mob:addMod(tpz.mod.DEF, 60)
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
 end
 
 function onMobDeath(mob, player, isKiller)
