@@ -154,7 +154,6 @@ namespace luautils
         set_function("getNationRank", &luautils::getNationRank);
         set_function("getConquestBalance", &luautils::getConquestBalance);
         set_function("isConquestAlliance", &luautils::isConquestAlliance);
-        set_function("setMobPos", &luautils::setMobPos);
         set_function("spawnMob", &luautils::SpawnMob);
         set_function("despawnMob", &luautils::DespawnMob);
         set_function("getPlayerByName", &luautils::GetPlayerByName);
@@ -834,92 +833,33 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 DespawnMob()
+    void DespawnMob(uint32 mobid, sol::object const& arg2)
     {
         TracyZoneScoped;
-        auto L = LuaHandle;
 
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
+        CMobEntity* PMob  = nullptr;
+
+        if (arg2.is<CLuaInstance>())
         {
-            uint32      mobid = (uint32)lua_tointeger(L, 1);
-            CMobEntity* PMob  = nullptr;
+            auto PInstance = arg2.as<CLuaInstance>().GetInstance();
+            PMob           = (CMobEntity*)PInstance->GetEntity(mobid & 0xFFF, TYPE_MOB);
+        }
+        else
+        {
+            PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        }
 
-            if (!lua_isnil(L, 2) && lua_isuserdata(L, 2))
+        if (PMob != nullptr)
+        {
+            if (arg2.is<uint32>())
             {
-                // CLuaInstance* PLuaInstance = Lunar<CLuaInstance>::check(L, 2);
-                // PMob                       = (CMobEntity*)PLuaInstance->GetInstance()->GetEntity(mobid & 0xFFF, TYPE_MOB);
+                PMob->SetDespawnTime(std::chrono::seconds(arg2.as<uint32>()));
             }
             else
             {
-                PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+                PMob->PAI->Despawn();
             }
-            if (PMob != nullptr)
-            {
-                if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-                {
-                    PMob->SetDespawnTime(std::chrono::seconds(lua_tointeger(L, 2)));
-                }
-                else
-                {
-                    PMob->PAI->Despawn();
-                }
-            }
-            return 0;
         }
-        lua_pushnil(L);
-        return 1;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  set a mobs position                                                  *
-     *                                                                       *
-     ************************************************************************/
-
-    int32 setMobPos()
-    {
-        auto L = LuaHandle;
-        if (!lua_isnil(L, 1) && lua_isnumber(L, 1))
-        {
-            uint32 mobid = (uint32)lua_tointeger(L, 1);
-
-            CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-            if (PMob != nullptr)
-            {
-                // if mob is in battle, do not warp it
-                if (!PMob->PAI->IsEngaged())
-                {
-                    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
-                    {
-                        PMob->loc.p.x = (float)lua_tonumber(L, 2);
-                    }
-
-                    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-                    {
-                        PMob->loc.p.y = (float)lua_tonumber(L, 3);
-                    }
-
-                    if (!lua_isnil(L, 4) && lua_isnumber(L, 4))
-                    {
-                        PMob->loc.p.z = (float)lua_tonumber(L, 4);
-                    }
-
-                    if (!lua_isnil(L, 5) && lua_isnumber(L, 5))
-                    {
-                        PMob->loc.p.rotation = (uint8)lua_tointeger(L, 5);
-                    }
-                }
-                else
-                {
-                    ShowDebug(CL_CYAN "setMobPos: <%s> is currently in battle, will not warp it!\n" CL_RESET, PMob->GetName());
-                    return 1;
-                }
-            }
-            lua_pushnil(L);
-            return 1;
-        }
-        ShowError(CL_RED "setMobPos :: Mob ID is not valid." CL_RESET);
-        return 1;
     }
 
     /************************************************************************

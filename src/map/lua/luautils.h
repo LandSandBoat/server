@@ -123,7 +123,6 @@ namespace luautils
     uint8 getConquestBalance();
     bool  isConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-    int32 setMobPos();                                  // set a mobs position (only if mob is not in combat)
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
@@ -132,7 +131,7 @@ namespace luautils
     auto GetSpell(uint16 id) -> std::shared_ptr<CLuaSpell>;
 
     auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
-    int32  DespawnMob();                                                                                                // Despawn (Fade Out) Mob By Id
+    void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
     auto   GetPlayerByName(std::string name) -> std::shared_ptr<CLuaBaseEntity>;
     auto   GetPlayerByID(uint32 pid) -> std::shared_ptr<CLuaBaseEntity>;
     int32  GetMagianTrial();
