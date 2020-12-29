@@ -200,22 +200,10 @@ auto CLuaItem::getAugment(uint8 slot) -> std::tuple<uint16, uint8>
     return { augmentid, augmentVal };
 }
 
-inline int32 CLuaItem::getSkillType(lua_State* L)
+uint8 CLuaItem::getSkillType()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
-
     auto* PItem = dynamic_cast<CItemWeapon*>(m_PLuaItem);
-
-    if (PItem)
-    {
-        lua_pushinteger(L, PItem->getSkillType());
-    }
-    else
-    {
-        lua_pushinteger(L, -1);
-    }
-
-    return 1;
+    return PItem ? PItem->getSkillType() : -1;
 }
 
 uint16 CLuaItem::getWeaponskillPoints()
@@ -246,7 +234,6 @@ bool CLuaItem::isTwoHanded()
 
 bool CLuaItem::isHandToHand()
 {
-
     if (CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(m_PLuaItem))
     {
         return PWeapon->isHandToHand();

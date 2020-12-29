@@ -67,7 +67,7 @@ public:
     auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    int32  getSkillType(lua_State*); // get skill type
+    uint8  getSkillType(); // get skill type
     uint16 getWeaponskillPoints();   // get current ws points
 
     bool isTwoHanded();  // is a two handed weapon
