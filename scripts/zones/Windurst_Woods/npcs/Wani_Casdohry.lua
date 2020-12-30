@@ -9,7 +9,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TwinstoneBonding = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+    local TwinstoneBonding = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
 
     if TwinstoneBonding == QUEST_COMPLETED then
         player:startEvent(492, 0, 13360)

@@ -49,7 +49,7 @@ end
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, {{498, 4}}) then -- Yagudo Necklace x4
-        local mihgosAmigo = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+        local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
 
         if mihgosAmigo == QUEST_ACCEPTED then
             player:startEvent(88, GIL_RATE * 200)
@@ -62,13 +62,13 @@ end
 function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
-    local mihgosAmigo = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
-    local tenshodoShowdown = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
+    local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+    local tenshodoShowdown = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
     local tenshodoShowdownCS = player:getCharVar("theTenshodoShowdownCS")
-    local rockRacketeer = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+    local rockRacketeer = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
-    local thickAsThieves = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
-    local hittingTheMarquisate = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
+    local thickAsThieves = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
+    local hittingTheMarquisate = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
     local hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
     local hittingTheMarquisateHagainCS = player:getCharVar("hittingTheMarquisateHagainCS")
     local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
@@ -78,7 +78,7 @@ function onTrigger(player, npc)
     -- LURE OF THE WILDCAT (WINDURST 2-1)
     -- Simply checks this NPC as talked to for the PC, should be highest priority
     if
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatWindurst, 4)
     then
         player:startEvent(732)
@@ -167,7 +167,7 @@ function onTrigger(player, npc)
 
     -- MIHGO'S AMIGO
     elseif mihgosAmigo == QUEST_AVAILABLE then
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
+        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
             player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
         else
             player:startEvent(80) -- Start Quest "Mihgo's Amigo"

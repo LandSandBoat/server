@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local sayItWithAHandbag = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+    local sayItWithAHandbag = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
 
     if sayItWithAHandbag == QUEST_COMPLETED then

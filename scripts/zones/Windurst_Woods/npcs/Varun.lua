@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local rockRacketeer = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+    local rockRacketeer = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
 
     if rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 3 then

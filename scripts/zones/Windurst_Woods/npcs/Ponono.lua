@@ -15,7 +15,7 @@ require("scripts/globals/status")
 function onTrade(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.CLOTHCRAFT)
-    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     if
         newRank > 9 and
@@ -45,7 +45,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)

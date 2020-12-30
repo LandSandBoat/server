@@ -16,9 +16,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local inAStew = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
+    local inAStew = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     local inAStewCS = player:getCharVar("IASvar")
-    local chocobilious = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
+    local chocobilious = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
 
     -- IN A STEW
     if inAStew == QUEST_AVAILABLE and chocobilious == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 3 then

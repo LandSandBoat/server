@@ -43,12 +43,12 @@ end
 
 function onTrade(player, npc, trade)
     -- THE KIND CARDIAN
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 969) then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
-    elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 551) then
         player:startEvent(325, 0, 20000, 5000)
     end
@@ -56,10 +56,10 @@ end
 
 function onTrigger(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
-    local kindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+    local kindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
-    local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
-    local canCardiansCry = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+    local allNewC3000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local canCardiansCry = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     local Rank6 = player:getRank() >= 6 and 1 or 0
 
     -- WINDURST 1-2: THE HEART OF THE MATTER

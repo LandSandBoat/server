@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES) == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.A_SONG_OF_LOVE) then
             player:startEvent(406)
         elseif player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 then

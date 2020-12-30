@@ -32,13 +32,13 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local theFangedOne = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
+    local theFangedOne = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
     local theFangedOneCS = player:getCharVar("TheFangedOne_Event")
-    local sinHunting = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SIN_HUNTING)-- RNG AF1
+    local sinHunting = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SIN_HUNTING)-- RNG AF1
     local sinHuntingCS = player:getCharVar("sinHunting")
-    local fireAndBrimstone = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)-- RNG AF2
+    local fireAndBrimstone = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)-- RNG AF2
     local fireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
-    local unbridledPassion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)-- RNG AF3
+    local unbridledPassion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)-- RNG AF3
     local unbridledPassionCS = player:getCharVar("unbridledPassion")
     local lvl = player:getMainLvl()
     local job = player:getMainJob()

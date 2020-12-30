@@ -13,11 +13,11 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
     -- CHOCOBILIOUS
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 1 and npcUtil.tradeHas(trade, 938) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 1 and npcUtil.tradeHas(trade, 938) then
         player:startEvent(229, 0, 938)
 
     -- PAYING LIP SERVICE
-    elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) >= QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {{912, 3}}) then -- beehive_chip
             player:startEvent(479, 0, 912, 1016, 0, 0)
         elseif npcUtil.tradeHas(trade, {{1016, 2}}) then -- remi_shell
@@ -27,9 +27,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local chocobilious = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
+    local chocobilious = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
     local chocobiliousCS = player:getCharVar("ChocobiliousQuest")
-    local payingLipService = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
+    local payingLipService = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
 
     -- CHOCOBILIOUS
     if chocobilious == QUEST_ACCEPTED and chocobiliousCS == 2 then
@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 477 and option == 1 then
         player:addQuest(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
     elseif csid == 479 then
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) == QUEST_ACCEPTED then
             npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE, {fame=60, title=tpz.title.KISSER_MAKEUPPER})
         else
             player:addFame(WINDURST, 8)

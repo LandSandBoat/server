@@ -16,9 +16,9 @@ end
 
 function onTrigger(player, npc)
 
-    local C2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
-    local AGreetingCardian = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
-    local LPB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
+    local C2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local AGreetingCardian = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+    local LPB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
     local AGCcs = player:getCharVar("AGreetingCardian_Event")
     local AGCtime = player:getCharVar("AGreetingCardian_timer")
 
