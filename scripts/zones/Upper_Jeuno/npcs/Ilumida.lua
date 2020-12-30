@@ -16,8 +16,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local aCandlelightVigil = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
-    local SearchingForWords = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local aCandlelightVigil = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
+    local SearchingForWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == QUEST_COMPLETED and RubbishDay == QUEST_COMPLETED and
     --NeverToReturn == QUEST_COMPLETED and SearchingForTheRightWords == QUEST_AVAILABLE and prereq CS complete

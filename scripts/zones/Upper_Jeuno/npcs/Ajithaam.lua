@@ -44,14 +44,14 @@ Port Jeuno (West to East)
 ]]--
 
 function onTrade(player, npc, trade)
-    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(10177)
     end
 end
 
 function onTrigger(player, npc)
-    local LureJeuno = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+    local LureJeuno = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
     if (LureJeuno ~= 2 and ENABLE_TOAU == 1) then
         if (LureJeuno == 0) then

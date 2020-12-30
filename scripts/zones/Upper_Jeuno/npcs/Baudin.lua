@@ -39,14 +39,14 @@ function onTrade(player, npc, trade)
         then
             player:startEvent(177, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
         player:startEvent(171) -- Finish Quest "Crest of Davoi" Start Quest "Save my Sister" with var, not addquest()
     end
 end
 
 function onTrigger(player, npc)
-    local CrestOfDavoi = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
-    local SaveMySister = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+    local CrestOfDavoi = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+    local SaveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
     -- You need to talk to Aldo before you can obtain the Crest of Davoi or Yagudo Torch
     if (player:hasKeyItem(tpz.ki.SILVER_BELL) and CrestOfDavoi == QUEST_AVAILABLE) then

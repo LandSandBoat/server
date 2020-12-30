@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SMALL_STARFRUIT) then
+    if player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SMALL_STARFRUIT) then
         player:addKeyItem(tpz.ki.SMALL_STARFRUIT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMALL_STARFRUIT)
     end

@@ -13,7 +13,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 2) then
         if (VanadielHour() < 8) then
             player:startEvent(107)
         elseif (VanadielHour() < 16) then

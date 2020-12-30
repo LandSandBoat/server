@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER) == QUEST_ACCEPTED and player:getCharVar("theDismayedCustomer") == 3 then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER) == QUEST_ACCEPTED and player:getCharVar("theDismayedCustomer") == 3 then
         player:addKeyItem(tpz.ki.GULEMONTS_DOCUMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GULEMONTS_DOCUMENT)
         player:setCharVar("theDismayedCustomer", 0)

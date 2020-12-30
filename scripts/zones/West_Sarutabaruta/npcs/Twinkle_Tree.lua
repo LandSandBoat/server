@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR) == QUEST_ACCEPTED and VanadielHour() <= 3 then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR) == QUEST_ACCEPTED and VanadielHour() <= 3 then
         if npcUtil.tradeHas(trade, 868) and player:getCharVar("QuestCatchAFallingStar_prog") == 0 then
             player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
             player:messageSpecial(ID.text.MELT_BARE_HANDS)

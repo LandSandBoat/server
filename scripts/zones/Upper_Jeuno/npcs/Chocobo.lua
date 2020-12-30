@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     if (ChocobosWounds == 0) then
         player:startEvent(62)
@@ -57,7 +57,7 @@ end
 
 function onTrigger(player, npc)
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     if (ChocobosWounds == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) == false) then
         -- this is a quick hack to let people get their license if it was lost

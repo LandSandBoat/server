@@ -44,8 +44,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TheLostCardien = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
-    local CooksPride = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+    local TheLostCardien = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
+    local CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     -- COP mission 1-1
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_RITES_OF_LIFE and  player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(10)--10
@@ -65,7 +65,7 @@ function onTrigger(player, npc)
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian" 33
     elseif (CooksPride == QUEST_COMPLETED and TheLostCardien == QUEST_AVAILABLE and player:getCharVar("theLostCardianVar") == 3) then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian" 34
-    elseif (TheLostCardien == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED) then
+    elseif (TheLostCardien == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED) then
         player:startEvent(32) -- 32
     else
         player:startEvent(28) -- Standard dialog 28

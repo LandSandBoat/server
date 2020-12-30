@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Eati = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
+    local Eati = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
     if Eati == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.EVIL_WARDING_SEAL) then
         player:startEvent(112)

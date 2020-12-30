@@ -22,10 +22,10 @@ end
 
 function onTrigger(player, npc)
 
-    local ANewDawn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     local feed = player:getCharVar("ChocobosWounds_Event")
 
     -- A New Dawn
