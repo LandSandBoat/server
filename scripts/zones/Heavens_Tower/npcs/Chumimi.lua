@@ -14,20 +14,20 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
         trade:hasItemQty(1104, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(269) -- Finish Quest "The Three Magi"
     elseif
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
         player:getCharVar("recollectionsQuest") < 2 and
         trade:hasItemQty(1105, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(271, 0, 520)
     elseif
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
         player:getCharVar("rootProblem") == 1 and
         trade:hasItemQty(829, 1) and
         trade:getItemCount() == 1
@@ -37,9 +37,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theThreeMagi = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
-    local recollections = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
-    local rootProblem = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+    local theThreeMagi = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
+    local recollections = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
+    local rootProblem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 

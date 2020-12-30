@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local tuw = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+    local tuw = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
     local tuwStatus = player:getCharVar("QuestStatus_DNC_AF1")
 
     if (tuw == QUEST_ACCEPTED and tuwStatus == 2) then

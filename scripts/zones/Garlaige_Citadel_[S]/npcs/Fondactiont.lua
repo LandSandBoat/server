@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TheFumblingFriar = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
+    local TheFumblingFriar = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if TheFumblingFriar == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then

@@ -14,9 +14,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
         player:startEvent(11, 1) -- For the quest "Rubbish day"
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.BROKEN_WAND) == true) then
             player:startEvent(11, 3)
         else player:startEvent(11, 0) -- Making Amens dialogue
@@ -30,8 +30,8 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-RubbishDay = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-MakingAmens = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
+RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
+MakingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
     if (csid == 11 and option == 1 and RubbishDay == QUEST_ACCEPTED) then
         player:delKeyItem(tpz.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDayVar", 1)

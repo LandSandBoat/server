@@ -30,7 +30,7 @@ end
 
 function onTrigger(player, npc)
     -- CHILDREN OF THE RUNE
-    local cotrQuestStatus = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+    local cotrQuestStatus = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
     -- for natural fallthrough, to avoid needing `not` statements in them.
     if cotrQuestStatus == QUEST_COMPLETED then

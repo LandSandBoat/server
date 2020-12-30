@@ -10,13 +10,13 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL) == QUEST_ACCEPTED and trade:hasItemQty(1210, 1) and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL) == QUEST_ACCEPTED and trade:hasItemQty(1210, 1) and trade:getItemCount() == 1) then
         player:startEvent(2, 1210)
     end
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_GENERAL_S_SECRET) == QUEST_ACCEPTED) and (player:hasKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY) == true) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_GENERAL_S_SECRET) == QUEST_ACCEPTED) and (player:hasKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY) == true) then
         player:addKeyItem(tpz.ki.CURILLAS_BOTTLE_FULL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURILLAS_BOTTLE_FULL)
         player:delKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY)

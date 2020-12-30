@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1094)) then -- Nail Puller
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1094)) then -- Nail Puller
         player:startEvent(14)
     end
 end

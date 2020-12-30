@@ -23,7 +23,7 @@ function onTrigger(player, npc)
     -- player:setCharVar("PromathiaStatus",3)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(2)
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 3 then
         player:startEvent(4)
     elseif (EventTriggerBCNM(player, npc)) then

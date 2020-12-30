@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
 
-    local AltanaSorrow = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
+    local AltanaSorrow = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
     local VirnageLetter = player:hasKeyItem(tpz.ki.LETTER_FROM_VIRNAGE)
     local DivinePaint = player:hasKeyItem(tpz.ki.BUCKET_OF_DIVINE_PAINT)
 

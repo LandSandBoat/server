@@ -17,7 +17,7 @@ end
 function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.UNDERGROUND_POOL_OFFSET
 
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED then
         if offset == 0 and player:hasKeyItem(tpz.ki.AQUAFLORA2) then
             player:startEvent(20)
         elseif offset == 1 and player:getCharVar("DabotzKilled") == 1 then
