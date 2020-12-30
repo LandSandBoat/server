@@ -192,7 +192,7 @@ function onTrigger(player, npc)
     --cs 904 - give coffee
     --cs 905 - head complete
 
-    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+    local NoStringsAttached = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
     local Automaton = player:hasKeyItem(tpz.ki.ANTIQUE_AUTOMATON)
     local automatonName = player:getAutomatonName()

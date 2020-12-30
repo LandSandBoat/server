@@ -10,7 +10,7 @@ function onMobSpawn(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_ACCEPTED and
         player:getCharVar("moral") == 5 then
         player:setCharVar("moral", 6)
         player:delKeyItem(tpz.ki.VAULT_QUIPUS);

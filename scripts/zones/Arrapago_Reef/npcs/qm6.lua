@@ -19,9 +19,9 @@ function onTrigger(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
     local lotdCS = player:getCharVar("LuckOfTheDraw")
-    local efao   = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+    local efao   = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
     local efaoCS = player:getCharVar("EquippedforAllOccasions")
-    local ntus   = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
+    local ntus   = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
     -- LUCK OF THE DRAW
     if lotdCS == 2 then

@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local gotitall = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
+    local gotitall = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
     local gotItAllProg = player:getCharVar("gotitallCS")
     local threeMenProg = player:getCharVar("threemenandaclosetCS")
     if gotitall == QUEST_AVAILABLE then

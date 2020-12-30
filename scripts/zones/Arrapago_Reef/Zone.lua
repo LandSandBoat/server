@@ -51,7 +51,7 @@ function onRegionEnter(player, region)
         player:startEvent(14)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.TESTING_THE_WATERS and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)) then
         player:startEvent(15)
-    elseif (player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1) then
         player:startEvent(237)
     end
 end

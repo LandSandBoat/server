@@ -19,7 +19,7 @@ function onZoneIn(player, prevZone)
 
     if player:getCharVar("FickblixCS") == 1 then
         cs = 10000
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then
         cs = 46
     elseif player:getCharVar("moral") == 4 and head == 15202 then -- Yagudo Headgear

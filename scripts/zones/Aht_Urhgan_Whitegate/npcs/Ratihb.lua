@@ -14,8 +14,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local luckOfTheDraw = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
-    local againstAllOdds = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS)
+    local luckOfTheDraw = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
+    local againstAllOdds = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS)
 
     if luckOfTheDraw == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL then
         player:startEvent(547)

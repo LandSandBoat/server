@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local keepingNotes = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+    local keepingNotes = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
 
     if keepingNotes == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {917, 929}) then -- parchment + black ink
         player:startEvent(11)
@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local keepingNotes = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+    local keepingNotes = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
 
     if keepingNotes == QUEST_AVAILABLE then
         player:startEvent(9)

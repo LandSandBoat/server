@@ -8,7 +8,7 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local moralmanifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralmanifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 7 then
         if (trade:hasItemQty(15202, 1)) then -- Trade Yagudo Headgear
             player:tradeComplete()
@@ -18,7 +18,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local moralmanifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralmanifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     local moral = player:getCharVar("moral")
     local head = player:getEquipID(tpz.slot.HEAD)
     if moral == 5 and head == 15202 then

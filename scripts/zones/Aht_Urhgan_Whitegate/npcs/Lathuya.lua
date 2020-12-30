@@ -53,8 +53,8 @@ end
 
 function onTrigger(player, npc)
     local omensProgress = player:getCharVar("OmensProgress")
-    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
-    local transformations = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
     -- OMENS
     if omens == QUEST_ACCEPTED then

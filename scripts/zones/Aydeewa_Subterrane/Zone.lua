@@ -33,7 +33,7 @@ end
 function onRegionEnter(player, region)
     if region:GetRegionID() == 1 then
         local StoneID = player:getCharVar("EmptyVesselStone")
-        if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
+        if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
             player:startEvent(3, StoneID)
         end
     end
