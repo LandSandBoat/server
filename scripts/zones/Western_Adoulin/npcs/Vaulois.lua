@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Transporting = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
+    local Transporting = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
     if ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") >= 2)) then
         -- Finishing Quest: 'Transporting'
         player:startEvent(2591)

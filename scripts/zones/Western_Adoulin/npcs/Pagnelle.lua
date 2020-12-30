@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Raptor_Rapture = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+    local Raptor_Rapture = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
     local Raptor_Rapture_Status = player:getCharVar("Raptor_Rapture_Status")
 
     if (Raptor_Rapture == QUEST_AVAILABLE) then

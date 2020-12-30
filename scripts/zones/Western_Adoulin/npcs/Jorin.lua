@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TOMATH = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+    local TOMATH = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
     if (TOMATH == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)) then
             -- Finishing Quest: 'The Old Man and the Harpoon'

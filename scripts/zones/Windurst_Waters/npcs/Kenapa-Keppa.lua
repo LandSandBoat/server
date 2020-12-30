@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local FoodForThought = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local KenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
 
     if (FoodForThought == QUEST_ACCEPTED) then
@@ -36,11 +36,11 @@ end
 
 function onTrigger(player, npc)
 
-    local OvernightDelivery = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
-    local FoodForThought = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local OvernightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+    local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS") -- Variable to track progress of Say It with Flowers.
-    local hatstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
     local KenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
     local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- Variable to track progress for Overnight Delivery
     local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- Variable to track the day the quest is started.

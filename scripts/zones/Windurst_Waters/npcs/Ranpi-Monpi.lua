@@ -31,8 +31,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    crisisstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    IAS = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
+    crisisstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+    IAS = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     IASvar = player:getCharVar("IASvar")
 
     -- In a Stew

@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and player:getCharVar("QuestMakingTheGrade_prog") == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and player:getCharVar("QuestMakingTheGrade_prog") == 0) then
         if (trade:hasItemQty(544, 1) and trade:getItemCount() == 1 and trade:getGil() == 0) then
             player:startEvent(455) -- Quest Progress: Test Papers Shown and told to deliver them to principal
         end
@@ -20,13 +20,13 @@ end
 
 function onTrigger(player, npc)
 
-    local gradestatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+    local gradestatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
     local prog = player:getCharVar("QuestMakingTheGrade_prog")
         -- 1 = answers found
         -- 2 = gave test answers to principle
         -- 3 = spoke to chomoro
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_COMPLETED and gradestatus == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >=3 and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_COMPLETED and gradestatus == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >=3 and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= QUEST_ACCEPTED) then
         player:startEvent(442) -- Quest Start
     elseif (gradestatus == QUEST_ACCEPTED) then
 
@@ -41,7 +41,7 @@ function onTrigger(player, npc)
         player:startEvent(459) -- After Quest
     -------------------------------------------------------
     -- Class Reunion
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") >= 3 and player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") >= 3 and player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1) then
         player:startEvent(817) -- he tells you about Uran-Mafran
     -------------------------------------------------------
     else

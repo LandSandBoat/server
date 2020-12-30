@@ -19,8 +19,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+    local bookwormStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
     local windurstFame = player:getFameLevel(WINDURST)
@@ -59,7 +59,7 @@ function onTrigger(player, npc)
 
     -- Hat in Hand
     elseif
-        (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or
+        (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or
         player:getCharVar("QuestHatInHand_var2") == 1) and
         bit.band(player:getCharVar("QuestHatInHand_var"), bit.lshift(1, 5)) == 0
     then
@@ -68,7 +68,7 @@ function onTrigger(player, npc)
     -- Early Bird Catches the Bookworm
     elseif
         bookwormStatus == QUEST_AVAILABLE and
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
         windurstFame >= 2 and
         player:needToZone() == false
     then

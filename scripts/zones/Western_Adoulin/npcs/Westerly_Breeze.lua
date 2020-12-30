@@ -12,9 +12,9 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local HS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
-    local TS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
-    local AMQTR = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local HS = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
+    local TS = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
+    local AMQTR = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if ((trade:getItemCount() == 1) and (trade:getGil() == 0)) then
         local item = trade:getItem(0)
@@ -72,9 +72,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local HS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
-    local TS = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
-    local AMQTR = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local HS = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
+    local TS = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
+    local AMQTR = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
     if (HS ~= QUEST_COMPLETED) then
         if (HS == QUEST_AVAILABLE) then
             -- Starts Quest: 'Hunger Strikes'

@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local ACSP = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    local ACSP = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local SOA_Mission = player:getCurrentMission(SOA)
     if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((ACSP == QUEST_ACCEPTED) and (player:getCharVar("ACSP_NPCs_Visited") == 7)) then

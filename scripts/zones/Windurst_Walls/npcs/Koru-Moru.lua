@@ -13,11 +13,11 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local qStarStruck = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
+    local qStarStruck = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
     local count = trade:getItemCount()
 
     if (trade:hasItemQty(544, 1) and count == 1 and trade:getGil() == 0) then
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
             if (player:getCharVar("QuestMakingTheGrade_prog") == 1) then
                 player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
             else
@@ -29,52 +29,52 @@ function onTrade(player, npc, trade)
     elseif (qStarStruck == QUEST_ACCEPTED and trade:hasItemQty(582, 1) and count == 1 and trade:getGil() == 0) then
         player:startEvent(211)
     elseif (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 4) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 4) then
             player:setCharVar("ridingOnTheClouds_4", 0)
             player:tradeComplete()
             player:addKeyItem(tpz.ki.SPIRITED_STONE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SPIRITED_STONE)
         end
     elseif (trade:hasItemQty(16511, 1) and count == 1 and trade:getGil() == 0) then
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED) then
             player:startEvent(224) -- Complete quest!
         else
             player:startEvent(225) -- not the shell
         end
     elseif (trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0) then
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED) then
             player:startEvent(349)
             player:tradeComplete()
             player:setCharVar("rootProblem", 2)
         end
     elseif (trade:hasItemQty(17299, 4) and count == 4 and trade:getGil() == 0) then -- trade:getItemCount() is apparently checking total of all 8 slots combined. Could have sworn that wasn't how it worked before.
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") == 2) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") == 2) then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
         end
     end
 end
 
 function onTrigger(player, npc)
-    local qStarStruck = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
-    local blastFromPast = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
+    local qStarStruck = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
+    local blastFromPast = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
     local blastProg = player:getCharVar("BlastFromThePast_Prog")
-    local rootProblem = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-    local ThePuppetMaster = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+    local rootProblem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+    local ThePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
-    local ClassReunion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local ClassReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
     local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
-    local CarbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    if (blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(WINDURST) >= 3 and player:needToZone() == false) then
+    if (blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(WINDURST) >= 3 and player:needToZone() == false) then
         player:startEvent(214)
     elseif (blastFromPast == QUEST_ACCEPTED and blastProg >= 2) then
         player:startEvent(215)
     elseif (blastFromPast == QUEST_ACCEPTED) then
         player:startEvent(216)
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local makingGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
         if (makingGradeProg == 0 and player:hasItem(544)) then
             player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe

@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
-        and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
+        and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
     then
         player:startEvent(886)
     end
@@ -21,11 +21,11 @@ end
 
 
 function onTrigger(player, npc)
-    local moonlitPath = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
+    local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local MissionStatus = player:getCharVar("MissionStatus")
-    local tuningIn = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TUNING_IN)
-    local tuningOut = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TUNING_OUT)
+    local tuningIn = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN)
+    local tuningOut = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_OUT)
 
     -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_PRICE_OF_PEACE and MissionStatus < 3) then
@@ -44,7 +44,7 @@ function onTrigger(player, npc)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 5 and player:hasKeyItem(tpz.ki.BOOK_OF_THE_GODS)) then
         player:startEvent(742)
     ---------------------------
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         player:startEvent(311)
 
     -- Tuning In
@@ -189,7 +189,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
         end
 
-        if (player:getNation() == tpz.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
+        if (player:getNation() == tpz.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
             player:addKeyItem(tpz.ki.DARK_MANA_ORB)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DARK_MANA_ORB)
         end
@@ -225,7 +225,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
         end
 
-        if (player:getNation() == tpz.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
+        if (player:getNation() == tpz.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
             player:addKeyItem(tpz.ki.DARK_MANA_ORB)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DARK_MANA_ORB)
         end

@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
 
-    smudgeStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
     if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637, 1) and trade:hasItemQty(4382, 1)) then
         player:startEvent(417, 3000)
@@ -23,9 +23,9 @@ end
 
 function onTrigger(player, npc)
 
-    GlyphHanger = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
-    chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
-    smudgeStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    GlyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+    chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     Fame = player:getFameLevel(WINDURST)
 
     if (smudgeStatus == QUEST_COMPLETED and player:needToZone() == true) then

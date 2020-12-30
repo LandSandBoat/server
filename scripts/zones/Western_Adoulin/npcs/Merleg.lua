@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local APBIF = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+    local APBIF = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     if (APBIF == QUEST_ACCEPTED) then
         if (player:hasStatusEffect(tpz.effect.IONIS)) then
             -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'

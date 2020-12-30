@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Raptor_Rapture = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+    local Raptor_Rapture = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
 
     if ((Raptor_Rapture == QUEST_ACCEPTED) and (player:getCharVar("Raptor_Rapture_Status") == 4)) then
         -- Progresses Quest: 'Raptor Rapture', speaking to Ilney.

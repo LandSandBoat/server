@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    featherstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     if (featherstatus >= 1 and trade:hasItemQty(842, 3) == true and trade:getGil() == 0 and trade:getItemCount() == 3) then
         player:startEvent(79, 1500) -- Quest Turn In
     end
@@ -26,8 +26,8 @@ function onTrigger(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
-    hatstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    featherstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     pfame = player:getFameLevel(WINDURST)
     if (hatstatus == 0) then
         player:startEvent(48) -- Quest Offered
@@ -144,13 +144,13 @@ printf("RESULT: %u", option)
 
 
     elseif (csid == 75 and option == 1) then
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_AVAILABLE) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_AVAILABLE) then
             player:addQuest(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
-        elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_COMPLETED) then
+        elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_COMPLETED) then
             player:setCharVar("QuestFeatherInOnesCap_var", 1)
         end
     elseif (csid == 79) then
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_ACCEPTED) then
             player:completeQuest(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
             player:addFame(WINDURST, 75)
         else

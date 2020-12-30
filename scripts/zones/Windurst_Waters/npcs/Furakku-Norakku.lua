@@ -16,10 +16,10 @@ end
 
 function onTrigger(player, npc)
 
-    local bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+    local bookwormStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     local bookNotifications = player:hasKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATIONS)
-    local ClassReunion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local ClassReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
 
