@@ -1275,7 +1275,7 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
     local owner = GetRegionOwner(region)
     local players = zone:getPlayers()
     local messageBase = zones[zone:getID()].text.CONQUEST_BASE
-    local ranking = getConquestBalance()
+    local ranking = GetConquestBalance()
 
     for _, player in pairs(players) do
 
