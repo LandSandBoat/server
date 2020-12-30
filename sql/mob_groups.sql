@@ -3098,19 +3098,23 @@ INSERT INTO `mob_groups` VALUES (39,3060,66,'Orochi',0,128,0,25000,0,80,82,0);
 -- Jade_Sepulcher (Zone 67)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,80,80,0);
-
-INSERT INTO `mob_groups` VALUES (2263,430,67,'Blacktattoo_Vedool_Ja',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2264,1506,67,'Gessho',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2265,1846,67,'Gulool_Ja_Ja',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2266,2143,67,'Jasweem',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (2268,2712,67,'Mocking_Colibri',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2269,3128,67,'Phantom_Puk',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2270,3327,67,'Raubahn',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2271,3567,67,'Shadowhand_Kajeel_Ja',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (2272,3933,67,'Tiyaash',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (2273,4270,67,'Wabjahl',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (2274,4332,67,'Whitetattoo_Rahool_Ja',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (1,2712,67,'Mocking_Colibri',0,128,0,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (2,3128,67,'Phantom_Puk',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (3,3327,67,'Raubahn',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (4,3567,67,'Shadowhand_Kajeel_Ja',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (5,430,67,'Blacktattoo_Vedool_Ja',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (6,4332,67,'Whitetattoo_Rahool_Ja',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (7,4270,67,'Wabjahl',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (8,3933,67,'Tiyaash',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (9,2143,67,'Jasweem',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (10,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (11,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (12,0,67,'Mamool_Ja_Isangoma',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (13,0,67,'Mamool_Ja_Polemicist',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (14,0,67,'Mamool_Ja_Profligate',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (15,0,67,'Mamool_Ja_Unseen',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (16,0,67,'Mamool_Ja_Flamerearer',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (17,0,67,'Scorched-snout_Wyvern',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
 
 -- ------------------------------------------------------------
 -- Aydeewa_Subterrane (Zone 68)
