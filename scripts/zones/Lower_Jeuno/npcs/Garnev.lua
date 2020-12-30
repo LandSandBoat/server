@@ -13,13 +13,13 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_ACCEPTED and trade:hasItemQty(554, 1) == true and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_ACCEPTED and trade:hasItemQty(554, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(166) -- Ending quest
     end
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE) then
         if (player:getFameLevel(NORG) >= 2) then
             player:startEvent(167) -- Start quest
         else

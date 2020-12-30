@@ -17,10 +17,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    TheWonderMagicSet = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    TheWonderMagicSet = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     WonderMagicSetKI = player:hasKeyItem(tpz.ki.WONDER_MAGIC_SET)
     TheLostCardianCS = player:getCharVar("theLostCardianVar")
-    TheKindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+    TheKindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if (player:getFameLevel(JEUNO) >= 4 and TheWonderMagicSet == QUEST_AVAILABLE) then
         player:startEvent(77) -- Start quest "The wonder magic set"
@@ -28,9 +28,9 @@ function onTrigger(player, npc)
         player:startEvent(55) -- During quest "The wonder magic set"
     elseif (WonderMagicSetKI == true) then
         player:startEvent(33) -- Finish quest "The wonder magic set"
-    elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED) then
+    elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED) then
         player:startEvent(40) -- Standard dialog
-    elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE) then
+    elseif (TheWonderMagicSet == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE) then
         if (TheLostCardianCS >= 1) then
             player:startEvent(30) -- Second dialog for "The lost cardien" quest
         else

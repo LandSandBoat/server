@@ -11,7 +11,7 @@ function onMobInitialize(mob)
 end
 
 function onMobDeath(mob, player, isKiller)
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED) then
         player:setCharVar("SPLINTERSPINE_GRUKJUK", 2)
     end
 end

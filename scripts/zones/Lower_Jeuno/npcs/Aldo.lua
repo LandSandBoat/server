@@ -27,7 +27,7 @@ function onTrigger(player, npc)
         player:startEvent(104)
     elseif (ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 1) then
         player:startEvent(111);
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 5 and player:getRank() >= 5 then
         player:startEvent(10057)
     elseif player:getCharVar('ApocalypseNigh') == 6 then

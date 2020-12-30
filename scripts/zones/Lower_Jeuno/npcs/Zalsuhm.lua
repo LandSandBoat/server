@@ -18,7 +18,7 @@ end
 function onTrade(player, npc, trade)
     for i, wepId in pairs(BaseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
-            local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(i))
+            local unlockingAMyth = player:getQuestStatus(tpz.quest.log_id.JEUNO, getQuestId(i))
             if unlockingAMyth == QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
                 if wsPoints <= 49 then
@@ -39,7 +39,7 @@ end
 
 function onTrigger(player, npc)
     local mainJobId = player:getMainJob()
-    local unlockingAMyth = player:getQuestStatus(JEUNO, getQuestId(mainJobId))
+    local unlockingAMyth = player:getQuestStatus(tpz.quest.log_id.JEUNO, getQuestId(mainJobId))
     local nyzulWeaponMain = isBaseNyzulWeapon(player:getEquipID(tpz.slot.MAIN))
     local nyzulWeaponRanged = isBaseNyzulWeapon(player:getEquipID(tpz.slot.RANGED))
 

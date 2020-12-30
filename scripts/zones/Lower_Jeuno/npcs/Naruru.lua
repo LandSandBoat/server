@@ -17,12 +17,12 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TheWonderMagicSet = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    local CooksPride = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
-    local TheKindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+    local TheWonderMagicSet = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+    local TheKindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 13)) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 13)) then
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then

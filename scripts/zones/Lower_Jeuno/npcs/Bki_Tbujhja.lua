@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local theRequiem = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+    local theRequiem = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
 
     -- THE REQUIEM (holy water)
     if (theRequiem == QUEST_ACCEPTED and player:getCharVar("TheRequiemCS") == 2 and trade:hasItemQty(4154, 1) and trade:getItemCount() == 1) then
@@ -23,9 +23,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local aMinstrelInDespair = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
-    local painfulMemory = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
-    local theRequiem = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+    local aMinstrelInDespair = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
+    local painfulMemory = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+    local theRequiem = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
 
     -- THE OLD MONUMENT
     if (player:getCharVar("TheOldMonument_Event") == 1) then

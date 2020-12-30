@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 
 function onTrade(player, npc, trade)
 
-    local questStatus = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
     if (questStatus == QUEST_ACCEPTED and questStatusVar == 1) then
@@ -43,7 +43,7 @@ function onTrigger(player, npc)
     local passYear = player:getCharVar("THE_ROAD_TO_AHT_URHGAN_Year")
     local currentDay = VanadielDayOfTheYear()
     local passReady = ((passDay < currentDay) or (passDay > currentDay and passYear < VanadielYear()))
-    local questStatus = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
     if (questStatus == QUEST_AVAILABLE and ENABLE_TOAU == 1) then

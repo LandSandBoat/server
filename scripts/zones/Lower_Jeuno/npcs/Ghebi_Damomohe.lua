@@ -15,7 +15,7 @@ require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
     elseif
@@ -35,7 +35,7 @@ end
 function onTrigger(player, npc)
     local GetGems = player:getCharVar("PXPassGetGems")
 
-    if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
+    if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
         -- Start Quest: Tenshodo Membership
         player:startEvent(106, 8)
     elseif player:hasKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM) then

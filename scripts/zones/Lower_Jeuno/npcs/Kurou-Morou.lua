@@ -11,24 +11,24 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         if (trade:hasItemQty(557, 1) == true) then
             player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
         elseif (trade:hasItemQty(556, 1) == true) then
             player:startEvent(196) -- Trade divination sphere, finish quest
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_ACCEPTED and trade:hasItemQty(12507, 1) == true and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_ACCEPTED and trade:hasItemQty(12507, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(203) -- Finish "Never to return" quest
     end
 end
 
 function onTrigger(player, npc)
     -- printf("Ontrigger completed")
-    local YourCrystalBall = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-    local SearchingForTheRightWords = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local ACandlelightVigil = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
-    local RubbishDay = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-    local NeverToReturn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN)
+    local YourCrystalBall = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+    local SearchingForTheRightWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local ACandlelightVigil = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
+    local RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
+    local NeverToReturn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN)
     local JFame = player:getFameLevel(JEUNO)
     local SearchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
 
@@ -36,7 +36,7 @@ function onTrigger(player, npc)
     if (JFame >= 2 and YourCrystalBall == QUEST_AVAILABLE) then
         player:startEvent(194) -- Start "Your Crystal Ball" quest
 
-    elseif (JFame >= 5 and YourCrystalBall == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_AVAILABLE and player:getCharVar("QuestNeverToReturn_day") ~= VanadielDayOfTheYear()) then
+    elseif (JFame >= 5 and YourCrystalBall == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_AVAILABLE and player:getCharVar("QuestNeverToReturn_day") ~= VanadielDayOfTheYear()) then
         prog = player:getCharVar("QuestNeverToReturn_prog")
         if (prog <= 2) then
             fortune = math.random(1, 99)

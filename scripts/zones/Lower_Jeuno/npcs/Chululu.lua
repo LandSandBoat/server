@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
@@ -26,10 +26,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local CollectTarutCards = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
-    local RubbishDay = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-    local SearchingForTheRightWords = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local AllInTheCards = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+    local CollectTarutCards = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+    local RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
+    local SearchingForTheRightWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local AllInTheCards = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
     local cdate = player:getCharVar("AllInTheCards_date")
 
     if player:getFameLevel(JEUNO) >= 3 and CollectTarutCards == QUEST_AVAILABLE then

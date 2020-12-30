@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
     local TheGobbieBag = gobQuest(player, inventorySize)
     local pFame = player:getFameLevel(JEUNO)
 
-    if (count == 4 and gil == 0 and player:getQuestStatus(JEUNO, TheGobbieBag[1]) == 1) then
+    if (count == 4 and gil == 0 and player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1]) == 1) then
         if (player:getContainerSize(0) < 80) then
             if (trade:hasItemQty(TheGobbieBag[3], 1) and trade:hasItemQty(TheGobbieBag[4], 1) and trade:hasItemQty(TheGobbieBag[5], 1) and trade:hasItemQty(TheGobbieBag[6], 1)) then
                 if (pFame >= TheGobbieBag[2]) then
@@ -60,13 +60,13 @@ function onTrigger(player, npc)
 
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 12)) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 12)) then
         player:startEvent(10056)
     elseif (player:getContainerSize(0) < 80) then
         local pFame = player:getFameLevel(JEUNO)
         local inventorySize = player:getContainerSize(0)
         local TheGobbieBag = gobQuest(player, inventorySize)
-        local questStatus = player:getQuestStatus(JEUNO, TheGobbieBag[1])
+        local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
 
         offer = 0
         if (pFame >= TheGobbieBag[2]) then
@@ -86,7 +86,7 @@ function onEventFinish(player, csid, option)
     local TheGobbieBag = gobQuest(player, player:getContainerSize(0))
 
     if (csid == 43 and option == 0) then
-        if (player:getQuestStatus(JEUNO, TheGobbieBag[1]) == 0) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1]) == 0) then
             player:addQuest(JEUNO, TheGobbieBag[1])
         end
     elseif (csid == 73) then
