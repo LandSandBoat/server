@@ -3215,7 +3215,7 @@ INSERT INTO `mob_groups` VALUES (47,866,69,'Cursed_Doppelganger',0,128,0,0,0,70,
 -- The_Colosseum (Zone 71)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (2361,3145,71,'Pit_Monster',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (1,3145,71,'Pit_Monster',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Alzadaal_Undersea_Ruins (Zone 72)
