@@ -3428,7 +3428,7 @@ INSERT INTO `mob_groups` VALUES (33,2431,76,'Long-Armed_Chariot',0,128,1531,0,0,
 
 -- Silver Sea Remnants II
 -- TODO: capture levels from retail
--- TODO: capture jobs of Ashu Talif Crew from retail, and assign groups 43, 44, and 45
+-- TODO: capture jobs of Ashu Talif Crew from retail, create pools for missing jobs, and assign
 INSERT INTO `mob_groups` VALUES (34,221,76,'Archaic_Rampart',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (35,0,76,'Doomed',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (36,0,76,'Qiqirn',0,128,0,0,0,99,99,0);
