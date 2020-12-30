@@ -20,7 +20,7 @@ local CRAWLERS_NEST =
             local EXORAY_MOLD = 1089 -- Human readability
 
             if
-                player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(EXORAY_MOLD) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)

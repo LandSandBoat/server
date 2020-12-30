@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 
 function onMobDeath(mob, player, isKiller)
 
-    local theFirstMeeting = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
+    local theFirstMeeting = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
     local martialArtsScroll = player:hasKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
 
     if (theFirstMeeting == QUEST_ACCEPTED and martialArtsScroll == false) then

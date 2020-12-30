@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Davoi/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1103, 1) and trade:getItemCount() == 1) then
             player:tradeComplete()
             player:addKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
@@ -23,7 +23,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
         player:messageSpecial(ID.text.AN_ORCISH_STORAGE_HOLE)
     else
         player:messageSpecial(ID.text.YOU_SEE_NOTHING)

@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.YAGUDO_CREST) == false) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.YAGUDO_CREST) == false) then
         player:addKeyItem(tpz.ki.YAGUDO_CREST)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.YAGUDO_CREST)
     else

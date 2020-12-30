@@ -45,8 +45,8 @@ end
 
 function onTrigger(player, npc)
     local mLvl = player:getMainLvl()
-    local aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
-    local underOath = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+    local aBoysDream = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+    local underOath = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
 
     -- "Under Oath" (PLD AF Body)
     if player:getCharVar("UnderOathCS") == 8 then

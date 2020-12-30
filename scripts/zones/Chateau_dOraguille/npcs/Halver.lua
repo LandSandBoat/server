@@ -25,10 +25,10 @@ function onTrigger(player, npc)
     local MissionStatus = player:getCharVar("MissionStatus")
 
     -- Lure of the Wildcat San d'Oria
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 16)) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 16)) then
         player:startEvent(558)
     -- Blackmail quest
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)) then
         player:startEvent(549)
         player:setCharVar("BlackMailQuest", 1)
         player:delKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)

@@ -17,7 +17,7 @@ end
 
 function onTrigger(player, npc)
 
-    local FoiledAGolem = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     -- Curses, Foiled A_Golem!?

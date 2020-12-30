@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
     -- Enveloped in Darkness
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS) == QUEST_ACCEPTED then
         local timeout = player:getCharVar("envelopedInDarkness_timer")
         if player:hasKeyItem(tpz.ki.CRAWLER_BLOOD) and player:hasKeyItem(tpz.ki.OLD_BOOTS) then
             player:startEvent(4) -- Ask to take key items

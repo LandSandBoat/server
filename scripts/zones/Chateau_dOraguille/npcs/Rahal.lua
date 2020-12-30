@@ -18,12 +18,12 @@ function onTrigger(player, npc)
 
     local CrestProgress = player:getCharVar("TheHolyCrest_Event")
     local RemedyKI = player:hasKeyItem(tpz.ki.DRAGON_CURSE_REMEDY)
-    local Stalker_Quest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+    local Stalker_Quest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
     local StalkerProgress = player:getCharVar("KnightStalker_Progress")
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
     if
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(WildcatSandy, 17)
     then
         player:startEvent(559)
@@ -35,7 +35,7 @@ function onTrigger(player, npc)
 
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
         Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == tpz.job.DRG
     then
         if (player:getCharVar("KnightStalker_Declined") == 0) then
