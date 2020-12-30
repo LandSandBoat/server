@@ -144,7 +144,7 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     local num_pt = 0
     local num_trusts = 0
     local party = caster:getPartyWithTrusts()
-    for _, member in ipairs(party) do
+    for _, member in party:ipairs() do
         if member:getObjType() == tpz.objType.TRUST then
             -- Check for same trust
             if member:getTrustID() == spell:getID() then
@@ -225,7 +225,7 @@ tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
 
     local master = mob:getMaster()
     local party = master:getPartyWithTrusts()
-    for _, member in ipairs(party) do
+    for _, member in party:ipairs() do
         if member:getObjType() == tpz.objType.TRUST then
             for id, message in pairs(teamwork_messages) do
                 if member:getTrustID() == id then

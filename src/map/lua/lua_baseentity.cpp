@@ -835,12 +835,12 @@ void CLuaBaseEntity::startEventString(uint16 EventID, sol::variadic_args va)
     string_t string2 = va.get_type(2) == sol::type::string ? va.get<std::string>(2) : "";
     string_t string3 = va.get_type(3) == sol::type::string ? va.get<std::string>(3) : "";
 
-    uint32 param0 = va.get_type(4)  == sol::type::number ? va.get<uint32>(4) : 0;
-    uint32 param1 = va.get_type(5)  == sol::type::number ? va.get<uint32>(5) : 0;
-    uint32 param2 = va.get_type(6)  == sol::type::number ? va.get<uint32>(6) : 0;
-    uint32 param3 = va.get_type(7)  == sol::type::number ? va.get<uint32>(7) : 0;
-    uint32 param4 = va.get_type(8)  == sol::type::number ? va.get<uint32>(8) : 0;
-    uint32 param5 = va.get_type(9)  == sol::type::number ? va.get<uint32>(9) : 0;
+    uint32 param0 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
+    uint32 param1 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
+    uint32 param2 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
+    uint32 param3 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
+    uint32 param4 = va.get_type(8) == sol::type::number ? va.get<uint32>(8) : 0;
+    uint32 param5 = va.get_type(9) == sol::type::number ? va.get<uint32>(9) : 0;
     uint32 param6 = va.get_type(10) == sol::type::number ? va.get<uint32>(10) : 0;
     uint32 param7 = va.get_type(11) == sol::type::number ? va.get<uint32>(11) : 0;
 
@@ -2233,7 +2233,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
     else if (arg0.is<sol::table>())
     {
         sol::table table = arg0.as<sol::table>();
-        auto vec = table.as<std::vector<double>>();
+        auto       vec   = table.as<std::vector<double>>();
 
         m_PBaseEntity->loc.p.x = vec[0];
         m_PBaseEntity->loc.p.y = vec[1];
@@ -2395,7 +2395,7 @@ sol::lua_value CLuaBaseEntity::getTeleport(uint8 type)
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
-    CCharEntity*  PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
 
     // TODO: Refator this out into getTeleport and getTeleportTable, this shouldn't be
     //       returning type different types...
@@ -2560,32 +2560,32 @@ void CLuaBaseEntity::setTeleportMenu(uint16 type, sol::table const& favs)
  *  Notes   :
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getTeleportMenu(uint8 type)
+std::vector<uint8> CLuaBaseEntity::getTeleportMenu(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity*  PChar = (CCharEntity*)m_PBaseEntity;
-    TELEPORT_TYPE tele_type  = static_cast<TELEPORT_TYPE>(type);
+    CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
+    TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
 
     if (tele_type != TELEPORT_TYPE::HOMEPOINT && tele_type != TELEPORT_TYPE::SURVIVAL)
     {
         ShowError("LuaBaseEntity::getTeleportMenu : Incorrect value or parameter 1.\n");
-        return sol::nil;
+        return {};
     }
 
-    sol::table table;
+    std::vector<uint8> vec;
     for (uint8 x = 0; x < 10; x++)
     {
         if (tele_type == TELEPORT_TYPE::HOMEPOINT)
         {
-            table.add(PChar->teleport.homepoint.menu[x]);
+            vec.emplace_back(PChar->teleport.homepoint.menu[x]);
         }
         else
         {
-            table.add(PChar->teleport.survival.menu[x]);
+            vec.emplace_back(PChar->teleport.survival.menu[x]);
         }
     }
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -2885,8 +2885,8 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
             return false;
         }
 
-        uint16 id = table.get<uint16>("id");
-        int32 quantity = table.get<int32>("quantity");
+        uint16 id       = table.get<uint16>("id");
+        int32  quantity = table.get<int32>("quantity");
         if (quantity == 0)
         {
             quantity = 1;
@@ -2928,7 +2928,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                         auto augmentsTable = augmentsObj.as<sol::table>();
                         for (auto& entryPair : augmentsTable)
                         {
-                            auto pair = entryPair.second.as<sol::table>();
+                            auto   pair   = entryPair.second.as<sol::table>();
                             uint16 augid  = pair[0];
                             uint8  augval = pair[1];
                             ((CItemEquipment*)PItem)->PushAugment(augid, augval);
@@ -2958,9 +2958,9 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
         player:addItem(itemID, quantity, true) -- silently add quantity of itemID
         */
 
-        uint16 itemID      = va.get<uint16>(0);
-        bool   silence     = false;
-        int32  quantity    = 1;
+        uint16 itemID   = va.get<uint16>(0);
+        bool   silence  = false;
+        int32  quantity = 1;
 
         if (va.get_type(1) == sol::type::boolean)
         {
@@ -3703,8 +3703,8 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar     = (CCharEntity*)m_PBaseEntity;
-    auto slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
+    auto* PChar      = (CCharEntity*)m_PBaseEntity;
+    auto  slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
 
     if (slipSlotId == 255)
     {
@@ -5701,7 +5701,6 @@ uint32 CLuaBaseEntity::getMissionLogEx(uint8 missionLogID, sol::object const& mi
 
     ShowError(CL_RED "Lua::getMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
     return 0;
-
 }
 
 /************************************************************************
@@ -7445,18 +7444,18 @@ void CLuaBaseEntity::recalculateAbilitiesTable()
  *  Notes   :
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getParty()
+std::vector<CLuaBaseEntity> CLuaBaseEntity::getParty()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CParty* party = static_cast<CBattleEntity*>(m_PBaseEntity)->PParty;
 
-    sol::table table;
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member) {
-        table.add(member);
+    std::vector<CLuaBaseEntity> vec;
+    ((CBattleEntity*)m_PBaseEntity)->ForParty([&vec](CBattleEntity* member) {
+        vec.emplace_back(CLuaBaseEntity(member));
     });
 
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -7466,18 +7465,18 @@ sol::table CLuaBaseEntity::getParty()
  *  Notes   : Removed index id, this might break things (idx started at 1)
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getPartyWithTrusts()
+std::vector<CLuaBaseEntity> CLuaBaseEntity::getPartyWithTrusts()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CParty* party = static_cast<CCharEntity*>(m_PBaseEntity)->PParty;
 
-    sol::table table;
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member) {
-        table.add(member);
+    std::vector<CLuaBaseEntity> vec;
+    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&vec](CBattleEntity* member) {
+        vec.emplace_back(CLuaBaseEntity(member));
     });
 
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -7713,18 +7712,18 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
  *  Notes   :
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getAlliance()
+std::vector<CLuaBaseEntity> CLuaBaseEntity::getAlliance()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    sol::table table;
-    PChar->ForAlliance([&table](CBattleEntity* PMember) {
-        table.add(PMember);
+    std::vector<CLuaBaseEntity> vec;
+    PChar->ForAlliance([&vec](CBattleEntity* PMember) {
+        vec.emplace_back(CLuaBaseEntity(PMember));
     });
 
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -8274,13 +8273,13 @@ void CLuaBaseEntity::sendTractor(float xPos, float yPos, float zPos, uint8 rotat
  *  Notes   : Using 0 or no argument removes the countdown bar from the player
  ************************************************************************/
 void CLuaBaseEntity::countdown(sol::object const& secondsObj,
-    sol::object const& bar1NameObj, sol::object const& bar1ValObj,
-    sol::object const& bar2NameObj, sol::object const& bar2ValObj)
+                               sol::object const& bar1NameObj, sol::object const& bar1ValObj,
+                               sol::object const& bar2NameObj, sol::object const& bar2ValObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar   = (CCharEntity*)m_PBaseEntity;
-    auto*        packet  = new CTimerBarUtilPacket();
+    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
+    auto*        packet = new CTimerBarUtilPacket();
 
     if (secondsObj.is<uint32>())
     {
@@ -8969,19 +8968,19 @@ bool CLuaBaseEntity::hasEnmity()
  *  Notes   : Key removed from table, this might break things
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getNotorietyList()
+std::vector<CLuaBaseEntity> CLuaBaseEntity::getNotorietyList()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
 
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto* entry : *notorietyContainer)
     {
-        table.add(entry);
+        vec.emplace_back(CLuaBaseEntity(entry));
     }
 
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -9113,7 +9112,7 @@ std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusI
  *  Notes   : Currently only used to check for Snake Eyes in ability.lua
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getStatusEffects()
+std::vector<CLuaStatusEffect> CLuaBaseEntity::getStatusEffects()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -9123,12 +9122,12 @@ sol::table CLuaBaseEntity::getStatusEffects()
         return {};
     }
 
-    sol::table table;
-    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&](CStatusEffect* PEffect) {
-        table.add(CLuaStatusEffect(PEffect));
+    std::vector<CLuaStatusEffect> vec;
+    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&vec](CStatusEffect* PEffect) {
+        vec.emplace_back(CLuaStatusEffect(PEffect));
     });
 
-    return table;
+    return vec;
 }
 
 /************************************************************************
@@ -11738,7 +11737,7 @@ sol::table CLuaBaseEntity::getEnmityList()
     if (enmityList)
     {
         sol::table table;
-        int i = 1;
+        int        i = 1;
         for (auto member : *enmityList)
         {
             if (member.second.PEnmityOwner)
@@ -12068,7 +12067,7 @@ void CLuaBaseEntity::addTreasure(uint16 itemID, sol::object const& arg1, sol::ob
         else // Entity can be nullptr - this is intentional
         {
             uint16 droprate = (arg1 != sol::nil) ? arg1.as<uint16>() : 1000;
-  
+
             charutils::DistributeItem(PChar, nullptr, itemID, droprate);
         }
     }

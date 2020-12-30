@@ -32,9 +32,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
     local SandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
     local ExcenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
     local Rank3 = player:getRank() >= 3 and 1 or 0
@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 895 then
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
+        npcUtil.completeQuest(player, tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
             ki = tpz.ki.SAN_DORIA_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
             var = "SandoriaFirstTrust"
@@ -79,7 +79,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 899)
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
+        npcUtil.completeQuest(player, tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
             ki = tpz.ki.SAN_DORIA_TRUST_PERMIT
         })
     end

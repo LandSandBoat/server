@@ -17,9 +17,9 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player, npc)
-    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
 
     if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 then
         if TrustSandoria == QUEST_AVAILABLE and (TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
@@ -41,7 +41,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 3500 or csid == 3504) and option == 2 then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
         npcUtil.giveKeyItem(player, tpz.ki.RED_INSTITUTE_CARD)
     elseif csid == 3503 or csid == 3553 then
         local spellID = player:getLocalVar("TradingTrustCipher")

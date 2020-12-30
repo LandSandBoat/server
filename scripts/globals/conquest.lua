@@ -1277,7 +1277,7 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
     local messageBase = zones[zone:getID()].text.CONQUEST_BASE
     local ranking = GetConquestBalance()
 
-    for _, player in pairs(players) do
+    for _, player in players:pairs() do
 
         -- CONQUEST TALLY START
         if updatetype == CONQUEST_TALLY_START then
