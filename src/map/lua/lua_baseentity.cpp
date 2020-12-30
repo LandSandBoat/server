@@ -2204,64 +2204,67 @@ uint8 CLuaBaseEntity::getRotPos()
  ************************************************************************/
 
 // TODO: Make sure we cover all types of argument cases, or standardize!
-void CLuaBaseEntity::setPos(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3, sol::object const& arg4)
+void CLuaBaseEntity::setPos(sol::variadic_args va)
 {
+    sol::object arg0 = va.get<sol::object>(0);
+    sol::object arg1 = va.get<sol::object>(1);
+    sol::object arg2 = va.get<sol::object>(2);
+    sol::object arg3 = va.get<sol::object>(3);
+    sol::object arg4 = va.get<sol::object>(4);
+
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (arg4 != sol::nil && static_cast<CCharEntity*>(m_PBaseEntity)->status == STATUS_TYPE::DISAPPEAR)
+        auto* PChar = ((CCharEntity*)m_PBaseEntity);
+        if (arg4.is<uint8>() && PChar->status == STATUS_TYPE::DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
             return;
         }
     }
 
-    bool isTable = false;
-
-    if (arg0.is<double>()) // is<double>() returns true on both float and int-types
+    if (arg0.is<double>())
     {
-        // Just in case we don't have sufficient parameters, default to current coordinate
-        m_PBaseEntity->loc.p.x        = (arg0 != sol::nil) ? arg0.as<float>() : m_PBaseEntity->loc.p.x;
-        m_PBaseEntity->loc.p.y        = (arg1 != sol::nil) ? arg1.as<float>() : m_PBaseEntity->loc.p.y;
-        m_PBaseEntity->loc.p.z        = (arg2 != sol::nil) ? arg2.as<float>() : m_PBaseEntity->loc.p.z;
-        m_PBaseEntity->loc.p.rotation = (arg3 != sol::nil) ? arg3.as<uint8>() : m_PBaseEntity->loc.p.rotation;
+        m_PBaseEntity->loc.p.x        = arg0.is<float>() ? arg0.as<float>() : m_PBaseEntity->loc.p.x;
+        m_PBaseEntity->loc.p.y        = arg1.is<float>() ? arg1.as<float>() : m_PBaseEntity->loc.p.y;
+        m_PBaseEntity->loc.p.z        = arg2.is<float>() ? arg2.as<float>() : m_PBaseEntity->loc.p.z;
+        m_PBaseEntity->loc.p.rotation = arg3.is<uint8>() ? arg3.as<uint8>() : m_PBaseEntity->loc.p.rotation;
     }
-    else
+    else if (arg0.is<sol::table>())
     {
-        // its a table
-        auto pos = arg0.as<std::vector<float>>();
+        sol::table table = arg0.as<sol::table>();
+        auto vec = table.as<std::vector<double>>();
 
-        m_PBaseEntity->loc.p.x        = pos[0];
-        m_PBaseEntity->loc.p.y        = pos[1];
-        m_PBaseEntity->loc.p.z        = pos[2];
-        m_PBaseEntity->loc.p.rotation = static_cast<uint8>(pos[3]);
+        m_PBaseEntity->loc.p.x = vec[0];
+        m_PBaseEntity->loc.p.y = vec[1];
+        m_PBaseEntity->loc.p.z = vec[2];
 
-        isTable = true;
+        if (vec.size() == 4)
+        {
+            m_PBaseEntity->loc.p.rotation = vec[3];
+        }
     }
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-        if ((arg4 != sol::nil && arg4.is<int>()) || (isTable && arg1 != sol::nil))
+        if (arg4.is<double>())
         {
-            uint16 zone = isTable ? arg1.as<uint16>() : arg4.as<uint16>();
-
-            if (zone >= MAX_ZONEID)
+            auto zoneid = arg4.as<uint16>();
+            if (zoneid >= MAX_ZONEID)
             {
                 return;
             }
 
-            PChar->loc.destination = zone;
-            PChar->status          = STATUS_TYPE::DISAPPEAR;
-            PChar->loc.boundary    = 0;
-            PChar->m_moghouseID    = 0;
-            PChar->clearPacketList();
-            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+            ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
+            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
+            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
+            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
+            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
+            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
             //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
         }
-        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
+        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
         {
-            PChar->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
