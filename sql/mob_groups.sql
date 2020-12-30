@@ -8584,17 +8584,17 @@ INSERT INTO `mob_groups` VALUES (45,2610,132,'Megamaw_Mikey',0,0,1654,0,0,85,85,
 INSERT INTO `mob_groups` VALUES (46,699,132,'Chasmic_Hornet',0,0,457,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (47,3134,132,'Piasa',0,0,1998,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (48,2204,132,'Keesha_Poppo',0,0,1429,0,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (49,2104,132,'Irrlicht',0,0,1379,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,2104,132,'Irrlicht',0,0,1379,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (50,3080,132,'Ovni',0,0,1970,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (51,3798,132,'Sturdy_Pyxis',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (52,76,132,'Akash',0,0,9,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (52,76,132,'Akash',0,0,9,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (53,6708,132,'Gigadaphnia',0,0,978,0,999,79,80,0);
 INSERT INTO `mob_groups` VALUES (54,6707,132,'Veld_Clionid',0,0,2570,0,999,79,80,0);
+INSERT INTO `mob_groups` VALUES (55,3416,132,'Ruminator',0,128,2133,0,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (56,540,132,'Brooder',0,128,364,0,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (57,2604,132,'Meditator',0,128,0,0,0,80,80,0);
 
-INSERT INTO `mob_groups` VALUES (6952,540,132,'Brooder',0,0,364,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6958,862,132,'Curilla',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6979,2604,132,'Meditator',0,0,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6994,3416,132,'Ruminator',0,0,2133,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Dynamis-Beaucedine (Zone 134)
