@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../common/cbasetypes.h"
 #include "luautils.h"
 
+class CLuaBaseEntity;
 class CInstance;
 class CLuaInstance
 {
@@ -38,32 +39,32 @@ public:
         return m_PLuaInstance;
     }
 
-    int32 getID(lua_State*);
-    int32 getAllies(lua_State*);
-    int32 getChars(lua_State*);
-    int32 getMobs(lua_State*);
-    int32 getNpcs(lua_State*);
-    int32 getPets(lua_State*);
-    int32 getTimeLimit(lua_State*);
-    int32 getEntryPos(lua_State*);
-    int32 getLastTimeUpdate(lua_State*);
-    int32 getProgress(lua_State*);
-    int32 getWipeTime(lua_State*);
-    int32 getEntity(lua_State*);
-    int32 getStage(lua_State*);
+    uint8  getID();
+    auto   getAllies() -> sol::table;
+    auto   getChars() -> sol::table;
+    auto   getMobs() -> sol::table;
+    auto   getNpcs() -> sol::table;
+    auto   getPets() -> sol::table;
+    uint32 getTimeLimit();
+    auto   getEntryPos() -> sol::table;
+    uint32 getLastTimeUpdate();
+    uint32 getProgress();
+    uint32 getWipeTime();
+    auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::shared_ptr<CLuaBaseEntity>;
+    uint32 getStage();
 
-    int32 setLevelCap(lua_State*);
-    int32 setLastTimeUpdate(lua_State*);
-    int32 setProgress(lua_State*);
-    int32 setWipeTime(lua_State*);
-    int32 setStage(lua_State*);
+    void  setLevelCap(uint8 cap);
+    void  setLastTimeUpdate(uint32 ms);
+    void  setProgress(uint32 progress);
+    void  setWipeTime(uint32 ms);
+    void  setStage(uint32 stage);
 
-    int32 fail(lua_State*);
-    int32 failed(lua_State*);
-    int32 complete(lua_State*);
-    int32 completed(lua_State*);
+    void fail();
+    bool failed();
+    void complete();
+    bool completed();
 
-    int32 insertAlly(lua_State*);
+    auto insertAlly(uint32 groupid) -> std::shared_ptr<CLuaBaseEntity>;
 
     static void Register();
 };
