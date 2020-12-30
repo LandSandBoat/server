@@ -15,13 +15,13 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(937, 1) and trade:getItemCount() == 1) then
             player:startEvent(277, 1500)
         else
             player:startEvent(275, 0, 937)
         end
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED) then
         SecondReward = player:getCharVar("SecondRewardVar")
         if (trade:hasItemQty(17091, 1) and trade:hasItemQty(17061, 1) and trade:hasItemQty(17053, 1) and trade:getItemCount() == 3) then --Check that all 3 items have been traded, one each
             SecondReward = player:setCharVar("SecondRewardVar", 1)
@@ -37,9 +37,9 @@ end
 
 function onTrigger(player, npc)
 
-    MakingAmends = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
-    MakingAmens = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    WonderWands = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    MakingAmends = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+    MakingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    WonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     needToZone = player:needToZone()
     pFame = player:getFameLevel(WINDURST)
 

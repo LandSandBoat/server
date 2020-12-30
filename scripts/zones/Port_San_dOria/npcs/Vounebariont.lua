@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(889, 5) and trade:getItemCount() == 5) then -- Trade Beetle Shell
             player:startEvent(514)
         end
@@ -35,11 +35,11 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 516) then
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
             player:addQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
         end
     elseif (csid == 514) then
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
             player:addFame(SANDORIA, 30)
         else

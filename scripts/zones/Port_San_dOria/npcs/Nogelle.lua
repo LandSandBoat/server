@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
         LufetSalt = trade:hasItemQty(1019, 3)
         if (LufetSalt == true and count == 3) then
@@ -26,7 +26,7 @@ end
 
 function onTrigger(player, npc)
 
-    local LufetsLakeSalt = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
+    local LufetsLakeSalt = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
 
     if (LufetsLakeSalt == 0) then
         player:startEvent(12)

@@ -18,14 +18,14 @@ end
 
 function onTrigger(player, npc)
 
-    local theDismayedCustomer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+    local theDismayedCustomer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
     if (theDismayedCustomer == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.GULEMONTS_DOCUMENT) == true) then
             player:startEvent(607)
         else
             player:startEvent(606)
         end
-    elseif (theDismayedCustomer == QUEST_AVAILABLE and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_COMPLETED) then
+    elseif (theDismayedCustomer == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_COMPLETED) then
         player:startEvent(605)
     else
         player:startEvent(593)

@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local theAntiqueCollector = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+    local theAntiqueCollector = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
     -- THE ANTIQUE COLLECTOR (kaiser sword)
     if (theAntiqueCollector == QUEST_ACCEPTED and trade:hasItemQty(16631, 1) and trade:getItemCount() == 1) then
@@ -22,8 +22,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local circleOfTime = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
-    local theAntiqueCollector = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+    local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local theAntiqueCollector = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
     local circleProgress = player:getCharVar("circleTime")
 
     -- CIRCLE OF TIME

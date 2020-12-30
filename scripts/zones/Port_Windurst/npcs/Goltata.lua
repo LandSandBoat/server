@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-WonderWands = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+WonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
     if (WonderWands == QUEST_ACCEPTED) then
         player:startEvent(257, 0, 0, 17091)
     elseif (WonderWands == QUEST_COMPLETED) then

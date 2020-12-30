@@ -14,7 +14,7 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
     local count = trade:getItemCount()
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
         if (count == 1 and trade:getGil() == 100) then  -- pay to replace package
             local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
             if (prog == 10 and player:hasItem(593) == false) then
@@ -30,7 +30,7 @@ function onTrade(player, npc, trade)
         end
     end
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
         if (trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_1", 0)
             player:tradeComplete()
@@ -43,7 +43,7 @@ end
 
 function onTrigger(player, npc)
 
-    local TheBrugaireConsortium = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local TheBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     if (TheBrugaireConsortium == QUEST_AVAILABLE) then
         player:startEvent(509)

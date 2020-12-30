@@ -12,14 +12,14 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    starstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+    starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
     if (starstatus == 1 and trade:hasItemQty(546, 1) == true and trade:getItemCount() == 1 and trade:getGil() == 0) then
         player:startEvent(199) -- Quest Finish
     end
 end
 
 function onTrigger(player, npc)
-    starstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+    starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
     if (starstatus == QUEST_AVAILABLE) then
         player:startEvent(196, 0, 546) -- Quest Start
     elseif (starstatus == QUEST_ACCEPTED) then
