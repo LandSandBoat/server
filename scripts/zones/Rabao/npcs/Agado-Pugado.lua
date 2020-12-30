@@ -16,10 +16,10 @@ end
 
 function onTrigger(player, npc)
 
-    local TrialByWind = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+    local TrialByWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
     local WhisperOfGales = player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local CarbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     ---------------------------------------------------------------------
@@ -60,7 +60,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 66 and option == 1) then
-        if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
             player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)

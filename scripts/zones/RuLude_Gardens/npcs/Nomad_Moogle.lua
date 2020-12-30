@@ -14,25 +14,25 @@ require("scripts/globals/npc_util")
 function onTrade(player, npc, trade)
     local meritCount = player:getMeritCount()
     if (trade:hasItemQty(1127, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 2) then
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
             player:startEvent(10135)
         end
     elseif (trade:hasItemQty(2955, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 3) then
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
             player:startEvent(10136)
         end
     elseif (trade:hasItemQty(2955, 10) == true and trade:getGil() == 0 and trade:getItemCount() == 10 and meritCount > 4) then
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
             player:startEvent(10137)
         end
     elseif (trade:hasItemQty(2955, 1) == true and trade:hasItemQty(503, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2 and meritCount > 9) then
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
             player:startEvent(10138)
         end
-    elseif npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
+    elseif npcUtil.tradeHasExactly(trade, 3541) and player:getQuestStatus(tpz.quest.log_id.JEUNO,tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED then
         npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) -- Exception to onEventFinish
         player:startEvent(10045, 0, 1, 5)
-    elseif npcUtil.tradeHasExactly(trade, {{2956, 5}}) and player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
+    elseif npcUtil.tradeHasExactly(trade, {{2956, 5}}) and player:getQuestStatus(tpz.quest.log_id.JEUNO,tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
         player:startEvent(10195, 1)
     end
 end
@@ -40,35 +40,35 @@ end
 function onTrigger(player, npc)
     if (player:hasKeyItem(tpz.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
-    elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and MAX_LEVEL >= 80 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and MAX_LEVEL >= 80 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 1, 0)
-    elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and MAX_LEVEL >= 85 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 76 and player:getLevelCap() == 80 and MAX_LEVEL >= 85 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 2, 0)
-    elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and MAX_LEVEL >= 90 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 81 and player:getLevelCap() == 85 and MAX_LEVEL >= 90 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 3, 0)
-    elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and MAX_LEVEL >= 95 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 86 and player:getLevelCap() == 90 and MAX_LEVEL >= 95 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_AVAILABLE) then
         player:startEvent(10045, 0, 1, 4, 0)
-    elseif (player:getMainLvl() >= 91 and player:getLevelCap() == 95 and MAX_LEVEL == 99 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
+    elseif (player:getMainLvl() >= 91 and player:getLevelCap() == 95 and MAX_LEVEL == 99 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_AVAILABLE) then
         player:startEvent(10194)
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE and player:getLocalVar("MaybeAnotherTimeCS") == 1 then
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE and player:getLocalVar("MaybeAnotherTimeCS") == 1 then
         player:startEvent(10045, 0, 1, 5, 0, 1)
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.sJEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
         player:startEvent(10045, 0, 1, 5)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 1, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 2, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 3, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 4, 1)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_ACCEPTED) then
         player:startEvent(10045, 0, 1, 6, 2)
-    elseif  player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
+    elseif  player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SOUL_GEM_CLASP) then
         player:startEvent(10045, 0, 1, 5, 1)
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:getCharVar("BeyondInfinityCS") == 1 then
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED and player:getCharVar("BeyondInfinityCS") == 1 then
         if player:getMeritCount() >= 1 then
             player:startEvent(10045, 0, 1, 5, 3, 0, 0, 1)
         else

@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    saveMySister = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+    saveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
     if (saveMySister == QUEST_AVAILABLE and player:getCharVar("saveMySisterVar") == 3) then
         player:startEvent(98) -- Real start of this quest (with addquest)

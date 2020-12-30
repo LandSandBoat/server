@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
     local TOTD = VanadielTOTD()
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+    local TheStarsOfIfrit = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
 
     if (TOTD == tpz.time.NIGHT and IsMoonFull()) then
         if (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CARRIER_PIGEON_LETTER) == false) then

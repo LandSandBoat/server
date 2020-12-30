@@ -35,7 +35,7 @@ function onEventFinish(player, csid, option)
     if csid == 32001 then
         player:addTitle(tpz.title.MAAT_MASHER)
 
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
             npcUtil.giveItem(player, 4181) -- scroll_of_instant_warp
         end
 
