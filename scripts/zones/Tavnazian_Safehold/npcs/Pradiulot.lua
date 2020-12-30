@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local unforgiven = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
+    local unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
 
     if unforgiven == QUEST_ACCEPTED and player:getCharVar("UnforgivenVar") == 1 then
         player:startEvent(204) -- Dialogue for final stage of Unforgiven Quest

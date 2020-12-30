@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
 
     -- Taking a logical guess what criteria displays what message.
@@ -41,7 +41,7 @@ end
 
 function onTrigger(player, npc)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     if overTheHillsAndFarAway == QUEST_COMPLETED then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

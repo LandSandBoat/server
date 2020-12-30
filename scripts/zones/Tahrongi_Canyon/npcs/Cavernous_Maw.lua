@@ -17,8 +17,8 @@ end
 function onTrigger(player, npc)
     if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE) == QUEST_AVAILABLE and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE) == QUEST_AVAILABLE and
             tpz.abyssea.getTravStonesTotal(player) >= 1
         then
             player:startEvent(38)

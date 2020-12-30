@@ -57,7 +57,7 @@ local nosTrades =
 }
 
 function onTrade(player, npc, trade)
-    local nameOfScience  = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+    local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
     if itemInProgress > 0 and npcUtil.tradeHas(trade, nosTrades[itemInProgress].organs) then
@@ -78,7 +78,7 @@ end
 function onTrigger(player, npc)
     -- IN THE NAME OF SCIENCE
     if player:hasCompletedMission(COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
-        local nameOfScience  = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+        local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
         if nameOfScience == QUEST_AVAILABLE then

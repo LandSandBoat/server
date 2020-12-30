@@ -24,7 +24,7 @@ function onTrigger(player, npc)
         if player:hasKeyItem(tpz.ki.MOONDROP) then
             player:messageSpecial(ID.text.CAN_SEE_SKY)
 
-        elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
+        elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED then
 
             if IsMoonNew() or not correctTime then
                 player:messageSpecial(ID.text.CANNOT_SEE_MOON)

@@ -20,7 +20,7 @@ local THE_ELDIEME_NECROPOLIS =
             local ANCIENT_PAPYRUS = 1088 -- Human readability
 
             if
-                player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)

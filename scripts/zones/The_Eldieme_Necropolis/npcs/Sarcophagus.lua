@@ -34,7 +34,7 @@ function onTrigger(player, npc)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- A NEW DAWN (Beastmaster AF3)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
         local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
         if aNewDawnEvent == 4 then

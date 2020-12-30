@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local flyHigh = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.FLY_HIGH)
+    local flyHigh = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
 
     if flyHigh == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{1690, 2}}) then -- 2x Hippogryph Tailfeather
         player:startEvent(243)
@@ -20,7 +20,7 @@ end
 
 function onTrigger(player, npc)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_SAVAGE) then
-        local flyHigh = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.FLY_HIGH)
+        local flyHigh = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
 
         if flyHigh == QUEST_AVAILABLE then
             player:startEvent(241)
