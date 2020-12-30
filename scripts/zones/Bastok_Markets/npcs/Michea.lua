@@ -11,9 +11,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
-    local theElvaanGoldsmith = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
-    local distantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
-    local fatherFigure = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+    local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+    local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+    local fatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
 
     -- THE ELVAAN GOLDSMITH
     if (theElvaanGoldsmith >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, 648)) then
@@ -30,10 +30,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theElvaanGoldsmith = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
-    local distantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+    local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+    local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
-    local fatherFigure = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+    local fatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
 
     -- THE ELVAAN GOLDSMITH
     if (theElvaanGoldsmith == QUEST_AVAILABLE) then

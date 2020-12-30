@@ -12,9 +12,9 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
         player:startEvent(336)
-    elseif (player:getFameLevel(BASTOK) > 4 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_AVAILABLE) then -- Quest: Wish Upon a Star - Start quest.
+    elseif (player:getFameLevel(BASTOK) > 4 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_AVAILABLE) then -- Quest: Wish Upon a Star - Start quest.
         player:startEvent(329)
     else -- Standard dialog
         player:startEvent(328)

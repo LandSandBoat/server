@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local cCollector = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR)
+    local cCollector = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR)
 
     if cCollector == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >=4 then
         player:startEvent(251) -- Quest Start Dialogue

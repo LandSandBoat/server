@@ -10,7 +10,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) ~= QUEST_AVAILABLE and npcUtil.tradeHas(trade, {{768, 4}}) then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) ~= QUEST_AVAILABLE and npcUtil.tradeHas(trade, {{768, 4}}) then
         if npc:getLocalVar("FlashInThePan") <= os.time() then
             player:startEvent(219)
         else
@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) == QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) == QUEST_AVAILABLE then
         player:startEvent(217)
     else
         player:startEvent(116)

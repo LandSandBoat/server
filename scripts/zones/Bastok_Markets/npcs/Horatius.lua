@@ -11,7 +11,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BREAKING_STONES) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 553)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BREAKING_STONES) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 553)) then
         player:startEvent(101)
     end
 end
@@ -19,9 +19,9 @@ end
 function onTrigger(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 12)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 12)) then
         player:startEvent(428)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BREAKING_STONES) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BREAKING_STONES) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(100)
     else
         player:startEvent(110)

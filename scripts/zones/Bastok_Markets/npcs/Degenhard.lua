@@ -11,21 +11,21 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
         npcUtil.tradeHasExactly(trade, {3541, 3542, 3543}) then
         player:startEvent(15)
-    elseif player:getQuestStatus(BASTOK,tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.BASTOK,tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 880) then
         player:startEvent(258)
     end
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
         player:startEvent(14)
     elseif player:getCharVar("BeatAroundTheBushin") == 3 then
         player:startEvent(342)
-    elseif player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
+    elseif player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
         player:startEvent(256)
     else
         player:startEvent(255)
