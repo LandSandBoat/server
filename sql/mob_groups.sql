@@ -3429,19 +3429,19 @@ INSERT INTO `mob_groups` VALUES (33,2431,76,'Long-Armed_Chariot',0,128,1531,0,0,
 -- Silver Sea Remnants II
 -- TODO: capture levels from retail
 -- TODO: capture jobs of Ashu Talif Crew from retail, and assign groups 43, 44, and 45
-INSERT INTO `mob_groups` VALUES (34,221,76,'Archaic_Rampart',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (35,0,76,'Doomed',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (36,0,76,'Qiqirn',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (37,2065,76,'Imp',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (38,0,76,'Voracious_Carrion',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (39,197,76,'Apkallu',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (40,0,76,'Apkallu_Avenger',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (41,0,76,'Seafarer_Piliproon',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (42,5430,76,'Ashu_Talif_Crew_mnk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (43,263,76,'Ashu_Talif_Crew_rng',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (44,5431,76,'Ashu_Talif_Crew_rdm',0,128,0,0,9999,0,0,0);
-INSERT INTO `mob_groups` VALUES (45,5728,76,'Ashu_Talif_Crew_cor',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (46,0,76,'Fomor_Windwalker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,221,76,'Archaic_Rampart',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (35,0,76,'Doomed',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (36,0,76,'Qiqirn',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (37,2065,76,'Imp',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (38,0,76,'Voracious_Carrion',0,128,0,0,0,100,100,0);
+INSERT INTO `mob_groups` VALUES (39,197,76,'Apkallu',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (40,0,76,'Apkallu_Avenger',0,128,0,0,0,100,100,0);
+INSERT INTO `mob_groups` VALUES (41,0,76,'Seafarer_Piliproon',0,128,0,0,0,100,100,0);
+INSERT INTO `mob_groups` VALUES (42,5430,76,'Ashu_Talif_Crew_mnk',0,128,0,0,0,101,101,0);
+INSERT INTO `mob_groups` VALUES (43,263,76,'Ashu_Talif_Crew_rng',0,128,0,0,0,101,101,0);
+INSERT INTO `mob_groups` VALUES (44,5431,76,'Ashu_Talif_Crew_rdm',0,128,0,0,9999,101,101,0);
+INSERT INTO `mob_groups` VALUES (45,5728,76,'Ashu_Talif_Crew_cor',0,128,0,0,0,101,101,0);
+INSERT INTO `mob_groups` VALUES (46,0,76,'Fomor_Windwalker',0,128,0,0,0,102,102,0);
 INSERT INTO `mob_groups` VALUES (47,0,76,'Stoneplate_Ghalimad',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (48,0,76,'Quickdirk_Kahladijn',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (49,3215,76,'Psycheflayer',0,128,0,0,0,0,0,0);
