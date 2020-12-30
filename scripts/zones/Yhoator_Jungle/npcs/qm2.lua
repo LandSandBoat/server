@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local StopWhining = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
+    local StopWhining = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
 
     if StopWhining == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW) and player:hasKeyItem(tpz.ki.EMPTY_BARREL) then
         player:messageSpecial(ID.text.TREE_CHECK)

@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.OLD_TRICK_BOX) then
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.OLD_TRICK_BOX) then
         if player:getCharVar("trueWillKilledNM") > 0 then
             npcUtil.giveKeyItem(player, tpz.ki.OLD_TRICK_BOX)
             player:setCharVar("trueWillKilledNM", 0)

@@ -19,8 +19,8 @@ function onTrigger(player, npc)
         local HasStone = tpz.abyssea.getTravStonesTotal(player)
         if
             HasStone >= 1 and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE) == QUEST_AVAILABLE
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE) == QUEST_AVAILABLE
         then
             player:startEvent(58)
         else
