@@ -4,8 +4,6 @@
 -- Gobbie Mystery Box
 -- !pos -215.5 0.0 -147.3
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 

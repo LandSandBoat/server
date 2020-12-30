@@ -3,14 +3,12 @@
 --  NPC: Ran
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 
 function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (math.random() >= .5) then
+    if math.random() >= .5 then
         player:startEvent(272)
     else
         player:startEvent(273)
