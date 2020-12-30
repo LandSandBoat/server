@@ -39,6 +39,7 @@ public:
     {
         return m_PLuaBattlefield;
     }
+
     uint16   getID();
     uint8    getArea();
     uint32   getTimeLimit();
@@ -47,10 +48,10 @@ public:
     uint32   getFightTick();
     uint32   getWipeTime();
     uint32   getFightTime();
-    auto     getPlayers() -> sol::table;
-    auto     getMobs(bool required, bool adds) -> sol::table;
-    auto     getNPCs() -> sol::table;
-    auto     getAllies() -> sol::table;
+    auto     getPlayers() -> std::vector<CLuaBaseEntity>;
+    auto     getMobs(bool required, bool adds) -> std::vector<CLuaBaseEntity>;
+    auto     getNPCs() -> std::vector<CLuaBaseEntity>;
+    auto     getAllies() -> std::vector<CLuaBaseEntity>;
     auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
     uint8    getStatus();
     uint64_t getLocalVar(std::string name);

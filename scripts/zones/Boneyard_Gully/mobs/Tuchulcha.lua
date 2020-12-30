@@ -39,7 +39,8 @@ function onMobFight(mob, target)
             local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
             local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
             tuchulcha:setPos(coords)
-            for _, char in pairs(tuchulcha:getBattlefield():getPlayers()) do
+            local players = tuchulcha:getBattlefield():getPlayers()
+            for _, char in players:pairs() do
                 char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
                 char:disengage()
                 if char:hasPet() then

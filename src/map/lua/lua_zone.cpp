@@ -70,11 +70,11 @@ sol::object CLuaZone::levelRestriction()
     return sol::nil;
 }
 
-sol::table CLuaZone::getPlayers()
+std::vector<CLuaBaseEntity> CLuaZone::getPlayers()
 {
-    sol::table list;
-    m_pLuaZone->ForEachChar([&list](CCharEntity* PChar) { list.add(CLuaBaseEntity{ PChar }); });
-    return list;
+    std::vector<CLuaBaseEntity> vec;
+    m_pLuaZone->ForEachChar([&vec](CCharEntity* PChar) { vec.emplace_back(CLuaBaseEntity(PChar)); });
+    return vec;
 }
 
 ZONEID CLuaZone::getID()

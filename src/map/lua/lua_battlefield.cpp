@@ -77,55 +77,55 @@ uint32 CLuaBattlefield::getFightTime()
     return std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count();
 }
 
-sol::table CLuaBattlefield::getPlayers()
+std::vector<CLuaBaseEntity> CLuaBattlefield::getPlayers()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
-            table.add(CLuaBaseEntity(PChar));
+            vec.emplace_back(CLuaBaseEntity(PChar));
         }
     });
-    return table;
+    return vec;
 }
 
-sol::table CLuaBattlefield::getMobs(bool required, bool adds)
+std::vector<CLuaBaseEntity> CLuaBattlefield::getMobs(bool required, bool adds)
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
 
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
-            table.add(CLuaBaseEntity(PMob));
+            vec.emplace_back(CLuaBaseEntity(PMob));
         });
     }
 
     if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
-            table.add(CLuaBaseEntity(PMob));
+            vec.emplace_back(CLuaBaseEntity(PMob));
         });
     }
 
-    return table;
+    return vec;
 }
 
-sol::table CLuaBattlefield::getNPCs()
+std::vector<CLuaBaseEntity> CLuaBattlefield::getNPCs()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
-        table.add(CLuaBaseEntity(PNpc));
+        vec.emplace_back(CLuaBaseEntity(PNpc));
     });
-    return table;
+    return vec;
 }
 
-sol::table CLuaBattlefield::getAllies()
+std::vector<CLuaBaseEntity> CLuaBattlefield::getAllies()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
-        table.add(CLuaBaseEntity(PAlly));
+        vec.emplace_back(CLuaBaseEntity(PAlly));
     });
-    return table;
+    return vec;
 }
 
 std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()

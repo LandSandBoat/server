@@ -53,7 +53,8 @@ function onMobDeath(mob, player, isKiller)
     if player then
         player:startEvent(32004, battlefield:getArea())
     else
-        for _, member in pairs(battlefield:getPlayers()) do
+        local players = battlefield:getPlayers()
+        for _, member in players:pairs() do
             member:startEvent(32004, battlefield:getArea())
         end
     end

@@ -130,7 +130,7 @@ function tpz.battlefield.SendTimePrompts(battlefield, players)
     end
 
     if message ~= 0 then
-        for i, player in pairs(players) do
+        for i, player in players:pairs() do
             player:messageBasic(tpz.msg.basic.TIME_LEFT, remainingTime)
         end
         battlefield:setLastTimeUpdate(message)
@@ -148,14 +148,14 @@ function tpz.battlefield.HandleWipe(battlefield, players)
 
     -- pure stolen from instance.lua
     if wipeTime <= 0 then
-        for _, player in pairs(players) do
+        for _, player in players:pairs() do
             if player:getHP() ~= 0 then
                 rekt = false
                 break
             end
         end
         if rekt then
-            for _, player in pairs(players) do
+            for _, player in players:pairs() do
                 -- v:messageSpecial(ID, 3)
             end
             battlefield:setWipeTime(elapsed)
@@ -164,7 +164,7 @@ function tpz.battlefield.HandleWipe(battlefield, players)
         if (elapsed - wipeTime) > 180 then
             battlefield:setStatus(tpz.battlefield.status.LOST)
         else
-            for _, player in pairs(players) do
+            for _, player in players:pairs() do
                 if player:getHP() ~= 0 then
                     battlefield:setWipeTime(0)
                     rekt = false
@@ -229,7 +229,7 @@ function tpz.battlefield.ExtendTimeLimit(battlefield, minutes, message, param, p
 
     if message then
         players = players or battlefield:getPlayers()
-        for _, player in pairs(players) do
+        for _, player in players:pairs() do
             player:messageBasic(message, param or minutes)
         end
     end
@@ -237,7 +237,7 @@ end
 
 function tpz.battlefield.HealPlayers(battlefield, players)
     players = players or battlefield:getPlayers()
-    for _, player in pairs(players) do
+    for _, player in players:pairs() do
         local recoverHP = player:getMaxHP() - player:getHP()
         local recoverMP = player:getMaxMP() - player:getMP()
         player:addHP(recoverHP)

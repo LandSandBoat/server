@@ -42,7 +42,7 @@ tpz.ally =
             local assistTarget = 0
 
             -- Loop players and find someone who is engaged in battle
-            for i, player in pairs(players) do
+            for i, player in players:pairs() do
                 local battleTarget = player:getTarget()
                 if battleTarget ~= nil then
                     assistTarget = battleTarget:getShortID()

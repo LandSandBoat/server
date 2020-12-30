@@ -18,7 +18,8 @@ g_mixins.maat = function(mob)
 
     mob:addListener("ROAM_TICK", "MAAT_RTICK", function(mob)
         if mob:getLocalVar("engaged") == 0 then
-            for _, player in pairs(mob:getZone():getPlayers()) do
+            local players = mob:getZone():getPlayers()
+            for _, player in players:pairs() do
                 if player:checkDistance(mob) < 8 then
                     local ID = zones[mob:getZoneID()]
                     mob:messageText(mob, ID.text.YOU_DECIDED_TO_SHOW_UP)
