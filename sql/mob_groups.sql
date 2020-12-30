@@ -10692,6 +10692,7 @@ INSERT INTO `mob_groups` VALUES (21,2548,167,'Manes',0,32,2879,0,0,73,73,0);
 INSERT INTO `mob_groups` VALUES (22,482,167,'Bodach',0,128,0,7500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (23,5138,167,'Bloodsucker',0,128,2892,3600,0,71,73,0);
 INSERT INTO `mob_groups` VALUES (24,2764,167,'Mousse',300,0,567,0,0,58,62,0);
+INSERT INTO `mob_groups` VALUES (25,6723,167,'Garbage_Gel',0,128,0,0,0,122,122,0);
 
 -- ------------------------------------------------------------
 -- Chamber_of_Oracles (Zone 168)
