@@ -2062,38 +2062,23 @@ namespace luautils
 
     int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
-        TPZ_DEBUG_BREAK_IF(PAttacker == nullptr);
-        TPZ_DEBUG_BREAK_IF(PWeaponskill == NULL);
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        if (prepFile(File, "onWeaponskillHit"))
+        auto onWeaponskillHit = loadFunctionFromFile("onWeaponskillHit", filename);
+        if (!onWeaponskillHit.valid())
         {
             return 0;
         }
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        CLuaBaseEntity LuaBaseEntity(PAttacker);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, PWeaponskill);
-
-        if (lua_pcall(LuaHandle, 3, 1, 0))
+        auto result = onWeaponskillHit(CLuaBaseEntity(PMob), CLuaBaseEntity(PAttacker), PWeaponskill);
+        if (!result.valid())
         {
-            ShowError("luautils::onWeaponskillHit: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onWeaponskillHit: %s\n", err.what());
             return 0;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : 0;
     }
 
     /************************************************************************
@@ -2865,27 +2850,24 @@ namespace luautils
 
     int32 OnMobRoam(CBaseEntity* PMob)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr || PMob->objtype != TYPE_MOB)
+        TracyZoneScoped;
 
-        CLuaBaseEntity LuaMobEntity(PMob);
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        if (prepFile(File, "onMobRoam"))
+        auto onMobRoam = loadFunctionFromFile("onMobRoam", filename);
+        if (!onMobRoam.valid())
         {
             return -1;
         }
 
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onMobRoam(CLuaBaseEntity(PMob));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobRoam: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobRoam: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
