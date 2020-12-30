@@ -77,7 +77,7 @@ end
 
 function onTrigger(player, npc)
 
-    local Vault = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+    local Vault = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
     local IronBox = player:hasKeyItem(tpz.ki.SEALED_IRON_BOX)
 

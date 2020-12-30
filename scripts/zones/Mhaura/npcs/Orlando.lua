@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local QuestStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local itemID = trade:getItemId()
     local itemList =
     {
@@ -45,7 +45,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local QuestStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
 
     if (player:getFameLevel(WINDURST) >= 2) then
         if (player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE)) then
@@ -66,7 +66,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    local QuestStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+    local QuestStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     local payout = player:getCharVar("ANTIQUE_PAYOUT")
 
     if (csid == 101) then

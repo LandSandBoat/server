@@ -16,13 +16,13 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
         if npcUtil.tradeHasExactly(trade, 13095) then
             player:startEvent(127) -- Finish quest "The Sand Charm"
         end
     end
 
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 5 then
         if npcUtil.tradeHasExactly(trade, 1127) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_3", 0)

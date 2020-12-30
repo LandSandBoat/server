@@ -38,7 +38,7 @@ function onTrigger(player, npc)
         player:startEvent(171)
     elseif (ZilartMission == tpz.mission.id.zilart.THE_CELESTIAL_NEXUS) then
         player:startEvent(173);
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then

@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Mhaura/IDs")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 6
     then
         if trade:hasItemQty(1127, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal

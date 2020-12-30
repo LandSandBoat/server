@@ -34,7 +34,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED then
         -- check whether trade is an item with id 1202 to 1208
         local tradedItem
         local bitToSet
@@ -68,8 +68,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local mamaMia = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
-    local moonlitPath = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
+    local mamaMia = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+    local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local evokersRing = player:hasItem(14625)
     local realday = tonumber(os.date("%j"))  -- %M for next minute, %j for next day
     local questday = player:getCharVar("MamaMia_date")

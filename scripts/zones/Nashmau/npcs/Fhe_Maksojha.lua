@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local notmeanttobe = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+    local notmeanttobe = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
     local notMeantToBeProg = player:getCharVar("notmeanttobeCS")
     if (notmeanttobe == QUEST_AVAILABLE) then
         player:startEvent(293)

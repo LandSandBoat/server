@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
 
     if (questStatus == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
@@ -26,9 +26,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local questStatus = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
 
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ELDER_MEMORIES) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES) ~= QUEST_AVAILABLE) then
         player:startEvent(130)
     elseif (questStatus == QUEST_COMPLETED) then
         player:startEvent(138)

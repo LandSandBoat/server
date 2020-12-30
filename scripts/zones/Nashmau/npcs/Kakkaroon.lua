@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local ratrace = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+    local ratrace = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
     local ratRaceProg = player:getCharVar("ratraceCS")
     if (ratrace == QUEST_AVAILABLE) then
         player:startEvent(308)

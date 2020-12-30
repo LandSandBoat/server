@@ -17,7 +17,7 @@ function onTrigger(player, npc)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
     -- Bahamut Battle (requires COP to be completed)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 0 then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 0 then
         player:startEvent(559)
     -- COP 7-2
     elseif copCurrentMission == copMissions.FLAMES_IN_THE_DARKNESS and copMissionStatus == 0 then

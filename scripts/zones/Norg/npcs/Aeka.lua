@@ -34,7 +34,7 @@ function onTrigger(player, npc)
 
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
         if (player:hasItem(1152)) then
             player:startEvent(48, 1152) -- Bomb Steel
         elseif (player:hasItem(1151) == false) then

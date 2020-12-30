@@ -17,7 +17,7 @@ end
 
 function onTrigger(player, npc)
 
-    local TrialByWater = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+    local TrialByWater = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
     local WhisperOfTides = player:hasKeyItem(tpz.ki.WHISPER_OF_TIDES)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
 
@@ -49,7 +49,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 109 and option == 1) then
-        if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
             player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         end
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
