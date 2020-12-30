@@ -12,10 +12,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    X = player:getXPos()
-    Z = player:getZPos()
+    local x = player:getXPos()
+    local z = player:getZPos()
 
-    if ((X >= 1.51 and X <= 9.49) and (Z >= 273.1 and Z <= 281)) then
+    if x >= 1.51 and x <= 9.49 and z >= 273.1 and z <= 281 then
         if player:hasKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) then
             player:startEvent(401)
         else
@@ -24,6 +24,7 @@ function onTrigger(player, npc)
     else
         player:startEvent(395)
     end
+
     return 1
 end
 

@@ -65,7 +65,7 @@ function onTrigger(player, npc)
                 player:startEvent(705) -- start Beginnings
             end
         else
-           player:startEvent(63) 
+            player:startEvent(63)
         end
     elseif beginnings == QUEST_ACCEPTED then
         local brand1 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_SPRINGSERPENT)
@@ -88,7 +88,7 @@ function onTrigger(player, npc)
                 player:startEvent(710) -- start Omens
             end
         else
-           player:startEvent(63) 
+            player:startEvent(63)
         end
     elseif omens == QUEST_ACCEPTED then
         if player:getCharVar("OmensProgress") == 1 then
@@ -110,7 +110,7 @@ function onTrigger(player, npc)
                 player:startEvent(720, player:getGil()) -- starts Transformations
             end
         else
-           player:startEvent(63) 
+            player:startEvent(63)
         end
     elseif transformations == QUEST_ACCEPTED then
         player:startEvent(723, player:getGil()) -- clue about possible route to take, costs you 1000 gil
@@ -119,7 +119,7 @@ function onTrigger(player, npc)
         if divinationReady then
             player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
         else
-            player:startEvent(63) 
+            player:startEvent(63)
         end
     else
         player:startEvent(61)

@@ -17,10 +17,10 @@ function onTrigger(player, npc)
     if (player:getNation() ~= tpz.nation.WINDURST) then
         player:startEvent(87) -- for other nation
     else
-        CurrentMission = player:getCurrentMission(WINDURST)
-        MissionStatus = player:getCharVar("MissionStatus")
-        pRank = player:getRank()
-        cs, p, offset = getMissionOffset(player, 4, CurrentMission, MissionStatus)
+        local CurrentMission = player:getCurrentMission(WINDURST)
+        local MissionStatus = player:getCharVar("MissionStatus")
+        local pRank = player:getRank()
+        local cs, p, offset = getMissionOffset(player, 4, CurrentMission, MissionStatus)
 
         if (CurrentMission <= tpz.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (CurrentMission == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
             if (cs == 0) then
@@ -39,7 +39,8 @@ function onTrigger(player, npc)
         elseif (player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_WINDURST)) then
             player:startEvent(150)
         else
-            flagMission, repeatMission = getMissionMask(player)
+            local param3
+            local flagMission, repeatMission = getMissionMask(player)
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
             if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
                 param3 = 1

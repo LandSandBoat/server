@@ -63,7 +63,7 @@ end
 local function firstEmptySlot(player)
     for i, v in ipairs(readTrials(player)) do
         if v.trial == 0 then
-        	return i
+            return i
         end
     end
 end

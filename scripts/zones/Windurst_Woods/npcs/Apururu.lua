@@ -137,9 +137,14 @@ function onEventFinish(player, csid, option)
     if csid == 137 then
         player:setCharVar("MissionStatus", 1)
 
-        npcUtil.giveKeyItem(player,
-            {tpz.ki.FIRST_DARK_MANA_ORB, tpz.ki.SECOND_DARK_MANA_ORB, tpz.ki.THIRD_DARK_MANA_ORB,
-             tpz.ki.FOURTH_DARK_MANA_ORB, tpz.ki.FIFTH_DARK_MANA_ORB, tpz.ki.SIXTH_DARK_MANA_ORB})
+        npcUtil.giveKeyItem(player, {
+            tpz.ki.FIRST_DARK_MANA_ORB,
+            tpz.ki.SECOND_DARK_MANA_ORB,
+            tpz.ki.THIRD_DARK_MANA_ORB,
+            tpz.ki.FOURTH_DARK_MANA_ORB,
+            tpz.ki.FIFTH_DARK_MANA_ORB,
+            tpz.ki.SIXTH_DARK_MANA_ORB
+        })
 
         player:setCharVar("MissionStatus_orb1", 1) -- Set the orb variables: 1 = not handled, 2 = handled
         player:setCharVar("MissionStatus_orb2", 1)

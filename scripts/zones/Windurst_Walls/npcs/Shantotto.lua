@@ -153,12 +153,13 @@ function onTrigger(player, npc)
 
         -- Trust
         -- TODO: Wiki's aren't clear on the exact conditions for this event, assuming it's the final nation "extreme" trust
-    elseif player:hasSpell(898) and -- Kupipi
-    player:hasSpell(901) and -- Nanaa Mihgo
-    player:hasSpell(903) and -- Volker
-    player:hasSpell(904) and -- Ajido-Marujido
-    player:hasSpell(905) and -- Trion
-    not player:hasSpell(896) -- NOT Shantotto
+    elseif
+        player:hasSpell(898) and -- Kupipi
+        player:hasSpell(901) and -- Nanaa Mihgo
+        player:hasSpell(903) and -- Volker
+        player:hasSpell(904) and -- Ajido-Marujido
+        player:hasSpell(905) and -- Trion
+        not player:hasSpell(896) -- NOT Shantotto
     then
         player:startEvent(529, 0, 0, 0, TrustMemory(player), 0, 0, 0, FoiledAGolem == QUEST_COMPLETED and 1 or 0)
 

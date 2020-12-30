@@ -4,7 +4,6 @@
 -- Standard Info NPC
 -- !pos -93 -5 130 239
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 

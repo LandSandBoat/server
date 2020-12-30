@@ -722,6 +722,9 @@ tpz.caskets.onTrade = function(player, npc, trade)
     local chestOwner        = npc:getLocalVar("[caskets]PARTYID")         -- the id of the player, party or alliance that has rights to the chest.
     local leaderId          = player:getLeaderID()
 
+    -- Trading a casket should remove sneak
+    player:delStatusEffect(tpz.effect.SNEAK)
+
     if leaderId ~= chestOwner then
         return
     end

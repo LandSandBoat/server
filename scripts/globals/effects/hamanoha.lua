@@ -1,6 +1,6 @@
 -----------------------------------
 --
---     tpz.effect.HAMANOHA	
+-- tpz.effect.HAMANOHA
 --
 -----------------------------------
 function onEffectGain(target, effect)

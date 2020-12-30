@@ -26,7 +26,7 @@ tpz.trust.message_offset =
     SPECIAL_MOVE_1 = 18,
 }
 
-local MAX_MESSAGE_PAGE = 120
+local MAX_MESSAGE_PAGE = 121
 
 local rovKIBattlefieldIDs = set{
     5,    -- Shattering Stars (WAR LB5)
@@ -212,6 +212,7 @@ end
 tpz.trust.message = function(mob, page_offset, message_offset)
 
     if page_offset > MAX_MESSAGE_PAGE then
+        print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
         return
     end
 

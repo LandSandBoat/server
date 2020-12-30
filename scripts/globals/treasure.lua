@@ -1333,6 +1333,9 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
     local mLvl = player:getMainLvl()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
+    
+    -- Trading a treasure should remove sneak
+    player:delStatusEffect(tpz.effect.SNEAK)
 
     -- determine type of key traded
     local keyTraded = nil

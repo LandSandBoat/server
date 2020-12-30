@@ -10023,7 +10023,7 @@ INSERT INTO `item_basic` VALUES (12718,0,'iron_mittens_+1','iron_mittens_+1',1,2
 INSERT INTO `item_basic` VALUES (12719,0,'mercenarys_tekko','mrc._tekko',1,2052,19,0,1368);
 INSERT INTO `item_basic` VALUES (12720,0,'gloves','gloves',1,2084,19,0,310);
 INSERT INTO `item_basic` VALUES (12721,0,'cotton_gloves','cotton_gloves',1,2084,19,0,372);
-INSERT INTO `item_basic` VALUES (12722,0,'bracers','bracers',1,2084,19,0,2464);
+INSERT INTO `item_basic` VALUES (12722,0,'bracers','bracers',1,2084,19,0,310);
 INSERT INTO `item_basic` VALUES (12723,0,'wool_bracers','wool_bracers',1,2084,19,0,3440);
 INSERT INTO `item_basic` VALUES (12724,0,'battle_bracers','battle_bracers',1,2084,19,0,4207);
 INSERT INTO `item_basic` VALUES (12725,0,'war_gloves','war_gloves',1,2084,19,0,6140);
