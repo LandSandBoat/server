@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
 
-    local WelcometoBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+    local WelcometoBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
 
     if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(tpz.slot.SUB) == 12415) then -- Shell Shield
         player:startEvent(52)
@@ -30,7 +30,7 @@ end
 
 function onEventFinish(player, csid, option)
 
-    if (csid == 52 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
+    if (csid == 52 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
         player:setCharVar("WelcometoBastok_Event", 1)
     end
 

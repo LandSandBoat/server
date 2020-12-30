@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-ForemansBestFriend = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+ForemansBestFriend = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
 
     if (ForemansBestFriend == QUEST_ACCEPTED) then
         player:startEvent(111)

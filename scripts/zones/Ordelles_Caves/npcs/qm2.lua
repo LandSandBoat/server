@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.STALACTITE_DEW) and player:getCharVar("SquiresTestII") == 0 then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.STALACTITE_DEW) and player:getCharVar("SquiresTestII") == 0 then
         player:setCharVar("SquiresTestII", os.time())
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_I)
     else

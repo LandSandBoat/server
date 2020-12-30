@@ -16,10 +16,10 @@ end
 
 function onTrigger(player, npc)
 
-    AltanaSorrow  = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
-    ActingInGoodFaith  = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
-    HealingTheLand = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
-    SorceryOfTheNorth = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+    AltanaSorrow  = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
+    ActingInGoodFaith  = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
+    HealingTheLand = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
+    SorceryOfTheNorth = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
     if (AltanaSorrow == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.LETTER_FROM_VIRNAGE)) then
         player:startEvent(679) -- Finish quest "Altana's Sorrow"

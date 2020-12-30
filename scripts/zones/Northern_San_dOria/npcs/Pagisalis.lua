@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(913, 2) and trade:getItemCount() == 2) then -- Trade Lump of Beeswax
             player:startEvent(563)
         end
@@ -31,7 +31,7 @@ end
 function onTrigger(player, npc)
 
     sanFame = player:getFameLevel(SANDORIA)
-    undyingFlames = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
+    undyingFlames = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
     if (player:hasKeyItem(tpz.ki.OLD_POCKET_WATCH)) then
         player:startEvent(48)
     elseif (player:hasKeyItem(tpz.ki.OLD_BOOTS)) then

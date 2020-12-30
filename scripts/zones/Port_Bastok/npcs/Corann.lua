@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 
 function onTrade(player, npc, trade)
 
-TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 
     if (TheQuadav == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -25,8 +25,8 @@ end
 
 function onTrigger(player, npc)
 
-TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
-OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_COMPLETED) then
         player:startEvent(88)

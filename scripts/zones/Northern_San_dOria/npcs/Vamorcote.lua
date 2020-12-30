@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
     -- "The Setting Sun" conditional script
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(535, 1) and trade:getItemCount() == 1) then
             player:startEvent (658)
         end
@@ -22,11 +22,11 @@ end
 
 function onTrigger(player, npc)
     -- Look at the "The Setting Sun" quest status and San d'Oria player's fame
-    theSettingSun = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
+    theSettingSun = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
 
     if (theSettingSun == QUEST_AVAILABLE  and
         player:getFameLevel(SANDORIA) >= 5 and
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) ~= QUEST_COMPLETED)
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) ~= QUEST_COMPLETED)
     then
         player:startEvent(654, 0, 535, 535) --The quest is offered to the player.
     elseif (theSettingSun == QUEST_ACCEPTED) then

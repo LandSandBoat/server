@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL) == QUEST_ACCEPTED and player:getCharVar("OutOfOneShell") == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL) == QUEST_ACCEPTED and player:getCharVar("OutOfOneShell") == 0) then
         if (trade:hasItemQty(17397, 3) and trade:getItemCount() == 3) then
             player:startEvent(84)
         end
@@ -21,7 +21,7 @@ end
 
 function onTrigger(player, npc)
 
-    OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+    OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_ACCEPTED and player:getCharVar("OutOfOneShell") == 1) then
         if (player:needToZone()) then
@@ -33,7 +33,7 @@ function onTrigger(player, npc)
         player:showText(npc, ID.text.RONAN_DIALOG_1)
     elseif (OutOfOneShell == QUEST_COMPLETED) then
         player:startEvent(89)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE) == QUEST_COMPLETED and player:getFameLevel(BASTOK) >= 2) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE) == QUEST_COMPLETED and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(82)
     else
         player:startEvent(37)

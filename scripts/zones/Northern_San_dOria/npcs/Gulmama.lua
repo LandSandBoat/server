@@ -17,10 +17,10 @@ end
 
 function onTrigger(player, npc)
 
-    local TrialByIce = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+    local TrialByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
     local WhisperOfFrost = player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local ClassReunion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local ClassReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
 
     ------------------------------------------------------------
@@ -58,7 +58,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 706 and option == 1) then
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
             player:delQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end
         player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)

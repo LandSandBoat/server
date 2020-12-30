@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, npc)
 
-    AyameAndKaede = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
+    AyameAndKaede = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
 
     if (AyameAndKaede == QUEST_ACCEPTED) then
 
@@ -35,13 +35,13 @@ function onTrigger(player, npc)
         else
             player:startEvent(27)
         end
-    elseif (AyameAndKaede == QUEST_COMPLETED and player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE) then
+    elseif (AyameAndKaede == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE) then
         player:startEvent(247)
     elseif (player:getCharVar("twentyInPirateYearsCS") == 2) then
         player:startEvent(262)
     elseif (player:getCharVar("twentyInPirateYearsCS") == 4) then
         player:startEvent(263)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 0) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 0) then
         player:startEvent(264)
     elseif (player:getCharVar("illTakeTheBigBoxCS") == 1) then
         player:startEvent(265)

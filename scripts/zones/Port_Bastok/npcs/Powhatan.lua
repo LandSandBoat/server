@@ -15,8 +15,8 @@ end
 
 function onTrigger(player, npc)
 
-    local WelcometoBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
-    local GuestofHauteur = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+    local WelcometoBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+    local GuestofHauteur = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
 
     if (WelcometoBastok ~= QUEST_COMPLETED) then
         local wtbStatus = player:getCharVar("WelcometoBastok_Event")

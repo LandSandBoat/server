@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
 
-    local aCraftsmansWork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local aCraftsmansWork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     if (player:getMainJob() == tpz.job.DRG and player:getMainLvl() >= AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then

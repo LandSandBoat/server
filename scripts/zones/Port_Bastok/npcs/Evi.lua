@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
 
-    PastPerfect = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
+    PastPerfect = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
 
     if (PastPerfect == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TATTERED_MISSION_ORDERS)) then
         player:startEvent(131)

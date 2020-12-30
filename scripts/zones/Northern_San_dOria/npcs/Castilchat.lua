@@ -12,14 +12,14 @@ require("scripts/globals/status")
 
 function onTrade(player, npc, trade)
     local count = trade:getItemCount()
-    if (trade:hasItemQty(1545, 1) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
+    if (trade:hasItemQty(1545, 1) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
         player:startEvent(734, 0, 1545, 4, 20)
     end
 end
 
 function onTrigger(player, npc)
 
-    local TrialSizeByIce = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+    local TrialSizeByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
 
     if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then -- Requires player to be Summoner at least lvl 20
         player:startEvent(733, 0, 1545, 4, 20)     --mini tuning fork of ice, zone, level

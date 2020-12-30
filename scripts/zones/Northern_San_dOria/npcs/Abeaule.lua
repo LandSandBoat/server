@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    theTraderInTheForest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
     if (theTraderInTheForest == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4367, 1) and trade:getItemCount() == 1) then -- Trade Batagreens
@@ -25,8 +25,8 @@ end
 
 function onTrigger(player, npc)
 
-    theTraderInTheForest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
-    medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
 
     if (theTraderInTheForest == QUEST_AVAILABLE) then
         if (player:getCharVar("theTraderInTheForestCS") == 1) then

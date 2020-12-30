@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 --
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(922, 2) and trade:getItemCount() == 2) then
             player:startEvent(18)
         end
@@ -21,7 +21,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FearOfTheDark = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
+    local FearOfTheDark = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
 
     if (FearOfTheDark == QUEST_AVAILABLE) then
         player:startEvent(19)
@@ -42,7 +42,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*200)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*200)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
         else

@@ -15,10 +15,10 @@ end
 
 function onTrigger(player, npc)
 
-    local TrialByEarth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+    local TrialByEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
     local WhisperOfTremors = player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local ThePuppetMaster = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+    local ThePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
 
     if (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 1) then
@@ -72,7 +72,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 258) then
         player:setCharVar("ThePuppetMasterProgress", 4)
     elseif (csid == 249 and option == 1) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
             player:delQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
         player:addQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)

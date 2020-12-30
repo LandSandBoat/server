@@ -13,15 +13,15 @@ require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1096, 1) and trade:getItemCount() == 1) then -- Trade Tavnazia Pass
             player:startEvent(690) -- Finish quest "Messenger from Beyond"
         end
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1097, 1) and trade:hasItemQty(12995, 1) and trade:getItemCount() == 2) then -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(13842, 1) and trade:getItemCount() == 1) then -- Trade Tavnazian Mask
             player:startEvent(692) -- Finish quest "Pieuje's Decision"
         end
@@ -30,7 +30,7 @@ end
 
 function onTrigger(player, npc)
 
-    messengerFromBeyond = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
+    messengerFromBeyond = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
 
     -- Checking levels and jobs for af quest
     mLvl = player:getMainLvl()

@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 
 function onTrade(player, npc, trade)
 
-    BiteDust = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+    BiteDust = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
 
     if (BiteDust ~= QUEST_AVAILABLE and trade:hasItemQty(1015, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -22,7 +22,7 @@ end
 
 function onTrigger(player, npc)
 
-    BiteDust = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+    BiteDust = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
 
     if (BiteDust == QUEST_AVAILABLE) then
         player:startEvent(191)
@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
     if (csid == 191) then
         player:addQuest(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
     elseif (csid == 193) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED) then
             player:addTitle(tpz.title.SAND_BLASTER)
             player:addFame(BASTOK, 120)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)

@@ -42,7 +42,7 @@ itemQuality = 0
         end
     end
 
-    GrowingFlowers = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
+    GrowingFlowers = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
 
     if (itemQuality == 2) then
         if (GrowingFlowers == QUEST_COMPLETED) then

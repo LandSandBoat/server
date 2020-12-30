@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
     local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS_OFFSET
-    local onSabbatical          = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+    local onSabbatical          = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress  = player:getCharVar("OnSabbatical")
     local pantsQuestProgress    = player:getCharVar("AF_SCH_PANTS")
     local gownQuestProgress     = player:getCharVar("AF_SCH_BODY")

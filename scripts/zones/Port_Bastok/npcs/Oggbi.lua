@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(13122, 1) and trade:getItemCount() == 1) then -- Trade Miner's Pendant
             player:startEvent(232) -- Finish Quest "Ghosts of the Past"
         end
@@ -28,8 +28,8 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local ghostsOfThePast = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
-    local theFirstMeeting = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
+    local ghostsOfThePast = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
+    local theFirstMeeting = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 

@@ -23,7 +23,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+    sermonQuest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_AVAILABLE) then
         player:startEvent(589)
