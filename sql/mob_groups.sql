@@ -3392,38 +3392,69 @@ INSERT INTO `mob_groups` VALUES (2483,4497,75,'Zebra_Zachary',0,128,0,0,0,0,0,0)
 -- Silver_Sea_Remnants (Zone 76)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5430,76,'Ashu_Talif_Crew2',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (2,263,76,'Ashu_Talif_Crew',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (3,5431,76,'Ashu_Talif_Crew3',0,128,0,0,9999,73,75,0);
-INSERT INTO `mob_groups` VALUES (4,5728,76,'Ashu_Talif_Crew4',0,128,0,0,0,73,75,0);
+-- Silver Sea Remnants I
+INSERT INTO `mob_groups` VALUES (1,5430,76,'Ashu_Talif_Crew_mnk',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (2,263,76,'Ashu_Talif_Crew_rng',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (3,5431,76,'Ashu_Talif_Crew_rdm',0,128,0,0,9999,73,75,0);
+INSERT INTO `mob_groups` VALUES (4,5728,76,'Ashu_Talif_Crew_cor',0,128,0,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (5,1887,76,'Hammerblow_Majanun',0,128,1272,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (6,1933,76,'Heraldic_Imp',0,128,0,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (7,933,76,'Deadpan_Devilet',0,128,0,0,0,79,79,0);
-INSERT INTO `mob_groups` VALUES (8,963,76,'Dekka',0,128,602,0,0,79,80,0);
-INSERT INTO `mob_groups` VALUES (9,1017,76,'Devilet',0,128,0,0,0,79,80,0);
-INSERT INTO `mob_groups` VALUES (10,3191,76,'Powderkeg_Yanadahn',0,128,2019,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (11,221,76,'Archaic_Rampart',0,128,154,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (12,6507,76,'Haunt',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (13,6555,76,'Guard_Skeleton',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (14,1471,76,'Garm',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (15,6533,76,'Doom_Mage',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (16,218,76,'Archaic_Gear',0,128,154,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (17,219,76,'Archaic_Gears',0,128,154,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (18,1862,76,'Gyroscopic_Gear',0,128,1262,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (19,1863,76,'Gyroscopic_Gears',0,128,1263,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (20,216,76,'Archaic_Chariot',0,128,0,0,0,80,82,0);
-INSERT INTO `mob_groups` VALUES (21,2878,76,'Night_Eft',0,128,0,0,0,73,73,0);
-INSERT INTO `mob_groups` VALUES (22,2431,76,'Long-Armed_Chariot',0,128,1531,0,0,83,85,0);
-INSERT INTO `mob_groups` VALUES (23,5430,76,'Ashu_Talif_Crew2',0,128,0,0,0,76,77,0);
-INSERT INTO `mob_groups` VALUES (24,263,76,'Ashu_Talif_Crew',0,128,0,0,0,76,77,0);
-INSERT INTO `mob_groups` VALUES (25,5431,76,'Ashu_Talif_Crew3',0,128,0,0,9999,76,77,0);
-INSERT INTO `mob_groups` VALUES (26,5728,76,'Ashu_Talif_Crew4',0,128,0,0,0,76,77,0);
-INSERT INTO `mob_groups` VALUES (27,1448,76,'Gakke',0,128,0,0,0,79,79,0);
-INSERT INTO `mob_groups` VALUES (28,1079,76,'Don_Poroggo',0,128,673,0,0,82,82,0);
-INSERT INTO `mob_groups` VALUES (29,3456,76,'Sand_Lizard',0,128,0,0,0,73,73,0);
-INSERT INTO `mob_groups` VALUES (30,962,76,'Deinonychus',0,128,0,0,0,73,73,0);
-INSERT INTO `mob_groups` VALUES (31,732,76,'Citadel_Chelonian',0,128,474,0,0,73,73,0);
-INSERT INTO `mob_groups` VALUES (32,6556,76,'Guard_Skeleton',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (6,5430,76,'Ashu_Talif_Crew_mnk',0,128,0,0,0,76,77,0);
+INSERT INTO `mob_groups` VALUES (7,263,76,'Ashu_Talif_Crew_rng',0,128,0,0,0,76,77,0);
+INSERT INTO `mob_groups` VALUES (8,5431,76,'Ashu_Talif_Crew_rdm',0,128,0,0,9999,76,77,0);
+INSERT INTO `mob_groups` VALUES (9,5728,76,'Ashu_Talif_Crew_cor',0,128,0,0,0,76,77,0);
+INSERT INTO `mob_groups` VALUES (10,1933,76,'Heraldic_Imp',0,128,0,0,0,73,75,0);
+INSERT INTO `mob_groups` VALUES (11,933,76,'Deadpan_Devilet',0,128,0,0,0,79,79,0);
+INSERT INTO `mob_groups` VALUES (12,963,76,'Dekka',0,128,602,0,0,79,80,0);
+INSERT INTO `mob_groups` VALUES (13,1448,76,'Gakke',0,128,0,0,0,79,79,0);
+INSERT INTO `mob_groups` VALUES (14,1017,76,'Devilet',0,128,0,0,0,79,80,0);
+INSERT INTO `mob_groups` VALUES (15,3191,76,'Powderkeg_Yanadahn',0,128,2019,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (17,221,76,'Archaic_Rampart',0,128,154,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (18,6507,76,'Haunt',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (19,1471,76,'Garm',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (20,6555,76,'Guard_Skeleton_blm',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (21,6533,76,'Doom_Mage',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (22,218,76,'Archaic_Gear',0,128,154,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (23,219,76,'Archaic_Gears',0,128,154,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (24,1862,76,'Gyroscopic_Gear',0,128,1262,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (25,1079,76,'Don_Poroggo',0,128,673,0,0,82,82,0);
+INSERT INTO `mob_groups` VALUES (26,6556,76,'Guard_Skeleton_war',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (27,1863,76,'Gyroscopic_Gears',0,128,1263,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (28,216,76,'Archaic_Chariot',0,128,0,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (29,2878,76,'Night_Eft',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (30,3456,76,'Sand_Lizard',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (31,962,76,'Deinonychus',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (32,732,76,'Citadel_Chelonian',0,128,474,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (33,2431,76,'Long-Armed_Chariot',0,128,1531,0,0,83,85,0);
+
+-- Silver Sea Remnants II
+-- TODO: capture levels from retail
+-- TODO: capture jobs of Ashu Talif Crew from retail, and assign groups 43, 44, and 45
+INSERT INTO `mob_groups` VALUES (34,221,76,'Archaic_Rampart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,0,76,'Doomed',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,0,76,'Qiqirn',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,2065,76,'Imp',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,0,76,'Voracious_Carrion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,197,76,'Apkallu',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,0,76,'Apkallu_Avenger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,0,76,'Seafarer_Piliproon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,5430,76,'Ashu_Talif_Crew_mnk',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,263,76,'Ashu_Talif_Crew_rng',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,5431,76,'Ashu_Talif_Crew_rdm',0,128,0,0,9999,0,0,0);
+INSERT INTO `mob_groups` VALUES (45,5728,76,'Ashu_Talif_Crew_cor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,76,'Fomor_Windwalker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,76,'Stoneplate_Ghalimad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,76,'Quickdirk_Kahladijn',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,3215,76,'Psycheflayer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,76,'Lunatic_Psycheflayer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,6722,76,'Orobon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,76,'Argent-eyed_Orobon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,218,76,'Archaic_Gear',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,219,76,'Archaic_Gears',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,2431,76,'Long-Armed_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,216,76,'Archaic_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,39,76,'Acrolith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,76,'Dvergr',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,0,76,'Bloodthirsty_Dweorg',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Nyzul_Isle (Zone 77)
