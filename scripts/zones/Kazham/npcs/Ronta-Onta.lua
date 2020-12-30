@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
 
-    TrialByFire = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+    TrialByFire = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
     WhisperOfFlames = player:hasKeyItem(tpz.ki.WHISPER_OF_FLAMES)
     realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
 
@@ -48,7 +48,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 270 and option == 1) then
-        if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
             player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)

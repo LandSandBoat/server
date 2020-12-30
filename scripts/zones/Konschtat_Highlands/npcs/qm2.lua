@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 1151) and -- Oriental Steel
         not GetMobByID(ID.mob.FORGER):isSpawned()
     then

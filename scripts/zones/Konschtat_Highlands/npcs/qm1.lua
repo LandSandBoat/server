@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
         player:addKeyItem(tpz.ki.TATTERED_MISSION_ORDERS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TATTERED_MISSION_ORDERS)
     else

@@ -12,11 +12,11 @@ local ID = require("scripts/zones/Kazham/IDs")
 
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
         if (trade:getGil() >= player:getCharVar("MAGRIFFON_GIL_REQUEST")) then
             player:startEvent(146)
         end
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS) == QUEST_ACCEPTED and player:getCharVar("EVEN_MORE_GULLIBLES_PROGRESS") == 0) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS) == QUEST_ACCEPTED and player:getCharVar("EVEN_MORE_GULLIBLES_PROGRESS") == 0) then
         if (trade:getGil() >= 35000) then
             player:startEvent(150, 0, 256)
         end
@@ -24,8 +24,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local gulliblesTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
-    local evenmoreTravelsStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+    local gulliblesTravelsStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
+    local evenmoreTravelsStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
 
     if (gulliblesTravelsStatus == QUEST_ACCEPTED) then
         local magriffonGilRequest = player:getCharVar("MAGRIFFON_GIL_REQUEST")
