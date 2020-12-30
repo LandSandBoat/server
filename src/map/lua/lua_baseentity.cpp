@@ -1317,11 +1317,12 @@ bool CLuaBaseEntity::atPoint(sol::variadic_args va)
     }
     else if (va.get_type(0) == sol::type::table)
     {
-        sol::table table = va.get<sol::table>(0);
+        auto table = va.get<sol::table>(0);
+        auto vec   = table.as<std::vector<float>>();
 
-        posX = table[0];
-        posY = table[1];
-        posZ = table[2];
+        posX = vec[0];
+        posY = vec[1];
+        posZ = vec[2];
     }
 
     return m_PBaseEntity->loc.p.x == posX && m_PBaseEntity->loc.p.y == posY && m_PBaseEntity->loc.p.z == posZ;
