@@ -12,9 +12,9 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
         player:startEvent(629)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED) then
         local Fired = player:getCharVar("Fired")
         if Fired == 1 then
             player:startEvent(567) -- i got fired in a day

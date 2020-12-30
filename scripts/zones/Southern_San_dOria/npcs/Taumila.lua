@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(884, 3) and trade:getItemCount() == 3) then
             player:startEvent(572)
         end
@@ -23,7 +23,7 @@ end
 
 function onTrigger(player, npc)
 
-    local tigersTeeth = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+    local tigersTeeth = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
 
     if (player:getFameLevel(SANDORIA) >= 3 and tigersTeeth == QUEST_AVAILABLE) then
         player:startEvent(574)
@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.FANG_FINDER)
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
         else

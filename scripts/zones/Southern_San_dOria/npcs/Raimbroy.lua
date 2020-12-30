@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
     -- "The Sweetest Things" quest status var
-    local theSweetestThings = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
+    local theSweetestThings = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
 
     if (theSweetestThings ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(4370, 5) and trade:getItemCount() == 5) then
@@ -24,7 +24,7 @@ end
 
 function onTrigger(player, npc)
 
-    local theSweetestThings = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
+    local theSweetestThings = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
 
     -- "The Sweetest Things" Quest Dialogs
     if (player:getFameLevel(SANDORIA) >= 2 and theSweetestThings == QUEST_AVAILABLE) then
@@ -66,7 +66,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addTitle(tpz.title.APIARIST)
         player:addGil(GIL_RATE*400)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
         else

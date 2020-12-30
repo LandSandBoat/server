@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local grimySignpost = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
+    local grimySignpost = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     if (grimySignpost == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then
         player:startEvent(45)
     elseif (grimySignpost == QUEST_ACCEPTED) then

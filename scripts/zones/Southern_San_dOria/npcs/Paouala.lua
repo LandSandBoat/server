@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4527, 1) and trade:getItemCount() == 1) then
             player:startEvent(84)
         end
@@ -23,7 +23,7 @@ end
 
 function onTrigger(player, npc)
 
-    sleeplessNights = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+    sleeplessNights = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
     if (player:getFameLevel(SANDORIA) >= 2 and sleeplessNights == QUEST_AVAILABLE) then
         player:startEvent(85)

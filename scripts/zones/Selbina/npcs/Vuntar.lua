@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.CARGO) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CARGO) ~= QUEST_AVAILABLE then
         if tonumber(os.date("%j")) ~= player:getCharVar("VuntarCanBuyItem_date") then
             if npcUtil.tradeHas(trade, 4529) then
                 player:startEvent(52, 1) -- Can Buy rolanberry (881 ce)
@@ -26,7 +26,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getMainLvl() >= 20 and player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE then
+    if player:getMainLvl() >= 20 and player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE then
         player:startEvent(50, 4365) -- Start quest "Cargo"
     elseif player:getMainLvl() < 20 then
         player:startEvent(53) -- Dialog for low level or low fame
@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 52 then
         player:setCharVar("VuntarCanBuyItem_date", os.date("%j"))
 
-        if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
             player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.CARGO)
             player:addFame(SELBINA, 30)
         end

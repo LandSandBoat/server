@@ -14,11 +14,11 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
     -- SIGNED IN BLOOD
-    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
+    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
         player:startEvent(734, 0, 1662)
 
     -- RIDING ON THE CLOUDS
-    elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
+    elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
         player:setCharVar("ridingOnTheClouds_1", 0)
         npcUtil.giveKeyItem(player, tpz.ki.SCOWLING_STONE)
         player:confirmTrade()
@@ -26,9 +26,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local signedInBlood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+    local signedInBlood = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
-    local teaWithATonberry = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
+    local teaWithATonberry = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
     -- SHARPENING THE SWORD
     if player:getCharVar("sharpeningTheSwordCS") >= 2 then

@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-    local ASquiresTest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
+    local ASquiresTest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
 
     if ASquiresTest == (QUEST_AVAILABLE) then
         player:startEvent(618) -- im looking for the examiner

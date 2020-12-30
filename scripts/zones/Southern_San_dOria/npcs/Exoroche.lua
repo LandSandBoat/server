@@ -19,7 +19,7 @@ function onTrigger(player, npc)
 --    player:startEvent(19)  -- thanks for your help i have to tell trion -- under oath
 --     player:startEvent(77)    -- a boys dream
 -- "Father and Son" Event Dialogs
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_ACCEPTED) then
         player:startEvent(542)
     elseif (player:getCharVar("aBoysDreamCS") == 2) then
         player:startEvent(50)

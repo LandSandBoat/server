@@ -13,7 +13,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) == QUEST_ACCEPTED and player:getCharVar("UnderOathCS") == 0) then   -- Quest: Under Oath - PLD AF3
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) == QUEST_ACCEPTED and player:getCharVar("UnderOathCS") == 0) then   -- Quest: Under Oath - PLD AF3
         player:startEvent(7) --Under Oath - mentions the boy missing
     elseif (player:getCharVar("UnderOathCS") == 3 and player:hasKeyItem(tpz.ki.MIQUES_PAINTBRUSH)) then
         player:startEvent(5) --Under Oath - upset about the paintbrush

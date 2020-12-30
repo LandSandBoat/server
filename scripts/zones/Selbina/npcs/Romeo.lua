@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING) == QUEST_ACCEPTED and
         (
             npcUtil.tradeHas(trade, {{16482, 5}}) or
             npcUtil.tradeHas(trade, {{16483, 5}}) or
@@ -25,7 +25,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    donateToRecycling = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
+    donateToRecycling = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
 
     if donateToRecycling == QUEST_AVAILABLE then
         player:startEvent(20) -- Start quest "Donate to Recycling"
