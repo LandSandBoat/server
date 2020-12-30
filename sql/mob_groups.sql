@@ -3238,40 +3238,66 @@ INSERT INTO `mob_groups` VALUES (12,0,72,'Vidmapire',0,128,0,0,0,99,99,0);
 -- Zhayolm_Remnants (Zone 73)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2545,73,'Mamool_Ja_Zenist',0,128,1605,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2,3181,73,'Poroggo_Gent',0,128,2016,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3,4508,73,'Ziz',0,128,2806,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (4,4117,73,'Vagrant_Lindwurm',0,128,2533,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5,577,73,'Bull_Bugard',0,128,384,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6,1098,73,'Draco_Lizard',0,128,696,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7,2533,73,'Mamool_Ja_Savant',0,128,696,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8,4389,73,'Wyvern',0,128,2678,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9,2508,73,'Mamool_Ja_Bounder',0,128,1589,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (10,2535,73,'Mamool_Ja_Spearman',0,128,608,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (11,2541,73,'Mamool_Jas_Wyvern',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (12,2138,73,'Jakko',0,128,1403,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (13,3183,73,'Poroggo_Madame',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (14,2538,73,'Mamool_Ja_Strapper',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (15,2539,73,'Mamool_Jas_Lizard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (16,221,73,'Archaic_Rampart',0,128,154,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (17,2534,73,'Mamool_Ja_Sophist',0,128,1599,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (18,2526,73,'Mamool_Ja_Mimicker',0,128,1599,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (19,1345,73,'First_Rampart',0,128,833,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (20,3526,73,'Second_Rampart',0,128,833,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (21,3898,73,'Third_Rampart',0,128,833,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (22,1413,73,'Fourth_Rampart',0,128,157,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (23,218,73,'Archaic_Gear',0,128,154,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (24,216,73,'Archaic_Chariot',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (25,219,73,'Archaic_Gears',0,128,157,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (26,364,73,'Battleclad_Chariot',0,128,238,0,0,0,0,0);
+-- Zhayolm Remnants I
+-- TODO: capture retail levels for all groups in this zone
+INSERT INTO `mob_groups` VALUES (1,3223,73,'Puk',0,128,2037,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,2545,73,'Mamool_Ja_Zenist',0,128,1605,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,3181,73,'Poroggo_Gent',0,128,2016,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,4508,73,'Ziz',0,128,2806,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,4117,73,'Vagrant_Lindwurm',0,128,2533,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,577,73,'Bull_Bugard',0,128,384,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,3183,73,'Poroggo_Madame',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,1098,73,'Draco_Lizard',0,128,696,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,2533,73,'Mamool_Ja_Savant',0,128,696,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,4389,73,'Wyvern',0,128,2678,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,2508,73,'Mamool_Ja_Bounder',0,128,1589,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,2535,73,'Mamool_Ja_Spearman',0,128,608,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (13,2541,73,'Mamool_Jas_Wyvern',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,2138,73,'Jakko',0,128,1403,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (15,2538,73,'Mamool_Ja_Strapper',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (16,2539,73,'Mamool_Jas_Lizard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (17,221,73,'Archaic_Rampart',0,128,154,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (18,4275,73,'Wajaom_Tiger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,2534,73,'Mamool_Ja_Sophist',0,128,1599,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,2526,73,'Mamool_Ja_Mimicker',0,128,1599,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,1345,73,'First_Rampart',0,128,833,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,3526,73,'Second_Rampart',0,128,833,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,3898,73,'Third_Rampart',0,128,833,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (24,1413,73,'Fourth_Rampart',0,128,157,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (25,3383,73,'Rogue_Marid',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,218,73,'Archaic_Gear',0,128,154,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,3670,73,'Slime_Mold',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,216,73,'Archaic_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,219,73,'Archaic_Gears',0,128,157,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,2669,73,'Mindgazer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,3976,73,'Torama',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,1806,73,'Greater_Manticore',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,364,73,'Battleclad_Chariot',0,128,238,0,0,0,0,0);
 
-INSERT INTO `mob_groups` VALUES (2389,1806,73,'Greater_Manticore',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2400,2669,73,'Mindgazer',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2403,3223,73,'Puk',0,128,2037,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2404,3383,73,'Rogue_Marid',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2406,3670,73,'Slime_Mold',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2408,3976,73,'Torama',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2410,4275,73,'Wajaom_Tiger',0,128,0,0,0,0,0,0);
+-- Zhayolm Remnants II
+-- TODO: capture retail levels for all groups in this zone
+INSERT INTO `mob_groups` VALUES (34,831,73,'Crawler',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,2545,73,'Mamool_Ja_Zenist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,2538,73,'Mamool_Ja_Strapper',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,2539,73,'Mamool_Jas_Lizard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,0,73,'Poroggo_Comtesse',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,3934,73,'Toad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,2526,73,'Mamool_Ja_Mimicker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,2508,73,'Mamool_Ja_Bounder',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,218,73,'Archaic_Gear',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,2534,73,'Mamool_Ja_Sophist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,1040,73,'Diremite',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (45,221,73,'Archaic_Rampart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,219,73,'Archaic_Gears',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,3221,73,'Pugil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,2533,73,'Mamool_Ja_Savant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,216,73,'Archaic_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,73,'Mamool_Ja_Backstabber',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,364,73,'Battleclad_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,73,'Mamool_Ja_Antiquary',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,39,73,'Acrolith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,2018,73,'Hydra',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,73,'Enraged_Alfard',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Arrapago_Remnants (Zone 74)
