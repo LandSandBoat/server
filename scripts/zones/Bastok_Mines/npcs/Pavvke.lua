@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 
 count = trade:getItemCount()
 SilverTag = trade:hasItemQty(13116, 1)
-Fallen = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 
     if (Fallen == 1 and SilverTag == true and count == 1) then
         player:tradeComplete()
@@ -26,7 +26,7 @@ end
 
 function onTrigger(player, npc)
 
-Fallen = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 pLevel = player:getMainLvl(player)
 pFame = player:getFameLevel(BASTOK)
 

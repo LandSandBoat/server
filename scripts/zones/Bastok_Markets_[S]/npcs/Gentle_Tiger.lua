@@ -11,7 +11,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local onSabbatical = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+    local onSabbatical = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
     if (onSabbatical == QUEST_ACCEPTED) then
         if (onSabbaticalProgress == 1) then
@@ -19,7 +19,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(47)
         end
-    elseif (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 5) then
             player:startEvent(160)
         else

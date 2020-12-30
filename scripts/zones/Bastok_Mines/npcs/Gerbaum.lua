@@ -15,7 +15,7 @@ count = trade:getItemCount()
 ZeruhnSoot = trade:hasItemQty(560, 3)
 
     if (ZeruhnSoot == true and count == 3) then
-        MineSweep = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+        MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
         if (MineSweep >= 1) then
             player:tradeComplete()
             player:startEvent(109)
@@ -26,7 +26,7 @@ end
 
 function onTrigger(player, npc)
 
-MineSweep = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
 
     if (MineSweep == 0) then
         player:startEvent(108)
@@ -48,7 +48,7 @@ end
 
 function onEventFinish(player, csid, option)
 
-MineSweep = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
 
     if (csid == 108) then
         if (MineSweep == 0) then

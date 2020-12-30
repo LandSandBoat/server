@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(576, 1) and trade:getItemCount() == 1) then
@@ -21,7 +21,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear == QUEST_AVAILABLE) then
         player:startEvent(81)

@@ -13,7 +13,7 @@ require("scripts/globals/utils")
 
 function onTrade(player, npc, trade)
 
-    local Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+    local Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
 
     if (Vengeful ~= QUEST_AVAILABLE) then
         QuadavHelm = trade:hasItemQty(501, 1)
@@ -25,12 +25,12 @@ end
 
 function onTrigger(player, npc)
 
-    local Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+    local Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
     local Fame = player:getFameLevel(BASTOK)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 16)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 16)) then
         player:startEvent(506)
     elseif (Vengeful == QUEST_AVAILABLE and Fame >= 3) then
         player:startEvent(106)
@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
     if (csid == 106) then
         player:addQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
     elseif (csid == 107) then
-        Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+        Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
         if (Vengeful == QUEST_ACCEPTED) then
             player:addTitle(tpz.title.AVENGER)
             player:addFame(BASTOK, 120)

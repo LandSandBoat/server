@@ -10,7 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
-    local groceries = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GROCERIES)
+    local groceries = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
     local groceriesProgress = player:getCharVar("Groceries")
 
     -- GROCERIES (trade meat jerky)
@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local groceries = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GROCERIES)
+    local groceries = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
     local groceriesProgress = player:getCharVar("Groceries")
 
     -- GROCERIES

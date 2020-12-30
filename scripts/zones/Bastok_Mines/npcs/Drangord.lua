@@ -10,7 +10,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_ACCEPTED then
         player:startEvent(97)
     else
         player:startEvent(21)

@@ -34,11 +34,11 @@ function onZoneIn(player, prevZone)
     end
 
     if prevZone == tpz.zone.PASHHOW_MARSHLANDS then
-        if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED and player:getCharVar("ChaosbringerKills") >= 100 then
+        if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED and player:getCharVar("ChaosbringerKills") >= 100 then
             cs = 121
         elseif player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS and player:getCharVar("MissionStatus") == 1 then
             cs = 120
-        elseif player:getMainJob() == tpz.job.DRK and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.DARK_PUPPET) == QUEST_COMPLETED and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_AVAILABLE then
+        elseif player:getMainJob() == tpz.job.DRK and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_AVAILABLE then
             cs = 122
         end
     end
@@ -54,7 +54,7 @@ function onRegionEnter(player, region)
     if region:GetRegionID() <= 6 then
         if not player:hasStatusEffect(tpz.effect.CURSE_I) and not player:hasStatusEffect(tpz.effect.SILENCE) then
             player:addStatusEffect(tpz.effect.CURSE_I, 50, 0, 300)
-            if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
+            if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
                 player:setCharVar("cCollectCurse", 1)
             end
         end

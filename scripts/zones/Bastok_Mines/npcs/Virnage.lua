@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    AltanaSorrow = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
+    AltanaSorrow = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
 
     if (AltanaSorrow == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 4 and player:getMainLvl() >= 10) then
         player:startEvent(141) -- Start quest "Altana's Sorrow"

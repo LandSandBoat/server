@@ -32,14 +32,14 @@ end
 
 function onTrigger(player, npc)
 
-    local theDoorman = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
     local theTalekeeperTruthCS = player:getCharVar("theTalekeeperTruthCS")
     local Wait1DayForAF3 = player:getCharVar("DeidoggWait1DayForAF3")
     local theTalekeeperGiftCS = player:getCharVar("theTalekeeperGiftCS")
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
         player:startEvent(504)
     elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 50) then
         if (theTalekeeperTruthCS == 1) then

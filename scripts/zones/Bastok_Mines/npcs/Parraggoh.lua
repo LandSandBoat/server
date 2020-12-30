@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local BeautyAndTheGalka = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+    local BeautyAndTheGalka = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
 
     if player:hasKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)

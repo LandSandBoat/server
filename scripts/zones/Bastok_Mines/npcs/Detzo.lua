@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 
 function onTrade(player, npc, trade)
 
-    Rivals = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
 
     if (Rivals == QUEST_ACCEPTED) then
         FreeSlots = player:getFreeSlotsCount()
@@ -34,7 +34,7 @@ end
 
 function onTrigger(player, npc)
 
-    Rivals = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
 
     if (player:getCharVar("theTalekeeperGiftCS") == 1) then
         player:startEvent(171)

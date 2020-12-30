@@ -23,14 +23,14 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local bladeDarkness = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS)
+    local bladeDarkness = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
     elseif (player:getMainLvl() >= ADVANCED_JOB_LEVEL and  bladeDarkness == QUEST_AVAILABLE) then
         --DARK KNIGHT QUEST
         player:startEvent(99)
-    elseif (bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE) then
+    elseif (bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE) then
         player:startEvent(130)
     elseif ((player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == true)
     or ((player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 3)))
