@@ -143,10 +143,10 @@ function moogleEventFinish(player, csid, option)
             player:setCharVar("MoghouseExplication", 0)
 
         elseif csid == 30023 then
-            player:completeMission(AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
+            player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
             player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
         elseif csid == 30024 then
-            player:completeMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
             player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then

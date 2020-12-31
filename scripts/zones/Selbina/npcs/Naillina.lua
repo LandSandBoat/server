@@ -22,7 +22,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 14 and option == 1 then
-        player:completeMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
     end
 end

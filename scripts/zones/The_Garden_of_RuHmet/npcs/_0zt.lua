@@ -24,7 +24,7 @@ function onEventFinish(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
     if (csid==204) then
-        player:completeMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
         player:setCharVar("PromathiaStatus", 0)
     end

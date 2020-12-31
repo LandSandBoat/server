@@ -66,7 +66,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 176 then
         -- Flag ROV 1-3 Selbina Route (1)
         player:setCharVar("RhapsodiesStatus", 1)
-        player:completeMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end

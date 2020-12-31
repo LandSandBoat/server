@@ -37,7 +37,7 @@ function onTrigger(player, npc)
             then
                 player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.LIGHT_FRAGMENT)
                 player:addTitle(tpz.title.BEARER_OF_THE_EIGHT_PRAYERS)
-                player:completeMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
+                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
                 player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
             else
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_FRAGMENT)

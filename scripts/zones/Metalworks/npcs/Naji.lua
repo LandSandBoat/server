@@ -128,7 +128,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 710) then
         player:delKeyItem(tpz.ki.ZERUHN_REPORT)
-        player:completeMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT)
+        player:completeMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT)
     elseif (csid == 713) then
         player:addKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)

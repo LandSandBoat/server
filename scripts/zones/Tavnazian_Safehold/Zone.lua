@@ -66,12 +66,12 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 101) then
-        player:completeMission(COP, tpz.mission.id.cop.AN_INVITATION_WEST)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_INVITATION_WEST)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LOST_CITY)
         player:setCharVar("PromathiaStatus", 0)
     elseif (csid == 105) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_VOWS)
     elseif (csid == 107) then
         player:setCharVar("PromathiaStatus", 1)

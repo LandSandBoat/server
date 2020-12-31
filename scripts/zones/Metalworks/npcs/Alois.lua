@@ -48,13 +48,13 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BASTOK91", 1)
     elseif (csid == 776) then
         player:setCharVar("BASTOK91", 0)
-        player:completeMission(BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH)
+        player:completeMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH)
         player:addRankPoints(1500)
         player:setCharVar("OptionalcsCornelia", 1)
     elseif (csid == 805) then
         if npcUtil.completeQuest(
             player,
-            BASTOK,
+            tpz.quest.log_id.BASTOK,
             tpz.quest.id.bastok.FADED_PROMISES,
             {item = 17775, tpz.title.ASSASSIN_REJECT, var = {"FadedPromises"}, fame=10})
         then

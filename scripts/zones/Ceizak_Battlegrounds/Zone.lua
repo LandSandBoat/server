@@ -59,7 +59,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 3 then
-        player:completeMission(SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
         player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
     end
 end

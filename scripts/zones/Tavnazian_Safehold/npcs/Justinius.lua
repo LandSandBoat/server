@@ -47,13 +47,13 @@ function onEventFinish(player, csid, option)
 
     if csid == 113 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.DISTANT_BELIEFS)
+        player:completeMission(tpz.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
         player:addMission(tpz.mission.log_id.COP, copMissions.AN_ETERNAL_MELODY)
     elseif csid == 109 then
         player:setCharVar("PromathiaStatus", 3)
     elseif csid == 110 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.THE_SAVAGE)
+        player:completeMission(tpz.mission.log_id.COP, copMissions.THE_SAVAGE)
         player:addMission(tpz.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
         player:addTitle(tpz.title.NAGMOLADAS_UNDERLING)
     end

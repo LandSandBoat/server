@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_CELESTIAL_NEXUS then
-            player:completeMission(ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
+            player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
             player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.AWAKENING)
             player:addTitle(tpz.title.BURIER_OF_THE_ILLUSION)
             player:setCharVar("ZilartStatus", 0)

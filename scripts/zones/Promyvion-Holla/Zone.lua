@@ -23,7 +23,7 @@ function onZoneIn(player, prevZone)
     end
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
-        player:completeMission(COP, tpz.mission.id.cop.BELOW_THE_ARKS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS) -- start mission 1.3
         player:setCharVar("PromathiaStatus", 0)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS then

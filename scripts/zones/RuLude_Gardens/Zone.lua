@@ -102,7 +102,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 65 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ROAD_FORKS) -- THE_ROAD_FORKS -- global mission 3.3
         -- We can't have more than 1 current mission at the time, so we keep The road forks as current mission
         -- progress are recorded in the following two variables
@@ -110,7 +110,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("EMERALD_WATERS_Status", 1) -- EMERALD_WATERS-- 3-3A: San d'Oria Road
     elseif csid == 10047 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_PLACE_TO_RETURN)
     elseif csid == 10048 then
         player:setCharVar("PromathiaStatus", 1)
@@ -128,19 +128,19 @@ function onEventFinish(player, csid, option)
             if player:getFreeSlotsCount() == 0 then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2184)
             else
-                player:completeMission(TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
+                player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
                 player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.WESTERLY_WINDS)
                 player:setCharVar("AhtUrganStatus", 0)
                 player:addItem(2184, 10)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 2184)
             end
         else
-            player:completeMission(TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
+            player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
             player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.WESTERLY_WINDS)
             player:setCharVar("AhtUrganStatus", 0)
         end
     elseif csid == 10097 then
-        player:completeMission(TOAU, tpz.mission.id.toau.ALLIED_RUMBLINGS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.ALLIED_RUMBLINGS)
         player:needToZone(true)
         player:setCharVar("TOAUM40_STARTDAY", VanadielDayOfTheYear())
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.UNRAVELING_REASON)

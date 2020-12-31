@@ -30,7 +30,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 3137 then
         npcUtil.giveKeyItem(player, tpz.ki.NYZUL_ISLE_ROUTE)
-        player:completeMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
     elseif csid == 3141 then
         npcUtil.giveKeyItem(player, tpz.ki.NYZUL_ISLE_ROUTE)

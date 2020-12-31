@@ -249,7 +249,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ShantottoCS", 0)
 
     elseif csid == 506 then
-        player:completeMission(AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
+        player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
         player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST

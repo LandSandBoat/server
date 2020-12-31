@@ -53,7 +53,7 @@ end
 function onEventFinish(player, csid, option)
 
     if csid == 21 then
-        player:completeMission(TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
         player:setCharVar("AhtUrganStatus", 0)
         player:setCharVar("TOAUM31_PERMITDAY", 0)
         player:setTitle(tpz.title.NASHMEIRAS_MERCENARY)

@@ -24,7 +24,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 7) then
-        player:completeMission(TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
         player:setCharVar("AhtUrganStatus", 0)
         player:setTitle(tpz.title.EMISSARY_OF_THE_EMPRESS)
         player:addKeyItem(tpz.ki.LUMINIAN_DAGGER)

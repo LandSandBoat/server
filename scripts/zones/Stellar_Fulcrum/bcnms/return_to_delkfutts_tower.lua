@@ -33,7 +33,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER then
-            player:completeMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+            player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
             player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ROMAEVE)
             player:setCharVar("ZilartStatus", 0)
         end

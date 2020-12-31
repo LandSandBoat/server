@@ -84,7 +84,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.FIFTH_GLOWING_MANA_ORB);
         player:delKeyItem(tpz.ki.SIXTH_GLOWING_MANA_ORB);
     elseif (csid == 71) then
-        player:completeMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
+        player:completeMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.BURGEONING_DREAD)
         player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end
 end

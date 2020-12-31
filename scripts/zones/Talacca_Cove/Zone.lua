@@ -34,7 +34,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 106) then
-        player:completeMission(TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
         player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
         player:addKeyItem(tpz.ki.PERCIPIENT_EYE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERCIPIENT_EYE)

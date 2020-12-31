@@ -34,7 +34,7 @@ function onEventFinish(player, csid, option)
     -- Retail packet captures have been marked {R}. Please don't change them.
     if (csid == 2 and option == 1 ) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
         player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}
     elseif (csid == 50 and option == 1) then

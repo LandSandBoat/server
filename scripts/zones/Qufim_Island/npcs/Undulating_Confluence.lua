@@ -28,7 +28,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 63 then
-        player:completeMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LIONS_ROAR)
     elseif csid == 64 then
         player:setPos(-338, 6, -225, 172, 288)

@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 21 then
         player:startEvent(22)
     elseif csid == 22 then
-        player:completeMission(TOAU, tpz.mission.id.toau.UNRAVELING_REASON)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.UNRAVELING_REASON)
         player:setTitle(tpz.title.ENDYMION_PARATROOPER)
         player:setCharVar("TOAUM40_STARTDAY", 0)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)

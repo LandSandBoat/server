@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 1)
         player:startEvent(9)
     elseif (csid == 22 ) then
-        player:completeMission(COP, tpz.mission.id.cop.TENDING_AGED_WOUNDS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.TENDING_AGED_WOUNDS)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED)
         player:setCharVar("PromathiaStatus", 0)
         player:startEvent(10)

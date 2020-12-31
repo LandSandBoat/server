@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Raptor_Rapture_Status", 4)
         end
     elseif csid == 2 then
-        player:completeMission(SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
+        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
         player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
     end
 end

@@ -28,7 +28,7 @@ function onEventFinish(player, csid, option)
     if ((option == 2) and (RychardetheChef == QUEST_AVAILABLE) and (tonumber(QuestStatus) == 0)) then
         player:setCharVar("QuestRychardetheChef_var", 1);  -- first stage of rycharde the chef quest
     elseif csid == 50 and option == 1 then
-        player:completeMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
     end
 

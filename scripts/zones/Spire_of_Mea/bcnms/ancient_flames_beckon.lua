@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
 
         -- first promyvion completed
         if player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS then
-            player:completeMission(COP, tpz.mission.id.cop.BELOW_THE_ARKS)
+            player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS)
             player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
             player:setCharVar("cspromy2", 1)
             player:setCharVar("PromathiaStatus", 0)
@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
 
             -- final promyvion completed
             else
-                player:completeMission(COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
+                player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
                 player:setCharVar("PromathiaStatus", 0)
                 player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_INVITATION_WEST)
                 player:addKeyItem(ki)

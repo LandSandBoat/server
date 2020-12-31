@@ -174,7 +174,7 @@ function onEventFinish(player, csid, option)
 
     if csid == 1 then
         player:addKeyItem(tpz.ki.ASTRAL_COMPASS)
-        player:completeMission(TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.ASTRAL_WAVES)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASTRAL_COMPASS)
     elseif csid == 2 then
@@ -182,12 +182,12 @@ function onEventFinish(player, csid, option)
     elseif csid == 3 then
         player:setCharVar("TransformationsProgress", 4)
     elseif csid == 7 then
-        player:completeMission(TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
         player:setTitle(tpz.title.NAJAS_COMRADEINARMS)
         player:setCharVar("AhtUrganStatus", 0)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.FANGS_OF_THE_LION)
     elseif csid == 10 then
-        player:completeMission(TOAU, tpz.mission.id.toau.NASHMEIRAS_PLEA)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.NASHMEIRAS_PLEA)
         player:setTitle(tpz.title.PREVENTER_OF_RAGNAROK)
         player:setCharVar("AhtUrganStatus", 0)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.RAGNAROK)

@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
     if (csid == 114) then
         player:addKeyItem(tpz.ki.SACRIFICIAL_CHAMBER_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SACRIFICIAL_CHAMBER_KEY)
-        player:completeMission(ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
     elseif (csid == 265) then
         player:setCharVar("MissionStatus", 3)
