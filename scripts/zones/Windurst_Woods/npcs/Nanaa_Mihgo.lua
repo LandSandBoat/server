@@ -25,15 +25,15 @@ local TrustMemory = function(player)
         memories = memories + 2
     end
     -- 4 - ROCK_RACKETEER
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
         memories = memories + 4
     end
     -- 8 - HITTING_THE_MARQUISATE
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
         memories = memories + 8
     end
     -- 16 - CRYING_OVER_ONIONS
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
         memories = memories + 16
     end
     -- 32 - hasItem(286) Nanaa Mihgo statue

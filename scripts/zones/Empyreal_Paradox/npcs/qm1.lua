@@ -12,7 +12,7 @@ end
 
 function onTrigger(player,npc)
     if
-        player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) and not
+        player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) and not
         (
             player:hasItem(15962) or
             player:hasItem(15963) or

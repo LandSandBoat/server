@@ -19,7 +19,7 @@ local TrustMemory = function(player)
     if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY) then
         memories = memories + 2
     end
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN) then
         memories = memories + 4
     end
     if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then

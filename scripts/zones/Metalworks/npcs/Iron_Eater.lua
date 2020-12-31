@@ -30,7 +30,7 @@ local TrustMemory = function(player)
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
@@ -38,7 +38,7 @@ local TrustMemory = function(player)
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--

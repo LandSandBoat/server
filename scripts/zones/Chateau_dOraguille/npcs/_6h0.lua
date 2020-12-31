@@ -25,11 +25,11 @@ local function TrustMemory(player)
         memories = memories + 4
     end
     -- 8 - UNDER_OATH
-    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) then
+    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) then
         memories = memories + 8
     end
     -- 16 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 16
     end
     -- 32 - Hero's Combat BCNM

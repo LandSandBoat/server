@@ -43,7 +43,7 @@ function onTrigger(player, npc)
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
-    elseif player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
+    elseif player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
     elseif (ZilartMission == tpz.mission.id.zilart.AWAKENING) then
         player:startEvent(177)

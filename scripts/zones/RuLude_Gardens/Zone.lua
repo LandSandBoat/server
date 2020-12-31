@@ -67,7 +67,7 @@ function onRegionEnter(player, region)
                 elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 3 then
                     player:startEvent(143)
                 elseif
-                    player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) and
+                    player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and
                     player:getCharVar("ZilartStatus") == 3 and
                     player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
@@ -81,7 +81,7 @@ function onRegionEnter(player, region)
                 then
                     player:startEvent(162)
                 elseif
-                    player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
+                    player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
                     player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_AVAILABLE and
                     player:getLocalVar('ANZONE') == 0 and
                     player:getCharVar("ApocNighWait") <= os.time()

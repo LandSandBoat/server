@@ -19,15 +19,15 @@ local TrustMemory = function(player)
         memories = memories + 2
     end
     -- 4 - WONDER_WANDS
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) then
         memories = memories + 4
     end
     -- 8 - THE_TIGRESS_STIRS
-    if player:hasCompletedQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) then
         memories = memories + 8
     end
     -- 16 - I_CAN_HEAR_A_RAINBOW
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
         memories = memories + 16
     end
     -- 32 - Hero's Combat (BCNM)

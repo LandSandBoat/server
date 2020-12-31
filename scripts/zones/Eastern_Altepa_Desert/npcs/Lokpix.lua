@@ -25,7 +25,7 @@ function onTrigger(player, npc)
         player:startEvent(20)
     elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME) == QUEST_ACCEPTED) then
         player:startEvent(21)
-    elseif (player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)) then
+    elseif (player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)) then
         player:startEvent(24)
     end
 end
