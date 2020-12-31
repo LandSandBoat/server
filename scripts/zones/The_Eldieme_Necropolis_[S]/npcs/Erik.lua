@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
     if
-        player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION) == QUEST_ACCEPTED
+        player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION) == QUEST_ACCEPTED
         and not player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
     then
         player:startEvent(3)

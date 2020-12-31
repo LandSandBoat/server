@@ -10,7 +10,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 function onTrigger(player, npc)
-    local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local snakeOnThePlains = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
     local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
     local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
     local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)

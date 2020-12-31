@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
 --player:addFame(WINDURST, 100)
-    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+    wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     fame = player:getFameLevel(WINDURST)
     if (wonderingstatus <= 1 and fame >= 5) then
         player:startEvent(637)                        -- WONDERING_MINSTREL: Quest Available / Quest Accepted

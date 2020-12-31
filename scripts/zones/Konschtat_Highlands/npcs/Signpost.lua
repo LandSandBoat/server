@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
     if
-        player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and
         not player:hasKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
     then
         player:messageSpecial(ID.text.SIGNPOST_DIALOG_2)

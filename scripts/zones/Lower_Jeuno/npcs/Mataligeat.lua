@@ -9,9 +9,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local painfulMemory = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
-    local theRequiem = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
-    local pathOfTheBard = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
+    local painfulMemory = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+    local theRequiem = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+    local pathOfTheBard = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
 
     -- THE OLD MONUMENT
     if (player:getCharVar("TheOldMonument_Event") == 1) then

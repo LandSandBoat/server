@@ -15,7 +15,7 @@ end
 function onTrigger(player, npc)
 
     -- "Rosel the Armorer" quest status var
-    local RoselTheArmorer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
+    local RoselTheArmorer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
 
     -- "Rosel the Armorer" - turn in reciept to prince
     if (RoselTheArmorer == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)) then

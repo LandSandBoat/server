@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    EveryonesGrudge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
+    EveryonesGrudge = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
     if (EveryonesGrudge == QUEST_ACCEPTED) then
         if (trade:hasItemQty(748, 3) and trade:getItemCount() == 3) then
             player:startEvent(118, 748)
@@ -21,11 +21,11 @@ end
 function onTrigger(player, npc)
 
     nFame = player:getFameLevel(NORG)
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and nFame >= 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and nFame >= 2) then
         player:startEvent(116, 748)  -- Quest start - you have tonberry kills?! I got yo back ^.-
     elseif (player:getCharVar("EveryonesGrudgeStarted")  == 1) then
         player:startEvent(117, 748)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_COMPLETED) then
         player:startEvent(119)  -- After completion cs
     else
         player:startEvent(115)

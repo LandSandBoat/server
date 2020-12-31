@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local flowerChild = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FLOWER_CHILD)
+    local flowerChild = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FLOWER_CHILD)
     local itemQuality = 0
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then

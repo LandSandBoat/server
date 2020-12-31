@@ -16,13 +16,13 @@ end
 
 function onTrigger(player, npc)
 
-    local aTasteForMeat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
-    local medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local aTasteForMeat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
+    local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     local diaryPage = player:getCharVar("DiaryPage")
     local fameLevel = player:getFameLevel(SANDORIA)
 
     if player:getCharVar("aTasteForMeat") == 0 and aTasteForMeat == QUEST_COMPLETED and fameLevel >= 8 and medicineWoman == QUEST_COMPLETED and diaryPage >= 4 then
-        local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
         if overTheHillsAndFarAway == QUEST_AVAILABLE then
             player:startEvent(725) -- Start

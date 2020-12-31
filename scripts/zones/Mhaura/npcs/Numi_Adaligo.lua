@@ -22,7 +22,7 @@ end
 
 function onEventFinish(player, csid, option)
 
-    local RychardetheChef = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)
+    local RychardetheChef = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)
     local QuestStatus=player:getCharVar("QuestRychardetheChef_var")
 
     if ((option == 2) and (RychardetheChef == QUEST_AVAILABLE) and (tonumber(QuestStatus) == 0)) then

@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (trade:getGil() >= 10) then
             player:startEvent(571)
         end
@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (player:hasItem(603) == true) then
             player:startEvent(573)
         elseif (player:hasItem(602) == true) then

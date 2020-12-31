@@ -12,15 +12,15 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_ACCEPTED and trade:hasItemQty(495, 1) and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_ACCEPTED and trade:hasItemQty(495, 1) and trade:getItemCount() == 1) then
         player:startEvent(91) -- Ending quest Mysteries I
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II) == QUEST_ACCEPTED and trade:hasItemQty(494, 1) and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II) == QUEST_ACCEPTED and trade:hasItemQty(494, 1) and trade:getItemCount() == 1) then
         player:startEvent(92) -- Ending quest Mysteries II
     end
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.SILVER_BELL)) then --Magicite Mission active (receive this KI after the first CS with aldo)
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.SILVER_BELL)) then --Magicite Mission active (receive this KI after the first CS with aldo)
         player:startEvent(89) -- Start quests
     else
         player:startEvent(96) -- Standard dialog

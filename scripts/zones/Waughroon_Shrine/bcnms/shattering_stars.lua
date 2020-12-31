@@ -37,7 +37,7 @@ function onEventFinish(player, csid, option)
         local pjob = player:getMainJob()
         local maatsCap = player:getCharVar("maatsCap")
 
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
             npcUtil.giveItem(player, 4181)
         end
         player:setCharVar("maatDefeated", pjob)

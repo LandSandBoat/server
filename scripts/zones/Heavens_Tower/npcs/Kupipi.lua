@@ -29,7 +29,7 @@ end
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_4") == 8 and
         trade:hasItemQty(1127, 1) and -- Kindred seal
         trade:getItemCount() == 1
@@ -58,9 +58,9 @@ function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(pNation)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
     local WindurstFirstTrust = player:getCharVar("WindurstFirstTrust")
     local KupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
     local Rank3 = player:getRank() >= 3 and 1 or 0

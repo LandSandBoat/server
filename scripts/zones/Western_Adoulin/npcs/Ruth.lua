@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local APBIF = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+    local APBIF = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     local SOA_Mission = player:getCurrentMission(SOA)
 
     if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then

@@ -16,14 +16,14 @@ require("scripts/globals/utils")
 
 function onTrade(player, npc, trade)
     local tradeCount = trade:getItemCount()
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
         -- Trade Bomb Coal / Exoray Mold / Ancient Papyrus
         if (trade:hasItemQty(1090, 1) and trade:hasItemQty(1089, 1) and trade:hasItemQty(1088, 1) and tradeCount == 3) then
             player:startEvent(81) -- Finish Quest "In Defiant Challenge"
         end
     end
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) ~= QUEST_AVAILABLE and player:getMainLvl() >= 66 and player:getCharVar("maatsCap") < 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) ~= QUEST_AVAILABLE and player:getMainLvl() >= 66 and player:getCharVar("maatsCap") < 1) then
         local mJob = player:getMainJob()
         if (trade:hasItemQty(1425 + mJob, 1) and tradeCount == 1 and mJob <= 15) then
             player:startEvent(64, mJob) -- Teleport to battlefield for "Shattering Stars"
@@ -36,11 +36,11 @@ function onTrigger(player, npc)
 
     local LvL = player:getMainLvl()
     local mJob = player:getMainJob()
-    local inDefiantChallenge = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
-    local atopTheHighestMountains = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
-    local whenceBlowsTheWind = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
-    local ridingOnTheClouds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
-    local shatteringStars = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS)
+    local inDefiantChallenge = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
+    local atopTheHighestMountains = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
+    local whenceBlowsTheWind = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
+    local ridingOnTheClouds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
+    local shatteringStars = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS)
 
     if (player:getCharVar("BeatAroundTheBushin") == 5) then
         player:startEvent(117)
@@ -89,7 +89,7 @@ function onTrigger(player, npc)
     elseif (shatteringStars == QUEST_ACCEPTED and LvL >= 66 and mJob <= 15 and player:getCharVar("maatDefeated") >= 1) then
         player:startEvent(93) -- Finish Quest "Shattering Stars"
     elseif
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_SUN) == QUEST_AVAILABLE and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_SUN) == QUEST_AVAILABLE and
         mJob <= 15 and
         utils.mask.isFull(player:getCharVar("maatsCap"), 15) -- defeated maat on 15 jobs
     then

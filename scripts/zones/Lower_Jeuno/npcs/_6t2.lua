@@ -16,13 +16,13 @@ end
 
 function onTrigger(player, npc)
 
-    local ANewDawn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
     local ScatteredIntoShadow = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
 
     local SaveMySon = player:getCharVar("SaveMySon_Event")
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
@@ -48,15 +48,15 @@ function onTrigger(player, npc)
         player:startEvent(0)
 
     -- Save My Son
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
         player:startEvent(164)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
         if (SaveMySon == 0) then
             player:startEvent(229)
         elseif (SaveMySon == 1) then
             player:startEvent(163)
         end
-    elseif (player:needToZone() == false and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
+    elseif (player:needToZone() == false and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
         player:startEvent(132)
 
     -- Chocobos Wounds

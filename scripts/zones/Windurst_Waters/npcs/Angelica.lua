@@ -41,7 +41,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local aPose = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+    local aPose = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
     local aPoseProg = player:getCharVar("QuestAPoseByOtherName_prog")
     local desiredBody = poseItems[player:getMainJob()]
     local currentBody = player:getEquipID(tpz.slot.BODY)

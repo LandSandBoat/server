@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, npc)
 
-    gates = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
+    gates = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
     if (player:hasKeyItem(tpz.ki.SCRIPTURE_OF_WATER) == true) then
         player:startEvent(620)
     elseif (gates == QUEST_ACCEPTED) then

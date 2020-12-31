@@ -11,7 +11,7 @@ require("scripts/globals/settings")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 1) then
         if (trade:hasItemQty(2562, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(106)
         end
@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED) then
         if (player:getCharVar("KnotQuiteThere") == 0) then
             player:startEvent(105)
         end

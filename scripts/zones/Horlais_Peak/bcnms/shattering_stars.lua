@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 32001 then
-        if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED and player:getFreeSlotsCount() > 0 then
+        if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED and player:getFreeSlotsCount() > 0 then
             npcUtil.giveItem(player, 4181) -- scroll_of_instant_warp
         end
 

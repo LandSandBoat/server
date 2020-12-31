@@ -14,7 +14,7 @@ require("scripts/globals/titles")
 function onTrade(player, npc, trade)
     -- YOMI OKURI (SAM AF2)
     if (
-        player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED and
         player:getCharVar("yomiOkuriKilledNM") == 0 and
         not player:hasKeyItem(tpz.ki.WASHUS_TASTY_WURST) and
         not player:hasKeyItem(tpz.ki.YOMOTSU_FEATHER) and
@@ -25,10 +25,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local stopYourWhining = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
+    local stopYourWhining = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
 
     -- YOMI OKURI (SAM AF2)
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED) then
         if (player:getCharVar("yomiOkuriCS") == 1) then
             player:startEvent(148) -- start quest
         elseif (player:hasKeyItem(tpz.ki.WASHUS_TASTY_WURST)) then

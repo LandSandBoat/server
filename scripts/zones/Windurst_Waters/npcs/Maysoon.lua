@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4508, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(10001) -- Finish quest "Hoist the Jelly, Roger"
         end
@@ -19,8 +19,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    CooksPride = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
-    HoistTheJelly = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+    CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+    HoistTheJelly = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
     if (CooksPride == QUEST_ACCEPTED and HoistTheJelly == QUEST_AVAILABLE) then
         player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"

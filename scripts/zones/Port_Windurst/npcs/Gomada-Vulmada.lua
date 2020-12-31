@@ -12,12 +12,12 @@ end
 
 function onTrigger(player, npc)
 
-TruthJusticeOnionWay = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
-KnowOnesOnions       = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
-InspectorsGadget     = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.INSPECTOR_S_GADGET)
-OnionRings           = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ONION_RINGS)
-CryingOverOnions     = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
-ThePromise = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PROMISE)
+TruthJusticeOnionWay = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+KnowOnesOnions       = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.KNOW_ONE_S_ONIONS)
+InspectorsGadget     = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.INSPECTOR_S_GADGET)
+OnionRings           = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ONION_RINGS)
+CryingOverOnions     = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+ThePromise = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PROMISE)
 
     if (ThePromise == QUEST_COMPLETED) then
         Message = math.random(0, 1)

@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    Stash = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+    Stash = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     mLvl = player:getMainLvl()
     SeaStatue = player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE)
 

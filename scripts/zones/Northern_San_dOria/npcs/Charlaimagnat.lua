@@ -14,7 +14,7 @@ end
 function onTrigger(player, npc)
 
     local realday = tonumber(tostring(os.date("%Y")) .. os.date("%m") .. os.date("%d"))
-    local TheMissingPiece = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
+    local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
 
     if (TheMissingPiece == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC) and player:hasKeyItem(tpz.ki.LETTER_FROM_ALFESAR)) then
         player:startEvent(703) -- Continuing the Quest

@@ -14,18 +14,18 @@ require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY) == QUEST_ACCEPTED and trade:hasItemQty(776, 1) == true and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY) == QUEST_ACCEPTED and trade:hasItemQty(776, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(1) -- Finish quest
     end
 end
 
 function onTrigger(player, npc)
-    local ChildsPlay = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
+    local ChildsPlay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 16)) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 16)) then
         player:startEvent(316)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_ACCEPTED and ChildsPlay == QUEST_AVAILABLE) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_ACCEPTED and ChildsPlay == QUEST_AVAILABLE) then
         player:startEvent(0) -- Start quest
     elseif (ChildsPlay == QUEST_ACCEPTED) then
         player:startEvent(61) -- mid quest CS

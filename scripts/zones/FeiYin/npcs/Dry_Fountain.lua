@@ -11,7 +11,7 @@ local ID = require("scripts/zones/FeiYin/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1093, 1) and trade:getItemCount() == 1) then -- Trade Antique Coin
             player:startEvent(17)
         end

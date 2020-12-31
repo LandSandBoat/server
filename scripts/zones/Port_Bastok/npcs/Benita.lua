@@ -14,7 +14,7 @@ count = trade:getItemCount()
 BombAsh = trade:hasItemQty(928, 1)
 
     if (count == 1 and BombAsh == true) then
-        TheWisdom = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        TheWisdom = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
         TheWisdomVar = player:getCharVar("TheWisdomVar")
         if (TheWisdom == 1 and TheWisdomVar == 2) then
             player:tradeComplete()
@@ -26,7 +26,7 @@ end
 
 function onTrigger(player, npc)
 
-TheWisdom = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+TheWisdom = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
 pLevel = player:getMainLvl()
 
     if (TheWisdom == 0 and pLevel >= 6) then

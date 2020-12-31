@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and player:getCharVar("ChasingQuotas_Progress") == 0 and
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and player:getCharVar("ChasingQuotas_Progress") == 0 and
         trade:getItemCount() == 1 and trade:hasItemQty(12494, 1) and trade:getGil() == 0) then -- Trading gold hairpin only
             player:tradeComplete()
             player:startEvent(17)
@@ -20,13 +20,13 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Quotas_Status = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
+    local Quotas_Status = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
     local Quotas_Progress = player:getCharVar("ChasingQuotas_Progress")
     local Quotas_No = player:getCharVar("ChasingQuotas_No")
-    local Stalker_Status = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+    local Stalker_Status = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
     local Stalker_Progress = player:getCharVar("KnightStalker_Progress")
 
-    if (player:getMainLvl() >= ADVANCED_JOB_LEVEL and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
+    if (player:getMainLvl() >= ADVANCED_JOB_LEVEL and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
         player:startEvent(24)
 
     -- Chasing Quotas (DRG AF2)

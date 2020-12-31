@@ -11,7 +11,7 @@ local ID = require("scripts/zones/East_Ronfaure/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED and trade:hasItemQty(602, 1)) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED and trade:hasItemQty(602, 1)) then
         if (trade:getItemCount() == 1 and player:getFreeSlotsCount() > 0) then
             player:tradeComplete()
             player:addItem(603)

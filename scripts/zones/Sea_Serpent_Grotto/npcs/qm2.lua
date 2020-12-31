@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE) then
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE) then
         player:startEvent(1)
     end
 end

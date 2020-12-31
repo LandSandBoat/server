@@ -15,7 +15,7 @@ end
 
 function onTrigger(player, npc)
 
-    local BeaSmog = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
+    local BeaSmog = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
     local keyitem = player:hasKeyItem(tpz.ki.CORRUPTED_DIRT)
 
     if (BeaSmog == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 4) then

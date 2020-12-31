@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and player:getCharVar("thePickpocket") == 1 and npcUtil.tradeHas(trade, 578) then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and player:getCharVar("thePickpocket") == 1 and npcUtil.tradeHas(trade, 578) then
         player:startEvent(121)
     end
 end

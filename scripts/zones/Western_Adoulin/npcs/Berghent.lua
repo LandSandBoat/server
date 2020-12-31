@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FOOL = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+    local FOOL = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
     if (FOOL == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.BLIGHTBERRY)) then
             -- Finishes Quest: 'Flavors of Our Lives'

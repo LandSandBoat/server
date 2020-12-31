@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 
 function onTrigger(player, npc)
     if
-        player:getQuestStatus(JEUNO,tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_ACCEPTED and
         not player:hasKeyItem(tpz.ki.PROMYVION_HOLLA_SLIVER)
     then
         npcUtil.giveKeyItem(player, tpz.ki.PROMYVION_HOLLA_SLIVER)

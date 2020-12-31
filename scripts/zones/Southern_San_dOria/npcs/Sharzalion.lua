@@ -19,9 +19,9 @@ end
 
 function onTrigger(player, npc)
 
-    theCrimsonTrial = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
-    envelopedInDarkness = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
-    peaceForTheSpirit = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+    theCrimsonTrial = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+    envelopedInDarkness = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+    peaceForTheSpirit = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
     peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
     OrcishDriedFood = player:hasKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
 

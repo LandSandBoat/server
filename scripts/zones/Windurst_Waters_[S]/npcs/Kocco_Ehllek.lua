@@ -8,7 +8,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local RedeemingRocks = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
+    local RedeemingRocks = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
     local RocksProg = player:getCharVar("RedeemingRocksProg")
 
     if RedeemingRocks == QUEST_AVAILABLE then

@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(645, 2) and trade:getItemCount() == 2) then
             player:startEvent(566)
         end
@@ -28,7 +28,7 @@ function onTrigger(player, npc)
         player:startEvent(752)
     elseif (player:hasKeyItem(tpz.ki.DARKSTEEL_FORMULA)) then
         player:startEvent(754)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 3) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 3) then
         player:startEvent(565)
     else
         Message = math.random(0, 1)
@@ -52,7 +52,7 @@ function onEventFinish(player, csid, option)
     if (csid == 565) then
         player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
     elseif (csid == 566) then
-        TheDarksmith = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
+        TheDarksmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
 
         player:tradeComplete()
         player:addGil(GIL_RATE*8000)

@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theRescue = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE)
+    local theRescue = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE)
     local fame = math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) -- Selbina Fame
 
     if theRescue == QUEST_AVAILABLE and fame >= 1 then

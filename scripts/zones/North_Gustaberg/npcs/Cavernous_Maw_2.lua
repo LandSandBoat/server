@@ -17,8 +17,8 @@ function onTrigger(player, npc)
     if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
             tpz.abyssea.getTravStonesTotal(player) >= 1 and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE) == QUEST_AVAILABLE
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE) == QUEST_AVAILABLE
         then
             player:startEvent(0)
         else

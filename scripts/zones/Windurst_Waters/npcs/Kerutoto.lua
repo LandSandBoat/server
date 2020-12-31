@@ -15,7 +15,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
     local count = trade:getItemCount()
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(12521, 1) and count == 1) then
             player:startEvent(362)
         elseif (trade:hasItemQty(13569, 1) and count == 1) then
@@ -26,12 +26,12 @@ function onTrade(player, npc, trade)
             end
         end
 
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         local KerutotoFood = player:getCharVar("Kerutoto_Food_var")
         if (trade:hasItemQty(4371, 1) and count == 1 and KerutotoFood == 1) then
             player:startEvent(332, 440)
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED) then
         if (player:getCharVar("ridingOnTheClouds_4") == 3 and trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_4", 0)
             player:tradeComplete()
@@ -44,12 +44,12 @@ end
 
 function onTrigger(player, npc)
     local KerutotoFood = player:getCharVar("Kerutoto_Food_var") -- Variable to track progress of Kerutoto in Food for Thought
-    local FoodForThought = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
-    local BlueRibbonBlues = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local BlueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
     local needZone = player:needToZone()
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local waking_dreams = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+    local waking_dreams = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
     -- Awakening of the Gods --
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 0) then
@@ -101,7 +101,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(306) -- Standard Conversation
         end
-    elseif (BlueRibbonBlues == QUEST_AVAILABLE and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 5) then
+    elseif (BlueRibbonBlues == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 5) then
         player:startEvent(357)
 
     -- Food for Thought --

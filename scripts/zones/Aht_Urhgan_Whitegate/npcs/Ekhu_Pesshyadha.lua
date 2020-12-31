@@ -21,7 +21,7 @@ function onTrigger(player, npc)
         player:startEvent(536)
     elseif gotItAllProg == 3 then
         player:startEvent(524)
-    elseif player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
         player:startEvent(531)
     else
         player:startEvent(532)

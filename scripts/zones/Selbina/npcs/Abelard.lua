@@ -37,7 +37,7 @@ local ZoneID =
 }
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
 
@@ -72,8 +72,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local anExplorersFootsteps = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
-    local signedInBlood = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+    local anExplorersFootsteps = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+    local signedInBlood = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local signedInBloodStat = player:getCharVar("SIGNED_IN_BLOOD_Prog")
 
     -- SIGNED IN BLOOD (will only activate if An Explorer's Footsteps is not active, or if it is completed)

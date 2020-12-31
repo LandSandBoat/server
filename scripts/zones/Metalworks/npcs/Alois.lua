@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
+    local FadedPromises = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 0) then
         player:startEvent(773)

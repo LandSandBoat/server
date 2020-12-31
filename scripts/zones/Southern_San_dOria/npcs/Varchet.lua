@@ -37,7 +37,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
         player:startEvent(638)
     else
         player:startEvent(525)
@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
             player:addGil(gilPayout)
             player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
 
-            if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+            if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
                 player:setCharVar("exitTheGamblerStat", 1)
                 player:showText(player:getEventTarget(), ID.text.VARCHET_KEEP_PROMISE)
             end

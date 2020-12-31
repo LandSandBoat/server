@@ -10,14 +10,14 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 557) then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 557) then
         player:setCharVar("QuestYourCrystalBall_prog", 1)
         player:confirmTrade(trade)
     end
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and player:getCharVar("QuestYourCrystalBall_prog") == 1 then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and player:getCharVar("QuestYourCrystalBall_prog") == 1 then
         player:startEvent(52)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

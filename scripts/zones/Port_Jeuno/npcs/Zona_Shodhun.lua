@@ -50,7 +50,7 @@ function onTrade(player, npc, trade)
         end
     end
 
-    local PrettyLittleThings = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+    local PrettyLittleThings = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
 
     if (itemQuality == 2) then
         if (PrettyLittleThings == QUEST_COMPLETED) then

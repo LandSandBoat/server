@@ -22,7 +22,7 @@ function onZoneIn(player, prevZone)
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 2 then
         cs = 116
     end
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED and not GetMobByID(ID.mob.PURPLEFLASH_BRUKDOK):isSpawned() then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED and not GetMobByID(ID.mob.PURPLEFLASH_BRUKDOK):isSpawned() then
         SpawnMob(ID.mob.PURPLEFLASH_BRUKDOK) -- Spawned by Quest: The Crimson Trial upon entering the zone
     end
     return cs

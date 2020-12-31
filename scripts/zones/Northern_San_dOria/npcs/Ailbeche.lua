@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
         if (trade:hasItemQty(17391, 1) == true and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish Quest "Father and Son" (part2) (trading fishing rod)
         end
@@ -29,9 +29,9 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local fatherAndSon = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
-    local sharpeningTheSword = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
-    local aBoysDream = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+    local fatherAndSon = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+    local sharpeningTheSword = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+    local aBoysDream = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
 
     -- Checking levels and jobs for af quest
     local mLvl = player:getMainLvl()

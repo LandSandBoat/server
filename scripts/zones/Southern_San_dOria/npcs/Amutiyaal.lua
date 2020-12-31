@@ -45,7 +45,7 @@ Chateau d'Oraguille (East to West)
 --]]
 
 function onTrade(player, npc, trade)
-    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(881)
     end
@@ -53,7 +53,7 @@ end
 
 function onTrigger(player, npc)
 
-    local LureSandy = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local LureSandy = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
     if (LureSandy ~= QUEST_COMPLETED and ENABLE_TOAU == 1) then

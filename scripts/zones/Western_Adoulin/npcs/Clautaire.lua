@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FINAO = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
+    local FINAO = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     if (FINAO == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.HUNK_OF_BEDROCK)) then
             -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'

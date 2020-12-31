@@ -12,8 +12,8 @@ require("scripts/globals/keyitems")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local Indomitable = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
-    local ImmortalLuShang = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
+    local Indomitable = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
+    local ImmortalLuShang = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
 
     if (ImmortalLuShang == QUEST_ACCEPTED or ImmortalLuShang == QUEST_COMPLETED) and npcUtil.tradeHas(trade, {720, 489, 4102}) then
         player:startEvent(78)
@@ -23,8 +23,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Indomitable = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
-    local ImmortalLuShang = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
+    local Indomitable = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
+    local ImmortalLuShang = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
     local indomitableTimer = player:getCharVar("IndomitableSpiritTimer")
 
     if player:hasItem(489) == true and (ImmortalLuShang == QUEST_AVAILABLE or ImmortalLuShang == QUEST_COMPLETED) then

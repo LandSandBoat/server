@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES) ~= QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, {{816, 3}}) then -- silk thread x3
             player:addFame(WINDURST, 15)
             player:startEvent(335, 600 * GIL_RATE, 816, 938, 1156)
@@ -22,7 +22,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES) == QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES) == QUEST_AVAILABLE then
         player:startEvent(333, 0, 816, 938, 1156)
     else
         player:startEvent(334, 0, 816, 938, 1156)

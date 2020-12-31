@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local lostInTranslocation = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
+    local lostInTranslocation = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     local leftMapPiece = player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
     local middleMapPiece = player:hasKeyItem(tpz.ki.MIDDLE_MAP_PIECE)
     local rightMapPiece = player:hasKeyItem(tpz.ki.RIGHT_MAP_PIECE)

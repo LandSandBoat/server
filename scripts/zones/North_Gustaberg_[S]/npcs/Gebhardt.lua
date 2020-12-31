@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.BATTLE_RATIONS)) == true then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.BATTLE_RATIONS)) == true then
         player:startEvent(102)
     else
         player:startEvent(110)

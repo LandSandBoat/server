@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
             player:startEvent(624)
         end
@@ -20,7 +20,7 @@ end
 
 function onTrigger(player, npc)
 
-    local Tomb = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+    local Tomb = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     local WellWater = player:hasItem(567) -- Well Water
     local Waterskin = player:hasItem(547) -- Tomb Waterskin
 

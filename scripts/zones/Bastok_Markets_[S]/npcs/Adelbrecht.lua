@@ -29,9 +29,9 @@ function onTrigger(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+    local TheFightingFourth = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local SnakeOnThePlains = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local SteamedRams = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     local BlueLetter = player:hasKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     local BattleRations = player:hasKeyItem(tpz.ki.BATTLE_RATIONS)
 

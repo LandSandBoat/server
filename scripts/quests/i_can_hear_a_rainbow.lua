@@ -111,7 +111,7 @@ local rubyData =
 -------------------------------------------------
 
 quests.i_can_hear_a_rainbow.onZoneIn = function(player)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and player:hasItem(1125, 0) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and player:hasItem(1125, 0) then
         local trigger = false
 
         -- get data for basic weather (e.g. downgrade GALES to WIND)

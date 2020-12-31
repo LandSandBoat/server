@@ -16,14 +16,14 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
     local SirensTearProgress = player:getCharVar("SirensTear")
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
-    local LoveAndIce = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
+    local TheStarsOfIfrit = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+    local LoveAndIce = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
     local LoveAndIceProgress = player:getCharVar("LoveAndIceProgress")
-    local ATestOfTrueLove = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+    local ATestOfTrueLove = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     local ATestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
-    local LoversInTheDusk = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)
+    local LoversInTheDusk = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
     if (SirensTear == QUEST_ACCEPTED) then
         player:startEvent(6)

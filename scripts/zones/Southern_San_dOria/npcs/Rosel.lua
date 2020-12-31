@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, npc)
 
-    local RoselTheArmorer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
+    local RoselTheArmorer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
     local receiprForThePrince = player:hasKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)
 
     if (player:getCharVar("RefuseRoselTheArmorerQuest") == 1 and RoselTheArmorer == QUEST_AVAILABLE) then

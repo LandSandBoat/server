@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+    local OperationTeatime = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
 
     if OperationTeatime == QUEST_ACCEPTED and OperationTeatimeProgress == 3 then

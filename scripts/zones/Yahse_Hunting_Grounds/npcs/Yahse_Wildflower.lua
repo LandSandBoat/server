@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
     -- CHILDREN OF THE RUNE
-    if player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == QUEST_ACCEPTED then
         npcUtil.giveKeyItem(player, tpz.ki.YAHSE_WILDFLOWER_PETAL)
     end
 end

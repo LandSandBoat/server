@@ -18,11 +18,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TOMATH = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
-    local Fertile_Ground = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.FERTILE_GROUND)
-    local Wayward_Waypoints = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.WAYWARD_WAYPOINTS)
+    local TOMATH = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+    local Fertile_Ground = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FERTILE_GROUND)
+    local Wayward_Waypoints = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.WAYWARD_WAYPOINTS)
     Wayward_Waypoints = (Wayward_Waypoints == QUEST_ACCEPTED) and (player:getCharVar("WW_Need_Shipilolo") > 0)
-    local ACSP = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    local ACSP = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local SOA_Mission = player:getCurrentMission(SOA)
 
     if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then

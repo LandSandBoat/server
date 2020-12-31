@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 -----------------------------------
 
 function onTrigger(player, npc)
-    local postman = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman == QUEST_AVAILABLE then
         player:startEvent(48)
@@ -21,7 +21,7 @@ function onTrigger(player, npc)
 end
 
 function onTrade(player, npc, trade)
-    local postman = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman ~= QUEST_AVAILABLE then
         reward = 0

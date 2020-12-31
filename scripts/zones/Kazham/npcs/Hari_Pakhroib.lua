@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    Guardian = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    Guardian = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
     Pamamas = player:getCharVar("PamamaVar")
     pfame = player:getFameLevel(KAZHAM)
     needToZone = player:needToZone()

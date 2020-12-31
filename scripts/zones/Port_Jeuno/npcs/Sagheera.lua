@@ -331,7 +331,7 @@ function onTrigger(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)

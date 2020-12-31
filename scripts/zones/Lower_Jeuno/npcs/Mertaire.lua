@@ -14,8 +14,8 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 local POETIC_PARCHMENT = 634
 
 function onTrade(player, npc, trade)
-    local theOldMonument = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
-    local aMinstrelInDespair = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
+    local theOldMonument = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
+    local aMinstrelInDespair = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
     -- A MINSTREL IN DESPAIR (poetic parchment)
     if trade:hasItemQty(POETIC_PARCHMENT, 1) and trade:getItemCount() == 1 and theOldMonument == QUEST_COMPLETED and aMinstrelInDespair == QUEST_AVAILABLE then
@@ -24,10 +24,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theOldMonument = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
-    local painfulMemory = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
-    local theRequiem = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
-    local circleOfTime = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local theOldMonument = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
+    local painfulMemory = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+    local theRequiem = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+    local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local job = player:getMainJob()
     local level = player:getMainLvl()
 

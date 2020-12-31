@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 
 function onTrade(player, npc, trade)
     -- DANCES WITH LUOPANS
-    if player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, 703) then -- Petrified Log
             player:startEvent(34)
         end
@@ -29,7 +29,7 @@ function onTrigger(player, npc)
     end
 
     -- DANCES WITH LUOPANS
-    local dwlQuestStatus = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
+    local dwlQuestStatus = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
     if dwlQuestStatus == QUEST_COMPLETED then
         player:startEvent(39)
     elseif player:getCharVar("GEO_DWL_Luopan") == 1 then

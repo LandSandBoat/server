@@ -13,14 +13,14 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847, 1) == true and trade:hasItemQty(4368, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847, 1) == true and trade:hasItemQty(4368, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
         player:startEvent(440, 250, 847, 4368) -- -- Quest Finish
     end
 end
 
 function onTrigger(player, npc)
 
-    local teacherstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+    local teacherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
 
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(752, 0, tpz.ki.STAR_SEEKER)
@@ -99,7 +99,7 @@ function onTrigger(player, npc)
         end
     elseif (teacherstatus == QUEST_ACCEPTED) then
         player:startEvent(439, 0, 847, 4368) -- Quest Reminder
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         player:startEvent(444) -- During Making the GRADE
     else   --  Will run through these iffame is not high enough for other quests
         rand = math.random(1, 2)
@@ -125,7 +125,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*250)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete(trade)
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
             player:completeQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
             player:addFame(WINDURST, 75)
         else

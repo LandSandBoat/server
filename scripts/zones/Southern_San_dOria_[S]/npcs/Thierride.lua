@@ -14,7 +14,7 @@ require("scripts/globals/quests")
 function onTrade(player, npc, trade)
     local lufetSalt = trade:hasItemQty(1019, 1)
     local cnt = trade:getItemCount()
-    local beansAhoy = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
     if (lufetSalt and cnt == 1 and beansAhoy == QUEST_ACCEPTED) then
         if (player:getCharVar("BeansAhoy") == 0 == true) then
 
@@ -33,7 +33,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local beansAhoy = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
     if (beansAhoy == QUEST_AVAILABLE) then
         player:startEvent(334) -- Quest Start
 

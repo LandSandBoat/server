@@ -14,7 +14,7 @@ require("scripts/globals/utils")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 1125) and
         utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7)
     then

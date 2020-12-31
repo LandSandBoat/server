@@ -11,7 +11,7 @@ end
 
 function onTrigger(player, npc)
 
-    OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+    OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_ACCEPTED and player:getCharVar("OutOfTheShellZone") == 0) then
         player:startEvent(83)

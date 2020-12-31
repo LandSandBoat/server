@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Beadeaux/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
         if (trade:hasItemQty(495, 1) == true and trade:getItemCount() == 1) then
             player:startEvent(1000)
         end
@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
         player:messageSpecial(ID.text.LOCKED_DOOR_QUADAV_HAS_KEY)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

@@ -15,7 +15,7 @@ function onTrigger(player, npc)
 
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 1)) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 1)) then
         player:startEvent(809)
     elseif (player:getCharVar("BrothersCS") == 1) then
         player:startEvent(597)  -- brothers cs

@@ -54,9 +54,9 @@ function moogleTrade(player, npc, trade)
             end
         end
 
-        local giveMoogleABreak = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
-        local theMooglePicnic = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
-        local moogleInTheWild = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+        local giveMoogleABreak = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+        local theMooglePicnic = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
+        local moogleInTheWild = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
         if giveMoogleABreak == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {17161, 13457}) then
             player:startEvent(30007)
         elseif theMooglePicnic == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {17402, 615}) then
@@ -87,9 +87,9 @@ function moogleTrigger(player, npc)
         end
 
         local homeNationFameLevel = player:getFameLevel(player:getNation())
-        local giveMoogleABreak = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
-        local theMooglePicnic = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
-        local moogleInTheWild = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+        local giveMoogleABreak = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+        local theMooglePicnic = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
+        local moogleInTheWild = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
 
         if player:getCharVar("MoghouseExplication") == 1 then
             player:startEvent(30000)

@@ -11,7 +11,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getMainLvl() >= 30 and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
+    if (player:getMainLvl() >= 30 and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
         player:startEvent(24)
     else
         player:startEvent(587)

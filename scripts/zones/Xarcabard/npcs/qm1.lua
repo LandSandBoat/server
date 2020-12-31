@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 613) and
         not player:hasItem(1104) and
         npcUtil.popFromQM(player, npc, ID.mob.CHAOS_ELEMENTAL)

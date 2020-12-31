@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TheStarsOfIfrit = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+    local TheStarsOfIfrit = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
 
     if (player:getFameLevel(BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true) then
         player:startEvent(180)

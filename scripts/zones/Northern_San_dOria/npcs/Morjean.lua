@@ -19,7 +19,7 @@ function onTrigger(player, npc)
         player:startEvent(65)
     elseif ((TheHolyCrest == 3 and player:hasItem(1159)) or TheHolyCrest == 4) then -- Wyvern Egg
         player:startEvent(62)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
         player:startEvent(602)
     else
         player:startEvent(601)

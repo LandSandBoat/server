@@ -21,7 +21,7 @@ end
 
 -- Cutscene for Dances with Luopans.
 local function triggerUncannySensationMessage(player)
-    if player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.LUOPAN) and player:getCharVar("GEO_DWL_Luopan") == 0 then
             player:messageSpecial(ID.text.UNCANNY_SENSATION)
             player:setLocalVar("GEO_DWL_Locus_Area", 1)

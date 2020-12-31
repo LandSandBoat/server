@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 function onTrade(player, npc, trade)
 
     if (trade:hasItemQty(13096, 1) and trade:getItemCount() == 1) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_ACCEPTED) then
             player:tradeComplete()
             player:startEvent(112)
         end
@@ -22,7 +22,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getMainLvl() >= 7 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_AVAILABLE) then
+    if (player:getMainLvl() >= 7 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_AVAILABLE) then
         player:startEvent(110)
     else
         player:startEvent(31)

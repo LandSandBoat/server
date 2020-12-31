@@ -9,13 +9,13 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II) >= QUEST_AVAILABLE and npcUtil.tradeHas( trade, {{2163, 2}} ) then
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II) >= QUEST_AVAILABLE and npcUtil.tradeHas( trade, {{2163, 2}} ) then
         player:startEvent(16)
     end
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II) == QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II) == QUEST_AVAILABLE then
         player:startEvent(14)
     else
         player:startEvent(15)

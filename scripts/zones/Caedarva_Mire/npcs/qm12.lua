@@ -17,7 +17,7 @@ function onTrigger(player, npc)
     if notMeantToBeProg == 1 then
         player:startEvent(16)
     elseif
-        player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE) == QUEST_ACCEPTED and
         notMeantToBeProg == 3 and
         not GetMobByID(ID.mob.LAMIA_NO27):isSpawned() and
         not GetMobByID(ID.mob.MOSHDAHN):isSpawned()

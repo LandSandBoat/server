@@ -13,7 +13,7 @@ end
 
 function onTrigger(player, npc)
     local X = player:getXPos(); Z = player:getZPos()
-    local TheSandCharm = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+    local TheSandCharm = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM)
 
     if (Z <= 29 or Z >= 38 or X <= 16 or X >= 32) then
         if (player:getFameLevel(WINDURST) >= 4 and TheSandCharm == QUEST_AVAILABLE) then

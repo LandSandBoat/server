@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
 
-    troubleAtTheSluice = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+    troubleAtTheSluice = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     NeutralizerKI = player:hasKeyItem(tpz.ki.NEUTRALIZER)
 
     if (troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then

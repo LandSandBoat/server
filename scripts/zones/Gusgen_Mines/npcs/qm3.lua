@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local HealingTheLand = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
+    local HealingTheLand = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
 
     if (HealingTheLand == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SEAL_OF_BANISHING) == true) then
         player:delKeyItem(tpz.ki.SEAL_OF_BANISHING)

@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
 
-    local TheMissingPiece = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
+    local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
     local Fame = player:getFameLevel(RABAO)
 
     if (TheMissingPiece == QUEST_AVAILABLE and Fame >= 4) then -- start quest

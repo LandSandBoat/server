@@ -48,7 +48,7 @@ end
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1100, 1) and trade:getItemCount() == 1) then -- Trade Xalmo Feather
             player:startEvent(749) -- Finish Quest "True Strength"
         end
@@ -58,12 +58,12 @@ end
 
 function onTrigger(player, npc)
 
-    local trueStrength = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
+    local trueStrength = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
     local WildcatBastok = player:getCharVar("WildcatBastok")
-    local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
+    local FadedPromises = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
     local Rank3 = player:getRank() >= 3 and 1 or 0
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
         player:startEvent(935)
     elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CRYSTAL_LINE and
         player:hasKeyItem(tpz.ki.C_L_REPORTS)) then

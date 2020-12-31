@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local anEmptyVessel = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local StoneID = player:getCharVar("EmptyVesselStone")
 
@@ -25,12 +25,12 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local anEmptyVessel = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
-    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
-    local transformations = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
@@ -171,8 +171,8 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 

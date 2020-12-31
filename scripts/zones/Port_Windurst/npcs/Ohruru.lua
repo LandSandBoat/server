@@ -31,8 +31,8 @@ function onTrigger(player, npc)
 --    end
 -- ======== FOR TESTING ONLY ==========-----
 
-    Catch = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
-    WonderWands = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+    Catch = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+    WonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
     if (WonderWands == QUEST_ACCEPTED) then
         player:startEvent(258, 0, 17053)
     elseif (Catch == 0) then
@@ -89,7 +89,7 @@ function onEventFinish(player, csid, option)
 
         player:setCharVar("QuestCatchItIfYouCan_var", 0)
 
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED) then
             player:completeQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
             player:addFame(WINDURST, 75)
         else

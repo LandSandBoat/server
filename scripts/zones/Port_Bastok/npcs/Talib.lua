@@ -13,11 +13,11 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS) >= QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS) >= QUEST_ACCEPTED) then
         if (trade:hasItemQty(642, 4) and trade:getItemCount() == 4) then
             player:startEvent(91)
         end
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(642, 1) and trade:getItemCount() == 1) then
             player:startEvent(3)
         end
@@ -27,7 +27,7 @@ end
 
 function onTrigger(player, npc)
 
-    BeautyAndTheGalka = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+    BeautyAndTheGalka = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
 
     if (BeautyAndTheGalka == QUEST_COMPLETED) then
         player:startEvent(90)
@@ -56,13 +56,13 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PALBOROUGH_MINES_LOGS)
     elseif (csid == 90) then
-        ShadyBusiness = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
+        ShadyBusiness = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
 
         if (ShadyBusiness == QUEST_AVAILABLE) then
             player:addQuest(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
         end
     elseif (csid == 91) then
-        ShadyBusiness = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
+        ShadyBusiness = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
 
         if (ShadyBusiness == QUEST_ACCEPTED) then
             player:addFame(NORG, 100)

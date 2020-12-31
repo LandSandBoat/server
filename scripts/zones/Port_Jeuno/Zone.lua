@@ -28,7 +28,7 @@ function onZoneIn(player, prevZone)
 
     if
         ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-        and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+        and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324
     end

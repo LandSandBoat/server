@@ -13,9 +13,9 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local allNewC2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
-    local legendaryPlanB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
-    local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local allNewC2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
+    local legendaryPlanB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
+    local allNewC3000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
 
     -- THE ALL NEW C-2000
     if allNewC2000 == QUEST_ACCEPTED then
@@ -45,11 +45,11 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local allNewC2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
-    local aGreetingCardian = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+    local allNewC2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
+    local aGreetingCardian = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
     local aGreetingCardianCS = player:getCharVar("AGreetingCardian_Event")
-    local legendaryPlanB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
-    local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local legendaryPlanB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
+    local allNewC3000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
 
     -- THE ALL NEW C-3000
     if legendaryPlanB == QUEST_COMPLETED and allNewC3000 == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 4 then

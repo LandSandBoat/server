@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 677 and option == 1 then
-        if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
+        if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
             player:addQuest(SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 1) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst

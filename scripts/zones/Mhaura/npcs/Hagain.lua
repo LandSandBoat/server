@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
 
-    local hittingTheMarquisate = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
+    local hittingTheMarquisate = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
 
     if (hittingTheMarquisate == QUEST_ACCEPTED and trade:hasItemQty(1091, 1) and trade:getItemCount() == 1) then -- Trade Chandelier coal
         player:startEvent(10005)

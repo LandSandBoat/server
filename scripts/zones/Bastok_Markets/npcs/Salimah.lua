@@ -12,7 +12,7 @@ require("scripts/globals/settings")
 
 function onTrade(player, npc, trade)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
@@ -51,7 +51,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
         player:startEvent(200)
@@ -63,7 +63,7 @@ end
 
 function onEventFinish(player, csid, option)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then

@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
         if player:getCharVar("AyameAndKaede_Event") == 2 and not player:hasKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL) then
             if
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_I):isSpawned() and

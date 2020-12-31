@@ -65,7 +65,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    DampScroll = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+    DampScroll = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     mLvl = player:getMainLvl()
 
     if (DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true) then

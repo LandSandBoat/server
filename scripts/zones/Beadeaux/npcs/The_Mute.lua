@@ -13,7 +13,7 @@ end
 function onTrigger(player, npc)
     local duration = math.random(600, 900)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectSilence") == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectSilence") == 0) then
         player:setCharVar("cCollectSilence", 1)
     end
 

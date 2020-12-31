@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Rftd = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)
+    local Rftd = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if Rftd == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then

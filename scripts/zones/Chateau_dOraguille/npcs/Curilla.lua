@@ -56,9 +56,9 @@ function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local theGeneralSecret = player:getQuestStatus(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
-    local envelopedInDarkness = player:getQuestStatus(SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
-    local peaceForTheSpirit = player:getQuestStatus(SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+    local theGeneralSecret = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+    local envelopedInDarkness = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+    local peaceForTheSpirit = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
     local Rank3 = player:getRank() >= 3 and 1 or 0
 
     -- Trust: San d'Oria (Curilla)
@@ -72,7 +72,7 @@ function onTrigger(player, npc)
 
     -- "Lure of the Wildcat"
     elseif
-        player:getQuestStatus(SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar("WildcatSandy"), 15)
     then
         player:startEvent(562)
@@ -115,7 +115,7 @@ function onTrigger(player, npc)
         end
     elseif
         mJob == tpz.job.RDM and mLvl >= AF2_QUEST_LEVEL and
-        player:getQuestStatus(SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
         envelopedInDarkness == QUEST_AVAILABLE
     then
         player:startEvent(94) -- Start

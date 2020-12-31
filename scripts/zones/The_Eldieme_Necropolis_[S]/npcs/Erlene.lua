@@ -13,7 +13,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
 
     if (ALittleKnowledge == QUEST_ACCEPTED and ALittleKnowledgeProgress == 1) then
@@ -32,13 +32,13 @@ end
 
 function onTrigger(player, npc)
 
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local onSabbatical = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+    local onSabbatical = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
-    local downwardHelix = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+    local downwardHelix = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
 
     if (ALittleKnowledge == QUEST_AVAILABLE) then
         if (mLvl >= ADVANCED_JOB_LEVEL) then

@@ -11,18 +11,18 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4375) then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4375) then
         player:startEvent(72, 0, 4375) -- Finish quest "The gift"
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4484) then
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_REAL_GIFT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 4484) then
         player:startEvent(75) -- Finish quest "The real gift"
     end
 end
 
 function onTrigger(player, npc)
-    underTheSea  = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
-    theSandCharm = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
-    theGift      = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT)
-    theRealGift  = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT)
+    underTheSea  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNDER_THE_SEA)
+    theSandCharm = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+    theGift      = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_GIFT)
+    theRealGift  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_REAL_GIFT)
 
     if player:getCharVar("underTheSeaVar") == 1 then
         player:startEvent(32) -- During quest "Under the sea" - 1st dialog

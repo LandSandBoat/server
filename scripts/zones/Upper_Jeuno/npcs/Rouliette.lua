@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_ACCEPTED and trade:hasItemQty(531, 1) == true and trade:getItemCount() == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_ACCEPTED and trade:hasItemQty(531, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(37)
     end
 end
@@ -22,8 +22,8 @@ function onTrigger(player, npc)
     --Prerequisites for this quest : A_CANDLELIGHT_VIGIL ACCEPTED
 
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) ~= QUEST_COMPLETED and
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) ~= QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_ACCEPTED
     then
         player:startEvent(36)  -- Start Quest Candle-making
     else
@@ -35,7 +35,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 36 and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_AVAILABLE) then
+    if (csid == 36 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_AVAILABLE) then
         player:addQuest(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
     elseif (csid == 37) then
         player:addTitle(tpz.title.BELIEVER_OF_ALTANA)

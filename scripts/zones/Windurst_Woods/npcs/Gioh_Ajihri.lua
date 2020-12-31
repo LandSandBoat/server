@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local twinstoneBonding = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+    local twinstoneBonding = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
 
     if twinstoneBonding == QUEST_COMPLETED then
         if player:needToZone() then
@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
         player:setCharVar("GiohAijhriSpokenTo", 0)
 
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
             npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=tpz.title.BOND_FIXER})
         else
             player:addFame(WINDURST, 10)

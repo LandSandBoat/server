@@ -19,7 +19,7 @@ local function isNaked(player)
 end
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) and npcUtil.tradeHas(trade, 17474) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) and npcUtil.tradeHas(trade, 17474) then
         if isNaked(player) then
             player:startEvent(2) -- complete grappling part of the quest
         else
@@ -29,7 +29,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
         if not player:hasKeyItem(tpz.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
             if npc:getLocalVar("[QM]Select") == 1 and npcUtil.popFromQM(player, npc, ID.mob.CLIMBPIX_HIGHRISE, {radius = 1, hide = 0}) then
                 player:messageSpecial(ID.text.THF_AF_MOB)

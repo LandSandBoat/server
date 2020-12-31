@@ -16,7 +16,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrigger(player, npc)
-    local TheMissingPiece = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
+    local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
     local HasAncientFragment = player:hasKeyItem(tpz.ki.ANCIENT_TABLET_FRAGMENT)
     local HasAncientTablet = player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC)
 

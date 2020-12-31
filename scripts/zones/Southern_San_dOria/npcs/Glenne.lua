@@ -46,7 +46,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local sentrysPerilStatus = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
+    local sentrysPerilStatus = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
 
     npc:wait()
     if sentrysPerilStatus == QUEST_AVAILABLE then

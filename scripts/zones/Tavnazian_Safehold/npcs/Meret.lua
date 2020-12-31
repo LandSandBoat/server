@@ -35,7 +35,7 @@ local trades =
 }
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
         for k, v in pairs(trades) do
             if npcUtil.tradeHasExactly(trade, k) then
                 player:setLocalVar("meretReward", v)
@@ -48,7 +48,7 @@ end
 
 function onTrigger(player, npc)
     if player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH then
-        if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
+        if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
             if math.random() < 0.5 then
                 player:startEvent(582)
             else

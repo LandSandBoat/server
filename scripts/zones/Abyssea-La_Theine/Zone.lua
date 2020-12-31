@@ -17,7 +17,7 @@ function onZoneIn(player, prevZone)
         player:setPos(-480.5, -0.5, 794, 62)
     end
 
-    if player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 0 then
+    if player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 0 then
         player:setCharVar("1stTimeAbyssea", 1)
     end
 

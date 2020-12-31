@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local offer = trade:getItemId()
 
@@ -27,7 +27,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local NeedToZone = player:needToZone()
 

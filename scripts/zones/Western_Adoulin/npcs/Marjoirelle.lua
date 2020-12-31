@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Order_Up = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
+    local Order_Up = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
     local Order_Marjoirelle = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 8)
 
     if Order_Up == QUEST_ACCEPTED and not Order_Marjoirelle then

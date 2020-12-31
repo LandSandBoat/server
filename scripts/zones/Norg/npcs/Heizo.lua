@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Norg/IDs")
 
 function onTrade(player, npc, trade)
 
-    ShiningLeggings = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    ShiningLeggings = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     Legging = trade:getItemQty(14117)
 
     if (Legging > 0 and Legging == trade:getItemCount()) then
@@ -37,7 +37,7 @@ end
 
 function onTrigger(player, npc)
 
-    ShiningLeggings = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    ShiningLeggings = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
     if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(NORG) >= 3) then
         player:startEvent(127) -- Start Like Shining Leggings

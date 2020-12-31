@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
     -- needs check for tpz.ki.TATTERED_TEST_SHEET then sets to var 3
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestMakingTheGrade_prog")
         if (prog == 0) then
             player:startEvent(454)

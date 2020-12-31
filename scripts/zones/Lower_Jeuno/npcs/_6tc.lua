@@ -14,7 +14,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1526, 1) == true and trade:getItemCount() == 1 and player:getCharVar("BeatAroundTheBushin") == 2) then
             player:startEvent(156) -- After trade Wyrm Beard
         elseif (trade:hasItemQty(1527, 1) == true and trade:getItemCount() == 1 and player:getCharVar("BeatAroundTheBushin") == 4) then

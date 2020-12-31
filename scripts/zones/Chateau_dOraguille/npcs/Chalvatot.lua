@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local herMajestysGarden = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
     if (herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533, 1) and trade:getItemCount() == 1) then
@@ -27,11 +27,11 @@ end
 function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
-    local circleOfTime = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
-    local lureOfTheWildcat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local lureOfTheWildcat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local herMajestysGarden = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- THE CRYSTAL SPRING (San d'Oria 3-2)
     if (currentMission == tpz.mission.id.sandoria.THE_CRYSTAL_SPRING and MissionStatus == 3) then

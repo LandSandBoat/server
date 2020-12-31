@@ -21,7 +21,7 @@ end
 
 function onTrigger(player, npc)
 
-local Unforgiven = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
+local Unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
 
     if (Unforgiven == 1 and player:hasKeyItem(tpz.ki.ALABASTER_HAIRPIN) == false) then
         player:addKeyItem(tpz.ki.ALABASTER_HAIRPIN)

@@ -18,7 +18,7 @@ function onZoneIn(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-104, -25.36, -410, 195)
     end
-    if (prevZone == tpz.zone.ROLANBERRY_FIELDS_S and player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getCharVar("DownwardHelix") == 2) then
+    if (prevZone == tpz.zone.ROLANBERRY_FIELDS_S and player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and player:getCharVar("DownwardHelix") == 2) then
         cs = 3
     end
     return cs

@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(768, 4) and trade:getItemCount() == 4) then
             player:startEvent(36)
         end
@@ -22,7 +22,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE) then
         player:startEvent(37)
     else
         player:startEvent(35)
@@ -41,7 +41,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
         else

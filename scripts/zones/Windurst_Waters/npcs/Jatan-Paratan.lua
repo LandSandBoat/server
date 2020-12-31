@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+    wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == 1 and trade:hasItemQty(718, 1) == true and trade:getItemCount() == 1 and player:getCharVar("QuestWonderingMin_var") == 1) then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
@@ -23,7 +23,7 @@ function onTrigger(player, npc)
             --        player:delQuest(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
 
 
-    wonderingstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+    wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     fame = player:getFameLevel(WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
         rand = math.random(1, 2)

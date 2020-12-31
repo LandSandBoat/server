@@ -11,7 +11,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local qStarStruck = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
+    local qStarStruck = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
 
     if (qStarStruck == QUEST_ACCEPTED) then
         player:startEvent(200)

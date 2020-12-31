@@ -71,7 +71,7 @@ function onTrade(player, npc, trade)
         end
 
         -- Curses Foiled Again!
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(928, 1) and trade:hasItemQty(880, 2) and count == 3) then
             player:startEvent(173, 0, 0, 0, 0, 0, 0, 928, 880) -- Correct items given, complete quest.
         else
@@ -79,7 +79,7 @@ function onTrade(player, npc, trade)
         end
 
         -- Curses, Foiled ... Again!?
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(17316, 2) and trade:hasItemQty(940, 1) and trade:hasItemQty(552, 1) and count == 4) then
             player:startEvent(183) -- Correct items given, complete quest.
         else
@@ -90,10 +90,10 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local foiledAgain = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-    local CFA2 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local foiledAgain = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+    local CFA2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
     local CFAtimer = player:getCharVar("CursesFoiledAgain")
-    local FoiledAGolem = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local golemdelivery = player:getCharVar("foiledagolemdeliverycomplete")
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
@@ -102,9 +102,9 @@ function onTrigger(player, npc)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 7) then
         player:startEvent(397, 0, 0, 0, 282)
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
         player:startEvent(498)
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
         player:startEvent(409) -- she mentions that Sunny-Pabonny left for San d'Oria
 

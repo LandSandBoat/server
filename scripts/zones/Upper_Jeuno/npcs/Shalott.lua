@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
         player:startEvent(101)
     else
         player:startEvent(104)

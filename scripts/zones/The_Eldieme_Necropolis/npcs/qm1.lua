@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SPIRIT_INCENSE) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SPIRIT_INCENSE) then
         player:startEvent(50)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

@@ -32,7 +32,7 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    local fsaQuest = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+    local fsaQuest = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
 
     if fsaQuest == QUEST_COMPLETED then

@@ -9,13 +9,13 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{90, 5}})) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{90, 5}})) then
         player:startEvent(272)
     end
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) == QUEST_AVAILABLE) then
         player:startEvent(271)
     else
         player:startEvent(270)

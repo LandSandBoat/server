@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
 
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local SheetsofVellumProgress = player:getCharVar("SheetsofVellum")
 
@@ -28,7 +28,7 @@ end
 
 function onTrigger(player, npc)
 
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local SheetsofVellumProgress = player:getCharVar("SheetsofVellum")
 

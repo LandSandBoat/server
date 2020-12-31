@@ -15,7 +15,7 @@ require("scripts/globals/shop")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local exoticDelacacies = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+    local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil", 5600}} )) then
@@ -35,8 +35,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theWeatherspoonWar = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_WEATHERSPOON_WAR)
-    local exoticDelacacies = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+    local theWeatherspoonWar = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_WEATHERSPOON_WAR)
+    local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- THE WEATHERSPOON WAR
     if (theWeatherspoonWar == QUEST_ACCEPTED and player:getCharVar("Weatherspoon_War_Status") == 6) then

@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
         player:setCharVar("saveMySisterLanternID", npc:getID())
         player:startEvent(44)
     else

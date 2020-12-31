@@ -17,10 +17,10 @@ end
 
 function onTrigger(player, npc)
 
-    local TrialByLightning = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+    local TrialByLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local WhisperOfStorms = player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local CarbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     ---------------------------------------------------------------------
@@ -59,7 +59,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 10016 and option == 1) then
-        if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
             player:delQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
         player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)

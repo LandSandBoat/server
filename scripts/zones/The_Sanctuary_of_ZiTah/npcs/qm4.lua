@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK) == QUEST_ACCEPTED and VanadielTOTD() == tpz.time.DUSK then
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK) == QUEST_ACCEPTED and VanadielTOTD() == tpz.time.DUSK then
         player:startEvent(204)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

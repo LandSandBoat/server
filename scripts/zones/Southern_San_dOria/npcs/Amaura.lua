@@ -23,8 +23,8 @@ end
 
 function onTrigger(player, npc)
 
-    medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    toCureaCough = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+    medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    toCureaCough = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if (medicineWoman == QUEST_ACCEPTED) then
         amaurasFormulaKI = player:hasKeyItem(tpz.ki.AMAURAS_FORMULA)

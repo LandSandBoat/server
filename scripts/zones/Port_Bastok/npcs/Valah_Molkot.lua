@@ -42,7 +42,7 @@ itemQuality = 0
         end
     end
 
-    ALadysHeart = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
+    ALadysHeart = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
 
     if (itemQuality == 2) then
         if (ALadysHeart == QUEST_COMPLETED) then

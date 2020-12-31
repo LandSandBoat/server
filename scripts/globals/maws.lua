@@ -44,9 +44,9 @@ local function meetsMission2Reqs(player)
     end
 
     local Q  = tpz.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
+    local Q1 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
+    local Q2 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
+    local Q3 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
 
     return Q1 or Q2 or Q3
 

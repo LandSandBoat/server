@@ -14,7 +14,7 @@ end
 
 function onTrigger(player, npc)
 
-    local RockRacketeer = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+    local RockRacketeer = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer

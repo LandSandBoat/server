@@ -38,7 +38,7 @@ function onTrade(player, npc, trade)
         then
             player:startEvent(160, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(16522, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish quest "Northward"
         end
@@ -46,7 +46,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local northward = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.NORTHWARD)
+    local northward = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
 
     if (player:getFameLevel(JEUNO) >= 4 and northward == QUEST_AVAILABLE) then
         player:startEvent(159, 1, 0, 0, 0, 0, 0, 8)

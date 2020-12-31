@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local Scaredycats = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.SCAREDYCATS)
+    local Scaredycats = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.SCAREDYCATS)
     local Scaredycats_Status = player:getCharVar("Scaredycats_Status")
     if ((Scaredycats_Status < 1) and (Scaredycats == QUEST_AVAILABLE)) then
         -- Dialogue before seeing the initial walk-in CS with Bilp, Eamonn, and Lhe.

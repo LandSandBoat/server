@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4526, 1) and trade:getItemCount() == 1) then
             player:startEvent(171) -- Quest Completion Dialogue
         end
@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local FearofFlying = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+    local FearofFlying = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
     -- csid 173 ?
     if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(BASTOK) >=3) then
         player:startEvent(170) -- Quest Start Dialogue

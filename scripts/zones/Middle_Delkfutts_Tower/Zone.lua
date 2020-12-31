@@ -42,7 +42,7 @@ end
 
 function onRegionEnter(player, region)
     local regionId = region:GetRegionID()
-    if regionId == 8 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
+    if regionId == 8 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
         player:startEvent(14)
     else
         player:startEvent(regionId - 1)

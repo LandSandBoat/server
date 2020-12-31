@@ -20,7 +20,7 @@ function onTrade(player, npc, trade)
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(940, 1) and trade:getItemCount() == 1) then
             player:startEvent(617)
         end
@@ -31,13 +31,13 @@ end
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local lvl = player:getMainLvl()
-    local aSquiresTest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
-    local aSquiresTestII = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
-    local aKnightsTest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
+    local aSquiresTest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
+    local aSquiresTestII = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
+    local aKnightsTest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 2) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 2) then
         player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.
     elseif (lvl < 7) then
         player:startEvent(668)

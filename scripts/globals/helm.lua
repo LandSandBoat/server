@@ -1424,7 +1424,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- quest stuff
         if
             helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
             not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
             broke ~= 1 and
             zoneId == tpz.zone.WAJAOM_WOODLANDS

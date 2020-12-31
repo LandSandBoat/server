@@ -25,7 +25,7 @@ function onZoneIn(player, prevZone)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and
         player:getCharVar("PromathiaStatus") == 2) then
         cs = 14
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 1 then
         cs = 29
     end

@@ -18,7 +18,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    MissionaryMan = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+    MissionaryMan = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryMan == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 3) then

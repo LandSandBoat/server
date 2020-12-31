@@ -11,16 +11,16 @@ require("scripts/globals/utils")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1017) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1017) then
         player:startEvent(484)
     end
 end
 
 function onTrigger(player, npc)
-    local amazinScorpio = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO)
+    local amazinScorpio = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 0) then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 0) then
         player:startEvent(735)
     elseif amazinScorpio == QUEST_COMPLETED then
         player:startEvent(485)

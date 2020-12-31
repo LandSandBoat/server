@@ -26,9 +26,9 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local makingAmends = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) --First quest in series
-    local makingAmens = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    local wonderWands = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    local makingAmends = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) --First quest in series
+    local makingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    local wonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local pfame = player:getFameLevel(WINDURST)
     local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(tpz.ki.BROKEN_WAND)

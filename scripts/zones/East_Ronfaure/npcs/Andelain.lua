@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    sermonQuest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+    sermonQuest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_ACCEPTED) then
         count = trade:getItemCount()

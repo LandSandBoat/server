@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    local returnOfAdven = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+    local returnOfAdven = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
     if (returnOfAdven == QUEST_ACCEPTED and trade:hasItemQty(628, 1) and trade:getItemCount() == 1) then
         player:startEvent(243)
     end
@@ -32,12 +32,12 @@ end
 function onTrigger(player, npc)
 
     local pFame = player:getFameLevel(BASTOK)
-    local FatherFigure = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
-    local TheReturn = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+    local FatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+    local TheReturn = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 
     if (FatherFigure == QUEST_COMPLETED and TheReturn == QUEST_AVAILABLE and pFame >= 3) then
         player:startEvent(242)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED) then
         player:startEvent(103)
     else
         player:startEvent(113)

@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEALED_IRON_BOX) then
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEALED_IRON_BOX) then
         player:addKeyItem(tpz.ki.SEALED_IRON_BOX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEALED_IRON_BOX)
     end

@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4370, 1) and trade:getItemCount() == 1) then
             local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
             if (ToBeeOrNotStatus == 10) then
@@ -29,8 +29,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local ToBee = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local PostmanKOsTwice = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local ToBee = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local PostmanKOsTwice = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
     if ((player:getFameLevel(WINDURST) >= 2 and PostmanKOsTwice == QUEST_COMPLETED and ToBee == QUEST_AVAILABLE) or (ToBee == QUEST_ACCEPTED and ToBeeOrNotStatus == 10)) then

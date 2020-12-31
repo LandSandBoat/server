@@ -21,7 +21,7 @@ end
 
 function onTrigger(player, npc)
 
-    local ForevertoHold = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
+    local ForevertoHold = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
 
     if (player:getFameLevel(BASTOK) >= 2 and ForevertoHold == QUEST_AVAILABLE) then
         player:startEvent(123)

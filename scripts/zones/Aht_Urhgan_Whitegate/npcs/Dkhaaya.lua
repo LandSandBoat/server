@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local olduumQuest = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+    local olduumQuest = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
     local ringCheck = player:hasItem(2217)
     if olduumQuest == QUEST_AVAILABLE then
         player:startEvent(4)

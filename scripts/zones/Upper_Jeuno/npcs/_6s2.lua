@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local aClockMostdelicate = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
+    local aClockMostdelicate = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 
     if (aClockMostdelicate == QUEST_AVAILABLE and player:getCharVar("aClockMostdelicateVar") == 1) then
         player:startEvent(119) -- Start long cs quest with option "a clock most delicate"
@@ -27,9 +27,9 @@ function onTrigger(player, npc)
         else
             player:startEvent(117) -- During quest "a clock most delicate"
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_AVAILABLE) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_AVAILABLE) then
         player:startEvent(152) -- Start & finish quest "The Clockmaster"
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
         player:startEvent(110) -- After quest "The Clockmaster"
     else
         player:startEvent(116) -- Standard dialog

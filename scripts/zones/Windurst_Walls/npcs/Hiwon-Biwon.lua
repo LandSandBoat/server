@@ -18,8 +18,8 @@ function onTrigger(player, npc)
         return (set % (2*flag) >= flag)
     end
 
-    local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
-    local CFA2 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local CFA2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Curses, Foiled ... Again!?
     if (CFA2 == QUEST_ACCEPTED and player:hasItem(552) == false) then
@@ -37,7 +37,7 @@ function onTrigger(player, npc)
         -- 8 = Umumu
         -- 16 = Mahogany Door
         if (testflag(tonumber(prog), 4) == false) then
-            if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
+            if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
                 if (math.random(1, 2) == 1) then
                     player:startEvent(283) -- Give scoop while sick
                 else

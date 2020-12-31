@@ -27,7 +27,7 @@ function onTrigger(player, npc)
     local SkillLevel = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
 
     if
-        player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
+        player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
         and player:getCharVar("sayItWithAHandbagBonusCS") == 1
     then
         player:startEvent(914)

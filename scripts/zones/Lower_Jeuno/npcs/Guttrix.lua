@@ -45,7 +45,7 @@ end
 function onTrigger(player, npc)
     local pFame = player:getFameLevel(JEUNO)
     local pLevel = player:getMainLvl()
-    local questStatus = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
     local rseGear = hasRSE(player)
     local rseRace = VanadielRSERace()
     local rseLocation = VanadielRSELocation()
@@ -71,7 +71,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    local questStatus = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
+    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
 
     if csid == 10016 then
         player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)

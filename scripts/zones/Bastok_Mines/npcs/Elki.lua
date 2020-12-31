@@ -16,9 +16,9 @@ end
 function onTrigger(player, npc)
 
 Fame = player:getFameLevel(BASTOK)
-Hearts = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
+Hearts = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
 HeartsVar = player:getCharVar("HeartsOfMythril")
-Elevenths = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+Elevenths = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 EleventhsVar = player:getCharVar("EleventhsHour")
 HasToolbox = player:hasKeyItem(tpz.ki.OLD_TOOLBOX)
 

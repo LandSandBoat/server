@@ -26,15 +26,15 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local twentyInPirateYears = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
-    local illTakeTheBigBox = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
-    local trueWill = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
+    local twentyInPirateYears = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+    local illTakeTheBigBox = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+    local trueWill = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
         if (player:getCharVar("AyameAndKaede_Event") == 3) then
             player:startEvent(95) -- During Quest "Ayame and Kaede"
         else

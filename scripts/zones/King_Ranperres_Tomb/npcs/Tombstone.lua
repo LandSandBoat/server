@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 
 function onTrade(player, npc, trade)
     if
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 567) -- Well Water
     then
         player:startEvent(3)
@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 2)
     elseif
         csid == 2 and
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         not player:hasItem(547) and
         not player:hasItem(567) and
         npcUtil.giveItem(player, 547) -- Tomb Waterskin

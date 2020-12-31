@@ -177,7 +177,7 @@ public:
     auto getTeleport(uint8 type) -> sol::lua_value;                             // Get unlocked teleport means
     bool hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
     void setTeleportMenu(uint16 type, sol::table const& favs);                  // Set favorites or menu layout preferences for homepoints or survival guides
-    auto getTeleportMenu(uint8 type) -> sol::table;                             // Get favorites and menu layout preferences
+    auto getTeleportMenu(uint8 type) -> std::vector<uint8>;                     // Get favorites and menu layout preferences
     void setHomePoint();                                                        // Sets character's homepoint
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
@@ -437,8 +437,8 @@ public:
     void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    auto   getParty() -> sol::table;
-    auto   getPartyWithTrusts() -> sol::table;
+    auto   getParty() -> std::vector<CLuaBaseEntity>;
+    auto   getPartyWithTrusts() -> std::vector<CLuaBaseEntity>;
     uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
     bool   hasPartyJob(uint8 job);
     auto   getPartyMember(uint8 member, uint8 allianceparty) -> std::shared_ptr<CLuaBaseEntity>; // Get a character entity from another entity's party or alliance
@@ -451,7 +451,7 @@ public:
     bool hasPartyEffect(uint16 effectid);       // Has Effect from all party members
     void removePartyEffect(uint16 effectid);    // Removes Effect from all party members
 
-    auto  getAlliance() -> sol::table;
+    auto  getAlliance() -> std::vector<CLuaBaseEntity>;
     uint8 getAllianceSize(); // Get the size of an entity's alliance
 
     void reloadParty();
@@ -529,10 +529,10 @@ public:
     void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
     void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
     void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount);
-    void  resetEnmity(CLuaBaseEntity* PEntity);   // resets enmity to player for specificed mob
-    void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
-    bool  hasEnmity();                            // Does the player have any enmity at all from any source
-    auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
+    void  resetEnmity(CLuaBaseEntity* PEntity);              // resets enmity to player for specificed mob
+    void  updateClaim(sol::object const& entity);            // Adds Enmity to player for specified mob and claims
+    bool  hasEnmity();                                       // Does the player have any enmity at all from any source
+    auto  getNotorietyList() -> std::vector<CLuaBaseEntity>; // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     bool   addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
@@ -541,7 +541,7 @@ public:
                              sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
                              sol::object const& arg8, sol::object const& arg9);
     auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::shared_ptr<CLuaStatusEffect>;
-    auto   getStatusEffects() -> sol::table;
+    auto   getStatusEffects() -> std::vector<CLuaStatusEffect>;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, uint16 power);           // Returns true if the effect can be added
     bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID); // Checks to see if character has specified effect

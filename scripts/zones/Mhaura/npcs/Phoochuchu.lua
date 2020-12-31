@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
         local aThiefinNorgCS = player:getCharVar("aThiefinNorgCS")
         if (aThiefinNorgCS == 2) then
             player:startEvent(301)

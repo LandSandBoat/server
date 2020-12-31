@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-BareBones = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
+BareBones = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
 
     if (BareBones == QUEST_ACCEPTED) then
         player:startEvent(257)

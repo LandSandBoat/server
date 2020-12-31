@@ -11,7 +11,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local TooManyChefs = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
+    local TooManyChefs = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
     local pFame = player:getFameLevel(BASTOK)
 
     if (TooManyChefs == QUEST_AVAILABLE and pFame >= 5) then

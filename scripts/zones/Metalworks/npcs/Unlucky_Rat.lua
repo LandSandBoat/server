@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 
 function onTrade(player, npc, trade)
 
-    local MeanMachine = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
 
     if (MeanMachine == QUEST_ACCEPTED) then
         local FreeSlots = player:getFreeSlotsCount()
@@ -31,7 +31,7 @@ end
 
 function onTrigger(player, npc)
 
-    local MeanMachine = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
     local Fame = player:getFameLevel(BASTOK)
 
     if (MeanMachine == QUEST_AVAILABLE and Fame >= 2) then

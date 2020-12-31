@@ -42,7 +42,7 @@ function onTrade(player, npc, trade)
     if player:getCharVar("troubleAtTheSluiceVar") == 2 and npcUtil.tradeHas(trade, 959) then -- Dahlia
         player:startEvent(17)
         npc:wait()
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 930) then -- Beastman Blood
+    elseif player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 930) then -- Beastman Blood
         player:startEvent(12)
         npc:wait()
     elseif wsQuestEvent ~= nil then
@@ -53,10 +53,10 @@ end
 
 function onTrigger(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local troubleAtTheSluice = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+    local troubleAtTheSluice = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     local troubleAtTheSluiceStat = player:getCharVar("troubleAtTheSluiceVar")
     local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
-    local theRumor = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)
+    local theRumor = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)
 
     npc:wait()
 

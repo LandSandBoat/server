@@ -21,20 +21,20 @@ function onTrade(player, npc, trade)
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {1152, 1153})) then -- Bomb Steel, Sacred Branch
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {1152, 1153})) then -- Bomb Steel, Sacred Branch
         player:startEvent(27)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
         player:startEvent(141)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CHARRED_HELM) and npcUtil.tradeHas(trade, 823)) then -- Gold Thread
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CHARRED_HELM) and npcUtil.tradeHas(trade, 823)) then -- Gold Thread
         player:startEvent(162)
     end
 end
 
 function onTrigger(player, npc)
-    local forgeYourDestiny  = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
-    local theSacredKatana   = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
-    local yomiOkuri         = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
-    local aThiefinNorg      = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG)
+    local forgeYourDestiny  = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
+    local theSacredKatana   = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
+    local yomiOkuri         = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
+    local aThiefinNorg      = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG)
     local swordTimer        = player:getCharVar("ForgeYourDestiny_timer")
     local swordTimeLeft     = swordTimer - os.time()
     local yomiOkuriCS       = player:getCharVar("yomiOkuriCS")

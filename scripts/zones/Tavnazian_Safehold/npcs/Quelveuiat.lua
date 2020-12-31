@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
     local CoralCrestKey = trade:hasItemQty(1659, 1)
     local Count = trade:getItemCount()
 
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY) == false) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY) == false) then
     -- Trade Sealion and Coral Crest keys to obtain Temple Knight key (keyitem).
         if (SealionCrestKey and CoralCrestKey and Count == 2) then
             player:addKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY)
@@ -28,11 +28,11 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_AVAILABLE) then
         player:startEvent(119)
-    elseif (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED and player:getCharVar("SPLINTERSPINE_GRUKJUK") <= 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED and player:getCharVar("SPLINTERSPINE_GRUKJUK") <= 1) then
         player:startEvent(120)
-    elseif (player:getCharVar("SPLINTERSPINE_GRUKJUK") == 2 and player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED) then
+    elseif (player:getCharVar("SPLINTERSPINE_GRUKJUK") == 2 and player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED) then
         player:startEvent(121)
     else
         player:startEvent(122)

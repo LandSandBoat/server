@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 function onTrade(player, npc, trade)
     -- GHOSTS OF THE PAST: Pickaxe
     if (
-        player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 605) and
         not player:hasItem(13122) and
         not GetMobByID(ID.mob.WANDERING_GHOST):isSpawned()

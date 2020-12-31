@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 
 function onTrade(player, npc, trade)
 
-Drachenfall = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
 
     if (Drachenfall == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -26,7 +26,7 @@ end
 
 function onTrigger(player, npc)
 
-Drachenfall = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
 Fame = player:getFameLevel(BASTOK)
 
     if (Drachenfall == QUEST_ACCEPTED) then
@@ -52,7 +52,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 101) then
-        Drachenfall = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+        Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
 
         if (Drachenfall == QUEST_AVAILABLE) then
             FreeSlots = player:getFreeSlotsCount()

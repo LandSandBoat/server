@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, npc)
     if
-        player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_ACCEPTED
+        player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_ACCEPTED
         and player:getCharVar("sayItWithAHandbagCS") == 0
     then
         player:startEvent(171)

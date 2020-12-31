@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    ForgetTheAntidote = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if ((ForgetTheAntidote == QUEST_ACCEPTED or ForgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1) then
         player:startEvent(4, 0, 1209)
@@ -18,7 +18,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    ForgetTheAntidote = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 4) then
         player:startEvent(2, 0, 1209)

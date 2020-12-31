@@ -17,10 +17,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local thePuppetMaster = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
-    local classReunion = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
-    local carbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local iCanHearARainbow = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+    local thePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+    local classReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local carbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local iCanHearARainbow = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- LOST FOR WORDS
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and player:getCharVar("MissionStatus") == 5 then
@@ -122,7 +122,7 @@ function onEventFinish(player, csid, option)
 
     -- THE PUPPET MASTER
     elseif csid == 402 then
-        if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
+        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
             player:delQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
         end
         player:addQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)

@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear == QUEST_ACCEPTED and player:getCharVar("SirensTear") == 0) then
         player:startEvent(5)

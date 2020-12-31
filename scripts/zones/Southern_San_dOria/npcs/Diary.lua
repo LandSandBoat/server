@@ -13,9 +13,9 @@ end
 
 function onTrigger(player, npc)
 
-    local aSquiresTestII = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
-    local medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local toCureaCough = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+    local aSquiresTestII = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
+    local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local toCureaCough = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
     local diaryPage = player:getCharVar("DiaryPage")
 
     if diaryPage == 0 then

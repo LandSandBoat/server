@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED and player:getCharVar("BetterPartOfValProg") == 3) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED and player:getCharVar("BetterPartOfValProg") == 3) then
         if (trade:hasItemQty(2521, 1) and trade:getItemCount() == 1 and trade:getGil() == 0) then
             player:startEvent(103)
         end
@@ -18,7 +18,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
         if (player:getCharVar("BetterPartOfValProg") == 2) then
             player:startEvent(101)
         elseif (player:getCharVar("BetterPartOfValProg") == 3) then

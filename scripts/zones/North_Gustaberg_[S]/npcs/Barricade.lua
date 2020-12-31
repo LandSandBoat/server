@@ -11,7 +11,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2) then
         player:startEvent(106)
     end
 end

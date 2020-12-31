@@ -15,10 +15,10 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local vanishingact = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT)
+    local vanishingact = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT)
     local deliveryGoodsProg = player:getCharVar("deliveringTheGoodsCS")
     local vanishActProg = player:getCharVar("vanishingactCS")
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_AVAILABLE then
         player:startEvent(39)
     elseif deliveryGoodsProg == 1 then
         player:startEvent(46)

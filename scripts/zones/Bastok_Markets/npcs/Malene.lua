@@ -9,13 +9,13 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 
 function onTrade(player, npc, trade)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 550)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 550)) then
         player:startEvent(104)
     end
 end
 
 function onTrigger(player, npc)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_ACCEPTED and player:getCharVar("WishUponAStar_Status") == 1) then -- Quest: Wish Upon a Star
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_ACCEPTED and player:getCharVar("WishUponAStar_Status") == 1) then -- Quest: Wish Upon a Star
         player:startEvent(330)
     else -- Quest: The Cold Light of Day
         player:startEvent(102)
@@ -28,7 +28,7 @@ end
 function onEventFinish(player, csid, option)
     -- THE COLD LIGHT OF DAY
     if (csid == 102) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_AVAILABLE) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_AVAILABLE) then
             player:addQuest(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
         end
     elseif (csid == 104) then

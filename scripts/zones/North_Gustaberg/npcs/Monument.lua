@@ -13,7 +13,7 @@ end
 
 function onTrigger(player, npc)
     if
-        player:getQuestStatus(BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL) == QUEST_ACCEPTED and
         player:hasKeyItem(tpz.ki.BOUQUETS_FOR_THE_PIONEERS)
     then
         player:startEvent(11)

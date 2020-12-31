@@ -13,7 +13,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local OvernightDelivery = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+    local OvernightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
     local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- Variable to track progress for Overnight Delivery
     local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- Variable to track the day the quest is started.
     local KenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var") -- Variable to track the hour the quest is started.

@@ -43,7 +43,7 @@ function onTrigger(player, npc)
         player:startEvent(112)
     elseif (player:getCharVar("saveTheClockTowerVar") >= 1) then
         player:startEvent(164)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
         player:startEvent(163)
     else
         player:startEvent(114)

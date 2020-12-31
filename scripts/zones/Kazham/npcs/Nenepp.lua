@@ -39,7 +39,7 @@ function onTrade(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(4600, 1)
@@ -57,7 +57,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")

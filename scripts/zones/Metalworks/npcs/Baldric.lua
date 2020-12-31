@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 
 function onTrade(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(503, 1) and trade:getItemCount() == 1) then
             player:startEvent(555)
         end
@@ -21,7 +21,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(554)
     else
         player:startEvent(552)
