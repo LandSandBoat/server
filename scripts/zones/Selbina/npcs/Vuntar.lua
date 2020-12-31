@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("VuntarCanBuyItem_date", os.date("%j"))
 
         if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.CARGO)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CARGO)
             player:addFame(SELBINA, 30)
         end
 

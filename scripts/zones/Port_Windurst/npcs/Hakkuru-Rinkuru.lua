@@ -110,7 +110,7 @@ function onEventFinish(player, csid, option)
             player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(GIL_RATE*1500)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
             player:addFame(WINDURST, 75)
             player:addTitle(tpz.title.QUICK_FIXER)
             player:needToZone(true)
@@ -170,7 +170,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
             player:addFame(WINDURST, 150)
             player:addTitle(tpz.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
         end
         -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
     elseif (csid == 456) then

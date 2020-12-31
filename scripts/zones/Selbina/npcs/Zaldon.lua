@@ -503,7 +503,7 @@ local function giveReward(player, csid)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
             if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
-                player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+                player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
             if reward.title ~= nil then
                 player:addTitle(reward.title)

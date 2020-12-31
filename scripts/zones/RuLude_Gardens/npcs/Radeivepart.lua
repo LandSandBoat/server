@@ -70,7 +70,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 159 and option == 1) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
     elseif (csid == 61) then
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.NORTHWARD)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
         player:addTitle(tpz.title.ENVOY_TO_THE_NORTH)
         if (player:hasKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL) == false) then
             player:addKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL)

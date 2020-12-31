@@ -57,7 +57,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ACSP_NPCs_Visited", 1)
     elseif (csid == 2552) then
         -- Finishing Quest: 'A Certain Substitute Patrolman'
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
         player:addExp(1000 * EXP_RATE)
         player:addCurrency('bayld', 500 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * BAYLD_RATE)

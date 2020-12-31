@@ -72,7 +72,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 5704)
             player:setCharVar("BeansAhoy_ConquestWeek", getConquestTally())
             if (csid == 340) then
-                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
                 player:setCharVar("BeansAhoy", 0)
                 player:tradeComplete()
             end

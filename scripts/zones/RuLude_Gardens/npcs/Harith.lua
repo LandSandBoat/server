@@ -80,7 +80,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("harithreward", 0)
         if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED) then
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
         else
             player:addFame(JEUNO, 5)
         end

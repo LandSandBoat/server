@@ -35,7 +35,7 @@ function onEventFinish(player, csid, option)
         if(player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17384) -- Carbon Fishing Rod
         else
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
             player:delKeyItem(tpz.ki.VUNKERL_HERB_MEMO)
             player:delKeyItem(tpz.ki.VUNKERL_HERB)
             player:addItem(17384)

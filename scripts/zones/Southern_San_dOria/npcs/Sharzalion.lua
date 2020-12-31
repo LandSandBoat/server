@@ -71,7 +71,7 @@ function onEventFinish(player, csid, option)
             player:addItem(16829)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end
     elseif (csid == 64) then
         player:setCharVar("peaceForTheSpiritCS", 1)

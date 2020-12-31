@@ -41,7 +41,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.FORGOTTEN_HEXAGUN)
             player:unlockJob(tpz.job.COR)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_CORSAIR)
-            player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
+            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
         end
     elseif (EventFinishBCNM(player, csid, option)) then
         return

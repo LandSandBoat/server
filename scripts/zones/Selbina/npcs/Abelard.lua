@@ -148,7 +148,7 @@ function onEventFinish(player, csid, option)
         end
 
         if csid == 47 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
             player:setCharVar("anExplorer-ClayTablets", 0)
         end
 

@@ -147,7 +147,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 142 then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
         player:setCharVar('StormsOfFate', 0)
         player:setCharVar("StormsOfFateWait", getVanaMidnight())
     elseif csid == 161 then
@@ -155,7 +155,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:setCharVar("StormsOfFateWait", 0)
     elseif csid == 162 then
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:delKeyItem(tpz.ki.PROMYVION_HOLLA_SLIVER)
         player:delKeyItem(tpz.ki.PROMYVION_DEM_SLIVER)
         player:delKeyItem(tpz.ki.PROMYVION_MEA_SLIVER)

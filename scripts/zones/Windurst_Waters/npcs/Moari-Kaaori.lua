@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
         if player:getFreeSlotsCount() > 0 then
             player:tradeComplete()
             player:addItem(16536)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
             player:addFame(WINDURST, 30)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16536)
             player:setCharVar("FLOWER_PROGRESS", 0)
@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16536)
         end
     elseif csid == 522 then -- Wrong flowers so complete quest, but smaller reward/fame and no title.
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
         player:addGil(GIL_RATE * 100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)

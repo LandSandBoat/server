@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
         else
             player:tradeComplete(trade)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(17349)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)
             player:addFame(WINDURST, 75)

@@ -89,7 +89,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     elseif (csid == 10118) then
         player:setCharVar("Lakeside_Minuet_Progress", 0)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
         player:addTitle(tpz.title.TROUPE_BRILIOTH_DANCER)
         player:unlockJob(tpz.job.DNC)
         player:messageSpecial(ID.text.UNLOCK_DANCER)
@@ -111,7 +111,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("QuestStatus_DNC_AF1", 0)
             player:addItem(19203) -- war hoop
             player:messageSpecial(ID.text.ITEM_OBTAINED, 19203)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end
 
     -- Dancer AF: The Road to Divadom
@@ -130,7 +130,7 @@ function onEventFinish(player, csid, option)
             -- do nothing. player doesn't have room to receive the reward item.
             player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 15660) -- the names of the gender specific items are the same
         else
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
             player:setCharVar("roadToDivadomCS", 0)
             player:setCharVar("dancerTailorCS", 1) -- allows player to start dancer version of Coffer AF. check Olgald and Matthias(@Bastok Markets) for the rest of the quest line
             -- determine what gender the player is so we can give the correct item
@@ -139,7 +139,7 @@ function onEventFinish(player, csid, option)
 
             player:addItem(dancersTights)
             player:messageSpecial(ID.text.ITEM_OBTAINED, dancersTights)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
             end
     -- Dancer AF: Comeback Queen
     elseif (csid == 10143) then
@@ -171,7 +171,7 @@ function onEventFinish(player, csid, option)
             -- do nothing. player doesn't have room to receive the reward item.
             player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578) -- the names of the gender specific items are the same
         else
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
             player:setCharVar("comebackQueenCS", 5) -- final state for all of the surrounding NPCs
             -- determine what gender the player is so we can give the correct item
             local playerGender = player:getGender()
@@ -179,7 +179,7 @@ function onEventFinish(player, csid, option)
 
             player:addItem(dancersCasaque)
             player:messageSpecial(ID.text.ITEM_OBTAINED, dancersCasaque)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
         end
     elseif (csid == 10154) then
         if (player:getCharVar("comebackQueenCS") == 4) then -- player's inventory was full at the end of the final cutscene
@@ -187,7 +187,7 @@ function onEventFinish(player, csid, option)
                 -- do nothing. player doesn't have room to receive the reward item.
                 player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, 14578) -- the names of the gender specific items are the same
             else
-                player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
+                player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
                 player:setCharVar("comebackQueenCS", 5) -- final state for all of the surrounding NPCs
                 -- determine what gender the player is so we can give the correct item
                 local playerGender = player:getGender()
@@ -195,7 +195,7 @@ function onEventFinish(player, csid, option)
 
                 player:addItem(dancersCasaque)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, dancersCasaque)
-                player:completeQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
+                player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
             end
         -- the surrounding NPCs should have their dialogue check comebackqueenCS as well.
         end

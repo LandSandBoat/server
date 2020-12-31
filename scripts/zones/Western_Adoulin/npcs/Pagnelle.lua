@@ -85,7 +85,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 5039) then
         -- Finishing Quest: 'Raptor Rapture'
         player:setCharVar("Raptor_Rapture_Status", 0)
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
         player:addCurrency('bayld', 1000 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
         player:addFame(ADOULIN)

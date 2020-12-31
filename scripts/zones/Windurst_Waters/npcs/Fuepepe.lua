@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4855)
         else
             player:tradeComplete()
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
             player:addFame(WINDURST, 75)
             player:addItem(4855)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4855)

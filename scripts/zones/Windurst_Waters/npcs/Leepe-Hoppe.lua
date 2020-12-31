@@ -179,7 +179,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
             player:setCharVar("MoonlitPath_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(WINDURST, 30)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
         end
 
         if (player:getFreeSlotsCount() == 0 and reward ~= 0) then

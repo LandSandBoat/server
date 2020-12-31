@@ -128,9 +128,9 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
 
         if (csid == 2532) then
-            player:completeQuest(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
+            player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
         elseif (csid == 3007) then
-            player:completeQuest(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
+            player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
         end
     elseif (csid == 3005) then
         -- Starting Quest: 'The Starving'
@@ -141,7 +141,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 3012) then
         -- Finishing Quest: 'Always More Quoth The Ravenous'
         player:tradeComplete()
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
         player:addExp(1500 * EXP_RATE)
         player:addCurrency('bayld', 1000 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)

@@ -65,7 +65,7 @@ function onEventFinish(player,csid,option)
     elseif csid == 10225 then
         -- Complete quest
         player:setCharVar("[QUEST]FullSpeedAhead", 0)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         npcUtil.giveKeyItem(player, tpz.ki.TRAINERS_WHISTLE)
         npcUtil.giveKeyItem(player, tpz.ki.RAPTOR_COMPANION)
     elseif csid == 10227 then

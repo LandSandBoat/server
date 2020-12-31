@@ -37,7 +37,7 @@ function onEventFinish(player, csid, option)
             player:addTitle(tpz.title.LADY_KILLER)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
         else
             player:addTitle(tpz.title.LADY_KILLER)
             player:addGil(GIL_RATE*3000)

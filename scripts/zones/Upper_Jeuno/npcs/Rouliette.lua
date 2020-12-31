@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.HOLY_CANDLE)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
     end
 end

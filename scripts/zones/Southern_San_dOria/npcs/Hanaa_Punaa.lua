@@ -96,7 +96,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12696) -- Leather Gloves
             if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS) == QUEST_ACCEPTED) then
                 player:addFame(SANDORIA, 30)
-                player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
+                player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
             else
                 player:addFame(SANDORIA, 5)
             end
@@ -116,7 +116,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12697) -- Lizard Gloves
             if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS) == QUEST_ACCEPTED) then
                 player:addFame(SANDORIA, 30)
-                player:completeQuest(SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
+                player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
             else
                 player:addFame(SANDORIA, 5)
             end
@@ -135,7 +135,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13119)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13119) -- Tyger Stole
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
         end
     end
 

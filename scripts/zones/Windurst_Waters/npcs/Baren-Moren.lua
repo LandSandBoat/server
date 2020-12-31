@@ -135,7 +135,7 @@ printf("RESULT: %u", option)
         else
             player:addFame(WINDURST, 8)
         end
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
         player:setCharVar("QuestHatInHand_count", 0)
         player:setCharVar("QuestHatInHand_var", 0)
         player:needToZone(true)
@@ -151,7 +151,7 @@ printf("RESULT: %u", option)
         end
     elseif (csid == 79) then
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)

@@ -36,7 +36,7 @@ function onEventFinish(player, csid, option)
     if (csid == 10000) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
     elseif (csid == 10001) then
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
         player:addKeyItem(tpz.ki.SUPER_SOUP_POT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUPER_SOUP_POT)
         player:addFame(WINDURST, 30)

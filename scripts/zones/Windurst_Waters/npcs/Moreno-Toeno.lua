@@ -126,7 +126,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete(trade)
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)

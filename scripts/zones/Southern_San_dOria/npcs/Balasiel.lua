@@ -101,7 +101,7 @@ function onEventFinish(player, csid, option)
             player:addItem(16565)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16565) -- Spatha
         end
@@ -114,7 +114,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.SQUIRE_CERTIFICATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SQUIRE_CERTIFICATE)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     elseif (csid == 627) then
         if (option == 0) then
             player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
@@ -140,7 +140,7 @@ function onEventFinish(player, csid, option)
             player:unlockJob(tpz.job.PLD)
             player:messageSpecial(ID.text.UNLOCK_PALADIN)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12306) -- Kite Shield
         end

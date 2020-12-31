@@ -27,7 +27,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 751)
         else
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE)
             player:addItem(751)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 751) --Platinum Beastcoin
             player:setCharVar("KnotQuiteThere", 0)

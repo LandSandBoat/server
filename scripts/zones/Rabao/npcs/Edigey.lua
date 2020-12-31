@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.DESERT_HUNTER)
         player:addItem(16974) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16974)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:addFame(RABAO, 60)
     elseif (csid == 4) then --Subsequent completions
         player:tradeComplete()

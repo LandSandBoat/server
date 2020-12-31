@@ -95,7 +95,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar("TrialByWind_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(RABAO, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end
     elseif (csid == 86 or csid == 87) then
         if (player:getFreeSlotsCount() ~= 0) then

@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12727)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12727)
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
             player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) -- Start next quest "Save the Clock Tower"
         end
     elseif (csid == 152) then
@@ -73,7 +73,7 @@ function onEventFinish(player, csid, option)
             player:addItem(17083)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17083)
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER)
         end
     end
 end

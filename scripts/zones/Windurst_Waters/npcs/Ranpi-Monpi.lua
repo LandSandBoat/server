@@ -95,7 +95,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(tpz.ki.OFF_OFFERING)
         player:addFame(WINDURST, 75)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif (csid == 268) then -- A Crisis in the Making: Repeatable Quest Finish
         player:addGil(GIL_RATE*400)

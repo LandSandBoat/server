@@ -188,7 +188,7 @@ function onEventFinish(player, csid, option)
             player:addFame(WINDURST, 80)
             player:addItem(17081)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17081)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
         end
     elseif (csid == 171 and option ~= 1) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
@@ -214,7 +214,7 @@ function onEventFinish(player, csid, option)
             player:setTitle(tpz.title.HEXER_VEXER)
             player:addItem(17116)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17116)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
             player:needToZone(true)
             player:addFame(WINDURST, 90)
         end
@@ -230,7 +230,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4870)
         else
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
             player:setCharVar("foiledagolemdeliverycomplete", 0)
             player:addItem(4870)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4870)

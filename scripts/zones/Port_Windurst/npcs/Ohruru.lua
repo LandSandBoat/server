@@ -90,7 +90,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestCatchItIfYouCan_var", 0)
 
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)

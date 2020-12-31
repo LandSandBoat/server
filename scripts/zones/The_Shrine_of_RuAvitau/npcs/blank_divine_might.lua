@@ -97,9 +97,9 @@ function onEventFinish(player, csid, option)
                 player:addItem(reward)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
                 if (csid == 55) then
-                    player:completeQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+                    player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
                 else
-                    player:completeQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+                    player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
                     player:delKeyItem(tpz.ki.MOONLIGHT_ORE)
                 end
                 player:setCharVar("DivineMight", 0)

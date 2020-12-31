@@ -61,7 +61,7 @@ function onEventFinish(player, csid, option)
         SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
 
         if (SomethingFishy == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
             player:addFame(WINDURST, 60)
         else
             player:addFame(WINDURST, 10)
