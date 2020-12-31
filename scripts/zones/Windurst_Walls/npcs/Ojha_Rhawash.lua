@@ -76,6 +76,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif csid == 10000 and option == 1 then
         player:tradeComplete()
-        player:addQuest(WINDURST, tpz.quest.id.windurst.FLOWER_CHILD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FLOWER_CHILD)
     end
 end

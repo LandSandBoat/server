@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
     if (csid == 80) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
-            player:addQuest(ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
             player:setCharVar("FOOL_Refused_Once", 0)
         else
             -- Refuses Quest: 'Flavors of Our Lives'
@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 81) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
-            player:addQuest(ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
             player:setCharVar("FOOL_Refused_Once", 0)
         end
     elseif (csid == 87) then

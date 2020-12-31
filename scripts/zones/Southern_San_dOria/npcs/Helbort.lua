@@ -34,7 +34,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 594 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         player:addKeyItem(tpz.ki.WEAPONS_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WEAPONS_ORDER)
     elseif (csid == 607) then

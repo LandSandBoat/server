@@ -65,7 +65,7 @@ end
 
 function onEventFinish(player, csid, option)
     if ((csid == 192 and option == 1) or (csid == 193 and option == 1)) then --just start quest
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
         player:setCharVar("QuestACandlelightVigil_denied", 0)
 
     elseif (csid == 192 and option == 0) then --quest denied, special eventIDs available
@@ -91,7 +91,7 @@ function onEventFinish(player, csid, option)
     elseif ((csid == 197 and option == 1) or (csid == 201 and option == 1)) then
         player:setCharVar("QuestSearchRightWords_prereq", 0) --remove charVar from memory
         player:setCharVar("QuestSearchRightWords_denied", 0)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     elseif (csid == 198) then --finish quest, note: no title granted
         if (player:getFreeSlotsCount() == 0) then

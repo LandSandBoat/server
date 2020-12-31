@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 56) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_DELECTABLE_DEMON)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_DELECTABLE_DEMON)
     elseif (csid == 57) then
         -- Killed Cirein-croin
     elseif (csid == 55 and option == 1) then

@@ -164,7 +164,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Kenapa_Overnight_var", 3)
     elseif (csid == 339) then
         if (option == 0) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
             player:setCharVar("Kenapa_Overnight_var", 4)
         else
             player:setCharVar("Kenapa_Overnight_var", 0)

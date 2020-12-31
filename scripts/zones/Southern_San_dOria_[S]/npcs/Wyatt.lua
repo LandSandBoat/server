@@ -30,7 +30,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 2) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
     elseif (csid == 4) then
         player:tradeComplete()
         if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS) == QUEST_ACCEPTED) then

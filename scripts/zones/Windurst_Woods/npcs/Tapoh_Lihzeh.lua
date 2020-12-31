@@ -63,7 +63,7 @@ function onEventFinish(player, csid, option)
 
     -- PAYING LIP SERVICE
     elseif csid == 477 and option == 1 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
     elseif csid == 479 then
         if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE) == QUEST_ACCEPTED then
             npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE, {fame=60, title=tpz.title.KISSER_MAKEUPPER})

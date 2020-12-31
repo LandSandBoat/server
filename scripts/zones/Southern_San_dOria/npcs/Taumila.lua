@@ -43,7 +43,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 574 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
     elseif (csid == 572) then
         player:tradeComplete()
         player:addTitle(tpz.title.FANG_FINDER)

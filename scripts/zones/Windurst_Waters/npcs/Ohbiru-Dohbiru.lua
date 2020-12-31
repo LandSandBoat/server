@@ -156,7 +156,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Ohbiru_Food_var", 3)
         end
     elseif (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
@@ -174,7 +174,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 352 and option == 0 or csid == 354) then
         if (player:getFreeSlotsCount() >= 1) then
             if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_AVAILABLE) then
-                player:addQuest(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+                player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
             end
             player:addItem(504)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 504)

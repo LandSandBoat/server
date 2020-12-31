@@ -28,7 +28,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 105) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
         player:addKeyItem(tpz.ki.VUNKERL_HERB_MEMO)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VUNKERL_HERB_MEMO)
     elseif (csid == 108) then

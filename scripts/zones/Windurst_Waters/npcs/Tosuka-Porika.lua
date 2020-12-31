@@ -141,10 +141,10 @@ function onEventFinish(player, csid, option)
 
     -- Early Bird Catches the Bookworm
     elseif csid == 387 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
     -- Chasing Tales
     elseif csid == 403 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     end
 end

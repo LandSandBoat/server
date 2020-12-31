@@ -191,7 +191,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
         end
     elseif (csid == 171 and option ~= 1) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
 
     elseif (csid == 179) then
         player:setCharVar("CursesFoiledAgainDayFinished", 0)
@@ -203,7 +203,7 @@ function onEventFinish(player, csid, option)
 
     elseif (csid == 180 and option == 3) then
         player:setCharVar("CursesFoiledAgain", 0)
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
         player:setTitle(tpz.title.TARUTARU_MURDER_SUSPECT)
 
     elseif (csid == 183) then
@@ -221,7 +221,7 @@ function onEventFinish(player, csid, option)
 
     elseif (csid == 340) then
         if (option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
         else
             player:setTitle(tpz.title.TOTAL_LOSER)
         end

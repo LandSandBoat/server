@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2540) then
         -- Starting Quest: 'The Old Man and the Harpoon'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
         player:addKeyItem(tpz.ki.BROKEN_HARPOON)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BROKEN_HARPOON)
     elseif (csid == 2542) then

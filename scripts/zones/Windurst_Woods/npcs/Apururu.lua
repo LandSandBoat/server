@@ -204,7 +204,7 @@ function onEventFinish(player, csid, option)
 
         -- CAN CARDIANS CRY?
     elseif csid == 319 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif csid == 325 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY, {
         gil = 5000
     }) then

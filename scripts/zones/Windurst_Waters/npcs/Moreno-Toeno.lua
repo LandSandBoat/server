@@ -118,7 +118,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 438 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
     elseif (csid == 438 and option == 1) then
         player:setCharVar("QuestTeachersPet_prog", 0)
     elseif (csid == 440) then

@@ -108,7 +108,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 524 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     elseif csid == 531 then
         player:confirmTrade()
     elseif csid == 526 then

@@ -56,7 +56,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 634) then    -- WONDERING_MINSTREL: Quest Start
-        player:addQuest(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
     elseif (csid == 638) then  -- WONDERING_MINSTREL: Quest Finish
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)

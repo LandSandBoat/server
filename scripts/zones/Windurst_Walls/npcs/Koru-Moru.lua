@@ -153,9 +153,9 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, 50)
         player:addGil(50)
     elseif (csid == 197 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
     elseif (csid == 214 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
     elseif (csid == 224) then
         player:tradeComplete()
         player:setCharVar("BlastFromThePast_Prog", 0)

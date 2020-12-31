@@ -54,13 +54,13 @@ function onEventFinish(player, csid, option)
         player:setCharVar("theSweetestThings", 1)
     elseif (csid == 533) then
         if (option == 0) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
             player:setCharVar("theSweetestThings", 0)
         else
             player:setCharVar("theSweetestThings", 2)
         end
     elseif (csid == 534 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
         player:setCharVar("theSweetestThings", 0)
     elseif (csid == 535) then
         player:tradeComplete()

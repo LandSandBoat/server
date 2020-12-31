@@ -46,7 +46,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 119 and option == 3) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT)
     elseif (csid == 121) then
         player:setCharVar("SPLINTERSPINE_GRUKJUK", 0)
         player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT)

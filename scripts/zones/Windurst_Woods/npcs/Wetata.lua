@@ -41,7 +41,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 863 or csid == 867) and option == 2 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
         npcUtil.giveKeyItem(player, tpz.ki.GREEN_INSTITUTE_CARD)
     elseif csid == 862 or csid == 902 then
         local spellID = player:getLocalVar("TradingTrustCipher")

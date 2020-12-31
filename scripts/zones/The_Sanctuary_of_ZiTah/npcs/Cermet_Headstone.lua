@@ -46,7 +46,7 @@ function onTrigger(player, npc)
 
     -- SOUL SEARCHING
     elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES) and not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING)
         player:startEvent(202, tpz.ki.PRISMATIC_FRAGMENT)
 
     -- DEFAULT DIALOGS

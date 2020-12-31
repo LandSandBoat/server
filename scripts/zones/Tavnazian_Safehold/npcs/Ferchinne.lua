@@ -39,7 +39,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 241 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.FLY_HIGH)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
     elseif csid == 243 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.FLY_HIGH, {item = 5265, fame_area = TAVNAZIA}) then -- Mistmelt
         player:confirmTrade()
     elseif csid == 245 and npcUtil.giveItem(player, 5265) then -- Mistmelt

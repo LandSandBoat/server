@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
     elseif (csid == 174 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
     elseif (csid == 171) then
         player:tradeComplete()
         player:setCharVar("saveMySisterVar", 1)

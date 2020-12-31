@@ -66,7 +66,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 48 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 50)

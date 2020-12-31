@@ -41,7 +41,7 @@ function onEventFinish(player, csid, option)
 
     -- Rosel the Armorer, get quest and receipt for prince
     if ((csid == 523 or csid == 524) and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
         player:setCharVar("RefuseRoselTheArmorerQuest", 0)
         player:addKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RECEIPT_FOR_THE_PRINCE)

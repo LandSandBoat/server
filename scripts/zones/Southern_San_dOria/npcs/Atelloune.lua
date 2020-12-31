@@ -41,7 +41,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 890) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
     elseif (csid == 891) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15008) -- Trainee Gloves

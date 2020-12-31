@@ -71,7 +71,7 @@ function onEventFinish(player, csid, option)
         player:setPos(0, 0, 0, 0, 258)
     elseif ((csid == 5061) and (option == 1)) then
         -- Starts Quest: 'Raptor Rapture'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
         player:setCharVar("Raptor_Rapture_Status", 4)
     elseif (csid == 5035) then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney, now need rockberries.

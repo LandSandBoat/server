@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
     -- A Greeting Cardian
     if csid == 296 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar("AGreetingCardian_Event", 2)
         player:setCharVar("AGreetingCardian_timer", os.date("%j"))
         player:needToZone(true) -- wait one day and zone after next step

@@ -47,6 +47,6 @@ function onEventFinish(player, csid, option)
     elseif csid == 172 then
         npcUtil.giveKeyItem(player, tpz.ki.TORN_PATCHES_OF_LEATHER)
     elseif csid == 169 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     end
 end

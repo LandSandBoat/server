@@ -32,7 +32,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2590) then
         -- Starting Quest: 'Transporting'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
     elseif (csid == 2591) then
         -- Finishing Quest: 'Transporting'
         player:completeQuest(ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)

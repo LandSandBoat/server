@@ -65,7 +65,7 @@ function onTrigger(player, npc)
 
     -- Waking Dreams --
     elseif (player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE)==false and ((player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) and  waking_dreams == QUEST_AVAILABLE ) or(waking_dreams  == QUEST_COMPLETED and realday ~= player:getCharVar("Darkness_Named_date")))) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
         player:startEvent(918)--918
 
     elseif (player:hasKeyItem(tpz.ki.WHISPER_OF_DREAMS) == true) then
@@ -135,7 +135,7 @@ function onEventFinish(player, csid, option)
     if (csid == 876) then
         player:setCharVar("COP_Ulmia_s_Path", 4)
     elseif ((csid == 313 and option == 0) or (csid == 314 and option == 0)) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
         player:setCharVar("Kerutoto_Food_var", 1)
     elseif (csid == 313 and option == 1) then
         player:setCharVar("Kerutoto_Food_var", 256)
@@ -154,7 +154,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Kerutoto_Food_var", 2)
         end
     elseif (csid == 357) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
     elseif (csid == 358 or csid == 365) then
         player:tradeComplete()
         player:setCharVar("BlueRibbonBluesProg", 2)

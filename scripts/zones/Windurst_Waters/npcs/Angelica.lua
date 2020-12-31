@@ -96,7 +96,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 92 then
         local desiredBody = poseItems[player:getMainJob()]
 
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
         player:setCharVar("QuestAPoseByOtherName_time", os.time())
         player:setCharVar("QuestAPoseByOtherName_prog", 2)
         player:setCharVar("QuestAPoseByOtherName_equip", desiredBody)

@@ -87,12 +87,12 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 616) then
         if (option == 0) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
         else
             player:setCharVar("SquiresTest_Event", 1)
         end
     elseif (csid == 631 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
         player:setCharVar("SquiresTest_Event", 0)
     elseif (csid == 617) then
         if (player:getFreeSlotsCount(0) >= 1) then
@@ -106,7 +106,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16565) -- Spatha
         end
     elseif (csid == 625 or csid == 630) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     elseif (csid == 626) then
         player:tradeComplete()
         player:addTitle(tpz.title.SPELUNKER)
@@ -117,14 +117,14 @@ function onEventFinish(player, csid, option)
         player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     elseif (csid == 627) then
         if (option == 0) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
             player:addKeyItem(tpz.ki.BOOK_OF_TASKS)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOOK_OF_TASKS)
         else
             player:setCharVar("KnightsTest_Event", 1)
         end
     elseif (csid == 635 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_KNIGHT_S_TEST)
         player:addKeyItem(tpz.ki.BOOK_OF_TASKS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOOK_OF_TASKS)
         player:setCharVar("KnightsTest_Event", 0)

@@ -140,7 +140,7 @@ function onEventFinish(player, csid, option)
 
     -- Moonlit Path and Other Fenrir Stuff
     elseif (csid == 842 and option == 2) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     elseif (csid == 844) then
         player:addKeyItem(tpz.ki.MOON_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOON_BAUBLE)
@@ -239,7 +239,7 @@ function onEventFinish(player, csid, option)
 
     -- Tuning In
     elseif csid == 884 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TUNING_IN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN)
 
     elseif csid == 886 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_IN, {
         gil = 4000,
@@ -250,7 +250,7 @@ function onEventFinish(player, csid, option)
     -- Tuning Out
     elseif csid == 888 then
         player:setCharVar("TuningOut_Progress", 1)
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TUNING_OUT)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_OUT)
 
     elseif csid == 897 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.TUNING_OUT, {
         item = 15180, -- Cache-Nez

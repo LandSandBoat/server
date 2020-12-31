@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("GEO_DWL_Triggered", 1)
         elseif option == 1 then
             player:setCharVar("GEO_DWL_Triggered", 0)
-            player:addQuest(ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
+            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
         end
     elseif csid == 34 then
         player:confirmTrade()

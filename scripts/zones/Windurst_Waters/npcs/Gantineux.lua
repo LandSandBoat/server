@@ -39,7 +39,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10019 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
         player:addKeyItem(tpz.ki.SPIRIT_INCENSE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SPIRIT_INCENSE)
     elseif (csid == 10021) then

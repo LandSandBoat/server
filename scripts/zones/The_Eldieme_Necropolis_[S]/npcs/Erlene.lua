@@ -91,7 +91,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 10 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
         player:setCharVar("ALittleKnowledge", 1)
     elseif (csid == 12) then
         player:tradeComplete()
@@ -111,7 +111,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
         end
     elseif (csid == 18) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
         player:addKeyItem(tpz.ki.ULBRECHTS_SEALED_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ULBRECHTS_SEALED_LETTER)
         player:setCharVar("OnSabbatical", 1)
@@ -129,7 +129,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 23) then
         player:setCharVar("Erlene_Sabbatical_Timer", 0)
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
     elseif (csid == 25) then
         player:setCharVar("DownwardHelix", 2)
     elseif (csid == 27) then

@@ -45,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 47) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
     elseif (csid == 23) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2528)
@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 56) then
         player:setCharVar("BoyAndTheBeast", 2)
     elseif (csid == 59) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
     elseif (csid == 60) then
         player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
         player:setCharVar("WrathOfTheGriffon", 0)

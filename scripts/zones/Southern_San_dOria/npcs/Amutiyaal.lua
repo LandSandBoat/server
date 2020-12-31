@@ -80,7 +80,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 812) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatSandy", 0)
         player:addKeyItem(tpz.ki.RED_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RED_SENTINEL_BADGE)

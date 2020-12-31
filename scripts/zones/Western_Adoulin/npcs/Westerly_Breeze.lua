@@ -116,7 +116,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2530) then
         -- Starting Quest: 'Hunger Strikes'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.HUNGER_STRIKES)
     elseif ((csid == 2532) or (csid == 3007)) then
         -- Finishing Quest: 'Hunger Strikes' or 'The Starving'
         player:tradeComplete()
@@ -134,10 +134,10 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 3005) then
         -- Starting Quest: 'The Starving'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_STARVING)
     elseif (csid == 3010) then
         -- Starting Quest: 'Always More Quoth the Ravenous'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
     elseif (csid == 3012) then
         -- Finishing Quest: 'Always More Quoth The Ravenous'
         player:tradeComplete()

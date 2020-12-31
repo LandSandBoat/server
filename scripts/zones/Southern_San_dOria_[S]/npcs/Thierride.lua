@@ -56,7 +56,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 334) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
 
     elseif (csid == 337) then
         player:tradeComplete()

@@ -57,11 +57,11 @@ end
 
 function onEventFinish(player,csid,option)
     if (csid == 10223 or csid == 10224) and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         player:setCharVar("[QUEST]FullSpeedAhead", 1) -- Flag to start minigame
         player:setPos(475, 8.8, -159, 128, 105)
     elseif csid == 10223 and option == 2 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     elseif csid == 10225 then
         -- Complete quest
         player:setCharVar("[QUEST]FullSpeedAhead", 0)

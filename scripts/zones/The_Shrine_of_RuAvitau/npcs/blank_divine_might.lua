@@ -73,11 +73,11 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ZilartStatus", 1)
 
     elseif ((csid == 54 or csid == 56) and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
 
     elseif (csid == 57) then -- Divine Might Repeat
         player:delQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     elseif (csid == 55 or csid == 59) then -- Turning in Divine Might or Repeat
         local reward = 0

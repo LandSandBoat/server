@@ -71,7 +71,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 665) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     elseif (csid == 670 or csid == 674) then
         player:addTitle(tpz.title.EDITORS_HATCHET_MAN)
         player:addGil(GIL_RATE*560)

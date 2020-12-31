@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
 
         if (option == 1) then
             -- Starts Quest: 'Raptor Rapture'
-            player:addQuest(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
             player:setCharVar("Raptor_Rapture_Status", 4)
         end
     elseif csid == 2 then

@@ -86,7 +86,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10111 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     elseif (csid == 10118) then
         player:setCharVar("Lakeside_Minuet_Progress", 0)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
@@ -101,7 +101,7 @@ function onEventFinish(player, csid, option)
             player:delQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
             player:delKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE)
         end
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         player:setCharVar("QuestStatus_DNC_AF1", 1)
 
     elseif (csid== 10133) then
@@ -117,7 +117,7 @@ function onEventFinish(player, csid, option)
     -- Dancer AF: The Road to Divadom
     elseif (csid == 10136) then -- Road To Divadom pt 1
         player:setCharVar("roadToDivadomCS", 1)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
     elseif (csid == 10139) then -- string of events
         player:startEvent(10214)
     elseif (csid == 10214) then
@@ -144,7 +144,7 @@ function onEventFinish(player, csid, option)
     -- Dancer AF: Comeback Queen
     elseif (csid == 10143) then
         player:setCharVar("comebackQueenCS", 1)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)
         player:addKeyItem(tpz.ki.WYATTS_PROPOSAL)
         player:messageSpecial( ID.text.KEYITEM_OBTAINED, tpz.ki.WYATTS_PROPOSAL)
     elseif (csid == 10147) then

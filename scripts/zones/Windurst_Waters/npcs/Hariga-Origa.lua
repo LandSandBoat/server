@@ -57,7 +57,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 381 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
         player:addKeyItem(tpz.ki.NOTES_FROM_HARIGAORIGA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NOTES_FROM_HARIGAORIGA)
     elseif (csid == 385) then
@@ -70,7 +70,7 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 120)
         player:completeQuest(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
     elseif (csid == 413 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     elseif (csid == 417) then
         player:needToZone(true)
         player:addGil(GIL_RATE*3000)

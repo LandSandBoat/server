@@ -39,7 +39,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 487 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
         player:setCharVar("GiohAijhriSpokenTo", 1)
     elseif csid == 490 then
         player:confirmTrade()

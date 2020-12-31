@@ -84,7 +84,7 @@ function onEventFinish(player, csid, option)
 
     -- "The Seamstress" Quest
     if ((csid == 528 or csid == 531) and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS)
         player:setCharVar("theSeamStress", 0)
     elseif (csid == 530) then
         if (player:getFreeSlotsCount() == 0) then
@@ -104,7 +104,7 @@ function onEventFinish(player, csid, option)
 
     -- "Liard Skins" Quest
     elseif ((csid == 559 or csid == 562) and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LIZARD_SKINS)
         player:setCharVar("lzdSkins", 0)
     elseif (csid == 561) then
         if (player:getFreeSlotsCount() == 0) then
@@ -124,7 +124,7 @@ function onEventFinish(player, csid, option)
 
     -- "Black Tiger Skins" Quest
     elseif ((csid == 576 or csid == 579) and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACK_TIGER_SKINS)
         player:setCharVar("blkTigerSkin", 0)
     elseif (csid == 577) then
         if (player:getFreeSlotsCount() == 0) then

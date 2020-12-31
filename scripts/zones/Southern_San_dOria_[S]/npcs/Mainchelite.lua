@@ -61,18 +61,18 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
         player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 7 and option == 1) then
         player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 8 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 10 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 11 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 12 and option == 0) then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if (player:getCharVar("Campaign_Nation") == 0) then

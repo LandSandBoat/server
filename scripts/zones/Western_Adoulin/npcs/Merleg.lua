@@ -38,7 +38,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2520) then
         -- Starting Quest: 'A Pioneers Best (Imaginary) Friend'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
         if (player:hasStatusEffect(tpz.effect.IONIS)) then
             -- Finishes quest if Ionis is already active
             player:startEvent(2522)

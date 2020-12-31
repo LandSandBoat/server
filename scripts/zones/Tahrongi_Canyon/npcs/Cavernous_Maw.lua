@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 38 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.MEGADRILE_MENACE)
     elseif csid == 39 then
         -- Killed Glavoid
     elseif csid == 100 and option == 1 then

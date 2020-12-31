@@ -88,7 +88,7 @@ function onEventFinish(player, csid, option)
 
     -- EXOTIC DELICACIES
     elseif (csid == 2860 and option == 1) then
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
     elseif (csid == 2861) then
         if (npcUtil.completeQuest(player, ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES, {bayld=500, item=5975, xp=1000})) then
             player:confirmTrade()

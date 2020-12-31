@@ -35,7 +35,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 90 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
     elseif (csid == 89) then
         player:tradeComplete()
         player:addGil(GIL_RATE*120)

@@ -60,7 +60,7 @@ function onEventFinish(player, csid, option)
         if (csid == 70 and option == 0) then
             player:setCharVar("has_seen_rdmaf1_quest_already", 1)
         elseif (option == 1) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
             player:setCharVar("has_seen_rdmaf1_quest_already", 0)
         end
     elseif (csid == 75) then

@@ -66,7 +66,7 @@ end
 function onEventFinish(player, csid, option, npc)
     npc:wait(5000)
     if csid == 510 and option == 0 and npcUtil.giveItem(player, 600) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
     elseif csid == 644 then
         npcUtil.giveItem(player, 600)
     elseif csid == 513 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL, {item = 12832, fame = 30, title = tpz.title.RONFAURIAN_RESCUER, var = "SentrysPerilTraded"}) then

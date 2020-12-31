@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 514 and option == 1 then
         player:setCharVar("FLOWER_PROGRESS", 1)
-        player:addQuest(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     elseif csid == 520 then -- First completion, Iron Sword awarded.
         if player:getFreeSlotsCount() > 0 then
             player:tradeComplete()

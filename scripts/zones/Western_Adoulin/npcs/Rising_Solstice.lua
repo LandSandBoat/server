@@ -51,7 +51,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2550) then
         -- Starting Quest: 'A Certain Substitute Patrolman'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
         player:addKeyItem(tpz.ki.WESTERN_ADOULIN_PATROL_ROUTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WESTERN_ADOULIN_PATROL_ROUTE)
         player:setCharVar("ACSP_NPCs_Visited", 1)

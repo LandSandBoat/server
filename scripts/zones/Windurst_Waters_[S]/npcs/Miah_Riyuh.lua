@@ -56,7 +56,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 103 and option == 0 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:addKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.GREEN_RECOMMENDATION_LETTER)
@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         player:setCharVar("SEALED_DOORS", 0)
     elseif csid == 105 and option == 0 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:addKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.GREEN_RECOMMENDATION_LETTER)

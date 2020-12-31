@@ -16,7 +16,7 @@ function onTrade(player, npc, trade)
     -- WRATH OF THE OPO-OPOS
     if npcUtil.tradeHas(trade, 790) then
         if not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.FIRE_FRAGMENT)) then
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
             player:startEvent(202, 790)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
