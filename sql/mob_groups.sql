@@ -10299,6 +10299,11 @@ INSERT INTO `mob_groups` VALUES (44,3415,159,'Rumble_Crawler',0,128,2131,0,0,53,
 INSERT INTO `mob_groups` VALUES (45,836,159,'Crimson-toothed_Pawberry',0,128,535,10000,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (46,3434,159,'Sacrificial_Goblet',0,128,2142,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (47,4463,159,'Yallery_Brown',0,128,0,7200,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (48,6726,159,'Neith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,6727,159,'Neiths_Bobbin',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,6728,159,'Azure-toothed_Clawberry',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,6729,159,'Clawberrys_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,6730,159,'Clawberrys_Avatar',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (8418,1798,159,'Grav_iton',0,128,0,0,0,0,0,0);
 
