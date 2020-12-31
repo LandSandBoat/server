@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 706 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
-            player:delQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+            player:delQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar("TrialByIce_date", 0)

@@ -101,6 +101,6 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
         end
     elseif (csid == 13 and option == 1) then
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     end
 end

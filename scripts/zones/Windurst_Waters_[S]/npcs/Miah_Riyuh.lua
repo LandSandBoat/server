@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("GREEN_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.GREEN_RECOMMENDATION_LETTER)
     elseif csid == 104 and option == 1 then
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:delKeyItem(tpz.ki.ZONPAZIPPAS_ALLPURPOSE_PUTTY)
         player:setCharVar("SEALED_DOORS", 0)
     elseif csid == 105 and option == 0 then

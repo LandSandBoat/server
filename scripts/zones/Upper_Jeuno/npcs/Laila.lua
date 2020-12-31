@@ -98,7 +98,7 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     elseif (csid== 10129) then
         if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED) then
-            player:delQuest(JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+            player:delQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)
             player:delKeyItem(tpz.ki.THE_ESSENCE_OF_DANCE)
         end
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ)

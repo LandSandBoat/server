@@ -37,7 +37,7 @@ function onEventFinish(player,csid,option)
         player:addMission(ZILART, tpz.mission.id.zilart.AWAKENING)
         player:setCharVar("ZilartStatus", 3)
         player:setCharVar("PromathiaStatus", 7)
-        player:delQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:delQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:delQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
     end
 end

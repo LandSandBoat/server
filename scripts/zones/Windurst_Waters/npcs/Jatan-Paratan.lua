@@ -20,7 +20,7 @@ end
 
 function onTrigger(player, npc)
 
-            --        player:delQuest(WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+            --        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
 
 
     wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)

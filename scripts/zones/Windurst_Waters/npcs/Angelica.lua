@@ -113,7 +113,7 @@ function onEventFinish(player, csid, option)
 
     -- fail quest
     elseif csid == 102 then
-        player:delQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
         player:addTitle(tpz.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
         player:setCharVar("QuestAPoseByOtherName_time", 0)
         player:setCharVar("QuestAPoseByOtherName_equip", 0)

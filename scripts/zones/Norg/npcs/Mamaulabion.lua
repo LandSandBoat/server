@@ -130,7 +130,7 @@ function onEventFinish(player, csid, option)
 
     elseif (csid == 243) then
         if (option == 1) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
             player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
         end
     end

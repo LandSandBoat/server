@@ -61,7 +61,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 66 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar("TrialByWind_date", 0)

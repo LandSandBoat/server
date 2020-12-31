@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 109 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         end
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar("TrialByWater_date", 0)

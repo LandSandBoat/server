@@ -20,7 +20,7 @@ end
 
 function onTrigger(player, npc)
 
---    player:delQuest(WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)  -- ================== FOR TESTING ONLY =====================
+--    player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)  -- ================== FOR TESTING ONLY =====================
 --    player:addFame(WINDURST, 200)   -- ================== FOR TESTING ONLY =====================
 
     function testflag(set, flag)

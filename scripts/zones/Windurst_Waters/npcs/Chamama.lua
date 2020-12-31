@@ -106,7 +106,7 @@ function onTrigger(player, npc)
     else
         player:startEvent(651) -- Standard Conversation
     end
--- player:delQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
+-- player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
 end
 
 function onEventUpdate(player, csid, option)

@@ -73,7 +73,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ThePuppetMasterProgress", 4)
     elseif (csid == 249 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
-            player:delQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+            player:delQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         player:setCharVar("TrialByEarth_date", 0)

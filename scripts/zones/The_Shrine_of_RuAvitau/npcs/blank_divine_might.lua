@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
 
     elseif (csid == 57) then -- Divine Might Repeat
-        player:delQuest(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+        player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     elseif (csid == 55 or csid == 59) then -- Turning in Divine Might or Repeat

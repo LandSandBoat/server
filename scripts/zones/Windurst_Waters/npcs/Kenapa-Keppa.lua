@@ -178,7 +178,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 343) then
         player:setCharVar("Kenapa_Overnight_var", 4) -- Begin reminder sequence
     elseif (csid == 346) then
-        player:delQuest(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
         player:delKeyItem(tpz.ki.SMALL_BAG)
         player:setCharVar("Kenapa_Overnight_Hour_var", 0)
         player:setCharVar("Kenapa_Overnight_var", 256)

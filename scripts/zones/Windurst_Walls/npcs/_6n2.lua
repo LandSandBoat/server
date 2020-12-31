@@ -123,7 +123,7 @@ function onEventFinish(player, csid, option)
     -- THE PUPPET MASTER
     elseif csid == 402 then
         if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
-            player:delQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+            player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
         end
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
         player:setCharVar("ThePuppetMasterProgress", 1)

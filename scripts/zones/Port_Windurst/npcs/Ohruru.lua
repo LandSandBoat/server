@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
---    player:delQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
+--    player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
 -- ======== FOR TESTING ONLY ==========-----
 --    if (player:getCharVar("QuestCatchItIfYouCan_var") == 0 and player:hasStatusEffect(tpz.effect.MUTE) == false and player:hasStatusEffect(tpz.effect.BANE) == false and player:hasStatusEffect(tpz.effect.PLAGUE) == false) then
 --        rand = math.random(1, 3)

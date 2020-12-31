@@ -134,7 +134,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
         end
     elseif (csid == 380) then
-        player:delQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:delQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     elseif (csid == 382 and option ~= 99) then
         player:setCharVar("BrygidWantsSubligar", option)

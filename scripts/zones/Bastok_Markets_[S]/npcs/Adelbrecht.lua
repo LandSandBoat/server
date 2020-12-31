@@ -64,9 +64,9 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     elseif (csid == 140 and option == 1) then
         player:delKeyItem(tpz.ki.BATTLE_RATIONS)
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
     elseif (csid == 141 or csid == 142 and option == 1) then
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
     elseif (csid == 143) then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if (player:getCharVar("Campaign_Nation") == 0) then
