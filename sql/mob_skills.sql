@@ -1215,12 +1215,12 @@ INSERT INTO `mob_skills` VALUES (1386,1021,'medusa_javelin',0,7.0,2000,1000,4,0,
 INSERT INTO `mob_skills` VALUES (1387,1017,'sideswipe',0,7.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1388,1015,'ranged_attack',0,25.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1389,1016,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1390,1036,'amatsu_torimai',0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1391,1038,'amatsu_kazakiri',0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1392,1038,'amatsu_yukiarashi',0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1393,1040,'amatsu_tsukioboro',0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1395,1041,'amatsu_tsukikage',0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1390,1037,'amatsu_torimai',0,15.0,2000,1500,4,0,0,0,1,4,0);
+INSERT INTO `mob_skills` VALUES (1391,1038,'amatsu_kazakiri',0,15.0,2000,1500,4,0,0,0,4,6,0);
+INSERT INTO `mob_skills` VALUES (1392,1039,'amatsu_yukiarashi',0,15.0,2000,1500,4,0,0,0,7,6,0);
+INSERT INTO `mob_skills` VALUES (1393,1040,'amatsu_tsukioboro',0,15.0,2000,1500,4,0,0,0,10,5,0);
+INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1500,4,0,0,0,11,2,0);
+INSERT INTO `mob_skills` VALUES (1395,1036,'amatsu_tsukikage',0,15.0,2000,1500,4,0,0,0,12,6,0);
 -- INSERT INTO `mob_skills` VALUES (1396,1140,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1397,1042,'oisoya',0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1398,1032,'riceball',0,15.0,2000,1500,1,0,0,0,0,0,0); -- riceball eating
