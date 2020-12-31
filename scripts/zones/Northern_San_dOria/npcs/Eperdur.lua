@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
         end
     elseif (csid == 681 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
         player:addKeyItem(tpz.ki.SEAL_OF_BANISHING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEAL_OF_BANISHING)
     elseif (csid == 683) then
@@ -90,7 +90,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif (csid == 685 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
     elseif (csid == 687) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4747)

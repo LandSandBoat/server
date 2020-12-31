@@ -47,11 +47,11 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 77 then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
     elseif csid == 78 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG, {item=17386, fameArea=RABAO, fame=60, title=tpz.title.THE_IMMORTAL_FISHER_LU_SHANG}) then
         player:confirmTrade()
     elseif csid == 131 then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
     elseif csid == 132 then
         player:confirmTrade()
         player:setCharVar("IndomitableSpiritTimer", getConquestTally()) -- Player must wait until next CQ tally

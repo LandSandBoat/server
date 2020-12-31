@@ -44,7 +44,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 654 and option == 1) then --Player accepts the quest
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
     elseif (csid == 658) then --The player trades the Engraved Key to the NPC. Here come the rewards!
         player:tradeComplete()
         player:addGil(GIL_RATE*10000)

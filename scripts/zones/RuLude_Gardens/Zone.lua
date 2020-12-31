@@ -145,14 +145,14 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TOAUM40_STARTDAY", VanadielDayOfTheYear())
         player:addMission(TOAU, tpz.mission.id.toau.UNRAVELING_REASON)
     elseif csid == 142 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
         player:setCharVar('StormsOfFate', 0)
         player:setCharVar("StormsOfFateWait", getVanaMidnight())
     elseif csid == 161 then
         npcUtil.giveKeyItem(player, tpz.ki.NOTE_WRITTEN_BY_ESHANTARL)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:setCharVar("StormsOfFateWait", 0)
     elseif csid == 162 then
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
@@ -163,7 +163,7 @@ function onEventFinish(player, csid, option)
         player:setLocalVar('ANZONE', 1)
         player:setCharVar("ApocNighWait", getVanaMidnight())
     elseif csid == 123 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
         player:setCharVar('ApocalypseNigh', 1)
         player:setCharVar("ApocNighWait", 0)
     end

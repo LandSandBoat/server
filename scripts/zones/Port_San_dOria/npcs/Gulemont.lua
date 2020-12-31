@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
 
     -- "The Dismayed Customer"
     if (csid == 605 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
         player:setCharVar("theDismayedCustomer", math.random(1, 3))
     elseif (csid == 607) then
         player:delKeyItem(tpz.ki.GULEMONTS_DOCUMENT)

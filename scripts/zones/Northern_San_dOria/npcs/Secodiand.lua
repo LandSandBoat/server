@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
 --
     if (csid == 19 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
     elseif (csid == 18) then
         player:tradeComplete()
         player:addGil(GIL_RATE*200)

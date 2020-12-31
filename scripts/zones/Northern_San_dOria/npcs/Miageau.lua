@@ -53,7 +53,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
         end
     elseif (csid == 504) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
     end
 
 end

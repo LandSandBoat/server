@@ -37,7 +37,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 116) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
         player:setCharVar("EveryonesGrudgeStarted", 1)
     elseif (csid == 118) then
         player:completeQuest(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)

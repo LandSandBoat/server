@@ -79,6 +79,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif (csid == 605 and option == 1) then
         player:tradeComplete()
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
     end
 end

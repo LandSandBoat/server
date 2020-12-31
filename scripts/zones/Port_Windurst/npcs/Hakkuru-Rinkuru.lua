@@ -107,7 +107,7 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 1, csid, option)
 
     elseif (csid == 274 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(GIL_RATE*1500)
             player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
@@ -116,7 +116,7 @@ function onEventFinish(player, csid, option)
             player:needToZone(true)
             player:tradeComplete()
     elseif (csid == 259 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
     elseif (csid == 267) then
         rand = math.random(3) --Setup random variable to determine which 2 items are returned upon quest completion
         if (rand == 1) then

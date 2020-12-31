@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
     if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
         player:setCharVar("has_seen_drgaf1_quest_already", 1)
     elseif ((csid == 73 or csid == 71) and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         player:setCharVar("has_seen_drgaf1_quest_already", 0)
         player:setCharVar("aCraftsmanWork", 1)
     elseif (csid == 70) then -- This is only if player has Altepa Polishing Stone

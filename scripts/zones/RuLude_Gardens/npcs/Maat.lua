@@ -112,7 +112,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BeatAroundTheBushin", 6)
     -- Genkai 1
     elseif (csid == 79 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
     elseif (csid == 81) then
         player:tradeComplete()
         player:addTitle(tpz.title.HORIZON_BREAKER)
@@ -121,7 +121,7 @@ function onEventFinish(player, csid, option)
         player:addFame(JEUNO, 30)
     -- Genkai 2
     elseif (csid == 82 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
     elseif (csid == 84) then
         player:addTitle(tpz.title.SUMMIT_BREAKER)
         player:delKeyItem(tpz.ki.ROUND_FRIGICITE)
@@ -133,7 +133,7 @@ function onEventFinish(player, csid, option)
         player:addFame(JEUNO, 40)
     -- Genkai 3
     elseif (csid == 85 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND)
     elseif (csid == 87) then
         player:addTitle(tpz.title.SKY_BREAKER)
         player:delKeyItem(tpz.ki.ORCISH_CREST)
@@ -145,7 +145,7 @@ function onEventFinish(player, csid, option)
         player:addFame(JEUNO, 50)
     elseif (csid == 88) then
         if (option == 1) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
         else
             player:setCharVar("ridingOnTheClouds_1", 0)
             player:setCharVar("ridingOnTheClouds_2", 0)
@@ -163,7 +163,7 @@ function onEventFinish(player, csid, option)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
         player:addFame(JEUNO, 60)
     elseif (csid == 92) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS)
     elseif (csid == 64 and option == 1) then
         local mJob = player:getMainJob()
             if (mJob == tpz.job.MNK or mJob == tpz.job.WHM or mJob == tpz.job.SMN) then player:setPos(299.316, -123.591, 353.760, 66, 146)

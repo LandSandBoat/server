@@ -38,7 +38,7 @@ function onEventFinish(player, csid, option)
     if (csid == 104 and player:getCharVar("PastPerfectVar") == 0) then
         player:setCharVar("PastPerfectVar", 1)
     elseif (csid == 130) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
     elseif (csid == 131) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12560)

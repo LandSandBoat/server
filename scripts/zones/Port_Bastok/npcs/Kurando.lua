@@ -38,7 +38,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 170) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
 
     elseif (csid == 171) then
         if    (player:getFreeSlotsCount() == 0) then

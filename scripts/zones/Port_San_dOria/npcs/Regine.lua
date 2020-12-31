@@ -51,7 +51,7 @@ function onEventFinish(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(

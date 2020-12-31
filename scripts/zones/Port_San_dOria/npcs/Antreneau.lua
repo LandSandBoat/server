@@ -62,7 +62,7 @@ end
 function onEventFinish(player, csid, option)
 
     if csid == 725 then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     else
         if csid == 527 then
             player:setCharVar("aTasteForMeat", 1)

@@ -41,7 +41,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 20 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING)
     elseif csid == 21 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.DONATE_TO_RECYCLING, {item = 89, fame_area = SELBINA, title = tpz.title.ECOLOGIST}) then
         player:confirmTrade()
     end

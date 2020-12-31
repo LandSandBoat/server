@@ -37,7 +37,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 6) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
     elseif (csid == 8) then -- give the player the key items he needs to complete the quest
         player:addKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC)
         player:addKeyItem(tpz.ki.LETTER_FROM_ALFESAR)

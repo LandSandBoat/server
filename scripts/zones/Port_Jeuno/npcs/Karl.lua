@@ -40,7 +40,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 0) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     elseif (csid == 1) then
         player:addTitle(tpz.title.TRADER_OF_MYSTERIES)
         player:addKeyItem(tpz.ki.WONDER_MAGIC_SET)

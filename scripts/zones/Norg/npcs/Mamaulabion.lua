@@ -108,7 +108,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 191) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
 
     elseif (csid == 193) then
         player:confirmTrade()
@@ -131,7 +131,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 243) then
         if (option == 1) then
             player:delQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
         end
     end
 end

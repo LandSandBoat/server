@@ -77,7 +77,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.UNFINISHED_LETTER)
     elseif (csid == 134 and option == 0) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.THE_USUAL)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL)
         end
     elseif (csid == 135) then
         player:tradeComplete()

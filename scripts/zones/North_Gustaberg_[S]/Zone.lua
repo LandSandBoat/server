@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 1) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR)
         player:addKeyItem(tpz.ki.CLUMP_OF_ANIMAL_HAIR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLUMP_OF_ANIMAL_HAIR)
     end

@@ -34,7 +34,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 0 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
     elseif csid == 1 then
         -- Killed Amphitrite
     elseif csid == 908 and option == 1 then

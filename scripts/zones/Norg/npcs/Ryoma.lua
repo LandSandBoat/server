@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL)
         player:setCharVar("AyameAndKaede_Event", 4)
     elseif (csid == 133) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         player:setCharVar("twentyInPirateYearsCS", 1)
     elseif (csid == 134) then
         if (player:getFreeSlotsCount() <= 1) then
@@ -82,9 +82,9 @@ function onEventFinish(player, csid, option)
             player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
     elseif (csid == 135) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
     elseif (csid == 136) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
     elseif (csid == 137) then
         player:setCharVar("trueWillCS", 1)
     else

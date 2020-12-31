@@ -89,6 +89,6 @@ function onEventFinish(player, csid, option)
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     elseif (csid == 10023 and option == 1) then
         player:tradeComplete()
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     end
 end

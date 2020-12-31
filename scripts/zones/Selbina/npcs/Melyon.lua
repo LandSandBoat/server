@@ -45,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 60 and option == 10 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
     elseif csid == 62 then
         player:addGil(100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)

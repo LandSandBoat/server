@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 57 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         player:setCharVar("troubleAtTheSluiceVar", 1)
     elseif (csid == 56) then
         if (player:getFreeSlotsCount() == 0) then

@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
     if (csid == 526) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_AVAILABLE) then
             player:setCharVar("aTasteForMeat", 0)
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
         end
     elseif (csid == 528) then
         player:tradeComplete()

@@ -33,7 +33,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 65) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)
         player:setCharVar("TheHolyCrest_Event", 3)
     elseif (csid == 62 and option == 0) then
         player:setCharVar("TheHolyCrest_Event", 4)

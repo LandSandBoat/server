@@ -51,7 +51,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 240) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
         end
     elseif (csid == 352) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 0, true))

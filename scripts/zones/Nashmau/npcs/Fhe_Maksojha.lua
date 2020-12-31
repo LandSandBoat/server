@@ -36,7 +36,7 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 293) then
         player:setCharVar("notmeanttobeCS", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
     elseif (csid == 294) then
         player:setCharVar("notmeanttobeCS", 3)
     elseif (csid == 297) then

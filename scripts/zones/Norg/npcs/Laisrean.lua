@@ -37,7 +37,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 33 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     elseif (csid == 35) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4946)

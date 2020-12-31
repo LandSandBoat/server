@@ -55,7 +55,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 208) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar("TokakaSpokenTo", 1)
     elseif (csid == 210) then
         SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)

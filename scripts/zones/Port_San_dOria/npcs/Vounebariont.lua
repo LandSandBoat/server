@@ -36,7 +36,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 516) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
         end
     elseif (csid == 514) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then

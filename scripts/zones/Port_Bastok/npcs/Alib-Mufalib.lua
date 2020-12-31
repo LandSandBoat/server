@@ -78,7 +78,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 357) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatBastok", 0)
         player:addKeyItem(tpz.ki.BLUE_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_SENTINEL_BADGE)

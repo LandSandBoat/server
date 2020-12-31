@@ -39,7 +39,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 123) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
         player:setCharVar("ForevertoHold_Event", 1)
     elseif (csid == 126) then
         player:addTitle(tpz.title.QIJIS_FRIEND)

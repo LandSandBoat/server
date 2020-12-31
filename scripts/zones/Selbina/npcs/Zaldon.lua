@@ -589,7 +589,7 @@ function onEventFinish(player, csid, option)
 
     -- INSIDE THE BELLY
     elseif csid == 161 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
     elseif csid == 166 or csid == 167 then
         giveReward(player, csid)
     end

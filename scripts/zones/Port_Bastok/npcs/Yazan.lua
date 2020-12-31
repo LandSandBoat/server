@@ -42,7 +42,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 191) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
     elseif (csid == 193) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED) then
             player:addTitle(tpz.title.SAND_BLASTER)

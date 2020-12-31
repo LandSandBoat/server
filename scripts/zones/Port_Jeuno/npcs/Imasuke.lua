@@ -58,7 +58,7 @@ end
 function onEventFinish(player, csid, option)
     -- THE ANTIQUE COLLECTOR
     if (csid == 13 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
     elseif (csid == 15) then
         player:addTitle(tpz.title.TRADER_OF_ANTIQUITIES)
         if (player:hasKeyItem(tpz.ki.MAP_OF_DELKFUTTS_TOWER) == false) then

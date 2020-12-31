@@ -87,11 +87,11 @@ function onEventFinish(player, csid, option)
         if option == 0 then
             player:setCharVar("ChasingQuotas_No", 1)
         else
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
         end
     elseif (csid == 14 and option == 1) then
         player:setCharVar("ChasingQuotas_No", 0)
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
     elseif (csid == 17) then
         player:setCharVar("ChasingQuotas_Progress", 1)
         player:setCharVar("ChasingQuotas_date", os.time() + 60)

@@ -31,7 +31,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 180) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
     elseif (csid == 181) then
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)

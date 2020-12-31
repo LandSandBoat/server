@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
             player:delQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         player:setCharVar("TrialByEarth_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_EARTH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_EARTH)

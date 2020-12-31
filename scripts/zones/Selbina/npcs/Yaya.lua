@@ -23,7 +23,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 31 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNDER_THE_SEA)
         player:setCharVar("underTheSeaVar", 1)
     end
 end

@@ -54,7 +54,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 24 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
     elseif (csid == 23) then
         player:tradeComplete()
         player:addTitle(tpz.title.VAMPIRE_HUNTER_DMINUS)

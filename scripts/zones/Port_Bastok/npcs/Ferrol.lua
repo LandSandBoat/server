@@ -52,7 +52,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1547) --Mini tuning fork
         else
             player:setCharVar("TrialSizeEarth_date", 0)
-            player:addQuest(BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
             player:addItem(1547)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1547)
         end

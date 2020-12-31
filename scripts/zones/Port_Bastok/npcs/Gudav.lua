@@ -38,7 +38,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 110) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     elseif (csid == 112) then
         if (player:hasKeyItem(tpz.ki.MAP_OF_THE_GUSGEN_MINES) == false) then
             player:addKeyItem(tpz.ki.MAP_OF_THE_GUSGEN_MINES)

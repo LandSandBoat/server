@@ -46,7 +46,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 80) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
     elseif (csid == 81) then
         player:tradeComplete()
         player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)

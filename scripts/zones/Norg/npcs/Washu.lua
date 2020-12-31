@@ -67,7 +67,7 @@ function onEventFinish(player, csid, option)
 
     -- STOP YOUR WHINING
     elseif (csid == 21 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
         npcUtil.giveKeyItem(player, tpz.ki.EMPTY_BARREL)
     elseif (csid == 23 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING, {item=4952, fame=75, fameArea=NORG, title=tpz.title.APPRENTICE_SOMMELIER})) then -- Scroll of Hojo: Ichi
         player:delKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW)

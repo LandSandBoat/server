@@ -92,13 +92,13 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIMIT_BREAKER)
     elseif (csid == 10045) then
         if (option == 5) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT)
         elseif (option == 7 ) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS)
         elseif (option == 9) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS)
         elseif (option == 11) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
         -- PRELUDE TO PUISSANCE + BEYOND INFINITY
         elseif option == 15 then
@@ -106,26 +106,26 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("MaybeAnotherTimeCS", 1)
         elseif option == 13 then
             player:tradeComplete()
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
         elseif option == 14 then
             player:tradeComplete()
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
         elseif option == 19 then
             player:tradeComplete()
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
         elseif option == 20 then
             player:tradeComplete()
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
         elseif option == 21 then
             player:tradeComplete()
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)
             player:addKeyItem(tpz.ki.SOUL_GEM_CLASP)
             player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
 
@@ -200,7 +200,7 @@ function onEventFinish(player, csid, option)
         player:setLevelCap(99)
         player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_99)
     elseif csid == 10194 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
 
     -- BEYOND INFINITY (Trading kindred high crest for keitem)
     elseif csid == 10195 then

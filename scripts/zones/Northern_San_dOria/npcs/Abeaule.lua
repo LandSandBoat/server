@@ -60,7 +60,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 592)
         else
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
             player:setCharVar("theTraderInTheForestCS", 0)
             player:addItem(592)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 592) -- Supplies Order
@@ -86,7 +86,7 @@ function onEventFinish(player, csid, option)
         end
     -- "The Medicine Woman" Quest
     elseif (csid == 613 and option == 0 or csid == 615 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     elseif (csid == 614) then
         player:addTitle(tpz.title.TRAVELING_MEDICINE_MAN)
         player:delKeyItem(tpz.ki.COLD_MEDICINE)

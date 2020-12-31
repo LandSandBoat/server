@@ -56,11 +56,11 @@ function onEventFinish(player, csid, option)
     elseif csid == 37 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNDER_THE_SEA, {item = 13335, fame_area = SELBINA, title = tpz.title.LIL_CUPID, var = "underTheSeaVar"}) then
         player:delKeyItem(tpz.ki.ETCHED_RING)
     elseif csid == 70 and option == 50 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_GIFT)
     elseif csid == 72 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_GIFT, {item = 16497, fame_area = SELBINA, title = tpz.title.SAVIOR_OF_LOVE}) then
         player:confirmTrade()
     elseif csid == 73 and option == 50 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_REAL_GIFT)
     elseif csid == 75 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_REAL_GIFT, {item = 17385, fame_area = SELBINA, title = tpz.title.THE_LOVE_DOCTOR}) then
         player:confirmTrade()
     end

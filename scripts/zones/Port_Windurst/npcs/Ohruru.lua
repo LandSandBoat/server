@@ -70,7 +70,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 231) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     elseif (csid == 246 and option == 0) then
         player:needToZone(true)
         if (player:hasStatusEffect(tpz.effect.MUTE) == true) then

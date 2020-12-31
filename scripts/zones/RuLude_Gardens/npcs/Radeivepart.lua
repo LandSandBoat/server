@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 1)
     elseif (csid == 159 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.NORTHWARD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
     elseif (csid == 61) then
         player:completeQuest(JEUNO, tpz.quest.id.jeuno.NORTHWARD)
         player:addTitle(tpz.title.ENVOY_TO_THE_NORTH)

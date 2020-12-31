@@ -75,6 +75,6 @@ function onEventFinish(player, csid, option)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION)
         end
     elseif (csid == 304 and option == 700) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION)
     end
 end

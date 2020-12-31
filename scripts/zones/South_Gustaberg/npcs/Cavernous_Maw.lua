@@ -34,7 +34,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 0 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)
     elseif csid == 1 then
         -- Killed Bennu
     elseif csid == 914 and option == 1 then

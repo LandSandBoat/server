@@ -82,7 +82,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 280) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
     elseif (csid == 284) then
         player:needToZone(true)
         player:delKeyItem(tpz.ki.BROKEN_WAND)

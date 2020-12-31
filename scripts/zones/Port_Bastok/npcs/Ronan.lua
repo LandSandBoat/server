@@ -47,7 +47,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 82) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
     elseif (csid == 84) then
         player:needToZone(true)
         player:setCharVar("OutOfOneShell", 1)

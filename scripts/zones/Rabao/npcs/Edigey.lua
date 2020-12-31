@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 2 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:setCharVar("DontForgetAntidoteVar", 1)
     elseif (csid == 4 and player:getCharVar("DontForgetAntidoteVar") == 1) then --If completing for the first time
         player:setCharVar("DontForgetAntidoteVar", 0)

@@ -48,7 +48,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 174) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
         player:setCharVar("TheWisdomVar", 1)
     elseif (csid == 176) then
         if (player:getFreeSlotsCount() == 0) then

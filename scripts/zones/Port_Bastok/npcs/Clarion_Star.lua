@@ -41,7 +41,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 434 or csid == 438) and option == 2 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
         npcUtil.giveKeyItem(player, tpz.ki.BLUE_INSTITUTE_CARD)
     elseif csid == 437 or csid == 458 then
         local spellID = player:getLocalVar("TradingTrustCipher")

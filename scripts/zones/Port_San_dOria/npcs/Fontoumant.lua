@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
         if (freeSlots ~= 0) then
             player:addItem(593)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 593)
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:setCharVar("TheBrugaireConsortium-Parcels", 10)
         else
             player:startEvent(537)

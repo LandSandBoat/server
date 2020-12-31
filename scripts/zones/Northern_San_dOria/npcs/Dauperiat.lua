@@ -67,7 +67,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 643) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
         player:addKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUSPICIOUS_ENVELOPE)
     elseif (csid == 646 and option == 1) then
@@ -83,7 +83,7 @@ function onEventFinish(player, csid, option)
             player:addFame(SANDORIA, 5)
         end
     elseif (csid == 40 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     end
 
 end

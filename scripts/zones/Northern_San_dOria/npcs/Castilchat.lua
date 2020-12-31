@@ -51,7 +51,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1545)
         else
             player:setCharVar("TrialSizeIce_date", 0)
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
             player:addItem(1545)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1545)
         end

@@ -44,7 +44,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 12 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
     elseif (csid == 11) then
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*600)
     end
