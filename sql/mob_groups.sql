@@ -12033,6 +12033,7 @@ INSERT INTO `mob_groups` VALUES (65,3284,194,'Queen_of_Coins',0,128,2063,0,0,72,
 INSERT INTO `mob_groups` VALUES (66,5529,194,'Thunder_Elemental',300,4,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (67,870,194,'Custom_Cardian',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (68,1518,194,'Ghoul',660,0,961,0,0,23,26,0);
+INSERT INTO `mob_groups` VALUES (69,6724,194,'Voidwrought',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
 
 INSERT INTO `mob_groups` VALUES (9656,33,194,'Ace_of_Swords',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (9657,75,194,'Ajido-Marujido',0,128,0,0,0,0,0,0);
