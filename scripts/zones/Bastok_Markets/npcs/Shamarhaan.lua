@@ -32,6 +32,6 @@ function onEventFinish(player, csid, option)
 
     if (csid == 434) then
         player:setCharVar("NoStringsAttachedProgress", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     end
 end

@@ -57,7 +57,7 @@ function onEventFinish(player, csid, option)
         if (Drachenfall == QUEST_AVAILABLE) then
             FreeSlots = player:getFreeSlotsCount()
             if (FreeSlots >= 1) then
-                player:addQuest(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+                player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
                 player:addItem(493)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 493)
             else

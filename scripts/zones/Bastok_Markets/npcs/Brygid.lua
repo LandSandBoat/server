@@ -122,7 +122,7 @@ function onEventFinish(player, csid, option)
     local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
 
     if (csid == 310 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST) == QUEST_AVAILABLE) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
     elseif (csid == 311) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12720)
@@ -135,7 +135,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 380) then
         player:delQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     elseif (csid == 382 and option ~= 99) then
         player:setCharVar("BrygidWantsSubligar", option)
     elseif (csid == 383) then

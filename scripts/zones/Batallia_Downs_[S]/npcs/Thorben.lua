@@ -58,6 +58,6 @@ function onEventFinish(player, csid, option)
     elseif csid == 105 then
         player:setCharVar("lostInTranslocationCS", 1)
     elseif csid == 103 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     end
 end

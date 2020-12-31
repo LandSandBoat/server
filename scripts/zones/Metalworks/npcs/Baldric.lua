@@ -34,7 +34,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 554) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.STARDUST)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST)
     elseif (csid == 555) then
         player:tradeComplete()
         player:addGil(300)

@@ -41,7 +41,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 141 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
     elseif (csid == 143) then
         player:delKeyItem(tpz.ki.BUCKET_OF_DIVINE_PAINT)
         player:addKeyItem(tpz.ki.LETTER_FROM_VIRNAGE)

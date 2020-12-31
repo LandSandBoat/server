@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
         else
             player:setCharVar("TrialSizeLightning_date", 0)
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
             player:addItem(1548)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
         end

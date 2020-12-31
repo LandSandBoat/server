@@ -32,8 +32,8 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 89) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
     elseif (csid == 91) then
         player:addKeyItem(tpz.ki.CORUSCANT_ROSARY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CORUSCANT_ROSARY)

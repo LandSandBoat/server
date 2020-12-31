@@ -29,7 +29,7 @@ function onEventFinish(player, csid, option)
     -- THE COLD LIGHT OF DAY
     if (csid == 102) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY)
         end
     elseif (csid == 104) then
         local fame = player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) and 8 or 50

@@ -74,7 +74,7 @@ function onEventFinish(player, csid, option)
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
 
     if csid == 10016 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
     elseif
         csid == 10018 and
         option >= 1 and

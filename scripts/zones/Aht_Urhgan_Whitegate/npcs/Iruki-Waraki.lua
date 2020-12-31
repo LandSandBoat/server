@@ -92,12 +92,12 @@ function onEventFinish(player, csid, option)
         player:unlockAttachment(8193) --Harlequin Head
     elseif csid == 774 then
         player:setCharVar("TheWaywardAutomationProgress", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     elseif csid == 776 then
         npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=17858, var="TheWaywardAutomationProgress"})
     elseif csid == 778 then
         player:setCharVar("OperationTeatimeProgress", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     elseif csid == 780 then
         player:setCharVar("OperationTeatimeProgress", 2)
         player:confirmTrade()

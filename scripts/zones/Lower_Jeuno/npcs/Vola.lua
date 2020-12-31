@@ -44,7 +44,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 216 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
     elseif (csid == 213) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13202)

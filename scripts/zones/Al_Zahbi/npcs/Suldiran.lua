@@ -27,7 +27,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 14 and option == 1 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
     elseif csid == 16 then
         if npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II, {title=tpz.title.DARK_RESISTANT, gil=200}) then
             player:confirmTrade()

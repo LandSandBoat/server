@@ -195,7 +195,7 @@ function onEventFinish(player, csid, option)
     if (csid == 70 or csid == 71) then  --accept quest 1
         player:setCharVar("QuestRychardetheChef_var", 3); --
         if (option == 71 or option == 72) then    --70 = answer no  71 answer yes!
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)
         end
     elseif (csid == 74) then   -- end quest 1 RYCHARDE_THE_CHEF
         player:tradeComplete()
@@ -211,7 +211,7 @@ function onEventFinish(player, csid, option)
         if (option == 74 ) then -- answer yes!
             player:setCharVar("QuestWayotcHourStarted_var", VanadielHour())
             player:setCharVar("QuestRychardeTCDayStarted_var", VanadielDayOfTheYear())
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.WAY_OF_THE_COOK)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.WAY_OF_THE_COOK)
         end
     elseif (csid == 80) then  --end quest 2 WAY_OF_THE_COOK
         player:tradeComplete()
@@ -242,11 +242,11 @@ function onEventFinish(player, csid, option)
     elseif (csid == 82) then  -- accept quest 3 UNENDING_CHASE
         player:setCharVar("QuestUnendingCAskedAlready_var", 2)
         if (option == 77 ) then -- answer yes!
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNENDING_CHASE)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNENDING_CHASE)
         end
     elseif (csid == 84) then  -- accept quest 3 UNENDING_CHASE
         if (option == 78 ) then -- answer yes!
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNENDING_CHASE)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNENDING_CHASE)
         end
     elseif (csid == 83) then  -- end quest 3 UNENDING_CHASE
         player:tradeComplete()
@@ -265,7 +265,7 @@ function onEventFinish(player, csid, option)
 
             player:addKeyItem(tpz.ki.ARAGONEU_PIZZA) --give pizza to player
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ARAGONEU_PIZZA)
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
         end
     elseif (csid == 88) then  -- end quest 4 his name is Valgeir
         player:addFame(WINDURST, 120)
@@ -279,7 +279,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 90 or csid == 91) then  --accept quest the clue
         player:setCharVar("QuestTheClueStatus_var", 1)
         if (option == 83 ) then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_CLUE)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_CLUE)
         end
     elseif (csid == 92) then   -- end quest THE CLUE
         player:tradeComplete()
@@ -298,7 +298,7 @@ function onEventFinish(player, csid, option)
                         --TODO pay for ferry
             player:addKeyItem(tpz.ki.MHAURAN_COUSCOUS) --tpz.ki.MHAURAN_COUSCOUS                = 92
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MHAURAN_COUSCOUS)
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_BASICS)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_BASICS)
         end
     elseif (csid == 96) then   -- end quest the basics
         player:tradeComplete()

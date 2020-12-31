@@ -197,7 +197,7 @@ function onEventFinish(player, csid, option)
         player:completeMission(COP, tpz.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
         player:addMission(COP, tpz.mission.id.cop.TENDING_AGED_WOUNDS ) --starting 3.4 COP mission
     elseif (csid == 760) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.DARK_PUPPET)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
     elseif (csid == 503) then
         player:addKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)
@@ -222,7 +222,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 763) then
         player:setCharVar("MissionStatus", 1)
     elseif (csid == 507) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:delKeyItem(tpz.ki.UNFINISHED_LETTER)

@@ -51,7 +51,7 @@ function onEventFinish(player, csid, option)
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
             player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar("TrialByFire_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_FIRE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_FIRE)

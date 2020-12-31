@@ -56,7 +56,7 @@ function onEventFinish(player, csid, option)
     if (csid == 510 and option == 0) then
         player:setCharVar("TheUsual_Event", 1)
     elseif (csid == 751) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         player:setCharVar("darkLegacyCS", 1)
     elseif (csid == 755) then
         if (player:getFreeSlotsCount() == 0) then

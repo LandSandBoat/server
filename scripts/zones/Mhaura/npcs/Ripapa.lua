@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
         if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
             player:delQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar("TrialByLightning_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_LIGHTNING)

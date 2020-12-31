@@ -135,12 +135,12 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 17, true))
     elseif (csid == 121) then
         if (option == 1) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
         else
             player:setCharVar("KnightStalker_Declined", 1)
         end
     elseif (csid == 120 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
         player:setCharVar("KnightStalker_Declined", 0)
     elseif (csid == 78) then
         player:setCharVar("KnightStalker_Progress", 2)

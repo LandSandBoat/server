@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
         if option == 0 then
             player:setCharVar("RUN_COTR", RUN_COTR.TRIGGERED)
         elseif option == 1 then
-            player:addQuest(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     elseif csid == 26 then
         if option == 0 then

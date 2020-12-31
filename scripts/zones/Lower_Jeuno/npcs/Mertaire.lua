@@ -84,14 +84,14 @@ function onEventFinish(player, csid, option)
     elseif csid == 138 and option == 0 then
         player:setCharVar("PainfulMemoryCS", 1) -- player declined quest
     elseif (csid == 137 or csid == 138) and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
         player:setCharVar("PainfulMemoryCS", 0)
         player:addKeyItem(tpz.ki.MERTAIRES_BRACELET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MERTAIRES_BRACELET)
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif csid == 139 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
         player:setCharVar("circleTime", 1)
     end
 end

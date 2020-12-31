@@ -44,7 +44,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 68 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
         player:setCharVar("PamamaVar", 0)
     elseif (csid == 71) then
         if (Pamamas == 1) then --First completion of quest; set title, complete quest, and give higher fame

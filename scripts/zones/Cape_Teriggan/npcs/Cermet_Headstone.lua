@@ -15,7 +15,7 @@ function onTrade(player, npc, trade)
     -- WANDERING SOULS
     if (trade:hasItemQty(949, 1) and trade:getItemCount() == 1) then
         if (not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.WIND_FRAGMENT))) then
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
             player:startEvent(202, 949)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)

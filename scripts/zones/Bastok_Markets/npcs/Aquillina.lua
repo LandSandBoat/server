@@ -32,7 +32,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 217 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN)
     elseif csid == 219 then
         local fame = player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) and 8 or 75
         if npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN, {gil=100, fame=fame}) then

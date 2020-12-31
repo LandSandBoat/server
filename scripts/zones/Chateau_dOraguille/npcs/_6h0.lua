@@ -143,7 +143,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
             if (player:getMainJob() == tpz.job.PLD) then
-                player:addQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+                player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
             end
             player:delKeyItem(tpz.ki.KNIGHTS_BOOTS)
             player:addItem(14095)
@@ -153,7 +153,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
         end
     elseif (csid == 90 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
     elseif (csid == 89) then
         if (player:getFreeSlotsCount() == 0) then

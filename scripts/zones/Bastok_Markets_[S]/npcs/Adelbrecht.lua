@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
     if (csid == 139 and option == 1) then
         player:addKeyItem(tpz.ki.BATTLE_RATIONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BATTLE_RATIONS)
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         player:setCharVar("BLUE_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     elseif (csid == 140 and option == 1) then

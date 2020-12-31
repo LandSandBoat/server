@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4096)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
             if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_AVAILABLE) then
-                player:addQuest(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
+                player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
             end
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
             player:addFame(BASTOK, 8)
         end
     elseif (csid == 235 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
         player:setCharVar("MomTheAdventurer_Event", 0)
     end
 

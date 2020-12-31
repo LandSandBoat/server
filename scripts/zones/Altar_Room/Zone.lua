@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
         player:setCharVar("moral", 1)
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     elseif csid == 46 and option == 1 then
         player:setCharVar("moraldecline", getConquestTally())
     elseif csid == 47 then

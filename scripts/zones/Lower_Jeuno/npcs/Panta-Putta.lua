@@ -53,7 +53,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 77 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif (csid == 33) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13328)

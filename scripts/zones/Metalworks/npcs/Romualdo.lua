@@ -31,7 +31,7 @@ function onEventFinish(player, csid, option)
     if (csid == 726) then
         player:setCharVar("StampHunt_Mask", utils.mask.setBit(player:getCharVar("StampHunt_Mask"), 4, true))
     elseif csid == 802 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
         player:setCharVar("FadedPromises", 1)
     end
 

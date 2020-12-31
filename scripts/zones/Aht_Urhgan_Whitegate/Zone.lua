@@ -220,7 +220,7 @@ function onEventFinish(player, csid, option)
         player:addMission(TOAU, tpz.mission.id.toau.ALLIED_RUMBLINGS)
     elseif (csid == 797) then
         player:setCharVar("AgainstAllOdds", 1) -- Set For Corsair BCNM
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         player:addKeyItem(tpz.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIFE_FLOAT)
     end

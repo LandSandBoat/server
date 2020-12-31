@@ -38,7 +38,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 428) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
     elseif (csid == 429) then
         player:tradeComplete()
         player:addGil(GIL_RATE*300)

@@ -38,7 +38,7 @@ function onEventFinish(player, csid, option)
     -- printf("OPTION: %u", option)
 
     if (csid == 20 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)
     elseif (csid == 22) then
         player:tradeComplete()
         player:addKeyItem(tpz.ki.LOADSTONE)

@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 0)
         player:startEvent(10)
     elseif (csid == 155) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
         player:setCharVar("BeatAroundTheBushin", 2)
     elseif (csid == 156) then
         player:setCharVar("BeatAroundTheBushin", 3)

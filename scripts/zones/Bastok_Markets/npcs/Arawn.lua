@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 225 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
         player:addKeyItem(tpz.ki.STAMP_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STAMP_SHEET)
     elseif (csid == 226) then

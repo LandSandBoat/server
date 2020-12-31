@@ -37,7 +37,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 7 and option == 0 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
     elseif csid == 10 then
         if player:getFreeSlotsCount() >= 1 then
             player:completeQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)

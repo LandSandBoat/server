@@ -39,7 +39,7 @@ function onEventFinish(player, csid, option)
     if csid == 4 then
         player:addKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
     elseif csid == 6 or csid == 8 then
         if player:getFreeSlotsCount() >= 1 then
             player:addItem(2217)

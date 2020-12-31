@@ -42,7 +42,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 342 then
         player:setCharVar("BeatAroundTheBushin", 4)
     elseif csid == 256 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
     elseif csid == 258 then
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_BARE_BONES, {ki = tpz.ki.MAP_OF_THE_DANGRUF_WADI, fame = 60})) then
             player:confirmTrade()

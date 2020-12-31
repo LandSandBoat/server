@@ -45,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 111 and option == 1 then  --accept quest
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 113 then --quest completed
         player:confirmTrade()
         player:addFame(WINDURST, 120)

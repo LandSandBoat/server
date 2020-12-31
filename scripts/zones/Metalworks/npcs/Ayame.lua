@@ -95,7 +95,7 @@ function onEventFinish(player, csid, option)
     if (csid == 712) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 748) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
     elseif (csid == 749) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14215) -- Temple Hose

@@ -51,7 +51,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 242) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
     elseif (csid == 243) then
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()

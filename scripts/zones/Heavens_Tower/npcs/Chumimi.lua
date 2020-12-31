@@ -92,7 +92,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 260 then
         -- option 3: Koru-Moru -- option 2: Shantotto -- option 1: Yoran-Oran
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
         player:setCharVar("theThreeMagiSupport", option)
     elseif csid == 269 then
         if player:getFreeSlotsCount() == 0 then
@@ -117,7 +117,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
         end
     elseif csid == 270 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
     elseif csid == 271 then
         player:tradeComplete()
         player:setCharVar("recollectionsQuest", 2)
@@ -133,7 +133,7 @@ function onEventFinish(player, csid, option)
             player:completeQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
         end
     elseif csid == 276 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
         player:setCharVar("rootProblem", 1)
     elseif csid == 279 then
         player:addKeyItem(tpz.ki.SLUICE_SURVEYOR_MK_I)

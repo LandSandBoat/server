@@ -53,7 +53,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 556) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
     elseif (csid == 557) then
         player:completeQuest(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
         player:addFame(BASTOK, 120)

@@ -47,7 +47,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 106) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
     elseif (csid == 107) then
         Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
         if (Vengeful == QUEST_ACCEPTED) then

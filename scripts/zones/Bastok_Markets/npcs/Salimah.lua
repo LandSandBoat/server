@@ -67,7 +67,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()

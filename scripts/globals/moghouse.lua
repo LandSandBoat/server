@@ -150,7 +150,7 @@ function moogleEventFinish(player, csid, option)
             player:addMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS1]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)
@@ -168,7 +168,7 @@ function moogleEventFinish(player, csid, option)
             player:setCharVar("MogSafeProgress", 0)
 
         elseif csid == 30009 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS2]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)
@@ -186,7 +186,7 @@ function moogleEventFinish(player, csid, option)
             player:setCharVar("MogSafeProgress", 0)
 
         elseif csid == 30013 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS3]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)

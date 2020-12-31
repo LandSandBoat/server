@@ -102,7 +102,7 @@ function onEventUpdate(player, csid, option)
         if (playerOnQuestId == 0 and (hour >= 18 or hour < 1)) then
             -- nobody is currently on the quest
             SetServerVariable("[JEUNO]CommService", player:getID())
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE)
             player:setCharVar("currCommService", 1)
             player:updateEvent(1, doneCommService)
         else

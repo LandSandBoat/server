@@ -46,7 +46,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 90) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
     elseif (csid == 91) then
         player:completeQuest(BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
         player:addFame(BASTOK, 120)

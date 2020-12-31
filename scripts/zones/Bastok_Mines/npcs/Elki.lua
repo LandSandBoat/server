@@ -44,7 +44,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 41 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
         player:addKeyItem(tpz.ki.BOUQUETS_FOR_THE_PIONEERS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOUQUETS_FOR_THE_PIONEERS)
     elseif (csid == 42) then
@@ -60,7 +60,7 @@ function onEventFinish(player, csid, option)
             player:needToZone(true)
         end
     elseif (csid == 43 and option == 1) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
     elseif (csid == 44) then
         player:setCharVar("EleventhsHour", 1)
     end

@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 125) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM)
         player:setCharVar("theSandCharmVar", 1)
     elseif (csid == 124) then
         player:setCharVar("theSandCharmVar", 3)

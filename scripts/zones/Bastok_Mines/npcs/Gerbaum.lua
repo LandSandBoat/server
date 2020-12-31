@@ -52,7 +52,7 @@ MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.M
 
     if (csid == 108) then
         if (MineSweep == 0) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
         end
     elseif (csid == 109) then
         if (MineSweep == 1) then

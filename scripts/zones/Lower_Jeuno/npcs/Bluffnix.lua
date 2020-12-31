@@ -87,7 +87,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 43 and option == 0) then
         if (player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1]) == 0) then
-            player:addQuest(JEUNO, TheGobbieBag[1])
+            player:addQuest(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
         end
     elseif (csid == 73) then
         if (gobbieBag == 5) then

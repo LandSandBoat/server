@@ -113,7 +113,7 @@ end
 
 function onEventFinish(player, csid, option, npc)
     if (csid == 217 and option == 1)  then                   -- Opo Opo and I quest start CS
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     elseif (csid == 219) then
         if (player:getCharVar("OPO_OPO_PROGRESS") == 0) then
             player:tradeComplete()

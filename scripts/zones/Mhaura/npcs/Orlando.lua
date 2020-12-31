@@ -70,7 +70,7 @@ function onEventFinish(player, csid, option)
     local payout = player:getCharVar("ANTIQUE_PAYOUT")
 
     if (csid == 101) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
     elseif (csid == 102) then
         player:tradeComplete()
         player:addFame(WINDURST, 10)

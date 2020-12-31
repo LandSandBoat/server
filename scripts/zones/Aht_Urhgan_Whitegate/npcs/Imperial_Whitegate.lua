@@ -91,7 +91,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, 129)
     elseif csid == 722 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
         player:setCharVar("TransformationsProgress", 2)
         player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end

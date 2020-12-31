@@ -74,7 +74,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Upset_Zalsuhm", 1)
             player:needToZone(true)
         elseif option <= tpz.job.SCH then
-            player:addQuest(JEUNO, questId)
+            player:addQuest(tpz.quest.log_id.JEUNO, questId)
         end
     elseif csid == 10088 and option <= tpz.job.SCH then
         local jobs =

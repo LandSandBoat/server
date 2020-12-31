@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
     if (csid == 60) then
         player:setCharVar("QuestRychardetheChef_var", 2) -- second stage on quest
     elseif (csid == 61) then  -- accept quest EXPERTICE
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.EXPERTISE)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.EXPERTISE)
     elseif (csid == 62) then   -- end quest expertice
         player:addFame(WINDURST, 120)
         if (player:getFreeSlotsCount() < 1) then

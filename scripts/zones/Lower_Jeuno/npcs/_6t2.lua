@@ -80,7 +80,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 164 and option == 0) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
     elseif (csid == 163) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:addTitle(tpz.title.LIFE_SAVER)
@@ -100,11 +100,11 @@ function onEventFinish(player, csid, option)
     elseif (csid == 5) then
         player:setCharVar("ANewDawn_Event", 1)
         if (option == 1) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
             player:setCharVar("ANewDawn_Event", 2)
         end
     elseif (csid == 4 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
         player:setCharVar("ANewDawn_Event", 2)
     elseif (csid == 0) then
         player:setCharVar("ANewDawn_Event", 0)

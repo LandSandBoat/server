@@ -199,7 +199,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 55 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         player:addKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURILLAS_BOTTLE_EMPTY)
     elseif (csid == 54) then
@@ -213,11 +213,11 @@ function onEventFinish(player, csid, option)
             player:completeQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         end
     elseif (csid == 94 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
         player:addKeyItem(tpz.ki.OLD_POCKET_WATCH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_POCKET_WATCH)
     elseif (csid == 109 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
         player:setCharVar("needs_crawler_blood", 0)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)

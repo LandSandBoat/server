@@ -91,7 +91,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 10062 and option == 1) then -- Offer Quest, First Dialog.
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     elseif (csid == 10063 or csid == 10064) then
         if (csid == 10063 and option == 1 or csid == 10063 and option == 2) then -- Offically offer quest, Second Dialog.
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 1)

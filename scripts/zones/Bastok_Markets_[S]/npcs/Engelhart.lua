@@ -63,7 +63,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BetterPartOfValProg", 0)
         player:needToZone(true)
     elseif (csid == 120) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
         player:delKeyItem(tpz.ki.WARNING_LETTER)
     elseif (csid == 124) then
         player:setCharVar("FiresOfDiscProg", 3)

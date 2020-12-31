@@ -44,9 +44,9 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 99) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS)
     elseif (csid == 130) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH)
         player:addKeyItem(tpz.ki.LETTER_FROM_ZEID)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_FROM_ZEID)
     elseif (csid == 177) then

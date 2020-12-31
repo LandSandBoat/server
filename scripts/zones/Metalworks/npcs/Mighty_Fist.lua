@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 565) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
     elseif (csid == 566) then
         TheDarksmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
 

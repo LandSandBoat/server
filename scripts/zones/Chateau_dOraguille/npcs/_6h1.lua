@@ -61,9 +61,9 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 551) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
     elseif (csid == 74) then
         player:setCharVar("Cutscenes_8-2", 2)
     end

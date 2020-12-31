@@ -42,7 +42,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 137 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar("MissionaryManVar", 1)
     elseif (csid == 139) then
         player:setCharVar("MissionaryManVar", 2)

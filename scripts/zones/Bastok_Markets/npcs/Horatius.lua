@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 100 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BREAKING_STONES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BREAKING_STONES)
     elseif (csid == 101) then
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BREAKING_STONES, {gil=400})) then
             player:confirmTrade()

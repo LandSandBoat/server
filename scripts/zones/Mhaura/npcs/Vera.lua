@@ -57,7 +57,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 131 and option == 40) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_OLD_LADY)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
         player:setCharVar("VeraOldLadyVar", 1)
     elseif (csid == 135) then
         player:tradeComplete()
