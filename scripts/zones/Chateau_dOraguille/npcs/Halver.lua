@@ -152,7 +152,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 501) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
         player:setCharVar("MissionStatus", 4)
     elseif (csid == 503) then
         player:setCharVar("MissionStatus", 9)
@@ -202,7 +202,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Wait1DayM8-1_date", os.date("%j"))
     elseif (csid == 564 and option == 1) then
         player:completeMission(TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
-        player:addMission(TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
         player:delKeyItem(tpz.ki.RAILLEFALS_LETTER)
         player:setCharVar("AhtUrganStatus", 1)
     end

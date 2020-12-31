@@ -171,6 +171,6 @@ function onEventFinish(player, csid, option)
             if not npcUtil.giveItem(player, 8711) then return end
         end
         player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_BEGINNING)
     end
 end

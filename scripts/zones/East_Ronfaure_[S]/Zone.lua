@@ -38,6 +38,6 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 7) then
         player:completeMission(WOTG, tpz.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
-        player:addMission(WOTG, tpz.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
     end
 end

@@ -28,6 +28,6 @@ function onEventFinish(player, csid, option)
     if (csid == 3) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.A_FATE_DECIDED)
-        player:addMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
     end
 end

@@ -35,7 +35,7 @@ function onEventFinish(player, csid, option)
         player:setTitle(tpz.title.GESSHOS_MERCY)
         if player:getCurrentMission(TOAU) == tpz.mission.id.toau.LEGACY_OF_THE_LOST then
             player:completeMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
-            player:addMission(TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
+            player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
         end
     end
 end

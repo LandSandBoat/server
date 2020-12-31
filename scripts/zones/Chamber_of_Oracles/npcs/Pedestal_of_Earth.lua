@@ -53,7 +53,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.PRISMATIC_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PRISMATIC_FRAGMENT)
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
-        player:addMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
     end
 
 end

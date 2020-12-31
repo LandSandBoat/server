@@ -61,7 +61,7 @@ function onEventFinish(player, csid, option)
         player:completeMission(TOAU, tpz.mission.id.toau.UNRAVELING_REASON)
         player:setTitle(tpz.title.ENDYMION_PARATROOPER)
         player:setCharVar("TOAUM40_STARTDAY", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT)
     elseif csid == 513 then
         player:setCharVar("princeandhopper", 2)
     end

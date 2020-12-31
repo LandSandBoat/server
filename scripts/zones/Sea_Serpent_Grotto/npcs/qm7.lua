@@ -22,6 +22,6 @@ end
 function onEventFinish(player, csid, option)
     if csid == 34 then
         player:completeMission(ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
-        player:addMission(ROV, tpz.mission.id.rov.IMPURITY)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.IMPURITY)
     end
 end

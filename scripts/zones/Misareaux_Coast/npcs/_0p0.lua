@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 7) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.SHELTERING_DOUBT)
-        player:addMission(COP, tpz.mission.id.cop.THE_SAVAGE)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_SAVAGE)
 
     -- A PLACE TO RETURN (PM6-2)
     elseif (csid == 10) then
@@ -67,6 +67,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Warder_Euphrosyne_KILL", 0)
         player:setCharVar("Warder_Thalia_KILL", 0)
         player:completeMission(COP, tpz.mission.id.cop.A_PLACE_TO_RETURN)
-        player:addMission(COP, tpz.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
     end
 end

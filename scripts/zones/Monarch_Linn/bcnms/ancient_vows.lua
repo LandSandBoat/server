@@ -36,7 +36,7 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.TAVNAZIAN_TRAVELER)
         if player:getCurrentMission(COP) == tpz.mission.id.cop.ANCIENT_VOWS and player:getCharVar("PromathiaStatus") == 2 then
             player:completeMission(COP, tpz.mission.id.cop.ANCIENT_VOWS)
-            player:addMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
+            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
             player:setCharVar("VowsDone", 1)
             player:setCharVar("PromathiaStatus", 0)
             player:setPos(694, -5.5, -619, 74, 107) -- South Gustaberg

@@ -31,6 +31,6 @@ end
 function onEventFinish(player, csid, option)
     if csid == 1 then
         player:completeMission(WOTG, tpz.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
-        player:addMission(WOTG, tpz.mission.id.wotg.PURPLE_THE_NEW_BLACK)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.PURPLE_THE_NEW_BLACK)
     end
 end

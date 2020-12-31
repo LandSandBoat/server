@@ -69,6 +69,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 29) then
         player:completeMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
-        player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end
 end

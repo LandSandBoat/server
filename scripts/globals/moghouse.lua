@@ -144,10 +144,10 @@ function moogleEventFinish(player, csid, option)
 
         elseif csid == 30023 then
             player:completeMission(AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
-            player:addMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
         elseif csid == 30024 then
             player:completeMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
-            player:addMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
+            player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then
             player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)

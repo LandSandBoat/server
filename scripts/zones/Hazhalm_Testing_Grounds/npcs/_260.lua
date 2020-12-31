@@ -29,7 +29,7 @@ function onEventFinish(player, csid, option)
         player:setTitle(tpz.title.EMISSARY_OF_THE_EMPRESS)
         player:addKeyItem(tpz.ki.LUMINIAN_DAGGER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LUMINIAN_DAGGER)
-        player:addMission(TOAU, tpz.mission.id.toau.PATH_OF_BLOOD)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PATH_OF_BLOOD)
     end
 
 end

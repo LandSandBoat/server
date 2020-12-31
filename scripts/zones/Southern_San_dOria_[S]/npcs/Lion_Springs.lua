@@ -35,7 +35,7 @@ function onEventFinish(player, csid, option)
         player:startEvent(153)
     elseif (csid == 153) then
         player:completeMission(WOTG, tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)
-        player:addMission(WOTG, tpz.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.WHILE_THE_CAT_IS_AWAY)
         player:delKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
         player:setCharVar("QueenOfTheDance", 0)
     end

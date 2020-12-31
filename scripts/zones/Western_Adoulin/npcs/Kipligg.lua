@@ -42,10 +42,10 @@ function onEventFinish(player, csid, option)
     if (csid == 155) then
         -- Finishes SOA Mission: '...Into the Fire'
         player:completeMission(SOA, tpz.mission.id.soa.INTO_THE_FIRE)
-        player:addMission(SOA, tpz.mission.id.soa.MELVIEN_DE_MALECROIX)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.MELVIEN_DE_MALECROIX)
     elseif (csid == 157) then
         -- Finishes SOA Mission: 'Done and Delivered'
         player:completeMission(SOA, tpz.mission.id.soa.DONE_AND_DELIVERED)
-        player:addMission(SOA, tpz.mission.id.soa.MINISTERIAL_WHISPERS)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.MINISTERIAL_WHISPERS)
     end
 end

@@ -62,16 +62,16 @@ end
 function onEventFinish(player, csid, option)
     if csid == 31 then
         player:completeMission(ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
-        player:addMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
         player:confirmTrade()
     elseif csid == 32 then
         player:completeMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
-        player:addMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
         player:delKeyItem(tpz.ki.SEEDSPALL_ROSEUM)
         player:delKeyItem(tpz.ki.SEEDSPALL_CAERULUM)
         player:delKeyItem(tpz.ki.SEEDSPALL_VIRIDIS)
     elseif csid == 34 then
         player:completeMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
-        player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
     end
 end

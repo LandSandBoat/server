@@ -34,7 +34,7 @@ function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_WARRIOR_S_PATH then
             player:completeMission(COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH)
-            player:addMission(COP, tpz.mission.id.cop.GARDEN_OF_ANTIQUITY)
+            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.GARDEN_OF_ANTIQUITY)
             player:setCharVar("PromathiaStatus", 0)
         end
         player:addExp(1000)

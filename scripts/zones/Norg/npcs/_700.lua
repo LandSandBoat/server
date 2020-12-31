@@ -38,7 +38,7 @@ function onTrigger(player, npc)
     elseif player:getCharVar("ZeidIICipher") == 1 then
         if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
             player:completeMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
-            player:addMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RING_MY_BELL)
             player:setCharVar("ZeidIICipher", 0)
         end
     elseif RhapsodiesMission == tpz.mission.id.rov.VOLTO_OSCURO then
@@ -85,14 +85,14 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 2 and option == 0) then
         player:completeMission(ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
-        player:addMission(ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
     elseif (csid == 3 and option == 0) then
         player:setCharVar("ZilartStatus", 0)
         player:completeMission(ZILART, tpz.mission.id.zilart.ROMAEVE)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
     elseif (csid == 169 and option == 0) then
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
     elseif (csid == 98) then
         player:setCharVar("MissionStatus", 2)
     elseif (csid == 172 and bit.band(option, 0x40000000) == 0) then
@@ -102,22 +102,22 @@ function onEventFinish(player, csid, option)
         player:setCharVar("RhapsodiesStatus", 0)
         npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_WHITE)
         player:completeMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
-        player:addMission(ROV, tpz.mission.id.rov.FLAMES_OF_PRAYER)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FLAMES_OF_PRAYER)
     elseif csid == 277 then
         player:completeMission(ROV, tpz.mission.id.rov.FLAMES_OF_PRAYER)
-        player:addMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
     elseif csid == 278 then
         player:completeMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
-        player:addMission(ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
     elseif csid == 279 then
         if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
             player:completeMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
-            player:addMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RING_MY_BELL)
         else
             player:setCharVar("ZeidIICipher", 1)
         end
     elseif csid == 284 then
         player:completeMission(ROV, tpz.mission.id.rov.RING_MY_BELL)
-        player:addMission(ROV, tpz.mission.id.rov.SPIRITS_AWOKEN)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SPIRITS_AWOKEN)
     end
 end

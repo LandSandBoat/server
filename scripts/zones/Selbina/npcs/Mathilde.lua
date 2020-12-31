@@ -38,6 +38,6 @@ function onEventFinish(player, csid, option)
     if csid == 10005 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS)
-        player:addMission(COP, tpz.mission.id.cop.ONE_TO_BE_FEARED)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ONE_TO_BE_FEARED)
     end
 end

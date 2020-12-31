@@ -39,7 +39,7 @@ function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
             player:completeMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
-            player:addMission(ACP, tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
+            player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
         end
         if not player:hasKeyItem(tpz.ki.IVORY_KEY) and player:getCurrentMission(ACP) >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
             player:setCharVar("LastIvoryKey", os.date("%j"))

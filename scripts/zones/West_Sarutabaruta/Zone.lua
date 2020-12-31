@@ -69,6 +69,6 @@ end
 function onEventFinish( player, csid, option)
     if csid == 62 or csid == 63 then
         player:completeMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
-        player:addMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end
 end

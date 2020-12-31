@@ -49,6 +49,6 @@ function onEventFinish(player, csid, option)
         end
     elseif csid == 2 then
         player:completeMission(SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
-        player:addMission(SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
     end
 end

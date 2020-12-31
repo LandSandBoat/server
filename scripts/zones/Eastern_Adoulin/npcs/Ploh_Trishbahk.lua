@@ -30,6 +30,6 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.DINNER_INVITATION)
 
         player:completeMission(SOA, tpz.mission.id.soa.MEETING_OF_THE_MINDS)
-        player:addMission(SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
     end
 end

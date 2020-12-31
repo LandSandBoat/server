@@ -60,7 +60,7 @@ function onEventFinish(player, csid, option)
     if csid == 906 then
         if player:getCurrentMission(COP) == tpz.mission.id.cop.A_TRANSIENT_DREAM then
             player:completeMission(COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)
-            player:addMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
+            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
         end
         player:setCharVar("VowsDone", 0)
     end

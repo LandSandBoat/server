@@ -64,7 +64,7 @@ function onEventFinish(player, csid, option)
         })
 
         player:completeMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
-        player:addMission(ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
 
         player:setCharVar("ASA_Status", 0)
         player:setCharVar("ASA4_Amber", "0")
@@ -106,7 +106,7 @@ function onEventFinish(player, csid, option)
 
         -- Advance Mission
         player:completeMission(ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
-        player:addMission(ASA, tpz.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
         player:setCharVar("ASA_Status", 0)
     end
 end

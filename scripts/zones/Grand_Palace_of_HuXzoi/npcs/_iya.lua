@@ -41,7 +41,7 @@ function onEventFinish(player, csid, option)
             if (player:addItem(14672)) then
                 player:setCharVar("PromathiaStatus", 0)
                 player:completeMission(COP, tpz.mission.id.cop.GARDEN_OF_ANTIQUITY)
-                player:addMission(COP, tpz.mission.id.cop.A_FATE_DECIDED)
+                player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_FATE_DECIDED)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 14672)
             end
         end

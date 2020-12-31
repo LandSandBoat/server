@@ -38,11 +38,11 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_ADOULIN)
 
         player:completeMission(SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
-        player:addMission(SOA, tpz.mission.id.soa.LIFE_ON_THE_FRONTIER)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.LIFE_ON_THE_FRONTIER)
     elseif csid == 4 then
         npcUtil.giveKeyItem(player, tpz.ki.DINNER_INVITATION)
 
         player:completeMission(SOA, tpz.mission.id.soa.LIFE_ON_THE_FRONTIER)
-        player:addMission(SOA, tpz.mission.id.soa.MEETING_OF_THE_MINDS)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.MEETING_OF_THE_MINDS)
     end
 end

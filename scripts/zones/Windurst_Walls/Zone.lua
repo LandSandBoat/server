@@ -67,7 +67,7 @@ function onEventFinish(player, csid, option)
         player:startEvent(514)
     elseif csid == 514 then
         player:completeMission(ASA, tpz.mission.id.asa.A_SHANTOTTO_ASCENSION)
-        player:addMission(ASA, tpz.mission.id.asa.BURGEONING_DREAD)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.BURGEONING_DREAD)
         player:setCharVar("ASA_Status", 0)
     elseif csid == 443 then
         player:completeMission(WINDURST, tpz.mission.id.windurst.MOON_READING)
@@ -80,9 +80,9 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.VESTAL_CHAMBERLAIN)
     elseif csid == 30035 then
         player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
     elseif csid == 30036 then
         player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

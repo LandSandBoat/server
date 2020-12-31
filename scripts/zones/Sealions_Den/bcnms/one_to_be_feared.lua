@@ -37,7 +37,7 @@ function onEventFinish(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(COP) == tpz.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 2 then
             player:completeMission(COP, tpz.mission.id.cop.ONE_TO_BE_FEARED)
-            player:addMission(COP, tpz.mission.id.cop.CHAINS_AND_BONDS)
+            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.CHAINS_AND_BONDS)
             player:setCharVar("PromathiaStatus", 0)
         end
         player:addExp(1500)

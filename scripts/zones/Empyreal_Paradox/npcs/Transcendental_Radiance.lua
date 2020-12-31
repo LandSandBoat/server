@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    -- player:addMission(COP, tpz.mission.id.cop.DAWN);
+    -- player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN);
     -- player:setCharVar("PromathiaStatus",3)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(2)

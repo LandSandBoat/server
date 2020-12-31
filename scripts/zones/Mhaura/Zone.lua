@@ -92,6 +92,6 @@ function onEventFinish(player, csid, option)
         -- Flag ROV 1-3 Mhuara Route (2)
         player:setCharVar("RhapsodiesStatus", 2)
         player:completeMission(ROV, tpz.mission.id.rov.RESONACE)
-        player:addMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end

@@ -80,13 +80,13 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.OVJANGS_ERRAND_RUNNER)
         player:needToZone(true)
         player:setCharVar("TOAUM18_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(TOAU, tpz.mission.id.toau.PASSING_GLORY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PASSING_GLORY)
     elseif csid == 3111 then
         player:completeMission(TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
-        player:addMission(TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
     elseif csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
         player:completeMission(TOAU, tpz.mission.id.toau.IMPERIAL_CORONATION)
-        player:addMission(TOAU, tpz.mission.id.toau.THE_EMPRESS_CROWNED)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, 129)

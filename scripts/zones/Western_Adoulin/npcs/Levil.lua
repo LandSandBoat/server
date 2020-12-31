@@ -29,7 +29,7 @@ function onEventFinish(player, csid, option)
     if (csid == 6 or csid == 7) and option == 1 then
         player:setCharVar("SOA", 0)
         player:completeMission(SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
-        player:addMission(SOA, tpz.mission.id.soa.BUILDING_PROSPECTS)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.BUILDING_PROSPECTS)
     elseif csid == 6 and option == 0 then
         player:setCharVar("SOA", 1)
     end

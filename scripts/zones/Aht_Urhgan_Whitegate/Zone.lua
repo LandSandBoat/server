@@ -152,7 +152,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 3000) then
         player:addKeyItem(tpz.ki.SUPPLIES_PACKAGE)
         player:completeMission(TOAU, tpz.mission.id.toau.LAND_OF_SACRED_SERPENTS)
-        player:addMission(TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUPPLIES_PACKAGE)
     elseif (csid == 3024) then
         player:setCharVar("AhtUrganStatus", 3)
@@ -161,7 +161,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.RAILLEFALS_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RAILLEFALS_LETTER)
         player:completeMission(TOAU, tpz.mission.id.toau.KNIGHT_OF_GOLD)
-        player:addMission(TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
     elseif (csid == 3027) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2185)
@@ -175,19 +175,19 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 3050) then
         player:completeMission(TOAU, tpz.mission.id.toau.A_MERCENARY_LIFE)
-        player:addMission(TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
     elseif (csid == 3092) then
         player:completeMission(TOAU, tpz.mission.id.toau.SWEETS_FOR_THE_SOUL)
-        player:addMission(TOAU, tpz.mission.id.toau.TEAHOUSE_TUMULT)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.TEAHOUSE_TUMULT)
     elseif (csid == 3093) then
         player:completeMission(TOAU, tpz.mission.id.toau.FINDERS_KEEPERS)
         player:setTitle(tpz.title.KARABABAS_BODYGUARD)
-        player:addMission(TOAU, tpz.mission.id.toau.SHIELD_OF_DIPLOMACY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SHIELD_OF_DIPLOMACY)
     elseif (csid == 3095) then
         player:completeMission(TOAU, tpz.mission.id.toau.SOCIAL_GRACES)
         player:needToZone(true)
         player:setCharVar("TOAUM23_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(TOAU, tpz.mission.id.toau.FOILED_AMBITION)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.FOILED_AMBITION)
     elseif (csid == 3097) then
         player:completeMission(TOAU, tpz.mission.id.toau.FOILED_AMBITION)
         player:setTitle(tpz.title.KARABABAS_SECRET_AGENT)
@@ -195,20 +195,20 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TOAUM23_STARTDAY", 0)
         player:needToZone(true)
         player:setCharVar("TOAUM24_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(TOAU, tpz.mission.id.toau.PLAYING_THE_PART)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PLAYING_THE_PART)
     elseif (csid == 3110) then
         player:completeMission(TOAU, tpz.mission.id.toau.PLAYING_THE_PART)
         player:setCharVar("TOAUM24_STARTDAY", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
     elseif (csid == 3112) then
         player:completeMission(TOAU, tpz.mission.id.toau.BASTION_OF_KNOWLEDGE)
         player:setTitle(tpz.title.APHMAUS_MERCENARY)
-        player:addMission(TOAU, tpz.mission.id.toau.PUPPET_IN_PERIL)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PUPPET_IN_PERIL)
     elseif (csid == 3131) then
         player:completeMission(TOAU, tpz.mission.id.toau.PATH_OF_BLOOD)
         player:needToZone(true)
         player:setCharVar("TOAUM38_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(TOAU, tpz.mission.id.toau.STIRRINGS_OF_WAR)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.STIRRINGS_OF_WAR)
     elseif (csid == 3220) then
         player:setCharVar("TOAUM38_STARTDAY", 0)
         player:setCharVar("AhtUrganStatus", 1)
@@ -217,7 +217,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AhtUrganStatus", 0)
         player:addKeyItem(tpz.ki.ALLIED_COUNCIL_SUMMONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ALLIED_COUNCIL_SUMMONS)
-        player:addMission(TOAU, tpz.mission.id.toau.ALLIED_RUMBLINGS)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.ALLIED_RUMBLINGS)
     elseif (csid == 797) then
         player:setCharVar("AgainstAllOdds", 1) -- Set For Corsair BCNM
         player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet

@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_NORG)
         end
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
-        player:addMission(ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
     elseif (csid == 176) then
         player:addCharVar("ZilartStatus", 1)
     end

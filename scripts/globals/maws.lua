@@ -112,13 +112,13 @@ tpz.maws.onEventFinish = function(player, csid, option)
         addMaw()
     elseif maw.cs.msn and csid == maw.cs.msn then
         player:completeMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
-        player:addMission(WOTG, tpz.mission.id.wotg.CAIT_SITH)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.CAIT_SITH)
         player:addTitle(tpz.title.CAIT_SITHS_ASSISTANT)
         addMaw() -- May not have yet, check
     elseif maw.cs.new and csid == maw.cs.new then
         local ID = zones[player:getZoneID()]
         player:completeMission(WOTG, tpz.mission.id.wotg.CAVERNOUS_MAWS)
-        player:addMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
         player:addKeyItem(tpz.ki.PURE_WHITE_FEATHER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PURE_WHITE_FEATHER)
         local x = math.random(1, 3)

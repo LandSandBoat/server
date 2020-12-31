@@ -53,6 +53,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("DownwardHelix", 1)
     elseif csid == 67 then
         player:completeMission(WOTG, tpz.mission.id.wotg.CAIT_SITH)
-        player:addMission(WOTG, tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)
     end
 end

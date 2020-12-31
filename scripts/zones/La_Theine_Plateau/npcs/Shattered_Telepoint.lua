@@ -20,7 +20,7 @@ function onTrigger(player, npc)
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
             player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
             player:setCharVar("LionIICipher", 0)
         end
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
@@ -53,12 +53,12 @@ function onEventFinish(player, csid, option)
     -- RoV Missions
     if csid == 14 then
         player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
-        player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
     elseif csid == 15 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
             player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
         else
             player:setCharVar("LionIICipher", 1)
         end

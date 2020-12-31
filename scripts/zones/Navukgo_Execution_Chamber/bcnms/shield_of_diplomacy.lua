@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 32001 and player:getCurrentMission(TOAU) == tpz.mission.id.toau.SHIELD_OF_DIPLOMACY then
         player:completeMission(TOAU, tpz.mission.id.toau.SHIELD_OF_DIPLOMACY)
-        player:addMission(TOAU, tpz.mission.id.toau.SOCIAL_GRACES)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SOCIAL_GRACES)
         player:setCharVar("AhtUrganStatus", 0)
     end
 end

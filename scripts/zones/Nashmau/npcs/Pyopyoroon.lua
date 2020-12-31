@@ -40,6 +40,6 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.VIAL_OF_SPECTRAL_SCENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VIAL_OF_SPECTRAL_SCENT)
         player:completeMission(TOAU, tpz.mission.id.toau.ROYAL_PUPPETEER)
-        player:addMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LOST_KINGDOM)
     end
 end

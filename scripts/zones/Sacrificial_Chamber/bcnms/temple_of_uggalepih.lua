@@ -44,6 +44,6 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.DARK_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DARK_FRAGMENT)
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
-        player:addMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
     end
 end

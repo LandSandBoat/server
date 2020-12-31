@@ -40,6 +40,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERCIPIENT_EYE)
         player:setTitle(tpz.title.TREASURE_TROVE_TENDER)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
     end
 end

@@ -113,6 +113,6 @@ function onEventFinish(player, csid, option)
         player:addCharVar("ZilartStatus", 2)
     elseif csid == 10094 then
         player:completeMission(ACP, tpz.mission.id.acp.A_CRYSTALLINE_PROPHECY)
-        player:addMission(ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
     end
 end

@@ -38,7 +38,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 17) then
         player:completeMission(COP, tpz.mission.id.cop.CALM_BEFORE_THE_STORM)
-        player:addMission(COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH)
         player:setCharVar("PromathiaStatus", 0)
         player:setCharVar("COP_Dalham_KILL", 0)
         player:setCharVar("COP_Boggelmann_KILL", 0)

@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
     if csid == 10178 then
         player:setCharVar("AMK", 1)
         player:completeMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
-        player:addMission(AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
     elseif csid == 10179 then
         player:setCharVar("AMK", 2)
         player:delKeyItem(tpz.ki.STURDY_METAL_STRIP)
@@ -56,6 +56,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AMK", 0)
         player:delKeyItem(tpz.ki.SAVORY_LAMB_ROAST)
         player:completeMission(AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
-        player:addMission(AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
     end
 end

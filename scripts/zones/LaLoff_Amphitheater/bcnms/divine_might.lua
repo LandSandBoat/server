@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
             end
             if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.ARK_ANGELS then
                 player:completeMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
-                player:addMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
                 player:setCharVar("ZilartStatus", 0)
             end
         elseif player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.MOONLIGHT_ORE) then

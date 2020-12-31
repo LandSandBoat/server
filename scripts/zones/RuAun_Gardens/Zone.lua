@@ -79,6 +79,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 51) then
         player:setCharVar("ZilartStatus", 0)
         player:completeMission(ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
-        player:addMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)
     end
 end

@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10012) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
-        player:addMission(COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
     elseif (csid == 129) then
         player:setCharVar("PromathiaStatus", 5)
     elseif ((csid == 84 or csid == 204) and option >= 5 and option <= 7) then

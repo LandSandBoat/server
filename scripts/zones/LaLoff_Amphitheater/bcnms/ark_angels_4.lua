@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
                 player:hasKeyItem(tpz.ki.SHARD_OF_RAGE)
             then
                 player:completeMission(ZILART, tpz.mission.id.zilart.ARK_ANGELS)
-                player:addMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
                 player:setCharVar("ZilartStatus", 0)
             end
         end

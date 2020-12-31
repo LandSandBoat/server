@@ -250,7 +250,7 @@ function onEventFinish(player, csid, option)
 
     elseif csid == 506 then
         player:completeMission(AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
-        player:addMission(AMK, tpz.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST
     elseif csid == 529 and option == 2 then

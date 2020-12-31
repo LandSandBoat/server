@@ -73,7 +73,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 166 or csid == 190 then
         if option == 0 then
-            player:addMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
+            player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
             player:addKeyItem(tpz.ki.NEW_FEIYIN_SEAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NEW_FEIYIN_SEAL)
             player:setCharVar("MissionStatus", 10)

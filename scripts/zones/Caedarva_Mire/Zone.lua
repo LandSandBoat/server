@@ -57,7 +57,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AhtUrganStatus", 0)
         player:setCharVar("TOAUM31_PERMITDAY", 0)
         player:setTitle(tpz.title.NASHMEIRAS_MERCENARY)
-        player:addMission(TOAU, tpz.mission.id.toau.IN_THE_BLOOD)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IN_THE_BLOOD)
     elseif csid == 133 then -- enter instance, warp to periqia
         player:setPos(0, 0, 0, 0, 56)
     elseif csid == 130 then

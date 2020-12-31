@@ -30,7 +30,7 @@ function onTrigger(player, npc)
             player:setCharVar("AhtUrganStatus", 0)
             player:addKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
             player:completeMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)
-            player:addMission(TOAU, tpz.mission.id.toau.THE_DOLPHIN_CREST)
+            player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_DOLPHIN_CREST)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EPHRAMADIAN_GOLD_COIN)
         else
             player:messageSpecial(ID.text.JAZARAATS_HEADSTONE)

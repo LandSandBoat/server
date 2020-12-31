@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.GEOMAGNETRON)
 
         player:completeMission(SOA, tpz.mission.id.soa.RUMORS_FROM_THE_WEST)
-        player:addMission(SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
     elseif
         (csid == 10117 and option == 2) or -- paid
         csid == 10118  -- quest complete
@@ -72,7 +72,7 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.ADOULINIAN_CHARTER_PERMIT)
 
         player:completeMission(SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
-        player:addMission(SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
 
         player:setCharVar("SOA", 0)
     end

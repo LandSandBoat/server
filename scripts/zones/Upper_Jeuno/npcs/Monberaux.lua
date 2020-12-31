@@ -107,7 +107,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTERIOUS_AMULET)
         player:completeMission(COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
-        player:addMission(COP, tpz.mission.id.cop.BELOW_THE_ARKS) -- start the mission 1-2
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS) -- start the mission 1-2
         player:startEvent(206) -- 206
     elseif (csid == 206) then
         player:startEvent(207)  --207
@@ -118,7 +118,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 75) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)
-        player:addMission(COP, tpz.mission.id.cop.SHELTERING_DOUBT)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SHELTERING_DOUBT)
     elseif (csid == 91) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 4)
