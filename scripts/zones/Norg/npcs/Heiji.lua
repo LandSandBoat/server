@@ -64,7 +64,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4955) -- Scroll of Kurayami: Ichi
         player:setCharVar("shiningSubligar_nb", 0)
         player:addFame(NORG, 100)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     end
 
 end

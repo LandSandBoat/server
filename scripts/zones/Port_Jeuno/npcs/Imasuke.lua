@@ -71,7 +71,7 @@ function onEventFinish(player, csid, option)
         end
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
     -- CIRCLE OF TIME
     elseif (csid == 29 and option == 1) then

@@ -83,7 +83,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.BLUE_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_SENTINEL_BADGE)
     elseif (csid == 360) then
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
         player:addFame(BASTOK, 150)
         player:setCharVar("WildcatBastok", 0)
         player:delKeyItem(tpz.ki.BLUE_SENTINEL_BADGE)

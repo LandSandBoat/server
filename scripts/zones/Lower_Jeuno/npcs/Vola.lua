@@ -54,7 +54,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13202)
             player:addFame(NORG, 125)
             player:tradeComplete()
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
         end
     elseif (csid == 160 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_AVAILABLE) then
         player:setCharVar("BeatAroundTheBushin", 1) -- For the next quest "Beat around the Bushin"

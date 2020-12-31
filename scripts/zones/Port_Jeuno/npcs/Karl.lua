@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WONDER_MAGIC_SET)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     elseif (csid == 316) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 16, true))
     end

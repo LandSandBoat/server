@@ -91,7 +91,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13110)
         end

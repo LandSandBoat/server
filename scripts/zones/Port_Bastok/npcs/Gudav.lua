@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         end
         player:addExp(2000 * EXP_RATE)
         player:addFame(BASTOK, 60)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     end
 
 end

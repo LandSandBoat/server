@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*1500)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
-            player:completeQuest(NORG, tpz.quest.id.outlands.BLACK_MARKET)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(NORG, 40)
         player:addTitle(tpz.title.BLACK_MARKETEER)
@@ -56,7 +56,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*2000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2000)
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(NORG, 50)
         player:addTitle(tpz.title.BLACK_MARKETEER)
@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*3000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(NORG, 80)
         player:addTitle(tpz.title.BLACK_MARKETEER)

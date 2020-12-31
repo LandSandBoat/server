@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         end
         player:setCharVar("TrialSizeLightning_date", 0)
         player:addFame(WINDURST, 30)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
     end
 end

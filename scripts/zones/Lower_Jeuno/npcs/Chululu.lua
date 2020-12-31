@@ -102,7 +102,7 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.CARD_COLLECTOR)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
     elseif (csid == 199 and option == 0) then
         player:addCharVar("RubbishDay_prog", 1)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day

@@ -55,7 +55,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.CLUMP_OF_ANIMAL_HAIR)
     elseif (csid == 118) then
         player:delKeyItem(tpz.ki.XHIFHUT)
-        player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR)
+        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR)
         player:addKeyItem(tpz.ki.WARNING_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WARNING_LETTER)
         player:addGil(GIL_RATE*10000)
@@ -70,7 +70,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 126) then
         player:setCharVar("FiresOfDiscProg", 5)
     elseif (csid == 164) then
-        player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
         player:addGil(GIL_RATE*10000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000)
         player:setCharVar("FiresOfDiscProg", 0)

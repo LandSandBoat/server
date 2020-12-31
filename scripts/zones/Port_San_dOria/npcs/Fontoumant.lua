@@ -104,7 +104,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12289)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12289)
             player:addTitle(tpz.title.COURIER_EXTRAORDINAIRE)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:addFame(SANDORIA, 30)
             player:setCharVar("TheBrugaireConsortium-Parcels", 0)
         else

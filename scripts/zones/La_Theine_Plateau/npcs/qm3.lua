@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 124) then
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
         player:addTitle(tpz.title.RAINBOW_WEAVER)
         player:unlockJob(tpz.job.SMN)
         player:addSpell(296)

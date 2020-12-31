@@ -70,7 +70,7 @@ function onEventFinish(player, csid, option)
 
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 20)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
         else
             player:addFame(BASTOK, 8)
         end

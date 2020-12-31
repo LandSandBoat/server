@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.GULEMONTS_DOCUMENT)
         player:addFame(SANDORIA, 30)
         player:addTitle(tpz.title.LOST_CHILD_OFFICER)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
         player:addGil(560*GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, 560*GIL_RATE)
     end

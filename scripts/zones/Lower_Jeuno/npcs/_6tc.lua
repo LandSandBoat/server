@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("BeatAroundTheBushin", 0)
             player:addFame(NORG, 125)
             player:tradeComplete()
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
         end
     end
 end

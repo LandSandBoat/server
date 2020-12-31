@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
         else
             player:addFame(SANDORIA, 5)
         end

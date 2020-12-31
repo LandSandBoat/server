@@ -66,7 +66,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13571)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.RIVALS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
         end
     end
 

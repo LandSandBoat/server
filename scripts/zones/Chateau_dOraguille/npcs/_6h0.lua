@@ -150,7 +150,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14095) -- Gallant Leggings
             player:setCharVar("aBoysDreamCS", 0)
             player:addFame(SANDORIA, 40)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
         end
     elseif (csid == 90 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
@@ -164,7 +164,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("UnderOathCS", 9)
             player:addFame(SANDORIA, 60)
             player:setTitle(tpz.title.PARAGON_OF_PALADIN_EXCELLENCE)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
         end
     elseif (csid == 81) then
         player:setCharVar("MissionStatus", 1)

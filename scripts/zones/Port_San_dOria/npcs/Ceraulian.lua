@@ -106,7 +106,7 @@ function onEventFinish(player, csid, option)
             player:addItem(14227)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14227) -- Drachen Brais
             player:addFame(SANDORIA, 40)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
             player:setCharVar("ChasingQuotas_Progress", 0)
         end
 

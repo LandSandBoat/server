@@ -94,7 +94,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar("TrialByLightning_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(MHAURA, 30)
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif (csid == 10022 or csid == 10023) then
         if (player:getFreeSlotsCount() ~= 0) then

@@ -131,7 +131,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12720)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12720)
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
         end
     elseif (csid == 380) then
         player:delQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
@@ -146,6 +146,6 @@ function onEventFinish(player, csid, option)
         player:addItem(14400+wantsSubligar)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14400+wantsSubligar)
         player:addFame(BASTOK, 30)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end
 end

@@ -44,7 +44,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.LOADSTONE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LOADSTONE)
         player:addFame(RABAO, 30)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME)
     end
 
 end

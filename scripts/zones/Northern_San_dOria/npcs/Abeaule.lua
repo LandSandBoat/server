@@ -82,7 +82,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12600)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12600) -- Robe
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
         end
     -- "The Medicine Woman" Quest
     elseif (csid == 613 and option == 0 or csid == 615 and option == 0) then
@@ -93,7 +93,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     end
 
 end

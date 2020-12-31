@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
                 player:setCharVar("PastPerfectVar", 0)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 12560)
                 player:addFame(BASTOK, 110)
-                player:completeQuest(BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
+                player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
             end
         end
     end

@@ -41,7 +41,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
     elseif (csid == 82) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
         player:addFame(BASTOK, 120)
         player:addGil(150*GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, 150*GIL_RATE)

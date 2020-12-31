@@ -88,7 +88,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() ~= 0) then
             player:addItem(12647)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12647)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
             player:addTitle(tpz.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar("circleTime", 0)
         else
@@ -107,7 +107,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     end
 end

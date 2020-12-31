@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         end
         player:setCharVar("TrialSizeIce_date", 0)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
     end
 end

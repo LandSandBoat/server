@@ -85,7 +85,7 @@ function onEventFinish(player, csid, option)
         if npcUtil.giveItem(player, rse_map[player:getRace()][option]) then
             if questStatus == QUEST_ACCEPTED then
                 player:addFame(JEUNO, 30)
-                player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
+                player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
             end
 
             player:delKeyItem(tpz.ki.MAGICAL_PATTERN)

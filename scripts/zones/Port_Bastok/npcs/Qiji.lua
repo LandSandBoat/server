@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*300)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
         player:addFame(BASTOK, 80)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
     end
 
 end

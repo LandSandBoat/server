@@ -92,7 +92,7 @@ function onEventFinish(player, csid, option)
             npcUtil.giveKeyItem(player, tpz.ki.JOB_GESTURE_RUNE_FENCER)
             player:setCharVar("RUN_COTR", 0)
             player:delKeyItem(tpz.ki.YAHSE_WILDFLOWER_PETAL)
-            player:completeQuest(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     end
 end

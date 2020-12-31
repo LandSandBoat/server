@@ -107,7 +107,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
             player:setCharVar("TrialByEarth_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
     end
 

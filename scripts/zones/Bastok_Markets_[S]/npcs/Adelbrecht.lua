@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
                 player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
             else
@@ -86,7 +86,7 @@ function onEventFinish(player, csid, option)
             player:setCampaignAllegiance(2)
             player:setCharVar("BLUE_R_LETTER_USED", 0)
             player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         end
     end
 end

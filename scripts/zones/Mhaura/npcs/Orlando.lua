@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 10)
         player:addGil(payout)
         player:messageSpecial(ID.text.GIL_OBTAINED, payout)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
         player:setCharVar("ANTIQUE_PAYOUT", 0)
         player:setLocalVar("OrlandoRepeat", 0)
     elseif (csid == 103) then

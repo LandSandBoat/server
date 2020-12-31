@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("notmeanttobeCS", 0)
             player:addItem(2187, 3)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2187, 3)
-            player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
         end
     end
 end

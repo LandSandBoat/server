@@ -50,6 +50,6 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*10000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
     end
 end

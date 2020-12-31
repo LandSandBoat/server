@@ -72,7 +72,7 @@ function onEventFinish(player, csid, option)
     elseif (csid ~= 121) then
         player:tradeComplete()
         if (Gourmet == QUEST_ACCEPTED) then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
         end
 
         local gil=350

@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13113, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13113)
             player:setTitle(tpz.title.AIRSHIP_DENOUNCER)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
             player:addFame(BASTOK, 30)
         end
     end

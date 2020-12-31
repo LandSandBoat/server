@@ -83,7 +83,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_FLAMES)
             player:setCharVar("TrialByFire_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(KAZHAM, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end
     end
 

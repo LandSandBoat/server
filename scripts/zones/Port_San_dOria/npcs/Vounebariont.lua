@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 514) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
             player:addFame(SANDORIA, 30)
         else
             player:addFame(SANDORIA, 5)

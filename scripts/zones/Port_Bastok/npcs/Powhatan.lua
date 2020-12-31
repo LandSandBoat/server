@@ -64,7 +64,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
             player:setCharVar("WelcomeToBastok_Event", 0)
             player:addFame(BASTOK, 80)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
         end
     elseif (csid == 55 and option == 0) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
@@ -78,7 +78,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.LETTERS_FROM_DOMIEN)
             player:setCharVar("GuestofHauteur_Event", 0)
             player:addFame(BASTOK, 80)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
         end
     end
 

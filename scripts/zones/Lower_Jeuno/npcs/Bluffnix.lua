@@ -100,7 +100,7 @@ function onEventFinish(player, csid, option)
         player:changeContainerSize(tpz.inv.MOGSATCHEL, 5)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, TheGobbieBag[1])
+        player:completeQuest(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
         player:messageSpecial(ID.text.INVENTORY_INCREASED)
     elseif (csid == 10056) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 12, true))

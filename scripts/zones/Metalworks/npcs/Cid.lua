@@ -230,7 +230,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13570)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13570) -- Ram Mantle
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13570)
         end

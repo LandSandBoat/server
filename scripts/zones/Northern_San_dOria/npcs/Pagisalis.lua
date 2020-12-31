@@ -64,7 +64,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13211)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13211) -- Friars Rope
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
         end
     elseif (csid == 37) then
         player:tradeComplete()

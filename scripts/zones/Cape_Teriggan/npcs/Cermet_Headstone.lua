@@ -80,7 +80,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13248) -- Flagellant's Rope
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13248)
             player:addTitle(tpz.title.BEARER_OF_BONDS_BEYOND_TIME)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
         end
     end
 end

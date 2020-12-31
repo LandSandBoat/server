@@ -84,7 +84,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
             player:setCharVar("TrialByWater_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(NORG, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         end
     end
 

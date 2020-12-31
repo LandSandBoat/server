@@ -61,7 +61,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4731)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4731) -- Scroll of Teleport-Dem
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
         end
     elseif (csid == 680) then
         if (player:getFreeSlotsCount() == 0) then
@@ -72,7 +72,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4732)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4732) -- Scroll of Teleport-Mea
             player:addFame(WINDURST, 30)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ACTING_IN_GOOD_FAITH)
         end
     elseif (csid == 681 and option == 0) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
@@ -87,7 +87,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4730) -- Scroll of Teleport-Holla
             player:needToZone(true)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif (csid == 685 and option == 0) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
@@ -99,7 +99,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4747)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4747) -- Scroll of Teleport-Vahzl
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end
     end
 

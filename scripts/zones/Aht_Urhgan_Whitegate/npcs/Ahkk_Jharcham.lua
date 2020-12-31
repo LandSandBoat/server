@@ -41,6 +41,6 @@ function onEventFinish(player, csid, option)
     elseif csid == 11 then
         player:confirmTrade()
         player:setMoghouseFlag(16)
-        player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+        player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
     end
 end

@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
         if (Pamamas == 1) then --First completion of quest; set title, complete quest, and give higher fame
             player:addGil(GIL_RATE*5000)
             player:messageSpecial(ID.text.GIL_OBTAINED, 5000)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
             player:addFame(WINDURST, 100)
             player:addTitle(tpz.title.KAZHAM_CALLER)
             player:setCharVar("PamamaVar", 0)

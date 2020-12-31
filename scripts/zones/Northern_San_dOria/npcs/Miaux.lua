@@ -61,7 +61,7 @@ function onEventFinish(player, csid, option)
             player:addItem(16887)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16887) -- Peregrine (DRG AF1)
             player:addFame(SANDORIA, 20)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif (csid == 67) then
         player:addKeyItem(tpz.ki.SHINY_EARRING)

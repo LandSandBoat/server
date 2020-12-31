@@ -54,7 +54,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12500)
         else
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
             player:addFame(BASTOK, 120)
             player:addItem(12500)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12500)

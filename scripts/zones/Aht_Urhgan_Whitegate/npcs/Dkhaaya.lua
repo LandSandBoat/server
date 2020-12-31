@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.ELECTROPOT)
             player:delKeyItem(tpz.ki.ELECTROCELL)
             if csid == 6 then
-                player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+                player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
             end
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2217)

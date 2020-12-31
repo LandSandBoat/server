@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4946)
             player:addTitle(tpz.title.TREASUREHOUSE_RANSACKER)
             player:addFame(NORG, 75)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
         end
     end
 

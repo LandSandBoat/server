@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         end
         player:setCharVar("TrialSizeWater_date", 0)
         player:addFame(NORG, 30)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
     end
 end

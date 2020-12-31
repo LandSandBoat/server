@@ -63,10 +63,10 @@ function onEventFinish(player, csid, option)
     if (csid == 325) then
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TRAVERSER_STONE1)
         player:addKeyItem(tpz.ki.TRAVERSER_STONE1)
-        player:completeQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
+        player:completeQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
         player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS)
     elseif (csid == 327) then
-        player:completeQuest(ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS)
+        player:completeQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS)
         player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH)
         player:setCharVar("1stTimeAbyssea", 0)
     elseif (csid == 328 and option == 6) then

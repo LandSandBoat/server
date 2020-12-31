@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
         player:setCharVar("EveryonesGrudgeStarted", 1)
     elseif (csid == 118) then
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
         player:addFame(NORG, 80)
         player:addKeyItem(tpz.ki.TONBERRY_PRIEST_KEY)    -- Permanent Tonberry key

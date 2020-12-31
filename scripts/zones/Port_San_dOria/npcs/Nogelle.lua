@@ -18,7 +18,7 @@ function onTrade(player, npc, trade)
             player:addFame(SANDORIA, 30)
             player:addGil(GIL_RATE*600)
             player:addTitle(tpz.title.BEAN_CUISINE_SALTER)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
             player:startEvent(11)
         end
     end

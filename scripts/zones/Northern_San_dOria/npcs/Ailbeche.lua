@@ -102,7 +102,7 @@ function onEventFinish(player, csid, option)
             player:addTitle(tpz.title.LOST_CHILD_OFFICER)
             player:setCharVar("QuestfatherAndSonVar", 0)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
         end
     elseif (csid == 61) then
         player:setCharVar("returnedAilbecheRod", 1)
@@ -124,7 +124,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17643) -- Honor Sword
             player:setCharVar("sharpeningTheSwordCS", 0)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
     -- "A Boy's Dream"
     elseif ((csid == 41 or csid == 40) and option == 1) then

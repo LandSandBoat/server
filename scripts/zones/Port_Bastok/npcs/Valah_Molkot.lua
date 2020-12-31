@@ -75,7 +75,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 160 and option == 2002) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
         player:addFame(BASTOK, 120)
         player:setMoghouseFlag(2)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)

@@ -40,7 +40,7 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
     elseif csid == 10 then
         if player:getFreeSlotsCount() >= 1 then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
             player:setCharVar("BeautyAndTheGalkaDenied", 0)
             player:delKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS)
             player:addFame(BASTOK, 75)

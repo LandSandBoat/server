@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()
             player:setCharVar("Groceries", 0)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GROCERIES)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
             player:addFame(BASTOK, 75)
             player:addItem(13594) -- Rabbit Mantle
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13594)

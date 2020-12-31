@@ -92,7 +92,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("DeidoggWait1DayForAF3", VanadielDayOfTheYear())
             player:needToZone(true)
             player:addFame(BASTOK, 40)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         end
     elseif (csid == 172) then
         player:tradeComplete()
