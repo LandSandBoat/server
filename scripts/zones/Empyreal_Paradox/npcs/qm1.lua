@@ -31,8 +31,8 @@ end
 
 function onEventFinish(player,csid,option)
     if csid == 5 and option == 1 then
-        player:delMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)
-        player:delMission(ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
+        player:delMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
+        player:delMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.AWAKENING)
         player:setCharVar("ZilartStatus", 3)

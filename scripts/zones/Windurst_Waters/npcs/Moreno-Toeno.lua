@@ -146,7 +146,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("testingTime_start_day", 0)
         player:setCharVar("testingTime_start_hour", 0)
         player:setCharVar("testingTime_start_time", 0)
-        player:delMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        player:delMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
     elseif (csid == 200 or csid == 201) then -- first time win
         finishMissionTimeline(player, 1, csid, option)
 
