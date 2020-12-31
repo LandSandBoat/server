@@ -9970,7 +9970,10 @@ INSERT INTO `mob_groups` VALUES (34,2664,153,'Mimic',0,128,1680,0,0,62,66,0);
 INSERT INTO `mob_groups` VALUES (35,60,153,'Agas',0,128,0,10000,10000,65,66,0);
 INSERT INTO `mob_groups` VALUES (36,386,153,'Beet_Leafhopper',0,128,0,11000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (37,5159,153,'Modron',0,128,0,0,9999,94,95,0);
-INSERT INTO `mob_groups` VALUES (38,5160,153,'Modronsdruid',0,128,0,0,0,92,93,0);
+INSERT INTO `mob_groups` VALUES (38,5160,153,'Modrons_Druid',0,128,0,0,0,92,93,0);
+INSERT INTO `mob_groups` VALUES (39,0,153,'Ayapec',0,128,0,0,0,125,125,0);
+INSERT INTO `mob_groups` VALUES (40,0,153,'Hidhaegg',0,128,0,0,0,135,135,0);
+INSERT INTO `mob_groups` VALUES (41,0,153,'Templar_Crawler',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (8170,4517,153,'Zonpa-Zippa',0,128,0,0,0,0,0,0);
 
