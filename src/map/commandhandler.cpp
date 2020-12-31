@@ -53,7 +53,12 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         return -1;
     }
 
-    if (auto result = lua.script_file(fmt::format("scripts/commands/{}.lua", cmdname.c_str())); !result.valid())
+    // Nil out any existing global instances of onTrigger before anything else!
+    lua.set("onTrigger", sol::nil);
+
+    auto filename = fmt::format("scripts/commands/{}.lua", cmdname.c_str());
+    auto result   = lua.script_file(filename);
+    if (!result.valid())
     {
         sol::error err = result;
         ShowError("cmdhandler::call: (%s): %s\n", cmdname.c_str(),err.what());
@@ -165,7 +170,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         switch (*parameter)
         {
             case 'b':
-                lua_pushstring(lua.lua_state(), (const char*)commandline);
+                sol::stack::push<std::string>(lua.lua_state(), (const char*)commandline);
                 ++cntparam;
                 break;
 
@@ -178,21 +183,21 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
                         clstream >> param;
                         str += " " + param;
                     }
-                    lua_pushstring(lua.lua_state(), str.c_str());
+                    sol::stack::push<std::string>(lua.lua_state(), str);
                     ++cntparam;
                     break;
                 }
-                lua_pushstring(lua.lua_state(), param.c_str());
+                sol::stack::push<std::string>(lua.lua_state(), param);
                 ++cntparam;
                 break;
 
             case 'i':
-                lua_pushnumber(lua.lua_state(), atoi(param.c_str()));
+                sol::stack::push<int>(lua.lua_state(), atoi(param.c_str()));
                 ++cntparam;
                 break;
 
             case 'd':
-                lua_pushnumber(lua.lua_state(), atof(param.c_str()));
+                sol::stack::push<float>(lua.lua_state(), atof(param.c_str()));
                 ++cntparam;
                 break;
 

@@ -40,4 +40,4 @@ public:
     static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
 };
 
-#endif
+#endif // _COMMAND_HANDLER_H
