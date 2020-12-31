@@ -120,14 +120,14 @@ tpz.roe.records =
 
     [ 500] = { -- Mog House Exit: San d'Oria
         trigger = triggers.questComplete,
-        reqs = { questComplete = {SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS} },
+        reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 501] = { -- Mog House Exit: Bastok
         trigger = triggers.questComplete,
-        reqs = { questComplete = {BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART} },
+        reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
@@ -138,70 +138,70 @@ tpz.roe.records =
 
     [ 705] = { -- Level Cap Increase: 55 +
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 706] = { -- Level Cap Increase: 60
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 707] = { -- Level Cap Increase: 65
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 708] = { -- Level Cap Increase: 70
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 709] = { -- Level Cap Increase: 75
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 710] = { -- Level Cap Increase: 80
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 711] = { -- Level Cap Increase: 85
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 712] = { -- Level Cap Increase: 90
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 713] = { -- Level Cap Increase: 95
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 714] = { -- Level Cap Increase: 99
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
@@ -212,70 +212,70 @@ tpz.roe.records =
 
     [ 715] = { -- Inventory Expansion 35
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_I} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_I} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 716] = { -- Inventory Expansion 40
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_II} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_II} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 717] = { -- Inventory Expansion 45
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_III} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_III} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 718] = { -- Inventory Expansion 50
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IV} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IV} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 719] = { -- Inventory Expansion 55
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_V} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_V} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 720] = { -- Inventory Expansion 60
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VI} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VI} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 721] = { -- Inventory Expansion 65
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VII} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VII} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 722] = { -- Inventory Expansion 70
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 723] = { -- Inventory Expansion 75
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IX} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IX} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
 
     [ 724] = { -- Inventory Expansion 80
         trigger = triggers.questComplete,
-        reqs = { questComplete = {JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_X} },
+        reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_X} },
         flags = set{"retro"},
         reward = { sparks = 100, xp = 300 },
     },
