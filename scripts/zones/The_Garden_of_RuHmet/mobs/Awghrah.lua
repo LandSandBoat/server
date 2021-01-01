@@ -9,7 +9,7 @@ function onMobSpawn(mob)
     -- Set core Skin and mob elemental resist/weakness; other elements set to 0.
     -- Set to non aggro.
     mob:setAnimationSub(0)
-    mob:setAggressive(0)
+    mob:setAggressive(false)
     mob:setLocalVar("roamTime", os.time())
     mob:setLocalVar("form2", math.random(1, 3))
     local skin = math.random(1161, 1168)
@@ -46,10 +46,10 @@ function onMobRoam(mob)
     if (mob:getAnimationSub() == 0 and os.time() - roamTime > 60) then
         mob:setAnimationSub(mob:getLocalVar("form2"))
         mob:setLocalVar("roamTime", os.time())
-        mob:setAggressive(1)
+        mob:setAggressive(true)
     elseif (mob:getAnimationSub() == mob:getLocalVar("form2") and os.time() - roamTime > 60) then
         mob:setAnimationSub(0)
-        mob:setAggressive(0)
+        mob:setAggressive(false)
         mob:setLocalVar("roamTime", os.time())
     end
 end
@@ -60,11 +60,11 @@ function onMobFight(mob, target)
 
     if (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
         mob:setAnimationSub(mob:getLocalVar("form2"))
-        mob:setAggressive(1)
+        mob:setAggressive(true)
         mob:setLocalVar("changeTime", mob:getBattleTime())
     elseif (mob:getAnimationSub() == mob:getLocalVar("form2") and mob:getBattleTime() - changeTime > 60) then
         mob:setAnimationSub(0)
-        mob:setAggressive(0)
+        mob:setAggressive(false)
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end
