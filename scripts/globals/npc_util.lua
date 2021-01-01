@@ -396,8 +396,20 @@ function npcUtil.completeQuest(player, area, quest, params)
         end
     end
 
+    local logId
+    if type(area) == "number" then
+        logId = area
+    elseif area["quest_log"] then
+        logId = area["quest_log"]
+    end
+
     -- successfully complete the quest
-    player:completeQuest(area, quest)
+    if logId then
+        player:completeQuest(logId, quest)
+    else
+        print("ERROR: invalid logId encountered in npcUtil.completeQuest")
+    end
+
     return true
 end
 

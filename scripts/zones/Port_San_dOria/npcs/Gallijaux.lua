@@ -45,7 +45,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION) == QUEST_AVAILABLE and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_AVAILABLE) then -- If you haven't started either quest yet
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION) == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_AVAILABLE) then -- If you haven't started either quest yet
         player:startEvent(300, 4401, 4289) -- 4401 = Moat Carp, 4289 = Forest Carp
     elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED) then
         player:showText(npc, ID.text.GALLIJAUX_CARP_STATUS, 0, player:getCharVar("theCompetitionFishCountVar"))

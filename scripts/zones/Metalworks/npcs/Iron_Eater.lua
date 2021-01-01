@@ -18,7 +18,7 @@ local TrustMemory = function(player)
     local memories = 0
     --[[ TODO
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge

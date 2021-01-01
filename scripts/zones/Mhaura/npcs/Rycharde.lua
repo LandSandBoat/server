@@ -87,7 +87,7 @@ function onTrade(player, npc, trade)
             player:startEvent(93) -- that's not enogh!
         end
 
-    elseif (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_ACCEPTED) then
         local BackedPototo  = trade:hasItemQty(4436, 1) --4436 - baked_popoto
         if (BackedPototo  == true) then
             player:startEvent(96)
@@ -144,7 +144,7 @@ elseif (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAr
     else
         player:startEvent(75) -- nothing to do
     end
-elseif (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_ACCEPTED) then
+elseif (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_ACCEPTED) then
     if (player:hasKeyItem(tpz.ki.ARAGONEU_PIZZA)) then
         player:startEvent(87)-- forth quest   not done yet
     else

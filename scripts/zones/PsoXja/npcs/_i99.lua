@@ -19,7 +19,7 @@ function onTrigger(player, npc)
         player:startEvent(109) -- Start Floor 1, 3 or 4
     elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS) or (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==7)) then
         player:startEvent(112) -- Start Floor 1, 3, 4, or 5
-    elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
         player:startEvent(50) -- Start Floor 1
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)

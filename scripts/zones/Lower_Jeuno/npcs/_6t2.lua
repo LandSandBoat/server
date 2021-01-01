@@ -18,7 +18,7 @@ function onTrigger(player, npc)
 
     local ANewDawn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
-    local ScatteredIntoShadow = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+    local ScatteredIntoShadow = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
 
     local SaveMySon = player:getCharVar("SaveMySon_Event")
 
