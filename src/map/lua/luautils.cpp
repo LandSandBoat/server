@@ -1542,6 +1542,8 @@ namespace luautils
 
     int32 OnNpcSpawn(CBaseEntity* PNpc)
     {
+        TracyZoneScoped;
+
         if (PNpc == nullptr)
         {
             ShowError("luautils::onNpcSpawn: Npc not found!\n");
@@ -1569,71 +1571,64 @@ namespace luautils
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage)
     {
-        lua_prepscript(PAttacker->objtype == TYPE_PC ? "scripts/globals/items/%s.lua" : "scripts/zones/%s/mobs/%s.lua",
+        TracyZoneScoped;
+
+        auto filename = fmt::format(PAttacker->objtype == TYPE_PC ? "scripts/globals/items/{}.lua" : "scripts/zones/{}/mobs/{}.lua",
                        PAttacker->objtype == TYPE_PC ? PItem->getName() : PAttacker->loc.zone->GetName(), PAttacker->GetName());
 
-        if (prepFile(File, "onAdditionalEffect"))
+        auto onAdditionalEffect = loadFunctionFromFile("onAdditionalEffect", filename);
+        if (!onAdditionalEffect.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PAttacker);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PDefender);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        lua_pushinteger(LuaHandle, damage);
-
-        if (lua_pcall(LuaHandle, 3, 3, 0))
+        auto result = onAdditionalEffect(CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), damage);
+        if (!result.valid())
         {
-            ShowError("luautils::onAdditionalEffect: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onAdditionalEffect: %s\n", err.what());
             return -1;
         }
 
-        Action->additionalEffect = (SUBEFFECT)(!lua_isnil(LuaHandle, -3) && lua_isnumber(LuaHandle, -3) ? (int32)lua_tonumber(LuaHandle, -3) : 0);
-        Action->addEffectMessage = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : 0);
-        Action->addEffectParam   = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 3);
+        Action->additionalEffect = (SUBEFFECT)(result.return_count() > 0 ? result.get<int32>() : 0);
+        Action->addEffectMessage = result.return_count() > 1 ? result.get<int32>() : 0;
+        Action->addEffectParam   = result.return_count() > 2 ? result.get<int32>() : 0;
 
         return 0;
     }
 
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage)
     {
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PDefender->loc.zone->GetName(), PDefender->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onSpikesDamage"))
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PDefender->loc.zone->GetName(), PDefender->GetName());
+
+        auto onSpikesDamage = loadFunctionFromFile("onSpikesDamage", filename);
+        if (!onSpikesDamage.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PDefender);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PAttacker);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        lua_pushinteger(LuaHandle, damage);
-
-        if (lua_pcall(LuaHandle, 3, 3, 0))
+        auto result = onSpikesDamage(CLuaBaseEntity(PDefender), CLuaBaseEntity(PAttacker), damage);
+        if (!result.valid())
         {
-            ShowError("luautils::onSpikesDamage: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onSpikesDamage: %s\n", err.what());
             return -1;
+
         }
 
-        Action->spikesEffect  = (SUBEFFECT)(!lua_isnil(LuaHandle, -3) && lua_isnumber(LuaHandle, -3) ? (int32)lua_tonumber(LuaHandle, -3) : 0);
-        Action->spikesMessage = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : 0);
-        Action->spikesParam   = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 3);
+        Action->additionalEffect = (SUBEFFECT)(result.return_count() > 0 ? result.get<int32>() : 0);
+        Action->addEffectMessage = result.return_count() > 1 ? result.get<int32>() : 0;
+        Action->addEffectParam   = result.return_count() > 2 ? result.get<int32>() : 0;
 
         return 0;
     }
 
     int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        TracyZoneScoped;
+
         auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
         auto onEffectGain = loadFunctionFromFile("onEffectGain", filename);
@@ -1655,6 +1650,8 @@ namespace luautils
 
     int32 OnEffectTick(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        TracyZoneScoped;
+
         auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
         auto onEffectTick = loadFunctionFromFile("onEffectTick", filename);
@@ -1676,6 +1673,8 @@ namespace luautils
 
     int32 OnEffectLose(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
+        TracyZoneScoped;
+
         auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
 
         auto onEffectLose = loadFunctionFromFile("onEffectLose", filename);
@@ -1697,64 +1696,67 @@ namespace luautils
 
     int32 OnAttachmentEquip(CBattleEntity* PEntity, CItemPuppet* attachment)
     {
-        lua_prepscript("scripts/globals/abilities/pets/attachments/%s.lua", attachment->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onEquip"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+
+        auto onEquip = loadFunctionFromFile("onEquip", filename);
+        if (!onEquip.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onEquip(CLuaBaseEntity(PEntity));
+        if (!result.valid())
         {
-            ShowError("luautils::onEquip: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onEquip: %s\n", err.what());
             return -1;
         }
+
         return 0;
     }
 
     int32 OnAttachmentUnequip(CBattleEntity* PEntity, CItemPuppet* attachment)
     {
-        lua_prepscript("scripts/globals/abilities/pets/attachments/%s.lua", attachment->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onUnequip"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+
+        auto onUnequip = loadFunctionFromFile("onUnequip", filename);
+        if (!onUnequip.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onUnequip(CLuaBaseEntity(PEntity));
+        if (!result.valid())
         {
-            ShowError("luautils::onUnequip: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onUnequip: %s\n", err.what());
             return -1;
         }
+
         return 0;
     }
 
     int32 OnManeuverGain(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers)
     {
-        lua_prepscript("scripts/globals/abilities/pets/attachments/%s.lua", attachment->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onManeuverGain"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+
+        auto onManeuverGain = loadFunctionFromFile("onManeuverGain", filename);
+        if (!onManeuverGain.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, maneuvers);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onManeuverGain(CLuaBaseEntity(PEntity), maneuvers);
+        if (!result.valid())
         {
-            ShowError("luautils::onManeuverGain: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onManeuverGain: %s\n", err.what());
             return -1;
         }
 
@@ -1763,22 +1765,21 @@ namespace luautils
 
     int32 OnManeuverLose(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers)
     {
-        lua_prepscript("scripts/globals/abilities/pets/attachments/%s.lua", attachment->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onManeuverLose"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+
+        auto onManeuverLose = loadFunctionFromFile("onManeuverLose", filename);
+        if (!onManeuverLose.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, maneuvers);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onManeuverLose(CLuaBaseEntity(PEntity), maneuvers);
+        if (!result.valid())
         {
-            ShowError("luautils::onManeuverLose: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onManeuverLose: %s\n", err.what());
             return -1;
         }
 
@@ -1787,22 +1788,21 @@ namespace luautils
 
     int32 OnUpdateAttachment(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers)
     {
-        lua_prepscript("scripts/globals/abilities/pets/attachments/%s.lua", attachment->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onUpdate"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+
+        auto onUpdate = loadFunctionFromFile("onUpdate", filename);
+        if (!onUpdate.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PEntity);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        lua_pushinteger(LuaHandle, maneuvers);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onUpdate(CLuaBaseEntity(PEntity), maneuvers);
+        if (!result.valid())
         {
-            ShowError("luautils::onUpdate: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onUpdate: %s\n", err.what());
             return -1;
         }
 
@@ -1818,37 +1818,29 @@ namespace luautils
 
     std::tuple<int32, int32, int32> OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param, CBaseEntity* PCaster)
     {
-        /*
-        lua_prepscript("scripts/globals/items/%s.lua", PItem->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onItemCheck"))
+        auto filename = fmt::format("scripts/globals/items/{}.lua", PItem->getName());
+
+        auto onItemCheck = loadFunctionFromFile("onItemCheck", filename);
+        if (!onItemCheck.valid())
         {
             return { 56, 0, 0 };
         }
 
-        CLuaBaseEntity LuaBaseEntityTarget(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntityTarget);
-        CLuaBaseEntity LuaBaseEntityCaster(PCaster);
-
-        lua_pushinteger(LuaHandle, static_cast<uint32>(param));
-
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntityCaster);
-
-        if (lua_pcall(LuaHandle, 3, 3, 0))
+        auto result = onItemCheck(CLuaBaseEntity(PTarget), static_cast<uint32>(param), CLuaBaseEntity(PCaster));
+        if (!result.valid())
         {
-            ShowError("luautils::onItemCheck: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onItemCheck: %s\n", err.what());
             return { 56, 0, 0 };
         }
 
-        uint32 messageId = (!lua_isnil(LuaHandle, -3) && lua_isnumber(LuaHandle, -3) ? (int32)lua_tonumber(LuaHandle, -3) : 0);
-        uint32 param1    = (!lua_isnil(LuaHandle, -2) && lua_isnumber(LuaHandle, -2) ? (int32)lua_tonumber(LuaHandle, -2) : 0);
-        uint32 param2    = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 3);
+        uint32 messageId = result.return_count() > 0 ? result.get<int32>() : 0;
+        uint32 param1    = result.return_count() > 1 ? result.get<int32>() : 0;
+        uint32 param2    = result.return_count() > 2 ? result.get<int32>() : 0;
 
         return { messageId, param1, param2 };
-        */
-        return { 0, 0, 0 };
     }
 
     /************************************************************************
@@ -1861,24 +1853,24 @@ namespace luautils
 
     int32 OnItemUse(CBaseEntity* PTarget, CItem* PItem)
     {
-        /*
-        lua_prepscript("scripts/globals/items/%s.lua", PItem->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onItemUse"))
+        auto filename = fmt::format("scripts/globals/items/{}.lua", PItem->getName());
+
+        auto onItemUse = loadFunctionFromFile("onItemUse", filename);
+        if (!onItemUse.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onItemUse(CLuaBaseEntity(PTarget));
+        if (!result.valid())
         {
-            ShowError("luautils::onItemUse: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onItemUse: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -1919,9 +1911,12 @@ namespace luautils
 
     uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
     {
+        TracyZoneScoped;
+
         if (PSpell == nullptr)
         {
             ShowError("luautils::OnSpellCast: Spell not found!\n");
+            return -1;
         }
 
         auto filename = fmt::format(PSpell->getSpellGroup() == SPELLGROUP_BLUE    ? "scripts/globals/spells/bluemagic/{}.lua"
@@ -1932,7 +1927,7 @@ namespace luautils
         auto onSpellCast = loadFunctionFromFile("onSpellCast", filename);
         if (!onSpellCast.valid())
         {
-            return 0;
+            return -1;
         }
 
         auto result = onSpellCast(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget), CLuaSpell(PSpell));
@@ -1940,7 +1935,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onSpellCast: %s\n", err.what());
-            return 0;
+            return -1;
         }
 
         uint32 retVal = result.return_count() ? result.get<int32>() : 0;
@@ -1955,58 +1950,63 @@ namespace luautils
 
     int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell)
     {
-        if (PCaster->objtype == TYPE_MOB)
+        TracyZoneScoped;
+
+        if (PCaster->objtype != TYPE_MOB)
         {
-            auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PCaster->loc.zone->GetName(), PCaster->GetName());
-
-            auto onSpellPrecast = loadFunctionFromFile("onSpellPrecast", filename);
-            if (!onSpellPrecast.valid())
-            {
-                return 0;
-            }
-
-            auto result = onSpellPrecast(CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
-            if (!result.valid())
-            {
-                sol::error err = result;
-                ShowError("luautils::onSpellPrecast: %s\n", err.what());
-                return 0;
-            }
+            return -1;
         }
+
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PCaster->loc.zone->GetName(), PCaster->GetName());
+
+        auto onSpellPrecast = loadFunctionFromFile("onSpellPrecast", filename);
+        if (!onSpellPrecast.valid())
+        {
+            return 0;
+        }
+
+        auto result = onSpellPrecast(CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onSpellPrecast: %s\n", err.what());
+            return 0;
+        }
+
         return 0;
     }
 
     std::optional<SpellID> OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PCaster == nullptr || PTarget == nullptr);
+        TracyZoneScoped;
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PCaster->loc.zone->GetName(), PCaster->GetName());
-
-        if (prepFile(File, "onMonsterMagicPrepare"))
+        if (PCaster == nullptr || PTarget == nullptr)
         {
             return {};
         }
 
-        CLuaBaseEntity LuaMobEntity(PCaster);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PCaster->loc.zone->GetName(), PCaster->GetName());
 
-        CLuaBaseEntity LuaTargetEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaTargetEntity);
-
-        if (lua_pcall(LuaHandle, 2, 1, 0))
+        auto onMonsterMagicPrepare = loadFunctionFromFile("onMonsterMagicPrepare", filename);
+        if (!onMonsterMagicPrepare.valid())
         {
-            ShowError("luautils::onMonsterMagicPrepare: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
             return {};
         }
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
+
+        auto result = onMonsterMagicPrepare(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMonsterMagicPrepare: %s\n", err.what());
+            return {};
+        }
+
+        uint32 retVal = result.return_count() ? result.get<int32>() : 0;
         if (retVal > 0)
         {
             return static_cast<SpellID>(retVal);
         }
-        */
+
         return {};
     }
 
@@ -2019,39 +2019,32 @@ namespace luautils
 
     int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PSpell == nullptr);
+        TracyZoneScoped;
+
+        if (PSpell == nullptr)
+        {
+            return -1;
+        }
 
         PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, PCaster, PSpell);
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PTarget->loc.zone->GetName(), PTarget->GetName());
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PTarget->loc.zone->GetName(), PTarget->GetName());
 
-        if (prepFile(File, "onMagicHit"))
+        auto onMagicHit = loadFunctionFromFile("onMagicHit", filename);
+        if (!onMagicHit.valid())
         {
             return 0;
         }
 
-        CLuaBaseEntity LuaCasterEntity(PCaster);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaCasterEntity);
-
-        CLuaBaseEntity LuaTargetEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaTargetEntity);
-
-        CLuaSpell LuaSpell(PSpell);
-        //Lunar<CLuaSpell>::push(LuaHandle, &LuaSpell);
-
-        if (lua_pcall(LuaHandle, 3, 1, 0))
+        auto result = onMagicHit(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget), CLuaSpell(PSpell));
+        if (!result.valid())
         {
-            ShowError("luautils::onMagicHit: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onMagicHit: %s\n", err.what());
+            return -1;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : 0;
     }
 
     /************************************************************************
@@ -2062,6 +2055,8 @@ namespace luautils
 
     int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill)
     {
+        TracyZoneScoped;
+
         auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
         auto onWeaponskillHit = loadFunctionFromFile("onWeaponskillHit", filename);
@@ -2112,63 +2107,51 @@ namespace luautils
 
     int32 ApplyMixins(CBaseEntity* PMob)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
+        TracyZoneScoped;
 
-        if (PMob->objtype == TYPE_MOB)
+        if (PMob == nullptr || PMob->objtype == TYPE_MOB)
         {
-            lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-            lua_pushnil(LuaHandle);
-            lua_setglobal(LuaHandle, "mixins");
-            lua_pushnil(LuaHandle);
-            lua_setglobal(LuaHandle, "mixinOptions");
-
-            // remove any previous definition of the global "mixins"
-
-            auto ret = luaL_loadfile(LuaHandle, (const char*)File);
-            if (ret)
-            {
-                lua_pop(LuaHandle, 1);
-                return -1;
-            }
-
-            ret = lua_pcall(LuaHandle, 0, 0, 0);
-            if (ret)
-            {
-                ShowError("luautils::%s: %s\n", "applyMixins", lua_tostring(LuaHandle, -1));
-                lua_pop(LuaHandle, 1);
-                return -1;
-            }
-
-            // get the function "applyMixins"
-            lua_getglobal(LuaHandle, "applyMixins");
-            if (lua_isnil(LuaHandle, -1))
-            {
-                lua_pop(LuaHandle, 1);
-                return -1;
-            }
-
-            CLuaBaseEntity LuaMobEntity(PMob);
-            //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-            // get the parameter "mixins"
-            lua_getglobal(LuaHandle, "mixins");
-            if (lua_isnil(LuaHandle, -1))
-            {
-                lua_pop(LuaHandle, 3);
-                return -1;
-            }
-            // get the parameter "mixinOptions" (optional)
-            lua_getglobal(LuaHandle, "mixinOptions");
-
-            if (lua_pcall(LuaHandle, 3, 0, 0))
-            {
-                ShowError("luautils::applyMixins: %s\n", lua_tostring(LuaHandle, -1));
-                lua_pop(LuaHandle, 1);
-            }
+            return -1;
         }
-        */
+
+        // Clear out globals
+        lua["mixins"]       = sol::nil;
+        lua["mixinOptions"] = sol::nil;
+
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+
+        auto script_result = lua.script_file(filename);
+        if (!script_result.valid())
+        {
+            sol::error err = script_result;
+            ShowError("luautils::%s: %s\n", "applyMixins", err.what());
+            return -1;
+        }
+
+        // get the function "applyMixins"
+        auto applyMixins = lua.get<sol::function>("applyMixins");
+        if (!applyMixins.valid())
+        {
+            return -1;
+        }
+
+        // get the parameter "mixins"
+        auto mixins = lua["mixins"];
+        if (!mixins.valid())
+        {
+            return -1;
+        }
+
+        // get the parameter "mixinOptions" (optional)
+        auto mixinOptions = lua["mixinOptions"];
+
+        auto result = applyMixins(CLuaBaseEntity(PMob), mixins, mixinOptions);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::applyMixins: %s\n", err.what());
+        }
+
         return 0;
     }
 
@@ -2326,7 +2309,12 @@ namespace luautils
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone)
     {
-        TPZ_DEBUG_BREAK_IF(PZone == nullptr);
+        TracyZoneScoped;
+
+        if (PZone == nullptr)
+        {
+            return -1;
+        }
 
         lua.load_file("scripts/globals/battlefield.lua");
 
@@ -2433,110 +2421,123 @@ namespace luautils
 
     int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PTarget == nullptr || PMob == nullptr);
+        TracyZoneScoped;
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        CLuaBaseEntity LuaKillerEntity(PTarget);
+        if (PTarget == nullptr || PMob == nullptr)
+        {
+            return -1;
+        }
 
-        int8 File[255];
-        PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str())
-                                  : snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        std::string filename;
+        if (PMob->objtype == TYPE_PET)
+        {
+            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
+        }
+        else
+        {
+            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        }
 
         if (PTarget->objtype == TYPE_PC)
         {
             ((CCharEntity*)PTarget)->m_event.reset();
             ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script.insert(0, (const char*)File);
+            ((CCharEntity*)PTarget)->m_event.Script.insert(0, filename);
         }
 
-        if (prepFile(File, "onMobEngaged"))
+        auto onMobEngaged = loadFunctionFromFile("onMobEngaged", filename);
+        if (!onMobEngaged.valid())
         {
             return -1;
         }
 
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaKillerEntity);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onMobEngaged(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobEngaged: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobEngaged: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     /************************************************************************
      *                                                                       *
-     *  Calls a lua script when a mob has disengaged from a target   *       *
+     *  Calls a lua script when a mob has disengaged from a target           *
      *                                                                       *
      ************************************************************************/
 
     int32 OnMobDisengage(CBaseEntity* PMob)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
+        TracyZoneScoped;
+
+        if (PMob == nullptr)
+        {
+            return -1;
+        }
+
+        std::string filename;
+        if (PMob->objtype == TYPE_PET)
+        {
+            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
+        }
+        else
+        {
+            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        }
+
+        auto onMobDisengage = loadFunctionFromFile("onMobDisengage", filename);
+        if (!onMobDisengage.valid())
+        {
+            return -1;
+        }
 
         uint8 weather = PMob->loc.zone->GetWeather();
 
-        int8 File[255];
-        PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str())
-                                  : snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        if (prepFile(File, "onMobDisengage"))
+        auto result = onMobDisengage(CLuaBaseEntity(PMob), weather);
+        if (!result.valid())
         {
+            sol::error err = result;
+            ShowError("luautils::onMobDisengage: %s\n", err.what());
             return -1;
         }
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        lua_pushinteger(LuaHandle, weather);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
-        {
-            ShowError("luautils::onMobDisengage: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
-        }
-        */
         return 0;
     }
 
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PTarget == nullptr || PMob == nullptr);
+        TracyZoneScoped;
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        CLuaBaseEntity LuaKillerEntity(PTarget);
+        if (PTarget == nullptr || PMob == nullptr)
+        {
+            return -1;
+        }
 
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
         if (PTarget->objtype == TYPE_PC)
         {
             ((CCharEntity*)PTarget)->m_event.reset();
             ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script.insert(0, (const char*)File);
+            ((CCharEntity*)PTarget)->m_event.Script.insert(0, filename);
         }
 
-        if (prepFile(File, "onMobDrawIn"))
+        auto onMobDrawIn = loadFunctionFromFile("onMobDrawIn", filename);
+        if (!onMobDrawIn.valid())
         {
             return -1;
         }
 
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaKillerEntity);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onMobDrawIn(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobDrawIn: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobDrawIn: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -2548,33 +2549,37 @@ namespace luautils
 
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
-        /*
         TracyZoneScoped;
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
-        TPZ_DEBUG_BREAK_IF(PTarget == nullptr || PTarget->objtype == TYPE_NPC);
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        CLuaBaseEntity LuaKillerEntity(PTarget);
-
-        int8 File[255];
-        PMob->objtype == TYPE_PET ? snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str())
-                                  : snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        if (prepFile(File, "onMobFight"))
+        if (PTarget == nullptr || PMob == nullptr)
         {
             return -1;
         }
 
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaKillerEntity);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        std::string filename;
+        if (PMob->objtype == TYPE_PET)
         {
-            ShowError("luautils::onMobFight: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
+        }
+        else
+        {
+            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        }
+
+        auto onMobFight = loadFunctionFromFile("onMobFight", filename);
+        if (!onMobFight.valid())
+        {
             return -1;
         }
-        */
+
+        auto result = onMobFight(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobFight: %s\n", err.what());
+            return -1;
+        }
+
         return 0;
     }
 
@@ -2925,17 +2930,21 @@ namespace luautils
 
     int32 OnGameDay(CZone* PZone)
     {
-        lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onGameDay"))
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
+
+        auto onGameDay = loadFunctionFromFile("onGameDay", filename);
+        if (!onGameDay.valid())
         {
             return -1;
         }
 
-        if (lua_pcall(LuaHandle, 0, 0, 0))
+        auto result = onGameDay();
+        if (!result.valid())
         {
-            ShowError("luautils::onGameDay: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onGameDay: %s\n", err.what());
             return -1;
         }
 
@@ -2950,68 +2959,70 @@ namespace luautils
 
     int32 OnGameHour(CZone* PZone)
     {
-        /*
         TracyZoneScoped;
-        lua.script_file(fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName()));
 
-        if (!lua["onGameHour"].valid())
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
+
+        auto onGameHour = loadFunctionFromFile("onGameHour", filename);
+        if (!onGameHour.valid())
         {
             return -1;
         }
 
-        CLuaZone LuaZone(PZone);
-
-        if (auto result = lua["onGameHour"](LuaZone); !result.valid())
+        auto result = onGameHour(CLuaZone(PZone));
+        if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onGameHour: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnZoneWeatherChange(uint16 ZoneID, uint8 weather)
     {
-        /*
-        lua_prepscript("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onZoneWeatherChange"))
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+
+        auto onZoneWeatherChange = loadFunctionFromFile("onZoneWeatherChange", filename);
+        if (!onZoneWeatherChange.valid())
         {
             return -1;
         }
 
-        lua_pushinteger(LuaHandle, weather);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onZoneWeatherChange(weather);
+        if (!result.valid())
         {
-            ShowError("luautils::OnZoneWeatherChange: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onZoneWeatherChange: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD)
     {
-        /*
-        lua_prepscript("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onTOTDChange"))
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", zoneutils::GetZone(ZoneID)->GetName());
+
+        auto onTOTDChange = loadFunctionFromFile("onTOTDChange", filename);
+        if (!onTOTDChange.valid())
         {
             return -1;
         }
 
-        lua_pushinteger(LuaHandle, TOTD);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onTOTDChange(TOTD);
+        if (!result.valid())
         {
-            ShowError("luautils::OnTOTDChange: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onTOTDChange: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -3024,6 +3035,7 @@ namespace luautils
     std::tuple<int32, uint8, uint8> OnUseWeaponSkill(CBattleEntity* PChar, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action,
                                                      CBattleEntity* taChar)
     {
+        /*
         lua_prepscript("scripts/globals/weaponskills/%s.lua", wskill->getName());
 
         if (prepFile(File, "onUseWeaponSkill"))
@@ -3067,6 +3079,9 @@ namespace luautils
 
         lua_pop(LuaHandle, 4);
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
+        */
+
+        return std::tuple<int32, uint8, uint8>();
     }
 
     /***********************************************************************
