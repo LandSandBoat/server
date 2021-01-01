@@ -9,12 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
 -- For those who don't know
--- at the end of if (player:getQuestStatus(REGION, QUEST_NAME)
+-- at the end of if (player:getQuestStatus(QUEST_LOG_ID, QUEST_NAME)
 -- == 0 means QUEST_AVAILABLE
 -- == 1 means QUEST_ACCEPTED
 -- == 2 means QUEST_COMPLETED
--- e.g. if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN) == 0
--- means if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN) == QUEST AVAILABLE
+-- e.g. if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN) == 0
+-- means if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN) == QUEST AVAILABLE
 
 function onTrade(player, npc, trade)
 end

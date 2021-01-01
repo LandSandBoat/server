@@ -18,7 +18,7 @@ function onTrade(player, npc, trade)
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
