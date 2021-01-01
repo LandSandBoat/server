@@ -121,9 +121,9 @@ namespace luautils
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
-    uint8 getNationRank(uint8 nation);
-    uint8 getConquestBalance();
-    bool  isConquestAlliance();
+    uint8 GetNationRank(uint8 nation);
+    uint8 GetConquestBalance();
+    bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay

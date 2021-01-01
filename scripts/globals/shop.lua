@@ -96,7 +96,7 @@ tpz.shop =
         nation is a tpz.nation ID from scripts/globals/zone.lua
     ******************************************************************************* --]]
     nation = function(player, stock, nation)
-        local rank = getNationRank(nation)
+        local rank = GetNationRank(nation)
         local newStock = {}
         for i = 1, #stock, 3 do
             if

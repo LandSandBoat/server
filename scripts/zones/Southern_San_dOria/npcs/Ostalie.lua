@@ -28,7 +28,7 @@ function onTrigger(player, npc)
         12856,  172, 3,    -- Slops
     }
 
-    local rank = getNationRank(tpz.nation.SANDORIA)
+    local rank = GetNationRank(tpz.nation.SANDORIA)
 
     if rank ~= 1 then
         table.insert(stock, 1022)    -- Thief's Tools

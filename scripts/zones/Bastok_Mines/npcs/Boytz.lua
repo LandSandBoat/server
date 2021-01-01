@@ -25,7 +25,7 @@ function onTrigger(player, npc)
         17336,   5, 3,     --Crossbow Bolt
     }
 
-    local rank = getNationRank(tpz.nation.BASTOK)
+    local rank = GetNationRank(tpz.nation.BASTOK)
 
     if (rank ~= 1) then
         table.insert(stock, 1022)    --Thief's Tools

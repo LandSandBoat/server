@@ -36,7 +36,7 @@ function onTrigger(player, npc)
         1241,   354, 3      --Twinkle Powder
     }
 
-    rank = getNationRank(tpz.nation.WINDURST)
+    rank = GetNationRank(tpz.nation.WINDURST)
     if (rank ~= 1) then
         table.insert(stock, 1022) --Thief's Tools
         table.insert(stock, 3643)
