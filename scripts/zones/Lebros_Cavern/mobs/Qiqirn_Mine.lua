@@ -12,7 +12,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
 
-    for i, v in pairs(players) do
+    for i, v in players:pairs() do
         v:messageSpecial(ID.text.MINE_COUNTDOWN, 10)
         mob:timer(5000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 5) end)
         mob:timer(6000, function(mob) v:messageSpecial(ID.text.MINE_COUNTDOWN, 4) end)

@@ -76,7 +76,7 @@ function onGameHour(zone)
     elseif VanadielHour == 18 then
         SetServerVariable("[JEUNO]CommService", 0)
         local players = zone:getPlayers()
-        for name, player in pairs(players) do
+        for name, player in players:pairs() do
             if player:hasKeyItem(tpz.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
                 player:messageSpecial(ID.text.ZAUKO_IS_RECRUITING)
             end

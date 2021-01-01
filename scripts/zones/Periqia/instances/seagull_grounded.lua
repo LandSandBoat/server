@@ -46,14 +46,14 @@ function onInstanceTimeUpdate(instance, elapsed)
 
     if (wipeTime == 0) then
         local wipe = true
-        for i, v in pairs(players) do
+        for i, v in players:pairs() do
             if v:getHP() ~= 0 then
                 wipe = false
                 break
             end
         end
         if (wipe) then
-            for i, v in pairs(players) do
+            for i, v in players:pairs() do
                 v:messageSpecial(ID.text.PARTY_FALLEN, 3)
             end
             instance:setWipeTime(elapsed)
@@ -63,7 +63,7 @@ function onInstanceTimeUpdate(instance, elapsed)
             instance:fail()
             return
         else
-            for i, v in pairs(players) do
+            for i, v in players:pairs() do
                 if v:getHP() ~= 0 then
                     instance:setWipeTime(0)
                     break
@@ -85,7 +85,7 @@ function onInstanceTimeUpdate(instance, elapsed)
     end
 
     if (message ~= 0) then
-        for i, v in pairs(players) do
+        for i, v in players:pairs() do
             if (remainingTimeLimit >= 60) then
                 v:messageSpecial(ID.text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
             else
@@ -100,7 +100,7 @@ function onInstanceFailure(instance)
 
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
+    for i, v in chars:pairs() do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(102)
     end
@@ -118,7 +118,7 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
+    for i, v in chars:pairs() do
         v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
     end
 

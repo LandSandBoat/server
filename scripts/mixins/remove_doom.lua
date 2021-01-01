@@ -26,7 +26,7 @@ g_mixins.clear_doom = function(mob)
     mob:addListener("DEATH", "REMOVE_DOOM", function(mob, player)
         if math.random(100) <= mob:getLocalVar("[remove_doom]removalChance") then
             local players = mob:getZone():getPlayers()
-            for name, player in pairs(players) do
+            for name, player in players:pairs() do
                 if mob:checkDistance(player) < 30 then
                     if player:delStatusEffectSilent(tpz.effect.DOOM) then
                         player:messagePublic(tpz.msg.basic.NARROWLY_ESCAPE, player)

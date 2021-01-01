@@ -39,54 +39,59 @@ uint8 CLuaInstance::getID()
     return m_PLuaInstance->GetID();
 }
 
-sol::table CLuaInstance::getAllies()
+std::vector<CLuaBaseEntity> CLuaInstance::getAllies()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto& member : m_PLuaInstance->m_allyList)
     {
-        table.add(CLuaBaseEntity(member.second));
+        vec.emplace_back(CLuaBaseEntity(member.second));
     }
-    return table;
+
+    return vec;
 }
 
-sol::table CLuaInstance::getChars()
+std::vector<CLuaBaseEntity> CLuaInstance::getChars()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto& member : m_PLuaInstance->m_charList)
     {
-        table.add(CLuaBaseEntity(member.second));
+        vec.emplace_back(CLuaBaseEntity(member.second));
     }
-    return table;
+
+    return vec;
 }
 
-sol::table CLuaInstance::getMobs()
+std::vector<CLuaBaseEntity> CLuaInstance::getMobs()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto& member : m_PLuaInstance->m_mobList)
     {
-        table.add(CLuaBaseEntity(member.second));
+        vec.emplace_back(CLuaBaseEntity(member.second));
     }
-    return table;
+
+    return vec;
 }
 
-sol::table CLuaInstance::getNpcs()
+std::vector<CLuaBaseEntity> CLuaInstance::getNpcs()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto& member : m_PLuaInstance->m_npcList)
     {
-        table.add(CLuaBaseEntity(member.second));
+        vec.emplace_back(CLuaBaseEntity(member.second));
     }
-    return table;
+
+    return vec;
 }
 
-sol::table CLuaInstance::getPets()
+std::vector<CLuaBaseEntity> CLuaInstance::getPets()
 {
-    sol::table table;
+    std::vector<CLuaBaseEntity> vec;
     for (auto& member : m_PLuaInstance->m_petList)
     {
-        table.add(CLuaBaseEntity(member.second));
+        vec.emplace_back(CLuaBaseEntity(member.second));
     }
-    return table;
+
+    return vec;
 }
 
 uint32 CLuaInstance::getTimeLimit()
