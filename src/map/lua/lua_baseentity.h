@@ -535,11 +535,8 @@ public:
     auto  getNotorietyList() -> std::vector<CLuaBaseEntity>; // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
-    bool   addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                           sol::object const& arg4, sol::object const& arg5, sol::object const& arg6);
-    bool   addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                             sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
-                             sol::object const& arg8, sol::object const& arg9);
+    bool   addStatusEffect(sol::variadic_args va);
+    bool   addStatusEffectEx(sol::variadic_args va);
     auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::shared_ptr<CLuaStatusEffect>;
     auto   getStatusEffects() -> std::vector<CLuaStatusEffect>;
     int16  getStatusEffectElement(uint16 statusId);

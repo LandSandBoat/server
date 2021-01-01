@@ -8990,8 +8990,7 @@ std::vector<CLuaBaseEntity> CLuaBaseEntity::getNotorietyList()
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::addStatusEffect(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                                     sol::object const& arg4, sol::object const& arg5, sol::object const& arg6)
+bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
 {
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
@@ -8999,21 +8998,38 @@ bool CLuaBaseEntity::addStatusEffect(sol::object const& arg0, sol::object const&
         return false;
     }
 
-    if (arg0.is<sol::userdata>())
+    if (va.size() < 4)
     {
-        auto PStatusEffect = arg0.as<CLuaStatusEffect>();
+        return false;
+    }
+
+    if (va[0].is<CLuaStatusEffect>())
+    {
+        auto PStatusEffect = va[0].as<CLuaStatusEffect>();
         return PBattleEntity->StatusEffectContainer->AddStatusEffect(new CStatusEffect(*PStatusEffect.GetStatusEffect()));
     }
     else
     {
-        CStatusEffect* PEffect = new CStatusEffect(arg0.as<EFFECT>(),                           // Effect ID
-                                                   arg0.as<uint16>(),                           // Effect Icon (Associated with ID)
-                                                   arg1.as<uint16>(),                           // Power
-                                                   arg2.as<uint16>(),                           // Tick
-                                                   arg3.as<uint16>(),                           // Duration
-                                                   (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // SubID
-                                                   (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Power
-                                                   (arg6 != sol::nil) ? arg5.as<uint16>() : 0); // Tier
+        // Mandatory
+        auto effectID   = va[0].as<EFFECT>(); // The same
+        auto effectIcon = va[0].as<uint16>(); // The same
+        auto power      = static_cast<uint16>(va[1].as<double>());// Can come in as a lua_number, capture as double and truncate
+        auto tick       = static_cast<uint16>(va[2].as<double>()); 
+        auto duration   = static_cast<uint16>(va[3].as<double>()); 
+
+        // Optional
+        auto subID    = va[4].is<uint16>() ? va[5].is<uint16>() : 0;
+        auto subPower = va[5].is<uint16>() ? va[6].is<uint16>() : 0;
+        auto tier     = va[6].is<uint16>() ? va[7].is<uint16>() : 0;
+
+        CStatusEffect* PEffect = new CStatusEffect(effectID,
+                                                   effectIcon,
+                                                   power,
+                                                   tick,
+                                                   duration,
+                                                   subID,
+                                                   subPower,
+                                                   tier);
 
         if (PEffect->GetStatusID() == EFFECT_FOOD)
         {
@@ -9035,41 +9051,50 @@ bool CLuaBaseEntity::addStatusEffect(sol::object const& arg0, sol::object const&
  *  Notes   : For instance, Chocobo status, Fireflights, Teleport
  ************************************************************************/
 
-bool CLuaBaseEntity::addStatusEffectEx(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3,
-                                       sol::object const& arg4, sol::object const& arg5, sol::object const& arg6, sol::object const& arg7,
-                                       sol::object const& arg8, sol::object const& arg9)
+bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
     {
         return false;
     }
 
-    auto                     isNil = [](auto& item) { return item == sol::nil; };
-    std::vector<sol::object> args  = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 };
-    args.erase(std::remove_if(args.begin(), args.end(), isNil), args.end());
-
-    bool silent      = false;
-    auto lastElement = args.at(args.size() - 1);
-    if (lastElement.is<bool>())
+    if (va.size() < 5)
     {
-        silent = lastElement.as<bool>();
+        return false;
     }
 
-    CStatusEffect* PEffect =
-        new CStatusEffect(arg0.as<EFFECT>(),                           // Effect ID
-                          arg1.as<uint16>(),                           // Effect Icon ID
-                          arg2.as<uint16>(),                           // Power
-                          arg3.as<uint16>(),                           // Tick
-                          arg4.as<uint16>(),                           // Duration
-                          (arg5 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Effect ID
-                          (arg6 != sol::nil) ? arg5.as<uint16>() : 0,  // Sub Power
-                          (arg7 != sol::nil) ? arg5.as<uint16>() : 0,  // Tier
-                          (arg8 != sol::nil) ? arg5.as<uint16>() : 0); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
+    bool silent = false;
+    if (va[va.size() - 1].is<bool>()) // Is last argument a bool?
+    {
+        silent = va[va.size() - 1].as<bool>();
+    }
 
-    return PBattleEntity->StatusEffectContainer->AddStatusEffect(PEffect, silent);
+    // Mandatory
+    auto effectID   = va[0].as<EFFECT>();
+    auto effectIcon = va[1].as<uint16>();
+    auto power      = static_cast<uint16>(va[2].as<double>()); // Can come in as a lua_number, capture as double and truncate
+    auto tick       = static_cast<uint16>(va[3].as<double>());
+    auto duration   = static_cast<uint16>(va[4].as<double>());
+
+    // Optional
+    auto subID      = va[5].is<uint32>() ? va[5].is<uint32>() : 0;
+    auto subPower   = va[6].is<uint16>() ? va[6].is<uint16>() : 0;
+    auto tier       = va[7].is<uint16>() ? va[7].is<uint16>() : 0;
+    auto effectFlag = va[8].is<uint32>() ? va[8].is<uint32>() : 0;
+
+    CStatusEffect* PEffect =
+        new CStatusEffect(effectID,
+                          effectIcon,
+                          power,
+                          tick,
+                          duration,
+                          subID,
+                          subPower,
+                          tier,
+                          effectFlag); // Effect Flag (i.e in lua tpz.effectFlag.AURA will make this an aura effect)
+
+    return ((CBattleEntity*)m_PBaseEntity)->StatusEffectContainer->AddStatusEffect(PEffect, silent);
 }
 
 /************************************************************************
