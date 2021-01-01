@@ -11,7 +11,7 @@ require("scripts/globals/missions")
 function onTrade(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.WADING_BEASTS and trade:hasItemQty(4362, 1) and trade:getItemCount() == 1) then -- Trade Lizard Egg
-        if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WADING_BEASTS) == false) then
+        if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WADING_BEASTS) == false) then
             player:startEvent(372)
         else
             player:startEvent(373)

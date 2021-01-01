@@ -28,7 +28,7 @@ function onTrigger(player, npc)
         player:startEvent(10012)
     elseif (mission == tpz.mission.id.cop.DAWN and status == 4) then
         player:startEvent(129)
-    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN)) then
+    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)) then
         local hasRing = false
 
         for key, value in pairs(ring) do

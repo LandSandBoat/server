@@ -37,7 +37,7 @@ function onTrigger(player, npc)
         else
             player:showText(npc, ID.text.RESCUE_DRILL)
         end
-    elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL)) then
         player:showText(npc, ID.text.RESCUE_DRILL + 30)
     else
         player:showText(npc, ID.text.RESCUE_DRILL)

@@ -77,7 +77,7 @@ end
 
 function onTrigger(player, npc)
     -- IN THE NAME OF SCIENCE
-    if player:hasCompletedMission(COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
+    if player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
         local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 

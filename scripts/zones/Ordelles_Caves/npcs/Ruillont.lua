@@ -25,7 +25,7 @@ function onTrigger(player, npc)
 
         if missionStatus >= 2 and missionStatus <= 7 then
             player:startEvent(1)
-        elseif missionStatus >= 10 or player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
+        elseif missionStatus >= 10 or player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 9)
         elseif missionStatus >= 8 then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG)

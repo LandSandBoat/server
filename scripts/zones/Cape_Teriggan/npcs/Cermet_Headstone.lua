@@ -14,7 +14,7 @@ function onTrade(player, npc, trade)
 
     -- WANDERING SOULS
     if (trade:hasItemQty(949, 1) and trade:getItemCount() == 1) then
-        if (not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.WIND_FRAGMENT))) then
+        if (not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS) and (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.WIND_FRAGMENT))) then
             player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
             player:startEvent(202, 949)
         else
@@ -55,7 +55,7 @@ function onTrigger(player, npc)
         end
 
     -- DEFAULT DIALOGS
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)

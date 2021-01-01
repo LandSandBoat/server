@@ -19,7 +19,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_SAVAGE) then
+    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_SAVAGE) then
         local flyHigh = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
 
         if flyHigh == QUEST_AVAILABLE then

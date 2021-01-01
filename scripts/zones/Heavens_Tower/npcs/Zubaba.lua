@@ -12,7 +12,7 @@ require("scripts/globals/missions")
 
 function onTrade(player, npc, trade)
     local currentMission = player:getCurrentMission(WINDURST)
-    local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
 
     if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getCharVar("MissionStatus") == 3 then
         if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
@@ -25,8 +25,8 @@ end
 function onTrigger(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
-    local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
-    local starsMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
+    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local starsMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
     if
         currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
@@ -55,7 +55,7 @@ function onTrigger(player, npc)
         player:startEvent(194) -- her reaction after 5-1.
     elseif
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and
-        (missionStatus >= 3 or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING))
+        (missionStatus >= 3 or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING))
     then
         player:startEvent(387)
     else

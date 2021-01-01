@@ -29,7 +29,7 @@ local TrustMemory = function(player)
         memories = memories + 4
     end
     -- 8 - THE_HEIR_TO_THE_LIGHT
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
         memories = memories + 8
     end
     -- 16 - Heroine's Combat BCNM
@@ -148,7 +148,7 @@ function onTrigger(player, npc)
 
         -- San d'Oria 9-1 "Breaking Barrier"
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.BREAKING_BARRIERS) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
             currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(16)
@@ -165,14 +165,14 @@ function onTrigger(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(545)

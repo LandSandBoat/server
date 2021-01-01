@@ -15,10 +15,10 @@ function onTrigger(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.FETICHISM)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.FETICHISM)) then
         BastokMissions = BastokMissions - 2 -- Fetichism.
     end
-    if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
         BastokMissions = BastokMissions - 4 -- To the Forsaken Mines.
     end
 
@@ -112,20 +112,20 @@ function onTrigger(player, npc)
 
     -- Promathia Missions.
     local PromathiaMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)) then
         PromathiaMissions = PromathiaMissions - 2 -- The Call of the Wyrmking.
     end
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)) then
         PromathiaMissions = PromathiaMissions - 4 -- The Enduring Tumult of War.
     end
 
     -- Add-on Scenarios.
     local AddonScenarios = 0xFFFFFFFE
-    if (player:hasCompletedMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
         AddonScenarios = AddonScenarios - 2 -- Drenched! It Began with a Raindrop.
     end
 -- *Need the correct csid
---    if (player:hasCompletedMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
+--    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
 --        AddonScenarios = AddonScenarios - 4 -- Hasten! In a Jam in Jeuno?
 --    end
 

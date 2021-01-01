@@ -32,7 +32,7 @@ function onTrigger(player, npc)
         player:startEvent(99)
     elseif (bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE) then
         player:startEvent(130)
-    elseif ((player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == true)
+    elseif ((player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == true)
     or ((player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 3)))
         and (player:getCharVar("[B7-2]Werei") == 0) then
         player:startEvent(177)

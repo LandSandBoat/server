@@ -22,7 +22,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(12)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) or player:hasKeyItem(tpz.ki.SCRAP_OF_PAPYRUS)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) or player:hasKeyItem(tpz.ki.SCRAP_OF_PAPYRUS)) then
         player:messageSpecial(ID.text.YOU_FIND_NOTHING)
     else
         player:messageSpecial(ID.text.SOMETHING_IS_BURIED)

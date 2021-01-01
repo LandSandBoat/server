@@ -23,7 +23,7 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
 
-        if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) then
+        if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) then
             player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
         else
             player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)

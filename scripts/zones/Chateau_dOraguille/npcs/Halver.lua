@@ -79,7 +79,7 @@ function onTrigger(player, npc)
         elseif (currentMission == tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 0) then
             player:startEvent(25)
         -- Mission San D'Oria 5-2 The Shadow Lord
-        elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
             player:showText(npc, ID.text.HALVER_OFFSET+500)
         elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 5) then
             player:showText(npc, ID.text.HALVER_OFFSET+471)

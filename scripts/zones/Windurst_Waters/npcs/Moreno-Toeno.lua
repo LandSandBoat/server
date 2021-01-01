@@ -32,7 +32,7 @@ function onTrigger(player, npc)
         end
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.A_TESTING_TIME) then
         local MissionStatus = player:getCharVar("MissionStatus")
-        local alreadyCompleted = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        local alreadyCompleted = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
         if (MissionStatus == 0) then
             if (alreadyCompleted == false) then
                 player:startEvent(182) -- First start at tahrongi

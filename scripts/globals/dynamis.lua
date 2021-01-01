@@ -116,7 +116,7 @@ local entryInfo =
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.BUBURIMU_PENINSULA] =
@@ -130,7 +130,7 @@ local entryInfo =
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.QUFIM_ISLAND] =
@@ -144,7 +144,7 @@ local entryInfo =
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.TAVNAZIAN_SAFEHOLD] =
@@ -161,7 +161,7 @@ local entryInfo =
                    player:hasKeyItem(tpz.ki.DYNAMIS_BUBURIMU_SLIVER) and
                    player:hasKeyItem(tpz.ki.DYNAMIS_QUFIM_SLIVER) and
                    player:hasKeyItem(tpz.ki.DYNAMIS_VALKURM_SLIVER) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
 }

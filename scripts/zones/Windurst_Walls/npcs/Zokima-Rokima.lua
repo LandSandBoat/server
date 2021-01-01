@@ -30,11 +30,11 @@ function onTrigger(player, npc)
             end
         elseif (CurrentMission ~= tpz.mission.id.windurst.NONE) then
             player:startEvent(91)
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
             player:startEvent(96)
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
             player:startEvent(106)
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
             player:startEvent(111)
         elseif (player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_WINDURST)) then
             player:startEvent(150)
@@ -42,7 +42,7 @@ function onTrigger(player, npc)
             local param3
             local flagMission, repeatMission = getMissionMask(player)
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
                 param3 = 1
             else
                 param3 = 0

@@ -16,11 +16,11 @@ function onTrade(player, npc, trade)
     local Count = trade:getItemCount()
 
     if (CurrentMission ~= tpz.mission.id.bastok.NONE) then
-        if (CurrentMission == tpz.mission.id.bastok.FETICHISM and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.FETICHISM) == false and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
+        if (CurrentMission == tpz.mission.id.bastok.FETICHISM and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.FETICHISM) == false and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
             player:startEvent(1008) -- Finish Mission "Fetichism" (First Time)
         elseif (CurrentMission == tpz.mission.id.bastok.FETICHISM and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
             player:startEvent(1005) -- Finish Mission "Fetichism" (Repeat)
-        elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
+        elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1010) -- Finish Mission "To the forsaken mines" (First Time)
         elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1006) -- Finish Mission "To the forsaken mines" (Repeat)
@@ -46,7 +46,7 @@ function onTrigger(player, npc)
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (player:getRank() == 1 and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
+        elseif (player:getRank() == 1 and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
             player:startEvent(1000) -- Start First Mission "The Zeruhn Report"
         elseif (CurrentMission ~= tpz.mission.id.bastok.NONE) then
             player:startEvent(1002) -- Have mission already activated

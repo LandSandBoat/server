@@ -30,7 +30,7 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.IS_SET_IN_THE_PEDESTAL, tpz.ki.FIRE_FRAGMENT)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
         player:messageSpecial(ID.text.HAS_LOST_ITS_POWER, tpz.ki.FIRE_FRAGMENT)
     else
         player:messageSpecial(ID.text.PLACED_INTO_THE_PEDESTAL)

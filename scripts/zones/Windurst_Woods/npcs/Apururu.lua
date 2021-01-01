@@ -35,7 +35,7 @@ local TrustMemory = function(player)
     --  memories = memories + 32
     -- end
     -- 64 - MOON_READING
-    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+    if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
         memories = memories + 64
     end
     return memories

@@ -41,7 +41,7 @@ function onTrigger(player, npc)
     -- San d'Oria 8-2 "Lightbringer" (optional)
     elseif
         player:getRank() == 9 and player:getRankPoints() == 0 and
-        player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
+        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then
         player:startEvent(74)

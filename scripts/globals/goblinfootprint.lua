@@ -30,8 +30,8 @@ local csReq = -- add checks to this table
         [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)) end,
         [4] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
         [5] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
-        [6] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) end,
-        [7] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.THREE_PATHS)) end,
+        [6] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) end,
+        [7] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THREE_PATHS)) end,
         [8] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
         [9] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
         [10] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)) end,
@@ -64,7 +64,7 @@ local csReq = -- add checks to this table
     },
     [tpz.zone.SOUTH_GUSTABERG] =
     {
-        [1] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)) end,
+        [1] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)) end,
         [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
         [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
     },
@@ -74,10 +74,10 @@ local csReq = -- add checks to this table
     },
     [tpz.zone.ROMAEVE] =
     {
-        [1] = function(player) return (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.VAIN)) end,
-        [2] = function(player) return (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING)) end,
+        [1] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.VAIN)) end,
+        [2] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING)) end,
         [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ZILART, tpz.quest.id.outlands.DIVINE_MIGHT)) end,
-        [4] = function(player) return (player:hasCompletedMission(ASA, tpz.mission.id.asa.FOUNTAIN_OF_TROUBLE)) end,
+        [4] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.FOUNTAIN_OF_TROUBLE)) end,
     },
     [tpz.zone.CASTLE_ZVAHL_KEEP] =
     {

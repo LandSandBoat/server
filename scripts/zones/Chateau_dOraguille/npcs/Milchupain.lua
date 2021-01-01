@@ -30,7 +30,7 @@ function onTrigger(player, npc)
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.LIGHTBRINGER) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 3)
@@ -41,7 +41,7 @@ function onTrigger(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(33)

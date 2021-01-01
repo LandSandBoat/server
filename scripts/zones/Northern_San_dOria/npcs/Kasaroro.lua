@@ -44,7 +44,7 @@ function onTrigger(player, npc)
             elseif (MissionStatus == 10) then
                 player:startEvent(551)
             end
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)) then
             player:startEvent(604)
         else
             player:startEvent(548)

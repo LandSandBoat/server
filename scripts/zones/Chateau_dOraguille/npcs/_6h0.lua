@@ -17,11 +17,11 @@ local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 local function TrustMemory(player)
     local memories = 0
     -- 2 - LIGHTBRINGER
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) then
         memories = memories + 2
     end
     -- 4 - IMMORTAL_SENTRIES
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         memories = memories + 4
     end
     -- 8 - UNDER_OATH
@@ -82,7 +82,7 @@ function onTrigger(player, npc)
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
             player:getRank() == 9 and player:getRankPoints() == 0 and
-            player:hasCompletedMission(SANDORIA, sandyMissions.LIGHTBRINGER) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
         then
             player:startEvent(63)
@@ -103,7 +103,7 @@ function onTrigger(player, npc)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(115)

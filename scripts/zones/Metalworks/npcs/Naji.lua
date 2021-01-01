@@ -16,13 +16,13 @@ local ID = require("scripts/zones/Metalworks/IDs");
 
 local TrustMemory = function(player)
     local memories = 0
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY) then
         memories = memories + 2
     end
     if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN) then
         memories = memories + 4
     end
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 8
     end
     -- 16 - Chocobo racing

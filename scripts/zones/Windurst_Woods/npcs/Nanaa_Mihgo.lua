@@ -41,7 +41,7 @@ local TrustMemory = function(player)
         memories = memories + 32
     end
     -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
-    if player:hasCompletedMission(AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
+    if player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
         memories = memories + 64
     end
     return memories

@@ -12,7 +12,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (player:hasCompletedMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LOST_KINGDOM)) then
         if (not player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)) then
             player:addKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EPHRAMADIAN_GOLD_COIN)

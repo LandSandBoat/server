@@ -11,7 +11,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
         player:sendMenu(3)
     end
 

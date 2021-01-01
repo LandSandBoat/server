@@ -15,7 +15,7 @@ function onTrigger(player, npc)
         player:startEvent(103)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 3) then
         player:startEvent(116)
-    elseif (player:getCurrentMission(COP) >= tpz.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
+    elseif (player:getCurrentMission(COP) >= tpz.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
         player:startEvent(502)
     else
         -- player:messageSpecial()

@@ -15,7 +15,7 @@ require("scripts/globals/titles")
 function onTrade(player, npc, trade)
     -- WRATH OF THE OPO-OPOS
     if npcUtil.tradeHas(trade, 790) then
-        if not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.FIRE_FRAGMENT)) then
+        if not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS) and (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.FIRE_FRAGMENT)) then
             player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WRATH_OF_THE_OPO_OPOS)
             player:startEvent(202, 790)
         else
@@ -55,7 +55,7 @@ function onTrigger(player, npc)
         end
 
     -- DEFAULT DIALOGS
-    elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)

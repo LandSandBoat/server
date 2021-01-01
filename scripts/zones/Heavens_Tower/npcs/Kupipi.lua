@@ -15,11 +15,11 @@ require("scripts/globals/titles")
 
 local TrustMemory = function(player)
     local memories = 0
-    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
+    if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) then
         memories = memories + 2
     end
     -- 4 - nothing
-    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+    if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
         memories = memories + 8
     end
     -- 16 - chocobo racing
@@ -45,7 +45,7 @@ function onTrade(player, npc, trade)
         player:getRank() >= 2 and
         not player:hasKeyItem(tpz.ki.PORTAL_CHARM)
     then
-        if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) then
+        if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) then
             player:startEvent(291) -- Qualifies for the reward immediately
         else
             player:startEvent(292) -- Kupipi owes you the portal charm later
@@ -138,7 +138,7 @@ function onTrigger(player, npc)
             player:startEvent(104)
         elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and missionStatus == 3 then
             player:startEvent(326)
-        elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) and player:getCharVar("OwesPortalCharm") == 1 then
+        elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) and player:getCharVar("OwesPortalCharm") == 1 then
             player:startEvent(293) -- Kupipi repays your favor
         elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and missionStatus >= 3 then
             player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10

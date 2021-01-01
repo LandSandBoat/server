@@ -135,7 +135,7 @@ function onRegionEnter(player, region)
         switch (region:GetRegionID()): caseof
         {
             [1] = function (x)
-                if (player:getCurrentMission(COP)==tpz.mission.id.cop.DAWN or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN) or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) ) then
+                if (player:getCurrentMission(COP)==tpz.mission.id.cop.DAWN or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) ) then
                     player:startEvent(101)
                 else
                     player:startEvent(155)

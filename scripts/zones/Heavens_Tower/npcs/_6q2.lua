@@ -23,7 +23,7 @@ function onTrigger(player, npc)
     elseif
         player:getRank() == 5 and
         currentMission == tpz.mission.id.windurst.NONE and
-        not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
+        not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
     then
         player:startEvent(190)
     elseif player:hasKeyItem(tpz.ki.BURNT_SEAL) then
