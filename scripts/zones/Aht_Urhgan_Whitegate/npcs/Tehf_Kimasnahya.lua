@@ -44,7 +44,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 520 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
         player:setCharVar("gotitallCS", 1)
     elseif csid == 525 and option == 0 then
         player:setCharVar("gotitallCS", 5)

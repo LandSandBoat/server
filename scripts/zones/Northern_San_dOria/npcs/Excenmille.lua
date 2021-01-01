@@ -19,10 +19,10 @@ local TrustMemory = function(player)
     end
     -- 4 - Chocobo racing
     --  memories = memories + 4
-    if player:hasCompletedQuest(WOTG, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) then
         memories = memories + 8
     end
-    if player:hasCompletedQuest(WOTG, tpz.quest.id.crystalWar.BLOOD_OF_HEROES) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BLOOD_OF_HEROES) then
         memories = memories + 16
     end
     return memories

@@ -37,7 +37,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 818 and option == 1 then
         if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ECO_WARRIOR) == QUEST_AVAILABLE then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.ECO_WARRIOR)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 201) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
     elseif csid == 822 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.ECO_WARRIOR, {

@@ -112,7 +112,7 @@ function onEventFinish(player, csid, option)
 
     -- FORGE YOUR DESTINY
     if (csid == 25 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
     elseif (csid == 27) then
         player:confirmTrade()
         player:setCharVar("ForgeYourDestiny_timer", os.time() + 10368) -- 3 game days
@@ -122,7 +122,7 @@ function onEventFinish(player, csid, option)
 
     -- THE SACRED KATANA
     elseif (csid == 139 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
     elseif (csid == 141 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA, {item=17812, fame=20, fameArea=NORG})) then -- Magoroku
         player:confirmTrade()
         player:delKeyItem(tpz.ki.HANDFUL_OF_CRYSTAL_SCALES)
@@ -130,7 +130,7 @@ function onEventFinish(player, csid, option)
 
     -- YOMI OKURI
     elseif (csid == 146 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
         player:setCharVar("yomiOkuriCS", 1)
     elseif (csid == 152) then
         player:delKeyItem(tpz.ki.YOMOTSU_FEATHER)
@@ -145,7 +145,7 @@ function onEventFinish(player, csid, option)
 
     -- A THIEF IN NORG
     elseif (csid == 158 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG)
         player:setCharVar("aThiefinNorgCS", 1)
     elseif ((csid == 166 or csid == 168) and npcUtil.giveItem(player, 1166)) then -- Banishing Charm
         player:setCharVar("aThiefinNorgCS", 6)

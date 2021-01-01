@@ -34,7 +34,7 @@ function onTrigger(player, npc)
         elseif player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) then
             player:messageSpecial(ID.text.ALREADY_OBTAINED_FRAG, tpz.ki.EARTH_FRAGMENT)
         end
-    elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)
@@ -52,8 +52,8 @@ function onEventFinish(player, csid, option)
         if hasAllFragments(player) then
             player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.EARTH_FRAGMENT)
             player:addTitle(tpz.title.BEARER_OF_THE_EIGHT_PRAYERS)
-            player:completeMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
-            player:addMission(ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
+            player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
+            player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
         else
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EARTH_FRAGMENT)
         end

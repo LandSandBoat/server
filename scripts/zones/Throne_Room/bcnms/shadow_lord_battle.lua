@@ -38,9 +38,9 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 32001 and player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 3 then
-        if player:getCurrentMission(ZILART) ~= tpz.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER) then
+        if player:getCurrentMission(ZILART) ~= tpz.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER) then
             -- Don't add missions we already completed. Players who change nation will hit this.
-            player:addMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
+            player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
         end
         player:startEvent(7)
     elseif csid == 7 then

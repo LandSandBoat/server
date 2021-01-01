@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 5 then
-        player:completeMission(ACP, tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
-        player:addMission(ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
     end
 end

@@ -17,9 +17,9 @@ function onTrigger(player, npc)
         player:startEvent(106) -- Start Floor 1, 3
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==5) then
         player:startEvent(109) -- Start Floor 1, 3 or 4
-    elseif (player:hasCompletedMission(COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS) or (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==7)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS) or (player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==7)) then
         player:startEvent(112) -- Start Floor 1, 3, 4, or 5
-    elseif (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
         player:startEvent(50) -- Start Floor 1
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
@@ -34,8 +34,8 @@ function onEventFinish(player, csid, option)
     -- Retail packet captures have been marked {R}. Please don't change them.
     if (csid == 2 and option == 1 ) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
-        player:addMission(COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
         player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}
     elseif (csid == 50 and option == 1) then
         player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}

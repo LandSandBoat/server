@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 62) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_FLUTTERY_FIEND)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_FLUTTERY_FIEND)
     elseif (csid == 63) then
         -- Killed Itzpapalotl
     elseif (csid == 61 and option == 1) then

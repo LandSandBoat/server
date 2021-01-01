@@ -15,7 +15,7 @@ end
 function onTrigger(player, npc)
 
     local CurrentMission = player:getCurrentMission(SANDORIA)
-    local infiltrateDavoi = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI)
+    local infiltrateDavoi = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI)
 
     if (CurrentMission == tpz.mission.id.sandoria.THE_DAVOI_REPORT and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(100)

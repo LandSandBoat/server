@@ -59,9 +59,9 @@ function onEventFinish(player, csid, option)
 
     if (csid == 706 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
-            player:delQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+            player:delQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar("TrialByIce_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_ICE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_ICE)
@@ -93,7 +93,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar("TrialByIce_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end
     elseif (csid == 713 or csid == 712) then
         if (player:getFreeSlotsCount() ~= 0) then

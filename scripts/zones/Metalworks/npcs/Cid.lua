@@ -19,8 +19,8 @@ local wsQuest = tpz.wsquest.detonator
 
 local function checkThreePaths(player)
     if player:getCharVar("COP_Tenzen_s_Path") == 11 and player:getCharVar("COP_Ulmia_s_Path") == 8 and player:getCharVar("COP_Louverance_s_Path") == 10 then
-        player:completeMission(COP, tpz.mission.id.cop.THREE_PATHS)
-        player:addMission(COP, tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THREE_PATHS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
         player:setCharVar("PromathiaStatus", 0)
     end
 end
@@ -153,8 +153,8 @@ function onEventFinish(player, csid, option)
     elseif (csid == 890) then
         player:setCharVar("PromathiaStatus", 0)
         player:setCharVar("Promathia_CID_timer", 0)
-        player:completeMission(COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
-        player:addMission(COP, tpz.mission.id.cop.CALM_BEFORE_THE_STORM)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.CALM_BEFORE_THE_STORM)
     elseif (csid == 857) then
         player:setCharVar("PromathiaStatus", 2)
         player:setCharVar("Promathia_CID_timer", VanadielDayOfTheYear())
@@ -176,28 +176,28 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_Louverance_s_Path", 7)
     elseif (csid == 850) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
-        player:addMission(COP, tpz.mission.id.cop.THREE_PATHS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESIRES_OF_EMPTINESS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THREE_PATHS)
     elseif (csid == 849) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 856) then
         player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 845) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
-        player:addMission(COP, tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
     elseif (csid == 847) then
         -- finishing mission 3.3 and all sub missions
         player:setCharVar("EMERALD_WATERS_Status", 0)
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 0)
-        player:completeMission(COP, tpz.mission.id.cop.THE_ROAD_FORKS)
-        player:addMission(COP, tpz.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
-        player:completeMission(COP, tpz.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
-        player:addMission(COP, tpz.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
-        player:completeMission(COP, tpz.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
-        player:addMission(COP, tpz.mission.id.cop.TENDING_AGED_WOUNDS ) --starting 3.4 COP mission
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ROAD_FORKS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.TENDING_AGED_WOUNDS ) --starting 3.4 COP mission
     elseif (csid == 760) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.DARK_PUPPET)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
     elseif (csid == 503) then
         player:addKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)
@@ -222,7 +222,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 763) then
         player:setCharVar("MissionStatus", 1)
     elseif (csid == 507) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then
         if (player:getFreeSlotsCount(0) >= 1) then
             player:delKeyItem(tpz.ki.UNFINISHED_LETTER)
@@ -230,7 +230,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13570)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13570) -- Ram Mantle
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13570)
         end

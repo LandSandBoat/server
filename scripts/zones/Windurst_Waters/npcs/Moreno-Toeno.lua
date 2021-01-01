@@ -32,7 +32,7 @@ function onTrigger(player, npc)
         end
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.A_TESTING_TIME) then
         local MissionStatus = player:getCharVar("MissionStatus")
-        local alreadyCompleted = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        local alreadyCompleted = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
         if (MissionStatus == 0) then
             if (alreadyCompleted == false) then
                 player:startEvent(182) -- First start at tahrongi
@@ -118,7 +118,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 438 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
     elseif (csid == 438 and option == 1) then
         player:setCharVar("QuestTeachersPet_prog", 0)
     elseif (csid == 440) then
@@ -126,7 +126,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete(trade)
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)
@@ -146,7 +146,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("testingTime_start_day", 0)
         player:setCharVar("testingTime_start_hour", 0)
         player:setCharVar("testingTime_start_time", 0)
-        player:delMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        player:delMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
     elseif (csid == 200 or csid == 201) then -- first time win
         finishMissionTimeline(player, 1, csid, option)
 

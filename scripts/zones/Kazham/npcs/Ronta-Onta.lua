@@ -49,9 +49,9 @@ function onEventFinish(player, csid, option)
 
     if (csid == 270 and option == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar("TrialByFire_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_FIRE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_FIRE)
@@ -83,7 +83,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_FLAMES)
             player:setCharVar("TrialByFire_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(KAZHAM, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end
     end
 

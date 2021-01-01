@@ -44,18 +44,18 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 204) then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
         player:setCharVar("MissionStatus", 3)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif (csid == 205) then
         player:tradeComplete()
         player:setCharVar("MissionStatus", 6)
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
     elseif (csid == 206) then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2)
         player:setCharVar("MissionStatus", 8)
     elseif (csid == 207) then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)

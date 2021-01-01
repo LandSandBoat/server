@@ -56,7 +56,7 @@ function onEventFinish(player, csid, option)
     if (csid == 510 and option == 0) then
         player:setCharVar("TheUsual_Event", 1)
     elseif (csid == 751) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         player:setCharVar("darkLegacyCS", 1)
     elseif (csid == 755) then
         if (player:getFreeSlotsCount() == 0) then
@@ -67,7 +67,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16798) -- Raven Scythe
             player:setCharVar("darkLegacyCS", 0)
             player:addFame(BASTOK, 20)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         end
     elseif (csid == 933) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 5, true))

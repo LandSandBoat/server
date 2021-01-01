@@ -75,23 +75,23 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 3078 and npcUtil.giveItem(player, 2186) then
-        player:completeMission(TOAU, tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE)
         player:setCharVar("AhtUrganStatus", 0)
         player:addTitle(tpz.title.OVJANGS_ERRAND_RUNNER)
         player:needToZone(true)
         player:setCharVar("TOAUM18_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(TOAU, tpz.mission.id.toau.PASSING_GLORY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PASSING_GLORY)
     elseif csid == 3111 then
-        player:completeMission(TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
-        player:addMission(TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
     elseif csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
-        player:completeMission(TOAU, tpz.mission.id.toau.IMPERIAL_CORONATION)
-        player:addMission(TOAU, tpz.mission.id.toau.THE_EMPRESS_CROWNED)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMPERIAL_CORONATION)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, 129)
     elseif csid == 722 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
         player:setCharVar("TransformationsProgress", 2)
         player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end

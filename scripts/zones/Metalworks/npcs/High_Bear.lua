@@ -33,13 +33,13 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 731) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
     elseif (csid == 732) then
             player:addFame(BASTOK, 30)
             player:delKeyItem(tpz.ki.CORRUPTED_DIRT)
             player:addItem(17284, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17284)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG)
             player:setTitle(tpz.title.BEADEAUX_SURVEYOR)
     end
 end

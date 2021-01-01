@@ -15,7 +15,7 @@ function onTrigger(player, npc)
         player:startEvent(51) --COP event
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.SAVE_THE_CHILDREN and player:getCharVar("MissionStatus") < 2) then
         player:startEvent(693)
-    elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN) and player:getCharVar("OptionalCSforSTC") == 1) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN) and player:getCharVar("OptionalCSforSTC") == 1) then
         player:startEvent(694)
     else
         player:startEvent(20)

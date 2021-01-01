@@ -143,14 +143,14 @@ function moogleEventFinish(player, csid, option)
             player:setCharVar("MoghouseExplication", 0)
 
         elseif csid == 30023 then
-            player:completeMission(AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
-            player:addMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.A_MOOGLE_KUPO_DETAT)
+            player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
         elseif csid == 30024 then
-            player:completeMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
-            player:addMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
+            player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
+            player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
 
         elseif csid == 30005 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS1]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)
@@ -162,13 +162,13 @@ function moogleEventFinish(player, csid, option)
             player:tradeComplete()
             player:setCharVar("MogSafeProgress", 2)
         elseif csid == 30008 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
             player:changeContainerSize(tpz.inv.MOGSAFE, 10)
             player:addTitle(tpz.title.MOGS_KIND_MASTER)
             player:setCharVar("MogSafeProgress", 0)
 
         elseif csid == 30009 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS2]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)
@@ -180,13 +180,13 @@ function moogleEventFinish(player, csid, option)
             player:tradeComplete()
             player:setCharVar("MogSafeProgress", 2)
         elseif csid == 30012 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC)
             player:changeContainerSize(tpz.inv.MOGSAFE, 10)
             player:addTitle(tpz.title.MOGS_EXCEPTIONALLY_KIND_MASTER)
             player:setCharVar("MogSafeProgress", 0)
 
         elseif csid == 30013 and option == 1 then
-            player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
             player:setLocalVar("QuestSeen", 1)
             player:setCharVar("[MS3]BedPlaced", 0)
             player:setCharVar("MogSafeProgress", 1)
@@ -198,7 +198,7 @@ function moogleEventFinish(player, csid, option)
             player:tradeComplete()
             player:setCharVar("MogSafeProgress", 2)
         elseif csid == 30016 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
             player:changeContainerSize(tpz.inv.MOGSAFE, 10)
             player:addTitle(tpz.title.MOGS_LOVING_MASTER)
             player:setCharVar("MogSafeProgress", 0)

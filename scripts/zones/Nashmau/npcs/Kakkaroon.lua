@@ -34,7 +34,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 308) then
         player:setCharVar("ratraceCS", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
     elseif (csid == 312) then
         if (player:getFreeSlotsCount() <= 2) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINEDX, 2187, 2)
@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2187, 2)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2186, 2)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2185, 3)
-            player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
         end
     end
 end

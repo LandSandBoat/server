@@ -43,7 +43,7 @@ function onTrigger(player, npc)
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
-    elseif player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
+    elseif player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
     elseif (ZilartMission == tpz.mission.id.zilart.AWAKENING) then
         player:startEvent(177)
@@ -81,11 +81,11 @@ function onEventFinish(player, csid, option)
                 item = reward,
                 var = {"ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1"}
             }) then
-                player:completeMission(COP, tpz.mission.id.cop.DAWN)
-                player:addMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)
+                player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
+                player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
                 player:setCharVar("PromathiaStatus", 0)
-                player:completeMission(ZILART, tpz.mission.id.cop.AWAKENING)
-                player:addMission(ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
+                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.cop.AWAKENING)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
                 player:setCharVar("ZilartStatus", 0)
             end
         end

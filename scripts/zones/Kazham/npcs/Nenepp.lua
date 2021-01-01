@@ -87,7 +87,7 @@ function onEventFinish(player, csid, option, npc)
         if (FreeSlots >= 4) then
             player:tradeComplete()
             player:addFame(KAZHAM, 75)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
             player:addItem(13870)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13870)
             player:addItem(4468, 3)  -- 3 pamamas

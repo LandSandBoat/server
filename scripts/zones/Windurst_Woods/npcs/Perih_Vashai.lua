@@ -104,7 +104,7 @@ function onEventFinish(player, csid, option)
 
     -- THE FANGED ONE
     elseif csid == 351 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE)
         player:setCharVar("TheFangedOneCS", 1)
     elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE, {item=13117, title=tpz.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then
         player:delKeyItem(tpz.ki.OLD_TIGERS_FANG)
@@ -113,7 +113,7 @@ function onEventFinish(player, csid, option)
 
     -- SIN HUNTING
     elseif csid == 523 then -- start quest RNG AF1
-        player:addQuest(WINDURST, tpz.quest.id.windurst.SIN_HUNTING)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SIN_HUNTING)
         npcUtil.giveKeyItem(player, tpz.ki.CHIEFTAINNESS_TWINSTONE_EARRING)
         player:setCharVar("sinHunting", 1)
     elseif csid == 527 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.SIN_HUNTING, {item=17188, var="sinHunting"}) then -- complete quest RNG AF1
@@ -122,7 +122,7 @@ function onEventFinish(player, csid, option)
 
     -- FIRE AND BRIMSTONE
     elseif csid == 531 then -- start RNG AF2
-        player:addQuest(WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE)
         player:setCharVar("fireAndBrimstone", 1)
     elseif csid == 535 then -- start second part RNG AF2
         player:setCharVar("fireAndBrimstone", 5)
@@ -131,7 +131,7 @@ function onEventFinish(player, csid, option)
 
     -- UNBRIDLED PASSION
     elseif csid == 541 then -- start RNG AF3
-        player:addQuest(WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION)
         player:setCharVar("unbridledPassion", 1)
     elseif csid == 546 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION, {item=14099, var="unbridledPassion"}) then -- complete quest RNG AF3
         player:delKeyItem(tpz.ki.KOHS_LETTER)

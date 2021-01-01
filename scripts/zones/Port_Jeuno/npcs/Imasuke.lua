@@ -58,7 +58,7 @@ end
 function onEventFinish(player, csid, option)
     -- THE ANTIQUE COLLECTOR
     if (csid == 13 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
     elseif (csid == 15) then
         player:addTitle(tpz.title.TRADER_OF_ANTIQUITIES)
         if (player:hasKeyItem(tpz.ki.MAP_OF_DELKFUTTS_TOWER) == false) then
@@ -71,7 +71,7 @@ function onEventFinish(player, csid, option)
         end
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
     -- CIRCLE OF TIME
     elseif (csid == 29 and option == 1) then

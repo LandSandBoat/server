@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 0 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.TO_PASTE_A_PEISTE)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.TO_PASTE_A_PEISTE)
     elseif csid == 1 then
         -- Killed Kukulkan
     elseif csid == 107 and option == 1 then

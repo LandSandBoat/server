@@ -27,7 +27,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 329) then -- Quest: Wish Upon a Star
-        player:addQuest(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 1)
     end
 end

@@ -41,7 +41,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 151) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
         player:setCharVar("theDoormanCS", 1)
     elseif (csid == 152) then
         player:setCharVar("theDoorman_time", VanadielDayOfTheYear())

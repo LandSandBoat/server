@@ -32,7 +32,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 200 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.UNFORGIVEN)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 202 then
         player:setCharVar("UnforgivenVar", 1)
     end

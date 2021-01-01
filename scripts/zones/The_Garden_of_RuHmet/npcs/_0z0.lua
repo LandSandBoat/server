@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    --player:addMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
+    --player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
     --player:setCharVar("PromathiaStatus", 3)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus")==3) then
         player:startEvent(203)

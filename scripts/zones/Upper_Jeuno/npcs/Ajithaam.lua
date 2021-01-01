@@ -77,12 +77,12 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 10088) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatJeuno", 0)
         player:addKeyItem(tpz.ki.WHITE_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WHITE_SENTINEL_BADGE)
     elseif (csid == 10091) then
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
         player:addFame(JEUNO, 150)
         player:setCharVar("WildcatJeuno", 0)
         player:delKeyItem(tpz.ki.WHITE_SENTINEL_BADGE)

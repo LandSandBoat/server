@@ -56,7 +56,7 @@ function onTrigger(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(113)
     elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_MOTHERCRYSTALS) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
         player:startEvent(114)
     elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED) then
         player:startEvent(114)
@@ -80,7 +80,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("harithreward", 0)
         if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED) then
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EMPTY_MEMORIES)
         else
             player:addFame(JEUNO, 5)
         end

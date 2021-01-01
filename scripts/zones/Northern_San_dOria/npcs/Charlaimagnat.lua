@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4729)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4729)
             player:addFame(RABAO, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
         end
 
     end

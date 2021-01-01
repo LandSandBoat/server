@@ -86,9 +86,9 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     elseif (csid == 10023 and option == 1) then
         player:tradeComplete()
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     end
 end

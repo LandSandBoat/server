@@ -43,7 +43,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 574 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
     elseif (csid == 572) then
         player:tradeComplete()
         player:addTitle(tpz.title.FANG_FINDER)
@@ -51,7 +51,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
         else
             player:addFame(SANDORIA, 5)
         end

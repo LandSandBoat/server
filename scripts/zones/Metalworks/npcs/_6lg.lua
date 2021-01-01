@@ -12,7 +12,7 @@ end
 
 function onTrigger(player, npc)
 
-    if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ON_MY_WAY) and player:getCharVar("[B7-2]Cornelia") == 0) then
+    if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ON_MY_WAY) and player:getCharVar("[B7-2]Cornelia") == 0) then
         player:startEvent(622)
     else
         player:messageSpecial(ID.text.ITS_LOCKED)

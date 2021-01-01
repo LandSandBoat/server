@@ -142,8 +142,8 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 51) then
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
         player:setCharVar("ZilartStatus", 0)
     end
 end

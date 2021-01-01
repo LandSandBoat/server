@@ -57,7 +57,7 @@ function onEventFinish(player, csid, option)
         if (Drachenfall == QUEST_AVAILABLE) then
             FreeSlots = player:getFreeSlotsCount()
             if (FreeSlots >= 1) then
-                player:addQuest(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+                player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
                 player:addItem(493)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 493)
             else
@@ -74,7 +74,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 103) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
         player:addFame(BASTOK, 120)
         player:addTitle(tpz.title.DRACHENFALL_ASCETIC)
         player:addGil(GIL_RATE*2000)

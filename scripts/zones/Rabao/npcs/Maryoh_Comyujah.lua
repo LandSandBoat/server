@@ -24,7 +24,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(82)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)) then
         player:startEvent(85) -- New standard dialog after ZM12
     else
         player:startEvent(43) -- Standard dialog

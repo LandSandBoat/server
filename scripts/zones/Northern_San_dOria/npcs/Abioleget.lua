@@ -53,10 +53,10 @@ function onEventFinish(player, csid, option)
             player:addFame(SANDORIA, 30)
             player:addTitle(tpz.title.THE_BENEVOLENT_ONE)
             player:setCharVar("sermonQuestVar", 0)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
         end
     elseif (csid == 589) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON )
     elseif (csid == 591) then
         player:addItem(618)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 618)

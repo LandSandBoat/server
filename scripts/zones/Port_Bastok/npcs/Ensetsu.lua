@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.UNLOCK_NINJA)
         player:setCharVar("AyameAndKaede_Event", 0)
         player:addFame(BASTOK, 30)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
     elseif (csid == 262) then
         player:setCharVar("twentyInPirateYearsCS", 3)
     elseif (csid == 264) then

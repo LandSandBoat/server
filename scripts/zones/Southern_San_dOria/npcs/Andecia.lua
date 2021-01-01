@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar("graveConcernsVar", 0)
             player:addItem(567)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 567) -- Well Water
@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*560)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*560)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     end
 
 end

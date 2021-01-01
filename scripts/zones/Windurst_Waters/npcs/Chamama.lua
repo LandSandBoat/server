@@ -106,7 +106,7 @@ function onTrigger(player, npc)
     else
         player:startEvent(651) -- Standard Conversation
     end
--- player:delQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
+-- player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
 end
 
 function onEventUpdate(player, csid, option)
@@ -127,10 +127,10 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.INVISIBLE_MAN_STICKER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.INVISIBLE_MAN_STICKER)
     elseif (csid == 654 and option == 1) then  -- IN A PICKLE + RARAB TAIL: Quest Begin
-        player:addQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
     elseif (csid == 659) then  -- IN A PICKLE: Quest Turn In (1st Time)
         player:tradeComplete(trade)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
         player:needToZone(true)
         player:addItem(12505)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12505)

@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 26 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
     elseif csid == 28 and npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR, {item = 4688}) then
         player:delKeyItem(tpz.ki.ORNATE_PACKAGE)
     end

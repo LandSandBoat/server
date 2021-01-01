@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
     if (((csid == 463 and option == 3) or (csid == 479 and option == 3)) and player:getFreeSlotsCount() == 0) then  -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED - INVENTORY FULL
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 572)
     elseif (csid == 463 and option == 3) then                      -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED
-        player:addQuest(WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
         player:addItem(572)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 572)
     elseif ((csid == 475 or csid == 477) and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED and player:getFreeSlotsCount() == 0) then -- inventory full on quest turn in
@@ -79,7 +79,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:needToZone(true)
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
             player:addFame(WINDURST, 75)
             player:addItem(131)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 131)
@@ -92,7 +92,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete(trade)
         player:needToZone(true)
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.REAP_WHAT_YOU_SOW)
             player:addFame(WINDURST, 75)
             player:addItem(131)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 131)

@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 19) then
         player:setCharVar("SirensTear", 2)
     elseif (csid == 185) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
         player:addKeyItem(tpz.ki.CARMELOS_SONG_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CARMELOS_SONG_SHEET)
     elseif (csid == 186) then
@@ -81,10 +81,10 @@ function onEventFinish(player, csid, option)
             player:addItem(17356)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17356) -- Lamia Harp
             player:addFame(BASTOK, 120)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)
         end
     elseif (csid == 270) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     elseif (csid == 272) then
         player:setCharVar("ATestOfTrueLoveProgress", 4)
         player:needToZone(true)
@@ -92,9 +92,9 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ATestOfTrueLoveProgress", 0)
         player:needToZone(true)
         player:addFame(BASTOK, 120)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     elseif (csid == 275) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)
         player:addKeyItem(tpz.ki.CHANSON_DE_LIBERTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHANSON_DE_LIBERTE)
     end

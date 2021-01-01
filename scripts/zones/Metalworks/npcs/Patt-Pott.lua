@@ -50,21 +50,21 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 254) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 256) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
         player:setCharVar("MissionStatus", 8)
     elseif (csid == 257) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
     elseif (csid == 255) then
         player:tradeComplete()
         player:setCharVar("MissionStatus", 7)
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
     end
 
 end

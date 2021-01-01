@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         end
         player:setCharVar("TrialSizeEarth_date", 0)
         player:addFame(BASTOK, 30)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
     end
 end

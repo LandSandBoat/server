@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 58 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_MAN_EATING_MITE)
     elseif csid == 59 then
         -- Killed Resheph
     elseif csid == 204 and option == 1 then

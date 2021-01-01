@@ -59,14 +59,14 @@ function onEventFinish(player, csid, option)
     if (csid == 139 and option == 1) then
         player:addKeyItem(tpz.ki.BATTLE_RATIONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BATTLE_RATIONS)
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         player:setCharVar("BLUE_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
     elseif (csid == 140 and option == 1) then
         player:delKeyItem(tpz.ki.BATTLE_RATIONS)
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
     elseif (csid == 141 or csid == 142 and option == 1) then
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
     elseif (csid == 143) then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if (player:getCharVar("Campaign_Nation") == 0) then
@@ -76,7 +76,7 @@ function onEventFinish(player, csid, option)
                 player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
             else
@@ -86,7 +86,7 @@ function onEventFinish(player, csid, option)
             player:setCampaignAllegiance(2)
             player:setCharVar("BLUE_R_LETTER_USED", 0)
             player:addTitle(tpz.title.FOURTH_DIVISION_SOLDIER)
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         end
     end
 end

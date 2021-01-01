@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
     -- A Greeting Cardian
     if csid == 296 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar("AGreetingCardian_Event", 2)
         player:setCharVar("AGreetingCardian_timer", os.date("%j"))
         player:needToZone(true) -- wait one day and zone after next step
@@ -63,7 +63,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13330)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13330) -- Tourmaline Earring
             player:addFame(WINDURST, 30)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
             player:setCharVar("AGreetingCardian_timer", 0)
             player:setCharVar("AGreetingCardian_Event", 0) -- finish cleanup of A Greeting Cardian variables

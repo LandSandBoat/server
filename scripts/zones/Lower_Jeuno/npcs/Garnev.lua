@@ -35,13 +35,13 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 167) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
     elseif (csid == 166) then
         player:addTitle(tpz.title.TRADER_OF_RENOWN)
         player:addKeyItem(tpz.ki.CLOCK_TOWER_OIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLOCK_TOWER_OIL)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
     end
 end

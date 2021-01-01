@@ -68,9 +68,9 @@ function onEventFinish(player, csid, option)
 
     -- THE ELVAAN GOLDSMITH
     if (csid == 215) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
     elseif (csid == 216) then
-        local fame = player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and 8 or 100
+        local fame = player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and 8 or 100
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH, {gil=180, fame=fame})) then
             player:confirmTrade()
         end
@@ -89,7 +89,7 @@ function onEventFinish(player, csid, option)
 
     -- FATHER FIGURE
     elseif (csid == 240) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
     elseif (csid == 241) then
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.FATHER_FIGURE, {gil=2200, fame=120})) then
             player:confirmTrade()

@@ -19,27 +19,27 @@ local TrustMemory = function(player)
     local memories = 0
     --[[ TODO
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - The Pirate's Cove
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--
@@ -169,7 +169,7 @@ function onTrigger(player, npc)
 
     elseif (CFA2 == QUEST_COMPLETED) then
         player:startEvent(184) -- New standard dialog after CFA2
-    elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
+    elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
         player:getCharVar("ShantottoCS") == 1) then
         player:startEvent(399, 0, 0, 282)
     else
@@ -188,10 +188,10 @@ function onEventFinish(player, csid, option)
             player:addFame(WINDURST, 80)
             player:addItem(17081)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17081)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
         end
     elseif (csid == 171 and option ~= 1) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
 
     elseif (csid == 179) then
         player:setCharVar("CursesFoiledAgainDayFinished", 0)
@@ -203,7 +203,7 @@ function onEventFinish(player, csid, option)
 
     elseif (csid == 180 and option == 3) then
         player:setCharVar("CursesFoiledAgain", 0)
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
         player:setTitle(tpz.title.TARUTARU_MURDER_SUSPECT)
 
     elseif (csid == 183) then
@@ -214,14 +214,14 @@ function onEventFinish(player, csid, option)
             player:setTitle(tpz.title.HEXER_VEXER)
             player:addItem(17116)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17116)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
             player:needToZone(true)
             player:addFame(WINDURST, 90)
         end
 
     elseif (csid == 340) then
         if (option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
         else
             player:setTitle(tpz.title.TOTAL_LOSER)
         end
@@ -230,7 +230,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4870)
         else
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
             player:setCharVar("foiledagolemdeliverycomplete", 0)
             player:addItem(4870)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4870)
@@ -249,8 +249,8 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ShantottoCS", 0)
 
     elseif csid == 506 then
-        player:completeMission(AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
-        player:addMission(AMK, tpz.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
+        player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
 
         -- TRUST
     elseif csid == 529 and option == 2 then

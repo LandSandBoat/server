@@ -23,11 +23,11 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 11) then
-        player:completeMission(TOAU, tpz.mission.id.toau.TEAHOUSE_TUMULT)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.TEAHOUSE_TUMULT)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.FINDERS_KEEPERS)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.FINDERS_KEEPERS)
     elseif (csid == 12) then
-        player:completeMission(TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
-        player:addMission(TOAU, tpz.mission.id.toau.BASTION_OF_KNOWLEDGE)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.BASTION_OF_KNOWLEDGE)
     end
 end

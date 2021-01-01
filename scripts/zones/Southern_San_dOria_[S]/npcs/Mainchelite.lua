@@ -61,18 +61,18 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
         player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 7 and option == 1) then
         player:setCharVar("RED_R_LETTER_USED", 1)
         player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 8 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 10 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 11 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 12 and option == 0) then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if (player:getCharVar("Campaign_Nation") == 0) then
@@ -82,7 +82,7 @@ function onEventFinish(player, csid, option)
                 player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
                 player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
                 player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
                 player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
                 player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
@@ -95,12 +95,12 @@ function onEventFinish(player, csid, option)
             player:setCampaignAllegiance(1)
             player:setCharVar("RED_R_LETTER_USED", 0)
             player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
             player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
             player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
             player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
         end
     elseif (csid == 13 and option == 1) then
-        player:delQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     end
 end

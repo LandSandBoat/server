@@ -33,7 +33,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 9) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
     elseif (csid == 10) then
         -- Killed Briareus
     elseif (csid == 218 and option == 1) then

@@ -63,8 +63,8 @@ function onEventFinish(player, csid, option)
             tpz.ki.DOMINAS_AZURE_SEAL
         })
 
-        player:completeMission(ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
-        player:addMission(ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
+        player:completeMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
 
         player:setCharVar("ASA_Status", 0)
         player:setCharVar("ASA4_Amber", "0")
@@ -105,8 +105,8 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.AZURE_COUNTERSEAL)
 
         -- Advance Mission
-        player:completeMission(ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
-        player:addMission(ASA, tpz.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
+        player:completeMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE)
+        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
         player:setCharVar("ASA_Status", 0)
     end
 end

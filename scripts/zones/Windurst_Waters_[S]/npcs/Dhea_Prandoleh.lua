@@ -38,13 +38,13 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 128 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS)
     elseif csid == 133 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES)
     elseif csid == 134 then
         player:addItem(139)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 139)
-        player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES)
+        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES)
         player:needToZone(true)
         player:addTitle(tpz.title.AJIDOMARUJIDOS_MINDER)
     end

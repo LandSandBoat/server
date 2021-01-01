@@ -158,7 +158,7 @@ local function suppliesAvailableBitmask(player, nation)
 
     if mask ~= -1 and mask ~= 4294967295 then
         for i = 0, 18 do
-            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
+            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
                 mask = mask + 2^(i + 5)
             end
         end

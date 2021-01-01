@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 21) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) -- Gifts of Griffon Quest Start
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) -- Gifts of Griffon Quest Start
 
     elseif (csid == 22) then
         player:setCharVar("GiftsOfGriffonProg", 1) -- Gifts of Griffon Stage 2

@@ -34,12 +34,12 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 106) then
-        player:completeMission(TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
         player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
         player:addKeyItem(tpz.ki.PERCIPIENT_EYE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERCIPIENT_EYE)
         player:setTitle(tpz.title.TREASURE_TROVE_TENDER)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
     end
 end

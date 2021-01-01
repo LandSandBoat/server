@@ -33,8 +33,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     -- Things that happen to any player in the party/alliance
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.A_TESTING_TIME then
         if
-            (player:getZoneID() == tpz.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)) or
-            (player:getZoneID() == tpz.zone.TAHRONGI_CANYON and not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME))
+            (player:getZoneID() == tpz.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)) or
+            (player:getZoneID() == tpz.zone.TAHRONGI_CANYON and not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME))
         then
             player:addCharVar("testingTime_crea_count", 1)
         end

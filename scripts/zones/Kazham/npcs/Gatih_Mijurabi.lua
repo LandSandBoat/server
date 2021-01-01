@@ -34,12 +34,12 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 191) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
     elseif (csid == 193) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13247)
         else
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
             player:addItem(13247) -- Mithran Stone
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13247)
         end

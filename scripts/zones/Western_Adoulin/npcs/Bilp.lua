@@ -41,6 +41,6 @@ function onEventFinish(player, csid, option)
     if ((csid == 5024) and (option == 1)) then
         -- Starts Quest: 'Scaredy-Cats', after first refusal.
         player:setCharVar("Scaredycats_Status", 2)
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.SCAREDYCATS)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.SCAREDYCATS)
     end
 end

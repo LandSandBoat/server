@@ -35,7 +35,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 547 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
         player:setCharVar("LuckOfTheDraw", 1)
     elseif csid == 552 then
         player:setCharVar("LuckOfTheDraw", 6)

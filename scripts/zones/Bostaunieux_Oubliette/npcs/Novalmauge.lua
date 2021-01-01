@@ -95,7 +95,7 @@ function onEventFinish(player, csid, option, npc)
     elseif csid == 12 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.THE_RUMOR, {item = 4853}) then
         player:confirmTrade()
     elseif csid == 13 and option == 1 then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)
     elseif csid == 14 then
         player:setCharVar("theHolyCrestCheck", 0)
     elseif csid == 15 then

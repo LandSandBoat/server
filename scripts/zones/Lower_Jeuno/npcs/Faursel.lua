@@ -91,7 +91,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 10062 and option == 1) then -- Offer Quest, First Dialog.
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     elseif (csid == 10063 or csid == 10064) then
         if (csid == 10063 and option == 1 or csid == 10063 and option == 2) then -- Offically offer quest, Second Dialog.
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 1)
@@ -109,7 +109,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 4)
         tpz.teleport.to(player, tpz.teleport.id.WAJAOM_LEYPOINT)
     elseif (csid == 10068) then
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Day", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Year", 0)
@@ -117,7 +117,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10070) then
         player:addKeyItem(tpz.ki.BOARDING_PERMIT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOARDING_PERMIT)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Day", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Year", 0)

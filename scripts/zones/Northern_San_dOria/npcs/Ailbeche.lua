@@ -92,7 +92,7 @@ function onEventFinish(player, csid, option)
 
     -- "Father and Son"
     if (csid == 508) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
     elseif (csid == 509) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17391)
@@ -102,7 +102,7 @@ function onEventFinish(player, csid, option)
             player:addTitle(tpz.title.LOST_CHILD_OFFICER)
             player:setCharVar("QuestfatherAndSonVar", 0)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
         end
     elseif (csid == 61) then
         player:setCharVar("returnedAilbecheRod", 1)
@@ -110,7 +110,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     -- "Sharpening the Sword"
     elseif ((csid == 45 or csid == 43) and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
         player:setCharVar("sharpeningTheSwordCS", 2)
         player:setCharVar("returnedAilbecheRod", 0)
     elseif (csid == 45 and option == 0) then
@@ -124,11 +124,11 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17643) -- Honor Sword
             player:setCharVar("sharpeningTheSwordCS", 0)
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
     -- "A Boy's Dream"
     elseif ((csid == 41 or csid == 40) and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
         player:setCharVar("aBoysDreamCS", 2)
     elseif (csid == 41 and option == 0) then
         player:setCharVar("aBoysDreamCS", 1)

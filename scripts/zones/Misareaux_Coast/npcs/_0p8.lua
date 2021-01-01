@@ -17,7 +17,7 @@ function onTrigger(player, npc)
 
     if (currentCoP == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and PromathiaStatus == 1) then
         player:startEvent(9)
-    elseif (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) or (currentCoP == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and PromathiaStatus >= 2)or(currentCoP > tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) or (currentCoP == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and PromathiaStatus >= 2)or(currentCoP > tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)) then
         player:startEvent(502)
     else
         player:messageSpecial(ID.text.DOOR_CLOSED)

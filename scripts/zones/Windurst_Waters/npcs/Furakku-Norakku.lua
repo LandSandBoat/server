@@ -68,7 +68,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
         player:setCharVar("EARLY_BIRD_TRACK_BOOK", 0)
         player:addFame(WINDURST, 120)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
     elseif (csid == 404) then
         player:addKeyItem(tpz.ki.OVERDUE_BOOK_NOTIFICATION)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OVERDUE_BOOK_NOTIFICATION)
@@ -81,7 +81,7 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.A_SONG_OF_LOVE)
         player:setCharVar("CHASING_TALES_TRACK_BOOK", 0)
         player:addFame(WINDURST, 120)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     elseif (csid == 816) then
         player:setCharVar("ClassReunion_TalkedToFurakku", 1)
     end

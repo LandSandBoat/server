@@ -36,7 +36,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 3)
     elseif (csid == 5) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
-        player:addMission(COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
     end
 end

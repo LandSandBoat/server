@@ -66,27 +66,27 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 48 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 50)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 150)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 250)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 500)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 50)

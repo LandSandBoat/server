@@ -71,8 +71,8 @@ function onEventFinish(player, csid, option)
     elseif csid == 22 then
         player:startEvent(36)
     elseif csid == 34 then
-        player:completeMission(ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
-        player:addMission(ACP, tpz.mission.id.acp.BANISHING_THE_ECHO)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.BANISHING_THE_ECHO)
     elseif csid == 36 then
         player:startEvent(37)
     elseif csid == 37 then
@@ -80,8 +80,8 @@ function onEventFinish(player, csid, option)
     elseif csid == 38 then
         player:startEvent(39)
     elseif csid == 39 then
-        player:completeMission(COP, tpz.mission.id.cop.ANCIENT_FLAMES_BECKON)
-        player:addMission(COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_FLAMES_BECKON)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
         player:setCharVar("COP1", 1)
     end
 end

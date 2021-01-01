@@ -43,7 +43,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WishUponAStar_Status", 3)
     elseif (csid == 334) then -- Quest: Wish Upon a Star - Traded Fallen Star
         player:tradeComplete( )
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
         player:addFame(BASTOK, 50)
         player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4

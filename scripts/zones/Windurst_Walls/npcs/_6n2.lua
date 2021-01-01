@@ -118,25 +118,25 @@ function onEventFinish(player, csid, option)
 
     -- I CAN HEAR A RAINBOW
     elseif csid == 384 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- THE PUPPET MASTER
     elseif csid == 402 then
         if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
-            player:delQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+            player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
         end
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
         player:setCharVar("ThePuppetMasterProgress", 1)
 
     -- CLASS REUNION
     elseif csid == 413 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
         npcUtil.giveKeyItem(player, tpz.ki.CARBUNCLES_TEAR)
         player:setCharVar("ClassReunionProgress", 1)
 
     -- CARBUNCLE DEBACLE
     elseif csid == 415 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
         player:setCharVar("CarbuncleDebacleProgress", 1)
     end
 end

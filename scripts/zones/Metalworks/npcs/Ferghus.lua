@@ -28,7 +28,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 946 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
         player:setCharVar("TOO_MANY_CHEFS", 1)
     elseif (csid == 947) then
         player:setCharVar("TOO_MANY_CHEFS", 5)

@@ -503,7 +503,7 @@ local function giveReward(player, csid)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
             if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
-                player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+                player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
             if reward.title ~= nil then
                 player:addTitle(reward.title)
@@ -589,7 +589,7 @@ function onEventFinish(player, csid, option)
 
     -- INSIDE THE BELLY
     elseif csid == 161 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
     elseif csid == 166 or csid == 167 then
         giveReward(player, csid)
     end

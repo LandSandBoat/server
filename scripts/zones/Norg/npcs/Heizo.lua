@@ -55,7 +55,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 127) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif (csid == 129) then
         player:tradeComplete()
         player:addItem(4958) -- Scroll of Dokumori: Ichi
@@ -63,7 +63,7 @@ function onEventFinish(player, csid, option)
         player:addFame(NORG, 100)
         player:addTitle(tpz.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb", 0)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     end
 
 end

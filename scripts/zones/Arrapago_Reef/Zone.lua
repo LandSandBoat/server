@@ -69,11 +69,11 @@ function onEventFinish(player, csid, option)
     elseif (csid == 13) then
         player:setCharVar("AhtUrganStatus", 1)
     elseif (csid == 14) then
-        player:completeMission(TOAU, tpz.mission.id.toau.PREVALENCE_OF_PIRATES)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PREVALENCE_OF_PIRATES)
         player:setCharVar("AhtUrganStatus", 0)
         player:addKeyItem(tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
-        player:addMission(TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
     elseif (csid == 15) then
         player:setCharVar("AhtUrganStatus", 1)
         player:setPos(0, 0, 0, 0, 57)

@@ -127,7 +127,7 @@ function onEventFinish(player, csid, option)
 
     -- AN EXPLORER'S FOOTSTEPS
     elseif csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
     elseif csid == 42 and option == 100 and npcUtil.giveItem(player, 571) then
         player:setCharVar("anExplorer-CurrentTablet", 0)
@@ -148,7 +148,7 @@ function onEventFinish(player, csid, option)
         end
 
         if csid == 47 then
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
             player:setCharVar("anExplorer-ClayTablets", 0)
         end
 
@@ -170,7 +170,7 @@ function onEventFinish(player, csid, option)
         else
             if not npcUtil.giveItem(player, 8711) then return end
         end
-        player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_BEGINNING)
     end
 end

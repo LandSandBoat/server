@@ -93,6 +93,6 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.CLOCK_TOWER_PRESERVATIONIST)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     end
 end

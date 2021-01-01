@@ -45,7 +45,7 @@ end
 function onEventFinish(player, csid, option)
     -- GROCERIES
     if (csid == 110) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.GROCERIES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
         player:addKeyItem(tpz.ki.TAMIS_NOTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TAMIS_NOTE)
         player:setCharVar("Groceries", 1)
@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()
             player:setCharVar("Groceries", 0)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GROCERIES)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
             player:addFame(BASTOK, 75)
             player:addItem(13594) -- Rabbit Mantle
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13594)

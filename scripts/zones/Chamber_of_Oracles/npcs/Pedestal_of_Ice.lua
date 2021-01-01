@@ -30,7 +30,7 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.IS_SET_IN_THE_PEDESTAL, tpz.ki.ICE_FRAGMENT)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
         player:messageSpecial(ID.text.HAS_LOST_ITS_POWER, tpz.ki.ICE_FRAGMENT)
     else
         player:messageSpecial(ID.text.PLACED_INTO_THE_PEDESTAL)
@@ -52,8 +52,8 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ZilartStatus", 0)
         player:addKeyItem(tpz.ki.PRISMATIC_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PRISMATIC_FRAGMENT)
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
-        player:addMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
     end
 
 end

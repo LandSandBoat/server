@@ -37,6 +37,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.UNLOCK_BARD)  --You can now become a bard!
         player:setCharVar("PathOfTheBard_Event", 0)
         player:addFame(JEUNO, 30)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
     end
 end

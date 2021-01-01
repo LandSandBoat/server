@@ -36,7 +36,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 107 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
         npcUtil.giveKeyItem(player, tpz.ki.EVIL_WARDING_SEAL)
     elseif csid == 109 then
         npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET, {item = 4687})

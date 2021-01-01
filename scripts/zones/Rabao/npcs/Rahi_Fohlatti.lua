@@ -48,7 +48,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1546) --Mini tuning fork
         else
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
             player:addItem(1546)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1546)
         end

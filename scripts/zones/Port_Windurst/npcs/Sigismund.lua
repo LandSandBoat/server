@@ -37,10 +37,10 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 196) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
     elseif (csid == 199) then
         player:tradeComplete(trade)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
         player:addFame(WINDURST, 75)
         player:addItem(12316)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12316)

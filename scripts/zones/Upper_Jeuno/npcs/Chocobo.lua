@@ -120,6 +120,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ChocobosWounds_Min", 0)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     end
 end

@@ -43,6 +43,6 @@ function onEventFinish(player, csid, option)
         end
         player:setCharVar("TrialSizeFire_date", 0)
         player:addFame(KAZHAM, 30)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
     end
 end

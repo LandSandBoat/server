@@ -34,7 +34,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 594 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         player:addKeyItem(tpz.ki.WEAPONS_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WEAPONS_ORDER)
     elseif (csid == 607) then
@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
             player:addItem(17090)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17090) -- Elm Staff
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         end
     end
 

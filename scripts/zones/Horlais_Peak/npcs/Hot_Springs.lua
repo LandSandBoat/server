@@ -35,6 +35,6 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4949)
         player:addFame(NORG, 75)
         player:addTitle(tpz.title.CRACKER_OF_THE_SECRET_CODE)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     end
 end

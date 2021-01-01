@@ -76,14 +76,14 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
     elseif (csid == 174 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
     elseif (csid == 171) then
         player:tradeComplete()
         player:setCharVar("saveMySisterVar", 1)
         player:addKeyItem(tpz.ki.CREST_OF_DAVOI_KI)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CREST_OF_DAVOI_KI)
         player:addFame(JEUNO, 30)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
 
     elseif (csid == 105) then
         player:setCharVar("saveMySisterVar", 3)
@@ -98,7 +98,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17041)
             player:tradeComplete()
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
         end
     end
 end

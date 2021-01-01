@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
         local freeInventory = player:getFreeSlotsCount()
 
         if (freeInventory > 0) then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
             player:delKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
             player:addTitle(tpz.title.TREASURE_SCAVENGER)
             player:addFame(BASTOK, 50)

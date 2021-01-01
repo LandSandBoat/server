@@ -78,10 +78,10 @@ function onEventFinish(player, csid, option)
     elseif csid == 758 then
         player:setCharVar("COP_louverance_story", 3)
     elseif csid == 30035 then
-        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

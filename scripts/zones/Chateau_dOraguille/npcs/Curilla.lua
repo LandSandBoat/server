@@ -21,15 +21,15 @@ local sandyQuests = tpz.quest.id.sandoria
 local TrustMemory = function(player)
     local memories = 0
     -- 2 - PEACE_FOR_THE_SPIRIT
-    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
+    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
         memories = memories + 2
     end
     -- 4 - OLD_WOUNDS
-    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.OLD_WOUNDS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OLD_WOUNDS) then
         memories = memories + 4
     end
     -- 8 - THE_HEIR_TO_THE_LIGHT
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
         memories = memories + 8
     end
     -- 16 - Heroine's Combat BCNM
@@ -37,7 +37,7 @@ local TrustMemory = function(player)
     --  memories = memories + 16
     -- end
     -- 32 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 32
     end
     return memories
@@ -148,7 +148,7 @@ function onTrigger(player, npc)
 
         -- San d'Oria 9-1 "Breaking Barrier"
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.BREAKING_BARRIERS) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
             currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(16)
@@ -165,14 +165,14 @@ function onTrigger(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(545)
@@ -199,7 +199,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 55 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         player:addKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURILLAS_BOTTLE_EMPTY)
     elseif (csid == 54) then
@@ -210,14 +210,14 @@ function onEventFinish(player, csid, option)
             player:addItem(16409)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16409) -- Lynx Baghnakhs
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         end
     elseif (csid == 94 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
         player:addKeyItem(tpz.ki.OLD_POCKET_WATCH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_POCKET_WATCH)
     elseif (csid == 109 and option == 1) then
-        player:addQuest(SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
         player:setCharVar("needs_crawler_blood", 0)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)

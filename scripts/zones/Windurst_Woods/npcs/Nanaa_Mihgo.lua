@@ -25,15 +25,15 @@ local TrustMemory = function(player)
         memories = memories + 2
     end
     -- 4 - ROCK_RACKETEER
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER) then
         memories = memories + 4
     end
     -- 8 - HITTING_THE_MARQUISATE
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE) then
         memories = memories + 8
     end
     -- 16 - CRYING_OVER_ONIONS
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS) then
         memories = memories + 16
     end
     -- 32 - hasItem(286) Nanaa Mihgo statue
@@ -41,7 +41,7 @@ local TrustMemory = function(player)
         memories = memories + 32
     end
     -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
-    if player:hasCompletedMission(AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
+    if player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
         memories = memories + 64
     end
     return memories
@@ -210,13 +210,13 @@ function onEventFinish(player, csid, option)
 
     -- THE TENSHODO SHOWDOWN
     elseif (csid == 496) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
         player:setCharVar("theTenshodoShowdownCS", 1)
         npcUtil.giveKeyItem(player, tpz.ki.LETTER_FROM_THE_TENSHODO)
 
     -- THICK AS THIEVES
     elseif (csid == 504 and option == 1) then -- start quest "as thick as thieves"
-        player:addQuest(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)
         player:setCharVar("thickAsThievesGamblingCS", 1)
         npcUtil.giveKeyItem(player,
             {tpz.ki.GANG_WHEREABOUTS_NOTE, tpz.ki.FIRST_FORGED_ENVELOPE, tpz.ki.SECOND_FORGED_ENVELOPE})
@@ -230,7 +230,7 @@ function onEventFinish(player, csid, option)
 
     -- HITTING THE MARQUISATE
     elseif csid == 512 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
         player:setCharVar("hittingTheMarquisateYatnielCS", 1)
         player:setCharVar("hittingTheMarquisateHagainCS", 1)
         npcUtil.giveKeyItem(player, tpz.ki.CAT_BURGLARS_NOTE)
@@ -241,7 +241,7 @@ function onEventFinish(player, csid, option)
 
     -- ROCK RACKETEER
     elseif csid == 93 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
         npcUtil.giveKeyItem(player, tpz.ki.SHARP_GRAY_STONE)
     elseif csid == 98 then
         player:delGil(10 * GIL_RATE)
@@ -249,7 +249,7 @@ function onEventFinish(player, csid, option)
 
     -- MIHGO'S AMIGO
     elseif csid == 80 or csid == 81 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
     elseif csid == 88 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO, {
         gil = 200,
         title = tpz.title.CAT_BURGLAR_GROUPIE,

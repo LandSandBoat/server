@@ -51,7 +51,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 242) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
     elseif (csid == 243) then
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()
@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12498)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12498)
             player:addFame(BASTOK, 80)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12498)
         end

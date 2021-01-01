@@ -41,7 +41,7 @@ function onTrigger(player, npc)
     -- San d'Oria 8-2 "Lightbringer" (optional)
     elseif
         player:getRank() == 9 and player:getRankPoints() == 0 and
-        player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
+        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then
         player:startEvent(74)
@@ -61,9 +61,9 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 551) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
     elseif (csid == 74) then
         player:setCharVar("Cutscenes_8-2", 2)
     end

@@ -143,7 +143,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*120)
         if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Ohbiru_Food_var") == 3) then -- If this is the last NPC to be fed
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
             player:addTitle(tpz.title.FAST_FOOD_DELIVERER)
             player:addFame(WINDURST, 100)
             player:needToZone(true)
@@ -164,7 +164,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("Kenapa_Overnight_var", 3)
     elseif (csid == 339) then
         if (option == 0) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
             player:setCharVar("Kenapa_Overnight_var", 4)
         else
             player:setCharVar("Kenapa_Overnight_var", 0)
@@ -178,7 +178,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 343) then
         player:setCharVar("Kenapa_Overnight_var", 4) -- Begin reminder sequence
     elseif (csid == 346) then
-        player:delQuest(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
         player:delKeyItem(tpz.ki.SMALL_BAG)
         player:setCharVar("Kenapa_Overnight_Hour_var", 0)
         player:setCharVar("Kenapa_Overnight_var", 256)
@@ -187,7 +187,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12590)
             player:delKeyItem(tpz.ki.SMALL_BAG)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12590)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
             player:addFame(WINDURST, 100)
             player:needToZone(true)
             player:setCharVar("Kenapa_Overnight_var", 0)

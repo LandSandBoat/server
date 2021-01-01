@@ -84,6 +84,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10013) then
         player:setPos(0, 0, 0, 0, 226)
     elseif (csid == 324) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 end

@@ -61,7 +61,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.COLD_MEDICINE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COLD_MEDICINE)
     elseif (csid == 645) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif (csid == 646) then
         player:delKeyItem(tpz.ki.THYME_MOSS)
         player:addKeyItem(tpz.ki.COUGH_MEDICINE)

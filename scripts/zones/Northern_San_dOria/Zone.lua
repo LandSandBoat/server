@@ -58,7 +58,7 @@ function onZoneIn(player, prevZone)
         cs = 1
     elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 4 then
         cs = 0
-    elseif player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) and tonumber(os.date("%j")) == player:getCharVar("Wait1DayM8-1_date") then
+    elseif player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) and tonumber(os.date("%j")) == player:getCharVar("Wait1DayM8-1_date") then
         cs = 16
     end
 
@@ -113,10 +113,10 @@ function onEventFinish(player, csid, option)
     elseif csid == 878 then
         player:setCharVar("SOA_1_CS1", 1)
     elseif csid == 30035 then
-        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end

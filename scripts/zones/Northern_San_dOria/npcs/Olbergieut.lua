@@ -37,14 +37,14 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 619 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
         player:addKeyItem(tpz.ki.SCRIPTURE_OF_WIND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCRIPTURE_OF_WIND)
     elseif (csid == 620) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13584)
         else
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GATES_TO_PARADISE)
             player:addFame(SANDORIA, 30)
             player:addTitle(tpz.title.THE_PIOUS_ONE)
             player:delKeyItem(tpz.ki.SCRIPTURE_OF_WATER)

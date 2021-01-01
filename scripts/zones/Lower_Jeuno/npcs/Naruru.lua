@@ -54,7 +54,7 @@ end
 
 function onEventFinish(player, csid, option)
     if ((csid == 189 or csid == 188) and option == 0) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     elseif (csid == 189 and option == 1) then
         player:setCharVar("CooksPrideVar", 1)
     elseif (csid == 187) then
@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13446)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13446) -- Mythril Ring
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
         end
     elseif (csid == 10053) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 13, true))

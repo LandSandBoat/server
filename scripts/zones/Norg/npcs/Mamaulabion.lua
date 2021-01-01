@@ -108,7 +108,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 191) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
 
     elseif (csid == 193) then
         player:confirmTrade()
@@ -124,14 +124,14 @@ function onEventFinish(player, csid, option)
             player:addItem(14625) -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14625) -- Evokers Ring
             player:addFame(NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
             player:setCharVar("tradesMamaMia", 0)
         end
 
     elseif (csid == 243) then
         if (option == 1) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
         end
     end
 end

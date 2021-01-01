@@ -19,8 +19,8 @@ function onTrigger(player, npc)
     elseif player:getCharVar("LionIICipher") == 1 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
-            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
             player:setCharVar("LionIICipher", 0)
         end
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
@@ -41,7 +41,7 @@ function onTrigger(player, npc)
         end
     elseif
         player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or
-        player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) or
+        player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) or
         (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1)
     then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
@@ -58,13 +58,13 @@ end
 function onEventFinish(player, csid, option)
     -- RoV Missions
     if csid == 3 then
-        player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
-        player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
     elseif csid == 4 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
-            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
         else
             player:setCharVar("LionIICipher", 1)
         end

@@ -170,7 +170,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 155) then
         local NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getMainJob() - 1
-        player:addQuest(JEUNO, NumQuest)
+        player:addQuest(tpz.quest.log_id.JEUNO, NumQuest)
         player:setCharVar("BorghertzAlreadyActiveWithJob", player:getMainJob())
     end
 

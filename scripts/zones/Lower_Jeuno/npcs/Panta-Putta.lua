@@ -53,7 +53,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 77 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif (csid == 33) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13328)
@@ -64,7 +64,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13328)
             player:addFame(JEUNO, 30)
             player:needToZone(true)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
         end
     elseif (csid == 30) then
         player:setCharVar("theLostCardianVar", 2)
@@ -78,7 +78,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13596)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13596) -- Green Cape
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
         end
     end
 end

@@ -15,15 +15,15 @@ local ID = require("scripts/zones/Metalworks/IDs");
 local function TrustMemory(player)
     local memories = 0
     -- 2 - Darkness Rising (Bastok Mission)
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge (Bastok Mission)
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - Light of Judgment (Aht Urhgan Mission)
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 8
     end
     -- 16 - Hero's Combat (BCNM)

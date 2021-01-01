@@ -39,11 +39,11 @@ end
 function onEventFinish(player, csid, option)
     if (csid == 78) then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     elseif (csid == 76) then
         -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'
         player:delKeyItem(tpz.ki.HUNK_OF_BEDROCK)
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
         player:addExp(1000 * EXP_RATE)
         player:addCurrency('bayld', 500 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * BAYLD_RATE)

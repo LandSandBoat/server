@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 689) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
     elseif (csid == 690) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17422)
@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17422) -- Blessed Hammer
             player:tradeComplete()
             player:addFame(SANDORIA, 20)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
         end
     elseif (csid == 691) then
         if (player:getFreeSlotsCount() == 0) then
@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14091) -- Healer's Duckbills
             player:tradeComplete()
             player:addFame(SANDORIA, 40)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
         end
     elseif (csid == 692) then
         if (player:getFreeSlotsCount() == 0) then
@@ -81,7 +81,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12640) -- Healer's Briault
             player:tradeComplete()
             player:addFame(SANDORIA, 60)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
         end
     end
 

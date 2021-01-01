@@ -79,7 +79,7 @@ function onTrigger(player, npc)
         elseif (currentMission == tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 0) then
             player:startEvent(25)
         -- Mission San D'Oria 5-2 The Shadow Lord
-        elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == tpz.mission.id.sandoria.NONE) then
             player:showText(npc, ID.text.HALVER_OFFSET+500)
         elseif (currentMission == tpz.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 5) then
             player:showText(npc, ID.text.HALVER_OFFSET+471)
@@ -152,7 +152,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 501) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
         player:setCharVar("MissionStatus", 4)
     elseif (csid == 503) then
         player:setCharVar("MissionStatus", 9)
@@ -189,7 +189,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 181)
         end
         player:setCharVar("MissionStatus", 0)
-        player:completeMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
+        player:completeMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
         player:setRank(10)
         player:addGil(100000)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100000)
@@ -201,8 +201,8 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 3, csid, option)
         player:setCharVar("Wait1DayM8-1_date", os.date("%j"))
     elseif (csid == 564 and option == 1) then
-        player:completeMission(TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
-        player:addMission(TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.CONFESSIONS_OF_ROYALTY)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.EASTERLY_WINDS)
         player:delKeyItem(tpz.ki.RAILLEFALS_LETTER)
         player:setCharVar("AhtUrganStatus", 1)
     end

@@ -42,7 +42,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 137 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar("MissionaryManVar", 1)
     elseif (csid == 139) then
         player:setCharVar("MissionaryManVar", 2)
@@ -58,7 +58,7 @@ function onEventFinish(player, csid, option)
             player:addItem(4728)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4728)
             player:addFame(WINDURST, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
         end
     end
 end

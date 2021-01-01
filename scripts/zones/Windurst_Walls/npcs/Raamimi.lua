@@ -45,7 +45,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4370) -- Cannot give Honey because player Inventory is full
         else
-            player:addQuest(WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
             player:addItem(4370)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4370) -- Gives player Honey x1
         end

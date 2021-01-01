@@ -49,7 +49,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1544) --Mini tuning fork
         else
             player:setCharVar("TrialSizeFire_date", 0)
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
             player:addItem(1544)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1544)
         end

@@ -107,16 +107,16 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 1, csid, option)
 
     elseif (csid == 274 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(GIL_RATE*1500)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
             player:addFame(WINDURST, 75)
             player:addTitle(tpz.title.QUICK_FIXER)
             player:needToZone(true)
             player:tradeComplete()
     elseif (csid == 259 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
     elseif (csid == 267) then
         rand = math.random(3) --Setup random variable to determine which 2 items are returned upon quest completion
         if (rand == 1) then
@@ -170,7 +170,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
             player:addFame(WINDURST, 150)
             player:addTitle(tpz.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
         end
         -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
     elseif (csid == 456) then

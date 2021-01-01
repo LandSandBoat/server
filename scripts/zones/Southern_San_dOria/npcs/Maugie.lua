@@ -35,12 +35,12 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 45 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     elseif (csid == 44) then
         player:setCharVar("CleanSignPost", 0)
         player:addFame(SANDORIA, 30)
         player:addGil(GIL_RATE*1500)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
 end

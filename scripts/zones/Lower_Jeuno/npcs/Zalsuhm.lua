@@ -74,7 +74,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Upset_Zalsuhm", 1)
             player:needToZone(true)
         elseif option <= tpz.job.SCH then
-            player:addQuest(JEUNO, questId)
+            player:addQuest(tpz.quest.log_id.JEUNO, questId)
         end
     elseif csid == 10088 and option <= tpz.job.SCH then
         local jobs =
@@ -102,7 +102,7 @@ function onEventFinish(player, csid, option)
         }
         local skill = jobs[option]
 
-        player:completeQuest(JEUNO, questId)
+        player:completeQuest(tpz.quest.log_id.JEUNO, questId)
         player:messageSpecial(ID.text.MYTHIC_LEARNED, player:getMainJob())
         player:addLearnedWeaponskill(skill)
     end

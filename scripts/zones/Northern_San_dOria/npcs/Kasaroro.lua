@@ -44,7 +44,7 @@ function onTrigger(player, npc)
             elseif (MissionStatus == 10) then
                 player:startEvent(551)
             end
-        elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)) then
+        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)) then
             player:startEvent(604)
         else
             player:startEvent(548)
@@ -61,17 +61,17 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 546) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 550) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
         player:setCharVar("MissionStatus", 6)
     elseif (csid == 547) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2)
         player:setCharVar("MissionStatus", 8)
     elseif (csid == 551) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)

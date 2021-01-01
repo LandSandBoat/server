@@ -38,7 +38,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 481 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO)
     elseif csid == 484 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.THE_AMAZIN_SCORPIO, {fame=80, title=tpz.title.GREAT_GRAPPLER_SCORPIO, gil=1500}) then
         player:confirmTrade()
     elseif csid == 735 then

@@ -39,8 +39,8 @@ function onEventFinish(player, csid, option)
         toPalaceEntrance(player)
     elseif (csid == 13) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
-        player:addMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
         player:addTitle(tpz.title.THE_LOST_ONE)
     end
 end

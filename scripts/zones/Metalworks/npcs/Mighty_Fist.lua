@@ -50,7 +50,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 565) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
     elseif (csid == 566) then
         TheDarksmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
 
@@ -60,7 +60,7 @@ function onEventFinish(player, csid, option)
 
         if (TheDarksmith == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
         else
             player:addFame(BASTOK, 5)
         end

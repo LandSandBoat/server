@@ -34,7 +34,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 48 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.THE_BEAST_OF_BASTORE)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_BEAST_OF_BASTORE)
     elseif csid == 49 then
         -- Killed Sedna
     elseif csid == 47 and option == 1 then

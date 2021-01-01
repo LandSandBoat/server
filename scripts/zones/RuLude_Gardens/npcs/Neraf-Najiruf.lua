@@ -31,7 +31,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 98) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
         player:setCharVar("saveMySisterVar", 0)
         player:addKeyItem(tpz.ki.DUCAL_GUARDS_LANTERN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DUCAL_GUARDS_LANTERN)

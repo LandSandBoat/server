@@ -18,27 +18,27 @@ local TrustMemory = function(player)
     local memories = 0
     --[[ TODO
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - The Pirate's Cove
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--
@@ -124,7 +124,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
         player:setCharVar("MissionStatus", 0)
-        player:completeMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
+        player:completeMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
         player:setRank(10)
         player:addGil(GIL_RATE * 100000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 100000)

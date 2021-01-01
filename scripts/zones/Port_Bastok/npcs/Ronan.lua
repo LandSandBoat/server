@@ -47,7 +47,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 82) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
     elseif (csid == 84) then
         player:needToZone(true)
         player:setCharVar("OutOfOneShell", 1)
@@ -59,7 +59,7 @@ function onEventFinish(player, csid, option)
             player:addItem(12501)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12501)
             player:addFame(BASTOK, 120)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12501)
         end

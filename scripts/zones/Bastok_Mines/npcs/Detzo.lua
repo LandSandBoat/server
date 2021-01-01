@@ -57,7 +57,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 93) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.RIVALS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
     elseif (csid == 94) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13571)
@@ -66,7 +66,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13571)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.RIVALS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
         end
     end
 

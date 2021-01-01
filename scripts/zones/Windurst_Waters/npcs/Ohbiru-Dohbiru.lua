@@ -145,7 +145,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*440)
         if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Kenapa_Food_var") == 4) then -- If this is the last NPC to be fed
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
             player:addFame(WINDURST, 100)
             player:addTitle(tpz.title.FAST_FOOD_DELIVERER)
             player:needToZone(true)
@@ -156,13 +156,13 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Ohbiru_Food_var", 3)
         end
     elseif (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
         player:addGil(GIL_RATE*4500)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*4500)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:addFame(WINDURST, 100)
         player:addTitle(tpz.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
@@ -174,7 +174,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 352 and option == 0 or csid == 354) then
         if (player:getFreeSlotsCount() >= 1) then
             if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_AVAILABLE) then
-                player:addQuest(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+                player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
             end
             player:addItem(504)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 504)
@@ -183,7 +183,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 355) then
         player:addGil(GIL_RATE*900)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
         player:addFame(WINDURST, 40)
         player:tradeComplete()
         player:needToZone(true)

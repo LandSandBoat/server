@@ -72,7 +72,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 161) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         player:setCharVar("theTalekeeperTruthCS", 3)
     elseif (csid == 162) then
         player:tradeComplete()
@@ -92,11 +92,11 @@ function onEventFinish(player, csid, option)
             player:setCharVar("DeidoggWait1DayForAF3", VanadielDayOfTheYear())
             player:needToZone(true)
             player:addFame(BASTOK, 40)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         end
     elseif (csid == 172) then
         player:tradeComplete()
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
     elseif (csid == 504) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))

@@ -48,7 +48,7 @@ end
 function onEventFinish(player, csid, option)
 
     if (csid == 2 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
     elseif (csid == 2 and option == 1) then
         player:setCharVar("BeautyAndTheGalkaDenied", 1)
     elseif (csid == 3) then
@@ -59,14 +59,14 @@ function onEventFinish(player, csid, option)
         ShadyBusiness = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
 
         if (ShadyBusiness == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
         end
     elseif (csid == 91) then
         ShadyBusiness = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
 
         if (ShadyBusiness == QUEST_ACCEPTED) then
             player:addFame(NORG, 100)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHADY_BUSINESS)
         else
             player:addFame(NORG, 80)
         end

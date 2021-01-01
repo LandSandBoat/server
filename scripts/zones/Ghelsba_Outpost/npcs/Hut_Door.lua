@@ -16,7 +16,7 @@ end
 function onTrigger(player, npc)
 
     if (player:hasKeyItem(tpz.ki.ORCISH_HUT_KEY)) then
-        if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN)) then
+        if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN)) then
             player:startEvent(3)
         else
             player:startEvent(55)

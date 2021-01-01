@@ -94,7 +94,7 @@ function onEventFinish(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
             player:addItem(card, 5)
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
@@ -102,12 +102,12 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.CARD_COLLECTOR)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
     elseif (csid == 199 and option == 0) then
         player:addCharVar("RubbishDay_prog", 1)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
     elseif (csid == 198 and option == 0) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
         player:addKeyItem(tpz.ki.MAGIC_TRASH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDay_prog", 0)
@@ -127,7 +127,7 @@ function onEventFinish(player, csid, option)
         end
 
         if npcUtil.giveItem(player, {{card, 5}}) then
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
             player:setCharVar("AllInTheCards_date", getMidnight())
             player:setLocalVar("Cardstemp", 1)
         end

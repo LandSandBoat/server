@@ -75,6 +75,6 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 2)
         player:setPos(-297, 1, 96, 1)
     elseif csid == 122 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL)
     end
 end

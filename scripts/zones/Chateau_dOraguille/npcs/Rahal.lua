@@ -78,14 +78,14 @@ function onTrigger(player, npc)
 
         -- San d'Oria 9-1 "Breaking Barrier" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.BREAKING_BARRIERS) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
             currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(37)
 
         -- San d'Oria 8-2 "Lightbringer"
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.LIGHTBRINGER) and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:startEvent(42) -- (optional)
@@ -102,14 +102,14 @@ function onTrigger(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(77)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(544)
@@ -135,12 +135,12 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 17, true))
     elseif (csid == 121) then
         if (option == 1) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
         else
             player:setCharVar("KnightStalker_Declined", 1)
         end
     elseif (csid == 120 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER)
         player:setCharVar("KnightStalker_Declined", 0)
     elseif (csid == 78) then
         player:setCharVar("KnightStalker_Progress", 2)

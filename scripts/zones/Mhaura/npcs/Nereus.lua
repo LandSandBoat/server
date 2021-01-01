@@ -45,7 +45,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 111 and option == 1 then  --accept quest
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 113 then --quest completed
         player:confirmTrade()
         player:addFame(WINDURST, 120)
@@ -54,7 +54,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestAPotterPrefeRepeat_var", 0)
         player:setCharVar("QuestAPotterPrefeCompDay_var", VanadielDayOfTheYear())
         player:setCharVar("QuestAPotterPrefeCompYear_var", VanadielYear())
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 112 then --repeat quest
         player:setCharVar("QuestAPotterPrefeRepeat_var", 1)
     end

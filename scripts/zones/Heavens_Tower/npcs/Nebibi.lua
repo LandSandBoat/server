@@ -17,7 +17,7 @@ function onTrigger(player, npc)
 
     if
         (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and missionStatus >= 3) or
-        player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING)
+        player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING)
     then
         player:startEvent(399)
     else

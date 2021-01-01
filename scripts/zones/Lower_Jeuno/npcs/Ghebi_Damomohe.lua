@@ -65,7 +65,7 @@ function onEventFinish(player, csid, option)
 
         tpz.shop.general(player, stock, NORG)
     elseif csid == 106 and option == 2 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP)
     elseif csid == 107 then
         -- Finish Quest: Tenshodo Membership (Application Form)
         if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, ki=tpz.ki.TENSHODO_MEMBERS_CARD }) then

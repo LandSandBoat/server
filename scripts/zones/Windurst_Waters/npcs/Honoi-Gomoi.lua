@@ -93,7 +93,7 @@ function onEventFinish(player, csid, option)
 
     -- "Wild Card"
     elseif csid == 780 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.WILD_CARD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WILD_CARD)
     elseif
         csid == 782 and
         npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {

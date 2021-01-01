@@ -58,17 +58,17 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 144 and option == 1)  then                     -- Gullible's Travels: First CS
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
     elseif (csid == 146) then                                  -- Gullible's Travels: Final CS
         player:confirmTrade()
         player:delGil(player:getCharVar("MAGRIFFON_GIL_REQUEST"))
         player:setCharVar("MAGRIFFON_GIL_REQUEST", 0)
         player:addFame(KAZHAM, 30)
         player:setTitle(tpz.title.GULLIBLES_TRAVELS)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
         player:needToZone(true)
     elseif (csid == 148 and option == 1) then                  -- Even More Guillible's Travels First CS
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     elseif (csid == 150) then                                  -- Even More Guillible's Travels Second CS
         player:confirmTrade()
         player:delGil(35000)
@@ -79,6 +79,6 @@ function onEventFinish(player, csid, option)
     elseif (csid == 152) then
         player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 0)
         player:addFame(KAZHAM, 30)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
 end

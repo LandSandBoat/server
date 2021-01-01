@@ -77,7 +77,7 @@ function onEventFinish(player, csid, option)
     elseif (csid == 145 and option == 0) then
         player:setCharVar("TheRequiemCS", 1) -- player declines quest
     elseif ((csid == 145 or csid == 148) and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
         player:setCharVar("TheRequiemCS", 2)
     elseif (csid == 151) then
         player:setCharVar("TheRequiemCS", 3)
@@ -90,7 +90,7 @@ function onEventFinish(player, csid, option)
             player:addItem(14098)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14098) -- Choral Slippers
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
         end
     end
 end

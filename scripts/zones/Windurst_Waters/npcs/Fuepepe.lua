@@ -54,7 +54,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 442 and option == 1) then -- Quest Start
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
     elseif (csid == 455) then -- Quest Progress: Test Papers Shown and told to deliver them to principal
         player:setCharVar("QuestMakingTheGrade_prog", 1)
     elseif (csid == 458) then -- Quest Finish
@@ -62,7 +62,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4855)
         else
             player:tradeComplete()
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
             player:addFame(WINDURST, 75)
             player:addItem(4855)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4855)

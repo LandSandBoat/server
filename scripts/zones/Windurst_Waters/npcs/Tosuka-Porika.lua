@@ -93,11 +93,11 @@ function onTrigger(player, npc)
         player:startEvent(412) -- CS after talking to Furakku-Norakku
 
     -- Standard dialogues
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
         player:startEvent(380) -- "Thanks to some adventurer somewhere, I was able to awaken from an inescapable nightmare."
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) then
         player:startEvent(379) -- "Hey, you're the adventurer from the other day!"
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) then
         player:startEvent(169) -- "You must not frighten the others with rumors that the Book of the Gods has gone blank..."
     elseif player:getLocalVar("TosukaDialogueToggle") == 1 then
         player:startEvent(881) -- He toggles this event with 370 when player has no other mission/quest dialogue.
@@ -141,10 +141,10 @@ function onEventFinish(player, csid, option)
 
     -- Early Bird Catches the Bookworm
     elseif csid == 387 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
     -- Chasing Tales
     elseif csid == 403 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     end
 end

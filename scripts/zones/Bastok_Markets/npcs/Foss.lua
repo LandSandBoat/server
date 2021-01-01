@@ -27,9 +27,9 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 271 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD)
     elseif (csid == 272) then
-        local fame = player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) and 8 or 75
+        local fame = player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) and 8 or 75
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD, {title=tpz.title.BUCKET_FISHER, gil=300, fame=fame})) then
             player:confirmTrade()
         end

@@ -76,7 +76,7 @@ end
 
 function onEventFinish(player, csid, option)
     if csid == 249 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
     elseif csid == 469 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 4)
     elseif csid == 470 then

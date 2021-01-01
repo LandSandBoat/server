@@ -47,10 +47,10 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 195) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.SILENCE_OF_THE_RAMS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SILENCE_OF_THE_RAMS)
     elseif (csid == 196) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.SILENCE_OF_THE_RAMS)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SILENCE_OF_THE_RAMS)
         player:addFame(3, 125)
         player:addItem(13201)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 13201)

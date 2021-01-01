@@ -10,7 +10,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)) then
         player:startEvent(112)
     end
     return 1

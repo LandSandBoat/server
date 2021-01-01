@@ -92,7 +92,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 260 then
         -- option 3: Koru-Moru -- option 2: Shantotto -- option 1: Yoran-Oran
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
         player:setCharVar("theThreeMagiSupport", option)
     elseif csid == 269 then
         if player:getFreeSlotsCount() == 0 then
@@ -114,10 +114,10 @@ function onEventFinish(player, csid, option)
             player:needToZone(true)
             player:setCharVar("theThreeMagiSupport", 0)
             player:addFame(WINDURST, 20)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
         end
     elseif csid == 270 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
     elseif csid == 271 then
         player:tradeComplete()
         player:setCharVar("recollectionsQuest", 2)
@@ -130,10 +130,10 @@ function onEventFinish(player, csid, option)
             player:addItem(14092)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14092) -- wizards sabots
             player:addFame(WINDURST, 40)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
         end
     elseif csid == 276 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
         player:setCharVar("rootProblem", 1)
     elseif csid == 279 then
         player:addKeyItem(tpz.ki.SLUICE_SURVEYOR_MK_I)
@@ -142,7 +142,7 @@ function onEventFinish(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
             player:addItem(13856)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13856)
             player:addTitle(tpz.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE)

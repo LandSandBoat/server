@@ -63,8 +63,8 @@ function onEventFinish(player, csid, option)
     -- printf("onFinish RESULT: %u", option)
 
     if (csid == 5) then
-        player:completeMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
-        player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
     else
         EventFinishBCNM(player, csid, option)
     end

@@ -17,7 +17,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
---    player:delQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
+--    player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
 -- ======== FOR TESTING ONLY ==========-----
 --    if (player:getCharVar("QuestCatchItIfYouCan_var") == 0 and player:hasStatusEffect(tpz.effect.MUTE) == false and player:hasStatusEffect(tpz.effect.BANE) == false and player:hasStatusEffect(tpz.effect.PLAGUE) == false) then
 --        rand = math.random(1, 3)
@@ -70,7 +70,7 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 231) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     elseif (csid == 246 and option == 0) then
         player:needToZone(true)
         if (player:hasStatusEffect(tpz.effect.MUTE) == true) then
@@ -90,7 +90,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestCatchItIfYouCan_var", 0)
 
         if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)

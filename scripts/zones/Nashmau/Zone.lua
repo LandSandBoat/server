@@ -49,8 +49,8 @@ function onEventFinish(player, csid, option)
     if (csid == 200) then
         player:setPos(0, -2, 0, 0, 59)
     elseif (csid == 281) then
-        player:completeMission(TOAU, tpz.mission.id.toau.THE_BLACK_COFFIN)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_BLACK_COFFIN)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.GHOSTS_OF_THE_PAST)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GHOSTS_OF_THE_PAST)
     end
 end

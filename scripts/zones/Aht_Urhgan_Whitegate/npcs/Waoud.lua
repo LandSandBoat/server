@@ -185,7 +185,7 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("waoudNeedToZone", 1)
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 2)
-            player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+            player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         elseif player:getGil() >= 1000 then
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 1)
@@ -205,7 +205,7 @@ function onEventFinish(player, csid, option)
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 705 and option == 1 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
     elseif csid == 706 and option == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
@@ -214,7 +214,7 @@ function onEventFinish(player, csid, option)
 
     -- OMENS
     elseif csid == 710 and beginnings == QUEST_COMPLETED then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
         player:setCharVar("OmensProgress", 1)
     elseif csid == 711 and option == 1 and omensProgress == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
