@@ -142,7 +142,7 @@ function tpz.limbus.handleDoors(battlefield, open, door)
     if door then
         if open then
             local players = battlefield:getPlayers()
-            for i, member in pairs(players) do
+            for i, member in players:pairs() do
                 member:messageSpecial(ID.text.GATE_OPEN)
                 member:messageSpecial(ID.text.TIME_LEFT, battlefield:getRemainingTime()/60)
             end
@@ -236,7 +236,7 @@ function tpz.limbus.extendTimeLimit(battlefield, minutes, zone, npc)
     local ID = zones[zone]
 
     players = battlefield:getPlayers()
-    for _, player in pairs(players) do
+    for _, player in players:pairs() do
         player:messageSpecial(ID.text.TIME_EXTENDED, minutes)
         player:messageSpecial(ID.text.TIME_LEFT, battlefield:getRemainingTime()/60)
     end

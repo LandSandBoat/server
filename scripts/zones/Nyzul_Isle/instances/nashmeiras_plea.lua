@@ -25,7 +25,7 @@ end
 function onInstanceFailure(instance)
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
+    for i, v in chars:pairs() do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(1)
     end
@@ -37,7 +37,7 @@ function onInstanceProgressUpdate(instance, progress)
         local entryPos = instance:getEntryPos()
 
         DespawnMob(ID.mob[59].RAZFAHD, instance)
-        for i, v in pairs(chars) do
+        for i, v in chars:pairs() do
             v:startEvent(203)
             v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.rot)
         end
@@ -52,7 +52,7 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
+    for i, v in chars:pairs() do
         if v:getCurrentMission(TOAU) == tpz.mission.id.toau.NASHMEIRAS_PLEA and v:getCharVar("AhtUrganStatus") == 1 then
             v:setCharVar("AhtUrganStatus", 2)
         end

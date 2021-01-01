@@ -10,7 +10,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
         if mobID == ID.mob.APOLLYON_SW_MOB[2] then
             local battlefield = mob:getBattlefield()
             local players = battlefield:getPlayers()
-            for i, member in pairs(players) do
+            for i, member in players:pairs() do
                 member:messageSpecial(ID.text.GATE_OPEN)
                 member:messageSpecial(ID.text.TIME_LEFT, battlefield:getRemainingTime()/60)
             end

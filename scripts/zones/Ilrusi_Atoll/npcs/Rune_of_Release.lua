@@ -34,7 +34,7 @@ function onEventFinish(player, csid, option)
         if id == 41 or id == 43 then
             points = 1100 - math.max(playerpoints, 0)
         end
-        for i, v in pairs(chars) do
+        for i, v in chars:pairs() do
             v:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
             v:addAssaultPoint(ILRUSI_ASSAULT_POINT, points)
             v:setCharVar("AssaultComplete", 1)
@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
         end
     end
     if csid == 102 then
-        for i, v in pairs(chars) do
+        for i, v in chars:pairs() do
             v:setPos(0, 0, 0, 0, 54)
         end
     end
