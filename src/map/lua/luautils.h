@@ -109,7 +109,10 @@ namespace luautils
     int32 init();
     int32 free();
     int32 garbageCollect(); // performs a full garbage collecting cycle
-    void  print(std::string const& str);
+
+    template <typename T>
+    void  print(T const& item);
+
     auto  loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);

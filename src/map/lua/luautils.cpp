@@ -112,7 +112,7 @@ namespace luautils
         lua.do_string("if not bit then bit = require('bit') end");
 
         // Bind print() and math.random() globally
-        lua.set_function("print", &luautils::print);
+        lua["print"] = sol::overload(&luautils::print<double>, &luautils::print<std::string>, &luautils::print<bool>);
 
         // clang-format off
         lua["math"]["random"] =
@@ -255,9 +255,10 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    void print(std::string const& str)
+    template <typename T>
+    void print(T const& item)
     {
-        ShowScript("%s\n", str);
+        ShowScript(fmt::format("{}\n", item));
     }
 
     sol::function loadFunctionFromFile(std::string funcName, std::string fileName)
