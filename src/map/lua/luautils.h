@@ -110,7 +110,6 @@ namespace luautils
     int32 free();
     int32 garbageCollect(); // performs a full garbage collecting cycle
     void  print(std::string const& str);
-    int32 prepFile(int8*, const char*);
     auto  loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);
