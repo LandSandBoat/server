@@ -3935,11 +3935,13 @@ uint16 CLuaBaseEntity::getModelId()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setModelId(uint16 modelId, uint8 slot = 0)
+void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        switch (static_cast<SLOTTYPE>(slot))
+        SLOTTYPE slot = slotObj.is<uint8>() ? slotObj.as<SLOTTYPE>() : SLOT_MAIN;
+
+        switch (slot)
         {
             case SLOT_MAIN:
                 m_PBaseEntity->look.main = modelId;
