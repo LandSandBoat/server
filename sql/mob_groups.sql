@@ -3370,6 +3370,7 @@ INSERT INTO `mob_groups` VALUES (14637,1015,74,'Deviate_Bhoot',0,128,3105,0,0,75
 -- Bhaflau_Remnants (Zone 75)
 -- ------------------------------------------------------------
 
+-- Bhaflau Remnants I
 INSERT INTO `mob_groups` VALUES (1,642,75,'Carmine_Eruca',0,128,420,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2,412,75,'Bifrons',0,128,269,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3,4017,75,'Troll_Gemologist',0,128,152,0,0,0,0,0);
@@ -3396,13 +3397,43 @@ INSERT INTO `mob_groups` VALUES (23,2014,75,'Hunting_Wasp',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (24,765,75,'Colibri',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (25,1372,75,'Flux_Flan',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (26,967,75,'Demented_Jalaawa',0,128,604,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,714,75,'Chigoe',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,1477,75,'Gate_Widow',0,128,939,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,3651,75,'Skirmish_Pephredo',0,128,2267,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,4497,75,'Zebra_Zachary',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,3984,75,'Tragopan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,3120,75,'Peryton',0,128,1989,0,0,0,0,0);
 
-INSERT INTO `mob_groups` VALUES (2458,714,75,'Chigoe',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2464,1477,75,'Gate_Widow',0,128,939,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2468,3120,75,'Peryton',0,128,1989,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2470,3651,75,'Skirmish_Pephredo',0,128,2267,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2472,3984,75,'Tragopan',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2483,4497,75,'Zebra_Zachary',0,128,0,0,0,0,0,0);
+-- Bhaflau Remnants II
+INSERT INTO `mob_groups` VALUES (33,0,75,'Fly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,75,'Black_Pudding',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,0,75,'Moblin_Armsman',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,0,75,'Throat_Tearer_Tregotroq',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,0,75,'Wamouracampa',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,0,75,'Wandering_Wamoura',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,0,75,'Moblin_Poniardman',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,0,75,'Silent_Smotherer_Silak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,0,75,'Dahak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,0,75,'Smouldering_Dahak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,0,75,'Troll_Stoneworker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,0,75,'Troll_Cameist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (45,0,75,'Troll_Gemologist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,75,'Troll_Smelter',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,75,'Troll_Lapidarist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,75,'Troll_Engraver',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,75,'Trolls_Automaton',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,75,'Troll_Occultist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,75,'Troll_Pugilist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,75,'Troll_Spellbinder',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,75,'Troll_Guardian',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,75,'Troll_Huntsman',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,75,'Archaic_Gear',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,75,'Archaic_Rampart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,75,'Archaic_Gears',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,75,'Long-Bowed_Chariot',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,0,75,'Acrolith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,0,75,'Cerberus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,75,'Orthrus_Seether',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Silver_Sea_Remnants (Zone 76)
