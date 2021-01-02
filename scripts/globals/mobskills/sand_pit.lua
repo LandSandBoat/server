@@ -47,7 +47,7 @@ function onMobWeaponSkill(target, mob, skill)
     elseif (PoolID == 4046) then
         -- Tuchulcha (Sheep in Antlion's Clothing)
         -- Resets all enmity
-        for _, enmAlly in pairs(mob:getBattlefield():getAllies()) do
+        for _, enmAlly in mob:getBattlefield():getAllies():pairs() do
             mob:resetEnmity(enmAlly)
         end
         -- Removes all enfeebling effects

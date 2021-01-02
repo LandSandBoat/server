@@ -45,7 +45,7 @@ function doHealingBreath(player, threshold, breath)
         player:getPet():useJobAbility(breath, player)
     else
         local party = player:getParty()
-        for _, member in ipairs(party) do
+        for _, member in party:pairs() do
             if member:getHPP() < threshold and inBreathRange(member) then
                 player:getPet():useJobAbility(breath, member)
                 break
@@ -91,7 +91,7 @@ function onMobSpawn(mob)
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
                 local party = player:getParty()
-                for _, member in ipairs(party) do
+                for _, member in party:pairs() do
                     if doStatusBreath(member, player) then
                         break
                     end

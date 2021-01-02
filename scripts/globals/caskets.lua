@@ -115,7 +115,7 @@ local function timeElapsedCheck(npc)
     if npc:getLocalVar("[caskets]SPAWNTIME") then
         spawnTime = npc:getLocalVar("[caskets]SPAWNTIME")
     end
-    
+
     local lastSpawned = os.time() - spawnTime
 
     timeTable = convertTime(lastSpawned)
@@ -192,7 +192,7 @@ local function sendChestDropMessage(player)
 
     party = player:getAlliance()
 
-    for _, member in ipairs(party) do
+    for _, member in party:pairs() do
         if member:getZoneID() == player:getZoneID() then
             member:messageSpecial(dropMessage , 0)
         end

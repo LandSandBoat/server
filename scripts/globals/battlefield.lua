@@ -89,7 +89,7 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
         end
     end
 
-    for _, mob in pairs(mobs) do
+    for _, mob in mobs:pairs() do
         if mob:isAlive() then
             killedallmobs = false
             break
