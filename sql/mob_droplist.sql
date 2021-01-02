@@ -15522,7 +15522,7 @@ INSERT INTO `mob_droplist` VALUES (2876,0,0,1000,16679,140);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,940,30);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,1660,60);
 INSERT INTO `mob_droplist` VALUES (2877,0,0,1000,15386,190);
-INSERT INTO `mob_droplist` VALUES (2878,0,0,1000,2861,230);
+-- 2878: free
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,1000); -- Manes (Taffeta Cloth)
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,500); -- Manes (Taffeta Cloth)
 INSERT INTO `mob_droplist` VALUES (2879,0,0,1000,1279,330); -- Manes (Taffeta Cloth)
