@@ -19,7 +19,7 @@ function onTrigger(player, npc)
     else
         player:showText(npc, ID.text.BIN_STEJIHNA_OPEN_DIALOG)
 
-        local rank = getNationRank(tpz.nation.WINDURST)
+        local rank = GetNationRank(tpz.nation.WINDURST)
         if rank ~= 3 then
             table.insert(stock, 1840) --Semolina
             table.insert(stock, 1840)

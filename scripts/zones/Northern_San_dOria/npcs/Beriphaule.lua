@@ -14,7 +14,7 @@ function onTrigger(player, npc)
 
     local new_nation = tpz.nation.SANDORIA
     local old_nation = player:getNation()
-    local rank = getNationRank(new_nation)
+    local rank = GetNationRank(new_nation)
 
     if (old_nation == new_nation) then
         player:startEvent(608, 0, 0, 0, old_nation)
@@ -47,7 +47,7 @@ function onEventFinish(player, csid, option)
 
     if (csid == 606 and option == 1) then
         local new_nation = tpz.nation.SANDORIA
-        local rank = getNationRank(new_nation)
+        local rank = GetNationRank(new_nation)
         local cost = 0
 
         if (rank == 1) then
