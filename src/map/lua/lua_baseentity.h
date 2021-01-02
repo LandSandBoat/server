@@ -173,12 +173,13 @@ public:
     void warp();                                                              // Returns Character to home point
     void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)
 
-    void addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
-    auto getTeleport(uint8 type) -> sol::lua_value;                             // Get unlocked teleport means
-    bool hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
-    void setTeleportMenu(uint16 type, sol::table const& favs);                  // Set favorites or menu layout preferences for homepoints or survival guides
-    auto getTeleportMenu(uint8 type) -> std::vector<uint8>;                     // Get favorites and menu layout preferences
-    void setHomePoint();                                                        // Sets character's homepoint
+    void   addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
+    uint32 getTeleport(uint8 type);                                               // Get unlocked teleport means
+    auto   getTeleportTable(uint8 type, sol::this_state ts) -> sol::table;
+    bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
+    void   setTeleportMenu(uint16 type, sol::table const& favs);                  // Set favorites or menu layout preferences for homepoints or survival guides
+    auto   getTeleportMenu(uint8 type) -> std::vector<int32>;                     // Get favorites and menu layout preferences
+    void   setHomePoint();                                                        // Sets character's homepoint
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
