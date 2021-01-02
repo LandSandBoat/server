@@ -13,7 +13,7 @@ end
 function onTrigger(player, npc)
     local newNation = tpz.nation.WINDURST
     local oldNation = player:getNation()
-    local rank = getNationRank(newNation)
+    local rank = GetNationRank(newNation)
 
     if oldNation == newNation then
         player:startEvent(10004, 0, 0, 0, oldNation)
@@ -45,7 +45,7 @@ end
 function onEventFinish(player, csid, option)
     if csid == 10002 and option == 1 then
         local newNation = tpz.nation.WINDURST
-        local rank = getNationRank(newNation)
+        local rank = GetNationRank(newNation)
         local cost = 0
 
         if rank == 1 then

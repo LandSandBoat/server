@@ -147,9 +147,9 @@ namespace luautils
         set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
         set_function("getRegionOwner", &luautils::GetRegionOwner);
         set_function("getRegionInfluence", &luautils::GetRegionInfluence);
-        set_function("getNationRank", &luautils::getNationRank);
-        set_function("getConquestBalance", &luautils::getConquestBalance);
-        set_function("isConquestAlliance", &luautils::isConquestAlliance);
+        set_function("getNationRank", &luautils::GetNationRank);
+        set_function("getConquestBalance", &luautils::GetConquestBalance);
+        set_function("isConquestAlliance", &luautils::IsConquestAlliance);
         set_function("spawnMob", &luautils::SpawnMob);
         set_function("despawnMob", &luautils::DespawnMob);
         set_function("getPlayerByName", &luautils::GetPlayerByName);
@@ -388,7 +388,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    uint8 getNationRank(uint8 nation)
+    uint8 GetNationRank(uint8 nation)
     {
         uint8 balance = conquest::GetBalance();
         switch (nation)
@@ -408,12 +408,12 @@ namespace luautils
         }
     }
 
-    uint8 getConquestBalance()
+    uint8 GetConquestBalance()
     {
         return conquest::GetBalance();
     }
 
-    bool isConquestAlliance()
+    bool IsConquestAlliance()
     {
         return conquest::IsAlliance();
     }
