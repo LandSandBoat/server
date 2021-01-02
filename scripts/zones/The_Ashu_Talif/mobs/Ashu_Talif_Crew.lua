@@ -8,14 +8,14 @@ local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 
 function onMobEngaged(mob, target)
     local allies = mob:getInstance():getAllies()
-    for i, v in pairs(allies) do
+    for i, v in allies:pairs() do
         if (v:isAlive()) then
             v:setLocalVar("ready", 1)
         end
     end
 
     local mobs = mob:getInstance():getMobs()
-    for i, v in pairs(mobs) do
+    for i, v in mobs:pairs() do
         if(v:isAlive()) then
             v:setLocalVar("ready", 1)
         end

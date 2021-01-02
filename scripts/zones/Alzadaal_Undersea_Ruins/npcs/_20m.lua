@@ -82,7 +82,7 @@ function onEventUpdate(player, csid, option, target)
     if pathOfDarkness == 1 then
 
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getID() ~= player:getID() then
                     if v:getCurrentMission(TOAU) < tpz.mission.id.toau.PATH_OF_DARKNESS then
                         player:messageText(target, ID.text.MEMBER_NO_REQS, false)
@@ -101,7 +101,7 @@ function onEventUpdate(player, csid, option, target)
     elseif nashmeirasPlea == 1 then
 
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getID() ~= player:getID() then
                     if v:getCurrentMission(TOAU) < tpz.mission.id.toau.NASHMEIRAS_PLEA then
                         player:messageText(target, ID.text.MEMBER_NO_REQS, false)
@@ -120,7 +120,7 @@ function onEventUpdate(player, csid, option, target)
     else
 
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getID() ~= player:getID() then
                     if not v:hasKeyItem(tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS) and v:getCurrentAssault() == assaultid then
                         player:messageText(target, ID.text.MEMBER_NO_REQS, false)
@@ -172,7 +172,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(116, 2)

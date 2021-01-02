@@ -29,7 +29,7 @@ function onEventUpdate(player, csid, option, target)
     local party = player:getParty()
     if player:getLocalVar("theblackcoffinfight") == 1 then
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if not v:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) then
                     player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
@@ -47,7 +47,7 @@ function onEventUpdate(player, csid, option, target)
 
         elseif player:getLocalVar("againstalloddsfight") == 1 then
         if (party ~= nil) then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
                     player:messageText(target, ID.text.MEMBER_TOO_FAR, false)
                     player:instanceEntry(target, 1)
@@ -75,7 +75,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if (party ~= nil) then
-            for i, v in ipairs(party) do
+            for i, v in party:pairs() do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(90) -- wrong csid, yet better than nothing

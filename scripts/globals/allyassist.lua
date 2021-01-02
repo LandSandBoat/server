@@ -17,7 +17,7 @@ tpz.ally =
         local allies = {}
 
         if entity:getBattlefield() ~= nil then
-            mobs = entity:getBattlefield():getEnemies()
+            mobs = entity:getBattlefield():getMobs()
             players = entity:getBattlefield():getPlayers()
         elseif entity:getInstance() ~= nil then
             mobs = entity:getInstance():getMobs()
@@ -26,7 +26,7 @@ tpz.ally =
 
         -- print("start inserting mob")
         local targetMobs = {}
-        for i, mob in pairs(mobs) do
+        for i, mob in mobs:pairs() do
             if mob:isSpawned() and mob:isAlive() then
                 if mob:isAlly() then
                     table.insert(allies, mob)

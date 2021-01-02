@@ -51,7 +51,7 @@ function onInstanceProgressUpdate(instance, progress)
 
         local npcs = instance:getNpcs()
 
-        for i, v in pairs(npcs) do
+        for i, v in npcs:pairs() do
             if(v:getID() == ID.npc._259) then
                 v:setAnimation(8)
             end

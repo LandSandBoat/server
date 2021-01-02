@@ -94,7 +94,7 @@ function onUseAbility(player, target, ability)
         local i = 0 -- highest existing index
         local copyi = 0
 
-        for _, effect in ipairs(effects) do
+        for _, effect in effects:pairs() do
             if bit.band(effect:getFlag(), tpz.effectFlag.EMPATHY) == tpz.effectFlag.EMPATHY then
                 validEffects[i+1] = effect
                 i = i + 1

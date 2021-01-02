@@ -61,7 +61,7 @@ end
 
 function onMobDeath(mob, player, isKiller)
     mob:getBattlefield():lose()
-        for _, player in ipairs(mob:getBattlefield():getPlayers()) do
+        for _, player in mob:getBattlefield():getPlayers():pairs() do
             player:messageSpecial(ID.text.UNABLE_TO_PROTECT)
         end
 end
