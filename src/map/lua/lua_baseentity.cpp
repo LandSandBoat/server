@@ -9129,7 +9129,12 @@ std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusI
         PStatusEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(effect_StatusID);
     }
 
-    return std::make_shared<CLuaStatusEffect>(PStatusEffect);
+    if (PStatusEffect)
+    {
+        return std::make_shared<CLuaStatusEffect>(PStatusEffect);
+    }
+
+    return nullptr;
 }
 
 /************************************************************************
