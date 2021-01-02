@@ -772,7 +772,7 @@ namespace luautils
      *  Spawn a mob using mob ID. Returns that mob.                          *
      *                                                                       *
      ************************************************************************/
-    std::shared_ptr<CLuaBaseEntity> SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3)
+    std::optional<CLuaBaseEntity> SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3)
     {
         TracyZoneScoped;
 
@@ -816,9 +816,10 @@ namespace luautils
         else
         {
             ShowDebug(CL_RED "SpawnMob: mob <%u> not found\n" CL_RESET, mobid);
+            return std::nullopt;
         }
 
-        return std::make_shared<CLuaBaseEntity>(PMob);
+        return std::optional<CLuaBaseEntity>(PMob);
     }
 
     /************************************************************************
@@ -862,16 +863,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::shared_ptr<CLuaBaseEntity> GetPlayerByName(std::string name)
+    std::optional<CLuaBaseEntity> GetPlayerByName(std::string name)
     {
         CCharEntity* PTargetChar = zoneutils::GetCharByName((int8*)name.c_str());
 
         if (PTargetChar != nullptr)
         {
-            return std::make_shared<CLuaBaseEntity>(PTargetChar);
+            return std::optional<CLuaBaseEntity>(PTargetChar);
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 
     /************************************************************************
@@ -880,16 +881,16 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::shared_ptr<CLuaBaseEntity> GetPlayerByID(uint32 pid)
+    std::optional<CLuaBaseEntity> GetPlayerByID(uint32 pid)
     {
         CCharEntity* PTargetChar = zoneutils::GetChar(pid);
 
         if (PTargetChar != nullptr)
         {
-            return std::make_shared<CLuaBaseEntity>(PTargetChar);
+            return std::optional<CLuaBaseEntity>(PTargetChar);
         }
 
-        return nullptr;
+        return std::nullopt;
     }
 
     /*******************************************************************************
@@ -4107,25 +4108,25 @@ namespace luautils
      *                                                                          *
      ***************************************************************************/
 
-    std::shared_ptr<CLuaItem> GetReadOnlyItem(uint32 id)
+    std::optional<CLuaItem> GetReadOnlyItem(uint32 id)
     {
         TracyZoneScoped;
         CItem* PItem = itemutils::GetItemPointer(id);
-        return PItem ? std::make_shared<CLuaItem>(PItem) : nullptr;
+        return PItem ? std::optional<CLuaItem>(PItem) : std::nullopt;
     }
 
-    std::shared_ptr<CLuaAbility> GetAbility(uint16 id)
+    std::optional<CLuaAbility> GetAbility(uint16 id)
     {
         TracyZoneScoped;
         CAbility* PAbility = ability::GetAbility(id);
-        return PAbility ? std::make_shared<CLuaAbility>(PAbility) : nullptr;
+        return PAbility ? std::optional<CLuaAbility>(PAbility) : std::nullopt;
     }
 
-    std::shared_ptr<CLuaSpell> GetSpell(uint16 id)
+    std::optional<CLuaSpell> GetSpell(uint16 id)
     {
         TracyZoneScoped;
         CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(id));
-        return PSpell ? std::make_shared<CLuaSpell>(PSpell) : nullptr;
+        return PSpell ? std::optional<CLuaSpell>(PSpell) : std::nullopt;
     }
 
     int32 UpdateServerMessage()

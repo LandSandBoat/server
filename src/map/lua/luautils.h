@@ -117,8 +117,8 @@ namespace luautils
     auto  loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);
-    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>;
-    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::shared_ptr<CLuaBaseEntity>;
+    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
@@ -129,14 +129,14 @@ namespace luautils
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
-    auto GetReadOnlyItem(uint32 id) -> std::shared_ptr<CLuaItem>; // Returns a read only lookup item object of the specified ID
-    auto GetAbility(uint16 id) -> std::shared_ptr<CLuaAbility>;
-    auto GetSpell(uint16 id) -> std::shared_ptr<CLuaSpell>;
+    auto GetReadOnlyItem(uint32 id) -> std::optional<CLuaItem>; // Returns a read only lookup item object of the specified ID
+    auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;
+    auto GetSpell(uint16 id) -> std::optional<CLuaSpell>;
 
-    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::shared_ptr<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
     void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
-    auto   GetPlayerByName(std::string name) -> std::shared_ptr<CLuaBaseEntity>;
-    auto   GetPlayerByID(uint32 pid) -> std::shared_ptr<CLuaBaseEntity>;
+    auto   GetPlayerByName(std::string name) -> std::optional<CLuaBaseEntity>;
+    auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
     int32  GetMagianTrial();
     int32  GetMagianTrialsWithParent();
     uint32 JstMidnight();
