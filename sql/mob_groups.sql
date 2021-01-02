@@ -252,6 +252,8 @@ INSERT INTO `mob_groups` VALUES (50,2043,5,'Ice_Elemental',330,4,1347,0,0,76,77,
 INSERT INTO `mob_groups` VALUES (51,2043,5,'Ice_Elemental',330,4,1347,0,0,83,84,0);
 INSERT INTO `mob_groups` VALUES (52,994,5,'Demons_Elemental',0,128,0,0,0,66,66,0);
 INSERT INTO `mob_groups` VALUES (53,0,5,'Camahueto',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,5,'Isarukitsck',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,5,'Little_Wingman',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Bearclaw_Pinnacle (Zone 6)
@@ -323,6 +325,11 @@ INSERT INTO `mob_groups` VALUES (51,80,7,'Alastor_Antlion',0,128,45,50000,10000,
 INSERT INTO `mob_groups` VALUES (52,104,7,'Ambusher_Antlion',0,32,61,0,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (53,71,7,'Air_Elemental',330,4,38,0,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (54,1160,7,'Earth_Elemental',330,4,733,0,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (55,0,7,'Fjalar',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,7,'Bloody_Skull',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,7,'Muut',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,5724,7,'Muuts_Hound_Warrior',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,5723,7,'Muuts_Sacrifice',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Boneyard_Gully (Zone 8)
@@ -858,8 +865,9 @@ INSERT INTO `mob_groups` VALUES (76,4691,24,'Gloam_Servitor_mage',0,128,0,0,9999
 INSERT INTO `mob_groups` VALUES (77,4690,24,'Gloam_Servitor_melee',0,128,0,0,0,101,102,0);
 INSERT INTO `mob_groups` VALUES (78,3912,24,'Thunder_Elemental',330,4,2410,0,0,62,62,0);
 INSERT INTO `mob_groups` VALUES (79,0,24,'Sengann',0,128,0,0,0,58,58,0);
-INSERT INTO `mob_groups` VALUES (80,0,24,'Immanibugard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (81,0,24,'Vermillion_Fishfly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (80,4856,24,'Immanibugard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (81,6738,24,'Vermillion_Fishfly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (82,0,24,'Yal-un_Eke',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Misareaux_Coast (Zone 25)
@@ -924,10 +932,10 @@ INSERT INTO `mob_groups` VALUES (56,484,25,'Boggelmann',0,128,0,7600,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (57,98,25,'Alsha',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (58,1792,25,'Gration',0,128,1218,30000,0,79,79,0);
 INSERT INTO `mob_groups` VALUES (59,4505,25,'Ziphius',0,128,2801,0,0,60,62,0);
-INSERT INTO `mob_groups` VALUES (60,0,25,'Tsui-Goab',0,128,0,0,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (61,0,25,'Bloodswiller_Fly',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (62,0,25,'Tiyanak',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (63,0,25,'Volatile_Cluster',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,6739,25,'Tsui-Goab',0,128,0,0,0,65,65,0);
+INSERT INTO `mob_groups` VALUES (61,6740,25,'Bloodswiller_Fly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,6741,25,'Tiyanak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,6742,25,'Volatile_Cluster',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Phomiuna_Aqueducts (Zone 27)
@@ -1108,6 +1116,10 @@ INSERT INTO `mob_groups` VALUES (6,2293,32,'Kukki-Chebukki',0,128,0,50000,0,75,7
 INSERT INTO `mob_groups` VALUES (7,710,32,'Cherukiki',0,128,0,50000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (8,2973,32,'Omega_HTBF',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (9,4083,32,'Ultima_HTBF',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (10,3875,32,'Tenzen',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,2492,32,'Makki-Chebukki',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,2293,32,'Kukki-Chebukki',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (13,710,32,'Cherukiki',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- AlTaieu (Zone 33)
@@ -2127,6 +2139,7 @@ INSERT INTO `mob_groups` VALUES (59,2247,42,'Kindreds_Wyvern',0,128,0,3300,1000,
 INSERT INTO `mob_groups` VALUES (60,4149,42,'Vanguard_Eye',0,128,2561,2000,2000,80,82,0);
 INSERT INTO `mob_groups` VALUES (61,5121,42,'Prototype_Eye',0,128,0,2000,2000,80,82,0);
 INSERT INTO `mob_groups` VALUES (62,6052,42,'Diabolos_Somnus',0,128,3137,15000,0,105,105,0);
+INSERT INTO `mob_groups` VALUES (63,6743,42,'Diaboloss_Vestige',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Abdhaljs_Isle-Purgonorgo (Zone 44)
@@ -2454,9 +2467,9 @@ INSERT INTO `mob_groups` VALUES (105,643,51,'Carmine_Sentinel',0,128,0,0,0,68,72
 INSERT INTO `mob_groups` VALUES (106,4393,51,'Xarhorkur_the_Claviger',0,128,0,0,0,85,90,0);
 INSERT INTO `mob_groups` VALUES (107,4524,51,'Zurmurwur_the_Ruthless',0,128,0,0,0,85,90,0);
 INSERT INTO `mob_groups` VALUES (108,4014,51,'Troll_Destroyer',0,128,0,0,0,75,80,0);
-INSERT INTO `mob_groups` VALUES (109,0,51,'Kubool_Jas_Mhuufya',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (110,0,51,'Vigilant_Kubool_Ja',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (111,0,51,'Thuban',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (109,6744,51,'Kubool_Jas_Mhuufya',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (110,6745,51,'Vigilant_Kubool_Ja',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (111,6746,51,'Thuban',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- Bhaflau_Thickets (Zone 52)
