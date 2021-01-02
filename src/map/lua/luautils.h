@@ -108,7 +108,8 @@ namespace luautils
 
     int32 init();
     int32 free();
-    int32 garbageCollect(); // performs a full garbage collecting cycle
+    int32 garbageCollectStep();
+    int32 garbageCollectFull();
 
     template <typename T>
     void  print(T const& item);

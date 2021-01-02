@@ -142,6 +142,8 @@ namespace luautils
             lua.set_function(upperName, func);
         };
 
+        set_function("garbageCollectStep", &luautils::garbageCollectStep);
+        set_function("garbageCollectFull", &luautils::garbageCollectFull);
         set_function("getNPCByID", &luautils::GetNPCByID);
         set_function("getMobByID", &luautils::GetMobByID);
         set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
@@ -234,15 +236,37 @@ namespace luautils
         return 0;
     }
 
-    int32 garbageCollect()
+    int32 garbageCollectStep()
     {
         TracyZoneScoped;
         TracyReportLuaMemory(LuaHandle);
 
-        int32 top = lua_gettop(LuaHandle);
-        ShowDebug(CL_CYAN "[Lua] Garbage Collected. Current State Top: %d\n" CL_RESET, top);
+        lua.step_gc(10); // LUA_GCSTEP 10 (performs an incremental step of garbage collection. Step size 10kb.)
 
-        lua_gc(LuaHandle, LUA_GCSTEP, 10);
+        // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
+        //       this request!
+
+        ShowDebug(CL_CYAN "[Lua] Garbage Collected (Step)\n" CL_RESET);
+        ShowDebug(CL_CYAN "[Lua] Current State Top: %d, Total Memory Used: %dkb\n" CL_RESET, lua_gettop(LuaHandle), lua.memory_used() / 1024);
+
+        TracyReportLuaMemory(LuaHandle);
+
+        return 0;
+    }
+
+    int32 garbageCollectFull()
+    {
+        TracyZoneScoped;
+        TracyReportLuaMemory(LuaHandle);
+
+        auto before_mem_kb = lua.memory_used() / 1024;
+
+        lua.collect_garbage(); // LUA_GCCOLLECT (performs a full garbage-collection cycle.)
+
+        auto after_mem_kb = lua.memory_used() / 1024;
+
+        ShowDebug(CL_CYAN "[Lua] Garbage Collected (Full)\n" CL_RESET);
+        ShowDebug(CL_CYAN "[Lua] Current State Top: %d, Total Memory Used: %dkb -> %dkb\n" CL_RESET, lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
 
         TracyReportLuaMemory(LuaHandle);
 
@@ -291,7 +315,7 @@ namespace luautils
         }
     }
 
-    std::shared_ptr<CLuaBaseEntity> GetNPCByID(uint32 npcid, sol::object const& instanceObj)
+    std::optional<CLuaBaseEntity> GetNPCByID(uint32 npcid, sol::object const& instanceObj)
     {
         TracyZoneScoped;
 
@@ -311,7 +335,13 @@ namespace luautils
             PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
         }
 
-        return std::make_shared<CLuaBaseEntity>(PNpc);
+        if (!PNpc)
+        {
+            ShowWarning("luautils::GetNPCByID NPC doesn't exist (%d)\n", npcid);
+            return std::nullopt;
+        }
+
+        return std::optional<CLuaBaseEntity>(PNpc);
     }
 
     /************************************************************************
@@ -320,7 +350,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::shared_ptr<CLuaBaseEntity> GetMobByID(uint32 mobid, sol::object const& instanceObj)
+    std::optional<CLuaBaseEntity> GetMobByID(uint32 mobid, sol::object const& instanceObj)
     {
         TracyZoneScoped;
 
@@ -344,10 +374,10 @@ namespace luautils
         if (!PMob)
         {
             ShowWarning("luautils::GetMobByID Mob doesn't exist (%d)\n", mobid);
-            return nullptr;
+            return std::nullopt;
         }
 
-        return std::make_shared<CLuaBaseEntity>(PMob);
+        return std::optional<CLuaBaseEntity>(PMob);
     }
 
     /************************************************************************
