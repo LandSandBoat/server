@@ -6243,6 +6243,16 @@ INSERT INTO `mob_groups` VALUES (151,6736,95,'Kindred_Incantor',0,128,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (152,6737,95,'Blurry_Eye',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (153,3387,95,'Romaa_Mihgo',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (154,0,95,'Protective_Ward',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (155,0,95,'Yilbegan',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (156,0,95,'Orcus',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (157,0,95,'Farruca_Fly',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (158,0,95,'Jyeshtha',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (159,0,95,'Rummager_Beetle',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (160,0,95,'Raker_Bee',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (161,0,95,'Kayeel-Payeel',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (162,0,95,'Ice_Fiend',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (163,0,95,'Thunder_Fiend',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (164,0,95,'Aquarian_Caster',0,128,0,0,0,70,70,0);
 
 -- ------------------------------------------------------------
 -- Fort_Karugo-Narugo_[S] (Zone 96)
