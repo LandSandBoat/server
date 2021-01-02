@@ -40,7 +40,7 @@ CLuaZone::CLuaZone(CZone* PZone)
  *                                                                       *
  ************************************************************************/
 
-void CLuaZone::registerRegion(uint16 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
+void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
     bool circleRegion = false;
     if (approximatelyEqual(x2, 0.0f) &&
@@ -50,11 +50,11 @@ void CLuaZone::registerRegion(uint16 RegionID, float x1, float y1, float z1, flo
         circleRegion = true; // Parameters were 0, we must be a circle.
     }
 
-    CRegion* Region = new CRegion((uint32)RegionID, circleRegion);
+    CRegion* Region = new CRegion(RegionID, circleRegion);
 
     // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
     Region->SetULCorner(x1, y1, z1);
-    Region->SetLRCorner(x2, y1, z2);
+    Region->SetLRCorner(x2, y2, z2);
 
     m_pLuaZone->InsertRegion(Region);
 }
