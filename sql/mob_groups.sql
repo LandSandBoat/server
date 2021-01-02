@@ -2587,7 +2587,7 @@ INSERT INTO `mob_groups` VALUES (18,1112,54,'Draugars_Wyvern',0,128,0,0,0,67,75,
 INSERT INTO `mob_groups` VALUES (19,2154,54,'Jnun',960,0,1408,0,0,77,80,0);
 INSERT INTO `mob_groups` VALUES (20,2890,54,'Nipper',960,0,93,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (21,2332,54,'Lamia_Fatedealer',960,0,1490,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (22,3294,54,'Qutrub',960,0,2885,0,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (22,3294,54,'Qutrub_drk',960,0,2885,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (23,2366,54,'Lamie_No8',259200,0,0,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (24,258,54,'Ashakku',960,0,174,0,0,71,74,0);
 INSERT INTO `mob_groups` VALUES (25,3231,54,'Purgatory_Bat',960,0,401,0,0,72,73,0);
@@ -2660,6 +2660,7 @@ INSERT INTO `mob_groups` VALUES (91,2920,54,'Nuhn',0,128,1828,36000,0,86,86,0);
 INSERT INTO `mob_groups` VALUES (92,5198,54,'Dimgruzub',0,128,0,0,5000,95,95,0);
 INSERT INTO `mob_groups` VALUES (93,5199,54,'Assassins_Apprentice',0,128,0,0,5000,80,80,0);
 INSERT INTO `mob_groups` VALUES (94,6673,54,'Lamia_Palace_Guard',960,0,0,0,0,81,82,0);
+INSERT INTO `mob_groups` VALUES (95,6747,54,'Qutrub_blm',960,0,2885,0,0,72,74,0);
 
 -- ------------------------------------------------------------
 -- Ilrusi_Atoll (Zone 55)
