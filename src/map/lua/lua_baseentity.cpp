@@ -3221,7 +3221,7 @@ void CLuaBaseEntity::createShop(uint8 size, sol::object const& arg1)
     PChar->Container->Clean();
     PChar->Container->setSize(size + 1);
 
-    if (arg1 != sol::nil)
+    if (arg1 != sol::nil && arg1.is<double>())
     {
         PChar->Container->setType(arg1.as<uint8>());
     }
@@ -3236,12 +3236,13 @@ void CLuaBaseEntity::createShop(uint8 size, sol::object const& arg1)
  *  Notes   : Use with createShop() - 16 Max Items in Shop
  ************************************************************************/
 
-void CLuaBaseEntity::addShopItem(uint16 itemID, uint32 price, sol::object const& arg2, sol::object const& arg3)
+void CLuaBaseEntity::addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
     uint8        slotID = PChar->Container->getItemsCount();
+    uint32       price  = static_cast<uint32>(rawPrice);
 
     PChar->Container->setItem(slotID, itemID, 0, price);
 

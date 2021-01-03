@@ -198,10 +198,10 @@ public:
     bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
     void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
 
-    void createShop(uint8 size, sol::object const& arg1);                                            // Prepare the container for work of shop ??
-    void addShopItem(uint16 itemID, uint32 price, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
-    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                              // Gets current GP item id and max points
-    bool breakLinkshell(std::string const& lsname);                                                  // Breaks all pearls/sacks
+    void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
+    void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
+    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                                 // Gets current GP item id and max points
+    bool breakLinkshell(std::string const& lsname);                                                     // Breaks all pearls/sacks
 
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
