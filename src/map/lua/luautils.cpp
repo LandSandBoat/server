@@ -3007,14 +3007,14 @@ namespace luautils
             return 87;
         }
 
-        auto result0 = result.get<int32>(-2);
-        auto result1 = result.get<int32>(-2);
-        if (result0 != 0)
+        auto result0 = result.get<int32>(0); // Message (0 = None)
+        auto result1 = result.get<int32>(1);
+        if (result1 != 0)
         {
             *PMsgTarget = (CBaseEntity*)PTarget;
         }
 
-        return result1 ? result1 : -5;
+        return result0 ? result0 : 0; // Default to no Message
     }
 
     /***********************************************************************
@@ -3084,6 +3084,7 @@ namespace luautils
         auto onUseAbility = loadFunctionFromFile("onUseAbility", filename);
         if (!onUseAbility.valid())
         {
+            ShowWarning("luautils::onUseAbility - Ability %s not found.\n", PAbility->getName());
             return 0;
         }
 
