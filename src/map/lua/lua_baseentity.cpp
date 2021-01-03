@@ -5798,25 +5798,24 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, sol::
  *  Notes   : returns nil if player does not have the record.
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getEminenceProgress(uint16 recordID)
+std::optional<uint32> CLuaBaseEntity::getEminenceProgress(uint16 recordID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        return 0;
+        return std::nullopt;
     }
 
     auto*  PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint32 progress = 0;
 
     if (roeutils::HasEminenceRecord(PChar, recordID))
     {
-        progress = roeutils::GetEminenceRecordProgress(PChar, recordID);
+        return roeutils::GetEminenceRecordProgress(PChar, recordID);
     }
 
-    // TODO: Verify that 0-return is acceptable in previous nil-cases
-    return progress;
+    // TODO: Verify that 0-return is acceptable in previous nil-cases (Its not)
+    return std::nullopt;
 }
 
 /************************************************************************
