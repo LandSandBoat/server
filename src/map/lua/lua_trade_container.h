@@ -39,7 +39,7 @@ public:
     }
 
     uint32 getGil();
-    auto   getItem(sol::object const& SlotIDObj) -> std::shared_ptr<CLuaItem>;
+    auto   getItem(sol::object const& SlotIDObj) -> std::optional<CLuaItem>;
     uint16 getItemId(sol::object const& SlotIDObj);
     uint16 getItemSubId(sol::object const& SlotIDObj);
     uint32 getItemQty(uint16 itemID);

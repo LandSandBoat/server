@@ -24,35 +24,35 @@ function onMobSkillCheck(target,mob,skill)
         mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
         local battlefield = mob:getBattlefield()
         local players = battlefield:getPlayers()
-        for _, member in players:pairs() do
+        for _, member in pairs(players) do
             member:messageSpecial(ID.text.CITADEL_BASE)
         end
         mob:timer(10000, function(mob)
-            for _, member in players:pairs() do
+            for _, member in pairs(players) do
                 member:messageSpecial(ID.text.CITADEL_BASE+1)
             end
             mob:timer(10000, function(mob)
-                for _, member in players:pairs() do
+                for _, member in pairs(players) do
                     member:messageSpecial(ID.text.CITADEL_BASE+2)
                 end
                 mob:timer(5000, function(mob)
-                    for _, member in players:pairs() do
+                    for _, member in pairs(players) do
                         member:messageSpecial(ID.text.CITADEL_BASE+3)
                     end
                     mob:timer(1000, function(mob)
-                        for _, member in players:pairs() do
+                        for _, member in pairs(players) do
                             member:messageSpecial(ID.text.CITADEL_BASE+4)
                         end
                         mob:timer(1000, function(mob)
-                            for _, member in players:pairs() do
+                            for _, member in pairs(players) do
                                 member:messageSpecial(ID.text.CITADEL_BASE+5)
                             end
                             mob:timer(1000, function(mob)
-                                for _, member in players:pairs() do
+                                for _, member in pairs(players) do
                                     member:messageSpecial(ID.text.CITADEL_BASE+6)
                                 end
                                 mob:timer(1000, function(mob)
-                                    for _, member in players:pairs() do
+                                    for _, member in pairs(players) do
                                         member:messageSpecial(ID.text.CITADEL_BASE+7)
                                     end
                                     mob:timer(1000, function(mob)

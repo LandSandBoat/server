@@ -13,7 +13,7 @@ end
 
 function onMobDeath(mob, player, isKiller)
     local party = player:getParty()
-    for _, member in party:pairs() do
+    for _, member in pairs(party) do
         if member:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LIONS_ROAR then
             member:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LIONS_ROAR)
             member:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EDDIES_OF_DESPAIR_I)

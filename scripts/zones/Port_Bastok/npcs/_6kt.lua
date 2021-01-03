@@ -34,7 +34,7 @@ function onTimeTrigger(npc, triggerID)
         local players = npc:getZone():getPlayers()
 
         --If a player is on the bridge, kick them off
-        for _, player in players:pairs() do
+        for _, player in pairs(players) do
             if player:getPlayerRegionInZone() == 2 then
                 player:startEvent(70)
             end

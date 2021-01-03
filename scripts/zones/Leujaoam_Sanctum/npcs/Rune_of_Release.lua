@@ -34,7 +34,7 @@ function onEventFinish(player, csid, option)
         if (id == 1) then
             points = 1000 - math.max(0, playerpoints)
         end
-        for i, v in chars:pairs() do
+        for i, v in pairs(chars) do
             v:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
             v:addAssaultPoint(LEUJAOAM_ASSAULT_POINT, points)
             v:setCharVar("AssaultComplete", 1)

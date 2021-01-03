@@ -41,7 +41,7 @@ uint32 CLuaTradeContainer::getGil()
     return itemID == 0xFFFF ? m_pMyTradeContainer->getQuantity(0) : 0;
 }
 
-std::shared_ptr<CLuaItem> CLuaTradeContainer::getItem(sol::object const& SlotIDObj)
+std::optional<CLuaItem> CLuaTradeContainer::getItem(sol::object const& SlotIDObj)
 {
     uint8 SlotID = 0;
     if (SlotIDObj.is<uint8>())
@@ -51,10 +51,10 @@ std::shared_ptr<CLuaItem> CLuaTradeContainer::getItem(sol::object const& SlotIDO
 
     if (auto PItem = m_pMyTradeContainer->getItem(SlotID))
     {
-        return std::make_shared<CLuaItem>(PItem);
+        return std::optional<CLuaItem>(PItem);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 //======================================================//

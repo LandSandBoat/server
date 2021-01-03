@@ -77,11 +77,11 @@ public:
     void entityVisualPacket(std::string const& command, sol::object const& entity);
     void entityAnimationPacket(const char* command);
 
-    void startEvent(sol::object const& EventIDObj, sol::variadic_args va);
+    void startEvent(uint32 EventID, sol::variadic_args va);
     void startEventString(uint16 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
-    auto getEventTarget() -> std::shared_ptr<CLuaBaseEntity>;
+    auto getEventTarget() -> std::optional<CLuaBaseEntity>;
     void release(); // Stops event
 
     void  setFlag(uint32 flags);
@@ -92,7 +92,7 @@ public:
     // Object Identification
     uint32 getID();
     uint16 getShortID();
-    auto   getCursorTarget() -> std::shared_ptr<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
+    auto   getCursorTarget() -> std::optional<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
 
     uint8 getObjType();
     bool  isPC();
@@ -150,7 +150,7 @@ public:
     bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
     bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
 
-    auto   getZone(sol::object const& arg0) -> std::shared_ptr<CLuaZone>; // Get Entity zone
+    auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>;   // Get Entity zone
     uint16 getZoneID();                                                   // Get Entity zone ID
     auto   getZoneName() -> const char*;                                  // Get Entity zone name
     bool   isZoneVisited(uint16 zone);                                    // true если указанная зона посещалась персонажем ранее
@@ -178,7 +178,7 @@ public:
     auto   getTeleportTable(uint8 type, sol::this_state ts) -> sol::table;
     bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
     void   setTeleportMenu(uint16 type, sol::table const& favs);                  // Set favorites or menu layout preferences for homepoints or survival guides
-    auto   getTeleportMenu(uint8 type) -> std::vector<int32>;                     // Get favorites and menu layout preferences
+    auto   getTeleportMenu(uint8 type) -> sol::table;                             // Get favorites and menu layout preferences
     void   setHomePoint();                                                        // Sets character's homepoint
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
@@ -189,7 +189,7 @@ public:
 
     // Items
     uint16 getEquipID(SLOTTYPE slot);                                // Gets the Item Id of the item in specified slot
-    auto   getEquippedItem(uint8 slot) -> std::shared_ptr<CLuaItem>; // Returns the item object from specified slot
+    auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;   // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location);      // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                           // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
@@ -226,7 +226,7 @@ public:
     void clearGearSetMods();                                         // Clears a characters gear set mods
 
     // Storing
-    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::shared_ptr<CLuaItem>; // returns item object player:getStorageItem(containerid, slotid, equipslotid)
+    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::optional<CLuaItem>; // returns item object player:getStorageItem(containerid, slotid, equipslotid)
     uint8 storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable);
     auto  getRetrievableItemsForSlip(uint16 slipId) -> sol::table;
     void  retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 extraId, uint8 extraData);
@@ -438,12 +438,12 @@ public:
     void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    auto   getParty() -> std::vector<CLuaBaseEntity>;
-    auto   getPartyWithTrusts() -> std::vector<CLuaBaseEntity>;
+    auto   getParty() -> sol::table;
+    auto   getPartyWithTrusts() -> sol::table;
     uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
     bool   hasPartyJob(uint8 job);
-    auto   getPartyMember(uint8 member, uint8 allianceparty) -> std::shared_ptr<CLuaBaseEntity>; // Get a character entity from another entity's party or alliance
-    auto   getPartyLeader() -> std::shared_ptr<CLuaBaseEntity>;
+    auto   getPartyMember(uint8 member, uint8 allianceparty) -> std::optional<CLuaBaseEntity>; // Get a character entity from another entity's party or alliance
+    auto   getPartyLeader() -> std::optional<CLuaBaseEntity>;
     uint32 getLeaderID(); // Get the id of the alliance/party leader *falls back to player id if no party*
     uint32 getPartyLastMemberJoinedTime();
     void   forMembersInRange(float range, sol::function function);
@@ -452,7 +452,7 @@ public:
     bool hasPartyEffect(uint16 effectid);       // Has Effect from all party members
     void removePartyEffect(uint16 effectid);    // Removes Effect from all party members
 
-    auto  getAlliance() -> std::vector<CLuaBaseEntity>;
+    auto  getAlliance() -> sol::table;
     uint8 getAllianceSize(); // Get the size of an entity's alliance
 
     void reloadParty();
@@ -464,7 +464,7 @@ public:
     bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
     // Instances
-    auto getInstance() -> std::shared_ptr<CLuaInstance>;
+    auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);
     void createInstance(uint8 instanceID, uint16 zoneID);
     void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
@@ -474,7 +474,7 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
 
     // Battlefields
-    auto  getBattlefield() -> std::shared_ptr<CLuaBattlefield>;                                           // returns CBattlefield* or nullptr if not available
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
     int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
     uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
     bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
@@ -509,7 +509,7 @@ public:
     void removeListener(std::string identifier);
     void triggerListener(std::string eventName, sol::variadic_args args);
 
-    auto getEntity(uint16 targetID) -> std::shared_ptr<CLuaBaseEntity>;
+    auto getEntity(uint16 targetID) -> std::optional<CLuaBaseEntity>;
     bool canChangeState();
 
     void wakeUp(); // wakes target if necessary
@@ -533,13 +533,13 @@ public:
     void  resetEnmity(CLuaBaseEntity* PEntity);              // resets enmity to player for specificed mob
     void  updateClaim(sol::object const& entity);            // Adds Enmity to player for specified mob and claims
     bool  hasEnmity();                                       // Does the player have any enmity at all from any source
-    auto  getNotorietyList() -> std::vector<CLuaBaseEntity>; // Returns a table with all of the entities on a chars notoriety list
+    auto  getNotorietyList() -> sol::table;                  // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::shared_ptr<CLuaStatusEffect>;
-    auto   getStatusEffects() -> std::vector<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, uint16 power);           // Returns true if the effect can be added
     bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID); // Checks to see if character has specified effect
@@ -589,11 +589,11 @@ public:
     uint16 getILvlMacc();
     bool   isSpellAoE(uint16 spellId);
 
-    int32 physicalDmgTaken(int32 damage, sol::object const& dmgType);
-    int32 magicDmgTaken(int32 damage, sol::object const& eleType);
-    int32 rangedDmgTaken(int32 damage, sol::object const& dmgType);
-    int32 breathDmgTaken(int32 damage);
-    void  handleAfflatusMiseryDamage(int32 damage);
+    int32 physicalDmgTaken(double damage, sol::variadic_args va);
+    int32 magicDmgTaken(double damage, sol::variadic_args va);
+    int32 rangedDmgTaken(double damage, sol::variadic_args va);
+    int32 breathDmgTaken(double damage);
+    void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
     int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1); // gets the damage of a single hit vs the specified mob
@@ -634,9 +634,9 @@ public:
     bool hasValidJugPetItem();
 
     bool   hasPet();                                    // returns true if the player has a pet
-    auto   getPet() -> std::shared_ptr<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
+    auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
     uint32 getPetID();                                  // If the entity has a pet, returns the PetID to identify pet type.
-    auto   getMaster() -> std::shared_ptr<CLuaBaseEntity>;
+    auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
 
     auto getPetName() -> const char*;
@@ -712,10 +712,10 @@ public:
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
 
-    auto getTarget() -> std::shared_ptr<CLuaBaseEntity>;
+    auto getTarget() -> std::optional<CLuaBaseEntity>;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
     auto getEnmityList() -> sol::table;
-    auto getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> std::shared_ptr<CLuaBaseEntity>; // true if TA target is available
+    auto getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> std::optional<CLuaBaseEntity>; // true if TA target is available
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 

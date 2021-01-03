@@ -89,7 +89,7 @@ function onPath(npc)
 
 
     if (progress == 0) then
-        for tid, player in chars:pairs() do
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
                 instance:setProgress(1)
                 npc:messageText(npc, Periqia.text.EXCALIACE_START)
@@ -98,7 +98,7 @@ function onPath(npc)
         end
     elseif (progress == 1) then
         local run = true
-        for tid, player in chars:pairs() do
+        for tid, player in pairs(chars) do
             if (npc:checkDistance(player) < 10) then
                 run = false
             end

@@ -54,7 +54,7 @@ function onMobSpawn(mob)
 
                 local chars = mob:getInstance():getChars()
 
-                for i, v in chars:pairs() do
+                for i, v in pairs(chars) do
                     local job = v:getMainJob()
 
                     if (job == 1 or job == 2 or (job >= 6 and job <= 10) or (job >=12 and job <=14) or (job >= 16 and job <=19 )) then

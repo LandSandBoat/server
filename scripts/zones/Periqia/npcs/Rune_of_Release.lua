@@ -37,7 +37,7 @@ function onEventFinish(player, csid, option)
         if id == 32 then
             points = 1000 - math.max(playerpoints, 0)
         end
-        for i, v in chars:pairs() do
+        for i, v in pairs(chars) do
             v:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
             v:addAssaultPoint(PERIQIA_ASSAULT_POINT, points)
             v:setCharVar("AssaultComplete", 1)
@@ -50,7 +50,7 @@ function onEventFinish(player, csid, option)
         end
     end
     if csid == 102 then
-        for i, v in chars:pairs() do
+        for i, v in pairs(chars) do
             v:setPos(0, 0, 0, 0, 79)
         end
     end

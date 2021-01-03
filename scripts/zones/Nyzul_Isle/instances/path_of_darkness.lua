@@ -25,7 +25,7 @@ end
 function onInstanceFailure(instance)
     local chars = instance:getChars()
 
-    for i, v in chars:pairs() do
+    for i, v in pairs(chars) do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(1)
     end
@@ -51,7 +51,7 @@ function onInstanceProgressUpdate(instance, progress)
 
         local npcs = instance:getNpcs()
 
-        for i, v in npcs:pairs() do
+        for i, v in pairs(npcs) do
             if(v:getID() == ID.npc._259) then
                 v:setAnimation(8)
             end
@@ -65,7 +65,7 @@ function onInstanceComplete(instance)
 
     local chars = instance:getChars()
 
-    for i, v in chars:pairs() do
+    for i, v in pairs(chars) do
         if (v:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS and v:getCharVar("AhtUrganStatus") == 1) then
             v:setCharVar("AhtUrganStatus", 2)
         end

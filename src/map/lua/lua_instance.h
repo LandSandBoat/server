@@ -40,17 +40,17 @@ public:
     }
 
     uint8  getID();
-    auto   getAllies() -> std::vector<CLuaBaseEntity>;
-    auto   getChars() -> std::vector<CLuaBaseEntity>;
-    auto   getMobs() -> std::vector<CLuaBaseEntity>;
-    auto   getNpcs() -> std::vector<CLuaBaseEntity>;
-    auto   getPets() -> std::vector<CLuaBaseEntity>;
+    auto   getAllies() -> sol::table;
+    auto   getChars() -> sol::table;
+    auto   getMobs() -> sol::table;
+    auto   getNpcs() -> sol::table;
+    auto   getPets() -> sol::table;
     uint32 getTimeLimit();
     auto   getEntryPos() -> sol::table;
     uint32 getLastTimeUpdate();
     uint32 getProgress();
     uint32 getWipeTime();
-    auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::shared_ptr<CLuaBaseEntity>;
+    auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::optional<CLuaBaseEntity>;
     uint32 getStage();
 
     void setLevelCap(uint8 cap);
@@ -64,7 +64,7 @@ public:
     void complete();
     bool completed();
 
-    auto insertAlly(uint32 groupid) -> std::shared_ptr<CLuaBaseEntity>;
+    auto insertAlly(uint32 groupid) -> std::optional<CLuaBaseEntity>;
 
     static void Register();
 };

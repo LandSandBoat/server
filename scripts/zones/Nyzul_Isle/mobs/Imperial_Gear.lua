@@ -13,7 +13,7 @@ function onMobSpawn(mob)
     if (progress >= 24) then
         local mobs = instance:getMobs()
 
-        for i, v in mobs:pairs() do
+        for i, v in pairs(mobs) do
             if (v:getID() == ID.mob[58].AMNAF_BLU) then
                 local pos = v:getPos()
 

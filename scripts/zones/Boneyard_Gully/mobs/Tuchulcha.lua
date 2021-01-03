@@ -40,7 +40,7 @@ function onMobFight(mob, target)
             local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
             tuchulcha:setPos(coords)
             local players = tuchulcha:getBattlefield():getPlayers()
-            for _, char in players:pairs() do
+            for _, char in pairs(players) do
                 char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
                 char:disengage()
                 if char:hasPet() then

@@ -77,55 +77,55 @@ uint32 CLuaBattlefield::getFightTime()
     return std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count();
 }
 
-std::vector<CLuaBaseEntity> CLuaBattlefield::getPlayers()
+sol::table CLuaBattlefield::getPlayers()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
-            vec.emplace_back(CLuaBaseEntity(PChar));
+            table.add(CLuaBaseEntity(PChar));
         }
     });
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaBattlefield::getMobs(bool required, bool adds)
+sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
 
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
-            vec.emplace_back(CLuaBaseEntity(PMob));
+            table.add(CLuaBaseEntity(PMob));
         });
     }
 
     if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
         m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
-            vec.emplace_back(CLuaBaseEntity(PMob));
+            table.add(CLuaBaseEntity(PMob));
         });
     }
 
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaBattlefield::getNPCs()
+sol::table CLuaBattlefield::getNPCs()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
-        vec.emplace_back(CLuaBaseEntity(PNpc));
+        table.add(CLuaBaseEntity(PNpc));
     });
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaBattlefield::getAllies()
+sol::table CLuaBattlefield::getAllies()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
-        vec.emplace_back(CLuaBaseEntity(PAlly));
+        table.add(CLuaBaseEntity(PAlly));
     });
-    return vec;
+    return table;
 }
 
 std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
@@ -201,7 +201,7 @@ bool CLuaBattlefield::spawnLoot(CLuaBaseEntity* PEntity)
     return m_PLuaBattlefield->SpawnLoot(PEntity->GetBaseEntity());
 }
 
-std::shared_ptr<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
+std::optional<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield)
 {
     BATTLEFIELDMOBCONDITION conditions = static_cast<BATTLEFIELDMOBCONDITION>(0);
     ENTITYTYPE              filter     = static_cast<ENTITYTYPE>(0x1F);
@@ -212,11 +212,11 @@ std::shared_ptr<CLuaBaseEntity> CLuaBattlefield::insertEntity(uint16 targid, boo
     if (PEntity)
     {
         m_PLuaBattlefield->InsertEntity(PEntity, inBattlefield, conditions, ally);
-        return std::make_shared<CLuaBaseEntity>(PEntity);
+        return std::optional<CLuaBaseEntity>(PEntity);
     }
 
     ShowError(CL_RED "CLuaBattlefield::insertEntity - targid ID %u not found!" CL_RESET, targid);
-    return nullptr;
+    return std::nullopt;
 }
 
 bool CLuaBattlefield::cleanup(bool cleanup)

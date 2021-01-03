@@ -597,7 +597,7 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
                 if eye == dynamis.eye.BLUE or eye == dynamis.eye.GREEN then
                     local zone = mob:getZone()
                     local players = zone:getPlayers()
-                    for name, player in players:pairs() do
+                    for name, player in pairs(players) do
                         if mob:checkDistance(player) < 30 then
                             if eye == dynamis.eye.BLUE then
                                 local amt = player:getMaxMP() - player:getMP()

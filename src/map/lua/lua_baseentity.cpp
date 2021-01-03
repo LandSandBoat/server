@@ -745,10 +745,8 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command)
  *            Arguments listed after sol::variadic_args are INCLUDED in it at position 0!
  ************************************************************************/
 
-void CLuaBaseEntity::startEvent(sol::object const& EventIDObj, sol::variadic_args va)
+void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (!PChar)
     {
@@ -766,31 +764,19 @@ void CLuaBaseEntity::startEvent(sol::object const& EventIDObj, sol::variadic_arg
         PChar->PPet->PAI->Disengage();
     }
 
-    std::vector<uint32> args(8, 0);
-    int32               textTable = -1;
+    uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
+    uint32 param1 = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
+    uint32 param2 = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
+    uint32 param3 = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
+    uint32 param4 = va.get_type(4) == sol::type::number ? va.get<uint32>(4) : 0;
+    uint32 param5 = va.get_type(5) == sol::type::number ? va.get<uint32>(5) : 0;
+    uint32 param6 = va.get_type(6) == sol::type::number ? va.get<uint32>(6) : 0;
+    uint32 param7 = va.get_type(7) == sol::type::number ? va.get<uint32>(7) : 0;
 
-    uint8 count = 0;
-    for (auto v : va)
-    {
-        if (v.get_type() == sol::type::nil)
-        {
-            break;
-        }
+    int16 textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
 
-        if (count < 8)
-        {
-            uint32 value  = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
-            args[count++] = value;
-        }
-        else
-        {
-            int32 value = v.is<std::string>() ? std::stoi(v.as<std::string>()) : v;
-            textTable   = value;
-        }
-    }
-
-    PChar->pushPacket(new CEventPacket(PChar, EventIDObj.as<uint32>(), count,
-                                       args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7],
+    PChar->pushPacket(new CEventPacket(PChar, EventID, va.size(),
+                                       param0, param1, param2, param3, param4, param5, param6, param7,
                                        textTable));
 
     // if you want to return a dummy result, then do it
@@ -908,7 +894,7 @@ void CLuaBaseEntity::updateEventString(sol::variadic_args va)
  *  Notes   : Used to relocate Siren's Tear, as an example
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -916,10 +902,10 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     if (PChar->m_event.Target == nullptr)
     {
         ShowWarning(CL_YELLOW "EventTarget is empty: %s\n" CL_RESET, m_PBaseEntity->GetName());
-        return nullptr;
+        return std::nullopt;
     }
 
-    return std::make_shared<CLuaBaseEntity>(PChar->m_event.Target);
+    return std::optional<CLuaBaseEntity>(PChar->m_event.Target);
 }
 
 /************************************************************************
@@ -1044,17 +1030,17 @@ uint16 CLuaBaseEntity::getShortID()
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getCursorTarget()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getCursorTarget()
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         if (auto* PTarget = PChar->GetEntity(PChar->m_TargID))
         {
-            return std::make_shared<CLuaBaseEntity>(PTarget);
+            return std::optional<CLuaBaseEntity>(PTarget);
         }
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -1967,18 +1953,18 @@ bool CLuaBaseEntity::isBeside(CLuaBaseEntity const* target, sol::object const& a
  *  they are in the process of zoning (for use in onZoneIn)
  ************************************************************************/
 
-std::shared_ptr<CLuaZone> CLuaBaseEntity::getZone(sol::object const& arg0)
+std::optional<CLuaZone> CLuaBaseEntity::getZone(sol::object const& arg0)
 {
     if (m_PBaseEntity->loc.zone)
     {
-        return std::make_shared<CLuaZone>(m_PBaseEntity->loc.zone);
+        return std::optional<CLuaZone>(m_PBaseEntity->loc.zone);
     }
     else if (m_PBaseEntity->loc.destination && (arg0 != sol::nil) && arg0.is<bool>() && arg0.as<bool>() != false)
     {
-        return std::make_shared<CLuaZone>(zoneutils::GetZone(m_PBaseEntity->loc.destination));
+        return std::optional<CLuaZone>(zoneutils::GetZone(m_PBaseEntity->loc.destination));
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -2583,7 +2569,7 @@ void CLuaBaseEntity::setTeleportMenu(uint16 type, sol::table const& favs)
  *  Notes   :
  ************************************************************************/
 
-std::vector<int32> CLuaBaseEntity::getTeleportMenu(uint8 type)
+sol::table CLuaBaseEntity::getTeleportMenu(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2593,22 +2579,22 @@ std::vector<int32> CLuaBaseEntity::getTeleportMenu(uint8 type)
     if (tele_type != TELEPORT_TYPE::HOMEPOINT && tele_type != TELEPORT_TYPE::SURVIVAL)
     {
         ShowError("LuaBaseEntity::getTeleportMenu : Incorrect value or parameter 1.\n");
-        return {};
+        return sol::nil;
     }
 
-    std::vector<int32> vec;
+    auto table = luautils::lua.create_table();
     for (uint8 x = 0; x < 10; x++)
     {
         if (tele_type == TELEPORT_TYPE::HOMEPOINT)
         {
-            vec.emplace_back(PChar->teleport.homepoint.menu[x]);
+            table.add(PChar->teleport.homepoint.menu[x]);
         }
         else
         {
-            vec.emplace_back(PChar->teleport.survival.menu[x]);
+            table.add(PChar->teleport.survival.menu[x]);
         }
     }
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -2827,7 +2813,7 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
+std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2840,11 +2826,11 @@ std::shared_ptr<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 
         if (slotItem)
         {
-            return std::make_shared<CLuaItem>(slotItem);
+            return std::optional<CLuaItem>(slotItem);
         }
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -3689,7 +3675,7 @@ void CLuaBaseEntity::clearGearSetMods()
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
+std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -3708,10 +3694,10 @@ std::shared_ptr<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 
 
     if (PItem != nullptr)
     {
-        return std::make_shared<CLuaItem>(PItem);
+        return std::optional<CLuaItem>(PItem);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -7469,18 +7455,18 @@ void CLuaBaseEntity::recalculateAbilitiesTable()
  *  Notes   :
  ************************************************************************/
 
-std::vector<CLuaBaseEntity> CLuaBaseEntity::getParty()
+sol::table CLuaBaseEntity::getParty()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CParty* party = static_cast<CBattleEntity*>(m_PBaseEntity)->PParty;
 
-    std::vector<CLuaBaseEntity> vec;
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&vec](CBattleEntity* member) {
-        vec.emplace_back(CLuaBaseEntity(member));
+    auto table = luautils::lua.create_table();
+    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member) {
+        table.add(CLuaBaseEntity(member));
     });
 
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -7490,18 +7476,18 @@ std::vector<CLuaBaseEntity> CLuaBaseEntity::getParty()
  *  Notes   : Removed index id, this might break things (idx started at 1)
  ************************************************************************/
 
-std::vector<CLuaBaseEntity> CLuaBaseEntity::getPartyWithTrusts()
+sol::table CLuaBaseEntity::getPartyWithTrusts()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CParty* party = static_cast<CCharEntity*>(m_PBaseEntity)->PParty;
 
-    std::vector<CLuaBaseEntity> vec;
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&vec](CBattleEntity* member) {
-        vec.emplace_back(CLuaBaseEntity(member));
+    auto table = luautils::lua.create_table();
+    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member) {
+        table.add(CLuaBaseEntity(member));
     });
 
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -7575,7 +7561,7 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
  *  Notes   : Passed value is position in party? What is this used for?
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -7601,11 +7587,11 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uin
 
     if (PTargetChar != nullptr)
     {
-        return std::make_shared<CLuaBaseEntity>(PTargetChar);
+        return std::optional<CLuaBaseEntity>(PTargetChar);
     }
 
     ShowError(CL_RED "Lua::getPartyMember :: Member or Alliance Number is not valid.\n" CL_RESET);
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -7615,7 +7601,7 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uin
  *  Notes   : Todo: also add ability for find Alliance Leader via lua?
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -7626,11 +7612,11 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
         CBattleEntity* PLeader = PChar->PParty->GetLeader();
         if (PLeader != nullptr)
         {
-            return std::make_shared<CLuaBaseEntity>(PLeader);
+            return std::optional<CLuaBaseEntity>(PLeader);
         }
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -7737,18 +7723,18 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
  *  Notes   :
  ************************************************************************/
 
-std::vector<CLuaBaseEntity> CLuaBaseEntity::getAlliance()
+sol::table CLuaBaseEntity::getAlliance()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    std::vector<CLuaBaseEntity> vec;
-    PChar->ForAlliance([&vec](CBattleEntity* PMember) {
-        vec.emplace_back(CLuaBaseEntity(PMember));
+    auto table = luautils::lua.create_table();
+    PChar->ForAlliance([&table](CBattleEntity* PMember) {
+        table.add(CLuaBaseEntity(PMember));
     });
 
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -7967,14 +7953,14 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaInstance> CLuaBaseEntity::getInstance()
+std::optional<CLuaInstance> CLuaBaseEntity::getInstance()
 {
     if (m_PBaseEntity->PInstance)
     {
-        return std::make_shared<CLuaInstance>(m_PBaseEntity->PInstance);
+        return std::optional<CLuaInstance>(m_PBaseEntity->PInstance);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -8071,16 +8057,16 @@ uint16 CLuaBaseEntity::copyConfrontationEffect(uint16 targetID)
  *  Notes   : Used to check if entity is inside a battlefield
  ************************************************************************/
 
-std::shared_ptr<CLuaBattlefield> CLuaBaseEntity::getBattlefield()
+std::optional<CLuaBattlefield> CLuaBaseEntity::getBattlefield()
 {
     auto* PBattlefield = m_PBaseEntity->PBattlefield;
 
     if (PBattlefield)
     {
-        return std::make_shared<CLuaBattlefield>(PBattlefield);
+        return std::optional<CLuaBattlefield>(PBattlefield);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -8564,15 +8550,15 @@ void CLuaBaseEntity::triggerListener(std::string eventName, sol::variadic_args a
  *  Notes   : Currently used in Assault Missions and some Mobs
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getEntity(uint16 targetID)
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getEntity(uint16 targetID)
 {
     auto* PEntity{ m_PBaseEntity->GetEntity(targetID) };
     if (PEntity)
     {
-        return std::make_shared<CLuaBaseEntity>(PEntity);
+        return std::optional<CLuaBaseEntity>(PEntity);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -8993,19 +8979,19 @@ bool CLuaBaseEntity::hasEnmity()
  *  Notes   : Key removed from table, this might break things
  ************************************************************************/
 
-std::vector<CLuaBaseEntity> CLuaBaseEntity::getNotorietyList()
+sol::table CLuaBaseEntity::getNotorietyList()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
 
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto* entry : *notorietyContainer)
     {
-        vec.emplace_back(CLuaBaseEntity(entry));
+        table.add(CLuaBaseEntity(entry));
     }
 
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -9129,7 +9115,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -9154,10 +9140,10 @@ std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusI
 
     if (PStatusEffect)
     {
-        return std::make_shared<CLuaStatusEffect>(PStatusEffect);
+        return std::optional<CLuaStatusEffect>(PStatusEffect);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -9167,7 +9153,7 @@ std::shared_ptr<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusI
  *  Notes   : Currently only used to check for Snake Eyes in ability.lua
  ************************************************************************/
 
-std::vector<CLuaStatusEffect> CLuaBaseEntity::getStatusEffects()
+sol::table CLuaBaseEntity::getStatusEffects()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -9177,12 +9163,12 @@ std::vector<CLuaStatusEffect> CLuaBaseEntity::getStatusEffects()
         return {};
     }
 
-    std::vector<CLuaStatusEffect> vec;
-    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&vec](CStatusEffect* PEffect) {
-        vec.emplace_back(CLuaStatusEffect(PEffect));
+    auto table = luautils::lua.create_table();
+    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&table](CStatusEffect* PEffect) {
+        table.add(CLuaStatusEffect(PEffect));
     });
 
-    return vec;
+    return table;
 }
 
 /************************************************************************
@@ -9995,13 +9981,13 @@ bool CLuaBaseEntity::isSpellAoE(uint16 spellId)
  *            DamageType is optional and defaults to weapon type if not provided.
  ************************************************************************/
 
-int32 CLuaBaseEntity::physicalDmgTaken(int32 damage, sol::object const& dmgType)
+int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = (dmgType != sol::nil) ? dmgType.as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
 
-    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage, damageType);
+    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
 }
 
 /************************************************************************
@@ -10011,14 +9997,13 @@ int32 CLuaBaseEntity::physicalDmgTaken(int32 damage, sol::object const& dmgType)
  *  Notes   : Passes argument to MagicDmgTaken member of battleutils
  ************************************************************************/
 
-int32 CLuaBaseEntity::magicDmgTaken(int32 damage, sol::object const& eleType)
+int32 CLuaBaseEntity::magicDmgTaken(double damage, sol::variadic_args va)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    ELEMENT elementType = (eleType != sol::nil) ? eleType.as<ELEMENT>() : ELEMENT_NONE;
+    ELEMENT elementType = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
 
-    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage, elementType);
+    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType);
 }
 
 /************************************************************************
@@ -10028,13 +10013,13 @@ int32 CLuaBaseEntity::magicDmgTaken(int32 damage, sol::object const& eleType)
  *  Notes   : Passes argument to RangedDmgTaken member of battleutils
  ************************************************************************/
 
-int32 CLuaBaseEntity::rangedDmgTaken(int32 damage, sol::object const& dmgType)
+int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = (dmgType != sol::nil) ? dmgType.as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
 
-    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage, damageType);
+    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
 }
 
 /************************************************************************
@@ -10044,11 +10029,11 @@ int32 CLuaBaseEntity::rangedDmgTaken(int32 damage, sol::object const& dmgType)
  *  Notes   : Passes argument to BreathDmgTaken member of battleutils
  ************************************************************************/
 
-int32 CLuaBaseEntity::breathDmgTaken(int32 damage)
+int32 CLuaBaseEntity::breathDmgTaken(double damage)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
+    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage));
 }
 
 /************************************************************************
@@ -10058,11 +10043,11 @@ int32 CLuaBaseEntity::breathDmgTaken(int32 damage)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::handleAfflatusMiseryDamage(int32 damage)
+void CLuaBaseEntity::handleAfflatusMiseryDamage(double damage)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    battleutils::HandleAfflatusMiseryDamage(static_cast<CBattleEntity*>(m_PBaseEntity), damage);
+    battleutils::HandleAfflatusMiseryDamage(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage));
 }
 
 /************************************************************************
@@ -10662,16 +10647,16 @@ bool CLuaBaseEntity::hasPet()
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getPet()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getPet()
 {
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     if (PBattle->PPet != nullptr)
     {
-        return std::make_shared<CLuaBaseEntity>(PBattle->PPet);
+        return std::optional<CLuaBaseEntity>(PBattle->PPet);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -10721,7 +10706,7 @@ uint8 CLuaBaseEntity::getPetElement()
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getMaster()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getMaster()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -10730,10 +10715,10 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getMaster()
     if (PBattle->PMaster != nullptr)
     {
         CBaseEntity* PMaster = PBattle->PMaster;
-        return std::make_shared<CLuaBaseEntity>(PMaster);
+        return std::optional<CLuaBaseEntity>(PMaster);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -11742,7 +11727,7 @@ void CLuaBaseEntity::setBehaviour(uint16 behavior)
  *  Notes   :
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTarget()
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getTarget()
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -11750,10 +11735,10 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTarget()
 
     if (PBattleTarget)
     {
-        return std::make_shared<CLuaBaseEntity>(PBattleTarget);
+        return std::optional<CLuaBaseEntity>(PBattleTarget);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -11822,7 +11807,7 @@ sol::table CLuaBaseEntity::getEnmityList()
  *  Notes   : For some reason, only used in Jump/High-Jump?
  ************************************************************************/
 
-std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -11833,11 +11818,11 @@ std::shared_ptr<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntit
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
         {
-            return std::make_shared<CLuaBaseEntity>(taTarget);
+            return std::optional<CLuaBaseEntity>(taTarget);
         }
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 /************************************************************************

@@ -178,7 +178,7 @@ tpz.player.onGameIn = function(player, firstLogin, zoning)
         player:addHP(50000)
         player:setMP(50000)
     end
-    
+
     -- !immortal
     if player:getCharVar("Immortal") == 1 then
         player:setUnkillable(true)

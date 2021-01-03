@@ -26,7 +26,8 @@ end
 
 function onEventUpdate(player, csid, option, extras)
     if EventUpdateBCNM(player, csid, option, extras) then
-        for _, member in player:getAlliance():pairs() do
+        local alliance = player:getAlliance()
+        for _, member in pairs(alliance) do
             if member:getZoneID() == player:getZoneID() and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
                 member:messageSpecial(ID.text.HUM)
             end

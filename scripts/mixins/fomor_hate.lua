@@ -6,7 +6,8 @@ g_mixins = g_mixins or {}
 g_mixins.fomor_hate = function(mob)
     mob:addListener("DEATH", "FOMOR_HATE_DEATH", function(mob, player)
         if player then
-            for _, member in player:getAlliance():pairs() do
+            local alliance = player:getAlliance()
+            for _, member in pairs(alliance) do
                 if member:getZoneID() == player:getZoneID() then
                     local hate = member:getCharVar("FOMOR_HATE")
                     local adj = mob:getLocalVar("fomorHateAdj")

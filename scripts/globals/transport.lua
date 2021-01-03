@@ -70,7 +70,7 @@ tpz.transport.pos =
 
 tpz.transport.captainMessage = function(npc, triggerID, messages)
     local playersInZone = npc:getZone():getPlayers()
-    for _, player in playersInZone:pairs() do
+    for _, player in pairs(playersInZone) do
         player:showText(player, messages[triggerID])
     end
 end

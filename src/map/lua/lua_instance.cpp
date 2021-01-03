@@ -39,59 +39,59 @@ uint8 CLuaInstance::getID()
     return m_PLuaInstance->GetID();
 }
 
-std::vector<CLuaBaseEntity> CLuaInstance::getAllies()
+sol::table CLuaInstance::getAllies()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto& member : m_PLuaInstance->m_allyList)
     {
-        vec.emplace_back(CLuaBaseEntity(member.second));
+        table.add(CLuaBaseEntity(member.second));
     }
 
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaInstance::getChars()
+sol::table CLuaInstance::getChars()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto& member : m_PLuaInstance->m_charList)
     {
-        vec.emplace_back(CLuaBaseEntity(member.second));
+        table.add(CLuaBaseEntity(member.second));
     }
 
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaInstance::getMobs()
+sol::table CLuaInstance::getMobs()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto& member : m_PLuaInstance->m_mobList)
     {
-        vec.emplace_back(CLuaBaseEntity(member.second));
+        table.add(CLuaBaseEntity(member.second));
     }
 
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaInstance::getNpcs()
+sol::table CLuaInstance::getNpcs()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto& member : m_PLuaInstance->m_npcList)
     {
-        vec.emplace_back(CLuaBaseEntity(member.second));
+        table.add(CLuaBaseEntity(member.second));
     }
 
-    return vec;
+    return table;
 }
 
-std::vector<CLuaBaseEntity> CLuaInstance::getPets()
+sol::table CLuaInstance::getPets()
 {
-    std::vector<CLuaBaseEntity> vec;
+    auto table = luautils::lua.create_table();
     for (auto& member : m_PLuaInstance->m_petList)
     {
-        vec.emplace_back(CLuaBaseEntity(member.second));
+        table.add(CLuaBaseEntity(member.second));
     }
 
-    return vec;
+    return table;
 }
 
 uint32 CLuaInstance::getTimeLimit()
@@ -130,7 +130,7 @@ uint32 CLuaInstance::getWipeTime()
     return static_cast<uint32>(time_ms);
 }
 
-std::shared_ptr<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj)
+std::optional<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::object const& filterObj)
 {
     uint8 filter = -1;
     if (filterObj.is<uint8>())
@@ -142,10 +142,10 @@ std::shared_ptr<CLuaBaseEntity> CLuaInstance::getEntity(uint16 targid, sol::obje
 
     if (PEntity)
     {
-        return std::make_shared<CLuaBaseEntity>(PEntity);
+        return std::optional<CLuaBaseEntity>(PEntity);
     }
 
-    return nullptr;
+    return std::nullopt;
 }
 
 uint32 CLuaInstance::getStage()
@@ -198,17 +198,17 @@ bool CLuaInstance::completed()
     return m_PLuaInstance->Completed();
 }
 
-std::shared_ptr<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
+std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
 {
     CMobEntity* PAlly = mobutils::InstantiateAlly(groupid, m_PLuaInstance->GetZone()->GetID(), m_PLuaInstance);
 
     if (PAlly)
     {
-        return std::make_shared<CLuaBaseEntity>(PAlly);
+        return std::optional<CLuaBaseEntity>(PAlly);
     }
 
     ShowError(CL_RED "CLuaBattlefield::insertAlly - group ID %u not found!" CL_RESET, groupid);
-    return nullptr;
+    return std::nullopt;
 }
 
 //==========================================================//

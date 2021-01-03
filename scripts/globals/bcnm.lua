@@ -1083,7 +1083,8 @@ function EventUpdateBCNM(player, csid, option, extras)
                     end
                 end
 
-                for _, member in player:getAlliance():pairs() do
+                local alliance = player:getAlliance()
+                for _, member in pairs(alliance) do
                     if member:getZoneID() == zone and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
                         member:addStatusEffect(effect)
                         member:registerBattlefield(id, area, player:getID())

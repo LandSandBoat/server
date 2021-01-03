@@ -48,10 +48,10 @@ public:
     uint32   getFightTick();
     uint32   getWipeTime();
     uint32   getFightTime();
-    auto     getPlayers() -> std::vector<CLuaBaseEntity>;
-    auto     getMobs(bool required, bool adds) -> std::vector<CLuaBaseEntity>;
-    auto     getNPCs() -> std::vector<CLuaBaseEntity>;
-    auto     getAllies() -> std::vector<CLuaBaseEntity>;
+    auto     getPlayers() -> sol::table;
+    auto     getMobs(bool required, bool adds) -> sol::table;
+    auto     getNPCs() -> sol::table;
+    auto     getAllies() -> sol::table;
     auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
     uint8    getStatus();
     uint64_t getLocalVar(std::string name);
@@ -66,7 +66,7 @@ public:
     void  setLocalVar(std::string name, uint64_t value);
     bool  loadMobs();
     bool  spawnLoot(CLuaBaseEntity* PEntity);
-    auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::shared_ptr<CLuaBaseEntity>;
+    auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
     bool  cleanup(bool cleanup);
     void  win();
     void  lose();

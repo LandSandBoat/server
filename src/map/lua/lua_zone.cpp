@@ -70,11 +70,11 @@ sol::object CLuaZone::levelRestriction()
     return sol::nil;
 }
 
-std::vector<CLuaBaseEntity> CLuaZone::getPlayers()
+sol::table CLuaZone::getPlayers()
 {
-    std::vector<CLuaBaseEntity> vec;
-    m_pLuaZone->ForEachChar([&vec](CCharEntity* PChar) { vec.emplace_back(CLuaBaseEntity(PChar)); });
-    return vec;
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar) { table.add(CLuaBaseEntity(PChar)); });
+    return table;
 }
 
 ZONEID CLuaZone::getID()
@@ -97,13 +97,13 @@ ZONE_TYPE CLuaZone::getType()
     return m_pLuaZone->GetType();
 }
 
-std::shared_ptr<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID)
+std::optional<CLuaBattlefield> CLuaZone::getBattlefieldByInitiator(uint32 charID)
 {
     if (m_pLuaZone->m_BattlefieldHandler)
     {
-        return std::make_shared<CLuaBattlefield>(m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID));
+        return std::optional<CLuaBattlefield>(m_pLuaZone->m_BattlefieldHandler->GetBattlefieldByInitiator(charID));
     }
-    return nullptr;
+    return std::nullopt;
 }
 
 bool CLuaZone::battlefieldsFull(int battlefieldId)

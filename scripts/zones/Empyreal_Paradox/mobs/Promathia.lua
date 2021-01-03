@@ -15,7 +15,7 @@ end
 
 function onMobEngaged(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i, v in bcnmAllies:pairs() do
+    for i, v in bcnmpairs(allies) do
         if v:getName() == "Prishe" then
             if not v:getTarget() then
                 v:entityAnimationPacket("prov")
@@ -35,7 +35,7 @@ function onMobFight(mob, target)
     end
 
     local bcnmAllies = mob:getBattlefield():getAllies()
-    for i, v in bcnmAllies:pairs() do
+    for i, v in bcnmpairs(allies) do
         if not v:getTarget() then
             v:addEnmity(mob, 0, 1)
         end
@@ -54,7 +54,7 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004, battlefield:getArea())
     else
         local players = battlefield:getPlayers()
-        for _, member in players:pairs() do
+        for _, member in pairs(players) do
             member:startEvent(32004, battlefield:getArea())
         end
     end
@@ -71,7 +71,7 @@ function onEventFinish(player, csid, option, target)
         DespawnMob(target:getID())
         mob = SpawnMob(target:getID()+1)
         local bcnmAllies = mob:getBattlefield():getAllies()
-        for i, v in bcnmAllies:pairs() do
+        for i, v in bcnmpairs(allies) do
             v:resetLocalVars()
             local spawn = v:getSpawnPos()
             v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)

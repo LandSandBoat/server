@@ -192,7 +192,7 @@ local function sendChestDropMessage(player)
 
     party = player:getAlliance()
 
-    for _, member in party:pairs() do
+    for _, member in pairs(party) do
         if member:getZoneID() == player:getZoneID() then
             member:messageSpecial(dropMessage , 0)
         end
@@ -322,7 +322,8 @@ local function messageChest(player, messageString, param1, param2, param3, param
         msg = ID.text.PLAYER_OBTAINS_TEMP_ITEM
     end
 
-    for _, member in player:getAlliance():pairs() do
+    local alliance = player:getAlliance()
+    for _, member in pairs(alliance) do
         if member:getZoneID() == player:getZoneID() then
             member:messageName(msg, player, param1, param2, param3, param4, nil)
         end

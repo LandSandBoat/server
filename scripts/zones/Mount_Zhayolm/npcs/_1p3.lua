@@ -43,7 +43,7 @@ function onEventUpdate(player, csid, option, target)
     local party = player:getParty()
 
     if party then
-        for i, v in party:pairs() do
+        for i, v in pairs(party) do
             if not (v:hasKeyItem(tpz.ki.LEBROS_ASSAULT_ORDERS) and v:getCurrentAssault() == assaultid) then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                 player:instanceEntry(target, 1)
@@ -76,7 +76,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party then
-            for i, v in party:pairs() do
+            for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(208, 2)

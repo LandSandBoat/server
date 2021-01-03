@@ -39,7 +39,7 @@ function onInstanceFailure(instance)
 
     local chars = instance:getChars()
 
-    for i, v in chars:pairs() do
+    for i, v in pairs(chars) do
         v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
         v:startEvent(1)
     end

@@ -50,7 +50,7 @@ function onEventUpdate(player, csid, option, target)
 
     if player:getCharVar("ShadesOfVengeance") == 1 then
         if (party ~= nil) then
-            for i, v in party:pairs() do
+            for i, v in pairs(party) do
                 if v:getCurrentMission(TOAU) < tpz.mission.id.toau.SHADES_OF_VENGEANCE then
                     player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
@@ -65,7 +65,7 @@ function onEventUpdate(player, csid, option, target)
         player:createInstance(79, 56)
     else
         if party ~= nil then
-            for i, v in party:pairs() do
+            for i, v in pairs(party) do
                 if (not (v:hasKeyItem(tpz.ki.PERIQIA_ASSAULT_ORDERS) and v:getCurrentAssault() == assaultid)) then
                     player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
@@ -100,7 +100,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in party:pairs() do
+            for i, v in pairs(party) do
                 if (v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID()) then
                     v:setInstance(instance)
                     v:startEvent(133)
@@ -118,7 +118,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in party:pairs() do
+            for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(133, 3)

@@ -26,7 +26,7 @@ tpz.ally =
 
         -- print("start inserting mob")
         local targetMobs = {}
-        for i, mob in mobs:pairs() do
+        for i, mob in pairs(mobs) do
             if mob:isSpawned() and mob:isAlive() then
                 if mob:isAlly() then
                     table.insert(allies, mob)
@@ -42,7 +42,7 @@ tpz.ally =
             local assistTarget = 0
 
             -- Loop players and find someone who is engaged in battle
-            for i, player in players:pairs() do
+            for i, player in pairs(players) do
                 local battleTarget = player:getTarget()
                 if battleTarget ~= nil then
                     assistTarget = battleTarget:getShortID()

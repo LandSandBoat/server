@@ -10,7 +10,7 @@ end
 
 function onItemUse(target)
     local alliance = target:getAlliance()
-    for i, member in alliance:pairs() do
+    for i, member in pairs(alliance) do
         if member:getZoneID() == target:getZoneID() then
             member:ChangeMusic(0, 153) -- Prelude
             member:ChangeMusic(1, 153) -- Prelude
