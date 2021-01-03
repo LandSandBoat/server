@@ -111,7 +111,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
             augs[0][0], augs[1][0], augs[2][0], augs[3][0],
             augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
-    sol::table table;
+    sol::table table = luautils::lua.create_table();
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
         int32 trialCount {0};

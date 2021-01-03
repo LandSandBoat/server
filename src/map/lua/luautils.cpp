@@ -156,6 +156,8 @@ namespace luautils
         set_function("despawnMob", &luautils::DespawnMob);
         set_function("getPlayerByName", &luautils::GetPlayerByName);
         set_function("getPlayerByID", &luautils::GetPlayerByID);
+        set_function("getMagianTrial", &luautils::GetMagianTrial);
+        set_function("getMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         set_function("jstMidnight", &luautils::JstMidnight);
         set_function("vanadielTime", &luautils::VanadielTime);
         set_function("vanadielTOTD", &luautils::VanadielTOTD);
@@ -990,6 +992,8 @@ namespace luautils
                 int32 childTrial = Sql_GetIntData(SqlHandle, 0);
                 table.add(++field, childTrial);
             }
+
+            return table;
         }
 
         return sol::nil;
