@@ -200,7 +200,7 @@ tpz.homepoint.onTrigger = function(player, csid, index)
     end
 
     player:setLocalVar("originIndex", index)
-    local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
+    local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
 
 end

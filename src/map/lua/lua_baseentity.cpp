@@ -2390,7 +2390,7 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
  *  Notes   :
  ************************************************************************/
 
-sol::lua_value CLuaBaseEntity::getTeleport(uint8 type)
+uint32 CLuaBaseEntity::getTeleport(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2427,23 +2427,46 @@ sol::lua_value CLuaBaseEntity::getTeleport(uint8 type)
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
             return PChar->teleport.campaignWindy;
             break;
+        default:
+            ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.\n");
+    }
+
+    return 0;
+}
+
+sol::table CLuaBaseEntity::getTeleportTable(uint8 type, sol::this_state ts)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    sol::state_view lua = ts;
+    sol::table      teleTable = lua.create_table();
+
+    TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
+    CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
+
+    // TODO: Refator this out into getTeleport and getTeleportTable, this shouldn't be
+    //       returning type different types...
+
+    switch (tele_type)
+    {
         case TELEPORT_TYPE::HOMEPOINT:
             for (uint8 x = 0; x < 4; x++)
             {
-                table.add(PChar->teleport.homepoint.access[x]);
+                teleTable.add(PChar->teleport.homepoint.access[x]);
             }
-            return table;
+            return teleTable;
             break;
         case TELEPORT_TYPE::SURVIVAL:
             for (uint8 x = 0; x < 4; x++)
             {
-                table.add(PChar->teleport.survival.access[x]);
+                teleTable.add(PChar->teleport.survival.access[x]);
             }
-            return table;
+            return teleTable;
             break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.\n");
     }
+
     return sol::nil;
 }
 
@@ -2560,7 +2583,7 @@ void CLuaBaseEntity::setTeleportMenu(uint16 type, sol::table const& favs)
  *  Notes   :
  ************************************************************************/
 
-std::vector<uint8> CLuaBaseEntity::getTeleportMenu(uint8 type)
+std::vector<int32> CLuaBaseEntity::getTeleportMenu(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2573,7 +2596,7 @@ std::vector<uint8> CLuaBaseEntity::getTeleportMenu(uint8 type)
         return {};
     }
 
-    std::vector<uint8> vec;
+    std::vector<int32> vec;
     for (uint8 x = 0; x < 10; x++)
     {
         if (tele_type == TELEPORT_TYPE::HOMEPOINT)
@@ -12334,6 +12357,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("teleport", CLuaBaseEntity::teleport);
     SOL_REGISTER("addTeleport", CLuaBaseEntity::addTeleport);
     SOL_REGISTER("getTeleport", CLuaBaseEntity::getTeleport);
+    SOL_REGISTER("getTeleportTable", CLuaBaseEntity::getTeleportTable);
     SOL_REGISTER("hasTeleport", CLuaBaseEntity::hasTeleport);
     SOL_REGISTER("setTeleportMenu", CLuaBaseEntity::setTeleportMenu);
     SOL_REGISTER("getTeleportMenu", CLuaBaseEntity::getTeleportMenu);
