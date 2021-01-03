@@ -2580,36 +2580,35 @@ namespace luautils
 
     int32 OnCriticalHit(CBattleEntity* PMob, CBattleEntity* PAttacker)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr || PMob->objtype != TYPE_MOB)
+        TracyZoneScoped;
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        CLuaBaseEntity LuaKillerEntity(PAttacker);
-
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        if (prepFile(File, "onCriticalHit"))
+        if (PMob == nullptr)
         {
             return -1;
         }
 
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+
+        auto onCriticalHit = loadFunctionFromFile("onCriticalHit", filename);
+        if (!onCriticalHit.valid())
+        {
+            return -1;
+        }
+
+        std::optional<CLuaBaseEntity> optionalKiller = std::nullopt;
         if (PAttacker)
         {
-            //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaKillerEntity);
-        }
-        else
-        {
-            lua_pushnil(LuaHandle);
+            optionalKiller = CLuaBaseEntity(PAttacker);
         }
 
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onCriticalHit(CLuaBaseEntity(PMob), optionalKiller);
+        if (!result.valid())
         {
-            ShowError("luautils::onCriticalHit: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onCriticalHit %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -2621,153 +2620,111 @@ namespace luautils
 
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
     {
-        /*
         TracyZoneScoped;
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
+
+        if (PMob == nullptr)
+        {
+            return -1;
+        }
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
-
         if (PChar && PMob->objtype == TYPE_MOB)
         {
-            // onMobDeathEx
-            lua_prepscript("scripts/globals/mobs.lua");
+            auto onMobDeathEx = loadFunctionFromFile("onMobDeathEx", "scripts/globals/mobs.lua");
+            if (!onMobDeathEx.valid())
+            {
+                return -1;
+            }
 
-            PChar->ForAlliance([PMob, PChar, &File](CBattleEntity* PMember) {
+            PChar->ForAlliance([PMob, PChar, &onMobDeathEx](CBattleEntity* PMember) {
                 if (PMember->getZone() == PChar->getZone())
                 {
-                    if (prepFile(File, "onMobDeathEx"))
-                    {
-                        return;
-                    }
-
                     CLuaBaseEntity LuaMobEntity(PMob);
                     CLuaBaseEntity LuaAllyEntity(PMember);
                     bool           isKiller          = PMember == PChar;
                     bool           isWeaponSkillKill = PChar->getWeaponSkillKill();
 
-                    //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-                    //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaAllyEntity);
-                    lua_pushboolean(LuaHandle, isKiller);
-
-                    lua_pushboolean(LuaHandle, isWeaponSkillKill);
-                    // lua_pushboolean(LuaHandle, isMagicKill);
-                    // lua_pushboolean(LuaHandle, isPetKill);
-                    // Todo: look at better way do do these than additional bools...
-
-                    if (lua_pcall(LuaHandle, 4, 0, 0))
+                    auto result = onMobDeathEx(LuaMobEntity, LuaAllyEntity, isKiller, isWeaponSkillKill);
+                    if (!result.valid())
                     {
-                        ShowError("luautils::onMobDeathEx: %s\n", lua_tostring(LuaHandle, -1));
-                        lua_pop(LuaHandle, 1);
+                        sol::error err = result;
+                        ShowError("luautils::onMobDeathEx: %s\n", err.what());
                     }
                 }
             });
 
-            // onMobDeath
-            memset(File, 0, sizeof(File));
+            auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-            lua_pushnil(LuaHandle);
-            lua_setglobal(LuaHandle, "onMobDeath");
+            auto onMobDeath = loadFunctionFromFile("onMobDeath", filename);
+            if (!onMobDeath.valid())
+            {
+                ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
+                return -1;
+            }
 
-            snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-            PChar->ForAlliance([PMob, PChar, &File](CBattleEntity* PPartyMember) {
+            PChar->ForAlliance([PMob, PChar, &onMobDeath, &filename](CBattleEntity* PPartyMember) {
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
-                if (PMember->getZone() == PChar->getZone())
+                if (PMember && PMember->getZone() == PChar->getZone())
                 {
                     CLuaBaseEntity LuaMobEntity(PMob);
-                    CLuaBaseEntity LuaAllyEntity(PMember);
-                    bool           isKiller = PMember == PChar;
+                    std::optional<CLuaBaseEntity> optLuaAllyEntity = std::nullopt;
+                    if (PMember)
+                    {
+                        optLuaAllyEntity = CLuaBaseEntity(PMember);
+                    }
+                    bool isKiller = PMember == PChar;
+                    bool noKiller = false;
 
                     PMember->m_event.reset();
                     PMember->m_event.Target = PMob;
-                    PMember->m_event.Script.insert(0, (const char*)File);
+                    PMember->m_event.Script.insert(0, filename);
 
-                    if (luaL_loadfile(LuaHandle, (const char*)File) || lua_pcall(LuaHandle, 0, 0, 0))
+                    // onMobDeath(mob, player, isKiller, noKiller)
+                    auto result = onMobDeath(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller);
+                    if (!result.valid())
                     {
-                        lua_pop(LuaHandle, 1);
-                        return;
-                    }
-
-                    lua_getglobal(LuaHandle, "onMobDeath");
-                    if (lua_isnil(LuaHandle, -1))
-                    {
-                        ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", File);
-                        lua_pop(LuaHandle, 1);
-                        return;
-                    }
-
-                    //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-                    if (PMember)
-                    {
-                        CLuaBaseEntity LuaAllyEntity(PMember);
-                        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaAllyEntity);
-                        lua_pushboolean(LuaHandle, isKiller);
-                    }
-                    else
-                    {
-                        lua_pushnil(LuaHandle);
-                    }
-
-                    if (lua_pcall(LuaHandle, 3, 0, 0))
-                    {
-                        ShowError("luautils::onMobDeath: %s\n", lua_tostring(LuaHandle, -1));
-                        lua_pop(LuaHandle, 1);
-                        return;
+                        sol::error err = result;
+                        ShowError("luautils::onMobDeath: %s\n", err.what());
                     }
                 }
             });
         }
         else
         {
-            int8 File[255];
+            std::string filename;
             switch (PMob->objtype)
             {
                 case TYPE_MOB:
-                    snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+                    filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
                     break;
                 case TYPE_PET:
-                    snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
+                    filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
                     break;
                 case TYPE_TRUST:
-                    snprintf((char*)File, sizeof(File), "scripts/globals/spells/trust/%s.lua", PMob->GetName());
+                    filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
                     break;
                 default:
-                    ShowWarning("luautils::onMobDeath (%d): unknown objtype\n", PMob->objtype);
+                    ShowWarning("luautils::onMobSpawn (%d): unknown objtype\n", PMob->objtype);
                     break;
             }
 
-            lua_pushnil(LuaHandle);
-            lua_setglobal(LuaHandle, "onMobDeath");
-
-            CLuaBaseEntity LuaMobEntity(PMob);
-
-            if (luaL_loadfile(LuaHandle, (const char*)File) || lua_pcall(LuaHandle, 0, 0, 0))
+            auto onMobDeath = loadFunctionFromFile("onMobDeath", filename);
+            if (!onMobDeath.valid())
             {
-                lua_pop(LuaHandle, 1);
+                ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
                 return -1;
             }
 
-            lua_getglobal(LuaHandle, "onMobDeath");
-            if (lua_isnil(LuaHandle, -1))
+            // onMobDeath(mob, player, isKiller, noKiller)
+            auto result = onMobDeath(CLuaBaseEntity(PMob), sol::nil, sol::nil, true);
+            if (!result.valid())
             {
-                ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", File);
-                lua_pop(LuaHandle, 1);
-                return -1;
-            }
-
-            //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-            lua_pushnil(LuaHandle);
-            lua_pushnil(LuaHandle);
-            lua_pushboolean(LuaHandle, true);
-
-            if (lua_pcall(LuaHandle, 4, 0, 0))
-            {
-                ShowError("luautils::onMobDeath: %s\n", lua_tostring(LuaHandle, -1));
-                lua_pop(LuaHandle, 1);
+                sol::error err = result;
+                ShowError("luautils::onMobDeath: %s\n", err.what());
                 return -1;
             }
         }
-        */
+
         return 0;
     }
 
@@ -2887,41 +2844,44 @@ namespace luautils
 
     int32 OnMobDespawn(CBaseEntity* PMob)
     {
-        /*
-        TPZ_DEBUG_BREAK_IF(PMob == nullptr);
+        TracyZoneScoped;
 
-        int8 File[255];
+        if (PMob == nullptr)
+        {
+            return -1;
+        }
+
+        std::string filename;
         switch (PMob->objtype)
         {
             case TYPE_MOB:
-                snprintf((char*)File, sizeof(File), "scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+                filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
                 break;
             case TYPE_PET:
-                snprintf((char*)File, sizeof(File), "scripts/globals/pets/%s.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
+                filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
                 break;
             case TYPE_TRUST:
-                snprintf((char*)File, sizeof(File), "scripts/globals/spells/trust/%s.lua", PMob->GetName());
+                filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
                 break;
             default:
-                ShowWarning("luautils::onMobDespawn (%d): unknown objtype\n", PMob->objtype);
+                ShowWarning("luautils::onMobSpawn (%d): unknown objtype\n", PMob->objtype);
                 break;
         }
 
-        if (prepFile(File, "onMobDespawn"))
+        auto onMobDespawn = loadFunctionFromFile("onMobDespawn", filename);
+        if (!onMobDespawn.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onMobDespawn(CLuaBaseEntity(PMob));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobDespawn: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobDespawn: %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
@@ -3038,53 +2998,41 @@ namespace luautils
     std::tuple<int32, uint8, uint8> OnUseWeaponSkill(CBattleEntity* PChar, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action,
                                                      CBattleEntity* taChar)
     {
-        /*
-        lua_prepscript("scripts/globals/weaponskills/%s.lua", wskill->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onUseWeaponSkill"))
+        auto filename = fmt::format("scripts/globals/weaponskills/{}.lua", wskill->getName());
+
+        auto onUseWeaponSkill = loadFunctionFromFile("onUseWeaponSkill", filename);
+        if (!onUseWeaponSkill.valid())
         {
             return std::tuple<int32, uint8, uint8>();
         }
 
-        sol::stack::push(LuaHandle, CLuaBaseEntity(PChar));
-
-        lua_pushinteger(LuaHandle, wskill->getID());
-        lua_pushnumber(LuaHandle, tp);
-        lua_pushboolean(LuaHandle, primary);
-
-        sol::stack::push(LuaHandle, CLuaAction(&action));
-
-        if (taChar == nullptr)
+        std::optional<CLuaBaseEntity> optTrickAttackLuaChar = std::nullopt;
+        if (taChar)
         {
-            lua_pushnil(LuaHandle);
-        }
-        else
-        {
-            sol::stack::push(LuaHandle, CLuaBaseEntity(taChar));
+            optTrickAttackLuaChar = CLuaBaseEntity(taChar);
         }
 
-        if (lua_pcall(LuaHandle, 7, 4, 0))
+        auto result = onUseWeaponSkill(CLuaBaseEntity(PChar), wskill->getID(), tp, primary, CLuaAction(&action), optTrickAttackLuaChar);
+        if (!result.valid())
         {
-            ShowError("luautils::onUseWeaponSkill: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onUseWeaponSkill: %s\n", err.what());
             return std::tuple<int32, uint8, uint8>();
         }
 
-        uint8 tpHitsLanded    = (uint8)lua_tonumber(LuaHandle, -4);
-        uint8 extraHitsLanded = (uint8)lua_tonumber(LuaHandle, -3);
-        bool  criticalHit     = lua_toboolean(LuaHandle, -2);
-        int32 dmg             = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
+        uint8 tpHitsLanded    = result.get<uint8>(-4);
+        uint8 extraHitsLanded = result.get<uint8>(-3);
+        bool  criticalHit     = result.get<bool>(-2);
+        int32 dmg             = result[-1].is<lua_Number>() ? result.get<int32>(-1): 0;
 
         if (criticalHit)
         {
             luautils::OnCriticalHit((CBattleEntity*)PMob, (CBattleEntity*)PChar);
         }
 
-        lua_pop(LuaHandle, 4);
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
-        */
-
-        return std::tuple<int32, uint8, uint8>();
     }
 
     /***********************************************************************
@@ -3095,55 +3043,44 @@ namespace luautils
 
     int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/mobs/%s.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        TracyZoneScoped;
 
-        if (!prepFile(File, "onMobWeaponSkill"))
+        // Mob Script
         {
-            CLuaBaseEntity LuaBaseEntity(PTarget);
-            //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
+            auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-            CLuaBaseEntity LuaMobEntity(PMob);
-            //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-            CLuaMobSkill LuaMobSkill(PMobSkill);
-            //Lunar<CLuaMobSkill>::push(LuaHandle, &LuaMobSkill);
-
-            CLuaAction LuaAction(action);
-            //Lunar<CLuaAction>::push(LuaHandle, &LuaAction);
-
-            if (lua_pcall(LuaHandle, 4, 0, 0))
+            auto onMobWeaponSkill = loadFunctionFromFile("onMobWeaponSkill", filename);
+            if (!onMobWeaponSkill.valid())
             {
-                ShowError("luautils::onMobWeaponSkill: %s\n", lua_tostring(LuaHandle, -1));
-                lua_pop(LuaHandle, 1);
+                return -1;
+            }
+
+            auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill), CLuaAction(action));
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::onMobWeaponSkill (mob) %s\n", err.what());
             }
         }
 
-        snprintf((char*)File, sizeof(File), "scripts/globals/mobskills/%s.lua", PMobSkill->getName());
+        // Mob Skill Script
+        auto filename = fmt::format("scripts/globals/mobskills/{}.lua", PMobSkill->getName());
 
-        if (prepFile(File, "onMobWeaponSkill"))
+        auto onMobWeaponSkill = loadFunctionFromFile("onMobWeaponSkill", filename);
+        if (!onMobWeaponSkill.valid())
         {
             return 0;
         }
-        CLuaBaseEntity LuaBaseEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-        CLuaMobSkill LuaMobSkill(PMobSkill);
-        //Lunar<CLuaMobSkill>::push(LuaHandle, &LuaMobSkill);
 
-        if (lua_pcall(LuaHandle, 3, 1, 0))
+        auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobWeaponSkill: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobWeaponSkill (mobskill) %s\n", err.what());
             return 0;
         }
 
-        int32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : 0;
     }
 
     /***********************************************************************
@@ -3154,68 +3091,48 @@ namespace luautils
 
     int32 OnMobSkillCheck(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill)
     {
-        /*
-        lua_prepscript("scripts/globals/mobskills/%s.lua", PMobSkill->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onMobSkillCheck"))
+        auto filename = fmt::format("scripts/globals/mobskills/{}.lua", PMobSkill->getName());
+
+        auto onMobSkillCheck = loadFunctionFromFile("onMobSkillCheck", filename);
+        if (!onMobSkillCheck.valid())
         {
             return 1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PTarget);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PMob);
-        //Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        CLuaMobSkill LuaMobSkill(PMobSkill);
-        //Lunar<CLuaMobSkill>::push(LuaHandle, &LuaMobSkill);
-
-        if (lua_pcall(LuaHandle, 3, 1, 0))
+        auto result = onMobSkillCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
         {
-            ShowError("luautils::onMobSkillCheck (%s): %s\n", PMobSkill->getName(), lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onMobSkillCheck: %s\n", err.what());
             return 1;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : -5);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : -5;
     }
 
     int32 OnMobAutomatonSkillCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
     {
-        /*
-        lua_prepscript("scripts/globals/abilities/pets/%s.lua", PMobSkill->getName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onMobSkillCheck"))
+        auto filename = fmt::format("scripts/globals/abilities/pets/{}.lua", PMobSkill->getName());
+
+        auto onMobSkillCheck = loadFunctionFromFile("onMobSkillCheck", filename);
+        if (!onMobSkillCheck.valid())
         {
-            return -1;
+            return 1;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PTarget);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        CLuaBaseEntity LuaMobEntity(PAutomaton);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaMobEntity);
-
-        CLuaMobSkill LuaMobSkill(PMobSkill);
-        // Lunar<CLuaMobSkill>::push(LuaHandle, &LuaMobSkill);
-
-        if (lua_pcall(LuaHandle, 3, 1, 0))
+        auto result = onMobSkillCheck(CLuaBaseEntity(PTarget), CLuaBaseEntity(PAutomaton), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
         {
-            ShowError("luautils::OnMobAutomatonSkillCheck (%s): %s\n", PMobSkill->getName(), lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return -1;
+            sol::error err = result;
+            ShowError("luautils::onMobSkillCheck: %s\n", err.what());
+            return 1;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : -5);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : -5;
     }
 
     /***********************************************************************
@@ -3456,125 +3373,117 @@ namespace luautils
 
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance)
     {
-        /*
+        TracyZoneScoped;
+
         CZone* PZone = PInstance->GetZone();
 
-        lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
 
-        if (prepFile(File, "onInstanceZoneIn"))
+        auto onInstanceZoneIn = loadFunctionFromFile("onInstanceZoneIn", filename);
+        if (!onInstanceZoneIn.valid())
         {
             return -1;
         }
 
-        CLuaBaseEntity LuaEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaEntity);
-
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onInstanceZoneIn(CLuaBaseEntity(PChar), CLuaInstance(PInstance));
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceZoneIn: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onInstanceZoneIn %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     void AfterInstanceRegister(CBaseEntity* PChar)
     {
-        /*
         TPZ_DEBUG_BREAK_IF(!PChar->PInstance);
 
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PChar->loc.zone->GetName(), PChar->PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "afterInstanceRegister"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PChar->loc.zone->GetName(), PChar->PInstance->GetName());
+
+        auto afterInstanceRegister = loadFunctionFromFile("afterInstanceRegister", filename);
+        if (!afterInstanceRegister.valid())
         {
             return;
         }
 
-        CLuaBaseEntity LuaBaseEntity(PChar);
-        // Lunar<CLuaBaseEntity>::push(LuaHandle, &LuaBaseEntity);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = afterInstanceRegister(CLuaBaseEntity(PChar));
+        if (!result.valid())
         {
-            ShowError("luautils::afterInstanceRegister: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return;
+            sol::error err = result;
+            ShowError("luautils::afterInstanceRegister %s\n", err.what());
         }
-        */
     }
 
     int32 OnInstanceLoadFailed(CZone* PZone)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/Zone.lua", PZone->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceLoadFailed"))
+        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PZone->GetName());
+
+        auto onInstanceLoadFailed = loadFunctionFromFile("onInstanceLoadFailed", filename);
+        if (!onInstanceLoadFailed.valid())
         {
             return -1;
         }
 
-        if (lua_pcall(LuaHandle, 0, 1, 0))
+        auto result = onInstanceLoadFailed();
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceLoadFailed: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::afterInstanceRegister %s\n", err.what());
             return 0;
         }
 
-        uint32 retVal = (!lua_isnil(LuaHandle, -1) && lua_isnumber(LuaHandle, -1) ? (int32)lua_tonumber(LuaHandle, -1) : 0);
-        lua_pop(LuaHandle, 1);
-        return retVal;
-        */
-        return 0;
+        return result.return_count() ? result.get<int32>() : 0;
     }
 
     int32 OnInstanceTimeUpdate(CZone* PZone, CInstance* PInstance, uint32 time)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PZone->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceTimeUpdate"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceTimeUpdate = loadFunctionFromFile("onInstanceTimeUpdate", filename);
+        if (!onInstanceTimeUpdate.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        lua_pushinteger(LuaHandle, time);
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onInstanceTimeUpdate(CLuaInstance(PInstance), time);
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceTimeUpdate: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onInstanceTimeUpdate %s\n", err.what());
+            return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnInstanceFailure(CInstance* PInstance)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceFailure"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceFailure = loadFunctionFromFile("onInstanceFailure", filename);
+        if (!onInstanceFailure.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onInstanceFailure(CLuaInstance(PInstance));
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceFailure: %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onInstanceFailure %s\n", err.what());
+            return -1;
         }
-        */
+
         return 0;
     }
 
@@ -3645,97 +3554,93 @@ namespace luautils
 
     int32 OnInstanceCreated(CInstance* PInstance)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceCreated"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceCreated = loadFunctionFromFile("onInstanceCreated", filename);
+        if (!onInstanceCreated.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onInstanceCreated(CLuaInstance(PInstance));
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceCreated %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onInstanceCreated %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnInstanceProgressUpdate(CInstance* PInstance)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceProgressUpdate"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceProgressUpdate = loadFunctionFromFile("onInstanceProgressUpdate", filename);
+        if (!onInstanceProgressUpdate.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        lua_pushinteger(LuaHandle, PInstance->GetProgress());
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onInstanceProgressUpdate(CLuaInstance(PInstance), PInstance->GetProgress());
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceProgressUpdate %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onInstanceProgressUpdate %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnInstanceStageChange(CInstance* PInstance)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceStageChange"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceStageChange = loadFunctionFromFile("onInstanceStageChange", filename);
+        if (!onInstanceStageChange.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        lua_pushinteger(LuaHandle, PInstance->GetStage());
-
-        if (lua_pcall(LuaHandle, 2, 0, 0))
+        auto result = onInstanceStageChange(CLuaInstance(PInstance), PInstance->GetStage());
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceStageChange %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onInstanceStageChange %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
     int32 OnInstanceComplete(CInstance* PInstance)
     {
-        /*
-        lua_prepscript("scripts/zones/%s/instances/%s.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+        TracyZoneScoped;
 
-        if (prepFile(File, "onInstanceComplete"))
+        auto filename = fmt::format("scripts/zones/{}/instances/{}.lua", PInstance->GetZone()->GetName(), PInstance->GetName());
+
+        auto onInstanceComplete = loadFunctionFromFile("onInstanceComplete", filename);
+        if (!onInstanceComplete.valid())
         {
             return -1;
         }
 
-        CLuaInstance LuaInstance(PInstance);
-        // Lunar<CLuaInstance>::push(LuaHandle, &LuaInstance);
-
-        if (lua_pcall(LuaHandle, 1, 0, 0))
+        auto result = onInstanceComplete(CLuaInstance(PInstance));
+        if (!result.valid())
         {
-            ShowError("luautils::onInstanceComplete %s\n", lua_tostring(LuaHandle, -1));
-            lua_pop(LuaHandle, 1);
+            sol::error err = result;
+            ShowError("luautils::onInstanceComplete %s\n", err.what());
             return -1;
         }
-        */
+
         return 0;
     }
 
