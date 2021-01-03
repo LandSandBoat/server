@@ -322,7 +322,7 @@ public:
 
     void   addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
     void   delMission(uint8 missionLogID, uint16 missionID);          // Delete Mission from Mission Log
-    uint16 getCurrentMission(sol::table const& missionLogTable);      // Gets the current mission
+    uint16 getCurrentMission(sol::object const& missionLogObj);       // Gets the current mission
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
 

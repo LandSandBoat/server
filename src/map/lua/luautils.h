@@ -28,6 +28,10 @@
 #include "../../common/taskmgr.h"
 
 #include "lua.hpp"
+
+// Sol compilation definitions are in the base CMakeLists file
+// SOL_ALL_SAFETIES_ON = 1
+// SOL_NO_CHECK_NUMBER_PRECISION = 1
 #include "sol/sol.hpp"
 
 // sol changes this behaviour to return 0 rather than truncating
