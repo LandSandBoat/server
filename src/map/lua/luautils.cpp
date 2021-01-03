@@ -3239,16 +3239,17 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-
-        // TODO:
-        // Try and load fom PChar->m_event.Script?
-
-        auto onInstanceCreated = loadFunctionFromFile("onInstanceCreated", filename);
+        auto onInstanceCreated = loadFunctionFromFile("onInstanceCreated", PChar->m_event.Script);
         if (!onInstanceCreated.valid())
         {
-            ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
-            return -1;
+            // If you can't load from PChar->m_event.Script, try from the zone
+            auto filename     = fmt::format("scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
+            onInstanceCreated = loadFunctionFromFile("onInstanceCreated", filename);
+            if (!onInstanceCreated.valid())
+            {
+                ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
+                return -1;
+            }
         }
 
         std::optional<CLuaInstance> optLuaInstance = std::nullopt;
