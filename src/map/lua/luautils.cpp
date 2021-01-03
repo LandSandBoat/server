@@ -1289,7 +1289,7 @@ namespace luautils
         auto onTrigger = loadFunctionFromFile("onTrigger", filename);
         if (!onTrigger.valid())
         {
-            ShowWarning("luautils::onTrigger\n");
+            ShowWarning("luautils::onTrigger - No Valid Function for %s in %s\n", PNpc->GetName(), PChar->loc.zone->GetName());
             return -1;
         }
 
