@@ -2383,10 +2383,6 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type)
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
     CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
 
-    // TODO: Refator this out into getTeleport and getTeleportTable, this shouldn't be
-    //       returning type different types...
-
-    sol::table table;
     switch (tele_type)
     {
         case TELEPORT_TYPE::OUTPOST_SANDY:
@@ -2420,18 +2416,15 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type)
     return 0;
 }
 
-sol::table CLuaBaseEntity::getTeleportTable(uint8 type, sol::this_state ts)
+sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua = ts;
+    sol::state_view lua = luautils::lua;
     sol::table      teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
     CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
-
-    // TODO: Refator this out into getTeleport and getTeleportTable, this shouldn't be
-    //       returning type different types...
 
     switch (tele_type)
     {
@@ -3228,7 +3221,7 @@ void CLuaBaseEntity::createShop(uint8 size, sol::object const& arg1)
     PChar->Container->Clean();
     PChar->Container->setSize(size + 1);
 
-    if (arg1 != sol::nil)
+    if (arg1 != sol::nil && arg1.is<double>())
     {
         PChar->Container->setType(arg1.as<uint8>());
     }
@@ -3243,12 +3236,13 @@ void CLuaBaseEntity::createShop(uint8 size, sol::object const& arg1)
  *  Notes   : Use with createShop() - 16 Max Items in Shop
  ************************************************************************/
 
-void CLuaBaseEntity::addShopItem(uint16 itemID, uint32 price, sol::object const& arg2, sol::object const& arg3)
+void CLuaBaseEntity::addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
     uint8        slotID = PChar->Container->getItemsCount();
+    uint32       price  = static_cast<uint32>(rawPrice);
 
     PChar->Container->setItem(slotID, itemID, 0, price);
 
@@ -4989,10 +4983,11 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
  *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getFame(uint8 fameArea)
+uint16 CLuaBaseEntity::getFame(sol::table const& areaTable)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
+    uint8  fameArea = areaTable["fame_area"];
     uint16 fame = 0;
 
     if (fameArea <= 15)
@@ -5048,9 +5043,11 @@ uint16 CLuaBaseEntity::getFame(uint8 fameArea)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addFame(uint8 fameArea, uint16 fame)
+void CLuaBaseEntity::addFame(sol::table const& areaTable, uint16 fame)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    uint8 fameArea = areaTable["fame_area"];
 
     if (fameArea <= 15)
     {
@@ -5104,9 +5101,11 @@ void CLuaBaseEntity::addFame(uint8 fameArea, uint16 fame)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setFame(uint8 fameArea, uint16 fame)
+void CLuaBaseEntity::setFame(sol::table const& areaTable, uint16 fame)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    uint8 fameArea = areaTable["fame_area"];
 
     if (fameArea <= 15)
     {
@@ -5161,15 +5160,16 @@ void CLuaBaseEntity::setFame(uint8 fameArea, uint16 fame)
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getFameLevel(uint8 fameArea)
+uint8 CLuaBaseEntity::getFameLevel(sol::table const& areaTable)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
+    uint8 fameArea  = areaTable["fame_area"];
     uint8 fameLevel = 1;
 
     if (fameArea <= 15)
     {
-        uint16 fame = this->getFame(fameArea);
+        uint16 fame = this->getFame(areaTable);
 
         if (fame >= 613)
         {

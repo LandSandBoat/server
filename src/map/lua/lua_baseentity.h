@@ -150,14 +150,14 @@ public:
     bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
     bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
 
-    auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>;   // Get Entity zone
-    uint16 getZoneID();                                                   // Get Entity zone ID
-    auto   getZoneName() -> const char*;                                  // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);                                    // true если указанная зона посещалась персонажем ранее
-    uint16 getPreviousZone();                                             // Get Entity previous zone
-    uint8  getCurrentRegion();                                            // Get Entity conquest region
-    uint8  getContinentID();                                              // узнаем континент, на котором находится сущность
-    bool   isInMogHouse();                                                // Check if entity inside a mog house
+    auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
+    uint16 getZoneID();                                                 // Get Entity zone ID
+    auto   getZoneName() -> const char*;                                // Get Entity zone name
+    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    uint16 getPreviousZone();                                           // Get Entity previous zone
+    uint8  getCurrentRegion();                                          // Get Entity conquest region
+    uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
+    bool   isInMogHouse();                                              // Check if entity inside a mog house
 
     uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
@@ -175,11 +175,11 @@ public:
 
     void   addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
     uint32 getTeleport(uint8 type);                                               // Get unlocked teleport means
-    auto   getTeleportTable(uint8 type, sol::this_state ts) -> sol::table;
-    bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2);          // Has access to specific teleport
-    void   setTeleportMenu(uint16 type, sol::table const& favs);                  // Set favorites or menu layout preferences for homepoints or survival guides
-    auto   getTeleportMenu(uint8 type) -> sol::table;                             // Get favorites and menu layout preferences
-    void   setHomePoint();                                                        // Sets character's homepoint
+    auto   getTeleportTable(uint8 type) -> sol::table;
+    bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2); // Has access to specific teleport
+    void   setTeleportMenu(uint16 type, sol::table const& favs);         // Set favorites or menu layout preferences for homepoints or survival guides
+    auto   getTeleportMenu(uint8 type) -> sol::table;                    // Get favorites and menu layout preferences
+    void   setHomePoint();                                               // Sets character's homepoint
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
@@ -188,20 +188,20 @@ public:
     bool bringPlayer(std::string const& playerName);             // warps target to self
 
     // Items
-    uint16 getEquipID(SLOTTYPE slot);                                // Gets the Item Id of the item in specified slot
-    auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;   // Returns the item object from specified slot
-    bool   hasItem(uint16 itemID, sol::object const& location);      // Check to see if Entity has item in inventory (hasItem(itemNumber))
-    bool   addItem(sol::variadic_args va);                           // Add item to Entity inventory (additem(itemNumber,quantity))
+    uint16 getEquipID(SLOTTYPE slot);                              // Gets the Item Id of the item in specified slot
+    auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
+    bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
+    bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                          // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
     bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
     void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
 
-    void createShop(uint8 size, sol::object const& arg1);                                            // Prepare the container for work of shop ??
-    void addShopItem(uint16 itemID, uint32 price, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
-    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                              // Gets current GP item id and max points
-    bool breakLinkshell(std::string const& lsname);                                                  // Breaks all pearls/sacks
+    void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
+    void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
+    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                                 // Gets current GP item id and max points
+    bool breakLinkshell(std::string const& lsname);                                                     // Breaks all pearls/sacks
 
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
@@ -303,10 +303,10 @@ public:
     void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
-    uint16 getFame(uint8 fameArea);              // Gets Fame
-    void   addFame(uint8 fameArea, uint16 fame); // Adds Fame
-    void   setFame(uint8 fameArea, uint16 fame); // Sets Fame
-    uint8  getFameLevel(uint8 fameArea);         // Gets Fame Level for specified nation
+    uint16 getFame(sol::table const& areaTable);              // Gets Fame
+    void   addFame(sol::table const& areaTable, uint16 fame); // Adds Fame
+    void   setFame(sol::table const& areaTable, uint16 fame); // Sets Fame
+    uint8  getFameLevel(sol::table const& areaTable);         // Gets Fame Level for specified nation
 
     uint8  getRank();                        // Get Rank for current active nation
     uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
@@ -530,10 +530,10 @@ public:
     void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
     void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
     void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount);
-    void  resetEnmity(CLuaBaseEntity* PEntity);              // resets enmity to player for specificed mob
-    void  updateClaim(sol::object const& entity);            // Adds Enmity to player for specified mob and claims
-    bool  hasEnmity();                                       // Does the player have any enmity at all from any source
-    auto  getNotorietyList() -> sol::table;                  // Returns a table with all of the entities on a chars notoriety list
+    void  resetEnmity(CLuaBaseEntity* PEntity);   // resets enmity to player for specificed mob
+    void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
+    bool  hasEnmity();                            // Does the player have any enmity at all from any source
+    auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
@@ -633,9 +633,9 @@ public:
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
     bool hasValidJugPetItem();
 
-    bool   hasPet();                                    // returns true if the player has a pet
+    bool   hasPet();                                  // returns true if the player has a pet
     auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
-    uint32 getPetID();                                  // If the entity has a pet, returns the PetID to identify pet type.
+    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
 
