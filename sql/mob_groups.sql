@@ -4294,7 +4294,7 @@ INSERT INTO `mob_groups` VALUES (7,3506,82,'Screamer',330,0,208,0,0,40,44,0);
 INSERT INTO `mob_groups` VALUES (8,6309,82,'Stag_Beetle',330,0,2319,0,0,38,48,0);
 INSERT INTO `mob_groups` VALUES (9,4285,82,'Wandering_Sapling',330,0,2616,0,0,38,41,0);
 INSERT INTO `mob_groups` VALUES (10,947,82,'Decrepit_Gnole',330,0,590,0,0,73,75,0);
-INSERT INTO `mob_groups` VALUES (11,1517,82,'Ghoul',330,1,959,0,0,39,51,0);
+INSERT INTO `mob_groups` VALUES (11,1517,82,'Ghoul_war',330,1,959,0,0,39,51,0);
 INSERT INTO `mob_groups` VALUES (12,3912,82,'Thunder_Elemental',330,4,2410,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (13,411,82,'Biddybug',330,0,267,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (14,548,82,'Brutal_Sheep',330,0,367,0,0,39,41,0);
@@ -4370,7 +4370,7 @@ INSERT INTO `mob_groups` VALUES (83,737,82,'Clan_Reaper_Grunt',0,128,0,0,0,0,0,0
 INSERT INTO `mob_groups` VALUES (84,96,82,'Alpha_Gnole_Anders',0,128,53,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (85,132,82,'Anderss_Guard',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (86,2734,82,'Moonfang_Warrior',0,128,1728,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (87,3765,82,'Steelbiter_Gudrud',0,128,2328,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (87,6761,82,'Steelbiter_Gudrud',0,128,2328,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (88,464,82,'Bloodwing_Impaler',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (89,735,82,'Clan_Bear_Fighter',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (90,776,82,'Confederate_Mantelet',0,128,0,0,0,60,60,0);
@@ -4439,7 +4439,8 @@ INSERT INTO `mob_groups` VALUES (152,3742,82,'Spring_Pugil',0,128,147,0,0,39,52,
 INSERT INTO `mob_groups` VALUES (153,1323,82,'Ferocious_Pugil',0,128,147,0,0,39,52,0);
 INSERT INTO `mob_groups` VALUES (154,5133,82,'Thread_Leech',0,128,895,0,0,39,51,0);
 INSERT INTO `mob_groups` VALUES (155,2001,82,'Huge_Leech',0,128,0,0,0,39,51,0);
-INSERT INTO `mob_groups` VALUES (156,1518,82,'Ghoul',330,1,959,0,0,39,51,0);
+INSERT INTO `mob_groups` VALUES (156,1518,82,'Ghoul_blm',330,1,959,0,0,39,51,0);
+INSERT INTO `mob_groups` VALUES (157,6760,82,'Voirloup',0,32,0,0,0,88,88,0);
 
 -- ------------------------------------------------------------
 -- Vunkerl_Inlet_[S] (Zone 83)
