@@ -3801,7 +3801,7 @@ sol::table CLuaBaseEntity::getRetrievableItemsForSlip(uint16 slipId)
 
     auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
 
-    sol::table table;
+    sol::table table = luautils::lua.create_table();
     // TODO Is extra sized defined anywhere?
     for (int i = 0; i < 24; i++)
     {
@@ -11785,7 +11785,7 @@ sol::table CLuaBaseEntity::getEnmityList()
 
     if (enmityList)
     {
-        sol::table table;
+        sol::table table = luautils::lua.create_table();
         int        i = 1;
         for (auto member : *enmityList)
         {

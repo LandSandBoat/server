@@ -103,8 +103,8 @@ uint32 CLuaInstance::getTimeLimit()
 sol::table CLuaInstance::getEntryPos()
 {
     position_t entry = m_PLuaInstance->GetEntryLoc();
+    sol::table table = luautils::lua.create_table();
 
-    sol::table table;
     table["x"]   = entry.x;
     table["y"]   = entry.y;
     table["z"]   = entry.z;

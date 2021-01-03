@@ -300,12 +300,7 @@ namespace luautils
         // Run script
         lua.script_file(fileName);
 
-        auto func = lua.get<sol::function>(funcName);
-        if (!func.valid())
-        {
-            return sol::nil;
-        }
-        return func;
+        return lua.get<sol::function>(funcName);
     }
 
     // temporary solution for geysers in Dangruf_Wadi
@@ -1280,7 +1275,7 @@ namespace luautils
 
         PChar->m_event.reset();
         PChar->m_event.Target = PNpc;
-        PChar->m_event.Script.insert(0, filename.c_str());
+        PChar->m_event.Script = filename;
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
@@ -1427,7 +1422,7 @@ namespace luautils
 
         PChar->m_event.reset();
         PChar->m_event.Target = PNpc;
-        PChar->m_event.Script.insert(0, filename);
+        PChar->m_event.Script = filename;
 
         auto onTrade = loadFunctionFromFile("onTrade", filename);
         if (!onTrade.valid())
@@ -2268,7 +2263,7 @@ namespace luautils
         {
             ((CCharEntity*)PTarget)->m_event.reset();
             ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script.insert(0, filename);
+            ((CCharEntity*)PTarget)->m_event.Script = filename;
         }
 
         auto onMobEngaged = loadFunctionFromFile("onMobEngaged", filename);
@@ -2347,7 +2342,7 @@ namespace luautils
         {
             ((CCharEntity*)PTarget)->m_event.reset();
             ((CCharEntity*)PTarget)->m_event.Target = PMob;
-            ((CCharEntity*)PTarget)->m_event.Script.insert(0, filename);
+            ((CCharEntity*)PTarget)->m_event.Script = filename;
         }
 
         auto onMobDrawIn = loadFunctionFromFile("onMobDrawIn", filename);
@@ -2508,7 +2503,7 @@ namespace luautils
 
                     PMember->m_event.reset();
                     PMember->m_event.Target = PMob;
-                    PMember->m_event.Script.insert(0, filename);
+                    PMember->m_event.Script = filename;
 
                     // onMobDeath(mob, player, isKiller, noKiller)
                     auto result = onMobDeath(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller);
@@ -2828,11 +2823,11 @@ namespace luautils
             ShowError("luautils::onUseWeaponSkill: %s\n", err.what());
             return std::tuple<int32, uint8, uint8>();
         }
-
-        uint8 tpHitsLanded    = result.get<uint8>(0);
-        uint8 extraHitsLanded = result.get<uint8>(1);
-        bool  criticalHit     = result.get<bool>(2);
-        int32 dmg             = result.get<int32>(3);
+        
+        uint8 tpHitsLanded    = result.get_type(0) == sol::type::number ? result.get<uint8>(0) : 0;
+        uint8 extraHitsLanded = result.get_type(1) == sol::type::number ? result.get<uint8>(1) : 0;
+        bool  criticalHit     = result.get_type(2) == sol::type::boolean ? result.get<bool>(2) : false;
+        int32 dmg             = result.get_type(3) == sol::type::number ? result.get<int32>(3) : 0;
 
         if (criticalHit)
         {
@@ -3540,7 +3535,7 @@ namespace luautils
 
         PChar->m_event.reset();
         PChar->m_event.Target = PChar;
-        PChar->m_event.Script.insert(0, filename.c_str());
+        PChar->m_event.Script = filename;
 
         auto result = onBattlefieldLeave(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
         if (!result.valid())

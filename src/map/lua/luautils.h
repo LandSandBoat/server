@@ -118,7 +118,7 @@ namespace luautils
     template <typename T>
     void  print(T const& item);
 
-    auto  loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
+    auto loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);
     auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
