@@ -1284,8 +1284,6 @@ namespace luautils
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
-        lua.script_file(filename);
-
         auto onTrigger = loadFunctionFromFile("onTrigger", filename);
         if (!onTrigger.valid())
         {
@@ -1301,7 +1299,7 @@ namespace luautils
             return -1;
         }
 
-        return result.return_count() ? result.get<int32>() : 0;
+        return result.get_type() == sol::type::number ? result.get<int32>() : 0;
     }
 
     /************************************************************************
@@ -1328,8 +1326,7 @@ namespace luautils
             return -1;
         }
 
-        int32 updatePosition = func_result.return_count() ? func_result.get<int32>() : 0;
-        return updatePosition;
+        return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
     /************************************************************************
@@ -1356,8 +1353,7 @@ namespace luautils
             return -1;
         }
 
-        int32 updatePosition = func_result.return_count() ? func_result.get<int32>() : 0;
-        return updatePosition;
+        return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
     int32 OnEventUpdate(CCharEntity* PChar, int8* string)
@@ -2825,7 +2821,7 @@ namespace luautils
             optTrickAttackLuaChar = CLuaBaseEntity(taChar);
         }
 
-        auto result = onUseWeaponSkill(CLuaBaseEntity(PChar), wskill->getID(), tp, primary, CLuaAction(&action), optTrickAttackLuaChar);
+        auto result = onUseWeaponSkill(CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), wskill->getID(), tp, primary, CLuaAction(&action), optTrickAttackLuaChar);
         if (!result.valid())
         {
             sol::error err = result;
@@ -2833,10 +2829,10 @@ namespace luautils
             return std::tuple<int32, uint8, uint8>();
         }
 
-        uint8 tpHitsLanded    = result.get<uint8>(-4);
-        uint8 extraHitsLanded = result.get<uint8>(-3);
-        bool  criticalHit     = result.get<bool>(-2);
-        int32 dmg             = result[-1].is<lua_Number>() ? result.get<int32>(-1): 0;
+        uint8 tpHitsLanded    = result.get<uint8>(0);
+        uint8 extraHitsLanded = result.get<uint8>(1);
+        bool  criticalHit     = result.get<bool>(2);
+        int32 dmg             = result.get<int32>(3);
 
         if (criticalHit)
         {
