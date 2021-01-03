@@ -383,15 +383,15 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, CLuaBaseEntity const* PEnti
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3, sol::object const& dispName)
+void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 param0   = (p0 != sol::nil) ? p0.as<uint32>() : 0;
-    uint32 param1   = (p1 != sol::nil) ? p1.as<uint32>() : 0;
-    uint32 param2   = (p2 != sol::nil) ? p2.as<uint32>() : 0;
-    uint32 param3   = (p3 != sol::nil) ? p3.as<uint32>() : 0;
-    bool   showName = (dispName != sol::nil) ? dispName.as<bool>() : false;
+    uint32 param0   = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
+    uint32 param1   = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
+    uint32 param2   = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
+    uint32 param3   = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
+    bool   showName = va.get_type(4) == sol::type::boolean ? va.get<bool>(4) : false;
 
     static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageSpecialPacket(m_PBaseEntity, messageID, param0, param1, param2, param3, showName));
 }
@@ -2420,7 +2420,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua = luautils::lua;
+    sol::state_view lua       = luautils::lua;
     sol::table      teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
@@ -4983,12 +4983,12 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
  *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getFame(sol::table const& areaTable)
+uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8  fameArea = areaTable["fame_area"];
-    uint16 fame = 0;
+    uint8  fameArea = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
+    uint16 fame     = 0;
 
     if (fameArea <= 15)
     {
@@ -5160,16 +5160,16 @@ void CLuaBaseEntity::setFame(sol::table const& areaTable, uint16 fame)
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getFameLevel(sol::table const& areaTable)
+uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 fameArea  = areaTable["fame_area"];
+    uint8 fameArea  = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
     uint8 fameLevel = 1;
 
     if (fameArea <= 15)
     {
-        uint16 fame = this->getFame(areaTable);
+        uint16 fame = this->getFame(areaObj);
 
         if (fame >= 613)
         {
@@ -9022,11 +9022,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
     else
     {
         // Mandatory
-        auto effectID   = va[0].as<EFFECT>(); // The same
-        auto effectIcon = va[0].as<uint16>(); // The same
-        auto power      = static_cast<uint16>(va[1].as<double>());// Can come in as a lua_number, capture as double and truncate
-        auto tick       = static_cast<uint16>(va[2].as<double>()); 
-        auto duration   = static_cast<uint16>(va[3].as<double>()); 
+        auto effectID   = va[0].as<EFFECT>();                      // The same
+        auto effectIcon = va[0].as<uint16>();                      // The same
+        auto power      = static_cast<uint16>(va[1].as<double>()); // Can come in as a lua_number, capture as double and truncate
+        auto tick       = static_cast<uint16>(va[2].as<double>());
+        auto duration   = static_cast<uint16>(va[3].as<double>());
 
         // Optional
         auto subID    = va[4].is<uint16>() ? va[5].is<uint16>() : 0;

@@ -56,8 +56,7 @@ public:
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
 
-    void messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2,
-                        sol::object const& p3, sol::object const& dispName); // Sends Special Message
+    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
 
     void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
     void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
@@ -303,10 +302,10 @@ public:
     void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
-    uint16 getFame(sol::table const& areaTable);              // Gets Fame
+    uint16 getFame(sol::object const& areaObj);               // Gets Fame
     void   addFame(sol::table const& areaTable, uint16 fame); // Adds Fame
     void   setFame(sol::table const& areaTable, uint16 fame); // Sets Fame
-    uint8  getFameLevel(sol::table const& areaTable);         // Gets Fame Level for specified nation
+    uint8  getFameLevel(sol::object const& areaObj);          // Gets Fame Level for specified nation
 
     uint8  getRank();                        // Get Rank for current active nation
     uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
