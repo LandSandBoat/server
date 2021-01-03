@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-function onAbilityCheck(player, target, ability, action)
+function onAbilityCheck(player, target, ability)
     return 0, 0
 end
 
@@ -36,9 +36,9 @@ function onUseAbility(player, target, ability, action)
 
     else
 
-    local bonuses = (player:getMod(tpz.mod.SCAVENGE_EFFECT)  + player:getMerit(tpz.merit.SCAVENGE_EFFECT) ) / 100
-    local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
-    local playerID = target:getID()
+        local bonuses = (player:getMod(tpz.mod.SCAVENGE_EFFECT)  + player:getMerit(tpz.merit.SCAVENGE_EFFECT) ) / 100
+        local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
+        local playerID = target:getID()
 
         if (arrowsToReturn == 0) then
             action:messageID(playerID, 139)
