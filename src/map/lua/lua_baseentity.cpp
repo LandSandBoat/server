@@ -3044,37 +3044,26 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
  ************************************************************************/
 
 bool CLuaBaseEntity::delItem(uint16 itemID, uint32 quantity, sol::object const& containerID)
-{ /*
+{
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 location = 0;
+    uint32 location = containerID.is<double>() ? containerID.as<uint32>() : 0;
 
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+    if (containerID.as<uint32>() >= MAX_CONTAINER_ID)
     {
-        quantity = (uint32)lua_tointeger(L, 2);
-    }
-
-    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-    {
-        if ((uint32)lua_tointeger(L, 3) < MAX_CONTAINER_ID)
-        {
-            location = (uint32)lua_tointeger(L, 3);
-        }
-        else
-        {
-            ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
-        }
+        ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
     }
 
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto  SlotID = PChar->getStorage(location)->SearchItem((uint16)lua_tointeger(L, 1));
+    auto  SlotID = PChar->getStorage(location)->SearchItem(itemID);
+
     if (SlotID != ERROR_SLOTID)
     {
         charutils::UpdateItem(PChar, location, SlotID, -quantity);
-        lua_pushboolean(L, true);
         PChar->pushPacket(new CInventoryFinishPacket());
-        return 1;
-    } */
+
+        return true;
+    }
 
     return false;
 }
@@ -5547,7 +5536,7 @@ uint16 CLuaBaseEntity::getCurrentMission(sol::object const& missionLogObj)
     }
 
     uint8  missionLogID = 0;
-    uint16 MissionID  = 0;
+    uint16 MissionID    = 0;
 
     if (missionLogObj.is<lua_Number>())
     {
