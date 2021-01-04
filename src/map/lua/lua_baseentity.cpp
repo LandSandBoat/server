@@ -5032,11 +5032,11 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addFame(sol::table const& areaTable, uint16 fame)
+void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 fameArea = areaTable["fame_area"];
+    uint8 fameArea = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
 
     if (fameArea <= 15)
     {
@@ -5090,11 +5090,11 @@ void CLuaBaseEntity::addFame(sol::table const& areaTable, uint16 fame)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setFame(sol::table const& areaTable, uint16 fame)
+void CLuaBaseEntity::setFame(sol::object const& areaObj, uint16 fame)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 fameArea = areaTable["fame_area"];
+    uint8 fameArea = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
 
     if (fameArea <= 15)
     {

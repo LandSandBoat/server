@@ -303,8 +303,8 @@ public:
     void   delTitle(uint16 titleID);
 
     uint16 getFame(sol::object const& areaObj);               // Gets Fame
-    void   addFame(sol::table const& areaTable, uint16 fame); // Adds Fame
-    void   setFame(sol::table const& areaTable, uint16 fame); // Sets Fame
+    void   addFame(sol::object const& areaObj, uint16 fame);  // Adds Fame
+    void   setFame(sol::object const& areaObj, uint16 fame);  // Sets Fame
     uint8  getFameLevel(sol::object const& areaObj);          // Gets Fame Level for specified nation
 
     uint8  getRank();                        // Get Rank for current active nation
