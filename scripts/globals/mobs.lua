@@ -40,7 +40,7 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
         end
     end
 
-      tpz.magian.checkMagianTrial(player, {['mob'] = mob})
+    tpz.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
 end
 
 -------------------------------------------------

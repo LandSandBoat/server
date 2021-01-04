@@ -258,6 +258,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         ['damageType'] = attacker:getWeaponDamageType(tpz.slot.MAIN)
     }
     local calcParams = {}
+    calcParams.wsID = wsID
     calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.fSTR = fSTR(attacker:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), attacker:getWeaponDmgRank())
     calcParams.cratio = cratio
@@ -288,7 +289,6 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
-
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(tpz.effectFlag.DETECTABLE)
     attacker:delStatusEffect(tpz.effect.SNEAK_ATTACK)
@@ -337,6 +337,7 @@ end
     }
     local calcParams =
     {
+        wsID = wsID,
         weaponDamage = {attacker:getRangedDmg()},
         fSTR = fSTR2(attacker:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), attacker:getRangedDmgRank()),
         cratio = cratio,
@@ -467,6 +468,8 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     end
 
     calcParams.finalDmg = dmg
+    calcParams.wsID = wsID
+
     dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
     return dmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -516,6 +519,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
+    tpz.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
     return finaldmg
 end
 
@@ -524,6 +528,7 @@ function fencerBonus(attacker)
         return 0
     end
 
+    
     local mainEquip = attacker:getStorageItem(0, 0, tpz.slot.MAIN)
     if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
         local subEquip = attacker:getStorageItem(0, 0, tpz.slot.SUB)
@@ -588,7 +593,6 @@ function getMeleeDmg(attacker, weaponType, kick)
         mainhandDamage = mainhandDamage + h2hSkill
         offhandDamage = mainhandDamage
     end
-
     return {mainhandDamage, offhandDamage}
 end
 

@@ -81,7 +81,7 @@ end
 -- increments progress if conditions are met
 function tpz.magian.checkMagianTrial(player, conditions)
     local trials = tpz.magian.trials
-    for _, slot in pairs( {tpz.slot.MAIN, tpz.slot.SUB} ) do
+    for _, slot in pairs( {tpz.slot.MAIN, tpz.slot.SUB, tpz.slot.RANGED} ) do
         local trialOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         local cachePosition, cacheData = hasTrial(player, trialOnItem)
         if trialOnItem and cachePosition then
