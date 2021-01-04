@@ -934,7 +934,7 @@ namespace luautils
                 {
                     for (auto column : magianColumns)
                     {
-                        table.add(column, (int32)Sql_GetIntData(SqlHandle, field++));
+                        table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
                     }
                 }
             }
@@ -952,7 +952,7 @@ namespace luautils
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
-                            inner_table.add(column, (int32)Sql_GetIntData(SqlHandle, field++));
+                            inner_table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
                         }
                     }
                 }
@@ -961,9 +961,11 @@ namespace luautils
             {
                 return sol::nil;
             }
+
+            return table;
         }
 
-        return table;
+        return sol::nil;
     }
 
     /*******************************************************************************
@@ -985,7 +987,7 @@ namespace luautils
             while (Sql_NextRow(SqlHandle) == 0)
             {
                 int32 childTrial = Sql_GetIntData(SqlHandle, 0);
-                table.add(++field, childTrial);
+                table[++field] = childTrial;
             }
 
             return table;
