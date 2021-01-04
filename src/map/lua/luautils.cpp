@@ -156,6 +156,8 @@ namespace luautils
         set_function("despawnMob", &luautils::DespawnMob);
         set_function("getPlayerByName", &luautils::GetPlayerByName);
         set_function("getPlayerByID", &luautils::GetPlayerByID);
+        set_function("getMagianTrial", &luautils::GetMagianTrial);
+        set_function("getMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         set_function("jstMidnight", &luautils::JstMidnight);
         set_function("vanadielTime", &luautils::VanadielTime);
         set_function("vanadielTOTD", &luautils::VanadielTOTD);
@@ -985,6 +987,8 @@ namespace luautils
                 int32 childTrial = Sql_GetIntData(SqlHandle, 0);
                 table.add(++field, childTrial);
             }
+
+            return table;
         }
 
         return sol::nil;
@@ -2998,14 +3002,14 @@ namespace luautils
             return 87;
         }
 
-        auto result0 = result.get<int32>(-2);
-        auto result1 = result.get<int32>(-2);
-        if (result0 != 0)
+        auto result0 = result.get<int32>(0); // Message (0 = None)
+        auto result1 = result.get<int32>(1);
+        if (result1 != 0)
         {
             *PMsgTarget = (CBaseEntity*)PTarget;
         }
 
-        return result1 ? result1 : -5;
+        return result0 ? result0 : 0; // Default to no Message
     }
 
     /***********************************************************************
@@ -3075,6 +3079,7 @@ namespace luautils
         auto onUseAbility = loadFunctionFromFile("onUseAbility", filename);
         if (!onUseAbility.valid())
         {
+            ShowWarning("luautils::onUseAbility - Ability %s not found.\n", PAbility->getName());
             return 0;
         }
 

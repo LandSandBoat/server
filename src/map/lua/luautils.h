@@ -141,8 +141,8 @@ namespace luautils
     void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
     auto   GetPlayerByName(std::string name) -> std::optional<CLuaBaseEntity>;
     auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
-    int32  GetMagianTrial();
-    int32  GetMagianTrialsWithParent();
+    auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
+    auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
     uint32 JstMidnight();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     uint8  VanadielTOTD();          // текущее игровое время суток

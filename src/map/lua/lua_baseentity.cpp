@@ -383,15 +383,15 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, CLuaBaseEntity const* PEnti
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3, sol::object const& dispName)
+void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 param0   = (p0 != sol::nil) ? p0.as<uint32>() : 0;
-    uint32 param1   = (p1 != sol::nil) ? p1.as<uint32>() : 0;
-    uint32 param2   = (p2 != sol::nil) ? p2.as<uint32>() : 0;
-    uint32 param3   = (p3 != sol::nil) ? p3.as<uint32>() : 0;
-    bool   showName = (dispName != sol::nil) ? dispName.as<bool>() : false;
+    uint32 param0   = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
+    uint32 param1   = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
+    uint32 param2   = va.get_type(2) == sol::type::number ? va.get<uint32>(2) : 0;
+    uint32 param3   = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
+    bool   showName = va.get_type(4) == sol::type::boolean ? va.get<bool>(4) : false;
 
     static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageSpecialPacket(m_PBaseEntity, messageID, param0, param1, param2, param3, showName));
 }
@@ -2420,7 +2420,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua = luautils::lua;
+    sol::state_view lua       = luautils::lua;
     sol::table      teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
@@ -3044,37 +3044,26 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
  ************************************************************************/
 
 bool CLuaBaseEntity::delItem(uint16 itemID, uint32 quantity, sol::object const& containerID)
-{ /*
+{
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 location = 0;
+    uint32 location = containerID.is<double>() ? containerID.as<uint32>() : 0;
 
-    if (!lua_isnil(L, 2) && lua_isnumber(L, 2))
+    if (containerID.as<uint32>() >= MAX_CONTAINER_ID)
     {
-        quantity = (uint32)lua_tointeger(L, 2);
-    }
-
-    if (!lua_isnil(L, 3) && lua_isnumber(L, 3))
-    {
-        if ((uint32)lua_tointeger(L, 3) < MAX_CONTAINER_ID)
-        {
-            location = (uint32)lua_tointeger(L, 3);
-        }
-        else
-        {
-            ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
-        }
+        ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
     }
 
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto  SlotID = PChar->getStorage(location)->SearchItem((uint16)lua_tointeger(L, 1));
+    auto  SlotID = PChar->getStorage(location)->SearchItem(itemID);
+
     if (SlotID != ERROR_SLOTID)
     {
         charutils::UpdateItem(PChar, location, SlotID, -quantity);
-        lua_pushboolean(L, true);
         PChar->pushPacket(new CInventoryFinishPacket());
-        return 1;
-    } */
+
+        return true;
+    }
 
     return false;
 }
@@ -4983,12 +4972,12 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
  *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getFame(sol::table const& areaTable)
+uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8  fameArea = areaTable["fame_area"];
-    uint16 fame = 0;
+    uint8  fameArea = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
+    uint16 fame     = 0;
 
     if (fameArea <= 15)
     {
@@ -5160,16 +5149,16 @@ void CLuaBaseEntity::setFame(sol::table const& areaTable, uint16 fame)
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getFameLevel(sol::table const& areaTable)
+uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 fameArea  = areaTable["fame_area"];
+    uint8 fameArea  = areaObj.is<sol::table>() ? areaObj.as<sol::table>()["fame_area"] : areaObj.as<uint8>();
     uint8 fameLevel = 1;
 
     if (fameArea <= 15)
     {
-        uint16 fame = this->getFame(areaTable);
+        uint16 fame = this->getFame(areaObj);
 
         if (fame >= 613)
         {
@@ -5547,7 +5536,7 @@ uint16 CLuaBaseEntity::getCurrentMission(sol::object const& missionLogObj)
     }
 
     uint8  missionLogID = 0;
-    uint16 MissionID  = 0;
+    uint16 MissionID    = 0;
 
     if (missionLogObj.is<lua_Number>())
     {
@@ -5809,25 +5798,24 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, sol::
  *  Notes   : returns nil if player does not have the record.
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getEminenceProgress(uint16 recordID)
+std::optional<uint32> CLuaBaseEntity::getEminenceProgress(uint16 recordID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        return 0;
+        return std::nullopt;
     }
 
     auto*  PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint32 progress = 0;
 
     if (roeutils::HasEminenceRecord(PChar, recordID))
     {
-        progress = roeutils::GetEminenceRecordProgress(PChar, recordID);
+        return roeutils::GetEminenceRecordProgress(PChar, recordID);
     }
 
-    // TODO: Verify that 0-return is acceptable in previous nil-cases
-    return progress;
+    // TODO: Verify that 0-return is acceptable in previous nil-cases (Its not)
+    return std::nullopt;
 }
 
 /************************************************************************
@@ -9031,11 +9019,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
     else
     {
         // Mandatory
-        auto effectID   = va[0].as<EFFECT>(); // The same
-        auto effectIcon = va[0].as<uint16>(); // The same
-        auto power      = static_cast<uint16>(va[1].as<double>());// Can come in as a lua_number, capture as double and truncate
-        auto tick       = static_cast<uint16>(va[2].as<double>()); 
-        auto duration   = static_cast<uint16>(va[3].as<double>()); 
+        auto effectID   = va[0].as<EFFECT>();                      // The same
+        auto effectIcon = va[0].as<uint16>();                      // The same
+        auto power      = static_cast<uint16>(va[1].as<double>()); // Can come in as a lua_number, capture as double and truncate
+        auto tick       = static_cast<uint16>(va[2].as<double>());
+        auto duration   = static_cast<uint16>(va[3].as<double>());
 
         // Optional
         auto subID    = va[4].is<uint16>() ? va[5].is<uint16>() : 0;
