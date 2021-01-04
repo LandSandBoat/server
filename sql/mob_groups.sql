@@ -14078,7 +14078,7 @@ INSERT INTO `mob_groups` VALUES (21,5382,291,'Quarrelsome_Hippogryph',180,0,0,0,
 INSERT INTO `mob_groups` VALUES (22,5384,291,'Ignoble_Skeleton',180,1,0,0,9999,121,126,0);
 INSERT INTO `mob_groups` VALUES (23,5388,291,'Wanton_Danaid',180,0,0,0,9999,121,126,0);
 INSERT INTO `mob_groups` VALUES (24,5560,291,'Ascended_Chapuli',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (25,5562,291,'Eschan_Mosquito',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (25,5562,291,'Ascended_Mosquito',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (26,5563,291,'Ascended_Mantis',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (27,5564,291,'Ascended_Beetle',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (28,5565,291,'Ascended_Luckybug',0,128,0,0,0,125,127,0);
@@ -14102,7 +14102,7 @@ INSERT INTO `mob_groups` VALUES (45,5582,291,'Dazzling_Dolores',0,128,0,0,0,125,
 INSERT INTO `mob_groups` VALUES (46,5583,291,'Taelmoth_the_Diremaw',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (47,5584,291,'Belphegor',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (48,5585,291,'Kabandha',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (49,5586,291,'Selkit',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (49,5586,291,'Selkit',0,128,0,0,0,129,129,0);
 INSERT INTO `mob_groups` VALUES (50,5587,291,'Sang_Buaya',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (51,5588,291,'Sabotender_Royal',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (52,5589,291,'Zduhac',0,128,0,0,0,125,127,0);
@@ -14127,11 +14127,22 @@ INSERT INTO `mob_groups` VALUES (70,5607,291,'Albumens_Lycopodium',0,128,0,0,0,1
 INSERT INTO `mob_groups` VALUES (71,5608,291,'Albumens_Korrigan',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (72,5615,291,'Albumens_Pachypodium',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (73,5609,291,'Onychophora',0,128,0,0,0,125,127,0);
-INSERT INTO `mob_groups` VALUES (74,5610,291,'Onychophoras_Sandworm',0,128,0,0,0,125,127,0);
+INSERT INTO `mob_groups` VALUES (74,5610,291,'Onycophoras_Sandworm',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (75,5611,291,'Erinys',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (76,5612,291,'Boobrie',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (77,5613,291,'Quetzalcoatl',0,128,0,0,0,119,119,0);
 INSERT INTO `mob_groups` VALUES (78,5614,291,'Quetzalcoatls_Sibilus',0,128,0,0,0,117,117,0);
+INSERT INTO `mob_groups` VALUES (79,0,291,'Ogdoad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (80,6792,291,'Oryx',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (81,6793,291,'Maju',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (82,6794,291,'Neak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (83,6795,291,'Schah',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (84,6796,291,'Schahs_Mantri',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (85,6797,291,'Schahs_Ratha',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (86,6798,291,'Schahs_Gaja',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (87,6799,291,'Schahs_Ashva',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (88,6800,291,'Schahs_Bhata',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (89,0,291,'Mireu',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Reisenjima_Sanctorium (Zone 293)
