@@ -5769,7 +5769,7 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, sol::
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto*  PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    uint32 total = (arg2 != sol::nil) ? arg2.as<uint32>() : 0;
+    uint32 total = arg2.get_type() == sol::type::number ? arg2.as<uint32>() : 0;
 
     // Determine threshold for sending progress messages
     bool progressNotify{ true };

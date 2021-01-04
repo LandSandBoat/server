@@ -34,8 +34,6 @@
 #include "ai/helpers/event_handler.h"
 #include "packets/weather.h"
 
-struct lua_State;
-
 class CItemContainer;
 
 class CBaseEntity;
@@ -115,8 +113,8 @@ namespace roeutils
     extern RoeSystemData RoeSystem;
 
     void  init();
-    int32 ParseRecords(lua_State* L);
-    int32 ParseTimedSchedule(lua_State* L);
+    void  ParseRecords(sol::table const& records_table);
+    void  ParseTimedSchedule(sol::table const& schedule_table);
 
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload);
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& payload);
