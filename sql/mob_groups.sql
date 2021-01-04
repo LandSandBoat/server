@@ -13995,6 +13995,7 @@ INSERT INTO `mob_groups` VALUES (36,5661,289,'Warder_of_Love',0,128,0,0,99999,12
 INSERT INTO `mob_groups` VALUES (37,5662,289,'Warders_phuabo',0,128,0,0,0,123,123,0);
 INSERT INTO `mob_groups` VALUES (38,5663,289,'Warders_xzomit',0,128,0,0,0,123,124,0);
 -- zone 289 group 39: free
+-- note: Warders_Hpedme is purposefully misspelled to match POL extract
 INSERT INTO `mob_groups` VALUES (40,5664,289,'Warders_Hpedme',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (41,5665,289,'Warder_of_Dignity',0,128,0,0,99999,124,124,0);
 INSERT INTO `mob_groups` VALUES (42,5666,289,'Warder_of_Loyalty',0,128,0,0,99999,124,124,0);
@@ -14128,6 +14129,7 @@ INSERT INTO `mob_groups` VALUES (70,5607,291,'Albumens_Lycopodium',0,128,0,0,0,1
 INSERT INTO `mob_groups` VALUES (71,5608,291,'Albumens_Korrigan',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (72,5615,291,'Albumens_Pachypodium',0,128,0,0,0,123,124,0);
 INSERT INTO `mob_groups` VALUES (73,5609,291,'Onychophora',0,128,0,0,0,125,127,0);
+-- note: Onycophoras_Sandworm is purposefully misspelled to match POL extract
 INSERT INTO `mob_groups` VALUES (74,5610,291,'Onycophoras_Sandworm',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (75,5611,291,'Erinys',0,128,0,0,0,125,127,0);
 INSERT INTO `mob_groups` VALUES (76,5612,291,'Boobrie',0,128,0,0,0,125,127,0);
