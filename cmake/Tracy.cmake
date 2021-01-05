@@ -14,7 +14,7 @@ if(TRACY_ENABLE)
                 SHOW_PROGRESS)
         execute_process(COMMAND "${CMAKE_COMMAND}" -E
                 tar xf "${CMAKE_SOURCE_DIR}/ext/tracy/tracy.tar.gz"
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tracy)
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/ext/tracy)
     endif()
 
     add_library(tracy_client ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.7.3/TracyClient.cpp)
