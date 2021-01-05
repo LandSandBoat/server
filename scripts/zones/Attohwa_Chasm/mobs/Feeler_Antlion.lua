@@ -3,8 +3,10 @@
 --  Mob: Feeler Antlion
 -----------------------------------
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 40) -- Don't know exact value
     mob:addMod(tpz.mod.REGEN, 30)
 end
@@ -15,3 +17,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

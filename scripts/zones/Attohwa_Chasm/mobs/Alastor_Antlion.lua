@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/families/antlion_ambush_noaggro")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
     mob:setMobMod(tpz.mobMod.MUG_GIL, 10000)
@@ -21,3 +22,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity
