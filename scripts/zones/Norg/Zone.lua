@@ -7,11 +7,13 @@ local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+require("scripts/globals/quests")
 require("scripts/globals/chocobo")
 -----------------------------------
 
 function onInitialize(zone)
     tpz.chocobo.initZone(zone)
+	zone:registerRegion(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
 end
 
 function onConquestUpdate(zone, updatetype)
@@ -36,6 +38,15 @@ function onZoneIn(player, prevZone)
 end
 
 function onRegionEnter(player, region)
+    switch (region:GetRegionID()): caseof
+    {
+        [1] = function (x)  -- An Undying Pledge cs trigger
+            if player:getCharVar("pledgeCS") == 1 then
+			player:startEvent(226)
+			player:setCharVar("pledgeCS", 2)
+			end
+        end,
+    }
 end
 
 function onEventUpdate(player, csid, option)
