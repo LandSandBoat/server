@@ -9,6 +9,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
@@ -45,7 +46,7 @@ function onMobEngaged(mob)
     mob:setLocalVar("runTime", os.time())
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local act = mob:getCurrentAction()
     local isBusy = false
     local runTime = mob:getLocalVar("runTime")
@@ -81,3 +82,5 @@ end
 function onMobDespawn(mob)
     mob:setLocalVar("run", 0)
 end
+
+return entity

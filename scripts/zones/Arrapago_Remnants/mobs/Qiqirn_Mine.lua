@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setUnkillable(true)
@@ -22,3 +23,5 @@ end
 
 function onMobDeath(mob, player)
 end
+
+return entity
