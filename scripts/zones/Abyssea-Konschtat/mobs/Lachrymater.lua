@@ -2,6 +2,7 @@
 -- Area: Abyssea-Konschtat
 --   NM: Lachrymater
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob ,target)
     local DayOfTheWeek = VanadielDayOfTheWeek()
@@ -11,3 +12,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity
