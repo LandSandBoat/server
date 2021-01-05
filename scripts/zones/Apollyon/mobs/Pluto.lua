@@ -4,6 +4,9 @@
 -----------------------------------
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
@@ -11,7 +14,7 @@ local path =
         {-458.178, 0.000, 49.511}
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
         local point = (mob:getLocalVar("point") % 2)+1
@@ -30,3 +33,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[1][1]):setStatus(tpz.status.NORMAL)
     end
 end
+
+return entity

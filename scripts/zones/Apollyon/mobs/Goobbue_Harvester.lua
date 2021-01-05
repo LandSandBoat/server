@@ -5,6 +5,9 @@
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
@@ -12,7 +15,7 @@ local path =
     {496.692, 0.000, 22.934}
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
         local point = (mob:getLocalVar("point") % 2)+1
@@ -38,3 +41,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

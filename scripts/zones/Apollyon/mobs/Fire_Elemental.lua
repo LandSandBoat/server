@@ -4,6 +4,8 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+3):updateEnmity(target)
@@ -18,3 +20,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

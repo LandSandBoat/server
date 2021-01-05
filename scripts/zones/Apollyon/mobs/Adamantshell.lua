@@ -4,6 +4,9 @@
 -----------------------------------
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.WALLHACK
 local path =
 {
@@ -53,7 +56,7 @@ function onPath(mob)
     mob:setLocalVar("pause", os.time()+1)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.APOLLYON_SE_MOB[2]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
@@ -83,3 +86,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

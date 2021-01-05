@@ -4,6 +4,9 @@
 -----------------------------------
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
@@ -22,7 +25,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("point", start)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
         local point = math.random(#path)
         while point == mob:getLocalVar("point") do
@@ -47,3 +50,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

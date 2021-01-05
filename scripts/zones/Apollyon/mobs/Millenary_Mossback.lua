@@ -3,6 +3,8 @@
 --  Mob: Millenary Mossback
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
@@ -13,3 +15,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setStatus(tpz.status.NORMAL)
     end
 end
+
+return entity

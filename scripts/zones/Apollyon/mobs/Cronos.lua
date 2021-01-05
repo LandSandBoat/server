@@ -4,6 +4,8 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMod(tpz.mod.UDMGPHYS, -100)
@@ -19,3 +21,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity
