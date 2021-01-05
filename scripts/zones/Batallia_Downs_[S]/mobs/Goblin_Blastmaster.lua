@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Batallia_Downs_[S]/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -13,3 +14,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.BURLIBIX_BRAWNBACK_PH, 10, 10800) -- 3 hours
 end
+
+return entity

@@ -7,8 +7,10 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -23,3 +25,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Mission9-1Kills", 1)
     end
 end
+
+return entity

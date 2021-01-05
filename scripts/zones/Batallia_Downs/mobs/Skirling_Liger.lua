@@ -5,6 +5,7 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     mob:setMod(tpz.mod.REGAIN, 50)
@@ -21,3 +22,5 @@ end
 function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
 end
+
+return entity

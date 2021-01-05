@@ -2,8 +2,9 @@
 -- Area: Batallia Downs
 --  Mob: Weeping Willow
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getHPP() <= 50 and mob:getLocalVar("Saplings") < 1) then
         SpawnMob(mob:getID()+1):updateEnmity(target)
         SpawnMob(mob:getID()+2):updateEnmity(target)
@@ -24,3 +25,5 @@ function onMobDespawn(mob)
     GetMobByID(LUMBER_JACK):setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
     SpawnMob(LUMBER_JACK)
 end
+
+return entity
