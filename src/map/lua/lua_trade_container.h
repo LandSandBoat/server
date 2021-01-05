@@ -43,7 +43,7 @@ public:
     uint16 getItemId(sol::object const& SlotIDObj);
     uint16 getItemSubId(sol::object const& SlotIDObj);
     uint32 getItemQty(uint16 itemID);
-    bool   hasItemQty(uint32 quantity, uint16 itemID);
+    bool   hasItemQty(uint16 itemID, uint32 quantity);
     uint32 getSlotQty(uint8 slotID); // number of items in the specified slot
     uint32 getItemCount();           // total number of items
     uint8  getSlotCount();

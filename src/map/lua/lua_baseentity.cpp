@@ -5807,7 +5807,7 @@ std::optional<uint32> CLuaBaseEntity::getEminenceProgress(uint16 recordID)
         return std::nullopt;
     }
 
-    auto*  PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     if (roeutils::HasEminenceRecord(PChar, recordID))
     {
@@ -11774,7 +11774,7 @@ sol::table CLuaBaseEntity::getEnmityList()
     if (enmityList)
     {
         sol::table table = luautils::lua.create_table();
-        int        i = 1;
+        int        i     = 1;
         for (auto member : *enmityList)
         {
             if (member.second.PEnmityOwner)
