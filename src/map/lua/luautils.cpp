@@ -1973,7 +1973,6 @@ namespace luautils
 
     /************************************************************************
      *  onMobInitialize                                                      *
-     *  Used for passive trait                                               *
      *                                                                       *
      ************************************************************************/
 
@@ -1981,9 +1980,41 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        // TODO: These int8 string need to die.
+        std::string zone_name = (const char*)PMob->loc.zone->GetName();
+        std::string mob_name  = (const char*)PMob->GetName();
 
-        auto onMobInitialize = loadFunctionFromFile("onMobInitialize", filename);
+        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
+
+        // Erase previous copies of the function, if they're left over from previous calls
+        lua.set("onMobInitialize", sol::nil);
+
+        auto file_result = lua.safe_script_file(filename);
+        if (!file_result.valid())
+        {
+            return -1;
+        }
+
+        // If the entity object has been returned, cache it!
+        if (file_result.return_count())
+        {
+            lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name] = file_result;
+        }
+        
+        sol::function onMobInitialize;
+
+        // Has this mob been cached?
+        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
+        {
+            // Use that (this might bail in the next section)!
+            onMobInitialize = mob_lookup["onMobInitialize"];
+        }
+        else
+        {
+            // Fallback to old style of grabbing globally defined things
+            onMobInitialize = lua.get<sol::function>("onMobInitialize");
+        }
+
         if (!onMobInitialize.valid())
         {
             return -1;
@@ -2383,6 +2414,10 @@ namespace luautils
             return -1;
         }
 
+        // TODO: These int8 string need to die.
+        std::string zone_name = (const char*)PMob->loc.zone->GetName();
+        std::string mob_name  = (const char*)PMob->GetName();
+
         std::string filename;
         if (PMob->objtype == TYPE_PET)
         {
@@ -2393,7 +2428,16 @@ namespace luautils
             filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
         }
 
-        auto onMobFight = loadFunctionFromFile("onMobFight", filename);
+        sol::function onMobFight;
+        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
+        {
+            onMobFight = mob_lookup["onMobFight"];
+        }
+        else
+        {
+            onMobFight = loadFunctionFromFile("onMobFight", filename);
+        }
+
         if (!onMobFight.valid())
         {
             return -1;
@@ -2637,9 +2681,24 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        // TODO: These int8 string need to die.
+        std::string zone_name = (const char*)PMob->loc.zone->GetName();
+        std::string mob_name  = (const char*)PMob->GetName();
+
         auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-        auto onMobRoam = loadFunctionFromFile("onMobRoam", filename);
+        sol::function onMobRoam;
+        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
+        {
+            TracyZoneScopedN("Cached Function");
+            onMobRoam = mob_lookup["onMobRoam"];
+        }
+        else
+        {
+            TracyZoneScopedN("File Read");
+            onMobRoam = loadFunctionFromFile("onMobRoam", filename);
+        }
+
         if (!onMobRoam.valid())
         {
             return -1;
