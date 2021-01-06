@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     if
@@ -17,3 +18,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("BorghertzSparkKilled", 1)
     end
 end
+
+return entity

@@ -4,8 +4,9 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[
     "Possess high Regain and/or Store TP, which seems to increase further as its HP declines."
 
@@ -26,3 +27,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
+
+return entity
