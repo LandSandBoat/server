@@ -6951,7 +6951,7 @@ INSERT INTO `mob_groups` VALUES (36,612,101,'Calf_[Herd2]',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (37,581,101,'Bull_[Herd3]',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (38,823,101,'Cow_[Herd3]',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (39,613,101,'Calf_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (40,0,101,'Hugemaw_Harold',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (40,4850,101,'Hugemaw_Harold',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (41,3241,101,'Pyracmon',0,128,2047,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (42,4381,101,'Wraith_Bat',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (43,6543,101,'Enchanted_Bones_war',330,1,769,0,0,4,8,0);
