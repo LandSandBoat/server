@@ -7176,10 +7176,20 @@ INSERT INTO `mob_groups` VALUES (66,3002,104,'Orcish_Colonel',0,128,0,0,0,35,35,
 INSERT INTO `mob_groups` VALUES (67,682,104,'Cernunnos',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (68,3745,104,'Sprite',0,128,0,0,0,61,63,0);
 INSERT INTO `mob_groups` VALUES (69,2297,104,'Kumbaba',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (70,5152,104,'Belphoebe',0,128,0,0,9999,88,90,0);
-
-INSERT INTO `mob_groups` VALUES (5782,2252,104,'Kingslayer_Doggvdegg',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5787,2415,104,'Lilisette',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (70,4736,104,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (71,0,104,'Krabkatoa',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (72,0,104,'Yacumama',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (73,0,104,'Capricornus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (74,0,104,'Quagmire_Pugil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (75,0,104,'Sunderclaw',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (76,5152,104,'Belphoebe',0,128,0,0,9999,88,90,0);
+INSERT INTO `mob_groups` VALUES (77,6828,104,'Emperor_Arthro',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (78,0,104,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (79,0,104,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (80,0,104,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (81,0,104,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (82,0,104,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (83,0,104,'Omodaka_Armor',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Batallia_Downs (Zone 105)

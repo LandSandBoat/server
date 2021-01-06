@@ -6872,6 +6872,7 @@ INSERT INTO `mob_pools` VALUES (6824,'War_Lynx_campaign','War_Lynx',71,0x0000C60
 INSERT INTO `mob_pools` VALUES (6825,'Hemodrosophila','Hemodrosophila',131,0x0000DC0700000000000000000000000000000000,4,4,3,240,100,0,1,0,0,2,0,0,0,1667,8,0,2,1,0,131); -- TODO: spell, skill list
 INSERT INTO `mob_pools` VALUES (6826,'Ironhorn_Baldurno','Ironhorn_Baldurno',208,0x0000580100000000000000000000000000000000,1,1,12,240,100,0,0,0,0,2,0,32,0,135,0,0,0,1,0,208); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6827,'Otherworldly_Rimester','Otherworldly_Rimester',121,0x0000700100000000000000000000000000000000,10,10,12,240,100,0,1,0,0,2,0,0,0,133,0,0,0,1,0,121); -- TODO: spell, skill list
+INSERT INTO `mob_pools` VALUES (6828,'Emperor_Arthro','Emperor_Arthro',77,0x0000650100000000000000000000000000000000,7,7,4,240,100,0,1,0,0,2,0,32,0,133,0,0,0,1,0,77); -- TODO: skill list
 
 /*
   `poolid` int(10) unsigned NOT NULL,
