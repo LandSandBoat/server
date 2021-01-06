@@ -6846,6 +6846,12 @@ INSERT INTO `mob_groups` VALUES (152,2180,99,'Kaiser_Behemoth',0,128,0,0,0,60,60
 INSERT INTO `mob_groups` VALUES (153,1324,99,'Ferreous_Coffin',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (154,2403,99,'Lewenhart',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (155,291,99,'Auroral_Alicorn',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (156,4072,99,'Tzee_Xicu_the_Manifest',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (157,4071,99,'Tzee_Xicus_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (158,0,99,'Fenrir',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (159,0,99,'Karaha-Baruha',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (160,0,99,'Robel-Akbel',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (161,0,99,'Lehko_Habhoka',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- West_Ronfaure (Zone 100)
