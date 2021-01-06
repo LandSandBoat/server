@@ -8325,7 +8325,7 @@ void CLuaBaseEntity::enableEntities(std::vector<uint32> data)
  *  Function: independantAnimation()
  *  Purpose : Play an animation independant of action messages
  *  Example : player:independantAnimation(player, 251, 4) -- Plays little hearts
- *  Notes   : 
+ *  Notes   :
  ************************************************************************/
 void CLuaBaseEntity::independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
@@ -9022,13 +9022,13 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto effectID   = va[0].as<EFFECT>();                      // The same
         auto effectIcon = va[0].as<uint16>();                      // The same
         auto power      = static_cast<uint16>(va[1].as<double>()); // Can come in as a lua_number, capture as double and truncate
-        auto tick       = static_cast<uint16>(va[2].as<double>());
-        auto duration   = static_cast<uint16>(va[3].as<double>());
+        auto tick       = static_cast<uint32>(va[2].as<double>());
+        auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subID    = va[4].is<uint16>() ? va[5].is<uint16>() : 0;
-        auto subPower = va[5].is<uint16>() ? va[6].is<uint16>() : 0;
-        auto tier     = va[6].is<uint16>() ? va[7].is<uint16>() : 0;
+        auto subID    = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        auto subPower = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
+        auto tier     = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
 
         CStatusEffect* PEffect = new CStatusEffect(effectID,
                                                    effectIcon,
@@ -9082,14 +9082,14 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
     auto effectID   = va[0].as<EFFECT>();
     auto effectIcon = va[1].as<uint16>();
     auto power      = static_cast<uint16>(va[2].as<double>()); // Can come in as a lua_number, capture as double and truncate
-    auto tick       = static_cast<uint16>(va[3].as<double>());
-    auto duration   = static_cast<uint16>(va[4].as<double>());
+    auto tick       = static_cast<uint32>(va[3].as<double>());
+    auto duration   = static_cast<uint32>(va[4].as<double>());
 
     // Optional
-    auto subID      = va[5].is<uint32>() ? va[5].is<uint32>() : 0;
-    auto subPower   = va[6].is<uint16>() ? va[6].is<uint16>() : 0;
-    auto tier       = va[7].is<uint16>() ? va[7].is<uint16>() : 0;
-    auto effectFlag = va[8].is<uint32>() ? va[8].is<uint32>() : 0;
+    auto subID      = va[5].is<uint32>() ? va[5].as<uint32>() : 0;
+    auto subPower   = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+    auto tier       = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
+    auto effectFlag = va[8].is<uint32>() ? va[8].as<uint32>() : 0;
 
     CStatusEffect* PEffect =
         new CStatusEffect(effectID,
@@ -9446,7 +9446,7 @@ uint8 CLuaBaseEntity::dispelAllStatusEffect(sol::object const& flagObj)
  *  Function: stealStatusEffect()
  *  Purpose : Removes a dispellable status effect from one Entity and transfers it to the other
  *  Example : target:stealStatusEffect()
- *  Notes   : 
+ *  Notes   :
  ************************************************************************/
 
 uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj)
