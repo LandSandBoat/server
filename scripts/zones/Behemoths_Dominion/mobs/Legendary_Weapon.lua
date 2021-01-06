@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
 function onMobDisengage(mob)
     DespawnMob(mob:getID(), 120)
@@ -17,3 +18,5 @@ function onMobDeath(mob, player, isKiller)
         GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
     end
 end
+
+return entity
