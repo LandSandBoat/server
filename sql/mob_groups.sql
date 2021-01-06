@@ -5142,7 +5142,7 @@ INSERT INTO `mob_groups` VALUES (53,3750,88,'Stabnix_Skewerfinger',0,128,0,0,0,0
 INSERT INTO `mob_groups` VALUES (54,3151,88,'Pixie_Impaler',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (55,4736,88,'Yilbegan',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (56,0,88,'Blobdingnag',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (57,0,88,'Septic_Boil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,6829,88,'Septic_Boil',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (58,0,88,'Shoggoth',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (59,0,88,'Lamprey_Lord',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (60,0,88,'Ground_Guzzler',0,128,0,0,0,0,0,0);
@@ -5464,7 +5464,7 @@ INSERT INTO `mob_groups` VALUES (50,1783,90,'GoRha_Sludgewater',0,128,0,0,0,1,1,
 INSERT INTO `mob_groups` VALUES (51,3820,90,'Swamp_Muck',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (52,4736,90,'Yilbegan',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (53,0,90,'Blobdingnag',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (54,0,90,'Septic_Boil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,6829,90,'Septic_Boil',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (55,0,90,'Shoggoth',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (56,0,90,'Lamprey_Lord',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (57,0,90,'Ground_Guzzler',0,128,0,0,0,0,0,0);
@@ -7312,25 +7312,35 @@ INSERT INTO `mob_groups` VALUES (38,3464,106,'Sapphirine_Quadav',0,128,0,0,0,20,
 INSERT INTO `mob_groups` VALUES (39,2383,106,'Lead_Quadav',0,128,0,0,0,25,25,0);
 INSERT INTO `mob_groups` VALUES (40,3148,106,'Pixie',0,128,2001,0,0,51,54,0);
 INSERT INTO `mob_groups` VALUES (41,936,106,'Deathly_Stinger',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (42,4687,106,'Sallow_Seymour',0,128,0,0,9999,100,101,0);
-INSERT INTO `mob_groups` VALUES (43,579,106,'Bull_[Herd1]',0,128,0,0,0,12,12,0);
-INSERT INTO `mob_groups` VALUES (44,821,106,'Cow_[Herd1]',0,128,0,0,0,11,11,0);
-INSERT INTO `mob_groups` VALUES (45,611,106,'Calf_[Herd1]',0,128,0,0,0,10,10,0);
-INSERT INTO `mob_groups` VALUES (46,580,106,'Bull_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (47,822,106,'Cow_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (48,612,106,'Calf_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (49,581,106,'Bull_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (50,823,106,'Cow_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (51,613,106,'Calf_[Herd3]',0,128,0,0,0,1,1,0);
--- 52: free
-INSERT INTO `mob_groups` VALUES (53,3241,106,'Pyracmon',0,128,2047,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (54,4381,106,'Wraith_Bat',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (55,6543,106,'Enchanted_Bones_war',330,1,769,0,0,5,8,0);
-
-INSERT INTO `mob_groups` VALUES (5895,2226,106,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5898,2405,106,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5899,2456,106,'Lycopodium',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5902,2904,106,'Noillurie',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,4736,106,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,0,106,'Blobdingnag',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,6829,106,'Septic_Boil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (45,0,106,'Shoggoth',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,106,'Lamprey_Lord',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,106,'Ground_Guzzler',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,106,'Globster',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,4687,106,'Sallow_Seymour',0,128,0,0,9999,100,101,0);
+INSERT INTO `mob_groups` VALUES (50,0,106,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,106,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,106,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,106,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,106,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,579,106,'Bull_[Herd1]',0,128,0,0,0,12,12,0);
+INSERT INTO `mob_groups` VALUES (56,821,106,'Cow_[Herd1]',0,128,0,0,0,11,11,0);
+INSERT INTO `mob_groups` VALUES (57,611,106,'Calf_[Herd1]',0,128,0,0,0,10,10,0);
+INSERT INTO `mob_groups` VALUES (58,580,106,'Bull_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (59,822,106,'Cow_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (60,612,106,'Calf_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (61,581,106,'Bull_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (62,823,106,'Cow_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (63,613,106,'Calf_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (64,3241,106,'Pyracmon',0,128,2047,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (65,4381,106,'Wraith_Bat',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (66,0,106,'Astral_Box',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (67,0,106,'Spriggan_Sifter',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,0,106,'Spriggan_Crier',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (69,0,106,'Spriggan_Graverobber',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (70,6543,106,'Enchanted_Bones_war',330,1,769,0,0,5,8,0);
 
 -- ------------------------------------------------------------
 -- South_Gustaberg (Zone 107)
