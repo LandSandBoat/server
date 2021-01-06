@@ -8,6 +8,7 @@ require("scripts/globals/titles")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 
@@ -18,7 +19,7 @@ end
 function onTrigger(player, npc)
     Pledge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE) 	
 
-    if (Pledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4) then
+	if (Pledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4) then
         player:startEvent(225) -- Start quest
 	elseif (Pledge == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CALIGINOUS_BLADE)) then
 		player:startEvent(227) -- Quest Finish
