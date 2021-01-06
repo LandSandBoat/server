@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/world")
 -----------------------------------
+local entity = {}
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not (mob:getWeather() == tpz.weather.WIND or mob:getWeather() == tpz.weather.GALES) then
         DespawnMob(mob:getID())
     end
@@ -43,3 +44,5 @@ function onMobDespawn(mob)
     mob:setLocalVar("cooldown", os.time() + mob:getRespawnTime()/1000)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
+
+return entity
