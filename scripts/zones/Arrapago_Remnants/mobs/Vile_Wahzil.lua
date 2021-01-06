@@ -5,7 +5,7 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------
-entity = {}
+local entity = {}
 
 function onMobSpawn(mob)
     local instance = mob:getInstance()
