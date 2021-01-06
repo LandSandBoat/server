@@ -7244,14 +7244,28 @@ INSERT INTO `mob_groups` VALUES (46,322,105,'Badshah',0,128,0,0,0,29,35,0);
 INSERT INTO `mob_groups` VALUES (47,3745,105,'Sprite',0,128,0,0,0,51,54,0);
 INSERT INTO `mob_groups` VALUES (48,2375,105,'Lanky_Lenglen',330,0,0,0,0,26,36,0);
 INSERT INTO `mob_groups` VALUES (49,4215,105,'Vegnix_Greenthumb',0,128,0,0,0,26,36,0);
-INSERT INTO `mob_groups` VALUES (50,5185,105,'Cherufe',0,128,0,0,0,93,94,0);
-INSERT INTO `mob_groups` VALUES (51,1642,105,'Goblin_Bounty_Hunter',300,0,1030,0,0,30,36,0);
-INSERT INTO `mob_groups` VALUES (52,6570,105,'Wight_blm',330,1,2651,0,0,26,36,0);
-
-INSERT INTO `mob_groups` VALUES (5839,2378,105,'Larzos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5840,2415,105,'Lilisette',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5842,2456,105,'Lycopodium',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5852,3305,105,'Ragelise',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,4736,105,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,105,'Verthandi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,105,'Urd',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,105,'Skuld',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,105,'Aither',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,105,'Deorc',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,105,'Eorthe',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,105,'Puretos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,105,'Pruina',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,0,105,'Beorht',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,0,105,'Thunor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,105,'Lacus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,5185,105,'Cherufe',0,128,0,0,0,93,94,0);
+INSERT INTO `mob_groups` VALUES (63,0,105,'Lumber_Jill',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,105,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,0,105,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (66,0,105,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (67,0,105,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,0,105,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (69,0,105,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (70,1642,105,'Goblin_Bounty_Hunter',300,0,1030,0,0,30,36,0);
+INSERT INTO `mob_groups` VALUES (71,6570,105,'Wight_blm',330,1,2651,0,0,26,36,0);
 
 -- ------------------------------------------------------------
 -- North_Gustaberg (Zone 106)
