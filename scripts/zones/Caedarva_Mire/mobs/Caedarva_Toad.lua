@@ -4,6 +4,8 @@
 -- Involved in Quest: The Wayward Automation
 -----------------------------------
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 
@@ -14,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("TheWaywardAutomationNM", 1)
     end
 end
+
+return entity

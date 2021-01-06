@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local function spawnMinions(mob, target)
     mob:setLocalVar("spawnedMinions", 1)
@@ -22,7 +23,7 @@ local function spawnMinions(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() < 75 and mob:getLocalVar("spawnedMinions") == 0 then
         spawnMinions(mob, target)
     end
@@ -44,3 +45,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity
