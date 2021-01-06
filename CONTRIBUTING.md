@@ -1,3 +1,16 @@
+# Table of Contents
+1. [General Guidelines](#general-guidelines)
+2. [Issue Report Contributions](#issue-report-contributions)
+3. [Pull Request Contributions](#pull-request-contributions)
+4. [Workflow Guide](#workflow-guide)
+5. [Style Guide](#style-guide)
+    - [Code Editor Configuration](#code-editor-configuration)
+    - [C++](#c)
+    - [Lua](#lua)
+    - [SQL](#sql)
+
+
+
 # General Guidelines
 
 * By contributing to Topaz Next, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide, and in our [Code of Conduct](https://github.com/topaz-next/topaz/blob/release/CODE_OF_CONDUCT.md).
