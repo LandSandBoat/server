@@ -12,9 +12,11 @@ require("scripts/globals/quests")
 -----------------------------------
 
 function onTrade(player, npc, trade)
+    local sermonQuest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+
     if (sermonQuest == QUEST_ACCEPTED) then
-        gil = trade:getGil()
-        count = trade:getItemCount()
+        local gil = trade:getGil()
+        local count = trade:getItemCount()
         if (gil == 70 and count == 1) then
             player:tradeComplete()
             player:startEvent(591)
@@ -23,7 +25,7 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    sermonQuest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+    local sermonQuest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_AVAILABLE) then
         player:startEvent(589)
